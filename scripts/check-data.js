@@ -188,6 +188,12 @@ async function checkGouvernementAgenda() {
     if (!g.membres?.some((m) => m.qualite === "Premier ministre") || g.membres.length < 15 || g.membres.some((m) => !m.nom || !m.fonction)) err("gouvernement.json : composition invalide");
     else console.log(`[check-data] gouvernement.json : ${g.membres.length} membres.`);
   }
+  const c = JSON.parse(await readFile("data/commissions.json", "utf-8").catch(() => "null"));
+  if (c) {
+    const e = Object.entries(c.deputes || {});
+    if (e.length < 400 || e.some(([id, v]) => !/^PA\d+$/.test(id) || v.length !== 3 || !v.every(Number.isInteger))) err("commissions.json : format invalide");
+    else console.log(`[check-data] commissions.json : ${e.length} députés, ${c.reunions} réunions.`);
+  }
   const a = JSON.parse(await readFile("data/agenda-an.json", "utf-8").catch(() => "null"));
   if (a) {
     if (!Array.isArray(a.jours) || a.jours.some((j) => !/^\d{4}-\d{2}-\d{2}$/.test(j.date) || !j.points?.every((p) => p.objet && ["texte", "vote", "qag", "autre"].includes(p.type)))) err("agenda-an.json : format invalide");

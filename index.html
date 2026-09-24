@@ -413,7 +413,7 @@
   .proximite-row .track{height:6px; background:var(--border-soft);}
   .proximite-row .fill{height:100%;}
   .proximite-row .pct{text-align:right; font-family:var(--font-display); font-size:16px; font-weight:600; font-variant-numeric:tabular-nums;}
-  .depute-activite{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px 22px; margin:0 0 18px; padding:12px 0 14px; border-bottom:1px solid var(--border);}
+  .depute-activite{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px 22px; margin:0 0 18px; padding:12px 0 14px; border-bottom:1px solid var(--border);}
   .depute-activite > div{display:grid; gap:2px; align-content:start;}
   .depute-activite .stat-label{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint);}
   .depute-activite b{font-family:var(--font-display); font-size:24px; font-weight:600;}
@@ -426,6 +426,13 @@
     .depute-activite b{font-size:20px;}
   }
   .depute-themes .proximite-row .pct{white-space:nowrap;}
+  .classements .theme-filter-bar{margin:6px 0 4px;}
+  .classement-ligne{display:grid; grid-template-columns:28px 1fr auto; gap:10px; align-items:baseline; width:100%; padding:8px 0; border:none; border-bottom:1px solid var(--border-soft); background:none; color:inherit; font:inherit; text-align:left; cursor:pointer;}
+  .classement-ligne .rang{font-weight:700; color:var(--text-faint); font-size:13px;}
+  .classement-ligne b{font-weight:600;}
+  .classement-ligne small{display:block; color:var(--text-soft); font-size:12.5px;}
+  .classement-ligne .val{font-family:var(--font-display); font-size:18px; font-weight:600; white-space:nowrap;}
+  .classement-ligne:hover b{text-decoration:underline;}
   .depute-themes{margin:0 0 18px; padding:10px 0; border-bottom:1px solid var(--border);}
   .depute-themes summary{cursor:pointer; font-weight:600; font-size:15px; min-height:32px; display:flex; align-items:center;}
   .depute-themes .proximite-row .nom{font-weight:500; white-space:normal;}
@@ -1181,6 +1188,7 @@
         </div>
       </div>
       <div id="deputes-communes"></div>
+      <details class="depute-themes classements" id="classements"><summary>Les classements : les plus assidus, les plus indépendants de leur groupe…</summary><div id="classements-corps"></div></details>
       <div class="depute-grid" id="deputes-liste"></div>
     </div>
     <div id="depute-fiche" hidden></div>
@@ -1333,7 +1341,7 @@
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
-        <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques), Licence Ouverte.</li>
+        <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
         <li><b>Photos des élus :</b> photos officielles de l'Assemblée nationale et du Sénat, réduites et hébergées sur le site.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
         <li><b>Communes et circonscriptions :</b> résultats officiels du 1er tour des législatives 2024 par circonscription et par bureau de vote, ministère de l'Intérieur (<a href="https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a>, Licence Ouverte).</li>
@@ -3512,6 +3520,7 @@ async function renderDeputes(){
     (!q || norm(d.nom).includes(q) || norm(d.dep).includes(q) || norm(d.numDep) === q));
   document.getElementById("depute-count").textContent = res.length || !blocCommunes ? `${formatNombre(res.length)} député${res.length>1?"s":""}` : "Communes trouvées";
   document.getElementById("depute-reset").hidden = !q && !dep;
+  document.getElementById("classements").hidden = !!(q || dep);
   document.getElementById("deputes-communes").innerHTML = blocCommunes;
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
   document.querySelectorAll("#deputes-communes .commune-elections:not(.commune-senateurs)").forEach(afficherPresidentielle);
@@ -3552,10 +3561,12 @@ function fermerDepute(){
 }
 
 // Activité (questions écrites, amendements) et déclarations HATVP : data/activite.json, chargé à la demande
-let ACTIVITE = null;
+let ACTIVITE = null, COMMISSIONS = null;
 async function afficherActivite(d){
   ACTIVITE ||= lireJSON("data/activite.json");
+  COMMISSIONS ||= lireJSON("data/commissions.json");
   const a = (await ACTIVITE)?.deputes?.[d.id];
+  const pc = (await COMMISSIONS)?.deputes?.[d.id];
   const bloc = document.getElementById("depute-activite");
   if(!a || !bloc || deputeOuvert !== d.id) return;
   const pluriel = (n, mot) => `${formatNombre(n)} ${mot}${n > 1 ? "s" : ""}`;
@@ -3564,6 +3575,7 @@ async function afficherActivite(d){
   bloc.innerHTML = `
     <div><span class="stat-label">Questions écrites au Gouvernement</span><b>${formatNombre(a.q)}</b>${a.sujets?.length ? `<span>surtout : ${a.sujets.map(esc).join(", ")}</span>` : ""}</div>
     <div><span class="stat-label">Amendements déposés</span><b>${formatNombre(a.a)}</b><span>${a.a ? `dont ${pluriel(a.aa, "adopté")}` : "en premier signataire"}</span></div>
+    ${pc ? `<div><span class="stat-label">Présence en commission</span><b>${pctFr(pc[0], pc[0] + pc[1] + pc[2])}</b><span>présent${d.f ? "e" : ""} à ${pluriel(pc[0], "réunion")} sur ${formatNombre(pc[0] + pc[1] + pc[2])}${pc[2] ? `, ${pluriel(pc[2], "absence")} excusée${pc[2] > 1 ? "s" : ""}` : ""}</span></div>` : ""}
     <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>`;
   bloc.hidden = false;
 }
@@ -3655,7 +3667,7 @@ function renderDeputeFiche(d){
     <div class="depute-activite" id="depute-activite" hidden></div>
     ${blocThemes(d)}
     ${blocComparaison(d)}
-    <p class="depute-note">La participation ne compte que les scrutins publics en séance. Beaucoup ont lieu pendant les réunions de commission, et les votes à main levée ne sont pas nominatifs : un taux bas ne veut pas dire que ${d.f ? "la députée" : "le député"} ne travaille pas. Un député peut aussi voter par délégation pour un collègue absent.</p>
+    <p class="depute-note">La participation ne compte que les scrutins publics en séance. Beaucoup ont lieu pendant les réunions de commission, et les votes à main levée ne sont pas nominatifs : un taux bas ne veut pas dire que ${d.f ? "la députée" : "le député"} ne travaille pas. Un député peut aussi voter par délégation pour un collègue absent. La présence en commission vient des feuilles de présence publiées par l'Assemblée pour ses 8 commissions permanentes, depuis juillet 2024.</p>
     <h3 class="histo-title">Ses votes sur les textes et les motions de censure</h3>
     <div class="theme-filter-bar" id="depute-filtre">
       ${[["tous","Tout"],["texte","Textes (vote final)"],["censure","Confiance et censure"]].map(([id,l])=>`<button type="button" class="theme-chip ${deputeFiltreVotes===id?"selected":""}" aria-pressed="${deputeFiltreVotes===id}" data-f="${id}">${l}</button>`).join("")}
@@ -3682,6 +3694,35 @@ function renderDeputeFiche(d){
 
 document.getElementById("loi-theme").addEventListener("change", ()=>{ populateLoiSelect(); updateBreakdown(); });
 document.getElementById("histo-theme").addEventListener("change", ()=>{ histoLimite = 50; renderHistorique(); });
+
+// Classements (bloc repliable de la rubrique Députés) : dix premiers de chaque critère, méthode affichée
+let classementChoisi = "participation";
+const CLASSEMENTS = {
+  participation: { titre:"Votent le plus souvent", note:"Part des scrutins publics où le député a voté pour, contre ou abstention, depuis sa prise de fonction (au moins 300 scrutins possibles).",
+    val: d => { const e = d.stats.pour + d.stats.contre + d.stats.abst; return d.stats.scrutins >= 300 ? e / d.stats.scrutins : null; }, fmt: v => Math.round(v * 100) + " %" },
+  frondeurs: { titre:"Les plus indépendants de leur groupe", note:"Part de ses votes qui diffèrent de la position majoritaire de son groupe (au moins 200 votes). Les non-inscrits ne sont pas classés.",
+    val: d => { const e = d.stats.pour + d.stats.contre + d.stats.abst; return e >= 200 && d.groupe !== "NI" ? d.stats.ecarts / e : null; }, fmt: v => Math.round(v * 100) + " %" },
+  commission: { titre:"Les plus présents en commission", note:"Part des réunions de sa commission permanente où il est noté présent, d'après les feuilles de présence de l'Assemblée (au moins 30 réunions).",
+    val: (d, a, c) => { const p = c?.[d.id]; const n = p ? p[0] + p[1] + p[2] : 0; return n >= 30 ? p[0] / n : null; }, fmt: v => Math.round(v * 100) + " %" },
+  amendements: { titre:"Le plus d'amendements adoptés", note:"Amendements adoptés dont il est le premier signataire, depuis le début de la législature.",
+    val: (d, a) => a?.[d.id]?.aa || null, fmt: v => formatNombre(v) },
+  questions: { titre:"Le plus de questions écrites", note:"Questions écrites posées au Gouvernement depuis le début de la législature.",
+    val: (d, a) => a?.[d.id]?.q || null, fmt: v => formatNombre(v) },
+};
+async function renderClassements(){
+  const corps = document.getElementById("classements-corps");
+  ACTIVITE ||= lireJSON("data/activite.json");
+  COMMISSIONS ||= lireJSON("data/commissions.json");
+  const [a, c] = await Promise.all([ACTIVITE, COMMISSIONS]);
+  const k = CLASSEMENTS[classementChoisi];
+  const top = DEPUTES.map(d => [d, k.val(d, a?.deputes, c?.deputes)]).filter(([, v]) => v != null).sort((x, y) => y[1] - x[1]).slice(0, 10);
+  corps.innerHTML = `<div class="theme-filter-bar" role="group" aria-label="Choisir un classement">${Object.entries(CLASSEMENTS).map(([id, x]) => `<button type="button" class="theme-chip ${id === classementChoisi ? "selected" : ""}" aria-pressed="${id === classementChoisi}" data-c="${id}">${x.titre}</button>`).join("")}</div>
+    ${top.length ? top.map(([d, v], i) => { const p = partiDepute(d); return `<button type="button" class="classement-ligne" data-id="${esc(d.id)}"><span class="rang">${i + 1}</span><span><b>${esc(d.nom)}</b><small><span class="dot" style="background:${p.couleur}; display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px"></span>${esc(d.groupe)} · ${esc(d.dep)}</small></span><span class="val">${k.fmt(v)}</span></button>`; }).join("") : `<p class="no-result-msg">Classement indisponible pour le moment.</p>`}
+    <p class="depute-note">${k.note} Un classement ne dit pas tout du travail d'un élu : rapports, travail en circonscription ou négociations n'apparaissent dans aucune donnée publique.</p>`;
+  corps.querySelectorAll("[data-c]").forEach(b => b.addEventListener("click", () => { classementChoisi = b.dataset.c; renderClassements(); }));
+  corps.querySelectorAll(".classement-ligne").forEach(b => b.addEventListener("click", () => ouvrirDepute(b.dataset.id)));
+}
+document.getElementById("classements").addEventListener("toggle", e => { if(e.target.open && DEPUTES) renderClassements(); });
 
 let deputeRechercheTimer;
 document.getElementById("depute-search").addEventListener("input", ()=>{
