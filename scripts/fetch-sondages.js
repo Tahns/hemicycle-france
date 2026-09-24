@@ -162,7 +162,9 @@ function valider(e, maintenant) {
   if (!e.dateFin) return "date illisible";
   if ((maintenant - e.dateFin) / 864e5 > JOURS_MAX) return "trop ancienne";
   if (!(e.echantillon >= 500)) return "échantillon illisible ou trop faible";
-  if (!e.url || !/^https:\/\/(www\.)?(commission-des-sondages\.fr|[a-z-]+\.(fr|com))\//.test(e.url)) return "lien source absent";
+  // Notice de la Commission des sondages, ou à défaut publication de l'institut ou du média commanditaire
+  // (le site indique alors que la notice officielle se consulte auprès de la Commission)
+  if (!e.url || !/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}\//i.test(e.url) || /wikipedia\.org/i.test(e.url)) return "lien source absent";
   if (e.lignesInvalides > 0) return `${e.lignesInvalides} hypothèse(s) dont le total ≠ 100 %`;
   if (e.hypotheses.length === 0) return "aucune hypothèse lisible";
   // Cohérence entre hypothèses d'une même enquête : un candidat présent partout ne varie pas de plus de 12 points
