@@ -4,8 +4,8 @@
  * -----------------
  * Construit data/communes.json : pour chaque commune, la ou les circonscriptions législatives
  * dont elle fait partie (les grandes villes sont partagées entre plusieurs circonscriptions),
- * d'après les résultats officiels par commune des élections législatives de 2024 publiés par le
- * ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
+ * d'après les résultats officiels des élections législatives de 2024 (par bureau de vote, qui
+ * indiquent la circonscription) publiés par le ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
  *
  * Le découpage des circonscriptions ne change qu'avec une loi : le fichier n'est reconstruit que
  * s'il a plus de 90 jours (ou avec --force).
@@ -23,7 +23,14 @@ import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
 const DATA_FILE = path.resolve("data/communes.json");
-const SOURCE = "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240711-075056/resultats-definitifs-par-communes.csv";
+// Fichiers essayés dans l'ordre : on garde le premier dont l'en-tête indique la circonscription
+// (le fichier « par communes » agrège les résultats par commune et ne la donne pas)
+const SOURCES = [
+  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240710-171445/resultats-definitifs-par-bureau-de-vote.csv",
+  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-2nd-tour/20240710-170658/resultats-definitifs-par-bureau-de-vote.csv",
+  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-2nd-tour/20240710-170606/resultats-definitifs-par-commune.csv",
+  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240711-075056/resultats-definitifs-par-communes.csv",
+];
 const PAGE = "https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/";
 const FORCE = process.argv.includes("--force");
 const FICHIER = process.argv.find((a) => a.startsWith("--fichier="))?.split("=")[1];
@@ -87,12 +94,23 @@ async function main() {
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "null"));
   if (ancien?.lastUpdated && !FORCE && !FICHIER && Date.now() - Date.parse(ancien.lastUpdated) < 90 * 864e5) return log("Table à jour (moins de 90 jours) : rien à faire.");
 
-  const csv = FICHIER ? await readFile(FICHIER, "utf-8") : await (async () => {
-    const res = await fetch(SOURCE);
-    if (!res.ok) throw new Error(`HTTP ${res.status} en téléchargeant ${SOURCE}`);
-    return res.text();
-  })();
-  const { departements, nbCommunes, nbCircos } = construire(csv);
+  let resultat = null;
+  if (FICHIER) resultat = construire(await readFile(FICHIER, "utf-8"));
+  else {
+    for (const url of SOURCES) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        resultat = construire(await res.text());
+        log(`Source retenue : ${url}`);
+        break;
+      } catch (e) {
+        warn(`${url.split("/").slice(-2).join("/")} : ${e.message}`);
+      }
+    }
+    if (!resultat) throw new Error("aucune source ne donne la circonscription des communes");
+  }
+  const { departements, nbCommunes, nbCircos } = resultat;
   log(`${nbCommunes} communes, ${nbCircos} circonscriptions, ${Object.keys(departements).length} départements ou collectivités.`);
   if (!FICHIER && (nbCommunes < 30000 || nbCircos < 500)) {
     warn("Table incomplète : data/communes.json n'est pas modifié.");
