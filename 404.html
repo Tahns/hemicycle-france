@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Page introuvable · Décrypter la politique française</title>
+<script>
+  // Lien de partage dont la page d'aperçu n'existe pas encore (v/<numéro>.html, d/<PA…>.html) :
+  // on renvoie directement vers le vote ou le député sur le site.
+  (function(){
+    var p = location.pathname, base = p.replace(/\/(v|d)\/[^/]*$/, "/").replace(/\/[^/]*$/, "/");
+    var v = p.match(/\/v\/(\d+)\.html$/), d = p.match(/\/d\/(PA\d+)\.html$/);
+    if(v) location.replace(base + "#scrutin-" + v[1]);
+    else if(d) location.replace(base + "#depute-" + d[1]);
+  })();
+</script>
+<style>
+  body{margin:0; padding:48px 24px; background:#F5F1E8; color:#1C1B18; font:16px/1.6 Georgia, serif; text-align:center;}
+  a{color:#1B3A8C;}
+</style>
+</head>
+<body>
+  <h1>Page introuvable</h1>
+  <p>Cette page n'existe pas ou plus. <a href="/politique-france/">Retour à l'accueil de Décrypter la politique française</a>.</p>
+</body>
+</html>
