@@ -492,7 +492,7 @@
   .justice-summary-card{padding:10px 22px 10px 0; display:flex; align-items:baseline; gap:8px;}
   .justice-summary-card + .justice-summary-card{padding-left:22px; border-left:1px solid var(--border);}
   .justice-summary-card .n{font-family:var(--font-display); font-size:28px; font-weight:600;}
-  .justice-summary-card .p{font-size:13px; font-weight:700; letter-spacing:.06em; color:var(--text-faint);}
+  .justice-summary-card .p{font-size:13px; color:var(--text-faint);}
   .justice-card{padding:18px 0; border-bottom:1px solid var(--border);}
   .justice-card-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
   .justice-name{font-family:var(--font-display); font-size:21px; font-weight:600;}
@@ -548,6 +548,7 @@
   .footer-liens{margin:0 0 18px; font-size:13.5px;}
   .footer-liens a{color:var(--text-soft);}
   .sondage-reserve{padding:18px 0; font-family:var(--font-display); font-size:18px; color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border); max-width:780px;}
+  .criteres{margin:14px 0 0; max-width:760px; font-size:14px; color:var(--text-soft);}
   .justice-presomption{font-size:13px; font-style:italic; color:var(--ambre); margin-bottom:6px;}
 
   /* ---------- Accessibilité ---------- */
@@ -702,6 +703,7 @@
       <h2>Justice et politique</h2>
       <p class="chapo">Des responsables politiques condamnés par la justice. Ne figurent ici que des décisions rendues par un tribunal, avec leur statut : définitive, ou frappée d'appel et donc susceptible d'évoluer. Aucune plainte, aucune mise en examen.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
+      <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/politique-france/issues/new?title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
     <div class="justice-filter-bar" id="justice-filter-bar"></div>
@@ -2047,16 +2049,17 @@ let CONDAMNATIONS = []; // data/justice.json (saisie manuelle volontaire)
 let justiceFiltrePartiActif = "Tous";
 
 function renderJusticeSummary(){
-  const partisConcernes = [...new Set(CONDAMNATIONS.map(c=>c.parti))];
-  const counts = partisConcernes.map(pid=>{
-    const party = PARTIES.find(p=>p.id===pid);
-    return { nom: party ? party.id : pid, n: CONDAMNATIONS.filter(c=>c.parti===pid).length };
-  }).sort((a,b)=>b.n-a.n);
-
-  document.getElementById("justice-summary").innerHTML = counts.map(c=>`
+  // Décompte par statut (et non par parti : la liste n'est pas exhaustive, un total par parti serait trompeur)
+  const n = statut => CONDAMNATIONS.filter(c=>c.statut===statut).length;
+  const cartes = [
+    { n: CONDAMNATIONS.length, p: CONDAMNATIONS.length > 1 ? "décisions présentées" : "décision présentée" },
+    { n: n("definitif"), p: "définitives" },
+    { n: n("appel"), p: "non définitives (appel ou cassation)" },
+  ];
+  document.getElementById("justice-summary").innerHTML = cartes.map(c=>`
     <div class="justice-summary-card">
       <div class="n">${c.n}</div>
-      <div class="p">${c.nom}</div>
+      <div class="p">${c.p}</div>
     </div>
   `).join("");
 }
