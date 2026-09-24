@@ -1,16 +1,17 @@
 {
-  "lastUpdated": "2026-09-03T00:00:00Z",
+  "lastUpdated": "2026-09-24T06:49:06.480Z",
   "indicateurs": [
     {
       "nom": "Population",
       "valeur": "69,08 M",
       "tendance": "neutre",
-      "detail": "Population totale au 1ᵉʳ janvier 2026",
+      "detail": "Population totale au 1ᵉʳ janvier, Mayotte incluse (estimation Insee) — 69 081 996 habitants",
       "motsCles": "population habitants démographie",
       "source": "INSEE",
-      "url": "https://www.insee.fr/fr/accueil",
+      "url": "https://www.insee.fr/fr/statistiques/serie/001641586",
       "date": "1ᵉʳ janvier 2026",
-      "misAJourLe": "manuel"
+      "misAJourLe": "automatique",
+      "idBank": "001641586"
     },
     {
       "nom": "Inflation",
@@ -27,24 +28,25 @@
       "nom": "Chômage",
       "valeur": "8,3 %",
       "tendance": "up",
-      "detail": "Taux de chômage au sens du BIT, population active — 2,7 millions de personnes concernées",
+      "detail": "Taux de chômage au sens du BIT, France hors Mayotte, données corrigées des variations saisonnières (trimestre précédent : 8,1 %)",
       "motsCles": "chomage chômage emploi travail",
       "source": "INSEE",
-      "url": "https://www.insee.fr/fr/statistiques/9032359",
+      "url": "https://www.insee.fr/fr/statistiques/serie/001688527",
       "date": "2ᵉ trimestre 2026",
       "idBank": "001688527",
-      "misAJourLe": "manuel"
+      "misAJourLe": "automatique"
     },
     {
       "nom": "Croissance du PIB",
       "valeur": "0,0 %",
       "tendance": "neutre",
-      "detail": "Évolution du PIB par rapport au trimestre précédent (estimation)",
+      "detail": "Évolution du PIB en volume par rapport au trimestre précédent (données corrigées des variations saisonnières et des jours ouvrables)",
       "motsCles": "croissance pib économie",
       "source": "INSEE",
-      "url": "https://www.insee.fr/fr/accueil",
+      "url": "https://www.insee.fr/fr/statistiques/serie/011794860",
       "date": "2ᵉ trimestre 2026",
-      "misAJourLe": "manuel"
+      "misAJourLe": "automatique",
+      "idBank": "011794860"
     },
     {
       "nom": "Déficit public",
@@ -59,14 +61,15 @@
     },
     {
       "nom": "Dette publique",
-      "valeur": "115,6 % du PIB",
+      "valeur": "117,5 % du PIB",
       "tendance": "up",
-      "detail": "3 460,5 milliards d'euros fin 2025 (dette au sens de Maastricht) — des estimateurs indépendants avancent ~118 % mi-2026, mais ce ne sont pas des chiffres officiels INSEE",
+      "detail": "3 536,1 milliards d'euros — dette des administrations publiques au sens de Maastricht (seuil européen : 60 % du PIB)",
       "motsCles": "dette endettement publique",
       "source": "INSEE",
-      "url": "https://www.insee.fr/fr/statistiques/8956575",
-      "date": "fin 2025 (chiffre définitif)",
-      "misAJourLe": "manuel"
+      "url": "https://www.insee.fr/fr/statistiques/serie/010777608",
+      "date": "fin du 1ᵉʳ trimestre 2026",
+      "misAJourLe": "automatique",
+      "idBank": "010777608"
     }
   ]
 }
