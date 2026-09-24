@@ -261,7 +261,9 @@ function parseScrutin(raw, organeRefToSigle) {
     titre,
     date: formatDateFr(dateScrutin),
     dateISO: dateScrutin,
-    resultat: /adopt/i.test(s.sort || s.syntheseVote?.decision?.texte || "") ? "adopte" : "rejete",
+    // `sort` est un objet { code: "adopté" | "rejeté", libelle } dans les exports de l'AN
+    // (le tester directement comme une chaîne donnait "[object Object]" → toujours "rejete").
+    resultat: /adopt/i.test(s.sort?.code || s.sort?.libelle || s.syntheseVote?.annonce || "") ? "adopte" : "rejete",
     theme: "À catégoriser", // pas de thème officiel fourni par l'AN — à corriger manuellement dans data/lois.json si besoin
     reel: true,
     source: "auto-assemblee-nationale",
