@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-24T06:49:06.480Z",
+  "lastUpdated": "2026-09-24T13:50:01.628Z",
   "indicateurs": [
     {
       "nom": "Population",
@@ -17,12 +17,13 @@
       "nom": "Inflation",
       "valeur": "+2,4 %",
       "tendance": "up",
-      "detail": "Évolution des prix à la consommation sur un an (estimation provisoire)",
+      "detail": "Évolution des prix à la consommation sur un an, ensemble des ménages, France (mois précédent : +2,1 %)",
       "motsCles": "inflation prix consommation ipc pouvoir d'achat",
       "source": "Insee",
-      "url": "https://www.insee.fr/fr/statistiques/9039020",
-      "date": "août 2026 (provisoire)",
-      "misAJourLe": "manuel"
+      "url": "https://www.insee.fr/fr/statistiques/serie/011814632",
+      "date": "août 2026",
+      "misAJourLe": "automatique",
+      "idBank": "011814632"
     },
     {
       "nom": "Chômage",
@@ -51,13 +52,13 @@
     {
       "nom": "Déficit public",
       "valeur": "5,1 % du PIB",
-      "tendance": "up",
-      "detail": "152,5 milliards d'euros en 2025 — au-dessus du seuil européen de 3 %, la France reste sous procédure pour déficit excessif",
+      "tendance": "down",
+      "detail": "152,5 milliards d'euros en 2025 — déficit des administrations publiques au sens de Maastricht (seuil européen : 3 % du PIB) ; 2024 : 5,8 %",
       "motsCles": "deficit déficit budget état finances publiques",
-      "source": "Insee",
-      "url": "https://www.insee.fr/fr/statistiques/8956575",
-      "date": "2025 (chiffre définitif)",
-      "misAJourLe": "manuel"
+      "source": "Eurostat (notification de la France, comptes de l'Insee)",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=fr",
+      "date": "2025",
+      "misAJourLe": "automatique"
     },
     {
       "nom": "Dette publique",
