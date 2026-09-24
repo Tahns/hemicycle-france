@@ -35,6 +35,9 @@
  *   node scripts/fetch-scrutins.js              # récupère et met à jour data/lois.json
  *   node scripts/fetch-scrutins.js --dry-run     # affiche ce qui serait ajouté, sans écrire
  *   node scripts/fetch-scrutins.js --limit=20    # ne traite que les 20 scrutins les + récents
+ *   node scripts/fetch-scrutins.js --rebuild     # re-dérive TOUS les scrutins auto depuis l'archive
+ *                                                # (à lancer après une correction du parseur ; les
+ *                                                # annotations manuelles des entrées sont conservées)
  *
  * DÉPENDANCES : Node.js 18+ (fetch natif), aucun paquet npm requis.
  */
@@ -91,6 +94,11 @@ const SIGLE_VERS_ID = {
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes("--dry-run");
+const REBUILD = args.includes("--rebuild");
+
+// Champs ajoutés à la main sur une entrée auto (titre court, contexte, thème…) : conservés
+// lors d'un --rebuild, qui ne ré-écrit que les champs dérivés de l'open data.
+const CHAMPS_MANUELS = ["titreCourt", "theme", "proposePar", "groupeMoteur", "contexte"];
 const LIMIT_ARG = args.find((a) => a.startsWith("--limit="));
 const LIMIT = LIMIT_ARG ? parseInt(LIMIT_ARG.split("=")[1], 10) : Infinity;
 
@@ -170,6 +178,65 @@ async function buildOrganeRefToSigle(dir) {
   return table;
 }
 
+/**
+ * Construit, depuis les fichiers "acteur" de l'archive AMO30, l'historique des appartenances
+ * de chaque député à un groupe politique (législature 17) : acteurRef -> [{ debut, fin, organeRef }].
+ * Sert uniquement à résoudre les groupes que l'AN publie avec un organeRef vide ("PO0") :
+ * on retrouve alors le groupe à partir des députés nominativement listés dans ce groupe.
+ */
+async function buildActeurGroupes(dir) {
+  const acteurDir = await findDirNamed(dir, "acteur");
+  const index = {};
+  if (!acteurDir) {
+    warn("Dossier 'acteur' introuvable dans l'archive AMO30 — les groupes 'PO0' ne pourront pas être résolus.");
+    return index;
+  }
+  for (const f of await readdir(acteurDir)) {
+    let raw;
+    try {
+      raw = JSON.parse(await readFile(path.join(acteurDir, f), "utf-8"));
+    } catch {
+      continue;
+    }
+    const a = raw.acteur;
+    const uid = a?.uid?.["#text"] || a?.uid;
+    const mandats = a?.mandats?.mandat;
+    if (!uid || !mandats) continue;
+    for (const m of Array.isArray(mandats) ? mandats : [mandats]) {
+      if (m.typeOrgane !== "GP" || m.legislature !== LEGISLATURE) continue;
+      (index[uid] ||= []).push({ debut: m.dateDebut, fin: m.dateFin || null, organeRef: m.organes?.organeRef });
+    }
+  }
+  return index;
+}
+
+function acteursNominatifs(g) {
+  const dn = g.vote?.decompteNominatif || {};
+  const refs = [];
+  for (const cle of ["pours", "contres", "abstentions", "nonVotants"]) {
+    const v = dn[cle]?.votant;
+    if (!v) continue;
+    for (const x of Array.isArray(v) ? v : [v]) if (x.acteurRef) refs.push(x.acteurRef);
+  }
+  return refs;
+}
+
+/**
+ * Résout un groupe publié avec organeRef "PO0" : tous les députés nominativement listés doivent
+ * appartenir au même groupe à la date du scrutin, sinon on renonce (jamais de devinette).
+ */
+function resoudreGroupeAnonyme(g, dateScrutin, acteurGroupes) {
+  const refs = acteursNominatifs(g);
+  if (refs.length === 0) return null;
+  const trouves = new Set();
+  for (const r of refs) {
+    const m = (acteurGroupes[r] || []).find((x) => x.debut <= dateScrutin && (!x.fin || x.fin >= dateScrutin));
+    if (!m) return null;
+    trouves.add(m.organeRef);
+  }
+  return trouves.size === 1 ? [...trouves][0] : null;
+}
+
 function moisFr(m) {
   const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   return mois[m];
@@ -183,10 +250,11 @@ function formatDateFr(isoDate) {
 /**
  * Extrait le détail par groupe d'un objet scrutin brut (JSON tel que publié par l'AN),
  * et vérifie que la somme recalculée correspond à la synthèse officielle.
- * `organeRefToSigle` est la correspondance construite par buildOrganeRefToSigle().
+ * `organeRefToSigle` est la correspondance construite par buildOrganeRefToSigle(),
+ * `acteurGroupes` celle de buildActeurGroupes() (pour les groupes publiés en "PO0").
  * Retourne { ok: true, votes, ... } ou { ok: false, raison }.
  */
-function parseScrutin(raw, organeRefToSigle) {
+function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}) {
   const s = raw.scrutin;
   if (!s) return { ok: false, raison: "pas de clé 'scrutin' à la racine" };
 
@@ -211,6 +279,17 @@ function parseScrutin(raw, organeRefToSigle) {
   let sommePour = 0, sommeContre = 0, sommeAbst = 0;
 
   for (const g of groupesArr) {
+    const decompteBrut = g.vote?.decompteVoix || g.decompteVoix;
+    let organeRef = g.organeRef;
+    if (organeRef === "PO0") {
+      organeRef = resoudreGroupeAnonyme(g, dateScrutin, acteurGroupes);
+      // Groupe anonyme sans aucun député listé ni aucune voix : il ne pèse rien dans le
+      // décompte, on l'omet (il apparaîtra "non communiqué") plutôt que de rejeter le scrutin.
+      if (!organeRef && decompteBrut && acteursNominatifs(g).length === 0 &&
+          ["pour", "contre", "abstentions", "nonVotants"].every((k) => !parseInt(decompteBrut[k], 10))) {
+        continue;
+      }
+    }
     // Le sigle n'est jamais inline dans les exports actuels de l'AN : chaque groupe n'est
     // identifié que par organeRef. On tente néanmoins les emplacements inline connus en premier
     // (au cas où l'AN les ajouterait un jour ou pour d'anciens formats), puis on résout via la
@@ -219,9 +298,9 @@ function parseScrutin(raw, organeRefToSigle) {
       g.sigle ||
       g.organe?.libelleAbrev ||
       g.libelleAbrev ||
-      (g.organeRef && organeRefToSigle[g.organeRef]) ||
+      (organeRef && organeRefToSigle[organeRef]) ||
       null;
-    const decompte = g.vote?.decompteVoix || g.decompteVoix;
+    const decompte = decompteBrut;
     if (!sigleTrouve || !decompte) {
       sigleInconnus.push(g.organeRef || JSON.stringify(g).slice(0, 80));
       continue;
@@ -235,7 +314,12 @@ function parseScrutin(raw, organeRefToSigle) {
     const pour = parseInt(decompte.pour, 10) || 0;
     const contre = parseInt(decompte.contre, 10) || 0;
     const abst = parseInt(decompte.abstention ?? decompte.abstentions, 10) || 0;
+    if (votes[id]) {
+      return { ok: false, raison: `scrutin ${numero} : deux groupes de l'AN correspondent au même groupe du site (${id})` };
+    }
     votes[id] = { pour, contre, abst };
+    const membres = parseInt(g.nombreMembresGroupe, 10);
+    if (membres) votes[id].membres = membres;
     sommePour += pour;
     sommeContre += contre;
     sommeAbst += abst;
@@ -258,9 +342,11 @@ function parseScrutin(raw, organeRefToSigle) {
   return {
     ok: true,
     id: `an-scrutin-${numero}`,
+    numero: parseInt(numero, 10),
     titre,
     date: formatDateFr(dateScrutin),
     dateISO: dateScrutin,
+    typeVote: s.typeVote?.codeTypeVote || null, // SPO ordinaire, SPS solennel, MOC motion de censure…
     // `sort` est un objet { code: "adopté" | "rejeté", libelle } dans les exports de l'AN
     // (le tester directement comme une chaîne donnait "[object Object]" → toujours "rejete").
     resultat: /adopt/i.test(s.sort?.code || s.sort?.libelle || s.syntheseVote?.annonce || "") ? "adopte" : "rejete",
@@ -269,17 +355,15 @@ function parseScrutin(raw, organeRefToSigle) {
     source: "auto-assemblee-nationale",
     sourceLabel: `Assemblée nationale — scrutin n°${numero}`,
     sourceUrl: `https://www.assemblee-nationale.fr/dyn/17/scrutins/${numero}`,
-    proposePar: "Non renseigné automatiquement — à compléter manuellement dans data/lois.json",
-    groupeMoteur: "Non renseigné automatiquement — à compléter manuellement dans data/lois.json",
     votes,
   };
 }
 
 async function main() {
-  log(DRY_RUN ? "Mode dry-run (aucune écriture)" : "Mode normal");
+  log(DRY_RUN ? "Mode dry-run (aucune écriture)" : REBUILD ? "Mode reconstruction (--rebuild)" : "Mode normal");
 
   const existing = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => '{"lois":[]}'));
-  const existingIds = new Set(existing.lois.map((l) => l.id));
+  const existingById = new Map(existing.lois.map((l) => [l.id, l]));
 
   const tmpDir = await mkdtemp(path.join(os.tmpdir(), "an-scrutins-"));
   await downloadAndExtract(SCRUTINS_ZIP_URL, tmpDir);
@@ -289,59 +373,81 @@ async function main() {
   const organesDir = await mkdtemp(path.join(os.tmpdir(), "an-organes-"));
   await downloadAndExtract(ORGANES_ZIP_URL, organesDir);
   const organeRefToSigle = await buildOrganeRefToSigle(organesDir);
+  const acteurGroupes = await buildActeurGroupes(organesDir);
 
   const nouveaux = [];
+  const misAJour = [];
   const rejets = [];
   let traites = 0;
 
-  // Les fichiers ne sont pas garantis triés ; on trie par nom (les numéros de scrutin
-  // croissent globalement avec le temps sur une législature donnée).
-  files.sort();
+  // Tri numérique du plus récent au plus ancien (un tri alphabétique placerait "V999" après "V8434").
+  const numeroFichier = (f) => parseInt(path.basename(f).match(/V(\d+)\.json$/)?.[1] || "0", 10);
+  files.sort((a, b) => numeroFichier(b) - numeroFichier(a));
 
-  for (const f of files.reverse()) { // du plus récent au plus ancien
+  for (const f of files) {
     if (traites >= LIMIT) break;
     let raw;
     try {
       raw = JSON.parse(await readFile(f, "utf-8"));
     } catch (e) {
-      rejets.push({ fichier: f, raison: `JSON illisible : ${e.message}` });
+      rejets.push({ fichier: path.basename(f), raison: `JSON illisible : ${e.message}` });
       continue;
     }
     const numero = raw?.scrutin?.numero;
-    if (numero && existingIds.has(`an-scrutin-${numero}`)) continue; // déjà connu
+    const id = `an-scrutin-${numero}`;
+    const connu = existingById.get(id);
+    if (connu && !REBUILD) continue; // déjà connu
 
     traites++;
-    const parsed = parseScrutin(raw, organeRefToSigle);
+    const parsed = parseScrutin(raw, organeRefToSigle, acteurGroupes);
     if (!parsed.ok) {
-      rejets.push({ fichier: f, raison: parsed.raison });
+      // En reconstruction, une entrée déjà publiée n'est jamais supprimée sur un simple échec de parsing.
+      rejets.push({ fichier: path.basename(f), raison: parsed.raison });
       continue;
     }
-    nouveaux.push(parsed);
+    const { ok, ...entree } = parsed;
+    if (connu) {
+      for (const champ of CHAMPS_MANUELS) {
+        const v = connu[champ];
+        const vide = v === undefined || v === "À catégoriser" || /^Non renseigné automatiquement/.test(v);
+        if (!vide) entree[champ] = v;
+      }
+      if (JSON.stringify(connu) !== JSON.stringify(entree)) {
+        existingById.set(id, entree);
+        misAJour.push(entree);
+      }
+    } else {
+      existingById.set(id, entree);
+      nouveaux.push(entree);
+    }
   }
 
-  log(`${nouveaux.length} nouveau(x) scrutin(s) valide(s), ${rejets.length} rejeté(s) ou déjà connus.`);
+  log(`${nouveaux.length} nouveau(x) scrutin(s), ${misAJour.length} mis à jour, ${rejets.length} rejeté(s).`);
 
-  if (nouveaux.length > 0 && !DRY_RUN) {
-    existing.lois.push(...nouveaux.map(({ dateISO, ok, ...l }) => l));
+  if ((nouveaux.length > 0 || misAJour.length > 0) && !DRY_RUN) {
+    // Entrées auto triées du plus récent au plus ancien ; les éventuelles entrées manuelles en tête.
+    const lois = [...existingById.values()];
+    const manuelles = lois.filter((l) => l.numero === undefined);
+    const auto = lois.filter((l) => l.numero !== undefined).sort((a, b) => b.numero - a.numero);
+    existing.lois = [...manuelles, ...auto];
     existing.lastUpdated = new Date().toISOString();
     await writeFile(DATA_FILE, JSON.stringify(existing, null, 2) + "\n");
     log("data/lois.json mis à jour.");
   }
 
-  await writeFile(
-    REPORT_FILE,
-    JSON.stringify(
-      {
-        executedAt: new Date().toISOString(),
-        dryRun: DRY_RUN,
-        nouveaux: nouveaux.map((n) => ({ id: n.id, titre: n.titre, date: n.date })),
-        rejets,
-      },
-      null,
-      2
-    ) + "\n"
-  );
-  log("Rapport écrit dans data/fetch-scrutins-report.json — à consulter en cas de rejets.");
+  // Le rapport n'est réécrit que si son contenu change (évite un commit quotidien pour un simple horodatage).
+  const rapport = {
+    dryRun: DRY_RUN,
+    nouveaux: nouveaux.map((n) => ({ id: n.id, titre: n.titre, date: n.date })),
+    misAJour: misAJour.length,
+    rejets,
+  };
+  const ancien = JSON.parse(await readFile(REPORT_FILE, "utf-8").catch(() => "{}"));
+  delete ancien.executedAt;
+  if (JSON.stringify(ancien) !== JSON.stringify(rapport)) {
+    await writeFile(REPORT_FILE, JSON.stringify({ executedAt: new Date().toISOString(), ...rapport }, null, 2) + "\n");
+    log("Rapport écrit dans data/fetch-scrutins-report.json — à consulter en cas de rejets.");
+  }
 
   if (nouveaux.length === 0) {
     log("Aucun nouveau scrutin ajouté à cette exécution.");

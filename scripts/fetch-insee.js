@@ -113,6 +113,17 @@ async function fetchSerie(idBank) {
   return { valeur: Number(valeur), periode };
 }
 
+// "2026-Q2" -> "2ᵉ trimestre 2026", "2026-08" -> "août 2026", "2025" -> "2025" (format affiché sur le site)
+function formatPeriode(periode) {
+  if (!periode) return null;
+  const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  let m = periode.match(/^(\d{4})-Q([1-4])$/);
+  if (m) return `${m[2] === "1" ? "1ᵉʳ" : m[2] + "ᵉ"} trimestre ${m[1]}`;
+  m = periode.match(/^(\d{4})-(\d{2})$/);
+  if (m) return `${mois[parseInt(m[2], 10) - 1]} ${m[1]}`;
+  return periode;
+}
+
 async function main() {
   if (!API_KEY) {
     console.error(
@@ -149,7 +160,8 @@ async function main() {
         ...precedent, // conserve tendance/detail/motsCles déjà en place si le script ne les fournit pas
         nom: ind.nom,
         valeur: ind.formatValeur(valeur),
-        date: periode,
+        date: formatPeriode(periode),
+        // Description technique : l'ancienne description manuelle peut citer des chiffres devenus faux
         detail: ind.label,
         source: "INSEE (API BDM, automatique)",
         url: ind.sourceUrl || precedent.url || null,
