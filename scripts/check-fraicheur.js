@@ -16,7 +16,7 @@
  *  - Déficit public de l'année N : remplacé par celui de N+1 publié fin mars N+2 (alerte au 15 avril).
  *  - Justice : relecture au moins tous les 60 jours, et après chaque échéance de data/justice.json.
  *  - Chefs de parti : relecture au moins tous les 90 jours.
- *  - Agenda : au moins un rendez-vous à venir.
+ *  - Agenda : au moins un rendez-vous à venir, relecture au moins tous les 30 jours.
  *
  * USAGE : node scripts/check-fraicheur.js [--date=AAAA-MM-JJ]   (la date sert aux tests)
  */
@@ -85,6 +85,9 @@ if (dirigeants?.verifieLe && joursDepuis(dirigeants.verifieLe) > 90) {
 }
 
 const meetings = await lire("data/meetings.json");
+if (meetings?.verifieLe && joursDepuis(meetings.verifieLe) > 30) {
+  alertes.push(`Agenda : relu pour la dernière fois le ${meetings.verifieLe} ; ajouter les rendez-vous annoncés depuis (congrès, meetings, primaires), puis mettre à jour « verifieLe » dans data/meetings.json.`);
+}
 if (meetings?.meetings && !meetings.meetings.some((m) => (m.fin || m.debut) >= isoAujourdhui)) {
   alertes.push("Agenda : aucun rendez-vous à venir dans data/meetings.json (la page Agenda affiche une liste vide).");
 }

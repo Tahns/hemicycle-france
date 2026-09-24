@@ -4,9 +4,10 @@
  * ----------------
  * Confronte chaque lien cité par le site (data/*.json) à la base du Décodex (Les Décodeurs, Le Monde) :
  *  - aucun lien ne doit figurer parmi les contenus que le Décodex a démentis ;
- *  - aucun lien ne doit pointer vers un site épinglé à plusieurs reprises pour de fausses informations
+ *  - aucun lien ne doit pointer vers un site épinglé à de nombreuses reprises pour de fausses informations
  *    (au moins SEUIL contenus démentis sur le même domaine, hors réseaux sociaux et plateformes d'hébergement,
- *    où chacun publie ce qu'il veut).
+ *    où chacun publie ce qu'il veut). Les grands médias comptent aussi quelques articles démentis (jusqu'à 6
+ *    pour franceinfo) : en dessous de 10, le nombre seul ne distingue pas un média d'un site douteux.
  * Sort en erreur (code 1) avec un message lisible ; le workflow ouvre alors un ticket GitHub.
  * Si la base du Décodex est injoignable, le script prévient mais ne bloque rien.
  *
@@ -16,8 +17,8 @@
 import { readFile } from "fs/promises";
 
 const DECODEX_URL = "https://asset.lemde.fr/medias/mmpub/data/decodex/hoax/hoax_debunks.json";
-const SEUIL = 3;
-const FICHIERS = ["justice", "meetings", "sondages", "dirigeants", "indicateurs", "groupes"];
+const SEUIL = 10;
+const FICHIERS = ["justice", "meetings", "sondages", "candidats", "dirigeants", "indicateurs", "groupes"];
 // Plateformes où n'importe qui publie : un contenu démenti n'y dit rien des autres pages
 const PLATEFORMES = /(^|\.)(facebook\.com|twitter\.com|x\.com|youtube\.com|youtu\.be|dailymotion\.com|redd\.it|reddit\.com|instagram\.com|tiktok\.com|jeuxvideo\.com|blogspot\.[a-z.]+|wordpress\.com|over-blog\.com|overblog\.com|google\.com|wikipedia\.org|change\.org|mesopinions\.com|telegram\.me|t\.me|vk\.com|imgur\.com|linkedin\.com)$/;
 
