@@ -182,6 +182,15 @@
     margin:0; font-family:var(--font-display);
     font-size:clamp(34px, 6vw, 58px); font-weight:600; line-height:1.02; letter-spacing:-.015em;
   }
+  .titre-lien{color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:.28em;}
+  .titre-lien:hover{text-decoration:none;}
+  .cocarde{width:.72em; height:.72em; flex:0 0 auto;}
+  /* Hors de la une, l'en-tête se fait discret pour laisser la place au contenu */
+  @media (min-width:701px){
+    body:not([data-page="accueil"]) .masthead-titre{padding:14px 0 12px;}
+    body:not([data-page="accueil"]) h1{font-size:30px;}
+    body:not([data-page="accueil"]) .masthead-titre p{display:none;}
+  }
   .masthead-titre p{
     margin:10px 0 0; max-width:640px;
     font-family:var(--font-display); font-style:italic; font-size:clamp(16px,2vw,19px);
@@ -217,6 +226,8 @@
 
   /* ---------- Titres de rubrique ---------- */
   .rubrique-tete{margin:0 0 26px; padding-bottom:18px; border-bottom:1px solid var(--border);}
+  .surtitre{display:inline-flex; align-items:center; gap:8px; margin-bottom:8px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
+  .surtitre::before{content:""; width:22px; height:3px; background:linear-gradient(90deg, #1B3A8C 0 33%, var(--border) 33% 66%, #C8102E 66%);}
   .rubrique-tete h2{
     margin:0 0 8px; font-family:var(--font-display); font-weight:600;
     font-size:clamp(26px,3.6vw,36px); line-height:1.1; letter-spacing:-.01em;
@@ -427,7 +438,7 @@
   .accueil-section-title{display:none;}
   .accueil-highlight-grid{display:grid; grid-template-columns:1fr; gap:0;}
   @media(min-width:860px){
-    .accueil-highlight-grid{grid-template-columns:1.7fr 1fr; column-gap:32px;}
+    .accueil-highlight-grid{grid-template-columns:1.7fr 1fr; grid-template-rows:auto 1fr; column-gap:32px; align-items:start;}
     .accueil-highlight-card:first-child{grid-row:span 2; padding-right:32px; border-right:1px solid var(--border);}
   }
   .accueil-highlight-card{padding:4px 0 22px; cursor:pointer;}
@@ -458,13 +469,29 @@
   .mini-sondage .barre{height:10px; background:var(--border-soft); border-radius:0 4px 4px 0;}
   .mini-sondage .barre span{display:block; height:100%; border-radius:0 4px 4px 0;}
   .mini-sondage .val{white-space:nowrap; min-width:3.2em; text-align:right; color:var(--text-soft); font-variant-numeric:tabular-nums;}
-  .accueil-rubrique{transition:background .15s;}
+  .accueil-rubrique{transition:background .15s, transform .15s; display:grid; grid-template-columns:auto 1fr; column-gap:14px; align-items:start;}
+  .accueil-rubrique > b, .accueil-rubrique > span:not(.rubrique-ico){grid-column:2;}
+  .rubrique-ico{grid-row:span 2; width:40px; height:40px; border-radius:50%; background:var(--accent-dim); color:var(--accent); display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s;}
+  .rubrique-ico svg{width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+  .accueil-rubrique:hover .rubrique-ico, .accueil-rubrique:focus-visible .rubrique-ico{background:var(--accent); color:var(--bg);}
   .accueil-rubrique b::after{content:" →"; opacity:0; transition:opacity .15s;}
   .accueil-rubrique:hover b::after, .accueil-rubrique:focus-visible b::after{opacity:1;}
   .accueil-highlight-title{font-family:var(--font-display); font-size:22px; font-weight:600; line-height:1.22; margin-bottom:8px;}
   .accueil-highlight-card:first-child .accueil-highlight-title{font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-.01em;}
   .accueil-highlight-card:hover .accueil-highlight-title{text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px;}
   .accueil-highlight-sub{font-size:14.5px; color:var(--text-soft);}
+  .autres-textes{margin-top:22px; border-top:1px solid var(--ink);}
+  .autres-titre{padding:12px 0 4px; font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-faint);}
+  .autre-texte{display:grid; grid-template-columns:7.5em 1fr auto; gap:4px 14px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--border-soft); color:var(--text); text-decoration:none;}
+  .autre-texte:hover .autre-nom{text-decoration:underline; text-underline-offset:3px;}
+  .autre-date{font-size:13px; color:var(--text-faint);}
+  .autre-nom{font-family:var(--font-display); font-size:17px; line-height:1.3;}
+  .autre-res{font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;}
+  .autre-res.adopte{color:var(--vert);} .autre-res.rejete{color:var(--rouge);}
+  @media (max-width:640px){ .autre-texte{grid-template-columns:1fr auto;} .autre-date{grid-column:1 / -1;} }
+  .carte-cta{display:inline-flex; gap:6px; margin-top:10px; font-size:14px; font-weight:700; color:var(--accent);}
+  .carte-cta span{transition:transform .15s;}
+  .accueil-highlight-card:hover .carte-cta span{transform:translateX(3px);}
   .accueil-rubriques{
     display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0 28px;
     margin-top:34px; border-top:3px double var(--ink);
@@ -483,7 +510,8 @@
   .meeting-card.passe{opacity:.62;}
   .meeting-card.placeholder{opacity:.6;}
   .meeting-date-badge{text-align:center; padding-top:2px; border-top:3px solid var(--accent);}
-  .meeting-date-badge .jour{font-family:var(--font-display); font-size:28px; font-weight:600; line-height:1.1;}
+  .meeting-date-badge .jour{font-family:var(--font-display); font-size:28px; font-weight:600; line-height:1.1; white-space:nowrap;}
+  @media (max-width:640px){ .meeting-date-badge .jour{font-size:22px;} }
   .meeting-date-badge .mois{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
   .meeting-body h4{margin:0 0 4px; font-family:var(--font-display); font-size:20px; font-weight:600;}
   .meeting-meta{font-size:13.5px; color:var(--text-soft); margin-bottom:6px;}
@@ -537,6 +565,9 @@
   .sondage-disclaimer{font-size:13px; font-style:italic; color:var(--text-faint); margin-top:16px;}
 
   /* ---------- Quiz ---------- */
+  .bientot{display:inline-block; vertical-align:3px; margin-left:6px; padding:2px 8px; border-radius:10px; background:var(--accent-dim); color:var(--accent); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
+  .gauge-legende{display:flex; align-items:center; gap:8px; margin-top:6px; font-size:12.5px; color:var(--text-faint);}
+  .gauge-legende .trait{width:3px; height:12px; background:var(--text); border-radius:2px;}
   .quiz-card{padding:18px 0 20px; border-bottom:1px solid var(--border);}
   .quiz-progress{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px;}
   .quiz-question{font-family:var(--font-display); font-size:21px; font-weight:500; line-height:1.3; margin-bottom:14px;}
@@ -547,6 +578,15 @@
     transition:background .15s ease, color .15s ease;
   }
   .quiz-option:hover{background:var(--bg-elevated-2);}
+  .quiz-option[data-vote="pour"]:hover{border-color:var(--vert); color:var(--vert);}
+  .quiz-option[data-vote="contre"]:hover{border-color:var(--rouge); color:var(--rouge);}
+  .quiz-option[data-vote="abst"]:hover{border-color:var(--ambre); color:var(--ambre);}
+  .quiz-option.picked-pour:hover, .quiz-option.picked-contre:hover, .quiz-option.picked-abst:hover{color:#fff;}
+  .quiz-avancement{position:sticky; top:52px; z-index:5; display:flex; align-items:center; gap:14px; padding:10px 0; background:var(--bg); border-bottom:1px solid var(--border);}
+  .quiz-avancement-texte{font-size:13px; font-weight:700; color:var(--text-soft); white-space:nowrap; min-width:9em;}
+  .quiz-avancement-piste{flex:1; height:6px; background:var(--border-soft); border-radius:3px; overflow:hidden;}
+  .quiz-avancement-piste span{display:block; height:100%; width:0; background:var(--accent); border-radius:3px; transition:width .3s ease;}
+  .quiz-card.repondue .quiz-progress::after{content:" ✓"; color:var(--vert);}
   .quiz-option.picked-pour{background:var(--vert); border-color:var(--vert); color:#fff;}
   .quiz-option.picked-contre{background:var(--rouge); border-color:var(--rouge); color:#fff;}
   .quiz-option.picked-abst{background:var(--ambre); border-color:var(--ambre); color:#fff;}
@@ -651,7 +691,9 @@
   .commune-titre span{font-family:var(--font-body); font-size:13px; font-weight:500; color:var(--text-faint);}
   .commune-bloc .depute-carte:last-child{border-bottom:none;}
   .depute-retour{margin-bottom:18px;}
-  .depute-entete{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; margin-bottom:6px;}
+  .depute-entete{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin-bottom:6px;}
+  .depute-avatar{width:52px; height:52px; border-radius:50%; border:3px solid; background:var(--bg-elevated); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--text);}
+  .vote-barre.mini{height:6px; margin:8px 0 0;}
   .depute-entete h3{margin:0; font-family:var(--font-display); font-size:30px; font-weight:600; line-height:1.15;}
   .depute-groupe{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;}
   .depute-groupe .dot{width:9px; height:9px; border-radius:50%;}
@@ -786,6 +828,7 @@
     .scrutin-choix-champ{flex-basis:100%;}
     .hemi-mode .theme-chip{min-height:36px;}
     .quiz-option{min-height:44px; flex:1 1 0; justify-content:center;}
+    .quiz-avancement{top:0;}
     .histo-more, .quiz-cta, .quiz-restart{min-height:48px;}
     select, input[type="search"]{min-height:44px; font-size:16px;} /* 16 px : pas de zoom automatique sur iPhone */
     .lien-bouton{padding:4px 0;}
@@ -879,7 +922,7 @@
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
-    <h1>Décrypter la politique française</h1>
+    <h1><a href="#accueil" class="titre-lien" data-tab-lien="accueil"><svg class="cocarde" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#1B3A8C"/><circle cx="20" cy="20" r="12.5" fill="#F7F4EC"/><circle cx="20" cy="20" r="6.5" fill="#C8102E"/></svg>Décrypter la politique française</a></h1>
     <button type="button" class="bouton-recherche loupe-mobile" aria-label="Rechercher sur le site" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 0 0-15a7.5 7.5 0 0 0 0 15z M16 16l5 5"/></svg></button>
     <p>Ce que votent les députés, qui dirige les partis, où en sont les sondages et les grands chiffres du pays. Chaque information renvoie à sa source.</p>
@@ -940,19 +983,20 @@
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
 
     <div class="accueil-rubriques">
-      <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><b>Les votes</b><span>Chaque scrutin de l'Assemblée, siège par siège.</span></div>
-      <div class="accueil-rubrique" data-tab="histo" tabindex="0" role="link"><b>Qui vote quoi</b><span>Les votes d'un groupe et ses alliés de fait.</span></div>
-      <div class="accueil-rubrique" data-tab="deputes" tabindex="0" role="link"><b>Votre député</b><span>Ses votes, à partir de votre commune.</span></div>
-      <div class="accueil-rubrique" data-tab="senat" tabindex="0" role="link"><b>Le Sénat</b><span>Les votes des sénateurs, groupe par groupe.</span></div>
-      <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><b>Sondages 2027</b><span>Les dernières enquêtes, institut par institut.</span></div>
-      <div class="accueil-rubrique" data-tab="candidats" tabindex="0" role="link"><b>Candidats 2027</b><span>Toutes les candidatures déclarées.</span></div>
-      <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
-      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><b>Le quiz</b><span>Votez à la place des députés.</span></div>
+      <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Les votes</b><span>Chaque scrutin de l'Assemblée, siège par siège.</span></div>
+      <div class="accueil-rubrique" data-tab="histo" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.8-3 2.7-4.5 5-4.5s4.2 1.5 5 4.5M11 19c.8-3 2.7-4.5 5-4.5s4.2 1.5 5 4.5"/></svg></span><b>Qui vote quoi</b><span>Les votes d'un groupe et ses alliés de fait.</span></div>
+      <div class="accueil-rubrique" data-tab="deputes" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><b>Votre député</b><span>Ses votes, à partir de votre commune.</span></div>
+      <div class="accueil-rubrique" data-tab="senat" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20v-8M9.5 20v-8M14.5 20v-8M19 20v-8M3 12h18L12 5 3 12z"/></svg></span><b>Le Sénat</b><span>Les votes des sénateurs, groupe par groupe.</span></div>
+      <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Sondages 2027</b><span>Les dernières enquêtes, institut par institut.</span></div>
+      <div class="accueil-rubrique" data-tab="candidats" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Candidats 2027</b><span>Toutes les candidatures déclarées.</span></div>
+      <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
+      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Le quiz</b><span>Votez à la place des députés.</span></div>
     </div>
   </section>
 
   <section class="view" id="view-scrutin">
     <div class="rubrique-tete">
+      <div class="surtitre">Assemblée nationale</div>
       <h2>Les votes de l'Assemblée</h2>
       <p class="chapo">Chaque scrutin public de la législature, groupe par groupe et siège par siège. Choisissez un texte : l'hémicycle montre qui a voté pour, qui a voté contre et qui n'a pas pris part au vote.
         <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées chaque matin.</small></p>
@@ -1001,6 +1045,7 @@
 
   <section class="view" id="view-histo">
     <div class="rubrique-tete">
+      <div class="surtitre">Assemblée nationale</div>
       <h2>Qui vote quoi</h2>
       <p class="chapo">Choisissez un groupe pour retrouver ses votes, texte par texte, et voir avec quels autres groupes il se retrouve le plus souvent.</p>
     </div>
@@ -1032,6 +1077,7 @@
 
   <section class="view" id="view-deputes">
     <div class="rubrique-tete">
+      <div class="surtitre">Assemblée nationale</div>
       <h2>Votre député</h2>
       <p class="chapo">Les 577 députés en fonction : leur circonscription, leur participation aux scrutins publics et leur vote sur chaque texte et chaque motion de censure de la législature.
         <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés chaque matin.</small></p>
@@ -1057,6 +1103,7 @@
 
   <section class="view" id="view-senat">
     <div class="rubrique-tete">
+      <div class="surtitre">Sénat</div>
       <h2>Les votes du Sénat</h2>
       <p class="chapo">Les scrutins publics du Sénat, groupe par groupe. Un texte de loi passe par les deux chambres : ce que l'Assemblée adopte, le Sénat peut le modifier ou le rejeter, et inversement.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
@@ -1080,6 +1127,7 @@
 
   <section class="view" id="view-dirigeants">
     <div class="rubrique-tete">
+      <div class="surtitre">Vie des partis</div>
       <h2>Partis et dirigeants</h2>
       <p class="chapo">Qui dirige les partis, et qui préside leurs groupes à l'Assemblée.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
@@ -1090,6 +1138,7 @@
 
   <section class="view" id="view-chiffres">
     <div class="rubrique-tete">
+      <div class="surtitre">Économie et finances publiques</div>
       <h2>Les chiffres clés</h2>
       <p class="chapo">Population, emploi, croissance, finances publiques : les derniers chiffres publiés par l'Insee, chacun avec sa date et un lien vers la série d'origine.</p>
     </div>
@@ -1100,6 +1149,7 @@
 
   <section class="view" id="view-meetings">
     <div class="rubrique-tete">
+      <div class="surtitre">Calendrier</div>
       <h2>Agenda politique</h2>
       <p class="chapo">Congrès, meetings et grands rendez-vous annoncés par les partis. Seules les dates confirmées par une source publique y figurent.</p>
     </div>
@@ -1108,6 +1158,7 @@
 
   <section class="view" id="view-justice">
     <div class="rubrique-tete">
+      <div class="surtitre">Probité</div>
       <h2>Justice et politique</h2>
       <p class="chapo">Des responsables politiques condamnés par la justice. Ne figurent ici que des décisions rendues par un tribunal, avec leur statut : définitive, ou frappée d'appel et donc susceptible d'évoluer. Aucune plainte, aucune mise en examen.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
@@ -1121,6 +1172,7 @@
 
   <section class="view" id="view-sondages">
     <div class="rubrique-tete">
+      <div class="surtitre">Présidentielle 2027</div>
       <h2>Sondages : présidentielle 2027</h2>
       <p class="chapo">Les intentions de vote au premier tour. Pas de moyenne maison : chaque institut a sa méthode, alors ses chiffres sont affichés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
     </div>
@@ -1147,6 +1199,7 @@
 
   <section class="view" id="view-candidats">
     <div class="rubrique-tete">
+      <div class="surtitre">Présidentielle 2027</div>
       <h2>Candidats à la présidentielle 2027</h2>
       <p class="chapo">Les personnalités qui ont annoncé leur candidature, avec leur parti, leurs fonctions et la source de leur annonce. Être candidat déclaré ne suffit pas : il faudra réunir 500 parrainages d'élus, et la liste officielle ne sera arrêtée par le Conseil constitutionnel qu'au printemps 2027.
         <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue chaque matin.</small></p>
@@ -1217,6 +1270,7 @@
 
   <section class="view" id="view-quiz">
     <div class="rubrique-tete">
+      <div class="surtitre">Jeu civique</div>
       <h2>Et vous, qu'auriez-vous voté ?</h2>
       <p class="chapo" id="quiz-banner-detail">Des votes récents de l'Assemblée. Donnez votre position sur chacun, puis découvrez de quels groupes vous êtes le plus proche.</p>
     </div>
@@ -2224,7 +2278,7 @@ function meetingCard(m, idx, passe){
         <div class="mois">${esc(m.mois)}</div>
       </div>
       <div class="meeting-body">
-        <h4>${esc(m.titre)}${m.verified?'':''}</h4>
+        <h4>${esc(m.titre)}${passe ? "" : (()=>{ const j = Math.round((Date.parse(m.debut) - Date.parse(aujourdhuiISO())) / 864e5); return j <= 0 ? ` <span class="bientot">En cours</span>` : j <= 45 ? ` <span class="bientot">${j === 1 ? "Demain" : `Dans ${j} jours`}</span>` : ""; })()}</h4>
         <div class="meeting-meta">
           <span class="dot-inline" style="background:${m.partyColor}"></span>${[m.parti, m.heure !== "—" ? m.heure : "", m.lieu].filter(Boolean).map(esc).join(" · ")}
         </div>
@@ -2599,7 +2653,7 @@ function choisirQuestionsQuiz(){
 function renderQuiz(){
   quizReponses = {};
   const container = document.getElementById("quiz-container");
-  container.innerHTML = QUIZ_LOIS.map((loi,idx)=>`
+  container.innerHTML = `<div class="quiz-avancement" id="quiz-avancement"><span class="quiz-avancement-texte" id="quiz-avancement-texte">0 réponse sur ${QUIZ_LOIS.length}</span><span class="quiz-avancement-piste"><span id="quiz-avancement-barre"></span></span></div>` + QUIZ_LOIS.map((loi,idx)=>`
     <div class="quiz-card">
       <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · vote du ${esc(loi.date)}</div>
       <div class="quiz-question">${esc(titreLoi(loi))}</div>
@@ -2609,7 +2663,7 @@ function renderQuiz(){
         <button type="button" class="quiz-option" data-vote="abst">Abstention</button>
       </div>
     </div>
-  `).join("") + `<button class="quiz-cta" id="quiz-submit" disabled>Voir mon résultat</button>`;
+  `).join("") + `<button class="quiz-cta" id="quiz-submit" disabled>Répondez aux ${QUIZ_LOIS.length} questions pour voir votre résultat</button>`;
 
   container.querySelectorAll(".quiz-options").forEach(group=>{
     const loiId = group.dataset.loi;
@@ -2618,7 +2672,13 @@ function renderQuiz(){
         quizReponses[loiId] = opt.dataset.vote;
         group.querySelectorAll(".quiz-option").forEach(o=>o.classList.remove("picked-pour","picked-contre","picked-abst"));
         opt.classList.add("picked-"+opt.dataset.vote);
+        const carte = group.closest(".quiz-card");
+        const premiereReponse = !carte.classList.contains("repondue");
+        carte.classList.add("repondue");
         checkQuizComplete();
+        // Première réponse à cette question : on amène la suivante sans réponse à l'écran
+        const suivante = premiereReponse && [...container.querySelectorAll(".quiz-card:not(.repondue)")][0];
+        if(suivante && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) suivante.scrollIntoView({ behavior:"smooth", block:"center" });
       });
     });
   });
@@ -2628,7 +2688,11 @@ function renderQuiz(){
 
 function checkQuizComplete(){
   const btn = document.getElementById("quiz-submit");
-  btn.disabled = Object.keys(quizReponses).length < QUIZ_LOIS.length;
+  const n = Object.keys(quizReponses).length, total = QUIZ_LOIS.length;
+  btn.disabled = n < total;
+  btn.textContent = n < total ? `Encore ${total - n} question${total - n > 1 ? "s" : ""} avant votre résultat` : "Voir mon résultat";
+  document.getElementById("quiz-avancement-texte").textContent = `${n} réponse${n > 1 ? "s" : ""} sur ${total}`;
+  document.getElementById("quiz-avancement-barre").style.width = `${n / total * 100}%`;
 }
 
 function showQuizResult(){
@@ -2721,7 +2785,7 @@ function renderChiffres(filter=""){
   const f = filter.trim().toLowerCase();
   const filtres = f ? INDICATEURS.filter(i =>
     i.nom.toLowerCase().includes(f) || i.motsCles.toLowerCase().includes(f)
-  ) : INDICATEURS;
+  ) : INDICATEURS.filter(i => !["Déficit public","Dette publique"].includes(i.nom)); // déjà en jauge au-dessus
 
   const grid = document.getElementById("chiffre-grid");
   if(filtres.length === 0){
@@ -2743,7 +2807,7 @@ document.getElementById("chiffre-search").addEventListener("input", (e)=> render
 
 /* ---------- Jauges budget / dette (données INSEE réelles, dernier chiffre officiel) ---------- */
 
-function makeGaugeSVG(label, pct, maxScale, colorFill){
+function makeGaugeSVG(label, pct, maxScale, colorFill, seuil){
   // anneau de progression en SVG — pct et maxScale en % du PIB
   const r = 46, circ = 2*Math.PI*r;
   const ratio = Math.min(pct/maxScale, 1);
@@ -2754,6 +2818,8 @@ function makeGaugeSVG(label, pct, maxScale, colorFill){
       <circle cx="60" cy="60" r="${r}" fill="none" stroke="${colorFill}" stroke-width="10"
         stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
         transform="rotate(-90 60 60)"/>
+      ${seuil ? (()=>{ const a = (seuil / maxScale) * 2 * Math.PI - Math.PI / 2, x1 = 60 + 38 * Math.cos(a), y1 = 60 + 38 * Math.sin(a), x2 = 60 + 56 * Math.cos(a), y2 = 60 + 56 * Math.sin(a);
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/>`; })() : ""}
       <text x="60" y="66" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="20" font-weight="600" fill="var(--text)">${label} %</text>
     </svg>`;
 }
@@ -2761,8 +2827,8 @@ function makeGaugeSVG(label, pct, maxScale, colorFill){
 function renderBudgetGauges(){
   // Alimenté par INDICATEURS (data/indicateurs.json) : une mise à jour des chiffres met aussi à jour les jauges
   const jauges = [
-    { nom:"Déficit public", echelle:10, couleur:"var(--rouge)", seuil:"Seuil européen : 3 % du PIB." },
-    { nom:"Dette publique", echelle:130, couleur:"var(--ambre)", seuil:"Seuil de Maastricht : 60 % du PIB." },
+    { nom:"Déficit public", echelle:10, couleur:"var(--rouge)", seuil:"Seuil européen : 3 % du PIB.", repere:3 },
+    { nom:"Dette publique", echelle:130, couleur:"var(--ambre)", seuil:"Seuil de Maastricht : 60 % du PIB.", repere:60 },
   ];
   document.getElementById("budget-hero").innerHTML = jauges.map(j=>{
     const i = INDICATEURS.find(x=>x.nom===j.nom);
@@ -2774,10 +2840,11 @@ function renderBudgetGauges(){
       <h3>${j.nom}</h3>
       <div class="budget-hero-sub">${esc(i.source)}, ${esc(i.date)}</div>
       <div class="gauge-block">
-        ${makeGaugeSVG(String(pct).replace(".", ","), pct, j.echelle, j.couleur)}
+        ${makeGaugeSVG(String(pct).replace(".", ","), pct, j.echelle, j.couleur, j.repere)}
         <div>
           <div class="gauge-value">${esc(i.valeur)}</div>
           <div class="gauge-note">${esc(String(i.detail).replace(/\.?\s*$/, "."))}${/seuil/i.test(i.detail) ? "" : " " + j.seuil}</div>
+          <div class="gauge-legende"><span class="trait" aria-hidden="true"></span>le trait sur l'anneau marque le seuil européen (${j.repere} % du PIB)</div>
         </div>
       </div>
     </div>`;
@@ -2864,6 +2931,7 @@ function checkContexteDate(loi){
 
 /* ---------- Accueil (tableau de bord) ---------- */
 
+const normTitreAccueil = l => norm(l.dossierTitre || titreLoi(l));
 function renderAccueil(){
   // Stats clés en haut de page (réutilise les données déjà chargées)
   document.getElementById("accueil-hero-stats").innerHTML = `
@@ -2896,19 +2964,19 @@ function renderAccueil(){
       titre: derniereLoi.dossierTitre || titreLoi(derniereLoi),
       sous: `${derniereLoi.resultat==="adopte" ? "Adopté" : "Rejeté"} le ${derniereLoi.date}${etapeLoi(derniereLoi) ? ` (${etapeLoi(derniereLoi)})` : ""}, par ${formatNombre(totaux.pour)} voix pour et ${formatNombre(totaux.contre)} contre.` +
         `${derniereLoi.auteur ? ` Texte déposé par ${derniereLoi.auteur}.` : ""} Voir le vote de chaque groupe.`,
-      tab: "scrutin", loi: derniereLoi.id
+      tab: "scrutin", loi: derniereLoi.id, cta: "Voir le vote siège par siège"
     },
     enTete ? {
       eyebrow: "Présidentielle 2027",
       titre: `${enTete.nom} en tête des intentions de vote`,
       sous: `${fourchette(enTete.range)} au premier tour selon ${instPrincipal.nom} (${instPrincipal.date}).`,
-      tab: "sondages"
+      tab: "sondages", cta: "Tous les sondages et leur évolution"
     } : null,
     prochainMeeting ? {
       eyebrow: "Agenda",
       titre: prochainMeeting.titre,
       sous: `${prochainMeeting.jour} ${prochainMeeting.mois.toLowerCase().replace(".", "")}, ${prochainMeeting.lieu}.`,
-      tab: "meetings"
+      tab: "meetings", cta: "Tout l'agenda"
     } : {
       eyebrow: "Agenda",
       titre: "Aucun rendez-vous annoncé pour l'instant",
@@ -2933,6 +3001,12 @@ function renderAccueil(){
       const ligne = (k, lib) => pos[k].length ? `<div><b>${lib}</b>${pos[k].map(esc).join(", ")}</div>` : "";
       return `<div class="vote-groupes">${ligne("pour","Groupes pour")}${ligne("contre","Groupes contre")}${ligne("abst","Abstention")}</div>`;
     })()}`;
+  // Les autres textes votés récemment (un par texte), sous la une
+  const dejaVus = new Set([normTitreAccueil(derniereLoi)]);
+  const autres = LOIS.filter(l => categorieLoi(l) === "texte" && l.id !== derniereLoi.id)
+    .filter(l => { const k = normTitreAccueil(l); if(dejaVus.has(k)) return false; dejaVus.add(k); return true; }).slice(0, 4);
+  if(autres.length) highlights[0].apres = `<div class="autres-textes"><div class="autres-titre">Les autres textes votés</div>${autres.map(l=>`
+    <a class="autre-texte" href="#scrutin-${l.numero ?? l.id}"><span class="autre-date">${esc(l.date)}</span><span class="autre-nom">${esc(l.dossierTitre || titreLoi(l))}</span><span class="autre-res ${l.resultat}">${l.resultat === "adopte" ? "Adopté" : "Rejeté"}</span></a>`).join("")}</div>`;
   // Mini-classement du dernier sondage (5 premiers), couleur = parti du candidat
   if(enTete){
     const top = CANDIDATS.map(c=>({ c, r: instPrincipal.scores[c.id] })).filter(x=>x.r)
@@ -2950,6 +3024,8 @@ function renderAccueil(){
       <div class="accueil-highlight-title">${esc(h.titre)}</div>
       ${h.extra || ""}
       <div class="accueil-highlight-sub">${esc(h.sous)}</div>
+      <span class="carte-cta">${h.cta || "Voir"} <span aria-hidden="true">→</span></span>
+      ${h.apres || ""}
     </div>
   `).join("");
 
@@ -2965,6 +3041,8 @@ function renderAccueil(){
     rebours.hidden = false;
   } else rebours.hidden = true;
 
+  // Un lien de la liste « autres textes » ouvre son propre vote, pas celui de la carte
+  document.querySelectorAll(".autre-texte").forEach(a=> a.addEventListener("click", e=> e.stopPropagation()));
   document.querySelectorAll(".accueil-highlight-card").forEach(card=>{
     card.addEventListener("click", ()=>{
       if(card.dataset.loi){
@@ -3212,6 +3290,7 @@ function renderDeputeFiche(d){
   document.getElementById("depute-fiche").innerHTML = `
     <button type="button" class="lien-bouton depute-retour" id="depute-retour">← Tous les députés</button>
     <div class="depute-entete">
+      <span class="depute-avatar" style="border-color:${p.couleur}" aria-hidden="true">${esc(d.nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join(""))}</span>
       <h3>${esc(d.nom)}</h3>
       <span class="depute-groupe"><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</span>
     </div>
@@ -3223,7 +3302,7 @@ function renderDeputeFiche(d){
     <div class="stat-cards">
       <div class="stat-card"><div class="stat-label">Votes clés</div><div class="stat-value accent">${presents} / ${possibles}</div><div class="stat-sub">textes et motions de censure où ${d.f ? "elle" : "il"} a voté</div></div>
       <div class="stat-card"><div class="stat-label">Tous les scrutins</div><div class="stat-value">${pctFr(exprimes, s.scrutins)}</div><div class="stat-sub">${formatNombre(exprimes)} votes sur ${formatNombre(s.scrutins)} scrutins publics</div></div>
-      <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${formatNombre(s.pour)} · ${formatNombre(s.contre)} · ${formatNombre(s.abst)}</div><div class="stat-sub">pour · contre · abstention</div></div>
+      <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${formatNombre(s.pour)} · ${formatNombre(s.contre)} · ${formatNombre(s.abst)}</div><div class="stat-sub">pour · contre · abstention</div>${exprimes ? `<div class="vote-barre mini" aria-hidden="true">${[["p",s.pour],["c",s.contre],["a",s.abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}</div>` : ""}</div>
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(s.ecarts)}</div><div class="stat-sub">${pctFr(s.ecarts, exprimes)} de ses votes diffèrent de la position majoritaire de son groupe</div></div>
     </div>
     ${blocComparaison(d)}
