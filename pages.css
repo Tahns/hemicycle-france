@@ -1,0 +1,29 @@
+/* Pages statiques (v/ votes clés, d/ députés) : même charte que le site, sans JavaScript */
+@font-face{font-family:"Newsreader"; font-style:normal; font-weight:400 600; font-display:swap; src:url(fonts/newsreader-normal-latin.woff2) format("woff2");}
+@font-face{font-family:"Public Sans"; font-style:normal; font-weight:400 700; font-display:swap; src:url(fonts/public-sans-normal-latin.woff2) format("woff2");}
+:root{--bg:#F5F1E8; --bg-elevated:#FBF9F4; --border:#D3CBBA; --border-soft:#E4DDCE; --ink:#1C1B18; --text-soft:#47443D; --text-faint:#625D53; --accent:#1B3A8C; --vert:#2E6B3F; --rouge:#B3261E; --ambre:#9A5500;}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 "Public Sans", -apple-system, "Segoe UI", sans-serif;}
+a{color:var(--accent); text-underline-offset:2px;}
+.lisere{display:flex; height:4px;} .lisere span{flex:1;} .lisere span:nth-child(1){background:#1B3A8C;} .lisere span:nth-child(2){background:#F7F4EC;} .lisere span:nth-child(3){background:#C8102E;}
+header, main, footer{max-width:860px; margin:0 auto; padding:0 20px;}
+header{padding-top:16px; padding-bottom:12px; border-bottom:3px double var(--ink);}
+header a{font-family:"Newsreader", Georgia, serif; font-size:22px; font-weight:600; color:var(--ink); text-decoration:none;}
+main{padding-top:26px; padding-bottom:30px;}
+.surtitre{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--accent);}
+h1{font-family:"Newsreader", Georgia, serif; font-size:clamp(28px,5vw,40px); font-weight:600; line-height:1.12; margin:8px 0 10px;}
+h2{font-family:"Newsreader", Georgia, serif; font-size:22px; font-weight:600; margin:30px 0 8px;}
+.meta{color:var(--text-soft);}
+.resultat{font-family:"Newsreader", Georgia, serif; font-size:28px; font-weight:600;}
+.adopte{color:var(--vert);} .rejete{color:var(--rouge);}
+.bouton{display:inline-block; margin:18px 0 6px; padding:11px 18px; border-radius:3px; background:var(--accent); color:#fff; font-weight:700; text-decoration:none;}
+table{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums;}
+th, td{padding:7px 8px; border-bottom:1px solid var(--border-soft); text-align:right;}
+th:first-child, td:first-child{text-align:left;}
+th{font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-faint); font-weight:700;}
+.pastille{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px;}
+.chiffres{display:flex; flex-wrap:wrap; gap:0 30px; margin:16px 0 6px; padding:12px 0; border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
+.chiffres div{min-width:140px;} .chiffres b{display:block; font-family:"Newsreader", Georgia, serif; font-size:26px; font-weight:600;} .chiffres span{font-size:13px; color:var(--text-soft);}
+.vote-p{color:var(--vert); font-weight:700;} .vote-c{color:var(--rouge); font-weight:700;} .vote-a{color:var(--ambre); font-weight:700;} .vote-x{color:var(--text-faint);}
+img.apercu{display:block; width:100%; max-width:800px; height:auto; margin:20px 0 4px; border:1px solid var(--border);}
+footer{padding-top:14px; padding-bottom:40px; border-top:1px solid var(--border); font-size:13px; color:var(--text-faint);}
