@@ -2858,7 +2858,9 @@ function chargerCommunes(){
   if(!communesChargement) communesChargement = lireJSON("data/communes.json").then(d=>{ COMMUNES = d?.departements || {}; });
   return communesChargement;
 }
-const normDep = t => norm(t).replace(/^(la|le|les) /, "").replace(/-/g, " ");
+// Noms de département comparés mot à mot, dans n'importe quel ordre : « La Réunion » = « Réunion »,
+// « Saint-Martin/Saint-Barthélemy » = « Saint-Barthélemy et Saint-Martin »
+const normDep = t => norm(t).replace(/^(la|le|les) /, "").split(/[\s\-\/]+/).filter(m => m && m !== "et").sort().join(" ");
 let deputeOuvert = null, deputeLimite = 60, deputeFiltreVotes = "tous", deputeCompare = null;
 
 function chargerDeputes(){
