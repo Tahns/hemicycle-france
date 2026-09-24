@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Décrypter la politique française</title>
+<meta name="description" content="Tous les votes de l'Assemblée nationale groupe par groupe, les dirigeants des partis, leurs condamnations judiciaires, les sondages 2027 et les chiffres clés de l'INSEE — chaque donnée est datée et sourcée.">
+<meta name="theme-color" content="#FBFBFA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Décrypter la politique française">
+<meta property="og:description" content="Tous les votes de l'Assemblée nationale groupe par groupe, sondages 2027, chiffres INSEE — chaque donnée est datée et sourcée.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M6 50a26 26 0 0 1 52 0' fill='none' stroke='%23000091' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M20 50a12 12 0 0 1 24 0' fill='none' stroke='%23CE0500' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +26,7 @@
     --border-soft:#EDECE7;
     --text:#15161A;
     --text-soft:#5B5D66;
-    --text-faint:#93949C;
+    --text-faint:#6B6D75; /* contraste ≥ 4,5:1 (WCAG AA) sur les fonds clairs */
     --accent:#000091;
     --accent-dim:rgba(0,0,145,.07);
     --vert:#18753C;
@@ -27,6 +37,27 @@
     --ambre-dim:rgba(179,64,0,.09);
     --font-display:"Space Grotesk", -apple-system, sans-serif;
     --font-body:"Inter", -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#111317;
+      --bg-elevated:#1A1D23;
+      --bg-elevated-2:#22262D;
+      --border:#343942;
+      --border-soft:#282C33;
+      --text:#ECEDEF;
+      --text-soft:#B4B7BF;
+      --text-faint:#9A9DA6;
+      --accent:#9AA6FF;
+      --accent-dim:rgba(154,166,255,.14);
+      --vert:#5BCB8A;
+      --vert-dim:rgba(91,203,138,.14);
+      --rouge:#FF7A72;
+      --rouge-dim:rgba(255,122,114,.14);
+      --ambre:#F2A65A;
+      --ambre-dim:rgba(242,166,90,.14);
+    }
+    .quiz-cta{color:#111317 !important;}
   }
   *{box-sizing:border-box;}
   body{
@@ -288,7 +319,7 @@
     border-radius:9px;
     font-size:13px;
     line-height:1.5;
-    white-space:nowrap;
+    max-width:min(340px, calc(100vw - 16px));
     z-index:5;
     box-shadow:0 12px 28px rgba(0,0,0,.22);
     opacity:0;
@@ -507,7 +538,7 @@
   .sondage-bar-row .bloc-name{width:150px; flex-shrink:0; font-size:13px; font-weight:600;}
   .sondage-bar-track{flex:1; height:20px; background:var(--border-soft); border-radius:6px; overflow:hidden;}
   .sondage-bar-fill{height:100%; border-radius:6px; transition:width .4s ease;}
-  .sondage-bar-pct{width:44px; text-align:right; font-variant-numeric:tabular-nums; font-size:13px; font-weight:700; color:var(--text);}
+  .sondage-bar-pct{min-width:84px; white-space:nowrap; text-align:right; font-variant-numeric:tabular-nums; font-size:13px; font-weight:700; color:var(--text);}
 
   .sondage-list-title{font-size:14.5px; font-weight:600; color:var(--text-soft); margin:0 0 12px;}
   .sondage-entry{
@@ -719,6 +750,65 @@
   .accueil-highlight-eyebrow{font-size:11px; color:var(--accent); font-weight:700; margin-bottom:6px;}
   .accueil-highlight-title{font-size:14.5px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.4;}
   .accueil-highlight-sub{font-size:12.5px; color:var(--text-soft); line-height:1.5;}
+  /* --- Ajouts : boutons accessibles, compteur, historique paginé --- */
+  button.theme-chip, button.party-chip, button.source-chip, button.quiz-option{font-family:inherit; line-height:inherit;}
+  .theme-chip:focus-visible, .party-chip:focus-visible, .source-chip:focus-visible, .tab:focus-visible,
+  .quiz-option:focus-visible, .accueil-highlight-card:focus-visible, .histo-more:focus-visible, .nav-toggle:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  .loi-count{font-size:12.5px; color:var(--text-faint);}
+  .hemi-mode{margin-bottom:6px;}
+  .legend-note{flex-basis:100%; font-size:11.5px;}
+  .party-membres{font-weight:500; color:var(--text-faint); font-size:11.5px;}
+  .party-votes .vote-pour b{color:var(--vert);}
+  .party-votes .vote-contre b{color:var(--rouge);}
+  .histo-date a{color:var(--accent); text-decoration:none;}
+  .histo-date a:hover{text-decoration:underline;}
+  .histo-resultat{font-weight:700;}
+  .histo-resultat.adopte{color:var(--vert);}
+  .histo-resultat.rejete{color:var(--rouge);}
+  .histo-vote-tag small{font-weight:600; opacity:.75;}
+  .histo-more{
+    display:block; width:100%; margin:18px 0 0; padding:12px; border-radius:12px;
+    border:1.5px solid var(--border); background:var(--bg-elevated); color:var(--text-soft);
+    font:inherit; font-size:13.5px; font-weight:600; cursor:pointer;
+  }
+  .histo-more:hover{border-color:var(--accent); color:var(--text);}
+  .meeting-empty{
+    background:var(--bg-elevated); border:1px dashed var(--border); border-radius:14px;
+    padding:22px; color:var(--text-soft); font-size:14px; line-height:1.55;
+  }
+  .meeting-card.passe{opacity:.6;}
+  .site-footer{
+    max-width:1260px; margin:40px auto 0; padding:24px 24px 40px; border-top:1px solid var(--border);
+    font-size:12.5px; color:var(--text-soft); line-height:1.7;
+  }
+  .site-footer h2{font-size:13px; margin:0 0 6px; color:var(--text);}
+  .site-footer a{color:var(--accent);}
+  .site-footer .footer-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px 32px;}
+  .chargement{color:var(--text-faint); font-size:14px; padding:24px 0;}
+  .proximite{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px; margin-bottom:22px;
+  }
+  .proximite h4{margin:0 0 4px; font-size:14px;}
+  .proximite .sub{font-size:12px; color:var(--text-faint); margin-bottom:12px;}
+  .proximite-row{display:grid; grid-template-columns:170px 1fr 48px; gap:10px; align-items:center; padding:3px 0; font-size:12.5px;}
+  .proximite-row .nom{font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .proximite-row .track{height:8px; border-radius:99px; background:var(--border-soft); overflow:hidden;}
+  .proximite-row .fill{height:100%; border-radius:99px;}
+  .proximite-row .pct{text-align:right; font-variant-numeric:tabular-nums; font-weight:700;}
+  .quiz-recap{margin-top:18px; border-top:1px solid var(--border-soft); padding-top:14px;}
+  .quiz-recap-row{font-size:12.5px; color:var(--text-soft); padding:6px 0; border-bottom:1px solid var(--border-soft);}
+  .quiz-recap-row b{color:var(--text);}
+  .sondage-disclaimer{font-size:12px; color:var(--text-faint); margin-top:14px; line-height:1.5;}
+  @media (max-width:640px){ .proximite-row{grid-template-columns:110px 1fr 42px;} }
+  .meetings-subtitle{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); margin:26px 0 12px;}
+  @media (max-width:640px){
+    .histo-row{grid-template-columns:1fr;}
+    .histo-vote-tag{justify-self:start;}
+    #loi-select{max-width:100%;}
+  }
 </style>
 </head>
 <body>
@@ -782,26 +872,28 @@
 
   <section class="view" id="view-scrutin">
     <div class="fictional-banner" style="background:var(--vert-dim); border-color:rgba(53,208,127,.3); color:var(--vert);">
-      ✓ <span><b>100% de votes réels et sourcés.</b> Plus de 8 400 scrutins réels, mis à jour automatiquement chaque jour depuis les données officielles de l'Assemblée nationale (open data). Aucun exemple fictif — chaque vote est daté et sourcé.</span>
+      ✓ <span><b>100% de votes réels et sourcés.</b> <span id="scrutin-banner-detail">Tous les scrutins publics de la législature</span>, mis à jour automatiquement chaque jour depuis les données officielles de l'Assemblée nationale (open data). Chaque vote renvoie à sa fiche officielle.</span>
     </div>
     <div class="theme-filter-bar" id="theme-filter-bar"></div>
     <div class="scrutin-controls">
-      <input type="search" id="loi-search" placeholder="Rechercher une loi (mot-clé)…" />
-      <select id="loi-select"></select>
+      <input type="search" id="loi-search" placeholder="Rechercher un texte (mot-clé)…" aria-label="Rechercher un scrutin" />
+      <select id="loi-select" aria-label="Choisir un scrutin"></select>
       <span class="resultat-pill" id="resultat-pill"></span>
+      <span class="loi-count" id="loi-count"></span>
     </div>
 
     <div class="stat-cards" id="stat-cards"></div>
 
     <div class="hemicycle-wrap">
       <div class="hemi-card">
-        <svg id="hemicycle" viewBox="0 0 1000 560"></svg>
+        <div class="theme-filter-bar hemi-mode" id="hemi-mode"></div>
+        <svg id="hemicycle" viewBox="0 0 1000 560" role="img" aria-label="Hémicycle : répartition des votes par siège"></svg>
         <div class="legend" id="legend"></div>
       </div>
 
       <div class="breakdown">
         <h3 id="breakdown-title">Répartition des votes</h3>
-        <div id="loi-provenance"></div>
+        <div id="loi-provenance" class="loi-provenance"></div>
         <div id="breakdown-list"></div>
       </div>
     </div>
@@ -809,16 +901,18 @@
 
   <section class="view" id="view-histo">
     <div class="party-select-bar" id="party-select-bar"></div>
+    <div class="theme-filter-bar" id="histo-cat-bar"></div>
     <div class="scrutin-controls">
-      <input type="search" id="histo-search" placeholder="Rechercher une loi dans l'historique…" />
+      <input type="search" id="histo-search" placeholder="Rechercher un texte dans l'historique…" aria-label="Rechercher dans l'historique" />
     </div>
+    <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
     <div id="histo-list"></div>
   </section>
 
   <section class="view" id="view-dirigeants">
     <div class="fictional-banner" style="background:var(--vert-dim); border-color:rgba(53,208,127,.3); color:var(--vert);">
-      ✓ <span><b>Données réelles</b>, vérifiées début septembre 2026. Un parti sans dirigeant national identifié (LIOT, UDR) est indiqué comme tel — ce sont des coalitions/groupes sans chef de parti unique.</span>
+      ✓ <span><b>Données réelles</b>, vérifiées début septembre 2026. Un groupe sans dirigeant national (LIOT, groupe pluraliste sans parti unique) est indiqué comme tel.</span>
     </div>
     <div class="leader-grid" id="leader-grid"></div>
   </section>
@@ -859,21 +953,42 @@
       <h3 id="sondage-institut-title">Intentions de vote — 1er tour, présidentielle 2027</h3>
       <div class="sondage-avg-sub" id="sondage-avg-sub"></div>
       <div id="sondage-avg-list"></div>
+      <div class="sondage-disclaimer">Un sondage mesure un rapport de forces à une date donnée ; ce n'est pas une prévision. Marge d'erreur de 1 à 3 points selon l'échantillon. Les candidats non testés par l'institut ne sont pas affichés.</div>
     </div>
   </section>
 
   <section class="view" id="view-quiz">
     <div class="fictional-banner" style="background:var(--vert-dim); border-color:rgba(53,208,127,.3); color:var(--vert);">
-      ✓ <span><b>Basé sur les 2 votes réels du site.</b> Encore peu de questions car on n'a intégré que des scrutins vérifiés — le quiz s'enrichira au fur et à mesure que d'autres votes réels seront ajoutés.</span>
+      ✓ <span><b>Basé sur des votes réels.</b> <span id="quiz-banner-detail">Votes récents de l'Assemblée nationale.</span></span>
     </div>
     <div id="quiz-container"></div>
   </section>
 </main>
 
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h2>Sources</h2>
+      Votes : <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte Etalab), récupéré chaque jour.<br>
+      Indicateurs : <a href="https://www.insee.fr" target="_blank" rel="noopener">INSEE</a>. Sondages, dirigeants, justice, meetings : source citée sur chaque fiche.
+    </div>
+    <div>
+      <h2>Méthode</h2>
+      Aucune donnée n'est estimée ni inventée. Les chiffres de vote sont recoupés avec la synthèse officielle de chaque scrutin avant publication ; une donnée manquante est affichée « non communiqué ».
+    </div>
+    <div>
+      <h2>Mise à jour</h2>
+      <span id="footer-maj">Chargement…</span>
+    </div>
+  </div>
+</footer>
+
+<noscript><p style="max-width:720px;margin:20px auto;padding:0 24px;">Ce site a besoin de JavaScript pour afficher les votes et les graphiques.</p></noscript>
+
 <div class="tooltip" id="tooltip"></div>
 
 <script>
-/* ---------- Données fictives ---------- */
+/* ---------- Groupes politiques ---------- */
 
 const PARTIES = [
   { id:"LFI",  nom:"LFI-NFP",              couleur:"#D6284B", sieges:71 },
@@ -890,80 +1005,341 @@ const PARTIES = [
   { id:"NI",   nom:"Non-inscrits",         couleur:"#6B6E78", sieges:15 },
 ];
 
-const TOTAL_SIEGES = PARTIES.reduce((s,p)=>s+p.sieges,0); // 577
+let TOTAL_SIEGES = PARTIES.reduce((s,p)=>s+p.sieges,0); // 577 — recalculé depuis les données (appliquerCompositionActuelle)
 
 // LOIS : valeurs de secours intégrées (pour que le fichier s'affiche correctement en
 // prévisualisation directe, sans serveur) — écrasées par data/lois.json si ce fichier
 // est accessible (site déployé avec le pipeline d'automatisation), voir loadExternalData().
 let LOIS = [
   {
-    id:"loi-reel-bayrou", titre:"Vote de confiance au gouvernement Bayrou",
-    date:"8 septembre 2025", resultat:"rejete", theme:"Institutions",
-    reel:true,
-    sourceLabel:"LCP / Public Sénat", sourceUrl:"https://www.publicsenat.fr/actualites/politique/vote-de-confiance-lassemblee-nationale-se-prononce-contre-entrainant-la-chute-du-gouvernement-bayrou",
-    proposePar:"Gouvernement Bayrou (engagement de responsabilité, art. 49 al.1)",
-    groupeMoteur:"Rejeté par une coalition RN, LFI-NFP, Socialistes, Écologistes, GDR et LIOT — le gouvernement Bayrou a démissionné le jour même",
-    votes:{
-      RN: {pour:0, contre:124, abst:0},
-      LFI: {pour:0, contre:71, abst:0},
-      SOC: {pour:0, contre:66, abst:0},
-      ECO: {pour:0, contre:38, abst:0},
-      GDR: {pour:0, contre:17, abst:0},
-      LIOT: {pour:0, contre:23, abst:0},
-      EPR: {pour:91, contre:0, abst:1},
-      DEM: {pour:36, contre:0, abst:0},
-      HOR: {pour:32, contre:0, abst:0},
-      LR: {pour:27, contre:13, abst:9},
-      UDR: null,
-      NI: null,
-    }
+    "id": "an-scrutin-3059",
+    "numero": 3059,
+    "titre": "la motion de censure déposée en application de l'article 49, alinéa 2, de la Constitution par Mme Marine Le Pen, M. Éric Ciotti et 56 députés.",
+    "date": "16 octobre 2025",
+    "dateISO": "2025-10-16",
+    "typeVote": "MOC",
+    "resultat": "rejete",
+    "theme": "Institutions",
+    "reel": true,
+    "source": "auto-assemblee-nationale",
+    "sourceLabel": "Assemblée nationale — scrutin n°3059",
+    "sourceUrl": "https://www.assemblee-nationale.fr/dyn/17/scrutins/3059",
+    "votes": {
+      "RN": {
+        "pour": 123,
+        "contre": 0,
+        "abst": 0,
+        "membres": 123
+      },
+      "EPR": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 92
+      },
+      "LFI": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 71
+      },
+      "SOC": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 69
+      },
+      "LR": {
+        "pour": 3,
+        "contre": 0,
+        "abst": 0,
+        "membres": 50
+      },
+      "ECO": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 38
+      },
+      "DEM": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 36
+      },
+      "HOR": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 34
+      },
+      "LIOT": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 22
+      },
+      "GDR": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 17
+      },
+      "UDR": {
+        "pour": 16,
+        "contre": 0,
+        "abst": 0,
+        "membres": 16
+      },
+      "NI": {
+        "pour": 2,
+        "contre": 0,
+        "abst": 0,
+        "membres": 9
+      }
+    },
+    "titreCourt": "Motion de censure RN/UDR contre le gouvernement Lecornu",
+    "contexte": "Une motion de censure ne recueille que des voix « pour » : il en fallait 289 (majorité absolue des députés) pour renverser le gouvernement. Ne pas la voter revient à ne pas censurer."
   },
   {
-    id:"loi-reel-censure-rn", titre:"Motion de censure RN/UDR contre le gouvernement Lecornu",
-    date:"16 octobre 2025", resultat:"rejete", theme:"Institutions",
-    reel:true,
-    sourceLabel:"Brut / LCP", sourceUrl:"https://www.brut.media/fr/articles/motions-de-censure-16-deputes-nont-pas-respecte-les-consignes-de-leur-parti",
-    proposePar:"Rassemblement National et UDR (motion de censure, art. 49 al.2)",
-    groupeMoteur:"Rejetée — 144 voix pour sur 289 nécessaires. Convention de vote : une motion de censure n'enregistre que les voix « pour » ; ne pas voter équivaut à ne pas censurer, donc à soutenir de fait le gouvernement (source : Datan)",
-    votes:{
-      RN: {pour:124, contre:0, abst:0},
-      UDR: {pour:16, contre:0, abst:0},
-      LR: {pour:3, contre:44, abst:0},
-      NI: {pour:2, contre:13, abst:0},
-      LFI: {pour:0, contre:71, abst:0},
-      SOC: {pour:0, contre:66, abst:0},
-      ECO: {pour:0, contre:38, abst:0},
-      GDR: {pour:0, contre:17, abst:0},
-      LIOT: {pour:0, contre:23, abst:0},
-      EPR: {pour:0, contre:92, abst:0},
-      DEM: {pour:0, contre:36, abst:0},
-      HOR: {pour:0, contre:32, abst:0},
-    }
+    "id": "an-scrutin-3058",
+    "numero": 3058,
+    "titre": "la motion de censure déposée en application de l'article 49, alinéa 2, de la Constitution par Mme Mathilde Panot et 86 députés.",
+    "date": "16 octobre 2025",
+    "dateISO": "2025-10-16",
+    "typeVote": "MOC",
+    "resultat": "rejete",
+    "theme": "Institutions",
+    "reel": true,
+    "source": "auto-assemblee-nationale",
+    "sourceLabel": "Assemblée nationale — scrutin n°3058",
+    "sourceUrl": "https://www.assemblee-nationale.fr/dyn/17/scrutins/3058",
+    "votes": {
+      "RN": {
+        "pour": 123,
+        "contre": 0,
+        "abst": 0,
+        "membres": 123
+      },
+      "EPR": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 92
+      },
+      "LFI": {
+        "pour": 71,
+        "contre": 0,
+        "abst": 0,
+        "membres": 71
+      },
+      "SOC": {
+        "pour": 7,
+        "contre": 0,
+        "abst": 0,
+        "membres": 69
+      },
+      "LR": {
+        "pour": 1,
+        "contre": 0,
+        "abst": 0,
+        "membres": 50
+      },
+      "ECO": {
+        "pour": 35,
+        "contre": 0,
+        "abst": 0,
+        "membres": 38
+      },
+      "DEM": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 36
+      },
+      "HOR": {
+        "pour": 0,
+        "contre": 0,
+        "abst": 0,
+        "membres": 34
+      },
+      "LIOT": {
+        "pour": 1,
+        "contre": 0,
+        "abst": 0,
+        "membres": 22
+      },
+      "GDR": {
+        "pour": 15,
+        "contre": 0,
+        "abst": 0,
+        "membres": 17
+      },
+      "UDR": {
+        "pour": 16,
+        "contre": 0,
+        "abst": 0,
+        "membres": 16
+      },
+      "NI": {
+        "pour": 2,
+        "contre": 0,
+        "abst": 0,
+        "membres": 9
+      }
+    },
+    "titreCourt": "Motion de censure LFI contre le gouvernement Lecornu",
+    "contexte": "Une motion de censure ne recueille que des voix « pour » : il en fallait 289 (majorité absolue des députés) pour renverser le gouvernement. Ne pas la voter revient à ne pas censurer."
   },
   {
-    id:"loi-reel-censure-lfi", titre:"Motion de censure LFI contre le gouvernement Lecornu",
-    date:"16 octobre 2025", resultat:"rejete", theme:"Institutions",
-    reel:true,
-    sourceLabel:"LCP / Public Sénat", sourceUrl:"https://lcp.fr/actualites/motions-de-censure-lfi-et-rn-rejetees-par-l-assemblee-nationale-qui-a-vote-quoi-409502",
-    proposePar:"La France insoumise (motion de censure, art. 49 al.2)",
-    groupeMoteur:"Rejetée — 271 voix pour sur 289 nécessaires (18 voix manquantes). Même convention de vote que pour la motion RN/UDR : ne pas voter équivaut à ne pas censurer",
-    votes:{
-      LFI: {pour:71, contre:0, abst:0},
-      RN: {pour:124, contre:0, abst:0},
-      UDR: {pour:16, contre:0, abst:0},
-      ECO: {pour:35, contre:3, abst:0},
-      GDR: {pour:15, contre:2, abst:0},
-      SOC: {pour:7, contre:62, abst:0},
-      LR: {pour:1, contre:49, abst:0},
-      LIOT: {pour:1, contre:21, abst:0},
-      DEM: {pour:0, contre:36, abst:0},
-      HOR: {pour:0, contre:34, abst:0},
-      EPR: null,
-      NI: null,
-    }
-  },
+    "id": "an-scrutin-3054",
+    "numero": 3054,
+    "titre": "la déclaration de politique générale du Gouvernement de M. François Bayrou (application de l'article 49, alinéa premier, de la Constitution).",
+    "date": "8 septembre 2025",
+    "dateISO": "2025-09-08",
+    "typeVote": "SPS",
+    "resultat": "rejete",
+    "theme": "Institutions",
+    "reel": true,
+    "source": "auto-assemblee-nationale",
+    "sourceLabel": "Assemblée nationale — scrutin n°3054",
+    "sourceUrl": "https://www.assemblee-nationale.fr/dyn/17/scrutins/3054",
+    "votes": {
+      "RN": {
+        "pour": 0,
+        "contre": 123,
+        "abst": 0,
+        "membres": 123
+      },
+      "EPR": {
+        "pour": 90,
+        "contre": 0,
+        "abst": 1,
+        "membres": 91
+      },
+      "LFI": {
+        "pour": 0,
+        "contre": 71,
+        "abst": 0,
+        "membres": 71
+      },
+      "SOC": {
+        "pour": 0,
+        "contre": 66,
+        "abst": 0,
+        "membres": 66
+      },
+      "LR": {
+        "pour": 27,
+        "contre": 13,
+        "abst": 9,
+        "membres": 49
+      },
+      "ECO": {
+        "pour": 0,
+        "contre": 38,
+        "abst": 0,
+        "membres": 38
+      },
+      "DEM": {
+        "pour": 36,
+        "contre": 0,
+        "abst": 0,
+        "membres": 36
+      },
+      "HOR": {
+        "pour": 34,
+        "contre": 0,
+        "abst": 0,
+        "membres": 34
+      },
+      "LIOT": {
+        "pour": 4,
+        "contre": 15,
+        "abst": 4,
+        "membres": 23
+      },
+      "GDR": {
+        "pour": 0,
+        "contre": 17,
+        "abst": 0,
+        "membres": 17
+      },
+      "UDR": {
+        "pour": 0,
+        "contre": 15,
+        "abst": 0,
+        "membres": 15
+      },
+      "NI": {
+        "pour": 3,
+        "contre": 6,
+        "abst": 1,
+        "membres": 11
+      }
+    },
+    "titreCourt": "Vote de confiance au gouvernement Bayrou",
+    "contexte": "Le Premier ministre a engagé la responsabilité de son gouvernement (article 49, alinéa 1 de la Constitution). Mis en minorité, le gouvernement Bayrou a dû présenter sa démission."
+  }
 ];
 
+
+/* ---------- Outils communs aux scrutins ---------- */
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+// Titre lisible : titre court saisi à la main s'il existe, sinon l'intitulé officiel avec majuscule initiale
+function titreLoi(l){
+  const t = l.titreCourt || l.titre;
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+// Catégorie d'un scrutin, déduite de son intitulé officiel (règle fixe, sans interprétation)
+const CATEGORIES = [
+  { id:"texte",      label:"Textes (vote final)" },
+  { id:"censure",    label:"Confiance & censure" },
+  { id:"amendement", label:"Amendements" },
+  { id:"article",    label:"Articles" },
+  { id:"procedure",  label:"Motions & procédure" },
+  { id:"tous",       label:"Tous les scrutins" },
+];
+function categorieLoi(l){
+  if(l._cat) return l._cat;
+  const t = l.titre.replace(/’/g,"'").toLowerCase();
+  let c = "procedure";
+  if(l.typeVote === "MOC" || t.startsWith("la motion de censure") || t.startsWith("la déclaration de politique générale")) c = "censure";
+  else if(t.startsWith("l'ensemble")) c = "texte";
+  else if(/^(l'|le |les )(sous-)?amendement/.test(t) || t.startsWith("les amendements")) c = "amendement";
+  else if(/^(l'|les )articles? /.test(t)) c = "article";
+  l._cat = c;
+  return c;
+}
+function categorieLabel(id){ return (CATEGORIES.find(c=>c.id===id) || {}).label || ""; }
+
+const TYPES_VOTE = { SPO:"Scrutin public ordinaire", SPS:"Scrutin public solennel", MOC:"Motion de censure" };
+
+function formatNombre(n){ return n.toLocaleString("fr-FR"); }
+
+// Recherche insensible aux accents, à la casse et aux apostrophes typographiques
+function norm(t){
+  return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/’/g,"'").toLowerCase();
+}
+function texteRecherche(l){
+  if(l._n === undefined) l._n = norm(l.titre + " " + (l.titreCourt || ""));
+  return l._n;
+}
+
+// Composition actuelle de l'Assemblée : effectifs des groupes lors du scrutin le plus récent
+let COMPOSITION_DATE = null;
+function appliquerCompositionActuelle(){
+  const ref = LOIS.find(l => PARTIES.every(p => l.votes[p.id] && l.votes[p.id].membres));
+  if(!ref) return;
+  PARTIES.forEach(p => p.sieges = ref.votes[p.id].membres);
+  TOTAL_SIEGES = PARTIES.reduce((s,p)=>s+p.sieges,0);
+  COMPOSITION_DATE = ref.date;
+}
 
 /* ---------- Génération de l'hémicycle ---------- */
 
@@ -971,17 +1347,24 @@ const svg = document.getElementById("hemicycle");
 const CX = 500, CY = 520;
 const R_MIN = 90, R_MAX = 470;
 const N_ROWS = 11;
+const COULEURS_VOTE = { pour:"var(--vert)", contre:"var(--rouge)", abst:"#E0A800", absent:"var(--border)" };
 
 let seatNodes = [];
+let modeHemicycle = "votes"; // "votes" | "groupes"
 
-function buildSeats(){
+// Effectifs par groupe au moment du scrutin affiché (à défaut, composition actuelle)
+function effectifs(loi){
+  return PARTIES.map(p => ({ party:p, n: (loi && loi.votes[p.id] && loi.votes[p.id].membres) || p.sieges }));
+}
+
+function buildSeats(loi){
+  const eff = effectifs(loi);
+  const total = Math.max(577, eff.reduce((s,e)=>s+e.n,0)); // sièges vacants éventuels affichés en gris
   const radii = [];
-  for(let i=0;i<N_ROWS;i++){
-    radii.push(R_MIN + (R_MAX-R_MIN) * (i/(N_ROWS-1)));
-  }
+  for(let i=0;i<N_ROWS;i++) radii.push(R_MIN + (R_MAX-R_MIN) * (i/(N_ROWS-1)));
   const totalRadius = radii.reduce((a,b)=>a+b,0);
-  let seatsPerRow = radii.map(r => Math.round(TOTAL_SIEGES * r/totalRadius));
-  let diff = TOTAL_SIEGES - seatsPerRow.reduce((a,b)=>a+b,0);
+  const seatsPerRow = radii.map(r => Math.round(total * r/totalRadius));
+  let diff = total - seatsPerRow.reduce((a,b)=>a+b,0);
   let idx = seatsPerRow.length-1;
   while(diff!==0){
     seatsPerRow[idx] += diff>0?1:-1;
@@ -989,71 +1372,77 @@ function buildSeats(){
     idx = (idx-1+seatsPerRow.length)%seatsPerRow.length;
   }
 
-  const boundaries = [0];
-  let acc=0;
-  PARTIES.forEach(p=>{ acc += p.sieges/TOTAL_SIEGES; boundaries.push(acc); });
-
-  seatNodes = [];
+  const seats = [];
   for(let row=0; row<N_ROWS; row++){
-    const n = seatsPerRow[row];
-    const r = radii[row];
+    const n = seatsPerRow[row], r = radii[row];
     for(let i=0;i<n;i++){
       const frac = (i+0.5)/n;
-      const angleDeg = 180 - frac*180;
-      const angle = angleDeg * Math.PI/180;
-      const x = CX + r*Math.cos(angle);
-      const y = CY - r*Math.sin(angle);
-
-      let partyIndex = boundaries.findIndex((b,bi)=> frac < b && bi>0);
-      if(partyIndex===-1) partyIndex = PARTIES.length;
-      const party = PARTIES[partyIndex-1] || PARTIES[PARTIES.length-1];
-
-      seatNodes.push({x,y,party:party.id});
+      const angle = (180 - frac*180) * Math.PI/180;
+      seats.push({ x: CX + r*Math.cos(angle), y: CY - r*Math.sin(angle), frac, row });
     }
   }
+  // Attribution de gauche à droite : les sièges sont triés par angle, puis distribués groupe par groupe
+  seats.sort((a,b)=> a.frac - b.frac || a.row - b.row);
+  seatNodes = [];
+  let k = 0;
+  eff.forEach(({party,n})=>{
+    const siegesGroupe = seats.slice(k, k+n);
+    k += n;
+    // Au sein du groupe : pour, puis abstention, puis contre, puis non-votants (lecture gauche → droite)
+    const v = loi && loi.votes[party.id];
+    const ordre = v ? [
+      ...Array(v.pour).fill("pour"), ...Array(v.abst).fill("abst"), ...Array(v.contre).fill("contre")
+    ] : [];
+    siegesGroupe.forEach((s,i)=> seatNodes.push({ ...s, party: party.id, vote: v ? (ordre[i] || "absent") : null }));
+  });
+  seats.slice(k).forEach(s => seatNodes.push({ ...s, party: null, vote: null }));
 }
 
-let seatsByParty = {}; // partyId -> [dotElement, ...] — construit une seule fois, réutilisé à chaque survol
+let seatsByParty = {}; // partyId -> [dotElement, ...] — reconstruit à chaque scrutin affiché
 const tooltip = document.getElementById("tooltip");
 const hemiCardEl = document.querySelector(".hemi-card");
+hemiCardEl.addEventListener("mouseleave", onSeatLeave); // un seul listener pour toute la zone
 
 function renderHemicycle(){
   svg.innerHTML = "";
   seatsByParty = {};
   PARTIES.forEach(p=> seatsByParty[p.id] = []);
+  partyEnCours = null;
 
-  const seatR = 6.4;
-  const hitR = 11;
-  const fragment = document.createDocumentFragment(); // un seul reflow au lieu de 1154 insertions
+  const seatR = 6.4, hitR = 11;
+  const fragment = document.createDocumentFragment(); // un seul reflow
 
   seatNodes.forEach(s=>{
-    const party = PARTIES.find(p=>p.id===s.party);
-
-    const hit = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    hit.setAttribute("cx", s.x.toFixed(1));
-    hit.setAttribute("cy", s.y.toFixed(1));
-    hit.setAttribute("r", hitR);
-    hit.classList.add("siege-hit");
-    hit.dataset.party = s.party;
+    const party = s.party ? PARTIES.find(p=>p.id===s.party) : null;
+    const couleur = !party ? "var(--border-soft)"
+      : modeHemicycle === "votes" && s.vote ? COULEURS_VOTE[s.vote]
+      : modeHemicycle === "votes" ? "var(--border)"
+      : party.couleur;
 
     const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
     dot.setAttribute("cx", s.x.toFixed(1));
     dot.setAttribute("cy", s.y.toFixed(1));
     dot.setAttribute("r", seatR);
-    dot.setAttribute("fill", party.couleur);
-    dot.style.color = party.couleur;
+    dot.setAttribute("fill", couleur);
+    dot.style.color = couleur;
     dot.classList.add("siege");
-    dot.dataset.party = s.party;
 
-    hit.addEventListener("mouseenter", (e)=> onSeatHover(e, party));
-
-    fragment.appendChild(hit);
+    if(party){
+      const hit = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      hit.setAttribute("cx", s.x.toFixed(1));
+      hit.setAttribute("cy", s.y.toFixed(1));
+      hit.setAttribute("r", hitR);
+      hit.classList.add("siege-hit");
+      hit.addEventListener("mouseenter", (e)=> onSeatHover(e, party));
+      hit.addEventListener("mousemove", (e)=> updateTooltip(e, party));
+      fragment.appendChild(hit);
+      seatsByParty[party.id].push(dot);
+    }
     fragment.appendChild(dot);
-    seatsByParty[s.party].push(dot);
   });
 
   svg.appendChild(fragment);
-  hemiCardEl.addEventListener("mouseleave", onSeatLeave); // un seul listener pour toute la zone, pas un par siège
+  renderLegend();
 }
 
 /* ---------- Interaction survol ---------- */
@@ -1077,14 +1466,11 @@ function currentLoi(){
 function onSeatHover(e, party){
   if(partyEnCours === party.id){
     updateTooltip(e, party);
-    return; // déjà en surbrillance, rien à changer visuellement
+    return;
   }
-
   if(partyEnCours === null){
-    // premier survol : on assombrit tous les autres groupes en une passe
     PARTIES.forEach(p=> setPartyState(p.id, p.id===party.id ? "hovered" : "dim"));
   } else {
-    // survol suivant : ne touche que l'ancien groupe (repasse en dim) et le nouveau (passe en hovered)
     setPartyState(partyEnCours, "dim");
     setPartyState(party.id, "hovered");
   }
@@ -1096,18 +1482,22 @@ function updateTooltip(e, party){
   const loi = currentLoi();
   if(!loi) return;
   const v = loi.votes[party.id];
-  const rect = hemiCardEl.getBoundingClientRect();
-  tooltip.style.left = (e.clientX - rect.left) + "px";
-  tooltip.style.top = (e.clientY - rect.top) + "px";
-  tooltip.innerHTML = v ? `
-    <b>${party.nom}</b>
-    <span class="vote-pour">Pour : ${v.pour}</span> ·
-    <span class="vote-contre">Contre : ${v.contre}</span> ·
-    <span class="vote-abst">Abstention : ${v.abst}</span>
-  ` : `
-    <b>${party.nom}</b>
-    <span class="vote-abst">Vote non communiqué dans les sources disponibles</span>
-  `;
+  if(v){
+    const nv = v.membres ? v.membres - v.pour - v.contre - v.abst : null;
+    tooltip.innerHTML = `
+      <b>${esc(party.nom)}</b>${v.membres ? ` <span class="vote-abst">(${v.membres} membres)</span>` : ""}
+      <span class="vote-pour">Pour : ${v.pour}</span> ·
+      <span class="vote-contre">Contre : ${v.contre}</span> ·
+      <span class="vote-abst">Abstention : ${v.abst}</span>
+      ${nv !== null ? ` · <span class="vote-abst">Non-votants : ${nv}</span>` : ""}`;
+  } else {
+    tooltip.innerHTML = `<b>${esc(party.nom)}</b> <span class="vote-abst">Vote non communiqué dans les sources disponibles</span>`;
+  }
+  // L'infobulle est positionnée dans la page (elle est hors de la carte) et gardée dans l'écran
+  const w = tooltip.offsetWidth;
+  const min = window.scrollX + w/2 + 8, max = window.scrollX + window.innerWidth - w/2 - 8;
+  tooltip.style.left = Math.max(min, Math.min(max, e.pageX)) + "px";
+  tooltip.style.top = e.pageY + "px";
   tooltip.classList.add("visible");
 }
 function onSeatLeave(){
@@ -1118,70 +1508,109 @@ function onSeatLeave(){
   tooltip.classList.remove("visible");
 }
 
-/* ---------- Sélecteur de loi + panneau détail ---------- */
+/* ---------- Sélecteur de scrutin + panneau détail ---------- */
 
-function populateLoiSelect(filter="", theme="Tous"){
+let selectedCategorie = "texte";
+
+function loisFiltrees(filter, categorie){
+  // Tous les mots saisis doivent apparaître (dans n'importe quel ordre)
+  const mots = norm(filter).split(/\s+/).filter(Boolean);
+  return LOIS.filter(l =>
+    (categorie === "tous" || categorieLoi(l) === categorie) &&
+    mots.every(m => texteRecherche(l).includes(m))
+  );
+}
+
+function populateLoiSelect(){
   const sel = document.getElementById("loi-select");
   const pill = document.getElementById("resultat-pill");
-  const f = filter.trim().toLowerCase();
-  let filtered = f ? LOIS.filter(l => l.titre.toLowerCase().includes(f)) : LOIS;
-  if(theme !== "Tous") filtered = filtered.filter(l => l.theme === theme);
+  const filtered = loisFiltrees(document.getElementById("loi-search").value, selectedCategorie);
+  document.getElementById("loi-count").textContent =
+    filtered.length ? `${formatNombre(filtered.length)} scrutin${filtered.length>1?"s":""}` : "";
 
   if(filtered.length === 0){
-    sel.innerHTML = `<option value="">Aucune loi ne correspond</option>`;
+    sel.innerHTML = `<option value="">Aucun scrutin ne correspond</option>`;
     sel.disabled = true;
     pill.style.display = "none";
     document.getElementById("breakdown-title").textContent = "Aucun résultat";
+    document.getElementById("loi-provenance").innerHTML = "";
     document.getElementById("breakdown-list").innerHTML = "";
     document.getElementById("stat-cards").innerHTML = "";
+    buildSeats(null);
+    renderHemicycle();
     return;
   }
 
   sel.disabled = false;
   pill.style.display = "";
-  sel.innerHTML = filtered.map(l=>`<option value="${l.id}">${l.reel ? "✓ " : "◌ "}${l.titre}</option>`).join("");
+  sel.innerHTML = filtered.map(l=>{
+    const t = titreLoi(l);
+    return `<option value="${l.id}">${esc(l.date)} — ${esc(t.length > 150 ? t.slice(0,147) + "…" : t)}</option>`;
+  }).join("");
   updateBreakdown();
 }
 
-let selectedTheme = "Tous";
-function renderThemeFilter(){
-  const themes = ["Tous", ...new Set(LOIS.map(l=>l.theme))];
+function renderCategorieFilter(){
   const bar = document.getElementById("theme-filter-bar");
-  bar.innerHTML = themes.map(t=>`
-    <div class="theme-chip ${t===selectedTheme?'selected':''}" data-theme="${t}">${t}</div>
+  bar.innerHTML = CATEGORIES.map(c=>`
+    <button type="button" class="theme-chip ${c.id===selectedCategorie?'selected':''}" data-cat="${c.id}">${c.label}</button>
   `).join("");
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
-      selectedTheme = chip.dataset.theme;
-      renderThemeFilter();
-      populateLoiSelect(document.getElementById("loi-search").value, selectedTheme);
+      selectedCategorie = chip.dataset.cat;
+      renderCategorieFilter();
+      populateLoiSelect();
     });
   });
 }
 
-document.getElementById("loi-search").addEventListener("input", (e)=>{
-  populateLoiSelect(e.target.value, selectedTheme);
+function renderModeToggle(){
+  const bar = document.getElementById("hemi-mode");
+  bar.innerHTML = [["votes","Couleur : votes"],["groupes","Couleur : groupes"]].map(([id,label])=>`
+    <button type="button" class="theme-chip ${id===modeHemicycle?'selected':''}" data-mode="${id}">${label}</button>
+  `).join("");
+  bar.querySelectorAll(".theme-chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      modeHemicycle = chip.dataset.mode;
+      renderModeToggle();
+      renderHemicycle();
+    });
+  });
+}
+
+let rechercheTimer = null;
+document.getElementById("loi-search").addEventListener("input", ()=>{
+  clearTimeout(rechercheTimer);
+  rechercheTimer = setTimeout(populateLoiSelect, 150);
 });
 document.getElementById("loi-select").addEventListener("change", updateBreakdown);
 
 function updateBreakdown(){
   const loi = currentLoi();
+  if(!loi) return;
+  if(DONNEES_CHARGEES && document.getElementById("view-scrutin").classList.contains("active")) majHash("scrutin-" + (loi.numero ?? loi.id));
   const pill = document.getElementById("resultat-pill");
-  pill.textContent = loi.resultat === "adopte" ? "Adoptée" : "Rejetée";
+  pill.textContent = loi.resultat === "adopte" ? "Adopté" : "Rejeté";
   pill.classList.remove("adopte","rejete","pop");
   void pill.offsetWidth;
   pill.classList.add(loi.resultat, "pop");
 
+  const theme = loi.theme && loi.theme !== "À catégoriser" ? loi.theme : categorieLabel(categorieLoi(loi));
   document.getElementById("breakdown-title").innerHTML =
-    `<span class="loi-source-badge ${loi.reel?'reel':'exemple'}">${loi.reel?'✓ Vote réel':'◌ Exemple pédagogique'}</span> ` +
-    loi.titre + " — " + loi.date + `<span class="loi-theme-tag">${loi.theme}</span>`;
+    `<span class="loi-source-badge reel">✓ Vote réel</span> ` +
+    esc(titreLoi(loi)) + " — " + esc(loi.date) + `<span class="loi-theme-tag">${esc(theme)}</span>`;
 
-  document.getElementById("loi-provenance").innerHTML = `
-    <div class="loi-provenance-row"><span class="label">Proposée par</span><span class="value"><b>${loi.proposePar}</b></span></div>
-    <div class="loi-provenance-row"><span class="label">Adoptée grâce à</span><span class="value"><b>${loi.groupeMoteur}</b></span></div>
-    ${loi.reel ? `<div class="loi-provenance-row"><span class="label">Source</span><span class="value"><a href="${loi.sourceUrl}" target="_blank" rel="noopener">${loi.sourceLabel}</a></span></div>` : ""}
-    ${(() => { const ctx = checkContexteDate(loi.date); return ctx ? `<div class="loi-provenance-row"><span class="label"></span><span class="loi-contexte-alert">${ctx.label}</span></div>` : ""; })()}
-  `;
+  const lignes = [];
+  if(loi.titreCourt) lignes.push(["Intitulé officiel", esc(loi.titre)]);
+  if(TYPES_VOTE[loi.typeVote]) lignes.push(["Type de vote", TYPES_VOTE[loi.typeVote]]);
+  if(loi.proposePar) lignes.push(["Proposé par", `<b>${esc(loi.proposePar)}</b>`]);
+  if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
+  if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
+  lignes.push(["Source", `<a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">${esc(loi.sourceLabel)}</a>`]);
+  const ctx = checkContexteDate(loi);
+  document.getElementById("loi-provenance").innerHTML =
+    lignes.map(([label,val])=>`<div class="loi-provenance-row"><span class="label">${label}</span><span class="value">${val}</span></div>`).join("") +
+    (ctx ? `<div class="loi-provenance-row"><span class="label"></span><span class="loi-contexte-alert">${ctx.label}</span></div>` : "");
 
   renderStatCards(loi);
 
@@ -1189,142 +1618,229 @@ function updateBreakdown(){
   list.innerHTML = PARTIES.map((p,idx)=>{
     const v = loi.votes[p.id];
     const votesHtml = v
-      ? `<span>P <b>${v.pour}</b></span><span>C <b>${v.contre}</b></span><span>A <b>${v.abst}</b></span>`
+      ? `<span class="vote-pour">P <b>${v.pour}</b></span><span class="vote-contre">C <b>${v.contre}</b></span><span>A <b>${v.abst}</b></span>`
       : `<span class="vote-nd">non communiqué</span>`;
     return `
       <div class="party-row" style="animation-delay:${idx*22}ms">
         <span class="dot" style="background:${p.couleur}"></span>
-        <span class="party-name">${p.nom}</span>
+        <span class="party-name">${esc(p.nom)}${v && v.membres ? ` <span class="party-membres">${v.membres}</span>` : ""}</span>
         <span class="party-votes">${votesHtml}</span>
       </div>`;
   }).join("");
+
+  buildSeats(loi);
+  renderHemicycle();
 }
 
 function renderStatCards(loi){
-  // participation = part des sièges dont le vote n'est pas "abstention pure de séance" (ici on simplifie : pour+contre / total)
-  // les groupes à null (vote non communiqué dans les sources) sont exclus des calculs plutôt que comptés comme 0
-  let totalVotants=0, totalSieges=0;
-  const uniteParGroupe = PARTIES.map(p=>{
-    const v = loi.votes[p.id];
-    if(!v) return null;
-    const total = v.pour+v.contre+v.abst;
-    totalVotants += v.pour+v.contre;
-    totalSieges += total;
-    const maxCamp = Math.max(v.pour,v.contre,v.abst);
-    return { nom:p.nom, unite: maxCamp/total };
-  });
-  const participation = (totalVotants/totalSieges*100).toFixed(0);
-  const groupesConnus = uniteParGroupe.filter(Boolean);
-  const plusUni = groupesConnus.reduce((a,c)=> c.unite>a.unite? c:a);
-  const plusDivise = groupesConnus.reduce((a,c)=> c.unite<a.unite? c:a);
+  const connus = PARTIES.map(p=>({ p, v: loi.votes[p.id] })).filter(x=>x.v);
+  const pour = connus.reduce((s,x)=>s+x.v.pour,0);
+  const contre = connus.reduce((s,x)=>s+x.v.contre,0);
+  const abst = connus.reduce((s,x)=>s+x.v.abst,0);
+  const membres = connus.reduce((s,x)=>s+(x.v.membres||0),0);
+  const votants = pour+contre+abst;
+  const card = (label, value, sub, accent) => `
+    <div class="stat-card">
+      <div class="stat-label">${label}</div>
+      <div class="stat-value ${accent?'accent':''}">${value}</div>
+      <div class="stat-sub">${sub}</div>
+    </div>`;
 
-  document.getElementById("stat-cards").innerHTML = `
-    <div class="stat-card">
-      <div class="stat-label">Participation</div>
-      <div class="stat-value accent">${participation}%</div>
-      <div class="stat-sub">des député·es ont pris part au vote</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Groupe le plus uni</div>
-      <div class="stat-value">${plusUni.nom}</div>
-      <div class="stat-sub">${(plusUni.unite*100).toFixed(0)}% dans la même direction</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Groupe le plus divisé</div>
-      <div class="stat-value">${plusDivise.nom}</div>
-      <div class="stat-sub">${(plusDivise.unite*100).toFixed(0)}% dans la même direction</div>
-    </div>
-  `;
+  if(categorieLoi(loi) === "censure" && loi.typeVote === "MOC"){
+    // Une motion de censure n'enregistre que des voix « pour » ; il en faut 289 (majorité absolue des 577 sièges)
+    const requis = 289;
+    document.getElementById("stat-cards").innerHTML =
+      card("Voix pour la censure", formatNombre(pour), `sur ${requis} nécessaires`, true) +
+      card(pour >= requis ? "Marge" : "Il a manqué", `${Math.abs(pour-requis)} voix`, pour >= requis ? "le gouvernement est renversé" : "le gouvernement reste en place") +
+      card("Groupes ayant voté la censure", connus.filter(x=>x.v.pour > 0).length, "avec au moins une voix pour");
+    return;
+  }
+
+  // Unité d'un groupe = part de ses votants dans la position majoritaire du groupe (groupes d'au moins 3 votants)
+  const unites = connus
+    .map(x=>{ const t = x.v.pour+x.v.contre+x.v.abst; return t >= 3 ? { nom:x.p.nom, unite: Math.max(x.v.pour,x.v.contre,x.v.abst)/t } : null; })
+    .filter(Boolean);
+  const plusUni = unites.length ? unites.reduce((a,c)=> c.unite>a.unite? c:a) : null;
+  const plusDivise = unites.length ? unites.reduce((a,c)=> c.unite<a.unite? c:a) : null;
+
+  document.getElementById("stat-cards").innerHTML =
+    card("Participation",
+      membres ? `${Math.round(votants/membres*100)} %` : formatNombre(votants),
+      membres ? `${formatNombre(votants)} votants sur ${formatNombre(membres)} député·es` : "votants", true) +
+    card("Résultat", `${formatNombre(pour)} pour · ${formatNombre(contre)} contre`, `${formatNombre(abst)} abstention${abst>1?"s":""}`) +
+    (plusDivise && plusDivise.unite < 1
+      ? card("Groupe le plus divisé", esc(plusDivise.nom), `${Math.round(plusDivise.unite*100)} % dans la même direction`)
+      : card("Cohésion des groupes", plusUni ? "Totale" : "—", plusUni ? "chaque groupe (≥ 3 votants) a voté d'un seul bloc" : "trop peu de votants par groupe"));
 }
 
 function renderLegend(){
-  document.getElementById("legend").innerHTML = PARTIES.map(p=>`
-    <span class="legend-item"><span class="dot" style="background:${p.couleur}"></span>${p.id} (${p.sieges})</span>
-  `).join("");
+  const el = document.getElementById("legend");
+  if(modeHemicycle === "votes"){
+    el.innerHTML = [["pour","Pour"],["abst","Abstention"],["contre","Contre"],["absent","Non-votant / absent"]].map(([k,l])=>`
+      <span class="legend-item"><span class="dot" style="background:${COULEURS_VOTE[k]}"></span>${l}</span>
+    `).join("") + `<span class="legend-item legend-note">Survolez un groupe pour le détail · de gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}</span>`;
+  } else {
+    const loi = currentLoi();
+    el.innerHTML = effectifs(loi).map(({party,n})=>`
+      <span class="legend-item"><span class="dot" style="background:${party.couleur}"></span>${party.id} (${n})</span>
+    `).join("");
+  }
+}
+
+/* ---------- Position majoritaire d'un groupe ---------- */
+
+// Motion de censure : seules les voix « pour » existent ; les membres qui ne la votent pas s'y opposent de fait.
+function positionMajoritaire(loi, v){
+  if(!v) return null;
+  const positions = loi.typeVote==="MOC"
+    ? { pour:v.pour, contre:Math.max(0,(v.membres||0)-v.pour), abst:0 }
+    : { pour:v.pour, contre:v.contre, abst:v.abst };
+  const tri = Object.entries(positions).sort((a,c)=>c[1]-a[1]);
+  if(tri[0][1] === 0 || tri[0][1] === tri[1][1]) return null; // aucun votant ou égalité : pas de position nette
+  return tri[0][0];
 }
 
 /* ---------- Vue historique par parti ---------- */
 
 let selectedPartyId = "RN";
+let histoCategorie = "texte";
+let histoLimite = 50;
 
 function renderPartyChips(){
   const bar = document.getElementById("party-select-bar");
   bar.innerHTML = PARTIES.map(p=>`
-    <div class="party-chip ${p.id===selectedPartyId?'selected':''}" data-id="${p.id}">
-      <span class="dot" style="background:${p.couleur}"></span>${p.nom}
-    </div>
+    <button type="button" class="party-chip ${p.id===selectedPartyId?'selected':''}" data-id="${p.id}">
+      <span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}
+    </button>
   `).join("");
   bar.querySelectorAll(".party-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
       selectedPartyId = chip.dataset.id;
+      histoLimite = 50;
       renderPartyChips();
       renderHistorique();
     });
   });
 }
 
+function renderHistoCategorie(){
+  const bar = document.getElementById("histo-cat-bar");
+  bar.innerHTML = CATEGORIES.map(c=>`
+    <button type="button" class="theme-chip ${c.id===histoCategorie?'selected':''}" data-cat="${c.id}">${c.label}</button>
+  `).join("");
+  bar.querySelectorAll(".theme-chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      histoCategorie = chip.dataset.cat;
+      histoLimite = 50;
+      renderHistoCategorie();
+      renderHistorique();
+    });
+  });
+}
+
+function renderProximite(party, liste){
+  const el = document.getElementById("histo-proximite");
+  const stats = PARTIES.filter(p=>p.id!==party.id).map(p=>{
+    let accord=0, total=0;
+    for(const loi of liste){
+      const a = positionMajoritaire(loi, loi.votes[party.id]);
+      const b = positionMajoritaire(loi, loi.votes[p.id]);
+      if(!a || !b) continue;
+      total++;
+      if(a===b) accord++;
+    }
+    return { p, total, pct: total ? Math.round(accord/total*100) : null };
+  }).filter(x=>x.pct!==null).sort((a,b)=>b.pct-a.pct);
+  if(!stats.length){ el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <h4>Proximité de vote — ${esc(party.nom)}</h4>
+    <div class="sub">Part des scrutins affichés où la position majoritaire de ${esc(party.nom)} (pour, contre ou abstention) est la même que celle de l'autre groupe.</div>
+    ${stats.map(x=>`
+      <div class="proximite-row" title="${x.total} scrutins comparés">
+        <span class="nom"><span class="dot" style="background:${x.p.couleur}"></span>${esc(x.p.nom)}</span>
+        <span class="track"><span class="fill" style="display:block;width:${x.pct}%;background:${x.p.couleur}"></span></span>
+        <span class="pct">${x.pct} %</span>
+      </div>`).join("")}`;
+}
+
 function renderHistorique(){
   const party = PARTIES.find(p=>p.id===selectedPartyId);
-  document.getElementById("histo-party-title").textContent = "Historique des votes — " + party.nom;
-
-  const f = document.getElementById("histo-search").value.trim().toLowerCase();
-  const loisFiltrees = f ? LOIS.filter(l=>l.titre.toLowerCase().includes(f)) : LOIS;
+  const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie);
+  if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
+  renderProximite(party, liste);
+  document.getElementById("histo-party-title").textContent =
+    `Historique des votes — ${party.nom} · ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
 
   const list = document.getElementById("histo-list");
-
-  if(loisFiltrees.length === 0){
-    list.innerHTML = `<p style="color:var(--text-faint);font-size:14px;">Aucune loi ne correspond à cette recherche.</p>`;
+  if(liste.length === 0){
+    list.innerHTML = `<p class="no-result-msg">Aucun scrutin ne correspond à cette recherche.</p>`;
     return;
   }
 
-  list.innerHTML = loisFiltrees.map((loi,idx)=>{
+  list.innerHTML = liste.slice(0, histoLimite).map((loi,idx)=>{
     const v = loi.votes[party.id];
-    const badge = `<span class="loi-source-badge ${loi.reel?'reel':'exemple'}" style="font-size:10px;padding:1px 8px;">${loi.reel?'✓ réel':'◌ exemple'}</span>`;
+    const resultat = `<span class="histo-resultat ${loi.resultat}">${loi.resultat==="adopte"?"Adopté":"Rejeté"}</span>`;
+    const entete = `
+      <div>
+        <div class="histo-loi">${esc(titreLoi(loi))}</div>
+        <div class="histo-date">${esc(loi.date)} · ${resultat} · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">scrutin n°${loi.numero ?? ""}</a></div>
+      </div>`;
+    const delay = `style="animation-delay:${Math.min(idx,20)*20}ms"`;
+    const total = v ? v.pour+v.contre+v.abst : 0;
 
-    if(!v){
+    if(!v || total === 0){
       return `
-        <div class="histo-row" style="animation-delay:${idx*30}ms">
-          <div>
-            <div class="histo-loi">${badge} ${loi.titre}</div>
-            <div class="histo-date">${loi.date}</div>
-          </div>
-          <span class="histo-vote-tag tag-partage">Non communiqué</span>
+        <div class="histo-row" ${delay}>
+          ${entete}
+          <span class="histo-vote-tag tag-partage">${v ? "Aucun votant" : "Non communiqué"}</span>
           <div class="histo-bar"><div style="width:100%;background:var(--border)"></div></div>
         </div>`;
     }
 
-    const total = v.pour+v.contre+v.abst;
-    const pctP = (v.pour/total*100).toFixed(0);
-    const pctC = (v.contre/total*100).toFixed(0);
-    const pctA = (v.abst/total*100).toFixed(0);
-
     let tagClass="tag-partage", tagLabel="Partagé";
-    if(v.pour > v.contre && v.pour > v.abst){ tagClass="tag-pour"; tagLabel="Majorité Pour"; }
-    else if(v.contre > v.pour && v.contre > v.abst){ tagClass="tag-contre"; tagLabel="Majorité Contre"; }
+    if(v.pour > v.contre && v.pour > v.abst){ tagClass="tag-pour"; tagLabel="Majorité pour"; }
+    else if(v.contre > v.pour && v.contre > v.abst){ tagClass="tag-contre"; tagLabel="Majorité contre"; }
+    else if(v.abst > v.pour && v.abst > v.contre){ tagLabel="Majorité abstention"; }
 
     return `
-      <div class="histo-row" style="animation-delay:${idx*30}ms">
-        <div>
-          <div class="histo-loi">${badge} ${loi.titre}</div>
-          <div class="histo-date">${loi.date}</div>
-        </div>
-        <span class="histo-vote-tag ${tagClass}">${tagLabel}</span>
+      <div class="histo-row" ${delay}>
+        ${entete}
+        <span class="histo-vote-tag ${tagClass}" title="${v.pour} pour · ${v.contre} contre · ${v.abst} abstention(s)">${tagLabel} <small>(${v.pour}/${v.contre}/${v.abst})</small></span>
         <div class="histo-bar">
-          <div style="width:${pctP}%;background:var(--vert)"></div>
-          <div style="width:${pctC}%;background:var(--rouge)"></div>
-          <div style="width:${pctA}%;background:var(--text-faint)"></div>
+          <div style="width:${(v.pour/total*100).toFixed(1)}%;background:var(--vert)"></div>
+          <div style="width:${(v.contre/total*100).toFixed(1)}%;background:var(--rouge)"></div>
+          <div style="width:${(v.abst/total*100).toFixed(1)}%;background:var(--text-faint)"></div>
         </div>
       </div>`;
-  }).join("");
+  }).join("") + (liste.length > histoLimite
+    ? `<button type="button" class="histo-more" id="histo-more">Afficher les ${Math.min(50, liste.length-histoLimite)} suivants (${formatNombre(liste.length-histoLimite)} restants)</button>`
+    : "");
+
+  const more = document.getElementById("histo-more");
+  if(more) more.addEventListener("click", ()=>{ histoLimite += 50; renderHistorique(); });
 }
 
-document.getElementById("histo-search").addEventListener("input", renderHistorique);
+let histoTimer = null;
+document.getElementById("histo-search").addEventListener("input", ()=>{
+  clearTimeout(histoTimer);
+  histoTimer = setTimeout(()=>{ histoLimite = 50; renderHistorique(); }, 150);
+});
 
 /* ---------- Prochains meetings ---------- */
 
+// debut/fin (AAAA-MM-JJ) servent à séparer automatiquement les événements à venir des événements passés.
 const MEETINGS = [
   {
-    jour:"5", mois:"SEPT.", heure:"16h00",
+    debut:"2026-10-24", fin:"2026-10-25", jour:"24-25", mois:"OCT.", heure:"—",
+    lieu:"Orléans (Loiret)",
+    parti:"RN", partyColor:"#5B4FC9",
+    titre:"XIXᵉ congrès du Rassemblement National",
+    desc:"Le samedi, désignation à huis clos du candidat du RN à la présidentielle et élection du président du parti par les adhérents ; le dimanche, premier grand meeting de campagne.",
+    source:{ nom:"franceinfo", url:"https://www.franceinfo.fr/politique/front-national/presidentielle-2027-le-candidat-du-rassemblement-national-sera-elu-par-le-congres-du-parti-qui-se-tiendra-les-24-et-25-octobre_7943123.html" },
+    verified:true
+  },
+  {
+    debut:"2026-09-05", jour:"5", mois:"SEPT.", heure:"16h00",
     lieu:"Braderie de Lille — Porte de Paris, stand La France insoumise, 17 place Simon Vollant",
     parti:"LFI", partyColor:"#D6284B",
     titre:"Discours de Jean-Luc Mélenchon",
@@ -1333,7 +1849,7 @@ const MEETINGS = [
     verified:true
   },
   {
-    jour:"11-13", mois:"SEPT.", heure:"—",
+    debut:"2026-09-11", fin:"2026-09-13", jour:"11-13", mois:"SEPT.", heure:"—",
     lieu:"Le Plessis-Pâté (Essonne)",
     parti:"GDR", partyColor:"#A32E22",
     titre:"Fête de l'Humanité",
@@ -1342,7 +1858,7 @@ const MEETINGS = [
     verified:true
   },
   {
-    jour:"12", mois:"SEPT.", heure:"—",
+    debut:"2026-09-12", jour:"12", mois:"SEPT.", heure:"—",
     lieu:"Nogent-sur-Marne (Val-de-Marne)",
     parti:"LR", partyColor:"#2F6FE0",
     titre:"Réunion des Jeunes Républicains, avec Bruno Retailleau",
@@ -1352,29 +1868,57 @@ const MEETINGS = [
   },
 ];
 
-function renderMeetings(){
-  const list = document.getElementById("meeting-list");
-  list.innerHTML = MEETINGS.map((m,idx)=>`
-    <div class="meeting-card ${m.verified?'':'placeholder'}" style="animation-delay:${idx*30}ms">
+function aujourdhuiISO(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function meetingsAVenir(){
+  const auj = aujourdhuiISO();
+  return MEETINGS.filter(m => (m.fin || m.debut) >= auj).sort((a,b)=> a.debut.localeCompare(b.debut));
+}
+
+function meetingCard(m, idx, passe){
+  return `
+    <div class="meeting-card ${m.verified?'':'placeholder'} ${passe?'passe':''}" style="animation-delay:${idx*30}ms">
       <div class="meeting-date-badge">
         <div class="jour">${m.jour}</div>
         <div class="mois">${m.mois}</div>
       </div>
       <div class="meeting-body">
-        <h4>${m.titre}${m.verified?'<span class="verified-badge">✓ vérifié</span>':''}</h4>
+        <h4>${esc(m.titre)}${m.verified?'<span class="verified-badge">✓ vérifié</span>':''}</h4>
         <div class="meeting-meta">
-          <span class="dot-inline" style="background:${m.partyColor}"></span>${m.parti} · ${m.heure} · ${m.lieu}
+          <span class="dot-inline" style="background:${m.partyColor}"></span>${m.parti} · ${m.heure} · ${esc(m.lieu)}
         </div>
-        <div class="meeting-desc">${m.desc}</div>
-        ${m.source ? `<div class="meeting-source">Source : <a href="${m.source.url}" target="_blank" rel="noopener">${m.source.nom}</a></div>` : ''}
+        <div class="meeting-desc">${esc(m.desc)}</div>
+        ${m.source ? `<div class="meeting-source">Source : <a href="${m.source.url}" target="_blank" rel="noopener">${esc(m.source.nom)}</a></div>` : ''}
       </div>
-    </div>
-  `).join("");
+    </div>`;
+}
+
+function renderMeetings(){
+  const aVenir = meetingsAVenir();
+  const auj = aujourdhuiISO();
+  const passes = MEETINGS.filter(m => (m.fin || m.debut) < auj).sort((a,b)=> b.debut.localeCompare(a.debut)).slice(0,3);
+  document.getElementById("meeting-list").innerHTML =
+    (aVenir.length
+      ? aVenir.map((m,i)=>meetingCard(m,i,false)).join("")
+      : `<div class="meeting-empty">Aucun meeting à venir n'est recensé pour l'instant. Seuls les événements annoncés par une source vérifiable sont listés ici — la liste sera complétée dès qu'une date sera confirmée.</div>`) +
+    (passes.length ? `<div class="meetings-subtitle">Événements récents</div>` + passes.map((m,i)=>meetingCard(m,i,true)).join("") : "");
 }
 
 /* ---------- Sondages 2027 ---------- */
 
+// Du plus récent au plus ancien : le premier institut est affiché par défaut.
 const INSTITUTS = [
+  {
+    id:"ipsos", nom:"Ipsos bva",
+    date:"31 août-2 sept. 2026", echantillon:"1 500 personnes inscrites sur les listes électorales",
+    source:"Le Parisien — ipsos.com", url:"https://www.ipsos.com/fr-fr/presidentielle-2027-marine-le-pen-conserve-une-avance-nette-dans-les-intentions-de-vote",
+    hypothese:"Fourchettes selon les hypothèses testées (É. Philippe et G. Attal : plus hauts s'ils sont seuls candidats du centre)",
+    scores:{
+      LE_PEN:[34,36], MELENCHON:[15,17], PHILIPPE:[14.5,22.5], ATTAL:[7.5,15.5], RETAILLEAU:[6,10], GLUCKSMANN:[11.5,14],
+    }
+  },
   {
     id:"ifop", nom:"IFOP-Fiducial",
     date:"24-25 août 2026", echantillon:"1 598 personnes",
@@ -1405,14 +1949,14 @@ const CANDIDATS = [
   { id:"GLUCKSMANN", nom:"Raphaël Glucksmann",  parti:"SOC", couleur:"#D6488A" },
 ];
 
-let selectedInstitut = "ifop";
+let selectedInstitut = INSTITUTS[0].id;
 
 function renderSourceBar(){
   const bar = document.getElementById("source-bar");
   bar.innerHTML = INSTITUTS.map(inst=>`
-    <div class="source-chip ${selectedInstitut===inst.id?'selected':''}" data-id="${inst.id}">
+    <button type="button" class="source-chip ${selectedInstitut===inst.id?'selected':''}" data-id="${inst.id}" aria-pressed="${selectedInstitut===inst.id}">
       <span class="check">${selectedInstitut===inst.id?'✓':''}</span>${inst.nom} — ${inst.date}
-    </div>
+    </button>
   `).join("");
   bar.querySelectorAll(".source-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
@@ -1439,7 +1983,8 @@ function renderSondageAverage(){
   const list = document.getElementById("sondage-avg-list");
   list.innerHTML = disponibles.map((c,idx)=>{
     const mid = (c.range[0]+c.range[1])/2;
-    const label = c.range[0]===c.range[1] ? `~${c.range[0]}%` : `${c.range[0]}–${c.range[1]}%`;
+    const fr = n => String(n).replace(".", ",");
+    const label = c.range[0]===c.range[1] ? `~${fr(c.range[0])} %` : `${fr(c.range[0])}–${fr(c.range[1])} %`;
     return `
     <div class="sondage-bar-row" style="animation-delay:${idx*25}ms">
       <div class="bloc-name">${c.nom}</div>
@@ -1453,20 +1998,34 @@ function renderSondageAverage(){
 
 /* ---------- Quiz d'affinité ---------- */
 
-const QUIZ_LOIS = LOIS.slice(0, 4); // 4 lois suffisent pour un quiz rapide
+let QUIZ_LOIS = []; // choisi après chargement des données (choisirQuestionsQuiz)
 let quizReponses = {}; // { loiId: "pour"|"contre"|"abst" }
+
+// Questions : les derniers votes solennels sur l'ensemble d'un texte (un par texte), puis la dernière censure
+function choisirQuestionsQuiz(){
+  const vus = new Set();
+  const cle = l => l.titre.replace(/\(.*$/,"").trim().toLowerCase();
+  const textes = LOIS.filter(l => categorieLoi(l)==="texte" && l.typeVote==="SPS")
+    .filter(l => { const k = cle(l); if(vus.has(k)) return false; vus.add(k); return true; })
+    .slice(0, 7);
+  const censure = LOIS.find(l => l.typeVote==="MOC");
+  QUIZ_LOIS = censure ? [...textes, censure] : textes;
+  const n = QUIZ_LOIS.length;
+  document.getElementById("quiz-banner-detail").textContent =
+    `${n} votes réels récents de l'Assemblée (votes solennels sur l'ensemble d'un texte et motion de censure). Votre choix est comparé à la position majoritaire de chaque groupe.`;
+}
 
 function renderQuiz(){
   quizReponses = {};
   const container = document.getElementById("quiz-container");
   container.innerHTML = QUIZ_LOIS.map((loi,idx)=>`
     <div class="quiz-card">
-      <div class="quiz-progress">Question ${idx+1} / ${QUIZ_LOIS.length} · ${loi.theme}</div>
-      <div class="quiz-question">${loi.titre}</div>
+      <div class="quiz-progress">Question ${idx+1} / ${QUIZ_LOIS.length} · vote du ${esc(loi.date)} · qu'auriez-vous voté ?</div>
+      <div class="quiz-question">${esc(titreLoi(loi))}</div>
       <div class="quiz-options" data-loi="${loi.id}">
-        <div class="quiz-option" data-vote="pour">Pour</div>
-        <div class="quiz-option" data-vote="contre">Contre</div>
-        <div class="quiz-option" data-vote="abst">Abstention</div>
+        <button type="button" class="quiz-option" data-vote="pour">Pour</button>
+        <button type="button" class="quiz-option" data-vote="contre">Contre</button>
+        <button type="button" class="quiz-option" data-vote="abst">Abstention</button>
       </div>
     </div>
   `).join("") + `<button class="quiz-cta" id="quiz-submit" disabled>Voir mon résultat</button>`;
@@ -1497,27 +2056,33 @@ function showQuizResult(){
   const scores = PARTIES.map(p=>{
     let accord = 0, comptes = 0;
     QUIZ_LOIS.forEach(loi=>{
-      const v = loi.votes[p.id];
-      if(!v) return; // vote non communiqué pour ce groupe sur cette loi : on ne compte pas ce cas
+      const positionGroupe = positionMajoritaire(loi, loi.votes[p.id]);
+      if(!positionGroupe) return; // non communiqué, aucun votant ou égalité : question non comptée pour ce groupe
       comptes++;
-      const positionGroupe = Object.entries({pour:v.pour, contre:v.contre, abst:v.abst}).sort((a,c)=>c[1]-a[1])[0][0];
       if(positionGroupe === quizReponses[loi.id]) accord++;
     });
-    return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0 };
-  }).sort((a,c)=>c.pct-a.pct);
+    return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0, comptes };
+  }).filter(s=>s.comptes>0).sort((a,c)=>c.pct-a.pct);
 
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
     <div class="quiz-card">
-      <div class="quiz-question">Ton résultat : tu votes le plus souvent comme <span style="color:${scores[0].couleur}">${scores[0].nom}</span></div>
+      <div class="quiz-question">Ton résultat : tu votes le plus souvent comme <span style="color:${scores[0].couleur}">${esc(scores[0].nom)}</span></div>
+      <div class="quiz-progress">Part des questions où ton choix correspond à la position majoritaire du groupe.</div>
       <div id="quiz-results-list"></div>
+      <div class="quiz-recap">
+        ${QUIZ_LOIS.map(loi=>{
+          const lib = {pour:"pour",contre:"contre",abst:"abstention"};
+          return `<div class="quiz-recap-row"><b>${esc(titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Assemblée : ${loi.resultat==="adopte"?"adopté":"rejeté"} (${esc(loi.date)}) · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">détail officiel</a></div>`;
+        }).join("")}
+      </div>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
     </div>
   `;
   document.getElementById("quiz-results-list").innerHTML = scores.map((s,idx)=>`
     <div class="quiz-result-row" style="animation-delay:${idx*25}ms">
       <div class="quiz-result-rank">${idx+1}</div>
-      <div class="quiz-result-name">${s.nom}</div>
+      <div class="quiz-result-name">${esc(s.nom)}</div>
       <div class="quiz-result-track"><div class="quiz-result-fill" style="width:${s.pct}%;background:${s.couleur}"></div></div>
       <div class="quiz-result-pct">${s.pct}%</div>
     </div>
@@ -1540,18 +2105,18 @@ const LEADERS = [
   { parti:"GDR", nom:"Fabien Roussel", role:"Secrétaire national du Parti Communiste Français", couleur:"#A32E22" },
   { parti:"DEM", nom:"François Bayrou", role:"Président du MoDem", couleur:"#E08800" },
   { parti:"HOR", nom:"Édouard Philippe", role:"Président d'Horizons", couleur:"#0FA89C" },
-  { parti:"LIOT", nom:"— (pas de chef de parti unique)", role:"LIOT est un groupe pluraliste d'élus régionalistes/centristes, sans président national", couleur:"#A67C0A" },
+  { parti:"LIOT", nom:"—", role:"LIOT est un groupe pluraliste d'élus régionalistes et centristes, sans président national", couleur:"#A67C0A" },
   { parti:"UDR", nom:"Éric Ciotti", role:"Président de l'UDR (Union des droites pour la République)", couleur:"#1E44B0" },
 ];
 
 function renderLeaders(){
   document.getElementById("leader-grid").innerHTML = LEADERS.map((l,idx)=>{
-    const initiales = l.nom.replace("—","?").split(" ").filter(w=>w.length>1).slice(0,2).map(w=>w[0]).join("");
+    const initiales = l.nom.startsWith("—") ? l.parti : l.nom.split(" ").filter(w=>w.length>1).slice(0,2).map(w=>w[0]).join("");
     return `
       <div class="leader-card" style="animation-delay:${idx*25}ms">
         <div class="leader-avatar" style="background:${l.couleur}">${initiales}</div>
         <div class="leader-info">
-          <div class="leader-name">${l.nom}</div>
+          <div class="leader-name">${l.nom.startsWith("—") ? "Pas de chef de parti unique" : l.nom}</div>
           <div class="leader-role">${l.role}${l.note ? " · "+l.note : ""}</div>
           <span class="leader-party">${l.parti}</span>
         </div>
@@ -1609,7 +2174,7 @@ document.getElementById("chiffre-search").addEventListener("input", (e)=> render
 
 /* ---------- Jauges budget / dette (données INSEE réelles, dernier chiffre officiel) ---------- */
 
-function makeGaugeSVG(pct, maxScale, colorFill){
+function makeGaugeSVG(label, pct, maxScale, colorFill){
   // anneau de progression en SVG — pct et maxScale en % du PIB
   const r = 46, circ = 2*Math.PI*r;
   const ratio = Math.min(pct/maxScale, 1);
@@ -1620,37 +2185,34 @@ function makeGaugeSVG(pct, maxScale, colorFill){
       <circle cx="60" cy="60" r="${r}" fill="none" stroke="${colorFill}" stroke-width="10"
         stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
         transform="rotate(-90 60 60)"/>
-      <text x="60" y="66" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="600" fill="var(--text)">${pct}%</text>
+      <text x="60" y="66" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="600" fill="var(--text)">${label} %</text>
     </svg>`;
 }
 
 function renderBudgetGauges(){
-  document.getElementById("budget-hero").innerHTML = `
+  // Alimenté par INDICATEURS (data/indicateurs.json) : une mise à jour des chiffres met aussi à jour les jauges
+  const jauges = [
+    { nom:"Déficit public", echelle:10, couleur:"var(--rouge)", seuil:"Seuil européen : 3 % du PIB." },
+    { nom:"Dette publique", echelle:130, couleur:"var(--ambre)", seuil:"Seuil de Maastricht : 60 % du PIB." },
+  ];
+  document.getElementById("budget-hero").innerHTML = jauges.map(j=>{
+    const i = INDICATEURS.find(x=>x.nom===j.nom);
+    if(!i) return "";
+    const pct = parseFloat(String(i.valeur).replace(",", ".").replace(/[^0-9.\-]/g,""));
+    if(isNaN(pct)) return "";
+    return `
     <div>
-      <h3>Déficit public</h3>
-      <div class="budget-hero-sub">Dernier chiffre officiel INSEE — année 2025</div>
+      <h3>${j.nom}</h3>
+      <div class="budget-hero-sub">Dernier chiffre officiel ${esc(i.source)} — ${esc(i.date)}</div>
       <div class="gauge-block">
-        ${makeGaugeSVG(5.1, 10, "var(--rouge)")}
+        ${makeGaugeSVG(String(pct).replace(".", ","), pct, j.echelle, j.couleur)}
         <div>
-          <div class="gauge-label">152,5 milliards d'euros</div>
-          <div class="gauge-value">5,1 % du PIB</div>
-          <div class="gauge-note">Seuil européen fixé à 3 % du PIB — la France est sous procédure pour déficit excessif.</div>
+          <div class="gauge-value">${esc(i.valeur)}</div>
+          <div class="gauge-note">${esc(String(i.detail).replace(/\.?\s*$/, "."))}${/seuil/i.test(i.detail) ? "" : " " + j.seuil}</div>
         </div>
       </div>
-    </div>
-    <div>
-      <h3>Dette publique</h3>
-      <div class="budget-hero-sub">Dernier chiffre officiel INSEE — fin 2025</div>
-      <div class="gauge-block">
-        ${makeGaugeSVG(115.6, 130, "var(--ambre)")}
-        <div>
-          <div class="gauge-label">3 460,5 milliards d'euros</div>
-          <div class="gauge-value">115,6 % du PIB</div>
-          <div class="gauge-note">Seuil de Maastricht fixé à 60 % du PIB. Des projections indépendantes (non-INSEE) évoquent ~118 % mi-2026 ; on affiche ici uniquement le chiffre officiel le plus récent.</div>
-        </div>
-      </div>
-    </div>
-  `;
+    </div>`;
+  }).join("");
 }
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
@@ -1658,7 +2220,7 @@ function renderBudgetGauges(){
 const CONDAMNATIONS = [
   {
     nom:"Nicolas Sarkozy", role:"Ex-président de la République", parti:"LR",
-    affaire:"Affaire des écoutes (« Bygmalion » écarté ici, voir entrée séparée)",
+    affaire:"Affaire des écoutes (dite « Bismuth »)",
     detail:"Condamné pour corruption et trafic d'influence (pacte avec le magistrat Gilbert Azibert). Peine : 1 an de prison dont 6 mois ferme, exécutés sous bracelet électronique.",
     statut:"definitif", statutLabel:"Définitive",
     source:"France 24", url:"https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
@@ -1756,45 +2318,19 @@ function renderJusticeList(){
   `).join("");
 }
 
-/* ---------- Détection jour férié / vacances scolaires ---------- */
-// Calendrier réel 2025-2026. Vacances scolaires = fenêtre globale toutes zones confondues
-// (approximation : les zones A/B/C ont des dates légèrement différentes, on prend l'union la plus large).
+/* ---------- Contexte de date : vote un jour férié ---------- */
 
 const JOURS_FERIES = [
+  "2024-07-14","2024-08-15","2024-11-01","2024-11-11","2024-12-25",
   "2025-01-01","2025-04-21","2025-05-01","2025-05-08","2025-05-29","2025-06-09","2025-07-14","2025-08-15","2025-11-01","2025-11-11","2025-12-25",
   "2026-01-01","2026-04-06","2026-05-01","2026-05-08","2026-05-14","2026-05-25","2026-07-14","2026-08-15","2026-11-01","2026-11-11","2026-12-25",
-];
-const VACANCES_SCOLAIRES = [
-  { nom:"Toussaint", debut:"2025-10-18", fin:"2025-11-03" },
-  { nom:"Noël", debut:"2025-12-20", fin:"2026-01-05" },
-  { nom:"Hiver", debut:"2026-02-07", fin:"2026-03-09" },
-  { nom:"Printemps", debut:"2026-04-04", fin:"2026-05-04" },
-  { nom:"Été", debut:"2026-07-04", fin:"2026-09-01" },
+  "2027-01-01","2027-03-29","2027-05-01","2027-05-06","2027-05-08","2027-05-17","2027-07-14","2027-08-15","2027-11-01","2027-11-11","2027-12-25",
 ];
 
-function parseDateFR(dateStr){
-  // "14 mars 2026" -> Date
-  const mois = {janvier:0,février:1,mars:2,avril:3,mai:4,juin:5,juillet:6,août:7,septembre:8,octobre:9,novembre:10,décembre:11};
-  const parts = dateStr.toLowerCase().replace(/[^a-zéû0-9 ]/g,"").split(" ").filter(Boolean);
-  const jour = parseInt(parts[0],10);
-  const m = mois[parts[1]];
-  const an = parseInt(parts[2],10);
-  if(isNaN(jour) || m===undefined || isNaN(an)) return null;
-  return new Date(an, m, jour);
-}
-
-function checkContexteDate(dateStr){
-  const d = parseDateFR(dateStr);
-  if(!d) return null;
-  const iso = d.toISOString().slice(0,10);
-  if(JOURS_FERIES.includes(iso)){
-    return { type:"ferie", label:"⚠️ Votée un jour férié" };
-  }
-  for(const v of VACANCES_SCOLAIRES){
-    if(iso >= v.debut && iso <= v.fin){
-      return { type:"vacances", label:`⚠️ Votée pendant les vacances scolaires (${v.nom})` };
-    }
-  }
+function checkContexteDate(loi){
+  // dateISO vient directement de l'open data (pas de conversion de fuseau horaire)
+  const iso = loi.dateISO;
+  if(iso && JOURS_FERIES.includes(iso)) return { type:"ferie", label:"ℹ️ Vote intervenu un jour férié" };
   return null;
 }
 
@@ -1803,16 +2339,18 @@ function checkContexteDate(dateStr){
 function renderAccueil(){
   // Stats clés en haut de page (réutilise les données déjà chargées)
   document.getElementById("accueil-hero-stats").innerHTML = `
-    <div class="accueil-hero-stat"><div class="v">577</div><div class="l">Sièges à l'Assemblée</div></div>
-    <div class="accueil-hero-stat"><div class="v">${INDICATEURS.find(i=>i.nom==="Chômage").valeur}</div><div class="l">Chômage (T2 2026)</div></div>
-    <div class="accueil-hero-stat"><div class="v">${INDICATEURS.find(i=>i.nom==="Inflation").valeur}</div><div class="l">Inflation (août 2026)</div></div>
-    <div class="accueil-hero-stat"><div class="v">${INDICATEURS.find(i=>i.nom==="Déficit public").valeur}</div><div class="l">Déficit public (2025)</div></div>
+    <div class="accueil-hero-stat"><div class="v">${formatNombre(LOIS.length)}</div><div class="l">Scrutins publics analysés</div></div>
+    ${["Chômage","Inflation","Déficit public"].map(nom=>{
+      const i = INDICATEURS.find(x=>x.nom===nom);
+      return i ? `<div class="accueil-hero-stat"><div class="v">${i.valeur}</div><div class="l">${nom} (${i.date.replace(/\s*\(.*\)/,"")})</div></div>` : "";
+    }).join("")}
   `;
 
   // "À la une" : dernière loi votée, prochain meeting, tendance sondages
-  const derniereLoi = [...LOIS].sort((a,b)=> parseDateFR(b.date) - parseDateFR(a.date))[0];
-  const prochainMeeting = MEETINGS.find(m=>m.verified) || MEETINGS[0];
-  const instPrincipal = INSTITUTS.find(i=>i.id==="ifop") || INSTITUTS[0];
+  // LOIS est trié du scrutin le plus récent au plus ancien : premier vote final sur un texte
+  const derniereLoi = LOIS.find(l=>categorieLoi(l)==="texte") || LOIS[0];
+  const prochainMeeting = meetingsAVenir()[0];
+  const instPrincipal = INSTITUTS[0];
   const enTete = CANDIDATS
     .map(c=>({...c, range: instPrincipal.scores[c.id]}))
     .filter(c=>c.range)
@@ -1820,41 +2358,96 @@ function renderAccueil(){
 
   const highlights = [
     {
-      eyebrow: derniereLoi.resultat==="adopte" ? "Dernière loi votée · Adoptée" : "Dernière loi votée · Rejetée",
-      titre: derniereLoi.titre,
-      sous: `${derniereLoi.date} · ${derniereLoi.theme}`,
-      tab: "scrutin"
+      eyebrow: derniereLoi.resultat==="adopte" ? "Dernier texte voté · Adopté" : "Dernier texte voté · Rejeté",
+      titre: titreLoi(derniereLoi),
+      sous: `${derniereLoi.date} · voir le détail dans l'hémicycle`,
+      tab: "scrutin", loi: derniereLoi.id
     },
-    {
-      eyebrow: prochainMeeting.verified ? "Prochain meeting · vérifié" : "Prochain meeting",
+    prochainMeeting ? {
+      eyebrow: prochainMeeting.verified ? "Prochain rendez-vous · vérifié" : "Prochain rendez-vous",
       titre: prochainMeeting.titre,
-      sous: `${prochainMeeting.parti} · ${prochainMeeting.lieu}`,
+      sous: `${prochainMeeting.jour} ${prochainMeeting.mois.toLowerCase()} · ${prochainMeeting.parti} · ${prochainMeeting.lieu}`,
+      tab: "meetings"
+    } : {
+      eyebrow: "Prochains rendez-vous",
+      titre: "Aucun meeting à venir recensé",
+      sous: "Seuls les événements confirmés par une source sont listés.",
       tab: "meetings"
     },
     {
       eyebrow: "Sondages 2027 · tendance actuelle",
-      titre: `${enTete.nom} en tête (${enTete.range[0]}–${enTete.range[1]}%)`,
+      titre: `${enTete.nom} en tête (${String(enTete.range[0]).replace(".",",")}–${String(enTete.range[1]).replace(".",",")} %)`,
       sous: `${instPrincipal.nom}, ${instPrincipal.date}`,
       tab: "sondages"
     },
   ];
 
   document.getElementById("accueil-highlight-grid").innerHTML = highlights.map(h=>`
-    <div class="accueil-highlight-card" data-tab="${h.tab}">
+    <div class="accueil-highlight-card" data-tab="${h.tab}" ${h.loi ? `data-loi="${h.loi}"` : ""}>
       <div class="accueil-highlight-eyebrow">${h.eyebrow}</div>
-      <div class="accueil-highlight-title">${h.titre}</div>
-      <div class="accueil-highlight-sub">${h.sous}</div>
+      <div class="accueil-highlight-title">${esc(h.titre)}</div>
+      <div class="accueil-highlight-sub">${esc(h.sous)}</div>
     </div>
   `).join("");
 
   document.querySelectorAll(".accueil-highlight-card").forEach(card=>{
-    card.addEventListener("click", ()=> activateTab(card.dataset.tab));
+    card.addEventListener("click", ()=>{
+      if(card.dataset.loi){
+        // Ouvre directement ce scrutin dans l'hémicycle
+        selectedCategorie = "texte";
+        document.getElementById("loi-search").value = "";
+        renderCategorieFilter();
+        populateLoiSelect();
+        document.getElementById("loi-select").value = card.dataset.loi;
+        updateBreakdown();
+      }
+      activateTab(card.dataset.tab);
+    });
   });
 }
 
-/* ---------- Onglets ---------- */
+/* ---------- Onglets et liens directs (#scrutin-8434, #histo-RN, #sondages…) ---------- */
+
+let DONNEES_CHARGEES = false;
+
+function majHash(h){
+  const cible = "#" + h;
+  if(location.hash !== cible) history.replaceState(null, "", h === "accueil" ? location.pathname + location.search : cible);
+}
+
+function ouvrirDepuisHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if(!h) return false;
+  let m = h.match(/^scrutin-(\d+)$/);
+  if(m){
+    const loi = LOIS.find(l=>String(l.numero)===m[1]);
+    if(loi){
+      selectedCategorie = categorieLoi(loi);
+      document.getElementById("loi-search").value = "";
+      renderCategorieFilter();
+      populateLoiSelect();
+      document.getElementById("loi-select").value = loi.id;
+      activateTab("scrutin");
+      updateBreakdown();
+      return true;
+    }
+  }
+  m = h.match(/^histo-([A-Z]+)$/);
+  if(m && PARTIES.some(p=>p.id===m[1])){
+    selectedPartyId = m[1];
+    histoLimite = 50;
+    renderPartyChips();
+    activateTab("histo");
+    renderHistorique();
+    return true;
+  }
+  if(document.getElementById("view-"+h)){ activateTab(h); return true; }
+  return false;
+}
+window.addEventListener("hashchange", ouvrirDepuisHash);
 
 function activateTab(tabId){
+  onSeatLeave();
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   const tabEl = document.querySelector(`.tab[data-tab="${tabId}"]`);
@@ -1870,10 +2463,29 @@ function activateTab(tabId){
   navToggle.setAttribute("aria-expanded","false");
   const label = document.getElementById("nav-toggle-current");
   label.textContent = (tabId !== "accueil" && tabEl && !tabEl.classList.contains("tab-home")) ? "· " + tabEl.textContent.trim() : "";
+
+  // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
+  if(DONNEES_CHARGEES){
+    if(tabId === "scrutin") updateBreakdown();
+    else if(tabId === "histo") majHash("histo-" + selectedPartyId);
+    else majHash(tabId);
+  }
+  document.title = (tabId === "accueil" || !tabEl ? "" : tabEl.textContent.trim() + " — ") + "Décrypter la politique française";
 }
 
 document.querySelectorAll(".tab").forEach(tab=>{
+  tab.setAttribute("role","button");
+  tab.setAttribute("tabindex","0");
   tab.addEventListener("click", ()=> activateTab(tab.dataset.tab));
+});
+
+// Éléments cliquables non-boutons (onglets, cartes de l'accueil) : activables au clavier (Entrée / Espace)
+document.addEventListener("keydown", (e)=>{
+  if(e.key !== "Enter" && e.key !== " ") return;
+  const el = e.target.closest && e.target.closest(".tab, .accueil-highlight-card");
+  if(!el) return;
+  e.preventDefault();
+  el.click();
 });
 
 document.getElementById("nav-toggle").addEventListener("click", (e)=>{
@@ -1898,6 +2510,7 @@ document.addEventListener("click", (e)=>{
 // Charge les données externes (mises à jour par les scripts d'automatisation) avant de
 // construire l'interface. En cas d'échec (fichier absent, ouverture en local sans serveur...),
 // le site continue avec des tableaux vides plutôt que de planter, et le signale dans la console.
+let LOIS_MAJ = null, INDICATEURS_MAJ = null;
 async function loadExternalData(){
   try{
     const [loisRes, indicRes] = await Promise.all([
@@ -1906,13 +2519,13 @@ async function loadExternalData(){
     ]);
     if(loisRes.ok){
       const loisJson = await loisRes.json();
-      if(loisJson.lois?.length) LOIS = loisJson.lois;
+      if(loisJson.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
     } else {
       console.warn("Impossible de charger data/lois.json — valeurs de secours conservées.", loisRes.status);
     }
     if(indicRes.ok){
       const indicJson = await indicRes.json();
-      if(indicJson.indicateurs?.length) INDICATEURS = indicJson.indicateurs;
+      if(indicJson.indicateurs?.length){ INDICATEURS = indicJson.indicateurs; INDICATEURS_MAJ = indicJson.lastUpdated; }
     } else {
       console.warn("Impossible de charger data/indicateurs.json — valeurs de secours conservées.", indicRes.status);
     }
@@ -1926,28 +2539,56 @@ async function loadExternalData(){
   }
 }
 
-async function initSite(){
-  await loadExternalData();
+function dateCourte(iso){
+  const d = new Date(iso);
+  return isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+}
 
-  buildSeats();
-  renderHemicycle();
-  renderLegend();
-  renderThemeFilter();
-  populateLoiSelect();
-  updateBreakdown();
-  renderPartyChips();
-  renderHistorique();
-  renderMeetings();
-  renderSourceBar();
-  renderSondageAverage();
-  renderQuiz();
+async function initSite(){
+  // 1) Sections qui ne dépendent pas des gros fichiers : affichées immédiatement
   renderLeaders();
-  renderChiffres();
-  renderBudgetGauges();
   renderJusticeSummary();
   renderJusticeFilterBar();
   renderJusticeList();
+  renderMeetings();
+  renderSourceBar();
+  renderSondageAverage();
+  renderChiffres();
+  renderBudgetGauges();
+  document.getElementById("accueil-highlight-grid").innerHTML = `<p class="chargement">Chargement des derniers votes de l'Assemblée…</p>`;
+  document.getElementById("histo-list").innerHTML = `<p class="chargement">Chargement des scrutins…</p>`;
+  document.getElementById("quiz-container").innerHTML = `<p class="chargement">Chargement des votes…</p>`;
+  document.getElementById("scrutin-banner-detail").textContent = "Chargement des scrutins publics de la législature…";
+
+  // 2) Données (≈ 500 Ko compressés)
+  await loadExternalData();
+
+  // Scrutins du plus récent au plus ancien, quel que soit l'ordre du fichier
+  LOIS.sort((a,b)=> (b.numero||0) - (a.numero||0));
+  appliquerCompositionActuelle();
+  const dernier = LOIS.find(l=>l.dateISO);
+  document.getElementById("scrutin-banner-detail").textContent =
+    `${formatNombre(LOIS.length)} scrutins publics de la XVIIᵉ législature${dernier ? ` (dernier : ${dernier.date})` : ""}`;
+  document.getElementById("footer-maj").innerHTML =
+    `Votes : ${formatNombre(LOIS.length)} scrutins, le plus récent du ${dernier ? esc(dernier.date) : "—"}` +
+    `${LOIS_MAJ && dateCourte(LOIS_MAJ) ? ` (base actualisée le ${dateCourte(LOIS_MAJ)})` : ""}. ` +
+    `L'archive est consultée chaque jour : pendant les suspensions de séance, aucun nouveau vote n'est publié.` +
+    `${INDICATEURS_MAJ && dateCourte(INDICATEURS_MAJ) ? `<br>Indicateurs : actualisés le ${dateCourte(INDICATEURS_MAJ)}.` : ""}`;
+
+  renderCategorieFilter();
+  renderModeToggle();
+  populateLoiSelect();
+  renderPartyChips();
+  renderHistoCategorie();
+  renderHistorique();
+  choisirQuestionsQuiz();
+  renderQuiz();
+  renderChiffres();
+  renderBudgetGauges();
   renderAccueil();
+
+  DONNEES_CHARGEES = true;
+  ouvrirDepuisHash();
 }
 
 initSite();

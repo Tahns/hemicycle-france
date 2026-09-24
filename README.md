@@ -6,14 +6,21 @@ automatiquement à partir de sources officielles :
 - **Assemblée nationale** (open data officiel) → `scripts/fetch-scrutins.js` → `data/lois.json`
 - **INSEE** (API BDM officielle) → `scripts/fetch-insee.js` → `data/indicateurs.json`
 - **GitHub Actions** (`.github/workflows/update-data.yml`) exécute les deux scripts chaque
-  jour et republie automatiquement si de nouvelles données sont trouvées.
+  jour, contrôle la cohérence des fichiers (`scripts/check-data.js`) et ne republie que si
+  de nouvelles données valides sont trouvées.
 
 ## Ce qui est déjà automatisable dès maintenant
 
 - **Scrutins de l'Assemblée nationale** : entièrement automatisé. Le script rejette
   activement tout scrutin dont il n'arrive pas à vérifier la cohérence des chiffres
   (voir les commentaires dans `scripts/fetch-scrutins.js`) plutôt que de publier une
-  donnée potentiellement fausse.
+  donnée potentiellement fausse. Chaque scrutin porte son numéro, son type de vote
+  (ordinaire, solennel, motion de censure), son résultat officiel et l'effectif de chaque
+  groupe au moment du vote. Les groupes que l'AN publie sans identifiant (`PO0`) sont
+  retrouvés à partir des députés nominativement listés, jamais devinés.
+- **Annotations manuelles** : on peut ajouter à la main, sur n'importe quelle entrée de
+  `data/lois.json`, les champs `titreCourt`, `theme`, `proposePar`, `groupeMoteur` ou
+  `contexte`. Ils sont conservés par le script, y compris lors d'une reconstruction.
 - **Chômage (INSEE)** : automatisé, idBank vérifié (`001688527`).
 
 ## Ce qui nécessite encore un peu de travail avant automatisation complète
@@ -74,8 +81,18 @@ puis ouvrir `http://localhost:8000` (ou le port indiqué).
 Pour tester un script d'automatisation sans rien publier :
 ```bash
 node scripts/fetch-scrutins.js --dry-run
+# après une correction du parseur : re-dérive tous les scrutins depuis l'archive officielle
+node scripts/fetch-scrutins.js --rebuild
 INSEE_API_KEY=xxxx node scripts/fetch-insee.js --dry-run
+# contrôle de cohérence des fichiers data/ (aussi lancé par le workflow avant publication)
+node scripts/check-data.js
 ```
+
+`data/lois.json` est écrit avec un scrutin par ligne : deux fois plus léger à télécharger
+qu'un JSON indenté, et chaque nouveau vote reste une ligne lisible dans l'historique git.
+
+Liens directs : `#scrutin-8434` ouvre un scrutin précis dans l'hémicycle, `#histo-RN`
+l'historique d'un groupe, `#sondages` (ou tout autre onglet) la page correspondante.
 
 ## Principe général adopté sur ce site
 
