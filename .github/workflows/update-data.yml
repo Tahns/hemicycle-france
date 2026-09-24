@@ -53,9 +53,14 @@ jobs:
         run: node scripts/check-fraicheur.js 2> fraicheur.txt
         continue-on-error: true
 
+      - name: Vérifier les sources citées avec le Décodex
+        id: sources
+        run: node scripts/check-sources.js 2> sources.txt
+        continue-on-error: true
+
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.fraicheur.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -67,6 +72,7 @@ jobs:
             [ "${{ steps.insee.outcome }}" = "failure" ] && echo "- **Insee** : au moins un indicateur n'a pas pu être mis à jour (valeur précédente conservée)."
             [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
             [ -s fraicheur.txt ] && cat fraicheur.txt
+            [ -s sources.txt ] && cat sources.txt
             echo
             echo "Journal complet : $RUN_URL"
           } > alerte.md
