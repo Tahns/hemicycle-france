@@ -4,9 +4,11 @@
  * -----------------
  * Construit data/communes.json : pour chaque commune, la ou les circonscriptions législatives
  * dont elle fait partie (les grandes villes sont partagées entre plusieurs circonscriptions),
- * d'après les résultats officiels par bureau de vote des élections législatives de 2024 publiés par
- * le ministère de l'Intérieur sur data.gouv.fr. (Le fichier « par communes » du même jeu de données
- * n'indique pas la circonscription : seul le fichier par bureau de vote la donne.) Sert à « trouver son député » en tapant sa commune.
+ * d'après les résultats officiels par commune du 1er tour des élections législatives de 2022 publiés
+ * par le ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
+ * Les fichiers de 2024 (par commune comme par bureau de vote) n'indiquent pas la circonscription ;
+ * ceux de 2022 si, et le découpage (loi de 2010) est le même pour les deux élections. Seules les
+ * communes fusionnées depuis juin 2022 apparaissent sous leur ancien nom.
  *
  * Le découpage des circonscriptions ne change qu'avec une loi : le fichier n'est reconstruit que
  * s'il a plus de 90 jours (ou avec --force).
@@ -24,8 +26,8 @@ import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
 const DATA_FILE = path.resolve("data/communes.json");
-const SOURCE = "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240710-171445/resultats-definitifs-par-bureau-de-vote.csv";
-const PAGE = "https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/";
+const SOURCE = "https://static.data.gouv.fr/resources/elections-legislatives-des-12-et-19-juin-2022-resultats-definitifs-du-premier-tour/20220614-192729/resultats-par-niveau-subcom-t1-france-entiere.txt";
+const PAGE = "https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-12-et-19-juin-2022-resultats-definitifs-du-premier-tour/";
 const FORCE = process.argv.includes("--force");
 const FICHIER = process.argv.find((a) => a.startsWith("--fichier="))?.split("=")[1];
 
@@ -47,6 +49,12 @@ function champs(ligne, sep) {
   return out.map((x) => x.trim());
 }
 
+/** Les fichiers du ministère sont tantôt en UTF-8, tantôt en Windows-1252 (Latin-1). */
+export function decoder(octets) {
+  try { return new TextDecoder("utf-8", { fatal: true }).decode(octets); }
+  catch { return new TextDecoder("windows-1252").decode(octets); }
+}
+
 export function construire(csv) {
   const lignes = csv.replace(/^﻿/, "").split(/\r?\n/).filter((l) => l.trim());
   const sep = (lignes[0].match(/;/g) || []).length >= (lignes[0].match(/,/g) || []).length ? ";" : ",";
@@ -62,11 +70,12 @@ export function construire(csv) {
     const f = champs(l, sep);
     const dep = f[iDep], commune = f[iCom];
     if (!dep || !commune) continue;
-    // Numéro de circonscription : « 4e circonscription » dans le libellé, sinon fin du code (« 3304 » → 4)
+    // Numéro de circonscription : « 4e circonscription » dans le libellé, sinon le code
+    // (« 04 » tel quel, ou « 3304 » → 4 quand il commence par le code du département)
     let num = parseInt((f[iLibCirco] || "").match(/(\d+)\s*(?:e|è|er|ère|re)/i)?.[1], 10);
     if (!num && iCirco >= 0) {
       const code = f[iCirco].replace(/\s/g, ""), codeDep = iCodeDep >= 0 ? f[iCodeDep] : "";
-      num = parseInt(codeDep && code.startsWith(codeDep) ? code.slice(codeDep.length) : code.slice(-2), 10);
+      num = parseInt(codeDep && code.length > codeDep.length && code.startsWith(codeDep) ? code.slice(codeDep.length) : code.slice(-2), 10);
     }
     if (!num) continue;
     circos.add(`${dep}|${num}`);
@@ -88,11 +97,12 @@ async function main() {
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "null"));
   if (ancien?.lastUpdated && !FORCE && !FICHIER && Date.now() - Date.parse(ancien.lastUpdated) < 90 * 864e5) return log("Table à jour (moins de 90 jours) : rien à faire.");
 
-  const csv = FICHIER ? await readFile(FICHIER, "utf-8") : await (async () => {
+  const brut = FICHIER ? await readFile(FICHIER) : await (async () => {
     const res = await fetch(SOURCE);
     if (!res.ok) throw new Error(`HTTP ${res.status} en téléchargeant ${SOURCE}`);
-    return res.text();
+    return new Uint8Array(await res.arrayBuffer());
   })();
+  const csv = decoder(brut);
   const { departements, nbCommunes, nbCircos } = construire(csv);
   log(`${nbCommunes} communes, ${nbCircos} circonscriptions, ${Object.keys(departements).length} départements ou collectivités.`);
   if (!FICHIER && (nbCommunes < 30000 || nbCircos < 500)) {
@@ -102,7 +112,7 @@ async function main() {
   }
   await writeFile(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
-    source: "Ministère de l'Intérieur — résultats des législatives 2024 par bureau de vote (data.gouv.fr)",
+    source: "Ministère de l'Intérieur — résultats des législatives 2022 par commune (data.gouv.fr)",
     sourceUrl: PAGE,
     departements,
   }) + "\n");
