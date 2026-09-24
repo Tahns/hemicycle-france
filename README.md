@@ -1,4 +1,6 @@
-# Décrypter la politique française — automatisation
+# Hémicycle — La politique française, preuves à l'appui
+
+Site : https://tahns.github.io/politique-france/ — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
 automatiquement, chaque jour, à partir de sources officielles.
