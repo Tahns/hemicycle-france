@@ -3456,7 +3456,7 @@ function fermerRecherche(){
 function renderRecherche(){
   const brut = document.getElementById("recherche-champ").value.trim();
   const zone = document.getElementById("recherche-resultats");
-  if(brut.length < 2){ zone.innerHTML = `<p class="histo-date">Tapez au moins deux lettres. Pour trouver votre député à partir de votre commune, utilisez la rubrique Députés.</p>`; return; }
+  if(brut.length < 2){ zone.innerHTML = `<p class="histo-date">Tapez au moins deux lettres : un texte, un député, votre commune, un candidat, un chiffre…</p>`; return; }
   const mots = norm(brut).split(/\s+/);
   const ok = t => { const n = norm(t); return mots.every(m => n.includes(m)); };
   const groupes = [];
@@ -3468,6 +3468,20 @@ function renderRecherche(){
   if(votes.length) groupes.push(["Votes de l'Assemblée", votes]);
   const deputes = (DEPUTES || []).filter(d => ok(d.nom)).slice(0, 5).map(d=>({ titre:d.nom, sous:`${d.f ? "Députée" : "Député"} ${d.groupe} · ${circoDepute(d)}`, action:()=>{ location.hash = "depute-" + d.id; } }));
   if(deputes.length) groupes.push(["Députés", deputes]);
+  // Communes : la table n'est chargée qu'à la première recherche d'au moins 3 lettres
+  if(norm(brut).length >= 3 && !COMMUNES){ chargerCommunes().then(()=>{ if(!document.getElementById("recherche").hidden) renderRecherche(); }); }
+  const communes = [];
+  if(COMMUNES && norm(brut).length >= 3){
+    const q = norm(brut);
+    for(const [depNom, liste] of Object.entries(COMMUNES)) for(const [c, circos] of liste){
+      const n = norm(c);
+      if(n === q || n.startsWith(q + " ") || n.startsWith(q + "-") || (q.length >= 4 && n.startsWith(q))) communes.push({ c, depNom, circos, exact: n === q });
+    }
+    communes.sort((a,b)=> (b.exact - a.exact) || a.c.length - b.c.length);
+  }
+  const lignesCommunes = communes.slice(0, 4).map(t=>({ titre:`${t.c} (${t.depNom})`, sous:`Trouver son député · ${t.circos.length > 1 ? `${t.circos.length} circonscriptions` : `${ordinalCirco(t.circos[0])} circonscription`}`,
+    action:()=>{ activateTab("deputes"); document.getElementById("depute-search").value = t.c; renderDeputes(); } }));
+  if(lignesCommunes.length) groupes.push(["Communes", lignesCommunes]);
   const candidats = CANDIDATURES.filter(c => ok(c.nom + " " + c.parti)).slice(0, 5).map(c=>({ titre:c.nom, sous:`Candidat à la présidentielle · ${c.parti}`, action:()=>activateTab("candidats") }));
   if(candidats.length) groupes.push(["Candidats 2027", candidats]);
   const partis = LEADERS.filter(l => ok(l.nom + " " + l.parti + " " + (l.role || ""))).slice(0, 4).map(l=>({ titre:`${l.parti} · ${l.nom}`, sous:l.role || "Parti", action:()=>activateTab("dirigeants") }));
