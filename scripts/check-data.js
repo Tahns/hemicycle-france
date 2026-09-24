@@ -151,6 +151,27 @@ async function checkCommunes() {
   console.log(`[check-data] communes.json : ${n} communes.`);
 }
 
+async function checkActivite() {
+  const data = JSON.parse(await readFile("data/activite.json", "utf-8").catch(() => "null"));
+  if (!data) return console.log("[check-data] activite.json : absent (bloc d'activité masqué).");
+  const e = Object.entries(data.deputes || {});
+  if (e.length < 500) err(`activite.json : seulement ${e.length} députés`);
+  for (const [id, a] of e) {
+    if (!/^PA\d+$/.test(id) || !Number.isInteger(a.q) || !Number.isInteger(a.a) || !Number.isInteger(a.aa) || a.aa > a.a) { err(`activite.json : entrée invalide (${id})`); break; }
+    if (a.hatvp && !/^https:\/\/www\.hatvp\.fr\//.test(a.hatvp.url)) { err(`activite.json : lien HATVP invalide (${id})`); break; }
+  }
+  console.log(`[check-data] activite.json : ${e.length} députés.`);
+}
+
+async function checkNavette() {
+  const data = JSON.parse(await readFile("data/navette.json", "utf-8").catch(() => "null"));
+  if (!data) return console.log("[check-data] navette.json : absent.");
+  for (const [ref, t] of Object.entries(data.textes || {})) {
+    if (!/^https:\/\/www\.senat\.fr\//.test(t.dossier) || !t.votes?.length || t.votes.some((v) => !["adopte", "rejete"].includes(v.resultat))) { err(`navette.json : entrée invalide (${ref})`); break; }
+  }
+  console.log(`[check-data] navette.json : ${Object.keys(data.textes || {}).length} textes.`);
+}
+
 async function checkManuels() {
   for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
     const data = JSON.parse(await readFile(fichier, "utf-8"));
@@ -173,6 +194,8 @@ await checkSondages();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();
+await checkActivite();
+await checkNavette();
 await checkCommunes();
 await checkManuels();
 

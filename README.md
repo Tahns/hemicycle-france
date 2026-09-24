@@ -1,6 +1,6 @@
 # Hémicycle France — La politique française, preuves à l'appui
 
-Site : https://tahns.github.io/politique-france/ — automatisation
+Site : https://tahns.github.io/hemicycle-france/ — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
 automatiquement, chaque jour, à partir de sources officielles.
@@ -18,6 +18,10 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
 | Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
+| Activité des députés (questions écrites, amendements) et déclarations HATVP | `fetch-activite.js` (chaque semaine) | open data de l'Assemblée nationale et de la HATVP (reliées par l'identifiant du député) | `data/activite.json` |
+| Vote du Sénat sur un texte voté à l'Assemblée | `navette.js` | dossiers législatifs de l'Assemblée (lien vers le dossier du Sénat) et `data/senat.json` | `data/navette.json` |
+| Présidentielle 2022 par commune | `fetch-elections.js` (une seule fois, résultats définitifs) | ministère de l'Intérieur sur data.gouv.fr | `data/elections/*.json` |
+| Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
@@ -34,7 +38,7 @@ Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 
 ## Nom de domaine (optionnel)
 
-1. Acheter le domaine (par ex. `politique-france.fr`) chez un registraire (OVH, Gandi…).
+1. Acheter le domaine (par ex. `hemicycle-france.fr`) chez un registraire (OVH, Gandi…).
 2. Chez le registraire, ajouter les enregistrements DNS de GitHub Pages :
    `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    (et `CNAME www` vers `tahns.github.io`).

@@ -29,7 +29,7 @@ const { chromium } = require("playwright");
 const RACINE = path.resolve(__dirname, "..");
 const CNAME = fs.existsSync(path.join(RACINE, "CNAME")) ? fs.readFileSync(path.join(RACINE, "CNAME"), "utf-8").trim().split(/\s+/)[0] : null;
 // Sans domaine propre : adresse GitHub Pages déduite du dépôt (suit un renommage du dépôt)
-const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/politique-france").split("/");
+const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/hemicycle-france").split("/");
 const SITE = process.env.SITE_URL || (CNAME ? `https://${CNAME}/` : `https://${PROPRIO.toLowerCase()}.github.io/${DEPOT}/`);
 const NOM_SITE = "Hémicycle France";
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".woff2": "font/woff2", ".png": "image/png", ".css": "text/css" };
@@ -205,6 +205,28 @@ function serveur() {
   ];
   ecrireSiChange(path.join(RACINE, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
   ecrireSiChange(path.join(RACINE, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
+
+  // 4 bis. Flux RSS des derniers votes clés (textes et motions de censure), à suivre dans un lecteur de flux
+  const xml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const items = [...votes].sort((a, b) => b.numero - a.numero).slice(0, 40).map((v) => `  <item>
+    <title>${xml(`${v.resultat === "adopte" ? "Adopté" : "Rejeté"} : ${v.titre}`)}</title>
+    <link>${SITE}v/${v.numero}.html</link>
+    <guid isPermaLink="true">${SITE}v/${v.numero}.html</guid>
+    ${v.dateISO ? `<pubDate>${new Date(v.dateISO + "T18:00:00Z").toUTCString()}</pubDate>` : ""}
+    <description>${xml(`Assemblée nationale, ${v.date} : ${nombre(v.pour)} pour, ${nombre(v.contre)} contre, ${nombre(v.abst)} abstention${v.abst > 1 ? "s" : ""}. Intitulé officiel : ${v.intitule}`)}</description>
+  </item>`).join("\n");
+  ecrireSiChange(path.join(RACINE, "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>${xml(NOM_SITE)} · Votes de l'Assemblée nationale</title>
+  <link>${SITE}</link>
+  <atom:link href="${SITE}feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Les derniers textes et motions de censure votés à l'Assemblée nationale, avec le décompte officiel.</description>
+  <language>fr</language>
+${items}
+</channel>
+</rss>
+`);
 
   // 5. Adresse du site dans les balises og: d'index.html (utile après un changement de domaine)
   const indexFichier = path.join(RACINE, "index.html");

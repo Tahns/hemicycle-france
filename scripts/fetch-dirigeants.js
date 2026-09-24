@@ -18,7 +18,7 @@ import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
 const DATA_FILE = path.resolve("data/dirigeants.json");
-const USER_AGENT = "politique-france-bot/1.0 (https://github.com/Tahns/politique-france)";
+const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
 const DRY_RUN = process.argv.includes("--dry-run");
 const log = (...m) => console.log("[fetch-dirigeants]", ...m);
 const warn = (...m) => console.warn("[fetch-dirigeants][ATTENTION]", ...m);
