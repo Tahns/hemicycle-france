@@ -112,6 +112,33 @@ async function checkDeputes() {
   console.log(`[check-data] deputes.json : ${data.deputes?.length} députés, ${data.cles.length} votes clés.`);
 }
 
+async function checkCandidats() {
+  const data = JSON.parse(await readFile("data/candidats.json", "utf-8").catch(() => "null"));
+  if (!data) return err("candidats.json : fichier absent");
+  if (!Array.isArray(data.candidats) || data.candidats.length < 5) return err("candidats.json : moins de 5 candidats");
+  for (const c of data.candidats) {
+    if (!c.nom || !c.parti) err(`candidats.json : candidat sans nom ou sans parti (${c.nom || "?"})`);
+    if (c.annonce !== null && !/^\d{4}-\d{2}-\d{2}$/.test(c.annonce || "")) err(`candidats.json : date d'annonce invalide pour ${c.nom}`);
+    if (!/^https?:\/\//.test(c.source || "")) err(`candidats.json : source manquante pour ${c.nom}`);
+  }
+  console.log(`[check-data] candidats.json : ${data.candidats.length} candidats.`);
+}
+
+async function checkSenat() {
+  const data = JSON.parse(await readFile("data/senat.json", "utf-8").catch(() => "null"));
+  if (!data) return err("senat.json : fichier absent");
+  const ids = new Set();
+  for (const x of data.scrutins || []) {
+    if (!x.id || ids.has(x.id)) err(`senat.json : identifiant invalide ou en double (${x.id})`);
+    ids.add(x.id);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x.dateISO || "") || !["adopte", "rejete"].includes(x.resultat)) err(`senat.json : ${x.id} date ou résultat invalide`);
+    const g = Object.values(x.groupes || {});
+    const somme = (k) => g.reduce((t, v) => t + v[k], 0);
+    if (somme("pour") !== x.pour || somme("contre") !== x.contre || somme("abst") !== x.abst) err(`senat.json : ${x.id} somme des groupes ≠ total officiel`);
+  }
+  console.log(`[check-data] senat.json : ${(data.scrutins || []).length} scrutins.`);
+}
+
 async function checkManuels() {
   for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
     const data = JSON.parse(await readFile(fichier, "utf-8"));
@@ -132,6 +159,8 @@ await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
 await checkDeputes();
+await checkCandidats();
+await checkSenat();
 await checkManuels();
 
 if (erreurs.length) {

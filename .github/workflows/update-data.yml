@@ -33,6 +33,19 @@ jobs:
         run: node scripts/fetch-sondages.js
         continue-on-error: true
 
+      - name: Communes et circonscriptions (reconstruit tous les 90 jours)
+        id: communes
+        run: node scripts/fetch-communes.js
+        continue-on-error: true
+      - name: Scrutins publics du Sénat
+        id: senat
+        run: node scripts/fetch-senat.js
+        continue-on-error: true
+      - name: Candidats déclarés à la présidentielle (Wikipédia)
+        id: candidats
+        run: node scripts/fetch-candidats.js
+        continue-on-error: true
+
       - name: Contrôler la cohérence des données avant publication
         run: node scripts/check-data.js
       # Pages d'aperçu pour le partage (v/ votes clés, d/ députés) : titres et images tirés du site lui-même
@@ -49,7 +62,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ v/ d/ icons/partage.jpg
+          git add data/ v/ d/ icons/partage.jpg sitemap.xml robots.txt index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de données — rien à committer."
           else
@@ -70,7 +83,7 @@ jobs:
 
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -81,6 +94,9 @@ jobs:
             [ "${{ steps.scrutins.outcome }}" = "failure" ] && echo "- **Scrutins** : échec du script (les votes ne sont plus mis à jour)."
             [ "${{ steps.insee.outcome }}" = "failure" ] && echo "- **Insee** : au moins un indicateur n'a pas pu être mis à jour (valeur précédente conservée)."
             [ "${{ steps.partage.outcome }}" = "failure" ] && echo "- **Partage** : les pages d'aperçu des nouveaux votes n'ont pas pu être générées (le lien partagé renvoie alors vers le vote sans image d'aperçu)."
+            [ "${{ steps.communes.outcome }}" = "failure" ] && echo "- **Communes** : la table communes → circonscriptions n'a pas pu être reconstruite (la recherche par commune garde l'ancienne)."
+            [ "${{ steps.senat.outcome }}" = "failure" ] && echo "- **Sénat** : lecture des scrutins impossible ou nombreux scrutins écartés (format des pages changé ?)."
+            [ "${{ steps.candidats.outcome }}" = "failure" ] && echo "- **Candidats 2027** : lecture de la page Wikipédia des candidatures impossible ou trop de lignes illisibles."
             [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
             [ -s fraicheur.txt ] && cat fraicheur.txt
             [ -s sources.txt ] && cat sources.txt
