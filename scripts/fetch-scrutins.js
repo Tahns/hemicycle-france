@@ -51,6 +51,7 @@ import os from "os";
 import { pipeline } from "stream/promises";
 import { execFile } from "child_process";
 import { promisify } from "util";
+import { construireDeputes } from "./deputes.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -81,6 +82,7 @@ const MANDATS = {};
 const DATA_FILE = path.resolve("data/lois.json");
 const REPORT_FILE = path.resolve("data/fetch-scrutins-report.json");
 const GROUPES_FILE = path.resolve("data/groupes.json");
+const DEPUTES_FILE = path.resolve("data/deputes.json");
 
 // Table de correspondance entre le sigle officiel du groupe (tel que publié par l'AN,
 // résolu via organeRef -> organe.libelleAbrev) et l'identifiant court utilisé sur le site.
@@ -569,6 +571,22 @@ async function main() {
     existing.lastUpdated = new Date().toISOString();
     await writeFile(DATA_FILE, serialiserLois(existing));
     log("data/lois.json mis à jour.");
+  }
+
+  // Députés en fonction : circonscription, statistiques et votes clés (réécrit seulement si le contenu change)
+  const acteurDir = await findDirNamed(organesDir, "acteur");
+  if (acteurDir) {
+    const organeVersId = Object.fromEntries(Object.entries(organeRefToSigle).map(([o, sigle]) => [o, SIGLE_VERS_ID[sigle]]).filter(([, id]) => id));
+    const { cles, deputes } = await construireDeputes(files, acteurDir, organeVersId);
+    const anciens = JSON.parse(await readFile(DEPUTES_FILE, "utf-8").catch(() => "{}"));
+    if (deputes.length >= 500 && JSON.stringify(anciens.deputes) + JSON.stringify(anciens.cles) !== JSON.stringify(deputes) + JSON.stringify(cles) && !DRY_RUN) {
+      await writeFile(DEPUTES_FILE, JSON.stringify({ lastUpdated: new Date().toISOString(), source: "Assemblée nationale — votes nominatifs et AMO30", cles, deputes }) + "\n");
+      log(`data/deputes.json mis à jour (${deputes.length} députés, ${cles.length} votes clés).`);
+    } else if (deputes.length < 500) {
+      warn(`Seulement ${deputes.length} député(s) en fonction trouvé(s) : data/deputes.json n'est pas modifié.`);
+    } else {
+      log(`data/deputes.json : aucun changement (${deputes.length} députés, ${cles.length} votes clés).`);
+    }
   }
 
   // Groupes politiques (présidences, effectifs) : réécrit seulement si le contenu change
