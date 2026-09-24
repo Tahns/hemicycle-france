@@ -49,7 +49,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
-    for (const onglet of ["scrutin", "histo", "deputes", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
@@ -84,6 +84,22 @@ function verifier(cond, message) {
     verifier(/#depute-PA\d+$/.test(page.url()), `${nom} : la fiche député n'a pas de lien direct`);
     verifier((await page.$$("#depute-fiche .stat-card")).length === 4, `${nom} : statistiques du député absentes`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
+
+    await page.goto(base + "#candidats", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$(".candidat-carte")).length >= 5, `${nom} : candidats absents`);
+
+    await page.goto(base + "#senat", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$(".senat-ligne")).length >= 10, `${nom} : scrutins du Sénat absents`);
+
+    // Recherche sur tout le site
+    await page.click(nom === "mobile" ? ".loupe-mobile" : ".masthead-top .bouton-recherche");
+    await page.fill("#recherche-champ", "retraites");
+    await page.waitForTimeout(400);
+    verifier((await page.$$(".recherche-item")).length >= 1, `${nom} : la recherche ne trouve rien`);
+    await page.keyboard.press("Escape");
+    verifier(await page.evaluate(() => document.getElementById("recherche").hidden), `${nom} : la recherche ne se ferme pas`);
 
     await page.goto(base + "#dirigeants", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);

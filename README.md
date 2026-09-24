@@ -13,11 +13,12 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Députés en fonction : circonscription, participation, votes contre leur groupe, vote sur chaque texte et chaque censure | `fetch-scrutins.js` (via `deputes.js`) | votes nominatifs de l'Assemblée + AMO30 | `data/deputes.json` |
 | Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
 | Sondages présidentielle 2027 (dernière enquête de chaque institut, et historique des deux derniers semestres pour la courbe) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
-| Pages d'aperçu pour le partage (titre et image propres sur WhatsApp, X…) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg` |
+| Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
+| Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
+| Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
+| Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
-En cas de nom de domaine propre : changer l'adresse du site dans `scripts/partage.cjs` (constante `SITE`)
-et dans les balises `og:` de `index.html`, puis relancer `node scripts/partage.cjs`.
 
 Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 - scrutins : les votes par groupe sont recoupés avec le total officiel ; les groupes que l'AN publie
@@ -25,13 +26,28 @@ Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 - Insee : l'intitulé officiel de chaque série est vérifié à chaque lecture (série renommée ou arrêtée = refus) ;
 - sondages : chaque hypothèse doit totaliser ~100 %, avec date, échantillon et notice officielle lisibles.
 
+## Nom de domaine (optionnel)
+
+1. Acheter le domaine (par ex. `politique-france.fr`) chez un registraire (OVH, Gandi…).
+2. Chez le registraire, ajouter les enregistrements DNS de GitHub Pages :
+   `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   (et `CNAME www` vers `tahns.github.io`).
+3. Dans GitHub : *Settings → Pages → Custom domain*, saisir le domaine, puis cocher *Enforce HTTPS*.
+   GitHub ajoute un fichier `CNAME` au dépôt.
+4. C'est tout : au prochain passage du workflow, `scripts/partage.cjs` lit `CNAME` et met à jour
+   toutes les adresses (pages d'aperçu, plan du site, `robots.txt`, balises `og:` d'`index.html`).
+
+Référencement : `sitemap.xml` liste l'accueil, les 246 votes clés et les 577 députés. À déclarer une fois
+dans Google Search Console (propriété = adresse du site). `robots.txt` n'est lu par les moteurs qu'à la
+racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
+
 ## Ce qui reste manuel (volontairement)
 
 | Donnée | Fichier | Pourquoi |
 |---|---|---|
 | Condamnations judiciaires | `data/justice.json` | distinguer une condamnation définitive d'un appel demande un jugement humain ; une erreur serait diffamatoire |
 | Chefs de parti | `data/dirigeants.json` | aucune source structurée fiable (Wikidata liste plusieurs chefs « en poste » pour un même parti) |
-| Meetings | `data/meetings.json` | pas d'agenda officiel structuré ; les événements passés sont masqués automatiquement |
+| Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
 | Inflation, déficit public | `data/indicateurs.json` | l'Insee ne publie pas l'inflation en série directe (la recalculer peut différer d'un dixième) ; pas de série de déficit en % du PIB en base 2020 |
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
