@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Décrypter la politique française</title>
+<title>Hémicycle · La politique française, preuves à l'appui</title>
 <meta name="description" content="Ce que votent les députés, groupe par groupe, qui dirige les partis, où en sont les sondages de la présidentielle 2027 et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
 <meta name="theme-color" content="#F5F1E8">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Politique FR">
+<meta name="apple-mobile-web-app-title" content="Hémicycle">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="color-scheme" content="light">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -18,7 +18,8 @@
 <script>if (window.top !== window.self) { try { window.top.location = window.self.location.href; } catch (e) { document.documentElement.style.display = "none"; } }</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="Décrypter la politique française">
+<meta property="og:title" content="Hémicycle · La politique française, preuves à l'appui">
+<meta property="og:site_name" content="Hémicycle">
 <meta property="og:description" content="Ce que votent les députés, les sondages 2027 et les grands chiffres du pays. Chaque information renvoie à sa source.">
 <link rel="canonical" href="https://tahns.github.io/politique-france/">
 <meta property="og:url" content="https://tahns.github.io/politique-france/">
@@ -26,7 +27,8 @@
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="420">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M6 50a26 26 0 0 1 52 0' fill='none' stroke='%23000091' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M20 50a12 12 0 0 1 24 0' fill='none' stroke='%23CE0500' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+<link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
 <script>
   // Thème : clair par défaut ; le mode sombre n'est activé que si le visiteur l'a choisi
   try{ if(localStorage.getItem("theme") === "sombre") document.documentElement.dataset.theme = "sombre"; }catch(e){}
@@ -184,7 +186,12 @@
   }
   .titre-lien{color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:.28em;}
   .titre-lien:hover{text-decoration:none;}
-  .cocarde{width:.72em; height:.72em; flex:0 0 auto;}
+  .logo{width:.95em; height:.95em; flex:0 0 auto; margin-right:.04em;}
+  .logo path{fill:none; stroke-width:8; stroke-linecap:round;}
+  .logo-ext{stroke:#1B3A8C;} .logo-int{stroke:#C8102E;} .logo-point{fill:var(--text);}
+  [data-theme="sombre"] .logo-ext{stroke:#8FA3EE;} [data-theme="sombre"] .logo-int{stroke:#EE5A52;}
+  .devise{display:block; font-family:var(--font-display); font-style:italic; font-weight:500; font-size:clamp(17px,2.2vw,22px); color:var(--accent); margin-bottom:2px;}
+  .masthead-titre h1 + button + p, .masthead-titre h1 + p{margin-top:2px;}
   /* Hors de la une, l'en-tête se fait discret pour laisser la place au contenu */
   @media (min-width:701px){
     body:not([data-page="accueil"]) .masthead-titre{padding:14px 0 12px;}
@@ -922,10 +929,10 @@
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
-    <h1><a href="#accueil" class="titre-lien" data-tab-lien="accueil"><svg class="cocarde" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#1B3A8C"/><circle cx="20" cy="20" r="12.5" fill="#F7F4EC"/><circle cx="20" cy="20" r="6.5" fill="#C8102E"/></svg>Décrypter la politique française</a></h1>
+    <h1><a href="#accueil" class="titre-lien" data-tab-lien="accueil"><svg class="logo" viewBox="4 6 56 56" aria-hidden="true"><path class="logo-ext" d="M8 46a24 24 0 0 1 48 0"/><path class="logo-int" d="M20 46a12 12 0 0 1 24 0"/><circle class="logo-point" cx="32" cy="46" r="4"/></svg>Hémicycle</a></h1>
     <button type="button" class="bouton-recherche loupe-mobile" aria-label="Rechercher sur le site" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 0 0-15a7.5 7.5 0 0 0 0 15z M16 16l5 5"/></svg></button>
-    <p>Ce que votent les députés, qui dirige les partis, où en sont les sondages et les grands chiffres du pays. Chaque information renvoie à sa source.</p>
+    <p><span class="devise">La politique française, preuves à l'appui.</span>Ce que votent les députés, qui dirige les partis, où en sont les sondages et les grands chiffres du pays. Chaque information renvoie à sa source.</p>
   </div>
 </header>
 
@@ -3230,7 +3237,7 @@ async function ouvrirDepute(id){
   document.getElementById("depute-fiche").hidden = false;
   renderDeputeFiche(d);
   majHash("depute-" + id);
-  document.title = `${d.nom} · Décrypter la politique française`;
+  document.title = `${d.nom} · Hémicycle`;
   window.scrollTo({ top:0, behavior:"smooth" });
 }
 
@@ -3490,7 +3497,7 @@ function afficherCarte(numero){
   for(const v of Object.values(loi.votes)){ t.pour += v.pour; t.contre += v.contre; t.abst += v.abst; }
   const carte = document.getElementById("carte-partage");
   carte.innerHTML = `<div>
-      <div class="carte-site">Décrypter la politique française</div>
+      <div class="carte-site">Hémicycle</div>
       <div class="carte-date">Assemblée nationale · ${esc(loi.date)}</div>
       <h1 class="carte-titre">${esc(titreLoi(loi))}</h1>
       <div class="carte-resultat ${loi.resultat}">${loi.resultat === "adopte" ? "Adopté" : "Rejeté"}</div>
@@ -3590,7 +3597,7 @@ function activateTab(tabId){
     else majHash(tabId);
   }
   const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales" })[tabId];
-  document.title = (tabId === "accueil" || !nomPage ? "" : nomPage + " · ") + "Décrypter la politique française";
+  document.title = tabId === "accueil" || !nomPage ? "Hémicycle · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle";
 }
 
 document.querySelectorAll(".tab").forEach(tab=>{
