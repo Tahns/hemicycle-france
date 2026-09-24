@@ -1,4 +1,4 @@
-# Hémicycle — La politique française, preuves à l'appui
+# Hémicycle France — La politique française, preuves à l'appui
 
 Site : https://tahns.github.io/politique-france/ — automatisation
 
