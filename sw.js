@@ -4,9 +4,9 @@
  * la copie en cache ne sert que hors connexion. Polices et icônes, qui ne changent pas : cache d'abord.
  * Incrémenter VERSION pour vider les anciens caches.
  */
-const VERSION = "v1";
+const VERSION = "v2";
 const CACHE = `politique-fr-${VERSION}`;
-const COQUILLE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png"];
+const COQUILLE = ["./", "index.html", "lois-worker.js", "manifest.webmanifest", "icons/icon-192.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(COQUILLE)).then(() => self.skipWaiting()));

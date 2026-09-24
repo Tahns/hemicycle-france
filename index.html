@@ -33,7 +33,6 @@
   // Thème : clair par défaut ; le mode sombre n'est activé que si le visiteur l'a choisi
   try{ if(localStorage.getItem("theme") === "sombre") document.documentElement.dataset.theme = "sombre"; }catch(e){}
 </script>
-<link rel="preload" href="data/lois.json" as="fetch" type="application/json" crossorigin>
 <link rel="preload" href="fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/public-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -2419,7 +2418,14 @@ let HISTORIQUE = []; // toutes les enquêtes valides des deux derniers semestres
 // Loi n° 77-808 du 19 juillet 1977, art. 11 : aucun sondage publié ni commenté la veille et le jour
 // de chaque tour (présidentielle : du samedi 0 h au dimanche 20 h, heure de Paris).
 const TOURS_PRESIDENTIELLE = ["2027-04-18", "2027-05-02"];
-function periodeReserveSondages(maintenant = new Date()){
+let reserveCache = null; // [minute, résultat] : le calcul (fuseau de Paris) est coûteux sur téléphone
+function periodeReserveSondages(maintenant){
+  if(maintenant) return calculReserveSondages(maintenant);
+  const minute = Math.floor(Date.now() / 6e4);
+  if(!reserveCache || reserveCache[0] !== minute) reserveCache = [minute, calculReserveSondages(new Date())];
+  return reserveCache[1];
+}
+function calculReserveSondages(maintenant){
   const p = Object.fromEntries(new Intl.DateTimeFormat("fr-FR", { timeZone:"Europe/Paris", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23" })
     .formatToParts(maintenant).map(x=>[x.type, x.value]));
   const paris = `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
@@ -3682,7 +3688,8 @@ function activateTab(tabId){
   }
   const viewEl = document.getElementById("view-"+tabId);
   if(viewEl) viewEl.classList.add("active");
-  window.scrollTo({top:0, behavior:"smooth"});
+  // Défilement instantané : l'animation vers le haut d'une longue page fige les téléphones
+  if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   if(tabId === "deputes") renderDeputes();
   if(tabId === "senat") renderSenat();
   if(tabId === "sondages"){ renderEvolution(); renderVeille(); }
@@ -3823,31 +3830,68 @@ function completerLoi(l){
 }
 
 // Gros fichier des scrutins (~500 Ko compressés)
+// Décodé dans un Worker (lois-worker.js) : le téléphone reste réactif pendant le chargement.
+// Repli sur un chargement classique si les Workers sont indisponibles.
+function chargerLoisWorker(){
+  return new Promise((resolve, reject)=>{
+    let w;
+    try { w = new Worker("lois-worker.js"); } catch(e){ return reject(e); }
+    const recues = [];
+    w.onmessage = (e)=>{
+      const m = e.data;
+      if(m.erreur){ w.terminate(); reject(new Error(m.erreur)); }
+      else if(m.lois) recues.push(...m.lois);
+      else if(m.fin){ w.terminate(); resolve({ lois: recues, lastUpdated: m.lastUpdated }); }
+    };
+    w.onerror = (e)=>{ w.terminate(); reject(e); };
+    w.postMessage({ url: new URL("data/lois.json", location.href).href });
+  });
+}
 async function loadExternalData(){
-  const loisJson = await lireJSON("data/lois.json");
-  if(loisJson?.lois?.length){ LOIS = loisJson.lois.map(completerLoi); LOIS_MAJ = loisJson.lastUpdated; }
+  let loisJson = null;
+  try { loisJson = await chargerLoisWorker(); }
+  catch(e){ console.warn("Worker indisponible, chargement classique des scrutins", e); loisJson = await lireJSON("data/lois.json"); if(loisJson?.lois) loisJson.lois = loisJson.lois.map(completerLoi); }
+  if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
 }
 
+const DATES_COURTES = new Map(); // toLocaleDateString est lent sur téléphone : résultat mémorisé
 function dateCourte(iso){
+  if(DATES_COURTES.has(iso)) return DATES_COURTES.get(iso);
   const d = new Date(iso);
-  return isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }).replace(/^1 /, "1er ");
+  const r = isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }).replace(/^1 /, "1er ");
+  DATES_COURTES.set(iso, r);
+  return r;
 }
 
+// Rend la main au navigateur entre deux étapes du démarrage : un toucher n'attend jamais la fin de tout
+const cede = () => new Promise(r => (window.scheduler?.yield ? scheduler.yield().then(r) : setTimeout(r, 0)));
 async function initSite(){
   // 1) Petits fichiers de données, puis sections qui ne dépendent pas des scrutins
   await loadPetitesDonnees();
   appliquerCompositionActuelle();
+  await cede();
   renderLeaders();
+  await cede();
   renderJusticeSummary();
+  await cede();
   renderJusticeFilterBar();
+  await cede();
   renderJusticeList();
+  await cede();
   renderMeetings();
+  await cede();
   renderSourceBar();
+  await cede();
   renderSondageAverage();
+  await cede();
   renderEvolution();
+  await cede();
   renderCandidats();
+  await cede();
   renderChiffres();
+  await cede();
   renderBudgetGauges();
+  await cede();
   document.getElementById("accueil-highlight-grid").innerHTML = `<p class="chargement">Chargement des derniers votes de l'Assemblée…</p>`;
   document.getElementById("histo-list").innerHTML = `<p class="chargement">Chargement des scrutins…</p>`;
   document.getElementById("quiz-container").innerHTML = `<p class="chargement">Chargement des votes…</p>`;
@@ -3859,6 +3903,7 @@ async function initSite(){
   // Scrutins du plus récent au plus ancien, quel que soit l'ordre du fichier
   LOIS.sort((a,b)=> (b.numero||0) - (a.numero||0));
   appliquerCompositionActuelle();
+  await cede();
   const dernier = LOIS.find(l=>l.dateISO);
   document.getElementById("scrutin-banner-detail").textContent =
     `${formatNombre(LOIS.length)} scrutins publics de la XVIIᵉ législature${dernier ? ` (dernier : ${dernier.date})` : ""}`;
@@ -3879,16 +3924,27 @@ async function initSite(){
     `${INDICATEURS_MAJ && dateCourte(INDICATEURS_MAJ) ? `<br>Indicateurs : actualisés le ${dateCourte(INDICATEURS_MAJ)}.` : ""}`;
 
   renderCategorieFilter();
+  await cede();
   renderModeToggle();
+  await cede();
   populateLoiSelect();
+  await cede();
   renderPartyChips();
+  await cede();
   renderHistoCategorie();
+  await cede();
   renderHistorique();
+  await cede();
   choisirQuestionsQuiz();
+  await cede();
   renderQuiz();
+  await cede();
   renderChiffres();
+  await cede();
   renderBudgetGauges();
+  await cede();
   renderAccueil();
+  await cede();
 
   DONNEES_CHARGEES = true;
   if(MODE_CARTE){ document.body.classList.add("mode-carte"); document.body.dataset.cartePrete = "1"; return; }
