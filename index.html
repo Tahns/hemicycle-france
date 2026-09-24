@@ -3294,7 +3294,7 @@ async function afficherPresidentielle(el){
   const d = await ELECTIONS.get(dep);
   const r = d?.communes?.[el.dataset.commune];
   if(!r){ el.remove(); return; }
-  const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + " %";
+  const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + "\u202f%";
   const tour = (t, n) => (r[t] || []).map((v, i) => [d.candidats[t][i], v]).sort((a, b) => b[1] - a[1]).slice(0, n).map(([c, v]) => `${esc(c)} ${pct(v)}`).join(" · ");
   el.innerHTML = `<b>Présidentielle 2022 ici</b> : 1er tour ${tour("t1", 3)}${r.t2 ? ` ; 2d tour ${tour("t2", 2)}` : ""}`;
 }
