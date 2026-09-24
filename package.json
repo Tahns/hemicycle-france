@@ -9,6 +9,7 @@
   "scripts": {
     "fetch:scrutins": "node scripts/fetch-scrutins.js",
     "fetch:insee": "node scripts/fetch-insee.js",
+    "check": "node scripts/check-data.js",
     "serve": "python3 -m http.server 8000"
   },
   "license": "MIT"

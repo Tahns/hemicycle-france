@@ -5,6 +5,9 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+concurrency:
+  group: update-data
+  cancel-in-progress: false
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -22,6 +25,8 @@ jobs:
         env:
           INSEE_API_KEY: ${{ secrets.INSEE_API_KEY }}
         continue-on-error: true
+      - name: Contrôler la cohérence des données avant publication
+        run: node scripts/check-data.js
       - name: Committer les changements s'il y en a
         run: |
           git config user.name "github-actions[bot]"
@@ -31,5 +36,6 @@ jobs:
             echo "Aucun changement de données — rien à committer."
           else
             git commit -m "Mise à jour automatique des données ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
