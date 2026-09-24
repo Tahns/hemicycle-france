@@ -266,6 +266,29 @@
   .party-chip .dot{width:9px; height:9px; border-radius:50%;}
   .source-chip .check{display:none;}
   .hemi-mode{margin-bottom:4px;}
+
+  /* Panneau de filtres : même organisation sur toutes les rubriques (étiquette au-dessus de chaque filtre,
+     nombre de résultats et remise à zéro en pied) */
+  .filtres{display:grid; gap:14px; margin-bottom:18px; padding:14px 16px 12px; border:1px solid var(--border); border-radius:3px; background:var(--bg-elevated);}
+  .filtre-label{display:block; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
+  .filtre-label small{font-size:inherit; font-weight:500; letter-spacing:.02em; text-transform:none;}
+  .filtre-groupe{display:grid; gap:7px; min-width:0;}
+  .filtres .theme-filter-bar, .filtres .party-select-bar, .filtre-inline .theme-filter-bar, .filtre-inline .source-bar, .filtre-inline .justice-filter-bar{margin-bottom:0;}
+  .filtres .theme-chip, .filtres .party-chip{background:var(--bg);}
+  .filtres .theme-chip.selected, .filtres .party-chip.selected{background:var(--accent-dim);}
+  .filtre-champs{display:flex; flex-wrap:wrap; gap:12px 16px;}
+  .filtre-champ{display:grid; gap:7px; flex:1 1 240px; min-width:0; max-width:420px;}
+  .filtre-champ-large{flex-basis:320px; max-width:520px;}
+  .filtre-champ input[type="search"], .filtre-champ select{width:100%; background:var(--bg);}
+  .filtres-pied{display:flex; align-items:center; gap:6px 16px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--border-soft); min-height:20px;}
+  .filtres-pied .loi-count{font-size:13.5px; color:var(--text-soft); font-weight:600;}
+  .filtres-reset{font-size:13.5px;}
+  .filtre-mobile{display:none;}
+  .filtre-inline{display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; margin-bottom:16px;}
+  .scrutin-choix{display:flex; align-items:flex-end; flex-wrap:wrap; gap:12px 16px; margin-bottom:22px;}
+  .scrutin-choix-champ{flex:1 1 420px; max-width:none;}
+  .scrutin-choix-champ select{width:100%; background:var(--bg-elevated);}
+  .scrutin-choix-actions{display:flex; align-items:center; gap:16px; min-height:42px;}
   .hemi-mode .theme-chip{font-size:12.5px; padding:4px 9px;}
 
   .resultat-pill{
@@ -752,6 +775,15 @@
     .evolution-bulle.en-dessous{position:static; margin-top:8px; box-shadow:none;}
     .evolution-graphe .etiquette{font-size:11.5px;}
     .theme-chip, .party-chip, .source-chip{flex:0 0 auto; min-height:40px; white-space:nowrap;}
+    .filtres{padding:12px 12px 10px;}
+    /* Dans le panneau, toutes les options restent visibles (deux colonnes) plutôt que cachées dans un défilement */
+    .filtres .theme-filter-bar{display:grid; grid-template-columns:1fr 1fr; gap:6px; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none;}
+    .filtres .theme-chip{justify-content:center; text-align:center; white-space:normal; padding:6px 8px;}
+    .filtres .party-select-bar{display:none;}
+    .filtre-mobile{display:block; width:100%;}
+    .filtre-champ, .filtre-champ-large{flex-basis:100%; max-width:none;}
+    .filtre-inline{display:grid; gap:7px;}
+    .scrutin-choix-champ{flex-basis:100%;}
     .hemi-mode .theme-chip{min-height:36px;}
     .quiz-option{min-height:44px; flex:1 1 0; justify-content:center;}
     .histo-more, .quiz-cta, .quiz-restart{min-height:48px;}
@@ -828,6 +860,9 @@
     .accueil-hero-stat, .accueil-hero-stat + .accueil-hero-stat{padding:12px 10px 10px 0; border-left:none;}
     .accueil-hero-stat:nth-child(even){padding-left:12px; border-left:1px solid var(--border);}
     .justice-status{margin-left:0;}
+    .justice-summary{display:grid; grid-template-columns:repeat(3,1fr);}
+    .justice-summary-card, .justice-summary-card + .justice-summary-card{flex-direction:column; gap:0; padding:10px 8px 10px 0;}
+    .justice-summary-card + .justice-summary-card{padding-left:12px; border-left:1px solid var(--border);}
     .meeting-card{grid-template-columns:58px 1fr; gap:12px;}
     .loi-provenance-row{flex-direction:column; gap:0;}
   }
@@ -922,14 +957,29 @@
       <p class="chapo">Chaque scrutin public de la législature, groupe par groupe et siège par siège. Choisissez un texte : l'hémicycle montre qui a voté pour, qui a voté contre et qui n'a pas pris part au vote.
         <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées chaque matin.</small></p>
     </div>
-    <div class="theme-filter-bar" id="theme-filter-bar"></div>
-    <div class="scrutin-controls">
-      <input type="search" id="loi-search" placeholder="Chercher un texte : retraites, logement…" aria-label="Rechercher un scrutin" />
-      <select id="loi-theme" aria-label="Thème (commission saisie au fond)"><option value="">Tous les thèmes</option></select>
-      <select id="loi-select" aria-label="Choisir un scrutin"></select>
-      <span class="resultat-pill" id="resultat-pill"></span>
-      <span class="loi-count" id="loi-count"></span>
-      <button type="button" class="lien-bouton bouton-partage" data-partage="scrutin">Partager ce vote</button>
+    <div class="filtres" role="search" aria-label="Filtrer les scrutins">
+      <div class="filtre-groupe">
+        <span class="filtre-label" id="loi-type-label">Type de scrutin</span>
+        <div class="theme-filter-bar" id="theme-filter-bar" role="group" aria-labelledby="loi-type-label"></div>
+      </div>
+      <div class="filtre-champs">
+        <label class="filtre-champ"><span class="filtre-label">Rechercher</span>
+          <input type="search" id="loi-search" placeholder="Retraites, logement, budget…" /></label>
+        <label class="filtre-champ"><span class="filtre-label">Thème <small>(commission saisie au fond)</small></span>
+          <select id="loi-theme"><option value="">Tous les thèmes</option></select></label>
+      </div>
+      <div class="filtres-pied">
+        <span class="loi-count" id="loi-count" aria-live="polite"></span>
+        <button type="button" class="lien-bouton filtres-reset" id="loi-reset" hidden>Réinitialiser les filtres</button>
+      </div>
+    </div>
+    <div class="scrutin-choix">
+      <label class="filtre-champ scrutin-choix-champ"><span class="filtre-label">Scrutin affiché</span>
+        <select id="loi-select"></select></label>
+      <div class="scrutin-choix-actions">
+        <span class="resultat-pill" id="resultat-pill"></span>
+        <button type="button" class="lien-bouton bouton-partage" data-partage="scrutin">Partager ce vote</button>
+      </div>
     </div>
 
     <div class="stat-cards" id="stat-cards"></div>
@@ -954,11 +1004,26 @@
       <h2>Qui vote quoi</h2>
       <p class="chapo">Choisissez un groupe pour retrouver ses votes, texte par texte, et voir avec quels autres groupes il se retrouve le plus souvent.</p>
     </div>
-    <div class="party-select-bar" id="party-select-bar"></div>
-    <div class="theme-filter-bar" id="histo-cat-bar"></div>
-    <div class="scrutin-controls">
-      <input type="search" id="histo-search" placeholder="Chercher un texte dans ses votes…" aria-label="Rechercher dans l'historique" />
-      <select id="histo-theme" aria-label="Thème (commission saisie au fond)"><option value="">Tous les thèmes</option></select>
+    <div class="filtres" role="search" aria-label="Filtrer les votes du groupe">
+      <div class="filtre-groupe">
+        <span class="filtre-label" id="histo-groupe-label">Groupe</span>
+        <div class="party-select-bar" id="party-select-bar" role="group" aria-labelledby="histo-groupe-label"></div>
+        <select id="party-select" class="filtre-mobile" aria-labelledby="histo-groupe-label"></select>
+      </div>
+      <div class="filtre-groupe">
+        <span class="filtre-label" id="histo-type-label">Type de scrutin</span>
+        <div class="theme-filter-bar" id="histo-cat-bar" role="group" aria-labelledby="histo-type-label"></div>
+      </div>
+      <div class="filtre-champs">
+        <label class="filtre-champ"><span class="filtre-label">Rechercher dans ses votes</span>
+          <input type="search" id="histo-search" placeholder="Retraites, logement, budget…" /></label>
+        <label class="filtre-champ"><span class="filtre-label">Thème <small>(commission saisie au fond)</small></span>
+          <select id="histo-theme"><option value="">Tous les thèmes</option></select></label>
+      </div>
+      <div class="filtres-pied">
+        <span class="loi-count" id="histo-count" aria-live="polite"></span>
+        <button type="button" class="lien-bouton filtres-reset" id="histo-reset" hidden>Réinitialiser les filtres</button>
+      </div>
     </div>
     <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
@@ -972,10 +1037,17 @@
         <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés chaque matin.</small></p>
     </div>
     <div id="deputes-recherche">
-      <div class="scrutin-controls">
-        <input type="search" id="depute-search" placeholder="Votre commune, un nom ou un département : Pessac, Dupont, 33…" aria-label="Rechercher un député par commune, nom ou département" />
-        <select id="depute-dep" aria-label="Choisir un département"><option value="">Tous les départements</option></select>
-        <span class="loi-count" id="depute-count"></span>
+      <div class="filtres" role="search" aria-label="Trouver un député">
+        <div class="filtre-champs">
+          <label class="filtre-champ filtre-champ-large"><span class="filtre-label">Commune, nom ou numéro de département</span>
+            <input type="search" id="depute-search" placeholder="Pessac, Dupont, 33…" /></label>
+          <label class="filtre-champ"><span class="filtre-label">Département</span>
+            <select id="depute-dep"><option value="">Tous les départements</option></select></label>
+        </div>
+        <div class="filtres-pied">
+          <span class="loi-count" id="depute-count" aria-live="polite"></span>
+          <button type="button" class="lien-bouton filtres-reset" id="depute-reset" hidden>Réinitialiser la recherche</button>
+        </div>
       </div>
       <div id="deputes-communes"></div>
       <div class="depute-grid" id="deputes-liste"></div>
@@ -989,10 +1061,19 @@
       <p class="chapo">Les scrutins publics du Sénat, groupe par groupe. Un texte de loi passe par les deux chambres : ce que l'Assemblée adopte, le Sénat peut le modifier ou le rejeter, et inversement.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
     </div>
-    <div class="theme-filter-bar" id="senat-filtre" role="group" aria-label="Type de scrutin"></div>
-    <div class="scrutin-controls">
-      <input type="search" id="senat-search" placeholder="Chercher un texte : agriculture, fin de vie…" aria-label="Rechercher un scrutin du Sénat" />
-      <span class="loi-count" id="senat-count"></span>
+    <div class="filtres" role="search" aria-label="Filtrer les scrutins du Sénat">
+      <div class="filtre-groupe">
+        <span class="filtre-label" id="senat-type-label">Type de scrutin</span>
+        <div class="theme-filter-bar" id="senat-filtre" role="group" aria-labelledby="senat-type-label"></div>
+      </div>
+      <div class="filtre-champs">
+        <label class="filtre-champ"><span class="filtre-label">Rechercher</span>
+          <input type="search" id="senat-search" placeholder="Agriculture, fin de vie…" /></label>
+      </div>
+      <div class="filtres-pied">
+        <span class="loi-count" id="senat-count" aria-live="polite"></span>
+        <button type="button" class="lien-bouton filtres-reset" id="senat-reset" hidden>Réinitialiser les filtres</button>
+      </div>
     </div>
     <div id="senat-liste"></div>
   </section>
@@ -1033,7 +1114,8 @@
       <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
-    <div class="justice-filter-bar" id="justice-filter-bar"></div>
+    <div class="filtre-inline"><span class="filtre-label" id="justice-parti-label">Parti</span>
+      <div class="justice-filter-bar" id="justice-filter-bar" role="group" aria-labelledby="justice-parti-label"></div></div>
     <div id="justice-list"></div>
   </section>
 
@@ -1043,7 +1125,8 @@
       <p class="chapo">Les intentions de vote au premier tour. Pas de moyenne maison : chaque institut a sa méthode, alors ses chiffres sont affichés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
     </div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button></div>
-    <div class="source-bar" id="source-bar"></div>
+    <div class="filtre-inline"><span class="filtre-label" id="sondage-institut-label">Institut</span>
+      <div class="source-bar" id="source-bar" role="group" aria-labelledby="sondage-institut-label"></div></div>
     <div class="sondage-avg-card">
       <h3 id="sondage-institut-title">Intentions de vote au premier tour</h3>
       <div class="sondage-avg-sub" id="sondage-avg-sub"></div>
@@ -1068,7 +1151,8 @@
       <p class="chapo">Les personnalités qui ont annoncé leur candidature, avec leur parti, leurs fonctions et la source de leur annonce. Être candidat déclaré ne suffit pas : il faudra réunir 500 parrainages d'élus, et la liste officielle ne sera arrêtée par le Conseil constitutionnel qu'au printemps 2027.
         <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue chaque matin.</small></p>
     </div>
-    <div class="theme-filter-bar" id="candidats-tri" role="group" aria-label="Trier les candidats"></div>
+    <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
+      <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
     <div class="candidat-grid" id="candidats-liste"></div>
   </section>
 
@@ -1778,7 +1862,8 @@ function populateLoiSelect(){
   remplirThemes("loi-theme");
   const filtered = loisFiltrees(document.getElementById("loi-search").value, selectedCategorie, document.getElementById("loi-theme").value);
   document.getElementById("loi-count").textContent =
-    filtered.length ? `${formatNombre(filtered.length)} scrutin${filtered.length>1?"s":""}` : "";
+    filtered.length ? `${formatNombre(filtered.length)} scrutin${filtered.length>1?"s":""}` : "Aucun scrutin";
+  document.getElementById("loi-reset").hidden = selectedCategorie === "texte" && !document.getElementById("loi-search").value && !document.getElementById("loi-theme").value;
 
   if(filtered.length === 0){
     sel.innerHTML = `<option value="">Aucun scrutin ne correspond</option>`;
@@ -1805,7 +1890,7 @@ function populateLoiSelect(){
 function renderCategorieFilter(){
   const bar = document.getElementById("theme-filter-bar");
   bar.innerHTML = CATEGORIES.map(c=>`
-    <button type="button" class="theme-chip ${c.id===selectedCategorie?'selected':''}" data-cat="${c.id}">${c.label}</button>
+    <button type="button" class="theme-chip ${c.id===selectedCategorie?'selected':''}" aria-pressed="${c.id===selectedCategorie}" data-cat="${c.id}">${c.label}</button>
   `).join("");
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
@@ -1819,7 +1904,7 @@ function renderCategorieFilter(){
 function renderModeToggle(){
   const bar = document.getElementById("hemi-mode");
   bar.innerHTML = [["votes","Couleur : votes"],["groupes","Couleur : groupes"]].map(([id,label])=>`
-    <button type="button" class="theme-chip ${id===modeHemicycle?'selected':''}" data-mode="${id}">${label}</button>
+    <button type="button" class="theme-chip ${id===modeHemicycle?'selected':''}" aria-pressed="${id===modeHemicycle}" data-mode="${id}">${label}</button>
   `).join("");
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
@@ -1829,6 +1914,14 @@ function renderModeToggle(){
     });
   });
 }
+
+document.getElementById("loi-reset").addEventListener("click", ()=>{
+  selectedCategorie = "texte";
+  document.getElementById("loi-search").value = "";
+  document.getElementById("loi-theme").value = "";
+  renderCategorieFilter();
+  populateLoiSelect();
+});
 
 let rechercheTimer = null;
 document.getElementById("loi-search").addEventListener("input", ()=>{
@@ -1972,7 +2065,7 @@ let histoLimite = 50;
 function renderPartyChips(){
   const bar = document.getElementById("party-select-bar");
   bar.innerHTML = PARTIES.map(p=>`
-    <button type="button" class="party-chip ${p.id===selectedPartyId?'selected':''}" data-id="${p.id}">
+    <button type="button" class="party-chip ${p.id===selectedPartyId?'selected':''}" aria-pressed="${p.id===selectedPartyId}" data-id="${p.id}">
       <span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}
     </button>
   `).join("");
@@ -1984,12 +2077,29 @@ function renderPartyChips(){
       renderHistorique();
     });
   });
+  const sel = document.getElementById("party-select");
+  sel.innerHTML = PARTIES.map(p=>`<option value="${esc(p.id)}">${esc(p.nom)}</option>`).join("");
+  sel.value = selectedPartyId;
 }
+document.getElementById("party-select").addEventListener("change", e=>{
+  selectedPartyId = e.target.value;
+  histoLimite = 50;
+  renderPartyChips();
+  renderHistorique();
+});
+document.getElementById("histo-reset").addEventListener("click", ()=>{
+  histoCategorie = "texte";
+  histoLimite = 50;
+  document.getElementById("histo-search").value = "";
+  document.getElementById("histo-theme").value = "";
+  renderHistoCategorie();
+  renderHistorique();
+});
 
 function renderHistoCategorie(){
   const bar = document.getElementById("histo-cat-bar");
   bar.innerHTML = CATEGORIES.map(c=>`
-    <button type="button" class="theme-chip ${c.id===histoCategorie?'selected':''}" data-cat="${c.id}">${c.label}</button>
+    <button type="button" class="theme-chip ${c.id===histoCategorie?'selected':''}" aria-pressed="${c.id===histoCategorie}" data-cat="${c.id}">${c.label}</button>
   `).join("");
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
@@ -2034,6 +2144,8 @@ function renderHistorique(){
   renderProximite(party, liste);
   document.getElementById("histo-party-title").textContent =
     `Ses votes : ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
+  document.getElementById("histo-count").textContent = liste.length ? `${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}` : "Aucun scrutin";
+  document.getElementById("histo-reset").hidden = histoCategorie === "texte" && !document.getElementById("histo-search").value && !document.getElementById("histo-theme").value;
 
   const list = document.getElementById("histo-list");
   if(liste.length === 0){
@@ -2442,7 +2554,7 @@ function renderCandidats(){
   if(CANDIDATURES_MAJ && dateCourte(CANDIDATURES_MAJ)) document.getElementById("candidats-maj").textContent =
     `${CANDIDATURES.length} candidatures d'après la page Wikipédia des candidatures, relue le ${dateCourte(CANDIDATURES_MAJ)}. Chaque annonce renvoie à l'article qui la rapporte.`;
   const tris = [["annonce","Annonce la plus récente"], ["sondages","Score dans les sondages"], ["nom","Ordre alphabétique"]];
-  document.getElementById("candidats-tri").innerHTML = tris.map(([id,l])=>`<button type="button" class="theme-chip ${candidatsTri===id?"selected":""}" data-tri="${id}">${l}</button>`).join("");
+  document.getElementById("candidats-tri").innerHTML = tris.map(([id,l])=>`<button type="button" class="theme-chip ${candidatsTri===id?"selected":""}" aria-pressed="${candidatsTri===id}" data-tri="${id}">${l}</button>`).join("");
   document.querySelectorAll("#candidats-tri .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ candidatsTri = b.dataset.tri; renderCandidats(); }));
 
   const nomFamille = c => c.nom.split(" ").slice(1).join(" ");
@@ -2699,7 +2811,7 @@ function renderJusticeFilterBar(){
   const bar = document.getElementById("justice-filter-bar");
   bar.innerHTML = partisConcernes.map(pid=>{
     const label = pid==="Tous" ? "Tous" : pid;
-    return `<div class="theme-chip ${pid===justiceFiltrePartiActif?'selected':''}" data-parti="${pid}">${label}</div>`;
+    return `<button type="button" class="theme-chip ${pid===justiceFiltrePartiActif?'selected':''}" aria-pressed="${pid===justiceFiltrePartiActif}" data-parti="${esc(pid)}">${esc(label)}</button>`;
   }).join("");
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
@@ -2899,12 +3011,13 @@ async function renderSenat(){
   if(SENAT_MAJ && dateCourte(SENAT_MAJ)) document.getElementById("senat-maj").textContent =
     `${formatNombre(SENAT.length)} scrutins publics depuis octobre ${Math.min(...SENAT.map(s=>s.session))}, d'après les pages officielles du Sénat (actualisées le ${dateCourte(SENAT_MAJ)}). Les votes par groupe sont recoupés avec le total officiel.`;
   document.getElementById("senat-filtre").innerHTML = [["texte","Textes (vote final)"],["tous","Tous les scrutins"]]
-    .map(([id,l])=>`<button type="button" class="theme-chip ${senatFiltre===id?"selected":""}" data-f="${id}">${l}</button>`).join("");
+    .map(([id,l])=>`<button type="button" class="theme-chip ${senatFiltre===id?"selected":""}" aria-pressed="${senatFiltre===id}" data-f="${id}">${l}</button>`).join("");
   document.querySelectorAll("#senat-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ senatFiltre = b.dataset.f; senatLimite = 40; renderSenat(); }));
 
   const q = norm(document.getElementById("senat-search").value.trim());
   const res = SENAT.filter(s => (senatFiltre === "tous" || categorieSenat(s) === "texte") && (!q || norm(s.titre).includes(q)));
-  document.getElementById("senat-count").textContent = `${formatNombre(res.length)} scrutin${res.length>1?"s":""}`;
+  document.getElementById("senat-count").textContent = res.length ? `${formatNombre(res.length)} scrutin${res.length>1?"s":""}` : "Aucun scrutin";
+  document.getElementById("senat-reset").hidden = senatFiltre === "texte" && !q;
   if(!res.length){ liste.innerHTML = `<p class="no-result-msg">Aucun scrutin ne correspond à cette recherche.</p>`; return; }
   liste.innerHTML = res.slice(0, senatLimite).map(s=>{
     const groupes = Object.keys(GROUPES_SENAT).filter(g=>s.groupes[g]).map(g=>{
@@ -2935,6 +3048,11 @@ async function renderSenat(){
   document.getElementById("senat-plus")?.addEventListener("click", ()=>{ senatLimite += 40; renderSenat(); });
 }
 let senatRechercheTimer;
+document.getElementById("senat-reset").addEventListener("click", ()=>{
+  senatFiltre = "texte"; senatLimite = 40;
+  document.getElementById("senat-search").value = "";
+  renderSenat();
+});
 document.getElementById("senat-search").addEventListener("input", ()=>{
   clearTimeout(senatRechercheTimer);
   senatRechercheTimer = setTimeout(()=>{ senatLimite = 40; renderSenat(); }, 150);
@@ -3007,7 +3125,8 @@ async function renderDeputes(){
   }
   const res = DEPUTES.filter(d => (!dep || d.numDep === dep) &&
     (!q || norm(d.nom).includes(q) || norm(d.dep).includes(q) || norm(d.numDep) === q));
-  document.getElementById("depute-count").textContent = res.length || !blocCommunes ? `${res.length} député${res.length>1?"s":""}` : "";
+  document.getElementById("depute-count").textContent = res.length || !blocCommunes ? `${formatNombre(res.length)} député${res.length>1?"s":""}` : "Communes trouvées";
+  document.getElementById("depute-reset").hidden = !q && !dep;
   document.getElementById("deputes-communes").innerHTML = blocCommunes;
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
   if(!res.length){ liste.innerHTML = blocCommunes ? "" : `<p class="no-result-msg">Aucun député ni aucune commune ne correspond à cette recherche.</p>`; return; }
@@ -3111,7 +3230,7 @@ function renderDeputeFiche(d){
     <p class="depute-note">La participation ne compte que les scrutins publics en séance. Beaucoup ont lieu pendant les réunions de commission, et les votes à main levée ne sont pas nominatifs : un taux bas ne veut pas dire que ${d.f ? "la députée" : "le député"} ne travaille pas. Un député peut aussi voter par délégation pour un collègue absent.</p>
     <h3 class="histo-title">Ses votes sur les textes et les motions de censure</h3>
     <div class="theme-filter-bar" id="depute-filtre">
-      ${[["tous","Tout"],["texte","Textes (vote final)"],["censure","Confiance et censure"]].map(([id,l])=>`<button type="button" class="theme-chip ${deputeFiltreVotes===id?"selected":""}" data-f="${id}">${l}</button>`).join("")}
+      ${[["tous","Tout"],["texte","Textes (vote final)"],["censure","Confiance et censure"]].map(([id,l])=>`<button type="button" class="theme-chip ${deputeFiltreVotes===id?"selected":""}" aria-pressed="${deputeFiltreVotes===id}" data-f="${id}">${l}</button>`).join("")}
     </div>
     <div>${lignes.length ? lignes.map(({ numero, code, loi })=>{
       const [libelle, classe] = LIB[code] || LIB["-"];
@@ -3141,6 +3260,12 @@ document.getElementById("depute-search").addEventListener("input", ()=>{
   deputeRechercheTimer = setTimeout(()=>{ deputeLimite = 60; renderDeputes(); }, 150);
 });
 document.getElementById("depute-dep").addEventListener("change", ()=>{ deputeLimite = 60; renderDeputes(); });
+document.getElementById("depute-reset").addEventListener("click", ()=>{
+  document.getElementById("depute-search").value = "";
+  document.getElementById("depute-dep").value = "";
+  deputeLimite = 60;
+  renderDeputes();
+});
 
 /* ---------- Recherche sur tout le site (touche « / ») ---------- */
 
