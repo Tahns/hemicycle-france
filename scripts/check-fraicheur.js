@@ -47,6 +47,13 @@ const plusRecent = sondages?.instituts?.[0]?.dateFin;
 if (!plusRecent) alertes.push("Sondages : aucune enquête dans data/sondages.json.");
 else if (joursDepuis(plusRecent) > 30) alertes.push(`Sondages : la dernière enquête retenue date du ${plusRecent} — la page Wikipédia a peut-être changé de format (voir les avertissements de fetch-sondages.js).`);
 
+// Veille : une enquête déposée à la Commission des sondages dont les chiffres ne sont toujours pas relevés
+const veille = await lire("data/sondages-veille.json");
+for (const e of veille?.enquetes || []) {
+  if (!e.integre && joursDepuis(e.terrain.fin) > 4) alertes.push(`Sondages : l'enquête ${e.institut}${e.media ? ` (${e.media})` : ""}, terrain terminé le ${e.terrain.fin}, est déposée à la Commission des sondages (${e.notice}) mais ses chiffres ne sont toujours pas relevés sur la liste Wikipédia.`);
+}
+if (veille?.lastUpdated && joursDepuis(veille.lastUpdated.slice(0, 10)) > 3) alertes.push(`Sondages : la veille de la Commission des sondages n'a pas tourné depuis le ${veille.lastUpdated.slice(0, 10)} (voir veille-sondages.js).`);
+
 const indic = await lire("data/indicateurs.json");
 const chomage = indic?.indicateurs?.find((i) => i.nom === "Chômage");
 const trimestre = chomage?.date?.match(/(\d)(?:ᵉʳ|ᵉ) trimestre (\d{4})/);

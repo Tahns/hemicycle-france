@@ -65,6 +65,11 @@ function verifier(cond, message) {
     const etatFiltres = () => page.evaluate(() => ({ n: document.getElementById("loi-count").textContent, theme: document.getElementById("loi-theme").value,
       reset: document.getElementById("loi-reset").hidden, type: document.querySelector("#theme-filter-bar .selected")?.dataset.cat }));
     const avant = await etatFiltres();
+    if (nom === "mobile") {
+      // Sur téléphone, les filtres sont repliés derrière un bouton qui affiche le nombre de résultats
+      verifier(!(await page.isVisible("#loi-theme")) && /scrutin/.test(await page.textContent("#view-scrutin .filtres-bouton")), `${nom} : filtres non repliés ou résumé absent`);
+      await page.click("#view-scrutin .filtres-bouton");
+    }
     await page.selectOption("#loi-theme", "Défense");
     await page.waitForTimeout(200);
     const filtre = await etatFiltres();

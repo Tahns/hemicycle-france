@@ -29,7 +29,7 @@ const { chromium } = require("playwright");
 const RACINE = path.resolve(__dirname, "..");
 const CNAME = fs.existsSync(path.join(RACINE, "CNAME")) ? fs.readFileSync(path.join(RACINE, "CNAME"), "utf-8").trim().split(/\s+/)[0] : null;
 const SITE = process.env.SITE_URL || (CNAME ? `https://${CNAME}/` : "https://tahns.github.io/politique-france/");
-const NOM_SITE = "Hémicycle";
+const NOM_SITE = "Hémicycle France";
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".woff2": "font/woff2", ".png": "image/png", ".css": "text/css" };
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -172,7 +172,7 @@ function serveur() {
       renderHemicycle();
       document.getElementById("carte-partage").innerHTML = `<div>
           <div class="carte-site">${adresse}</div>
-          <h1 class="carte-titre" style="font-size:72px">Hémicycle</h1><div class="carte-date" style="font-size:24px">La politique française, preuves à l'appui</div>
+          <h1 class="carte-titre" style="font-size:60px">Hémicycle France</h1><div class="carte-date" style="font-size:24px">La politique française, preuves à l'appui</div>
           <div class="carte-chiffres">Ce que votent les députés, les sondages de 2027 et les grands chiffres du pays. Chaque information renvoie à sa source.</div>
         </div>
         <div class="carte-hemi">${document.getElementById("hemicycle").outerHTML.replace(' id="hemicycle"', "")}</div>`;

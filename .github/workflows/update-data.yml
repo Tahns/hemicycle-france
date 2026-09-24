@@ -33,6 +33,13 @@ jobs:
         run: node scripts/fetch-sondages.js
         continue-on-error: true
 
+      - name: Veille des sondages (notices de la Commission des sondages)
+        id: veille
+        run: |
+          npm install --no-save --no-package-lock pdfjs-dist@4
+          node scripts/veille-sondages.js
+        continue-on-error: true
+
       - name: Communes et circonscriptions (reconstruit tous les 90 jours)
         id: communes
         run: node scripts/fetch-communes.js
@@ -87,7 +94,7 @@ jobs:
 
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -102,6 +109,7 @@ jobs:
             [ "${{ steps.senat.outcome }}" = "failure" ] && echo "- **Sénat** : lecture des scrutins impossible ou nombreux scrutins écartés (format des pages changé ?)."
             [ "${{ steps.dirigeants.outcome }}" = "failure" ] && echo "- **Chefs de parti** : au moins une infobox Wikipédia n'a pas pu être lue (entrée conservée)."
             [ "${{ steps.candidats.outcome }}" = "failure" ] && echo "- **Candidats 2027** : lecture de la page Wikipédia des candidatures impossible ou trop de lignes illisibles."
+            [ "${{ steps.veille.outcome }}" = "failure" ] && echo "- **Veille des sondages** : liste ou notices de la Commission des sondages illisibles."
             [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
             [ -s fraicheur.txt ] && cat fraicheur.txt
             [ -s sources.txt ] && cat sources.txt

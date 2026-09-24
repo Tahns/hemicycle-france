@@ -5,7 +5,13 @@
  * qui se déduisent du numéro ne sont pas écrits dans le fichier (−20 % de poids, −100 Ko compressés) :
  * id, sourceUrl, sourceLabel, source, reel, le thème par défaut et l'adresse du dossier législatif. Ils sont reconstitués à la lecture,
  * par ces fonctions côté scripts et par completerLoi() dans index.html (même règle).
+ * Les votes par groupe sont écrits en liste [pour, contre, abstention, membres] plutôt qu'en objet
+ * (−40 % de poids : le fichier est lu sur téléphone au chargement du site).
  */
+
+const CHAMPS_VOTE = ["pour", "contre", "abst", "membres"];
+const voteObjet = (v) => Array.isArray(v) ? Object.fromEntries(CHAMPS_VOTE.map((k, i) => [k, v[i] ?? 0])) : v;
+const voteListe = (v) => v && !Array.isArray(v) && Object.keys(v).every((k) => CHAMPS_VOTE.includes(k)) ? CHAMPS_VOTE.map((k) => v[k] ?? 0) : v;
 
 const LEGISLATURE = "17";
 
@@ -24,6 +30,7 @@ function deduits(numero) {
 
 /** Reconstitue les champs déduits (à la lecture du fichier). */
 export function completer(l) {
+  if (l.votes) for (const g of Object.keys(l.votes)) l.votes[g] = voteObjet(l.votes[g]);
   if (l.numero === undefined) return l;
   const d = deduits(l.numero);
   for (const k of Object.keys(d)) if (l[k] === undefined) l[k] = d[k];
@@ -33,6 +40,7 @@ export function completer(l) {
 
 /** Retire les champs égaux à leur valeur déduite (à l'écriture du fichier). */
 export function compacter(l) {
+  if (l.votes) l = { ...l, votes: Object.fromEntries(Object.entries(l.votes).map(([g, v]) => [g, voteListe(v)])) };
   if (l.numero === undefined) return l;
   const d = deduits(l.numero);
   const sortie = {};
