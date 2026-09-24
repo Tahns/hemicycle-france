@@ -1,42 +1,45 @@
 # Décrypter la politique française — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
-automatiquement à partir de sources officielles :
+automatiquement, chaque jour, à partir de sources officielles.
 
-- **Assemblée nationale** (open data officiel) → `scripts/fetch-scrutins.js` → `data/lois.json`
-- **INSEE** (API BDM officielle) → `scripts/fetch-insee.js` → `data/indicateurs.json`
-- **GitHub Actions** (`.github/workflows/update-data.yml`) exécute les deux scripts chaque
-  jour, contrôle la cohérence des fichiers (`scripts/check-data.js`) et ne republie que si
-  de nouvelles données valides sont trouvées.
+## Ce qui est automatique
 
-## Ce qui est déjà automatisable dès maintenant
+| Donnée | Script | Source | Fichier |
+|---|---|---|---|
+| Scrutins, résultat, votes par groupe | `fetch-scrutins.js` | open data de l'Assemblée nationale | `data/lois.json` |
+| Titre court du texte, auteur (Gouvernement, député·e et son groupe, sénateur·rice) | `fetch-scrutins.js` | dossiers législatifs de l'Assemblée | `data/lois.json` |
+| Présidences et effectifs des groupes | `fetch-scrutins.js` | open data de l'Assemblée (AMO30) | `data/groupes.json` |
+| Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
+| Sondages présidentielle 2027 (dernière enquête de chaque institut) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
+| Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
-- **Scrutins de l'Assemblée nationale** : entièrement automatisé. Le script rejette
-  activement tout scrutin dont il n'arrive pas à vérifier la cohérence des chiffres
-  (voir les commentaires dans `scripts/fetch-scrutins.js`) plutôt que de publier une
-  donnée potentiellement fausse. Chaque scrutin porte son numéro, son type de vote
-  (ordinaire, solennel, motion de censure), son résultat officiel et l'effectif de chaque
-  groupe au moment du vote. Les groupes que l'AN publie sans identifiant (`PO0`) sont
-  retrouvés à partir des députés nominativement listés, jamais devinés.
-- **Annotations manuelles** : on peut ajouter à la main, sur n'importe quelle entrée de
-  `data/lois.json`, les champs `titreCourt`, `theme`, `proposePar`, `groupeMoteur` ou
-  `contexte`. Ils sont conservés par le script, y compris lors d'une reconstruction.
-- **Chômage (INSEE)** : automatisé, idBank vérifié (`001688527`).
+Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
+- scrutins : les votes par groupe sont recoupés avec le total officiel ; les groupes que l'AN publie
+  sans identifiant (`PO0`) sont retrouvés à partir des députés nommés dans le vote ;
+- Insee : l'intitulé officiel de chaque série est vérifié à chaque lecture (série renommée ou arrêtée = refus) ;
+- sondages : chaque hypothèse doit totaliser ~100 %, avec date, échantillon et notice officielle lisibles.
 
-## Ce qui nécessite encore un peu de travail avant automatisation complète
+## Ce qui reste manuel (volontairement)
 
-- **Inflation, population, déficit, dette (INSEE)** : les idBank de ces séries ne sont
-  pas encore renseignés dans `scripts/fetch-insee.js` (marqués `TODO` dans le fichier) —
-  je n'ai pas voulu deviner un identifiant au risque de publier la mauvaise série.
-  Pour les compléter : aller sur [insee.fr](https://www.insee.fr), chercher la série
-  voulue (ex. "indice des prix à la consommation ensemble des ménages"), ouvrir sa page
-  "Séries chronologiques", relever l'identifiant à 9 chiffres affiché en haut de page,
-  et le coller dans le `idBank: null` correspondant.
-- **Justice & politique** : volontairement laissé en mise à jour manuelle — distinguer une
-  condamnation définitive d'un appel en cours demande un jugement humain qu'un script ne
-  doit pas prendre à ma place.
-- **Sondages, meetings** : pas de flux structuré officiel identifié ; mise à jour manuelle
-  pour l'instant.
+| Donnée | Fichier | Pourquoi |
+|---|---|---|
+| Condamnations judiciaires | `data/justice.json` | distinguer une condamnation définitive d'un appel demande un jugement humain ; une erreur serait diffamatoire |
+| Chefs de parti | `data/dirigeants.json` | aucune source structurée fiable (Wikidata liste plusieurs chefs « en poste » pour un même parti) |
+| Meetings | `data/meetings.json` | pas d'agenda officiel structuré ; les événements passés sont masqués automatiquement |
+| Inflation, déficit public | `data/indicateurs.json` | l'Insee ne publie pas l'inflation en série directe (la recalculer peut différer d'un dixième) ; pas de série de déficit en % du PIB en base 2020 |
+
+Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
+
+## Surveillance
+
+- `scripts/check-data.js` contrôle la cohérence de tous les fichiers `data/` avant chaque publication.
+- `scripts/check-fraicheur.js` vérifie que les données se mettent bien à jour (votes pendant la
+  session parlementaire, sondages de moins de 30 jours, chômage du dernier trimestre publié).
+- En cas d'échec d'une source ou de données périmées, le workflow ouvre (ou complète) un ticket
+  GitHub avec l'étiquette `alerte-donnees` : GitHub vous notifie par e-mail.
+- `.github/workflows/ci.yml` lance ces contrôles et un test du site dans un vrai navigateur
+  (`tests/smoke.cjs`, ordinateur et mobile) à chaque modification.
 
 ## Déploiement (à faire une fois)
 
@@ -54,13 +57,7 @@ automatiquement à partir de sources officielles :
    branche `main`, dossier `/ (root)`. Le site sera alors accessible à une adresse du
    type `https://<ton-compte>.github.io/<ton-repo>/`.
 
-3. **(Optionnel mais recommandé) Ajouter la clé INSEE** pour automatiser les indicateurs :
-   - Créer un compte gratuit sur [portail-api.insee.fr](https://portail-api.insee.fr)
-   - Souscrire à l'API **BDM V1**, générer une clé
-   - Dans le dépôt GitHub : Settings → Secrets and variables → Actions → New repository
-     secret → nom `INSEE_API_KEY`, valeur = la clé générée
-
-4. **Vérifier que l'automatisation tourne** : onglet "Actions" du dépôt → le workflow
+3. **Vérifier que l'automatisation tourne** : onglet "Actions" du dépôt → le workflow
    "Mise à jour automatique des données" doit apparaître et pouvoir être lancé manuellement
    (bouton "Run workflow") pour un premier test, avant d'attendre le déclenchement quotidien.
 
@@ -83,7 +80,8 @@ Pour tester un script d'automatisation sans rien publier :
 node scripts/fetch-scrutins.js --dry-run
 # après une correction du parseur : re-dérive tous les scrutins depuis l'archive officielle
 node scripts/fetch-scrutins.js --rebuild
-INSEE_API_KEY=xxxx node scripts/fetch-insee.js --dry-run
+node scripts/fetch-insee.js --dry-run
+node scripts/fetch-sondages.js --dry-run
 # contrôle de cohérence des fichiers data/ (aussi lancé par le workflow avant publication)
 node scripts/check-data.js
 ```
@@ -98,5 +96,5 @@ l'historique d'un groupe, `#sondages` (ou tout autre onglet) la page corresponda
 
 Aucune valeur n'est jamais inventée ou estimée pour "avoir l'air complet". Une donnée
 manquante ou non vérifiable est explicitement marquée comme telle (`null`, "non
-communiqué", `idBank: null` avec un `TODO`) plutôt que remplacée par une approximation.
+communiqué", valeur précédente conservée, alerte) plutôt que remplacée par une approximation.
 Merci de garder ce principe si vous étendez ce script.

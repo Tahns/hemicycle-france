@@ -2,7 +2,7 @@
 /**
  * check-data.js
  * -------------
- * Contrôle de cohérence des fichiers publiés (data/lois.json, data/indicateurs.json).
+ * Contrôle de cohérence des fichiers publiés dans data/.
  * Lancé par le workflow GitHub Actions AVANT de committer : si une donnée est incohérente,
  * le workflow échoue et rien n'est publié.
  *
@@ -63,8 +63,52 @@ async function checkIndicateurs() {
   console.log(`[check-data] indicateurs.json : ${data.indicateurs.length} indicateurs contrôlés.`);
 }
 
+async function checkGroupes() {
+  const data = JSON.parse(await readFile("data/groupes.json", "utf-8"));
+  const groupes = Object.entries(data.groupes || {});
+  if (groupes.length < 8) return err(`groupes.json : seulement ${groupes.length} groupe(s)`);
+  let total = 0;
+  for (const [id, g] of groupes) {
+    if (!GROUPES.includes(id)) err(`groupes.json : groupe inconnu ${id}`);
+    if (!g.libelle || !estEntierPositif(g.membres)) err(`groupes.json : ${id} incomplet`);
+    total += g.membres || 0;
+  }
+  if (total > 577 || total < 540) err(`groupes.json : ${total} députés au total (attendu entre 540 et 577)`);
+  console.log(`[check-data] groupes.json : ${groupes.length} groupes, ${total} députés.`);
+}
+
+async function checkSondages() {
+  const data = JSON.parse(await readFile("data/sondages.json", "utf-8"));
+  if (!Array.isArray(data.instituts) || data.instituts.length === 0) return err("sondages.json : aucun institut");
+  for (const i of data.instituts) {
+    if (!i.nom || !/^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") || !/^https:\/\//.test(i.url || "")) err(`sondages.json : ${i.nom || "?"} incomplet`);
+    for (const [nom, [min, max]] of Object.entries(i.scores || {})) {
+      if (!(min >= 0 && max <= 60 && min <= max)) err(`sondages.json : ${i.nom}, score invalide pour ${nom}`);
+    }
+  }
+  console.log(`[check-data] sondages.json : ${data.instituts.length} instituts contrôlés.`);
+}
+
+async function checkManuels() {
+  for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
+    const data = JSON.parse(await readFile(fichier, "utf-8"));
+    if (!Array.isArray(data[cle])) err(`${fichier} : tableau « ${cle} » manquant`);
+  }
+  const justice = JSON.parse(await readFile("data/justice.json", "utf-8"));
+  for (const c of justice.condamnations) {
+    if (!["definitif", "appel"].includes(c.statut)) err(`justice.json : statut invalide pour ${c.nom}`);
+    if (!/^https:\/\//.test(c.url || "")) err(`justice.json : source manquante pour ${c.nom}`);
+  }
+  const meetings = JSON.parse(await readFile("data/meetings.json", "utf-8"));
+  for (const m of meetings.meetings) if (!/^\d{4}-\d{2}-\d{2}$/.test(m.debut || "")) err(`meetings.json : date « debut » invalide pour ${m.titre}`);
+  console.log("[check-data] fichiers manuels contrôlés.");
+}
+
 await checkLois();
 await checkIndicateurs();
+await checkGroupes();
+await checkSondages();
+await checkManuels();
 
 if (erreurs.length) {
   console.error(`[check-data] ${erreurs.length} erreur(s) :`);

@@ -1,0 +1,25 @@
+name: Vérifications
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+permissions:
+  contents: read
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Syntaxe des scripts
+        run: for f in scripts/*.js; do node --check "$f"; done
+      - name: Cohérence des données
+        run: node scripts/check-data.js
+      - name: Installer Playwright (Chromium)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test du site dans un vrai navigateur (ordinateur et mobile)
+        run: node tests/smoke.cjs
