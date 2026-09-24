@@ -148,7 +148,7 @@ async function main() {
         ...precedent, // conserve motsCles
         nom: ind.nom,
         ...construit,
-        source: "INSEE",
+        source: "Insee",
         url: `https://www.insee.fr/fr/statistiques/serie/${ind.idBank}`,
         idBank: ind.idBank,
         misAJourLe: "automatique",

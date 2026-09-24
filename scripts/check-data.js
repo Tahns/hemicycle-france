@@ -10,6 +10,7 @@
  */
 
 import { readFile } from "fs/promises";
+import { completer } from "./lois-format.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -22,6 +23,7 @@ function estEntierPositif(n) {
 async function checkLois() {
   const data = JSON.parse(await readFile("data/lois.json", "utf-8"));
   if (!Array.isArray(data.lois) || data.lois.length === 0) return err("lois.json : tableau 'lois' absent ou vide");
+  data.lois.forEach(completer);
 
   const ids = new Set();
   let precedent = Infinity;
