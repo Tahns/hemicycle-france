@@ -52,6 +52,7 @@ import { pipeline } from "stream/promises";
 import { execFile } from "child_process";
 import { promisify } from "util";
 import { construireDeputes } from "./deputes.js";
+import { completer, compacter } from "./lois-format.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -330,7 +331,7 @@ function resoudreGroupeAnonyme(g, dateScrutin, acteurGroupes) {
 function serialiserLois(data) {
   const { lois, ...entete } = data;
   const lignesEntete = Object.entries(entete).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`);
-  return ["{", ...lignesEntete, '  "lois": [', lois.map((l) => "    " + JSON.stringify(l)).join(",\n"), "  ]", "}", ""].join("\n");
+  return ["{", ...lignesEntete, '  "lois": [', lois.map((l) => "    " + JSON.stringify(compacter(l))).join(",\n"), "  ]", "}", ""].join("\n");
 }
 
 /**
@@ -497,6 +498,7 @@ async function main() {
   log(DRY_RUN ? "Mode dry-run (aucune écriture)" : REBUILD ? "Mode reconstruction (--rebuild)" : "Mode normal");
 
   const existing = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => '{"lois":[]}'));
+  existing.lois.forEach(completer); // champs déduits du numéro (format compact, voir lois-format.js)
   const existingById = new Map(existing.lois.map((l) => [l.id, l]));
 
   const tmpDir = await mkdtemp(path.join(os.tmpdir(), "an-scrutins-"));
@@ -550,7 +552,9 @@ async function main() {
         const vide = v === undefined || v === "À catégoriser" || /^Non renseigné automatiquement/.test(v);
         if (!vide) entree[champ] = v;
       }
-      if (JSON.stringify(connu) !== JSON.stringify(entree)) {
+      // Comparaison sur le format compact, champs triés : l'ordre des champs n'est pas un changement
+      const canonique = (o) => JSON.stringify(Object.fromEntries(Object.entries(compacter(o)).sort()));
+      if (canonique(connu) !== canonique(entree)) {
         existingById.set(id, entree);
         misAJour.push(entree);
       }
