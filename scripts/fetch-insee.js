@@ -11,11 +11,11 @@
  * l'intitulé ne correspond plus (série renommée, arrêtée ou remplacée) — la valeur précédente est
  * alors conservée et l'anomalie signalée.
  *
- * Indicateurs volontairement laissés en saisie manuelle dans data/indicateurs.json :
- *  - Inflation : l'Insee publie l'indice, pas le glissement annuel ; le recalculer pourrait
- *    différer d'un dixième du chiffre officiel communiqué.
- *  - Déficit public : pas de série « en % du PIB » en base 2020 dans la BDM ; chiffre annuel
- *    publié chaque printemps, à reporter à la main.
+ * Tous les indicateurs sont automatiques :
+ *  - Inflation : série officielle du glissement annuel de l'indice des prix (Insee, base 2025) ;
+ *  - Déficit public : la BDM n'a pas de série « en % du PIB » en base 2020 ; le chiffre vient
+ *    de la notification officielle de la France à Eurostat (tableau gov_10dd_edpt1, API publique
+ *    sans clé), qui reprend les comptes de l'Insee (publiés chaque printemps).
  *
  * USAGE :
  *   node scripts/fetch-insee.js
@@ -53,6 +53,18 @@ function formatPeriode(periode) {
 function tendance(actuelle, precedente) {
   if (precedente === undefined || actuelle === precedente) return "neutre";
   return actuelle > precedente ? "up" : "down";
+}
+
+const EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10dd_edpt1";
+/** Déficit (−) ou excédent (+) public de la France : [{ periode: "2025", valeur: -5.1 }, …] (plus récent d'abord) */
+async function lireEurostat(unite) {
+  const res = await fetch(`${EUROSTAT}?geo=FR&unit=${unite}&sector=S13&na_item=B9&lastTimePeriod=3&format=JSON&lang=fr`);
+  if (!res.ok) throw new Error(`HTTP ${res.status} pour Eurostat gov_10dd_edpt1`);
+  const d = await res.json();
+  const temps = d.dimension?.time?.category?.index || {};
+  const obs = Object.entries(temps).map(([periode, i]) => ({ periode, valeur: d.value?.[i] })).filter((o) => Number.isFinite(o.valeur));
+  if (!obs.length || !/gouvernement|government/i.test(d.label || "")) throw new Error("réponse Eurostat inattendue");
+  return obs.sort((a, b) => b.periode.localeCompare(a.periode));
 }
 
 /**
@@ -100,6 +112,38 @@ const INDICATEURS = [
     },
   },
   {
+    nom: "Inflation",
+    idBank: "011814632",
+    titreAttendu: /^Indice des prix à la consommation - Base 2025 - Glissement annuel - Ensemble des ménages - France - Nomenclature Coicop : 00 - Ensemble$/,
+    construire: (obs) => ({
+      valeur: `${obs[0].valeur > 0 ? "+" : obs[0].valeur < 0 ? "−" : ""}${nf(Math.abs(obs[0].valeur), 1)} %`,
+      tendance: tendance(obs[0].valeur, obs[1]?.valeur),
+      date: formatPeriode(obs[0].periode),
+      detail:
+        "Évolution des prix à la consommation sur un an, ensemble des ménages, France" +
+        (obs[1] ? ` (mois précédent : ${obs[1].valeur > 0 ? "+" : ""}${nf(obs[1].valeur, 1)} %)` : ""),
+    }),
+  },
+  {
+    nom: "Déficit public",
+    source: "Eurostat (notification de la France, comptes de l'Insee)",
+    url: "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=fr",
+    lire: async () => ({ obs: await lireEurostat("PC_GDP"), montant: await lireEurostat("MIO_EUR") }),
+    construire: (obs, montant) => {
+      const v = obs[0].valeur, m = montant?.find((x) => x.periode === obs[0].periode)?.valeur;
+      const deficit = v < 0;
+      return {
+        valeur: `${nf(Math.abs(v), 1)} % du PIB`,
+        tendance: deficit ? tendance(-v, obs[1] ? -obs[1].valeur : undefined) : "down",
+        date: obs[0].periode,
+        detail:
+          (m !== undefined ? `${nf(Math.abs(m) / 1000, 1)} milliards d'euros en ${obs[0].periode} — ` : "") +
+          (deficit ? `déficit des administrations publiques au sens de Maastricht (seuil européen : 3 % du PIB)` : "excédent des administrations publiques") +
+          (obs[1] ? ` ; ${obs[1].periode} : ${nf(Math.abs(obs[1].valeur), 1)} %` : ""),
+      };
+    },
+  },
+  {
     nom: "Dette publique",
     idBank: "010777608",
     titreAttendu: /^Dette trimestrielle des administrations publiques au sens de Maastricht - Ensemble - En point de PIB - Base 2020$/,
@@ -140,17 +184,18 @@ async function main() {
 
   for (const ind of INDICATEURS) {
     try {
-      const obs = await lireSerie(ind.idBank, ind.titreAttendu);
-      const montant = ind.complement ? await lireSerie(ind.complement.idBank, ind.complement.titreAttendu, 1) : null;
+      const { obs, montant } = ind.lire
+        ? await ind.lire()
+        : { obs: await lireSerie(ind.idBank, ind.titreAttendu), montant: ind.complement ? await lireSerie(ind.complement.idBank, ind.complement.titreAttendu, 1) : null };
       const construit = ind.construire(obs, montant);
       const precedent = parNom.get(ind.nom) || {};
       parNom.set(ind.nom, {
         ...precedent, // conserve motsCles
         nom: ind.nom,
         ...construit,
-        source: "Insee",
-        url: `https://www.insee.fr/fr/statistiques/serie/${ind.idBank}`,
-        idBank: ind.idBank,
+        source: ind.source || "Insee",
+        url: ind.url || `https://www.insee.fr/fr/statistiques/serie/${ind.idBank}`,
+        ...(ind.idBank ? { idBank: ind.idBank } : {}),
         misAJourLe: "automatique",
       });
       if (!ordre.includes(ind.nom)) ordre.push(ind.nom);

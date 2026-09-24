@@ -1,0 +1,19 @@
+name: Droit de réponse ou demande de retrait
+description: Vous êtes cité sur le site et souhaitez répondre ou demander une rectification
+labels: ["droit-de-reponse"]
+body:
+  - type: markdown
+    attributes:
+      value: Les tickets sont publics. N'y indiquez aucune donnée personnelle (adresse, téléphone, pièce d'identité).
+  - type: input
+    id: page
+    attributes:
+      label: Page concernée
+    validations:
+      required: true
+  - type: textarea
+    id: demande
+    attributes:
+      label: Votre demande
+    validations:
+      required: true

@@ -45,14 +45,36 @@ Référencement : `sitemap.xml` liste l'accueil, les 246 votes clés et les 577 
 dans Google Search Console (propriété = adresse du site). `robots.txt` n'est lu par les moteurs qu'à la
 racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 
+## Protection contre les attaques (DDoS, spam)
+
+- **Pas de serveur à faire tomber** : le site est un ensemble de fichiers statiques servis par le
+  réseau de diffusion (CDN) de GitHub Pages, qui absorbe les attaques par saturation (DDoS). Aucune
+  base de données, aucun formulaire, aucune API appelée par le site : il n'y a rien à pirater ni à
+  saturer côté site. Les données sont récupérées par GitHub Actions, jamais par les visiteurs.
+- **En-têtes de sécurité** : politique de sécurité du contenu (CSP) stricte, aucun script externe,
+  refus d'être affiché dans le cadre d'un autre site (anti-clickjacking).
+- **Tickets (contact)** : ticket libre désactivé, uniquement des formulaires (erreur avec source
+  obligatoire, droit de réponse). En cas de raid de spam : *Settings → Moderation options →
+  Interaction limits* (limiter aux comptes existants depuis plus de 24 h, ou aux contributeurs,
+  pendant 24 h à 6 mois), et *Settings → Moderation options → Reported content* ; un compte
+  malveillant se bloque depuis son profil (*Block user*), ce qui masque aussi ses tickets.
+- **Avec un nom de domaine** (voir plus haut), on peut ajouter Cloudflare, gratuit, devant le site :
+  pointer les serveurs DNS du domaine vers Cloudflare, activer le proxy (nuage orange), *SSL/TLS →
+  Full (strict)*, *Security → Bots → Bot Fight Mode*, et *Under Attack Mode* le temps d'une attaque.
+  Cloudflare permet aussi d'envoyer les vrais en-têtes HTTP (`frame-ancestors`,
+  `Strict-Transport-Security`) que GitHub Pages ne permet pas de régler.
+
 ## Ce qui reste manuel (volontairement)
 
 | Donnée | Fichier | Pourquoi |
 |---|---|---|
 | Condamnations judiciaires | `data/justice.json` | distinguer une condamnation définitive d'un appel demande un jugement humain ; une erreur serait diffamatoire |
-| Chefs de parti | `data/dirigeants.json` | aucune source structurée fiable (Wikidata liste plusieurs chefs « en poste » pour un même parti) |
 | Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
-| Inflation, déficit public | `data/indicateurs.json` | l'Insee ne publie pas l'inflation en série directe (la recalculer peut différer d'un dixième) ; pas de série de déficit en % du PIB en base 2020 |
+
+Désormais automatiques : l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
+(Eurostat, notification de la France), les chefs de parti (vérifiés chaque jour dans l'infobox
+Wikipédia de chaque parti ; un changement est appliqué puis signalé pour relire l'intitulé de la
+fonction) et le thème des votes (commission saisie au fond du dossier législatif).
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
 
@@ -61,9 +83,9 @@ Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans touch
 - `scripts/check-data.js` contrôle la cohérence de tous les fichiers `data/` avant chaque publication.
 - `scripts/check-fraicheur.js` vérifie que les données se mettent bien à jour (votes pendant la
   session parlementaire, sondages de moins de 30 jours, chômage du dernier trimestre publié) et
-  rappelle les mises à jour manuelles : inflation (chaque mois), déficit (chaque printemps),
-  justice (relecture tous les 60 jours et après chaque date listée dans `echeances` de
-  `data/justice.json`), chefs de parti (tous les 90 jours), agenda vide.
+  (inflation du dernier mois, déficit de l'année écoulée, chefs de parti à relire) et
+  rappelle les relectures manuelles : justice (relecture tous les 60 jours et après chaque date listée dans `echeances` de
+  `data/justice.json`), agenda (tous les 30 jours ou s'il est vide).
   Après une relecture, mettre à jour le champ `verifieLe` du fichier concerné.
 - En cas d'échec d'une source ou de données périmées, le workflow ouvre (ou complète) un ticket
   GitHub avec l'étiquette `alerte-donnees` : GitHub vous notifie par e-mail.

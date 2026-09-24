@@ -80,6 +80,49 @@ const GROUPES_ACTIFS = {};
 const APPARTENANCES_ACTUELLES = []; // { acteurRef, organeRef, qualite, debut }
 const MANDATS = {};
 
+const ORGANES_LIBELLES = {}; // organeRef -> libellé officiel (commissions, groupes…)
+
+// Thème d'un texte = commission de l'Assemblée saisie au fond (donnée officielle, pas un classement maison)
+const THEMES_COMMISSIONS = [
+  [/finances/i, "Finances et budget"],
+  [/affaires sociales|culturelles, familiales et sociales/i, "Affaires sociales et santé"],
+  [/lois constitutionnelles/i, "Lois, justice et institutions"],
+  [/défense/i, "Défense"],
+  [/affaires étrangères/i, "Affaires étrangères"],
+  [/affaires culturelles et de l'éducation/i, "Culture et éducation"],
+  [/développement durable|environnement et du territoire/i, "Environnement et territoires"],
+  [/affaires économiques/i, "Économie"],
+  [/spéciale/i, "Commission spéciale"],
+];
+function themeCommission(organeRef) {
+  const libelle = ORGANES_LIBELLES[organeRef];
+  if (!libelle) return null;
+  return THEMES_COMMISSIONS.find(([re]) => re.test(libelle))?.[1] || null;
+}
+/** Première commission saisie au fond à l'Assemblée (acte « …-COM-FOND »), en parcourant les actes du dossier. */
+function commissionFond(actes) {
+  for (const a of Array.isArray(actes) ? actes : actes ? [actes] : []) {
+    if (/^AN\d*-COM-FOND$/.test(a.codeActe || "") && a.organeRef) return a.organeRef;
+    const sous = commissionFond(a.actesLegislatifs?.acteLegislatif);
+    if (sous) return sous;
+  }
+  return null;
+}
+
+const TITRES_DOSSIERS = []; // [{ uid, t }] titres de dossiers normalisés, du plus long au plus court
+const normTitre = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[’`]/g, "'").replace(/[^a-z0-9]+/g, " ").trim();
+/**
+ * Dossier d'un scrutin publié sans référence : le titre du dossier doit figurer tel quel dans
+ * l'intitulé du scrutin ; on garde le titre le plus long, et on renonce en cas d'égalité (ambiguïté).
+ */
+function dossierParTitre(titreScrutin) {
+  const s = normTitre(titreScrutin);
+  const trouves = TITRES_DOSSIERS.filter((d) => s.includes(d.t));
+  if (!trouves.length) return null;
+  if (trouves.length > 1 && trouves[0].t.length === trouves[1].t.length) return null;
+  return trouves[0].uid;
+}
+
 const DATA_FILE = path.resolve("data/lois.json");
 const REPORT_FILE = path.resolve("data/fetch-scrutins-report.json");
 const GROUPES_FILE = path.resolve("data/groupes.json");
@@ -187,6 +230,7 @@ async function buildOrganeRefToSigle(dir) {
       continue;
     }
     const o = raw.organe;
+    if (o?.uid && o.libelle) ORGANES_LIBELLES[o.uid] = o.libelle;
     if (o && o.codeType === "GP" && o.legislature === LEGISLATURE && o.uid && o.libelleAbrev) {
       table[o.uid] = o.libelleAbrev;
       if (!o.viMoDe?.dateFin) GROUPES_ACTIFS[o.uid] = o.libelle;
@@ -256,12 +300,20 @@ async function buildDossiers(dir) {
     if (!d?.uid) continue;
     const acteurs = d.initiateur?.acteurs?.acteur;
     index[d.uid] = {
+      commissionFond: commissionFond(d.actesLegislatifs?.acteLegislatif),
       titre: d.titreDossier?.titre || null,
       procedure: d.procedureParlementaire?.libelle || null,
       initiateurs: acteurs ? (Array.isArray(acteurs) ? acteurs : [acteurs]) : [],
     };
   }
   log(`${Object.keys(index).length} dossier(s) législatif(s) indexé(s).`);
+  // Titres normalisés, pour rattacher les scrutins que l'AN publie sans référence de dossier
+  TITRES_DOSSIERS.length = 0;
+  for (const [uid, d] of Object.entries(index)) {
+    const t = normTitre(d.titre);
+    if (t.length >= 20) TITRES_DOSSIERS.push({ uid, t });
+  }
+  TITRES_DOSSIERS.sort((a, b) => b.t.length - a.t.length);
   return index;
 }
 
@@ -368,16 +420,18 @@ function formatDateFr(isoDate) {
 }
 
 function infosDossier(s, dateScrutin, organeRefToSigle, acteurGroupes, dossiers) {
-  const ref = s.objet?.dossierLegislatif?.dossierRef;
+  const ref = s.objet?.dossierLegislatif?.dossierRef || dossierParTitre(s.titre || s.objet?.libelle);
   if (!ref) return {};
   const d = dossiers[ref];
   const out = {
     dossierRef: ref,
-    dossierTitre: d?.titre || s.objet.dossierLegislatif.libelle || null,
+    dossierTitre: d?.titre || s.objet?.dossierLegislatif?.libelle || null,
     dossierUrl: `https://www.assemblee-nationale.fr/dyn/17/dossiers/${ref}`,
   };
   const auteur = d && auteurDossier(d, dateScrutin, acteurGroupes, organeRefToSigle);
   if (auteur) out.auteur = auteur;
+  const theme = d?.commissionFond && themeCommission(d.commissionFond);
+  if (theme) out.theme = theme;
   return out;
 }
 
@@ -473,6 +527,7 @@ function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}, dossiers = {}) 
     };
   }
 
+  const infos = infosDossier(s, dateScrutin, organeRefToSigle, acteurGroupes, dossiers);
   return {
     ok: true,
     id: `an-scrutin-${numero}`,
@@ -481,11 +536,12 @@ function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}, dossiers = {}) 
     date: formatDateFr(dateScrutin),
     dateISO: dateScrutin,
     typeVote: s.typeVote?.codeTypeVote || null, // SPO ordinaire, SPS solennel, MOC motion de censure…
-    ...infosDossier(s, dateScrutin, organeRefToSigle, acteurGroupes, dossiers),
+    ...infos,
     // `sort` est un objet { code: "adopté" | "rejeté", libelle } dans les exports de l'AN
     // (le tester directement comme une chaîne donnait "[object Object]" → toujours "rejete").
     resultat: /adopt/i.test(s.sort?.code || s.sort?.libelle || s.syntheseVote?.annonce || "") ? "adopte" : "rejete",
-    theme: "À catégoriser", // pas de thème officiel fourni par l'AN — à corriger manuellement dans data/lois.json si besoin
+    // Thème : commission saisie au fond du texte (voir themeCommission) ; à défaut, à catégoriser à la main
+    theme: infos.theme || "À catégoriser",
     reel: true,
     source: "auto-assemblee-nationale",
     sourceLabel: `Assemblée nationale — scrutin n°${numero}`,
