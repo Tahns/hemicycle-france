@@ -8,6 +8,8 @@
  * SOURCES OFFICIELLES (aucune donnée inventée) :
  *   Scrutins :
  *   https://data.assemblee-nationale.fr/static/openData/repository/17/loi/scrutins/Scrutins.json.zip
+ *   Dossiers législatifs (titre court du texte, auteur) :
+ *   https://data.assemblee-nationale.fr/static/openData/repository/17/loi/dossiers_legislatifs/Dossiers_Legislatifs.json.zip
  *   Organes (pour résoudre organeRef -> sigle du groupe politique) :
  *   https://data.assemblee-nationale.fr/static/openData/repository/17/amo/tous_acteurs_mandats_organes_xi_legislature/AMO30_tous_acteurs_tous_mandats_tous_organes_historique.json.zip
  *   Licence ouverte Etalab.
@@ -62,10 +64,23 @@ const SCRUTINS_ZIP_URL =
 const ORGANES_ZIP_URL =
   "https://data.assemblee-nationale.fr/static/openData/repository/17/amo/tous_acteurs_mandats_organes_xi_legislature/AMO30_tous_acteurs_tous_mandats_tous_organes_historique.json.zip";
 
+const DOSSIERS_ZIP_URL =
+  "https://data.assemblee-nationale.fr/static/openData/repository/17/loi/dossiers_legislatifs/Dossiers_Legislatifs.json.zip";
+
 const LEGISLATURE = "17";
+
+// Remplis par buildActeurGroupes() : nom affiché de chaque acteur, et nature de chaque mandat
+// (sert à dire si un texte a été déposé par le Gouvernement ou par un député).
+const ACTEURS_NOMS = {};
+const ACTEURS_FEMMES = new Set();
+// Groupes politiques en activité (uid -> libellé) et appartenances en cours, pour data/groupes.json
+const GROUPES_ACTIFS = {};
+const APPARTENANCES_ACTUELLES = []; // { acteurRef, organeRef, qualite, debut }
+const MANDATS = {};
 
 const DATA_FILE = path.resolve("data/lois.json");
 const REPORT_FILE = path.resolve("data/fetch-scrutins-report.json");
+const GROUPES_FILE = path.resolve("data/groupes.json");
 
 // Table de correspondance entre le sigle officiel du groupe (tel que publié par l'AN,
 // résolu via organeRef -> organe.libelleAbrev) et l'identifiant court utilisé sur le site.
@@ -171,6 +186,7 @@ async function buildOrganeRefToSigle(dir) {
     const o = raw.organe;
     if (o && o.codeType === "GP" && o.legislature === LEGISLATURE && o.uid && o.libelleAbrev) {
       table[o.uid] = o.libelleAbrev;
+      if (!o.viMoDe?.dateFin) GROUPES_ACTIFS[o.uid] = o.libelle;
       nbGroupes++;
     }
   }
@@ -202,12 +218,80 @@ async function buildActeurGroupes(dir) {
     const uid = a?.uid?.["#text"] || a?.uid;
     const mandats = a?.mandats?.mandat;
     if (!uid || !mandats) continue;
+    const ident = a.etatCivil?.ident;
+    if (ident?.nom) ACTEURS_NOMS[uid] = `${ident.prenom || ""} ${ident.nom}`.trim();
+    if (ident?.civ === "Mme") ACTEURS_FEMMES.add(uid);
     for (const m of Array.isArray(mandats) ? mandats : [mandats]) {
+      const muid = m.uid?.["#text"] || m.uid;
+      if (muid) MANDATS[muid] = { typeOrgane: m.typeOrgane, qualite: m.infosQualite?.libQualite || null };
       if (m.typeOrgane !== "GP" || m.legislature !== LEGISLATURE) continue;
+      if (!m.dateFin) APPARTENANCES_ACTUELLES.push({ acteurRef: uid, organeRef: m.organes?.organeRef, qualite: m.infosQualite?.codeQualite || null, debut: m.dateDebut });
       (index[uid] ||= []).push({ debut: m.dateDebut, fin: m.dateFin || null, organeRef: m.organes?.organeRef });
     }
   }
   return index;
+}
+
+/**
+ * Index des dossiers législatifs : uid -> { titre, procedure, initiateurs: [{acteurRef, mandatRef}] }.
+ */
+async function buildDossiers(dir) {
+  const dossierDir = await findDirNamed(dir, "dossierParlementaire");
+  const index = {};
+  if (!dossierDir) {
+    warn("Dossier 'dossierParlementaire' introuvable — titres courts et auteurs non renseignés.");
+    return index;
+  }
+  for (const f of await readdir(dossierDir)) {
+    let raw;
+    try {
+      raw = JSON.parse(await readFile(path.join(dossierDir, f), "utf-8"));
+    } catch {
+      continue;
+    }
+    const d = raw.dossierParlementaire;
+    if (!d?.uid) continue;
+    const acteurs = d.initiateur?.acteurs?.acteur;
+    index[d.uid] = {
+      titre: d.titreDossier?.titre || null,
+      procedure: d.procedureParlementaire?.libelle || null,
+      initiateurs: acteurs ? (Array.isArray(acteurs) ? acteurs : [acteurs]) : [],
+    };
+  }
+  log(`${Object.keys(index).length} dossier(s) législatif(s) indexé(s).`);
+  return index;
+}
+
+/**
+ * Auteur d'un texte, déduit du mandat du premier initiateur : ministre -> « Gouvernement »,
+ * député -> « Prénom Nom (groupe à la date du vote) et N autres ». Rien si non déterminable.
+ */
+function auteurDossier(dossier, dateScrutin, acteurGroupes, organeRefToSigle) {
+  const premier = dossier?.initiateurs?.[0];
+  if (!premier) return null;
+  const mandat = MANDATS[premier.mandatRef];
+  const nom = ACTEURS_NOMS[premier.acteurRef];
+  if (!mandat || !nom) return null;
+  const autres = dossier.initiateurs.length - 1;
+  const etAutres = (mot) => (autres > 0 ? ` et ${autres} autre${autres > 1 ? "s" : ""} ${mot}${autres > 1 ? "s" : ""}` : "");
+  switch (mandat.typeOrgane) {
+    case "MINISTERE":
+    case "GOUVERNEMENT":
+      return `Gouvernement (${nom})`;
+    case "PRESREP":
+      return `Président de la République (${nom})`;
+    case "SENAT":
+      return `${nom}, ${ACTEURS_FEMMES.has(premier.acteurRef) ? "sénatrice" : "sénateur"}${etAutres("sénateur")}`;
+    case "ASSEMBLEE": {
+      // Groupe à la date du vote, sinon dernier groupe connu avant cette date (député devenu ministre…)
+      const gps = (acteurGroupes[premier.acteurRef] || []).filter((x) => x.debut <= dateScrutin).sort((a, b) => b.debut.localeCompare(a.debut));
+      const gp = gps.find((x) => !x.fin || x.fin >= dateScrutin) || gps[0];
+      const groupe = gp && SIGLE_VERS_ID[organeRefToSigle[gp.organeRef]];
+      return `${nom}${groupe ? ` (${groupe})` : ""}${etAutres("député")}`;
+    }
+    default:
+      return null;
+  }
 }
 
 function acteursNominatifs(g) {
@@ -247,6 +331,29 @@ function serialiserLois(data) {
   return ["{", ...lignesEntete, '  "lois": [', lois.map((l) => "    " + JSON.stringify(l)).join(",\n"), "  ]", "}", ""].join("\n");
 }
 
+/**
+ * data/groupes.json : pour chaque groupe politique en activité, libellé officiel, président·e
+ * et nombre de membres (membres + apparentés), d'après les mandats en cours dans l'archive AMO30.
+ */
+function construireGroupes(organeRefToSigle) {
+  const groupes = {};
+  for (const [uid, libelle] of Object.entries(GROUPES_ACTIFS)) {
+    const id = SIGLE_VERS_ID[organeRefToSigle[uid]];
+    if (!id) continue;
+    const mandats = APPARTENANCES_ACTUELLES.filter((a) => a.organeRef === uid);
+    const pres = mandats.find((a) => a.qualite === "Président");
+    groupes[id] = {
+      libelle,
+      // un président a deux mandats ouverts (« Membre » et « Président ») : on compte les députés, pas les mandats
+      membres: new Set(mandats.map((a) => a.acteurRef)).size,
+      ...(pres && ACTEURS_NOMS[pres.acteurRef]
+        ? { president: ACTEURS_NOMS[pres.acteurRef], presidente: ACTEURS_FEMMES.has(pres.acteurRef), presidentDepuis: pres.debut }
+        : {}),
+    };
+  }
+  return groupes;
+}
+
 function moisFr(m) {
   const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   return mois[m];
@@ -257,6 +364,20 @@ function formatDateFr(isoDate) {
   return `${d.getDate()} ${moisFr(d.getMonth())} ${d.getFullYear()}`;
 }
 
+function infosDossier(s, dateScrutin, organeRefToSigle, acteurGroupes, dossiers) {
+  const ref = s.objet?.dossierLegislatif?.dossierRef;
+  if (!ref) return {};
+  const d = dossiers[ref];
+  const out = {
+    dossierRef: ref,
+    dossierTitre: d?.titre || s.objet.dossierLegislatif.libelle || null,
+    dossierUrl: `https://www.assemblee-nationale.fr/dyn/17/dossiers/${ref}`,
+  };
+  const auteur = d && auteurDossier(d, dateScrutin, acteurGroupes, organeRefToSigle);
+  if (auteur) out.auteur = auteur;
+  return out;
+}
+
 /**
  * Extrait le détail par groupe d'un objet scrutin brut (JSON tel que publié par l'AN),
  * et vérifie que la somme recalculée correspond à la synthèse officielle.
@@ -264,7 +385,7 @@ function formatDateFr(isoDate) {
  * `acteurGroupes` celle de buildActeurGroupes() (pour les groupes publiés en "PO0").
  * Retourne { ok: true, votes, ... } ou { ok: false, raison }.
  */
-function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}) {
+function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}, dossiers = {}) {
   const s = raw.scrutin;
   if (!s) return { ok: false, raison: "pas de clé 'scrutin' à la racine" };
 
@@ -357,6 +478,7 @@ function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}) {
     date: formatDateFr(dateScrutin),
     dateISO: dateScrutin,
     typeVote: s.typeVote?.codeTypeVote || null, // SPO ordinaire, SPS solennel, MOC motion de censure…
+    ...infosDossier(s, dateScrutin, organeRefToSigle, acteurGroupes, dossiers),
     // `sort` est un objet { code: "adopté" | "rejeté", libelle } dans les exports de l'AN
     // (le tester directement comme une chaîne donnait "[object Object]" → toujours "rejete").
     resultat: /adopt/i.test(s.sort?.code || s.sort?.libelle || s.syntheseVote?.annonce || "") ? "adopte" : "rejete",
@@ -385,6 +507,10 @@ async function main() {
   const organeRefToSigle = await buildOrganeRefToSigle(organesDir);
   const acteurGroupes = await buildActeurGroupes(organesDir);
 
+  const dossiersDir = await mkdtemp(path.join(os.tmpdir(), "an-dossiers-"));
+  await downloadAndExtract(DOSSIERS_ZIP_URL, dossiersDir);
+  const dossiers = await buildDossiers(dossiersDir);
+
   const nouveaux = [];
   const misAJour = [];
   const rejets = [];
@@ -409,7 +535,7 @@ async function main() {
     if (connu && !REBUILD) continue; // déjà connu
 
     traites++;
-    const parsed = parseScrutin(raw, organeRefToSigle, acteurGroupes);
+    const parsed = parseScrutin(raw, organeRefToSigle, acteurGroupes, dossiers);
     if (!parsed.ok) {
       // En reconstruction, une entrée déjà publiée n'est jamais supprimée sur un simple échec de parsing.
       rejets.push({ fichier: path.basename(f), raison: parsed.raison });
@@ -443,6 +569,14 @@ async function main() {
     existing.lastUpdated = new Date().toISOString();
     await writeFile(DATA_FILE, serialiserLois(existing));
     log("data/lois.json mis à jour.");
+  }
+
+  // Groupes politiques (présidences, effectifs) : réécrit seulement si le contenu change
+  const groupes = construireGroupes(organeRefToSigle);
+  const anciensGroupes = JSON.parse(await readFile(GROUPES_FILE, "utf-8").catch(() => "{}"));
+  if (Object.keys(groupes).length >= 8 && JSON.stringify(anciensGroupes.groupes) !== JSON.stringify(groupes) && !DRY_RUN) {
+    await writeFile(GROUPES_FILE, JSON.stringify({ lastUpdated: new Date().toISOString(), source: "Assemblée nationale — open data AMO30", groupes }, null, 2) + "\n");
+    log("data/groupes.json mis à jour.");
   }
 
   // Le rapport n'est réécrit que si son contenu change (évite un commit quotidien pour un simple horodatage).

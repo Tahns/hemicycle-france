@@ -757,6 +757,7 @@
     outline:2px solid var(--accent); outline-offset:2px;
   }
   .loi-count{font-size:12.5px; color:var(--text-faint);}
+  .lien-bouton{background:none; border:none; padding:0; font:inherit; color:var(--accent); text-decoration:underline; cursor:pointer;}
   .hemi-mode{margin-bottom:6px;}
   .legend-note{flex-basis:100%; font-size:11.5px;}
   .party-membres{font-weight:500; color:var(--text-faint); font-size:11.5px;}
@@ -803,6 +804,14 @@
   .quiz-recap-row b{color:var(--text);}
   .sondage-disclaimer{font-size:12px; color:var(--text-faint); margin-top:14px; line-height:1.5;}
   @media (max-width:640px){ .proximite-row{grid-template-columns:110px 1fr 42px;} }
+  .section-titre{font-size:15px; margin:30px 0 12px;}
+  .section-titre span{font-size:12px; font-weight:500; color:var(--text-faint);}
+  .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px;}
+  .groupe-card{display:flex; gap:10px; align-items:flex-start; background:var(--bg-elevated); border:1px solid var(--border); border-radius:12px; padding:12px 14px;}
+  .groupe-card .dot{margin-top:5px;}
+  .groupe-nom{font-weight:700; font-size:13.5px; color:var(--text);}
+  .groupe-meta{font-size:12px; color:var(--text-soft); margin-top:2px;}
+  .parti-sigle{font-weight:600; color:var(--text-faint); font-size:11px;}
   .meetings-subtitle{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); margin:26px 0 12px;}
   @media (max-width:640px){
     .histo-row{grid-template-columns:1fr;}
@@ -912,9 +921,10 @@
 
   <section class="view" id="view-dirigeants">
     <div class="fictional-banner" style="background:var(--vert-dim); border-color:rgba(53,208,127,.3); color:var(--vert);">
-      ✓ <span><b>Données réelles</b>, vérifiées début septembre 2026. Un groupe sans dirigeant national (LIOT, groupe pluraliste sans parti unique) est indiqué comme tel.</span>
+      ✓ <span><b>Données réelles.</b> Chefs de parti vérifiés à la main (<span id="dirigeants-verifie">septembre 2026</span>) ; présidences et effectifs des groupes issus automatiquement de l'open data de l'Assemblée.</span>
     </div>
     <div class="leader-grid" id="leader-grid"></div>
+    <div id="groupes-presidents"></div>
   </section>
 
   <section class="view" id="view-chiffres">
@@ -937,7 +947,7 @@
 
   <section class="view" id="view-justice">
     <div class="fictional-banner" style="background:var(--vert-dim); border-color:rgba(53,208,127,.3); color:var(--vert);">
-      ✓ <span><b>Faits établis uniquement.</b> Cette liste ne contient que des condamnations effectivement prononcées par un tribunal, avec la mention explicite du statut (définitive, ou en appel/cassation donc non-définitive). Elle ne contient aucune plainte non jugée ni accusation — présenter une plainte comme une culpabilité serait diffamatoire et trompeur. Vérifié début septembre 2026.</span>
+      ✓ <span><b>Faits établis uniquement.</b> Cette liste ne contient que des condamnations effectivement prononcées par un tribunal, avec la mention explicite du statut (définitive, ou en appel/cassation donc non-définitive). Elle ne contient aucune plainte non jugée ni accusation — présenter une plainte comme une culpabilité serait diffamatoire et trompeur. Vérifié le <span id="justice-verifie">3 septembre 2026</span>.</span>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
     <div class="justice-filter-bar" id="justice-filter-bar"></div>
@@ -1291,8 +1301,19 @@ function esc(s){
 }
 
 // Titre lisible : titre court saisi à la main s'il existe, sinon l'intitulé officiel avec majuscule initiale
+// Pour un vote final, le titre du dossier législatif est bien plus lisible que l'intitulé du scrutin :
+// « Fin de vie — vote final (première lecture) » plutôt que « l'ensemble de la proposition de loi relative à… ».
+function etapeLoi(l){
+  const m = l.titre.match(/\(([^()]*(lecture|commission mixte paritaire)[^()]*)\)\.?\s*$/i);
+  return m ? m[1].replace(/^texte de la /,"") : null;
+}
 function titreLoi(l){
-  const t = l.titreCourt || l.titre;
+  let t = l.titreCourt;
+  if(!t && l.dossierTitre && categorieLoi(l) === "texte"){
+    const etape = etapeLoi(l);
+    t = `${l.dossierTitre} — vote final${etape ? ` (${etape})` : ""}`;
+  }
+  t = t || l.titre;
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
 
@@ -1327,13 +1348,19 @@ function norm(t){
   return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/’/g,"'").toLowerCase();
 }
 function texteRecherche(l){
-  if(l._n === undefined) l._n = norm(l.titre + " " + (l.titreCourt || ""));
+  if(l._n === undefined) l._n = norm(l.titre + " " + (l.titreCourt || "") + " " + (l.dossierTitre || ""));
   return l._n;
 }
 
 // Composition actuelle de l'Assemblée : effectifs des groupes lors du scrutin le plus récent
 let COMPOSITION_DATE = null;
 function appliquerCompositionActuelle(){
+  // 1) Effectifs actuels publiés par l'Assemblée (data/groupes.json), sinon 2) ceux du dernier scrutin
+  if(PARTIES.every(p => GROUPES[p.id] && GROUPES[p.id].membres)){
+    PARTIES.forEach(p => p.sieges = GROUPES[p.id].membres);
+    TOTAL_SIEGES = PARTIES.reduce((s,p)=>s+p.sieges,0);
+    return;
+  }
   const ref = LOIS.find(l => PARTIES.every(p => l.votes[p.id] && l.votes[p.id].membres));
   if(!ref) return;
   PARTIES.forEach(p => p.sieges = ref.votes[p.id].membres);
@@ -1601,9 +1628,11 @@ function updateBreakdown(){
     esc(titreLoi(loi)) + " — " + esc(loi.date) + `<span class="loi-theme-tag">${esc(theme)}</span>`;
 
   const lignes = [];
-  if(loi.titreCourt) lignes.push(["Intitulé officiel", esc(loi.titre)]);
+  if(titreLoi(loi) !== loi.titre.charAt(0).toUpperCase() + loi.titre.slice(1)) lignes.push(["Intitulé officiel", esc(loi.titre)]);
   if(TYPES_VOTE[loi.typeVote]) lignes.push(["Type de vote", TYPES_VOTE[loi.typeVote]]);
-  if(loi.proposePar) lignes.push(["Proposé par", `<b>${esc(loi.proposePar)}</b>`]);
+  if(loi.proposePar || loi.auteur) lignes.push(["Texte déposé par", `<b>${esc(loi.proposePar || loi.auteur)}</b>`]);
+  if(loi.dossierTitre) lignes.push(["Dossier législatif",
+    `<a href="${esc(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
   if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
   if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
   lignes.push(["Source", `<a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">${esc(loi.sourceLabel)}</a>`]);
@@ -1611,6 +1640,16 @@ function updateBreakdown(){
   document.getElementById("loi-provenance").innerHTML =
     lignes.map(([label,val])=>`<div class="loi-provenance-row"><span class="label">${label}</span><span class="value">${val}</span></div>`).join("") +
     (ctx ? `<div class="loi-provenance-row"><span class="label"></span><span class="loi-contexte-alert">${ctx.label}</span></div>` : "");
+
+  const voirDossier = document.getElementById("voir-dossier");
+  if(voirDossier) voirDossier.addEventListener("click", ()=>{
+    selectedCategorie = "tous";
+    document.getElementById("loi-search").value = loi.dossierTitre;
+    renderCategorieFilter();
+    populateLoiSelect();
+    document.getElementById("loi-select").value = loi.id;
+    updateBreakdown();
+  });
 
   renderStatCards(loi);
 
@@ -1783,7 +1822,7 @@ function renderHistorique(){
     const entete = `
       <div>
         <div class="histo-loi">${esc(titreLoi(loi))}</div>
-        <div class="histo-date">${esc(loi.date)} · ${resultat} · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">scrutin n°${loi.numero ?? ""}</a></div>
+        <div class="histo-date">${esc(loi.date)} · ${resultat} · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">scrutin n°${loi.numero ?? ""}</a>${loi.dossierTitre && categorieLoi(loi) !== "texte" ? ` · texte : ${esc(loi.dossierTitre)}` : ""}${loi.auteur && categorieLoi(loi) === "texte" ? ` · déposé par ${esc(loi.auteur)}` : ""}</div>
       </div>`;
     const delay = `style="animation-delay:${Math.min(idx,20)*20}ms"`;
     const total = v ? v.pour+v.contre+v.abst : 0;
@@ -1829,44 +1868,7 @@ document.getElementById("histo-search").addEventListener("input", ()=>{
 /* ---------- Prochains meetings ---------- */
 
 // debut/fin (AAAA-MM-JJ) servent à séparer automatiquement les événements à venir des événements passés.
-const MEETINGS = [
-  {
-    debut:"2026-10-24", fin:"2026-10-25", jour:"24-25", mois:"OCT.", heure:"—",
-    lieu:"Orléans (Loiret)",
-    parti:"RN", partyColor:"#5B4FC9",
-    titre:"XIXᵉ congrès du Rassemblement National",
-    desc:"Le samedi, désignation à huis clos du candidat du RN à la présidentielle et élection du président du parti par les adhérents ; le dimanche, premier grand meeting de campagne.",
-    source:{ nom:"franceinfo", url:"https://www.franceinfo.fr/politique/front-national/presidentielle-2027-le-candidat-du-rassemblement-national-sera-elu-par-le-congres-du-parti-qui-se-tiendra-les-24-et-25-octobre_7943123.html" },
-    verified:true
-  },
-  {
-    debut:"2026-09-05", jour:"5", mois:"SEPT.", heure:"16h00",
-    lieu:"Braderie de Lille — Porte de Paris, stand La France insoumise, 17 place Simon Vollant",
-    parti:"LFI", partyColor:"#D6284B",
-    titre:"Discours de Jean-Luc Mélenchon",
-    desc:"Prise de parole dans le cadre de la campagne pour la présidentielle 2027, en marge de la Braderie de Lille.",
-    source:{ nom:"lafranceinsoumise.fr", url:"https://lafranceinsoumise.fr/2026/08/28/melenchon-braderie-lille-2026/" },
-    verified:true
-  },
-  {
-    debut:"2026-09-11", fin:"2026-09-13", jour:"11-13", mois:"SEPT.", heure:"—",
-    lieu:"Le Plessis-Pâté (Essonne)",
-    parti:"GDR", partyColor:"#A32E22",
-    titre:"Fête de l'Humanité",
-    desc:"Grand rassemblement annuel traditionnellement lié au Parti communiste français, avec de nombreuses prises de parole politiques.",
-    source:{ nom:"parlons-politique.fr", url:"https://www.parlons-politique.fr/elections/rentree-politique-2026-les-dates-cles-pour-comprendre-les-choix-qui-peseront-sur-la-presidentielle_25184/" },
-    verified:true
-  },
-  {
-    debut:"2026-09-12", jour:"12", mois:"SEPT.", heure:"—",
-    lieu:"Nogent-sur-Marne (Val-de-Marne)",
-    parti:"LR", partyColor:"#2F6FE0",
-    titre:"Réunion des Jeunes Républicains, avec Bruno Retailleau",
-    desc:"Rassemblement de la branche jeunesse des Républicains, en présence du président du parti Bruno Retailleau.",
-    source:{ nom:"parlons-politique.fr", url:"https://www.parlons-politique.fr/elections/rentree-politique-2026-les-dates-cles-pour-comprendre-les-choix-qui-peseront-sur-la-presidentielle_25184/" },
-    verified:true
-  },
-];
+let MEETINGS = []; // data/meetings.json
 
 function aujourdhuiISO(){
   const d = new Date();
@@ -1909,47 +1911,39 @@ function renderMeetings(){
 /* ---------- Sondages 2027 ---------- */
 
 // Du plus récent au plus ancien : le premier institut est affiché par défaut.
-const INSTITUTS = [
-  {
-    id:"ipsos", nom:"Ipsos bva",
-    date:"31 août-2 sept. 2026", echantillon:"1 500 personnes inscrites sur les listes électorales",
-    source:"Le Parisien — ipsos.com", url:"https://www.ipsos.com/fr-fr/presidentielle-2027-marine-le-pen-conserve-une-avance-nette-dans-les-intentions-de-vote",
-    hypothese:"Fourchettes selon les hypothèses testées (É. Philippe et G. Attal : plus hauts s'ils sont seuls candidats du centre)",
-    scores:{
-      LE_PEN:[34,36], MELENCHON:[15,17], PHILIPPE:[14.5,22.5], ATTAL:[7.5,15.5], RETAILLEAU:[6,10], GLUCKSMANN:[11.5,14],
-    }
-  },
-  {
-    id:"ifop", nom:"IFOP-Fiducial",
-    date:"24-25 août 2026", echantillon:"1 598 personnes",
-    source:"LCI / Le Figaro / Sud Radio", url:"https://sondages-presidentielle2027.fr/instituts/ifop.html",
-    hypothese:"Hypothèse à 11 candidats (la plus large testée par l'institut)",
-    scores:{
-      LE_PEN:[33,35], MELENCHON:[16,19], PHILIPPE:[14.5,21], ATTAL:[8,15], RETAILLEAU:[6,12], GLUCKSMANN:null,
-    }
-  },
-  {
-    id:"harris", nom:"Harris Interactive",
-    date:"18-19 août 2026", echantillon:"non précisé dans la source",
-    source:"le-francais-moyen.com (agrégateur Wikipédia/instituts)", url:"https://le-francais-moyen.com/elections/sondages-2027/",
-    hypothese:"Hypothèse principale de la vague",
-    scores:{
-      LE_PEN:[35,38], MELENCHON:[16,17], PHILIPPE:[14,19], ATTAL:[8,15], RETAILLEAU:null, GLUCKSMANN:[10,10],
-    }
-  },
-];
+let INSTITUTS = []; // data/sondages.json (automatique, depuis la liste Wikipédia des sondages)
 
 // Candidats réels déclarés ou pressentis, couleur reprise du parti le plus proche pour cohérence visuelle
-const CANDIDATS = [
-  { id:"LE_PEN",     nom:"Marine Le Pen",       parti:"RN",  couleur:"#5B4FC9" },
-  { id:"MELENCHON",  nom:"Jean-Luc Mélenchon",  parti:"LFI", couleur:"#D6284B" },
-  { id:"PHILIPPE",   nom:"Édouard Philippe",    parti:"HOR", couleur:"#0FA89C" },
-  { id:"ATTAL",      nom:"Gabriel Attal",       parti:"EPR", couleur:"#E0B400" },
-  { id:"RETAILLEAU", nom:"Bruno Retailleau",    parti:"LR",  couleur:"#2F6FE0" },
-  { id:"GLUCKSMANN", nom:"Raphaël Glucksmann",  parti:"SOC", couleur:"#D6488A" },
-];
+let CANDIDATS = []; // construit depuis data/sondages.json
 
-let selectedInstitut = INSTITUTS[0].id;
+// Couleur d'un candidat : celle de son parti (sigles tels qu'affichés dans la liste Wikipédia)
+const COULEURS_PARTIS = {
+  LO:"#8E1B1B", LFI:"#D6284B", FI:"#D6284B", PCF:"#A32E22", LE:"#1E9F58", EELV:"#1E9F58", PS:"#D6488A", PP:"#D6488A",
+  RE:"#E0B400", REN:"#E0B400", MoDem:"#E08800", HOR:"#0FA89C", LR:"#2F6FE0", DVD:"#5B7FC4", UDR:"#1E44B0",
+  DLF:"#4B5AA8", RN:"#5B4FC9", REC:"#2B2B6E",
+};
+
+let selectedInstitut = null;
+
+// data/sondages.json -> INSTITUTS / CANDIDATS au format attendu par l'affichage
+function appliquerSondages(data){
+  INSTITUTS = (data.instituts || []).map((i, k)=>({
+    id: "inst" + k,
+    nom: i.nom,
+    date: i.date,
+    echantillon: `${formatNombre(i.echantillon)} personnes`,
+    source: "notice officielle (Commission des sondages)",
+    url: i.url,
+    hypothese: i.hypotheses > 1 ? `Fourchette sur les ${i.hypotheses} hypothèses de candidatures testées` : "Hypothèse unique testée",
+    scores: i.scores,
+  }));
+  CANDIDATS = Object.entries(data.candidats || {}).map(([nom, parti])=>({
+    id: nom, nom, parti, couleur: COULEURS_PARTIS[parti] || "#8A8C94",
+  }));
+  SONDAGES_SOURCE = data.sourceUrl ? { url: data.sourceUrl, maj: data.lastUpdated } : null;
+  selectedInstitut = INSTITUTS[0] ? INSTITUTS[0].id : null;
+}
+let SONDAGES_SOURCE = null;
 
 function renderSourceBar(){
   const bar = document.getElementById("source-bar");
@@ -1969,10 +1963,15 @@ function renderSourceBar(){
 
 function renderSondageAverage(){
   const inst = INSTITUTS.find(i=>i.id===selectedInstitut);
+  if(!inst){
+    document.getElementById("sondage-avg-list").innerHTML = `<p class="chargement">Sondages indisponibles pour le moment.</p>`;
+    return;
+  }
   document.getElementById("sondage-institut-title").textContent =
     `Intentions de vote — 1er tour, présidentielle 2027 · ${inst.nom}`;
   document.getElementById("sondage-avg-sub").innerHTML =
-    `${inst.hypothese} · Échantillon : ${inst.echantillon} · <a href="${inst.url}" target="_blank" rel="noopener" style="color:var(--accent);">${inst.source}</a>`;
+    `${inst.hypothese} · Échantillon : ${inst.echantillon} · <a href="${esc(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${inst.source}</a>` +
+    (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${esc(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
 
   const disponibles = CANDIDATS
     .map(c=>({...c, range: inst.scores[c.id]}))
@@ -1987,7 +1986,7 @@ function renderSondageAverage(){
     const label = c.range[0]===c.range[1] ? `~${fr(c.range[0])} %` : `${fr(c.range[0])}–${fr(c.range[1])} %`;
     return `
     <div class="sondage-bar-row" style="animation-delay:${idx*25}ms">
-      <div class="bloc-name">${c.nom}</div>
+      <div class="bloc-name">${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</div>
       <div class="sondage-bar-track">
         <div class="sondage-bar-fill" style="width:${(mid/maxVal*100).toFixed(1)}%;background:${c.couleur}"></div>
       </div>
@@ -2092,61 +2091,48 @@ function showQuizResult(){
 
 /* ---------- Dirigeants des partis (données réelles, vérifiées début septembre 2026) ---------- */
 
-const LEADERS = [
-  { parti:"RN", nom:"Jordan Bardella", role:"Président du Rassemblement National", couleur:"#5B4FC9",
-    note:"Marine Le Pen préside le groupe RN à l'Assemblée nationale." },
-  { parti:"LFI", nom:"Jean-Luc Mélenchon", role:"Fondateur et figure de référence de LFI", couleur:"#D6284B",
-    note:"Mathilde Panot préside le groupe LFI-NFP à l'Assemblée nationale." },
-  { parti:"EPR", nom:"Gabriel Attal", role:"Président de Renaissance / Ensemble pour la République", couleur:"#E0B400" },
-  { parti:"LR", nom:"Bruno Retailleau", role:"Président des Républicains", couleur:"#2F6FE0",
-    note:"Laurent Wauquiez préside le groupe Droite Républicaine à l'Assemblée nationale." },
-  { parti:"SOC", nom:"Olivier Faure", role:"Premier secrétaire du Parti Socialiste", couleur:"#D6488A" },
-  { parti:"ECO", nom:"Marine Tondelier", role:"Secrétaire nationale des Écologistes (EELV)", couleur:"#1E9F58" },
-  { parti:"GDR", nom:"Fabien Roussel", role:"Secrétaire national du Parti Communiste Français", couleur:"#A32E22" },
-  { parti:"DEM", nom:"François Bayrou", role:"Président du MoDem", couleur:"#E08800" },
-  { parti:"HOR", nom:"Édouard Philippe", role:"Président d'Horizons", couleur:"#0FA89C" },
-  { parti:"LIOT", nom:"—", role:"LIOT est un groupe pluraliste d'élus régionalistes et centristes, sans président national", couleur:"#A67C0A" },
-  { parti:"UDR", nom:"Éric Ciotti", role:"Président de l'UDR (Union des droites pour la République)", couleur:"#1E44B0" },
-];
+let LEADERS = []; // data/dirigeants.json (saisie manuelle)
+let GROUPES = {}; // data/groupes.json (automatique, open data de l'Assemblée)
 
 function renderLeaders(){
   document.getElementById("leader-grid").innerHTML = LEADERS.map((l,idx)=>{
-    const initiales = l.nom.startsWith("—") ? l.parti : l.nom.split(" ").filter(w=>w.length>1).slice(0,2).map(w=>w[0]).join("");
+    const sansChef = l.nom.startsWith("—");
+    const initiales = sansChef ? l.parti : l.nom.split(" ").filter(w=>w.length>1).slice(0,2).map(w=>w[0]).join("");
+    // Présidence du groupe à l'Assemblée : donnée officielle (data/groupes.json), si ce n'est pas la même personne
+    const g = GROUPES[l.parti];
+    const noteGroupe = g && g.president && g.president !== l.nom
+      ? `${esc(g.president)} préside le groupe à l'Assemblée nationale.` : "";
     return `
       <div class="leader-card" style="animation-delay:${idx*25}ms">
-        <div class="leader-avatar" style="background:${l.couleur}">${initiales}</div>
+        <div class="leader-avatar" style="background:${l.couleur}">${esc(initiales)}</div>
         <div class="leader-info">
-          <div class="leader-name">${l.nom.startsWith("—") ? "Pas de chef de parti unique" : l.nom}</div>
-          <div class="leader-role">${l.role}${l.note ? " · "+l.note : ""}</div>
-          <span class="leader-party">${l.parti}</span>
+          <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
+          <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
+          <span class="leader-party">${esc(l.parti)}</span>
         </div>
       </div>`;
   }).join("");
+
+  const ids = PARTIES.map(p=>p.id).filter(id=>GROUPES[id]);
+  document.getElementById("groupes-presidents").innerHTML = ids.length ? `
+    <h3 class="section-titre">Groupes à l'Assemblée nationale <span>— données officielles, mises à jour automatiquement</span></h3>
+    <div class="groupes-grid">
+      ${ids.map(id=>{
+        const g = GROUPES[id], p = PARTIES.find(x=>x.id===id);
+        return `<div class="groupe-card">
+          <span class="dot" style="background:${p.couleur}"></span>
+          <div>
+            <div class="groupe-nom">${esc(g.libelle)}</div>
+            <div class="groupe-meta">${g.president ? `${g.presidente ? "Présidente" : "Président"} : <b>${esc(g.president)}</b>${g.presidentDepuis ? ` (depuis le ${esc(dateCourte(g.presidentDepuis))})` : ""} · ` : ""}${g.membres} député·es</div>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>` : "";
 }
 
 /* ---------- Chiffres clés France (données réelles INSEE) ---------- */
 
-// INDICATEURS : valeurs de secours intégrées, mêmes règles que pour LOIS ci-dessus.
-let INDICATEURS = [
-  { nom:"Population", valeur:"69,08 M", tendance:"neutre",
-    detail:"Population totale au 1ᵉʳ janvier 2026", motsCles:"population habitants démographie",
-    source:"INSEE", url:"https://www.insee.fr/fr/accueil", date:"1ᵉʳ janvier 2026" },
-  { nom:"Inflation", valeur:"+2,4 %", tendance:"up",
-    detail:"Évolution des prix à la consommation sur un an (estimation provisoire)", motsCles:"inflation prix consommation ipc pouvoir d'achat",
-    source:"INSEE", url:"https://www.insee.fr/fr/statistiques/9039020", date:"août 2026 (provisoire)" },
-  { nom:"Chômage", valeur:"8,3 %", tendance:"up",
-    detail:"Taux de chômage au sens du BIT, population active — 2,7 millions de personnes concernées", motsCles:"chomage chômage emploi travail",
-    source:"INSEE", url:"https://www.insee.fr/fr/statistiques/9032359", date:"2ᵉ trimestre 2026" },
-  { nom:"Croissance du PIB", valeur:"0,0 %", tendance:"neutre",
-    detail:"Évolution du PIB par rapport au trimestre précédent (estimation)", motsCles:"croissance pib économie",
-    source:"INSEE", url:"https://www.insee.fr/fr/accueil", date:"2ᵉ trimestre 2026" },
-  { nom:"Déficit public", valeur:"5,1 % du PIB", tendance:"up",
-    detail:"152,5 milliards d'euros en 2025 — au-dessus du seuil européen de 3 %, la France reste sous procédure pour déficit excessif", motsCles:"deficit déficit budget état finances publiques",
-    source:"INSEE", url:"https://www.insee.fr/fr/statistiques/8956575", date:"2025 (chiffre définitif)" },
-  { nom:"Dette publique", valeur:"115,6 % du PIB", tendance:"up",
-    detail:"3 460,5 milliards d'euros fin 2025 (dette au sens de Maastricht) — des estimateurs indépendants avancent ~118 % mi-2026, mais ce ne sont pas des chiffres officiels INSEE", motsCles:"dette endettement publique",
-    source:"INSEE", url:"https://www.insee.fr/fr/statistiques/8956575", date:"fin 2025 (chiffre définitif)" },
-];
+let INDICATEURS = []; // data/indicateurs.json (automatique depuis l'Insee, sauf inflation et déficit)
 
 function renderChiffres(filter=""){
   const f = filter.trim().toLowerCase();
@@ -2217,57 +2203,7 @@ function renderBudgetGauges(){
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
 
-const CONDAMNATIONS = [
-  {
-    nom:"Nicolas Sarkozy", role:"Ex-président de la République", parti:"LR",
-    affaire:"Affaire des écoutes (dite « Bismuth »)",
-    detail:"Condamné pour corruption et trafic d'influence (pacte avec le magistrat Gilbert Azibert). Peine : 1 an de prison dont 6 mois ferme, exécutés sous bracelet électronique.",
-    statut:"definitif", statutLabel:"Définitive",
-    source:"France 24", url:"https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
-  },
-  {
-    nom:"Nicolas Sarkozy", role:"Ex-président de la République", parti:"LR",
-    affaire:"Affaire Bygmalion",
-    detail:"Dépassement du budget de campagne présidentielle 2012 maquillé en factures de meetings militants. Peine devenue définitive le 26 novembre 2025 : 1 an de prison dont 6 mois ferme aménageable.",
-    statut:"definitif", statutLabel:"Définitive",
-    source:"L'Essentiel de l'Éco", url:"https://lessentieldeleco.fr/7807-ces-personnalites-qui-ont-ete-condamnees-au-bracelet-electronique/"
-  },
-  {
-    nom:"Nicolas Sarkozy", role:"Ex-président de la République", parti:"LR",
-    affaire:"Affaire du financement libyen (campagne 2007)",
-    detail:"Condamné en première instance le 25 septembre 2025 à 5 ans de prison ferme pour association de malfaiteurs. Incarcéré le 21 octobre 2025. Procès en appel ouvert le 16 mars 2026, verdict attendu le 30 novembre 2026.",
-    statut:"appel", statutLabel:"1ʳᵉ instance — appel en cours, non définitive",
-    source:"France 24 / Euronews", url:"https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
-  },
-  {
-    nom:"Marine Le Pen", role:"Présidente du groupe RN à l'Assemblée nationale", parti:"RN",
-    affaire:"Affaire des assistants parlementaires européens du FN",
-    detail:"Détournement de fonds du Parlement européen (2004-2016). Condamnée en 1ʳᵉ instance le 31 mars 2025, puis en appel le 7 juillet 2026 à 3 ans de prison dont 2 avec sursis et 1 an ferme aménageable (bracelet électronique) — sa peine d'inéligibilité, déjà purgée du fait de l'exécution provisoire, la laisse éligible pour 2027. Elle et les autres condamnés ont formé un pourvoi en cassation le 24 juillet 2026.",
-    statut:"appel", statutLabel:"Appel — pourvoi en cassation en cours, non définitive",
-    source:"Touteleurope.eu", url:"https://www.touteleurope.eu/vie-politique-des-etats-membres/proces-des-assistants-du-rn-marine-le-pen-condamnee-en-appel-mais-eligible-a-l-election-presidentielle-2027/"
-  },
-  {
-    nom:"François Fillon", role:"Ex-Premier ministre (RPR/UMP puis LR)", parti:"LR",
-    affaire:"Affaire des emplois fictifs (« Penelope Gate »)",
-    detail:"Emploi fictif de son épouse comme assistante parlementaire. Le statut d'emploi fictif est confirmé par la Cour de cassation en avril 2024. Peine définitive : 4 ans de prison avec sursis, 375 000 € d'amende, 5 ans d'inéligibilité.",
-    statut:"definitif", statutLabel:"Définitive",
-    source:"Poligraph.fr", url:"https://poligraph.fr/affaires/condamnations?certainty=etabli"
-  },
-  {
-    nom:"Jérôme Cahuzac", role:"Ex-ministre du Budget", parti:"SOC",
-    affaire:"Fraude fiscale et blanchiment",
-    detail:"Compte bancaire non déclaré à l'étranger dissimulé pendant qu'il était ministre du Budget chargé de la lutte contre la fraude fiscale. Condamnation confirmée par la Cour de cassation en 2018.",
-    statut:"definitif", statutLabel:"Définitive",
-    source:"Presse judiciaire française", url:"https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
-  },
-  {
-    nom:"Patrick Balkany", role:"Ex-maire de Levallois-Perret", parti:"LR",
-    affaire:"Fraude fiscale et blanchiment",
-    detail:"Dissimulation de patrimoine et fraude fiscale sur plusieurs années. Condamnation définitive.",
-    statut:"definitif", statutLabel:"Définitive",
-    source:"L'Essentiel de l'Éco", url:"https://lessentieldeleco.fr/7807-ces-personnalites-qui-ont-ete-condamnees-au-bracelet-electronique/"
-  },
-];
+let CONDAMNATIONS = []; // data/justice.json (saisie manuelle volontaire)
 
 let justiceFiltrePartiActif = "Tous";
 
@@ -2320,17 +2256,24 @@ function renderJusticeList(){
 
 /* ---------- Contexte de date : vote un jour férié ---------- */
 
-const JOURS_FERIES = [
-  "2024-07-14","2024-08-15","2024-11-01","2024-11-11","2024-12-25",
-  "2025-01-01","2025-04-21","2025-05-01","2025-05-08","2025-05-29","2025-06-09","2025-07-14","2025-08-15","2025-11-01","2025-11-11","2025-12-25",
-  "2026-01-01","2026-04-06","2026-05-01","2026-05-08","2026-05-14","2026-05-25","2026-07-14","2026-08-15","2026-11-01","2026-11-11","2026-12-25",
-  "2027-01-01","2027-03-29","2027-05-01","2027-05-06","2027-05-08","2027-05-17","2027-07-14","2027-08-15","2027-11-01","2027-11-11","2027-12-25",
-];
+// Jours fériés nationaux, calculés pour n'importe quelle année (dimanche de Pâques : algorithme de Meeus)
+function joursFeries(an){
+  const a=an%19, b=Math.floor(an/100), c=an%100, d=Math.floor(b/4), e=b%4, f=Math.floor((b+8)/25), g=Math.floor((b-f+1)/3);
+  const h=(19*a+b-d-g+15)%30, i=Math.floor(c/4), k=c%4, l=(32+2*e+2*i-h-k)%7, m=Math.floor((a+11*h+22*l)/451);
+  const mois=Math.floor((h+l-7*m+114)/31), jour=((h+l-7*m+114)%31)+1;
+  const paques = Date.UTC(an, mois-1, jour);
+  const iso = t => new Date(t).toISOString().slice(0,10);
+  const j = 864e5;
+  return new Set([
+    `${an}-01-01`, iso(paques + j), `${an}-05-01`, `${an}-05-08`, iso(paques + 39*j), iso(paques + 50*j),
+    `${an}-07-14`, `${an}-08-15`, `${an}-11-01`, `${an}-11-11`, `${an}-12-25`,
+  ]);
+}
 
 function checkContexteDate(loi){
   // dateISO vient directement de l'open data (pas de conversion de fuseau horaire)
   const iso = loi.dateISO;
-  if(iso && JOURS_FERIES.includes(iso)) return { type:"ferie", label:"ℹ️ Vote intervenu un jour férié" };
+  if(iso && joursFeries(parseInt(iso.slice(0,4),10)).has(iso)) return { type:"ferie", label:"ℹ️ Vote intervenu un jour férié" };
   return null;
 }
 
@@ -2351,7 +2294,7 @@ function renderAccueil(){
   const derniereLoi = LOIS.find(l=>categorieLoi(l)==="texte") || LOIS[0];
   const prochainMeeting = meetingsAVenir()[0];
   const instPrincipal = INSTITUTS[0];
-  const enTete = CANDIDATS
+  const enTete = instPrincipal && CANDIDATS
     .map(c=>({...c, range: instPrincipal.scores[c.id]}))
     .filter(c=>c.range)
     .sort((a,b)=> (b.range[0]+b.range[1]) - (a.range[0]+a.range[1]))[0];
@@ -2374,13 +2317,13 @@ function renderAccueil(){
       sous: "Seuls les événements confirmés par une source sont listés.",
       tab: "meetings"
     },
-    {
-      eyebrow: "Sondages 2027 · tendance actuelle",
-      titre: `${enTete.nom} en tête (${String(enTete.range[0]).replace(".",",")}–${String(enTete.range[1]).replace(".",",")} %)`,
+    enTete ? {
+      eyebrow: "Sondages 2027 · dernière enquête",
+      titre: `${enTete.nom} en tête (${enTete.range[0]===enTete.range[1] ? String(enTete.range[0]).replace(".",",") : String(enTete.range[0]).replace(".",",")+"–"+String(enTete.range[1]).replace(".",",")} %)`,
       sous: `${instPrincipal.nom}, ${instPrincipal.date}`,
       tab: "sondages"
-    },
-  ];
+    } : null,
+  ].filter(Boolean);
 
   document.getElementById("accueil-highlight-grid").innerHTML = highlights.map(h=>`
     <div class="accueil-highlight-card" data-tab="${h.tab}" ${h.loi ? `data-loi="${h.loi}"` : ""}>
@@ -2511,41 +2454,50 @@ document.addEventListener("click", (e)=>{
 // construire l'interface. En cas d'échec (fichier absent, ouverture en local sans serveur...),
 // le site continue avec des tableaux vides plutôt que de planter, et le signale dans la console.
 let LOIS_MAJ = null, INDICATEURS_MAJ = null;
-async function loadExternalData(){
+
+async function lireJSON(url){
   try{
-    const [loisRes, indicRes] = await Promise.all([
-      fetch("data/lois.json"),
-      fetch("data/indicateurs.json"),
-    ]);
-    if(loisRes.ok){
-      const loisJson = await loisRes.json();
-      if(loisJson.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
-    } else {
-      console.warn("Impossible de charger data/lois.json — valeurs de secours conservées.", loisRes.status);
-    }
-    if(indicRes.ok){
-      const indicJson = await indicRes.json();
-      if(indicJson.indicateurs?.length){ INDICATEURS = indicJson.indicateurs; INDICATEURS_MAJ = indicJson.lastUpdated; }
-    } else {
-      console.warn("Impossible de charger data/indicateurs.json — valeurs de secours conservées.", indicRes.status);
-    }
+    const res = await fetch(url);
+    if(!res.ok){ console.warn(`Impossible de charger ${url}`, res.status); return null; }
+    return await res.json();
   } catch(e){
-    console.warn(
-      "Chargement des données externes impossible (probablement une ouverture du fichier " +
-      "en local sans serveur — le navigateur bloque fetch() sur file://). " +
-      "Servir le dossier avec un petit serveur local (ex: `npx serve`) pour tester correctement.",
-      e
-    );
+    console.warn(`Chargement de ${url} impossible (ouverture sans serveur ?)`, e);
+    return null;
   }
+}
+
+// Petits fichiers : affichés immédiatement
+async function loadPetitesDonnees(){
+  const [indic, groupes, sondages, dirigeants, justice, meetings] = await Promise.all([
+    lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
+    lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
+  ]);
+  if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
+  if(groupes?.groupes) GROUPES = groupes.groupes;
+  if(sondages?.instituts?.length) appliquerSondages(sondages);
+  if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
+  if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
+  if(meetings?.meetings) MEETINGS = meetings.meetings;
+  const verif = (id, iso) => { const el = document.getElementById(id); if(el && iso && dateCourte(iso)) el.textContent = dateCourte(iso); };
+  verif("dirigeants-verifie", dirigeants?.verifieLe);
+  verif("justice-verifie", justice?.verifieLe);
+}
+
+// Gros fichier des scrutins (~500 Ko compressés)
+async function loadExternalData(){
+  const loisJson = await lireJSON("data/lois.json");
+  if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
 }
 
 function dateCourte(iso){
   const d = new Date(iso);
-  return isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+  return isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }).replace(/^1 /, "1er ");
 }
 
 async function initSite(){
-  // 1) Sections qui ne dépendent pas des gros fichiers : affichées immédiatement
+  // 1) Petits fichiers de données, puis sections qui ne dépendent pas des scrutins
+  await loadPetitesDonnees();
+  appliquerCompositionActuelle();
   renderLeaders();
   renderJusticeSummary();
   renderJusticeFilterBar();
