@@ -85,6 +85,21 @@ function verifier(cond, message) {
     await page.click("#quiz-submit");
     verifier((await page.$$(".quiz-result-row")).length >= 8, `${nom} : résultat du quiz absent`);
 
+    if (nom === "mobile") {
+      // Version téléphone : barre d'onglets et panneau « Plus »
+      await page.goto(base, { waitUntil: "networkidle" });
+      verifier(await page.isVisible(".barre-mobile"), "mobile : barre d'onglets absente");
+      await page.click("#bouton-plus");
+      verifier(await page.isVisible("#feuille-plus"), "mobile : le panneau « Plus » ne s'ouvre pas");
+      await page.click('.feuille-lien[data-tab="chiffres"]');
+      await page.waitForTimeout(250);
+      verifier(await page.evaluate(() => document.getElementById("view-chiffres").classList.contains("active") && document.getElementById("feuille-plus").hidden),
+        "mobile : le panneau ne mène pas à la rubrique choisie");
+      await page.click('.onglet-mobile[data-tab="scrutin"]');
+      await page.waitForTimeout(400);
+      verifier(await page.evaluate(() => document.getElementById("view-scrutin").classList.contains("active")), "mobile : l'onglet Votes ne fonctionne pas");
+    }
+
     verifier(erreurs.length === 0, `${nom} : erreurs JavaScript — ${erreurs.join(" | ")}`);
     await page.close();
   }
