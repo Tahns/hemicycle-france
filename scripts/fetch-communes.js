@@ -4,8 +4,9 @@
  * -----------------
  * Construit data/communes.json : pour chaque commune, la ou les circonscriptions législatives
  * dont elle fait partie (les grandes villes sont partagées entre plusieurs circonscriptions),
- * d'après les résultats officiels par commune des élections législatives de 2024 publiés par le
- * ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
+ * d'après les résultats officiels par bureau de vote des élections législatives de 2024 publiés par
+ * le ministère de l'Intérieur sur data.gouv.fr. (Le fichier « par communes » du même jeu de données
+ * n'indique pas la circonscription : seul le fichier par bureau de vote la donne.) Sert à « trouver son député » en tapant sa commune.
  *
  * Le découpage des circonscriptions ne change qu'avec une loi : le fichier n'est reconstruit que
  * s'il a plus de 90 jours (ou avec --force).
@@ -23,7 +24,7 @@ import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
 const DATA_FILE = path.resolve("data/communes.json");
-const SOURCE = "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240711-075056/resultats-definitifs-par-communes.csv";
+const SOURCE = "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240710-171445/resultats-definitifs-par-bureau-de-vote.csv";
 const PAGE = "https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/";
 const FORCE = process.argv.includes("--force");
 const FICHIER = process.argv.find((a) => a.startsWith("--fichier="))?.split("=")[1];
@@ -53,7 +54,7 @@ export function construire(csv) {
   const col = (...motsCles) => entete.findIndex((h) => motsCles.every((m) => h.includes(m)));
   const iDep = col("libelle", "departement"), iCirco = col("code", "circonscription"), iLibCirco = col("libelle", "circonscription");
   const iCom = col("libelle", "commune"), iCodeDep = col("code", "departement");
-  if (iDep < 0 || iCom < 0 || (iCirco < 0 && iLibCirco < 0)) throw new Error(`colonnes introuvables dans l'en-tête : ${entete.slice(0, 12).join(" | ")}`);
+  if (iDep < 0 || iCom < 0 || (iCirco < 0 && iLibCirco < 0)) throw new Error(`colonnes introuvables (département, commune et circonscription) dans l'en-tête : ${entete.join(" | ")}`);
 
   const deps = {};
   const circos = new Set();
@@ -101,7 +102,7 @@ async function main() {
   }
   await writeFile(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
-    source: "Ministère de l'Intérieur — résultats des législatives 2024 par commune (data.gouv.fr)",
+    source: "Ministère de l'Intérieur — résultats des législatives 2024 par bureau de vote (data.gouv.fr)",
     sourceUrl: PAGE,
     departements,
   }) + "\n");

@@ -15,7 +15,7 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Sondages présidentielle 2027 (dernière enquête de chaque institut, et historique des deux derniers semestres pour la courbe) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
-| Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
+| Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par bureau de vote, ministère de l'Intérieur | `data/communes.json` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
