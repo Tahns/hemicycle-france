@@ -11,7 +11,7 @@
  *   { "candidats": { "t1": ["Macron", …], "t2": [...] }, "communes": { "Bordeaux": { "t1": [301, …], "t2": [...] } } }
  * Les pourcentages sont en dixièmes de point des suffrages exprimés (301 = 30,1 %).
  *
- * Les ressources sont retrouvées par l'API de data.gouv.fr (titre contenant « commune »), les
+ * Les ressources sont retrouvées par l'API de data.gouv.fr (niveau « subcom », c'est-à-dire la commune), les
  * colonnes par leur intitulé. Résultats définitifs : le fichier n'est construit qu'une fois (--force
  * pour le refaire).
  *
@@ -42,9 +42,11 @@ async function urlRessource(jeu) {
   const res = await fetch(`https://www.data.gouv.fr/api/1/datasets/${jeu}/`);
   if (!res.ok) throw new Error(`data.gouv.fr : HTTP ${res.status} pour ${jeu}`);
   const d = await res.json();
-  const r = d.resources.find((x) => /commune/i.test(x.title) && /csv|txt/i.test(x.format || x.url) && !/sub|arrond/i.test(x.title))
-    || d.resources.find((x) => /commune/i.test(x.title) && /csv|txt/i.test(x.format || x.url));
-  if (!r) throw new Error(`aucune ressource « commune » en CSV dans ${jeu} : ${d.resources.map((x) => x.title).join(" | ")}`);
+  // Niveau « subcom » (subdivision communale = commune) en texte, sinon un fichier « commune » en CSV
+  const texte = (x) => /\.(txt|csv)$/i.test(x.title || x.url) || /csv|txt/i.test(x.format || "");
+  const r = d.resources.find((x) => /subcom/i.test(x.title) && texte(x))
+    || d.resources.find((x) => /commune/i.test(x.title) && texte(x));
+  if (!r) throw new Error(`aucune ressource par commune en texte dans ${jeu} : ${d.resources.map((x) => x.title).join(" | ")}`);
   log(`${jeu} : ${r.title}`);
   return r.url;
 }
