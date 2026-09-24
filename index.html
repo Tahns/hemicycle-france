@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Décrypter la politique française</title>
 <meta name="description" content="Ce que votent les députés, groupe par groupe, qui dirige les partis, où en sont les sondages de la présidentielle 2027 et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
-<meta name="theme-color" content="#F5F1E8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F5F1E8">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Décrypter la politique française">
@@ -17,6 +16,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Thème : clair par défaut ; le mode sombre n'est activé que si le visiteur l'a choisi
+  try{ if(localStorage.getItem("theme") === "sombre") document.documentElement.dataset.theme = "sombre"; }catch(e){}
+</script>
 <style>
   /* =========================================================
      Thème « journal civique » : papier, encre, filets, bleu République.
@@ -45,17 +48,19 @@
     --font-body:"Public Sans", -apple-system, "Segoe UI", sans-serif;
     --largeur:1180px;
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#151411;
-      --bg-elevated:#1D1C18;
-      --bg-elevated-2:#26241F;
-      --border:#3D3A32;
-      --border-soft:#2C2A25;
-      --ink:#EDE9DF;
-      --text:#EDE9DF;
-      --text-soft:#C9C3B6;
-      --text-faint:#A29C8F;
+  /* Mode sombre : uniquement sur demande (bouton dans l'en-tête), jamais imposé par le système.
+     Fond gris ardoise plutôt que noir, pour garder un bon confort de lecture. */
+  :root[data-theme="sombre"]{
+    color-scheme:dark;
+      --bg:#2A2926;
+      --bg-elevated:#33312D;
+      --bg-elevated-2:#3B3934;
+      --border:#55524A;
+      --border-soft:#43403A;
+      --ink:#F0ECE3;
+      --text:#F0ECE3;
+      --text-soft:#D6D0C4;
+      --text-faint:#B5AFA2;
       --accent:#A9B8F2;
       --accent-dim:rgba(169,184,242,.12);
       --vert:#7CC596;
@@ -64,7 +69,6 @@
       --rouge-dim:rgba(240,138,128,.13);
       --ambre:#E5A75A;
       --ambre-dim:rgba(229,167,90,.13);
-    }
   }
   *{box-sizing:border-box;}
   html{scroll-padding-top:64px;}
@@ -92,11 +96,17 @@
   .liseré span:nth-child(2){background:#F7F4EC;}
   .liseré span:nth-child(3){background:#C8102E;}
   .masthead-top{
-    display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    padding:14px 0 10px; font-size:12.5px; color:var(--text-faint);
+    display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    padding:12px 0 10px; font-size:12.5px; color:var(--text-faint);
     border-bottom:1px solid var(--border);
   }
   .masthead-top b{color:var(--text-soft); font-weight:600;}
+  .theme-toggle{
+    background:none; border:1px solid var(--border); border-radius:3px; padding:3px 9px;
+    font:inherit; font-size:12.5px; color:var(--text-soft); cursor:pointer;
+  }
+  .theme-toggle:hover{border-color:var(--text-soft); color:var(--text);}
+  .masthead-top .droite{display:flex; align-items:center; gap:14px;}
   .masthead-titre{padding:22px 0 18px; border-bottom:3px double var(--ink);}
   h1{
     margin:0; font-family:var(--font-display);
@@ -180,7 +190,7 @@
   }
   .theme-chip:hover, .party-chip:hover, .source-chip:hover{border-color:var(--ink); color:var(--text);}
   .theme-chip.selected, .party-chip.selected, .source-chip.selected{
-    background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:600;
+    background:var(--accent-dim); border-color:var(--accent); color:var(--accent); font-weight:700;
   }
   .party-chip .dot{width:9px; height:9px; border-radius:50%;}
   .source-chip .check{display:none;}
@@ -242,9 +252,8 @@
   .tooltip .vote-pour{color:#8FD4A5;}
   .tooltip .vote-contre{color:#F4A097;}
   .tooltip .vote-abst{opacity:.8;}
-  @media (prefers-color-scheme: dark){
-    .tooltip .vote-pour{color:var(--vert);} .tooltip .vote-contre{color:#B3261E;}
-  }
+  [data-theme="sombre"] .tooltip .vote-pour{color:#2E6B3F;}
+  [data-theme="sombre"] .tooltip .vote-contre{color:#B3261E;}
 
   .breakdown h3{
     margin:0 0 12px; font-family:var(--font-display); font-size:22px; font-weight:600; line-height:1.25; color:var(--text);
@@ -394,7 +403,8 @@
   }
   .quiz-cta:disabled{opacity:.35; cursor:not-allowed;}
   .quiz-cta:not(:disabled):hover{filter:brightness(1.12);}
-  @media (prefers-color-scheme: dark){ .quiz-cta{color:#151411;} .quiz-option.picked-pour, .quiz-option.picked-contre, .quiz-option.picked-abst{color:#151411;} }
+  [data-theme="sombre"] .quiz-cta, [data-theme="sombre"] .quiz-option.picked-pour,
+  [data-theme="sombre"] .quiz-option.picked-contre, [data-theme="sombre"] .quiz-option.picked-abst{color:#2A2926;}
   .quiz-result-row{display:flex; align-items:center; gap:14px; padding:9px 0; border-bottom:1px solid var(--border-soft);}
   .quiz-result-rank{font-family:var(--font-display); font-size:18px; color:var(--text-faint); width:24px;}
   .quiz-result-name{flex:1; font-weight:600;}
@@ -490,7 +500,7 @@
     main{padding:22px 16px 48px;}
     .masthead{padding:0 16px;}
     .liseré{margin:0 -16px;}
-    .masthead-top span:last-child{display:none;}
+    .masthead-top .maj-info{display:none;}
     .histo-row{grid-template-columns:1fr;}
     .histo-vote-tag{justify-self:start;}
     input[type="search"]{width:100%;}
@@ -514,7 +524,8 @@
   <div class="liseré" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="masthead-top">
     <span id="edition-date">Édition du jour</span>
-    <span>Mis à jour chaque matin à partir de sources publiques</span>
+    <span class="droite"><span class="maj-info">Mis à jour chaque matin à partir de sources publiques</span>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
     <h1>Décrypter la politique française</h1>
@@ -2123,6 +2134,24 @@ document.addEventListener("keydown", (e)=>{
   e.preventDefault();
   el.click();
 });
+
+// Bouton clair / sombre (le choix est mémorisé dans ce navigateur)
+(function(){
+  const btn = document.getElementById("theme-toggle");
+  const maj = () => {
+    const sombre = document.documentElement.dataset.theme === "sombre";
+    btn.textContent = sombre ? "Mode clair" : "Mode sombre";
+    btn.setAttribute("aria-pressed", String(sombre));
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", sombre ? "#2A2926" : "#F5F1E8");
+  };
+  btn.addEventListener("click", ()=>{
+    const sombre = document.documentElement.dataset.theme !== "sombre";
+    if(sombre) document.documentElement.dataset.theme = "sombre"; else delete document.documentElement.dataset.theme;
+    try{ localStorage.setItem("theme", sombre ? "sombre" : "clair"); }catch(e){}
+    maj();
+  });
+  maj();
+})();
 
 // Date d'édition affichée dans l'en-tête
 (function(){
