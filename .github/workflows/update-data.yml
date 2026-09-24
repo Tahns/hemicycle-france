@@ -52,6 +52,14 @@ jobs:
         id: senat
         run: node scripts/fetch-senat.js
         continue-on-error: true
+      - name: Sénateurs en fonction et leur vote sur chaque texte
+        id: senateurs
+        run: node scripts/fetch-senateurs.js
+        continue-on-error: true
+      - name: Ordre du jour des séances de l'Assemblée
+        id: agenda
+        run: node scripts/fetch-agenda-an.js
+        continue-on-error: true
       - name: Parcours des textes entre l'Assemblée et le Sénat
         id: navette
         run: node scripts/navette.js
@@ -81,11 +89,16 @@ jobs:
         run: node scripts/partage.cjs
         continue-on-error: true
 
+      - name: Photos des députés et des sénateurs (seulement les nouvelles)
+        id: photos
+        run: node scripts/photos.cjs
+        continue-on-error: true
+
       - name: Committer les changements s'il y en a
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ v/ d/ icons/partage.jpg sitemap.xml robots.txt feed.xml index.html
+          git add data/ v/ d/ photos/ icons/partage.jpg sitemap.xml robots.txt feed.xml index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de données — rien à committer."
           else
@@ -106,7 +119,7 @@ jobs:
 
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -121,6 +134,9 @@ jobs:
             [ "${{ steps.senat.outcome }}" = "failure" ] && echo "- **Sénat** : lecture des scrutins impossible ou nombreux scrutins écartés (format des pages changé ?)."
             [ "${{ steps.activite.outcome }}" = "failure" ] && echo "- **Activité des députés** : archives de l'Assemblée ou liste HATVP illisibles (données précédentes conservées)."
             [ "${{ steps.elections.outcome }}" = "failure" ] && echo "- **Présidentielle 2022 par commune** : fichiers du ministère introuvables ou incohérents sur data.gouv.fr."
+            [ "${{ steps.senateurs.outcome }}" = "failure" ] && echo "- **Sénateurs** : liste officielle illisible ou votes nom par nom qui ne correspondent pas aux totaux officiels."
+            [ "${{ steps.agenda.outcome }}" = "failure" ] && echo "- **Ordre du jour de l'Assemblée** : agenda open data illisible (ancien agenda conservé)."
+            [ "${{ steps.photos.outcome }}" = "failure" ] && echo "- **Photos des élus** : nombreuses photos impossibles à télécharger."
             [ "${{ steps.navette.outcome }}" = "failure" ] && echo "- **Parcours des textes** : correspondance Assemblée/Sénat impossible à construire."
             [ "${{ steps.dirigeants.outcome }}" = "failure" ] && echo "- **Chefs de parti** : au moins une infobox Wikipédia n'a pas pu être lue (entrée conservée)."
             [ "${{ steps.candidats.outcome }}" = "failure" ] && echo "- **Candidats 2027** : lecture de la page Wikipédia des candidatures impossible ou trop de lignes illisibles."

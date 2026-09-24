@@ -53,6 +53,7 @@ import { execFile } from "child_process";
 import { promisify } from "util";
 import { construireDeputes } from "./deputes.js";
 import { completer, compacter } from "./lois-format.js";
+import { ecrireGouvernement } from "./gouvernement.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -568,6 +569,8 @@ async function main() {
   await downloadAndExtract(ORGANES_ZIP_URL, organesDir);
   const organeRefToSigle = await buildOrganeRefToSigle(organesDir);
   const acteurGroupes = await buildActeurGroupes(organesDir);
+  // Composition du Gouvernement (même archive AMO30) : un échec ne bloque pas les votes
+  if (!DRY_RUN) await ecrireGouvernement(organesDir).catch((e) => warn(`Gouvernement non mis à jour : ${e.message}`));
 
   const dossiersDir = await mkdtemp(path.join(os.tmpdir(), "an-dossiers-"));
   await downloadAndExtract(DOSSIERS_ZIP_URL, dossiersDir);

@@ -548,6 +548,16 @@
   .meeting-desc{font-size:15px; color:var(--text-soft); margin-bottom:6px;}
   .meeting-source{font-size:12.5px; color:var(--text-faint);}
   .verified-badge{display:none;}
+  .an-agenda .section-titre:first-child{margin-top:0;}
+  .an-jour{display:grid; grid-template-columns:78px 1fr; gap:18px; padding:12px 0; border-bottom:1px solid var(--border);}
+  .an-jour .jour{font-weight:700; font-size:14px;}
+  .an-jour .jour::first-letter{text-transform:uppercase;}
+  .an-jour ul{margin:0; padding:0; list-style:none;}
+  .an-jour li{font-size:14.5px; padding:2px 0;}
+  .an-jour .tag{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:1px 6px; border-radius:4px; margin-right:6px; background:var(--border-soft); color:var(--text-soft);}
+  .an-jour .tag.vote{background:var(--accent); color:#fff;}
+  .an-agenda details summary{cursor:pointer; font-weight:600; font-size:15px; min-height:44px; display:flex; align-items:center;}
+  @media (max-width:640px){ .an-jour{grid-template-columns:62px 1fr; gap:12px;} }
   .meeting-empty{padding:18px 0; font-family:var(--font-display); font-style:italic; font-size:17px; color:var(--text-soft); border-bottom:1px solid var(--border);}
   .meetings-subtitle{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-faint); margin:34px 0 0; padding-top:10px; border-top:1px solid var(--ink);}
 
@@ -732,6 +742,8 @@
   .commune-bloc .depute-carte:last-child{border-bottom:none;}
   .depute-retour{margin-bottom:18px;}
   .depute-entete{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin-bottom:6px;}
+  .depute-avatar img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 20%; border-radius:50%;}
+  .depute-avatar.photo{width:64px; height:64px; position:relative; overflow:hidden;}
   .depute-avatar{width:52px; height:52px; border-radius:50%; border:3px solid; background:var(--bg-elevated); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--text);}
   .vote-barre.mini{height:6px; margin:8px 0 0;}
   .depute-entete h3{margin:0; font-family:var(--font-display); font-size:30px; font-weight:600; line-height:1.15;}
@@ -759,6 +771,9 @@
   .groupe-card .dot{margin-top:7px;}
   .groupe-nom{font-weight:700; font-size:15px;}
   .groupe-meta{font-size:13.5px; color:var(--text-soft); margin-top:1px;}
+  .gouv-bloc{margin:0 0 6px; border-bottom:1px solid var(--border);}
+  .gouv-bloc summary{cursor:pointer; font-weight:600; font-size:15px; min-height:44px; display:flex; align-items:center;}
+  .gouv-bloc .groupes-grid{margin-bottom:10px;}
 
   /* ---------- Justice ---------- */
   .justice-summary{display:flex; flex-wrap:wrap; gap:0; margin-bottom:18px; border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
@@ -1175,9 +1190,18 @@
     <div class="rubrique-tete">
       <div class="surtitre">Sénat</div>
       <h2>Sénat</h2>
-      <p class="chapo">L'autre moitié du Parlement. Une loi passe par les deux chambres : le Sénat peut modifier ou rejeter ce que l'Assemblée a adopté, et l'inverse. Voici ses votes publics, groupe par groupe.
+      <p class="chapo">L'autre moitié du Parlement. Une loi passe par les deux chambres : le Sénat peut modifier ou rejeter ce que l'Assemblée a adopté, et l'inverse. Voici ses votes publics groupe par groupe, et ce qu'a voté chaque sénateur sur l'ensemble des textes.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
     </div>
+    <div id="senat-principal">
+    <div class="filtres" role="search" aria-label="Trouver un sénateur">
+      <div class="filtre-champs">
+        <label class="filtre-champ filtre-champ-large"><span class="filtre-label">Vos sénateurs : nom ou département</span>
+          <input type="search" id="senateur-search" placeholder="Gironde, Larcher…" /></label>
+      </div>
+    </div>
+    <div class="depute-grid" id="senateurs-liste" hidden></div>
+    <h3 class="section-titre">Les scrutins publics</h3>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins du Sénat">
       <div class="filtre-groupe">
         <span class="filtre-label" id="senat-type-label">Type de scrutin</span>
@@ -1193,17 +1217,20 @@
       </div>
     </div>
     <div id="senat-liste"></div>
+    </div>
+    <div id="senateur-fiche" hidden></div>
   </section>
 
   <section class="view" id="view-dirigeants">
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Partis</h2>
-      <p class="chapo">Qui tient les rênes de chaque parti, et qui mène ses troupes à l'Assemblée.
+      <p class="chapo">Qui tient les rênes de chaque parti, qui mène ses troupes à l'Assemblée, et qui siège au Gouvernement.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
     </div>
     <div class="leader-grid" id="leader-grid"></div>
     <div id="groupes-presidents"></div>
+    <div id="gouvernement"></div>
   </section>
 
   <section class="view" id="view-chiffres">
@@ -1221,8 +1248,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Agenda</h2>
-      <p class="chapo">Les prochains rendez-vous de la vie politique : congrès, primaires, meetings, élections. Seules les dates confirmées publiquement y figurent.</p>
+      <p class="chapo">Ce que les députés examinent dans les prochains jours, puis les rendez-vous de la vie politique : congrès, primaires, meetings, élections. Seules les dates confirmées publiquement y figurent.</p>
     </div>
+    <div class="an-agenda" id="an-agenda"></div>
     <div class="meeting-list" id="meeting-list"></div>
   </section>
 
@@ -1304,6 +1332,9 @@
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
+        <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
+        <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques), Licence Ouverte.</li>
+        <li><b>Photos des élus :</b> photos officielles de l'Assemblée nationale et du Sénat, réduites et hébergées sur le site.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
         <li><b>Communes et circonscriptions :</b> résultats officiels du 1er tour des législatives 2024 par circonscription et par bureau de vote, ministère de l'Intérieur (<a href="https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a>, Licence Ouverte).</li>
         <li><b>Activité et transparence des députés :</b> questions écrites et amendements (<a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a>) ; déclarations d'intérêts et de patrimoine (<a href="https://www.hatvp.fr/open-data/" target="_blank" rel="noopener">open data de la HATVP</a>, lien vers la page officielle de chaque député, sans reprise des montants).</li>
@@ -1329,7 +1360,7 @@
         <li>Les polices de caractères sont hébergées sur le site : votre navigateur ne contacte aucun service tiers.</li>
         <li>Pour permettre la lecture hors connexion, votre navigateur conserve une copie des pages et des données publiques déjà consultées. Cette copie reste sur votre appareil ; vous pouvez l'effacer à tout moment depuis les réglages du navigateur.</li>
         <li>En tant qu'hébergeur, GitHub peut conserver des journaux techniques, dont votre adresse IP, pour des raisons de sécurité : voir sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>.</li>
-        <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale.</li>
+        <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale et le Sénat.</li>
       </ul>
       <p>Pour toute question sur vos données, vous pouvez ouvrir un ticket ou saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
 
@@ -2399,6 +2430,26 @@ function renderMeetings(){
     (passes.length ? `<div class="meetings-subtitle">Événements récents</div>` + passes.map((m,i)=>meetingCard(m,i,true)).join("") : "");
 }
 
+// Ordre du jour des séances publiques de l'Assemblée : data/agenda-an.json, chargé à l'ouverture de l'Agenda
+let AGENDA_AN = null;
+function renderAgendaAN(){
+  if(AGENDA_AN === null){ AGENDA_AN = false; lireJSON("data/agenda-an.json").then(d=>{ AGENDA_AN = d || {}; renderAgendaAN(); }); return; }
+  const el = document.getElementById("an-agenda");
+  if(!AGENDA_AN) return;
+  const jours = (AGENDA_AN.jours || []).filter(j=> j.date >= aujourdhuiISO());
+  if(!jours.length){ el.innerHTML = ""; return; }
+  const jourFr = (iso)=> new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"short", day:"numeric", month:"short" });
+  const ligne = (p)=>{
+    const t = p.dossier ? `<a href="https://www.assemblee-nationale.fr/dyn/17/dossiers/${encodeURIComponent(p.dossier)}" target="_blank" rel="noopener">${esc(p.objet)}</a>` : esc(p.objet);
+    return p.type === "vote" ? `<li><span class="tag vote">Vote solennel</span>${t}</li>` : p.type === "qag" ? "" : `<li>${t}</li>`;
+  };
+  const jour = (j)=>`<div class="an-jour"><div class="jour">${esc(jourFr(j.date))}</div><ul>${j.points.some(p=>p.type==="qag") ? `<li><span class="tag">Questions au Gouvernement</span></li>` : ""}${j.points.map(ligne).join("")}</ul></div>`;
+  el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé chaque matin. Il peut encore changer.</span></h3>
+    ${jours.slice(0,4).map(jour).join("")}
+    ${jours.length > 4 ? `<details><summary>Les ${jours.length - 4} jours de séance suivants</summary>${jours.slice(4).map(jour).join("")}</details>` : ""}
+    <h3 class="section-titre">Congrès, meetings, élections</h3>`;
+}
+
 /* ---------- Sondages 2027 ---------- */
 
 // Du plus récent au plus ancien : le premier institut est affiché par défaut.
@@ -2903,6 +2954,24 @@ function renderLeaders(){
     </div>` : "";
 }
 
+// Composition du Gouvernement : data/gouvernement.json, chargé à l'ouverture de la rubrique Partis
+let GOUVERNEMENT = null;
+function renderGouvernement(){
+  if(GOUVERNEMENT === null){ GOUVERNEMENT = false; lireJSON("data/gouvernement.json").then(d=>{ GOUVERNEMENT = d; renderGouvernement(); }); return; }
+  const g = GOUVERNEMENT, el = document.getElementById("gouvernement");
+  if(!g || !g.membres?.length || el.dataset.fait) return;
+  el.dataset.fait = "1";
+  const carte = (m)=> `<div class="groupe-card"><div><div class="groupe-nom">${esc(m.nom)}</div><div class="groupe-meta">${esc(m.fonction)}${m.depuis && g.depuis && Date.parse(m.depuis) - Date.parse(g.depuis) > 30*864e5 ? ` · depuis le ${esc(dateCourte(m.depuis))}` : ""}</div></div></div>`;
+  const pm = g.membres.filter(m=>m.qualite === "Premier ministre");
+  const delegues = g.membres.filter(m=>/délégué|Secrétaire/i.test(m.qualite + " " + m.fonction.split(",")[0]));
+  const ministres = g.membres.filter(m=>!pm.includes(m) && !delegues.includes(m));
+  const bloc = (titre, liste)=> liste.length ? `<details class="gouv-bloc"><summary>${titre} (${liste.length})</summary><div class="groupes-grid">${liste.map(carte).join("")}</div></details>` : "";
+  el.innerHTML = `
+    <h3 class="section-titre">Le Gouvernement <span>${esc(g.nom)}${g.depuis ? `, nommé le ${esc(dateCourte(g.depuis))}` : ""}. ${g.membres.length} membres, d'après les données de l'Assemblée nationale, mises à jour automatiquement.</span></h3>
+    <div class="groupes-grid">${pm.map(carte).join("")}</div>
+    ${bloc("Les ministres", ministres)}${bloc("Les ministres délégués", delegues)}`;
+}
+
 /* ---------- Chiffres clés France (données réelles INSEE) ---------- */
 
 let INDICATEURS = []; // data/indicateurs.json (automatique depuis l'Insee, sauf inflation et déficit)
@@ -3262,6 +3331,102 @@ document.getElementById("senat-search").addEventListener("input", ()=>{
   senatRechercheTimer = setTimeout(()=>{ senatLimite = 40; renderSenat(); }, 150);
 });
 
+// Photo officielle (hébergée sur le site) : si elle manque, les initiales restent affichées
+function photoSecours(el){ el.querySelectorAll(".depute-avatar img").forEach(img=> img.addEventListener("error", ()=> img.remove())); }
+
+/* Sénateurs (data/senateurs.json, chargé à la première recherche) : vote de chacun sur l'ensemble des textes */
+let SENATEURS = null, SENATEURS_CLES = [], senateursChargement = null, senateurOuvert = null;
+function chargerSenateurs(){
+  if(!senateursChargement) senateursChargement = lireJSON("data/senateurs.json").then(d=>{ SENATEURS = d?.senateurs || []; SENATEURS_CLES = d?.cles || []; });
+  return senateursChargement;
+}
+const groupeSenateur = s => GROUPES_SENAT[s.groupe] || { nom:s.groupe, couleur:"#8A8C94" };
+const carteSenateur = s => `<button type="button" class="depute-carte" data-senateur="${esc(s.id)}"><span class="dot" style="background:${groupeSenateur(s).couleur}"></span><span><b>${esc(s.nom)}</b><span>${s.f ? "Sénatrice" : "Sénateur"} · ${esc(s.dep)} · ${esc(groupeSenateur(s).nom)}</span></span></button>`;
+function brancherSenateurs(el){ el.querySelectorAll("[data-senateur]").forEach(b=> b.addEventListener("click", ()=>{ location.hash = "senateur-" + b.dataset.senateur; })); }
+
+async function renderSenateursRecherche(){
+  const q = norm(document.getElementById("senateur-search").value.trim());
+  const el = document.getElementById("senateurs-liste");
+  if(q.length < 2){ el.hidden = true; el.innerHTML = ""; return; }
+  if(!SENATEURS) await chargerSenateurs();
+  const res = SENATEURS.filter(s => norm(s.nom).includes(q) || normDep(s.dep).includes(normDep(q)));
+  el.hidden = false;
+  el.innerHTML = res.length ? res.slice(0, 30).map(carteSenateur).join("") : `<p class="no-result-msg">Aucun sénateur ne correspond à cette recherche.</p>`;
+  brancherSenateurs(el);
+}
+let senateurRechercheTimer;
+document.getElementById("senateur-search").addEventListener("input", ()=>{
+  clearTimeout(senateurRechercheTimer);
+  senateurRechercheTimer = setTimeout(renderSenateursRecherche, 150);
+});
+
+async function ouvrirSenateur(id){
+  await Promise.all([chargerSenateurs(), chargerSenat()]);
+  const s = SENATEURS.find(x=>x.id===id);
+  if(!s){ fermerSenateur(); return; }
+  senateurOuvert = id;
+  document.getElementById("senat-principal").hidden = true;
+  const fiche = document.getElementById("senateur-fiche");
+  fiche.hidden = false;
+  const g = groupeSenateur(s);
+  const LIB = { p:["Pour","tag-pour"], c:["Contre","tag-contre"], a:["Abstention","abst"], n:["N'a pas pris part au vote","absent"] };
+  const lignes = SENATEURS_CLES.map((cle, i)=>({ code:s.votes[i], scr:SENAT.find(x=>x.id===cle) })).filter(x=>x.code && x.code !== "." && x.scr);
+  const presents = lignes.filter(x=>"pca".includes(x.code));
+  // Position majoritaire de son groupe actuel sur chaque texte
+  const ecarts = presents.filter(({ code, scr })=>{
+    const v = scr.groupes?.[s.groupe]; if(!v || s.groupe === "NI") return false;
+    const maj = [["p",v.pour],["c",v.contre],["a",v.abst]].sort((a,b)=>b[1]-a[1]);
+    return maj[0][1] > maj[1][1] && maj[0][0] !== code;
+  }).length;
+  const initiales = s.nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
+  fiche.innerHTML = `
+    <button type="button" class="lien-bouton depute-retour" id="senateur-retour">← Le Sénat</button>
+    <div class="depute-entete">
+      <span class="depute-avatar photo" style="border-color:${g.couleur}" aria-hidden="true">${esc(initiales)}<img src="photos/senateurs/${esc(s.id)}.jpg" alt="" width="64" height="64"></span>
+      <h3>${esc(s.nom)}</h3>
+      <span class="depute-groupe"><span class="dot" style="background:${g.couleur}"></span>${esc(g.nom)}</span>
+    </div>
+    <p class="depute-lieu">${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "représentant les Français établis hors de France" : `de ${esc(s.dep)}`}.</p>
+    <div class="depute-actions">
+      <a href="https://www.senat.fr/${s.slug ? `senateur/${encodeURIComponent(s.slug)}.html` : "senateurs/senatl.html"}" target="_blank" rel="noopener">Fiche officielle au Sénat</a>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card"><div class="stat-label">Votes sur les textes</div><div class="stat-value accent">${presents.length} / ${lignes.length}</div><div class="stat-sub">votes sur l'ensemble d'un texte où ${s.f ? "elle" : "il"} s'est prononcé${s.f ? "e" : ""}</div></div>
+      <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${["p","c","a"].map(k=>presents.filter(x=>x.code===k).length).join(" · ")}</div><div class="stat-sub">pour · contre · abstention</div></div>
+      <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(ecarts)}</div><div class="stat-sub">${pctFr(ecarts, presents.length)} de ses votes diffèrent de la position majoritaire de son groupe actuel</div></div>
+    </div>
+    <p class="depute-note">Au Sénat, les votes se font souvent par délégation : chaque groupe vote pour ses membres absents. Un vote enregistré ne veut donc pas toujours dire que ${s.f ? "la sénatrice" : "le sénateur"} était en séance.</p>
+    <h3 class="histo-title">Ses votes sur l'ensemble des textes</h3>
+    <div>${lignes.length ? lignes.map(({ code, scr })=>{
+      const [libelle, classe] = LIB[code] || LIB.n;
+      return `<div class="histo-row">
+        <div>
+          <div class="histo-loi"><a href="${lien(scr.sourceUrl)}" target="_blank" rel="noopener">${esc(titreSenat(scr))}</a></div>
+          <div class="histo-date">${esc(scr.date)} · <span class="histo-resultat ${scr.resultat}">${scr.resultat==="adopte"?"Adopté":"Rejeté"}</span> · scrutin n°${scr.numero}</div>
+        </div>
+        <span class="depute-vote ${classe}">${libelle}</span>
+      </div>`;
+    }).join("") : `<p class="no-result-msg">Aucun vote relevé depuis sa prise de fonction.</p>`}</div>`;
+  document.getElementById("senateur-retour").addEventListener("click", fermerSenateur);
+  photoSecours(fiche);
+  majHash("senateur-" + id);
+  document.title = `${s.nom} · Hémicycle France`;
+  if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+}
+function fermerSenateur(){
+  senateurOuvert = null;
+  document.getElementById("senateur-fiche").hidden = true;
+  document.getElementById("senat-principal").hidden = false;
+  if(document.getElementById("view-senat").classList.contains("active")) majHash("senat");
+}
+// Sous une commune trouvée (rubrique Députés) : les sénateurs de son département
+async function afficherSenateursCommune(el){
+  await chargerSenateurs();
+  const liste = SENATEURS.filter(s => normDep(s.dep) === normDep(el.dataset.dep));
+  if(!liste.length){ el.remove(); return; }
+  el.innerHTML = `<b>Sénateurs du département</b> : ${liste.map(s=>`<a href="#senateur-${esc(s.id)}">${esc(s.nom)}</a>`).join(", ")}`;
+}
+
 /* ---------- Députés (data/deputes.json, chargé à la première visite de la rubrique) ---------- */
 
 let DEPUTES = null, DEPUTES_CLES = [], DEPUTES_MAJ = null, deputesChargement = null;
@@ -3338,6 +3503,7 @@ async function renderDeputes(){
       return `<div class="commune-bloc">
         <div class="commune-titre">${esc(t.c)} <span>(${esc(t.depNom)}) · ${t.circos.length > 1 ? `${t.circos.length} circonscriptions` : `${ordinalCirco(t.circos[0])} circonscription`}</span></div>
         <div class="commune-elections" data-dep="${esc(slugDep(t.depNom))}" data-commune="${esc(t.c)}"></div>
+        <div class="commune-elections commune-senateurs" data-dep="${esc(t.depNom)}"></div>
         ${deps.map(d=>{ const p = partiDepute(d); return `<button type="button" class="depute-carte" data-id="${esc(d.id)}"><span class="dot" style="background:${p.couleur}"></span><span><b>${esc(d.nom)}</b><span>${esc(circoDepute(d))} · ${esc(d.groupe)}</span></span></button>`; }).join("")}
       </div>`;
     }).join("");
@@ -3348,7 +3514,8 @@ async function renderDeputes(){
   document.getElementById("depute-reset").hidden = !q && !dep;
   document.getElementById("deputes-communes").innerHTML = blocCommunes;
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
-  document.querySelectorAll("#deputes-communes .commune-elections").forEach(afficherPresidentielle);
+  document.querySelectorAll("#deputes-communes .commune-elections:not(.commune-senateurs)").forEach(afficherPresidentielle);
+  document.querySelectorAll("#deputes-communes .commune-senateurs").forEach(afficherSenateursCommune);
   if(!res.length){ liste.innerHTML = blocCommunes ? "" : `<p class="no-result-msg">Aucun député ni aucune commune ne correspond à cette recherche.</p>`; return; }
   liste.innerHTML = res.slice(0, deputeLimite).map(d=>{
     const p = partiDepute(d);
@@ -3470,7 +3637,7 @@ function renderDeputeFiche(d){
   document.getElementById("depute-fiche").innerHTML = `
     <button type="button" class="lien-bouton depute-retour" id="depute-retour">← Tous les députés</button>
     <div class="depute-entete">
-      <span class="depute-avatar" style="border-color:${p.couleur}" aria-hidden="true">${esc(d.nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join(""))}</span>
+      <span class="depute-avatar photo" style="border-color:${p.couleur}" aria-hidden="true">${esc(d.nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join(""))}<img src="photos/deputes/${esc(d.id)}.jpg" alt="" width="64" height="64"></span>
       <h3>${esc(d.nom)}</h3>
       <span class="depute-groupe"><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</span>
     </div>
@@ -3505,6 +3672,7 @@ function renderDeputeFiche(d){
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
+  photoSecours(document.getElementById("depute-fiche"));
   document.getElementById("depute-comparer")?.addEventListener("change", e=>{ deputeCompare = e.target.value || null; renderDeputeFiche(d); });
   document.querySelectorAll("#depute-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{
     deputeFiltreVotes = b.dataset.f;
@@ -3741,12 +3909,21 @@ function ouvrirDepuisHash(){
     renderHistorique();
     return true;
   }
+  m = h.match(/^senateur-(\d{5}[A-Z])$/);
+  if(m){
+    activateTab("senat");
+    ouvrirSenateur(m[1]);
+    return true;
+  }
   m = h.match(/^depute-(PA\d+)$/);
   if(m){
     activateTab("deputes");
     ouvrirDepute(m[1]);
     return true;
   }
+  // Retour arrière depuis une fiche (#deputes, #senat) : la liste réapparaît
+  if(h === "deputes" && deputeOuvert) fermerDepute();
+  if(h === "senat" && senateurOuvert) fermerSenateur();
   if(document.getElementById("view-"+h)){ activateTab(h); return true; }
   return false;
 }
@@ -3777,6 +3954,8 @@ function activateTab(tabId){
   if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   if(tabId === "deputes") renderDeputes();
   if(tabId === "senat") renderSenat();
+  if(tabId === "dirigeants") renderGouvernement();
+  if(tabId === "meetings") renderAgendaAN();
   if(tabId === "sondages"){ renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
@@ -3784,6 +3963,7 @@ function activateTab(tabId){
     if(tabId === "scrutin") updateBreakdown();
     else if(tabId === "histo") majHash("histo-" + selectedPartyId);
     else if(tabId === "deputes") majHash(deputeOuvert ? "depute-" + deputeOuvert : "deputes");
+    else if(tabId === "senat") majHash(senateurOuvert ? "senateur-" + senateurOuvert : "senat");
     else majHash(tabId);
   }
   const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales" })[tabId];

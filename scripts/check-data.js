@@ -172,6 +172,29 @@ async function checkNavette() {
   console.log(`[check-data] navette.json : ${Object.keys(data.textes || {}).length} textes.`);
 }
 
+async function checkSenateurs() {
+  const data = JSON.parse(await readFile("data/senateurs.json", "utf-8").catch(() => "null"));
+  if (!data) return console.log("[check-data] senateurs.json : absent (recherche de sénateurs masquée).");
+  if (data.senateurs.length < 300) err(`senateurs.json : seulement ${data.senateurs.length} sénateurs`);
+  for (const s of data.senateurs) {
+    if (!/^\d{5}[A-Z]$/.test(s.id) || !s.nom || !s.dep || s.votes.length !== data.cles.length || /[^pcan.]/.test(s.votes)) { err(`senateurs.json : entrée invalide (${s.id})`); break; }
+  }
+  console.log(`[check-data] senateurs.json : ${data.senateurs.length} sénateurs, ${data.cles.length} votes.`);
+}
+
+async function checkGouvernementAgenda() {
+  const g = JSON.parse(await readFile("data/gouvernement.json", "utf-8").catch(() => "null"));
+  if (g) {
+    if (!g.membres?.some((m) => m.qualite === "Premier ministre") || g.membres.length < 15 || g.membres.some((m) => !m.nom || !m.fonction)) err("gouvernement.json : composition invalide");
+    else console.log(`[check-data] gouvernement.json : ${g.membres.length} membres.`);
+  }
+  const a = JSON.parse(await readFile("data/agenda-an.json", "utf-8").catch(() => "null"));
+  if (a) {
+    if (!Array.isArray(a.jours) || a.jours.some((j) => !/^\d{4}-\d{2}-\d{2}$/.test(j.date) || !j.points?.every((p) => p.objet && ["texte", "vote", "qag", "autre"].includes(p.type)))) err("agenda-an.json : format invalide");
+    else console.log(`[check-data] agenda-an.json : ${a.jours.length} jour(s) de séance.`);
+  }
+}
+
 async function checkManuels() {
   for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
     const data = JSON.parse(await readFile(fichier, "utf-8"));
@@ -196,6 +219,8 @@ await checkCandidats();
 await checkSenat();
 await checkActivite();
 await checkNavette();
+await checkSenateurs();
+await checkGouvernementAgenda();
 await checkCommunes();
 await checkManuels();
 
