@@ -1895,7 +1895,11 @@ function appliquerSondages(data){
     date: i.date,
     echantillon: `${formatNombre(i.echantillon)} personnes`,
     n: i.echantillon,
-    source: "notice officielle (Commission des sondages)",
+    // Lien vers la notice de la Commission quand Wikipédia la cite, sinon vers l'article du commanditaire
+    notice: /^https:\/\/(www\.)?commission-des-sondages\.fr\//.test(i.url || ""),
+    source: /^https:\/\/(www\.)?commission-des-sondages\.fr\//.test(i.url || "")
+      ? "notice officielle (Commission des sondages)"
+      : `publication d'origine (${(String(i.url).match(/^https:\/\/(?:www\.)?([^/]+)/) || [,"source"])[1]})`,
     url: i.url,
     hypothese: i.hypotheses > 1 ? `Fourchette sur les ${i.hypotheses} hypothèses de candidatures testées` : "Hypothèse unique testée",
     scores: i.scores,
@@ -1956,7 +1960,9 @@ function renderSondageAverage(){
     `${inst.hypothese} · Échantillon : ${inst.echantillon}` +
     // Marge d'erreur usuelle (intervalle de confiance à 95 %) pour un score de 50 %, la plus large possible
     (inst.n ? ` · Marge d'erreur : environ ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} points pour un score de 50 %, moins pour les petits scores` : "") +
-    ` · Commanditaire, questions posées et méthode dans la <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a>` +
+    (inst.notice
+      ? ` · Commanditaire, questions posées et méthode dans la <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a>`
+      : ` · Source : <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a> ; commanditaire, questions posées et méthode dans la <a href="https://www.commission-des-sondages.fr/notices/" target="_blank" rel="noopener" style="color:var(--accent);">notice déposée à la Commission des sondages</a>`) +
     (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${lien(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
 
   const disponibles = CANDIDATS
