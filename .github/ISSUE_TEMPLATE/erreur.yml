@@ -1,0 +1,24 @@
+name: Signaler une erreur
+description: Une donnée fausse, périmée ou mal sourcée sur le site
+labels: ["erreur-signalee"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page concernée
+      description: Copiez l'adresse de la page (par ex. https://tahns.github.io/politique-france/#scrutin-1234)
+    validations:
+      required: true
+  - type: textarea
+    id: erreur
+    attributes:
+      label: Ce qui est faux
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source officielle de la correction
+      description: Lien vers une source vérifiable (Assemblée, Sénat, Insee, Journal officiel, décision de justice…). Sans source, la correction ne peut pas être faite.
+    validations:
+      required: true

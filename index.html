@@ -15,6 +15,7 @@
 <meta name="color-scheme" content="light">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<script>if (window.top !== window.self) { try { window.top.location = window.self.location.href; } catch (e) { document.documentElement.style.display = "none"; } }</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Décrypter la politique française">
@@ -410,6 +411,32 @@
   .accueil-highlight-card + .accueil-highlight-card{border-top:1px solid var(--border); padding-top:18px;}
   @media(min-width:860px){ .accueil-highlight-card:nth-child(2){border-top:none; padding-top:4px;} }
   .accueil-highlight-eyebrow{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;}
+  /* Accueil : compte à rebours, barre du vote, mini-classement des sondages */
+  .accueil-rebours{display:flex; align-items:center; gap:14px 18px; flex-wrap:wrap; margin:0 0 18px; padding:14px 18px; background:var(--accent); color:#fff; text-decoration:none; border-radius:2px;}
+  .accueil-rebours .n{font-family:var(--font-display); font-size:clamp(34px,5vw,46px); font-weight:600; line-height:1; font-variant-numeric:lining-nums tabular-nums;}
+  .accueil-rebours .n small{font-size:.45em; font-weight:500; margin-left:4px; opacity:.85;}
+  .accueil-rebours .t{flex:1; min-width:200px; font-size:15px; line-height:1.4;}
+  .accueil-rebours .t b{display:block; font-family:var(--font-display); font-size:20px; font-weight:600;}
+  .accueil-rebours .fleche{font-size:14px; font-weight:600; white-space:nowrap; border-bottom:1px solid rgba(255,255,255,.5);}
+  .accueil-rebours:hover .fleche{border-bottom-color:#fff;}
+  [data-theme="sombre"] .accueil-rebours{background:#23305E; color:#F0ECE3;}
+  .vote-barre{display:flex; gap:2px; height:14px; margin:16px 0 8px; max-width:560px;}
+  .vote-barre span{display:block; height:100%;}
+  .vote-barre span:first-child{border-radius:4px 0 0 4px;} .vote-barre span:last-child{border-radius:0 4px 4px 0;}
+  .vote-barre .p{background:var(--vert);} .vote-barre .c{background:var(--rouge);} .vote-barre .a{background:var(--ambre);}
+  .vote-legende{display:flex; flex-wrap:wrap; gap:4px 16px; font-size:13.5px; color:var(--text-soft); margin-bottom:12px;}
+  .vote-groupes{display:grid; gap:6px; margin:0 0 14px; font-size:14px; color:var(--text-soft);}
+  .vote-groupes b{color:var(--text); font-weight:600; margin-right:6px;}
+  .vote-legende i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px;}
+  .mini-sondage{list-style:none; margin:12px 0 4px; padding:0; display:grid; gap:7px;}
+  .mini-sondage li{display:grid; grid-template-columns:minmax(80px,8em) 1fr 5em; align-items:center; gap:10px; font-size:13.5px;}
+  .mini-sondage .nom{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text);}
+  .mini-sondage .barre{height:10px; background:var(--border-soft); border-radius:0 4px 4px 0;}
+  .mini-sondage .barre span{display:block; height:100%; border-radius:0 4px 4px 0;}
+  .mini-sondage .val{white-space:nowrap; min-width:3.2em; text-align:right; color:var(--text-soft); font-variant-numeric:tabular-nums;}
+  .accueil-rubrique{transition:background .15s;}
+  .accueil-rubrique b::after{content:" →"; opacity:0; transition:opacity .15s;}
+  .accueil-rubrique:hover b::after, .accueil-rubrique:focus-visible b::after{opacity:1;}
   .accueil-highlight-title{font-family:var(--font-display); font-size:22px; font-weight:600; line-height:1.22; margin-bottom:8px;}
   .accueil-highlight-card:first-child .accueil-highlight-title{font-size:clamp(28px,3.4vw,40px); line-height:1.1; letter-spacing:-.01em;}
   .accueil-highlight-card:hover .accueil-highlight-title{text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px;}
@@ -582,6 +609,7 @@
   .recherche-item b{display:block; font-weight:600; line-height:1.35;}
   .recherche-item span{display:block; font-size:12.5px; color:var(--text-faint);}
   .nouveautes{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin:0 0 20px; padding:10px 14px; border:1px solid var(--border); border-left:3px solid var(--accent); background:var(--bg-elevated); font-size:14px;}
+  .nouveautes[hidden]{display:none;}
   .nouveautes b{font-weight:700;}
   .nouveautes .lien-bouton{font-size:13px; color:var(--text-faint); margin-left:auto;}
   .comparaison{margin:0 0 26px; padding:14px 0 4px; border-top:1px solid var(--border);}
@@ -870,6 +898,7 @@
 <main>
   <section class="view active" id="view-accueil">
     <div class="nouveautes" id="nouveautes" hidden></div>
+    <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
     <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
@@ -895,6 +924,7 @@
     <div class="theme-filter-bar" id="theme-filter-bar"></div>
     <div class="scrutin-controls">
       <input type="search" id="loi-search" placeholder="Chercher un texte : retraites, logement…" aria-label="Rechercher un scrutin" />
+      <select id="loi-theme" aria-label="Thème (commission saisie au fond)"><option value="">Tous les thèmes</option></select>
       <select id="loi-select" aria-label="Choisir un scrutin"></select>
       <span class="resultat-pill" id="resultat-pill"></span>
       <span class="loi-count" id="loi-count"></span>
@@ -927,6 +957,7 @@
     <div class="theme-filter-bar" id="histo-cat-bar"></div>
     <div class="scrutin-controls">
       <input type="search" id="histo-search" placeholder="Chercher un texte dans ses votes…" aria-label="Rechercher dans l'historique" />
+      <select id="histo-theme" aria-label="Thème (commission saisie au fond)"><option value="">Tous les thèmes</option></select>
     </div>
     <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
@@ -998,7 +1029,7 @@
       <h2>Justice et politique</h2>
       <p class="chapo">Des responsables politiques condamnés par la justice. Ne figurent ici que des décisions rendues par un tribunal, avec leur statut : définitive, ou frappée d'appel et donc susceptible d'évoluer. Aucune plainte, aucune mise en examen.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
-      <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/politique-france/issues/new?title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
+      <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
     <div class="justice-filter-bar" id="justice-filter-bar"></div>
@@ -1050,7 +1081,7 @@
     <div class="texte-legal">
       <h3>Éditeur</h3>
       <p>Ce site est édité par un particulier, à titre non professionnel. Comme le permet l'article 6, III, 2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), l'éditeur a choisi de ne pas rendre son identité publique ; les éléments permettant de l'identifier sont détenus par l'hébergeur. L'éditeur est également directeur de la publication.</p>
-      <p>Contact, demande de correction ou droit de réponse : <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">ouvrir un ticket sur GitHub</a>.</p>
+      <p>Contact, demande de correction ou droit de réponse : <a href="https://github.com/Tahns/politique-france/issues/new/choose" target="_blank" rel="noopener">ouvrir un ticket sur GitHub</a>.</p>
 
       <h3>Hébergeur</h3>
       <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820. <a href="https://github.com" target="_blank" rel="noopener">github.com</a></p>
@@ -1077,7 +1108,7 @@
 
       <h3>Justice et présomption d'innocence</h3>
       <p>La rubrique Justice ne mentionne que des décisions effectivement rendues par une juridiction, avec leur statut. Tant qu'une condamnation n'est pas définitive (appel ou pourvoi en cassation en cours), la personne concernée reste présumée innocente, conformément à l'article 9-1 du Code civil ; ces décisions sont signalées comme telles. Aucune plainte, enquête ou mise en examen n'y figure.</p>
-      <p>Toute personne nommée sur ce site peut demander la correction d'une information ou exercer son droit de réponse (article 6, IV de la LCEN) en <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">ouvrant un ticket</a>. Les demandes sont traitées dans les délais prévus par la loi.</p>
+      <p>Toute personne nommée sur ce site peut demander la correction d'une information ou exercer son droit de réponse (article 6, IV de la LCEN) en <a href="https://github.com/Tahns/politique-france/issues/new?template=reponse.yml" target="_blank" rel="noopener">ouvrant un ticket</a>. Les demandes sont traitées dans les délais prévus par la loi.</p>
 
       <h3>Données personnelles et cookies</h3>
       <ul>
@@ -1112,7 +1143,7 @@
   <p class="footer-liens">
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
-    <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">Signaler une erreur</a>
+    <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a>
   </p>
   <div class="footer-grid">
     <div>
@@ -1176,7 +1207,7 @@ let LOIS = [
     "dateISO": "2025-10-16",
     "typeVote": "MOC",
     "resultat": "rejete",
-    "theme": "Institutions",
+    "theme": "À catégoriser",
     "reel": true,
     "source": "auto-assemblee-nationale",
     "sourceLabel": "Assemblée nationale — scrutin n°3059",
@@ -1266,7 +1297,7 @@ let LOIS = [
     "dateISO": "2025-10-16",
     "typeVote": "MOC",
     "resultat": "rejete",
-    "theme": "Institutions",
+    "theme": "À catégoriser",
     "reel": true,
     "source": "auto-assemblee-nationale",
     "sourceLabel": "Assemblée nationale — scrutin n°3058",
@@ -1356,7 +1387,7 @@ let LOIS = [
     "dateISO": "2025-09-08",
     "typeVote": "SPS",
     "resultat": "rejete",
-    "theme": "Institutions",
+    "theme": "À catégoriser",
     "reel": true,
     "source": "auto-assemblee-nationale",
     "sourceLabel": "Assemblée nationale — scrutin n°3054",
@@ -1722,11 +1753,20 @@ function onSeatLeave(){
 
 let selectedCategorie = "texte";
 
-function loisFiltrees(filter, categorie){
+// Thème d'un scrutin : commission de l'Assemblée saisie au fond du texte (renseigné automatiquement)
+const themeLoi = l => l.theme && l.theme !== "À catégoriser" ? l.theme : "";
+function remplirThemes(id){
+  const sel = document.getElementById(id);
+  if(!sel || sel.options.length > 1) return;
+  const themes = [...new Set(LOIS.map(themeLoi).filter(Boolean))].sort((a,b)=>a.localeCompare(b, "fr"));
+  sel.insertAdjacentHTML("beforeend", themes.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join("") + `<option value="-">Sans commission identifiée</option>`);
+}
+function loisFiltrees(filter, categorie, theme = ""){
   // Tous les mots saisis doivent apparaître (dans n'importe quel ordre)
   const mots = norm(filter).split(/\s+/).filter(Boolean);
   return LOIS.filter(l =>
     (categorie === "tous" || categorieLoi(l) === categorie) &&
+    (!theme || (theme === "-" ? !themeLoi(l) : themeLoi(l) === theme)) &&
     mots.every(m => texteRecherche(l).includes(m))
   );
 }
@@ -1734,7 +1774,8 @@ function loisFiltrees(filter, categorie){
 function populateLoiSelect(){
   const sel = document.getElementById("loi-select");
   const pill = document.getElementById("resultat-pill");
-  const filtered = loisFiltrees(document.getElementById("loi-search").value, selectedCategorie);
+  remplirThemes("loi-theme");
+  const filtered = loisFiltrees(document.getElementById("loi-search").value, selectedCategorie, document.getElementById("loi-theme").value);
   document.getElementById("loi-count").textContent =
     filtered.length ? `${formatNombre(filtered.length)} scrutin${filtered.length>1?"s":""}` : "";
 
@@ -1805,7 +1846,7 @@ function updateBreakdown(){
   void pill.offsetWidth;
   pill.classList.add(loi.resultat, "pop");
 
-  const theme = loi.theme && loi.theme !== "À catégoriser" ? loi.theme : categorieLabel(categorieLoi(loi));
+  const theme = categorieLabel(categorieLoi(loi)) + (themeLoi(loi) ? ` · ${themeLoi(loi)}` : "");
   document.getElementById("breakdown-title").innerHTML =
     esc(titreLoi(loi)) + `<span class="loi-theme-tag" style="display:block;margin:6px 0 0">${esc(loi.date)} · ${esc(theme)}</span>`;
 
@@ -1986,7 +2027,8 @@ function renderProximite(party, liste){
 
 function renderHistorique(){
   const party = PARTIES.find(p=>p.id===selectedPartyId);
-  const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie);
+  remplirThemes("histo-theme");
+  const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie, document.getElementById("histo-theme").value);
   if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
   renderProximite(party, liste);
   document.getElementById("histo-party-title").textContent =
@@ -2679,7 +2721,7 @@ function renderJusticeList(){
       <div class="justice-affaire">${esc(c.affaire)}</div>
       <div class="justice-detail">${esc(c.detail)}</div>
       ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
-      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/politique-france/issues/new?title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
+      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
     </div>
   `).join("");
 }
@@ -2715,7 +2757,7 @@ function renderAccueil(){
     <a class="accueil-hero-stat" href="#scrutin"><div class="v">${formatNombre(LOIS.length)}</div><div class="l">scrutins publics recensés · Assemblée nationale</div></a>
     ${["Chômage","Inflation","Déficit public"].map(nom=>{
       const i = INDICATEURS.find(x=>x.nom===nom);
-      return i ? `<a class="accueil-hero-stat" href="#chiffres"><div class="v">${esc(i.valeur)}</div><div class="l">${nom} (${esc(i.date.replace(/\s*\(.*\)/,""))}) · ${esc(i.source || "Insee")}</div></a>` : "";
+      return i ? `<a class="accueil-hero-stat" href="#chiffres"><div class="v">${esc(i.valeur)}</div><div class="l">${nom} (${esc(i.date.replace(/\s*\(.*\)/,""))}) · ${esc((i.source || "Insee").replace(/\s*\(.*\)$/, ""))}</div></a>` : "";
     }).join("")}
   `;
 
@@ -2762,13 +2804,53 @@ function renderAccueil(){
     },
   ].filter(Boolean);
 
+  // Barre du dernier vote (pour / contre / abstention), avec légende en toutes lettres
+  const abst = Object.values(derniereLoi.votes).filter(Boolean).reduce((t,v)=>t+(v.abst||0), 0);
+  const exprimes = totaux.pour + totaux.contre + abst;
+  if(exprimes) highlights[0].sous = highlights[0].sous.replace(/, par .*? contre\./, ".");
+  if(exprimes) highlights[0].extra = `
+    <div class="vote-barre" role="img" aria-label="${formatNombre(totaux.pour)} pour, ${formatNombre(totaux.contre)} contre, ${formatNombre(abst)} abstentions">
+      ${[["p",totaux.pour],["c",totaux.contre],["a",abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}
+    </div>
+    <div class="vote-legende"><span><i style="background:var(--vert)"></i>${formatNombre(totaux.pour)} pour</span><span><i style="background:var(--rouge)"></i>${formatNombre(totaux.contre)} contre</span>${abst ? `<span><i style="background:var(--ambre)"></i>${formatNombre(abst)} abstentions</span>` : ""}</div>
+    ${(()=>{
+      // Position majoritaire de chaque groupe (le détail député par député est sur la page du vote)
+      const pos = { pour:[], contre:[], abst:[] };
+      for(const [g,v] of Object.entries(derniereLoi.votes)){ if(!v) continue; const k = ["pour","contre","abst"].sort((a,b)=>(v[b]||0)-(v[a]||0))[0]; if(v[k]) pos[k].push(g); }
+      const ligne = (k, lib) => pos[k].length ? `<div><b>${lib}</b>${pos[k].map(esc).join(", ")}</div>` : "";
+      return `<div class="vote-groupes">${ligne("pour","Groupes pour")}${ligne("contre","Groupes contre")}${ligne("abst","Abstention")}</div>`;
+    })()}`;
+  // Mini-classement du dernier sondage (5 premiers), couleur = parti du candidat
+  if(enTete){
+    const top = CANDIDATS.map(c=>({ c, r: instPrincipal.scores[c.id] })).filter(x=>x.r)
+      .sort((a,b)=> milieuFourchette(b.r) - milieuFourchette(a.r)).slice(0,5);
+    const max = Math.max(...top.map(x=>x.r[1]), 1);
+    const carte = highlights.find(h=>h.tab==="sondages");
+    carte.sous = `Intentions de vote au premier tour, enquête ${instPrincipal.nom} (${instPrincipal.date}). Barre au milieu de la fourchette.`;
+    carte.extra = `<ul class="mini-sondage" aria-label="Les cinq premiers selon ${esc(instPrincipal.nom)}">${top.map(({c,r})=>`
+      <li><span class="nom">${esc(nomCourt(c.nom))}</span><span class="barre"><span style="width:${(milieuFourchette(r)/max*100).toFixed(1)}%; background:${couleurSerie(c.id)}"></span></span><span class="val">${fourchetteTexte(r)}</span></li>`).join("")}</ul>`;
+  }
+
   document.getElementById("accueil-highlight-grid").innerHTML = highlights.map(h=>`
     <div class="accueil-highlight-card" data-tab="${h.tab}" ${h.loi ? `data-loi="${h.loi}"` : ""} tabindex="0" role="link">
       <div class="accueil-highlight-eyebrow">${h.eyebrow}</div>
       <div class="accueil-highlight-title">${esc(h.titre)}</div>
+      ${h.extra || ""}
       <div class="accueil-highlight-sub">${esc(h.sous)}</div>
     </div>
   `).join("");
+
+  // Compte à rebours jusqu'au prochain tour de la présidentielle (date officielle de data/meetings.json)
+  const rebours = document.getElementById("accueil-rebours");
+  const tour = meetingsAVenir().find(m=>/^Élection présidentielle/.test(m.titre));
+  if(tour){
+    const jours = Math.round((Date.parse(tour.debut) - Date.parse(aujourdhuiISO())) / 864e5);
+    const dateLongue = new Date(tour.debut + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" });
+    rebours.innerHTML = jours > 0
+      ? `<span class="n">J-${formatNombre(jours)}</span><span class="t"><b>${esc(tour.titre.replace("Élection présidentielle : ", "Présidentielle, "))}</b>${esc(dateLongue)}</span><span class="fleche">L'agenda →</span>`
+      : `<span class="n">Aujourd'hui</span><span class="t"><b>${esc(tour.titre)}</b>${esc(tour.heure || "")}</span><span class="fleche">L'agenda →</span>`;
+    rebours.hidden = false;
+  } else rebours.hidden = true;
 
   document.querySelectorAll(".accueil-highlight-card").forEach(card=>{
     card.addEventListener("click", ()=>{
@@ -3048,6 +3130,9 @@ function renderDeputeFiche(d){
     renderDeputeFiche(d);
   }));
 }
+
+document.getElementById("loi-theme").addEventListener("change", ()=>{ populateLoiSelect(); updateBreakdown(); });
+document.getElementById("histo-theme").addEventListener("change", ()=>{ histoLimite = 50; renderHistorique(); });
 
 let deputeRechercheTimer;
 document.getElementById("depute-search").addEventListener("input", ()=>{

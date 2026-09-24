@@ -15,7 +15,7 @@
  *    à la fin du mois M+1 ; alerte 10 jours après.
  *  - Déficit public de l'année N : remplacé par celui de N+1 publié fin mars N+2 (alerte au 15 avril).
  *  - Justice : relecture au moins tous les 60 jours, et après chaque échéance de data/justice.json.
- *  - Chefs de parti : relecture au moins tous les 90 jours.
+ *  - Chefs de parti : vérifiés chaque jour sur Wikipédia (fetch-dirigeants.js) ; alerte si l'un a changé.
  *  - Agenda : au moins un rendez-vous à venir, relecture au moins tous les 30 jours.
  *
  * USAGE : node scripts/check-fraicheur.js [--date=AAAA-MM-JJ]   (la date sert aux tests)
@@ -55,6 +55,18 @@ if (trimestre) {
   if (joursDepuis(finTrimestre) > 215) alertes.push(`Indicateurs : le chômage affiché date du ${chomage.date} — la mise à jour Insee semble bloquée.`);
 }
 
+const inflationAuto = indic?.indicateurs?.find((i) => i.nom === "Inflation" && i.misAJourLe === "automatique");
+const moisAuto = inflationAuto?.date?.toLowerCase().match(/([a-zéû]+) (\d{4})/);
+if (moisAuto && MOIS.includes(moisAuto[1])) {
+  // L'Insee publie le mois M vers la mi-M+1 : alerte si le chiffre a plus de deux mois de retard
+  const limite = new Date(Date.UTC(parseInt(moisAuto[2], 10), MOIS.indexOf(moisAuto[1]) + 3, 1));
+  if (aujourdhui > limite) alertes.push(`Inflation : le chiffre affiché date de ${inflationAuto.date} — la série Insee ne semble plus mise à jour (changement de base ?).`);
+}
+const deficitAuto = indic?.indicateurs?.find((i) => i.nom === "Déficit public" && i.misAJourLe === "automatique");
+if (deficitAuto && isoAujourdhui > `${parseInt(deficitAuto.date, 10) + 2}-05-15`) {
+  alertes.push(`Déficit public : le chiffre affiché porte sur ${deficitAuto.date} ; celui de ${parseInt(deficitAuto.date, 10) + 1} aurait dû être publié par Eurostat fin avril.`);
+}
+
 // ---------- Données manuelles ----------
 const inflation = indic?.indicateurs?.find((i) => i.nom === "Inflation" && i.misAJourLe === "manuel");
 const moisInfl = inflation?.date?.toLowerCase().match(/([a-zéû]+) (\d{4})/);
@@ -80,6 +92,9 @@ if (justice?.verifieLe) {
 }
 
 const dirigeants = await lire("data/dirigeants.json");
+for (const l of dirigeants?.dirigeants || []) {
+  if (l.aVerifier) alertes.push(`Chefs de parti : ${l.parti} est désormais dirigé par ${l.nom} d'après Wikipédia ; préciser l'intitulé de sa fonction (« role ») dans data/dirigeants.json, puis retirer « aVerifier ».`);
+}
 if (dirigeants?.verifieLe && joursDepuis(dirigeants.verifieLe) > 90) {
   alertes.push(`Chefs de parti : liste relue pour la dernière fois le ${dirigeants.verifieLe} ; la vérifier puis mettre à jour « verifieLe » dans data/dirigeants.json.`);
 }
