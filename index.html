@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Décrypter la politique française</title>
+<meta name="description" content="Tous les votes de l'Assemblée nationale groupe par groupe, les dirigeants des partis, leurs condamnations judiciaires, les sondages 2027 et les chiffres clés de l'INSEE — chaque donnée est datée et sourcée.">
+<meta name="theme-color" content="#FBFBFA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Décrypter la politique française">
+<meta property="og:description" content="Tous les votes de l'Assemblée nationale groupe par groupe, sondages 2027, chiffres INSEE — chaque donnée est datée et sourcée.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M6 50a26 26 0 0 1 52 0' fill='none' stroke='%23000091' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M20 50a12 12 0 0 1 24 0' fill='none' stroke='%23CE0500' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +26,7 @@
     --border-soft:#EDECE7;
     --text:#15161A;
     --text-soft:#5B5D66;
-    --text-faint:#93949C;
+    --text-faint:#6B6D75; /* contraste ≥ 4,5:1 (WCAG AA) sur les fonds clairs */
     --accent:#000091;
     --accent-dim:rgba(0,0,145,.07);
     --vert:#18753C;
@@ -27,6 +37,27 @@
     --ambre-dim:rgba(179,64,0,.09);
     --font-display:"Space Grotesk", -apple-system, sans-serif;
     --font-body:"Inter", -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#111317;
+      --bg-elevated:#1A1D23;
+      --bg-elevated-2:#22262D;
+      --border:#343942;
+      --border-soft:#282C33;
+      --text:#ECEDEF;
+      --text-soft:#B4B7BF;
+      --text-faint:#9A9DA6;
+      --accent:#9AA6FF;
+      --accent-dim:rgba(154,166,255,.14);
+      --vert:#5BCB8A;
+      --vert-dim:rgba(91,203,138,.14);
+      --rouge:#FF7A72;
+      --rouge-dim:rgba(255,122,114,.14);
+      --ambre:#F2A65A;
+      --ambre-dim:rgba(242,166,90,.14);
+    }
+    .quiz-cta{color:#111317 !important;}
   }
   *{box-sizing:border-box;}
   body{
@@ -748,6 +779,30 @@
     padding:22px; color:var(--text-soft); font-size:14px; line-height:1.55;
   }
   .meeting-card.passe{opacity:.6;}
+  .site-footer{
+    max-width:1260px; margin:40px auto 0; padding:24px 24px 40px; border-top:1px solid var(--border);
+    font-size:12.5px; color:var(--text-soft); line-height:1.7;
+  }
+  .site-footer h2{font-size:13px; margin:0 0 6px; color:var(--text);}
+  .site-footer a{color:var(--accent);}
+  .site-footer .footer-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px 32px;}
+  .chargement{color:var(--text-faint); font-size:14px; padding:24px 0;}
+  .proximite{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px; margin-bottom:22px;
+  }
+  .proximite h4{margin:0 0 4px; font-size:14px;}
+  .proximite .sub{font-size:12px; color:var(--text-faint); margin-bottom:12px;}
+  .proximite-row{display:grid; grid-template-columns:170px 1fr 48px; gap:10px; align-items:center; padding:3px 0; font-size:12.5px;}
+  .proximite-row .nom{font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .proximite-row .track{height:8px; border-radius:99px; background:var(--border-soft); overflow:hidden;}
+  .proximite-row .fill{height:100%; border-radius:99px;}
+  .proximite-row .pct{text-align:right; font-variant-numeric:tabular-nums; font-weight:700;}
+  .quiz-recap{margin-top:18px; border-top:1px solid var(--border-soft); padding-top:14px;}
+  .quiz-recap-row{font-size:12.5px; color:var(--text-soft); padding:6px 0; border-bottom:1px solid var(--border-soft);}
+  .quiz-recap-row b{color:var(--text);}
+  .sondage-disclaimer{font-size:12px; color:var(--text-faint); margin-top:14px; line-height:1.5;}
+  @media (max-width:640px){ .proximite-row{grid-template-columns:110px 1fr 42px;} }
   .meetings-subtitle{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); margin:26px 0 12px;}
   @media (max-width:640px){
     .histo-row{grid-template-columns:1fr;}
@@ -850,6 +905,7 @@
     <div class="scrutin-controls">
       <input type="search" id="histo-search" placeholder="Rechercher un texte dans l'historique…" aria-label="Rechercher dans l'historique" />
     </div>
+    <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
     <div id="histo-list"></div>
   </section>
@@ -897,6 +953,7 @@
       <h3 id="sondage-institut-title">Intentions de vote — 1er tour, présidentielle 2027</h3>
       <div class="sondage-avg-sub" id="sondage-avg-sub"></div>
       <div id="sondage-avg-list"></div>
+      <div class="sondage-disclaimer">Un sondage mesure un rapport de forces à une date donnée ; ce n'est pas une prévision. Marge d'erreur de 1 à 3 points selon l'échantillon. Les candidats non testés par l'institut ne sont pas affichés.</div>
     </div>
   </section>
 
@@ -907,6 +964,26 @@
     <div id="quiz-container"></div>
   </section>
 </main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h2>Sources</h2>
+      Votes : <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte Etalab), récupéré chaque jour.<br>
+      Indicateurs : <a href="https://www.insee.fr" target="_blank" rel="noopener">INSEE</a>. Sondages, dirigeants, justice, meetings : source citée sur chaque fiche.
+    </div>
+    <div>
+      <h2>Méthode</h2>
+      Aucune donnée n'est estimée ni inventée. Les chiffres de vote sont recoupés avec la synthèse officielle de chaque scrutin avant publication ; une donnée manquante est affichée « non communiqué ».
+    </div>
+    <div>
+      <h2>Mise à jour</h2>
+      <span id="footer-maj">Chargement…</span>
+    </div>
+  </div>
+</footer>
+
+<noscript><p style="max-width:720px;margin:20px auto;padding:0 24px;">Ce site a besoin de JavaScript pour afficher les votes et les graphiques.</p></noscript>
 
 <div class="tooltip" id="tooltip"></div>
 
@@ -1245,6 +1322,15 @@ const TYPES_VOTE = { SPO:"Scrutin public ordinaire", SPS:"Scrutin public solenne
 
 function formatNombre(n){ return n.toLocaleString("fr-FR"); }
 
+// Recherche insensible aux accents, à la casse et aux apostrophes typographiques
+function norm(t){
+  return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/’/g,"'").toLowerCase();
+}
+function texteRecherche(l){
+  if(l._n === undefined) l._n = norm(l.titre + " " + (l.titreCourt || ""));
+  return l._n;
+}
+
 // Composition actuelle de l'Assemblée : effectifs des groupes lors du scrutin le plus récent
 let COMPOSITION_DATE = null;
 function appliquerCompositionActuelle(){
@@ -1427,10 +1513,11 @@ function onSeatLeave(){
 let selectedCategorie = "texte";
 
 function loisFiltrees(filter, categorie){
-  const f = filter.trim().toLowerCase();
+  // Tous les mots saisis doivent apparaître (dans n'importe quel ordre)
+  const mots = norm(filter).split(/\s+/).filter(Boolean);
   return LOIS.filter(l =>
     (categorie === "tous" || categorieLoi(l) === categorie) &&
-    (!f || l.titre.toLowerCase().includes(f) || (l.titreCourt || "").toLowerCase().includes(f))
+    mots.every(m => texteRecherche(l).includes(m))
   );
 }
 
@@ -1501,6 +1588,7 @@ document.getElementById("loi-select").addEventListener("change", updateBreakdown
 function updateBreakdown(){
   const loi = currentLoi();
   if(!loi) return;
+  if(DONNEES_CHARGEES && document.getElementById("view-scrutin").classList.contains("active")) majHash("scrutin-" + (loi.numero ?? loi.id));
   const pill = document.getElementById("resultat-pill");
   pill.textContent = loi.resultat === "adopte" ? "Adopté" : "Rejeté";
   pill.classList.remove("adopte","rejete","pop");
@@ -1599,6 +1687,19 @@ function renderLegend(){
   }
 }
 
+/* ---------- Position majoritaire d'un groupe ---------- */
+
+// Motion de censure : seules les voix « pour » existent ; les membres qui ne la votent pas s'y opposent de fait.
+function positionMajoritaire(loi, v){
+  if(!v) return null;
+  const positions = loi.typeVote==="MOC"
+    ? { pour:v.pour, contre:Math.max(0,(v.membres||0)-v.pour), abst:0 }
+    : { pour:v.pour, contre:v.contre, abst:v.abst };
+  const tri = Object.entries(positions).sort((a,c)=>c[1]-a[1]);
+  if(tri[0][1] === 0 || tri[0][1] === tri[1][1]) return null; // aucun votant ou égalité : pas de position nette
+  return tri[0][0];
+}
+
 /* ---------- Vue historique par parti ---------- */
 
 let selectedPartyId = "RN";
@@ -1637,9 +1738,36 @@ function renderHistoCategorie(){
   });
 }
 
+function renderProximite(party, liste){
+  const el = document.getElementById("histo-proximite");
+  const stats = PARTIES.filter(p=>p.id!==party.id).map(p=>{
+    let accord=0, total=0;
+    for(const loi of liste){
+      const a = positionMajoritaire(loi, loi.votes[party.id]);
+      const b = positionMajoritaire(loi, loi.votes[p.id]);
+      if(!a || !b) continue;
+      total++;
+      if(a===b) accord++;
+    }
+    return { p, total, pct: total ? Math.round(accord/total*100) : null };
+  }).filter(x=>x.pct!==null).sort((a,b)=>b.pct-a.pct);
+  if(!stats.length){ el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <h4>Proximité de vote — ${esc(party.nom)}</h4>
+    <div class="sub">Part des scrutins affichés où la position majoritaire de ${esc(party.nom)} (pour, contre ou abstention) est la même que celle de l'autre groupe.</div>
+    ${stats.map(x=>`
+      <div class="proximite-row" title="${x.total} scrutins comparés">
+        <span class="nom"><span class="dot" style="background:${x.p.couleur}"></span>${esc(x.p.nom)}</span>
+        <span class="track"><span class="fill" style="display:block;width:${x.pct}%;background:${x.p.couleur}"></span></span>
+        <span class="pct">${x.pct} %</span>
+      </div>`).join("")}`;
+}
+
 function renderHistorique(){
   const party = PARTIES.find(p=>p.id===selectedPartyId);
   const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie);
+  if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
+  renderProximite(party, liste);
   document.getElementById("histo-party-title").textContent =
     `Historique des votes — ${party.nom} · ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
 
@@ -1892,7 +2020,7 @@ function renderQuiz(){
   const container = document.getElementById("quiz-container");
   container.innerHTML = QUIZ_LOIS.map((loi,idx)=>`
     <div class="quiz-card">
-      <div class="quiz-progress">Question ${idx+1} / ${QUIZ_LOIS.length} · ${esc(loi.date)} · ${loi.resultat==="adopte"?"adopté":"rejeté"} par l'Assemblée</div>
+      <div class="quiz-progress">Question ${idx+1} / ${QUIZ_LOIS.length} · vote du ${esc(loi.date)} · qu'auriez-vous voté ?</div>
       <div class="quiz-question">${esc(titreLoi(loi))}</div>
       <div class="quiz-options" data-loi="${loi.id}">
         <button type="button" class="quiz-option" data-vote="pour">Pour</button>
@@ -1928,15 +2056,9 @@ function showQuizResult(){
   const scores = PARTIES.map(p=>{
     let accord = 0, comptes = 0;
     QUIZ_LOIS.forEach(loi=>{
-      const v = loi.votes[p.id];
-      if(!v) return; // vote non communiqué pour ce groupe sur cette loi : on ne compte pas ce cas
-      // Motion de censure : seules les voix « pour » existent ; un groupe qui ne la vote pas s'y oppose de fait
-      const positions = loi.typeVote==="MOC"
-        ? { pour:v.pour, contre:(v.membres||0)-v.pour, abst:0 }
-        : { pour:v.pour, contre:v.contre, abst:v.abst };
-      if(positions.pour+positions.contre+positions.abst === 0) return; // aucun votant dans ce groupe
+      const positionGroupe = positionMajoritaire(loi, loi.votes[p.id]);
+      if(!positionGroupe) return; // non communiqué, aucun votant ou égalité : question non comptée pour ce groupe
       comptes++;
-      const positionGroupe = Object.entries(positions).sort((a,c)=>c[1]-a[1])[0][0];
       if(positionGroupe === quizReponses[loi.id]) accord++;
     });
     return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0, comptes };
@@ -1948,6 +2070,12 @@ function showQuizResult(){
       <div class="quiz-question">Ton résultat : tu votes le plus souvent comme <span style="color:${scores[0].couleur}">${esc(scores[0].nom)}</span></div>
       <div class="quiz-progress">Part des questions où ton choix correspond à la position majoritaire du groupe.</div>
       <div id="quiz-results-list"></div>
+      <div class="quiz-recap">
+        ${QUIZ_LOIS.map(loi=>{
+          const lib = {pour:"pour",contre:"contre",abst:"abstention"};
+          return `<div class="quiz-recap-row"><b>${esc(titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Assemblée : ${loi.resultat==="adopte"?"adopté":"rejeté"} (${esc(loi.date)}) · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">détail officiel</a></div>`;
+        }).join("")}
+      </div>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
     </div>
   `;
@@ -2046,7 +2174,7 @@ document.getElementById("chiffre-search").addEventListener("input", (e)=> render
 
 /* ---------- Jauges budget / dette (données INSEE réelles, dernier chiffre officiel) ---------- */
 
-function makeGaugeSVG(pct, maxScale, colorFill){
+function makeGaugeSVG(label, pct, maxScale, colorFill){
   // anneau de progression en SVG — pct et maxScale en % du PIB
   const r = 46, circ = 2*Math.PI*r;
   const ratio = Math.min(pct/maxScale, 1);
@@ -2057,37 +2185,34 @@ function makeGaugeSVG(pct, maxScale, colorFill){
       <circle cx="60" cy="60" r="${r}" fill="none" stroke="${colorFill}" stroke-width="10"
         stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
         transform="rotate(-90 60 60)"/>
-      <text x="60" y="66" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="600" fill="var(--text)">${pct}%</text>
+      <text x="60" y="66" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="600" fill="var(--text)">${label} %</text>
     </svg>`;
 }
 
 function renderBudgetGauges(){
-  document.getElementById("budget-hero").innerHTML = `
+  // Alimenté par INDICATEURS (data/indicateurs.json) : une mise à jour des chiffres met aussi à jour les jauges
+  const jauges = [
+    { nom:"Déficit public", echelle:10, couleur:"var(--rouge)", seuil:"Seuil européen : 3 % du PIB." },
+    { nom:"Dette publique", echelle:130, couleur:"var(--ambre)", seuil:"Seuil de Maastricht : 60 % du PIB." },
+  ];
+  document.getElementById("budget-hero").innerHTML = jauges.map(j=>{
+    const i = INDICATEURS.find(x=>x.nom===j.nom);
+    if(!i) return "";
+    const pct = parseFloat(String(i.valeur).replace(",", ".").replace(/[^0-9.\-]/g,""));
+    if(isNaN(pct)) return "";
+    return `
     <div>
-      <h3>Déficit public</h3>
-      <div class="budget-hero-sub">Dernier chiffre officiel INSEE — année 2025</div>
+      <h3>${j.nom}</h3>
+      <div class="budget-hero-sub">Dernier chiffre officiel ${esc(i.source)} — ${esc(i.date)}</div>
       <div class="gauge-block">
-        ${makeGaugeSVG(5.1, 10, "var(--rouge)")}
+        ${makeGaugeSVG(String(pct).replace(".", ","), pct, j.echelle, j.couleur)}
         <div>
-          <div class="gauge-label">152,5 milliards d'euros</div>
-          <div class="gauge-value">5,1 % du PIB</div>
-          <div class="gauge-note">Seuil européen fixé à 3 % du PIB — la France est sous procédure pour déficit excessif.</div>
+          <div class="gauge-value">${esc(i.valeur)}</div>
+          <div class="gauge-note">${esc(String(i.detail).replace(/\.?\s*$/, "."))}${/seuil/i.test(i.detail) ? "" : " " + j.seuil}</div>
         </div>
       </div>
-    </div>
-    <div>
-      <h3>Dette publique</h3>
-      <div class="budget-hero-sub">Dernier chiffre officiel INSEE — fin 2025</div>
-      <div class="gauge-block">
-        ${makeGaugeSVG(115.6, 130, "var(--ambre)")}
-        <div>
-          <div class="gauge-label">3 460,5 milliards d'euros</div>
-          <div class="gauge-value">115,6 % du PIB</div>
-          <div class="gauge-note">Seuil de Maastricht fixé à 60 % du PIB. Des projections indépendantes (non-INSEE) évoquent ~118 % mi-2026 ; on affiche ici uniquement le chiffre officiel le plus récent.</div>
-        </div>
-      </div>
-    </div>
-  `;
+    </div>`;
+  }).join("");
 }
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
@@ -2281,7 +2406,45 @@ function renderAccueil(){
   });
 }
 
-/* ---------- Onglets ---------- */
+/* ---------- Onglets et liens directs (#scrutin-8434, #histo-RN, #sondages…) ---------- */
+
+let DONNEES_CHARGEES = false;
+
+function majHash(h){
+  const cible = "#" + h;
+  if(location.hash !== cible) history.replaceState(null, "", h === "accueil" ? location.pathname + location.search : cible);
+}
+
+function ouvrirDepuisHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if(!h) return false;
+  let m = h.match(/^scrutin-(\d+)$/);
+  if(m){
+    const loi = LOIS.find(l=>String(l.numero)===m[1]);
+    if(loi){
+      selectedCategorie = categorieLoi(loi);
+      document.getElementById("loi-search").value = "";
+      renderCategorieFilter();
+      populateLoiSelect();
+      document.getElementById("loi-select").value = loi.id;
+      activateTab("scrutin");
+      updateBreakdown();
+      return true;
+    }
+  }
+  m = h.match(/^histo-([A-Z]+)$/);
+  if(m && PARTIES.some(p=>p.id===m[1])){
+    selectedPartyId = m[1];
+    histoLimite = 50;
+    renderPartyChips();
+    activateTab("histo");
+    renderHistorique();
+    return true;
+  }
+  if(document.getElementById("view-"+h)){ activateTab(h); return true; }
+  return false;
+}
+window.addEventListener("hashchange", ouvrirDepuisHash);
 
 function activateTab(tabId){
   onSeatLeave();
@@ -2300,6 +2463,14 @@ function activateTab(tabId){
   navToggle.setAttribute("aria-expanded","false");
   const label = document.getElementById("nav-toggle-current");
   label.textContent = (tabId !== "accueil" && tabEl && !tabEl.classList.contains("tab-home")) ? "· " + tabEl.textContent.trim() : "";
+
+  // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
+  if(DONNEES_CHARGEES){
+    if(tabId === "scrutin") updateBreakdown();
+    else if(tabId === "histo") majHash("histo-" + selectedPartyId);
+    else majHash(tabId);
+  }
+  document.title = (tabId === "accueil" || !tabEl ? "" : tabEl.textContent.trim() + " — ") + "Décrypter la politique française";
 }
 
 document.querySelectorAll(".tab").forEach(tab=>{
@@ -2339,6 +2510,7 @@ document.addEventListener("click", (e)=>{
 // Charge les données externes (mises à jour par les scripts d'automatisation) avant de
 // construire l'interface. En cas d'échec (fichier absent, ouverture en local sans serveur...),
 // le site continue avec des tableaux vides plutôt que de planter, et le signale dans la console.
+let LOIS_MAJ = null, INDICATEURS_MAJ = null;
 async function loadExternalData(){
   try{
     const [loisRes, indicRes] = await Promise.all([
@@ -2347,13 +2519,13 @@ async function loadExternalData(){
     ]);
     if(loisRes.ok){
       const loisJson = await loisRes.json();
-      if(loisJson.lois?.length) LOIS = loisJson.lois;
+      if(loisJson.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
     } else {
       console.warn("Impossible de charger data/lois.json — valeurs de secours conservées.", loisRes.status);
     }
     if(indicRes.ok){
       const indicJson = await indicRes.json();
-      if(indicJson.indicateurs?.length) INDICATEURS = indicJson.indicateurs;
+      if(indicJson.indicateurs?.length){ INDICATEURS = indicJson.indicateurs; INDICATEURS_MAJ = indicJson.lastUpdated; }
     } else {
       console.warn("Impossible de charger data/indicateurs.json — valeurs de secours conservées.", indicRes.status);
     }
@@ -2367,7 +2539,28 @@ async function loadExternalData(){
   }
 }
 
+function dateCourte(iso){
+  const d = new Date(iso);
+  return isNaN(d) ? null : d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+}
+
 async function initSite(){
+  // 1) Sections qui ne dépendent pas des gros fichiers : affichées immédiatement
+  renderLeaders();
+  renderJusticeSummary();
+  renderJusticeFilterBar();
+  renderJusticeList();
+  renderMeetings();
+  renderSourceBar();
+  renderSondageAverage();
+  renderChiffres();
+  renderBudgetGauges();
+  document.getElementById("accueil-highlight-grid").innerHTML = `<p class="chargement">Chargement des derniers votes de l'Assemblée…</p>`;
+  document.getElementById("histo-list").innerHTML = `<p class="chargement">Chargement des scrutins…</p>`;
+  document.getElementById("quiz-container").innerHTML = `<p class="chargement">Chargement des votes…</p>`;
+  document.getElementById("scrutin-banner-detail").textContent = "Chargement des scrutins publics de la législature…";
+
+  // 2) Données (≈ 500 Ko compressés)
   await loadExternalData();
 
   // Scrutins du plus récent au plus ancien, quel que soit l'ordre du fichier
@@ -2376,6 +2569,11 @@ async function initSite(){
   const dernier = LOIS.find(l=>l.dateISO);
   document.getElementById("scrutin-banner-detail").textContent =
     `${formatNombre(LOIS.length)} scrutins publics de la XVIIᵉ législature${dernier ? ` (dernier : ${dernier.date})` : ""}`;
+  document.getElementById("footer-maj").innerHTML =
+    `Votes : ${formatNombre(LOIS.length)} scrutins, le plus récent du ${dernier ? esc(dernier.date) : "—"}` +
+    `${LOIS_MAJ && dateCourte(LOIS_MAJ) ? ` (base actualisée le ${dateCourte(LOIS_MAJ)})` : ""}. ` +
+    `L'archive est consultée chaque jour : pendant les suspensions de séance, aucun nouveau vote n'est publié.` +
+    `${INDICATEURS_MAJ && dateCourte(INDICATEURS_MAJ) ? `<br>Indicateurs : actualisés le ${dateCourte(INDICATEURS_MAJ)}.` : ""}`;
 
   renderCategorieFilter();
   renderModeToggle();
@@ -2384,17 +2582,13 @@ async function initSite(){
   renderHistoCategorie();
   renderHistorique();
   choisirQuestionsQuiz();
-  renderMeetings();
-  renderSourceBar();
-  renderSondageAverage();
   renderQuiz();
-  renderLeaders();
   renderChiffres();
   renderBudgetGauges();
-  renderJusticeSummary();
-  renderJusticeFilterBar();
-  renderJusticeList();
   renderAccueil();
+
+  DONNEES_CHARGEES = true;
+  ouvrirDepuisHash();
 }
 
 initSite();
