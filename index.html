@@ -395,7 +395,8 @@
     display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
     border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); margin-bottom:30px;
   }
-  .accueil-hero-stat{padding:14px 16px 12px 0;}
+  .accueil-hero-stat{padding:14px 16px 12px 0; display:block; color:inherit; text-decoration:none;}
+  a.accueil-hero-stat:hover .v{color:var(--accent);}
   .accueil-hero-stat + .accueil-hero-stat{padding-left:16px; border-left:1px solid var(--border);}
   .accueil-hero-stat .v{font-family:var(--font-display); font-size:30px; font-weight:600; line-height:1.1; font-variant-numeric:lining-nums;}
   .accueil-hero-stat .l{font-size:13px; color:var(--text-faint); margin-top:2px;}
@@ -617,6 +618,7 @@
   }
   .leader-info .leader-name{font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.2; margin-bottom:3px;}
   .leader-info .leader-role{font-size:13.5px; color:var(--text-soft); margin-bottom:6px;}
+  .leader-source{font-size:12px; margin-left:6px;}
   .leader-info .leader-party{font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
   .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 28px;}
   .groupe-card{display:flex; gap:10px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border);}
@@ -827,13 +829,13 @@
     <div class="tab" data-tab="histo">Qui vote quoi</div>
     <div class="tab" data-tab="deputes">Députés</div>
     <div class="tab" data-tab="senat">Sénat</div>
-    <div class="tab" data-tab="sondages">Sondages 2027</div>
     <div class="tab" data-tab="candidats">Candidats</div>
+    <div class="tab" data-tab="sondages">Sondages 2027</div>
     <div class="tab" data-tab="dirigeants">Partis</div>
-    <div class="tab" data-tab="justice">Justice</div>
     <div class="tab" data-tab="meetings">Agenda</div>
-    <div class="tab" data-tab="quiz">Quiz</div>
+    <div class="tab" data-tab="justice">Justice</div>
     <div class="tab" data-tab="chiffres">Chiffres clés</div>
+    <div class="tab" data-tab="quiz">Quiz</div>
   </div>
 </nav>
 
@@ -853,13 +855,13 @@
 <div class="feuille-fond" id="feuille-fond" hidden></div>
 <div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
   <div class="feuille-poignee" aria-hidden="true"></div>
-  <button type="button" class="feuille-lien" data-tab="candidats"><b>Candidats 2027</b><span>Qui s'est déclaré, depuis quand, avec quel parti</span></button>
-  <button type="button" class="feuille-lien" data-tab="deputes"><b>Votre député</b><span>Ses votes, sa participation, sa circonscription</span></button>
-  <button type="button" class="feuille-lien" data-tab="senat"><b>Le Sénat</b><span>Les votes des sénateurs, groupe par groupe</span></button>
+  <button type="button" class="feuille-lien" data-tab="deputes"><b>Députés</b><span>Ses votes, sa participation, sa circonscription</span></button>
   <button type="button" class="feuille-lien" data-tab="histo"><b>Qui vote quoi</b><span>Les votes d'un groupe et ses alliés de fait</span></button>
+  <button type="button" class="feuille-lien" data-tab="senat"><b>Le Sénat</b><span>Les votes des sénateurs, groupe par groupe</span></button>
+  <button type="button" class="feuille-lien" data-tab="candidats"><b>Candidats 2027</b><span>Qui s'est déclaré, depuis quand, avec quel parti</span></button>
   <button type="button" class="feuille-lien" data-tab="dirigeants"><b>Partis</b><span>Dirigeants et groupes à l'Assemblée</span></button>
-  <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
   <button type="button" class="feuille-lien" data-tab="meetings"><b>Agenda</b><span>Congrès et meetings à venir</span></button>
+  <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Chiffres clés</b><span>Emploi, croissance, dette, population</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
@@ -875,9 +877,11 @@
     <div class="accueil-rubriques">
       <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><b>Les votes</b><span>Chaque scrutin de l'Assemblée, siège par siège.</span></div>
       <div class="accueil-rubrique" data-tab="histo" tabindex="0" role="link"><b>Qui vote quoi</b><span>Les votes d'un groupe et ses alliés de fait.</span></div>
-      <div class="accueil-rubrique" data-tab="deputes" tabindex="0" role="link"><b>Votre député</b><span>Ses votes et sa participation.</span></div>
+      <div class="accueil-rubrique" data-tab="deputes" tabindex="0" role="link"><b>Votre député</b><span>Ses votes, à partir de votre commune.</span></div>
+      <div class="accueil-rubrique" data-tab="senat" tabindex="0" role="link"><b>Le Sénat</b><span>Les votes des sénateurs, groupe par groupe.</span></div>
       <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><b>Sondages 2027</b><span>Les dernières enquêtes, institut par institut.</span></div>
       <div class="accueil-rubrique" data-tab="candidats" tabindex="0" role="link"><b>Candidats 2027</b><span>Toutes les candidatures déclarées.</span></div>
+      <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
       <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><b>Le quiz</b><span>Votez à la place des députés.</span></div>
     </div>
   </section>
@@ -1059,6 +1063,9 @@
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées chaque jour ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
+        <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
+        <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
+        <li><b>Communes et circonscriptions :</b> résultats officiels du 1er tour des législatives 2024 par circonscription et par bureau de vote, ministère de l'Intérieur (<a href="https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a>, Licence Ouverte).</li>
         <li><b>Condamnations, dirigeants, agenda :</b> décisions de justice, articles de presse et sites officiels, cités sur chaque fiche.</li>
       </ul>
       <p>Chaque jour, tous les liens cités sont confrontés à la base du <a href="https://www.lemonde.fr/verification/" target="_blank" rel="noopener">Décodex</a> (Les Décodeurs, <i>Le Monde</i>) : aucun ne doit renvoyer vers un contenu qu'elle a démenti ni vers un site qu'elle a épinglé à de nombreuses reprises (au moins dix fois).</p>
@@ -1110,7 +1117,7 @@
   <div class="footer-grid">
     <div>
       <h2>D'où viennent les données</h2>
-      Les votes, les dossiers législatifs et la composition des groupes viennent de l'<a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte). Les chiffres économiques viennent de l'<a href="https://www.insee.fr" target="_blank" rel="noopener">Insee</a>, les sondages des notices déposées à la Commission des sondages. Chaque fiche renvoie à sa source.
+      Votes, dossiers, groupes et députés : <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte). Votes du Sénat : <a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">pages officielles du Sénat</a>. Chiffres économiques : <a href="https://www.insee.fr" target="_blank" rel="noopener">Insee</a>. Sondages : notices de la <a href="https://www.commission-des-sondages.fr" target="_blank" rel="noopener">Commission des sondages</a>, relevées sur Wikipédia, comme les candidatures. Communes et circonscriptions : <a href="https://www.data.gouv.fr" target="_blank" rel="noopener">ministère de l'Intérieur</a>. Chaque fiche renvoie à sa source ; les liens sont vérifiés chaque jour avec le Décodex.
     </div>
     <div>
       <h2>La règle</h2>
@@ -1141,16 +1148,16 @@
 /* ---------- Groupes politiques ---------- */
 
 const PARTIES = [
-  { id:"LFI",  nom:"LFI-NFP",              couleur:"#D6284B", sieges:71 },
+  { id:"LFI",  nom:"La France insoumise (LFI-NFP)", couleur:"#D6284B", sieges:71 },
   { id:"GDR",  nom:"GDR (communistes)",    couleur:"#A32E22", sieges:17 },
   { id:"ECO",  nom:"Écologiste et Social", couleur:"#1E9F58", sieges:38 },
-  { id:"SOC",  nom:"Socialistes",          couleur:"#D6488A", sieges:66 },
+  { id:"SOC",  nom:"Socialistes et apparentés", couleur:"#D6488A", sieges:66 },
   { id:"LIOT", nom:"LIOT",                 couleur:"#A67C0A", sieges:23 },
   { id:"EPR",  nom:"Ensemble pour la République", couleur:"#E0B400", sieges:92 },
-  { id:"DEM",  nom:"Démocrate (MoDem)",    couleur:"#E08800", sieges:36 },
-  { id:"HOR",  nom:"Horizons",             couleur:"#0FA89C", sieges:32 },
+  { id:"DEM",  nom:"Les Démocrates (MoDem)", couleur:"#E08800", sieges:36 },
+  { id:"HOR",  nom:"Horizons & Indépendants", couleur:"#0FA89C", sieges:32 },
   { id:"LR",   nom:"Droite Républicaine",  couleur:"#2F6FE0", sieges:47 },
-  { id:"UDR",  nom:"UDR",                  couleur:"#1E44B0", sieges:16 },
+  { id:"UDR",  nom:"UDR (Union des droites)", couleur:"#1E44B0", sieges:16 },
   { id:"RN",   nom:"Rassemblement National", couleur:"#5B4FC9", sieges:124 },
   { id:"NI",   nom:"Non-inscrits",         couleur:"#6B6E78", sieges:15 },
 ];
@@ -1469,10 +1476,10 @@ function titreLoi(l){
 // Catégorie d'un scrutin, déduite de son intitulé officiel (règle fixe, sans interprétation)
 const CATEGORIES = [
   { id:"texte",      label:"Textes (vote final)" },
-  { id:"censure",    label:"Confiance & censure" },
+  { id:"censure",    label:"Confiance et censure" },
   { id:"amendement", label:"Amendements" },
   { id:"article",    label:"Articles" },
-  { id:"procedure",  label:"Motions & procédure" },
+  { id:"procedure",  label:"Motions et procédure" },
   { id:"tous",       label:"Tous les scrutins" },
 ];
 function categorieLoi(l){
@@ -2529,7 +2536,7 @@ function renderLeaders(){
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
-          <span class="leader-party">${esc(l.parti)}</span>
+          <span class="leader-party">${esc(l.parti)}</span>${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
         </div>
       </div>`;
   }).join("");
@@ -2705,10 +2712,10 @@ function checkContexteDate(loi){
 function renderAccueil(){
   // Stats clés en haut de page (réutilise les données déjà chargées)
   document.getElementById("accueil-hero-stats").innerHTML = `
-    <div class="accueil-hero-stat"><div class="v">${formatNombre(LOIS.length)}</div><div class="l">scrutins publics recensés</div></div>
+    <a class="accueil-hero-stat" href="#scrutin"><div class="v">${formatNombre(LOIS.length)}</div><div class="l">scrutins publics recensés · Assemblée nationale</div></a>
     ${["Chômage","Inflation","Déficit public"].map(nom=>{
       const i = INDICATEURS.find(x=>x.nom===nom);
-      return i ? `<div class="accueil-hero-stat"><div class="v">${i.valeur}</div><div class="l">${nom} (${i.date.replace(/\s*\(.*\)/,"")})</div></div>` : "";
+      return i ? `<a class="accueil-hero-stat" href="#chiffres"><div class="v">${esc(i.valeur)}</div><div class="l">${nom} (${esc(i.date.replace(/\s*\(.*\)/,""))}) · ${esc(i.source || "Insee")}</div></a>` : "";
     }).join("")}
   `;
 
@@ -3021,7 +3028,7 @@ function renderDeputeFiche(d){
     <p class="depute-note">La participation ne compte que les scrutins publics en séance. Beaucoup ont lieu pendant les réunions de commission, et les votes à main levée ne sont pas nominatifs : un taux bas ne veut pas dire que ${d.f ? "la députée" : "le député"} ne travaille pas. Un député peut aussi voter par délégation pour un collègue absent.</p>
     <h3 class="histo-title">Ses votes sur les textes et les motions de censure</h3>
     <div class="theme-filter-bar" id="depute-filtre">
-      ${[["tous","Tout"],["texte","Textes (vote final)"],["censure","Censure et confiance"]].map(([id,l])=>`<button type="button" class="theme-chip ${deputeFiltreVotes===id?"selected":""}" data-f="${id}">${l}</button>`).join("")}
+      ${[["tous","Tout"],["texte","Textes (vote final)"],["censure","Confiance et censure"]].map(([id,l])=>`<button type="button" class="theme-chip ${deputeFiltreVotes===id?"selected":""}" data-f="${id}">${l}</button>`).join("")}
     </div>
     <div>${lignes.length ? lignes.map(({ numero, code, loi })=>{
       const [libelle, classe] = LIB[code] || LIB["-"];
@@ -3259,7 +3266,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["candidats", "deputes", "senat", "histo", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -3404,10 +3411,24 @@ async function loadPetitesDonnees(){
   verif("justice-verifie", justice?.verifieLe);
 }
 
+// Format compact de data/lois.json : les champs déduits du numéro de scrutin ne sont pas écrits
+// dans le fichier (même règle que scripts/lois-format.js)
+function completerLoi(l){
+  if(l.numero === undefined) return l;
+  l.id ??= `an-scrutin-${l.numero}`;
+  l.sourceUrl ??= `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
+  l.sourceLabel ??= `Assemblée nationale — scrutin n°${l.numero}`;
+  l.source ??= "auto-assemblee-nationale";
+  l.reel ??= true;
+  l.theme ??= "À catégoriser";
+  if(l.dossierRef) l.dossierUrl ??= `https://www.assemblee-nationale.fr/dyn/17/dossiers/${l.dossierRef}`;
+  return l;
+}
+
 // Gros fichier des scrutins (~500 Ko compressés)
 async function loadExternalData(){
   const loisJson = await lireJSON("data/lois.json");
-  if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
+  if(loisJson?.lois?.length){ LOIS = loisJson.lois.map(completerLoi); LOIS_MAJ = loisJson.lastUpdated; }
 }
 
 function dateCourte(iso){

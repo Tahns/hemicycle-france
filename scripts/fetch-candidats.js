@@ -94,6 +94,23 @@ function contenu(cell) {
   return cell;
 }
 
+/**
+ * Source de l'annonce : parmi les références citées, un article qui nomme le candidat et parle de sa
+ * candidature ; jamais un article consacré à une procédure judiciaire (présomption d'innocence : ce
+ * n'est pas le sujet de la fiche). À défaut, la page Wikipédia des candidatures elle-même.
+ */
+function choisirSource(paragraphe, commentaires, nomFamille) {
+  const refs = [...`${paragraphe}\n${commentaires}`.matchAll(/<ref[^>]*>([\s\S]*?)<\/ref>/g)].map((m) => {
+    const url = m[1].match(/(?:\burl|lire en ligne)\s*=\s*(https?:\/\/[^\s|}]+)/)?.[1] || m[1].match(/(https?:\/\/[^\s|}\]]+)/)?.[1];
+    const titre = m[1].match(/titre\s*=\s*([^|}]+)/)?.[1] || "";
+    return url ? { url, texte: (titre + " " + url).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() } : null;
+  }).filter(Boolean);
+  const nom = String(nomFamille).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[\s-]+/).pop();
+  const judiciaire = /jug|agress|harcel|condamn|proces|enquete|mis en examen|mise en examen|garde a vue|plainte/;
+  const bonne = refs.find((r) => r.texte.includes(nom) && /candidat|presidentielle|2027/.test(r.texte) && !judiciaire.test(r.texte));
+  return bonne?.url || PAGE_URL;
+}
+
 function parseLigne(bloc, primaire) {
   const entete = bloc.split("\n").find((l) => l.startsWith("!"));
   const tri = entete?.match(/\{\{TriNom\|([^|}]*)\|([^|}]*)/);
@@ -118,7 +135,7 @@ function parseLigne(bloc, primaire) {
   const paragraphe = paragraphes.find((x) => /candidat/i.test(x) && /annonc|confirm|déclar|officialis|présente|lance/i.test(x))
     || paragraphes.find((x) => /candidat/i.test(x) && !/^\s*\|?\s*Candidat(e)? (à|au|aux) /i.test(x)) || "";
   const annonce = premiereDate(paragraphe);
-  const source = paragraphe.match(/(?:\burl|lire en ligne)\s*=\s*(https?:\/\/[^\s|}]+)/)?.[1] || commentaires.match(/(?:\burl|lire en ligne)\s*=\s*(https?:\/\/[^\s|}]+)/)?.[1] || null;
+  const source = choisirSource(paragraphe, commentaires, tri[2]);
 
   return {
     nom,

@@ -20,6 +20,10 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
 
+`data/lois.json` est écrit au format compact : les champs qui se déduisent du numéro de scrutin
+(identifiant, lien officiel, lien du dossier…) ne sont pas stockés et sont reconstitués à la lecture
+(`scripts/lois-format.js` pour les scripts, `completerLoi()` dans `index.html`), soit −22 % de poids.
+
 Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 - scrutins : les votes par groupe sont recoupés avec le total officiel ; les groupes que l'AN publie
   sans identifiant (`PO0`) sont retrouvés à partir des députés nommés dans le vote ;
