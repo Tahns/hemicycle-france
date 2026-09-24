@@ -4,8 +4,12 @@
  * -----------------
  * Construit data/communes.json : pour chaque commune, la ou les circonscriptions législatives
  * dont elle fait partie (les grandes villes sont partagées entre plusieurs circonscriptions),
- * d'après les résultats officiels des élections législatives de 2024 (par bureau de vote, qui
- * indiquent la circonscription) publiés par le ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
+ * d'après les résultats officiels du 1er tour des élections législatives de 2024 publiés par le
+ * ministère de l'Intérieur sur data.gouv.fr. Sert à « trouver son député » en tapant sa commune.
+ *
+ * Les résultats par bureau de vote ne donnent pas la circonscription, mais la liste des candidats,
+ * propre à chaque circonscription : le premier candidat d'un bureau (nom + prénom, dans son
+ * département) désigne donc sa circonscription, d'après le fichier des résultats par circonscription.
  *
  * Le découpage des circonscriptions ne change qu'avec une loi : le fichier n'est reconstruit que
  * s'il a plus de 90 jours (ou avec --force).
@@ -23,14 +27,9 @@ import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
 const DATA_FILE = path.resolve("data/communes.json");
-// Fichiers essayés dans l'ordre : on garde le premier dont l'en-tête indique la circonscription
-// (le fichier « par communes » agrège les résultats par commune et ne la donne pas)
-const SOURCES = [
-  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240710-171445/resultats-definitifs-par-bureau-de-vote.csv",
-  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-2nd-tour/20240710-170658/resultats-definitifs-par-bureau-de-vote.csv",
-  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-2nd-tour/20240710-170606/resultats-definitifs-par-commune.csv",
-  "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/20240711-075056/resultats-definitifs-par-communes.csv",
-];
+const BASE = "https://static.data.gouv.fr/resources/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/";
+const SOURCE_CIRCOS = BASE + "20240710-171413/resultats-definitifs-par-circonscriptions-legislatives.csv";
+const SOURCE_BUREAUX = BASE + "20240710-171445/resultats-definitifs-par-bureau-de-vote.csv";
 const PAGE = "https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/";
 const FORCE = process.argv.includes("--force");
 const FICHIER = process.argv.find((a) => a.startsWith("--fichier="))?.split("=")[1];
@@ -53,6 +52,54 @@ function champs(ligne, sep) {
   return out.map((x) => x.trim());
 }
 
+/** Lit un CSV : { entete normalisé, lignes découpées, col(...motsClés) } */
+function lireCsv(csv) {
+  const lignes = csv.replace(/^\uFEFF/, "").split(/\r?\n/).filter((l) => l.trim());
+  const sep = (lignes[0].match(/;/g) || []).length >= (lignes[0].match(/,/g) || []).length ? ";" : ",";
+  const entete = champs(lignes[0], sep).map(normEntete);
+  return { entete, lignes: lignes.slice(1).map((l) => champs(l, sep)), col: (...m) => entete.findIndex((h) => m.every((x) => h.includes(x))) };
+}
+const cleCandidat = (dep, nom, prenom) => `${dep}|${normEntete(nom)}|${normEntete(prenom)}`;
+function numeroCirco(code, codeDep) {
+  const c = String(code).replace(/\s/g, "");
+  return parseInt(codeDep && c.startsWith(codeDep) ? c.slice(codeDep.length) : c.slice(-2), 10);
+}
+
+/** Jointure résultats par circonscription × résultats par bureau de vote, sur le premier candidat. */
+export function construireParCandidats(csvCircos, csvBureaux) {
+  const C = lireCsv(csvCircos);
+  const cDep = C.col("code", "departement"), cCirco = C.col("code", "circonscription"), cNom = C.col("nom", "candidat"), cPrenom = C.col("prenom", "candidat");
+  if (cDep < 0 || cCirco < 0 || cNom < 0 || cPrenom < 0) throw new Error(`colonnes introuvables (circonscriptions) : ${C.entete.slice(0, 22).join(" | ")}`);
+  const circoDe = new Map();
+  for (const f of C.lignes) {
+    const num = numeroCirco(f[cCirco], f[cDep]);
+    if (num && f[cNom]) circoDe.set(cleCandidat(f[cDep], f[cNom], f[cPrenom]), num);
+  }
+  const B = lireCsv(csvBureaux);
+  const bDep = B.col("code", "departement"), bLibDep = B.col("libelle", "departement"), bCom = B.col("libelle", "commune"), bNom = B.col("nom", "candidat"), bPrenom = B.col("prenom", "candidat");
+  if (bDep < 0 || bLibDep < 0 || bCom < 0 || bNom < 0 || bPrenom < 0) throw new Error(`colonnes introuvables (bureaux) : ${B.entete.slice(0, 22).join(" | ")}`);
+  const deps = {}, circos = new Set();
+  let sansCirco = 0;
+  for (const f of B.lignes) {
+    const num = circoDe.get(cleCandidat(f[bDep], f[bNom], f[bPrenom]));
+    if (!num) { sansCirco++; continue; }
+    const dep = f[bLibDep], commune = f[bCom];
+    if (!dep || !commune) continue;
+    circos.add(`${dep}|${num}`);
+    const liste = (deps[dep] ||= new Map());
+    (liste.get(commune) || liste.set(commune, new Set()).get(commune)).add(num);
+  }
+  if (sansCirco) warn(`${sansCirco} bureau(x) de vote sans circonscription retrouvée.`);
+  const departements = {};
+  let nbCommunes = 0;
+  for (const [dep, liste] of Object.entries(deps)) {
+    departements[dep] = [...liste.entries()].sort((a, b) => a[0].localeCompare(b[0], "fr")).map(([c, n]) => [c, [...n].sort((a, b) => a - b)]);
+    nbCommunes += liste.size;
+  }
+  return { departements, nbCommunes, nbCircos: circos.size };
+}
+
+/** Fichier local déjà au format commune + circonscription (tests). */
 export function construire(csv) {
   const lignes = csv.replace(/^﻿/, "").split(/\r?\n/).filter((l) => l.trim());
   const sep = (lignes[0].match(/;/g) || []).length >= (lignes[0].match(/,/g) || []).length ? ";" : ",";
@@ -97,18 +144,12 @@ async function main() {
   let resultat = null;
   if (FICHIER) resultat = construire(await readFile(FICHIER, "utf-8"));
   else {
-    for (const url of SOURCES) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        resultat = construire(await res.text());
-        log(`Source retenue : ${url}`);
-        break;
-      } catch (e) {
-        warn(`${url.split("/").slice(-2).join("/")} : ${e.message}`);
-      }
-    }
-    if (!resultat) throw new Error("aucune source ne donne la circonscription des communes");
+    const lire = async (url) => {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status} en téléchargeant ${url}`);
+      return res.text();
+    };
+    resultat = construireParCandidats(await lire(SOURCE_CIRCOS), await lire(SOURCE_BUREAUX));
   }
   const { departements, nbCommunes, nbCircos } = resultat;
   log(`${nbCommunes} communes, ${nbCircos} circonscriptions, ${Object.keys(departements).length} départements ou collectivités.`);
@@ -119,7 +160,7 @@ async function main() {
   }
   await writeFile(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
-    source: "Ministère de l'Intérieur — résultats des législatives 2024 par commune (data.gouv.fr)",
+    source: "Ministère de l'Intérieur — résultats du 1er tour des législatives 2024 par circonscription et par bureau de vote (data.gouv.fr)",
     sourceUrl: PAGE,
     departements,
   }) + "\n");
