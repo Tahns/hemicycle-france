@@ -61,10 +61,28 @@ function verifier(cond, message) {
     verifier((await page.$$("#hemicycle circle.siege")).length >= 570, `${nom} : hémicycle incomplet`);
     verifier((await page.$$("#breakdown-list .party-row")).length === 12, `${nom} : détail par groupe incomplet`);
 
+    // Filtres : un filtre actif fait apparaître « Réinitialiser », qui rétablit l'état par défaut
+    const etatFiltres = () => page.evaluate(() => ({ n: document.getElementById("loi-count").textContent, theme: document.getElementById("loi-theme").value,
+      reset: document.getElementById("loi-reset").hidden, type: document.querySelector("#theme-filter-bar .selected")?.dataset.cat }));
+    const avant = await etatFiltres();
+    await page.selectOption("#loi-theme", "Défense");
+    await page.waitForTimeout(200);
+    const filtre = await etatFiltres();
+    verifier(!filtre.reset && filtre.n !== avant.n, `${nom} : le filtre par thème est sans effet`);
+    await page.click("#loi-reset");
+    await page.waitForTimeout(200);
+    const apres = await etatFiltres();
+    verifier(apres.reset && apres.theme === "" && apres.type === "texte" && /\d/.test(apres.n), `${nom} : « Réinitialiser » ne rétablit pas les filtres`);
+
     await page.goto(base + "#histo-LFI", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".histo-row")).length > 10, `${nom} : historique vide`);
     verifier((await page.$$(".proximite-row")).length >= 5, `${nom} : proximité de vote absente`);
+    if (nom === "mobile") {
+      await page.selectOption("#party-select", "RN");
+      await page.waitForTimeout(200);
+      verifier(/#histo-RN$/.test(page.url()), `${nom} : la liste déroulante des groupes ne change pas de groupe`);
+    }
 
     await page.goto(base + "#sondages", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
