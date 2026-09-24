@@ -206,6 +206,28 @@ function serveur() {
   ecrireSiChange(path.join(RACINE, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
   ecrireSiChange(path.join(RACINE, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
 
+  // 4 bis. Flux RSS des derniers votes clés (textes et motions de censure), à suivre dans un lecteur de flux
+  const xml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const items = [...votes].sort((a, b) => b.numero - a.numero).slice(0, 40).map((v) => `  <item>
+    <title>${xml(`${v.resultat === "adopte" ? "Adopté" : "Rejeté"} : ${v.titre}`)}</title>
+    <link>${SITE}v/${v.numero}.html</link>
+    <guid isPermaLink="true">${SITE}v/${v.numero}.html</guid>
+    ${v.dateISO ? `<pubDate>${new Date(v.dateISO + "T18:00:00Z").toUTCString()}</pubDate>` : ""}
+    <description>${xml(`Assemblée nationale, ${v.date} : ${nombre(v.pour)} pour, ${nombre(v.contre)} contre, ${nombre(v.abst)} abstention${v.abst > 1 ? "s" : ""}. Intitulé officiel : ${v.intitule}`)}</description>
+  </item>`).join("\n");
+  ecrireSiChange(path.join(RACINE, "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>${xml(NOM_SITE)} · Votes de l'Assemblée nationale</title>
+  <link>${SITE}</link>
+  <atom:link href="${SITE}feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Les derniers textes et motions de censure votés à l'Assemblée nationale, avec le décompte officiel.</description>
+  <language>fr</language>
+${items}
+</channel>
+</rss>
+`);
+
   // 5. Adresse du site dans les balises og: d'index.html (utile après un changement de domaine)
   const indexFichier = path.join(RACINE, "index.html");
   const index = fs.readFileSync(indexFichier, "utf-8");

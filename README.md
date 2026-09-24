@@ -18,6 +18,10 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
 | Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
+| Activité des députés (questions écrites, amendements) et déclarations HATVP | `fetch-activite.js` (chaque semaine) | open data de l'Assemblée nationale et de la HATVP (reliées par l'identifiant du député) | `data/activite.json` |
+| Vote du Sénat sur un texte voté à l'Assemblée | `navette.js` | dossiers législatifs de l'Assemblée (lien vers le dossier du Sénat) et `data/senat.json` | `data/navette.json` |
+| Présidentielle 2022 par commune | `fetch-elections.js` (une seule fois, résultats définitifs) | ministère de l'Intérieur sur data.gouv.fr | `data/elections/*.json` |
+| Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 

@@ -303,6 +303,8 @@ async function buildDossiers(dir) {
       commissionFond: commissionFond(d.actesLegislatifs?.acteLegislatif),
       titre: d.titreDossier?.titre || null,
       procedure: d.procedureParlementaire?.libelle || null,
+      // Adresse du même dossier au Sénat (pour relier les votes des deux chambres, voir scripts/navette.js)
+      senat: (d.titreDossier?.senatChemin || "").match(/\/dossier-legislatif\/[^/?#]+\.html/)?.[0] || null,
       initiateurs: acteurs ? (Array.isArray(acteurs) ? acteurs : [acteurs]) : [],
     };
   }
@@ -570,6 +572,9 @@ async function main() {
   const dossiersDir = await mkdtemp(path.join(os.tmpdir(), "an-dossiers-"));
   await downloadAndExtract(DOSSIERS_ZIP_URL, dossiersDir);
   const dossiers = await buildDossiers(dossiersDir);
+  // Correspondance dossier Assemblée -> dossier Sénat, utilisée par scripts/navette.js
+  const versSenat = Object.fromEntries(Object.entries(dossiers).filter(([, d]) => d.senat).map(([uid, d]) => [uid, d.senat]).sort());
+  if (!DRY_RUN && Object.keys(versSenat).length > 100) await writeFile(path.resolve("data/dossiers-senat.json"), JSON.stringify(versSenat, null, 0) + "\n");
 
   const nouveaux = [];
   const misAJour = [];

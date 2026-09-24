@@ -7,6 +7,7 @@
 <meta name="description" content="Ce que votent les députés, groupe par groupe, qui dirige les partis, où en sont les sondages de la présidentielle 2027 et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
 <meta name="theme-color" content="#F5F1E8">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="Hémicycle France · Votes de l'Assemblée" href="feed.xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -412,6 +413,22 @@
   .proximite-row .track{height:6px; background:var(--border-soft);}
   .proximite-row .fill{height:100%;}
   .proximite-row .pct{text-align:right; font-family:var(--font-display); font-size:16px; font-weight:600; font-variant-numeric:tabular-nums;}
+  .depute-activite{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px 22px; margin:0 0 18px; padding:12px 0 14px; border-bottom:1px solid var(--border);}
+  .depute-activite > div{display:grid; gap:2px; align-content:start;}
+  .depute-activite .stat-label{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint);}
+  .depute-activite b{font-family:var(--font-display); font-size:24px; font-weight:600;}
+  .depute-activite span:not(.stat-label){font-size:13px; color:var(--text-soft);}
+  @media (max-width:640px){
+    .depute-activite{grid-template-columns:1fr; gap:0;}
+    .depute-activite > div{grid-template-columns:auto 1fr; column-gap:12px; align-items:baseline; padding:8px 0; border-bottom:1px solid var(--border-soft);}
+    .depute-activite > div:last-child{border-bottom:none;}
+    .depute-activite .stat-label{grid-column:1 / -1;}
+    .depute-activite b{font-size:20px;}
+  }
+  .depute-themes .proximite-row .pct{white-space:nowrap;}
+  .depute-themes{margin:0 0 18px; padding:10px 0; border-bottom:1px solid var(--border);}
+  .depute-themes summary{cursor:pointer; font-weight:600; font-size:15px; min-height:32px; display:flex; align-items:center;}
+  .depute-themes .proximite-row .nom{font-weight:500; white-space:normal;}
   .histo-title{font-family:var(--font-display); font-size:20px; font-weight:600; margin:0 0 4px;}
   .histo-row{
     display:grid; grid-template-columns:1fr auto; gap:6px 16px; align-items:center;
@@ -708,6 +725,8 @@
   .depute-carte b{display:block; font-family:var(--font-display); font-size:17px; font-weight:600; line-height:1.3;}
   .depute-carte span{display:block; font-size:13px; color:var(--text-soft);}
   .commune-bloc{margin:0 0 22px; padding:12px 16px 4px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:4px;}
+  .commune-elections{font-size:13px; color:var(--text-soft); margin:2px 0 8px;}
+  .commune-elections b{color:var(--text); font-weight:600;}
   .commune-titre{font-family:var(--font-display); font-size:19px; font-weight:600;}
   .commune-titre span{font-family:var(--font-body); font-size:13px; font-weight:500; color:var(--text-faint);}
   .commune-bloc .depute-carte:last-child{border-bottom:none;}
@@ -1287,6 +1306,8 @@
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
         <li><b>Communes et circonscriptions :</b> résultats officiels du 1er tour des législatives 2024 par circonscription et par bureau de vote, ministère de l'Intérieur (<a href="https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a>, Licence Ouverte).</li>
+        <li><b>Activité et transparence des députés :</b> questions écrites et amendements (<a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a>) ; déclarations d'intérêts et de patrimoine (<a href="https://www.hatvp.fr/open-data/" target="_blank" rel="noopener">open data de la HATVP</a>, lien vers la page officielle de chaque député, sans reprise des montants).</li>
+        <li><b>Présidentielle 2022 par commune :</b> résultats définitifs publiés par le ministère de l'Intérieur sur <a href="https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-10-et-24-avril-2022-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a> (licence ouverte).</li>
         <li><b>Condamnations, dirigeants, agenda :</b> décisions de justice, articles de presse et sites officiels, cités sur chaque fiche.</li>
       </ul>
       <p>Chaque jour, tous les liens cités sont confrontés à la base du <a href="https://www.lemonde.fr/verification/" target="_blank" rel="noopener">Décodex</a> (Les Décodeurs, <i>Le Monde</i>) : aucun ne doit renvoyer vers un contenu qu'elle a démenti ni vers un site qu'elle a épinglé à de nombreuses reprises (au moins dix fois).</p>
@@ -1334,12 +1355,13 @@
   <p class="footer-liens">
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
-    <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a>
+    <a href="https://github.com/Tahns/politique-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
+    <a href="feed.xml">Flux RSS des votes</a>
   </p>
   <div class="footer-grid">
     <div>
       <h2>D'où viennent les données</h2>
-      Votes, dossiers, groupes et députés : <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte). Votes du Sénat : <a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">pages officielles du Sénat</a>. Chiffres économiques : <a href="https://www.insee.fr" target="_blank" rel="noopener">Insee</a>. Sondages : notices de la <a href="https://www.commission-des-sondages.fr" target="_blank" rel="noopener">Commission des sondages</a>, relevées sur Wikipédia, comme les candidatures. Communes et circonscriptions : <a href="https://www.data.gouv.fr" target="_blank" rel="noopener">ministère de l'Intérieur</a>. Chaque fiche renvoie à sa source ; les liens sont vérifiés chaque jour avec le Décodex.
+      Votes, dossiers, groupes et députés : <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (licence ouverte). Votes du Sénat : <a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">pages officielles du Sénat</a>. Chiffres économiques : <a href="https://www.insee.fr" target="_blank" rel="noopener">Insee</a>. Sondages : notices de la <a href="https://www.commission-des-sondages.fr" target="_blank" rel="noopener">Commission des sondages</a>, relevées sur Wikipédia, comme les candidatures. Communes, circonscriptions et présidentielle 2022 : <a href="https://www.data.gouv.fr" target="_blank" rel="noopener">ministère de l'Intérieur</a>. Déclarations des élus : <a href="https://www.hatvp.fr" target="_blank" rel="noopener">HATVP</a>. Chaque fiche renvoie à sa source ; les liens sont vérifiés chaque jour avec le Décodex.
     </div>
     <div>
       <h2>La règle</h2>
@@ -2055,6 +2077,7 @@ document.getElementById("loi-search").addEventListener("input", ()=>{
 });
 document.getElementById("loi-select").addEventListener("change", updateBreakdown);
 
+let NAVETTE = null; // data/navette.json : votes du Sénat sur les mêmes textes
 function updateBreakdown(){
   const loi = currentLoi();
   if(!loi) return;
@@ -2076,6 +2099,12 @@ function updateBreakdown(){
   if(loi.dossierTitre) lignes.push(["Dossier législatif",
     `<a href="${lien(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
   if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
+  // Parcours du texte : vote du Sénat sur l'ensemble du même texte (data/navette.json, chargé à la demande)
+  if(loi.dossierRef){
+    if(NAVETTE === null){ NAVETTE = false; lireJSON("data/navette.json").then(d=>{ NAVETTE = d?.textes || {}; if(currentLoi() === loi) updateBreakdown(); }); }
+    const n = NAVETTE && NAVETTE[loi.dossierRef];
+    if(n) lignes.push(["Au Sénat", n.votes.map(v=>`<span class="histo-resultat ${v.resultat}">${v.resultat === "adopte" ? "Adopté" : "Rejeté"}</span> le ${esc(v.date)} (${formatNombre(v.pour)} pour, ${formatNombre(v.contre)} contre) · <a href="${lien(v.url)}" target="_blank" rel="noopener">le scrutin</a>`).join("<br>") + ` · <a href="${lien(n.dossier)}" target="_blank" rel="noopener">dossier au Sénat</a>`]);
+  }
   if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
   lignes.push(["Source", `<a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">${loi.numero ? `fiche du scrutin n°${loi.numero}` : esc(loi.sourceLabel)}</a>`]);
   const ctx = checkContexteDate(loi);
@@ -3255,6 +3284,20 @@ function chargerDeputes(){
 }
 
 const ordinalCirco = n => n === 1 ? "1ʳᵉ" : n + "ᵉ";
+
+/* Présidentielle 2022 dans la commune (data/elections/<département>.json, chargé à la demande) */
+const slugDep = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const ELECTIONS = new Map();
+async function afficherPresidentielle(el){
+  const dep = el.dataset.dep;
+  if(!ELECTIONS.has(dep)) ELECTIONS.set(dep, lireJSON(`data/elections/${dep}.json`));
+  const d = await ELECTIONS.get(dep);
+  const r = d?.communes?.[el.dataset.commune];
+  if(!r){ el.remove(); return; }
+  const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + " %";
+  const tour = (t, n) => (r[t] || []).map((v, i) => [d.candidats[t][i], v]).sort((a, b) => b[1] - a[1]).slice(0, n).map(([c, v]) => `${esc(c)} ${pct(v)}`).join(" · ");
+  el.innerHTML = `<b>Présidentielle 2022 ici</b> : 1er tour ${tour("t1", 3)}${r.t2 ? ` ; 2d tour ${tour("t2", 2)}` : ""}`;
+}
 function circoDepute(d){ return `${d.dep}${d.circo ? `, ${ordinalCirco(d.circo)} circonscription` : ""}`; }
 function partiDepute(d){ return PARTIES.find(p=>p.id===d.groupe) || { nom:d.groupe, couleur:"#8A8C94" }; }
 const pctFr = (n, d) => d ? (n / d * 100).toFixed(0) + " %" : "—";
@@ -3294,6 +3337,7 @@ async function renderDeputes(){
       if(!deps.length) return "";
       return `<div class="commune-bloc">
         <div class="commune-titre">${esc(t.c)} <span>(${esc(t.depNom)}) · ${t.circos.length > 1 ? `${t.circos.length} circonscriptions` : `${ordinalCirco(t.circos[0])} circonscription`}</span></div>
+        <div class="commune-elections" data-dep="${esc(slugDep(t.depNom))}" data-commune="${esc(t.c)}"></div>
         ${deps.map(d=>{ const p = partiDepute(d); return `<button type="button" class="depute-carte" data-id="${esc(d.id)}"><span class="dot" style="background:${p.couleur}"></span><span><b>${esc(d.nom)}</b><span>${esc(circoDepute(d))} · ${esc(d.groupe)}</span></span></button>`; }).join("")}
       </div>`;
     }).join("");
@@ -3304,6 +3348,7 @@ async function renderDeputes(){
   document.getElementById("depute-reset").hidden = !q && !dep;
   document.getElementById("deputes-communes").innerHTML = blocCommunes;
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
+  document.querySelectorAll("#deputes-communes .commune-elections").forEach(afficherPresidentielle);
   if(!res.length){ liste.innerHTML = blocCommunes ? "" : `<p class="no-result-msg">Aucun député ni aucune commune ne correspond à cette recherche.</p>`; return; }
   liste.innerHTML = res.slice(0, deputeLimite).map(d=>{
     const p = partiDepute(d);
@@ -3326,9 +3371,10 @@ async function ouvrirDepute(id){
   document.getElementById("deputes-recherche").hidden = true;
   document.getElementById("depute-fiche").hidden = false;
   renderDeputeFiche(d);
+  afficherActivite(d);
   majHash("depute-" + id);
   document.title = `${d.nom} · Hémicycle France`;
-  window.scrollTo({ top:0, behavior:"smooth" });
+  if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
 }
 
 function fermerDepute(){
@@ -3336,6 +3382,43 @@ function fermerDepute(){
   document.getElementById("depute-fiche").hidden = true;
   document.getElementById("deputes-recherche").hidden = false;
   if(document.getElementById("view-deputes").classList.contains("active")) majHash("deputes");
+}
+
+// Activité (questions écrites, amendements) et déclarations HATVP : data/activite.json, chargé à la demande
+let ACTIVITE = null;
+async function afficherActivite(d){
+  ACTIVITE ||= lireJSON("data/activite.json");
+  const a = (await ACTIVITE)?.deputes?.[d.id];
+  const bloc = document.getElementById("depute-activite");
+  if(!a || !bloc || deputeOuvert !== d.id) return;
+  const pluriel = (n, mot) => `${formatNombre(n)} ${mot}${n > 1 ? "s" : ""}`;
+  const derniere = a.hatvp?.docs[0]?.[1];
+  const hatvp = a.hatvp ? `${derniere ? `la dernière le ${esc(dateCourte(derniere) || derniere)} · ` : ""}<a href="${lien(a.hatvp.url)}" target="_blank" rel="noopener">les consulter</a>` : "aucune publiée pour l'instant";
+  bloc.innerHTML = `
+    <div><span class="stat-label">Questions écrites au Gouvernement</span><b>${formatNombre(a.q)}</b>${a.sujets?.length ? `<span>surtout : ${a.sujets.map(esc).join(", ")}</span>` : ""}</div>
+    <div><span class="stat-label">Amendements déposés</span><b>${formatNombre(a.a)}</b><span>${a.a ? `dont ${pluriel(a.aa, "adopté")}` : "en premier signataire"}</span></div>
+    <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>`;
+  bloc.hidden = false;
+}
+
+// Fidélité à son groupe, thème par thème, sur les votes clés où il a voté
+function blocThemes(d){
+  const parTheme = {};
+  DEPUTES_CLES.forEach((numero, i)=>{
+    const mien = { p:"pour", c:"contre", a:"abst" }[d.votes[i]];
+    const loi = mien && LOIS.find(l => l.numero === numero);
+    const theme = loi && themeLoi(loi);
+    const groupe = theme && positionMajoritaire(loi, loi.votes[d.groupe]);
+    if(!groupe) return;
+    const t = (parTheme[theme] ||= [0, 0]);
+    t[1]++; if(mien === groupe) t[0]++;
+  });
+  const lignes = Object.entries(parTheme).filter(([, [, n]]) => n >= 3).sort((a, b) => b[1][1] - a[1][1]);
+  if(!lignes.length) return "";
+  return `<details class="depute-themes"><summary>Vote-t-${d.f ? "elle" : "il"} comme son groupe ? Le détail par thème</summary>
+    ${lignes.map(([t, [ok, n]]) => `<div class="proximite-row" title="${ok} vote${ok > 1 ? "s" : ""} sur ${n} comme la majorité de son groupe"><span class="nom">${esc(t)}</span><span class="track"><span class="fill" style="display:block; width:${Math.round(ok / n * 100)}%; background:var(--accent)"></span></span><span class="pct">${Math.round(ok / n * 100)} %</span></div>`).join("")}
+    <p class="depute-note">Sur les textes et motions de censure où ${d.f ? "elle" : "il"} a voté, classés par commission saisie au fond. Seuls les thèmes avec au moins 3 votes sont montrés.</p>
+  </details>`;
 }
 
 // Deux députés face à face sur les votes clés où tous deux ont voté (pour, contre ou abstention)
@@ -3402,6 +3485,8 @@ function renderDeputeFiche(d){
       <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${formatNombre(s.pour)} · ${formatNombre(s.contre)} · ${formatNombre(s.abst)}</div><div class="stat-sub">pour · contre · abstention</div>${exprimes ? `<div class="vote-barre mini" aria-hidden="true">${[["p",s.pour],["c",s.contre],["a",s.abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}</div>` : ""}</div>
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(s.ecarts)}</div><div class="stat-sub">${pctFr(s.ecarts, exprimes)} de ses votes diffèrent de la position majoritaire de son groupe</div></div>
     </div>
+    <div class="depute-activite" id="depute-activite" hidden></div>
+    ${blocThemes(d)}
     ${blocComparaison(d)}
     <p class="depute-note">La participation ne compte que les scrutins publics en séance. Beaucoup ont lieu pendant les réunions de commission, et les votes à main levée ne sont pas nominatifs : un taux bas ne veut pas dire que ${d.f ? "la députée" : "le député"} ne travaille pas. Un député peut aussi voter par délégation pour un collègue absent.</p>
     <h3 class="histo-title">Ses votes sur les textes et les motions de censure</h3>
