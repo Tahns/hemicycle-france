@@ -13,6 +13,8 @@
 <meta name="apple-mobile-web-app-title" content="Politique FR">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Décrypter la politique française">
@@ -879,6 +881,9 @@
       </ul>
       <p>Pour toute question sur vos données, vous pouvez ouvrir un ticket ou saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
 
+      <h3>Sécurité</h3>
+      <p>Le site est servi uniquement en HTTPS et n'exécute aucun code provenant d'un autre site. Les textes et liens issus des sources extérieures sont filtrés avant affichage. Si vous découvrez une faille, merci de la signaler en <a href="https://github.com/Tahns/politique-france/security/advisories/new" target="_blank" rel="noopener">message privé sur GitHub</a> plutôt que dans un ticket public.</p>
+
       <h3>Responsabilité</h3>
       <p>Les informations sont publiées à titre d'information du public. Malgré le soin apporté aux vérifications, des erreurs restent possibles : signalez-les et elles seront corrigées. Le code du site est public et consultable sur <a href="https://github.com/Tahns/politique-france" target="_blank" rel="noopener">GitHub</a>.</p>
     </div>
@@ -1220,6 +1225,10 @@ let LOIS = [
 
 function esc(s){
   return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+// Lien externe venant des données : seules les adresses http(s) passent (pas de « javascript: »)
+function lien(u){
+  return /^https?:\/\//i.test(String(u ?? "")) ? esc(u) : "#";
 }
 
 // Titre lisible : titre court saisi à la main s'il existe, sinon l'intitulé officiel avec majuscule initiale
@@ -1585,10 +1594,10 @@ function updateBreakdown(){
   if(TYPES_VOTE[loi.typeVote]) lignes.push(["Type de vote", TYPES_VOTE[loi.typeVote]]);
   if(loi.proposePar || loi.auteur) lignes.push(["Texte déposé par", `<b>${esc(loi.proposePar || loi.auteur)}</b>`]);
   if(loi.dossierTitre) lignes.push(["Dossier législatif",
-    `<a href="${esc(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
+    `<a href="${lien(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
   if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
   if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
-  lignes.push(["Source", `<a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">${loi.numero ? `fiche du scrutin n°${loi.numero}` : esc(loi.sourceLabel)}</a>`]);
+  lignes.push(["Source", `<a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">${loi.numero ? `fiche du scrutin n°${loi.numero}` : esc(loi.sourceLabel)}</a>`]);
   const ctx = checkContexteDate(loi);
   document.getElementById("loi-provenance").innerHTML =
     lignes.map(([label,val])=>`<div class="loi-provenance-row"><span class="label">${label}</span><span class="value">${val}</span></div>`).join("") +
@@ -1775,7 +1784,7 @@ function renderHistorique(){
     const entete = `
       <div>
         <div class="histo-loi">${esc(titreLoi(loi))}</div>
-        <div class="histo-date">${esc(loi.date)} · ${resultat} · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">scrutin n°${loi.numero ?? ""}</a>${loi.dossierTitre && categorieLoi(loi) !== "texte" ? ` · texte : ${esc(loi.dossierTitre)}` : ""}${loi.auteur && categorieLoi(loi) === "texte" ? ` · déposé par ${esc(loi.auteur)}` : ""}</div>
+        <div class="histo-date">${esc(loi.date)} · ${resultat} · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">scrutin n°${loi.numero ?? ""}</a>${loi.dossierTitre && categorieLoi(loi) !== "texte" ? ` · texte : ${esc(loi.dossierTitre)}` : ""}${loi.auteur && categorieLoi(loi) === "texte" ? ` · déposé par ${esc(loi.auteur)}` : ""}</div>
       </div>`;
     const delay = `style="animation-delay:${Math.min(idx,20)*20}ms"`;
     const total = v ? v.pour+v.contre+v.abst : 0;
@@ -1836,16 +1845,16 @@ function meetingCard(m, idx, passe){
   return `
     <div class="meeting-card ${m.verified?'':'placeholder'} ${passe?'passe':''}" style="animation-delay:${idx*30}ms">
       <div class="meeting-date-badge">
-        <div class="jour">${m.jour}</div>
-        <div class="mois">${m.mois}</div>
+        <div class="jour">${esc(m.jour)}</div>
+        <div class="mois">${esc(m.mois)}</div>
       </div>
       <div class="meeting-body">
         <h4>${esc(m.titre)}${m.verified?'':''}</h4>
         <div class="meeting-meta">
-          <span class="dot-inline" style="background:${m.partyColor}"></span>${m.parti}${m.heure && m.heure !== "—" ? ` · ${m.heure}` : ""} · ${esc(m.lieu)}
+          <span class="dot-inline" style="background:${m.partyColor}"></span>${esc(m.parti)}${m.heure && m.heure !== "—" ? ` · ${esc(m.heure)}` : ""} · ${esc(m.lieu)}
         </div>
         <div class="meeting-desc">${esc(m.desc)}</div>
-        ${m.source ? `<div class="meeting-source">Source : <a href="${m.source.url}" target="_blank" rel="noopener">${esc(m.source.nom)}</a></div>` : ''}
+        ${m.source ? `<div class="meeting-source">Source : <a href="${lien(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.nom)}</a></div>` : ''}
       </div>
     </div>`;
 }
@@ -1947,8 +1956,8 @@ function renderSondageAverage(){
     `${inst.hypothese} · Échantillon : ${inst.echantillon}` +
     // Marge d'erreur usuelle (intervalle de confiance à 95 %) pour un score de 50 %, la plus large possible
     (inst.n ? ` · Marge d'erreur : environ ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} points pour un score de 50 %, moins pour les petits scores` : "") +
-    ` · Commanditaire, questions posées et méthode dans la <a href="${esc(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${inst.source}</a>` +
-    (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${esc(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
+    ` · Commanditaire, questions posées et méthode dans la <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a>` +
+    (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${lien(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
 
   const disponibles = CANDIDATS
     .map(c=>({...c, range: inst.scores[c.id]}))
@@ -2050,7 +2059,7 @@ function showQuizResult(){
       <div class="quiz-recap">
         ${QUIZ_LOIS.map(loi=>{
           const lib = {pour:"pour",contre:"contre",abst:"abstention"};
-          return `<div class="quiz-recap-row"><b>${esc(titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Assemblée : ${loi.resultat==="adopte"?"adopté":"rejeté"} (${esc(loi.date)}) · <a href="${esc(loi.sourceUrl)}" target="_blank" rel="noopener">détail officiel</a></div>`;
+          return `<div class="quiz-recap-row"><b>${esc(titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Assemblée : ${loi.resultat==="adopte"?"adopté":"rejeté"} (${esc(loi.date)}) · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">détail officiel</a></div>`;
         }).join("")}
       </div>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
@@ -2129,7 +2138,7 @@ function renderChiffres(filter=""){
       <div class="chiffre-label">${i.nom}</div>
       <div class="chiffre-value ${i.tendance==='up'?'up':i.tendance==='down'?'down':''}">${i.valeur}</div>
       <div class="chiffre-sub">${i.detail}</div>
-      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${esc(i.url)}" target="_blank" rel="noopener">voir la série</a></div>
+      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a></div>
     </div>
   `).join("");
 }
@@ -2222,14 +2231,14 @@ function renderJusticeList(){
   document.getElementById("justice-list").innerHTML = filtres.map((c,idx)=>`
     <div class="justice-card" style="animation-delay:${idx*25}ms">
       <div class="justice-card-head">
-        <span class="justice-name">${c.nom}</span>
-        <span class="justice-role">${c.role} · ${c.parti}</span>
-        <span class="justice-status ${c.statut}">${c.statutLabel}</span>
+        <span class="justice-name">${esc(c.nom)}</span>
+        <span class="justice-role">${esc(c.role)} · ${esc(c.parti)}</span>
+        <span class="justice-status ${esc(c.statut)}">${esc(c.statutLabel)}</span>
       </div>
-      <div class="justice-affaire">${c.affaire}</div>
-      <div class="justice-detail">${c.detail}</div>
+      <div class="justice-affaire">${esc(c.affaire)}</div>
+      <div class="justice-detail">${esc(c.detail)}</div>
       ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
-      <div class="justice-meta">Source : <a href="${c.url}" target="_blank" rel="noopener">${c.source}</a> · <a href="https://github.com/Tahns/politique-france/issues/new?title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
+      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/politique-france/issues/new?title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
     </div>
   `).join("");
 }
