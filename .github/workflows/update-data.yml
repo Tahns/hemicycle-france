@@ -5,6 +5,7 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+  issues: write
 concurrency:
   group: update-data
   cancel-in-progress: false
@@ -18,13 +19,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Récupérer les nouveaux scrutins de l'Assemblée nationale
+
+      # Chaque source est indépendante : l'échec de l'une n'empêche pas la publication des autres.
+      - name: Scrutins, dossiers et groupes (Assemblée nationale)
+        id: scrutins
         run: node scripts/fetch-scrutins.js
-      - name: Récupérer les indicateurs INSEE
+      - name: Indicateurs (Insee, accès public sans clé)
+        id: insee
         run: node scripts/fetch-insee.js
-        env:
-          INSEE_API_KEY: ${{ secrets.INSEE_API_KEY }}
         continue-on-error: true
+      - name: Sondages (liste Wikipédia, notices de la Commission des sondages)
+        id: sondages
+        run: node scripts/fetch-sondages.js
+        continue-on-error: true
+
       - name: Contrôler la cohérence des données avant publication
         run: node scripts/check-data.js
       - name: Committer les changements s'il y en a
@@ -38,4 +46,34 @@ jobs:
             git commit -m "Mise à jour automatique des données ($(date -u +%Y-%m-%d))"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
+          fi
+
+      - name: Vérifier la fraîcheur des données
+        id: fraicheur
+        run: node scripts/check-fraicheur.js 2> fraicheur.txt
+        continue-on-error: true
+
+      # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
+      - name: Signaler un problème par un ticket GitHub
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.fraicheur.outcome == 'failure')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "La mise à jour automatique du $(date -u +%Y-%m-%d) signale un problème."
+            echo
+            [ "${{ steps.scrutins.outcome }}" = "failure" ] && echo "- **Scrutins** : échec du script (les votes ne sont plus mis à jour)."
+            [ "${{ steps.insee.outcome }}" = "failure" ] && echo "- **Insee** : au moins un indicateur n'a pas pu être mis à jour (valeur précédente conservée)."
+            [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
+            [ -s fraicheur.txt ] && cat fraicheur.txt
+            echo
+            echo "Journal complet : $RUN_URL"
+          } > alerte.md
+          gh label create alerte-donnees --color D93F0B --description "Problème détecté par la mise à jour automatique" 2>/dev/null || true
+          numero=$(gh issue list --label alerte-donnees --state open --json number --jq '.[0].number')
+          if [ -n "$numero" ]; then
+            gh issue comment "$numero" --body-file alerte.md
+          else
+            gh issue create --title "Alerte : mise à jour automatique des données" --label alerte-donnees --body-file alerte.md
           fi
