@@ -13,14 +13,64 @@
 <meta property="og:description" content="Ce que votent les députés, les sondages 2027 et les grands chiffres du pays. Chaque information renvoie à sa source.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M6 50a26 26 0 0 1 52 0' fill='none' stroke='%23000091' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M20 50a12 12 0 0 1 24 0' fill='none' stroke='%23CE0500' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
   // Thème : clair par défaut ; le mode sombre n'est activé que si le visiteur l'a choisi
   try{ if(localStorage.getItem("theme") === "sombre") document.documentElement.dataset.theme = "sombre"; }catch(e){}
 </script>
+<link rel="preload" href="fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/public-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Polices hébergées sur le site (aucune requête vers Google : pas de transfert d'adresse IP).
+   Newsreader et Public Sans — SIL Open Font License 1.1. */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/newsreader-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/newsreader-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/newsreader-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/newsreader-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/public-sans-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/public-sans-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
   /* =========================================================
      Thème « journal civique » : papier, encre, filets, bleu République.
      Les noms de variables historiques (--bg, --text, --accent…) sont conservés :
@@ -488,6 +538,18 @@
   .site-footer h2{font-family:var(--font-display); font-size:18px; font-weight:600; margin:0 0 6px; color:var(--text);}
   .site-footer .footer-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px 36px;}
 
+  /* ---------- Mentions légales ---------- */
+  .texte-legal{max-width:780px;}
+  .texte-legal h3{font-family:var(--font-display); font-size:21px; font-weight:600; margin:28px 0 8px; padding-top:10px; border-top:1px solid var(--border);}
+  .texte-legal h3:first-child{margin-top:0;}
+  .texte-legal p, .texte-legal li{color:var(--text-soft); margin:0 0 10px;}
+  .texte-legal ul{padding-left:20px; margin:0 0 10px;}
+  .texte-legal b{color:var(--text);}
+  .footer-liens{margin:0 0 18px; font-size:13.5px;}
+  .footer-liens a{color:var(--text-soft);}
+  .sondage-reserve{padding:18px 0; font-family:var(--font-display); font-size:18px; color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border); max-width:780px;}
+  .justice-presomption{font-size:13px; font-style:italic; color:var(--ambre); margin-bottom:6px;}
+
   /* ---------- Accessibilité ---------- */
   .tab:focus-visible, .theme-chip:focus-visible, .party-chip:focus-visible, .source-chip:focus-visible,
   .quiz-option:focus-visible, .accueil-highlight-card:focus-visible, .accueil-rubrique:focus-visible,
@@ -660,6 +722,56 @@
     </div>
   </section>
 
+  <section class="view" id="view-mentions">
+    <div class="rubrique-tete">
+      <h2>Mentions légales</h2>
+      <p class="chapo">Qui publie ce site, d'où viennent ses informations, et ce qu'il fait (ou ne fait pas) de vos données.
+        <small>Dernière mise à jour de cette page : 24 septembre 2026.</small></p>
+    </div>
+
+    <div class="texte-legal">
+      <h3>Éditeur</h3>
+      <p>Ce site est édité par un particulier, à titre non professionnel. Comme le permet l'article 6, III, 2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), l'éditeur a choisi de ne pas rendre son identité publique ; les éléments permettant de l'identifier sont détenus par l'hébergeur. L'éditeur est également directeur de la publication.</p>
+      <p>Contact, demande de correction ou droit de réponse : <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">ouvrir un ticket sur GitHub</a>.</p>
+
+      <h3>Hébergeur</h3>
+      <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820. <a href="https://github.com" target="_blank" rel="noopener">github.com</a></p>
+
+      <h3>Indépendance</h3>
+      <p>Ce site n'est lié à aucun parti, candidat, groupe parlementaire, média ou administration. Il n'est ni financé ni relu par l'Assemblée nationale, l'Insee ou les instituts de sondage, dont il réutilise les données publiques. Il ne contient aucune publicité.</p>
+
+      <h3>Sources et réutilisation des données</h3>
+      <ul>
+        <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées chaque jour ; la date de la dernière mise à jour figure en bas de chaque page.</li>
+        <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
+        <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
+        <li><b>Condamnations, dirigeants, agenda :</b> articles de presse et sites officiels, cités sur chaque fiche.</li>
+      </ul>
+      <p>Les classements par type de vote, les titres courts et les calculs (participation, proximité entre groupes, quiz) sont produits par le site à partir de ces données. En cas de doute, le document officiel lié fait foi.</p>
+
+      <h3>Sondages</h3>
+      <p>Les sondages sont présentés dans le respect de la loi n° 77-808 du 19 juillet 1977 relative aux sondages d'opinion. Pour chaque enquête sont indiqués l'institut, les dates de terrain, le nombre de personnes interrogées et la marge d'erreur, avec un lien vers la notice officielle, que toute personne a le droit de consulter auprès de la <a href="https://www.commission-des-sondages.fr" target="_blank" rel="noopener">Commission des sondages</a> ; le commanditaire et le texte des questions figurent dans cette notice.</p>
+      <p>Conformément à l'article 11 de cette loi, la veille et le jour de chaque tour de l'élection présidentielle (du samedi 0 h au dimanche 20 h, heure de Paris), la rubrique Sondages est masquée et aucun nouveau sondage n'est relevé.</p>
+
+      <h3>Justice et présomption d'innocence</h3>
+      <p>La rubrique Justice ne mentionne que des décisions effectivement rendues par une juridiction, avec leur statut. Tant qu'une condamnation n'est pas définitive (appel ou pourvoi en cassation en cours), la personne concernée reste présumée innocente, conformément à l'article 9-1 du Code civil ; ces décisions sont signalées comme telles. Aucune plainte, enquête ou mise en examen n'y figure.</p>
+      <p>Toute personne nommée sur ce site peut demander la correction d'une information ou exercer son droit de réponse (article 6, IV de la LCEN) en <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">ouvrant un ticket</a>. Les demandes sont traitées dans les délais prévus par la loi.</p>
+
+      <h3>Données personnelles et cookies</h3>
+      <ul>
+        <li>Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
+        <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
+        <li>Les polices de caractères sont hébergées sur le site : votre navigateur ne contacte aucun service tiers.</li>
+        <li>En tant qu'hébergeur, GitHub peut conserver des journaux techniques, dont votre adresse IP, pour des raisons de sécurité : voir sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>.</li>
+        <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale.</li>
+      </ul>
+      <p>Pour toute question sur vos données, vous pouvez ouvrir un ticket ou saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+      <h3>Responsabilité</h3>
+      <p>Les informations sont publiées à titre d'information du public. Malgré le soin apporté aux vérifications, des erreurs restent possibles : signalez-les et elles seront corrigées. Le code du site est public et consultable sur <a href="https://github.com/Tahns/politique-france" target="_blank" rel="noopener">GitHub</a>.</p>
+    </div>
+  </section>
+
   <section class="view" id="view-quiz">
     <div class="rubrique-tete">
       <h2>Et vous, qu'auriez-vous voté ?</h2>
@@ -670,6 +782,11 @@
 </main>
 
 <footer class="site-footer">
+  <p class="footer-liens">
+    <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
+    <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
+    <a href="https://github.com/Tahns/politique-france/issues/new" target="_blank" rel="noopener">Signaler une erreur</a>
+  </p>
   <div class="footer-grid">
     <div>
       <h2>D'où viennent les données</h2>
@@ -1629,6 +1746,7 @@ function appliquerSondages(data){
     nom: i.nom,
     date: i.date,
     echantillon: `${formatNombre(i.echantillon)} personnes`,
+    n: i.echantillon,
     source: "notice officielle (Commission des sondages)",
     url: i.url,
     hypothese: i.hypotheses > 1 ? `Fourchette sur les ${i.hypotheses} hypothèses de candidatures testées` : "Hypothèse unique testée",
@@ -1641,6 +1759,19 @@ function appliquerSondages(data){
   selectedInstitut = INSTITUTS[0] ? INSTITUTS[0].id : null;
 }
 let SONDAGES_SOURCE = null;
+
+// Loi n° 77-808 du 19 juillet 1977, art. 11 : aucun sondage publié ni commenté la veille et le jour
+// de chaque tour (présidentielle : du samedi 0 h au dimanche 20 h, heure de Paris).
+const TOURS_PRESIDENTIELLE = ["2027-04-18", "2027-05-02"];
+function periodeReserveSondages(maintenant = new Date()){
+  const p = Object.fromEntries(new Intl.DateTimeFormat("fr-FR", { timeZone:"Europe/Paris", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23" })
+    .formatToParts(maintenant).map(x=>[x.type, x.value]));
+  const paris = `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+  return TOURS_PRESIDENTIELLE.find(tour=>{
+    const veille = new Date(Date.parse(tour + "T12:00:00Z") - 864e5).toISOString().slice(0,10);
+    return paris >= `${veille}T00:00` && paris < `${tour}T20:00`;
+  }) || null;
+}
 
 function renderSourceBar(){
   const bar = document.getElementById("source-bar");
@@ -1659,6 +1790,13 @@ function renderSourceBar(){
 }
 
 function renderSondageAverage(){
+  const tour = periodeReserveSondages();
+  if(tour){
+    document.getElementById("source-bar").innerHTML = "";
+    document.querySelector("#view-sondages .sondage-avg-card").innerHTML =
+      `<p class="sondage-reserve">Veille et jour de vote : comme l'impose l'article 11 de la loi du 19 juillet 1977, aucun sondage n'est publié ni commenté jusqu'au dimanche ${new Date(tour + "T12:00:00Z").toLocaleDateString("fr-FR", { day:"numeric", month:"long" })} à 20 h. Les résultats réapparaîtront après la fermeture des bureaux de vote.</p>`;
+    return;
+  }
   const inst = INSTITUTS.find(i=>i.id===selectedInstitut);
   if(!inst){
     document.getElementById("sondage-avg-list").innerHTML = `<p class="chargement">Sondages indisponibles pour le moment.</p>`;
@@ -1667,7 +1805,10 @@ function renderSondageAverage(){
   document.getElementById("sondage-institut-title").textContent =
     `${inst.nom}, enquête du ${inst.date}`;
   document.getElementById("sondage-avg-sub").innerHTML =
-    `${inst.hypothese} · Échantillon : ${inst.echantillon} · <a href="${esc(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${inst.source}</a>` +
+    `${inst.hypothese} · Échantillon : ${inst.echantillon}` +
+    // Marge d'erreur usuelle (intervalle de confiance à 95 %) pour un score de 50 %, la plus large possible
+    (inst.n ? ` · Marge d'erreur : environ ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} points pour un score de 50 %, moins pour les petits scores` : "") +
+    ` · Commanditaire, questions posées et méthode dans la <a href="${esc(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${inst.source}</a>` +
     (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${esc(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
 
   const disponibles = CANDIDATS
@@ -1947,7 +2088,8 @@ function renderJusticeList(){
       </div>
       <div class="justice-affaire">${c.affaire}</div>
       <div class="justice-detail">${c.detail}</div>
-      <div class="justice-meta">Source : <a href="${c.url}" target="_blank" rel="noopener">${c.source}</a></div>
+      ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
+      <div class="justice-meta">Source : <a href="${c.url}" target="_blank" rel="noopener">${c.source}</a> · <a href="https://github.com/Tahns/politique-france/issues/new?title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
     </div>
   `).join("");
 }
@@ -1992,7 +2134,7 @@ function renderAccueil(){
   const derniereLoi = LOIS.find(l=>categorieLoi(l)==="texte") || LOIS[0];
   const prochainMeeting = meetingsAVenir()[0];
   const instPrincipal = INSTITUTS[0];
-  const enTete = instPrincipal && CANDIDATS
+  const enTete = instPrincipal && !periodeReserveSondages() && CANDIDATS
     .map(c=>({...c, range: instPrincipal.scores[c.id]}))
     .filter(c=>c.range)
     .sort((a,b)=> (b.range[0]+b.range[1]) - (a.range[0]+a.range[1]))[0];
@@ -2114,13 +2256,17 @@ function activateTab(tabId){
     else if(tabId === "histo") majHash("histo-" + selectedPartyId);
     else majHash(tabId);
   }
-  document.title = (tabId === "accueil" || !tabEl ? "" : tabEl.textContent.trim() + " · ") + "Décrypter la politique française";
+  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales" })[tabId];
+  document.title = (tabId === "accueil" || !nomPage ? "" : nomPage + " · ") + "Décrypter la politique française";
 }
 
 document.querySelectorAll(".tab").forEach(tab=>{
   tab.setAttribute("role","button");
   tab.setAttribute("tabindex","0");
   tab.addEventListener("click", ()=> activateTab(tab.dataset.tab));
+});
+document.querySelectorAll("[data-tab-lien]").forEach(a=>{
+  a.addEventListener("click", (e)=>{ e.preventDefault(); activateTab(a.dataset.tabLien); });
 });
 document.querySelectorAll(".accueil-rubrique").forEach(el=>{
   el.addEventListener("click", ()=> activateTab(el.dataset.tab));
