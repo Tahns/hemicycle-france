@@ -237,6 +237,16 @@ function resoudreGroupeAnonyme(g, dateScrutin, acteurGroupes) {
   return trouves.size === 1 ? [...trouves][0] : null;
 }
 
+/**
+ * Sérialise data/lois.json avec une entrée par ligne : ~2x plus léger à télécharger que
+ * l'indentation complète, tout en gardant des diffs git lisibles (un scrutin = une ligne).
+ */
+function serialiserLois(data) {
+  const { lois, ...entete } = data;
+  const lignesEntete = Object.entries(entete).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`);
+  return ["{", ...lignesEntete, '  "lois": [', lois.map((l) => "    " + JSON.stringify(l)).join(",\n"), "  ]", "}", ""].join("\n");
+}
+
 function moisFr(m) {
   const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   return mois[m];
@@ -431,7 +441,7 @@ async function main() {
     const auto = lois.filter((l) => l.numero !== undefined).sort((a, b) => b.numero - a.numero);
     existing.lois = [...manuelles, ...auto];
     existing.lastUpdated = new Date().toISOString();
-    await writeFile(DATA_FILE, JSON.stringify(existing, null, 2) + "\n");
+    await writeFile(DATA_FILE, serialiserLois(existing));
     log("data/lois.json mis à jour.");
   }
 
