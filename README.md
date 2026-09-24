@@ -10,9 +10,14 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Scrutins, résultat, votes par groupe | `fetch-scrutins.js` | open data de l'Assemblée nationale | `data/lois.json` |
 | Titre court du texte, auteur (Gouvernement, député·e et son groupe, sénateur·rice) | `fetch-scrutins.js` | dossiers législatifs de l'Assemblée | `data/lois.json` |
 | Présidences et effectifs des groupes | `fetch-scrutins.js` | open data de l'Assemblée (AMO30) | `data/groupes.json` |
+| Députés en fonction : circonscription, participation, votes contre leur groupe, vote sur chaque texte et chaque censure | `fetch-scrutins.js` (via `deputes.js`) | votes nominatifs de l'Assemblée + AMO30 | `data/deputes.json` |
 | Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
-| Sondages présidentielle 2027 (dernière enquête de chaque institut) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
+| Sondages présidentielle 2027 (dernière enquête de chaque institut, et historique des deux derniers semestres pour la courbe) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
+| Pages d'aperçu pour le partage (titre et image propres sur WhatsApp, X…) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
+
+En cas de nom de domaine propre : changer l'adresse du site dans `scripts/partage.cjs` (constante `SITE`)
+et dans les balises `og:` de `index.html`, puis relancer `node scripts/partage.cjs`.
 
 Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 - scrutins : les votes par groupe sont recoupés avec le total officiel ; les groupes que l'AN publie
@@ -42,6 +47,8 @@ Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans touch
   Après une relecture, mettre à jour le champ `verifieLe` du fichier concerné.
 - En cas d'échec d'une source ou de données périmées, le workflow ouvre (ou complète) un ticket
   GitHub avec l'étiquette `alerte-donnees` : GitHub vous notifie par e-mail.
+- `scripts/check-sources.js` confronte chaque lien cité dans `data/` à la base du Décodex
+  (contenus démentis par Les Décodeurs du *Monde*).
 - `.github/workflows/ci.yml` lance ces contrôles et un test du site dans un vrai navigateur
   (`tests/smoke.cjs`, ordinateur et mobile) à chaque modification.
 

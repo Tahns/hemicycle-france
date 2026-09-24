@@ -86,7 +86,30 @@ async function checkSondages() {
       if (!(min >= 0 && max <= 60 && min <= max)) err(`sondages.json : ${i.nom}, score invalide pour ${nom}`);
     }
   }
-  console.log(`[check-data] sondages.json : ${data.instituts.length} instituts contrôlés.`);
+  for (const e of data.historique || []) {
+    if (!e.institut || !/^\d{4}-\d{2}-\d{2}$/.test(e.dateFin || "")) err(`sondages.json : entrée d'historique incomplète (${e.institut || "?"})`);
+    for (const [nom, [min, max]] of Object.entries(e.scores || {})) {
+      if (!(min >= 0 && max <= 60 && min <= max)) err(`sondages.json : historique ${e.institut} ${e.dateFin}, score invalide pour ${nom}`);
+    }
+  }
+  console.log(`[check-data] sondages.json : ${data.instituts.length} instituts, ${(data.historique || []).length} enquêtes en historique.`);
+}
+
+async function checkDeputes() {
+  const data = JSON.parse(await readFile("data/deputes.json", "utf-8").catch(() => "null"));
+  if (!data) return err("deputes.json : fichier absent");
+  if (!Array.isArray(data.deputes) || data.deputes.length < 500 || data.deputes.length > 577) err(`deputes.json : ${data.deputes?.length} députés (attendu : 500 à 577)`);
+  if (!Array.isArray(data.cles)) return err("deputes.json : liste « cles » absente");
+  const ids = new Set();
+  for (const d of data.deputes || []) {
+    if (!/^PA\d+$/.test(d.id) || ids.has(d.id)) err(`deputes.json : identifiant invalide ou en double (${d.id})`);
+    ids.add(d.id);
+    if (!d.nom || !GROUPES.includes(d.groupe)) err(`deputes.json : ${d.id} sans nom ou groupe inconnu (${d.groupe})`);
+    if (typeof d.votes !== "string" || d.votes.length !== data.cles.length || /[^pcan.\-]/.test(d.votes)) err(`deputes.json : votes clés invalides pour ${d.nom}`);
+    const s = d.stats || {};
+    if (![s.scrutins, s.pour, s.contre, s.abst, s.ecarts].every(estEntierPositif) || s.pour + s.contre + s.abst > s.scrutins) err(`deputes.json : statistiques incohérentes pour ${d.nom}`);
+  }
+  console.log(`[check-data] deputes.json : ${data.deputes?.length} députés, ${data.cles.length} votes clés.`);
 }
 
 async function checkManuels() {
@@ -108,6 +131,7 @@ await checkLois();
 await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
+await checkDeputes();
 await checkManuels();
 
 if (erreurs.length) {
