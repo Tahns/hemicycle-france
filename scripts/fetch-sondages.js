@@ -227,13 +227,24 @@ async function main() {
   }
   for (const r of rejets) warn("écartée —", r);
 
+  // Historique pour la courbe : toutes les enquêtes des deux semestres qui passent les mêmes contrôles
+  // (hors ancienneté), une entrée par enquête, fourchette de chaque candidat sur ses hypothèses.
+  const fourchettes = (e) => {
+    const scores = {};
+    for (const h of e.hypotheses) for (const [nom, v] of Object.entries(h)) {
+      scores[nom] = scores[nom] ? [Math.min(scores[nom][0], v), Math.max(scores[nom][1], v)] : [v, v];
+    }
+    return scores;
+  };
+  const historique = enquetes
+    .filter((e) => e.dateFin && !valider(e, e.dateFin))
+    .sort((a, b) => a.dateFin - b.dateFin)
+    .map((e) => ({ institut: e.institut, dateFin: e.dateFin.toISOString().slice(0, 10), echantillon: e.echantillon, scores: fourchettes(e) }));
+
   const instituts = [...retenues.values()]
     .sort((a, b) => b.dateFin - a.dateFin)
     .map((e) => {
-      const scores = {};
-      for (const h of e.hypotheses) for (const [nom, v] of Object.entries(h)) {
-        scores[nom] = scores[nom] ? [Math.min(scores[nom][0], v), Math.max(scores[nom][1], v)] : [v, v];
-      }
+      const scores = fourchettes(e);
       return {
         nom: e.institut,
         date: `${e.dateTexte.replace(/\{\{1er\}\}/g, "1er")} ${e.dateFin.getUTCFullYear()}`.replace(/\{\{[^}]*\}\}/g, "").replace(/\s+/g, " ").trim(),
@@ -252,8 +263,8 @@ async function main() {
   }
 
   const candidats = {};
-  for (const i of instituts) for (const nom of Object.keys(i.scores)) candidats[nom] = PARTIS[nom] || null;
-  const sortie = { source: "Wikipédia — liste des sondages (notices de la Commission des sondages)", sourceUrl: PAGE_URL, candidats, instituts };
+  for (const i of [...instituts, ...historique]) for (const nom of Object.keys(i.scores)) candidats[nom] = PARTIS[nom] || null;
+  const sortie = { source: "Wikipédia — liste des sondages (notices de la Commission des sondages)", sourceUrl: PAGE_URL, candidats, instituts, historique };
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "{}"));
   delete ancien.lastUpdated;
   if (JSON.stringify(ancien) === JSON.stringify(sortie)) return log("Aucun changement.");

@@ -49,7 +49,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
-    for (const onglet of ["scrutin", "histo", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
@@ -69,6 +69,21 @@ function verifier(cond, message) {
     await page.goto(base + "#sondages", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".sondage-bar-row")).length >= 4, `${nom} : sondages absents`);
+    verifier((await page.$$("#evolution-graphe path")).length >= 3, `${nom} : courbe d'évolution des sondages absente`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec la courbe des sondages`);
+
+    await page.goto(base + "#deputes", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$(".depute-carte")).length >= 50, `${nom} : liste des députés vide`);
+    await page.fill("#depute-search", "33");
+    await page.waitForTimeout(300);
+    const nbGironde = (await page.$$(".depute-carte")).length;
+    verifier(nbGironde >= 5 && nbGironde <= 15, `${nom} : la recherche par département ne fonctionne pas (${nbGironde})`);
+    await page.click(".depute-carte");
+    await page.waitForTimeout(300);
+    verifier(/#depute-PA\d+$/.test(page.url()), `${nom} : la fiche député n'a pas de lien direct`);
+    verifier((await page.$$("#depute-fiche .stat-card")).length === 4, `${nom} : statistiques du député absentes`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
 
     await page.goto(base + "#dirigeants", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
