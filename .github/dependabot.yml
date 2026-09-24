@@ -1,0 +1,8 @@
+# Propose automatiquement une PR quand une action GitHub utilisée par les workflows a une nouvelle version
+# (correctifs de sécurité compris).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
