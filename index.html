@@ -2,10 +2,16 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Décrypter la politique française</title>
 <meta name="description" content="Ce que votent les députés, groupe par groupe, qui dirige les partis, où en sont les sondages de la présidentielle 2027 et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
 <meta name="theme-color" content="#F5F1E8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Politique FR">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
@@ -276,11 +282,12 @@
   .hemi-card{position:relative;}
   .siege{
     stroke:var(--bg); stroke-width:0.8; pointer-events:none;
-    transition:opacity .18s ease, stroke-width .15s ease;
+    transition:opacity .12s ease;
   }
   .siege.dim{opacity:.35;}
   .siege.hovered{stroke:var(--ink); stroke-width:1.6;}
-  .siege-hit{fill:transparent; cursor:pointer;}
+  #hemicycle.sur-siege{cursor:pointer;}
+  .siege.pointe{stroke:var(--ink); stroke-width:2.4; opacity:1;}
   @media (prefers-reduced-motion:reduce){ .siege{transition:none;} }
   .legend{
     display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:14px; padding-top:12px;
@@ -551,10 +558,87 @@
   .criteres{margin:14px 0 0; max-width:760px; font-size:14px; color:var(--text-soft);}
   .justice-presomption{font-size:13px; font-style:italic; color:var(--ambre); margin-bottom:6px;}
 
+  /* ---------- Version téléphone ---------- */
+  .barre-mobile, .feuille, .feuille-fond{display:none;}
+  @media (max-width:700px){
+    body{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
+    /* En-tête compact : le titre et le chapô complets ne restent que sur la une */
+    .rubriques{display:none;}
+    .liseré{height:3px;}
+    .masthead-top{display:none;}
+    .masthead-titre{padding:12px 0 10px; border-bottom:1px solid var(--ink);}
+    h1{font-size:25px; letter-spacing:-.01em;}
+    .masthead-titre p{font-size:15px; margin-top:6px;}
+    body:not([data-page="accueil"]) .masthead-titre p{display:none;}
+    body[data-page="accueil"] .masthead-titre{padding-top:18px;}
+    body[data-page="accueil"] h1{font-size:32px;}
+    main{padding-top:18px;}
+    .rubrique-tete{margin-bottom:18px; padding-bottom:14px;}
+    .rubrique-tete h2{font-size:25px;}
+    .chapo{font-size:16px;}
+
+    /* Filtres : une seule ligne qu'on fait glisser, cibles d'au moins 40 px */
+    .theme-filter-bar, .party-select-bar, .source-bar, .justice-filter-bar{
+      flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-left:-16px; margin-right:-16px; padding:0 16px 2px;
+      -webkit-mask-image:linear-gradient(90deg, #000 88%, transparent); mask-image:linear-gradient(90deg, #000 88%, transparent);
+    }
+    .theme-filter-bar::-webkit-scrollbar, .party-select-bar::-webkit-scrollbar, .source-bar::-webkit-scrollbar, .justice-filter-bar::-webkit-scrollbar{display:none;}
+    .theme-chip, .party-chip, .source-chip{flex:0 0 auto; min-height:40px; white-space:nowrap;}
+    .hemi-mode .theme-chip{min-height:36px;}
+    .quiz-option{min-height:44px; flex:1 1 0; justify-content:center;}
+    .histo-more, .quiz-cta, .quiz-restart{min-height:48px;}
+    select, input[type="search"]{min-height:44px; font-size:16px;} /* 16 px : pas de zoom automatique sur iPhone */
+    .lien-bouton{padding:4px 0;}
+
+    /* Barre d'onglets en bas de l'écran */
+    .barre-mobile{
+      display:flex; position:fixed; left:0; right:0; bottom:0; z-index:55; /* au-dessus du voile du panneau */
+      background:var(--bg); border-top:1px solid var(--ink);
+      padding:4px 4px calc(4px + env(safe-area-inset-bottom));
+    }
+    .onglet-mobile{
+      flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;
+      min-height:54px; padding:6px 2px 4px; border:none; background:none; cursor:pointer;
+      font:inherit; font-size:11.5px; font-weight:600; color:var(--text-faint);
+      border-top:3px solid transparent; margin-top:-5px;
+    }
+    .onglet-mobile .ico svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+    .onglet-mobile.active{color:var(--accent); border-top-color:var(--accent);}
+    #bouton-plus[aria-expanded="true"]{color:var(--accent);}
+
+    /* Panneau « Plus » */
+    .feuille-fond:not([hidden]){display:block; position:fixed; inset:0; z-index:45; background:rgba(20,20,15,.35);}
+    .feuille:not([hidden]){
+      display:block; position:fixed; left:0; right:0; bottom:calc(63px + env(safe-area-inset-bottom)); z-index:50;
+      background:var(--bg); border-top:3px double var(--ink);
+      padding:8px 16px 8px;
+      max-height:80vh; overflow-y:auto; animation:feuilleIn .2s ease both;
+    }
+    @keyframes feuilleIn{ from{transform:translateY(24px); opacity:0;} to{transform:none; opacity:1;} }
+    .feuille-poignee{width:40px; height:4px; border-radius:2px; background:var(--border); margin:2px auto 8px;}
+    .feuille-lien{
+      display:block; width:100%; text-align:left; padding:12px 0; min-height:56px;
+      border:none; border-bottom:1px solid var(--border); background:none; cursor:pointer; font:inherit; color:var(--text);
+    }
+    .feuille-lien b{display:block; font-family:var(--font-display); font-size:19px; font-weight:600;}
+    .feuille-lien span{font-size:13.5px; color:var(--text-soft);}
+    .feuille-lien.active b{color:var(--accent);}
+    .feuille-theme{border-bottom:none;}
+    .site-footer{padding-bottom:24px;}
+    /* Chiffres du vote : une colonne compacte */
+    .stat-cards{grid-template-columns:1fr;}
+    .stat-card, .stat-card + .stat-card{padding:10px 0; display:grid; grid-template-columns:auto 1fr; column-gap:14px; align-items:baseline;}
+    .stat-card .stat-label{grid-column:1 / -1; margin-bottom:0;}
+    .stat-card .stat-value{font-size:23px;}
+    .stat-card .stat-sub{margin:0;}
+  }
+  @media (max-width:700px) and (prefers-reduced-motion:reduce){ .feuille:not([hidden]){animation:none;} }
+
   /* ---------- Accessibilité ---------- */
   .tab:focus-visible, .theme-chip:focus-visible, .party-chip:focus-visible, .source-chip:focus-visible,
   .quiz-option:focus-visible, .accueil-highlight-card:focus-visible, .accueil-rubrique:focus-visible,
-  .histo-more:focus-visible, .lien-bouton:focus-visible, a:focus-visible{
+  .histo-more:focus-visible, .lien-bouton:focus-visible, a:focus-visible,
+  .onglet-mobile:focus-visible, .feuille-lien:focus-visible{
     outline:2px solid var(--accent); outline-offset:2px;
   }
 
@@ -581,7 +665,7 @@
   }
 </style>
 </head>
-<body>
+<body data-page="accueil">
 
 <header class="masthead">
   <div class="liseré" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -609,6 +693,31 @@
     <div class="tab" data-tab="chiffres">Chiffres clés</div>
   </div>
 </nav>
+
+<!-- Version téléphone : barre d'onglets en bas de l'écran et panneau « Plus » -->
+<nav class="barre-mobile" aria-label="Rubriques (mobile)">
+  <button type="button" class="onglet-mobile" data-tab="accueil"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z M4 9h16 M9 9v10"/></svg></span>À la une</button>
+  <button type="button" class="onglet-mobile" data-tab="scrutin"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0 M7 18a5 5 0 0 1 10 0"/></svg></span>Votes</button>
+  <button type="button" class="onglet-mobile" data-tab="sondages"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M5 20V10 M12 20V4 M19 20v-7"/></svg></span>Sondages</button>
+  <button type="button" class="onglet-mobile" data-tab="quiz"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14 M12 17v.5"/></svg></span>Quiz</button>
+  <button type="button" class="onglet-mobile" id="bouton-plus" aria-expanded="false" aria-controls="feuille-plus"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></span>Plus</button>
+</nav>
+<div class="feuille-fond" id="feuille-fond" hidden></div>
+<div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
+  <div class="feuille-poignee" aria-hidden="true"></div>
+  <button type="button" class="feuille-lien" data-tab="histo"><b>Qui vote quoi</b><span>Les votes d'un groupe et ses alliés de fait</span></button>
+  <button type="button" class="feuille-lien" data-tab="dirigeants"><b>Partis</b><span>Dirigeants et groupes à l'Assemblée</span></button>
+  <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
+  <button type="button" class="feuille-lien" data-tab="meetings"><b>Agenda</b><span>Congrès et meetings à venir</span></button>
+  <button type="button" class="feuille-lien" data-tab="chiffres"><b>Chiffres clés</b><span>Emploi, croissance, dette, population</span></button>
+  <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
+  <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
+</div>
 
 <main>
   <section class="view active" id="view-accueil">
@@ -764,6 +873,7 @@
         <li>Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
         <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
         <li>Les polices de caractères sont hébergées sur le site : votre navigateur ne contacte aucun service tiers.</li>
+        <li>Pour permettre la lecture hors connexion, votre navigateur conserve une copie des pages et des données publiques déjà consultées. Cette copie reste sur votre appareil ; vous pouvez l'effacer à tout moment depuis les réglages du navigateur.</li>
         <li>En tant qu'hébergeur, GitHub peut conserver des journaux techniques, dont votre adresse IP, pour des raisons de sécurité : voir sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>.</li>
         <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale.</li>
       </ul>
@@ -1245,15 +1355,49 @@ function buildSeats(loi){
 let seatsByParty = {}; // partyId -> [dotElement, ...] — reconstruit à chaque scrutin affiché
 const tooltip = document.getElementById("tooltip");
 const hemiCardEl = document.querySelector(".hemi-card");
-hemiCardEl.addEventListener("mouseleave", onSeatLeave); // un seul listener pour toute la zone
+// Survol : on cherche le siège le plus proche du pointeur (en coordonnées de l'hémicycle).
+// Loin de tout siège (centre vide, marges), le détail s'efface : pas de groupe « collé ».
+const DISTANCE_MAX = 24; // en unités du dessin : un peu plus que la moitié de l'écart entre deux rangées (38), pour ne pas clignoter entre elles
+function siegeSousPointeur(e){
+  const ctm = svg.getScreenCTM();
+  if(!ctm) return null;
+  const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+  let meilleur = null, dMin = DISTANCE_MAX * DISTANCE_MAX;
+  for(const s of seatNodes){
+    if(!s.party) continue;
+    const d = (s.x - pt.x) ** 2 + (s.y - pt.y) ** 2;
+    if(d < dMin){ dMin = d; meilleur = s; }
+  }
+  return meilleur;
+}
+let siegeEnCours = null;
+function suivrePointeur(e){
+  const s = siegeSousPointeur(e);
+  svg.classList.toggle("sur-siege", !!s);
+  if(!s){ onSeatLeave(); return; }
+  const party = PARTIES.find(p=>p.id===s.party);
+  if(siegeEnCours) siegeEnCours.el.classList.remove("pointe");
+  siegeEnCours = s;
+  s.el.classList.add("pointe");
+  onSeatHover(e, party, s);
+}
+// Souris : suivi en continu. Doigt : seul le toucher compte (le navigateur simule ensuite une
+// « sortie » de la souris, qu'il faut ignorer sinon le détail disparaît aussitôt).
+svg.addEventListener("pointermove", (e)=>{ if(e.pointerType === "mouse") suivrePointeur(e); });
+svg.addEventListener("pointerleave", (e)=>{ if(e.pointerType === "mouse") onSeatLeave(); });
+// Écran tactile : toucher un siège affiche le détail, toucher ailleurs le referme
+svg.addEventListener("click", (e)=>{ e.stopPropagation(); suivrePointeur(e); });
+document.addEventListener("click", (e)=>{ if(!e.target.closest || !e.target.closest("#hemicycle")) onSeatLeave(); });
 
 function renderHemicycle(){
   svg.innerHTML = "";
   seatsByParty = {};
   PARTIES.forEach(p=> seatsByParty[p.id] = []);
   partyEnCours = null;
+  siegeEnCours = null;
+  tooltip.classList.remove("visible");
 
-  const seatR = 6.4, hitR = 11;
+  const seatR = 6.4;
   const fragment = document.createDocumentFragment(); // un seul reflow
 
   seatNodes.forEach(s=>{
@@ -1271,17 +1415,8 @@ function renderHemicycle(){
     dot.style.color = couleur;
     dot.classList.add("siege");
 
-    if(party){
-      const hit = document.createElementNS("http://www.w3.org/2000/svg","circle");
-      hit.setAttribute("cx", s.x.toFixed(1));
-      hit.setAttribute("cy", s.y.toFixed(1));
-      hit.setAttribute("r", hitR);
-      hit.classList.add("siege-hit");
-      hit.addEventListener("mouseenter", (e)=> onSeatHover(e, party));
-      hit.addEventListener("mousemove", (e)=> updateTooltip(e, party));
-      fragment.appendChild(hit);
-      seatsByParty[party.id].push(dot);
-    }
+    if(party) seatsByParty[party.id].push(dot);
+    s.el = dot;
     fragment.appendChild(dot);
   });
 
@@ -1307,9 +1442,9 @@ function currentLoi(){
   return LOIS.find(l=>l.id===id);
 }
 
-function onSeatHover(e, party){
+function onSeatHover(e, party, siege){
   if(partyEnCours === party.id){
-    updateTooltip(e, party);
+    updateTooltip(e, party, siege);
     return;
   }
   if(partyEnCours === null){
@@ -1319,10 +1454,10 @@ function onSeatHover(e, party){
     setPartyState(party.id, "hovered");
   }
   partyEnCours = party.id;
-  updateTooltip(e, party);
+  updateTooltip(e, party, siege);
 }
 
-function updateTooltip(e, party){
+function updateTooltip(e, party, siege){
   const loi = currentLoi();
   if(!loi) return;
   const v = loi.votes[party.id];
@@ -1345,6 +1480,8 @@ function updateTooltip(e, party){
   tooltip.classList.add("visible");
 }
 function onSeatLeave(){
+  if(siegeEnCours){ siegeEnCours.el.classList.remove("pointe"); siegeEnCours = null; }
+  svg.classList.remove("sur-siege");
   if(partyEnCours !== null){
     PARTIES.forEach(p=> setPartyState(p.id, "normal"));
     partyEnCours = null;
@@ -1533,7 +1670,7 @@ function renderLegend(){
   if(modeHemicycle === "votes"){
     el.innerHTML = [["pour","Pour"],["abst","Abstention"],["contre","Contre"],["absent","Non-votant / absent"]].map(([k,l])=>`
       <span class="legend-item"><span class="dot" style="background:${COULEURS_VOTE[k]}"></span>${l}</span>
-    `).join("") + `<span class="legend-item legend-note">De gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}. Survolez un siège pour le détail du groupe.</span>`;
+    `).join("") + `<span class="legend-item legend-note">De gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}. Pointez ou touchez un siège pour le détail du groupe.</span>`;
   } else {
     const loi = currentLoi();
     el.innerHTML = effectifs(loi).map(({party,n})=>`
@@ -2239,8 +2376,17 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
+const RUBRIQUES_PLUS = ["histo", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+
 function activateTab(tabId){
   onSeatLeave();
+  fermerFeuille();
+  document.body.dataset.page = tabId;
+  // Barre d'onglets mobile : « Plus » est actif pour les rubriques rangées dans le panneau
+  document.querySelectorAll(".onglet-mobile").forEach(b=>{
+    b.classList.toggle("active", b.dataset.tab === tabId || (b.id === "bouton-plus" && RUBRIQUES_PLUS.includes(tabId)));
+  });
+  document.querySelectorAll(".feuille-lien[data-tab]").forEach(b=> b.classList.toggle("active", b.dataset.tab === tabId));
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   const tabEl = document.querySelector(`.tab[data-tab="${tabId}"]`);
@@ -2284,23 +2430,49 @@ document.addEventListener("keydown", (e)=>{
   el.click();
 });
 
-// Bouton clair / sombre (le choix est mémorisé dans ce navigateur)
+// Bouton clair / sombre, dans l'en-tête et dans le panneau mobile (choix mémorisé dans ce navigateur)
 (function(){
   const btn = document.getElementById("theme-toggle");
+  const btnMobile = document.getElementById("theme-toggle-mobile");
   const maj = () => {
     const sombre = document.documentElement.dataset.theme === "sombre";
     btn.textContent = sombre ? "Mode clair" : "Mode sombre";
     btn.setAttribute("aria-pressed", String(sombre));
+    btnMobile.querySelector("b").textContent = sombre ? "Mode clair" : "Mode sombre";
     document.querySelector('meta[name="theme-color"]').setAttribute("content", sombre ? "#2A2926" : "#F5F1E8");
   };
-  btn.addEventListener("click", ()=>{
+  const basculer = ()=>{
     const sombre = document.documentElement.dataset.theme !== "sombre";
     if(sombre) document.documentElement.dataset.theme = "sombre"; else delete document.documentElement.dataset.theme;
     try{ localStorage.setItem("theme", sombre ? "sombre" : "clair"); }catch(e){}
     maj();
-  });
+  };
+  btn.addEventListener("click", basculer);
+  btnMobile.addEventListener("click", basculer);
   maj();
 })();
+
+// Version téléphone : barre d'onglets et panneau « Plus »
+const feuille = document.getElementById("feuille-plus");
+const feuilleFond = document.getElementById("feuille-fond");
+const boutonPlus = document.getElementById("bouton-plus");
+function ouvrirFeuille(){
+  feuille.hidden = false; feuilleFond.hidden = false;
+  boutonPlus.setAttribute("aria-expanded", "true");
+  const actif = feuille.querySelector(".feuille-lien.active") || feuille.querySelector(".feuille-lien");
+  actif.focus({ preventScroll:true });
+}
+function fermerFeuille(){
+  if(feuille.hidden) return;
+  feuille.hidden = true; feuilleFond.hidden = true;
+  boutonPlus.setAttribute("aria-expanded", "false");
+}
+boutonPlus.addEventListener("click", ()=> feuille.hidden ? ouvrirFeuille() : fermerFeuille());
+feuilleFond.addEventListener("click", fermerFeuille);
+document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") fermerFeuille(); });
+document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").forEach(b=>{
+  b.addEventListener("click", ()=> activateTab(b.dataset.tab));
+});
 
 // Date d'édition affichée dans l'en-tête
 (function(){
@@ -2404,6 +2576,11 @@ async function initSite(){
 }
 
 initSite();
+
+// Application installable : lecture hors connexion des dernières données consultées
+if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+  window.addEventListener("load", ()=> navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
 </script>
 
 </body>
