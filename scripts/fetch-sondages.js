@@ -174,7 +174,26 @@ function valider(e, maintenant) {
   return null;
 }
 
+// Loi n° 77-808 du 19 juillet 1977, art. 11 : aucun sondage publié la veille et le jour de chaque tour
+// (présidentielle : du samedi 0 h au dimanche 20 h, heure de Paris). Aucun relevé pendant cette période.
+const TOURS_PRESIDENTIELLE = ["2027-04-18", "2027-05-02"];
+function periodeReserve(maintenant = new Date()) {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+      .formatToParts(maintenant)
+      .map((x) => [x.type, x.value])
+  );
+  const paris = `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+  return TOURS_PRESIDENTIELLE.find((tour) => {
+    const veille = new Date(Date.parse(tour + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+    return paris >= `${veille}T00:00` && paris < `${tour}T20:00`;
+  }) || null;
+}
+
 async function main() {
+  const tour = periodeReserve();
+  if (tour) return log(`Période de réserve électorale (scrutin du ${tour}) : aucun relevé de sondage.`);
+
   const wikitexte = FICHIER
     ? await readFile(FICHIER, "utf-8")
     : await (async () => {
