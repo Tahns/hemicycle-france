@@ -139,6 +139,16 @@ async function checkSenat() {
   console.log(`[check-data] senat.json : ${(data.scrutins || []).length} scrutins.`);
 }
 
+async function checkCommunes() {
+  const data = JSON.parse(await readFile("data/communes.json", "utf-8").catch(() => "null"));
+  if (!data) return console.log("[check-data] communes.json : absent (recherche par commune désactivée).");
+  const deps = Object.values(data.departements || {});
+  const n = deps.reduce((t, l) => t + l.length, 0);
+  if (n < 30000) err(`communes.json : seulement ${n} communes`);
+  for (const l of deps) for (const [c, circos] of l) if (!c || !Array.isArray(circos) || !circos.length || !circos.every((x) => Number.isInteger(x) && x > 0 && x < 30)) { err(`communes.json : entrée invalide (${c})`); break; }
+  console.log(`[check-data] communes.json : ${n} communes.`);
+}
+
 async function checkManuels() {
   for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
     const data = JSON.parse(await readFile(fichier, "utf-8"));
@@ -161,6 +171,7 @@ await checkSondages();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();
+await checkCommunes();
 await checkManuels();
 
 if (erreurs.length) {

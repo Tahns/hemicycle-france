@@ -2858,7 +2858,8 @@ function chargerCommunes(){
   if(!communesChargement) communesChargement = lireJSON("data/communes.json").then(d=>{ COMMUNES = d?.departements || {}; });
   return communesChargement;
 }
-const normDep = t => norm(t).replace(/^(la|le|les) /, "").replace(/-/g, " ");
+// Libellés de département : « La Réunion » = « Réunion », « Saint-Martin/Saint-Barthélemy » = « Saint-Barthélemy et Saint-Martin »
+const normDep = t => { const n = norm(t).replace(/^(la|le|les) /, "").replace(/-/g, " "); return /saint martin/.test(n) && /saint barthelemy/.test(n) ? "saint barthelemy et saint martin" : n; };
 let deputeOuvert = null, deputeLimite = 60, deputeFiltreVotes = "tous", deputeCompare = null;
 
 function chargerDeputes(){
