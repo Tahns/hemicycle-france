@@ -1,6 +1,6 @@
 {
   "_comment": "Saisie manuelle volontaire : uniquement des condamnations prononcées, avec leur statut exact (definitif / appel). Aucune plainte ni mise en examen.",
-  "verifieLe": "2026-09-03",
+  "verifieLe": "2026-09-24",
   "_echeances": "Dates où une décision attendue peut changer une fiche : scripts/check-fraicheur.js ouvre une alerte dès qu'une échéance est passée sans nouvelle vérification (verifieLe).",
   "echeances": [
     {
@@ -14,33 +14,33 @@
       "role": "Ex-président de la République",
       "parti": "LR",
       "affaire": "Affaire des écoutes (dite « Bismuth »)",
-      "detail": "Condamné pour corruption et trafic d'influence (pacte avec le magistrat Gilbert Azibert). Peine : 1 an de prison dont 6 mois ferme, exécutés sous bracelet électronique.",
+      "detail": "Condamné pour corruption et trafic d'influence (pacte avec le magistrat Gilbert Azibert). Condamnation confirmée par la Cour de cassation le 18 décembre 2024 : 3 ans de prison dont 1 an ferme exécuté sous bracelet électronique, et 3 ans d'inéligibilité.",
       "statut": "definitif",
       "statutLabel": "Définitive",
-      "source": "France 24",
-      "url": "https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
+      "source": "Le Club des juristes",
+      "url": "https://www.leclubdesjuristes.com/justice/affaire-des-ecoutes-la-cour-de-cassation-tranche-sur-le-pourvoi-de-nicolas-sarkozy-8483/"
     },
     {
       "nom": "Nicolas Sarkozy",
       "role": "Ex-président de la République",
       "parti": "LR",
       "affaire": "Affaire Bygmalion",
-      "detail": "Dépassement du budget de campagne présidentielle 2012 maquillé en factures de meetings militants. Peine devenue définitive le 26 novembre 2025 : 1 an de prison dont 6 mois ferme aménageable.",
+      "detail": "Financement illégal de la campagne présidentielle de 2012 : près de 43 millions d'euros de dépenses pour un plafond de 22,5 millions, l'excédent étant dissimulé par un système de double facturation. Pourvoi rejeté par la Cour de cassation le 26 novembre 2025 : 1 an de prison dont 6 mois ferme, aménagé sous bracelet électronique.",
       "statut": "definitif",
       "statutLabel": "Définitive",
-      "source": "L'Essentiel de l'Éco",
-      "url": "https://lessentieldeleco.fr/7807-ces-personnalites-qui-ont-ete-condamnees-au-bracelet-electronique/"
+      "source": "Public Sénat",
+      "url": "https://www.publicsenat.fr/actualites/politique/affaire-bygmalion-vers-une-nouvelle-condamnation-definitive-pour-nicolas-sarkozy"
     },
     {
       "nom": "Nicolas Sarkozy",
       "role": "Ex-président de la République",
       "parti": "LR",
       "affaire": "Affaire du financement libyen (campagne 2007)",
-      "detail": "Condamné en première instance le 25 septembre 2025 à 5 ans de prison ferme pour association de malfaiteurs. Incarcéré le 21 octobre 2025. Procès en appel ouvert le 16 mars 2026, verdict attendu le 30 novembre 2026.",
+      "detail": "Condamné en première instance le 25 septembre 2025 à 5 ans de prison ferme pour association de malfaiteurs. Incarcéré le 21 octobre 2025. Procès en appel du 16 mars au 27 mai 2026 ; décision attendue le 30 novembre 2026.",
       "statut": "appel",
       "statutLabel": "1ʳᵉ instance, appel en cours, non définitive",
-      "source": "France 24 / Euronews",
-      "url": "https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
+      "source": "franceinfo",
+      "url": "https://www.franceinfo.fr/politique/affaire/financement-de-la-campagne-de-sarkozy/direct-nicolas-sarkozy-est-innocent-et-nous-le-demontrerons-au-proces-en-appel-du-financement-libyen-l-heure-des-plaidoiries-de-la-defense-de-l-ex-president-de-la-republique_8029064.html"
     },
     {
       "nom": "Marine Le Pen",
@@ -50,41 +50,41 @@
       "detail": "Détournement de fonds du Parlement européen (2004-2016). Condamnée en 1ʳᵉ instance le 31 mars 2025, puis en appel le 7 juillet 2026 à 3 ans de prison dont 2 avec sursis et 1 an ferme aménageable (bracelet électronique). Sa peine d'inéligibilité, déjà purgée du fait de l'exécution provisoire, la laisse éligible pour 2027. Elle et les autres condamnés ont formé un pourvoi en cassation le 24 juillet 2026.",
       "statut": "appel",
       "statutLabel": "Appel, pourvoi en cassation en cours, non définitive",
-      "source": "Touteleurope.eu",
-      "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/proces-des-assistants-du-rn-marine-le-pen-condamnee-en-appel-mais-eligible-a-l-election-presidentielle-2027/"
+      "source": "Cour d'appel de Paris (communiqué)",
+      "url": "https://www.cours-appel.justice.fr/sites/default/files/2026-07/20260707%20-%20CA%20Paris%20-%20CP.pdf"
     },
     {
       "nom": "François Fillon",
       "role": "Ex-Premier ministre (RPR/UMP puis LR)",
       "parti": "LR",
       "affaire": "Affaire des emplois fictifs (« Penelope Gate »)",
-      "detail": "Emploi fictif de son épouse comme assistante parlementaire. Le statut d'emploi fictif est confirmé par la Cour de cassation en avril 2024. Peine définitive : 4 ans de prison avec sursis, 375 000 € d'amende, 5 ans d'inéligibilité.",
+      "detail": "Emploi fictif de son épouse comme assistante parlementaire. La Cour de cassation a confirmé sa culpabilité en 2024 mais renvoyé la peine devant la cour d'appel de Paris, qui l'a fixée en juin 2025 : 4 ans de prison avec sursis, 375 000 € d'amende et 5 ans d'inéligibilité. Peine définitive depuis que François Fillon a renoncé à son pourvoi, en février 2026.",
       "statut": "definitif",
       "statutLabel": "Définitive",
-      "source": "Poligraph.fr",
-      "url": "https://poligraph.fr/affaires/condamnations?certainty=etabli"
+      "source": "ici (Radio France)",
+      "url": "https://www.ici.fr/infos/faits-divers-justice/emplois-fictifs-francois-fillon-renonce-a-son-pourvoi-sa-peine-devient-definitive-5865183"
     },
     {
       "nom": "Jérôme Cahuzac",
       "role": "Ex-ministre du Budget",
       "parti": "SOC",
       "affaire": "Fraude fiscale et blanchiment",
-      "detail": "Compte bancaire non déclaré à l'étranger dissimulé pendant qu'il était ministre du Budget chargé de la lutte contre la fraude fiscale. Condamnation confirmée par la Cour de cassation en 2018.",
+      "detail": "Compte bancaire non déclaré à l'étranger dissimulé pendant qu'il était ministre du Budget chargé de la lutte contre la fraude fiscale. Condamné en appel le 15 mai 2018 à 4 ans de prison dont 2 avec sursis, 300 000 € d'amende et 5 ans d'inéligibilité ; la partie ferme a été exécutée sous bracelet électronique à partir de 2019.",
       "statut": "definitif",
       "statutLabel": "Définitive",
-      "source": "Presse judiciaire française",
-      "url": "https://www.france24.com/fr/france/20250926-scandales-politico-financiers-quels-sont-pr%C3%A9sidents-ministres-d%C3%A9j%C3%A0-condamn%C3%A9s"
+      "source": "franceinfo",
+      "url": "https://www.franceinfo.fr/politique/affaire/cahuzac/l-ancien-ministre-du-budget-jerome-cahuzac-est-condamne-en-appel-a-quatre-ans-de-prison-dont-deux-avec-sursis-pour-fraude-fiscale-et-blanchiment-de-fraude-fiscale_2753503.html"
     },
     {
       "nom": "Patrick Balkany",
       "role": "Ex-maire de Levallois-Perret",
       "parti": "LR",
       "affaire": "Fraude fiscale et blanchiment",
-      "detail": "Dissimulation de patrimoine et fraude fiscale sur plusieurs années. Condamnation définitive.",
+      "detail": "Dissimulation de patrimoine au fisc par des sociétés écrans. Culpabilité pour blanchiment aggravé de fraude fiscale confirmée par la Cour de cassation en 2021 ; peine fixée par la cour d'appel de Paris le 9 janvier 2023 : 4 ans et demi de prison, 100 000 € d'amende et 10 ans d'inéligibilité.",
       "statut": "definitif",
       "statutLabel": "Définitive",
-      "source": "L'Essentiel de l'Éco",
-      "url": "https://lessentieldeleco.fr/7807-ces-personnalites-qui-ont-ete-condamnees-au-bracelet-electronique/"
+      "source": "franceinfo",
+      "url": "https://www.franceinfo.fr/politique/affaire/affaire-balkany/blanchiment-de-fraude-fiscale-patrick-et-isabelle-balkany-condamnes-en-appel-a-quatre-ans-et-demi-et-trois-ans-et-demi-de-prison_5592030.html"
     }
   ]
 }
