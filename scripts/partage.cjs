@@ -29,7 +29,7 @@ const { chromium } = require("playwright");
 const RACINE = path.resolve(__dirname, "..");
 const CNAME = fs.existsSync(path.join(RACINE, "CNAME")) ? fs.readFileSync(path.join(RACINE, "CNAME"), "utf-8").trim().split(/\s+/)[0] : null;
 // Sans domaine propre : adresse GitHub Pages déduite du dépôt (suit un renommage du dépôt)
-const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/politique-france").split("/");
+const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/hemicycle-france").split("/");
 const SITE = process.env.SITE_URL || (CNAME ? `https://${CNAME}/` : `https://${PROPRIO.toLowerCase()}.github.io/${DEPOT}/`);
 const NOM_SITE = "Hémicycle France";
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".woff2": "font/woff2", ".png": "image/png", ".css": "text/css" };

@@ -21,7 +21,7 @@ import path from "path";
 
 const DATA_FILE = path.resolve("data/senat.json");
 const BASE = "https://www.senat.fr/scrutin-public/";
-const USER_AGENT = "politique-france-bot/1.0 (https://github.com/Tahns/politique-france)";
+const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
 const DRY_RUN = process.argv.includes("--dry-run");
 const MAX = parseInt(process.argv.find((a) => a.startsWith("--max="))?.split("=")[1] || "800", 10);
 const PAUSE_MS = 300;

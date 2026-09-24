@@ -29,7 +29,7 @@ const normaliser = (u) => String(u).replace(/^https?:\/\/(www\.)?/, "").replace(
 
 let base;
 try {
-  const res = await fetch(DECODEX_URL, { headers: { "User-Agent": "politique-france (verification des sources)" } });
+  const res = await fetch(DECODEX_URL, { headers: { "User-Agent": "hemicycle-france (verification des sources)" } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   base = await res.json();
 } catch (e) {

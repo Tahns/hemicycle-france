@@ -1,6 +1,6 @@
 # Hémicycle France — La politique française, preuves à l'appui
 
-Site : https://tahns.github.io/politique-france/ — automatisation
+Site : https://tahns.github.io/hemicycle-france/ — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
 automatiquement, chaque jour, à partir de sources officielles.
@@ -38,7 +38,7 @@ Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
 
 ## Nom de domaine (optionnel)
 
-1. Acheter le domaine (par ex. `politique-france.fr`) chez un registraire (OVH, Gandi…).
+1. Acheter le domaine (par ex. `hemicycle-france.fr`) chez un registraire (OVH, Gandi…).
 2. Chez le registraire, ajouter les enregistrements DNS de GitHub Pages :
    `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    (et `CNAME www` vers `tahns.github.io`).

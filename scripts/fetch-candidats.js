@@ -27,7 +27,7 @@ const DATA_FILE = path.resolve("data/candidats.json");
 const PAGE = "Candidatures_à_l'élection_présidentielle_française_de_2027";
 const RAW_URL = `https://fr.wikipedia.org/w/index.php?title=${encodeURIComponent(PAGE)}&action=raw`;
 const PAGE_URL = `https://fr.wikipedia.org/wiki/${encodeURIComponent(PAGE)}`;
-const USER_AGENT = "politique-france-bot/1.0 (https://github.com/Tahns/politique-france)";
+const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
 const DRY_RUN = process.argv.includes("--dry-run");
 const FICHIER = process.argv.find((a) => a.startsWith("--fichier="))?.split("=")[1];
 const PREMIER_TOUR = "2027-04-18";
