@@ -10,12 +10,23 @@
  *  - Sondages : dernière enquête retenue datant de moins de 30 jours.
  *  - Indicateurs Insee automatiques : chômage du trimestre publié il y a moins de 7 mois.
  *
- * USAGE : node scripts/check-fraicheur.js
+ * Données saisies à la main (rappel à mettre à jour) :
+ *  - Inflation : le chiffre du mois M est remplacé par l'estimation provisoire du mois M+1, publiée
+ *    à la fin du mois M+1 ; alerte 10 jours après.
+ *  - Déficit public de l'année N : remplacé par celui de N+1 publié fin mars N+2 (alerte au 15 avril).
+ *  - Justice : relecture au moins tous les 60 jours, et après chaque échéance de data/justice.json.
+ *  - Chefs de parti : relecture au moins tous les 90 jours.
+ *  - Agenda : au moins un rendez-vous à venir.
+ *
+ * USAGE : node scripts/check-fraicheur.js [--date=AAAA-MM-JJ]   (la date sert aux tests)
  */
 
 import { readFile } from "fs/promises";
 
-const aujourdhui = new Date();
+const DATE_ARG = process.argv.find((a) => a.startsWith("--date="))?.split("=")[1];
+const aujourdhui = DATE_ARG ? new Date(DATE_ARG + "T12:00:00Z") : new Date();
+const isoAujourdhui = aujourdhui.toISOString().slice(0, 10);
+const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const joursDepuis = (iso) => Math.floor((aujourdhui - new Date(iso)) / 864e5);
 const alertes = [];
 
@@ -42,6 +53,40 @@ const trimestre = chomage?.date?.match(/(\d)(?:ᵉʳ|ᵉ) trimestre (\d{4})/);
 if (trimestre) {
   const finTrimestre = new Date(Date.UTC(parseInt(trimestre[2], 10), parseInt(trimestre[1], 10) * 3, 0));
   if (joursDepuis(finTrimestre) > 215) alertes.push(`Indicateurs : le chômage affiché date du ${chomage.date} — la mise à jour Insee semble bloquée.`);
+}
+
+// ---------- Données manuelles ----------
+const inflation = indic?.indicateurs?.find((i) => i.nom === "Inflation" && i.misAJourLe === "manuel");
+const moisInfl = inflation?.date?.toLowerCase().match(/([a-zéû]+) (\d{4})/);
+if (moisInfl && MOIS.includes(moisInfl[1])) {
+  // fin du mois suivant + 10 jours
+  const limite = new Date(Date.UTC(parseInt(moisInfl[2], 10), MOIS.indexOf(moisInfl[1]) + 2, 0) + 10 * 864e5);
+  if (aujourdhui > limite) alertes.push(`Inflation (saisie manuelle) : le chiffre affiché date de ${inflation.date} ; reporter le dernier chiffre publié par l'Insee dans data/indicateurs.json.`);
+}
+const deficit = indic?.indicateurs?.find((i) => i.nom === "Déficit public" && i.misAJourLe === "manuel");
+const anneeDef = parseInt(deficit?.date?.match(/\d{4}/)?.[0], 10);
+if (anneeDef && isoAujourdhui > `${anneeDef + 2}-04-15`) {
+  alertes.push(`Déficit public (saisie manuelle) : le chiffre affiché porte sur ${anneeDef} ; l'Insee a publié celui de ${anneeDef + 1} fin mars, à reporter dans data/indicateurs.json (déficit et jauge).`);
+}
+
+const justice = await lire("data/justice.json");
+if (justice?.verifieLe) {
+  if (joursDepuis(justice.verifieLe) > 60) alertes.push(`Justice : liste relue pour la dernière fois le ${justice.verifieLe} ; vérifier l'état de chaque procédure puis mettre à jour « verifieLe » dans data/justice.json.`);
+  for (const e of justice.echeances || []) {
+    if (e.date <= isoAujourdhui && justice.verifieLe < e.date) {
+      alertes.push(`Justice : échéance du ${e.date} passée (${e.objet}) ; mettre la fiche à jour, puis « verifieLe » dans data/justice.json.`);
+    }
+  }
+}
+
+const dirigeants = await lire("data/dirigeants.json");
+if (dirigeants?.verifieLe && joursDepuis(dirigeants.verifieLe) > 90) {
+  alertes.push(`Chefs de parti : liste relue pour la dernière fois le ${dirigeants.verifieLe} ; la vérifier puis mettre à jour « verifieLe » dans data/dirigeants.json.`);
+}
+
+const meetings = await lire("data/meetings.json");
+if (meetings?.meetings && !meetings.meetings.some((m) => (m.fin || m.debut) >= isoAujourdhui)) {
+  alertes.push("Agenda : aucun rendez-vous à venir dans data/meetings.json (la page Agenda affiche une liste vide).");
 }
 
 if (alertes.length) {

@@ -9,10 +9,10 @@ jobs:
   verifier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Syntaxe des scripts
         run: for f in scripts/*.js; do node --check "$f"; done
       - name: Cohérence des données

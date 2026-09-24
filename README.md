@@ -35,7 +35,11 @@ Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans touch
 
 - `scripts/check-data.js` contrôle la cohérence de tous les fichiers `data/` avant chaque publication.
 - `scripts/check-fraicheur.js` vérifie que les données se mettent bien à jour (votes pendant la
-  session parlementaire, sondages de moins de 30 jours, chômage du dernier trimestre publié).
+  session parlementaire, sondages de moins de 30 jours, chômage du dernier trimestre publié) et
+  rappelle les mises à jour manuelles : inflation (chaque mois), déficit (chaque printemps),
+  justice (relecture tous les 60 jours et après chaque date listée dans `echeances` de
+  `data/justice.json`), chefs de parti (tous les 90 jours), agenda vide.
+  Après une relecture, mettre à jour le champ `verifieLe` du fichier concerné.
 - En cas d'échec d'une source ou de données périmées, le workflow ouvre (ou complète) un ticket
   GitHub avec l'étiquette `alerte-donnees` : GitHub vous notifie par e-mail.
 - `.github/workflows/ci.yml` lance ces contrôles et un test du site dans un vrai navigateur

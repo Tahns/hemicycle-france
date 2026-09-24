@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Installer Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       # Chaque source est indépendante : l'échec de l'une n'empêche pas la publication des autres.
       - name: Scrutins, dossiers et groupes (Assemblée nationale)
@@ -70,10 +70,18 @@ jobs:
             echo
             echo "Journal complet : $RUN_URL"
           } > alerte.md
+          # Empreinte des problèmes signalés : on ne recommente pas chaque jour la même alerte
+          empreinte=$(grep '^- ' alerte.md | sha256sum | cut -c1-16)
+          echo "<!-- empreinte: $empreinte -->" >> alerte.md
           gh label create alerte-donnees --color D93F0B --description "Problème détecté par la mise à jour automatique" 2>/dev/null || true
           numero=$(gh issue list --label alerte-donnees --state open --json number --jq '.[0].number')
           if [ -n "$numero" ]; then
-            gh issue comment "$numero" --body-file alerte.md
+            dernier=$(gh issue view "$numero" --json body,comments --jq '(.comments | last | .body) // .body')
+            if printf '%s' "$dernier" | grep -q "empreinte: $empreinte"; then
+              echo "Alerte identique déjà signalée dans le ticket #$numero : rien à ajouter."
+            else
+              gh issue comment "$numero" --body-file alerte.md
+            fi
           else
             gh issue create --title "Alerte : mise à jour automatique des données" --label alerte-donnees --body-file alerte.md
           fi
