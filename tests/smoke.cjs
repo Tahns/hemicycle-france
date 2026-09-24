@@ -125,7 +125,7 @@ function verifier(cond, message) {
 
     await page.goto(base + "#chiffres", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
-    verifier((await page.$$(".chiffre-card")).length >= 5, `${nom} : indicateurs absents`);
+    verifier((await page.$$(".chiffre-card")).length >= 4 && (await page.$$("#budget-hero .gauge-svg")).length === 2, `${nom} : indicateurs absents`);
 
     await page.goto(base + "#quiz", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
