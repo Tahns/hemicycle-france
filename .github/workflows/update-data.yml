@@ -72,6 +72,10 @@ jobs:
         id: dirigeants
         run: node scripts/fetch-dirigeants.js
         continue-on-error: true
+      - name: Logos des partis (Wikimedia Commons, seulement s'ils changent)
+        id: logos
+        run: node scripts/fetch-logos.js
+        continue-on-error: true
       - name: Candidats déclarés à la présidentielle (Wikipédia)
         id: candidats
         run: node scripts/fetch-candidats.js
@@ -98,7 +102,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ v/ d/ photos/ icons/partage.jpg sitemap.xml robots.txt feed.xml index.html
+          git add data/ v/ d/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de données — rien à committer."
           else
@@ -119,7 +123,7 @@ jobs:
 
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -136,6 +140,7 @@ jobs:
             [ "${{ steps.elections.outcome }}" = "failure" ] && echo "- **Présidentielle 2022 par commune** : fichiers du ministère introuvables ou incohérents sur data.gouv.fr."
             [ "${{ steps.senateurs.outcome }}" = "failure" ] && echo "- **Sénateurs** : liste officielle illisible ou votes nom par nom qui ne correspondent pas aux totaux officiels."
             [ "${{ steps.agenda.outcome }}" = "failure" ] && echo "- **Ordre du jour de l'Assemblée** : agenda open data illisible (ancien agenda conservé)."
+            [ "${{ steps.logos.outcome }}" = "failure" ] && echo "- **Logos des partis** : fichier introuvable ou licence non libre sur Wikimedia Commons (vérifier data/logos.json)."
             [ "${{ steps.photos.outcome }}" = "failure" ] && echo "- **Photos des élus** : nombreuses photos impossibles à télécharger."
             [ "${{ steps.navette.outcome }}" = "failure" ] && echo "- **Parcours des textes** : correspondance Assemblée/Sénat impossible à construire."
             [ "${{ steps.dirigeants.outcome }}" = "failure" ] && echo "- **Chefs de parti** : au moins une infobox Wikipédia n'a pas pu être lue (entrée conservée)."

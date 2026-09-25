@@ -775,6 +775,8 @@
   .leader-info .leader-name{font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.2; margin-bottom:3px;}
   .leader-info .leader-role{font-size:13.5px; color:var(--text-soft); margin-bottom:6px;}
   .leader-source{font-size:12px; margin-left:6px;}
+  .parti-logo{display:block; width:max-content; margin:8px 0 6px; padding:4px 7px; background:#fff; border-radius:4px; line-height:0;}
+  .parti-logo img{height:24px; width:auto; max-width:150px; object-fit:contain;}
   .leader-info .leader-party{font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
   .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 28px;}
   .groupe-card{display:flex; gap:10px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border);}
@@ -1345,6 +1347,7 @@
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
         <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
+        <li><b>Logos des partis :</b> fichiers libres de <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (domaine public, sauf le logo de Renaissance : CC BY-SA 4.0, Stéphane Séjourné, vectorisation Valo139), hébergés sur le site. Les logos restent des marques de leurs partis ; ils ne sont montrés qu'à titre d'identification.</li>
         <li><b>Photos des élus :</b> photos officielles de l'Assemblée nationale et du Sénat, réduites et hébergées sur le site.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
         <li><b>Communes et circonscriptions :</b> résultats officiels du 1er tour des législatives 2024 par circonscription et par bureau de vote, ministère de l'Intérieur (<a href="https://www.data.gouv.fr/fr/datasets/elections-legislatives-des-30-juin-et-7-juillet-2024-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a>, Licence Ouverte).</li>
@@ -2927,6 +2930,7 @@ function showQuizResult(){
 /* ---------- Dirigeants des partis (données réelles, vérifiées début septembre 2026) ---------- */
 
 let LEADERS = []; // data/dirigeants.json (saisie manuelle)
+let LOGOS = null; // data/logos.json : logos libres de Wikimedia Commons, chargés à l'ouverture de la rubrique Partis
 let GROUPES = {}; // data/groupes.json (automatique, open data de l'Assemblée)
 
 function renderLeaders(){
@@ -2943,7 +2947,7 @@ function renderLeaders(){
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
-          <span class="leader-party">${esc(l.parti)}</span>${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
+          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
         </div>
       </div>`;
   }).join("");
@@ -3345,7 +3349,10 @@ document.getElementById("senat-search").addEventListener("input", ()=>{
 // Photo officielle (hébergée sur le site) : si elle manque, les initiales restent affichées
 function photoSecours(el){ el.querySelectorAll(".depute-avatar img").forEach(img=> img.addEventListener("error", ()=> img.remove())); }
 // Miniatures des listes : photo absente -> pastille de la couleur du groupe
-document.addEventListener("error", e=>{ if(e.target.closest?.(".mini-photo")) e.target.remove(); }, true);
+document.addEventListener("error", e=>{
+  if(e.target.closest?.(".mini-photo")) e.target.remove();
+  else if(e.target.closest?.(".parti-logo")) e.target.parentNode.remove(); // pas de logo libre pour ce parti
+}, true);
 
 /* Sénateurs (data/senateurs.json, chargé à la première recherche) : vote de chacun sur l'ensemble des textes */
 let SENATEURS = null, SENATEURS_CLES = [], senateursChargement = null, senateurOuvert = null;
@@ -4000,7 +4007,10 @@ function activateTab(tabId){
   if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   if(tabId === "deputes") renderDeputes();
   if(tabId === "senat") renderSenat();
-  if(tabId === "dirigeants") renderGouvernement();
+  if(tabId === "dirigeants"){
+    renderGouvernement();
+    if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
+  }
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "sondages"){ renderEvolution(); renderVeille(); }
 
