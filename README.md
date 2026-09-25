@@ -24,6 +24,7 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Sénateurs en fonction et leur vote sur l'ensemble de chaque texte | `fetch-senateurs.js` | liste data.senat.fr et analyse détaillée des scrutins senat.fr (recoupée avec le total officiel) | `data/senateurs.json` |
 | Composition du Gouvernement | `gouvernement.js` (appelé par `fetch-scrutins.js`) | archive AMO30 de l'Assemblée nationale | `data/gouvernement.json` |
 | Ordre du jour des séances de l'Assemblée (21 jours) et présence en commission | `fetch-agenda-an.js` | agenda open data de l'Assemblée nationale (feuilles de présence des 8 commissions permanentes) | `data/agenda-an.json`, `data/commissions.json` |
+| Logos des partis (fichiers libres de Wikimedia Commons, liste dans `data/logos.json`) | `fetch-logos.js` | commons.wikimedia.org | `icons/partis/` |
 | Photos des députés et sénateurs (104 px, hébergées sur le site) | `photos.cjs` | assemblee-nationale.fr et senat.fr | `photos/` |
 | Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |

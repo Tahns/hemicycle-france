@@ -228,6 +228,11 @@ await checkNavette();
 await checkSenateurs();
 await checkGouvernementAgenda();
 await checkCommunes();
+{
+  const { logos } = JSON.parse(await readFile("data/logos.json", "utf-8"));
+  for (const [id, l] of Object.entries(logos)) if (!l.fichier || (l.licence && !/public domain|domaine public|^cc0|^cc by/i.test(l.licence))) err(`logos.json : ${id} invalide ou non libre`);
+  console.log(`[check-data] logos.json : ${Object.keys(logos).length} logos.`);
+}
 await checkManuels();
 
 if (erreurs.length) {
