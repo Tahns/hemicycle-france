@@ -8,6 +8,9 @@
  *    détail par groupe, lien vers le scrutin officiel — et son image v/<numéro>.jpg
  *    (titre, résultat, hémicycle en miniature) ;
  *  - d/<PA…>.html    : un député en fonction — circonscription, statistiques, vote sur chaque texte ;
+ *  - s/<matricule>.html : un sénateur en fonction — vote sur l'ensemble de chaque texte ;
+ *  - p/sondages.html : le dernier sondage de la présidentielle et son image (rien pendant la réserve électorale) ;
+ *  - data/alertes.json : derniers votes clés et dernier sondage, lus par le service worker pour les alertes ;
  *  - icons/partage.jpg : image d'aperçu générale du site ;
  *  - sitemap.xml et robots.txt : plan du site pour les moteurs de recherche.
  * Chaque page est lisible sans JavaScript et renvoie vers la version interactive du site.
@@ -40,7 +43,7 @@ const pct = (n, d) => (d ? `${Math.round((n / d) * 100)} %` : "—");
 const ordinal = (n) => (n === 1 ? "1re" : `${n}e`);
 const LIB_VOTE = { p: ["Pour", "vote-p"], c: ["Contre", "vote-c"], a: ["Abstention", "vote-a"], n: ["Non-votant", "vote-x"], "-": ["N'a pas pris part au vote", "vote-x"] };
 
-function gabarit({ titre, description, chemin, image, cible, libelleCible, corps }) {
+function gabarit({ titre, description, chemin, image, cible, libelleCible, corps, jsonld = null, pied = "Données publiques de l'Assemblée nationale, relevées chaque jour." }) {
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -62,6 +65,7 @@ function gabarit({ titre, description, chemin, image, cible, libelleCible, corps
 <meta name="theme-color" content="#F5F1E8">
 <link rel="icon" href="../icons/icon-192.png">
 <link rel="stylesheet" href="../pages.css">
+${jsonld ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", ...jsonld }).replace(/</g, "\\u003c")}</script>` : ""}
 </head>
 <body>
 <div class="lisere" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -70,7 +74,7 @@ function gabarit({ titre, description, chemin, image, cible, libelleCible, corps
 ${corps}
 <a class="bouton" href="${esc(cible)}">${esc(libelleCible)}</a>
 </main>
-<footer>Données publiques de l'Assemblée nationale, relevées chaque jour. <a href="../#mentions">Mentions légales et sources</a>.</footer>
+<footer>${esc(pied)} <a href="../#mentions">Mentions légales et sources</a>.</footer>
 </body>
 </html>
 `;
@@ -92,7 +96,8 @@ ${v.auteur ? `<p class="meta">Texte déposé par ${esc(v.auteur)}.</p>` : ""}
 ${lignes}
 </tbody></table>
 <p class="meta">Source : <a href="${esc(v.sourceUrl)}">fiche officielle du scrutin</a>${v.dossierUrl ? ` · <a href="${esc(v.dossierUrl)}">dossier législatif</a>` : ""}.</p>`;
-  return gabarit({ titre: v.titre, description, chemin: `v/${v.numero}.html`, image: `v/${v.numero}.jpg`, cible: `../#scrutin-${v.numero}`, libelleCible: "Voir l'hémicycle interactif", corps });
+  const jsonld = { "@type": "Article", headline: v.titre, description, datePublished: v.dateISO || undefined, image: `${SITE}v/${v.numero}.jpg`, url: `${SITE}v/${v.numero}.html`, inLanguage: "fr", isBasedOn: v.sourceUrl, publisher: { "@type": "Organization", name: NOM_SITE, url: SITE } };
+  return gabarit({ titre: v.titre, description, chemin: `v/${v.numero}.html`, image: `v/${v.numero}.jpg`, cible: `../#scrutin-${v.numero}`, libelleCible: "Voir l'hémicycle interactif", corps, jsonld });
 }
 
 function pageDepute(d, cles, votesParNumero) {
@@ -121,7 +126,55 @@ function pageDepute(d, cles, votesParNumero) {
 ${lignes}
 </tbody></table>
 <p class="meta"><a href="https://www.assemblee-nationale.fr/dyn/deputes/${esc(d.id)}">Fiche officielle à l'Assemblée nationale</a></p>`;
-  return gabarit({ titre, description, chemin: `d/${d.id}.html`, image: "icons/partage.jpg", cible: `../#depute-${d.id}`, libelleCible: "Voir la fiche interactive", corps });
+  const jsonld = { "@type": "Person", name: d.nom, jobTitle: role, memberOf: { "@type": "Organization", name: "Assemblée nationale" }, url: `${SITE}d/${d.id}.html`, image: fs.existsSync(path.join(RACINE, "photos", "deputes", `${d.id}.jpg`)) ? `${SITE}photos/deputes/${d.id}.jpg` : undefined, sameAs: `https://www.assemblee-nationale.fr/dyn/deputes/${d.id}` };
+  return gabarit({ titre, description, chemin: `d/${d.id}.html`, image: "icons/partage.jpg", cible: `../#depute-${d.id}`, libelleCible: "Voir la fiche interactive", corps, jsonld });
+}
+
+function pageSenateur(s, cles, scrutinsParId) {
+  const role = s.f ? "Sénatrice" : "Sénateur";
+  const lieu = /^Français/.test(s.dep) ? "des Français établis hors de France" : `de ${s.dep}`;
+  const titre = `${s.nom}, ${role.toLowerCase()} ${lieu}`;
+  const lignes = cles.map((id, i) => ({ code: s.votes[i], v: scrutinsParId.get(id) })).filter((x) => x.code && x.code !== "." && x.v);
+  const presents = lignes.filter((x) => "pca".includes(x.code)).length;
+  const description = `${role} ${s.groupe} ${lieu}. S'est prononcé${s.f ? "e" : ""} sur ${presents} des ${lignes.length} votes sur l'ensemble d'un texte depuis octobre 2024. Son vote sur chaque texte.`;
+  const LIB = { p: ["Pour", "vote-p"], c: ["Contre", "vote-c"], a: ["Abstention", "vote-a"], n: ["N'a pas pris part au vote", "vote-x"] };
+  const tableau = lignes.map(({ code, v }) => { const [lib, cl] = LIB[code] || LIB.n; const t = v.titre.replace(/^sur\s+/i, ""); return `<tr><td><a href="${esc(v.sourceUrl)}">${esc(t.charAt(0).toUpperCase() + t.slice(1))}</a><br><small class="meta">${esc(v.date)} · ${v.resultat === "adopte" ? "adopté" : "rejeté"}</small></td><td class="${cl}">${lib}</td></tr>`; }).join("\n");
+  const corps = `<div class="surtitre">${role} · ${esc(s.groupe)}</div>
+<h1>${esc(s.nom)}</h1>
+<p class="meta">${role} ${esc(lieu)}.</p>
+<div class="chiffres"><div><b>${presents} / ${lignes.length}</b><span>votes sur un texte où ${s.f ? "elle" : "il"} s'est prononcé${s.f ? "e" : ""}</span></div></div>
+<p class="meta">Au Sénat, les groupes votent souvent pour leurs membres absents (délégation) : un vote enregistré ne veut pas toujours dire une présence en séance.</p>
+<h2>Son vote sur l'ensemble de chaque texte</h2>
+<table><thead><tr><th>Texte</th><th>Vote</th></tr></thead><tbody>
+${tableau}
+</tbody></table>
+${s.slug ? `<p class="meta"><a href="https://www.senat.fr/senateur/${esc(s.slug)}.html">Fiche officielle au Sénat</a></p>` : ""}`;
+  const jsonld = { "@type": "Person", name: s.nom, jobTitle: role, memberOf: { "@type": "Organization", name: "Sénat" }, url: `${SITE}s/${s.id}.html`, sameAs: s.slug ? `https://www.senat.fr/senateur/${s.slug}.html` : undefined };
+  return gabarit({ titre, description, chemin: `s/${s.id}.html`, image: "icons/partage.jpg", cible: `../#senateur-${s.id}`, libelleCible: "Voir la fiche interactive", corps, jsonld, pied: "Votes relevés sur les pages officielles des scrutins du Sénat." });
+}
+
+function pageSondage(inst, reserve, image) {
+  const titre = "Sondages de la présidentielle 2027 : le dernier en date";
+  if (reserve) {
+    return gabarit({ titre, description: "Aucun sondage n'est publié la veille et le jour du vote (loi du 19 juillet 1977).", chemin: "p/sondages.html", image: "icons/partage.jpg", cible: "../#sondages", libelleCible: "Voir la rubrique Sondages", pied: "Sondages déposés à la Commission des sondages.",
+      corps: `<div class="surtitre">Présidentielle 2027</div>\n<h1>${esc(titre)}</h1>\n<p class="meta">Veille et jour de vote : comme l'impose la loi, aucun sondage n'est publié ni commenté jusqu'à 20 h.</p>` });
+  }
+  const fr = (n) => String(n).replace(".", ",");
+  const lignes = Object.entries(inst.scores).sort((a, b) => b[1][0] + b[1][1] - a[1][0] - a[1][1]);
+  const lib = ([a, b]) => (a === b ? `${fr(a)} %` : `${fr(a)} à ${fr(b)} %`);
+  const marge = inst.echantillon ? (1.96 * Math.sqrt(0.25 / inst.echantillon) * 100).toFixed(1).replace(".", ",") : null;
+  const description = `${inst.nom}, enquête du ${inst.date} (${nombre(inst.echantillon)} personnes) : ${lignes.slice(0, 3).map(([n, r]) => `${n} ${lib(r)}`).join(", ")}. Intentions de vote au 1er tour.`;
+  const corps = `<div class="surtitre">Présidentielle 2027 · sondage</div>
+<h1>Intentions de vote au 1er tour : ${esc(inst.nom)}, enquête du ${esc(inst.date)}</h1>
+<p class="meta">${nombre(inst.echantillon)} personnes interrogées${marge ? `, marge d'erreur jusqu'à ±${marge} points` : ""}${inst.hypotheses > 1 ? `, fourchette sur les ${inst.hypotheses} hypothèses de candidatures testées` : ""}. Un sondage n'est pas une prévision.</p>
+<img class="apercu" src="${image}" alt="Intentions de vote par candidat" width="800" height="420" loading="lazy">
+<table><thead><tr><th>Candidat</th><th>Intentions de vote</th></tr></thead><tbody>
+${lignes.map(([n, r]) => `<tr><td>${esc(n)}</td><td>${lib(r)}</td></tr>`).join("\n")}
+</tbody></table>
+<p class="meta">Notice officielle (commanditaire, questions posées, méthode) : <a href="${esc(inst.url)}">Commission des sondages</a>.</p>`;
+  return gabarit({ titre, description, chemin: "p/sondages.html", image: `p/${image}`, cible: "../#sondages", libelleCible: "Voir tous les sondages et leur évolution", corps,
+    jsonld: { "@type": "Article", headline: `Sondage ${inst.nom}, ${inst.date}`, description, datePublished: inst.dateFin, inLanguage: "fr", publisher: { "@type": "Organization", name: NOM_SITE, url: SITE } },
+    pied: "Sondages déposés à la Commission des sondages, relevés chaque jour." });
 }
 
 function ecrireSiChange(fichier, contenu) {
@@ -182,6 +235,33 @@ function serveur() {
     await (await onglet.$("#carte-partage")).screenshot({ path: imageSite, type: "jpeg", quality: 82 });
     images++;
   }
+  // 2 bis. Dernier sondage : page et image d'aperçu (rien pendant la période de réserve électorale)
+  const sondages = JSON.parse(fs.readFileSync(path.join(RACINE, "data", "sondages.json"), "utf-8"));
+  const inst = sondages.instituts?.[0];
+  const { reserve, tours } = await onglet.evaluate(() => ({ reserve: !!periodeReserveSondages(), tours: TOURS_PRESIDENTIELLE }));
+  if (inst) {
+    const nomImage = `sondage-${inst.nom.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${inst.dateFin}.jpg`;
+    const html = pageSondage(inst, reserve, nomImage);
+    if (ecrireSiChange(path.join(RACINE, "p", "sondages.html"), html)) pages++;
+    const cheminImage = path.join(RACINE, "p", nomImage);
+    if (!reserve && !fs.existsSync(cheminImage)) {
+      await onglet.evaluate(({ inst, adresse }) => {
+        const fr = (n) => String(n).replace(".", ",");
+        const lignes = Object.entries(inst.scores).sort((a, b) => b[1][0] + b[1][1] - a[1][0] - a[1][1]).slice(0, 6);
+        const maxi = Math.max(...lignes.map(([, r]) => r[1]));
+        const coul = (nom) => (CANDIDATS.find((c) => c.nom === nom) || {}).couleur || "#8A8C94";
+        document.getElementById("carte-partage").innerHTML = `<div style="grid-column:1/-1">
+          <div class="carte-site">${adresse} · Présidentielle 2027</div>
+          <h1 class="carte-titre" style="font-size:40px;margin-bottom:6px">Sondage ${esc(inst.nom)}, ${esc(inst.date)}</h1>
+          <div class="carte-date" style="font-size:20px">Intentions de vote au 1er tour · ${Number(inst.echantillon).toLocaleString("fr-FR")} personnes</div>
+          ${lignes.map(([n, r]) => `<div style="display:flex;align-items:center;gap:16px;margin:10px 0;font-size:22px"><span style="width:300px;font-weight:600">${esc(n)}</span><span style="flex:1;height:18px;background:#E4DDCE;border-radius:9px;overflow:hidden"><span style="display:block;height:100%;width:${((r[0] + r[1]) / 2 / maxi * 100).toFixed(1)}%;background:${coul(n)}"></span></span><span style="width:130px;text-align:right;font-family:var(--font-display);font-weight:600;font-size:26px">${r[0] === r[1] ? fr(r[0]) : fr(r[0]) + "–" + fr(r[1])} %</span></div>`).join("")}
+        </div>`;
+      }, { inst, adresse: SITE.replace(/^https:\/\//, "").replace(/\/$/, "") });
+      await (await onglet.$("#carte-partage")).screenshot({ path: cheminImage, type: "jpeg", quality: 82 });
+      for (const f of fs.readdirSync(path.join(RACINE, "p"))) if (f.startsWith("sondage-") && f !== nomImage) fs.unlinkSync(path.join(RACINE, "p", f));
+      images++;
+    }
+  }
   await navigateur.close();
   srv.close();
 
@@ -197,11 +277,39 @@ function serveur() {
     for (const f of fs.readdirSync(path.join(RACINE, "d"))) if (f.endsWith(".html") && !actuels.has(f)) fs.unlinkSync(path.join(RACINE, "d", f));
   }
 
+  // 3. bis Alertes : derniers votes clés (avec le vote de chaque député) et dernier sondage, lus par le service worker
+  const derniers = cles.slice(0, 10).map((n, i) => ({ n, i, v: votesParNumero.get(n) })).filter((x) => x.v);
+  const alertes = {
+    tours,
+    deputes: deputes.map((d) => d.id),
+    votes: derniers.map(({ n, i, v }) => ({ numero: n, titre: v.titre, resultat: v.resultat, date: v.date, codes: deputes.map((d) => d.votes[i] || ".").join("") })),
+    sondage: inst ? { nom: inst.nom, date: inst.date, dateFin: inst.dateFin,
+      tete: Object.entries(inst.scores).sort((a, b) => b[1][0] + b[1][1] - a[1][0] - a[1][1]).slice(0, 3).map(([nom, [a, b]]) => `${nom} ${a === b ? a : `${a}-${b}`} %`.replace(/\./g, ",")).join(", ") } : null,
+  };
+  ecrireSiChange(path.join(RACINE, "data", "alertes.json"), JSON.stringify(alertes) + "\n");
+
+  // 3 bis. Sénateurs en fonction
+  const lireData = (f) => { try { return JSON.parse(fs.readFileSync(path.join(RACINE, "data", f), "utf-8")); } catch { return {}; } };
+  const sen = lireData("senateurs.json");
+  const { scrutins: scrutinsSenat = [] } = lireData("senat.json");
+  const scrutinsParId = new Map(scrutinsSenat.map((x) => [x.id, x]));
+  const senateurs = sen.senateurs || [];
+  const senActuels = new Set();
+  for (const x of senateurs) {
+    senActuels.add(`${x.id}.html`);
+    if (ecrireSiChange(path.join(RACINE, "s", `${x.id}.html`), pageSenateur(x, sen.cles || [], scrutinsParId))) pages++;
+  }
+  if (senateurs.length >= 300 && fs.existsSync(path.join(RACINE, "s"))) {
+    for (const f of fs.readdirSync(path.join(RACINE, "s"))) if (f.endsWith(".html") && !senActuels.has(f)) fs.unlinkSync(path.join(RACINE, "s", f));
+  }
+
   // 4. Plan du site et robots.txt
   const urls = [
     `<url><loc>${SITE}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>`,
     ...votes.map((v) => `<url><loc>${SITE}v/${v.numero}.html</loc>${v.dateISO ? `<lastmod>${v.dateISO}</lastmod>` : ""}</url>`),
     ...deputes.map((d) => `<url><loc>${SITE}d/${d.id}.html</loc><changefreq>weekly</changefreq></url>`),
+    ...senateurs.map((x) => `<url><loc>${SITE}s/${x.id}.html</loc><changefreq>weekly</changefreq></url>`),
+    `<url><loc>${SITE}p/sondages.html</loc><changefreq>daily</changefreq></url>`,
   ];
   ecrireSiChange(path.join(RACINE, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
   ecrireSiChange(path.join(RACINE, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
@@ -234,7 +342,8 @@ ${items}
   const maj = index
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}$2`)
     .replace(/(<meta property="og:image" content=")[^"]*(icons\/partage\.jpg")/, `$1${SITE}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}$2`);
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}$2`)
+    .replace(/("@type":"WebSite"[^<]*?"url":")[^"]*(")/, `$1${SITE}$2`);
   if (maj !== index) fs.writeFileSync(indexFichier, maj);
 
   console.log(`[partage] ${votes.length} votes clés, ${deputes.length} députés : ${pages} page(s) écrite(s), ${images} image(s) créée(s). Adresse : ${SITE}`);
