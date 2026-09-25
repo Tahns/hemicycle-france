@@ -716,6 +716,18 @@
   .theme-toggle kbd{font:inherit; font-size:11px; padding:0 4px; margin-left:4px; border:1px solid var(--border); border-radius:2px; color:var(--text-faint);}
   .masthead-titre{position:relative;}
   .loupe-mobile{display:none;}
+  .story-fond{position:fixed; inset:0; z-index:80; background:rgba(20,18,14,.55); display:flex; align-items:center; justify-content:center; padding:16px;}
+  .story-fond[hidden]{display:none;}
+  .story-boite{background:var(--bg); color:var(--text); border-radius:8px; padding:16px 18px 18px; width:min(360px, 100%); max-height:100%; overflow:auto; box-shadow:0 10px 40px rgba(0,0,0,.3);}
+  .story-tete{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+  .story-etat{margin:0; font-size:14px; color:var(--text-soft);}
+  .story-etat:empty{display:none;}
+  #story-apercu{display:block; width:100%; max-width:270px; height:auto; aspect-ratio:9/16; margin:6px auto 12px; border:1px solid var(--border); border-radius:6px; background:var(--bg-elevated);}
+  .story-actions{display:flex; flex-direction:column; gap:8px;}
+  .story-bouton{min-height:46px; border:none; border-radius:6px; background:var(--accent); color:#fff; font:600 15px var(--font-body); cursor:pointer;}
+  .story-bouton.secondaire{background:none; color:var(--accent); border:1.5px solid var(--accent);}
+  .story-aide{font-size:12.5px; color:var(--text-faint); margin:10px 0 0;}
+  .bouton-story::before{content:""; display:inline-block; width:.85em; height:.85em; margin-right:.35em; vertical-align:-1px; border:2px solid currentColor; border-radius:4px;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:rgba(20,18,14,.45);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
     background:var(--bg); border:1px solid var(--ink); border-radius:6px; box-shadow:0 18px 50px rgba(0,0,0,.25); padding:14px 18px 18px;}
@@ -1120,6 +1132,7 @@
       <div class="scrutin-choix-actions">
         <span class="resultat-pill" id="resultat-pill"></span>
         <button type="button" class="lien-bouton bouton-partage" data-partage="scrutin">Partager ce vote</button>
+        <button type="button" class="lien-bouton bouton-story" data-story="scrutin">Story</button>
       </div>
     </div>
 
@@ -1287,7 +1300,7 @@
       <h2>Sondages</h2>
       <p class="chapo">Qui est en tête pour le premier tour ? Pas de moyenne maison ici : chaque institut a sa méthode, donc ses chiffres sont montrés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
     </div>
-    <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button></div>
+    <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
     <div class="filtre-inline"><span class="filtre-label" id="sondage-institut-label">Institut</span>
       <div class="source-bar" id="source-bar" role="group" aria-labelledby="sondage-institut-label"></div></div>
     <div class="sondage-avg-card">
@@ -1423,6 +1436,18 @@
 
 <div class="tooltip" id="tooltip"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="story-fond" id="story-fond" hidden>
+  <div class="story-boite" role="dialog" aria-modal="true" aria-labelledby="story-titre">
+    <div class="story-tete"><b id="story-titre">Image pour une story</b><button type="button" class="lien-bouton" id="story-fermer" aria-label="Fermer">Fermer</button></div>
+    <p class="story-etat" id="story-etat" aria-live="polite"></p>
+    <img id="story-apercu" alt="Aperçu de l'image à partager" width="270" height="480">
+    <div class="story-actions">
+      <button type="button" class="story-bouton" id="story-partager" hidden>Partager (Instagram, WhatsApp…)</button>
+      <button type="button" class="story-bouton secondaire" id="story-telecharger">Enregistrer l'image</button>
+    </div>
+    <p class="story-aide" id="story-aide">Sur téléphone, « Partager » ouvre directement Instagram, WhatsApp ou Snapchat. Sinon, enregistrez l'image et ajoutez-la à votre story depuis vos photos.</p>
+  </div>
+</div>
 <div class="recherche-fond" id="recherche-fond" hidden></div>
 <div class="recherche" id="recherche" role="dialog" aria-modal="true" aria-label="Rechercher sur le site" hidden>
   <div class="recherche-barre">
@@ -2547,6 +2572,8 @@ function renderSourceBar(){
 
 function renderSondageAverage(){
   const tour = periodeReserveSondages();
+  // Pas d'image de sondage à partager la veille et le jour du vote (loi du 19 juillet 1977)
+  document.querySelectorAll('.bouton-story[data-story="sondages"]').forEach(b=> b.hidden = !!tour);
   if(tour){
     document.getElementById("source-bar").innerHTML = "";
     document.getElementById("sondage-evolution").hidden = true;
@@ -3329,7 +3356,7 @@ async function renderSenat(){
         <div class="senat-totaux">${s.pour} pour · ${s.contre} contre<small>${s.abst} abstention${s.abst>1?"s":""}</small></div>
       </summary>
       <div class="senat-groupes">${groupes}
-        <div class="histo-date">Par groupe : pour · contre · abstention. <a href="${lien(s.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>${s.dossierUrl ? ` · <a href="${lien(s.dossierUrl)}" target="_blank" rel="noopener">dossier législatif</a>` : ""}</div>
+        <div class="histo-date">Par groupe : pour · contre · abstention. <a href="${lien(s.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>${s.dossierUrl ? ` · <a href="${lien(s.dossierUrl)}" target="_blank" rel="noopener">dossier législatif</a>` : ""} · <button type="button" class="lien-bouton bouton-story" data-story="senat" data-id="${esc(s.id)}">Story</button></div>
       </div>
     </details>`;
   }).join("") + (res.length > senatLimite ? `<button type="button" class="histo-more" id="senat-plus">Afficher ${Math.min(40, res.length - senatLimite)} de plus (${res.length - senatLimite} restants)</button>` : "");
@@ -3481,7 +3508,7 @@ async function afficherPresidentielle(el){
   if(!r){ el.remove(); return; }
   const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + "\u202f%";
   const tour = (t, n) => (r[t] || []).map((v, i) => [d.candidats[t][i], v]).sort((a, b) => b[1] - a[1]).slice(0, n).map(([c, v]) => `${esc(c)} ${pct(v)}`).join(" · ");
-  el.innerHTML = `<b>Présidentielle 2022 ici</b> : 1er tour ${tour("t1", 3)}${r.t2 ? ` ; 2d tour ${tour("t2", 2)}` : ""}`;
+  el.innerHTML = `<b>Présidentielle 2022 ici</b> : 1er tour ${tour("t1", 3)}${r.t2 ? ` ; 2d tour ${tour("t2", 2)}` : ""} · <button type="button" class="lien-bouton bouton-story" data-story="commune" data-dep="${esc(dep)}" data-commune="${esc(el.dataset.commune)}">Story</button>`;
 }
 function circoDepute(d){ return `${d.dep}${d.circo ? `, ${ordinalCirco(d.circo)} circonscription` : ""}`; }
 function partiDepute(d){ return PARTIES.find(p=>p.id===d.groupe) || { nom:d.groupe, couleur:"#8A8C94" }; }
@@ -3669,6 +3696,7 @@ function renderDeputeFiche(d){
     <div class="depute-actions">
       <a href="https://www.assemblee-nationale.fr/dyn/deputes/${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fiche officielle à l'Assemblée</a>
       <button type="button" class="lien-bouton bouton-partage" data-partage="depute">Partager cette fiche</button>
+      <button type="button" class="lien-bouton bouton-story" data-story="depute">Story</button>
     </div>
     <div class="stat-cards">
       <div class="stat-card"><div class="stat-label">Votes clés</div><div class="stat-value accent">${presents} / ${possibles}</div><div class="stat-sub">textes et motions de censure où ${d.f ? "elle" : "il"} a voté</div></div>
@@ -3845,6 +3873,294 @@ function afficherNouveautes(){
   el.hidden = false;
   document.getElementById("nouveautes-fermer").addEventListener("click", ()=>{ el.hidden = true; });
 }
+
+/* ---------- Stories (Instagram, WhatsApp…) : image verticale 1080 × 1920 dessinée dans le navigateur ---------- */
+// Rien n'est envoyé à un serveur : l'image est composée ici, puis partagée par le menu du téléphone
+// (Instagram, WhatsApp, Snapchat…) ou téléchargée sur ordinateur.
+const STORY = { L:1080, H:1920, marge:84, papier:"#F5F1E8", encre:"#1C1B18", doux:"#47443D", pale:"#625D53", filet:"#D3CBBA", bleu:"#1B3A8C", rouge:"#B3261E", vert:"#2E6B3F", ambre:"#C98A00" };
+const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
+const SITE_COURT = new URL(".", location.href).href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+function storyLignes(ctx, texte, largeur, max){
+  const mots = String(texte).split(/\s+/), lignes = [];
+  let l = "";
+  for(const m of mots){
+    const essai = l ? l + " " + m : m;
+    if(ctx.measureText(essai).width > largeur && l){ lignes.push(l); l = m; } else l = essai;
+  }
+  if(l) lignes.push(l);
+  if(lignes.length > max){
+    lignes.length = max;
+    let d = lignes[max - 1];
+    while(ctx.measureText(d + "…").width > largeur && d.includes(" ")) d = d.slice(0, d.lastIndexOf(" "));
+    lignes[max - 1] = d + "…";
+  }
+  return lignes;
+}
+function storyTexte(ctx, texte, x, y, { taille=40, poids=400, police="Public Sans", couleur=STORY.encre, largeur=STORY.L - 2*STORY.marge, max=3, interligne=1.2, align="left" } = {}){
+  ctx.font = `${poids} ${taille}px "${police}"`;
+  ctx.fillStyle = couleur;
+  ctx.textAlign = align;
+  ctx.textBaseline = "alphabetic";
+  const lignes = storyLignes(ctx, texte, largeur, max);
+  lignes.forEach((l, i)=> ctx.fillText(l, x, y + taille + i * taille * interligne));
+  ctx.textAlign = "left";
+  return y + taille + (lignes.length - 1) * taille * interligne + taille * (interligne - 1) + 8;
+}
+function storyPastille(ctx, texte, x, y, fond, couleur="#fff", taille=34){
+  ctx.font = `700 ${taille}px "Public Sans"`;
+  const w = ctx.measureText(texte).width + taille * 1.2, h = taille * 1.75;
+  ctx.fillStyle = fond;
+  ctx.beginPath(); ctx.roundRect(x, y, w, h, 10); ctx.fill();
+  ctx.fillStyle = couleur; ctx.textBaseline = "middle";
+  ctx.fillText(texte, x + taille * 0.6, y + h / 2 + 2);
+  ctx.textBaseline = "alphabetic";
+  return x + w;
+}
+// Barre empilée (segments [valeur, couleur]) avec un espace de 3 px entre les segments
+function storyBarre(ctx, x, y, largeur, hauteur, segments, total){
+  ctx.fillStyle = "#E4DDCE";
+  ctx.beginPath(); ctx.roundRect(x, y, largeur, hauteur, hauteur / 2); ctx.fill();
+  let cx = x;
+  ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, largeur, hauteur, hauteur / 2); ctx.clip();
+  for(const [v, c] of segments){
+    if(!v) continue;
+    const w = v / total * largeur;
+    ctx.fillStyle = c; ctx.fillRect(cx, y, Math.max(0, w - 3), hauteur);
+    cx += w;
+  }
+  ctx.restore();
+}
+async function storyImage(src){
+  const img = new Image();
+  img.src = src;
+  try { await img.decode(); return img; } catch(e){ return null; }
+}
+// Cadre commun : bande tricolore, marque, surtitre ; renvoie l'ordonnée où commencer le contenu
+function storyCadre(ctx, surtitre){
+  const { L, H, marge } = STORY;
+  ctx.fillStyle = STORY.papier; ctx.fillRect(0, 0, L, H);
+  [["#1B3A8C",0],["#FFFFFF",L/3],["#C8102E",2*L/3]].forEach(([c,x])=>{ ctx.fillStyle = c; ctx.fillRect(x, 0, L/3 + 1, 14); });
+  // Logo (hémicycle) et nom du site, sous la zone masquée par Instagram (≈ 220 px)
+  const y0 = 230;
+  ctx.lineWidth = 7; ctx.lineCap = "round";
+  ctx.strokeStyle = "#1B3A8C"; ctx.beginPath(); ctx.arc(marge + 34, y0 + 52, 30, Math.PI, 0); ctx.stroke();
+  ctx.strokeStyle = "#C8102E"; ctx.beginPath(); ctx.arc(marge + 34, y0 + 52, 15, Math.PI, 0); ctx.stroke();
+  ctx.fillStyle = STORY.encre; ctx.beginPath(); ctx.arc(marge + 34, y0 + 52, 5, 0, 2 * Math.PI); ctx.fill();
+  ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText("Hémicycle France", marge + 86, y0 + 56);
+  ctx.fillStyle = STORY.encre; ctx.fillRect(marge, y0 + 86, L - 2 * marge, 3);
+  ctx.font = `700 28px "Public Sans"`; ctx.fillStyle = STORY.bleu;
+  ctx.letterSpacing = "3px";
+  ctx.fillText(surtitre.toUpperCase(), marge, y0 + 146);
+  ctx.letterSpacing = "0px";
+  return y0 + 176;
+}
+function storyPied(ctx, source){
+  const { L, marge } = STORY, y = 1600;
+  ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, L - 2 * marge, 2);
+  storyTexte(ctx, source, marge, y + 14, { taille:24, couleur:STORY.pale, max:2 });
+  ctx.font = `700 32px "Public Sans"`; ctx.fillStyle = STORY.bleu;
+  ctx.fillText(SITE_COURT, marge, y + 132);
+}
+
+async function dessinerStory(type, info){
+  await Promise.all(["600 60px Newsreader", "400 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
+  const c = document.createElement("canvas");
+  c.width = STORY.L; c.height = STORY.H;
+  const ctx = c.getContext("2d");
+  const { L, marge } = STORY, largeur = L - 2 * marge;
+  let y, nom = "hemicycle-france";
+
+  if(type === "scrutin" || type === "senat"){
+    let titre, date, resultat, groupes, sourceTxt, surtitre, censure = false;
+    if(type === "scrutin"){
+      const loi = currentLoi(); if(!loi) return null;
+      censure = loi.typeVote === "MOC";
+      titre = titreLoi(loi); date = loi.date; resultat = loi.resultat;
+      groupes = PARTIES.filter(p=>loi.votes?.[p.id]).map(p=>({ id:p.id, nom:p.nom, couleur:p.couleur, ...loi.votes[p.id] }));
+      surtitre = `Assemblée nationale · ${date}`;
+      sourceTxt = `Scrutin public n°${loi.numero} de l'Assemblée nationale. Votes nominatifs officiels, détail par groupe.`;
+      nom = `vote-${loi.numero}`;
+    } else {
+      const s = SENAT?.find(x=>x.id === info); if(!s) return null;
+      titre = titreSenat(s); date = s.date; resultat = s.resultat;
+      groupes = Object.keys(GROUPES_SENAT).filter(g=>s.groupes[g]).map(g=>({ id:g, nom:GROUPES_SENAT[g].nom, couleur:GROUPES_SENAT[g].couleur, ...s.groupes[g] }));
+      surtitre = `Sénat · ${date}`;
+      sourceTxt = `Scrutin public n°${s.numero} du Sénat (session ${s.session}-${s.session + 1}), page officielle senat.fr.`;
+      nom = `senat-${s.session}-${s.numero}`;
+    }
+    y = storyCadre(ctx, surtitre);
+    y = storyTexte(ctx, titre, marge, y, { taille:58, poids:600, police:"Newsreader", max:4, interligne:1.15 }) + 20;
+    const pour = groupes.reduce((a,g)=>a+g.pour,0), contre = groupes.reduce((a,g)=>a+(g.contre||0),0), abst = groupes.reduce((a,g)=>a+(g.abst||0),0);
+    storyPastille(ctx, resultat === "adopte" ? (censure ? "CENSURE ADOPTÉE" : "ADOPTÉ") : (censure ? "CENSURE REJETÉE" : "REJETÉ"), marge, y, resultat === "adopte" ? STORY.vert : STORY.rouge);
+    y += 100;
+    const colonnes = censure ? [["Pour la censure", pour, STORY.vert], ["Voix requises", 289, STORY.encre]] : [["Pour", pour, STORY.vert], ["Contre", contre, STORY.rouge], ["Abstention", abst, STORY.ambre]];
+    colonnes.forEach(([lib, n, coul], i)=>{
+      const x = marge + i * (largeur / colonnes.length);
+      ctx.font = `600 84px "Newsreader"`; ctx.fillStyle = coul; ctx.fillText(formatNombre(n), x, y + 76);
+      ctx.font = `600 26px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(lib, x, y + 116);
+    });
+    y += 150;
+    if(!censure){ storyBarre(ctx, marge, y, largeur, 26, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], pour + contre + abst); y += 64; }
+    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
+    ctx.fillText("PAR GROUPE", marge, y + 20); ctx.letterSpacing = "0px";
+    y += 40;
+    const pas = Math.min(64, (1580 - y) / Math.max(1, groupes.length));
+    const taille = Math.min(30, pas * 0.5);
+    for(const g of groupes){
+      ctx.fillStyle = g.couleur; ctx.beginPath(); ctx.arc(marge + 10, y + pas / 2, 10, 0, 2 * Math.PI); ctx.fill();
+      ctx.font = `600 ${taille}px "Public Sans"`; ctx.fillStyle = STORY.encre;
+      ctx.fillText(g.id, marge + 34, y + pas / 2 + taille * 0.36);
+      const m = g.membres || (g.pour + (g.contre||0) + (g.abst||0) + (g.npv||0)) || 1;
+      storyBarre(ctx, marge + 190, y + pas / 2 - 11, 520, 22, [[g.pour, STORY.vert], [g.contre||0, STORY.rouge], [g.abst||0, STORY.ambre]], m);
+      const pos = censure ? (g.pour ? `${g.pour} pour` : "—") : positionMajoritaire({ typeVote:"" }, g);
+      ctx.font = `600 ${taille}px "Public Sans"`; ctx.textAlign = "right";
+      ctx.fillStyle = pos === "pour" ? STORY.vert : pos === "contre" ? STORY.rouge : pos === "abst" ? STORY.ambre : STORY.doux;
+      ctx.fillText(censure ? pos : ({ pour:"Pour", contre:"Contre", abst:"Abstention" }[pos] || "Partagé"), L - marge, y + pas / 2 + taille * 0.36);
+      ctx.textAlign = "left";
+      y += pas;
+    }
+    storyPied(ctx, sourceTxt + (censure ? " Barre : part des députés du groupe ayant voté la censure." : " Barre : pour · contre · abstention, sur les membres du groupe."));
+  }
+
+  else if(type === "sondages"){
+    const inst = INSTITUTS.find(i=>i.id===selectedInstitut); if(!inst || periodeReserveSondages()) return null;
+    y = storyCadre(ctx, "Présidentielle 2027 · sondage");
+    y = storyTexte(ctx, `Intentions de vote au 1er tour`, marge, y, { taille:62, poids:600, police:"Newsreader", max:2 });
+    y = storyTexte(ctx, `${inst.nom}, enquête du ${inst.date} · ${inst.echantillon}`, marge, y + 4, { taille:30, couleur:STORY.doux, max:2 }) + 30;
+    const liste = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1])).slice(0, 10);
+    const maxi = Math.max(...liste.map(c=>c.r[1]));
+    const pas = Math.min(112, (1560 - y) / liste.length);
+    const fr = n => String(n).replace(".", ",");
+    for(const c of liste){
+      ctx.font = `600 34px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(c.nom, marge, y + 36);
+      const lib = c.r[0] === c.r[1] ? `${fr(c.r[0])} %` : `${fr(c.r[0])}–${fr(c.r[1])} %`;
+      ctx.font = `600 40px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 38); ctx.textAlign = "left";
+      storyBarre(ctx, marge, y + 54, largeur, 22, [[(c.r[0] + c.r[1]) / 2, c.couleur]], maxi);
+      y += pas;
+    }
+    const erreur = inst.n ? ` Marge d'erreur : jusqu'à ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} pts.` : "";
+    storyPied(ctx, `${inst.nom}, ${inst.date}, ${inst.echantillon}.${erreur} Notice : commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
+    nom = `sondage-${slugDep(inst.nom)}`;
+  }
+
+  else if(type === "depute"){
+    const d = DEPUTES?.find(x=>x.id===deputeOuvert); if(!d) return null;
+    const p = partiDepute(d), s = d.stats, exprimes = s.pour + s.contre + s.abst;
+    y = storyCadre(ctx, "Votre député");
+    const photo = await storyImage(`photos/deputes/${d.id}.jpg`);
+    const r = 110, cx = marge + r, cy = y + r + 10;
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
+    if(photo){ const h = 2 * r * photo.naturalHeight / photo.naturalWidth; ctx.drawImage(photo, cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h); }
+    else { ctx.fillStyle = p.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
+    ctx.restore();
+    ctx.lineWidth = 8; ctx.strokeStyle = p.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
+    let ty = storyTexte(ctx, d.nom, marge + 2 * r + 40, y + 20, { taille:60, poids:600, police:"Newsreader", largeur:largeur - 2 * r - 40, max:2, interligne:1.05 });
+    storyTexte(ctx, p.nom, marge + 2 * r + 40, ty, { taille:30, poids:600, couleur:STORY.doux, largeur:largeur - 2 * r - 40, max:2 });
+    y = cy + r + 30;
+    y = storyTexte(ctx, `${d.f ? "Députée" : "Député"} de ${circoDepute(d)} (${d.numDep})`, marge, y, { taille:32, couleur:STORY.doux, max:2 }) + 24;
+    const possibles = [...d.votes].filter(c=>c !== ".").length, presents = [...d.votes].filter(c=>"pca".includes(c)).length;
+    const cartes = [[`${presents}/${possibles}`, "votes clés où il a voté"], [pctFr(exprimes, s.scrutins), "de tous les scrutins"], [formatNombre(s.ecarts), "votes contre son groupe"]];
+    cartes.forEach(([v, lib], i)=>{
+      const x = marge + i * (largeur / 3);
+      ctx.font = `600 56px "Newsreader"`; ctx.fillStyle = i === 0 ? STORY.bleu : STORY.encre; ctx.fillText(v, x, y + 58);
+      storyTexte(ctx, d.f ? lib.replace(" il ", " elle ") : lib, x, y + 76, { taille:24, couleur:STORY.doux, largeur:largeur / 3 - 20, max:2 });
+    });
+    y += 170;
+    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
+    ctx.fillText("SES DERNIERS VOTES CLÉS", marge, y); ctx.letterSpacing = "0px";
+    y += 24;
+    const LIB = { p:["POUR", STORY.vert], c:["CONTRE", STORY.rouge], a:["ABST.", STORY.ambre], n:["NON-VOTANT", STORY.pale], "-":["PAS VOTÉ", STORY.pale] };
+    const derniers = DEPUTES_CLES.map((numero, i)=>({ code:d.votes[i], loi:LOIS.find(l=>l.numero===numero) })).filter(x=>x.code !== "." && x.loi).slice(0, 6);
+    for(const { code, loi } of derniers){
+      const [lib, coul] = LIB[code] || LIB["-"];
+      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, largeur, 2);
+      const fin = storyTexte(ctx, titreLoi(loi), marge, y + 8, { taille:28, largeur:largeur - 220, max:2 });
+      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = coul; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 46); ctx.textAlign = "left";
+      y = Math.max(fin, y + 70) + 8;
+      if(y > 1540) break;
+    }
+    storyPied(ctx, "Votes nominatifs de l'Assemblée nationale. Un taux bas ne veut pas dire qu'un député ne travaille pas (commissions, circonscription).");
+    nom = `depute-${slugDep(d.nom)}`;
+  }
+
+  else if(type === "commune"){
+    const dep = info.dep, commune = info.commune;
+    if(!ELECTIONS.has(dep)) ELECTIONS.set(dep, lireJSON(`data/elections/${dep}.json`));
+    const data = await ELECTIONS.get(dep), r = data?.communes?.[commune];
+    if(!r) return null;
+    y = storyCadre(ctx, "Présidentielle 2022 · résultats");
+    y = storyTexte(ctx, commune, marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+    y = storyTexte(ctx, data.departement || "", marge, y, { taille:32, couleur:STORY.doux, max:1 }) + 20;
+    const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + " %";
+    const tour = (t, titre, n, pas)=>{
+      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
+      ctx.fillText(titre, marge, y + 20); ctx.letterSpacing = "0px";
+      y += 40;
+      const lignes = (r[t] || []).map((v, i)=>[data.candidats[t][i], v]).sort((a, b)=>b[1] - a[1]);
+      const maxi = lignes[0]?.[1] || 1;
+      for(const [nomC, v] of lignes.slice(0, n)){
+        ctx.font = `600 32px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(nomC, marge, y + 32);
+        ctx.font = `600 36px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(pct(v), L - marge, y + 34); ctx.textAlign = "left";
+        storyBarre(ctx, marge, y + 46, largeur, 18, [[v, COULEURS_2022[nomC] || "#8A8C94"]], t === "t2" ? 1000 : maxi);
+        y += pas;
+      }
+      const autres = lignes.slice(n).reduce((a, [, v])=>a + v, 0);
+      if(autres){ storyTexte(ctx, `Autres candidats : ${pct(autres)}`, marge, y - 10, { taille:26, couleur:STORY.doux, max:1 }); y += 40; }
+      y += 20;
+    };
+    tour("t1", "1ER TOUR · 10 AVRIL 2022", 8, 84);
+    if(r.t2) tour("t2", "2D TOUR · 24 AVRIL 2022", 2, 84);
+    storyPied(ctx, "Résultats définitifs du ministère de l'Intérieur (data.gouv.fr), en % des suffrages exprimés dans la commune.");
+    nom = `presidentielle-2022-${slugDep(commune)}`;
+  }
+  else return null;
+
+  const blob = await new Promise(res=> c.toBlob(res, "image/png"));
+  return { blob, apercu: c.toDataURL("image/jpeg", 0.85), nom: nom + ".png" };
+}
+
+let storyCourante = null;
+async function ouvrirStory(type, info){
+  const fond = document.getElementById("story-fond");
+  fond.hidden = false;
+  document.getElementById("story-apercu").removeAttribute("src");
+  document.getElementById("story-etat").textContent = "Préparation de l'image…";
+  storyCourante = await dessinerStory(type, info).catch(e=>{ console.warn(e); return null; });
+  if(!storyCourante){ document.getElementById("story-etat").textContent = "Impossible de préparer cette image."; return; }
+  document.getElementById("story-apercu").src = storyCourante.apercu;
+  document.getElementById("story-etat").textContent = "";
+  const fichier = new File([storyCourante.blob], storyCourante.nom, { type:"image/png" });
+  document.getElementById("story-partager").hidden = !(navigator.canShare && navigator.canShare({ files:[fichier] }));
+  document.getElementById("story-aide").textContent = document.getElementById("story-partager").hidden
+    ? "Enregistrez l'image, puis ajoutez-la à votre story (Instagram, WhatsApp, Snapchat…) depuis vos photos."
+    : "« Partager » ouvre directement Instagram, WhatsApp, Snapchat… Vous pouvez aussi enregistrer l'image.";
+  storyCourante.fichier = fichier;
+  document.getElementById(document.getElementById("story-partager").hidden ? "story-telecharger" : "story-partager").focus();
+}
+function fermerStory(){ document.getElementById("story-fond").hidden = true; storyCourante = null; }
+document.getElementById("story-fermer").addEventListener("click", fermerStory);
+document.getElementById("story-fond").addEventListener("click", e=>{ if(e.target.id === "story-fond") fermerStory(); });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape" && !document.getElementById("story-fond").hidden) fermerStory(); });
+document.getElementById("story-partager").addEventListener("click", async ()=>{
+  if(!storyCourante?.fichier) return;
+  try { await navigator.share({ files:[storyCourante.fichier] }); } catch(e){ /* partage annulé */ }
+});
+document.getElementById("story-telecharger").addEventListener("click", ()=>{
+  if(!storyCourante) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(storyCourante.blob);
+  a.download = storyCourante.nom;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(a.href), 5000);
+  afficherToast("Image enregistrée : ajoutez-la à votre story depuis vos photos.");
+});
+document.addEventListener("click", (e)=>{
+  const b = e.target.closest && e.target.closest(".bouton-story");
+  if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  ouvrirStory(b.dataset.story, b.dataset.story === "commune" ? { dep:b.dataset.dep, commune:b.dataset.commune } : b.dataset.id);
+});
 
 /* ---------- Partage (bouton « Partager » et carte d'aperçu pour les réseaux) ---------- */
 
