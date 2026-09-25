@@ -26,6 +26,8 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Ordre du jour des séances de l'Assemblée (21 jours) et présence en commission | `fetch-agenda-an.js` | agenda open data de l'Assemblée nationale (feuilles de présence des 8 commissions permanentes) | `data/agenda-an.json`, `data/commissions.json` |
 | Logos des partis (fichiers libres de Wikimedia Commons, liste dans `data/logos.json`) | `fetch-logos.js` | commons.wikimedia.org | `icons/partis/` |
 | Photos des députés et sénateurs (104 px, hébergées sur le site) | `photos.cjs` | assemblee-nationale.fr et senat.fr | `photos/` |
+| Pages d'aperçu des sénateurs et du dernier sondage (partage, moteurs de recherche) | `partage.cjs` | `data/senateurs.json`, `data/sondages.json` | `s/`, `p/` |
+| Fichier des nouveautés pour les alertes (derniers votes clés, vote de chaque député, dernier sondage) | `partage.cjs` | `data/deputes.json`, `data/sondages.json` | `data/alertes.json` |
 | Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |

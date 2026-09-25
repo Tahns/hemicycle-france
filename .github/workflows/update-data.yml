@@ -102,7 +102,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ v/ d/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
+          git add data/ v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de données — rien à committer."
           else

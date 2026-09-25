@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Hémicycle France · La politique française, preuves à l'appui</title>
-<meta name="description" content="Ce que votent les députés, groupe par groupe, qui dirige les partis, où en sont les sondages de la présidentielle 2027 et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
+<meta name="description" content="Ce que votent les députés et les sénateurs, groupe par groupe, les sondages de la présidentielle 2027, les résultats par commune, le Gouvernement et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
 <meta name="theme-color" content="#F5F1E8">
 <link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Hémicycle France","alternateName":"Hémicycle","url":"https://tahns.github.io/hemicycle-france/","inLanguage":"fr","description":"Ce que votent les députés et les sénateurs, groupe par groupe, les sondages de la présidentielle 2027, les résultats par commune et les grands chiffres du pays. Chaque information renvoie à sa source."}</script>
 <link rel="alternate" type="application/rss+xml" title="Hémicycle France · Votes de l'Assemblée" href="feed.xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -727,6 +728,16 @@
   .story-bouton{min-height:46px; border:none; border-radius:6px; background:var(--accent); color:#fff; font:600 15px var(--font-body); cursor:pointer;}
   .story-bouton.secondaire{background:none; color:var(--accent); border:1.5px solid var(--accent);}
   .story-aide{font-size:12.5px; color:var(--text-faint); margin:10px 0 0;}
+  .alertes-form label{display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:15px; border-bottom:1px solid var(--border-soft);}
+  .alertes-form input{margin-top:3px; width:18px; height:18px; accent-color:var(--accent); flex:none;}
+  #alertes-etat{margin:10px 0;}
+  .partage-actions{margin:6px 0 14px;}
+  .faire-connaitre{display:flex; flex-wrap:wrap; gap:14px 28px; align-items:center; justify-content:space-between; margin:34px 0 0; padding:18px 20px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:6px;}
+  .faire-connaitre b{display:block; font-family:var(--font-display); font-size:21px; font-weight:600;}
+  .faire-connaitre span{font-size:14px; color:var(--text-soft);}
+  .faire-connaitre-actions{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; font-size:14.5px;}
+  .bouton-plein{min-height:42px; padding:0 18px; border:none; border-radius:6px; background:var(--accent); color:#fff; font:600 15px var(--font-body); cursor:pointer;}
+  :root[data-theme="sombre"] .bouton-plein{color:#1C1B18;}
   .bouton-story::before{content:""; display:inline-block; width:.85em; height:.85em; margin-right:.35em; vertical-align:-1px; border:2px solid currentColor; border-radius:4px;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:rgba(20,18,14,.45);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
@@ -1101,6 +1112,15 @@
       <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Qu'auriez-vous voté à la place des députés ?</span></div>
      </div>
     </div>
+    <div class="faire-connaitre">
+      <div><b>Le site vous est utile ?</b><span>Faites-le connaître : il est gratuit, sans publicité et sans compte.</span></div>
+      <div class="faire-connaitre-actions">
+        <button type="button" class="bouton-plein bouton-partage" data-partage="site">Partager le site</button>
+        <button type="button" class="lien-bouton bouton-copier" data-copier="site">Copier le lien</button>
+        <button type="button" class="lien-bouton" data-alertes="">Recevoir les alertes</button>
+        <a href="feed.xml">Flux RSS</a>
+      </div>
+    </div>
   </section>
 
   <section class="view" id="view-scrutin">
@@ -1182,6 +1202,7 @@
     </div>
     <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button></div>
     <div id="histo-list"></div>
   </section>
 
@@ -1289,6 +1310,7 @@
       <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="justice">Partager cette page</button></div>
     <div class="filtre-inline"><span class="filtre-label" id="justice-parti-label">Parti</span>
       <div class="justice-filter-bar" id="justice-filter-bar" role="group" aria-labelledby="justice-parti-label"></div></div>
     <div id="justice-list"></div>
@@ -1383,6 +1405,7 @@
       <ul>
         <li>Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
         <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
+        <li>Si vous activez les alertes, vos choix (et le député suivi) sont gardés sur votre appareil ; votre téléphone vérifie lui-même quelques fois par jour le fichier public des nouveautés du site. Aucun compte, aucune adresse, aucun identifiant de notification n'est transmis ni conservé par le site. Pour les arrêter : « Recevoir les alertes » → « Désactiver », ou les réglages de notification du téléphone.</li>
         <li>La date de votre dernière visite est aussi gardée dans votre navigateur, pour vous signaler les nouveaux votes et sondages depuis. Elle n'est jamais transmise ; effacer les données du site dans votre navigateur la supprime.</li>
         <li>Les polices de caractères sont hébergées sur le site : votre navigateur ne contacte aucun service tiers.</li>
         <li>Pour permettre la lecture hors connexion, votre navigateur conserve une copie des pages et des données publiques déjà consultées. Cette copie reste sur votre appareil ; vous pouvez l'effacer à tout moment depuis les réglages du navigateur.</li>
@@ -1414,7 +1437,9 @@
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
-    <a href="feed.xml">Flux RSS des votes</a>
+    <a href="feed.xml">Flux RSS des votes</a> ·
+    <button type="button" class="lien-bouton bouton-partage" data-partage="site">Partager le site</button> ·
+    <button type="button" class="lien-bouton" data-alertes="">Recevoir les alertes</button>
   </p>
   <div class="footer-grid">
     <div>
@@ -1436,6 +1461,22 @@
 
 <div class="tooltip" id="tooltip"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="story-fond" id="alertes-fond" hidden>
+  <div class="story-boite" role="dialog" aria-modal="true" aria-labelledby="alertes-titre">
+    <div class="story-tete"><b id="alertes-titre">Recevoir les alertes</b><button type="button" class="lien-bouton" id="alertes-fermer">Fermer</button></div>
+    <form id="alertes-form" class="alertes-form">
+      <label><input type="checkbox" name="votes"><span>Les nouveaux votes clés de l'Assemblée</span></label>
+      <label><input type="checkbox" name="sondages"><span>Les nouveaux sondages de la présidentielle</span></label>
+      <label><input type="checkbox" name="depute"><span>Les votes de <span id="alertes-depute-nom">votre député</span></span></label>
+    </form>
+    <p class="story-etat" id="alertes-etat" aria-live="polite"></p>
+    <div class="story-actions">
+      <button type="button" class="story-bouton" id="alertes-activer">Activer les alertes</button>
+      <button type="button" class="story-bouton secondaire" id="alertes-desactiver" hidden>Désactiver les alertes</button>
+    </div>
+    <p class="story-aide">Aucun compte, aucune adresse : vos choix restent sur cet appareil. Vous pouvez aussi suivre les votes avec le <a href="feed.xml">flux RSS</a>.</p>
+  </div>
+</div>
 <div class="story-fond" id="story-fond" hidden>
   <div class="story-boite" role="dialog" aria-modal="true" aria-labelledby="story-titre">
     <div class="story-tete"><b id="story-titre">Image pour une story</b><button type="button" class="lien-bouton" id="story-fermer" aria-label="Fermer">Fermer</button></div>
@@ -2484,6 +2525,7 @@ function renderAgendaAN(){
   };
   const jour = (j)=>`<div class="an-jour"><div class="jour">${esc(jourFr(j.date))}</div><ul>${j.points.some(p=>p.type==="qag") ? `<li><span class="tag">Questions au Gouvernement</span></li>` : ""}${j.points.map(ligne).join("")}</ul></div>`;
   el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé chaque matin. Il peut encore changer.</span></h3>
+    ${boutonsPartage("agenda")}
     ${jours.slice(0,4).map(jour).join("")}
     ${jours.length > 4 ? `<details><summary>Les ${jours.length - 4} jours de séance suivants</summary>${jours.slice(4).map(jour).join("")}</details>` : ""}
     <h3 class="section-titre">Congrès, meetings, élections</h3>`;
@@ -2853,6 +2895,13 @@ function renderCandidats(){
 
 let QUIZ_LOIS = []; // choisi après chargement des données (choisirQuestionsQuiz)
 let quizReponses = {}; // { loiId: "pour"|"contre"|"abst" }
+let QUIZ_RESULTAT = null; // accord avec chaque groupe, pour le partage du résultat
+// « Mes votes sont les plus proches de ceux du groupe X (88 %). » ; en cas d'égalité, tous les groupes ex aequo
+function quizPhrase(sc, sujet){
+  const ex = sc.filter(x=>x.pct === sc[0].pct);
+  return ex.length === 1 ? `${sujet} votes sont les plus proches de ceux du groupe ${sc[0].nom} (${sc[0].pct} %).`
+    : `${sujet} votes sont aussi proches (${sc[0].pct} %) de ceux de ${ex.length} groupes : ${ex.map(x=>x.nom).join(", ")}.`;
+}
 
 // Questions : les derniers votes solennels sur l'ensemble d'un texte (un par texte), puis la dernière censure
 function choisirQuestionsQuiz(){
@@ -2927,13 +2976,15 @@ function showQuizResult(){
     return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0, comptes };
   }).filter(s=>s.comptes>0).sort((a,c)=>c.pct-a.pct);
 
+  QUIZ_RESULTAT = scores;
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
     <div class="quiz-card">
       <div class="quiz-progress">Votre résultat</div>
-      <div class="quiz-question">Vos réponses sont les plus proches de celles du groupe <b style="color:${scores[0].couleur}">${esc(scores[0].nom)}</b>.</div>
+      <div class="quiz-question">${scores.filter(x=>x.pct === scores[0].pct).length > 1 ? esc(quizPhrase(scores, "Vos")) : `Vos réponses sont les plus proches de celles du groupe <b style="color:${scores[0].couleur}">${esc(scores[0].nom)}</b>.`}</div>
       <p class="sondage-disclaimer" style="margin-top:0">Chaque pourcentage indique la part des questions sur lesquelles votre choix correspond à la position de la majorité du groupe.</p>
       <div id="quiz-results-list"></div>
+      <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="quiz">Défier mes amis</button><button type="button" class="lien-bouton bouton-story" data-story="quiz">Story de mon résultat</button></div>
       <div class="quiz-recap">
         ${QUIZ_LOIS.map(loi=>{
           const lib = {pour:"pour",contre:"contre",abst:"abstention"};
@@ -3010,6 +3061,7 @@ function renderGouvernement(){
   const bloc = (titre, liste)=> liste.length ? `<details class="gouv-bloc"><summary>${titre} (${liste.length})</summary><div class="groupes-grid">${liste.map(carte).join("")}</div></details>` : "";
   el.innerHTML = `
     <h3 class="section-titre">Le Gouvernement <span>${esc(g.nom)}${g.depuis ? `, nommé le ${esc(dateCourte(g.depuis))}` : ""}. ${g.membres.length} membres, d'après les données de l'Assemblée nationale, mises à jour automatiquement.</span></h3>
+    ${boutonsPartage("gouvernement")}
     <div class="groupes-grid">${pm.map(carte).join("")}</div>
     ${bloc("Les ministres", ministres)}${bloc("Les ministres délégués", delegues)}`;
 }
@@ -3407,6 +3459,17 @@ document.getElementById("senateur-search").addEventListener("input", ()=>{
   senateurRechercheTimer = setTimeout(renderSenateursRecherche, 150);
 });
 
+function statsSenateur(s){
+  const lignes = SENATEURS_CLES.map((cle, i)=>({ code:s.votes[i], scr:SENAT.find(x=>x.id===cle) })).filter(x=>x.code && x.code !== "." && x.scr);
+  const presents = lignes.filter(x=>"pca".includes(x.code));
+  // Position majoritaire de son groupe actuel sur chaque texte
+  const ecarts = presents.filter(({ code, scr })=>{
+    const v = scr.groupes?.[s.groupe]; if(!v || s.groupe === "NI") return false;
+    const maj = [["p",v.pour],["c",v.contre],["a",v.abst]].sort((a,b)=>b[1]-a[1]);
+    return maj[0][1] > maj[1][1] && maj[0][0] !== code;
+  }).length;
+  return { lignes, presents, ecarts };
+}
 async function ouvrirSenateur(id){
   await Promise.all([chargerSenateurs(), chargerSenat()]);
   const s = SENATEURS.find(x=>x.id===id);
@@ -3417,14 +3480,7 @@ async function ouvrirSenateur(id){
   fiche.hidden = false;
   const g = groupeSenateur(s);
   const LIB = { p:["Pour","tag-pour"], c:["Contre","tag-contre"], a:["Abstention","abst"], n:["N'a pas pris part au vote","absent"] };
-  const lignes = SENATEURS_CLES.map((cle, i)=>({ code:s.votes[i], scr:SENAT.find(x=>x.id===cle) })).filter(x=>x.code && x.code !== "." && x.scr);
-  const presents = lignes.filter(x=>"pca".includes(x.code));
-  // Position majoritaire de son groupe actuel sur chaque texte
-  const ecarts = presents.filter(({ code, scr })=>{
-    const v = scr.groupes?.[s.groupe]; if(!v || s.groupe === "NI") return false;
-    const maj = [["p",v.pour],["c",v.contre],["a",v.abst]].sort((a,b)=>b[1]-a[1]);
-    return maj[0][1] > maj[1][1] && maj[0][0] !== code;
-  }).length;
+  const { lignes, presents, ecarts } = statsSenateur(s);
   const initiales = s.nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
   fiche.innerHTML = `
     <button type="button" class="lien-bouton depute-retour" id="senateur-retour">← Le Sénat</button>
@@ -3436,6 +3492,8 @@ async function ouvrirSenateur(id){
     <p class="depute-lieu">${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "représentant les Français établis hors de France" : `de ${esc(s.dep)}`}.</p>
     <div class="depute-actions">
       <a href="https://www.senat.fr/${s.slug ? `senateur/${encodeURIComponent(s.slug)}.html` : "senateurs/senatl.html"}" target="_blank" rel="noopener">Fiche officielle au Sénat</a>
+      <button type="button" class="lien-bouton bouton-partage" data-partage="senateur">Partager cette fiche</button>
+      <button type="button" class="lien-bouton bouton-story" data-story="senateur">Story</button>
     </div>
     <div class="stat-cards">
       <div class="stat-card"><div class="stat-label">Votes sur les textes</div><div class="stat-value accent">${presents.length} / ${lignes.length}</div><div class="stat-sub">votes sur l'ensemble d'un texte où ${s.f ? "elle" : "il"} s'est prononcé${s.f ? "e" : ""}</div></div>
@@ -3697,6 +3755,7 @@ function renderDeputeFiche(d){
       <a href="https://www.assemblee-nationale.fr/dyn/deputes/${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fiche officielle à l'Assemblée</a>
       <button type="button" class="lien-bouton bouton-partage" data-partage="depute">Partager cette fiche</button>
       <button type="button" class="lien-bouton bouton-story" data-story="depute">Story</button>
+      <button type="button" class="lien-bouton" data-alertes="${esc(d.id)}">M'alerter de ses votes</button>
     </div>
     <div class="stat-cards">
       <div class="stat-card"><div class="stat-label">Votes clés</div><div class="stat-value accent">${presents} / ${possibles}</div><div class="stat-sub">textes et motions de censure où ${d.f ? "elle" : "il"} a voté</div></div>
@@ -3758,6 +3817,7 @@ async function renderClassements(){
   const top = DEPUTES.map(d => [d, k.val(d, a?.deputes, c?.deputes)]).filter(([, v]) => v != null).sort((x, y) => y[1] - x[1]).slice(0, 10);
   corps.innerHTML = `<div class="theme-filter-bar" role="group" aria-label="Choisir un classement">${Object.entries(CLASSEMENTS).map(([id, x]) => `<button type="button" class="theme-chip ${id === classementChoisi ? "selected" : ""}" aria-pressed="${id === classementChoisi}" data-c="${id}">${x.titre}</button>`).join("")}</div>
     ${top.length ? top.map(([d, v], i) => { const p = partiDepute(d); return `<button type="button" class="classement-ligne" data-id="${esc(d.id)}"><span class="rang">${i + 1}</span><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(d.nom)}</b><small>${esc(d.groupe)} · ${esc(d.dep)}</small></span><span class="val">${k.fmt(v)}</span></button>`; }).join("") : `<p class="no-result-msg">Classement indisponible pour le moment.</p>`}
+    ${boutonsPartage("classement")}
     <p class="depute-note">${k.note} Un classement ne dit pas tout du travail d'un élu : rapports, travail en circonscription ou négociations n'apparaissent dans aucune donnée publique.</p>`;
   corps.querySelectorAll("[data-c]").forEach(b => b.addEventListener("click", () => { classementChoisi = b.dataset.c; renderClassements(); }));
   corps.querySelectorAll(".classement-ligne").forEach(b => b.addEventListener("click", () => ouvrirDepute(b.dataset.id)));
@@ -4114,6 +4174,129 @@ async function dessinerStory(type, info){
     storyPied(ctx, "Résultats définitifs du ministère de l'Intérieur (data.gouv.fr), en % des suffrages exprimés dans la commune.");
     nom = `presidentielle-2022-${slugDep(commune)}`;
   }
+  else if(type === "senateur"){
+    const s = SENATEURS?.find(x=>x.id===senateurOuvert); if(!s) return null;
+    const g = groupeSenateur(s), { lignes, presents, ecarts } = statsSenateur(s);
+    y = storyCadre(ctx, s.f ? "Votre sénatrice" : "Votre sénateur");
+    const photo = await storyImage(`photos/senateurs/${s.id}.jpg`);
+    const r = 110, cx = marge + r, cy = y + r + 10;
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
+    if(photo) ctx.drawImage(photo, cx - r, cy - r, 2 * r, 2 * r); else { ctx.fillStyle = g.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
+    ctx.restore();
+    ctx.lineWidth = 8; ctx.strokeStyle = g.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
+    const ty = storyTexte(ctx, s.nom, marge + 2 * r + 40, y + 20, { taille:60, poids:600, police:"Newsreader", largeur:largeur - 2 * r - 40, max:2, interligne:1.05 });
+    storyTexte(ctx, g.nom, marge + 2 * r + 40, ty, { taille:30, poids:600, couleur:STORY.doux, largeur:largeur - 2 * r - 40, max:2 });
+    y = cy + r + 30;
+    y = storyTexte(ctx, `${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "des Français de l'étranger" : `de ${s.dep}`}`, marge, y, { taille:32, couleur:STORY.doux, max:2 }) + 24;
+    const cartes = [[`${presents.length}/${lignes.length}`, "textes où elle/il s'est prononcé"], [["p","c","a"].map(k=>presents.filter(x=>x.code===k).length).join(" · "), "pour · contre · abst."], [formatNombre(ecarts), "votes contre son groupe"]];
+    cartes.forEach(([v, lib], i)=>{
+      const x = marge + i * (largeur / 3);
+      ctx.font = `600 52px "Newsreader"`; ctx.fillStyle = i === 0 ? STORY.bleu : STORY.encre; ctx.fillText(v, x, y + 56);
+      storyTexte(ctx, lib.replace("elle/il", s.f ? "elle" : "il").replace("prononcé", s.f ? "prononcée" : "prononcé"), x, y + 70, { taille:24, couleur:STORY.doux, largeur:largeur / 3 - 20, max:2 });
+    });
+    y += 170;
+    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
+    ctx.fillText("SES DERNIERS VOTES SUR UN TEXTE", marge, y); ctx.letterSpacing = "0px";
+    y += 24;
+    const LIB = { p:["POUR", STORY.vert], c:["CONTRE", STORY.rouge], a:["ABST.", STORY.ambre], n:["PAS VOTÉ", STORY.pale] };
+    for(const { code, scr } of lignes.slice(0, 6)){
+      const [lib, coul] = LIB[code] || LIB.n;
+      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, largeur, 2);
+      const fin = storyTexte(ctx, titreSenat(scr), marge, y + 8, { taille:28, largeur:largeur - 220, max:2 });
+      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = coul; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 46); ctx.textAlign = "left";
+      y = Math.max(fin, y + 70) + 8;
+      if(y > 1540) break;
+    }
+    storyPied(ctx, "Vote de chaque sénateur relevé sur les pages officielles des scrutins du Sénat, recoupé avec le total officiel.");
+    nom = `senateur-${slugDep(s.nom)}`;
+  }
+
+  else if(type === "gouvernement"){
+    const g = GOUVERNEMENT; if(!g?.membres?.length) return null;
+    y = storyCadre(ctx, "Qui gouverne ?");
+    y = storyTexte(ctx, `Le ${g.nom}`, marge, y, { taille:66, poids:600, police:"Newsreader", max:2 });
+    y = storyTexte(ctx, `Nommé le ${dateCourte(g.depuis)} · ${g.membres.length} membres`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 20;
+    const delegue = m => /délégué|Secrétaire/i.test(m.qualite + " " + m.fonction.split(",")[0]);
+    const liste = g.membres.filter(m=>!delegue(m));
+    const pas = Math.min(64, (1570 - y) / liste.length);
+    for(const m of liste){
+      const pm = m.qualite === "Premier ministre";
+      ctx.font = `${pm ? 700 : 600} ${pm ? 32 : 27}px "Public Sans"`; ctx.fillStyle = STORY.encre;
+      ctx.fillText(m.nom, marge, y + pas * 0.45);
+      const f = m.fonction;
+      ctx.font = `400 ${Math.min(22, pas * 0.36)}px "Public Sans"`; ctx.fillStyle = STORY.doux;
+      ctx.fillText(storyLignes(ctx, pm ? "Premier ministre" : f, largeur, 1)[0], marge, y + pas * 0.85);
+      y += pas;
+    }
+    storyPied(ctx, `Et ${g.membres.length - liste.length} ministres délégués. Source : Assemblée nationale, mandats des membres du Gouvernement.`);
+    nom = "gouvernement";
+  }
+
+  else if(type === "classement"){
+    const k = CLASSEMENTS[classementChoisi];
+    const [a, cm] = await Promise.all([ACTIVITE, COMMISSIONS]);
+    const top = DEPUTES.map(d => [d, k.val(d, a?.deputes, cm?.deputes)]).filter(([, v]) => v != null).sort((x, z) => z[1] - x[1]).slice(0, 10);
+    if(!top.length) return null;
+    y = storyCadre(ctx, "Classement des députés");
+    y = storyTexte(ctx, k.titre, marge, y, { taille:62, poids:600, police:"Newsreader", max:2 }) + 16;
+    const photos = await Promise.all(top.map(([d]) => storyImage(`photos/deputes/${d.id}.jpg`)));
+    const pas = Math.min(104, (1560 - y) / top.length);
+    top.forEach(([d, v], i)=>{
+      const p = partiDepute(d), r = pas * 0.36, cy = y + pas / 2;
+      ctx.font = `700 30px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.fillText(String(i + 1), marge, cy + 10);
+      const cx = marge + 60 + r;
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
+      if(photos[i]){ const h = 2 * r * photos[i].naturalHeight / photos[i].naturalWidth; ctx.drawImage(photos[i], cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h); } else { ctx.fillStyle = p.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
+      ctx.restore();
+      ctx.lineWidth = 4; ctx.strokeStyle = p.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
+      ctx.font = `600 32px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(d.nom, cx + r + 22, cy - 2);
+      ctx.font = `400 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(`${d.groupe} · ${d.dep}`, cx + r + 22, cy + 30);
+      ctx.font = `600 44px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.textAlign = "right"; ctx.fillText(k.fmt(v), L - marge, cy + 14); ctx.textAlign = "left";
+      y += pas;
+    });
+    storyPied(ctx, k.note);
+    nom = `classement-${classementChoisi}`;
+  }
+
+  else if(type === "agenda"){
+    const jours = (AGENDA_AN?.jours || []).filter(j=> j.date >= aujourdhuiISO());
+    if(!jours.length) return null;
+    y = storyCadre(ctx, "Assemblée nationale · agenda");
+    y = storyTexte(ctx, "Ce que les députés examinent ces prochains jours", marge, y, { taille:58, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 16;
+    for(const j of jours){
+      if(y > 1480) break;
+      const titre = new Date(j.date + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
+      ctx.fillStyle = STORY.encre; ctx.fillRect(marge, y, largeur, 3);
+      ctx.font = `700 28px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(titre.charAt(0).toUpperCase() + titre.slice(1), marge, y + 44);
+      y += 60;
+      const points = [...(j.points.some(p=>p.type==="qag") ? [{ type:"qag", objet:"Questions au Gouvernement" }] : []), ...j.points.filter(p=>p.type !== "qag")];
+      for(const p of points.slice(0, 4)){
+        if(y > 1520) break;
+        const txt = (p.type === "vote" ? "Vote solennel : " : "") + p.objet;
+        y = storyTexte(ctx, "• " + txt, marge, y, { taille:27, poids:p.type === "vote" ? 700 : 400, couleur:p.type === "qag" ? STORY.doux : STORY.encre, max:2, interligne:1.2 }) + 4;
+      }
+      y += 12;
+    }
+    storyPied(ctx, "Ordre du jour des séances publiques publié par l'Assemblée nationale. Il peut encore changer.");
+    nom = "agenda-assemblee";
+  }
+
+  else if(type === "quiz"){
+    const sc = QUIZ_RESULTAT; if(!sc?.length) return null;
+    y = storyCadre(ctx, "Mon résultat au quiz");
+    y = storyTexte(ctx, "Qu'aurais-je voté à la place des députés ?", marge, y, { taille:60, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 10;
+    y = storyTexte(ctx, quizPhrase(sc, "Mes"), marge, y, { taille:34, poids:600, couleur:sc.filter(x=>x.pct===sc[0].pct).length > 1 ? STORY.encre : sc[0].couleur, max:3 }) + 24;
+    const pas = Math.min(92, (1470 - y) / Math.min(sc.length, 8));
+    for(const x of sc.slice(0, 8)){
+      ctx.font = `600 30px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, x.nom, largeur - 140, 1)[0], marge, y + 32);
+      ctx.font = `600 38px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(`${x.pct} %`, L - marge, y + 34); ctx.textAlign = "left";
+      storyBarre(ctx, marge, y + 46, largeur, 18, [[x.pct, x.couleur]], 100);
+      y += pas;
+    }
+    storyTexte(ctx, "Et vous ? Faites le quiz :", marge, 1520, { taille:34, poids:700, couleur:STORY.bleu, max:1 });
+    storyPied(ctx, "Part des questions où ma réponse correspond à la position de la majorité du groupe, sur de vrais votes de l'Assemblée.");
+    nom = "quiz-hemicycle-france";
+  }
   else return null;
 
   const blob = await new Promise(res=> c.toBlob(res, "image/png"));
@@ -4162,6 +4345,86 @@ document.addEventListener("click", (e)=>{
   ouvrirStory(b.dataset.story, b.dataset.story === "commune" ? { dep:b.dataset.dep, commune:b.dataset.commune } : b.dataset.id);
 });
 
+/* ---------- Alertes (notifications) : sans serveur ni compte ----------
+   Le service worker relit data/alertes.json de temps en temps (synchronisation périodique en
+   arrière-plan, application installée) et affiche une notification locale. Les réglages restent
+   dans le navigateur (Cache Storage, lisible par le service worker) : rien n'est transmis. */
+const ALERTES_CACHE = "hemicycle-alertes";
+async function alertesLire(cle){ try { const r = await (await caches.open(ALERTES_CACHE)).match(cle); return r ? await r.json() : null; } catch(e){ return null; } }
+async function alertesEcrire(cle, v){ const c = await caches.open(ALERTES_CACHE); await c.put(cle, new Response(JSON.stringify(v), { headers:{ "Content-Type":"application/json" } })); }
+async function alertesPrise(){
+  if(!("serviceWorker" in navigator) || !("Notification" in window) || !window.caches) return { ok:false, raison:"navigateur" };
+  const reg = await navigator.serviceWorker.getRegistration();
+  if(!reg || !("periodicSync" in reg)) return { ok:false, raison:"arriere-plan", reg };
+  return { ok:true, reg };
+}
+const ALERTES_AIDE = {
+  navigateur: "Votre navigateur ne permet pas les alertes.",
+  "arriere-plan": /iPhone|iPad/.test(navigator.userAgent)
+    ? "Sur iPhone et iPad, Apple ne permet pas à un site de vérifier les nouveautés en arrière-plan. Suivez plutôt le flux RSS, ou revenez sur le site : les nouveautés depuis votre dernière visite s'affichent en haut de la page d'accueil."
+    : "Ce navigateur ne vérifie pas les nouveautés en arrière-plan. Utilisez Chrome, Edge ou Samsung Internet, installez le site comme une application (menu ⋮ → « Installer l'application » ou « Ajouter à l'écran d'accueil »), puis ouvrez-le depuis son icône et revenez ici. Sinon, suivez le flux RSS.",
+  installer: "Pour recevoir les alertes, installez d'abord le site comme une application (menu ⋮ → « Installer l'application » ou « Ajouter à l'écran d'accueil »), puis ouvrez-le depuis son icône et revenez ici.",
+  refus: "Les notifications sont bloquées pour ce site. Autorisez-les dans les réglages du navigateur, puis réessayez.",
+};
+async function ouvrirAlertes(deputeId){
+  const fond = document.getElementById("alertes-fond");
+  fond.hidden = false;
+  const prefs = (await alertesLire("prefs")) || { votes:true, sondages:true };
+  if(deputeId){ prefs.depute = deputeId; prefs.deputeNom = DEPUTES?.find(d=>d.id===deputeId)?.nom || prefs.deputeNom; }
+  const f = document.getElementById("alertes-form");
+  f.votes.checked = prefs.votes !== false; f.sondages.checked = prefs.sondages !== false;
+  f.depute.checked = !!prefs.depute && (prefs.deputeActif !== false || !!deputeId);
+  f.depute.disabled = !prefs.depute;
+  document.getElementById("alertes-depute-nom").textContent = prefs.depute ? prefs.deputeNom || "votre député" : "votre député (ouvrez sa fiche et choisissez « M'alerter de ses votes »)";
+  f.dataset.depute = prefs.depute || ""; f.dataset.deputeNom = prefs.deputeNom || "";
+  const p = await alertesPrise();
+  const etat = document.getElementById("alertes-etat");
+  document.getElementById("alertes-desactiver").hidden = !prefs.actif;
+  document.getElementById("alertes-activer").textContent = prefs.actif ? "Enregistrer" : "Activer les alertes";
+  etat.textContent = p.ok ? (prefs.actif ? "Alertes activées sur cet appareil." : "") : ALERTES_AIDE[p.raison];
+  document.getElementById("alertes-activer").hidden = !p.ok;
+}
+async function activerAlertes(){
+  const f = document.getElementById("alertes-form"), etat = document.getElementById("alertes-etat");
+  const p = await alertesPrise();
+  if(!p.ok){ etat.textContent = ALERTES_AIDE[p.raison]; return; }
+  if(await Notification.requestPermission() !== "granted"){ etat.textContent = ALERTES_AIDE.refus; return; }
+  try {
+    const perm = await navigator.permissions.query({ name:"periodic-background-sync" }).catch(()=>null);
+    if(perm && perm.state !== "granted") throw new Error("installer");
+    await p.reg.periodicSync.register("alertes", { minInterval: 6 * 3600 * 1000 });
+  } catch(e){ etat.textContent = ALERTES_AIDE.installer; return; }
+  const prefs = { actif:true, votes:f.votes.checked, sondages:f.sondages.checked, depute:f.dataset.depute || null, deputeNom:f.dataset.deputeNom || null, deputeActif:f.depute.checked };
+  await alertesEcrire("prefs", prefs);
+  // Point de départ : seules les nouveautés à venir seront signalées
+  const a = await lireJSON("data/alertes.json");
+  if(a) await alertesEcrire("etat", { vote: Math.max(0, ...a.votes.map(v=>v.numero)), sondage: a.sondage ? a.sondage.nom + "|" + a.sondage.dateFin : null });
+  etat.textContent = "C'est fait : vous serez prévenu des nouveautés choisies (le téléphone vérifie quelques fois par jour).";
+  document.getElementById("alertes-desactiver").hidden = false;
+  document.getElementById("alertes-activer").textContent = "Enregistrer";
+}
+async function desactiverAlertes(){
+  const p = await alertesPrise();
+  try { await p.reg?.periodicSync?.unregister("alertes"); } catch(e){}
+  const prefs = (await alertesLire("prefs")) || {};
+  prefs.actif = false;
+  await alertesEcrire("prefs", prefs);
+  document.getElementById("alertes-etat").textContent = "Alertes désactivées sur cet appareil.";
+  document.getElementById("alertes-desactiver").hidden = true;
+  document.getElementById("alertes-activer").textContent = "Activer les alertes";
+}
+document.getElementById("alertes-activer").addEventListener("click", activerAlertes);
+document.getElementById("alertes-desactiver").addEventListener("click", desactiverAlertes);
+document.getElementById("alertes-fermer").addEventListener("click", ()=>{ document.getElementById("alertes-fond").hidden = true; });
+document.getElementById("alertes-fond").addEventListener("click", e=>{ if(e.target.id === "alertes-fond") e.target.hidden = true; });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape") document.getElementById("alertes-fond").hidden = true; });
+document.addEventListener("click", e=>{
+  const b = e.target.closest && e.target.closest("[data-alertes]");
+  if(!b) return;
+  e.preventDefault();
+  ouvrirAlertes(b.dataset.alertes || null);
+});
+
 /* ---------- Partage (bouton « Partager » et carte d'aperçu pour les réseaux) ---------- */
 
 // Les votes clés (vote final d'un texte, censure, confiance) ont une page d'aperçu v/<numéro>.html,
@@ -4178,7 +4441,20 @@ function lienPartage(type){
     const d = DEPUTES?.find(x=>x.id===deputeOuvert);
     return d ? { titre: `${d.nom}, ${d.f ? "députée" : "député"} de ${circoDepute(d)}`, url: `${base}d/${d.id}.html` } : null;
   }
-  if(type === "sondages") return { titre: "Sondages de la présidentielle 2027", url: `${base}#sondages` };
+  if(type === "sondages") return { titre: "Sondages de la présidentielle 2027", url: `${base}p/sondages.html` };
+  if(type === "senateur"){
+    const s = SENATEURS?.find(x=>x.id===senateurOuvert);
+    return s ? { titre: `${s.nom}, ${s.f ? "sénatrice" : "sénateur"} : ses votes au Sénat`, url: `${base}s/${s.id}.html` } : null;
+  }
+  if(type === "gouvernement") return { titre: `La composition du Gouvernement${GOUVERNEMENT?.nom ? ` (${GOUVERNEMENT.nom})` : ""}`, url: `${base}#dirigeants` };
+  if(type === "classement") return { titre: `Classement des députés : ${CLASSEMENTS[classementChoisi].titre.toLowerCase()}`, url: `${base}#classement-${classementChoisi}` };
+  if(type === "agenda") return { titre: "Ce que l'Assemblée nationale examine ces prochains jours", url: `${base}#meetings` };
+  if(type === "histo"){ const g = PARTIES.find(p=>p.id===selectedPartyId); return { titre: `Comment vote le groupe ${g ? g.nom : selectedPartyId} à l'Assemblée`, url: `${base}#histo-${selectedPartyId}` }; }
+  if(type === "justice") return { titre: "Responsables politiques condamnés : les décisions de justice, sources à l'appui", url: `${base}#justice` };
+  if(type === "quiz") return QUIZ_RESULTAT
+    ? { titre: `J'ai fait le quiz d'Hémicycle France. ${quizPhrase(QUIZ_RESULTAT, "Mes")} Et vous ?`, url: `${base}#quiz` }
+    : { titre: "Qu'auriez-vous voté à la place des députés ? Le quiz d'Hémicycle France", url: `${base}#quiz` };
+  if(type === "site") return { titre: "Hémicycle France : ce que votent les députés, les sondages de 2027 et plus, sources à l'appui", url: base };
   return null;
 }
 
@@ -4208,7 +4484,14 @@ async function partager(type){
 document.addEventListener("click", (e)=>{
   const b = e.target.closest && e.target.closest(".bouton-partage");
   if(b) partager(b.dataset.partage);
+  const c = e.target.closest && e.target.closest(".bouton-copier");
+  if(c){
+    const p = lienPartage(c.dataset.copier);
+    if(p) navigator.clipboard?.writeText(p.url).then(()=> afficherToast("Lien copié."), ()=> window.prompt("Copiez ce lien :", p.url));
+  }
 });
+// Boutons « Partager » + « Story » d'une rubrique
+const boutonsPartage = (type, story = true) => `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="${type}">Partager</button>${story ? `<button type="button" class="lien-bouton bouton-story" data-story="${type}">Story</button>` : ""}</div>`;
 
 // Mode carte : index.html?carte, puis afficherCarte(numéro) compose l'image d'aperçu d'un vote
 const MODE_CARTE = new URLSearchParams(location.search).has("carte");
@@ -4276,6 +4559,13 @@ function ouvrirDepuisHash(){
     renderPartyChips();
     activateTab("histo");
     renderHistorique();
+    return true;
+  }
+  m = h.match(/^classement-([a-z]+)$/);
+  if(m && CLASSEMENTS[m[1]]){
+    classementChoisi = m[1];
+    activateTab("deputes");
+    chargerDeputes().then(()=>{ const d = document.getElementById("classements"); d.open = true; renderClassements(); d.scrollIntoView({ block:"start" }); });
     return true;
   }
   m = h.match(/^senateur-(\d{5}[A-Z])$/);

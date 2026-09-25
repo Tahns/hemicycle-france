@@ -233,6 +233,13 @@ await checkCommunes();
   for (const [id, l] of Object.entries(logos)) if (!l.fichier || (l.licence && !/public domain|domaine public|^cc0|^cc by/i.test(l.licence))) err(`logos.json : ${id} invalide ou non libre`);
   console.log(`[check-data] logos.json : ${Object.keys(logos).length} logos.`);
 }
+{
+  const a = JSON.parse(await readFile("data/alertes.json", "utf-8").catch(() => "null"));
+  if (a) {
+    if (!Array.isArray(a.votes) || !a.votes.length || a.votes.some((v) => !Number.isInteger(v.numero) || !v.titre || v.codes.length !== a.deputes.length)) err("alertes.json : format invalide");
+    else console.log(`[check-data] alertes.json : ${a.votes.length} votes récents.`);
+  }
+}
 await checkManuels();
 
 if (erreurs.length) {
