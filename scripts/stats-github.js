@@ -1,20 +1,8 @@
 #!/usr/bin/env node
 /**
- * stats-github.js
- * ---------------
- * Archive les statistiques de trafic du dépôt GitHub (vues, visiteurs uniques, clones,
- * sites référents, pages les plus vues, étoiles) que GitHub n'affiche que sur 14 jours.
- * Chaque passage complète l'historique ; rien n'est perdu d'un jour sur l'autre.
- *
- * Écrit dans le dossier donné (branche « stats » dans le workflow) :
- *  - trafic.json : l'historique complet (une entrée par jour) ;
- *  - README.md   : le tableau de bord lisible directement sur GitHub.
- *
- * L'API de trafic exige un jeton avec accès en écriture au dépôt (le GITHUB_TOKEN des
- * workflows n'y a pas droit) : jeton « fine-grained » avec la permission
- * « Administration : Read-only » sur ce dépôt, enregistré dans le secret TRAFIC_TOKEN.
- *
- * USAGE : TRAFIC_TOKEN=… GITHUB_REPOSITORY=owner/repo node scripts/stats-github.js <dossier>
+ * Archive le trafic du dépôt GitHub (limité à 14 jours par GitHub) dans <dossier>/trafic.json
+ * et écrit le tableau de bord <dossier>/README.md.
+ * Jeton requis : secret TRAFIC_TOKEN (permission « Administration : Read-only »).
  */
 
 import { readFile, writeFile, appendFile, mkdir } from "fs/promises";
@@ -27,11 +15,7 @@ const FICHIER = join(DOSSIER, "trafic.json");
 const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
 if (!JETON) {
-  console.error(
-    "Secret TRAFIC_TOKEN absent : créez un jeton « fine-grained » (Settings → Developer settings → " +
-      "Personal access tokens) limité à ce dépôt avec la permission « Administration : Read-only », " +
-      "puis ajoutez-le dans Settings → Secrets and variables → Actions sous le nom TRAFIC_TOKEN."
-  );
+  console.error("Secret TRAFIC_TOKEN absent.");
   process.exit(1);
 }
 
@@ -45,10 +29,7 @@ async function api(chemin) {
     },
   });
   if (rep.status === 401 || rep.status === 403) {
-    throw new Error(
-      `${chemin} : accès refusé (${rep.status}). Le jeton TRAFIC_TOKEN doit donner la permission ` +
-        "« Administration : Read-only » sur ce dépôt (ou être un jeton classique avec la portée « repo »)."
-    );
+    throw new Error(`${chemin} : accès refusé (${rep.status}), vérifier TRAFIC_TOKEN.`);
   }
   if (!rep.ok) throw new Error(`${chemin} : réponse ${rep.status}`);
   return rep.json();
@@ -66,7 +47,6 @@ let hist = { vues: {}, clones: {}, depot: {}, referents: {}, pages: {} };
 try {
   hist = { ...hist, ...JSON.parse(await readFile(FICHIER, "utf8")) };
 } catch {
-  // premier passage : historique vide
 }
 
 const jour = (ts) => ts.slice(0, 10);
@@ -133,10 +113,7 @@ const maxMois = Math.max(0, ...Object.values(parMois).map((v) => v.total));
 const lignes = [
   "# Statistiques du dépôt",
   "",
-  `Mis à jour le ${dateFr(aujourdhui)} par le workflow « Statistiques GitHub ». Historique depuis le ${dateFr(debut)}.`,
-  "",
-  "> Ces chiffres sont ceux de GitHub : visites des pages **du dépôt** sur github.com et clones.",
-  "> Les visites du site lui-même (tahns.github.io) ne sont pas comptées par GitHub.",
+  `Mis à jour le ${dateFr(aujourdhui)}. Historique depuis le ${dateFr(debut)}.`,
   "",
   "| | |",
   "|---|---|",
@@ -164,7 +141,7 @@ const lignes = [
       return `| ${MOIS[mm - 1]} ${a} | ${nb(v.total)} | ${nb(v.uniques)} | ${nb(v.clones)} | ${barre(v.total, maxMois)} |`;
     }),
   "",
-  "\\* somme des visiteurs uniques de chaque jour (une personne venue deux jours compte deux fois).",
+  "\\* somme des visiteurs uniques de chaque jour.",
   "",
   "## D'où viennent les visiteurs (14 derniers jours)",
   "",
@@ -177,8 +154,6 @@ const lignes = [
   hist.pages[aujourdhui].length
     ? ["| Page | Vues | Visiteurs uniques |", "|---|--:|--:|", ...hist.pages[aujourdhui].map((p) => `| \`${p.chemin}\` | ${nb(p.total)} | ${nb(p.uniques)} |`)].join("\n")
     : "_Aucune page vue sur la période._",
-  "",
-  "Données brutes : [`trafic.json`](trafic.json).",
   "",
 ];
 const md = lignes.join("\n");

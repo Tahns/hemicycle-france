@@ -1,6 +1,4 @@
 name: Statistiques GitHub
-# GitHub n'affiche le trafic du dépôt (vues, visiteurs, clones, référents) que sur 14 jours :
-# ce workflow l'archive chaque jour sur la branche « stats », dont le README sert de tableau de bord.
 on:
   schedule:
     - cron: "17 23 * * *"
@@ -20,9 +18,7 @@ jobs:
         id: jeton
         run: |
           if [ -z "$TRAFIC_TOKEN" ]; then
-            msg="Secret TRAFIC_TOKEN absent : les statistiques ne sont pas archivées. Voir la section « Statistiques du dépôt » du README."
-            echo "::warning::$msg"
-            echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::Secret TRAFIC_TOKEN absent."
             echo "present=non" >> "$GITHUB_OUTPUT"
           else
             echo "present=oui" >> "$GITHUB_OUTPUT"
