@@ -117,6 +117,7 @@ function verifier(cond, message) {
     await page.goto(base + "#senat", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".senat-ligne")).length >= 10, `${nom} : scrutins du Sénat absents`);
+    verifier((await page.$$("#senat-hemicycle circle")).length === 348, `${nom} : hémicycle du Sénat incomplet`);
 
     // Recherche sur tout le site
     await page.click(nom === "mobile" ? ".loupe-mobile" : ".masthead-top .bouton-recherche");
