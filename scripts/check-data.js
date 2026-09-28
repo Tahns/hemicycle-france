@@ -94,7 +94,24 @@ async function checkSondages() {
       if (!(min >= 0 && max <= 60 && min <= max)) err(`sondages.json : historique ${e.institut} ${e.dateFin}, score invalide pour ${nom}`);
     }
   }
-  console.log(`[check-data] sondages.json : ${data.instituts.length} instituts, ${(data.historique || []).length} enquêtes en historique.`);
+  for (const d of data.secondTour || []) {
+    if (!Array.isArray(d.candidats) || d.candidats.length !== 2 || !d.instituts?.length) err(`sondages.json : duel de second tour incomplet (${d.candidats})`);
+    for (const i of d.instituts || []) {
+      const v = d.candidats.map((n) => i.scores?.[n]);
+      if (!i.nom || !/^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") || !/^https:\/\//.test(i.url || "")) err(`sondages.json : second tour ${i.nom || "?"} incomplet`);
+      if (!v.every((x) => x >= 0 && x <= 100) || Math.abs(v[0] + v[1] - 100) > 3) err(`sondages.json : second tour ${i.nom} (${d.candidats.join(" / ")}), scores invalides`);
+    }
+  }
+  console.log(`[check-data] sondages.json : ${data.instituts.length} instituts, ${(data.historique || []).length} enquêtes en historique, ${(data.secondTour || []).length} duel(s) de second tour.`);
+}
+
+async function checkProbabilites() {
+  const data = JSON.parse(await readFile("data/probabilites.json", "utf-8").catch(() => "null"));
+  if (!data) return;
+  if (!Array.isArray(data.candidats) || data.candidats.length < 2) return err("probabilites.json : candidats absents");
+  const somme = (cle) => data.candidats.reduce((s, c) => s + (c[cle] || 0), 0);
+  if (Math.abs(somme("secondTour") - 200) > 1) err(`probabilites.json : les qualifications ne totalisent pas 200 % (${somme("secondTour")})`);
+  if (data.candidats.some((c) => c.victoire !== null) && Math.abs(somme("victoire") + data.duelNonTeste - 100) > 1) err("probabilites.json : victoires + duels non testés ≠ 100 %");
 }
 
 async function checkDeputes() {
@@ -220,6 +237,7 @@ await checkLois();
 await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
+await checkProbabilites();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();

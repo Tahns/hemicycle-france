@@ -92,6 +92,8 @@ function verifier(cond, message) {
     await page.goto(base + "#sondages", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".sondage-bar-row")).length >= 4, `${nom} : sondages absents`);
+    verifier(await page.isVisible("#annonce-president .compte"), `${nom} : décompte jusqu'à l'annonce du président absent`);
+    verifier((await page.$$("#sondage-probas tbody tr")).length >= 2, `${nom} : probabilités absentes`);
     verifier((await page.$$("#evolution-graphe path")).length >= 3, `${nom} : courbe d'évolution des sondages absente`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec la courbe des sondages`);
 

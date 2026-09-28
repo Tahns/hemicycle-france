@@ -619,6 +619,37 @@
   .veille-ligne a{font-size:13px;}
   @media (max-width:640px){ .veille-ligne{grid-template-columns:1fr auto;} .veille-nom{grid-row:1;} .veille-statut{grid-row:1; grid-column:2;} .veille-date{grid-column:1;} .veille-ligne a{grid-column:2; text-align:right;} }
   .sondage-disclaimer{font-size:13px; font-style:italic; color:var(--text-faint); margin-top:16px;}
+  /* Décompte jusqu'à l'annonce du résultat, probabilités, second tour */
+  .annonce{display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; margin:0 0 22px; padding:14px 18px; border:1px solid var(--ink); border-radius:2px;}
+  .annonce .t{flex:1; min-width:220px; font-size:14px; color:var(--text-soft);}
+  .annonce .t b{display:block; font-family:var(--font-display); font-size:19px; font-weight:600; color:var(--text);}
+  .annonce .compte{display:flex; gap:14px; font-variant-numeric:lining-nums tabular-nums;}
+  .annonce .compte span{display:flex; flex-direction:column; align-items:center; min-width:3ch; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint);}
+  .annonce .compte b{font-family:var(--font-display); font-size:clamp(24px,4vw,32px); font-weight:600; line-height:1.1; color:var(--accent); letter-spacing:0; text-transform:none;}
+  .annonce[hidden], .probas[hidden], .second-tour[hidden]{display:none;}
+  .probas, .second-tour{margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--ink);}
+  .probas h3, .second-tour h3{margin:0 0 4px; font-family:var(--font-display); font-size:24px; font-weight:600;}
+  .probas-sub{font-size:13px; color:var(--text-faint); margin:0 0 14px; max-width:820px;}
+  .probas-table{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums;}
+  .probas-table th{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-faint); text-align:right; padding:6px 4px; border-bottom:1px solid var(--ink);}
+  .probas-table th:first-child, .probas-table td:first-child{text-align:left;}
+  .probas-table td{padding:7px 4px; border-bottom:1px solid var(--border-soft); text-align:right; white-space:nowrap;}
+  .probas-table td.barre-cell{width:40%;}
+  .probas-table .barre{height:10px; background:var(--border-soft);}
+  .probas-table .barre span{display:block; height:100%;}
+  .probas-finales{list-style:none; margin:14px 0 0; padding:0; font-size:14px;}
+  .probas-finales li{padding:5px 0; border-bottom:1px solid var(--border-soft);}
+  .duel{padding:10px 0; border-bottom:1px solid var(--border-soft);}
+  .duel-titre{font-weight:600; font-size:15px; margin-bottom:6px;}
+  .duel-ligne{display:grid; grid-template-columns:minmax(90px,11em) 1fr; gap:10px; align-items:center; font-size:13px; margin:4px 0;}
+  .duel-ligne .inst{color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .duel-barre{display:flex; height:20px; font-size:12px; font-weight:600; color:#fff; font-variant-numeric:tabular-nums;}
+  .duel-barre span{display:flex; align-items:center; padding:0 6px; white-space:nowrap; overflow:hidden;}
+  .duel-barre span + span{justify-content:flex-end;}
+  @media (max-width:700px){
+    .probas-table{font-size:13px;} .probas-table th{font-size:10.5px; letter-spacing:0; white-space:normal;}
+    .probas-table td:first-child{white-space:normal;} .probas-table .barre-cell{display:none;}
+  }
 
   /* ---------- Quiz ---------- */
   .bientot{display:inline-block; vertical-align:3px; margin-left:6px; padding:2px 8px; border-radius:10px; background:var(--accent-dim); color:var(--accent); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
@@ -1322,6 +1353,7 @@
       <h2>Sondages</h2>
       <p class="chapo">Qui est en tête pour le premier tour ? Pas de moyenne maison ici : chaque institut a sa méthode, donc ses chiffres sont montrés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
     </div>
+    <div class="annonce" id="annonce-president" hidden></div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
     <div class="filtre-inline"><span class="filtre-label" id="sondage-institut-label">Institut</span>
       <div class="source-bar" id="source-bar" role="group" aria-labelledby="sondage-institut-label"></div></div>
@@ -1331,6 +1363,8 @@
       <div id="sondage-avg-list"></div>
       <p class="sondage-disclaimer">Un sondage est une photo à un instant donné, pas une prédiction. Selon la taille de l'échantillon, la marge d'erreur va de 1 à 3 points. Les candidats que l'institut n'a pas testés n'apparaissent pas.</p>
     </div>
+    <div class="second-tour" id="sondage-second-tour" hidden></div>
+    <div class="probas" id="sondage-probas" hidden></div>
     <div class="veille" id="sondage-veille" hidden></div>
     <div class="evolution" id="sondage-evolution" hidden>
       <h3>L'évolution depuis le printemps</h3>
@@ -2571,6 +2605,7 @@ function appliquerSondages(data){
   }));
   SONDAGES_SOURCE = data.sourceUrl ? { url: data.sourceUrl, maj: data.lastUpdated } : null;
   HISTORIQUE = (data.historique || []).filter(e=>e.dateFin && e.scores).sort((a,b)=> a.dateFin.localeCompare(b.dateFin));
+  SECOND_TOUR = data.secondTour || [];
   selectedInstitut = INSTITUTS[0] ? INSTITUTS[0].id : null;
 }
 let SONDAGES_SOURCE = null;
@@ -2661,6 +2696,82 @@ function renderSondageAverage(){
   }).join("");
 }
 
+
+/* ---------- Décompte jusqu'à l'annonce du président (dimanche du second tour, 20 h, heure de Paris) ---------- */
+// Heure d'été en France fin avril et début mai : 20 h à Paris = 18 h UTC
+const annonceTour = iso => Date.parse(iso + "T18:00:00Z");
+let annonceMinuteur = null;
+function renderAnnonce(){
+  const bloc = document.getElementById("annonce-president");
+  const maintenant = Date.now();
+  const [t1, t2] = TOURS_PRESIDENTIELLE.map(annonceTour);
+  clearTimeout(annonceMinuteur);
+  if(maintenant >= t2 + 6 * 3600e3){ bloc.hidden = true; return; }
+  const reste = Math.max(0, t2 - maintenant);
+  const j = Math.floor(reste / 864e5), h = Math.floor(reste / 36e5) % 24, m = Math.floor(reste / 6e4) % 60, s = Math.floor(reste / 1e3) % 60;
+  const deux = n => String(n).padStart(2, "0");
+  bloc.innerHTML = reste > 0
+    ? `<div class="t"><b>Annonce du président de la République</b>Dimanche 2 mai 2027 à 20 h, à la fermeture des derniers bureaux de vote${maintenant < t1 ? ` · premier tour le 18 avril` : ""}</div>
+       <div class="compte" role="timer" aria-label="Temps restant avant l'annonce du résultat">
+         <span><b>${formatNombre(j)}</b>jours</span><span><b>${deux(h)}</b>heures</span><span><b>${deux(m)}</b>min</span><span><b>${deux(s)}</b>s</span>
+       </div>`
+    : `<div class="t"><b>Le nouveau président de la République est annoncé ce soir</b>Premières estimations à 20 h ; résultats officiels proclamés par le Conseil constitutionnel.</div>`;
+  bloc.hidden = false;
+  // Mise à jour chaque seconde, seulement quand la page des sondages est affichée et l'onglet visible
+  if(reste > 0 && document.getElementById("view-sondages").classList.contains("active") && !document.hidden)
+    annonceMinuteur = setTimeout(renderAnnonce, 1000 - (Date.now() % 1000) + 5);
+}
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) renderAnnonce(); });
+
+/* ---------- Sondages du second tour (data/sondages.json, secondTour) ---------- */
+let SECOND_TOUR = [];
+function renderSecondTour(){
+  const bloc = document.getElementById("sondage-second-tour");
+  if(!SECOND_TOUR.length || periodeReserveSondages()){ bloc.hidden = true; return; }
+  const couleur = nom => CANDIDATS.find(c=>c.id===nom)?.couleur || "#8A8C94";
+  bloc.innerHTML = `<h3>Second tour : les duels testés</h3>
+    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement chaque matin, avec les mêmes contrôles qu'au premier tour.</p>
+    ${SECOND_TOUR.slice(0, 8).map(d=>{
+      const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
+      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
+        ${d.instituts.map(i=>`<div class="duel-ligne">
+          <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
+          <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
+            <span style="width:${i.scores[a]}%; background:${couleur(a)}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${couleur(b)}">${nombreFr(i.scores[b])} %</span>
+          </div></div>`).join("")}
+      </div>`;
+    }).join("")}`;
+  bloc.hidden = false;
+}
+
+/* ---------- Probabilités calculées chaque jour depuis les sondages (data/probabilites.json) ---------- */
+let PROBAS = null;
+function renderProbabilites(){
+  const bloc = document.getElementById("sondage-probas");
+  if(!PROBAS?.candidats?.length || periodeReserveSondages()){ bloc.hidden = true; return; }
+  const p = v => v === null || v === undefined ? "—" : v < 1 ? (v > 0 ? "< 1 %" : "< 0,1 %") : v > 99 ? "> 99 %" : `${nombreFr(Math.round(v))} %`;
+  const m = PROBAS.methode;
+  const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null);
+  const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1);
+  bloc.innerHTML = `<h3>Qui a le plus de chances ?</h3>
+    <p class="probas-sub">Estimation recalculée chaque matin à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
+    <table class="probas-table">
+      <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
+      <tbody>${liste.map(c=>`<tr>
+        <td>${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</td>
+        <td>${nombreFr(c.intention)} %</td>
+        <td><b>${p(c.secondTour)}</b></td>
+        <td class="barre-cell"><div class="barre"><span style="width:${c.secondTour}%; background:${couleurSerie(c.nom)}"></span></div></td>
+        ${avecVictoire ? `<td><b>${p(c.victoire)}</b></td>` : ""}
+      </tr>`).join("")}</tbody>
+    </table>
+    ${avecVictoire
+      ? (PROBAS.duelNonTeste >= 1 ? `<p class="probas-sub" style="margin-top:10px">Dans ${p(PROBAS.duelNonTeste)} des simulations, le duel final n'a jamais été testé par les sondeurs : personne n'y est déclaré élu.</p>` : "")
+      : `<p class="probas-sub" style="margin-top:10px">Chance d'être élu : affichée dès que les sondages de second tour sont disponibles.</p>`}
+    <h3 style="font-size:19px; margin-top:22px">Les seconds tours les plus probables</h3>
+    <ul class="probas-finales">${PROBAS.finales.filter(f=>f.probabilite >= 1).map(f=>`<li><b>${esc(f.candidats[0])} – ${esc(f.candidats[1])}</b> : ${p(f.probabilite)} des simulations${f.victoire ? ` · victoire de ${esc(f.victoire[f.candidats[0]] >= 50 ? f.candidats[0] : f.candidats[1])} dans ${p(Math.max(...Object.values(f.victoire)))} des cas` : " · duel pas encore testé"}</li>`).join("")}</ul>`;
+  bloc.hidden = false;
+}
 
 /* ---------- Veille : enquêtes déposées à la Commission des sondages (data/sondages-veille.json) ---------- */
 let VEILLE = null;
@@ -4618,7 +4729,7 @@ function activateTab(tabId){
     if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
   }
   if(tabId === "meetings") renderAgendaAN();
-  if(tabId === "sondages"){ renderEvolution(); renderVeille(); }
+  if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
   if(DONNEES_CHARGEES){
@@ -4723,15 +4834,16 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
-    lireJSON("data/candidats.json"),
+    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"),
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
   if(groupes?.groupes) GROUPES = groupes.groupes;
   if(sondages?.instituts?.length) appliquerSondages(sondages);
+  if(probas?.candidats?.length) PROBAS = probas;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
   if(meetings?.meetings) MEETINGS = meetings.meetings;
@@ -4810,6 +4922,9 @@ async function initSite(){
   renderSourceBar();
   await cede();
   renderSondageAverage();
+  renderSecondTour();
+  renderProbabilites();
+  renderAnnonce();
   await cede();
   renderEvolution();
   await cede();
