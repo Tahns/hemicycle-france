@@ -91,6 +91,14 @@ fonction) et le thème des votes (commission saisie au fond du dossier législat
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
 
+## Statistiques du dépôt
+
+Le workflow `stats.yml` archive chaque jour le trafic GitHub (vues, visiteurs, clones, référents)
+sur la branche **`stats`**, dont le README sert de tableau de bord.
+
+Mise en place : créer un jeton *fine-grained* limité à ce dépôt avec la permission
+**Administration : Read-only**, puis l'ajouter en secret Actions sous le nom **`TRAFIC_TOKEN`**.
+
 ## Surveillance
 
 - `scripts/check-data.js` contrôle la cohérence de tous les fichiers `data/` avant chaque publication.
