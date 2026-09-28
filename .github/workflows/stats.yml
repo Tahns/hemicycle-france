@@ -1,0 +1,63 @@
+name: Statistiques GitHub
+# GitHub n'affiche le trafic du dépôt (vues, visiteurs, clones, référents) que sur 14 jours :
+# ce workflow l'archive chaque jour sur la branche « stats », dont le README sert de tableau de bord.
+on:
+  schedule:
+    - cron: "17 23 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: stats
+  cancel-in-progress: false
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    env:
+      TRAFIC_TOKEN: ${{ secrets.TRAFIC_TOKEN }}
+    steps:
+      - name: Vérifier le jeton
+        id: jeton
+        run: |
+          if [ -z "$TRAFIC_TOKEN" ]; then
+            msg="Secret TRAFIC_TOKEN absent : les statistiques ne sont pas archivées. Voir la section « Statistiques du dépôt » du README."
+            echo "::warning::$msg"
+            echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+            echo "present=non" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Récupérer le dépôt
+        if: steps.jeton.outputs.present == 'oui'
+        uses: actions/checkout@v7
+      - name: Installer Node.js
+        if: steps.jeton.outputs.present == 'oui'
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Récupérer l'historique (branche stats)
+        if: steps.jeton.outputs.present == 'oui'
+        run: |
+          if git fetch origin stats; then
+            git worktree add stats-branche FETCH_HEAD --detach
+          else
+            git worktree add stats-branche --detach
+            git -C stats-branche checkout --orphan stats
+            git -C stats-branche rm -rf --quiet .
+          fi
+      - name: Relever le trafic
+        if: steps.jeton.outputs.present == 'oui'
+        run: node scripts/stats-github.js stats-branche
+      - name: Committer sur la branche stats
+        if: steps.jeton.outputs.present == 'oui'
+        working-directory: stats-branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add trafic.json README.md
+          if git diff --cached --quiet; then
+            echo "Aucun changement."
+          else
+            git commit -m "Statistiques du $(date -u +%Y-%m-%d)"
+            git push origin HEAD:refs/heads/stats
+          fi

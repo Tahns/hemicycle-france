@@ -91,6 +91,23 @@ fonction) et le thème des votes (commission saisie au fond du dossier législat
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
 
+## Statistiques du dépôt (vues, visiteurs, clones)
+
+GitHub n'affiche le trafic du dépôt (Insights → Traffic) que sur 14 jours. Le workflow
+`stats.yml` (chaque soir, ou à la demande depuis l'onglet Actions) l'archive sur la branche
+**`stats`**, dont le README est le tableau de bord : vues et visiteurs uniques par jour et par mois,
+clones, sites référents, pages les plus vues, étoiles. Données brutes dans `trafic.json`.
+
+À faire une fois (l'API de trafic refuse le jeton par défaut des workflows) :
+1. GitHub → Settings (du compte) → Developer settings → Personal access tokens → **Fine-grained tokens**
+   → Generate new token : dépôt `hemicycle-france` uniquement, permission **Administration : Read-only**.
+2. Dans le dépôt : Settings → Secrets and variables → Actions → New repository secret,
+   nom **`TRAFIC_TOKEN`**, valeur = le jeton.
+3. Actions → « Statistiques GitHub » → Run workflow, puis ouvrir la branche `stats`.
+
+Ces chiffres ne comptent que les visites du dépôt sur github.com, pas celles du site
+(tahns.github.io), que GitHub Pages ne mesure pas.
+
 ## Surveillance
 
 - `scripts/check-data.js` contrôle la cohérence de tous les fichiers `data/` avant chaque publication.
