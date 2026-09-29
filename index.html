@@ -356,6 +356,22 @@
     border-top:1px solid var(--border); font-size:13px; color:var(--text-soft);
   }
   .legend-item{display:flex; align-items:center; gap:6px;}
+  .actu-liste{margin-top:8px;}
+  .actu-sujet{padding:14px 0; border-bottom:1px solid var(--border-soft);}
+  .actu-sujet h4{margin:2px 0 4px; font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.3;}
+  .actu-sujet h4 a{color:var(--text); text-decoration:none;}
+  .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-meta{font-size:13px; color:var(--text-faint);}
+  .actu-recoupe{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent);}
+  .actu-autres{list-style:none; margin:8px 0 0; padding:0 0 0 12px; border-left:2px solid var(--border-soft); font-size:13.5px;}
+  .actu-autres li{margin:4px 0;}
+  .actu-autres a{color:var(--text-soft); text-decoration:none;}
+  .actu-autres a:hover{text-decoration:underline;}
+  .actu-accueil{margin:26px 0 8px; padding-top:14px; border-top:1px solid var(--ink);}
+  .actu-accueil[hidden]{display:none;}
+  .actu-accueil-tete{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .actu-accueil-tete h3{margin:0; font-family:var(--font-display); font-size:22px; font-weight:600;}
+  .actu-accueil-tete a{font-size:14px; font-weight:600; color:var(--accent);}
   .senat-hemi{margin:0 0 30px;}
   .senat-hemi-tete{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:8px 20px;}
   .senat-hemi-tete select{max-width:min(100%, 34em);}
@@ -1080,6 +1096,7 @@
     <div class="tab" data-tab="sondages">Sondages</div>
     <div class="tab" data-tab="meetings">Agenda</div>
     <span class="tab-sep" aria-hidden="true"></span>
+    <div class="tab" data-tab="actualites">Actualités</div>
     <div class="tab" data-tab="dirigeants">Partis</div>
     <div class="tab" data-tab="justice">Justice</div>
     <span class="tab-sep" aria-hidden="true"></span>
@@ -1112,6 +1129,7 @@
   <button type="button" class="feuille-lien" data-tab="candidats"><b>Candidats</b><span>Qui s'est déclaré, depuis quand, avec quel parti</span></button>
   <button type="button" class="feuille-lien" data-tab="meetings"><b>Agenda</b><span>Congrès et meetings à venir</span></button>
   <div class="feuille-groupe" aria-hidden="true">Vie politique</div>
+  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
   <button type="button" class="feuille-lien" data-tab="dirigeants"><b>Partis</b><span>Dirigeants et groupes à l'Assemblée</span></button>
   <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
@@ -1128,6 +1146,7 @@
     <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
+    <div class="actu-accueil" id="accueil-actualites" hidden></div>
 
     <div class="accueil-rubriques">
      <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Parlement</h3>
@@ -1142,6 +1161,7 @@
       <div class="accueil-rubrique" data-tab="meetings" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><b>Agenda</b><span>Congrès, primaires, meetings et dates d'élection.</span></div>
      </div>
      <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Vie politique</h3>
+      <div class="accueil-rubrique" data-tab="actualites" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span></div>
       <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
       <div class="accueil-rubrique" data-tab="justice" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z"/></svg></span><b>Justice</b><span>Les condamnations de responsables politiques.</span></div>
      </div>
@@ -1336,6 +1356,19 @@
     <div class="chiffre-grid" id="chiffre-grid"></div>
   </section>
 
+  <section class="view" id="view-actualites">
+    <div class="rubrique-tete">
+      <div class="surtitre">Vie politique</div>
+      <h2>Actualités</h2>
+      <p class="chapo">Les derniers titres de la rubrique politique de médias nationaux reconnus, de sensibilités différentes, relus toutes les deux heures. Le site ne reprend que le titre : chaque ligne renvoie à l'article du média qui l'a publié. Un sujet traité par plusieurs rédactions indépendantes est mis en avant.
+        <small id="actualites-maj">Flux publics des rédactions, relus toutes les deux heures.</small></p>
+    </div>
+    <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
+      <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
+    <div class="actu-liste" id="actualites-liste"><p class="chargement">Chargement des actualités…</p></div>
+    <p class="sondage-disclaimer">Titres choisis par chaque rédaction, reproduits tels quels. Les liens vers des contenus démentis par le Décodex du Monde sont écartés automatiquement.</p>
+  </section>
+
   <section class="view" id="view-meetings">
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
@@ -1426,6 +1459,7 @@
       <ul>
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées chaque jour ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les deux heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Les Échos et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
@@ -2784,6 +2818,48 @@ function renderProbabilites(){
       : `<p class="probas-sub" style="margin-top:10px">Chance d'être élu : affichée dès que les sondages de second tour sont disponibles.</p>`}
     <h3 style="font-size:19px; margin-top:22px">Les seconds tours les plus probables</h3>
     <ul class="probas-finales">${PROBAS.finales.filter(f=>f.probabilite >= 1).map(f=>`<li><b>${esc(f.candidats[0])} – ${esc(f.candidats[1])}</b> : ${p(f.probabilite)} des simulations${f.victoire ? ` · victoire de ${esc(f.victoire[f.candidats[0]] >= 50 ? f.candidats[0] : f.candidats[1])} dans ${p(Math.max(...Object.values(f.victoire)))} des cas` : " · duel pas encore testé"}</li>`).join("")}</ul>`;
+  bloc.hidden = false;
+}
+
+/* ---------- Actualités : titres de la rubrique politique des médias (data/actualites.json, toutes les 2 h) ---------- */
+let ACTUALITES = null, actuFiltre = "recoupes";
+function ilYA(iso){
+  const min = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 6e4));
+  if(min < 1) return "à l'instant";
+  if(min < 60) return `il y a ${min} min`;
+  if(min < 24 * 60) return `il y a ${Math.round(min / 60)} h`;
+  return new Date(iso).toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
+}
+function sujetHTML(s, court){
+  const a = s.articles[0];
+  const medias = [...new Set(s.articles.map(x=>x.media))];
+  return `<article class="actu-sujet">
+    ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
+    <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
+    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}</div>
+    ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
+  </article>`;
+}
+function renderActualites(){
+  const liste = document.getElementById("actualites-liste");
+  if(!ACTUALITES?.sujets?.length){ liste.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
+  const lus = (ACTUALITES.medias || []).filter(m=>m.lu).map(m=>m.nom);
+  document.getElementById("actualites-maj").textContent =
+    `Titres de ${lus.join(", ")}${ACTUALITES.lastUpdated ? `, relus ${ilYA(ACTUALITES.lastUpdated)}` : ""}.`;
+  const recoupes = ACTUALITES.sujets.filter(s=>s.medias >= 2);
+  document.getElementById("actualites-filtre").innerHTML = [["recoupes", `Repris par plusieurs médias (${recoupes.length})`], ["tous", "Tous les titres"]]
+    .map(([id, l])=>`<button type="button" class="theme-chip ${actuFiltre===id?"selected":""}" aria-pressed="${actuFiltre===id}" data-f="${id}">${l}</button>`).join("");
+  document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
+  const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
+    : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
+  liste.innerHTML = sujets.slice(0, 60).map(s=> sujetHTML(s, false)).join("");
+}
+function renderAccueilActualites(){
+  const bloc = document.getElementById("accueil-actualites");
+  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
+  if(!top.length){ bloc.hidden = true; return; }
+  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>` +
+    top.map(s=> sujetHTML(s, true)).join("");
   bloc.hidden = false;
 }
 
@@ -4812,7 +4888,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -4842,6 +4918,7 @@ function activateTab(tabId){
     if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
   }
   if(tabId === "meetings") renderAgendaAN();
+  if(tabId === "actualites") renderActualites();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
@@ -4947,16 +5024,17 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
-    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"),
+    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"),
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
   if(groupes?.groupes) GROUPES = groupes.groupes;
   if(sondages?.instituts?.length) appliquerSondages(sondages);
   if(probas?.candidats?.length) PROBAS = probas;
+  if(actualites?.sujets) ACTUALITES = actualites;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
   if(meetings?.meetings) MEETINGS = meetings.meetings;
@@ -5034,6 +5112,8 @@ async function initSite(){
   await cede();
   renderSourceBar();
   await cede();
+  renderAccueilActualites();
+  renderActualites();
   renderSondageAverage();
   renderSecondTour();
   renderProbabilites();

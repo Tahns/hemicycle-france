@@ -16,6 +16,7 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
 | Sondages présidentielle 2027 (dernière enquête de chaque institut, historique des deux derniers semestres pour la courbe, duels du second tour) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
 | Probabilités d'accéder au second tour et d'être élu (simulation à partir des sondages) | `probabilites.js` | `data/sondages.json` | `data/probabilites.json` |
+| Actualités politiques : titres et liens, sujets repris par plusieurs médias mis en avant (toutes les 2 h, workflow `actualites.yml`) | `fetch-actualites.js` | flux RSS publics de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Les Échos, Public Sénat | `data/actualites.json` |
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
 | Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |

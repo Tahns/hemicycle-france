@@ -49,7 +49,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);

@@ -105,6 +105,18 @@ async function checkSondages() {
   console.log(`[check-data] sondages.json : ${data.instituts.length} instituts, ${(data.historique || []).length} enquêtes en historique, ${(data.secondTour || []).length} duel(s) de second tour.`);
 }
 
+async function checkActualites() {
+  const data = JSON.parse(await readFile("data/actualites.json", "utf-8").catch(() => "null"));
+  if (!data) return;
+  if (!Array.isArray(data.sujets)) return err("actualites.json : sujets absents");
+  const sites = (data.medias || []).map((m) => new URL(m.site).hostname.replace(/^www\./, ""));
+  for (const s of data.sujets) for (const a of s.articles || []) {
+    const hote = (() => { try { return new URL(a.url).hostname.replace(/^www\./, ""); } catch { return ""; } })();
+    if (!a.titre || !a.media || isNaN(Date.parse(a.date))) err(`actualites.json : article incomplet (${a.url})`);
+    if (!/^https:\/\//.test(a.url || "") || !sites.some((d) => hote === d || hote.endsWith("." + d))) err(`actualites.json : lien hors des médias retenus (${a.url})`);
+  }
+}
+
 async function checkProbabilites() {
   const data = JSON.parse(await readFile("data/probabilites.json", "utf-8").catch(() => "null"));
   if (!data) return;
@@ -238,6 +250,7 @@ await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
 await checkProbabilites();
+await checkActualites();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();
