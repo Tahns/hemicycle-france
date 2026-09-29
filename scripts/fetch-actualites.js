@@ -77,7 +77,8 @@ const mots = (titre) => new Set(titre.normalize("NFD").replace(/[̀-ͯ]/g, "").t
 function memeSujet(a, b) {
   let communs = 0;
   for (const m of a) if (b.has(m)) communs++;
-  return communs >= 2 && communs / Math.min(a.size, b.size) >= 0.45;
+  // 3 mots communs, ou 2 qui pèsent au moins la moitié du titre le plus long (un titre court n'attire pas tout)
+  return communs >= 3 || (communs === 2 && communs / Math.max(a.size, b.size) >= 0.5);
 }
 
 // Loi du 19 juillet 1977, art. 11 : même période de réserve que fetch-sondages.js
