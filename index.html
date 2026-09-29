@@ -356,6 +356,29 @@
     border-top:1px solid var(--border); font-size:13px; color:var(--text-soft);
   }
   .legend-item{display:flex; align-items:center; gap:6px;}
+  .actu-liste{margin-top:8px;}
+  .actu-sujet{padding:14px 0; border-bottom:1px solid var(--border-soft);}
+  .actu-sujet h4{margin:2px 0 4px; font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.3;}
+  .actu-sujet h4 a{color:var(--text); text-decoration:none;}
+  .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-meta{font-size:13px; color:var(--text-faint);}
+  .actu-recoupe{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent);}
+  .actu-autres{list-style:none; margin:8px 0 0; padding:0 0 0 12px; border-left:2px solid var(--border-soft); font-size:13.5px;}
+  .actu-autres li{margin:4px 0;}
+  .actu-autres a{color:var(--text-soft); text-decoration:none;}
+  .actu-autres a:hover{text-decoration:underline;}
+  .actu-accueil{margin:26px 0 8px; padding-top:14px; border-top:1px solid var(--ink);}
+  .actu-accueil[hidden]{display:none;}
+  .actu-accueil-tete{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .actu-accueil-tete h3{margin:0; font-family:var(--font-display); font-size:22px; font-weight:600;}
+  .actu-accueil-tete a{font-size:14px; font-weight:600; color:var(--accent);}
+  .senat-hemi{margin:0 0 30px;}
+  .senat-hemi-tete{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:8px 20px;}
+  .senat-hemi-tete select{max-width:min(100%, 34em);}
+  .senat-hemi-tete .filtre-champ{flex:0 1 34em; min-width:0;}
+  #senat-hemicycle{display:block; width:100%; height:auto; margin-top:10px; touch-action:manipulation;}
+  #senat-hemicycle.sur-siege{cursor:pointer;}
+  .senat-hemi-info{min-height:1.5em; margin:6px 0 0; font-size:14px; color:var(--text-soft); text-align:center;}
   .legend-note{flex-basis:100%; font-size:12.5px; color:var(--text-faint);}
   .dot{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
 
@@ -619,6 +642,37 @@
   .veille-ligne a{font-size:13px;}
   @media (max-width:640px){ .veille-ligne{grid-template-columns:1fr auto;} .veille-nom{grid-row:1;} .veille-statut{grid-row:1; grid-column:2;} .veille-date{grid-column:1;} .veille-ligne a{grid-column:2; text-align:right;} }
   .sondage-disclaimer{font-size:13px; font-style:italic; color:var(--text-faint); margin-top:16px;}
+  /* Décompte jusqu'à l'annonce du résultat, probabilités, second tour */
+  .annonce{display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; margin:0 0 22px; padding:14px 18px; border:1px solid var(--ink); border-radius:2px;}
+  .annonce .t{flex:1; min-width:220px; font-size:14px; color:var(--text-soft);}
+  .annonce .t b{display:block; font-family:var(--font-display); font-size:19px; font-weight:600; color:var(--text);}
+  .annonce .compte{display:flex; gap:14px; font-variant-numeric:lining-nums tabular-nums;}
+  .annonce .compte span{display:flex; flex-direction:column; align-items:center; min-width:3ch; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint);}
+  .annonce .compte b{font-family:var(--font-display); font-size:clamp(24px,4vw,32px); font-weight:600; line-height:1.1; color:var(--accent); letter-spacing:0; text-transform:none;}
+  .annonce[hidden], .probas[hidden], .second-tour[hidden]{display:none;}
+  .probas, .second-tour{margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--ink);}
+  .probas h3, .second-tour h3{margin:0 0 4px; font-family:var(--font-display); font-size:24px; font-weight:600;}
+  .probas-sub{font-size:13px; color:var(--text-faint); margin:0 0 14px; max-width:820px;}
+  .probas-table{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums;}
+  .probas-table th{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-faint); text-align:right; padding:6px 4px; border-bottom:1px solid var(--ink);}
+  .probas-table th:first-child, .probas-table td:first-child{text-align:left;}
+  .probas-table td{padding:7px 4px; border-bottom:1px solid var(--border-soft); text-align:right; white-space:nowrap;}
+  .probas-table td.barre-cell{width:40%;}
+  .probas-table .barre{height:10px; background:var(--border-soft);}
+  .probas-table .barre span{display:block; height:100%;}
+  .probas-finales{list-style:none; margin:14px 0 0; padding:0; font-size:14px;}
+  .probas-finales li{padding:5px 0; border-bottom:1px solid var(--border-soft);}
+  .duel{padding:10px 0; border-bottom:1px solid var(--border-soft);}
+  .duel-titre{font-weight:600; font-size:15px; margin-bottom:6px;}
+  .duel-ligne{display:grid; grid-template-columns:minmax(90px,11em) 1fr; gap:10px; align-items:center; font-size:13px; margin:4px 0;}
+  .duel-ligne .inst{color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .duel-barre{display:flex; height:20px; font-size:12px; font-weight:600; color:#fff; font-variant-numeric:tabular-nums;}
+  .duel-barre span{display:flex; align-items:center; padding:0 6px; white-space:nowrap; overflow:hidden;}
+  .duel-barre span + span{justify-content:flex-end;}
+  @media (max-width:700px){
+    .probas-table{font-size:13px;} .probas-table th{font-size:10.5px; letter-spacing:0; white-space:normal;}
+    .probas-table td:first-child{white-space:normal;} .probas-table .barre-cell{display:none;}
+  }
 
   /* ---------- Quiz ---------- */
   .bientot{display:inline-block; vertical-align:3px; margin-left:6px; padding:2px 8px; border-radius:10px; background:var(--accent-dim); color:var(--accent); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
@@ -1042,6 +1096,7 @@
     <div class="tab" data-tab="sondages">Sondages</div>
     <div class="tab" data-tab="meetings">Agenda</div>
     <span class="tab-sep" aria-hidden="true"></span>
+    <div class="tab" data-tab="actualites">Actualités</div>
     <div class="tab" data-tab="dirigeants">Partis</div>
     <div class="tab" data-tab="justice">Justice</div>
     <span class="tab-sep" aria-hidden="true"></span>
@@ -1074,6 +1129,7 @@
   <button type="button" class="feuille-lien" data-tab="candidats"><b>Candidats</b><span>Qui s'est déclaré, depuis quand, avec quel parti</span></button>
   <button type="button" class="feuille-lien" data-tab="meetings"><b>Agenda</b><span>Congrès et meetings à venir</span></button>
   <div class="feuille-groupe" aria-hidden="true">Vie politique</div>
+  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
   <button type="button" class="feuille-lien" data-tab="dirigeants"><b>Partis</b><span>Dirigeants et groupes à l'Assemblée</span></button>
   <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
@@ -1090,6 +1146,7 @@
     <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
+    <div class="actu-accueil" id="accueil-actualites" hidden></div>
 
     <div class="accueil-rubriques">
      <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Parlement</h3>
@@ -1104,6 +1161,7 @@
       <div class="accueil-rubrique" data-tab="meetings" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><b>Agenda</b><span>Congrès, primaires, meetings et dates d'élection.</span></div>
      </div>
      <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Vie politique</h3>
+      <div class="accueil-rubrique" data-tab="actualites" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span></div>
       <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
       <div class="accueil-rubrique" data-tab="justice" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z"/></svg></span><b>Justice</b><span>Les condamnations de responsables politiques.</span></div>
      </div>
@@ -1241,6 +1299,13 @@
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
     </div>
     <div id="senat-principal">
+    <div class="senat-hemi" id="senat-hemi">
+      <div class="senat-hemi-tete"><h3 class="section-titre">L'hémicycle</h3>
+        <label class="filtre-champ"><span class="filtre-label">Afficher</span><select id="senat-hemi-choix"></select></label></div>
+      <svg id="senat-hemicycle" viewBox="0 0 1000 530" role="img" aria-label="Hémicycle du Sénat : un point par sénateur"></svg>
+      <p class="senat-hemi-info" id="senat-hemi-info" aria-live="polite"></p>
+      <div class="legend" id="senat-hemi-legende"></div>
+    </div>
     <div class="filtres" role="search" aria-label="Trouver un sénateur">
       <div class="filtre-champs">
         <label class="filtre-champ filtre-champ-large"><span class="filtre-label">Vos sénateurs : nom ou département</span>
@@ -1291,6 +1356,19 @@
     <div class="chiffre-grid" id="chiffre-grid"></div>
   </section>
 
+  <section class="view" id="view-actualites">
+    <div class="rubrique-tete">
+      <div class="surtitre">Vie politique</div>
+      <h2>Actualités</h2>
+      <p class="chapo">Les derniers titres de la rubrique politique de médias nationaux reconnus, de sensibilités différentes, relus toutes les deux heures. Le site ne reprend que le titre : chaque ligne renvoie à l'article du média qui l'a publié. Un sujet traité par plusieurs rédactions indépendantes est mis en avant.
+        <small id="actualites-maj">Flux publics des rédactions, relus toutes les deux heures.</small></p>
+    </div>
+    <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
+      <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
+    <div class="actu-liste" id="actualites-liste"><p class="chargement">Chargement des actualités…</p></div>
+    <p class="sondage-disclaimer">Titres choisis par chaque rédaction, reproduits tels quels. Les liens vers des contenus démentis par le Décodex du Monde sont écartés automatiquement.</p>
+  </section>
+
   <section class="view" id="view-meetings">
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
@@ -1322,6 +1400,7 @@
       <h2>Sondages</h2>
       <p class="chapo">Qui est en tête pour le premier tour ? Pas de moyenne maison ici : chaque institut a sa méthode, donc ses chiffres sont montrés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
     </div>
+    <div class="annonce" id="annonce-president" hidden></div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
     <div class="filtre-inline"><span class="filtre-label" id="sondage-institut-label">Institut</span>
       <div class="source-bar" id="source-bar" role="group" aria-labelledby="sondage-institut-label"></div></div>
@@ -1331,6 +1410,8 @@
       <div id="sondage-avg-list"></div>
       <p class="sondage-disclaimer">Un sondage est une photo à un instant donné, pas une prédiction. Selon la taille de l'échantillon, la marge d'erreur va de 1 à 3 points. Les candidats que l'institut n'a pas testés n'apparaissent pas.</p>
     </div>
+    <div class="second-tour" id="sondage-second-tour" hidden></div>
+    <div class="probas" id="sondage-probas" hidden></div>
     <div class="veille" id="sondage-veille" hidden></div>
     <div class="evolution" id="sondage-evolution" hidden>
       <h3>L'évolution depuis le printemps</h3>
@@ -1378,6 +1459,7 @@
       <ul>
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées chaque jour ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les deux heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Les Échos et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
@@ -2571,6 +2653,7 @@ function appliquerSondages(data){
   }));
   SONDAGES_SOURCE = data.sourceUrl ? { url: data.sourceUrl, maj: data.lastUpdated } : null;
   HISTORIQUE = (data.historique || []).filter(e=>e.dateFin && e.scores).sort((a,b)=> a.dateFin.localeCompare(b.dateFin));
+  SECOND_TOUR = data.secondTour || [];
   selectedInstitut = INSTITUTS[0] ? INSTITUTS[0].id : null;
 }
 let SONDAGES_SOURCE = null;
@@ -2661,6 +2744,124 @@ function renderSondageAverage(){
   }).join("");
 }
 
+
+/* ---------- Décompte jusqu'à l'annonce du président (dimanche du second tour, 20 h, heure de Paris) ---------- */
+// Heure d'été en France fin avril et début mai : 20 h à Paris = 18 h UTC
+const annonceTour = iso => Date.parse(iso + "T18:00:00Z");
+let annonceMinuteur = null;
+function renderAnnonce(){
+  const bloc = document.getElementById("annonce-president");
+  const maintenant = Date.now();
+  const [t1, t2] = TOURS_PRESIDENTIELLE.map(annonceTour);
+  clearTimeout(annonceMinuteur);
+  if(maintenant >= t2 + 6 * 3600e3){ bloc.hidden = true; return; }
+  const reste = Math.max(0, t2 - maintenant);
+  const j = Math.floor(reste / 864e5), h = Math.floor(reste / 36e5) % 24, m = Math.floor(reste / 6e4) % 60, s = Math.floor(reste / 1e3) % 60;
+  const deux = n => String(n).padStart(2, "0");
+  bloc.innerHTML = reste > 0
+    ? `<div class="t"><b>Annonce du président de la République</b>Dimanche 2 mai 2027 à 20 h, à la fermeture des derniers bureaux de vote${maintenant < t1 ? ` · premier tour le 18 avril` : ""}</div>
+       <div class="compte" role="timer" aria-label="Temps restant avant l'annonce du résultat">
+         <span><b>${formatNombre(j)}</b>jours</span><span><b>${deux(h)}</b>heures</span><span><b>${deux(m)}</b>min</span><span><b>${deux(s)}</b>s</span>
+       </div>`
+    : `<div class="t"><b>Le nouveau président de la République est annoncé ce soir</b>Premières estimations à 20 h ; résultats officiels proclamés par le Conseil constitutionnel.</div>`;
+  bloc.hidden = false;
+  // Mise à jour chaque seconde, seulement quand la page des sondages est affichée et l'onglet visible
+  if(reste > 0 && document.getElementById("view-sondages").classList.contains("active") && !document.hidden)
+    annonceMinuteur = setTimeout(renderAnnonce, 1000 - (Date.now() % 1000) + 5);
+}
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) renderAnnonce(); });
+
+/* ---------- Sondages du second tour (data/sondages.json, secondTour) ---------- */
+let SECOND_TOUR = [];
+function renderSecondTour(){
+  const bloc = document.getElementById("sondage-second-tour");
+  if(!SECOND_TOUR.length || periodeReserveSondages()){ bloc.hidden = true; return; }
+  const couleur = nom => CANDIDATS.find(c=>c.id===nom)?.couleur || "#8A8C94";
+  bloc.innerHTML = `<h3>Second tour : les duels testés</h3>
+    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement chaque matin, avec les mêmes contrôles qu'au premier tour.</p>
+    ${SECOND_TOUR.slice(0, 8).map(d=>{
+      const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
+      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
+        ${d.instituts.map(i=>`<div class="duel-ligne">
+          <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
+          <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
+            <span style="width:${i.scores[a]}%; background:${couleur(a)}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${couleur(b)}">${nombreFr(i.scores[b])} %</span>
+          </div></div>`).join("")}
+      </div>`;
+    }).join("")}`;
+  bloc.hidden = false;
+}
+
+/* ---------- Probabilités calculées chaque jour depuis les sondages (data/probabilites.json) ---------- */
+let PROBAS = null;
+function renderProbabilites(){
+  const bloc = document.getElementById("sondage-probas");
+  if(!PROBAS?.candidats?.length || periodeReserveSondages()){ bloc.hidden = true; return; }
+  const p = v => v === null || v === undefined ? "—" : v < 1 ? (v > 0 ? "< 1 %" : "< 0,1 %") : v > 99 ? "> 99 %" : `${nombreFr(Math.round(v))} %`;
+  const m = PROBAS.methode;
+  const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null);
+  const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1);
+  bloc.innerHTML = `<h3>Qui a le plus de chances ?</h3>
+    <p class="probas-sub">Estimation recalculée chaque matin à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
+    <table class="probas-table">
+      <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
+      <tbody>${liste.map(c=>`<tr>
+        <td>${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</td>
+        <td>${nombreFr(c.intention)} %</td>
+        <td><b>${p(c.secondTour)}</b></td>
+        <td class="barre-cell"><div class="barre"><span style="width:${c.secondTour}%; background:${couleurSerie(c.nom)}"></span></div></td>
+        ${avecVictoire ? `<td><b>${p(c.victoire)}</b></td>` : ""}
+      </tr>`).join("")}</tbody>
+    </table>
+    ${avecVictoire
+      ? (PROBAS.duelNonTeste >= 1 ? `<p class="probas-sub" style="margin-top:10px">Dans ${p(PROBAS.duelNonTeste)} des simulations, le duel final n'a jamais été testé par les sondeurs : personne n'y est déclaré élu.</p>` : "")
+      : `<p class="probas-sub" style="margin-top:10px">Chance d'être élu : affichée dès que les sondages de second tour sont disponibles.</p>`}
+    <h3 style="font-size:19px; margin-top:22px">Les seconds tours les plus probables</h3>
+    <ul class="probas-finales">${PROBAS.finales.filter(f=>f.probabilite >= 1).map(f=>`<li><b>${esc(f.candidats[0])} – ${esc(f.candidats[1])}</b> : ${p(f.probabilite)} des simulations${f.victoire ? ` · victoire de ${esc(f.victoire[f.candidats[0]] >= 50 ? f.candidats[0] : f.candidats[1])} dans ${p(Math.max(...Object.values(f.victoire)))} des cas` : " · duel pas encore testé"}</li>`).join("")}</ul>`;
+  bloc.hidden = false;
+}
+
+/* ---------- Actualités : titres de la rubrique politique des médias (data/actualites.json, toutes les 2 h) ---------- */
+let ACTUALITES = null, actuFiltre = "recoupes";
+function ilYA(iso){
+  const min = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 6e4));
+  if(min < 1) return "à l'instant";
+  if(min < 60) return `il y a ${min} min`;
+  if(min < 24 * 60) return `il y a ${Math.round(min / 60)} h`;
+  return new Date(iso).toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
+}
+function sujetHTML(s, court){
+  const a = s.articles[0];
+  const medias = [...new Set(s.articles.map(x=>x.media))];
+  return `<article class="actu-sujet">
+    ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
+    <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
+    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}</div>
+    ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
+  </article>`;
+}
+function renderActualites(){
+  const liste = document.getElementById("actualites-liste");
+  if(!ACTUALITES?.sujets?.length){ liste.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
+  const lus = (ACTUALITES.medias || []).filter(m=>m.lu).map(m=>m.nom);
+  document.getElementById("actualites-maj").textContent =
+    `Titres de ${lus.join(", ")}${ACTUALITES.lastUpdated ? `, relus ${ilYA(ACTUALITES.lastUpdated)}` : ""}.`;
+  const recoupes = ACTUALITES.sujets.filter(s=>s.medias >= 2);
+  document.getElementById("actualites-filtre").innerHTML = [["recoupes", `Repris par plusieurs médias (${recoupes.length})`], ["tous", "Tous les titres"]]
+    .map(([id, l])=>`<button type="button" class="theme-chip ${actuFiltre===id?"selected":""}" aria-pressed="${actuFiltre===id}" data-f="${id}">${l}</button>`).join("");
+  document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
+  const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
+    : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
+  liste.innerHTML = sujets.slice(0, 60).map(s=> sujetHTML(s, false)).join("");
+}
+function renderAccueilActualites(){
+  const bloc = document.getElementById("accueil-actualites");
+  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
+  if(!top.length){ bloc.hidden = true; return; }
+  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>` +
+    top.map(s=> sujetHTML(s, true)).join("");
+  bloc.hidden = false;
+}
 
 /* ---------- Veille : enquêtes déposées à la Commission des sondages (data/sondages-veille.json) ---------- */
 let VEILLE = null;
@@ -3371,7 +3572,106 @@ const titreSenat = s => { const t = s.titre.replace(/^sur\s+/i, "").replace(/\s*
 // Vote final : « sur l'ensemble du projet de loi… » ou « sur l'ensemble du texte élaboré par la commission mixte paritaire… »
 const categorieSenat = s => /^sur l.ensemble|^sur le texte élaboré/i.test(s.titre.replace(/’/g, "'")) ? "texte" : "autre";
 
+/* ---------- Hémicycle du Sénat : un point par sénateur (data/senateurs.json), par groupe ou par vote ---------- */
+// Places en demi-cercle, remplies de gauche à droite comme l'hémicycle de l'Assemblée
+function placesHemicycle(total, rangees, cx, cy, rMin, rMax){
+  const rayons = Array.from({ length: rangees }, (_, i)=> rMin + (rMax - rMin) * i / (rangees - 1));
+  const somme = rayons.reduce((a, b)=> a + b, 0);
+  const parRangee = rayons.map(r=> Math.round(total * r / somme));
+  let ecart = total - parRangee.reduce((a, b)=> a + b, 0);
+  for(let i = rangees - 1; ecart !== 0; i = (i - 1 + rangees) % rangees){ parRangee[i] += Math.sign(ecart); ecart -= Math.sign(ecart); }
+  const places = [];
+  rayons.forEach((r, rang)=>{
+    for(let i = 0; i < parRangee[rang]; i++){
+      const frac = (i + 0.5) / parRangee[rang], a = Math.PI * (1 - frac);
+      places.push({ x: cx + r * Math.cos(a), y: cy - r * Math.sin(a), frac, rang });
+    }
+  });
+  return places.sort((a, b)=> a.frac - b.frac || a.rang - b.rang);
+}
+
+let senatHemiSieges = [], senatHemiChoix = "", senatHemiPointe = null;
+const VOTE_SENAT = { p:["pour", "var(--vert)"], c:["contre", "var(--rouge)"], a:["abstention", "#E0A800"], n:["n'a pas pris part au vote", "var(--border)"] };
+async function renderSenatHemicycle(){
+  const svgS = document.getElementById("senat-hemicycle");
+  await Promise.all([chargerSenateurs(), chargerSenat()]);
+  if(!SENATEURS.length){ document.getElementById("senat-hemi").hidden = true; return; }
+  const select = document.getElementById("senat-hemi-choix");
+  if(!select.options.length){
+    const textes = SENATEURS_CLES.map(id=> SENAT.find(s=> s.id === id)).filter(Boolean).slice(0, 60);
+    select.innerHTML = `<option value="">Les groupes politiques</option>` +
+      textes.map(s=>`<option value="${esc(s.id)}">${esc(s.date)} · ${esc(titreSenat(s).slice(0, 90))}</option>`).join("");
+    select.addEventListener("change", ()=>{ senatHemiChoix = select.value; renderSenatHemicycle(); });
+  }
+  const ordreGroupes = Object.keys(GROUPES_SENAT);
+  const k = senatHemiChoix ? SENATEURS_CLES.indexOf(senatHemiChoix) : -1;
+  const code = s => (k >= 0 && s.votes?.[k]) || "n";
+  const ordreVote = "pacn";
+  const senateurs = [...SENATEURS].sort((a, b)=>
+    (ordreGroupes.indexOf(a.groupe) + 99) % 99 - (ordreGroupes.indexOf(b.groupe) + 99) % 99 ||
+    (k >= 0 ? ordreVote.indexOf(code(a)) - ordreVote.indexOf(code(b)) : 0) ||
+    a.nom.localeCompare(b.nom, "fr"));
+  const places = placesHemicycle(Math.max(348, senateurs.length), 9, 500, 510, 110, 470);
+  senatHemiSieges = senateurs.map((s, i)=> ({ ...places[i], s }));
+
+  const ns = "http://www.w3.org/2000/svg", fragment = document.createDocumentFragment();
+  for(const siege of senatHemiSieges){
+    const c = document.createElementNS(ns, "circle");
+    const couleur = k >= 0 ? VOTE_SENAT[code(siege.s)]?.[1] || "var(--border)" : groupeSenateur(siege.s).couleur;
+    c.setAttribute("cx", siege.x.toFixed(1)); c.setAttribute("cy", siege.y.toFixed(1)); c.setAttribute("r", 8.2);
+    c.setAttribute("fill", couleur); c.style.color = couleur; c.classList.add("siege");
+    siege.el = c;
+    fragment.appendChild(c);
+  }
+  for(const place of places.slice(senatHemiSieges.length)){ // sièges vacants
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", place.x.toFixed(1)); c.setAttribute("cy", place.y.toFixed(1)); c.setAttribute("r", 8.2);
+    c.setAttribute("fill", "var(--border-soft)"); c.classList.add("siege");
+    fragment.appendChild(c);
+  }
+  svgS.replaceChildren(fragment);
+  senatHemiPointe = null;
+
+  const scr = k >= 0 ? SENAT.find(s=> s.id === senatHemiChoix) : null;
+  const compte = {};
+  senatHemiSieges.forEach(({ s })=>{ const cle = k >= 0 ? code(s) : s.groupe; compte[cle] = (compte[cle] || 0) + 1; });
+  document.getElementById("senat-hemi-legende").innerHTML = (k >= 0
+    ? Object.entries(VOTE_SENAT).filter(([c])=> compte[c]).map(([c, [lib, coul]])=>`<span class="legend-item"><span class="dot" style="background:${coul}"></span>${formatNombre(compte[c])} ${lib}</span>`)
+    : ordreGroupes.filter(g=> compte[g]).map(g=>`<span class="legend-item"><span class="dot" style="background:${GROUPES_SENAT[g].couleur}"></span>${esc(GROUPES_SENAT[g].nom)} : ${formatNombre(compte[g])}</span>`)
+  ).join("") + `<span class="legend-note">${scr
+    ? `${esc(titreSenat(scr))}, ${esc(scr.date)} : <b>${scr.resultat === "adopte" ? "adopté" : "rejeté"}</b>. Vote de chaque sénateur actuellement en fonction ; au Sénat, chaque groupe peut voter pour ses membres absents. <a href="${lien(scr.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>`
+    : `${formatNombre(senatHemiSieges.length)} sénateurs en fonction${senatHemiSieges.length < 348 ? ` sur 348 sièges (${348 - senatHemiSieges.length} vacant${348 - senatHemiSieges.length > 1 ? "s" : ""})` : ""}, d'après la liste officielle du Sénat, mise à jour chaque matin. Majorité absolue : 175 sièges.`}</span>`;
+  document.getElementById("senat-hemi-info").textContent = "Survolez ou touchez un siège pour voir le sénateur.";
+}
+
+function pointerSenateur(e){
+  const svgS = document.getElementById("senat-hemicycle");
+  const ctm = svgS.getScreenCTM();
+  if(!ctm || !senatHemiSieges.length) return;
+  const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+  let meilleur = null, dMin = 22 * 22;
+  for(const siege of senatHemiSieges){
+    const d = (siege.x - pt.x) ** 2 + (siege.y - pt.y) ** 2;
+    if(d < dMin){ dMin = d; meilleur = siege; }
+  }
+  svgS.classList.toggle("sur-siege", !!meilleur);
+  if(!meilleur || meilleur === senatHemiPointe) return;
+  senatHemiPointe?.el.classList.remove("pointe");
+  meilleur.el.classList.add("pointe");
+  senatHemiPointe = meilleur;
+  const s = meilleur.s, k = senatHemiChoix ? SENATEURS_CLES.indexOf(senatHemiChoix) : -1;
+  const vote = k >= 0 ? ` · ${VOTE_SENAT[s.votes?.[k] || "n"][0]}` : "";
+  document.getElementById("senat-hemi-info").innerHTML =
+    `<b>${esc(s.nom)}</b> · ${esc(groupeSenateur(s).nom)} · ${esc(s.dep)}${esc(vote)} · <a href="#senateur-${esc(s.id)}">sa fiche</a>`;
+}
+{
+  const svgS = document.getElementById("senat-hemicycle");
+  svgS.addEventListener("pointermove", e=>{ if(e.pointerType === "mouse") pointerSenateur(e); });
+  svgS.addEventListener("click", pointerSenateur);
+}
+
 async function renderSenat(){
+  if(!document.getElementById("senat-hemicycle").childElementCount) renderSenatHemicycle();
   const liste = document.getElementById("senat-liste");
   if(!SENAT){ liste.innerHTML = `<p class="chargement">Chargement des scrutins du Sénat…</p>`; await chargerSenat(); }
   if(!SENAT.length){ liste.innerHTML = `<p class="no-result-msg">Les scrutins du Sénat sont indisponibles pour le moment.</p>`; return; }
@@ -4588,7 +4888,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -4618,7 +4918,8 @@ function activateTab(tabId){
     if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
   }
   if(tabId === "meetings") renderAgendaAN();
-  if(tabId === "sondages"){ renderEvolution(); renderVeille(); }
+  if(tabId === "actualites") renderActualites();
+  if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
   if(DONNEES_CHARGEES){
@@ -4723,15 +5024,17 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
-    lireJSON("data/candidats.json"),
+    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"),
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
   if(groupes?.groupes) GROUPES = groupes.groupes;
   if(sondages?.instituts?.length) appliquerSondages(sondages);
+  if(probas?.candidats?.length) PROBAS = probas;
+  if(actualites?.sujets) ACTUALITES = actualites;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
   if(meetings?.meetings) MEETINGS = meetings.meetings;
@@ -4809,7 +5112,12 @@ async function initSite(){
   await cede();
   renderSourceBar();
   await cede();
+  renderAccueilActualites();
+  renderActualites();
   renderSondageAverage();
+  renderSecondTour();
+  renderProbabilites();
+  renderAnnonce();
   await cede();
   renderEvolution();
   await cede();

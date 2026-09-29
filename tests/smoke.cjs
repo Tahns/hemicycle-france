@@ -49,7 +49,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
@@ -92,6 +92,8 @@ function verifier(cond, message) {
     await page.goto(base + "#sondages", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".sondage-bar-row")).length >= 4, `${nom} : sondages absents`);
+    verifier(await page.isVisible("#annonce-president .compte"), `${nom} : décompte jusqu'à l'annonce du président absent`);
+    verifier((await page.$$("#sondage-probas tbody tr")).length >= 2, `${nom} : probabilités absentes`);
     verifier((await page.$$("#evolution-graphe path")).length >= 3, `${nom} : courbe d'évolution des sondages absente`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec la courbe des sondages`);
 
@@ -115,6 +117,7 @@ function verifier(cond, message) {
     await page.goto(base + "#senat", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".senat-ligne")).length >= 10, `${nom} : scrutins du Sénat absents`);
+    verifier((await page.$$("#senat-hemicycle circle")).length === 348, `${nom} : hémicycle du Sénat incomplet`);
 
     // Recherche sur tout le site
     await page.click(nom === "mobile" ? ".loupe-mobile" : ".masthead-top .bouton-recherche");

@@ -32,6 +32,10 @@ jobs:
         id: sondages
         run: node scripts/fetch-sondages.js
         continue-on-error: true
+      - name: Probabilités (qualification au second tour, victoire) calculées depuis les sondages
+        id: probabilites
+        run: node scripts/probabilites.js
+        continue-on-error: true
 
       - name: Veille des sondages (notices de la Commission des sondages)
         id: veille
@@ -123,7 +127,7 @@ jobs:
 
       # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
       - name: Signaler un problème par un ticket GitHub
-        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
+        if: always() && (failure() || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -146,6 +150,7 @@ jobs:
             [ "${{ steps.dirigeants.outcome }}" = "failure" ] && echo "- **Chefs de parti** : au moins une infobox Wikipédia n'a pas pu être lue (entrée conservée)."
             [ "${{ steps.candidats.outcome }}" = "failure" ] && echo "- **Candidats 2027** : lecture de la page Wikipédia des candidatures impossible ou trop de lignes illisibles."
             [ "${{ steps.veille.outcome }}" = "failure" ] && echo "- **Veille des sondages** : liste ou notices de la Commission des sondages illisibles."
+            [ "${{ steps.probabilites.outcome }}" = "failure" ] && echo "- **Probabilités** : calcul impossible à partir des sondages (anciennes probabilités conservées)."
             [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
             [ -s fraicheur.txt ] && cat fraicheur.txt
             [ -s sources.txt ] && cat sources.txt

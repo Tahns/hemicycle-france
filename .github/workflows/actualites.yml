@@ -1,0 +1,34 @@
+name: Actualités
+on:
+  schedule:
+    - cron: "41 */2 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: actualites
+  cancel-in-progress: false
+jobs:
+  actualites:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Titres de la rubrique politique des médias (flux RSS)
+        run: node scripts/fetch-actualites.js
+      - name: Contrôler la cohérence des données
+        run: node scripts/check-data.js
+      - name: Committer s'il y a du nouveau
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/actualites.json
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "Actualités ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

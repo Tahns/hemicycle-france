@@ -14,14 +14,16 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Présidences et effectifs des groupes | `fetch-scrutins.js` | open data de l'Assemblée (AMO30) | `data/groupes.json` |
 | Députés en fonction : circonscription, participation, votes contre leur groupe, vote sur chaque texte et chaque censure | `fetch-scrutins.js` (via `deputes.js`) | votes nominatifs de l'Assemblée + AMO30 | `data/deputes.json` |
 | Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
-| Sondages présidentielle 2027 (dernière enquête de chaque institut, et historique des deux derniers semestres pour la courbe) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
+| Sondages présidentielle 2027 (dernière enquête de chaque institut, historique des deux derniers semestres pour la courbe, duels du second tour) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
+| Probabilités d'accéder au second tour et d'être élu (simulation à partir des sondages) | `probabilites.js` | `data/sondages.json` | `data/probabilites.json` |
+| Actualités politiques : titres et liens, sujets repris par plusieurs médias mis en avant (toutes les 2 h, workflow `actualites.yml`) | `fetch-actualites.js` | flux RSS publics de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Les Échos, Public Sénat | `data/actualites.json` |
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
 | Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
 | Activité des députés (questions écrites, amendements) et déclarations HATVP | `fetch-activite.js` (chaque semaine) | open data de l'Assemblée nationale et de la HATVP (reliées par l'identifiant du député) | `data/activite.json` |
 | Vote du Sénat sur un texte voté à l'Assemblée | `navette.js` | dossiers législatifs de l'Assemblée (lien vers le dossier du Sénat) et `data/senat.json` | `data/navette.json` |
 | Présidentielle 2022 par commune | `fetch-elections.js` (une seule fois, résultats définitifs) | ministère de l'Intérieur sur data.gouv.fr | `data/elections/*.json` |
-| Sénateurs en fonction et leur vote sur l'ensemble de chaque texte | `fetch-senateurs.js` | liste data.senat.fr et analyse détaillée des scrutins senat.fr (recoupée avec le total officiel) | `data/senateurs.json` |
+| Sénateurs en fonction et leur vote sur l'ensemble de chaque texte (aussi dessinés dans l'hémicycle du Sénat) | `fetch-senateurs.js` | liste data.senat.fr et analyse détaillée des scrutins senat.fr (recoupée avec le total officiel) | `data/senateurs.json` |
 | Composition du Gouvernement | `gouvernement.js` (appelé par `fetch-scrutins.js`) | archive AMO30 de l'Assemblée nationale | `data/gouvernement.json` |
 | Ordre du jour des séances de l'Assemblée (21 jours) et présence en commission | `fetch-agenda-an.js` | agenda open data de l'Assemblée nationale (feuilles de présence des 8 commissions permanentes) | `data/agenda-an.json`, `data/commissions.json` |
 | Logos des partis (fichiers libres de Wikimedia Commons, liste dans `data/logos.json`) | `fetch-logos.js` | commons.wikimedia.org | `icons/partis/` |

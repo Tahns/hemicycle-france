@@ -18,7 +18,7 @@ import { readFile } from "fs/promises";
 
 const DECODEX_URL = "https://asset.lemde.fr/medias/mmpub/data/decodex/hoax/hoax_debunks.json";
 const SEUIL = 10;
-const FICHIERS = ["justice", "meetings", "sondages", "candidats", "dirigeants", "indicateurs", "groupes"];
+const FICHIERS = ["justice", "meetings", "sondages", "candidats", "dirigeants", "indicateurs", "groupes", "actualites"];
 // Plateformes où n'importe qui publie : un contenu démenti n'y dit rien des autres pages
 const PLATEFORMES = /(^|\.)(facebook\.com|twitter\.com|x\.com|youtube\.com|youtu\.be|dailymotion\.com|redd\.it|reddit\.com|instagram\.com|tiktok\.com|jeuxvideo\.com|blogspot\.[a-z.]+|wordpress\.com|over-blog\.com|overblog\.com|google\.com|wikipedia\.org|change\.org|mesopinions\.com|telegram\.me|t\.me|vk\.com|imgur\.com|linkedin\.com)$/;
 

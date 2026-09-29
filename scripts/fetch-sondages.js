@@ -2,7 +2,7 @@
 /**
  * fetch-sondages.js
  * -----------------
- * Met à jour data/sondages.json (intentions de vote au 1er tour de la présidentielle 2027) à partir
+ * Met à jour data/sondages.json (intentions de vote aux deux tours de la présidentielle 2027) à partir
  * de la page Wikipédia « Liste de sondages sur l'élection présidentielle française de 2027 »,
  * qui recense chaque enquête avec un lien vers sa notice officielle déposée auprès de la
  * Commission des sondages.
@@ -158,6 +158,87 @@ function parseTableau(texte, annee) {
   return enquetes;
 }
 
+/**
+ * Second tour : tous les tableaux de la section dont le titre contient « second tour ».
+ * Une ligne est un duel quand exactement deux colonnes candidates y ont un score.
+ * Retourne [{ institut, dateTexte, dateFin, echantillon, url, duel: { nom: score }, totalValide }].
+ */
+function parseSecondTour(wikitexte, maintenant) {
+  const titre = [...wikitexte.matchAll(/^(=+)\s*([^=\n]*second tour[^=\n]*?)\s*\1\s*$/gim)][0];
+  if (!titre) return [];
+  const suite = wikitexte.slice(titre.index + titre[0].length);
+  const finSection = suite.search(new RegExp(`^={2,${titre[1].length}}[^=]`, "m"));
+  const section = finSection >= 0 ? suite.slice(0, finSection) : suite;
+
+  // Date de fin : année écrite dans la cellule, sinon celle du dernier sous-titre qui en porte une,
+  // sinon l'année en cours (ou la précédente si la date tomberait dans le futur)
+  const dateDe = (texte, avant) => {
+    const explicite = texte.match(/\b(20\d{2})\b/);
+    const titres = [...section.slice(0, avant).matchAll(/^=+[^=\n]*\b(20\d{2})\b[^=\n]*=+\s*$/gm)];
+    const an = explicite ? +explicite[1] : titres.length ? +titres.at(-1)[1] : null;
+    const sansAn = texte.replace(/\b20\d{2}\b/g, "").trim();
+    if (an) return parseDate(sansAn, an);
+    const d = parseDate(sansAn, maintenant.getUTCFullYear());
+    return d && d > maintenant ? parseDate(sansAn, maintenant.getUTCFullYear() - 1) : d;
+  };
+
+  const duels = [];
+  let pos = 0;
+  while ((pos = section.indexOf("{|", pos)) >= 0) {
+    const fin = section.indexOf("\n|}", pos);
+    if (fin < 0) break;
+    const debutTableau = pos;
+    const lignes = section.slice(pos, fin).split("\n|-");
+    pos = fin;
+
+    // Colonnes candidates : les en-têtes « ! » qui portent un lien vers une personne
+    const colonnes = [];
+    for (const l of lignes) {
+      if (/\{\{Sondeur\|/.test(l)) continue;
+      for (const e of l.split("\n").filter((x) => x.trim().startsWith("!"))) {
+        const nom = nomDepuisLien(contenuCellule(e.trim().slice(1)));
+        if (!nom || /sondage|institut|échantillon/i.test(nom)) continue;
+        colonnes.push(nom);
+        const parti = partiDepuis(e);
+        if (parti && !PARTIS[nom]) PARTIS[nom] = parti;
+      }
+    }
+    if (colonnes.length < 2) continue;
+
+    let courante = null;
+    for (const bloc of lignes) {
+      const cellules = bloc.split("\n").filter((l) => l.startsWith("|") && !/^\|[}\-+]/.test(l)).map((l) => l.slice(1));
+      if (!cellules.length || /colspan/.test(cellules[0])) continue;
+      let scores = cellules;
+      if (/\{\{Sondeur\|/.test(cellules[0])) {
+        const url = cellules[0].match(/\[(https?:\/\/\S+)\s+([^\]]+)\]/);
+        const dateTexte = contenuCellule(cellules[1] || "");
+        const brut = contenuCellule(cellules[2] || "");
+        courante = {
+          institut: (url?.[2] || brut).replace(/'''|\[\[|\]\]/g, "").trim(),
+          dateTexte,
+          dateFin: dateDe(dateTexte, debutTableau),
+          echantillon: parseInt((brut.match(/formatnum:\s*([\d\s ]+)/)?.[1] || brut).replace(/[^\d]/g, ""), 10),
+          url: url?.[1] || null,
+        };
+        if (!url) courante.institut = contenuCellule(cellules[0]).replace(/\{\{Sondeur\||\}\}|'''|\[\[|\]\]/g, "").trim();
+        scores = cellules.slice(3);
+      }
+      if (!courante) continue;
+      const duel = {};
+      scores.slice(0, colonnes.length).forEach((cell, i) => {
+        const v = valeurCellule(contenuCellule(cell));
+        if (v !== null) duel[colonnes[i]] = v;
+      });
+      const valeurs = Object.values(duel);
+      if (valeurs.length !== 2) continue;
+      const total = valeurs[0] + valeurs[1];
+      duels.push({ ...courante, duel, totalValide: total >= 97 && total <= 103 });
+    }
+  }
+  return duels;
+}
+
 function valider(e, maintenant) {
   if (!e.dateFin) return "date illisible";
   if ((maintenant - e.dateFin) / 864e5 > JOURS_MAX) return "trop ancienne";
@@ -262,9 +343,45 @@ async function main() {
     return;
   }
 
+  // Second tour : dernière enquête de chaque institut pour chaque duel, mêmes contrôles qu'au premier tour.
+  // Si le tableau de Wikipédia change de forme, aucun duel n'est lu et rien n'est publié pour le second tour.
+  const parDuel = new Map();
+  const lusSecond = parseSecondTour(wikitexte, maintenant);
+  for (const d of lusSecond) {
+    const raison = d.totalValide ? valider({ ...d, hypotheses: [d.duel], lignesInvalides: 0 }, maintenant) : "total ≠ 100 %";
+    if (raison) {
+      if (raison !== "trop ancienne") warn("second tour écarté —", `${d.institut} (${d.dateTexte}) : ${raison}`);
+      continue;
+    }
+    const noms = Object.keys(d.duel).sort();
+    const cle = noms.join(" / ");
+    if (!parDuel.has(cle)) parDuel.set(cle, { candidats: noms, parInstitut: new Map() });
+    const inst = d.institut.toLowerCase().replace(/[^a-z]/g, "");
+    const deja = parDuel.get(cle).parInstitut.get(inst);
+    if (!deja || deja.dateFin < d.dateFin) parDuel.get(cle).parInstitut.set(inst, d);
+  }
+  const secondTour = [...parDuel.values()]
+    .map(({ candidats: noms, parInstitut }) => ({
+      candidats: noms,
+      instituts: [...parInstitut.values()]
+        .sort((a, b) => b.dateFin - a.dateFin)
+        .map((d) => ({
+          nom: d.institut,
+          date: `${d.dateTexte.replace(/\{\{1er\}\}/g, "1er").replace(/\b20\d{2}\b/g, "")} ${d.dateFin.getUTCFullYear()}`.replace(/\{\{[^}]*\}\}/g, "").replace(/\s+/g, " ").trim(),
+          dateFin: d.dateFin.toISOString().slice(0, 10),
+          echantillon: d.echantillon,
+          url: d.url,
+          scores: d.duel,
+        })),
+    }))
+    .sort((a, b) => b.instituts.length - a.instituts.length || b.instituts[0].dateFin.localeCompare(a.instituts[0].dateFin));
+  log(`Second tour : ${lusSecond.length} ligne(s) lue(s), ${secondTour.length} duel(s) retenu(s).`);
+
   const candidats = {};
   for (const i of [...instituts, ...historique]) for (const nom of Object.keys(i.scores)) candidats[nom] = PARTIS[nom] || null;
+  for (const d of secondTour) for (const nom of d.candidats) if (!(nom in candidats)) candidats[nom] = PARTIS[nom] || null;
   const sortie = { source: "Wikipédia — liste des sondages (notices de la Commission des sondages)", sourceUrl: PAGE_URL, candidats, instituts, historique };
+  if (secondTour.length) sortie.secondTour = secondTour;
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "{}"));
   delete ancien.lastUpdated;
   if (JSON.stringify(ancien) === JSON.stringify(sortie)) return log("Aucun changement.");
