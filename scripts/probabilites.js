@@ -55,8 +55,10 @@ const ecart2 = 2 + 7 * echelle(joursAvant(TOUR2));
 
 // ---------- Second tour : moyenne de chaque duel testé ----------
 const duels = new Map(); // "A|B" (ordre alphabétique) -> part moyenne de A
+const enLice = new Set(candidats.map((c) => c.nom));
 for (const d of data.secondTour || []) {
   const [a, b] = [...d.candidats].sort();
+  if (!enLice.has(a) || !enLice.has(b)) continue; // duel entre candidats absents du premier tour : inutilisable
   const parts = d.instituts.map((i) => (100 * i.scores[a]) / (i.scores[a] + i.scores[b])).filter(Number.isFinite);
   if (parts.length) duels.set(`${a}|${b}`, parts.reduce((s, x) => s + x, 0) / parts.length);
 }

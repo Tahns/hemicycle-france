@@ -36,7 +36,6 @@ const MEDIAS = [
   { id: "lefigaro", nom: "Le Figaro", flux: "https://www.lefigaro.fr/rss/figaro_politique.xml", domaine: "lefigaro.fr" },
   { id: "liberation", nom: "Libération", flux: "https://www.liberation.fr/arc/outboundfeeds/rss/category/politique/?outputType=xml", domaine: "liberation.fr" },
   { id: "20minutes", nom: "20 Minutes", flux: "https://www.20minutes.fr/feeds/rss-politique.xml", domaine: "20minutes.fr" },
-  { id: "lesechos", nom: "Les Échos", flux: "https://syndication.lesechos.fr/rss/rss_politique.xml", domaine: "lesechos.fr" },
   { id: "publicsenat", nom: "Public Sénat", flux: "https://www.publicsenat.fr/feed", domaine: "publicsenat.fr" },
 ];
 
@@ -152,18 +151,23 @@ async function main() {
   const vus = new Set();
   const uniques = articles.filter((a) => !vus.has(a.url) && vus.add(a.url)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, MAX);
 
-  // Sujets : regroupement des titres proches, du plus récent au plus ancien
+  // Sujets : chaque titre est comparé au premier titre du sujet (pas à tous : sinon les sujets s'enchaînent)
   const sujets = [];
   for (const a of uniques) {
     const m = mots(a.titre);
-    const s = m.size >= 2 && sujets.find((x) => x.articles.some((y) => memeSujet(m, mots(y.titre))));
-    if (s) {
-      s.articles.push(a);
-      for (const x of m) s.mots.add(x);
-    } else sujets.push({ mots: new Set(m), articles: [a] });
+    const s = m.size >= 2 && sujets.find((x) => memeSujet(m, x.mots));
+    if (s) s.articles.push(a);
+    else sujets.push({ mots: m, articles: [a] });
   }
+  // Titre de tête : le plus proche des autres titres du sujet (à égalité, le plus récent)
+  const central = (articles) => {
+    const ens = articles.map((a) => mots(a.titre));
+    const score = (i) => ens.reduce((t, e, j) => t + (i === j ? 0 : [...ens[i]].filter((x) => e.has(x)).length), 0);
+    const i = ens.map((_, k) => k).sort((x, y) => score(y) - score(x) || x - y)[0];
+    return [articles[i], ...articles.filter((_, k) => k !== i)];
+  };
   const sortieSujets = sujets
-    .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, articles: s.articles }))
+    .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, articles: central(s.articles) }))
     .sort((a, b) => b.medias - a.medias || b.derniere.localeCompare(a.derniere));
 
   const sortie = {
