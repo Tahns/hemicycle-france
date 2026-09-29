@@ -45,8 +45,11 @@ function warn(...m) {
 
 /** Nom affiché depuis un lien wiki [[Cible|Texte]] ou [[Cible]] : on garde la cible (nom complet). */
 function nomDepuisLien(s) {
-  const m = s.match(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/);
-  return m ? m[1].trim() : null;
+  // Les en-têtes peuvent commencer par la photo du candidat ([[Fichier:…|80px]]) : on l'ignore
+  for (const m of s.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) {
+    if (!/^\s*(fichier|file|image)\s*:/i.test(m[1])) return m[1].trim();
+  }
+  return null;
 }
 
 /** Sigle du parti affiché dans « ([[Parti socialiste (France)|PS]]) » ; null si absent. */

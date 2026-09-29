@@ -96,6 +96,7 @@ async function checkSondages() {
   }
   for (const d of data.secondTour || []) {
     if (!Array.isArray(d.candidats) || d.candidats.length !== 2 || !d.instituts?.length) err(`sondages.json : duel de second tour incomplet (${d.candidats})`);
+    for (const nom of d.candidats || []) if (/^(fichier|file|image)\s*:/i.test(nom) || !(nom in (data.candidats || {}))) err(`sondages.json : second tour, candidat inconnu « ${nom} »`);
     for (const i of d.instituts || []) {
       const v = d.candidats.map((n) => i.scores?.[n]);
       if (!i.nom || !/^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") || !/^https:\/\//.test(i.url || "")) err(`sondages.json : second tour ${i.nom || "?"} incomplet`);
