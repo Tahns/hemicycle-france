@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-09-29T13:05:59.465Z",
+  "lastUpdated": "2026-09-30T11:02:51.479Z",
   "methode": {
-    "instituts": 6,
-    "duels": 6,
+    "instituts": 7,
+    "duels": 7,
     "tirages": 20000,
     "ecartPremierTour": 5.9,
     "ecartSecondTour": 6.1,
@@ -15,84 +15,84 @@
     {
       "nom": "Marine Le Pen",
       "parti": "RN",
-      "intention": 33.6,
-      "secondTour": 98.3,
-      "victoire": 85.5
-    },
-    {
-      "nom": "Édouard Philippe",
-      "parti": "HOR",
-      "intention": 17,
-      "secondTour": 43.2,
-      "victoire": 10.1
+      "intention": 33.8,
+      "secondTour": 98.6,
+      "victoire": 86.6
     },
     {
       "nom": "Jean-Luc Mélenchon",
       "parti": "LFI",
       "intention": 16.9,
-      "secondTour": 42.4,
+      "secondTour": 44.3,
       "victoire": 0.1
+    },
+    {
+      "nom": "Édouard Philippe",
+      "parti": "HOR",
+      "intention": 16.5,
+      "secondTour": 41.7,
+      "victoire": 10.6
     },
     {
       "nom": "Raphaël Glucksmann",
       "parti": "PP",
-      "intention": 12,
-      "secondTour": 9,
-      "victoire": 1.4
+      "intention": 11.3,
+      "secondTour": 8.1,
+      "victoire": 1.1
     },
     {
       "nom": "Gabriel Attal",
       "parti": "RE",
-      "intention": 10.3,
-      "secondTour": 4.7,
-      "victoire": 0.8
-    },
-    {
-      "nom": "François Hollande",
-      "parti": "PS",
-      "intention": 8.4,
-      "secondTour": 1.2,
-      "victoire": 0.3
+      "intention": 10.4,
+      "secondTour": 5.1,
+      "victoire": 0.9
     },
     {
       "nom": "Bruno Retailleau",
       "parti": "LR",
       "intention": 8.3,
-      "secondTour": 1.2,
+      "secondTour": 1.4,
+      "victoire": 0.1
+    },
+    {
+      "nom": "François Hollande",
+      "parti": "PS",
+      "intention": 7.6,
+      "secondTour": 0.8,
       "victoire": 0.1
     },
     {
       "nom": "Éric Zemmour",
       "parti": "REC",
-      "intention": 3.8,
+      "intention": 4,
       "secondTour": 0,
       "victoire": 0
     },
     {
       "nom": "Marine Tondelier",
       "parti": "LE",
-      "intention": 3.5,
+      "intention": 3.6,
       "secondTour": 0,
       "victoire": 0
     },
     {
       "nom": "David Lisnard",
       "parti": null,
-      "intention": 3.4,
+      "intention": 3.1,
       "secondTour": 0,
       "victoire": 0
     },
     {
       "nom": "Fabien Roussel",
       "parti": "PCF",
-      "intention": 3,
+      "intention": 2.8,
       "secondTour": 0,
       "victoire": 0
     },
     {
       "nom": "Nicolas Dupont-Aignan",
       "parti": "DLF",
-      "intention": 2.5,
+      "intention": 2.4,
       "secondTour": 0,
       "victoire": 0
     },
@@ -104,28 +104,28 @@
       "victoire": 0
     }
   ],
-  "duelNonTeste": 1.7,
+  "duelNonTeste": 0.6,
   "finales": [
-    {
-      "candidats": [
-        "Marine Le Pen",
-        "Édouard Philippe"
-      ],
-      "probabilite": 41.8,
-      "victoire": {
-        "Marine Le Pen": 75.9,
-        "Édouard Philippe": 24.1
-      }
-    },
     {
       "candidats": [
         "Jean-Luc Mélenchon",
         "Marine Le Pen"
       ],
-      "probabilite": 41,
+      "probabilite": 43.2,
       "victoire": {
-        "Jean-Luc Mélenchon": 0.1,
-        "Marine Le Pen": 99.9
+        "Jean-Luc Mélenchon": 0.2,
+        "Marine Le Pen": 99.8
+      }
+    },
+    {
+      "candidats": [
+        "Marine Le Pen",
+        "Édouard Philippe"
+      ],
+      "probabilite": 40.5,
+      "victoire": {
+        "Marine Le Pen": 76,
+        "Édouard Philippe": 24
       }
     },
     {
@@ -133,10 +133,10 @@
         "Marine Le Pen",
         "Raphaël Glucksmann"
       ],
-      "probabilite": 8.6,
+      "probabilite": 7.8,
       "victoire": {
-        "Marine Le Pen": 83.9,
-        "Raphaël Glucksmann": 16.1
+        "Marine Le Pen": 86.1,
+        "Raphaël Glucksmann": 13.9
       }
     },
     {
@@ -144,21 +144,10 @@
         "Gabriel Attal",
         "Marine Le Pen"
       ],
-      "probabilite": 4.5,
+      "probabilite": 4.9,
       "victoire": {
-        "Gabriel Attal": 17.9,
-        "Marine Le Pen": 82.1
-      }
-    },
-    {
-      "candidats": [
-        "François Hollande",
-        "Marine Le Pen"
-      ],
-      "probabilite": 1.2,
-      "victoire": {
-        "François Hollande": 28.6,
-        "Marine Le Pen": 71.4
+        "Gabriel Attal": 17.2,
+        "Marine Le Pen": 82.8
       }
     },
     {
@@ -166,10 +155,21 @@
         "Bruno Retailleau",
         "Marine Le Pen"
       ],
-      "probabilite": 1.1,
+      "probabilite": 1.4,
       "victoire": {
-        "Bruno Retailleau": 12.5,
-        "Marine Le Pen": 87.5
+        "Bruno Retailleau": 9.6,
+        "Marine Le Pen": 90.4
+      }
+    },
+    {
+      "candidats": [
+        "Jean-Luc Mélenchon",
+        "Édouard Philippe"
+      ],
+      "probabilite": 0.9,
+      "victoire": {
+        "Jean-Luc Mélenchon": 3.3,
+        "Édouard Philippe": 96.7
       }
     }
   ]
