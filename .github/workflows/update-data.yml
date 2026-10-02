@@ -28,6 +28,10 @@ jobs:
         id: insee
         run: node scripts/fetch-insee.js
         continue-on-error: true
+      - name: Budget de l'État et de la Sécurité sociale (Eurostat, comptes des administrations publiques)
+        id: budget
+        run: node scripts/fetch-budget.js
+        continue-on-error: true
       - name: Sondages (liste Wikipédia, notices de la Commission des sondages)
         id: sondages
         run: node scripts/fetch-sondages.js
@@ -137,7 +141,7 @@ jobs:
 
       # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
       - name: Signaler un problème dans le résumé de l'exécution
-        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
+        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -147,6 +151,7 @@ jobs:
             echo
             [ "${{ steps.scrutins.outcome }}" = "failure" ] && echo "- **Scrutins** : échec du script (les votes ne sont plus mis à jour)."
             [ "${{ steps.insee.outcome }}" = "failure" ] && echo "- **Insee** : au moins un indicateur n'a pas pu être mis à jour (valeur précédente conservée)."
+            [ "${{ steps.budget.outcome }}" = "failure" ] && echo "- **Budget** : données d'Eurostat illisibles, incomplètes ou incohérentes (fichier précédent conservé, la rubrique garde les derniers chiffres)."
             [ "${{ steps.partage.outcome }}" = "failure" ] && echo "- **Partage** : les pages d'aperçu des nouveaux votes n'ont pas pu être générées (le lien partagé renvoie alors vers le vote sans image d'aperçu)."
             [ "${{ steps.communes.outcome }}" = "failure" ] && echo "- **Communes** : la table communes → circonscriptions n'a pas pu être reconstruite (la recherche par commune garde l'ancienne)."
             [ "${{ steps.senat.outcome }}" = "failure" ] && echo "- **Sénat** : lecture des scrutins impossible ou nombreux scrutins écartés (format des pages changé ?)."

@@ -1009,6 +1009,33 @@
   .gauge-svg{width:112px; height:112px; flex-shrink:0;}
   .gauge-value{font-family:var(--font-display); font-size:28px; font-weight:600; line-height:1.1;}
   .gauge-note{font-size:13.5px; color:var(--text-soft); margin-top:6px;}
+  /* ---------- Budget : où va l'argent public ---------- */
+  :root{ --bud-1:#1B3A8C; --bud-2:#12806A; --bud-3:#9A5500; --bud-4:#5B4FC9; --bud-5:#B3261E; --bud-6:#4F7A28; --bud-7:#6B5B95; --bud-8:#1F7A99; --bud-9:#B0447F; --bud-10:#7A6A2F; --bud-11:#5D6470; }
+  :root[data-theme="sombre"]{ --bud-1:#8FA3EE; --bud-2:#5FC4A8; --bud-3:#E5A75A; --bud-4:#A99FF0; --bud-5:#F08A80; --bud-6:#9CCB6B; --bud-7:#B9A6E8; --bud-8:#6CC3E3; --bud-9:#E58FBF; --bud-10:#CDB968; --bud-11:#A9B0BC; }
+  .budget-bloc{margin:0 0 34px;}
+  .budget-bloc h3{margin:0 0 6px; font-family:var(--font-display); font-size:24px; font-weight:600;}
+  .budget-phrase{margin:0 0 16px; max-width:760px; color:var(--text-soft); font-size:16px;}
+  .budget-phrase b{color:var(--text);}
+  .budget-source{margin-top:12px; font-size:12.5px; color:var(--text-faint);}
+  .budget-barres{list-style:none; margin:0; padding:0; border-top:1px solid var(--ink);}
+  .budget-barres li{padding:10px 0 11px; border-bottom:1px solid var(--border);}
+  .budget-ligne{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:6px;}
+  .budget-ligne .nom{font-weight:600; min-width:0; overflow-wrap:anywhere;}
+  .budget-ligne .val{flex:none; font-variant-numeric:tabular-nums; color:var(--text-soft); text-align:right; font-size:14.5px;}
+  .budget-ligne .val b{color:var(--text);}
+  .budget-piste{height:14px; border-radius:7px; background:var(--bg-elevated-2); overflow:hidden;}
+  .budget-piste i{display:block; height:100%; border-radius:7px; min-width:3px; background:var(--bud, var(--accent));}
+  .budget-chiffres{display:grid; grid-template-columns:1fr; gap:0 28px; border-top:1px solid var(--ink); margin-top:18px;}
+  @media(min-width:640px){ .budget-chiffres{grid-template-columns:repeat(3,1fr);} }
+  .budget-chiffres > div{padding:14px 0 16px; border-bottom:1px solid var(--border);}
+  .budget-chiffres .petit{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:4px;}
+  .budget-chiffres .gros{font-family:var(--font-display); font-size:30px; font-weight:600; line-height:1.1; font-variant-numeric:lining-nums;}
+  .budget-chiffres .gros.rouge{color:var(--rouge);} .budget-chiffres .gros.vert{color:var(--vert);}
+  .budget-chiffres .note{font-size:13.5px; color:var(--text-soft); margin-top:4px;}
+  .budget-serie{display:grid; grid-template-columns:1fr; gap:22px 40px;}
+  @media(min-width:760px){ .budget-serie{grid-template-columns:1fr 1fr;} }
+  .budget-serie h4{margin:0 0 4px; font-size:14px; font-weight:700;}
+  .budget-vide{padding:22px 0; color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
   .chiffre-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:0 28px; border-top:1px solid var(--ink);}
   .chiffre-card{padding:16px 0 18px; border-bottom:1px solid var(--border); display:flex; flex-direction:column;}
   .chiffre-card .chiffre-label{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:4px;}
@@ -1250,6 +1277,7 @@
     <div class="tab" data-tab="justice">Justice</div>
     <span class="tab-sep" aria-hidden="true"></span>
     <div class="tab" data-tab="chiffres">Économie</div>
+    <div class="tab" data-tab="budget">Budget</div>
     <div class="tab" data-tab="quiz">Quiz</div>
   </div>
 </nav>
@@ -1283,6 +1311,7 @@
   <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
+  <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
   <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
@@ -1519,6 +1548,15 @@
     <div class="chiffre-grid" id="chiffre-grid"></div>
   </section>
 
+  <section class="view" id="view-budget">
+    <div class="rubrique-tete">
+      <div class="surtitre">L'argent public</div>
+      <h2>Budget</h2>
+      <p class="chapo">Où va l'argent public, d'où il vient, combien il manque et ce que pèse la dette. Les chiffres concernent l'ensemble des administrations publiques : État, collectivités locales et Sécurité sociale. Ils sont donnés tels que publiés, sans commentaire.</p>
+    </div>
+    <div id="budget-contenu"><p class="chargement">Chargement du budget…</p></div>
+  </section>
+
   <section class="view" id="view-actualites">
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
@@ -1623,6 +1661,7 @@
       <ul>
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
+        <li><b>Budget, déficit et dette :</b> comptes des administrations publiques de la France (établis par l'Insee) tels que notifiés à <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=fr" target="_blank" rel="noopener">Eurostat</a> (tableaux gov_10a_exp, gov_10a_main et gov_10dd_edpt1, API publique), réutilisables sous licence ouverte (<a href="https://commission.europa.eu/legal-notice/reuse-commission-documents_fr" target="_blank" rel="noopener">politique de réutilisation de la Commission européenne</a>, source citée). Chaque bloc de la rubrique « Budget » indique sa source et son année.</li>
         <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
@@ -1679,7 +1718,7 @@
     </div>
     <div class="texte-legal">
       <h3>Sources</h3>
-      <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
+      <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; le budget, le déficit et la dette des comptes publics publiés par Eurostat ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
 
       <h3>Fréquence de mise à jour</h3>
       <p>Un traitement automatique est lancé toutes les heures : il relit les sources publiques, vérifie la cohérence des fichiers puis publie. Les dates ci-dessous sont lues dans les fichiers de données eux-mêmes ; elles indiquent la dernière réécriture du fichier, pas la date des faits.</p>
@@ -3437,14 +3476,16 @@ const FICHIERS_METHODE = [
   ["Scrutins de l'Assemblée", "data/lois.json"], ["Groupes parlementaires", "data/groupes.json"], ["Députés", "data/deputes.json"],
   ["Scrutins du Sénat", "data/senat.json"], ["Sondages", "data/sondages.json"], ["Candidats", "data/candidats.json"],
   ["Indicateurs Insee", "data/indicateurs.json"], ["Actualités", "data/actualites.json"], ["Agenda de l'Assemblée", "data/agenda-an.json"],
+  ["Budget (Eurostat)", "data/budget.json", true], // facultatif : ligne masquée tant que le fichier n'existe pas
 ];
 let methodeRendue = false;
 async function renderMethode(){
   if(methodeRendue) return;
   methodeRendue = true;
   const corps = document.getElementById("methode-maj");
-  const lignes = await Promise.all(FICHIERS_METHODE.map(async ([nom, f])=>{
+  const lignes = await Promise.all(FICHIERS_METHODE.map(async ([nom, f, facultatif])=>{
     const d = await lireJSON(f);
+    if(facultatif && !d) return "";
     const maj = d?.lastUpdated && !isNaN(Date.parse(d.lastUpdated)) ? new Date(d.lastUpdated).toLocaleString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit" }).replace(":", " h ") : "date non indiquée";
     return `<tr><td>${esc(nom)}</td><td><code>${esc(f)}</code></td><td>${esc(maj)}</td></tr>`;
   }));
@@ -3714,6 +3755,101 @@ function renderBudgetGauges(){
       </div>
     </div>`;
   }).join("");
+}
+
+/* ---------- Budget : où va l'argent public (data/budget.json, Eurostat / comptes de l'Insee) ---------- */
+
+let BUDGET; // undefined = pas encore lu ; null = fichier absent ou inexploitable (aucun chiffre n'est alors affiché)
+const BUDGET_COULEURS = { GF10:1, GF07:2, GF09:3, GF04:4, GF03:5, GF02:6, GF0107:7, GF01:8, GF06:9, GF08:10, GF05:11 };
+const BUDGET_VERS = { GF10:"à la protection sociale", GF07:"à la santé", GF09:"à l'éducation", GF04:"aux affaires économiques", GF03:"à l'ordre et à la sécurité publics",
+  GF02:"à la défense", GF0107:"au paiement des intérêts de la dette", GF01:"aux services publics généraux", GF06:"au logement et aux équipements collectifs",
+  GF08:"aux loisirs, à la culture et au culte", GF05:"à la protection de l'environnement" };
+const nbOk = v => typeof v === "number" && isFinite(v);
+const fmtNb = (v, dec = 1) => v.toLocaleString("fr-FR", { minimumFractionDigits:dec, maximumFractionDigits:dec });
+const fmtMd = v => `${fmtNb(v, Math.abs(v) >= 100 ? 0 : 1)} Md€`;
+const fmtPct = v => `${fmtNb(v, 1)} %`;
+const fmtEur = v => `${fmtNb(v, Number.isInteger(v) ? 0 : 1)} €`;
+const signe = v => v < 0 ? "−" : v > 0 ? "+" : "";
+
+function budgetSource(b, annee){
+  return `<div class="budget-source">Source : ${esc(b.source)} · année ${annee} · <a href="${lien(b.url)}" target="_blank" rel="noopener">voir les données</a></div>`;
+}
+// Une ligne à barre : { nom, val (HTML), part (0 à 100), couleur }
+function budgetBarres(lignes){
+  return `<ul class="budget-barres">${lignes.map(l=>`<li><div class="budget-ligne"><span class="nom">${esc(l.nom)}</span><span class="val">${l.val}</span></div>
+    <div class="budget-piste" aria-hidden="true"><i style="width:${Math.max(0, Math.min(100, l.part)).toFixed(1)}%; --bud:${l.couleur}"></i></div></li>`).join("")}</ul>`;
+}
+
+function budgetDepenses(d){
+  if(!d || !Array.isArray(d.postes) || d.postes.length < 3 || !d.postes.every(p=> p && p.libelle && nbOk(p.md) && nbOk(p.pct)) || !nbOk(d.totalMd) || !nbOk(d.annee)) return "";
+  const postes = [...d.postes].sort((a,b)=> b.md - a.md);
+  const max = Math.max(...postes.map(p=>p.pct), 1);
+  const tete = postes.slice(0, 4).map(p=> `${fmtEur(p.pct)} ${BUDGET_VERS[p.code] || "à : " + p.libelle.toLowerCase()}`);
+  const phrase = `Pour 100 € dépensés par l'État, les collectivités et la Sécurité sociale, ${tete.slice(0,-1).join(", ")} et ${tete[tete.length-1]}. Le détail est ci-dessous.`;
+  return `<div class="budget-bloc"><h3>Où va l'argent public ?</h3>
+    <p class="budget-phrase">${esc(phrase)}</p>
+    <p class="budget-phrase">En ${d.annee}, les dépenses publiques ont représenté <b>${fmtMd(d.totalMd)}</b>, classées par grande fonction (classification internationale COFOG).</p>
+    ${budgetBarres(postes.map(p=>({ nom:p.libelle, val:`<b>${fmtMd(p.md)}</b> · ${fmtPct(p.pct)}`, part:p.pct / max * 100, couleur:`var(--bud-${BUDGET_COULEURS[p.code] || 11})` })))}
+    ${budgetSource(d, d.annee)}</div>`;
+}
+
+function budgetEquilibre(e){
+  if(!e || ![e.recettesMd, e.depensesMd, e.soldeMd, e.soldePib, e.annee].every(nbOk)) return "";
+  const deficit = e.soldeMd < 0, max = Math.max(e.recettesMd, e.depensesMd);
+  const couverts = e.depensesMd > 0 ? e.recettesMd / e.depensesMd * 100 : null;
+  const phrase = `En ${e.annee}, les administrations publiques ont reçu ${fmtMd(e.recettesMd)} et dépensé ${fmtMd(e.depensesMd)}. ` +
+    (e.soldeMd === 0 ? "Les recettes ont égalé les dépenses."
+      : deficit ? `Il a manqué ${fmtMd(-e.soldeMd)}, soit ${fmtPct(-e.soldePib)} du PIB : c'est le déficit public.`
+      : `Les recettes ont dépassé les dépenses de ${fmtMd(e.soldeMd)}, soit ${fmtPct(e.soldePib)} du PIB : c'est un excédent.`) +
+    (couverts !== null ? ` Pour 100 € dépensés, ${fmtEur(Math.round(couverts * 10) / 10)} ont été couverts par des recettes.` : "");
+  return `<div class="budget-bloc"><h3>D'où vient l'argent, et où est le déficit ?</h3>
+    <p class="budget-phrase">${esc(phrase)}</p>
+    ${budgetBarres([
+      { nom:"Recettes (impôts, cotisations…)", val:`<b>${fmtMd(e.recettesMd)}</b>${nbOk(e.recettesPib) ? ` · ${fmtPct(e.recettesPib)} du PIB` : ""}`, part:e.recettesMd / max * 100, couleur:"var(--bud-2)" },
+      { nom:"Dépenses", val:`<b>${fmtMd(e.depensesMd)}</b>${nbOk(e.depensesPib) ? ` · ${fmtPct(e.depensesPib)} du PIB` : ""}`, part:e.depensesMd / max * 100, couleur:"var(--bud-3)" },
+    ])}
+    <div class="budget-chiffres"><div><div class="petit">${deficit ? "Déficit" : "Excédent"}</div><div class="gros ${deficit ? "rouge" : "vert"}">${fmtMd(Math.abs(e.soldeMd))}</div><div class="note">${fmtPct(Math.abs(e.soldePib))} du PIB, en ${e.annee}</div></div></div>
+    ${budgetSource(e, e.annee)}</div>`;
+}
+
+function budgetDette(d){
+  if(!d || ![d.md, d.pib, d.interetsMd, d.annee].every(nbOk)) return "";
+  const pct = nbOk(d.interetsPctDepenses) ? d.interetsPctDepenses : null;
+  return `<div class="budget-bloc"><h3>Ce que pèse la dette</h3>
+    <p class="budget-phrase">La dette publique est ce que les administrations publiques doivent au total à leurs prêteurs. Fin ${d.annee}, elle s'élevait à <b>${fmtMd(d.md)}</b>, soit ${fmtPct(d.pib)} du PIB.${pct !== null ? ` Sur 100 € dépensés en ${d.annee}, ${fmtEur(pct)} ont servi à payer les intérêts de cette dette.` : ""}</p>
+    <div class="budget-chiffres">
+      <div><div class="petit">Dette publique</div><div class="gros">${fmtMd(d.md)}</div><div class="note">fin ${d.annee}</div></div>
+      <div><div class="petit">En part du PIB</div><div class="gros">${fmtPct(d.pib)}</div><div class="note">dette au sens de Maastricht</div></div>
+      <div><div class="petit">Charge d'intérêts</div><div class="gros">${fmtMd(d.interetsMd)}</div><div class="note">en ${d.annee}${pct !== null ? `, soit ${fmtPct(pct)} des dépenses` : ""}</div></div>
+    </div>
+    ${budgetSource(d, d.annee)}</div>`;
+}
+
+function budgetSerie(s){
+  const a = s?.annees;
+  if(!Array.isArray(a) || a.length < 2 || !a.every(x=> [x.annee, x.soldeMd, x.soldePib, x.detteMd, x.dettePib].every(nbOk))) return "";
+  const maxS = Math.max(...a.map(x=>Math.abs(x.soldePib)), 0.1), maxD = Math.max(...a.map(x=>x.dettePib), 0.1);
+  const der = a[a.length - 1].annee;
+  return `<div class="budget-bloc"><h3>Ces dernières années</h3>
+    <p class="budget-phrase">Le solde et la dette des administrations publiques, de ${a[0].annee} à ${der}, en part du PIB.</p>
+    <div class="budget-serie">
+      <div><h4>Solde (− déficit, + excédent)</h4>${budgetBarres(a.map(x=>({ nom:String(x.annee), val:`<b>${signe(x.soldePib)}${fmtPct(Math.abs(x.soldePib))}</b> · ${signe(x.soldeMd)}${fmtMd(Math.abs(x.soldeMd))}`, part:Math.abs(x.soldePib) / maxS * 100, couleur:x.soldePib < 0 ? "var(--rouge)" : "var(--vert)" })))}</div>
+      <div><h4>Dette</h4>${budgetBarres(a.map(x=>({ nom:String(x.annee), val:`<b>${fmtPct(x.dettePib)}</b> · ${fmtMd(x.detteMd)}`, part:x.dettePib / maxD * 100, couleur:"var(--bud-3)" })))}</div>
+    </div>
+    ${budgetSource(s, `${a[0].annee} à ${der}`)}</div>`;
+}
+
+async function renderBudget(){
+  const el = document.getElementById("budget-contenu");
+  if(BUDGET === undefined){
+    const d = await lireJSON("data/budget.json");
+    BUDGET = d && typeof d === "object" ? d : null;
+  }
+  // Aucun chiffre sans fichier : pas de repli inventé
+  const html = BUDGET ? budgetDepenses(BUDGET.depenses) + budgetEquilibre(BUDGET.equilibre) + budgetDette(BUDGET.dette) + budgetSerie(BUDGET.serie) : "";
+  if(!html){ el.innerHTML = `<p class="budget-vide">Données en cours de récupération. Les chiffres du budget s'afficheront ici dès qu'ils auront été lus à la source officielle.</p>`; return; }
+  const maj = BUDGET.lastUpdated && dateCourte(BUDGET.lastUpdated);
+  el.innerHTML = html + `<p class="budget-source">Les comptes publics sont publiés avec un décalage : l'année la plus récente est souvent l'année écoulée ou la précédente.${maj ? ` Fichier relu le ${esc(maj)}.` : ""}</p>`;
 }
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
@@ -6115,7 +6251,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "methode", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "budget", "methode", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -6148,6 +6284,7 @@ function activateTab(tabId){
   if(tabId === "actualites") renderActualites();
   if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "methode") renderMethode();
+  if(tabId === "budget") renderBudget();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe

@@ -68,6 +68,44 @@ async function checkIndicateurs() {
   console.log(`[check-data] indicateurs.json : ${data.indicateurs.length} indicateurs contrôlés.`);
 }
 
+/** Budget : fichier facultatif (absent tant que la première récupération n'a pas réussi) ; s'il existe, il doit être complet et cohérent. */
+async function checkBudget() {
+  const fichier = process.env.BUDGET_FILE || "data/budget.json";
+  const d = JSON.parse(await readFile(fichier, "utf-8").catch(() => "null"));
+  if (!d) return console.log("[check-data] budget.json : absent (la rubrique affiche « données en cours de récupération »).");
+  const nb = (v) => typeof v === "number" && Number.isFinite(v);
+  const annee = (a, ou) => { if (!Number.isInteger(a) || a < 2000 || a > new Date().getFullYear()) err(`budget.json : année invalide (${ou})`); };
+  const source = (b, ou) => { if (!b?.source) err(`budget.json : source manquante (${ou})`); if (!/^https:\/\//.test(b?.url || "")) err(`budget.json : url manquante ou non https (${ou})`); };
+  if (!d.lastUpdated || isNaN(Date.parse(d.lastUpdated))) err("budget.json : lastUpdated invalide");
+  annee(d.anneeReference, "anneeReference");
+  const { depenses: dep, equilibre: eq, dette, serie } = d;
+  if (!dep || !Array.isArray(dep.postes) || dep.postes.length < 8) return err("budget.json : dépenses par fonction absentes ou incomplètes");
+  annee(dep.annee, "dépenses"); source(dep, "dépenses");
+  let somme = 0;
+  for (const p of dep.postes) {
+    if (!p.code || !p.libelle || !nb(p.md) || p.md < 0 || !nb(p.pct) || p.pct < 0 || p.pct > 100) err(`budget.json : poste ${p.code || "?"} invalide`);
+    somme += p.md;
+  }
+  if (!nb(dep.totalMd) || Math.abs(somme - dep.totalMd) > Math.max(1, dep.totalMd * 0.01)) err(`budget.json : la somme des postes (${somme.toFixed(1)}) ne correspond pas au total (${dep.totalMd})`);
+  if (!eq || ![eq.recettesMd, eq.depensesMd, eq.soldeMd, eq.soldePib].every(nb)) err("budget.json : recettes, dépenses ou solde manquants");
+  else {
+    annee(eq.annee, "équilibre"); source(eq, "équilibre");
+    if (Math.abs(eq.recettesMd - eq.depensesMd - eq.soldeMd) > 1.5) err("budget.json : recettes − dépenses ≠ solde");
+  }
+  if (!dette || ![dette.md, dette.pib, dette.interetsMd].every(nb) || dette.pib <= 0 || dette.pib >= 300) err("budget.json : dette ou charge d'intérêts manquante ou invraisemblable");
+  else { annee(dette.annee, "dette"); source(dette, "dette"); }
+  if (dep.annee !== d.anneeReference || eq?.annee !== d.anneeReference || dette?.annee !== d.anneeReference) err("budget.json : les blocs ne portent pas tous l'année de référence");
+  if (!Array.isArray(serie?.annees) || !serie.annees.length) err("budget.json : série annuelle absente");
+  else {
+    source(serie, "série");
+    serie.annees.forEach((a, i) => {
+      if (![a.annee, a.soldeMd, a.soldePib, a.detteMd, a.dettePib].every(nb)) err(`budget.json : série, ligne ${i + 1} incomplète`);
+      if (i && a.annee <= serie.annees[i - 1].annee) err("budget.json : série non triée par année croissante");
+    });
+  }
+  console.log(`[check-data] budget.json : année ${d.anneeReference}, ${dep.postes.length} fonctions de dépenses, ${serie?.annees?.length || 0} années de série.`);
+}
+
 async function checkGroupes() {
   const data = JSON.parse(await readFile("data/groupes.json", "utf-8"));
   const groupes = Object.entries(data.groupes || {});
@@ -285,6 +323,7 @@ async function checkManuels() {
 
 await checkLois();
 await checkIndicateurs();
+await checkBudget();
 await checkGroupes();
 await checkSondages();
 await checkProbabilites();
