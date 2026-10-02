@@ -883,7 +883,7 @@
   .bouton-story{display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px; text-decoration:none; font-weight:600; font-size:14px; color:#fff; background:linear-gradient(135deg,#7c3aed,#db2777 60%,#f59e0b); box-shadow:0 1px 4px rgba(124,58,237,.35); transition:transform .12s, box-shadow .12s;}
   .bouton-story:hover{transform:translateY(-1px); box-shadow:0 3px 10px rgba(124,58,237,.45);}
   .bouton-story:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
-  .bouton-story::before{content:"✦"; flex:none; font-size:15px; line-height:1;}
+  .bouton-story::before{content:""; flex:none; width:15px; height:15px; background:currentColor; -webkit-mask:url(icons/partager.svg) center/contain no-repeat; mask:url(icons/partager.svg) center/contain no-repeat;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:rgba(20,18,14,.45);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
     background:var(--bg); border:1px solid var(--ink); border-radius:6px; box-shadow:0 18px 50px rgba(0,0,0,.25); padding:14px 18px 18px;}
