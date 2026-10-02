@@ -533,13 +533,13 @@ function verifier(cond, message) {
 
   // Langues : des phrases entières (aucun mélange avec le français), dates, heures et nombres écrits à la manière de la langue
   {
-    const FR_RESIDUEL = /\bMd€|\bil y a \d|\b\d{1,2} h \d{2}\b|annoncée le|Auriez-vous voté|Question \d+ sur|\. Depuis 2008|\. Données relevées toutes les heures|\. Les chiffres concernent|Candidature annoncée|Échantillon :|Marge d'erreur :/;
+    const FR_RESIDUEL = /\bMd€|\bil y a \d|\b\d{1,2} h \d{2}\b|annoncée le|Auriez-vous voté|Voulez-vous|Faut-il |Approuvez-vous|Question \d+ sur|\. Depuis 2008|\. Données relevées toutes les heures|\. Les chiffres concernent|Candidature annoncée|Échantillon :|Marge d'erreur :/;
     const THEMES_FR = /(?:Question|Pregunta|Pergunta|Frage) \d+ (?:of|de|von) \d+ · (?:Santé|Numérique|Sécurité|Gouvernement|Institutions|Agriculture|Argent public|Environnement|Finances et budget|Commission spéciale)\b/i;
     const MOIS_FR = /\b(?:janvier|février|avril|juin|juillet|août|septembre|octobre|novembre|décembre)\b/;
     const LANGUES = {
       en: { locale: "en-GB", date: /\d{1,2} [A-Z][a-z]+ 20\d\d at \d{2}:\d{2}/,
-        attendus: [["#candidats", /Candidacy announced on \d{1,2} [A-Z][a-z]+ 20\d\d/], ["#candidats", /Polls: from \d/], ["#quiz", /Question 1 of 12 · /i], ["#quiz", /Would you have voted for/], ["#budget", /€[\d,.]+bn/], ["#comprendre", /Since 2008, it can only be used/], ["#dirigeants", /chairs the group in the National Assembly/]],
-        interdits: [["#candidats", /Candidacy annoncée|Polls: de /], ["#quiz", /Would you have voted for la /], ["#dirigeants", /préside le groupe/]] },
+        attendus: [["#candidats", /Candidacy announced on \d{1,2} [A-Z][a-z]+ 20\d\d/], ["#candidats", /Polls: from \d/], ["#quiz", /Question 1 of 12 · /i], ["#quiz", /Do you want a law|Should an? /], ["#budget", /€[\d,.]+bn/], ["#comprendre", /Since 2008, it can only be used/], ["#dirigeants", /chairs the group in the National Assembly/]],
+        interdits: [["#candidats", /Candidacy annoncée|Polls: de /], ["#dirigeants", /préside le groupe/]] },
       es: { locale: "es-ES", date: /\d{1,2} de [a-záéíóú]+ de 20\d\d a las? \d{1,2}:\d{2}/, attendus: [["#quiz", /Pregunta 1 de 12 · /i], ["#comprendre", /Desde 2008/]], interdits: [] },
       pt: { locale: "pt-PT", date: /\d{1,2} de [a-zçãé]+ de 20\d\d às? \d{1,2}:\d{2}/, attendus: [["#quiz", /Pergunta 1 de 12 · /i], ["#comprendre", /Desde 2008/]], interdits: [] },
       de: { locale: "de-DE", date: /\d{1,2}\. [A-Z][a-zä]+ 20\d\d um \d{2}:\d{2}/, attendus: [["#quiz", /Frage 1 von 12 · /i], ["#comprendre", /Seit 2008/]], interdits: [] },
