@@ -1,0 +1,146 @@
+{
+  "lastUpdated": "2026-10-02T00:00:00.000Z",
+  "anneeReference": 2023,
+  "depenses": {
+    "annee": 2023,
+    "totalMd": 1050,
+    "postes": [
+      {
+        "code": "GF10",
+        "libelle": "Protection sociale",
+        "md": 420,
+        "pct": 40
+      },
+      {
+        "code": "GF07",
+        "libelle": "Santé",
+        "md": 157.5,
+        "pct": 15
+      },
+      {
+        "code": "GF01",
+        "libelle": "Services publics généraux (hors charge de la dette)",
+        "md": 115.5,
+        "pct": 11
+      },
+      {
+        "code": "GF09",
+        "libelle": "Éducation",
+        "md": 105,
+        "pct": 10
+      },
+      {
+        "code": "GF04",
+        "libelle": "Affaires économiques",
+        "md": 84,
+        "pct": 8
+      },
+      {
+        "code": "GF03",
+        "libelle": "Ordre et sécurité publics",
+        "md": 42,
+        "pct": 4
+      },
+      {
+        "code": "GF02",
+        "libelle": "Défense",
+        "md": 31.5,
+        "pct": 3
+      },
+      {
+        "code": "GF08",
+        "libelle": "Loisirs, culture et culte",
+        "md": 31.5,
+        "pct": 3
+      },
+      {
+        "code": "GF0107",
+        "libelle": "Charge de la dette",
+        "md": 21,
+        "pct": 2
+      },
+      {
+        "code": "GF06",
+        "libelle": "Logement et équipements collectifs",
+        "md": 21,
+        "pct": 2
+      },
+      {
+        "code": "GF05",
+        "libelle": "Protection de l'environnement",
+        "md": 21,
+        "pct": 2
+      }
+    ],
+    "source": "JEU D'ESSAI fictif (chiffres inventés pour les tests, ne pas publier)",
+    "url": "https://example.org/jeu-d-essai"
+  },
+  "equilibre": {
+    "annee": 2023,
+    "recettesMd": 997.5,
+    "recettesPib": 4.8,
+    "depensesMd": 1050,
+    "depensesPib": 5,
+    "soldeMd": -52.5,
+    "soldePib": -0.2,
+    "source": "JEU D'ESSAI fictif (chiffres inventés pour les tests, ne pas publier)",
+    "url": "https://example.org/jeu-d-essai"
+  },
+  "dette": {
+    "annee": 2023,
+    "md": 25200,
+    "pib": 120,
+    "interetsMd": 21,
+    "interetsPctDepenses": 2,
+    "source": "JEU D'ESSAI fictif (chiffres inventés pour les tests, ne pas publier)",
+    "url": "https://example.org/jeu-d-essai"
+  },
+  "serie": {
+    "source": "JEU D'ESSAI fictif (chiffres inventés pour les tests, ne pas publier)",
+    "url": "https://example.org/jeu-d-essai",
+    "annees": [
+      {
+        "annee": 2018,
+        "soldeMd": -50,
+        "soldePib": -0.2,
+        "detteMd": 24000,
+        "dettePib": 120
+      },
+      {
+        "annee": 2019,
+        "soldeMd": -50.5,
+        "soldePib": -0.2,
+        "detteMd": 24240,
+        "dettePib": 120
+      },
+      {
+        "annee": 2020,
+        "soldeMd": -51,
+        "soldePib": -0.2,
+        "detteMd": 24480,
+        "dettePib": 120
+      },
+      {
+        "annee": 2021,
+        "soldeMd": -51.5,
+        "soldePib": -0.2,
+        "detteMd": 24720,
+        "dettePib": 120
+      },
+      {
+        "annee": 2022,
+        "soldeMd": -52,
+        "soldePib": -0.2,
+        "detteMd": 24960,
+        "dettePib": 120
+      },
+      {
+        "annee": 2023,
+        "soldeMd": -52.5,
+        "soldePib": -0.2,
+        "detteMd": 25200,
+        "dettePib": 120
+      }
+    ]
+  }
+}
