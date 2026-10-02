@@ -502,6 +502,8 @@
   .proximite{margin-bottom:28px; padding:14px 0 6px; border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
   .proximite h4{margin:0 0 2px; font-family:var(--font-display); font-size:20px; font-weight:600;}
   .proximite .sub{font-size:13px; color:var(--text-faint); margin-bottom:12px; max-width:720px;}
+  .comparateur-select{margin:6px 0 10px; max-width:100%;}
+  .comparateur-resume{font-family:var(--font-display); font-size:19px; margin:8px 0 6px;}
   .proximite-row{display:grid; grid-template-columns:190px 1fr 52px; gap:12px; align-items:center; padding:4px 0; font-size:13.5px;}
   .proximite-row .nom{font-weight:600; display:flex; align-items:center; gap:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .proximite-row .track{height:6px; background:var(--border-soft);}
@@ -1347,6 +1349,8 @@
       </div>
     </div>
     <div class="proximite" id="histo-proximite"></div>
+    <div class="proximite" id="histo-cohesion"></div>
+    <div class="proximite" id="histo-comparateur"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button><button type="button" class="lien-bouton bouton-story" id="histo-story" data-story="groupe" data-id="RN">Story</button></div>
     <div id="histo-list"></div>
@@ -2575,6 +2579,75 @@ function renderProximite(party, liste){
       </div>`).join("")}`;
 }
 
+
+// Cohésion : sur chaque scrutin (hors motions de censure, où seules les voix « pour » sont comptées), part des
+// suffrages exprimés du groupe qui se portent sur sa position majoritaire ; moyenne sur les scrutins affichés.
+function cohesionGroupe(id, liste){
+  let somme = 0, n = 0, unanimes = 0;
+  for(const loi of liste){
+    const v = loi.votes[id];
+    if(!v || loi.typeVote === "MOC") continue;
+    const exprimes = v.pour + v.contre + v.abst;
+    if(exprimes < 5) continue;
+    const part = Math.max(v.pour, v.contre, v.abst) / exprimes;
+    somme += part; n++;
+    if(part === 1) unanimes++;
+  }
+  return n ? { n, unanimes, pct: Math.round(somme / n * 100) } : null;
+}
+
+function renderCohesion(liste){
+  const el = document.getElementById("histo-cohesion");
+  const stats = PARTIES.filter(p=>p.id!=="NI").map(p=>({ p, c: cohesionGroupe(p.id, liste) })).filter(x=>x.c).sort((a,b)=>b.c.pct-a.c.pct);
+  if(!stats.length){ el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <h4>Cohésion de vote des groupes</h4>
+    <div class="sub">Sur les scrutins affichés (hors motions de censure, avec au moins 5 votants du groupe), part moyenne des suffrages exprimés du groupe qui vont dans le même sens que sa position majoritaire. 100 % : le groupe a toujours voté d'un bloc. Les non-inscrits ne forment pas un groupe et sont exclus.</div>
+    ${stats.map(x=>`
+      <div class="proximite-row" title="${x.c.n} scrutins pris en compte, dont ${x.c.unanimes} où le groupe a voté à l'unanimité des suffrages exprimés">
+        <span class="nom"><span class="dot" style="background:${x.p.couleur}"></span>${esc(x.p.nom)}</span>
+        <span class="track"><span class="fill" style="display:block;width:${x.c.pct}%;background:${x.p.couleur}"></span></span>
+        <span class="pct">${x.c.pct} %</span>
+      </div>`).join("")}`;
+}
+
+// Comparateur : le groupe choisi face à un second groupe, sur les scrutins affichés où les deux ont une position nette
+let groupeComparaison = "";
+function renderComparateur(party, liste){
+  const el = document.getElementById("histo-comparateur");
+  if(groupeComparaison === party.id) groupeComparaison = "";
+  const autres = PARTIES.filter(p=>p.id!==party.id);
+  const o = autres.find(p=>p.id===groupeComparaison);
+  const LIB = { pour:"Pour", contre:"Contre", abst:"Abstention" };
+  let resultat = "";
+  if(o){
+    let communs = 0, accords = 0;
+    const ecarts = [];
+    for(const loi of liste){
+      const a = positionMajoritaire(loi, loi.votes[party.id]);
+      const b = positionMajoritaire(loi, loi.votes[o.id]);
+      if(!a || !b) continue;
+      communs++;
+      if(a===b) accords++; else ecarts.push({ loi, a, b });
+    }
+    resultat = communs ? `<p class="comparateur-resume">Sur ${communs} scrutins communs, ${esc(party.nom)} et ${esc(o.nom)} ont pris la même position <b>${accords} fois</b> (${Math.round(accords/communs*100)} %).</p>
+      ${ecarts.length ? `<div>${ecarts.slice(0,15).map(({loi,a,b})=>`<div class="histo-row"><div><div class="histo-loi"><a href="#scrutin-${loi.numero}">${esc(titreLoi(loi))}</a></div><div class="histo-date">${esc(loi.date)}</div></div>
+        <span class="depute-vote ${a==="pour"?"tag-pour":a==="contre"?"tag-contre":"abst"}" title="${esc(party.nom)}">${LIB[a]}</span>
+        <span class="depute-vote ${b==="pour"?"tag-pour":b==="contre"?"tag-contre":"abst"}" title="${esc(o.nom)}">${LIB[b]}</span></div>`).join("")}
+        ${ecarts.length>15 ? `<p class="histo-date">… et ${ecarts.length-15} autres scrutins où ils divergent.</p>` : ""}</div>` : ""}`
+      : `<p class="histo-date">Aucun scrutin affiché où les deux groupes ont une position nette.</p>`;
+  }
+  el.innerHTML = `
+    <h4>Comparer deux groupes</h4>
+    <div class="sub">Accord entre ${esc(party.nom)} et un autre groupe sur les scrutins affichés : position majoritaire de chaque groupe (pour, contre ou abstention), scrutins sans position nette écartés.</div>
+    <label for="groupe-comparer" class="histo-date">Comparer avec :</label><br>
+    <select id="groupe-comparer" class="comparateur-select"><option value="">Choisir un groupe…</option>
+      ${autres.map(p=>`<option value="${esc(p.id)}" ${p.id===groupeComparaison?"selected":""}>${esc(p.nom)}</option>`).join("")}
+    </select>
+    ${resultat}`;
+  document.getElementById("groupe-comparer").addEventListener("change", e=>{ groupeComparaison = e.target.value; renderComparateur(party, liste); });
+}
+
 function renderHistorique(){
   const party = PARTIES.find(p=>p.id===selectedPartyId);
   remplirThemes("histo-theme");
@@ -2582,6 +2655,8 @@ function renderHistorique(){
   if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
   renderProximite(party, liste);
   document.getElementById("histo-story").dataset.id = party.id;
+  renderCohesion(liste);
+  renderComparateur(party, liste);
   document.getElementById("histo-party-title").textContent =
     `Ses votes : ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
   document.getElementById("histo-count").textContent = liste.length ? `${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}` : "Aucun scrutin";
