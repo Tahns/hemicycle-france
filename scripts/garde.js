@@ -18,12 +18,15 @@ const present = (v) => v !== undefined && v !== null && v !== "" && !(typeof v =
 const taux = (items, champ) => (items.length ? items.filter((x) => present(x?.[champ])).length / items.length : 1);
 
 /** Compare un nouveau contenu à l'ancien. Renvoie { ok, raisons }. Fonction pure (testable). */
-export function evaluer(ancien, nouveau, { liste, obligatoires = [], seuil = 0.3 }) {
+export function evaluer(ancien, nouveau, { liste, obligatoires = [], seuil = 0.3, videPermis = false }) {
   const raisons = [];
   const n = liste(nouveau) || [];
   const a = ancien ? liste(ancien) || [] : [];
-  if (!Array.isArray(n) || n.length === 0) raisons.push("aucun élément dans le nouveau contenu");
-  else {
+  if (!Array.isArray(n)) raisons.push("liste absente du nouveau contenu");
+  else if (n.length === 0) {
+    // Un fichier d'événements ponctuels (data/direct.json) est légitimement vide quand rien n'est en cours
+    if (!videPermis) raisons.push("aucun élément dans le nouveau contenu");
+  } else {
     if (a.length > 0 && n.length < a.length * (1 - seuil)) {
       raisons.push(`nombre d'éléments en chute de ${Math.round((1 - n.length / a.length) * 100)} % (${a.length} → ${n.length}, seuil ${Math.round(seuil * 100)} %)`);
     }

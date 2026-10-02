@@ -163,6 +163,29 @@ async function checkActualites() {
   }
 }
 
+// Bandeau « En direct » (fichier optionnel, écrit par scripts/detecter-direct.js)
+async function checkDirect() {
+  const d = JSON.parse(await readFile("data/direct.json", "utf-8").catch(() => "null"));
+  if (!d) return;
+  if (isNaN(Date.parse(d.lastUpdated)) || !Array.isArray(d.evenements)) return err("direct.json : format invalide");
+  const https = (u) => /^https:\/\//.test(u || "");
+  const types = ["allocution", "conference", "interview", "discours", "prise-de-parole", "seance-an"];
+  for (const e of d.evenements) {
+    const nom = `direct.json : événement ${e.id || "?"}`;
+    if (!e.id || !types.includes(e.type) || !e.titre || !e.quand) err(`${nom} incomplet`);
+    if (!https(e.source?.url) || !e.source?.media) err(`${nom} : source sans média ou sans lien https`);
+    if (!Array.isArray(e.chaines) || !e.chaines.length || e.chaines.some((c) => !c.nom || !https(c.url))) err(`${nom} : chaînes sans lien https`);
+    if (e.type === "seance-an" && !(e.chaines || []).some((c) => c.url === "https://videos.assemblee-nationale.fr/")) err(`${nom} : lien du direct officiel de l'Assemblée absent`);
+    if (e.type !== "seance-an") {
+      // Fenêtre : titre publié depuis au plus 6 h, expiration = publication + 6 h
+      const pub = Date.parse(e.publie), exp = Date.parse(e.expire);
+      if (isNaN(pub) || isNaN(exp) || exp - pub !== 6 * 36e5) err(`${nom} : fenêtre incohérente (publication + 6 h attendue)`);
+      else if (pub > Date.parse(d.lastUpdated) + 36e5) err(`${nom} : publié après la mise à jour du fichier`);
+    } else if (isNaN(Date.parse(e.expire)) || Date.parse(e.expire) - Date.parse(d.lastUpdated) > 25 * 36e5) err(`${nom} : expiration incohérente`);
+  }
+  console.log(`[check-data] direct.json : ${d.evenements.length} événement(s) en direct.`);
+}
+
 async function checkQuiz() {
   const data = JSON.parse(await readFile("data/quiz.json", "utf-8").catch(() => "null"));
   if (!data) return;
@@ -345,6 +368,7 @@ await checkWorkflows();
 await checkProbabilites();
 await checkQuiz();
 await checkActualites();
+await checkDirect();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();

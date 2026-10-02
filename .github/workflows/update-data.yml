@@ -68,6 +68,9 @@ jobs:
         id: agenda
         run: node scripts/fetch-agenda-an.js
         continue-on-error: true
+      - name: Bandeau « En direct » (d'après les actualités et l'agenda déjà relevés)
+        run: node scripts/detecter-direct.js
+        continue-on-error: true
       - name: Parcours des textes entre l'Assemblée et le Sénat
         id: navette
         run: node scripts/navette.js
