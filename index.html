@@ -3597,6 +3597,8 @@ function appliquerSondages(data){
     id: "inst" + k,
     nom: i.nom,
     date: i.date,
+    dateFin: i.dateFin,
+    nbHyp: i.hypotheses,
     echantillon: `${formatNombre(i.echantillon)} personnes`,
     n: i.echantillon,
     // Lien vers la notice de la Commission quand Wikipédia la cite, sinon vers l'article du commanditaire
@@ -5629,6 +5631,14 @@ async function storyImage(src){
   img.src = src;
   try { await img.decode(); return img; } catch(e){ return null; }
 }
+// Portrait de la meilleure définition disponible : photos/<dossier>/hd/<fichier> s'il existe (voir scripts/fetch-portraits.js et
+// scripts/photos-hd.cjs), sinon la vignette du site. « hd » : chemin HD connu (champ photoHd des illustrations), facultatif.
+async function storyPortrait(src, hd){
+  if(!src) return null;
+  const candidat = hd || src.replace(/^(photos\/(?:deputes|senateurs|personnalites))\//, "$1/hd/");
+  if(candidat !== src){ const img = await storyImage(candidat); if(img) return img; }
+  return storyImage(src);
+}
 
 /* ----- Helpers de dessin réutilisables (ne pas renommer, ne pas changer les signatures) -----
    Charte (docs/identite.md) : fond papier uni (variante « Nuit » STORY_NUIT pour les EN DIRECT), filet tricolore en haut,
@@ -5729,9 +5739,10 @@ function storyCarte(ctx, x, y, w, h, fond = "#FFFFFF", rayon = 28){
 // Portrait carré recadré sur le haut (visage), sans cercle ni ombre ; liseré de la couleur du parti en bas
 function storyMedaillon(ctx, img, cx, cy, rayon, bordure = STORY.bleu){
   const x = cx - rayon, y = cy - rayon, c = 2 * rayon;
-  if(img){ storyPPhoto(ctx, img, x, y, c, c); }
+  let zone = { x, y, w:c, h:c };
+  if(img){ zone = storyPPhoto(ctx, img, x, y, c, c, { centre:true }); }
   else { ctx.fillStyle = storyAlpha(bordure, 0.2); ctx.fillRect(x, y, c, c); }
-  ctx.fillStyle = bordure; ctx.fillRect(x, y + c - Math.max(4, rayon * 0.07), c, Math.max(4, rayon * 0.07));
+  ctx.fillStyle = bordure; ctx.fillRect(zone.x, zone.y + zone.h - Math.max(4, rayon * 0.07), zone.w, Math.max(4, rayon * 0.07));
 }
 function storyInitiales(ctx, nom, cx, cy, rayon, couleur = STORY.bleu){
   const mots = String(nom).replace(/\(.*?\)/g, "").split(/[\s-]+/).filter(m=> /^\p{L}/u.test(m) && !/^(de|du|des|la|le|d['’])$/i.test(m));
@@ -5837,23 +5848,42 @@ const storyPLisible = c => c === "#E0B400" ? STORY.ambreTxt : c === "#8A8C94" ? 
 // Médaillon : photo (recadrée sur le haut), sinon initiales sur la couleur du parti
 // Portrait carré (recadré sur le haut), sinon initiales sur la couleur du parti ; sans cercle
 function storyPMedaillon(ctx, img, cx, cy, r, couleur, nom){
-  if(img) storyPPhoto(ctx, img, cx - r, cy - r, 2 * r, 2 * r);
+  let zone = { x:cx - r, y:cy - r, w:2 * r, h:2 * r };
+  if(img) zone = storyPPhoto(ctx, img, cx - r, cy - r, 2 * r, 2 * r, { centre:true });
   else {
     ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
     ctx.font = `700 ${Math.round(r * 0.8)}px "Newsreader"`; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.fillText(storyPInitiales(nom), cx, cy + r * 0.05); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   }
   const e = Math.max(4, r * 0.07);
-  ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy + r - e, 2 * r, e);
+  ctx.fillStyle = couleur; ctx.fillRect(zone.x, zone.y + zone.h - e, zone.w, e);
 }
-// Photo recadrée « cover » dans le rectangle, ancrée vers le haut pour garder le visage ; légère désaturation
-function storyPPhoto(ctx, img, x, y, w, h){
-  const k = Math.max(w / img.naturalWidth, h / img.naturalHeight), iw = img.naturalWidth * k, ih = img.naturalHeight * k;
+// Photo recadrée « cover » dans le rectangle, ancrée vers le haut pour garder le visage ; légère désaturation.
+// Netteté : jamais agrandie à plus de STORY_AGRANDISSEMENT_MAX fois sa taille naturelle (un portrait de 104 px ne devient pas
+// un flou de 450 px) : au-delà, la photo est reproduite plus petite, avec un cadre net, et seule la place utile est occupée.
+// Dessin au pixel entier, lissage de haute qualité, aucun flou. Renvoie le rectangle réellement occupé.
+const STORY_AGRANDISSEMENT_MAX = 1.4;
+function storyPPhoto(ctx, img, x, y, w, h, { centre = false } = {}){
+  let k = Math.max(w / img.naturalWidth, h / img.naturalHeight), reduite = false;
+  if(k > STORY_AGRANDISSEMENT_MAX){
+    const f = STORY_AGRANDISSEMENT_MAX / k;
+    const w2 = Math.round(w * f), h2 = Math.round(h * f);
+    if(centre){ x += Math.round((w - w2) / 2); y += Math.round((h - h2) / 2); }
+    w = w2; h = h2; k = STORY_AGRANDISSEMENT_MAX; reduite = true;
+  }
+  x = Math.round(x); y = Math.round(y);
+  const iw = Math.round(img.naturalWidth * k), ih = Math.round(img.naturalHeight * k);
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
   ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
   ctx.filter = "grayscale(0.2) contrast(1.03)";
-  ctx.drawImage(img, x - (iw - w) / 2, y - (ih - h) * 0.1, iw, ih);
+  ctx.drawImage(img, Math.round(x - (iw - w) / 2), Math.round(y - (ih - h) * 0.1), iw, ih);
   ctx.restore();
+  if(reduite){ // cadre net autour d'une photo reproduite plus petite
+    ctx.fillStyle = STORY.encre;
+    ctx.fillRect(x - 3, y - 3, w + 6, 3); ctx.fillRect(x - 3, y + h, w + 6, 3);
+    ctx.fillRect(x - 3, y, 3, h); ctx.fillRect(x + w, y, 3, h);
+  }
+  return { x, y, w, h };
 }
 
 function storyPLogo(ctx, img, x, y, taille){
@@ -5912,7 +5942,7 @@ STORY_PLUS.actualite = async (ctx, info)=>{
   const ill = s.illustration || {}, theme = THEMES_ACTU[ill.theme] || THEMES_ACTU.politique;
   const enDirect = (DIRECT?.evenements || []).some(e=> e.type !== "seance-an" && s.articles.some(a=> a.titre === e.titre));
   const pers = (ill.personnes || []).slice(0, 3);
-  const imgs = await Promise.all(pers.map(p=> p.photo ? storyImage(p.photo) : null));
+  const imgs = await Promise.all(pers.map(p=> p.photo ? storyPortrait(p.photo, p.photoHd) : null));
   const vus = pers.map((p, i)=>({ ...p, img:imgs[i] })).filter(p=>p.img);
   for(const p of vus) if(!p.credit && /personnalites/.test(p.photo || "")) p.credit = (await storyPCredits([p.nom]))[0] || "";
   const d = new Date(a0.date), fmt = o => d.toLocaleString("fr-FR", { timeZone:"Europe/Paris", ...o });
@@ -5967,8 +5997,8 @@ STORY_PLUS.actualite = async (ctx, info)=>{
 
     if(mode === 1){
       const p = vus[0], ph = Math.min(720, Math.max(phMin, bas - yP));
-      storyPPhoto(ctx, p.img, marge, yP, colW, ph);
-      const x0 = marge + colW + 40, w = L - marge - x0;
+      const zp = storyPPhoto(ctx, p.img, marge, yP, colW, ph);
+      const x0 = marge + zp.w + 40, w = L - marge - x0;
       let yy = storyTexte(ctx, p.nom, x0, yP - 4, { taille:50, poids:700, police:"Newsreader", largeur:w, max:3, interligne:1.08 });
       if(p.credit) storyTexte(ctx, `Photo : ${p.credit}`, x0, yy + 2, { taille:22, couleur:STORY.pale, largeur:w, max:3, interligne:1.2 });
       // bas de colonne, aligné sur le bas de la photo
@@ -5994,9 +6024,9 @@ STORY_PLUS.actualite = async (ctx, info)=>{
       const ph = Math.min(Math.round(colW * 1.45), 560, Math.max(phMin, bas - yP - capH));
       vus.forEach((p, i)=>{
         const x = marge + i * (colW + 16);
-        storyPPhoto(ctx, p.img, x, yP, colW, ph);
-        ctx.fillStyle = couleurPartiActu(p.parti); ctx.fillRect(x, yP + ph, colW, 6);
-        storyTexte(ctx, p.nom, x, yP + ph + 14, { taille:tailleNom, poids:700, police:"Newsreader", largeur:colW, max:2, interligne:1.05 });
+        const zp = storyPPhoto(ctx, p.img, x, yP, colW, ph);
+        ctx.fillStyle = couleurPartiActu(p.parti); ctx.fillRect(zp.x, zp.y + zp.h, zp.w, 6);
+        storyTexte(ctx, p.nom, x, zp.y + zp.h + 14, { taille:tailleNom, poids:700, police:"Newsreader", largeur:colW, max:2, interligne:1.05 });
       });
     }
 
@@ -6028,7 +6058,7 @@ STORY_PLUS.actualites = async (ctx)=>{
     ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
     const ill = s.illustration || {}, p0 = ill.personnes?.[0];
     const coul = p0 ? couleurPartiActu(p0.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique)[0]);
-    const img = p0?.photo ? await storyImage(p0.photo) : null;
+    const img = p0?.photo ? await storyPortrait(p0.photo, p0.photoHd) : null;
     const logo = !p0 && ill.partis?.[0] ? await storyImage(`icons/partis/${ill.partis[0]}.png`) : null;
     let vis = true;
     if(p0 && img) storyPMedaillon(ctx, img, marge + r, cy, r, coul, p0.nom);
@@ -6176,14 +6206,15 @@ STORY_PLUS.candidat = async (ctx, info)=>{
   const { L, marge } = STORY;
   const coul = COULEURS_PARTIS[c.code] || "#8A8C94", lisible = storyPLisible(coul);
   let y = storyCadre(ctx, "Présidentielle 2027 · candidat");
-  const photo = await storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`);
+  const photo = await storyPortrait(`photos/personnalites/${slugDep(c.nom)}.jpg`);
   let annonceDite = false;
   const age = ()=> c.age ? (ctx.font = `700 170px "Newsreader"`, ctx.fillStyle = lisible, true) : false;
   if(photo){
     // portrait rectangulaire à gauche, nom, parti et âge à droite
-    const pw = 400, ph = 540, x0 = marge + pw + 44, w = L - marge - x0;
-    storyPPhoto(ctx, photo, marge, y, pw, ph);
-    ctx.fillStyle = coul; ctx.fillRect(marge, y + ph, pw, 8);
+    const pw = 400, ph = 540;
+    const zp = storyPPhoto(ctx, photo, marge, y, pw, ph);
+    const x0 = marge + zp.w + 44, w = L - marge - x0;
+    ctx.fillStyle = coul; ctx.fillRect(zp.x, zp.y + zp.h, zp.w, 8);
     const yn = storyTexte(ctx, c.nom, x0, y - 8, { taille:78, poids:700, police:"Newsreader", largeur:w, max:4, interligne:1.02 });
     ctx.font = `700 28px "Public Sans"`;
     storyPastille(ctx, storyLignes(ctx, c.parti.toUpperCase(), w - 40, 1)[0], x0, yn + 30, lisible, "#fff", 28);
@@ -6451,37 +6482,41 @@ async function dessinerStory(type, info){
   }
 
   else if(type === "sondages"){
-    const inst = INSTITUTS.find(i=>i.id===selectedInstitut); if(!inst || periodeReserveSondages()) return null;
-    const liste = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1])).slice(0, 10);
+    // info : identifiant de l'enquête (« inst0 »…), sinon l'enquête choisie sur la page. Une seule enquête, premier tour.
+    const inst = INSTITUTS.find(i=>i.id === (info || selectedInstitut)); if(!inst || periodeReserveSondages()) return null;
+    const tous = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1]));
+    const liste = tous.slice(0, 10);
     if(!liste.length) return null;
-    const tete = liste[0];
-    y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:tete.couleur });
+    // Commanditaire : relevé sur la notice déposée à la Commission des sondages, quand il est connu
+    const veille = (await lireJSON("data/sondages-veille.json"))?.enquetes || [];
+    const notice = veille.find(e=> e.institut === inst.nom && e.terrain?.fin === inst.dateFin);
+    const commanditaire = notice?.media || "";
+    y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:STORY.bleu });
     y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 });
-    y = storyTexte(ctx, `${inst.nom}, enquête du ${inst.date} · ${inst.echantillon}`, marge, y, { taille:26, couleur:STORY.doux, max:2 }) + 14;
+    y = storyTexte(ctx, `${inst.nom}${commanditaire ? ` pour ${commanditaire}` : ""} · terrain : ${inst.date}`, marge, y, { taille:28, poids:600, couleur:STORY.doux, max:2 });
+    y = storyTexte(ctx, `${liste.length} candidats sur ${tous.length} testés, classés par milieu de fourchette`, marge, y, { taille:24, couleur:STORY.pale, max:1 }) + 10;
     const score = c => c.r[0] === c.r[1] ? `${fr1(c.r[0])} %` : `${fr1(c.r[0])}–${fr1(c.r[1])} %`;
-    const photos = await Promise.all(liste.map(c=> storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`)));
-    const hh = 290;
-    storyCarte(ctx, marge, y, largeur, hh);
-    ctx.fillStyle = tete.couleur; ctx.beginPath(); ctx.rect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
-    storyMedaillon(ctx, photos[0], marge + 138, y + hh / 2, 92, tete.couleur);
-    if(!photos[0]) storyInitiales(ctx, tete.nom, marge + 138, y + hh / 2, 92, tete.couleur);
-    ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(tete.couleur); ctx.fillText("EN TÊTE", marge + 268, y + 56); ctx.letterSpacing = "0px";
-    ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, tete.nom, largeur - 290, 1)[0], marge + 268, y + 108);
-    storyChiffreHeros(ctx, score(tete), marge + 268, y + 244, storyLisible(tete.couleur), 150);
-    y += hh + 24;
-    const reste = liste.slice(1), maxi = Math.max(...liste.map(c=>c.r[1]));
-    const pas = Math.min(78, (bas - y - 40) / reste.length);
-    storyCarte(ctx, marge, y, largeur, reste.length * pas + 24, "#fff", 24);
-    reste.forEach((cd, i)=>{
-      const yy = y + 12 + i * pas, r = Math.min(24, pas * 0.34), cx = marge + 26 + r, cy = yy + pas / 2;
-      if(photos[i + 1]) storyMedaillon(ctx, photos[i + 1], cx, cy, r, cd.couleur); else storyInitiales(ctx, cd.nom, cx, cy, r, cd.couleur);
-      const x = cx + r + 18;
-      ctx.font = `600 ${Math.min(28, pas * 0.4)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, cd.nom, 400, 1)[0], x, yy + pas * 0.46);
-      ctx.font = `700 ${Math.min(36, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(cd.couleur); ctx.textAlign = "right"; ctx.fillText(score(cd), L - marge - 26, yy + pas * 0.48); ctx.textAlign = "left";
-      storyBarre(ctx, x, yy + pas * 0.6, L - marge - 26 - x, 14, [[(cd.r[0] + cd.r[1]) / 2, cd.couleur]], maxi);
+    const photos = await Promise.all(liste.map(c=> storyPortrait(`photos/personnalites/${slugDep(c.nom)}.jpg`)));
+    const yLegal = 1368, pas = Math.min(80, (yLegal - 24 - y) / liste.length), maxi = Math.max(...liste.map(c=>c.r[1]));
+    storyCarte(ctx, marge, y, largeur, liste.length * pas + 24, "#fff", 24);
+    liste.forEach((cd, i)=>{
+      const yy = y + 12 + i * pas, r = Math.min(34, pas * 0.42), cx = marge + 26 + r, cy = yy + pas / 2;
+      if(photos[i]) storyMedaillon(ctx, photos[i], cx, cy, r, cd.couleur); else storyInitiales(ctx, cd.nom, cx, cy, r, cd.couleur);
+      const x = cx + r + 20;
+      ctx.font = `600 ${Math.min(30, pas * 0.4)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, cd.nom, 420, 1)[0], x, yy + pas * 0.44);
+      ctx.font = `700 ${Math.min(38, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(cd.couleur); ctx.textAlign = "right"; ctx.fillText(score(cd), L - marge - 26, yy + pas * 0.46); ctx.textAlign = "left";
+      storyBarre(ctx, x, yy + pas * 0.6, L - marge - 26 - x, 12, cd.r[0] === cd.r[1] ? [[cd.r[0], cd.couleur]] : [[cd.r[0], cd.couleur], [cd.r[1] - cd.r[0], storyAlpha(cd.couleur, 0.35)]], maxi); // plein : bas de la fourchette ; clair : jusqu'au haut
     });
-    const erreur = inst.n ? ` Marge d'erreur : jusqu'à ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} pts.` : "";
-    storyPied(ctx, `${inst.nom}, ${inst.date}, ${inst.echantillon}.${erreur} Notice : commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
+    // Mentions obligatoires (loi n° 77-808 du 19 juillet 1977) : institut, commanditaire, dates, échantillon, marge d'erreur, notice, source
+    const erreur = inst.n ? `±${(1.96 * Math.sqrt(0.25 / inst.n) * 100).toFixed(1).replace(".", ",")} pts` : "";
+    const mentions = `Sondage ${inst.nom}${commanditaire ? ` pour ${commanditaire}` : " (commanditaire non relevé)"}, terrain : ${inst.date}, auprès de ${inst.echantillon}. `
+      + (erreur ? `Marge d'erreur théorique : ${erreur} à 95 %. ` : "")
+      + `Chiffres tels que publiés${inst.nbHyp > 1 ? ` : fourchette selon les ${inst.nbHyp} hypothèses de candidatures testées` : " (hypothèse unique testée)"}. `
+      + `Une notice détaillée est déposée à la Commission des sondages (commission-des-sondages.fr), qui précise la méthode. `
+      + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`;
+    ctx.fillStyle = STORY.encre; ctx.fillRect(marge, yLegal, largeur, 5);
+    storyTexte(ctx, mentions, marge, yLegal + 16, { taille:23, couleur:STORY.doux, max:9, interligne:1.2 });
+    ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(SITE_COURT, marge, 1700);
     nom = `sondage-${slugDep(inst.nom)}`;
   }
 
@@ -6489,7 +6524,7 @@ async function dessinerStory(type, info){
     const d = DEPUTES?.find(x=>x.id===deputeOuvert); if(!d) return null;
     const p = partiDepute(d), s = d.stats, exprimes = s.pour + s.contre + s.abst;
     y = storyCadre(ctx, "Votre député", { couleur:p.couleur });
-    const photo = await storyImage(`photos/deputes/${d.id}.jpg`);
+    const photo = await storyPortrait(`photos/deputes/${d.id}.jpg`);
     const possibles = [...d.votes].filter(c=>c !== ".").length, presents = [...d.votes].filter(c=>"pca".includes(c)).length;
     const derniers = DEPUTES_CLES.map((numero, i)=>({ code:d.votes[i], loi:LOIS.find(l=>l.numero===numero) })).filter(x=>x.code !== "." && x.loi).slice(0, 8);
     storyFicheElu(ctx, y, {
@@ -6552,7 +6587,7 @@ async function dessinerStory(type, info){
     const s = SENATEURS?.find(x=>x.id===senateurOuvert); if(!s) return null;
     const g = groupeSenateur(s), { lignes, presents, ecarts } = statsSenateur(s);
     y = storyCadre(ctx, s.f ? "Votre sénatrice" : "Votre sénateur", { couleur:g.couleur });
-    const photo = await storyImage(`photos/senateurs/${s.id}.jpg`);
+    const photo = await storyPortrait(`photos/senateurs/${s.id}.jpg`);
     storyFicheElu(ctx, y, {
       photo, couleur:g.couleur, nom:s.nom, soustitre:g.nom,
       ligne:`${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "des Français de l'étranger" : `de ${s.dep}`}`,
@@ -6606,7 +6641,7 @@ async function dessinerStory(type, info){
     const p1 = partiDepute(top[0][0]);
     y = storyCadre(ctx, "Classement des députés", { couleur:p1.couleur });
     y = storyTexte(ctx, k.titre, marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 10;
-    const photos = await Promise.all(top.map(([d]) => storyImage(`photos/deputes/${d.id}.jpg`)));
+    const photos = await Promise.all(top.map(([d]) => storyPortrait(`photos/deputes/${d.id}.jpg`)));
     const hh = 290;
     storyCarte(ctx, marge, y, largeur, hh);
     ctx.fillStyle = p1.couleur; ctx.beginPath(); ctx.rect(marge, y + 40, 12, hh - 80, 6); ctx.fill();

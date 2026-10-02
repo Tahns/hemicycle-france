@@ -9,7 +9,7 @@ on:
     types: [completed]
   push:
     branches: [main]
-    paths: ["scripts/fetch-actualites.js", "scripts/illustrations.js", "data/portraits.json"]
+    paths: ["scripts/fetch-actualites.js", "scripts/illustrations.js", "data/portraits.json", "data/sondages.json"]
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -41,6 +41,16 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
         continue-on-error: true
+      # Stories nettes : versions haute définition des portraits des personnes citées (Commons : mêmes licences et crédits ;
+      # photos officielles du Parlement : seulement les parlementaires cités). Sans elles, la story utilise la vignette, réduite.
+      - name: Portraits HD des personnalités (Wikimedia Commons)
+        if: steps.story_choix.outputs.a_faire == 'true'
+        run: node scripts/fetch-portraits.js --max=0
+        continue-on-error: true
+      - name: Photos HD des parlementaires cités dans l'actualité
+        if: steps.story_choix.outputs.a_faire == 'true'
+        run: node scripts/photos-hd.cjs
+        continue-on-error: true
       - name: Story automatique (file d'attente Instagram)
         if: steps.story_choix.outputs.a_faire == 'true'
         run: node scripts/stories-auto.cjs
@@ -51,7 +61,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/actualites.json data/direct.json data/instagram-file.json instagram/auto
+          git add data/actualites.json data/direct.json data/instagram-file.json data/portraits.json instagram/auto photos/personnalites/hd photos/deputes/hd photos/senateurs/hd
           if git diff --cached --quiet; then
             echo "Rien de nouveau."
           else
