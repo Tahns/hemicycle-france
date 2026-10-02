@@ -13,6 +13,7 @@ import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
+import { extraire, controlerDico, listerLangues } from "./extraire-i18n.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -372,6 +373,38 @@ await checkManuels();
   const e = await verifierPortraits();
   e.forEach(err);
   if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
+}
+await checkI18n();
+
+/** Langues du site : fr.json (généré depuis index.html) et un dictionnaire par langue dans data/i18n/. */
+async function checkI18n() {
+  const lire = async (f) => JSON.parse(await readFile(f, "utf-8"));
+  let fr;
+  try { fr = await lire("data/i18n/fr.json"); } catch (e) { return err("i18n : data/i18n/fr.json absent ou invalide (node scripts/extraire-i18n.js)"); }
+  // fr.json se régénère depuis index.html : s'il est périmé, les nouvelles chaînes restent en français (avertissement)
+  const html = await readFile("index.html", "utf-8");
+  const frActuel = extraire(html);
+  const perimees = [...frActuel].filter(([k, v]) => fr[k] !== v).length + Object.keys(fr).filter((k) => !frActuel.has(k)).length;
+  if (perimees) console.warn(`[check-data] i18n : fr.json n'est plus à jour (${perimees} différence(s)) : lancer node scripts/extraire-i18n.js`);
+  // Langues déclarées dans la page = fichiers présents (sauf fr), avec leur drapeau
+  const declarees = [...html.matchAll(/\{\s*code:"([a-z]{2,3})"[^}]*?\}/g)].map((m) => ({ code: m[1], icone: (/icone:"([\w-]+)"/.exec(m[0]) || [])[1] }));
+  const fichiers = await listerLangues();
+  for (const d of declarees) {
+    if (d.code !== "fr" && !fichiers.includes(d.code)) err(`i18n : langue « ${d.code} » déclarée dans index.html sans data/i18n/${d.code}.json`);
+    if (d.icone && !existsSync(`icons/drapeaux/${d.icone}.svg`)) err(`i18n : drapeau icons/drapeaux/${d.icone}.svg absent`);
+  }
+  for (const f of fichiers) if (!declarees.some((d) => d.code === f)) err(`i18n : data/i18n/${f}.json n'est pas déclarée dans la liste LANGUES d'index.html`);
+  const resume = [];
+  for (const code of fichiers) {
+    let dico;
+    try { dico = await lire(`data/i18n/${code}.json`); } catch (e) { err(`i18n : ${code}.json n'est pas un JSON valide (${e.message})`); continue; }
+    const { erreurs: e, avertissements: a, traduites } = controlerDico(code, fr, dico);
+    e.forEach(err);
+    a.slice(0, 3).forEach((m) => console.warn("[check-data] " + m));
+    if (a.length > 3) console.warn(`[check-data] i18n : ${a.length - 3} autre(s) marque(s) omise(s) pour ${code}.json`);
+    resume.push(`${code} ${traduites}`);
+  }
+  console.log(`[check-data] i18n : ${Object.keys(fr).length} chaînes françaises ; traduites : ${resume.join(", ")}.`);
 }
 
 if (erreurs.length) {
