@@ -4460,6 +4460,481 @@ function storyPied(ctx, source){
   ctx.fillText(SITE_COURT, marge, y + 132);
 }
 
+/* ---------- Stories : types supplémentaires (actualités, sondages, fiches…) ----------
+   Chaque entrée dessine sur le canevas déjà créé et renvoie { nom }, ou null si les données manquent. */
+const STORY_PLUS = {};
+
+// Petits outils de dessin propres à ces types
+const storyPLarg = STORY.L - 2 * STORY.marge;
+function storyPCarte(ctx, x, y, w, h, fond = "#FBF8F1", bord = STORY.filet){
+  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(x, y, w, h, 18); ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = bord; ctx.stroke();
+}
+function storyPFond(ctx, couleur, y, h){
+  ctx.save(); ctx.globalAlpha = 0.12; ctx.fillStyle = couleur; ctx.fillRect(0, y, STORY.L, h); ctx.restore();
+  ctx.fillStyle = couleur; ctx.fillRect(0, y, STORY.L, 6);
+}
+// Texte sur une ligne, réduit jusqu'à tenir dans la largeur ; renvoie la taille retenue
+function storyPLigne(ctx, texte, x, y, { taille=60, poids=600, police="Newsreader", couleur=STORY.encre, largeur=storyPLarg, align="left", mini=20 } = {}){
+  let t = taille;
+  ctx.font = `${poids} ${t}px "${police}"`;
+  while(ctx.measureText(texte).width > largeur && t > mini){ t -= 2; ctx.font = `${poids} ${t}px "${police}"`; }
+  ctx.fillStyle = couleur; ctx.textAlign = align; ctx.textBaseline = "alphabetic";
+  ctx.fillText(texte, x, y); ctx.textAlign = "left";
+  return t;
+}
+const storyPInitiales = nom => String(nom || "").split(/[\s-]+/).filter(Boolean).map(m=>m[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0, 2).join("");
+const storyPLisible = c => c === "#E0B400" ? STORY.ambre : c; // le jaune du parti est illisible en texte sur papier crème
+// Médaillon : photo (recadrée sur le haut), sinon initiales sur la couleur du parti
+function storyPMedaillon(ctx, img, cx, cy, r, couleur, nom){
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
+  if(img){
+    const h = Math.max(2 * r, 2 * r * img.naturalHeight / img.naturalWidth);
+    ctx.drawImage(img, cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h);
+  } else {
+    ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
+    ctx.font = `600 ${Math.round(r * 0.8)}px "Newsreader"`; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(storyPInitiales(nom), cx, cy + r * 0.05); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  }
+  ctx.restore();
+  ctx.lineWidth = Math.max(4, r * 0.07); ctx.strokeStyle = couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
+}
+// Pictogramme de thème (même tracé que sur le site), dans un disque coloré
+function storyPPicto(ctx, theme, cx, cy, r){
+  const [couleur, trace] = THEMES_ACTU[theme] || THEMES_ACTU.politique;
+  ctx.fillStyle = couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.fill();
+  ctx.save(); ctx.translate(cx - r * 0.55, cy - r * 0.55); ctx.scale(r * 1.1 / 24, r * 1.1 / 24);
+  ctx.lineWidth = 1.8; ctx.strokeStyle = "#fff"; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke(new Path2D(trace));
+  ctx.restore();
+}
+function storyPLogo(ctx, img, x, y, taille){
+  storyPCarte(ctx, x, y, taille, taille, "#fff");
+  const k = Math.min((taille - 36) / img.naturalWidth, (taille - 36) / img.naturalHeight);
+  ctx.drawImage(img, x + taille / 2 - img.naturalWidth * k / 2, y + taille / 2 - img.naturalHeight * k / 2, img.naturalWidth * k, img.naturalHeight * k);
+}
+// Visuel d'un sujet d'actualité : portraits (jusqu'à 3), sinon logos de partis, sinon pictogramme.
+// Dessine de gauche à droite à partir de x, centré en cy ; renvoie la largeur occupée.
+async function storyPVisuel(ctx, s, x, cy, r, maxi = 3){
+  const ill = s.illustration || {}, pers = (ill.personnes || []).slice(0, maxi);
+  if(pers.length){
+    const imgs = await Promise.all(pers.map(p=> p.photo ? storyImage(p.photo) : null));
+    pers.forEach((p, i)=> storyPMedaillon(ctx, imgs[i], x + r + i * (2 * r + 18), cy, r, couleurPartiActu(p.parti), p.nom));
+    return pers.length * (2 * r + 18) - 18;
+  }
+  const logos = (await Promise.all((ill.partis || []).slice(0, maxi).map(c=> storyImage(`icons/partis/${c}.png`)))).filter(Boolean);
+  if(logos.length){
+    logos.forEach((img, i)=> storyPLogo(ctx, img, x + i * (2 * r + 18), cy - r, 2 * r));
+    return logos.length * (2 * r + 18) - 18;
+  }
+  storyPPicto(ctx, ill.theme, x + r, cy, r);
+  return 2 * r;
+}
+// Crédit des portraits libres de Wikimedia Commons (personnalités), à rappeler dans le pied
+async function storyPCredits(noms){
+  const liste = (await lireJSON("data/portraits.json"))?.portraits || {};
+  return noms.map(n=> liste[n]).filter(p=>p?.fichier).map(p=> `${p.auteur || "auteur inconnu"} (${p.licence})`);
+}
+const storyPDateLongue = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
+const storyPPct = v => v === null || v === undefined ? "—" : v < 1 ? (v > 0 ? "< 1 %" : "< 0,1 %") : v > 99 ? "> 99 %" : `${nombreFr(Math.round(v))} %`;
+const storyPCouleurCandidat = nom => CANDIDATS.find(c=>c.id === nom)?.couleur || "#8A8C94";
+function storyPPastilleCentre(ctx, texte, cx, y, fond, taille = 32){
+  ctx.font = `700 ${taille}px "Public Sans"`;
+  const w = ctx.measureText(texte).width + taille * 1.2;
+  return storyPastille(ctx, texte, cx - w / 2, y, fond, "#fff", taille);
+}
+function storyPSousTitre(ctx, texte, x, y, couleur = STORY.pale){
+  ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = couleur; ctx.letterSpacing = "2px";
+  ctx.fillText(texte.toUpperCase(), x, y + 20); ctx.letterSpacing = "0px";
+  return y + 44;
+}
+const storyPDomaine = u => (String(u).match(/^https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "";
+
+// 1. Un sujet d'actualité (data-id : indice du sujet dans ACTUALITES.sujets)
+STORY_PLUS.actualite = async (ctx, info)=>{
+  const s = ACTUALITES?.sujets?.[Number(info)];
+  if(!s?.articles?.length) return null;
+  const { L, marge } = STORY;
+  const medias = [...new Set(s.articles.map(a=>a.media))];
+  const ill = s.illustration || {}, theme = (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique);
+  const premier = ill.personnes?.[0];
+  const couleur = premier ? couleurPartiActu(premier.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : theme[0]);
+  let y = storyCadre(ctx, "Actualité · à la une");
+  storyPFond(ctx, couleur, y - 6, 18);
+  y += 24;
+  storyPastille(ctx, s.medias >= 2 ? `REPRIS PAR ${s.medias} MÉDIAS` : "TITRE RELEVÉ DANS LA PRESSE", marge, y, s.medias >= 2 ? STORY.vert : STORY.pale, "#fff", 30);
+  y += 76;
+  y = storyTexte(ctx, s.articles[0].titre, marge, y, { taille:60, poids:600, police:"Newsreader", max:6, interligne:1.12 }) + 8;
+  y = storyTexte(ctx, `${s.articles[0].media}, ${ilYA(s.articles[0].date)}`, marge, y, { taille:28, couleur:STORY.doux, max:1 }) + 22;
+  // Portraits
+  const r = 92, cy = y + r;
+  const largVisuel = await storyPVisuel(ctx, s, marge, cy, r, 3);
+  const noms = (ill.personnes || []).slice(0, 3).map(p=>p.nom), tx = marge + largVisuel + 36;
+  if(noms.length) storyTexte(ctx, noms.join(" · "), tx, cy - 34, { taille:30, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:3 });
+  else storyTexte(ctx, theme[2], tx, cy - 20, { taille:34, poids:600, couleur:theme[0], largeur:L - marge - tx, max:1 });
+  y = cy + r + 38;
+  // Médias
+  y = storyPSousTitre(ctx, `${medias.length > 1 ? "Médias" : "Média"} qui en parlent`, marge, y);
+  let x = marge;
+  ctx.font = `700 28px "Public Sans"`;
+  for(const m of medias.slice(0, 8)){
+    const w = ctx.measureText(m).width + 34;
+    if(x + w > L - marge){ x = marge; y += 60; }
+    storyPastille(ctx, m, x, y, "#EAE3D2", STORY.encre, 28); x += w + 12;
+  }
+  y += 86;
+  // Autres titres, un par média
+  const vus = new Set([s.articles[0].media]);
+  const autres = s.articles.filter(a=> !vus.has(a.media) && vus.add(a.media));
+  if(autres.length){
+    y = storyPSousTitre(ctx, "Ce que titrent les autres", marge, y);
+    for(const a of autres.slice(0, 5)){
+      if(y > 1470) break;
+      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+      ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = storyPLisible(couleur); ctx.fillText(a.media.toUpperCase(), marge, y + 36);
+      y = storyTexte(ctx, a.titre, marge, y + 44, { taille:27, max:2, interligne:1.2 }) + 8;
+    }
+  }
+  const credits = await storyPCredits((ill.personnes || []).filter(p=>/personnalites/.test(p.photo || "")).map(p=>p.nom));
+  storyPied(ctx, `Titres relevés dans la presse, liens sur le site. Seuls les titres sont repris.${credits.length ? ` Photos : ${credits.join(", ")}.` : ""}`);
+  return { nom:`actualite-${slugDep(s.articles[0].titre).slice(0, 40)}` };
+};
+
+// 2. Les sujets du moment (data-id vide)
+STORY_PLUS.actualites = async (ctx)=>{
+  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 4);
+  if(!top.length) return null;
+  const { L, marge } = STORY;
+  let y = storyCadre(ctx, "Actualité · à la une");
+  y = storyTexte(ctx, "Les sujets du moment", marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+  y = storyTexte(ctx, "Les plus repris par plusieurs médias", marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 20;
+  const pas = Math.min(300, (1580 - y) / top.length), r = 62;
+  for(let i = 0; i < top.length; i++){
+    const s = top[i], cy = y + pas / 2;
+    ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+    const ill = s.illustration || {}, p0 = ill.personnes?.[0];
+    const coul = p0 ? couleurPartiActu(p0.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique)[0]);
+    const img = p0?.photo ? await storyImage(p0.photo) : null;
+    const logo = !p0 && ill.partis?.[0] ? await storyImage(`icons/partis/${ill.partis[0]}.png`) : null;
+    if(p0) storyPMedaillon(ctx, img, marge + r, cy, r, coul, p0.nom);
+    else if(logo) storyPLogo(ctx, logo, marge, cy - r, 2 * r);
+    else storyPPicto(ctx, ill.theme, marge + r, cy, r);
+    const tx = marge + 2 * r + 30, tl = L - marge - 150 - tx;
+    storyTexte(ctx, s.articles[0].titre, tx, cy - 70, { taille:32, poids:600, police:"Newsreader", largeur:tl, max:5, interligne:1.12 });
+    ctx.font = `600 120px "Newsreader"`; ctx.fillStyle = STORY.vert; ctx.textAlign = "right"; ctx.fillText(String(s.medias), L - marge, cy + 20);
+    ctx.font = `700 24px "Public Sans"`; ctx.fillText("MÉDIAS", L - marge, cy + 58); ctx.textAlign = "left";
+    y += pas;
+  }
+  storyPied(ctx, "Titres relevés dans la presse, liens sur le site. Un sujet est « repris » quand au moins deux médias le traitent. Seuls les titres sont repris.");
+  return { nom:"sujets-du-moment" };
+};
+
+// 3. Qui a le plus de chances ? (data-id vide)
+STORY_PLUS.probabilites = async (ctx)=>{
+  if(!PROBAS?.candidats?.length || periodeReserveSondages()) return null;
+  const { L, marge } = STORY;
+  const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null && c.victoire !== undefined);
+  const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1)
+    .sort((a, b)=> ((b.victoire || 0) - (a.victoire || 0)) || (b.secondTour - a.secondTour)).slice(0, 6);
+  if(!liste.length) return null;
+  let y = storyCadre(ctx, "Présidentielle 2027 · simulation");
+  y = storyTexte(ctx, "Qui a le plus de chances ?", marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+  y = storyTexte(ctx, "Simulation à partir des sondages, pas une prédiction.", marge, y + 2, { taille:30, poids:700, couleur:STORY.ambre, max:2 }) + 18;
+  ctx.font = `600 24px "Public Sans"`;
+  ctx.fillStyle = "#8A8C94"; ctx.globalAlpha = 0.5; ctx.fillRect(marge, y + 6, 36, 18); ctx.globalAlpha = 1;
+  ctx.fillStyle = STORY.doux; ctx.fillText("chance d'aller au second tour", marge + 48, y + 24);
+  if(avecVictoire){ ctx.fillStyle = "#6B6E78"; ctx.fillRect(marge + 480, y + 6, 36, 18); ctx.fillStyle = STORY.doux; ctx.fillText("chance d'être élu", marge + 528, y + 24); }
+  y += 54;
+  const pas = Math.min(190, (1585 - y) / liste.length);
+  for(const c of liste){
+    const coul = COULEURS_PARTIS[c.parti] || "#8A8C94";
+    ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+    ctx.font = `600 34px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(c.nom, marge, y + 44);
+    const elu = avecVictoire && c.victoire !== null && c.victoire !== undefined;
+    const pri = elu ? c.victoire : c.secondTour;
+    ctx.font = pri < 1 ? `700 44px "Public Sans"` : `600 64px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.textAlign = "right"; ctx.fillText(storyPPct(pri), L - marge, y + 54); ctx.textAlign = "left";
+    const hb = elu ? 20 : 26, by = y + 74, larg = storyPLarg - 200;
+    ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = STORY.pale;
+    ctx.fillText("2d tour", marge, by + hb - 3);
+    ctx.globalAlpha = 0.5; storyBarre(ctx, marge + 120, by, larg, hb, [[c.secondTour, coul]], 100); ctx.globalAlpha = 1;
+    ctx.textAlign = "right"; ctx.fillStyle = STORY.doux; ctx.fillText(storyPPct(c.secondTour), L - marge, by + hb - 3); ctx.textAlign = "left";
+    if(elu){
+      ctx.fillStyle = STORY.pale; ctx.fillText("Élu", marge, by + 38 + hb - 3);
+      storyBarre(ctx, marge + 120, by + 38, larg, hb, [[c.victoire, coul]], 100);
+      ctx.textAlign = "right"; ctx.fillStyle = STORY.encre; ctx.font = `700 22px "Public Sans"`; ctx.fillText(storyPPct(c.victoire), L - marge, by + 38 + hb - 3); ctx.textAlign = "left";
+    }
+    y += pas;
+  }
+  const m = PROBAS.methode || {};
+  storyPied(ctx, `Simulation à partir des sondages (${formatNombre(m.tirages || 0)} élections simulées), pas une prédiction : les sondages mesurent l'opinion du moment.`);
+  return { nom:"probabilites-presidentielle" };
+};
+
+// 4. Un duel de second tour (data-id : indice dans SECOND_TOUR)
+STORY_PLUS.secondtour = async (ctx, info)=>{
+  const d = SECOND_TOUR?.[Number(info)];
+  if(!d?.instituts?.length || periodeReserveSondages()) return null;
+  const { L, marge } = STORY;
+  const [a, b] = [...d.candidats].sort((x, z)=> (d.instituts[0].scores[z] ?? 0) - (d.instituts[0].scores[x] ?? 0));
+  const ca = storyPCouleurCandidat(a);
+  let cb = storyPCouleurCandidat(b); if(cb === ca) cb = "#6B6E78";
+  const premier = d.instituts[0], sa = premier.scores[a], sb = premier.scores[b];
+  let y = storyCadre(ctx, "Présidentielle 2027 · second tour");
+  y = storyTexte(ctx, "Le duel testé par les sondages", marge, y, { taille:60, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 14;
+  const demi = storyPLarg / 2 - 20;
+  const fa = storyTexte(ctx, a, marge, y, { taille:56, poids:600, police:"Newsreader", largeur:demi, max:2, interligne:1.05 });
+  const fb = storyTexte(ctx, b, L - marge, y, { taille:56, poids:600, police:"Newsreader", largeur:demi, max:2, interligne:1.05, align:"right" });
+  y = Math.max(fa, fb) + 6;
+  ctx.fillStyle = ca; ctx.fillRect(marge, y, demi, 8); ctx.fillStyle = cb; ctx.fillRect(L - marge - demi, y, demi, 8);
+  y += 30;
+  ctx.font = `700 210px "Newsreader"`; ctx.fillStyle = storyPLisible(ca); ctx.fillText(nombreFr(sa), marge, y + 170);
+  ctx.fillStyle = storyPLisible(cb); ctx.textAlign = "right"; ctx.fillText(nombreFr(sb), L - marge, y + 170); ctx.textAlign = "left";
+  ctx.font = `700 40px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.textAlign = "center"; ctx.fillText("%", L / 2, y + 150); ctx.textAlign = "left";
+  y += 200;
+  ctx.font = `600 26px "Public Sans"`; ctx.fillStyle = STORY.doux;
+  ctx.fillText(`${premier.nom}, enquête du ${premier.date}`, marge, y + 20);
+  y += 44;
+  const hb = 56, wa = storyPLarg * sa / (sa + sb);
+  ctx.save(); ctx.beginPath(); ctx.roundRect(marge, y, storyPLarg, hb, hb / 2); ctx.clip();
+  ctx.fillStyle = ca; ctx.fillRect(marge, y, wa - 2, hb); ctx.fillStyle = cb; ctx.fillRect(marge + wa + 2, y, storyPLarg - wa - 2, hb);
+  ctx.restore();
+  y += hb + 40;
+  if(d.instituts.length > 1){
+    y = storyPSousTitre(ctx, "Chaque institut", marge, y);
+    const pas = Math.min(110, (1570 - y) / Math.min(6, d.instituts.length));
+    for(const i of d.instituts.slice(0, 6)){
+      const x = i.scores[a], z = i.scores[b];
+      ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(i.nom, marge, y + 28);
+      ctx.font = `400 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "right"; ctx.fillText(i.date, L - marge, y + 28); ctx.textAlign = "left";
+      const by = y + 42, h = 38, w = storyPLarg * x / (x + z);
+      ctx.save(); ctx.beginPath(); ctx.roundRect(marge, by, storyPLarg, h, h / 2); ctx.clip();
+      ctx.fillStyle = ca; ctx.fillRect(marge, by, w - 2, h); ctx.fillStyle = cb; ctx.fillRect(marge + w + 2, by, storyPLarg - w - 2, h);
+      ctx.restore();
+      ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = "#fff"; ctx.textBaseline = "middle";
+      ctx.fillText(`${nombreFr(x)} %`, marge + 18, by + h / 2 + 2); ctx.textAlign = "right"; ctx.fillText(`${nombreFr(z)} %`, L - marge - 18, by + h / 2 + 2); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      y += pas;
+    }
+  }
+  storyPied(ctx, `Sondages de second tour (${premier.nom} et autres instituts), en % des votes exprimés, notices sur commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
+  return { nom:`second-tour-${slugDep(a)}-${slugDep(b)}` };
+};
+
+// 5. Décompte avant l'annonce du président (data-id vide)
+STORY_PLUS.decompte = async (ctx)=>{
+  const { L, marge } = STORY;
+  const [iso1, iso2] = TOURS_PRESIDENTIELLE;
+  const jours = iso => Math.round((Date.parse(iso) - Date.parse(aujourdhuiISO())) / 864e5);
+  const j2 = jours(iso2), j1 = jours(iso1);
+  if(j2 < 0) return null;
+  let y = storyCadre(ctx, "Présidentielle 2027 · décompte");
+  y = storyTexte(ctx, "Avant l'annonce du président de la République", marge, y, { taille:62, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 40;
+  storyPFond(ctx, STORY.bleu, y, 500);
+  storyPLigne(ctx, j2 === 0 ? "Jour J" : `J-${j2}`, L / 2, y + 360, { taille:420, poids:700, couleur:STORY.bleu, largeur:storyPLarg, align:"center", mini:120 });
+  if(j2 > 0){
+    ctx.font = `600 44px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "center";
+    ctx.fillText(j2 === 1 ? "plus qu'un jour" : `${formatNombre(j2)} jours · environ ${Math.round(j2 / 7)} semaines`, L / 2, y + 450);
+    ctx.textAlign = "left";
+  }
+  y += 540;
+  const carte = (titre, date, detail, couleur, jr)=>{
+    storyPCarte(ctx, marge, y, storyPLarg, 200);
+    ctx.fillStyle = couleur; ctx.fillRect(marge, y + 18, 10, 164);
+    storyTexte(ctx, titre, marge + 40, y + 14, { taille:26, poids:700, couleur:STORY.pale, max:1 });
+    storyTexte(ctx, date, marge + 40, y + 52, { taille:38, poids:600, police:"Newsreader", largeur:storyPLarg - 300, max:2, interligne:1.05 });
+    storyTexte(ctx, detail, marge + 40, y + 134, { taille:24, couleur:STORY.doux, largeur:storyPLarg - 100, max:1 });
+    if(jr !== null){ ctx.font = `700 76px "Newsreader"`; ctx.fillStyle = couleur; ctx.textAlign = "right"; ctx.fillText(jr > 0 ? `J-${jr}` : "Jour J", L - marge - 30, y + 118); ctx.textAlign = "left"; }
+    y += 222;
+  };
+  if(j1 >= 0) carte("PREMIER TOUR", storyPDateLongue(iso1), "Scrutin du 18 avril", STORY.rouge, j1);
+  carte("SECOND TOUR ET ANNONCE", storyPDateLongue(iso2), "Annonce à 20 h, à la fermeture des derniers bureaux", STORY.bleu, j2 > 0 ? j2 : null);
+  storyPied(ctx, "Calendrier de l'élection présidentielle de 2027 : premier tour le 18 avril, second tour le 2 mai ; résultats officiels proclamés par le Conseil constitutionnel.");
+  return { nom:"decompte-presidentielle-2027" };
+};
+
+// 6. Une candidature (data-id : nom exact)
+STORY_PLUS.candidat = async (ctx, info)=>{
+  const c = CANDIDATURES?.find(x=>x.nom === info);
+  if(!c) return null;
+  const { L, marge } = STORY;
+  const coul = COULEURS_PARTIS[c.code] || "#8A8C94";
+  let y = storyCadre(ctx, "Présidentielle 2027 · candidat");
+  const photo = await storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`);
+  const r = 170, cy = y + 30 + r;
+  storyPMedaillon(ctx, photo, L / 2, cy, r, coul, c.nom);
+  y = cy + r + 30;
+  storyPLigne(ctx, c.nom, L / 2, y + 66, { taille:92, poids:600, couleur:STORY.encre, align:"center", mini:44 });
+  y += 100;
+  storyPPastilleCentre(ctx, c.parti.toUpperCase(), L / 2, y, storyPLisible(coul), 34);
+  y += 90;
+  if(c.age){
+    ctx.font = `700 230px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.textAlign = "right"; ctx.fillText(String(c.age), L / 2 - 6, y + 180);
+    ctx.font = `600 52px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "left"; ctx.fillText("ans", L / 2 + 14, y + 180);
+    ctx.font = `400 26px "Public Sans"`; ctx.fillText("au premier tour", L / 2 + 14, y + 124);
+    y += 230;
+  }
+  if(c.slogan) y = storyTexte(ctx, `« ${c.slogan} »`, L / 2, y, { taille:40, poids:600, police:"Newsreader", couleur:STORY.doux, align:"center", max:2, interligne:1.15 }) + 10;
+  for(const f of (c.fonctions || []).slice(0, 3)){
+    if(y > 1400) break;
+    y = storyTexte(ctx, f, L / 2, y, { taille:30, couleur:STORY.encre, align:"center", max:2, interligne:1.2 }) + 4;
+  }
+  storyTexte(ctx, c.annonce ? `Candidature annoncée le ${dateCourte(c.annonce) || c.annonce}` : "Candidature annoncée", L / 2, Math.min(Math.max(y + 40, 1400), 1510), { taille:32, poids:700, couleur:STORY.bleu, align:"center", max:1 });
+  const dom = storyPDomaine(c.source) || "la source indiquée sur le site";
+  const credits = photo ? await storyPCredits([c.nom]) : [];
+  storyPied(ctx, `Candidature rapportée par ${dom}, d'après la liste des candidatures de Wikipédia.${credits.length ? ` Photo : ${credits.join(", ")}.` : ""}`);
+  return { nom:`candidat-${slugDep(c.nom)}` };
+};
+
+// 7. Un parti (data-id : code du parti)
+STORY_PLUS.parti = async (ctx, info)=>{
+  const l = LEADERS?.find(x=>x.parti === info);
+  if(!l) return null;
+  const { L, marge } = STORY;
+  const p = PARTIES.find(x=>x.id === l.parti), g = GROUPES?.[l.parti];
+  const coul = l.couleur || p?.couleur || "#6B6E78", sansChef = l.nom.startsWith("—");
+  let y = storyCadre(ctx, "Les partis");
+  storyPFond(ctx, coul, y - 6, 330);
+  y += 20;
+  const logo = await storyImage(`icons/partis/${l.parti}.png`);
+  let tx = marge;
+  if(logo){ storyPLogo(ctx, logo, marge, y, 260); tx = marge + 300; }
+  storyPLigne(ctx, l.parti, tx, y + 130, { taille:150, poids:700, couleur:storyPLisible(coul), largeur:L - marge - tx, mini:60 });
+  storyTexte(ctx, g?.libelle || p?.nom || l.parti, tx, y + 150, { taille:32, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:2 });
+  y += 330;
+  y = storyPSousTitre(ctx, "À la tête du parti", marge, y + 20);
+  y = storyTexte(ctx, sansChef ? "Pas de chef de parti unique" : l.nom, marge, y, { taille:sansChef ? 72 : 88, poids:600, police:"Newsreader", max:2, interligne:1.02 });
+  y = storyTexte(ctx, l.role, marge, y + 4, { taille:34, couleur:STORY.doux, max:4, interligne:1.25 }) + 36;
+  if(g?.membres){
+    storyPCarte(ctx, marge, y, storyPLarg, 250);
+    ctx.fillStyle = coul; ctx.fillRect(marge, y + 20, 10, 210);
+    ctx.font = `700 150px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.fillText(formatNombre(g.membres), marge + 44, y + 175);
+    const w = ctx.measureText(formatNombre(g.membres)).width;
+    storyTexte(ctx, "députés dans le groupe à l'Assemblée nationale", marge + 44 + w + 24, y + 70, { taille:30, poids:600, couleur:STORY.doux, largeur:storyPLarg - w - 90, max:3 });
+    y += 276;
+    if(g.president && g.president !== l.nom) storyTexte(ctx, `${g.presidente ? "Présidente" : "Président"} du groupe : ${g.president}`, marge, y, { taille:32, poids:600, couleur:STORY.encre, max:2 });
+  }
+  storyPied(ctx, `Direction du parti : ${l.source?.nom || "sources publiques"}. Effectifs du groupe : Assemblée nationale (open data).`);
+  return { nom:`parti-${slugDep(l.parti)}` };
+};
+
+// 8. Une décision de justice (data-id : indice dans CONDAMNATIONS)
+STORY_PLUS.justice = async (ctx, info)=>{
+  const c = CONDAMNATIONS?.[Number(info)];
+  if(!c) return null;
+  const { marge } = STORY;
+  const coul = c.statut === "definitif" ? STORY.rouge : STORY.ambre;
+  let y = storyCadre(ctx, "Justice · décisions rendues");
+  y = storyTexte(ctx, c.nom, marge, y, { taille:84, poids:600, police:"Newsreader", max:2, interligne:1.03 });
+  y = storyTexte(ctx, `${c.role} · ${c.parti}`, marge, y, { taille:32, poids:600, couleur:STORY.doux, max:2 }) + 22;
+  // Statut, tel qu'il figure dans la source
+  ctx.font = `700 34px "Public Sans"`;
+  const n = storyLignes(ctx, c.statutLabel, storyPLarg - 70, 3).length, h = 56 + n * 42;
+  storyPCarte(ctx, marge, y, storyPLarg, h, "#FBF8F1", coul);
+  ctx.fillStyle = coul; ctx.fillRect(marge, y + 16, 10, h - 32);
+  ctx.font = `700 22px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px"; ctx.fillText("STATUT JUDICIAIRE", marge + 40, y + 38); ctx.letterSpacing = "0px";
+  storyTexte(ctx, c.statutLabel, marge + 40, y + 44, { taille:34, poids:700, couleur:coul, largeur:storyPLarg - 70, max:3, interligne:1.2 });
+  y += h + 34;
+  y = storyTexte(ctx, c.affaire, marge, y, { taille:56, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 12;
+  y = storyTexte(ctx, c.detail, marge, y, { taille:36, couleur:STORY.encre, max:11, interligne:1.3 }) + 24;
+  if(c.statut === "appel"){
+    const t = "Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.";
+    ctx.font = `600 28px "Public Sans"`;
+    const k = storyLignes(ctx, t, storyPLarg - 50, 4).length, hh = 30 + k * 36;
+    storyPCarte(ctx, marge, y, storyPLarg, hh, "#F3EBD3", STORY.ambre);
+    storyTexte(ctx, t, marge + 25, y + 14, { taille:28, poids:600, couleur:STORY.encre, largeur:storyPLarg - 50, max:4, interligne:1.25 });
+  }
+  storyPied(ctx, `Source : ${c.source}. Statut tel qu'indiqué par la source ; présomption d'innocence tant que la décision n'est pas définitive.`);
+  return { nom:`justice-${slugDep(c.nom)}-${slugDep(c.affaire).slice(0, 30)}` };
+};
+
+// 9. Un chiffre clé (data-id : indice dans INDICATEURS)
+STORY_PLUS.indicateur = async (ctx, info)=>{
+  const i = INDICATEURS?.[Number(info)];
+  if(!i) return null;
+  const { L, marge } = STORY;
+  const coul = i.tendance === "up" ? STORY.rouge : i.tendance === "down" ? STORY.vert : STORY.bleu;
+  let y = storyCadre(ctx, "Chiffres clés · France");
+  y = storyTexte(ctx, i.nom, marge, y, { taille:78, poids:600, police:"Newsreader", max:2, interligne:1.03 }) + 24;
+  storyPFond(ctx, coul, y, 500);
+  const mv = /^(.+?%)\s+(\S.*)$/.exec(i.valeur), valeur = mv ? mv[1] : i.valeur;
+  storyPLigne(ctx, valeur, marge, y + 330, { taille:300, poids:700, couleur:coul, largeur:storyPLarg, mini:90 });
+  if(mv) storyPLigne(ctx, mv[2], L - marge, y + 432, { taille:60, poids:600, couleur:STORY.doux, largeur:storyPLarg - 360, align:"right", mini:30 });
+  if(i.tendance === "up" || i.tendance === "down"){
+    const hx = marge + 22, hy = y + 420;
+    ctx.fillStyle = coul; ctx.beginPath();
+    if(i.tendance === "up"){ ctx.moveTo(hx - 22, hy + 14); ctx.lineTo(hx + 22, hy + 14); ctx.lineTo(hx, hy - 24); }
+    else { ctx.moveTo(hx - 22, hy - 14); ctx.lineTo(hx + 22, hy - 14); ctx.lineTo(hx, hy + 24); }
+    ctx.closePath(); ctx.fill();
+    ctx.font = `700 38px "Public Sans"`; ctx.fillText(i.tendance === "up" ? "En hausse" : "En baisse", marge + 64, hy + 12);
+  }
+  y += 560;
+  y = storyTexte(ctx, i.detail, marge, y, { taille:40, couleur:STORY.encre, max:7, interligne:1.3 }) + 24;
+  storyTexte(ctx, `${i.source}, ${i.date}`, marge, y, { taille:30, poids:700, couleur:STORY.bleu, max:2 });
+  storyPied(ctx, `Source : ${i.source}, ${i.date}. Série officielle consultable sur ${storyPDomaine(i.url) || "le site de la source"}.`);
+  return { nom:`chiffre-${slugDep(i.nom)}` };
+};
+
+// 10. Un groupe de l'Assemblée (data-id : id de groupe, ex. « RN »)
+STORY_PLUS.groupe = async (ctx, info)=>{
+  const p = PARTIES.find(x=>x.id === info);
+  if(!p) return null;
+  const { L, marge } = STORY;
+  const g = GROUPES?.[p.id], eff = g?.membres ?? p.sieges, coul = p.couleur;
+  let y = storyCadre(ctx, "Assemblée nationale · groupe");
+  storyPFond(ctx, coul, y - 6, 300);
+  y += 20;
+  const logo = await storyImage(`icons/partis/${p.id}.png`);
+  let tx = marge;
+  if(logo){ storyPLogo(ctx, logo, marge, y, 220); tx = marge + 256; }
+  storyPLigne(ctx, p.id, tx, y + 120, { taille:130, poids:700, couleur:storyPLisible(coul), largeur:L - marge - tx, mini:60 });
+  storyTexte(ctx, g?.libelle || p.nom, tx, y + 134, { taille:34, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:2 });
+  y += 290;
+  storyPLigne(ctx, formatNombre(eff), marge, y + 290, { taille:340, poids:700, couleur:storyPLisible(coul), largeur:storyPLarg - 10, mini:120 });
+  y += 330;
+  y = storyTexte(ctx, eff > 1 ? "députés" : "député", marge, y, { taille:56, poids:600, police:"Newsreader", max:1 }) + 28;
+  const total = TOTAL_SIEGES || 577;
+  storyBarre(ctx, marge, y, storyPLarg, 36, [[eff, coul]], total);
+  const maj = Math.floor(total / 2) + 1, xm = marge + storyPLarg * maj / total;
+  ctx.fillStyle = STORY.encre; ctx.fillRect(xm - 2, y - 12, 4, 60);
+  y += 80;
+  ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = STORY.doux;
+  ctx.fillText(`${nombreFr(eff / total * 100)} % des ${formatNombre(total)} sièges`, marge, y);
+  ctx.textAlign = "right"; ctx.fillText(`Majorité absolue : ${maj}`, L - marge, y); ctx.textAlign = "left";
+  y += 50;
+  if(g?.president){
+    storyPCarte(ctx, marge, y, storyPLarg, 150);
+    ctx.fillStyle = coul; ctx.fillRect(marge, y + 16, 10, 118);
+    storyTexte(ctx, g.presidente ? "PRÉSIDENTE DU GROUPE" : "PRÉSIDENT DU GROUPE", marge + 40, y + 12, { taille:22, poids:700, couleur:STORY.pale, max:1 });
+    storyTexte(ctx, g.president, marge + 40, y + 46, { taille:48, poids:600, police:"Newsreader", max:1, largeur:storyPLarg - 80 });
+    if(g.presidentDepuis) storyTexte(ctx, `depuis le ${dateCourte(g.presidentDepuis)}`, marge + 40, y + 100, { taille:24, couleur:STORY.doux, max:1 });
+  }
+  storyPied(ctx, "Assemblée nationale, composition des groupes politiques (open data) ; effectifs relevés automatiquement.");
+  return { nom:`groupe-${slugDep(p.id)}` };
+};
+
+// 11. Un meeting (data-id : indice dans MEETINGS)
+STORY_PLUS.meeting = async (ctx, info)=>{
+  const m = MEETINGS?.[Number(info)];
+  if(!m) return null;
+  const { L, marge } = STORY;
+  const coul = m.partyColor || "#6B6E78";
+  let y = storyCadre(ctx, "Agenda · meetings");
+  storyPFond(ctx, coul, y - 6, 400);
+  y += 10;
+  storyPLigne(ctx, m.jour, marge, y + 270, { taille:300, poids:700, couleur:storyPLisible(coul), largeur:storyPLarg, mini:100 });
+  y += 290;
+  const mois = String(m.mois).toUpperCase();
+  ctx.font = `700 64px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.letterSpacing = "4px"; ctx.fillText(mois, marge, y + 56); ctx.letterSpacing = "0px";
+  if(m.parti) storyPastille(ctx, m.parti, marge + ctx.measureText(mois).width + 60, y + 6, storyPLisible(coul), "#fff", 36);
+  y += 130;
+  y = storyTexte(ctx, m.titre, marge, y, { taille:68, poids:600, police:"Newsreader", max:4, interligne:1.08 }) + 14;
+  const ou = [m.heure && m.heure !== "—" ? m.heure : "", m.lieu].filter(Boolean).join(" · ");
+  if(ou) y = storyTexte(ctx, ou, marge, y, { taille:34, poids:700, couleur:STORY.bleu, max:3, interligne:1.2 }) + 14;
+  y = storyTexte(ctx, m.desc, marge, y, { taille:32, couleur:STORY.doux, max:8, interligne:1.3 }) + 14;
+  if((m.fin || m.debut) < aujourdhuiISO()) storyTexte(ctx, "Événement passé", marge, y, { taille:30, poids:700, couleur:STORY.pale, max:1 });
+  else if(!m.verified) storyTexte(ctx, "Date à confirmer", marge, y, { taille:30, poids:700, couleur:STORY.ambre, max:1 });
+  storyPied(ctx, `Date annoncée par ${m.source?.nom || "l'organisateur"}. Les programmes peuvent changer : vérifiez auprès de l'organisateur.`);
+  return { nom:`meeting-${slugDep(m.titre).slice(0, 40)}` };
+};
+
 async function dessinerStory(type, info){
   await Promise.all(["600 60px Newsreader", "400 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
@@ -4733,6 +5208,11 @@ async function dessinerStory(type, info){
     storyTexte(ctx, "Et vous ? Faites le quiz :", marge, 1520, { taille:34, poids:700, couleur:STORY.bleu, max:1 });
     storyPied(ctx, "Part des questions où ma réponse correspond à la position de la majorité du groupe, sur de vrais votes de l'Assemblée.");
     nom = "quiz-hemicycle-france";
+  }
+  else if(STORY_PLUS[type]){
+    const r = await STORY_PLUS[type](ctx, info);
+    if(!r) return null;
+    nom = r.nom;
   }
   else return null;
 
