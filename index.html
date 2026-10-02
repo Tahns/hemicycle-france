@@ -4352,7 +4352,7 @@ function afficherResultatQuiz(scores, lignes, quand){
       <div class="quiz-result-pct">${s.pct} %</div>
     </div>
   `).join("");
-  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString(document.documentElement.lang || "fr", { day:"numeric", month:"long", year:"numeric" }) : "";
+  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }).replace(/^1 /, "1er ") : "";
   document.getElementById("quiz-enregistre").textContent = maj ? `Résultat enregistré sur cet appareil le ${maj}.` : "Résultat enregistré sur cet appareil.";
   document.getElementById("quiz-restart").addEventListener("click", ()=>{ try{ localStorage.removeItem("quiz-resultat"); }catch(e){} renderQuiz(); });
 }
@@ -4380,9 +4380,8 @@ const presDate = iso => {
   if(!iso) return "";
   if(String(iso).length === 4) return String(iso);
   const d = new Date(iso + "T12:00:00Z");
-  const lang = document.documentElement.lang || "fr";
-  const r = d.toLocaleDateString(lang, { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" });
-  return lang === "fr" ? r.replace(/^1 /, "1er ") : r;
+  // Toujours écrite en français : la date est reformulée pour la langue active par localiserFormats (Intl), comme partout ailleurs
+  return d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" }).replace(/^1 /, "1er ");
 };
 const presPrecis = iso => String(iso || "").length === 10;
 // Mois entiers écoulés entre deux dates complètes (AAAA-MM-JJ)
@@ -8098,7 +8097,7 @@ const FORMATS_I18N = [
   // 5e circonscription · 2ᵉ trimestre · 1ʳᵉ circonscription
   { re:new RegExp(`${AVANT}(\\d{1,2})(ʳᵉ|ᵉʳ|ᵉ|re|er|e)(?=\\s+(\\p{L}+))`, "giu"), f:(loc, m)=> formaterOrdinal(loc, +m[1], m[3]) },
   // 1 504 Md€ · 5,1 % · 3 595,5 · 100 €
-  { re:new RegExp(`${AVANT}(\\d{1,3}(?:[\\u00a0\\u202f ]\\d{3})+|\\d+)(?:,(\\d{1,2})(?!\\d))?(?:[\\u00a0\\u202f ]?(Md€|M€|%|€))?${APRES}`, "gu"), f:(loc, m)=> formaterNombre(loc, m) },
+  { re:new RegExp(`${AVANT}(\\d{1,3}(?:[\\u00a0\\u202f ]\\d{3})+|\\d+)(?:,(\\d{1,2})(?!\\d))?(?:([\\u00a0\\u202f ]?)(Md€|M€|%|€))?${APRES}`, "gu"), f:(loc, m)=> formaterNombre(loc, m) },
 ];
 
 function fmtIntl(loc, opts){
@@ -8133,15 +8132,16 @@ function formaterRelatif(loc, n, u){
   return new Intl.RelativeTimeFormat(loc, { numeric:"always", style:"long" }).format(-n, unite);
 }
 function formaterOrdinal(loc, n, mot){
-  const l = loc.slice(0, 2), f = /^(circ[ou]n?scri|c[ií]rcul)/i.test(mot);
+  const l = loc.slice(0, 2), f = /^circ[ou]n?scri/i.test(mot); // circunscripción, circunscrição (féminins) ; « círculo » est masculin
   if(l === "en"){ const r = n % 100, s = r >= 11 && r <= 13 ? "th" : ({ 1:"st", 2:"nd", 3:"rd" })[n % 10] || "th"; return n + s; }
   if(l === "es" || l === "pt") return n + (f ? ".ª" : ".º");
   if(l === "de") return n + ".";
   return null;
 }
 function formaterNombre(loc, m){
-  const [tout, ent, dec, unite] = m, l = loc.slice(0, 2);
-  if(!dec && !unite && !/[\s  ]/.test(ent)) return tout;
+  const [tout, ent, dec, espace, unite] = m, l = loc.slice(0, 2), groupe = /[\s\u00a0\u202f]/.test(ent);
+  if(!dec && !unite && !groupe) return tout;
+  if(!dec && unite && !espace && !groupe) return tout; // « 100% » n'est pas de l'écriture française (« 100 % ») : on n'y touche pas
   const n = Number(ent.replace(/\D/g, "") + (dec ? "." + dec : ""));
   const d = dec ? dec.length : 0;
   const s = new Intl.NumberFormat(loc, { minimumFractionDigits:d, maximumFractionDigits:d }).format(n);
@@ -8178,7 +8178,8 @@ function localiserFormats(s, loc, strict){
 
 // « {2} % » : espace avant le signe pourcent selon la langue (aucune en anglais et en portugais, insécable en espagnol et en allemand)
 const typoGabarit = (s, code)=> s.replace(/(\{\d+\})[\u00a0\u202f ]%/g, (m, x)=> x + (code === "en" || code === "pt" ? "" : "\u00a0") + "%");
-const RE_COUPURE_PHRASE = /(?:[.!?…»] +[\p{Lu}«"(]|\) +[\p{Lu}«"])/u;
+// (« M. Boris Vallaud », « Mme Panot » : le point d'une abréviation ne termine pas une phrase)
+const RE_COUPURE_PHRASE = /(?:(?:[!?…»]|(?<!\b(?:M|Mme|Mmes|MM|Me|Dr|Pr|St|Ste|Mlle))\.) +[\p{Lu}«"(]|\) +[\p{Lu}«"])/u;
 function construireDico(fr, tr, code, donnees){
   const exact = new Map(), motifs = [], petits = [], cles = new Map();
   const ajouter = (texteFr, sortie, libre)=>{
@@ -8192,7 +8193,7 @@ function construireDico(fr, tr, code, donnees){
       const morceaux = texteFr.split(/\{\d+\}/), nums = (texteFr.match(/\{\d+\}/g) || []).map(x=>x.slice(1, -1));
       // Un motif presque sans texte fixe (« {1}, {2} de {3} ») attraperait n'importe quel titre officiel : on l'ignore
       const lettres = morceaux.join("").replace(/[^\p{L}]/gu, "").length;
-      if(lettres >= 4 || libre) motifs.push({ morceaux, nums, sortie, numeriques, sep:texteFr.includes(" · "), ph:RE_COUPURE_PHRASE.test(texteFr), libre:libre || lettres >= 6, poids:morceaux.join("").length }); // assez de texte fixe : la valeur insérée peut être longue (un titre officiel suivi de « (vote final) »)
+      if(lettres >= 4 || libre) motifs.push({ morceaux, nums, sortie, numeriques, sep:texteFr.includes(" · "), ph:RE_COUPURE_PHRASE.test(texteFr), attache:/\p{L}\{\d+\}|\{\d+\}\p{L}/u.test(texteFr), libre:libre || (lettres >= 9 && /\S\s+\S/.test(morceaux.join("").replace(/[^\p{L}\s]/gu, "").trim())), poids:morceaux.join("").length }); // assez de texte fixe (« (vote final) ») : la valeur insérée peut être longue, un titre officiel
       else if(lettres >= 3) petits.push({ morceaux, nums, sortie, numeriques, sep:texteFr.includes(" · "), ph:RE_COUPURE_PHRASE.test(texteFr), libre:false, poids:morceaux.join("").length }); // « de {1} à {2} % » : seulement comme valeur d'un gabarit plus grand
     } else exact.set(texteFr, sortie);
     return true;
@@ -8223,6 +8224,8 @@ function apparier(m, texte){
   // « A · B · C » est une suite de morceaux : un gabarit sans « · » ne s'étend pas sur plusieurs morceaux (la ligne est alors traduite morceau par morceau)
   if(!m.sep) for(const v of Object.values(valeurs)) if(v.includes(" · ")) return null;
   if(!m.ph) for(const v of Object.values(valeurs)) if(RE_COUPURE_PHRASE.test(v)) return null; // idem pour une suite de phrases
+  // « mot{2} sur {3} » : une marque collée à des lettres est un accord (s, e…), jamais un long texte
+  if(m.attache && !m.libre) for(const v of Object.values(valeurs)) if(v.length > 30) return null;
   for(const k of m.numeriques) if(!/^[\d\s,.\u00a0\u202f%+−-]+$/.test(valeurs[k])) return null;
   return m.libre || Object.values(valeurs).every(v=>v.length <= 60) ? valeurs : null;
 }
@@ -8278,10 +8281,11 @@ function traduireCoeur(coeur, dico, profondeur = 0, valeur = false){
     if(tr.some(x=>x !== null)) return parts.map((x, i)=> tr[i] === null ? x : /^\s*/.exec(x)[0] + tr[i] + /\s*$/.exec(x)[0]).join("");
   }
   // Plusieurs phrases accolées par le code (« …contre. » + « Texte déposé par {1}. » + « Voir le vote… ») : traduites une à une
-  const phrases = coeur.split(/(?:(?<=[.!?…»]) +(?=[\p{Lu}«"(])|(?<=\)) +(?=[\p{Lu}«"]))/u); // (même règle que RE_COUPURE_PHRASE)
+  const phrases = coeur.split(/(?:(?<=[!?…»]|(?<!\b(?:M|Mme|Mmes|MM|Me|Dr|Pr|St|Ste|Mlle))\.) +(?=[\p{Lu}«"(])|(?<=\)) +(?=[\p{Lu}«"]))/u); // (même règle que RE_COUPURE_PHRASE)
   if(phrases.length > 1){
     const tr = phrases.map(x=> traduireCoeur(x, dico, profondeur + 1, valeur));
-    if(tr.some(x=>x !== null)) return phrases.map((x, i)=> tr[i] ?? fin(x)).join(" ");
+    // Un titre de presse « Justice. Procès du MoDem : … » ne devient pas « Justiça. Procès… » : un seul mot reconnu ne suffit pas
+    if(tr.some((x, i)=> x !== null && /\S\s+\S/.test(phrases[i]))) return phrases.map((x, i)=> tr[i] ?? fin(x)).join(" ");
   }
   if(coeur.includes(" · ")){
     // (les gabarits du code écrivent souvent « · texte » avec leur séparateur : la clé du morceau peut le contenir)
@@ -8341,7 +8345,8 @@ function t(x, valeurs){
     const tr = traduireTexte(s, DICO_ACTIF);
     if(tr !== null) s = tr;
   }
-  return valeurs ? s.replace(/\{(\d+)\}/g, (m, n)=> valeurs[n] ?? m) : s;
+  // Les valeurs insérées (dates, nombres) sont écrites à la manière de la langue active, comme dans le traducteur du DOM
+  return valeurs ? s.replace(/\{(\d+)\}/g, (m, n)=> valeurs[n] === undefined ? m : (DICO_ACTIF && typeof valeurs[n] === "string" ? localiserFormats(valeurs[n], DICO_ACTIF.locale, true) : valeurs[n])) : s;
 }
 
 /* ---------- Phrases coupées par des éléments (infobulles du glossaire, gras, liens) ----------
