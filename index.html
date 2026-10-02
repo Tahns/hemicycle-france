@@ -305,7 +305,7 @@
   /* Navigateurs récents : une rubrique masquée garde sa mise en page (content-visibility:hidden, aussi invisible et inerte
      que display:none). Revenir dessus ne reconstruit plus ses centaines d'éléments, ce qui coûte seconde(s) sur un vieux téléphone. */
   @supports (content-visibility:hidden){
-    .view{display:block; content-visibility:hidden; visibility:hidden; contain-intrinsic-size:auto 0;}
+    .view{display:block; content-visibility:hidden; visibility:hidden; contain-intrinsic-size:0 0;}
     .view.active{content-visibility:visible; visibility:visible;}
   }
   @keyframes viewIn{ from{opacity:0;} to{opacity:1;} }
