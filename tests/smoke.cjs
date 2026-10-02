@@ -54,14 +54,16 @@ function verifier(cond, message) {
     verifier((await page.$$(".accueil-rubrique")).length === 6, `${nom} : la grille de l'accueil doit compter 6 regroupements`);
     verifier((await page.$$(".onglet-mobile")).length <= 5, `${nom} : la barre mobile doit compter 5 entrées au plus`);
     for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre"]) {
-      // Navigation à six regroupements : on ouvre la page par la barre du haut ou par la rangée de pastilles du regroupement
+      // Navigation à six regroupements : on ouvre la page par la barre du haut ou par le menu « Dans cette rubrique »
       await page.evaluate((t) => {
         const tab = document.querySelector(`.tab[data-tab="${t}"]`);
-        if (tab) tab.click();
+        if (tab) (tab.querySelector(".tab-libelle") || tab).click();
         else {
           const hub = HUBS.find((h) => h.pages.some((p) => p[0] === t));
-          document.querySelector(`.tab[data-hub="${hub.id}"]`).click();
-          document.querySelector(`.sous-nav a[data-sous="${t}"]`).click();
+          document.querySelector(`.tab[data-hub="${hub.id}"] .tab-libelle`).click();
+          const sel = document.querySelector(".sous-nav select");
+          sel.value = t;
+          sel.dispatchEvent(new Event("change", { bubbles: true }));
         }
       }, onglet);
       await page.waitForTimeout(250);
@@ -69,7 +71,7 @@ function verifier(cond, message) {
       verifier(await page.evaluate((t) => {
         const n = HUBS.find((h) => h.pages.some((p) => p[0] === t)).pages.length;
         const sn = document.querySelector(`#view-${t} .sous-nav`);
-        return n < 2 ? !sn : !!sn && sn.querySelectorAll("a").length === n && sn.querySelectorAll('[aria-current="page"]').length === 1 && sn.querySelector('[aria-current="page"]').dataset.sous === t;
+        return n < 2 ? !sn : !!sn && sn.querySelectorAll("option").length === n && sn.querySelector("select").value === t && /Dans cette rubrique/.test(sn.textContent);
       }, onglet), `${nom} : sous-navigation incorrecte sur ${onglet}`);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
     }
@@ -224,12 +226,68 @@ function verifier(cond, message) {
       await page.evaluate(() => fermerStory());
     }
 
+    if (nom === "ordinateur") {
+      // Menus déroulants de la barre du haut
+      await page.goto(base, { waitUntil: "networkidle" });
+      verifier((await page.$$(".tab-menu")).length === 4, "ordinateur : 4 regroupements doivent avoir un menu déroulant");
+      verifier((await page.$$('.tab:not(.tab-menu)')).length === 2, "ordinateur : À la une et Actualités restent des liens directs");
+      const flecheElus = '.tab[data-hub="elus"] .tab-fleche';
+      verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "false", "ordinateur : menu fermé au départ (aria-expanded)");
+      await page.click(flecheElus);
+      verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "true" && await page.isVisible("#menu-elus"), "ordinateur : le clic sur la flèche n'ouvre pas le menu");
+      verifier(await page.evaluate(() => { const l = document.getElementById("menu-elus"); const r = l.getBoundingClientRect(); return l.querySelectorAll("a[role=menuitem]").length === 6 && [...l.querySelectorAll("a")].every(a => a.querySelector("b") && a.querySelector("span").textContent.trim()) && r.left >= 0 && r.right <= innerWidth; }),
+        "ordinateur : menu Élus incomplet ou coupé par l'écran");
+      await page.keyboard.press("Escape");
+      verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "false" && !(await page.isVisible("#menu-elus")), "ordinateur : Échap ne ferme pas le menu");
+      await page.click(flecheElus);
+      await page.mouse.click(5, 600);
+      verifier(!(await page.isVisible("#menu-elus")), "ordinateur : un clic extérieur ne ferme pas le menu");
+      // Survol
+      await page.mouse.move(5, 5);
+      await page.hover('.tab[data-hub="argent"] .tab-libelle');
+      await page.waitForTimeout(150);
+      verifier(await page.isVisible("#menu-argent"), "ordinateur : le survol n'ouvre pas le menu");
+      await page.mouse.move(5, 700);
+      await page.waitForTimeout(450);
+      verifier(!(await page.isVisible("#menu-argent")), "ordinateur : le menu ne se ferme pas à la sortie du survol");
+      // Clavier : flèche bas ouvre, flèches déplacent, Entrée choisit
+      await page.focus('.tab[data-hub="presidentielle"] .tab-fleche');
+      await page.keyboard.press("ArrowDown");
+      verifier(await page.evaluate(() => document.activeElement.dataset.menuPage === "sondages"), "ordinateur : ArrowDown doit focaliser le premier choix");
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("ArrowDown");
+      verifier(await page.evaluate(() => document.activeElement.dataset.menuPage === "sondages"), "ordinateur : la navigation clavier doit boucler");
+      await page.keyboard.press("ArrowUp");
+      await page.keyboard.press("Enter");
+      await page.waitForTimeout(300);
+      verifier(await page.evaluate(() => document.getElementById("view-meetings").classList.contains("active") && location.hash === "#meetings" && document.querySelector('.tab[data-hub="presidentielle"]').classList.contains("active") && document.getElementById("menu-presidentielle").hidden),
+        "ordinateur : Entrée dans le menu ne mène pas à la page choisie");
+      // Le libellé du regroupement ouvre sa page d'ouverture
+      await page.click('.tab[data-hub="elus"] .tab-libelle');
+      await page.waitForTimeout(250);
+      verifier(await page.evaluate(() => document.getElementById("view-scrutin").classList.contains("active")), "ordinateur : le libellé du regroupement n'ouvre pas sa première page");
+      // Menus au bord droit de l'écran, à 800 px
+      await page.setViewportSize({ width: 800, height: 700 });
+      await page.click('.tab[data-hub="quiz"] .tab-fleche');
+      verifier(await page.evaluate(() => { const r = document.getElementById("menu-quiz").getBoundingClientRect(); return r.right <= innerWidth && r.left >= 0; }), "ordinateur 800 px : menu Quiz coupé");
+      verifier((await largeur()) <= 1, "ordinateur 800 px : défilement horizontal avec menu ouvert");
+      await page.setViewportSize({ width: 1300, height: 900 });
+    }
+
     if (nom === "mobile") {
       // Version téléphone : barre d'onglets et panneau « Plus »
       await page.goto(base, { waitUntil: "networkidle" });
       verifier(await page.isVisible(".barre-mobile"), "mobile : barre d'onglets absente");
       await page.click("#bouton-plus");
       verifier(await page.isVisible("#feuille-plus"), "mobile : le panneau « Plus » ne s'ouvre pas");
+      verifier(await page.evaluate(() => document.querySelectorAll("#feuille-plus details.feuille-section").length >= 2 && document.querySelectorAll("#feuille-plus details[open]").length === 1),
+        "mobile : le panneau « Plus » doit être un accordéon (une seule section dépliée)");
+      await page.click("#feuille-plus details:not([open]) > summary");
+      await page.waitForTimeout(150);
+      verifier(await page.evaluate(() => document.querySelectorAll("#feuille-plus details[open]").length === 1), "mobile : l'accordéon doit replier l'autre section");
+      await page.click("#feuille-plus details[data-section='actu-argent'] > summary");
+      await page.waitForTimeout(100);
       await page.click('.feuille-lien[data-tab="budget"]');
       await page.waitForTimeout(250);
       verifier(await page.evaluate(() => document.getElementById("view-budget").classList.contains("active") && document.getElementById("feuille-plus").hidden),
@@ -239,6 +297,11 @@ function verifier(cond, message) {
       await page.waitForTimeout(250);
       verifier(await page.evaluate(() => document.getElementById("view-chiffres").classList.contains("active") && document.getElementById("feuille-plus").hidden),
         "mobile : le panneau ne mène pas à la rubrique choisie");
+      verifier(await page.evaluate(() => { const s = document.querySelector("#view-chiffres .sous-nav select"); return !!s && s.getBoundingClientRect().height >= 44 && s.value === "chiffres"; }),
+        "mobile : le menu « Dans cette rubrique » (select natif, 44 px) est absent");
+      await page.selectOption("#view-chiffres .sous-nav select", "budget");
+      await page.waitForTimeout(250);
+      verifier(await page.evaluate(() => document.getElementById("view-budget").classList.contains("active")), "mobile : le choix du select ne change pas de page");
       await page.click('.onglet-mobile[data-tab="scrutin"]');
       await page.waitForTimeout(400);
       verifier(await page.evaluate(() => document.getElementById("view-scrutin").classList.contains("active")), "mobile : l'onglet Votes ne fonctionne pas");
