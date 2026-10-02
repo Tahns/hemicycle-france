@@ -1,0 +1,146 @@
+{
+  "lastUpdated": "2026-10-02T12:16:17.453Z",
+  "anneeReference": 2024,
+  "depenses": {
+    "annee": 2024,
+    "totalMd": 1671.8,
+    "postes": [
+      {
+        "code": "GF10",
+        "libelle": "Protection sociale",
+        "md": 693,
+        "pct": 41.5
+      },
+      {
+        "code": "GF07",
+        "libelle": "Santé",
+        "md": 261.2,
+        "pct": 15.6
+      },
+      {
+        "code": "GF04",
+        "libelle": "Affaires économiques",
+        "md": 166.1,
+        "pct": 9.9
+      },
+      {
+        "code": "GF09",
+        "libelle": "Éducation",
+        "md": 148.6,
+        "pct": 8.9
+      },
+      {
+        "code": "GF01",
+        "libelle": "Services publics généraux (hors charge de la dette)",
+        "md": 122.2,
+        "pct": 7.3
+      },
+      {
+        "code": "GF0107",
+        "libelle": "Charge de la dette",
+        "md": 58.9,
+        "pct": 3.5
+      },
+      {
+        "code": "GF02",
+        "libelle": "Défense",
+        "md": 54.2,
+        "pct": 3.2
+      },
+      {
+        "code": "GF03",
+        "libelle": "Ordre et sécurité publics",
+        "md": 52.1,
+        "pct": 3.1
+      },
+      {
+        "code": "GF08",
+        "libelle": "Loisirs, culture et culte",
+        "md": 43.1,
+        "pct": 2.6
+      },
+      {
+        "code": "GF06",
+        "libelle": "Logement et équipements collectifs",
+        "md": 42.1,
+        "pct": 2.5
+      },
+      {
+        "code": "GF05",
+        "libelle": "Protection de l'environnement",
+        "md": 30.3,
+        "pct": 1.8
+      }
+    ],
+    "source": "Eurostat, tableau gov_10a_exp, dépenses par fonction (COFOG) (comptes des administrations publiques de la France, établis par l'Insee)",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=fr"
+  },
+  "equilibre": {
+    "annee": 2024,
+    "recettesMd": 1503.6,
+    "recettesPib": 51.2,
+    "depensesMd": 1672.7,
+    "depensesPib": 57,
+    "soldeMd": -169.1,
+    "soldePib": -5.8,
+    "source": "Eurostat, tableau gov_10a_main, recettes, dépenses et solde (comptes des administrations publiques de la France, établis par l'Insee)",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=fr"
+  },
+  "dette": {
+    "annee": 2024,
+    "md": 3306.1,
+    "pib": 112.6,
+    "interetsMd": 58.9,
+    "interetsPctDepenses": 3.5,
+    "source": "Eurostat, tableaux gov_10dd_edpt1, dette au sens de Maastricht, et gov_10a_exp, charge de la dette (COFOG 01.7) (comptes des administrations publiques de la France, établis par l'Insee)",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=fr"
+  },
+  "serie": {
+    "source": "Eurostat, tableaux gov_10a_main et gov_10dd_edpt1 (comptes des administrations publiques de la France, établis par l'Insee)",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=fr",
+    "annees": [
+      {
+        "annee": 2019,
+        "soldeMd": -58.2,
+        "soldePib": -2.4,
+        "detteMd": 2387.4,
+        "dettePib": 98.2
+      },
+      {
+        "annee": 2020,
+        "soldeMd": -207.1,
+        "soldePib": -8.9,
+        "detteMd": 2663.9,
+        "dettePib": 114.9
+      },
+      {
+        "annee": 2021,
+        "soldeMd": -165.1,
+        "soldePib": -6.6,
+        "detteMd": 2828.8,
+        "dettePib": 112.8
+      },
+      {
+        "annee": 2022,
+        "soldeMd": -125.9,
+        "soldePib": -4.7,
+        "detteMd": 2955.6,
+        "dettePib": 111.4
+      },
+      {
+        "annee": 2023,
+        "soldeMd": -151.9,
+        "soldePib": -5.4,
+        "detteMd": 3103.2,
+        "dettePib": 109.5
+      },
+      {
+        "annee": 2024,
+        "soldeMd": -169.1,
+        "soldePib": -5.8,
+        "detteMd": 3306.1,
+        "dettePib": 112.6
+      }
+    ]
+  }
+}
