@@ -385,18 +385,18 @@ function verifier(cond, message) {
     // Anglais
     await choisir("en");
     verifier(await page.evaluate(() => document.documentElement.lang === "en" && document.documentElement.dir === "ltr"), etiquette("html lang=en attendu"));
-    verifier((await texte('.tab[data-tab="deputes"]')) === "MPs", etiquette(`titre de menu non traduit (${await texte('.tab[data-tab="deputes"]')})`));
+    verifier((await texte('.tab[data-tab="actualites"]')) === "News", etiquette(`titre de menu non traduit (${await texte('.tab[data-tab="actualites"]')})`));
     verifier(/French politics, with the evidence/.test(await texte(".devise")), etiquette("devise non traduite"));
     verifier(await page.evaluate(() => !document.getElementById("note-officiel").hidden), etiquette("note « Contenu officiel en français » absente"));
     verifier(/votes, the most recent from/.test(await texte("#footer-maj")), etiquette(`texte rendu par JavaScript non traduit (${(await texte("#footer-maj")).slice(0, 60)})`));
     verifier(await page.evaluate(() => localStorage.getItem("langue") === "en"), etiquette("choix non mémorisé"));
     verifier((await decalage()) <= 1, etiquette("défilement horizontal en anglais"));
-    await page.evaluate(() => document.querySelector('.tab[data-tab="deputes"]').click());
+    await page.evaluate(() => { location.hash = "#deputes"; });
     await page.waitForSelector(".depute-carte", { timeout: 15000 });
     verifier(/Enter the name of your town/.test(await texte("#view-deputes")), etiquette("rubrique Députés non traduite"));
     await page.reload({ waitUntil: "networkidle" });
     verifier(await page.evaluate(() => document.documentElement.lang === "en"), etiquette("la langue n'est pas retrouvée après rechargement"));
-    verifier((await texte('.tab[data-tab="histo"]')) === "Groups", etiquette("traduction non appliquée après rechargement"));
+    verifier((await texte('.tab[data-tab="actualites"]')) === "News", etiquette("traduction non appliquée après rechargement"));
 
     // Retour au français : plus aucune trace d'anglais
     await page.focus(bouton);
@@ -405,12 +405,12 @@ function verifier(cond, message) {
     await page.keyboard.press("Enter");
     await page.waitForTimeout(500);
     verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.getElementById("note-officiel").hidden), etiquette("retour au français incomplet"));
-    verifier((await texte('.tab[data-tab="deputes"]')) === "Députés" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
+    verifier((await texte('.tab[data-tab="actualites"]')) === "Actualités" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
 
     // Arabe : droite à gauche, sans défilement horizontal ; dictionnaire vide → le français reste affiché
     await choisir("ar");
     verifier(await page.evaluate(() => document.documentElement.lang === "ar" && document.documentElement.dir === "rtl"), etiquette("dir=rtl attendu en arabe"));
-    verifier((await texte('.tab[data-tab="deputes"]')) === "Députés", etiquette("le français doit rester quand la clé manque"));
+    verifier((await texte('.tab[data-tab="actualites"]')) === "Actualités", etiquette("le français doit rester quand la clé manque"));
     verifier(await page.evaluate(() => !document.getElementById("note-traduction").hidden), etiquette("note « traduction en préparation » absente"));
     for (const onglet of ["accueil", "scrutin", "deputes", "sondages", "mentions"]) {
       await page.evaluate((t) => { location.hash = t; }, onglet);
@@ -431,7 +431,7 @@ function verifier(cond, message) {
     const cle = Object.keys(fr).find((k) => fr[k] === "Députés");
     await page.route(/\/data\/i18n\/es\.json/, (route) => route.fulfill({ contentType: "application/json", body: JSON.stringify({ [cle]: "<img src=x onerror=window.__pwned=1>" }) }));
     await page.goto(base, { waitUntil: "networkidle" });
-    verifier(await page.evaluate(() => window.__pwned === undefined && !document.querySelector('.tab[data-tab="deputes"] img')), "langues : du HTML de dictionnaire a été injecté");
+    verifier(await page.evaluate(() => window.__pwned === undefined && !document.querySelector('.tab[data-tab="actualites"] img')), "langues : du HTML de dictionnaire a été injecté");
     verifier(await page.evaluate(() => document.documentElement.lang === "fr"), "langues : une langue détectée sans traduction doit laisser le site en français");
     await ctx.close();
     const ctxEn = await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block", locale: "en-GB" });
