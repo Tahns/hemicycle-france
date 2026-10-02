@@ -25,3 +25,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Test du site dans un vrai navigateur (ordinateur et mobile)
         run: node tests/smoke.cjs
+      - name: Navigation fluide (nœuds DOM, tâches longues, CPU ralenti)
+        run: node tests/perf-navigation.cjs --cpu=6
