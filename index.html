@@ -4299,7 +4299,7 @@ function renderQuiz(){
     <div class="quiz-card">
       <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · ${esc(loi.quizTheme || "")}</div>
       <div class="quiz-question">${esc(loi.quizQuestion || titreLoi(loi))}</div>
-      <p class="quiz-aide">${esc(loi.quizAide || "")} Voté le ${esc(loi.date)}.</p>
+      <p class="quiz-aide">${esc(loi.quizAide || "")} <span class="quiz-vote">Voté le ${esc(loi.date)}.</span></p>
       <div class="quiz-options" data-loi="${loi.id}">
         <button type="button" class="quiz-option" data-vote="pour">Oui</button>
         <button type="button" class="quiz-option" data-vote="contre">Non</button>
