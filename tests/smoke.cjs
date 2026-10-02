@@ -38,7 +38,7 @@ function verifier(cond, message) {
   const navigateur = await chromium.launch();
 
   for (const [nom, viewport] of [["ordinateur", { width: 1300, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
-    const page = await navigateur.newPage({ viewport });
+    const page = await navigateur.newPage({ viewport, locale: "fr-FR" });
     const erreurs = [];
     page.on("pageerror", (e) => erreurs.push(e.message));
     // Les polices Google peuvent être indisponibles hors ligne : on ne les compte pas comme erreurs
@@ -296,7 +296,7 @@ function verifier(cond, message) {
 
   // Âge et profession : jeu d'essai injecté (les données réelles n'ont ces champs qu'après la collecte), puis cas « champs absents »
   for (const avec of [true, false]) {
-    const page = await (await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block" })).newPage(); // le service worker contournerait l'interception
+    const page = await (await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block", locale: "fr-FR" })).newPage(); // le service worker contournerait l'interception
     const erreurs = [];
     page.on("pageerror", (e) => erreurs.push(e.message));
     await page.route(/\/data\/deputes\.json/, async (route) => {
@@ -323,7 +323,7 @@ function verifier(cond, message) {
   // Budget : sans fichier (jamais de chiffre inventé), puis avec un jeu d'essai fictif injecté (tests/fixtures/budget-essai.json)
   for (const [nom, viewport] of [["ordinateur", { width: 1300, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
     for (const avec of [false, true]) {
-      const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block" })).newPage();
+      const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block", locale: "fr-FR" })).newPage();
       const erreurs = [];
       page.on("pageerror", (e) => erreurs.push(e.message));
       await page.route(/\/data\/budget\.json/, (route) => avec
@@ -349,6 +349,97 @@ function verifier(cond, message) {
       verifier(erreurs.length === 0, `${etiquette} : erreurs JavaScript — ${erreurs.join(" | ")}`);
       await page.close();
     }
+  }
+
+  // Langues : menu déroulant, anglais, retour au français, arabe (droite à gauche), repli sur le français
+  for (const [nom, viewport, hote] of [["ordinateur", { width: 1300, height: 900 }, "langue-haut"], ["mobile", { width: 390, height: 844 }, "langue-mobile"]]) {
+    const ctx = await navigateur.newContext({ viewport, serviceWorkers: "block", locale: "fr-FR" });
+    const page = await ctx.newPage();
+    const erreurs = [];
+    page.on("pageerror", (e) => erreurs.push(e.message));
+    page.on("console", (m) => { if (m.type() === "error" && !/Failed to load resource/.test(m.text())) erreurs.push(m.text()); });
+    await page.goto(base, { waitUntil: "networkidle" });
+    const etiquette = (x) => `langues (${nom}) : ${x}`;
+    const decalage = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    const texte = (sel) => page.evaluate((s) => (document.querySelector(s) || {}).textContent, sel);
+    const bouton = `#${hote} .langue-bouton`;
+    const choisir = async (code) => {
+      await page.click(bouton);
+      await page.click(`#${hote} .langue-liste li[lang="${code}"]`);
+      await page.waitForTimeout(500);
+    };
+
+    verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.documentElement.dir !== "rtl"), etiquette("la page doit démarrer en français (lang=fr, ltr)"));
+    verifier((await page.$$(`#${hote} .langue-liste li`)).length === 10, etiquette("dix langues attendues dans le menu"));
+    verifier((await page.$$(`#${hote} .langue-liste li img[src^="icons/drapeaux/"]`)).length >= 6, etiquette("drapeaux SVG absents du menu"));
+
+    // Clavier : Entrée ouvre, Échap ferme et rend le focus au bouton
+    await page.focus(bouton);
+    await page.keyboard.press("Enter");
+    verifier(await page.evaluate((h) => document.querySelector(`#${h} .langue-bouton`).getAttribute("aria-expanded") === "true" && !document.querySelector(`#${h} .langue-liste`).hidden, hote), etiquette("Entrée n'ouvre pas le menu"));
+    await page.keyboard.press("ArrowDown");
+    verifier(await page.evaluate((h) => document.querySelector(`#${h} .langue-liste`).getAttribute("aria-activedescendant") === `${document.querySelector(`#${h} .langue-liste`).id}-en`, hote), etiquette("la flèche bas ne descend pas à l'option suivante"));
+    await page.keyboard.press("Escape");
+    verifier(await page.evaluate((h) => document.querySelector(`#${h} .langue-liste`).hidden && document.activeElement === document.querySelector(`#${h} .langue-bouton`), hote), etiquette("Échap ne referme pas le menu en rendant le focus au bouton"));
+
+    // Anglais
+    await choisir("en");
+    verifier(await page.evaluate(() => document.documentElement.lang === "en" && document.documentElement.dir === "ltr"), etiquette("html lang=en attendu"));
+    verifier((await texte('.tab[data-tab="deputes"]')) === "MPs", etiquette(`titre de menu non traduit (${await texte('.tab[data-tab="deputes"]')})`));
+    verifier(/French politics, with the evidence/.test(await texte(".devise")), etiquette("devise non traduite"));
+    verifier(await page.evaluate(() => !document.getElementById("note-officiel").hidden), etiquette("note « Contenu officiel en français » absente"));
+    verifier(/votes, the most recent from/.test(await texte("#footer-maj")), etiquette(`texte rendu par JavaScript non traduit (${(await texte("#footer-maj")).slice(0, 60)})`));
+    verifier(await page.evaluate(() => localStorage.getItem("langue") === "en"), etiquette("choix non mémorisé"));
+    verifier((await decalage()) <= 1, etiquette("défilement horizontal en anglais"));
+    await page.evaluate(() => document.querySelector('.tab[data-tab="deputes"]').click());
+    await page.waitForSelector(".depute-carte", { timeout: 15000 });
+    verifier(/Enter the name of your town/.test(await texte("#view-deputes")), etiquette("rubrique Députés non traduite"));
+    await page.reload({ waitUntil: "networkidle" });
+    verifier(await page.evaluate(() => document.documentElement.lang === "en"), etiquette("la langue n'est pas retrouvée après rechargement"));
+    verifier((await texte('.tab[data-tab="histo"]')) === "Groups", etiquette("traduction non appliquée après rechargement"));
+
+    // Retour au français : plus aucune trace d'anglais
+    await page.focus(bouton);
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Home");
+    await page.keyboard.press("Enter");
+    await page.waitForTimeout(500);
+    verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.getElementById("note-officiel").hidden), etiquette("retour au français incomplet"));
+    verifier((await texte('.tab[data-tab="deputes"]')) === "Députés" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
+
+    // Arabe : droite à gauche, sans défilement horizontal ; dictionnaire vide → le français reste affiché
+    await choisir("ar");
+    verifier(await page.evaluate(() => document.documentElement.lang === "ar" && document.documentElement.dir === "rtl"), etiquette("dir=rtl attendu en arabe"));
+    verifier((await texte('.tab[data-tab="deputes"]')) === "Députés", etiquette("le français doit rester quand la clé manque"));
+    verifier(await page.evaluate(() => !document.getElementById("note-traduction").hidden), etiquette("note « traduction en préparation » absente"));
+    for (const onglet of ["accueil", "scrutin", "deputes", "sondages", "mentions"]) {
+      await page.evaluate((t) => { location.hash = t; }, onglet);
+      await page.waitForTimeout(300);
+      verifier((await decalage()) <= 1, etiquette(`défilement horizontal en arabe sur ${onglet}`));
+    }
+    await choisir("fr");
+    verifier(await page.evaluate(() => document.documentElement.dir === "ltr"), etiquette("dir=ltr non rétabli"));
+    verifier(erreurs.length === 0, etiquette(`erreurs JavaScript — ${erreurs.join(" | ")}`));
+    await ctx.close();
+  }
+
+  // Sécurité : une traduction contenant du HTML n'est jamais insérée, et une langue détectée mais vide laisse le français
+  {
+    const ctx = await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block", locale: "es-ES" });
+    const page = await ctx.newPage();
+    const fr = JSON.parse(fs.readFileSync(path.join(RACINE, "data/i18n/fr.json"), "utf-8"));
+    const cle = Object.keys(fr).find((k) => fr[k] === "Députés");
+    await page.route(/\/data\/i18n\/es\.json/, (route) => route.fulfill({ contentType: "application/json", body: JSON.stringify({ [cle]: "<img src=x onerror=window.__pwned=1>" }) }));
+    await page.goto(base, { waitUntil: "networkidle" });
+    verifier(await page.evaluate(() => window.__pwned === undefined && !document.querySelector('.tab[data-tab="deputes"] img')), "langues : du HTML de dictionnaire a été injecté");
+    verifier(await page.evaluate(() => document.documentElement.lang === "fr"), "langues : une langue détectée sans traduction doit laisser le site en français");
+    await ctx.close();
+    const ctxEn = await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block", locale: "en-GB" });
+    const pageEn = await ctxEn.newPage();
+    await pageEn.goto(base, { waitUntil: "networkidle" });
+    await pageEn.waitForTimeout(500);
+    verifier(await pageEn.evaluate(() => document.documentElement.lang === "en"), "langues : la langue du navigateur (en) n'est pas détectée");
+    await ctxEn.close();
   }
 
   await navigateur.close();
