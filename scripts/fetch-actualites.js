@@ -51,7 +51,6 @@ const MEDIAS = [
   { id: "ledauphine", nom: "Le Dauphiné libéré", flux: "https://www.ledauphine.com/politique/rss", domaine: "ledauphine.com" },
   { id: "estrepublicain", nom: "L'Est républicain", flux: "https://www.estrepublicain.fr/politique/rss", domaine: "estrepublicain.fr" },
   { id: "nicematin", nom: "Nice-Matin", flux: "https://www.nicematin.com/politique/rss", domaine: "nicematin.com" },
-  { id: "euronews", nom: "Euronews", flux: "https://fr.euronews.com/rss?level=theme&name=news", domaine: "fr.euronews.com" },
 ];
 
 const log = (...m) => console.log("[fetch-actualites]", ...m);
