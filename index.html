@@ -502,6 +502,8 @@
   .proximite{margin-bottom:28px; padding:14px 0 6px; border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
   .proximite h4{margin:0 0 2px; font-family:var(--font-display); font-size:20px; font-weight:600;}
   .proximite .sub{font-size:13px; color:var(--text-faint); margin-bottom:12px; max-width:720px;}
+  .comparateur-select{margin:6px 0 10px; max-width:100%;}
+  .comparateur-resume{font-family:var(--font-display); font-size:19px; margin:8px 0 6px;}
   .proximite-row{display:grid; grid-template-columns:190px 1fr 52px; gap:12px; align-items:center; padding:4px 0; font-size:13.5px;}
   .proximite-row .nom{font-weight:600; display:flex; align-items:center; gap:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .proximite-row .track{height:6px; background:var(--border-soft);}
@@ -748,6 +750,10 @@
   .bientot{display:inline-block; vertical-align:3px; margin-left:6px; padding:2px 8px; border-radius:10px; background:var(--accent-dim); color:var(--accent); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
   .gauge-legende{display:flex; align-items:center; gap:8px; margin-top:6px; font-size:12.5px; color:var(--text-faint);}
   .gauge-legende .trait{width:3px; height:12px; background:var(--text); border-radius:2px;}
+  .methode-table{width:100%; border-collapse:collapse; font-size:14px; margin:10px 0 16px;}
+  .methode-table th, .methode-table td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border-soft);}
+  .methode-table code{font-size:12.5px;}
+  .table-scroll{overflow-x:auto;}
   .quiz-card{padding:18px 0 20px; border-bottom:1px solid var(--border);}
   .quiz-progress{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px;}
   .quiz-question{font-family:var(--font-display); font-size:21px; font-weight:500; line-height:1.3; margin-bottom:6px;}
@@ -913,6 +919,23 @@
   .depute-groupe{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;}
   .depute-groupe .dot{width:9px; height:9px; border-radius:50%;}
   .depute-lieu{font-size:14px; color:var(--text-soft); margin:0 0 18px;}
+  .en-bref{margin-bottom:30px;}
+  .en-bref .accueil-hero-stats{margin-bottom:0;}
+  .en-bref-maj{font-size:12.5px; color:var(--text-faint); margin:6px 0 0;}
+  .depute-parcours{margin:0 0 18px; padding:0 0 14px; border-bottom:1px solid var(--border);}
+  .depute-parcours h3{font-size:15px; margin:0 0 8px;}
+  .depute-parcours ol{list-style:none; margin:0; padding:0 0 0 14px; border-left:2px solid var(--border);}
+  .depute-parcours li{margin:0 0 8px; font-size:14.5px; position:relative;}
+  .depute-parcours li::before{content:""; position:absolute; left:-20px; top:.55em; width:8px; height:8px; border-radius:50%; background:var(--accent);}
+  .depute-parcours li small{display:block; color:var(--text-faint); font-size:12.5px;}
+  .archives-graphe svg{display:block; width:100%; height:auto; overflow:visible;}
+  .archives-graphe .grille{stroke:var(--border-soft); stroke-width:1;}
+  .archives-graphe .axe-texte{fill:var(--text-faint); font-size:11.5px; font-family:var(--font-body);}
+  .archives-graphe .etiquette{fill:var(--text); font-size:12px; font-weight:600; font-family:var(--font-body);}
+  .archives-liste{list-style:none; margin:0; padding:0;}
+  .archives-liste li{display:flex; flex-wrap:wrap; gap:4px 16px; padding:10px 0; border-top:1px solid var(--border-soft); font-size:14.5px;}
+  .archives-liste b{min-width:110px;}
+  .archives-liste a{color:var(--accent);}
   .depute-note{font-size:13px; color:var(--text-faint); max-width:760px; margin:10px 0 26px;}
   .depute-vote{font-size:12.5px; font-weight:700; white-space:nowrap;}
   .depute-vote.absent{color:var(--text-faint); font-weight:500;}
@@ -1190,6 +1213,7 @@
     <span class="tab-sep" aria-hidden="true"></span>
     <div class="tab" data-tab="chiffres">Économie</div>
     <div class="tab" data-tab="quiz">Quiz</div>
+    <div class="tab" data-tab="archives">Archives</div>
   </div>
 </nav>
 
@@ -1223,6 +1247,8 @@
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
+  <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
+  <button type="button" class="feuille-lien" data-tab="archives"><b>Archives</b><span>Instantanés hebdomadaires des sondages et des probabilités</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
@@ -1232,6 +1258,11 @@
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
     <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
+    <div class="en-bref" id="en-bref" hidden>
+      <div class="accueil-section-title">En bref</div>
+      <div class="accueil-hero-stats" id="en-bref-faits"></div>
+      <p class="en-bref-maj" id="en-bref-maj"></p>
+    </div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
@@ -1347,6 +1378,8 @@
       </div>
     </div>
     <div class="proximite" id="histo-proximite"></div>
+    <div class="proximite" id="histo-cohesion"></div>
+    <div class="proximite" id="histo-comparateur"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button><button type="button" class="lien-bouton bouton-story" id="histo-story" data-story="groupe" data-id="RN">Story</button></div>
     <div id="histo-list"></div>
@@ -1596,6 +1629,58 @@
     </div>
   </section>
 
+  <section class="view" id="view-methode">
+    <div class="rubrique-tete">
+      <div class="surtitre">Transparence</div>
+      <h2>Méthode</h2>
+      <p class="chapo">D'où viennent les chiffres, à quel rythme ils sont actualisés, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
+    </div>
+    <div class="texte-legal">
+      <h3>Sources</h3>
+      <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
+
+      <h3>Fréquence de mise à jour</h3>
+      <p>Un traitement automatique est lancé toutes les heures : il relit les sources publiques, vérifie la cohérence des fichiers puis publie. Les dates ci-dessous sont lues dans les fichiers de données eux-mêmes ; elles indiquent la dernière réécriture du fichier, pas la date des faits.</p>
+      <div class="table-scroll"><table class="methode-table">
+        <thead><tr><th scope="col">Données</th><th scope="col">Fichier</th><th scope="col">Dernière actualisation</th></tr></thead>
+        <tbody id="methode-maj"><tr><td colspan="3">Chargement…</td></tr></tbody>
+      </table></div>
+      <p>Les données saisies à la main (justice, agenda, questions du quiz) portent une date de vérification ; un contrôle quotidien signale celles qui ne bougent plus.</p>
+
+      <h3>Limites</h3>
+      <ul>
+        <li>Les sources sont reprises telles qu'elles sont publiées : une erreur ou un retard à la source se retrouve ici jusqu'à la prochaine actualisation.</li>
+        <li>Pendant les suspensions de séance, aucun nouveau vote n'est publié.</li>
+        <li>Un vote ne résume pas une position : il porte sur un texte précis, parfois sur un seul article, et peut répondre à des considérations de procédure ou de calendrier.</li>
+        <li>La position d'un groupe est celle de la majorité de ses membres sur le scrutin ; les votes individuels peuvent différer.</li>
+        <li>Les sondages sont des mesures à une date donnée, avec une marge d'erreur ; ils ne prédisent pas le résultat.</li>
+        <li>Les probabilités affichées sont une simulation à partir des sondages, pas une prévision.</li>
+      </ul>
+
+      <h3>Neutralité</h3>
+      <ul>
+        <li>Le site ne publie pas de moyenne maison des sondages : chaque institut est montré avec ses propres chiffres.</li>
+        <li>Les classements et pourcentages (participation, proximité entre groupes, quiz) sont calculés mécaniquement à partir des votes publics, avec la même règle pour tous les groupes.</li>
+        <li>Les questions du quiz renvoient chacune à un scrutin réel, dont le titre officiel est rappelé et le vote consultable ; elles n'ajoutent ni explication de vote ni opinion.</li>
+        <li>Les condamnations ne sont mentionnées que si elles ont été rendues par une juridiction, avec leur statut.</li>
+        <li>Une erreur ? <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signalez-la</a> ; le code est public.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="view" id="view-archives">
+    <div class="rubrique-tete">
+      <div class="surtitre">Mémoire du site</div>
+      <h2>Archives</h2>
+      <p class="chapo">Chaque semaine, le site conserve une copie datée des sondages, des probabilités et des actualités (52 semaines au plus). Les fichiers complets sont téléchargeables.</p>
+    </div>
+    <h3 class="histo-title">Intentions de vote au premier tour, semaine après semaine</h3>
+    <p class="depute-note" id="archives-note"></p>
+    <div class="archives-graphe" id="archives-graphe"></div>
+    <h3 class="histo-title">Les instantanés</h3>
+    <ul class="archives-liste" id="archives-liste"></ul>
+  </section>
+
   <section class="view" id="view-quiz">
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
@@ -1608,6 +1693,7 @@
 
 <footer class="site-footer">
   <p class="footer-liens">
+    <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
@@ -2575,6 +2661,75 @@ function renderProximite(party, liste){
       </div>`).join("")}`;
 }
 
+
+// Cohésion : sur chaque scrutin (hors motions de censure, où seules les voix « pour » sont comptées), part des
+// suffrages exprimés du groupe qui se portent sur sa position majoritaire ; moyenne sur les scrutins affichés.
+function cohesionGroupe(id, liste){
+  let somme = 0, n = 0, unanimes = 0;
+  for(const loi of liste){
+    const v = loi.votes[id];
+    if(!v || loi.typeVote === "MOC") continue;
+    const exprimes = v.pour + v.contre + v.abst;
+    if(exprimes < 5) continue;
+    const part = Math.max(v.pour, v.contre, v.abst) / exprimes;
+    somme += part; n++;
+    if(part === 1) unanimes++;
+  }
+  return n ? { n, unanimes, pct: Math.round(somme / n * 100) } : null;
+}
+
+function renderCohesion(liste){
+  const el = document.getElementById("histo-cohesion");
+  const stats = PARTIES.filter(p=>p.id!=="NI").map(p=>({ p, c: cohesionGroupe(p.id, liste) })).filter(x=>x.c).sort((a,b)=>b.c.pct-a.c.pct);
+  if(!stats.length){ el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <h4>Cohésion de vote des groupes</h4>
+    <div class="sub">Sur les scrutins affichés (hors motions de censure, avec au moins 5 votants du groupe), part moyenne des suffrages exprimés du groupe qui vont dans le même sens que sa position majoritaire. 100 % : le groupe a toujours voté d'un bloc. Les non-inscrits ne forment pas un groupe et sont exclus.</div>
+    ${stats.map(x=>`
+      <div class="proximite-row" title="${x.c.n} scrutins pris en compte, dont ${x.c.unanimes} où le groupe a voté à l'unanimité des suffrages exprimés">
+        <span class="nom"><span class="dot" style="background:${x.p.couleur}"></span>${esc(x.p.nom)}</span>
+        <span class="track"><span class="fill" style="display:block;width:${x.c.pct}%;background:${x.p.couleur}"></span></span>
+        <span class="pct">${x.c.pct} %</span>
+      </div>`).join("")}`;
+}
+
+// Comparateur : le groupe choisi face à un second groupe, sur les scrutins affichés où les deux ont une position nette
+let groupeComparaison = "";
+function renderComparateur(party, liste){
+  const el = document.getElementById("histo-comparateur");
+  if(groupeComparaison === party.id) groupeComparaison = "";
+  const autres = PARTIES.filter(p=>p.id!==party.id);
+  const o = autres.find(p=>p.id===groupeComparaison);
+  const LIB = { pour:"Pour", contre:"Contre", abst:"Abstention" };
+  let resultat = "";
+  if(o){
+    let communs = 0, accords = 0;
+    const ecarts = [];
+    for(const loi of liste){
+      const a = positionMajoritaire(loi, loi.votes[party.id]);
+      const b = positionMajoritaire(loi, loi.votes[o.id]);
+      if(!a || !b) continue;
+      communs++;
+      if(a===b) accords++; else ecarts.push({ loi, a, b });
+    }
+    resultat = communs ? `<p class="comparateur-resume">Sur ${communs} scrutins communs, ${esc(party.nom)} et ${esc(o.nom)} ont pris la même position <b>${accords} fois</b> (${Math.round(accords/communs*100)} %).</p>
+      ${ecarts.length ? `<div>${ecarts.slice(0,15).map(({loi,a,b})=>`<div class="histo-row"><div><div class="histo-loi"><a href="#scrutin-${loi.numero}">${esc(titreLoi(loi))}</a></div><div class="histo-date">${esc(loi.date)}</div></div>
+        <span class="depute-vote ${a==="pour"?"tag-pour":a==="contre"?"tag-contre":"abst"}" title="${esc(party.nom)}">${LIB[a]}</span>
+        <span class="depute-vote ${b==="pour"?"tag-pour":b==="contre"?"tag-contre":"abst"}" title="${esc(o.nom)}">${LIB[b]}</span></div>`).join("")}
+        ${ecarts.length>15 ? `<p class="histo-date">… et ${ecarts.length-15} autres scrutins où ils divergent.</p>` : ""}</div>` : ""}`
+      : `<p class="histo-date">Aucun scrutin affiché où les deux groupes ont une position nette.</p>`;
+  }
+  el.innerHTML = `
+    <h4>Comparer deux groupes</h4>
+    <div class="sub">Accord entre ${esc(party.nom)} et un autre groupe sur les scrutins affichés : position majoritaire de chaque groupe (pour, contre ou abstention), scrutins sans position nette écartés.</div>
+    <label for="groupe-comparer" class="histo-date">Comparer avec :</label><br>
+    <select id="groupe-comparer" class="comparateur-select"><option value="">Choisir un groupe…</option>
+      ${autres.map(p=>`<option value="${esc(p.id)}" ${p.id===groupeComparaison?"selected":""}>${esc(p.nom)}</option>`).join("")}
+    </select>
+    ${resultat}`;
+  document.getElementById("groupe-comparer").addEventListener("change", e=>{ groupeComparaison = e.target.value; renderComparateur(party, liste); });
+}
+
 function renderHistorique(){
   const party = PARTIES.find(p=>p.id===selectedPartyId);
   remplirThemes("histo-theme");
@@ -2582,6 +2737,8 @@ function renderHistorique(){
   if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
   renderProximite(party, liste);
   document.getElementById("histo-story").dataset.id = party.id;
+  renderCohesion(liste);
+  renderComparateur(party, liste);
   document.getElementById("histo-party-title").textContent =
     `Ses votes : ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
   document.getElementById("histo-count").textContent = liste.length ? `${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}` : "Aucun scrutin";
@@ -2917,6 +3074,47 @@ function renderProbabilites(){
   bloc.hidden = false;
 }
 
+/* ---------- Archives : instantanés hebdomadaires (data/archives/, écrits par scripts/archiver.js) ---------- */
+let ARCHIVES = null;
+async function renderArchives(){
+  ARCHIVES ||= lireJSON("data/archives/index.json");
+  const idx = await ARCHIVES;
+  const liste = document.getElementById("archives-liste"), graphe = document.getElementById("archives-graphe"), note = document.getElementById("archives-note");
+  const inst = idx?.instantanes || [];
+  if(!inst.length){
+    note.textContent = "Aucun instantané disponible pour l'instant : le premier sera enregistré lors de la prochaine mise à jour.";
+    graphe.innerHTML = ""; liste.innerHTML = ""; return;
+  }
+  const jour = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+  liste.innerHTML = [...inst].reverse().map(i=>`<li><b>${esc(jour(i.date))}</b>
+    <span>${formatNombre(i.instituts)} enquête${i.instituts > 1 ? "s" : ""} · ${formatNombre(i.sujets)} sujets d'actualité</span>
+    ${["sondages","probabilites","actualites"].map(f=>`<a href="data/archives/${esc(i.date)}/${f}.json" target="_blank" rel="noopener">${f === "probabilites" ? "probabilités" : f === "actualites" ? "actualités" : "sondages"}</a>`).join("")}</li>`).join("");
+
+  // Courbes : intention de vote moyenne (data/probabilites.json de chaque semaine) des cinq premiers du dernier instantané
+  const dernier = inst.at(-1);
+  const noms = dernier.candidats.slice(0, 5).map(c=>c.nom);
+  const series = noms.map(nom=>({ nom, parti:dernier.candidats.find(c=>c.nom===nom).parti,
+    pts: inst.map((i,k)=>({ k, v:i.candidats.find(c=>c.nom===nom)?.intention })).filter(p=>typeof p.v === "number") })).filter(s=>s.pts.length);
+  note.textContent = inst.length < 2
+    ? "Un seul instantané pour l'instant : les courbes apparaîtront dès la semaine prochaine. Valeurs : intentions de vote moyennes calculées par le site."
+    : `${inst.length} instantanés, du ${jour(inst[0].date)} au ${jour(dernier.date)}. Valeurs : intentions de vote moyennes calculées par le site, en %.`;
+  if(!series.length){ graphe.innerHTML = ""; return; }
+  const W = 640, H = 280, g = { l:34, r:110, t:12, b:26 };
+  const max = Math.max(10, Math.ceil(Math.max(...series.flatMap(s=>s.pts.map(p=>p.v))) / 10) * 10);
+  const x = k => g.l + (inst.length < 2 ? (W - g.l - g.r) / 2 : k * (W - g.l - g.r) / (inst.length - 1));
+  const y = v => g.t + (1 - v / max) * (H - g.t - g.b);
+  const couleur = parti => `var(--serie-${SERIE_PARTI[parti] || "autre"})`;
+  const grille = [0, .25, .5, .75, 1].map(f=>{ const v = max * f; return `<line class="grille" x1="${g.l}" x2="${W - g.r}" y1="${y(v)}" y2="${y(v)}"/><text class="axe-texte" x="${g.l - 6}" y="${y(v) + 4}" text-anchor="end">${v} %</text>`; }).join("");
+  const dates = [0, inst.length - 1].filter((k,j,a)=>a.indexOf(k)===j).map(k=>`<text class="axe-texte" x="${x(k)}" y="${H - 6}" text-anchor="${inst.length < 2 ? "middle" : k ? "end" : "start"}">${esc(new Date(inst[k].date + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"short" }))}</text>`).join("");
+  graphe.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution hebdomadaire des intentions de vote de ${series.map(s=>esc(nomCourt(s.nom))).join(", ")}">
+    ${grille}${dates}
+    ${series.map(s=>`<g style="color:${couleur(s.parti)}">
+      <polyline fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" points="${s.pts.map(p=>`${x(p.k)},${y(p.v)}`).join(" ")}"/>
+      ${s.pts.map(p=>`<circle cx="${x(p.k)}" cy="${y(p.v)}" r="3.5" fill="currentColor"><title>${esc(s.nom)}, ${esc(jour(inst[p.k].date))} : ${nombreFr(p.v)} %</title></circle>`).join("")}
+      <text class="etiquette" x="${x(s.pts.at(-1).k) + 9}" y="${y(s.pts.at(-1).v) + 4}">${esc(nomCourt(s.nom))} ${nombreFr(s.pts.at(-1).v)} %</text></g>`).join("")}
+  </svg>`;
+}
+
 /* ---------- Actualités : titres de la rubrique politique des médias (data/actualites.json, toutes les 2 h) ---------- */
 let ACTUALITES = null, actuFiltre = "recoupes";
 function ilYA(iso){
@@ -3242,6 +3440,25 @@ function renderCandidats(){
       </div>
     </div>`;
   }).join("");
+}
+
+/* ---------- Méthode : dates d'actualisation lues dans les fichiers de données ---------- */
+const FICHIERS_METHODE = [
+  ["Scrutins de l'Assemblée", "data/lois.json"], ["Groupes parlementaires", "data/groupes.json"], ["Députés", "data/deputes.json"],
+  ["Scrutins du Sénat", "data/senat.json"], ["Sondages", "data/sondages.json"], ["Candidats", "data/candidats.json"],
+  ["Indicateurs Insee", "data/indicateurs.json"], ["Actualités", "data/actualites.json"], ["Agenda de l'Assemblée", "data/agenda-an.json"],
+];
+let methodeRendue = false;
+async function renderMethode(){
+  if(methodeRendue) return;
+  methodeRendue = true;
+  const corps = document.getElementById("methode-maj");
+  const lignes = await Promise.all(FICHIERS_METHODE.map(async ([nom, f])=>{
+    const d = await lireJSON(f);
+    const maj = d?.lastUpdated && !isNaN(Date.parse(d.lastUpdated)) ? new Date(d.lastUpdated).toLocaleString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit" }).replace(":", " h ") : "date non indiquée";
+    return `<tr><td>${esc(nom)}</td><td><code>${esc(f)}</code></td><td>${esc(maj)}</td></tr>`;
+  }));
+  corps.innerHTML = lignes.join("");
 }
 
 /* ---------- Quiz d'affinité ---------- */
@@ -3591,6 +3808,38 @@ function checkContexteDate(loi){
 
 /* ---------- Accueil (tableau de bord) ---------- */
 
+/* ---------- « En bref » : cinq faits calculés depuis les données déjà chargées, rien d'écrit à la main ---------- */
+function renderEnBref(){
+  const bloc = document.getElementById("en-bref");
+  if(!bloc) return;
+  const faits = [];
+  const dernier = LOIS[0];
+  if(dernier) faits.push({ href:"#scrutin", v:`n° ${dernier.numero ?? ""}`.trim(), l:`dernier scrutin public (${dernier.date}) : ${dernier.resultat === "adopte" ? "adopté" : "rejeté"}` });
+  const textes = LOIS.filter(l=>categorieLoi(l)==="texte");
+  if(textes.length) faits.push({ href:"#scrutin", v:`${formatNombre(textes.filter(l=>l.resultat==="adopte").length)} / ${formatNombre(textes.length)}`, l:"textes adoptés sur les textes votés à l'Assemblée" });
+  const inst = INSTITUTS[0];
+  if(inst && !periodeReserveSondages() && CANDIDATS.length){
+    const tete = CANDIDATS.map(c=>({ c, r:inst.scores[c.id] })).filter(x=>x.r).sort((a,b)=>milieuFourchette(b.r)-milieuFourchette(a.r))[0];
+    if(tete) faits.push({ href:"#sondages", v:fourchetteTexte(tete.r), l:`${tete.c.nom} en tête au premier tour (${inst.nom}, ${inst.date})` });
+  }
+  if(PROBAS?.candidats?.length && !periodeReserveSondages()){
+    const fav = PROBAS.candidats.filter(c=>typeof c.victoire==="number").sort((a,b)=>b.victoire-a.victoire)[0];
+    if(fav) faits.push({ href:"#sondages", v:`${nombreFr(fav.victoire)} %`, l:`des simulations donnent la victoire à ${fav.nom}` });
+  }
+  const tour = meetingsAVenir().find(m=>/^Élection présidentielle/.test(m.titre));
+  if(tour){
+    const jours = Math.round((Date.parse(tour.debut) - Date.parse(aujourdhuiISO())) / 864e5);
+    if(jours > 0) faits.push({ href:"#meetings", v:`J-${formatNombre(jours)}`, l:tour.titre.replace("Élection présidentielle : ", "avant la présidentielle, ") });
+  }
+  const recoupes = (ACTUALITES?.sujets || []).filter(x=>x.medias >= 2).length;
+  if(recoupes) faits.push({ href:"#actualites", v:formatNombre(recoupes), l:"sujets d'actualité repris par au moins deux médias" });
+  const cinq = faits.slice(0, 5);
+  bloc.hidden = cinq.length === 0;
+  document.getElementById("en-bref-faits").innerHTML = cinq.map(f=>`<a class="accueil-hero-stat" href="${f.href}"><div class="v">${esc(f.v)}</div><div class="l">${esc(f.l)}</div></a>`).join("");
+  const maj = [PROBAS?.lastUpdated, ACTUALITES?.lastUpdated, LOIS_MAJ].filter(Boolean).sort().at(-1);
+  document.getElementById("en-bref-maj").textContent = maj && dateCourte(maj) ? `Calculé à partir des données publiées sur le site, actualisées le ${dateCourte(maj)}.` : "";
+}
+
 const normTitreAccueil = l => norm(l.dossierTitre || titreLoi(l));
 function renderAccueil(){
   // Stats clés en haut de page (réutilise les données déjà chargées)
@@ -3601,6 +3850,8 @@ function renderAccueil(){
       return i ? `<a class="accueil-hero-stat" href="#chiffres"><div class="v">${esc(i.valeur)}</div><div class="l">${nom} (${esc(i.date.replace(/\s*\(.*\)/,""))}) · ${esc((i.source || "Insee").replace(/\s*\(.*\)$/, ""))}</div></a>` : "";
     }).join("")}
   `;
+
+  renderEnBref();
 
   // "À la une" : dernière loi votée, prochain meeting, tendance sondages
   // LOIS est trié du scrutin le plus récent au plus ancien : premier vote final sur un texte
@@ -4005,6 +4256,7 @@ async function ouvrirSenateur(id){
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(ecarts)}</div><div class="stat-sub">${pctFr(ecarts, presents.length)} de ses votes diffèrent de la position majoritaire de son groupe actuel</div></div>
     </div>
     <p class="depute-note">Au Sénat, les votes se font souvent par délégation : chaque groupe vote pour ses membres absents. Un vote enregistré ne veut donc pas toujours dire que ${s.f ? "la sénatrice" : "le sénateur"} était en séance.</p>
+    <div id="senateur-lobbying" hidden></div>
     <h3 class="histo-title">Ses votes sur l'ensemble des textes</h3>
     <div>${lignes.length ? lignes.map(({ code, scr })=>{
       const [libelle, classe] = LIB[code] || LIB.n;
@@ -4018,6 +4270,7 @@ async function ouvrirSenateur(id){
     }).join("") : `<p class="no-result-msg">Aucun vote relevé depuis sa prise de fonction.</p>`}</div>`;
   document.getElementById("senateur-retour").addEventListener("click", fermerSenateur);
   photoSecours(fiche);
+  afficherLobbyingSenateur(s);
   majHash("senateur-" + id);
   document.title = `${s.nom} · Hémicycle France`;
   if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
@@ -4162,7 +4415,22 @@ function fermerDepute(){
 }
 
 // Activité (questions écrites, amendements) et déclarations HATVP : data/activite.json, chargé à la demande
-let ACTIVITE = null, COMMISSIONS = null;
+let ACTIVITE = null, COMMISSIONS = null, LOBBYING = null;
+// Rencontres déclarées avec des représentants d'intérêts (data/lobbying.json, rattachées par identifiant officiel) ; vide si la source n'en publie pas
+async function blocLobbying(id){
+  LOBBYING ||= lireJSON("data/lobbying.json");
+  const l = (await LOBBYING)?.elus?.[id];
+  if(!l) return "";
+  const pl = l.n > 1 ? "s" : "";
+  return `<div class="depute-lobbying"><h3 class="histo-title">Rencontres avec des représentants d'intérêts</h3>
+    <p class="depute-note">${formatNombre(l.n)} action${pl} déclarée${pl} au répertoire de la HATVP par les représentants d'intérêts eux-mêmes, sans vérification : ${l.derniers.length < l.n ? `les ${l.derniers.length} plus récentes` : "toutes"}.</p>
+    ${l.derniers.map(([org, date, objet]) => `<div class="histo-row"><div><div class="histo-loi">${esc(org)}</div><div class="histo-date">${esc(dateCourte(date) || date)}${objet ? ` · ${esc(objet)}` : ""}</div></div></div>`).join("")}</div>`;
+}
+async function afficherLobbyingSenateur(s){
+  const html = await blocLobbying(s.id);
+  const el = document.getElementById("senateur-lobbying");
+  if(html && el && senateurOuvert === s.id){ el.innerHTML = html; el.hidden = false; }
+}
 async function afficherActivite(d){
   ACTIVITE ||= lireJSON("data/activite.json");
   COMMISSIONS ||= lireJSON("data/commissions.json");
@@ -4173,11 +4441,16 @@ async function afficherActivite(d){
   const pluriel = (n, mot) => `${formatNombre(n)} ${mot}${n > 1 ? "s" : ""}`;
   const derniere = a.hatvp?.docs[0]?.[1];
   const hatvp = a.hatvp ? `${derniere ? `la dernière le ${esc(dateCourte(derniere) || derniere)} · ` : ""}<a href="${lien(a.hatvp.url)}" target="_blank" rel="noopener">les consulter</a>` : "aucune publiée pour l'instant";
+  const lobby = await blocLobbying(d.id);
+  if(deputeOuvert !== d.id) return;
   bloc.innerHTML = `
+    <h3 class="histo-title" style="grid-column:1/-1; margin:0">Activité à l'Assemblée</h3>
     <div><span class="stat-label">Questions écrites au Gouvernement</span><b>${formatNombre(a.q)}</b>${a.sujets?.length ? `<span>surtout : ${a.sujets.map(esc).join(", ")}</span>` : ""}</div>
     <div><span class="stat-label">Amendements déposés</span><b>${formatNombre(a.a)}</b><span>${a.a ? `dont ${pluriel(a.aa, "adopté")}` : "en premier signataire"}</span></div>
     ${pc ? `<div><span class="stat-label">Présence en commission</span><b>${pctFr(pc[0], pc[0] + pc[1] + pc[2])}</b><span>présent${d.f ? "e" : ""} à ${pluriel(pc[0], "réunion")} sur ${formatNombre(pc[0] + pc[1] + pc[2])}${pc[2] ? `, ${pluriel(pc[2], "absence")} excusée${pc[2] > 1 ? "s" : ""}` : ""}</span></div>` : ""}
-    <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>`;
+    <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>
+    ${lobby ? `<div style="grid-column:1/-1">${lobby}</div>` : ""}
+    <p class="depute-note" style="grid-column:1/-1; margin:0">Sources : open data de l'Assemblée nationale et de la HATVP. Les interventions en séance ne sont pas reprises ici.</p>`;
   bloc.hidden = false;
 }
 
@@ -4236,6 +4509,33 @@ function blocComparaison(d){
   </div>`;
 }
 
+// « Parcours » : mandat, groupe et commissions, uniquement à partir des données déjà publiées sur le site
+function blocParcours(d){
+  const p = partiDepute(d);
+  const g = GROUPES[d.groupe];
+  const depuis = dateCourte(d.depuis);
+  const etapes = [
+    `<li><b>${d.f ? "Députée" : "Député"} de ${esc(circoDepute(d))}</b> (${esc(d.numDep)})<small>${depuis ? `en fonction depuis le ${esc(depuis)}` : "mandat en cours, 17e législature"}</small></li>`,
+    `<li><b>Groupe : ${esc(p.nom)}</b>${g?.membres ? `<small>${formatNombre(g.membres)} membres à l'Assemblée</small>` : ""}</li>`,
+  ];
+  if(g?.president && g.president === d.nom){
+    const dg = dateCourte(g.presidentDepuis);
+    etapes.push(`<li><b>${g.presidente ? "Présidente" : "Président"} du groupe</b>${dg ? `<small>depuis le ${esc(dg)}</small>` : ""}</li>`);
+  }
+  etapes.push(`<li id="parcours-commissions" hidden></li>`);
+  return `<h3>Parcours</h3><ol>${etapes.join("")}</ol>`;
+}
+async function afficherParcoursCommissions(d){
+  COMMISSIONS ||= lireJSON("data/commissions.json");
+  const pc = (await COMMISSIONS)?.deputes?.[d.id];
+  const li = document.getElementById("parcours-commissions");
+  if(!pc || !li || deputeOuvert !== d.id) return;
+  const total = pc[0] + pc[1] + pc[2];
+  if(!total) return;
+  li.innerHTML = `<b>Commission permanente</b><small>présent${d.f ? "e" : ""} à ${formatNombre(pc[0])} réunion${pc[0] > 1 ? "s" : ""} sur ${formatNombre(total)} (${pctFr(pc[0], total)})</small>`;
+  li.hidden = false;
+}
+
 function renderDeputeFiche(d){
   const p = partiDepute(d);
   const s = d.stats;
@@ -4267,6 +4567,7 @@ function renderDeputeFiche(d){
       <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${formatNombre(s.pour)} · ${formatNombre(s.contre)} · ${formatNombre(s.abst)}</div><div class="stat-sub">pour · contre · abstention</div>${exprimes ? `<div class="vote-barre mini" aria-hidden="true">${[["p",s.pour],["c",s.contre],["a",s.abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}</div>` : ""}</div>
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(s.ecarts)}</div><div class="stat-sub">${pctFr(s.ecarts, exprimes)} de ses votes diffèrent de la position majoritaire de son groupe</div></div>
     </div>
+    <div class="depute-parcours" id="depute-parcours">${blocParcours(d)}</div>
     <div class="depute-activite" id="depute-activite" hidden></div>
     ${blocThemes(d)}
     ${blocComparaison(d)}
@@ -4287,6 +4588,7 @@ function renderDeputeFiche(d){
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
+  afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
   document.getElementById("depute-comparer")?.addEventListener("change", e=>{ deputeCompare = e.target.value || null; renderDeputeFiche(d); });
   document.querySelectorAll("#depute-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{
@@ -5799,7 +6101,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "methode", "archives", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -5831,6 +6133,8 @@ function activateTab(tabId){
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
   if(tabId === "mentions") renderCreditsPortraits();
+  if(tabId === "methode") renderMethode();
+  if(tabId === "archives") renderArchives();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
@@ -5841,7 +6145,7 @@ function activateTab(tabId){
     else if(tabId === "senat") majHash(senateurOuvert ? "senateur-" + senateurOuvert : "senat");
     else majHash(tabId);
   }
-  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales" })[tabId];
+  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales", methode:"Méthode" })[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
 }
 

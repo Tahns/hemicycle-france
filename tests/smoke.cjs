@@ -49,6 +49,8 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
+    verifier((await page.$$("#en-bref .accueil-hero-stat")).length === 5, `${nom} : bloc « En bref » incomplet`);
+
     for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
@@ -83,6 +85,11 @@ function verifier(cond, message) {
     await page.waitForTimeout(300);
     verifier((await page.$$(".histo-row")).length > 10, `${nom} : historique vide`);
     verifier((await page.$$(".proximite-row")).length >= 5, `${nom} : proximité de vote absente`);
+    verifier((await page.$$("#histo-cohesion .proximite-row")).length >= 8, `${nom} : cohésion des groupes absente`);
+    await page.selectOption("#groupe-comparer", "RN");
+    await page.waitForTimeout(200);
+    verifier(/\d+ fois/.test(await page.textContent("#histo-comparateur .comparateur-resume").catch(() => "")), `${nom} : comparateur de deux groupes sans résultat`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec le comparateur de groupes`);
     if (nom === "mobile") {
       await page.selectOption("#party-select", "RN");
       await page.waitForTimeout(200);
@@ -109,6 +116,12 @@ function verifier(cond, message) {
     verifier(/#depute-PA\d+$/.test(page.url()), `${nom} : la fiche député n'a pas de lien direct`);
     verifier((await page.$$("#depute-fiche .stat-card")).length === 4, `${nom} : statistiques du député absentes`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
+    verifier((await page.$$("#depute-parcours li")).length >= 2, `${nom} : « Parcours » absent de la fiche député`);
+
+    await page.goto(base + "#archives", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$("#archives-liste li")).length >= 1 && (await page.$$("#archives-graphe svg circle")).length >= 1, `${nom} : archives ou graphique absents`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur les archives`);
 
     await page.goto(base + "#candidats", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
@@ -134,6 +147,13 @@ function verifier(cond, message) {
     await page.goto(base + "#chiffres", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".chiffre-card")).length >= 4 && (await page.$$("#budget-hero .gauge-svg")).length === 2, `${nom} : indicateurs absents`);
+
+    await page.goto(base + "#methode", { waitUntil: "networkidle" });
+    await page.waitForTimeout(400);
+    verifier(await page.isVisible("#view-methode"), `${nom} : page Méthode absente`);
+    verifier((await page.$$("#methode-maj tr")).length >= 5 && !/Chargement|date non indiquée/.test(await page.textContent("#methode-maj")), `${nom} : dates de mise à jour de la page Méthode non lues dans data/*.json`);
+    verifier(/Méthode/.test(await page.title()), `${nom} : titre de la page Méthode`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la page Méthode`);
 
     await page.goto(base + "#quiz", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
