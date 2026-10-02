@@ -93,8 +93,6 @@ jobs:
         run: node scripts/fetch-candidats.js
         continue-on-error: true
 
-        continue-on-error: true
-
       - name: Contrôler la cohérence des données avant publication
         run: node scripts/check-data.js
       # Pages d'aperçu pour le partage (v/ votes clés, d/ députés) : titres et images tirés du site lui-même
@@ -121,8 +119,13 @@ jobs:
             echo "Aucun changement de données — rien à committer."
           else
             git commit -m "Mise à jour automatique des données ($(date -u +%Y-%m-%d))"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push
+            # Plusieurs workflows écrivent dans data/ : on reprend le dernier état distant et on réessaie
+            for i in 1 2 3; do
+              git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && break
+              git rebase --abort 2>/dev/null || true
+              sleep $((i * 5))
+            done
+            git status -sb | head -1
           fi
 
       - name: Vérifier la fraîcheur des données
