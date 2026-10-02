@@ -4134,7 +4134,12 @@ function choisirQuestionsQuiz(){
     `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.`;
 }
 
+function quizEnregistre(){
+  try{ const d = JSON.parse(localStorage.getItem("quiz-resultat") || "null"); return d && Array.isArray(d.scores) && d.scores.length && Array.isArray(d.lignes) ? d : null; }catch(e){ return null; }
+}
 function renderQuiz(){
+  const enregistre = quizEnregistre();
+  if(enregistre){ afficherResultatQuiz(enregistre.scores, enregistre.lignes, enregistre.date); return; }
   quizReponses = {};
   const container = document.getElementById("quiz-container");
   container.innerHTML = `<div class="quiz-avancement" id="quiz-avancement"><span class="quiz-avancement-texte" id="quiz-avancement-texte">0 réponse sur ${QUIZ_LOIS.length}</span><span class="quiz-avancement-piste"><span id="quiz-avancement-barre"></span></span></div>` + QUIZ_LOIS.map((loi,idx)=>`
@@ -4194,6 +4199,13 @@ function showQuizResult(){
     return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0, comptes };
   }).filter(s=>s.comptes>0).sort((a,c)=>c.pct-a.pct);
 
+  const lignes = QUIZ_LOIS.map(loi=>({ q: loi.quizQuestion || titreLoi(loi), vous: quizReponses[loi.id], adopte: loi.resultat==="adopte", date: loi.date, url: loi.sourceUrl }));
+  const quand = new Date().toISOString();
+  try{ localStorage.setItem("quiz-resultat", JSON.stringify({ date: quand, scores, lignes })); }catch(e){}
+  afficherResultatQuiz(scores, lignes, quand);
+}
+
+function afficherResultatQuiz(scores, lignes, quand){
   QUIZ_RESULTAT = scores;
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
@@ -4204,11 +4216,12 @@ function showQuizResult(){
       <div id="quiz-results-list"></div>
       <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="quiz">Défier mes amis</button><button type="button" class="lien-bouton bouton-story" data-story="quiz">Story de mon résultat</button></div>
       <div class="quiz-recap">
-        ${QUIZ_LOIS.map(loi=>{
+        ${lignes.map(l=>{
           const lib = {pour:"oui",contre:"non",abst:"sans avis"};
-          return `<div class="quiz-recap-row"><b>${esc(loi.quizQuestion || titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Les députés : ${loi.resultat==="adopte"?"oui (adopté)":"non (rejeté)"}, le ${esc(loi.date)} · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">vote officiel</a></div>`;
+          return `<div class="quiz-recap-row"><b>${esc(l.q)}</b><br>Vous : ${lib[l.vous]} · Les députés : ${l.adopte?"oui (adopté)":"non (rejeté)"}, le ${esc(l.date)} · <a href="${lien(l.url)}" target="_blank" rel="noopener">vote officiel</a></div>`;
         }).join("")}
       </div>
+      <p class="quiz-enregistre" id="quiz-enregistre"></p>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
     </div>
   `;
@@ -4220,7 +4233,9 @@ function showQuizResult(){
       <div class="quiz-result-pct">${s.pct} %</div>
     </div>
   `).join("");
-  document.getElementById("quiz-restart").addEventListener("click", renderQuiz);
+  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString(document.documentElement.lang || "fr", { day:"numeric", month:"long", year:"numeric" }) : "";
+  document.getElementById("quiz-enregistre").textContent = maj ? `Résultat enregistré sur cet appareil le ${maj}.` : "Résultat enregistré sur cet appareil.";
+  document.getElementById("quiz-restart").addEventListener("click", ()=>{ try{ localStorage.removeItem("quiz-resultat"); }catch(e){} renderQuiz(); });
 }
 
 /* ---------- Dirigeants des partis (données réelles, vérifiées début septembre 2026) ---------- */

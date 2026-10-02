@@ -141,6 +141,19 @@ function verifier(cond, message) {
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
     verifier((await page.$$("#depute-parcours li")).length >= 2, `${nom} : « Parcours » absent de la fiche député`);
 
+    // Quiz : le résultat reste après rechargement, jusqu'à « Refaire le quiz »
+    await page.goto(base + "#quiz", { waitUntil: "networkidle" });
+    await page.waitForSelector(".quiz-options", { timeout: 15000 });
+    const nbQuestions = await page.locator(".quiz-options").count();
+    for (let i = 0; i < nbQuestions; i++) await page.locator(".quiz-options").nth(i).locator(".quiz-option").first().click();
+    await page.click("#quiz-submit");
+    await page.waitForSelector("#quiz-results-list .quiz-result-row", { timeout: 8000 });
+    await page.reload({ waitUntil: "networkidle" });
+    await page.waitForTimeout(500);
+    verifier((await page.locator("#quiz-results-list .quiz-result-row").count()) >= 3, `${nom} : le résultat du quiz ne reste pas après rechargement`);
+    await page.click("#quiz-restart");
+    verifier((await page.locator(".quiz-options").count()) === nbQuestions, `${nom} : « Refaire le quiz » ne rouvre pas les questions`);
+
     await page.goto(base + "#candidats", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".candidat-carte")).length >= 5, `${nom} : candidats absents`);
