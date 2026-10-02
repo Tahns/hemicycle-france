@@ -135,6 +135,21 @@ async function checkQuiz() {
   }
 }
 
+
+// Un workflow GitHub avec une clé en double dans une étape est refusé en bloc (plus aucune mise à jour automatique)
+async function checkWorkflows() {
+  const { readdir } = await import("fs/promises");
+  for (const f of (await readdir(".github/workflows")).filter((n) => n.endsWith(".yml"))) {
+    const texte = await readFile(`.github/workflows/${f}`, "utf-8");
+    for (const bloc of texte.split(/\n {6}- /).slice(1)) {
+      for (const cle of ["id:", "run:", "if:", "env:", "with:", "uses:", "continue-on-error:"]) {
+        const n = bloc.split("\n").filter((l) => l.startsWith(`        ${cle}`)).length;
+        if (n > 1) err(`${f} : clé « ${cle} » en double dans l'étape « ${bloc.split("\n")[0].slice(0, 60)} »`);
+      }
+    }
+  }
+  console.log("[check-data] workflows : pas de clé en double.");
+}
 async function checkProbabilites() {
   const data = JSON.parse(await readFile("data/probabilites.json", "utf-8").catch(() => "null"));
   if (!data) return;
@@ -287,6 +302,7 @@ await checkLois();
 await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
+await checkWorkflows();
 await checkProbabilites();
 await checkQuiz();
 await checkActualites();
