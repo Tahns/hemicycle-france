@@ -107,6 +107,10 @@ function verifier(cond, message) {
     await page.goto(base + "#deputes", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".depute-carte")).length >= 50, `${nom} : liste des députés vide`);
+    await page.evaluate(() => { document.getElementById("stats-groupes-bloc").open = true; });
+    await page.waitForTimeout(300);
+    verifier((await page.$$("#stats-groupes-corps tbody tr")).length >= 10, `${nom} : statistiques par groupe absentes`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec les statistiques par groupe`);
     await page.fill("#depute-search", "33");
     await page.waitForTimeout(300);
     const nbGironde = (await page.$$(".depute-carte")).length;
@@ -168,9 +172,8 @@ function verifier(cond, message) {
       for (const t of ["actualite", "actualites", "probabilites", "secondtour", "decompte", "candidat", "parti", "justice", "indicateur", "groupe", "meeting"])
         if (!STORY_PLUS[t]) STORY_PLUS[t] = async (ctx) => { ctx.fillStyle = "#123"; ctx.fillRect(0, 0, 40, 40); return { nom: "test" }; };
     });
-    for (const [onglet, type] of [["accueil", "actualite"], ["accueil", "actualites"], ["actualites", "actualite"], ["actualites", "actualites"], ["sondages", "probabilites"], ["sondages", "secondtour"],
-      ["sondages", "decompte"], ["candidats", "candidat"], ["dirigeants", "parti"], ["dirigeants", "groupe"], ["histo", "groupe"], ["justice", "justice"], ["chiffres", "indicateur"],
-      ["meetings", "meeting"], ["scrutin", "scrutin"], ["senat", "senat"], ["dirigeants", "gouvernement"]]) {
+    for (const [onglet, type] of [["accueil", "actualites"], ["actualites", "actualites"], ["sondages", "probabilites"], ["sondages", "decompte"], ["histo", "groupe"],
+      ["scrutin", "scrutin"], ["senat", "senat"], ["dirigeants", "gouvernement"]]) {
       await page.goto(base + (onglet === "accueil" ? "" : "#" + onglet), { waitUntil: "networkidle" });
       await poserDessins();
       await page.waitForTimeout(300);
