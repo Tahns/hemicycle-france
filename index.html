@@ -240,9 +240,8 @@
   }
   .rubriques-inner{
     max-width:var(--largeur); margin:0 auto; padding:0 12px;
-    display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;
+    display:flex; flex-wrap:wrap; gap:0 2px; /* pas de défilement : les menus déroulants ne doivent pas être coupés */
   }
-  .rubriques-inner::-webkit-scrollbar{display:none;}
   .tab{
     padding:13px 12px 11px; font-size:14.5px; font-weight:500; white-space:nowrap;
     color:var(--text-soft); cursor:pointer; user-select:none;
@@ -253,16 +252,33 @@
   .tab-sep{flex:0 0 1px; align-self:center; height:18px; margin:0 6px; background:var(--border);}
   @media (max-width:1180px){ .tab{padding-left:9px; padding-right:9px; font-size:14px;} }
   .tab.active{color:var(--text); font-weight:700; border-bottom-color:var(--accent);}
+  /* Regroupement à plusieurs pages : libellé (page d'ouverture) + flèche qui ouvre un menu déroulant */
+  .tab-menu{position:relative; display:flex; align-items:stretch; padding:0; cursor:default;}
+  .tab-libelle, .tab-fleche{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
+  .tab-libelle{padding:13px 2px 11px 12px; white-space:nowrap;}
+  .tab-fleche{display:flex; align-items:center; justify-content:center; min-width:30px; padding:0 8px 0 4px;}
+  .tab-fleche::before{content:""; width:7px; height:7px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg) translateY(-2px); transition:transform .15s;}
+  .tab-fleche[aria-expanded="true"]::before{transform:rotate(-135deg) translateY(-1px);}
+  .tab-libelle:focus-visible, .tab-fleche:focus-visible{outline:2px solid var(--accent); outline-offset:-3px; border-radius:3px;}
+  .tab-liste{position:absolute; z-index:40; top:100%; left:0; min-width:min(340px, calc(100vw - 16px)); padding:6px; text-align:start; font-weight:400; white-space:normal; background:var(--bg-elevated); border:1px solid var(--border); border-top:2px solid var(--accent); border-radius:0 0 4px 4px; box-shadow:0 10px 28px rgba(20,18,14,.18);}
+  .tab-liste a{display:block; min-height:44px; padding:8px 12px; border-radius:3px; color:var(--text); text-decoration:none;}
+  .tab-liste a b{display:block; font-size:14.5px; font-weight:600;}
+  .tab-liste a span{display:block; margin-top:1px; font-size:13px; line-height:1.35; color:var(--text-soft);}
+  .tab-liste a:hover, .tab-liste a:focus-visible{background:var(--bg-elevated-2); outline:none;}
+  .tab-liste a:focus-visible{box-shadow:inset 0 0 0 2px var(--accent);}
+  .tab-liste a[aria-current="page"] b{color:var(--accent);}
 
   .accueil-rubrique > .rubrique-ico{grid-row:1 / span 3;}
   .accueil-rubrique > .rubrique-pages{grid-column:2; display:block; margin-top:4px; font-size:12.5px; color:var(--text-faint);}
-  /* Sous-navigation d'un regroupement : pastilles défilables, sans faire défiler la page */
-  .sous-nav{display:flex; flex-wrap:nowrap; gap:8px; margin:14px 0 0; padding:2px 2px 4px; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
-  .sous-nav::-webkit-scrollbar{display:none;}
-  .sous-nav a{flex:0 0 auto; display:inline-flex; align-items:center; min-height:40px; padding:0 16px; border:1px solid var(--border); border-radius:999px; font-size:14.5px; font-weight:500; color:var(--text-soft); text-decoration:none; white-space:nowrap; transition:background .15s,color .15s,border-color .15s;}
-  .sous-nav a:hover{color:var(--text); border-color:var(--ink);}
-  .sous-nav a[aria-current="page"]{background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:700;}
-  .sous-nav a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  /* Sous-navigation d'un regroupement : un seul menu déroulant (liste native, confortable au toucher) */
+  .sous-nav{display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin:14px 0 0;}
+  .sous-nav label{font-size:14px; color:var(--text-soft);}
+  .sous-nav select{appearance:none; -webkit-appearance:none; min-height:44px; max-width:100%; padding:0 42px 0 14px; border-radius:999px; font-weight:600; cursor:pointer;
+    background-color:var(--bg-elevated);
+    background-image:linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:calc(100% - 20px) 50%, calc(100% - 15px) 50%; background-size:5px 5px, 5px 5px; background-repeat:no-repeat;}
+  .sous-nav select:hover{border-color:var(--ink);}
+  html[dir="rtl"] .sous-nav select{padding:0 14px 0 42px; background-position:20px 50%, 15px 50%;}
 
   main{max-width:var(--largeur); margin:0 auto; padding:30px 24px 60px;}
   .view{display:none;}
@@ -1291,8 +1307,14 @@
     .feuille-lien span{font-size:13.5px; color:var(--text-soft);}
     .feuille-lien.active b{color:var(--accent);}
     .feuille-theme{border-bottom:none;}
-    .feuille-groupe{padding:14px 0 2px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
-    .feuille-groupe:first-of-type{padding-top:4px;}
+    .feuille-section{border-bottom:1px solid var(--border);}
+    .feuille-section > summary{display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:52px; padding:10px 0; cursor:pointer; list-style:none; font-size:13px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--accent);}
+    .feuille-section > summary::-webkit-details-marker{display:none;}
+    .feuille-section > summary::after{content:""; width:9px; height:9px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg) translateY(-3px); transition:transform .2s; flex:0 0 auto;}
+    .feuille-section[open] > summary::after{transform:rotate(-135deg) translateY(-2px);}
+    .feuille-section > summary:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+    .feuille-section .feuille-lien:last-child{border-bottom:none;}
+    .feuille-section .feuille-lien{padding-left:10px;}
     .site-footer{padding-bottom:24px;}
     /* Chiffres du vote : une colonne compacte */
     .stat-cards{grid-template-columns:1fr;}
@@ -1417,16 +1439,18 @@
 <div class="feuille-fond" id="feuille-fond" hidden></div>
 <div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
   <div class="feuille-poignee" aria-hidden="true"></div>
-  <div class="feuille-groupe" aria-hidden="true">Actualités</div>
-  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Argent public</div>
-  <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
-  <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Pour débuter</div>
-  <button type="button" class="feuille-lien" data-tab="comprendre"><b>Comprendre</b><span>Qui fait quoi, comment naît une loi, lexique</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Le site</div>
-  <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
-  <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
+  <details class="feuille-section" data-section="actu-argent">
+    <summary>Actualités et argent public</summary>
+    <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
+    <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
+    <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
+  </details>
+  <details class="feuille-section" data-section="aide">
+    <summary>Comprendre et méthode</summary>
+    <button type="button" class="feuille-lien" data-tab="comprendre"><b>Comprendre</b><span>Qui fait quoi, comment naît une loi, lexique</span></button>
+    <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
+    <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
+  </details>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
 
@@ -6874,10 +6898,10 @@ window.addEventListener("hashchange", ouvrirDepuisHash);
 const HUBS = [
   { id:"une", nom:"À la une", pages:[["accueil","À la une"]] },
   { id:"actu", nom:"Actualités", pages:[["actualites","Actualités"]] },
-  { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages"], ["candidats","Candidats"], ["meetings","Agenda"]] },
-  { id:"argent", nom:"Argent public", pages:[["budget","Budget"], ["chiffres","Économie"]] },
-  { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes"], ["deputes","Députés"], ["senat","Sénat"], ["histo","Groupes"], ["dirigeants","Partis"], ["justice","Justice"]] },
-  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz"], ["comprendre","Comprendre"]] }
+  { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, moyenne des instituts"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
+  { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
+  { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"]] },
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
@@ -6892,18 +6916,85 @@ function majSousNav(tabId){
   const tete = document.querySelector("#view-" + tabId + " .rubrique-tete");
   if(!hub || hub.pages.length < 2 || !tete){ sousNav.remove(); return; }
   sousNav.setAttribute("aria-label", hub.nom);
-  sousNav.innerHTML = hub.pages.map(([id, nom]) => `<a href="#${id}" data-sous="${id}"${id === tabId ? ' aria-current="page"' : ""}>${nom}</a>`).join("");
+  sousNav.innerHTML = `<label for="sous-nav-select">Dans cette rubrique :</label><select id="sous-nav-select">${hub.pages.map(([id, nom]) => `<option value="${id}"${id === tabId ? " selected" : ""}>${nom}</option>`).join("")}</select>`;
   tete.appendChild(sousNav);
-  const cur = sousNav.querySelector("[aria-current]");
-  // Défilement interne de la rangée seulement (jamais de la page)
-  if(cur) sousNav.scrollLeft = Math.max(0, cur.offsetLeft - (sousNav.clientWidth - cur.offsetWidth) / 2);
 }
-sousNav.addEventListener("click", (e)=>{
-  const a = e.target.closest("a[data-sous]");
-  if(!a) return;
-  e.preventDefault();
-  activateTab(a.dataset.sous);
+sousNav.addEventListener("change", (e)=>{
+  const sel = e.target.closest("select");
+  if(sel) activateTab(sel.value);
 });
+
+// Barre du haut : un regroupement à plusieurs pages devient « libellé + flèche » avec un menu déroulant de ses pages
+const menusHaut = [];
+document.querySelectorAll(".tab").forEach(tab=>{
+  const hub = HUBS.find(h => h.id === tab.dataset.hub);
+  if(!hub || hub.pages.length < 2) return;
+  tab.classList.add("tab-menu");
+  const idMenu = "menu-" + hub.id;
+  tab.innerHTML = `<button type="button" class="tab-libelle">${hub.nom}</button>` +
+    `<button type="button" class="tab-fleche" aria-haspopup="true" aria-expanded="false" aria-controls="${idMenu}" aria-label="Pages de la rubrique ${hub.nom}"></button>` +
+    `<div class="tab-liste" id="${idMenu}" role="menu" aria-label="${hub.nom}" hidden>` +
+    hub.pages.map(([id, nom, desc]) => `<a role="menuitem" href="#${id}" data-menu-page="${id}"><b>${nom}</b><span>${desc || ""}</span></a>`).join("") + `</div>`;
+  const fleche = tab.querySelector(".tab-fleche"), liste = tab.querySelector(".tab-liste");
+  const m = { tab, fleche, liste, epingle:false, minuterie:0 };
+  menusHaut.push(m);
+  m.ouvrir = (focus) => {
+    menusHaut.forEach(o => { if(o !== m) o.fermer(); });
+    clearTimeout(m.minuterie);
+    liste.hidden = false; fleche.setAttribute("aria-expanded", "true");
+    // Jamais coupé par le bord de l'écran : on décale le menu vers l'intérieur si besoin
+    liste.style.left = "0px";
+    const r = liste.getBoundingClientRect(), marge = 8;
+    if(r.right > innerWidth - marge) liste.style.left = Math.min(0, innerWidth - marge - r.right) + "px";
+    if(focus) (liste.querySelector('[aria-current="page"]') || liste.querySelector("a")).focus();
+  };
+  m.fermer = (rendreFocus) => {
+    clearTimeout(m.minuterie);
+    m.epingle = false;
+    if(liste.hidden) return;
+    liste.hidden = true; fleche.setAttribute("aria-expanded", "false");
+    if(rendreFocus) fleche.focus();
+  };
+  tab.querySelector(".tab-libelle").addEventListener("click", ()=>{ m.fermer(); activateTab(tab.dataset.tab); });
+  fleche.addEventListener("click", ()=>{
+    if(liste.hidden){ m.ouvrir(false); m.epingle = true; }
+    else if(!m.epingle) m.epingle = true; // ouvert au survol : le clic le maintient ouvert
+    else m.fermer();
+  });
+  fleche.addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); m.ouvrir(true); m.epingle = true; }
+  });
+  tab.querySelector(".tab-libelle").addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowDown"){ e.preventDefault(); m.ouvrir(true); m.epingle = true; }
+  });
+  liste.addEventListener("keydown", (e)=>{
+    const items = [...liste.querySelectorAll("a")], i = items.indexOf(document.activeElement);
+    if(e.key === "ArrowDown"){ e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    else if(e.key === "ArrowUp"){ e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    else if(e.key === "Home"){ e.preventDefault(); items[0].focus(); }
+    else if(e.key === "End"){ e.preventDefault(); items[items.length - 1].focus(); }
+    else if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); m.fermer(true); }
+    else if(e.key === "Tab") m.fermer();
+  });
+  liste.addEventListener("click", (e)=>{
+    const a = e.target.closest("a[data-menu-page]");
+    if(!a) return;
+    e.preventDefault();
+    m.fermer();
+    activateTab(a.dataset.menuPage);
+  });
+  // Survol (souris seulement) : ouvre, puis referme peu après la sortie
+  tab.addEventListener("pointerenter", (e)=>{ if(e.pointerType === "mouse") m.ouvrir(false); });
+  tab.addEventListener("pointerleave", (e)=>{ if(e.pointerType === "mouse" && !m.epingle) m.minuterie = setTimeout(()=> m.fermer(), 180); });
+});
+document.addEventListener("pointerdown", (e)=>{ menusHaut.forEach(m => { if(!m.tab.contains(e.target)) m.fermer(); }); });
+document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") menusHaut.forEach(m => m.fermer()); });
+document.addEventListener("focusin", (e)=>{ menusHaut.forEach(m => { if(!m.liste.hidden && !m.tab.contains(e.target)) m.fermer(); }); });
+function majMenusHaut(tabId){
+  menusHaut.forEach(m => m.liste.querySelectorAll("a").forEach(a => {
+    if(a.dataset.menuPage === tabId) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  }));
+}
 
 function activateTab(tabId){
   onSeatLeave();
@@ -6948,11 +7039,13 @@ function activateTab(tabId){
     else majHash(tabId);
   }
   majSousNav(tabId);
+  majMenusHaut(tabId);
+  menusHaut.forEach(m => m.fermer());
   const nomPage = PAGES_NOMS[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
 }
 
-document.querySelectorAll(".tab").forEach(tab=>{
+document.querySelectorAll(".tab:not(.tab-menu)").forEach(tab=>{
   tab.setAttribute("role","button");
   tab.setAttribute("tabindex","0");
   tab.addEventListener("click", ()=> activateTab(tab.dataset.tab));
@@ -6968,7 +7061,7 @@ document.querySelectorAll(".accueil-rubrique").forEach(el=>{
 document.addEventListener("keydown", (e)=>{
   if(e.key !== "Enter" && e.key !== " ") return;
   const el = e.target.closest && e.target.closest(".tab, .accueil-highlight-card, .accueil-rubrique");
-  if(!el) return;
+  if(!el || e.target.closest("button, a, select")) return;
   e.preventDefault();
   el.click();
 });
@@ -7002,7 +7095,10 @@ const boutonPlus = document.getElementById("bouton-plus");
 function ouvrirFeuille(){
   feuille.hidden = false; feuilleFond.hidden = false;
   boutonPlus.setAttribute("aria-expanded", "true");
+  // Accordéon : seule la section de la page affichée est dépliée (la première à défaut)
   const actif = feuille.querySelector(".feuille-lien.active") || feuille.querySelector(".feuille-lien");
+  const section = actif.closest(".feuille-section") || feuille.querySelector(".feuille-section");
+  feuille.querySelectorAll(".feuille-section").forEach(d => { d.open = d === section; });
   actif.focus({ preventScroll:true });
 }
 function fermerFeuille(){
@@ -7010,6 +7106,9 @@ function fermerFeuille(){
   feuille.hidden = true; feuilleFond.hidden = true;
   boutonPlus.setAttribute("aria-expanded", "false");
 }
+feuille.querySelectorAll(".feuille-section").forEach(d => d.addEventListener("toggle", ()=>{
+  if(d.open) feuille.querySelectorAll(".feuille-section").forEach(o => { if(o !== d) o.open = false; });
+}));
 boutonPlus.addEventListener("click", ()=> feuille.hidden ? ouvrirFeuille() : fermerFeuille());
 feuilleFond.addEventListener("click", fermerFeuille);
 document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") fermerFeuille(); });
