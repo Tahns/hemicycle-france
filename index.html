@@ -884,6 +884,8 @@
   .suivez span{flex:1 1 240px; color:var(--text-soft); font-size:14.5px;}
   .bouton-ig{display:inline-block; padding:8px 16px; border-radius:999px; color:#fff; font-weight:600; font-size:14px; text-decoration:none; background:linear-gradient(135deg,#7c3aed,#db2777 60%,#f59e0b);}
   .bouton-ig:hover{filter:brightness(1.08);}
+  .bouton-story.mini{width:26px; height:26px; padding:0; justify-content:center; vertical-align:middle; margin-left:6px; font-size:0; gap:0;}
+  .bouton-story.mini::before{width:13px; height:13px;}
   .bouton-story[hidden]{display:none;}
   .bouton-story{display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px; text-decoration:none; font-weight:600; font-size:14px; color:#fff; background:linear-gradient(135deg,#7c3aed,#db2777 60%,#f59e0b); box-shadow:0 1px 4px rgba(124,58,237,.35); transition:transform .12s, box-shadow .12s;}
   .bouton-story:hover{transform:translateY(-1px); box-shadow:0 3px 10px rgba(124,58,237,.45);}
@@ -3214,7 +3216,7 @@ function sujetHTML(s, court, une){
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
-    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}</div>
+    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
     </div>
   </article>`;
