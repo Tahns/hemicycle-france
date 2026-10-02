@@ -12,7 +12,7 @@ const path = require("path");
 const { chromium } = require("playwright");
 
 const RACINE = path.resolve(__dirname, "..");
-const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".svg": "image/svg+xml" };
 
 function serveur() {
   return new Promise((ok) => {
@@ -53,7 +53,7 @@ function verifier(cond, message) {
     verifier((await page.$$(".tab")).length === 6, `${nom} : la barre du haut doit compter 6 regroupements`);
     verifier((await page.$$(".accueil-rubrique")).length === 6, `${nom} : la grille de l'accueil doit compter 6 regroupements`);
     verifier((await page.$$(".onglet-mobile")).length <= 5, `${nom} : la barre mobile doit compter 5 entrées au plus`);
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre", "presidents"]) {
       // Navigation à six regroupements : on ouvre la page par la barre du haut ou par le menu « Dans cette rubrique »
       await page.evaluate((t) => {
         const tab = document.querySelector(`.tab[data-tab="${t}"]`);
@@ -141,6 +141,19 @@ function verifier(cond, message) {
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
     verifier((await page.$$("#depute-parcours li")).length >= 2, `${nom} : « Parcours » absent de la fiche député`);
 
+    // Quiz : le résultat reste après rechargement, jusqu'à « Refaire le quiz »
+    await page.goto(base + "#quiz", { waitUntil: "networkidle" });
+    await page.waitForSelector(".quiz-options", { timeout: 15000 });
+    const nbQuestions = await page.locator(".quiz-options").count();
+    for (let i = 0; i < nbQuestions; i++) await page.locator(".quiz-options").nth(i).locator(".quiz-option").first().click();
+    await page.click("#quiz-submit");
+    await page.waitForSelector("#quiz-results-list .quiz-result-row", { timeout: 8000 });
+    await page.reload({ waitUntil: "networkidle" });
+    await page.waitForTimeout(500);
+    verifier((await page.locator("#quiz-results-list .quiz-result-row").count()) >= 3, `${nom} : le résultat du quiz ne reste pas après rechargement`);
+    await page.click("#quiz-restart");
+    verifier((await page.locator(".quiz-options").count()) === nbQuestions, `${nom} : « Refaire le quiz » ne rouvre pas les questions`);
+
     await page.goto(base + "#candidats", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".candidat-carte")).length >= 5, `${nom} : candidats absents`);
@@ -160,7 +173,30 @@ function verifier(cond, message) {
     verifier((await page.$$("#lex-liste .lex-item")).length >= 1 && (await page.$$("#lex-liste .lex-item")).length < 6, `${nom} : la recherche du lexique ne filtre pas`);
     await page.fill("#lex-recherche", "");
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur Comprendre`);
-    for (const t of ["scrutin", "histo", "deputes", "senat", "dirigeants", "chiffres", "budget", "actualites", "meetings", "justice", "sondages", "candidats", "quiz"]) {
+    // Les présidents : page dans le hub Comprendre, 25 présidents dans l'ordre chronologique, un seul président actuel, mode d'élection fidèle aux données, clair et sombre sans défilement horizontal
+    await page.goto(base + "#presidents", { waitUntil: "networkidle" });
+    await page.waitForSelector("#presidents-frise .pres-item");
+    const donneesPres = JSON.parse(fs.readFileSync(path.join(RACINE, "data/presidents.json"), "utf-8"));
+    const attendus = donneesPres.regimes.flatMap((r) => r.presidents.map((p) => p.nom));
+    verifier(await page.evaluate(() => document.getElementById("view-presidents").classList.contains("active")), `${nom} : la page Les présidents ne s'ouvre pas`);
+    verifier(attendus.length === 25 && (await page.$$("#presidents-frise .pres-item")).length === attendus.length, `${nom} : le nombre de présidents affichés ne correspond pas aux données`);
+    verifier(JSON.stringify(await page.$$eval("#presidents-frise .pres-item", (l) => l.map((e) => e.dataset.president))) === JSON.stringify(attendus), `${nom} : présidents hors ordre chronologique`);
+    verifier(new RegExp(`^${attendus.length} présidents depuis 1848`).test(await page.textContent("#presidents-bandeau .pres-gros")), `${nom} : bandeau « présidents depuis 1848 » incorrect`);
+    verifier((await page.$$("#presidents-frise .pres-item.en-cours")).length === 1 && /Emmanuel Macron/.test(await page.textContent("#presidents-bandeau .pres-courant")), `${nom} : le président actuel n'est pas mis en évidence`);
+    verifier((await page.$$("#presidents-frise .pres-regime")).length === 4 && (await page.$$("#presidents-frise .pres-pause")).length === 2, `${nom} : régimes ou périodes sans président manquants`);
+    verifier((await page.$$eval("#presidents-frise .pres-item a", (l) => l.filter((a) => /^https:\/\/fr\.wikipedia\.org\/wiki\//.test(a.href)).length)) === attendus.length, `${nom} : un lien Wikipédia manque`);
+    for (const r of donneesPres.regimes) {
+      const phrase = (await page.textContent(`.pres-regime[data-regime="${r.id}"] .pres-election`)).replace(/\s+/g, " ").trim();
+      verifier(phrase === r.election, `${nom} : mode d'élection de ${r.nom} différent des données : « ${phrase} »`);
+    }
+    verifier((await page.$$("#view-presidents .gl")).length >= 5, `${nom} : infobulles du glossaire absentes sur Les présidents`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur Les présidents`);
+    await page.evaluate(() => document.documentElement.setAttribute("data-theme", "sombre"));
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur Les présidents en mode sombre`);
+    verifier(await page.evaluate(() => { const c = getComputedStyle(document.querySelector("#presidents-frise .pres-nom a")).color.match(/\d+/g).map(Number); return c.reduce((a, b) => a + b, 0) > 384; }), `${nom} : texte des présidents illisible en mode sombre`);
+    await page.evaluate(() => document.documentElement.removeAttribute("data-theme"));
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur Les présidents en mode clair`);
+    for (const t of ["scrutin", "histo", "deputes", "senat", "dirigeants", "chiffres", "budget", "actualites", "meetings", "justice", "sondages", "candidats", "quiz", "presidents"]) {
       verifier((await page.$$(`#view-${t} .sert`)).length === 1, `${nom} : ligne « À quoi sert cette page ? » absente sur ${t}`);
     }
     await page.goto(base + "#scrutin", { waitUntil: "networkidle" });
@@ -532,6 +568,8 @@ function verifier(cond, message) {
       await ctx.close();
     }
   }
+
+  await require("./compte-fumee.cjs").testerComptes({ navigateur, base, verifier });
 
   await navigateur.close();
   s.close();

@@ -1127,6 +1127,48 @@
   .parti-logo img{height:24px; width:auto; max-width:150px; object-fit:contain; mix-blend-mode:multiply;}
   [data-theme="sombre"] .parti-logo, [data-theme="sombre"] .actu-logo{background:#E9E4D6; padding:var(--s1) var(--s2); box-shadow:0 0 0 1px var(--border);}
   .leader-info .leader-party{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
+  /* Les présidents : frise verticale par régime, mobile d'abord */
+  .pres-bandeau{display:grid; gap:0; grid-template-columns:1fr; border-top:var(--filet-epais) solid var(--ink); border-bottom:1px solid var(--border); margin:0 0 var(--s5);}
+  .pres-chiffre{padding:var(--s4) 0; border-bottom:1px solid var(--border);}
+  .pres-chiffre:last-child{border-bottom:0;}
+  .pres-chiffre .pres-etiquette{font-size:var(--fs-etiquette); font-weight:700; letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--text-faint);}
+  .pres-chiffre .pres-gros{font-family:var(--font-display); font-weight:700; font-size:var(--fs-2xl); line-height:1.1; margin-top:var(--s1);}
+  .pres-chiffre .pres-detail{font-size:var(--fs-md); color:var(--text-soft); margin-top:var(--s1);}
+  .pres-actuel{display:flex; gap:var(--s3); align-items:center; margin-top:var(--s2);}
+  .pres-actuel b{font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; line-height:1.15;}
+  .pres-legende{font-size:var(--fs-sm); color:var(--text-faint); margin:calc(-1 * var(--s3)) 0 var(--s5);}
+  .pres-courant{display:flex; gap:var(--s4); align-items:center; padding:var(--s4); margin:0 0 var(--s5); background:var(--accent-dim); border-left:var(--filet-epais) solid var(--accent); border-radius:0 var(--r-2) var(--r-2) 0;}
+  .pres-courant .pres-etiquette{font-size:var(--fs-etiquette); font-weight:700; letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--accent);}
+  .pres-courant .pres-nom{font-size:var(--fs-xl); font-weight:700;}
+  .pres-src{margin:var(--s1) 0 var(--s4); font-size:var(--fs-sm); color:var(--text-faint);}
+  .pres-regime{margin:var(--s6) 0 0;}
+  .pres-regime-tete{border-top:var(--filet-fort) solid var(--ink); padding-top:var(--s3);}
+  .pres-regime-tete h3{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s3); margin:0; font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; line-height:1.2;}
+  .pres-regime-tete h3 span{font-family:var(--font-body); font-size:var(--fs-md); font-weight:600; color:var(--text-faint);}
+  .pres-election{margin:var(--s2) 0 var(--s4); font-size:var(--fs-md); color:var(--text-soft); max-width:62ch;}
+  .pres-liste{list-style:none; margin:0; padding:0 0 0 var(--s4); border-left:2px solid var(--border);}
+  .pres-item{position:relative; display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) 0 var(--s3) var(--s3);}
+  .pres-item::before{content:""; position:absolute; left:calc(-1 * var(--s4) - 6px); top:26px; width:10px; height:10px; border-radius:50%; background:var(--bg); border:2px solid var(--ink);}
+  .pres-item.en-cours::before{background:var(--accent); border-color:var(--accent);}
+  .pres-item.en-cours{background:var(--accent-dim); border-radius:var(--r-2); padding-right:var(--s3);}
+  .pres-nom{font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.2;}
+  .pres-nom a{color:inherit; text-decoration-color:var(--border);}
+  .pres-nom a:hover{text-decoration-color:currentColor;}
+  .pres-badge{display:inline-block; margin-left:var(--s2); padding:1px var(--s2); border-radius:var(--r-pill); background:var(--accent); color:var(--sur-couleur); font-family:var(--font-body); font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; vertical-align:2px;}
+  .pres-dates{font-size:var(--fs-md); margin-top:var(--s1);}
+  .pres-meta{font-size:var(--fs-sm); color:var(--text-soft); margin-top:2px;}
+  .pres-meta b{font-weight:600; color:var(--text);}
+  .pres-pause{margin:var(--s5) 0 0; padding:var(--s3) var(--s4); border-left:2px dashed var(--text-faint); background:var(--bg-elevated-2); font-size:var(--fs-md); color:var(--text-soft);}
+  .pres-pause b{display:block; font-size:var(--fs-etiquette); letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--text-faint); margin-bottom:var(--s1);}
+  .pres-sources{margin:var(--s6) 0 0; padding-top:var(--s3); border-top:1px solid var(--border); font-size:var(--fs-sm); color:var(--text-faint);}
+  @media (min-width:700px){
+    .pres-bandeau{grid-template-columns:repeat(3,1fr);}
+    .pres-chiffre{padding:var(--s4) var(--s5) var(--s4) 0; border-bottom:0; border-right:1px solid var(--border);}
+    .pres-chiffre + .pres-chiffre{padding-left:var(--s5);}
+    .pres-chiffre:last-child{border-right:0;}
+    .pres-liste{padding-left:var(--s5);}
+    .pres-item::before{left:calc(-1 * var(--s5) - 6px);}
+  }
   .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 var(--s5);}
   .groupe-card{display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) 0; border-bottom:1px solid var(--border);}
   .groupe-card .dot{margin-top:var(--s2);}
@@ -1221,6 +1263,35 @@
   .texte-legal p, .texte-legal li{color:var(--text-soft); margin:0 0 var(--s3);}
   .texte-legal ul{padding-left:var(--s5); margin:0 0 var(--s3);}
   .texte-legal b{color:var(--text);}
+
+  /* ---------- Mon espace (comptes facultatifs) ---------- */
+  .espace-bloc{padding:var(--s5) 0; border-top:1px solid var(--border);}
+  #espace-contenu .espace-bloc:first-child{border-top:3px solid var(--ink);}
+  .espace-bloc h3{font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600; margin:0 0 var(--s2);}
+  .espace-bloc h4{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin:var(--s4) 0 var(--s1);}
+  .espace-bloc p{margin:0 0 var(--s3); color:var(--text-soft); max-width:62ch;}
+  .espace-liste{list-style:none; margin:0 0 var(--s3); padding:0; max-width:62ch;}
+  .espace-liste li{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s4); align-items:baseline; padding:var(--s2) 0; border-bottom:1px solid var(--border-soft);}
+  .espace-liste .lien-bouton{margin-left:auto; font-size:var(--fs-sm);}
+  .espace-bloc .espace-vide{font-style:italic; color:var(--text-faint);}
+  .espace-bloc .espace-email{font-weight:700; color:var(--text); overflow-wrap:anywhere;}
+  .espace-bloc .espace-msg{min-height:1.4em; color:var(--text); font-weight:600;}
+  .espace-bloc .espace-aide{font-size:var(--fs-sm);}
+  .espace-actions{display:flex; flex-wrap:wrap; gap:var(--s3); margin:var(--s3) 0 0;}
+  .espace-actions .story-bouton{padding:0 var(--s5);}
+  .espace-confirm{border:2px solid var(--ink); padding:var(--s4) var(--s4) var(--s5); margin:0 0 var(--s5); background:var(--bg-elevated);}
+  .espace-confirm p{margin:0; font-weight:600;}
+  .espace-form{display:grid; gap:var(--s3); max-width:420px; margin:var(--s4) 0 0;}
+  .espace-form label{font-size:var(--fs-md); font-weight:600;}
+  .espace-form input[type=email]{width:100%; min-height:46px; padding:0 var(--s3); font:inherit; border:1.5px solid var(--border); border-radius:var(--r-1); background:var(--bg); color:var(--text);}
+  .espace-form .espace-case{display:flex; gap:var(--s3); align-items:flex-start; font-weight:400;}
+  .espace-form .espace-case input{width:18px; height:18px; margin-top:2px; accent-color:var(--accent); flex:none;}
+  .espace-fournisseur{display:flex; align-items:center; justify-content:center; gap:var(--s3); min-height:46px; padding:0 var(--s4); background:#fff; color:#1F1F1F; border:1px solid #747775; border-radius:var(--r-2); font:600 var(--fs-base) var(--font-body); cursor:pointer;}
+  .espace-fournisseur img{width:18px; height:18px; flex:none;}
+  .espace-ou{display:flex; align-items:center; gap:var(--s3); color:var(--text-faint); font-size:var(--fs-sm);}
+  .espace-ou::before, .espace-ou::after{content:""; flex:1; border-top:1px solid var(--border);}
+  .espace-fav-bouton{margin-left:var(--s3); font-size:var(--fs-sm);}
+  #espace-groupe{font:inherit; min-height:40px; max-width:100%; padding:0 var(--s2); border:1.5px solid var(--border); border-radius:var(--r-1); background:var(--bg); color:var(--text);}
   .footer-liens{margin:0 0 var(--s4); font-size:var(--fs-sm);}
   .footer-liens a{color:var(--text-soft);}
   .sondage-reserve{padding:var(--s4) 0; font-family:var(--font-display); font-size:var(--fs-lg); color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border); max-width:780px;}
@@ -1460,6 +1531,7 @@
     <span class="droite"><span class="maj-info" id="maj-info">Mis à jour toutes les heures à partir de sources publiques</span>
       <button type="button" class="theme-toggle bouton-recherche" aria-haspopup="dialog">Rechercher <kbd>/</kbd></button>
       <span class="langue" id="langue-haut"></span>
+      <button type="button" class="theme-toggle" id="espace-haut" hidden>Mon espace</button>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
@@ -1510,6 +1582,7 @@
     <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
     <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   </details>
+  <button type="button" class="feuille-lien" id="espace-plus" data-tab="espace" hidden><b>Mon espace</b><span>Député suivi, historique du quiz, favoris</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
 
@@ -1537,7 +1610,7 @@
       <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></div>
       <div class="accueil-rubrique" data-tab="budget" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></div>
       <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></div>
-      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre</small></div>
+      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre · Les présidents</small></div>
     </div>
     </details>
     <div class="faire-connaitre">
@@ -2040,6 +2113,18 @@
     </article>
   </section>
 
+  <section class="view" id="view-presidents">
+    <div class="rubrique-tete">
+      <div class="surtitre">Pour débuter</div>
+      <h2>Les présidents</h2>
+      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> en France, dans l'ordre, régime après régime. Des dates et des faits, sans avis.
+        <small>Liste relue le <span id="presidents-verifie">2 octobre 2026</span>. Sources : site de l'Élysée et Wikipédia, un lien vers la fiche de chacun.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> s'est terminé.</p>
+    </div>
+    <div id="presidents-bandeau"></div>
+    <div id="presidents-frise"></div>
+  </section>
+
   <section class="view" id="view-mentions">
     <div class="rubrique-tete">
       <h2>Mentions légales</h2>
@@ -2094,7 +2179,8 @@
 
       <h3>Données personnelles et cookies</h3>
       <ul>
-        <li>Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
+        <li id="mention-sans-compte">Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
+        <li id="mention-avec-compte" hidden>Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité. La création d'un compte est facultative : tout le site fonctionne sans (voir « Compte et données personnelles » plus bas).</li>
         <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
         <li>Si vous activez les alertes, vos choix (et le député suivi) sont gardés sur votre appareil ; votre téléphone vérifie lui-même quelques fois par jour le fichier public des nouveautés du site. Aucun compte, aucune adresse, aucun identifiant de notification n'est transmis ni conservé par le site. Pour les arrêter : « Recevoir les alertes » → « Désactiver », ou les réglages de notification du téléphone.</li>
         <li>La date de votre dernière visite est aussi gardée dans votre navigateur, pour vous signaler les nouveaux votes et sondages depuis. Elle n'est jamais transmise ; effacer les données du site dans votre navigateur la supprime.</li>
@@ -2104,6 +2190,22 @@
         <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale et le Sénat.</li>
       </ul>
       <p>Pour toute question sur vos données, vous pouvez ouvrir un ticket ou saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+      <div id="mentions-compte" hidden>
+        <h3>Compte et données personnelles</h3>
+        <p>Un compte est facultatif. Il sert uniquement à retrouver vos préférences (député ou groupe suivi, historique de vos résultats au quiz, favoris) sur tous vos appareils, dans la rubrique « Mon espace ». Sans compte, ces préférences restent dans votre navigateur.</p>
+        <ul>
+          <li><b>Responsable du traitement :</b> l'éditeur du site, joignable aux coordonnées indiquées plus haut, dans la rubrique « Éditeur ».</li>
+          <li><b>Finalité :</b> vous permettre de vous connecter et d'accéder à « Mon espace ». Aucune autre utilisation : ni publicité, ni profilage, ni mesure d'audience, ni revente.</li>
+          <li><b>Base légale :</b> votre consentement, donné en créant volontairement le compte, et l'exécution du service que vous demandez. Le compte est réservé aux personnes de 15 ans ou plus, ce que vous confirmez par une case à cocher.</li>
+          <li><b>Données traitées :</b> votre adresse e-mail et vos préférences. Si vous vous connectez avec un fournisseur (Google, Microsoft…), ce fournisseur reçoit votre identifiant chez lui, selon sa propre politique de confidentialité ; le site n'utilise que l'adresse e-mail qu'il transmet. Selon le fournisseur, le service d'authentification peut aussi enregistrer le nom de votre profil, qui n'est ni affiché ni utilisé.</li>
+          <li><b>Durée de conservation :</b> jusqu'à la suppression de votre compte, que vous pouvez faire à tout moment. Un compte sans connexion ni modification depuis 24 mois est supprimé automatiquement, avec ses données.</li>
+          <li><b>Destinataire et sous-traitant :</b> Supabase, qui héberge la base de données et l'authentification dans l'Union européenne. Le courriel du lien de connexion est envoyé par le service de messagerie configuré pour ce projet. Aucune autre transmission à des tiers.</li>
+          <li><b>Vos droits :</b> accès et portabilité (bouton « Télécharger mes données », fichier JSON), rectification (vous modifiez vos préférences vous-même), effacement (bouton « Supprimer mon compte et mes données »), opposition et limitation (en nous contactant). Ils s'exercent en libre-service dans « Mon espace » ou aux coordonnées de l'éditeur. En cas de désaccord, vous pouvez saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</li>
+          <li><b>Cookies et stockage :</b> aucun cookie, aucun traceur. Votre session de connexion est gardée dans le stockage local de votre navigateur, strictement nécessaire au fonctionnement du compte ; elle est effacée à la déconnexion.</li>
+          <li><b>Sécurité :</b> pas de mot de passe à retenir ni à voler ; connexions chiffrées (HTTPS) ; chaque compte ne peut lire et modifier que ses propres données.</li>
+        </ul>
+      </div>
 
       <h3>Sécurité</h3>
       <p>Le site est servi uniquement en HTTPS et n'exécute aucun code provenant d'un autre site. Les textes et liens issus des sources extérieures sont filtrés avant affichage. Si vous découvrez une faille, merci de la signaler en <a href="https://github.com/Tahns/hemicycle-france/security/advisories/new" target="_blank" rel="noopener">message privé sur GitHub</a> plutôt que dans un ticket public.</p>
@@ -2164,10 +2266,21 @@
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
       <h2>Quiz</h2>
-      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
+      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. <span id="quiz-vie-privee">Vos réponses ne sont enregistrées nulle part.</span></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Vous situer par rapport aux groupes en votant à votre tour sur de vrais textes.</p>
     </div>
     <div id="quiz-container"></div>
+  </section>
+
+  <section class="view" id="view-espace">
+    <div class="rubrique-tete">
+      <div class="surtitre">Vos préférences</div>
+      <h2>Mon espace</h2>
+      <p class="chapo">Le député ou le groupe que vous suivez, l'historique de vos résultats au quiz et vos favoris, au même endroit.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Retrouver vos préférences sur cet appareil, ou sur tous vos appareils si vous créez un compte, ce qui est facultatif.</p>
+    </div>
+    <div class="espace-confirm" id="espace-confirm" hidden></div>
+    <div id="espace-contenu"></div>
   </section>
 </main>
 
@@ -2177,6 +2290,7 @@
     <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
+    <span id="espace-pied" hidden><a href="#espace" data-tab-lien="espace">Mon espace</a> ·</span>
     <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">Instagram</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
     <a href="feed.xml">Flux RSS des votes</a> ·
@@ -2621,6 +2735,7 @@ const GLOSSAIRE = [
   ["commission", "Commission", "Petit groupe de parlementaires spécialisé dans un domaine (finances, défense, affaires sociales…). Elle étudie un texte et peut le modifier avant le vote en séance."],
   ["cmp", "Commission mixte paritaire (CMP)", "Réunion de 7 députés et 7 sénateurs, chargée de proposer un texte commun quand l'Assemblée et le Sénat ne sont pas d'accord."],
   ["conseil-constitutionnel", "Conseil constitutionnel", "9 membres qui vérifient qu'une loi respecte la Constitution. Ils veillent aussi à la régularité des élections nationales."],
+  ["congres", "Congrès", "Réunion des députés et des sénateurs au même endroit, à Versailles aujourd'hui. Il sert à réviser la Constitution. Sous les IIIe et IVe Républiques, il élisait aussi le président de la République."],
   ["constitution", "Constitution", "Texte qui organise les pouvoirs et fixe les règles du pays. Celle de la Ve République date de 1958."],
   ["croissance", "Croissance", "Hausse de la production du pays d'une année sur l'autre, mesurée par l'évolution du PIB."],
   ["deficit", "Déficit public", "Somme qui manque quand l'État, les collectivités et la Sécurité sociale dépensent plus qu'ils ne reçoivent pendant une année."],
@@ -2635,6 +2750,7 @@ const GLOSSAIRE = [
   ["intention-de-vote", "Intention de vote", "Réponse d'une personne sondée à la question « pour qui voteriez-vous ? ». Ce n'est pas un vote : l'avis peut changer jusqu'au scrutin."],
   ["journal-officiel", "Journal officiel", "Publication de l'État où paraissent les lois, les décrets et les nominations."],
   ["majorite-absolue", "Majorité absolue", "Plus de la moitié de tous les membres d'une assemblée, présents ou non. À l'Assemblée nationale : 289 voix sur 577."],
+  ["mandat", "Mandat", "Durée pendant laquelle un élu exerce sa fonction. Celui du président de la République dure 5 ans depuis 2002 ; il durait 7 ans avant."],
   ["marge-erreur", "Marge d'erreur", "Écart possible entre le résultat d'un sondage et la réalité, car on interroge une partie des gens seulement. Pour 1 000 personnes interrogées, elle est d'environ 3 points."],
   ["motion-de-censure", "Motion de censure", "Vote par lequel les députés peuvent renverser le gouvernement. Elle doit être signée par au moins un dixième des députés et votée par 289 d'entre eux. Si elle l'est, le gouvernement doit démissionner."],
   ["navette", "Navette parlementaire", "Allers-retours d'un texte entre l'Assemblée et le Sénat, jusqu'à ce que les deux votent le même texte."],
@@ -3537,6 +3653,8 @@ function appliquerSondages(data){
     id: "inst" + k,
     nom: i.nom,
     date: i.date,
+    dateFin: i.dateFin,
+    nbHyp: i.hypotheses,
     echantillon: `${formatNombre(i.echantillon)} personnes`,
     n: i.echantillon,
     // Lien vers la notice de la Commission quand Wikipédia la cite, sinon vers l'article du commanditaire
@@ -3782,6 +3900,7 @@ function sujetHTML(s, court, une){
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
     <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
+    ${espaceBoutonFav("sujet", a.url, a.titre)}
     ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
     </div>
   </article>`;
@@ -4068,6 +4187,7 @@ function renderCandidats(){
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
       <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      ${espaceBoutonFav("candidat", c.nom)}
       </div>
     </div>`;
   }).join("");
@@ -4127,11 +4247,17 @@ function choisirQuestionsQuiz(){
     .map(l => Object.assign(l, { quizQuestion: questionAuto(l), quizAide: titreLoi(l), quizTheme: l.theme && l.theme !== "À catégoriser" ? l.theme : "Loi récente" }));
   QUIZ_LOIS = [...perso.slice(0, QUIZ_NB - Math.min(QUIZ_AUTO, auto.length)), ...auto].slice(0, QUIZ_NB);
   const n = QUIZ_LOIS.length;
-  document.getElementById("quiz-banner-detail").textContent =
-    `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.`;
+  const banniere = document.getElementById("quiz-banner-detail");
+  banniere.textContent = `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche.`;
+  banniere.append(" ", el("span", { id:"quiz-vie-privee", text:phraseVieQuiz() }));
 }
 
+function quizEnregistre(){
+  try{ const d = JSON.parse(localStorage.getItem("quiz-resultat") || "null"); return d && Array.isArray(d.scores) && d.scores.length && Array.isArray(d.lignes) ? d : null; }catch(e){ return null; }
+}
 function renderQuiz(){
+  const enregistre = quizEnregistre();
+  if(enregistre){ afficherResultatQuiz(enregistre.scores, enregistre.lignes, enregistre.date); return; }
   quizReponses = {};
   const container = document.getElementById("quiz-container");
   container.innerHTML = `<div class="quiz-avancement" id="quiz-avancement"><span class="quiz-avancement-texte" id="quiz-avancement-texte">0 réponse sur ${QUIZ_LOIS.length}</span><span class="quiz-avancement-piste"><span id="quiz-avancement-barre"></span></span></div>` + QUIZ_LOIS.map((loi,idx)=>`
@@ -4191,6 +4317,14 @@ function showQuizResult(){
     return { nom:p.nom, couleur:p.couleur, pct: comptes ? Math.round(accord/comptes*100) : 0, comptes };
   }).filter(s=>s.comptes>0).sort((a,c)=>c.pct-a.pct);
 
+  const lignes = QUIZ_LOIS.map(loi=>({ q: loi.quizQuestion || titreLoi(loi), vous: quizReponses[loi.id], adopte: loi.resultat==="adopte", date: loi.date, url: loi.sourceUrl }));
+  const quand = new Date().toISOString();
+  try{ localStorage.setItem("quiz-resultat", JSON.stringify({ date: quand, scores, lignes })); }catch(e){}
+  if(ESPACE_ACTIF) espaceNoterQuiz(scores);
+  afficherResultatQuiz(scores, lignes, quand);
+}
+
+function afficherResultatQuiz(scores, lignes, quand){
   QUIZ_RESULTAT = scores;
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
@@ -4201,11 +4335,12 @@ function showQuizResult(){
       <div id="quiz-results-list"></div>
       <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="quiz">Défier mes amis</button><button type="button" class="lien-bouton bouton-story" data-story="quiz">Story de mon résultat</button></div>
       <div class="quiz-recap">
-        ${QUIZ_LOIS.map(loi=>{
+        ${lignes.map(l=>{
           const lib = {pour:"oui",contre:"non",abst:"sans avis"};
-          return `<div class="quiz-recap-row"><b>${esc(loi.quizQuestion || titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Les députés : ${loi.resultat==="adopte"?"oui (adopté)":"non (rejeté)"}, le ${esc(loi.date)} · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">vote officiel</a></div>`;
+          return `<div class="quiz-recap-row"><b>${esc(l.q)}</b><br>Vous : ${lib[l.vous]} · Les députés : ${l.adopte?"oui (adopté)":"non (rejeté)"}, le ${esc(l.date)} · <a href="${lien(l.url)}" target="_blank" rel="noopener">vote officiel</a></div>`;
         }).join("")}
       </div>
+      <p class="quiz-enregistre" id="quiz-enregistre"></p>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
     </div>
   `;
@@ -4217,8 +4352,114 @@ function showQuizResult(){
       <div class="quiz-result-pct">${s.pct} %</div>
     </div>
   `).join("");
-  document.getElementById("quiz-restart").addEventListener("click", renderQuiz);
+  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString(document.documentElement.lang || "fr", { day:"numeric", month:"long", year:"numeric" }) : "";
+  document.getElementById("quiz-enregistre").textContent = maj ? `Résultat enregistré sur cet appareil le ${maj}.` : "Résultat enregistré sur cet appareil.";
+  document.getElementById("quiz-restart").addEventListener("click", ()=>{ try{ localStorage.removeItem("quiz-resultat"); }catch(e){} renderQuiz(); });
 }
+
+/* ---------- Les présidents (data/presidents.json, saisie manuelle) ---------- */
+
+let PRESIDENTS = null; // { regimes, periodes_sans_president, verifieLe }
+let PRESIDENTS_PHOTOS = null; // data/portraits.json
+// Phrases du mode d'élection, une par régime : coupées autour des termes du glossaire pour être traduisibles morceau par morceau.
+// Le texte complet (sans balises) doit rester identique à « election » dans data/presidents.json (contrôlé par check-data.js et le test de fumée).
+const PRESIDENTS_ELECTION = {
+  ii: `<span>Le président est élu au</span> ${gl("suffrage-direct", "suffrage universel direct")}<span>, mais seuls les hommes votent.</span>`,
+  iii: `<span>Le président est élu par le Parlement : par l'Assemblée nationale pour Thiers et Mac Mahon, puis par les députés et les sénateurs réunis en</span> ${gl("congres", "Congrès")}.`,
+  iv: `<span>Le président est élu pour 7 ans par le Parlement réuni en</span> ${gl("congres", "Congrès")} <span>: l'Assemblée nationale et le Conseil de la République.</span>`,
+  v: `<span>Le président est choisi en 1958 par un collège de</span> ${gl("grands-electeurs", "grands électeurs")}. <span>Depuis la réforme de 1962, il est élu au</span> ${gl("suffrage-direct", "suffrage universel direct")}<span>, pour la première fois en 1965.</span>`
+};
+// Textes de data/presidents.json affichés tels quels : listés ici pour entrer dans les traductions
+const PRESIDENTS_TEXTES = [
+  "démission", "mort en fonction", "assassiné", "fin de mandat", "devenu empereur sous le nom de Napoléon III", "fin de la IIIe République",
+  "Il reste en fonction jusqu'à l'arrivée de son successeur, après le début de la Ve République.",
+  "De 1940 à 1944, le régime de Vichy est dirigé par Philippe Pétain, avec le titre de « chef de l'État français ». Cette période n'a pas de président de la République.",
+  "De 1944 à 1946, le Gouvernement provisoire de la République française est dirigé tour à tour par Charles de Gaulle, Félix Gouin et Georges Bidault, entre autres. Cette période n'a pas non plus de président de la République."
+];
+const presDate = iso => {
+  if(!iso) return "";
+  if(String(iso).length === 4) return String(iso);
+  const d = new Date(iso + "T12:00:00Z");
+  const lang = document.documentElement.lang || "fr";
+  const r = d.toLocaleDateString(lang, { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" });
+  return lang === "fr" ? r.replace(/^1 /, "1er ") : r;
+};
+const presPrecis = iso => String(iso || "").length === 10;
+// Mois entiers écoulés entre deux dates complètes (AAAA-MM-JJ)
+function presMois(a, b){
+  const [y1, m1, d1] = a.split("-").map(Number), [y2, m2, d2] = b.split("-").map(Number);
+  return (y2 - y1) * 12 + (m2 - m1) - (d2 < d1 ? 1 : 0);
+}
+const presAujourdhui = () => new Date().toISOString().slice(0, 10);
+function presDuree(p){
+  const fin = p.fin || presAujourdhui();
+  if(presPrecis(p.debut) && presPrecis(fin)){
+    const m = presMois(p.debut, fin), a = Math.floor(m / 12), r = m % 12;
+    if(a === 0) return t("Durée : {1} mois", { 1:m });
+    if(r === 0) return t(a === 1 ? "Durée : {1} an" : "Durée : {1} ans", { 1:a });
+    return t(a === 1 ? "Durée : {1} an et {2} mois" : "Durée : {1} ans et {2} mois", { 1:a, 2:r });
+  }
+  return t("Durée : environ {1} ans", { 1:parseInt(fin, 10) - parseInt(p.debut, 10) });
+}
+function presMedaillon(p, actuel){
+  const credit = PRESIDENTS_PHOTOS?.[p.nom];
+  const photo = credit?.fichier ? `photos/personnalites/${slugPortrait(p.nom)}.jpg` : null;
+  const ini = p.nom.split(/[\s-]+/).filter(Boolean).map(x => x[0]).filter(c => /\p{Lu}/u.test(c)).slice(0, 2).join("");
+  const titre = photo ? t("Photo : {1}, {2}, via Wikimedia Commons", { 1:credit.auteur || t("auteur non indiqué"), 2:credit.licence }) : "";
+  const taille = actuel ? 72 : 56;
+  return `<span class="medaillon" style="--c:${actuel ? "#1B3A8C" : "#47443D"}; --t:${taille}px"${titre ? ` title="${esc(titre)}"` : ""}><b aria-hidden="true">${esc(ini)}</b>${photo ? `<img src="${esc(photo)}" alt="" width="${taille}" height="${taille}" loading="lazy" onerror="this.remove()">` : ""}</span>`;
+}
+function presEntree(p){
+  const actuel = !p.fin;
+  const fin = actuel ? t("aujourd'hui") : presDate(p.fin);
+  return `<li class="pres-item${actuel ? " en-cours" : ""}" data-president="${esc(p.nom)}">
+    ${presMedaillon(p, false)}
+    <div>
+      <div class="pres-nom"><a href="${lien(p.wikipedia)}" target="_blank" rel="noopener">${esc(p.nom)}</a>${actuel ? ` <span class="pres-badge">Président actuel</span>` : ""}</div>
+      <div class="pres-dates"><time>${esc(presDate(p.debut))}</time> – <time>${esc(fin)}</time></div>
+      <div class="pres-meta">${esc(presDuree(p))}</div>
+      ${p.fin_type ? `<div class="pres-meta">${esc(t("Fin de la fonction : {1}", { 1:t(p.fin_type) }))}</div>` : ""}
+      ${p.note ? `<div class="pres-meta">${esc(t(p.note))}</div>` : ""}
+    </div>
+  </li>`;
+}
+function renderPresidents(){
+  const bandeau = document.getElementById("presidents-bandeau"), frise = document.getElementById("presidents-frise");
+  if(!bandeau || !frise || !PRESIDENTS) return;
+  const tous = PRESIDENTS.regimes.flatMap(r => r.presidents);
+  const jours = p => (Date.parse((p.fin || presAujourdhui()) + "T12:00:00Z") - Date.parse(p.debut + "T12:00:00Z")) / 864e5;
+  const precis = tous.filter(p => presPrecis(p.debut) && (!p.fin || presPrecis(p.fin)));
+  const plus = precis.reduce((a, b) => jours(b) > jours(a) ? b : a), moins = precis.reduce((a, b) => jours(b) < jours(a) ? b : a);
+  const actuel = tous.find(p => !p.fin);
+  const premier = parseInt(tous[0].debut, 10);
+  bandeau.innerHTML = `<div class="pres-bandeau">
+      <div class="pres-chiffre"><div class="pres-etiquette">Au total</div><div class="pres-gros">${esc(t("{1} présidents depuis {2}", { 1:tous.length, 2:premier }))}</div><div class="pres-detail">De la IIe à la Ve République.</div></div>
+      <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus long</span></div><div class="pres-gros">${esc(plus.nom)}</div><div class="pres-detail">${esc(presDuree(plus))}</div></div>
+      <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus court</span></div><div class="pres-gros">${esc(moins.nom)}</div><div class="pres-detail">${esc(presDuree(moins))}</div></div>
+    </div>
+    <p class="pres-legende">Durées calculées d'après les dates connues au jour près.</p>
+    ${actuel ? `<div class="pres-courant">${presMedaillon(actuel, true)}<div><div class="pres-etiquette">Président actuel</div><div class="pres-nom"><a href="${lien(actuel.wikipedia)}" target="_blank" rel="noopener">${esc(actuel.nom)}</a></div><div class="pres-meta">${esc(t("En fonction depuis le {1}", { 1:presDate(actuel.debut) }))}</div></div></div>` : ""}`;
+  // Régimes et périodes sans président, dans l'ordre des dates
+  const blocs = [
+    ...PRESIDENTS.regimes.map(r => ({ debut:r.debut, html:`<section class="pres-regime" data-regime="${esc(r.id)}">
+      <div class="pres-regime-tete"><h3>${esc(r.nom)} <span>${esc(r.debut)}–${esc(r.fin || "")}${r.fin ? "" : " " + esc(t("à aujourd'hui"))}</span></h3></div>
+      <p class="pres-election">${PRESIDENTS_ELECTION[r.id] || esc(r.election)}</p>
+      <p class="pres-src">${esc(t("Sources :"))} ${(r.sources || []).map(s => `<a href="${lien(s.url)}" target="_blank" rel="noopener">${esc(s.nom)}</a>`).join(" · ")}</p>
+      <ol class="pres-liste">${r.presidents.map(presEntree).join("")}</ol>
+    </section>` })),
+    ...(PRESIDENTS.periodes_sans_president || []).map(x => ({ debut:x.debut, html:`<p class="pres-pause" data-periode="${esc(x.debut)}"><b>${esc(x.debut)}–${esc(x.fin)} · Pas de président de la République</b>${esc(t(x.texte))} <a href="${lien(x.wikipedia)}" target="_blank" rel="noopener">Wikipédia</a></p>` }))
+  ].sort((a, b) => a.debut - b.debut);
+  frise.innerHTML = blocs.map(b => b.html).join("");
+}
+async function chargerPresidents(){
+  if(!PRESIDENTS){
+    const [d, p] = await Promise.all([lireJSON("data/presidents.json"), lireJSON("data/portraits.json")]);
+    if(d?.regimes){ PRESIDENTS = d; const el = document.getElementById("presidents-verifie"); if(el && d.verifieLe && presDate(d.verifieLe)) el.textContent = presDate(d.verifieLe); }
+    PRESIDENTS_PHOTOS = p?.portraits || {};
+  }
+  renderPresidents();
+}
+document.addEventListener("langue-changee", ()=>{ if(PRESIDENTS) renderPresidents(); });
 
 /* ---------- Dirigeants des partis (données réelles, vérifiées début septembre 2026) ---------- */
 
@@ -5298,6 +5539,7 @@ function renderDeputeFiche(d){
       </div>`;
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
+  document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", espaceBoutonDepute(d));
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
   afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
@@ -5551,6 +5793,14 @@ async function storyImage(src){
   img.src = src;
   try { await img.decode(); return img; } catch(e){ return null; }
 }
+// Portrait de la meilleure définition disponible : photos/<dossier>/hd/<fichier> s'il existe (voir scripts/fetch-portraits.js et
+// scripts/photos-hd.cjs), sinon la vignette du site. « hd » : chemin HD connu (champ photoHd des illustrations), facultatif.
+async function storyPortrait(src, hd){
+  if(!src) return null;
+  const candidat = hd || src.replace(/^(photos\/(?:deputes|senateurs|personnalites))\//, "$1/hd/");
+  if(candidat !== src){ const img = await storyImage(candidat); if(img) return img; }
+  return storyImage(src);
+}
 
 /* ----- Helpers de dessin réutilisables (ne pas renommer, ne pas changer les signatures) -----
    Charte (docs/identite.md) : fond papier uni (variante « Nuit » STORY_NUIT pour les EN DIRECT), filet tricolore en haut,
@@ -5651,9 +5901,10 @@ function storyCarte(ctx, x, y, w, h, fond = "#FFFFFF", rayon = 28){
 // Portrait carré recadré sur le haut (visage), sans cercle ni ombre ; liseré de la couleur du parti en bas
 function storyMedaillon(ctx, img, cx, cy, rayon, bordure = STORY.bleu){
   const x = cx - rayon, y = cy - rayon, c = 2 * rayon;
-  if(img){ storyPPhoto(ctx, img, x, y, c, c); }
+  let zone = { x, y, w:c, h:c };
+  if(img){ zone = storyPPhoto(ctx, img, x, y, c, c, { centre:true }); }
   else { ctx.fillStyle = storyAlpha(bordure, 0.2); ctx.fillRect(x, y, c, c); }
-  ctx.fillStyle = bordure; ctx.fillRect(x, y + c - Math.max(4, rayon * 0.07), c, Math.max(4, rayon * 0.07));
+  ctx.fillStyle = bordure; ctx.fillRect(zone.x, zone.y + zone.h - Math.max(4, rayon * 0.07), zone.w, Math.max(4, rayon * 0.07));
 }
 function storyInitiales(ctx, nom, cx, cy, rayon, couleur = STORY.bleu){
   const mots = String(nom).replace(/\(.*?\)/g, "").split(/[\s-]+/).filter(m=> /^\p{L}/u.test(m) && !/^(de|du|des|la|le|d['’])$/i.test(m));
@@ -5759,23 +6010,42 @@ const storyPLisible = c => c === "#E0B400" ? STORY.ambreTxt : c === "#8A8C94" ? 
 // Médaillon : photo (recadrée sur le haut), sinon initiales sur la couleur du parti
 // Portrait carré (recadré sur le haut), sinon initiales sur la couleur du parti ; sans cercle
 function storyPMedaillon(ctx, img, cx, cy, r, couleur, nom){
-  if(img) storyPPhoto(ctx, img, cx - r, cy - r, 2 * r, 2 * r);
+  let zone = { x:cx - r, y:cy - r, w:2 * r, h:2 * r };
+  if(img) zone = storyPPhoto(ctx, img, cx - r, cy - r, 2 * r, 2 * r, { centre:true });
   else {
     ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
     ctx.font = `700 ${Math.round(r * 0.8)}px "Newsreader"`; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.fillText(storyPInitiales(nom), cx, cy + r * 0.05); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   }
   const e = Math.max(4, r * 0.07);
-  ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy + r - e, 2 * r, e);
+  ctx.fillStyle = couleur; ctx.fillRect(zone.x, zone.y + zone.h - e, zone.w, e);
 }
-// Photo recadrée « cover » dans le rectangle, ancrée vers le haut pour garder le visage ; légère désaturation
-function storyPPhoto(ctx, img, x, y, w, h){
-  const k = Math.max(w / img.naturalWidth, h / img.naturalHeight), iw = img.naturalWidth * k, ih = img.naturalHeight * k;
+// Photo recadrée « cover » dans le rectangle, ancrée vers le haut pour garder le visage ; légère désaturation.
+// Netteté : jamais agrandie à plus de STORY_AGRANDISSEMENT_MAX fois sa taille naturelle (un portrait de 104 px ne devient pas
+// un flou de 450 px) : au-delà, la photo est reproduite plus petite, avec un cadre net, et seule la place utile est occupée.
+// Dessin au pixel entier, lissage de haute qualité, aucun flou. Renvoie le rectangle réellement occupé.
+const STORY_AGRANDISSEMENT_MAX = 1.4;
+function storyPPhoto(ctx, img, x, y, w, h, { centre = false } = {}){
+  let k = Math.max(w / img.naturalWidth, h / img.naturalHeight), reduite = false;
+  if(k > STORY_AGRANDISSEMENT_MAX){
+    const f = STORY_AGRANDISSEMENT_MAX / k;
+    const w2 = Math.round(w * f), h2 = Math.round(h * f);
+    if(centre){ x += Math.round((w - w2) / 2); y += Math.round((h - h2) / 2); }
+    w = w2; h = h2; k = STORY_AGRANDISSEMENT_MAX; reduite = true;
+  }
+  x = Math.round(x); y = Math.round(y);
+  const iw = Math.round(img.naturalWidth * k), ih = Math.round(img.naturalHeight * k);
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
   ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
   ctx.filter = "grayscale(0.2) contrast(1.03)";
-  ctx.drawImage(img, x - (iw - w) / 2, y - (ih - h) * 0.1, iw, ih);
+  ctx.drawImage(img, Math.round(x - (iw - w) / 2), Math.round(y - (ih - h) * 0.1), iw, ih);
   ctx.restore();
+  if(reduite){ // cadre net autour d'une photo reproduite plus petite
+    ctx.fillStyle = STORY.encre;
+    ctx.fillRect(x - 3, y - 3, w + 6, 3); ctx.fillRect(x - 3, y + h, w + 6, 3);
+    ctx.fillRect(x - 3, y, 3, h); ctx.fillRect(x + w, y, 3, h);
+  }
+  return { x, y, w, h };
 }
 
 function storyPLogo(ctx, img, x, y, taille){
@@ -5834,7 +6104,7 @@ STORY_PLUS.actualite = async (ctx, info)=>{
   const ill = s.illustration || {}, theme = THEMES_ACTU[ill.theme] || THEMES_ACTU.politique;
   const enDirect = (DIRECT?.evenements || []).some(e=> e.type !== "seance-an" && s.articles.some(a=> a.titre === e.titre));
   const pers = (ill.personnes || []).slice(0, 3);
-  const imgs = await Promise.all(pers.map(p=> p.photo ? storyImage(p.photo) : null));
+  const imgs = await Promise.all(pers.map(p=> p.photo ? storyPortrait(p.photo, p.photoHd) : null));
   const vus = pers.map((p, i)=>({ ...p, img:imgs[i] })).filter(p=>p.img);
   for(const p of vus) if(!p.credit && /personnalites/.test(p.photo || "")) p.credit = (await storyPCredits([p.nom]))[0] || "";
   const d = new Date(a0.date), fmt = o => d.toLocaleString("fr-FR", { timeZone:"Europe/Paris", ...o });
@@ -5889,8 +6159,8 @@ STORY_PLUS.actualite = async (ctx, info)=>{
 
     if(mode === 1){
       const p = vus[0], ph = Math.min(720, Math.max(phMin, bas - yP));
-      storyPPhoto(ctx, p.img, marge, yP, colW, ph);
-      const x0 = marge + colW + 40, w = L - marge - x0;
+      const zp = storyPPhoto(ctx, p.img, marge, yP, colW, ph);
+      const x0 = marge + zp.w + 40, w = L - marge - x0;
       let yy = storyTexte(ctx, p.nom, x0, yP - 4, { taille:50, poids:700, police:"Newsreader", largeur:w, max:3, interligne:1.08 });
       if(p.credit) storyTexte(ctx, `Photo : ${p.credit}`, x0, yy + 2, { taille:22, couleur:STORY.pale, largeur:w, max:3, interligne:1.2 });
       // bas de colonne, aligné sur le bas de la photo
@@ -5916,9 +6186,9 @@ STORY_PLUS.actualite = async (ctx, info)=>{
       const ph = Math.min(Math.round(colW * 1.45), 560, Math.max(phMin, bas - yP - capH));
       vus.forEach((p, i)=>{
         const x = marge + i * (colW + 16);
-        storyPPhoto(ctx, p.img, x, yP, colW, ph);
-        ctx.fillStyle = couleurPartiActu(p.parti); ctx.fillRect(x, yP + ph, colW, 6);
-        storyTexte(ctx, p.nom, x, yP + ph + 14, { taille:tailleNom, poids:700, police:"Newsreader", largeur:colW, max:2, interligne:1.05 });
+        const zp = storyPPhoto(ctx, p.img, x, yP, colW, ph);
+        ctx.fillStyle = couleurPartiActu(p.parti); ctx.fillRect(zp.x, zp.y + zp.h, zp.w, 6);
+        storyTexte(ctx, p.nom, x, zp.y + zp.h + 14, { taille:tailleNom, poids:700, police:"Newsreader", largeur:colW, max:2, interligne:1.05 });
       });
     }
 
@@ -5950,7 +6220,7 @@ STORY_PLUS.actualites = async (ctx)=>{
     ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
     const ill = s.illustration || {}, p0 = ill.personnes?.[0];
     const coul = p0 ? couleurPartiActu(p0.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique)[0]);
-    const img = p0?.photo ? await storyImage(p0.photo) : null;
+    const img = p0?.photo ? await storyPortrait(p0.photo, p0.photoHd) : null;
     const logo = !p0 && ill.partis?.[0] ? await storyImage(`icons/partis/${ill.partis[0]}.png`) : null;
     let vis = true;
     if(p0 && img) storyPMedaillon(ctx, img, marge + r, cy, r, coul, p0.nom);
@@ -6098,14 +6368,15 @@ STORY_PLUS.candidat = async (ctx, info)=>{
   const { L, marge } = STORY;
   const coul = COULEURS_PARTIS[c.code] || "#8A8C94", lisible = storyPLisible(coul);
   let y = storyCadre(ctx, "Présidentielle 2027 · candidat");
-  const photo = await storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`);
+  const photo = await storyPortrait(`photos/personnalites/${slugDep(c.nom)}.jpg`);
   let annonceDite = false;
   const age = ()=> c.age ? (ctx.font = `700 170px "Newsreader"`, ctx.fillStyle = lisible, true) : false;
   if(photo){
     // portrait rectangulaire à gauche, nom, parti et âge à droite
-    const pw = 400, ph = 540, x0 = marge + pw + 44, w = L - marge - x0;
-    storyPPhoto(ctx, photo, marge, y, pw, ph);
-    ctx.fillStyle = coul; ctx.fillRect(marge, y + ph, pw, 8);
+    const pw = 400, ph = 540;
+    const zp = storyPPhoto(ctx, photo, marge, y, pw, ph);
+    const x0 = marge + zp.w + 44, w = L - marge - x0;
+    ctx.fillStyle = coul; ctx.fillRect(zp.x, zp.y + zp.h, zp.w, 8);
     const yn = storyTexte(ctx, c.nom, x0, y - 8, { taille:78, poids:700, police:"Newsreader", largeur:w, max:4, interligne:1.02 });
     ctx.font = `700 28px "Public Sans"`;
     storyPastille(ctx, storyLignes(ctx, c.parti.toUpperCase(), w - 40, 1)[0], x0, yn + 30, lisible, "#fff", 28);
@@ -6373,37 +6644,41 @@ async function dessinerStory(type, info){
   }
 
   else if(type === "sondages"){
-    const inst = INSTITUTS.find(i=>i.id===selectedInstitut); if(!inst || periodeReserveSondages()) return null;
-    const liste = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1])).slice(0, 10);
+    // info : identifiant de l'enquête (« inst0 »…), sinon l'enquête choisie sur la page. Une seule enquête, premier tour.
+    const inst = INSTITUTS.find(i=>i.id === (info || selectedInstitut)); if(!inst || periodeReserveSondages()) return null;
+    const tous = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1]));
+    const liste = tous.slice(0, 10);
     if(!liste.length) return null;
-    const tete = liste[0];
-    y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:tete.couleur });
+    // Commanditaire : relevé sur la notice déposée à la Commission des sondages, quand il est connu
+    const veille = (await lireJSON("data/sondages-veille.json"))?.enquetes || [];
+    const notice = veille.find(e=> e.institut === inst.nom && e.terrain?.fin === inst.dateFin);
+    const commanditaire = notice?.media || "";
+    y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:STORY.bleu });
     y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 });
-    y = storyTexte(ctx, `${inst.nom}, enquête du ${inst.date} · ${inst.echantillon}`, marge, y, { taille:26, couleur:STORY.doux, max:2 }) + 14;
+    y = storyTexte(ctx, `${inst.nom}${commanditaire ? ` pour ${commanditaire}` : ""} · terrain : ${inst.date}`, marge, y, { taille:28, poids:600, couleur:STORY.doux, max:2 });
+    y = storyTexte(ctx, `${liste.length} candidats sur ${tous.length} testés, classés par milieu de fourchette`, marge, y, { taille:24, couleur:STORY.pale, max:1 }) + 10;
     const score = c => c.r[0] === c.r[1] ? `${fr1(c.r[0])} %` : `${fr1(c.r[0])}–${fr1(c.r[1])} %`;
-    const photos = await Promise.all(liste.map(c=> storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`)));
-    const hh = 290;
-    storyCarte(ctx, marge, y, largeur, hh);
-    ctx.fillStyle = tete.couleur; ctx.beginPath(); ctx.rect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
-    storyMedaillon(ctx, photos[0], marge + 138, y + hh / 2, 92, tete.couleur);
-    if(!photos[0]) storyInitiales(ctx, tete.nom, marge + 138, y + hh / 2, 92, tete.couleur);
-    ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(tete.couleur); ctx.fillText("EN TÊTE", marge + 268, y + 56); ctx.letterSpacing = "0px";
-    ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, tete.nom, largeur - 290, 1)[0], marge + 268, y + 108);
-    storyChiffreHeros(ctx, score(tete), marge + 268, y + 244, storyLisible(tete.couleur), 150);
-    y += hh + 24;
-    const reste = liste.slice(1), maxi = Math.max(...liste.map(c=>c.r[1]));
-    const pas = Math.min(78, (bas - y - 40) / reste.length);
-    storyCarte(ctx, marge, y, largeur, reste.length * pas + 24, "#fff", 24);
-    reste.forEach((cd, i)=>{
-      const yy = y + 12 + i * pas, r = Math.min(24, pas * 0.34), cx = marge + 26 + r, cy = yy + pas / 2;
-      if(photos[i + 1]) storyMedaillon(ctx, photos[i + 1], cx, cy, r, cd.couleur); else storyInitiales(ctx, cd.nom, cx, cy, r, cd.couleur);
-      const x = cx + r + 18;
-      ctx.font = `600 ${Math.min(28, pas * 0.4)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, cd.nom, 400, 1)[0], x, yy + pas * 0.46);
-      ctx.font = `700 ${Math.min(36, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(cd.couleur); ctx.textAlign = "right"; ctx.fillText(score(cd), L - marge - 26, yy + pas * 0.48); ctx.textAlign = "left";
-      storyBarre(ctx, x, yy + pas * 0.6, L - marge - 26 - x, 14, [[(cd.r[0] + cd.r[1]) / 2, cd.couleur]], maxi);
+    const photos = await Promise.all(liste.map(c=> storyPortrait(`photos/personnalites/${slugDep(c.nom)}.jpg`)));
+    const yLegal = 1368, pas = Math.min(80, (yLegal - 24 - y) / liste.length), maxi = Math.max(...liste.map(c=>c.r[1]));
+    storyCarte(ctx, marge, y, largeur, liste.length * pas + 24, "#fff", 24);
+    liste.forEach((cd, i)=>{
+      const yy = y + 12 + i * pas, r = Math.min(34, pas * 0.42), cx = marge + 26 + r, cy = yy + pas / 2;
+      if(photos[i]) storyMedaillon(ctx, photos[i], cx, cy, r, cd.couleur); else storyInitiales(ctx, cd.nom, cx, cy, r, cd.couleur);
+      const x = cx + r + 20;
+      ctx.font = `600 ${Math.min(30, pas * 0.4)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, cd.nom, 420, 1)[0], x, yy + pas * 0.44);
+      ctx.font = `700 ${Math.min(38, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(cd.couleur); ctx.textAlign = "right"; ctx.fillText(score(cd), L - marge - 26, yy + pas * 0.46); ctx.textAlign = "left";
+      storyBarre(ctx, x, yy + pas * 0.6, L - marge - 26 - x, 12, cd.r[0] === cd.r[1] ? [[cd.r[0], cd.couleur]] : [[cd.r[0], cd.couleur], [cd.r[1] - cd.r[0], storyAlpha(cd.couleur, 0.35)]], maxi); // plein : bas de la fourchette ; clair : jusqu'au haut
     });
-    const erreur = inst.n ? ` Marge d'erreur : jusqu'à ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} pts.` : "";
-    storyPied(ctx, `${inst.nom}, ${inst.date}, ${inst.echantillon}.${erreur} Notice : commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
+    // Mentions obligatoires (loi n° 77-808 du 19 juillet 1977) : institut, commanditaire, dates, échantillon, marge d'erreur, notice, source
+    const erreur = inst.n ? `±${(1.96 * Math.sqrt(0.25 / inst.n) * 100).toFixed(1).replace(".", ",")} pts` : "";
+    const mentions = `Sondage ${inst.nom}${commanditaire ? ` pour ${commanditaire}` : " (commanditaire non relevé)"}, terrain : ${inst.date}, auprès de ${inst.echantillon}. `
+      + (erreur ? `Marge d'erreur théorique : ${erreur} à 95 %. ` : "")
+      + `Chiffres tels que publiés${inst.nbHyp > 1 ? ` : fourchette selon les ${inst.nbHyp} hypothèses de candidatures testées` : " (hypothèse unique testée)"}. `
+      + `Une notice détaillée est déposée à la Commission des sondages (commission-des-sondages.fr), qui précise la méthode. `
+      + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`;
+    ctx.fillStyle = STORY.encre; ctx.fillRect(marge, yLegal, largeur, 5);
+    storyTexte(ctx, mentions, marge, yLegal + 16, { taille:23, couleur:STORY.doux, max:9, interligne:1.2 });
+    ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(SITE_COURT, marge, 1700);
     nom = `sondage-${slugDep(inst.nom)}`;
   }
 
@@ -6411,7 +6686,7 @@ async function dessinerStory(type, info){
     const d = DEPUTES?.find(x=>x.id===deputeOuvert); if(!d) return null;
     const p = partiDepute(d), s = d.stats, exprimes = s.pour + s.contre + s.abst;
     y = storyCadre(ctx, "Votre député", { couleur:p.couleur });
-    const photo = await storyImage(`photos/deputes/${d.id}.jpg`);
+    const photo = await storyPortrait(`photos/deputes/${d.id}.jpg`);
     const possibles = [...d.votes].filter(c=>c !== ".").length, presents = [...d.votes].filter(c=>"pca".includes(c)).length;
     const derniers = DEPUTES_CLES.map((numero, i)=>({ code:d.votes[i], loi:LOIS.find(l=>l.numero===numero) })).filter(x=>x.code !== "." && x.loi).slice(0, 8);
     storyFicheElu(ctx, y, {
@@ -6474,7 +6749,7 @@ async function dessinerStory(type, info){
     const s = SENATEURS?.find(x=>x.id===senateurOuvert); if(!s) return null;
     const g = groupeSenateur(s), { lignes, presents, ecarts } = statsSenateur(s);
     y = storyCadre(ctx, s.f ? "Votre sénatrice" : "Votre sénateur", { couleur:g.couleur });
-    const photo = await storyImage(`photos/senateurs/${s.id}.jpg`);
+    const photo = await storyPortrait(`photos/senateurs/${s.id}.jpg`);
     storyFicheElu(ctx, y, {
       photo, couleur:g.couleur, nom:s.nom, soustitre:g.nom,
       ligne:`${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "des Français de l'étranger" : `de ${s.dep}`}`,
@@ -6528,7 +6803,7 @@ async function dessinerStory(type, info){
     const p1 = partiDepute(top[0][0]);
     y = storyCadre(ctx, "Classement des députés", { couleur:p1.couleur });
     y = storyTexte(ctx, k.titre, marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 10;
-    const photos = await Promise.all(top.map(([d]) => storyImage(`photos/deputes/${d.id}.jpg`)));
+    const photos = await Promise.all(top.map(([d]) => storyPortrait(`photos/deputes/${d.id}.jpg`)));
     const hh = 290;
     storyCarte(ctx, marge, y, largeur, hh);
     ctx.fillStyle = p1.couleur; ctx.beginPath(); ctx.rect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
@@ -6917,6 +7192,7 @@ function ouvrirDepuisHash(){
     ouvrirDepute(m[1]);
     return true;
   }
+  if(h === "espace"){ ESPACE_PRET.then(()=>{ if(ESPACE_ACTIF) activateTab("espace"); }); return true; } // seulement si les comptes sont actifs
   // Retour arrière depuis une fiche (#deputes, #senat) : la liste réapparaît
   if(h === "deputes" && deputeOuvert) fermerDepute();
   if(h === "senat" && senateurOuvert) fermerSenateur();
@@ -6932,7 +7208,7 @@ const HUBS = [
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, institut par institut"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
   { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"]] },
-  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"]] }
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"], ["presidents","Les présidents","Tous les présidents de la République, de 1848 à aujourd'hui"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
@@ -7054,8 +7330,10 @@ function activateTab(tabId){
     renderGouvernement();
     if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
   }
+  if(tabId === "presidents") chargerPresidents();
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
+  if(tabId === "espace") renderEspace();
   if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "methode") renderMethode();
   if(tabId === "budget") renderBudget();
@@ -7071,6 +7349,7 @@ function activateTab(tabId){
   }
   majSousNav(tabId);
   majMenusHaut(tabId);
+  majBoutonRubrique(tabId);
   menusHaut.forEach(m => m.fermer());
   const nomPage = PAGES_NOMS[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
@@ -7152,6 +7431,416 @@ document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").f
   const t = new Date().toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
   document.getElementById("edition-date").textContent = `Édition du ${t}`;
 })();
+
+/* ---------- Mon espace : préférences sur l'appareil, et compte facultatif (Supabase) ----------
+   Tout est caché tant que data/compte-config.json est absent ou invalide, ou que la CSP d'index.html n'autorise pas
+   l'adresse du projet : le site se comporte alors exactement comme avant. Le client (compte-client.js) parle
+   directement à l'API de Supabase avec fetch : aucun script tiers. Les textes viennent toujours de t() et sont
+   écrits avec textContent ; aucune donnée de l'utilisateur ne passe par innerHTML. */
+// Le retour d'une connexion arrive dans le fragment d'URL (#access_token=…) : on le lit puis on nettoie l'adresse tout de suite
+const RETOUR_AUTH = (()=>{
+  const h = location.hash;
+  if(!/^#(access_token|error|error_code|error_description)=/.test(h)) return null;
+  try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){}
+  return h;
+})();
+
+let COMPTE = null, COMPTE_M = null, ESPACE_ACTIF = false, ESPACE = null, ESPACE_USER = null;
+let espaceEtat = "", espaceMessage = "", espaceFormulaireOuvert = false, espaceMinuterie = 0, espaceResolu = null;
+const CLE_ESPACE = "espace-local";
+const ESPACE_PRET = new Promise(ok => { espaceResolu = ok; });
+const phraseVieQuiz = () => ESPACE_ACTIF ? t("Votre résultat est gardé dans Mon espace (sur cet appareil, ou dans votre compte si vous en avez un) ; vous pouvez l'effacer à tout moment.") : t("Vos réponses ne sont enregistrées nulle part.");
+/* i18n-ignorer : noms propres, classes CSS et messages de console */
+const FOURNISSEURS_NOMS = { google:"Google", azure:"Microsoft", apple:"Apple", github:"GitHub" };
+const CLS_BOUTON2 = "story-bouton secondaire", LOCALE_ISO = "sv-SE";
+const MSG_CSP = "Comptes désactivés : la CSP d'index.html n'autorise pas l'adresse du projet (node scripts/appliquer-compte.js).", MSG_INDISPO = "Comptes indisponibles";
+/* i18n-fin-ignorer */
+
+function el(tag, o, ...enfants){
+  const e = document.createElement(tag);
+  o = o || {};
+  if(o.cls) e.className = o.cls;
+  if(o.id) e.id = o.id;
+  if(o.text !== undefined) e.textContent = o.text;
+  for(const [k, v] of Object.entries(o.attrs || {})) e.setAttribute(k, v);
+  for(const c of enfants.flat()) if(c) e.append(c);
+  return e;
+}
+function espaceBouton(libelle, cls, action){
+  const b = el("button", { cls, text:libelle, attrs:{ type:"button" } });
+  b.addEventListener("click", action);
+  return b;
+}
+const aujourdhuiLocal = () => new Date().toLocaleDateString(LOCALE_ISO);
+
+function espaceErreur(e){
+  const c = e && e.code;
+  if(c === "reseau") return t("Connexion impossible pour le moment. Vérifiez votre réseau et réessayez.");
+  if(c === "limite") return t("Trop de demandes. Patientez un peu avant de réessayer.");
+  if(c === "session") return t("Votre session a expiré. Reconnectez-vous.");
+  if(c === "email") return t("Cette adresse e-mail ne semble pas valide.");
+  return t("Une erreur est survenue. Réessayez plus tard.");
+}
+
+/* --- Données : copie de travail, gardée sur l'appareil et, si connecté, synchronisée avec le compte --- */
+function espaceLireLocal(){
+  try{ return COMPTE_M.normaliser(JSON.parse(localStorage.getItem(CLE_ESPACE))); }catch(e){ return COMPTE_M.donneesVides(); }
+}
+function espaceEcrireLocal(){
+  try{
+    if(COMPTE_M.sontVides(ESPACE)) localStorage.removeItem(CLE_ESPACE);
+    else localStorage.setItem(CLE_ESPACE, JSON.stringify(ESPACE));
+  }catch(e){}
+}
+function espaceChange(){
+  ESPACE = COMPTE_M.normaliser(ESPACE);
+  espaceEcrireLocal();
+  majBoutonsEspace();
+  if(document.body.dataset.page === "espace") renderEspace();
+  if(ESPACE_USER){
+    clearTimeout(espaceMinuterie);
+    espaceMinuterie = setTimeout(espacePousser, 700);
+  }
+}
+async function espacePousser(){
+  if(!ESPACE_USER) return;
+  espaceEtat = "cours"; majStatutEspace();
+  try{ await COMPTE.ecrireProfil(ESPACE); espaceEtat = ""; }
+  catch(e){ espaceEtat = "erreur"; }
+  majStatutEspace();
+}
+function majStatutEspace(){
+  const n = document.getElementById("espace-statut");
+  if(!n) return;
+  n.textContent = espaceEtat === "cours" ? t("Synchronisation en cours…")
+    : espaceEtat === "erreur" ? t("Synchronisation impossible pour le moment : vos préférences restent sur cet appareil.")
+    : t("Vos préférences sont synchronisées avec votre compte.");
+}
+
+const espaceSuit = (type, cle) => type === "rubrique" ? ESPACE.favoris.rubriques.includes(cle)
+  : type === "candidat" ? ESPACE.favoris.candidats.some(c => c.nom === cle)
+  : ESPACE.favoris.sujets.some(s => s.url === cle);
+
+function espaceBasculerFavori(type, cle, titre){
+  const f = ESPACE.favoris;
+  if(type === "rubrique") f.rubriques = espaceSuit(type, cle) ? f.rubriques.filter(x => x !== cle) : [...f.rubriques, cle];
+  else if(type === "candidat") f.candidats = espaceSuit(type, cle) ? f.candidats.filter(c => c.nom !== cle) : [...f.candidats, { nom:cle }];
+  else f.sujets = espaceSuit(type, cle) ? f.sujets.filter(s => s.url !== cle) : [{ url:cle, titre }, ...f.sujets];
+  espaceChange();
+}
+function espaceSuivreDepute(id, nom){
+  ESPACE.suivi.depute = ESPACE.suivi.depute && ESPACE.suivi.depute.id === id ? null : { id, nom };
+  espaceChange();
+}
+function espaceNoterQuiz(scores){
+  const date = aujourdhuiLocal();
+  const top = scores.slice(0, 5).map(s => ({ nom:s.nom, pct:s.pct }));
+  const cle = q => q.date + JSON.stringify(q.top);
+  if(!ESPACE.quiz.some(q => cle(q) === cle({ date, top }))) ESPACE.quiz = [{ date, top }, ...ESPACE.quiz];
+  espaceChange();
+}
+
+/* Boutons posés dans les pages (fiche d'un député, candidats, sujets, rubriques) : libellé selon l'état */
+function majBoutonsEspace(){
+  if(!ESPACE_ACTIF) return;
+  document.querySelectorAll("[data-espace-depute]").forEach(b => {
+    b.textContent = ESPACE.suivi.depute && ESPACE.suivi.depute.id === b.dataset.espaceDepute ? t("Ne plus suivre dans Mon espace") : t("Suivre dans Mon espace");
+  });
+  document.querySelectorAll("[data-espace-fav]").forEach(b => {
+    const type = b.dataset.espaceFav, cle = type === "rubrique" ? b.dataset.id : type === "candidat" ? b.dataset.nom : b.dataset.url;
+    const oui = espaceSuit(type, cle);
+    b.textContent = oui ? t("Retirer des favoris") : t("Ajouter aux favoris");
+    b.setAttribute("aria-pressed", String(oui));
+  });
+}
+document.addEventListener("click", e => {
+  if(!ESPACE_ACTIF) return;
+  const d = e.target.closest && e.target.closest("[data-espace-depute]");
+  if(d){ e.preventDefault(); espaceSuivreDepute(d.dataset.espaceDepute, d.dataset.nom || ""); return; }
+  const f = e.target.closest && e.target.closest("[data-espace-fav]");
+  if(!f) return;
+  e.preventDefault();
+  const type = f.dataset.espaceFav;
+  espaceBasculerFavori(type, type === "rubrique" ? f.dataset.id : type === "candidat" ? f.dataset.nom : f.dataset.url, f.dataset.titre || "");
+});
+/* Boutons des pages, en HTML (valeurs passées par esc() ; vide si les comptes ne sont pas actifs) */
+function espaceBoutonDepute(d){
+  if(!ESPACE_ACTIF) return "";
+  const oui = ESPACE.suivi.depute && ESPACE.suivi.depute.id === d.id;
+  return `<button type="button" class="lien-bouton" data-espace-depute="${esc(d.id)}" data-nom="${esc(d.nom)}">${esc(oui ? t("Ne plus suivre dans Mon espace") : t("Suivre dans Mon espace"))}</button>`;
+}
+function espaceBoutonFav(type, cle, titre){
+  if(!ESPACE_ACTIF) return "";
+  const oui = espaceSuit(type, cle);
+  const attr = type === "candidat" ? `data-nom="${esc(cle)}"` : `data-url="${esc(cle)}" data-titre="${esc(titre || "")}"`;
+  return `<button type="button" class="lien-bouton espace-fav-bouton" data-espace-fav="${type}" ${attr} aria-pressed="${oui}">${esc(oui ? t("Retirer des favoris") : t("Ajouter aux favoris"))}</button>`;
+}
+function majBoutonRubrique(tabId){
+  if(!ESPACE_ACTIF || tabId === "espace" || tabId === "accueil") return;
+  const tete = document.querySelector("#view-" + tabId + " .rubrique-tete");
+  if(!tete || tete.querySelector("[data-espace-fav]")) return;
+  const b = el("button", { cls:"lien-bouton espace-fav-bouton", attrs:{ type:"button", "data-espace-fav":"rubrique", "data-id":tabId } });
+  tete.append(b);
+  majBoutonsEspace();
+}
+
+/* --- Confirmation en ligne (fusion, suppression) --- */
+function espaceConfirmer(question, oui, non){
+  return new Promise(ok => {
+    const zone = document.getElementById("espace-confirm");
+    const fin = v => { zone.hidden = true; zone.replaceChildren(); ok(v); };
+    zone.replaceChildren(el("p", { text:question }),
+      el("div", { cls:"espace-actions" }, espaceBouton(oui, "story-bouton", () => fin(true)), espaceBouton(non, CLS_BOUTON2, () => fin(false))));
+    zone.hidden = false;
+    zone.setAttribute("role", "alertdialog");
+    zone.setAttribute("aria-label", question);
+    zone.querySelector("button.secondaire").focus();
+    zone.scrollIntoView({ block:"nearest" });
+  });
+}
+
+/* --- Connexion, déconnexion, export, suppression --- */
+async function espaceApresConnexion(user, reprise){
+  ESPACE_USER = user;
+  espaceFormulaireOuvert = false;
+  let distant;
+  try{ const p = await COMPTE.lireProfil(); distant = p ? p.donnees : null; }
+  catch(e){ espaceMessage = espaceErreur(e); espaceEtat = "erreur"; return; }
+  const local = ESPACE;
+  if(reprise){ if(distant) ESPACE = distant; espaceEcrireLocal(); majBoutonsEspace(); if(!distant && !COMPTE_M.sontVides(local)) await espacePousser(); return; } // session retrouvée : le compte fait foi, sans question
+  if(distant && JSON.stringify(distant) === JSON.stringify(local)) { renderEspace(); return; }
+  if(!COMPTE_M.sontVides(local) && (!distant || COMPTE_M.sontVides(distant))){
+    const oui = await espaceConfirmer(t("Des préférences existent sur cet appareil. Les ajouter à votre compte ?"), t("Oui, les ajouter"), t("Non, les ignorer"));
+    ESPACE = oui ? local : COMPTE_M.donneesVides();
+  } else if(!COMPTE_M.sontVides(local) && distant){
+    const oui = await espaceConfirmer(t("Des préférences existent sur cet appareil et dans votre compte. Les fusionner ?"), t("Oui, fusionner"), t("Non, garder celles du compte"));
+    ESPACE = oui ? COMPTE_M.fusionner(distant, local) : distant;
+  } else if(distant){
+    ESPACE = distant;
+  }
+  espaceChange();
+  if(!distant || JSON.stringify(ESPACE) !== JSON.stringify(distant)) await espacePousser();
+}
+async function espaceDeconnecter(){
+  await COMPTE.deconnecter();
+  ESPACE_USER = null; ESPACE = COMPTE_M.donneesVides(); espaceEtat = "";
+  espaceEcrireLocal();
+  espaceMessage = t("Vous êtes déconnecté. Les préférences de cet appareil ont été effacées ; elles restent dans votre compte.");
+  majBoutonsEspace(); renderEspace();
+}
+async function espaceExporter(){
+  try{
+    const donnees = await COMPTE.exporter();
+    const lienDl = el("a", { attrs:{ href:URL.createObjectURL(new Blob([JSON.stringify(donnees, null, 2)], { type:"application/json" })), download:"hemicycle-france-mes-donnees.json" } });
+    document.body.append(lienDl); lienDl.click(); lienDl.remove();
+    setTimeout(() => URL.revokeObjectURL(lienDl.href), 4000);
+    espaceMessage = t("Vos données ont été téléchargées.");
+  }catch(e){ espaceMessage = espaceErreur(e); }
+  renderEspace();
+}
+async function espaceSupprimer(){
+  const oui = await espaceConfirmer(t("Supprimer définitivement votre compte, votre adresse e-mail et vos préférences ? Cette action est irréversible."), t("Supprimer définitivement"), t("Annuler"));
+  if(!oui) return;
+  try{
+    await COMPTE.supprimer();
+    ESPACE_USER = null; ESPACE = COMPTE_M.donneesVides(); espaceEtat = "";
+    espaceEcrireLocal();
+    espaceMessage = t("Votre compte et vos données ont été supprimés.");
+    majBoutonsEspace();
+  }catch(e){ espaceMessage = espaceErreur(e); }
+  renderEspace();
+}
+
+function espaceFormulaire(){
+  const msg = el("p", { cls:"espace-msg", id:"espace-form-msg", attrs:{ "aria-live":"polite" } });
+  const age = el("input", { attrs:{ type:"checkbox", id:"espace-age" } });
+  const email = el("input", { attrs:{ type:"email", id:"espace-email", autocomplete:"email", maxlength:"254", inputmode:"email", placeholder:t("vous@exemple.fr") } });
+  const form = el("form", { cls:"espace-form", attrs:{ novalidate:"" } });
+  const conditionOk = () => { if(age.checked) return true; msg.textContent = t("Cochez la case « J'ai 15 ans ou plus » pour continuer."); age.focus(); return false; };
+  const fournisseurs = COMPTE.config.fournisseurs.map(p => {
+    const b = el("button", { cls:"espace-fournisseur", attrs:{ type:"button", "data-fournisseur":p } },
+      el("img", { attrs:{ src:`icons/fournisseur-${p}.svg`, alt:"", width:"18", height:"18" } }),
+      el("span", { text:t("Continuer avec {1}", { 1:FOURNISSEURS_NOMS[p] }) }));
+    b.addEventListener("click", () => { if(conditionOk()) location.assign(COMPTE.urlFournisseur(p)); });
+    return b;
+  });
+  const envoyer = el("button", { cls:"story-bouton", text:t("Recevoir un lien de connexion"), attrs:{ type:"submit" } });
+  form.append(...fournisseurs, fournisseurs.length ? el("div", { cls:"espace-ou", text:t("ou par e-mail") }) : null,
+    el("label", { text:t("Votre adresse e-mail"), attrs:{ for:"espace-email" } }), email,
+    el("label", { cls:"espace-case" }, age, el("span", { text:t("J'ai 15 ans ou plus") })),
+    envoyer, msg,
+    el("p", { cls:"espace-aide" }, document.createTextNode(t("Pas de mot de passe : un lien vous est envoyé par e-mail. Votre adresse ne sert qu'à vous connecter. ")), (() => { const a = el("a", { text:t("Données personnelles"), attrs:{ href:"#mentions" } }); a.addEventListener("click", ev => { ev.preventDefault(); activateTab("mentions"); }); return a; })()));
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    if(!conditionOk()) return;
+    if(!COMPTE_M.emailValide(email.value)){ msg.textContent = espaceErreur({ code:"email" }); email.focus(); return; }
+    const attente = COMPTE.attenteEnvoi();
+    if(attente > 0){ msg.textContent = t("Patientez {1} secondes avant de demander un nouveau lien.", { 1:attente }); return; }
+    envoyer.disabled = true;
+    try{
+      await COMPTE.envoyerLien(email.value);
+      msg.textContent = t("Un lien de connexion vient d'être envoyé. Ouvrez-le sur cet appareil (pensez à regarder dans les courriers indésirables).");
+    }catch(e){ msg.textContent = espaceErreur(e); }
+    envoyer.disabled = false;
+  });
+  return form;
+}
+
+/* --- Page « Mon espace » --- */
+function renderEspace(){
+  const racine = document.getElementById("espace-contenu");
+  if(!racine || !ESPACE_ACTIF) return;
+  const connecte = !!ESPACE_USER;
+  const blocs = [];
+
+  // Compte
+  const compte = el("section", { cls:"espace-bloc" });
+  if(connecte){
+    compte.append(el("h3", { text:t("Votre compte") }), el("p", { cls:"espace-email", text:ESPACE_USER.email || "" }),
+      el("p", { id:"espace-statut", cls:"espace-statut", attrs:{ "aria-live":"polite" } }),
+      el("div", { cls:"espace-actions" },
+        espaceBouton(t("Télécharger mes données"), CLS_BOUTON2, espaceExporter),
+        espaceBouton(t("Se déconnecter"), CLS_BOUTON2, espaceDeconnecter),
+        espaceBouton(t("Supprimer mon compte et mes données"), CLS_BOUTON2, espaceSupprimer)));
+  } else {
+    compte.append(el("h3", { text:t("Sur cet appareil") }),
+      el("p", { text:t("Vos préférences sont gardées sur cet appareil, dans ce navigateur. Un compte (facultatif) permet de les retrouver partout.") }),
+      espaceFormulaireOuvert ? espaceFormulaire()
+        : el("div", { cls:"espace-actions" }, espaceBouton(t("Créer un compte pour les retrouver partout"), "story-bouton", () => { espaceFormulaireOuvert = true; renderEspace(); document.getElementById("espace-email")?.focus(); })));
+  }
+  if(espaceMessage) compte.append(el("p", { cls:"espace-msg", text:espaceMessage, attrs:{ role:"status" } }));
+  blocs.push(compte);
+
+  // Député et groupe suivis
+  const suivi = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Député ou groupe suivi") }));
+  const dep = ESPACE.suivi.depute;
+  if(dep){
+    const a = el("a", { text:dep.nom, attrs:{ href:"#depute-" + dep.id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); location.hash = "depute-" + dep.id; });
+    suivi.append(el("ul", { cls:"espace-liste" }, el("li", {}, el("b", { text:t("Député : ") }), a,
+      espaceBouton(t("Ne plus suivre"), "lien-bouton", () => espaceSuivreDepute(dep.id, dep.nom)))));
+  } else suivi.append(el("p", { cls:"espace-vide", text:t("Aucun député suivi. Ouvrez la fiche d'un député et choisissez « Suivre dans Mon espace ».") }));
+  const choix = el("select", { id:"espace-groupe", attrs:{ "aria-label":t("Groupe suivi") } }, el("option", { text:t("Aucun groupe"), attrs:{ value:"" } }),
+    ...PARTIES.map(p => el("option", { text:p.nom, attrs:{ value:p.id } })));
+  choix.value = ESPACE.suivi.groupe ? ESPACE.suivi.groupe.id : "";
+  choix.addEventListener("change", () => {
+    const p = PARTIES.find(x => x.id === choix.value);
+    ESPACE.suivi.groupe = p ? { id:p.id, nom:p.nom } : null;
+    espaceChange();
+  });
+  suivi.append(el("p", {}, el("label", { text:t("Groupe suivi : "), attrs:{ for:"espace-groupe" } }), choix));
+  if(ESPACE.suivi.groupe){
+    const a = el("a", { text:t("Voir l'historique de ce groupe"), attrs:{ href:"#histo-" + ESPACE.suivi.groupe.id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); location.hash = "histo-" + ESPACE.suivi.groupe.id; });
+    suivi.append(el("p", {}, a));
+  }
+  blocs.push(suivi);
+
+  // Historique du quiz
+  const quiz = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Historique du quiz") }));
+  if(ESPACE.quiz.length){
+    quiz.append(el("ul", { cls:"espace-liste" }, ESPACE.quiz.map(q => el("li", {},
+      el("b", { text:new Date(q.date + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }) }),
+      el("span", { text:q.top.slice(0, 3).map(x => `${x.nom} ${x.pct} %`).join(" · ") })))),
+      espaceBouton(t("Effacer l'historique"), "lien-bouton", () => { ESPACE.quiz = []; espaceChange(); }));
+  } else quiz.append(el("p", { cls:"espace-vide", text:t("Aucun résultat enregistré. Faites le quiz : votre résultat apparaîtra ici.") }));
+  blocs.push(quiz);
+
+  // Favoris
+  const fav = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Favoris") }));
+  const f = ESPACE.favoris;
+  const ligne = (contenu, retirer) => el("li", {}, contenu, espaceBouton(t("Retirer"), "lien-bouton", retirer));
+  fav.append(el("h4", { text:t("Rubriques") }));
+  fav.append(f.rubriques.length ? el("ul", { cls:"espace-liste" }, f.rubriques.filter(id => PAGES_NOMS[id]).map(id => {
+    const a = el("a", { text:PAGES_NOMS[id], attrs:{ href:"#" + id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); activateTab(id); });
+    return ligne(a, () => espaceBasculerFavori("rubrique", id));
+  })) : el("p", { cls:"espace-vide", text:t("Aucune rubrique en favori. Utilisez « Ajouter aux favoris » en haut d'une rubrique.") }));
+  fav.append(el("h4", { text:t("Candidats") }));
+  fav.append(f.candidats.length ? el("ul", { cls:"espace-liste" }, f.candidats.map(c => {
+    const a = el("a", { text:c.nom, attrs:{ href:"#candidats" } });
+    a.addEventListener("click", ev => { ev.preventDefault(); activateTab("candidats"); });
+    return ligne(a, () => espaceBasculerFavori("candidat", c.nom));
+  })) : el("p", { cls:"espace-vide", text:t("Aucun candidat en favori.") }));
+  fav.append(el("h4", { text:t("Sujets d'actualité") }));
+  fav.append(f.sujets.length ? el("ul", { cls:"espace-liste" }, f.sujets.map(s =>
+    ligne(el("a", { text:s.titre, attrs:{ href:s.url, target:"_blank", rel:"noopener" } }), () => espaceBasculerFavori("sujet", s.url, s.titre)))) : el("p", { cls:"espace-vide", text:t("Aucun sujet en favori.") }));
+  blocs.push(fav);
+
+  racine.replaceChildren(...blocs);
+  if(connecte) majStatutEspace();
+}
+
+/* --- Démarrage : tout reste caché sans configuration valide --- */
+function espaceMontrer(){
+  document.querySelectorAll("#espace-haut, #espace-plus, #espace-pied, #mentions-compte, #mention-avec-compte").forEach(n => { n.hidden = false; });
+  document.querySelectorAll("#mention-sans-compte").forEach(n => { n.hidden = true; });
+  const quiz = HUBS.find(h => h.id === "quiz");
+  const page = ["espace", "Mon espace", "Vos préférences, sur cet appareil ou dans votre compte"];
+  quiz.pages.push(page);
+  PAGES_NOMS.espace = page[1];
+  const liste = document.getElementById("menu-quiz");
+  if(liste){
+    const a = el("a", { attrs:{ role:"menuitem", href:"#espace", "data-menu-page":"espace" } }, el("b", { text:t(page[1]) }), el("span", { text:t(page[2]) }));
+    liste.append(a);
+  }
+  document.getElementById("espace-haut").addEventListener("click", () => activateTab("espace"));
+  document.getElementById("espace-plus").addEventListener("click", () => activateTab("espace"));
+  document.getElementById("quiz-vie-privee").textContent = phraseVieQuiz();
+  if(typeof renderCandidats === "function" && CANDIDATURES.length) renderCandidats();
+  if(typeof renderAccueilActualites === "function" && ACTUALITES) renderAccueilActualites();
+  if(document.getElementById("view-actualites").classList.contains("active")) renderActualites();
+  majBoutonRubrique(document.body.dataset.page);
+}
+
+async function initEspace(){
+  try{
+    const rep = await fetch("data/compte-config.json", { cache:"no-cache" });
+    if(!rep.ok) return;
+    const brut = await rep.text();
+    if(!brut.trim()) return;
+    const json = JSON.parse(brut);
+    COMPTE_M = await import("./compte-client.js");
+    const config = COMPTE_M.configValide(json);
+    if(!config) return;
+    // La CSP de la page doit déjà autoriser l'adresse du projet (scripts/appliquer-compte.js) : sinon on reste caché
+    const csp = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content || "";
+    const hotes = (csp.match(/connect-src ([^;]*)/) || [])[1] || "";
+    if(!hotes.split(/\s+/).includes(config.url)){ console.warn(MSG_CSP); return; }
+    let stockage = null;
+    try{ stockage = window.localStorage; }catch(e){}
+    COMPTE = COMPTE_M.creerClient({ config:json, fetch:(...a) => fetch(...a), stockage, adresseSite:location.origin + location.pathname });
+    ESPACE = espaceLireLocal();
+    ESPACE_ACTIF = true;
+    espaceMontrer();
+    const retour = RETOUR_AUTH ? COMPTE_M.lireRetour(RETOUR_AUTH) : null;
+    if(retour && retour.erreur){
+      espaceMessage = t("La connexion a échoué ou a été annulée. Vous pouvez réessayer.");
+      activateTab("espace");
+    } else if(retour){
+      activateTab("espace");
+      try{ await espaceApresConnexion(await COMPTE.terminerConnexion(retour)); }
+      catch(e){ espaceMessage = espaceErreur(e); }
+      renderEspace();
+    } else if(COMPTE.estConnecte()){
+      const u = await COMPTE.reprendre();
+      if(u) await espaceApresConnexion(u, true);
+    }
+    majBoutonsEspace();
+    if(document.body.dataset.page === "espace") renderEspace();
+  }catch(e){
+    console.warn(MSG_INDISPO, e);
+  }finally{
+    espaceResolu();
+  }
+}
+document.addEventListener("langue-changee", () => {
+  if(!ESPACE_ACTIF) return;
+  if(document.body.dataset.page === "espace") renderEspace();
+  majBoutonsEspace();
+  const q = document.getElementById("quiz-vie-privee");
+  if(q) q.textContent = phraseVieQuiz();
+});
 
 /* ---------- Init ---------- */
 
@@ -7345,6 +8034,7 @@ async function initSite(){
   if(MODE_CARTE){ document.body.classList.add("mode-carte"); document.body.dataset.cartePrete = "1"; return; }
   afficherNouveautes();
   ouvrirDepuisHash();
+  initEspace();
 }
 
 /* ---------- Langues : le français reste dans la page (source de vérité) ----------
