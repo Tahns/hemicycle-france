@@ -181,6 +181,30 @@
   }
   .theme-toggle:hover{border-color:var(--text-soft); color:var(--text);}
   .masthead-top .droite{display:flex; align-items:center; gap:14px;}
+
+  /* ---------- Langues : menu déroulant (bouton + liste), drapeaux dans icons/drapeaux/ ---------- */
+  .langue{position:relative; display:inline-block;}
+  .langue-mobile{display:none;}
+  .langue-bouton{display:inline-flex; align-items:center; gap:7px;}
+  .langue-bouton::after{content:""; width:5px; height:5px; margin-top:-3px; border:solid currentColor; border-width:0 1.5px 1.5px 0; transform:rotate(45deg);}
+  .langue-ico{display:inline-flex; flex:0 0 auto; width:22px; height:15px;}
+  .langue-ico img{display:block; width:22px; height:15px; object-fit:cover; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.22);}
+  .langue-pastille{display:inline-flex; align-items:center; justify-content:center; width:22px; height:15px; border-radius:8px; background:#1B3A8C; color:#fff; font-size:10px; font-weight:600; line-height:1;}
+  .langue-liste{position:absolute; z-index:60; top:calc(100% + 6px); inset-inline-end:0; min-width:196px; margin:0; padding:4px; list-style:none; background:var(--bg-elevated); border:1px solid var(--border); border-radius:4px; box-shadow:0 10px 28px rgba(20,18,14,.18); text-align:start;}
+  .langue-liste[hidden]{display:none;}
+  .langue-liste:focus{outline:none;}
+  .langue-liste li{display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:3px; cursor:pointer; font-size:14px; color:var(--text);}
+  .langue-liste li:hover{background:var(--accent-dim);}
+  .langue-liste li.actif{background:var(--accent-dim); outline:2px solid var(--accent); outline-offset:-2px;}
+  .langue-liste li[aria-selected="true"]{font-weight:600;}
+  .langue-liste li[aria-selected="true"]::after{content:"✓"; margin-inline-start:auto; color:var(--accent);}
+  .langue-bouton:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .note-officiel{margin:10px 0 0; font-size:12.5px; color:var(--text-faint);}
+  .fait-foi{margin:10px 0 0; padding:8px 12px; font-size:13.5px; border-inline-start:3px solid var(--accent); background:var(--accent-dim);}
+  .fait-foi:not([hidden])::after{content:" (« " attr(data-fr) " »)"; color:var(--text-faint);}
+  /* Arabe : lecture de droite à gauche ; les dessins (hémicycle, courbes) gardent leur sens */
+  html[dir="rtl"] svg, html[dir="rtl"] canvas{direction:ltr;}
+  html[dir="rtl"] .liseré{direction:ltr;}
   .masthead-titre{padding:22px 0 18px; border-bottom:3px double var(--ink);}
   h1{
     margin:0; font-family:var(--font-display);
@@ -230,6 +254,16 @@
   @media (max-width:1180px){ .tab{padding-left:9px; padding-right:9px; font-size:14px;} }
   .tab.active{color:var(--text); font-weight:700; border-bottom-color:var(--accent);}
 
+  .accueil-rubrique > .rubrique-ico{grid-row:1 / span 3;}
+  .accueil-rubrique > .rubrique-pages{grid-column:2; display:block; margin-top:4px; font-size:12.5px; color:var(--text-faint);}
+  /* Sous-navigation d'un regroupement : pastilles défilables, sans faire défiler la page */
+  .sous-nav{display:flex; flex-wrap:nowrap; gap:8px; margin:14px 0 0; padding:2px 2px 4px; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
+  .sous-nav::-webkit-scrollbar{display:none;}
+  .sous-nav a{flex:0 0 auto; display:inline-flex; align-items:center; min-height:40px; padding:0 16px; border:1px solid var(--border); border-radius:999px; font-size:14.5px; font-weight:500; color:var(--text-soft); text-decoration:none; white-space:nowrap; transition:background .15s,color .15s,border-color .15s;}
+  .sous-nav a:hover{color:var(--text); border-color:var(--ink);}
+  .sous-nav a[aria-current="page"]{background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:700;}
+  .sous-nav a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
   main{max-width:var(--largeur); margin:0 auto; padding:30px 24px 60px;}
   .view{display:none;}
   .view.active{display:block; animation:viewIn .25s ease both;}
@@ -259,6 +293,17 @@
   .gl-pop b{display:block; margin-bottom:4px; font-family:var(--font-display); font-size:17px; font-weight:600;}
   .gl-pop p{margin:0 0 8px;}
   .gl-pop a{font-weight:600; color:var(--accent);}
+  .accueil-quiz{display:flex; align-items:center; gap:16px; margin:6px 0 16px; padding:18px 20px; border:1px solid var(--accent); border-radius:8px; background:var(--accent-dim); color:inherit; text-decoration:none;}
+  .accueil-quiz-ico{flex:0 0 52px; width:52px; height:52px; border-radius:50%; background:var(--accent); color:var(--bg); display:flex; align-items:center; justify-content:center;}
+  .accueil-quiz-ico svg{width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;}
+  .accueil-quiz-texte{flex:1; min-width:0;}
+  .accueil-quiz-texte b{display:block; font-family:var(--font-display); font-size:21px; font-weight:600; line-height:1.25;}
+  .accueil-quiz-texte span{display:block; margin-top:4px; font-size:14px; color:var(--text-soft);}
+  .accueil-quiz-bouton{flex:0 0 auto; padding:11px 20px; border-radius:6px; background:var(--accent); color:var(--bg); font-weight:700; font-size:15px;}
+  .accueil-quiz:hover .accueil-quiz-bouton{filter:brightness(1.1);}
+  .accueil-quiz:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  @media (max-width:700px){ .accueil-quiz{flex-wrap:wrap; padding:16px;} .accueil-quiz-texte{flex:1 1 calc(100% - 70px);} .accueil-quiz-texte b{font-size:19px;} .accueil-quiz-bouton{flex:1 1 100%; text-align:center; min-height:44px; box-sizing:border-box;} }
+  .onglet-quiz .ico svg{stroke-width:2.2;}
   .debutant{display:block; margin:6px 0 22px; padding:11px 14px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:4px; background:var(--bg-elevated); color:inherit; text-decoration:none;}
   .debutant b{display:block; font-size:15px;}
   .debutant span{font-size:13.5px; color:var(--text-soft);}
@@ -1159,7 +1204,13 @@
     .masthead-top{display:none;}
     .loupe-mobile{display:flex; align-items:center; justify-content:center; position:absolute; right:0; top:8px; width:44px; height:44px; border:none; background:none; color:var(--text); cursor:pointer;}
     .loupe-mobile svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round;}
-    .masthead-titre h1{padding-right:44px;}
+    .langue-mobile{display:block; position:absolute; right:44px; top:8px;}
+    .langue-mobile .langue-bouton{width:44px; height:44px; padding:0; justify-content:center; border:none; background:none;}
+    .langue-mobile .langue-bouton::after, .langue-mobile .langue-nom{display:none;}
+    .masthead-titre h1{padding-right:88px;}
+    html[dir="rtl"] .loupe-mobile{right:auto; left:0;}
+    html[dir="rtl"] .langue-mobile{right:auto; left:44px;}
+    html[dir="rtl"] .masthead-titre h1{padding-right:0; padding-left:88px;}
     .recherche{top:0; border-radius:0; width:100vw; max-height:100vh; height:100vh;}
     .masthead-titre{padding:12px 0 10px; border-bottom:1px solid var(--ink);}
     h1{font-size:25px; letter-spacing:-.01em;}
@@ -1327,72 +1378,52 @@
     <span id="edition-date">Édition du jour</span>
     <span class="droite"><span class="maj-info" id="maj-info">Mis à jour toutes les heures à partir de sources publiques</span>
       <button type="button" class="theme-toggle bouton-recherche" aria-haspopup="dialog">Rechercher <kbd>/</kbd></button>
+      <span class="langue" id="langue-haut"></span>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
     <h1><a href="#accueil" class="titre-lien" data-tab-lien="accueil"><svg class="logo" viewBox="4 6 56 56" aria-hidden="true"><path class="logo-ext" d="M8 46a24 24 0 0 1 48 0"/><path class="logo-int" d="M20 46a12 12 0 0 1 24 0"/><circle class="logo-point" cx="32" cy="46" r="4"/></svg>Hémicycle France</a></h1>
     <button type="button" class="bouton-recherche loupe-mobile" aria-label="Rechercher sur le site" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 0 0-15a7.5 7.5 0 0 0 0 15z M16 16l5 5"/></svg></button>
+    <span class="langue langue-mobile" id="langue-mobile"></span>
     <p><span class="maj-mobile" id="maj-mobile"></span><span class="devise">La politique française, preuves à l'appui.</span>Ce que votent les députés, qui dirige les partis, où en sont les sondages. Chaque information renvoie à sa source.</p>
   </div>
 </header>
 
 <nav class="rubriques" aria-label="Rubriques">
   <div class="rubriques-inner">
-    <div class="tab active" data-tab="accueil">À la une</div>
-    <div class="tab" data-tab="comprendre">Comprendre</div>
-    <span class="tab-sep" aria-hidden="true"></span>
-    <div class="tab" data-tab="scrutin">Votes</div>
-    <div class="tab" data-tab="histo">Groupes</div>
-    <div class="tab" data-tab="deputes">Députés</div>
-    <div class="tab" data-tab="senat">Sénat</div>
-    <span class="tab-sep" aria-hidden="true"></span>
-    <div class="tab" data-tab="candidats">Candidats</div>
-    <div class="tab" data-tab="sondages">Sondages</div>
-    <div class="tab" data-tab="meetings">Agenda</div>
-    <span class="tab-sep" aria-hidden="true"></span>
-    <div class="tab" data-tab="actualites">Actualités</div>
-    <div class="tab" data-tab="dirigeants">Partis</div>
-    <div class="tab" data-tab="justice">Justice</div>
-    <span class="tab-sep" aria-hidden="true"></span>
-    <div class="tab" data-tab="chiffres">Économie</div>
-    <div class="tab" data-tab="budget">Budget</div>
-    <div class="tab" data-tab="quiz">Quiz</div>
+    <div class="tab active" data-tab="accueil" data-hub="une">À la une</div>
+    <div class="tab" data-tab="actualites" data-hub="actu">Actualités</div>
+    <div class="tab" data-tab="sondages" data-hub="presidentielle">Présidentielle 2027</div>
+    <div class="tab" data-tab="budget" data-hub="argent">Argent public</div>
+    <div class="tab" data-tab="scrutin" data-hub="elus">Élus et votes</div>
+    <div class="tab" data-tab="quiz" data-hub="quiz">Quiz</div>
   </div>
 </nav>
 
 <!-- Version téléphone : barre d'onglets en bas de l'écran et panneau « Plus » -->
 <nav class="barre-mobile" aria-label="Rubriques (mobile)">
-  <button type="button" class="onglet-mobile" data-tab="accueil"><span class="ico" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z M4 9h16 M9 9v10"/></svg></span>À la une</button>
-  <button type="button" class="onglet-mobile" data-tab="scrutin"><span class="ico" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0 M7 18a5 5 0 0 1 10 0"/></svg></span>Votes</button>
-  <button type="button" class="onglet-mobile" data-tab="sondages"><span class="ico" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M5 20V10 M12 20V4 M19 20v-7"/></svg></span>Sondages</button>
-  <button type="button" class="onglet-mobile" data-tab="quiz"><span class="ico" aria-hidden="true">
+  <button type="button" class="onglet-mobile" data-tab="accueil" data-hub="une"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z M4 9h16 M9 9v10"/></svg></span> À la une</button>
+  <button type="button" class="onglet-mobile" data-tab="sondages" data-hub="presidentielle"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M5 20V10 M12 20V4 M19 20v-7"/></svg></span> Présidentielle</button>
+  <button type="button" class="onglet-mobile" data-tab="scrutin" data-hub="elus"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0 M7 18a5 5 0 0 1 10 0"/></svg></span> Élus</button>
+  <button type="button" class="onglet-mobile onglet-quiz" data-tab="quiz" data-hub="quiz"><span class="ico" aria-hidden="true">
     <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14 M12 17v.5"/></svg></span>Quiz</button>
   <button type="button" class="onglet-mobile" id="bouton-plus" aria-expanded="false" aria-controls="feuille-plus"><span class="ico" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></span>Plus</button>
+    <svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></span> Plus</button>
 </nav>
 <div class="feuille-fond" id="feuille-fond" hidden></div>
 <div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
   <div class="feuille-poignee" aria-hidden="true"></div>
+  <div class="feuille-groupe" aria-hidden="true">Actualités</div>
+  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
+  <div class="feuille-groupe" aria-hidden="true">Argent public</div>
+  <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
+  <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
   <div class="feuille-groupe" aria-hidden="true">Pour débuter</div>
   <button type="button" class="feuille-lien" data-tab="comprendre"><b>Comprendre</b><span>Qui fait quoi, comment naît une loi, lexique</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Parlement</div>
-  <button type="button" class="feuille-lien" data-tab="histo"><b>Groupes</b><span>Ce que vote chaque groupe, et avec qui</span></button>
-  <button type="button" class="feuille-lien" data-tab="deputes"><b>Députés</b><span>Ses votes, sa participation, sa circonscription</span></button>
-  <button type="button" class="feuille-lien" data-tab="senat"><b>Sénat</b><span>Les votes des sénateurs, groupe par groupe</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Présidentielle 2027</div>
-  <button type="button" class="feuille-lien" data-tab="candidats"><b>Candidats</b><span>Qui s'est déclaré, depuis quand, avec quel parti</span></button>
-  <button type="button" class="feuille-lien" data-tab="meetings"><b>Agenda</b><span>Congrès et meetings à venir</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Vie politique</div>
-  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
-  <button type="button" class="feuille-lien" data-tab="dirigeants"><b>Partis</b><span>Dirigeants et groupes à l'Assemblée</span></button>
-  <button type="button" class="feuille-lien" data-tab="justice"><b>Justice</b><span>Condamnations de responsables politiques</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
-  <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
-  <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
   <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
@@ -1407,32 +1438,23 @@
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
+    <a class="accueil-quiz" href="#quiz" data-tab-lien="quiz">
+      <span class="accueil-quiz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span>
+      <span class="accueil-quiz-texte"><b>Faites le quiz : avec quel groupe pensez-vous voter pareil ?</b><span>Quelques votes réels de l'Assemblée, à vous de choisir. Une minute, sans compte.</span></span>
+      <span class="accueil-quiz-bouton">Faire le quiz</span>
+    </a>
     <a class="debutant" href="#comprendre" data-tab-lien="comprendre"><b>Nouveau en politique ? Commencez ici</b><span>Qui décide quoi, comment naît une loi, comment lire un vote : l'essentiel en quelques fiches courtes.</span></a>
     <details class="accueil-plie accueil-chiffres"><summary>Les chiffres clés</summary>
       <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     </details>
     <details class="accueil-plie accueil-explorer"><summary>Explorer toutes les rubriques</summary>
     <div class="accueil-rubriques">
-     <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Parlement</h3>
-      <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Votes</b><span>Chaque scrutin de l'Assemblée, siège par siège.</span></div>
-      <div class="accueil-rubrique" data-tab="histo" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.8-3 2.7-4.5 5-4.5s4.2 1.5 5 4.5M11 19c.8-3 2.7-4.5 5-4.5s4.2 1.5 5 4.5"/></svg></span><b>Groupes</b><span>Ce que vote chaque groupe, et avec qui.</span></div>
-      <div class="accueil-rubrique" data-tab="deputes" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><b>Députés</b><span>Ses votes, à partir de votre commune.</span></div>
-      <div class="accueil-rubrique" data-tab="senat" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20v-8M9.5 20v-8M14.5 20v-8M19 20v-8M3 12h18L12 5 3 12z"/></svg></span><b>Sénat</b><span>Les votes des sénateurs, groupe par groupe.</span></div>
-     </div>
-     <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Présidentielle 2027</h3>
-      <div class="accueil-rubrique" data-tab="candidats" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Candidats</b><span>Qui s'est déclaré, avec quel parti.</span></div>
-      <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Sondages</b><span>Les dernières enquêtes et leur évolution.</span></div>
-      <div class="accueil-rubrique" data-tab="meetings" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><b>Agenda</b><span>Congrès, primaires, meetings et dates d'élection.</span></div>
-     </div>
-     <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Vie politique</h3>
-      <div class="accueil-rubrique" data-tab="actualites" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span></div>
-      <div class="accueil-rubrique" data-tab="dirigeants" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><b>Partis</b><span>Qui les dirige, qui préside leurs groupes.</span></div>
-      <div class="accueil-rubrique" data-tab="justice" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z"/></svg></span><b>Justice</b><span>Les condamnations de responsables politiques.</span></div>
-     </div>
-     <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Pour aller plus loin</h3>
-      <div class="accueil-rubrique" data-tab="chiffres" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Économie</b><span>Chômage, inflation, déficit, dette, population.</span></div>
-      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Qu'auriez-vous voté à la place des députés ?</span></div>
-     </div>
+      <div class="accueil-rubrique" data-tab="accueil" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg></span><b>À la une</b><span>Les faits marquants du moment.</span><small class="rubrique-pages">Sondages, votes, actualités du jour</small></div>
+      <div class="accueil-rubrique" data-tab="actualites" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span><small class="rubrique-pages">Titres, sujets du moment</small></div>
+      <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></div>
+      <div class="accueil-rubrique" data-tab="budget" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></div>
+      <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></div>
+      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre</small></div>
     </div>
     </details>
     <div class="faire-connaitre">
@@ -1940,6 +1962,7 @@
       <h2>Mentions légales</h2>
       <p class="chapo">Qui publie ce site, d'où viennent ses informations, et ce qu'il fait (ou ne fait pas) de vos données.
         <small>Dernière mise à jour de cette page : 2 octobre 2026.</small></p>
+      <p class="fait-foi" id="fait-foi" data-fr="Seule la version française fait foi." hidden>Seule la version française fait foi.</p>
     </div>
 
     <div class="texte-legal">
@@ -2077,6 +2100,8 @@
     <button type="button" class="lien-bouton bouton-partage" data-partage="site">Partager le site</button> ·
     <button type="button" class="lien-bouton" data-alertes="">Recevoir les alertes</button>
   </p>
+  <p class="note-officiel" id="note-officiel" hidden>Contenu officiel en français : titres de scrutins, de lois et d'articles de presse, noms propres et intitulés d'amendements ne sont pas traduits.</p>
+  <p class="note-officiel" id="note-traduction" hidden>Traduction en préparation : cette langue n'est pas encore disponible, le site s'affiche en français.</p>
   <details class="footer-plie"><summary>Sources, règle du jeu, fraîcheur des données</summary>
   <div class="footer-grid">
     <div>
@@ -2140,6 +2165,7 @@
 <script>
 /* ---------- Groupes politiques ---------- */
 
+/* i18n-ignorer : noms officiels des groupes et scrutins de secours (contenu officiel, non traduit) */
 const PARTIES = [
   { id:"LFI",  nom:"La France insoumise (LFI-NFP)", couleur:"#D6284B", sieges:71 },
   { id:"GDR",  nom:"GDR (communistes)",    couleur:"#A32E22", sieges:17 },
@@ -2434,6 +2460,7 @@ let LOIS = [
 ];
 
 
+/* i18n-fin-ignorer */
 /* ---------- Outils communs aux scrutins ---------- */
 
 function esc(s){
@@ -4560,6 +4587,7 @@ function renderAccueil(){
 /* ---------- Sénat (data/senat.json, chargé à la première visite de la rubrique) ---------- */
 
 let SENAT = null, SENAT_MAJ = null, senatChargement = null, senatFiltre = "texte", senatLimite = 40;
+/* i18n-ignorer : noms officiels des groupes du Sénat */
 const GROUPES_SENAT = {
   "CRCE-K": { nom:"Communiste (CRCE-K)", couleur:"#A32E22" },
   GEST:     { nom:"Écologiste (GEST)", couleur:"#1E9F58" },
@@ -4572,6 +4600,7 @@ const GROUPES_SENAT = {
   NI:       { nom:"Non-inscrits", couleur:"#6B6E78" },
   Aucun:    { nom:"Groupe pas encore enregistré (renouvellement de septembre 2026)", couleur:"#A9ABB3" },
 };
+/* i18n-fin-ignorer */
 
 function chargerSenat(){
   if(!senatChargement) senatChargement = lireJSON("data/senat.json").then(d=>{ SENAT = d?.scrutins || []; SENAT_MAJ = d?.lastUpdated || null; });
@@ -5288,7 +5317,7 @@ function renderRecherche(){
   const mots = norm(brut).split(/\s+/);
   const ok = t => { const n = norm(t); return mots.every(m => n.includes(m)); };
   const groupes = [];
-  const rubriques = [...document.querySelectorAll(".tab")].filter(t=>ok(t.textContent)).map(t=>({ titre:t.textContent.trim(), sous:"Rubrique", action:()=>activateTab(t.dataset.tab) }));
+  const rubriques = HUBS.flatMap(h => h.pages.filter(([id, nom]) => ok(nom) || ok(h.nom)).map(([id, nom]) => ({ titre:nom, sous:h.id === "une" || h.nom === nom ? "Rubrique" : h.nom, action:()=>activateTab(id) })));
   if(rubriques.length) groupes.push(["Rubriques", rubriques]);
   const votes = LOIS.filter(l => ok(texteRecherche(l)))
     .sort((a,b)=> (["texte","censure"].includes(categorieLoi(b)) - ["texte","censure"].includes(categorieLoi(a))) || (b.numero||0) - (a.numero||0))
@@ -5362,6 +5391,7 @@ function afficherNouveautes(){
   document.getElementById("nouveautes-fermer").addEventListener("click", ()=>{ el.hidden = true; });
 }
 
+/* i18n-ignorer : images dessinées dans un canvas, non traduites */
 /* ---------- Stories (Instagram, WhatsApp…) : image verticale 1080 × 1920 dessinée dans le navigateur ---------- */
 // Rien n'est envoyé à un serveur : l'image est composée ici, puis partagée par le menu du téléphone
 // (Instagram, WhatsApp, Snapchat…) ou téléchargée sur ordinateur.
@@ -6551,6 +6581,7 @@ async function dessinerStory(type, info){
 }
 
 let storyCourante = null;
+/* i18n-fin-ignorer */
 async function ouvrirStory(type, info){
   const fond = document.getElementById("story-fond");
   fond.hidden = false;
@@ -6839,25 +6870,58 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["comprendre", "deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "budget", "methode", "mentions"];
+// Six regroupements ; chaque page garde sa vue (#view-<id>) et son lien direct (#sondages, #deputes…)
+const HUBS = [
+  { id:"une", nom:"À la une", pages:[["accueil","À la une"]] },
+  { id:"actu", nom:"Actualités", pages:[["actualites","Actualités"]] },
+  { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages"], ["candidats","Candidats"], ["meetings","Agenda"]] },
+  { id:"argent", nom:"Argent public", pages:[["budget","Budget"], ["chiffres","Économie"]] },
+  { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes"], ["deputes","Députés"], ["senat","Sénat"], ["histo","Groupes"], ["dirigeants","Partis"], ["justice","Justice"]] },
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz"], ["comprendre","Comprendre"]] }
+];
+const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
+HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
+const hubDe = id => HUBS.find(h => h.pages.some(p => p[0] === id));
+// Rubriques rangées dans le panneau « Plus » (la barre du bas n'en montre que quatre : À la une, Présidentielle, Élus, Quiz)
+const RUBRIQUES_PLUS = ["actualites", "budget", "chiffres", "methode", "mentions"];
+
+const sousNav = document.createElement("nav");
+sousNav.className = "sous-nav";
+function majSousNav(tabId){
+  const hub = hubDe(tabId);
+  const tete = document.querySelector("#view-" + tabId + " .rubrique-tete");
+  if(!hub || hub.pages.length < 2 || !tete){ sousNav.remove(); return; }
+  sousNav.setAttribute("aria-label", hub.nom);
+  sousNav.innerHTML = hub.pages.map(([id, nom]) => `<a href="#${id}" data-sous="${id}"${id === tabId ? ' aria-current="page"' : ""}>${nom}</a>`).join("");
+  tete.appendChild(sousNav);
+  const cur = sousNav.querySelector("[aria-current]");
+  // Défilement interne de la rangée seulement (jamais de la page)
+  if(cur) sousNav.scrollLeft = Math.max(0, cur.offsetLeft - (sousNav.clientWidth - cur.offsetWidth) / 2);
+}
+sousNav.addEventListener("click", (e)=>{
+  const a = e.target.closest("a[data-sous]");
+  if(!a) return;
+  e.preventDefault();
+  activateTab(a.dataset.sous);
+});
 
 function activateTab(tabId){
   onSeatLeave();
   fermerFeuille();
   document.body.dataset.page = tabId;
   // Barre d'onglets mobile : « Plus » est actif pour les rubriques rangées dans le panneau
+  const hubActif = hubDe(tabId);
   document.querySelectorAll(".onglet-mobile").forEach(b=>{
-    b.classList.toggle("active", b.dataset.tab === tabId || (b.id === "bouton-plus" && RUBRIQUES_PLUS.includes(tabId)));
+    b.classList.toggle("active", (!!b.dataset.hub && b.dataset.hub === hubActif?.id) || (b.id === "bouton-plus" && RUBRIQUES_PLUS.includes(tabId)));
   });
   document.querySelectorAll(".feuille-lien[data-tab]").forEach(b=> b.classList.toggle("active", b.dataset.tab === tabId));
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  // Barre du haut : le regroupement actif est surligné quand l'une de ses pages est ouverte
+  document.querySelectorAll(".tab").forEach(t=>{
+    const actif = t.dataset.hub === hubActif?.id;
+    t.classList.toggle("active", actif);
+    if(actif){ t.setAttribute("aria-current", "page"); t.scrollIntoView({ block:"nearest", inline:"center" }); } else t.removeAttribute("aria-current");
+  });
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  const tabEl = document.querySelector(`.tab[data-tab="${tabId}"]`);
-  if(tabEl){
-    tabEl.classList.add("active");
-    // Sur mobile, la barre de rubriques défile : on garde la rubrique active visible
-    tabEl.scrollIntoView({ block:"nearest", inline:"center" });
-  }
   const viewEl = document.getElementById("view-"+tabId);
   if(viewEl) viewEl.classList.add("active");
   // Défilement instantané : l'animation vers le haut d'une longue page fige les téléphones
@@ -6883,7 +6947,8 @@ function activateTab(tabId){
     else if(tabId === "senat") majHash(senateurOuvert ? "senateur-" + senateurOuvert : "senat");
     else majHash(tabId);
   }
-  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales", methode:"Méthode" })[tabId];
+  majSousNav(tabId);
+  const nomPage = PAGES_NOMS[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
 }
 
@@ -6955,7 +7020,7 @@ document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").f
 // Date d'édition affichée dans l'en-tête
 (function(){
   const t = new Date().toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
-  document.getElementById("edition-date").textContent = "Édition du " + t;
+  document.getElementById("edition-date").textContent = `Édition du ${t}`;
 })();
 
 /* ---------- Init ---------- */
@@ -7117,9 +7182,9 @@ async function initSite(){
     document.getElementById("maj-mobile").textContent = `Mis à jour le ${jour} à ${heure}`;
   }
   document.getElementById("footer-maj").innerHTML =
-    `Votes : ${formatNombre(LOIS.length)} scrutins, le plus récent du ${dernier ? esc(dernier.date) : "—"}` +
-    `${LOIS_MAJ && dateCourte(LOIS_MAJ) ? ` (base actualisée le ${dateCourte(LOIS_MAJ)})` : ""}. ` +
-    `L'archive est consultée chaque jour : pendant les suspensions de séance, aucun nouveau vote n'est publié.` +
+    `<span>Votes : ${formatNombre(LOIS.length)} scrutins, le plus récent du ${dernier ? esc(dernier.date) : "—"}</span>` +
+    `${LOIS_MAJ && dateCourte(LOIS_MAJ) ? ` <span>(base actualisée le ${dateCourte(LOIS_MAJ)})</span>` : ""}. ` +
+    `<span>L'archive est consultée chaque jour : pendant les suspensions de séance, aucun nouveau vote n'est publié.</span>` +
     `${INDICATEURS_MAJ && dateCourte(INDICATEURS_MAJ) ? `<br>Indicateurs : actualisés le ${dateCourte(INDICATEURS_MAJ)}.` : ""}`;
 
   renderCategorieFilter();
@@ -7151,6 +7216,299 @@ async function initSite(){
   afficherNouveautes();
   ouvrirDepuisHash();
 }
+
+/* ---------- Langues : le français reste dans la page (source de vérité) ----------
+   Les autres langues viennent de data/i18n/<code>.json, chargé à la demande : { clé : texte }, les clés
+   étant celles de data/i18n/fr.json (généré par scripts/extraire-i18n.js). Un traducteur DOM remplace
+   les textes français par ceux du dictionnaire actif, sans toucher aux balises ni aux liens ; il écrit
+   toujours avec data / setAttribute, jamais avec innerHTML. Si une clé manque, le français reste.
+   Les contenus officiels et de presse ne figurent pas dans les dictionnaires : ils restent en français. */
+/* i18n-ignorer : noms des langues, écrits dans leur propre langue */
+const LANGUES = [
+  { code:"fr", nom:"Français",  icone:"fr" },
+  { code:"en", nom:"English",   icone:"gb" },
+  { code:"es", nom:"Español",   icone:"es" },
+  { code:"pt", nom:"Português", icone:"pt" },
+  { code:"de", nom:"Deutsch",   icone:"de" },
+];
+/* i18n-fin-ignorer */
+let LANGUE = "fr", DICO_ACTIF = null, TEXTES_FR = null, JETON_LANGUE = 0;
+const DICOS = new Map();               // code -> { exact, motifs, cles, nombre }
+const ORIGINES = new WeakMap();        // nœud texte -> { fr, sortie }
+const ORIGINES_ATTR = new WeakMap();   // élément -> { attribut: { fr, sortie } }
+const ATTRIBUTS_I18N = ["placeholder", "title", "aria-label", "alt"];
+const SEL_ATTRIBUTS = "[placeholder],[title],[aria-label],[alt]";
+const SANS_TRADUCTION = "[translate=no],.sans-traduction,script,style,textarea,noscript";
+
+const normaliserTexte = s => s.replace(/[ \t\r\n\f]+/g, " ").trim();
+const marquesDe = s => s.match(/\{\d+\}|%[sd]/g) || [];
+
+function construireDico(fr, tr){
+  const exact = new Map(), motifs = [], cles = new Map();
+  for(const [cle, texteFr] of Object.entries(fr)){
+    const sortie = tr[cle];
+    if(typeof sortie !== "string" || !sortie.trim()) continue;
+    const permises = marquesDe(texteFr); // une marque peut être omise (accord en genre ou en nombre), jamais ajoutée
+    if(marquesDe(sortie).some(x=>!permises.includes(x)) || /<\/?[a-z][^>]*>/i.test(sortie)) continue;
+    cles.set(cle, sortie);
+    if(/\{\d+\}/.test(texteFr)){
+      // Texte à trous : morceaux fixes et numéros des marques (comparaison par indexOf, sans expression régulière coûteuse)
+      const morceaux = texteFr.split(/\{\d+\}/), nums = (texteFr.match(/\{\d+\}/g) || []).map(x=>x.slice(1, -1));
+      // Un motif presque sans texte fixe (« {1}, {2} de {3} ») attraperait n'importe quel titre officiel : on l'ignore
+      if(morceaux.join("").replace(/[^\p{L}]/gu, "").length >= 4) motifs.push({ morceaux, nums, sortie, poids:morceaux.join("").length });
+    } else exact.set(texteFr, sortie);
+  }
+  motifs.sort((a, b)=> b.poids - a.poids);
+  return { exact, motifs, cles, nombre:cles.size, memo:new Map() };
+}
+
+// Valeurs des marques si le texte correspond au motif (début, fin et morceaux intermédiaires dans l'ordre), sinon null
+function apparier(m, texte){
+  const p = m.morceaux, n = p.length - 1;
+  if(!texte.startsWith(p[0]) || !texte.endsWith(p[n]) || texte.length < p[0].length + p[n].length) return null;
+  const fin = texte.length - p[n].length, valeurs = {};
+  let pos = p[0].length;
+  for(let i = 1; i < n; i++){
+    const j = p[i] ? texte.indexOf(p[i], pos) : pos;
+    if(j < 0 || j + p[i].length > fin) return null;
+    valeurs[m.nums[i - 1]] = texte.slice(pos, j);
+    pos = j + p[i].length;
+  }
+  valeurs[m.nums[n - 1]] = texte.slice(pos, fin);
+  // Une valeur insérée (nombre, date, nom) est courte : un long texte n'est pas un gabarit rempli, mais du contenu à ne pas toucher
+  return Object.values(valeurs).every(v=>v.length <= 60) ? valeurs : null;
+}
+
+// Texte traduit (avec les espaces de début et de fin d'origine), ou null si le dictionnaire n'a pas ce texte
+function traduireTexte(brut, dico){
+  const coeur = normaliserTexte(brut);
+  if(!coeur || !dico) return null;
+  let sortie = dico.exact.get(coeur);
+  if(sortie === undefined) sortie = dico.memo.get(coeur);
+  if(sortie === undefined){
+    sortie = null;
+    for(const m of dico.motifs){
+      const valeurs = apparier(m, coeur);
+      if(!valeurs) continue;
+      sortie = m.sortie.replace(/\{(\d+)\}/g, (x, n)=> valeurs[n] === undefined ? x : (dico.exact.get(valeurs[n].trim()) ?? valeurs[n])); // une valeur qui est elle-même un texte connu (« Députés ») est traduite aussi
+      break;
+    }
+    if(dico.memo.size > 4000) dico.memo.clear();
+    dico.memo.set(coeur, sortie);
+  }
+  if(sortie === null) return null;
+  return /^\s*/.exec(brut)[0] + sortie + /\s*$/.exec(brut)[0];
+}
+
+// t("Texte français") ou t("clé.stable", { 1: valeur }) : toujours une chaîne lisible, le français au pire
+function t(x, valeurs){
+  let s = String(x);
+  if(/^[a-z0-9]+(-[a-z0-9]+)*\.[0-9a-f]{6,20}$/.test(s)){
+    s = (DICO_ACTIF && DICO_ACTIF.cles.get(s)) || (TEXTES_FR && TEXTES_FR[s]) || s.split(".")[0].replace(/-/g, " ");
+  } else if(DICO_ACTIF){
+    const tr = traduireTexte(s, DICO_ACTIF);
+    if(tr !== null) s = tr;
+  }
+  return valeurs ? s.replace(/\{(\d+)\}/g, (m, n)=> valeurs[n] ?? m) : s;
+}
+
+function traduireNoeud(n){
+  const o = ORIGINES.get(n);
+  const traduit = !!o && n.data === o.sortie;
+  const fr = traduit ? o.fr : n.data;
+  const tr = DICO_ACTIF ? traduireTexte(fr, DICO_ACTIF) : null;
+  if(tr !== null && n.parentElement && n.parentElement.closest(SANS_TRADUCTION)) return;
+  if(tr === null || tr === fr){
+    if(traduit){ n.data = fr; ORIGINES.delete(n); }
+  } else if(tr !== n.data){
+    ORIGINES.set(n, { fr, sortie:tr });
+    n.data = tr;
+  }
+}
+
+function traduireAttributs(el){
+  if(el.closest && el.closest(SANS_TRADUCTION)) return;
+  const reg = ORIGINES_ATTR.get(el) || {};
+  for(const a of ATTRIBUTS_I18N){
+    if(!el.hasAttribute(a)) continue;
+    const valeur = el.getAttribute(a), o = reg[a];
+    const traduit = !!o && valeur === o.sortie;
+    const fr = traduit ? o.fr : valeur;
+    const tr = DICO_ACTIF ? traduireTexte(fr, DICO_ACTIF) : null;
+    if(tr === null || tr === fr){
+      if(traduit){ el.setAttribute(a, fr); delete reg[a]; }
+    } else if(tr !== valeur){
+      reg[a] = { fr, sortie:tr };
+      el.setAttribute(a, tr);
+    }
+  }
+  ORIGINES_ATTR.set(el, reg);
+}
+
+function traduireArbre(racine){
+  if(racine.nodeType === 3){ traduireNoeud(racine); return; }
+  if(racine.nodeType !== 1 && racine.nodeType !== 9) return;
+  const marche = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
+  for(let n = marche.nextNode(); n; n = marche.nextNode()) traduireNoeud(n);
+  if(racine.nodeType === 1 && racine.matches(SEL_ATTRIBUTS)) traduireAttributs(racine);
+  const racineEl = racine.nodeType === 9 ? racine.documentElement : racine;
+  racineEl.querySelectorAll(SEL_ATTRIBUTS).forEach(traduireAttributs);
+}
+
+// Tout ce que la page ajoute ou modifie ensuite (rendus JavaScript, listes, fiches) est traduit au vol
+const OBSERVATEUR_I18N = new MutationObserver(muts=>{
+  if(!DICO_ACTIF) return;
+  for(const m of muts){
+    if(m.type === "childList") m.addedNodes.forEach(traduireArbre);
+    else if(m.type === "characterData") traduireNoeud(m.target);
+    else if(m.type === "attributes") traduireAttributs(m.target);
+  }
+  OBSERVATEUR_I18N.takeRecords(); // nos propres écritures ne sont pas retraitées
+});
+
+async function chargerDico(code){
+  if(DICOS.has(code)) return DICOS.get(code);
+  const [fr, tr] = await Promise.all([TEXTES_FR || lireJSON("data/i18n/fr.json"), lireJSON(`data/i18n/${code}.json`)]);
+  if(fr) TEXTES_FR = fr;
+  const dico = fr && tr && typeof tr === "object" ? construireDico(fr, tr) : { exact:new Map(), motifs:[], cles:new Map(), nombre:0, memo:new Map() };
+  if(fr && tr) DICOS.set(code, dico);
+  return dico;
+}
+
+async function definirLangue(code, options = {}){
+  if(!LANGUES.some(l=>l.code === code)) code = "fr";
+  const jeton = ++JETON_LANGUE;
+  const dico = code === "fr" ? null : await chargerDico(code);
+  if(jeton !== JETON_LANGUE) return; // un autre choix est arrivé entre-temps
+  if(options.auto && dico && !dico.nombre) code = "fr"; // langue détectée mais pas encore traduite : on reste en français
+  const L = LANGUES.find(l=>l.code === code);
+  LANGUE = code;
+  DICO_ACTIF = code === "fr" ? null : dico;
+  document.documentElement.lang = code;
+  document.documentElement.dir = L.dir || "ltr";
+  if(options.memoriser){ try{ localStorage.setItem("langue", code); }catch(e){} }
+  traduireArbre(document);
+  OBSERVATEUR_I18N.takeRecords();
+  majMenusLangue();
+  document.dispatchEvent(new CustomEvent("langue-changee", { detail:code }));
+}
+
+/* ---------- Menu déroulant : bouton + liste (rôle listbox), clavier, aria ---------- */
+const MENUS_LANGUE = [];
+
+function iconeLangue(L){
+  const c = document.createElement("span");
+  c.className = "langue-ico"; c.setAttribute("aria-hidden", "true");
+  if(L.icone){
+    const img = document.createElement("img");
+    img.src = `icons/drapeaux/${L.icone}.svg`; img.alt = ""; img.width = 22; img.height = 15;
+    c.appendChild(img);
+  } else {
+    const p = document.createElement("span");
+    p.className = "langue-pastille"; p.textContent = L.pastille;
+    c.appendChild(p);
+  }
+  return c;
+}
+
+function fermerMenuLangue(m, rendreLeFocus){
+  m.liste.hidden = true;
+  m.bouton.setAttribute("aria-expanded", "false");
+  if(rendreLeFocus) m.bouton.focus();
+}
+
+function marquerOption(m, i){
+  m.indice = (i + LANGUES.length) % LANGUES.length;
+  m.options.forEach((o, k)=> o.classList.toggle("actif", k === m.indice));
+  m.liste.setAttribute("aria-activedescendant", m.options[m.indice].id);
+  m.options[m.indice].scrollIntoView({ block:"nearest" });
+}
+
+function ouvrirMenuLangue(m){
+  MENUS_LANGUE.forEach(x=>{ if(x !== m) fermerMenuLangue(x, false); });
+  m.liste.hidden = false;
+  m.bouton.setAttribute("aria-expanded", "true");
+  marquerOption(m, Math.max(0, LANGUES.findIndex(l=>l.code === LANGUE)));
+  m.liste.focus();
+}
+
+function creerMenuLangue(hote){
+  if(!hote) return;
+  const n = MENUS_LANGUE.length, idListe = `langue-liste-${n}`;
+  const bouton = document.createElement("button");
+  bouton.type = "button"; bouton.className = "theme-toggle langue-bouton";
+  bouton.setAttribute("aria-haspopup", "listbox"); bouton.setAttribute("aria-expanded", "false"); bouton.setAttribute("aria-controls", idListe);
+  const liste = document.createElement("ul");
+  liste.id = idListe; liste.className = "langue-liste"; liste.hidden = true; liste.tabIndex = -1;
+  liste.setAttribute("role", "listbox"); liste.setAttribute("aria-label", "Choisir la langue");
+  const m = { bouton, liste, options:[], indice:0 };
+  LANGUES.forEach((L, i)=>{
+    const li = document.createElement("li");
+    li.id = `${idListe}-${L.code}`; li.setAttribute("role", "option"); li.lang = L.code; li.setAttribute("translate", "no");
+    li.appendChild(iconeLangue(L));
+    const nom = document.createElement("span"); nom.textContent = L.nom;
+    li.appendChild(nom);
+    li.addEventListener("click", ()=>{ fermerMenuLangue(m, true); definirLangue(L.code, { memoriser:true }); });
+    li.addEventListener("mousemove", ()=>{ if(m.indice !== i) marquerOption(m, i); });
+    liste.appendChild(li); m.options.push(li);
+  });
+  bouton.addEventListener("click", ()=>{ if(liste.hidden) ouvrirMenuLangue(m); else fermerMenuLangue(m, true); });
+  bouton.addEventListener("keydown", e=>{
+    if(["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)){ e.preventDefault(); ouvrirMenuLangue(m); }
+  });
+  liste.addEventListener("keydown", e=>{
+    const k = e.key;
+    if(k === "ArrowDown") marquerOption(m, m.indice + 1);
+    else if(k === "ArrowUp") marquerOption(m, m.indice - 1);
+    else if(k === "Home") marquerOption(m, 0);
+    else if(k === "End") marquerOption(m, LANGUES.length - 1);
+    else if(k === "Enter" || k === " "){ const code = LANGUES[m.indice].code; fermerMenuLangue(m, true); definirLangue(code, { memoriser:true }); }
+    else if(k === "Escape"){ fermerMenuLangue(m, true); }
+    else if(k === "Tab"){ fermerMenuLangue(m, false); return; }
+    else return;
+    e.preventDefault();
+  });
+  document.addEventListener("click", e=>{ if(!hote.contains(e.target) && !liste.hidden) fermerMenuLangue(m, false); });
+  hote.append(bouton, liste);
+  MENUS_LANGUE.push(m);
+}
+
+function majMenusLangue(){
+  const L = LANGUES.find(l=>l.code === LANGUE);
+  for(const m of MENUS_LANGUE){
+    m.bouton.replaceChildren(iconeLangue(L));
+    const nom = document.createElement("span"); nom.className = "langue-nom"; nom.setAttribute("translate", "no"); nom.textContent = L.nom;
+    m.bouton.appendChild(nom);
+    m.bouton.setAttribute("aria-label", `Langue : ${L.nom}`);
+    m.options.forEach((o, i)=> o.setAttribute("aria-selected", String(LANGUES[i].code === LANGUE)));
+  }
+  const autre = LANGUE !== "fr";
+  const vide = autre && DICO_ACTIF && !DICO_ACTIF.nombre;
+  document.getElementById("note-officiel").hidden = !autre || vide;
+  document.getElementById("note-traduction").hidden = !vide;
+  document.getElementById("fait-foi").hidden = !autre || vide;
+}
+
+function langueInitiale(){
+  try{ const c = localStorage.getItem("langue"); if(LANGUES.some(l=>l.code === c)) return { code:c, auto:false }; }catch(e){}
+  const prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language];
+  for(const p of prefs){
+    const c = String(p || "").toLowerCase().split("-")[0];
+    if(LANGUES.some(l=>l.code === c)) return { code:c, auto:true };
+  }
+  return { code:"fr", auto:false };
+}
+
+function initLangues(){
+  creerMenuLangue(document.getElementById("langue-haut"));
+  creerMenuLangue(document.getElementById("langue-mobile"));
+  OBSERVATEUR_I18N.observe(document.documentElement, { childList:true, subtree:true, characterData:true, attributes:true, attributeFilter:ATTRIBUTS_I18N });
+  document.addEventListener("keydown", e=>{ if(e.key === "Escape") MENUS_LANGUE.forEach(m=>{ if(!m.liste.hidden) fermerMenuLangue(m, true); }); });
+  majMenusLangue();
+  const { code, auto } = langueInitiale();
+  if(code !== "fr") definirLangue(code, { auto });
+}
+initLangues();
 
 initSite();
 

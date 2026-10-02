@@ -117,6 +117,50 @@ fonction) et le thème des votes (commission saisie au fond du dossier législat
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
 
+## Langues du site (fr, en, es, pt, de, ru, ar, hi, ja, bn)
+
+Le français reste écrit dans `index.html` : c'est la source de vérité. Les autres langues sont des
+dictionnaires `data/i18n/<code>.json` de la forme `{ "clé stable": "texte traduit" }`, chargés à la demande
+(seulement quand on choisit la langue). Un traducteur DOM remplace les textes français par ceux du
+dictionnaire (nœuds texte, `placeholder`, `title`, `aria-label`, `alt`), y compris pour ce que la page
+affiche plus tard (`MutationObserver`). Liens et balises sont conservés ; les traductions sont
+insérées en texte brut (jamais en `innerHTML`). Si une clé manque, le français s'affiche.
+
+- **Menu** : bouton + liste en haut de page (icône de langue à côté de la loupe sur téléphone), clavier
+  (Entrée/Espace/flèches ouvrent, flèches/Début/Fin déplacent, Entrée choisit, Échap ferme), `aria-haspopup="listbox"`.
+  Drapeaux en SVG dans `icons/drapeaux/` ; pastille avec le nom natif pour hi et bn, globe pour l'arabe.
+  Choix mémorisé dans `localStorage` (`langue`) ; sinon langue du navigateur si elle est traduite, sinon français.
+  `<html lang>` et `dir="rtl"` (arabe) suivent la langue.
+- **Contenu officiel non traduit** : titres de scrutins, de lois, d'articles de presse, noms propres, intitulés
+  d'amendements ne figurent dans aucun dictionnaire ; une note « Contenu officiel en français » s'affiche en pied de
+  page quand la langue n'est pas le français. Les mentions légales traduites portent « Seule la version française fait foi ».
+- **Hors-ligne** : les dictionnaires passent par le service worker comme les autres données (réseau d'abord, copie en cache).
+
+### Traduire une chaîne ou compléter une langue
+
+1. `node scripts/extraire-i18n.js` régénère `data/i18n/fr.json` depuis `index.html` (nœuds texte, attributs,
+   chaînes et gabarits du script ; chaque `${…}` devient `{1}`, `{2}`…). La clé dérive du texte
+   (`debut-du-texte.empreinte`) : si le français change, la clé change et l'ancienne traduction devient orpheline.
+   Les blocs de données officielles à ne pas extraire sont encadrés par `/* i18n-ignorer */ … /* i18n-fin-ignorer */`.
+2. Ajouter la clé et sa traduction dans `data/i18n/<code>.json` (`node scripts/couverture-i18n.js --manquantes en`
+   liste ce qui manque). Conserver les marques `{1}`, `{2}`, `%s` ; une marque peut être omise seulement pour un
+   accord en genre ou en nombre (`présent{2}`), jamais ajoutée. Pas de balise HTML.
+3. `node scripts/check-data.js` contrôle JSON valide, clés connues de `fr.json`, marques, absence de HTML ;
+   `node scripts/couverture-i18n.js` affiche le pourcentage de clés traduites par langue.
+
+### Ajouter une langue
+
+1. Créer `data/i18n/<code>.json` (`{}` au départ).
+2. Ajouter une ligne dans le tableau `LANGUES` d'`index.html` (`code`, nom natif, `icone` = fichier de
+   `icons/drapeaux/`, ou `pastille` = deux caractères ; `dir:"rtl"` pour une langue de droite à gauche).
+3. Une langue dont le dictionnaire est vide s'affiche en français avec la note « Traduction en préparation » ;
+   elle n'est jamais choisie automatiquement d'après le navigateur tant qu'elle est vide.
+
+Dans le code de la page, `t("Texte français")` (ou `t("clé")`) renvoie le texte dans la langue active, avec
+`t("{1} votes", { 1: n })` pour les valeurs. Limites connues : les dates, nombres et accords produits par le
+JavaScript (« 3 réunions », « il/elle ») restent en français ; les images de partage (canvas) restent en français ;
+les polices hébergées sont latines, les autres écritures utilisent les polices du système.
+
 ## Architecture et secrets (en bref)
 
 - `data/*.json` : toutes les données publiées ; `index.html` les lit au chargement (site statique, GitHub Pages).
