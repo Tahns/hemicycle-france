@@ -5151,7 +5151,8 @@ let LOIS_MAJ = null, INDICATEURS_MAJ = null;
 
 async function lireJSON(url){
   try{
-    const res = await fetch(url);
+    // « no-cache » : le navigateur revérifie toujours auprès du serveur (données mises à jour toutes les heures)
+    const res = await fetch(url, { cache: "no-cache" });
     if(!res.ok){ console.warn(`Impossible de charger ${url}`, res.status); return null; }
     return await res.json();
   } catch(e){
