@@ -91,7 +91,7 @@ async function pageAvec(navigateur, base, { config, csp, viewport = { width: 130
 }
 
 async function testerComptes({ navigateur, base, verifier, dossierCaptures }) {
-  const visible = (page, sel) => page.evaluate((s) => { const n = document.querySelector(s); return !!n && !n.hidden && n.offsetParent !== null; }, sel);
+  const visible = (page, sel) => page.evaluate((s) => { const n = document.querySelector(s); return !!n && !n.hidden && n.offsetParent !== null && getComputedStyle(n).visibility !== "hidden"; }, sel);
   const config = { url: PROJET, cle_publique: CLE, fournisseurs: ["google", "azure"] };
 
   // 1. Sans configuration : le site est celui d'avant
