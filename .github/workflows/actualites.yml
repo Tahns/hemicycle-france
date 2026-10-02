@@ -2,6 +2,14 @@ name: Actualités
 on:
   schedule:
     - cron: "37 * * * *"
+  # GitHub retarde souvent les tâches programmées : relevé aussi après chaque mise à jour des données,
+  # et dès qu'une modification du relevé ou des illustrations est fusionnée
+  workflow_run:
+    workflows: ["Mise à jour automatique des données"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["scripts/fetch-actualites.js", "scripts/illustrations.js", "data/portraits.json"]
   workflow_dispatch: {}
 permissions:
   contents: write

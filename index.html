@@ -360,12 +360,31 @@
   .actu-sujet{display:grid; grid-template-columns:76px 1fr; gap:14px; align-items:start; padding:14px 0; border-bottom:1px solid var(--border-soft);}
   .actu-corps{min-width:0;}
   .actu-visuel{position:relative; width:76px; height:76px;}
+  .actu-pastille-nom{position:absolute; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-display); font-weight:600; font-size:18px; border:3px solid var(--bg); box-sizing:border-box;}
+  .actu-portraits.n1 .actu-pastille-nom{width:76px; height:76px; font-size:26px;}
+  .actu-portraits.n3 .actu-pastille-nom{width:40px; height:40px; font-size:14px; border-width:2px;}
+  .actu-portraits.n2 > :nth-child(1) .actu-pastille-nom, .actu-portraits.n2 > .actu-pastille-nom:nth-child(1){left:0; top:0;}
+  .actu-portraits.n2 > :nth-child(2) .actu-pastille-nom, .actu-portraits.n2 > .actu-pastille-nom:nth-child(2){right:0; bottom:0;}
+  .actu-portraits.n3 > :nth-child(1) .actu-pastille-nom, .actu-portraits.n3 > .actu-pastille-nom:nth-child(1){left:18px; top:0;}
+  .actu-portraits.n3 > :nth-child(2) .actu-pastille-nom, .actu-portraits.n3 > .actu-pastille-nom:nth-child(2){left:0; bottom:0;}
+  .actu-portraits.n3 > :nth-child(3) .actu-pastille-nom, .actu-portraits.n3 > .actu-pastille-nom:nth-child(3){right:0; bottom:0;}
+  .actu-une .actu-pastille-nom{width:100px; height:100px; font-size:34px;}
+  .actu-une .actu-portraits.n1 .actu-pastille-nom{width:140px; height:140px; font-size:48px;}
+  .actu-une .actu-portraits.n3 .actu-pastille-nom{width:72px; height:72px; font-size:26px;}
+  .actu-une .actu-portraits.n3 > :nth-child(1) .actu-pastille-nom, .actu-une .actu-portraits.n3 > .actu-pastille-nom:nth-child(1){left:34px;}
+  @media (max-width:700px){
+    .actu-pastille-nom{width:44px; height:44px; font-size:15px;}
+    .actu-portraits.n1 .actu-pastille-nom{width:60px; height:60px;}
+    .actu-portraits.n3 .actu-pastille-nom{width:31px; height:31px; font-size:11px;}
+    .actu-portraits.n3 > :nth-child(1) .actu-pastille-nom, .actu-portraits.n3 > .actu-pastille-nom:nth-child(1){left:14px;}
+    .actu-une .actu-pastille-nom, .actu-une .actu-portraits.n1 .actu-pastille-nom, .actu-une .actu-portraits.n3 .actu-pastille-nom{position:static; width:110px; height:110px; font-size:38px; flex-shrink:0;}
+  }
   .actu-portraits img{position:absolute; width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid; background:var(--border-soft); box-sizing:border-box;}
   .actu-portraits.n1 img{width:76px; height:76px;}
   .actu-portraits.n2 a:nth-child(1) img, .actu-portraits.n2 > img:nth-child(1){left:0; top:0;}
   .actu-portraits.n2 a:nth-child(2) img, .actu-portraits.n2 > img:nth-child(2){right:0; bottom:0;}
-  .actu-portraits.n3 img{width:46px; height:46px;}
-  .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:15px; top:0;}
+  .actu-portraits.n3 img{width:40px; height:40px; border-width:2px;}
+  .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:18px; top:0;}
   .actu-portraits.n3 a:nth-child(2) img, .actu-portraits.n3 > img:nth-child(2){left:0; bottom:0;}
   .actu-portraits.n3 a:nth-child(3) img, .actu-portraits.n3 > img:nth-child(3){right:0; bottom:0;}
   .actu-logo{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:#fff; border:1px solid var(--border-soft); border-radius:6px; padding:6px; box-sizing:border-box;}
@@ -382,8 +401,8 @@
   .actu-une .actu-visuel{width:140px; height:140px;}
   .actu-une .actu-portraits.n1 img{width:140px; height:140px; border-width:4px;}
   .actu-une .actu-portraits.n2 img{width:100px; height:100px;}
-  .actu-une .actu-portraits.n3 img{width:84px; height:84px;}
-  .actu-une .actu-portraits.n3 a:nth-child(1) img, .actu-une .actu-portraits.n3 > img:nth-child(1){left:28px;}
+  .actu-une .actu-portraits.n3 img{width:72px; height:72px;}
+  .actu-une .actu-portraits.n3 a:nth-child(1) img, .actu-une .actu-portraits.n3 > img:nth-child(1){left:34px;}
   .actu-une .actu-picto svg{width:60px; height:60px;}
   .actu-une .actu-picto small{font-size:11px;}
   .actu-une .actu-logo img{max-height:52px;} .actu-une .actu-logo img:only-of-type{max-height:90px;}
@@ -395,8 +414,8 @@
     .actu-visuel{width:60px; height:60px;}
     .actu-portraits.n1 img{width:60px; height:60px;}
     .actu-portraits img{width:44px; height:44px;}
-    .actu-portraits.n3 img{width:36px; height:36px;}
-    .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:12px;}
+    .actu-portraits.n3 img{width:31px; height:31px;}
+    .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:14px;}
     .actu-picto svg{width:26px; height:26px;} .actu-picto small{display:none;}
     .actu-une{grid-template-columns:1fr; gap:12px;}
     .actu-une .actu-visuel{width:100%; height:120px;}
@@ -2899,13 +2918,16 @@ const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPE
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
 function visuelActu(s){
   const ill = s.illustration || {};
-  const avecPhoto = (ill.personnes || []).filter(p=>p.photo);
+  const personnes = ill.personnes || [];
   const theme = THEMES_ACTU[ill.theme] || THEMES_ACTU.politique;
   const pastille = `<span class="actu-theme" style="--c:${theme[0]}" title="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg></span>`;
-  if(avecPhoto.length){
-    return `<div class="actu-visuel actu-portraits n${avecPhoto.length}">${avecPhoto.map(p=>{
-      const img = `<img src="${esc(p.photo)}" alt="" loading="lazy" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`;
-      return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${img}</a>` : img;
+  // Les personnes citées, dans l'ordre (la plus citée d'abord) : portrait, ou initiales à la couleur du parti
+  if(personnes.some(p=>p.photo)){
+    return `<div class="actu-visuel actu-portraits n${personnes.length}">${personnes.map(p=>{
+      const contenu = p.photo
+        ? `<img src="${esc(p.photo)}" alt="" loading="lazy" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
+        : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}">${esc(initialesActu(p.nom))}</span>`;
+      return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${contenu}</a>` : contenu;
     }).join("")}${pastille}</div>`;
   }
   if((ill.partis || []).length){
