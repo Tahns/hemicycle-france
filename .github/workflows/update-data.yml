@@ -126,6 +126,9 @@ jobs:
         id: photos
         run: node scripts/photos.cjs
         continue-on-error: true
+      - name: Photos HD des parlementaires cités dans l'actualité (stories nettes)
+        run: node scripts/photos-hd.cjs
+        continue-on-error: true
 
       - name: Committer les changements s'il y en a
         run: |
