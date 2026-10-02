@@ -56,6 +56,28 @@ async function checkLois() {
   console.log(`[check-data] lois.json : ${data.lois.length} scrutins contrôlés.`);
 }
 
+async function checkArchives() {
+  const { MAX_SEMAINES, FICHIERS, semaineISO } = await import("./archiver.js");
+  if (!existsSync("data/archives/index.json")) return console.log("[check-data] archives : aucun instantané pour l'instant.");
+  const idx = JSON.parse(await readFile("data/archives/index.json", "utf-8"));
+  if (!Array.isArray(idx.instantanes)) return err("archives/index.json : tableau 'instantanes' absent");
+  if (idx.instantanes.length > MAX_SEMAINES) err(`archives : ${idx.instantanes.length} instantanés (maximum ${MAX_SEMAINES})`);
+  const semaines = new Set();
+  let precedent = "";
+  for (const i of idx.instantanes) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(i.date || "")) { err(`archives : date invalide (${i.date})`); continue; }
+    if (i.date <= precedent) err(`archives : instantanés non triés du plus ancien au plus récent (${i.date})`);
+    precedent = i.date;
+    if (semaines.has(semaineISO(i.date))) err(`archives : deux instantanés la même semaine (${i.date})`);
+    semaines.add(semaineISO(i.date));
+    for (const f of FICHIERS) {
+      try { JSON.parse(await readFile(`data/archives/${i.date}/${f}`, "utf-8")); } catch { err(`archives : ${i.date}/${f} absent ou illisible`); }
+    }
+    if (!Array.isArray(i.candidats) || i.candidats.some((c) => !c.nom || typeof c.intention !== "number")) err(`archives : résumé du ${i.date} invalide`);
+  }
+  console.log(`[check-data] archives : ${idx.instantanes.length} instantané(s).`);
+}
+
 async function checkIndicateurs() {
   const data = JSON.parse(await readFile("data/indicateurs.json", "utf-8"));
   if (!Array.isArray(data.indicateurs) || data.indicateurs.length === 0) return err("indicateurs.json : tableau vide");
@@ -276,6 +298,7 @@ await checkNavette();
 await checkSenateurs();
 await checkGouvernementAgenda();
 await checkCommunes();
+await checkArchives();
 {
   const { logos } = JSON.parse(await readFile("data/logos.json", "utf-8"));
   for (const [id, l] of Object.entries(logos)) if (!l.fichier || (l.licence && !/public domain|domaine public|^cc0|^cc by/i.test(l.licence))) err(`logos.json : ${id} invalide ou non libre`);

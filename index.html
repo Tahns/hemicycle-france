@@ -909,6 +909,23 @@
   .depute-groupe{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;}
   .depute-groupe .dot{width:9px; height:9px; border-radius:50%;}
   .depute-lieu{font-size:14px; color:var(--text-soft); margin:0 0 18px;}
+  .en-bref{margin-bottom:30px;}
+  .en-bref .accueil-hero-stats{margin-bottom:0;}
+  .en-bref-maj{font-size:12.5px; color:var(--text-faint); margin:6px 0 0;}
+  .depute-parcours{margin:0 0 18px; padding:0 0 14px; border-bottom:1px solid var(--border);}
+  .depute-parcours h3{font-size:15px; margin:0 0 8px;}
+  .depute-parcours ol{list-style:none; margin:0; padding:0 0 0 14px; border-left:2px solid var(--border);}
+  .depute-parcours li{margin:0 0 8px; font-size:14.5px; position:relative;}
+  .depute-parcours li::before{content:""; position:absolute; left:-20px; top:.55em; width:8px; height:8px; border-radius:50%; background:var(--accent);}
+  .depute-parcours li small{display:block; color:var(--text-faint); font-size:12.5px;}
+  .archives-graphe svg{display:block; width:100%; height:auto; overflow:visible;}
+  .archives-graphe .grille{stroke:var(--border-soft); stroke-width:1;}
+  .archives-graphe .axe-texte{fill:var(--text-faint); font-size:11.5px; font-family:var(--font-body);}
+  .archives-graphe .etiquette{fill:var(--text); font-size:12px; font-weight:600; font-family:var(--font-body);}
+  .archives-liste{list-style:none; margin:0; padding:0;}
+  .archives-liste li{display:flex; flex-wrap:wrap; gap:4px 16px; padding:10px 0; border-top:1px solid var(--border-soft); font-size:14.5px;}
+  .archives-liste b{min-width:110px;}
+  .archives-liste a{color:var(--accent);}
   .depute-note{font-size:13px; color:var(--text-faint); max-width:760px; margin:10px 0 26px;}
   .depute-vote{font-size:12.5px; font-weight:700; white-space:nowrap;}
   .depute-vote.absent{color:var(--text-faint); font-weight:500;}
@@ -1186,6 +1203,7 @@
     <span class="tab-sep" aria-hidden="true"></span>
     <div class="tab" data-tab="chiffres">Économie</div>
     <div class="tab" data-tab="quiz">Quiz</div>
+    <div class="tab" data-tab="archives">Archives</div>
   </div>
 </nav>
 
@@ -1219,6 +1237,7 @@
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
+  <button type="button" class="feuille-lien" data-tab="archives"><b>Archives</b><span>Instantanés hebdomadaires des sondages et des probabilités</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
@@ -1228,6 +1247,11 @@
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
     <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
+    <div class="en-bref" id="en-bref" hidden>
+      <div class="accueil-section-title">En bref</div>
+      <div class="accueil-hero-stats" id="en-bref-faits"></div>
+      <p class="en-bref-maj" id="en-bref-maj"></p>
+    </div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
@@ -1587,6 +1611,19 @@
       <h3>Responsabilité</h3>
       <p>Tout est vérifié avec soin, mais personne n'est à l'abri d'une erreur : si vous en voyez une, signalez-la et elle sera corrigée. Le code du site est public et consultable sur <a href="https://github.com/Tahns/hemicycle-france" target="_blank" rel="noopener">GitHub</a>.</p>
     </div>
+  </section>
+
+  <section class="view" id="view-archives">
+    <div class="rubrique-tete">
+      <div class="surtitre">Mémoire du site</div>
+      <h2>Archives</h2>
+      <p class="chapo">Chaque semaine, le site conserve une copie datée des sondages, des probabilités et des actualités (52 semaines au plus). Les fichiers complets sont téléchargeables.</p>
+    </div>
+    <h3 class="histo-title">Intentions de vote au premier tour, semaine après semaine</h3>
+    <p class="depute-note" id="archives-note"></p>
+    <div class="archives-graphe" id="archives-graphe"></div>
+    <h3 class="histo-title">Les instantanés</h3>
+    <ul class="archives-liste" id="archives-liste"></ul>
   </section>
 
   <section class="view" id="view-quiz">
@@ -2906,6 +2943,47 @@ function renderProbabilites(){
   bloc.hidden = false;
 }
 
+/* ---------- Archives : instantanés hebdomadaires (data/archives/, écrits par scripts/archiver.js) ---------- */
+let ARCHIVES = null;
+async function renderArchives(){
+  ARCHIVES ||= lireJSON("data/archives/index.json");
+  const idx = await ARCHIVES;
+  const liste = document.getElementById("archives-liste"), graphe = document.getElementById("archives-graphe"), note = document.getElementById("archives-note");
+  const inst = idx?.instantanes || [];
+  if(!inst.length){
+    note.textContent = "Aucun instantané disponible pour l'instant : le premier sera enregistré lors de la prochaine mise à jour.";
+    graphe.innerHTML = ""; liste.innerHTML = ""; return;
+  }
+  const jour = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+  liste.innerHTML = [...inst].reverse().map(i=>`<li><b>${esc(jour(i.date))}</b>
+    <span>${formatNombre(i.instituts)} enquête${i.instituts > 1 ? "s" : ""} · ${formatNombre(i.sujets)} sujets d'actualité</span>
+    ${["sondages","probabilites","actualites"].map(f=>`<a href="data/archives/${esc(i.date)}/${f}.json" target="_blank" rel="noopener">${f === "probabilites" ? "probabilités" : f === "actualites" ? "actualités" : "sondages"}</a>`).join("")}</li>`).join("");
+
+  // Courbes : intention de vote moyenne (data/probabilites.json de chaque semaine) des cinq premiers du dernier instantané
+  const dernier = inst.at(-1);
+  const noms = dernier.candidats.slice(0, 5).map(c=>c.nom);
+  const series = noms.map(nom=>({ nom, parti:dernier.candidats.find(c=>c.nom===nom).parti,
+    pts: inst.map((i,k)=>({ k, v:i.candidats.find(c=>c.nom===nom)?.intention })).filter(p=>typeof p.v === "number") })).filter(s=>s.pts.length);
+  note.textContent = inst.length < 2
+    ? "Un seul instantané pour l'instant : les courbes apparaîtront dès la semaine prochaine. Valeurs : intentions de vote moyennes calculées par le site."
+    : `${inst.length} instantanés, du ${jour(inst[0].date)} au ${jour(dernier.date)}. Valeurs : intentions de vote moyennes calculées par le site, en %.`;
+  if(!series.length){ graphe.innerHTML = ""; return; }
+  const W = 640, H = 280, g = { l:34, r:110, t:12, b:26 };
+  const max = Math.max(10, Math.ceil(Math.max(...series.flatMap(s=>s.pts.map(p=>p.v))) / 10) * 10);
+  const x = k => g.l + (inst.length < 2 ? (W - g.l - g.r) / 2 : k * (W - g.l - g.r) / (inst.length - 1));
+  const y = v => g.t + (1 - v / max) * (H - g.t - g.b);
+  const couleur = parti => `var(--serie-${SERIE_PARTI[parti] || "autre"})`;
+  const grille = [0, .25, .5, .75, 1].map(f=>{ const v = max * f; return `<line class="grille" x1="${g.l}" x2="${W - g.r}" y1="${y(v)}" y2="${y(v)}"/><text class="axe-texte" x="${g.l - 6}" y="${y(v) + 4}" text-anchor="end">${v} %</text>`; }).join("");
+  const dates = [0, inst.length - 1].filter((k,j,a)=>a.indexOf(k)===j).map(k=>`<text class="axe-texte" x="${x(k)}" y="${H - 6}" text-anchor="${inst.length < 2 ? "middle" : k ? "end" : "start"}">${esc(new Date(inst[k].date + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"short" }))}</text>`).join("");
+  graphe.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution hebdomadaire des intentions de vote de ${series.map(s=>esc(nomCourt(s.nom))).join(", ")}">
+    ${grille}${dates}
+    ${series.map(s=>`<g style="color:${couleur(s.parti)}">
+      <polyline fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" points="${s.pts.map(p=>`${x(p.k)},${y(p.v)}`).join(" ")}"/>
+      ${s.pts.map(p=>`<circle cx="${x(p.k)}" cy="${y(p.v)}" r="3.5" fill="currentColor"><title>${esc(s.nom)}, ${esc(jour(inst[p.k].date))} : ${nombreFr(p.v)} %</title></circle>`).join("")}
+      <text class="etiquette" x="${x(s.pts.at(-1).k) + 9}" y="${y(s.pts.at(-1).v) + 4}">${esc(nomCourt(s.nom))} ${nombreFr(s.pts.at(-1).v)} %</text></g>`).join("")}
+  </svg>`;
+}
+
 /* ---------- Actualités : titres de la rubrique politique des médias (data/actualites.json, toutes les 2 h) ---------- */
 let ACTUALITES = null, actuFiltre = "recoupes";
 function ilYA(iso){
@@ -3576,6 +3654,38 @@ function checkContexteDate(loi){
 
 /* ---------- Accueil (tableau de bord) ---------- */
 
+/* ---------- « En bref » : cinq faits calculés depuis les données déjà chargées, rien d'écrit à la main ---------- */
+function renderEnBref(){
+  const bloc = document.getElementById("en-bref");
+  if(!bloc) return;
+  const faits = [];
+  const dernier = LOIS[0];
+  if(dernier) faits.push({ href:"#scrutin", v:`n° ${dernier.numero ?? ""}`.trim(), l:`dernier scrutin public (${dernier.date}) : ${dernier.resultat === "adopte" ? "adopté" : "rejeté"}` });
+  const textes = LOIS.filter(l=>categorieLoi(l)==="texte");
+  if(textes.length) faits.push({ href:"#scrutin", v:`${formatNombre(textes.filter(l=>l.resultat==="adopte").length)} / ${formatNombre(textes.length)}`, l:"textes adoptés sur les textes votés à l'Assemblée" });
+  const inst = INSTITUTS[0];
+  if(inst && !periodeReserveSondages() && CANDIDATS.length){
+    const tete = CANDIDATS.map(c=>({ c, r:inst.scores[c.id] })).filter(x=>x.r).sort((a,b)=>milieuFourchette(b.r)-milieuFourchette(a.r))[0];
+    if(tete) faits.push({ href:"#sondages", v:fourchetteTexte(tete.r), l:`${tete.c.nom} en tête au premier tour (${inst.nom}, ${inst.date})` });
+  }
+  if(PROBAS?.candidats?.length && !periodeReserveSondages()){
+    const fav = PROBAS.candidats.filter(c=>typeof c.victoire==="number").sort((a,b)=>b.victoire-a.victoire)[0];
+    if(fav) faits.push({ href:"#sondages", v:`${nombreFr(fav.victoire)} %`, l:`des simulations donnent la victoire à ${fav.nom}` });
+  }
+  const tour = meetingsAVenir().find(m=>/^Élection présidentielle/.test(m.titre));
+  if(tour){
+    const jours = Math.round((Date.parse(tour.debut) - Date.parse(aujourdhuiISO())) / 864e5);
+    if(jours > 0) faits.push({ href:"#meetings", v:`J-${formatNombre(jours)}`, l:tour.titre.replace("Élection présidentielle : ", "avant la présidentielle, ") });
+  }
+  const recoupes = (ACTUALITES?.sujets || []).filter(x=>x.medias >= 2).length;
+  if(recoupes) faits.push({ href:"#actualites", v:formatNombre(recoupes), l:"sujets d'actualité repris par au moins deux médias" });
+  const cinq = faits.slice(0, 5);
+  bloc.hidden = cinq.length === 0;
+  document.getElementById("en-bref-faits").innerHTML = cinq.map(f=>`<a class="accueil-hero-stat" href="${f.href}"><div class="v">${esc(f.v)}</div><div class="l">${esc(f.l)}</div></a>`).join("");
+  const maj = [PROBAS?.lastUpdated, ACTUALITES?.lastUpdated, LOIS_MAJ].filter(Boolean).sort().at(-1);
+  document.getElementById("en-bref-maj").textContent = maj && dateCourte(maj) ? `Calculé à partir des données publiées sur le site, actualisées le ${dateCourte(maj)}.` : "";
+}
+
 const normTitreAccueil = l => norm(l.dossierTitre || titreLoi(l));
 function renderAccueil(){
   // Stats clés en haut de page (réutilise les données déjà chargées)
@@ -3586,6 +3696,8 @@ function renderAccueil(){
       return i ? `<a class="accueil-hero-stat" href="#chiffres"><div class="v">${esc(i.valeur)}</div><div class="l">${nom} (${esc(i.date.replace(/\s*\(.*\)/,""))}) · ${esc((i.source || "Insee").replace(/\s*\(.*\)$/, ""))}</div></a>` : "";
     }).join("")}
   `;
+
+  renderEnBref();
 
   // "À la une" : dernière loi votée, prochain meeting, tendance sondages
   // LOIS est trié du scrutin le plus récent au plus ancien : premier vote final sur un texte
@@ -4221,6 +4333,33 @@ function blocComparaison(d){
   </div>`;
 }
 
+// « Parcours » : mandat, groupe et commissions, uniquement à partir des données déjà publiées sur le site
+function blocParcours(d){
+  const p = partiDepute(d);
+  const g = GROUPES[d.groupe];
+  const depuis = dateCourte(d.depuis);
+  const etapes = [
+    `<li><b>${d.f ? "Députée" : "Député"} de ${esc(circoDepute(d))}</b> (${esc(d.numDep)})<small>${depuis ? `en fonction depuis le ${esc(depuis)}` : "mandat en cours, 17e législature"}</small></li>`,
+    `<li><b>Groupe : ${esc(p.nom)}</b>${g?.membres ? `<small>${formatNombre(g.membres)} membres à l'Assemblée</small>` : ""}</li>`,
+  ];
+  if(g?.president && g.president === d.nom){
+    const dg = dateCourte(g.presidentDepuis);
+    etapes.push(`<li><b>${g.presidente ? "Présidente" : "Président"} du groupe</b>${dg ? `<small>depuis le ${esc(dg)}</small>` : ""}</li>`);
+  }
+  etapes.push(`<li id="parcours-commissions" hidden></li>`);
+  return `<h3>Parcours</h3><ol>${etapes.join("")}</ol>`;
+}
+async function afficherParcoursCommissions(d){
+  COMMISSIONS ||= lireJSON("data/commissions.json");
+  const pc = (await COMMISSIONS)?.deputes?.[d.id];
+  const li = document.getElementById("parcours-commissions");
+  if(!pc || !li || deputeOuvert !== d.id) return;
+  const total = pc[0] + pc[1] + pc[2];
+  if(!total) return;
+  li.innerHTML = `<b>Commission permanente</b><small>présent${d.f ? "e" : ""} à ${formatNombre(pc[0])} réunion${pc[0] > 1 ? "s" : ""} sur ${formatNombre(total)} (${pctFr(pc[0], total)})</small>`;
+  li.hidden = false;
+}
+
 function renderDeputeFiche(d){
   const p = partiDepute(d);
   const s = d.stats;
@@ -4252,6 +4391,7 @@ function renderDeputeFiche(d){
       <div class="stat-card"><div class="stat-label">Ses votes</div><div class="stat-value">${formatNombre(s.pour)} · ${formatNombre(s.contre)} · ${formatNombre(s.abst)}</div><div class="stat-sub">pour · contre · abstention</div>${exprimes ? `<div class="vote-barre mini" aria-hidden="true">${[["p",s.pour],["c",s.contre],["a",s.abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}</div>` : ""}</div>
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(s.ecarts)}</div><div class="stat-sub">${pctFr(s.ecarts, exprimes)} de ses votes diffèrent de la position majoritaire de son groupe</div></div>
     </div>
+    <div class="depute-parcours" id="depute-parcours">${blocParcours(d)}</div>
     <div class="depute-activite" id="depute-activite" hidden></div>
     ${blocThemes(d)}
     ${blocComparaison(d)}
@@ -4272,6 +4412,7 @@ function renderDeputeFiche(d){
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
+  afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
   document.getElementById("depute-comparer")?.addEventListener("change", e=>{ deputeCompare = e.target.value || null; renderDeputeFiche(d); });
   document.querySelectorAll("#depute-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{
@@ -5089,7 +5230,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "archives", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -5121,6 +5262,7 @@ function activateTab(tabId){
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
   if(tabId === "mentions") renderCreditsPortraits();
+  if(tabId === "archives") renderArchives();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe

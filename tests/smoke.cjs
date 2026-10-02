@@ -49,6 +49,8 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
+    verifier((await page.$$("#en-bref .accueil-hero-stat")).length === 5, `${nom} : bloc « En bref » incomplet`);
+
     for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
@@ -109,6 +111,12 @@ function verifier(cond, message) {
     verifier(/#depute-PA\d+$/.test(page.url()), `${nom} : la fiche député n'a pas de lien direct`);
     verifier((await page.$$("#depute-fiche .stat-card")).length === 4, `${nom} : statistiques du député absentes`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la fiche député`);
+    verifier((await page.$$("#depute-parcours li")).length >= 2, `${nom} : « Parcours » absent de la fiche député`);
+
+    await page.goto(base + "#archives", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$("#archives-liste li")).length >= 1 && (await page.$$("#archives-graphe svg circle")).length >= 1, `${nom} : archives ou graphique absents`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur les archives`);
 
     await page.goto(base + "#candidats", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
