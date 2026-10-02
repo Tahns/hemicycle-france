@@ -13,7 +13,7 @@ import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
-import { extraire, controlerDico, listerLangues } from "./extraire-i18n.js";
+import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
@@ -527,6 +527,10 @@ async function checkI18n() {
     a.slice(0, 3).forEach((m) => console.warn("[check-data] " + m));
     if (a.length > 3) console.warn(`[check-data] i18n : ${a.length - 3} autre(s) marque(s) omise(s) pour ${code}.json`);
     resume.push(`${code} ${traduites}`);
+    // Tables de données (postes du budget, groupes, fonctions, quiz… : clé = texte français exact) ; absence = retour au français
+    if (!existsSync(`data/i18n/donnees/${code}.json`)) { console.warn(`[check-data] i18n : data/i18n/donnees/${code}.json absent (libellés de données non traduits)`); continue; }
+    try { controlerDonnees(code, await lire(`data/i18n/donnees/${code}.json`)).forEach(err); }
+    catch (e) { err(`i18n : donnees/${code}.json n'est pas un JSON valide (${e.message})`); }
   }
   console.log(`[check-data] i18n : ${Object.keys(fr).length} chaînes françaises ; traduites : ${resume.join(", ")}.`);
 }

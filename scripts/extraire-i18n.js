@@ -37,8 +37,8 @@ const ATTRIBUTS = ["placeholder", "title", "aria-label", "alt"];
 const EXCLUS = new Set(["Public Sans", "Newsreader", "Enter", "Escape", "Home", "End", "Tab", "Notification", "Content-Type", "NFD", "fr-FR", "Le Pen", "Mélenchon", "Pécresse", "Dupont-Aignan", "Instagram", "Eurostat", "Insee", "HATVP", "CNIL", "GitHub", "Wikimedia Commons", "Décodex", "Le Monde"]);
 
 /* ---------- Filtre : est-ce un texte français destiné à l'affichage ? ---------- */
-function plausible(t) {
-  if (!t || t.length > 600 || EXCLUS.has(t)) return false;
+function plausible(t, max = 600) {
+  if (!t || t.length > max || EXCLUS.has(t)) return false;
   const sansMarques = t.replace(/\{\d+\}/g, " ");
   if (!/\p{L}{2,}/u.test(sansMarques)) return false;
   if (/(^|\s)(\d+|\{\d+\})px\b/.test(t) || /^[.#]|\[[\w-]+[=\]]|\bdata-[a-z-]+=|^[\w-]+="[^"]*"$|^\(.*:.*\)$|^\$\d/.test(t)) return false; // police canvas, sélecteur, attribut
@@ -76,6 +76,61 @@ function* morceauxHtml(html, { entites = true } = {}) {
       }
     } else if (s[0] !== "<") yield dec(s);
   }
+}
+
+/* ---------- HTML : phrases coupées par des éléments en ligne ----------
+   « Le <infobulle>49.3</infobulle> est un article… <b>sans vote</b>. Depuis 2008… » : traduire chaque morceau séparément mêle
+   deux langues. Un élément dont tous les enfants-éléments sont en ligne et qui contient au moins deux morceaux de texte avec des
+   mots (séparés par des éléments) donne une clé de phrase entière : chaque élément en ligne et chaque ${…} y est remplacé par une
+   marque {1}, {2}… dans l'ordre. index.html applique la même règle au moment de traduire (estPhrase / traduirePhrase). */
+const VIDES = new Set(["br", "img", "hr", "input", "meta", "link", "wbr", "area", "base", "col", "source", "track", "embed"]);
+export const EN_LIGNE = new Set(["a", "b", "strong", "i", "em", "span", "button", "code", "abbr", "sup", "sub", "small", "mark", "u", "cite", "q", "time", "br", "s", "del", "ins", "wbr", "kbd", "var", "samp"]);
+
+function arbre(html) {
+  const racine = { tag: "#racine", enfants: [], ferme: true }, pile = [racine];
+  const re = /<!--[\s\S]*?-->|<![^>]*>|<(script|style)\b[\s\S]*?<\/\1\s*>|<(\/?)([a-zA-Z][\w-]*)([^>]*)>|[^<]+|</g;
+  let m;
+  while ((m = re.exec(html))) {
+    const haut = pile[pile.length - 1];
+    if (m[0].startsWith("<!") || m[1]) continue;
+    if (m[3]) {
+      const tag = m[3].toLowerCase();
+      if (m[2]) {
+        const i = pile.map((x) => x.tag).lastIndexOf(tag);
+        if (i > 0) { pile[i].ferme = true; pile.length = i; }
+      } else {
+        const e = { tag, enfants: [], ferme: VIDES.has(tag) || /\/\s*$/.test(m[4]) };
+        haut.enfants.push(e);
+        if (!e.ferme) pile.push(e);
+      }
+    } else if (m[0] !== "<") haut.enfants.push({ texte: m[0] });
+  }
+  return racine;
+}
+
+const avecMots = (t) => /\p{L}{2,}/u.test(t.replace(/\u0001\d+\u0001/g, " "));
+function estPhrase(n) {
+  let element = false, segments = 0, mots = false;
+  for (const e of n.enfants) {
+    if (e.texte !== undefined) { if (avecMots(decoder(e.texte))) mots = true; }
+    else {
+      if (!EN_LIGNE.has(e.tag) || !e.ferme) return false;
+      element = true; if (mots) segments++; mots = false;
+    }
+  }
+  if (mots) segments++;
+  return element && segments >= 2;
+}
+
+function* phrasesHtml(html) {
+  const visiter = function* (n) {
+    for (const e of n.enfants) if (e.tag) yield* visiter(e);
+    if (n.tag !== "#racine" && n.ferme && estPhrase(n)) {
+      let k = 0;
+      yield n.enfants.map((e) => e.texte !== undefined ? decoder(e.texte).replace(/\u0001\d+\u0001/g, () => `{${++k}}`) : `{${++k}}`).join("");
+    }
+  };
+  yield* visiter(arbre(html));
 }
 
 /* ---------- JavaScript : chaînes et gabarits ---------- */
@@ -161,20 +216,23 @@ export function cle(texte, existantes = new Map()) {
 export function extraire(html) {
   const { principal, statique } = separer(html);
   const titre = /<title>([^<]*)<\/title>/i.exec(statique);
-  const vus = new Set(), liste = [];
-  const ajouter = (brut, source) => {
+  const vus = new Set(), liste = [], phrases = [];
+  const ajouter = (brut, source, max) => {
     const t = normaliser(String(brut));
-    if (!plausible(t) || vus.has(t)) return;
+    if (!plausible(t, max) || vus.has(t)) return;
     vus.add(t); liste.push({ texte: t, source });
   };
+  const phrase = (html) => { for (const p of phrasesHtml(html)) phrases.push(p); };
   if (titre) ajouter(decoder(titre[1]), "html");
   for (const m of morceauxHtml(statique.replace(/<title>[\s\S]*?<\/title>/i, ""))) ajouter(m, "html");
+  phrase(statique);
   parcourirJS(principal, (t, gab) => {
     const contientHtml = /<\/?[a-zA-Z][^>]*>/.test(t);
     const m = t.replace(/\u0001(\d+)\u0001/g, "{$1}");
-    if (contientHtml) for (const x of morceauxHtml(m)) ajouter(x, "js");
+    if (contientHtml) { for (const x of morceauxHtml(m)) ajouter(x, "js"); phrase(t); }
     else ajouter(/&[a-z#0-9]+;/i.test(m) ? decoder(m) : m, "js");
   });
+  for (const p of phrases) ajouter(p, "phrase", 2000); // les phrases entières viennent après les morceaux : clés existantes inchangées
   const dico = new Map();
   for (const { texte } of liste) dico.set(cle(texte, dico), texte);
   return dico;
@@ -229,6 +287,28 @@ export function controlerDico(code, fr, dico) {
     if (texte.trim()) traduites++;
   }
   return { erreurs, avertissements, traduites };
+}
+
+/**
+ * Contrôle une table de données data/i18n/donnees/<code>.json : { texte français exact : traduction }.
+ * La clé est le texte tel qu'il apparaît dans la page (espaces normalisés) ; {1}, {2}… sont des emplacements, {1#} un emplacement
+ * réservé à un nombre ou à une année. Erreurs : valeur non textuelle ou vide, HTML, clé non normalisée, marque ajoutée ou omise.
+ */
+export function controlerDonnees(code, donnees) {
+  const erreurs = [];
+  const f = `donnees/${code}.json`;
+  if (!donnees || typeof donnees !== "object" || Array.isArray(donnees)) return [`${f} : doit être un objet { texte français: traduction }`];
+  for (const [cle, texte] of Object.entries(donnees)) {
+    if (cle.startsWith("_")) continue;
+    if (cle !== normaliser(cle)) erreurs.push(`${f} : clé non normalisée (espaces en trop) « ${cle} »`);
+    if (typeof texte !== "string" || !texte.trim()) { erreurs.push(`${f} : traduction vide ou non textuelle pour « ${cle.slice(0, 80)} »`); continue; }
+    if (BALISE.test(texte)) erreurs.push(`${f} : balise HTML interdite dans la traduction de « ${cle.slice(0, 80)} »`);
+    const permises = marques(cle.replace(/\{(\d+)#\}/g, "{$1}")), presentes = marques(texte);
+    const ajoutees = presentes.filter((m) => !permises.includes(m)), omises = permises.filter((m) => !presentes.includes(m));
+    if (ajoutees.length) erreurs.push(`${f} : marque ${ajoutees.join(" ")} absente du français dans « ${cle.slice(0, 80)} »`);
+    if (omises.length) erreurs.push(`${f} : marque ${omises.join(" ")} omise dans « ${cle.slice(0, 80)} »`);
+  }
+  return erreurs;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) await main();

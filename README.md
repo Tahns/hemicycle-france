@@ -149,6 +149,39 @@ insérées en texte brut (jamais en `innerHTML`). Si une clé manque, le frança
 3. `node scripts/check-data.js` contrôle JSON valide, clés connues de `fr.json`, marques, absence de HTML ;
    `node scripts/couverture-i18n.js` affiche le pourcentage de clés traduites par langue.
 
+**Phrases entières.** Un morceau de gabarit traduit seul donnerait une phrase mêlant deux langues. Trois mécanismes
+évitent cela :
+- une phrase écrite en plusieurs morceaux (« Adopté le … » puis « Texte déposé par … » accolés par le code) est traduite
+  phrase par phrase ; une valeur insérée dans un gabarit est elle-même traduite (`Candidature {1}` + `annoncée le {1}`) ; une ligne
+  « A · B · C » l'est morceau par morceau ; un gabarit dont les valeurs sont longues (titre officiel suivi de
+  « (vote final) ») s'applique quand même ;
+- un élément dont le contenu est fait de plusieurs morceaux de texte séparés par des éléments en ligne (infobulle du
+  glossaire, lien, gras) a une **clé de phrase entière** : chaque élément en ligne y est une marque `{1}`, `{2}`… et la
+  traduction replace l'élément (même règle dans `scripts/extraire-i18n.js` et dans `index.html`, fonctions
+  `estPhrase` / `traduirePhrase`). Une traduction qui omet une marque d'élément est ignorée (on ne perd jamais un lien) ;
+- dans le JavaScript, préférer des phrases entières (une chaîne par cas : « Adopté le {1}. » / « Rejeté le {1}. ») à des
+  morceaux accolés ; après avoir remanié un gabarit, `node scripts/extraire-i18n.js` peut renuméroter les marques des
+  clés voisines : vérifier `node scripts/couverture-i18n.js --manquantes en`.
+
+**Dates, heures, durées et nombres.** Le site les écrit en français ; `localiserFormats` (`index.html`) les reconnaît
+et les reformule avec `Intl` pour la langue active (fr-FR, en-GB, es-ES, pt-PT, de-DE, champ `locale` de `LANGUES`) :
+« 2 octobre 2026 à 14 h 16 » devient « 2 October 2026 at 14:16 », « il y a 1 h » « 1 hour ago », « 1 504 Md€ » « €1,504bn »,
+« 5,1 % » « 5.1% », « 5ᵉ circonscription » « 5th constituency ». Seuls les textes entièrement faits d'une date, d'un nombre
+ou d'une heure, et les valeurs insérées dans une phrase traduite, sont touchés : un titre officiel français contenant une
+date reste tel quel. Dans une traduction, écrire les nombres à la manière de la langue cible (jamais « 1,597 » pour mille).
+Les images de partage (canvas), les pages statiques `d/`, `s/`, `v/`, `p/` et les stories restent en français.
+
+**Libellés de données** (postes du budget, indicateurs, groupes parlementaires, fonctions des dirigeants et des
+ministres, statuts et affaires de justice, thèmes, quiz, rubriques de questions, professions, agenda des partis…) :
+`data/i18n/donnees/<code>.json`, `{ "texte français exact": "traduction" }`, sans modifier les fichiers de données. Le texte
+a les espaces normalisés ; `{1}`, `{2}`… sont des emplacements (traduits à leur tour), `{1#}` un emplacement réservé à un
+nombre ou une année (« en {1#} » n'attrape pas « en cours »). Une entrée absente laisse le français. `check-data.js` contrôle
+marques, HTML et clés non normalisées. Ces tables sont chargées avec le dictionnaire et appliquées par le même traducteur.
+
+Ce qui reste volontairement en français : titres de scrutins, de lois et d'amendements, titres d'articles de presse, noms
+propres de personnes, de lieux et de partis, intitulés officiels cités, slogans de campagne, professions rares saisies librement
+par chaque élu, et les rubriques officielles des questions écrites non répertoriées.
+
 ### Ajouter une langue
 
 1. Créer `data/i18n/<code>.json` (`{}` au départ).
@@ -158,9 +191,9 @@ insérées en texte brut (jamais en `innerHTML`). Si une clé manque, le frança
    elle n'est jamais choisie automatiquement d'après le navigateur tant qu'elle est vide.
 
 Dans le code de la page, `t("Texte français")` (ou `t("clé")`) renvoie le texte dans la langue active, avec
-`t("{1} votes", { 1: n })` pour les valeurs. Limites connues : les dates, nombres et accords produits par le
-JavaScript (« 3 réunions », « il/elle ») restent en français ; les images de partage (canvas) restent en français ;
-les polices hébergées sont latines, les autres écritures utilisent les polices du système.
+`t("{1} votes", { 1: n })` pour les valeurs. Limites connues : les images de partage (canvas), les pages statiques de
+partage et les stories restent en français ; les polices hébergées sont latines, les autres écritures utilisent les
+polices du système.
 
 ## Architecture et secrets (en bref)
 
