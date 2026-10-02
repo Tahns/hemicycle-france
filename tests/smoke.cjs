@@ -83,6 +83,11 @@ function verifier(cond, message) {
     await page.waitForTimeout(300);
     verifier((await page.$$(".histo-row")).length > 10, `${nom} : historique vide`);
     verifier((await page.$$(".proximite-row")).length >= 5, `${nom} : proximité de vote absente`);
+    verifier((await page.$$("#histo-cohesion .proximite-row")).length >= 8, `${nom} : cohésion des groupes absente`);
+    await page.selectOption("#groupe-comparer", "RN");
+    await page.waitForTimeout(200);
+    verifier(/\d+ fois/.test(await page.textContent("#histo-comparateur .comparateur-resume").catch(() => "")), `${nom} : comparateur de deux groupes sans résultat`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec le comparateur de groupes`);
     if (nom === "mobile") {
       await page.selectOption("#party-select", "RN");
       await page.waitForTimeout(200);
