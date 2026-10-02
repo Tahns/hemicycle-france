@@ -4229,7 +4229,7 @@ function quizPhrase(sc, sujet){
 // Questions en langage courant (data/quiz.json, chacune reliée à un vote réel), complétées par les
 // derniers textes votés, dont l'intitulé officiel est simplifié automatiquement
 let QUIZ_PERSO = []; // data/quiz.json
-const QUIZ_NB = 12, QUIZ_AUTO = 2; // 10 questions rédigées + les 2 derniers textes votés
+const QUIZ_NB = 12, QUIZ_AUTO = 0; // uniquement des questions rédigées à la main (les intitulés officiels des derniers textes sont trop techniques)
 // L'intitulé officiel reste tel quel (en français, entre guillemets) : seule la formule autour de lui se traduit
 function questionAuto(l){
   const titre = (l.dossierTitre || titreLoi(l)).replace(/\s*\([^)]*\)\.?$/, "").replace(/\.$/, "");
@@ -7448,7 +7448,7 @@ let COMPTE = null, COMPTE_M = null, ESPACE_ACTIF = false, ESPACE = null, ESPACE_
 let espaceEtat = "", espaceMessage = "", espaceFormulaireOuvert = false, espaceMinuterie = 0, espaceResolu = null;
 const CLE_ESPACE = "espace-local";
 const ESPACE_PRET = new Promise(ok => { espaceResolu = ok; });
-const phraseVieQuiz = () => ESPACE_ACTIF ? t("Votre résultat est gardé dans Mon espace (sur cet appareil, ou dans votre compte si vous en avez un) ; vous pouvez l'effacer à tout moment.") : t("Vos réponses ne sont enregistrées nulle part.");
+const phraseVieQuiz = () => ESPACE_ACTIF ? t("Votre résultat est gardé dans Mon espace (sur cet appareil, ou dans votre compte si vous en avez un) ; vous pouvez l'effacer à tout moment.") : t("Votre résultat reste sur cet appareil : rien n'est envoyé ailleurs.");
 /* i18n-ignorer : noms propres, classes CSS et messages de console */
 const FOURNISSEURS_NOMS = { google:"Google", azure:"Microsoft", apple:"Apple", github:"GitHub" };
 const CLS_BOUTON2 = "story-bouton secondaire", LOCALE_ISO = "sv-SE";
