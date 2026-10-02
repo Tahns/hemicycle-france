@@ -1221,6 +1221,35 @@
   .texte-legal p, .texte-legal li{color:var(--text-soft); margin:0 0 var(--s3);}
   .texte-legal ul{padding-left:var(--s5); margin:0 0 var(--s3);}
   .texte-legal b{color:var(--text);}
+
+  /* ---------- Mon espace (comptes facultatifs) ---------- */
+  .espace-bloc{padding:var(--s5) 0; border-top:1px solid var(--border);}
+  #espace-contenu .espace-bloc:first-child{border-top:3px solid var(--ink);}
+  .espace-bloc h3{font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600; margin:0 0 var(--s2);}
+  .espace-bloc h4{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin:var(--s4) 0 var(--s1);}
+  .espace-bloc p{margin:0 0 var(--s3); color:var(--text-soft); max-width:62ch;}
+  .espace-liste{list-style:none; margin:0 0 var(--s3); padding:0; max-width:62ch;}
+  .espace-liste li{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s4); align-items:baseline; padding:var(--s2) 0; border-bottom:1px solid var(--border-soft);}
+  .espace-liste .lien-bouton{margin-left:auto; font-size:var(--fs-sm);}
+  .espace-bloc .espace-vide{font-style:italic; color:var(--text-faint);}
+  .espace-bloc .espace-email{font-weight:700; color:var(--text); overflow-wrap:anywhere;}
+  .espace-bloc .espace-msg{min-height:1.4em; color:var(--text); font-weight:600;}
+  .espace-bloc .espace-aide{font-size:var(--fs-sm);}
+  .espace-actions{display:flex; flex-wrap:wrap; gap:var(--s3); margin:var(--s3) 0 0;}
+  .espace-actions .story-bouton{padding:0 var(--s5);}
+  .espace-confirm{border:2px solid var(--ink); padding:var(--s4) var(--s4) var(--s5); margin:0 0 var(--s5); background:var(--bg-elevated);}
+  .espace-confirm p{margin:0; font-weight:600;}
+  .espace-form{display:grid; gap:var(--s3); max-width:420px; margin:var(--s4) 0 0;}
+  .espace-form label{font-size:var(--fs-md); font-weight:600;}
+  .espace-form input[type=email]{width:100%; min-height:46px; padding:0 var(--s3); font:inherit; border:1.5px solid var(--border); border-radius:var(--r-1); background:var(--bg); color:var(--text);}
+  .espace-form .espace-case{display:flex; gap:var(--s3); align-items:flex-start; font-weight:400;}
+  .espace-form .espace-case input{width:18px; height:18px; margin-top:2px; accent-color:var(--accent); flex:none;}
+  .espace-fournisseur{display:flex; align-items:center; justify-content:center; gap:var(--s3); min-height:46px; padding:0 var(--s4); background:#fff; color:#1F1F1F; border:1px solid #747775; border-radius:var(--r-2); font:600 var(--fs-base) var(--font-body); cursor:pointer;}
+  .espace-fournisseur img{width:18px; height:18px; flex:none;}
+  .espace-ou{display:flex; align-items:center; gap:var(--s3); color:var(--text-faint); font-size:var(--fs-sm);}
+  .espace-ou::before, .espace-ou::after{content:""; flex:1; border-top:1px solid var(--border);}
+  .espace-fav-bouton{margin-left:var(--s3); font-size:var(--fs-sm);}
+  #espace-groupe{font:inherit; min-height:40px; max-width:100%; padding:0 var(--s2); border:1.5px solid var(--border); border-radius:var(--r-1); background:var(--bg); color:var(--text);}
   .footer-liens{margin:0 0 var(--s4); font-size:var(--fs-sm);}
   .footer-liens a{color:var(--text-soft);}
   .sondage-reserve{padding:var(--s4) 0; font-family:var(--font-display); font-size:var(--fs-lg); color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border); max-width:780px;}
@@ -1460,6 +1489,7 @@
     <span class="droite"><span class="maj-info" id="maj-info">Mis à jour toutes les heures à partir de sources publiques</span>
       <button type="button" class="theme-toggle bouton-recherche" aria-haspopup="dialog">Rechercher <kbd>/</kbd></button>
       <span class="langue" id="langue-haut"></span>
+      <button type="button" class="theme-toggle" id="espace-haut" hidden>Mon espace</button>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
@@ -1510,6 +1540,7 @@
     <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
     <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   </details>
+  <button type="button" class="feuille-lien" id="espace-plus" data-tab="espace" hidden><b>Mon espace</b><span>Député suivi, historique du quiz, favoris</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
 
@@ -2094,7 +2125,8 @@
 
       <h3>Données personnelles et cookies</h3>
       <ul>
-        <li>Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
+        <li id="mention-sans-compte">Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
+        <li id="mention-avec-compte" hidden>Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité. La création d'un compte est facultative : tout le site fonctionne sans (voir « Compte et données personnelles » plus bas).</li>
         <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
         <li>Si vous activez les alertes, vos choix (et le député suivi) sont gardés sur votre appareil ; votre téléphone vérifie lui-même quelques fois par jour le fichier public des nouveautés du site. Aucun compte, aucune adresse, aucun identifiant de notification n'est transmis ni conservé par le site. Pour les arrêter : « Recevoir les alertes » → « Désactiver », ou les réglages de notification du téléphone.</li>
         <li>La date de votre dernière visite est aussi gardée dans votre navigateur, pour vous signaler les nouveaux votes et sondages depuis. Elle n'est jamais transmise ; effacer les données du site dans votre navigateur la supprime.</li>
@@ -2104,6 +2136,22 @@
         <li>Les informations sur les élus (nom, groupe, votes, fonctions) sont des données publiques liées à l'exercice de leur mandat, publiées par l'Assemblée nationale et le Sénat.</li>
       </ul>
       <p>Pour toute question sur vos données, vous pouvez ouvrir un ticket ou saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+      <div id="mentions-compte" hidden>
+        <h3>Compte et données personnelles</h3>
+        <p>Un compte est facultatif. Il sert uniquement à retrouver vos préférences (député ou groupe suivi, historique de vos résultats au quiz, favoris) sur tous vos appareils, dans la rubrique « Mon espace ». Sans compte, ces préférences restent dans votre navigateur.</p>
+        <ul>
+          <li><b>Responsable du traitement :</b> l'éditeur du site, joignable aux coordonnées indiquées plus haut, dans la rubrique « Éditeur ».</li>
+          <li><b>Finalité :</b> vous permettre de vous connecter et d'accéder à « Mon espace ». Aucune autre utilisation : ni publicité, ni profilage, ni mesure d'audience, ni revente.</li>
+          <li><b>Base légale :</b> votre consentement, donné en créant volontairement le compte, et l'exécution du service que vous demandez. Le compte est réservé aux personnes de 15 ans ou plus, ce que vous confirmez par une case à cocher.</li>
+          <li><b>Données traitées :</b> votre adresse e-mail et vos préférences. Si vous vous connectez avec un fournisseur (Google, Microsoft…), ce fournisseur reçoit votre identifiant chez lui, selon sa propre politique de confidentialité ; le site n'utilise que l'adresse e-mail qu'il transmet. Selon le fournisseur, le service d'authentification peut aussi enregistrer le nom de votre profil, qui n'est ni affiché ni utilisé.</li>
+          <li><b>Durée de conservation :</b> jusqu'à la suppression de votre compte, que vous pouvez faire à tout moment. Un compte sans connexion ni modification depuis 24 mois est supprimé automatiquement, avec ses données.</li>
+          <li><b>Destinataire et sous-traitant :</b> Supabase, qui héberge la base de données et l'authentification dans l'Union européenne. Le courriel du lien de connexion est envoyé par le service de messagerie configuré pour ce projet. Aucune autre transmission à des tiers.</li>
+          <li><b>Vos droits :</b> accès et portabilité (bouton « Télécharger mes données », fichier JSON), rectification (vous modifiez vos préférences vous-même), effacement (bouton « Supprimer mon compte et mes données »), opposition et limitation (en nous contactant). Ils s'exercent en libre-service dans « Mon espace » ou aux coordonnées de l'éditeur. En cas de désaccord, vous pouvez saisir la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</li>
+          <li><b>Cookies et stockage :</b> aucun cookie, aucun traceur. Votre session de connexion est gardée dans le stockage local de votre navigateur, strictement nécessaire au fonctionnement du compte ; elle est effacée à la déconnexion.</li>
+          <li><b>Sécurité :</b> pas de mot de passe à retenir ni à voler ; connexions chiffrées (HTTPS) ; chaque compte ne peut lire et modifier que ses propres données.</li>
+        </ul>
+      </div>
 
       <h3>Sécurité</h3>
       <p>Le site est servi uniquement en HTTPS et n'exécute aucun code provenant d'un autre site. Les textes et liens issus des sources extérieures sont filtrés avant affichage. Si vous découvrez une faille, merci de la signaler en <a href="https://github.com/Tahns/hemicycle-france/security/advisories/new" target="_blank" rel="noopener">message privé sur GitHub</a> plutôt que dans un ticket public.</p>
@@ -2164,10 +2212,21 @@
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
       <h2>Quiz</h2>
-      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
+      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. <span id="quiz-vie-privee">Vos réponses ne sont enregistrées nulle part.</span></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Vous situer par rapport aux groupes en votant à votre tour sur de vrais textes.</p>
     </div>
     <div id="quiz-container"></div>
+  </section>
+
+  <section class="view" id="view-espace">
+    <div class="rubrique-tete">
+      <div class="surtitre">Vos préférences</div>
+      <h2>Mon espace</h2>
+      <p class="chapo">Le député ou le groupe que vous suivez, l'historique de vos résultats au quiz et vos favoris, au même endroit.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Retrouver vos préférences sur cet appareil, ou sur tous vos appareils si vous créez un compte, ce qui est facultatif.</p>
+    </div>
+    <div class="espace-confirm" id="espace-confirm" hidden></div>
+    <div id="espace-contenu"></div>
   </section>
 </main>
 
@@ -2177,6 +2236,7 @@
     <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
+    <span id="espace-pied" hidden><a href="#espace" data-tab-lien="espace">Mon espace</a> ·</span>
     <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">Instagram</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
     <a href="feed.xml">Flux RSS des votes</a> ·
@@ -3781,6 +3841,7 @@ function sujetHTML(s, court, une){
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
     <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
+    ${espaceBoutonFav("sujet", a.url, a.titre)}
     ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
     </div>
   </article>`;
@@ -4067,6 +4128,7 @@ function renderCandidats(){
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
       <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      ${espaceBoutonFav("candidat", c.nom)}
       </div>
     </div>`;
   }).join("");
@@ -4130,8 +4192,9 @@ function choisirQuestionsQuiz(){
     .map(l => Object.assign(l, { quizQuestion: questionAuto(l), quizAide: titreLoi(l), quizTheme: l.theme && l.theme !== "À catégoriser" ? l.theme : "Loi récente" }));
   QUIZ_LOIS = [...perso.slice(0, QUIZ_NB - Math.min(QUIZ_AUTO, auto.length)), ...auto].slice(0, QUIZ_NB);
   const n = QUIZ_LOIS.length;
-  document.getElementById("quiz-banner-detail").textContent =
-    `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.`;
+  const banniere = document.getElementById("quiz-banner-detail");
+  banniere.textContent = `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche.`;
+  banniere.append(" ", el("span", { id:"quiz-vie-privee", text:phraseVieQuiz() }));
 }
 
 function renderQuiz(){
@@ -4195,6 +4258,7 @@ function showQuizResult(){
   }).filter(s=>s.comptes>0).sort((a,c)=>c.pct-a.pct);
 
   QUIZ_RESULTAT = scores;
+  if(ESPACE_ACTIF) espaceNoterQuiz(scores);
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
     <div class="quiz-card">
@@ -5296,6 +5360,7 @@ function renderDeputeFiche(d){
       </div>`;
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
+  document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", espaceBoutonDepute(d));
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
   afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
@@ -6915,6 +6980,7 @@ function ouvrirDepuisHash(){
     ouvrirDepute(m[1]);
     return true;
   }
+  if(h === "espace"){ ESPACE_PRET.then(()=>{ if(ESPACE_ACTIF) activateTab("espace"); }); return true; } // seulement si les comptes sont actifs
   // Retour arrière depuis une fiche (#deputes, #senat) : la liste réapparaît
   if(h === "deputes" && deputeOuvert) fermerDepute();
   if(h === "senat" && senateurOuvert) fermerSenateur();
@@ -7054,6 +7120,7 @@ function activateTab(tabId){
   }
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
+  if(tabId === "espace") renderEspace();
   if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "methode") renderMethode();
   if(tabId === "budget") renderBudget();
@@ -7069,6 +7136,7 @@ function activateTab(tabId){
   }
   majSousNav(tabId);
   majMenusHaut(tabId);
+  majBoutonRubrique(tabId);
   menusHaut.forEach(m => m.fermer());
   const nomPage = PAGES_NOMS[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
@@ -7150,6 +7218,416 @@ document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").f
   const t = new Date().toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
   document.getElementById("edition-date").textContent = `Édition du ${t}`;
 })();
+
+/* ---------- Mon espace : préférences sur l'appareil, et compte facultatif (Supabase) ----------
+   Tout est caché tant que data/compte-config.json est absent ou invalide, ou que la CSP d'index.html n'autorise pas
+   l'adresse du projet : le site se comporte alors exactement comme avant. Le client (compte-client.js) parle
+   directement à l'API de Supabase avec fetch : aucun script tiers. Les textes viennent toujours de t() et sont
+   écrits avec textContent ; aucune donnée de l'utilisateur ne passe par innerHTML. */
+// Le retour d'une connexion arrive dans le fragment d'URL (#access_token=…) : on le lit puis on nettoie l'adresse tout de suite
+const RETOUR_AUTH = (()=>{
+  const h = location.hash;
+  if(!/^#(access_token|error|error_code|error_description)=/.test(h)) return null;
+  try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){}
+  return h;
+})();
+
+let COMPTE = null, COMPTE_M = null, ESPACE_ACTIF = false, ESPACE = null, ESPACE_USER = null;
+let espaceEtat = "", espaceMessage = "", espaceFormulaireOuvert = false, espaceMinuterie = 0, espaceResolu = null;
+const CLE_ESPACE = "espace-local";
+const ESPACE_PRET = new Promise(ok => { espaceResolu = ok; });
+const phraseVieQuiz = () => ESPACE_ACTIF ? t("Votre résultat est gardé dans Mon espace (sur cet appareil, ou dans votre compte si vous en avez un) ; vous pouvez l'effacer à tout moment.") : t("Vos réponses ne sont enregistrées nulle part.");
+/* i18n-ignorer : noms propres, classes CSS et messages de console */
+const FOURNISSEURS_NOMS = { google:"Google", azure:"Microsoft", apple:"Apple", github:"GitHub" };
+const CLS_BOUTON2 = "story-bouton secondaire", LOCALE_ISO = "sv-SE";
+const MSG_CSP = "Comptes désactivés : la CSP d'index.html n'autorise pas l'adresse du projet (node scripts/appliquer-compte.js).", MSG_INDISPO = "Comptes indisponibles";
+/* i18n-fin-ignorer */
+
+function el(tag, o, ...enfants){
+  const e = document.createElement(tag);
+  o = o || {};
+  if(o.cls) e.className = o.cls;
+  if(o.id) e.id = o.id;
+  if(o.text !== undefined) e.textContent = o.text;
+  for(const [k, v] of Object.entries(o.attrs || {})) e.setAttribute(k, v);
+  for(const c of enfants.flat()) if(c) e.append(c);
+  return e;
+}
+function espaceBouton(libelle, cls, action){
+  const b = el("button", { cls, text:libelle, attrs:{ type:"button" } });
+  b.addEventListener("click", action);
+  return b;
+}
+const aujourdhuiLocal = () => new Date().toLocaleDateString(LOCALE_ISO);
+
+function espaceErreur(e){
+  const c = e && e.code;
+  if(c === "reseau") return t("Connexion impossible pour le moment. Vérifiez votre réseau et réessayez.");
+  if(c === "limite") return t("Trop de demandes. Patientez un peu avant de réessayer.");
+  if(c === "session") return t("Votre session a expiré. Reconnectez-vous.");
+  if(c === "email") return t("Cette adresse e-mail ne semble pas valide.");
+  return t("Une erreur est survenue. Réessayez plus tard.");
+}
+
+/* --- Données : copie de travail, gardée sur l'appareil et, si connecté, synchronisée avec le compte --- */
+function espaceLireLocal(){
+  try{ return COMPTE_M.normaliser(JSON.parse(localStorage.getItem(CLE_ESPACE))); }catch(e){ return COMPTE_M.donneesVides(); }
+}
+function espaceEcrireLocal(){
+  try{
+    if(COMPTE_M.sontVides(ESPACE)) localStorage.removeItem(CLE_ESPACE);
+    else localStorage.setItem(CLE_ESPACE, JSON.stringify(ESPACE));
+  }catch(e){}
+}
+function espaceChange(){
+  ESPACE = COMPTE_M.normaliser(ESPACE);
+  espaceEcrireLocal();
+  majBoutonsEspace();
+  if(document.body.dataset.page === "espace") renderEspace();
+  if(ESPACE_USER){
+    clearTimeout(espaceMinuterie);
+    espaceMinuterie = setTimeout(espacePousser, 700);
+  }
+}
+async function espacePousser(){
+  if(!ESPACE_USER) return;
+  espaceEtat = "cours"; majStatutEspace();
+  try{ await COMPTE.ecrireProfil(ESPACE); espaceEtat = ""; }
+  catch(e){ espaceEtat = "erreur"; }
+  majStatutEspace();
+}
+function majStatutEspace(){
+  const n = document.getElementById("espace-statut");
+  if(!n) return;
+  n.textContent = espaceEtat === "cours" ? t("Synchronisation en cours…")
+    : espaceEtat === "erreur" ? t("Synchronisation impossible pour le moment : vos préférences restent sur cet appareil.")
+    : t("Vos préférences sont synchronisées avec votre compte.");
+}
+
+const espaceSuit = (type, cle) => type === "rubrique" ? ESPACE.favoris.rubriques.includes(cle)
+  : type === "candidat" ? ESPACE.favoris.candidats.some(c => c.nom === cle)
+  : ESPACE.favoris.sujets.some(s => s.url === cle);
+
+function espaceBasculerFavori(type, cle, titre){
+  const f = ESPACE.favoris;
+  if(type === "rubrique") f.rubriques = espaceSuit(type, cle) ? f.rubriques.filter(x => x !== cle) : [...f.rubriques, cle];
+  else if(type === "candidat") f.candidats = espaceSuit(type, cle) ? f.candidats.filter(c => c.nom !== cle) : [...f.candidats, { nom:cle }];
+  else f.sujets = espaceSuit(type, cle) ? f.sujets.filter(s => s.url !== cle) : [{ url:cle, titre }, ...f.sujets];
+  espaceChange();
+}
+function espaceSuivreDepute(id, nom){
+  ESPACE.suivi.depute = ESPACE.suivi.depute && ESPACE.suivi.depute.id === id ? null : { id, nom };
+  espaceChange();
+}
+function espaceNoterQuiz(scores){
+  const date = aujourdhuiLocal();
+  const top = scores.slice(0, 5).map(s => ({ nom:s.nom, pct:s.pct }));
+  const cle = q => q.date + JSON.stringify(q.top);
+  if(!ESPACE.quiz.some(q => cle(q) === cle({ date, top }))) ESPACE.quiz = [{ date, top }, ...ESPACE.quiz];
+  espaceChange();
+}
+
+/* Boutons posés dans les pages (fiche d'un député, candidats, sujets, rubriques) : libellé selon l'état */
+function majBoutonsEspace(){
+  if(!ESPACE_ACTIF) return;
+  document.querySelectorAll("[data-espace-depute]").forEach(b => {
+    b.textContent = ESPACE.suivi.depute && ESPACE.suivi.depute.id === b.dataset.espaceDepute ? t("Ne plus suivre dans Mon espace") : t("Suivre dans Mon espace");
+  });
+  document.querySelectorAll("[data-espace-fav]").forEach(b => {
+    const type = b.dataset.espaceFav, cle = type === "rubrique" ? b.dataset.id : type === "candidat" ? b.dataset.nom : b.dataset.url;
+    const oui = espaceSuit(type, cle);
+    b.textContent = oui ? t("Retirer des favoris") : t("Ajouter aux favoris");
+    b.setAttribute("aria-pressed", String(oui));
+  });
+}
+document.addEventListener("click", e => {
+  if(!ESPACE_ACTIF) return;
+  const d = e.target.closest && e.target.closest("[data-espace-depute]");
+  if(d){ e.preventDefault(); espaceSuivreDepute(d.dataset.espaceDepute, d.dataset.nom || ""); return; }
+  const f = e.target.closest && e.target.closest("[data-espace-fav]");
+  if(!f) return;
+  e.preventDefault();
+  const type = f.dataset.espaceFav;
+  espaceBasculerFavori(type, type === "rubrique" ? f.dataset.id : type === "candidat" ? f.dataset.nom : f.dataset.url, f.dataset.titre || "");
+});
+/* Boutons des pages, en HTML (valeurs passées par esc() ; vide si les comptes ne sont pas actifs) */
+function espaceBoutonDepute(d){
+  if(!ESPACE_ACTIF) return "";
+  const oui = ESPACE.suivi.depute && ESPACE.suivi.depute.id === d.id;
+  return `<button type="button" class="lien-bouton" data-espace-depute="${esc(d.id)}" data-nom="${esc(d.nom)}">${esc(oui ? t("Ne plus suivre dans Mon espace") : t("Suivre dans Mon espace"))}</button>`;
+}
+function espaceBoutonFav(type, cle, titre){
+  if(!ESPACE_ACTIF) return "";
+  const oui = espaceSuit(type, cle);
+  const attr = type === "candidat" ? `data-nom="${esc(cle)}"` : `data-url="${esc(cle)}" data-titre="${esc(titre || "")}"`;
+  return `<button type="button" class="lien-bouton espace-fav-bouton" data-espace-fav="${type}" ${attr} aria-pressed="${oui}">${esc(oui ? t("Retirer des favoris") : t("Ajouter aux favoris"))}</button>`;
+}
+function majBoutonRubrique(tabId){
+  if(!ESPACE_ACTIF || tabId === "espace" || tabId === "accueil") return;
+  const tete = document.querySelector("#view-" + tabId + " .rubrique-tete");
+  if(!tete || tete.querySelector("[data-espace-fav]")) return;
+  const b = el("button", { cls:"lien-bouton espace-fav-bouton", attrs:{ type:"button", "data-espace-fav":"rubrique", "data-id":tabId } });
+  tete.append(b);
+  majBoutonsEspace();
+}
+
+/* --- Confirmation en ligne (fusion, suppression) --- */
+function espaceConfirmer(question, oui, non){
+  return new Promise(ok => {
+    const zone = document.getElementById("espace-confirm");
+    const fin = v => { zone.hidden = true; zone.replaceChildren(); ok(v); };
+    zone.replaceChildren(el("p", { text:question }),
+      el("div", { cls:"espace-actions" }, espaceBouton(oui, "story-bouton", () => fin(true)), espaceBouton(non, CLS_BOUTON2, () => fin(false))));
+    zone.hidden = false;
+    zone.setAttribute("role", "alertdialog");
+    zone.setAttribute("aria-label", question);
+    zone.querySelector("button.secondaire").focus();
+    zone.scrollIntoView({ block:"nearest" });
+  });
+}
+
+/* --- Connexion, déconnexion, export, suppression --- */
+async function espaceApresConnexion(user, reprise){
+  ESPACE_USER = user;
+  espaceFormulaireOuvert = false;
+  let distant;
+  try{ const p = await COMPTE.lireProfil(); distant = p ? p.donnees : null; }
+  catch(e){ espaceMessage = espaceErreur(e); espaceEtat = "erreur"; return; }
+  const local = ESPACE;
+  if(reprise){ if(distant) ESPACE = distant; espaceEcrireLocal(); majBoutonsEspace(); if(!distant && !COMPTE_M.sontVides(local)) await espacePousser(); return; } // session retrouvée : le compte fait foi, sans question
+  if(distant && JSON.stringify(distant) === JSON.stringify(local)) { renderEspace(); return; }
+  if(!COMPTE_M.sontVides(local) && (!distant || COMPTE_M.sontVides(distant))){
+    const oui = await espaceConfirmer(t("Des préférences existent sur cet appareil. Les ajouter à votre compte ?"), t("Oui, les ajouter"), t("Non, les ignorer"));
+    ESPACE = oui ? local : COMPTE_M.donneesVides();
+  } else if(!COMPTE_M.sontVides(local) && distant){
+    const oui = await espaceConfirmer(t("Des préférences existent sur cet appareil et dans votre compte. Les fusionner ?"), t("Oui, fusionner"), t("Non, garder celles du compte"));
+    ESPACE = oui ? COMPTE_M.fusionner(distant, local) : distant;
+  } else if(distant){
+    ESPACE = distant;
+  }
+  espaceChange();
+  if(!distant || JSON.stringify(ESPACE) !== JSON.stringify(distant)) await espacePousser();
+}
+async function espaceDeconnecter(){
+  await COMPTE.deconnecter();
+  ESPACE_USER = null; ESPACE = COMPTE_M.donneesVides(); espaceEtat = "";
+  espaceEcrireLocal();
+  espaceMessage = t("Vous êtes déconnecté. Les préférences de cet appareil ont été effacées ; elles restent dans votre compte.");
+  majBoutonsEspace(); renderEspace();
+}
+async function espaceExporter(){
+  try{
+    const donnees = await COMPTE.exporter();
+    const lienDl = el("a", { attrs:{ href:URL.createObjectURL(new Blob([JSON.stringify(donnees, null, 2)], { type:"application/json" })), download:"hemicycle-france-mes-donnees.json" } });
+    document.body.append(lienDl); lienDl.click(); lienDl.remove();
+    setTimeout(() => URL.revokeObjectURL(lienDl.href), 4000);
+    espaceMessage = t("Vos données ont été téléchargées.");
+  }catch(e){ espaceMessage = espaceErreur(e); }
+  renderEspace();
+}
+async function espaceSupprimer(){
+  const oui = await espaceConfirmer(t("Supprimer définitivement votre compte, votre adresse e-mail et vos préférences ? Cette action est irréversible."), t("Supprimer définitivement"), t("Annuler"));
+  if(!oui) return;
+  try{
+    await COMPTE.supprimer();
+    ESPACE_USER = null; ESPACE = COMPTE_M.donneesVides(); espaceEtat = "";
+    espaceEcrireLocal();
+    espaceMessage = t("Votre compte et vos données ont été supprimés.");
+    majBoutonsEspace();
+  }catch(e){ espaceMessage = espaceErreur(e); }
+  renderEspace();
+}
+
+function espaceFormulaire(){
+  const msg = el("p", { cls:"espace-msg", id:"espace-form-msg", attrs:{ "aria-live":"polite" } });
+  const age = el("input", { attrs:{ type:"checkbox", id:"espace-age" } });
+  const email = el("input", { attrs:{ type:"email", id:"espace-email", autocomplete:"email", maxlength:"254", inputmode:"email", placeholder:t("vous@exemple.fr") } });
+  const form = el("form", { cls:"espace-form", attrs:{ novalidate:"" } });
+  const conditionOk = () => { if(age.checked) return true; msg.textContent = t("Cochez la case « J'ai 15 ans ou plus » pour continuer."); age.focus(); return false; };
+  const fournisseurs = COMPTE.config.fournisseurs.map(p => {
+    const b = el("button", { cls:"espace-fournisseur", attrs:{ type:"button", "data-fournisseur":p } },
+      el("img", { attrs:{ src:`icons/fournisseur-${p}.svg`, alt:"", width:"18", height:"18" } }),
+      el("span", { text:t("Continuer avec {1}", { 1:FOURNISSEURS_NOMS[p] }) }));
+    b.addEventListener("click", () => { if(conditionOk()) location.assign(COMPTE.urlFournisseur(p)); });
+    return b;
+  });
+  const envoyer = el("button", { cls:"story-bouton", text:t("Recevoir un lien de connexion"), attrs:{ type:"submit" } });
+  form.append(...fournisseurs, fournisseurs.length ? el("div", { cls:"espace-ou", text:t("ou par e-mail") }) : null,
+    el("label", { text:t("Votre adresse e-mail"), attrs:{ for:"espace-email" } }), email,
+    el("label", { cls:"espace-case" }, age, el("span", { text:t("J'ai 15 ans ou plus") })),
+    envoyer, msg,
+    el("p", { cls:"espace-aide" }, document.createTextNode(t("Pas de mot de passe : un lien vous est envoyé par e-mail. Votre adresse ne sert qu'à vous connecter. ")), (() => { const a = el("a", { text:t("Données personnelles"), attrs:{ href:"#mentions" } }); a.addEventListener("click", ev => { ev.preventDefault(); activateTab("mentions"); }); return a; })()));
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    if(!conditionOk()) return;
+    if(!COMPTE_M.emailValide(email.value)){ msg.textContent = espaceErreur({ code:"email" }); email.focus(); return; }
+    const attente = COMPTE.attenteEnvoi();
+    if(attente > 0){ msg.textContent = t("Patientez {1} secondes avant de demander un nouveau lien.", { 1:attente }); return; }
+    envoyer.disabled = true;
+    try{
+      await COMPTE.envoyerLien(email.value);
+      msg.textContent = t("Un lien de connexion vient d'être envoyé. Ouvrez-le sur cet appareil (pensez à regarder dans les courriers indésirables).");
+    }catch(e){ msg.textContent = espaceErreur(e); }
+    envoyer.disabled = false;
+  });
+  return form;
+}
+
+/* --- Page « Mon espace » --- */
+function renderEspace(){
+  const racine = document.getElementById("espace-contenu");
+  if(!racine || !ESPACE_ACTIF) return;
+  const connecte = !!ESPACE_USER;
+  const blocs = [];
+
+  // Compte
+  const compte = el("section", { cls:"espace-bloc" });
+  if(connecte){
+    compte.append(el("h3", { text:t("Votre compte") }), el("p", { cls:"espace-email", text:ESPACE_USER.email || "" }),
+      el("p", { id:"espace-statut", cls:"espace-statut", attrs:{ "aria-live":"polite" } }),
+      el("div", { cls:"espace-actions" },
+        espaceBouton(t("Télécharger mes données"), CLS_BOUTON2, espaceExporter),
+        espaceBouton(t("Se déconnecter"), CLS_BOUTON2, espaceDeconnecter),
+        espaceBouton(t("Supprimer mon compte et mes données"), CLS_BOUTON2, espaceSupprimer)));
+  } else {
+    compte.append(el("h3", { text:t("Sur cet appareil") }),
+      el("p", { text:t("Vos préférences sont gardées sur cet appareil, dans ce navigateur. Un compte (facultatif) permet de les retrouver partout.") }),
+      espaceFormulaireOuvert ? espaceFormulaire()
+        : el("div", { cls:"espace-actions" }, espaceBouton(t("Créer un compte pour les retrouver partout"), "story-bouton", () => { espaceFormulaireOuvert = true; renderEspace(); document.getElementById("espace-email")?.focus(); })));
+  }
+  if(espaceMessage) compte.append(el("p", { cls:"espace-msg", text:espaceMessage, attrs:{ role:"status" } }));
+  blocs.push(compte);
+
+  // Député et groupe suivis
+  const suivi = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Député ou groupe suivi") }));
+  const dep = ESPACE.suivi.depute;
+  if(dep){
+    const a = el("a", { text:dep.nom, attrs:{ href:"#depute-" + dep.id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); location.hash = "depute-" + dep.id; });
+    suivi.append(el("ul", { cls:"espace-liste" }, el("li", {}, el("b", { text:t("Député : ") }), a,
+      espaceBouton(t("Ne plus suivre"), "lien-bouton", () => espaceSuivreDepute(dep.id, dep.nom)))));
+  } else suivi.append(el("p", { cls:"espace-vide", text:t("Aucun député suivi. Ouvrez la fiche d'un député et choisissez « Suivre dans Mon espace ».") }));
+  const choix = el("select", { id:"espace-groupe", attrs:{ "aria-label":t("Groupe suivi") } }, el("option", { text:t("Aucun groupe"), attrs:{ value:"" } }),
+    ...PARTIES.map(p => el("option", { text:p.nom, attrs:{ value:p.id } })));
+  choix.value = ESPACE.suivi.groupe ? ESPACE.suivi.groupe.id : "";
+  choix.addEventListener("change", () => {
+    const p = PARTIES.find(x => x.id === choix.value);
+    ESPACE.suivi.groupe = p ? { id:p.id, nom:p.nom } : null;
+    espaceChange();
+  });
+  suivi.append(el("p", {}, el("label", { text:t("Groupe suivi : "), attrs:{ for:"espace-groupe" } }), choix));
+  if(ESPACE.suivi.groupe){
+    const a = el("a", { text:t("Voir l'historique de ce groupe"), attrs:{ href:"#histo-" + ESPACE.suivi.groupe.id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); location.hash = "histo-" + ESPACE.suivi.groupe.id; });
+    suivi.append(el("p", {}, a));
+  }
+  blocs.push(suivi);
+
+  // Historique du quiz
+  const quiz = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Historique du quiz") }));
+  if(ESPACE.quiz.length){
+    quiz.append(el("ul", { cls:"espace-liste" }, ESPACE.quiz.map(q => el("li", {},
+      el("b", { text:new Date(q.date + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }) }),
+      el("span", { text:q.top.slice(0, 3).map(x => `${x.nom} ${x.pct} %`).join(" · ") })))),
+      espaceBouton(t("Effacer l'historique"), "lien-bouton", () => { ESPACE.quiz = []; espaceChange(); }));
+  } else quiz.append(el("p", { cls:"espace-vide", text:t("Aucun résultat enregistré. Faites le quiz : votre résultat apparaîtra ici.") }));
+  blocs.push(quiz);
+
+  // Favoris
+  const fav = el("section", { cls:"espace-bloc" }, el("h3", { text:t("Favoris") }));
+  const f = ESPACE.favoris;
+  const ligne = (contenu, retirer) => el("li", {}, contenu, espaceBouton(t("Retirer"), "lien-bouton", retirer));
+  fav.append(el("h4", { text:t("Rubriques") }));
+  fav.append(f.rubriques.length ? el("ul", { cls:"espace-liste" }, f.rubriques.filter(id => PAGES_NOMS[id]).map(id => {
+    const a = el("a", { text:PAGES_NOMS[id], attrs:{ href:"#" + id } });
+    a.addEventListener("click", ev => { ev.preventDefault(); activateTab(id); });
+    return ligne(a, () => espaceBasculerFavori("rubrique", id));
+  })) : el("p", { cls:"espace-vide", text:t("Aucune rubrique en favori. Utilisez « Ajouter aux favoris » en haut d'une rubrique.") }));
+  fav.append(el("h4", { text:t("Candidats") }));
+  fav.append(f.candidats.length ? el("ul", { cls:"espace-liste" }, f.candidats.map(c => {
+    const a = el("a", { text:c.nom, attrs:{ href:"#candidats" } });
+    a.addEventListener("click", ev => { ev.preventDefault(); activateTab("candidats"); });
+    return ligne(a, () => espaceBasculerFavori("candidat", c.nom));
+  })) : el("p", { cls:"espace-vide", text:t("Aucun candidat en favori.") }));
+  fav.append(el("h4", { text:t("Sujets d'actualité") }));
+  fav.append(f.sujets.length ? el("ul", { cls:"espace-liste" }, f.sujets.map(s =>
+    ligne(el("a", { text:s.titre, attrs:{ href:s.url, target:"_blank", rel:"noopener" } }), () => espaceBasculerFavori("sujet", s.url, s.titre)))) : el("p", { cls:"espace-vide", text:t("Aucun sujet en favori.") }));
+  blocs.push(fav);
+
+  racine.replaceChildren(...blocs);
+  if(connecte) majStatutEspace();
+}
+
+/* --- Démarrage : tout reste caché sans configuration valide --- */
+function espaceMontrer(){
+  document.querySelectorAll("#espace-haut, #espace-plus, #espace-pied, #mentions-compte, #mention-avec-compte").forEach(n => { n.hidden = false; });
+  document.querySelectorAll("#mention-sans-compte").forEach(n => { n.hidden = true; });
+  const quiz = HUBS.find(h => h.id === "quiz");
+  const page = ["espace", "Mon espace", "Vos préférences, sur cet appareil ou dans votre compte"];
+  quiz.pages.push(page);
+  PAGES_NOMS.espace = page[1];
+  const liste = document.getElementById("menu-quiz");
+  if(liste){
+    const a = el("a", { attrs:{ role:"menuitem", href:"#espace", "data-menu-page":"espace" } }, el("b", { text:t(page[1]) }), el("span", { text:t(page[2]) }));
+    liste.append(a);
+  }
+  document.getElementById("espace-haut").addEventListener("click", () => activateTab("espace"));
+  document.getElementById("espace-plus").addEventListener("click", () => activateTab("espace"));
+  document.getElementById("quiz-vie-privee").textContent = phraseVieQuiz();
+  if(typeof renderCandidats === "function" && CANDIDATURES.length) renderCandidats();
+  if(typeof renderAccueilActualites === "function" && ACTUALITES) renderAccueilActualites();
+  if(document.getElementById("view-actualites").classList.contains("active")) renderActualites();
+  majBoutonRubrique(document.body.dataset.page);
+}
+
+async function initEspace(){
+  try{
+    const rep = await fetch("data/compte-config.json", { cache:"no-cache" });
+    if(!rep.ok) return;
+    const brut = await rep.text();
+    if(!brut.trim()) return;
+    const json = JSON.parse(brut);
+    COMPTE_M = await import("./compte-client.js");
+    const config = COMPTE_M.configValide(json);
+    if(!config) return;
+    // La CSP de la page doit déjà autoriser l'adresse du projet (scripts/appliquer-compte.js) : sinon on reste caché
+    const csp = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content || "";
+    const hotes = (csp.match(/connect-src ([^;]*)/) || [])[1] || "";
+    if(!hotes.split(/\s+/).includes(config.url)){ console.warn(MSG_CSP); return; }
+    let stockage = null;
+    try{ stockage = window.localStorage; }catch(e){}
+    COMPTE = COMPTE_M.creerClient({ config:json, fetch:(...a) => fetch(...a), stockage, adresseSite:location.origin + location.pathname });
+    ESPACE = espaceLireLocal();
+    ESPACE_ACTIF = true;
+    espaceMontrer();
+    const retour = RETOUR_AUTH ? COMPTE_M.lireRetour(RETOUR_AUTH) : null;
+    if(retour && retour.erreur){
+      espaceMessage = t("La connexion a échoué ou a été annulée. Vous pouvez réessayer.");
+      activateTab("espace");
+    } else if(retour){
+      activateTab("espace");
+      try{ await espaceApresConnexion(await COMPTE.terminerConnexion(retour)); }
+      catch(e){ espaceMessage = espaceErreur(e); }
+      renderEspace();
+    } else if(COMPTE.estConnecte()){
+      const u = await COMPTE.reprendre();
+      if(u) await espaceApresConnexion(u, true);
+    }
+    majBoutonsEspace();
+    if(document.body.dataset.page === "espace") renderEspace();
+  }catch(e){
+    console.warn(MSG_INDISPO, e);
+  }finally{
+    espaceResolu();
+  }
+}
+document.addEventListener("langue-changee", () => {
+  if(!ESPACE_ACTIF) return;
+  if(document.body.dataset.page === "espace") renderEspace();
+  majBoutonsEspace();
+  const q = document.getElementById("quiz-vie-privee");
+  if(q) q.textContent = phraseVieQuiz();
+});
 
 /* ---------- Init ---------- */
 
@@ -7343,6 +7821,7 @@ async function initSite(){
   if(MODE_CARTE){ document.body.classList.add("mode-carte"); document.body.dataset.cartePrete = "1"; return; }
   afficherNouveautes();
   ouvrirDepuisHash();
+  initEspace();
 }
 
 /* ---------- Langues : le français reste dans la page (source de vérité) ----------

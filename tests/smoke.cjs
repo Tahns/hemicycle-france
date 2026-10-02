@@ -12,7 +12,7 @@ const path = require("path");
 const { chromium } = require("playwright");
 
 const RACINE = path.resolve(__dirname, "..");
-const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".svg": "image/svg+xml" };
 
 function serveur() {
   return new Promise((ok) => {
@@ -494,6 +494,8 @@ function verifier(cond, message) {
     verifier(await pageEn.evaluate(() => document.documentElement.lang === "en"), "langues : la langue du navigateur (en) n'est pas détectée");
     await ctxEn.close();
   }
+
+  await require("./compte-fumee.cjs").testerComptes({ navigateur, base, verifier });
 
   await navigateur.close();
   s.close();
