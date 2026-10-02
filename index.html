@@ -1183,6 +1183,43 @@
     .meeting-card{grid-template-columns:58px 1fr; gap:12px;}
     .loi-provenance-row{flex-direction:column; gap:0;}
   }
+
+  /* ---------- Épure : accueil et pages plus aérés, blocs secondaires repliés ---------- */
+  main > .view > * + *{margin-top:0;}
+  .accueil-plie{margin:28px 0 0; border-top:1px solid var(--border);}
+  .accueil-plie > summary, .footer-plie > summary{
+    list-style:none; cursor:pointer; padding:14px 0; font-size:14px; font-weight:600; color:var(--text-soft);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+  }
+  .accueil-plie > summary::-webkit-details-marker, .footer-plie > summary::-webkit-details-marker{display:none;}
+  .accueil-plie > summary::after, .footer-plie > summary::after{content:"+"; font-size:20px; font-weight:400; color:var(--text-faint);}
+  .accueil-plie[open] > summary::after, .footer-plie[open] > summary::after{content:"\2212";}
+  .accueil-plie > summary:hover, .footer-plie > summary:hover{color:var(--accent);}
+  .accueil-plie > summary:focus-visible, .footer-plie > summary:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .accueil-plie .accueil-hero-stats{margin-bottom:10px;}
+  .accueil-plie .accueil-rubriques{margin-top:4px; border-top:none;}
+  .footer-plie{margin-top:4px; border-top:1px solid var(--border);}
+  .footer-plie .footer-grid{padding-top:6px;}
+  .en-bref{margin:0 0 8px;}
+  .en-bref .accueil-section-title{display:block; margin:0 0 6px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
+  .en-bref .accueil-hero-stats{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+  .actu-accueil{margin:34px 0 0;}
+  #view-accueil > .accueil-section-title{display:block; margin:38px 0 14px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
+  .accueil-rebours{margin-bottom:22px;}
+  .faire-connaitre{margin-top:30px; background:transparent; border-style:dashed;}
+  .rubrique-tete{margin-bottom:28px; padding-bottom:20px;}
+  .rubrique-tete h2{margin-bottom:10px;}
+  .chapo{line-height:1.55;}
+  .no-result-msg, .chargement{font-size:16px; padding:24px 0; line-height:1.5;}
+  @media(max-width:700px){
+    .accueil-plie{margin-top:22px;}
+    #view-accueil > .accueil-section-title{margin:28px 0 12px;}
+    .actu-accueil{margin-top:26px;}
+    .rubrique-tete{margin-bottom:20px; padding-bottom:16px;}
+    .faire-connaitre{padding:16px;}
+    .accueil-highlight-card{padding-bottom:18px;}
+    .en-bref .accueil-hero-stats{grid-template-columns:1fr 1fr;}
+  }
 </style>
 </head>
 <body data-page="accueil">
@@ -1199,7 +1236,7 @@
     <h1><a href="#accueil" class="titre-lien" data-tab-lien="accueil"><svg class="logo" viewBox="4 6 56 56" aria-hidden="true"><path class="logo-ext" d="M8 46a24 24 0 0 1 48 0"/><path class="logo-int" d="M20 46a12 12 0 0 1 24 0"/><circle class="logo-point" cx="32" cy="46" r="4"/></svg>Hémicycle France</a></h1>
     <button type="button" class="bouton-recherche loupe-mobile" aria-label="Rechercher sur le site" aria-haspopup="dialog">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 0 0-15a7.5 7.5 0 0 0 0 15z M16 16l5 5"/></svg></button>
-    <p><span class="maj-mobile" id="maj-mobile"></span><span class="devise">La politique française, preuves à l'appui.</span>Ce que votent vos députés, qui mène les partis, où en sont les sondages et les chiffres qui comptent. Chaque information renvoie à sa source : vous pouvez tout vérifier.</p>
+    <p><span class="maj-mobile" id="maj-mobile"></span><span class="devise">La politique française, preuves à l'appui.</span>Ce que votent les députés, qui dirige les partis, où en sont les sondages. Chaque information renvoie à sa source.</p>
   </div>
 </header>
 
@@ -1266,16 +1303,18 @@
   <section class="view active" id="view-accueil">
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
-    <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     <div class="en-bref" id="en-bref" hidden>
       <div class="accueil-section-title">En bref</div>
       <div class="accueil-hero-stats" id="en-bref-faits"></div>
       <p class="en-bref-maj" id="en-bref-maj"></p>
     </div>
+    <div class="actu-accueil" id="accueil-actualites" hidden></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
-    <div class="actu-accueil" id="accueil-actualites" hidden></div>
-
+    <details class="accueil-plie accueil-chiffres"><summary>Les chiffres clés</summary>
+      <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
+    </details>
+    <details class="accueil-plie accueil-explorer"><summary>Explorer toutes les rubriques</summary>
     <div class="accueil-rubriques">
      <div class="rubrique-groupe"><h3 class="rubrique-groupe-titre">Parlement</h3>
       <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Votes</b><span>Chaque scrutin de l'Assemblée, siège par siège.</span></div>
@@ -1298,8 +1337,9 @@
       <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Qu'auriez-vous voté à la place des députés ?</span></div>
      </div>
     </div>
+    </details>
     <div class="faire-connaitre">
-      <div><b>Le site vous est utile ?</b><span>Faites-le connaître : il est gratuit, sans publicité et sans compte.</span></div>
+      <div><b>Le site vous est utile ?</b><span>Faites-le connaître : gratuit, sans publicité, sans compte.</span></div>
       <div class="faire-connaitre-actions">
         <button type="button" class="bouton-plein bouton-partage" data-partage="site">Partager le site</button>
         <button type="button" class="lien-bouton bouton-copier" data-copier="site">Copier le lien</button>
@@ -1313,7 +1353,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Votes</h2>
-      <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024. Choisissez un texte : chaque point de l'hémicycle est un député, et vous voyez d'un coup d'œil qui a voté pour, qui a voté contre et qui n'a pas voté.
+      <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024 (un scrutin, c'est un vote en séance). Choisissez un texte : chaque point est un député, selon qu'il a voté pour, contre, ou pas du tout.
         <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées chaque matin.</small></p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins">
@@ -1363,7 +1403,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Groupes</h2>
-      <p class="chapo">Choisissez un groupe : vous verrez comment il a voté, texte par texte, et avec qui il vote le plus souvent. Les alliances réelles ne sont pas toujours celles qu'on imagine.</p>
+      <p class="chapo">Choisissez un groupe pour voir comment il a voté, texte par texte, et avec qui il vote le plus souvent.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les votes du groupe">
       <div class="filtre-groupe filtre-toujours">
@@ -1398,7 +1438,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Députés</h2>
-      <p class="chapo">Tapez le nom de votre commune pour trouver votre député. Vous verrez sa circonscription, s'il vient voter, et ce qu'il a voté sur chaque texte et chaque motion de censure.
+      <p class="chapo">Entrez le nom de votre commune pour trouver votre député, puis voyez s'il vient voter et ce qu'il a voté.
         <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés chaque matin.</small></p>
     </div>
     <div id="deputes-recherche">
@@ -1426,7 +1466,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Sénat</div>
       <h2>Sénat</h2>
-      <p class="chapo">L'autre moitié du Parlement. Une loi passe par les deux chambres : le Sénat peut modifier ou rejeter ce que l'Assemblée a adopté, et l'inverse. Voici ses votes publics groupe par groupe, et ce qu'a voté chaque sénateur sur l'ensemble des textes.
+      <p class="chapo">L'autre chambre du Parlement : elle peut modifier ou rejeter ce que l'Assemblée a adopté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
     </div>
     <div id="senat-principal">
@@ -1468,7 +1508,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Partis</h2>
-      <p class="chapo">Qui tient les rênes de chaque parti, qui mène ses troupes à l'Assemblée, et qui siège au Gouvernement.
+      <p class="chapo">Qui dirige chaque parti, qui préside son groupe à l'Assemblée, et qui siège au Gouvernement.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="dirigeants">Partager</button></div>
@@ -1481,7 +1521,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Le pays en chiffres</div>
       <h2>Économie</h2>
-      <p class="chapo">Les chiffres dont on parle dans chaque débat : chômage, inflation, croissance, déficit, dette. Toujours la dernière valeur officielle, avec sa date et un lien vers la source.</p>
+      <p class="chapo">Chômage, inflation, croissance, déficit, dette : la dernière valeur officielle, avec sa date et sa source.</p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="chiffres">Partager</button></div>
     <input type="search" class="chiffre-search" id="chiffre-search" placeholder="Chercher un indicateur : chômage, dette…" aria-label="Rechercher un indicateur" />
@@ -1493,7 +1533,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Actualités</h2>
-      <p class="chapo">Les derniers titres de la rubrique politique de médias nationaux reconnus, de sensibilités différentes, relus toutes les heures. Le site ne reprend que le titre : chaque ligne renvoie à l'article du média qui l'a publié. Un sujet traité par plusieurs rédactions indépendantes est mis en avant.
+      <p class="chapo">Les derniers titres de médias nationaux de sensibilités différentes, relus chaque heure. Chaque ligne renvoie à l'article d'origine ; un sujet repris par plusieurs rédactions passe en premier.
         <small id="actualites-maj">Flux publics des rédactions, relus toutes les heures.</small></p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
@@ -1506,7 +1546,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Agenda</h2>
-      <p class="chapo">Ce que les députés examinent dans les prochains jours, puis les rendez-vous de la vie politique : congrès, primaires, meetings, élections. Seules les dates confirmées publiquement y figurent.</p>
+      <p class="chapo">Ce que les députés examinent bientôt, puis les rendez-vous à venir : congrès, primaires, meetings, élections. Seules les dates confirmées figurent ici.</p>
     </div>
     <div class="an-agenda" id="an-agenda"></div>
     <div class="meeting-list" id="meeting-list"></div>
@@ -1516,7 +1556,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Probité</div>
       <h2>Justice</h2>
-      <p class="chapo">Des responsables politiques condamnés par la justice. On ne cite ici que des jugements, en précisant s'ils sont définitifs ou si un appel est en cours (et donc s'ils peuvent encore changer). Pas de plainte, pas de mise en examen : uniquement des décisions de tribunal.
+      <p class="chapo">Des responsables politiques condamnés par un tribunal. Seules les décisions de justice sont citées, avec leur état : définitive, ou en appel et donc susceptible de changer.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
       <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
@@ -1531,7 +1571,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Sondages</h2>
-      <p class="chapo">Qui est en tête pour le premier tour ? Pas de moyenne maison ici : chaque institut a sa méthode, donc ses chiffres sont montrés tels qu'il les a publiés, de son hypothèse la plus basse à la plus haute.</p>
+      <p class="chapo">Qui est en tête au premier tour ? Chaque institut a sa méthode : ses chiffres sont donc montrés tels qu'il les a publiés, de l'hypothèse la plus basse à la plus haute.</p>
     </div>
     <div class="annonce" id="annonce-president" hidden></div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
@@ -1562,7 +1602,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Candidats</h2>
-      <p class="chapo">Tous ceux qui se sont lancés, avec leur parti, leurs fonctions et la source de leur annonce. Se déclarer ne suffit pas : il faut réunir 500 parrainages d'élus, et la liste officielle ne sera connue qu'au printemps 2027, quand le Conseil constitutionnel l'arrêtera.
+      <p class="chapo">Les personnes qui se sont déclarées, avec leur parti, leurs fonctions et la source de leur annonce. Pour être candidat, il faut encore 500 parrainages d'élus ; la liste officielle sera connue au printemps 2027.
         <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue chaque matin.</small></p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
@@ -1574,7 +1614,7 @@
   <section class="view" id="view-mentions">
     <div class="rubrique-tete">
       <h2>Mentions légales</h2>
-      <p class="chapo">Qui publie ce site, d'où viennent ses informations, et ce qu'il fait (ou plutôt ne fait pas) de vos données.
+      <p class="chapo">Qui publie ce site, d'où viennent ses informations, et ce qu'il fait (ou ne fait pas) de vos données.
         <small>Dernière mise à jour de cette page : 24 septembre 2026.</small></p>
     </div>
 
@@ -1643,7 +1683,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Transparence</div>
       <h2>Méthode</h2>
-      <p class="chapo">D'où viennent les chiffres, à quel rythme ils sont actualisés, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
+      <p class="chapo">D'où viennent les chiffres, à quelle fréquence ils sont mis à jour, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
     </div>
     <div class="texte-legal">
       <h3>Sources</h3>
@@ -1682,7 +1722,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Mémoire du site</div>
       <h2>Archives</h2>
-      <p class="chapo">Chaque semaine, le site conserve une copie datée des sondages, des probabilités et des actualités (52 semaines au plus). Les fichiers complets sont téléchargeables.</p>
+      <p class="chapo">Chaque semaine, le site garde une copie datée des sondages, des probabilités et des actualités (52 semaines au plus), à télécharger.</p>
     </div>
     <h3 class="histo-title">Intentions de vote au premier tour, semaine après semaine</h3>
     <p class="depute-note" id="archives-note"></p>
@@ -1695,7 +1735,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
       <h2>Quiz</h2>
-      <p class="chapo" id="quiz-banner-detail">Mettez-vous à la place d'un député : votez sur des textes récents, puis découvrez de quels groupes vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
+      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels groupes vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
     </div>
     <div id="quiz-container"></div>
   </section>
@@ -1711,6 +1751,7 @@
     <button type="button" class="lien-bouton bouton-partage" data-partage="site">Partager le site</button> ·
     <button type="button" class="lien-bouton" data-alertes="">Recevoir les alertes</button>
   </p>
+  <details class="footer-plie"><summary>Sources, règle du jeu, fraîcheur des données</summary>
   <div class="footer-grid">
     <div>
       <h2>D'où viennent les données</h2>
@@ -1725,9 +1766,10 @@
       <span id="footer-maj">Chargement…</span>
     </div>
   </div>
+  </details>
 </footer>
 
-<noscript><p style="max-width:720px;margin:20px auto;padding:0 24px;">Ce site a besoin de JavaScript pour afficher les votes et les graphiques.</p></noscript>
+<noscript><p style="max-width:720px;margin:20px auto;padding:0 24px;">Ce site a besoin de JavaScript pour afficher les votes et les graphiques. Pensez à l'activer.</p></noscript>
 
 <div class="tooltip" id="tooltip"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -2756,7 +2798,7 @@ function renderHistorique(){
 
   const list = document.getElementById("histo-list");
   if(liste.length === 0){
-    list.innerHTML = `<p class="no-result-msg">Aucun scrutin ne correspond à cette recherche.</p>`;
+    list.innerHTML = `<p class="no-result-msg">Rien ne correspond à cette recherche. Essayez un autre mot.</p>`;
     return;
   }
 
@@ -2848,7 +2890,7 @@ function renderMeetings(){
   document.getElementById("meeting-list").innerHTML =
     (aVenir.length
       ? aVenir.map((m,i)=>meetingCard(m,i,false)).join("")
-      : `<div class="meeting-empty">Aucun meeting à venir n'est recensé pour l'instant. Seuls les événements annoncés par une source vérifiable sont listés ici. La liste sera complétée dès qu'une date sera confirmée.</div>`) +
+      : `<div class="meeting-empty">Aucun meeting n'est annoncé pour l'instant. Seuls les événements confirmés par une source vérifiable figurent ici. La liste sera complétée dès qu'une date sera confirmée.</div>`) +
     (passes.length ? `<div class="meetings-subtitle">Événements récents</div>` + passes.map((m,i)=>meetingCard(m,i,true)).join("") : "");
 }
 
@@ -2968,7 +3010,7 @@ function renderSondageAverage(){
   }
   const inst = INSTITUTS.find(i=>i.id===selectedInstitut);
   if(!inst){
-    document.getElementById("sondage-avg-list").innerHTML = `<p class="chargement">Sondages indisponibles pour le moment.</p>`;
+    document.getElementById("sondage-avg-list").innerHTML = `<p class="chargement">Les sondages ne sont pas disponibles pour l'instant. Réessayez un peu plus tard.</p>`;
     return;
   }
   document.getElementById("sondage-institut-title").textContent =
@@ -3420,7 +3462,7 @@ function sondagesCandidat(nom){
 
 function renderCandidats(){
   const liste = document.getElementById("candidats-liste");
-  if(!CANDIDATURES.length){ liste.innerHTML = `<p class="no-result-msg">La liste des candidatures est indisponible pour le moment.</p>`; return; }
+  if(!CANDIDATURES.length){ liste.innerHTML = `<p class="no-result-msg">La liste des candidatures n'est pas disponible pour l'instant. Réessayez un peu plus tard.</p>`; return; }
   if(CANDIDATURES_MAJ && dateCourte(CANDIDATURES_MAJ)) document.getElementById("candidats-maj").textContent =
     `${CANDIDATURES.length} candidatures d'après la page Wikipédia des candidatures, relue le ${dateCourte(CANDIDATURES_MAJ)}. Chaque annonce renvoie à l'article qui la rapporte.`;
   const tris = [["annonce","Annonce la plus récente"], ["sondages","Score dans les sondages"], ["nom","Ordre alphabétique"]];
@@ -3672,7 +3714,7 @@ function renderChiffres(filter=""){
 
   const grid = document.getElementById("chiffre-grid");
   if(filtres.length === 0){
-    grid.innerHTML = `<p class="no-result-msg">Aucun indicateur ne correspond à cette recherche.</p>`;
+    grid.innerHTML = `<p class="no-result-msg">Rien ne correspond à cette recherche. Essayez un autre mot.</p>`;
     return;
   }
 
@@ -3820,27 +3862,11 @@ function renderEnBref(){
   const bloc = document.getElementById("en-bref");
   if(!bloc) return;
   const faits = [];
-  const dernier = LOIS[0];
-  if(dernier) faits.push({ href:"#scrutin", v:`n° ${dernier.numero ?? ""}`.trim(), l:`dernier scrutin public (${dernier.date}) : ${dernier.resultat === "adopte" ? "adopté" : "rejeté"}` });
   const textes = LOIS.filter(l=>categorieLoi(l)==="texte");
   if(textes.length) faits.push({ href:"#scrutin", v:`${formatNombre(textes.filter(l=>l.resultat==="adopte").length)} / ${formatNombre(textes.length)}`, l:"textes adoptés sur les textes votés à l'Assemblée" });
-  const inst = INSTITUTS[0];
-  if(inst && !periodeReserveSondages() && CANDIDATS.length){
-    const tete = CANDIDATS.map(c=>({ c, r:inst.scores[c.id] })).filter(x=>x.r).sort((a,b)=>milieuFourchette(b.r)-milieuFourchette(a.r))[0];
-    if(tete) faits.push({ href:"#sondages", v:fourchetteTexte(tete.r), l:`${tete.c.nom} en tête au premier tour (${inst.nom}, ${inst.date})` });
-  }
-  if(PROBAS?.candidats?.length && !periodeReserveSondages()){
-    const fav = PROBAS.candidats.filter(c=>typeof c.victoire==="number").sort((a,b)=>b.victoire-a.victoire)[0];
-    if(fav) faits.push({ href:"#sondages", v:`${nombreFr(fav.victoire)} %`, l:`des simulations donnent la victoire à ${fav.nom}` });
-  }
-  const tour = meetingsAVenir().find(m=>/^Élection présidentielle/.test(m.titre));
-  if(tour){
-    const jours = Math.round((Date.parse(tour.debut) - Date.parse(aujourdhuiISO())) / 864e5);
-    if(jours > 0) faits.push({ href:"#meetings", v:`J-${formatNombre(jours)}`, l:tour.titre.replace("Élection présidentielle : ", "avant la présidentielle, ") });
-  }
   const recoupes = (ACTUALITES?.sujets || []).filter(x=>x.medias >= 2).length;
   if(recoupes) faits.push({ href:"#actualites", v:formatNombre(recoupes), l:"sujets d'actualité repris par au moins deux médias" });
-  const cinq = faits.slice(0, 5);
+  const cinq = faits.slice(0, 3);
   bloc.hidden = cinq.length === 0;
   document.getElementById("en-bref-faits").innerHTML = cinq.map(f=>`<a class="accueil-hero-stat" href="${f.href}"><div class="v">${esc(f.v)}</div><div class="l">${esc(f.l)}</div></a>`).join("");
   const maj = [PROBAS?.lastUpdated, ACTUALITES?.lastUpdated, LOIS_MAJ].filter(Boolean).sort().at(-1);
@@ -4113,7 +4139,7 @@ async function renderSenat(){
   const res = SENAT.filter(s => (senatFiltre === "tous" || categorieSenat(s) === "texte") && (!q || norm(s.titre).includes(q)));
   document.getElementById("senat-count").textContent = res.length ? `${formatNombre(res.length)} scrutin${res.length>1?"s":""}` : "Aucun scrutin";
   document.getElementById("senat-reset").hidden = senatFiltre === "texte" && !q;
-  if(!res.length){ liste.innerHTML = `<p class="no-result-msg">Aucun scrutin ne correspond à cette recherche.</p>`; return; }
+  if(!res.length){ liste.innerHTML = `<p class="no-result-msg">Rien ne correspond à cette recherche. Essayez un autre mot.</p>`; return; }
   liste.innerHTML = res.slice(0, senatLimite).map(s=>{
     const groupes = Object.keys(GROUPES_SENAT).filter(g=>s.groupes[g]).map(g=>{
       const v = s.groupes[g], info = GROUPES_SENAT[g], m = v.membres || 1;
@@ -4339,10 +4365,10 @@ const pctFr = (n, d) => d ? (n / d * 100).toFixed(0) + " %" : "—";
 async function renderDeputes(){
   const liste = document.getElementById("deputes-liste");
   if(!DEPUTES){
-    liste.innerHTML = `<p class="chargement">Chargement des 577 députés…</p>`;
+    liste.innerHTML = `<p class="chargement">Un instant, nous récupérons les députés…</p>`;
     await chargerDeputes();
   }
-  if(!DEPUTES.length){ liste.innerHTML = `<p class="no-result-msg">La liste des députés est indisponible pour le moment.</p>`; return; }
+  if(!DEPUTES.length){ liste.innerHTML = `<p class="no-result-msg">La liste des députés n'est pas disponible pour l'instant. Réessayez un peu plus tard.</p>`; return; }
   if(DEPUTES_MAJ && dateCourte(DEPUTES_MAJ)) document.getElementById("deputes-maj").textContent =
     `Votes nominatifs publiés par l'Assemblée nationale ; données actualisées le ${dateCourte(DEPUTES_MAJ)}.`;
 
@@ -4386,7 +4412,7 @@ async function renderDeputes(){
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
   document.querySelectorAll("#deputes-communes .commune-elections:not(.commune-senateurs)").forEach(afficherPresidentielle);
   document.querySelectorAll("#deputes-communes .commune-senateurs").forEach(afficherSenateursCommune);
-  if(!res.length){ liste.innerHTML = blocCommunes ? "" : `<p class="no-result-msg">Aucun député ni aucune commune ne correspond à cette recherche.</p>`; return; }
+  if(!res.length){ liste.innerHTML = blocCommunes ? "" : `<p class="no-result-msg">Rien ne correspond à cette recherche. Essayez un autre nom ou une autre commune.</p>`; return; }
   liste.innerHTML = res.slice(0, deputeLimite).map(d=>{
     const p = partiDepute(d);
     return `<button type="button" class="depute-carte" data-id="${esc(d.id)}">
@@ -5850,7 +5876,7 @@ async function ouvrirStory(type, info){
   document.getElementById("story-apercu").removeAttribute("src");
   document.getElementById("story-etat").textContent = "Préparation de l'image…";
   storyCourante = await dessinerStory(type, info).catch(e=>{ console.warn(e); return null; });
-  if(!storyCourante){ document.getElementById("story-etat").textContent = "Impossible de préparer cette image."; return; }
+  if(!storyCourante){ document.getElementById("story-etat").textContent = "Cette image n'a pas pu être préparée. Réessayez dans un instant."; return; }
   document.getElementById("story-apercu").src = storyCourante.apercu;
   document.getElementById("story-etat").textContent = "";
   const fichier = new File([storyCourante.blob], storyCourante.nom, { type:"image/png" });
@@ -6376,9 +6402,9 @@ async function initSite(){
   await cede();
   renderBudgetGauges();
   await cede();
-  document.getElementById("accueil-highlight-grid").innerHTML = `<p class="chargement">Chargement des derniers votes de l'Assemblée…</p>`;
-  document.getElementById("histo-list").innerHTML = `<p class="chargement">Chargement des scrutins…</p>`;
-  document.getElementById("quiz-container").innerHTML = `<p class="chargement">Chargement des votes…</p>`;
+  document.getElementById("accueil-highlight-grid").innerHTML = `<p class="chargement">Un instant, nous récupérons les derniers votes…</p>`;
+  document.getElementById("histo-list").innerHTML = `<p class="chargement">Un instant, nous récupérons les votes…</p>`;
+  document.getElementById("quiz-container").innerHTML = `<p class="chargement">Un instant, nous récupérons les votes…</p>`;
   document.getElementById("scrutin-banner-detail").textContent = "Chargement des scrutins publics de la législature…";
 
   // 2) Données (≈ 500 Ko compressés)
