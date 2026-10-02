@@ -1127,6 +1127,48 @@
   .parti-logo img{height:24px; width:auto; max-width:150px; object-fit:contain; mix-blend-mode:multiply;}
   [data-theme="sombre"] .parti-logo, [data-theme="sombre"] .actu-logo{background:#E9E4D6; padding:var(--s1) var(--s2); box-shadow:0 0 0 1px var(--border);}
   .leader-info .leader-party{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
+  /* Les présidents : frise verticale par régime, mobile d'abord */
+  .pres-bandeau{display:grid; gap:0; grid-template-columns:1fr; border-top:var(--filet-epais) solid var(--ink); border-bottom:1px solid var(--border); margin:0 0 var(--s5);}
+  .pres-chiffre{padding:var(--s4) 0; border-bottom:1px solid var(--border);}
+  .pres-chiffre:last-child{border-bottom:0;}
+  .pres-chiffre .pres-etiquette{font-size:var(--fs-etiquette); font-weight:700; letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--text-faint);}
+  .pres-chiffre .pres-gros{font-family:var(--font-display); font-weight:700; font-size:var(--fs-2xl); line-height:1.1; margin-top:var(--s1);}
+  .pres-chiffre .pres-detail{font-size:var(--fs-md); color:var(--text-soft); margin-top:var(--s1);}
+  .pres-actuel{display:flex; gap:var(--s3); align-items:center; margin-top:var(--s2);}
+  .pres-actuel b{font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; line-height:1.15;}
+  .pres-legende{font-size:var(--fs-sm); color:var(--text-faint); margin:calc(-1 * var(--s3)) 0 var(--s5);}
+  .pres-courant{display:flex; gap:var(--s4); align-items:center; padding:var(--s4); margin:0 0 var(--s5); background:var(--accent-dim); border-left:var(--filet-epais) solid var(--accent); border-radius:0 var(--r-2) var(--r-2) 0;}
+  .pres-courant .pres-etiquette{font-size:var(--fs-etiquette); font-weight:700; letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--accent);}
+  .pres-courant .pres-nom{font-size:var(--fs-xl); font-weight:700;}
+  .pres-src{margin:var(--s1) 0 var(--s4); font-size:var(--fs-sm); color:var(--text-faint);}
+  .pres-regime{margin:var(--s6) 0 0;}
+  .pres-regime-tete{border-top:var(--filet-fort) solid var(--ink); padding-top:var(--s3);}
+  .pres-regime-tete h3{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s3); margin:0; font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; line-height:1.2;}
+  .pres-regime-tete h3 span{font-family:var(--font-body); font-size:var(--fs-md); font-weight:600; color:var(--text-faint);}
+  .pres-election{margin:var(--s2) 0 var(--s4); font-size:var(--fs-md); color:var(--text-soft); max-width:62ch;}
+  .pres-liste{list-style:none; margin:0; padding:0 0 0 var(--s4); border-left:2px solid var(--border);}
+  .pres-item{position:relative; display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) 0 var(--s3) var(--s3);}
+  .pres-item::before{content:""; position:absolute; left:calc(-1 * var(--s4) - 6px); top:26px; width:10px; height:10px; border-radius:50%; background:var(--bg); border:2px solid var(--ink);}
+  .pres-item.en-cours::before{background:var(--accent); border-color:var(--accent);}
+  .pres-item.en-cours{background:var(--accent-dim); border-radius:var(--r-2); padding-right:var(--s3);}
+  .pres-nom{font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.2;}
+  .pres-nom a{color:inherit; text-decoration-color:var(--border);}
+  .pres-nom a:hover{text-decoration-color:currentColor;}
+  .pres-badge{display:inline-block; margin-left:var(--s2); padding:1px var(--s2); border-radius:var(--r-pill); background:var(--accent); color:var(--sur-couleur); font-family:var(--font-body); font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; vertical-align:2px;}
+  .pres-dates{font-size:var(--fs-md); margin-top:var(--s1);}
+  .pres-meta{font-size:var(--fs-sm); color:var(--text-soft); margin-top:2px;}
+  .pres-meta b{font-weight:600; color:var(--text);}
+  .pres-pause{margin:var(--s5) 0 0; padding:var(--s3) var(--s4); border-left:2px dashed var(--text-faint); background:var(--bg-elevated-2); font-size:var(--fs-md); color:var(--text-soft);}
+  .pres-pause b{display:block; font-size:var(--fs-etiquette); letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--text-faint); margin-bottom:var(--s1);}
+  .pres-sources{margin:var(--s6) 0 0; padding-top:var(--s3); border-top:1px solid var(--border); font-size:var(--fs-sm); color:var(--text-faint);}
+  @media (min-width:700px){
+    .pres-bandeau{grid-template-columns:repeat(3,1fr);}
+    .pres-chiffre{padding:var(--s4) var(--s5) var(--s4) 0; border-bottom:0; border-right:1px solid var(--border);}
+    .pres-chiffre + .pres-chiffre{padding-left:var(--s5);}
+    .pres-chiffre:last-child{border-right:0;}
+    .pres-liste{padding-left:var(--s5);}
+    .pres-item::before{left:calc(-1 * var(--s5) - 6px);}
+  }
   .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 var(--s5);}
   .groupe-card{display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) 0; border-bottom:1px solid var(--border);}
   .groupe-card .dot{margin-top:var(--s2);}
@@ -1568,7 +1610,7 @@
       <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></div>
       <div class="accueil-rubrique" data-tab="budget" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></div>
       <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></div>
-      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre</small></div>
+      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre · Les présidents</small></div>
     </div>
     </details>
     <div class="faire-connaitre">
@@ -2069,6 +2111,18 @@
       <dl class="lex-liste" id="lex-liste"></dl>
       <p class="cp-source">Définitions d'après les sites officiels : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a> · <a href="https://www.service-public.fr/" target="_blank" rel="noopener">service-public.fr</a></p>
     </article>
+  </section>
+
+  <section class="view" id="view-presidents">
+    <div class="rubrique-tete">
+      <div class="surtitre">Pour débuter</div>
+      <h2>Les présidents</h2>
+      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> en France, dans l'ordre, régime après régime. Des dates et des faits, sans avis.
+        <small>Liste relue le <span id="presidents-verifie">2 octobre 2026</span>. Sources : site de l'Élysée et Wikipédia, un lien vers la fiche de chacun.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> s'est terminé.</p>
+    </div>
+    <div id="presidents-bandeau"></div>
+    <div id="presidents-frise"></div>
   </section>
 
   <section class="view" id="view-mentions">
@@ -2681,6 +2735,7 @@ const GLOSSAIRE = [
   ["commission", "Commission", "Petit groupe de parlementaires spécialisé dans un domaine (finances, défense, affaires sociales…). Elle étudie un texte et peut le modifier avant le vote en séance."],
   ["cmp", "Commission mixte paritaire (CMP)", "Réunion de 7 députés et 7 sénateurs, chargée de proposer un texte commun quand l'Assemblée et le Sénat ne sont pas d'accord."],
   ["conseil-constitutionnel", "Conseil constitutionnel", "9 membres qui vérifient qu'une loi respecte la Constitution. Ils veillent aussi à la régularité des élections nationales."],
+  ["congres", "Congrès", "Réunion des députés et des sénateurs au même endroit, à Versailles aujourd'hui. Il sert à réviser la Constitution. Sous les IIIe et IVe Républiques, il élisait aussi le président de la République."],
   ["constitution", "Constitution", "Texte qui organise les pouvoirs et fixe les règles du pays. Celle de la Ve République date de 1958."],
   ["croissance", "Croissance", "Hausse de la production du pays d'une année sur l'autre, mesurée par l'évolution du PIB."],
   ["deficit", "Déficit public", "Somme qui manque quand l'État, les collectivités et la Sécurité sociale dépensent plus qu'ils ne reçoivent pendant une année."],
@@ -2695,6 +2750,7 @@ const GLOSSAIRE = [
   ["intention-de-vote", "Intention de vote", "Réponse d'une personne sondée à la question « pour qui voteriez-vous ? ». Ce n'est pas un vote : l'avis peut changer jusqu'au scrutin."],
   ["journal-officiel", "Journal officiel", "Publication de l'État où paraissent les lois, les décrets et les nominations."],
   ["majorite-absolue", "Majorité absolue", "Plus de la moitié de tous les membres d'une assemblée, présents ou non. À l'Assemblée nationale : 289 voix sur 577."],
+  ["mandat", "Mandat", "Durée pendant laquelle un élu exerce sa fonction. Celui du président de la République dure 5 ans depuis 2002 ; il durait 7 ans avant."],
   ["marge-erreur", "Marge d'erreur", "Écart possible entre le résultat d'un sondage et la réalité, car on interroge une partie des gens seulement. Pour 1 000 personnes interrogées, elle est d'environ 3 points."],
   ["motion-de-censure", "Motion de censure", "Vote par lequel les députés peuvent renverser le gouvernement. Elle doit être signée par au moins un dixième des députés et votée par 289 d'entre eux. Si elle l'est, le gouvernement doit démissionner."],
   ["navette", "Navette parlementaire", "Allers-retours d'un texte entre l'Assemblée et le Sénat, jusqu'à ce que les deux votent le même texte."],
@@ -4301,6 +4357,110 @@ function afficherResultatQuiz(scores, lignes, quand){
   document.getElementById("quiz-enregistre").textContent = maj ? `Résultat enregistré sur cet appareil le ${maj}.` : "Résultat enregistré sur cet appareil.";
   document.getElementById("quiz-restart").addEventListener("click", ()=>{ try{ localStorage.removeItem("quiz-resultat"); }catch(e){} renderQuiz(); });
 }
+
+/* ---------- Les présidents (data/presidents.json, saisie manuelle) ---------- */
+
+let PRESIDENTS = null; // { regimes, periodes_sans_president, verifieLe }
+let PRESIDENTS_PHOTOS = null; // data/portraits.json
+// Phrases du mode d'élection, une par régime : coupées autour des termes du glossaire pour être traduisibles morceau par morceau.
+// Le texte complet (sans balises) doit rester identique à « election » dans data/presidents.json (contrôlé par check-data.js et le test de fumée).
+const PRESIDENTS_ELECTION = {
+  ii: `<span>Le président est élu au</span> ${gl("suffrage-direct", "suffrage universel direct")}<span>, mais seuls les hommes votent.</span>`,
+  iii: `<span>Le président est élu par le Parlement : par l'Assemblée nationale pour Thiers et Mac Mahon, puis par les députés et les sénateurs réunis en</span> ${gl("congres", "Congrès")}.`,
+  iv: `<span>Le président est élu pour 7 ans par le Parlement réuni en</span> ${gl("congres", "Congrès")} <span>: l'Assemblée nationale et le Conseil de la République.</span>`,
+  v: `<span>Le président est choisi en 1958 par un collège de</span> ${gl("grands-electeurs", "grands électeurs")}. <span>Depuis la réforme de 1962, il est élu au</span> ${gl("suffrage-direct", "suffrage universel direct")}<span>, pour la première fois en 1965.</span>`
+};
+// Textes de data/presidents.json affichés tels quels : listés ici pour entrer dans les traductions
+const PRESIDENTS_TEXTES = [
+  "démission", "mort en fonction", "assassiné", "fin de mandat", "devenu empereur sous le nom de Napoléon III", "fin de la IIIe République",
+  "Il reste en fonction jusqu'à l'arrivée de son successeur, après le début de la Ve République.",
+  "De 1940 à 1944, le régime de Vichy est dirigé par Philippe Pétain, avec le titre de « chef de l'État français ». Cette période n'a pas de président de la République.",
+  "De 1944 à 1946, le Gouvernement provisoire de la République française est dirigé tour à tour par Charles de Gaulle, Félix Gouin et Georges Bidault, entre autres. Cette période n'a pas non plus de président de la République."
+];
+const presDate = iso => {
+  if(!iso) return "";
+  if(String(iso).length === 4) return String(iso);
+  const d = new Date(iso + "T12:00:00Z");
+  const lang = document.documentElement.lang || "fr";
+  const r = d.toLocaleDateString(lang, { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" });
+  return lang === "fr" ? r.replace(/^1 /, "1er ") : r;
+};
+const presPrecis = iso => String(iso || "").length === 10;
+// Mois entiers écoulés entre deux dates complètes (AAAA-MM-JJ)
+function presMois(a, b){
+  const [y1, m1, d1] = a.split("-").map(Number), [y2, m2, d2] = b.split("-").map(Number);
+  return (y2 - y1) * 12 + (m2 - m1) - (d2 < d1 ? 1 : 0);
+}
+const presAujourdhui = () => new Date().toISOString().slice(0, 10);
+function presDuree(p){
+  const fin = p.fin || presAujourdhui();
+  if(presPrecis(p.debut) && presPrecis(fin)){
+    const m = presMois(p.debut, fin), a = Math.floor(m / 12), r = m % 12;
+    if(a === 0) return t("Durée : {1} mois", { 1:m });
+    if(r === 0) return t(a === 1 ? "Durée : {1} an" : "Durée : {1} ans", { 1:a });
+    return t(a === 1 ? "Durée : {1} an et {2} mois" : "Durée : {1} ans et {2} mois", { 1:a, 2:r });
+  }
+  return t("Durée : environ {1} ans", { 1:parseInt(fin, 10) - parseInt(p.debut, 10) });
+}
+function presMedaillon(p, actuel){
+  const credit = PRESIDENTS_PHOTOS?.[p.nom];
+  const photo = credit?.fichier ? `photos/personnalites/${slugPortrait(p.nom)}.jpg` : null;
+  const ini = p.nom.split(/[\s-]+/).filter(Boolean).map(x => x[0]).filter(c => /\p{Lu}/u.test(c)).slice(0, 2).join("");
+  const titre = photo ? t("Photo : {1}, {2}, via Wikimedia Commons", { 1:credit.auteur || t("auteur non indiqué"), 2:credit.licence }) : "";
+  const taille = actuel ? 72 : 56;
+  return `<span class="medaillon" style="--c:${actuel ? "#1B3A8C" : "#47443D"}; --t:${taille}px"${titre ? ` title="${esc(titre)}"` : ""}><b aria-hidden="true">${esc(ini)}</b>${photo ? `<img src="${esc(photo)}" alt="" width="${taille}" height="${taille}" loading="lazy" onerror="this.remove()">` : ""}</span>`;
+}
+function presEntree(p){
+  const actuel = !p.fin;
+  const fin = actuel ? t("aujourd'hui") : presDate(p.fin);
+  return `<li class="pres-item${actuel ? " en-cours" : ""}" data-president="${esc(p.nom)}">
+    ${presMedaillon(p, false)}
+    <div>
+      <div class="pres-nom"><a href="${lien(p.wikipedia)}" target="_blank" rel="noopener">${esc(p.nom)}</a>${actuel ? ` <span class="pres-badge">Président actuel</span>` : ""}</div>
+      <div class="pres-dates"><time>${esc(presDate(p.debut))}</time> – <time>${esc(fin)}</time></div>
+      <div class="pres-meta">${esc(presDuree(p))}</div>
+      ${p.fin_type ? `<div class="pres-meta">${esc(t("Fin de la fonction : {1}", { 1:t(p.fin_type) }))}</div>` : ""}
+      ${p.note ? `<div class="pres-meta">${esc(t(p.note))}</div>` : ""}
+    </div>
+  </li>`;
+}
+function renderPresidents(){
+  const bandeau = document.getElementById("presidents-bandeau"), frise = document.getElementById("presidents-frise");
+  if(!bandeau || !frise || !PRESIDENTS) return;
+  const tous = PRESIDENTS.regimes.flatMap(r => r.presidents);
+  const jours = p => (Date.parse((p.fin || presAujourdhui()) + "T12:00:00Z") - Date.parse(p.debut + "T12:00:00Z")) / 864e5;
+  const precis = tous.filter(p => presPrecis(p.debut) && (!p.fin || presPrecis(p.fin)));
+  const plus = precis.reduce((a, b) => jours(b) > jours(a) ? b : a), moins = precis.reduce((a, b) => jours(b) < jours(a) ? b : a);
+  const actuel = tous.find(p => !p.fin);
+  const premier = parseInt(tous[0].debut, 10);
+  bandeau.innerHTML = `<div class="pres-bandeau">
+      <div class="pres-chiffre"><div class="pres-etiquette">Au total</div><div class="pres-gros">${esc(t("{1} présidents depuis {2}", { 1:tous.length, 2:premier }))}</div><div class="pres-detail">De la IIe à la Ve République.</div></div>
+      <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus long</span></div><div class="pres-gros">${esc(plus.nom)}</div><div class="pres-detail">${esc(presDuree(plus))}</div></div>
+      <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus court</span></div><div class="pres-gros">${esc(moins.nom)}</div><div class="pres-detail">${esc(presDuree(moins))}</div></div>
+    </div>
+    <p class="pres-legende">Durées calculées d'après les dates connues au jour près.</p>
+    ${actuel ? `<div class="pres-courant">${presMedaillon(actuel, true)}<div><div class="pres-etiquette">Président actuel</div><div class="pres-nom"><a href="${lien(actuel.wikipedia)}" target="_blank" rel="noopener">${esc(actuel.nom)}</a></div><div class="pres-meta">${esc(t("En fonction depuis le {1}", { 1:presDate(actuel.debut) }))}</div></div></div>` : ""}`;
+  // Régimes et périodes sans président, dans l'ordre des dates
+  const blocs = [
+    ...PRESIDENTS.regimes.map(r => ({ debut:r.debut, html:`<section class="pres-regime" data-regime="${esc(r.id)}">
+      <div class="pres-regime-tete"><h3>${esc(r.nom)} <span>${esc(r.debut)}–${esc(r.fin || "")}${r.fin ? "" : " " + esc(t("à aujourd'hui"))}</span></h3></div>
+      <p class="pres-election">${PRESIDENTS_ELECTION[r.id] || esc(r.election)}</p>
+      <p class="pres-src">${esc(t("Sources :"))} ${(r.sources || []).map(s => `<a href="${lien(s.url)}" target="_blank" rel="noopener">${esc(s.nom)}</a>`).join(" · ")}</p>
+      <ol class="pres-liste">${r.presidents.map(presEntree).join("")}</ol>
+    </section>` })),
+    ...(PRESIDENTS.periodes_sans_president || []).map(x => ({ debut:x.debut, html:`<p class="pres-pause" data-periode="${esc(x.debut)}"><b>${esc(x.debut)}–${esc(x.fin)} · Pas de président de la République</b>${esc(t(x.texte))} <a href="${lien(x.wikipedia)}" target="_blank" rel="noopener">Wikipédia</a></p>` }))
+  ].sort((a, b) => a.debut - b.debut);
+  frise.innerHTML = blocs.map(b => b.html).join("");
+}
+async function chargerPresidents(){
+  if(!PRESIDENTS){
+    const [d, p] = await Promise.all([lireJSON("data/presidents.json"), lireJSON("data/portraits.json")]);
+    if(d?.regimes){ PRESIDENTS = d; const el = document.getElementById("presidents-verifie"); if(el && d.verifieLe && presDate(d.verifieLe)) el.textContent = presDate(d.verifieLe); }
+    PRESIDENTS_PHOTOS = p?.portraits || {};
+  }
+  renderPresidents();
+}
+document.addEventListener("langue-changee", ()=>{ if(PRESIDENTS) renderPresidents(); });
 
 /* ---------- Dirigeants des partis (données réelles, vérifiées début septembre 2026) ---------- */
 
@@ -7011,7 +7171,7 @@ const HUBS = [
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, institut par institut"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
   { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"]] },
-  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"]] }
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"], ["presidents","Les présidents","Tous les présidents de la République, de 1848 à aujourd'hui"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
@@ -7133,6 +7293,7 @@ function activateTab(tabId){
     renderGouvernement();
     if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
   }
+  if(tabId === "presidents") chargerPresidents();
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
   if(tabId === "espace") renderEspace();

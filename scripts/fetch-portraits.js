@@ -34,21 +34,24 @@ async function api(url) {
 }
 
 /** Fichier de l'image principale de l'article, si l'article décrit une personnalité politique */
-async function imageArticle(nom) {
-  for (const titre of [nom, `${nom} (homme politique)`, `${nom} (femme politique)`]) {
+async function imageArticle(nom, titreArticle) {
+  for (const titre of [titreArticle || nom, `${nom} (homme politique)`, `${nom} (femme politique)`]) {
     const d = await api(`https://fr.wikipedia.org/w/api.php?action=query&format=json&redirects=1&prop=pageimages|pageprops|description&piprop=name&titles=${encodeURIComponent(titre)}`);
     const page = Object.values(d.query?.pages || {})[0];
     if (!page || page.missing !== undefined || page.pageprops?.disambiguation !== undefined) continue;
-    if (page.description && !/politi|ministre|député|sénat|maire|président|syndical|homme d.état|femme d.état|haut fonctionnaire|militant|candidat|essayiste|journaliste/i.test(page.description)) continue;
+    if (page.description && !/politi|ministre|député|sénat|maire|président|syndical|homme d.état|femme d.état|empereur|chef de l.état|haut fonctionnaire|militant|candidat|essayiste|journaliste/i.test(page.description)) continue;
     return page.pageimage ? { fichier: page.pageimage, page: `https://fr.wikipedia.org/wiki/${encodeURIComponent(page.title.replace(/ /g, "_"))}` } : null;
   }
   return null;
 }
 
 async function main() {
-  const [deputes, senateurs, dirigeants, candidats, gouvernement, justice] = await Promise.all(
-    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement", "justice"].map((f) => lire(`data/${f}.json`))
+  const [deputes, senateurs, dirigeants, candidats, gouvernement, justice, presidents] = await Promise.all(
+    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement", "justice", "presidents"].map((f) => lire(`data/${f}.json`))
   );
+  // Présidents de la République (data/presidents.json) : le titre de l'article Wikipédia vient de leur lien
+  const presidentsListe = (presidents?.regimes || []).flatMap((r) => r.presidents || []);
+  const titres = Object.fromEntries(presidentsListe.map((p) => [p.nom, decodeURIComponent(String(p.wikipedia || "").split("/wiki/")[1] || "").replace(/_/g, " ")]));
   const data = (await lire(DATA_FILE)) || { source: "Wikimedia Commons (licences libres), via l'image principale de l'article Wikipédia", portraits: {} };
   const parlementaires = new Set([...(deputes?.deputes || []), ...(senateurs?.senateurs || [])].map((p) => p.nom));
   const noms = [...new Set([
@@ -56,6 +59,7 @@ async function main() {
     ...(candidats?.candidats || []).map((c) => c.nom),
     ...(gouvernement?.membres || []).map((m) => m.nom),
     ...(justice?.condamnations || []).map((c) => c.nom),
+    ...presidentsListe.map((p) => p.nom),
     "Emmanuel Macron",
   ])].filter((n) => n && n !== "—" && !parlementaires.has(n));
 
@@ -70,7 +74,7 @@ async function main() {
     if (p && !p.fichier && (maintenant - new Date(p.essai)) / 864e5 < (/pas d'article/.test(p.raison || "") ? 1 : 30)) continue;
     if (traites++ >= MAX) break;
     try {
-      const img = await imageArticle(nom);
+      const img = await imageArticle(nom, titres[nom]);
       if (!img) throw new Error("pas d'article ou pas d'image principale");
       const d = await api(`https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=120&titles=${encodeURIComponent("File:" + img.fichier)}`);
       const info = Object.values(d.query?.pages || {})[0]?.imageinfo?.[0];

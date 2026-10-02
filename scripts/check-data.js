@@ -393,6 +393,52 @@ async function checkManuels() {
   console.log("[check-data] fichiers manuels contrôlés.");
 }
 
+/** Présidents de la République (saisie manuelle) : dates cohérentes et sans chevauchement, un seul président en cours, liens https, textes présents dans index.html (traductions). */
+async function checkPresidents() {
+  const data = JSON.parse(await readFile("data/presidents.json", "utf-8").catch(() => "null"));
+  if (!data?.regimes?.length) return err("presidents.json : absent ou sans « regimes »");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.verifieLe || "")) err("presidents.json : « verifieLe » invalide");
+  const html = await readFile("index.html", "utf-8");
+  const dansPage = (texte) => html.includes(JSON.stringify(texte).slice(1, -1).replace(/\\"/g, '"')) || html.includes(texte);
+  const portraits = JSON.parse(await readFile("data/portraits.json", "utf-8").catch(() => "null"))?.portraits || {};
+  const ISO = /^(\d{4})(-(\d{2})-(\d{2}))?$/;
+  const fin = (d, defaut) => { const m = ISO.exec(d || ""); return m ? (m[2] ? d : `${d}${defaut}`) : null; };
+  let precedent = null, enCours = 0, total = 0;
+  const noms = new Set();
+  for (const r of data.regimes) {
+    if (!r.nom || !r.election || !Number.isInteger(r.debut)) err(`presidents.json : régime « ${r.id} » incomplet (nom, election, debut)`);
+    if (!r.sources?.length || r.sources.some((s) => !/^https:\/\//.test(s.url || "") || !s.nom)) err(`presidents.json : ${r.nom} : source https manquante`);
+    if (!r.presidents?.length) err(`presidents.json : ${r.nom} sans président`);
+    for (const p of r.presidents || []) {
+      total++;
+      if (noms.has(p.nom)) err(`presidents.json : ${p.nom} en double`);
+      noms.add(p.nom);
+      if (!/^https:\/\/fr\.wikipedia\.org\/wiki\//.test(p.wikipedia || "")) err(`presidents.json : ${p.nom} : lien Wikipédia https manquant`);
+      if (!ISO.test(p.debut || "")) { err(`presidents.json : ${p.nom} : début invalide « ${p.debut} »`); continue; }
+      if (p.fin === null) enCours++;
+      else if (!ISO.test(p.fin || "")) { err(`presidents.json : ${p.nom} : fin invalide « ${p.fin} »`); continue; }
+      const d = fin(p.debut, "-01-01"), f = p.fin === null ? null : fin(p.fin, "-12-31");
+      if (f && f < d) err(`presidents.json : ${p.nom} : la fin précède le début`);
+      // Pas de chevauchement : le début d'un président n'est jamais avant la fin du précédent (l'année seule compte comme bornes larges)
+      if (precedent) {
+        if (precedent.fin === null) err(`presidents.json : ${precedent.nom} est en cours mais ${p.nom} lui succède`);
+        else if (d < fin(precedent.fin, "-01-01")) err(`presidents.json : ${p.nom} commence avant la fin de ${precedent.nom}`);
+      }
+      precedent = { nom: p.nom, fin: p.fin };
+      if (p.fin_type && !dansPage(p.fin_type)) err(`presidents.json : « ${p.fin_type} » (${p.nom}) absent de index.html : il ne serait pas traduit`);
+      if (p.note && !dansPage(p.note)) err(`presidents.json : la note de ${p.nom} est absente de index.html : elle ne serait pas traduite`);
+      const pt = portraits[p.nom];
+      if (pt?.fichier && (!pt.licence || !/^https:\/\//.test(pt.source || ""))) err(`presidents.json : portrait de ${p.nom} sans licence ou source`);
+    }
+  }
+  if (enCours !== 1) err(`presidents.json : ${enCours} président(s) en cours (un seul attendu)`);
+  for (const x of data.periodes_sans_president || []) {
+    if (!/^https:\/\//.test(x.wikipedia || "") || !x.texte) err(`presidents.json : période ${x.debut} incomplète`);
+    else if (!dansPage(x.texte)) err(`presidents.json : le texte de la période ${x.debut}–${x.fin} est absent de index.html`);
+  }
+  console.log(`[check-data] presidents.json : ${total} présidents, ${data.regimes.length} régimes.`);
+}
+
 await checkLois();
 await checkIndicateurs();
 await checkBudget();
@@ -426,6 +472,7 @@ await checkCommunes();
   }
 }
 await checkManuels();
+await checkPresidents();
 {
   // Droit à l'image : chaque photo de personnalité doit avoir sa licence dans data/portraits.json (bloquant)
   const e = await verifierPortraits();
