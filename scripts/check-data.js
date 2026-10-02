@@ -14,6 +14,7 @@ import { existsSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
 import { extraire, controlerDico, listerLangues } from "./extraire-i18n.js";
+import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -432,6 +433,25 @@ await checkManuels();
   if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
 }
 await checkI18n();
+await checkCompte();
+
+/** Comptes (Supabase) : config absente = fonction cachée et CSP stricte ; config présente = URL https …supabase.co, clé publique seulement. */
+async function checkCompte() {
+  const { presente, config, erreur } = await lireConfigCompte();
+  const html = await readFile("index.html", "utf-8");
+  const hotes = connectSrc(html);
+  if (!hotes) return err("compte : directive connect-src introuvable dans la CSP d'index.html");
+  const autres = hotes.filter((h) => h !== "'self'");
+  if (presente && !config) return err(`compte : data/compte-config.json invalide (${erreur}). L'URL doit être https://<projet>.supabase.co et la clé la clé publique « anon », jamais la clé secrète.`);
+  for (const h of autres) if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(h)) err(`compte : la CSP autorise « ${h} » : seule l'URL https://<projet>.supabase.co de la configuration est admise`);
+  if (!config) {
+    if (autres.length) err("compte : pas de configuration mais la CSP autorise encore une adresse : lancer node scripts/appliquer-compte.js");
+    console.log("[check-data] compte : comptes inactifs (pas de data/compte-config.json), CSP stricte.");
+    return;
+  }
+  if (autres.length !== 1 || autres[0] !== config.url) console.warn("[check-data] compte : la CSP d'index.html ne correspond pas à la configuration : lancer node scripts/appliquer-compte.js (le site garde les comptes cachés tant que ce n'est pas fait).");
+  console.log(`[check-data] compte : comptes actifs (${config.url}), ${config.fournisseurs.length} fournisseur(s).`);
+}
 
 /** Langues du site : fr.json (généré depuis index.html) et un dictionnaire par langue dans data/i18n/. */
 async function checkI18n() {
