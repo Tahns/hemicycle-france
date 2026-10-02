@@ -135,6 +135,13 @@ function verifier(cond, message) {
     await page.waitForTimeout(300);
     verifier((await page.$$(".chiffre-card")).length >= 4 && (await page.$$("#budget-hero .gauge-svg")).length === 2, `${nom} : indicateurs absents`);
 
+    await page.goto(base + "#methode", { waitUntil: "networkidle" });
+    await page.waitForTimeout(400);
+    verifier(await page.isVisible("#view-methode"), `${nom} : page Méthode absente`);
+    verifier((await page.$$("#methode-maj tr")).length >= 5 && !/Chargement|date non indiquée/.test(await page.textContent("#methode-maj")), `${nom} : dates de mise à jour de la page Méthode non lues dans data/*.json`);
+    verifier(/Méthode/.test(await page.title()), `${nom} : titre de la page Méthode`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur la page Méthode`);
+
     await page.goto(base + "#quiz", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     for (const g of await page.$$(".quiz-options")) await (await g.$$(".quiz-option"))[0].click();

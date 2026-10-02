@@ -748,6 +748,10 @@
   .bientot{display:inline-block; vertical-align:3px; margin-left:6px; padding:2px 8px; border-radius:10px; background:var(--accent-dim); color:var(--accent); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
   .gauge-legende{display:flex; align-items:center; gap:8px; margin-top:6px; font-size:12.5px; color:var(--text-faint);}
   .gauge-legende .trait{width:3px; height:12px; background:var(--text); border-radius:2px;}
+  .methode-table{width:100%; border-collapse:collapse; font-size:14px; margin:10px 0 16px;}
+  .methode-table th, .methode-table td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border-soft);}
+  .methode-table code{font-size:12.5px;}
+  .table-scroll{overflow-x:auto;}
   .quiz-card{padding:18px 0 20px; border-bottom:1px solid var(--border);}
   .quiz-progress{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px;}
   .quiz-question{font-family:var(--font-display); font-size:21px; font-weight:500; line-height:1.3; margin-bottom:6px;}
@@ -1219,6 +1223,7 @@
   <div class="feuille-groupe" aria-hidden="true">Pour aller plus loin</div>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
+  <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
@@ -1589,6 +1594,45 @@
     </div>
   </section>
 
+  <section class="view" id="view-methode">
+    <div class="rubrique-tete">
+      <div class="surtitre">Transparence</div>
+      <h2>Méthode</h2>
+      <p class="chapo">D'où viennent les chiffres, à quel rythme ils sont actualisés, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
+    </div>
+    <div class="texte-legal">
+      <h3>Sources</h3>
+      <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
+
+      <h3>Fréquence de mise à jour</h3>
+      <p>Un traitement automatique est lancé toutes les heures : il relit les sources publiques, vérifie la cohérence des fichiers puis publie. Les dates ci-dessous sont lues dans les fichiers de données eux-mêmes ; elles indiquent la dernière réécriture du fichier, pas la date des faits.</p>
+      <div class="table-scroll"><table class="methode-table">
+        <thead><tr><th scope="col">Données</th><th scope="col">Fichier</th><th scope="col">Dernière actualisation</th></tr></thead>
+        <tbody id="methode-maj"><tr><td colspan="3">Chargement…</td></tr></tbody>
+      </table></div>
+      <p>Les données saisies à la main (justice, agenda, questions du quiz) portent une date de vérification ; un contrôle quotidien signale celles qui ne bougent plus.</p>
+
+      <h3>Limites</h3>
+      <ul>
+        <li>Les sources sont reprises telles qu'elles sont publiées : une erreur ou un retard à la source se retrouve ici jusqu'à la prochaine actualisation.</li>
+        <li>Pendant les suspensions de séance, aucun nouveau vote n'est publié.</li>
+        <li>Un vote ne résume pas une position : il porte sur un texte précis, parfois sur un seul article, et peut répondre à des considérations de procédure ou de calendrier.</li>
+        <li>La position d'un groupe est celle de la majorité de ses membres sur le scrutin ; les votes individuels peuvent différer.</li>
+        <li>Les sondages sont des mesures à une date donnée, avec une marge d'erreur ; ils ne prédisent pas le résultat.</li>
+        <li>Les probabilités affichées sont une simulation à partir des sondages, pas une prévision.</li>
+      </ul>
+
+      <h3>Neutralité</h3>
+      <ul>
+        <li>Le site ne publie pas de moyenne maison des sondages : chaque institut est montré avec ses propres chiffres.</li>
+        <li>Les classements et pourcentages (participation, proximité entre groupes, quiz) sont calculés mécaniquement à partir des votes publics, avec la même règle pour tous les groupes.</li>
+        <li>Les questions du quiz renvoient chacune à un scrutin réel, dont le titre officiel est rappelé et le vote consultable ; elles n'ajoutent ni explication de vote ni opinion.</li>
+        <li>Les condamnations ne sont mentionnées que si elles ont été rendues par une juridiction, avec leur statut.</li>
+        <li>Une erreur ? <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signalez-la</a> ; le code est public.</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="view" id="view-quiz">
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
@@ -1601,6 +1645,7 @@
 
 <footer class="site-footer">
   <p class="footer-liens">
+    <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
@@ -3228,6 +3273,25 @@ function renderCandidats(){
       </div>
     </div>`;
   }).join("");
+}
+
+/* ---------- Méthode : dates d'actualisation lues dans les fichiers de données ---------- */
+const FICHIERS_METHODE = [
+  ["Scrutins de l'Assemblée", "data/lois.json"], ["Groupes parlementaires", "data/groupes.json"], ["Députés", "data/deputes.json"],
+  ["Scrutins du Sénat", "data/senat.json"], ["Sondages", "data/sondages.json"], ["Candidats", "data/candidats.json"],
+  ["Indicateurs Insee", "data/indicateurs.json"], ["Actualités", "data/actualites.json"], ["Agenda de l'Assemblée", "data/agenda-an.json"],
+];
+let methodeRendue = false;
+async function renderMethode(){
+  if(methodeRendue) return;
+  methodeRendue = true;
+  const corps = document.getElementById("methode-maj");
+  const lignes = await Promise.all(FICHIERS_METHODE.map(async ([nom, f])=>{
+    const d = await lireJSON(f);
+    const maj = d?.lastUpdated && !isNaN(Date.parse(d.lastUpdated)) ? new Date(d.lastUpdated).toLocaleString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit" }).replace(":", " h ") : "date non indiquée";
+    return `<tr><td>${esc(nom)}</td><td><code>${esc(f)}</code></td><td>${esc(maj)}</td></tr>`;
+  }));
+  corps.innerHTML = lignes.join("");
 }
 
 /* ---------- Quiz d'affinité ---------- */
@@ -5089,7 +5153,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "mentions"];
+const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "methode", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
@@ -5121,6 +5185,7 @@ function activateTab(tabId){
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
   if(tabId === "mentions") renderCreditsPortraits();
+  if(tabId === "methode") renderMethode();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
@@ -5131,7 +5196,7 @@ function activateTab(tabId){
     else if(tabId === "senat") majHash(senateurOuvert ? "senateur-" + senateurOuvert : "senat");
     else majHash(tabId);
   }
-  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales" })[tabId];
+  const nomPage = tabEl ? tabEl.textContent.trim() : ({ mentions:"Mentions légales", methode:"Méthode" })[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
 }
 
