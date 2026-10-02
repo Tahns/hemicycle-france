@@ -100,7 +100,7 @@ Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans touch
 - `scripts/fetch-*.js` : collecte depuis les sources officielles ; chacun passe par `scripts/garde.js`, qui refuse
   d'écraser un bon fichier si le contenu est vide, chute de plus de 30 % ou perd un champ obligatoire (ancien fichier conservé, alerte levée).
 - `scripts/check-data.js` (cohérence, licence de chaque photo de `photos/personnalites/` dans `data/portraits.json`), `check-fraicheur.js` (données périmées), `check-sources.js` (Décodex).
-- Workflows : `update-data.yml` (toutes les heures), `actualites.yml`, `ci.yml` (tests), `stats.yml` (trafic), `sante.yml` (chaque lundi : les trois contrôles ; ouvre ou complète UNE issue `alerte-donnees`, silencieux si tout va bien).
+- Workflows : `update-data.yml` (toutes les heures), `actualites.yml`, `ci.yml` (tests), `stats.yml` (trafic), `sante.yml` (chaque lundi : les trois contrôles ; écrit le problème dans le résumé de l'exécution, sans e-mail).
 - Secrets : `GITHUB_TOKEN` (fourni automatiquement) ; `TRAFIC_TOKEN` (jeton fine-grained « Administration : Read-only ») pour `stats.yml` uniquement.
 - Données manuelles : une fiche de `justice.json` non vérifiée depuis 90 jours est marquée « À vérifier » (masquée après 180) ; les événements passés de `meetings.json` sont masqués.
 - Tests : `node tests/garde.test.mjs` (garde-fou et licences, sur fixtures), `node tests/smoke.cjs` (navigateur).
@@ -122,8 +122,7 @@ Mise en place : créer un jeton *fine-grained* limité à ce dépôt avec la per
   rappelle les relectures manuelles : justice (relecture tous les 60 jours et après chaque date listée dans `echeances` de
   `data/justice.json`), agenda (tous les 30 jours ou s'il est vide).
   Après une relecture, mettre à jour le champ `verifieLe` du fichier concerné.
-- En cas d'échec d'une source ou de données périmées, le workflow ouvre (ou complète) un ticket
-  GitHub avec l'étiquette `alerte-donnees` : GitHub vous notifie par e-mail.
+- En cas d'échec d'une source ou de données périmées, le problème est écrit dans le résumé de l'exécution (onglet Actions du dépôt). Aucun ticket ni e-mail n'est créé automatiquement.
 - `scripts/check-sources.js` confronte chaque lien cité dans `data/` à la base du Décodex
   (contenus démentis par Les Décodeurs du *Monde*).
 - `.github/workflows/ci.yml` lance ces contrôles et un test du site dans un vrai navigateur

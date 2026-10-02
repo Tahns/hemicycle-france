@@ -3,7 +3,7 @@
  * check-fraicheur.js
  * ------------------
  * Signale les données qui ne se mettent plus à jour alors qu'elles le devraient.
- * Sort en erreur (code 1) avec un message lisible ; le workflow ouvre alors un ticket GitHub.
+ * Sort en erreur (code 1) avec un message lisible ; le workflow l'écrit dans le résumé de l'exécution.
  *
  *  - Scrutins : pendant la session parlementaire (octobre → juin, hors fêtes de fin d'année),
  *    un vote au moins tous les 21 jours.

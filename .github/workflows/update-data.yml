@@ -5,7 +5,6 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
-  issues: write
 concurrency:
   group: update-data
   cancel-in-progress: false
@@ -136,8 +135,8 @@ jobs:
         run: node scripts/check-sources.js 2> sources.txt
         continue-on-error: true
 
-      # Alerte : un ticket « alerte-donnees » est ouvert (ou complété s'il existe déjà)
-      - name: Signaler un problème par un ticket GitHub
+      # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
+      - name: Signaler un problème dans le résumé de l'exécution
         if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -169,18 +168,5 @@ jobs:
             echo
             echo "Journal complet : $RUN_URL"
           } > alerte.md
-          # Empreinte des problèmes signalés : on ne recommente pas chaque jour la même alerte
-          empreinte=$(grep '^- ' alerte.md | sha256sum | cut -c1-16)
-          echo "<!-- empreinte: $empreinte -->" >> alerte.md
-          gh label create alerte-donnees --color D93F0B --description "Problème détecté par la mise à jour automatique" 2>/dev/null || true
-          numero=$(gh issue list --label alerte-donnees --state open --json number --jq '.[0].number')
-          if [ -n "$numero" ]; then
-            dernier=$(gh issue view "$numero" --json body,comments --jq '(.comments | last | .body) // .body')
-            if printf '%s' "$dernier" | grep -q "empreinte: $empreinte"; then
-              echo "Alerte identique déjà signalée dans le ticket #$numero : rien à ajouter."
-            else
-              gh issue comment "$numero" --body-file alerte.md
-            fi
-          else
-            gh issue create --title "Alerte : mise à jour automatique des données" --label alerte-donnees --body-file alerte.md
-          fi
+          # Aucun ticket ni e-mail : le problème est lu dans le résumé de l'exécution (onglet Actions)
+          cat alerte.md >> "$GITHUB_STEP_SUMMARY"

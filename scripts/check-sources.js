@@ -8,7 +8,7 @@
  *    (au moins SEUIL contenus démentis sur le même domaine, hors réseaux sociaux et plateformes d'hébergement,
  *    où chacun publie ce qu'il veut). Les grands médias comptent aussi quelques articles démentis (jusqu'à 6
  *    pour franceinfo) : en dessous de 10, le nombre seul ne distingue pas un média d'un site douteux.
- * Sort en erreur (code 1) avec un message lisible ; le workflow ouvre alors un ticket GitHub.
+ * Sort en erreur (code 1) avec un message lisible ; le workflow l'écrit dans le résumé de l'exécution.
  * Si la base du Décodex est injoignable, le script prévient mais ne bloque rien.
  *
  * USAGE : node scripts/check-sources.js
