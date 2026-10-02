@@ -1,0 +1,45 @@
+name: Santé des données
+on:
+  schedule:
+    - cron: "23 6 * * 1"
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+jobs:
+  sante:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Contrôles (cohérence, fraîcheur, sources)
+        id: controles
+        run: |
+          : > sante.md
+          for s in check-data check-fraicheur check-sources; do
+            if ! node "scripts/$s.js" > "$s.out" 2> "$s.err"; then
+              { echo "### $s"; echo; cat "$s.out" "$s.err" | head -60 | sed 's/^/    /'; echo; } >> sante.md
+            fi
+          done
+          if [ -s sante.md ]; then echo "probleme=1" >> "$GITHUB_OUTPUT"; else echo "Tout est sain : aucune issue."; fi
+      # Une seule issue « alerte-donnees » (la même que celle de update-data.yml) : ouverte ou complétée,
+      # jamais dupliquée, et aucun commentaire si le problème signalé n'a pas changé.
+      - name: Ouvrir ou mettre à jour l'issue unique
+        if: steps.controles.outputs.probleme == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          empreinte=$(sha256sum sante.md | cut -c1-16)
+          { echo "Le contrôle hebdomadaire de santé du $(date -u +%Y-%m-%d) signale un problème."; echo; cat sante.md; echo "Journal : $RUN_URL"; echo "<!-- empreinte: $empreinte -->"; } > alerte.md
+          gh label create alerte-donnees --color D93F0B --description "Problème détecté par la mise à jour automatique" 2>/dev/null || true
+          numero=$(gh issue list --label alerte-donnees --state open --json number --jq '.[0].number')
+          if [ -z "$numero" ]; then
+            gh issue create --title "Alerte : mise à jour automatique des données" --label alerte-donnees --body-file alerte.md
+          elif gh issue view "$numero" --json body,comments --jq '[.body, (.comments[].body)] | join("\n")' | grep -q "empreinte: $empreinte"; then
+            echo "Problème déjà signalé dans #$numero : rien à ajouter."
+          else
+            gh issue comment "$numero" --body-file alerte.md
+          fi

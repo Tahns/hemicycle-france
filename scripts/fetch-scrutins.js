@@ -53,6 +53,7 @@ import { execFile } from "child_process";
 import { promisify } from "util";
 import { construireDeputes } from "./deputes.js";
 import { completer, compacter } from "./lois-format.js";
+import { ecrireGarde } from "./garde.js";
 import { ecrireGouvernement } from "./gouvernement.js";
 
 const execFileAsync = promisify(execFile);
@@ -637,8 +638,7 @@ async function main() {
     const auto = lois.filter((l) => l.numero !== undefined).sort((a, b) => b.numero - a.numero);
     existing.lois = [...manuelles, ...auto];
     existing.lastUpdated = new Date().toISOString();
-    await writeFile(DATA_FILE, serialiserLois(existing));
-    log("data/lois.json mis à jour.");
+    if (await ecrireGarde(DATA_FILE, existing, { nom: "data/lois.json", texte: serialiserLois(existing), liste: (d) => d.lois, obligatoires: ["titre", "date", "resultat", "sourceUrl"] })) log("data/lois.json mis à jour.");
   }
 
   // Députés en fonction : circonscription, statistiques et votes clés (réécrit seulement si le contenu change)
@@ -648,8 +648,8 @@ async function main() {
     const { cles, deputes } = await construireDeputes(files, acteurDir, organeVersId);
     const anciens = JSON.parse(await readFile(DEPUTES_FILE, "utf-8").catch(() => "{}"));
     if (deputes.length >= 500 && JSON.stringify(anciens.deputes) + JSON.stringify(anciens.cles) !== JSON.stringify(deputes) + JSON.stringify(cles) && !DRY_RUN) {
-      await writeFile(DEPUTES_FILE, JSON.stringify({ lastUpdated: new Date().toISOString(), source: "Assemblée nationale — votes nominatifs et AMO30", cles, deputes }) + "\n");
-      log(`data/deputes.json mis à jour (${deputes.length} députés, ${cles.length} votes clés).`);
+      const contenuDeputes = { lastUpdated: new Date().toISOString(), source: "Assemblée nationale — votes nominatifs et AMO30", cles, deputes };
+      if (await ecrireGarde(DEPUTES_FILE, contenuDeputes, { nom: "data/deputes.json", texte: JSON.stringify(contenuDeputes) + "\n", liste: (d) => d.deputes, obligatoires: ["id", "nom", "groupe", "circo", "stats", "votes"] })) log(`data/deputes.json mis à jour (${deputes.length} députés, ${cles.length} votes clés).`);
     } else if (deputes.length < 500) {
       warn(`Seulement ${deputes.length} député(s) en fonction trouvé(s) : data/deputes.json n'est pas modifié.`);
     } else {

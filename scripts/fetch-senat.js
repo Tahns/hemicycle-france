@@ -18,6 +18,7 @@
 
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
+import { ecrireGarde } from "./garde.js";
 
 const DATA_FILE = path.resolve("data/senat.json");
 const BASE = "https://www.senat.fr/scrutin-public/";
@@ -140,8 +141,9 @@ async function main() {
   for (const s of nouveaux) connus.set(s.id, s);
   const scrutins = [...connus.values()].sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.session - a.session || b.numero - a.numero);
   const lignes = scrutins.map((s) => "    " + JSON.stringify(s)).join(",\n");
-  await writeFile(DATA_FILE, `{\n  "lastUpdated": ${JSON.stringify(new Date().toISOString())},\n  "source": "Sénat — pages des scrutins publics (senat.fr)",\n  "scrutins": [\n${lignes}\n  ]\n}\n`);
-  log(`data/senat.json mis à jour (${scrutins.length} scrutins).`);
+  const contenu = { scrutins };
+  const texte = `{\n  "lastUpdated": ${JSON.stringify(new Date().toISOString())},\n  "source": "Sénat — pages des scrutins publics (senat.fr)",\n  "scrutins": [\n${lignes}\n  ]\n}\n`;
+  if (await ecrireGarde(DATA_FILE, contenu, { nom: "data/senat.json", texte, liste: (d) => d.scrutins, obligatoires: ["id", "titre", "dateISO", "resultat", "pour", "contre", "groupes"] })) log(`data/senat.json mis à jour (${scrutins.length} scrutins).`);
 }
 
 main().catch((e) => {

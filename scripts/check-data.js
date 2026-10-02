@@ -12,6 +12,7 @@
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import { completer } from "./lois-format.js";
+import { verifierPortraits } from "./check-portraits.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -326,6 +327,12 @@ await checkArchives();
   }
 }
 await checkManuels();
+{
+  // Droit à l'image : chaque photo de personnalité doit avoir sa licence dans data/portraits.json (bloquant)
+  const e = await verifierPortraits();
+  e.forEach(err);
+  if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
+}
 
 if (erreurs.length) {
   console.error(`[check-data] ${erreurs.length} erreur(s) :`);

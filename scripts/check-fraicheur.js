@@ -98,6 +98,19 @@ if (justice?.verifieLe) {
   }
 }
 
+// Fiches justice : au-delà de 90 jours sans vérification la page affiche « à vérifier », au-delà de 180 jours elle les masque
+for (const c of justice?.condamnations || []) {
+  const v = c.verifieLe; // la date globale est déjà contrôlée plus haut (60 jours)
+  if (v && joursDepuis(v) > 90) alertes.push(`Justice : la fiche « ${c.nom} » n'a pas été vérifiée depuis le ${v} (« à vérifier » sur la page, masquée après 180 jours) ; vérifier le statut puis mettre à jour « verifieLe ».`);
+}
+
+// Quiz : une question dont le scrutin a disparu de data/lois.json est ignorée par la page
+const quiz = await lire("data/quiz.json");
+const numeros = new Set((lois?.lois || []).map((l) => l.numero));
+for (const q of quiz?.questions || []) {
+  if (numeros.size && !numeros.has(q.numero)) alertes.push(`Quiz : la question sur le scrutin n° ${q.numero} ne correspond à aucun scrutin de data/lois.json (elle est ignorée) ; la corriger ou la retirer de data/quiz.json.`);
+}
+
 const dirigeants = await lire("data/dirigeants.json");
 for (const l of dirigeants?.dirigeants || []) {
   if (l.aVerifier) alertes.push(`Chefs de parti : ${l.parti} est désormais dirigé par ${l.nom} d'après Wikipédia ; préciser l'intitulé de sa fonction (« role ») dans data/dirigeants.json, puis retirer « aVerifier ».`);

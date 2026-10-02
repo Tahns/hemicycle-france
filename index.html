@@ -3739,6 +3739,8 @@ function renderBudgetGauges(){
 let CONDAMNATIONS = []; // data/justice.json (saisie manuelle volontaire)
 
 let justiceFiltrePartiActif = "Tous";
+const JUSTICE_A_VERIFIER_JOURS = 90, JUSTICE_MASQUE_JOURS = 180;
+function joursDepuisISO(iso){ const t = Date.parse(iso); return isNaN(t) ? 0 : Math.floor((Date.now() - t) / 864e5); }
 
 function renderJusticeSummary(){
   // Décompte par statut (et non par parti : la liste n'est pas exhaustive, un total par parti serait trompeur)
@@ -3781,6 +3783,7 @@ function renderJusticeList(){
         <span class="justice-name">${esc(c.nom)}</span>
         <span class="justice-role">${esc(c.role)} · ${esc(c.parti)}</span>
         <span class="justice-status ${esc(c.statut)}">${esc(c.statutLabel)}</span>
+        ${c._age > JUSTICE_A_VERIFIER_JOURS ? `<span class="justice-status appel">À vérifier</span>` : ""}
       </div>
       <div class="justice-affaire">${esc(c.affaire)}</div>
       <div class="justice-detail">${esc(c.detail)}</div>
@@ -6285,7 +6288,10 @@ async function loadPetitesDonnees(){
   if(actualites?.sujets) ACTUALITES = actualites;
   if(quiz?.questions) QUIZ_PERSO = quiz.questions;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
-  if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
+  if(justice?.condamnations) CONDAMNATIONS = justice.condamnations
+    // Péremption : une fiche dont la vérification (la sienne, sinon celle de la liste) a plus de 90 jours est signalée « à vérifier » ; au-delà de 180 jours, elle est masquée
+    .map(c => ({ ...c, _age: joursDepuisISO(c.verifieLe || justice.verifieLe) }))
+    .filter(c => !(c._age > JUSTICE_MASQUE_JOURS));
   if(meetings?.meetings) MEETINGS = meetings.meetings;
   const verif = (id, iso) => { const el = document.getElementById(id); if(el && iso && dateCourte(iso)) el.textContent = dateCourte(iso); };
   verif("dirigeants-verifie", dirigeants?.verifieLe);
