@@ -29,13 +29,29 @@ jobs:
       - name: Bandeau « En direct » (prise de parole du président, séance de l'Assemblée)
         run: node scripts/detecter-direct.js
         continue-on-error: true
+      # File de stories Instagram : au plus un sujet par exécution, image dessinée par le site lui-même.
+      # Rien n'est publié ici (aucune clé, aucun appel à Instagram) : la file et les JPEG sont seulement committés.
+      - name: Un sujet mérite-t-il une story ?
+        id: story_choix
+        run: node scripts/stories-auto.cjs --a-faire >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+      - name: Installer Playwright (Chromium)
+        if: steps.story_choix.outputs.a_faire == 'true'
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+        continue-on-error: true
+      - name: Story automatique (file d'attente Instagram)
+        if: steps.story_choix.outputs.a_faire == 'true'
+        run: node scripts/stories-auto.cjs
+        continue-on-error: true
       - name: Contrôler la cohérence des données
         run: node scripts/check-data.js
       - name: Committer s'il y a du nouveau
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/actualites.json data/direct.json
+          git add data/actualites.json data/direct.json data/instagram-file.json instagram/auto
           if git diff --cached --quiet; then
             echo "Rien de nouveau."
           else

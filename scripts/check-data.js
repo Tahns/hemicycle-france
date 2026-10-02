@@ -186,6 +186,38 @@ async function checkDirect() {
   console.log(`[check-data] direct.json : ${d.evenements.length} événement(s) en direct.`);
 }
 
+// File de stories Instagram automatiques (fichier optionnel, écrit par scripts/stories-auto.cjs)
+async function checkInstagramFile() {
+  const d = JSON.parse(await readFile("data/instagram-file.json", "utf-8").catch(() => "null"));
+  if (!d) return;
+  if (!Array.isArray(d.entrees)) return err("instagram-file.json : entrees absentes");
+  const parJour = {}, ids = new Set();
+  for (const e of d.entrees) {
+    const nom = `instagram-file.json : entrée ${e.id || "?"}`;
+    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || e.type !== "story") { err(`${nom} incomplète`); continue; }
+    if (ids.has(e.id)) err(`${nom} en double`);
+    ids.add(e.id);
+    const t = Date.parse(e.cree);
+    if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
+    if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
+    const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
+    parJour[jour] = (parJour[jour] || 0) + 1;
+    // Les images de plus de 3 jours sont supprimées (marge d'un jour) ; les plus récentes doivent exister
+    if (Date.now() - t < 4 * 24 * 36e5) {
+      const f = `instagram/auto/${e.id}.jpg`;
+      if (!existsSync(f)) err(`${nom} : image absente (${f})`);
+      else {
+        const buf = await readFile(f);
+        if (buf[0] !== 0xff || buf[1] !== 0xd8) err(`${nom} : ${f} n'est pas un JPEG`);
+        if (buf.length > 8 * 1024 * 1024) err(`${nom} : ${f} dépasse 8 Mo`);
+      }
+    }
+  }
+  for (const [j, n] of Object.entries(parJour)) if (n > 4) err(`instagram-file.json : ${n} entrées le ${j} (4 au maximum par jour)`);
+  if (d.entrees.length > 30) err("instagram-file.json : plus de 30 entrées");
+  console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s).`);
+}
+
 async function checkQuiz() {
   const data = JSON.parse(await readFile("data/quiz.json", "utf-8").catch(() => "null"));
   if (!data) return;
@@ -369,6 +401,7 @@ await checkProbabilites();
 await checkQuiz();
 await checkActualites();
 await checkDirect();
+await checkInstagramFile();
 await checkDeputes();
 await checkCandidats();
 await checkSenat();

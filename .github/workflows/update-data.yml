@@ -112,6 +112,10 @@ jobs:
         run: node scripts/partage.cjs
         continue-on-error: true
 
+      - name: Story automatique (file d'attente Instagram, sans publication)
+        run: node scripts/stories-auto.cjs
+        continue-on-error: true
+
       - name: Photos des députés et des sénateurs (seulement les nouvelles)
         id: photos
         run: node scripts/photos.cjs
@@ -121,7 +125,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
+          git add data/ instagram/auto v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
           if git diff --cached --quiet; then
             echo "Aucun changement de données — rien à committer."
           else
