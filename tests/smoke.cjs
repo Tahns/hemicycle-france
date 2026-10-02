@@ -50,9 +50,27 @@ function verifier(cond, message) {
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
 
+    verifier((await page.$$(".tab")).length === 6, `${nom} : la barre du haut doit compter 6 regroupements`);
+    verifier((await page.$$(".accueil-rubrique")).length === 6, `${nom} : la grille de l'accueil doit compter 6 regroupements`);
+    verifier((await page.$$(".onglet-mobile")).length <= 5, `${nom} : la barre mobile doit compter 5 entrées au plus`);
     for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre"]) {
-      await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
+      // Navigation à six regroupements : on ouvre la page par la barre du haut ou par la rangée de pastilles du regroupement
+      await page.evaluate((t) => {
+        const tab = document.querySelector(`.tab[data-tab="${t}"]`);
+        if (tab) tab.click();
+        else {
+          const hub = HUBS.find((h) => h.pages.some((p) => p[0] === t));
+          document.querySelector(`.tab[data-hub="${hub.id}"]`).click();
+          document.querySelector(`.sous-nav a[data-sous="${t}"]`).click();
+        }
+      }, onglet);
       await page.waitForTimeout(250);
+      verifier(await page.evaluate((t) => document.getElementById("view-" + t).classList.contains("active"), onglet), `${nom} : la page ${onglet} ne s'ouvre pas`);
+      verifier(await page.evaluate((t) => {
+        const n = HUBS.find((h) => h.pages.some((p) => p[0] === t)).pages.length;
+        const sn = document.querySelector(`#view-${t} .sous-nav`);
+        return n < 2 ? !sn : !!sn && sn.querySelectorAll("a").length === n && sn.querySelectorAll('[aria-current="page"]').length === 1 && sn.querySelector('[aria-current="page"]').dataset.sous === t;
+      }, onglet), `${nom} : sous-navigation incorrecte sur ${onglet}`);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
     }
 
