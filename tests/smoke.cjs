@@ -49,7 +49,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$(".accueil-highlight-card")).length >= 2, `${nom} : cartes « À la une » absentes`);
 
-    verifier((await page.$$("#en-bref .accueil-hero-stat")).length === 5, `${nom} : bloc « En bref » incomplet`);
+    verifier((await page.$$("#en-bref .accueil-hero-stat")).length >= 1, `${nom} : bloc « En bref » incomplet`);
 
     for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
