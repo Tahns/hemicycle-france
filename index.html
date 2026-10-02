@@ -1569,12 +1569,12 @@
     .rubrique-tete .sous-nav select{min-height:44px; max-width:min(52vw, 210px); padding:0 var(--s6) 0 var(--s3); font-size:var(--fs-md); background-position:calc(100% - 17px) 50%, calc(100% - 12px) 50%;}
     .rubrique-tete .tete-ligne{grid-row:3; grid-column:1; font-size:var(--fs-md); line-height:1.35; color:var(--text-soft); max-width:none;
       display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:1; line-clamp:1; overflow:hidden;}
-    .rubrique-tete .tete-ligne small, .rubrique-tete .sert:not(.tete-ligne){display:none;}
+    .rubrique-tete .tete-ligne small, .rubrique-tete > :not(.surtitre):not(h2):not(.sous-nav):not(.tete-ligne):not(.tete-plus):not(.espace-fav-bouton){display:none;}
     .rubrique-tete .tete-plus{display:inline-flex; align-items:center; justify-content:flex-end; grid-row:3; grid-column:2; min-height:44px; padding:0 0 0 var(--s2); border:0; background:none; font:600 var(--fs-sm)/1 var(--font-body); color:var(--accent); text-decoration:underline; text-underline-offset:2px; white-space:nowrap; cursor:pointer;}
     .rubrique-tete .tete-plus:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
     .rubrique-tete.ouvert .tete-ligne{display:block; grid-column:1 / -1; -webkit-line-clamp:unset; line-clamp:unset; overflow:visible; font-size:var(--fs-base); line-height:1.45; padding-top:var(--s1);}
     .rubrique-tete.ouvert .tete-ligne small{display:block;}
-    .rubrique-tete.ouvert .sert:not(.tete-ligne){display:block; grid-row:4; margin-top:var(--s2); font-size:var(--fs-md); line-height:1.4;}
+    .rubrique-tete.ouvert > :not(.surtitre):not(h2):not(.sous-nav):not(.tete-ligne):not(.tete-plus):not(.espace-fav-bouton){display:block; grid-row:4; margin-top:var(--s2); font-size:var(--fs-md); line-height:1.4;}
     .rubrique-tete.ouvert .tete-plus{grid-row:5; grid-column:1 / -1; justify-self:end;}
     .rubrique-tete .espace-fav-bouton{grid-row:6; justify-self:start; margin:0;}
 
@@ -1587,7 +1587,10 @@
     .depute-actions[data-pm="menu"]:not(.ouvert) > :not(.partage-bascule):not(.resultat-pill){display:none;}
     .depute-actions[data-pm="menu"] > :not(.partage-bascule){min-height:44px; display:inline-flex; align-items:center;}
     .depute-actions[data-pm="menu"] .bouton-story{padding:0 var(--s3); border-radius:var(--r-pill);}
-    .depute-actions:not([data-pm]) .lien-bouton{min-height:44px; display:inline-flex; align-items:center;}
+    .depute-actions .lien-bouton, .bouton-story:not(.mini){min-height:44px; display:inline-flex; align-items:center;}
+    #voir-dossier{display:inline-block; padding:10px 0;}
+    .cp-nav button{min-height:44px;}
+    .duel-ligne .inst, .veille-ligne a{padding:13px 0; margin:-13px 0;}
     .depute-actions{margin-top:0; margin-bottom:var(--s1);}
     .partage-actions{margin:0 0 var(--s1);}
 
@@ -1649,7 +1652,7 @@
     .actu-sujet .actu-quand{flex:none; margin-left:4px;}
     .actu-sujet .actu-noms, .actu-sujet .actu-meta .bouton-story{display:none;}
     .actu-sujet .actu-autres{margin:0; padding-left:var(--s3);}
-    .actu-sujet .pli-mobile > summary.pli-titre{min-height:36px; font-size:var(--fs-xs);}
+    .actu-sujet .pli-mobile > summary.pli-titre{font-size:var(--fs-xs);}
     #view-accueil > .accueil-section-title{display:none;}
     .accueil-highlight-card{padding-bottom:var(--s3);}
     .accueil-highlight-card + .accueil-highlight-card{padding-top:var(--s3);}
@@ -1704,6 +1707,117 @@
     .loi-provenance{margin-top:var(--s2);}
     .loi-provenance .pli-mobile > summary.pli-titre{border-top:1px solid var(--border-soft);}
     .loi-provenance-row{font-size:var(--fs-sm);}
+
+    /* Titres de bloc repliables, titres plus petits */
+    .pli-mobile > summary.pli-h3{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); min-height:48px; cursor:pointer; border-top:1px solid var(--border);}
+    .pli-mobile > summary.pli-h3 > *{margin:0; flex:1;}
+    .pli-mobile > summary.pli-h3::after{content:"+"; font-size:var(--fs-h3); font-weight:400; color:var(--text-faint);}
+    .pli-mobile[open] > summary.pli-h3::after{content:"\2212";}
+    .pli-mobile > summary.pli-h3:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+    .cp-bloc h3, .sondage-avg-card h3, .evolution h3, .probas h3, .second-tour h3, .budget-bloc h3, .breakdown h3, .section-titre, .veille h3{font-size:var(--fs-lg); line-height:1.25;}
+    .histo-title, .proximite h4, .candidat-carte h3{font-size:var(--fs-base);}
+    .proximite{margin-bottom:var(--s3); padding:var(--s2) 0 var(--s1);}
+    .proximite .sub, .probas-sub, .veille-sub, .evolution-sub{font-size:var(--fs-xs); margin-bottom:var(--s2);}
+    .section-titre{margin:var(--s4) 0 var(--s2);}
+    .second-tour, .probas, .veille, .evolution, .budget-bloc{margin-bottom:var(--s2);}
+
+    /* Sondages : les chiffres d'abord, barres fines sur une ligne */
+    #view-sondages.active{display:flex; flex-direction:column;}
+    #view-sondages > *{order:5;}
+    #view-sondages > .rubrique-tete{order:0;} #view-sondages > .depute-actions{order:1;} #view-sondages > .filtre-inline{order:2;} #view-sondages > .sondage-avg-card{order:3;}
+    #view-sondages > .annonce{order:4;}
+    .annonce{gap:var(--s2) var(--s4); margin:var(--s2) 0; padding:var(--s2) var(--s3);}
+    .annonce .t{min-width:0; flex-basis:100%; font-size:var(--fs-sm);} .annonce .t b{font-size:var(--fs-base);}
+    .annonce .compte{gap:var(--s3);} .annonce .compte b{font-size:20px;}
+    .filtre-inline{gap:var(--s1);}
+    .sondage-avg-card{margin-bottom:var(--s3);}
+    .sondage-avg-card h3{margin:var(--s2) 0 0;}
+    .sondage-avg-sub{margin-bottom:var(--s2);}
+    .sondage-bar-row{gap:var(--s2); padding:3px 0; min-height:34px;}
+    .sondage-bar-row .bloc-name{width:138px; font-size:var(--fs-sm); line-height:1.15;}
+    .sondage-bar-row .parti-sigle{display:inline; font-size:10px;}
+    .sondage-bar-track{height:10px;}
+    .sondage-bar-pct{min-width:58px; font-size:var(--fs-md);}
+    .duel{margin:0 0 var(--s2);} .duel-titre{font-size:var(--fs-sm); margin-bottom:2px;}
+    .duel-ligne{grid-template-columns:minmax(80px,8em) 1fr; margin:0;}
+    .duel-barre{height:18px;}
+    .veille-ligne{padding:var(--s2) 0;}
+
+    /* Candidats : une ligne par personne, détail replié */
+    .candidat-carte{gap:var(--s3); padding:var(--s2) 0;}
+    .candidat-carte .medaillon{width:40px; height:40px;}
+    .candidat-parti{display:flex; justify-content:space-between; gap:var(--s3); font-size:var(--fs-sm);}
+    .candidat-parti .sondage-mobile{display:inline; flex:none; font-weight:700; color:var(--text);}
+    .candidat-carte .sondage{display:none;}
+    .candidat-carte .pli-mobile > summary.pli-titre{min-height:44px; font-size:var(--fs-xs); font-weight:600;}
+    .candidat-carte .slogan{font-size:var(--fs-base);}
+
+    /* Budget : phrases courtes, barres fines */
+    .budget-phrase{font-size:var(--fs-md); line-height:1.4; margin:var(--s1) 0 var(--s2);}
+    .budget-barres li{padding:var(--s1) 0;}
+    .budget-ligne{font-size:var(--fs-sm);}
+    .budget-piste, .sondage-bar-track{height:8px;}
+    .budget-chiffres .gros{font-size:var(--fs-xl);}
+    .budget-source{font-size:var(--fs-xs); margin:var(--s2) 0;}
+    .budget-serie{gap:var(--s2);}
+
+    /* Listes : lignes compactes */
+    .depute-carte{padding:5px 0; gap:var(--s3); align-items:center; min-height:48px;}
+    .depute-carte .dot{margin-top:0;}
+    .mini-photo{width:36px; height:36px;}
+    .filtre-label{font-size:11px; margin-bottom:2px;}
+    .filtres .filtre-champs{gap:var(--s2);}
+    .groupe-card{padding:5px 0;} .groupe-card .dot{margin-top:5px;}
+    .section-titre span{font-size:var(--fs-xs); line-height:1.3;}
+    .chiffre-card{padding:var(--s2) 0;}
+    .chiffre-card .chiffre-value{font-size:var(--fs-xl);}
+    .chiffre-card .chiffre-sub{font-size:var(--fs-sm); line-height:1.35; margin-top:var(--s1);}
+    .chiffre-card .chiffre-source{margin-top:var(--s1);}
+    .leader-info .leader-source{margin:-12px 0; padding:12px var(--s2); min-height:0;}
+    .leader-info .leader-role{line-height:1.35;}
+    .gauge-block{gap:var(--s3);} .gauge-svg{width:64px; height:64px;} .gauge-value{font-size:var(--fs-lg);} .gauge-note{margin-top:2px; font-size:var(--fs-xs);}
+    .budget-hero{padding:var(--s2) 0;}
+    .an-jour li{font-size:var(--fs-sm); padding:1px 0; line-height:1.3;}
+    .an-jour .jour{font-size:var(--fs-sm);}
+    .an-jour{grid-template-columns:60px 1fr; gap:var(--s2);}
+    .meeting-meta{margin-bottom:2px;} .meeting-body h4{margin-bottom:2px;}
+    .meeting-card{grid-template-columns:48px 1fr; gap:var(--s2);}
+    .depute-carte b{font-size:var(--fs-base);}
+    .depute-carte span{font-size:var(--fs-xs);}
+    .leader-card{gap:var(--s3); padding:var(--s2) 0;}
+    .leader-info{display:flex; flex-wrap:wrap; align-items:center; column-gap:var(--s3);}
+    .leader-info .leader-name{font-size:var(--fs-base); flex-basis:100%;}
+    .leader-info .leader-role{font-size:var(--fs-sm); margin-bottom:var(--s1); flex-basis:100%;}
+    .leader-info .parti-logo{margin:0; padding:0;} .leader-info .parti-logo img{height:18px;}
+    .justice-summary-card, .justice-summary-card + .justice-summary-card{flex-direction:row; align-items:baseline; gap:var(--s2); padding:var(--s2) var(--s2) var(--s2) 0;}
+    .justice-summary-card .n{font-size:var(--fs-lg);} .justice-summary-card .p{font-size:var(--fs-xs); line-height:1.2;}
+    .justice-summary{margin-bottom:var(--s2);}
+    .groupe-card{padding:var(--s2) 0;}
+    .senat-ligne{padding:var(--s2) 0;}
+    .senat-ligne summary{min-height:44px;}
+    .senat-hemi{margin:0 0 var(--s3);}
+    .senat-hemi-info{font-size:var(--fs-sm);}
+    .histo-row{padding:var(--s2) 0; gap:var(--s1);}
+    .histo-loi, .senat-ligne .histo-loi{font-size:var(--fs-base); line-height:1.3;}
+    .histo-date{margin-top:2px; line-height:1.3;}
+    .meeting-card{padding:var(--s2) 0;}
+    .meeting-date-badge .jour{font-size:var(--fs-xl);}
+    .meeting-body h4{font-size:var(--fs-base);}
+    .meeting-desc{font-size:var(--fs-sm);}
+    .an-jour{padding:var(--s2) 0; gap:var(--s3);}
+    .justice-card{padding:var(--s2) 0;}
+    .justice-name{font-size:var(--fs-base);}
+    .justice-summary-card .n{font-size:var(--fs-xl);}
+    .gauge-svg{width:84px; height:84px;} .gauge-value{font-size:var(--fs-xl);}
+    .lex-liste{max-height:52vh; overflow-y:auto; overscroll-behavior:contain; border-top:1px solid var(--border); -webkit-overflow-scrolling:touch;}
+    .lex-item{padding:var(--s2) 0;} .lex-item dd{font-size:var(--fs-md); line-height:1.4;}
+    .lex-lettre{margin:var(--s2) 0 2px; font-size:var(--fs-lg);}
+    .cp-bloc{padding:var(--s3) 0 var(--s1);}
+    .cp-bloc h3{margin:0 0 var(--s2);}
+    .cp-texte{font-size:var(--fs-md); line-height:1.45;}
+    .cp-fig svg{max-width:340px;}
+    .quiz-card{padding:var(--s2) 0;}
+    .quiz-question{font-size:var(--fs-lg);}
 
     /* Cartes plus denses */
     .carte, .candidat-carte, .leader-card, .groupe-card, .justice-card, .chiffre-card, .quiz-card{padding:var(--s3) 0;}
@@ -3067,8 +3181,12 @@ function lexiqueAller(id){
 function initComprendre(){
   renderLexique();
   document.getElementById("lex-recherche").addEventListener("input", renderLexique);
+  document.querySelectorAll("#view-comprendre .cp-bloc").forEach((b, i) => plierBloc(b, i === 0 || !!b.querySelector("#lex-recherche")));
   document.querySelectorAll(".cp-nav button[data-cp]").forEach(b => b.addEventListener("click", () => {
-    document.getElementById(b.dataset.cp).scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    const cible = document.getElementById(b.dataset.cp);
+    const pli = cible.querySelector("details.pli-mobile");
+    if(pli) pli.open = true;
+    cible.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }));
 }
 initGlossaire();
@@ -3557,7 +3675,8 @@ function positionMajoritaire(loi, v){
 
 let selectedPartyId = "RN";
 let histoCategorie = "texte";
-let histoLimite = 50;
+const PAS_LISTE = matchMedia("(max-width:700px)").matches ? 20 : 50; // listes longues : moins de lignes d'un coup sur téléphone
+let histoLimite = PAS_LISTE;
 
 function renderPartyChips(){
   const bar = document.getElementById("party-select-bar");
@@ -3569,7 +3688,7 @@ function renderPartyChips(){
   bar.querySelectorAll(".party-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
       selectedPartyId = chip.dataset.id;
-      histoLimite = 50;
+      histoLimite = PAS_LISTE;
       renderPartyChips();
       renderHistorique();
     });
@@ -3580,13 +3699,13 @@ function renderPartyChips(){
 }
 document.getElementById("party-select").addEventListener("change", e=>{
   selectedPartyId = e.target.value;
-  histoLimite = 50;
+  histoLimite = PAS_LISTE;
   renderPartyChips();
   renderHistorique();
 });
 document.getElementById("histo-reset").addEventListener("click", ()=>{
   histoCategorie = "texte";
-  histoLimite = 50;
+  histoLimite = PAS_LISTE;
   document.getElementById("histo-search").value = "";
   document.getElementById("histo-theme").value = "";
   renderHistoCategorie();
@@ -3601,7 +3720,7 @@ function renderHistoCategorie(){
   bar.querySelectorAll(".theme-chip").forEach(chip=>{
     chip.addEventListener("click", ()=>{
       histoCategorie = chip.dataset.cat;
-      histoLimite = 50;
+      histoLimite = PAS_LISTE;
       renderHistoCategorie();
       renderHistorique();
     });
@@ -3758,17 +3877,17 @@ function renderHistorique(){
         </div>
       </div>`;
   }).join("") + (liste.length > histoLimite
-    ? `<button type="button" class="histo-more" id="histo-more">Afficher les ${Math.min(50, liste.length-histoLimite)} suivants (${formatNombre(liste.length-histoLimite)} restants)</button>`
+    ? `<button type="button" class="histo-more" id="histo-more">Afficher les ${Math.min(PAS_LISTE, liste.length-histoLimite)} suivants (${formatNombre(liste.length-histoLimite)} restants)</button>`
     : "");
 
   const more = document.getElementById("histo-more");
-  if(more) more.addEventListener("click", ()=>{ histoLimite += 50; renderHistorique(); });
+  if(more) more.addEventListener("click", ()=>{ histoLimite += PAS_LISTE; renderHistorique(); });
 }
 
 let histoTimer = null;
 document.getElementById("histo-search").addEventListener("input", ()=>{
   clearTimeout(histoTimer);
-  histoTimer = setTimeout(()=>{ histoLimite = 50; renderHistorique(); }, 150);
+  histoTimer = setTimeout(()=>{ histoLimite = PAS_LISTE; renderHistorique(); }, 150);
 });
 
 /* ---------- Prochains meetings ---------- */
@@ -4001,8 +4120,8 @@ document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) renderA
 let SECOND_TOUR = [];
 // Bloc « titre + contenu » : sur téléphone le contenu se replie sous son titre (ouvert sur bureau)
 function plierBloc(bloc, garder){
-  const h3 = bloc.querySelector(":scope > h3");
-  if(!h3 || bloc.querySelector(":scope > details.pli-mobile")) return;
+  const h3 = [...bloc.children].find(e=> e instanceof HTMLHeadingElement);
+  if(!h3 || [...bloc.children].some(e=> e instanceof HTMLDetailsElement)) return;
   const d = document.createElement("details"), s = document.createElement("summary");
   d.className = "pli-mobile"; d.open = true; if(garder) d.dataset.garder = "1";
   s.className = "pli-h3"; s.append(h3);
@@ -4497,7 +4616,7 @@ function renderQuiz(){
     <div class="quiz-card">
       <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · ${esc(loi.quizTheme || "")}</div>
       <div class="quiz-question">${esc(loi.quizQuestion || titreLoi(loi))}</div>
-      <p class="quiz-aide">${esc(loi.quizAide || "")} <span class="quiz-vote">Voté le ${esc(loi.date)}.</span></p>
+      <details class="pli-mobile" open><summary class="pli-titre">Contexte de cette loi</summary><p class="quiz-aide">${esc(loi.quizAide || "")} <span class="quiz-vote">Voté le ${esc(loi.date)}.</span></p></details>
       <div class="quiz-options" data-loi="${loi.id}">
         <button type="button" class="quiz-option" data-vote="pour">Oui</button>
         <button type="button" class="quiz-option" data-vote="contre">Non</button>
@@ -4979,8 +5098,9 @@ function renderJusticeList(){
         ${c._age > JUSTICE_A_VERIFIER_JOURS ? `<span class="justice-status appel">À vérifier</span>` : ""}
       </div>
       <div class="justice-affaire">${esc(c.affaire)}</div>
+      <details class="pli-mobile" open><summary class="pli-titre">Détail de la décision</summary>
       <div class="justice-detail">${esc(c.detail)}</div>
-      ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
+      ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}</details>
       <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
     </div>
   `).join("");
@@ -5145,7 +5265,7 @@ function renderAccueil(){
 
 /* ---------- Sénat (data/senat.json, chargé à la première visite de la rubrique) ---------- */
 
-let SENAT = null, SENAT_MAJ = null, senatChargement = null, senatFiltre = "texte", senatLimite = 40;
+let SENAT = null, SENAT_MAJ = null, senatChargement = null, senatFiltre = "texte", senatLimite = PAS_LISTE;
 /* i18n-ignorer : noms officiels des groupes du Sénat */
 const GROUPES_SENAT = {
   "CRCE-K": { nom:"Communiste (CRCE-K)", couleur:"#A32E22" },
@@ -5276,7 +5396,7 @@ async function renderSenat(){
     `${formatNombre(SENAT.length)} scrutins publics depuis octobre ${Math.min(...SENAT.map(s=>s.session))}, d'après les pages officielles du Sénat (actualisées le ${dateCourte(SENAT_MAJ)}). Les votes par groupe sont recoupés avec le total officiel.`;
   document.getElementById("senat-filtre").innerHTML = [["texte","Textes (vote final)"],["tous","Tous les scrutins"]]
     .map(([id,l])=>`<button type="button" class="theme-chip ${senatFiltre===id?"selected":""}" aria-pressed="${senatFiltre===id}" data-f="${id}">${l}</button>`).join("");
-  document.querySelectorAll("#senat-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ senatFiltre = b.dataset.f; senatLimite = 40; renderSenat(); }));
+  document.querySelectorAll("#senat-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ senatFiltre = b.dataset.f; senatLimite = PAS_LISTE; renderSenat(); }));
 
   const q = norm(document.getElementById("senat-search").value.trim());
   const res = SENAT.filter(s => (senatFiltre === "tous" || categorieSenat(s) === "texte") && (!q || norm(s.titre).includes(q)));
@@ -5311,8 +5431,8 @@ async function renderSenat(){
       </summary>
       <div class="senat-groupes">${piedSenat(s)}</div>
     </details>`;
-  }).join("") + (res.length > senatLimite ? `<button type="button" class="histo-more" id="senat-plus">Afficher ${Math.min(40, res.length - senatLimite)} de plus (${res.length - senatLimite} restants)</button>` : "");
-  document.getElementById("senat-plus")?.addEventListener("click", ()=>{ senatLimite += 40; renderSenat(); });
+  }).join("") + (res.length > senatLimite ? `<button type="button" class="histo-more" id="senat-plus">Afficher ${Math.min(PAS_LISTE, res.length - senatLimite)} de plus (${res.length - senatLimite} restants)</button>` : "");
+  document.getElementById("senat-plus")?.addEventListener("click", ()=>{ senatLimite += PAS_LISTE; renderSenat(); });
 }
 // Le détail par groupe n'existe dans la page que pour les lignes ouvertes (une quarantaine de lignes fermées pèsent des milliers de nœuds)
 let senatAffiches = [], senatDetailHTML = null;
@@ -5326,13 +5446,13 @@ document.getElementById("senat-liste").addEventListener("toggle", e=>{
 }, true);
 let senatRechercheTimer;
 document.getElementById("senat-reset").addEventListener("click", ()=>{
-  senatFiltre = "texte"; senatLimite = 40;
+  senatFiltre = "texte"; senatLimite = PAS_LISTE;
   document.getElementById("senat-search").value = "";
   renderSenat();
 });
 document.getElementById("senat-search").addEventListener("input", ()=>{
   clearTimeout(senatRechercheTimer);
-  senatRechercheTimer = setTimeout(()=>{ senatLimite = 40; renderSenat(); }, 150);
+  senatRechercheTimer = setTimeout(()=>{ senatLimite = PAS_LISTE; renderSenat(); }, 150);
 });
 
 // Photo officielle (hébergée sur le site) : si elle manque, les initiales restent affichées
@@ -5797,7 +5917,7 @@ function renderDeputeFiche(d){
 }
 
 document.getElementById("loi-theme").addEventListener("change", ()=>{ populateLoiSelect(); updateBreakdown(); });
-document.getElementById("histo-theme").addEventListener("change", ()=>{ histoLimite = 50; renderHistorique(); });
+document.getElementById("histo-theme").addEventListener("change", ()=>{ histoLimite = PAS_LISTE; renderHistorique(); });
 
 // Classements (bloc repliable de la rubrique Députés) : dix premiers de chaque critère, méthode affichée
 let classementChoisi = "participation";
@@ -7413,7 +7533,7 @@ function ouvrirDepuisHash(){
   m = h.match(/^histo-([A-Z]+)$/);
   if(m && PARTIES.some(p=>p.id===m[1])){
     selectedPartyId = m[1];
-    histoLimite = 50;
+    histoLimite = PAS_LISTE;
     renderPartyChips();
     activateTab("histo");
     renderHistorique();
@@ -8967,7 +9087,7 @@ function preparerMobile(racine){
   if(racine.matches && racine.matches(".depute-actions:not([data-pm]), details.pli-mobile:not([data-pm])")) blocs.unshift(racine);
   blocs.forEach(bloc=>{
     bloc.dataset.pm = "1";
-    if(bloc.tagName === "DETAILS"){ if(MQ_MOBILE.matches && !bloc.dataset.garder) bloc.open = false; return; }
+    if(bloc instanceof HTMLDetailsElement){ if(MQ_MOBILE.matches && !bloc.dataset.garder) bloc.open = false; return; }
     if(bloc.querySelectorAll("button, a").length < 2) return;
     bloc.dataset.pm = "menu";
     const b = document.createElement("button");
@@ -8979,7 +9099,19 @@ function preparerMobile(racine){
 const OBSERVATEUR_MOBILE = new MutationObserver(muts=>{
   for(const m of muts) m.addedNodes.forEach(n=>{ if(n.nodeType === 1) preparerMobile(n); });
 });
+// Pages de texte (méthode, mentions) : chaque titre ouvre sa section ; seule la première reste ouverte sur téléphone
+function plierSections(conteneur){
+  let d = null, n = 0;
+  for(const e of [...conteneur.children]){
+    if(e instanceof HTMLHeadingElement){
+      d = document.createElement("details"); d.className = "pli-mobile"; d.open = true; if(n++ === 0) d.dataset.garder = "1";
+      const s = document.createElement("summary"); s.className = "pli-h3";
+      conteneur.insertBefore(d, e); s.append(e); d.append(s);
+    } else if(d) d.append(e);
+  }
+}
 function initMobile(){
+  document.querySelectorAll(".texte-legal").forEach(plierSections);
   initTetes();
   preparerMobile(document);
   OBSERVATEUR_MOBILE.observe(document.querySelector("main"), { childList:true, subtree:true });
