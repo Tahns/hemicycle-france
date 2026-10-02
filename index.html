@@ -247,6 +247,69 @@
   .chapo{
     margin:0; max-width:760px; font-family:var(--font-display); font-size:18px; line-height:1.5; color:var(--text-soft);
   }
+  /* Aide aux débutants : ligne « À quoi sert cette page ? », infobulles de glossaire, rubrique Comprendre */
+  .sert{margin:10px 0 0; max-width:760px; font-size:14.5px; line-height:1.5; color:var(--text-soft);}
+  .sert b{color:var(--accent); font-weight:700;}
+  .gl{appearance:none; display:inline; margin:0; padding:0 1px; border:0; border-bottom:1.5px dotted var(--accent); border-radius:0; background:none; font:inherit; letter-spacing:inherit; text-align:inherit; color:inherit; cursor:help;}
+  .gl:hover, .gl[aria-expanded="true"]{background:var(--accent-dim);}
+  .gl:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .gl-pop{position:absolute; z-index:900; width:min(320px, calc(100vw - 24px)); padding:12px 14px; background:var(--bg-elevated); color:var(--text); border:1px solid var(--ink); border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.2); font:14px/1.5 var(--font-body);}
+  .gl-pop[hidden]{display:none;}
+  .gl-pop:focus{outline:none;}
+  .gl-pop b{display:block; margin-bottom:4px; font-family:var(--font-display); font-size:17px; font-weight:600;}
+  .gl-pop p{margin:0 0 8px;}
+  .gl-pop a{font-weight:600; color:var(--accent);}
+  .debutant{display:block; margin:6px 0 22px; padding:11px 14px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:4px; background:var(--bg-elevated); color:inherit; text-decoration:none;}
+  .debutant b{display:block; font-size:15px;}
+  .debutant span{font-size:13.5px; color:var(--text-soft);}
+  .debutant:hover b{text-decoration:underline;}
+  .cp-nav{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 6px;}
+  .cp-nav button{padding:8px 12px; border:1px solid var(--border); border-radius:999px; background:var(--bg-elevated); color:var(--text); font:600 13.5px var(--font-body); cursor:pointer;}
+  .cp-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .cp-bloc{padding:24px 0 6px; border-top:1px solid var(--border); scroll-margin-top:12px;}
+  .cp-bloc h3{display:flex; align-items:center; gap:10px; margin:0 0 14px; font-family:var(--font-display); font-size:24px; font-weight:600; line-height:1.2;}
+  .cp-num{flex:none; min-width:28px; height:28px; padding:0 7px; border-radius:14px; background:var(--accent); color:var(--bg); font:700 13px/28px var(--font-body); text-align:center;}
+  .cp-corps{display:grid; gap:18px; align-items:start;}
+  @media(min-width:860px){ .cp-corps{grid-template-columns:1.15fr 1fr; gap:34px;} }
+  .cp-texte{font-size:15.5px; line-height:1.55; min-width:0;}
+  .cp-liste{margin:0;}
+  .cp-liste dt{font-weight:700; margin-top:12px;}
+  .cp-liste dt:first-child{margin-top:0;}
+  .cp-liste dd{margin:2px 0 0; color:var(--text-soft);}
+  .cp-etapes, .cp-points{margin:0; padding-left:20px;}
+  .cp-etapes li, .cp-points li{margin:0 0 9px; color:var(--text-soft);}
+  .cp-etapes b, .cp-points b{color:var(--text);}
+  .cp-fig{margin:0; min-width:0;}
+  .cp-fig svg{display:block; width:100%; max-width:440px; height:auto;}
+  .cp-fig text{font-family:var(--font-body);}
+  .sv-box{fill:var(--bg-elevated); stroke:var(--border); stroke-width:1.3;}
+  .sv-fort{stroke:var(--accent); stroke-width:1.8;}
+  .sv-zone{fill:none; stroke:var(--border); stroke-width:1.3; stroke-dasharray:5 4;}
+  .sv-t{fill:var(--text); font-size:12px; font-weight:700;}
+  .sv-s{fill:var(--text-soft); font-size:11px;}
+  .sv-a{fill:none; stroke:var(--accent); stroke-width:1.6;}
+  .sv-ac{fill:var(--accent);}
+  .sv-tiret{stroke-dasharray:4 3;}
+  .sv-pour{fill:var(--vert);} .sv-contre{fill:var(--rouge);} .sv-abst{fill:var(--ambre);} .sv-abs{fill:var(--border);}
+  .sv-marque{stroke:var(--ink); stroke-width:1.6; stroke-dasharray:4 3; fill:none;}
+  .sv-bl{fill:var(--bg); font-weight:700;}
+  .sv-base{stroke:var(--ink); stroke-width:1.4;}
+  .sv-recette{fill:var(--vert);} .sv-depense{fill:var(--accent); opacity:.55;}
+  .sv-deficit{fill:var(--rouge); stroke:var(--bg-elevated); stroke-width:1;}
+  .cp-encart{margin:18px 0 0; padding:12px 16px; border-left:3px solid var(--accent); background:var(--accent-dim); font-size:15px; line-height:1.55;}
+  .cp-encart h4{margin:0 0 6px; font-size:15.5px;}
+  .cp-encart p{margin:0 0 8px;}
+  .cp-encart p:last-child{margin:0;}
+  .cp-source{margin:16px 0 0; font-size:12.5px; color:var(--text-faint);}
+  .cp-source a{color:var(--accent);}
+  .lex-champ{max-width:420px;}
+  .lex-liste{margin:0;}
+  .lex-lettre{margin:18px 0 2px; padding-bottom:3px; border-bottom:1px solid var(--border); font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--accent);}
+  .lex-item{padding:9px 6px; border-bottom:1px solid var(--border-soft); scroll-margin-top:12px;}
+  .lex-item dt{font-weight:700;}
+  .lex-item dd{margin:2px 0 0; color:var(--text-soft); font-size:15px; line-height:1.5;}
+  .lex-item.flash{background:var(--accent-dim);}
+  @media (max-width:700px){ .cp-bloc h3{font-size:21px;} }
   .chapo small{display:block; margin-top:8px; font-family:var(--font-body); font-size:12.5px; color:var(--text-faint);}
   .intertitre{
     font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
@@ -1277,6 +1340,7 @@
 <nav class="rubriques" aria-label="Rubriques">
   <div class="rubriques-inner">
     <div class="tab active" data-tab="accueil">À la une</div>
+    <div class="tab" data-tab="comprendre">Comprendre</div>
     <span class="tab-sep" aria-hidden="true"></span>
     <div class="tab" data-tab="scrutin">Votes</div>
     <div class="tab" data-tab="histo">Groupes</div>
@@ -1313,6 +1377,8 @@
 <div class="feuille-fond" id="feuille-fond" hidden></div>
 <div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
   <div class="feuille-poignee" aria-hidden="true"></div>
+  <div class="feuille-groupe" aria-hidden="true">Pour débuter</div>
+  <button type="button" class="feuille-lien" data-tab="comprendre"><b>Comprendre</b><span>Qui fait quoi, comment naît une loi, lexique</span></button>
   <div class="feuille-groupe" aria-hidden="true">Parlement</div>
   <button type="button" class="feuille-lien" data-tab="histo"><b>Groupes</b><span>Ce que vote chaque groupe, et avec qui</span></button>
   <button type="button" class="feuille-lien" data-tab="deputes"><b>Députés</b><span>Ses votes, sa participation, sa circonscription</span></button>
@@ -1341,6 +1407,7 @@
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
+    <a class="debutant" href="#comprendre" data-tab-lien="comprendre"><b>Nouveau en politique ? Commencez ici</b><span>Qui décide quoi, comment naît une loi, comment lire un vote : l'essentiel en quelques fiches courtes.</span></a>
     <details class="accueil-plie accueil-chiffres"><summary>Les chiffres clés</summary>
       <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     </details>
@@ -1389,12 +1456,13 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Votes</h2>
-      <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024 (un scrutin, c'est un vote en séance). Choisissez un texte : chaque point est un député, selon qu'il a voté pour, contre, ou pas du tout.
+      <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024 (un <span class="gl" data-gl="scrutin">scrutin</span>, c'est un vote en séance). Choisissez un texte : chaque point est un député, selon qu'il a voté pour, contre, ou pas du tout.
         <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées chaque matin.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment les députés ont voté sur chaque texte : pour, contre, ou pas de vote.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins">
       <div class="filtre-groupe">
-        <span class="filtre-label" id="loi-type-label">Type de scrutin</span>
+        <span class="filtre-label" id="loi-type-label">Type de <span class="gl" data-gl="scrutin">scrutin</span></span>
         <div class="theme-filter-bar" id="theme-filter-bar" role="group" aria-labelledby="loi-type-label"></div>
       </div>
       <div class="filtre-champs">
@@ -1439,7 +1507,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Groupes</h2>
-      <p class="chapo">Choisissez un groupe pour voir comment il a voté, texte par texte, et avec qui il vote le plus souvent.</p>
+      <p class="chapo">Choisissez un <span class="gl" data-gl="groupe">groupe</span> pour voir comment il a voté, texte par texte, et avec qui il vote le plus souvent.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Comparer la façon de voter des groupes et repérer ceux qui votent souvent ensemble.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les votes du groupe">
       <div class="filtre-groupe filtre-toujours">
@@ -1474,8 +1543,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Députés</h2>
-      <p class="chapo">Entrez le nom de votre commune pour trouver votre député, puis voyez s'il vient voter et ce qu'il a voté.
+      <p class="chapo">Entrez le nom de votre commune pour trouver votre <span class="gl" data-gl="depute">député</span>, puis voyez s'il vient voter et ce qu'il a voté.
         <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés chaque matin.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Trouver votre député, voir s'il est présent et comment il vote.</p>
     </div>
     <div id="deputes-recherche">
       <div class="filtres" role="search" aria-label="Trouver un député">
@@ -1502,8 +1572,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Sénat</div>
       <h2>Sénat</h2>
-      <p class="chapo">L'autre chambre du Parlement : elle peut modifier ou rejeter ce que l'Assemblée a adopté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
+      <p class="chapo">L'autre chambre du <span class="gl" data-gl="parlement">Parlement</span> : elle peut modifier ou rejeter ce que l'Assemblée a adopté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment votent les sénateurs et leurs groupes.</p>
     </div>
     <div id="senat-principal">
     <div class="senat-hemi" id="senat-hemi">
@@ -1523,7 +1594,7 @@
     <h3 class="section-titre">Les scrutins publics</h3>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins du Sénat">
       <div class="filtre-groupe">
-        <span class="filtre-label" id="senat-type-label">Type de scrutin</span>
+        <span class="filtre-label" id="senat-type-label">Type de <span class="gl" data-gl="scrutin">scrutin</span></span>
         <div class="theme-filter-bar" id="senat-filtre" role="group" aria-labelledby="senat-type-label"></div>
       </div>
       <div class="filtre-champs">
@@ -1544,8 +1615,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Partis</h2>
-      <p class="chapo">Qui dirige chaque parti, qui préside son groupe à l'Assemblée, et qui siège au Gouvernement.
+      <p class="chapo">Qui dirige chaque parti, qui préside son <span class="gl" data-gl="groupe">groupe</span> à l'Assemblée, et qui siège au <span class="gl" data-gl="gouvernement">Gouvernement</span>.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui dirige les partis et qui fait partie du Gouvernement.</p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="dirigeants">Partager</button></div>
     <div class="leader-grid" id="leader-grid"></div>
@@ -1557,7 +1629,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Le pays en chiffres</div>
       <h2>Économie</h2>
-      <p class="chapo">Chômage, inflation, croissance, déficit, dette : la dernière valeur officielle, avec sa date et sa source.</p>
+      <p class="chapo">Chômage, <span class="gl" data-gl="inflation">inflation</span>, <span class="gl" data-gl="croissance">croissance</span>, <span class="gl" data-gl="deficit">déficit</span>, <span class="gl" data-gl="dette">dette</span> : la dernière valeur officielle, avec sa date et sa source.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Suivre les grands chiffres du pays (emploi, prix, croissance, dette), avec leur date et leur source.</p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="chiffres">Partager</button></div>
     <input type="search" class="chiffre-search" id="chiffre-search" placeholder="Chercher un indicateur : chômage, dette…" aria-label="Rechercher un indicateur" />
@@ -1569,7 +1642,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">L'argent public</div>
       <h2>Budget</h2>
-      <p class="chapo">Où va l'argent public, d'où il vient, combien il manque et ce que pèse la dette. Les chiffres concernent l'ensemble des administrations publiques : État, collectivités locales et Sécurité sociale. Ils sont donnés tels que publiés, sans commentaire.</p>
+      <p class="chapo">Où va l'argent public, d'où il vient, combien il manque et ce que pèse la <span class="gl" data-gl="dette">dette</span>. Les chiffres concernent l'ensemble des <span class="gl" data-gl="administrations-publiques">administrations publiques</span> : État, collectivités locales et Sécurité sociale. Ils sont donnés tels que publiés, sans commentaire.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Comprendre d'où vient l'argent public et où il va.</p>
     </div>
     <div id="budget-contenu"><p class="chargement">Chargement du budget…</p></div>
   </section>
@@ -1581,6 +1655,7 @@
       <h2>Actualités</h2>
       <p class="chapo">Les derniers titres de médias nationaux de sensibilités différentes, relus chaque heure. Chaque ligne renvoie à l'article d'origine ; un sujet repris par plusieurs rédactions passe en premier.
         <small id="actualites-maj">Flux publics des rédactions, relus toutes les heures.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Lire au même endroit les titres politiques de plusieurs médias, avec le lien vers chaque article.</p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
       <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
@@ -1592,7 +1667,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Agenda</h2>
-      <p class="chapo">Ce que les députés examinent bientôt, puis les rendez-vous à venir : congrès, primaires, meetings, élections. Seules les dates confirmées figurent ici.</p>
+      <p class="chapo">Ce que les députés examinent bientôt, puis les rendez-vous à venir : congrès, <span class="gl" data-gl="primaire">primaires</span>, meetings, élections. Seules les dates confirmées figurent ici.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir ce qui se prépare : débats à l'Assemblée, congrès, meetings.</p>
     </div>
     <div class="an-agenda" id="an-agenda"></div>
     <div class="meeting-list" id="meeting-list"></div>
@@ -1602,8 +1678,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Probité</div>
       <h2>Justice</h2>
-      <p class="chapo">Des responsables politiques condamnés par un tribunal. Seules les décisions de justice sont citées, avec leur état : définitive, ou en appel et donc susceptible de changer.
+      <p class="chapo">Des responsables politiques condamnés par un tribunal. Seules les décisions de justice sont citées, avec leur état : définitive, ou en <span class="gl" data-gl="appel">appel</span> et donc susceptible de changer.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Connaître les décisions de justice qui concernent des responsables politiques, et où elles en sont.</p>
       <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
@@ -1618,6 +1695,7 @@
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Sondages</h2>
       <p class="chapo">Qui est en tête au premier tour ? Chaque institut a sa méthode : ses chiffres sont donc montrés tels qu'il les a publiés, de l'hypothèse la plus basse à la plus haute.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir les <span class="gl" data-gl="intention-de-vote">intentions de vote</span> pour la présidentielle. Un <span class="gl" data-gl="sondage">sondage</span> n'est pas un résultat : gardez sa <span class="gl" data-gl="marge-erreur">marge d'erreur</span> en tête.</p>
     </div>
     <div class="annonce" id="annonce-president" hidden></div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
@@ -1648,13 +1726,213 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Candidats</h2>
-      <p class="chapo">Les personnes qui se sont déclarées, avec leur parti, leurs fonctions et la source de leur annonce. Pour être candidat, il faut encore 500 parrainages d'élus ; la liste officielle sera connue au printemps 2027.
+      <p class="chapo">Les personnes qui se sont déclarées, avec leur parti, leurs fonctions et la source de leur annonce. Pour être candidat, il faut encore 500 <span class="gl" data-gl="parrainage">parrainages</span> d'élus ; la liste officielle sera connue au printemps 2027.
         <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue chaque matin.</small></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui s'est déclaré pour la présidentielle, et d'où vient l'information.</p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
       <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="candidats">Partager</button></div>
     <div class="candidat-grid" id="candidats-liste"></div>
+  </section>
+
+  <section class="view" id="view-comprendre">
+    <div class="rubrique-tete">
+      <div class="surtitre">Pour débuter</div>
+      <h2>Comprendre</h2>
+      <p class="chapo">La politique française expliquée simplement : cinq fiches courtes, puis un lexique. Seulement les règles du jeu, sans avis.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> À comprendre les mots et les règles que vous croiserez sur tout le site.</p>
+    </div>
+    <div class="cp-nav" role="group" aria-label="Aller à une fiche">
+      <button type="button" data-cp="cp-qui">Qui fait quoi</button>
+      <button type="button" data-cp="cp-loi">Comment naît une loi</button>
+      <button type="button" data-cp="cp-elections">Les élections</button>
+      <button type="button" data-cp="cp-vote">Lire un vote</button>
+      <button type="button" data-cp="cp-budget">Le budget</button>
+      <button type="button" data-cp="cp-lexique">Lexique</button>
+    </div>
+
+    <article class="cp-bloc" id="cp-qui">
+      <h3><span class="cp-num">1</span>Qui fait quoi ?</h3>
+      <div class="cp-corps">
+        <div class="cp-texte">
+          <dl class="cp-liste">
+            <dt>Le président de la République</dt>
+            <dd>Chef de l'État, élu pour 5 ans par tous les citoyens. Il nomme le Premier ministre et signe les lois. Il peut aussi mettre fin au mandat des députés (la <span class="gl" data-gl="dissolution">dissolution</span>).</dd>
+            <dt>Le Premier ministre et le gouvernement</dt>
+            <dd>Ils dirigent le pays au quotidien : ils préparent des lois et les font appliquer. Le gouvernement doit pouvoir compter sur l'Assemblée nationale, qui peut le renverser.</dd>
+            <dt>L'Assemblée nationale</dt>
+            <dd>577 députés, élus pour 5 ans. Ils votent les lois et contrôlent le gouvernement.</dd>
+            <dt>Le Sénat</dt>
+            <dd>348 sénateurs, élus pour 6 ans par des élus locaux. Ils votent aussi les lois. Le Sénat est renouvelé par moitié tous les 3 ans.</dd>
+            <dt>Le Conseil constitutionnel</dt>
+            <dd>9 membres. Ils vérifient qu'une loi respecte la Constitution, le texte qui fixe les règles du pays.</dd>
+          </dl>
+        </div>
+        <figure class="cp-fig">
+          <svg viewBox="0 0 340 276" role="img" aria-labelledby="fig1-t"><title id="fig1-t">Schéma : le président nomme le Premier ministre et peut dissoudre l'Assemblée ; le gouvernement et le Parlement (Assemblée nationale et Sénat) travaillent ensemble ; le Conseil constitutionnel vérifie les lois.</title>
+            <defs><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="sv-ac"/></marker></defs>
+            <rect class="sv-box sv-fort" x="90" y="6" width="160" height="40" rx="6"/>
+            <text class="sv-t" x="170" y="23" text-anchor="middle">Président</text><text class="sv-s" x="170" y="38" text-anchor="middle">de la République</text>
+            <rect class="sv-box" x="4" y="96" width="132" height="54" rx="6"/>
+            <text class="sv-t" x="70" y="116" text-anchor="middle">Premier ministre</text><text class="sv-t" x="70" y="131" text-anchor="middle">et gouvernement</text><text class="sv-s" x="70" y="144" text-anchor="middle">dirigent</text>
+            <rect class="sv-zone" x="186" y="84" width="150" height="124" rx="8"/>
+            <text class="sv-s" x="261" y="100" text-anchor="middle">PARLEMENT</text>
+            <rect class="sv-box" x="196" y="108" width="130" height="40" rx="6"/>
+            <text class="sv-t" x="261" y="125" text-anchor="middle">Assemblée nationale</text><text class="sv-s" x="261" y="140" text-anchor="middle">577 députés</text>
+            <rect class="sv-box" x="196" y="156" width="130" height="40" rx="6"/>
+            <text class="sv-t" x="261" y="173" text-anchor="middle">Sénat</text><text class="sv-s" x="261" y="188" text-anchor="middle">348 sénateurs</text>
+            <path class="sv-a" d="M120 46L80 94" marker-end="url(#fl)"/><text class="sv-s" x="76" y="70" text-anchor="end">nomme</text>
+            <path class="sv-a" d="M214 46L240 82" marker-end="url(#fl)"/><text class="sv-s" x="238" y="62">peut dissoudre</text>
+            <path class="sv-a" d="M138 123L184 123" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="sv-s" x="161" y="116" text-anchor="middle">propose</text><text class="sv-s" x="161" y="140" text-anchor="middle">contrôle</text>
+            <rect class="sv-box sv-fort" x="70" y="230" width="200" height="38" rx="6"/>
+            <text class="sv-t" x="170" y="246" text-anchor="middle">Conseil constitutionnel</text><text class="sv-s" x="170" y="260" text-anchor="middle">vérifie les lois</text>
+            <path class="sv-a sv-tiret" d="M236 230L250 210" marker-end="url(#fl)"/>
+          </svg>
+        </figure>
+      </div>
+      <p class="cp-source">Pour vérifier : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a> · <a href="https://www.conseil-constitutionnel.fr/" target="_blank" rel="noopener">conseil-constitutionnel.fr</a></p>
+    </article>
+
+    <article class="cp-bloc" id="cp-loi">
+      <h3><span class="cp-num">2</span>Comment naît une loi ?</h3>
+      <div class="cp-corps">
+        <div class="cp-texte">
+          <ol class="cp-etapes">
+            <li><b>Dépôt.</b> Le gouvernement dépose un <span class="gl" data-gl="projet-de-loi">projet de loi</span>, ou des parlementaires une <span class="gl" data-gl="proposition-de-loi">proposition de loi</span>.</li>
+            <li><b>Commission.</b> Quelques élus spécialistes du sujet étudient le texte. Un <span class="gl" data-gl="rapporteur">rapporteur</span> le présente. On peut le modifier par des <span class="gl" data-gl="amendement">amendements</span>.</li>
+            <li><b>Vote dans une première chambre</b> (Assemblée ou Sénat). Le texte est débattu en séance publique, puis voté.</li>
+            <li><b>Vote dans l'autre chambre.</b> Si elle change le texte, il repart dans la première : c'est la <span class="gl" data-gl="navette">navette</span>.</li>
+            <li><b>Commission mixte paritaire.</b> Si les deux chambres ne s'accordent pas, 7 députés et 7 sénateurs cherchent un texte commun. Si cela échoue, le gouvernement peut donner le dernier mot à l'Assemblée.</li>
+            <li><b>Promulgation.</b> Le président de la République signe la loi dans les 15 jours, puis elle paraît au Journal officiel. Avant cela, le Conseil constitutionnel peut vérifier le texte s'il est saisi.</li>
+          </ol>
+        </div>
+        <figure class="cp-fig">
+          <svg viewBox="0 0 340 190" role="img" aria-labelledby="fig2-t"><title id="fig2-t">Schéma en six étapes : dépôt, commission, vote dans une première chambre, vote dans l'autre chambre avec la navette, commission mixte paritaire en cas de désaccord, promulgation.</title>
+            <rect class="sv-box" x="2" y="6" width="96" height="52" rx="6"/><text class="sv-t" x="50" y="28" text-anchor="middle">1 Dépôt</text><text class="sv-s" x="50" y="44" text-anchor="middle">du texte</text>
+            <rect class="sv-box" x="122" y="6" width="96" height="52" rx="6"/><text class="sv-t" x="170" y="28" text-anchor="middle">2 Commission</text><text class="sv-s" x="170" y="44" text-anchor="middle">amendements</text>
+            <rect class="sv-box" x="242" y="6" width="96" height="52" rx="6"/><text class="sv-t" x="290" y="28" text-anchor="middle">3 Chambre 1</text><text class="sv-s" x="290" y="44" text-anchor="middle">débat et vote</text>
+            <rect class="sv-box" x="242" y="124" width="96" height="52" rx="6"/><text class="sv-t" x="290" y="146" text-anchor="middle">4 Chambre 2</text><text class="sv-s" x="290" y="162" text-anchor="middle">débat et vote</text>
+            <rect class="sv-box sv-fort" x="122" y="124" width="96" height="52" rx="6"/><text class="sv-t" x="170" y="146" text-anchor="middle">5 CMP</text><text class="sv-s" x="170" y="162" text-anchor="middle">si désaccord</text>
+            <rect class="sv-box sv-fort" x="2" y="124" width="96" height="52" rx="6"/><text class="sv-t" x="50" y="146" text-anchor="middle">6 Promulgation</text><text class="sv-s" x="50" y="162" text-anchor="middle">puis publication</text>
+            <path class="sv-a" d="M98 32H120" marker-end="url(#fl)"/><path class="sv-a" d="M218 32H240" marker-end="url(#fl)"/>
+            <path class="sv-a" d="M290 58V122" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="sv-s" x="298" y="94">navette</text>
+            <path class="sv-a" d="M240 150H220" marker-end="url(#fl)"/><path class="sv-a" d="M120 150H100" marker-end="url(#fl)"/>
+          </svg>
+        </figure>
+      </div>
+      <div class="cp-encart">
+        <h4>Le 49.3 et la motion de censure, en clair</h4>
+        <p>Le <span class="gl" data-gl="49-3">49.3</span> est un article de la Constitution. Il permet au Premier ministre de faire adopter un texte <b>sans vote</b>. Depuis 2008, il ne sert que pour les lois de finances, celles de la Sécurité sociale, et un autre texte par session.</p>
+        <p>Les députés ont une réponse : la <span class="gl" data-gl="motion-de-censure">motion de censure</span>. Elle doit être signée par au moins un dixième des députés. Si 289 députés au moins la votent, le texte n'est pas adopté et le gouvernement doit démissionner. Sinon, le texte est adopté.</p>
+      </div>
+      <p class="cp-source">Pour vérifier : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a></p>
+    </article>
+
+    <article class="cp-bloc" id="cp-elections">
+      <h3><span class="cp-num">3</span>Les élections en France</h3>
+      <div class="cp-corps">
+        <div class="cp-texte">
+          <dl class="cp-liste">
+            <dt>Présidentielle : tous les 5 ans</dt>
+            <dd>Tous les citoyens votent directement. Il y a deux tours. Si personne n'a plus de la moitié des voix au premier, les deux premiers se retrouvent au second. Pour se présenter, il faut 500 <span class="gl" data-gl="parrainage">parrainages</span> d'élus.</dd>
+            <dt>Législatives : pour élire les députés</dt>
+            <dd>La France est découpée en 577 <span class="gl" data-gl="circonscription">circonscriptions</span>, avec un député chacune, pour 5 ans. Il y a deux tours. Au second, celui qui a le plus de voix l'emporte.</dd>
+            <dt>Sénatoriales : pour élire les sénateurs</dt>
+            <dd>Vote indirect : les citoyens n'y votent pas eux-mêmes. Ce sont des <span class="gl" data-gl="grands-electeurs">grands électeurs</span>, des élus locaux, qui choisissent. Mandat de 6 ans, renouvelé par moitié tous les 3 ans.</dd>
+            <dt>Municipales : tous les 6 ans</dt>
+            <dd>Les habitants de chaque commune élisent leur conseil municipal. Ce conseil élit ensuite le maire.</dd>
+          </dl>
+        </div>
+        <figure class="cp-fig">
+          <svg viewBox="0 0 340 146" role="img" aria-labelledby="fig3-t"><title id="fig3-t">Schéma : vote direct, les citoyens élisent le président, les députés et les conseillers municipaux ; vote indirect, les citoyens élisent des grands électeurs qui élisent les sénateurs.</title>
+            <rect class="sv-box" x="2" y="6" width="76" height="38" rx="6"/><text class="sv-t" x="40" y="29" text-anchor="middle">Citoyens</text>
+            <path class="sv-a" d="M80 25H176" marker-end="url(#fl)"/><text class="sv-s" x="128" y="19" text-anchor="middle">votent</text>
+            <rect class="sv-box sv-fort" x="178" y="6" width="160" height="38" rx="6"/><text class="sv-t" x="258" y="22" text-anchor="middle">Président, députés,</text><text class="sv-t" x="258" y="36" text-anchor="middle">conseillers municipaux</text>
+            <text class="sv-s" x="2" y="62">Vote direct</text>
+            <rect class="sv-box" x="2" y="80" width="76" height="38" rx="6"/><text class="sv-t" x="40" y="103" text-anchor="middle">Citoyens</text>
+            <path class="sv-a" d="M80 99H104" marker-end="url(#fl)"/>
+            <rect class="sv-box" x="106" y="80" width="116" height="38" rx="6"/><text class="sv-t" x="164" y="96" text-anchor="middle">Grands électeurs</text><text class="sv-s" x="164" y="110" text-anchor="middle">(élus locaux)</text>
+            <path class="sv-a" d="M224 99H248" marker-end="url(#fl)"/>
+            <rect class="sv-box sv-fort" x="250" y="80" width="88" height="38" rx="6"/><text class="sv-t" x="294" y="103" text-anchor="middle">Sénateurs</text>
+            <text class="sv-s" x="2" y="136">Vote indirect</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="cp-source">Pour vérifier : <a href="https://www.service-public.fr/" target="_blank" rel="noopener">service-public.fr</a> · <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a></p>
+    </article>
+
+    <article class="cp-bloc" id="cp-vote">
+      <h3><span class="cp-num">4</span>Lire un vote</h3>
+      <div class="cp-corps">
+        <div class="cp-texte">
+          <ul class="cp-points">
+            <li><b>Pour, contre, abstention.</b> Un député peut voter pour, contre, ou s'abstenir (ni oui ni non). Il peut aussi ne pas voter du tout.</li>
+            <li><b>« Adopté » :</b> il y a plus de « pour » que de « contre ». Les abstentions et les absents ne comptent pas dans ce calcul.</li>
+            <li><b>Majorité absolue :</b> plus de la moitié de tous les députés, présents ou non : 289 sur 577. Elle n'est exigée que dans certains cas, comme la motion de censure.</li>
+            <li><b>Groupe parlementaire :</b> des députés de sensibilité proche, au moins 15. Ceux d'un groupe votent souvent pareil, mais pas toujours. Un <span class="gl" data-gl="non-inscrit">non-inscrit</span> n'appartient à aucun groupe.</li>
+            <li><b>Sur ce site,</b> chaque point de l'hémicycle est un député, coloré selon son vote. La page <a href="#scrutin" data-tab-lien="scrutin">Votes</a> montre tous les <span class="gl" data-gl="scrutin">scrutins</span>.</li>
+          </ul>
+        </div>
+        <figure class="cp-fig">
+          <svg viewBox="0 0 340 156" role="img" aria-labelledby="fig4-t"><title id="fig4-t">Exemple inventé : sur 577 députés, 250 votent pour, 200 contre, 60 s'abstiennent et 67 ne votent pas. Le texte est adopté car 250 est supérieur à 200, même sans atteindre la majorité absolue de 289.</title>
+            <rect class="sv-pour" x="10" y="34" width="138.7" height="28"/>
+            <rect class="sv-contre" x="148.7" y="34" width="110.9" height="28"/>
+            <rect class="sv-abst" x="259.6" y="34" width="33.3" height="28"/>
+            <rect class="sv-abs" x="292.9" y="34" width="37.1" height="28"/>
+            <path class="sv-marque" d="M170.3 26V70"/><text class="sv-s" x="170" y="18" text-anchor="middle">289 : majorité absolue</text>
+            <rect class="sv-pour" x="10" y="88" width="11" height="11"/><text class="sv-t" x="28" y="98">250 pour</text>
+            <rect class="sv-contre" x="10" y="108" width="11" height="11"/><text class="sv-t" x="28" y="118">200 contre</text>
+            <rect class="sv-abst" x="176" y="88" width="11" height="11"/><text class="sv-t" x="194" y="98">60 abstentions</text>
+            <rect class="sv-abs" x="176" y="108" width="11" height="11"/><text class="sv-t" x="194" y="118">67 n'ont pas voté</text>
+            <text class="sv-s" x="10" y="146">Exemple inventé : adopté, car 250 est plus que 200.</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="cp-source">Pour vérifier : <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a></p>
+    </article>
+
+    <article class="cp-bloc" id="cp-budget">
+      <h3><span class="cp-num">5</span>Le budget en deux mots</h3>
+      <div class="cp-corps">
+        <div class="cp-texte">
+          <ul class="cp-points">
+            <li><b>Recettes :</b> l'argent qui rentre (impôts, taxes, cotisations). <b>Dépenses :</b> l'argent qui sort (écoles, santé, retraites, sécurité, intérêts de la dette…).</li>
+            <li><b>Déficit :</b> quand on dépense plus qu'on ne reçoit <i>pendant une année</i>.</li>
+            <li><b>Dette :</b> tout ce qui a été emprunté et pas encore remboursé, <i>année après année</i>. Chaque déficit s'ajoute à la dette.</li>
+            <li><b>Déficit et dette ne sont pas la même chose :</b> le premier se mesure sur un an, la seconde est un total.</li>
+            <li><b>PIB :</b> la valeur de ce que le pays produit en un an. On y compare déficit et dette pour pouvoir comparer des pays de tailles différentes.</li>
+            <li>Chaque année, le Parlement vote le budget de l'État dans la loi de finances. Les chiffres du moment sont sur la page <a href="#budget" data-tab-lien="budget">Budget</a>.</li>
+          </ul>
+        </div>
+        <figure class="cp-fig">
+          <svg viewBox="0 0 340 170" role="img" aria-labelledby="fig5-t"><title id="fig5-t">Schéma : sur une année, les dépenses dépassent les recettes, l'écart est le déficit ; au fil des années, les déficits s'additionnent et forment la dette.</title>
+            <text class="sv-s" x="4" y="14">Une année</text><text class="sv-s" x="196" y="14">Au fil des années</text>
+            <path class="sv-base" d="M4 130H170M190 130H336"/>
+            <rect class="sv-recette" x="20" y="70" width="44" height="60"/>
+            <rect class="sv-depense" x="84" y="36" width="44" height="94"/>
+            <rect class="sv-deficit" x="84" y="36" width="44" height="34"/>
+            <text class="sv-t" x="42" y="146" text-anchor="middle">Recettes</text><text class="sv-t" x="106" y="146" text-anchor="middle">Dépenses</text>
+            <text class="sv-t" x="134" y="56">déficit</text>
+            <rect class="sv-deficit" x="196" y="100" width="70" height="30"/><text class="sv-s sv-bl" x="231" y="119" text-anchor="middle">année 1</text>
+            <rect class="sv-deficit" x="196" y="68" width="70" height="30"/><text class="sv-s sv-bl" x="231" y="87" text-anchor="middle">année 2</text>
+            <rect class="sv-deficit" x="196" y="36" width="70" height="30"/><text class="sv-s sv-bl" x="231" y="55" text-anchor="middle">année 3</text>
+            <path class="sv-marque" d="M272 36V130"/><text class="sv-t" x="278" y="86">= dette</text>
+            <text class="sv-s" x="4" y="164">Le déficit est un écart annuel, la dette est la somme.</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="cp-source">Pour vérifier : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a></p>
+    </article>
+
+    <article class="cp-bloc" id="cp-lexique">
+      <h3><span class="cp-num">A-Z</span>Lexique</h3>
+      <label class="filtre-champ lex-champ"><span class="filtre-label">Chercher un mot</span>
+        <input type="search" id="lex-recherche" placeholder="Navette, quorum, 49.3…" autocomplete="off" /></label>
+      <p class="loi-count" id="lex-compte" aria-live="polite"></p>
+      <dl class="lex-liste" id="lex-liste"></dl>
+      <p class="cp-source">Définitions d'après les sites officiels : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a> · <a href="https://www.service-public.fr/" target="_blank" rel="noopener">service-public.fr</a></p>
+    </article>
   </section>
 
   <section class="view" id="view-mentions">
@@ -1739,6 +2017,9 @@
       <h3>Sources</h3>
       <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; le budget, le déficit et la dette des comptes publics publiés par Eurostat ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
 
+      <h3>Rubrique « Comprendre » et infobulles</h3>
+      <p>La rubrique Comprendre, le lexique et les mots soulignés en pointillés expliquent le fonctionnement des institutions. Ils ne reposent que sur des règles stables (Constitution, règlements de l'Assemblée nationale et du Sénat), jamais sur l'actualité. Les chiffres du moment viennent des données du site. Chaque fiche renvoie aux sites officiels : vie-publique.fr, service-public.fr, assemblee-nationale.fr, senat.fr, conseil-constitutionnel.fr. Une erreur ? Signalez-la depuis le pied de page.</p>
+
       <h3>Bandeau « En direct »</h3>
       <p>Quand le président de la République prend la parole (ou l'annonce) ou qu'une séance publique se tient à l'Assemblée nationale, un bandeau signale l'événement en haut de l'accueil et des Actualités, avec le titre de presse qui l'annonce, son média et son lien. Il disparaît six heures après la publication du titre. Il est déclenché par des mots-clés dans des titres déjà relevés, sans aucune appréciation ; il peut donc manquer un événement ou, rarement, en signaler un à tort. Les chaînes ne sont que des liens vers leurs pages officielles de direct.</p>
 
@@ -1777,7 +2058,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
       <h2>Quiz</h2>
-      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels groupes vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
+      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Vous situer par rapport aux groupes en votant à votre tour sur de vrais textes.</p>
     </div>
     <div id="quiz-container"></div>
   </section>
@@ -1785,6 +2067,7 @@
 
 <footer class="site-footer">
   <p class="footer-liens">
+    <a href="#comprendre" data-tab-lien="comprendre">Comprendre</a> ·
     <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
@@ -2210,6 +2493,168 @@ const TYPES_VOTE = { SPO:"Scrutin public ordinaire", SPS:"Scrutin public solenne
 function formatNombre(n){ return n.toLocaleString("fr-FR"); }
 
 // Recherche insensible aux accents, à la casse et aux apostrophes typographiques
+/* ===== Glossaire : infobulles accessibles et lexique A-Z (une seule source de définitions) =====
+   Dans le HTML : <span class="gl" data-gl="navette">navette</span> devient un bouton au chargement.
+   Dans le JavaScript : gl("navette", "Navette") renvoie le bouton prêt à insérer. */
+const GLOSSAIRE = [
+  ["49-3", "49.3", "Article de la Constitution qui permet au Premier ministre de faire adopter un texte sans vote. Les députés peuvent répondre par une motion de censure : si elle échoue, le texte est adopté.", "article 49 alinéa 3"],
+  ["abstention", "Abstention", "Au vote, s'abstenir, c'est ne dire ni oui ni non. Dans une élection, c'est aussi ne pas aller voter."],
+  ["adopte", "Adopté", "Un texte est adopté quand il y a plus de « pour » que de « contre ». Les abstentions et les absents ne comptent pas dans ce calcul."],
+  ["amendement", "Amendement", "Proposition pour modifier un texte de loi : ajouter, changer ou supprimer une phrase. Les parlementaires et le gouvernement peuvent en déposer."],
+  ["appel", "Appel", "Nouveau procès devant une juridiction supérieure. La première décision peut y être confirmée ou changée."],
+  ["administrations-publiques", "Administrations publiques", "L'État, les collectivités locales (communes, départements, régions) et la Sécurité sociale, pris ensemble."],
+  ["assemblee", "Assemblée nationale", "Chambre du Parlement composée de 577 députés élus pour 5 ans. Elle vote les lois et contrôle le gouvernement."],
+  ["budget", "Budget de l'État", "Chaque année, le Parlement vote une loi de finances. Elle fixe les recettes et les dépenses prévues de l'État.", "loi de finances"],
+  ["circonscription", "Circonscription", "Territoire où les électeurs élisent un député. La France en compte 577 : un député par circonscription."],
+  ["cohabitation", "Cohabitation", "Situation où le président de la République et la majorité de l'Assemblée nationale sont de camps opposés. Le Premier ministre vient alors de la majorité de l'Assemblée."],
+  ["cohesion", "Cohésion", "Sur ce site : à quel point les membres d'un groupe votent de la même façon. 100 % veut dire que tous ont voté dans le même sens."],
+  ["commission", "Commission", "Petit groupe de parlementaires spécialisé dans un domaine (finances, défense, affaires sociales…). Elle étudie un texte et peut le modifier avant le vote en séance."],
+  ["cmp", "Commission mixte paritaire (CMP)", "Réunion de 7 députés et 7 sénateurs, chargée de proposer un texte commun quand l'Assemblée et le Sénat ne sont pas d'accord."],
+  ["conseil-constitutionnel", "Conseil constitutionnel", "9 membres qui vérifient qu'une loi respecte la Constitution. Ils veillent aussi à la régularité des élections nationales."],
+  ["constitution", "Constitution", "Texte qui organise les pouvoirs et fixe les règles du pays. Celle de la Ve République date de 1958."],
+  ["croissance", "Croissance", "Hausse de la production du pays d'une année sur l'autre, mesurée par l'évolution du PIB."],
+  ["deficit", "Déficit public", "Somme qui manque quand l'État, les collectivités et la Sécurité sociale dépensent plus qu'ils ne reçoivent pendant une année."],
+  ["depute", "Député", "Élu qui représente les habitants d'une circonscription à l'Assemblée nationale, pour 5 ans."],
+  ["dette", "Dette publique", "Total de l'argent emprunté par les administrations publiques et pas encore remboursé. Chaque déficit s'ajoute à la dette."],
+  ["dissolution", "Dissolution", "Décision du président de la République de mettre fin au mandat des députés avant la date prévue. De nouvelles élections législatives ont lieu 20 à 40 jours plus tard."],
+  ["gouvernement", "Gouvernement", "Le Premier ministre et les ministres. Ils dirigent le pays au quotidien et proposent des lois."],
+  ["grands-electeurs", "Grands électeurs", "Élus qui votent pour désigner les sénateurs. Ce sont surtout des délégués des conseils municipaux, avec les députés, les sénateurs et les conseillers régionaux et départementaux."],
+  ["groupe", "Groupe parlementaire", "Regroupement de députés (ou de sénateurs) de sensibilités proches. À l'Assemblée, il faut au moins 15 députés pour former un groupe.", "groupe"],
+  ["hemicycle", "Hémicycle", "Salle en demi-cercle où siègent les députés (ou les sénateurs). Par extension, l'Assemblée elle-même."],
+  ["inflation", "Inflation", "Hausse générale des prix sur une période, le plus souvent un an."],
+  ["intention-de-vote", "Intention de vote", "Réponse d'une personne sondée à la question « pour qui voteriez-vous ? ». Ce n'est pas un vote : l'avis peut changer jusqu'au scrutin."],
+  ["journal-officiel", "Journal officiel", "Publication de l'État où paraissent les lois, les décrets et les nominations."],
+  ["majorite-absolue", "Majorité absolue", "Plus de la moitié de tous les membres d'une assemblée, présents ou non. À l'Assemblée nationale : 289 voix sur 577."],
+  ["marge-erreur", "Marge d'erreur", "Écart possible entre le résultat d'un sondage et la réalité, car on interroge une partie des gens seulement. Pour 1 000 personnes interrogées, elle est d'environ 3 points."],
+  ["motion-de-censure", "Motion de censure", "Vote par lequel les députés peuvent renverser le gouvernement. Elle doit être signée par au moins un dixième des députés et votée par 289 d'entre eux. Si elle l'est, le gouvernement doit démissionner."],
+  ["navette", "Navette parlementaire", "Allers-retours d'un texte entre l'Assemblée et le Sénat, jusqu'à ce que les deux votent le même texte."],
+  ["non-inscrit", "Non-inscrit", "Député (ou sénateur) qui n'appartient à aucun groupe parlementaire."],
+  ["ordonnance", "Ordonnance", "Texte pris par le gouvernement dans un domaine normalement réservé à la loi, avec l'accord du Parlement. Le Parlement doit ensuite la ratifier."],
+  ["ordre-du-jour", "Ordre du jour", "Liste des textes que l'Assemblée ou le Sénat examine, jour après jour. Il est partagé entre le gouvernement et le Parlement."],
+  ["parlement", "Parlement", "L'Assemblée nationale et le Sénat réunis. Il vote les lois et contrôle le gouvernement."],
+  ["parrainage", "Parrainage", "Pour se présenter à la présidentielle, un candidat doit être soutenu par 500 élus (maires, parlementaires…)."],
+  ["pib", "PIB", "Produit intérieur brut : valeur de tout ce qui est produit dans le pays en un an. Il sert à comparer déficit et dette à la taille de l'économie."],
+  ["premier-ministre", "Premier ministre", "Nommé par le président de la République. Il dirige le gouvernement et répond de son action devant l'Assemblée nationale."],
+  ["president", "Président de la République", "Chef de l'État, élu pour 5 ans au suffrage universel direct. Il nomme le Premier ministre et promulgue les lois."],
+  ["primaire", "Primaire", "Élection organisée par un parti ou un camp pour choisir son candidat à une élection."],
+  ["procedure-acceleree", "Procédure accélérée", "Le gouvernement peut demander que chaque chambre n'examine le texte qu'une fois avant la commission mixte paritaire. Le texte avance plus vite."],
+  ["projet-de-loi", "Projet de loi", "Texte de loi proposé par le gouvernement."],
+  ["promulgation", "Promulgation", "Acte du président de la République qui rend une loi officielle, dans les 15 jours après son adoption définitive."],
+  ["proposition-de-loi", "Proposition de loi", "Texte de loi proposé par des députés ou des sénateurs."],
+  ["quorum", "Quorum", "Nombre minimum de présents exigé pour qu'une réunion ou un vote soit valable."],
+  ["rapporteur", "Rapporteur", "Parlementaire chargé d'étudier un texte en commission et de présenter son analyse à ses collègues."],
+  ["recettes", "Recettes et dépenses", "Recettes : l'argent qui rentre (impôts, cotisations). Dépenses : l'argent qui sort (salaires, retraites, santé, intérêts de la dette…).", "recette depense"],
+  ["referendum", "Référendum", "Vote où tous les électeurs répondent par oui ou non à une même question."],
+  ["report-de-voix", "Report de voix", "Électeurs d'un candidat éliminé au premier tour qui votent pour un autre au second. On parle aussi de réserve de voix.", "reserve electorale reserve de voix"],
+  ["scrutin", "Scrutin", "Un vote, ou la manière de voter. Sur ce site, un scrutin est un vote des députés en séance : pour chacun, pour, contre ou abstention."],
+  ["seance-publique", "Séance publique", "Réunion de tous les députés (ou sénateurs) dans l'hémicycle, ouverte au public et filmée. C'est là qu'on débat et qu'on vote."],
+  ["senat", "Sénat", "Chambre du Parlement composée de 348 sénateurs élus pour 6 ans par des élus locaux. Il est renouvelé par moitié tous les 3 ans."],
+  ["senateur", "Sénateur", "Élu au Sénat par des grands électeurs (vote indirect) pour 6 ans."],
+  ["sondage", "Sondage", "Enquête auprès de quelques centaines ou milliers de personnes pour estimer l'opinion de tous. Une photo d'un moment, pas une prévision."],
+  ["suffrage-direct", "Suffrage direct et indirect", "Direct : les électeurs choisissent eux-mêmes l'élu. Indirect : ils choisissent des intermédiaires (les grands électeurs), qui élisent l'élu.", "suffrage universel"],
+  ["suffrages-exprimes", "Suffrages exprimés", "Voix données à un candidat ou à une liste. Les votes blancs et nuls n'en font pas partie."],
+  ["vote-blanc", "Vote blanc", "Enveloppe vide ou bulletin sans nom. Il est compté à part et n'entre pas dans les suffrages exprimés."]
+];
+const GL_PAR_ID = new Map(GLOSSAIRE.map(g => [g[0], g]));
+
+// Bouton d'infobulle pour un terme : à utiliser dans les gabarits JavaScript (le texte affiché est libre)
+function gl(id, texte){
+  const g = GL_PAR_ID.get(id);
+  if(!g) return esc(texte || id);
+  return `<button type="button" class="gl" data-gl="${id}" aria-expanded="false" aria-controls="gl-pop">${esc(texte || g[1])}</button>`;
+}
+
+let glOuvert = null;
+function fermerGl(rendreFocus){
+  const pop = document.getElementById("gl-pop");
+  if(pop) pop.hidden = true;
+  if(glOuvert){
+    glOuvert.setAttribute("aria-expanded", "false");
+    if(rendreFocus) glOuvert.focus();
+    glOuvert = null;
+  }
+}
+function ouvrirGl(bouton){
+  const g = GL_PAR_ID.get(bouton.dataset.gl);
+  if(!g) return;
+  if(glOuvert === bouton){ fermerGl(true); return; }
+  fermerGl(false);
+  const pop = document.getElementById("gl-pop");
+  pop.setAttribute("aria-label", g[1]);
+  pop.innerHTML = `<b>${esc(g[1])}</b><p>${esc(g[2])}</p><a href="#comprendre" data-gl-plus="${g[0]}">En savoir plus</a>`;
+  pop.hidden = false;
+  bouton.setAttribute("aria-expanded", "true");
+  glOuvert = bouton;
+  // Position sous le terme (au-dessus s'il manque de place), sans sortir de l'écran
+  const r = bouton.getBoundingClientRect(), marge = 12;
+  const largeur = pop.offsetWidth, hauteur = pop.offsetHeight;
+  const gauche = Math.max(marge, Math.min(r.left, innerWidth - largeur - marge));
+  const dessous = r.bottom + hauteur + 8 <= innerHeight - 80 || r.top < hauteur + 16;
+  pop.style.left = (gauche + scrollX) + "px";
+  pop.style.top = ((dessous ? r.bottom + 6 : r.top - hauteur - 6) + scrollY) + "px";
+  pop.focus({ preventScroll: true });
+}
+// Les <span class="gl" data-gl="…"> écrits dans le HTML deviennent des boutons (sans JavaScript, ils restent du texte)
+function initGlossaire(){
+  document.querySelectorAll("span.gl[data-gl]").forEach(s => {
+    s.outerHTML = gl(s.dataset.gl, s.textContent);
+  });
+  const pop = document.createElement("div");
+  pop.id = "gl-pop"; pop.className = "gl-pop"; pop.hidden = true; pop.tabIndex = -1; pop.setAttribute("role", "dialog");
+  document.body.appendChild(pop);
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".gl[data-gl]");
+    if(b){ e.preventDefault(); ouvrirGl(b); return; }
+    const plus = e.target.closest("[data-gl-plus]");
+    if(plus){
+      e.preventDefault();
+      const id = plus.dataset.glPlus;
+      fermerGl(false);
+      activateTab("comprendre");
+      setTimeout(() => lexiqueAller(id), 80);
+      return;
+    }
+    if(glOuvert && !pop.contains(e.target)) fermerGl(false);
+  });
+  document.addEventListener("keydown", e => { if(e.key === "Escape" && glOuvert){ e.stopPropagation(); fermerGl(true); } }, true);
+  pop.addEventListener("focusout", e => { if(glOuvert && !pop.contains(e.relatedTarget) && e.relatedTarget !== glOuvert) fermerGl(false); });
+  addEventListener("resize", () => fermerGl(false));
+}
+
+// Lexique A-Z avec recherche par saisie
+function renderLexique(){
+  const champ = document.getElementById("lex-recherche");
+  const mots = norm(champ.value.trim()).split(/\s+/).filter(Boolean);
+  const tous = GLOSSAIRE.slice().sort((a, b) => a[1].localeCompare(b[1], "fr"));
+  const liste = tous.filter(g => { const t = norm(g[1] + " " + g[2] + " " + (g[3] || "")); return mots.every(m => t.includes(m)); });
+  let lettre = "", html = "";
+  for(const g of liste){
+    const l = /^\d/.test(g[1]) ? "0-9" : norm(g[1]).charAt(0).toUpperCase();
+    if(l !== lettre){ lettre = l; html += `<div class="lex-lettre" aria-hidden="true">${l}</div>`; }
+    html += `<div class="lex-item" id="lex-${g[0]}"><dt>${esc(g[1])}</dt><dd>${esc(g[2])}</dd></div>`;
+  }
+  document.getElementById("lex-liste").innerHTML = html || `<p class="histo-date">Aucun mot ne correspond. Essayez une partie du mot.</p>`;
+  document.getElementById("lex-compte").textContent = mots.length ? `${liste.length} mot${liste.length > 1 ? "s" : ""} sur ${tous.length}` : `${tous.length} mots`;
+}
+function lexiqueAller(id){
+  const champ = document.getElementById("lex-recherche");
+  if(champ.value){ champ.value = ""; renderLexique(); }
+  const el = document.getElementById("lex-" + id);
+  if(!el) return;
+  el.scrollIntoView({ block: "center" });
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 2500);
+}
+function initComprendre(){
+  renderLexique();
+  document.getElementById("lex-recherche").addEventListener("input", renderLexique);
+  document.querySelectorAll(".cp-nav button[data-cp]").forEach(b => b.addEventListener("click", () => {
+    document.getElementById(b.dataset.cp).scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }));
+}
+initGlossaire();
+initComprendre();
+
 function norm(t){
   return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/’/g,"'").toLowerCase();
 }
@@ -2569,7 +3014,7 @@ function updateBreakdown(){
   if(loi.dossierRef){
     if(NAVETTE === null){ NAVETTE = false; lireJSON("data/navette.json").then(d=>{ NAVETTE = d?.textes || {}; if(currentLoi() === loi) updateBreakdown(); }); }
     const n = NAVETTE && NAVETTE[loi.dossierRef];
-    if(n) lignes.push(["Au Sénat", n.votes.map(v=>`<span class="histo-resultat ${v.resultat}">${v.resultat === "adopte" ? "Adopté" : "Rejeté"}</span> le ${esc(v.date)} (${formatNombre(v.pour)} pour, ${formatNombre(v.contre)} contre) · <a href="${lien(v.url)}" target="_blank" rel="noopener">le scrutin</a>`).join("<br>") + ` · <a href="${lien(n.dossier)}" target="_blank" rel="noopener">dossier au Sénat</a>`]);
+    if(n) lignes.push([`${gl("navette", "Navette")} : au Sénat`, n.votes.map(v=>`<span class="histo-resultat ${v.resultat}">${v.resultat === "adopte" ? "Adopté" : "Rejeté"}</span> le ${esc(v.date)} (${formatNombre(v.pour)} pour, ${formatNombre(v.contre)} contre) · <a href="${lien(v.url)}" target="_blank" rel="noopener">le scrutin</a>`).join("<br>") + ` · <a href="${lien(n.dossier)}" target="_blank" rel="noopener">dossier au Sénat</a>`]);
   }
   if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
   lignes.push(["Source", `<a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">${loi.numero ? `fiche du scrutin n°${loi.numero}` : esc(loi.sourceLabel)}</a>`]);
@@ -2646,7 +3091,7 @@ function renderStatCards(loi){
     card("Résultat", `${formatNombre(pour)} pour · ${formatNombre(contre)} contre`, `${formatNombre(abst)} abstention${abst>1?"s":""}`) +
     (plusDivise && plusDivise.unite < 1
       ? card("Groupe le plus divisé", esc(plusDivise.nom), `${Math.round(plusDivise.unite*100)} % dans la même direction`)
-      : card("Cohésion des groupes", plusUni ? "Totale" : "—", plusUni ? "chaque groupe (≥ 3 votants) a voté d'un seul bloc" : "trop peu de votants par groupe"));
+      : card(gl("cohesion", "Cohésion des groupes"), plusUni ? "Totale" : "—", plusUni ? "chaque groupe (≥ 3 votants) a voté d'un seul bloc" : "trop peu de votants par groupe"));
 }
 
 function renderLegend(){
@@ -2778,7 +3223,7 @@ function renderCohesion(liste){
   const stats = PARTIES.filter(p=>p.id!=="NI").map(p=>({ p, c: cohesionGroupe(p.id, liste) })).filter(x=>x.c).sort((a,b)=>b.c.pct-a.c.pct);
   if(!stats.length){ el.innerHTML = ""; return; }
   el.innerHTML = `
-    <h4>Cohésion de vote des groupes</h4>
+    <h4>${gl("cohesion", "Cohésion")} de vote des groupes</h4>
     <div class="sub">Sur les scrutins affichés (hors motions de censure, avec au moins 5 votants du groupe), part moyenne des suffrages exprimés du groupe qui vont dans le même sens que sa position majoritaire. 100 % : le groupe a toujours voté d'un bloc. Les non-inscrits ne forment pas un groupe et sont exclus.</div>
     ${stats.map(x=>`
       <div class="proximite-row" title="${x.c.n} scrutins pris en compte, dont ${x.c.unanimes} où le groupe a voté à l'unanimité des suffrages exprimés">
@@ -4799,7 +5244,7 @@ function renderStatsGroupes(){
   }
   const lignes = [...groupes.entries()].sort((a, b) => b[1].n - a[1].n);
   const tot = lignes.reduce((t, [, g]) => ({ n:t.n + g.n, f:t.f + g.f }), { n:0, f:0 });
-  corps.innerHTML = `<table class="stats-groupes"><thead><tr><th scope="col">Groupe</th><th scope="col">Députés</th><th scope="col">Femmes</th><th scope="col">Participation</th><th scope="col">Cohésion</th></tr></thead><tbody>
+  corps.innerHTML = `<table class="stats-groupes"><thead><tr><th scope="col">Groupe</th><th scope="col">Députés</th><th scope="col">Femmes</th><th scope="col">Participation</th><th scope="col">${gl("cohesion")}</th></tr></thead><tbody>
     ${lignes.map(([id, g]) => { const p = PARTIES.find(x => x.id === id) || { nom:id, couleur:"#8A8C94" };
       return `<tr><td><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</td><td>${g.n}</td><td>${pctFr(g.f, g.n)}</td><td>${pctFr(g.exp, g.sc)}</td><td>${id === "NI" ? "—" : pctFr(g.exp - g.ec, g.exp)}</td></tr>`; }).join("")}
     </tbody><tfoot><tr><td>Assemblée</td><td>${tot.n}</td><td>${pctFr(tot.f, tot.n)}</td><td colspan="2"></td></tr></tfoot></table>
@@ -6282,7 +6727,7 @@ function ouvrirDepuisHash(){
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
 
-const RUBRIQUES_PLUS = ["deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "budget", "methode", "mentions"];
+const RUBRIQUES_PLUS = ["comprendre", "deputes", "histo", "senat", "candidats", "actualites", "dirigeants", "justice", "meetings", "chiffres", "budget", "methode", "mentions"];
 
 function activateTab(tabId){
   onSeatLeave();
