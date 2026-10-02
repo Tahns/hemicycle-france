@@ -269,6 +269,17 @@
   .gl-pop b{display:block; margin-bottom:4px; font-family:var(--font-display); font-size:17px; font-weight:600;}
   .gl-pop p{margin:0 0 8px;}
   .gl-pop a{font-weight:600; color:var(--accent);}
+  .accueil-quiz{display:flex; align-items:center; gap:16px; margin:6px 0 16px; padding:18px 20px; border:1px solid var(--accent); border-radius:8px; background:var(--accent-dim); color:inherit; text-decoration:none;}
+  .accueil-quiz-ico{flex:0 0 52px; width:52px; height:52px; border-radius:50%; background:var(--accent); color:var(--bg); display:flex; align-items:center; justify-content:center;}
+  .accueil-quiz-ico svg{width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;}
+  .accueil-quiz-texte{flex:1; min-width:0;}
+  .accueil-quiz-texte b{display:block; font-family:var(--font-display); font-size:21px; font-weight:600; line-height:1.25;}
+  .accueil-quiz-texte span{display:block; margin-top:4px; font-size:14px; color:var(--text-soft);}
+  .accueil-quiz-bouton{flex:0 0 auto; padding:11px 20px; border-radius:6px; background:var(--accent); color:var(--bg); font-weight:700; font-size:15px;}
+  .accueil-quiz:hover .accueil-quiz-bouton{filter:brightness(1.1);}
+  .accueil-quiz:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  @media (max-width:700px){ .accueil-quiz{flex-wrap:wrap; padding:16px;} .accueil-quiz-texte{flex:1 1 calc(100% - 70px);} .accueil-quiz-texte b{font-size:19px;} .accueil-quiz-bouton{flex:1 1 100%; text-align:center; min-height:44px; box-sizing:border-box;} }
+  .onglet-quiz .ico svg{stroke-width:2.2;}
   .debutant{display:block; margin:6px 0 22px; padding:11px 14px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:4px; background:var(--bg-elevated); color:inherit; text-decoration:none;}
   .debutant b{display:block; font-size:15px;}
   .debutant span{font-size:13.5px; color:var(--text-soft);}
@@ -1354,7 +1365,7 @@
     <div class="tab" data-tab="sondages" data-hub="presidentielle">Présidentielle 2027</div>
     <div class="tab" data-tab="budget" data-hub="argent">Argent public</div>
     <div class="tab" data-tab="scrutin" data-hub="elus">Élus et votes</div>
-    <div class="tab" data-tab="comprendre" data-hub="comprendre">Comprendre</div>
+    <div class="tab" data-tab="quiz" data-hub="quiz">Quiz</div>
   </div>
 </nav>
 
@@ -1362,24 +1373,25 @@
 <nav class="barre-mobile" aria-label="Rubriques (mobile)">
   <button type="button" class="onglet-mobile" data-tab="accueil" data-hub="une"><span class="ico" aria-hidden="true">
     <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z M4 9h16 M9 9v10"/></svg></span> À la une</button>
-  <button type="button" class="onglet-mobile" data-tab="actualites" data-hub="actu"><span class="ico" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5z M17 9h3v8a2 2 0 0 1-2 2 M7 9h7 M7 12h7 M7 15h4"/></svg></span> Actualités</button>
   <button type="button" class="onglet-mobile" data-tab="sondages" data-hub="presidentielle"><span class="ico" aria-hidden="true">
     <svg viewBox="0 0 24 24"><path d="M5 20V10 M12 20V4 M19 20v-7"/></svg></span> Présidentielle</button>
   <button type="button" class="onglet-mobile" data-tab="scrutin" data-hub="elus"><span class="ico" aria-hidden="true">
     <svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0 M7 18a5 5 0 0 1 10 0"/></svg></span> Élus</button>
+  <button type="button" class="onglet-mobile onglet-quiz" data-tab="quiz" data-hub="quiz"><span class="ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14 M12 17v.5"/></svg></span>Quiz</button>
   <button type="button" class="onglet-mobile" id="bouton-plus" aria-expanded="false" aria-controls="feuille-plus"><span class="ico" aria-hidden="true">
     <svg viewBox="0 0 24 24"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></span> Plus</button>
 </nav>
 <div class="feuille-fond" id="feuille-fond" hidden></div>
 <div class="feuille" id="feuille-plus" hidden role="dialog" aria-label="Autres rubriques">
   <div class="feuille-poignee" aria-hidden="true"></div>
+  <div class="feuille-groupe" aria-hidden="true">Actualités</div>
+  <button type="button" class="feuille-lien" data-tab="actualites"><b>Actualités</b><span>Les titres politiques des grands médias, avec leur source</span></button>
   <div class="feuille-groupe" aria-hidden="true">Argent public</div>
   <button type="button" class="feuille-lien" data-tab="budget"><b>Budget</b><span>Où va l'argent public, d'où il vient, déficit et dette</span></button>
   <button type="button" class="feuille-lien" data-tab="chiffres"><b>Économie</b><span>Chômage, inflation, déficit, dette, population</span></button>
-  <div class="feuille-groupe" aria-hidden="true">Comprendre</div>
+  <div class="feuille-groupe" aria-hidden="true">Pour débuter</div>
   <button type="button" class="feuille-lien" data-tab="comprendre"><b>Comprendre</b><span>Qui fait quoi, comment naît une loi, lexique</span></button>
-  <button type="button" class="feuille-lien" data-tab="quiz"><b>Quiz</b><span>Qu'auriez-vous voté à la place des députés ?</span></button>
   <div class="feuille-groupe" aria-hidden="true">Le site</div>
   <button type="button" class="feuille-lien" data-tab="methode"><b>Méthode</b><span>Sources, mises à jour, limites, neutralité</span></button>
   <button type="button" class="feuille-lien" data-tab="mentions"><b>Mentions légales</b><span>Éditeur, sources, données personnelles</span></button>
@@ -1394,6 +1406,11 @@
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
+    <a class="accueil-quiz" href="#quiz" data-tab-lien="quiz">
+      <span class="accueil-quiz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span>
+      <span class="accueil-quiz-texte"><b>Faites le quiz : avec quel groupe pensez-vous voter pareil ?</b><span>Quelques votes réels de l'Assemblée, à vous de choisir. Une minute, sans compte.</span></span>
+      <span class="accueil-quiz-bouton">Faire le quiz</span>
+    </a>
     <a class="debutant" href="#comprendre" data-tab-lien="comprendre"><b>Nouveau en politique ? Commencez ici</b><span>Qui décide quoi, comment naît une loi, comment lire un vote : l'essentiel en quelques fiches courtes.</span></a>
     <details class="accueil-plie accueil-chiffres"><summary>Les chiffres clés</summary>
       <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
@@ -1405,7 +1422,7 @@
       <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></div>
       <div class="accueil-rubrique" data-tab="budget" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></div>
       <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></div>
-      <div class="accueil-rubrique" data-tab="comprendre" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Comprendre</b><span>Qui décide quoi, comment naît une loi. Et le quiz.</span><small class="rubrique-pages">Comprendre · Quiz</small></div>
+      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre</small></div>
     </div>
     </details>
     <div class="faire-connaitre">
@@ -6707,13 +6724,13 @@ const HUBS = [
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages"], ["candidats","Candidats"], ["meetings","Agenda"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget"], ["chiffres","Économie"]] },
   { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes"], ["deputes","Députés"], ["senat","Sénat"], ["histo","Groupes"], ["dirigeants","Partis"], ["justice","Justice"]] },
-  { id:"comprendre", nom:"Comprendre", pages:[["comprendre","Comprendre"], ["quiz","Quiz"]] }
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz"], ["comprendre","Comprendre"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
 const hubDe = id => HUBS.find(h => h.pages.some(p => p[0] === id));
-// Rubriques rangées dans le panneau « Plus » (la barre du bas n'en montre que quatre)
-const RUBRIQUES_PLUS = ["budget", "chiffres", "comprendre", "quiz", "methode", "mentions"];
+// Rubriques rangées dans le panneau « Plus » (la barre du bas n'en montre que quatre : À la une, Présidentielle, Élus, Quiz)
+const RUBRIQUES_PLUS = ["actualites", "budget", "chiffres", "methode", "mentions"];
 
 const sousNav = document.createElement("nav");
 sousNav.className = "sous-nav";
