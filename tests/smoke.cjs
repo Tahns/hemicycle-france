@@ -200,6 +200,52 @@ function verifier(cond, message) {
     await page.close();
   }
 
+  // Bandeau « En direct » : data/direct.json injecté (événement de presse + séance), puis vide, puis absent (404)
+  {
+    const maintenant = Date.now();
+    const evenements = [
+      { id: "president-prise-de-parole-test", type: "prise-de-parole", titre: "Emmanuel Macron s'exprimera ce soir à 20 h (titre fictif très long pour vérifier le retour à la ligne sur mobile sans aucun débordement horizontal)", quand: "Ce soir à 20 h", publie: new Date(maintenant - 36e5).toISOString(), expire: new Date(maintenant + 5 * 36e5).toISOString(), source: { media: "Média test", url: "https://example.org/article" },
+        chaines: [["franceinfo", "https://www.francetvinfo.fr/en-direct/"], ["BFMTV", "https://www.bfmtv.com/en-direct/"], ["LCI", "https://www.tf1info.fr/direct/"], ["Public Sénat", "https://www.publicsenat.fr/direct"], ["France 24", "https://www.france24.com/fr/direct"]].map(([nom, url]) => ({ nom, url })) },
+      { id: "seance-an-test", type: "seance-an", titre: "Séance publique à l'Assemblée nationale : Proposition de loi fictive", quand: "Aujourd'hui", expire: new Date(maintenant + 5 * 36e5).toISOString(), source: { media: "Assemblée nationale", url: "https://www2.assemblee-nationale.fr/agendas/les-agendas" }, chaines: [{ nom: "Direct de l'Assemblée nationale", url: "https://videos.assemblee-nationale.fr/" }] },
+      { id: "expire", type: "discours", titre: "Titre expiré qui ne doit pas apparaître", quand: "x", expire: new Date(maintenant - 1000).toISOString(), source: { media: "Média test", url: "https://example.org/vieux" }, chaines: [{ nom: "BFMTV", url: "https://www.bfmtv.com/en-direct/" }] },
+    ];
+    for (const [nom, viewport] of [["ordinateur", { width: 1300, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
+      for (const cas of ["present", "vide", "absent"]) for (const theme of ["clair", "sombre"]) {
+        const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block" })).newPage();
+        const erreurs = [];
+        page.on("pageerror", (e) => erreurs.push(e.message));
+        await page.route(/\/data\/direct\.json/, (route) => cas === "absent" ? route.fulfill({ status: 404, body: "" })
+          : route.fulfill({ contentType: "application/json", body: JSON.stringify({ lastUpdated: new Date().toISOString(), evenements: cas === "present" ? evenements : [] }) }));
+        for (const vue of ["", "#actualites"]) {
+          const lieu = `${nom}/${theme}/${cas}/${vue || "accueil"}`;
+          await page.goto(base + vue, { waitUntil: "networkidle" });
+          if (theme === "sombre") await page.evaluate(() => document.documentElement.setAttribute("data-theme", "sombre"));
+          await page.waitForTimeout(300);
+          const bloc = page.locator(".view.active [data-direct]");
+          const visible = await bloc.isVisible();
+          verifier(visible === (cas === "present"), `bandeau « En direct » ${lieu} : ${visible ? "affiché" : "absent"} à tort`);
+          // Sans événement : aucun espace réservé, la vue démarre comme avant
+          if (cas !== "present") verifier(await bloc.evaluate((e) => e.hidden && getComputedStyle(e).display === "none" && e.innerHTML === ""), `bandeau ${lieu} : espace vide laissé dans la page`);
+          else {
+            const txt = await bloc.textContent();
+            verifier(/En direct/.test(txt) && /Titre de Média test/.test(txt) && /Assemblée nationale/.test(txt) && !/expiré/.test(txt), `bandeau ${lieu} : contenu inattendu`);
+            verifier((await bloc.locator(".direct-ev").count()) === 2, `bandeau ${lieu} : événements affichés ≠ 2 (expiré non retiré ?)`);
+            const liens = await bloc.locator("a").evaluateAll((as) => as.map((a) => a.href + "|" + a.rel));
+            verifier(liens.length >= 8 && liens.every((l) => /^https:\/\//.test(l) && /noopener/.test(l)), `bandeau ${lieu} : liens non https ou sans noopener`);
+            verifier(liens.some((l) => l.startsWith("https://videos.assemblee-nationale.fr/")), `bandeau ${lieu} : lien du direct de l'Assemblée absent`);
+            verifier((await page.$$("iframe, video, embed, object")).length === 0, `bandeau ${lieu} : contenu intégré interdit`);
+            const encadre = await bloc.evaluate((e) => { const r = e.getBoundingClientRect(); return r.left >= 0 && r.right <= window.innerWidth; });
+            verifier(encadre, `bandeau ${lieu} : déborde de l'écran`);
+          }
+          verifier((await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)) <= 1, `bandeau ${lieu} : défilement horizontal`);
+          if (process.env.CAPTURES_DIRECT && cas !== "vide") await page.screenshot({ path: path.join(process.env.CAPTURES_DIRECT, `direct-${nom}-${theme}-${cas}-${vue ? "actu" : "accueil"}.png`) });
+        }
+        verifier(erreurs.length === 0, `bandeau « En direct » ${nom}/${theme}/${cas} : erreurs JavaScript — ${erreurs.join(" | ")}`);
+        await page.close();
+      }
+    }
+  }
+
   // Âge et profession : jeu d'essai injecté (les données réelles n'ont ces champs qu'après la collecte), puis cas « champs absents »
   for (const avec of [true, false]) {
     const page = await (await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block" })).newPage(); // le service worker contournerait l'interception

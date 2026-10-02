@@ -591,6 +591,21 @@
   .accueil-rebours .fleche{font-size:14px; font-weight:600; white-space:nowrap; border-bottom:1px solid rgba(255,255,255,.5);}
   .accueil-rebours:hover .fleche{border-bottom-color:#fff;}
   .accueil-rebours[hidden]{display:none;}
+  /* Bandeau « En direct » : n'existe dans la page que lorsqu'un événement est détecté (data/direct.json) */
+  .direct-bandeau{margin:0 0 18px; padding:12px 16px 14px; background:var(--bg-elevated); border:1px solid var(--border); border-left:4px solid var(--rouge); border-radius:2px; min-width:0;}
+  .direct-bandeau[hidden]{display:none;}
+  .direct-ev + .direct-ev{margin-top:12px; padding-top:12px; border-top:1px solid var(--border-soft);}
+  .direct-tete{display:flex; align-items:center; flex-wrap:wrap; gap:4px 10px; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;}
+  .direct-pastille{display:inline-flex; align-items:center; gap:6px; color:var(--rouge);}
+  .direct-pastille::before{content:""; width:9px; height:9px; border-radius:50%; background:var(--rouge);}
+  .direct-quand{color:var(--text-soft); letter-spacing:.02em; text-transform:none; font-weight:600;}
+  .direct-titre{margin:6px 0 0; font-family:var(--font-display); font-size:19px; line-height:1.3; font-weight:600; overflow-wrap:anywhere;}
+  .direct-titre a{color:var(--text);}
+  .direct-media{margin:2px 0 0; font-size:13px; color:var(--text-soft);}
+  .direct-chaines{display:flex; flex-wrap:wrap; gap:6px 8px; margin:10px 0 0; padding:0; list-style:none;}
+  .direct-chaines a{display:inline-block; padding:5px 11px; border:1px solid var(--accent); border-radius:2px; font-size:13px; font-weight:600; text-decoration:none;}
+  .direct-chaines a:hover{background:var(--accent-dim);}
+  .direct-note{margin:8px 0 0; font-size:12px; color:var(--text-faint);}
   [data-theme="sombre"] .accueil-rebours{background:#23305E; color:#F0ECE3;}
   .vote-barre{display:flex; gap:2px; height:14px; margin:16px 0 8px; max-width:560px;}
   .vote-barre span{display:block; height:100%;}
@@ -1296,6 +1311,7 @@
 
 <main>
   <section class="view active" id="view-accueil">
+    <aside class="direct-bandeau" data-direct hidden aria-label="En direct"></aside>
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
     <div class="en-bref" id="en-bref" hidden>
@@ -1531,6 +1547,7 @@
   </section>
 
   <section class="view" id="view-actualites">
+    <aside class="direct-bandeau" data-direct hidden aria-label="En direct"></aside>
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Actualités</h2>
@@ -1635,6 +1652,7 @@
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart, Euronews). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Bandeau « En direct » :</b> affiché seulement quand un événement est détecté, jamais autrement. Un traitement automatique repère, dans les titres déjà relevés des médias ci-dessus, l'annonce ou la tenue d'une prise de parole du président de la République (allocution, conférence de presse, discours, interview) publiée depuis moins de six heures ; il y ajoute, les jours de séance, la séance publique de l'Assemblée nationale d'après son agenda officiel (sans les heures : le bandeau dit « aujourd'hui », pas « en cours »). Le bandeau cite le titre du média et renvoie à son article. Les chaînes proposées sont de simples liens vers leurs pages officielles de direct : <a href="https://www.francetvinfo.fr/en-direct/" target="_blank" rel="noopener">franceinfo</a>, <a href="https://www.bfmtv.com/en-direct/" target="_blank" rel="noopener">BFMTV</a>, <a href="https://www.tf1info.fr/direct/" target="_blank" rel="noopener">LCI</a>, <a href="https://www.publicsenat.fr/direct" target="_blank" rel="noopener">Public Sénat</a>, <a href="https://www.france24.com/fr/direct" target="_blank" rel="noopener">France 24</a> et le <a href="https://videos.assemblee-nationale.fr/" target="_blank" rel="noopener">direct officiel de l'Assemblée nationale</a>. Aucune vidéo n'est intégrée au site. Le Sénat n'est pas couvert faute de données de séance relevées.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
@@ -1691,6 +1709,9 @@
     <div class="texte-legal">
       <h3>Sources</h3>
       <p>Chaque rubrique cite sa source à côté des données. Les votes viennent de l'open data de l'Assemblée nationale et du Sénat ; les indicateurs économiques de l'Insee ; les sondages de la liste Wikipédia des enquêtes, confrontée aux notices de la Commission des sondages ; les candidats et les chefs de parti de Wikipédia ; les décisions de justice des juridictions et de la presse. La liste détaillée figure dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a>.</p>
+
+      <h3>Bandeau « En direct »</h3>
+      <p>Quand le président de la République prend la parole (ou l'annonce) ou qu'une séance publique se tient à l'Assemblée nationale, un bandeau signale l'événement en haut de l'accueil et des Actualités, avec le titre de presse qui l'annonce, son média et son lien. Il disparaît six heures après la publication du titre. Il est déclenché par des mots-clés dans des titres déjà relevés, sans aucune appréciation ; il peut donc manquer un événement ou, rarement, en signaler un à tort. Les chaînes ne sont que des liens vers leurs pages officielles de direct.</p>
 
       <h3>Fréquence de mise à jour</h3>
       <p>Un traitement automatique est lancé toutes les heures : il relit les sources publiques, vérifie la cohérence des fichiers puis publie. Les dates ci-dessous sont lues dans les fichiers de données eux-mêmes ; elles indiquent la dernière réécriture du fichier, pas la date des faits.</p>
@@ -3202,6 +3223,29 @@ function renderActualites(){
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
   liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
 }
+/* ---------- Bandeau « En direct » (data/direct.json, écrit par scripts/detecter-direct.js) ----------
+   Affiché seulement si un événement est détecté et non expiré ; sinon l'élément reste masqué (aucun espace).
+   Liens sortants uniquement : jamais de lecteur ni d'iframe. */
+let DIRECT = null;
+function renderDirect(){
+  const evs = (DIRECT?.evenements || []).filter(e=> e?.titre && Date.parse(e.expire) > Date.now() && /^https:\/\//.test(e.source?.url || ""));
+  document.querySelectorAll("[data-direct]").forEach(bloc=>{
+    if(!evs.length){ bloc.hidden = true; bloc.innerHTML = ""; return; }
+    bloc.innerHTML = evs.map(e=>{
+      const presse = e.type !== "seance-an";
+      const chaines = (e.chaines || []).filter(c=>/^https:\/\//.test(c.url || ""));
+      return `<div class="direct-ev">
+        <div class="direct-tete"><span class="direct-pastille">En direct</span><span class="direct-quand">${esc(e.quand)}</span></div>
+        <p class="direct-titre">${presse ? `« <a href="${lien(e.source.url)}" target="_blank" rel="noopener">${esc(e.titre)}</a> »` : `<a href="${lien(e.source.url)}" target="_blank" rel="noopener">${esc(e.titre)}</a>`}</p>
+        <p class="direct-media">${presse ? "Titre de" : "Source :"} ${esc(e.source.media)}</p>
+        ${chaines.length ? `<ul class="direct-chaines">${chaines.map(c=>`<li><a href="${lien(c.url)}" target="_blank" rel="noopener">${presse ? "Suivre sur" : ""} ${esc(c.nom)} ↗</a></li>`).join("")}</ul>` : ""}
+      </div>`;
+    }).join("") + `<p class="direct-note">Liens vers les pages officielles de direct (ouverture dans un nouvel onglet). Le site ne diffuse aucune vidéo.</p>`;
+    bloc.hidden = false;
+  });
+}
+setInterval(renderDirect, 60000); // un événement expiré disparaît sans recharger la page
+
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
@@ -6267,10 +6311,11 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites, quiz] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites, quiz, direct] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
     lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"), lireJSON("data/quiz.json"),
+    lireJSON("data/direct.json"), // fichier optionnel : absent = aucun bandeau
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
@@ -6278,6 +6323,7 @@ async function loadPetitesDonnees(){
   if(sondages?.instituts?.length) appliquerSondages(sondages);
   if(probas?.candidats?.length) PROBAS = probas;
   if(actualites?.sujets) ACTUALITES = actualites;
+  if(direct?.evenements) DIRECT = direct;
   if(quiz?.questions) QUIZ_PERSO = quiz.questions;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations
@@ -6359,6 +6405,7 @@ async function initSite(){
   await cede();
   renderSourceBar();
   await cede();
+  renderDirect();
   renderAccueilActualites();
   renderActualites();
   renderSondageAverage();

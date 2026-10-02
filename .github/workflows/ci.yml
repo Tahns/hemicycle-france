@@ -16,7 +16,7 @@ jobs:
       - name: Syntaxe des scripts
         run: for f in scripts/*.js; do node --check "$f"; done
       - name: Tests du garde-fou et des licences
-        run: node tests/garde.test.mjs
+        run: node tests/garde.test.mjs && node tests/detecter-direct.test.mjs
       - name: Cohérence des données
         run: node scripts/check-data.js
       - name: Installer Playwright (Chromium)
