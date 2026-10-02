@@ -2144,7 +2144,7 @@
           <svg viewBox="0 0 340 276" role="img" aria-labelledby="fig1-t"><title id="fig1-t">Schéma : le président nomme le Premier ministre et peut dissoudre l'Assemblée ; le gouvernement et le Parlement (Assemblée nationale et Sénat) travaillent ensemble ; le Conseil constitutionnel vérifie les lois.</title>
             <defs><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="sv-ac"/></marker></defs>
             <rect class="sv-box sv-fort" x="90" y="6" width="160" height="40" rx="6"/>
-            <text class="sv-t" x="170" y="23" text-anchor="middle">Président</text><text class="sv-s" x="170" y="38" text-anchor="middle">de la République</text>
+            <text class="sv-t" x="170" y="23" text-anchor="middle">Président de la</text><text class="sv-s" x="170" y="38" text-anchor="middle">République</text>
             <rect class="sv-box" x="4" y="96" width="132" height="54" rx="6"/>
             <text class="sv-t" x="70" y="116" text-anchor="middle">Premier ministre</text><text class="sv-t" x="70" y="131" text-anchor="middle">et gouvernement</text><text class="sv-s" x="70" y="144" text-anchor="middle">dirigent</text>
             <rect class="sv-zone" x="186" y="84" width="150" height="124" rx="8"/>
@@ -3938,7 +3938,8 @@ function renderSondageAverage(){
   document.getElementById("sondage-institut-title").textContent =
     `${inst.nom}, enquête du ${inst.date}`;
   document.getElementById("sondage-avg-sub").innerHTML = `<details class="pli-mobile" open><summary class="pli-titre">Méthode et source de l'enquête</summary>` +
-    `${inst.hypothese} · Échantillon : ${inst.echantillon}` +
+    `${inst.hypothese}` +
+    ` · Échantillon : ${inst.echantillon}` +
     // Marge d'erreur usuelle (intervalle de confiance à 95 %) pour un score de 50 %, la plus large possible
     (inst.n ? ` · Marge d'erreur : environ ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} points pour un score de 50 %, moins pour les petits scores` : "") +
     (inst.notice
@@ -4462,14 +4463,10 @@ function quizPhrase(sc, sujet){
 // derniers textes votés, dont l'intitulé officiel est simplifié automatiquement
 let QUIZ_PERSO = []; // data/quiz.json
 const QUIZ_NB = 12, QUIZ_AUTO = 0; // uniquement des questions rédigées à la main (les intitulés officiels des derniers textes sont trop techniques)
+// L'intitulé officiel reste tel quel (en français, entre guillemets) : seule la formule autour de lui se traduit
 function questionAuto(l){
-  const t = l.titre
-    .replace(/^l[’']ensemble (du|de la) /i, "")
-    .replace(/\s*\((texte de la commission mixte paritaire|[^)]*lecture[^)]*)\)\.?$/i, "")
-    .replace(/^(projet|proposition) de loi( organique| constitutionnelle)?/i, (_, x, y)=> y ? `la loi${y}` : "la loi")
-    .replace(/^(la loi(?: organique| constitutionnelle)?) relatif/, "$1 relative")
-    .replace(/\.$/, "");
-  return `Auriez-vous voté pour ${t} ?`;
+  const titre = (l.dossierTitre || titreLoi(l)).replace(/\s*\([^)]*\)\.?$/, "").replace(/\.$/, "");
+  return `Auriez-vous voté pour ce texte : « ${titre} » ?`;
 }
 function choisirQuestionsQuiz(){
   const vus = new Set();
@@ -4500,7 +4497,7 @@ function renderQuiz(){
     <div class="quiz-card">
       <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · ${esc(loi.quizTheme || "")}</div>
       <div class="quiz-question">${esc(loi.quizQuestion || titreLoi(loi))}</div>
-      <p class="quiz-aide">${esc(loi.quizAide || "")} Voté le ${esc(loi.date)}.</p>
+      <p class="quiz-aide">${esc(loi.quizAide || "")} <span class="quiz-vote">Voté le ${esc(loi.date)}.</span></p>
       <div class="quiz-options" data-loi="${loi.id}">
         <button type="button" class="quiz-option" data-vote="pour">Oui</button>
         <button type="button" class="quiz-option" data-vote="contre">Non</button>
@@ -4588,7 +4585,7 @@ function afficherResultatQuiz(scores, lignes, quand){
       <div class="quiz-result-pct">${s.pct} %</div>
     </div>
   `).join("");
-  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString(document.documentElement.lang || "fr", { day:"numeric", month:"long", year:"numeric" }) : "";
+  const maj = quand && !isNaN(Date.parse(quand)) ? new Date(quand).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }).replace(/^1 /, "1er ") : "";
   document.getElementById("quiz-enregistre").textContent = maj ? `Résultat enregistré sur cet appareil le ${maj}.` : "Résultat enregistré sur cet appareil.";
   document.getElementById("quiz-restart").addEventListener("click", ()=>{ try{ localStorage.removeItem("quiz-resultat"); }catch(e){} renderQuiz(); });
 }
@@ -4616,9 +4613,8 @@ const presDate = iso => {
   if(!iso) return "";
   if(String(iso).length === 4) return String(iso);
   const d = new Date(iso + "T12:00:00Z");
-  const lang = document.documentElement.lang || "fr";
-  const r = d.toLocaleDateString(lang, { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" });
-  return lang === "fr" ? r.replace(/^1 /, "1er ") : r;
+  // Toujours écrite en français : la date est reformulée pour la langue active par localiserFormats (Intl), comme partout ailleurs
+  return d.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric", timeZone:"UTC" }).replace(/^1 /, "1er ");
 };
 const presPrecis = iso => String(iso || "").length === 10;
 // Mois entiers écoulés entre deux dates complètes (AAAA-MM-JJ)
@@ -4860,7 +4856,10 @@ function budgetDepenses(d){
   const postes = [...d.postes].sort((a,b)=> b.md - a.md);
   const max = Math.max(...postes.map(p=>p.pct), 1);
   const tete = postes.slice(0, 4).map(p=> `${fmtEur(p.pct)} ${BUDGET_VERS[p.code] || "à : " + p.libelle.toLowerCase()}`);
-  const phrase = `Pour 100 € dépensés par l'État, les collectivités et la Sécurité sociale, ${tete.slice(0,-1).join(", ")} et ${tete[tete.length-1]}. Le détail est ci-dessous.`;
+  // Les quatre premiers postes, chacun « 41,5 € à la protection sociale » (gabarits de BUDGET_VERS), dans une phrase entière
+  const phrase = tete.length === 4
+    ? `Pour 100 € dépensés par l'État, les collectivités et la Sécurité sociale, ${tete[0]}, ${tete[1]}, ${tete[2]} et ${tete[3]}. Le détail est ci-dessous.`
+    : `Pour 100 € dépensés par l'État, les collectivités et la Sécurité sociale, ${tete.slice(0,-1).join(", ")} et ${tete[tete.length-1]}. Le détail est ci-dessous.`;
   return `<div class="budget-bloc"><h3>Où va l'argent public ?</h3>
     <p class="budget-phrase">${esc(phrase)}</p>
     <p class="budget-phrase">En ${d.annee}, les dépenses publiques ont représenté <b>${fmtMd(d.totalMd)}</b>, classées par grande fonction (classification internationale COFOG).</p>
@@ -5041,12 +5040,15 @@ function renderAccueil(){
   const fr = n => String(n).replace(".", ",");
   const fourchette = r => r[0]===r[1] ? `${fr(r[0])} %` : `${fr(r[0])} à ${fr(r[1])} %`;
 
+  const etapeDernier = etapeLoi(derniereLoi), adopteDernier = derniereLoi.resultat==="adopte";
   const highlights = [
     {
       eyebrow: "Dernier texte voté",
       titre: derniereLoi.dossierTitre || titreLoi(derniereLoi),
-      sous: `${derniereLoi.resultat==="adopte" ? "Adopté" : "Rejeté"} le ${derniereLoi.date}${etapeLoi(derniereLoi) ? ` (${etapeLoi(derniereLoi)})` : ""}, par ${formatNombre(totaux.pour)} voix pour et ${formatNombre(totaux.contre)} contre.` +
-        `${derniereLoi.auteur ? ` Texte déposé par ${derniereLoi.auteur}.` : ""} Voir le vote de chaque groupe.`,
+      // Trois phrases entières (le décompte, déjà dans la barre juste dessous, n'est pas répété)
+      sous: (etapeDernier ? (adopteDernier ? `Adopté le ${derniereLoi.date} (${etapeDernier}).` : `Rejeté le ${derniereLoi.date} (${etapeDernier}).`)
+                          : (adopteDernier ? `Adopté le ${derniereLoi.date}.` : `Rejeté le ${derniereLoi.date}.`)) +
+        (derniereLoi.auteur ? ` Texte déposé par ${derniereLoi.auteur}.` : "") + " Voir le vote de chaque groupe.",
       tab: "scrutin", loi: derniereLoi.id, cta: "Voir le vote siège par siège"
     },
     enTete ? {
@@ -5058,7 +5060,7 @@ function renderAccueil(){
     prochainMeeting ? {
       eyebrow: "Agenda",
       titre: prochainMeeting.titre,
-      sous: `${prochainMeeting.jour} ${prochainMeeting.mois.toLowerCase().replace(".", "")}, ${prochainMeeting.lieu}.`,
+      sous: `${prochainMeeting.jour} ${new Date(prochainMeeting.debut + "T12:00:00").toLocaleDateString("fr-FR", { month:"long" })} · ${prochainMeeting.lieu}`,
       tab: "meetings", cta: "Tout l'agenda"
     } : {
       eyebrow: "Agenda",
@@ -5071,7 +5073,6 @@ function renderAccueil(){
   // Barre du dernier vote (pour / contre / abstention), avec légende en toutes lettres
   const abst = Object.values(derniereLoi.votes).filter(Boolean).reduce((t,v)=>t+(v.abst||0), 0);
   const exprimes = totaux.pour + totaux.contre + abst;
-  if(exprimes) highlights[0].sous = highlights[0].sous.replace(/, par .*? contre\./, ".");
   if(exprimes) highlights[0].extra = `
     <div class="vote-barre" role="img" aria-label="${formatNombre(totaux.pour)} pour, ${formatNombre(totaux.contre)} contre, ${formatNombre(abst)} abstentions">
       ${[["p",totaux.pour],["c",totaux.contre],["a",abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}
@@ -5432,7 +5433,7 @@ async function ouvrirSenateur(id){
       <h3>${esc(s.nom)}</h3>
       <span class="depute-groupe"><span class="dot" style="background:${g.couleur}"></span>${esc(g.nom)}</span>
     </div>
-    <p class="depute-lieu">${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "représentant les Français établis hors de France" : `de ${esc(s.dep)}`}.</p>
+    <p class="depute-lieu">${/^Français/.test(s.dep) ? (s.f ? "Sénatrice représentant les Français établis hors de France." : "Sénateur représentant les Français établis hors de France.") : (s.f ? `Sénatrice de ${esc(s.dep)}.` : `Sénateur de ${esc(s.dep)}.`)}</p>
     <div class="depute-actions">
       <a href="https://www.senat.fr/${s.slug ? `senateur/${encodeURIComponent(s.slug)}.html` : "senateurs/senatl.html"}" target="_blank" rel="noopener">Fiche officielle au Sénat</a>
       <button type="button" class="lien-bouton bouton-partage" data-partage="senateur">Partager cette fiche</button>
@@ -5711,12 +5712,12 @@ function blocParcours(d){
   const g = GROUPES[d.groupe];
   const depuis = dateCourte(d.depuis);
   const etapes = [
-    `<li><b>${d.f ? "Députée" : "Député"} de ${esc(circoDepute(d))}</b> (${esc(d.numDep)})<small>${depuis ? `en fonction depuis le ${esc(depuis)}` : "mandat en cours, 17e législature"}</small></li>`,
+    `<li><b>${d.f ? `Députée de ${esc(circoDepute(d))}` : `Député de ${esc(circoDepute(d))}`}</b> (${esc(d.numDep)})<small>${depuis ? `en fonction depuis le ${esc(depuis)}` : "mandat en cours, 17e législature"}</small></li>`,
     `<li><b>Groupe : ${esc(p.nom)}</b>${g?.membres ? `<small>${formatNombre(g.membres)} membres à l'Assemblée</small>` : ""}</li>`,
   ];
   if(g?.president && g.president === d.nom){
     const dg = dateCourte(g.presidentDepuis);
-    etapes.push(`<li><b>${g.presidente ? "Présidente" : "Président"} du groupe</b>${dg ? `<small>depuis le ${esc(dg)}</small>` : ""}</li>`);
+    etapes.push(`<li><b>${g.presidente ? "Présidente du groupe" : "Président du groupe"}</b>${dg ? `<small>depuis le ${esc(dg)}</small>` : ""}</li>`);
   }
   etapes.push(`<li id="parcours-commissions" hidden></li>`);
   return `<h3>Parcours</h3><ol>${etapes.join("")}</ol>`;
@@ -5750,7 +5751,7 @@ function renderDeputeFiche(d){
       <h3>${esc(d.nom)}</h3>
       <span class="depute-groupe"><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</span>
     </div>
-    <p class="depute-lieu">${d.f ? "Députée" : "Député"} de ${esc(circoDepute(d))} (${esc(d.numDep)})${depuis ? `, en fonction depuis le ${esc(depuis)}` : ""}.</p>
+    <p class="depute-lieu">${d.f ? (depuis ? `Députée de ${esc(circoDepute(d))} (${esc(d.numDep)}), en fonction depuis le ${esc(depuis)}.` : `Députée de ${esc(circoDepute(d))} (${esc(d.numDep)}).`) : (depuis ? `Député de ${esc(circoDepute(d))} (${esc(d.numDep)}), en fonction depuis le ${esc(depuis)}.` : `Député de ${esc(circoDepute(d))} (${esc(d.numDep)}).`)}</p>
     ${(()=>{ const age = ageDepute(d); const bits = [age != null ? `${age} ans` : "", d.profession ? esc(d.profession) : ""].filter(Boolean); return bits.length ? `<p class="depute-lieu" id="depute-identite">${bits.join(" · ")}</p>` : ""; })()}
     <div class="depute-actions">
       <a href="https://www.assemblee-nationale.fr/dyn/deputes/${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fiche officielle à l'Assemblée</a>
@@ -5895,7 +5896,7 @@ function renderRecherche(){
     .sort((a,b)=> (["texte","censure"].includes(categorieLoi(b)) - ["texte","censure"].includes(categorieLoi(a))) || (b.numero||0) - (a.numero||0))
     .slice(0, 6).map(l=>({ titre:titreLoi(l), sous:`${l.date} · ${l.resultat==="adopte"?"adopté":"rejeté"} · Assemblée nationale`, action:()=>{ location.hash = "scrutin-" + (l.numero ?? l.id); } }));
   if(votes.length) groupes.push(["Votes de l'Assemblée", votes]);
-  const deputes = (DEPUTES || []).filter(d => ok(d.nom)).slice(0, 5).map(d=>({ titre:d.nom, sous:`${d.f ? "Députée" : "Député"} ${d.groupe} · ${circoDepute(d)}`, action:()=>{ location.hash = "depute-" + d.id; } }));
+  const deputes = (DEPUTES || []).filter(d => ok(d.nom)).slice(0, 5).map(d=>({ titre:d.nom, sous:`${d.f ? `Députée ${d.groupe}` : `Député ${d.groupe}`} · ${circoDepute(d)}`, action:()=>{ location.hash = "depute-" + d.id; } }));
   if(deputes.length) groupes.push(["Députés", deputes]);
   // Communes : la table n'est chargée qu'à la première recherche d'au moins 3 lettres
   if(norm(brut).length >= 3 && !COMMUNES){ chargerCommunes().then(()=>{ if(!document.getElementById("recherche").hidden) renderRecherche(); }); }
@@ -8333,11 +8334,11 @@ function prechargerProbable(){
    Les contenus officiels et de presse ne figurent pas dans les dictionnaires : ils restent en français. */
 /* i18n-ignorer : noms des langues, écrits dans leur propre langue */
 const LANGUES = [
-  { code:"fr", nom:"Français",  icone:"fr" },
-  { code:"en", nom:"English",   icone:"gb" },
-  { code:"es", nom:"Español",   icone:"es" },
-  { code:"pt", nom:"Português", icone:"pt" },
-  { code:"de", nom:"Deutsch",   icone:"de" },
+  { code:"fr", nom:"Français",  icone:"fr", locale:"fr-FR" },
+  { code:"en", nom:"English",   icone:"gb", locale:"en-GB" },
+  { code:"es", nom:"Español",   icone:"es", locale:"es-ES" },
+  { code:"pt", nom:"Português", icone:"pt", locale:"pt-PT" },
+  { code:"de", nom:"Deutsch",   icone:"de", locale:"de-DE" },
 ];
 /* i18n-fin-ignorer */
 let LANGUE = "fr", DICO_ACTIF = null, TEXTES_FR = null, JETON_LANGUE = 0;
@@ -8351,23 +8352,149 @@ const SANS_TRADUCTION = "[translate=no],.sans-traduction,script,style,textarea,n
 const normaliserTexte = s => s.replace(/[ \t\r\n\f]+/g, " ").trim();
 const marquesDe = s => s.match(/\{\d+\}|%[sd]/g) || [];
 
-function construireDico(fr, tr){
-  const exact = new Map(), motifs = [], cles = new Map();
-  for(const [cle, texteFr] of Object.entries(fr)){
-    const sortie = tr[cle];
-    if(typeof sortie !== "string" || !sortie.trim()) continue;
+/* ---------- Dates, heures, durées et nombres : formats de la langue active ----------
+   Le site écrit ses dates et ses nombres à la française (« 2 octobre 2026 à 14 h 16 », « 1 504 Md€ », « 5,1 % »,
+   « il y a 1 h »). Ici, et nulle part ailleurs, ces écritures sont reconnues puis reformulées avec Intl
+   (DateTimeFormat, NumberFormat, RelativeTimeFormat) selon la langue active : fr-FR, en-GB, es-ES, pt-PT, de-DE.
+   Les images de partage dessinées dans un canvas ne passent pas par ici : elles restent en français. */
+/* i18n-ignorer : formats de dates, d'heures et de nombres (écritures françaises reconnues, unités et connecteurs de chaque langue) */
+const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const MOIS_ABR_FR = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+const JOURS_FR = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+const JOURS_ABR_FR = ["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
+const echapperRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const RE_M = "(?:" + [...new Set([...MOIS_FR, ...MOIS_ABR_FR])].sort((a, b)=> b.length - a.length).map(echapperRe).join("|") + ")";
+const RE_J = "(?:" + [...JOURS_FR, ...JOURS_ABR_FR].sort((a, b)=> b.length - a.length).map(echapperRe).join("|") + ")";
+const RE_D = "(\\d{1,2})(?:er|ᵉʳ)?";
+const AVANT = "(?<![\\p{L}\\d])", APRES = "(?![\\p{L}\\d])";
+const RE_HEURE = "(\\d{1,2})\\s?h(?:\\s?(\\d{2}))?";
+const FORMATS_I18N = [
+  // il y a 14 min · il y a 1 h
+  { re:new RegExp(`${AVANT}il y a\\s+(\\d+)\\s*(min|h|jours?|j|semaines?|mois|ans?)${APRES}`, "giu"), f:(loc, m)=> formaterRelatif(loc, +m[1], m[2]) },
+  // 28 août - 3 septembre 2026
+  { re:new RegExp(`${AVANT}${RE_D}\\s+(${RE_M})\\s*[-–]\\s*${RE_D}\\s+(${RE_M})(?:\\s+(\\d{4}))?${APRES}`, "giu"), f:(loc, m)=> formaterDate(loc, { j:+m[1], m:indexMois(m[2]), an:+m[5] || 0, abr:m[2].endsWith(".") || m[4].endsWith("."), fin:{ j:+m[3], m:indexMois(m[4]) } }) },
+  // dimanche 18 avril 2027 · 25-29 septembre 2026 · 2 octobre 2026 à 14 h 16 · 1er septembre
+  { re:new RegExp(`${AVANT}(?:(${RE_J})\\s+)?${RE_D}(?:\\s*[-–]\\s*${RE_D})?\\s+(${RE_M})(?:\\s+(\\d{4}))?(?:\\s+à\\s+${RE_HEURE})?${APRES}`, "giu"),
+    f:(loc, m)=>{
+      const abr = m[4].endsWith(".") || (!!m[1] && m[1].endsWith("."));
+      const d = formaterDate(loc, { sem:m[1] ? Math.max(JOURS_FR.indexOf(m[1].toLowerCase()), JOURS_ABR_FR.indexOf(m[1].toLowerCase())) : -1, j:+m[2], m:indexMois(m[4]), an:+m[5] || 0, abr, fin:m[3] ? { j:+m[3], m:indexMois(m[4]) } : null });
+      return m[6] === undefined ? d : d + formaterConnecteur(loc, +m[6]) + formaterHeure(loc, +m[6], +(m[7] || 0));
+    } },
+  // septembre 2026
+  { re:new RegExp(`${AVANT}(${RE_M})\\s+(\\d{4})${APRES}`, "giu"), f:(loc, m)=> fmtIntl(loc, { month:m[1].endsWith(".") ? "short" : "long", year:"numeric", timeZone:"UTC" }).format(new Date(Date.UTC(+m[2], indexMois(m[1]), 1))) },
+  // 14 h 16 · 16h00
+  { re:new RegExp(`${AVANT}(\\d{1,2})\\s?h\\s?(\\d{2})${APRES}`, "giu"), f:(loc, m)=> formaterHeure(loc, +m[1], +m[2]) },
+  // 5e circonscription · 2ᵉ trimestre · 1ʳᵉ circonscription
+  { re:new RegExp(`${AVANT}(\\d{1,2})(ʳᵉ|ᵉʳ|ᵉ|re|er|e)(?=\\s+(\\p{L}+))`, "giu"), f:(loc, m)=> formaterOrdinal(loc, +m[1], m[3]) },
+  // 1 504 Md€ · 5,1 % · 3 595,5 · 100 €
+  { re:new RegExp(`${AVANT}(\\d{1,3}(?:[\\u00a0\\u202f ]\\d{3})+|\\d+)(?:,(\\d{1,2})(?!\\d))?(?:([\\u00a0\\u202f ]?)(Md€|M€|%|€))?${APRES}`, "gu"), f:(loc, m)=> formaterNombre(loc, m) },
+];
+
+function fmtIntl(loc, opts){
+  const cle = loc + JSON.stringify(opts);
+  let f = FORMATS_CACHE.get(cle);
+  if(!f){ f = new Intl.DateTimeFormat(loc, opts); FORMATS_CACHE.set(cle, f); }
+  return f;
+}
+const FORMATS_CACHE = new Map();
+function indexMois(m){ m = m.toLowerCase(); const i = MOIS_FR.indexOf(m); return i >= 0 ? i : MOIS_ABR_FR.indexOf(m); }
+
+function formaterDate(loc, o){
+  const opts = { timeZone:"UTC", day:"numeric", month:o.abr ? "short" : "long" };
+  if(o.an) opts.year = "numeric";
+  const sem = o.sem === undefined ? -1 : o.sem;
+  if(sem >= 0) opts.weekday = o.abr ? "short" : "long";
+  let an = o.an || 2024;
+  if(!o.an && sem >= 0){ for(let a = 2026; a < 2040; a++) if(new Date(Date.UTC(a, o.m, o.j)).getUTCDay() === sem){ an = a; break; } }
+  const f = fmtIntl(loc, opts), debut = new Date(Date.UTC(an, o.m, o.j));
+  if(o.fin) return f.formatRange(debut, new Date(Date.UTC(an, o.fin.m, o.fin.j)));
+  return f.format(debut);
+}
+function formaterHeure(loc, h, mn){
+  return fmtIntl(loc, { hour:"numeric", minute:"2-digit", hourCycle:"h23", timeZone:"UTC" }).format(new Date(Date.UTC(2026, 0, 1, h, mn)));
+}
+function formaterConnecteur(loc, h){
+  const l = loc.slice(0, 2);
+  return l === "en" ? " at " : l === "es" ? (h === 1 ? " a la " : " a las ") : l === "pt" ? (h === 1 ? " à " : " às ") : l === "de" ? " um " : " à ";
+}
+function formaterRelatif(loc, n, u){
+  const unite = /^min/.test(u) ? "minute" : u === "h" ? "hour" : /^j/.test(u) ? "day" : /^sem/.test(u) ? "week" : u === "mois" ? "month" : "year";
+  return new Intl.RelativeTimeFormat(loc, { numeric:"always", style:"long" }).format(-n, unite);
+}
+function formaterOrdinal(loc, n, mot){
+  const l = loc.slice(0, 2), f = /^circ[ou]n?scri/i.test(mot); // circunscripción, circunscrição (féminins) ; « círculo » est masculin
+  if(l === "en"){ const r = n % 100, s = r >= 11 && r <= 13 ? "th" : ({ 1:"st", 2:"nd", 3:"rd" })[n % 10] || "th"; return n + s; }
+  if(l === "es" || l === "pt") return n + (f ? ".ª" : ".º");
+  if(l === "de") return n + ".";
+  return null;
+}
+function formaterNombre(loc, m){
+  const [tout, ent, dec, espace, unite] = m, l = loc.slice(0, 2), groupe = /[\s\u00a0\u202f]/.test(ent);
+  if(!dec && !unite && !groupe) return tout;
+  if(!dec && unite && !espace && !groupe) return tout; // « 100% » n'est pas de l'écriture française (« 100 % ») : on n'y touche pas
+  const n = Number(ent.replace(/\D/g, "") + (dec ? "." + dec : ""));
+  const d = dec ? dec.length : 0;
+  const s = new Intl.NumberFormat(loc, { minimumFractionDigits:d, maximumFractionDigits:d }).format(n);
+  if(!unite) return s;
+  const fin = " ";
+  if(unite === "%") return l === "en" || l === "pt" ? s + "%" : s + fin + "%";
+  if(unite === "€") return l === "en" ? "€" + s : s + fin + "€";
+  if(unite === "M€") return l === "en" ? "€" + s + "m" : s + fin + "M€";
+  return l === "en" ? "€" + s + "bn" : l === "de" ? s + fin + "Mrd. €" : s + fin + "mil M€"; // Md€ : milliards d'euros
+}
+
+const MOIS_SEUL = new RegExp(`^(${RE_M})$`, "iu");
+// Texte avec ses formats reformulés pour la langue de loc. Mode strict : un texte qui n'est pas entièrement une date, une heure ou un
+// nombre (titre d'article, intitulé officiel) reste tel quel, pour ne pas mêler deux langues dans une phrase française.
+function localiserFormats(s, loc, strict){
+  if(!loc) return s;
+  let reste = s, sortie = s;
+  for(const { re, f } of FORMATS_I18N){
+    re.lastIndex = 0;
+    sortie = sortie.replace(re, (...a)=>{
+      const g = a.slice(0, a.findIndex(x=> typeof x === "number"));
+      const r = f(loc, g);
+      return r === null ? g[0] : r;
+    });
+  }
+  if(!strict) return sortie;
+  if(MOIS_SEUL.test(s.trim())){ const i = indexMois(s.trim()); return fmtIntl(loc, { month:/\.$/.test(s) ? "short" : "long", timeZone:"UTC" }).format(new Date(Date.UTC(2026, i, 1))); }
+  if(sortie === s) return s;
+  for(const { re } of FORMATS_I18N){ re.lastIndex = 0; reste = reste.replace(re, "\u0001"); }
+  return /(?:^|[^\p{L}'’-])\p{Ll}{2,}/u.test(reste.replace(/\u0001/g, " ")) ? s : sortie; // un mot en minuscules : phrase française à ne pas toucher
+}
+
+/* i18n-fin-ignorer */
+
+// « {2} % » : espace avant le signe pourcent selon la langue (aucune en anglais et en portugais, insécable en espagnol et en allemand)
+const typoGabarit = (s, code)=> s.replace(/(\{\d+\})[\u00a0\u202f ]%/g, (m, x)=> x + (code === "en" || code === "pt" ? "" : "\u00a0") + "%");
+// (« M. Boris Vallaud », « Mme Panot » : le point d'une abréviation ne termine pas une phrase)
+const RE_COUPURE_PHRASE = /(?:(?:[!?…»]|(?<!\b(?:M|Mme|Mmes|MM|Me|Dr|Pr|St|Ste|Mlle))\.) +[\p{Lu}«"(]|\) +[\p{Lu}«"])/u;
+function construireDico(fr, tr, code, donnees){
+  const exact = new Map(), motifs = [], petits = [], cles = new Map();
+  const ajouter = (texteFr, sortie, libre)=>{
+    // {1#} : emplacement réservé à un nombre ou une année (« en {1#} » ne doit pas attraper « en cours »)
+    const numeriques = new Set((texteFr.match(/\{\d+#\}/g) || []).map(x=>x.slice(1, -2)));
+    texteFr = texteFr.replace(/\{(\d+)#\}/g, "{$1}");
     const permises = marquesDe(texteFr); // une marque peut être omise (accord en genre ou en nombre), jamais ajoutée
-    if(marquesDe(sortie).some(x=>!permises.includes(x)) || /<\/?[a-z][^>]*>/i.test(sortie)) continue;
-    cles.set(cle, sortie);
+    if(typeof sortie !== "string" || !sortie.trim() || marquesDe(sortie).some(x=>!permises.includes(x)) || /<\/?[a-z][^>]*>/i.test(sortie)) return false;
     if(/\{\d+\}/.test(texteFr)){
       // Texte à trous : morceaux fixes et numéros des marques (comparaison par indexOf, sans expression régulière coûteuse)
       const morceaux = texteFr.split(/\{\d+\}/), nums = (texteFr.match(/\{\d+\}/g) || []).map(x=>x.slice(1, -1));
       // Un motif presque sans texte fixe (« {1}, {2} de {3} ») attraperait n'importe quel titre officiel : on l'ignore
-      if(morceaux.join("").replace(/[^\p{L}]/gu, "").length >= 4) motifs.push({ morceaux, nums, sortie, poids:morceaux.join("").length });
+      const lettres = morceaux.join("").replace(/[^\p{L}]/gu, "").length;
+      if(lettres >= 4 || libre) motifs.push({ morceaux, nums, sortie, numeriques, sep:texteFr.includes(" · "), ph:RE_COUPURE_PHRASE.test(texteFr), attache:/\p{L}\{\d+\}|\{\d+\}\p{L}/u.test(texteFr), libre:libre || (lettres >= 9 && /\S\s+\S/.test(morceaux.join("").replace(/[^\p{L}\s]/gu, "").trim())), poids:morceaux.join("").length }); // assez de texte fixe (« (vote final) ») : la valeur insérée peut être longue, un titre officiel
+      else if(lettres >= 3) petits.push({ morceaux, nums, sortie, numeriques, sep:texteFr.includes(" · "), ph:RE_COUPURE_PHRASE.test(texteFr), libre:false, poids:morceaux.join("").length }); // « de {1} à {2} % » : seulement comme valeur d'un gabarit plus grand
     } else exact.set(texteFr, sortie);
-  }
+    return true;
+  };
+  for(const [cle, texteFr] of Object.entries(fr)) if(ajouter(texteFr, tr[cle])) cles.set(cle, tr[cle]);
+  // Tables de données (intitulés de budget, d'indicateurs, de groupes, de fonctions, quiz…) : clé = texte français exact
+  if(donnees && typeof donnees === "object") for(const [texteFr, sortie] of Object.entries(donnees)) if(!texteFr.startsWith("_")) ajouter(normaliserTexte(texteFr), sortie, true);
+  for(const m of motifs.concat(petits)) m.sortie = typoGabarit(m.sortie, code);
   motifs.sort((a, b)=> b.poids - a.poids);
-  return { exact, motifs, cles, nombre:cles.size, memo:new Map() };
+  petits.sort((a, b)=> b.poids - a.poids);
+  return { tous:motifs.concat(petits), code, locale:(LANGUES.find(l=>l.code === code) || {}).locale || "", exact, motifs, petits, cles, nombre:cles.size, memo:new Map() };
 }
 
 // Valeurs des marques si le texte correspond au motif (début, fin et morceaux intermédiaires dans l'ordre), sinon null
@@ -8384,22 +8511,113 @@ function apparier(m, texte){
   }
   valeurs[m.nums[n - 1]] = texte.slice(pos, fin);
   // Une valeur insérée (nombre, date, nom) est courte : un long texte n'est pas un gabarit rempli, mais du contenu à ne pas toucher
-  return Object.values(valeurs).every(v=>v.length <= 60) ? valeurs : null;
+  // « A · B · C » est une suite de morceaux : un gabarit sans « · » ne s'étend pas sur plusieurs morceaux (la ligne est alors traduite morceau par morceau)
+  if(!m.sep) for(const v of Object.values(valeurs)) if(v.includes(" · ")) return null;
+  if(!m.ph) for(const v of Object.values(valeurs)) if(RE_COUPURE_PHRASE.test(v)) return null; // idem pour une suite de phrases
+  // « mot{2} sur {3} » : une marque collée à des lettres est un accord (s, e…), jamais un long texte
+  if(m.attache && !m.libre) for(const v of Object.values(valeurs)) if(v.length > 30) return null;
+  for(const k of m.numeriques) if(!/^[\d\s,.\u00a0\u202f%+−-]+$/.test(valeurs[k])) return null;
+  return m.libre || Object.values(valeurs).every(v=>v.length <= 60) ? valeurs : null;
 }
 
-// Texte traduit (avec les espaces de début et de fin d'origine), ou null si le dictionnaire n'a pas ce texte
+// Traduction d'un texte normalisé par le dictionnaire seul (sans formats), ou null. Les valeurs insérées dans un gabarit sont
+// elles-mêmes traduites (« Candidature {1} » + « annoncée le {1} »), et une ligne « A · B · C » l'est morceau par morceau.
+function traduireCoeur(coeur, dico, profondeur = 0, valeur = false){
+  // Les formats (dates, nombres, heures) ne sont reformulés que dans le texte du dictionnaire et dans les valeurs qui sont entièrement
+  // une date, un nombre ou une heure : un titre officiel français contenant une date reste tel quel
+  const loc = dico.locale, fin = x => localiserFormats(x, loc, true);
+  let sortie = dico.exact.get(coeur);
+  if(sortie !== undefined) return localiserFormats(sortie, loc);
+  if(profondeur > 4) return null;
+  // « Président de X (depuis 2021) » : la mention « (depuis … ) » finale se traduit à part, le reste selon son propre gabarit
+  const depuis = /^(.*\S) (\(depuis [^()]+\))$/.exec(coeur);
+  if(depuis){
+    const a = traduireCoeur(depuis[1], dico, profondeur + 1, valeur), b = traduireCoeur(depuis[2], dico, profondeur + 1, valeur);
+    if(a !== null || b !== null) return (a ?? fin(depuis[1])) + " " + (b ?? fin(depuis[2]));
+  }
+  for(const m of valeur ? dico.tous : dico.motifs){
+    const valeurs = apparier(m, coeur);
+    if(!valeurs) continue;
+    return m.sortie.replace(/\{(\d+)\}/g, (x, n, pos)=>{
+      const v = valeurs[n];
+      if(v === undefined) return x;
+      const c = normaliserTexte(v);
+      if(!c) return v;
+      const ord = /^(\d{1,2})(ʳᵉ|ᵉʳ|ᵉ|re|er|e)$/.exec(c); // « 5ᵉ » + « circonscription » : le rang s'écrit selon le mot qui suit dans la phrase traduite
+      if(ord){
+        const mot = /^\s*(\p{L}+)/u.exec(m.sortie.slice(pos + x.length)), o = mot && formaterOrdinal(loc, +ord[1], mot[1]);
+        if(o) return o;
+      }
+      const tv = traduireCoeur(c, dico, profondeur + 1, true);
+      return /^\s*/.exec(v)[0] + (tv === null ? fin(c) : tv) + /\s*$/.exec(v)[0];
+    });
+  }
+  if(valeur && coeur.includes(", ") && coeur.length < 400){ // liste de noms connus (« Ensemble pour la République, Les Démocrates (MoDem) »), les noms à virgule inclus
+    const p = coeur.split(", "), r = [];
+    let trouve = false;
+    for(let i = 0; i < p.length; ){
+      let ok = false;
+      for(let j = p.length; j > i; j--){
+        const e = dico.exact.get(p.slice(i, j).join(", "));
+        if(e !== undefined){ r.push(e); i = j; ok = true; trouve = true; break; }
+      }
+      if(!ok) r.push(p[i++]);
+    }
+    if(trouve) return r.join(", ");
+  }
+  // Phrase coupée par des éléments (infobulle, lien) sans clé de phrase entière : chaque morceau de texte est traduit séparément, les éléments restent en place
+  if(JETON_I18N.test(coeur)){
+    const parts = coeur.split(/(\uE000[\uE100-\uE1FF]\uE001)/), tr = parts.map(x=> x.length > 1 && !JETON_I18N.test(x) && /\p{L}/u.test(x) ? traduireCoeur(normaliserTexte(x), dico, profondeur + 1, valeur) : null);
+    if(tr.some(x=>x !== null)) return parts.map((x, i)=> tr[i] === null ? x : /^\s*/.exec(x)[0] + tr[i] + /\s*$/.exec(x)[0]).join("");
+  }
+  // Plusieurs phrases accolées par le code (« …contre. » + « Texte déposé par {1}. » + « Voir le vote… ») : traduites une à une
+  const phrases = coeur.split(/(?:(?<=[!?…»]|(?<!\b(?:M|Mme|Mmes|MM|Me|Dr|Pr|St|Ste|Mlle))\.) +(?=[\p{Lu}«"(])|(?<=\)) +(?=[\p{Lu}«"]))/u); // (même règle que RE_COUPURE_PHRASE)
+  if(phrases.length > 1){
+    const tr = phrases.map(x=> traduireCoeur(x, dico, profondeur + 1, valeur));
+    // Un titre de presse « Justice. Procès du MoDem : … » ne devient pas « Justiça. Procès… » : un seul mot reconnu ne suffit pas
+    if(tr.some((x, i)=> x !== null && /\S\s+\S/.test(phrases[i]))) return phrases.map((x, i)=> tr[i] ?? fin(x)).join(" ");
+  }
+  if(coeur.includes(" · ")){
+    // (les gabarits du code écrivent souvent « · texte » avec leur séparateur : la clé du morceau peut le contenir)
+    const morceaux = coeur.split(" · "), tr = morceaux.map(x=>{
+      if(x.length < 2) return null;
+      const queue = / ·$/.test(x) ? " ·" : "", c = x.replace(/ ·$/, ""); // le dernier morceau peut finir par son séparateur
+      const r = traduireCoeur(c, dico, profondeur + 1, valeur);
+      if(r !== null) return r + queue;
+      const a = traduireCoeur("· " + c, dico, profondeur + 1, valeur);
+      if(a !== null) return a.replace(/^· /, "") + queue;
+      const b = traduireCoeur(c + " ·", dico, profondeur + 1, valeur);
+      return b === null ? null : b.replace(/ ·$/, "") + queue;
+    });
+    if(tr.some(x=>x !== null)) return morceaux.map((x, i)=> tr[i] ?? fin(x)).join(" · ");
+  }
+  const tete = /^([,;:])\s*(.{3,})$/.exec(coeur); // valeur qui commence par sa ponctuation (« , commission mixte paritaire »)
+  if(valeur && tete){
+    const r = traduireCoeur(tete[2], dico, profondeur + 1, valeur);
+    if(r !== null) return tete[1] + " " + r;
+  }
+  if(coeur.length > 3 && coeur.endsWith(".") && !coeur.endsWith("..")){ // la phrase sans son point final (le code l'ajoute souvent après une donnée)
+    const r = traduireCoeur(coeur.slice(0, -1), dico, profondeur + 1, valeur);
+    if(r !== null) return r + ".";
+  }
+  if(valeur && coeur.length > 20 && /[\p{L}\d)»]$/u.test(coeur)){ // valeur insérée dans « …{3}. » : son point final est dans le gabarit
+    const r = traduireCoeur(coeur + ".", dico, profondeur + 1, valeur);
+    if(r !== null) return r.replace(/\.$/, "");
+  }
+  return null;
+}
+
+// Texte traduit (avec les espaces de début et de fin d'origine), ou null si rien n'est à changer
 function traduireTexte(brut, dico){
   const coeur = normaliserTexte(brut);
   if(!coeur || !dico) return null;
-  let sortie = dico.exact.get(coeur);
-  if(sortie === undefined) sortie = dico.memo.get(coeur);
+  let sortie = dico.memo.get(coeur);
   if(sortie === undefined){
-    sortie = null;
-    for(const m of dico.motifs){
-      const valeurs = apparier(m, coeur);
-      if(!valeurs) continue;
-      sortie = m.sortie.replace(/\{(\d+)\}/g, (x, n)=> valeurs[n] === undefined ? x : (dico.exact.get(valeurs[n].trim()) ?? valeurs[n])); // une valeur qui est elle-même un texte connu (« Députés ») est traduite aussi
-      break;
+    sortie = traduireCoeur(coeur, dico);
+    if(sortie === null){
+      // Rien dans le dictionnaire : dates, heures et nombres seuls sont reformulés, ligne « A · B · C » morceau par morceau
+      const l = coeur.split(/( · | ·$)/).map((x, i)=> i % 2 ? x : localiserFormats(x, dico.locale, true)).join("");
+      sortie = l !== coeur ? l : null;
     }
     if(dico.memo.size > 4000) dico.memo.clear();
     dico.memo.set(coeur, sortie);
@@ -8417,10 +8635,79 @@ function t(x, valeurs){
     const tr = traduireTexte(s, DICO_ACTIF);
     if(tr !== null) s = tr;
   }
-  return valeurs ? s.replace(/\{(\d+)\}/g, (m, n)=> valeurs[n] ?? m) : s;
+  // Les valeurs insérées (dates, nombres) sont écrites à la manière de la langue active, comme dans le traducteur du DOM
+  return valeurs ? s.replace(/\{(\d+)\}/g, (m, n)=> valeurs[n] === undefined ? m : (DICO_ACTIF && typeof valeurs[n] === "string" ? localiserFormats(valeurs[n], DICO_ACTIF.locale, true) : valeurs[n])) : s;
+}
+
+/* ---------- Phrases coupées par des éléments (infobulles du glossaire, gras, liens) ----------
+   « Le <49.3> est un article… <sans vote>. Depuis 2008, il ne sert que… » : traduire chaque morceau séparément donnerait une phrase
+   mêlant deux langues. Un élément dont le contenu est fait de plusieurs morceaux de texte séparés par des éléments en ligne est donc
+   traduit en entier : chaque élément en ligne devient une marque {1}, {2}… dans la clé de phrase (scripts/extraire-i18n.js applique la
+   même règle), et la traduction replace les éléments d'origine (liens, boutons, infobulles) là où la marque se trouve. */
+const EN_LIGNE = new Set(["A","B","STRONG","I","EM","SPAN","BUTTON","CODE","ABBR","SUP","SUB","SMALL","MARK","U","CITE","Q","TIME","BR","S","DEL","INS","WBR","KBD","VAR","SAMP"]);
+const JETON_I18N = /[]/;
+const RE_JETONS = /([-])/g;
+const ORIGINES_PHRASE = new WeakMap(); // élément -> { orig:[nœuds d'origine], sortie:[nœuds produits] }
+const NOEUDS_PHRASE = new WeakSet();   // nœuds texte produits par une traduction de phrase
+const jetonPhrase = i => "" + String.fromCharCode(0xE100 + i) + "";
+
+const texteFrDe = n => { const o = ORIGINES.get(n); return o && n.data === o.sortie ? o.fr : n.data; };
+
+function enfantsOrigine(el){
+  const o = ORIGINES_PHRASE.get(el);
+  if(!o) return [...el.childNodes];
+  const act = el.childNodes;
+  if(act.length === o.sortie.length && o.sortie.every((n, i)=> act[i] === n)) return o.orig;
+  ORIGINES_PHRASE.delete(el);
+  return [...act];
+}
+// Plusieurs morceaux de texte avec des mots, séparés par des éléments en ligne, et rien d'autre qu'en ligne
+function estPhrase(enfants){
+  let element = false, segments = 0, mots = false;
+  for(const n of enfants){
+    if(n.nodeType === 3){ if(/\p{L}{2,}/u.test(texteFrDe(n))) mots = true; }
+    else if(n.nodeType === 1){
+      if(!EN_LIGNE.has(n.tagName)) return false;
+      element = true; if(mots) segments++; mots = false;
+    }
+  }
+  if(mots) segments++;
+  return element && segments >= 2;
+}
+function restaurerPhrase(el){
+  const o = ORIGINES_PHRASE.get(el);
+  if(!o) return;
+  for(const n of o.orig) if(n.nodeType === 3){ const x = ORIGINES.get(n); if(x && n.data === x.sortie){ n.data = x.fr; ORIGINES.delete(n); } }
+  el.replaceChildren(...o.orig);
+  ORIGINES_PHRASE.delete(el);
+}
+// true si la phrase de cet élément est traduite en entier (ses enfants sont alors remplacés)
+function traduirePhrase(el){
+  if(el.closest(SANS_TRADUCTION)) return false;
+  const enfants = enfantsOrigine(el);
+  if(!DICO_ACTIF || !estPhrase(enfants)){ restaurerPhrase(el); return false; }
+  let s = "";
+  const elements = [];
+  for(const n of enfants){
+    if(n.nodeType === 3) s += texteFrDe(n);
+    else if(n.nodeType === 1){ s += jetonPhrase(elements.length); elements.push(n); }
+  }
+  const tr = traduireTexte(s, DICO_ACTIF);
+  if(tr === null){ restaurerPhrase(el); return false; }
+  const morceaux = tr.split(RE_JETONS), nouveaux = [], utilises = new Set();
+  for(let i = 0; i < morceaux.length; i++){
+    if(i % 2 === 0){ if(morceaux[i]){ const x = document.createTextNode(morceaux[i]); NOEUDS_PHRASE.add(x); nouveaux.push(x); } }
+    else { const k = morceaux[i].charCodeAt(0) - 0xE100; if(elements[k] && !utilises.has(k)){ utilises.add(k); nouveaux.push(elements[k]); } }
+  }
+  if(utilises.size !== elements.length){ restaurerPhrase(el); return false; } // une marque manque : on ne perd jamais un lien
+  const o = ORIGINES_PHRASE.get(el);
+  ORIGINES_PHRASE.set(el, { orig:o ? o.orig : enfants, sortie:nouveaux });
+  el.replaceChildren(...nouveaux);
+  return true;
 }
 
 function traduireNoeud(n){
+  if(NOEUDS_PHRASE.has(n)) return;
   const o = ORIGINES.get(n);
   const traduit = !!o && n.data === o.sortie;
   const fr = traduit ? o.fr : n.data;
@@ -8454,10 +8741,24 @@ function traduireAttributs(el){
 }
 
 function traduireArbre(racine){
-  if(racine.nodeType === 3){ traduireNoeud(racine); return; }
+  if(racine.nodeType === 3){
+    const p = racine.parentElement;
+    if(!(p && p.childElementCount && (ORIGINES_PHRASE.has(p) || DICO_ACTIF) && traduirePhrase(p))) traduireNoeud(racine);
+    return;
+  }
   if(racine.nodeType !== 1 && racine.nodeType !== 9) return;
-  const marche = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
-  for(let n = marche.nextNode(); n; n = marche.nextNode()) traduireNoeud(n);
+  const marche = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT), noeuds = [];
+  for(let n = marche.nextNode(); n; n = marche.nextNode()) noeuds.push(n);
+  const phrases = new Map(); // élément parent -> sa phrase a-t-elle été traduite en entier ?
+  for(const n of noeuds){
+    if(!n.parentNode) continue; // remplacé par la traduction d'une phrase
+    const p = n.parentElement;
+    if(p && p.childElementCount && (DICO_ACTIF || ORIGINES_PHRASE.has(p))){
+      if(!phrases.has(p)) phrases.set(p, traduirePhrase(p));
+      if(phrases.get(p) && n.parentNode === p) continue;
+    }
+    traduireNoeud(n);
+  }
   if(racine.nodeType === 1 && racine.matches(SEL_ATTRIBUTS)) traduireAttributs(racine);
   const racineEl = racine.nodeType === 9 ? racine.documentElement : racine;
   racineEl.querySelectorAll(SEL_ATTRIBUTS).forEach(traduireAttributs);
@@ -8476,9 +8777,9 @@ const OBSERVATEUR_I18N = new MutationObserver(muts=>{
 
 async function chargerDico(code){
   if(DICOS.has(code)) return DICOS.get(code);
-  const [fr, tr] = await Promise.all([TEXTES_FR || lireJSON("data/i18n/fr.json"), lireJSON(`data/i18n/${code}.json`)]);
+  const [fr, tr, donnees] = await Promise.all([TEXTES_FR || lireJSON("data/i18n/fr.json"), lireJSON(`data/i18n/${code}.json`), lireJSON(`data/i18n/donnees/${code}.json`)]);
   if(fr) TEXTES_FR = fr;
-  const dico = fr && tr && typeof tr === "object" ? construireDico(fr, tr) : { exact:new Map(), motifs:[], cles:new Map(), nombre:0, memo:new Map() };
+  const dico = fr && tr && typeof tr === "object" ? construireDico(fr, tr, code, donnees) : { code, locale:"", exact:new Map(), motifs:[], petits:[], tous:[], cles:new Map(), nombre:0, memo:new Map() };
   if(fr && tr) DICOS.set(code, dico);
   return dico;
 }
