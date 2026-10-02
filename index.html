@@ -379,7 +379,7 @@
     .actu-portraits.n3 > :nth-child(1) .actu-pastille-nom, .actu-portraits.n3 > .actu-pastille-nom:nth-child(1){left:14px;}
     .actu-une .actu-pastille-nom, .actu-une .actu-portraits.n1 .actu-pastille-nom, .actu-une .actu-portraits.n3 .actu-pastille-nom{position:static; width:110px; height:110px; font-size:38px; flex-shrink:0;}
   }
-  .actu-portraits img{position:absolute; width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid; background:var(--border-soft); box-sizing:border-box;}
+  .actu-portraits img{position:absolute; width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 20%; border:3px solid; background:var(--border-soft); box-sizing:border-box; box-shadow:0 2px 7px rgba(40,34,20,.22);}
   .actu-portraits.n1 img{width:76px; height:76px;}
   .actu-portraits.n2 a:nth-child(1) img, .actu-portraits.n2 > img:nth-child(1){left:0; top:0;}
   .actu-portraits.n2 a:nth-child(2) img, .actu-portraits.n2 > img:nth-child(2){right:0; bottom:0;}
@@ -387,11 +387,12 @@
   .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:18px; top:0;}
   .actu-portraits.n3 a:nth-child(2) img, .actu-portraits.n3 > img:nth-child(2){left:0; bottom:0;}
   .actu-portraits.n3 a:nth-child(3) img, .actu-portraits.n3 > img:nth-child(3){right:0; bottom:0;}
-  .actu-logo{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:#fff; border:1px solid var(--border-soft); border-radius:6px; padding:6px; box-sizing:border-box;}
-  .actu-logo img{max-width:100%; max-height:28px; object-fit:contain;}
+  .actu-logo{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:var(--bg); border:1px solid var(--border-soft); border-radius:12px; padding:6px; box-sizing:border-box; isolation:isolate;}
+  .actu-logo img{max-width:100%; max-height:28px; object-fit:contain; mix-blend-mode:multiply;}
+  [data-theme="sombre"] .actu-logo{border-color:transparent; padding:6px;}
   .actu-logo img:only-of-type{max-height:46px;}
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:#fff; font-family:var(--font-display); font-size:26px; font-weight:600;}
-  .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:6px; background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
+  .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:12px; background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
   .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
   .actu-picto small{font-size:9.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
@@ -812,11 +813,12 @@
   .carte-chiffres{font-size:23px; color:var(--text-soft); margin-top:10px; font-variant-numeric:tabular-nums;}
   .carte-hemi svg{width:100%; height:auto; display:block;}
   .candidat-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 32px; border-top:1px solid var(--ink);}
-  .candidat-carte{padding:16px 0 18px; border-bottom:1px solid var(--border);}
+  .candidat-carte{padding:16px 0 18px; border-bottom:1px solid var(--border); display:flex; gap:14px; align-items:flex-start;}
+  .candidat-corps{min-width:0; flex:1;}
   .candidat-carte h3{margin:0; font-family:var(--font-display); font-size:21px; font-weight:600; line-height:1.25; display:flex; align-items:center; gap:9px;}
   .candidat-carte h3 .dot{flex:none; width:10px; height:10px; border-radius:50%;}
-  .candidat-parti{font-size:13.5px; font-weight:600; color:var(--text-soft); margin:2px 0 8px 19px;}
-  .candidat-carte p{margin:4px 0 0 19px; font-size:13.5px; color:var(--text-soft);}
+  .candidat-parti{font-size:13.5px; font-weight:600; color:var(--text-soft); margin:2px 0 8px;}
+  .candidat-carte p{margin:4px 0 0; font-size:13.5px; color:var(--text-soft);}
   .candidat-carte .slogan{font-family:var(--font-display); font-style:italic; font-size:16px; color:var(--text);}
   .candidat-carte .sondage{font-weight:600; color:var(--text);}
   .candidat-carte .meta{font-size:12.5px; color:var(--text-faint);}
@@ -912,6 +914,16 @@
   .depute-vote.absent{color:var(--text-faint); font-weight:500;}
   .depute-vote.abst{color:var(--ambre);}
   .depute-actions{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin:0 0 20px; font-size:14px;}
+  /* Médaillon : initiales en repli, photo recadrée sur le visage, liseré de la couleur du parti, ombre douce */
+  .medaillon{--t:48px; flex:none; position:relative; width:var(--t); height:var(--t); border-radius:50%; overflow:hidden; box-sizing:border-box;
+    border:2px solid var(--c); background:var(--c); display:flex; align-items:center; justify-content:center; align-self:flex-start;
+    box-shadow:0 2px 7px rgba(40,34,20,.22), 0 0 0 2px var(--bg);}
+  .medaillon b{font-family:var(--font-display); font-weight:600; font-size:calc(var(--t) * .36); color:#fff; letter-spacing:.02em;}
+  .medaillon img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 20%; border-radius:50%;}
+  .medaillon::after{content:""; position:absolute; inset:0; border-radius:50%; pointer-events:none;
+    background:linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(0,0,0,0) 38%, rgba(0,0,0,.2) 100%);}
+  .groupe-card .medaillon{margin-top:1px;}
+  .justice-card-head .medaillon{align-self:center; margin-right:4px;}
   .leader-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:0 28px; border-top:1px solid var(--ink);}
   .leader-card{display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--border);}
   .leader-avatar{
@@ -922,8 +934,10 @@
   .leader-info .leader-name{font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.2; margin-bottom:3px;}
   .leader-info .leader-role{font-size:13.5px; color:var(--text-soft); margin-bottom:6px;}
   .leader-source{font-size:12px; margin-left:6px;}
-  .parti-logo{display:block; width:max-content; margin:8px 0 6px; padding:4px 7px; background:#fff; border-radius:4px; line-height:0;}
-  .parti-logo img{height:24px; width:auto; max-width:150px; object-fit:contain;}
+  /* Logo sans rectangle blanc : fondu dans le papier (multiply) ; en mode sombre, pastille claire discrète */
+  .parti-logo{display:block; width:max-content; margin:8px 0 6px; padding:2px 0; background:var(--bg); border-radius:6px; line-height:0; isolation:isolate;}
+  .parti-logo img{height:24px; width:auto; max-width:150px; object-fit:contain; mix-blend-mode:multiply;}
+  [data-theme="sombre"] .parti-logo, [data-theme="sombre"] .actu-logo{background:#E9E4D6; padding:4px 9px; box-shadow:0 1px 4px rgba(0,0,0,.28);}
   .leader-info .leader-party{font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);}
   .groupes-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:0 28px;}
   .groupe-card{display:flex; gap:10px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border);}
@@ -3203,12 +3217,15 @@ function renderCandidats(){
     const couleur = COULEURS_PARTIS[c.code] || "#8A8C94";
     const domaine = (String(c.source).match(/^https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "source";
     return `<div class="candidat-carte">
-      <h3><span class="dot" style="background:${couleur}"></span>${esc(c.nom)}${c.primaire ? `<span class="candidat-primaire">primaire</span>` : ""}</h3>
+      ${medaillon(c.nom, couleur, 48)}
+      <div class="candidat-corps">
+      <h3>${esc(c.nom)}${c.primaire ? `<span class="candidat-primaire">primaire</span>` : ""}</h3>
       <div class="candidat-parti">${esc(c.parti)}${c.age ? ` · ${c.age} ans au premier tour` : ""}</div>
       ${c.slogan ? `<p class="slogan">« ${esc(c.slogan)} »</p>` : ""}
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
       <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      </div>
     </div>`;
   }).join("");
 }
@@ -3359,7 +3376,7 @@ function renderLeaders(){
       ? `${esc(g.president)} préside le groupe à l'Assemblée nationale.` : "";
     return `
       <div class="leader-card" style="animation-delay:${idx*25}ms">
-        <div class="leader-avatar" style="background:${l.couleur}">${esc(initiales)}</div>
+        ${sansChef ? `<div class="leader-avatar" style="background:${l.couleur}">${esc(initiales)}</div>` : medaillon(l.nom, l.couleur, 52, initiales)}
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
@@ -3392,7 +3409,7 @@ function renderGouvernement(){
   const g = GOUVERNEMENT, el = document.getElementById("gouvernement");
   if(!g || !g.membres?.length || el.dataset.fait) return;
   el.dataset.fait = "1";
-  const carte = (m)=> `<div class="groupe-card"><div><div class="groupe-nom">${esc(m.nom)}</div><div class="groupe-meta">${esc(m.fonction)}${m.depuis && g.depuis && Date.parse(m.depuis) - Date.parse(g.depuis) > 30*864e5 ? ` · depuis le ${esc(dateCourte(m.depuis))}` : ""}</div></div></div>`;
+  const carte = (m)=> `<div class="groupe-card">${medaillon(m.nom, "#8A8C94", 40)}<div><div class="groupe-nom">${esc(m.nom)}</div><div class="groupe-meta">${esc(m.fonction)}${m.depuis && g.depuis && Date.parse(m.depuis) - Date.parse(g.depuis) > 30*864e5 ? ` · depuis le ${esc(dateCourte(m.depuis))}` : ""}</div></div></div>`;
   const pm = g.membres.filter(m=>m.qualite === "Premier ministre");
   const delegues = g.membres.filter(m=>/délégué|Secrétaire/i.test(m.qualite + " " + m.fonction.split(",")[0]));
   const ministres = g.membres.filter(m=>!pm.includes(m) && !delegues.includes(m));
@@ -3521,6 +3538,7 @@ function renderJusticeList(){
   document.getElementById("justice-list").innerHTML = filtres.map((c,idx)=>`
     <div class="justice-card" style="animation-delay:${idx*25}ms">
       <div class="justice-card-head">
+        ${medaillon(c.nom, COULEURS_PARTIS[c.parti] || "#8A8C94", 48)}
         <span class="justice-name">${esc(c.nom)}</span>
         <span class="justice-role">${esc(c.role)} · ${esc(c.parti)}</span>
         <span class="justice-status ${esc(c.statut)}">${esc(c.statutLabel)}</span>
@@ -3866,7 +3884,7 @@ document.getElementById("senat-search").addEventListener("input", ()=>{
 function photoSecours(el){ el.querySelectorAll(".depute-avatar img").forEach(img=> img.addEventListener("error", ()=> img.remove())); }
 // Miniatures des listes : photo absente -> pastille de la couleur du groupe
 document.addEventListener("error", e=>{
-  if(e.target.closest?.(".mini-photo")) e.target.remove();
+  if(e.target.closest?.(".mini-photo, .medaillon")) e.target.remove();
   else if(e.target.closest?.(".parti-logo")) e.target.parentNode.remove(); // pas de logo libre pour ce parti
 }, true);
 
@@ -3875,6 +3893,40 @@ let SENATEURS = null, SENATEURS_CLES = [], senateursChargement = null, senateurO
 function chargerSenateurs(){
   if(!senateursChargement) senateursChargement = lireJSON("data/senateurs.json").then(d=>{ SENATEURS = d?.senateurs || []; SENATEURS_CLES = d?.cles || []; });
   return senateursChargement;
+}
+/* Photos des personnes nommées : député (photos/deputes), sénateur (photos/senateurs), puis portrait libre
+   (photos/personnalites, voir data/portraits.json). Tout est hébergé sur le site ; sans photo, initiales. */
+const nomCle = t => norm(t).replace(/[-'’]/g, " ").split(/\s+/).filter(m => m && !["de","du","des","la","le","d"].includes(m)).join(" ");
+const slugPortrait = nom => nom.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+let PORTRAITS_LIBRES = null, indexPhotos = null, photosChargement = null;
+function chargerPhotos(){
+  if(!photosChargement) photosChargement = Promise.all([chargerDeputes(), chargerSenateurs(), lireJSON("data/portraits.json")])
+    .then(([,, p])=>{ PORTRAITS_LIBRES = p?.portraits || {}; indexPhotos = null; });
+  return photosChargement;
+}
+function photoPersonne(nom){
+  if(!nom || !PORTRAITS_LIBRES) return null;
+  if(!indexPhotos){
+    indexPhotos = new Map();
+    const ajoute = (n, chemin)=>{ const k = nomCle(n); if(k && !indexPhotos.has(k)) indexPhotos.set(k, chemin); };
+    (DEPUTES || []).forEach(d=> ajoute(d.nom, `photos/deputes/${d.id}.jpg`));
+    (SENATEURS || []).forEach(x=> ajoute(x.nom, `photos/senateurs/${x.id}.jpg`));
+    Object.entries(PORTRAITS_LIBRES).forEach(([n, p])=>{ if(p?.fichier) ajoute(n, `photos/personnalites/${slugPortrait(n)}.jpg`); });
+  }
+  return indexPhotos.get(nomCle(nom)) || null;
+}
+// Médaillon : initiales en repli, photo par-dessus (retirée si le fichier ne charge pas)
+function medaillon(nom, couleur, taille, initiales){
+  const ph = photoPersonne(nom);
+  const ini = initiales ?? nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
+  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b>${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy">` : ""}</span>`;
+}
+// Une fois les listes de parlementaires chargées, les rubriques qui nomment des personnes se redessinent avec les photos
+function appliquerPhotos(){
+  chargerPhotos().then(()=>{
+    renderLeaders(); renderJusticeList(); renderCandidats();
+    const g = document.getElementById("gouvernement"); if(g){ delete g.dataset.fait; renderGouvernement(); }
+  }).catch(()=>{});
 }
 const groupeSenateur = s => GROUPES_SENAT[s.groupe] || { nom:s.groupe, couleur:"#8A8C94" };
 const carteSenateur = s => `<button type="button" class="depute-carte" data-senateur="${esc(s.id)}"><span class="mini-photo" style="border-color:${groupeSenateur(s).couleur}; background:${groupeSenateur(s).couleur}"><img src="photos/senateurs/${esc(s.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(s.nom)}</b><span>${s.f ? "Sénatrice" : "Sénateur"} · ${esc(s.dep)} · ${esc(groupeSenateur(s).nom)}</span></span></button>`;
@@ -4460,6 +4512,12 @@ function storyPied(ctx, source){
   ctx.fillText(SITE_COURT, marge, y + 132);
 }
 
+/* ---------- STORY_PLUS : types de story supplémentaires ----------
+   Chaque entrée est une fonction async (ctx, info) qui dessine sur le canevas 1080 × 1920 (cadre, contenu, pied)
+   et renvoie { nom } (nom de fichier sans extension), ou null si les données manquent.
+   `info` est la valeur de data-id du bouton .bouton-story[data-story="<type>"]. */
+const STORY_PLUS = {};
+
 async function dessinerStory(type, info){
   await Promise.all(["600 60px Newsreader", "400 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
@@ -4733,6 +4791,12 @@ async function dessinerStory(type, info){
     storyTexte(ctx, "Et vous ? Faites le quiz :", marge, 1520, { taille:34, poids:700, couleur:STORY.bleu, max:1 });
     storyPied(ctx, "Part des questions où ma réponse correspond à la position de la majorité du groupe, sur de vrais votes de l'Assemblée.");
     nom = "quiz-hemicycle-france";
+  }
+  else if(STORY_PLUS[type]){
+    // Nouveaux types de story (actualités, probabilités, second tour…), définis dans STORY_PLUS ci-dessous
+    const r = await STORY_PLUS[type](ctx, info);
+    if(!r) return null;
+    nom = r.nom || nom;
   }
   else return null;
 
@@ -5324,6 +5388,7 @@ async function initSite(){
   await cede();
 
   DONNEES_CHARGEES = true;
+  appliquerPhotos();
   if(MODE_CARTE){ document.body.classList.add("mode-carte"); document.body.dataset.cartePrete = "1"; return; }
   afficherNouveautes();
   ouvrirDepuisHash();
