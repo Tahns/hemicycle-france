@@ -24,6 +24,7 @@
 
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
+import { ecrireGarde } from "./garde.js";
 
 const DATA_FILE = path.resolve("data/sondages.json");
 const PAGE = "Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027";
@@ -389,8 +390,8 @@ async function main() {
   delete ancien.lastUpdated;
   if (JSON.stringify(ancien) === JSON.stringify(sortie)) return log("Aucun changement.");
   if (DRY_RUN) return console.log(JSON.stringify(sortie, null, 2));
-  await writeFile(DATA_FILE, JSON.stringify({ lastUpdated: new Date().toISOString(), ...sortie }, null, 2) + "\n");
-  log(`data/sondages.json mis à jour (${instituts.length} instituts).`);
+  const contenu = { lastUpdated: new Date().toISOString(), ...sortie };
+  if (await ecrireGarde(DATA_FILE, contenu, { nom: "data/sondages.json", texte: JSON.stringify(contenu, null, 2) + "\n", liste: (d) => d.instituts, obligatoires: ["nom", "dateFin", "scores", "url"] })) log(`data/sondages.json mis à jour (${instituts.length} instituts).`);
 }
 
 main().catch((e) => {
