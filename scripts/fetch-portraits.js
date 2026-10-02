@@ -3,7 +3,7 @@
  * fetch-portraits.js
  * ------------------
  * Portraits des personnalités sans photo officielle sur le site (chefs de parti, candidats déclarés,
- * membres du Gouvernement qui ne siègent ni à l'Assemblée ni au Sénat), pour illustrer les actualités.
+ * personnes citées dans la page Justice, membres du Gouvernement qui ne siègent ni à l'Assemblée ni au Sénat), pour illustrer les actualités.
  *
  * Pour chaque nom : image principale de son article Wikipédia, à condition que l'article décrive une
  * personnalité politique et que le fichier, sur Wikimedia Commons, soit sous licence libre (domaine
@@ -46,8 +46,8 @@ async function imageArticle(nom) {
 }
 
 async function main() {
-  const [deputes, senateurs, dirigeants, candidats, gouvernement] = await Promise.all(
-    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement"].map((f) => lire(`data/${f}.json`))
+  const [deputes, senateurs, dirigeants, candidats, gouvernement, justice] = await Promise.all(
+    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement", "justice"].map((f) => lire(`data/${f}.json`))
   );
   const data = (await lire(DATA_FILE)) || { source: "Wikimedia Commons (licences libres), via l'image principale de l'article Wikipédia", portraits: {} };
   const parlementaires = new Set([...(deputes?.deputes || []), ...(senateurs?.senateurs || [])].map((p) => p.nom));
@@ -55,6 +55,7 @@ async function main() {
     ...(dirigeants?.dirigeants || []).map((d) => d.nom),
     ...(candidats?.candidats || []).map((c) => c.nom),
     ...(gouvernement?.membres || []).map((m) => m.nom),
+    ...(justice?.condamnations || []).map((c) => c.nom),
     "Emmanuel Macron",
   ])].filter((n) => n && n !== "—" && !parlementaires.has(n));
 
