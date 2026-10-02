@@ -302,8 +302,21 @@
   main{max-width:var(--largeur); margin:0 auto; padding:var(--s6) var(--s5) var(--s7);}
   .view{display:none;}
   .view.active{display:block; animation:viewIn .25s ease both;}
+  /* Navigateurs récents : une rubrique masquée garde sa mise en page (content-visibility:hidden, aussi invisible et inerte
+     que display:none). Revenir dessus ne reconstruit plus ses centaines d'éléments, ce qui coûte seconde(s) sur un vieux téléphone. */
+  @supports (content-visibility:hidden){
+    .view{display:block; content-visibility:hidden; visibility:hidden; contain-intrinsic-size:auto 0;}
+    .view.active{content-visibility:visible; visibility:visible;}
+  }
   @keyframes viewIn{ from{opacity:0;} to{opacity:1;} }
   @media (prefers-reduced-motion:reduce){ .view.active{animation:none;} }
+  /* Téléphone : pas de fondu sur toute la page (il force un calque géant et fige les appareils d'entrée de gamme) */
+  @media (max-width:700px){ .view.active{animation:none;} }
+  /* Performances : ce qui est hors de l'écran n'est ni mis en page ni peint avant d'être approché */
+  /* Une liste déroulante de centaines d'options coûte cher à mesurer : sa largeur vient du conteneur, pas de l'option la plus longue */
+  .filtre-champ, .sous-nav label{contain:inline-size;}
+  .view > :not(.rubrique-tete){content-visibility:auto; contain-intrinsic-size:auto 480px;}
+  .senat-ligne, .histo-row, .depute-carte, .meeting-card, .party-row{content-visibility:auto; contain-intrinsic-size:auto 64px;}
 
   /* ---------- Titres de rubrique ---------- */
   .rubrique-tete{margin:0 0 var(--s5); padding-bottom:var(--s4); border-bottom:1px solid var(--border);}
@@ -3215,10 +3228,15 @@ document.getElementById("loi-search").addEventListener("input", ()=>{
 document.getElementById("loi-select").addEventListener("change", updateBreakdown);
 
 let NAVETTE = null; // data/navette.json : votes du Sénat sur les mêmes textes
+let detailAffiche = {};
 function updateBreakdown(){
   const loi = currentLoi();
   if(!loi) return;
   if(DONNEES_CHARGEES && document.getElementById("view-scrutin").classList.contains("active")) majHash("scrutin-" + (loi.numero ?? loi.id));
+  // Même scrutin, mêmes données (parcours, composition) : le détail affiché est déjà à jour
+  const signature = `${loi.id}|${TOTAL_SIEGES}|${NAVETTE ? 1 : 0}|${document.documentElement.lang}`;
+  if(detailAffiche.loi === loi && detailAffiche.signature === signature && document.getElementById("hemicycle").childElementCount) return;
+  detailAffiche = { loi, signature };
   const pill = document.getElementById("resultat-pill");
   pill.textContent = loi.resultat === "adopte" ? "Adopté" : "Rejeté";
   pill.classList.remove("adopte","rejete","pop");
@@ -3275,9 +3293,15 @@ function updateBreakdown(){
       </div>`;
   }).join("");
 
-  buildSeats(loi);
-  renderHemicycle();
+  // Les 577 sièges sont dessinés après le premier affichage du texte et des chiffres : la page répond d'abord
+  const jeton = ++jetonHemicycle;
+  requestAnimationFrame(()=> setTimeout(()=>{
+    if(jeton !== jetonHemicycle) return;
+    buildSeats(loi);
+    renderHemicycle();
+  }, 0));
 }
+let jetonHemicycle = 0;
 
 function renderStatCards(loi){
   const connus = PARTIES.map(p=>({ p, v: loi.votes[p.id] })).filter(x=>x.v);
@@ -3874,13 +3898,13 @@ function visuelActu(s){
   if(personnes.some(p=>p.photo)){
     return `<div class="actu-visuel actu-portraits n${personnes.length}">${personnes.map(p=>{
       const contenu = p.photo
-        ? `<img src="${esc(p.photo)}" alt="" loading="lazy" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
+        ? `<img src="${esc(p.photo)}" alt="" loading="lazy" decoding="async" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
         : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}">${esc(initialesActu(p.nom))}</span>`;
       return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${contenu}</a>` : contenu;
     }).join("")}${pastille}</div>`;
   }
   if((ill.partis || []).length){
-    return `<div class="actu-visuel actu-logo">${ill.partis.map(c=>`<img src="icons/partis/${esc(c)}.png" alt="${esc(c)}" loading="lazy">`).join("")}${pastille}</div>`;
+    return `<div class="actu-visuel actu-logo">${ill.partis.map(c=>`<img src="icons/partis/${esc(c)}.png" alt="${esc(c)}" loading="lazy" decoding="async">`).join("")}${pastille}</div>`;
   }
   if((ill.personnes || []).length){
     const p = ill.personnes[0];
@@ -4028,6 +4052,15 @@ function renderEvolution(){
   const series = noms.filter(n=>evolutionChoix.has(n));
   dessinerEvolution(series);
 
+  evolutionSeries = series;
+  const details = document.getElementById("evolution-table").closest("details");
+  document.getElementById("evolution-table").innerHTML = "";
+  if(details && details.open) remplirTableEvolution();
+}
+let evolutionSeries = [];
+// Tableau complet : construit seulement quand « Voir tous les chiffres » est ouvert
+function remplirTableEvolution(){
+  const series = evolutionSeries;
   document.getElementById("evolution-table").innerHTML = `<table>
     <thead><tr><th>Fin du terrain</th><th>Institut</th>${series.map(n=>`<th>${esc(nomCourt(n))}</th>`).join("")}</tr></thead>
     <tbody>${[...HISTORIQUE].reverse().map(e=>`<tr><td>${esc(dateCourte(e.dateFin) || e.dateFin)}</td><td>${esc(e.institut)}</td>${series.map(n=>`<td>${e.scores[n] ? fourchetteTexte(e.scores[n]) : "—"}</td>`).join("")}</tr>`).join("")}</tbody>
@@ -4138,6 +4171,8 @@ function dessinerEvolution(series){
     montrer(Math.max(0, Math.min(dates.length - 1, i + (e.key === "ArrowRight" ? 1 : -1))));
   });
 }
+
+document.getElementById("evolution-table").closest("details").addEventListener("toggle", e=>{ if(e.target.open && !document.getElementById("evolution-table").firstChild) remplirTableEvolution(); });
 
 let evolutionRedim;
 window.addEventListener("resize", ()=>{
@@ -4484,7 +4519,7 @@ function renderLeaders(){
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
-          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${sansChef ? "" : ``}${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
+          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy" decoding="async"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${sansChef ? "" : ``}${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
         </div>
       </div>`;
   }).join("");
@@ -5048,7 +5083,8 @@ async function renderSenat(){
   document.getElementById("senat-count").textContent = res.length ? `${formatNombre(res.length)} scrutin${res.length>1?"s":""}` : "Aucun scrutin";
   document.getElementById("senat-reset").hidden = senatFiltre === "texte" && !q;
   if(!res.length){ liste.innerHTML = `<p class="no-result-msg">Rien ne correspond à cette recherche. Essayez un autre mot.</p>`; return; }
-  liste.innerHTML = res.slice(0, senatLimite).map(s=>{
+  senatAffiches = res.slice(0, senatLimite);
+  senatDetailHTML = s=>{
     const groupes = Object.keys(GROUPES_SENAT).filter(g=>s.groupes[g]).map(g=>{
       const v = s.groupes[g], info = GROUPES_SENAT[g], m = v.membres || 1;
       return `<div class="senat-groupe">
@@ -5061,7 +5097,11 @@ async function renderSenat(){
         <span class="chiffres">${v.pour} · ${v.contre} · ${v.abst}</span>
       </div>`;
     }).join("");
-    return `<details class="senat-ligne">
+    return groupes;
+  };
+  const piedSenat = s=>`        <div class="histo-date">Par groupe : pour · contre · abstention. <a href="${lien(s.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>${s.dossierUrl ? ` · <a href="${lien(s.dossierUrl)}" target="_blank" rel="noopener">dossier législatif</a>` : ""} · <button type="button" class="lien-bouton bouton-story" data-story="senat" data-id="${esc(s.id)}">Story</button></div>`;
+  liste.innerHTML = senatAffiches.map((s, i)=>{
+    return `<details class="senat-ligne" data-i="${i}">
       <summary>
         <div>
           <div class="histo-loi">${esc(titreSenat(s))}</div>
@@ -5069,13 +5109,21 @@ async function renderSenat(){
         </div>
         <div class="senat-totaux">${s.pour} pour · ${s.contre} contre<small>${s.abst} abstention${s.abst>1?"s":""}</small></div>
       </summary>
-      <div class="senat-groupes">${groupes}
-        <div class="histo-date">Par groupe : pour · contre · abstention. <a href="${lien(s.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>${s.dossierUrl ? ` · <a href="${lien(s.dossierUrl)}" target="_blank" rel="noopener">dossier législatif</a>` : ""} · <button type="button" class="lien-bouton bouton-story" data-story="senat" data-id="${esc(s.id)}">Story</button></div>
-      </div>
+      <div class="senat-groupes">${piedSenat(s)}</div>
     </details>`;
   }).join("") + (res.length > senatLimite ? `<button type="button" class="histo-more" id="senat-plus">Afficher ${Math.min(40, res.length - senatLimite)} de plus (${res.length - senatLimite} restants)</button>` : "");
   document.getElementById("senat-plus")?.addEventListener("click", ()=>{ senatLimite += 40; renderSenat(); });
 }
+// Le détail par groupe n'existe dans la page que pour les lignes ouvertes (une quarantaine de lignes fermées pèsent des milliers de nœuds)
+let senatAffiches = [], senatDetailHTML = null;
+document.getElementById("senat-liste").addEventListener("toggle", e=>{
+  const d = e.target;
+  if(!d.open || !d.matches?.(".senat-ligne") || d.dataset.pret || !senatDetailHTML) return;
+  const s = senatAffiches[+d.dataset.i];
+  if(!s) return;
+  d.dataset.pret = "1";
+  d.querySelector(".senat-groupes").insertAdjacentHTML("afterbegin", senatDetailHTML(s));
+}, true);
 let senatRechercheTimer;
 document.getElementById("senat-reset").addEventListener("click", ()=>{
   senatFiltre = "texte"; senatLimite = 40;
@@ -5126,7 +5174,7 @@ function photoPersonne(nom){
 function medaillon(nom, couleur, taille, initiales){
   const ph = photoPersonne(nom);
   const ini = initiales ?? nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
-  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b>${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy">` : ""}</span>`;
+  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b>${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy" decoding="async">` : ""}</span>`;
 }
 // Une fois les listes de parlementaires chargées, les rubriques qui nomment des personnes se redessinent avec les photos
 function appliquerPhotos(){
@@ -5136,7 +5184,7 @@ function appliquerPhotos(){
   }).catch(()=>{});
 }
 const groupeSenateur = s => GROUPES_SENAT[s.groupe] || { nom:s.groupe, couleur:"#8A8C94" };
-const carteSenateur = s => `<button type="button" class="depute-carte" data-senateur="${esc(s.id)}"><span class="mini-photo" style="border-color:${groupeSenateur(s).couleur}; background:${groupeSenateur(s).couleur}"><img src="photos/senateurs/${esc(s.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(s.nom)}</b><span>${s.f ? "Sénatrice" : "Sénateur"} · ${esc(s.dep)} · ${esc(groupeSenateur(s).nom)}</span></span></button>`;
+const carteSenateur = s => `<button type="button" class="depute-carte" data-senateur="${esc(s.id)}"><span class="mini-photo" style="border-color:${groupeSenateur(s).couleur}; background:${groupeSenateur(s).couleur}"><img src="photos/senateurs/${esc(s.id)}.jpg" alt="" loading="lazy" decoding="async" width="40" height="40"></span><span><b>${esc(s.nom)}</b><span>${s.f ? "Sénatrice" : "Sénateur"} · ${esc(s.dep)} · ${esc(groupeSenateur(s).nom)}</span></span></button>`;
 function brancherSenateurs(el){ el.querySelectorAll("[data-senateur]").forEach(b=> b.addEventListener("click", ()=>{ location.hash = "senateur-" + b.dataset.senateur; })); }
 
 async function renderSenateursRecherche(){
@@ -5315,7 +5363,7 @@ async function renderDeputes(){
         <div class="commune-titre">${esc(t.c)} <span>(${esc(t.depNom)}) · ${t.circos.length > 1 ? `${t.circos.length} circonscriptions` : `${ordinalCirco(t.circos[0])} circonscription`}</span></div>
         <div class="commune-elections" data-dep="${esc(slugDep(t.depNom))}" data-commune="${esc(t.c)}"></div>
         <div class="commune-elections commune-senateurs" data-dep="${esc(t.depNom)}"></div>
-        ${deps.map(d=>{ const p = partiDepute(d); return `<button type="button" class="depute-carte" data-id="${esc(d.id)}"><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(d.nom)}</b><span>${esc(circoDepute(d))} · ${esc(d.groupe)}</span></span></button>`; }).join("")}
+        ${deps.map(d=>{ const p = partiDepute(d); return `<button type="button" class="depute-carte" data-id="${esc(d.id)}"><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" decoding="async" width="40" height="40"></span><span><b>${esc(d.nom)}</b><span>${esc(circoDepute(d))} · ${esc(d.groupe)}</span></span></button>`; }).join("")}
       </div>`;
     }).join("");
   }
@@ -5332,7 +5380,7 @@ async function renderDeputes(){
   liste.innerHTML = res.slice(0, deputeLimite).map(d=>{
     const p = partiDepute(d);
     return `<button type="button" class="depute-carte" data-id="${esc(d.id)}">
-      <span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span>
+      <span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" decoding="async" width="40" height="40"></span>
       <span><b>${esc(d.nom)}</b><span>${esc(circoDepute(d))} · ${esc(d.groupe)}</span></span>
     </button>`;
   }).join("") + (res.length > deputeLimite ? `<button type="button" class="histo-more" id="deputes-plus">Afficher ${Math.min(60, res.length - deputeLimite)} de plus (${res.length - deputeLimite} restants)</button>` : "");
@@ -5573,7 +5621,7 @@ async function renderClassements(){
   const k = CLASSEMENTS[classementChoisi];
   const top = DEPUTES.map(d => [d, k.val(d, a?.deputes, c?.deputes)]).filter(([, v]) => v != null).sort((x, y) => y[1] - x[1]).slice(0, 10);
   corps.innerHTML = `<div class="theme-filter-bar" role="group" aria-label="Choisir un classement">${Object.entries(CLASSEMENTS).map(([id, x]) => `<button type="button" class="theme-chip ${id === classementChoisi ? "selected" : ""}" aria-pressed="${id === classementChoisi}" data-c="${id}">${x.titre}</button>`).join("")}</div>
-    ${top.length ? top.map(([d, v], i) => { const p = partiDepute(d); return `<button type="button" class="classement-ligne" data-id="${esc(d.id)}"><span class="rang">${i + 1}</span><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(d.nom)}</b><small>${esc(d.groupe)} · ${esc(d.dep)}</small></span><span class="val">${k.fmt(v)}</span></button>`; }).join("") : `<p class="no-result-msg">Classement indisponible pour le moment.</p>`}
+    ${top.length ? top.map(([d, v], i) => { const p = partiDepute(d); return `<button type="button" class="classement-ligne" data-id="${esc(d.id)}"><span class="rang">${i + 1}</span><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" decoding="async" width="40" height="40"></span><span><b>${esc(d.nom)}</b><small>${esc(d.groupe)} · ${esc(d.dep)}</small></span><span class="val">${k.fmt(v)}</span></button>`; }).join("") : `<p class="no-result-msg">Classement indisponible pour le moment.</p>`}
     ${boutonsPartage("classement")}
     <p class="depute-note">${k.note} Un classement ne dit pas tout du travail d'un élu : rapports, travail en circonscription ou négociations n'apparaissent dans aucune donnée publique.</p>`;
   const ages = {};
@@ -7301,6 +7349,45 @@ function majMenusHaut(tabId){
   }));
 }
 
+/* Rendus faits une fois : « unefois(cle, fn, ttl) » n'appelle fn que si elle n'a pas déjà été appelée
+   (ou depuis plus de ttl ms). Un échec libère la clé ; un changement de langue vide tout. */
+const RENDUS = new Map();
+function unefois(cle, fn, ttl = Infinity){
+  const t = RENDUS.get(cle);
+  if(t !== undefined && Date.now() - t < ttl) return;
+  RENDUS.set(cle, Date.now());
+  try{
+    const r = fn();
+    if(r && r.catch) r.catch(()=> RENDUS.delete(cle));
+    return r;
+  }catch(e){ RENDUS.delete(cle); throw e; }
+}
+document.addEventListener("langue-changee", ()=> RENDUS.clear());
+
+/* Rend la main au navigateur (affichage, saisie) entre deux tranches de travail */
+const rendreLaMain = () => (window.scheduler && scheduler.yield) ? scheduler.yield() : new Promise(ok => setTimeout(ok, 0));
+
+async function rendreRubrique(tabId){
+  if(tabId === "deputes") unefois("deputes", renderDeputes);
+  else if(tabId === "senat") unefois("senat", renderSenat);
+  else if(tabId === "dirigeants"){
+    renderGouvernement();
+    if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
+  }
+  else if(tabId === "meetings") unefois("agenda", renderAgendaAN, 10 * 60e3);
+  else if(tabId === "actualites") unefois("actualites", renderActualites, 5 * 60e3);
+  else if(tabId === "budget") unefois("budget", renderBudget);
+  else if(tabId === "sondages"){
+    renderAnnonce();
+    await rendreLaMain();
+    if(document.body.dataset.page !== tabId) return;
+    unefois("evolution" + innerWidth, renderEvolution);
+    await rendreLaMain();
+    if(document.body.dataset.page !== tabId) return;
+    unefois("veille", renderVeille, 10 * 60e3);
+  }
+}
+
 function activateTab(tabId){
   onSeatLeave();
   fermerFeuille();
@@ -7322,20 +7409,15 @@ function activateTab(tabId){
   if(viewEl) viewEl.classList.add("active");
   // Défilement instantané : l'animation vers le haut d'une longue page fige les téléphones
   if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
-  if(tabId === "deputes") renderDeputes();
-  if(tabId === "senat") renderSenat();
-  if(tabId === "dirigeants"){
-    renderGouvernement();
-    if(LOGOS === null){ LOGOS = {}; lireJSON("data/logos.json").then(d=>{ LOGOS = d?.logos || {}; renderLeaders(); }); }
-  }
+  // Un rendu déjà à jour n'est pas refait à chaque changement de rubrique (les filtres, eux, redessinent directement)
   if(tabId === "presidents") chargerPresidents();
-  if(tabId === "meetings") renderAgendaAN();
-  if(tabId === "actualites") renderActualites();
   if(tabId === "espace") renderEspace();
   if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "methode") renderMethode();
-  if(tabId === "budget") renderBudget();
-  if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
+  // Le travail lourd vient APRÈS le premier affichage de la rubrique (un tour d'image plus tard), en tranches : l'interface répond d'abord
+  if(["deputes","senat","dirigeants","meetings","actualites","budget","sondages"].includes(tabId)){
+    requestAnimationFrame(()=> setTimeout(()=>{ if(document.body.dataset.page === tabId) rendreRubrique(tabId); }, 0));
+  }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
   if(DONNEES_CHARGEES){
@@ -8033,6 +8115,15 @@ async function initSite(){
   afficherNouveautes();
   ouvrirDepuisHash();
   initEspace();
+  prechargerProbable();
+}
+
+/* Quand le navigateur est inactif (et hors économie de données) : télécharge sans l'analyser le fichier de la rubrique
+   la plus probable après l'accueil (le Sénat). Le service worker le garde : l'ouverture de la rubrique est alors instantanée. */
+function prechargerProbable(){
+  if(navigator.connection?.saveData || /(^|-)2g$/.test(navigator.connection?.effectiveType || "")) return;
+  const aller = ()=>{ fetch("data/senat.json", { cache:"no-cache", priority:"low" }).then(r=> r.arrayBuffer()).catch(()=>{}); };
+  if(window.requestIdleCallback) requestIdleCallback(aller, { timeout:10000 }); else setTimeout(aller, 3000);
 }
 
 /* ---------- Langues : le français reste dans la page (source de vérité) ----------
