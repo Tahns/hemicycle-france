@@ -33,6 +33,7 @@ automatiquement, toutes les heures, à partir de sources officielles.
 | Fichier des nouveautés pour les alertes (derniers votes clés, vote de chaque député, dernier sondage) | `partage.cjs` | `data/deputes.json`, `data/sondages.json` | `data/alertes.json` |
 | Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
 | Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
+| File de stories Instagram automatiques : au plus un sujet d'actualité par exécution, image 1080 × 1920 dessinée par le site lui-même (`dessinerStory("actualite", indice)`), voir ci-dessous | `stories-auto.cjs` (Playwright, étape continue-on-error de `actualites.yml` et `update-data.yml`) | `data/actualites.json`, `data/direct.json` | `data/instagram-file.json`, `instagram/auto/<id>.jpg` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
 
@@ -45,6 +46,28 @@ Chaque script refuse de publier une donnée qu'il ne peut pas vérifier :
   sans identifiant (`PO0`) sont retrouvés à partir des députés nommés dans le vote ;
 - Insee : l'intitulé officiel de chaque série est vérifié à chaque lecture (série renommée ou arrêtée = refus) ;
 - sondages : chaque hypothèse doit totaliser ~100 %, avec date, échantillon et notice officielle lisibles.
+
+### File de stories Instagram automatiques
+
+`scripts/stories-auto.cjs` prépare des stories, il **ne publie rien** : aucune clé secrète, aucun appel à
+Instagram dans les workflows. Il écrit seulement `data/instagram-file.json` (les 30 dernières entrées
+`{ id, cree, titre, medias, url_image, type: "story", sources }`) et `instagram/auto/<id>.jpg` (JPEG 1080 × 1920,
+≤ 8 Mo, adresse publique `https://tahns.github.io/hemicycle-france/instagram/auto/<id>.jpg`). Un outil séparé
+lit cette file et publie, ou non. L'adresse du site est écrite en clair dans le pied de l'image (pas d'autocollant
+lien possible par l'API).
+
+Un sujet n'est retenu (un seul par exécution) que s'il remplit **toutes** ces règles :
+- repris par au moins 3 médias, ou prise de parole du président détectée dans `data/direct.json` (accroche « EN DIRECT ») ;
+- dernière mise à jour il y a moins de 3 h ;
+- pas déjà en file (id = empreinte du titre central ; un lien d'article déjà utilisé écarte aussi le sujet) ;
+- aucun mot de la liste prudente `MOTS_EXCLUS` du script (accusation, mise en examen, garde à vue, plainte, enquête, poursuite,
+  condamnation, soupçon, agression, viol, meurtre, mort, décès, drame, fait divers, mineur, victime, âge de moins de 20 ans…)
+  dans aucun titre du sujet, et pas de thème « justice » : mieux vaut manquer une story que publier à tort ;
+- au plus 4 entrées par jour (UTC+2), et aucune entre 23 h et 7 h, heure de Paris.
+
+Les JPEG de plus de 3 jours sont supprimés par le script lui-même. `scripts/check-data.js` contrôle la file
+(https, date valide, JPEG présent et ≤ 8 Mo, 4 entrées par jour au plus). Test : `node tests/stories-auto.test.mjs`.
+Essai local : `NODE_PATH=… CHROMIUM_PATH=/chemin/chrome STORIES_AUTO_MAINTENANT=2026-10-02T13:30:00Z node scripts/stories-auto.cjs`.
 
 ## Nom de domaine (optionnel)
 
