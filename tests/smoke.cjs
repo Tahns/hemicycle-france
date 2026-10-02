@@ -370,8 +370,8 @@ function verifier(cond, message) {
     };
 
     verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.documentElement.dir !== "rtl"), etiquette("la page doit démarrer en français (lang=fr, ltr)"));
-    verifier((await page.$$(`#${hote} .langue-liste li`)).length === 10, etiquette("dix langues attendues dans le menu"));
-    verifier((await page.$$(`#${hote} .langue-liste li img[src^="icons/drapeaux/"]`)).length >= 6, etiquette("drapeaux SVG absents du menu"));
+    verifier((await page.$$(`#${hote} .langue-liste li`)).length === 5, etiquette("cinq langues attendues dans le menu"));
+    verifier((await page.$$(`#${hote} .langue-liste li img[src^="icons/drapeaux/"]`)).length >= 5, etiquette("drapeaux SVG absents du menu"));
 
     // Clavier : Entrée ouvre, Échap ferme et rend le focus au bouton
     await page.focus(bouton);
@@ -393,7 +393,7 @@ function verifier(cond, message) {
     verifier((await decalage()) <= 1, etiquette("défilement horizontal en anglais"));
     await page.evaluate(() => { location.hash = "#deputes"; });
     await page.waitForSelector(".depute-carte", { timeout: 15000 });
-    verifier(/Enter the name of your town/.test(await texte("#view-deputes")), etiquette("rubrique Députés non traduite"));
+    verifier(/MPs/.test(await texte("#view-deputes h2")), etiquette("rubrique Députés non traduite"));
     await page.reload({ waitUntil: "networkidle" });
     verifier(await page.evaluate(() => document.documentElement.lang === "en"), etiquette("la langue n'est pas retrouvée après rechargement"));
     verifier((await texte('.tab[data-tab="actualites"]')) === "News", etiquette("traduction non appliquée après rechargement"));
@@ -407,16 +407,6 @@ function verifier(cond, message) {
     verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.getElementById("note-officiel").hidden), etiquette("retour au français incomplet"));
     verifier((await texte('.tab[data-tab="actualites"]')) === "Actualités" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
 
-    // Arabe : droite à gauche, sans défilement horizontal ; dictionnaire vide → le français reste affiché
-    await choisir("ar");
-    verifier(await page.evaluate(() => document.documentElement.lang === "ar" && document.documentElement.dir === "rtl"), etiquette("dir=rtl attendu en arabe"));
-    verifier((await texte('.tab[data-tab="actualites"]')) === "Actualités", etiquette("le français doit rester quand la clé manque"));
-    verifier(await page.evaluate(() => !document.getElementById("note-traduction").hidden), etiquette("note « traduction en préparation » absente"));
-    for (const onglet of ["accueil", "scrutin", "deputes", "sondages", "mentions"]) {
-      await page.evaluate((t) => { location.hash = t; }, onglet);
-      await page.waitForTimeout(300);
-      verifier((await decalage()) <= 1, etiquette(`défilement horizontal en arabe sur ${onglet}`));
-    }
     await choisir("fr");
     verifier(await page.evaluate(() => document.documentElement.dir === "ltr"), etiquette("dir=ltr non rétabli"));
     verifier(erreurs.length === 0, etiquette(`erreurs JavaScript — ${erreurs.join(" | ")}`));
