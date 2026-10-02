@@ -10,6 +10,7 @@
  */
 
 import { readFile } from "fs/promises";
+import { existsSync } from "fs";
 import { completer } from "./lois-format.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
@@ -115,6 +116,10 @@ async function checkActualites() {
     const hote = (() => { try { return new URL(a.url).hostname.replace(/^www\./, ""); } catch { return ""; } })();
     if (!a.titre || !a.media || isNaN(Date.parse(a.date))) err(`actualites.json : article incomplet (${a.url})`);
     if (!/^https:\/\//.test(a.url || "") || !sites.some((d) => hote === d || hote.endsWith("." + d))) err(`actualites.json : lien hors des médias retenus (${a.url})`);
+  }
+  // Illustrations : uniquement des images hébergées sur le site, qui existent
+  for (const s of data.sujets) for (const p of s.illustration?.personnes || []) {
+    if (p.photo && (!/^photos\/(deputes|senateurs|personnalites)\/[\w-]+\.jpg$/.test(p.photo) || !existsSync(p.photo))) err(`actualites.json : photo absente ou non hébergée (${p.photo})`);
   }
 }
 

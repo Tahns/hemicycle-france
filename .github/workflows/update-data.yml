@@ -80,6 +80,10 @@ jobs:
         id: logos
         run: node scripts/fetch-logos.js
         continue-on-error: true
+      - name: Portraits libres des personnalités sans photo officielle (Wikimedia Commons)
+        id: portraits
+        run: node scripts/fetch-portraits.js
+        continue-on-error: true
       - name: Candidats déclarés à la présidentielle (Wikipédia)
         id: candidats
         run: node scripts/fetch-candidats.js

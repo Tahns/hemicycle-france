@@ -21,6 +21,7 @@
  */
 
 import { readFile, writeFile } from "fs/promises";
+import { construireIndex, illustrer } from "./illustrations.js";
 
 const DATA_FILE = "data/actualites.json";
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -167,8 +168,10 @@ async function main() {
     const i = ens.map((_, k) => k).sort((x, y) => score(y) - score(x) || x - y)[0];
     return [articles[i], ...articles.filter((_, k) => k !== i)];
   };
+  // Illustration : portraits et logos libres hébergés sur le site, ou pictogramme du thème
+  const motifs = await construireIndex();
   const sortieSujets = sujets
-    .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, articles: central(s.articles) }))
+    .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, illustration: illustrer(s.articles.map((a) => a.titre), motifs), articles: central(s.articles) }))
     .sort((a, b) => b.medias - a.medias || b.derniere.localeCompare(a.derniere));
 
   const sortie = {

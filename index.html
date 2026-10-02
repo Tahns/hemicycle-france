@@ -357,7 +357,57 @@
   }
   .legend-item{display:flex; align-items:center; gap:6px;}
   .actu-liste{margin-top:8px;}
-  .actu-sujet{padding:14px 0; border-bottom:1px solid var(--border-soft);}
+  .actu-sujet{display:grid; grid-template-columns:76px 1fr; gap:14px; align-items:start; padding:14px 0; border-bottom:1px solid var(--border-soft);}
+  .actu-corps{min-width:0;}
+  .actu-visuel{position:relative; width:76px; height:76px;}
+  .actu-portraits img{position:absolute; width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid; background:var(--border-soft); box-sizing:border-box;}
+  .actu-portraits.n1 img{width:76px; height:76px;}
+  .actu-portraits.n2 a:nth-child(1) img, .actu-portraits.n2 > img:nth-child(1){left:0; top:0;}
+  .actu-portraits.n2 a:nth-child(2) img, .actu-portraits.n2 > img:nth-child(2){right:0; bottom:0;}
+  .actu-portraits.n3 img{width:46px; height:46px;}
+  .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:15px; top:0;}
+  .actu-portraits.n3 a:nth-child(2) img, .actu-portraits.n3 > img:nth-child(2){left:0; bottom:0;}
+  .actu-portraits.n3 a:nth-child(3) img, .actu-portraits.n3 > img:nth-child(3){right:0; bottom:0;}
+  .actu-logo{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:#fff; border:1px solid var(--border-soft); border-radius:6px; padding:6px; box-sizing:border-box;}
+  .actu-logo img{max-width:100%; max-height:28px; object-fit:contain;}
+  .actu-logo img:only-of-type{max-height:46px;}
+  .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:#fff; font-family:var(--font-display); font-size:26px; font-weight:600;}
+  .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:6px; background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
+  .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
+  .actu-picto small{font-size:9.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1;}
+  .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
+  .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .actu-noms{color:var(--text-soft);}
+  .actu-une{grid-template-columns:140px 1fr; gap:20px; padding:18px 0 20px;}
+  .actu-une .actu-visuel{width:140px; height:140px;}
+  .actu-une .actu-portraits.n1 img{width:140px; height:140px; border-width:4px;}
+  .actu-une .actu-portraits.n2 img{width:100px; height:100px;}
+  .actu-une .actu-portraits.n3 img{width:84px; height:84px;}
+  .actu-une .actu-portraits.n3 a:nth-child(1) img, .actu-une .actu-portraits.n3 > img:nth-child(1){left:28px;}
+  .actu-une .actu-picto svg{width:60px; height:60px;}
+  .actu-une .actu-picto small{font-size:11px;}
+  .actu-une .actu-logo img{max-height:52px;} .actu-une .actu-logo img:only-of-type{max-height:90px;}
+  .actu-une .actu-initiales{font-size:48px;}
+  .actu-une .actu-theme{width:32px; height:32px;} .actu-une .actu-theme svg{width:18px; height:18px;}
+  .actu-une h4{font-size:24px;}
+  @media (max-width:700px){
+    .actu-sujet{grid-template-columns:60px 1fr; gap:12px;}
+    .actu-visuel{width:60px; height:60px;}
+    .actu-portraits.n1 img{width:60px; height:60px;}
+    .actu-portraits img{width:44px; height:44px;}
+    .actu-portraits.n3 img{width:36px; height:36px;}
+    .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:12px;}
+    .actu-picto svg{width:26px; height:26px;} .actu-picto small{display:none;}
+    .actu-une{grid-template-columns:1fr; gap:12px;}
+    .actu-une .actu-visuel{width:100%; height:120px;}
+    .actu-une .actu-portraits{display:flex; justify-content:flex-start; gap:10px;}
+    .actu-une .actu-portraits img, .actu-une .actu-portraits.n1 img, .actu-une .actu-portraits.n2 img, .actu-une .actu-portraits.n3 img{position:static; width:110px; height:110px;}
+    .actu-une .actu-portraits.n3 img{width:96px; height:96px;}
+    .actu-une .actu-theme{right:auto; left:96px; top:-4px;}
+    .actu-une .actu-picto{flex-direction:row; gap:12px;} .actu-une .actu-picto small{display:block; font-size:13px;}
+    .actu-une .actu-initiales{width:110px;}
+    .actu-une h4{font-size:20px;}
+  }
   .actu-sujet h4{margin:2px 0 4px; font-family:var(--font-display); font-size:19px; font-weight:600; line-height:1.3;}
   .actu-sujet h4 a{color:var(--text); text-decoration:none;}
   .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
@@ -1464,6 +1514,7 @@
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
         <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
+        <li><b>Portraits :</b> photos officielles de l'Assemblée nationale et du Sénat pour les parlementaires ; pour les autres personnalités, image principale de leur article Wikipédia lorsqu'elle est sous licence libre sur <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>, hébergée sur le site.<span id="credits-portraits"></span></li>
         <li><b>Logos des partis :</b> fichiers libres de <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (domaine public, sauf le logo de Renaissance : CC BY-SA 4.0, Stéphane Séjourné, vectorisation Valo139), hébergés sur le site. Les logos restent des marques de leurs partis ; ils ne sont montrés qu'à titre d'identification.</li>
         <li><b>Photos des élus :</b> photos officielles de l'Assemblée nationale et du Sénat, réduites et hébergées sur le site.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
@@ -2830,15 +2881,62 @@ function ilYA(iso){
   if(min < 24 * 60) return `il y a ${Math.round(min / 60)} h`;
   return new Date(iso).toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
 }
-function sujetHTML(s, court){
+// Illustration d'un sujet : portraits (officiels ou libres de Wikimedia Commons), sinon logo du parti,
+// sinon pictogramme du thème. Aucune image extérieure : tout est hébergé sur le site.
+const THEMES_ACTU = {
+  justice:      ["#8E6C3A", "M12 4v16M7 20h10M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z", "Justice"],
+  budget:       ["#1F7A4D", "M17 6.5A6.5 6.5 0 1 0 17 17.5M4 10h9M4 14h9", "Budget"],
+  election:     ["#1B3A8C", "M4 11h16v9H4zM8 11V4h8v7M10 7h4", "Élections"],
+  senat:        ["#7A2E4A", "M3 20h18M5 20v-8M9.5 20v-8M14.5 20v-8M19 20v-8M3 12h18L12 5 3 12z", "Sénat"],
+  assemblee:    ["#2F6FE0", "M3 18a9 9 0 0 1 18 0M7 18a5 5 0 0 1 10 0M2 18h20", "Assemblée"],
+  gouvernement: ["#5B4FC9", "M4 21V9l8-5 8 5v12M9 21v-6h6v6M2 21h20", "Gouvernement"],
+  international: ["#0F7C8C", "M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18zM3 12h18M12 3c2.5 2.6 3.5 5.6 3.5 9s-1 6.4-3.5 9c-2.5-2.6-3.5-5.6-3.5-9s1-6.4 3.5-9z", "International"],
+  securite:     ["#B3261E", "M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z", "Sécurité"],
+  politique:    ["#625D53", "M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4", "Vie politique"],
+};
+const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
+const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
+function visuelActu(s){
+  const ill = s.illustration || {};
+  const avecPhoto = (ill.personnes || []).filter(p=>p.photo);
+  const theme = THEMES_ACTU[ill.theme] || THEMES_ACTU.politique;
+  const pastille = `<span class="actu-theme" style="--c:${theme[0]}" title="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg></span>`;
+  if(avecPhoto.length){
+    return `<div class="actu-visuel actu-portraits n${avecPhoto.length}">${avecPhoto.map(p=>{
+      const img = `<img src="${esc(p.photo)}" alt="" loading="lazy" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`;
+      return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${img}</a>` : img;
+    }).join("")}${pastille}</div>`;
+  }
+  if((ill.partis || []).length){
+    return `<div class="actu-visuel actu-logo">${ill.partis.map(c=>`<img src="icons/partis/${esc(c)}.png" alt="${esc(c)}" loading="lazy">`).join("")}${pastille}</div>`;
+  }
+  if((ill.personnes || []).length){
+    const p = ill.personnes[0];
+    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
+  }
+  return `<div class="actu-visuel actu-picto" style="--c:${theme[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
+}
+function sujetHTML(s, court, une){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
-  return `<article class="actu-sujet">
+  const noms = (s.illustration?.personnes || []).map(p=>p.nom);
+  return `<article class="actu-sujet${une ? " actu-une" : ""}">
+    ${visuelActu(s)}
+    <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
-    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}</div>
-    ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
+    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}</div>
+    ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
+    </div>
   </article>`;
+}
+let creditsPortraits = null;
+async function renderCreditsPortraits(){
+  if(creditsPortraits) return;
+  creditsPortraits = (await lireJSON("data/portraits.json"))?.portraits || {};
+  const liste = Object.entries(creditsPortraits).filter(([, p])=>p.fichier);
+  if(liste.length) document.getElementById("credits-portraits").innerHTML = ` Auteurs et licences : ${liste.map(([nom, p])=>
+    `<a href="${lien(p.source)}" target="_blank" rel="noopener">${esc(nom)}</a> (${esc(p.auteur || "auteur inconnu")}, ${esc(p.licence)})`).join(" ; ")}.`;
 }
 function renderActualites(){
   const liste = document.getElementById("actualites-liste");
@@ -2852,14 +2950,14 @@ function renderActualites(){
   document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
   const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
-  liste.innerHTML = sujets.slice(0, 60).map(s=> sujetHTML(s, false)).join("");
+  liste.innerHTML = sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
 }
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
   if(!top.length){ bloc.hidden = true; return; }
   bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>` +
-    top.map(s=> sujetHTML(s, true)).join("");
+    top.map((s, i)=> sujetHTML(s, true, i === 0)).join("");
   bloc.hidden = false;
 }
 
@@ -4919,6 +5017,7 @@ function activateTab(tabId){
   }
   if(tabId === "meetings") renderAgendaAN();
   if(tabId === "actualites") renderActualites();
+  if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "sondages"){ renderAnnonce(); renderEvolution(); renderVeille(); }
 
   // L'URL reflète la page affichée (partageable) ; hémicycle et historique précisent le scrutin / le groupe
