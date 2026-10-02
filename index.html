@@ -730,7 +730,8 @@
   .gauge-legende .trait{width:3px; height:12px; background:var(--text); border-radius:2px;}
   .quiz-card{padding:18px 0 20px; border-bottom:1px solid var(--border);}
   .quiz-progress{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px;}
-  .quiz-question{font-family:var(--font-display); font-size:21px; font-weight:500; line-height:1.3; margin-bottom:14px;}
+  .quiz-question{font-family:var(--font-display); font-size:21px; font-weight:500; line-height:1.3; margin-bottom:6px;}
+  .quiz-aide{font-size:13px; color:var(--text-faint); margin:0 0 14px; max-width:720px;}
   .quiz-options{display:flex; gap:8px; flex-wrap:wrap;}
   .quiz-option{
     padding:8px 18px; border-radius:3px; border:1px solid var(--ink);
@@ -1121,7 +1122,7 @@
   <div class="liseré" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="masthead-top">
     <span id="edition-date">Édition du jour</span>
-    <span class="droite"><span class="maj-info" id="maj-info">Mis à jour chaque matin à partir de sources publiques</span>
+    <span class="droite"><span class="maj-info" id="maj-info">Mis à jour toutes les heures à partir de sources publiques</span>
       <button type="button" class="theme-toggle bouton-recherche" aria-haspopup="dialog">Rechercher <kbd>/</kbd></button>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
@@ -1410,8 +1411,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Actualités</h2>
-      <p class="chapo">Les derniers titres de la rubrique politique de médias nationaux reconnus, de sensibilités différentes, relus toutes les deux heures. Le site ne reprend que le titre : chaque ligne renvoie à l'article du média qui l'a publié. Un sujet traité par plusieurs rédactions indépendantes est mis en avant.
-        <small id="actualites-maj">Flux publics des rédactions, relus toutes les deux heures.</small></p>
+      <p class="chapo">Les derniers titres de la rubrique politique de médias nationaux reconnus, de sensibilités différentes, relus toutes les heures. Le site ne reprend que le titre : chaque ligne renvoie à l'article du média qui l'a publié. Un sujet traité par plusieurs rédactions indépendantes est mis en avant.
+        <small id="actualites-maj">Flux publics des rédactions, relus toutes les heures.</small></p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
       <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
@@ -1507,11 +1508,11 @@
 
       <h3>Sources et réutilisation des données</h3>
       <ul>
-        <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées chaque jour ; la date de la dernière mise à jour figure en bas de chaque page.</li>
+        <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
-        <li><b>Actualités :</b> titres, dates et liens relus toutes les deux heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
-        <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues chaque jour ; le vote de chaque groupe est recoupé avec le total officiel.</li>
+        <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
         <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
         <li><b>Portraits :</b> photos officielles de l'Assemblée nationale et du Sénat pour les parlementaires ; pour les autres personnalités, image principale de leur article Wikipédia lorsqu'elle est sous licence libre sur <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>, hébergée sur le site.<span id="credits-portraits"></span></li>
@@ -2657,7 +2658,7 @@ function renderAgendaAN(){
     return p.type === "vote" ? `<li><span class="tag vote">Vote solennel</span>${t}</li>` : p.type === "qag" ? "" : `<li>${t}</li>`;
   };
   const jour = (j)=>`<div class="an-jour"><div class="jour">${esc(jourFr(j.date))}</div><ul>${j.points.some(p=>p.type==="qag") ? `<li><span class="tag">Questions au Gouvernement</span></li>` : ""}${j.points.map(ligne).join("")}</ul></div>`;
-  el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé chaque matin. Il peut encore changer.</span></h3>
+  el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé toutes les heures. Il peut encore changer.</span></h3>
     ${boutonsPartage("agenda")}
     ${jours.slice(0,4).map(jour).join("")}
     ${jours.length > 4 ? `<details><summary>Les ${jours.length - 4} jours de séance suivants</summary>${jours.slice(4).map(jour).join("")}</details>` : ""}
@@ -2829,7 +2830,7 @@ function renderSecondTour(){
   if(!SECOND_TOUR.length || periodeReserveSondages()){ bloc.hidden = true; return; }
   const couleur = nom => CANDIDATS.find(c=>c.id===nom)?.couleur || "#8A8C94";
   bloc.innerHTML = `<h3>Second tour : les duels testés</h3>
-    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement chaque matin, avec les mêmes contrôles qu'au premier tour.</p>
+    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement toutes les heures, avec les mêmes contrôles qu'au premier tour.</p>
     ${SECOND_TOUR.slice(0, 8).map(d=>{
       const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
       return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
@@ -2853,7 +2854,7 @@ function renderProbabilites(){
   const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null);
   const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1);
   bloc.innerHTML = `<h3>Qui a le plus de chances ?</h3>
-    <p class="probas-sub">Estimation recalculée chaque matin à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
+    <p class="probas-sub">Estimation recalculée toutes les heures à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
     <table class="probas-table">
       <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
       <tbody>${liste.map(c=>`<tr>
@@ -2970,7 +2971,7 @@ async function renderVeille(){
   if(!liste.length || periodeReserveSondages()){ bloc.hidden = true; return; }
   const fin = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long" }).replace(/^1 /, "1er ");
   bloc.innerHTML = `<h3>Les dernières enquêtes déposées</h3>
-    <p class="veille-sub">Chaque sondage publié doit être déclaré à la Commission des sondages. Le site vérifie sa liste chaque matin : une enquête dont les chiffres ne sont pas encore publiés apparaît « en attente », puis s'affiche dès qu'ils le sont.</p>
+    <p class="veille-sub">Chaque sondage publié doit être déclaré à la Commission des sondages. Le site vérifie sa liste toutes les heures : une enquête dont les chiffres ne sont pas encore publiés apparaît « en attente », puis s'affiche dès qu'ils le sont.</p>
     ${liste.map(e=>`<div class="veille-ligne">
       <span class="veille-nom"><b>${esc(e.institut)}</b>${e.media ? ` pour ${esc(e.media)}` : ""}</span>
       <span class="veille-date">terrain jusqu'au ${esc(fin(e.terrain.fin))}${e.echantillon ? ` · ${formatNombre(e.echantillon)} personnes` : ""}</span>
@@ -3202,18 +3203,33 @@ function quizPhrase(sc, sujet){
     : `${sujet} votes sont aussi proches (${sc[0].pct} %) de ceux de ${ex.length} groupes : ${ex.map(x=>x.nom).join(", ")}.`;
 }
 
-// Questions : les derniers votes solennels sur l'ensemble d'un texte (un par texte), puis la dernière censure
+// Questions en langage courant (data/quiz.json, chacune reliée à un vote réel), complétées par les
+// derniers textes votés, dont l'intitulé officiel est simplifié automatiquement
+let QUIZ_PERSO = []; // data/quiz.json
+const QUIZ_NB = 12, QUIZ_AUTO = 2; // 10 questions rédigées + les 2 derniers textes votés
+function questionAuto(l){
+  const t = l.titre
+    .replace(/^l[’']ensemble (du|de la) /i, "")
+    .replace(/\s*\((texte de la commission mixte paritaire|[^)]*lecture[^)]*)\)\.?$/i, "")
+    .replace(/^(projet|proposition) de loi( organique| constitutionnelle)?/i, (_, x, y)=> y ? `la loi${y}` : "la loi")
+    .replace(/^(la loi(?: organique| constitutionnelle)?) relatif/, "$1 relative")
+    .replace(/\.$/, "");
+  return `Auriez-vous voté pour ${t} ?`;
+}
 function choisirQuestionsQuiz(){
   const vus = new Set();
-  const cle = l => l.titre.replace(/\(.*$/,"").trim().toLowerCase();
-  const textes = LOIS.filter(l => categorieLoi(l)==="texte" && l.typeVote==="SPS")
+  const cle = l => (l.dossierRef || l.titre.replace(/\(.*$/,"").trim().toLowerCase());
+  const perso = QUIZ_PERSO.map(q => ({ q, loi: LOIS.find(l => l.numero === q.numero) }))
+    .filter(x => x.loi && x.loi.votes && !vus.has(cle(x.loi)) && vus.add(cle(x.loi)))
+    .map(x => Object.assign(x.loi, { quizQuestion: x.q.question, quizAide: x.q.aide, quizTheme: x.q.theme }));
+  const auto = LOIS.filter(l => categorieLoi(l)==="texte" && l.typeVote==="SPS" && !vus.has(cle(l)))
     .filter(l => { const k = cle(l); if(vus.has(k)) return false; vus.add(k); return true; })
-    .slice(0, 7);
-  const censure = LOIS.find(l => l.typeVote==="MOC");
-  QUIZ_LOIS = censure ? [...textes, censure] : textes;
+    .slice(0, Math.max(QUIZ_AUTO, QUIZ_NB - perso.length))
+    .map(l => Object.assign(l, { quizQuestion: questionAuto(l), quizAide: titreLoi(l), quizTheme: l.theme && l.theme !== "À catégoriser" ? l.theme : "Loi récente" }));
+  QUIZ_LOIS = [...perso.slice(0, QUIZ_NB - Math.min(QUIZ_AUTO, auto.length)), ...auto].slice(0, QUIZ_NB);
   const n = QUIZ_LOIS.length;
   document.getElementById("quiz-banner-detail").textContent =
-    `Mettez-vous à la place d'un député : votez sur ${n} textes récents parmi les plus importants de la session, puis découvrez de quels groupes vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.`;
+    `${n} questions simples sur des lois vraiment votées par les députés : répondez oui ou non, puis découvrez de quels groupes de l'Assemblée vous êtes le plus proche. Vos réponses ne sont enregistrées nulle part.`;
 }
 
 function renderQuiz(){
@@ -3221,12 +3237,13 @@ function renderQuiz(){
   const container = document.getElementById("quiz-container");
   container.innerHTML = `<div class="quiz-avancement" id="quiz-avancement"><span class="quiz-avancement-texte" id="quiz-avancement-texte">0 réponse sur ${QUIZ_LOIS.length}</span><span class="quiz-avancement-piste"><span id="quiz-avancement-barre"></span></span></div>` + QUIZ_LOIS.map((loi,idx)=>`
     <div class="quiz-card">
-      <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · vote du ${esc(loi.date)}</div>
-      <div class="quiz-question">${esc(titreLoi(loi))}</div>
+      <div class="quiz-progress">Question ${idx+1} sur ${QUIZ_LOIS.length} · ${esc(loi.quizTheme || "")}</div>
+      <div class="quiz-question">${esc(loi.quizQuestion || titreLoi(loi))}</div>
+      <p class="quiz-aide">${esc(loi.quizAide || "")} Voté le ${esc(loi.date)}.</p>
       <div class="quiz-options" data-loi="${loi.id}">
-        <button type="button" class="quiz-option" data-vote="pour">Pour</button>
-        <button type="button" class="quiz-option" data-vote="contre">Contre</button>
-        <button type="button" class="quiz-option" data-vote="abst">Abstention</button>
+        <button type="button" class="quiz-option" data-vote="pour">Oui</button>
+        <button type="button" class="quiz-option" data-vote="contre">Non</button>
+        <button type="button" class="quiz-option" data-vote="abst">Sans avis</button>
       </div>
     </div>
   `).join("") + `<button class="quiz-cta" id="quiz-submit" disabled>Répondez aux ${QUIZ_LOIS.length} questions pour voir votre résultat</button>`;
@@ -3286,8 +3303,8 @@ function showQuizResult(){
       <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="quiz">Défier mes amis</button><button type="button" class="lien-bouton bouton-story" data-story="quiz">Story de mon résultat</button></div>
       <div class="quiz-recap">
         ${QUIZ_LOIS.map(loi=>{
-          const lib = {pour:"pour",contre:"contre",abst:"abstention"};
-          return `<div class="quiz-recap-row"><b>${esc(titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Assemblée : ${loi.resultat==="adopte"?"adopté":"rejeté"} (${esc(loi.date)}) · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">détail officiel</a></div>`;
+          const lib = {pour:"oui",contre:"non",abst:"sans avis"};
+          return `<div class="quiz-recap-row"><b>${esc(loi.quizQuestion || titreLoi(loi))}</b><br>Vous : ${lib[quizReponses[loi.id]]} · Les députés : ${loi.resultat==="adopte"?"oui (adopté)":"non (rejeté)"}, le ${esc(loi.date)} · <a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">vote officiel</a></div>`;
         }).join("")}
       </div>
       <button class="quiz-restart" id="quiz-restart">Refaire le quiz</button>
@@ -3738,7 +3755,7 @@ async function renderSenatHemicycle(){
     : ordreGroupes.filter(g=> compte[g]).map(g=>`<span class="legend-item"><span class="dot" style="background:${GROUPES_SENAT[g].couleur}"></span>${esc(GROUPES_SENAT[g].nom)} : ${formatNombre(compte[g])}</span>`)
   ).join("") + `<span class="legend-note">${scr
     ? `${esc(titreSenat(scr))}, ${esc(scr.date)} : <b>${scr.resultat === "adopte" ? "adopté" : "rejeté"}</b>. Vote de chaque sénateur actuellement en fonction ; au Sénat, chaque groupe peut voter pour ses membres absents. <a href="${lien(scr.sourceUrl)}" target="_blank" rel="noopener">Scrutin officiel</a>`
-    : `${formatNombre(senatHemiSieges.length)} sénateurs en fonction${senatHemiSieges.length < 348 ? ` sur 348 sièges (${348 - senatHemiSieges.length} vacant${348 - senatHemiSieges.length > 1 ? "s" : ""})` : ""}, d'après la liste officielle du Sénat, mise à jour chaque matin. Majorité absolue : 175 sièges.`}</span>`;
+    : `${formatNombre(senatHemiSieges.length)} sénateurs en fonction${senatHemiSieges.length < 348 ? ` sur 348 sièges (${348 - senatHemiSieges.length} vacant${348 - senatHemiSieges.length > 1 ? "s" : ""})` : ""}, d'après la liste officielle du Sénat, relue toutes les heures. Majorité absolue : 175 sièges.`}</span>`;
   document.getElementById("senat-hemi-info").textContent = "Survolez ou touchez un siège pour voir le sénateur.";
 }
 
@@ -5123,10 +5140,10 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites, quiz] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
-    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"),
+    lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"), lireJSON("data/quiz.json"),
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
@@ -5134,6 +5151,7 @@ async function loadPetitesDonnees(){
   if(sondages?.instituts?.length) appliquerSondages(sondages);
   if(probas?.candidats?.length) PROBAS = probas;
   if(actualites?.sujets) ACTUALITES = actualites;
+  if(quiz?.questions) QUIZ_PERSO = quiz.questions;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations;
   if(meetings?.meetings) MEETINGS = meetings.meetings;
@@ -5242,7 +5260,9 @@ async function initSite(){
   document.getElementById("scrutin-banner-detail").textContent =
     `${formatNombre(LOIS.length)} scrutins publics de la XVIIᵉ législature${dernier ? ` (dernier : ${dernier.date})` : ""}`;
   // Heure de la dernière mise à jour des données, en heure de Paris
-  const derniereMaj = [LOIS_MAJ, INDICATEURS_MAJ].filter(d => d && !isNaN(Date.parse(d))).sort().pop();
+  // Dernière mise à jour, toutes données confondues (votes, Insee, sondages, probabilités, actualités)
+  const derniereMaj = [LOIS_MAJ, INDICATEURS_MAJ, SONDAGES_SOURCE?.maj, PROBAS?.lastUpdated, ACTUALITES?.lastUpdated]
+    .filter(d => d && !isNaN(Date.parse(d))).sort((a, b)=> Date.parse(a) - Date.parse(b)).pop();
   if(derniereMaj){
     const d = new Date(derniereMaj);
     const jour = d.toLocaleDateString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"long" });
