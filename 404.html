@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F1E8">
 <title>Page introuvable · Hémicycle France</title>
 <script>
   // Lien de partage dont la page d'aperçu n'existe pas encore (v/<numéro>.html, d/<PA…>.html) :
@@ -15,18 +16,31 @@
     else if(d) location.replace(base + "#depute-" + d[1]);
     // Lien de retour : racine du site, qu'il soit sur tahns.github.io/hemicycle-france/ ou sur un domaine propre
     document.addEventListener("DOMContentLoaded", function(){
-      var a = document.getElementById("accueil");
-      if(a) a.href = location.hostname.endsWith("github.io") ? "/" + location.pathname.split("/")[1] + "/" : "/";
+      var racine = location.hostname.endsWith("github.io") ? "/" + location.pathname.split("/")[1] + "/" : "/";
+      ["accueil", "logo"].forEach(function(id){ var a = document.getElementById(id); if(a) a.href = racine; });
+      var css = document.createElement("link"); css.rel = "stylesheet"; css.href = racine + "pages.css"; document.head.appendChild(css);
     });
   })();
 </script>
 <style>
-  body{margin:0; padding:48px 24px; background:#F5F1E8; color:#1C1B18; font:16px/1.6 Georgia, serif; text-align:center;}
+  /* Repli minimal ; la charte complète vient de pages.css, chargé depuis la racine du site (voir le script) */
+  body{margin:0; background:#F5F1E8; color:#1C1B18; font:16px/1.55 "Public Sans", -apple-system, "Segoe UI", sans-serif;}
   a{color:#1B3A8C;}
+  .lisere{display:flex; height:4px;} .lisere span{flex:1;} .lisere span:nth-child(1){background:#1B3A8C;} .lisere span:nth-child(2){background:#F7F4EC;} .lisere span:nth-child(3){background:#C8102E;}
+  header, main{max-width:860px; margin:0 auto; padding:16px 24px;}
+  header{border-bottom:3px double #1C1B18;}
+  header a{font-family:"Newsreader", Georgia, serif; font-size:24px; font-weight:700; color:#1C1B18; text-decoration:none;}
+  h1{font-family:"Newsreader", Georgia, serif; font-size:clamp(28px,5vw,40px); font-weight:700; line-height:1.12; margin:8px 0 12px;}
 </style>
 </head>
 <body>
-  <h1>Page introuvable</h1>
-  <p>Cette page n'existe pas ou plus. <a id="accueil" href="/hemicycle-france/">Retour à l'accueil d'Hémicycle France</a>.</p>
+  <div class="lisere" aria-hidden="true"><span></span><span></span><span></span></div>
+  <header><a id="logo" href="/hemicycle-france/">Hémicycle France</a></header>
+  <main>
+    <div class="surtitre">Erreur 404</div>
+    <h1>Cette page n'existe pas ou plus</h1>
+    <p class="meta">Le lien est peut-être ancien ou mal recopié. Vous retrouverez les votes, les sondages et les chiffres clés à l'accueil.</p>
+    <a class="bouton" id="accueil" href="/hemicycle-france/">Retour à l'accueil</a>
+  </main>
 </body>
 </html>
