@@ -59,8 +59,8 @@ function gabarit({ titre, description, chemin, image, cible, libelleCible, corps
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE}${chemin}">
 <meta property="og:image" content="${SITE}${image}">
-<meta property="og:image:width" content="800">
-<meta property="og:image:height" content="420">
+<meta property="og:image:width" content="${image === "icons/partage.jpg" ? 1200 : 800}">
+<meta property="og:image:height" content="${image === "icons/partage.jpg" ? 630 : 420}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F1E8">
 <link rel="icon" href="../icons/icon-192.png">
