@@ -51,7 +51,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$("#en-bref .accueil-hero-stat")).length >= 1, `${nom} : bloc « En bref » incomplet`);
 
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
@@ -187,6 +187,11 @@ function verifier(cond, message) {
       verifier(await page.isVisible(".barre-mobile"), "mobile : barre d'onglets absente");
       await page.click("#bouton-plus");
       verifier(await page.isVisible("#feuille-plus"), "mobile : le panneau « Plus » ne s'ouvre pas");
+      await page.click('.feuille-lien[data-tab="budget"]');
+      await page.waitForTimeout(250);
+      verifier(await page.evaluate(() => document.getElementById("view-budget").classList.contains("active") && document.getElementById("feuille-plus").hidden),
+        "mobile : le panneau « Plus » ne mène pas à la rubrique Budget");
+      await page.click("#bouton-plus");
       await page.click('.feuille-lien[data-tab="chiffres"]');
       await page.waitForTimeout(250);
       verifier(await page.evaluate(() => document.getElementById("view-chiffres").classList.contains("active") && document.getElementById("feuille-plus").hidden),
@@ -224,6 +229,37 @@ function verifier(cond, message) {
     verifier(avec ? !!groupes : !groupes, `« Les groupes en chiffres » : âge moyen ${avec ? "absent" : "affiché sans données"}`);
     verifier(erreurs.length === 0, `âge/profession : erreurs JavaScript — ${erreurs.join(" | ")}`);
     await page.close();
+  }
+
+  // Budget : sans fichier (jamais de chiffre inventé), puis avec un jeu d'essai fictif injecté (tests/fixtures/budget-essai.json)
+  for (const [nom, viewport] of [["ordinateur", { width: 1300, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
+    for (const avec of [false, true]) {
+      const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block" })).newPage();
+      const erreurs = [];
+      page.on("pageerror", (e) => erreurs.push(e.message));
+      await page.route(/\/data\/budget\.json/, (route) => avec
+        ? route.fulfill({ contentType: "application/json", body: fs.readFileSync(path.join(RACINE, "tests/fixtures/budget-essai.json"), "utf-8") })
+        : route.fulfill({ status: 404, body: "" }));
+      await page.goto(base + "#budget", { waitUntil: "networkidle" });
+      await page.waitForTimeout(400);
+      const texte = await page.textContent("#budget-contenu");
+      const etiquette = `budget ${avec ? "avec données" : "sans données"} (${nom})`;
+      const decalage = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      if (avec) {
+        verifier((await page.$$("#budget-contenu .budget-bloc")).length === 4, `${etiquette} : quatre blocs attendus`);
+        verifier((await page.$$("#budget-contenu .budget-bloc:first-child .budget-barres li")).length === 11, `${etiquette} : onze fonctions de dépenses attendues`);
+        verifier(/Pour 100 € dépensés/.test(texte) && /Source : /.test(texte) && /année 2023/.test(texte), `${etiquette} : phrase « Pour 100 € », source ou année absentes`);
+        verifier((await page.$$("#budget-contenu .budget-source a[href^='https://']")).length >= 4, `${etiquette} : lien vers la source absent`);
+        verifier(/Déficit/.test(texte), `${etiquette} : déficit absent`);
+      } else {
+        verifier(/Données en cours de récupération/.test(texte) && !/\d/.test(texte), `${etiquette} : message d'attente absent ou chiffres affichés sans données`);
+      }
+      verifier((await decalage()) <= 1, `${etiquette} : défilement horizontal`);
+      await page.evaluate(() => { document.documentElement.dataset.theme = "sombre"; });
+      verifier((await decalage()) <= 1, `${etiquette} : défilement horizontal en mode sombre`);
+      verifier(erreurs.length === 0, `${etiquette} : erreurs JavaScript — ${erreurs.join(" | ")}`);
+      await page.close();
+    }
   }
 
   await navigateur.close();
