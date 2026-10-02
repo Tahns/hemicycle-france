@@ -3105,9 +3105,9 @@ async function renderArchives(){
   const series = noms.map(nom=>({ nom, parti:dernier.candidats.find(c=>c.nom===nom).parti,
     pts: inst.map((i,k)=>({ k, v:i.candidats.find(c=>c.nom===nom)?.intention })).filter(p=>typeof p.v === "number") })).filter(s=>s.pts.length);
   note.textContent = inst.length < 2
-    ? "Un seul instantané pour l'instant : les courbes apparaîtront dès la semaine prochaine. Valeurs : intentions de vote moyennes calculées par le site."
-    : `${inst.length} instantanés, du ${jour(inst[0].date)} au ${jour(dernier.date)}. Valeurs : intentions de vote moyennes calculées par le site, en %.`;
-  if(!series.length){ graphe.innerHTML = ""; return; }
+    ? "Premier instantané enregistré. La courbe d'évolution apparaîtra dès la semaine prochaine, avec un deuxième point."
+    : `${inst.length} instantanés, du ${jour(inst[0].date)} au ${jour(dernier.date)}. Valeurs : intentions de vote retenues pour la simulation (voir Méthode), en %.`;
+  if(inst.length < 2 || !series.length){ graphe.innerHTML = ""; return; }
   const W = 640, H = 280, g = { l:34, r:110, t:12, b:26 };
   const max = Math.max(10, Math.ceil(Math.max(...series.flatMap(s=>s.pts.map(p=>p.v))) / 10) * 10);
   const x = k => g.l + (inst.length < 2 ? (W - g.l - g.r) / 2 : k * (W - g.l - g.r) / (inst.length - 1));

@@ -124,7 +124,7 @@ function verifier(cond, message) {
 
     await page.goto(base + "#archives", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
-    verifier((await page.$$("#archives-liste li")).length >= 1 && (await page.$$("#archives-graphe svg circle")).length >= 1, `${nom} : archives ou graphique absents`);
+    verifier((await page.$$("#archives-liste li")).length >= 1 && ((await page.$$("#archives-liste li")).length < 2 ? (await page.$$("#archives-graphe svg")).length === 0 : (await page.$$("#archives-graphe svg circle")).length >= 1), `${nom} : archives ou graphique incohérents`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur les archives`);
 
     await page.goto(base + "#candidats", { waitUntil: "networkidle" });
