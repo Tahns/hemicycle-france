@@ -12,6 +12,7 @@
     "fetch:sondages": "node scripts/fetch-sondages.js",
     "check": "node scripts/check-data.js && node scripts/check-fraicheur.js",
     "test": "node tests/smoke.cjs",
+    "test:perf": "node tests/perf-navigation.cjs --cpu=20",
     "serve": "python3 -m http.server 8000"
   },
   "license": "MIT"

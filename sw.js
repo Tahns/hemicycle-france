@@ -1,10 +1,11 @@
 /**
  * Service de mise en cache (application installable).
- * Règle : le réseau d'abord pour la page et les données, pour toujours afficher la dernière version ;
- * la copie en cache ne sert que hors connexion. Polices et icônes, qui ne changent pas : cache d'abord.
+ * Règle : le réseau d'abord pour la page et les scripts ; les données JSON sont servies depuis la copie puis rafraîchies
+ * (stale-while-revalidate : 2e affichage instantané). Pas de mise en cache à la volée au-delà de 1 Mo.
+ * Polices et icônes, qui ne changent pas : cache d'abord.
  * Incrémenter VERSION pour vider les anciens caches.
  */
-const VERSION = "v3";
+const VERSION = "v4";
 const CACHE = `politique-fr-${VERSION}`;
 const COQUILLE = ["./", "index.html", "lois-worker.js", "manifest.webmanifest", "icons/icon-192.png"];
 
@@ -20,6 +21,23 @@ self.addEventListener("activate", (e) => {
   );
 });
 
+// Au-delà de cette taille (octets, telle qu'annoncée par le serveur), une réponse n'est pas mise en cache à la volée :
+// l'écriture d'un gros fichier occupe le service worker et la mémoire d'un téléphone d'entrée de gamme.
+const TAILLE_MAX_CACHE = 1024 * 1024;
+const GROS_FICHIERS = /\/data\/lois\.json$/; // 5 Mo décodés : le cache HTTP du navigateur le garde déjà
+
+function cachable(rep) {
+  if (!rep || !rep.ok || rep.type === "opaque") return false;
+  return !(Number(rep.headers.get("content-length")) > TAILLE_MAX_CACHE);
+}
+
+// Écriture dans le cache APRÈS avoir rendu la réponse : la page n'attend jamais le cache
+function ecrireEnCache(e, requete, rep) {
+  if (!cachable(rep) || GROS_FICHIERS.test(new URL(requete.url).pathname)) return;
+  const copie = rep.clone();
+  e.waitUntil(caches.open(CACHE).then((c) => c.put(requete, copie)).catch(() => {}));
+}
+
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
@@ -27,25 +45,29 @@ self.addEventListener("fetch", (e) => {
   // Ressources fixes : cache d'abord
   if (/\/(fonts|icons)\//.test(url.pathname)) {
     e.respondWith(
-      caches.match(e.request).then((r) => r || fetch(e.request).then((rep) => {
-        const copie = rep.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copie));
-        return rep;
-      }))
+      caches.match(e.request).then((r) => r || fetch(e.request).then((rep) => { ecrireEnCache(e, e.request, rep); return rep; }))
     );
     return;
   }
 
-  // Page et données : réseau d'abord, copie de secours hors connexion
+  // Données JSON : « stale-while-revalidate ». La copie en cache répond tout de suite (2e visite instantanée) ;
+  // le réseau la rafraîchit en arrière-plan pour la visite suivante. Sans copie : réseau, puis secours.
+  if (/\/data\/.+\.json$/.test(url.pathname)) {
+    e.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const copie = await cache.match(e.request);
+      const reseau = fetch(e.request).then((rep) => { ecrireEnCache(e, e.request, rep); return rep; });
+      if (copie) { e.waitUntil(reseau.catch(() => {})); return copie; }
+      try { return await reseau; }
+      catch (err) { return (await caches.match(e.request)) || Response.error(); }
+    })());
+    return;
+  }
+
+  // Page et scripts : réseau d'abord, copie de secours hors connexion
   e.respondWith(
     fetch(e.request)
-      .then((rep) => {
-        if (rep.ok) {
-          const copie = rep.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, copie));
-        }
-        return rep;
-      })
+      .then((rep) => { ecrireEnCache(e, e.request, rep); return rep; })
       .catch(() => caches.match(e.request).then((r) => r || caches.match("index.html")))
   );
 });
