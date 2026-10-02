@@ -168,9 +168,8 @@ function verifier(cond, message) {
       for (const t of ["actualite", "actualites", "probabilites", "secondtour", "decompte", "candidat", "parti", "justice", "indicateur", "groupe", "meeting"])
         if (!STORY_PLUS[t]) STORY_PLUS[t] = async (ctx) => { ctx.fillStyle = "#123"; ctx.fillRect(0, 0, 40, 40); return { nom: "test" }; };
     });
-    for (const [onglet, type] of [["accueil", "actualite"], ["accueil", "actualites"], ["actualites", "actualite"], ["actualites", "actualites"], ["sondages", "probabilites"], ["sondages", "secondtour"],
-      ["sondages", "decompte"], ["candidats", "candidat"], ["dirigeants", "parti"], ["dirigeants", "groupe"], ["histo", "groupe"], ["justice", "justice"], ["chiffres", "indicateur"],
-      ["meetings", "meeting"], ["scrutin", "scrutin"], ["senat", "senat"], ["dirigeants", "gouvernement"]]) {
+    for (const [onglet, type] of [["accueil", "actualites"], ["actualites", "actualites"], ["sondages", "probabilites"], ["sondages", "decompte"], ["histo", "groupe"],
+      ["scrutin", "scrutin"], ["senat", "senat"], ["dirigeants", "gouvernement"]]) {
       await page.goto(base + (onglet === "accueil" ? "" : "#" + onglet), { waitUntil: "networkidle" });
       await poserDessins();
       await page.waitForTimeout(300);
