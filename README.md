@@ -3,7 +3,7 @@
 Site : https://tahns.github.io/hemicycle-france/ — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
-automatiquement, chaque jour, à partir de sources officielles.
+automatiquement, toutes les heures, à partir de sources officielles.
 
 ## Ce qui est automatique
 
@@ -16,7 +16,7 @@ automatiquement, chaque jour, à partir de sources officielles.
 | Chômage, population, croissance du PIB, dette publique | `fetch-insee.js` | Insee, accès SDMX public (**aucune clé nécessaire**) | `data/indicateurs.json` |
 | Sondages présidentielle 2027 (dernière enquête de chaque institut, historique des deux derniers semestres pour la courbe, duels du second tour) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
 | Probabilités d'accéder au second tour et d'être élu (simulation à partir des sondages) | `probabilites.js` | `data/sondages.json` | `data/probabilites.json` |
-| Actualités politiques : titres et liens, sujets repris par plusieurs médias mis en avant (toutes les 2 h, workflow `actualites.yml`) | `fetch-actualites.js` | flux RSS publics de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat | `data/actualites.json` |
+| Actualités politiques : titres et liens, sujets repris par plusieurs médias mis en avant (toutes les heures, workflow `actualites.yml`) | `fetch-actualites.js` | flux RSS publics de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat | `data/actualites.json` |
 | Portraits libres des personnalités sans photo officielle (chefs de parti, candidats, Gouvernement), pour illustrer les actualités | `fetch-portraits.js` | image principale de l'article Wikipédia, si elle est sous licence libre sur Wikimedia Commons | `photos/personnalites/`, `data/portraits.json` |
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
@@ -88,7 +88,7 @@ racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 | Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
 
 Désormais automatiques : l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
-(Eurostat, notification de la France), les chefs de parti (vérifiés chaque jour dans l'infobox
+(Eurostat, notification de la France), les chefs de parti (vérifiés toutes les heures dans l'infobox
 Wikipédia de chaque parti ; un changement est appliqué puis signalé pour relire l'intitulé de la
 fonction) et le thème des votes (commission saisie au fond du dossier législatif).
 
@@ -136,7 +136,7 @@ Mise en place : créer un jeton *fine-grained* limité à ce dépôt avec la per
 
 3. **Vérifier que l'automatisation tourne** : onglet "Actions" du dépôt → le workflow
    "Mise à jour automatique des données" doit apparaître et pouvoir être lancé manuellement
-   (bouton "Run workflow") pour un premier test, avant d'attendre le déclenchement quotidien.
+   (bouton "Run workflow") pour un premier test, avant d'attendre le déclenchement horaire.
 
 ## Tester en local avant de déployer
 

@@ -123,6 +123,16 @@ async function checkActualites() {
   }
 }
 
+async function checkQuiz() {
+  const data = JSON.parse(await readFile("data/quiz.json", "utf-8").catch(() => "null"));
+  if (!data) return;
+  const lois = JSON.parse(await readFile("data/lois.json", "utf-8")).lois.map((l) => l.numero);
+  for (const q of data.questions || []) {
+    if (!Number.isInteger(q.numero) || !q.question || !q.aide) err(`quiz.json : question incomplète (${q.numero})`);
+    else if (!lois.includes(q.numero)) err(`quiz.json : scrutin n° ${q.numero} absent de lois.json`);
+  }
+}
+
 async function checkProbabilites() {
   const data = JSON.parse(await readFile("data/probabilites.json", "utf-8").catch(() => "null"));
   if (!data) return;
@@ -256,6 +266,7 @@ await checkIndicateurs();
 await checkGroupes();
 await checkSondages();
 await checkProbabilites();
+await checkQuiz();
 await checkActualites();
 await checkDeputes();
 await checkCandidats();

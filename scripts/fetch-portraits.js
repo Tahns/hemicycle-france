@@ -39,7 +39,7 @@ async function imageArticle(nom) {
     const d = await api(`https://fr.wikipedia.org/w/api.php?action=query&format=json&redirects=1&prop=pageimages|pageprops|description&piprop=name&titles=${encodeURIComponent(titre)}`);
     const page = Object.values(d.query?.pages || {})[0];
     if (!page || page.missing !== undefined || page.pageprops?.disambiguation !== undefined) continue;
-    if (!/politi|ministre|député|sénat|maire|président|syndical/i.test(page.description || "")) continue;
+    if (page.description && !/politi|ministre|député|sénat|maire|président|syndical|homme d.état|femme d.état|haut fonctionnaire|militant|candidat|essayiste|journaliste/i.test(page.description)) continue;
     return page.pageimage ? { fichier: page.pageimage, page: `https://fr.wikipedia.org/wiki/${encodeURIComponent(page.title.replace(/ /g, "_"))}` } : null;
   }
   return null;
@@ -65,7 +65,8 @@ async function main() {
     const p = data.portraits[nom];
     const fichierLocal = `${DOSSIER}/${slug(nom)}.jpg`;
     if (p?.fichier && (await existe(fichierLocal))) continue;
-    if (p && !p.fichier && (maintenant - new Date(p.essai)) / 864e5 < 30) continue;
+    // Sans article reconnu : nouvel essai le lendemain ; licence non libre : au bout de 30 jours
+    if (p && !p.fichier && (maintenant - new Date(p.essai)) / 864e5 < (/pas d'article/.test(p.raison || "") ? 1 : 30)) continue;
     if (traites++ >= MAX) break;
     try {
       const img = await imageArticle(nom);
