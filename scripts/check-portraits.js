@@ -2,7 +2,7 @@
 /**
  * check-portraits.js
  * ------------------
- * Droit à l'image : chaque photo de photos/personnalites/ doit avoir une entrée dans
+ * Droit à l'image : chaque photo de photos/personnalites/ (et de sa version haute définition photos/personnalites/hd/) doit avoir une entrée dans
  * data/portraits.json avec sa licence, sa source (page Commons) et, hors domaine public / CC0,
  * son auteur (obligation d'attribution). Une photo sans licence est une erreur bloquante
  * (appelée par check-data.js).
@@ -21,14 +21,17 @@ export async function verifierPortraits(dossier = "photos/personnalites", fichie
   const data = JSON.parse(await readFile(fichierPortraits, "utf-8").catch(() => "null"));
   if (!data?.portraits) return [`${fichierPortraits} : absent ou sans « portraits »`];
   const parSlug = new Map(Object.entries(data.portraits).filter(([, p]) => p?.fichier).map(([nom, p]) => [slug(nom), { nom, ...p }]));
-  const photos = (await readdir(dossier).catch(() => [])).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
-  for (const f of photos) {
-    const p = parSlug.get(f.replace(/\.[^.]+$/, ""));
-    if (!p) { erreurs.push(`${dossier}/${f} : aucune entrée de licence dans ${fichierPortraits}`); continue; }
-    if (!p.licence) erreurs.push(`${dossier}/${f} : licence manquante (${p.nom})`);
-    else if (NON_LIBRE.test(p.licence)) erreurs.push(`${dossier}/${f} : licence non libre (« ${p.licence} », ${p.nom})`);
-    if (!/^https:\/\//.test(p.source || "")) erreurs.push(`${dossier}/${f} : source (page Commons) manquante (${p.nom})`);
-    if (p.licence && !/public domain|domaine public|^cc0|^pd\b/i.test(p.licence) && !p.auteur) erreurs.push(`${dossier}/${f} : auteur manquant, attribution impossible (${p.nom})`);
+  // Les versions HD (hd/) reprennent l'entrée, donc la licence et les crédits, de la vignette du même nom
+  for (const dir of [dossier, `${dossier}/hd`]) {
+    const photos = (await readdir(dir).catch(() => [])).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
+    for (const f of photos) {
+      const p = parSlug.get(f.replace(/\.[^.]+$/, ""));
+      if (!p) { erreurs.push(`${dir}/${f} : aucune entrée de licence dans ${fichierPortraits}`); continue; }
+      if (!p.licence) erreurs.push(`${dir}/${f} : licence manquante (${p.nom})`);
+      else if (NON_LIBRE.test(p.licence)) erreurs.push(`${dir}/${f} : licence non libre (« ${p.licence} », ${p.nom})`);
+      if (!/^https:\/\//.test(p.source || "")) erreurs.push(`${dir}/${f} : source (page Commons) manquante (${p.nom})`);
+      if (p.licence && !/public domain|domaine public|^cc0|^pd\b/i.test(p.licence) && !p.auteur) erreurs.push(`${dir}/${f} : auteur manquant, attribution impossible (${p.nom})`);
+    }
   }
   return erreurs;
 }

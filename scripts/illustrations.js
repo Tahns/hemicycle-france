@@ -3,7 +3,7 @@
  * ----------------
  * Illustre un sujet d'actualité à partir de ses titres, avec uniquement des images que le site a le
  * droit de montrer : portraits officiels des parlementaires (photos/deputes, photos/senateurs),
- * portraits libres de Wikimedia Commons (photos/personnalites, voir fetch-portraits.js) et logos libres
+ * portraits libres de Wikimedia Commons (photos/personnalites, voir fetch-portraits.js ; versions haute définition dans les sous-dossiers hd/, champ photoHd) et logos libres
  * des partis (icons/partis). À défaut, un thème (budget, justice, élection…) qui choisit un pictogramme.
  *
  * Une personne est reconnue par son nom complet ; les personnalités nationales (chefs de parti,
@@ -80,6 +80,13 @@ export async function construireIndex() {
     }
   }
 
+  // Version haute définition (stories Instagram nettes) quand elle existe : photos/<dossier>/hd/<fichier>
+  for (const p of personnes.values()) {
+    if (!p.photo) continue;
+    const hd = p.photo.replace(/^(photos\/(?:deputes|senateurs|personnalites))\//, "$1/hd/");
+    if (hd !== p.photo && (await existe(hd))) p.photoHd = hd;
+  }
+
   // Motifs : nom complet pour tous ; nom de famille seul pour les personnalités nationales, s'il est unique
   const motifs = [];
   const familles = new Map();
@@ -126,7 +133,7 @@ export function illustrer(titres, motifs) {
   const personnes = classes
     .filter(([, n]) => n * 2 >= titres.length || n === classes[0][1])
     .slice(0, 3)
-    .map(([p]) => Object.fromEntries(Object.entries({ nom: p.nom, photo: p.photo, parti: p.parti, lien: p.lien, credit: p.credit }).filter(([, v]) => v)));
+    .map(([p]) => Object.fromEntries(Object.entries({ nom: p.nom, photo: p.photo, photoHd: p.photoHd, parti: p.parti, lien: p.lien, credit: p.credit }).filter(([, v]) => v)));
   const tout = plat(titres.join(" "));
   const partis = PARTIS.filter(([, re]) => re.test(tout)).map(([code]) => code).slice(0, 2);
   const theme = THEMES.find(([, re]) => re.test(tout))?.[0] || "politique";

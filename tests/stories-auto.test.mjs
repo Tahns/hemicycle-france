@@ -1,7 +1,8 @@
 // Tests de scripts/stories-auto.cjs (choix du sujet) sur des titres fictifs. USAGE : node tests/stories-auto.test.mjs
 import assert from "assert";
+import { readFileSync } from "fs";
 import { createRequire } from "module";
-const { choisirSujet, motExclu, idSujet, jourUTC2, elaguer } = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+const { choisirSujet, choisirSondage, choisir, reserveSondages, jourPublication, motExclu, idSujet, jourUTC2, elaguer } = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
 
 const now = new Date("2026-10-02T13:30:00Z"); // 15 h 30 à Paris
 const il_y_a = (h) => new Date(now.getTime() - h * 36e5).toISOString();
@@ -87,6 +88,72 @@ assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027
   const { gardees, images } = elaguer(entrees, now);
   assert.strictEqual(gardees.length, 30);
   assert.ok(images.size < 30 && images.size > 0 && images.has(entrees[34].id) && !images.has(entrees[5].id));
+}
+
+// ---------- Déclencheur « nouveau sondage » ----------
+const jour = (h) => new Date(now.getTime() - h * 36e5).toISOString().slice(0, 10);
+const scores = { "Marine Le Pen": [31, 36], "Jean-Luc Mélenchon": [14, 17], "Édouard Philippe": [15, 24] };
+const inst = (nom, hFin, extra = {}) => ({ nom, date: "29 septembre 2026", dateFin: jour(hFin), echantillon: 1500, hypotheses: 3, url: "https://www.commission-des-sondages.fr/notices/files/x.pdf", scores, ...extra });
+const sond = (...instituts) => ({ instituts });
+const choixS = (instituts, opts = {}) => choisirSondage({ sondages: sond(...instituts), file: vide, now, ...opts });
+// Nouveau sondage (terrain fini hier, publié aujourd'hui) : retenu, avec son identifiant
+{
+  const r = choixS([inst("Ifop", 24)]);
+  assert.ok(!r.refus, r.refus);
+  assert.strictEqual(r.sondageId, `Ifop|${jour(24)}`);
+  assert.match(r.id, /^[0-9a-f]{12}$/);
+  assert.strictEqual(r.indice, 0);
+  // il est prioritaire sur un sujet d'actualité retenable
+  const actus = actu(sujet("Le gouvernement présente son projet de budget pour 2027", 5));
+  assert.ok(choisir({ actualites: actus, direct: null, sondages: sond(inst("Ifop", 24)), file: vide, now }).sondage, "le sondage passe avant l'actualité");
+  assert.strictEqual(choisir({ actualites: actus, direct: null, sondages: sond(), file: vide, now }).indice, 0, "sans sondage : l'actualité");
+}
+// Le plus récent des nouveaux sondages
+assert.strictEqual(choixS([inst("Harris", 40), inst("Ifop", 24)]).sondage.nom, "Ifop");
+// Même sondage déjà en file : non ; un sondage plus ancien que le dernier en file : non ; un plus récent : oui
+{
+  const entree = (sondageId) => ({ id: "abcdefabcdef", cree: il_y_a(3), titre: "t", sources: [], type: "story", sondageId });
+  assert.ok(choixS([inst("Ifop", 24)], { file: { entrees: [entree(`Ifop|${jour(24)}`)] } }).refus, "déjà en file");
+  assert.ok(choixS([inst("Harris", 30)], { file: { entrees: [entree(`Ifop|${jour(24)}`)] } }).refus, "plus ancien que le dernier en file");
+  assert.ok(!choixS([inst("Harris", 1)], { file: { entrees: [entree(`Ifop|${jour(24)}`)] } }).refus, "plus récent que le dernier en file");
+}
+// Sondage ancien (> 48 h après publication) : non ; publié hier selon le nom de la notice malgré un terrain plus ancien : oui
+assert.ok(choixS([inst("Ifop", 24 * 5)]).refus, "ancien refusé");
+{
+  const hier = jour(24), mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"][Number(hier.slice(5, 7)) - 1];
+  const i = inst("Ifop", 24 * 4, { url: `https://www.commission-des-sondages.fr/notices/files/10284-pres-ifop-le-figaro-${Number(hier.slice(8))}-${mois}.pdf` });
+  assert.strictEqual(jourPublication(i), hier, "jour de publication lu dans le nom de la notice");
+  assert.ok(!choixS([i]).refus, "publié hier selon la notice");
+  assert.strictEqual(jourPublication(inst("Ifop", 24)), jour(0), "sinon lendemain de la fin du terrain");
+}
+// Mentions obligatoires impossibles (pas d'échantillon) ou trop peu de candidats : non
+assert.ok(choixS([inst("Ifop", 24, { echantillon: 0 })]).refus, "sans échantillon");
+assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).refus, "trop peu de candidats");
+// Réserve électorale (samedi 0 h – dimanche 20 h, Paris) : non, même pour un sondage tout frais ; mêmes dates que le site
+{
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf-8");
+  const tours = JSON.parse(/const TOURS_PRESIDENTIELLE = (\[[^\]]*\]);/.exec(html)[1]);
+  assert.deepStrictEqual(tours, ["2027-04-18", "2027-05-02"], "dates des tours identiques à index.html");
+  for (const t of ["2027-04-16T22:30:00Z" /* samedi 0 h 30 Paris */, "2027-04-17T10:00:00Z", "2027-04-18T17:30:00Z" /* dimanche 19 h 30 Paris */, "2027-05-01T08:00:00Z", "2027-05-02T17:59:00Z"]) {
+    const n = new Date(t);
+    assert.ok(reserveSondages(n), `réserve ${t}`);
+    const fin = new Date(n.getTime() - 36e5).toISOString().slice(0, 10);
+    const r = choisirSondage({ sondages: sond({ ...inst("Ifop", 24), dateFin: fin }), file: vide, now: n });
+    assert.ok(r.refus && /réserve/.test(r.refus), `aucun sondage en réserve ${t}`);
+  }
+  for (const t of ["2027-04-16T21:30:00Z" /* vendredi 23 h 30 Paris */, "2027-04-18T18:00:00Z" /* dimanche 20 h Paris */, "2027-04-19T08:00:00Z"]) assert.strictEqual(reserveSondages(new Date(t)), null, `hors réserve ${t}`);
+}
+// Plafonds : 2 sondages par jour ; ils ne comptent pas dans les 4 actualités ; nuit : refus avant 7 h et après 23 h 30, accepté à 23 h 15
+{
+  const e = (i, h) => ({ id: `${i}`.repeat(12), cree: il_y_a(h), titre: "t", sources: [], type: "story", sondageId: `X${i}|2026-09-0${i}` });
+  assert.ok(choixS([inst("Ifop", 24)], { file: { entrees: [e(1, 2), e(2, 3)] } }).refus, "3e sondage du jour refusé");
+  const quatreActus = [1, 2, 3, 4].map((i) => ({ id: `${i}`.repeat(12), cree: il_y_a(i * 1.5), titre: `t${i}`, sources: [] }));
+  assert.ok(!choixS([inst("Ifop", 24)], { file: { entrees: quatreActus } }).refus, "hors plafond de 4 actualités");
+  assert.strictEqual(choisirSujet({ actualites: actu(sujet("Le gouvernement présente son projet de budget pour 2027", 4)), direct: null, file: { entrees: [e(1, 2), e(2, 3), ...quatreActus.slice(0, 3)] }, now }).indice, 0, "les sondages ne comptent pas dans les 4 actualités");
+  const ok = (iso) => !choisirSondage({ sondages: sond(inst("Ifop", 24)), file: vide, now: new Date(iso) }).refus;
+  assert.ok(ok("2026-10-02T21:15:00Z"), "23 h 15 à Paris accepté");
+  assert.ok(!ok("2026-10-02T21:45:00Z"), "23 h 45 refusé");
+  assert.ok(!ok("2026-10-03T04:30:00Z"), "6 h 30 refusé");
 }
 
 console.log("stories-auto : tous les tests passent.");
