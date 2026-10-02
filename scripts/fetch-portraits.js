@@ -7,11 +7,11 @@
  *
  * Pour chaque nom : image principale de son article Wikipédia, à condition que l'article décrive une
  * personnalité politique et que le fichier, sur Wikimedia Commons, soit sous licence libre (domaine
- * public, CC0, CC BY, CC BY-SA). Vignette de 120 px dans photos/personnalites/<slug>.jpg ; auteur et
+ * public, CC0, CC BY, CC BY-SA, ou autre licence libre acceptée par Commons). Vignette de 120 px dans photos/personnalites/<slug>.jpg ; auteur et
  * licence notés dans data/portraits.json (crédités dans les mentions légales et au survol de la photo).
  * Un nom sans portrait libre est retenté au bout de 30 jours.
  *
- * USAGE : node scripts/fetch-portraits.js [--max=15]
+ * USAGE : node scripts/fetch-portraits.js [--max=40]
  */
 import { readFile, writeFile, mkdir, access } from "fs/promises";
 import { pathToFileURL } from "url";
@@ -19,7 +19,7 @@ import { pathToFileURL } from "url";
 const DATA_FILE = "data/portraits.json";
 const DOSSIER = "photos/personnalites";
 const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
-const MAX = parseInt(process.argv.find((a) => a.startsWith("--max="))?.split("=")[1] || "15", 10);
+const MAX = parseInt(process.argv.find((a) => a.startsWith("--max="))?.split("=")[1] || "40", 10);
 const log = (...m) => console.log("[fetch-portraits]", ...m);
 const warn = (...m) => console.warn("[fetch-portraits][ATTENTION]", ...m);
 const texte = (h) => String(h || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
@@ -76,7 +76,8 @@ async function main() {
       if (!info?.thumburl) throw new Error("fichier absent de Commons (image non libre hébergée sur Wikipédia ?)");
       const m = info.extmetadata || {};
       const licence = texte(m.LicenseShortName?.value);
-      if (!/public domain|domaine public|^cc0|^cc by(-sa)?\b/i.test(licence)) throw new Error(`licence non libre (${licence})`);
+      // Commons n'héberge que des fichiers libres ; on écarte quand même toute mention de restriction
+      if (!licence || /non[- ]?free|fair use|non commercial|\bnc\b|\bnd\b|all rights reserved|tous droits/i.test(licence)) throw new Error(`licence non libre (${licence || "inconnue"})`);
       const res = await fetch(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
       if (!res.ok || !/image\/(jpeg|png)/.test(res.headers.get("content-type") || "")) throw new Error(`téléchargement impossible (HTTP ${res.status})`);
       await writeFile(fichierLocal, Buffer.from(await res.arrayBuffer()));
