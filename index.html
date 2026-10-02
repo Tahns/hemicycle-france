@@ -879,6 +879,11 @@
   .actu-actions{margin:6px 0 0;}
   .duel-titre .bouton-story{margin-left:8px; font-weight:400;}
   .annonce .bouton-story{flex:none;}
+  .suivez{display:flex; flex-wrap:wrap; align-items:center; gap:6px 16px; margin:28px 0 8px; padding:16px 18px; border:1px solid var(--border); border-radius:12px; background:var(--bg-elevated);}
+  .suivez b{font-family:var(--font-display, inherit); font-size:17px;}
+  .suivez span{flex:1 1 240px; color:var(--text-soft); font-size:14.5px;}
+  .bouton-ig{display:inline-block; padding:8px 16px; border-radius:999px; color:#fff; font-weight:600; font-size:14px; text-decoration:none; background:linear-gradient(135deg,#7c3aed,#db2777 60%,#f59e0b);}
+  .bouton-ig:hover{filter:brightness(1.08);}
   .bouton-story[hidden]{display:none;}
   .bouton-story{display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px; text-decoration:none; font-weight:600; font-size:14px; color:#fff; background:linear-gradient(135deg,#7c3aed,#db2777 60%,#f59e0b); box-shadow:0 1px 4px rgba(124,58,237,.35); transition:transform .12s, box-shadow .12s;}
   .bouton-story:hover{transform:translateY(-1px); box-shadow:0 3px 10px rgba(124,58,237,.45);}
@@ -1337,6 +1342,12 @@
         <a href="feed.xml">Flux RSS</a>
       </div>
     </div>
+  
+    <aside class="suivez">
+      <b>Suivez le site sur Instagram</b>
+      <span>Les votes du jour, les sondages et l'actualité politique, en images. C'est aussi le moyen de nous écrire.</span>
+      <a class="bouton-ig" href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">@hemicyclefrance</a>
+    </aside>
   </section>
 
   <section class="view" id="view-scrutin">
@@ -1611,7 +1622,7 @@
     <div class="texte-legal">
       <h3>Éditeur</h3>
       <p>Ce site est édité par un particulier, à titre non professionnel. Comme le permet l'article 6, III, 2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), l'éditeur a choisi de ne pas rendre son identité publique ; les éléments permettant de l'identifier sont détenus par l'hébergeur. L'éditeur est également directeur de la publication.</p>
-      <p>Contact, demande de correction ou droit de réponse : <a href="https://github.com/Tahns/hemicycle-france/issues/new/choose" target="_blank" rel="noopener">ouvrir un ticket sur GitHub</a>.</p>
+      <p>Contact, demande de correction ou droit de réponse : par message privé sur Instagram, <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">@hemicyclefrance</a>, ou en <a href="https://github.com/Tahns/hemicycle-france/issues/new/choose" target="_blank" rel="noopener">ouvrant un ticket sur GitHub</a>.</p>
 
       <h3>Hébergeur</h3>
       <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820. <a href="https://github.com" target="_blank" rel="noopener">github.com</a></p>
@@ -1623,7 +1634,7 @@
       <ul>
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
-        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes et Public Sénat. Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, Le Point, Les Échos, BFMTV, France 24, RFI, Ouest-France, La Croix, L'Express, L'Humanité, Le Parisien, Mediapart, Euronews). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
@@ -1727,6 +1738,7 @@
     <a href="#methode" data-tab-lien="methode">Méthode</a> ·
     <a href="#mentions" data-tab-lien="mentions">Mentions légales</a> ·
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
+    <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">Instagram</a> ·
     <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
     <a href="feed.xml">Flux RSS des votes</a> ·
     <button type="button" class="lien-bouton bouton-partage" data-partage="site">Partager le site</button> ·
