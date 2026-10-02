@@ -529,6 +529,12 @@
   .classement-ligne small{display:block; color:var(--text-soft); font-size:12.5px;}
   .classement-ligne .val{font-family:var(--font-display); font-size:18px; font-weight:600; white-space:nowrap;}
   .classement-ligne:hover b{text-decoration:underline;}
+  .stats-groupes{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums;}
+  .stats-groupes th{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-faint); text-align:right; padding:6px 4px; border-bottom:1px solid var(--ink);}
+  .stats-groupes td{padding:7px 4px; border-bottom:1px solid var(--border-soft); text-align:right;}
+  .stats-groupes th:first-child, .stats-groupes td:first-child{text-align:left; font-weight:600;}
+  .stats-groupes .dot{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px;}
+  @media (max-width:640px){ .stats-groupes{font-size:13px;} .stats-groupes th{font-size:10.5px; letter-spacing:0; white-space:normal;} }
   .depute-themes{margin:0 0 18px; padding:10px 0; border-bottom:1px solid var(--border);}
   .depute-themes summary{cursor:pointer; font-weight:600; font-size:15px; min-height:32px; display:flex; align-items:center;}
   .depute-themes .proximite-row .nom{font-weight:500; white-space:normal;}
@@ -1410,6 +1416,7 @@
       </div>
       <div id="deputes-communes"></div>
       <details class="depute-themes classements" id="classements"><summary>Les classements : les plus assidus, les plus indépendants de leur groupe…</summary><div id="classements-corps"></div></details>
+      <details class="depute-themes classements" id="stats-groupes-bloc"><summary>Les groupes en chiffres : parité, participation, cohésion</summary><div id="stats-groupes-corps"></div></details>
       <div class="depute-grid" id="deputes-liste"></div>
     </div>
     <div id="depute-fiche" hidden></div>
@@ -4374,7 +4381,7 @@ async function renderDeputes(){
     (!q || norm(d.nom).includes(q) || norm(d.dep).includes(q) || norm(d.numDep) === q));
   document.getElementById("depute-count").textContent = res.length || !blocCommunes ? `${formatNombre(res.length)} député${res.length>1?"s":""}` : "Communes trouvées";
   document.getElementById("depute-reset").hidden = !q && !dep;
-  document.getElementById("classements").hidden = !!(q || dep);
+  document.getElementById("classements").hidden = document.getElementById("stats-groupes-bloc").hidden = !!(q || dep);
   document.getElementById("deputes-communes").innerHTML = blocCommunes;
   document.getElementById("deputes-communes").querySelectorAll(".depute-carte").forEach(b=> b.addEventListener("click", ()=> ouvrirDepute(b.dataset.id)));
   document.querySelectorAll("#deputes-communes .commune-elections:not(.commune-senateurs)").forEach(afficherPresidentielle);
@@ -4629,6 +4636,26 @@ async function renderClassements(){
   corps.querySelectorAll(".classement-ligne").forEach(b => b.addEventListener("click", () => ouvrirDepute(b.dataset.id)));
 }
 document.getElementById("classements").addEventListener("toggle", e => { if(e.target.open && DEPUTES) renderClassements(); });
+
+// Statistiques par groupe (bloc repliable) : calculées dans la page à partir de data/deputes.json, comme les classements
+function renderStatsGroupes(){
+  const corps = document.getElementById("stats-groupes-corps");
+  const groupes = new Map();
+  for(const d of DEPUTES){
+    const g = groupes.get(d.groupe) || { n:0, f:0, exp:0, sc:0, ec:0 };
+    const e = d.stats.pour + d.stats.contre + d.stats.abst;
+    g.n++; g.f += d.f ? 1 : 0; g.exp += e; g.sc += d.stats.scrutins; g.ec += d.stats.ecarts;
+    groupes.set(d.groupe, g);
+  }
+  const lignes = [...groupes.entries()].sort((a, b) => b[1].n - a[1].n);
+  const tot = lignes.reduce((t, [, g]) => ({ n:t.n + g.n, f:t.f + g.f }), { n:0, f:0 });
+  corps.innerHTML = `<table class="stats-groupes"><thead><tr><th scope="col">Groupe</th><th scope="col">Députés</th><th scope="col">Femmes</th><th scope="col">Participation</th><th scope="col">Cohésion</th></tr></thead><tbody>
+    ${lignes.map(([id, g]) => { const p = PARTIES.find(x => x.id === id) || { nom:id, couleur:"#8A8C94" };
+      return `<tr><td><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</td><td>${g.n}</td><td>${pctFr(g.f, g.n)}</td><td>${pctFr(g.exp, g.sc)}</td><td>${id === "NI" ? "—" : pctFr(g.exp - g.ec, g.exp)}</td></tr>`; }).join("")}
+    </tbody><tfoot><tr><td>Assemblée</td><td>${tot.n}</td><td>${pctFr(tot.f, tot.n)}</td><td colspan="2"></td></tr></tfoot></table>
+    <p class="depute-note">Calcul à partir des ${formatNombre(tot.n)} députés en fonction. Femmes : part des députés du groupe. Participation : votes exprimés (pour, contre ou abstention) sur l'ensemble des scrutins publics possibles pour ses membres. Cohésion : part des votes des membres identiques à la position majoritaire du groupe ; non calculée pour les non-inscrits. Les groupes de petite taille sont plus sensibles à un seul député.</p>`;
+}
+document.getElementById("stats-groupes-bloc").addEventListener("toggle", e => { if(e.target.open && DEPUTES) renderStatsGroupes(); });
 
 let deputeRechercheTimer;
 document.getElementById("depute-search").addEventListener("input", ()=>{

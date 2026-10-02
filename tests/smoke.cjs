@@ -107,6 +107,10 @@ function verifier(cond, message) {
     await page.goto(base + "#deputes", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$$(".depute-carte")).length >= 50, `${nom} : liste des députés vide`);
+    await page.evaluate(() => { document.getElementById("stats-groupes-bloc").open = true; });
+    await page.waitForTimeout(300);
+    verifier((await page.$$("#stats-groupes-corps tbody tr")).length >= 10, `${nom} : statistiques par groupe absentes`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec les statistiques par groupe`);
     await page.fill("#depute-search", "33");
     await page.waitForTimeout(300);
     const nbGironde = (await page.$$(".depute-carte")).length;
