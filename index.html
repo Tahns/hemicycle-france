@@ -864,6 +864,10 @@
   .faire-connaitre-actions{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; font-size:14.5px;}
   .bouton-plein{min-height:42px; padding:0 18px; border:none; border-radius:6px; background:var(--accent); color:#fff; font:600 15px var(--font-body); cursor:pointer;}
   :root[data-theme="sombre"] .bouton-plein{color:#1C1B18;}
+  .actu-actions{margin:6px 0 0;}
+  .duel-titre .bouton-story{margin-left:8px; font-weight:400;}
+  .annonce .bouton-story{flex:none;}
+  .bouton-story[hidden]{display:none;}
   .bouton-story::before{content:""; display:inline-block; width:.85em; height:.85em; margin-right:.35em; vertical-align:-1px; border:2px solid currentColor; border-radius:4px;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:rgba(20,18,14,.45);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
@@ -1344,7 +1348,7 @@
     </div>
     <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
-    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button></div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button><button type="button" class="lien-bouton bouton-story" id="histo-story" data-story="groupe" data-id="RN">Story</button></div>
     <div id="histo-list"></div>
   </section>
 
@@ -1424,6 +1428,7 @@
       <p class="chapo">Qui tient les rênes de chaque parti, qui mène ses troupes à l'Assemblée, et qui siège au Gouvernement.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
     </div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="dirigeants">Partager</button></div>
     <div class="leader-grid" id="leader-grid"></div>
     <div id="groupes-presidents"></div>
     <div id="gouvernement"></div>
@@ -1435,6 +1440,7 @@
       <h2>Économie</h2>
       <p class="chapo">Les chiffres dont on parle dans chaque débat : chômage, inflation, croissance, déficit, dette. Toujours la dernière valeur officielle, avec sa date et un lien vers la source.</p>
     </div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="chiffres">Partager</button></div>
     <input type="search" class="chiffre-search" id="chiffre-search" placeholder="Chercher un indicateur : chômage, dette…" aria-label="Rechercher un indicateur" />
     <div class="budget-hero" id="budget-hero"></div>
     <div class="chiffre-grid" id="chiffre-grid"></div>
@@ -1518,6 +1524,7 @@
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
       <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="candidats">Partager</button></div>
     <div class="candidat-grid" id="candidats-liste"></div>
   </section>
 
@@ -2574,6 +2581,7 @@ function renderHistorique(){
   const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie, document.getElementById("histo-theme").value);
   if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
   renderProximite(party, liste);
+  document.getElementById("histo-story").dataset.id = party.id;
   document.getElementById("histo-party-title").textContent =
     `Ses votes : ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
   document.getElementById("histo-count").textContent = liste.length ? `${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}` : "Aucun scrutin";
@@ -2662,6 +2670,7 @@ function meetingCard(m, idx, passe){
         </div>
         <div class="meeting-desc">${esc(m.desc)}</div>
         ${m.source ? `<div class="meeting-source">Source : <a href="${lien(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.nom)}</a></div>` : ''}
+        ${MEETINGS.indexOf(m) >= 0 ? `<div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="meeting" data-id="${MEETINGS.indexOf(m)}">Story</button></div>` : ""}
       </div>
     </div>`;
 }
@@ -2783,7 +2792,7 @@ function renderSourceBar(){
 function renderSondageAverage(){
   const tour = periodeReserveSondages();
   // Pas d'image de sondage à partager la veille et le jour du vote (loi du 19 juillet 1977)
-  document.querySelectorAll('.bouton-story[data-story="sondages"]').forEach(b=> b.hidden = !!tour);
+  document.querySelectorAll('.bouton-story[data-story="sondages"], .bouton-story[data-story="decompte"]').forEach(b=> b.hidden = !!tour);
   if(tour){
     document.getElementById("source-bar").innerHTML = "";
     document.getElementById("sondage-evolution").hidden = true;
@@ -2847,7 +2856,8 @@ function renderAnnonce(){
     ? `<div class="t"><b>Annonce du président de la République</b>Dimanche 2 mai 2027 à 20 h, à la fermeture des derniers bureaux de vote${maintenant < t1 ? ` · premier tour le 18 avril` : ""}</div>
        <div class="compte" role="timer" aria-label="Temps restant avant l'annonce du résultat">
          <span><b>${formatNombre(j)}</b>jours</span><span><b>${deux(h)}</b>heures</span><span><b>${deux(m)}</b>min</span><span><b>${deux(s)}</b>s</span>
-       </div>`
+       </div>
+       <button type="button" class="lien-bouton bouton-story" data-story="decompte" data-id=""${periodeReserveSondages() ? " hidden" : ""}>Story</button>`
     : `<div class="t"><b>Le nouveau président de la République est annoncé ce soir</b>Premières estimations à 20 h ; résultats officiels proclamés par le Conseil constitutionnel.</div>`;
   bloc.hidden = false;
   // Mise à jour chaque seconde, seulement quand la page des sondages est affichée et l'onglet visible
@@ -2866,7 +2876,7 @@ function renderSecondTour(){
     <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement toutes les heures, avec les mêmes contrôles qu'au premier tour.</p>
     ${SECOND_TOUR.slice(0, 8).map(d=>{
       const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
-      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
+      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)} <button type="button" class="lien-bouton bouton-story" data-story="secondtour" data-id="${SECOND_TOUR.indexOf(d)}">Story</button></div>
         ${d.instituts.map(i=>`<div class="duel-ligne">
           <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
           <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
@@ -2887,6 +2897,7 @@ function renderProbabilites(){
   const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null);
   const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1);
   bloc.innerHTML = `<h3>Qui a le plus de chances ?</h3>
+    <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="probabilites" data-id="">Story</button></div>
     <p class="probas-sub">Estimation recalculée toutes les heures à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
     <table class="probas-table">
       <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
@@ -2957,12 +2968,14 @@ function sujetHTML(s, court, une){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
   const noms = (s.illustration?.personnes || []).map(p=>p.nom);
+  const idxActu = ACTUALITES.sujets.indexOf(s); // indice dans la liste complète, pas dans la liste filtrée ou triée affichée
   return `<article class="actu-sujet${une ? " actu-une" : ""}">
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
     <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}</div>
+    ${idxActu >= 0 ? `<div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-story" data-story="actualite" data-id="${idxActu}">Story</button></div>` : ""}
     ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
     </div>
   </article>`;
@@ -2987,13 +3000,14 @@ function renderActualites(){
   document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
   const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
-  liste.innerHTML = sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
+  liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
 }
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
   if(!top.length){ bloc.hidden = true; return; }
-  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>` +
+  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
+    <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
     top.map((s, i)=> sujetHTML(s, true, i === 0)).join("");
   bloc.hidden = false;
 }
@@ -3224,7 +3238,7 @@ function renderCandidats(){
       ${c.slogan ? `<p class="slogan">« ${esc(c.slogan)} »</p>` : ""}
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
-      <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a> · <button type="button" class="lien-bouton bouton-story" data-story="candidat" data-id="${esc(c.nom)}">Story</button></p>
       </div>
     </div>`;
   }).join("");
@@ -3380,7 +3394,7 @@ function renderLeaders(){
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
-          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
+          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${sansChef ? "" : ` <button type="button" class="lien-bouton bouton-story" data-story="parti" data-id="${esc(l.parti)}">Story</button>`}${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
         </div>
       </div>`;
   }).join("");
@@ -3395,7 +3409,7 @@ function renderLeaders(){
           <span class="dot" style="background:${p.couleur}"></span>
           <div>
             <div class="groupe-nom">${esc(g.libelle)}</div>
-            <div class="groupe-meta">${g.president ? `${g.presidente ? "Présidente" : "Président"} : <b>${esc(g.president)}</b>${g.presidentDepuis ? ` (depuis le ${esc(dateCourte(g.presidentDepuis))})` : ""} · ` : ""}${g.membres} député·es</div>
+            <div class="groupe-meta">${g.president ? `${g.presidente ? "Présidente" : "Président"} : <b>${esc(g.president)}</b>${g.presidentDepuis ? ` (depuis le ${esc(dateCourte(g.presidentDepuis))})` : ""} · ` : ""}${g.membres} député·es · <button type="button" class="lien-bouton bouton-story" data-story="groupe" data-id="${esc(id)}">Story</button></div>
           </div>
         </div>`;
       }).join("")}
@@ -3442,7 +3456,7 @@ function renderChiffres(filter=""){
       <div class="chiffre-label">${i.nom}</div>
       <div class="chiffre-value ${i.tendance==='up'?'up':i.tendance==='down'?'down':''}">${i.valeur}</div>
       <div class="chiffre-sub">${i.detail}</div>
-      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a></div>
+      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a> · <button type="button" class="lien-bouton bouton-story" data-story="indicateur" data-id="${INDICATEURS.indexOf(i)}">Story</button></div>
     </div>
   `).join("");
 }
@@ -3489,6 +3503,7 @@ function renderBudgetGauges(){
           <div class="gauge-value">${esc(i.valeur)}</div>
           <div class="gauge-note">${esc(String(i.detail).replace(/\.?\s*$/, "."))}${/seuil/i.test(i.detail) ? "" : " " + j.seuil}</div>
           <div class="gauge-legende"><span class="trait" aria-hidden="true"></span>le trait sur l'anneau marque le seuil européen (${j.repere} % du PIB)</div>
+          <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="indicateur" data-id="${INDICATEURS.indexOf(i)}">Story</button></div>
         </div>
       </div>
     </div>`;
@@ -3546,7 +3561,7 @@ function renderJusticeList(){
       <div class="justice-affaire">${esc(c.affaire)}</div>
       <div class="justice-detail">${esc(c.detail)}</div>
       ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
-      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
+      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a> · <button type="button" class="lien-bouton bouton-story" data-story="justice" data-id="${CONDAMNATIONS.indexOf(c)}">Story</button></div>
     </div>
   `).join("");
 }
@@ -4426,7 +4441,7 @@ function afficherNouveautes(){
 /* ---------- Stories (Instagram, WhatsApp…) : image verticale 1080 × 1920 dessinée dans le navigateur ---------- */
 // Rien n'est envoyé à un serveur : l'image est composée ici, puis partagée par le menu du téléphone
 // (Instagram, WhatsApp, Snapchat…) ou téléchargée sur ordinateur.
-const STORY = { L:1080, H:1920, marge:84, papier:"#F5F1E8", encre:"#1C1B18", doux:"#47443D", pale:"#625D53", filet:"#D3CBBA", bleu:"#1B3A8C", rouge:"#B3261E", vert:"#2E6B3F", ambre:"#C98A00" };
+const STORY = { L:1080, H:1920, marge:84, papier:"#F5F1E8", encre:"#1C1B18", doux:"#47443D", pale:"#625D53", filet:"#D3CBBA", bleu:"#1B3A8C", rouge:"#B3261E", vert:"#2E6B3F", ambre:"#C98A00", bas:1490 };
 const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
 const SITE_COURT = new URL(".", location.href).href.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
@@ -4456,11 +4471,12 @@ function storyTexte(ctx, texte, x, y, { taille=40, poids=400, police="Public San
   ctx.textAlign = "left";
   return y + taille + (lignes.length - 1) * taille * interligne + taille * (interligne - 1) + 8;
 }
+// Pastille arrondie pleine ; renvoie l'abscisse de son bord droit
 function storyPastille(ctx, texte, x, y, fond, couleur="#fff", taille=34){
   ctx.font = `700 ${taille}px "Public Sans"`;
   const w = ctx.measureText(texte).width + taille * 1.2, h = taille * 1.75;
   ctx.fillStyle = fond;
-  ctx.beginPath(); ctx.roundRect(x, y, w, h, 10); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.fill();
   ctx.fillStyle = couleur; ctx.textBaseline = "middle";
   ctx.fillText(texte, x + taille * 0.6, y + h / 2 + 2);
   ctx.textBaseline = "alphabetic";
@@ -4485,11 +4501,70 @@ async function storyImage(src){
   img.src = src;
   try { await img.decode(); return img; } catch(e){ return null; }
 }
-// Cadre commun : bande tricolore, marque, surtitre ; renvoie l'ordonnée où commencer le contenu
-function storyCadre(ctx, surtitre){
-  const { L, H, marge } = STORY;
+
+/* ----- Helpers de dessin réutilisables (ne pas renommer, ne pas changer les signatures) -----
+   Zone de contenu sûre : de l'ordonnée renvoyée par storyCadre jusqu'à STORY.bas (≈ 1490) ;
+   le pied (storyPied) occupe ensuite jusqu'à ≈ 1670, les 250 derniers pixels restent vides.
+   storyAlpha(couleur, a)                      -> "rgba(...)" à partir de #rrggbb
+   storyMelange(couleur, autre, t)             -> couleur mélangée (t = 0..1 vers « autre »)
+   storyLisible(couleur)                       -> la couleur, assombrie si trop claire pour du texte sur papier
+   storyFondTheme(ctx, couleur)                -> fond papier avec halo dégradé teinté + motif d'hémicycle discret
+   storyCadre(ctx, surtitre, { couleur })      -> fond + en-tête (marque, surtitre) ; renvoie l'ordonnée de début du contenu
+   storyChiffreHeros(ctx, texte, x, y, couleur, taille=220, align="left")
+                                               -> très gros chiffre (y = ligne de base, réduit pour tenir dans la page) ; renvoie y + 24
+   storyCarte(ctx, x, y, w, h, fond="#FFFFFF", rayon=28) -> carte arrondie avec ombre légère
+   storyMedaillon(ctx, img, cx, cy, rayon, bordure)      -> portrait rond (img = Image ou null) avec liseré de couleur
+   storyInitiales(ctx, nom, cx, cy, rayon, couleur)      -> pastille ronde d'initiales
+   storyHemicycle(ctx, cx, cy, rayon, segments, total, points=180)
+                                               -> demi-cercle de points ; segments = [[n, couleur], ...], le reste en gris
+   storyTitreSection(ctx, texte, x, y, couleur)          -> petit intitulé en capitales avec filet coloré ; renvoie y + 40
+   storyPuceVote(ctx, texte, xDroite, yMilieu, fond)     -> pastille de vote alignée à droite (POUR, CONTRE…)
+   storyPied(ctx, source)                                -> source + adresse du site
+*/
+function storyRVB(c){
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(c).trim());
+  if(!m) return [138, 140, 148];
+  const n = parseInt(m[1], 16);
+  return [n >> 16, (n >> 8) & 255, n & 255];
+}
+function storyAlpha(c, a){ const [r, g, b] = storyRVB(c); return `rgba(${r},${g},${b},${a})`; }
+function storyMelange(c, autre, t){
+  const x = storyRVB(c), y = storyRVB(autre);
+  return "#" + x.map((v, i)=> Math.round(v + (y[i] - v) * t).toString(16).padStart(2, "0")).join("");
+}
+function storyLuminance(c){
+  const [r, g, b] = storyRVB(c).map(v=> { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+function storyLisible(c){ return storyLuminance(c) > 0.28 ? storyMelange(c, STORY.encre, 0.45) : c; }
+
+function storyFondTheme(ctx, couleur = STORY.bleu){
+  const { L, H } = STORY;
   ctx.fillStyle = STORY.papier; ctx.fillRect(0, 0, L, H);
+  // halo en haut à droite, lueur en bas
+  let g = ctx.createRadialGradient(L * 0.9, 120, 0, L * 0.9, 120, 1250);
+  g.addColorStop(0, storyAlpha(couleur, 0.30)); g.addColorStop(0.55, storyAlpha(couleur, 0.09)); g.addColorStop(1, storyAlpha(couleur, 0));
+  ctx.fillStyle = g; ctx.fillRect(0, 0, L, H);
+  g = ctx.createLinearGradient(0, H * 0.55, 0, H);
+  g.addColorStop(0, storyAlpha(couleur, 0)); g.addColorStop(1, storyAlpha(couleur, 0.14));
+  ctx.fillStyle = g; ctx.fillRect(0, H * 0.55, L, H * 0.45);
+  // grand hémicycle de points, très discret
+  const cx = L * 0.5, cy = 1180;
+  ctx.fillStyle = storyAlpha(couleur, 0.05);
+  for(let rang = 0; rang < 7; rang++){
+    const r = 330 + rang * 78, n = Math.round(r / 17);
+    for(let i = 0; i <= n; i++){
+      const a = Math.PI + Math.PI * i / n;
+      ctx.beginPath(); ctx.arc(cx + r * Math.cos(a), cy + r * Math.sin(a), 8, 0, 2 * Math.PI); ctx.fill();
+    }
+  }
   [["#1B3A8C",0],["#FFFFFF",L/3],["#C8102E",2*L/3]].forEach(([c,x])=>{ ctx.fillStyle = c; ctx.fillRect(x, 0, L/3 + 1, 14); });
+}
+
+// Cadre commun : fond teinté, marque, surtitre ; renvoie l'ordonnée où commencer le contenu
+function storyCadre(ctx, surtitre, { couleur = STORY.bleu } = {}){
+  const { L, marge } = STORY;
+  storyFondTheme(ctx, couleur);
   // Logo (hémicycle) et nom du site, sous la zone masquée par Instagram (≈ 220 px)
   const y0 = 230;
   ctx.lineWidth = 7; ctx.lineCap = "round";
@@ -4497,34 +4572,624 @@ function storyCadre(ctx, surtitre){
   ctx.strokeStyle = "#C8102E"; ctx.beginPath(); ctx.arc(marge + 34, y0 + 52, 15, Math.PI, 0); ctx.stroke();
   ctx.fillStyle = STORY.encre; ctx.beginPath(); ctx.arc(marge + 34, y0 + 52, 5, 0, 2 * Math.PI); ctx.fill();
   ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText("Hémicycle France", marge + 86, y0 + 56);
-  ctx.fillStyle = STORY.encre; ctx.fillRect(marge, y0 + 86, L - 2 * marge, 3);
-  ctx.font = `700 28px "Public Sans"`; ctx.fillStyle = STORY.bleu;
-  ctx.letterSpacing = "3px";
-  ctx.fillText(surtitre.toUpperCase(), marge, y0 + 146);
+  // surtitre en pastille teintée
+  ctx.font = `700 24px "Public Sans"`; ctx.letterSpacing = "2px";
+  const txt = storyLignes(ctx, surtitre.toUpperCase(), L - 2 * marge - 44, 1)[0], h = 50;
+  const w = ctx.measureText(txt).width + 44;
+  ctx.fillStyle = storyAlpha(couleur, 0.16);
+  ctx.beginPath(); ctx.roundRect(marge, y0 + 96, w, h, h / 2); ctx.fill();
+  ctx.fillStyle = storyLisible(couleur); ctx.textBaseline = "middle"; ctx.fillText(txt, marge + 22, y0 + 96 + h / 2 + 1); ctx.textBaseline = "alphabetic";
   ctx.letterSpacing = "0px";
-  return y0 + 176;
+  return y0 + 96 + h + 36;
 }
 function storyPied(ctx, source){
-  const { L, marge } = STORY, y = 1600;
+  const { L, marge } = STORY, y = 1520;
   ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, L - 2 * marge, 2);
-  storyTexte(ctx, source, marge, y + 14, { taille:24, couleur:STORY.pale, max:2 });
+  storyTexte(ctx, source, marge, y + 12, { taille:22, couleur:STORY.pale, max:3, interligne:1.2 });
   ctx.font = `700 32px "Public Sans"`; ctx.fillStyle = STORY.bleu;
-  ctx.fillText(SITE_COURT, marge, y + 132);
+  ctx.fillText(SITE_COURT, marge, y + 140);
 }
 
-/* ---------- STORY_PLUS : types de story supplémentaires ----------
-   Chaque entrée est une fonction async (ctx, info) qui dessine sur le canevas 1080 × 1920 (cadre, contenu, pied)
-   et renvoie { nom } (nom de fichier sans extension), ou null si les données manquent.
-   `info` est la valeur de data-id du bouton .bouton-story[data-story="<type>"]. */
+function storyChiffreHeros(ctx, texte, x, y, couleur, taille = 220, align = "left"){
+  const dispo = align === "center" ? STORY.L - 2 * STORY.marge : align === "right" ? x - STORY.marge : STORY.L - STORY.marge - x;
+  ctx.font = `700 ${taille}px "Newsreader"`;
+  const w = ctx.measureText(texte).width;
+  if(w > dispo) taille = Math.floor(taille * dispo / w);
+  ctx.font = `700 ${taille}px "Newsreader"`;
+  ctx.textAlign = align; ctx.textBaseline = "alphabetic";
+  ctx.save();
+  ctx.shadowColor = storyAlpha(couleur, 0.25); ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+  ctx.fillStyle = couleur; ctx.fillText(texte, x, y);
+  ctx.restore();
+  ctx.textAlign = "left";
+  return y + 24;
+}
+function storyCarte(ctx, x, y, w, h, fond = "#FFFFFF", rayon = 28){
+  ctx.save();
+  ctx.shadowColor = "rgba(28,27,24,0.14)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8;
+  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(x, y, w, h, rayon); ctx.fill();
+  ctx.restore();
+  ctx.strokeStyle = "rgba(28,27,24,0.07)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.roundRect(x, y, w, h, rayon); ctx.stroke();
+}
+function storyMedaillon(ctx, img, cx, cy, rayon, bordure = STORY.bleu){
+  const ep = Math.max(4, rayon * 0.07);
+  ctx.save();
+  ctx.shadowColor = "rgba(28,27,24,0.28)"; ctx.shadowBlur = 22; ctx.shadowOffsetY = 8;
+  ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, rayon + ep * 0.6, 0, 2 * Math.PI); ctx.fill();
+  ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, rayon, 0, 2 * Math.PI); ctx.clip();
+  if(img){
+    const k = Math.max(2 * rayon / img.naturalWidth, 2 * rayon / img.naturalHeight), w = img.naturalWidth * k, h = img.naturalHeight * k;
+    ctx.drawImage(img, cx - w / 2, cy - rayon - (h - 2 * rayon) * 0.18, w, h);
+  } else {
+    ctx.fillStyle = storyAlpha(bordure, 0.22); ctx.fillRect(cx - rayon, cy - rayon, 2 * rayon, 2 * rayon);
+    ctx.fillStyle = storyAlpha(bordure, 0.7);
+    ctx.beginPath(); ctx.arc(cx, cy - rayon * 0.18, rayon * 0.34, 0, 2 * Math.PI); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx, cy + rayon * 0.78, rayon * 0.7, rayon * 0.56, 0, Math.PI, 2 * Math.PI); ctx.fill();
+  }
+  ctx.restore();
+  ctx.lineWidth = ep; ctx.strokeStyle = bordure;
+  ctx.beginPath(); ctx.arc(cx, cy, rayon, 0, 2 * Math.PI); ctx.stroke();
+}
+function storyInitiales(ctx, nom, cx, cy, rayon, couleur = STORY.bleu){
+  const mots = String(nom).replace(/\(.*?\)/g, "").split(/[\s-]+/).filter(m=> /^\p{L}/u.test(m) && !/^(de|du|des|la|le|d['’])$/i.test(m));
+  const ini = ((mots[0]?.[0] || "") + (mots.length > 1 ? mots[mots.length - 1][0] : "")).toUpperCase();
+  ctx.fillStyle = couleur; ctx.beginPath(); ctx.arc(cx, cy, rayon, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = storyLuminance(couleur) > 0.4 ? STORY.encre : "#fff";
+  ctx.font = `700 ${Math.round(rayon * 0.8)}px "Public Sans"`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText(ini, cx, cy + rayon * 0.04);
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+}
+function storyHemicycle(ctx, cx, cy, rayon, segments, total, points = 180){
+  const rangs = Math.max(3, Math.round(Math.sqrt(points) / 1.7)), rMin = 0.46;
+  const rayons = Array.from({ length: rangs }, (_, i)=> rayon * (rMin + (1 - rMin) * i / (rangs - 1)));
+  const somme = rayons.reduce((a, r)=>a + r, 0), sieges = [];
+  rayons.forEach(r=>{
+    const n = Math.max(2, Math.round(points * r / somme));
+    for(let i = 0; i < n; i++) sieges.push({ a: Math.PI + Math.PI * i / (n - 1), r });
+  });
+  sieges.sort((p, q)=> p.a - q.a || p.r - q.r);
+  const dot = rayon * (1 - rMin) / (rangs - 1) * 0.36;
+  const cumul = []; let s = 0;
+  for(const [v, c] of segments){ s += v; cumul.push([s, c]); }
+  sieges.forEach((p, i)=>{
+    const t = (i + 0.5) / sieges.length * total;
+    ctx.fillStyle = (cumul.find(([lim])=> t <= lim) || [0, "#D9D2C2"])[1];
+    ctx.beginPath(); ctx.arc(cx + p.r * Math.cos(p.a), cy + p.r * Math.sin(p.a), dot, 0, 2 * Math.PI); ctx.fill();
+  });
+}
+function storyTitreSection(ctx, texte, x, y, couleur = STORY.bleu){
+  ctx.fillStyle = couleur; ctx.beginPath(); ctx.roundRect(x, y - 20, 8, 28, 4); ctx.fill();
+  ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.letterSpacing = "2px";
+  ctx.fillText(texte.toUpperCase(), x + 22, y + 2); ctx.letterSpacing = "0px";
+  return y + 40;
+}
+function storyPuceVote(ctx, texte, xDroite, yMilieu, fond, couleurTexte = "#fff"){
+  ctx.font = `700 22px "Public Sans"`;
+  const w = ctx.measureText(texte).width + 34, h = 42;
+  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(xDroite - w, yMilieu - h / 2, w, h, h / 2); ctx.fill();
+  ctx.fillStyle = couleurTexte; ctx.textBaseline = "middle"; ctx.textAlign = "left";
+  ctx.fillText(texte, xDroite - w + 17, yMilieu + 2); ctx.textBaseline = "alphabetic";
+}
+// Fiche d'élu (député, sénateur) : médaillon, nom, trois cartes de chiffres [valeur, légende, couleur], derniers votes [{code, titre}]
+function storyFicheElu(ctx, y, { photo, couleur, nom, soustitre, ligne, cartes, titreVotes, votes }){
+  const { L, marge, bas } = STORY, largeur = L - 2 * marge, r = 124, cx = marge + r + 8, cy = y + r + 10;
+  storyMedaillon(ctx, photo, cx, cy, r, couleur);
+  const tx = marge + 2 * r + 52, tl = largeur - 2 * r - 52;
+  const ty = storyTexte(ctx, nom, tx, y + 8, { taille:60, poids:600, police:"Newsreader", largeur:tl, max:3, interligne:1.05 });
+  ctx.font = `700 26px "Public Sans"`;
+  storyPastille(ctx, storyLignes(ctx, soustitre, tl - 40, 1)[0], tx, ty + 4, couleur, storyLuminance(couleur) > 0.4 ? STORY.encre : "#fff", 26);
+  y = cy + r + 34;
+  y = storyTexte(ctx, ligne, marge, y, { taille:32, couleur:STORY.doux, max:2 }) + 14;
+  const cw = (largeur - 40) / 3, ch = 176;
+  cartes.forEach(([v, lib, coul], i)=>{
+    const x = marge + i * (cw + 20);
+    storyCarte(ctx, x, y, cw, ch, "#fff", 24);
+    ctx.fillStyle = coul; ctx.beginPath(); ctx.roundRect(x + 22, y + 20, 44, 7, 4); ctx.fill();
+    let t = 64; ctx.font = `700 ${t}px "Newsreader"`;
+    while(ctx.measureText(v).width > cw - 36 && t > 30){ t -= 2; ctx.font = `700 ${t}px "Newsreader"`; }
+    ctx.fillStyle = coul; ctx.fillText(v, x + 22, y + 92);
+    storyTexte(ctx, lib, x + 22, y + 104, { taille:21, couleur:STORY.doux, largeur:cw - 40, max:2, interligne:1.15 });
+  });
+  y += ch + 40;
+  y = storyTitreSection(ctx, titreVotes, marge, y + 10, couleur) - 4;
+  const LIB = { p:["POUR", STORY.vert], c:["CONTRE", STORY.rouge], a:["ABST.", STORY.ambre], n:["PAS VOTÉ", STORY.pale], "-":["PAS VOTÉ", STORY.pale] };
+  const pas = 82, n = Math.max(1, Math.min(votes.length, Math.floor((bas - y - 30) / pas)));
+  storyCarte(ctx, marge, y, largeur, n * pas + 24, "#fff", 24);
+  votes.slice(0, n).forEach(({ code, titre }, i)=>{
+    const yy = y + 12 + i * pas, [lib, coul] = LIB[code] || LIB.n;
+    if(i){ ctx.fillStyle = STORY.filet; ctx.fillRect(marge + 26, yy, largeur - 52, 2); }
+    ctx.font = `400 26px "Public Sans"`;
+    const l = storyLignes(ctx, titre, largeur - 260, 2);
+    l.forEach((t, k)=>{ ctx.fillStyle = STORY.encre; ctx.fillText(t, marge + 26, yy + (l.length === 1 ? 48 : 34 + k * 31)); });
+    storyPuceVote(ctx, lib, L - marge - 24, yy + pas / 2, coul);
+  });
+}
+
+/* ---------- Stories : types supplémentaires (actualités, sondages, fiches…) ----------
+   Chaque entrée dessine sur le canevas déjà créé et renvoie { nom }, ou null si les données manquent. */
 const STORY_PLUS = {};
 
+// Petits outils de dessin propres à ces types
+const storyPLarg = STORY.L - 2 * STORY.marge;
+function storyPCarte(ctx, x, y, w, h, fond = "#FBF8F1", bord = STORY.filet){
+  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(x, y, w, h, 18); ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = bord; ctx.stroke();
+}
+function storyPFond(ctx, couleur, y, h){
+  ctx.save(); ctx.globalAlpha = 0.12; ctx.fillStyle = couleur; ctx.fillRect(0, y, STORY.L, h); ctx.restore();
+  ctx.fillStyle = couleur; ctx.fillRect(0, y, STORY.L, 6);
+}
+// Texte sur une ligne, réduit jusqu'à tenir dans la largeur ; renvoie la taille retenue
+function storyPLigne(ctx, texte, x, y, { taille=60, poids=600, police="Newsreader", couleur=STORY.encre, largeur=storyPLarg, align="left", mini=20 } = {}){
+  let t = taille;
+  ctx.font = `${poids} ${t}px "${police}"`;
+  while(ctx.measureText(texte).width > largeur && t > mini){ t -= 2; ctx.font = `${poids} ${t}px "${police}"`; }
+  ctx.fillStyle = couleur; ctx.textAlign = align; ctx.textBaseline = "alphabetic";
+  ctx.fillText(texte, x, y); ctx.textAlign = "left";
+  return t;
+}
+const storyPInitiales = nom => String(nom || "").split(/[\s-]+/).filter(Boolean).map(m=>m[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0, 2).join("");
+const storyPLisible = c => c === "#E0B400" ? STORY.ambre : c; // le jaune du parti est illisible en texte sur papier crème
+// Médaillon : photo (recadrée sur le haut), sinon initiales sur la couleur du parti
+function storyPMedaillon(ctx, img, cx, cy, r, couleur, nom){
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
+  if(img){
+    const h = Math.max(2 * r, 2 * r * img.naturalHeight / img.naturalWidth);
+    ctx.drawImage(img, cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h);
+  } else {
+    ctx.fillStyle = couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
+    ctx.font = `600 ${Math.round(r * 0.8)}px "Newsreader"`; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(storyPInitiales(nom), cx, cy + r * 0.05); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  }
+  ctx.restore();
+  ctx.lineWidth = Math.max(4, r * 0.07); ctx.strokeStyle = couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
+}
+// Pictogramme de thème (même tracé que sur le site), dans un disque coloré
+function storyPPicto(ctx, theme, cx, cy, r){
+  const [couleur, trace] = THEMES_ACTU[theme] || THEMES_ACTU.politique;
+  ctx.fillStyle = couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.fill();
+  ctx.save(); ctx.translate(cx - r * 0.55, cy - r * 0.55); ctx.scale(r * 1.1 / 24, r * 1.1 / 24);
+  ctx.lineWidth = 1.8; ctx.strokeStyle = "#fff"; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke(new Path2D(trace));
+  ctx.restore();
+}
+function storyPLogo(ctx, img, x, y, taille){
+  storyPCarte(ctx, x, y, taille, taille, "#fff");
+  const k = Math.min((taille - 36) / img.naturalWidth, (taille - 36) / img.naturalHeight);
+  ctx.drawImage(img, x + taille / 2 - img.naturalWidth * k / 2, y + taille / 2 - img.naturalHeight * k / 2, img.naturalWidth * k, img.naturalHeight * k);
+}
+// Visuel d'un sujet d'actualité : portraits (jusqu'à 3), sinon logos de partis, sinon pictogramme.
+// Dessine de gauche à droite à partir de x, centré en cy ; renvoie la largeur occupée.
+async function storyPVisuel(ctx, s, x, cy, r, maxi = 3){
+  const ill = s.illustration || {}, pers = (ill.personnes || []).slice(0, maxi);
+  if(pers.length){
+    const imgs = await Promise.all(pers.map(p=> p.photo ? storyImage(p.photo) : null));
+    pers.forEach((p, i)=> storyPMedaillon(ctx, imgs[i], x + r + i * (2 * r + 18), cy, r, couleurPartiActu(p.parti), p.nom));
+    return pers.length * (2 * r + 18) - 18;
+  }
+  const logos = (await Promise.all((ill.partis || []).slice(0, maxi).map(c=> storyImage(`icons/partis/${c}.png`)))).filter(Boolean);
+  if(logos.length){
+    logos.forEach((img, i)=> storyPLogo(ctx, img, x + i * (2 * r + 18), cy - r, 2 * r));
+    return logos.length * (2 * r + 18) - 18;
+  }
+  storyPPicto(ctx, ill.theme, x + r, cy, r);
+  return 2 * r;
+}
+// Crédit des portraits libres de Wikimedia Commons (personnalités), à rappeler dans le pied
+async function storyPCredits(noms){
+  const liste = (await lireJSON("data/portraits.json"))?.portraits || {};
+  return noms.map(n=> liste[n]).filter(p=>p?.fichier).map(p=> `${p.auteur || "auteur inconnu"} (${p.licence})`);
+}
+const storyPDateLongue = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
+const storyPPct = v => v === null || v === undefined ? "—" : v < 1 ? (v > 0 ? "< 1 %" : "< 0,1 %") : v > 99 ? "> 99 %" : `${nombreFr(Math.round(v))} %`;
+const storyPCouleurCandidat = nom => CANDIDATS.find(c=>c.id === nom)?.couleur || "#8A8C94";
+function storyPPastilleCentre(ctx, texte, cx, y, fond, taille = 32){
+  ctx.font = `700 ${taille}px "Public Sans"`;
+  const w = ctx.measureText(texte).width + taille * 1.2;
+  return storyPastille(ctx, texte, cx - w / 2, y, fond, "#fff", taille);
+}
+function storyPSousTitre(ctx, texte, x, y, couleur = STORY.pale){
+  ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = couleur; ctx.letterSpacing = "2px";
+  ctx.fillText(texte.toUpperCase(), x, y + 20); ctx.letterSpacing = "0px";
+  return y + 44;
+}
+const storyPDomaine = u => (String(u).match(/^https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "";
+
+// 1. Un sujet d'actualité (data-id : indice du sujet dans ACTUALITES.sujets)
+STORY_PLUS.actualite = async (ctx, info)=>{
+  const s = ACTUALITES?.sujets?.[Number(info)];
+  if(!s?.articles?.length) return null;
+  const { L, marge } = STORY;
+  const medias = [...new Set(s.articles.map(a=>a.media))];
+  const ill = s.illustration || {}, theme = (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique);
+  const premier = ill.personnes?.[0];
+  const couleur = premier ? couleurPartiActu(premier.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : theme[0]);
+  let y = storyCadre(ctx, "Actualité · à la une");
+  storyPFond(ctx, couleur, y - 6, 18);
+  y += 24;
+  storyPastille(ctx, s.medias >= 2 ? `REPRIS PAR ${s.medias} MÉDIAS` : "TITRE RELEVÉ DANS LA PRESSE", marge, y, s.medias >= 2 ? STORY.vert : STORY.pale, "#fff", 30);
+  y += 76;
+  y = storyTexte(ctx, s.articles[0].titre, marge, y, { taille:60, poids:600, police:"Newsreader", max:6, interligne:1.12 }) + 8;
+  y = storyTexte(ctx, `${s.articles[0].media}, ${ilYA(s.articles[0].date)}`, marge, y, { taille:28, couleur:STORY.doux, max:1 }) + 22;
+  // Portraits
+  const r = 92, cy = y + r;
+  const largVisuel = await storyPVisuel(ctx, s, marge, cy, r, 3);
+  const noms = (ill.personnes || []).slice(0, 3).map(p=>p.nom), tx = marge + largVisuel + 36;
+  if(noms.length) storyTexte(ctx, noms.join(" · "), tx, cy - 34, { taille:30, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:3 });
+  else storyTexte(ctx, theme[2], tx, cy - 20, { taille:34, poids:600, couleur:theme[0], largeur:L - marge - tx, max:1 });
+  y = cy + r + 38;
+  // Médias
+  y = storyPSousTitre(ctx, `${medias.length > 1 ? "Médias" : "Média"} qui en parlent`, marge, y);
+  let x = marge;
+  ctx.font = `700 28px "Public Sans"`;
+  for(const m of medias.slice(0, 8)){
+    const w = ctx.measureText(m).width + 34;
+    if(x + w > L - marge){ x = marge; y += 60; }
+    storyPastille(ctx, m, x, y, "#EAE3D2", STORY.encre, 28); x += w + 12;
+  }
+  y += 86;
+  // Autres titres, un par média
+  const vus = new Set([s.articles[0].media]);
+  const autres = s.articles.filter(a=> !vus.has(a.media) && vus.add(a.media));
+  if(autres.length){
+    y = storyPSousTitre(ctx, "Ce que titrent les autres", marge, y);
+    for(const a of autres.slice(0, 5)){
+      if(y > 1470) break;
+      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+      ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = storyPLisible(couleur); ctx.fillText(a.media.toUpperCase(), marge, y + 36);
+      y = storyTexte(ctx, a.titre, marge, y + 44, { taille:27, max:2, interligne:1.2 }) + 8;
+    }
+  }
+  const credits = await storyPCredits((ill.personnes || []).filter(p=>/personnalites/.test(p.photo || "")).map(p=>p.nom));
+  storyPied(ctx, `Titres relevés dans la presse, liens sur le site. Seuls les titres sont repris.${credits.length ? ` Photos : ${credits.join(", ")}.` : ""}`);
+  return { nom:`actualite-${slugDep(s.articles[0].titre).slice(0, 40)}` };
+};
+
+// 2. Les sujets du moment (data-id vide)
+STORY_PLUS.actualites = async (ctx)=>{
+  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 4);
+  if(!top.length) return null;
+  const { L, marge } = STORY;
+  let y = storyCadre(ctx, "Actualité · à la une");
+  y = storyTexte(ctx, "Les sujets du moment", marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+  y = storyTexte(ctx, "Les plus repris par plusieurs médias", marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 20;
+  const pas = Math.min(300, (1580 - y) / top.length), r = 62;
+  for(let i = 0; i < top.length; i++){
+    const s = top[i], cy = y + pas / 2;
+    ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+    const ill = s.illustration || {}, p0 = ill.personnes?.[0];
+    const coul = p0 ? couleurPartiActu(p0.parti) : (ill.partis?.[0] ? couleurPartiActu(ill.partis[0]) : (THEMES_ACTU[ill.theme] || THEMES_ACTU.politique)[0]);
+    const img = p0?.photo ? await storyImage(p0.photo) : null;
+    const logo = !p0 && ill.partis?.[0] ? await storyImage(`icons/partis/${ill.partis[0]}.png`) : null;
+    if(p0) storyPMedaillon(ctx, img, marge + r, cy, r, coul, p0.nom);
+    else if(logo) storyPLogo(ctx, logo, marge, cy - r, 2 * r);
+    else storyPPicto(ctx, ill.theme, marge + r, cy, r);
+    const tx = marge + 2 * r + 30, tl = L - marge - 150 - tx;
+    storyTexte(ctx, s.articles[0].titre, tx, cy - 70, { taille:32, poids:600, police:"Newsreader", largeur:tl, max:5, interligne:1.12 });
+    ctx.font = `600 120px "Newsreader"`; ctx.fillStyle = STORY.vert; ctx.textAlign = "right"; ctx.fillText(String(s.medias), L - marge, cy + 20);
+    ctx.font = `700 24px "Public Sans"`; ctx.fillText("MÉDIAS", L - marge, cy + 58); ctx.textAlign = "left";
+    y += pas;
+  }
+  storyPied(ctx, "Titres relevés dans la presse, liens sur le site. Un sujet est « repris » quand au moins deux médias le traitent. Seuls les titres sont repris.");
+  return { nom:"sujets-du-moment" };
+};
+
+// 3. Qui a le plus de chances ? (data-id vide)
+STORY_PLUS.probabilites = async (ctx)=>{
+  if(!PROBAS?.candidats?.length || periodeReserveSondages()) return null;
+  const { L, marge } = STORY;
+  const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null && c.victoire !== undefined);
+  const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1)
+    .sort((a, b)=> ((b.victoire || 0) - (a.victoire || 0)) || (b.secondTour - a.secondTour)).slice(0, 6);
+  if(!liste.length) return null;
+  let y = storyCadre(ctx, "Présidentielle 2027 · simulation");
+  y = storyTexte(ctx, "Qui a le plus de chances ?", marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+  y = storyTexte(ctx, "Simulation à partir des sondages, pas une prédiction.", marge, y + 2, { taille:30, poids:700, couleur:STORY.ambre, max:2 }) + 18;
+  ctx.font = `600 24px "Public Sans"`;
+  ctx.fillStyle = "#8A8C94"; ctx.globalAlpha = 0.5; ctx.fillRect(marge, y + 6, 36, 18); ctx.globalAlpha = 1;
+  ctx.fillStyle = STORY.doux; ctx.fillText("chance d'aller au second tour", marge + 48, y + 24);
+  if(avecVictoire){ ctx.fillStyle = "#6B6E78"; ctx.fillRect(marge + 480, y + 6, 36, 18); ctx.fillStyle = STORY.doux; ctx.fillText("chance d'être élu", marge + 528, y + 24); }
+  y += 54;
+  const pas = Math.min(190, (1585 - y) / liste.length);
+  for(const c of liste){
+    const coul = COULEURS_PARTIS[c.parti] || "#8A8C94";
+    ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+    ctx.font = `600 34px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(c.nom, marge, y + 44);
+    const elu = avecVictoire && c.victoire !== null && c.victoire !== undefined;
+    const pri = elu ? c.victoire : c.secondTour;
+    ctx.font = pri < 1 ? `700 44px "Public Sans"` : `600 64px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.textAlign = "right"; ctx.fillText(storyPPct(pri), L - marge, y + 54); ctx.textAlign = "left";
+    const hb = elu ? 20 : 26, by = y + 74, larg = storyPLarg - 200;
+    ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = STORY.pale;
+    ctx.fillText("2d tour", marge, by + hb - 3);
+    ctx.globalAlpha = 0.5; storyBarre(ctx, marge + 120, by, larg, hb, [[c.secondTour, coul]], 100); ctx.globalAlpha = 1;
+    ctx.textAlign = "right"; ctx.fillStyle = STORY.doux; ctx.fillText(storyPPct(c.secondTour), L - marge, by + hb - 3); ctx.textAlign = "left";
+    if(elu){
+      ctx.fillStyle = STORY.pale; ctx.fillText("Élu", marge, by + 38 + hb - 3);
+      storyBarre(ctx, marge + 120, by + 38, larg, hb, [[c.victoire, coul]], 100);
+      ctx.textAlign = "right"; ctx.fillStyle = STORY.encre; ctx.font = `700 22px "Public Sans"`; ctx.fillText(storyPPct(c.victoire), L - marge, by + 38 + hb - 3); ctx.textAlign = "left";
+    }
+    y += pas;
+  }
+  const m = PROBAS.methode || {};
+  storyPied(ctx, `Simulation à partir des sondages (${formatNombre(m.tirages || 0)} élections simulées), pas une prédiction : les sondages mesurent l'opinion du moment.`);
+  return { nom:"probabilites-presidentielle" };
+};
+
+// 4. Un duel de second tour (data-id : indice dans SECOND_TOUR)
+STORY_PLUS.secondtour = async (ctx, info)=>{
+  const d = SECOND_TOUR?.[Number(info)];
+  if(!d?.instituts?.length || periodeReserveSondages()) return null;
+  const { L, marge } = STORY;
+  const [a, b] = [...d.candidats].sort((x, z)=> (d.instituts[0].scores[z] ?? 0) - (d.instituts[0].scores[x] ?? 0));
+  const ca = storyPCouleurCandidat(a);
+  let cb = storyPCouleurCandidat(b); if(cb === ca) cb = "#6B6E78";
+  const premier = d.instituts[0], sa = premier.scores[a], sb = premier.scores[b];
+  let y = storyCadre(ctx, "Présidentielle 2027 · second tour");
+  y = storyTexte(ctx, "Le duel testé par les sondages", marge, y, { taille:60, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 14;
+  const demi = storyPLarg / 2 - 20;
+  const fa = storyTexte(ctx, a, marge, y, { taille:56, poids:600, police:"Newsreader", largeur:demi, max:2, interligne:1.05 });
+  const fb = storyTexte(ctx, b, L - marge, y, { taille:56, poids:600, police:"Newsreader", largeur:demi, max:2, interligne:1.05, align:"right" });
+  y = Math.max(fa, fb) + 6;
+  ctx.fillStyle = ca; ctx.fillRect(marge, y, demi, 8); ctx.fillStyle = cb; ctx.fillRect(L - marge - demi, y, demi, 8);
+  y += 30;
+  ctx.font = `700 210px "Newsreader"`; ctx.fillStyle = storyPLisible(ca); ctx.fillText(nombreFr(sa), marge, y + 170);
+  ctx.fillStyle = storyPLisible(cb); ctx.textAlign = "right"; ctx.fillText(nombreFr(sb), L - marge, y + 170); ctx.textAlign = "left";
+  ctx.font = `700 40px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.textAlign = "center"; ctx.fillText("%", L / 2, y + 150); ctx.textAlign = "left";
+  y += 200;
+  ctx.font = `600 26px "Public Sans"`; ctx.fillStyle = STORY.doux;
+  ctx.fillText(`${premier.nom}, enquête du ${premier.date}`, marge, y + 20);
+  y += 44;
+  const hb = 56, wa = storyPLarg * sa / (sa + sb);
+  ctx.save(); ctx.beginPath(); ctx.roundRect(marge, y, storyPLarg, hb, hb / 2); ctx.clip();
+  ctx.fillStyle = ca; ctx.fillRect(marge, y, wa - 2, hb); ctx.fillStyle = cb; ctx.fillRect(marge + wa + 2, y, storyPLarg - wa - 2, hb);
+  ctx.restore();
+  y += hb + 40;
+  if(d.instituts.length > 1){
+    y = storyPSousTitre(ctx, "Chaque institut", marge, y);
+    const pas = Math.min(110, (1570 - y) / Math.min(6, d.instituts.length));
+    for(const i of d.instituts.slice(0, 6)){
+      const x = i.scores[a], z = i.scores[b];
+      ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(i.nom, marge, y + 28);
+      ctx.font = `400 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "right"; ctx.fillText(i.date, L - marge, y + 28); ctx.textAlign = "left";
+      const by = y + 42, h = 38, w = storyPLarg * x / (x + z);
+      ctx.save(); ctx.beginPath(); ctx.roundRect(marge, by, storyPLarg, h, h / 2); ctx.clip();
+      ctx.fillStyle = ca; ctx.fillRect(marge, by, w - 2, h); ctx.fillStyle = cb; ctx.fillRect(marge + w + 2, by, storyPLarg - w - 2, h);
+      ctx.restore();
+      ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = "#fff"; ctx.textBaseline = "middle";
+      ctx.fillText(`${nombreFr(x)} %`, marge + 18, by + h / 2 + 2); ctx.textAlign = "right"; ctx.fillText(`${nombreFr(z)} %`, L - marge - 18, by + h / 2 + 2); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      y += pas;
+    }
+  }
+  storyPied(ctx, `Sondages de second tour (${premier.nom} et autres instituts), en % des votes exprimés, notices sur commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
+  return { nom:`second-tour-${slugDep(a)}-${slugDep(b)}` };
+};
+
+// 5. Décompte avant l'annonce du président (data-id vide)
+STORY_PLUS.decompte = async (ctx)=>{
+  const { L, marge } = STORY;
+  const [iso1, iso2] = TOURS_PRESIDENTIELLE;
+  const jours = iso => Math.round((Date.parse(iso) - Date.parse(aujourdhuiISO())) / 864e5);
+  const j2 = jours(iso2), j1 = jours(iso1);
+  if(j2 < 0) return null;
+  let y = storyCadre(ctx, "Présidentielle 2027 · décompte");
+  y = storyTexte(ctx, "Avant l'annonce du président de la République", marge, y, { taille:62, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 40;
+  storyPFond(ctx, STORY.bleu, y, 500);
+  storyPLigne(ctx, j2 === 0 ? "Jour J" : `J-${j2}`, L / 2, y + 360, { taille:420, poids:700, couleur:STORY.bleu, largeur:storyPLarg, align:"center", mini:120 });
+  if(j2 > 0){
+    ctx.font = `600 44px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "center";
+    ctx.fillText(j2 === 1 ? "plus qu'un jour" : `${formatNombre(j2)} jours · environ ${Math.round(j2 / 7)} semaines`, L / 2, y + 450);
+    ctx.textAlign = "left";
+  }
+  y += 540;
+  const carte = (titre, date, detail, couleur, jr)=>{
+    storyPCarte(ctx, marge, y, storyPLarg, 200);
+    ctx.fillStyle = couleur; ctx.fillRect(marge, y + 18, 10, 164);
+    storyTexte(ctx, titre, marge + 40, y + 14, { taille:26, poids:700, couleur:STORY.pale, max:1 });
+    storyTexte(ctx, date, marge + 40, y + 52, { taille:38, poids:600, police:"Newsreader", largeur:storyPLarg - 300, max:2, interligne:1.05 });
+    storyTexte(ctx, detail, marge + 40, y + 134, { taille:24, couleur:STORY.doux, largeur:storyPLarg - 100, max:1 });
+    if(jr !== null){ ctx.font = `700 76px "Newsreader"`; ctx.fillStyle = couleur; ctx.textAlign = "right"; ctx.fillText(jr > 0 ? `J-${jr}` : "Jour J", L - marge - 30, y + 118); ctx.textAlign = "left"; }
+    y += 222;
+  };
+  if(j1 >= 0) carte("PREMIER TOUR", storyPDateLongue(iso1), "Scrutin du 18 avril", STORY.rouge, j1);
+  carte("SECOND TOUR ET ANNONCE", storyPDateLongue(iso2), "Annonce à 20 h, à la fermeture des derniers bureaux", STORY.bleu, j2 > 0 ? j2 : null);
+  storyPied(ctx, "Calendrier de l'élection présidentielle de 2027 : premier tour le 18 avril, second tour le 2 mai ; résultats officiels proclamés par le Conseil constitutionnel.");
+  return { nom:"decompte-presidentielle-2027" };
+};
+
+// 6. Une candidature (data-id : nom exact)
+STORY_PLUS.candidat = async (ctx, info)=>{
+  const c = CANDIDATURES?.find(x=>x.nom === info);
+  if(!c) return null;
+  const { L, marge } = STORY;
+  const coul = COULEURS_PARTIS[c.code] || "#8A8C94";
+  let y = storyCadre(ctx, "Présidentielle 2027 · candidat");
+  const photo = await storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`);
+  const r = 170, cy = y + 30 + r;
+  storyPMedaillon(ctx, photo, L / 2, cy, r, coul, c.nom);
+  y = cy + r + 30;
+  storyPLigne(ctx, c.nom, L / 2, y + 66, { taille:92, poids:600, couleur:STORY.encre, align:"center", mini:44 });
+  y += 100;
+  storyPPastilleCentre(ctx, c.parti.toUpperCase(), L / 2, y, storyPLisible(coul), 34);
+  y += 90;
+  if(c.age){
+    ctx.font = `700 230px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.textAlign = "right"; ctx.fillText(String(c.age), L / 2 - 6, y + 180);
+    ctx.font = `600 52px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.textAlign = "left"; ctx.fillText("ans", L / 2 + 14, y + 180);
+    ctx.font = `400 26px "Public Sans"`; ctx.fillText("au premier tour", L / 2 + 14, y + 124);
+    y += 230;
+  }
+  if(c.slogan) y = storyTexte(ctx, `« ${c.slogan} »`, L / 2, y, { taille:40, poids:600, police:"Newsreader", couleur:STORY.doux, align:"center", max:2, interligne:1.15 }) + 10;
+  for(const f of (c.fonctions || []).slice(0, 3)){
+    if(y > 1400) break;
+    y = storyTexte(ctx, f, L / 2, y, { taille:30, couleur:STORY.encre, align:"center", max:2, interligne:1.2 }) + 4;
+  }
+  storyTexte(ctx, c.annonce ? `Candidature annoncée le ${dateCourte(c.annonce) || c.annonce}` : "Candidature annoncée", L / 2, Math.min(Math.max(y + 40, 1400), 1510), { taille:32, poids:700, couleur:STORY.bleu, align:"center", max:1 });
+  const dom = storyPDomaine(c.source) || "la source indiquée sur le site";
+  const credits = photo ? await storyPCredits([c.nom]) : [];
+  storyPied(ctx, `Candidature rapportée par ${dom}, d'après la liste des candidatures de Wikipédia.${credits.length ? ` Photo : ${credits.join(", ")}.` : ""}`);
+  return { nom:`candidat-${slugDep(c.nom)}` };
+};
+
+// 7. Un parti (data-id : code du parti)
+STORY_PLUS.parti = async (ctx, info)=>{
+  const l = LEADERS?.find(x=>x.parti === info);
+  if(!l) return null;
+  const { L, marge } = STORY;
+  const p = PARTIES.find(x=>x.id === l.parti), g = GROUPES?.[l.parti];
+  const coul = l.couleur || p?.couleur || "#6B6E78", sansChef = l.nom.startsWith("—");
+  let y = storyCadre(ctx, "Les partis");
+  storyPFond(ctx, coul, y - 6, 330);
+  y += 20;
+  const logo = await storyImage(`icons/partis/${l.parti}.png`);
+  let tx = marge;
+  if(logo){ storyPLogo(ctx, logo, marge, y, 260); tx = marge + 300; }
+  storyPLigne(ctx, l.parti, tx, y + 130, { taille:150, poids:700, couleur:storyPLisible(coul), largeur:L - marge - tx, mini:60 });
+  storyTexte(ctx, g?.libelle || p?.nom || l.parti, tx, y + 150, { taille:32, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:2 });
+  y += 330;
+  y = storyPSousTitre(ctx, "À la tête du parti", marge, y + 20);
+  y = storyTexte(ctx, sansChef ? "Pas de chef de parti unique" : l.nom, marge, y, { taille:sansChef ? 72 : 88, poids:600, police:"Newsreader", max:2, interligne:1.02 });
+  y = storyTexte(ctx, l.role, marge, y + 4, { taille:34, couleur:STORY.doux, max:4, interligne:1.25 }) + 36;
+  if(g?.membres){
+    storyPCarte(ctx, marge, y, storyPLarg, 250);
+    ctx.fillStyle = coul; ctx.fillRect(marge, y + 20, 10, 210);
+    ctx.font = `700 150px "Newsreader"`; ctx.fillStyle = storyPLisible(coul); ctx.fillText(formatNombre(g.membres), marge + 44, y + 175);
+    const w = ctx.measureText(formatNombre(g.membres)).width;
+    storyTexte(ctx, "députés dans le groupe à l'Assemblée nationale", marge + 44 + w + 24, y + 70, { taille:30, poids:600, couleur:STORY.doux, largeur:storyPLarg - w - 90, max:3 });
+    y += 276;
+    if(g.president && g.president !== l.nom) storyTexte(ctx, `${g.presidente ? "Présidente" : "Président"} du groupe : ${g.president}`, marge, y, { taille:32, poids:600, couleur:STORY.encre, max:2 });
+  }
+  storyPied(ctx, `Direction du parti : ${l.source?.nom || "sources publiques"}. Effectifs du groupe : Assemblée nationale (open data).`);
+  return { nom:`parti-${slugDep(l.parti)}` };
+};
+
+// 8. Une décision de justice (data-id : indice dans CONDAMNATIONS)
+STORY_PLUS.justice = async (ctx, info)=>{
+  const c = CONDAMNATIONS?.[Number(info)];
+  if(!c) return null;
+  const { marge } = STORY;
+  const coul = c.statut === "definitif" ? STORY.rouge : STORY.ambre;
+  let y = storyCadre(ctx, "Justice · décisions rendues");
+  y = storyTexte(ctx, c.nom, marge, y, { taille:84, poids:600, police:"Newsreader", max:2, interligne:1.03 });
+  y = storyTexte(ctx, `${c.role} · ${c.parti}`, marge, y, { taille:32, poids:600, couleur:STORY.doux, max:2 }) + 22;
+  // Statut, tel qu'il figure dans la source
+  ctx.font = `700 34px "Public Sans"`;
+  const n = storyLignes(ctx, c.statutLabel, storyPLarg - 70, 3).length, h = 56 + n * 42;
+  storyPCarte(ctx, marge, y, storyPLarg, h, "#FBF8F1", coul);
+  ctx.fillStyle = coul; ctx.fillRect(marge, y + 16, 10, h - 32);
+  ctx.font = `700 22px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px"; ctx.fillText("STATUT JUDICIAIRE", marge + 40, y + 38); ctx.letterSpacing = "0px";
+  storyTexte(ctx, c.statutLabel, marge + 40, y + 44, { taille:34, poids:700, couleur:coul, largeur:storyPLarg - 70, max:3, interligne:1.2 });
+  y += h + 34;
+  y = storyTexte(ctx, c.affaire, marge, y, { taille:56, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 12;
+  y = storyTexte(ctx, c.detail, marge, y, { taille:36, couleur:STORY.encre, max:11, interligne:1.3 }) + 24;
+  if(c.statut === "appel"){
+    const t = "Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.";
+    ctx.font = `600 28px "Public Sans"`;
+    const k = storyLignes(ctx, t, storyPLarg - 50, 4).length, hh = 30 + k * 36;
+    storyPCarte(ctx, marge, y, storyPLarg, hh, "#F3EBD3", STORY.ambre);
+    storyTexte(ctx, t, marge + 25, y + 14, { taille:28, poids:600, couleur:STORY.encre, largeur:storyPLarg - 50, max:4, interligne:1.25 });
+  }
+  storyPied(ctx, `Source : ${c.source}. Statut tel qu'indiqué par la source ; présomption d'innocence tant que la décision n'est pas définitive.`);
+  return { nom:`justice-${slugDep(c.nom)}-${slugDep(c.affaire).slice(0, 30)}` };
+};
+
+// 9. Un chiffre clé (data-id : indice dans INDICATEURS)
+STORY_PLUS.indicateur = async (ctx, info)=>{
+  const i = INDICATEURS?.[Number(info)];
+  if(!i) return null;
+  const { L, marge } = STORY;
+  const coul = i.tendance === "up" ? STORY.rouge : i.tendance === "down" ? STORY.vert : STORY.bleu;
+  let y = storyCadre(ctx, "Chiffres clés · France");
+  y = storyTexte(ctx, i.nom, marge, y, { taille:78, poids:600, police:"Newsreader", max:2, interligne:1.03 }) + 24;
+  storyPFond(ctx, coul, y, 500);
+  const mv = /^(.+?%)\s+(\S.*)$/.exec(i.valeur), valeur = mv ? mv[1] : i.valeur;
+  storyPLigne(ctx, valeur, marge, y + 330, { taille:300, poids:700, couleur:coul, largeur:storyPLarg, mini:90 });
+  if(mv) storyPLigne(ctx, mv[2], L - marge, y + 432, { taille:60, poids:600, couleur:STORY.doux, largeur:storyPLarg - 360, align:"right", mini:30 });
+  if(i.tendance === "up" || i.tendance === "down"){
+    const hx = marge + 22, hy = y + 420;
+    ctx.fillStyle = coul; ctx.beginPath();
+    if(i.tendance === "up"){ ctx.moveTo(hx - 22, hy + 14); ctx.lineTo(hx + 22, hy + 14); ctx.lineTo(hx, hy - 24); }
+    else { ctx.moveTo(hx - 22, hy - 14); ctx.lineTo(hx + 22, hy - 14); ctx.lineTo(hx, hy + 24); }
+    ctx.closePath(); ctx.fill();
+    ctx.font = `700 38px "Public Sans"`; ctx.fillText(i.tendance === "up" ? "En hausse" : "En baisse", marge + 64, hy + 12);
+  }
+  y += 560;
+  y = storyTexte(ctx, i.detail, marge, y, { taille:40, couleur:STORY.encre, max:7, interligne:1.3 }) + 24;
+  storyTexte(ctx, `${i.source}, ${i.date}`, marge, y, { taille:30, poids:700, couleur:STORY.bleu, max:2 });
+  storyPied(ctx, `Source : ${i.source}, ${i.date}. Série officielle consultable sur ${storyPDomaine(i.url) || "le site de la source"}.`);
+  return { nom:`chiffre-${slugDep(i.nom)}` };
+};
+
+// 10. Un groupe de l'Assemblée (data-id : id de groupe, ex. « RN »)
+STORY_PLUS.groupe = async (ctx, info)=>{
+  const p = PARTIES.find(x=>x.id === info);
+  if(!p) return null;
+  const { L, marge } = STORY;
+  const g = GROUPES?.[p.id], eff = g?.membres ?? p.sieges, coul = p.couleur;
+  let y = storyCadre(ctx, "Assemblée nationale · groupe");
+  storyPFond(ctx, coul, y - 6, 300);
+  y += 20;
+  const logo = await storyImage(`icons/partis/${p.id}.png`);
+  let tx = marge;
+  if(logo){ storyPLogo(ctx, logo, marge, y, 220); tx = marge + 256; }
+  storyPLigne(ctx, p.id, tx, y + 120, { taille:130, poids:700, couleur:storyPLisible(coul), largeur:L - marge - tx, mini:60 });
+  storyTexte(ctx, g?.libelle || p.nom, tx, y + 134, { taille:34, poids:600, couleur:STORY.doux, largeur:L - marge - tx, max:2 });
+  y += 290;
+  storyPLigne(ctx, formatNombre(eff), marge, y + 290, { taille:340, poids:700, couleur:storyPLisible(coul), largeur:storyPLarg - 10, mini:120 });
+  y += 330;
+  y = storyTexte(ctx, eff > 1 ? "députés" : "député", marge, y, { taille:56, poids:600, police:"Newsreader", max:1 }) + 28;
+  const total = TOTAL_SIEGES || 577;
+  storyBarre(ctx, marge, y, storyPLarg, 36, [[eff, coul]], total);
+  const maj = Math.floor(total / 2) + 1, xm = marge + storyPLarg * maj / total;
+  ctx.fillStyle = STORY.encre; ctx.fillRect(xm - 2, y - 12, 4, 60);
+  y += 80;
+  ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = STORY.doux;
+  ctx.fillText(`${nombreFr(eff / total * 100)} % des ${formatNombre(total)} sièges`, marge, y);
+  ctx.textAlign = "right"; ctx.fillText(`Majorité absolue : ${maj}`, L - marge, y); ctx.textAlign = "left";
+  y += 50;
+  if(g?.president){
+    storyPCarte(ctx, marge, y, storyPLarg, 150);
+    ctx.fillStyle = coul; ctx.fillRect(marge, y + 16, 10, 118);
+    storyTexte(ctx, g.presidente ? "PRÉSIDENTE DU GROUPE" : "PRÉSIDENT DU GROUPE", marge + 40, y + 12, { taille:22, poids:700, couleur:STORY.pale, max:1 });
+    storyTexte(ctx, g.president, marge + 40, y + 46, { taille:48, poids:600, police:"Newsreader", max:1, largeur:storyPLarg - 80 });
+    if(g.presidentDepuis) storyTexte(ctx, `depuis le ${dateCourte(g.presidentDepuis)}`, marge + 40, y + 100, { taille:24, couleur:STORY.doux, max:1 });
+  }
+  storyPied(ctx, "Assemblée nationale, composition des groupes politiques (open data) ; effectifs relevés automatiquement.");
+  return { nom:`groupe-${slugDep(p.id)}` };
+};
+
+// 11. Un meeting (data-id : indice dans MEETINGS)
+STORY_PLUS.meeting = async (ctx, info)=>{
+  const m = MEETINGS?.[Number(info)];
+  if(!m) return null;
+  const { L, marge } = STORY;
+  const coul = m.partyColor || "#6B6E78";
+  let y = storyCadre(ctx, "Agenda · meetings");
+  storyPFond(ctx, coul, y - 6, 400);
+  y += 10;
+  storyPLigne(ctx, m.jour, marge, y + 270, { taille:300, poids:700, couleur:storyPLisible(coul), largeur:storyPLarg, mini:100 });
+  y += 290;
+  const mois = String(m.mois).toUpperCase();
+  ctx.font = `700 64px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.letterSpacing = "4px"; ctx.fillText(mois, marge, y + 56); ctx.letterSpacing = "0px";
+  if(m.parti) storyPastille(ctx, m.parti, marge + ctx.measureText(mois).width + 60, y + 6, storyPLisible(coul), "#fff", 36);
+  y += 130;
+  y = storyTexte(ctx, m.titre, marge, y, { taille:68, poids:600, police:"Newsreader", max:4, interligne:1.08 }) + 14;
+  const ou = [m.heure && m.heure !== "—" ? m.heure : "", m.lieu].filter(Boolean).join(" · ");
+  if(ou) y = storyTexte(ctx, ou, marge, y, { taille:34, poids:700, couleur:STORY.bleu, max:3, interligne:1.2 }) + 14;
+  y = storyTexte(ctx, m.desc, marge, y, { taille:32, couleur:STORY.doux, max:8, interligne:1.3 }) + 14;
+  if((m.fin || m.debut) < aujourdhuiISO()) storyTexte(ctx, "Événement passé", marge, y, { taille:30, poids:700, couleur:STORY.pale, max:1 });
+  else if(!m.verified) storyTexte(ctx, "Date à confirmer", marge, y, { taille:30, poids:700, couleur:STORY.ambre, max:1 });
+  storyPied(ctx, `Date annoncée par ${m.source?.nom || "l'organisateur"}. Les programmes peuvent changer : vérifiez auprès de l'organisateur.`);
+  return { nom:`meeting-${slugDep(m.titre).slice(0, 40)}` };
+};
+
 async function dessinerStory(type, info){
-  await Promise.all(["600 60px Newsreader", "400 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
+  await Promise.all(["600 60px Newsreader", "700 60px Newsreader", "400 30px \"Public Sans\"", "600 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
   c.width = STORY.L; c.height = STORY.H;
   const ctx = c.getContext("2d");
-  const { L, marge } = STORY, largeur = L - 2 * marge;
+  const { L, marge, bas } = STORY, largeur = L - 2 * marge;
   let y, nom = "hemicycle-france";
+  const fr1 = n => String(n).replace(".", ",");
 
   if(type === "scrutin" || type === "senat"){
     let titre, date, resultat, groupes, sourceTxt, surtitre, censure = false;
@@ -4544,56 +5209,76 @@ async function dessinerStory(type, info){
       sourceTxt = `Scrutin public n°${s.numero} du Sénat (session ${s.session}-${s.session + 1}), page officielle senat.fr.`;
       nom = `senat-${s.session}-${s.numero}`;
     }
-    y = storyCadre(ctx, surtitre);
-    y = storyTexte(ctx, titre, marge, y, { taille:58, poids:600, police:"Newsreader", max:4, interligne:1.15 }) + 20;
+    const adopte = resultat === "adopte", theme = adopte ? STORY.vert : STORY.rouge;
+    y = storyCadre(ctx, surtitre, { couleur:theme });
+    const mot = adopte ? (censure ? "Censure adoptée" : "Adopté") : (censure ? "Censure rejetée" : "Rejeté");
+    y = storyChiffreHeros(ctx, mot, marge, y + 112, theme, 150);
+    y = storyTexte(ctx, titre, marge, y + 6, { taille:48, poids:600, police:"Newsreader", max:3, interligne:1.12 }) + 14;
     const pour = groupes.reduce((a,g)=>a+g.pour,0), contre = groupes.reduce((a,g)=>a+(g.contre||0),0), abst = groupes.reduce((a,g)=>a+(g.abst||0),0);
-    storyPastille(ctx, resultat === "adopte" ? (censure ? "CENSURE ADOPTÉE" : "ADOPTÉ") : (censure ? "CENSURE REJETÉE" : "REJETÉ"), marge, y, resultat === "adopte" ? STORY.vert : STORY.rouge);
-    y += 100;
+    const total = pour + contre + abst;
     const colonnes = censure ? [["Pour la censure", pour, STORY.vert], ["Voix requises", 289, STORY.encre]] : [["Pour", pour, STORY.vert], ["Contre", contre, STORY.rouge], ["Abstention", abst, STORY.ambre]];
+    const hc = 330;
+    storyCarte(ctx, marge, y, largeur, hc);
+    if(censure) storyHemicycle(ctx, marge + 300, y + hc - 34, 262, [[pour, STORY.vert]], 577, 190);
+    else storyHemicycle(ctx, marge + 300, y + hc - 34, 262, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], total || 1, 190);
     colonnes.forEach(([lib, n, coul], i)=>{
-      const x = marge + i * (largeur / colonnes.length);
-      ctx.font = `600 84px "Newsreader"`; ctx.fillStyle = coul; ctx.fillText(formatNombre(n), x, y + 76);
-      ctx.font = `600 26px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(lib, x, y + 116);
+      const yy = y + 36 + i * (colonnes.length === 3 ? 96 : 120), x = marge + 620;
+      ctx.fillStyle = coul; ctx.beginPath(); ctx.arc(x + 9, yy + 20, 9, 0, 2 * Math.PI); ctx.fill();
+      ctx.font = `600 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(lib, x + 28, yy + 28);
+      ctx.font = `700 64px "Newsreader"`; ctx.fillStyle = coul; ctx.fillText(formatNombre(n), x, yy + 88);
     });
-    y += 150;
-    if(!censure){ storyBarre(ctx, marge, y, largeur, 26, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], pour + contre + abst); y += 64; }
-    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
-    ctx.fillText("PAR GROUPE", marge, y + 20); ctx.letterSpacing = "0px";
-    y += 40;
-    const pas = Math.min(64, (1580 - y) / Math.max(1, groupes.length));
-    const taille = Math.min(30, pas * 0.5);
-    for(const g of groupes){
-      ctx.fillStyle = g.couleur; ctx.beginPath(); ctx.arc(marge + 10, y + pas / 2, 10, 0, 2 * Math.PI); ctx.fill();
+    y += hc + 26;
+    if(!censure){ storyBarre(ctx, marge, y, largeur, 26, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], total || 1); y += 56; }
+    y = storyTitreSection(ctx, "Par groupe", marge, y + 14, theme) + 8;
+    const rangs = Math.ceil(groupes.length / 2), pas = Math.min(58, (bas - y - 30) / Math.max(1, rangs));
+    storyCarte(ctx, marge, y, largeur, rangs * pas + 24, "#fff", 24);
+    const cw = (largeur - 60) / 2, taille = Math.min(26, pas * 0.5);
+    groupes.forEach((g, i)=>{
+      const x = marge + 24 + (i % 2) * (cw + 12), yy = y + 12 + Math.floor(i / 2) * pas, ym = yy + pas / 2;
+      ctx.fillStyle = g.couleur; ctx.beginPath(); ctx.arc(x + 9, ym, 9, 0, 2 * Math.PI); ctx.fill();
       ctx.font = `600 ${taille}px "Public Sans"`; ctx.fillStyle = STORY.encre;
-      ctx.fillText(g.id, marge + 34, y + pas / 2 + taille * 0.36);
+      ctx.fillText(storyLignes(ctx, g.id, 100, 1)[0], x + 28, ym + taille * 0.36);
       const m = g.membres || (g.pour + (g.contre||0) + (g.abst||0) + (g.npv||0)) || 1;
-      storyBarre(ctx, marge + 190, y + pas / 2 - 11, 520, 22, [[g.pour, STORY.vert], [g.contre||0, STORY.rouge], [g.abst||0, STORY.ambre]], m);
+      storyBarre(ctx, x + 138, ym - 8, 150, 16, [[g.pour, STORY.vert], [g.contre||0, STORY.rouge], [g.abst||0, STORY.ambre]], m);
       const pos = censure ? (g.pour ? `${g.pour} pour` : "—") : positionMajoritaire({ typeVote:"" }, g);
-      ctx.font = `600 ${taille}px "Public Sans"`; ctx.textAlign = "right";
-      ctx.fillStyle = pos === "pour" ? STORY.vert : pos === "contre" ? STORY.rouge : pos === "abst" ? STORY.ambre : STORY.doux;
-      ctx.fillText(censure ? pos : ({ pour:"Pour", contre:"Contre", abst:"Abstention" }[pos] || "Partagé"), L - marge, y + pas / 2 + taille * 0.36);
+      ctx.font = `700 ${taille * 0.85}px "Public Sans"`; ctx.textAlign = "right";
+      ctx.fillStyle = pos === "pour" ? STORY.vert : pos === "contre" ? STORY.rouge : pos === "abst" ? "#9A6B00" : STORY.doux;
+      ctx.fillText(censure ? pos : ({ pour:"Pour", contre:"Contre", abst:"Abst." }[pos] || "Partagé"), x + cw - 6, ym + taille * 0.34);
       ctx.textAlign = "left";
-      y += pas;
-    }
+    });
     storyPied(ctx, sourceTxt + (censure ? " Barre : part des députés du groupe ayant voté la censure." : " Barre : pour · contre · abstention, sur les membres du groupe."));
   }
 
   else if(type === "sondages"){
     const inst = INSTITUTS.find(i=>i.id===selectedInstitut); if(!inst || periodeReserveSondages()) return null;
-    y = storyCadre(ctx, "Présidentielle 2027 · sondage");
-    y = storyTexte(ctx, `Intentions de vote au 1er tour`, marge, y, { taille:62, poids:600, police:"Newsreader", max:2 });
-    y = storyTexte(ctx, `${inst.nom}, enquête du ${inst.date} · ${inst.echantillon}`, marge, y + 4, { taille:30, couleur:STORY.doux, max:2 }) + 30;
     const liste = CANDIDATS.map(c=>({ ...c, r:inst.scores[c.id] })).filter(c=>c.r).sort((a,b)=>(b.r[0]+b.r[1])-(a.r[0]+a.r[1])).slice(0, 10);
-    const maxi = Math.max(...liste.map(c=>c.r[1]));
-    const pas = Math.min(112, (1560 - y) / liste.length);
-    const fr = n => String(n).replace(".", ",");
-    for(const c of liste){
-      ctx.font = `600 34px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(c.nom, marge, y + 36);
-      const lib = c.r[0] === c.r[1] ? `${fr(c.r[0])} %` : `${fr(c.r[0])}–${fr(c.r[1])} %`;
-      ctx.font = `600 40px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 38); ctx.textAlign = "left";
-      storyBarre(ctx, marge, y + 54, largeur, 22, [[(c.r[0] + c.r[1]) / 2, c.couleur]], maxi);
-      y += pas;
-    }
+    if(!liste.length) return null;
+    const tete = liste[0];
+    y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:tete.couleur });
+    y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 });
+    y = storyTexte(ctx, `${inst.nom}, enquête du ${inst.date} · ${inst.echantillon}`, marge, y, { taille:26, couleur:STORY.doux, max:2 }) + 14;
+    const score = c => c.r[0] === c.r[1] ? `${fr1(c.r[0])} %` : `${fr1(c.r[0])}–${fr1(c.r[1])} %`;
+    const photos = await Promise.all(liste.map(c=> storyImage(`photos/personnalites/${slugDep(c.nom)}.jpg`)));
+    const hh = 290;
+    storyCarte(ctx, marge, y, largeur, hh);
+    ctx.fillStyle = tete.couleur; ctx.beginPath(); ctx.roundRect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
+    storyMedaillon(ctx, photos[0], marge + 138, y + hh / 2, 92, tete.couleur);
+    if(!photos[0]) storyInitiales(ctx, tete.nom, marge + 138, y + hh / 2, 92, tete.couleur);
+    ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(tete.couleur); ctx.fillText("EN TÊTE", marge + 268, y + 56); ctx.letterSpacing = "0px";
+    ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, tete.nom, largeur - 290, 1)[0], marge + 268, y + 108);
+    storyChiffreHeros(ctx, score(tete), marge + 268, y + 244, storyLisible(tete.couleur), 150);
+    y += hh + 24;
+    const reste = liste.slice(1), maxi = Math.max(...liste.map(c=>c.r[1]));
+    const pas = Math.min(78, (bas - y - 40) / reste.length);
+    storyCarte(ctx, marge, y, largeur, reste.length * pas + 24, "#fff", 24);
+    reste.forEach((cd, i)=>{
+      const yy = y + 12 + i * pas, r = Math.min(24, pas * 0.34), cx = marge + 26 + r, cy = yy + pas / 2;
+      if(photos[i + 1]) storyMedaillon(ctx, photos[i + 1], cx, cy, r, cd.couleur); else storyInitiales(ctx, cd.nom, cx, cy, r, cd.couleur);
+      const x = cx + r + 18;
+      ctx.font = `600 ${Math.min(28, pas * 0.4)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, cd.nom, 400, 1)[0], x, yy + pas * 0.46);
+      ctx.font = `700 ${Math.min(36, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(cd.couleur); ctx.textAlign = "right"; ctx.fillText(score(cd), L - marge - 26, yy + pas * 0.48); ctx.textAlign = "left";
+      storyBarre(ctx, x, yy + pas * 0.6, L - marge - 26 - x, 14, [[(cd.r[0] + cd.r[1]) / 2, cd.couleur]], maxi);
+    });
     const erreur = inst.n ? ` Marge d'erreur : jusqu'à ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} pts.` : "";
     storyPied(ctx, `${inst.nom}, ${inst.date}, ${inst.echantillon}.${erreur} Notice : commission-des-sondages.fr. Un sondage n'est pas une prévision.`);
     nom = `sondage-${slugDep(inst.nom)}`;
@@ -4602,39 +5287,17 @@ async function dessinerStory(type, info){
   else if(type === "depute"){
     const d = DEPUTES?.find(x=>x.id===deputeOuvert); if(!d) return null;
     const p = partiDepute(d), s = d.stats, exprimes = s.pour + s.contre + s.abst;
-    y = storyCadre(ctx, "Votre député");
+    y = storyCadre(ctx, "Votre député", { couleur:p.couleur });
     const photo = await storyImage(`photos/deputes/${d.id}.jpg`);
-    const r = 110, cx = marge + r, cy = y + r + 10;
-    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
-    if(photo){ const h = 2 * r * photo.naturalHeight / photo.naturalWidth; ctx.drawImage(photo, cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h); }
-    else { ctx.fillStyle = p.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
-    ctx.restore();
-    ctx.lineWidth = 8; ctx.strokeStyle = p.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
-    let ty = storyTexte(ctx, d.nom, marge + 2 * r + 40, y + 20, { taille:60, poids:600, police:"Newsreader", largeur:largeur - 2 * r - 40, max:2, interligne:1.05 });
-    storyTexte(ctx, p.nom, marge + 2 * r + 40, ty, { taille:30, poids:600, couleur:STORY.doux, largeur:largeur - 2 * r - 40, max:2 });
-    y = cy + r + 30;
-    y = storyTexte(ctx, `${d.f ? "Députée" : "Député"} de ${circoDepute(d)} (${d.numDep})`, marge, y, { taille:32, couleur:STORY.doux, max:2 }) + 24;
     const possibles = [...d.votes].filter(c=>c !== ".").length, presents = [...d.votes].filter(c=>"pca".includes(c)).length;
-    const cartes = [[`${presents}/${possibles}`, "votes clés où il a voté"], [pctFr(exprimes, s.scrutins), "de tous les scrutins"], [formatNombre(s.ecarts), "votes contre son groupe"]];
-    cartes.forEach(([v, lib], i)=>{
-      const x = marge + i * (largeur / 3);
-      ctx.font = `600 56px "Newsreader"`; ctx.fillStyle = i === 0 ? STORY.bleu : STORY.encre; ctx.fillText(v, x, y + 58);
-      storyTexte(ctx, d.f ? lib.replace(" il ", " elle ") : lib, x, y + 76, { taille:24, couleur:STORY.doux, largeur:largeur / 3 - 20, max:2 });
+    const derniers = DEPUTES_CLES.map((numero, i)=>({ code:d.votes[i], loi:LOIS.find(l=>l.numero===numero) })).filter(x=>x.code !== "." && x.loi).slice(0, 8);
+    storyFicheElu(ctx, y, {
+      photo, couleur:p.couleur, nom:d.nom, soustitre:p.nom,
+      ligne:`${d.f ? "Députée" : "Député"} de ${circoDepute(d)} (${d.numDep})`,
+      cartes:[[`${presents}/${possibles}`, d.f ? "votes clés où elle a voté" : "votes clés où il a voté", storyLisible(p.couleur)], [pctFr(exprimes, s.scrutins), "de tous les scrutins", STORY.bleu], [formatNombre(s.ecarts), "votes contre son groupe", STORY.rouge]],
+      titreVotes:"Ses derniers votes clés",
+      votes:derniers.map(({ code, loi })=>({ code, titre:titreLoi(loi) })),
     });
-    y += 170;
-    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
-    ctx.fillText("SES DERNIERS VOTES CLÉS", marge, y); ctx.letterSpacing = "0px";
-    y += 24;
-    const LIB = { p:["POUR", STORY.vert], c:["CONTRE", STORY.rouge], a:["ABST.", STORY.ambre], n:["NON-VOTANT", STORY.pale], "-":["PAS VOTÉ", STORY.pale] };
-    const derniers = DEPUTES_CLES.map((numero, i)=>({ code:d.votes[i], loi:LOIS.find(l=>l.numero===numero) })).filter(x=>x.code !== "." && x.loi).slice(0, 6);
-    for(const { code, loi } of derniers){
-      const [lib, coul] = LIB[code] || LIB["-"];
-      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, largeur, 2);
-      const fin = storyTexte(ctx, titreLoi(loi), marge, y + 8, { taille:28, largeur:largeur - 220, max:2 });
-      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = coul; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 46); ctx.textAlign = "left";
-      y = Math.max(fin, y + 70) + 8;
-      if(y > 1540) break;
-    }
     storyPied(ctx, "Votes nominatifs de l'Assemblée nationale. Un taux bas ne veut pas dire qu'un député ne travaille pas (commissions, circonscription).");
     nom = `depute-${slugDep(d.nom)}`;
   }
@@ -4644,86 +5307,91 @@ async function dessinerStory(type, info){
     if(!ELECTIONS.has(dep)) ELECTIONS.set(dep, lireJSON(`data/elections/${dep}.json`));
     const data = await ELECTIONS.get(dep), r = data?.communes?.[commune];
     if(!r) return null;
-    y = storyCadre(ctx, "Présidentielle 2022 · résultats");
-    y = storyTexte(ctx, commune, marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
-    y = storyTexte(ctx, data.departement || "", marge, y, { taille:32, couleur:STORY.doux, max:1 }) + 20;
+    const classer = t => (r[t] || []).map((v, i)=>[data.candidats[t][i], v]).sort((a, b)=>b[1] - a[1]);
+    const tours = [["t1", "1er tour · 10 avril 2022", r.t2 ? 5 : 8, classer("t1")]];
+    if(r.t2) tours.push(["t2", "2d tour · 24 avril 2022", 2, classer("t2")]);
+    const final = tours[tours.length - 1][3], [gagnant, vg] = final[0];
+    const coulG = COULEURS_2022[gagnant] || "#8A8C94";
     const pct = v => (v / 10).toLocaleString("fr-FR", { minimumFractionDigits:1, maximumFractionDigits:1 }) + " %";
-    const tour = (t, titre, n, pas)=>{
-      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
-      ctx.fillText(titre, marge, y + 20); ctx.letterSpacing = "0px";
-      y += 40;
-      const lignes = (r[t] || []).map((v, i)=>[data.candidats[t][i], v]).sort((a, b)=>b[1] - a[1]);
+    y = storyCadre(ctx, "Présidentielle 2022 · résultats", { couleur:coulG });
+    y = storyTexte(ctx, commune, marge, y, { taille:72, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+    y = storyTexte(ctx, data.departement || "", marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 10;
+    const hh = 250;
+    storyCarte(ctx, marge, y, largeur, hh);
+    ctx.fillStyle = coulG; ctx.beginPath(); ctx.roundRect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
+    ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(coulG);
+    ctx.fillText(r.t2 ? "EN TÊTE AU 2D TOUR" : "EN TÊTE AU 1ER TOUR", marge + 44, y + 56); ctx.letterSpacing = "0px";
+    ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(gagnant, marge + 44, y + 108);
+    storyChiffreHeros(ctx, pct(vg), marge + 44, y + 224, storyLisible(coulG), 130);
+    y += hh + 24;
+    const nbL = tours.reduce((a, t)=>a + t[2], 0), entetes = tours.length * 54;
+    const pas = Math.min(74, (bas - y - entetes - 40) / nbL);
+    storyCarte(ctx, marge, y, largeur, entetes + nbL * pas + 30, "#fff", 24);
+    y += 14;
+    for(const [t, titre, n, lignes] of tours){
+      ctx.font = `700 22px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.letterSpacing = "2px"; ctx.fillText(titre.toUpperCase(), marge + 28, y + 36); ctx.letterSpacing = "0px";
+      const autres = lignes.slice(n).reduce((a, [, v])=>a + v, 0);
+      if(autres){ ctx.font = `400 22px "Public Sans"`; ctx.textAlign = "right"; ctx.fillText(`Autres : ${pct(autres)}`, L - marge - 28, y + 36); ctx.textAlign = "left"; }
+      y += 54;
       const maxi = lignes[0]?.[1] || 1;
       for(const [nomC, v] of lignes.slice(0, n)){
-        ctx.font = `600 32px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(nomC, marge, y + 32);
-        ctx.font = `600 36px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(pct(v), L - marge, y + 34); ctx.textAlign = "left";
-        storyBarre(ctx, marge, y + 46, largeur, 18, [[v, COULEURS_2022[nomC] || "#8A8C94"]], t === "t2" ? 1000 : maxi);
+        const coul = COULEURS_2022[nomC] || "#8A8C94";
+        ctx.fillStyle = coul; ctx.beginPath(); ctx.arc(marge + 40, y + pas * 0.3, 9, 0, 2 * Math.PI); ctx.fill();
+        ctx.font = `600 ${Math.min(30, pas * 0.42)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(nomC, marge + 62, y + pas * 0.4);
+        ctx.font = `700 ${Math.min(34, pas * 0.48)}px "Newsreader"`; ctx.fillStyle = storyLisible(coul); ctx.textAlign = "right"; ctx.fillText(pct(v), L - marge - 28, y + pas * 0.42); ctx.textAlign = "left";
+        storyBarre(ctx, marge + 62, y + pas * 0.56, largeur - 90, 14, [[v, coul]], t === "t2" ? 1000 : maxi);
         y += pas;
       }
-      const autres = lignes.slice(n).reduce((a, [, v])=>a + v, 0);
-      if(autres){ storyTexte(ctx, `Autres candidats : ${pct(autres)}`, marge, y - 10, { taille:26, couleur:STORY.doux, max:1 }); y += 40; }
-      y += 20;
-    };
-    tour("t1", "1ER TOUR · 10 AVRIL 2022", 8, 84);
-    if(r.t2) tour("t2", "2D TOUR · 24 AVRIL 2022", 2, 84);
+    }
     storyPied(ctx, "Résultats définitifs du ministère de l'Intérieur (data.gouv.fr), en % des suffrages exprimés dans la commune.");
     nom = `presidentielle-2022-${slugDep(commune)}`;
   }
+
   else if(type === "senateur"){
     const s = SENATEURS?.find(x=>x.id===senateurOuvert); if(!s) return null;
     const g = groupeSenateur(s), { lignes, presents, ecarts } = statsSenateur(s);
-    y = storyCadre(ctx, s.f ? "Votre sénatrice" : "Votre sénateur");
+    y = storyCadre(ctx, s.f ? "Votre sénatrice" : "Votre sénateur", { couleur:g.couleur });
     const photo = await storyImage(`photos/senateurs/${s.id}.jpg`);
-    const r = 110, cx = marge + r, cy = y + r + 10;
-    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
-    if(photo) ctx.drawImage(photo, cx - r, cy - r, 2 * r, 2 * r); else { ctx.fillStyle = g.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
-    ctx.restore();
-    ctx.lineWidth = 8; ctx.strokeStyle = g.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
-    const ty = storyTexte(ctx, s.nom, marge + 2 * r + 40, y + 20, { taille:60, poids:600, police:"Newsreader", largeur:largeur - 2 * r - 40, max:2, interligne:1.05 });
-    storyTexte(ctx, g.nom, marge + 2 * r + 40, ty, { taille:30, poids:600, couleur:STORY.doux, largeur:largeur - 2 * r - 40, max:2 });
-    y = cy + r + 30;
-    y = storyTexte(ctx, `${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "des Français de l'étranger" : `de ${s.dep}`}`, marge, y, { taille:32, couleur:STORY.doux, max:2 }) + 24;
-    const cartes = [[`${presents.length}/${lignes.length}`, "textes où elle/il s'est prononcé"], [["p","c","a"].map(k=>presents.filter(x=>x.code===k).length).join(" · "), "pour · contre · abst."], [formatNombre(ecarts), "votes contre son groupe"]];
-    cartes.forEach(([v, lib], i)=>{
-      const x = marge + i * (largeur / 3);
-      ctx.font = `600 52px "Newsreader"`; ctx.fillStyle = i === 0 ? STORY.bleu : STORY.encre; ctx.fillText(v, x, y + 56);
-      storyTexte(ctx, lib.replace("elle/il", s.f ? "elle" : "il").replace("prononcé", s.f ? "prononcée" : "prononcé"), x, y + 70, { taille:24, couleur:STORY.doux, largeur:largeur / 3 - 20, max:2 });
+    storyFicheElu(ctx, y, {
+      photo, couleur:g.couleur, nom:s.nom, soustitre:g.nom,
+      ligne:`${s.f ? "Sénatrice" : "Sénateur"} ${/^Français/.test(s.dep) ? "des Français de l'étranger" : `de ${s.dep}`}`,
+      cartes:[[`${presents.length}/${lignes.length}`, s.f ? "textes où elle s'est prononcée" : "textes où il s'est prononcé", storyLisible(g.couleur)], [["p","c","a"].map(k=>presents.filter(x=>x.code===k).length).join(" · "), "pour · contre · abst.", STORY.bleu], [formatNombre(ecarts), "votes contre son groupe", STORY.rouge]],
+      titreVotes:"Ses derniers votes sur un texte",
+      votes:lignes.slice(0, 8).map(({ code, scr })=>({ code, titre:titreSenat(scr) })),
     });
-    y += 170;
-    ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.letterSpacing = "2px";
-    ctx.fillText("SES DERNIERS VOTES SUR UN TEXTE", marge, y); ctx.letterSpacing = "0px";
-    y += 24;
-    const LIB = { p:["POUR", STORY.vert], c:["CONTRE", STORY.rouge], a:["ABST.", STORY.ambre], n:["PAS VOTÉ", STORY.pale] };
-    for(const { code, scr } of lignes.slice(0, 6)){
-      const [lib, coul] = LIB[code] || LIB.n;
-      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, largeur, 2);
-      const fin = storyTexte(ctx, titreSenat(scr), marge, y + 8, { taille:28, largeur:largeur - 220, max:2 });
-      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = coul; ctx.textAlign = "right"; ctx.fillText(lib, L - marge, y + 46); ctx.textAlign = "left";
-      y = Math.max(fin, y + 70) + 8;
-      if(y > 1540) break;
-    }
     storyPied(ctx, "Vote de chaque sénateur relevé sur les pages officielles des scrutins du Sénat, recoupé avec le total officiel.");
     nom = `senateur-${slugDep(s.nom)}`;
   }
 
   else if(type === "gouvernement"){
     const g = GOUVERNEMENT; if(!g?.membres?.length) return null;
-    y = storyCadre(ctx, "Qui gouverne ?");
-    y = storyTexte(ctx, `Le ${g.nom}`, marge, y, { taille:66, poids:600, police:"Newsreader", max:2 });
-    y = storyTexte(ctx, `Nommé le ${dateCourte(g.depuis)} · ${g.membres.length} membres`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 20;
+    y = storyCadre(ctx, "Qui gouverne ?", { couleur:STORY.bleu });
+    y = storyTexte(ctx, `Le ${g.nom}`, marge, y, { taille:62, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+    y = storyTexte(ctx, `Nommé le ${dateCourte(g.depuis)} · ${g.membres.length} membres`, marge, y, { taille:28, couleur:STORY.doux, max:1 }) + 10;
     const delegue = m => /délégué|Secrétaire/i.test(m.qualite + " " + m.fonction.split(",")[0]);
-    const liste = g.membres.filter(m=>!delegue(m));
-    const pas = Math.min(64, (1570 - y) / liste.length);
-    for(const m of liste){
-      const pm = m.qualite === "Premier ministre";
-      ctx.font = `${pm ? 700 : 600} ${pm ? 32 : 27}px "Public Sans"`; ctx.fillStyle = STORY.encre;
-      ctx.fillText(m.nom, marge, y + pas * 0.45);
-      const f = m.fonction;
-      ctx.font = `400 ${Math.min(22, pas * 0.36)}px "Public Sans"`; ctx.fillStyle = STORY.doux;
-      ctx.fillText(storyLignes(ctx, pm ? "Premier ministre" : f, largeur, 1)[0], marge, y + pas * 0.85);
-      y += pas;
+    const pm = g.membres.find(m=>m.qualite === "Premier ministre");
+    const liste = g.membres.filter(m=>!delegue(m) && m !== pm);
+    if(pm){
+      const hh = 170;
+      storyCarte(ctx, marge, y, largeur, hh);
+      ctx.fillStyle = STORY.bleu; ctx.beginPath(); ctx.roundRect(marge, y + 30, 12, hh - 60, 6); ctx.fill();
+      storyInitiales(ctx, pm.nom, marge + 112, y + hh / 2, 58, STORY.bleu);
+      ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = STORY.bleu; ctx.fillText("PREMIER MINISTRE", marge + 196, y + 62); ctx.letterSpacing = "0px";
+      ctx.font = `600 54px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, pm.nom, largeur - 220, 1)[0], marge + 196, y + 124);
+      y += hh + 22;
     }
-    storyPied(ctx, `Et ${g.membres.length - liste.length} ministres délégués. Source : Assemblée nationale, mandats des membres du Gouvernement.`);
+    const rangs = Math.ceil(liste.length / 2), pas = Math.min(72, (bas - y - 30) / rangs);
+    storyCarte(ctx, marge, y, largeur, rangs * pas + 24, "#fff", 24);
+    const cw = (largeur - 56) / 2, r = Math.min(24, pas * 0.34);
+    liste.forEach((m, i)=>{
+      const x = marge + 22 + (i % 2) * (cw + 12), yy = y + 12 + Math.floor(i / 2) * pas, cy = yy + pas / 2;
+      storyInitiales(ctx, m.nom, x + r, cy, r, STORY.bleu);
+      const tx = x + 2 * r + 14, tl = cw - 2 * r - 20;
+      ctx.font = `600 ${Math.min(25, pas * 0.36)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, m.nom, tl, 1)[0], tx, cy - pas * 0.04);
+      ctx.font = `400 ${Math.min(19, pas * 0.28)}px "Public Sans"`; ctx.fillStyle = STORY.doux;
+      ctx.fillText(storyLignes(ctx, m.fonction, tl, 1)[0], tx, cy + pas * 0.3);
+    });
+    storyPied(ctx, `Et ${g.membres.length - liste.length - (pm ? 1 : 0)} ministres délégués. Source : Assemblée nationale, mandats des membres du Gouvernement.`);
     nom = "gouvernement";
   }
 
@@ -4732,22 +5400,30 @@ async function dessinerStory(type, info){
     const [a, cm] = await Promise.all([ACTIVITE, COMMISSIONS]);
     const top = DEPUTES.map(d => [d, k.val(d, a?.deputes, cm?.deputes)]).filter(([, v]) => v != null).sort((x, z) => z[1] - x[1]).slice(0, 10);
     if(!top.length) return null;
-    y = storyCadre(ctx, "Classement des députés");
-    y = storyTexte(ctx, k.titre, marge, y, { taille:62, poids:600, police:"Newsreader", max:2 }) + 16;
+    const p1 = partiDepute(top[0][0]);
+    y = storyCadre(ctx, "Classement des députés", { couleur:p1.couleur });
+    y = storyTexte(ctx, k.titre, marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 10;
     const photos = await Promise.all(top.map(([d]) => storyImage(`photos/deputes/${d.id}.jpg`)));
-    const pas = Math.min(104, (1560 - y) / top.length);
-    top.forEach(([d, v], i)=>{
-      const p = partiDepute(d), r = pas * 0.36, cy = y + pas / 2;
-      ctx.font = `700 30px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.fillText(String(i + 1), marge, cy + 10);
-      const cx = marge + 60 + r;
-      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.clip();
-      if(photos[i]){ const h = 2 * r * photos[i].naturalHeight / photos[i].naturalWidth; ctx.drawImage(photos[i], cx - r, cy - r - (h - 2 * r) * 0.2, 2 * r, h); } else { ctx.fillStyle = p.couleur; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
-      ctx.restore();
-      ctx.lineWidth = 4; ctx.strokeStyle = p.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.stroke();
-      ctx.font = `600 32px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(d.nom, cx + r + 22, cy - 2);
-      ctx.font = `400 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(`${d.groupe} · ${d.dep}`, cx + r + 22, cy + 30);
-      ctx.font = `600 44px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.textAlign = "right"; ctx.fillText(k.fmt(v), L - marge, cy + 14); ctx.textAlign = "left";
-      y += pas;
+    const hh = 290;
+    storyCarte(ctx, marge, y, largeur, hh);
+    ctx.fillStyle = p1.couleur; ctx.beginPath(); ctx.roundRect(marge, y + 40, 12, hh - 80, 6); ctx.fill();
+    storyMedaillon(ctx, photos[0], marge + 138, y + hh / 2, 92, p1.couleur);
+    ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(p1.couleur); ctx.fillText("N° 1", marge + 268, y + 56); ctx.letterSpacing = "0px";
+    ctx.font = `600 44px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, top[0][0].nom, largeur - 290, 1)[0], marge + 268, y + 104);
+    ctx.font = `400 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(storyLignes(ctx, `${top[0][0].groupe} · ${top[0][0].dep}`, largeur - 290, 1)[0], marge + 268, y + 142);
+    storyChiffreHeros(ctx, k.fmt(top[0][1]), marge + 268, y + 254, storyLisible(p1.couleur), 120);
+    y += hh + 24;
+    const reste = top.slice(1), pas = Math.min(80, (bas - y - 40) / reste.length);
+    storyCarte(ctx, marge, y, largeur, reste.length * pas + 24, "#fff", 24);
+    reste.forEach(([d, v], j)=>{
+      const i = j + 1, p = partiDepute(d), r = Math.min(26, pas * 0.36), yy = y + 12 + j * pas, cy = yy + pas / 2;
+      if(j){ ctx.fillStyle = STORY.filet; ctx.fillRect(marge + 26, yy, largeur - 52, 2); }
+      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = STORY.pale; ctx.fillText(String(i + 1), marge + 30, cy + 9);
+      const cx = marge + 96 + r;
+      storyMedaillon(ctx, photos[i], cx, cy, r, p.couleur);
+      ctx.font = `600 ${Math.min(29, pas * 0.38)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, d.nom, 400, 1)[0], cx + r + 20, cy - 2);
+      ctx.font = `400 ${Math.min(21, pas * 0.28)}px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(storyLignes(ctx, `${d.groupe} · ${d.dep}`, 400, 1)[0], cx + r + 20, cy + pas * 0.28);
+      ctx.font = `700 ${Math.min(40, pas * 0.5)}px "Newsreader"`; ctx.fillStyle = storyLisible(p.couleur); ctx.textAlign = "right"; ctx.fillText(k.fmt(v), L - marge - 28, cy + 12); ctx.textAlign = "left";
     });
     storyPied(ctx, k.note);
     nom = `classement-${classementChoisi}`;
@@ -4756,21 +5432,34 @@ async function dessinerStory(type, info){
   else if(type === "agenda"){
     const jours = (AGENDA_AN?.jours || []).filter(j=> j.date >= aujourdhuiISO());
     if(!jours.length) return null;
-    y = storyCadre(ctx, "Assemblée nationale · agenda");
-    y = storyTexte(ctx, "Ce que les députés examinent ces prochains jours", marge, y, { taille:58, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 16;
+    y = storyCadre(ctx, "Assemblée nationale · agenda", { couleur:STORY.bleu });
+    y = storyTexte(ctx, "Ce que les députés examinent ces prochains jours", marge, y, { taille:58, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 24;
+    const tl = largeur - 52 - 34;
     for(const j of jours){
-      if(y > 1480) break;
       const titre = new Date(j.date + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
-      ctx.fillStyle = STORY.encre; ctx.fillRect(marge, y, largeur, 3);
-      ctx.font = `700 28px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(titre.charAt(0).toUpperCase() + titre.slice(1), marge, y + 44);
-      y += 60;
-      const points = [...(j.points.some(p=>p.type==="qag") ? [{ type:"qag", objet:"Questions au Gouvernement" }] : []), ...j.points.filter(p=>p.type !== "qag")];
-      for(const p of points.slice(0, 4)){
-        if(y > 1520) break;
-        const txt = (p.type === "vote" ? "Vote solennel : " : "") + p.objet;
-        y = storyTexte(ctx, "• " + txt, marge, y, { taille:27, poids:p.type === "vote" ? 700 : 400, couleur:p.type === "qag" ? STORY.doux : STORY.encre, max:2, interligne:1.2 }) + 4;
+      const points = [...(j.points.some(p=>p.type==="qag") ? [{ type:"qag", objet:"Questions au Gouvernement" }] : []), ...j.points.filter(p=>p.type !== "qag")].slice(0, 4);
+      const blocs = [];
+      let h = 84;
+      for(const p of points){
+        const vote = p.type === "vote";
+        ctx.font = `${vote ? 700 : 400} 26px "Public Sans"`;
+        const l = storyLignes(ctx, (vote ? "Vote solennel : " : "") + p.objet, tl, 2), bh = l.length * 32 + 10;
+        if(y + h + bh + 24 > bas) break;
+        blocs.push({ p, vote, l }); h += bh;
       }
-      y += 12;
+      if(!blocs.length) break;
+      storyCarte(ctx, marge, y, largeur, h + 8, "#fff", 24);
+      ctx.fillStyle = STORY.bleu; ctx.beginPath(); ctx.roundRect(marge, y, largeur, 62, [24, 24, 0, 0]); ctx.fill();
+      ctx.font = `700 28px "Public Sans"`; ctx.fillStyle = "#fff"; ctx.fillText(titre.charAt(0).toUpperCase() + titre.slice(1), marge + 26, y + 41);
+      let yy = y + 86;
+      for(const { p, vote, l } of blocs){
+        ctx.fillStyle = vote ? STORY.rouge : p.type === "qag" ? STORY.bleu : STORY.pale;
+        ctx.beginPath(); ctx.arc(marge + 34, yy + 8, vote ? 8 : 6, 0, 2 * Math.PI); ctx.fill();
+        ctx.font = `${vote ? 700 : 400} 26px "Public Sans"`; ctx.fillStyle = p.type === "qag" ? STORY.doux : STORY.encre;
+        l.forEach((t, i)=> ctx.fillText(t, marge + 56, yy + 16 + i * 32));
+        yy += l.length * 32 + 10;
+      }
+      y += h + 28;
     }
     storyPied(ctx, "Ordre du jour des séances publiques publié par l'Assemblée nationale. Il peut encore changer.");
     nom = "agenda-assemblee";
@@ -4778,22 +5467,39 @@ async function dessinerStory(type, info){
 
   else if(type === "quiz"){
     const sc = QUIZ_RESULTAT; if(!sc?.length) return null;
-    y = storyCadre(ctx, "Mon résultat au quiz");
-    y = storyTexte(ctx, "Qu'aurais-je voté à la place des députés ?", marge, y, { taille:60, poids:600, police:"Newsreader", max:3, interligne:1.1 }) + 10;
-    y = storyTexte(ctx, quizPhrase(sc, "Mes"), marge, y, { taille:34, poids:600, couleur:sc.filter(x=>x.pct===sc[0].pct).length > 1 ? STORY.encre : sc[0].couleur, max:3 }) + 24;
-    const pas = Math.min(92, (1470 - y) / Math.min(sc.length, 8));
-    for(const x of sc.slice(0, 8)){
-      ctx.font = `600 30px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, x.nom, largeur - 140, 1)[0], marge, y + 32);
-      ctx.font = `600 38px "Newsreader"`; ctx.textAlign = "right"; ctx.fillText(`${x.pct} %`, L - marge, y + 34); ctx.textAlign = "left";
-      storyBarre(ctx, marge, y + 46, largeur, 18, [[x.pct, x.couleur]], 100);
-      y += pas;
-    }
-    storyTexte(ctx, "Et vous ? Faites le quiz :", marge, 1520, { taille:34, poids:700, couleur:STORY.bleu, max:1 });
+    const ex = sc.filter(x=>x.pct === sc[0].pct), seul = ex.length === 1, coul = seul ? sc[0].couleur : STORY.bleu;
+    y = storyCadre(ctx, "Mon résultat au quiz", { couleur:coul });
+    y = storyTexte(ctx, "Qu'aurais-je voté à la place des députés ?", marge, y, { taille:44, poids:600, police:"Newsreader", max:2, interligne:1.1 });
+    y = storyChiffreHeros(ctx, `${sc[0].pct} %`, marge, y + 190, storyLisible(coul), 230);
+    ctx.font = `600 50px "Newsreader"`; ctx.fillStyle = STORY.encre;
+    y = storyTexte(ctx, seul ? `d'accord avec ${sc[0].nom}` : `d'accord avec ${ex.length} groupes`, marge, y - 14, { taille:50, poids:600, police:"Newsreader", max:2, interligne:1.08 });
+    y = storyTexte(ctx, quizPhrase(sc, "Mes"), marge, y, { taille:27, couleur:STORY.doux, max:3 }) + 12;
+    const lignes = sc.slice(0, 8), fin = bas - 110;
+    const logos = await Promise.all(lignes.map(x=>{ const p = PARTIES.find(q=>q.nom === x.nom); return p ? storyImage(`icons/partis/${p.id}.png`) : null; }));
+    const pas = Math.min(84, (fin - y - 20) / lignes.length);
+    storyCarte(ctx, marge, y, largeur, lignes.length * pas + 24, "#fff", 24);
+    lignes.forEach((x, i)=>{
+      const yy = y + 12 + i * pas, r = Math.min(24, pas * 0.32), cx = marge + 28 + r, cy = yy + pas * 0.4;
+      ctx.fillStyle = x.couleur; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.fill();
+      if(logos[i]){
+        ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r - 3, 0, 2 * Math.PI); ctx.clip(); ctx.fillStyle = "#fff"; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
+        const k = Math.min((2 * r - 10) / logos[i].naturalWidth, (2 * r - 10) / logos[i].naturalHeight);
+        ctx.drawImage(logos[i], cx - logos[i].naturalWidth * k / 2, cy - logos[i].naturalHeight * k / 2, logos[i].naturalWidth * k, logos[i].naturalHeight * k); ctx.restore();
+      }
+      const tx = cx + r + 18;
+      ctx.font = `600 ${Math.min(27, pas * 0.36)}px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, x.nom, largeur - 220, 1)[0], tx, cy + 4);
+      ctx.font = `700 ${Math.min(36, pas * 0.48)}px "Newsreader"`; ctx.fillStyle = storyLisible(x.couleur); ctx.textAlign = "right"; ctx.fillText(`${x.pct} %`, L - marge - 28, cy + 8); ctx.textAlign = "left";
+      storyBarre(ctx, tx, yy + pas * 0.66, L - marge - 28 - tx, 14, [[x.pct, x.couleur]], 100);
+    });
+    y += lignes.length * pas + 40;
+    ctx.font = `700 34px "Public Sans"`;
+    const t = "Et vous ? Faites le quiz", w = ctx.measureText(t).width + 80;
+    ctx.fillStyle = STORY.bleu; ctx.beginPath(); ctx.roundRect(marge, y, w, 70, 35); ctx.fill();
+    ctx.fillStyle = "#fff"; ctx.textBaseline = "middle"; ctx.fillText(t, marge + 40, y + 37); ctx.textBaseline = "alphabetic";
     storyPied(ctx, "Part des questions où ma réponse correspond à la position de la majorité du groupe, sur de vrais votes de l'Assemblée.");
     nom = "quiz-hemicycle-france";
   }
   else if(STORY_PLUS[type]){
-    // Nouveaux types de story (actualités, probabilités, second tour…), définis dans STORY_PLUS ci-dessous
     const r = await STORY_PLUS[type](ctx, info);
     if(!r) return null;
     nom = r.nom || nom;
@@ -4951,6 +5657,10 @@ function lienPartage(type){
   if(type === "classement") return { titre: `Classement des députés : ${CLASSEMENTS[classementChoisi].titre.toLowerCase()}`, url: `${base}#classement-${classementChoisi}` };
   if(type === "agenda") return { titre: "Ce que l'Assemblée nationale examine ces prochains jours", url: `${base}#meetings` };
   if(type === "histo"){ const g = PARTIES.find(p=>p.id===selectedPartyId); return { titre: `Comment vote le groupe ${g ? g.nom : selectedPartyId} à l'Assemblée`, url: `${base}#histo-${selectedPartyId}` }; }
+  if(type === "actualites") return { titre: "Les sujets du moment dans la presse politique", url: `${base}#actualites` };
+  if(type === "candidats") return { titre: "Présidentielle 2027 : tous les candidats déclarés", url: `${base}#candidats` };
+  if(type === "dirigeants") return { titre: "Les chefs de parti et les groupes à l'Assemblée nationale", url: `${base}#dirigeants` };
+  if(type === "chiffres") return { titre: "Chômage, inflation, dette : les chiffres clés de la France", url: `${base}#chiffres` };
   if(type === "justice") return { titre: "Responsables politiques condamnés : les décisions de justice, sources à l'appui", url: `${base}#justice` };
   if(type === "quiz") return QUIZ_RESULTAT
     ? { titre: `J'ai fait le quiz d'Hémicycle France. ${quizPhrase(QUIZ_RESULTAT, "Mes")} Et vous ?`, url: `${base}#quiz` }
