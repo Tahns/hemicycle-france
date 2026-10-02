@@ -94,6 +94,17 @@ fonction) et le thème des votes (commission saisie au fond du dossier législat
 
 Ces fichiers se modifient directement sur GitHub (crayon « Edit »), sans toucher au code du site.
 
+## Architecture et secrets (en bref)
+
+- `data/*.json` : toutes les données publiées ; `index.html` les lit au chargement (site statique, GitHub Pages).
+- `scripts/fetch-*.js` : collecte depuis les sources officielles ; chacun passe par `scripts/garde.js`, qui refuse
+  d'écraser un bon fichier si le contenu est vide, chute de plus de 30 % ou perd un champ obligatoire (ancien fichier conservé, alerte levée).
+- `scripts/check-data.js` (cohérence, licence de chaque photo de `photos/personnalites/` dans `data/portraits.json`), `check-fraicheur.js` (données périmées), `check-sources.js` (Décodex).
+- Workflows : `update-data.yml` (toutes les heures), `actualites.yml`, `ci.yml` (tests), `stats.yml` (trafic), `sante.yml` (chaque lundi : les trois contrôles ; ouvre ou complète UNE issue `alerte-donnees`, silencieux si tout va bien).
+- Secrets : `GITHUB_TOKEN` (fourni automatiquement) ; `TRAFIC_TOKEN` (jeton fine-grained « Administration : Read-only ») pour `stats.yml` uniquement.
+- Données manuelles : une fiche de `justice.json` non vérifiée depuis 90 jours est marquée « À vérifier » (masquée après 180) ; les événements passés de `meetings.json` sont masqués.
+- Tests : `node tests/garde.test.mjs` (garde-fou et licences, sur fixtures), `node tests/smoke.cjs` (navigateur).
+
 ## Statistiques du dépôt
 
 Le workflow `stats.yml` archive chaque jour le trafic GitHub (vues, visiteurs, clones, référents)

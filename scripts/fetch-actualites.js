@@ -21,6 +21,7 @@
  */
 
 import { readFile, writeFile } from "fs/promises";
+import { ecrireGarde } from "./garde.js";
 import { construireIndex, illustrer } from "./illustrations.js";
 
 const DATA_FILE = "data/actualites.json";
@@ -183,8 +184,9 @@ async function main() {
   delete ancien.lastUpdated;
   if (JSON.stringify(ancien) === JSON.stringify(sortie)) return log("Aucun changement.");
   if (DRY_RUN) return console.log(JSON.stringify(sortie, null, 2));
-  await writeFile(DATA_FILE, JSON.stringify({ lastUpdated: maintenant.toISOString(), ...sortie }, null, 1) + "\n");
-  log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.filter((s) => s.medias >= 2).length} sujet(s) repris par plusieurs médias.`);
+  // Le volume de l'actualité varie fortement d'une heure à l'autre : seuil de chute plus large (50 %) que les données stables
+  const contenu = { lastUpdated: maintenant.toISOString(), ...sortie };
+  if (await ecrireGarde(DATA_FILE, contenu, { nom: DATA_FILE, texte: JSON.stringify(contenu, null, 1) + "\n", liste: (d) => d.sujets, obligatoires: ["articles", "derniere"], seuil: 0.5 })) log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.filter((s) => s.medias >= 2).length} sujet(s) repris par plusieurs médias.`);
 }
 
 main().catch((e) => {

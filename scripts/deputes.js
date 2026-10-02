@@ -14,6 +14,7 @@
 
 import { readFile, readdir, writeFile } from "fs/promises";
 import path from "path";
+import { ecrireGarde } from "./garde.js";
 
 const LEGISLATURE = "17";
 
@@ -156,6 +157,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
   const t0 = Date.now();
   const res = await construireDeputes(await fichiersJson(scrDir), await trouverDossier(amoDir, "acteur"), organeVersId);
-  await writeFile(sortie, JSON.stringify({ lastUpdated: new Date().toISOString(), source: "Assemblée nationale — votes nominatifs et AMO30", ...res }) + "\n");
+  const contenu = { lastUpdated: new Date().toISOString(), source: "Assemblée nationale — votes nominatifs et AMO30", ...res };
+  await ecrireGarde(sortie, contenu, { nom: sortie, texte: JSON.stringify(contenu) + "\n", liste: (d) => d.deputes, obligatoires: ["id", "nom", "groupe", "circo", "stats", "votes"] });
   console.log(`${res.deputes.length} députés, ${res.cles.length} votes clés, ${((Date.now() - t0) / 1000).toFixed(1)} s`);
 }
