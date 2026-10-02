@@ -1634,7 +1634,7 @@
       <ul>
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
-        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, Le Point, Les Échos, BFMTV, France 24, RFI, Ouest-France, La Croix, L'Express, L'Humanité, Le Parisien, Mediapart, Euronews). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart, Euronews). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
@@ -3971,6 +3971,7 @@ const GROUPES_SENAT = {
   LIRT:     { nom:"Les Indépendants", couleur:"#5B7FC4" },
   LR:       { nom:"Les Républicains", couleur:"#2F6FE0" },
   NI:       { nom:"Non-inscrits", couleur:"#6B6E78" },
+  Aucun:    { nom:"Groupe pas encore enregistré (renouvellement de septembre 2026)", couleur:"#A9ABB3" },
 };
 
 function chargerSenat(){
