@@ -259,7 +259,7 @@ function verifier(cond, message) {
     ];
     for (const [nom, viewport] of [["ordinateur", { width: 1300, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
       for (const cas of ["present", "vide", "absent"]) for (const theme of ["clair", "sombre"]) {
-        const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block" })).newPage();
+        const page = await (await navigateur.newContext({ viewport, serviceWorkers: "block", locale: "fr-FR" })).newPage();
         const erreurs = [];
         page.on("pageerror", (e) => erreurs.push(e.message));
         await page.route(/\/data\/direct\.json/, (route) => cas === "absent" ? route.fulfill({ status: 404, body: "" })
