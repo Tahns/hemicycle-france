@@ -51,7 +51,7 @@ function verifier(cond, message) {
 
     verifier((await page.$$("#en-bref .accueil-hero-stat")).length >= 1, `${nom} : bloc « En bref » incomplet`);
 
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre"]) {
       await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), onglet);
       await page.waitForTimeout(250);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
@@ -130,6 +130,32 @@ function verifier(cond, message) {
     await page.waitForTimeout(300);
     verifier((await page.$$(".senat-ligne")).length >= 10, `${nom} : scrutins du Sénat absents`);
     verifier((await page.$$("#senat-hemicycle circle")).length === 348, `${nom} : hémicycle du Sénat incomplet`);
+
+    // Comprendre : cinq fiches, lexique avec recherche, ligne « À quoi sert cette page ? », infobulle au clavier
+    await page.goto(base + "#comprendre", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    verifier((await page.$$("#view-comprendre .cp-bloc svg")).length === 5, `${nom} : les cinq fiches illustrées de « Comprendre » sont absentes`);
+    verifier((await page.$$("#view-comprendre .cp-source a")).length >= 10, `${nom} : sources officielles absentes de « Comprendre »`);
+    verifier((await page.$$("#lex-liste .lex-item")).length >= 40, `${nom} : lexique incomplet`);
+    await page.fill("#lex-recherche", "navette");
+    verifier((await page.$$("#lex-liste .lex-item")).length >= 1 && (await page.$$("#lex-liste .lex-item")).length < 6, `${nom} : la recherche du lexique ne filtre pas`);
+    await page.fill("#lex-recherche", "");
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur Comprendre`);
+    for (const t of ["scrutin", "histo", "deputes", "senat", "dirigeants", "chiffres", "budget", "actualites", "meetings", "justice", "sondages", "candidats", "quiz"]) {
+      verifier((await page.$$(`#view-${t} .sert`)).length === 1, `${nom} : ligne « À quoi sert cette page ? » absente sur ${t}`);
+    }
+    await page.goto(base + "#scrutin", { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    const terme = await page.$("#view-scrutin .gl");
+    verifier(!!terme && (await terme.evaluate((b) => b.tagName)) === "BUTTON", `${nom} : terme de glossaire absent ou pas un bouton`);
+    if (terme) {
+      await terme.focus();
+      await page.keyboard.press("Enter");
+      verifier(await page.isVisible("#gl-pop") && (await terme.getAttribute("aria-expanded")) === "true" && /\S/.test(await page.textContent("#gl-pop")), `${nom} : l'infobulle ne s'ouvre pas au clavier`);
+      verifier((await largeur()) <= 1, `${nom} : défilement horizontal avec l'infobulle ouverte`);
+      await page.keyboard.press("Escape");
+      verifier(!(await page.isVisible("#gl-pop")) && (await terme.getAttribute("aria-expanded")) === "false", `${nom} : l'infobulle ne se ferme pas avec Échap`);
+    }
 
     // Recherche sur tout le site
     await page.click(nom === "mobile" ? ".loupe-mobile" : ".masthead-top .bouton-recherche");
