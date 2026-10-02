@@ -142,6 +142,27 @@ function verifier(cond, message) {
     await page.click("#quiz-submit");
     verifier((await page.$$(".quiz-result-row")).length >= 8, `${nom} : résultat du quiz absent`);
 
+    // Boutons « Story » : présents sur chaque page concernée, et un clic affiche une image dans l'aperçu.
+    // Si un type de story n'a pas encore de dessin (STORY_PLUS), un dessin minimal le remplace : on vérifie alors le branchement du bouton.
+    const poserDessins = () => page.evaluate(() => {
+      for (const t of ["actualite", "actualites", "probabilites", "secondtour", "decompte", "candidat", "parti", "justice", "indicateur", "groupe", "meeting"])
+        if (!STORY_PLUS[t]) STORY_PLUS[t] = async (ctx) => { ctx.fillStyle = "#123"; ctx.fillRect(0, 0, 40, 40); return { nom: "test" }; };
+    });
+    for (const [onglet, type] of [["accueil", "actualite"], ["accueil", "actualites"], ["actualites", "actualite"], ["actualites", "actualites"], ["sondages", "probabilites"], ["sondages", "secondtour"],
+      ["sondages", "decompte"], ["candidats", "candidat"], ["dirigeants", "parti"], ["dirigeants", "groupe"], ["histo", "groupe"], ["justice", "justice"], ["chiffres", "indicateur"],
+      ["meetings", "meeting"], ["scrutin", "scrutin"], ["senat", "senat"], ["dirigeants", "gouvernement"]]) {
+      await page.goto(base + (onglet === "accueil" ? "" : "#" + onglet), { waitUntil: "networkidle" });
+      await poserDessins();
+      await page.waitForTimeout(300);
+      const bouton = page.locator(`.view.active .bouton-story[data-story="${type}"]:not([hidden])`).first();
+      verifier((await bouton.count()) >= 1, `${nom} : bouton Story « ${type} » absent sur ${onglet}`);
+      if (!(await bouton.count())) continue;
+      await bouton.evaluate((b) => b.click());
+      await page.waitForFunction(() => document.getElementById("story-apercu").getAttribute("src"), null, { timeout: 8000 }).catch(() => {});
+      verifier(!!(await page.getAttribute("#story-apercu", "src")), `${nom} : la story « ${type} » (${onglet}) ne s'affiche pas`);
+      await page.evaluate(() => fermerStory());
+    }
+
     if (nom === "mobile") {
       // Version téléphone : barre d'onglets et panneau « Plus »
       await page.goto(base, { waitUntil: "networkidle" });

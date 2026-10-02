@@ -864,6 +864,10 @@
   .faire-connaitre-actions{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; font-size:14.5px;}
   .bouton-plein{min-height:42px; padding:0 18px; border:none; border-radius:6px; background:var(--accent); color:#fff; font:600 15px var(--font-body); cursor:pointer;}
   :root[data-theme="sombre"] .bouton-plein{color:#1C1B18;}
+  .actu-actions{margin:6px 0 0;}
+  .duel-titre .bouton-story{margin-left:8px; font-weight:400;}
+  .annonce .bouton-story{flex:none;}
+  .bouton-story[hidden]{display:none;}
   .bouton-story::before{content:""; display:inline-block; width:.85em; height:.85em; margin-right:.35em; vertical-align:-1px; border:2px solid currentColor; border-radius:4px;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:rgba(20,18,14,.45);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
@@ -1344,7 +1348,7 @@
     </div>
     <div class="proximite" id="histo-proximite"></div>
     <h3 class="histo-title" id="histo-party-title"></h3>
-    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button></div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="histo">Partager les votes de ce groupe</button><button type="button" class="lien-bouton bouton-story" id="histo-story" data-story="groupe" data-id="RN">Story</button></div>
     <div id="histo-list"></div>
   </section>
 
@@ -1424,6 +1428,7 @@
       <p class="chapo">Qui tient les rênes de chaque parti, qui mène ses troupes à l'Assemblée, et qui siège au Gouvernement.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
     </div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="dirigeants">Partager</button></div>
     <div class="leader-grid" id="leader-grid"></div>
     <div id="groupes-presidents"></div>
     <div id="gouvernement"></div>
@@ -1435,6 +1440,7 @@
       <h2>Économie</h2>
       <p class="chapo">Les chiffres dont on parle dans chaque débat : chômage, inflation, croissance, déficit, dette. Toujours la dernière valeur officielle, avec sa date et un lien vers la source.</p>
     </div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="chiffres">Partager</button></div>
     <input type="search" class="chiffre-search" id="chiffre-search" placeholder="Chercher un indicateur : chômage, dette…" aria-label="Rechercher un indicateur" />
     <div class="budget-hero" id="budget-hero"></div>
     <div class="chiffre-grid" id="chiffre-grid"></div>
@@ -1518,6 +1524,7 @@
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
       <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
+    <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="candidats">Partager</button></div>
     <div class="candidat-grid" id="candidats-liste"></div>
   </section>
 
@@ -2574,6 +2581,7 @@ function renderHistorique(){
   const liste = loisFiltrees(document.getElementById("histo-search").value, histoCategorie, document.getElementById("histo-theme").value);
   if(DONNEES_CHARGEES && document.getElementById("view-histo").classList.contains("active")) majHash("histo-" + party.id);
   renderProximite(party, liste);
+  document.getElementById("histo-story").dataset.id = party.id;
   document.getElementById("histo-party-title").textContent =
     `Ses votes : ${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}`;
   document.getElementById("histo-count").textContent = liste.length ? `${formatNombre(liste.length)} scrutin${liste.length>1?"s":""}` : "Aucun scrutin";
@@ -2662,6 +2670,7 @@ function meetingCard(m, idx, passe){
         </div>
         <div class="meeting-desc">${esc(m.desc)}</div>
         ${m.source ? `<div class="meeting-source">Source : <a href="${lien(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.nom)}</a></div>` : ''}
+        ${MEETINGS.indexOf(m) >= 0 ? `<div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="meeting" data-id="${MEETINGS.indexOf(m)}">Story</button></div>` : ""}
       </div>
     </div>`;
 }
@@ -2783,7 +2792,7 @@ function renderSourceBar(){
 function renderSondageAverage(){
   const tour = periodeReserveSondages();
   // Pas d'image de sondage à partager la veille et le jour du vote (loi du 19 juillet 1977)
-  document.querySelectorAll('.bouton-story[data-story="sondages"]').forEach(b=> b.hidden = !!tour);
+  document.querySelectorAll('.bouton-story[data-story="sondages"], .bouton-story[data-story="decompte"]').forEach(b=> b.hidden = !!tour);
   if(tour){
     document.getElementById("source-bar").innerHTML = "";
     document.getElementById("sondage-evolution").hidden = true;
@@ -2847,7 +2856,8 @@ function renderAnnonce(){
     ? `<div class="t"><b>Annonce du président de la République</b>Dimanche 2 mai 2027 à 20 h, à la fermeture des derniers bureaux de vote${maintenant < t1 ? ` · premier tour le 18 avril` : ""}</div>
        <div class="compte" role="timer" aria-label="Temps restant avant l'annonce du résultat">
          <span><b>${formatNombre(j)}</b>jours</span><span><b>${deux(h)}</b>heures</span><span><b>${deux(m)}</b>min</span><span><b>${deux(s)}</b>s</span>
-       </div>`
+       </div>
+       <button type="button" class="lien-bouton bouton-story" data-story="decompte" data-id=""${periodeReserveSondages() ? " hidden" : ""}>Story</button>`
     : `<div class="t"><b>Le nouveau président de la République est annoncé ce soir</b>Premières estimations à 20 h ; résultats officiels proclamés par le Conseil constitutionnel.</div>`;
   bloc.hidden = false;
   // Mise à jour chaque seconde, seulement quand la page des sondages est affichée et l'onglet visible
@@ -2866,7 +2876,7 @@ function renderSecondTour(){
     <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement toutes les heures, avec les mêmes contrôles qu'au premier tour.</p>
     ${SECOND_TOUR.slice(0, 8).map(d=>{
       const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
-      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
+      return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)} <button type="button" class="lien-bouton bouton-story" data-story="secondtour" data-id="${SECOND_TOUR.indexOf(d)}">Story</button></div>
         ${d.instituts.map(i=>`<div class="duel-ligne">
           <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
           <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
@@ -2887,6 +2897,7 @@ function renderProbabilites(){
   const avecVictoire = PROBAS.candidats.some(c=>c.victoire !== null);
   const liste = PROBAS.candidats.filter(c=>c.secondTour >= 0.1 || (c.victoire || 0) >= 0.1);
   bloc.innerHTML = `<h3>Qui a le plus de chances ?</h3>
+    <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="probabilites" data-id="">Story</button></div>
     <p class="probas-sub">Estimation recalculée toutes les heures à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
     <table class="probas-table">
       <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
@@ -2957,12 +2968,14 @@ function sujetHTML(s, court, une){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
   const noms = (s.illustration?.personnes || []).map(p=>p.nom);
+  const idxActu = ACTUALITES.sujets.indexOf(s); // indice dans la liste complète, pas dans la liste filtrée ou triée affichée
   return `<article class="actu-sujet${une ? " actu-une" : ""}">
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
     <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}</div>
+    ${idxActu >= 0 ? `<div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-story" data-story="actualite" data-id="${idxActu}">Story</button></div>` : ""}
     ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
     </div>
   </article>`;
@@ -2987,13 +3000,14 @@ function renderActualites(){
   document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
   const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
-  liste.innerHTML = sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
+  liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
 }
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
   if(!top.length){ bloc.hidden = true; return; }
-  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>` +
+  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
+    <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
     top.map((s, i)=> sujetHTML(s, true, i === 0)).join("");
   bloc.hidden = false;
 }
@@ -3224,7 +3238,7 @@ function renderCandidats(){
       ${c.slogan ? `<p class="slogan">« ${esc(c.slogan)} »</p>` : ""}
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
-      <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a> · <button type="button" class="lien-bouton bouton-story" data-story="candidat" data-id="${esc(c.nom)}">Story</button></p>
       </div>
     </div>`;
   }).join("");
@@ -3380,7 +3394,7 @@ function renderLeaders(){
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
-          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
+          ${LOGOS?.[l.parti]?.telecharge ? `<span class="parti-logo"><img src="icons/partis/${esc(l.parti)}.png" alt="" height="24" loading="lazy"></span>` : ""}<span class="leader-party">${esc(l.parti)}</span>${sansChef ? "" : ` <button type="button" class="lien-bouton bouton-story" data-story="parti" data-id="${esc(l.parti)}">Story</button>`}${l.source ? ` <a class="leader-source" href="${lien(l.source.url)}" target="_blank" rel="noopener">source</a>` : ""}
         </div>
       </div>`;
   }).join("");
@@ -3395,7 +3409,7 @@ function renderLeaders(){
           <span class="dot" style="background:${p.couleur}"></span>
           <div>
             <div class="groupe-nom">${esc(g.libelle)}</div>
-            <div class="groupe-meta">${g.president ? `${g.presidente ? "Présidente" : "Président"} : <b>${esc(g.president)}</b>${g.presidentDepuis ? ` (depuis le ${esc(dateCourte(g.presidentDepuis))})` : ""} · ` : ""}${g.membres} député·es</div>
+            <div class="groupe-meta">${g.president ? `${g.presidente ? "Présidente" : "Président"} : <b>${esc(g.president)}</b>${g.presidentDepuis ? ` (depuis le ${esc(dateCourte(g.presidentDepuis))})` : ""} · ` : ""}${g.membres} député·es · <button type="button" class="lien-bouton bouton-story" data-story="groupe" data-id="${esc(id)}">Story</button></div>
           </div>
         </div>`;
       }).join("")}
@@ -3442,7 +3456,7 @@ function renderChiffres(filter=""){
       <div class="chiffre-label">${i.nom}</div>
       <div class="chiffre-value ${i.tendance==='up'?'up':i.tendance==='down'?'down':''}">${i.valeur}</div>
       <div class="chiffre-sub">${i.detail}</div>
-      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a></div>
+      <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a> · <button type="button" class="lien-bouton bouton-story" data-story="indicateur" data-id="${INDICATEURS.indexOf(i)}">Story</button></div>
     </div>
   `).join("");
 }
@@ -3489,6 +3503,7 @@ function renderBudgetGauges(){
           <div class="gauge-value">${esc(i.valeur)}</div>
           <div class="gauge-note">${esc(String(i.detail).replace(/\.?\s*$/, "."))}${/seuil/i.test(i.detail) ? "" : " " + j.seuil}</div>
           <div class="gauge-legende"><span class="trait" aria-hidden="true"></span>le trait sur l'anneau marque le seuil européen (${j.repere} % du PIB)</div>
+          <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="indicateur" data-id="${INDICATEURS.indexOf(i)}">Story</button></div>
         </div>
       </div>
     </div>`;
@@ -3546,7 +3561,7 @@ function renderJusticeList(){
       <div class="justice-affaire">${esc(c.affaire)}</div>
       <div class="justice-detail">${esc(c.detail)}</div>
       ${c.statut === "appel" ? `<div class="justice-presomption">Décision non définitive : la présomption d'innocence s'applique pour ces faits tant que la justice n'a pas statué définitivement.</div>` : ""}
-      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a></div>
+      <div class="justice-meta">Source : <a href="${lien(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a> · <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=${encodeURIComponent("Correction : " + c.nom + ", " + c.affaire)}" target="_blank" rel="noopener">demander une correction</a> · <button type="button" class="lien-bouton bouton-story" data-story="justice" data-id="${CONDAMNATIONS.indexOf(c)}">Story</button></div>
     </div>
   `).join("");
 }
@@ -4951,6 +4966,10 @@ function lienPartage(type){
   if(type === "classement") return { titre: `Classement des députés : ${CLASSEMENTS[classementChoisi].titre.toLowerCase()}`, url: `${base}#classement-${classementChoisi}` };
   if(type === "agenda") return { titre: "Ce que l'Assemblée nationale examine ces prochains jours", url: `${base}#meetings` };
   if(type === "histo"){ const g = PARTIES.find(p=>p.id===selectedPartyId); return { titre: `Comment vote le groupe ${g ? g.nom : selectedPartyId} à l'Assemblée`, url: `${base}#histo-${selectedPartyId}` }; }
+  if(type === "actualites") return { titre: "Les sujets du moment dans la presse politique", url: `${base}#actualites` };
+  if(type === "candidats") return { titre: "Présidentielle 2027 : tous les candidats déclarés", url: `${base}#candidats` };
+  if(type === "dirigeants") return { titre: "Les chefs de parti et les groupes à l'Assemblée nationale", url: `${base}#dirigeants` };
+  if(type === "chiffres") return { titre: "Chômage, inflation, dette : les chiffres clés de la France", url: `${base}#chiffres` };
   if(type === "justice") return { titre: "Responsables politiques condamnés : les décisions de justice, sources à l'appui", url: `${base}#justice` };
   if(type === "quiz") return QUIZ_RESULTAT
     ? { titre: `J'ai fait le quiz d'Hémicycle France. ${quizPhrase(QUIZ_RESULTAT, "Mes")} Et vous ?`, url: `${base}#quiz` }
