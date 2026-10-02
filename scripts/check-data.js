@@ -208,6 +208,19 @@ async function checkActivite() {
   console.log(`[check-data] activite.json : ${e.length} députés.`);
 }
 
+async function checkLobbying() {
+  const data = JSON.parse(await readFile("data/lobbying.json", "utf-8").catch(() => "null"));
+  if (!data) return console.log("[check-data] lobbying.json : absent (bloc « rencontres » masqué).");
+  if (!/^https?:|HATVP|Haute Autorité/.test(data.source || "")) err("lobbying.json : source manquante");
+  const e = Object.entries(data.elus || {});
+  for (const [id, x] of e) {
+    const ok = /^(PA\d+|[0-9A-Za-z]{5,8})$/.test(id) && Number.isInteger(x.n) && x.n >= x.derniers?.length && Array.isArray(x.derniers) && x.derniers.length > 0
+      && x.derniers.every((r) => Array.isArray(r) && r[0] && /^\d{4}-\d{2}-\d{2}$/.test(r[1]));
+    if (!ok) { err(`lobbying.json : entrée invalide (${id})`); break; }
+  }
+  console.log(`[check-data] lobbying.json : ${e.length} élus.`);
+}
+
 async function checkNavette() {
   const data = JSON.parse(await readFile("data/navette.json", "utf-8").catch(() => "null"));
   if (!data) return console.log("[check-data] navette.json : absent.");
@@ -272,6 +285,7 @@ await checkDeputes();
 await checkCandidats();
 await checkSenat();
 await checkActivite();
+await checkLobbying();
 await checkNavette();
 await checkSenateurs();
 await checkGouvernementAgenda();
