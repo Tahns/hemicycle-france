@@ -89,7 +89,8 @@ racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 - **Pas de serveur à faire tomber** : le site est un ensemble de fichiers statiques servis par le
   réseau de diffusion (CDN) de GitHub Pages, qui absorbe les attaques par saturation (DDoS). Aucune
   base de données, aucun formulaire, aucune API appelée par le site : il n'y a rien à pirater ni à
-  saturer côté site. Les données sont récupérées par GitHub Actions, jamais par les visiteurs.
+  saturer côté site. (Seule exception, facultative et désactivée par défaut : les comptes des visiteurs,
+  décrits dans `docs/COMPTES.md`, qui ne s'activent que si `data/compte-config.json` existe.) Les données sont récupérées par GitHub Actions, jamais par les visiteurs.
 - **En-têtes de sécurité** : politique de sécurité du contenu (CSP) stricte, aucun script externe,
   refus d'être affiché dans le cadre d'un autre site (anti-clickjacking).
 - **Tickets (contact)** : ticket libre désactivé, uniquement des formulaires (erreur avec source
