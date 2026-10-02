@@ -4326,6 +4326,14 @@ async function afficherPresidentielle(el){
   el.innerHTML = `<b>Présidentielle 2022 ici</b> : 1er tour ${tour("t1", 3)}${r.t2 ? ` ; 2d tour ${tour("t2", 2)}` : ""} · <button type="button" class="lien-bouton bouton-story" data-story="commune" data-dep="${esc(dep)}" data-commune="${esc(el.dataset.commune)}">Story</button>`;
 }
 function circoDepute(d){ return `${d.dep}${d.circo ? `, ${ordinalCirco(d.circo)} circonscription` : ""}`; }
+// Âge en années révolues d'après la date de naissance (AAAA-MM-JJ) ; null si absente ou invalide
+function ageDepute(d){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d.naissance || "");
+  if(!m) return null;
+  const n = new Date(), mois = n.getMonth() + 1;
+  const a = n.getFullYear() - +m[1] - ((mois < +m[2] || (mois === +m[2] && n.getDate() < +m[3])) ? 1 : 0);
+  return a >= 18 && a <= 110 ? a : null;
+}
 function partiDepute(d){ return PARTIES.find(p=>p.id===d.groupe) || { nom:d.groupe, couleur:"#8A8C94" }; }
 const pctFr = (n, d) => d ? (n / d * 100).toFixed(0) + " %" : "—";
 
@@ -4555,6 +4563,7 @@ function renderDeputeFiche(d){
       <span class="depute-groupe"><span class="dot" style="background:${p.couleur}"></span>${esc(p.nom)}</span>
     </div>
     <p class="depute-lieu">${d.f ? "Députée" : "Député"} de ${esc(circoDepute(d))} (${esc(d.numDep)})${depuis ? `, en fonction depuis le ${esc(depuis)}` : ""}.</p>
+    ${(()=>{ const age = ageDepute(d); const bits = [age != null ? `${age} ans` : "", d.profession ? esc(d.profession) : ""].filter(Boolean); return bits.length ? `<p class="depute-lieu" id="depute-identite">${bits.join(" · ")}</p>` : ""; })()}
     <div class="depute-actions">
       <a href="https://www.assemblee-nationale.fr/dyn/deputes/${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fiche officielle à l'Assemblée</a>
       <button type="button" class="lien-bouton bouton-partage" data-partage="depute">Partager cette fiche</button>
@@ -4625,6 +4634,11 @@ async function renderClassements(){
     ${top.length ? top.map(([d, v], i) => { const p = partiDepute(d); return `<button type="button" class="classement-ligne" data-id="${esc(d.id)}"><span class="rang">${i + 1}</span><span class="mini-photo" style="border-color:${p.couleur}; background:${p.couleur}"><img src="photos/deputes/${esc(d.id)}.jpg" alt="" loading="lazy" width="40" height="40"></span><span><b>${esc(d.nom)}</b><small>${esc(d.groupe)} · ${esc(d.dep)}</small></span><span class="val">${k.fmt(v)}</span></button>`; }).join("") : `<p class="no-result-msg">Classement indisponible pour le moment.</p>`}
     ${boutonsPartage("classement")}
     <p class="depute-note">${k.note} Un classement ne dit pas tout du travail d'un élu : rapports, travail en circonscription ou négociations n'apparaissent dans aucune donnée publique.</p>`;
+  const ages = {};
+  for(const d of DEPUTES){ const a = ageDepute(d); if(a != null) (ages[d.groupe] ||= []).push(a); }
+  const lignesAge = Object.entries(ages).map(([g, l]) => [g, l.reduce((x, y) => x + y, 0) / l.length, l.length]).sort((x, y) => y[1] - x[1]);
+  if(lignesAge.length) corps.insertAdjacentHTML("beforeend", `<div id="groupes-chiffres"><h3 class="histo-title">Les groupes en chiffres</h3>
+    ${lignesAge.map(([g, m, n]) => { const p = PARTIES.find(x => x.id === g) || { nom:g, couleur:"#8A8C94" }; return `<div class="histo-row"><div><div class="histo-loi"><span class="dot" style="background:${p.couleur}"></span> ${esc(p.nom)}</div><div class="histo-date">Âge moyen, ${formatNombre(n)} député${n > 1 ? "s" : ""} dont l'âge est connu</div></div><span class="val">${m.toLocaleString("fr-FR", { maximumFractionDigits:1, minimumFractionDigits:1 })} ans</span></div>`; }).join("")}</div>`);
   corps.querySelectorAll("[data-c]").forEach(b => b.addEventListener("click", () => { classementChoisi = b.dataset.c; renderClassements(); }));
   corps.querySelectorAll(".classement-ligne").forEach(b => b.addEventListener("click", () => ouvrirDepute(b.dataset.id)));
 }

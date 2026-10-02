@@ -177,6 +177,13 @@ async function checkDeputes() {
     if (typeof d.votes !== "string" || d.votes.length !== data.cles.length || /[^pcan.\-]/.test(d.votes)) err(`deputes.json : votes clés invalides pour ${d.nom}`);
     const s = d.stats || {};
     if (![s.scrutins, s.pour, s.contre, s.abst, s.ecarts].every(estEntierPositif) || s.pour + s.contre + s.abst > s.scrutins) err(`deputes.json : statistiques incohérentes pour ${d.nom}`);
+    // Champs optionnels : date de naissance (âge plausible 18-110 ans) et profession
+    if (d.naissance !== undefined) {
+      const t = Date.parse(d.naissance);
+      const age = (Date.now() - t) / 31557600000;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d.naissance) || Number.isNaN(t) || age < 18 || age > 110) err(`deputes.json : date de naissance invalide ou âge implausible pour ${d.nom} (${d.naissance})`);
+    }
+    if (d.profession !== undefined && (typeof d.profession !== "string" || !d.profession.trim() || d.profession.length > 200)) err(`deputes.json : profession invalide pour ${d.nom}`);
   }
   console.log(`[check-data] deputes.json : ${data.deputes?.length} députés, ${data.cles.length} votes clés.`);
 }

@@ -39,6 +39,19 @@ async function fichiersJson(dir) {
 }
 
 /**
+ * Date de naissance (AAAA-MM-JJ) et profession déclarée, d'après la fiche acteur AMO30
+ * (etatCivil.infoNaissance.dateNais, profession.libelleCourant). Champ absent ou invalide : omis.
+ */
+export function naissanceEtProfession(a) {
+  const sortie = {};
+  const nais = a?.etatCivil?.infoNaissance?.dateNais;
+  if (typeof nais === "string" && /^\d{4}-\d{2}-\d{2}$/.test(nais)) sortie.naissance = nais;
+  const prof = a?.profession?.libelleCourant;
+  if (typeof prof === "string" && prof.trim()) sortie.profession = prof.trim();
+  return sortie;
+}
+
+/**
  * @param scrutinFiles  chemins des fichiers de scrutins (archive Scrutins.json.zip décompressée)
  * @param acteurDir     dossier « acteur » de l'archive AMO30
  * @param organeVersId  organeRef d'un groupe politique -> identifiant du site (ex. "PO845401" -> "RN")
@@ -67,6 +80,7 @@ export async function construireDeputes(scrutinFiles, acteurDir, organeVersId) {
       dep: lieu.departement || "",
       numDep: lieu.numDepartement || "",
       circo: parseInt(lieu.numCirco, 10) || null,
+      ...naissanceEtProfession(a),
       depuis: m.mandature?.datePriseFonction || m.dateDebut,
       stats: { scrutins: 0, pour: 0, contre: 0, abst: 0, ecarts: 0 },
       _cles: {},
