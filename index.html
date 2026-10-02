@@ -4265,12 +4265,12 @@ function showQuizResult(){
   const lignes = QUIZ_LOIS.map(loi=>({ q: loi.quizQuestion || titreLoi(loi), vous: quizReponses[loi.id], adopte: loi.resultat==="adopte", date: loi.date, url: loi.sourceUrl }));
   const quand = new Date().toISOString();
   try{ localStorage.setItem("quiz-resultat", JSON.stringify({ date: quand, scores, lignes })); }catch(e){}
+  if(ESPACE_ACTIF) espaceNoterQuiz(scores);
   afficherResultatQuiz(scores, lignes, quand);
 }
 
 function afficherResultatQuiz(scores, lignes, quand){
   QUIZ_RESULTAT = scores;
-  if(ESPACE_ACTIF) espaceNoterQuiz(scores);
   const container = document.getElementById("quiz-container");
   container.innerHTML = `
     <div class="quiz-card">
