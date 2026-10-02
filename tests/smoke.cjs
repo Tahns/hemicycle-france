@@ -205,6 +205,32 @@ function verifier(cond, message) {
     await page.close();
   }
 
+  // Âge et profession : jeu d'essai injecté (les données réelles n'ont ces champs qu'après la collecte), puis cas « champs absents »
+  for (const avec of [true, false]) {
+    const page = await (await navigateur.newContext({ viewport: { width: 1300, height: 900 }, serviceWorkers: "block" })).newPage(); // le service worker contournerait l'interception
+    const erreurs = [];
+    page.on("pageerror", (e) => erreurs.push(e.message));
+    await page.route(/\/data\/deputes\.json/, async (route) => {
+      const j = JSON.parse(fs.readFileSync(path.join(RACINE, "data/deputes.json"), "utf-8"));
+      for (const d of j.deputes) { delete d.naissance; delete d.profession; }
+      if (avec) j.deputes.forEach((d) => { d.naissance = "1970-01-01"; d.profession = "Avocat"; });
+      await route.fulfill({ contentType: "application/json", body: JSON.stringify(j) });
+    });
+    await page.goto(base + "#deputes", { waitUntil: "networkidle" });
+    await page.waitForSelector(".depute-carte");
+    await page.evaluate(() => { const d = DEPUTES[0]; location.hash = "depute-" + d.id; });
+    await page.waitForSelector("#depute-fiche .stat-card"); await page.waitForTimeout(500);
+    const identite = await page.$("#depute-identite");
+    if (avec) verifier(identite && /^\d+ ans · Avocat$/.test(await identite.textContent()), `fiche député : âge et profession absents (${identite && await identite.textContent()})`);
+    else verifier(!identite, "fiche député : ligne âge/profession affichée sans données");
+    await page.evaluate(() => { document.getElementById("classements").open = true; renderClassements(); });
+    await page.waitForTimeout(300);
+    const groupes = await page.$("#groupes-chiffres .histo-row");
+    verifier(avec ? !!groupes : !groupes, `« Les groupes en chiffres » : âge moyen ${avec ? "absent" : "affiché sans données"}`);
+    verifier(erreurs.length === 0, `âge/profession : erreurs JavaScript — ${erreurs.join(" | ")}`);
+    await page.close();
+  }
+
   await navigateur.close();
   s.close();
   if (echecs.length) {
