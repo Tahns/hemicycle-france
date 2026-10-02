@@ -1533,6 +1533,186 @@
   .candidat-carte h3, .veille h3, .actu-accueil-tete h3, .texte-legal h3, .budget-hero h3{font-size:var(--fs-h3); font-weight:700;}
   .tag-pour{color:var(--vote-pour);} .tag-contre{color:var(--vote-contre);} .tag-partage{color:var(--vote-abst);}
   @media (max-width:640px){ .stats-groupes th, .stats-groupes td{padding-left:2px; padding-right:2px;} .stats-groupes .dot{margin-right:var(--s1);} }
+
+  /* =========================================================
+     Téléphone compact (≤ 700 px) : l'information utile d'abord, le reste replié.
+     Le bureau n'est pas touché : tout ce bloc est dans la media query.
+     Cibles tactiles : 44 px conservés même quand le visuel est dense.
+     ========================================================= */
+  .tete-plus, .partage-bascule, .pli-mobile > summary.pli-titre, .solo-mobile, .actu-nb, .actu-toutes, .sondage-mobile{display:none;}
+  .pli-mobile > summary.pli-h3{list-style:none; cursor:default;}
+  .pli-mobile > summary.pli-h3::-webkit-details-marker{display:none;}
+  .actu-sup{display:none;}
+  @media (max-width:700px){
+    :root{--m-pad:12px;}
+    body{line-height:1.4;}
+    main{padding:var(--s3) var(--s3) var(--s6);}
+    .masthead{padding:0 var(--s3);}
+    .liseré{margin:0 -12px;}
+
+    /* En-tête : une ligne (logo + nom + actions) ; devise et sous-titre repliés, date réduite */
+    .masthead-titre, body[data-page="accueil"] .masthead-titre{padding:var(--s2) 0 var(--s2); min-height:48px; display:flex; flex-wrap:wrap; align-items:center;}
+    .masthead-titre h1, body[data-page="accueil"] h1{font-size:22px; line-height:1.1; padding-right:96px;}
+    .loupe-mobile{top:2px;} .langue-mobile{top:2px;}
+    .masthead-titre p, body[data-page="accueil"] .masthead-titre p{display:block; flex-basis:100%; margin:0; font-size:0; line-height:0;}
+    body:not([data-page="accueil"]) .masthead-titre p{display:none;}
+    .masthead-titre .devise{display:none;}
+    .maj-mobile:not(:empty){display:block; margin:0; padding-top:2px; font-size:var(--fs-xs); line-height:1.3;}
+
+    /* Titre de rubrique : petit, sur une ligne avec le menu « Dans cette rubrique » ; chapô et « À quoi sert » en une ligne */
+    .rubrique-tete{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:var(--s3); margin:0 0 var(--s2); padding:0 0 var(--s1);}
+    .rubrique-tete > *{grid-column:1 / -1; margin:0;}
+    .rubrique-tete .surtitre{grid-row:1; font-size:11px; line-height:1.2; margin:0; letter-spacing:.09em;}
+    .rubrique-tete h2{grid-row:2; grid-column:1; font-size:21px; line-height:1.15; margin:0; padding:2px 0;}
+    .rubrique-tete .sous-nav{grid-row:2; grid-column:2; margin:0; display:block;}
+    .rubrique-tete .sous-nav label{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+    .rubrique-tete .sous-nav select{min-height:44px; max-width:min(52vw, 210px); padding:0 var(--s6) 0 var(--s3); font-size:var(--fs-md); background-position:calc(100% - 17px) 50%, calc(100% - 12px) 50%;}
+    .rubrique-tete .tete-ligne{grid-row:3; grid-column:1; font-size:var(--fs-md); line-height:1.35; color:var(--text-soft); max-width:none;
+      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:1; line-clamp:1; overflow:hidden;}
+    .rubrique-tete .tete-ligne small, .rubrique-tete .sert:not(.tete-ligne){display:none;}
+    .rubrique-tete .tete-plus{display:inline-flex; align-items:center; justify-content:flex-end; grid-row:3; grid-column:2; min-height:44px; padding:0 0 0 var(--s2); border:0; background:none; font:600 var(--fs-sm)/1 var(--font-body); color:var(--accent); text-decoration:underline; text-underline-offset:2px; white-space:nowrap; cursor:pointer;}
+    .rubrique-tete .tete-plus:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
+    .rubrique-tete.ouvert .tete-ligne{display:block; grid-column:1 / -1; -webkit-line-clamp:unset; line-clamp:unset; overflow:visible; font-size:var(--fs-base); line-height:1.45; padding-top:var(--s1);}
+    .rubrique-tete.ouvert .tete-ligne small{display:block;}
+    .rubrique-tete.ouvert .sert:not(.tete-ligne){display:block; grid-row:4; margin-top:var(--s2); font-size:var(--fs-md); line-height:1.4;}
+    .rubrique-tete.ouvert .tete-plus{grid-row:5; grid-column:1 / -1; justify-self:end;}
+    .rubrique-tete .espace-fav-bouton{grid-row:6; justify-self:start; margin:0;}
+
+    /* Boutons Story / Partager regroupés dans un petit menu « Partager » */
+    .depute-actions[data-pm="menu"]{display:flex; flex-wrap:wrap; align-items:center; gap:0 var(--s4); margin:0 0 var(--s1);}
+    .depute-actions[data-pm="menu"] .partage-bascule{display:inline-flex; align-items:center; gap:var(--s2); min-height:44px; padding:0 var(--s3); border:1px solid var(--accent); border-radius:var(--r-pill); background:transparent; color:var(--accent); font:600 var(--fs-md)/1 var(--font-body); cursor:pointer;}
+    .depute-actions[data-pm="menu"] .partage-bascule::before{content:""; flex:none; width:14px; height:14px; background:currentColor; -webkit-mask:url(icons/partager.svg) center/contain no-repeat; mask:url(icons/partager.svg) center/contain no-repeat;}
+    .depute-actions[data-pm="menu"] .partage-bascule::after{content:""; width:6px; height:6px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg) translateY(-2px); transition:transform .15s;}
+    .depute-actions[data-pm="menu"].ouvert .partage-bascule::after{transform:rotate(-135deg) translateY(-1px);}
+    .depute-actions[data-pm="menu"]:not(.ouvert) > :not(.partage-bascule):not(.resultat-pill){display:none;}
+    .depute-actions[data-pm="menu"] > :not(.partage-bascule){min-height:44px; display:inline-flex; align-items:center;}
+    .depute-actions[data-pm="menu"] .bouton-story{padding:0 var(--s3); border-radius:var(--r-pill);}
+    .depute-actions:not([data-pm]) .lien-bouton{min-height:44px; display:inline-flex; align-items:center;}
+    .depute-actions{margin-top:0; margin-bottom:var(--s1);}
+    .partage-actions{margin:0 0 var(--s1);}
+
+    /* Blocs repliables par défaut sur téléphone (ouverts sur bureau) */
+    .pli-mobile > summary.pli-titre{display:flex; align-items:center; justify-content:space-between; gap:var(--s3); min-height:44px; padding:0; list-style:none; cursor:pointer; font-size:var(--fs-md); font-weight:600; color:var(--text-soft);}
+    .pli-mobile > summary.pli-titre::-webkit-details-marker{display:none;}
+    .pli-mobile > summary.pli-titre::after{content:"+"; font-size:var(--fs-h3); font-weight:400; color:var(--text-faint);}
+    .pli-mobile[open] > summary.pli-titre::after{content:"\2212";}
+    .pli-mobile > summary.pli-titre:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+    /* Accueil : bandeau « En direct » compact, compte à rebours en une ligne, actualités en liste dense, quiz compact */
+    .direct-bandeau{margin:0 0 var(--s2); padding:var(--s2) var(--s3);}
+    .direct-tete{gap:0 var(--s3);}
+    .direct-titre{margin:2px 0 0; font-size:var(--fs-base); line-height:1.3; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden;}
+    .direct-media{display:block; margin:0; font-size:var(--fs-xs);}
+    .direct-chaines{margin:0; display:flex;}
+    .direct-chaines a{display:inline-flex; align-items:center; min-height:44px; padding:0 var(--s2); border:0; font-size:var(--fs-sm); text-decoration:underline;}
+    .direct-ev{display:flex; flex-wrap:wrap; align-items:center; column-gap:var(--s3);}
+    .direct-ev > .direct-tete, .direct-ev > .direct-titre{flex-basis:100%;}
+    .direct-ev > .direct-media, .direct-ev > .direct-chaines{flex-basis:100%;}
+    .direct-chaines a{padding:0;}
+    .direct-bandeau .pli-mobile{margin-top:0;}
+    .direct-bandeau .pli-mobile > summary.pli-titre{min-height:44px; font-size:var(--fs-xs); font-weight:600;}
+    .direct-note{margin:0 0 var(--s2);}
+    .nouveautes{margin:0 0 var(--s2);}
+    .accueil-rebours{flex-wrap:nowrap; gap:var(--s3); margin:0 0 var(--s2); padding:var(--s2) var(--s3); min-height:48px; border-radius:var(--r-2);}
+    .accueil-rebours .n{font-size:26px; flex:none;}
+    .accueil-rebours .t{min-width:0; font-size:var(--fs-xs); line-height:1.3;}
+    .accueil-rebours .t b{display:block; font-size:var(--fs-md); line-height:1.25;}
+    .accueil-rebours .fleche{flex:none; font-size:0; border:0; margin-left:auto;}
+    .accueil-rebours .fleche::after{content:"\2192"; font-size:var(--fs-lg);}
+    .actu-accueil{position:relative; margin:var(--s3) 0 0; padding-top:var(--s2);}
+    .actu-accueil-tete{flex-wrap:nowrap; padding-right:150px; min-height:44px; align-items:center;}
+    .actu-accueil-tete h3{font-size:var(--fs-lg);}
+    .actu-accueil-tete a{display:none;}
+    .actu-accueil .actu-actions{position:absolute; top:var(--s2); right:0; margin:0;}
+    .actu-accueil .actu-actions .solo-mobile{display:inline-flex;}
+    .actu-toutes{display:flex; align-items:center; min-height:44px; font-size:var(--fs-md); font-weight:600;}
+    .actu-sup{display:grid;}
+    .actu-sujet, .actu-sujet.actu-une{grid-template-columns:44px minmax(0,1fr); gap:var(--s3); padding:var(--s2) 0; border-bottom:1px solid var(--border-soft);}
+    .actu-sujet .actu-visuel, .actu-sujet.actu-une .actu-visuel{width:44px; height:44px;}
+    .actu-sujet .actu-portraits img, .actu-sujet .actu-portraits.n1 img, .actu-sujet.actu-une .actu-portraits img, .actu-sujet.actu-une .actu-portraits.n1 img, .actu-sujet.actu-une .actu-portraits.n2 img, .actu-sujet.actu-une .actu-portraits.n3 img{position:absolute; width:44px; height:44px; border-width:2px;}
+    .actu-sujet .actu-portraits.n2 img, .actu-sujet .actu-portraits.n3 img{width:30px; height:30px;}
+    .actu-sujet .actu-portraits.n2 a:nth-child(1) img, .actu-sujet .actu-portraits.n2 > img:nth-child(1){left:0; top:0;}
+    .actu-sujet .actu-portraits.n2 a:nth-child(2) img, .actu-sujet .actu-portraits.n2 > img:nth-child(2){right:0; bottom:0; left:auto; top:auto;}
+    .actu-sujet .actu-portraits.n3 img{width:26px; height:26px;}
+    .actu-sujet .actu-pastille-nom, .actu-sujet.actu-une .actu-pastille-nom{width:44px; height:44px; font-size:var(--fs-md);}
+    .actu-sujet .actu-theme, .actu-sujet.actu-une .actu-theme{width:18px; height:18px; right:-4px; top:-4px; left:auto;}
+    .actu-sujet .actu-theme svg{width:11px; height:11px;}
+    .actu-sujet .actu-picto svg, .actu-sujet.actu-une .actu-picto svg{width:22px; height:22px;}
+    .actu-sujet .actu-picto, .actu-sujet.actu-une .actu-picto{flex-direction:column;}
+    .actu-sujet .actu-initiales{font-size:var(--fs-lg);}
+    .actu-sujet .actu-logo{padding:2px;} .actu-sujet .actu-logo img{max-height:18px;} .actu-sujet .actu-logo img:only-of-type{max-height:30px;}
+    .actu-sujet .actu-recoupe{display:none;}
+    .actu-sujet h4, .actu-sujet.actu-une h4{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
+    .actu-sujet .actu-meta{display:flex; align-items:baseline; margin-top:2px; font-size:var(--fs-xs); line-height:1.3; white-space:nowrap;}
+    .actu-sujet .actu-nb{display:inline; flex:none; margin-right:4px; font-weight:700; color:var(--accent);}
+    .actu-sujet .actu-medias{flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;}
+    .actu-sujet .actu-quand{flex:none; margin-left:4px;}
+    .actu-sujet .actu-noms, .actu-sujet .actu-meta .bouton-story{display:none;}
+    .actu-sujet .actu-autres{margin:0; padding-left:var(--s3);}
+    .actu-sujet .pli-mobile > summary.pli-titre{min-height:36px; font-size:var(--fs-xs);}
+    #view-accueil > .accueil-section-title{display:none;}
+    .accueil-highlight-card{padding-bottom:var(--s3);}
+    .accueil-highlight-card + .accueil-highlight-card{padding-top:var(--s3);}
+    .accueil-highlight-title, .accueil-highlight-card:first-child .accueil-highlight-title{font-size:var(--fs-lg); line-height:1.25; margin-bottom:var(--s1);}
+    .accueil-highlight-eyebrow{margin-bottom:var(--s1);}
+    .accueil-highlight-sub{font-size:var(--fs-sm); line-height:1.35;}
+    .vote-barre{margin:var(--s2) 0 var(--s1); height:10px;}
+    .vote-legende{margin-bottom:var(--s1); font-size:var(--fs-xs);}
+    .vote-groupes{margin:0; font-size:var(--fs-sm);}
+    .accueil-highlight-card .pli-mobile > summary.pli-titre{min-height:44px;}
+    .autres-textes{margin-top:var(--s2);}
+    .autres-titre{display:none;}
+    .autre-texte{grid-template-columns:1fr auto; gap:0 var(--s3); padding:var(--s2) 0; min-height:44px;}
+    .autre-nom{font-size:var(--fs-base); line-height:1.3;}
+    .autre-date{font-size:var(--fs-xs);}
+    .mini-sondage{margin:var(--s2) 0 var(--s1); gap:var(--s1);}
+    .mini-sondage li{grid-template-columns:minmax(70px,7em) 1fr 5em; gap:var(--s2);}
+    .accueil-quiz{flex-wrap:nowrap; gap:var(--s3); margin:var(--s2) 0; padding:var(--s2) var(--s3); min-height:56px; border-radius:var(--r-2);}
+    .accueil-quiz-ico{flex:0 0 36px; width:36px; height:36px;} .accueil-quiz-ico svg{width:20px; height:20px;}
+    .accueil-quiz-texte{flex:1 1 0; min-width:0;}
+    .accueil-quiz-texte b{font-size:var(--fs-md); line-height:1.25;}
+    .accueil-quiz-texte > span{display:none;}
+    .accueil-quiz-bouton{flex:none; min-height:36px; padding:0 var(--s3); font-size:var(--fs-sm);}
+    .debutant{margin:var(--s2) 0; padding:var(--s2) var(--s3); min-height:44px;}
+    .debutant span{display:none;}
+    .accueil-plie{margin-top:var(--s2);}
+    .accueil-plie > summary, .footer-plie > summary{padding:0; min-height:48px;}
+    .faire-connaitre{margin-top:var(--s3); gap:var(--s2) var(--s4);}
+    .faire-connaitre b{font-size:var(--fs-lg);}
+    .faire-connaitre > div:first-child span{display:none;}
+    .faire-connaitre-actions{gap:0 var(--s4);}
+    .faire-connaitre-actions .lien-bouton, .faire-connaitre-actions a{display:inline-flex; align-items:center; min-height:44px;}
+    .suivez{margin:var(--s3) 0 var(--s1); gap:var(--s1) var(--s3);}
+    .suivez b{font-size:var(--fs-base);}
+    .suivez span{display:none;}
+    .bouton-ig{min-height:44px; display:inline-flex; align-items:center;}
+
+    /* Page Votes */
+    .scrutin-choix{gap:0 var(--s3); margin-bottom:var(--s2);}
+    .scrutin-choix-champ .filtre-label{display:block; margin:0 0 2px; font-size:11px;}
+    .scrutin-choix-actions{min-height:44px; gap:0 var(--s3);}
+    .stat-cards{margin-bottom:var(--s3);}
+    .stat-card, .stat-card + .stat-card{padding:var(--s2) 0; column-gap:var(--s3);}
+    .stat-card .stat-label{font-size:11px;}
+    .stat-card .stat-value{font-size:var(--fs-lg);}
+    .stat-card .stat-sub{font-size:var(--fs-xs);}
+    .hemicycle-wrap{gap:var(--s3);}
+    .hemi-mode .theme-chip{min-height:44px;}
+    .legend{margin-top:var(--s2); padding-top:var(--s2); gap:var(--s1) var(--s3); font-size:var(--fs-xs);}
+    .legend-note-plie{flex-basis:100%;}
+    .breakdown h3{font-size:var(--fs-lg); line-height:1.25;}
+    .loi-provenance{margin-top:var(--s2);}
+    .loi-provenance .pli-mobile > summary.pli-titre{border-top:1px solid var(--border-soft);}
+    .loi-provenance-row{font-size:var(--fs-sm);}
+
+    /* Cartes plus denses */
+    .carte, .candidat-carte, .leader-card, .groupe-card, .justice-card, .chiffre-card, .quiz-card{padding:var(--s3) 0;}
+    .encadre, .fait-foi, .cp-encart, .nouveautes, .debutant{padding:var(--s2) var(--s3);}
+    .suivez, .faire-connaitre{padding:var(--s3);}
+    .filtres{padding:var(--s1) var(--s3);}
+    .no-result-msg, .chargement{font-size:var(--fs-base); padding:var(--s4) 0;}
+    .accueil-section-title{margin:var(--s4) 0 var(--s2);}
+  }
 </style>
 </head>
 <body data-page="accueil">
@@ -1670,7 +1850,7 @@
     <div class="scrutin-choix">
       <label class="filtre-champ scrutin-choix-champ"><span class="filtre-label">Scrutin affiché</span>
         <select id="loi-select"></select></label>
-      <div class="scrutin-choix-actions">
+      <div class="scrutin-choix-actions depute-actions">
         <span class="resultat-pill" id="resultat-pill"></span>
         <button type="button" class="lien-bouton bouton-partage" data-partage="scrutin">Partager ce vote</button>
         <button type="button" class="lien-bouton bouton-story" data-story="scrutin">Story</button>
@@ -1896,7 +2076,7 @@
       <h3 id="sondage-institut-title">Intentions de vote au premier tour</h3>
       <div class="sondage-avg-sub" id="sondage-avg-sub"></div>
       <div id="sondage-avg-list"></div>
-      <p class="sondage-disclaimer">Un sondage est une photo à un instant donné, pas une prédiction. Selon la taille de l'échantillon, la marge d'erreur va de 1 à 3 points. Les candidats que l'institut n'a pas testés n'apparaissent pas.</p>
+      <details class="pli-mobile" open><summary class="pli-titre">Lire un sondage : marge d'erreur</summary><p class="sondage-disclaimer">Un sondage est une photo à un instant donné, pas une prédiction. Selon la taille de l'échantillon, la marge d'erreur va de 1 à 3 points. Les candidats que l'institut n'a pas testés n'apparaissent pas.</p></details>
     </div>
     <div class="second-tour" id="sondage-second-tour" hidden></div>
     <div class="probas" id="sondage-probas" hidden></div>
@@ -3263,8 +3443,10 @@ function updateBreakdown(){
   if(loi.contexte) lignes.push(["Contexte", esc(loi.contexte)]);
   lignes.push(["Source", `<a href="${lien(loi.sourceUrl)}" target="_blank" rel="noopener">${loi.numero ? `fiche du scrutin n°${loi.numero}` : esc(loi.sourceLabel)}</a>`]);
   const ctx = checkContexteDate(loi);
+  const ligneProv = ([label,val])=>`<div class="loi-provenance-row"><span class="label">${label}</span><span class="value">${val}</span></div>`;
+  // Détail du texte replié sur téléphone ; la ligne « Source » reste visible
   document.getElementById("loi-provenance").innerHTML =
-    lignes.map(([label,val])=>`<div class="loi-provenance-row"><span class="label">${label}</span><span class="value">${val}</span></div>`).join("") +
+    `<details class="pli-mobile" open><summary class="pli-titre">Détails du texte</summary>${lignes.slice(0, -1).map(ligneProv).join("")}</details>` + ligneProv(lignes[lignes.length - 1]) +
     (ctx ? `<div class="loi-provenance-row"><span class="label"></span><span class="loi-contexte-alert">${ctx.label}</span></div>` : "");
 
   const voirDossier = document.getElementById("voir-dossier");
@@ -3349,7 +3531,7 @@ function renderLegend(){
   if(modeHemicycle === "votes"){
     el.innerHTML = [["pour","Pour"],["abst","Abstention"],["contre","Contre"],["absent","Non-votant / absent"]].map(([k,l])=>`
       <span class="legend-item"><span class="dot" style="background:${COULEURS_VOTE[k]}"></span>${l}</span>
-    `).join("") + `<span class="legend-item legend-note">De gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}. Pointez ou touchez un siège pour le détail du groupe.</span>`;
+    `).join("") + `<details class="pli-mobile legend-note-plie" open><summary class="pli-titre">Lire le graphique</summary><span class="legend-item legend-note">De gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}. Pointez ou touchez un siège pour le détail du groupe.</span></details>`;
   } else {
     const loi = currentLoi();
     el.innerHTML = effectifs(loi).map(({party,n})=>`
@@ -3755,14 +3937,14 @@ function renderSondageAverage(){
   }
   document.getElementById("sondage-institut-title").textContent =
     `${inst.nom}, enquête du ${inst.date}`;
-  document.getElementById("sondage-avg-sub").innerHTML =
+  document.getElementById("sondage-avg-sub").innerHTML = `<details class="pli-mobile" open><summary class="pli-titre">Méthode et source de l'enquête</summary>` +
     `${inst.hypothese} · Échantillon : ${inst.echantillon}` +
     // Marge d'erreur usuelle (intervalle de confiance à 95 %) pour un score de 50 %, la plus large possible
     (inst.n ? ` · Marge d'erreur : environ ±${(1.96*Math.sqrt(0.25/inst.n)*100).toFixed(1).replace(".", ",")} points pour un score de 50 %, moins pour les petits scores` : "") +
     (inst.notice
       ? ` · Commanditaire, questions posées et méthode dans la <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a>`
       : ` · Source : <a href="${lien(inst.url)}" target="_blank" rel="noopener" style="color:var(--accent);">${esc(inst.source)}</a> ; commanditaire, questions posées et méthode dans la <a href="https://www.commission-des-sondages.fr/notices/" target="_blank" rel="noopener" style="color:var(--accent);">notice déposée à la Commission des sondages</a>`) +
-    (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${lien(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "");
+    (SONDAGES_SOURCE ? ` · relevé automatiquement depuis la <a href="${lien(SONDAGES_SOURCE.url)}" target="_blank" rel="noopener" style="color:var(--accent);">liste Wikipédia des sondages</a>` : "") + `</details>`;
 
   const disponibles = CANDIDATS
     .map(c=>({...c, range: inst.scores[c.id]}))
@@ -3816,6 +3998,16 @@ document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) renderA
 
 /* ---------- Sondages du second tour (data/sondages.json, secondTour) ---------- */
 let SECOND_TOUR = [];
+// Bloc « titre + contenu » : sur téléphone le contenu se replie sous son titre (ouvert sur bureau)
+function plierBloc(bloc, garder){
+  const h3 = bloc.querySelector(":scope > h3");
+  if(!h3 || bloc.querySelector(":scope > details.pli-mobile")) return;
+  const d = document.createElement("details"), s = document.createElement("summary");
+  d.className = "pli-mobile"; d.open = true; if(garder) d.dataset.garder = "1";
+  s.className = "pli-h3"; s.append(h3);
+  d.append(s, ...bloc.childNodes);
+  bloc.replaceChildren(d);
+}
 function renderSecondTour(){
   const bloc = document.getElementById("sondage-second-tour");
   if(!SECOND_TOUR.length || periodeReserveSondages()){ bloc.hidden = true; return; }
@@ -3832,6 +4024,7 @@ function renderSecondTour(){
           </div></div>`).join("")}
       </div>`;
     }).join("")}`;
+  plierBloc(bloc);
   bloc.hidden = false;
 }
 
@@ -3862,6 +4055,7 @@ function renderProbabilites(){
       : `<p class="probas-sub" style="margin-top:10px">Chance d'être élu : affichée dès que les sondages de second tour sont disponibles.</p>`}
     <h3 style="font-size:19px; margin-top:22px">Les seconds tours les plus probables</h3>
     <ul class="probas-finales">${PROBAS.finales.filter(f=>f.probabilite >= 1).map(f=>`<li><b>${esc(f.candidats[0])} – ${esc(f.candidats[1])}</b> : ${p(f.probabilite)} des simulations${f.victoire ? ` · victoire de ${esc(f.victoire[f.candidats[0]] >= 50 ? f.candidats[0] : f.candidats[1])} dans ${p(Math.max(...Object.values(f.victoire)))} des cas` : " · duel pas encore testé"}</li>`).join("")}</ul>`;
+  plierBloc(bloc);
   bloc.hidden = false;
 }
 
@@ -3912,19 +4106,19 @@ function visuelActu(s){
   }
   return `<div class="actu-visuel actu-picto" style="--c:${theme[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
 }
-function sujetHTML(s, court, une){
+function sujetHTML(s, court, une, sup){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
   const noms = (s.illustration?.personnes || []).map(p=>p.nom);
   const idxActu = ACTUALITES.sujets.indexOf(s); // indice dans la liste complète, pas dans la liste filtrée ou triée affichée
-  return `<article class="actu-sujet${une ? " actu-une" : ""}">
+  return `<article class="actu-sujet${une ? " actu-une" : ""}${sup ? " actu-sup" : ""}">
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
-    <div class="actu-meta">${esc(medias.join(", "))} · ${esc(ilYA(s.derniere))}${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
+    <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}
-    ${!court && s.articles.length > 1 ? `<ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>` : ""}
+    ${!court && s.articles.length > 1 ? `<details class="pli-mobile" open><summary class="pli-titre">Voir aussi ${Math.min(s.articles.length - 1, une ? 3 : 5)} titres</summary><ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul></details>` : ""}
     </div>
   </article>`;
 }
@@ -3967,7 +4161,7 @@ function renderDirect(){
         <p class="direct-media">${presse ? "Titre de" : "Source :"} ${esc(e.source.media)}</p>
         ${chaines.length ? `<ul class="direct-chaines">${chaines.map(c=>`<li><a href="${lien(c.url)}" target="_blank" rel="noopener">${presse ? "Suivre sur" : ""} ${esc(c.nom)} ↗</a></li>`).join("")}</ul>` : ""}
       </div>`;
-    }).join("") + `<p class="direct-note">Liens vers les pages officielles de direct (ouverture dans un nouvel onglet). Le site ne diffuse aucune vidéo.</p>`;
+    }).join("") + `<details class="pli-mobile" open><summary class="pli-titre">À propos de ces liens</summary><p class="direct-note">Liens vers les pages officielles de direct (ouverture dans un nouvel onglet). Le site ne diffuse aucune vidéo.</p></details>`;
     bloc.hidden = false;
   });
 }
@@ -3975,11 +4169,12 @@ setInterval(renderDirect, 60000); // un événement expiré disparaît sans rech
 
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
-  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 3);
+  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 5); // 3 sur bureau, 5 sur téléphone (liste dense)
   if(!top.length){ bloc.hidden = true; return; }
   bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
-    <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
-    top.map((s, i)=> sujetHTML(s, true, i === 0)).join("");
+    <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-partage solo-mobile" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
+    top.map((s, i)=> sujetHTML(s, true, i === 0, i >= 3)).join("") +
+    `<a class="actu-toutes" href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a>`;
   bloc.hidden = false;
 }
 
@@ -3999,6 +4194,7 @@ async function renderVeille(){
       <span class="veille-statut ${e.integre ? "ok" : "attente"}">${e.integre ? "Chiffres affichés" : "En attente des chiffres"}</span>
       <a href="${lien(e.notice)}" target="_blank" rel="noopener">notice</a>
     </div>`).join("")}`;
+  plierBloc(bloc);
   bloc.hidden = false;
 }
 
@@ -4216,11 +4412,13 @@ function renderCandidats(){
       ${medaillon(c.nom, couleur, 48)}
       <div class="candidat-corps">
       <h3>${esc(c.nom)}${c.primaire ? `<span class="candidat-primaire">primaire</span>` : ""}</h3>
-      <div class="candidat-parti">${esc(c.parti)}${c.age ? ` · ${c.age} ans au premier tour` : ""}</div>
+      <div class="candidat-parti"><span>${esc(c.parti)}${c.age ? ` · ${c.age} ans au premier tour` : ""}</span>${c.s ? `<span class="sondage-mobile">${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`}</span>` : ""}</div>
+      <details class="pli-mobile" open><summary class="pli-titre">Fonctions, sondages et source</summary>
       ${c.slogan ? `<p class="slogan">« ${esc(c.slogan)} »</p>` : ""}
       ${c.fonctions?.length ? `<p>${esc(c.fonctions.slice(0, 2).join(" · "))}</p>` : ""}
       ${c.s ? `<p class="sondage">Sondages : ${c.s.min === c.s.max ? `${nombreFr(c.s.min)} %` : `de ${nombreFr(c.s.min)} à ${nombreFr(c.s.max)} %`} <span class="meta">(${c.s.n} institut${c.s.n>1?"s":""})</span></p>` : ""}
       <p class="meta">Candidature ${c.annonce ? `annoncée le ${esc(dateCourte(c.annonce) || c.annonce)}` : "annoncée (date non précisée)"} · <a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine)}</a></p>
+      </details>
       ${espaceBoutonFav("candidat", c.nom)}
       </div>
     </div>`;
@@ -4727,6 +4925,7 @@ async function renderBudget(){
   if(!html){ el.innerHTML = `<p class="budget-vide">Données en cours de récupération. Les chiffres du budget s'afficheront ici dès qu'ils auront été lus à la source officielle.</p>`; return; }
   const maj = BUDGET.lastUpdated && dateCourte(BUDGET.lastUpdated);
   el.innerHTML = html + `<p class="budget-source">Les comptes publics sont publiés avec un décalage : l'année la plus récente est souvent l'année écoulée ou la précédente.${maj ? ` Fichier relu le ${esc(maj)}.` : ""}</p>`;
+  el.querySelectorAll(".budget-bloc").forEach((b, i)=> plierBloc(b, i === 0));
 }
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
@@ -4883,14 +5082,14 @@ function renderAccueil(){
       const pos = { pour:[], contre:[], abst:[] };
       for(const [g,v] of Object.entries(derniereLoi.votes)){ if(!v) continue; const k = ["pour","contre","abst"].sort((a,b)=>(v[b]||0)-(v[a]||0))[0]; if(v[k]) pos[k].push(g); }
       const ligne = (k, lib) => pos[k].length ? `<div><b>${lib}</b>${pos[k].map(esc).join(", ")}</div>` : "";
-      return `<div class="vote-groupes">${ligne("pour","Groupes pour")}${ligne("contre","Groupes contre")}${ligne("abst","Abstention")}</div>`;
+      return `<details class="pli-mobile" open><summary class="pli-titre">Position des groupes</summary><div class="vote-groupes">${ligne("pour","Groupes pour")}${ligne("contre","Groupes contre")}${ligne("abst","Abstention")}</div></details>`;
     })()}`;
   // Les autres textes votés récemment (un par texte), sous la une
   const dejaVus = new Set([normTitreAccueil(derniereLoi)]);
   const autres = LOIS.filter(l => categorieLoi(l) === "texte" && l.id !== derniereLoi.id)
     .filter(l => { const k = normTitreAccueil(l); if(dejaVus.has(k)) return false; dejaVus.add(k); return true; }).slice(0, 4);
-  if(autres.length) highlights[0].apres = `<div class="autres-textes"><div class="autres-titre">Les autres textes votés</div>${autres.map(l=>`
-    <a class="autre-texte" href="#scrutin-${l.numero ?? l.id}"><span class="autre-date">${esc(l.date)}</span><span class="autre-nom">${esc(l.dossierTitre || titreLoi(l))}</span><span class="autre-res ${l.resultat}">${l.resultat === "adopte" ? "Adopté" : "Rejeté"}</span></a>`).join("")}</div>`;
+  if(autres.length) highlights[0].apres = `<details class="pli-mobile autres-textes" open><summary class="pli-titre">Les autres textes votés</summary><div class="autres-titre">Les autres textes votés</div>${autres.map(l=>`
+    <a class="autre-texte" href="#scrutin-${l.numero ?? l.id}"><span class="autre-date">${esc(l.date)}</span><span class="autre-nom">${esc(l.dossierTitre || titreLoi(l))}</span><span class="autre-res ${l.resultat}">${l.resultat === "adopte" ? "Adopté" : "Rejeté"}</span></a>`).join("")}</details>`;
   // Mini-classement du dernier sondage (5 premiers), couleur = parti du candidat
   if(enTete){
     const top = CANDIDATS.map(c=>({ c, r: instPrincipal.scores[c.id] })).filter(x=>x.r)
@@ -4926,7 +5125,7 @@ function renderAccueil(){
   } else rebours.hidden = true;
 
   // Un lien de la liste « autres textes » ouvre son propre vote, pas celui de la carte
-  document.querySelectorAll(".autre-texte").forEach(a=> a.addEventListener("click", e=> e.stopPropagation()));
+  document.querySelectorAll(".autre-texte, .accueil-highlight-card details").forEach(a=> a.addEventListener("click", e=> e.stopPropagation()));
   document.querySelectorAll(".accueil-highlight-card").forEach(card=>{
     card.addEventListener("click", ()=>{
       if(card.dataset.loi){
@@ -8418,6 +8617,76 @@ function initLangues(){
   if(code !== "fr") definirLangue(code, { auto });
 }
 initLangues();
+
+
+/* ---------- Téléphone : en-têtes de rubrique repliables, menu « Partager », blocs repliés ---------- */
+const MQ_MOBILE = matchMedia("(max-width:700px)");
+const CLE_TETE = "tete-ouverte";
+let teteOuverte = false;
+try{ teteOuverte = localStorage.getItem(CLE_TETE) === "1"; }catch(e){}
+function majTetes(){
+  document.querySelectorAll(".rubrique-tete").forEach(tete=>{
+    tete.classList.toggle("ouvert", teteOuverte);
+    const b = tete.querySelector(".tete-plus");
+    if(b){ b.setAttribute("aria-expanded", String(teteOuverte)); b.textContent = teteOuverte ? t("Réduire") : t("En savoir plus"); }
+  });
+}
+function initTetes(){
+  document.querySelectorAll(".rubrique-tete").forEach(tete=>{
+    const ligne = tete.querySelector(".chapo") || tete.querySelector(".sert");
+    if(!ligne || tete.querySelector(".tete-plus")) return;
+    ligne.classList.add("tete-ligne");
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "tete-plus";
+    ligne.after(b);
+  });
+  majTetes();
+}
+document.addEventListener("click", e=>{
+  const plus = e.target.closest(".tete-plus");
+  if(plus){
+    teteOuverte = !teteOuverte;
+    try{ localStorage.setItem(CLE_TETE, teteOuverte ? "1" : "0"); }catch(err){}
+    majTetes();
+    return;
+  }
+  const pm = e.target.closest(".partage-bascule");
+  if(pm){
+    const bloc = pm.parentElement, ouvert = !bloc.classList.contains("ouvert");
+    bloc.classList.toggle("ouvert", ouvert);
+    pm.setAttribute("aria-expanded", String(ouvert));
+    return;
+  }
+  const action = e.target.closest(".depute-actions.ouvert[data-pm] > *");
+  if(action) action.parentElement.classList.remove("ouvert"), action.parentElement.querySelector(".partage-bascule")?.setAttribute("aria-expanded", "false");
+});
+// Un bloc d'actions de partage de plusieurs boutons devient un menu « Partager » ; un bloc `details.pli-mobile` est replié
+function preparerMobile(racine){
+  const blocs = [...racine.querySelectorAll(".depute-actions:not([data-pm]), details.pli-mobile:not([data-pm])")];
+  if(racine.matches && racine.matches(".depute-actions:not([data-pm]), details.pli-mobile:not([data-pm])")) blocs.unshift(racine);
+  blocs.forEach(bloc=>{
+    bloc.dataset.pm = "1";
+    if(bloc.tagName === "DETAILS"){ if(MQ_MOBILE.matches && !bloc.dataset.garder) bloc.open = false; return; }
+    if(bloc.querySelectorAll("button, a").length < 2) return;
+    bloc.dataset.pm = "menu";
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "partage-bascule"; b.setAttribute("aria-expanded", "false");
+    b.textContent = t("Partager");
+    bloc.prepend(b);
+  });
+}
+const OBSERVATEUR_MOBILE = new MutationObserver(muts=>{
+  for(const m of muts) m.addedNodes.forEach(n=>{ if(n.nodeType === 1) preparerMobile(n); });
+});
+function initMobile(){
+  initTetes();
+  preparerMobile(document);
+  OBSERVATEUR_MOBILE.observe(document.querySelector("main"), { childList:true, subtree:true });
+  MQ_MOBILE.addEventListener("change", ()=> document.querySelectorAll("details.pli-mobile").forEach(d=>{ d.open = !MQ_MOBILE.matches || !!d.dataset.garder; }));
+  // Sur bureau ces blocs restent toujours ouverts (le titre n'est qu'un titre)
+  document.addEventListener("toggle", e=>{ const d = e.target; if(d.matches && d.matches("details.pli-mobile") && !d.open && !MQ_MOBILE.matches) d.open = true; }, true);
+}
+initMobile();
 
 initSite();
 
