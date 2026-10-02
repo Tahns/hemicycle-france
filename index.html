@@ -3990,6 +3990,7 @@ async function ouvrirSenateur(id){
       <div class="stat-card"><div class="stat-label">Contre son groupe</div><div class="stat-value">${formatNombre(ecarts)}</div><div class="stat-sub">${pctFr(ecarts, presents.length)} de ses votes diffèrent de la position majoritaire de son groupe actuel</div></div>
     </div>
     <p class="depute-note">Au Sénat, les votes se font souvent par délégation : chaque groupe vote pour ses membres absents. Un vote enregistré ne veut donc pas toujours dire que ${s.f ? "la sénatrice" : "le sénateur"} était en séance.</p>
+    <div id="senateur-lobbying" hidden></div>
     <h3 class="histo-title">Ses votes sur l'ensemble des textes</h3>
     <div>${lignes.length ? lignes.map(({ code, scr })=>{
       const [libelle, classe] = LIB[code] || LIB.n;
@@ -4003,6 +4004,7 @@ async function ouvrirSenateur(id){
     }).join("") : `<p class="no-result-msg">Aucun vote relevé depuis sa prise de fonction.</p>`}</div>`;
   document.getElementById("senateur-retour").addEventListener("click", fermerSenateur);
   photoSecours(fiche);
+  afficherLobbyingSenateur(s);
   majHash("senateur-" + id);
   document.title = `${s.nom} · Hémicycle France`;
   if(window.scrollY > 0) window.scrollTo({ top:0, behavior: matchMedia("(max-width:700px), (prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
@@ -4147,7 +4149,22 @@ function fermerDepute(){
 }
 
 // Activité (questions écrites, amendements) et déclarations HATVP : data/activite.json, chargé à la demande
-let ACTIVITE = null, COMMISSIONS = null;
+let ACTIVITE = null, COMMISSIONS = null, LOBBYING = null;
+// Rencontres déclarées avec des représentants d'intérêts (data/lobbying.json, rattachées par identifiant officiel) ; vide si la source n'en publie pas
+async function blocLobbying(id){
+  LOBBYING ||= lireJSON("data/lobbying.json");
+  const l = (await LOBBYING)?.elus?.[id];
+  if(!l) return "";
+  const pl = l.n > 1 ? "s" : "";
+  return `<div class="depute-lobbying"><h3 class="histo-title">Rencontres avec des représentants d'intérêts</h3>
+    <p class="depute-note">${formatNombre(l.n)} action${pl} déclarée${pl} au répertoire de la HATVP par les représentants d'intérêts eux-mêmes, sans vérification : ${l.derniers.length < l.n ? `les ${l.derniers.length} plus récentes` : "toutes"}.</p>
+    ${l.derniers.map(([org, date, objet]) => `<div class="histo-row"><div><div class="histo-loi">${esc(org)}</div><div class="histo-date">${esc(dateCourte(date) || date)}${objet ? ` · ${esc(objet)}` : ""}</div></div></div>`).join("")}</div>`;
+}
+async function afficherLobbyingSenateur(s){
+  const html = await blocLobbying(s.id);
+  const el = document.getElementById("senateur-lobbying");
+  if(html && el && senateurOuvert === s.id){ el.innerHTML = html; el.hidden = false; }
+}
 async function afficherActivite(d){
   ACTIVITE ||= lireJSON("data/activite.json");
   COMMISSIONS ||= lireJSON("data/commissions.json");
@@ -4158,11 +4175,16 @@ async function afficherActivite(d){
   const pluriel = (n, mot) => `${formatNombre(n)} ${mot}${n > 1 ? "s" : ""}`;
   const derniere = a.hatvp?.docs[0]?.[1];
   const hatvp = a.hatvp ? `${derniere ? `la dernière le ${esc(dateCourte(derniere) || derniere)} · ` : ""}<a href="${lien(a.hatvp.url)}" target="_blank" rel="noopener">les consulter</a>` : "aucune publiée pour l'instant";
+  const lobby = await blocLobbying(d.id);
+  if(deputeOuvert !== d.id) return;
   bloc.innerHTML = `
+    <h3 class="histo-title" style="grid-column:1/-1; margin:0">Activité à l'Assemblée</h3>
     <div><span class="stat-label">Questions écrites au Gouvernement</span><b>${formatNombre(a.q)}</b>${a.sujets?.length ? `<span>surtout : ${a.sujets.map(esc).join(", ")}</span>` : ""}</div>
     <div><span class="stat-label">Amendements déposés</span><b>${formatNombre(a.a)}</b><span>${a.a ? `dont ${pluriel(a.aa, "adopté")}` : "en premier signataire"}</span></div>
     ${pc ? `<div><span class="stat-label">Présence en commission</span><b>${pctFr(pc[0], pc[0] + pc[1] + pc[2])}</b><span>présent${d.f ? "e" : ""} à ${pluriel(pc[0], "réunion")} sur ${formatNombre(pc[0] + pc[1] + pc[2])}${pc[2] ? `, ${pluriel(pc[2], "absence")} excusée${pc[2] > 1 ? "s" : ""}` : ""}</span></div>` : ""}
-    <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>`;
+    <div><span class="stat-label">Déclarations à la HATVP</span><b>${a.hatvp ? formatNombre(a.hatvp.docs.length) : "0"}</b><span>${hatvp}</span></div>
+    ${lobby ? `<div style="grid-column:1/-1">${lobby}</div>` : ""}
+    <p class="depute-note" style="grid-column:1/-1; margin:0">Sources : open data de l'Assemblée nationale et de la HATVP. Les interventions en séance ne sont pas reprises ici.</p>`;
   bloc.hidden = false;
 }
 
