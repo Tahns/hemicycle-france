@@ -950,9 +950,6 @@
   .depute-groupe{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;}
   .depute-groupe .dot{width:9px; height:9px; border-radius:50%;}
   .depute-lieu{font-size:14px; color:var(--text-soft); margin:0 0 18px;}
-  .en-bref{margin-bottom:30px;}
-  .en-bref .accueil-hero-stats{margin-bottom:0;}
-  .en-bref-maj{font-size:12.5px; color:var(--text-faint); margin:6px 0 0;}
   .depute-parcours{margin:0 0 18px; padding:0 0 14px; border-bottom:1px solid var(--border);}
   .depute-parcours h3{font-size:15px; margin:0 0 8px;}
   .depute-parcours ol{list-style:none; margin:0; padding:0 0 0 14px; border-left:2px solid var(--border);}
@@ -1241,9 +1238,6 @@
   .accueil-plie .accueil-rubriques{margin-top:4px; border-top:none;}
   .footer-plie{margin-top:4px; border-top:1px solid var(--border);}
   .footer-plie .footer-grid{padding-top:6px;}
-  .en-bref{margin:0 0 8px;}
-  .en-bref .accueil-section-title{display:block; margin:0 0 6px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
-  .en-bref .accueil-hero-stats{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
   .actu-accueil{margin:34px 0 0;}
   #view-accueil > .accueil-section-title{display:block; margin:38px 0 14px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
   .accueil-rebours{margin-bottom:22px;}
@@ -1259,8 +1253,7 @@
     .rubrique-tete{margin-bottom:20px; padding-bottom:16px;}
     .faire-connaitre{padding:16px;}
     .accueil-highlight-card{padding-bottom:18px;}
-    .en-bref .accueil-hero-stats{grid-template-columns:1fr 1fr;}
-  }
+    }
 </style>
 </head>
 <body data-page="accueil">
@@ -1345,11 +1338,6 @@
     <aside class="direct-bandeau" data-direct hidden aria-label="En direct"></aside>
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
-    <div class="en-bref" id="en-bref" hidden>
-      <div class="accueil-section-title">En bref</div>
-      <div class="accueil-hero-stats" id="en-bref-faits"></div>
-      <p class="en-bref-maj" id="en-bref-maj"></p>
-    </div>
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
@@ -3994,21 +3982,6 @@ function checkContexteDate(loi){
 
 /* ---------- Accueil (tableau de bord) ---------- */
 
-/* ---------- « En bref » : cinq faits calculés depuis les données déjà chargées, rien d'écrit à la main ---------- */
-function renderEnBref(){
-  const bloc = document.getElementById("en-bref");
-  if(!bloc) return;
-  const faits = [];
-  const textes = LOIS.filter(l=>categorieLoi(l)==="texte");
-  if(textes.length) faits.push({ href:"#scrutin", v:`${formatNombre(textes.filter(l=>l.resultat==="adopte").length)} / ${formatNombre(textes.length)}`, l:"textes adoptés sur les textes votés à l'Assemblée" });
-  const recoupes = (ACTUALITES?.sujets || []).filter(x=>x.medias >= 2).length;
-  if(recoupes) faits.push({ href:"#actualites", v:formatNombre(recoupes), l:"sujets d'actualité repris par au moins deux médias" });
-  const cinq = faits.slice(0, 3);
-  bloc.hidden = cinq.length === 0;
-  document.getElementById("en-bref-faits").innerHTML = cinq.map(f=>`<a class="accueil-hero-stat" href="${f.href}"><div class="v">${esc(f.v)}</div><div class="l">${esc(f.l)}</div></a>`).join("");
-  const maj = [PROBAS?.lastUpdated, ACTUALITES?.lastUpdated, LOIS_MAJ].filter(Boolean).sort().at(-1);
-  document.getElementById("en-bref-maj").textContent = maj && dateCourte(maj) ? `Calculé à partir des données publiées sur le site, actualisées le ${dateCourte(maj)}.` : "";
-}
 
 const normTitreAccueil = l => norm(l.dossierTitre || titreLoi(l));
 function renderAccueil(){
@@ -4021,7 +3994,6 @@ function renderAccueil(){
     }).join("")}
   `;
 
-  renderEnBref();
 
   // "À la une" : dernière loi votée, prochain meeting, tendance sondages
   // LOIS est trié du scrutin le plus récent au plus ancien : premier vote final sur un texte
