@@ -4460,6 +4460,12 @@ function storyPied(ctx, source){
   ctx.fillText(SITE_COURT, marge, y + 132);
 }
 
+/* ---------- STORY_PLUS : types de story supplémentaires ----------
+   Chaque entrée est une fonction async (ctx, info) qui dessine sur le canevas 1080 × 1920 (cadre, contenu, pied)
+   et renvoie { nom } (nom de fichier sans extension), ou null si les données manquent.
+   `info` est la valeur de data-id du bouton .bouton-story[data-story="<type>"]. */
+const STORY_PLUS = {};
+
 async function dessinerStory(type, info){
   await Promise.all(["600 60px Newsreader", "400 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
@@ -4733,6 +4739,12 @@ async function dessinerStory(type, info){
     storyTexte(ctx, "Et vous ? Faites le quiz :", marge, 1520, { taille:34, poids:700, couleur:STORY.bleu, max:1 });
     storyPied(ctx, "Part des questions où ma réponse correspond à la position de la majorité du groupe, sur de vrais votes de l'Assemblée.");
     nom = "quiz-hemicycle-france";
+  }
+  else if(STORY_PLUS[type]){
+    // Nouveaux types de story (actualités, probabilités, second tour…), définis dans STORY_PLUS ci-dessous
+    const r = await STORY_PLUS[type](ctx, info);
+    if(!r) return null;
+    nom = r.nom || nom;
   }
   else return null;
 
