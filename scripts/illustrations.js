@@ -120,8 +120,11 @@ export function illustrer(titres, motifs) {
       }
     }
   }
-  const personnes = [...comptes.entries()]
-    .sort((a, b) => b[1] - a[1] || (b[0].photo ? 1 : 0) - (a[0].photo ? 1 : 0))
+  const classes = [...comptes.entries()].sort((a, b) => b[1] - a[1] || (b[0].photo ? 1 : 0) - (a[0].photo ? 1 : 0));
+  // Une personne citée dans un seul titre d'un sujet qui en regroupe plusieurs n'en est pas le sujet : seules comptent
+  // celles citées dans au moins la moitié des titres (ou autant que la plus citée)
+  const personnes = classes
+    .filter(([, n]) => n * 2 >= titres.length || n === classes[0][1])
     .slice(0, 3)
     .map(([p]) => Object.fromEntries(Object.entries({ nom: p.nom, photo: p.photo, parti: p.parti, lien: p.lien, credit: p.credit }).filter(([, v]) => v)));
   const tout = plat(titres.join(" "));
