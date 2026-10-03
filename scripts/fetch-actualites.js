@@ -21,8 +21,10 @@
  */
 
 import { readFile, writeFile } from "fs/promises";
+import { createRequire } from "module";
 import { ecrireGarde } from "./garde.js";
 import { construireIndex, illustrer } from "./illustrations.js";
+const { concerneLaFrance } = createRequire(import.meta.url)("./pertinence.cjs");
 
 const DATA_FILE = "data/actualites.json";
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -183,7 +185,9 @@ async function main() {
   };
   // Illustration : portraits et logos libres hébergés sur le site, ou pictogramme du thème
   const motifs = await construireIndex();
+  // Le site suit la vie politique française : un sujet qui ne parle que de l'étranger est écarté
   const sortieSujets = sujets
+    .filter((s) => concerneLaFrance(s.articles.map((a) => a.titre)))
     .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, illustration: illustrer(s.articles.map((a) => a.titre), motifs), articles: central(s.articles) }))
     .sort((a, b) => b.medias - a.medias || b.derniere.localeCompare(a.derniere));
 

@@ -156,4 +156,12 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(!ok("2026-10-03T04:30:00Z"), "6 h 30 refusé");
 }
 
+// Seulement des sujets qui concernent la France
+{
+  assert.ok(choix([sujet("Brésil. Élection présidentielle : Lula et le fils Bolsonaro au coude à coude dans un pays très polarisé", 4)]).refus, "sujet purement étranger écarté");
+  assert.ok(choix([sujet("Espagne. Crise du logement : les députés rejettent les textes du gouvernement de Pedro Sánchez", 4)]).refus, "Espagne écartée");
+  assert.ok(!choix([sujet("Carburants : Emmanuel Macron va présider une réunion des dirigeants du G7 en visioconférence", 4)]).refus, "étranger mais avec Macron : gardé");
+  assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4)]).refus, "sujet français gardé");
+}
+
 console.log("stories-auto : tous les tests passent.");

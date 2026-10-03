@@ -30,6 +30,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { concerneLaFrance } = require("./pertinence.cjs");
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = path.join(RACINE, "data", "instagram-file.json");
@@ -173,6 +174,7 @@ function choisirSujet({ actualites, direct, file, now = new Date() }) {
   (actualites?.sujets || []).forEach((s, indice) => {
     const titre = s.articles?.[0]?.titre;
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
+    if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return; // sujet purement étranger : ni site ni story
     const medias = new Set((s.articles || []).map((a) => a.media)).size;
     const parole = presidentParle(s, direct);
     if (medias < MIN_MEDIAS && !parole) return;
