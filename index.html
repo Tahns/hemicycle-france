@@ -6575,7 +6575,29 @@ STORY_PLUS.actualite = async (ctx, info)=>{
 };
 
 // 2. Les sujets du moment (data-id vide)
-STORY_PLUS.actualites = async (ctx)=>{
+const DOSSIERS_STORY = { lyceens:{ titre:"Blocus des lycées", re:/lyc[ée]|blocus|blocage/i } };
+STORY_PLUS.actualites = async (ctx, info)=>{
+  const dossier = DOSSIERS_STORY[info];
+  if(dossier){
+    const vus = new Set(), arts = [];
+    for(const s of ACTUALITES?.sujets || []) for(const a of s.articles) if(dossier.re.test(a.titre) && !vus.has(a.media)){ vus.add(a.media); arts.push(a); }
+    arts.sort((x, y)=> y.date.localeCompare(x.date));
+    const l = arts.slice(0, 5);
+    if(l.length < 3) return null;
+    const { L, marge } = STORY;
+    let y = storyCadre(ctx, "Actualité · à la une", { alerte:true });
+    y = storyTexte(ctx, dossier.titre, marge, y, { taille:84, poids:600, police:"Newsreader", max:2, interligne:1.05 });
+    y = storyTexte(ctx, `${l.length} médias en parlent aujourd'hui`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 24;
+    const pas = Math.min(300, (1495 - y) / l.length);
+    for(let i = 0; i < l.length; i++){
+      ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
+      ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = STORY.alerteTxt; ctx.fillText(l[i].media.toUpperCase(), marge, y + 44);
+      storyTexte(ctx, l[i].titre, marge, y + 62, { taille:34, poids:600, police:"Newsreader", largeur:L - 2 * marge, max:4, interligne:1.12 });
+      y += pas;
+    }
+    storyPied(ctx, "Titres relevés dans la presse, liens sur le site. Seuls les titres sont repris.");
+    return { nom:`dossier-${info}` };
+  }
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 4);
   if(!top.length) return null;
   const { L, marge } = STORY;
