@@ -40,6 +40,7 @@ const MEDIAS = [
   { id: "lefigaro", nom: "Le Figaro", flux: "https://www.lefigaro.fr/rss/figaro_politique.xml", domaine: "lefigaro.fr" },
   { id: "liberation", nom: "Libération", flux: "https://www.liberation.fr/arc/outboundfeeds/rss/category/politique/?outputType=xml", domaine: "liberation.fr" },
   { id: "20minutes", nom: "20 Minutes", flux: "https://www.20minutes.fr/feeds/rss-politique.xml", domaine: "20minutes.fr" },
+  { id: "hugodecrypte", nom: "Hugo Décrypte", flux: "https://www.youtube.com/feeds/videos.xml?channel_id=UCAcAnMF0OrCtUep3Y4M-ZPw", domaine: "youtube.com", filtre: /gouvernement|président|macron|assembl|sénat|député|ministre|élection|présidentielle|loi |réforme|budget|lycé|manifest|police|parti|premier ministre|politi/i },
   { id: "publicsenat", nom: "Public Sénat", flux: "https://www.publicsenat.fr/feed", domaine: "publicsenat.fr" },
   { id: "bfmtv", nom: "BFMTV", flux: "https://www.bfmtv.com/rss/politique/", domaine: "bfmtv.com" },
   { id: "france24", nom: "France 24", flux: "https://www.france24.com/fr/france/rss", domaine: "france24.com" },
@@ -148,6 +149,7 @@ async function main() {
       try { hote = new URL(a.url).hostname.replace(/^www\./, ""); } catch { continue; }
       if (!a.titre || isNaN(a.date) || !/^https:/.test(a.url)) continue;
       if (hote !== m.domaine && !hote.endsWith("." + m.domaine)) continue;
+      if (m.filtre && !m.filtre.test(a.titre)) continue;
       if ((maintenant - a.date) / 864e5 > JOURS || a.date - maintenant > 36e5) continue;
       if (dementis.has(normaliser(a.url))) continue;
       if (reserve && /sondage|intentions? de vote/i.test(a.titre)) continue;
