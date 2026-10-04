@@ -6587,7 +6587,7 @@ STORY_PLUS.actualites = async (ctx, info)=>{
     const { L, marge } = STORY;
     let y = storyCadre(ctx, "Actualité · à la une", { alerte:true });
     y = storyTexte(ctx, dossier.titre, marge, y, { taille:84, poids:600, police:"Newsreader", max:2, interligne:1.05 });
-    y = storyTexte(ctx, `${l.length} médias en parlent aujourd'hui`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 24;
+    y = storyTexte(ctx, `${l.length} médias en parlent en ce moment`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 24;
     const pas = Math.min(300, (1495 - y) / l.length);
     for(let i = 0; i < l.length; i++){
       ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
