@@ -465,6 +465,28 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
   }
 }
 
+/** Flux Atom de la file (instagram/file.atom) : pour un outil sans code (Make, Zapier) qui lit un flux et publie la story. Une entrée = une story, image en pièce jointe. */
+function fluxAtom(entrees, now = new Date()) {
+  const x = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const liste = [...(entrees || [])].sort((a, b) => String(b.cree).localeCompare(String(a.cree)));
+  const corps = liste.map((e) => `  <entry>
+    <id>tag:hemicycle-france,2026:story:${x(e.id)}</id>
+    <title>${x(e.titre)}</title>
+    <updated>${x(e.cree)}</updated>
+    <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>
+    <link rel="alternate" href="${x(e.url_image)}"/>
+    <summary>${x(e.titre)}</summary>
+  </entry>`).join("\n");
+  return `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:hemicycle-france,2026:file-stories</id>
+  <title>Hémicycle France : stories à publier</title>
+  <updated>${now.toISOString()}</updated>
+${corps}
+</feed>
+`;
+}
+
 /** Configuration (data/stories-config.json) : tout est désactivé par défaut. */
 function normaliserConfig(c) {
   return { monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true };
@@ -681,9 +703,10 @@ async function main() {
   if ((!choix.refus && destination(choix, config) === "file") || purge || entrees.length !== file.entrees.length) {
     fs.mkdirSync(path.dirname(FICHIER_FILE), { recursive: true });
     fs.writeFileSync(FICHIER_FILE, JSON.stringify({ lastUpdated: now.toISOString(), entrees }, null, 1) + "\n");
+    fs.writeFileSync(path.join(RACINE, "instagram", "file.atom"), fluxAtom(entrees, now));
   }
 }
 
-module.exports = { dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
+module.exports = { fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
