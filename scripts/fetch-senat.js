@@ -16,6 +16,7 @@
  * USAGE : node scripts/fetch-senat.js [--dry-run] [--max=50]
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { ecrireGarde } from "./garde.js";
@@ -58,7 +59,7 @@ function texteBrut(html) {
 }
 
 async function lire(url) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status} sur ${url}`);
   return res.text();
 }

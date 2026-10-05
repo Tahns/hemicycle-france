@@ -44,6 +44,7 @@
  * DÉPENDANCES : Node.js 18+ (fetch natif), aucun paquet npm requis.
  */
 
+import { fetchPoli, sonder } from "./http.js";
 import { readFile, writeFile, mkdtemp, readdir } from "fs/promises";
 import { createWriteStream, existsSync } from "fs";
 import path from "path";
@@ -175,7 +176,7 @@ function warn(...m) {
 async function downloadAndExtract(url, destDir) {
   const zipPath = path.join(destDir, "archive.zip");
   log("Téléchargement :", url);
-  const res = await fetch(url);
+  const res = await fetchPoli(url, { timeoutMs: 180000 });
   if (!res.ok) {
     throw new Error(`Échec du téléchargement (${res.status} ${res.statusText}) — l'URL a peut-être changé, vérifier data.assemblee-nationale.fr/opendata`);
   }
@@ -557,6 +558,11 @@ function parseScrutin(raw, organeRefToSigle, acteurGroupes = {}, dossiers = {}) 
 async function main() {
   log(DRY_RUN ? "Mode dry-run (aucune écriture)" : REBUILD ? "Mode reconstruction (--rebuild)" : "Mode normal");
 
+  // Politesse : si les trois archives n'ont pas changé depuis le dernier passage réussi (requêtes HEAD conditionnelles,
+  // quelques octets), on ne les retélécharge pas. Un passage complet a lieu au moins toutes les 6 h (voir http.js).
+  const sonde = !REBUILD && !DRY_RUN && !LIMIT_ARG ? await sonder([SCRUTINS_ZIP_URL, ORGANES_ZIP_URL, DOSSIERS_ZIP_URL]) : null;
+  if (sonde?.inchange) return log("Archives de l'Assemblée inchangées depuis le dernier passage : rien à télécharger.");
+
   const existing = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => '{"lois":[]}'));
   existing.lois.forEach(completer); // champs déduits du numéro (format compact, voir lois-format.js)
   const existingById = new Map(existing.lois.map((l) => [l.id, l]));
@@ -682,6 +688,7 @@ async function main() {
   if (nouveaux.length === 0) {
     log("Aucun nouveau scrutin ajouté à cette exécution.");
   }
+  if (sonde && !process.exitCode) await sonde.valider();
 }
 
 main().catch((e) => {

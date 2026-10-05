@@ -46,7 +46,7 @@ async function main() {
         const fichier = path.join(dir, `${id}.jpg`);
         if (fs.existsSync(fichier) || ajoutees >= MAX) continue;
         try {
-          const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+          const res = await fetch(url, { headers: { "User-Agent": USER_AGENT }, signal: AbortSignal.timeout(30000) });
           if (!res.ok || !/image\/jpe?g/.test(res.headers.get("content-type") || "")) throw new Error(`HTTP ${res.status}`);
           const b64 = Buffer.from(await res.arrayBuffer()).toString("base64");
           const reduite = await page.evaluate(async ({ b64, largeur }) => {

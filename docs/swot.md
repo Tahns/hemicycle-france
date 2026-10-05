@@ -104,3 +104,32 @@ Base : contenu et données du site au 2 octobre 2026. Les points marqués (?) so
 3. Publier des stories sur Instagram pour lancer le compte.
 4. Renforcer la page Justice (rigueur juridique) ou la limiter.
 5. Ajouter des sources fiables pour comparer les programmes.
+
+## Chaîne automatique (collecte, mise à jour, publication, santé)
+Examen du 5 octobre 2026 : update-data (7, 22, 37, 52 min) et actualités (2, 17, 32, 47 min), plus publier-stories (toutes les heures), sante (lundi), stats (nuit), ci. Statut : **corrigé** / **à faire par le propriétaire** / **accepté**.
+
+- **Forces** : écriture refusée si une source se dégrade (garde.js) ; chaque source est isolée (`continue-on-error` + alerte dans le résumé) ; aucun ticket ni e-mail ; secrets absents gérés proprement (publier-stories, stats) ; concurrence `update-data` partagée (jamais deux écritures en parallèle) ; User-Agent explicite ; contrôle de cohérence avant tout commit.
+- **Faiblesses** : un commit « horodatage seul » à chaque passage, trois archives de l'Assemblée retéléchargées à chaque quart d'heure, un contrôle secondaire (file des stories) qui bloquait toute la publication (lignes ci-dessous).
+- **Opportunités** : cache conditionnel (ETag) pour les grosses archives ; battement quotidien lisible par check-fraicheur ; relevés d'actualités à la demande.
+- **Menaces** : blocage d'une source publique (403/429) si la charge augmente ; quota de minutes Actions si le dépôt devient privé ; historique git qui grossit.
+
+| # | Constat | Statut |
+|---|---------|--------|
+| 1 | **Panne du 5 octobre** : l'image d'une story est supprimée à 3 jours (stories-auto) mais check-data l'exigeait jusqu'à 4 jours ; « image absente » faisait échouer « Actualités » avant le commit : plus aucune donnée publiée depuis 08 h 21 UTC. | **Corrigé** : exigence ramenée à 2 jours ; file des stories et traductions = contrôles *secondaires* (alerte dans le résumé, publication maintenue ; `--strict` en CI et en santé) ; stories-auto retire de la file toute entrée récente sans image JPEG valide (avec alerte) et n'ajoute jamais une entrée dont l'image n'est pas relisible. |
+| 2 | Un commit toutes les 15 min pour un simple `lastUpdated` (navette, agenda, commissions, gouvernement, budget, veille, direct, probabilités) : historique gonflé, déploiements Pages inutiles. | **Corrigé** : `ecrireSiChange` / `ecrireGarde` n'écrivent plus si seul l'horodatage change ; battement de 24 h (6 h pour direct.json) ; probabilités calculées au jour entier. |
+| 3 | Échec du push après 3 essais silencieux (le job restait vert) ; logique copiée dans 3 workflows. | **Corrigé** : `scripts/commit-push.sh` (4 essais, échec visible + ligne dans le résumé) ; `fetch-depth: 50`. |
+| 4 | Aucun délai, nouvelle tentative ni User-Agent homogène sur ~20 appels aux sources. | **Corrigé** : `scripts/http.js` (`fetchPoli` : 30 s, 3 tentatives, Retry-After respecté, pas de nouvelle tentative sur 403/404, User-Agent). Appels séquentiels conservés (pas de rafale). |
+| 5 | Archives Scrutins/Organes/Dossiers (AMO30 historique), agenda et répertoire HATVP retéléchargés à chaque passage. | **Corrigé** : `sonder()` (HEAD conditionnel ETag/Last-Modified, mémoire `.cache/http` via actions/cache) ; passage complet forcé au moins toutes les 6 h ; au moindre doute, comportement inchangé. Aucune fréquence d'appel n'augmente. |
+| 6 | `workflow_run` doublait les relevés de flux RSS (≈ 8 par heure au lieu de 4) et se déclenchait aussi après un échec. | **Corrigé** : relevé non redemandé s'il date de moins de 10 min ; `workflow_run` seulement si le workflow amont a réussi. |
+| 7 | Aucun `timeout-minutes`. | **Corrigé** : 30 min (update-data), 15 (actualités), 20 (ci), 10 (autres) ; `concurrency` sur ci. |
+| 8 | Étapes `continue-on-error` sans alerte (bandeau direct, story, photos HD) ; Actualités sans résumé d'échec ; flux illisible seulement dans le journal. | **Corrigé** : alertes ajoutées dans le résumé. |
+| 9 | Données périmées : aucune alerte quand un relevé automatique ne bouge plus. | **Corrigé** : check-fraicheur compare `lastUpdated` à une limite par fichier (actualités 24 h, direct 12 h, autres 72 h). Le bandeau du site (index.html, non modifié) affiche la date du dernier *changement* de données, pas du dernier passage : **accepté**. |
+| 10 | Détecteurs manquants : JSON invalide, fichier vide ou énorme, `lastUpdated` futur. | **Corrigé** : `controles-json.js` appliqué à tout `data/*.json` (limite 12 Mo ; lois.json fait 5,4 Mo). |
+| 11 | Tests : fetch-budget et deputes-fixture n'étaient pas lancés par ci.yml. | **Corrigé** : `tests/lancer-tous.mjs` lance tous les tests ; nouveau `tests/http.test.mjs`. |
+| 12 | Garde-fou : chute de 30 % (50 % pour les actualités), pas 60 %. | **Accepté** : plus strict, adapté aux fichiers stables. |
+| 13 | Actions épinglées par version majeure, pas par empreinte de commit. | **Accepté** (actions officielles) ; épinglage par SHA possible via Dependabot. |
+| 14 | GitHub retarde les tâches programmées : rythme réel inférieur à 4 par heure. | **Accepté** : battement et alertes de fraîcheur le rendent visible. |
+| 15 | Historique git : images `instagram/auto`, photos HD, `data/*.json` s'accumulent (~100 Mo) ; les images de stories supprimées restent dans l'historique. | **À faire par le propriétaire** : surveiller ; au besoin réécrire l'historique ou sortir les images. Aucune donnée supprimée ici. |
+| 16 | Coût : environ 45 min d'Actions par heure (gratuit si dépôt public ; limite de 2 000 min par mois si privé) ; chaque commit relance Pages. | **À faire par le propriétaire** : vérifier le plan et Réglages > Pages (source = main). |
+| 17 | Secrets absents : `IG_USER_ID`, `IG_ACCESS_TOKEN` (publication Instagram), `TRAFIC_TOKEN` (statistiques) ; les workflows sortent proprement. | **À faire par le propriétaire** si voulus (docs/PUBLICATION-AUTO.md). |
+| 18 | Flux RSS sans cache conditionnel (contenu changeant, flux légers) ; 403/429 : signalés dans le résumé, ancien fichier conservé. | **Accepté** |

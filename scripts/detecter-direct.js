@@ -126,6 +126,7 @@ async function main() {
     obligatoires: ["titre", "source"],
     videPermis: true,
     texte: JSON.stringify(direct, null, 1) + "\n",
+    battementH: 6,
   });
   if (ok) console.log(`[detecter-direct] ${direct.evenements.length} événement(s) en direct.`);
 }

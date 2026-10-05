@@ -15,8 +15,12 @@ concurrency:
 jobs:
   publier:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
@@ -28,19 +32,4 @@ jobs:
         run: node scripts/publier-stories.cjs
       - name: Committer le registre des publications
         if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/instagram-publiees.json 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "Rien de nouveau."
-          else
-            git commit -m "Stories publiées ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
-            # Plusieurs workflows écrivent dans data/ : on reprend le dernier état distant et on réessaie
-            for i in 1 2 3; do
-              git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && break
-              git rebase --abort 2>/dev/null || true
-              sleep $((i * 5))
-            done
-            git status -sb | head -1
-          fi
+        run: scripts/commit-push.sh "Stories publiées ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-publiees.json

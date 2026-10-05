@@ -20,6 +20,7 @@
  * USAGE : node scripts/fetch-verifications.js [--dry-run] [--dossier=flux/]   (flux locaux <id>.xml, tests)
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile } from "fs/promises";
 import { ecrireGarde } from "./garde.js";
 
@@ -91,7 +92,7 @@ export function retenir(lus, media, maintenant, reserve = false) {
 }
 
 async function telecharger(url) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" }, signal: AbortSignal.timeout(20000) });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.text();
 }

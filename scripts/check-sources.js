@@ -14,6 +14,7 @@
  * USAGE : node scripts/check-sources.js
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile } from "fs/promises";
 
 const DECODEX_URL = "https://asset.lemde.fr/medias/mmpub/data/decodex/hoax/hoax_debunks.json";
@@ -29,7 +30,7 @@ const normaliser = (u) => String(u).replace(/^https?:\/\/(www\.)?/, "").replace(
 
 let base;
 try {
-  const res = await fetch(DECODEX_URL, { headers: { "User-Agent": "hemicycle-france (verification des sources)" } });
+  const res = await fetchPoli(DECODEX_URL, { headers: { "User-Agent": "hemicycle-france (verification des sources)" } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   base = await res.json();
 } catch (e) {

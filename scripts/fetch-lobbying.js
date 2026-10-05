@@ -17,6 +17,8 @@
  *
  * USAGE : node scripts/fetch-lobbying.js [--fixture=chemin.json] [--sortie=chemin.json]
  */
+import { ecrireSiChange } from "./garde.js";
+import { fetchPoli, sonder } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -50,22 +52,25 @@ export function extraire(source) {
 }
 
 async function main() {
-  let source;
+  let source, sonde;
   if (FIXTURE) source = JSON.parse(await readFile(FIXTURE, "utf-8"));
   else {
-    const res = await fetch(URL_AGORA);
+    sonde = await sonder([URL_AGORA]);
+    if (sonde.inchange) return log("Répertoire HATVP inchangé depuis le dernier passage : rien à télécharger.");
+    const res = await fetchPoli(URL_AGORA, { timeoutMs: 180000 });
     if (!res.ok) throw new Error(`HATVP : HTTP ${res.status}`);
     source = await res.json();
   }
   const { elus, nominatives } = extraire(source);
   log(`${nominatives} actions nominatives, ${Object.keys(elus).length} élus concernés.`);
   if (!nominatives) return log("Aucune rencontre nominative dans la source : data/lobbying.json n'est pas modifié.");
-  await writeFile(SORTIE, JSON.stringify({
+  await ecrireSiChange(SORTIE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
     source: "Haute Autorité pour la transparence de la vie publique — répertoire des représentants d'intérêts (open data, Licence Ouverte)",
     elus,
   }) + "\n");
   log(`${path.relative(process.cwd(), SORTIE)} écrit.`);
+  if (sonde && !process.exitCode) await sonde.valider();
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) main().catch((e) => { console.error("[fetch-lobbying] ÉCHEC :", e.message); process.exitCode = 1; });

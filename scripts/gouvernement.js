@@ -12,6 +12,7 @@
  *
  * USAGE (test) : node scripts/gouvernement.js --dossier=/chemin/archive-AMO30-extraite
  */
+import { ecrireSiChange } from "./garde.js";
 import { readFile, writeFile, readdir } from "fs/promises";
 import path from "path";
 
@@ -72,7 +73,7 @@ export async function ecrireGouvernement(amoDir, fichier = "data/gouvernement.js
   membres.sort((x, y) => (RANG[x.qualite] ?? 5) - (RANG[y.qualite] ?? 5) || x.nom.localeCompare(y.nom, "fr"));
   const pm = membres.find((m) => m.qualite === "Premier ministre");
   if (!pm || membres.length < 15) throw new Error(`composition incomplète (${membres.length} membres, Premier ministre : ${pm ? "oui" : "non"})`);
-  await writeFile(fichier, JSON.stringify({
+  await ecrireSiChange(fichier, JSON.stringify({
     lastUpdated: new Date().toISOString(),
     source: "Assemblée nationale — open data AMO (mandats des membres du Gouvernement)",
     nom: `Gouvernement ${pm.nom.split(" ").slice(1).join(" ")}`,

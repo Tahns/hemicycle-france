@@ -17,6 +17,7 @@
  *
  * USAGE : node scripts/fetch-portraits.js [--max=40]
  */
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, mkdir, access } from "fs/promises";
 import { pathToFileURL } from "url";
 
@@ -38,7 +39,7 @@ const existe = (f) => access(f).then(() => true, () => false);
 const lire = async (f) => JSON.parse(await readFile(f, "utf-8").catch(() => "null"));
 
 async function api(url) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT }, signal: AbortSignal.timeout(20000) });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
@@ -67,7 +68,7 @@ export function licenceLibre(m) {
  * Version haute définition d'un fichier de Commons : JPEG de LARGEURS_HD[0] px de large au plus et MAX_OCTETS_HD au plus.
  * `api` et `telecharger` sont injectables pour les essais hors ligne. Renvoie { octets, largeur, licence, auteur, source }.
  */
-export async function recupererHd(fichierCommons, { api: appel = api, telecharger = (u) => fetch(u, { headers: { "User-Agent": USER_AGENT }, signal: AbortSignal.timeout(30000) }) } = {}) {
+export async function recupererHd(fichierCommons, { api: appel = api, telecharger = (u) => fetchPoli(u) } = {}) {
   let derniere = "aucune largeur n'a convenu";
   for (const largeur of LARGEURS_HD) {
     const d = await appel(`https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=${largeur}&titles=${encodeURIComponent("File:" + fichierCommons)}`);
@@ -129,7 +130,7 @@ async function main() {
       if (!info?.thumburl) throw new Error("fichier absent de Commons (image non libre hébergée sur Wikipédia ?)");
       const m = info.extmetadata || {};
       const licence = licenceLibre(m);
-      const res = await fetch(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
+      const res = await fetchPoli(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
       if (!res.ok || !/image\/(jpeg|png)/.test(res.headers.get("content-type") || "")) throw new Error(`téléchargement impossible (HTTP ${res.status})`);
       await writeFile(fichierLocal, Buffer.from(await res.arrayBuffer()));
       data.portraits[nom] = { fichier: img.fichier, licence, auteur: texte(m.Artist?.value).slice(0, 120) || "Auteur inconnu", source: info.descriptionurl, article: img.page };

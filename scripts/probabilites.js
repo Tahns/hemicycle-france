@@ -24,7 +24,7 @@ const TOUR1 = "2027-04-18";
 const TOUR2 = "2027-05-02";
 const TIRAGES = 20000;
 const DATE_ARG = process.argv.find((a) => a.startsWith("--date="))?.split("=")[1];
-const maintenant = DATE_ARG ? new Date(DATE_ARG + "T12:00:00Z") : new Date();
+const maintenant = DATE_ARG ? new Date(DATE_ARG + "T12:00:00Z") : new Date(new Date().toISOString().slice(0, 10) + "T12:00:00Z"); // jour entier : pas de recalcul (ni de commit) à chaque quart d'heure
 const joursAvant = (iso) => Math.max(0, (Date.parse(iso + "T18:00:00Z") - maintenant) / 864e5);
 const log = (...m) => console.log("[probabilites]", ...m);
 

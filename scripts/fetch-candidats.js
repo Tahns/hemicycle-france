@@ -20,6 +20,7 @@
  *   node scripts/fetch-candidats.js --fichier=page.wikitext   # parse un fichier local (tests)
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -154,7 +155,7 @@ async function main() {
   const wikitexte = FICHIER
     ? await readFile(FICHIER, "utf-8")
     : await (async () => {
-        const res = await fetch(RAW_URL, { headers: { "User-Agent": USER_AGENT } });
+        const res = await fetchPoli(RAW_URL, { headers: { "User-Agent": USER_AGENT } });
         if (!res.ok) throw new Error(`HTTP ${res.status} en lisant la page Wikipédia`);
         return res.text();
       })();

@@ -20,6 +20,8 @@
  *
  * USAGE : node scripts/fetch-agenda-an.js [--dossier=/chemin/archive-extraite]
  */
+import { ecrireSiChange } from "./garde.js";
+import { fetchPoli, sonder } from "./http.js";
 import { readFile, writeFile, readdir, mkdtemp } from "fs/promises";
 import { createWriteStream } from "fs";
 import { pipeline } from "stream/promises";
@@ -76,9 +78,11 @@ export function construireAgenda(reunions, depuis, jusqua) {
 
 async function main() {
   let dir = DOSSIER;
+  const sonde = !dir ? await sonder([AGENDA_ZIP]) : null;
+  if (sonde?.inchange) return log("Archive de l'agenda inchangée depuis le dernier passage : rien à télécharger.");
   if (!dir) {
     dir = await mkdtemp(path.join(os.tmpdir(), "an-agenda-"));
-    const res = await fetch(AGENDA_ZIP);
+    const res = await fetchPoli(AGENDA_ZIP, { timeoutMs: 180000 });
     if (!res.ok) throw new Error(`HTTP ${res.status} sur ${AGENDA_ZIP}`);
     await pipeline(res.body, createWriteStream(path.join(dir, "agenda.zip")));
     await execFileAsync("unzip", ["-q", "-o", path.join(dir, "agenda.zip"), "-d", dir], { maxBuffer: 1 << 26 });
@@ -106,7 +110,7 @@ async function main() {
     try { const r = JSON.parse(await readFile(f, "utf-8")).reunion; if (r?.timeStampDebut) reunions.push(r); } catch {}
   }
   if (Object.keys(presences).length >= 400) {
-    await writeFile(COMMISSIONS_FILE, JSON.stringify({
+    await ecrireSiChange(COMMISSIONS_FILE, JSON.stringify({
       lastUpdated: new Date().toISOString(),
       source: "Assemblée nationale — feuilles de présence des réunions des commissions permanentes (agenda open data)",
       reunions: reunionsCommission,
@@ -123,13 +127,14 @@ async function main() {
   const jourParis = (d) => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(d);
   const depuis = jourParis(new Date()), jusqua = jourParis(new Date(Date.now() + JOURS * 864e5));
   const jours = construireAgenda(reunions, depuis, jusqua);
-  await writeFile(DATA_FILE, JSON.stringify({
+  await ecrireSiChange(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
     source: "Assemblée nationale — agenda des séances publiques (open data, Licence Ouverte)",
     sourceUrl: "https://www2.assemblee-nationale.fr/agendas/les-agendas",
     jours,
   }, null, 1) + "\n");
   log(`${reunions.length} séances lues ; ${jours.length} jour(s) de séance d'ici au ${jusqua}.`);
+  if (sonde && !process.exitCode) await sonde.valider();
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
