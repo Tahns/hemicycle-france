@@ -68,6 +68,10 @@ jobs:
         id: agenda
         run: node scripts/fetch-agenda-an.js
         continue-on-error: true
+      - name: Vérifications des faits (flux publics des rédactions ; un flux injoignable est signalé sans bloquer)
+        id: verifications
+        run: node scripts/fetch-verifications.js
+        continue-on-error: true
       - name: Bandeau « En direct » (d'après les actualités et l'agenda déjà relevés)
         run: node scripts/detecter-direct.js
         continue-on-error: true
@@ -160,7 +164,7 @@ jobs:
 
       # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
       - name: Signaler un problème dans le résumé de l'exécution
-        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
+        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.verifications.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -168,6 +172,7 @@ jobs:
           {
             echo "La mise à jour automatique du $(date -u +%Y-%m-%d) signale un problème."
             echo
+            [ "${{ steps.verifications.outcome }}" = "failure" ] && echo "- **Vérifications** : le nouveau fichier a été refusé (chute des titres ou format de flux changé ; fichier précédent conservé)."
             [ "${{ steps.scrutins.outcome }}" = "failure" ] && echo "- **Scrutins** : échec du script (les votes ne sont plus mis à jour)."
             [ "${{ steps.insee.outcome }}" = "failure" ] && echo "- **Insee** : au moins un indicateur n'a pas pu être mis à jour (valeur précédente conservée)."
             [ "${{ steps.budget.outcome }}" = "failure" ] && echo "- **Budget** : données d'Eurostat illisibles, incomplètes ou incohérentes (fichier précédent conservé, la rubrique garde les derniers chiffres)."
