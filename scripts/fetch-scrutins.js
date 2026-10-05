@@ -44,6 +44,7 @@
  * DÉPENDANCES : Node.js 18+ (fetch natif), aucun paquet npm requis.
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, mkdtemp, readdir } from "fs/promises";
 import { createWriteStream, existsSync } from "fs";
 import path from "path";
@@ -175,7 +176,7 @@ function warn(...m) {
 async function downloadAndExtract(url, destDir) {
   const zipPath = path.join(destDir, "archive.zip");
   log("Téléchargement :", url);
-  const res = await fetch(url);
+  const res = await fetchPoli(url, { timeoutMs: 180000 });
   if (!res.ok) {
     throw new Error(`Échec du téléchargement (${res.status} ${res.statusText}) — l'URL a peut-être changé, vérifier data.assemblee-nationale.fr/opendata`);
   }

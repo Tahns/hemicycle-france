@@ -22,6 +22,7 @@
  *   node scripts/fetch-insee.js --dry-run
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -58,7 +59,7 @@ function tendance(actuelle, precedente) {
 const EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10dd_edpt1";
 /** Déficit (−) ou excédent (+) public de la France : [{ periode: "2025", valeur: -5.1 }, …] (plus récent d'abord) */
 async function lireEurostat(unite) {
-  const res = await fetch(`${EUROSTAT}?geo=FR&unit=${unite}&sector=S13&na_item=B9&lastTimePeriod=3&format=JSON&lang=fr`);
+  const res = await fetchPoli(`${EUROSTAT}?geo=FR&unit=${unite}&sector=S13&na_item=B9&lastTimePeriod=3&format=JSON&lang=fr`);
   if (!res.ok) throw new Error(`HTTP ${res.status} pour Eurostat gov_10dd_edpt1`);
   const d = await res.json();
   const temps = d.dimension?.time?.category?.index || {};
@@ -161,7 +162,7 @@ const INDICATEURS = [
 
 /** Lit les `n` dernières observations d'une série (réponse SDMX-ML). */
 async function lireSerie(idBank, titreAttendu, n = 2) {
-  const res = await fetch(`${BASE_URL}/${idBank}?lastNObservations=${n}`, { headers: { Accept: "application/xml" } });
+  const res = await fetchPoli(`${BASE_URL}/${idBank}?lastNObservations=${n}`, { headers: { Accept: "application/xml" } });
   if (!res.ok) throw new Error(`HTTP ${res.status} pour la série ${idBank}`);
   const xml = await res.text();
   const titre = xml.match(/TITLE_FR="([^"]*)"/)?.[1]?.replace(/&apos;/g, "'").replace(/&amp;/g, "&");

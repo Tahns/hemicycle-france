@@ -23,6 +23,7 @@
  * USAGE : node scripts/fetch-communes.js [--force] [--fichier=local.csv]
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -145,7 +146,7 @@ async function main() {
   if (FICHIER) resultat = construire(await readFile(FICHIER, "utf-8"));
   else {
     const lire = async (url) => {
-      const res = await fetch(url);
+      const res = await fetchPoli(url, { timeoutMs: 180000 });
       if (!res.ok) throw new Error(`HTTP ${res.status} en téléchargeant ${url}`);
       return res.text();
     };

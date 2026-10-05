@@ -20,6 +20,7 @@
  *
  * USAGE : node scripts/fetch-agenda-an.js [--dossier=/chemin/archive-extraite]
  */
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, readdir, mkdtemp } from "fs/promises";
 import { createWriteStream } from "fs";
 import { pipeline } from "stream/promises";
@@ -78,7 +79,7 @@ async function main() {
   let dir = DOSSIER;
   if (!dir) {
     dir = await mkdtemp(path.join(os.tmpdir(), "an-agenda-"));
-    const res = await fetch(AGENDA_ZIP);
+    const res = await fetchPoli(AGENDA_ZIP, { timeoutMs: 180000 });
     if (!res.ok) throw new Error(`HTTP ${res.status} sur ${AGENDA_ZIP}`);
     await pipeline(res.body, createWriteStream(path.join(dir, "agenda.zip")));
     await execFileAsync("unzip", ["-q", "-o", path.join(dir, "agenda.zip"), "-d", dir], { maxBuffer: 1 << 26 });

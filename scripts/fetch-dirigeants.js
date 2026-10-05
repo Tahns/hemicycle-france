@@ -14,6 +14,7 @@
  * USAGE : node scripts/fetch-dirigeants.js [--dry-run]
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -26,7 +27,7 @@ const warn = (...m) => console.warn("[fetch-dirigeants][ATTENTION]", ...m);
 async function chefWikipedia(urlPage) {
   const titre = decodeURIComponent(urlPage.split("/wiki/")[1] || "");
   if (!titre) throw new Error("adresse Wikipédia illisible");
-  const res = await fetch(`https://fr.wikipedia.org/w/index.php?title=${encodeURIComponent(titre)}&action=raw`, { headers: { "User-Agent": USER_AGENT } });
+  const res = await fetchPoli(`https://fr.wikipedia.org/w/index.php?title=${encodeURIComponent(titre)}&action=raw`, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   let texte = await res.text();
   const redirection = texte.match(/^#REDIRECT(?:ION)?\s*\[\[([^\]]+)\]\]/i);

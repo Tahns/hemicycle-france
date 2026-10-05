@@ -25,7 +25,9 @@
  * USAGE : node scripts/fetch-actualites.js [--dry-run] [--dossier=flux/]   (flux locaux <id>.xml, tests)
  */
 
+import { fetchPoli, releveRecent, noterReleve } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
+import { appendFileSync } from "fs";
 import { createRequire } from "module";
 import { ecrireGarde } from "./garde.js";
 import { construireIndex, illustrer } from "./illustrations.js";
@@ -122,12 +124,15 @@ function periodeReserve(maintenant) {
 }
 
 async function telecharger(url) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" }, signal: AbortSignal.timeout(20000) });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.text();
 }
 
 async function main() {
+  // Déclenchement supplémentaire (workflow_run) juste après un relevé : on ne redemande pas tous les flux
+  const GATE = Number(process.env.GATE_MINUTES) || 0;
+  if (GATE && !DOSSIER && !DRY_RUN && (await releveRecent("actualites", GATE))) return log(`Relevé de moins de ${GATE} min : les flux ne sont pas redemandés.`);
   const maintenant = new Date();
   const reserve = periodeReserve(maintenant);
   const normaliser = (u) => String(u).replace(/^https?:\/\/(www\.)?/, "").replace(/[?#].*$/, "").replace(/\/+$/, "").toLowerCase();
@@ -142,12 +147,14 @@ async function main() {
 
   const articles = [];
   const repondu = [];
+  const illisibles = [];
   for (const m of MEDIAS) {
     let xml;
     try {
       xml = DOSSIER ? await readFile(`${DOSSIER}/${m.id}.xml`, "utf-8") : await telecharger(m.flux);
     } catch (e) {
       warn(`${m.nom} : flux illisible (${e.message}).`);
+      illisibles.push(`${m.nom} (${e.message})`);
       continue;
     }
     const lus = lireFlux(xml);
@@ -168,6 +175,10 @@ async function main() {
     log(`${m.nom} : ${lus.length} article(s) lu(s), ${gardes} gardé(s).`);
   }
 
+  if (illisibles.length && process.env.GITHUB_STEP_SUMMARY) {
+    try { appendFileSync(process.env.GITHUB_STEP_SUMMARY, `- **Actualités** : flux illisible(s) ce quart d'heure : ${illisibles.join(", ")}.\n`); } catch {}
+  }
+  if (!DOSSIER && repondu.length >= 3) await noterReleve("actualites").catch(() => {});
   if (repondu.length < 3) {
     warn(`Seulement ${repondu.length} média(s) lisible(s) : ${DATA_FILE} n'est pas modifié.`);
     process.exitCode = 1;

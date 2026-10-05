@@ -20,6 +20,7 @@
  *   node scripts/fetch-budget.js --dry-run
  */
 
+import { fetchPoli } from "./http.js";
 import { mkdir } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -67,7 +68,7 @@ export function lireJsonStat(d) {
 async function eurostat(jeu, params) {
   const q = new URLSearchParams({ format: "JSON", lang: "fr", freq: "A", geo: "FR", sector: "S13" });
   for (const [k, v] of Object.entries(params)) for (const x of [].concat(v)) q.append(k, x);
-  const res = await fetch(`${BASE_URL}/${jeu}?${q}`, { headers: { Accept: "application/json" } });
+  const res = await fetchPoli(`${BASE_URL}/${jeu}?${q}`, { headers: { Accept: "application/json" } });
   if (!res.ok) throw new Error(`HTTP ${res.status} pour Eurostat ${jeu}`);
   return lireJsonStat(await res.json());
 }

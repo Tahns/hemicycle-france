@@ -94,7 +94,7 @@ function choisir({ file, registre, config, now = new Date() }) {
 /** Appel à l'API Graph ; l'erreur levée ne contient jamais le jeton. */
 async function graph(methode, chemin, params = {}) {
   const url = new URL(GRAPH + chemin);
-  const opts = { method: methode, headers: { Authorization: "Bearer " + IG_ACCESS_TOKEN } };
+  const opts = { method: methode, headers: { Authorization: "Bearer " + IG_ACCESS_TOKEN }, signal: AbortSignal.timeout(60000) };
   if (methode === "POST") opts.body = new URLSearchParams({ ...params, access_token: IG_ACCESS_TOKEN });
   else for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
   let r, texte;
@@ -142,7 +142,7 @@ async function publier(entree) {
 }
 
 async function imageEnLigne(url) {
-  try { const r = await fetch(url, { method: "HEAD", redirect: "follow" }); return r.status === 200; } catch (e) { return false; }
+  try { const r = await fetch(url, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(20000) }); return r.status === 200; } catch (e) { return false; }
 }
 
 function ecrireRegistre(registre, now) {

@@ -23,6 +23,7 @@
  *
  * USAGE : node scripts/fetch-senateurs.js [--max=200] [--csv=/chemin/ODSEN_GENERAL.csv]
  */
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -79,7 +80,7 @@ export function votesNominatifs(html) {
 }
 
 async function lire(url, latin1 = false) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status} sur ${url}`);
   return latin1 ? new TextDecoder("latin1").decode(await res.arrayBuffer()) : res.text();
 }

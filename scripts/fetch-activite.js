@@ -19,6 +19,7 @@
  * USAGE : node scripts/fetch-activite.js [--force] [--dossier=/chemin/archives-deja-extraites]
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, readdir, mkdtemp } from "fs/promises";
 import { createWriteStream } from "fs";
 import { pipeline } from "stream/promises";
@@ -44,7 +45,7 @@ const warn = (...m) => console.warn("[fetch-activite][ATTENTION]", ...m);
 async function telechargerEtExtraire(url, nom) {
   const dir = await mkdtemp(path.join(os.tmpdir(), `an-${nom}-`));
   const zip = path.join(dir, "archive.zip");
-  const res = await fetch(url);
+  const res = await fetchPoli(url, { timeoutMs: 180000 });
   if (!res.ok) throw new Error(`HTTP ${res.status} sur ${url}`);
   await pipeline(res.body, createWriteStream(zip));
   await execFileAsync("unzip", ["-q", "-o", zip, "-d", dir], { maxBuffer: 1 << 26 });
@@ -97,7 +98,7 @@ async function lireAmendements(dir) {
 
 /** HATVP : déclarations des députés, reliées par l'identifiant Assemblée (id_origine). */
 async function lireHatvp() {
-  const res = await fetch(HATVP_CSV);
+  const res = await fetchPoli(HATVP_CSV, { timeoutMs: 180000 });
   if (!res.ok) throw new Error(`HATVP : HTTP ${res.status}`);
   const lignes = (await res.text()).replace(/^﻿/, "").split(/\r?\n/).filter(Boolean);
   const entete = lignes[0].split(";");

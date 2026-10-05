@@ -18,6 +18,7 @@
  * Dépendance (installée par le workflow) : pdfjs-dist.
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -43,7 +44,7 @@ const texte = (h) => h.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).
 const iso = (a, m, j) => `${a}-${String(m).padStart(2, "0")}-${String(j).padStart(2, "0")}`;
 
 async function lirePdf(url) {
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT }, redirect: "follow" });
+  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT }, redirect: "follow" });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const { getDocument } = await import("pdfjs-dist/legacy/build/pdf.mjs");
   const doc = await getDocument({ data: new Uint8Array(await res.arrayBuffer()), useSystemFonts: true, verbosity: 0 }).promise;
@@ -77,7 +78,7 @@ const echantillon = (t) => { const m = t.match(/échantillon de ([\d  ]{3,7}) pe
 async function main() {
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => '{"notices":[]}'));
   const connues = new Map((ancien.notices || []).map((n) => [n.id, n]));
-  const res = await fetch(LISTE, { headers: { "User-Agent": USER_AGENT } });
+  const res = await fetchPoli(LISTE, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) throw new Error(`liste des notices : HTTP ${res.status}`);
   const html = await res.text();
   const lignes = [...html.matchAll(/<a href="(\/notices\/medias\/fichiers\/add\/(\d+))"[^>]*>([^<]+)<\/a>/g)]

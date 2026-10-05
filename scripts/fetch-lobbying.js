@@ -17,6 +17,7 @@
  *
  * USAGE : node scripts/fetch-lobbying.js [--fixture=chemin.json] [--sortie=chemin.json]
  */
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -53,7 +54,7 @@ async function main() {
   let source;
   if (FIXTURE) source = JSON.parse(await readFile(FIXTURE, "utf-8"));
   else {
-    const res = await fetch(URL_AGORA);
+    const res = await fetchPoli(URL_AGORA, { timeoutMs: 180000 });
     if (!res.ok) throw new Error(`HATVP : HTTP ${res.status}`);
     source = await res.json();
   }
