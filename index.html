@@ -319,7 +319,8 @@
   @media (max-width:700px){ .view.active{animation:none;} }
   /* Performances : ce qui est hors de l'écran n'est ni mis en page ni peint avant d'être approché */
   /* Une liste déroulante de centaines d'options coûte cher à mesurer : sa largeur vient du conteneur, pas de l'option la plus longue */
-  .filtre-champ, .sous-nav label{contain:inline-size;}
+  .filtre-champ{contain:inline-size;}
+  .sous-nav label{white-space:nowrap;}
   .view > :not(.rubrique-tete){content-visibility:auto; contain-intrinsic-size:auto 480px;}
   .senat-ligne, .histo-row, .depute-carte, .meeting-card, .party-row{content-visibility:auto; contain-intrinsic-size:auto 64px;}
 
