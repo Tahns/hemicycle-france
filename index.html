@@ -28,7 +28,12 @@
 <meta property="og:image" content="https://tahns.github.io/hemicycle-france/icons/partage.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hémicycle France : la politique française, preuves à l'appui. Un hémicycle en trois arcs, bleu, rouge et un point noir.">
+<meta property="og:image:type" content="image/jpeg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hémicycle France · La politique française, preuves à l'appui">
+<meta name="twitter:description" content="Ce que votent les députés, les sondages 2027 et les grands chiffres du pays. Chaque information renvoie à sa source.">
+<meta name="twitter:image" content="https://tahns.github.io/hemicycle-france/icons/partage.jpg">
 <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
 <script>
@@ -1061,6 +1066,12 @@
   .bouton-story{display:inline-flex; align-items:center; gap:var(--s2); padding:var(--s2) var(--s4); border-radius:var(--r-pill); text-decoration:none; font-weight:600; font-size:var(--fs-md); color:var(--sur-couleur); background:var(--accent);}
   .bouton-story:hover{filter:brightness(1.12);}
   .bouton-story:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  .actu-verifs{margin:28px 0 8px; padding-top:14px; border-top:3px solid var(--ink)}
+  .actu-verifs h3{margin:0 0 4px}
+  .verifs-liste{list-style:none; margin:10px 0; padding:0}
+  .verifs-liste li{padding:9px 0; border-bottom:1px solid var(--border-soft)}
+  .verifs-liste a{font-weight:600}
+  .verif-meta{display:block; font-size:.85em; color:var(--text-faint); margin-top:2px}
   .bouton-story::before{content:""; flex:none; width:15px; height:15px; background:currentColor; -webkit-mask:url(icons/partager.svg) center/contain no-repeat; mask:url(icons/partager.svg) center/contain no-repeat;}
   .recherche-fond{position:fixed; inset:0; z-index:70; background:var(--voile);}
   .recherche{position:fixed; z-index:71; top:8vh; left:50%; transform:translateX(-50%); width:min(680px, calc(100vw - 24px)); max-height:80vh; overflow:auto;
@@ -2147,6 +2158,12 @@
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
       <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
     <div class="actu-liste" id="actualites-liste"><p class="chargement">Chargement des actualités…</p></div>
+    <section class="actu-verifs" id="actualites-verifs" aria-labelledby="actualites-verifs-titre" hidden>
+      <h3 id="actualites-verifs-titre">Vérifications des faits</h3>
+      <p class="veille-sub">Les derniers articles de vérification publiés par des rédactions françaises. Le site ne tranche pas : il renvoie vers la vérification de chaque rédaction, dont le titre est reproduit tel quel.</p>
+      <ul class="verifs-liste" id="actualites-verifs-liste"></ul>
+      <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="verifications">Partager</button></div>
+    </section>
     <p class="sondage-disclaimer">Titres choisis par chaque rédaction, reproduits tels quels. Les liens vers des contenus démentis par le Décodex du Monde sont écartés automatiquement.</p>
   </section>
 
@@ -2473,6 +2490,7 @@
         <li><b>Rencontres avec des représentants d'intérêts :</b> répertoire des représentants d'intérêts de la <a href="https://www.hatvp.fr/le-repertoire/" target="_blank" rel="noopener">HATVP</a> (open data, Licence Ouverte), seulement lorsque l'élu y est désigné par son identifiant officiel ; le site ne rattache jamais une rencontre à un élu d'après son seul nom.</li>
         <li><b>Âge et profession des députés :</b> date de naissance et profession déclarée dans les fiches officielles de l'Assemblée nationale (open data, Licence Ouverte) ; seul l'âge est affiché. Ce sont des informations publiques liées au mandat.</li>
         <li><b>Présidentielle 2022 par commune :</b> résultats définitifs publiés par le ministère de l'Intérieur sur <a href="https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-10-et-24-avril-2022-resultats-definitifs-du-1er-tour/" target="_blank" rel="noopener">data.gouv.fr</a> (licence ouverte).</li>
+        <li><b>Vérifications des faits :</b> titres, dates et liens des articles de vérification publiés par <i>Les Décodeurs</i> (<i>Le Monde</i>), <i>franceinfo</i> (« Vrai ou faux »), l'<i>AFP</i> (Factuel), <i>20 Minutes</i> (« Fake Off ») et <i>Libération</i> (CheckNews), lus dans leurs flux RSS publics. Le site ne reprend que le titre, attribué à la rédaction qui l'a publié, et renvoie vers son article ; il ne porte aucun jugement et n'établit aucune accusation contre une personne.</li>
         <li><b>Condamnations, dirigeants, agenda :</b> décisions de justice, articles de presse et sites officiels, cités sur chaque fiche.</li>
       </ul>
       <p>Chaque jour, tous les liens cités sont confrontés à la base du <a href="https://www.lemonde.fr/verification/" target="_blank" rel="noopener">Décodex</a> (Les Décodeurs, <i>Le Monde</i>) : aucun ne doit renvoyer vers un contenu qu'elle a démenti ni vers un site qu'elle a épinglé à de nombreuses reprises (au moins dix fois).</p>
@@ -4252,7 +4270,18 @@ async function renderCreditsPortraits(){
   if(liste.length) document.getElementById("credits-portraits").innerHTML = ` Auteurs et licences : ${liste.map(([nom, p])=>
     `<a href="${lien(p.source)}" target="_blank" rel="noopener">${esc(nom)}</a> (${esc(p.auteur || "auteur inconnu")}, ${esc(p.licence)})`).join(" ; ")}.`;
 }
+/* Vérifications des faits : titres des rédactions de fact-checking (data/verifications.json), attribués et sans commentaire du site */
+let VERIFICATIONS;
+async function renderVerifications(){
+  const bloc = document.getElementById("actualites-verifs");
+  if(VERIFICATIONS === undefined) VERIFICATIONS = await lireJSON("data/verifications.json");
+  const liste = (VERIFICATIONS?.verifications || []).filter(v=>/^https:\/\//.test(v.url || "")).slice(0, 12);
+  if(!liste.length){ bloc.hidden = true; return; }
+  document.getElementById("actualites-verifs-liste").innerHTML = liste.map(v=>`<li><a href="${lien(v.url)}" target="_blank" rel="noopener">${esc(v.titre)}</a><span class="verif-meta">${esc(v.media)} · ${esc(ilYA(v.date))}</span></li>`).join("");
+  bloc.hidden = false;
+}
 function renderActualites(){
+  renderVerifications();
   const liste = document.getElementById("actualites-liste");
   if(!ACTUALITES?.sujets?.length){ liste.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
   const lus = (ACTUALITES.medias || []).filter(m=>m.lu).map(m=>m.nom);
@@ -7449,6 +7478,7 @@ function lienPartage(type){
   if(type === "agenda") return { titre: "Ce que l'Assemblée nationale examine ces prochains jours", url: `${base}#meetings` };
   if(type === "histo"){ const g = PARTIES.find(p=>p.id===selectedPartyId); return { titre: `Comment vote le groupe ${g ? g.nom : selectedPartyId} à l'Assemblée`, url: `${base}#histo-${selectedPartyId}` }; }
   if(type === "actualites") return { titre: "Les sujets du moment dans la presse politique", url: `${base}#actualites` };
+  if(type === "verifications") return { titre: "Vérifications des faits : les derniers articles des rédactions", url: `${base}#actualites` };
   if(type === "candidats") return { titre: "Présidentielle 2027 : tous les candidats déclarés", url: `${base}#candidats` };
   if(type === "dirigeants") return { titre: "Les chefs de parti et les groupes à l'Assemblée nationale", url: `${base}#dirigeants` };
   if(type === "chiffres") return { titre: "Chômage, inflation, dette : les chiffres clés de la France", url: `${base}#chiffres` };

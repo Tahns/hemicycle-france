@@ -165,6 +165,20 @@ async function checkActualites() {
   }
 }
 
+// Vérifications des faits : titres de rédactions, liens https vers le site de la rédaction qui les publie
+async function checkVerifications() {
+  const data = JSON.parse(await readFile("data/verifications.json", "utf-8").catch(() => "null"));
+  if (!data) return;
+  if (!Array.isArray(data.verifications) || !Array.isArray(data.medias)) return err("verifications.json : format invalide");
+  const sites = data.medias.map((m) => new URL(m.site).hostname.replace(/^www\./, ""));
+  for (const a of data.verifications) {
+    const hote = (() => { try { return new URL(a.url).hostname.replace(/^www\./, ""); } catch { return ""; } })();
+    if (!a.titre || !a.media || isNaN(Date.parse(a.date))) err(`verifications.json : entrée incomplète (${a.url})`);
+    if (!/^https:\/\//.test(a.url || "") || !sites.some((d) => hote === d || hote.endsWith("." + d))) err(`verifications.json : lien hors des rédactions retenues (${a.url})`);
+  }
+  console.log(`[check-data] verifications.json : ${data.verifications.length} titre(s).`);
+}
+
 // Bandeau « En direct » (fichier optionnel, écrit par scripts/detecter-direct.js)
 async function checkDirect() {
   const d = JSON.parse(await readFile("data/direct.json", "utf-8").catch(() => "null"));
@@ -448,6 +462,7 @@ await checkWorkflows();
 await checkProbabilites();
 await checkQuiz();
 await checkActualites();
+await checkVerifications();
 await checkDirect();
 await checkInstagramFile();
 await checkDeputes();
