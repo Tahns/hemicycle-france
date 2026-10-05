@@ -9,7 +9,7 @@
  *
  * Garde-fous (tous obligatoires) :
  *  - UNE seule publication par exécution ;
- *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus 4 par jour (Paris) ;
+ *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus 4 par jour (Paris) ; au moins 60 min entre deux stories ;
  *  - une entrée créée il y a plus de 3 h est marquée « perimee » et n'est jamais publiée ;
  *  - jamais deux fois le même id (registre) ;
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
@@ -36,6 +36,7 @@ const FICHIER_REGISTRE = process.env.PUBLIER_REGISTRE || path.join(RACINE, "data
 const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "stories-config.json");
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.facebook.com/v21.0").replace(/\/+$/, "");
 const MAX_PAR_JOUR = 4;
+const ESPACEMENT_MIN = 60; // minutes minimum entre deux stories publiées (jamais d'enchaînement)
 const FRAICHEUR_H = 3;
 const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;
@@ -82,6 +83,8 @@ function choisir({ file, registre, config, now = new Date() }) {
   const jour = jourParis(now);
   const publieesJour = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe && jourParis(e.publieLe) === jour).length;
   if (publieesJour >= MAX_PAR_JOUR) return sortie(`plafond atteint : ${publieesJour} publication(s) aujourd'hui (maximum ${MAX_PAR_JOUR})`);
+  const dernier = Math.max(0, ...[...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe).map((e) => Date.parse(e.publieLe)));
+  if (dernier && now.getTime() - dernier < ESPACEMENT_MIN * 60000) return sortie(`dernière publication il y a moins de ${ESPACEMENT_MIN} min`);
   let ok = purgerReserve(candidates, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
   if (config.monetisation) ok = purgerPresse(ok);
   if (!ok.length) return sortie(candidates.length ? `${candidates.length} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");

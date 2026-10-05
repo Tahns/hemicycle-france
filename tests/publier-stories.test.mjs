@@ -111,6 +111,13 @@ try {
     assert.strictEqual(publications().length, 0);
     assert.match(r.sortie, /plafond/);
   }
+  // Espacement : une story publiée il y a moins d'une heure bloque la suivante
+  {
+    const reg = { entrees: [{ id: "eeeeeeeeeeee", statut: "publiee", publieLe: il_y_a(0.25), mediaId: "m1" }] };
+    const r = await lancer({ entrees: [frais], registre: reg });
+    assert.strictEqual(publications().length, 0);
+    assert.match(r.sortie, /moins de 60 min/);
+  }
   // Entrée périmée (> 3 h) : marquée « perimee », jamais publiée
   {
     const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(3.5))] });

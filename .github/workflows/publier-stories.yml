@@ -1,7 +1,7 @@
 name: Publier les stories
 on:
   schedule:
-    - cron: "11,26,41,56 * * * *"
+    - cron: "11 * * * *"
   # Après chaque relevé d'actualités : la story sort sans attendre le quart d'heure suivant
   workflow_run:
     workflows: ["Actualités"]
