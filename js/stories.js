@@ -877,7 +877,11 @@ STORY_PLUS.meeting = async (ctx, info)=>{
   return { nom:`meeting-${slugDep(m.titre).slice(0, 40)}` };
 };
 
+// Stories d'actualité : modules séparés, chargés ensemble (A « à la une » et E « en direct » : stories-actu ; B « en bref » et D « dossier » : stories-actu-liste ;
+// C « le chiffre », F « face à face » et G « date à retenir » : stories-actu-fait). Chacun remplit STORY_PLUS ; les définitions ci-dessus ne servent que de secours.
+const STORY_ACTU_TYPES = ["actualite", "actualites", "chiffre", "facea", "date"];
 async function dessinerStory(type, info){
+  if(STORY_ACTU_TYPES.includes(type)) await Promise.all(["stories-actu", "stories-actu-liste", "stories-actu-fait"].map(chargerModule));
   await Promise.all(["600 60px Newsreader", "700 60px Newsreader", "400 30px \"Public Sans\"", "600 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
   c.width = STORY.L; c.height = STORY.H;
