@@ -21,6 +21,9 @@ import { readFile, writeFile, mkdir, access } from "fs/promises";
 import { pathToFileURL } from "url";
 
 const DATA_FILE = "data/portraits.json";
+const CHOIX_FILE = "data/portraits-choix.json"; // fichier Commons imposé (sinon : image principale de l'article Wikipédia) ; licence toujours revérifiée par l'API
+// Personnalités citées sans être candidates ni dirigeantes, y compris parlementaires (leur portrait officiel reste prioritaire sur le site)
+const CITEES = ["Raphaël Glucksmann", "François Hollande"];
 const DOSSIER = "photos/personnalites";
 const DOSSIER_HD = `${DOSSIER}/hd`;
 const LARGEURS_HD = [640, 480, 360, 280];
@@ -75,29 +78,38 @@ export async function recupererHd(fichierCommons, { api: appel = api, telecharge
     if (!res.ok) throw new Error(`téléchargement HD impossible (HTTP ${res.status})`);
     if (!/image\/jpeg/.test(res.headers.get("content-type") || "")) throw new Error(`HD : format non JPEG (${res.headers.get("content-type")})`);
     const octets = Buffer.from(await res.arrayBuffer());
-    if (octets.length <= MAX_OCTETS_HD) return { octets, largeur, licence, auteur: texte(info.extmetadata?.Artist?.value).slice(0, 120) || null, source: info.descriptionurl };
+    if (octets.length <= MAX_OCTETS_HD) return { octets, largeur, licence, auteur: texte(info.extmetadata?.Artist?.value).slice(0, 120) || "Auteur inconnu", source: info.descriptionurl };
     derniere = `${Math.round(octets.length / 1024)} Ko à ${largeur} px`;
   }
   throw new Error(`HD trop lourde (${derniere}, maximum ${MAX_OCTETS_HD / 1024} Ko)`);
 }
 
 async function main() {
-  const [deputes, senateurs, dirigeants, candidats, gouvernement, justice, presidents] = await Promise.all(
-    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement", "justice", "presidents"].map((f) => lire(`data/${f}.json`))
+  const [deputes, senateurs, dirigeants, candidats, gouvernement, justice, presidents, actualites, choixBrut] = await Promise.all(
+    ["deputes", "senateurs", "dirigeants", "candidats", "gouvernement", "justice", "presidents", "actualites"].map((f) => lire(`data/${f}.json`)).concat(lire(CHOIX_FILE))
   );
+  const choix = choixBrut?.choix || {};
+  // Personnes citées dans les actualités (objets avec « nom » et « parti »)
+  const citeesActu = new Set();
+  (function parcourir(o) { if (o && typeof o === "object") { if (typeof o.nom === "string" && "parti" in o) citeesActu.add(o.nom); Object.values(o).forEach(parcourir); } })(actualites);
   // Présidents de la République (data/presidents.json) : le titre de l'article Wikipédia vient de leur lien
   const presidentsListe = (presidents?.regimes || []).flatMap((r) => r.presidents || []);
   const titres = Object.fromEntries(presidentsListe.map((p) => [p.nom, decodeURIComponent(String(p.wikipedia || "").split("/wiki/")[1] || "").replace(/_/g, " ")]));
   const data = (await lire(DATA_FILE)) || { source: "Wikimedia Commons (licences libres), via l'image principale de l'article Wikipédia", portraits: {} };
   const parlementaires = new Set([...(deputes?.deputes || []), ...(senateurs?.senateurs || [])].map((p) => p.nom));
+  const candidatsNoms = new Set((candidats?.candidats || []).map((c) => c.nom));
   const noms = [...new Set([
     ...(dirigeants?.dirigeants || []).map((d) => d.nom),
     ...(candidats?.candidats || []).map((c) => c.nom),
     ...(gouvernement?.membres || []).map((m) => m.nom),
     ...(justice?.condamnations || []).map((c) => c.nom),
     ...presidentsListe.map((p) => p.nom),
+    ...Object.keys(choix),
+    ...CITEES,
+    ...citeesActu,
     "Emmanuel Macron",
-  ])].filter((n) => n && n !== "—" && !parlementaires.has(n));
+  ])].filter((n) => n && n !== "—" && (!parlementaires.has(n) || candidatsNoms.has(n) || CITEES.includes(n) || choix[n]));
+  // Les candidats parlementaires (Le Pen, Attal…) ont un portrait officiel sur le site, mais les stories candidat cherchent photos/personnalites/
 
   await mkdir(DOSSIER, { recursive: true });
   const maintenant = new Date();
@@ -105,12 +117,12 @@ async function main() {
   for (const nom of noms) {
     const p = data.portraits[nom];
     const fichierLocal = `${DOSSIER}/${slug(nom)}.jpg`;
-    if (p?.fichier && (await existe(fichierLocal))) continue;
+    if (p?.fichier && (await existe(fichierLocal)) && (!choix[nom] || choix[nom] === p.fichier)) continue;
     // Sans article reconnu : nouvel essai le lendemain ; licence non libre : au bout de 30 jours
     if (p && !p.fichier && (maintenant - new Date(p.essai)) / 864e5 < (/pas d'article/.test(p.raison || "") ? 1 : 30)) continue;
     if (traites++ >= MAX) break;
     try {
-      const img = await imageArticle(nom, titres[nom]);
+      const img = choix[nom] ? { fichier: choix[nom], page: `https://fr.wikipedia.org/wiki/${encodeURIComponent(nom.replace(/ /g, "_"))}` } : await imageArticle(nom, titres[nom]);
       if (!img) throw new Error("pas d'article ou pas d'image principale");
       const d = await api(`https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=120&titles=${encodeURIComponent("File:" + img.fichier)}`);
       const info = Object.values(d.query?.pages || {})[0]?.imageinfo?.[0];
@@ -120,7 +132,7 @@ async function main() {
       const res = await fetch(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
       if (!res.ok || !/image\/(jpeg|png)/.test(res.headers.get("content-type") || "")) throw new Error(`téléchargement impossible (HTTP ${res.status})`);
       await writeFile(fichierLocal, Buffer.from(await res.arrayBuffer()));
-      data.portraits[nom] = { fichier: img.fichier, licence, auteur: texte(m.Artist?.value).slice(0, 120) || null, source: info.descriptionurl, article: img.page };
+      data.portraits[nom] = { fichier: img.fichier, licence, auteur: texte(m.Artist?.value).slice(0, 120) || "Auteur inconnu", source: info.descriptionurl, article: img.page };
       ajouts++;
       log(`${nom} : ${img.fichier} (${licence})`);
     } catch (e) {

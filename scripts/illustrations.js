@@ -14,7 +14,7 @@ import { readFile, access } from "fs/promises";
 import { slug } from "./fetch-portraits.js";
 
 // Personnalités nationales absentes des autres listes
-export const FIGURES = ["Emmanuel Macron"];
+export const FIGURES = ["Emmanuel Macron", "Raphaël Glucksmann", "François Hollande"];
 
 const lire = async (f) => JSON.parse(await readFile(f, "utf-8").catch(() => "null"));
 const existe = (f) => access(f).then(() => true, () => false);
