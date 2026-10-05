@@ -3,7 +3,7 @@
    Style « bleu question / réponse » : fond bleu, un élément géant, carte crème avec une citation de presse.
    Tout est dans une fonction : aucun nom ne s'ajoute à l'espace global en dehors de STORY_PLUS. */
 (() => {
-const BLEU = "#1B3A8C", CIEL = "#C9D3FF", CREME = "#F5F1E8", ROUGE = "#C8102E", ROSE = "#FF6B7A", ROSE2 = "#FF8D98", ENCRE = "#1C1B18", PALE = "#625D53", FILET = "#D3CBBA";
+const DA = STORY_DA, BLEU = DA.fond, CIEL = DA.ciel, CREME = DA.creme, ROUGE = DA.rouge, ROSE = DA.rose, ROSE2 = DA.rose, ENCRE = DA.encre, PALE = STORY.pale, FILET = STORY.filet;
 const { L, H, marge } = STORY, LARG = L - 2 * marge;
 const PUB = '"Public Sans"', NEW = '"Newsreader"';
 const fnt = (poids, taille, fam = PUB) => `${poids} ${taille}px ${fam}`;
@@ -65,48 +65,38 @@ function articleCite(s, mots){
   }
   return best;
 }
+// Contexte du sujet ; pendant la réserve électorale (loi du 19 juillet 1977), aucun résultat de sondage
+const contexteSur = s => (s.contexte || []).filter(c => !(c.type === "sondage" && periodeReserveSondages()));
 const videoDe = s => (s.articles || []).find(a => a.video)?.media || "";
 
 /* ---------- Éléments communs ---------- */
-function fond(ctx, etiquette, { fondEt = ROUGE, couleurEt = "#fff" } = {}){
-  ctx.fillStyle = BLEU; ctx.fillRect(0, 0, L, H);
-  // marque : arc, point, nom (sous la zone masquée par Instagram)
-  const cx = marge + 34, cy = 264;
-  ctx.lineWidth = 7; ctx.lineCap = "round";
-  ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, 30, Math.PI, 0); ctx.stroke();
-  ctx.strokeStyle = ROSE; ctx.beginPath(); ctx.arc(cx, cy, 15, Math.PI, 0); ctx.stroke();
-  ctx.lineCap = "butt"; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2 * Math.PI); ctx.fill();
-  ecrire(ctx, "Hémicycle France", marge + 86, cy + 12, { poids: 800, taille: 38 });
-  // étiquette plate
+function fond(ctx, etiquette, { fondEt = ROUGE } = {}){
+  storyFondTheme(ctx);
+  storyMarque(ctx);
+  // étiquette plate : rouge (« le chiffre du jour »), blanche (« à noter »)
   ctx.font = fnt(800, 26); ctx.letterSpacing = "4px";
-  const txt = storyLignes(ctx, etiquette.toUpperCase(), LARG - 40, 1)[0], w = ctx.measureText(txt).width + 40 - 4;
-  ctx.fillStyle = fondEt; ctx.fillRect(marge, 312, w, 52);
-  ctx.fillStyle = couleurEt; ctx.textBaseline = "middle"; ctx.fillText(txt, marge + 20, 312 + 27); ctx.textBaseline = "alphabetic"; ctx.letterSpacing = "0px";
+  const txt = storyLignes(ctx, etiquette.toUpperCase(), LARG - 44, 1)[0]; ctx.letterSpacing = "0px";
+  storyEtiquette(ctx, txt, marge, DA.etiquetteY, fondEt === ROUGE ? "rouge" : "blanc");
   return 364;
 }
-// Pied discret : ligne « Repris par N médias » (facultative), source en petit, puis le compte. Renvoie l'ordonnée du haut du bloc.
-function pied(ctx, { medias = [], source, cta = "Suivre" }){
-  const bas = 1580, l = [];
+// Pied commun : ligne « Repris par N médias » (facultative), source en petit, puis « accroche → @compte ». Renvoie l'ordonnée du haut du pied (le contenu s'arrête 30 px plus haut).
+function pied(ctx, { medias = [], source, cta = "Toute l'actu politique" }){
+  let ligne = "";
   if(medias.length >= 2){
     const n = medias.length; let k = Math.min(medias.length, 3), t;
     do { t = `Repris par ${n} médias · ${medias.slice(0, k).join(", ")}${k < n ? "…" : ""}`; k--; }
     while(k >= 0 && mesurer(ctx, t, 700, 26) > LARG);
     if(k < 0) t = `Repris par ${n} médias`;
-    l.push({ t: [t], taille: 26, poids: 700, couleur: "#fff" });
+    ligne = t;
   }
-  const ls = lignes(ctx, source, 600, 23, PUB, LARG, 3);
-  l.push({ t: ls, taille: 23, poids: 600, couleur: CIEL });
-  let h = 0; for(const b of l) h += b.t.length * Math.round(b.taille * 1.3) + 6;
-  let y = bas - h;
-  for(const b of l){ b.t.forEach((x, i) => ecrire(ctx, x, marge, y + b.taille + i * Math.round(b.taille * 1.3), { poids: b.poids, taille: b.taille, couleur: b.couleur })); y += b.t.length * Math.round(b.taille * 1.3) + 6; }
-  ecrire(ctx, `${cta} → ${COMPTE_STORY}`, L / 2, 1634, { poids: 800, taille: 34, align: "center" });
-  return bas - h;
+  storyPied(ctx, source, { ligne, accroche:cta });
+  return STORY.bas + 30;
 }
 // Carte crème : citation de presse, média, contexte, vidéo. Mesure (dessiner = false) ou dessine ; renvoie la hauteur.
 function carte(ctx, d, tq, x, y, w, dessiner, { maxQ = 99, tc = 27 } = {}){
   const wi = w - 96, xi = x + 48, lh = tq * 1.26;
   let c = y + 44;
-  if(dessiner){ ctx.fillStyle = CREME; ctx.beginPath(); ctx.roundRect(x, y, w, dessiner, 30); ctx.fill(); }
+  if(dessiner){ ctx.fillStyle = CREME; ctx.beginPath(); ctx.roundRect(x, y, w, dessiner, DA.rayon); ctx.fill(); }
   if(d.citation){
     const lq = lignes(ctx, `« ${d.citation} »`, 700, tq, PUB, wi, maxQ);
     if(!/»$/.test(lq[lq.length - 1])){ // citation tronquée : on referme proprement le guillemet
@@ -190,10 +180,10 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   const d = {
     citation: art ? titreCite(art.titre) : "", media: art?.media || "",
     note: art ? (medias.length >= 2 ? "Chiffre tel que rapporté par plusieurs médias" : "Chiffre tel que rapporté par la presse") : "",
-    contexte: s.contexte || [], video: videoDe(s)
+    contexte: contexteSur(s), video: videoDe(s)
   };
   const y0 = fond(ctx, "Le chiffre du jour");
-  const yPied = pied(ctx, { medias, source: "Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée." });
+  const yPied = pied(ctx, { medias, source: "Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée.", cta: "Tous les chiffres" });
   const bas = yPied - 30, jt = jetons(ch.valeur);
   let tnMax = 300; while(tnMax > 120 && largeurChiffre(ctx, jt, tnMax) > LARG) tnMax -= 2;
   const unite = String(ch.unite || "").trim();
@@ -260,7 +250,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   const medias = mediasDe(s), titre = titreAffiche(s);
   const noms = pers.map(p => p.nom), derniers = noms.map(n => n.split(/\s+/).slice(-1)[0]);
   const art = articleCite(s, [...noms, ...derniers]);
-  const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: s.contexte || [], video: videoDe(s) };
+  const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "Face à face");
   const uniq = [...new Set(credits)];
   const yPied = pied(ctx, { medias, source: `Titres relevés dans la presse.${uniq.length ? ` Photos : ${uniq.join(" ; ")}.` : ""}` });
@@ -305,7 +295,7 @@ STORY_PLUS.date = async (ctx, info) => {
   await polices();
   const medias = mediasDe(s), titre = titreAffiche(s);
   const art = articleCite(s, [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois]);
-  const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: s.contexte || [], video: videoDe(s) };
+  const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "À noter", { fondEt: "#fff", couleurEt: BLEU });
   const yPied = pied(ctx, { medias: [], source: "Date annoncée par la presse. L'ordre du jour peut changer.", cta: "Ne rien rater" });
   const bas = yPied - 30;
