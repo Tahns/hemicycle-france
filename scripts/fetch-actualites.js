@@ -17,6 +17,9 @@
  *    (loi du 19 juillet 1977, art. 11) ;
  *  - « dossiers » (scripts/dossiers.cjs) : mots-clés communs à >= 6 articles de >= 4 médias sur 48 h ; faits divers et
  *    accusations écartés, titres neutres ;
+ *  - « titrePropre », « contexte », « chiffre », « date », « video » (scripts/titres-propres.cjs) : titre rédigé par le site à
+ *    partir du recoupement de plusieurs médias (jamais un titre de presse, qui n'est que cité avec son média), contexte tiré de
+ *    nos données officielles, liens vidéo signalés ; en cas de doute, le champ est absent ;
  *  - si moins de 3 médias répondent, le fichier n'est pas modifié (erreur signalée par le workflow).
  *
  * USAGE : node scripts/fetch-actualites.js [--dry-run] [--dossier=flux/]   (flux locaux <id>.xml, tests)
@@ -29,6 +32,7 @@ import { construireIndex, illustrer } from "./illustrations.js";
 const requireCjs = createRequire(import.meta.url);
 const { concerneLaFrance } = requireCjs("./pertinence.cjs");
 const { construireDossiers } = requireCjs("./dossiers.cjs");
+const { estVideo, enrichirSujet } = requireCjs("./titres-propres.cjs");
 
 const DATA_FILE = "data/actualites.json";
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -199,6 +203,12 @@ async function main() {
     .filter((s) => concerneLaFrance(s.articles.map((a) => a.titre)))
     .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, illustration: illustrer(s.articles.map((a) => a.titre), motifs), articles: central(s.articles) }))
     .sort((a, b) => b.medias - a.medias || b.derniere.localeCompare(a.derniere));
+
+  // Ce que le site ajoute : titre à nous, contexte tiré de nos données, chiffre, date, liens vidéo (fichiers absents ignorés)
+  const lire = (f) => readFile(`data/${f}.json`, "utf-8").then(JSON.parse).catch(() => null);
+  const donnees = { gouvernement: await lire("gouvernement"), dirigeants: await lire("dirigeants"), deputes: await lire("deputes"), sondages: await lire("sondages"), agenda: await lire("agenda-an"), tours: TOURS_PRESIDENTIELLE };
+  for (const d of dossiers) for (const a of d.articles || []) if (estVideo(a.url)) a.video = true;
+  for (const s of sortieSujets) enrichirSujet(s, dossiers, donnees, maintenant);
 
   const sortie = {
     source: "Flux RSS publics de la rubrique politique de médias nationaux",

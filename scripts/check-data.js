@@ -174,6 +174,25 @@ async function checkActualites() {
       }
     }
   }
+  // Ce que le site ajoute (facultatif) : titre à nous, contexte, chiffre, date, liens vidéo
+  const brefs = [...data.sujets, ...(Array.isArray(data.dossiers) ? data.dossiers : [])];
+  for (const a of brefs.flatMap((s) => s.articles || [])) if (a.video !== undefined && a.video !== true) err(`actualites.json : video doit valoir true (${a.url})`);
+  data.sujets.forEach((s, i) => {
+    const nom = `actualites.json : sujet ${i}`;
+    if (s.titrePropre !== undefined) {
+      const t = s.titrePropre?.titre;
+      if (typeof t !== "string" || t.length < 3 || t.length > 80 || !["dossier", "recoupement"].includes(s.titrePropre.origine)) err(`${nom} : titrePropre invalide`);
+      else {
+        const plat = (x) => String(x).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+        if ((s.articles || []).some((a) => plat(a.titre) === plat(t))) err(`${nom} : titrePropre identique à un titre de presse`);
+        if ((s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne`);
+        if (s.titrePropre.origine === "recoupement" && new Set((s.articles || []).map((a) => a.media)).size < 2) err(`${nom} : titrePropre sans recoupement`);
+      }
+    }
+    if (s.contexte !== undefined && (!Array.isArray(s.contexte) || s.contexte.length === 0 || s.contexte.length > 2 || s.contexte.some((c) => !c?.texte || !c?.source || !c?.type))) err(`${nom} : contexte invalide`);
+    if (s.chiffre !== undefined && (!s.chiffre?.valeur || !s.chiffre?.unite)) err(`${nom} : chiffre invalide`);
+    if (s.date !== undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(s.date?.iso || "") || !s.date.jour || !s.date.mois)) err(`${nom} : date invalide`);
+  });
   // Illustrations : uniquement des images hébergées sur le site, qui existent
   for (const s of data.sujets) for (const p of s.illustration?.personnes || []) {
     if (p.photo && (!/^photos\/(deputes|senateurs|personnalites)\/[\w-]+\.jpg$/.test(p.photo) || !existsSync(p.photo))) err(`actualites.json : photo absente ou non hébergée (${p.photo})`);

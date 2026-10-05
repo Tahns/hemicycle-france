@@ -41,21 +41,66 @@ const clauses = (t) => nettoyer(t).split(/[,;:.!?…«»"“”()—–]+| - /).
 const motsDe = (c) => c.match(/[\p{L}0-9]+(?:-[\p{L}0-9]+)*/gu) || [];
 const estMotVide = (m) => MOTS_VIDES.has(plat(m));
 
+
+const INSTITUTIONS = new Set(["senat", "assemblee", "nationale", "etat", "elysee", "matignon", "republique", "france", "europe", "parlement", "gouvernement", "union", "conseil", "constitutionnel", "palais", "bourbon"]);
+const majuscules = (t) => (String(t).match(/\p{Lu}/gu) || []).length;
+/** Participe passé / forme verbale en tête : « Examiné au Sénat », « Annoncé… » ne sont pas des titres de sujet. */
+const estParticipe = (m) => /(é|ée|és|ées|ant)$/i.test(m) && (!/t(é|ée|és|ées)$/i.test(m) || /^(adopt|vot|rejet|présent|dénonc|prévu|promulgu|déposé|écart|lanc|arrêt|visé|attaqu|ciblé|débattu|porté|menacé|contesté)/i.test(m)) || /^(examin|annonc|dénonc|attendu|ouvert|mis|pris|prévu|voté)/i.test(m);
+/** Deux mots de suite à majuscule initiale : prénom + nom, pas un intitulé de sujet. */
+const ressembleANom = (t) => { const w = t.split(" "); return w.some((x, i) => i > 0 && /^\p{Lu}/u.test(x) && /^\p{Lu}/u.test(w[i - 1]) && !estMotVide(x)); };
+
+/** Nom d'un texte de loi cité entre guillemets dans au moins la moitié des titres : « Projet de loi « casseurs-payeurs » ». */
+function titreDeTexte(articles) {
+  const compte = new Map();
+  for (const a of articles) {
+    const vus = new Set();
+    for (const m of String(a.titre).matchAll(/\b(projet de loi|proposition de loi|loi)\s+(?:organique\s+)?[«"“]\s*([^»"”]{3,40}?)\s*[»"”]/giu)) {
+      const cle = plat(m[2]).replace(/-/g, " ");
+      if (vus.has(cle)) continue;
+      vus.add(cle);
+      const e = compte.get(cle) || { n: 0, noms: new Map(), formes: new Map() };
+      e.n++;
+      e.noms.set(m[2], (e.noms.get(m[2]) || 0) + 1);
+      const f = m[1].toLowerCase();
+      e.formes.set(f, (e.formes.get(f) || 0) + 1);
+      compte.set(cle, e);
+    }
+  }
+  const e = [...compte.values()].sort((x, y) => y.n - x.n)[0];
+  if (!e || e.n < Math.max(2, Math.ceil(articles.length * 0.5))) return null;
+  const forme = [...e.formes].filter(([f]) => f !== "loi").sort((x, y) => y[1] - x[1])[0]?.[0] || "loi";
+  const nom = [...e.noms].sort((x, y) => y[1] - x[1])[0][0];
+  return `${forme.charAt(0).toUpperCase()}${forme.slice(1)} « ${nom} »`;
+}
+
 /** Titre à nous : null si rien de solide. Les dossiers (data/actualites.json) ont déjà un titre éditorial. */
 function titrePropre(sujet, dossiers = []) {
   const articles = sujet?.articles || [];
   if (!articles.length) return null;
   const urls = new Set(articles.map((a) => a.url));
-  const dossier = (dossiers || []).find((d) => d?.titre && (d.articles || []).some((a) => urls.has(a.url)));
+  // Dossier : au moins la moitié des articles du sujet y figurent (un seul article dans un dossier ne suffit pas)
+  const dossier = (dossiers || []).find((d) => d?.titre && articles.filter((a) => (d.articles || []).some((x) => x.url === a.url)).length * 2 >= articles.length);
   if (dossier) return { titre: dossier.titre, origine: "dossier" };
 
   const medias = new Set(articles.map((a) => a.media)).size;
   if (medias < 2) return null; // un seul média : rien à recouper
+  // Des médias d'un même groupe reprennent parfois le même article, titre identique : ce n'est pas un recoupement
+  if (new Set(articles.map((a) => plat(nettoyer(a.titre)))).size < 2) return null;
+  const loi = titreDeTexte(articles);
+  if (loi) return { titre: loi, origine: "recoupement" };
   const N = articles.length, df = new Map();
   const interdits = new Set([
     ...(sujet.illustration?.personnes || []).flatMap((p) => plat(p.nom).split(/[\s-]+/)),
     ...articles.map((a) => plat(a.media)),
   ]);
+  // Noms propres : mot à majuscule ailleurs qu'en début de phrase (et le mot capitalisé qui le précède : prénom)
+  const propres = new Set();
+  for (const a of articles) for (const c of clauses(a.titre)) {
+    const w = motsDe(c);
+    w.forEach((x, i) => {
+      if (i > 0 && /^\p{Lu}/u.test(x) && !INSTITUTIONS.has(plat(x))) { propres.add(plat(x)); if (/^\p{Lu}/u.test(w[i - 1])) propres.add(plat(w[i - 1])); }
+    });
+  }
   for (const a of articles) {
     const vus = new Set();
     for (const c of clauses(a.titre)) {
@@ -66,7 +111,9 @@ function titrePropre(sujet, dossiers = []) {
         const cle = g.map(plat).join(" ");
         if (vus.has(cle)) continue;
         vus.add(cle);
-        const e = df.get(cle) || { n: 0, texte: g.join(" "), len: n, cle };
+        const texte = g.join(" ");
+        const e = df.get(cle) || { n: 0, texte, len: n, cle };
+        if (majuscules(texte) < majuscules(e.texte)) e.texte = texte; // forme avec le moins de majuscules (« casse de phrase » écartée)
         e.n++;
         df.set(cle, e);
       }
@@ -79,6 +126,9 @@ function titrePropre(sujet, dossiers = []) {
     if (m.every((x) => TROP_GENERIQUES.has(x) || interdits.has(x) || MOTS_VIDES.has(x))) return false;
     if (/\d/.test(e.cle) || m.some((x) => MOIS.map(plat).includes(x))) return false; // pas de chiffre ni de date dans un titre
     if (e.len === 1 && e.texte.length < 8) return false;
+    if (m.some((x) => (interdits.has(x) && !MOTS_VIDES.has(x)) || propres.has(x))) return false; // jamais le nom d'une personne citée
+    if (estParticipe(e.texte.split(" ")[0])) return false; // « Examiné au Sénat » : un verbe, pas un sujet
+    if (ressembleANom(e.texte)) return false; // « Sébastien Lecornu » : deux majuscules de suite = un nom propre
     return e.texte.length >= 8 && e.texte.length <= 64;
   }).sort((a, b) => b.n - a.n || b.len - a.len);
   if (!bons.length) return null;
@@ -86,6 +136,17 @@ function titrePropre(sujet, dossiers = []) {
   // L'expression doit vraiment résumer : elle couvre au moins 2 mots, ou un mot long repris par la moitié des titres
   if (meilleur.len < 2 && meilleur.texte.length < 9) return null;
   return { titre: meilleur.texte.charAt(0).toUpperCase() + meilleur.texte.slice(1), origine: "recoupement" };
+}
+
+/** Tous les champs « média » d'un sujet, prêts à écrire (seulement ceux qui existent). Marque aussi les vidéos. */
+function enrichirSujet(sujet, dossiers, donnees, maintenant = new Date()) {
+  for (const a of sujet.articles || []) if (estVideo(a.url)) a.video = true; else delete a.video;
+  for (const k of ["titrePropre", "contexte", "chiffre", "date"]) delete sujet[k];
+  const tp = titrePropre(sujet, dossiers); if (tp) sujet.titrePropre = tp;
+  const c = contexteSujet(sujet, donnees, maintenant); if (c.length) sujet.contexte = c;
+  const ch = chiffreSujet(sujet); if (ch) sujet.chiffre = ch;
+  const da = dateSujet(sujet, maintenant); if (da) sujet.date = da;
+  return sujet;
 }
 
 const dateFr = (iso) => { const [y, m, j] = iso.split("-").map(Number); return `${j === 1 ? "1er" : j} ${MOIS[m - 1]}${y ? "" : ""}`; };
@@ -102,6 +163,7 @@ function fonctionDe(nom, donnees) {
   return null;
 }
 
+const JUDICIAIRE = /mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement/i;
 function enReserve(maintenant, tours) {
   const p = Object.fromEntries(new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
     .formatToParts(maintenant).map((x) => [x.type, x.value]));
@@ -126,7 +188,9 @@ function contexteSujet(sujet, donnees = {}, maintenant = new Date()) {
     if (l.length) sortie.push({ type: "sondage", texte: `Dernier sondage ${inst.nom} (${inst.date}) : ${l.join(", ")}`, source: `Commission des sondages (notice ${inst.nom})` });
   }
   // 2. Fonction des personnes citées
-  const fonctions = personnes.map((p) => fonctionDe(p.nom, donnees)).filter(Boolean);
+  // (jamais quand les titres relèvent d'une affaire judiciaire : on ne qualifie pas une personne mise en cause)
+  const judiciaire = (sujet.articles || []).some((a) => JUDICIAIRE.test(a.titre || ""));
+  const fonctions = judiciaire ? [] : personnes.map((p) => fonctionDe(p.nom, donnees)).filter(Boolean);
   if (fonctions.length) sortie.push({ type: "personnes", texte: fonctions.slice(0, 2).map((f) => f.texte).join(" · "), source: fonctions[0].source });
   // 3. Ordre du jour de l'Assemblée : au moins 2 mots rares en commun avec le titre propre
   const titre = sujet.titrePropre?.titre || sujet.titrePropre;
@@ -186,8 +250,9 @@ function dateSujet(sujet, maintenant = new Date()) {
       trouvees.set(iso, e);
     }
   }
-  const e = [...trouvees.values()].sort((a, b) => b.medias.size - a.medias.size || a.iso.localeCompare(b.iso))[0];
+  // Une date reprise par un seul média (fête locale, annonce isolée) n'est pas un rendez-vous recoupé
+  const e = [...trouvees.values()].filter((x) => x.medias.size >= 2).sort((a, b) => b.medias.size - a.medias.size || a.iso.localeCompare(b.iso))[0];
   return e ? { iso: e.iso, jour: e.jour, mois: e.mois } : null;
 }
 
-module.exports = { estVideo, titrePropre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer };
+module.exports = { estVideo, titrePropre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
