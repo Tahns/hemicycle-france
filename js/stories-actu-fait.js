@@ -43,7 +43,7 @@ function ecrireLignes(ctx, f, x, yHaut, { poids = 700, fam = NEW, couleur = "#ff
 const sujetDe = info => ACTUALITES?.sujets?.[Number(info)] || null;
 const rubrique = s => (THEMES_ACTU[s?.illustration?.theme] || THEMES_ACTU.politique)[2];
 // Notre titre ; à défaut, un titre de repli neutre (jamais un titre de presse en grand titre)
-const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && s.titrePropre.titre.trim()) || `${rubrique(s)} · à la une`;
+const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && s.titrePropre.titre.trim()) || `${rubrique(s)} · à\u00A0la\u00A0une`;
 const mediasDe = s => [...new Set((s.articles || []).map(a => a.media).filter(Boolean))];
 const sansAccent = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 // Titre de presse prêt à être cité : sans rubrique en tête, guillemets internes typographiques
@@ -109,6 +109,11 @@ function carte(ctx, d, tq, x, y, w, dessiner, { maxQ = 99, tc = 27 } = {}){
   if(dessiner){ ctx.fillStyle = CREME; ctx.beginPath(); ctx.roundRect(x, y, w, dessiner, 30); ctx.fill(); }
   if(d.citation){
     const lq = lignes(ctx, `« ${d.citation} »`, 700, tq, PUB, wi, maxQ);
+    if(!/»$/.test(lq[lq.length - 1])){ // citation tronquée : on referme proprement le guillemet
+      let t = lq[lq.length - 1].replace(/…$/, "");
+      while(t.includes(" ") && mesurer(ctx, t + "… »", 700, tq) > wi) t = t.slice(0, t.lastIndexOf(" "));
+      lq[lq.length - 1] = t + "… »";
+    }
     if(dessiner) lq.forEach((l, i) => ecrire(ctx, l, xi, c + tq * 0.95 + i * lh, { poids: 700, taille: tq, couleur: ENCRE }));
     c += lq.length * lh;
     if(d.media){ c += 8; if(dessiner) ecrire(ctx, "— " + d.media, xi, c + 26, { poids: 800, taille: 27, couleur: BLEU }); c += 36; }
@@ -265,7 +270,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   // noms (2 lignes au plus) et partis sous chaque portrait
   const nl = S => pers.map(p => lignes(ctx, p.nom, 800, 38, PUB, S + 40, 2));
   let choix = null;
-  for(const S of [416, 396, 376, 356, 336, 316, 296, 276]){
+  for(const S of [416, 396, 376, 356, 336, 316, 296, 276, 256, 236, 216]){
     const nn = Math.max(...nl(S).map(l => l.length)), hNoms = 22 + nn * 42 + (pers.some(p => p.parti) ? 40 : 0) + 10;
     const yCarte = yP0 + S + hNoms + 30;
     for(const tc of [27, 24]){
@@ -273,7 +278,7 @@ STORY_PLUS.facea = async (ctx, info) => {
     }
     if(choix) break;
   }
-  if(!choix){ const S = 276, nn = Math.max(...nl(S).map(l => l.length)); choix = { S, nn, hNoms: 22 + nn * 42 + 50, tc: 24 }; }
+  if(!choix){ const S = 216, nn = Math.max(...nl(S).map(l => l.length)); choix = { S, nn, hNoms: 22 + nn * 42 + 50, tc: 24 }; }
   const { S, nn, tc } = choix, gap = 80, x1 = marge + Math.round((LARG - 2 * S - gap) / 2), x2 = x1 + S + gap;
   ecrireLignes(ctx, ft, marge, yT, { poids: 600, inter: 1.04 });
   const cy = yP0 + S / 2, lignesNoms = nl(S);
@@ -345,8 +350,8 @@ STORY_PLUS.date = async (ctx, info) => {
     const dispo = L - marge - xDroit - 40;
     const fc = ajuster(ctx, compte.grand, { poids: 700, tMax: 78, tMin: 36, largeur: Math.max(dispo, 200), hMax: 100, max: 1, inter: 1 });
     const yb = h.yJ;
-    ecrire(ctx, compte.grand, L - marge, yb - 2, { poids: 700, taille: fc.t, fam: NEW, couleur: "#fff", align: "right" });
-    if(compte.petit) ecrire(ctx, compte.petit.toUpperCase(), L - marge, yb - fc.t - 12, { poids: 800, taille: 30, couleur: ROSE2, align: "right", ls: 4 });
+    ecrire(ctx, compte.grand, L - marge, yb - 14, { poids: 700, taille: fc.t, fam: NEW, couleur: "#fff", align: "right" });
+    if(compte.petit) ecrire(ctx, compte.petit.toUpperCase(), L - marge, yb - fc.t - 24, { poids: 800, taille: 30, couleur: ROSE2, align: "right", ls: 4 });
   }
   ecrire(ctx, mois, marge + 4, h.yM, { poids: 800, taille: h.tm, couleur: ROSE2, ls: 6 });
   ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, inter: 1.06 });
