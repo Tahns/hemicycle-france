@@ -22,6 +22,17 @@
  *  - au plus 4 entrées par jour (UTC+2) ; aucune entre 23 h et 7 h, heure de Paris.
  * On garde les 30 dernières entrées ; les images de plus de 3 jours sont supprimées.
  *
+ * MODÈLES D'IMAGE (direction artistique « fond bleu », js/stories-actu*.js) : le choix du modèle est automatique, avec les mêmes règles de prudence :
+ *  - « À la une »      : le sujet fort retenu ci-dessus (modèle par défaut) ;
+ *  - « Dossier »       : un dossier non publié (voir plus haut) ;
+ *  - « En direct »     : le sujet dont un titre correspond à une prise de parole active de data/direct.json (hors séances de l'Assemblée, événement non expiré) ;
+ *  - « Le chiffre »    : seulement si le chiffre du sujet figure tel quel dans les titres d'au moins 2 médias ;
+ *  - « Face à face »   : seulement si les deux premières personnalités du sujet sont des candidats déclarés (data/candidats.json) et qu'aucun titre n'est conflictuel ;
+ *  - « Date à retenir »: seulement si le sujet annonce une date À VENIR (au plus 180 jours) ;
+ *  - « En bref »       : une fois par jour, le matin (7 h – 11 h, Paris) : 3 ou 4 sujets forts (3 médias au moins, titre rédigé par le site, aucun mot de la liste prudente).
+ *    Les liens de ses sujets sont enregistrés : aucun de ces sujets n'aura aussi sa propre image le même jour (pas de doublon).
+ *  Tous comptent dans le plafond de 4 entrées par jour, respectent la nuit (23 h – 7 h), le fichier data/stories-config.json et ne sont jamais produits en monétisation.
+ *
  * DÉCLENCHEUR « NOUVEAU SONDAGE » (prioritaire sur les actualités) : si data/sondages.json contient une enquête d'intentions de vote
  * au premier tour de la présidentielle plus récente que la dernière déjà mise en file (entrée « story » avec champ sondageId,
  * « Institut|AAAA-MM-JJ »), publiée il y a moins de 48 h, on dessine la story « sondages » du site limitée à CETTE enquête
@@ -61,6 +72,9 @@ const SONDAGE_FRAICHEUR_H = 48;
 const SONDAGE_DERNIERE_MINUTE = 23 * 60 + 30; // un sondage qui vient de sortir peut être mis en file jusqu'à 23 h 30
 const MOIS = { janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6, juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12 };
 
+const BREF_DEBUT_H = 7, BREF_FIN_H = 11; // « En bref » : une fois par jour, le matin (heure de Paris)
+const BREF_FRAICHEUR_H = 12, BREF_MIN = 3, BREF_MAX = 4, BREF_MIN_MEDIAS = 3;
+const DATE_MAX_JOURS = 180;
 const MAX_PROPRES_PAR_JOUR = 3; // stories « données propres » (monétisation) par jour, brouillons compris
 const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « récent »
 const BROUILLON_JOURS = 7;
@@ -114,6 +128,10 @@ function reserveSondages(now) {
     return paris >= `${veille}T00:00` && paris < `${tour}T20:00`;
   }) || null;
 }
+
+// Réserve électorale (loi du 19 juillet 1977) : aucun résultat de sondage, pas même repris d'un titre de presse
+const RE_SONDAGE = /sondage|intentions? de vote|estimations? de vote|enquete d'opinion|barometre/;
+const parleDeSondage = (titre) => RE_SONDAGE.test(sansAccent(titre));
 
 /** Empreinte stable du titre central du sujet. */
 function idSujet(titre) {
@@ -171,10 +189,55 @@ function choisirSondage({ sondages, file, now = new Date() }) {
   return { sondage: c.inst, indice: c.indice, sondageId: c.sondageId, id: crypto.createHash("sha1").update("sondage|" + c.sondageId).digest("hex").slice(0, 12) };
 }
 
-/** La prise de parole du président détectée par detecter-direct.js concerne-t-elle ce sujet ? */
-function presidentParle(sujet, direct) {
-  const titres = new Set((direct?.evenements || []).filter((e) => e.type !== "seance-an").map((e) => e.titre));
+/** La prise de parole du président détectée par detecter-direct.js (non expirée) concerne-t-elle ce sujet ? */
+function presidentParle(sujet, direct, now = new Date()) {
+  const titres = new Set((direct?.evenements || []).filter((e) => e.type !== "seance-an" && !(e.expire && Date.parse(e.expire) <= now.getTime())).map((e) => e.titre));
   return (sujet.articles || []).some((a) => titres.has(a.titre));
+}
+
+/** Jour (AAAA-MM-JJ) à Paris. */
+const jourParis = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(d));
+
+// Mots d'un titre qui opposent frontalement deux personnes : pas de « face à face » (l'image resterait neutre, le titre non)
+const RE_CONFLIT = /\b(attaque|attaquent|tacle|taclent|clash|charge|descend|flingue|fustige|accable|regle ses comptes|insulte|traite de|lynch|clivage|guerre|affronte|s'oppose|se dechire|se dechirent|invective|dezingue|etrille|tire sur)\b/;
+
+/** Candidats déclarés (data/candidats.json), noms sans accents. */
+const nomsCandidats = (candidats) => new Set((candidats?.candidats || (Array.isArray(candidats) ? candidats : [])).map((c) => sansAccent(c?.nom || c)).filter(Boolean));
+
+/** « Face à face » : les deux premières personnalités du sujet (celles que dessine l'image) sont des candidats déclarés, et aucun titre n'est conflictuel. */
+function faceAFace(sujet, candidats) {
+  const noms = nomsCandidats(candidats);
+  const pers = (sujet.illustration?.personnes || []).slice(0, 2).map((p) => sansAccent(p?.nom));
+  if (pers.length < 2 || pers[0] === pers[1] || !pers.every((n) => noms.has(n))) return false;
+  return !(sujet.articles || []).some((a) => RE_CONFLIT.test(sansAccent(a.titre)));
+}
+
+/** « Le chiffre » : le chiffre du sujet (« 400 à 500 ») figure tel quel dans les titres d'au moins 2 médias différents. */
+function chiffreSource(sujet) {
+  const valeur = String(sujet.chiffre?.valeur || "");
+  const nombres = valeur.match(/\d+(?:[.,]\d+)?/g);
+  if (!nombres?.length) return false;
+  return nombres.every((n) => {
+    const re = new RegExp(`(^|[^0-9])${n.replace(/[.,]/g, "[.,]")}([^0-9]|$)`);
+    return new Set((sujet.articles || []).filter((a) => re.test(sansAccent(a.titre))).map((a) => a.media)).size >= 2;
+  });
+}
+
+/** « Date à retenir » : une date À VENIR (demain ou plus tard, au plus 180 jours) annoncée dans les titres. */
+function dateAVenir(sujet, now = new Date()) {
+  const iso = sujet.date?.iso;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "") || !sujet.date.jour || !sujet.date.mois) return false;
+  const jours = (Date.parse(iso + "T12:00:00Z") - Date.parse(jourParis(now) + "T12:00:00Z")) / 864e5;
+  return jours >= 1 && jours <= DATE_MAX_JOURS;
+}
+
+/** Modèle d'image d'un sujet retenu : direct, facea, chiffre, date ou une (par défaut). */
+function modeleSujet(sujet, { direct = null, candidats = null, now = new Date() } = {}) {
+  if (presidentParle(sujet, direct, now)) return "direct";
+  if (faceAFace(sujet, candidats)) return "facea";
+  if (chiffreSource(sujet)) return "chiffre";
+  if (dateAVenir(sujet, now)) return "date";
+  return "une";
 }
 
 /** Identifiant d'une story de dossier. */
@@ -197,7 +260,7 @@ function choisirDossier({ actualites, file, now = new Date() }) {
     if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return false;
     if (new Set(d.articles.map((a) => a.media)).size < 4) return false;
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
-    return !d.articles.some((a) => motExclu(a.titre));
+    return !d.articles.some((a) => motExclu(a.titre)) && !(reserveSondages(now) && d.articles.some((a) => parleDeSondage(a.titre)));
   });
   if (!candidats.length) return null;
   candidats.sort((a, b) => b.medias.length - a.medias.length || b.nb - a.nb);
@@ -209,7 +272,7 @@ function choisirDossier({ actualites, file, now = new Date() }) {
  * Choisit au plus un sujet. Renvoie { indice, sujet, id } ou { refus: "raison" }.
  * file : { entrees: [...] } ; now : Date.
  */
-function choisirSujet({ actualites, direct, file, now = new Date() }) {
+function choisirSujet({ actualites, direct, file, now = new Date(), candidats: declares = null }) {
   const entrees = file?.entrees || [];
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
@@ -226,19 +289,68 @@ function choisirSujet({ actualites, direct, file, now = new Date() }) {
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
     if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return; // sujet purement étranger : ni site ni story
     const medias = new Set((s.articles || []).map((a) => a.media)).size;
-    const parole = presidentParle(s, direct);
+    const parole = presidentParle(s, direct, now);
     if (medias < MIN_MEDIAS && !parole) return;
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (s.illustration?.theme === "justice") return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
+    if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
-    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole });
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele: modeleSujet(s, { direct, candidats: declares, now }) });
   });
   if (!candidats.length) return { refus: "aucun sujet ne remplit toutes les règles" };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
   return candidats[0];
+}
+
+/** Identifiant d'une story « En bref » : une par jour (Paris). */
+const idBref = (jour) => crypto.createHash("sha1").update("bref|" + jour).digest("hex").slice(0, 12);
+
+/**
+ * « En bref » (une fois par jour, le matin) : 3 ou 4 sujets forts. Mêmes plafonds et horaires que les autres sujets
+ * (4 par jour, rien de 23 h à 7 h), mêmes mots exclus, titre rédigé par le site obligatoire, sujets non déjà publiés.
+ * Renvoie { bref: { indices, titres }, id, medias, sources } ou { refus }.
+ */
+function choisirEnBref({ actualites, file, now = new Date() }) {
+  const h = heureParis(now);
+  if (h < BREF_DEBUT_H || h >= BREF_FIN_H) return { refus: "« en bref » : seulement le matin" };
+  const entrees = file?.entrees || [];
+  const jour = jourParis(now);
+  if (entrees.some((e) => e.bref === true && jourParis(e.cree) === jour)) return { refus: "« en bref » déjà publié aujourd'hui" };
+  if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
+  const ids = new Set(entrees.map((e) => e.id));
+  const urls = new Set(entrees.flatMap((e) => e.sources || []));
+  const retenus = [];
+  (actualites?.sujets || []).forEach((s, indice) => {
+    const titre = s.articles?.[0]?.titre;
+    if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
+    if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return;
+    const medias = new Set((s.articles || []).map((a) => a.media)).size;
+    if (medias < BREF_MIN_MEDIAS) return;
+    const age = now.getTime() - Date.parse(s.derniere);
+    if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
+    if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
+    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre)) return;
+    if ((s.articles || []).some((a) => motExclu(a.titre))) return;
+    if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
+  });
+  retenus.sort((a, b) => b.medias - a.medias || Date.parse(b.s.derniere) - Date.parse(a.s.derniere));
+  // un sujet par thème d'abord, puis sans doublon de titre propre
+  const pris = [], titres = new Set(), themes = new Set();
+  for (const r of retenus) if (pris.length < BREF_MAX && !titres.has(r.s.titrePropre.titre) && !themes.has(r.theme)) { pris.push(r); titres.add(r.s.titrePropre.titre); themes.add(r.theme); }
+  for (const r of retenus) if (pris.length < BREF_MAX && !pris.includes(r) && !titres.has(r.s.titrePropre.titre)) { pris.push(r); titres.add(r.s.titrePropre.titre); }
+  if (pris.length < BREF_MIN) return { refus: `« en bref » : seulement ${pris.length} sujet(s) fort(s)` };
+  const medias = [...new Set(pris.flatMap((r) => r.s.articles.map((a) => a.media)))].length;
+  return {
+    bref: { indices: pris.map((r) => r.indice), titres: pris.map((r) => r.s.articles[0].titre), titresPropres: pris.map((r) => r.s.titrePropre.titre) },
+    id: idBref(jour), medias,
+    // un lien par sujet d'abord (pour qu'aucun de ces sujets ne soit repris seul), puis les autres, 12 au plus
+    sources: [...new Set([...pris.map((r) => r.s.articles[0].url), ...pris.flatMap((r) => r.s.articles.map((a) => a.url))].filter((u) => /^https:\/\//.test(u || "")))].slice(0, 12),
+    modele: "bref",
+  };
 }
 
 /** Dimensions d'un JPEG, ou null. */
@@ -280,7 +392,7 @@ function nettoyerImages(images, dossier = DOSSIER_IMG) {
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".mjs": "text/javascript", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".svg": "image/svg+xml", ".css": "text/css", ".webmanifest": "application/manifest+json" };
 
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null, dossier = null, propre = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -310,7 +422,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref }) => {
       if (propre) { // données propres : vote par groupe ou simulation, jamais de presse ; le site doit avoir la même donnée que le fichier
         let r = null;
         if (propre.type === "scrutin") {
@@ -336,10 +448,15 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
         const r = await dessinerStory("sondages", i.id);
         return r ? r.apercu : null;
       }
+      if (bref) { // « en bref » : les sujets choisis doivent être les mêmes sur le site
+        if (!bref.indices.every((i, k) => ACTUALITES.sujets[i]?.articles?.[0]?.titre === bref.titres[k])) return null;
+        const r = await dessinerStory("actualites", "bref:" + bref.indices.join(","));
+        return r ? r.apercu : null;
+      }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
-      const r = await dessinerStory("actualite", indice);
+      const r = await dessinerStory("actualite", `${indice}:${modele || "une"}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date »
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -432,14 +549,17 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, lois, senat, probas, file, now = new Date(), config = normaliserConfig(null) }) {
+function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, now = new Date(), config = normaliserConfig(null) }) {
   const s = choisirSondage({ sondages, file, now });
   if (!s.refus) return s;
   if (config.monetisation) {
     const p = choisirDonneesPropres({ lois, senat, probas, file, now });
     return p.refus ? { refus: `${p.refus} ; sondage : ${s.refus}` } : p;
   }
-  const a = choisirSujet({ actualites, direct, file, now });
+  const a = choisirSujet({ actualites, direct, file, now, candidats });
+  if (a.dossier || a.modele === "direct") return a; // un dossier non publié et un direct en cours passent avant tout
+  const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
+  if (!b.refus) return b;
   return a.refus ? { refus: `${a.refus} ; sondage : ${s.refus}` } : a;
 }
 
@@ -450,7 +570,7 @@ function lireEtat(now) {
   const file = lire("data/instagram-file.json", { entrees: [] });
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
-  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null) };
+  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), candidats: lire("data/candidats.json", null) };
   if (config.monetisation) Object.assign(donnees, { lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), probas: lire("data/probabilites.json", null) });
   return { config, file, brouillons, donnees };
 }
@@ -486,6 +606,8 @@ function ecrireBrouillon(fiche, jpeg, dossier = DOSSIER_BROUILLONS) {
 /** Ligne du résumé d'exécution GitHub pour un brouillon à valider. */
 const ligneResume = (b) => `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
 
+const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
+
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
 function decrire(choix) {
   if (choix.sondage) {
@@ -501,9 +623,13 @@ function decrire(choix) {
     const videos = liensVideo(d.articles);
     return { titre: d.titre, medias: [...new Set(d.articles.map((a) => a.media))], sources: sourcesDe(d.articles, videos), champs: { dossierId: d.id, titrePropre: d.titre, ...(videos.length ? { videos } : {}) }, args: [0, d.titre, null, d.id, null], type: "dossier" };
   }
+  if (choix.bref) {
+    return { titre: "En bref : ce qu'il faut retenir aujourd'hui", medias: [], sources: choix.sources, champs: { bref: true, sujets: choix.bref.titresPropres, modele: "bref" }, args: [0, "", null, null, null, "bref", choix.bref], type: "en-bref" };
+  }
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
-  return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}) }, args: [choix.indice, titre, null, null, null], type: "actualite" };
+  const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
+  return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 async function main() {
@@ -558,6 +684,6 @@ async function main() {
   }
 }
 
-module.exports = { choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
+module.exports = { dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
