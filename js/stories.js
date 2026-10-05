@@ -6,7 +6,7 @@ const STORY = { L:1080, H:1920, marge:84, papier:"#F5F1E8", encre:"#1C1B18", dou
 // Variante sombre « Nuit » (charte : docs/identite.md), utilisée pour les sujets EN DIRECT
 const STORY_NUIT = { papier:"#2A2926", encre:"#F5F1E8", doux:"#DDD7C9", pale:"#BDB7A9", filet:"#57544C", bleu:"#A9B8F2", alerteTxt:"#FF8D98", ambreTxt:"#E8B84A" };
 const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
-const SITE_COURT = new URL(".", location.href).href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+const COMPTE_STORY = "@hemicyclefrance"; // les stories n'affichent que le compte Instagram, pas l'adresse du site
 
 function storyLignes(ctx, texte, largeur, max){
   const mots = String(texte).trim().replace(/«[ \t]+/g, "«\u00A0").replace(/[ \t]+([»:;?!%])/g, "\u00A0$1").split(/[ \t\r\n]+/), lignes = [];
@@ -158,7 +158,7 @@ function storyPied(ctx, source, { ligne = "" } = {}){
   if(ligne) yy = storyTexte(ctx, ligne, marge, yy, { taille:28, poids:700, couleur:STORY.encre, max:1 }) + 2;
   storyTexte(ctx, source, marge, yy, { taille:23, couleur:STORY.pale, max:3, interligne:1.22 });
   ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = STORY.bleu;
-  ctx.fillText(SITE_COURT, marge, y + 180);
+  ctx.fillText(COMPTE_STORY, marge, y + 180);
 }
 
 function storyChiffreHeros(ctx, texte, x, y, couleur, taille = 220, align = "left"){
@@ -480,7 +480,7 @@ STORY_PLUS.actualite = async (ctx, info)=>{
     }
 
     const credits = mode === 2 ? vus.map(p=> p.credit).filter(Boolean) : [];
-    storyPied(ctx, `Seuls les titres sont repris, liens sur le site.${credits.length ? ` Photos : ${[...new Set(credits)].join(" ; ")}.` : ""}`, { ligne:`Titre : ${a0.media} · ${quand}` });
+    storyPied(ctx, `Seuls les titres sont repris.${credits.length ? ` Photos : ${[...new Set(credits)].join(" ; ")}.` : ""}`, { ligne:`Titre : ${a0.media} · ${quand}` });
   } finally { Object.assign(STORY, sauve); }
   return { nom:`actualite-${slugDep(a0.titre).slice(0, 40)}` };
 };
@@ -506,7 +506,7 @@ STORY_PLUS.actualites = async (ctx, info)=>{
       storyTexte(ctx, l[i].titre, marge, y + 62, { taille:34, poids:600, police:"Newsreader", largeur:L - 2 * marge, max:4, interligne:1.12 });
       y += pas;
     }
-    storyPied(ctx, "Titres relevés dans la presse, liens sur le site. Seuls les titres sont repris.");
+    storyPied(ctx, "Titres relevés dans la presse. Seuls les titres sont repris.");
     return { nom:`dossier-${info}` };
   }
   const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 4);
@@ -533,7 +533,7 @@ STORY_PLUS.actualites = async (ctx, info)=>{
     ctx.font = `700 24px "Public Sans"`; ctx.fillText("MÉDIAS", L - marge, cy + 58); ctx.textAlign = "left";
     y += pas;
   }
-  storyPied(ctx, "Titres relevés dans la presse, liens sur le site. Un sujet est « repris » quand au moins deux médias le traitent. Seuls les titres sont repris.");
+  storyPied(ctx, "Titres relevés dans la presse. Un sujet est « repris » quand au moins deux médias le traitent. Seuls les titres sont repris.");
   return { nom:"sujets-du-moment" };
 };
 
@@ -979,7 +979,7 @@ async function dessinerStory(type, info){
       + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`;
     ctx.fillStyle = STORY.encre; ctx.fillRect(marge, yLegal, largeur, 5);
     storyTexte(ctx, mentions, marge, yLegal + 16, { taille:23, couleur:STORY.doux, max:9, interligne:1.2 });
-    ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(SITE_COURT, marge, 1700);
+    ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = STORY.bleu; ctx.fillText(COMPTE_STORY, marge, 1700);
     nom = `sondage-${slugDep(inst.nom)}`;
   }
 
