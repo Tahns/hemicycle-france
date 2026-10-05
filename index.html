@@ -319,7 +319,8 @@
   @media (max-width:700px){ .view.active{animation:none;} }
   /* Performances : ce qui est hors de l'écran n'est ni mis en page ni peint avant d'être approché */
   /* Une liste déroulante de centaines d'options coûte cher à mesurer : sa largeur vient du conteneur, pas de l'option la plus longue */
-  .filtre-champ, .sous-nav label{contain:inline-size;}
+  .filtre-champ{contain:inline-size;}
+  .sous-nav label{white-space:nowrap;}
   .view > :not(.rubrique-tete){content-visibility:auto; contain-intrinsic-size:auto 480px;}
   .senat-ligne, .histo-row, .depute-carte, .meeting-card, .party-row{content-visibility:auto; contain-intrinsic-size:auto 64px;}
 
@@ -555,7 +556,9 @@
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:var(--blanc); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
   .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1); border-radius:var(--r-3); background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
   .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
-  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1;}
+  .actu-picto{overflow:hidden;}
+  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
+  .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
   .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .actu-noms{color:var(--text-soft);}
@@ -592,6 +595,12 @@
   .actu-sujet h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
   .actu-sujet h4 a{color:var(--text); text-decoration:none;}
   .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-citation{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
+  .actu-citation a{color:inherit; text-decoration:none;} .actu-citation a:hover{text-decoration:underline;}
+  .actu-citation-media{color:var(--text-faint); font-weight:600;}
+  .actu-contexte{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
+  .actu-contexte small{color:var(--text-faint);}
+  .actu-video{font-size:var(--fs-xs); font-weight:700; color:var(--text-faint); white-space:nowrap;}
   .actu-meta{font-size:var(--fs-sm); color:var(--text-faint);}
   .actu-recoupe{display:inline-block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent);}
   .actu-autres{list-style:none; margin:var(--s2) 0 0; padding:0 0 0 var(--s3); border-left:2px solid var(--border-soft); font-size:var(--fs-sm);}
@@ -1172,6 +1181,7 @@
   .pres-courant{display:flex; gap:var(--s4); align-items:center; padding:var(--s4); margin:0 0 var(--s5); background:var(--accent-dim); border-left:var(--filet-epais) solid var(--accent); border-radius:0 var(--r-2) var(--r-2) 0;}
   .pres-courant .pres-etiquette{font-size:var(--fs-etiquette); font-weight:700; letter-spacing:var(--ls-etiquette); text-transform:uppercase; color:var(--accent);}
   .pres-courant .pres-nom{font-size:var(--fs-xl); font-weight:700;}
+  .pres-rang{color:var(--text-faint); font-weight:700; margin-right:.15em;}
   .pres-src{margin:var(--s1) 0 var(--s4); font-size:var(--fs-sm); color:var(--text-faint);}
   .pres-regime{margin:var(--s6) 0 0;}
   .pres-regime-tete{border-top:var(--filet-fort) solid var(--ink); padding-top:var(--s3);}
@@ -2475,7 +2485,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Pour débuter</div>
       <h2>Les présidents</h2>
-      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> en France, dans l'ordre, régime après régime. Des dates et des faits, sans avis.
+      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> sous la Ve République, dans l'ordre, du premier au dernier. Des dates et des faits, sans avis.
         <small>Liste relue le <span id="presidents-verifie">2 octobre 2026</span>. Sources : site de l'Élysée et Wikipédia, un lien vers la fiche de chacun.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> s'est terminé.</p>
     </div>
@@ -2507,7 +2517,7 @@
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Budget, déficit et dette :</b> comptes des administrations publiques de la France (établis par l'Insee) tels que notifiés à <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=fr" target="_blank" rel="noopener">Eurostat</a> (tableaux gov_10a_exp, gov_10a_main et gov_10dd_edpt1, API publique), réutilisables sous licence ouverte (<a href="https://commission.europa.eu/legal-notice/reuse-commission-documents_fr" target="_blank" rel="noopener">politique de réutilisation de la Commission européenne</a>, source citée). Chaque bloc de la rubrique « Budget » indique sa source et son année.</li>
-        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart). Le titre de presse n'est que cité, avec son média et un lien ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Bandeau « En direct » :</b> affiché seulement quand un événement est détecté, jamais autrement. Un traitement automatique repère, dans les titres déjà relevés des médias ci-dessus, l'annonce ou la tenue d'une prise de parole du président de la République (allocution, conférence de presse, discours, interview) publiée depuis moins de six heures ; il y ajoute, les jours de séance, la séance publique de l'Assemblée nationale d'après son agenda officiel (sans les heures : le bandeau dit « aujourd'hui », pas « en cours »). Le bandeau cite le titre du média et renvoie à son article. Les chaînes proposées sont de simples liens vers leurs pages officielles de direct : <a href="https://www.francetvinfo.fr/en-direct/" target="_blank" rel="noopener">franceinfo</a>, <a href="https://www.bfmtv.com/en-direct/" target="_blank" rel="noopener">BFMTV</a>, <a href="https://www.tf1info.fr/direct/" target="_blank" rel="noopener">LCI</a>, <a href="https://www.publicsenat.fr/direct" target="_blank" rel="noopener">Public Sénat</a>, <a href="https://www.france24.com/fr/direct" target="_blank" rel="noopener">France 24</a> et le <a href="https://videos.assemblee-nationale.fr/" target="_blank" rel="noopener">direct officiel de l'Assemblée nationale</a>. Aucune vidéo n'est intégrée au site. Le Sénat n'est pas couvert faute de données de séance relevées.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
@@ -4278,8 +4288,11 @@ function visuelActu(s){
     const p = ill.personnes[0];
     return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
-  return `<div class="actu-visuel actu-picto" style="--c:${theme[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
+  // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
+  const long = !/\s/.test(theme[2]) && theme[2].length > 9;
+  return `<div class="actu-visuel actu-picto${long ? " long" : ""}" style="--c:${theme[0]}" role="img" aria-label="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
 }
+const pastilleVideo = x => x.video ? `<span class="actu-video">▶ Vidéo</span> ` : "";
 function sujetHTML(s, court, une, sup){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
@@ -4289,10 +4302,14 @@ function sujetHTML(s, court, une, sup){
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
-    <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
+    ${s.titrePropre?.titre
+      ? `<h4>${esc(s.titrePropre.titre)}</h4>
+    <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>`
+      : `<h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h4>`}
+    ${(s.contexte || []).length ? `<p class="actu-contexte"><b>Le contexte</b> : ${s.contexte.map(c=>`${esc(c.texte)} <small>(${esc(c.source)})</small>`).join(" · ")}</p>` : ""}
     <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}
-    ${!court && s.articles.length > 1 ? `<details class="pli-mobile" open><summary class="pli-titre">Voir aussi ${Math.min(s.articles.length - 1, une ? 3 : 5)} titres</summary><ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul></details>` : ""}
+    ${!court && s.articles.length > 1 ? `<details class="pli-mobile" open><summary class="pli-titre">Voir aussi ${Math.min(s.articles.length - 1, une ? 3 : 5)} titres</summary><ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul></details>` : ""}
     </div>
   </article>`;
 }
@@ -4306,7 +4323,7 @@ function dossierHTML(d, max){
     <span class="actu-recoupe">Dossier</span>
     <h4>${esc(d.titre)}</h4>
     <div class="actu-meta"><span class="actu-nb">${d.articles.length} articles · ${medias.length} médias</span><span class="actu-quand"> · ${esc(ilYA(d.derniere || d.articles[0].date))}</span> <button type="button" class="lien-bouton bouton-story mini" data-story="actualites" data-id="${esc(d.id)}" aria-label="Créer une story de ce dossier" title="Créer une story de ce dossier"></button></div>
-    <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
+    <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
     <p class="actu-dossier-medias"><span>Médias :</span> <span>${esc(medias.join(", "))}</span></p>
   </article>`;
 }
@@ -4846,13 +4863,14 @@ function presMedaillon(p, actuel){
   const taille = actuel ? 72 : 56;
   return `<span class="medaillon" style="--c:${actuel ? "#1B3A8C" : "#47443D"}; --t:${taille}px"${titre ? ` title="${esc(titre)}"` : ""}><b aria-hidden="true">${esc(ini)}</b>${photo ? `<img src="${esc(photo)}" alt="" width="${taille}" height="${taille}" loading="lazy" onerror="this.remove()">` : ""}</span>`;
 }
-function presEntree(p){
+function presEntree(p, rang){
   const actuel = !p.fin;
   const fin = actuel ? t("aujourd'hui") : presDate(p.fin);
   return `<li class="pres-item${actuel ? " en-cours" : ""}" data-president="${esc(p.nom)}">
     ${presMedaillon(p, false)}
     <div>
-      <div class="pres-nom"><a href="${lien(p.wikipedia)}" target="_blank" rel="noopener">${esc(p.nom)}</a>${actuel ? ` <span class="pres-badge">Président actuel</span>` : ""}</div>
+      <div class="pres-nom"><span class="pres-rang">${rang}.</span> <a href="${lien(p.wikipedia)}" target="_blank" rel="noopener">${esc(p.nom)}</a>${actuel ? ` <span class="pres-badge">Président actuel</span>` : ""}</div>
+      ${p.parti ? `<div class="pres-meta">${esc(t("Parti : {1}", { 1:p.parti }))}</div>` : ""}
       <div class="pres-dates"><time>${esc(presDate(p.debut))}</time> – <time>${esc(fin)}</time></div>
       <div class="pres-meta">${esc(presDuree(p))}</div>
       ${p.fin_type ? `<div class="pres-meta">${esc(t("Fin de la fonction : {1}", { 1:t(p.fin_type) }))}</div>` : ""}
@@ -4863,14 +4881,15 @@ function presEntree(p){
 function renderPresidents(){
   const bandeau = document.getElementById("presidents-bandeau"), frise = document.getElementById("presidents-frise");
   if(!bandeau || !frise || !PRESIDENTS) return;
-  const tous = PRESIDENTS.regimes.flatMap(r => r.presidents);
+  const regimes = PRESIDENTS.regimes.filter(r => r.id === "v"); // seulement la Ve République, dans l'ordre
+  const tous = regimes.flatMap(r => r.presidents);
   const jours = p => (Date.parse((p.fin || presAujourdhui()) + "T12:00:00Z") - Date.parse(p.debut + "T12:00:00Z")) / 864e5;
   const precis = tous.filter(p => presPrecis(p.debut) && (!p.fin || presPrecis(p.fin)));
   const plus = precis.reduce((a, b) => jours(b) > jours(a) ? b : a), moins = precis.reduce((a, b) => jours(b) < jours(a) ? b : a);
   const actuel = tous.find(p => !p.fin);
   const premier = parseInt(tous[0].debut, 10);
   bandeau.innerHTML = `<div class="pres-bandeau">
-      <div class="pres-chiffre"><div class="pres-etiquette">Au total</div><div class="pres-gros">${esc(t("{1} présidents depuis {2}", { 1:tous.length, 2:premier }))}</div><div class="pres-detail">De la IIe à la Ve République.</div></div>
+      <div class="pres-chiffre"><div class="pres-etiquette">Au total</div><div class="pres-gros">${esc(t("{1} présidents depuis {2}", { 1:tous.length, 2:premier }))}</div><div class="pres-detail">Sous la Ve République, du premier au dernier.</div></div>
       <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus long</span></div><div class="pres-gros">${esc(plus.nom)}</div><div class="pres-detail">${esc(presDuree(plus))}</div></div>
       <div class="pres-chiffre"><div class="pres-etiquette">${gl("mandat", "Mandat")}<span> le plus court</span></div><div class="pres-gros">${esc(moins.nom)}</div><div class="pres-detail">${esc(presDuree(moins))}</div></div>
     </div>
@@ -4878,13 +4897,13 @@ function renderPresidents(){
     ${actuel ? `<div class="pres-courant">${presMedaillon(actuel, true)}<div><div class="pres-etiquette">Président actuel</div><div class="pres-nom"><a href="${lien(actuel.wikipedia)}" target="_blank" rel="noopener">${esc(actuel.nom)}</a></div><div class="pres-meta">${esc(t("En fonction depuis le {1}", { 1:presDate(actuel.debut) }))}</div></div></div>` : ""}`;
   // Régimes et périodes sans président, dans l'ordre des dates
   const blocs = [
-    ...PRESIDENTS.regimes.map(r => ({ debut:r.debut, html:`<section class="pres-regime" data-regime="${esc(r.id)}">
+    ...regimes.map(r => ({ debut:r.debut, html:`<section class="pres-regime" data-regime="${esc(r.id)}">
       <div class="pres-regime-tete"><h3>${esc(r.nom)} <span>${esc(r.debut)}–${esc(r.fin || "")}${r.fin ? "" : " " + esc(t("à aujourd'hui"))}</span></h3></div>
       <p class="pres-election">${PRESIDENTS_ELECTION[r.id] || esc(r.election)}</p>
       <p class="pres-src">${esc(t("Sources :"))} ${(r.sources || []).map(s => `<a href="${lien(s.url)}" target="_blank" rel="noopener">${esc(s.nom)}</a>`).join(" · ")}</p>
-      <ol class="pres-liste">${r.presidents.map(presEntree).join("")}</ol>
+      <ol class="pres-liste">${r.presidents.map((p, i) => presEntree(p, i + 1)).join("")}</ol>
     </section>` })),
-    ...(PRESIDENTS.periodes_sans_president || []).map(x => ({ debut:x.debut, html:`<p class="pres-pause" data-periode="${esc(x.debut)}"><b>${esc(x.debut)}–${esc(x.fin)} · Pas de président de la République</b>${esc(t(x.texte))} <a href="${lien(x.wikipedia)}" target="_blank" rel="noopener">Wikipédia</a></p>` }))
+    ...[].map(x => ({ debut:x.debut, html:`<p class="pres-pause" data-periode="${esc(x.debut)}"><b>${esc(x.debut)}–${esc(x.fin)} · Pas de président de la République</b>${esc(t(x.texte))} <a href="${lien(x.wikipedia)}" target="_blank" rel="noopener">Wikipédia</a></p>` }))
   ].sort((a, b) => a.debut - b.debut);
   frise.innerHTML = blocs.map(b => b.html).join("");
 }
@@ -6612,7 +6631,7 @@ const HUBS = [
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, institut par institut"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
   { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"]] },
-  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"], ["presidents","Les présidents","Tous les présidents de la République, de 1848 à aujourd'hui"]] }
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"], ["presidents","Les présidents","Tous les présidents de la Ve République, dans l'ordre"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
@@ -8169,3 +8188,5 @@ if("serviceWorker" in navigator && (location.protocol === "https:" || location.h
 
 </body>
 </html>
+
+        <li><b>Titres, contexte et vidéos :</b> le grand titre de chaque sujet est rédigé par le site à partir du recoupement de plusieurs médias (sans lui, aucun titre n'est inventé). Les titres de presse ne sont que cités, entre guillemets, avec le nom de leur média. La ligne « Le contexte » vient des données officielles du site (Assemblée nationale, Gouvernement, partis, Commission des sondages), jamais d'un média. Les vidéos sont de simples liens signalés « Vidéo » : aucune n'est intégrée.</li>

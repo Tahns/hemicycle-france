@@ -11,6 +11,7 @@ const sujet = (titre, nb, extra = {}) => ({
   medias: nb,
   derniere: il_y_a(1),
   illustration: { theme: "budget", ...(extra.illustration || {}) },
+  titrePropre: { titre: "Budget 2027", origine: "recoupement" },
   articles: Array.from({ length: Math.max(nb, 1) }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il_y_a(1) })),
   ...extra,
 });
@@ -23,6 +24,28 @@ const choix = (sujets, opts = {}) => choisirSujet({ actualites: actu(...sujets),
   const r = choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3)]);
   assert.strictEqual(r.indice, 0);
   assert.strictEqual(r.id, idSujet("Le gouvernement présente son projet de budget pour 2027"));
+}
+// Sans titre rédigé par le site (titrePropre), un sujet de presse n'est jamais retenu : mieux vaut ne rien publier
+assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: undefined })]).refus, "sans titre propre : refusé");
+assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: null })]).refus, "titre propre null : refusé");
+assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: undefined }), sujet("Autre sujet de budget présenté ce matin par le gouvernement", 3)]).indice, 1, "on passe au suivant qui en a un");
+// La fiche d'entrée reçoit le titre propre et les liens vidéo (en tête des sources) ; le choix (id, indice) ne change pas
+{
+  const s = sujet("Le gouvernement présente son projet de budget pour 2027", 4);
+  s.articles[2].video = true;
+  s.articles[3].video = true;
+  const c = choix([s]);
+  assert.strictEqual(c.indice, 0);
+  assert.strictEqual(c.id, idSujet("Le gouvernement présente son projet de budget pour 2027"));
+  const d = createRequire(import.meta.url)("../scripts/stories-auto.cjs").decrire(c);
+  assert.strictEqual(d.champs.titrePropre, "Budget 2027");
+  assert.deepStrictEqual(d.champs.videos, [{ media: MEDIAS[2], url: s.articles[2].url }, { media: MEDIAS[3], url: s.articles[3].url }]);
+  assert.deepStrictEqual(d.sources.slice(0, 2), [s.articles[2].url, s.articles[3].url], "vidéos en tête");
+  assert.strictEqual(new Set(d.sources).size, d.sources.length, "sans doublon");
+  assert.strictEqual(d.sources.length, 4);
+  assert.deepStrictEqual(d.args, [0, s.articles[0].titre, null, null, null], "l'indice passé à dessinerStory ne change pas");
+  const sans = createRequire(import.meta.url)("../scripts/stories-auto.cjs").decrire(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3)]));
+  assert.ok(!("videos" in sans.champs), "pas de champ videos sans vidéo");
 }
 // Sujet à 2 médias : non
 assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).refus, "2 médias refusé");
@@ -210,6 +233,12 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.strictEqual(choisirDossier({ actualites: { dossiers: d.map((x) => ({ ...x, derniere: il_y_a(5) })) }, file: vide, now }), null, "dossier trop ancien");
   const risqueD = d.map((x) => ({ ...x, derniere: il_y_a(1), articles: x.articles.map((a, i) => (i ? a : { ...a, titre: a.titre + " : un lycéen mis en examen" })) }));
   assert.strictEqual(choisirDossier({ actualites: { dossiers: risqueD }, file: vide, now }), null, "titre à risque dans un dossier");
+  // Fiche d'un dossier : titre éditorial du dossier + liens vidéo en tête des sources
+  const dv = { ...d[0], derniere: il_y_a(1), articles: d[0].articles.map((a, i) => (i === 3 ? { ...a, video: true } : a)) };
+  const fiche = createRequire(import.meta.url)("../scripts/stories-auto.cjs").decrire(choisirDossier({ actualites: { dossiers: [dv] }, file: vide, now }));
+  assert.strictEqual(fiche.champs.titrePropre, "Blocus des lycées");
+  assert.deepStrictEqual(fiche.champs.videos, [{ media: dv.articles[3].media, url: dv.articles[3].url }]);
+  assert.strictEqual(fiche.sources[0], dv.articles[3].url);
 }
 
 // ---------- Configuration, monétisation, brouillons, réserve (data/stories-config.json) ----------

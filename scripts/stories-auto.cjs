@@ -13,6 +13,9 @@
  *  - pas déjà en file (id = empreinte du titre central, ou lien d'article déjà utilisé) ;
  *  - aucun mot de la liste prudente (mise en cause, accusation, enquête, violence, décès, mineur,
  *    victime, fait divers…), pas de thème « justice » : mieux vaut manquer une story que publier à tort ;
+ *  - un sujet de presse n'est retenu que s'il a un titre rédigé par le site (« titrePropre », scripts/titres-propres.cjs) ;
+ *    un dossier a toujours le sien. Sinon on passe : mieux vaut ne rien publier qu'un titre de presse en grand titre.
+ *    L'entrée de file reçoit « titrePropre » et « videos » [{ media, url }] (liens vidéo, placés en tête de « sources »).
  *  - DOSSIER (data/actualites.json, « dossiers » : un sujet dominant repris par >= 4 médias) : un dossier non encore publié
  *    (champ dossierId du journal) passe AVANT les sujets simples, avec les mêmes plafonds, horaires et fraîcheur ;
  *    ses titres sont déjà filtrés (faits divers et accusations écartés) ;
@@ -177,6 +180,11 @@ function presidentParle(sujet, direct) {
 /** Identifiant d'une story de dossier. */
 const idDossier = (id) => crypto.createHash("sha1").update("dossier|" + id).digest("hex").slice(0, 12);
 
+/** Liens vidéo des articles (signalés par le site, jamais intégrés) : [{ media, url }], sans doublon. */
+const liensVideo = (articles) => [...new Map((articles || []).filter((a) => a?.video === true && /^https:\/\//.test(a.url || "")).map((a) => [a.url, { media: a.media, url: a.url }])).values()];
+/** Sources de la fiche : les liens vidéo en tête, puis les articles (12 au plus, sans doublon). */
+const sourcesDe = (articles, videos) => [...new Set([...videos.map((v) => v.url), ...(articles || []).map((a) => a.url).filter((u) => /^https:\/\//.test(u || ""))])].slice(0, 12);
+
 /** Un dossier (actualites.dossiers) non encore publié, frais, sans mot de la liste prudente ; renvoie { dossier, id, medias } ou null. */
 function choisirDossier({ actualites, file, now = new Date() }) {
   const entrees = file?.entrees || [];
@@ -225,6 +233,7 @@ function choisirSujet({ actualites, direct, file, now = new Date() }) {
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (s.illustration?.theme === "justice") return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
+    if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
     candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole });
   });
   if (!candidats.length) return { refus: "aucun sujet ne remplit toutes les règles" };
@@ -489,10 +498,12 @@ function decrire(choix) {
   }
   if (choix.dossier) {
     const d = choix.dossier;
-    return { titre: d.titre, medias: [...new Set(d.articles.map((a) => a.media))], sources: d.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12), champs: { dossierId: d.id }, args: [0, d.titre, null, d.id, null], type: "dossier" };
+    const videos = liensVideo(d.articles);
+    return { titre: d.titre, medias: [...new Set(d.articles.map((a) => a.media))], sources: sourcesDe(d.articles, videos), champs: { dossierId: d.id, titrePropre: d.titre, ...(videos.length ? { videos } : {}) }, args: [0, d.titre, null, d.id, null], type: "dossier" };
   }
   const titre = choix.sujet.articles[0].titre;
-  return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: choix.sujet.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12), champs: {}, args: [choix.indice, titre, null, null, null], type: "actualite" };
+  const videos = liensVideo(choix.sujet.articles);
+  return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}) }, args: [choix.indice, titre, null, null, null], type: "actualite" };
 }
 
 async function main() {
