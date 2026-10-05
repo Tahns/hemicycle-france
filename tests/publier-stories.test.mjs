@@ -179,6 +179,34 @@ try {
     assert.match(r.resume, /ALERTE : le jeton Instagram est invalide/);
     assert.strictEqual(publications().length, 0);
   }
+  // Dernier filet : une entrée de presse mise en file avant le durcissement de la liste prudente n'est jamais publiée
+  {
+    const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(1), { titre: "Primaire de la gauche : Glucksmann se dit désolé après ses propos inélégants" })] });
+    assert.strictEqual(publications().length, 0, "titre à mot prudent : pas de publication");
+    assert.match(r.sortie, /rien à publier/);
+    // un « en bref » est contrôlé sujet par sujet
+    const r2 = await lancer({ entrees: [entree("eeeeeeeeeeee", il_y_a(1), { bref: true, titre: "En bref : ce qu'il faut retenir aujourd'hui", sujets: ["Budget 2027", "Polémique sur le budget"] })] });
+    assert.strictEqual(publications().length, 0, "en bref avec un sujet à mot prudent : pas de publication");
+    jamaisLeJeton(r2);
+    // un titre sans mot prudent passe
+    await lancer({ entrees: [entree("ffffffffffff", il_y_a(1), { bref: true, titre: "En bref", sujets: ["Budget 2027", "Loi de programmation militaire"] })] });
+    assert.strictEqual(publications().length, 1);
+  }
+  // Pas deux fois le même sujet à quelques heures d'écart (titres rédigés proches, story déjà publiée dans les 24 h)
+  {
+    const deja = entree("gggggggggggg", il_y_a(4), { titrePropre: "Blocage des lycées" });
+    const proche = entree("hhhhhhhhhhhh", il_y_a(1), { titrePropre: "Blocus des lycées" });
+    const registre = { entrees: [{ id: "gggggggggggg", statut: "publiee", publieLe: il_y_a(3), mediaId: "M1" }] };
+    await lancer({ entrees: [deja, proche], registre });
+    assert.strictEqual(publications().length, 0, "sujet proche déjà publié : rien");
+    const autre = entree("iiiiiiiiiiii", il_y_a(1), { titrePropre: "Loi de programmation militaire" });
+    await lancer({ entrees: [deja, autre], registre });
+    assert.strictEqual(publications().length, 1, "sujet différent : publié");
+    // plus de 24 h après : de nouveau possible
+    const ancien = { entrees: [{ id: "gggggggggggg", statut: "publiee", publieLe: il_y_a(30), mediaId: "M1" }] };
+    await lancer({ entrees: [{ ...deja, cree: il_y_a(30) }, proche], registre: ancien });
+    assert.strictEqual(publications().length, 1, "plus de 24 h : possible");
+  }
   console.log("[tests publier-stories] OK");
 } finally {
   serveur.close();

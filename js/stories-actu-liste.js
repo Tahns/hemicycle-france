@@ -10,7 +10,7 @@
     if(isNaN(d)) return "";
     const f = o => d.toLocaleString("fr-FR", { timeZone:"Europe/Paris", ...o });
     const jour = x => x.toLocaleDateString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"numeric", year:"numeric" });
-    const h = f({ hour:"2-digit", minute:"2-digit" }).replace(":", " h ");
+    const h = f({ hour:"2-digit", minute:"2-digit" }).replace(":", " h ").replace(/^0(?=\d)/, "");
     return jour(d) === jour(new Date()) ? h : `${f({ day:"numeric", month:"short" })} · ${h}`;
   }
 
@@ -28,14 +28,14 @@
   // Citation « … » : guillemets français, guillemets internes adoucis, tronquée proprement (« … ») si trop longue.
   // La police du contexte doit déjà être réglée.
   function citer(ctx, titre, larg, max){
-    const t = String(titre).replace(/\s+/g, " ").trim()
+    const t = minusculesListe(storyTypo(titre).replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, ""))
       .replace(/"([^"]*)"/g, "“$1”").replace(/«\s*([^»]*?)\s*»/g, "“$1”").replace(/(\p{L})'(\p{L})/gu, "$1’$2");
     const l = storyLignes(ctx, `« ${t} »`, larg, 99);
     if(l.length <= max) return l;
     const r = l.slice(0, max);
     let d = r[max - 1];
     while(d.includes(" ") && ctx.measureText(d + "… »").width > larg) d = d.slice(0, d.lastIndexOf(" "));
-    r[max - 1] = d.replace(/[\s,;:.\-–—]+$/, "") + "… »";
+    r[max - 1] = storyCoupePropre(d.split(" ")).join(" ").replace(/[\s,;:.\-–—]+$/, "") + "… »";
     return r;
   }
   const hauteurLignes = (n, t, inter) => n ? t + (n - 1) * t * inter : 0;
@@ -50,11 +50,12 @@
   /* ---------- Modèle B : « En bref » ---------- */
   // Titre de presse nettoyé (sans « DIRECT. » ni rubrique en tête), guillemets français
   function titrePresse(t){
-    let x = String(t || "").replace(/\s+/g, " ").trim().replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, "");
+    let x = storyTypo(t).replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, "");
     const m = /^[\p{L}0-9'’ -]{4,32}\.\s+(?=\p{Lu})/u.exec(x);
     if(m && x.length - m[0].length >= 28) x = x.slice(m[0].length);
-    return x.replace(/\.$/, "");
+    return minusculesListe(x.replace(/\.$/, ""));
   }
+  const minusculesListe = storyMinuscules;
   function choisirEnBref(){
     const tous = (ACTUALITES?.sujets || []).filter(s=> s.medias >= 2 && s.articles?.length)
       .map((s, i)=>({ s, i })).sort((a, b)=> (b.s.medias - a.s.medias) || (a.i - b.i));
@@ -84,7 +85,7 @@
       return { s, medias, titre: propre || titrePresse(arts[0].titre), propre:!!propre, video: aVideo(arts) };
     });
     // lignes d'un titre : le nôtre tel quel ; un titre de presse entre guillemets, refermés même s'il est coupé
-    const lignesDe = (it, tt)=>{ ctx.font = `800 ${tt}px "Public Sans"`; return it.propre ? storyLignes(ctx, it.titre, larg, 3) : citer(ctx, it.titre, larg, 3); };
+    const lignesDe = (it, tt)=>{ ctx.font = `800 ${tt}px "Public Sans"`; return it.propre ? storyLignes(ctx, storyTypo(it.titre), larg, 3) : citer(ctx, it.titre, larg, 3); };
     const mesure = (tt)=> items.map(it=> hauteurLignes(lignesDe(it, tt).length, tt, 1.14) + 14 + 26);
     const tz = 22; // médias : une ligne
     let tt = 62, hs = mesure(tt);
@@ -119,6 +120,7 @@
 
   /* ---------- Modèle D : « Dossier » ---------- */
   async function dossierStory(ctx, dossier){
+    dossier = { ...dossier, titre:storyTypo(dossier.titre) };
     // Un média différent par entrée, du plus récent au plus ancien ; on évite de répéter le même titre (reprises de dépêche)
     const triees = [...(dossier.articles || [])].sort((x, y)=> String(y.date).localeCompare(String(x.date)));
     const vus = new Set(), titresVus = new Set(), arts = [], reportes = [];
@@ -130,7 +132,7 @@
     }
     const nbMediasVus = new Set(triees.map(a=> a.media)).size;
     if(nbMediasVus < 3) return null;
-    for(const a of reportes){ if(arts.length >= 4) break; if(!vus.has(a.media)){ vus.add(a.media); arts.push(a); } }
+    if(arts.length < 2) return null; // jamais deux fois le même titre (reprises de dépêche) : sans au moins deux titres distincts, pas de dossier
     arts.sort((x, y)=> String(y.date).localeCompare(String(x.date)));
     const nbMedias = dossier.medias?.length || arts.length, nbArts = dossier.nb || dossier.articles?.length || arts.length;
     const { L, marge } = STORY, larg = L - 2 * marge;
@@ -212,7 +214,7 @@
       const wv = a.video ? largeurVideo(ctx) + 20 : 0;
       const h = quand(a.date), enteteLarg = larg - 56 - wv;
       let med = a.media; ctx.font = `800 26px "Public Sans"`;
-      while(ctx.measureText(`${med} · ${h}`).width > enteteLarg && med.length > 6) med = med.slice(0, -2).trimEnd();
+      while(ctx.measureText(`${med}${med !== a.media ? "…" : ""} · ${h}`).width > enteteLarg && med.length > 6) med = med.slice(0, -1).trimEnd();
       if(med !== a.media) med += "…";
       const entete = `${med} · ${h}`;
       ctx.fillStyle = C.ciel; ctx.fillText(entete, tx, yy + 24);

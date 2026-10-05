@@ -115,6 +115,48 @@ Base : audit du 5 octobre 2026 (Playwright, bureau 1300 px et mobile 390 px, 19 
 - **O** : donnée historique que les concurrents ne gardent pas.
 - **M** : volume de fichiers qui grossit dans le dépôt.
 
+## Stories (Instagram 1080 × 1920)
+Audit du 5 octobre 2026 : chaque modèle rendu avec Playwright sur des données réelles du dépôt et sur des cas limites (titre de 220 caractères, chiffre de 13 chiffres, nom de 70 caractères, média au nom très long, 12 médias, 0 média, portrait absent, TITRE EN CAPITALES, guillemets et accents, sujet sans titre rédigé, dossier à 120 articles, dossier à reprises identiques), puis relus image par image avec les zones masquées par Instagram (≈ 250 px en haut et en bas) en surimpression. Chaque ligne : **corrigé** / **à faire par le propriétaire** / **accepté**. Les rendus corrigés sont dans `instagram/modeles/`.
+
+**Forces**
+- Une direction artistique unique (`STORY_DA`) : tout modèle se reconnaît d'un coup d'œil. *Accepté (c'est le but).*
+- Titres de presse toujours cités avec leur média ; seuls les titres sont repris ; aucun titre de presse en grand si le site n'a pas son propre titre. *Accepté.*
+- Heures calculées (jamais codées en dur) : « 7 h 31 » est l'heure de l'article, au fuseau de Paris. *Vérifié : rien à corriger.*
+- Sélection très prudente (liste de mots exclus, thème justice, réserve électorale, nuit, plafonds, seuils 5 médias / dossier 6 / 2 par jour dans `data/stories-config.json`). *Accepté.*
+- Publication à 60 min d'écart, jamais deux fois la même story, jeton masqué dans les journaux. *Accepté.*
+
+**Faiblesses**
+- Logo à cheval sur la barre de profil Instagram (haut de l'image masqué sur ≈ 250 px) : **corrigé** (logo, étiquette et contenu descendus de 28 px ; `STORY_DA.logoY/etiquetteY/haut`).
+- Ligne « accroche → @hemicyclefrance » posée à 1680-1700 px, sous le champ de réponse : **corrigé** (1636 px, y compris pour la story « sondages »).
+- Citation coupée sur un mot faible (« … d'une annulation de la… », « … écoulé près… ») : **corrigé** (`storyLignes` retire les mots faibles et la ponctuation en fin de coupe ; titres longs d'abord réduits jusqu'à 9 lignes avant toute coupe).
+- Nom très long débordant de l'image (portraits, face à face) ou se chevauchant : **corrigé** (coupe après un trait d'union, puis au caractère avec « … »).
+- Chiffre très long (13 chiffres) sorti de l'image : **corrigé** (la taille descend jusqu'à 44 px).
+- Pastille de média trop étroite pour un nom long (texte qui dépasse) et, après coupe, dépassant la marge : **corrigé** (police fixée à la mesure, « … » compté).
+- Média absent : « — » seul et « TITRE PUBLIÉ PAR » vide : **corrigé** (pas de story sans média cité).
+- Titre de presse tout en capitales en géant (« L'ÉTAT DOIT TOUT CHANGER… ») : **corrigé** (remis en minuscules, sigles et noms propres usuels conservés).
+- Préfixes de rubrique et « DIRECT. » conservés dans les citations des modèles « en direct », « une » et « dossier » : **corrigé**.
+- Apostrophes droites mêlées aux apostrophes typographiques : **corrigé**.
+- Heures « 00 h 43 » : **corrigé** (« 0 h 43 »).
+- Dossier qui répète trois fois le même titre de dépêche : **corrigé** (titres distincts seulement ; moins de 3 titres distincts : pas de dossier en publication automatique).
+- Mots de reproche ou de polémique visant une personne nommée (« propos inélégants », « polémique », « fustige », « dérapage », « s'excuse », « attaque »…) absents de la liste d'exclusion : **corrigé** (ajoutés à `MOTS_EXCLUS`) ; le publieur applique aussi la liste à la sortie de file, pour une entrée plus ancienne que le durcissement.
+- Portrait manquant (Glucksmann, Faure, Hollande, Attal…) : initiales sur fond de couleur. **À faire par le propriétaire** : fournir ou autoriser des photos libres (`docs/portraits-a-completer.md`). L'image reste correcte.
+- Étiquette grise « PARTI ANIMALISTE » (texte blanc sur gris, contraste ≈ 2,3:1) dans la story candidat : **à faire par le propriétaire** (choisir une couleur de parti plus foncée dans les données) ; non bloquant.
+- Aucun lien cliquable : l'API des stories ne permet pas d'autocollant lien. **Accepté** ; le renvoi se fait par « → @hemicyclefrance » et le lien de la bio.
+
+**Opportunités**
+- Texte alternatif et fiche de publication : **corrigé** (champ `alt` dans chaque entrée de `data/instagram-file.json`, brouillon et flux Atom ; à coller dans le champ « texte alternatif » si la story est publiée à la main).
+- Série de rendez-vous réguliers (« En bref » du matin, « À noter » avant une échéance) pour fidéliser. **À faire par le propriétaire** : décider si l'« En bref » (actuellement `enBref: false`) est réactivé quand le compte aura une audience.
+- Réutiliser les stories comme publications de fil (carrousel) : **à faire par le propriétaire** (choix éditorial).
+
+**Menaces**
+- Libellé « À la une » pour un sujet faible : **corrigé** (« À la une » seulement à partir de 4 médias ; « En ce moment » pour 2-3 ; « Dans la presse » pour 1) ; titre de repli « Rubrique · en ce moment » ; « Énergie » ou toute rubrique seule n'est plus un titre de story.
+- « Face à face » affirmait une opposition entre deux candidats simplement cités ensemble : **corrigé** (il faut un débat, un duel ou une primaire dans les titres, et aucun mot de conflit).
+- Répétitivité (« Primaire de la gauche » en deux stories, « Blocage » puis « Blocus » des lycées) : **corrigé** (un sujet proche d'une story des dernières 24 h est refusé à la sélection, dans l'« En bref » et à la publication).
+- Sondage pendant la réserve électorale : déjà bloqué (sélection, file, publieur, contexte des modèles, dossier). **Accepté**, tests existants.
+- Reprise de titres de presse (droit d'auteur, droit des personnes) : titres courts, attribués, jamais d'accusation ; risque résiduel faible mais non nul. **À faire par le propriétaire** : relire les premières stories avant d'activer la publication sans validation (`validationHumaine`).
+- Fiabilité technique : les stories dépendent du rendu du site dans Chromium et d'un jeton Instagram à renouveler ; alertes déjà en place dans le résumé du workflow. **Accepté.**
+- Effet sur l'audience : peu de stories (2 par jour au plus) et sélectives, donc peu de bruit ; le risque est plutôt un compte trop silencieux. **Accepté.**
+
 ## Méthode et mentions
 - **F** : transparence (sources, limites, neutralité), dates réelles lues dans les fichiers, crédits des photos.
 - **f** : peu visitées ; texte dense.

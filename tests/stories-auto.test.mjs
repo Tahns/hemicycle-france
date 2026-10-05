@@ -410,7 +410,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon"))), "une");
     assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon", "Raphaël Glucksmann")), { candidats: null }), "une", "sans liste de candidats : pas de face à face");
     const s = sujet(TD, 4, pers("Jean-Luc Mélenchon", "Raphaël Glucksmann"));
-    s.articles[1].titre = "Primaire : Mélenchon attaque Glucksmann sur la fiscalité";
+    s.articles[1].titre = "Primaire : Mélenchon s'oppose à Glucksmann sur la fiscalité";
     assert.strictEqual(modele(s), "une", "titre conflictuel : pas de face à face");
   }
   // Le chiffre : le chiffre doit figurer dans les titres d'au moins 2 médias
@@ -445,7 +445,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   {
     const matin = new Date("2026-10-02T06:30:00Z"); // 8 h 30 à Paris
     const il = (h) => new Date(matin.getTime() - h * 36e5).toISOString();
-    const fort = (titre, theme, nb = 3) => ({ medias: nb, derniere: il(2), illustration: { theme }, titrePropre: { titre: `Sujet ${theme}`, origine: "recoupement" }, articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
+    const fort = (titre, theme, nb = 3) => ({ medias: nb, derniere: il(2), illustration: { theme }, titrePropre: { titre: titre.split(":")[0].slice(0, 45), origine: "recoupement" }, articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
     const sujets = [fort("Le gouvernement présente son projet de budget pour 2027", "budget"), fort("Le Sénat examine la loi de programmation militaire", "senat", 4), fort("Réforme des retraites : les partenaires sociaux reçus à Matignon", "gouvernement"), fort("Élections municipales : la date du scrutin est fixée", "election", 5)];
     const bref = (opts = {}) => AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: matin, ...opts });
     const b = bref();
@@ -507,6 +507,70 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const sujets = [1, 2, 3].map((i) => sujet(`Sujet de presse numéro ${i} sur le budget de la défense`, 4, { derniere: new Date(matin.getTime() - 36e5).toISOString() }));
     const c = choisir({ actualites: actu(...sujets), direct: null, sondages: sond(), lois: null, senat: null, probas: null, file: vide, now: matin, config: { monetisation: true, validationHumaine: false } });
     assert.ok(c.refus || c.propre, "monétisation : ni presse ni « en bref »");
+  }
+}
+
+// ---- Audit des stories : garde-fous ajoutés ----
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const T = "Le gouvernement présente son projet de budget pour 2027";
+  // Titre rédigé trop vague (« Énergie » seul, une rubrique) : pas de story
+  assert.ok(AUTO.titreGenerique("Énergie") && AUTO.titreGenerique("Vie politique") && AUTO.titreGenerique("Économie") && AUTO.titreGenerique(""));
+  assert.ok(!AUTO.titreGenerique("Primaire de la gauche") && !AUTO.titreGenerique("Blocage des lycées"));
+  assert.ok(choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" } })]).refus, "titre générique : refusé");
+  // Sujets proches (« Blocage » / « Blocus » des lycées) reconnus ; sujets différents non
+  assert.ok(AUTO.titresProches("Blocage des lycées", "Blocus des lycées"));
+  assert.ok(AUTO.titresProches("Primaire de la gauche", "Primaire de la gauche"));
+  assert.ok(!AUTO.titresProches("Primaire de la gauche", "Budget de la Défense"));
+  // Un sujet proche d'une story des dernières 24 h ne repasse pas (même avec un titre de presse différent) ; au-delà de 24 h, oui
+  {
+    const s = sujet(T, 4, { titrePropre: { titre: "Blocus des lycées", origine: "recoupement" } });
+    const recente = { id: "a".repeat(12), cree: il_y_a(5), titre: "autre titre de presse", titrePropre: "Blocage des lycées", sources: [] };
+    assert.ok(choix([s], { file: { entrees: [recente] } }).refus, "doublon proche : refusé");
+    assert.strictEqual(choix([s], { file: { entrees: [{ ...recente, cree: il_y_a(30) }] } }).indice, 0, "plus de 24 h : de nouveau possible");
+  }
+  // « En bref » : un seul des deux sujets proches
+  {
+    const matin = new Date("2026-10-02T06:30:00Z");
+    const il = (h) => new Date(matin.getTime() - h * 36e5).toISOString();
+    const f = (titre, propre, theme) => ({ medias: 3, derniere: il(2), illustration: { theme }, titrePropre: { titre: propre, origine: "recoupement" }, articles: Array.from({ length: 3 }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
+    const sujets = [f("Blocage des lycées : les syndicats appellent à la grève", "Blocage des lycées", "gouvernement"), f("Blocus des lycées : le ministre reçoit les syndicats ce matin", "Blocus des lycées", "politique"), f("Le Sénat examine la loi de programmation militaire", "Loi de programmation militaire", "senat"), f("Élections municipales : la date du scrutin est fixée", "Municipales : la date fixée", "election")];
+    const b = AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: matin });
+    assert.ok(!b.refus, b.refus);
+    assert.strictEqual(b.bref.indices.length, 3, "un seul des deux sujets « lycées »");
+    assert.ok(!(b.bref.indices.includes(0) && b.bref.indices.includes(1)));
+  }
+  // Mots de reproche ou de polémique visant une personne nommée : écartés
+  for (const t of ["Primaire de la gauche : Glucksmann se dit désolé après ses propos inélégants", "Polémique autour des déclarations du ministre sur la réforme", "Retraites : le président du groupe fustige la méthode du gouvernement", "Budget : la députée s'excuse après un dérapage en séance"]) {
+    assert.ok(AUTO.motExclu(t), `écarté : ${t}`);
+  }
+  assert.ok(!AUTO.motExclu("Le gouvernement présente son projet de budget pour 2027"));
+  // Face à face : il faut un débat, un duel ou une primaire dans les titres (deux candidats cités ensemble ne suffisent pas)
+  {
+    const candidats = { candidats: [{ nom: "Jean-Luc Mélenchon" }, { nom: "Raphaël Glucksmann" }] };
+    const pers = { illustration: { theme: "election", personnes: [{ nom: "Jean-Luc Mélenchon" }, { nom: "Raphaël Glucksmann" }] } };
+    assert.strictEqual(AUTO.faceAFace(sujet("Mélenchon et Glucksmann saluent la future loi sur le budget", 4, pers), candidats), false, "pas d'opposition annoncée : pas de face à face");
+    assert.strictEqual(AUTO.faceAFace(sujet("Primaire de la gauche : Mélenchon et Glucksmann au débat de ce soir", 4, pers), candidats), true);
+  }
+  // Dossier : au moins 3 titres distincts (reprises d'une même dépêche) et titre non générique
+  {
+    const art = (titre, i) => ({ titre, url: `https://example.org/d/${i}`, media: ["A", "B", "C", "D", "E"][i % 5], date: il_y_a(1) });
+    const dossier = (titres, titre = "Blocage des lycées") => ({ dossiers: [{ id: "lycees", titre, derniere: il_y_a(1), medias: ["A", "B", "C", "D", "E"], nb: titres.length, articles: titres.map(art) }], sujets: [] });
+    const meme = Array(5).fill("Le projet de loi de finances est présenté ce matin en conseil des ministres");
+    assert.strictEqual(AUTO.choisirDossier({ actualites: dossier(meme), file: vide, now }), null, "une seule dépêche reprise 5 fois : pas de dossier");
+    const divers = ["Le projet de loi de finances est présenté ce matin", "Budget 2027 : ce que contient le texte du gouvernement", "Loi de finances : les premières réactions des oppositions", "Budget : les syndicats demandent des garanties", "Finances publiques : le calendrier de l'examen au Parlement"];
+    assert.ok(AUTO.choisirDossier({ actualites: dossier(divers), file: vide, now }));
+    assert.strictEqual(AUTO.choisirDossier({ actualites: dossier(divers, "Énergie"), file: vide, now }), null, "titre de dossier générique");
+    assert.strictEqual(AUTO.choisirDossier({ actualites: dossier(divers), file: { entrees: [{ id: "b".repeat(12), cree: il_y_a(2), titrePropre: "Blocus des lycées", sources: [] }] }, now }), null, "dossier proche d'une story récente");
+  }
+  // Texte alternatif : dans la fiche (champ « alt »), sans rien ajouter au contenu
+  {
+    const d = AUTO.decrire(choix([sujet(T, 4)]));
+    assert.match(d.champs.alt, /Budget 2027/);
+    assert.match(d.champs.alt, /Repris par 4 médias/);
+    assert.match(d.champs.alt, /chaque média nommé/);
+    const flux = AUTO.fluxAtom([{ id: "c".repeat(12), cree: now.toISOString(), titre: "t", alt: "Texte <alt> & plus", url_image: "https://x/y.jpg" }], now);
+    assert.match(flux, /<summary>Texte &lt;alt&gt; &amp; plus<\/summary>/);
   }
 }
 

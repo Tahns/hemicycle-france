@@ -43,7 +43,7 @@ function ecrireLignes(ctx, f, x, yHaut, { poids = 700, fam = NEW, couleur = "#ff
 const sujetDe = info => ACTUALITES?.sujets?.[Number(info)] || null;
 const rubrique = s => (THEMES_ACTU[s?.illustration?.theme] || THEMES_ACTU.politique)[2];
 // Notre titre ; à défaut, un titre de repli neutre (jamais un titre de presse en grand titre)
-const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && s.titrePropre.titre.trim()) || `${rubrique(s)} · à\u00A0la\u00A0une`;
+const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && storyTypo(s.titrePropre.titre)) || `${rubrique(s)} · en\u00A0ce\u00A0moment`;
 const mediasDe = s => [...new Set((s.articles || []).map(a => a.media).filter(Boolean))];
 const sansAccent = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 // Titre de presse prêt à être cité : sans rubrique en tête, guillemets internes typographiques
@@ -77,7 +77,7 @@ function fond(ctx, etiquette, { fondEt = ROUGE } = {}){
   ctx.font = fnt(800, 26); ctx.letterSpacing = "4px";
   const txt = storyLignes(ctx, etiquette.toUpperCase(), LARG - 44, 1)[0]; ctx.letterSpacing = "0px";
   storyEtiquette(ctx, txt, marge, DA.etiquetteY, fondEt === ROUGE ? "rouge" : "blanc");
-  return 364;
+  return 392;
 }
 // Pied commun : ligne « Repris par N médias » (facultative), source en petit, puis « accroche → @compte ». Renvoie l'ordonnée du haut du pied (le contenu s'arrête 30 px plus haut).
 function pied(ctx, { medias = [], source, cta = "Toute l'actu politique" }){
@@ -185,7 +185,7 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   const y0 = fond(ctx, "Le chiffre du jour");
   const yPied = pied(ctx, { medias, source: "Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée.", cta: "Tous les chiffres" });
   const bas = yPied - 30, jt = jetons(ch.valeur);
-  let tnMax = 300; while(tnMax > 120 && largeurChiffre(ctx, jt, tnMax) > LARG) tnMax -= 2;
+  let tnMax = 300; while(tnMax > 44 && largeurChiffre(ctx, jt, tnMax) > LARG) tnMax -= 2; // chiffre très long : il rétrécit plutôt que de sortir de l'image
   const unite = String(ch.unite || "").trim();
   // Mise en page du haut : chiffre, unité, notre titre
   const hero = tn => {
@@ -199,13 +199,13 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   };
   let choix = null;
   for(const tq of [38, 34, 30, 28]){
-    for(let tn = tnMax; tn >= Math.max(170, tnMax * 0.8); tn -= 10){
+    for(let tn = tnMax; tn >= Math.min(tnMax, Math.max(170, tnMax * 0.8)); tn -= 10){
       const h = hero(tn);
       if(carte(ctx, d, tq, marge, 0, LARG, false) <= bas - h.bas - 40){ choix = { tn, tq, h }; break; }
     }
     if(choix) break;
   }
-  if(!choix){ const tn = Math.max(170, tnMax * 0.8); choix = { tn, tq: 28, h: hero(tn), maxQ: 2 }; }
+  if(!choix){ const tn = Math.min(tnMax, Math.max(170, tnMax * 0.8)); choix = { tn, tq: 28, h: hero(tn), maxQ: 2 }; }
   const { tn, h } = choix;
   ecrireChiffre(ctx, jt, marge, h.yN, tn);
   if(h.fu) ecrireLignes(ctx, h.fu, marge, h.yU, { poids: 700, inter: 1.04 });

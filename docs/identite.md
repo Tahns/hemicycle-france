@@ -52,6 +52,10 @@ Toutes les stories (1080 × 1920) partagent une seule direction artistique, déf
 - **Cartes** crème `#F5F1E8` aux angles arrondis (28 px), texte encre ; résultats : vert `#2E6E41` / rouge `#B8261E`.
 - **Pied** : une petite phrase de sources en bleu clair, puis une ligne blanche centrée « accroche → @hemicyclefrance » (jamais l'adresse du site).
 - Modèles d'actualité : « À la une », « En bref », « Le chiffre », « Dossier », « En direct », « Face à face », « Date à retenir » (`js/stories-actu*.js`). Un titre de presse est toujours cité et attribué ; seuls les titres sont repris.
+- **Zones masquées par Instagram** : les ≈ 250 px du haut (barre de profil) et du bas (champ de réponse) ne portent rien d'important. Logo à 292 px, étiquette à 340 px, contenu de 420 à 1490 px, pied de 1510 à 1650 px, ligne « → @compte » à 1636 px.
+- **Garde-fous de texte** : les titres réduisent leur taille avant toute coupe ; une coupe « … » ne s'arrête jamais sur un mot faible (de, la, près…) ; un nom ou un chiffre trop long est coupé ou réduit, jamais rogné ; un titre de presse en capitales est remis en minuscules.
+- **Libellés** : « À la une » seulement pour un sujet repris par 4 médias au moins ; « En ce moment » (2-3), « Dans la presse » (1). « Face à face » seulement pour un débat, un duel ou une primaire entre deux candidats déclarés.
+- **Texte alternatif** : chaque entrée de la file porte un champ `alt` (à coller dans le champ « texte alternatif » en cas de publication manuelle).
 - Aperçus : `instagram/modeles/`.
 
 ## Où ça s'applique
