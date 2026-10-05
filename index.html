@@ -556,7 +556,9 @@
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:var(--blanc); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
   .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1); border-radius:var(--r-3); background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
   .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
-  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1;}
+  .actu-picto{overflow:hidden;}
+  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
+  .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
   .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .actu-noms{color:var(--text-soft);}
@@ -593,6 +595,12 @@
   .actu-sujet h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
   .actu-sujet h4 a{color:var(--text); text-decoration:none;}
   .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-citation{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
+  .actu-citation a{color:inherit; text-decoration:none;} .actu-citation a:hover{text-decoration:underline;}
+  .actu-citation-media{color:var(--text-faint); font-weight:600;}
+  .actu-contexte{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
+  .actu-contexte small{color:var(--text-faint);}
+  .actu-video{font-size:var(--fs-xs); font-weight:700; color:var(--text-faint); white-space:nowrap;}
   .actu-meta{font-size:var(--fs-sm); color:var(--text-faint);}
   .actu-recoupe{display:inline-block; font-size:var(--fs-xs); font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent);}
   .actu-autres{list-style:none; margin:var(--s2) 0 0; padding:0 0 0 var(--s3); border-left:2px solid var(--border-soft); font-size:var(--fs-sm);}
@@ -2508,7 +2516,7 @@
         <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Budget, déficit et dette :</b> comptes des administrations publiques de la France (établis par l'Insee) tels que notifiés à <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=fr" target="_blank" rel="noopener">Eurostat</a> (tableaux gov_10a_exp, gov_10a_main et gov_10dd_edpt1, API publique), réutilisables sous licence ouverte (<a href="https://commission.europa.eu/legal-notice/reuse-commission-documents_fr" target="_blank" rel="noopener">politique de réutilisation de la Commission européenne</a>, source citée). Chaque bloc de la rubrique « Budget » indique sa source et son année.</li>
-        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart). Seul le titre est repris ; le contenu reste celui du média, à lire sur son site.</li>
+        <li><b>Actualités :</b> titres, dates et liens relus toutes les heures dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart). Le titre de presse n'est que cité, avec son média et un lien ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Bandeau « En direct » :</b> affiché seulement quand un événement est détecté, jamais autrement. Un traitement automatique repère, dans les titres déjà relevés des médias ci-dessus, l'annonce ou la tenue d'une prise de parole du président de la République (allocution, conférence de presse, discours, interview) publiée depuis moins de six heures ; il y ajoute, les jours de séance, la séance publique de l'Assemblée nationale d'après son agenda officiel (sans les heures : le bandeau dit « aujourd'hui », pas « en cours »). Le bandeau cite le titre du média et renvoie à son article. Les chaînes proposées sont de simples liens vers leurs pages officielles de direct : <a href="https://www.francetvinfo.fr/en-direct/" target="_blank" rel="noopener">franceinfo</a>, <a href="https://www.bfmtv.com/en-direct/" target="_blank" rel="noopener">BFMTV</a>, <a href="https://www.tf1info.fr/direct/" target="_blank" rel="noopener">LCI</a>, <a href="https://www.publicsenat.fr/direct" target="_blank" rel="noopener">Public Sénat</a>, <a href="https://www.france24.com/fr/direct" target="_blank" rel="noopener">France 24</a> et le <a href="https://videos.assemblee-nationale.fr/" target="_blank" rel="noopener">direct officiel de l'Assemblée nationale</a>. Aucune vidéo n'est intégrée au site. Le Sénat n'est pas couvert faute de données de séance relevées.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
         <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
@@ -4279,8 +4287,11 @@ function visuelActu(s){
     const p = ill.personnes[0];
     return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
-  return `<div class="actu-visuel actu-picto" style="--c:${theme[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
+  // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
+  const long = !/\s/.test(theme[2]) && theme[2].length > 9;
+  return `<div class="actu-visuel actu-picto${long ? " long" : ""}" style="--c:${theme[0]}" role="img" aria-label="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
 }
+const pastilleVideo = x => x.video ? `<span class="actu-video">▶ Vidéo</span> ` : "";
 function sujetHTML(s, court, une, sup){
   const a = s.articles[0];
   const medias = [...new Set(s.articles.map(x=>x.media))];
@@ -4290,10 +4301,14 @@ function sujetHTML(s, court, une, sup){
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
-    <h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a></h4>
+    ${s.titrePropre?.titre
+      ? `<h4>${esc(s.titrePropre.titre)}</h4>
+    <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>`
+      : `<h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h4>`}
+    ${(s.contexte || []).length ? `<p class="actu-contexte"><b>Le contexte</b> : ${s.contexte.map(c=>`${esc(c.texte)} <small>(${esc(c.source)})</small>`).join(" · ")}</p>` : ""}
     <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}
-    ${!court && s.articles.length > 1 ? `<details class="pli-mobile" open><summary class="pli-titre">Voir aussi ${Math.min(s.articles.length - 1, une ? 3 : 5)} titres</summary><ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul></details>` : ""}
+    ${!court && s.articles.length > 1 ? `<details class="pli-mobile" open><summary class="pli-titre">Voir aussi ${Math.min(s.articles.length - 1, une ? 3 : 5)} titres</summary><ul class="actu-autres">${s.articles.slice(1, une ? 4 : 6).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul></details>` : ""}
     </div>
   </article>`;
 }
@@ -4307,7 +4322,7 @@ function dossierHTML(d, max){
     <span class="actu-recoupe">Dossier</span>
     <h4>${esc(d.titre)}</h4>
     <div class="actu-meta"><span class="actu-nb">${d.articles.length} articles · ${medias.length} médias</span><span class="actu-quand"> · ${esc(ilYA(d.derniere || d.articles[0].date))}</span> <button type="button" class="lien-bouton bouton-story mini" data-story="actualites" data-id="${esc(d.id)}" aria-label="Créer une story de ce dossier" title="Créer une story de ce dossier"></button></div>
-    <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
+    <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
     <p class="actu-dossier-medias"><span>Médias :</span> <span>${esc(medias.join(", "))}</span></p>
   </article>`;
 }
@@ -8170,3 +8185,5 @@ if("serviceWorker" in navigator && (location.protocol === "https:" || location.h
 
 </body>
 </html>
+
+        <li><b>Titres, contexte et vidéos :</b> le grand titre de chaque sujet est rédigé par le site à partir du recoupement de plusieurs médias (sans lui, aucun titre n'est inventé). Les titres de presse ne sont que cités, entre guillemets, avec le nom de leur média. La ligne « Le contexte » vient des données officielles du site (Assemblée nationale, Gouvernement, partis, Commission des sondages), jamais d'un média. Les vidéos sont de simples liens signalés « Vidéo » : aucune n'est intégrée.</li>
