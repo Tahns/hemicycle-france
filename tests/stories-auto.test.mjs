@@ -212,4 +212,131 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.strictEqual(choisirDossier({ actualites: { dossiers: risqueD }, file: vide, now }), null, "titre à risque dans un dossier");
 }
 
+// ---------- Configuration, monétisation, brouillons, réserve (data/stories-config.json) ----------
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const { mkdtempSync, readdirSync, writeFileSync } = await import("fs");
+  const { tmpdir } = await import("os");
+  const { join } = await import("path");
+
+  // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
+  assert.deepStrictEqual(A.normaliserConfig(null), { monetisation: false, validationHumaine: false });
+  assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), { monetisation: false, validationHumaine: false }, "seul true (booléen) active");
+  assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), { monetisation: false, validationHumaine: false });
+  assert.deepStrictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")), { monetisation: false, validationHumaine: false }, "valeurs livrées : false/false");
+
+  // Données de test : un sujet de presse et un dossier parfaitement retenables, des votes finals récents (Assemblée, Sénat)
+  const titrePresse = "Le gouvernement présente son projet de budget pour 2027";
+  const dossierPresse = { id: "blocus-des-lycees", titre: "Blocus des lycées", nb: 7, medias: MEDIAS, derniere: il_y_a(1), articles: Array.from({ length: 7 }, (_, i) => ({ titre: `Blocus des lycées : épisode ${i}`, url: `https://example.org/d/${i}`, media: MEDIAS[i % 5], date: il_y_a(1) })) };
+  const presse = { sujets: [sujet(titrePresse, 5)], dossiers: [dossierPresse] };
+  assert.ok(choisir({ actualites: presse, direct: null, sondages: sond(), file: vide, now }).dossier, "sans monétisation : la presse reste retenue (dossier d'abord)");
+  const loi = (numero, dateISO, titre = "l'ensemble du projet de loi de finances pour 2027 (première lecture).") => ({ numero, titre, dateISO, resultat: "adopte", votes: { RN: [10, 0, 0, 12] }, dossierTitre: "Loi de finances pour 2027" });
+  const senatVote = (id, dateISO) => ({ id, numero: 1, session: 2026, titre: "sur l'ensemble du projet de loi relatif à l'énergie", dateISO, resultat: "adopte", groupes: { LR: { pour: 5, contre: 0, abst: 0 } } });
+  const loisEcartees = { lois: [loi(9001, jour(24 * 30)), loi(9002, jour(0), "l'amendement n° 12 à l'article 3"), loi(9003, jour(1), "l'ensemble du texte visant les mineurs victimes de violences")] };
+  const lois = { lois: [...loisEcartees.lois, loi(9004, jour(1))] };
+  const senat = { scrutins: [senatVote("senat-2026-1", jour(0))] };
+  const probas = { candidats: [{ nom: "X", secondTour: 20 }], lastUpdated: il_y_a(2) };
+  const mon = { monetisation: true, validationHumaine: false };
+  const choixM = (extra = {}) => choisir({ actualites: presse, direct: null, sondages: sond(), lois, senat, probas, file: vide, now, config: mon, ...extra });
+
+  // 1. Monétisation : aucun titre externe n'est retenu, même si presse et dossier sont parfaits
+  {
+    const titresExternes = new Set([...presse.sujets.flatMap((s) => s.articles.map((a) => a.titre)), ...dossierPresse.articles.map((a) => a.titre), dossierPresse.titre]);
+    assert.ok(choixM({ lois: null, senat: null, probas: null }).refus, "aucune donnée propre : rien, et surtout pas de presse");
+    for (const extra of [{}, { lois: loisEcartees }, { lois: null }, { lois: null, senat: null }, { sondages: sond(inst("Ifop", 24)) }]) {
+      const c = choixM(extra);
+      assert.ok(!c.refus, c.refus);
+      assert.ok(!c.sujet && !c.dossier && c.indice === undefined === !c.sondage, "ni sujet ni dossier de presse en monétisation");
+      const d = A.decrire(c);
+      assert.ok(!titresExternes.has(d.titre), `aucun titre externe : ${d.titre}`);
+      assert.ok(!d.champs.dossierId, "pas de dossier");
+      if (!c.sondage) assert.deepStrictEqual([d.medias, d.sources], [[], []], "aucun média ni lien de presse");
+    }
+    assert.strictEqual(choixM({ sondages: sond(inst("Ifop", 24)) }).sondage.nom, "Ifop", "le sondage garde la priorité");
+    const c = choixM();
+    assert.strictEqual(c.propre.type, "scrutin", "vote final de l'Assemblée d'abord");
+    assert.strictEqual(c.propre.numero, 9004, "vote récent, sobre, vote final");
+    // vote ancien (30 j), amendement, titre à risque (« mineurs », « victimes ») : jamais retenus ; le Sénat suit
+    assert.strictEqual(choixM({ lois: loisEcartees }).propre.type, "senat");
+    assert.strictEqual(choixM({ lois: loisEcartees, senat: null }).propre.type, "probabilites", "puis la simulation");
+    assert.strictEqual(choixM({ lois: loisEcartees, senat: null, probas: null }).refus !== undefined, true);
+    // déjà publié (file ou brouillon) : pas de doublon
+    const deja = { entrees: [{ id: c.id, cree: il_y_a(1), titre: "t", sources: [], donneesPropres: true }] };
+    assert.notStrictEqual(choixM({ file: deja }).id, c.id, "pas de doublon");
+    // la presse encore en file est retirée ; sondages et données propres restent
+    const file = [{ id: "a".repeat(12), cree: il_y_a(1), titre: "presse", dossierId: "x" }, { id: "b".repeat(12), cree: il_y_a(1), titre: "presse simple" }, { id: "c".repeat(12), cree: il_y_a(1), titre: "sondage", sondageId: "Ifop|2026-10-01" }, { id: "d".repeat(12), cree: il_y_a(1), titre: "vote", donneesPropres: true }];
+    assert.deepStrictEqual(A.purgerPresse(file).map((e) => e.id[0]), ["c", "d"]);
+    // nuit : rien, même en monétisation
+    assert.ok(choixM({ now: new Date("2026-10-02T21:30:00Z") }).refus, "pas de nuit");
+  }
+
+  // 2. Validation humaine : brouillon obligatoire, jamais la file de publication
+  {
+    const voteSeul = { id: "1".repeat(12), propre: { type: "scrutin" }, nommePersonne: false };
+    const sondageChoisi = { sondage: { nom: "Ifop" }, sondageId: "Ifop|2026-10-01", id: "2".repeat(12) };
+    const simulation = { propre: { type: "probabilites" }, nommePersonne: true, id: "3".repeat(12) };
+    const presseChoisie = { sujet: presse.sujets[0], id: "4".repeat(12) };
+    const off = { monetisation: false, validationHumaine: false };
+    assert.strictEqual(A.destination(voteSeul, mon), "file", "vote par groupe, sans validation : file");
+    assert.strictEqual(A.destination(voteSeul, { monetisation: true, validationHumaine: true }), "brouillon", "validation humaine : brouillon");
+    assert.strictEqual(A.destination(voteSeul, { monetisation: false, validationHumaine: true }), "brouillon", "validation humaine seule : brouillon");
+    assert.strictEqual(A.destination(sondageChoisi, mon), "brouillon", "sondage (nomme des candidats) : brouillon obligatoire");
+    assert.strictEqual(A.destination(simulation, mon), "brouillon", "simulation (nomme des candidats) : brouillon obligatoire");
+    assert.strictEqual(A.destination(sondageChoisi, off), "file", "comportement actuel inchangé sans monétisation");
+    assert.strictEqual(A.destination(presseChoisie, off), "file", "presse : inchangé sans monétisation");
+    assert.strictEqual(A.destination(presseChoisie, { monetisation: false, validationHumaine: true }), "brouillon");
+    // Écriture : brouillon (image + fiche) et une ligne de résumé ; aucune file de publication n'est touchée
+    const dir = join(mkdtempSync(join(tmpdir(), "brouillons-")), "instagram", "brouillons");
+    const resume = join(mkdtempSync(join(tmpdir(), "resume-")), "summary.md");
+    writeFileSync(resume, "");
+    process.env.GITHUB_STEP_SUMMARY = resume;
+    const fiche = { id: "2".repeat(12), cree: now.toISOString(), titre: "Sondage Ifop", type: "sondage", sondageId: `Ifop|${jour(24)}`, nommePersonne: true, statut: "a-valider" };
+    A.ecrireBrouillon(fiche, Buffer.from([0xff, 0xd8, 0xff, 0xd9]), dir);
+    delete process.env.GITHUB_STEP_SUMMARY;
+    assert.deepStrictEqual(readdirSync(dir).sort(), [`${fiche.id}.jpg`, `${fiche.id}.json`]);
+    assert.strictEqual(JSON.parse(readFileSync(join(dir, `${fiche.id}.json`), "utf-8")).statut, "a-valider");
+    const lignes = readFileSync(resume, "utf-8").trim().split("\n");
+    assert.strictEqual(lignes.length, 1, "une ligne dans $GITHUB_STEP_SUMMARY");
+    assert.match(lignes[0], /Brouillon à valider/);
+    assert.match(lignes[0], /nomme une personne/);
+    // Les brouillons comptent comme « déjà fait » : le même sondage n'est pas refait
+    const lus = A.lireBrouillons(dir);
+    assert.strictEqual(lus.length, 1);
+    assert.ok(choixS([inst("Ifop", 24)], { file: { entrees: lus } }).refus, "sondage déjà en brouillon : pas refait");
+  }
+
+  // 3. Réserve électorale : aucune sortie de sondage (ni simulation), du samedi 0 h au dimanche 20 h, file de publication et brouillons compris
+  {
+    const instants = ["2027-04-16T22:00:00Z" /* samedi 0 h 00 Paris */, "2027-04-17T10:00:00Z" /* samedi midi */, "2027-04-18T16:30:00Z" /* dimanche 18 h 30 */, "2027-04-18T17:59:00Z" /* dimanche 19 h 59 */];
+    const hors = ["2027-04-16T21:59:00Z" /* vendredi 23 h 59 */, "2027-04-18T18:00:00Z" /* dimanche 20 h 00 */];
+    for (const t of hors) assert.strictEqual(A.reserveSondages(new Date(t)), null, `hors réserve ${t}`);
+    for (const t of instants) {
+      const n = new Date(t);
+      assert.ok(A.reserveSondages(n), `réserve ${t}`);
+      const enFile = [{ id: "a".repeat(12), cree: n.toISOString(), titre: "sondage", type: "story", sondageId: "Ifop|2027-04-15" }, { id: "b".repeat(12), cree: n.toISOString(), titre: "simulation", reserve: true, donneesPropres: true }, { id: "c".repeat(12), cree: n.toISOString(), titre: "vote", donneesPropres: true }];
+      // aucun sondage ni simulation sélectionné, même tout frais, quelle que soit la configuration
+      const frais = { ...inst("Ifop", 24), dateFin: new Date(n.getTime() - 3 * 36e5).toISOString().slice(0, 10) };
+      const probasFrais = { candidats: [{ nom: "X", secondTour: 20 }], lastUpdated: n.toISOString() };
+      for (const config of [mon, { monetisation: false, validationHumaine: false }, { monetisation: true, validationHumaine: true }]) {
+        const c = choisir({ actualites: null, direct: null, sondages: sond(frais), lois: null, senat: null, probas: probasFrais, file: vide, now: n, config });
+        assert.ok(!c.sondage && !c.propre, `aucune sortie de sondage ni de simulation en réserve ${t}`);
+      }
+      assert.match(choisirSondage({ sondages: sond(frais), file: vide, now: n }).refus, /réserve/);
+      // file de publication et brouillons : les sorties de sondage sont retirées, le vote par groupe demeure
+      assert.deepStrictEqual(A.purgerReserve(enFile, n).map((e) => e.id[0]), ["c"], `file purgée en réserve ${t}`);
+      assert.deepStrictEqual(A.brouillonsASupprimer(enFile, n).sort(), ["a".repeat(12), "b".repeat(12)], `brouillons de sondage supprimés ${t}`);
+    }
+    // la simulation est refusée pour cause de réserve en pleine journée de samedi, et acceptée le dimanche à 20 h
+    const sam = new Date("2027-04-17T10:00:00Z"), dim20 = new Date("2027-04-18T18:00:00Z");
+    const pr = (n) => ({ candidats: [{ nom: "X", secondTour: 20 }], lastUpdated: n.toISOString() });
+    assert.match(A.choisirDonneesPropres({ lois: null, senat: null, probas: pr(sam), file: vide, now: sam }).refus, /réserve/);
+    assert.strictEqual(A.choisirDonneesPropres({ lois: null, senat: null, probas: pr(dim20), file: vide, now: dim20 }).propre.type, "probabilites", "dimanche 20 h : la réserve est levée");
+    // hors réserve : rien n'est retiré ; un brouillon de plus de 7 jours l'est quoi qu'il arrive
+    const garde = [{ id: "a".repeat(12), cree: dim20.toISOString(), titre: "sondage", sondageId: "Ifop|2027-04-15" }];
+    assert.strictEqual(A.purgerReserve(garde, dim20).length, 1, "hors réserve : conservé");
+    assert.deepStrictEqual(A.brouillonsASupprimer(garde, dim20), []);
+    assert.deepStrictEqual(A.brouillonsASupprimer([{ id: "e".repeat(12), cree: "2027-04-01T10:00:00Z" }], dim20), ["e".repeat(12)]);
+  }
+}
+
 console.log("stories-auto : tous les tests passent.");
