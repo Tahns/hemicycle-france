@@ -164,4 +164,52 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4)]).refus, "sujet français gardé");
 }
 
+// ---------- Dossiers (sujet dominant éclaté en petits sujets) ----------
+{
+  const { construireDossiers } = createRequire(import.meta.url)("../scripts/dossiers.cjs");
+  const { choisirDossier, idDossier } = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const titresLycees = [
+    "Blocus des lycées : la mobilisation s'étend dans l'Ouest", "Lycéens mobilisés devant leur lycée à Lyon", "Lycées : nouveau blocage ce matin à Toulouse",
+    "Les lycéens manifestent contre la réforme du bac", "Blocage des lycées : la ministre appelle au calme", "Un lycée bloqué à Nantes, rassemblement prévu",
+    "Blocus des lycées : les syndicats reçus au ministère",
+  ];
+  const fond = ["Le Sénat examine le budget de la défense", "Débat sur la fin de vie à l'Assemblée", "Réforme de l'audiovisuel public en commission", "Nouvelle loi sur l'immigration en discussion",
+    "Les écologistes réunis en université d'été", "Accord de libre-échange : les agriculteurs inquiets", "Transport ferroviaire : la SNCF annonce des hausses", "Le Conseil constitutionnel valide un texte",
+    "Les maires réclament plus de moyens pour les communes", "Retraites : les partenaires sociaux se retrouvent à Bercy"];
+  const art = (titre, i) => ({ titre, url: `https://example.org/${i}`, media: MEDIAS[i % 5], date: il_y_a(1 + (i % 10)) });
+  const fond2 = [...fond, ...fond.map((t) => t + " (2)"), ...fond.map((t) => t + " (3)")];
+  const base = [...titresLycees, ...fond2].map(art);
+  const d = construireDossiers(base, now);
+  assert.strictEqual(d.length, 1, "un dossier");
+  assert.strictEqual(d[0].titre, "Blocus des lycées");
+  assert.ok(d[0].nb >= 6 && d[0].medias.length >= 4);
+  assert.deepStrictEqual(Object.keys(d[0].articles[0]).sort(), ["date", "media", "titre", "url"]);
+  // Moins de 4 médias, ou moins de 6 articles : pas de dossier
+  assert.strictEqual(construireDossiers([...titresLycees.map((t, i) => ({ ...art(t, i), media: ["A", "B", "C"][i % 3] })), ...fond2.map(art)], now).length, 0, "3 médias : non");
+  assert.strictEqual(construireDossiers([...titresLycees.slice(0, 5).map(art), ...fond2.map(art)], now).length, 0, "5 articles : non");
+  // Plus de 48 h : non
+  assert.strictEqual(construireDossiers(base.map((a) => ({ ...a, date: il_y_a(60) })), now).length, 0, "trop ancien");
+  // Faits divers et accusations écartés avant le calcul : 3 des 7 titres sont exclus, il reste 4 articles
+  const risque = base.map((a, i) => (i % 2 === 0 && i < 6 ? { ...a, titre: a.titre + " : un élève mis en examen" } : a));
+  assert.strictEqual(construireDossiers(risque, now).length, 0, "titres à risque écartés");
+  // Un nom propre (personne) ne forme pas un dossier
+  const nom = Array.from({ length: 8 }, (_, i) => art(`${fond[i]} selon Jean Dupontel`, i + 20));
+  assert.strictEqual(construireDossiers([...nom, ...fond2.map(art)], now).length, 0, "nom propre : pas de dossier");
+  // Sujet purement étranger : écarté
+  const etr = Array.from({ length: 8 }, (_, i) => art(`Brésil. Élection présidentielle : Lula multiplie les meetings à Brasilia (${i})`, i + 40));
+  assert.strictEqual(construireDossiers([...etr, ...fond2.map(art)], now).length, 0, "dossier étranger écarté");
+
+  // Stories : un dossier non publié passe avant un sujet simple, avec les plafonds et horaires existants
+  const actus = { dossiers: d.map((x) => ({ ...x, derniere: il_y_a(1) })), sujets: [sujet("Le gouvernement présente son projet de budget pour 2027", 5)] };
+  const c = choisir({ actualites: actus, direct: null, sondages: sond(), file: vide, now });
+  assert.ok(c.dossier && c.dossier.id === d[0].id && c.id === idDossier(d[0].id), "dossier prioritaire sur le sujet simple");
+  const publie = { entrees: [{ id: idDossier(d[0].id), cree: il_y_a(2), titre: "x", sources: [], type: "story", dossierId: d[0].id }] };
+  assert.strictEqual(choisir({ actualites: actus, direct: null, sondages: sond(), file: publie, now }).indice, 0, "dossier déjà publié : le sujet simple suit");
+  assert.ok(choisirSujet({ actualites: actus, direct: null, file: { entrees: [1, 2, 3, 4].map((i) => ({ id: `${i}`.repeat(12), cree: il_y_a(i * 1.5), titre: `t${i}`, sources: [] })) }, now }).refus, "plafond de 4 par jour");
+  assert.ok(choisirSujet({ actualites: actus, direct: null, file: vide, now: new Date("2026-10-02T21:30:00Z") }).refus, "pas de dossier la nuit");
+  assert.strictEqual(choisirDossier({ actualites: { dossiers: d.map((x) => ({ ...x, derniere: il_y_a(5) })) }, file: vide, now }), null, "dossier trop ancien");
+  const risqueD = d.map((x) => ({ ...x, derniere: il_y_a(1), articles: x.articles.map((a, i) => (i ? a : { ...a, titre: a.titre + " : un lycéen mis en examen" })) }));
+  assert.strictEqual(choisirDossier({ actualites: { dossiers: risqueD }, file: vide, now }), null, "titre à risque dans un dossier");
+}
+
 console.log("stories-auto : tous les tests passent.");

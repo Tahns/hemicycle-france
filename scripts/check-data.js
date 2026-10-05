@@ -159,6 +159,21 @@ async function checkActualites() {
     if (!a.titre || !a.media || isNaN(Date.parse(a.date))) err(`actualites.json : article incomplet (${a.url})`);
     if (!/^https:\/\//.test(a.url || "") || !sites.some((d) => hote === d || hote.endsWith("." + d))) err(`actualites.json : lien hors des médias retenus (${a.url})`);
   }
+  // Dossiers (facultatifs) : au plus 3, >= 6 articles de >= 4 médias, liens vers les médias retenus
+  if (data.dossiers !== undefined) {
+    if (!Array.isArray(data.dossiers) || data.dossiers.length > 3) err("actualites.json : dossiers invalides (tableau de 3 au plus)");
+    for (const d of Array.isArray(data.dossiers) ? data.dossiers : []) {
+      const nom = `actualites.json : dossier ${d?.id || "?"}`;
+      if (!/^[a-z0-9-]+$/.test(d?.id || "") || !d.titre || !Array.isArray(d.motifs) || !Array.isArray(d.medias) || !Array.isArray(d.articles)) { err(`${nom} incomplet`); continue; }
+      if (d.articles.length < 6 || d.nb < 6) err(`${nom} : moins de 6 articles`);
+      if (new Set(d.articles.map((a) => a.media)).size < 4 || d.medias.length < 4) err(`${nom} : moins de 4 médias`);
+      for (const a of d.articles) {
+        const hote = (() => { try { return new URL(a.url).hostname.replace(/^www\./, ""); } catch { return ""; } })();
+        if (!a.titre || !a.media || isNaN(Date.parse(a.date))) err(`${nom} : article incomplet (${a.url})`);
+        if (!/^https:\/\//.test(a.url || "") || !sites.some((s) => hote === s || hote.endsWith("." + s))) err(`${nom} : lien hors des médias retenus (${a.url})`);
+      }
+    }
+  }
   // Illustrations : uniquement des images hébergées sur le site, qui existent
   for (const s of data.sujets) for (const p of s.illustration?.personnes || []) {
     if (p.photo && (!/^photos\/(deputes|senateurs|personnalites)\/[\w-]+\.jpg$/.test(p.photo) || !existsSync(p.photo))) err(`actualites.json : photo absente ou non hébergée (${p.photo})`);
