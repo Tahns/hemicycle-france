@@ -908,44 +908,67 @@ async function dessinerStory(type, info){
       sourceTxt = `Scrutin public n°${s.numero} du Sénat (session ${s.session}-${s.session + 1}), page officielle senat.fr.`;
       nom = `senat-${s.session}-${s.numero}`;
     }
-    const adopte = resultat === "adopte", theme = adopte ? STORY.vert : STORY.rouge;
-    y = storyCadre(ctx, surtitre, { couleur:theme });
-    const mot = adopte ? (censure ? "Censure adoptée" : "Adopté") : (censure ? "Censure rejetée" : "Rejeté");
-    y = storyChiffreHeros(ctx, mot, marge, y + 112, theme, 150);
-    y = storyTexte(ctx, titre, marge, y + 6, { taille:48, poids:600, police:"Newsreader", max:3, interligne:1.12 }) + 14;
+    // Style « question / réponse » sur fond bleu : la question (le texte voté), puis la réponse en grand
+    const adopte = resultat === "adopte";
     const pour = groupes.reduce((a,g)=>a+g.pour,0), contre = groupes.reduce((a,g)=>a+(g.contre||0),0), abst = groupes.reduce((a,g)=>a+(g.abst||0),0);
-    const total = pour + contre + abst;
-    const colonnes = censure ? [["Pour la censure", pour, STORY.vert], ["Voix requises", 289, STORY.encre]] : [["Pour", pour, STORY.vert], ["Contre", contre, STORY.rouge], ["Abstention", abst, STORY.ambre]];
-    const hc = 330;
-    storyCarte(ctx, marge, y, largeur, hc);
-    if(censure) storyHemicycle(ctx, marge + 300, y + hc - 34, 262, [[pour, STORY.vert]], 577, 190);
-    else storyHemicycle(ctx, marge + 300, y + hc - 34, 262, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], total || 1, 190);
-    colonnes.forEach(([lib, n, coul], i)=>{
-      const yy = y + 36 + i * (colonnes.length === 3 ? 96 : 120), x = marge + 620;
-      ctx.fillStyle = coul; ctx.fillRect(x, yy + 11, 18, 18);
-      ctx.font = `600 24px "Public Sans"`; ctx.fillStyle = STORY.doux; ctx.fillText(lib, x + 28, yy + 28);
-      ctx.font = `700 64px "Newsreader"`; ctx.fillStyle = coul === STORY.ambre ? STORY.ambreTxt : coul; ctx.fillText(formatNombre(n), x, yy + 88);
-    });
-    y += hc + 26;
-    if(!censure){ storyBarre(ctx, marge, y, largeur, 26, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], total || 1); y += 56; }
-    y = storyTitreSection(ctx, "Par groupe", marge, y + 14, theme) + 8;
-    const rangs = Math.ceil(groupes.length / 2), pas = Math.min(58, (bas - y - 30) / Math.max(1, rangs));
-    storyCarte(ctx, marge, y, largeur, rangs * pas + 24, "#fff", 24);
-    const cw = (largeur - 60) / 2, taille = Math.min(26, pas * 0.5);
-    groupes.forEach((g, i)=>{
-      const x = marge + 24 + (i % 2) * (cw + 12), yy = y + 12 + Math.floor(i / 2) * pas, ym = yy + pas / 2;
-      ctx.fillStyle = g.couleur; ctx.fillRect(x, ym - 9, 18, 18);
-      ctx.font = `600 ${taille}px "Public Sans"`; ctx.fillStyle = STORY.encre;
-      ctx.fillText(storyLignes(ctx, g.id, 100, 1)[0], x + 28, ym + taille * 0.36);
-      const m = g.membres || (g.pour + (g.contre||0) + (g.abst||0) + (g.npv||0)) || 1;
-      storyBarre(ctx, x + 138, ym - 8, 150, 16, [[g.pour, STORY.vert], [g.contre||0, STORY.rouge], [g.abst||0, STORY.ambre]], m);
-      const pos = censure ? (g.pour ? `${g.pour} pour` : "—") : positionMajoritaire({ typeVote:"" }, g);
-      ctx.font = `700 ${taille * 0.85}px "Public Sans"`; ctx.textAlign = "right";
-      ctx.fillStyle = pos === "pour" ? STORY.vert : pos === "contre" ? STORY.rouge : pos === "abst" ? STORY.ambreTxt : STORY.doux;
-      ctx.fillText(censure ? pos : ({ pour:"Pour", contre:"Contre", abst:"Abst." }[pos] || "Partagé"), x + cw - 6, ym + taille * 0.34);
-      ctx.textAlign = "left";
-    });
-    storyPied(ctx, sourceTxt + (censure ? " Barre : part des députés du groupe ayant voté la censure." : " Barre : pour · contre · abstention, sur les membres du groupe."));
+    const BLEU = "#1B3A8C", CIEL = "#C9D3FF", CREME = "#F5F1E8";
+    ctx.fillStyle = BLEU; ctx.fillRect(0, 0, L, STORY.H);
+    // Marque
+    const y0 = 214, cy = y0 + 40;
+    ctx.lineWidth = 7; ctx.lineCap = "round";
+    ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(marge + 30, cy, 27, Math.PI, 0); ctx.stroke();
+    ctx.strokeStyle = "#FF6B7A"; ctx.beginPath(); ctx.arc(marge + 30, cy, 13, Math.PI, 0); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(marge + 30, cy, 5, 0, 2 * Math.PI); ctx.fill(); ctx.lineCap = "butt";
+    ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = "#fff"; ctx.fillText("Hémicycle France", marge + 76, cy + 6);
+    // Question
+    const chambre = type === "senat" ? "Sénat" : "Assemblée nationale";
+    const etape = (titre.match(/\(([^)]*)\)\s*$/) || [])[1] || "";
+    const court = titre.replace(/\s*\([^)]*\)\s*$/, "").replace(/^L['’]ensemble (du |de la |de l['’]|des )/i, "").replace(/^./, c=>c.toUpperCase());
+    ctx.font = `700 30px "Public Sans"`; ctx.fillStyle = CIEL; ctx.letterSpacing = "4px";
+    ctx.fillText((censure ? "Motion de censure" : type === "senat" ? "Les sénateurs ont-ils voté" : "Vos députés ont-ils voté").toUpperCase(), marge, 362);
+    ctx.letterSpacing = "0px";
+    const question = censure ? "La motion de censure est-elle adoptée ?" : `« ${court} » ?`;
+    const tq = storyTailleFit(ctx, question, 392, 760, { tMax:92, tMin:52, police:"Newsreader", poids:600, interligne:1.06 });
+    y = storyTexte(ctx, question, marge, 392, { taille:tq, poids:600, police:"Newsreader", couleur:"#fff", max:7, interligne:1.06 });
+    y = storyTexte(ctx, [chambre, date, censure ? court : etape].filter(Boolean).join(" · "), marge, y + 20, { taille:26, poids:600, couleur:CIEL, max:2 }) + 30;
+    // Carte réponse
+    const lignes = [];
+    if(censure){
+      lignes.push(["Pour la censure", `${formatNombre(pour)} voix sur 289 requises`, adopte ? STORY.vert : STORY.rouge]);
+      const ids = groupes.filter(g=>g.pour > 0 && g.pour >= (g.membres || 0) / 2).map(g=>g.id);
+      lignes.push(["Groupes qui l'ont votée", ids.length ? ids.join(", ") : "aucun", STORY.encre]);
+    } else {
+      const parPos = { contre:[], abst:[], pour:[], partage:[] };
+      for(const g of groupes){ const p = positionMajoritaire({ typeVote:"" }, g); (parPos[p] || parPos.partage).push(g.id); }
+      const liste = ids => ids.length <= 4 ? ids.join(", ") : `${ids.length} groupes`;
+      if(parPos.contre.length) lignes.push(["Contre", liste(parPos.contre), STORY.rouge]);
+      if(parPos.abst.length) lignes.push(["Abstention", liste(parPos.abst), STORY.ambreTxt]);
+      if(parPos.pour.length) lignes.push(["Pour", liste(parPos.pour), STORY.vert]);
+      if(parPos.partage.length) lignes.push(["Partagés", liste(parPos.partage), STORY.doux]);
+    }
+    const cx = marge, cw = largeur, pad = 56, hCarte = 300 + lignes.length * 70 + (censure ? 0 : 50);
+    const cyc = Math.min(Math.max(y, 780), 1500 - hCarte);
+    ctx.fillStyle = CREME; ctx.beginPath(); ctx.roundRect(cx, cyc, cw, hCarte, 28); ctx.fill();
+    const verdict = (adopte ? "Adopté" : "Rejeté") + (censure ? "e" : "") + ".";
+    let tv = 150; ctx.letterSpacing = "-4px";
+    do { ctx.font = `900 ${tv}px "Public Sans"`; } while(ctx.measureText(verdict.toUpperCase()).width > cw - 2 * pad && (tv -= 6) > 80);
+    ctx.fillStyle = adopte ? STORY.vert : STORY.rouge;
+    ctx.fillText(verdict.toUpperCase(), cx + pad, cyc + 176); ctx.letterSpacing = "0px";
+    ctx.font = `600 36px "Public Sans"`; ctx.fillStyle = STORY.doux;
+    ctx.fillText(censure ? (adopte ? "Le Gouvernement est renversé." : "Le Gouvernement reste en place.") : `${formatNombre(pour)} pour · ${formatNombre(contre)} contre · ${formatNombre(abst)} abstention${abst > 1 ? "s" : ""}`, cx + pad, cyc + 236);
+    let ly = cyc + 270;
+    if(!censure){ storyBarre(ctx, cx + pad, ly, cw - 2 * pad, 16, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], (pour + contre + abst) || 1); ly += 46; }
+    for(const [lib, val, coul] of lignes){
+      ctx.fillStyle = "#E4DDCE"; ctx.fillRect(cx + pad, ly, cw - 2 * pad, 2);
+      ctx.font = `400 30px "Public Sans"`; ctx.fillStyle = STORY.encre; ctx.fillText(lib, cx + pad, ly + 46);
+      ctx.font = `800 30px "Public Sans"`; ctx.fillStyle = coul; ctx.textAlign = "right";
+      ctx.fillText(storyLignes(ctx, val, cw - 2 * pad - 300, 1)[0], cx + cw - pad, ly + 46); ctx.textAlign = "left";
+      ly += 70;
+    }
+    // Source et appel
+    storyTexte(ctx, sourceTxt, marge, 1530, { taille:22, couleur:CIEL, max:2, interligne:1.25 });
+    ctx.font = `700 32px "Public Sans"`; ctx.fillStyle = "#fff"; ctx.textAlign = "center";
+    ctx.fillText(`${type === "senat" ? "Et vos sénateurs" : "Et votre député"} ? → ${COMPTE_STORY}`, L / 2, 1680); ctx.textAlign = "left";
   }
 
   else if(type === "sondages"){
