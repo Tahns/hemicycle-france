@@ -12,6 +12,7 @@
  *
  * USAGE : node scripts/fetch-logos.js [--force]
  */
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, mkdir, access } from "fs/promises";
 import path from "path";
 
@@ -33,12 +34,12 @@ async function main() {
     if (present && l.telecharge === l.fichier && !FORCE) continue;
     try {
       const api = `https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlheight=80&format=json&titles=${encodeURIComponent("File:" + l.fichier)}`;
-      const info = Object.values((await (await fetch(api, { headers: { "User-Agent": USER_AGENT } })).json()).query.pages)[0].imageinfo?.[0];
+      const info = Object.values((await (await fetchPoli(api, { headers: { "User-Agent": USER_AGENT } })).json()).query.pages)[0].imageinfo?.[0];
       if (!info?.thumburl) throw new Error("fichier introuvable sur Commons");
       const m = info.extmetadata || {};
       const licence = texte(m.LicenseShortName?.value);
       if (!/public domain|domaine public|^cc0|^cc by/i.test(licence)) throw new Error(`licence non libre (${licence})`);
-      const res = await fetch(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
+      const res = await fetchPoli(info.thumburl, { headers: { "User-Agent": USER_AGENT } });
       if (!res.ok || !/image\/png/.test(res.headers.get("content-type") || "")) throw new Error(`HTTP ${res.status}`);
       await writeFile(cible, Buffer.from(await res.arrayBuffer()));
       Object.assign(l, { licence, auteur: texte(m.Artist?.value) || null, source: info.descriptionurl, telecharge: l.fichier });

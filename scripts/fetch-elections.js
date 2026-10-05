@@ -21,6 +21,7 @@
  * USAGE : node scripts/fetch-elections.js [--force] [--t1=fichier.csv --t2=fichier.csv]
  */
 
+import { fetchPoli } from "./http.js";
 import { readFile, writeFile, mkdir, access } from "fs/promises";
 import path from "path";
 
@@ -39,7 +40,7 @@ const normEntete = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase
 const nomAffiche = (nom) => nom.toLowerCase().replace(/(^|[\s'-])(\p{L})/gu, (m, p, c) => p + c.toUpperCase());
 
 async function urlRessource(jeu) {
-  const res = await fetch(`https://www.data.gouv.fr/api/1/datasets/${jeu}/`);
+  const res = await fetchPoli(`https://www.data.gouv.fr/api/1/datasets/${jeu}/`);
   if (!res.ok) throw new Error(`data.gouv.fr : HTTP ${res.status} pour ${jeu}`);
   const d = await res.json();
   // Niveau « subcom » (subdivision communale = commune) en texte, sinon un fichier « commune » en CSV
@@ -52,7 +53,7 @@ async function urlRessource(jeu) {
 }
 
 async function lireTexte(url) {
-  const res = await fetch(url);
+  const res = await fetchPoli(url, { timeoutMs: 180000 });
   if (!res.ok) throw new Error(`HTTP ${res.status} sur ${url}`);
   const buf = Buffer.from(await res.arrayBuffer());
   // Les fichiers du ministère sont souvent en Windows-1252

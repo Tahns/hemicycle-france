@@ -19,12 +19,26 @@ concurrency:
 jobs:
   actualites:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Déclenché par la fin d'une mise à jour : seulement si elle a réussi (pas de relance après un échec ou une annulation)
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
+      - name: Mémoire HTTP (relevés récents)
+        uses: actions/cache@v4
+        with:
+          path: .cache/http
+          key: http-${{ github.run_id }}
+          restore-keys: http-
+      # Sur un déclenchement workflow_run, les flux ne sont pas redemandés si le dernier relevé date de moins de 10 minutes
       - name: Titres de la rubrique politique des médias (flux RSS)
+        env:
+          GATE_MINUTES: ${{ github.event_name == 'workflow_run' && '10' || '' }}
         run: node scripts/fetch-actualites.js
       - name: Bandeau « En direct » (prise de parole du président, séance de l'Assemblée)
         run: node scripts/detecter-direct.js
@@ -58,20 +72,12 @@ jobs:
       - name: Contrôler la cohérence des données
         run: node scripts/check-data.js
       - name: Committer s'il y a du nouveau
+        run: scripts/commit-push.sh "Actualités ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/actualites.json data/direct.json data/instagram-file.json data/portraits.json instagram/auto instagram/file.atom photos/personnalites/hd photos/deputes/hd photos/senateurs/hd instagram/brouillons
+      # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
+      - name: Signaler un problème dans le résumé de l'exécution
+        if: failure()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/actualites.json data/direct.json data/instagram-file.json data/portraits.json instagram/auto instagram/file.atom photos/personnalites/hd photos/deputes/hd photos/senateurs/hd
-          git add -A -- instagram/brouillons || true
-          if git diff --cached --quiet; then
-            echo "Rien de nouveau."
-          else
-            git commit -m "Actualités ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
-            # Plusieurs workflows écrivent dans data/ : on reprend le dernier état distant et on réessaie
-            for i in 1 2 3; do
-              git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && break
-              git rebase --abort 2>/dev/null || true
-              sleep $((i * 5))
-            done
-            git status -sb | head -1
-          fi
+          {
+            echo "Le relevé d'actualités du $(date -u +%Y-%m-%d\ %H:%M) UTC a échoué : aucune donnée n'a été committée par cette exécution."
+            echo "Journal complet : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

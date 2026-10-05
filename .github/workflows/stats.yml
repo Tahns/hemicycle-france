@@ -11,6 +11,7 @@ concurrency:
 jobs:
   stats:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       TRAFIC_TOKEN: ${{ secrets.TRAFIC_TOKEN }}
     steps:

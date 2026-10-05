@@ -376,6 +376,31 @@ function elaguer(entrees, now = new Date()) {
   return { gardees, images };
 }
 
+/** Vrai si le fichier existe et commence comme un JPEG. */
+function imageValide(chemin) {
+  try {
+    const b = fs.readFileSync(chemin);
+    return b.length > 1000 && b[0] === 0xff && b[1] === 0xd8;
+  } catch (e) { return false; }
+}
+
+/** Retire des entrées dont l'image doit encore exister (ids de `images`) celles dont `existe(id)` est faux. Fonction pure (testable). */
+function retirerSansImage(entrees, images, existe) {
+  const retirees = [];
+  const gardees = entrees.filter((e) => {
+    if (!images.has(e.id) || existe(e.id)) return true;
+    retirees.push(e.id);
+    return false;
+  });
+  return { gardees, retirees };
+}
+
+/** Ligne d'alerte dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail. */
+function alerteResume(ligne) {
+  console.warn(`[stories-auto] ${ligne}`);
+  if (process.env.GITHUB_STEP_SUMMARY) { try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, ligne + "\n"); } catch (e) { /* sans résumé */ } }
+}
+
 /** Supprime les JPEG de instagram/auto/ qui ne sont plus à garder (noms strictement contrôlés). */
 function nettoyerImages(images, dossier = DOSSIER_IMG) {
   if (!fs.existsSync(dossier)) return [];
@@ -687,7 +712,10 @@ async function main() {
 
   const choix = choisir({ ...donnees, file: { entrees: [...file.entrees, ...restants] }, now, config });
   const { gardees, images } = elaguer(file.entrees, now);
-  let entrees = gardees;
+  // Une entrée récente dont l'image manque (ou n'est pas un JPEG) est retirée de la file, avec alerte : elle ne bloque rien
+  const { gardees: saines, retirees } = retirerSansImage(gardees, images, (id) => imageValide(path.join(DOSSIER_IMG, `${id}.jpg`)));
+  if (retirees.length) alerteResume(`- **File des stories** : entrée(s) retirée(s) faute d'image valide : ${retirees.join(", ")}.`);
+  let entrees = saines;
 
   if (choix.refus) {
     console.log(`[stories-auto] rien à mettre en file : ${choix.refus}.`);
@@ -705,7 +733,9 @@ async function main() {
     } else {
       fs.mkdirSync(DOSSIER_IMG, { recursive: true });
       fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
-      entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`, type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
+      // Jamais d'entrée sans image : l'image écrite doit être relisible, sinon rien n'entre dans la file
+      if (!imageValide(path.join(DOSSIER_IMG, `${choix.id}.jpg`))) throw new Error(`l'image instagram/auto/${choix.id}.jpg n'a pas été écrite correctement : aucune entrée ajoutée`);
+      entrees =[...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`, type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
       images.add(choix.id);
       console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
     }
@@ -720,6 +750,6 @@ async function main() {
   }
 }
 
-module.exports = { appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
+module.exports = { appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, retirerSansImage, imageValide, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

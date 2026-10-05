@@ -5,9 +5,13 @@ on:
   pull_request: {}
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verifier:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -15,10 +19,11 @@ jobs:
           node-version: "22"
       - name: Syntaxe des scripts
         run: for f in scripts/*.js scripts/*.cjs; do node --check "$f"; done
-      - name: Tests du garde-fou et des licences
-        run: node tests/garde.test.mjs && node tests/detecter-direct.test.mjs && node tests/compte.test.mjs && node tests/verifications.test.mjs && node tests/titres-propres.test.mjs && node tests/stories-auto.test.mjs && node tests/publier-stories.test.mjs
+      # Tous les fichiers tests/*.test.mjs et tests/*.test.js sont lancés (un nouveau test est pris en compte sans modifier ce fichier)
+      - name: Tests unitaires
+        run: node tests/lancer-tous.mjs
       - name: Cohérence des données
-        run: node scripts/check-data.js
+        run: node scripts/check-data.js --strict
       - name: Installer Playwright (Chromium)
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
