@@ -2485,7 +2485,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Pour débuter</div>
       <h2>Les présidents</h2>
-      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> sous la Ve République, dans l'ordre, du premier au dernier. Des dates et des faits, sans avis.
+      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> sous la Ve République, du plus récent au plus ancien. Des dates et des faits, sans avis.
         <small>Liste relue le <span id="presidents-verifie">2 octobre 2026</span>. Sources : site de l'Élysée et Wikipédia, un lien vers la fiche de chacun.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> s'est terminé.</p>
     </div>
@@ -4901,7 +4901,7 @@ function renderPresidents(){
       <div class="pres-regime-tete"><h3>${esc(r.nom)} <span>${esc(r.debut)}–${esc(r.fin || "")}${r.fin ? "" : " " + esc(t("à aujourd'hui"))}</span></h3></div>
       <p class="pres-election">${PRESIDENTS_ELECTION[r.id] || esc(r.election)}</p>
       <p class="pres-src">${esc(t("Sources :"))} ${(r.sources || []).map(s => `<a href="${lien(s.url)}" target="_blank" rel="noopener">${esc(s.nom)}</a>`).join(" · ")}</p>
-      <ol class="pres-liste">${r.presidents.map((p, i) => presEntree(p, i + 1)).join("")}</ol>
+      <ol class="pres-liste">${r.presidents.map((p, i) => presEntree(p, i + 1)).reverse().join("")}</ol>
     </section>` })),
     ...[].map(x => ({ debut:x.debut, html:`<p class="pres-pause" data-periode="${esc(x.debut)}"><b>${esc(x.debut)}–${esc(x.fin)} · Pas de président de la République</b>${esc(t(x.texte))} <a href="${lien(x.wikipedia)}" target="_blank" rel="noopener">Wikipédia</a></p>` }))
   ].sort((a, b) => a.debut - b.debut);
@@ -6630,8 +6630,8 @@ const HUBS = [
   { id:"actu", nom:"Actualités", pages:[["actualites","Actualités"]] },
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, institut par institut"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
-  { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"]] },
-  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"], ["presidents","Les présidents","Tous les présidents de la Ve République, dans l'ordre"]] }
+  { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"], ["presidents","Les présidents","Tous les présidents de la Ve République, du plus récent au plus ancien"]] },
+  { id:"quiz", nom:"Quiz", pages:[["quiz","Quiz","Avec quel groupe votez-vous pareil ?"], ["comprendre","Comprendre","Qui fait quoi, comment naît une loi"]] }
 ];
 const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));

@@ -3,8 +3,7 @@
  * check-portraits.js
  * ------------------
  * Droit à l'image : chaque photo de photos/personnalites/ (et de sa version haute définition photos/personnalites/hd/) doit avoir une entrée dans
- * data/portraits.json avec sa licence, sa source (page Commons) et, hors domaine public / CC0,
- * son auteur (obligation d'attribution). Une photo sans licence est une erreur bloquante
+ * data/portraits.json avec sa licence libre, sa source (page Commons) et son auteur. Une photo sans licence est une erreur bloquante
  * (appelée par check-data.js).
  *
  * USAGE : node scripts/check-portraits.js [dossier] [portraits.json]
@@ -30,7 +29,8 @@ export async function verifierPortraits(dossier = "photos/personnalites", fichie
       if (!p.licence) erreurs.push(`${dir}/${f} : licence manquante (${p.nom})`);
       else if (NON_LIBRE.test(p.licence)) erreurs.push(`${dir}/${f} : licence non libre (« ${p.licence} », ${p.nom})`);
       if (!/^https:\/\//.test(p.source || "")) erreurs.push(`${dir}/${f} : source (page Commons) manquante (${p.nom})`);
-      if (p.licence && !/public domain|domaine public|^cc0|^pd\b/i.test(p.licence) && !p.auteur) erreurs.push(`${dir}/${f} : auteur manquant, attribution impossible (${p.nom})`);
+      // Auteur obligatoire pour toute photo (« Auteur inconnu » si Commons n'en donne pas) : crédit affiché partout
+      if (!String(p.auteur || "").trim()) erreurs.push(`${dir}/${f} : auteur manquant (${p.nom}) ; écrire « Auteur inconnu » si Commons n'en indique pas`);
     }
   }
   return erreurs;

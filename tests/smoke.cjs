@@ -180,7 +180,7 @@ function verifier(cond, message) {
     const attendus = donneesPres.regimes.filter((r) => r.id === "v").flatMap((r) => r.presidents.map((p) => p.nom));
     verifier(await page.evaluate(() => document.getElementById("view-presidents").classList.contains("active")), `${nom} : la page Les présidents ne s'ouvre pas`);
     verifier(attendus.length === 8 && (await page.$$("#presidents-frise .pres-item")).length === attendus.length, `${nom} : le nombre de présidents affichés ne correspond pas aux données`);
-    verifier(JSON.stringify(await page.$$eval("#presidents-frise .pres-item", (l) => l.map((e) => e.dataset.president))) === JSON.stringify(attendus), `${nom} : présidents hors ordre chronologique`);
+    verifier(JSON.stringify(await page.$$eval("#presidents-frise .pres-item", (l) => l.map((e) => e.dataset.president))) === JSON.stringify([...attendus].reverse()), `${nom} : présidents hors ordre (du plus récent au plus ancien)`);
     verifier(new RegExp(`^${attendus.length} présidents depuis 1959`).test(await page.textContent("#presidents-bandeau .pres-gros")), `${nom} : bandeau « présidents depuis 1959 » incorrect`);
     verifier((await page.$$("#presidents-frise .pres-item.en-cours")).length === 1 && /Emmanuel Macron/.test(await page.textContent("#presidents-bandeau .pres-courant")), `${nom} : le président actuel n'est pas mis en évidence`);
     verifier((await page.$$("#presidents-frise .pres-regime")).length === 1 && (await page.$$("#presidents-frise .pres-pause")).length === 0, `${nom} : régimes ou périodes sans président manquants`);
@@ -271,7 +271,7 @@ function verifier(cond, message) {
       verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "false", "ordinateur : menu fermé au départ (aria-expanded)");
       await page.click(flecheElus);
       verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "true" && await page.isVisible("#menu-elus"), "ordinateur : le clic sur la flèche n'ouvre pas le menu");
-      verifier(await page.evaluate(() => { const l = document.getElementById("menu-elus"); const r = l.getBoundingClientRect(); return l.querySelectorAll("a[role=menuitem]").length === 6 && [...l.querySelectorAll("a")].every(a => a.querySelector("b") && a.querySelector("span").textContent.trim()) && r.left >= 0 && r.right <= innerWidth; }),
+      verifier(await page.evaluate(() => { const l = document.getElementById("menu-elus"); const r = l.getBoundingClientRect(); return l.querySelectorAll("a[role=menuitem]").length === 7 && [...l.querySelectorAll("a")].every(a => a.querySelector("b") && a.querySelector("span").textContent.trim()) && r.left >= 0 && r.right <= innerWidth; }),
         "ordinateur : menu Élus incomplet ou coupé par l'écran");
       await page.keyboard.press("Escape");
       verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "false" && !(await page.isVisible("#menu-elus")), "ordinateur : Échap ne ferme pas le menu");
