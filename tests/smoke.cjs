@@ -435,7 +435,7 @@ function verifier(cond, message) {
       const decalage = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       if (avec) {
         verifier((await page.$$("#budget-contenu .budget-bloc")).length === 4, `${etiquette} : quatre blocs attendus`);
-        verifier((await page.$$("#budget-contenu .budget-bloc:first-child .budget-barres li")).length === 11, `${etiquette} : onze fonctions de dépenses attendues`);
+        verifier((await page.$$("#budget-contenu .budget-bloc:first-child .tm-case")).length === 11 && (await page.$$("#budget-contenu .budget-bloc:first-child .budget-tableau tbody tr")).length === 11, `${etiquette} : onze fonctions de dépenses attendues (graphique et tableau)`);
         verifier(/Pour 100 € dépensés/.test(texte) && /Source : /.test(texte) && /année 2023/.test(texte), `${etiquette} : phrase « Pour 100 € », source ou année absentes`);
         verifier((await page.$$("#budget-contenu .budget-source a[href^='https://']")).length >= 4, `${etiquette} : lien vers la source absent`);
         verifier(/Déficit/.test(texte), `${etiquette} : déficit absent`);

@@ -13,6 +13,9 @@
  *  - pas déjà en file (id = empreinte du titre central, ou lien d'article déjà utilisé) ;
  *  - aucun mot de la liste prudente (mise en cause, accusation, enquête, violence, décès, mineur,
  *    victime, fait divers…), pas de thème « justice » : mieux vaut manquer une story que publier à tort ;
+ *  - DOSSIER (data/actualites.json, « dossiers » : un sujet dominant repris par >= 4 médias) : un dossier non encore publié
+ *    (champ dossierId du journal) passe AVANT les sujets simples, avec les mêmes plafonds, horaires et fraîcheur ;
+ *    ses titres sont déjà filtrés (faits divers et accusations écartés) ;
  *  - au plus 4 entrées par jour (UTC+2) ; aucune entre 23 h et 7 h, heure de Paris.
  * On garde les 30 dernières entrées ; les images de plus de 3 jours sont supprimées.
  *
@@ -157,6 +160,29 @@ function presidentParle(sujet, direct) {
   return (sujet.articles || []).some((a) => titres.has(a.titre));
 }
 
+/** Identifiant d'une story de dossier. */
+const idDossier = (id) => crypto.createHash("sha1").update("dossier|" + id).digest("hex").slice(0, 12);
+
+/** Un dossier (actualites.dossiers) non encore publié, frais, sans mot de la liste prudente ; renvoie { dossier, id, medias } ou null. */
+function choisirDossier({ actualites, file, now = new Date() }) {
+  const entrees = file?.entrees || [];
+  const enFile = new Set(entrees.map((e) => e.dossierId).filter(Boolean));
+  const ids = new Set(entrees.map((e) => e.id));
+  const candidats = (actualites?.dossiers || []).filter((d) => {
+    if (!d?.id || !/^[a-z0-9-]+$/.test(d.id) || !d.titre || !Array.isArray(d.articles) || d.articles.length < 3) return false;
+    if (enFile.has(d.id) || ids.has(idDossier(d.id))) return false;
+    const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
+    if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return false;
+    if (new Set(d.articles.map((a) => a.media)).size < 4) return false;
+    if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
+    return !d.articles.some((a) => motExclu(a.titre));
+  });
+  if (!candidats.length) return null;
+  candidats.sort((a, b) => b.medias.length - a.medias.length || b.nb - a.nb);
+  const d = candidats[0];
+  return { dossier: d, id: idDossier(d.id), medias: new Set(d.articles.map((a) => a.media)).size };
+}
+
 /**
  * Choisit au plus un sujet. Renvoie { indice, sujet, id } ou { refus: "raison" }.
  * file : { entrees: [...] } ; now : Date.
@@ -169,6 +195,8 @@ function choisirSujet({ actualites, direct, file, now = new Date() }) {
   if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jour).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set(entrees.map((e) => e.id));
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
+  const dossier = choisirDossier({ actualites, file, now });
+  if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
   const candidats = [];
   (actualites?.sujets || []).forEach((s, indice) => {
@@ -229,7 +257,7 @@ function nettoyerImages(images, dossier = DOSSIER_IMG) {
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".mjs": "text/javascript", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".svg": "image/svg+xml", ".css": "text/css", ".webmanifest": "application/manifest+json" };
 
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -250,10 +278,17 @@ async function dessiner(indice, titre, sondage = null) {
     await page.goto(SITE, { waitUntil: "load" });
     if (sondage) {
       await page.waitForFunction(() => typeof INSTITUTS !== "undefined" && INSTITUTS.length > 0 && typeof CANDIDATS !== "undefined" && typeof dessinerStory === "function", null, { timeout: 30000 });
+    } else if (dossier) {
+      await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.dossiers?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier }) => {
+      if (dossier) { // story du dossier : le site doit avoir le même dossier que le fichier
+        if (!ACTUALITES.dossiers.some((d) => d.id === dossier)) return null;
+        const r = await dessinerStory("actualites", dossier);
+        return r ? r.apercu : null;
+      }
       if (sondage) { // story « sondages » limitée à CETTE enquête ; le site doit avoir le même relevé que le fichier
         const i = INSTITUTS[indice];
         if (!i || i.nom !== sondage.nom || i.dateFin !== sondage.dateFin) return null;
@@ -263,7 +298,7 @@ async function dessiner(indice, titre, sondage = null) {
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
       const r = await dessinerStory("actualite", indice);
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -333,6 +368,27 @@ async function main() {
     }].slice(-GARDER);
     images.add(choix.id);
     console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+  } else if (choix.dossier) {
+    const d = choix.dossier;
+    console.log(`[stories-auto] dossier retenu (${choix.medias} média(s)) : ${d.titre}`);
+    const jpeg = await dessiner(0, d.titre, null, d.id);
+    const dim = dimensionsJpeg(jpeg);
+    if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
+    if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
+    fs.mkdirSync(DOSSIER_IMG, { recursive: true });
+    fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
+    entrees = [...entrees, {
+      id: choix.id,
+      cree: now.toISOString(),
+      titre: d.titre,
+      medias: [...new Set(d.articles.map((a) => a.media))],
+      url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`,
+      type: "story",
+      dossierId: d.id,
+      sources: d.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12),
+    }].slice(-GARDER);
+    images.add(choix.id);
+    console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
   } else {
     const titre = choix.sujet.articles[0].titre;
     console.log(`[stories-auto] sujet retenu (${choix.medias} média(s)) : ${titre}`);
@@ -364,6 +420,6 @@ async function main() {
   }
 }
 
-module.exports = { choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, MAX_PAR_JOUR, GARDER };
+module.exports = { choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

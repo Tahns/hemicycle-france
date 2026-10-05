@@ -15,6 +15,8 @@
  *  - un lien présent dans la base des contenus démentis du Décodex (Le Monde) est écarté ;
  *  - la veille et le jour d'un tour de la présidentielle, les titres qui citent un sondage sont écartés
  *    (loi du 19 juillet 1977, art. 11) ;
+ *  - « dossiers » (scripts/dossiers.cjs) : mots-clés communs à >= 6 articles de >= 4 médias sur 48 h ; faits divers et
+ *    accusations écartés, titres neutres ;
  *  - si moins de 3 médias répondent, le fichier n'est pas modifié (erreur signalée par le workflow).
  *
  * USAGE : node scripts/fetch-actualites.js [--dry-run] [--dossier=flux/]   (flux locaux <id>.xml, tests)
@@ -24,7 +26,9 @@ import { readFile, writeFile } from "fs/promises";
 import { createRequire } from "module";
 import { ecrireGarde } from "./garde.js";
 import { construireIndex, illustrer } from "./illustrations.js";
-const { concerneLaFrance } = createRequire(import.meta.url)("./pertinence.cjs");
+const requireCjs = createRequire(import.meta.url);
+const { concerneLaFrance } = requireCjs("./pertinence.cjs");
+const { construireDossiers } = requireCjs("./dossiers.cjs");
 
 const DATA_FILE = "data/actualites.json";
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -168,7 +172,10 @@ async function main() {
 
   // Un même article peut figurer deux fois dans un flux : dédoublonnage par lien
   const vus = new Set();
-  const uniques = articles.filter((a) => !vus.has(a.url) && vus.add(a.url)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, MAX);
+  const tous = articles.filter((a) => !vus.has(a.url) && vus.add(a.url)).sort((a, b) => b.date.localeCompare(a.date));
+  const uniques = tous.slice(0, MAX);
+  // Dossiers : un sujet dominant éclaté en petits sujets d'un seul média (>= 6 articles, >= 4 médias sur 48 h)
+  const dossiers = construireDossiers(tous, maintenant);
 
   // Sujets : chaque titre est comparé au premier titre du sujet (pas à tous : sinon les sujets s'enchaînent)
   const sujets = [];
@@ -196,6 +203,7 @@ async function main() {
   const sortie = {
     source: "Flux RSS publics de la rubrique politique de médias nationaux",
     medias: MEDIAS.map((m) => ({ nom: m.nom, site: `https://www.${m.domaine}/`, lu: repondu.includes(m.nom) })),
+    dossiers,
     sujets: sortieSujets,
   };
   const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "{}"));
@@ -204,7 +212,7 @@ async function main() {
   if (DRY_RUN) return console.log(JSON.stringify(sortie, null, 2));
   // Le volume de l'actualité varie fortement d'une heure à l'autre : seuil de chute plus large (50 %) que les données stables
   const contenu = { lastUpdated: maintenant.toISOString(), ...sortie };
-  if (await ecrireGarde(DATA_FILE, contenu, { nom: DATA_FILE, texte: JSON.stringify(contenu, null, 1) + "\n", liste: (d) => d.sujets, obligatoires: ["articles", "derniere"], seuil: 0.5 })) log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.filter((s) => s.medias >= 2).length} sujet(s) repris par plusieurs médias.`);
+  if (await ecrireGarde(DATA_FILE, contenu, { nom: DATA_FILE, texte: JSON.stringify(contenu, null, 1) + "\n", liste: (d) => d.sujets, obligatoires: ["articles", "derniere"], seuil: 0.5 })) log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.filter((s) => s.medias >= 2).length} sujet(s) repris par plusieurs médias, ${dossiers.length} dossier(s).`);
 }
 
 main().catch((e) => {
