@@ -43,6 +43,17 @@ qu'à lire un graphique, jamais à décorer. Aucun dégradé coloré, aucun halo
 - Pas d'emoji, pas de point d'exclamation, pas de jugement sur un parti ou une personne.
 - Exemples : « Ce que votent les députés, texte après texte. » plutôt que « Plateforme de suivi parlementaire ».
 
+## Les stories Instagram : direction artistique « fond bleu »
+Toutes les stories (1080 × 1920) partagent une seule direction artistique, définie dans une constante (`STORY_DA`, `js/stories.js`) :
+- **Fond** bleu royal `#1B3A8C` (fond « nuit » `#14161B` pour les sujets EN DIRECT).
+- **En haut** (sous la zone masquée par Instagram) : le logo « Hémicycle France » (icône d'hémicycle bleu clair et rose, nom en Public Sans gras blanc).
+- **Kicker** en capitales espacées bleu clair `#C5CEF2`, ou **pastille** plate : rouge `#C8102E` à texte blanc (« À LA UNE », « LE CHIFFRE DU JOUR », « FACE À FACE »), blanche à texte bleu (« DOSSIER », « À NOTER »).
+- **Titres** en Newsreader gras blanc ; accent **rose** `#F26B8A` (numéros, mois, « VS », filets de frise).
+- **Cartes** crème `#F5F1E8` aux angles arrondis (28 px), texte encre ; résultats : vert `#2E6E41` / rouge `#B8261E`.
+- **Pied** : une petite phrase de sources en bleu clair, puis une ligne blanche centrée « accroche → @hemicyclefrance » (jamais l'adresse du site).
+- Modèles d'actualité : « À la une », « En bref », « Le chiffre », « Dossier », « En direct », « Face à face », « Date à retenir » (`js/stories-actu*.js`). Un titre de presse est toujours cité et attribué ; seuls les titres sont repris.
+- Aperçus : `instagram/modeles/`.
+
 ## Où ça s'applique
 Le site (en-tête, titres, cartes), les stories et publications Instagram, la photo de profil et les couvertures
 « À la une », l'image de partage (`icons/partage.jpg`), le favicon et la page 404.

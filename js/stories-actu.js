@@ -1,14 +1,14 @@
 /* Module chargé à la demande (stories d'actualité) : voir chargerModule() dans index.html. */
-/* Story d'un sujet d'actualité, style « bleu question / réponse » :
-   - modèle A « À la une » (par défaut) : grand titre (le nôtre), citation de presse, portraits, contexte ;
-   - modèle E « En direct » : fond sombre, grand titre, 2-3 citations de presse.
+/* Story d'un sujet d'actualité, sur la direction artistique commune (STORY_DA, helpers de js/stories.js) :
+   - modèle A « À la une » (par défaut) : étiquette rouge + heure, gros titre, « N médias en parlent » + pastilles blanches des médias, 1 ou 2 personnalités ;
+   - modèle E « En direct » : fond nuit, « ● EN DIRECT », heure de mise à jour, titre, puces (titre de presse + média).
    info = indice du sujet dans ACTUALITES.sujets, éventuellement « <indice>:<modèle> » (une, direct, facea, chiffre, date).
    Tout est enfermé dans une fonction : les constantes ne doivent pas entrer en collision avec les autres modules d'actualité. */
 (()=>{
-const BLEU = "#1B3A8C", CIEL = "#C9D3FF", CREME = "#F5F1E8", ROUGE = "#C8102E", ROSE = "#FF6B7A", SOMBRE = "#12141C", POINT = "#FF4D5E";
-const ENCRE = "#1C1B18", GRIS_CREME = "#625D53";
+const DA = STORY_DA;
+const BLEU = DA.fond, CIEL = DA.ciel, ROSE = DA.rose, ROUGE = DA.rouge, SOMBRE = DA.nuit, POINT = "#F0283F";
 const norm = t => String(t || "").replace(/\s+/g, " ").trim();
-const Y_HAUT = 392, Y_BAS = 1480; // zone de contenu (marque et étiquette au-dessus, pied en dessous)
+const Y_HAUT = DA.haut, Y_BAS = STORY.bas; // zone de contenu (marque et étiquette au-dessus, pied en dessous)
 
 /* ----- Outils ----- */
 function parisFmt(iso, o){ return new Date(iso).toLocaleString("fr-FR", { timeZone:"Europe/Paris", ...o }); }
@@ -20,20 +20,25 @@ function quandFr(iso){
   const jour = x => parisFmt(x, { day:"numeric", month:"numeric", year:"numeric" });
   return jour(d) === jour(new Date()) ? heureFr(iso) : `${parisFmt(iso, { day:"numeric", month:"long" })} · ${heureFr(iso)}`;
 }
-function rond(ctx, x, y, w, h, r){
-  ctx.beginPath();
-  if(ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
-}
 // Texte aligné au pixel, une ligne par entrée ; renvoie la hauteur utilisée
 function lignes(ctx, ls, x, y, taille, interligne, couleur){
   ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   ls.forEach((l, i)=>{ ctx.fillStyle = typeof couleur === "function" ? couleur(i) : couleur; ctx.fillText(l, x, y + taille * 0.82 + i * taille * interligne); });
   return (ls.length - 1) * taille * interligne + taille * 1.0;
 }
-// Citation « … » mise en lignes ; si elle est trop longue, on coupe aux mots et on termine par « … »
+// Guillemets français autour d'un titre de presse, guillemets internes adoucis
 function guillemets(t){
-  return String(t).replace(/«\s*/g, "\u201C").replace(/\s*»/g, "\u201D").replace(/"([^"]*)"/g, "\u201C$1\u201D").replace(/"/g, "");
+  return String(t).replace(/«\s*/g, "“").replace(/\s*»/g, "”").replace(/"([^"]*)"/g, "“$1”").replace(/"/g, "").replace(/(\p{L})'(\p{L})/gu, "$1’$2");
 }
+// Titre de presse prêt à être cité : sans « DIRECT. » ni rubrique en tête (« Social. »), sans point final
+function titreCite(t){
+  let x = norm(t);
+  x = x.replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, "");
+  const m = /^[\p{L}0-9'’ -]{4,32}\.\s+(?=\p{Lu})/u.exec(x);
+  if(m && x.length - m[0].length >= 28) x = x.slice(m[0].length);
+  return x.replace(/\.$/, "");
+}
+// Citation « … » mise en lignes ; si elle est trop longue, on coupe aux mots et on termine par « … »
 function citation(ctx, titre, largeur, maxLignes){
   const mots = guillemets(norm(titre)).split(" ");
   let coupe = false;
@@ -42,7 +47,7 @@ function citation(ctx, titre, largeur, maxLignes){
   while(ls.length > maxLignes && mots.length > 3){ mots.pop(); coupe = true; ls = storyLignes(ctx, fabrique(), largeur, 99); }
   return ls;
 }
-// Titre : le nôtre ; à défaut, la rubrique du thème sur une ligne et « à la une » (ou « en direct ») en rose dessous.
+// Titre à nous ; à défaut, la rubrique du thème sur une ligne et « à la une » (ou « en direct ») en rose dessous.
 // Renvoie la plus grande taille (≤ tMax) pour laquelle il tient dans hMax, sans mot coupé.
 function titreFit(ctx, d, largeur, hMax, tMax, tMin){
   const essai = t => {
@@ -55,50 +60,11 @@ function titreFit(ctx, d, largeur, hMax, tMax, tMin){
   return r || essai(tMin);
 }
 const couleurTitre = r => i => (!r.propre && i === r.ls.length - 1) ? ROSE : "#fff";
-function labelMarque(ctx, fond){
-  const { marge } = STORY, cy = 260;
-  ctx.fillStyle = fond; ctx.fillRect(0, 0, STORY.L, STORY.H);
-  ctx.lineWidth = 7; ctx.lineCap = "round";
-  ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(marge + 34, cy + 6, 30, Math.PI, 0); ctx.stroke();
-  ctx.strokeStyle = ROSE; ctx.beginPath(); ctx.arc(marge + 34, cy + 6, 15, Math.PI, 0); ctx.stroke();
-  ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(marge + 34, cy + 6, 5, 0, 2 * Math.PI); ctx.fill();
-  ctx.lineCap = "butt";
-  ctx.font = `700 46px "Newsreader"`; ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-  ctx.fillText("Hémicycle France", marge + 86, cy + 12);
-}
-function etiquette(ctx, texte, x, y, fond, couleur = "#fff"){
-  ctx.font = `800 26px "Public Sans"`; ctx.letterSpacing = "4px";
-  const w = ctx.measureText(texte).width + 44 - 4, h = 54;
-  ctx.fillStyle = fond; ctx.fillRect(x, y, w, h);
-  ctx.fillStyle = couleur; ctx.textBaseline = "middle"; ctx.textAlign = "left";
-  ctx.fillText(texte, x + 22, y + h / 2 + 2);
-  ctx.letterSpacing = "0px"; ctx.textBaseline = "alphabetic";
-  return x + w;
-}
 function droite(ctx, texte, yMilieu, { taille = 26, poids = 700, couleur = CIEL, espace = "0px" } = {}){
   ctx.font = `${poids} ${taille}px "Public Sans"`; ctx.letterSpacing = espace;
   ctx.fillStyle = couleur; ctx.textAlign = "right"; ctx.textBaseline = "middle";
   ctx.fillText(texte, STORY.L - STORY.marge, yMilieu + 2);
   ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.letterSpacing = "0px";
-}
-// Pied : filet, « ▶ Vidéo : média » éventuel, source, compte
-function pied(ctx, { source, video, couleurSource = CIEL, couleurCompte = "#fff", filet = "rgba(255,255,255,0.28)" }){
-  const { L, marge } = STORY;
-  ctx.fillStyle = filet; ctx.fillRect(marge, 1516, L - 2 * marge, 3);
-  let y = 1542;
-  if(video){
-    ctx.font = `800 28px "Public Sans"`;
-    const t = `Vidéo : ${video}`, tw = Math.min(ctx.measureText(t).width, L - 2 * marge - 50);
-    ctx.fillStyle = couleurCompte;
-    ctx.beginPath(); ctx.moveTo(marge, y + 6); ctx.lineTo(marge, y + 32); ctx.lineTo(marge + 24, y + 19); ctx.closePath(); ctx.fill();
-    ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
-    ctx.fillText(storyLignes(ctx, t, L - 2 * marge - 44, 1)[0], marge + 42, y + 29);
-    y += 50;
-    void tw;
-  }
-  const h = storyTexte(ctx, source, marge, y, { taille:23, couleur:couleurSource, max:2, interligne:1.2 });
-  ctx.font = `800 34px "Public Sans"`; ctx.fillStyle = couleurCompte; ctx.textAlign = "left";
-  ctx.fillText(COMPTE_STORY, marge, Math.max(h + 44, 1626));
 }
 function theme(s){ return THEMES_ACTU?.[s.illustration?.theme] || THEMES_ACTU?.politique || ["", "", "Vie politique"]; }
 function enDirectDe(s){
@@ -110,9 +76,9 @@ function titreDe(s, suffixe){
   return { texte:propre, propre:!!propre, rub:theme(s)[2], suffixe };
 }
 
-/* ----- Portraits ----- */
-async function personnes(s){
-  const pers = (s.illustration?.personnes || []).slice(0, 3);
+/* ----- Portraits (1 ou 2 personnalités) : portrait carré à gauche, nom et parti à droite ----- */
+async function personnes(s, max = 3){
+  const pers = (s.illustration?.personnes || []).slice(0, max);
   const imgs = await Promise.all(pers.map(p=> p.photo ? storyPortrait(p.photo, p.photoHd) : null));
   const res = pers.map((p, i)=> ({ ...p, img:imgs[i] }));
   for(const p of res) if(!p.credit && /personnalites/.test(p.photo || "") && p.img) p.credit = (await storyPCredits([p.nom]).catch(()=>[]))[0] || "";
@@ -124,181 +90,165 @@ function libelleParti(code){
   const g = (typeof GROUPES_SENAT !== "undefined" && GROUPES_SENAT[code]) || null;
   return p?.nom || g?.nom || "";
 }
-function carre(ctx, p, x, y, w, h){
-  // portrait (ou initiales) dans le rectangle ; renvoie le rectangle réellement occupé, avec un filet rose en bas
+// Portrait (ou initiales) dans un carré, avec un filet rose en bas ; renvoie le rectangle réellement occupé
+function carre(ctx, p, x, y, S){
   let z;
-  if(p.img){
-    const sauve = STORY.encre; STORY.encre = "#fff"; // cadre blanc si la photo est reproduite plus petite
-    try { z = storyPPhoto(ctx, p.img, x, y, w, h, { centre:false }); } finally { STORY.encre = sauve; }
-  } else {
-    ctx.fillStyle = "#2F54B8"; ctx.fillRect(x, y, w, h);
-    ctx.fillStyle = "#fff"; ctx.font = `900 ${Math.round(Math.min(w, h) * 0.4)}px "Public Sans"`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText(storyPInitiales(p.nom) || "?", x + w / 2, y + h / 2 + 4); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    z = { x, y, w, h };
+  if(p.img) z = storyPPhoto(ctx, p.img, x, y, S, S, { centre:false });
+  else {
+    ctx.fillStyle = "#2F54B8"; ctx.fillRect(x, y, S, S);
+    ctx.fillStyle = "#fff"; ctx.font = `900 ${Math.round(S * 0.4)}px "Public Sans"`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(storyPInitiales(p.nom) || "?", x + S / 2, y + S / 2 + 4); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    z = { x, y, w:S, h:S };
   }
   ctx.fillStyle = ROSE; ctx.fillRect(z.x, z.y + z.h, z.w, 8);
   return { ...z, h:z.h + 8 };
 }
-// Mesure d'un bloc de portraits pour une hauteur de photo donnée
-function mesurePortraits(ctx, pers, ph){
+function mesurePortraits(ctx, pers, bonus = 0){
   const larg = STORY.L - 2 * STORY.marge, n = pers.length;
-  if(n === 1) return { h: ph + 8, col: 0 };
-  const gap = 28, col = (larg - gap * (n - 1)) / n, tn = n === 3 ? 34 : 40;
-  ctx.font = `700 ${tn}px "Newsreader"`;
-  const nl = Math.max(...pers.map(p=> storyLignes(ctx, p.nom, col, 2).length));
-  const cred = pers.some(p=> p.credit && p.img) ? 56 : 0;
-  const part = pers.some(p=> libelleParti(p.parti)) ? 34 : 0;
-  return { h: ph + 8 + 14 + (nl - 1) * tn * 1.08 + tn + part + cred, col, gap, tn };
+  if(!n) return { h:0 };
+  const S = (n === 1 ? 250 + bonus : 200), gap = 32, col = n === 1 ? larg : (larg - gap) / 2;
+  return { h:S + 8, S, gap, col, tn:n === 1 ? 52 : 36 };
 }
-function dessinePortraits(ctx, pers, y, ph){
-  const { marge, L } = STORY, larg = L - 2 * marge, n = pers.length, m = mesurePortraits(ctx, pers, ph);
-  if(n === 1){
-    const p = pers[0], taille = Math.min(ph, 460);
-    const z = carre(ctx, p, marge, y, Math.round(taille * 0.9), taille);
-    const x0 = z.x + z.w + 44, w = L - marge - x0;
-    let yy = y + 6;
-    ctx.font = `700 54px "Newsreader"`;
-    const ls = storyLignes(ctx, p.nom, w, 3);
-    yy += lignes(ctx, ls, x0, yy, 54, 1.06, "#fff") + 12;
-    const part = libelleParti(p.parti);
-    if(part){ ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = CIEL; ctx.fillText(storyLignes(ctx, part, w, 1)[0], x0, yy + 24); yy += 40; }
-    if(p.credit && p.img){ ctx.font = `600 22px "Public Sans"`; const cl = storyLignes(ctx, `Photo : ${p.credit}`, w, 3); yy += 6; lignes(ctx, cl, x0, yy, 22, 1.25, CIEL); }
-    return Math.max(z.h, 0) ;
-  }
+function dessinePortraits(ctx, pers, y, bonus = 0){
+  const { marge } = STORY, n = pers.length, m = mesurePortraits(ctx, pers, bonus);
   pers.forEach((p, i)=>{
     const x = marge + i * (m.col + m.gap);
-    const z = carre(ctx, p, x, y, Math.min(m.col, Math.round(ph * 0.95)), ph);
-    let yy = z.y + z.h + 14;
-    ctx.font = `700 ${m.tn}px "Newsreader"`;
-    const ls = storyLignes(ctx, p.nom, m.col, 2);
-    yy += lignes(ctx, ls, x, yy, m.tn, 1.08, "#fff");
-    const part = libelleParti(p.parti);
-    if(part){ ctx.font = `700 24px "Public Sans"`; ctx.fillStyle = CIEL; ctx.fillText(storyLignes(ctx, part, m.col, 1)[0], x, yy + 28); }
-    if(p.credit && p.img){ ctx.font = `600 22px "Public Sans"`; lignes(ctx, storyLignes(ctx, `Photo : ${p.credit}`, m.col, 2), x, yy + (part ? 44 : 14), 22, 1.25, CIEL); }
+    const z = carre(ctx, p, x, y, m.S);
+    const x0 = z.x + z.w + 24, w = x + m.col - x0;
+    // le plus long mot du nom doit tenir dans la colonne : on réduit la taille au besoin
+    let tn = m.tn; ctx.font = `700 ${tn}px "Newsreader"`;
+    while(tn > 24 && Math.max(...String(p.nom).split(/[\s]+/).map(mot=> ctx.measureText(mot).width)) > w){ tn -= 1; ctx.font = `700 ${tn}px "Newsreader"`; }
+    const ls = storyLignes(ctx, p.nom, w, 3);
+    let yy = y + 4 + lignes(ctx, ls, x0, y + 4, tn, 1.06, "#fff") + 12;
+    const part = n === 1 ? libelleParti(p.parti) : (p.parti || "");
+    if(part){ ctx.font = `700 ${n === 1 ? 26 : 21}px "Public Sans"`; ctx.fillStyle = CIEL; ctx.letterSpacing = "2px"; ctx.fillText(storyLignes(ctx, part.toUpperCase(), w, 1)[0], x0, yy + 22); ctx.letterSpacing = "0px"; }
   });
   return m.h;
 }
 
-/* ----- Contexte ----- */
-function mesureContexte(ctx, items, largeur){
-  if(!items.length) return { h:0, ls:[] };
-  const ls = items.map(c=>{
-    ctx.font = `700 28px "Public Sans"`;
-    const t = storyLignes(ctx, norm(c.texte), largeur - 64, 3);
-    ctx.font = `600 22px "Public Sans"`;
-    const s = c.source ? storyLignes(ctx, norm(c.source), largeur - 64, 1) : [];
-    return { t, s };
-  });
-  const h = 30 + 34 + ls.reduce((a, l)=> a + l.t.length * 36 + (l.s.length ? 32 : 0) + 18, 0) + 12;
-  return { h, ls };
+/* ----- « N médias en parlent » : pastilles blanches, une par média ----- */
+function rangeesPastilles(ctx, noms, larg, maxRangees){
+  ctx.font = `700 26px "Public Sans"`;
+  const w = t => Math.ceil(ctx.measureText(t).width) + 40, gap = 12;
+  const items = noms.map(nm=>{ let t = nm; while(w(t) > larg && t.length > 4) t = t.slice(0, -2).trimEnd(); return t === nm ? nm : t + "…"; });
+  const rangs = [[]]; let x = 0, i = 0;
+  for(; i < items.length; i++){
+    const wi = w(items[i]);
+    if(x + wi > larg && rangs[rangs.length - 1].length){ if(rangs.length === maxRangees) break; rangs.push([]); x = 0; }
+    rangs[rangs.length - 1].push(items[i]); x += wi + gap;
+  }
+  if(i < items.length){
+    let reste = items.length - i; const der = rangs[rangs.length - 1];
+    let tot = der.reduce((a, t)=> a + w(t) + gap, 0);
+    while(der.length > 1 && tot + w("+" + reste) > larg){ const p = der.pop(); tot -= w(p) + gap; reste++; }
+    der.push("+" + reste);
+  }
+  return { rangs, w };
 }
-function dessineContexte(ctx, m, y){
-  const { marge } = STORY, larg = STORY.L - 2 * marge;
-  ctx.fillStyle = CREME; rond(ctx, marge, y, larg, m.h, 22); ctx.fill();
-  ctx.font = `800 22px "Public Sans"`; ctx.letterSpacing = "3px"; ctx.fillStyle = BLEU; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-  ctx.fillText("LE CONTEXTE", marge + 32, y + 30 + 20); ctx.letterSpacing = "0px";
-  let yy = y + 30 + 34 + 8;
-  m.ls.forEach((l, i)=>{
-    if(i){ ctx.fillStyle = "#D3CBBA"; ctx.fillRect(marge + 32, yy - 10, larg - 64, 2); }
-    ctx.font = `700 28px "Public Sans"`;
-    yy += lignes(ctx, l.t, marge + 32, yy, 28, 1.28, ENCRE) + 6;
-    if(l.s.length){ ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = GRIS_CREME; ctx.fillText(l.s[0], marge + 32, yy + 18); yy += 32; }
-    yy += 18;
+function dessinePastilles(ctx, bloc, x, y){
+  bloc.rangs.forEach((r, ri)=>{
+    let cx = x; const cy = y + ri * 62;
+    for(const t of r){
+      const wi = bloc.w(t), reste = /^\+\d+$/.test(t);
+      if(reste){ ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.strokeRect(cx + 1.5, cy + 1.5, wi - 3, 47); }
+      else { ctx.fillStyle = "#fff"; ctx.fillRect(cx, cy, wi, 50); }
+      ctx.font = `700 26px "Public Sans"`; ctx.fillStyle = reste ? "#fff" : BLEU; ctx.textBaseline = "middle"; ctx.textAlign = "left";
+      ctx.fillText(t, cx + 20, cy + 26); ctx.textBaseline = "alphabetic";
+      cx += wi + 12;
+    }
   });
 }
 
 /* ----- Modèle A : « À la une » ----- */
 async function dessineUne(ctx, s){
   const { L, marge } = STORY, larg = L - 2 * marge, a0 = s.articles[0];
-  const medias = [...new Set(s.articles.map(a=> a.media))], n = medias.length;
-  const dT = titreDe(s, "à la une"), propre = dT.propre;
-  const pers = await personnes(s);
+  const medias = [...new Set(s.articles.map(a=> a.media))].filter(Boolean), n = medias.length;
+  const propre = norm(s.titrePropre?.titre);
+  const pers = (await personnes(s, 2)).slice(0, 2);
   const video = premiereVideo(s);
-  const contexte = (s.contexte || []).filter(c=> norm(c.texte));
+  const mediaTitre = norm(a0.media);
 
-  // en-tête
-  labelMarque(ctx, BLEU);
-  const xe = etiquette(ctx, "À LA UNE", marge, 310, ROUGE);
+  // en-tête : étiquette rouge, heure, rubrique
+  storyCadre(ctx, "À la une", { alerte:true });
+  const xe = storyEtiquette(ctx, "À la une", marge, DA.etiquetteY, "rouge");
   ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = CIEL; ctx.textBaseline = "middle"; ctx.textAlign = "left";
-  ctx.fillText(quandFr(a0.date), xe + 22, 310 + 27 + 2); ctx.textBaseline = "alphabetic";
-  droite(ctx, theme(s)[2].toUpperCase(), 310 + 27, { taille:24, poids:800, couleur:CIEL, espace:"3px" });
+  ctx.fillText(quandFr(a0.date), xe + 22, DA.etiquetteY + 27 + 2); ctx.textBaseline = "alphabetic";
+  droite(ctx, theme(s)[2].toUpperCase(), DA.etiquetteY + 27, { taille:24, poids:800, couleur:CIEL, espace:"3px" });
 
-  // citation (grande quand le titre n'est pas le nôtre : c'est alors le seul texte du sujet)
-  const tQuote = propre ? (pers.length ? 36 : 52) : (pers.length ? 46 : 52), xq = marge + 36, lq = larg - 36;
-  // reprise (discrète)
-  let reprise = "";
-  if(n >= 2){
-    ctx.font = `700 26px "Public Sans"`;
-    reprise = storyLignes(ctx, `Repris par ${n} médias · ${medias.join(", ")}`, larg, 1)[0];
-  }
-  const mediaQuote = norm(a0.media);
-
-  // niveaux de compacité : on réduit d'abord la citation, puis le contexte
-  const niveaux = [
-    { lq:pers.length ? 3 : 4, ctx:contexte.slice(0, 2) }, { lq:3, ctx:contexte.slice(0, 2) }, { lq:2, ctx:contexte.slice(0, 2) }, { lq:2, ctx:contexte.slice(0, 1) }, { lq:2, ctx:[] }
-  ];
+  // gros titre : le nôtre ; à défaut, le titre de presse du premier article, entre guillemets et attribué
+  const titreTexte = propre || "";
+  // blocs sous le titre
+  const kick = n >= 2 ? `${n} médias en parlent` : "Titre publié par";
+  const past = rangeesPastilles(ctx, medias, larg, 3);
+  const hMedias = 30 + 16 + (past.rangs.length - 1) * 62 + 50;
+  const mp = mesurePortraits(ctx, pers);
+  const gap = 34;
+  const dispo = Y_BAS - Y_HAUT;
+  const tMax = propre ? (pers.length ? 118 : 156) : (pers.length ? 84 : 100);
+  // attribution : titre de presse cité (si le titre est le nôtre) ou « — média » (si le titre est celui du média)
+  const variantes = propre ? [{ q:2 }, { q:1 }, { q:0 }] : [{ q:0 }];
   let plan = null;
-  for(const nv of niveaux){
-    ctx.font = `600 ${tQuote}px "Newsreader"`;
-    const ql = citation(ctx, a0.titre, lq, nv.lq);
-    const hq = (ql.length - 1) * tQuote * 1.16 + tQuote + 10 + 34;       // + ligne du média
-    const hr = reprise ? 26 + 12 : 0;
-    const mc = mesureContexte(ctx, nv.ctx, larg);
-    const blocs = 1 + (pers.length ? 1 : 0) + (mc.h ? 1 : 0) + 1;          // titre, portraits, contexte, citation
-    const gap = 40, fixe = hq + hr + mc.h + gap * (blocs - 1);
-    const dispo = Y_BAS - Y_HAUT;
-    const tMax = propre ? (pers.length ? 112 : 190) : 96;
-    const tMin = 64;
-    const phMax = 420, phMin = pers.length === 1 ? 300 : 280;
-    let choix = null;
-    for(let t = tMax; t >= tMin && !choix; t -= 2){
-      const f = titreFit(ctx, dT, larg, 9999, t, t);
-      const rest = dispo - fixe - f.h;
-      if(!pers.length){ if(rest >= 0) choix = { f, ph:0, mc, ql, hq, hr, gap, rest }; continue; }
-      let ph = Math.min(phMax, rest);
-      // retire la hauteur des légendes pour obtenir la hauteur de photo
-      const m0 = mesurePortraits(ctx, pers, 0);
-      ph = Math.min(phMax, rest - m0.h);
-      if(ph >= phMin) choix = { f, ph, mc, ql, hq, hr, gap, rest };
+  for(const v of variantes){
+    let trouve = null;
+    for(let t = tMax; t >= 60 && !trouve; t -= 2){
+      ctx.font = `700 ${t}px "Newsreader"`;
+      const ls = propre ? storyLignes(ctx, titreTexte, larg, 99) : citation(ctx, titreCite(a0.titre), larg, 5);
+      if(!ls.every(l=> ctx.measureText(l).width <= larg)) continue;
+      const hT = (ls.length - 1) * t * 1.04 + t;
+      let hA = 0, ql = [];
+      if(v.q){ ctx.font = `600 32px "Newsreader"`; ql = citation(ctx, a0.titre, larg - 28, v.q); hA = 18 + (ql.length - 1) * 32 * 1.2 + 32 + 10 + 30; }
+      else hA = 14 + 32;
+      const tot = hT + hA + gap + hMedias + (pers.length ? gap + mp.h : 0);
+      if(tot <= dispo) trouve = { t, ls, hT, hA, ql, v, tot };
     }
-    if(choix){ plan = { ...choix, nv }; break; }
-    if(nv === niveaux[niveaux.length - 1]){
-      // dernier recours : titre minimal, photos réduites
-      const f = titreFit(ctx, dT, larg, 9999, tMin, tMin);
-      const m0 = mesurePortraits(ctx, pers, 0);
-      plan = { f, ph: pers.length ? Math.max(160, Math.min(phMax, dispo - fixe - f.h - m0.h)) : 0, mc, ql, hq, hr, gap, rest:0, nv };
-    }
+    // avec la citation, le titre doit rester gros (≥ 88 px) ; sinon on passe à la variante plus courte
+    if(trouve && (!v.q || trouve.t >= 88)){ plan = trouve; break; }
   }
-
-  // dessin de haut en bas
-  let y = Y_HAUT;
-  const hpers = pers.length ? mesurePortraits(ctx, pers, plan.ph).h : 0;
-  const utilise = plan.f.h + (pers.length ? hpers : 0) + plan.hq + plan.hr + plan.mc.h + plan.gap * (1 + (pers.length ? 1 : 0) + (plan.mc.h ? 1 : 0));
-  const extra = Math.max(0, Y_BAS - Y_HAUT - utilise);
-  // sans portrait, la citation (et le contexte) descendent vers le pied : grand titre en haut, réponse en bas
-  const ecart = pers.length ? Math.min(extra / 3, 50) : extra;
-  const decale = pers.length ? 0 : Math.max(0, ecart - 140) * 0.45;
-  y += decale;
-  ctx.font = `700 ${plan.f.t}px "Newsreader"`;
-  y += lignes(ctx, plan.f.ls, marge, y, plan.f.t, 1.04, couleurTitre(plan.f)) + plan.gap + (pers.length ? 0 : Math.min(ecart, 140));
+  if(!plan){ // dernier recours : titre minimal, sans citation
+    ctx.font = `700 56px "Newsreader"`;
+    const ls = propre ? storyLignes(ctx, titreTexte, larg, 4) : citation(ctx, titreCite(a0.titre), larg, 4);
+    plan = { t:56, ls, hT:(ls.length - 1) * 56 * 1.04 + 56, hA:46, ql:[], v:{ q:0 }, tot:0 };
+  }
+  let extra = Math.max(0, dispo - plan.tot);
+  const bonus = pers.length ? Math.min(Math.max(0, extra - 60), pers.length === 1 ? 90 : 24) : 0;
+  extra -= bonus;
+  const ec = Math.min(extra / 4, 40);
+  let y = Y_HAUT + Math.min(extra * 0.1, 20);
+  ctx.font = `700 ${plan.t}px "Newsreader"`;
+  y += lignes(ctx, plan.ls, marge, y, plan.t, 1.04, "#fff");
+  // attribution
+  if(plan.v.q){
+    y += 18 + ec / 2;
+    const yq = y;
+    ctx.font = `600 32px "Newsreader"`;
+    const hq = lignes(ctx, plan.ql, marge + 28, y, 32, 1.2, CIEL);
+    ctx.font = `800 24px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "1px";
+    ctx.fillText(storyLignes(ctx, `— ${mediaTitre}`, larg - 28, 1)[0], marge + 28, y + hq + 10 + 22); ctx.letterSpacing = "0px";
+    y += hq + 10 + 30;
+    ctx.fillStyle = ROSE; ctx.fillRect(marge, yq, 8, y - yq - 4);
+  } else {
+    y += 14;
+    ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "1px";
+    if(!propre) ctx.fillText(`— ${storyLignes(ctx, mediaTitre, larg - 40, 1)[0]}`, marge, y + 24);
+    ctx.letterSpacing = "0px";
+    y += 32;
+  }
+  // « N médias en parlent » + pastilles
+  y += gap + ec;
+  ctx.font = `800 24px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = CIEL;
+  ctx.fillText(kick.toUpperCase(), marge, y + 22); ctx.letterSpacing = "0px";
+  y += 30 + 16;
+  dessinePastilles(ctx, past, marge, y);
+  y += hMedias - 46;
+  // personnalités
   if(pers.length){
-    dessinePortraits(ctx, pers, y, plan.ph);
-    y += hpers + plan.gap + ecart;
+    y += gap + ec;
+    dessinePortraits(ctx, pers, y, bonus);
   }
-  // citation : filet rose à gauche, texte puis média
-  ctx.font = `600 ${tQuote}px "Newsreader"`;
-  const yq = y;
-  const hq = lignes(ctx, plan.ql, xq, y, tQuote, 1.16, "#fff");
-  ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "1px";
-  ctx.fillText(storyLignes(ctx, `— ${mediaQuote}`, lq, 1)[0], xq, y + hq + 10 + 24); ctx.letterSpacing = "0px";
-  const yFinQ = y + hq + 10 + 34;
-  ctx.fillStyle = ROSE; ctx.fillRect(marge, yq, 8, yFinQ - yq);
-  y = yFinQ;
-  if(reprise){ ctx.font = `600 26px "Public Sans"`; ctx.fillStyle = CIEL; ctx.fillText(reprise, marge, y + 14 + 26); y += 12 + 26 + 2; }
-  if(plan.mc.h){ y += plan.gap; dessineContexte(ctx, plan.mc, y); }
-
-  pied(ctx, { source:"Titres relevés dans la presse. Chaque média est cité.", video });
-  return { nom:`actualite-${slugDep(norm(s.titrePropre?.titre) || a0.titre).slice(0, 40)}` };
+  const credits = [...new Set(pers.filter(p=> p.img && p.credit).map(p=> p.credit))];
+  const sourceTxt = (plan.v.q || !propre ? "Titre repris de la presse. Chaque média est cité." : "Titre rédigé par Hémicycle France d'après la presse. Chaque média est cité.") + (credits.length ? ` Photos : ${credits.join(" ; ")}.` : "");
+  storyPied(ctx, sourceTxt, { video, accroche:"Toute l'actu politique" });
+  return { nom:`actualite-${slugDep(propre || a0.titre).slice(0, 40)}` };
 }
 
 /* ----- Modèle E : « En direct » ----- */
@@ -309,11 +259,11 @@ async function dessineDirect(ctx, s){
   const maj = s.derniere || s.articles.map(a=> a.date).sort().pop();
   const GRIS = "#8A93B0", CLAIR = "#B6BEDB";
 
-  labelMarque(ctx, SOMBRE);
-  // point rouge (avec halo) + EN DIRECT + heure de mise à jour
-  ctx.fillStyle = "rgba(255,77,94,0.28)"; ctx.beginPath(); ctx.arc(marge + 16, 337, 24, 0, 2 * Math.PI); ctx.fill();
+  storyFondTheme(ctx, true);
+  storyMarque(ctx);
+  // point rouge + EN DIRECT + heure de mise à jour
   ctx.fillStyle = POINT; ctx.beginPath(); ctx.arc(marge + 16, 337, 14, 0, 2 * Math.PI); ctx.fill();
-  ctx.font = `800 54px "Public Sans"`; ctx.letterSpacing = "5px"; ctx.fillStyle = ROSE; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  ctx.font = `800 54px "Public Sans"`; ctx.letterSpacing = "5px"; ctx.fillStyle = POINT; ctx.textAlign = "left"; ctx.textBaseline = "middle";
   ctx.fillText("EN DIRECT", marge + 52, 337 + 3); ctx.letterSpacing = "0px"; ctx.textBaseline = "alphabetic";
   droite(ctx, `mis à jour ${heureFr(maj)}`, 337, { taille:28, poids:700, couleur:GRIS });
 
@@ -351,7 +301,7 @@ async function dessineDirect(ctx, s){
     y += b.h;
   }
 
-  pied(ctx, { source:"Information en cours : elle peut changer. Titres relevés dans la presse.", video, couleurSource:GRIS, couleurCompte:"#A9B8F2", filet:"rgba(255,255,255,0.18)" });
+  storyPied(ctx, "Information en cours : elle peut changer. Titres relevés dans la presse.", { video, accroche:"Suivez le direct" });
   return { nom:`actualite-${slugDep(norm(s.titrePropre?.titre) || s.articles[0].titre).slice(0, 40)}` };
 }
 
@@ -366,7 +316,7 @@ STORY_PLUS.actualite = async (ctx, info)=>{
     modele = enDirectDe(s) ? "direct"
       : nbPers >= 2 && STORY_PLUS.facea ? "facea"
       : s.chiffre && STORY_PLUS.chiffre ? "chiffre"
-      : s.date && STORY_PLUS.date ? "date"
+      : s.date?.iso && s.date.iso > aujourdhuiISO() && STORY_PLUS.date ? "date" // une date À VENIR seulement
       : "une";
   }
   if(["facea", "chiffre", "date"].includes(modele) && STORY_PLUS[modele]){

@@ -368,4 +368,133 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   }
 }
 
+// ---------- Modèles d'image (À la une, En direct, Le chiffre, Face à face, Date à retenir, En bref) ----------
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const candidats = { candidats: [{ nom: "Jean-Luc Mélenchon" }, { nom: "Raphaël Glucksmann" }, { nom: "Édouard Philippe" }] };
+  const T1 = "Le gouvernement présente son projet de budget pour 2027";
+  const modele = (s, opts = {}) => choix([s], { candidats, ...opts }).modele;
+  // par défaut : « À la une » ; l'entrée de file garde le même format qu'avant (aucun champ « modele », args inchangés)
+  assert.strictEqual(modele(sujet(T1, 3)), "une");
+  assert.ok(!("modele" in AUTO.decrire(choix([sujet(T1, 3)])).champs));
+  // En direct : seulement si la prise de parole est active (non expirée)
+  {
+    const s = sujet("Emmanuel Macron s'exprimera ce soir à 20 h sur le budget", 1);
+    const ev = (expire) => ({ evenements: [{ type: "allocution", titre: s.articles[0].titre, ...(expire ? { expire } : {}) }] });
+    assert.strictEqual(modele(s, { direct: ev() }), "direct");
+    assert.strictEqual(modele(s, { direct: ev(new Date(now.getTime() + 36e5).toISOString()) }), "direct");
+    assert.ok(choix([s], { direct: ev(new Date(now.getTime() - 36e5).toISOString()) }).refus, "prise de parole expirée : pas de sujet à 1 média");
+    assert.strictEqual(modele(sujet(T1, 4), { direct: ev(new Date(now.getTime() - 36e5).toISOString()) }), "une", "événement expiré : pas de direct");
+    // les séances de l'Assemblée (type « seance-an ») ne font pas un « direct » de sujet
+    assert.strictEqual(modele(sujet(T1, 4), { direct: { evenements: [{ type: "seance-an", titre: T1 }] } }), "une");
+  }
+  // Face à face : les deux premières personnalités doivent être des candidats déclarés, sans titre conflictuel
+  {
+    const pers = (...noms) => ({ illustration: { theme: "election", personnes: noms.map((nom) => ({ nom })) } });
+    const TD = "Primaire de la gauche : le débat entre les candidats";
+    assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon", "Raphaël Glucksmann"))), "facea");
+    assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon", "Un Ministre"))), "une", "un seul candidat : pas de face à face");
+    assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon"))), "une");
+    assert.strictEqual(modele(sujet(TD, 4, pers("Jean-Luc Mélenchon", "Raphaël Glucksmann")), { candidats: null }), "une", "sans liste de candidats : pas de face à face");
+    const s = sujet(TD, 4, pers("Jean-Luc Mélenchon", "Raphaël Glucksmann"));
+    s.articles[1].titre = "Primaire : Mélenchon attaque Glucksmann sur la fiscalité";
+    assert.strictEqual(modele(s), "une", "titre conflictuel : pas de face à face");
+  }
+  // Le chiffre : le chiffre doit figurer dans les titres d'au moins 2 médias
+  {
+    const ch = { chiffre: { valeur: "400 à 500", unite: "établissements" } };
+    const s = sujet("Blocage des lycées : 400 à 500 établissements fermés ce lundi", 3, ch);
+    s.articles[1].titre = "Lycées : de 400 à 500 établissements bloqués en France";
+    assert.strictEqual(modele(s), "chiffre");
+    const un = sujet("Blocage des lycées : 400 à 500 établissements fermés ce lundi", 3, ch);
+    un.articles[1].titre = "Lycées : la mobilisation se poursuit dans plusieurs académies"; un.articles[2].titre = "Blocage des lycées : le gouvernement réclame un retour au calme";
+    assert.strictEqual(modele(un), "une", "chiffre présent dans un seul titre : non sourcé");
+    assert.strictEqual(modele(sujet(T1, 3, { chiffre: { valeur: "12 %", unite: "" } })), "une", "chiffre absent des titres");
+  }
+  // Date à retenir : seulement une date À VENIR
+  {
+    const d = (iso) => ({ date: { iso, jour: Number(iso.slice(8)), mois: "octobre" } });
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-27"))), "date");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-03"))), "date", "demain");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-02"))), "une", "aujourd'hui : pas à venir");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-09-20"))), "une", "passée");
+    assert.strictEqual(modele(sujet(T1, 3, d("2028-01-01"))), "une", "trop lointaine");
+  }
+  // Un modèle spécial s'ajoute à l'entrée ; le dessin reçoit le modèle en 6e argument
+  {
+    const s = sujet("Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 27 octobre", 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" } });
+    const d = AUTO.decrire(choix([s], { candidats }));
+    assert.strictEqual(d.champs.modele, "date");
+    assert.strictEqual(d.type, "date");
+    assert.deepStrictEqual(d.args, [0, s.articles[0].titre, null, null, null, "date"]);
+  }
+  // En bref : une fois par jour, le matin, 3 ou 4 sujets forts, sans doublon, dans les plafonds
+  {
+    const matin = new Date("2026-10-02T06:30:00Z"); // 8 h 30 à Paris
+    const il = (h) => new Date(matin.getTime() - h * 36e5).toISOString();
+    const fort = (titre, theme, nb = 3) => ({ medias: nb, derniere: il(2), illustration: { theme }, titrePropre: { titre: `Sujet ${theme}`, origine: "recoupement" }, articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
+    const sujets = [fort("Le gouvernement présente son projet de budget pour 2027", "budget"), fort("Le Sénat examine la loi de programmation militaire", "senat", 4), fort("Réforme des retraites : les partenaires sociaux reçus à Matignon", "gouvernement"), fort("Élections municipales : la date du scrutin est fixée", "election", 5)];
+    const bref = (opts = {}) => AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: matin, ...opts });
+    const b = bref();
+    assert.ok(!b.refus, b.refus);
+    assert.strictEqual(b.bref.indices.length, 4);
+    assert.strictEqual(b.id, AUTO.idBref("2026-10-02"));
+    assert.ok(b.sources.length > 0 && b.sources.length <= 12);
+    // le choix global : un « en bref » le matin quand aucun dossier n'attend
+    assert.strictEqual(choisir({ actualites: actu(...sujets), direct: null, sondages: sond(), file: vide, now: matin }).modele, "bref");
+    // un direct en cours (prise de parole non expirée) passe avant l'« en bref »
+    const enDirect = { evenements: [{ type: "allocution", titre: sujets[1].articles[0].titre, expire: new Date(matin.getTime() + 36e5).toISOString() }] };
+    assert.strictEqual(choisir({ actualites: actu(...sujets), direct: enDirect, sondages: sond(), file: vide, now: matin }).modele, "direct", "direct avant « en bref »");
+    // pas le reste de la journée, ni la nuit
+    for (const t of ["2026-10-02T09:00:00Z" /* 11 h */, "2026-10-02T13:30:00Z", "2026-10-02T04:30:00Z" /* 6 h 30 */]) assert.ok(AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: new Date(t) }).refus, `pas d'« en bref » à ${t}`);
+    // une seule fois par jour (Paris) ; le lendemain, oui
+    const entree = { id: b.id, cree: matin.toISOString(), titre: "En bref", sources: [], bref: true };
+    assert.ok(bref({ file: { entrees: [entree] } }).refus, "déjà publié aujourd'hui");
+    assert.ok(!AUTO.choisirEnBref({ actualites: actu(...sujets), file: { entrees: [{ ...entree, cree: new Date(matin.getTime() - 24 * 36e5).toISOString() }] }, now: matin }).refus, "hier ne compte pas");
+    // plafond de 4 entrées par jour
+    const quatre = [1, 2, 3, 4].map((i) => ({ id: `${i}`.repeat(12), cree: new Date(matin.getTime() - i * 36e5 / 2).toISOString(), titre: `t${i}`, sources: [] }));
+    assert.ok(bref({ file: { entrees: quatre } }).refus, "plafond du jour");
+    // au moins 3 sujets forts
+    assert.ok(AUTO.choisirEnBref({ actualites: actu(...sujets.slice(0, 2)), file: vide, now: matin }).refus, "2 sujets : pas assez");
+    // sujets à 2 médias, sans titre rédigé par le site, justice : écartés
+    const faibles = [fort("Le gouvernement présente son projet de budget pour 2027", "budget", 2), { ...sujets[1], titrePropre: undefined }, { ...sujets[2], illustration: { theme: "justice" } }];
+    assert.ok(AUTO.choisirEnBref({ actualites: actu(...faibles, sujets[3]), file: vide, now: matin }).refus, "sujets faibles écartés");
+    const risque = fort("Réforme : un ministre mis en cause par une plainte", "gouvernement");
+    assert.strictEqual(AUTO.choisirEnBref({ actualites: actu(...sujets, risque), file: vide, now: matin }).bref.indices.includes(4), false, "titre à risque écarté");
+    // un sujet déjà publié n'entre pas dans l'« en bref » ; les sujets de l'« en bref » ne sont plus repris seuls (liens enregistrés)
+    const deja = { id: idSujet(sujets[0].articles[0].titre), cree: il(1), titre: "x", sources: [] };
+    assert.strictEqual(bref({ file: { entrees: [deja] } }).bref.indices.includes(0), false, "déjà publié : écarté");
+    const apres = { ...entree, sources: b.sources };
+    assert.ok(choisirSujet({ actualites: actu(sujets[0]), direct: null, file: { entrees: [apres] }, now: matin }).refus, "pas de doublon avec l'« en bref »");
+    // un dossier non publié passe avant l'« en bref »
+    const dossier = { id: "primaire", titre: "Primaire de la gauche", nb: 6, derniere: il(1), medias: MEDIAS.slice(0, 4), articles: Array.from({ length: 6 }, (_, i) => ({ titre: `Primaire de la gauche : débat numéro ${i}`, url: `https://example.org/d/${i}`, media: MEDIAS[i % 4], date: il(1) })) };
+    const cd = choisir({ actualites: { sujets, dossiers: [dossier] }, direct: null, sondages: sond(), file: vide, now: matin });
+    assert.strictEqual(cd.dossier?.id, "primaire", "dossier d'abord");
+    // l'entrée décrite
+    const d = AUTO.decrire(b);
+    assert.strictEqual(d.type, "en-bref");
+    assert.strictEqual(d.champs.bref, true);
+    assert.deepStrictEqual(d.args.slice(0, 6), [0, "", null, null, null, "bref"]);
+    assert.deepStrictEqual(d.args[6].indices, b.bref.indices);
+  }
+  // Réserve électorale : aucun titre qui rapporte un sondage (même cité par la presse), tous modèles confondus
+  {
+    const sam = new Date("2027-04-17T10:00:00Z"); // samedi midi avant le premier tour
+    const frais = (titre, nb = 4) => ({ ...sujet(titre, nb), derniere: new Date(sam.getTime() - 36e5).toISOString(), articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: new Date(sam.getTime() - 36e5).toISOString() })) });
+    const avecSondage = frais("Présidentielle : un nouveau sondage donne dix points d'avance au candidat sortant");
+    assert.ok(AUTO.parleDeSondage(avecSondage.articles[0].titre) && !AUTO.parleDeSondage("Le gouvernement présente son projet de budget pour 2027"));
+    assert.ok(choisirSujet({ actualites: actu(avecSondage), direct: null, file: vide, now: sam }).refus, "réserve : sujet qui rapporte un sondage refusé");
+    assert.strictEqual(choisirSujet({ actualites: actu(frais("Le gouvernement présente son projet de budget pour 2027")), direct: null, file: vide, now: sam }).indice, 0, "réserve : un sujet sans sondage reste possible");
+    const doss = { id: "sond", titre: "Présidentielle 2027", nb: 6, derniere: new Date(sam.getTime() - 36e5).toISOString(), medias: MEDIAS.slice(0, 4), articles: Array.from({ length: 6 }, (_, i) => ({ titre: i === 2 ? "Présidentielle : le dernier sondage Ifop" : `Présidentielle 2027 : la campagne s'organise (${i})`, url: `https://example.org/s/${i}`, media: MEDIAS[i % 4], date: new Date(sam.getTime() - 36e5).toISOString() })) };
+    assert.strictEqual(AUTO.choisirDossier({ actualites: { dossiers: [doss] }, file: vide, now: sam }), null, "réserve : dossier avec un sondage refusé");
+  }
+  // Monétisation : jamais de modèle de presse (ni « en bref »)
+  {
+    const matin = new Date("2026-10-02T06:30:00Z");
+    const sujets = [1, 2, 3].map((i) => sujet(`Sujet de presse numéro ${i} sur le budget de la défense`, 4, { derniere: new Date(matin.getTime() - 36e5).toISOString() }));
+    const c = choisir({ actualites: actu(...sujets), direct: null, sondages: sond(), lois: null, senat: null, probas: null, file: vide, now: matin, config: { monetisation: true, validationHumaine: false } });
+    assert.ok(c.refus || c.propre, "monétisation : ni presse ni « en bref »");
+  }
+}
+
 console.log("stories-auto : tous les tests passent.");
