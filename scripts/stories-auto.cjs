@@ -104,10 +104,37 @@ const MOTS_EXCLUS = [
   "mineur", "victime", "fillette", "garconnet", "adolescent", "collegien", "collegienne", "enfant de", "bebe",
   "menace de mort", "menaces", "diffam", "calomni", "mentir", "mensonge", "fraude", "corruption", "detournement", "escroquerie", "blanchiment",
   "scandale", "affaire ",
+  // reproches, polémiques et attaques entre personnalités : pas de titre de presse en grand qui vise une personne nommée
+  "polemique", "derapage", "\\bclash", "\\btacle", "fustige", "accable", "recadre", "tolle", "inelegant", "honte", "honteu", "insult", "injur", "propos choquant",
+  "s'excuse", "s’excuse", "desole", "excuses", "\\battaq", "desavoue", "trahi", "trahison",
 ];
 const RE_EXCLUS = new RegExp(MOTS_EXCLUS.map((m) => (m.startsWith("\\b") ? m : m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))).join("|"), "i");
 // Âge de moins de 20 ans cité dans un titre (« une adolescente de 15 ans ») : mineur potentiel
 const RE_AGE_MINEUR = /\b(?:1\d|[2-9]|0?\d) ?(?:ans|-ans)\b/;
+
+// Rubriques génériques : un titre rédigé « Énergie » ou « Économie » ne dit rien (pas de story)
+const RUBRIQUES_GENERIQUES = new Set(["energie", "economie", "social", "politique", "societe", "international", "monde", "france", "budget", "justice", "culture", "sante", "education", "ecologie", "environnement", "securite", "sport", "europe", "gouvernement", "vie politique", "elections", "election", "senat", "assemblee"]);
+/** Un titre rédigé trop vague : un seul mot, ou une simple rubrique. */
+function titreGenerique(titre) {
+  const t = sansAccent(titre).replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+  return !t || RUBRIQUES_GENERIQUES.has(t) || t.split(" ").filter((w) => w.length > 2).length < 2;
+}
+
+const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont"]);
+const racines = (t) => new Set(sansAccent(t).replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length >= 4 && !MOTS_VIDES.has(w)).map((w) => w.slice(0, 5)));
+/** Deux titres rédigés parlent-ils du même sujet (« Blocage des lycées » / « Blocus des lycées ») ? */
+function titresProches(a, b) {
+  const x = racines(a), y = racines(b);
+  if (!x.size || !y.size) return false;
+  const commun = [...x].filter((w) => y.has(w)).length;
+  return commun >= 1 && commun / Math.min(x.size, y.size) >= 0.5;
+}
+const RECENT_H = 24;
+/** Titres rédigés des entrées (file + brouillons) des dernières 24 h : un sujet proche ne repasse pas le même jour. */
+function titresRecents(entrees, now) {
+  return (entrees || []).filter((e) => now.getTime() - Date.parse(e.cree) < RECENT_H * 36e5).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]).filter((t) => typeof t === "string" && t);
+}
+const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
 
 /** Pourquoi un titre est écarté (null s'il passe). */
 function motExclu(titre) {
@@ -202,6 +229,8 @@ const jourParis = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Pa
 // Mots d'un titre qui opposent frontalement deux personnes : pas de « face à face » (l'image resterait neutre, le titre non)
 const RE_CONFLIT = /\b(attaque|attaquent|tacle|taclent|clash|charge|descend|flingue|fustige|accable|regle ses comptes|insulte|traite de|lynch|clivage|guerre|affronte|s'oppose|se dechire|se dechirent|invective|dezingue|etrille|tire sur)\b/;
 
+const RE_DUEL = /\b(debat|debats|duel|primaire|primaires|face a face|face-a-face|confrontation)\b/;
+
 /** Candidats déclarés (data/candidats.json), noms sans accents. */
 const nomsCandidats = (candidats) => new Set((candidats?.candidats || (Array.isArray(candidats) ? candidats : [])).map((c) => sansAccent(c?.nom || c)).filter(Boolean));
 
@@ -210,7 +239,9 @@ function faceAFace(sujet, candidats) {
   const noms = nomsCandidats(candidats);
   const pers = (sujet.illustration?.personnes || []).slice(0, 2).map((p) => sansAccent(p?.nom));
   if (pers.length < 2 || pers[0] === pers[1] || !pers.every((n) => noms.has(n))) return false;
-  return !(sujet.articles || []).some((a) => RE_CONFLIT.test(sansAccent(a.titre)));
+  const arts = (sujet.articles || []).map((a) => sansAccent(a.titre));
+  // « Face à face » affirme une opposition : il faut un débat, un duel ou une primaire dans les titres, et aucun mot de conflit
+  return arts.some((t) => RE_DUEL.test(t)) && !arts.some((t) => RE_CONFLIT.test(t));
 }
 
 /** « Le chiffre » : le chiffre du sujet (« 400 à 500 ») figure tel quel dans les titres d'au moins 2 médias différents. */
@@ -254,12 +285,15 @@ function choisirDossier({ actualites, file, now = new Date() }) {
   const entrees = file?.entrees || [];
   const enFile = new Set(entrees.map((e) => e.dossierId).filter(Boolean));
   const ids = new Set(entrees.map((e) => e.id));
+  const recents = titresRecents(entrees, now);
   const candidats = (actualites?.dossiers || []).filter((d) => {
     if (!d?.id || !/^[a-z0-9-]+$/.test(d.id) || !d.titre || !Array.isArray(d.articles) || d.articles.length < 3) return false;
     if (enFile.has(d.id) || ids.has(idDossier(d.id))) return false;
     const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
     if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return false;
     if (new Set(d.articles.map((a) => a.media)).size < MIN_MEDIAS_DOSSIER) return false;
+    if (titreGenerique(d.titre) || dejaVu(d.titre, recents)) return false;
+    if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
     return !d.articles.some((a) => motExclu(a.titre)) && !(reserveSondages(now) && d.articles.some((a) => parleDeSondage(a.titre)));
   });
@@ -281,6 +315,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
   if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jour).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set(entrees.map((e) => e.id));
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
+  const recents = titresRecents(entrees, now);
   const dossier = choisirDossier({ actualites, file, now });
   if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
@@ -299,6 +334,8 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
+    if (titreGenerique(s.titrePropre.titre)) return; // « Énergie » seul : trop vague
+    if (dejaVu(s.titrePropre.titre, recents)) return; // même sujet qu'une story des dernières 24 h
     candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele: modeleSujet(s, { direct, candidats: declares, now }) });
   });
   if (!candidats.length) return { refus: "aucun sujet ne remplit toutes les règles" };
@@ -324,6 +361,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
   if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set(entrees.map((e) => e.id));
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
+  const recents = titresRecents(entrees, now);
   const retenus = [];
   (actualites?.sujets || []).forEach((s, indice) => {
     const titre = s.articles?.[0]?.titre;
@@ -334,7 +372,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
-    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre)) return;
+    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || dejaVu(s.titrePropre.titre, recents)) return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
@@ -342,8 +380,9 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
   retenus.sort((a, b) => b.medias - a.medias || Date.parse(b.s.derniere) - Date.parse(a.s.derniere));
   // un sujet par thème d'abord, puis sans doublon de titre propre
   const pris = [], titres = new Set(), themes = new Set();
-  for (const r of retenus) if (pris.length < BREF_MAX && !titres.has(r.s.titrePropre.titre) && !themes.has(r.theme)) { pris.push(r); titres.add(r.s.titrePropre.titre); themes.add(r.theme); }
-  for (const r of retenus) if (pris.length < BREF_MAX && !pris.includes(r) && !titres.has(r.s.titrePropre.titre)) { pris.push(r); titres.add(r.s.titrePropre.titre); }
+  const doublon = (r) => titres.has(r.s.titrePropre.titre) || pris.some((p) => titresProches(p.s.titrePropre.titre, r.s.titrePropre.titre)); // « Blocage » et « Blocus » des lycées : un seul
+  for (const r of retenus) if (pris.length < BREF_MAX && !doublon(r) && !themes.has(r.theme)) { pris.push(r); titres.add(r.s.titrePropre.titre); themes.add(r.theme); }
+  for (const r of retenus) if (pris.length < BREF_MAX && !pris.includes(r) && !doublon(r)) { pris.push(r); titres.add(r.s.titrePropre.titre); }
   if (pris.length < BREF_MIN) return { refus: `« en bref » : seulement ${pris.length} sujet(s) fort(s)` };
   const medias = [...new Set(pris.flatMap((r) => r.s.articles.map((a) => a.media)))].length;
   return {
@@ -502,7 +541,7 @@ function fluxAtom(entrees, now = new Date()) {
     <updated>${x(e.cree)}</updated>
     <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>
     <link rel="alternate" href="${x(e.url_image)}"/>
-    <summary>${x(e.titre)}</summary>
+    <summary>${x(e.alt || e.titre)}</summary>
   </entry>`).join("\n");
   return `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -666,10 +705,22 @@ function ecrireBrouillon(fiche, jpeg, dossier = DOSSIER_BROUILLONS) {
 /** Ligne du résumé d'exécution GitHub pour un brouillon à valider. */
 const ligneResume = (b) => `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
 
+/** Texte alternatif de l'image (accessibilité, fiche de publication) : ce que dit la story, sans rien ajouter. */
+function texteAlternatif(type, titre, medias, sujets) {
+  const m = (medias || []).length ? ` Repris par ${medias.length} média${medias.length > 1 ? "s" : ""} : ${medias.slice(0, 5).join(", ")}${medias.length > 5 ? "…" : ""}.` : "";
+  if (type === "en-bref") return `Story Hémicycle France, En bref : ${(sujets || []).join(" ; ")}. Titres de presse cités, chaque média nommé dans l'image.`;
+  return `Story Hémicycle France (${type}) : ${titre}.${m} Titres de presse cités, chaque média nommé dans l'image.`;
+}
+
 const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
 
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
 function decrire(choix) {
+  const d = decrireBase(choix);
+  const titre = d.champs.titrePropre || d.titre;
+  return { ...d, champs: { ...d.champs, alt: texteAlternatif(d.type, titre, d.medias, d.champs.sujets) } };
+}
+function decrireBase(choix) {
   if (choix.sondage) {
     const i = choix.sondage;
     return { titre: `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
@@ -750,6 +801,6 @@ async function main() {
   }
 }
 
-module.exports = { appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, retirerSansImage, imageValide, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
+module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

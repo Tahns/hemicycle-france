@@ -1,12 +1,35 @@
 # SWOT du site Hémicycle France, page par page
 
-Base : contenu et données du site au 2 octobre 2026. Les points marqués (?) sont des hypothèses non vérifiées.
+Base : audit du 5 octobre 2026 (Playwright, bureau 1300 px et mobile 390 px, 19 pages ; console, réseau, contraste, titres, panne de sources, SEO, i18n). Section « Site » ajoutée le 5 octobre ; les sections par page datent du 2 octobre, mises à jour là où l'audit les contredit. Les points marqués (?) sont des hypothèses non vérifiées.
 
 ## Vue d'ensemble
-- **Forces** : données officielles mises à jour chaque heure, sans serveur ni coût ; ton neutre, sources citées partout ; large couverture (569 députés, 348 sénateurs, plus de 8 400 scrutins) ; stories partageables ; site rapide (une seule page statique).
-- **Faiblesses** : un seul fichier de plus de 400 Ko (maintenance et chargement) ; dépendance à des sources externes qui peuvent changer de format ; aucune audience mesurée (statistiques GitHub pas confirmées) ; plusieurs scripts jamais testés sur leur vraie source (lobbying, âge et profession) ; pas de compte ni d'alertes.
+- **Forces** : données officielles mises à jour toutes les 15 minutes, sans serveur ni coût ; ton neutre, sources citées partout ; large couverture (569 députés, 348 sénateurs, plus de 8 400 scrutins) ; stories partageables ; site rapide (une seule page statique).
+- **Faiblesses** : un seul fichier de 590 Ko (maintenance et chargement) ; dépendance à des sources externes qui peuvent changer de format ; aucune audience mesurée (statistiques GitHub pas confirmées) ; plusieurs scripts jamais testés sur leur vraie source (lobbying, âge et profession) ; pas de compte ni d'alertes.
 - **Opportunités** : présidentielle 2027 (sondages, probabilités, décompte) ; Instagram comme relais (compte créé, encore vide) ; stories d'actualité à fort potentiel de partage ; archives hebdomadaires qui deviennent une série historique unique.
 - **Menaces** : concurrents établis (NosDéputés, Datan, Vie-publique) ; réserve électorale et règles sur les sondages ; changement ou fermeture d'une source ouverte ; droit à l'image et licences des portraits ; accusation de partialité malgré la neutralité.
+
+## Site (audit du 5 octobre 2026)
+**Forces** : aucune erreur JavaScript sur les 19 pages (bureau et mobile) ; aucun débordement horizontal à 390 px ; un seul h1 par page, titres de page et partage (title, description, Open Graph, canonical, sitemap) en place ; CSP stricte sans service tiers ; thèmes clair et sombre ; labels, alt et noms de boutons corrects partout ; focus visible défini ; traductions à 100 % (1 405 chaînes, 4 langues) ; si une source tombe, chaque rubrique affiche un message (« Réessayez un peu plus tard ») au lieu de planter.
+**Faiblesses** : voir le tableau (la plupart corrigées).
+**Opportunités** : bannière d'état des données réutilisable pour d'autres sources ; page Méthode déjà prête à accueillir un état de fraîcheur public.
+**Menaces** : un seul fichier index.html (590 Ko) et lois.json (5,4 Mo, chargé en worker) : lourd sur réseau lent et en cas de panne de la source ; mentions légales qui divergent du fonctionnement réel (risque de crédibilité).
+
+| Constat | Statut |
+|---|---|
+| Mentions, bandeaux et textes disaient « toutes les heures » ou « chaque matin » alors que la mise à jour tourne toutes les 15 minutes (Votes, Députés, Sénat, Candidats, Sondages, Agenda, mentions, README) | **corrigé** |
+| Mentions légales ne disaient rien de la publication des stories sur Instagram | **corrigé** (nouvelle section, date de mise à jour changée ; l'identité de l'éditeur n'est pas modifiée) |
+| Si data/lois.json est injoignable, le site affichait en silence un seul vote ancien (« Motion de censure », quiz « 0 questions ») sans le dire | **corrigé** (bandeau d'alerte clair en haut de page) |
+| Initiales des médaillons (candidats, partis, actualités) et pourcentages des duels de second tour illisibles sur fond clair ou jaune (contraste 1,96 à 3,4) | **corrigé** (texte noir ou blanc selon le fond) |
+| Libellés des pictogrammes d'actualité (Budget, Sénat) trop pâles en mode sombre (1,6 à 2,7) | **corrigé** |
+| Titres sautant de h2 à h4 (Actualités, Groupes) | **corrigé** (h3) |
+| Pas de lien d'évitement au clavier (« Aller au contenu ») | **corrigé** |
+| Chaque visite déclenche une requête 404 vers data/compte-config.json (comptes inactifs), visible dans la console | **accepté** (comportement voulu tant que les comptes ne sont pas activés ; ne gêne pas l'affichage) |
+| Pas de publication Instagram tant que les secrets Meta ne sont pas créés ; compte à lancer | **à faire par le propriétaire** |
+| Mentions légales : l'éditeur reste anonyme (LCEN art. 6 III 2) ; les coordonnées d'hébergeur doivent rester exactes ; ajouter l'adresse de contact réelle si souhaité | **à faire par le propriétaire** |
+| Page d'accueil et index.html de 590 Ko, lois.json de 5,4 Mo | **accepté** (déjà chargé par morceaux et en worker ; découpage = chantier lourd) |
+| Sondage YouGov déposé mais absent de la liste Wikipédia (signalé par le contrôle de fraîcheur) | **à faire par le propriétaire** (attendre Wikipédia ou saisir à la main) |
+| Agenda, Justice et questions du quiz saisis à la main, vite périmés | **à faire par le propriétaire** |
+| Audience non mesurée (statistiques GitHub à confirmer) | **à faire par le propriétaire** |
 
 ## Accueil
 - **F** : « En bref » (5 faits du jour), compte à rebours, sujets du moment, accès direct à tout.
@@ -51,7 +74,7 @@ Base : contenu et données du site au 2 octobre 2026. Les points marqués (?) so
 - **M** : séries révisées après publication.
 
 ## Actualités
-- **F** : sujets regroupés depuis des médias fiables, mise à jour toutes les heures, sources et dates, illustrations libres.
+- **F** : sujets regroupés depuis des médias fiables, mise à jour toutes les 15 minutes, sources et dates, illustrations libres.
 - **f** : regroupement automatique par similarité de titres (erreurs possibles) ; images limitées aux portraits et logos libres ; pas de texte d'article (voulu).
 - **O** : page qui génère le plus de retours et de partages.
 - **M** : changement de flux RSS d'un média ; sujet sensible (affaires judiciaires) à traiter avec prudence.
@@ -75,7 +98,7 @@ Base : contenu et données du site au 2 octobre 2026. Les points marqués (?) so
 - **M** : interprétation des probabilités comme prévisions ; contentieux sur la réserve.
 
 ## Candidats
-- **F** : 23 candidats déclarés, date et source de candidature.
+- **F** : 24 candidats déclarés, date et source de candidature.
 - **f** : pas de programme comparé (aucune source neutre intégrée) ; Bardella sans photo.
 - **O** : comparateur de programmes thématique, si des sources officielles sont fournies.
 - **M** : accusation de déséquilibre entre candidats.
@@ -91,6 +114,48 @@ Base : contenu et données du site au 2 octobre 2026. Les points marqués (?) so
 - **f** : un seul instantané pour l'instant ; courbes vides tant qu'il n'y a qu'un point.
 - **O** : donnée historique que les concurrents ne gardent pas.
 - **M** : volume de fichiers qui grossit dans le dépôt.
+
+## Stories (Instagram 1080 × 1920)
+Audit du 5 octobre 2026 : chaque modèle rendu avec Playwright sur des données réelles du dépôt et sur des cas limites (titre de 220 caractères, chiffre de 13 chiffres, nom de 70 caractères, média au nom très long, 12 médias, 0 média, portrait absent, TITRE EN CAPITALES, guillemets et accents, sujet sans titre rédigé, dossier à 120 articles, dossier à reprises identiques), puis relus image par image avec les zones masquées par Instagram (≈ 250 px en haut et en bas) en surimpression. Chaque ligne : **corrigé** / **à faire par le propriétaire** / **accepté**. Les rendus corrigés sont dans `instagram/modeles/`.
+
+**Forces**
+- Une direction artistique unique (`STORY_DA`) : tout modèle se reconnaît d'un coup d'œil. *Accepté (c'est le but).*
+- Titres de presse toujours cités avec leur média ; seuls les titres sont repris ; aucun titre de presse en grand si le site n'a pas son propre titre. *Accepté.*
+- Heures calculées (jamais codées en dur) : « 7 h 31 » est l'heure de l'article, au fuseau de Paris. *Vérifié : rien à corriger.*
+- Sélection très prudente (liste de mots exclus, thème justice, réserve électorale, nuit, plafonds, seuils 5 médias / dossier 6 / 2 par jour dans `data/stories-config.json`). *Accepté.*
+- Publication à 60 min d'écart, jamais deux fois la même story, jeton masqué dans les journaux. *Accepté.*
+
+**Faiblesses**
+- Logo à cheval sur la barre de profil Instagram (haut de l'image masqué sur ≈ 250 px) : **corrigé** (logo, étiquette et contenu descendus de 28 px ; `STORY_DA.logoY/etiquetteY/haut`).
+- Ligne « accroche → @hemicyclefrance » posée à 1680-1700 px, sous le champ de réponse : **corrigé** (1636 px, y compris pour la story « sondages »).
+- Citation coupée sur un mot faible (« … d'une annulation de la… », « … écoulé près… ») : **corrigé** (`storyLignes` retire les mots faibles et la ponctuation en fin de coupe ; titres longs d'abord réduits jusqu'à 9 lignes avant toute coupe).
+- Nom très long débordant de l'image (portraits, face à face) ou se chevauchant : **corrigé** (coupe après un trait d'union, puis au caractère avec « … »).
+- Chiffre très long (13 chiffres) sorti de l'image : **corrigé** (la taille descend jusqu'à 44 px).
+- Pastille de média trop étroite pour un nom long (texte qui dépasse) et, après coupe, dépassant la marge : **corrigé** (police fixée à la mesure, « … » compté).
+- Média absent : « — » seul et « TITRE PUBLIÉ PAR » vide : **corrigé** (pas de story sans média cité).
+- Titre de presse tout en capitales en géant (« L'ÉTAT DOIT TOUT CHANGER… ») : **corrigé** (remis en minuscules, sigles et noms propres usuels conservés).
+- Préfixes de rubrique et « DIRECT. » conservés dans les citations des modèles « en direct », « une » et « dossier » : **corrigé**.
+- Apostrophes droites mêlées aux apostrophes typographiques : **corrigé**.
+- Heures « 00 h 43 » : **corrigé** (« 0 h 43 »).
+- Dossier qui répète trois fois le même titre de dépêche : **corrigé** (titres distincts seulement ; moins de 3 titres distincts : pas de dossier en publication automatique).
+- Mots de reproche ou de polémique visant une personne nommée (« propos inélégants », « polémique », « fustige », « dérapage », « s'excuse », « attaque »…) absents de la liste d'exclusion : **corrigé** (ajoutés à `MOTS_EXCLUS`) ; le publieur applique aussi la liste à la sortie de file, pour une entrée plus ancienne que le durcissement.
+- Portrait manquant (Glucksmann, Faure, Hollande, Attal…) : initiales sur fond de couleur. **À faire par le propriétaire** : fournir ou autoriser des photos libres (`docs/portraits-a-completer.md`). L'image reste correcte.
+- Étiquette grise « PARTI ANIMALISTE » (texte blanc sur gris, contraste ≈ 2,3:1) dans la story candidat : **à faire par le propriétaire** (choisir une couleur de parti plus foncée dans les données) ; non bloquant.
+- Aucun lien cliquable : l'API des stories ne permet pas d'autocollant lien. **Accepté** ; le renvoi se fait par « → @hemicyclefrance » et le lien de la bio.
+
+**Opportunités**
+- Texte alternatif et fiche de publication : **corrigé** (champ `alt` dans chaque entrée de `data/instagram-file.json`, brouillon et flux Atom ; à coller dans le champ « texte alternatif » si la story est publiée à la main).
+- Série de rendez-vous réguliers (« En bref » du matin, « À noter » avant une échéance) pour fidéliser. **À faire par le propriétaire** : décider si l'« En bref » (actuellement `enBref: false`) est réactivé quand le compte aura une audience.
+- Réutiliser les stories comme publications de fil (carrousel) : **à faire par le propriétaire** (choix éditorial).
+
+**Menaces**
+- Libellé « À la une » pour un sujet faible : **corrigé** (« À la une » seulement à partir de 4 médias ; « En ce moment » pour 2-3 ; « Dans la presse » pour 1) ; titre de repli « Rubrique · en ce moment » ; « Énergie » ou toute rubrique seule n'est plus un titre de story.
+- « Face à face » affirmait une opposition entre deux candidats simplement cités ensemble : **corrigé** (il faut un débat, un duel ou une primaire dans les titres, et aucun mot de conflit).
+- Répétitivité (« Primaire de la gauche » en deux stories, « Blocage » puis « Blocus » des lycées) : **corrigé** (un sujet proche d'une story des dernières 24 h est refusé à la sélection, dans l'« En bref » et à la publication).
+- Sondage pendant la réserve électorale : déjà bloqué (sélection, file, publieur, contexte des modèles, dossier). **Accepté**, tests existants.
+- Reprise de titres de presse (droit d'auteur, droit des personnes) : titres courts, attribués, jamais d'accusation ; risque résiduel faible mais non nul. **À faire par le propriétaire** : relire les premières stories avant d'activer la publication sans validation (`validationHumaine`).
+- Fiabilité technique : les stories dépendent du rendu du site dans Chromium et d'un jeton Instagram à renouveler ; alertes déjà en place dans le résumé du workflow. **Accepté.**
+- Effet sur l'audience : peu de stories (2 par jour au plus) et sélectives, donc peu de bruit ; le risque est plutôt un compte trop silencieux. **Accepté.**
 
 ## Méthode et mentions
 - **F** : transparence (sources, limites, neutralité), dates réelles lues dans les fichiers, crédits des photos.

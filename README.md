@@ -3,7 +3,7 @@
 Site : https://tahns.github.io/hemicycle-france/ — automatisation
 
 Ce dossier contient le site (`index.html`) et l'infrastructure qui le met à jour
-automatiquement, toutes les heures, à partir de sources officielles.
+automatiquement, toutes les 15 minutes, à partir de sources officielles.
 
 ## Ce qui est automatique
 
@@ -112,7 +112,7 @@ racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 | Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
 
 Désormais automatiques : l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
-(Eurostat, notification de la France), les chefs de parti (vérifiés toutes les heures dans l'infobox
+(Eurostat, notification de la France), les chefs de parti (vérifiés toutes les 15 minutes dans l'infobox
 Wikipédia de chaque parti ; un changement est appliqué puis signalé pour relire l'intitulé de la
 fonction) et le thème des votes (commission saisie au fond du dossier législatif).
 
@@ -201,7 +201,7 @@ polices du système.
 - `scripts/fetch-*.js` : collecte depuis les sources officielles ; chacun passe par `scripts/garde.js`, qui refuse
   d'écraser un bon fichier si le contenu est vide, chute de plus de 30 % ou perd un champ obligatoire (ancien fichier conservé, alerte levée).
 - `scripts/check-data.js` (cohérence, licence de chaque photo de `photos/personnalites/` dans `data/portraits.json`), `check-fraicheur.js` (données périmées), `check-sources.js` (Décodex).
-- Workflows : `update-data.yml` (toutes les heures), `actualites.yml`, `ci.yml` (tests), `stats.yml` (trafic), `sante.yml` (chaque lundi : les trois contrôles ; écrit le problème dans le résumé de l'exécution, sans e-mail).
+- Workflows : `update-data.yml` (toutes les 15 minutes), `actualites.yml`, `ci.yml` (tests), `stats.yml` (trafic), `sante.yml` (chaque lundi : les trois contrôles ; écrit le problème dans le résumé de l'exécution, sans e-mail).
 - Secrets : `GITHUB_TOKEN` (fourni automatiquement) ; `TRAFIC_TOKEN` (jeton fine-grained « Administration : Read-only ») pour `stats.yml` uniquement.
 - Données manuelles : une fiche de `justice.json` non vérifiée depuis 90 jours est marquée « À vérifier » (masquée après 180) ; les événements passés de `meetings.json` sont masqués.
 - Tests : `node tests/garde.test.mjs` (garde-fou et licences, sur fixtures), `node tests/smoke.cjs` (navigateur).

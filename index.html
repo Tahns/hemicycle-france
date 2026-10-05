@@ -641,7 +641,10 @@
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:var(--blanc); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
   .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1); border-radius:var(--r-3); background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
   .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
+  .alerte-donnees{margin:var(--s3) 0; padding:var(--s3) var(--s4); border:1px solid var(--rouge-rep); border-left-width:4px; background:var(--bg); color:var(--text); font-size:var(--fs-base);}
+  .alerte-donnees[hidden]{display:none;}
   .actu-picto{overflow:hidden;}
+  [data-theme="sombre"] .actu-picto{color:color-mix(in srgb, var(--c) 55%, #fff);}
   .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
   .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
@@ -658,7 +661,7 @@
   .actu-une .actu-logo img{max-height:52px;} .actu-une .actu-logo img:only-of-type{max-height:90px;}
   .actu-une .actu-initiales{font-size:var(--fs-3xl);}
   .actu-une .actu-theme{width:32px; height:32px;} .actu-une .actu-theme svg{width:18px; height:18px;}
-  .actu-une h4{font-size:var(--fs-xl);}
+  .actu-une h3{font-size:var(--fs-xl);}
   @media (max-width:700px){
     .actu-sujet{grid-template-columns:60px 1fr; gap:var(--s3);}
     .actu-visuel{width:60px; height:60px;}
@@ -675,11 +678,11 @@
     .actu-une .actu-theme{right:auto; left:96px; top:-4px;}
     .actu-une .actu-picto{flex-direction:row; gap:var(--s3);} .actu-une .actu-picto small{display:block; font-size:var(--fs-sm);}
     .actu-une .actu-initiales{width:110px;}
-    .actu-une h4{font-size:var(--fs-h3);}
+    .actu-une h3{font-size:var(--fs-h3);}
   }
-  .actu-sujet h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
-  .actu-sujet h4 a{color:var(--text); text-decoration:none;}
-  .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-sujet h3{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
+  .actu-sujet h3 a{color:var(--text); text-decoration:none;}
+  .actu-sujet h3 a:hover{color:var(--accent); text-decoration:underline;}
   .actu-citation{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
   .actu-citation a{color:inherit; text-decoration:none;} .actu-citation a:hover{text-decoration:underline;}
   .actu-citation-media{color:var(--text-faint); font-weight:600;}
@@ -693,7 +696,7 @@
   .actu-autres a{color:var(--text-soft); text-decoration:none;}
   .actu-autres a:hover{text-decoration:underline;}
   .actu-dossier{padding:var(--s4) var(--s4); margin:var(--s4) 0; border:1px solid var(--border-soft); border-left:4px solid var(--accent); border-radius:var(--radius-md, 8px); background:var(--surface, transparent);}
-  .actu-dossier h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600; line-height:1.25;}
+  .actu-dossier h3{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600; line-height:1.25;}
   .actu-dossier .actu-autres li{margin:var(--s2) 0;}
   .actu-dossier-medias{margin:var(--s2) 0 0; font-size:var(--fs-xs); color:var(--text-faint);}
   .actu-accueil{margin:var(--s5) 0 var(--s2); padding-top:var(--s4); border-top:1px solid var(--ink);}
@@ -759,7 +762,7 @@
 
   /* ---------- Historique ---------- */
   .proximite{margin-bottom:var(--s5); padding:var(--s4) 0 var(--s2); border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
-  .proximite h4{margin:0 0 2px; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
+  .proximite h3{margin:0 0 2px; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
   .proximite .sub{font-size:var(--fs-sm); color:var(--text-faint); margin-bottom:var(--s3); max-width:720px;}
   .comparateur-select{margin:var(--s2) 0 var(--s3); max-width:100%;}
   .comparateur-resume{font-family:var(--font-display); font-size:var(--fs-lg); margin:var(--s2) 0 var(--s2);}
@@ -1085,6 +1088,9 @@
   .quiz-restart:hover{background:var(--ink); color:var(--bg);}
 
   /* ---------- Partis et dirigeants ---------- */
+  .lien-evitement{position:absolute; left:var(--s3); top:-60px; z-index:100; padding:var(--s2) var(--s3); background:var(--ink); color:var(--bg); font-weight:600; border-radius:var(--r-1);}
+  .lien-evitement:focus{top:var(--s2);}
+  main:focus{outline:none;}
   .toast{position:fixed; left:50%; bottom:28px; transform:translateX(-50%); z-index:60; padding:var(--s3) var(--s4); border-radius:var(--r-1); background:var(--ink); color:var(--bg); font-size:var(--fs-md); font-weight:600; box-shadow:var(--ombre);}
   @media (max-width:700px){ .toast{bottom:calc(76px + env(safe-area-inset-bottom));} }
   /* Carte d'aperçu (1200 × 630, enregistrée en 800 × 420) photographiée par scripts/partage.cjs : index.html?carte */
@@ -1785,7 +1791,7 @@
     .actu-sujet .actu-initiales{font-size:var(--fs-lg);}
     .actu-sujet .actu-logo{padding:2px;} .actu-sujet .actu-logo img{max-height:18px;} .actu-sujet .actu-logo img:only-of-type{max-height:30px;}
     .actu-sujet .actu-recoupe{display:none;}
-    .actu-sujet h4, .actu-sujet.actu-une h4{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
+    .actu-sujet h3, .actu-sujet.actu-une h3{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
     .actu-sujet .actu-meta{display:flex; align-items:baseline; margin-top:2px; font-size:var(--fs-xs); line-height:1.3; white-space:nowrap;}
     .actu-sujet .actu-nb{display:inline; flex:none; margin-right:4px; font-weight:700; color:var(--accent);}
     .actu-sujet .actu-medias{flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;}
@@ -1855,7 +1861,7 @@
     .pli-mobile[open] > summary.pli-h3::after{content:"\2212";}
     .pli-mobile > summary.pli-h3:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
     .cp-bloc h3, .sondage-avg-card h3, .evolution h3, .probas h3, .second-tour h3, .budget-bloc h3, .breakdown h3, .section-titre, .veille h3{font-size:var(--fs-lg); line-height:1.25;}
-    .histo-title, .proximite h4, .candidat-carte h3{font-size:var(--fs-base);}
+    .histo-title, .proximite h3, .candidat-carte h3{font-size:var(--fs-base);}
     .proximite{margin-bottom:var(--s3); padding:var(--s2) 0 var(--s1);}
     .proximite .sub, .probas-sub, .veille-sub, .evolution-sub{font-size:var(--fs-xs); margin-bottom:var(--s2);}
     .section-titre{margin:var(--s4) 0 var(--s2);}
@@ -1970,6 +1976,7 @@
 </style>
 </head>
 <body data-page="accueil">
+<a class="lien-evitement" href="#" id="lien-evitement">Aller au contenu</a>
 
 <header class="masthead">
   <div class="liseré" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -2033,7 +2040,8 @@
   <button type="button" class="feuille-lien feuille-theme" id="theme-toggle-mobile"><b>Mode sombre</b><span>Changer l'apparence du site</span></button>
 </div>
 
-<main>
+<main id="contenu" tabindex="-1">
+  <p class="alerte-donnees" id="alerte-donnees" role="alert" hidden></p>
   <section class="view active" id="view-accueil">
     <aside class="direct-bandeau" data-direct hidden aria-label="En direct"></aside>
     <div class="nouveautes" id="nouveautes" hidden></div>
@@ -2082,7 +2090,7 @@
       <div class="surtitre">Assemblée nationale</div>
       <h2>Votes</h2>
       <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024 (un <span class="gl" data-gl="scrutin">scrutin</span>, c'est un vote en séance). Choisissez un texte : chaque point est un député, selon qu'il a voté pour, contre, ou pas du tout.
-        <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées chaque matin.</small></p>
+        <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées toutes les 15 minutes.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Voir comment les députés ont voté sur chaque texte : pour, contre, ou pas de vote.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins">
@@ -2169,7 +2177,7 @@
       <div class="surtitre">Assemblée nationale</div>
       <h2>Députés</h2>
       <p class="chapo">Entrez le nom de votre commune pour trouver votre <span class="gl" data-gl="depute">député</span>, puis voyez s'il vient voter et ce qu'il a voté.
-        <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés chaque matin.</small></p>
+        <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés toutes les 15 minutes.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Trouver votre député, voir s'il est présent et comment il vote.</p>
     </div>
     <div id="deputes-recherche">
@@ -2198,7 +2206,7 @@
       <div class="surtitre">Sénat</div>
       <h2>Sénat</h2>
       <p class="chapo">L'autre chambre du <span class="gl" data-gl="parlement">Parlement</span> : elle peut modifier ou rejeter ce que l'Assemblée a adopté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
-        <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues chaque matin.</small></p>
+        <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues toutes les 15 minutes.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Voir comment votent les sénateurs et leurs groupes.</p>
     </div>
     <div id="senat-principal">
@@ -2372,7 +2380,7 @@
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Candidats</h2>
       <p class="chapo">Les personnes qui se sont déclarées, avec leur parti, leurs fonctions et la source de leur annonce. Pour être candidat, il faut encore 500 <span class="gl" data-gl="parrainage">parrainages</span> d'élus ; la liste officielle sera connue au printemps 2027.
-        <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue chaque matin.</small></p>
+        <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue toutes les 15 minutes.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui s'est déclaré pour la présidentielle, et d'où vient l'information.</p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
@@ -2596,7 +2604,7 @@
     <div class="rubrique-tete">
       <h2>Mentions légales</h2>
       <p class="chapo">Qui publie ce site, d'où viennent ses informations, et ce qu'il fait (ou ne fait pas) de vos données.
-        <small>Dernière mise à jour de cette page : 2 octobre 2026.</small></p>
+        <small>Dernière mise à jour de cette page : 5 octobre 2026.</small></p>
       <p class="fait-foi" id="fait-foi" data-fr="Seule la version française fait foi." hidden>Seule la version française fait foi.</p>
     </div>
 
@@ -2613,13 +2621,13 @@
 
       <h3>Sources et réutilisation des données</h3>
       <ul>
-        <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les heures ; la date de la dernière mise à jour figure en bas de chaque page.</li>
+        <li><b>Votes, dossiers législatifs, groupes politiques :</b> Assemblée nationale, <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">data.assemblee-nationale.fr</a>, sous <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>. Données relevées toutes les 15 minutes ; la date de la dernière mise à jour figure en bas de chaque page.</li>
         <li><b>Indicateurs économiques :</b> Insee, Banque de données macroéconomiques. Chaque chiffre renvoie à sa série d'origine sur insee.fr.</li>
         <li><b>Budget, déficit et dette :</b> comptes des administrations publiques de la France (établis par l'Insee) tels que notifiés à <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=fr" target="_blank" rel="noopener">Eurostat</a> (tableaux gov_10a_exp, gov_10a_main et gov_10dd_edpt1, API publique), réutilisables sous licence ouverte (<a href="https://commission.europa.eu/legal-notice/reuse-commission-documents_fr" target="_blank" rel="noopener">politique de réutilisation de la Commission européenne</a>, source citée). Chaque bloc de la rubrique « Budget » indique sa source et son année.</li>
         <li><b>Actualités :</b> titres, dates et liens relus toutes les 15 minutes dans les flux RSS publics de la rubrique politique de médias d'information reconnus (la liste à jour, avec ceux qui ont répondu, figure sur la page Actualités : franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat, BFMTV, France 24, RFI, L'Express, Le Parisien, Mediapart). Le titre de presse n'est que cité, avec son média et un lien ; le contenu reste celui du média, à lire sur son site.</li>
         <li><b>Bandeau « En direct » :</b> affiché seulement quand un événement est détecté, jamais autrement. Un traitement automatique repère, dans les titres déjà relevés des médias ci-dessus, l'annonce ou la tenue d'une prise de parole du président de la République (allocution, conférence de presse, discours, interview) publiée depuis moins de six heures ; il y ajoute, les jours de séance, la séance publique de l'Assemblée nationale d'après son agenda officiel (sans les heures : le bandeau dit « aujourd'hui », pas « en cours »). Le bandeau cite le titre du média et renvoie à son article. Les chaînes proposées sont de simples liens vers leurs pages officielles de direct : <a href="https://www.francetvinfo.fr/en-direct/" target="_blank" rel="noopener">franceinfo</a>, <a href="https://www.bfmtv.com/en-direct/" target="_blank" rel="noopener">BFMTV</a>, <a href="https://www.tf1info.fr/direct/" target="_blank" rel="noopener">LCI</a>, <a href="https://www.publicsenat.fr/direct" target="_blank" rel="noopener">Public Sénat</a>, <a href="https://www.france24.com/fr/direct" target="_blank" rel="noopener">France 24</a> et le <a href="https://videos.assemblee-nationale.fr/" target="_blank" rel="noopener">direct officiel de l'Assemblée nationale</a>. Aucune vidéo n'est intégrée au site. Le Sénat n'est pas couvert faute de données de séance relevées.</li>
         <li><b>Sondages :</b> résultats relevés sur la <a href="https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">liste Wikipédia des sondages</a> (licence CC BY-SA 4.0), chacun renvoyant à la notice officielle déposée par l'institut auprès de la Commission des sondages.</li>
-        <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les heures ; le vote de chaque groupe est recoupé avec le total officiel.</li>
+        <li><b>Votes du Sénat :</b> pages officielles des scrutins publics (<a href="https://www.senat.fr/scrutin-public/" target="_blank" rel="noopener">senat.fr</a>), relues toutes les 15 minutes ; le vote de chaque groupe est recoupé avec le total officiel.</li>
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
         <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
         <li><b>Portraits :</b> photos officielles de l'Assemblée nationale et du Sénat pour les parlementaires ; pour les autres personnalités, image principale de leur article Wikipédia lorsqu'elle est sous licence libre sur <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>, hébergée sur le site.<span id="credits-portraits"></span></li>
@@ -2637,6 +2645,8 @@
       <p>Chaque jour, tous les liens cités sont confrontés à la base du <a href="https://www.lemonde.fr/verification/" target="_blank" rel="noopener">Décodex</a> (Les Décodeurs, <i>Le Monde</i>) : aucun ne doit renvoyer vers un contenu qu'elle a démenti ni vers un site qu'elle a épinglé à de nombreuses reprises (au moins dix fois).</p>
       <p>Les données reprises de Wikipédia (sondages, candidatures) et les portraits sous licence CC BY-SA sont redistribuées sous la même licence, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a> ; l'auteur et la licence de chaque portrait s'affichent au survol de la photo. Les titres de presse restent la propriété de leurs médias et ne sont repris que pour renvoyer vers leur article. Les classements par type de vote, les titres courts et les calculs (participation, proximité entre groupes, quiz) sont produits par le site à partir de ces données. En cas de doute, le document officiel lié fait foi.</p>
 
+      <h3>Publication sur Instagram</h3>
+      <p>Des images au format « story » sont préparées automatiquement à partir des données du site (actualités du moment, sondages, chiffres clés, votes) puis publiées sur le compte Instagram @hemicyclefrance, au plus quelques fois par jour et jamais la nuit. Elles reprennent les mêmes sources, avec leur mention, et obéissent aux mêmes règles : aucun sondage pendant la réserve électorale, titres de presse seulement cités avec leur média. Instagram (Meta) est un service tiers soumis à sa propre politique de confidentialité ; le site lui-même ne s'y connecte pas et n'y envoie aucune donnée de visiteur.</p>
       <h3>Sondages</h3>
       <p>Les sondages sont présentés dans le respect de la loi n° 77-808 du 19 juillet 1977 relative aux sondages d'opinion. Pour chaque enquête sont indiqués l'institut, les dates de terrain, le nombre de personnes interrogées et la marge d'erreur, avec un lien vers la notice officielle, que toute personne a le droit de consulter auprès de la <a href="https://www.commission-des-sondages.fr" target="_blank" rel="noopener">Commission des sondages</a> ; le commanditaire et le texte des questions figurent dans cette notice.</p>
       <p>Conformément à l'article 11 de cette loi, la veille et le jour de chaque tour de l'élection présidentielle (du samedi 0 h au dimanche 20 h, heure de Paris), la rubrique Sondages est masquée et aucun nouveau sondage n'est relevé.</p>
@@ -3903,7 +3913,7 @@ function renderProximite(party, liste){
   }).filter(x=>x.pct!==null).sort((a,b)=>b.pct-a.pct);
   if(!stats.length){ el.innerHTML = ""; return; }
   el.innerHTML = `
-    <h4>Avec qui vote le groupe ${esc(party.nom)} ?</h4>
+    <h3>Avec qui vote le groupe ${esc(party.nom)} ?</h3>
     <div class="sub">Sur les scrutins affichés, part des votes où la majorité du groupe a pris la même position (pour, contre ou abstention) que la majorité de chacun des autres groupes.</div>
     ${stats.map(x=>`
       <div class="proximite-row" title="${x.total} scrutins comparés">
@@ -3935,7 +3945,7 @@ function renderCohesion(liste){
   const stats = PARTIES.filter(p=>p.id!=="NI").map(p=>({ p, c: cohesionGroupe(p.id, liste) })).filter(x=>x.c).sort((a,b)=>b.c.pct-a.c.pct);
   if(!stats.length){ el.innerHTML = ""; return; }
   el.innerHTML = `
-    <h4>${gl("cohesion", "Cohésion")} de vote des groupes</h4>
+    <h3>${gl("cohesion", "Cohésion")} de vote des groupes</h3>
     <div class="sub">Sur les scrutins affichés (hors motions de censure, avec au moins 5 votants du groupe), part moyenne des suffrages exprimés du groupe qui vont dans le même sens que sa position majoritaire. 100 % : le groupe a toujours voté d'un bloc. Les non-inscrits ne forment pas un groupe et sont exclus.</div>
     ${stats.map(x=>`
       <div class="proximite-row" title="${x.c.n} scrutins pris en compte, dont ${x.c.unanimes} où le groupe a voté à l'unanimité des suffrages exprimés">
@@ -3972,7 +3982,7 @@ function renderComparateur(party, liste){
       : `<p class="histo-date">Aucun scrutin affiché où les deux groupes ont une position nette.</p>`;
   }
   el.innerHTML = `
-    <h4>Comparer deux groupes</h4>
+    <h3>Comparer deux groupes</h3>
     <div class="sub">Accord entre ${esc(party.nom)} et un autre groupe sur les scrutins affichés : position majoritaire de chaque groupe (pour, contre ou abstention), scrutins sans position nette écartés.</div>
     <label for="groupe-comparer" class="histo-date">Comparer avec :</label><br>
     <select id="groupe-comparer" class="comparateur-select"><option value="">Choisir un groupe…</option>
@@ -4108,7 +4118,7 @@ function renderAgendaAN(){
     return p.type === "vote" ? `<li><span class="tag vote">Vote solennel</span>${t}</li>` : p.type === "qag" ? "" : `<li>${t}</li>`;
   };
   const jour = (j)=>`<div class="an-jour"><div class="jour">${esc(jourFr(j.date))}</div><ul>${j.points.some(p=>p.type==="qag") ? `<li><span class="tag">Questions au Gouvernement</span></li>` : ""}${j.points.map(ligne).join("")}</ul></div>`;
-  el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé toutes les heures. Il peut encore changer.</span></h3>
+  el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé toutes les 15 minutes. Il peut encore changer.</span></h3>
     ${boutonsPartage("agenda")}
     ${jours.slice(0,4).map(jour).join("")}
     ${jours.length > 4 ? `<details><summary>Les ${jours.length - 4} jours de séance suivants</summary>${jours.slice(4).map(jour).join("")}</details>` : ""}
@@ -4296,14 +4306,14 @@ function renderSecondTour(){
   if(!SECOND_TOUR.length || periodeReserveSondages()){ bloc.hidden = true; return; }
   const couleur = nom => CANDIDATS.find(c=>c.id===nom)?.couleur || "#8A8C94";
   bloc.innerHTML = `<h3>Second tour : les duels testés</h3>
-    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement toutes les heures, avec les mêmes contrôles qu'au premier tour.</p>
+    <p class="probas-sub">Dernière enquête de chaque institut pour chaque duel, en pourcentage des votes exprimés (blancs et abstention exclus). Relevé automatiquement toutes les 15 minutes, avec les mêmes contrôles qu'au premier tour.</p>
     ${SECOND_TOUR.slice(0, 8).map(d=>{
       const [a, b] = [...d.candidats].sort((x, y)=> (d.instituts[0].scores[y] ?? 0) - (d.instituts[0].scores[x] ?? 0));
       return `<div class="duel"><div class="duel-titre">${esc(a)} – ${esc(b)}</div>
         ${d.instituts.map(i=>`<div class="duel-ligne">
           <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
           <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
-            <span style="width:${i.scores[a]}%; background:${couleur(a)}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${couleur(b)}">${nombreFr(i.scores[b])} %</span>
+            <span style="width:${i.scores[a]}%; background:${couleur(a)}; color:${texteSurCouleur(couleur(a))}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${couleur(b)}; color:${texteSurCouleur(couleur(b))}">${nombreFr(i.scores[b])} %</span>
           </div></div>`).join("")}
       </div>`;
     }).join("")}`;
@@ -4364,6 +4374,13 @@ const THEMES_ACTU = {
   securite:     ["#B3261E", "M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z", "Sécurité"],
   politique:    ["#625D53", "M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4", "Vie politique"],
 };
+// Texte lisible (contraste WCAG) sur une pastille de couleur de parti : blanc, sauf sur fond clair (ex. jaune)
+function texteSurCouleur(hex){
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex||"")); if(!m) return "#fff";
+  const v = [0,2,4].map(i=>{ const c = parseInt(m[1].slice(i,i+2),16)/255; return c<=.03928 ? c/12.92 : Math.pow((c+.055)/1.055,2.4); });
+  const l = .2126*v[0] + .7152*v[1] + .0722*v[2];
+  return 1.05/(l+.05) >= 4.5 ? "#fff" : "#1A1A1A";
+}
 const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
 function visuelActu(s){
@@ -4376,7 +4393,7 @@ function visuelActu(s){
     return `<div class="actu-visuel actu-portraits n${personnes.length}">${personnes.map(p=>{
       const contenu = p.photo
         ? `<img src="${esc(p.photo)}" alt="" loading="lazy" decoding="async" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
-        : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}">${esc(initialesActu(p.nom))}</span>`;
+        : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}">${esc(initialesActu(p.nom))}</span>`;
       return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${contenu}</a>` : contenu;
     }).join("")}${pastille}</div>`;
   }
@@ -4385,7 +4402,7 @@ function visuelActu(s){
   }
   if((ill.personnes || []).length){
     const p = ill.personnes[0];
-    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
+    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
   // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
   const long = !/\s/.test(theme[2]) && theme[2].length > 9;
@@ -4402,9 +4419,9 @@ function sujetHTML(s, court, une, sup){
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     ${s.titrePropre?.titre
-      ? `<h4>${esc(s.titrePropre.titre)}</h4>
+      ? `<h3>${esc(s.titrePropre.titre)}</h3>
     <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>`
-      : `<h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h4>`}
+      : `<h3><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h3>`}
     ${(s.contexte || []).length ? `<p class="actu-contexte"><b>Le contexte</b> : ${s.contexte.map(c=>`${esc(c.texte)} <small>(${esc(c.source)})</small>`).join(" · ")}</p>` : ""}
     <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}
@@ -4420,7 +4437,7 @@ function dossierHTML(d, max){
   const medias = [...new Set(d.articles.map(x=>x.media))];
   return `<article class="actu-dossier">
     <span class="actu-recoupe">Dossier</span>
-    <h4>${esc(d.titre)}</h4>
+    <h3>${esc(d.titre)}</h3>
     <div class="actu-meta"><span class="actu-nb">${d.articles.length} articles · ${medias.length} médias</span><span class="actu-quand"> · ${esc(ilYA(d.derniere || d.articles[0].date))}</span> <button type="button" class="lien-bouton bouton-story mini" data-story="actualites" data-id="${esc(d.id)}" aria-label="Créer une story de ce dossier" title="Créer une story de ce dossier"></button></div>
     <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
     <p class="actu-dossier-medias"><span>Médias :</span> <span>${esc(medias.join(", "))}</span></p>
@@ -4570,7 +4587,7 @@ async function renderVeille(){
   if(!liste.length || periodeReserveSondages()){ bloc.hidden = true; return; }
   const fin = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long" }).replace(/^1 /, "1er ");
   bloc.innerHTML = `<h3>Les dernières enquêtes déposées</h3>
-    <p class="veille-sub">Chaque sondage publié doit être déclaré à la Commission des sondages. Le site vérifie sa liste toutes les heures : une enquête dont les chiffres ne sont pas encore publiés apparaît « en attente », puis s'affiche dès qu'ils le sont.</p>
+    <p class="veille-sub">Chaque sondage publié doit être déclaré à la Commission des sondages. Le site vérifie sa liste toutes les 15 minutes : une enquête dont les chiffres ne sont pas encore publiés apparaît « en attente », puis s'affiche dès qu'ils le sont.</p>
     ${liste.map(e=>`<div class="veille-ligne">
       <span class="veille-nom"><b>${esc(e.institut)}</b>${e.media ? ` pour ${esc(e.media)}` : ""}</span>
       <span class="veille-date">terrain jusqu'au ${esc(fin(e.terrain.fin))}${e.echantillon ? ` · ${formatNombre(e.echantillon)} personnes` : ""}</span>
@@ -5093,7 +5110,7 @@ function renderLeaders(){
       ? `${esc(g.president)} préside le groupe à l'Assemblée nationale.` : "";
     return `
       <div class="leader-card" style="animation-delay:${idx*25}ms">
-        ${sansChef ? `<div class="leader-avatar" style="background:${l.couleur}">${esc(initiales)}</div>` : medaillon(l.nom, l.couleur, 52, initiales)}
+        ${sansChef ? `<div class="leader-avatar" style="background:${l.couleur}; color:${texteSurCouleur(l.couleur)}">${esc(initiales)}</div>` : medaillon(l.nom, l.couleur, 52, initiales)}
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
@@ -5879,7 +5896,7 @@ function photoPersonne(nom){
 function medaillon(nom, couleur, taille, initiales){
   const ph = photoPersonne(nom);
   const ini = initiales ?? nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
-  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b>${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy" decoding="async">` : ""}</span>`;
+  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b style="color:${texteSurCouleur(couleur)}">${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy" decoding="async">` : ""}</span>`;
 }
 // Une fois les listes de parlementaires chargées, les rubriques qui nomment des personnes se redessinent avec les photos
 function appliquerPhotos(){
@@ -6784,6 +6801,7 @@ function ouvrirDepuisHash(){
   return false;
 }
 window.addEventListener("hashchange", ouvrirDepuisHash);
+document.getElementById("lien-evitement").addEventListener("click", ev=>{ ev.preventDefault(); document.getElementById("contenu").focus(); });
 
 // Six regroupements ; chaque page garde sa vue (#view-<id>) et son lien direct (#sondages, #deputes…)
 const HUBS = [
@@ -7471,7 +7489,7 @@ let LOIS_MAJ = null, INDICATEURS_MAJ = null;
 
 async function lireJSON(url){
   try{
-    // « no-cache » : le navigateur revérifie toujours auprès du serveur (données mises à jour toutes les heures)
+    // « no-cache » : le navigateur revérifie toujours auprès du serveur (données mises à jour toutes les 15 minutes)
     const res = await fetch(url, { cache: "no-cache" });
     if(!res.ok){ console.warn(`Impossible de charger ${url}`, res.status); return null; }
     return await res.json();
@@ -7547,6 +7565,11 @@ async function loadExternalData(){
   try { loisJson = await chargerLoisWorker(); }
   catch(e){ console.warn("Worker indisponible, chargement classique des scrutins", e); loisJson = await lireJSON("data/lois.json"); if(loisJson?.lois) loisJson.lois = loisJson.lois.map(completerLoi); }
   if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
+  else {
+    // Fichier absent ou illisible : seul le dernier scrutin intégré à la page reste affiché. On le dit clairement.
+    const a = document.getElementById("alerte-donnees");
+    if(a){ a.textContent = t("Les scrutins n'ont pas pu être chargés (source momentanément injoignable). Seul un extrait ancien est affiché : les votes, les groupes et le quiz sont incomplets. Rechargez la page dans quelques minutes."); a.hidden = false; }
+  }
 }
 
 const DATES_COURTES = new Map(); // toLocaleDateString est lent sur téléphone : résultat mémorisé
