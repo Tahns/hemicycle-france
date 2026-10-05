@@ -518,6 +518,91 @@
     border-top:1px solid var(--border); font-size:var(--fs-sm); color:var(--text-soft);
   }
   .legend-item{display:flex; align-items:center; gap:var(--s2);}
+  /* ---------- Le journal du jour : les actualités en une de quotidien (rendu à l'ouverture, depuis data/actualites.json) ---------- */
+  .journal-invite{margin:var(--s4) 0 var(--s2);}
+  .journal-invite a{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s3); padding:var(--s3) var(--s4); min-height:44px; box-sizing:border-box; border:var(--filet-fort) solid var(--ink); border-radius:var(--r-1); background:var(--bg-elevated); color:var(--text); text-decoration:none;}
+  .journal-invite a b{font-family:var(--font-display); font-size:var(--fs-h3); font-weight:700;}
+  .journal-invite a span{font-size:var(--fs-md); color:var(--text-soft);}
+  .journal-invite a:hover b, .journal-invite a:focus-visible b{text-decoration:underline; text-underline-offset:3px;}
+  .journal-invite a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .journal-actions{display:flex; flex-wrap:wrap; gap:var(--s2) var(--s3); margin:var(--s3) 0 var(--s4);}
+  .journal{background:var(--bg-elevated); color:var(--text); border:1px solid var(--border); padding:var(--s4) var(--s4) var(--s5); font-family:var(--font-body);}
+  .journal a{color:inherit; text-decoration-color:var(--border); text-underline-offset:3px;}
+  .journal a:hover{text-decoration-color:currentColor;}
+  .journal a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .journal-nom{margin:0; text-align:center; font-family:var(--font-display); font-weight:800; font-size:clamp(34px,8vw,64px); line-height:1.05; letter-spacing:-.01em; padding:var(--s2) 0 var(--s3);}
+  .journal-ligne{display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--s1) var(--s4); padding:var(--s2) 0; border-top:var(--filet-epais) double var(--ink); border-bottom:var(--filet) solid var(--ink); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase;}
+  .journal-ligne .journal-date{font-size:var(--fs-sm);}
+  .journal-etiquette{display:block; margin:0 0 var(--s2); font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);}
+  .journal-etiquette.rouge{color:var(--rouge);}
+  .journal-une{padding:var(--s4) 0; border-bottom:var(--filet-fort) solid var(--ink);}
+  .journal h3{margin:0; font-family:var(--font-display); font-weight:700; line-height:1.15; text-wrap:balance;}
+  .journal-une h3{font-size:clamp(26px,5.4vw,46px); line-height:1.08;}
+  .journal-meta{margin:var(--s2) 0 0; font-size:var(--fs-sm); color:var(--text-soft);}
+  .journal-meta b{color:var(--text);}
+  .journal-aussi{margin:var(--s2) 0 0; font-size:var(--fs-sm); color:var(--text-soft);}
+  .journal-aussi a{font-weight:600;}
+  .journal-secondaires{display:grid; grid-template-columns:1fr; border-bottom:var(--filet-fort) solid var(--ink);}
+  .journal-secondaires article{padding:var(--s4) 0; border-bottom:1px solid var(--border);}
+  .journal-secondaires article:last-child{border-bottom:0;}
+  .journal-secondaires h3{font-size:var(--fs-xl);}
+  .journal-rubriques{padding-top:var(--s4);}
+  .journal-rubrique{break-inside:avoid; margin:0 0 var(--s5);}
+  .journal-rubrique h3{font-size:var(--fs-lg); padding-bottom:var(--s2); margin-bottom:var(--s3); border-bottom:var(--filet-fort) solid var(--ink);}
+  .journal-rubrique ol, .journal-rubrique ul{margin:0; padding:0; list-style:none;}
+  .journal-rubrique li{padding:var(--s2) 0; border-bottom:1px solid var(--border-soft); font-size:var(--fs-base); line-height:1.35;}
+  .journal-rubrique li:last-child{border-bottom:0;}
+  .journal-bref li{display:grid; grid-template-columns:1.8em 1fr; gap:var(--s2); align-items:baseline;}
+  .journal-bref .num{font-family:var(--font-display); font-weight:800; font-size:var(--fs-lg); color:var(--rouge); font-variant-numeric:lining-nums;}
+  .journal-bref small, .journal-medias small, .journal-dossier small{display:block; color:var(--text-soft); font-size:var(--fs-sm);}
+  .journal-dossier b{font-family:var(--font-display); font-size:var(--fs-lg); font-weight:700; line-height:1.2; display:block;}
+  .journal-medias li{display:flex; flex-wrap:wrap; gap:0 var(--s2); align-items:baseline; justify-content:space-between;}
+  .journal-pied{margin:var(--s2) 0 0; padding-top:var(--s3); border-top:var(--filet) solid var(--ink); font-size:var(--fs-xs); color:var(--text-soft);}
+  @media (max-width:700px){
+    .journal-invite a span{display:none;}
+    .journal-secondaires article:nth-child(3){display:none;}
+    .journal-bref li:nth-child(n+7), .journal-medias li:nth-child(n+6){display:none;}
+    .journal{padding:var(--s3) var(--s3) var(--s4);}
+    .journal-une{padding:var(--s3) 0;}
+    .journal-secondaires article{padding:var(--s3) 0;}
+    .journal-secondaires h3{font-size:var(--fs-h3);}
+    .journal-rubrique{margin-bottom:var(--s4);}
+    .journal-rubrique li{padding:var(--s1) 0; font-size:var(--fs-md);}
+    .journal-pied{display:none;}
+  }
+  @media (min-width:900px){
+    .journal{padding:var(--s5) var(--s6) var(--s6);}
+    .journal-secondaires{grid-template-columns:repeat(3, 1fr);}
+    .journal-secondaires article{padding:var(--s4) var(--s4); border-bottom:0; border-inline-start:1px solid var(--ink);}
+    .journal-secondaires article:first-child{padding-inline-start:0; border-inline-start:0;}
+    .journal-secondaires article:last-child{padding-inline-end:0;}
+    .journal-une{display:grid; grid-template-columns:2fr 1fr; gap:var(--s5); align-items:start;}
+    .journal-une > .journal-aussi-bloc{padding-inline-start:var(--s5); border-inline-start:1px solid var(--ink);}
+    .journal-rubriques{column-count:3; column-gap:var(--s6); column-rule:1px solid var(--ink);}
+  }
+  @media print{
+    @page{size:A4; margin:11mm;}
+    body[data-page="journal"]{background:#fff; color:#000; font-size:10pt;}
+    body[data-page="journal"] .masthead, body[data-page="journal"] .rubriques, body[data-page="journal"] .barre-mobile, body[data-page="journal"] .feuille, body[data-page="journal"] .feuille-fond,
+    body[data-page="journal"] .site-footer, body[data-page="journal"] .toast, body[data-page="journal"] #view-journal .rubrique-tete, body[data-page="journal"] .journal-actions,
+    body[data-page="journal"] .sous-nav, body[data-page="journal"] .direct-bandeau, body[data-page="journal"] noscript{display:none !important;}
+    body[data-page="journal"] main, body[data-page="journal"] #view-journal{display:block !important; padding:0; margin:0; max-width:none;}
+    .journal{border:0; padding:0; background:#fff; color:#000;}
+    .journal a{text-decoration:none;}
+    .journal-nom{font-size:42pt;}
+    .journal-une{display:grid; grid-template-columns:2fr 1fr; gap:6mm; break-inside:avoid;}
+    .journal-une h3{font-size:28pt;}
+    .journal-secondaires{grid-template-columns:repeat(3, 1fr);}
+    .journal-secondaires article{display:block !important; padding:3mm 4mm; border-bottom:0; border-inline-start:1px solid #000; break-inside:avoid;}
+    .journal-secondaires article:first-child{padding-inline-start:0; border-inline-start:0;}
+    .journal-secondaires h3{font-size:15pt;}
+    .journal-rubriques{column-count:3; column-gap:7mm; column-rule:1px solid #000;}
+    .journal-bref li:nth-child(n){display:grid;}
+    .journal-medias li:nth-child(n){display:flex;}
+    .journal-rubrique li{font-size:9.5pt; break-inside:avoid;}
+    .journal-pied{display:block !important;}
+    .journal-etiquette.rouge, .journal-bref .num{color:#000;}
+  }
   .actu-liste{margin-top:var(--s2);}
   .actu-sujet{display:grid; grid-template-columns:76px 1fr; gap:var(--s4); align-items:start; padding:var(--s4) 0; border-bottom:1px solid var(--border-soft);}
   .actu-corps{min-width:0;}
@@ -2197,6 +2282,7 @@
         <small id="actualites-maj">Flux publics des rédactions, relus toutes les heures.</small></p>
       <p class="sert"><b>À quoi sert cette page ?</b> Lire au même endroit les titres politiques de plusieurs médias, avec le lien vers chaque article.</p>
     </div>
+    <p class="journal-invite"><a href="#journal" data-tab-lien="journal"><b>Le journal du jour</b> <span>Les actualités du jour, mises en page comme la une d'un quotidien</span> <span aria-hidden="true">→</span></a></p>
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
       <div class="theme-filter-bar" id="actualites-filtre" role="group" aria-labelledby="actualites-filtre-label"></div></div>
     <div class="actu-liste" id="actualites-liste"><p class="chargement">Chargement des actualités…</p></div>
@@ -2207,6 +2293,19 @@
       <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="verifications">Partager</button></div>
     </section>
     <p class="sondage-disclaimer">Titres choisis par chaque rédaction, reproduits tels quels. Les liens vers des contenus démentis par le Décodex du Monde sont écartés automatiquement.</p>
+  </section>
+
+  <section class="view" id="view-journal">
+    <div class="rubrique-tete">
+      <div class="surtitre">Vie politique</div>
+      <h2>Le journal du jour</h2>
+      <p class="chapo">Les actualités politiques du jour, en une de quotidien : titres seuls, médias cités, lien vers chaque article.</p>
+    </div>
+    <div class="journal-actions">
+      <button type="button" class="lien-bouton" id="journal-imprimer">Imprimer / enregistrer en PDF</button>
+      <button type="button" class="lien-bouton bouton-partage" data-partage="journal">Partager</button>
+    </div>
+    <article class="journal" id="journal" aria-label="Le journal du jour"><p class="chargement">Chargement des actualités…</p></article>
   </section>
 
   <section class="view" id="view-meetings">
@@ -4388,6 +4487,67 @@ function renderDirect(){
 }
 setInterval(renderDirect, 60000); // un événement expiré disparaît sans recharger la page
 
+/* ---------- Le journal du jour : rendu à l'ouverture de la vue, à partir de ACTUALITES déjà chargé (rien côté serveur) ----------
+   Titres de presse seuls, médias attribués, liens vers l'original ; chiffres = ceux des données (nombre de médias, d'articles). */
+const JOURNAL_DEPART = Date.UTC(2026, 0, 1); // le numéro 1 est le 1er janvier 2026 ; +1 chaque jour
+function renderJournal(){
+  const el = document.getElementById("journal");
+  if(!el) return;
+  const sujets = (ACTUALITES?.sujets || []).filter(s=> s?.articles?.length && s.derniere);
+  if(!sujets.length){ el.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
+  const maintenant = new Date();
+  let pool = sujets.filter(s=> maintenant - Date.parse(s.derniere) < 36 * 36e5);
+  if(pool.length < 4) pool = [...sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere)).slice(0, 12);
+  pool = pool.filter(s=> !/^Bonjour chez vous/.test(s.articles[0].titre)); // émissions sans intérêt pour un résumé de la journée
+  pool.sort((a, b)=> b.medias - a.medias || b.derniere.localeCompare(a.derniere));
+  const [une, ...reste] = pool;
+  const secondaires = reste.slice(0, 3), bref = reste.slice(3, 11);
+  const fmt = (opt)=> new Intl.DateTimeFormat("fr-FR", { timeZone:"Europe/Paris", ...opt });
+  const jour = fmt({ weekday:"long", day:"numeric", month:"long", year:"numeric" }).format(maintenant);
+  const date = jour.charAt(0).toUpperCase() + jour.slice(1);
+  const pp = Object.fromEntries(fmt({ year:"numeric", month:"numeric", day:"numeric" }).formatToParts(maintenant).filter(x=>x.type !== "literal").map(x=>[x.type, +x.value]));
+  const numero = Math.floor((Date.UTC(pp.year, pp.month - 1, pp.day) - JOURNAL_DEPART) / 864e5) + 1;
+  const heure = ACTUALITES.lastUpdated ? fmt({ hour:"numeric", minute:"2-digit" }).format(new Date(ACTUALITES.lastUpdated)).replace(":", " h ") : "";
+  const a0 = s => s.articles[0];
+  const lienTitre = x => `<a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.titre)}</a>`;
+  // « Aussi chez » : un lien par autre média, vers son propre article
+  const aussi = (s, max)=> {
+    const vus = new Set([a0(s).media]);
+    const autres = s.articles.filter(x=> !vus.has(x.media) && vus.add(x.media)).slice(0, max);
+    return autres.length ? `<p class="journal-aussi">Aussi chez ${autres.map(x=>`<a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.media)}</a>`).join(", ")}</p>` : "";
+  };
+  const repris = s => s.medias >= 2 ? ` · <b>Repris par ${s.medias} médias</b>` : "";
+  const dossiers = dossiersActu().slice(0, 3);
+  // Dans les médias : nombre de titres relevés par média
+  const parMedia = new Map();
+  for(const s of pool) for(const x of s.articles){
+    const m = parMedia.get(x.media) || { nom:x.media, n:0 };
+    m.n++;
+    parMedia.set(x.media, m);
+  }
+  const medias = [...parMedia.values()].sort((a, b)=> b.n - a.n || a.nom.localeCompare(b.nom, "fr")).slice(0, 8);
+  const aussiUne = aussi(une, 4);
+  el.innerHTML = `<p class="journal-nom">Hémicycle France</p>
+    <div class="journal-ligne"><span class="journal-date">${esc(date)}</span><span>N° ${numero}</span>${heure ? `<span>Édition de ${esc(heure)}</span>` : ""}</div>
+    <section class="journal-une" aria-labelledby="journal-une-titre">
+      <div><span class="journal-etiquette rouge">À la une</span>
+      <h3 id="journal-une-titre">${lienTitre(a0(une))}</h3>
+      <p class="journal-meta"><b>${esc(a0(une).media)}</b>${repris(une)}</p></div>
+      ${aussiUne ? `<div class="journal-aussi-bloc">${aussiUne}</div>` : ""}
+    </section>
+    ${secondaires.length ? `<div class="journal-secondaires">${secondaires.map(s=>`<article><h3>${lienTitre(a0(s))}</h3><p class="journal-meta"><b>${esc(a0(s).media)}</b>${repris(s)}</p>${aussi(s, 2)}</article>`).join("")}</div>` : ""}
+    <div class="journal-rubriques">
+      ${dossiers.length ? `<section class="journal-rubrique journal-dossier" aria-labelledby="journal-dossiers"><h3 id="journal-dossiers">Dossiers du moment</h3><ul>${dossiers.map(d=>{
+        const x = d.articles[0], nm = new Set(d.articles.map(y=>y.media)).size;
+        return `<li><b>${esc(d.titre)}</b><small>${d.articles.length} articles · ${nm} médias</small><small><a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.media)}</a></small></li>`;
+      }).join("")}</ul></section>` : ""}
+      ${bref.length ? `<section class="journal-rubrique journal-bref" aria-labelledby="journal-bref"><h3 id="journal-bref">En bref</h3><ol>${bref.map((s, i)=>`<li><span class="num" aria-hidden="true">${i + 1}</span><span>${lienTitre(a0(s))}<small>${esc(a0(s).media)}</small></span></li>`).join("")}</ol></section>` : ""}
+      <section class="journal-rubrique journal-medias" aria-labelledby="journal-medias"><h3 id="journal-medias">Dans les médias</h3><ul>${medias.map(m=>`<li><b>${esc(m.nom)}</b>${m.n > 1 ? `<small>${m.n} titres</small>` : `<small>1 titre</small>`}</li>`).join("")}</ul></section>
+    </div>
+    <p class="journal-pied">Titres reproduits tels quels, choisis par chaque rédaction : le contenu est à lire sur le site du média. Sujets classés selon le nombre de médias qui les reprennent.</p>`;
+}
+document.getElementById("journal-imprimer")?.addEventListener("click", ()=> window.print());
+
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
   const dossiers = dossiersActu().slice(0, 2);
@@ -4397,7 +4557,7 @@ function renderAccueilActualites(){
     <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-partage solo-mobile" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
     dossiers.map(d=> dossierHTML(d, 5)).join("") +
     top.map((s, i)=> sujetHTML(s, true, i === 0 && !dossiers.length, i >= 3)).join("") +
-    `<a class="actu-toutes" href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a>`;
+    `<a class="actu-toutes" href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a> <a class="actu-toutes" href="#journal" data-tab-lien="journal">Le journal du jour →</a>`;
   bloc.hidden = false;
 }
 
@@ -6481,6 +6641,7 @@ function lienPartage(type){
   if(type === "agenda") return { titre: "Ce que l'Assemblée nationale examine ces prochains jours", url: `${base}#meetings` };
   if(type === "histo"){ const g = PARTIES.find(p=>p.id===selectedPartyId); return { titre: `Comment vote le groupe ${g ? g.nom : selectedPartyId} à l'Assemblée`, url: `${base}#histo-${selectedPartyId}` }; }
   if(type === "actualites") return { titre: "Les sujets du moment dans la presse politique", url: `${base}#actualites` };
+  if(type === "journal") return { titre: "Le journal du jour : les actualités politiques, titres et sources", url: `${base}#journal` };
   if(type === "verifications") return { titre: "Vérifications des faits : les derniers articles des rédactions", url: `${base}#actualites` };
   if(type === "candidats") return { titre: "Présidentielle 2027 : tous les candidats déclarés", url: `${base}#candidats` };
   if(type === "dirigeants") return { titre: "Les chefs de parti et les groupes à l'Assemblée nationale", url: `${base}#dirigeants` };
@@ -6627,7 +6788,7 @@ window.addEventListener("hashchange", ouvrirDepuisHash);
 // Six regroupements ; chaque page garde sa vue (#view-<id>) et son lien direct (#sondages, #deputes…)
 const HUBS = [
   { id:"une", nom:"À la une", pages:[["accueil","À la une"]] },
-  { id:"actu", nom:"Actualités", pages:[["actualites","Actualités"]] },
+  { id:"actu", nom:"Actualités", pages:[["actualites","Actualités","Les titres politiques des grands médias, avec leur source"], ["journal","Le journal du jour","Les actualités du jour en une de quotidien"]] },
   { id:"presidentielle", nom:"Présidentielle 2027", pages:[["sondages","Sondages","Intentions de vote, institut par institut"], ["candidats","Candidats","Qui est déclaré, qui hésite"], ["meetings","Agenda","Meetings et rendez-vous de campagne"]] },
   { id:"argent", nom:"Argent public", pages:[["budget","Budget","Où va l'argent public, d'où il vient"], ["chiffres","Économie","Chômage, inflation, déficit, dette"]] },
   { id:"elus", nom:"Élus et votes", pages:[["scrutin","Votes","Chaque scrutin de l'Assemblée, groupe par groupe"], ["deputes","Députés","Trouver un député, voir ses votes"], ["senat","Sénat","Les sénateurs et leurs groupes"], ["histo","Groupes","Les groupes parlementaires dans le temps"], ["dirigeants","Partis","Qui dirige les partis, le gouvernement"], ["justice","Justice","Affaires judiciaires visant des élus"], ["presidents","Les présidents","Tous les présidents de la Ve République, du plus récent au plus ancien"]] },
@@ -6637,7 +6798,7 @@ const PAGES_NOMS = { mentions:"Mentions légales", methode:"Méthode" };
 HUBS.forEach(h => h.pages.forEach(([id, nom]) => { PAGES_NOMS[id] = nom; }));
 const hubDe = id => HUBS.find(h => h.pages.some(p => p[0] === id));
 // Rubriques rangées dans le panneau « Plus » (la barre du bas n'en montre que quatre : À la une, Présidentielle, Élus, Quiz)
-const RUBRIQUES_PLUS = ["actualites", "budget", "chiffres", "methode", "mentions"];
+const RUBRIQUES_PLUS = ["actualites", "journal", "budget", "chiffres", "methode", "mentions"];
 
 const sousNav = document.createElement("nav");
 sousNav.className = "sous-nav";
@@ -6753,6 +6914,7 @@ async function rendreRubrique(tabId){
   }
   else if(tabId === "meetings") unefois("agenda", renderAgendaAN, 10 * 60e3);
   else if(tabId === "actualites") unefois("actualites", renderActualites, 5 * 60e3);
+  else if(tabId === "journal") unefois("journal", renderJournal, 5 * 60e3);
   else if(tabId === "budget") unefois("budget", renderBudget);
   else if(tabId === "sondages"){
     renderAnnonce();
@@ -6792,7 +6954,7 @@ function activateTab(tabId){
   if(tabId === "mentions") renderCreditsPortraits();
   if(tabId === "methode") renderMethode();
   // Le travail lourd vient APRÈS le premier affichage de la rubrique (un tour d'image plus tard), en tranches : l'interface répond d'abord
-  if(["deputes","senat","dirigeants","meetings","actualites","budget","sondages"].includes(tabId)){
+  if(["deputes","senat","dirigeants","meetings","actualites","journal","budget","sondages"].includes(tabId)){
     requestAnimationFrame(()=> setTimeout(()=>{ if(document.body.dataset.page === tabId) rendreRubrique(tabId); }, 0));
   }
 
@@ -7247,6 +7409,7 @@ function espaceMontrer(){
   if(typeof renderCandidats === "function" && CANDIDATURES.length) renderCandidats();
   if(typeof renderAccueilActualites === "function" && ACTUALITES) renderAccueilActualites();
   if(document.getElementById("view-actualites").classList.contains("active")) renderActualites();
+  if(document.getElementById("view-journal").classList.contains("active")) renderJournal();
   majBoutonRubrique(document.body.dataset.page);
 }
 
@@ -7417,6 +7580,7 @@ async function initSite(){
   renderDirect();
   renderAccueilActualites();
   renderActualites();
+  if(document.getElementById("view-journal").classList.contains("active")) renderJournal();
   renderSondageAverage();
   renderSecondTour();
   renderProbabilites();
