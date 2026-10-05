@@ -593,6 +593,10 @@
   .actu-autres li{margin:var(--s1) 0;}
   .actu-autres a{color:var(--text-soft); text-decoration:none;}
   .actu-autres a:hover{text-decoration:underline;}
+  .actu-dossier{padding:var(--s4) var(--s4); margin:var(--s4) 0; border:1px solid var(--border-soft); border-left:4px solid var(--accent); border-radius:var(--radius-md, 8px); background:var(--surface, transparent);}
+  .actu-dossier h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600; line-height:1.25;}
+  .actu-dossier .actu-autres li{margin:var(--s2) 0;}
+  .actu-dossier-medias{margin:var(--s2) 0 0; font-size:var(--fs-xs); color:var(--text-faint);}
   .actu-accueil{margin:var(--s5) 0 var(--s2); padding-top:var(--s4); border-top:1px solid var(--ink);}
   .actu-accueil[hidden]{display:none;}
   .actu-accueil-tete{display:flex; justify-content:space-between; align-items:baseline; gap:var(--s3); flex-wrap:wrap;}
@@ -4244,6 +4248,25 @@ function sujetHTML(s, court, une, sup){
     </div>
   </article>`;
 }
+// Dossier : un sujet dominant repris par plusieurs médias (calculé par scripts/dossiers.cjs). Titres seuls, un lien par média.
+function dossiersActu(){
+  return (ACTUALITES?.dossiers || []).filter(d=> d?.titre && Array.isArray(d.articles) && d.articles.length >= 3);
+}
+function dossierHTML(d, max){
+  const medias = [...new Set(d.articles.map(x=>x.media))];
+  return `<article class="actu-dossier">
+    <span class="actu-recoupe">Dossier</span>
+    <h4>${esc(d.titre)}</h4>
+    <div class="actu-meta"><span class="actu-nb">${d.articles.length} articles · ${medias.length} médias</span><span class="actu-quand"> · ${esc(ilYA(d.derniere || d.articles[0].date))}</span> <button type="button" class="lien-bouton bouton-story mini" data-story="actualites" data-id="${esc(d.id)}" aria-label="Créer une story de ce dossier" title="Créer une story de ce dossier"></button></div>
+    <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li><a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
+    <p class="actu-dossier-medias"><span>Médias :</span> <span>${esc(medias.join(", "))}</span></p>
+  </article>`;
+}
+// Sujets simples hors dossiers (leurs articles figurent déjà dans le dossier)
+function sujetsHorsDossiers(sujets){
+  const urls = new Set(dossiersActu().flatMap(d=>d.articles.map(a=>a.url)));
+  return sujets.filter(s=> !urls.has(s.articles[0].url));
+}
 let creditsPortraits = null;
 async function renderCreditsPortraits(){
   if(creditsPortraits) return;
@@ -4254,7 +4277,7 @@ async function renderCreditsPortraits(){
 }
 function renderActualites(){
   const liste = document.getElementById("actualites-liste");
-  if(!ACTUALITES?.sujets?.length){ liste.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
+  if(!ACTUALITES?.sujets?.length && !dossiersActu().length){ liste.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
   const lus = (ACTUALITES.medias || []).filter(m=>m.lu).map(m=>m.nom);
   document.getElementById("actualites-maj").textContent =
     `Titres de ${lus.join(", ")}${ACTUALITES.lastUpdated ? `, relus ${ilYA(ACTUALITES.lastUpdated)}` : ""}.`;
@@ -4264,7 +4287,7 @@ function renderActualites(){
   document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
   const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
-  liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + sujets.slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0)).join("");
+  liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + dossiersActu().map(d=> dossierHTML(d, 8)).join("") + sujetsHorsDossiers(sujets).slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0 && !dossiersActu().length)).join("");
 }
 /* ---------- Bandeau « En direct » (data/direct.json, écrit par scripts/detecter-direct.js) ----------
    Affiché seulement si un événement est détecté et non expiré ; sinon l'élément reste masqué (aucun espace).
@@ -4291,11 +4314,13 @@ setInterval(renderDirect, 60000); // un événement expiré disparaît sans rech
 
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
-  const top = (ACTUALITES?.sujets || []).filter(s=>s.medias >= 2).slice(0, 5); // 3 sur bureau, 5 sur téléphone (liste dense)
-  if(!top.length){ bloc.hidden = true; return; }
+  const dossiers = dossiersActu().slice(0, 2);
+  const top = sujetsHorsDossiers((ACTUALITES?.sujets || []).filter(s=>s.medias >= 2)).slice(0, dossiers.length ? 3 : 5); // 3 sur bureau, 5 sur téléphone (liste dense)
+  if(!top.length && !dossiers.length){ bloc.hidden = true; return; }
   bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
     <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-partage solo-mobile" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
-    top.map((s, i)=> sujetHTML(s, true, i === 0, i >= 3)).join("") +
+    dossiers.map(d=> dossierHTML(d, 5)).join("") +
+    top.map((s, i)=> sujetHTML(s, true, i === 0 && !dossiers.length, i >= 3)).join("") +
     `<a class="actu-toutes" href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a>`;
   bloc.hidden = false;
 }
@@ -6575,19 +6600,19 @@ STORY_PLUS.actualite = async (ctx, info)=>{
 };
 
 // 2. Les sujets du moment (data-id vide)
-const DOSSIERS_STORY = { lyceens:{ titre:"Blocus des lycées", re:/lyc[ée]|blocus|blocage/i } };
 STORY_PLUS.actualites = async (ctx, info)=>{
-  const dossier = DOSSIERS_STORY[info];
+  // info = id d'un dossier de ACTUALITES.dossiers (calculé par scripts/dossiers.cjs) ; vide : les sujets du moment
+  const dossier = info ? (ACTUALITES?.dossiers || []).find(d=> d.id === info) : null;
   if(dossier){
     const vus = new Set(), arts = [];
-    for(const s of ACTUALITES?.sujets || []) for(const a of s.articles) if(dossier.re.test(a.titre) && !vus.has(a.media)){ vus.add(a.media); arts.push(a); }
+    for(const a of dossier.articles || []) if(!vus.has(a.media)){ vus.add(a.media); arts.push(a); }
     arts.sort((x, y)=> y.date.localeCompare(x.date));
     const l = arts.slice(0, 5);
     if(l.length < 3) return null;
     const { L, marge } = STORY;
     let y = storyCadre(ctx, "Actualité · à la une", { alerte:true });
     y = storyTexte(ctx, dossier.titre, marge, y, { taille:84, poids:600, police:"Newsreader", max:2, interligne:1.05 });
-    y = storyTexte(ctx, `${l.length} médias en parlent en ce moment`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 24;
+    y = storyTexte(ctx, `${arts.length} médias en parlent en ce moment`, marge, y, { taille:30, couleur:STORY.doux, max:1 }) + 24;
     const pas = Math.min(300, (1495 - y) / l.length);
     for(let i = 0; i < l.length; i++){
       ctx.fillStyle = STORY.filet; ctx.fillRect(marge, y, storyPLarg, 2);
