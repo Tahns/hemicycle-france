@@ -8,7 +8,7 @@
 const STORY_DA = {
   fond:"#1B3A8C", nuit:"#14161B", ciel:"#C5CEF2", rose:"#F26B8A", rouge:"#C8102E", creme:"#F5F1E8", blanc:"#FFFFFF", encre:"#1C1B18",
   vert:"#2E6E41", rougeVote:"#B8261E", ambre:"#C98A00", ambreTxt:"#8A5F00", rayon:28,
-  filet:"rgba(197,206,242,0.30)", logoY:264, etiquetteY:312, haut:392,
+  filet:"rgba(197,206,242,0.30)", logoY:292, etiquetteY:340, haut:420,
 };
 // STORY : géométrie + couleurs. « encre », « doux », « pale », « filet » sont les couleurs du TEXTE SUR CARTE CRÈME ; le texte posé
 // directement sur le fond bleu utilise « blanc » et « ciel ».
@@ -16,18 +16,56 @@ const STORY = { L:1080, H:1920, marge:84, fond:STORY_DA.fond, papier:STORY_DA.cr
 const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
 const COMPTE_STORY = "@hemicyclefrance"; // les stories n'affichent que le compte Instagram, pas l'adresse du site
 
+// Mots « faibles » : une coupe « … » ne doit jamais s'arrêter sur l'un d'eux (« … le vote de la… »)
+const STORY_FAIBLES = new Set("de du des la le les l d un une au aux à a en et ou où que qu qui quoi pour par sur sous dans avec sans vers chez entre ni mais car donc ce cet cette ces son sa ses leur leurs près plus après avant depuis contre selon dès lors y ne pas se s n c j m t".split(" "));
+function storyFaible(m){ const x = String(m).toLowerCase().replace(/[«»"“”.,;:!?…()\u00A0]/g, "").replace(/['’]$/, "").replace(/^.*['’]/, ""); return !x || STORY_FAIBLES.has(x); }
+// Apostrophes droites -> typographiques (« l'État » -> « l’État ») et espaces normalisées
+function storyTypo(t){ return String(t == null ? "" : t).replace(/\s+/g, " ").trim().replace(/(\p{L})'(\p{L})/gu, "$1’$2"); }
+// Titre tout en capitales (plus de 60 % des lettres) : remis en minuscules, majuscule en début de phrase, sigles et noms propres usuels conservés
+const STORY_PROPRES = ["UE", "OTAN", "ONU", "RN", "LFI", "PS", "LR", "PCF", "CGT", "SNCF", "EDF", "FMI", "USA", "PIB", "TVA", "CSG", "AIE", "RFI", "BFMTV", "IA", "État", "États", "Élysée", "République", "France", "Paris", "Europe", "Assemblée", "Sénat", "Macron", "Ukraine", "Russie", "Israël", "Gaza", "Français", "Française", "Françaises"];
+function storyMinuscules(t){
+  t = String(t);
+  const L = t.match(/\p{L}/gu) || [], M = t.match(/\p{Lu}/gu) || [];
+  if(L.length < 12 || M.length / L.length < 0.6) return t;
+  let b = t.toLowerCase().replace(/(^|[.!?]\s+|:\s+|«\s*|“)(\p{L})/gu, (_, p, c) => p + c.toUpperCase());
+  for(const n of STORY_PROPRES) b = b.replace(new RegExp("(?<![\\p{L}])" + n + "(?![\\p{L}])", "giu"), n);
+  return b;
+}
+// Coupe propre : retire les mots faibles et la ponctuation de la fin (pas de « … de la… »)
+function storyCoupePropre(mots){
+  const m = [...mots];
+  while(m.length > 2 && (storyFaible(m[m.length - 1]) || /[,;:\-–—(]$/.test(m[m.length - 1]))) m.pop();
+  if(m.length) m[m.length - 1] = m[m.length - 1].replace(/[\s,;:.\-–—(]+$/, "");
+  return m;
+}
 function storyLignes(ctx, texte, largeur, max){
-  const mots = String(texte).trim().replace(/«[ \t]+/g, "«\u00A0").replace(/[ \t]+([»:;?!%])/g, "\u00A0$1").split(/[ \t\r\n]+/), lignes = [];
+  const brut = String(texte).trim().replace(/«[ \t]+/g, "«\u00A0").replace(/[ \t]+([»:;?!%])/g, "\u00A0$1").split(/[ \t\r\n]+/);
+  // un mot plus large que la ligne est coupé après un trait d'union, puis au caractère (avec « … » en dernier recours)
+  const mots = [];
+  for(const m of brut){
+    if(ctx.measureText(m).width <= largeur){ mots.push({ t:m, colle:false }); continue; }
+    const morceaux = m.split(/(?<=-)/);
+    let cur = "", premier = true;
+    const pousse = t => { mots.push({ t, colle:!premier }); premier = false; };
+    for(const p of morceaux){
+      if(ctx.measureText(cur + p).width <= largeur || !cur){ cur += p; if(ctx.measureText(cur).width > largeur){ let c = cur; while(c.length > 2 && ctx.measureText(c + "…").width > largeur) c = c.slice(0, -1); cur = ""; pousse(c + "…"); } }
+      else { pousse(cur); cur = p; }
+    }
+    if(cur) pousse(cur);
+  }
+  const lignes = [];
   let l = "";
-  for(const m of mots){
-    const essai = l ? l + " " + m : m;
-    if(ctx.measureText(essai).width > largeur && l){ lignes.push(l); l = m; } else l = essai;
+  for(const w of mots){
+    const essai = l ? l + (w.colle ? "" : " ") + w.t : w.t;
+    if(ctx.measureText(essai).width > largeur && l){ lignes.push(l); l = w.t; } else l = essai;
   }
   if(l) lignes.push(l);
   if(lignes.length > max){
     lignes.length = max;
     let d = lignes[max - 1];
-    while(ctx.measureText(d + "…").width > largeur && d.includes(" ")) d = d.slice(0, d.lastIndexOf(" "));
+    let m = storyCoupePropre(d.split(" "));
+    d = m.join(" ");
+    while(ctx.measureText(d + "…").width > largeur && m.length > 1){ m = storyCoupePropre(m.slice(0, -1)); d = m.join(" "); }
     lignes[max - 1] = d + "…";
   }
   return lignes;
@@ -92,7 +130,7 @@ async function storyPortrait(src, hd){
 /* ----- Helpers de dessin réutilisables (ne pas renommer, ne pas changer les signatures) -----
    Direction artistique : STORY_DA (fond bleu, logo blanc, kicker ou étiquette, titres blancs Newsreader, cartes crème arrondies,
    pied « source » puis « accroche → @compte »). Zone de contenu sûre : de l'ordonnée renvoyée par storyCadre jusqu'à STORY.bas (≈ 1490) ;
-   le pied (storyPied) occupe ensuite jusqu'à ≈ 1700. Texte sur le fond : STORY.blanc / STORY.ciel ; texte sur carte crème : STORY.encre / doux / pale.
+   le pied (storyPied) occupe ensuite jusqu'à ≈ 1650 (l’accroche « → @compte » est posée vers 1636 : les ≈ 250 px du haut et du bas sont masqués par Instagram). Texte sur le fond : STORY.blanc / STORY.ciel ; texte sur carte crème : STORY.encre / doux / pale.
    storyAlpha(couleur, a)                      -> "rgba(...)" à partir de #rrggbb
    storyMelange(couleur, autre, t)             -> couleur mélangée (t = 0..1 vers « autre »)
    storyLisible(couleur)                       -> la couleur, assombrie si trop claire pour du texte sur carte crème
@@ -177,7 +215,7 @@ function storyCadre(ctx, surtitre, { alerte = false, etiquette = "", sombre = fa
   } else {
     ctx.font = `700 30px "Public Sans"`; ctx.letterSpacing = "4px";
     const txt = storyLignes(ctx, String(surtitre).toUpperCase(), L - 2 * marge, 1)[0];
-    ctx.fillStyle = STORY_DA.ciel; ctx.textBaseline = "alphabetic"; ctx.fillText(txt, marge, 362); ctx.letterSpacing = "0px";
+    ctx.fillStyle = STORY_DA.ciel; ctx.textBaseline = "alphabetic"; ctx.fillText(txt, marge, 390); ctx.letterSpacing = "0px";
   }
   return haut;
 }
@@ -196,7 +234,7 @@ function storyPied(ctx, source, { ligne = "", accroche = "Toute l'actu politique
   storyAccroche(ctx, accroche);
 }
 // Dernière ligne de toute story : « accroche → @compte », blanche, centrée (jamais l'adresse du site)
-function storyAccroche(ctx, accroche = "Toute l'actu politique", y = 1680, sombre = false){
+function storyAccroche(ctx, accroche = "Toute l'actu politique", y = 1636, sombre = false){
   let t = 34; const texte = `${accroche} → ${COMPTE_STORY}`;
   ctx.font = `700 ${t}px "Public Sans"`;
   while(ctx.measureText(texte).width > STORY.L - 2 * STORY.marge && t > 24){ t -= 2; ctx.font = `700 ${t}px "Public Sans"`; }
@@ -805,11 +843,11 @@ async function dessinerStory(type, info){
     const etape = (titre.match(/\(([^)]*)\)\s*$/) || [])[1] || "";
     const court = titre.replace(/\s*\([^)]*\)\s*$/, "").replace(/^L['’]ensemble (du |de la |de l['’]|des )/i, "").replace(/^./, c=>c.toUpperCase());
     ctx.font = `700 30px "Public Sans"`; ctx.fillStyle = CIEL; ctx.letterSpacing = "4px";
-    ctx.fillText((censure ? "Motion de censure" : type === "senat" ? "Les sénateurs ont-ils voté" : "Vos députés ont-ils voté").toUpperCase(), marge, 362);
+    ctx.fillText((censure ? "Motion de censure" : type === "senat" ? "Les sénateurs ont-ils voté" : "Vos députés ont-ils voté").toUpperCase(), marge, 390);
     ctx.letterSpacing = "0px";
     const question = censure ? "La motion de censure est-elle adoptée ?" : `« ${court} » ?`;
-    const tq = storyTailleFit(ctx, question, 392, 760, { tMax:92, tMin:52, police:"Newsreader", poids:600, interligne:1.06 });
-    y = storyTexte(ctx, question, marge, 392, { taille:tq, poids:600, police:"Newsreader", couleur:"#fff", max:7, interligne:1.06 });
+    const tq = storyTailleFit(ctx, question, STORY_DA.haut, 760, { tMax:92, tMin:52, police:"Newsreader", poids:600, interligne:1.06 });
+    y = storyTexte(ctx, question, marge, STORY_DA.haut, { taille:tq, poids:600, police:"Newsreader", couleur:"#fff", max:7, interligne:1.06 });
     y = storyTexte(ctx, [chambre, date, censure ? court : etape].filter(Boolean).join(" · "), marge, y + 20, { taille:26, poids:600, couleur:CIEL, max:2 }) + 30;
     // Carte réponse
     const lignes = [];
@@ -883,7 +921,7 @@ async function dessinerStory(type, info){
       + `Une notice détaillée est déposée à la Commission des sondages (commission-des-sondages.fr), qui précise la méthode. `
       + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`;
     storyTexte(ctx, mentions, marge, yLegal + 30, { taille:23, couleur:STORY.ciel, max:9, interligne:1.2 });
-    storyAccroche(ctx, "Tous les sondages", 1700);
+    storyAccroche(ctx, "Tous les sondages", 1636);
     nom = `sondage-${slugDep(inst.nom)}`;
   }
 

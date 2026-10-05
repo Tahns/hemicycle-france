@@ -15,6 +15,8 @@
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
  *  - data/stories-config.json : validationHumaine à true => rien n'est publié ; monétisation => seules les entrées
  *    « données propres » (sans titre de presse) sont publiables, comme dans la file de stories-auto.cjs ;
+ *  - dernier filet de sécurité : une entrée de presse dont un titre contient un mot de la liste prudente (liste durcie depuis la mise en file)
+ *    n'est jamais publiée, ni une entrée qui reprend un sujet proche d'une story déjà publiée dans les dernières 24 h ;
  *  - l'image doit être en ligne (HEAD 200 sur l'URL GitHub Pages), sinon nouvel essai au passage suivant ;
  *  - une erreur de l'API ne marque JAMAIS l'entrée comme publiée (nouvel essai au passage suivant, tant qu'elle n'est pas périmée).
  *
@@ -28,7 +30,7 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { reserveSondages, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis } = require("./stories-auto.cjs");
+const { reserveSondages, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, titresProches } = require("./stories-auto.cjs");
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "instagram-file.json");
@@ -65,6 +67,13 @@ function alerte(ligne) {
 
 const lireJson = (f, defaut) => { try { return JSON.parse(fs.readFileSync(f, "utf-8")); } catch (e) { return defaut; } };
 
+/** Une entrée de presse (ni sondage, ni donnée propre) dont un titre contient un mot de la liste prudente. */
+function risque(e) {
+  if (e.sondageId || e.donneesPropres === true) return false;
+  const titres = e.bref === true ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titre || ""];
+  return titres.some((t) => motExclu(t));
+}
+
 /** Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer). */
 function choisir({ file, registre, config, now = new Date() }) {
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
@@ -87,6 +96,11 @@ function choisir({ file, registre, config, now = new Date() }) {
   if (dernier && now.getTime() - dernier < ESPACEMENT_MIN * 60000) return sortie(`dernière publication il y a moins de ${ESPACEMENT_MIN} min`);
   let ok = purgerReserve(candidates, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
   if (config.monetisation) ok = purgerPresse(ok);
+  const avant = ok.length;
+  const dernieres = new Set([...deja.values()].filter((d) => d.statut === "publiee" && d.publieLe && now.getTime() - Date.parse(d.publieLe) < 24 * 36e5).map((d) => d.id));
+  const titresPublies = (file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]).filter(Boolean);
+  ok = ok.filter((e) => !risque(e) && !(e.titrePropre && titresPublies.some((t) => titresProches(t, e.titrePropre))));
+  if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente ou sujet déjà publié dans les dernières 24 h");
   if (!ok.length) return sortie(candidates.length ? `${candidates.length} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
   return { entree: ok[0], perimees };
 }
