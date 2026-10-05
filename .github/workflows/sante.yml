@@ -8,6 +8,7 @@ permissions:
 jobs:
   sante:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -18,7 +19,7 @@ jobs:
         run: |
           : > sante.md
           for s in check-data check-fraicheur check-sources; do
-            if ! node "scripts/$s.js" > "$s.out" 2> "$s.err"; then
+            if ! node "scripts/$s.js" --strict > "$s.out" 2> "$s.err"; then
               { echo "### $s"; echo; cat "$s.out" "$s.err" | head -60 | sed 's/^/    /'; echo; } >> sante.md
             fi
           done

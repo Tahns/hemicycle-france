@@ -74,6 +74,17 @@ if (deficitAuto && isoAujourdhui > `${parseInt(deficitAuto.date, 10) + 2}-05-15`
   alertes.push(`Déficit public : le chiffre affiché porte sur ${deficitAuto.date} ; celui de ${parseInt(deficitAuto.date, 10) + 1} aurait dû être publié par Eurostat fin avril.`);
 }
 
+// Fichiers relevés automatiquement : leur horodatage « lastUpdated » est rafraîchi au plus tard toutes les 24 h même sans
+// changement (garde.js, battement), donc un horodatage plus vieux que la limite signifie que le relevé ne tourne plus.
+const LIMITES_H = { "data/actualites.json": 24, "data/direct.json": 12, "data/agenda-an.json": 72, "data/navette.json": 72, "data/commissions.json": 72, "data/budget.json": 72, "data/gouvernement.json": 72, "data/lobbying.json": 72 };
+for (const [f, h] of Object.entries(LIMITES_H)) {
+  const d = await lire(f);
+  if (!d) continue; // fichier optionnel absent
+  const t = Date.parse(d.lastUpdated);
+  if (isNaN(t)) alertes.push(`${f} : horodatage « lastUpdated » absent ou invalide.`);
+  else if ((aujourdhui - t) / 36e5 > h) alertes.push(`${f} : aucun relevé depuis ${Math.floor((aujourdhui - t) / 36e5)} h (limite ${h} h) — la source ou le workflow ne répond plus (voir l'onglet Actions).`);
+}
+
 // ---------- Données manuelles ----------
 const inflation = indic?.indicateurs?.find((i) => i.nom === "Inflation" && i.misAJourLe === "manuel");
 const moisInfl = inflation?.date?.toLowerCase().match(/([a-zéû]+) (\d{4})/);

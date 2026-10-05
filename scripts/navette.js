@@ -9,6 +9,7 @@
  *
  * USAGE : node scripts/navette.js
  */
+import { ecrireSiChange } from "./garde.js";
 import { readFile, writeFile } from "fs/promises";
 
 const log = (...m) => console.log("[navette]", ...m);
@@ -33,4 +34,4 @@ for (const [ref, chemin] of Object.entries(versSenat)) {
   if (votes) navette[ref] = { dossier: "https://www.senat.fr" + chemin, votes: votes.sort((a, b) => a.dateISO.localeCompare(b.dateISO)) };
 }
 log(`${Object.keys(navette).length} texte(s) avec un vote du Sénat sur l'ensemble.`);
-await writeFile("data/navette.json", JSON.stringify({ lastUpdated: new Date().toISOString(), textes: navette }) + "\n");
+await ecrireSiChange("data/navette.json", JSON.stringify({ lastUpdated: new Date().toISOString(), textes: navette }) + "\n");

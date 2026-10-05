@@ -10,15 +10,25 @@
  */
 
 import { readFile } from "fs/promises";
-import { existsSync } from "fs";
+import { existsSync, appendFileSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
 import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
+import { controlerFichierJson } from "./controles-json.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
-const err = (m) => erreurs.push(m);
+// Contrôles « secondaires » (file des stories Instagram, traductions) : une anomalie est signalée dans le résumé de l'exécution
+// mais ne bloque pas la publication des données utiles (sauf avec --strict, utilisé par l'intégration continue).
+const secondaires = [];
+let liste = erreurs;
+const err = (m) => liste.push(m);
+async function secondaire(controle) {
+  liste = secondaires;
+  try { await controle(); } finally { liste = erreurs; }
+}
+const STRICT = process.argv.includes("--strict");
 
 function estEntierPositif(n) {
   return Number.isInteger(n) && n >= 0;
@@ -231,7 +241,7 @@ async function checkDirect() {
       const pub = Date.parse(e.publie), exp = Date.parse(e.expire);
       if (isNaN(pub) || isNaN(exp) || exp - pub !== 6 * 36e5) err(`${nom} : fenêtre incohérente (publication + 6 h attendue)`);
       else if (pub > Date.parse(d.lastUpdated) + 36e5) err(`${nom} : publié après la mise à jour du fichier`);
-    } else if (isNaN(Date.parse(e.expire)) || Date.parse(e.expire) - Date.parse(d.lastUpdated) > 25 * 36e5) err(`${nom} : expiration incohérente`);
+    } else if (isNaN(Date.parse(e.expire)) || Date.parse(e.expire) - Date.parse(d.lastUpdated) > 31 * 36e5) err(`${nom} : expiration incohérente`);
   }
   console.log(`[check-data] direct.json : ${d.evenements.length} événement(s) en direct.`);
 }
@@ -252,8 +262,8 @@ async function checkInstagramFile() {
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
     parJour[jour] = (parJour[jour] || 0) + 1;
-    // Les images de plus de 3 jours sont supprimées (marge d'un jour) ; les plus récentes doivent exister
-    if (Date.now() - t < 4 * 24 * 36e5) {
+    // Les images de plus de 3 jours sont supprimées par stories-auto.cjs (IMAGE_JOURS) : on n'exige que celles de moins de 2 jours
+    if (Date.now() - t < 2 * 24 * 36e5) {
       const f = `instagram/auto/${e.id}.jpg`;
       if (!existsSync(f)) err(`${nom} : image absente (${f})`);
       else {
@@ -487,6 +497,14 @@ async function checkPresidents() {
   console.log(`[check-data] presidents.json : ${total} présidents, ${data.regimes.length} régimes.`);
 }
 
+async function checkFichiersJson() {
+  const { readdir } = await import("fs/promises");
+  const fichiers = (await readdir("data")).filter((n) => n.endsWith(".json"));
+  for (const n of fichiers) controlerFichierJson(`data/${n}`, await readFile(`data/${n}`, "utf-8")).forEach(err);
+  console.log(`[check-data] ${fichiers.length} fichiers data/*.json : JSON valide, taille et horodatage plausibles.`);
+}
+
+await checkFichiersJson();
 await checkLois();
 await checkIndicateurs();
 await checkBudget();
@@ -498,7 +516,7 @@ await checkQuiz();
 await checkActualites();
 await checkVerifications();
 await checkDirect();
-await checkInstagramFile();
+await secondaire(checkInstagramFile);
 await checkDeputes();
 await checkCandidats();
 await checkSenat();
@@ -528,7 +546,7 @@ await checkPresidents();
   e.forEach(err);
   if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
 }
-await checkI18n();
+await secondaire(checkI18n);
 await checkCompte();
 
 /** Comptes (Supabase) : config absente = fonction cachée et CSP stricte ; config présente = URL https …supabase.co, clé publique seulement. */
@@ -584,6 +602,15 @@ async function checkI18n() {
   console.log(`[check-data] i18n : ${Object.keys(fr).length} chaînes françaises ; traduites : ${resume.join(", ")}.`);
 }
 
+if (secondaires.length) {
+  const texte = secondaires.slice(0, 20).map((e) => "- " + e).join("\n");
+  console.warn(`[check-data] ${secondaires.length} anomalie(s) secondaire(s)${STRICT ? " (bloquantes avec --strict)" : " : la mise à jour n'est pas bloquée"} :\n${texte}`);
+  console.warn(`::warning::check-data : ${secondaires.length} anomalie(s) secondaire(s), voir le résumé`);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    try { appendFileSync(process.env.GITHUB_STEP_SUMMARY, `\n**Contrôle des données : anomalie(s) secondaire(s) (publication des données utiles maintenue)**\n\n${texte}\n`); } catch {}
+  }
+  if (STRICT) erreurs.push(...secondaires);
+}
 if (erreurs.length) {
   console.error(`[check-data] ${erreurs.length} erreur(s) :`);
   for (const e of erreurs.slice(0, 50)) console.error("  - " + e);

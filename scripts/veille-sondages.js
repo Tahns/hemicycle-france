@@ -18,6 +18,7 @@
  * Dépendance (installée par le workflow) : pdfjs-dist.
  */
 
+import { ecrireSiChange } from "./garde.js";
 import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
@@ -128,7 +129,7 @@ async function main() {
   for (const e of attente) log(`  en attente : ${e.institut}${e.media ? ` (${e.media})` : ""}, terrain jusqu'au ${e.terrain.fin}`);
   if (echecs > 5) process.exitCode = 1;
   if (DRY_RUN) return;
-  await writeFile(DATA_FILE, JSON.stringify({
+  await ecrireSiChange(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
     source: "Commission des sondages — notices déposées",
     sourceUrl: LISTE,
