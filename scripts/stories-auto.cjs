@@ -79,9 +79,10 @@ const MAX_PROPRES_PAR_JOUR = 3; // stories « données propres » (monétisation
 const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « récent »
 const BROUILLON_JOURS = 7;
 
-const MIN_MEDIAS = 3;
+let MIN_MEDIAS = 3; // réglable par data/stories-config.json (« minMedias »)
 const FRAICHEUR_H = 3;
-const MAX_PAR_JOUR = 4;
+let MAX_PAR_JOUR = 4; // réglable par data/stories-config.json (« maxParJour »)
+let MIN_MEDIAS_DOSSIER = 4, EN_BREF = true; // « dossierMedias », « enBref »
 const GARDER = 30;
 const IMAGE_JOURS = 3;
 const MAX_OCTETS = 8 * 1024 * 1024;
@@ -258,7 +259,7 @@ function choisirDossier({ actualites, file, now = new Date() }) {
     if (enFile.has(d.id) || ids.has(idDossier(d.id))) return false;
     const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
     if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return false;
-    if (new Set(d.articles.map((a) => a.media)).size < 4) return false;
+    if (new Set(d.articles.map((a) => a.media)).size < MIN_MEDIAS_DOSSIER) return false;
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
     return !d.articles.some((a) => motExclu(a.titre)) && !(reserveSondages(now) && d.articles.some((a) => parleDeSondage(a.titre)));
   });
@@ -315,6 +316,7 @@ const idBref = (jour) => crypto.createHash("sha1").update("bref|" + jour).digest
  */
 function choisirEnBref({ actualites, file, now = new Date() }) {
   const h = heureParis(now);
+  if (!EN_BREF) return { refus: "« en bref » désactivé (data/stories-config.json)" };
   if (h < BREF_DEBUT_H || h >= BREF_FIN_H) return { refus: "« en bref » : seulement le matin" };
   const entrees = file?.entrees || [];
   const jour = jourParis(now);
@@ -489,7 +491,17 @@ ${corps}
 
 /** Configuration (data/stories-config.json) : tout est désactivé par défaut. */
 function normaliserConfig(c) {
-  return { monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true };
+  const entier = (v, defaut, min, max) => (Number.isInteger(v) && v >= min && v <= max ? v : defaut);
+  return {
+    monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
+    // seuils « très intéressant » : valeurs par défaut = comportement historique
+    minMedias: entier(c?.minMedias, 3, 2, 10), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
+    maxParJour: entier(c?.maxParJour, 4, 1, 8), enBref: c?.enBref !== false
+  };
+}
+/** Applique les seuils de la configuration (appelé une fois par exécution). */
+function appliquerSeuils(config) {
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref;
 }
 function lireConfig(fichier = FICHIER_CONFIG) {
   try { return normaliserConfig(JSON.parse(fs.readFileSync(fichier, "utf-8"))); } catch (e) { return normaliserConfig(null); }
@@ -589,6 +601,7 @@ function choisir({ actualites, direct, sondages, lois, senat, probas, candidats 
 function lireEtat(now) {
   const lire = (f, defaut) => { try { return JSON.parse(fs.readFileSync(path.join(RACINE, f), "utf-8")); } catch (e) { return defaut; } };
   const config = lireConfig();
+  appliquerSeuils(config);
   const file = lire("data/instagram-file.json", { entrees: [] });
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
@@ -707,6 +720,6 @@ async function main() {
   }
 }
 
-module.exports = { fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
+module.exports = { appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

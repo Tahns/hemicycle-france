@@ -249,10 +249,23 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  assert.deepStrictEqual(A.normaliserConfig(null), { monetisation: false, validationHumaine: false });
-  assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), { monetisation: false, validationHumaine: false }, "seul true (booléen) active");
-  assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), { monetisation: false, validationHumaine: false });
-  assert.deepStrictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")), { monetisation: false, validationHumaine: false }, "valeurs livrées : false/false");
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true };
+  assert.deepStrictEqual(A.normaliserConfig(null), DEF);
+  assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
+  assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
+  assert.deepStrictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")), { monetisation: false, validationHumaine: false, minMedias: 5, dossierMedias: 6, maxParJour: 2, enBref: false }, "valeurs livrées : sélectif (sujets très repris seulement)");
+
+  // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
+  {
+    const trois = { sujets: [sujet("Le gouvernement présente son projet de budget pour 2027", 3)] };
+    const base = { actualites: trois, direct: null, file: vide, now };
+    A.appliquerSeuils(A.normaliserConfig(null));
+    assert.ok(!A.choisirSujet(base).refus, "seuil par défaut : 3 médias suffisent");
+    A.appliquerSeuils(A.normaliserConfig({ minMedias: 5, enBref: false }));
+    assert.ok(A.choisirSujet(base).refus, "minMedias = 5 : 3 médias ne suffisent plus");
+    assert.ok(A.choisirEnBref({ actualites: trois, file: vide, now }).refus, "enBref = false : refusé");
+    A.appliquerSeuils(A.normaliserConfig(null));
+  }
 
   // Données de test : un sujet de presse et un dossier parfaitement retenables, des votes finals récents (Assemblée, Sénat)
   const titrePresse = "Le gouvernement présente son projet de budget pour 2027";
