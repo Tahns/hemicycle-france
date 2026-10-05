@@ -556,7 +556,9 @@
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:var(--blanc); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
   .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1); border-radius:var(--r-3); background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
   .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
-  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1;}
+  .actu-picto{overflow:hidden;}
+  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
+  .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
   .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .actu-noms{color:var(--text-soft);}
@@ -4285,7 +4287,9 @@ function visuelActu(s){
     const p = ill.personnes[0];
     return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
-  return `<div class="actu-visuel actu-picto" style="--c:${theme[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
+  // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
+  const long = !/\s/.test(theme[2]) && theme[2].length > 9;
+  return `<div class="actu-visuel actu-picto${long ? " long" : ""}" style="--c:${theme[0]}" role="img" aria-label="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
 }
 const pastilleVideo = x => x.video ? `<span class="actu-video">▶ Vidéo</span> ` : "";
 function sujetHTML(s, court, une, sup){
