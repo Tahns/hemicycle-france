@@ -658,7 +658,7 @@
   .actu-une .actu-logo img{max-height:52px;} .actu-une .actu-logo img:only-of-type{max-height:90px;}
   .actu-une .actu-initiales{font-size:var(--fs-3xl);}
   .actu-une .actu-theme{width:32px; height:32px;} .actu-une .actu-theme svg{width:18px; height:18px;}
-  .actu-une h4{font-size:var(--fs-xl);}
+  .actu-une h3{font-size:var(--fs-xl);}
   @media (max-width:700px){
     .actu-sujet{grid-template-columns:60px 1fr; gap:var(--s3);}
     .actu-visuel{width:60px; height:60px;}
@@ -675,11 +675,11 @@
     .actu-une .actu-theme{right:auto; left:96px; top:-4px;}
     .actu-une .actu-picto{flex-direction:row; gap:var(--s3);} .actu-une .actu-picto small{display:block; font-size:var(--fs-sm);}
     .actu-une .actu-initiales{width:110px;}
-    .actu-une h4{font-size:var(--fs-h3);}
+    .actu-une h3{font-size:var(--fs-h3);}
   }
-  .actu-sujet h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
-  .actu-sujet h4 a{color:var(--text); text-decoration:none;}
-  .actu-sujet h4 a:hover{color:var(--accent); text-decoration:underline;}
+  .actu-sujet h3{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.3;}
+  .actu-sujet h3 a{color:var(--text); text-decoration:none;}
+  .actu-sujet h3 a:hover{color:var(--accent); text-decoration:underline;}
   .actu-citation{margin:0 0 var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
   .actu-citation a{color:inherit; text-decoration:none;} .actu-citation a:hover{text-decoration:underline;}
   .actu-citation-media{color:var(--text-faint); font-weight:600;}
@@ -693,7 +693,7 @@
   .actu-autres a{color:var(--text-soft); text-decoration:none;}
   .actu-autres a:hover{text-decoration:underline;}
   .actu-dossier{padding:var(--s4) var(--s4); margin:var(--s4) 0; border:1px solid var(--border-soft); border-left:4px solid var(--accent); border-radius:var(--radius-md, 8px); background:var(--surface, transparent);}
-  .actu-dossier h4{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600; line-height:1.25;}
+  .actu-dossier h3{margin:2px 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600; line-height:1.25;}
   .actu-dossier .actu-autres li{margin:var(--s2) 0;}
   .actu-dossier-medias{margin:var(--s2) 0 0; font-size:var(--fs-xs); color:var(--text-faint);}
   .actu-accueil{margin:var(--s5) 0 var(--s2); padding-top:var(--s4); border-top:1px solid var(--ink);}
@@ -759,7 +759,7 @@
 
   /* ---------- Historique ---------- */
   .proximite{margin-bottom:var(--s5); padding:var(--s4) 0 var(--s2); border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
-  .proximite h4{margin:0 0 2px; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
+  .proximite h3{margin:0 0 2px; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
   .proximite .sub{font-size:var(--fs-sm); color:var(--text-faint); margin-bottom:var(--s3); max-width:720px;}
   .comparateur-select{margin:var(--s2) 0 var(--s3); max-width:100%;}
   .comparateur-resume{font-family:var(--font-display); font-size:var(--fs-lg); margin:var(--s2) 0 var(--s2);}
@@ -1785,7 +1785,7 @@
     .actu-sujet .actu-initiales{font-size:var(--fs-lg);}
     .actu-sujet .actu-logo{padding:2px;} .actu-sujet .actu-logo img{max-height:18px;} .actu-sujet .actu-logo img:only-of-type{max-height:30px;}
     .actu-sujet .actu-recoupe{display:none;}
-    .actu-sujet h4, .actu-sujet.actu-une h4{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
+    .actu-sujet h3, .actu-sujet.actu-une h3{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
     .actu-sujet .actu-meta{display:flex; align-items:baseline; margin-top:2px; font-size:var(--fs-xs); line-height:1.3; white-space:nowrap;}
     .actu-sujet .actu-nb{display:inline; flex:none; margin-right:4px; font-weight:700; color:var(--accent);}
     .actu-sujet .actu-medias{flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;}
@@ -1855,7 +1855,7 @@
     .pli-mobile[open] > summary.pli-h3::after{content:"\2212";}
     .pli-mobile > summary.pli-h3:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
     .cp-bloc h3, .sondage-avg-card h3, .evolution h3, .probas h3, .second-tour h3, .budget-bloc h3, .breakdown h3, .section-titre, .veille h3{font-size:var(--fs-lg); line-height:1.25;}
-    .histo-title, .proximite h4, .candidat-carte h3{font-size:var(--fs-base);}
+    .histo-title, .proximite h3, .candidat-carte h3{font-size:var(--fs-base);}
     .proximite{margin-bottom:var(--s3); padding:var(--s2) 0 var(--s1);}
     .proximite .sub, .probas-sub, .veille-sub, .evolution-sub{font-size:var(--fs-xs); margin-bottom:var(--s2);}
     .section-titre{margin:var(--s4) 0 var(--s2);}
@@ -3903,7 +3903,7 @@ function renderProximite(party, liste){
   }).filter(x=>x.pct!==null).sort((a,b)=>b.pct-a.pct);
   if(!stats.length){ el.innerHTML = ""; return; }
   el.innerHTML = `
-    <h4>Avec qui vote le groupe ${esc(party.nom)} ?</h4>
+    <h3>Avec qui vote le groupe ${esc(party.nom)} ?</h3>
     <div class="sub">Sur les scrutins affichés, part des votes où la majorité du groupe a pris la même position (pour, contre ou abstention) que la majorité de chacun des autres groupes.</div>
     ${stats.map(x=>`
       <div class="proximite-row" title="${x.total} scrutins comparés">
@@ -3935,7 +3935,7 @@ function renderCohesion(liste){
   const stats = PARTIES.filter(p=>p.id!=="NI").map(p=>({ p, c: cohesionGroupe(p.id, liste) })).filter(x=>x.c).sort((a,b)=>b.c.pct-a.c.pct);
   if(!stats.length){ el.innerHTML = ""; return; }
   el.innerHTML = `
-    <h4>${gl("cohesion", "Cohésion")} de vote des groupes</h4>
+    <h3>${gl("cohesion", "Cohésion")} de vote des groupes</h3>
     <div class="sub">Sur les scrutins affichés (hors motions de censure, avec au moins 5 votants du groupe), part moyenne des suffrages exprimés du groupe qui vont dans le même sens que sa position majoritaire. 100 % : le groupe a toujours voté d'un bloc. Les non-inscrits ne forment pas un groupe et sont exclus.</div>
     ${stats.map(x=>`
       <div class="proximite-row" title="${x.c.n} scrutins pris en compte, dont ${x.c.unanimes} où le groupe a voté à l'unanimité des suffrages exprimés">
@@ -3972,7 +3972,7 @@ function renderComparateur(party, liste){
       : `<p class="histo-date">Aucun scrutin affiché où les deux groupes ont une position nette.</p>`;
   }
   el.innerHTML = `
-    <h4>Comparer deux groupes</h4>
+    <h3>Comparer deux groupes</h3>
     <div class="sub">Accord entre ${esc(party.nom)} et un autre groupe sur les scrutins affichés : position majoritaire de chaque groupe (pour, contre ou abstention), scrutins sans position nette écartés.</div>
     <label for="groupe-comparer" class="histo-date">Comparer avec :</label><br>
     <select id="groupe-comparer" class="comparateur-select"><option value="">Choisir un groupe…</option>
@@ -4364,6 +4364,13 @@ const THEMES_ACTU = {
   securite:     ["#B3261E", "M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z", "Sécurité"],
   politique:    ["#625D53", "M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4", "Vie politique"],
 };
+// Texte lisible (contraste WCAG) sur une pastille de couleur de parti : blanc, sauf sur fond clair (ex. jaune)
+function texteSurCouleur(hex){
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex||"")); if(!m) return "#fff";
+  const v = [0,2,4].map(i=>{ const c = parseInt(m[1].slice(i,i+2),16)/255; return c<=.03928 ? c/12.92 : Math.pow((c+.055)/1.055,2.4); });
+  const l = .2126*v[0] + .7152*v[1] + .0722*v[2];
+  return 1.05/(l+.05) >= 4.5 ? "#fff" : "#1A1A1A";
+}
 const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
 function visuelActu(s){
@@ -4376,7 +4383,7 @@ function visuelActu(s){
     return `<div class="actu-visuel actu-portraits n${personnes.length}">${personnes.map(p=>{
       const contenu = p.photo
         ? `<img src="${esc(p.photo)}" alt="" loading="lazy" decoding="async" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
-        : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}">${esc(initialesActu(p.nom))}</span>`;
+        : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}">${esc(initialesActu(p.nom))}</span>`;
       return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${contenu}</a>` : contenu;
     }).join("")}${pastille}</div>`;
   }
@@ -4385,7 +4392,7 @@ function visuelActu(s){
   }
   if((ill.personnes || []).length){
     const p = ill.personnes[0];
-    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
+    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
   // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
   const long = !/\s/.test(theme[2]) && theme[2].length > 9;
@@ -4402,9 +4409,9 @@ function sujetHTML(s, court, une, sup){
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     ${s.titrePropre?.titre
-      ? `<h4>${esc(s.titrePropre.titre)}</h4>
+      ? `<h3>${esc(s.titrePropre.titre)}</h3>
     <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>`
-      : `<h4><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h4>`}
+      : `<h3><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h3>`}
     ${(s.contexte || []).length ? `<p class="actu-contexte"><b>Le contexte</b> : ${s.contexte.map(c=>`${esc(c.texte)} <small>(${esc(c.source)})</small>`).join(" · ")}</p>` : ""}
     <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}
@@ -4420,7 +4427,7 @@ function dossierHTML(d, max){
   const medias = [...new Set(d.articles.map(x=>x.media))];
   return `<article class="actu-dossier">
     <span class="actu-recoupe">Dossier</span>
-    <h4>${esc(d.titre)}</h4>
+    <h3>${esc(d.titre)}</h3>
     <div class="actu-meta"><span class="actu-nb">${d.articles.length} articles · ${medias.length} médias</span><span class="actu-quand"> · ${esc(ilYA(d.derniere || d.articles[0].date))}</span> <button type="button" class="lien-bouton bouton-story mini" data-story="actualites" data-id="${esc(d.id)}" aria-label="Créer une story de ce dossier" title="Créer une story de ce dossier"></button></div>
     <ul class="actu-autres actu-dossier-liste">${d.articles.slice(0, max).map(x=>`<li>${pastilleVideo(x)}<a href="${lien(x.url)}" target="_blank" rel="noopener"><b>${esc(x.media)}</b> · ${esc(x.titre)}</a></li>`).join("")}</ul>
     <p class="actu-dossier-medias"><span>Médias :</span> <span>${esc(medias.join(", "))}</span></p>
@@ -5093,7 +5100,7 @@ function renderLeaders(){
       ? `${esc(g.president)} préside le groupe à l'Assemblée nationale.` : "";
     return `
       <div class="leader-card" style="animation-delay:${idx*25}ms">
-        ${sansChef ? `<div class="leader-avatar" style="background:${l.couleur}">${esc(initiales)}</div>` : medaillon(l.nom, l.couleur, 52, initiales)}
+        ${sansChef ? `<div class="leader-avatar" style="background:${l.couleur}; color:${texteSurCouleur(l.couleur)}">${esc(initiales)}</div>` : medaillon(l.nom, l.couleur, 52, initiales)}
         <div class="leader-info">
           <div class="leader-name">${sansChef ? "Pas de chef de parti unique" : esc(l.nom)}</div>
           <div class="leader-role">${esc(l.role)}${noteGroupe ? " · " + noteGroupe : ""}</div>
@@ -5879,7 +5886,7 @@ function photoPersonne(nom){
 function medaillon(nom, couleur, taille, initiales){
   const ph = photoPersonne(nom);
   const ini = initiales ?? nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
-  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b>${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy" decoding="async">` : ""}</span>`;
+  return `<span class="medaillon" style="--c:${couleur}; --t:${taille}px" aria-hidden="true"><b style="color:${texteSurCouleur(couleur)}">${esc(ini)}</b>${ph ? `<img src="${esc(ph)}" alt="" width="${taille}" height="${taille}" loading="lazy" decoding="async">` : ""}</span>`;
 }
 // Une fois les listes de parlementaires chargées, les rubriques qui nomment des personnes se redessinent avec les photos
 function appliquerPhotos(){
