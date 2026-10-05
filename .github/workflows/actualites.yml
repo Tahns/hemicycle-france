@@ -1,7 +1,7 @@
 name: Actualités
 on:
   schedule:
-    - cron: "37 * * * *"
+    - cron: "2,17,32,47 * * * *"
   # GitHub retarde souvent les tâches programmées : relevé aussi après chaque mise à jour des données,
   # et dès qu'une modification du relevé ou des illustrations est fusionnée
   workflow_run:
