@@ -27,6 +27,14 @@
  * au plus) ; autorisé jusqu'à 23 h 30 (heure de Paris). JAMAIS pendant la réserve électorale (loi du 19 juillet 1977, art. 11 : même
  * calcul que periodeReserveSondages() du site) : les stories de sondage encore en file y sont retirées.
  *
+ * CONFIGURATION (data/stories-config.json, lue à chaque exécution ; absente ou invalide : tout à false) :
+ *  - monetisation (false par défaut) : à true, AUCUN dossier ni sujet de presse (aucun titre de média dans l'image) ; seulement
+ *    des données propres : sondage (hors réserve), vote final de l'Assemblée ou du Sénat, simulation « probabilités » (hors réserve).
+ *    Les entrées de presse encore en file sont retirées. À false : comportement historique, inchangé.
+ *  - validationHumaine (false par défaut) : à true — ou, en monétisation, dès que l'image nomme une personne (sondage, simulation) —
+ *    rien n'entre dans la file de publication : un brouillon (instagram/brouillons/<id>.jpg + .json) est écrit et une ligne
+ *    est ajoutée à $GITHUB_STEP_SUMMARY ; un humain valide puis publie. Les brouillons de sondage sont supprimés pendant la réserve.
+ *
  * USAGE : node scripts/stories-auto.cjs   (--a-faire : dit seulement s'il y a un sujet à traiter ; nécessite le paquet « playwright » et Chromium)
  * Variables facultatives : SITE_URL, GITHUB_REPOSITORY, CHROMIUM_PATH, STORIES_AUTO_MAINTENANT (ISO, pour essais).
  */
@@ -38,6 +46,8 @@ const { concerneLaFrance } = require("./pertinence.cjs");
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = path.join(RACINE, "data", "instagram-file.json");
 const DOSSIER_IMG = path.join(RACINE, "instagram", "auto");
+const FICHIER_CONFIG = path.join(RACINE, "data", "stories-config.json");
+const DOSSIER_BROUILLONS = path.join(RACINE, "instagram", "brouillons");
 const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/hemicycle-france").split("/");
 const SITE = process.env.SITE_URL || `https://${PROPRIO.toLowerCase()}.github.io/${DEPOT}/`;
 
@@ -47,6 +57,10 @@ const MAX_SONDAGES_PAR_JOUR = 2;
 const SONDAGE_FRAICHEUR_H = 48;
 const SONDAGE_DERNIERE_MINUTE = 23 * 60 + 30; // un sondage qui vient de sortir peut être mis en file jusqu'à 23 h 30
 const MOIS = { janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6, juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12 };
+
+const MAX_PROPRES_PAR_JOUR = 3; // stories « données propres » (monétisation) par jour, brouillons compris
+const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « récent »
+const BROUILLON_JOURS = 7;
 
 const MIN_MEDIAS = 3;
 const FRAICHEUR_H = 3;
@@ -257,7 +271,7 @@ function nettoyerImages(images, dossier = DOSSIER_IMG) {
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".mjs": "text/javascript", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".svg": "image/svg+xml", ".css": "text/css", ".webmanifest": "application/manifest+json" };
 
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null, dossier = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null, propre = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -276,14 +290,32 @@ async function dessiner(indice, titre, sondage = null, dossier = null) {
     const erreurs = [];
     page.on("pageerror", (e) => erreurs.push(e.message));
     await page.goto(SITE, { waitUntil: "load" });
-    if (sondage) {
+    if (propre) {
+      await page.waitForFunction(() => typeof dessinerStory === "function" && typeof LOIS !== "undefined" && LOIS.length > 0, null, { timeout: 30000 });
+      if (propre.type === "senat") await page.evaluate(() => chargerSenat());
+      if (propre.type === "probabilites") await page.waitForFunction(() => typeof PROBAS !== "undefined" && PROBAS?.candidats?.length > 0, null, { timeout: 30000 });
+    } else if (sondage) {
       await page.waitForFunction(() => typeof INSTITUTS !== "undefined" && INSTITUTS.length > 0 && typeof CANDIDATS !== "undefined" && typeof dessinerStory === "function", null, { timeout: 30000 });
     } else if (dossier) {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.dossiers?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage, dossier }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre }) => {
+      if (propre) { // données propres : vote par groupe ou simulation, jamais de presse ; le site doit avoir la même donnée que le fichier
+        let r = null;
+        if (propre.type === "scrutin") {
+          const loi = LOIS.find((l) => l.numero === propre.numero);
+          if (!loi) return null;
+          document.getElementById("loi-select").innerHTML = `<option value="${loi.id}">${loi.numero}</option>`;
+          document.getElementById("loi-select").value = loi.id;
+          r = await dessinerStory("scrutin");
+        } else if (propre.type === "senat") {
+          if (!SENAT?.some((s) => s.id === propre.idScrutin)) return null;
+          r = await dessinerStory("senat", propre.idScrutin);
+        } else if (propre.type === "probabilites") r = await dessinerStory("probabilites");
+        return r ? r.apercu : null;
+      }
       if (dossier) { // story du dossier : le site doit avoir le même dossier que le fichier
         if (!ACTUALITES.dossiers.some((d) => d.id === dossier)) return null;
         const r = await dessinerStory("actualites", dossier);
@@ -298,7 +330,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null) {
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
       const r = await dessinerStory("actualite", indice);
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -307,119 +339,214 @@ async function dessiner(indice, titre, sondage = null, dossier = null) {
   }
 }
 
-/** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité. */
-function choisir({ actualites, direct, sondages, file, now = new Date() }) {
+/** Configuration (data/stories-config.json) : tout est désactivé par défaut. */
+function normaliserConfig(c) {
+  return { monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true };
+}
+function lireConfig(fichier = FICHIER_CONFIG) {
+  try { return normaliserConfig(JSON.parse(fs.readFileSync(fichier, "utf-8"))); } catch (e) { return normaliserConfig(null); }
+}
+
+/** Une entrée (file ou brouillon) tombe sous la réserve électorale : sondage, ou simulation marquée « reserve ». */
+const estSensibleReserve = (e) => Boolean(e && (e.sondageId || e.reserve === true));
+
+/** Pendant la réserve électorale, retire d'une liste d'entrées (file de publication ou brouillons) tout ce qui concerne les sondages. */
+function purgerReserve(entrees, now = new Date()) {
+  return reserveSondages(now) ? (entrees || []).filter((e) => !estSensibleReserve(e)) : (entrees || []);
+}
+
+/** En monétisation : seules restent les entrées sur données propres (sondage ou marquées donneesPropres) ; aucune entrée de presse. */
+function purgerPresse(entrees) {
+  return (entrees || []).filter((e) => !e.dossierId && (e.sondageId || e.donneesPropres === true));
+}
+
+/**
+ * Story sur DONNÉES PROPRES (monétisation) : jamais un titre de presse. Renvoie { propre: { type, ... }, id, nommePersonne } ou { refus }.
+ * Ordre : vote final de l'Assemblée, vote final du Sénat, simulation « probabilités » (hors réserve). Les votes sont montrés par groupe
+ * (aucune personne nommée) ; la simulation nomme des candidats : elle passe toujours par un brouillon à valider.
+ * Mêmes horaires que les actualités (pas la nuit), pas de doublon, au plus MAX_PROPRES_PAR_JOUR par jour.
+ */
+function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) {
+  const h = heureParis(now);
+  if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
+  const entrees = file?.entrees || [];
+  const jour = jourUTC2(now);
+  if (entrees.filter((e) => e.donneesPropres === true && jourUTC2(e.cree) === jour).length >= MAX_PROPRES_PAR_JOUR) return { refus: `déjà ${MAX_PROPRES_PAR_JOUR} stories sur données propres aujourd'hui` };
+  const ids = new Set(entrees.map((e) => e.id));
+  const limite = new Date(now.getTime() - PROPRES_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
+  const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
+  const recent = (iso) => /^\d{4}-\d{2}-\d{2}$/.test(iso || "") && iso >= limite && iso <= demain;
+  const sobre = (t) => typeof t === "string" && t.length >= 15 && t.length <= 400 && !motExclu(t) && !/[<>{}]/.test(t);
+  const hash = (x) => crypto.createHash("sha1").update(x).digest("hex").slice(0, 12);
+
+  // 1. Vote final récent de l'Assemblée nationale (« l'ensemble du… »), titre sans mot de la liste prudente
+  const an = (lois?.lois || []).filter((l) => l?.numero && l.resultat && l.votes && recent(l.dateISO) && /ensemble/i.test(l.titre || "") && sobre(l.titre) && !motExclu(l.dossierTitre || "") && !ids.has(hash("scrutin|" + l.numero)))
+    .sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero);
+  if (an.length) return { propre: { type: "scrutin", numero: an[0].numero, titre: an[0].titre, source: "Assemblée nationale (open data)" }, id: hash("scrutin|" + an[0].numero), nommePersonne: false };
+
+  // 2. Vote final récent du Sénat
+  const sn = (senat?.scrutins || []).filter((s) => s?.id && s.resultat && s.groupes && recent(s.dateISO) && /ensemble/i.test(s.titre || "") && sobre(s.titre) && !ids.has(hash("senat|" + s.id)))
+    .sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero);
+  if (sn.length) return { propre: { type: "senat", idScrutin: sn[0].id, titre: sn[0].titre, source: "Sénat (pages officielles)" }, id: hash("senat|" + sn[0].id), nommePersonne: false };
+
+  // 3. Simulation « probabilités » : jamais pendant la réserve ; une par jour ; nomme des candidats donc à valider
+  const reserve = reserveSondages(now);
+  if (probas?.candidats?.length && !reserve && Date.parse(probas.lastUpdated) > now.getTime() - 24 * 36e5) {
+    const id = hash("probabilites|" + jour);
+    if (!ids.has(id)) return { propre: { type: "probabilites", titre: "Présidentielle 2027 · simulation à partir des sondages", source: "Simulation du site à partir des sondages" }, id, nommePersonne: true, reserve: true };
+  }
+  return { refus: `aucune donnée propre à publier${reserve ? " (réserve électorale)" : ""}` };
+}
+
+/** Où va la story : « brouillon » (validation humaine) ou « file » (file de publication). */
+function destination(choix, config) {
+  const nomme = Boolean(choix.sondage || choix.nommePersonne);
+  return config.validationHumaine || (config.monetisation && nomme) ? "brouillon" : "file";
+}
+
+/** Brouillons déjà écrits (instagram/brouillons/*.json), vus comme des entrées pour éviter les doublons et respecter les plafonds. */
+function lireBrouillons(dossier = DOSSIER_BROUILLONS) {
+  if (!fs.existsSync(dossier)) return [];
+  const out = [];
+  for (const f of fs.readdirSync(dossier)) {
+    if (!/^[0-9a-f]{12}\.json$/.test(f)) continue;
+    try { const b = JSON.parse(fs.readFileSync(path.join(dossier, f), "utf-8")); if (b?.id && b.cree) out.push(b); } catch (e) { /* brouillon illisible : ignoré */ }
+  }
+  return out;
+}
+
+/** Brouillons à supprimer : sensibles à la réserve pendant celle-ci, ou de plus de BROUILLON_JOURS jours. */
+function brouillonsASupprimer(brouillons, now = new Date()) {
+  const limite = now.getTime() - BROUILLON_JOURS * 24 * 36e5;
+  const reste = new Set(purgerReserve(brouillons, now).map((b) => b.id));
+  return brouillons.filter((b) => !reste.has(b.id) || Date.parse(b.cree) < limite).map((b) => b.id);
+}
+
+/** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
+function choisir({ actualites, direct, sondages, lois, senat, probas, file, now = new Date(), config = normaliserConfig(null) }) {
   const s = choisirSondage({ sondages, file, now });
   if (!s.refus) return s;
+  if (config.monetisation) {
+    const p = choisirDonneesPropres({ lois, senat, probas, file, now });
+    return p.refus ? { refus: `${p.refus} ; sondage : ${s.refus}` } : p;
+  }
   const a = choisirSujet({ actualites, direct, file, now });
   return a.refus ? { refus: `${a.refus} ; sondage : ${s.refus}` } : a;
 }
 
+/** Lit toutes les données utiles au choix (file + brouillons vus comme une seule liste d'entrées). */
+function lireEtat(now) {
+  const lire = (f, defaut) => { try { return JSON.parse(fs.readFileSync(path.join(RACINE, f), "utf-8")); } catch (e) { return defaut; } };
+  const config = lireConfig();
+  const file = lire("data/instagram-file.json", { entrees: [] });
+  if (!Array.isArray(file.entrees)) file.entrees = [];
+  const brouillons = lireBrouillons();
+  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null) };
+  if (config.monetisation) Object.assign(donnees, { lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), probas: lire("data/probabilites.json", null) });
+  return { config, file, brouillons, donnees };
+}
+
+/** Entrées de la file après nettoyage obligatoire : réserve électorale (sondages) et, en monétisation, presse. */
+function nettoyerFile(entrees, config, now) {
+  let e = purgerReserve(entrees, now);
+  if (config.monetisation) e = purgerPresse(e);
+  return e;
+}
+
 /** Mode --a-faire : écrit « a_faire=true|false » (pour GITHUB_OUTPUT) sans lancer le navigateur, pour n'installer Chromium que si utile. */
 function aFaire() {
-  const lire = (f, defaut) => { try { return JSON.parse(fs.readFileSync(path.join(RACINE, f), "utf-8")); } catch (e) { return defaut; } };
   const now = process.env.STORIES_AUTO_MAINTENANT ? new Date(process.env.STORIES_AUTO_MAINTENANT) : new Date();
-  const file = lire("data/instagram-file.json", { entrees: [] });
-  const c = choisir({ actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), file, now });
-  // Pendant la réserve électorale, des stories de sondage restées en file doivent être retirées (main() s'en charge)
-  const aRetirer = reserveSondages(now) && (file.entrees || []).some((e) => e.sondageId);
+  const { config, file, brouillons, donnees } = lireEtat(now);
+  const vue = { entrees: [...nettoyerFile(file.entrees, config, now), ...purgerReserve(brouillons, now)] };
+  const c = choisir({ ...donnees, file: vue, now, config });
+  // Des entrées à retirer (réserve électorale, presse en monétisation) ou des brouillons périmés : main() s'en charge
+  const aRetirer = nettoyerFile(file.entrees, config, now).length !== file.entrees.length || brouillonsASupprimer(brouillons, now).length > 0;
   console.log(`a_faire=${c.refus && !aRetirer ? "false" : "true"}`);
 }
 
-async function main() {
-  const lire = (f, defaut) => { try { return JSON.parse(fs.readFileSync(path.join(RACINE, f), "utf-8")); } catch (e) { return defaut; } };
-  const now = process.env.STORIES_AUTO_MAINTENANT ? new Date(process.env.STORIES_AUTO_MAINTENANT) : new Date();
-  const file = lire("data/instagram-file.json", { entrees: [] });
-  if (!Array.isArray(file.entrees)) file.entrees = [];
-  // Réserve électorale : aucun sondage ne reste en file (le publieur lit la file plus tard)
-  const enReserve = reserveSondages(now);
-  let purge = false;
-  if (enReserve) {
-    const avant = file.entrees.length;
-    file.entrees = file.entrees.filter((e) => !e.sondageId);
-    purge = file.entrees.length !== avant;
-    if (file.entrees.length !== avant) console.log(`[stories-auto] réserve électorale (${enReserve}) : ${avant - file.entrees.length} story(s) de sondage retirée(s) de la file.`);
+/** Écrit un brouillon (image + fiche JSON) dans instagram/brouillons/ et une ligne dans $GITHUB_STEP_SUMMARY. Rien n'entre dans la file de publication. */
+function ecrireBrouillon(fiche, jpeg, dossier = DOSSIER_BROUILLONS) {
+  fs.mkdirSync(dossier, { recursive: true });
+  fs.writeFileSync(path.join(dossier, `${fiche.id}.jpg`), jpeg);
+  fs.writeFileSync(path.join(dossier, `${fiche.id}.json`), JSON.stringify(fiche, null, 1) + "\n");
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, ligneResume(fiche) + "\n"); } catch (e) { /* résumé facultatif */ }
   }
-  const choix = choisir({ actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), file, now });
+}
+
+/** Ligne du résumé d'exécution GitHub pour un brouillon à valider. */
+const ligneResume = (b) => `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
+
+/** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
+function decrire(choix) {
+  if (choix.sondage) {
+    const i = choix.sondage;
+    return { titre: `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
+  }
+  if (choix.propre) {
+    const p = choix.propre;
+    return { titre: p.titre, medias: [], sources: [], champs: { donneesPropres: true, nommePersonne: Boolean(choix.nommePersonne), ...(choix.reserve ? { reserve: true } : {}), source: p.source }, args: [0, p.titre, null, null, p], type: p.type };
+  }
+  if (choix.dossier) {
+    const d = choix.dossier;
+    return { titre: d.titre, medias: [...new Set(d.articles.map((a) => a.media))], sources: d.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12), champs: { dossierId: d.id }, args: [0, d.titre, null, d.id, null], type: "dossier" };
+  }
+  const titre = choix.sujet.articles[0].titre;
+  return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: choix.sujet.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12), champs: {}, args: [choix.indice, titre, null, null, null], type: "actualite" };
+}
+
+async function main() {
+  const now = process.env.STORIES_AUTO_MAINTENANT ? new Date(process.env.STORIES_AUTO_MAINTENANT) : new Date();
+  const { config, file, brouillons, donnees } = lireEtat(now);
+  if (config.monetisation || config.validationHumaine) console.log(`[stories-auto] configuration : monétisation=${config.monetisation}, validation humaine=${config.validationHumaine}.`);
+  // Réserve électorale : aucun sondage ne reste en file ni en brouillon (le publieur lit la file plus tard). Monétisation : aucune presse en file.
+  const enReserve = reserveSondages(now);
+  const avant = file.entrees.length;
+  file.entrees = purgerReserve(file.entrees, now);
+  if (enReserve && file.entrees.length !== avant) console.log(`[stories-auto] réserve électorale (${enReserve}) : ${avant - file.entrees.length} story(s) de sondage retirée(s) de la file.`);
+  const apresReserve = file.entrees.length;
+  if (config.monetisation) file.entrees = purgerPresse(file.entrees);
+  if (file.entrees.length !== apresReserve) console.log(`[stories-auto] monétisation : ${apresReserve - file.entrees.length} entrée(s) de presse retirée(s) de la file.`);
+  const purge = file.entrees.length !== avant;
+  const aSupprimer = brouillonsASupprimer(brouillons, now);
+  for (const id of aSupprimer) for (const ext of ["jpg", "json"]) { try { fs.unlinkSync(path.join(DOSSIER_BROUILLONS, `${id}.${ext}`)); } catch (e) { /* déjà absent */ } }
+  if (aSupprimer.length) console.log(`[stories-auto] brouillons supprimés (réserve électorale ou ancienneté) : ${aSupprimer.join(", ")}`);
+  const restants = brouillons.filter((b) => !aSupprimer.includes(b.id));
+
+  const choix = choisir({ ...donnees, file: { entrees: [...file.entrees, ...restants] }, now, config });
   const { gardees, images } = elaguer(file.entrees, now);
   let entrees = gardees;
 
   if (choix.refus) {
     console.log(`[stories-auto] rien à mettre en file : ${choix.refus}.`);
-  } else if (choix.sondage) {
-    const i = choix.sondage;
-    const titre = `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`;
-    console.log(`[stories-auto] nouveau sondage : ${titre}`);
-    const jpeg = await dessiner(choix.indice, titre, i);
-    const dim = dimensionsJpeg(jpeg);
-    if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
-    if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
-    fs.mkdirSync(DOSSIER_IMG, { recursive: true });
-    fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
-    entrees = [...entrees, {
-      id: choix.id,
-      cree: now.toISOString(),
-      titre,
-      medias: [i.nom],
-      url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`,
-      type: "story",
-      sondageId: choix.sondageId,
-      sources: [i.url].filter((u) => /^https:\/\//.test(u || "")),
-    }].slice(-GARDER);
-    images.add(choix.id);
-    console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
-  } else if (choix.dossier) {
-    const d = choix.dossier;
-    console.log(`[stories-auto] dossier retenu (${choix.medias} média(s)) : ${d.titre}`);
-    const jpeg = await dessiner(0, d.titre, null, d.id);
-    const dim = dimensionsJpeg(jpeg);
-    if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
-    if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
-    fs.mkdirSync(DOSSIER_IMG, { recursive: true });
-    fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
-    entrees = [...entrees, {
-      id: choix.id,
-      cree: now.toISOString(),
-      titre: d.titre,
-      medias: [...new Set(d.articles.map((a) => a.media))],
-      url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`,
-      type: "story",
-      dossierId: d.id,
-      sources: d.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12),
-    }].slice(-GARDER);
-    images.add(choix.id);
-    console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
   } else {
-    const titre = choix.sujet.articles[0].titre;
-    console.log(`[stories-auto] sujet retenu (${choix.medias} média(s)) : ${titre}`);
-    const jpeg = await dessiner(choix.indice, titre);
+    const d = decrire(choix);
+    const vers = destination(choix, config);
+    console.log(`[stories-auto] ${d.type} retenu${choix.medias ? ` (${choix.medias} média(s))` : ""} : ${d.titre} — destination : ${vers}`);
+    const jpeg = await dessiner(...d.args);
     const dim = dimensionsJpeg(jpeg);
     if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
     if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
-    fs.mkdirSync(DOSSIER_IMG, { recursive: true });
-    fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
-    const medias = [...new Set(choix.sujet.articles.map((a) => a.media))];
-    entrees = [...entrees, {
-      id: choix.id,
-      cree: now.toISOString(),
-      titre,
-      medias,
-      url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`,
-      type: "story",
-      sources: choix.sujet.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")).slice(0, 12),
-    }].slice(-GARDER);
-    images.add(choix.id);
-    console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+    if (vers === "brouillon") {
+      ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: d.type, medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: Boolean(choix.sondage || choix.nommePersonne), ...d.champs }, jpeg);
+      console.log(`[stories-auto] brouillon instagram/brouillons/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko), à valider par un humain ; rien n'est mis en file de publication.`);
+    } else {
+      fs.mkdirSync(DOSSIER_IMG, { recursive: true });
+      fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
+      entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`, type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
+      images.add(choix.id);
+      console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+    }
   }
 
   const supprimes = nettoyerImages(new Set(entrees.filter((e) => images.has(e.id)).map((e) => e.id)));
   if (supprimes.length) console.log(`[stories-auto] images anciennes supprimées : ${supprimes.join(", ")}`);
-  if (!choix.refus || purge || entrees.length !== file.entrees.length) {
+  if ((!choix.refus && destination(choix, config) === "file") || purge || entrees.length !== file.entrees.length) {
     fs.mkdirSync(path.dirname(FICHIER_FILE), { recursive: true });
     fs.writeFileSync(FICHIER_FILE, JSON.stringify({ lastUpdated: now.toISOString(), entrees }, null, 1) + "\n");
   }
 }
 
-module.exports = { choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, MAX_PAR_JOUR, GARDER };
+module.exports = { choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
