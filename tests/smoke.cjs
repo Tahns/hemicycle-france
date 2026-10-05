@@ -53,7 +53,7 @@ function verifier(cond, message) {
     verifier((await page.$$(".tab")).length === 6, `${nom} : la barre du haut doit compter 6 regroupements`);
     verifier((await page.$$(".accueil-rubrique")).length === 6, `${nom} : la grille de l'accueil doit compter 6 regroupements`);
     verifier((await page.$$(".onglet-mobile")).length <= 5, `${nom} : la barre mobile doit compter 5 entrées au plus`);
-    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre", "presidents"]) {
+    for (const onglet of ["scrutin", "histo", "deputes", "senat", "candidats", "actualites", "journal", "dirigeants", "justice", "sondages", "meetings", "quiz", "chiffres", "budget", "comprendre", "presidents"]) {
       // Navigation à six regroupements : on ouvre la page par la barre du haut ou par le menu « Dans cette rubrique »
       await page.evaluate((t) => {
         const tab = document.querySelector(`.tab[data-tab="${t}"]`);
@@ -75,6 +75,35 @@ function verifier(cond, message) {
       }, onglet), `${nom} : sous-navigation incorrecte sur ${onglet}`);
       verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur l'onglet ${onglet}`);
     }
+
+    // Le journal du jour : une de quotidien rendue à l'ouverture, titres seuls, liens vers les articles d'origine
+    await page.goto(base + "#journal", { waitUntil: "networkidle" });
+    await page.waitForTimeout(400);
+    const journal = await page.evaluate(() => {
+      const j = document.getElementById("journal");
+      const liens = [...j.querySelectorAll("a")];
+      const tete = j.querySelector(".journal-ligne")?.textContent || "";
+      return {
+        date: /^(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche) \d{1,2}(er)? \p{L}+ \d{4}/u.test(tete), numero: /N° \d+/.test(tete),
+        une: !!j.querySelector(".journal-une h3 a"), secondaires: j.querySelectorAll(".journal-secondaires article").length,
+        rubriques: ["Dossiers du moment", "En bref", "Dans les médias"].every((t) => [...j.querySelectorAll("h3")].some((h) => h.textContent === t)),
+        bref: j.querySelectorAll(".journal-bref li").length,
+        liensSurs: liens.length > 5 && liens.every((a) => /^https:\/\//.test(a.href) && a.rel.includes("noopener")),
+        imprimer: !!document.getElementById("journal-imprimer"), partager: !!document.querySelector('#view-journal [data-partage="journal"]'),
+        police: getComputedStyle(j.querySelector(".journal-une h3")).fontFamily.includes("Newsreader"),
+        h: [...j.querySelectorAll("h1,h2,h4,h5,h6")].length,
+        invite: !!document.querySelector('#view-actualites a[href="#journal"]'),
+      };
+    });
+    verifier(journal.date && journal.numero, `${nom} : date ou numéro absents du journal`);
+    verifier(journal.une && journal.secondaires >= 2 && journal.secondaires <= 3, `${nom} : une ou articles secondaires du journal absents`);
+    verifier(journal.rubriques && journal.bref >= 1, `${nom} : rubriques du journal absentes`);
+    verifier(journal.liensSurs, `${nom} : liens du journal absents ou non sûrs`);
+    verifier(journal.imprimer && journal.partager && journal.police && journal.h === 0 && journal.invite, `${nom} : boutons, typographie ou titraille du journal incorrects`);
+    verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur le journal`);
+    await page.emulateMedia({ media: "print" });
+    verifier(await page.evaluate(() => getComputedStyle(document.querySelector(".masthead")).display === "none" && getComputedStyle(document.querySelector(".journal-actions")).display === "none" && getComputedStyle(document.querySelector(".journal")).display !== "none"), `${nom} : feuille de style d'impression du journal incorrecte`);
+    await page.emulateMedia({ media: "screen" });
 
     await page.goto(base + "#scrutin-3054", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
@@ -265,8 +294,8 @@ function verifier(cond, message) {
     if (nom === "ordinateur") {
       // Menus déroulants de la barre du haut
       await page.goto(base, { waitUntil: "networkidle" });
-      verifier((await page.$$(".tab-menu")).length === 4, "ordinateur : 4 regroupements doivent avoir un menu déroulant");
-      verifier((await page.$$('.tab:not(.tab-menu)')).length === 2, "ordinateur : À la une et Actualités restent des liens directs");
+      verifier((await page.$$(".tab-menu")).length === 5, "ordinateur : 5 regroupements doivent avoir un menu déroulant");
+      verifier((await page.$$('.tab:not(.tab-menu)')).length === 1, "ordinateur : À la une reste un lien direct");
       const flecheElus = '.tab[data-hub="elus"] .tab-fleche';
       verifier((await page.getAttribute(flecheElus, "aria-expanded")) === "false", "ordinateur : menu fermé au départ (aria-expanded)");
       await page.click(flecheElus);
@@ -484,7 +513,7 @@ function verifier(cond, message) {
     // Anglais
     await choisir("en");
     verifier(await page.evaluate(() => document.documentElement.lang === "en" && document.documentElement.dir === "ltr"), etiquette("html lang=en attendu"));
-    verifier((await texte('.tab[data-tab="actualites"]')) === "News", etiquette(`titre de menu non traduit (${await texte('.tab[data-tab="actualites"]')})`));
+    verifier((await texte('.tab[data-tab="actualites"] .tab-libelle')) === "News", etiquette(`titre de menu non traduit (${await texte('.tab[data-tab="actualites"] .tab-libelle')})`));
     verifier(/French politics, with the evidence/.test(await texte(".devise")), etiquette("devise non traduite"));
     verifier(await page.evaluate(() => !document.getElementById("note-officiel").hidden), etiquette("note « Contenu officiel en français » absente"));
     verifier(/votes, the most recent from/.test(await texte("#footer-maj")), etiquette(`texte rendu par JavaScript non traduit (${(await texte("#footer-maj")).slice(0, 60)})`));
@@ -495,7 +524,7 @@ function verifier(cond, message) {
     verifier(/MPs/.test(await texte("#view-deputes h2")), etiquette("rubrique Députés non traduite"));
     await page.reload({ waitUntil: "networkidle" });
     verifier(await page.evaluate(() => document.documentElement.lang === "en"), etiquette("la langue n'est pas retrouvée après rechargement"));
-    verifier((await texte('.tab[data-tab="actualites"]')) === "News", etiquette("traduction non appliquée après rechargement"));
+    verifier((await texte('.tab[data-tab="actualites"] .tab-libelle')) === "News", etiquette("traduction non appliquée après rechargement"));
 
     // Retour au français : plus aucune trace d'anglais
     await page.focus(bouton);
@@ -504,7 +533,7 @@ function verifier(cond, message) {
     await page.keyboard.press("Enter");
     await page.waitForTimeout(500);
     verifier(await page.evaluate(() => document.documentElement.lang === "fr" && document.getElementById("note-officiel").hidden), etiquette("retour au français incomplet"));
-    verifier((await texte('.tab[data-tab="actualites"]')) === "Actualités" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
+    verifier((await texte('.tab[data-tab="actualites"] .tab-libelle')) === "Actualités" && /scrutins, le plus récent/.test(await texte("#footer-maj")), etiquette("textes non restaurés en français"));
 
     await choisir("fr");
     verifier(await page.evaluate(() => document.documentElement.dir === "ltr"), etiquette("dir=ltr non rétabli"));
