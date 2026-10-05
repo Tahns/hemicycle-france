@@ -855,6 +855,9 @@
   .parti-sigle{font-weight:500; color:var(--text-faint); font-size:var(--fs-xs); margin-left:var(--s1);}
   .sondage-bar-track{flex:1; height:14px; background:var(--border-soft);}
   .sondage-bar-fill{height:100%; transition:width .4s ease;}
+  .sondage-bar-track{display:flex;}
+  .sondage-bar-ext{opacity:.38;}
+  .sondage-legende{margin-top:var(--s2);}
   .sondage-bar-pct{min-width:92px; white-space:nowrap; text-align:right; font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; font-variant-numeric:tabular-nums;}
   .evolution{margin:var(--s6) 0 var(--s3); padding-top:var(--s4); border-top:1px solid var(--ink);}
   .evolution h3{margin:0 0 var(--s1); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
@@ -920,7 +923,8 @@
   .duel-titre{font-weight:600; font-size:var(--fs-base); margin-bottom:var(--s2);}
   .duel-ligne{display:grid; grid-template-columns:minmax(90px,11em) 1fr; gap:var(--s3); align-items:center; font-size:var(--fs-sm); margin:var(--s1) 0;}
   .duel-ligne .inst{color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .duel-barre{display:flex; height:20px; font-size:var(--fs-xs); font-weight:600; color:var(--blanc); font-variant-numeric:tabular-nums;}
+  .duel-barre{position:relative; display:flex; height:20px; font-size:var(--fs-xs); font-weight:600; color:var(--blanc); font-variant-numeric:tabular-nums;}
+  .duel-barre::after{content:""; position:absolute; left:50%; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:var(--ink); opacity:.55;}
   .duel-barre span{display:flex; align-items:center; padding:0 var(--s2); white-space:nowrap; overflow:hidden;}
   .duel-barre span + span{justify-content:flex-end;}
   @media (max-width:700px){
@@ -1261,6 +1265,30 @@
   .budget-serie{display:grid; grid-template-columns:1fr; gap:var(--s5) var(--s6);}
   @media(min-width:760px){ .budget-serie{grid-template-columns:1fr 1fr;} }
   .budget-serie h4{margin:0 0 var(--s1); font-size:var(--fs-md); font-weight:700;}
+  .budget-graphe{position:relative; min-height:120px;}
+  .budget-graphe svg{display:block; width:100%; height:auto; overflow:visible;}
+  .budget-lecture{margin:var(--s2) 0 var(--s3); min-height:2.8em; font-size:var(--fs-md); color:var(--text);}
+  .tm-case, .col-case{cursor:pointer; outline:none;}
+  .tm-case rect{stroke:var(--bg); stroke-width:2;}
+  .tm-case:hover rect, .tm-case:focus rect, .tm-case.choix rect{stroke:var(--ink); stroke-width:3;}
+  .tm-nom, .tm-val{fill:#fff; font-family:var(--font-body); pointer-events:none;}
+  .tm-nom{font-size:12px; font-weight:700;} .tm-val{font-size:13px; font-variant-numeric:tabular-nums;}
+  :root[data-theme="sombre"] .tm-nom, :root[data-theme="sombre"] .tm-val{fill:#1C1B18;}
+  .tm-case:focus-visible rect{stroke:var(--accent); stroke-width:4;}
+  .col-zone{fill:transparent;}
+  .col-case:hover .col-barre, .col-case:focus .col-barre, .col-case.choix .col-barre{stroke:var(--ink); stroke-width:2;}
+  .col-case:focus-visible .col-zone{stroke:var(--accent); stroke-width:2;}
+  .col-val{fill:var(--text); font-size:var(--fs-sm); font-weight:700; font-family:var(--font-body); font-variant-numeric:tabular-nums; pointer-events:none;}
+  .col-an{fill:var(--text-faint); font-size:var(--fs-xs); font-family:var(--font-body); pointer-events:none;}
+  .col-zero{stroke:var(--ink); stroke-width:1;}
+  .budget-tableau{margin:var(--s3) 0; font-size:var(--fs-sm);}
+  .budget-tableau summary{cursor:pointer; color:var(--accent); min-height:32px;}
+  .budget-tableau-defil{overflow-x:auto; margin-top:var(--s2);}
+  .budget-tableau table{border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums;}
+  .budget-tableau th, .budget-tableau td{padding:var(--s1) var(--s2); border-bottom:1px solid var(--border-soft); text-align:right;}
+  .budget-tableau th:first-child{text-align:left;}
+  .budget-tableau thead th{font-size:var(--fs-xs); color:var(--text-faint); border-bottom-color:var(--ink);}
+  .budget-tableau tbody th{font-weight:600;}
   .budget-vide{padding:var(--s5) 0; color:var(--text-soft); border-top:1px solid var(--ink); border-bottom:1px solid var(--border);}
   .chiffre-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:0 var(--s5); border-top:1px solid var(--ink);}
   .chiffre-card{padding:var(--s4) 0 var(--s4); border-bottom:1px solid var(--border); display:flex; flex-direction:column;}
@@ -4093,19 +4121,21 @@ function renderSondageAverage(){
 
   const maxVal = Math.max(...disponibles.map(c=>c.range[1]));
   const list = document.getElementById("sondage-avg-list");
+  const fr = n => String(n).replace(".", ",");
+  const aFourchette = disponibles.some(c=> c.range[0] !== c.range[1]);
   list.innerHTML = disponibles.map((c,idx)=>{
-    const mid = (c.range[0]+c.range[1])/2;
-    const fr = n => String(n).replace(".", ",");
     const label = c.range[0]===c.range[1] ? `${fr(c.range[0])} %` : `${fr(c.range[0])}–${fr(c.range[1])} %`;
+    // Trait plein jusqu'au bas de la fourchette, trait clair jusqu'au haut : l'institut a testé plusieurs hypothèses
+    const bas = c.range[0] / maxVal * 100, ecart = (c.range[1] - c.range[0]) / maxVal * 100;
     return `
-    <div class="sondage-bar-row" style="animation-delay:${idx*25}ms">
+    <div class="sondage-bar-row" style="animation-delay:${idx*25}ms" title="${esc(c.nom)} : ${label}">
       <div class="bloc-name">${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</div>
-      <div class="sondage-bar-track">
-        <div class="sondage-bar-fill" style="width:${(mid/maxVal*100).toFixed(1)}%;background:${c.couleur}"></div>
+      <div class="sondage-bar-track" aria-hidden="true">
+        <div class="sondage-bar-fill" style="width:${bas.toFixed(1)}%;background:${c.couleur}"></div>${ecart > 0 ? `<div class="sondage-bar-fill sondage-bar-ext" style="width:${ecart.toFixed(1)}%;background:${c.couleur}"></div>` : ""}
       </div>
       <div class="sondage-bar-pct">${label}</div>
     </div>`;
-  }).join("");
+  }).join("") + (aFourchette ? `<p class="sondage-disclaimer sondage-legende">Trait plein : score le plus bas selon les hypothèses de candidatures testées ; trait clair : jusqu'au score le plus haut.</p>` : "");
 }
 
 
@@ -5001,10 +5031,34 @@ function budgetBarres(lignes){
     <div class="budget-piste" aria-hidden="true"><i style="width:${Math.max(0, Math.min(100, l.part)).toFixed(1)}%; --bud:${l.couleur}"></i></div></li>`).join("")}</ul>`;
 }
 
+const BUDGET_COURT = { GF10:"Protection sociale", GF07:"Santé", GF09:"Éducation", GF04:"Économie", GF03:"Sécurité", GF02:"Défense", GF0107:"Intérêts de la dette",
+  GF01:"Services publics", GF06:"Logement", GF08:"Culture et loisirs", GF05:"Environnement" };
+// Treemap « squarifié » : chaque aire est proportionnelle à la valeur. Calcul léger (11 rectangles), fait à l'ouverture de la rubrique.
+function budgetRectangles(items, W, H){
+  const tot = items.reduce((t,i)=> t + i.v, 0), k = W * H / tot;
+  const liste = items.map(i=>({ ...i, a:i.v * k })), out = [];
+  let x = 0, y = 0, w = W, h = H, rang = [];
+  const somme = r => r.reduce((t,i)=> t + i.a, 0);
+  const pire = (r, c)=>{ const s = somme(r); return Math.max(c * c * Math.max(...r.map(i=>i.a)) / (s * s), s * s / (c * c * Math.min(...r.map(i=>i.a)))); };
+  const poser = r =>{
+    const s = somme(r);
+    if(w >= h){ const cw = s / h; let cy = y; r.forEach(i=>{ const ch = i.a / cw; out.push({ ...i, x, y:cy, w:cw, h:ch }); cy += ch; }); x += cw; w -= cw; }
+    else { const ch = s / w; let cx = x; r.forEach(i=>{ const cw = i.a / ch; out.push({ ...i, x:cx, y, w:cw, h:ch }); cx += cw; }); y += ch; h -= ch; }
+  };
+  for(const it of liste){
+    const c = Math.min(w, h);
+    if(!rang.length || pire([...rang, it], c) <= pire(rang, c)) rang.push(it);
+    else { poser(rang); rang = [it]; }
+  }
+  if(rang.length) poser(rang);
+  return out;
+}
+const budgetPostes = d => [...d.postes].sort((a,b)=> b.md - a.md);
+const budgetLectureDepense = p => `${p.libelle} : ${fmtMd(p.md)}, soit ${fmtPct(p.pct)} des dépenses publiques.`;
+
 function budgetDepenses(d){
   if(!d || !Array.isArray(d.postes) || d.postes.length < 3 || !d.postes.every(p=> p && p.libelle && nbOk(p.md) && nbOk(p.pct)) || !nbOk(d.totalMd) || !nbOk(d.annee)) return "";
-  const postes = [...d.postes].sort((a,b)=> b.md - a.md);
-  const max = Math.max(...postes.map(p=>p.pct), 1);
+  const postes = budgetPostes(d);
   const tete = postes.slice(0, 4).map(p=> `${fmtEur(p.pct)} ${BUDGET_VERS[p.code] || "à : " + p.libelle.toLowerCase()}`);
   // Les quatre premiers postes, chacun « 41,5 € à la protection sociale » (gabarits de BUDGET_VERS), dans une phrase entière
   const phrase = tete.length === 4
@@ -5012,9 +5066,42 @@ function budgetDepenses(d){
     : `Pour 100 € dépensés par l'État, les collectivités et la Sécurité sociale, ${tete.slice(0,-1).join(", ")} et ${tete[tete.length-1]}. Le détail est ci-dessous.`;
   return `<div class="budget-bloc"><h3>Où va l'argent public ?</h3>
     <p class="budget-phrase">${esc(phrase)}</p>
-    <p class="budget-phrase">En ${d.annee}, les dépenses publiques ont représenté <b>${fmtMd(d.totalMd)}</b>, classées par grande fonction (classification internationale COFOG).</p>
-    ${budgetBarres(postes.map(p=>({ nom:p.libelle, val:`<b>${fmtMd(p.md)}</b> · ${fmtPct(p.pct)}`, part:p.pct / max * 100, couleur:`var(--bud-${BUDGET_COULEURS[p.code] || 11})` })))}
+    <p class="budget-phrase">En ${d.annee}, les dépenses publiques ont représenté <b>${fmtMd(d.totalMd)}</b>, classées par grande fonction (classification internationale COFOG). Chaque bloc a une aire proportionnelle à sa part.</p>
+    <div class="budget-graphe" data-bg="depenses"></div>
+    <p class="budget-lecture" id="budget-lecture-depenses" aria-live="polite">Touchez ou survolez un bloc pour lire sa valeur.</p>
+    <details class="budget-tableau"><summary>Voir le tableau des chiffres</summary><div class="budget-tableau-defil"><table>
+      <thead><tr><th scope="col">Fonction</th><th scope="col">Milliards d'euros</th><th scope="col">Part des dépenses</th></tr></thead>
+      <tbody>${postes.map(p=>`<tr><th scope="row">${esc(p.libelle)}</th><td>${fmtNb(p.md, p.md >= 100 ? 0 : 1)}</td><td>${fmtPct(p.pct)}</td></tr>`).join("")}</tbody>
+    </table></div></details>
     ${budgetSource(d, d.annee)}</div>`;
+}
+
+function budgetDessinerDepenses(c, W){
+  const postes = budgetPostes(BUDGET.depenses), mobile = W < 520;
+  const H = Math.round(Math.max(220, Math.min(mobile ? 330 : 360, W * (mobile ? .9 : .5))));
+  const rects = budgetRectangles(postes.map(p=>({ v:p.md, p })), W, H);
+  const cases = rects.map((r, i)=>{
+    const p = r.p, coul = `var(--bud-${BUDGET_COULEURS[p.code] || 11})`, nom = BUDGET_COURT[p.code] || p.libelle;
+    const lw = nom.length * 6.6 + 14, grand = r.w >= 54 && r.h >= 34;
+    const txt = grand
+      ? (lw <= r.w ? `<text class="tm-nom" x="${(r.x + 7).toFixed(1)}" y="${(r.y + 17).toFixed(1)}">${esc(nom)}</text><text class="tm-val" x="${(r.x + 7).toFixed(1)}" y="${(r.y + 33).toFixed(1)}">${fmtPct(p.pct)}</text>`
+        : `<text class="tm-val" x="${(r.x + 7).toFixed(1)}" y="${(r.y + 19).toFixed(1)}">${fmtPct(p.pct)}</text>`)
+      : "";
+    return `<g class="tm-case" tabindex="0" role="img" data-i="${i}" aria-label="${esc(budgetLectureDepense(p))}"><title>${esc(budgetLectureDepense(p))}</title>
+      <rect x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}" fill="${coul}"/>${txt}</g>`;
+  }).join("");
+  c.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="group" aria-label="Dépenses publiques par fonction en ${BUDGET.depenses.annee} : ${esc(postes.slice(0, 3).map(p=>`${p.libelle} ${fmtPct(p.pct)}`).join(", "))}, et ${postes.length - 3} autres fonctions. Le tableau des chiffres est sous le graphique.">${cases}</svg>`;
+  const lecture = document.getElementById("budget-lecture-depenses");
+  const choisir = g =>{
+    c.querySelectorAll(".tm-case.choix").forEach(e=> e.classList.remove("choix"));
+    g.classList.add("choix");
+    lecture.textContent = budgetLectureDepense(rects[+g.dataset.i].p);
+  };
+  c.querySelectorAll(".tm-case").forEach(g=>{
+    g.addEventListener("click", ()=> choisir(g));
+    g.addEventListener("focus", ()=> choisir(g));
+    g.addEventListener("pointerenter", e=>{ if(e.pointerType === "mouse") choisir(g); });
+  });
 }
 
 function budgetEquilibre(e){
@@ -5049,19 +5136,81 @@ function budgetDette(d){
     ${budgetSource(d, d.annee)}</div>`;
 }
 
-function budgetSerie(s){
+function budgetSerieValide(s){
   const a = s?.annees;
-  if(!Array.isArray(a) || a.length < 2 || !a.every(x=> [x.annee, x.soldeMd, x.soldePib, x.detteMd, x.dettePib].every(nbOk))) return "";
-  const maxS = Math.max(...a.map(x=>Math.abs(x.soldePib)), 0.1), maxD = Math.max(...a.map(x=>x.dettePib), 0.1);
+  return Array.isArray(a) && a.length >= 2 && a.every(x=> [x.annee, x.soldeMd, x.soldePib, x.detteMd, x.dettePib].every(nbOk)) ? a : null;
+}
+function budgetSerie(s){
+  const a = budgetSerieValide(s);
+  if(!a) return "";
   const der = a[a.length - 1].annee;
   return `<div class="budget-bloc"><h3>Ces dernières années</h3>
     <p class="budget-phrase">Le solde et la dette des administrations publiques, de ${a[0].annee} à ${der}, en part du PIB.</p>
     <div class="budget-serie">
-      <div><h4>Solde (− déficit, + excédent)</h4>${budgetBarres(a.map(x=>({ nom:String(x.annee), val:`<b>${signe(x.soldePib)}${fmtPct(Math.abs(x.soldePib))}</b> · ${signe(x.soldeMd)}${fmtMd(Math.abs(x.soldeMd))}`, part:Math.abs(x.soldePib) / maxS * 100, couleur:x.soldePib < 0 ? "var(--rouge)" : "var(--vert)" })))}</div>
-      <div><h4>Dette</h4>${budgetBarres(a.map(x=>({ nom:String(x.annee), val:`<b>${fmtPct(x.dettePib)}</b> · ${fmtMd(x.detteMd)}`, part:x.dettePib / maxD * 100, couleur:"var(--bud-3)" })))}</div>
+      <div><h4>Solde (− déficit, + excédent)</h4><div class="budget-graphe" data-bg="solde"></div><p class="budget-lecture" id="budget-lecture-solde" aria-live="polite">Touchez ou survolez une colonne pour lire l'année.</p></div>
+      <div><h4>Dette</h4><div class="budget-graphe" data-bg="dette"></div><p class="budget-lecture" id="budget-lecture-dette" aria-live="polite">Touchez ou survolez une colonne pour lire l'année.</p></div>
     </div>
+    <details class="budget-tableau"><summary>Voir le tableau des chiffres</summary><div class="budget-tableau-defil"><table>
+      <thead><tr><th scope="col">Année</th><th scope="col">Solde (Md€)</th><th scope="col">Solde (% du PIB)</th><th scope="col">Dette (Md€)</th><th scope="col">Dette (% du PIB)</th></tr></thead>
+      <tbody>${a.map(x=>`<tr><th scope="row">${x.annee}</th><td>${signe(x.soldeMd)}${fmtNb(Math.abs(x.soldeMd), 1)}</td><td>${signe(x.soldePib)}${fmtNb(Math.abs(x.soldePib), 1)}</td><td>${fmtNb(x.detteMd, 1)}</td><td>${fmtNb(x.dettePib, 1)}</td></tr>`).join("")}</tbody>
+    </table></div></details>
     ${budgetSource(s, `${a[0].annee} à ${der}`)}</div>`;
 }
+
+// Colonnes d'une série annuelle : une colonne par année, valeur écrite au bout, zéro marqué, lecture détaillée au toucher
+function budgetDessinerColonnes(c, W, type){
+  const a = budgetSerieValide(BUDGET.serie), solde = type === "solde";
+  const val = x => solde ? x.soldePib : x.dettePib;
+  const lecture = x => solde
+    ? `${x.annee} : ${x.soldePib < 0 ? "déficit" : "excédent"} de ${fmtPct(Math.abs(x.soldePib))} du PIB, soit ${fmtMd(Math.abs(x.soldeMd))}.`
+    : `${x.annee} : dette de ${fmtPct(x.dettePib)} du PIB, soit ${fmtMd(x.detteMd)}.`;
+  const H = W < 520 ? 190 : 210, haut = 22;
+  const mini = Math.min(0, ...a.map(val)), bas = mini < 0 ? 44 : 26, maxi = Math.max(0, ...a.map(val)), echelle = (H - haut - bas) / ((maxi - mini) || 1);
+  const y = v => haut + (maxi - v) * echelle, y0 = y(0);
+  const pas = W / a.length, lg = Math.min(46, pas * .62);
+  const col = x => solde ? (x.soldePib < 0 ? "var(--rouge)" : "var(--vert)") : "var(--bud-1)";
+  const out = a.map((x, i)=>{
+    const v = val(x), cx = pas * (i + .5), top = Math.min(y(v), y0), h = Math.max(2, Math.abs(y(v) - y0));
+    const ty = v < 0 ? y(v) + 14 : top - 6;
+    return `<g class="col-case" tabindex="0" role="img" data-i="${i}" aria-label="${esc(lecture(x))}"><title>${esc(lecture(x))}</title>
+      <rect class="col-zone" x="${(cx - pas / 2).toFixed(1)}" y="0" width="${pas.toFixed(1)}" height="${H}"/>
+      <rect class="col-barre" x="${(cx - lg / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${lg.toFixed(1)}" height="${h.toFixed(1)}" fill="${col(x)}"/>
+      <text class="col-val" x="${cx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="middle">${solde ? signe(v) : ""}${fmtNb(Math.abs(v), 1)}</text>
+      <text class="col-an" x="${cx.toFixed(1)}" y="${H - 8}" text-anchor="middle">${x.annee}</text></g>`;
+  }).join("");
+  c.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="group" aria-label="${solde ? "Solde public" : "Dette publique"} en % du PIB, de ${a[0].annee} à ${a[a.length - 1].annee}. Le tableau des chiffres est sous les graphiques.">
+    <line class="col-zero" x1="0" x2="${W}" y1="${y0.toFixed(1)}" y2="${y0.toFixed(1)}"/>${out}</svg>`;
+  const lect = document.getElementById(`budget-lecture-${type}`);
+  const choisir = g =>{
+    c.querySelectorAll(".col-case.choix").forEach(e=> e.classList.remove("choix"));
+    g.classList.add("choix");
+    lect.textContent = lecture(a[+g.dataset.i]);
+  };
+  c.querySelectorAll(".col-case").forEach(g=>{
+    g.addEventListener("click", ()=> choisir(g));
+    g.addEventListener("focus", ()=> choisir(g));
+    g.addEventListener("pointerenter", e=>{ if(e.pointerType === "mouse") choisir(g); });
+  });
+}
+
+// Dessine les graphiques de la rubrique, à la largeur réelle du conteneur (appelé à l'ouverture et au redimensionnement)
+function budgetDessiner(){
+  const el = document.getElementById("budget-contenu");
+  if(!BUDGET || !el) return;
+  el.querySelectorAll("[data-bg]").forEach(c=>{
+    let W = Math.round(c.clientWidth);
+    if(!W){ if(c.dataset.w) return; W = 340; }
+    if(+c.dataset.w === W) return;
+    c.dataset.w = W;
+    if(c.dataset.bg === "depenses") budgetDessinerDepenses(c, W);
+    else budgetDessinerColonnes(c, W, c.dataset.bg);
+  });
+}
+let budgetRedim;
+window.addEventListener("resize", ()=>{
+  clearTimeout(budgetRedim);
+  budgetRedim = setTimeout(()=>{ if(document.getElementById("view-budget").classList.contains("active")) budgetDessiner(); }, 150);
+});
 
 async function renderBudget(){
   const el = document.getElementById("budget-contenu");
@@ -5075,6 +5224,7 @@ async function renderBudget(){
   const maj = BUDGET.lastUpdated && dateCourte(BUDGET.lastUpdated);
   el.innerHTML = html + `<p class="budget-source">Les comptes publics sont publiés avec un décalage : l'année la plus récente est souvent l'année écoulée ou la précédente.${maj ? ` Fichier relu le ${esc(maj)}.` : ""}</p>`;
   el.querySelectorAll(".budget-bloc").forEach((b, i)=> plierBloc(b, i === 0));
+  budgetDessiner();
 }
 
 /* ---------- Justice & politique (faits établis, condamnations réelles uniquement, vérifié sept. 2026) ---------- */
