@@ -177,15 +177,15 @@ function verifier(cond, message) {
     await page.goto(base + "#presidents", { waitUntil: "networkidle" });
     await page.waitForSelector("#presidents-frise .pres-item");
     const donneesPres = JSON.parse(fs.readFileSync(path.join(RACINE, "data/presidents.json"), "utf-8"));
-    const attendus = donneesPres.regimes.flatMap((r) => r.presidents.map((p) => p.nom));
+    const attendus = donneesPres.regimes.filter((r) => r.id === "v").flatMap((r) => r.presidents.map((p) => p.nom));
     verifier(await page.evaluate(() => document.getElementById("view-presidents").classList.contains("active")), `${nom} : la page Les présidents ne s'ouvre pas`);
-    verifier(attendus.length === 25 && (await page.$$("#presidents-frise .pres-item")).length === attendus.length, `${nom} : le nombre de présidents affichés ne correspond pas aux données`);
+    verifier(attendus.length === 8 && (await page.$$("#presidents-frise .pres-item")).length === attendus.length, `${nom} : le nombre de présidents affichés ne correspond pas aux données`);
     verifier(JSON.stringify(await page.$$eval("#presidents-frise .pres-item", (l) => l.map((e) => e.dataset.president))) === JSON.stringify(attendus), `${nom} : présidents hors ordre chronologique`);
-    verifier(new RegExp(`^${attendus.length} présidents depuis 1848`).test(await page.textContent("#presidents-bandeau .pres-gros")), `${nom} : bandeau « présidents depuis 1848 » incorrect`);
+    verifier(new RegExp(`^${attendus.length} présidents depuis 1959`).test(await page.textContent("#presidents-bandeau .pres-gros")), `${nom} : bandeau « présidents depuis 1959 » incorrect`);
     verifier((await page.$$("#presidents-frise .pres-item.en-cours")).length === 1 && /Emmanuel Macron/.test(await page.textContent("#presidents-bandeau .pres-courant")), `${nom} : le président actuel n'est pas mis en évidence`);
-    verifier((await page.$$("#presidents-frise .pres-regime")).length === 4 && (await page.$$("#presidents-frise .pres-pause")).length === 2, `${nom} : régimes ou périodes sans président manquants`);
+    verifier((await page.$$("#presidents-frise .pres-regime")).length === 1 && (await page.$$("#presidents-frise .pres-pause")).length === 0, `${nom} : régimes ou périodes sans président manquants`);
     verifier((await page.$$eval("#presidents-frise .pres-item a", (l) => l.filter((a) => /^https:\/\/fr\.wikipedia\.org\/wiki\//.test(a.href)).length)) === attendus.length, `${nom} : un lien Wikipédia manque`);
-    for (const r of donneesPres.regimes) {
+    for (const r of donneesPres.regimes.filter((x) => x.id === "v")) {
       const phrase = (await page.textContent(`.pres-regime[data-regime="${r.id}"] .pres-election`)).replace(/\s+/g, " ").trim();
       verifier(phrase === r.election, `${nom} : mode d'élection de ${r.nom} différent des données : « ${phrase} »`);
     }
