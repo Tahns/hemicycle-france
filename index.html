@@ -37,8 +37,13 @@
 <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
 <script>
-  // Thème : clair par défaut ; le mode sombre n'est activé que si le visiteur l'a choisi
-  try{ if(localStorage.getItem("theme") === "sombre") document.documentElement.dataset.theme = "sombre"; }catch(e){}
+  // Thème : le choix mémorisé du visiteur l'emporte ; à défaut, la préférence du système (clair ou sombre)
+  (function(){
+    var choix = null, sombre = false;
+    try{ choix = localStorage.getItem("theme"); }catch(e){}
+    try{ sombre = matchMedia("(prefers-color-scheme: dark)").matches; }catch(e){}
+    if(choix === "sombre" || (choix !== "clair" && sombre)) document.documentElement.dataset.theme = "sombre";
+  })();
 </script>
 <link rel="preload" href="fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/public-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -100,6 +105,7 @@
      le JavaScript les utilise dans ses gabarits.
      ========================================================= */
   :root{
+    color-scheme:light;
     --bg:#F5F1E8;            /* papier */
     --bg-elevated:#FBF9F4;   /* encarts */
     --bg-elevated-2:#EDE7DA; /* aplats */
@@ -143,8 +149,8 @@
     --serie-RN:#5B4FC9; --serie-LFI:#C8102E; --serie-HOR:#0E7B63;
     --serie-RE:#846800; --serie-PP:#C22E83; --serie-LR:#116BCD; --serie-autre:#696B73;
   }
-  /* Mode sombre : uniquement sur demande (bouton dans l'en-tête), jamais imposé par le système.
-     Fond gris ardoise plutôt que noir, pour garder un bon confort de lecture. */
+  /* Mode sombre : activé par la préférence du système ou par le bouton de l'en-tête (le choix du bouton,
+     mémorisé dans ce navigateur, l'emporte). Fond gris ardoise plutôt que noir, pour garder un bon confort de lecture. */
   :root[data-theme="sombre"]{
     color-scheme:dark;
       --bg:#2A2926;
@@ -403,7 +409,7 @@
   .cp-source a{color:var(--accent);}
   .lex-champ{max-width:420px;}
   .lex-liste{margin:0;}
-  .lex-lettre{margin:var(--s4) 0 2px; padding-bottom:var(--s1); border-bottom:1px solid var(--border); font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600; color:var(--accent);}
+  .lex-debut::before{content:attr(data-lettre); display:block; margin:var(--s2) 0 var(--s2); padding-bottom:var(--s1); border-bottom:1px solid var(--border); font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600; color:var(--accent);}
   .lex-item{padding:var(--s2) var(--s2); border-bottom:1px solid var(--border-soft); scroll-margin-top:12px;}
   .lex-item dt{font-weight:700;}
   .lex-item dd{margin:2px 0 0; color:var(--text-soft); font-size:var(--fs-base); line-height:1.5;}
@@ -450,6 +456,8 @@
   }
   .party-chip .dot{width:9px; height:9px; border-radius:50%;}
   .source-chip .check{display:none;}
+  .chip-date{font-weight:400; color:var(--text-faint);}
+  .source-chip.selected .chip-date{color:inherit;}
   .hemi-mode{margin-bottom:var(--s1);}
 
   /* Panneau de filtres : même organisation sur toutes les rubriques (étiquette au-dessus de chaque filtre,
@@ -770,7 +778,7 @@
   .actu-accueil{margin:var(--s5) 0 var(--s2); padding-top:var(--s4); border-top:1px solid var(--ink);}
   .actu-accueil[hidden]{display:none;}
   .actu-accueil-tete{display:flex; justify-content:space-between; align-items:baseline; gap:var(--s3); flex-wrap:wrap;}
-  .actu-accueil-tete h3{margin:0; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
+  .actu-accueil-tete h2{margin:0; font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
   .actu-accueil-tete a{font-size:var(--fs-md); font-weight:600; color:var(--accent);}
   .senat-hemi{margin:0 0 var(--s6);}
   .senat-hemi-tete{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s2) var(--s5);}
@@ -1640,11 +1648,64 @@
   @media (max-width:700px) and (prefers-reduced-motion:reduce){ .feuille:not([hidden]){animation:none;} }
 
   /* ---------- Accessibilité ---------- */
+  .sr-only{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
+  /* Focus toujours visible au clavier, sur tout élément interactif */
+  :focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  /* Animations réduites à la demande du système : plus aucune transition ni animation */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *, *::before, *::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
   .tab:focus-visible, .theme-chip:focus-visible, .party-chip:focus-visible, .source-chip:focus-visible,
   .quiz-option:focus-visible, .accueil-highlight-card:focus-visible, .accueil-rubrique:focus-visible,
   .histo-more:focus-visible, .lien-bouton:focus-visible, a:focus-visible,
   .onglet-mobile:focus-visible, .feuille-lien:focus-visible{
     outline:2px solid var(--accent); outline-offset:2px;
+  }
+
+  /* ---------- Confiance : source de chaque page, méthode, correction d'erreur ---------- */
+  .source-maj{margin:var(--s3) 0 0; font-size:var(--fs-sm); color:var(--text-faint);}
+  .source-maj b{color:var(--text-soft); font-weight:600;}
+  .accueil-methode{margin:0 0 var(--s5); border:1px solid var(--border); border-left:var(--filet-epais) solid var(--accent); border-radius:var(--r-2); background:var(--bg-elevated);}
+  .accueil-methode > summary{cursor:pointer; padding:var(--s3) var(--s4); font-weight:700; color:var(--text);}
+  .accueil-methode-corps{padding:0 var(--s4) var(--s4); color:var(--text-soft); font-size:var(--fs-md);}
+  .accueil-methode-corps ul{margin:0 0 var(--s3); padding-left:var(--s5);}
+  .accueil-methode-corps li{margin:0 0 var(--s2);}
+  .accueil-methode-corps p{margin:0;}
+  .corriger{margin:var(--s6) 0 var(--s4); padding:var(--s4); border:1px solid var(--border); border-left:var(--filet-epais) solid var(--rouge-rep); border-radius:var(--r-2); background:var(--bg-elevated); font-size:var(--fs-md);}
+  .corriger-titre{margin:0 0 var(--s2); font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600;}
+  .corriger p{margin:0 0 var(--s3); color:var(--text-soft);}
+  .corriger-liens{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s5);}
+  .corriger-liens a{font-weight:600;}
+  .view > .corriger{content-visibility:visible;}
+  .corriger-pied{max-width:var(--largeur); margin:0 auto var(--s4);}
+  .lien-methode{text-decoration:none;}
+  .comparateur-candidats{margin:0 0 var(--s4); border:1px solid var(--border); border-radius:var(--r-2); background:var(--bg-elevated);}
+  .comparateur-candidats > summary{cursor:pointer; padding:var(--s3) var(--s4); font-weight:700;}
+  .comparateur-candidats-corps{padding:0 var(--s4) var(--s4);}
+  .comparateur-candidats-choix{display:flex; flex-wrap:wrap; gap:var(--s3); margin:0 0 var(--s3);}
+  .comparateur-candidats-choix label{display:flex; flex-direction:column; gap:var(--s1); font-size:var(--fs-sm); color:var(--text-soft);}
+  .comparateur-candidats-choix select{max-width:100%; min-height:44px;}
+  .comparateur-table{width:100%; border-collapse:collapse; font-size:var(--fs-md);}
+  .comparateur-table th, .comparateur-table td{padding:var(--s2) var(--s3); border-bottom:1px solid var(--border-soft); text-align:left; vertical-align:top;}
+  .comparateur-table thead th{border-bottom:var(--filet-fort) solid var(--ink); font-family:var(--font-display); font-size:var(--fs-lg);}
+  .comparateur-table tbody th{font-weight:600; color:var(--text-soft); width:28%;}
+  .cp-notions{display:grid; gap:var(--s3); }
+  @media(min-width:860px){ .cp-notions{grid-template-columns:1fr 1fr; gap:var(--s4) var(--s6);} }
+  .cp-fiche{padding:var(--s3) var(--s4); border:1px solid var(--border); border-radius:var(--r-2); background:var(--bg-elevated);}
+  .cp-fiche h4{margin:0 0 var(--s2); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.25;}
+  .cp-fiche p{margin:0 0 var(--s2); color:var(--text-soft); font-size:var(--fs-md); line-height:1.5;}
+  .cp-fiche .cp-source{margin:var(--s2) 0 0;}
+
+  /* Cibles tactiles d'au moins 44 px (écrans tactiles et téléphones) */
+  @media (pointer:coarse), (max-width:700px){
+    .theme-chip, .party-chip, .source-chip, .evolution-chip{min-height:44px;}
+    .lien-bouton, .titre-lien, .footer-liens a, .footer-liens .lien-bouton{display:inline-flex; align-items:center; min-height:44px;}
+    .footer-plie > summary, .pli-mobile > summary, details.carte-pli > summary{min-height:44px; display:flex; align-items:center;}
+    .bouton-plein, .bouton-contour{min-height:44px;}
+    .bouton-story.mini{position:relative;}
+    .bouton-story.mini::after{content:""; position:absolute; inset:-9px;}
+    details.depute-themes > summary, .evolution-graphe + details > summary{min-height:44px; display:flex; align-items:center;}
   }
 
   /* ---------- Petits écrans ---------- */
@@ -1743,7 +1804,7 @@
   .rubrique-tete h2{font-weight:700;}
   /* Titres de bloc : même taille partout */
   .cp-bloc h3, .sondage-avg-card h3, .evolution h3, .probas h3, .second-tour h3, .budget-bloc h3, .breakdown h3, .section-titre{font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; line-height:1.2;}
-  .candidat-carte h3, .veille h3, .actu-accueil-tete h3, .texte-legal h3, .budget-hero h3{font-size:var(--fs-h3); font-weight:700;}
+  .candidat-carte h3, .veille h3, .actu-accueil-tete h2, .texte-legal h3, .budget-hero h3{font-size:var(--fs-h3); font-weight:700;}
   .tag-pour{color:var(--vote-pour);} .tag-contre{color:var(--vote-contre);} .tag-partage{color:var(--vote-abst);}
   @media (max-width:640px){ .stats-groupes th, .stats-groupes td{padding-left:2px; padding-right:2px;} .stats-groupes .dot{margin-right:var(--s1);} }
 
@@ -2026,7 +2087,7 @@
     .gauge-svg{width:84px; height:84px;} .gauge-value{font-size:var(--fs-xl);}
     .lex-liste{max-height:52vh; overflow-y:auto; overscroll-behavior:contain; border-top:1px solid var(--border); -webkit-overflow-scrolling:touch;}
     .lex-item{padding:var(--s2) 0;} .lex-item dd{font-size:var(--fs-md); line-height:1.4;}
-    .lex-lettre{margin:var(--s2) 0 2px; font-size:var(--fs-lg);}
+    .lex-debut::before{font-size:var(--fs-lg);}
     .cp-bloc{padding:var(--s3) 0 var(--s1);}
     .cp-bloc h3{margin:0 0 var(--s2);}
     .cp-texte{font-size:var(--fs-md); line-height:1.45;}
@@ -2045,7 +2106,7 @@
 </style>
 </head>
 <body data-page="accueil">
-<a class="lien-evitement" href="#" id="lien-evitement">Aller au contenu</a>
+<a class="lien-evitement" href="#contenu" id="lien-evitement">Aller au contenu</a>
 
 <header class="masthead">
   <div class="liseré" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -2055,6 +2116,7 @@
       <button type="button" class="theme-toggle bouton-recherche" aria-haspopup="dialog">Rechercher <kbd>/</kbd></button>
       <span class="langue" id="langue-haut"></span>
       <button type="button" class="theme-toggle" id="espace-haut" hidden>Mon espace</button>
+      <a class="theme-toggle lien-methode" href="#methode" data-tab-lien="methode">Méthode</a>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Mode sombre</button></span>
   </div>
   <div class="masthead-titre">
@@ -2116,6 +2178,17 @@
     <div class="nouveautes" id="nouveautes" hidden></div>
     <a class="accueil-rebours" id="accueil-rebours" href="#meetings" hidden></a>
     <div class="actu-accueil" id="accueil-actualites" hidden></div>
+    <details class="accueil-methode" id="accueil-methode">
+      <summary>D'où viennent les chiffres ?</summary>
+      <div class="accueil-methode-corps">
+        <ul>
+          <li><b>Des sources officielles.</b> Votes et députés : open data de l'Assemblée nationale. Sénat : pages officielles des scrutins. Économie : Insee. Budget : Eurostat. Sondages : notices de la Commission des sondages. Actualités : flux publics des médias, cités avec leur lien.</li>
+          <li><b>Des mises à jour automatiques.</b> Les données sont relues toutes les 15 minutes ; sous le titre de chaque page, la source et l'ancienneté des chiffres sont indiquées.</li>
+          <li><b>Rien d'estimé.</b> Chaque vote est recoupé avec le décompte officiel avant d'être publié. Quand une information manque, le site le dit.</li>
+        </ul>
+        <p><a href="#methode" data-tab-lien="methode">Lire la méthode complète</a> · <a href="#mentions" data-tab-lien="mentions">Mentions légales</a></p>
+      </div>
+    </details>
     <div class="accueil-section-title">À la une</div>
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
     <a class="accueil-quiz" href="#quiz" data-tab-lien="quiz">
@@ -2455,6 +2528,10 @@
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
       <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="candidats">Partager</button></div>
+    <details class="comparateur-candidats" id="candidats-comparer">
+      <summary>Comparer deux candidats</summary>
+      <div class="comparateur-candidats-corps" id="candidats-comparer-corps"></div>
+    </details>
     <div class="candidat-grid" id="candidats-liste"></div>
   </section>
 
@@ -2462,7 +2539,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Pour débuter</div>
       <h2>Comprendre</h2>
-      <p class="chapo">La politique française expliquée simplement : cinq fiches courtes, puis un lexique. Seulement les règles du jeu, sans avis.</p>
+      <p class="chapo">La politique française expliquée simplement : cinq fiches courtes, dix notions clés, puis un lexique. Seulement les règles du jeu, sans avis.</p>
       <p class="sert"><b>À quoi sert cette page ?</b> À comprendre les mots et les règles que vous croiserez sur tout le site.</p>
     </div>
     <div class="cp-nav" role="group" aria-label="Aller à une fiche">
@@ -2471,6 +2548,7 @@
       <button type="button" data-cp="cp-elections">Les élections</button>
       <button type="button" data-cp="cp-vote">Lire un vote</button>
       <button type="button" data-cp="cp-budget">Le budget</button>
+      <button type="button" data-cp="cp-notions">Dix notions clés</button>
       <button type="button" data-cp="cp-lexique">Lexique</button>
     </div>
 
@@ -2647,12 +2725,69 @@
       <p class="cp-source">Pour vérifier : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a></p>
     </article>
 
+    <article class="cp-bloc" id="cp-notions">
+      <h3><span class="cp-num">6</span>Dix notions clés</h3>
+      <div class="cp-notions">
+          <div class="cp-fiche">
+            <h4>L'article 49, alinéa 3 (« 49.3 »)</h4>
+            <p>Le Premier ministre peut, après délibération du Conseil des ministres, engager la responsabilité du gouvernement devant l'Assemblée nationale sur un texte. Ce texte est alors considéré comme adopté sans vote, sauf si une <span class="gl" data-gl="motion-de-censure">motion de censure</span> est déposée dans les 24 heures et adoptée. Depuis la révision de 2008, cette procédure s'applique sans limite aux projets de loi de finances et de financement de la sécurité sociale, et une seule fois par session pour tout autre texte.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 49</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>La motion de censure</h4>
+            <p>Les députés peuvent renverser le gouvernement en adoptant une motion de censure. Elle doit être signée par au moins un dixième des députés (58). Le vote a lieu au plus tôt 48 heures après son dépôt. Seuls les votes favorables sont comptés : il faut la majorité absolue des membres de l'Assemblée, soit 289 voix sur 577. Si elle est adoptée, le Premier ministre remet la démission du gouvernement au président de la République. Un député ne peut signer que trois motions par session ordinaire et une par session extraordinaire, hors cas du 49.3.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, articles 49 et 50</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>La navette parlementaire</h4>
+            <p>Pour devenir une loi, un texte doit être adopté dans les mêmes termes par l'Assemblée nationale et par le Sénat. Il passe donc de l'une à l'autre : c'est la navette. Chaque passage dans une assemblée est une lecture. Si le désaccord persiste après deux lectures dans chaque assemblée (une seule si le gouvernement a engagé la procédure accélérée), une commission mixte paritaire peut être réunie.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 45</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>Loi organique et loi ordinaire</h4>
+            <p>Une loi ordinaire s'applique aux domaines énumérés par l'article 34 de la Constitution. Une loi organique précise le fonctionnement des pouvoirs publics, dans les cas prévus par la Constitution (par exemple les lois de finances). Elle suit une procédure plus stricte : un délai de quinze jours avant le débat dans la première assemblée, un dernier mot de l'Assemblée nationale qui exige la majorité absolue de ses membres, et un contrôle obligatoire du Conseil constitutionnel avant sa promulgation.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, articles 34, 46 et 61</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>Le vote solennel</h4>
+            <p>À l'Assemblée nationale, le vote solennel est un scrutin public sur l'ensemble d'un texte important. Sa date est fixée à l'avance par la Conférence des présidents, qui réunit le président de l'Assemblée et les responsables des groupes. Le vote de chaque député est publié. Il se distingue des votes sur un amendement ou sur un article, qui ont lieu au fil du débat.</p>
+            <p class="cp-source">Texte : <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> (règlement de l'Assemblée nationale)</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>La commission mixte paritaire (CMP)</h4>
+            <p>Elle réunit 7 députés et 7 sénateurs. Le Premier ministre peut la convoquer quand les deux assemblées ne s'accordent pas sur un texte (pour une proposition de loi, ce sont les présidents des deux assemblées, ensemble). Elle propose un texte commun, soumis ensuite à chaque assemblée ; aucun amendement n'est recevable sans l'accord du gouvernement. Si elle échoue, le gouvernement peut, après une nouvelle lecture, demander à l'Assemblée nationale de décider en dernier mot.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 45</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>Réserve électorale et silence électoral</h4>
+            <p>Plusieurs règles encadrent la période qui précède un scrutin. Dans les six mois qui précèdent le mois d'une élection générale, une collectivité ne peut pas organiser de campagne de promotion publicitaire de ses réalisations ou de sa gestion. De la veille à 0 h jusqu'à la fermeture des bureaux de vote, toute propagande électorale est interdite. La veille et le jour du scrutin, la publication de sondages est aussi interdite : le site masque alors ses pages de sondages.</p>
+            <p class="cp-source">Texte : <a href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070239" target="_blank" rel="noopener">code électoral</a>, articles L49 et L52-1 ; loi du 19 juillet 1977, article 11</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>Les parrainages</h4>
+            <p>Pour être candidat à l'élection présidentielle, il faut recueillir 500 présentations d'élus (maires, parlementaires, conseillers départementaux ou régionaux, etc.). Elles doivent venir d'au moins 30 départements ou collectivités d'outre-mer, sans que plus d'un dixième des parrains soient élus d'un même département ou d'une même collectivité. Un élu ne peut parrainer qu'un seul candidat. Le Conseil constitutionnel vérifie les présentations, publie les noms des parrains et arrête la liste officielle des candidats.</p>
+            <p class="cp-source">Texte : Loi organique n° 62-1292 du 6 novembre 1962, article 3 ; <a href="https://www.conseil-constitutionnel.fr/" target="_blank" rel="noopener">conseil-constitutionnel.fr</a></p>
+          </div>
+          <div class="cp-fiche">
+            <h4>Le quinquennat</h4>
+            <p>Depuis la révision constitutionnelle de 2000, approuvée par référendum le 24 septembre 2000, le président de la République est élu pour cinq ans, et non plus pour sept ans (septennat). Jacques Chirac, élu en 2002, est le premier président élu pour un quinquennat. Depuis la révision de 2008, nul ne peut exercer plus de deux mandats consécutifs.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 6</p>
+          </div>
+          <div class="cp-fiche">
+            <h4>La dissolution</h4>
+            <p>Le président de la République peut prononcer la dissolution de l'Assemblée nationale, après avoir consulté le Premier ministre et les présidents des deux assemblées. Les élections législatives ont lieu 20 jours au moins et 40 jours au plus après la dissolution. Il ne peut pas y avoir de nouvelle dissolution dans l'année qui suit ces élections. Le Sénat ne peut pas être dissous. La XVIIᵉ législature est issue de la dissolution du 9 juin 2024.</p>
+            <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 12</p>
+          </div>
+      </div>
+      <p class="cp-source">Seules les règles en vigueur sont décrites, sans avis. Une erreur ? Utilisez le bloc « Corriger une erreur » en bas de page.</p>
+    </article>
+
     <article class="cp-bloc" id="cp-lexique">
       <h3><span class="cp-num">A-Z</span>Lexique</h3>
       <label class="filtre-champ lex-champ"><span class="filtre-label">Chercher un mot</span>
         <input type="search" id="lex-recherche" placeholder="Navette, quorum, 49.3…" autocomplete="off" /></label>
       <p class="loi-count" id="lex-compte" aria-live="polite"></p>
-      <dl class="lex-liste" id="lex-liste"></dl>
+      <dl class="lex-liste" id="lex-liste" tabindex="0"></dl>
       <p class="cp-source">Définitions d'après les sites officiels : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a> · <a href="https://www.service-public.fr/" target="_blank" rel="noopener">service-public.fr</a></p>
     </article>
   </section>
@@ -2686,7 +2821,7 @@
       <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820. <a href="https://github.com" target="_blank" rel="noopener">github.com</a></p>
 
       <h3>Indépendance</h3>
-      <p>Ce site n'est lié à aucun parti, candidat, groupe parlementaire, média ou administration. Il n'est ni financé ni relu par l'Assemblée nationale, l'Insee ou les instituts de sondage, dont il réutilise les données publiques. Il ne contient aucune publicité.</p>
+      <p>Ce site n'est lié à aucun parti, candidat, groupe parlementaire, média ou administration. Il n'est ni financé ni relu par l'Assemblée nationale, l'Insee ou les instituts de sondage, dont il réutilise les données publiques. Il ne contient aucune publicité. L'engagement de neutralité et le droit de réponse sont détaillés dans la page <a href="#methode" data-tab-lien="methode">Méthode</a>.</p>
 
       <h3>Sources et réutilisation des données</h3>
       <ul>
@@ -2722,13 +2857,13 @@
 
       <h3>Justice et présomption d'innocence</h3>
       <p>La rubrique Justice ne mentionne que des décisions effectivement rendues par une juridiction, avec leur statut. Tant qu'une condamnation n'est pas définitive (appel ou pourvoi en cassation en cours), la personne concernée reste présumée innocente, conformément à l'article 9-1 du Code civil ; ces décisions sont signalées comme telles. Aucune plainte, enquête ou mise en examen n'y figure.</p>
-      <p>Toute personne nommée sur ce site peut demander la correction d'une information ou exercer son droit de réponse (article 6, IV de la LCEN) en <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=reponse.yml" target="_blank" rel="noopener">ouvrant un ticket</a>. Les demandes sont traitées dans les délais prévus par la loi.</p>
+      <p>Toute personne nommée sur ce site peut demander la correction d'une information ou exercer son droit de réponse (article 6, IV de la LCEN) par message privé sur <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">Instagram</a> (à préférer si la demande vous concerne personnellement) ou en <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=reponse.yml" target="_blank" rel="noopener">ouvrant un ticket</a> (les tickets GitHub sont publics). Les demandes sont traitées dans les délais prévus par la loi.</p>
 
       <h3>Données personnelles et cookies</h3>
       <ul>
         <li id="mention-sans-compte">Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
         <li id="mention-avec-compte" hidden>Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité. La création d'un compte est facultative : tout le site fonctionne sans (voir « Compte et données personnelles » plus bas).</li>
-        <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
+        <li>Le site suit la préférence d'affichage de votre appareil (clair ou sombre). Si vous changez de mode avec le bouton, ce choix est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
         <li>Si vous activez les alertes, vos choix (et le député suivi) sont gardés sur votre appareil ; votre téléphone vérifie lui-même quelques fois par jour le fichier public des nouveautés du site. Aucun compte, aucune adresse, aucun identifiant de notification n'est transmis ni conservé par le site. Pour les arrêter : « Recevoir les alertes » → « Désactiver », ou les réglages de notification du téléphone.</li>
         <li>La date de votre dernière visite est aussi gardée dans votre navigateur, pour vous signaler les nouveaux votes et sondages depuis. Elle n'est jamais transmise ; effacer les données du site dans votre navigateur la supprime.</li>
         <li>Les polices de caractères sont hébergées sur le site : votre navigateur ne contacte aucun service tiers.</li>
@@ -2802,7 +2937,14 @@
         <li>Les classements et pourcentages (participation, proximité entre groupes, quiz) sont calculés mécaniquement à partir des votes publics, avec la même règle pour tous les groupes.</li>
         <li>Les questions du quiz renvoient chacune à un scrutin réel, dont le titre officiel est rappelé et le vote consultable ; elles n'ajoutent ni explication de vote ni opinion.</li>
         <li>Les condamnations ne sont mentionnées que si elles ont été rendues par une juridiction, avec leur statut.</li>
-        <li>Une erreur ? <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signalez-la</a> ; le code est public.</li>
+        <li>Une erreur ? <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener" data-corriger>Signalez-la</a> ; le code est public.</li>
+      </ul>
+
+      <h3>Engagement de neutralité et droit de réponse</h3>
+      <ul>
+        <li><b>Neutralité.</b> Le site ne recommande aucun vote, ne qualifie aucune personne et n'emploie aucune formule d'appréciation. Les mêmes règles de calcul et de présentation s'appliquent à tous les groupes, partis et candidats.</li>
+        <li><b>Correction.</b> Une information fausse ou périmée est corrigée dès qu'une source officielle ou vérifiable le montre. L'historique de toutes les modifications est public sur GitHub.</li>
+        <li><b>Droit de réponse.</b> Toute personne citée peut demander une correction ou exercer son droit de réponse, selon la procédure décrite dans les <a href="#mentions" data-tab-lien="mentions">mentions légales</a> (article 6, IV de la loi du 21 juin 2004).</li>
       </ul>
     </div>
   </section>
@@ -2839,11 +2981,12 @@
     <a href="#mentions" data-tab-lien="mentions">Données personnelles</a> ·
     <span id="espace-pied" hidden><a href="#espace" data-tab-lien="espace">Mon espace</a> ·</span>
     <a href="https://www.instagram.com/hemicyclefrance/" target="_blank" rel="noopener">Instagram</a> ·
-    <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener">Signaler une erreur</a> ·
+    <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml" target="_blank" rel="noopener" data-corriger>Corriger une erreur</a> ·
     <a href="feed.xml">Flux RSS des votes</a> ·
     <button type="button" class="lien-bouton bouton-partage" data-partage="site">Partager le site</button> ·
     <button type="button" class="lien-bouton" data-alertes="">Recevoir les alertes</button>
   </p>
+  <div class="corriger-pied" id="corriger-pied"></div>
   <p class="note-officiel" id="note-officiel" hidden>Contenu officiel en français : titres de scrutins, de lois et d'articles de presse, noms propres et intitulés d'amendements ne sont pas traduits.</p>
   <p class="note-officiel" id="note-traduction" hidden>Traduction en préparation : cette langue n'est pas encore disponible, le site s'affiche en français.</p>
   <details class="footer-plie"><summary>Sources, règle du jeu, fraîcheur des données</summary>
@@ -3421,8 +3564,8 @@ function renderLexique(){
   let lettre = "", html = "";
   for(const g of liste){
     const l = /^\d/.test(g[1]) ? "0-9" : norm(g[1]).charAt(0).toUpperCase();
-    if(l !== lettre){ lettre = l; html += `<div class="lex-lettre" aria-hidden="true">${l}</div>`; }
-    html += `<div class="lex-item" id="lex-${g[0]}"><dt>${esc(g[1])}</dt><dd>${esc(g[2])}</dd></div>`;
+    const debut = l !== lettre; lettre = l;
+    html += `<div class="lex-item${debut ? " lex-debut" : ""}"${debut ? ` data-lettre="${l}"` : ""} id="lex-${g[0]}"><dt>${esc(g[1])}</dt><dd>${esc(g[2])}</dd></div>`;
   }
   document.getElementById("lex-liste").innerHTML = html || `<p class="histo-date">Aucun mot ne correspond. Essayez une partie du mot.</p>`;
   document.getElementById("lex-compte").textContent = mots.length ? `${liste.length} mot${liste.length > 1 ? "s" : ""} sur ${tous.length}` : `${tous.length} mots`;
@@ -4285,7 +4428,7 @@ function renderSourceBar(){
   const bar = document.getElementById("source-bar");
   bar.innerHTML = INSTITUTS.map(inst=>`
     <button type="button" class="source-chip ${selectedInstitut===inst.id?'selected':''}" data-id="${inst.id}" aria-pressed="${selectedInstitut===inst.id}">
-      ${esc(inst.nom)} <span style="opacity:.75;font-weight:400">${esc(inst.date)}</span>
+      ${esc(inst.nom)} <span class="chip-date">${esc(inst.date)}</span>
     </button>
   `).join("");
   bar.querySelectorAll(".source-chip").forEach(chip=>{
@@ -4401,7 +4544,7 @@ function renderSecondTour(){
         ${d.instituts.map(i=>`<div class="duel-ligne">
           <a class="inst" href="${lien(i.url)}" target="_blank" rel="noopener" title="${esc(i.nom)}, ${esc(i.date)}, ${formatNombre(i.echantillon)} personnes">${esc(i.nom)} · ${esc(i.date)}</a>
           <div class="duel-barre" role="img" aria-label="${esc(a)} ${nombreFr(i.scores[a])} %, ${esc(b)} ${nombreFr(i.scores[b])} %">
-            <span style="width:${i.scores[a]}%; background:${couleur(a)}; color:${texteSurCouleur(couleur(a))}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${couleur(b)}; color:${texteSurCouleur(couleur(b))}">${nombreFr(i.scores[b])} %</span>
+            <span style="width:${i.scores[a]}%; background:${fondLisible(couleur(a))}; color:${texteSurCouleur(fondLisible(couleur(a)))}">${nombreFr(i.scores[a])} %</span><span style="width:${i.scores[b]}%; background:${fondLisible(couleur(b))}; color:${texteSurCouleur(fondLisible(couleur(b)))}">${nombreFr(i.scores[b])} %</span>
           </div></div>`).join("")}
       </div>`;
     }).join("")}`;
@@ -4422,7 +4565,7 @@ function renderProbabilites(){
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="probabilites" data-id="">Story</button></div>
     <p class="probas-sub">Estimation recalculée à chaque mise à jour à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
     <table class="probas-table">
-      <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
+      <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"><span class="sr-only">Répartition</span></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
       <tbody>${liste.map(c=>`<tr>
         <td>${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</td>
         <td>${nombreFr(c.intention)} %</td>
@@ -4467,7 +4610,19 @@ function texteSurCouleur(hex){
   const m = /^#?([0-9a-f]{6})$/i.exec(String(hex||"")); if(!m) return "#fff";
   const v = [0,2,4].map(i=>{ const c = parseInt(m[1].slice(i,i+2),16)/255; return c<=.03928 ? c/12.92 : Math.pow((c+.055)/1.055,2.4); });
   const l = .2126*v[0] + .7152*v[1] + .0722*v[2];
-  return 1.05/(l+.05) >= 4.5 ? "#fff" : "#1A1A1A";
+  return 1.05/(l+.05) >= (l+.05)/.0603 ? "#fff" : "#1A1A1A"; // le texte, blanc ou encre, qui contraste le plus
+}
+// Fond de barre : la couleur du parti, assombrie juste assez pour que le texte posé dessus atteigne 4,5:1 (WCAG AA)
+function fondLisible(hex){
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex||"")); if(!m) return hex;
+  let c = [0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16));
+  const lum = c => { const v = c.map(x=>{ x /= 255; return x<=.03928 ? x/12.92 : Math.pow((x+.055)/1.055,2.4); }); return .2126*v[0]+.7152*v[1]+.0722*v[2]; };
+  for(let i = 0; i < 12; i++){
+    const l = lum(c), meilleur = Math.max(1.05/(l+.05), (l+.05)/.0603);
+    if(meilleur >= 4.5) break;
+    c = c.map(x=>Math.round(x*.92));
+  }
+  return "#" + c.map(x=>x.toString(16).padStart(2,"0")).join("");
 }
 const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
@@ -4806,7 +4961,7 @@ function renderAccueilActualites(){
   const dossiers = dossiersActu().slice(0, 2);
   const top = sujetsHorsDossiers((ACTUALITES?.sujets || []).filter(s=>s.medias >= 2)).slice(0, dossiers.length ? 3 : 5); // 3 sur bureau, 5 sur téléphone (liste dense)
   if(!top.length && !dossiers.length){ bloc.hidden = true; return; }
-  bloc.innerHTML = `<div class="actu-accueil-tete"><h3>Les sujets du moment</h3><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
+  bloc.innerHTML = `<div class="actu-accueil-tete"><h2>Les sujets du moment</h2><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
     <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-partage solo-mobile" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
     dossiers.map(d=> dossierHTML(d, 5)).join("") +
     top.map((s, i)=> sujetHTML(s, true, i === 0 && !dossiers.length, i >= 3)).join("") +
@@ -5026,6 +5181,41 @@ function sondagesCandidat(nom){
   return { min: Math.min(...r.map(x=>x[0])), max: Math.max(...r.map(x=>x[1])), n: r.length };
 }
 
+// Comparateur de deux candidats : uniquement des faits déjà présents dans les données (parti, âge, fonctions, annonce, sondages, source)
+let comparaisonCandidats = ["", ""];
+function renderComparateurCandidats(){
+  const corps = document.getElementById("candidats-comparer-corps");
+  if(!corps || !CANDIDATURES.length) return;
+  const noms = CANDIDATURES.map(c=>c.nom).sort((a,b)=> a.localeCompare(b, "fr"));
+  const options = choisi => `<option value="">Choisir un candidat…</option>` + noms.map(n=>`<option value="${esc(n)}"${n === choisi ? " selected" : ""}>${esc(n)}</option>`).join("");
+  const [a, b] = comparaisonCandidats.map(n => CANDIDATURES.find(c=>c.nom === n));
+  const sondage = c => { const s = sondagesCandidat(c.nom); return s ? `${s.min === s.max ? `${nombreFr(s.min)} %` : `de ${nombreFr(s.min)} à ${nombreFr(s.max)} %`} (${s.n} institut${s.n > 1 ? "s" : ""})` : "Absent des sondages relevés"; };
+  const domaine = c => (String(c.source).match(/^https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "source";
+  const lignes = [
+    ["Parti", c => esc(c.parti || "Non précisé")],
+    ["Âge au premier tour", c => c.age ? `${c.age} ans` : "Non précisé"],
+    ["Fonctions", c => esc((c.fonctions || []).slice(0, 2).join(" · ") || "Non précisées")],
+    ["Candidature annoncée", c => c.annonce ? esc(dateCourte(c.annonce) || c.annonce) : "Date non précisée"],
+    ["Participe à une primaire", c => c.primaire ? "Oui" : "Non"],
+    ["Intentions de vote (premier tour)", sondage],
+    ["Source de l'annonce", c => `<a href="${lien(c.source)}" target="_blank" rel="noopener">${esc(domaine(c))}</a>`],
+  ];
+  corps.innerHTML = `<div class="comparateur-candidats-choix">
+      <label>Premier candidat<select id="candidat-comparer-a">${options(comparaisonCandidats[0])}</select></label>
+      <label>Second candidat<select id="candidat-comparer-b">${options(comparaisonCandidats[1])}</select></label>
+    </div>` + (a && b && a !== b
+      ? `<div class="table-scroll"><table class="comparateur-table">
+        <caption class="sr-only">Comparaison de deux candidats</caption>
+        <thead><tr><td></td><th scope="col">${esc(a.nom)}</th><th scope="col">${esc(b.nom)}</th></tr></thead>
+        <tbody>${lignes.map(([nom, f])=>`<tr><th scope="row">${nom}</th><td>${f(a)}</td><td>${f(b)}</td></tr>`).join("")}</tbody>
+      </table></div>
+      <p class="cp-source">Seulement des faits issus des données de cette page, présentés dans le même ordre pour les deux candidats.</p>`
+      : `<p class="histo-date">Choisissez deux candidats différents pour voir leurs informations côte à côte.</p>`);
+  const maj = () => { comparaisonCandidats = [document.getElementById("candidat-comparer-a").value, document.getElementById("candidat-comparer-b").value]; renderComparateurCandidats(); };
+  document.getElementById("candidat-comparer-a").addEventListener("change", maj);
+  document.getElementById("candidat-comparer-b").addEventListener("change", maj);
+}
+
 function renderCandidats(){
   const liste = document.getElementById("candidats-liste");
   if(!CANDIDATURES.length){ liste.innerHTML = `<p class="no-result-msg">La liste des candidatures n'est pas disponible pour l'instant. Réessayez un peu plus tard.</p>`; return; }
@@ -5059,6 +5249,7 @@ function renderCandidats(){
       </div>
     </div>`;
   }).join("");
+  renderComparateurCandidats();
 }
 
 /* ---------- Méthode : dates d'actualisation lues dans les fichiers de données ---------- */
@@ -7141,6 +7332,89 @@ function majMenusHaut(tabId){
   }));
 }
 
+/* ---------- Confiance : source et ancienneté de chaque page, bloc « Corriger une erreur » ---------- */
+// Dates de mise à jour lues dans chaque fichier de données au moment où il est chargé (lireJSON), sans requête supplémentaire
+const MAJ_FICHIERS = {};
+// Page → [source citée, fichiers dont la date de mise à jour sert de repère]
+const SOURCES_VUES = {
+  scrutin:["Assemblée nationale (open data)", ["data/lois.json"]],
+  histo:["Assemblée nationale (open data)", ["data/lois.json"]],
+  deputes:["Assemblée nationale (open data)", ["data/deputes.json", "data/lois.json"]],
+  senat:["Sénat (scrutins publics)", ["data/senat.json"]],
+  dirigeants:["Wikipédia et sites officiels", ["data/dirigeants.json", "data/gouvernement.json"]],
+  chiffres:["Insee", ["data/indicateurs.json"]],
+  budget:["Eurostat", ["data/budget.json"]],
+  actualites:["Flux publics des médias", ["data/actualites.json"]],
+  journal:["Flux publics des médias", ["data/actualites.json"]],
+  meetings:["Sites officiels des partis et de l'Assemblée", ["data/meetings.json", "data/agenda-an.json"]],
+  justice:["Juridictions et presse", ["data/justice.json"]],
+  sondages:["Instituts de sondage, relevés sur Wikipédia", ["data/sondages.json"]],
+  candidats:["Wikipédia", ["data/candidats.json"]],
+  presidents:["Élysée et Wikipédia", ["data/presidents.json"]],
+  quiz:["Assemblée nationale (open data)", ["data/lois.json"]],
+};
+function noterMaj(url, d){
+  const iso = d && (d.lastUpdated || d.verifieLe);
+  if(!iso || isNaN(Date.parse(iso)) || MAJ_FICHIERS[url] === iso) return;
+  MAJ_FICHIERS[url] = iso;
+  if(!noterMaj.attente) noterMaj.attente = requestAnimationFrame(()=>{ noterMaj.attente = 0; majSourceVue(); });
+}
+function ilYaCourt(iso){
+  const min = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 6e4));
+  if(min < 1) return "à l'instant";
+  if(min < 60) return `il y a ${min} min`;
+  if(min < 24 * 60) return `il y a ${Math.round(min / 60)} h`;
+  const j = Math.round(min / (24 * 60));
+  return j > 1 ? `il y a ${j} jours` : "il y a 1 jour";
+}
+// « Source : Eurostat · mis à jour il y a 3 h · Méthode » sous le titre de la page affichée
+function majSourceVue(){
+  const id = document.body.dataset.page, def = SOURCES_VUES[id];
+  const tete = document.querySelector("#view-" + id + " .rubrique-tete");
+  if(!def || !tete) return;
+  let p = tete.querySelector(".source-maj");
+  if(!p){
+    p = document.createElement("p"); p.className = "source-maj";
+    tete.insertBefore(p, sousNav.parentNode === tete ? sousNav : null);
+  }
+  const dates = def[1].map(f => MAJ_FICHIERS[f]).filter(Boolean).sort(), iso = dates[dates.length - 1];
+  p.innerHTML = `Source : <b>${esc(def[0])}</b>${iso ? ` · mis à jour <time datetime="${esc(iso)}" title="${esc(dateCourte(iso) || "")}">${ilYaCourt(iso)}</time>` : ""} · <a href="#methode">Méthode</a>`;
+  p.querySelector("a").addEventListener("click", ev=>{ ev.preventDefault(); activateTab("methode"); });
+}
+/* i18n-ignorer : lien et modèle du ticket GitHub (le dépôt est en français) */
+const URL_TICKET = "https://github.com/Tahns/hemicycle-france/issues/new";
+function urlCorriger(){
+  const nom = PAGES_NOMS[document.body.dataset.page] || "Accueil";
+  const q = new URLSearchParams({ template:"erreur.yml", title:"Erreur sur la page « " + nom + " »", page:location.href,
+    erreur:"Sur la page « " + nom + " », cette information est fausse ou périmée :\n\nElle devrait être :\n" });
+  return URL_TICKET + "?" + q;
+}
+/* i18n-fin-ignorer */
+function blocCorriger(niveau){
+  const balise = niveau === 2 ? "div" : "aside"; // un seul repère « aside » par page : celui de la rubrique affichée
+  return `<${balise} class="corriger"${niveau === 2 ? "" : ' aria-label="Corriger une erreur"'}>
+    <h${niveau} class="corriger-titre">Corriger une erreur</h${niveau}>
+    <p>Une information vous paraît fausse ou périmée ? Dites-le : une correction appuyée sur une source officielle est publiée. Les tickets GitHub sont publics ; pour une demande qui vous concerne personnellement, préférez le message privé.</p>
+    <div class="corriger-liens">
+      <a href="https://ig.me/m/hemicyclefrance" target="_blank" rel="noopener">Message privé sur Instagram (@hemicyclefrance)</a>
+      <a href="${URL_TICKET}?template=erreur.yml" target="_blank" rel="noopener" data-corriger>Ouvrir un ticket GitHub pré-rempli</a>
+      <a href="#methode" data-tab-lien="methode">Neutralité et droit de réponse</a>
+    </div>
+  </${balise}>`;
+}
+function ajouterCorriger(view){
+  if(!view || view.querySelector(".corriger") || ["view-accueil", "view-espace"].includes(view.id)) return;
+  view.insertAdjacentHTML("beforeend", blocCorriger(3));
+  view.querySelector(".corriger a[data-tab-lien]").addEventListener("click", ev=>{ ev.preventDefault(); activateTab("methode"); });
+}
+// Le lien du ticket est mis à jour au survol, au focus et au toucher : il porte toujours l'adresse de la page affichée
+["pointerover", "pointerdown", "focusin"].forEach(t => document.addEventListener(t, e=>{
+  const a = e.target.closest && e.target.closest("a[data-corriger]");
+  if(a) a.href = urlCorriger();
+}));
+document.getElementById("corriger-pied").innerHTML = blocCorriger(2);
+document.querySelector("#corriger-pied a[data-tab-lien]").addEventListener("click", ev=>{ ev.preventDefault(); activateTab("methode"); });
+
 /* Rendus faits une fois : « unefois(cle, fn, ttl) » n'appelle fn que si elle n'a pas déjà été appelée
    (ou depuis plus de ttl ms). Un échec libère la clé ; un changement de langue vide tout. */
 const RENDUS = new Map();
@@ -7223,6 +7497,8 @@ function activateTab(tabId){
   majSousNav(tabId);
   majMenusHaut(tabId);
   majBoutonRubrique(tabId);
+  ajouterCorriger(viewEl);
+  majSourceVue();
   menusHaut.forEach(m => m.fermer());
   const nomPage = PAGES_NOMS[tabId];
   document.title = tabId === "accueil" || !nomPage ? "Hémicycle France · La politique française, preuves à l\'appui" : nomPage + " · Hémicycle France";
@@ -7268,6 +7544,15 @@ document.addEventListener("keydown", (e)=>{
   };
   btn.addEventListener("click", basculer);
   btnMobile.addEventListener("click", basculer);
+  // Tant que le visiteur n'a rien choisi, le thème suit le système en direct
+  try{
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e=>{
+      let choix = null; try{ choix = localStorage.getItem("theme"); }catch(x){}
+      if(choix === "sombre" || choix === "clair") return;
+      if(e.matches) document.documentElement.dataset.theme = "sombre"; else delete document.documentElement.dataset.theme;
+      maj();
+    });
+  }catch(e){}
   maj();
 })();
 
@@ -7728,7 +8013,9 @@ async function lireJSON(url){
     // « no-cache » : le navigateur revérifie toujours auprès du serveur (données mises à jour toutes les 15 minutes)
     const res = await fetch(url, { cache: "no-cache" });
     if(!res.ok){ console.warn(`Impossible de charger ${url}`, res.status); return null; }
-    return await res.json();
+    const donnees = await res.json();
+    noterMaj(url, donnees);
+    return donnees;
   } catch(e){
     console.warn(`Chargement de ${url} impossible (ouverture sans serveur ?)`, e);
     return null;
@@ -7801,7 +8088,7 @@ async function loadExternalData(){
   let loisJson = null;
   try { loisJson = await chargerLoisWorker(); }
   catch(e){ console.warn("Worker indisponible, chargement classique des scrutins", e); loisJson = await lireJSON("data/lois.json"); if(loisJson?.lois) loisJson.lois = loisJson.lois.map(completerLoi); }
-  if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; }
+  if(loisJson?.lois?.length){ LOIS = loisJson.lois; LOIS_MAJ = loisJson.lastUpdated; noterMaj("data/lois.json", loisJson); }
   else {
     // Fichier absent ou illisible : seul le dernier scrutin intégré à la page reste affiché. On le dit clairement.
     const a = document.getElementById("alerte-donnees");
