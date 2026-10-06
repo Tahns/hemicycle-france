@@ -46,7 +46,7 @@ const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "inst
 const FICHIER_REGISTRE = process.env.PUBLIER_REGISTRE || path.join(RACINE, "data", "instagram-publiees.json");
 const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "stories-config.json");
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.instagram.com/v21.0").replace(/\/+$/, "");
-const MAX_PAR_JOUR_DEFAUT = 4; // stories par jour (hors stories d'annonce de post) ; réglable par data/stories-config.json (« maxParJour », 1 à 8)
+const MAX_PAR_JOUR_DEFAUT = 4; // stories par jour (hors stories d'annonce de post) ; réglable par data/stories-config.json (« maxParJour », 1 à 99 ; 99 = pas de plafond)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
 const ESPACEMENT_ANNONCE_MIN = 5; // une story d'annonce sort au plus tôt 5 min après son post (seule exception à l'espacement de 60 min)
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
@@ -157,7 +157,7 @@ function choisir({ file, registre, config, now = new Date() }) {
   const reelsJour = publieesJour.filter(estReel).length;
   const maxReels = Number.isInteger(config.videosMax) ? config.videosMax : MAX_REELS_PAR_JOUR_DEFAUT;
   const storiesJour = publieesJour.filter((e) => !estPost(e) && !estReel(e) && !e.annonceDe).length; // les stories d'annonce n'entrent pas dans le plafond des stories
-  const MAX_PAR_JOUR = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 8 ? config.maxParJour : MAX_PAR_JOUR_DEFAUT;
+  const MAX_PAR_JOUR = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 99 ? config.maxParJour : MAX_PAR_JOUR_DEFAUT;
   const sousPlafond = (e) => (estAnnonce(e) ? true : estReel(e) ? reelsJour < maxReels : estPost(e) ? postsJour < MAX_POSTS_PAR_JOUR : storiesJour < MAX_PAR_JOUR);
   if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_PAR_JOUR} et ${MAX_POSTS_PAR_JOUR})`);
   let ok = candidates.filter(sousPlafond);
