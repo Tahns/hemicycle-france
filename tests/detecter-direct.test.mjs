@@ -1,6 +1,6 @@
 // Tests de scripts/detecter-direct.js sur fixtures (titres fictifs). USAGE : node tests/detecter-direct.test.mjs
 import assert from "assert";
-import { detecter, detecterPresident, typeParole, annonceHoraire } from "../scripts/detecter-direct.js";
+import { detecter, detecterSeanceAN, detecterPresident, typeParole, annonceHoraire } from "../scripts/detecter-direct.js";
 import { evaluer } from "../scripts/garde.js";
 
 const now = new Date("2026-10-02T14:00:00Z");
@@ -42,15 +42,17 @@ assert.equal(annonceHoraire("Macron prend la parole"), null);
 // Séance de l'Assemblée : jour de séance = aujourd'hui (heure de Paris), lien vers le direct officiel
 const agenda = { lastUpdated: il_y_a(2), sourceUrl: "https://www2.assemblee-nationale.fr/agendas/les-agendas", jours: [{ date: "2026-10-02", points: [{ type: "texte", objet: "Proposition de loi fictive" }] }, { date: "2026-10-05", points: [{ type: "texte", objet: "Autre texte" }] }] };
 {
-  const d = detecter({ sujets: [] }, agenda, now);
+  // La séance n'est plus affichée dans le bandeau
+  assert.equal(detecter({ sujets: [] }, agenda, now).evenements.length, 0);
+  const d = { evenements: detecterSeanceAN(agenda, now) };
   assert.equal(d.evenements.length, 1);
   assert.equal(d.evenements[0].type, "seance-an");
   assert.equal(d.evenements[0].chaines[0].url, "https://videos.assemblee-nationale.fr/");
   assert.ok(new Date(d.evenements[0].expire) > now && new Date(d.evenements[0].expire) - now <= 24 * 36e5);
 }
 // Pas de séance aujourd'hui, ou agenda trop ancien : rien
-assert.equal(detecter({ sujets: [] }, agenda, new Date("2026-10-03T10:00:00Z")).evenements.length, 0);
-assert.equal(detecter({ sujets: [] }, { ...agenda, lastUpdated: il_y_a(80) }, now).evenements.length, 0);
+assert.equal(detecterSeanceAN(agenda, new Date("2026-10-03T10:00:00Z")).length, 0);
+assert.equal(detecterSeanceAN({ ...agenda, lastUpdated: il_y_a(80) }, now).length, 0);
 // Rien du tout : liste vide, acceptée par le garde-fou (fichier d'événements ponctuels)
 {
   const vide = detecter({ sujets: [] }, { jours: [] }, now);

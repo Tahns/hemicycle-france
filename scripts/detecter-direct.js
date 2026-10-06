@@ -9,9 +9,7 @@
  *     de la République) à une prise de parole (allocution, s'exprime, prend la parole, conférence de
  *     presse, discours, interview). Une annonce (« ce soir à 20 h ») compte. Fenêtre : titre publié
  *     depuis moins de 6 h ; au-delà, l'événement disparaît du fichier.
- * (2) Séance publique à l'Assemblée nationale : le jour de séance de data/agenda-an.json est celui du
- *     jour (l'agenda ne donne pas les heures : on annonce « aujourd'hui », jamais « en cours »).
- * (3) Sénat : aucune donnée de séance n'est relevée par ce site, donc rien n'est affiché.
+ * Les séances de l'Assemblée nationale et du Sénat ne sont plus mises en avant (quasi quotidiennes).
  *
  * Résultat : data/direct.json
  *   { lastUpdated, evenements: [{ id, type, titre, quand, publie?, expire, source: {media, url}, chaines: [{nom, url}] }] }
@@ -112,8 +110,10 @@ export function detecterSeanceAN(agenda, now = new Date()) {
   }];
 }
 
+// La séance de l'Assemblée a lieu presque tous les jours : elle n'est plus mise en avant (seul le président l'est).
+// detecterSeanceAN reste exporté mais n'est plus branché ; l'agenda est conservé dans la signature par compatibilité.
 export function detecter(actualites, agenda, now = new Date()) {
-  return { lastUpdated: now.toISOString(), evenements: [...detecterPresident(actualites, now), ...detecterSeanceAN(agenda, now)] };
+  return { lastUpdated: now.toISOString(), evenements: detecterPresident(actualites, now) };
 }
 
 const lire = async (f) => JSON.parse(await readFile(path.resolve(f), "utf-8").catch(() => "null"));
