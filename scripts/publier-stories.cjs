@@ -9,8 +9,11 @@
  *
  * Garde-fous (tous obligatoires) :
  *  - UNE seule publication par exécution ;
- *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus 4 par jour (Paris) ; au moins 60 min entre deux stories ;
- *  - une entrée créée il y a plus de 3 h est marquée « perimee » et n'est jamais publiée ;
+ *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus 4 stories et 2 posts par jour (Paris) ; au moins 60 min entre deux publications ;
+ *  - POST (entrée { type: "post", legende }) : image de fil + légende (POST /media {image_url, caption}), légende contrôlée (2 200 caractères, 30 hashtags, jamais le lien du site) ;
+ *    STORY D'ANNONCE (entrée { annonceDe: id du post }) : publiée seulement APRÈS son post, au plus tôt 5 min après (seule exception aux 60 min), au plus tard 3 h après ;
+ *    elle ne compte pas dans les 4 stories par jour ;
+ *  - une story créée il y a plus de 3 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
  *  - jamais deux fois le même id (registre) ;
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
  *  - data/stories-config.json : validationHumaine à true => rien n'est publié ; monétisation => seules les entrées
@@ -37,7 +40,10 @@ const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "inst
 const FICHIER_REGISTRE = process.env.PUBLIER_REGISTRE || path.join(RACINE, "data", "instagram-publiees.json");
 const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "stories-config.json");
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.facebook.com/v21.0").replace(/\/+$/, "");
-const MAX_PAR_JOUR = 4;
+const MAX_PAR_JOUR = 4; // stories par jour (hors stories d'annonce de post)
+const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
+const ESPACEMENT_ANNONCE_MIN = 5; // une story d'annonce sort au plus tôt 5 min après son post (seule exception à l'espacement de 60 min)
+const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
 const ESPACEMENT_MIN = 60; // minutes minimum entre deux stories publiées (jamais d'enchaînement)
 const FRAICHEUR_H = 3;
 const ALERTE_JETON_JOURS = 10;
@@ -68,47 +74,94 @@ function alerte(ligne) {
 
 const lireJson = (f, defaut) => { try { return JSON.parse(fs.readFileSync(f, "utf-8")); } catch (e) { return defaut; } };
 
-/** Une entrée de presse (ni sondage, ni donnée propre) dont un titre contient un mot de la liste prudente. */
-function risque(e) {
-  if (e.sondageId || e.donneesPropres === true) return false;
-  const titres = e.bref === true ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titre || ""];
-  return titres.some((t) => motExclu(t));
+/** Légende d'un post : texte non vide, 2 200 caractères au plus, 30 hashtags au plus, le compte cité, jamais l'adresse du site. */
+function legendeValide(e) {
+  const l = e.legende;
+  if (typeof l !== "string" || l.length < 20 || l.length > 2200) return false;
+  if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 30) return false;
+  if (/github\.io|hemicycle-france|hémicycle-france\.|https?:\/\/(www\.)?hemicycle/i.test(l)) return false;
+  return l.includes("@hemicyclefrance");
 }
 
-/** Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer). */
+/** Une entrée dont le contenu est à risque : mot de la liste prudente (presse ou post), légende de post invalide. */
+function risque(e) {
+  if (e.sondageId) return false;
+  const post = e.type === "post" || Boolean(e.annonceDe);
+  if (e.type === "post" && !legendeValide(e)) return true;
+  if (e.donneesPropres === true && !post) return false;
+  const titres = e.bref === true ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titre || "", ...(post ? [e.titrePropre || ""] : [])];
+  return titres.some((t) => motExclu(t));
+}
+const estPost = (e) => e.type === "post";
+const estAnnonce = (e) => Boolean(e.annonceDe);
+
+/**
+ * Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer).
+ * Trois sortes d'entrées : story, post (fil, légende) et story d'annonce d'un post (champ annonceDe) ; voir l'en-tête du fichier.
+ */
 function choisir({ file, registre, config, now = new Date() }) {
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
   const perimees = [];
   const candidates = [];
-  for (const e of [...(file?.entrees || [])].sort((a, b) => String(a.cree).localeCompare(String(b.cree)))) {
-    if (!e || e.type !== "story" || !e.id || deja.has(e.id)) continue;
+  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post") && e.id && !deja.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
+  // 1. posts et stories : périmées après 3 h (story) ou 12 h (post)
+  for (const e of entreesFile.filter((x) => !estAnnonce(x))) {
     const t = Date.parse(e.cree);
-    if (isNaN(t) || now.getTime() - t > FRAICHEUR_H * 36e5) { perimees.push(e.id); continue; }
+    if (isNaN(t) || now.getTime() - t > (estPost(e) ? FRAICHEUR_POST_H : FRAICHEUR_H) * 36e5) { perimees.push(e.id); continue; }
     candidates.push(e);
   }
+  // 2. stories d'annonce : liées à la publication de leur post (au plus tôt 5 min après, au plus tard 3 h après) ; en attente tant que le post n'est pas sorti
+  let enAttente = 0;
+  for (const e of entreesFile.filter(estAnnonce)) {
+    const parent = deja.get(e.annonceDe);
+    if (parent?.statut === "perimee" || perimees.includes(e.annonceDe)) { perimees.push(e.id); continue; }
+    if (parent?.statut === "publiee" && parent.publieLe) {
+      const age = now.getTime() - Date.parse(parent.publieLe);
+      if (age > FRAICHEUR_H * 36e5) { perimees.push(e.id); continue; }
+      if (age < ESPACEMENT_ANNONCE_MIN * 60000) { enAttente++; continue; }
+      candidates.push(e);
+      continue;
+    }
+    const t = Date.parse(e.cree);
+    if (isNaN(t) || now.getTime() - t > (FRAICHEUR_POST_H + FRAICHEUR_H) * 36e5) perimees.push(e.id); else enAttente++; // post pas encore publié
+  }
+  // les annonces d'abord (leur fenêtre est courte), puis l'ordre de création
+  candidates.sort((a, b) => Number(estAnnonce(b)) - Number(estAnnonce(a)) || String(a.cree).localeCompare(String(b.cree)));
   const sortie = (refus) => ({ refus, perimees });
   if (config.validationHumaine) return sortie("validation humaine activée : rien n'est publié automatiquement");
   const h = heureParis(now);
   if (h >= 23 || h < 7) return sortie(`nuit (${h} h à Paris)`);
   const jour = jourParis(now);
-  const publieesJour = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe && jourParis(e.publieLe) === jour).length;
-  if (publieesJour >= MAX_PAR_JOUR) return sortie(`plafond atteint : ${publieesJour} publication(s) aujourd'hui (maximum ${MAX_PAR_JOUR})`);
-  const dernier = Math.max(0, ...[...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe).map((e) => Date.parse(e.publieLe)));
-  if (dernier && now.getTime() - dernier < ESPACEMENT_MIN * 60000) return sortie(`dernière publication il y a moins de ${ESPACEMENT_MIN} min`);
-  let ok = purgerReserve(candidates, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
+  const publieesJour = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe && jourParis(e.publieLe) === jour);
+  const postsJour = publieesJour.filter(estPost).length;
+  const storiesJour = publieesJour.filter((e) => !estPost(e) && !e.annonceDe).length; // les stories d'annonce n'entrent pas dans le plafond des stories
+  const sousPlafond = (e) => (estAnnonce(e) ? true : estPost(e) ? postsJour < MAX_POSTS_PAR_JOUR : storiesJour < MAX_PAR_JOUR);
+  if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_PAR_JOUR} et ${MAX_POSTS_PAR_JOUR})`);
+  let ok = candidates.filter(sousPlafond);
+  // Espacement : 60 min entre deux publications ; seule exception, la story d'annonce d'un post (≥ 5 min après CE post)
+  const publiees = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe);
+  const dernier = publiees.reduce((m, e) => (Date.parse(e.publieLe) > (m ? Date.parse(m.publieLe) : 0) ? e : m), null);
+  if (dernier && now.getTime() - Date.parse(dernier.publieLe) < ESPACEMENT_MIN * 60000) {
+    const ok2 = ok.filter((e) => estAnnonce(e) && e.annonceDe === dernier.id);
+    if (!ok2.length) return sortie(ok.length ? `dernière publication il y a moins de ${ESPACEMENT_MIN} min` : (enAttente ? `story d'annonce en attente (${ESPACEMENT_ANNONCE_MIN} min après son post)` : "rien à publier"));
+    ok = ok2;
+  }
+  if (!ok.length) return sortie(enAttente ? `story d'annonce en attente (${ESPACEMENT_ANNONCE_MIN} min après son post)` : "rien à publier");
+  const candidatesBrutes = ok.length;
+  ok = purgerReserve(ok, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
   if (config.monetisation) ok = purgerPresse(ok);
   const avant = ok.length;
-  const recentes = [...deja.values()].filter((d) => d.statut === "publiee" && d.publieLe && now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_H * 36e5);
+  const recentes = publiees.filter((d) => now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_H * 36e5);
   const dernieres = new Set(recentes.map((d) => d.id));
   // Titres déjà publiés : ceux du registre (conservés même quand l'entrée a quitté la file) et ceux de la file
   const titresPublies = [
     ...recentes.flatMap((d) => [d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
     ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraite = (e) => [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  const dejaTraite = (e) => !estAnnonce(e) && [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
   ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
-  if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente ou sujet déjà publié dans les dernières 24 h");
-  if (!ok.length) return sortie(candidates.length ? `${candidates.length} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
+  if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente, légende invalide ou sujet déjà publié dans les dernières 36 h");
+  if (!ok.length) return sortie(candidatesBrutes ? `${candidatesBrutes} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
   return { entree: ok[0], perimees };
 }
 
@@ -144,9 +197,10 @@ async function controlerJeton(now) {
   return { valide: true, expireLe: exp, jours };
 }
 
-/** Publie une story : conteneur STORIES, attente du statut FINISHED, puis media_publish. Renvoie l'identifiant du média. */
+/** Publie une story (conteneur STORIES) ou un post (image de fil + légende) : attente du statut FINISHED, puis media_publish. Renvoie l'identifiant du média. */
 async function publier(entree) {
-  const cree = await graph("POST", `/${IG_USER_ID}/media`, { media_type: "STORIES", image_url: entree.url_image });
+  const params = estPost(entree) ? { image_url: entree.url_image, caption: entree.legende } : { media_type: "STORIES", image_url: entree.url_image };
+  const cree = await graph("POST", `/${IG_USER_ID}/media`, params);
   const creation = cree.id;
   if (!creation) throw new Error("API : pas d'identifiant de conteneur");
   let statut = "";
@@ -185,20 +239,20 @@ async function main() {
 
   if (c.perimees.length) {
     log(`entrée(s) périmée(s) (plus de ${FRAICHEUR_H} h), jamais publiées : ${c.perimees.join(", ")}`);
-    if (!A_SEC) for (const id of c.perimees) registre.entrees.push({ id, statut: "perimee", publieLe: null, mediaId: null });
+    if (!A_SEC) for (const id of c.perimees) registre.entrees.push({ id, statut: "perimee", publieLe: null, mediaId: null, type: (file.entrees.find((x) => x.id === id) || {}).type || "story" });
   }
   const finir = () => { if (!A_SEC && c.perimees.length) ecrireRegistre(registre, now); };
   if (!c.entree) { log(`rien à publier : ${c.refus}`); finir(); return; }
   if (!jeton.valide) { log("jeton invalide : aucune publication."); finir(); return; }
   const e = c.entree;
   if (!(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : nouvel essai au prochain passage.`); finir(); return; }
-  if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en story.`); return; }
+  if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${estPost(e) ? "post" : "story"}.`); return; }
   finir(); // les périmées sont enregistrées même si la publication échoue
   try {
     const mediaId = await publier(e);
-    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
+    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : "story", ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
-    resume(`Story publiée : « ${e.titre} » (média ${mediaId}).`);
+    resume(`${estPost(e) ? "Post publié" : e.annonceDe ? "Story d'annonce publiée" : "Story publiée"} : « ${e.titre} » (média ${mediaId}).`);
   } catch (err) {
     alerte(`échec de publication de l'entrée ${e.id} : ${err.message}. Nouvel essai au prochain passage tant qu'elle n'est pas périmée.`);
   }

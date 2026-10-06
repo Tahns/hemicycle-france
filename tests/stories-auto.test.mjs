@@ -427,7 +427,9 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // Date à retenir : seulement une date À VENIR
   {
     const d = (iso) => ({ date: { iso, jour: Number(iso.slice(8)), mois: "octobre" } });
-    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-27"))), "date");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-27"))), "post-date", "date lointaine (> 3 jours) : un POST, plus une story");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-06"))), "post-date", "dans 4 jours : post");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-05"))), "date", "dans 3 jours : toujours une story");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-10-03"))), "date", "demain");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-10-02"))), "une", "aujourd'hui : pas à venir");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-09-20"))), "une", "passée");
@@ -435,7 +437,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   }
   // Un modèle spécial s'ajoute à l'entrée ; le dessin reçoit le modèle en 6e argument
   {
-    const s = sujet("Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 27 octobre", 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" } });
+    const s = sujet("Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 3 octobre", 3, { date: { iso: "2026-10-03", jour: 3, mois: "octobre" } });
     const d = AUTO.decrire(choix([s], { candidats }));
     assert.strictEqual(d.champs.modele, "date");
     assert.strictEqual(d.type, "date");
@@ -572,6 +574,185 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const flux = AUTO.fluxAtom([{ id: "c".repeat(12), cree: now.toISOString(), titre: "t", alt: "Texte <alt> & plus", url_image: "https://x/y.jpg" }], now);
     assert.match(flux, /<summary>Texte &lt;alt&gt; &amp; plus<\/summary>/);
   }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// POSTS : date lointaine et loi adoptée/rejetée, puis story d'annonce
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const TITRE_DATE = "Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 27 octobre";
+  const dateSujet = (extra = {}) => sujet(TITRE_DATE, 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" }, ...extra });
+  const post = (id, extra = {}) => ({ id, cree: il_y_a(2), titre: "t", type: "post", titrePropre: "Autre sujet", sources: [], ...extra });
+
+  // 1. Date lointaine : un POST (modèle « post-date »), avec légende, fiche de dessin et texte alternatif
+  {
+    const c = choix([dateSujet()]);
+    assert.strictEqual(c.modele, "post-date");
+    assert.strictEqual(c.id, idSujet(TITRE_DATE));
+    const d = AUTO.decrire(c, now);
+    assert.strictEqual(d.type, "post");
+    assert.strictEqual(d.post.fiche.spec.genre, "date");
+    assert.strictEqual(d.post.fiche.spec.compte, "25 jours");
+    assert.strictEqual(d.post.fiche.spec.semaine, "Mardi");
+    assert.strictEqual(d.champs.postGenre, "date");
+    assert.strictEqual(d.champs.dateIso, "2026-10-27");
+    assert.strictEqual(d.champs.titrePropre, "Loi casseurs-payeurs au Sénat");
+    assert.match(d.champs.legende, /Date à retenir : 27 octobre 2026/);
+    assert.match(d.champs.legende, /Date annoncée par la presse \(franceinfo, Le Monde, Le Figaro\)/);
+    assert.match(d.champs.legende, /@hemicyclefrance/);
+    assert.ok(!/github\.io|hemicycle-france|https?:\/\//.test(d.champs.legende), "pas de lien du site dans la légende");
+    assert.ok(d.champs.legende.length < 2200 && (d.champs.legende.match(/#/g) || []).length <= 5, "légende courte, hashtags sobres");
+    assert.match(d.champs.alt, /date à retenir/);
+    // à 3 jours ou moins : toujours une story « Date à retenir »
+    const proche = dateSujet({ date: { iso: "2026-10-05", jour: 5, mois: "octobre" } });
+    assert.strictEqual(choix([proche]).modele, "date");
+    assert.strictEqual(AUTO.decrire(choix([proche]), now).type, "date");
+  }
+  // 2. Plafonds distincts : 2 posts par jour ; les stories (4 par jour) et les annonces n'y comptent pas
+  {
+    const deuxPosts = { entrees: [post("1".repeat(12)), post("2".repeat(12))] };
+    assert.ok(choix([dateSujet()], { file: deuxPosts }).refus, "3e post du jour refusé");
+    assert.strictEqual(choix([dateSujet()], { file: { entrees: [post("1".repeat(12))] } }).modele, "post-date", "2e post du jour : possible");
+    assert.ok(!choix([dateSujet()], { file: { entrees: [post("1".repeat(12), { cree: il_y_a(30) }), post("2".repeat(12), { cree: il_y_a(31) })] } }).refus, "les posts d'hier ne comptent pas");
+    // 4 stories déjà faites : un post reste possible, une story non
+    const quatre = { entrees: [1, 2, 3, 4].map((i) => ({ id: `${i}`.repeat(12), cree: il_y_a(i / 2), titre: `t${i}`, type: "story", sources: [] })) };
+    assert.strictEqual(choix([dateSujet()], { file: quatre }).modele, "post-date", "plafond des stories atteint : le post passe");
+    assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3)], { file: quatre }).refus, "mais pas une story");
+    // posts et annonces ne comptent pas dans les 4 stories
+    const posts = { entrees: [post("1".repeat(12)), { id: "2".repeat(12), cree: il_y_a(2), titre: "Nouveau post", type: "story", annonceDe: "1".repeat(12), sources: [] }, ...[3, 4, 5].map((i) => ({ id: `${i}`.repeat(12), cree: il_y_a(i / 2), titre: `t${i}`, type: "story", sources: [] }))] };
+    assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3)], { file: posts }).refus, "3 stories + 1 post + 1 annonce : la 4e story passe");
+    // les posts du registre (file élaguée) comptent aussi
+    const registre = { entrees: [{ id: "a".repeat(12), statut: "publiee", publieLe: il_y_a(3), type: "post", titre: "x" }, { id: "b".repeat(12), statut: "publiee", publieLe: il_y_a(5), type: "post", titre: "y" }] };
+    assert.ok(choix([dateSujet()], { registre }).refus, "2 posts publiés aujourd'hui (registre) : plus de post");
+    assert.strictEqual(AUTO.nbPostsDuJour(deuxPosts.entrees, registre, now), 4);
+  }
+  // 3. Jamais de doublon : id, titre proche (36 h), même date + même sujet
+  {
+    const id = idSujet(TITRE_DATE);
+    assert.ok(choix([dateSujet()], { file: { entrees: [post(id)] } }).refus, "id déjà en file");
+    assert.ok(choix([dateSujet()], { registre: { entrees: [{ id, statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "x" }] } }).refus, "id déjà au registre");
+    assert.ok(choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(30), type: "post", titre: "Loi casseurs-payeurs au Sénat" }] } }).refus, "titre proche publié il y a 30 h");
+    assert.ok(!choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-30" }] } }).refus, "plus de 36 h et autre date : possible");
+    assert.ok(choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-27" }] } }).refus, "même date et même sujet, quel que soit le délai");
+    assert.ok(choix([dateSujet()], { file: { entrees: [post("d".repeat(12), { cree: il_y_a(40), titrePropre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-27" })] } }).refus, "même date et même sujet en file");
+  }
+  // 4. Nuit, réserve électorale, mots à risque : jamais de post
+  {
+    assert.ok(AUTO.choisirSujet({ actualites: actu(dateSujet()), direct: null, file: vide, now: new Date("2026-10-02T22:00:00Z") }).refus, "nuit (0 h à Paris)");
+    const risque = sujet("Le procès du projet de loi casseurs-payeurs sera examiné au Sénat le 27 octobre", 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" } });
+    assert.ok(choix([risque]).refus, "mot à risque : rien");
+    const nuitReserve = new Date("2027-04-17T10:00:00Z");
+    const sond = sujet("Sondage : le projet de loi casseurs-payeurs sera examiné au Sénat le 27 avril", 3, { date: { iso: "2027-04-27", jour: 27, mois: "avril" }, derniere: new Date(nuitReserve.getTime() - 36e5).toISOString(), titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" } });
+    sond.articles.forEach((a, i) => { a.date = sond.derniere; a.url += "/r" + i; });
+    assert.ok(AUTO.choisirSujet({ actualites: actu(sond), direct: null, file: vide, now: nuitReserve }).refus, "réserve électorale : aucun sondage, même en post");
+  }
+
+  // 5. Lois adoptées ou rejetées : posts
+  const AN = (numero, titre, resultat, votes, extra = {}) => ({ numero, titre, date: "1 octobre 2026", dateISO: "2026-10-01", typeVote: "SPS", dossierRef: "DLR5L17N1", dossierTitre: "Dossier", resultat, votes, ...extra });
+  const V = (p, c, a) => ({ RN: [p, 0, 0, 100], LFI: [0, c, a, 70] });
+  const lois = { lois: [
+    AN(100, "l'ensemble du projet de loi relatif à la simplification de la vie économique (première lecture).", "adopte", V(300, 100, 10)),
+    AN(101, "l'amendement n° 12 de M. Dupont après l'article 3 du projet de loi relatif à la simplification de la vie économique.", "adopte", V(300, 100, 10)),
+    AN(102, "l'ensemble de la proposition de loi visant à renforcer le contrôle des prix de l'énergie.", "rejete", V(80, 200, 5), { dateISO: "2026-09-30", date: "30 septembre 2026" }),
+    AN(103, "l'ensemble du projet de loi ancien sur les marchés publics.", "adopte", V(300, 100, 10), { dateISO: "2026-08-01" }),
+    AN(104, "l'ensemble de la proposition de loi incohérente.", "adopte", V(80, 200, 5)),
+    AN(105, "l'ensemble de la proposition de loi visant à protéger les mineurs en ligne.", "adopte", V(300, 100, 10)),
+    AN(106, "la motion de censure déposée par M. Untel.", "rejete", V(80, 200, 5), { typeVote: "MOC" }),
+  ] };
+  const senat = { scrutins: [
+    { id: "senat-2026-77", session: 2026, numero: 77, titre: "sur l'ensemble du projet de loi de programmation militaire", date: "1 octobre 2026", dateISO: "2026-10-01", resultat: "adopte", pour: 214, contre: 111, abst: 20, npv: 3, groupes: {}, dossierUrl: "https://www.senat.fr/dossier-legislatif/pjl26-1.html", sourceUrl: "https://www.senat.fr/scrutin-public/2026/scr2026-77.html" },
+  ] };
+  const loi = (opts = {}) => AUTO.choisirPostLoi({ lois, senat, file: vide, now, ...opts });
+  {
+    const r = loi();
+    assert.ok(!r.refus, r.refus);
+    assert.strictEqual(r.modele, "post-loi");
+    assert.strictEqual(r.post.spec.numero, 100, "le plus récent (puis le plus grand numéro) d'abord, vote final seulement");
+    assert.strictEqual(r.post.spec.verdict, "adopte");
+    assert.deepStrictEqual([r.post.spec.pour, r.post.spec.contre, r.post.spec.abst], [300, 100, 10]);
+    assert.strictEqual(r.post.spec.titre, "Projet de loi relatif à la simplification de la vie économique");
+    assert.strictEqual(r.post.spec.etape, "première lecture");
+    assert.strictEqual(r.id, AUTO.choisirPostLoi({ lois, senat, file: vide, now }).id, "id stable");
+    const d = AUTO.decrire(r, now);
+    assert.strictEqual(d.type, "post");
+    assert.strictEqual(d.champs.donneesPropres, true);
+    assert.strictEqual(d.champs.voteId, "an-100");
+    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, l'ensemble du texte/);
+    assert.match(d.champs.legende, /Pour : 300 · Contre : 100 · Abstentions : 10/);
+    assert.match(d.champs.legende, /Source officielle : Assemblée nationale, scrutin public n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
+    assert.match(d.champs.legende, /@hemicyclefrance/);
+    assert.ok(!/github\.io|hemicycle-france/.test(d.champs.legende));
+    assert.deepStrictEqual(d.sources, ["https://www.assemblee-nationale.fr/dyn/17/scrutins/100"]);
+    assert.deepStrictEqual(AUTO.ficheAnnonce(d.post.fiche, r.id), { id: r.id, titre: "Projet de loi relatif à la simplification de la vie économique", sous: "Assemblée nationale · texte adopté · 1 octobre 2026" });
+  }
+  // rejetée : formulation neutre, résultat officiel
+  {
+    const r = loi({ lois: { lois: [lois.lois[2]] }, senat: null });
+    assert.strictEqual(r.post.spec.verdict, "rejete");
+    const l = AUTO.decrire(r, now).champs.legende;
+    assert.match(l, /a rejeté, le 30 septembre 2026/);
+    assert.match(l, /texte rejeté/);
+    assert.ok(!/(enfin|scandale|victoire|défaite|honte|bravo|malheureusement|heureusement)/i.test(l), "aucun qualificatif politique");
+  }
+  // le Sénat aussi ; vote ancien, non final, incohérent, à mot prudent (mineurs) ou motion : jamais
+  {
+    const r = loi({ lois: { lois: [] } });
+    assert.strictEqual(r.post.spec.chambre, "Sénat");
+    assert.deepStrictEqual([r.post.spec.pour, r.post.spec.contre, r.post.spec.abst], [214, 111, 20]);
+    assert.match(AUTO.decrire(r, now).champs.legende, /Le Sénat a adopté/);
+    assert.match(r.post.source, /^https:\/\/www\.senat\.fr\//);
+    for (const n of [101, 103, 104, 105, 106]) assert.ok(loi({ lois: { lois: [lois.lois.find((x) => x.numero === n)] }, senat: null }).refus, `vote ${n} : jamais en post`);
+    assert.ok(loi({ senat: { scrutins: [{ ...senat.scrutins[0], dateISO: "2026-07-01" }] }, lois: { lois: [] } }).refus, "vote de plus de 2 jours");
+    assert.ok(loi({ senat: { scrutins: [{ ...senat.scrutins[0], pour: 10, contre: 100 }] }, lois: { lois: [] } }).refus, "adopté avec plus de contre que de pour : incohérent");
+  }
+  // jamais deux fois : id en file, au registre, même vote, titre proche (36 h), plafond de 2 posts par jour, nuit
+  {
+    const r = loi();
+    assert.ok(loi({ file: { entrees: [post(r.id)] } }).post.spec.numero !== 100, "id déjà en file : on passe au vote suivant");
+    assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [post(r.id)] } }).refus);
+    assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, registre: { entrees: [{ id: r.id, statut: "publiee", publieLe: il_y_a(50), type: "post", titre: "x" }] } }).refus, "id au registre");
+    assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [post("e".repeat(12), { voteId: "an-100" })] } }).refus, "même vote");
+    assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, registre: { entrees: [{ id: "f".repeat(12), statut: "publiee", publieLe: il_y_a(20), type: "post", titre: "Projet de loi relatif à la simplification de la vie économique" }] } }).refus, "même loi publiée il y a 20 h");
+    assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [{ id: "9".repeat(12), cree: il_y_a(5), titre: "t", type: "story", titrePropre: "Simplification de la vie économique", sources: [] }] } }).refus, "même sujet déjà en story");
+    assert.ok(loi({ file: { entrees: [post("1".repeat(12)), post("2".repeat(12))] } }).refus, "plafond de 2 posts");
+    assert.ok(loi({ now: new Date("2026-10-02T22:30:00Z") }).refus, "nuit");
+  }
+  // choisir() : un vote final récent devient un post, après sondage / dossier / direct ; en monétisation aussi
+  {
+    const g = choisir({ actualites: actu(), direct: null, sondages: { instituts: [] }, lois, senat, file: vide, now });
+    assert.strictEqual(g.modele, "post-loi");
+    const enDirect = sujet("Emmanuel Macron s'exprimera ce soir à 20 h sur le budget", 1);
+    const direct = { evenements: [{ type: "allocution", titre: enDirect.articles[0].titre }] };
+    assert.strictEqual(choisir({ actualites: actu(enDirect), direct, sondages: { instituts: [] }, lois, senat, file: vide, now }).modele, "direct", "un direct passe avant le post");
+    const m = choisir({ actualites: actu(), direct: null, sondages: { instituts: [] }, lois, senat, file: vide, now, config: AUTO.normaliserConfig({ monetisation: true }) });
+    assert.strictEqual(m.modele, "post-loi", "monétisation : le post sur données officielles reste possible");
+    // un vote déjà publié en post n'a pas aussi sa story « données propres »
+    const sc = AUTO.choisirDonneesPropres({ lois: { lois: [{ ...lois.lois[0], votes: { RN: { pour: 300, contre: 0, abst: 0, membres: 100 } } }] }, senat: null, probas: null, file: { entrees: [post("e".repeat(12), { voteId: "an-100" })] }, now });
+    assert.ok(sc.refus, "pas de story pour un vote déjà en post");
+  }
+  // Monétisation : le post « date » (presse) et son annonce sont retirés ; le post « loi » (données officielles) et son annonce restent
+  {
+    const entrees = [
+      post("1".repeat(12), { donneesPropres: true }), { id: "2".repeat(12), cree: il_y_a(2), titre: "a", type: "story", annonceDe: "1".repeat(12), donneesPropres: true, sources: [] },
+      post("3".repeat(12)), { id: "4".repeat(12), cree: il_y_a(2), titre: "a", type: "story", annonceDe: "3".repeat(12), sources: [] },
+    ];
+    assert.deepStrictEqual(AUTO.purgerPresse(entrees).map((e) => e.id), ["1".repeat(12), "2".repeat(12)]);
+  }
+  // Flux Atom : catégorie « post » / « story », légende du post dans <content>
+  {
+    const flux = AUTO.fluxAtom([post("5".repeat(12), { cree: now.toISOString(), titre: "Un <post>", url_image: "https://x/p.jpg", legende: "Légende & @hemicyclefrance" }), { id: "6".repeat(12), cree: now.toISOString(), titre: "Annonce", type: "story", annonceDe: "5".repeat(12), url_image: "https://x/a.jpg" }], now);
+    assert.match(flux, /tag:hemicycle-france,2026:post:5{12}/);
+    assert.match(flux, /<category term="post"\/>/);
+    assert.match(flux, /<category term="story"\/>/);
+    assert.match(flux, /<content type="text">Légende &amp; @hemicyclefrance<\/content>/);
+    assert.strictEqual((flux.match(/<content/g) || []).length, 1, "seul le post porte une légende");
+  }
+  // Annonce : identifiant stable et distinct du post
+  assert.strictEqual(AUTO.idAnnonce("a".repeat(12)), AUTO.idAnnonce("a".repeat(12)));
+  assert.notStrictEqual(AUTO.idAnnonce("a".repeat(12)), "a".repeat(12));
+  assert.match(AUTO.idAnnonce("a".repeat(12)), /^[0-9a-f]{12}$/);
+  assert.deepStrictEqual(AUTO.decomposerTitreVote("sur l'ensemble de la proposition de loi pour une montagne vivante et souveraine"), { nature: "proposition de loi", court: "Proposition de loi pour une montagne vivante et souveraine", etape: "" });
+  assert.strictEqual(AUTO.decomposerTitreVote("l'amendement n° 12 du projet de loi"), null);
 }
 
 console.log("stories-auto : tous les tests passent.");
