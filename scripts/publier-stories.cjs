@@ -44,6 +44,7 @@ const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;
 const ESSAIS_STATUT = 20;
 const GARDER_REGISTRE = 200;
+const FENETRE_DOUBLON_H = 36; // un sujet proche d'une story publiée depuis moins de 36 h est refusé
 
 const A_SEC = process.argv.includes("--a-sec");
 const IG_USER_ID = (process.env.IG_USER_ID || "").trim();
@@ -97,9 +98,15 @@ function choisir({ file, registre, config, now = new Date() }) {
   let ok = purgerReserve(candidates, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
   if (config.monetisation) ok = purgerPresse(ok);
   const avant = ok.length;
-  const dernieres = new Set([...deja.values()].filter((d) => d.statut === "publiee" && d.publieLe && now.getTime() - Date.parse(d.publieLe) < 24 * 36e5).map((d) => d.id));
-  const titresPublies = (file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]).filter(Boolean);
-  ok = ok.filter((e) => !risque(e) && !(e.titrePropre && titresPublies.some((t) => titresProches(t, e.titrePropre))));
+  const recentes = [...deja.values()].filter((d) => d.statut === "publiee" && d.publieLe && now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_H * 36e5);
+  const dernieres = new Set(recentes.map((d) => d.id));
+  // Titres déjà publiés : ceux du registre (conservés même quand l'entrée a quitté la file) et ceux de la file
+  const titresPublies = [
+    ...recentes.flatMap((d) => [d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
+    ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+  ].filter(Boolean);
+  const dejaTraite = (e) => [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
   if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente ou sujet déjà publié dans les dernières 24 h");
   if (!ok.length) return sortie(candidates.length ? `${candidates.length} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
   return { entree: ok[0], perimees };
@@ -189,7 +196,7 @@ async function main() {
   finir(); // les périmées sont enregistrées même si la publication échoue
   try {
     const mediaId = await publier(e);
-    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId });
+    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
     resume(`Story publiée : « ${e.titre} » (média ${mediaId}).`);
   } catch (err) {

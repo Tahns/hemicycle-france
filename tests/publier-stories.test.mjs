@@ -192,7 +192,7 @@ try {
     await lancer({ entrees: [entree("ffffffffffff", il_y_a(1), { bref: true, titre: "En bref", sujets: ["Budget 2027", "Loi de programmation militaire"] })] });
     assert.strictEqual(publications().length, 1);
   }
-  // Pas deux fois le même sujet à quelques heures d'écart (titres rédigés proches, story déjà publiée dans les 24 h)
+  // Pas deux fois le même sujet à quelques heures d'écart (titres rédigés proches, story déjà publiée dans les 36 h)
   {
     const deja = entree("gggggggggggg", il_y_a(4), { titrePropre: "Blocage des lycées" });
     const proche = entree("hhhhhhhhhhhh", il_y_a(1), { titrePropre: "Blocus des lycées" });
@@ -202,10 +202,14 @@ try {
     const autre = entree("iiiiiiiiiiii", il_y_a(1), { titrePropre: "Loi de programmation militaire" });
     await lancer({ entrees: [deja, autre], registre });
     assert.strictEqual(publications().length, 1, "sujet différent : publié");
-    // plus de 24 h après : de nouveau possible
-    const ancien = { entrees: [{ id: "gggggggggggg", statut: "publiee", publieLe: il_y_a(30), mediaId: "M1" }] };
-    await lancer({ entrees: [{ ...deja, cree: il_y_a(30) }, proche], registre: ancien });
-    assert.strictEqual(publications().length, 1, "plus de 24 h : possible");
+    // le titre conservé dans le registre suffit, même si l'entrée a quitté la file
+    const seul = { entrees: [{ id: "zzzzzzzzzzzz", statut: "publiee", publieLe: il_y_a(30), mediaId: "M2", titre: "Blocage des lycées" }] };
+    await lancer({ entrees: [proche], registre: seul });
+    assert.strictEqual(publications().length, 0, "titre du registre (30 h) : refusé");
+    // plus de 36 h après : de nouveau possible
+    const ancien = { entrees: [{ id: "gggggggggggg", statut: "publiee", publieLe: il_y_a(40), mediaId: "M1", titre: "Blocage des lycées" }] };
+    await lancer({ entrees: [{ ...deja, cree: il_y_a(40) }, proche], registre: ancien });
+    assert.strictEqual(publications().length, 1, "plus de 36 h : possible");
   }
   console.log("[tests publier-stories] OK");
 } finally {
