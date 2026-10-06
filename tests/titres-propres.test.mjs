@@ -252,3 +252,15 @@ test("accusation ou polémique sans juridiction : jamais « procédure judiciair
   const j = titreParRegles(reel("Un homme condamné par le tribunal correctionnel de Lyon", {}), {});
   assert.ok(/judiciaire|tribunal/i.test(j.titre) && !/en cours/i.test(j.titre), j.titre);
 });
+
+test("titreSujet : jamais un segment de 5 mots d'un titre de presse (sinon titre générique)", () => {
+  const s = reel("Gouvernement : annonces sur la présidentielle de 2027, le détail", {});
+  const brut = titreParRegles(s, {});
+  const t = titreSujet(s, [], {});
+  assert.ok(t && t.titre, "un titre existe toujours");
+  const mots = (x) => x.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().split(" ");
+  const pm = ` ${mots(s.articles[0].titre).join(" ")} `;
+  const m = mots(t.titre);
+  for (let k = 0; k + 5 <= m.length; k++) assert.ok(!pm.includes(` ${m.slice(k, k + 5).join(" ")} `), `segment copié : ${t.titre}`);
+  if (brut) assert.ok(t.titre === brut.titre || t.generique === true);
+});
