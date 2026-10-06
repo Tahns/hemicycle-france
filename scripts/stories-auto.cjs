@@ -634,7 +634,7 @@ function normaliserConfig(c) {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
     minMedias: entier(c?.minMedias, 3, 2, 10), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
-    maxParJour: entier(c?.maxParJour, 4, 1, 8), enBref: c?.enBref !== false,
+    maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6)
   };
