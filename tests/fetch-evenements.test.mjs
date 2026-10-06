@@ -3,7 +3,7 @@
 // USAGE : node tests/fetch-evenements.test.mjs
 import assert from "assert";
 import { readFileSync } from "fs";
-import { trouverDates, resumeTexte, lireReponseWikipedia, extraireEvenementsPage, evenementsDepuisPage, evenementsDepuisAgendaAN, fusionner, comparer, typeDe, jourMois, releverTout } from "../scripts/fetch-evenements.js";
+import { trouverDates, resumeTexte, lireReponseWikipedia, extraireEvenementsPage, evenementsDepuisPage, evenementsDepuisAgendaAN, choisirTitre, fusionner, comparer, typeDe, jourMois, releverTout } from "../scripts/fetch-evenements.js";
 
 const AUJ = "2026-10-06";
 const fixture = (id) => lireReponseWikipedia(JSON.parse(readFileSync(`tests/fixtures/evenements/${id}.json`, "utf-8")));
@@ -143,3 +143,13 @@ const relSansFixture = await releverTout({ sources: { pages: [cfg("primaire-ps")
 assert.equal(relSansFixture.echecs, 1, "lecture impossible : comptée comme échec");
 
 console.log("fetch-evenements : tous les tests passent.");
+
+// Recherche du titre voisin quand le titre exact n'existe pas
+{
+  const rep = (...titres) => ({ query: { search: titres.map((title) => ({ title })) } });
+  assert.strictEqual(choisirTitre(rep("Liste des primaires de 2026", "Primaire de la gauche de 2026", "Primaire de 2022"), "Primaire socialiste de 2026"), "Primaire de la gauche de 2026");
+  assert.strictEqual(choisirTitre(rep("Congrès du Parti socialiste de 2023"), "Congrès des Républicains de 2026"), null, "année différente : refusé");
+  assert.strictEqual(choisirTitre(rep("Élection municipale de 2026"), "Primaire socialiste de 2026"), null, "mot distinctif absent : refusé");
+  assert.strictEqual(choisirTitre({}, "x 2026"), null);
+}
+console.log("[tests fetch-evenements] recherche de titre OK");
