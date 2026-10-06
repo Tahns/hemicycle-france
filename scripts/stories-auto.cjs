@@ -28,10 +28,15 @@
  *  - « En direct »     : le sujet dont un titre correspond à une prise de parole active de data/direct.json (hors séances de l'Assemblée, événement non expiré) ;
  *  - « Le chiffre »    : seulement si le chiffre du sujet figure tel quel dans les titres d'au moins 2 médias ;
  *  - « Face à face »   : seulement si les deux premières personnalités du sujet sont des candidats déclarés (data/candidats.json) et qu'aucun titre n'est conflictuel ;
- *  - « Date à retenir »: seulement si le sujet annonce une date À VENIR (au plus 180 jours) ;
+ *  - « Date à retenir »: seulement si le sujet annonce une date À VENIR à 3 jours ou moins (story) ; au-delà (jusqu'à 180 jours) c'est un POST « post-date » (voir plus bas) ;
  *  - « En bref »       : une fois par jour, le matin (7 h – 11 h, Paris) : 3 ou 4 sujets forts (3 médias au moins, titre rédigé par le site, aucun mot de la liste prudente).
  *    Les liens de ses sujets sont enregistrés : aucun de ces sujets n'aura aussi sa propre image le même jour (pas de doublon).
  *  Tous comptent dans le plafond de 4 entrées par jour, respectent la nuit (23 h – 7 h), le fichier data/stories-config.json et ne sont jamais produits en monétisation.
+ *
+ * POSTS (fil, image 1080 × 1350, entrée { type: "post", legende }) : seulement (a) une date à retenir lointaine (> 3 jours) et (b) une loi ADOPTÉE ou REJETÉE
+ * (vote final de l'Assemblée ou du Sénat, résultat officiel : choisirPostLoi). Chaque post est accompagné d'une story d'annonce (entrée { type: "story", annonceDe }),
+ * dessinée en même temps (js/stories-post.js) et publiée par publier-stories.cjs au plus tôt 5 min après le post. 2 posts par jour au plus ; les posts et annonces
+ * ne comptent pas dans les 4 stories par jour. Mêmes garde-fous anti-doublon que les stories (id stable, titres proches sur 36 h, registre des publications).
  *
  * DÉCLENCHEUR « NOUVEAU SONDAGE » (prioritaire sur les actualités) : si data/sondages.json contient une enquête d'intentions de vote
  * au premier tour de la présidentielle plus récente que la dernière déjà mise en file (entrée « story » avec champ sondageId,
@@ -75,6 +80,10 @@ const MOIS = { janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6, juill
 const BREF_DEBUT_H = 7, BREF_FIN_H = 11; // « En bref » : une fois par jour, le matin (heure de Paris)
 const BREF_FRAICHEUR_H = 12, BREF_MIN = 3, BREF_MAX = 4, BREF_MIN_MEDIAS = 3;
 const DATE_MAX_JOURS = 180;
+const DATE_STORY_MAX_JOURS = 3; // date à venir à 3 jours ou moins : story « Date à retenir » ; au-delà : POST (puis story d'annonce)
+const MAX_POSTS_PAR_JOUR = 2; // posts (fil Instagram) par jour ; les stories d'annonce n'entrent pas dans le plafond des stories
+const POST_FENETRE_DOUBLON_H = 36; // un post proche d'un post/story publié depuis moins de 36 h est refusé
+const POST_VOTE_FRAICHEUR_J = 2; // un vote final de plus de 2 jours n'est plus « récent » : pas de post
 const MAX_PROPRES_PAR_JOUR = 3; // stories « données propres » (monétisation) par jour, brouillons compris
 const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « récent »
 const BROUILLON_JOURS = 7;
@@ -135,6 +144,25 @@ function titresRecents(entrees, now) {
   return (entrees || []).filter((e) => now.getTime() - Date.parse(e.cree) < RECENT_H * 36e5).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]).filter((t) => typeof t === "string" && t);
 }
 const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
+
+/** Une entrée compte-t-elle dans le plafond des STORIES (hors sondages, posts et stories d'annonce de post) ? */
+const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && !e.annonceDe;
+/** Posts du jour (UTC+2) : ceux de la file (et des brouillons) et ceux du registre des publications, sans double compte. */
+function nbPostsDuJour(entrees, registre, now) {
+  const jour = jourUTC2(now);
+  const ids = new Set();
+  for (const e of entrees || []) if (e.type === "post" && jourUTC2(e.cree) === jour) ids.add(e.id);
+  for (const e of registre?.entrees || []) if (e.type === "post" && e.statut === "publiee" && e.publieLe && jourUTC2(e.publieLe) === jour) ids.add(e.id);
+  return ids.size;
+}
+/** Titres (rédigés, sujets, titres du registre) des entrées de la file et du registre sur les dernières `h` heures. */
+function titresRecentsH(entrees, registre, now, h) {
+  const garde = (iso) => now.getTime() - Date.parse(iso) < h * 36e5;
+  return [
+    ...(entrees || []).filter((e) => e.cree && garde(e.cree)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+    ...(registre?.entrees || []).filter((e) => e.statut === "publiee" && e.publieLe && garde(e.publieLe)).flatMap((e) => [e.titre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+  ].filter((t) => typeof t === "string" && t);
+}
 
 /** Pourquoi un titre est écarté (null s'il passe). */
 function motExclu(titre) {
@@ -262,13 +290,15 @@ function dateAVenir(sujet, now = new Date()) {
   const jours = (Date.parse(iso + "T12:00:00Z") - Date.parse(jourParis(now) + "T12:00:00Z")) / 864e5;
   return jours >= 1 && jours <= DATE_MAX_JOURS;
 }
+/** Nombre de jours (Paris) avant la date annoncée du sujet. */
+const joursAvantDate = (sujet, now = new Date()) => Math.round((Date.parse(sujet.date.iso + "T12:00:00Z") - Date.parse(jourParis(now) + "T12:00:00Z")) / 864e5);
 
 /** Modèle d'image d'un sujet retenu : direct, facea, chiffre, date ou une (par défaut). */
 function modeleSujet(sujet, { direct = null, candidats = null, now = new Date() } = {}) {
   if (presidentParle(sujet, direct, now)) return "direct";
   if (faceAFace(sujet, candidats)) return "facea";
   if (chiffreSource(sujet)) return "chiffre";
-  if (dateAVenir(sujet, now)) return "date";
+  if (dateAVenir(sujet, now)) return joursAvantDate(sujet, now) > DATE_STORY_MAX_JOURS ? "post-date" : "date"; // date lointaine : un POST, pas une story
   return "une";
 }
 
@@ -307,16 +337,20 @@ function choisirDossier({ actualites, file, now = new Date() }) {
  * Choisit au plus un sujet. Renvoie { indice, sujet, id } ou { refus: "raison" }.
  * file : { entrees: [...] } ; now : Date.
  */
-function choisirSujet({ actualites, direct, file, now = new Date(), candidats: declares = null }) {
+function choisirSujet({ actualites, direct, file, now = new Date(), candidats: declares = null, registre = null }) {
   const entrees = file?.entrees || [];
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const jour = jourUTC2(now);
-  if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jour).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
-  const ids = new Set(entrees.map((e) => e.id));
+  // Plafonds distincts : 4 stories par jour (les posts et leurs stories d'annonce n'y comptent pas) et 2 posts par jour
+  const storiesPleines = entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jour).length >= MAX_PAR_JOUR;
+  const postsPleins = nbPostsDuJour(entrees, registre, now) >= MAX_POSTS_PAR_JOUR;
+  if (storiesPleines && postsPleins) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
   const recents = titresRecents(entrees, now);
-  const dossier = choisirDossier({ actualites, file, now });
+  const recentsPost = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
+  const dossier = storiesPleines ? null : choisirDossier({ actualites, file, now });
   if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
   const candidats = [];
@@ -336,9 +370,15 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
     if (titreGenerique(s.titrePropre.titre)) return; // « Énergie » seul : trop vague
     if (dejaVu(s.titrePropre.titre, recents)) return; // même sujet qu'une story des dernières 24 h
-    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele: modeleSujet(s, { direct, candidats: declares, now }) });
+    const modele = modeleSujet(s, { direct, candidats: declares, now });
+    if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
+      if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
+      if (entrees.some((e) => e.type === "post" && e.dateIso === s.date.iso && titresProches(e.titrePropre, s.titrePropre.titre))) return;
+      if ((registre?.entrees || []).some((e) => e.type === "post" && e.dateIso === s.date.iso && titresProches(e.titre, s.titrePropre.titre))) return;
+    } else if (storiesPleines) return;
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele });
   });
-  if (!candidats.length) return { refus: "aucun sujet ne remplit toutes les règles" };
+  if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : "aucun sujet ne remplit toutes les règles" };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
   return candidats[0];
 }
@@ -358,7 +398,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
   const entrees = file?.entrees || [];
   const jour = jourParis(now);
   if (entrees.some((e) => e.bref === true && jourParis(e.cree) === jour)) return { refus: "« en bref » déjà publié aujourd'hui" };
-  if (entrees.filter((e) => !e.sondageId && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
+  if (entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set(entrees.map((e) => e.id));
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
   const recents = titresRecents(entrees, now);
@@ -457,6 +497,45 @@ function nettoyerImages(images, dossier = DOSSIER_IMG) {
 
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".mjs": "text/javascript", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".svg": "image/svg+xml", ".css": "text/css", ".webmanifest": "application/manifest+json" };
 
+/** Le site est servi depuis le dossier du dépôt, sous son adresse publique (l'image affiche ainsi la bonne adresse) ; rien d'autre n'est joignable. */
+async function servirSite(page) {
+  await page.route("**/*", async (route) => {
+    const u = new URL(route.request().url());
+    if (!(u.origin + u.pathname).startsWith(SITE.replace(/\/$/, "")) && u.origin !== new URL(SITE).origin) return route.abort();
+    let rel = decodeURIComponent(u.pathname.slice(new URL(SITE).pathname.length));
+    if (!rel || rel.endsWith("/")) rel += "index.html";
+    const fichier = path.resolve(RACINE, rel);
+    if (!fichier.startsWith(RACINE + path.sep) || !fs.existsSync(fichier) || !fs.statSync(fichier).isFile()) return route.fulfill({ status: 404, body: "" });
+    route.fulfill({ status: 200, contentType: TYPES[path.extname(fichier)] || "application/octet-stream", body: fs.readFileSync(fichier) });
+  });
+}
+
+/** Dessine un POST (1080 × 1350) et la story qui l'annonce (1080 × 1920, avec la miniature du post) d'après une fiche (js/stories-post.js) ; renvoie { post, annonce } (Buffers JPEG). */
+async function dessinerPost(fiche, idPost) {
+  const { chromium } = require("playwright");
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
+  try {
+    const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 }, serviceWorkers: "block" });
+    const page = await ctx.newPage();
+    await servirSite(page);
+    const erreurs = [];
+    page.on("pageerror", (e) => erreurs.push(e.message));
+    await page.goto(SITE, { waitUntil: "load" });
+    await page.waitForFunction(() => typeof dessinerStory === "function", null, { timeout: 30000 });
+    const [post, annonce] = await page.evaluate(async ({ spec, annonce }) => {
+      const p = await dessinerStory("post", spec);
+      if (!p) return [null, null];
+      const a = await dessinerStory("annonce-post", { ...annonce, miniature: p.apercu });
+      return [p.apercu, a ? a.apercu : null];
+    }, { spec: fiche.spec, annonce: ficheAnnonce(fiche, idPost) });
+    if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
+    const buf = (u) => { if (!u || !u.startsWith("data:image/jpeg;base64,")) throw new Error("le post n'a pas pu être dessiné"); return Buffer.from(u.slice("data:image/jpeg;base64,".length), "base64"); };
+    return { post: buf(post), annonce: buf(annonce) };
+  } finally {
+    await browser.close();
+  }
+}
+
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
 async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null) {
   const { chromium } = require("playwright");
@@ -464,16 +543,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
   try {
     const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 }, serviceWorkers: "block" });
     const page = await ctx.newPage();
-    // Le site est servi depuis le dossier du dépôt, sous son adresse publique (l'image affiche ainsi la bonne adresse)
-    await page.route("**/*", async (route) => {
-      const u = new URL(route.request().url());
-      if (!(u.origin + u.pathname).startsWith(SITE.replace(/\/$/, "")) && u.origin !== new URL(SITE).origin) return route.abort();
-      let rel = decodeURIComponent(u.pathname.slice(new URL(SITE).pathname.length));
-      if (!rel || rel.endsWith("/")) rel += "index.html";
-      const fichier = path.resolve(RACINE, rel);
-      if (!fichier.startsWith(RACINE + path.sep) || !fs.existsSync(fichier) || !fs.statSync(fichier).isFile()) return route.fulfill({ status: 404, body: "" });
-      route.fulfill({ status: 200, contentType: TYPES[path.extname(fichier)] || "application/octet-stream", body: fs.readFileSync(fichier) });
-    });
+    await servirSite(page);
     const erreurs = [];
     page.on("pageerror", (e) => erreurs.push(e.message));
     await page.goto(SITE, { waitUntil: "load" });
@@ -531,22 +601,24 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
   }
 }
 
-/** Flux Atom de la file (instagram/file.atom) : pour un outil sans code (Make, Zapier) qui lit un flux et publie la story. Une entrée = une story, image en pièce jointe. */
+/** Flux Atom de la file (instagram/file.atom) : pour un outil sans code (Make, Zapier) qui lit un flux et publie la story. Une entrée = une story ou un post (catégorie « story » ou « post »), image en pièce jointe ; un post porte sa légende dans <content>. */
 function fluxAtom(entrees, now = new Date()) {
   const x = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const liste = [...(entrees || [])].sort((a, b) => String(b.cree).localeCompare(String(a.cree)));
   const corps = liste.map((e) => `  <entry>
-    <id>tag:hemicycle-france,2026:story:${x(e.id)}</id>
+    <id>tag:hemicycle-france,2026:${e.type === "post" ? "post" : "story"}:${x(e.id)}</id>
     <title>${x(e.titre)}</title>
     <updated>${x(e.cree)}</updated>
     <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>
     <link rel="alternate" href="${x(e.url_image)}"/>
-    <summary>${x(e.alt || e.titre)}</summary>
+    <category term="${e.type === "post" ? "post" : "story"}"/>
+    <summary>${x(e.alt || e.titre)}</summary>${e.type === "post" && e.legende ? `
+    <content type="text">${x(e.legende)}</content>` : ""}
   </entry>`).join("\n");
   return `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>tag:hemicycle-france,2026:file-stories</id>
-  <title>Hémicycle France : stories à publier</title>
+  <title>Hémicycle France : stories et posts à publier</title>
   <updated>${now.toISOString()}</updated>
 ${corps}
 </feed>
@@ -595,8 +667,9 @@ function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) 
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const entrees = file?.entrees || [];
   const jour = jourUTC2(now);
-  if (entrees.filter((e) => e.donneesPropres === true && jourUTC2(e.cree) === jour).length >= MAX_PROPRES_PAR_JOUR) return { refus: `déjà ${MAX_PROPRES_PAR_JOUR} stories sur données propres aujourd'hui` };
+  if (entrees.filter((e) => e.donneesPropres === true && estStoryComptee(e) && jourUTC2(e.cree) === jour).length >= MAX_PROPRES_PAR_JOUR) return { refus: `déjà ${MAX_PROPRES_PAR_JOUR} stories sur données propres aujourd'hui` };
   const ids = new Set(entrees.map((e) => e.id));
+  const votesPostes = new Set(entrees.map((e) => e.voteId).filter(Boolean)); // un vote déjà publié en post n'a pas aussi sa story
   const limite = new Date(now.getTime() - PROPRES_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
   const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
   const recent = (iso) => /^\d{4}-\d{2}-\d{2}$/.test(iso || "") && iso >= limite && iso <= demain;
@@ -604,12 +677,12 @@ function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) 
   const hash = (x) => crypto.createHash("sha1").update(x).digest("hex").slice(0, 12);
 
   // 1. Vote final récent de l'Assemblée nationale (« l'ensemble du… »), titre sans mot de la liste prudente
-  const an = (lois?.lois || []).filter((l) => l?.numero && l.resultat && l.votes && recent(l.dateISO) && /ensemble/i.test(l.titre || "") && sobre(l.titre) && !motExclu(l.dossierTitre || "") && !ids.has(hash("scrutin|" + l.numero)))
+  const an = (lois?.lois || []).filter((l) => l?.numero && l.resultat && l.votes && recent(l.dateISO) && /ensemble/i.test(l.titre || "") && sobre(l.titre) && !motExclu(l.dossierTitre || "") && !ids.has(hash("scrutin|" + l.numero)) && !votesPostes.has(`an-${l.numero}`))
     .sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero);
   if (an.length) return { propre: { type: "scrutin", numero: an[0].numero, titre: an[0].titre, source: "Assemblée nationale (open data)" }, id: hash("scrutin|" + an[0].numero), nommePersonne: false };
 
   // 2. Vote final récent du Sénat
-  const sn = (senat?.scrutins || []).filter((s) => s?.id && s.resultat && s.groupes && recent(s.dateISO) && /ensemble/i.test(s.titre || "") && sobre(s.titre) && !ids.has(hash("senat|" + s.id)))
+  const sn = (senat?.scrutins || []).filter((s) => s?.id && s.resultat && s.groupes && recent(s.dateISO) && /ensemble/i.test(s.titre || "") && sobre(s.titre) && !ids.has(hash("senat|" + s.id)) && !votesPostes.has(`senat-${s.id}`))
     .sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero);
   if (sn.length) return { propre: { type: "senat", idScrutin: sn[0].id, titre: sn[0].titre, source: "Sénat (pages officielles)" }, id: hash("senat|" + sn[0].id), nommePersonne: false };
 
@@ -621,6 +694,150 @@ function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) 
   }
   return { refus: `aucune donnée propre à publier${reserve ? " (réserve électorale)" : ""}` };
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// POSTS (fil Instagram, image 4:5 de 1080 × 1350) : deux cas seulement, chacun suivi d'une story d'annonce
+//  - une « date à retenir » lointaine (plus de 3 jours) tirée de data/actualites.json ;
+//  - une loi ADOPTÉE ou REJETÉE : vote final (« l'ensemble » d'un projet ou d'une proposition de loi) de l'Assemblée (data/lois.json)
+//    ou du Sénat (data/senat.json), avec le résultat officiel, la date, le nombre de voix et le lien du scrutin.
+// Tout le reste de l'actualité reste directement en story. Formulation neutre : jamais d'avis ni de qualificatif politique.
+// ---------------------------------------------------------------------------------------------------------------------
+const COMPTE = "@hemicyclefrance";
+const SITE_HOTE = "tahns.github.io";
+const RE_VOTE_FINAL = /^(?:sur )?l['’]ensemble (du|de la) (projet|proposition) de loi\b/i;
+const hashStable = (x) => crypto.createHash("sha1").update(x).digest("hex").slice(0, 12);
+/** Identifiant de la story qui annonce le post `idPost`. */
+const idAnnonce = (idPost) => hashStable("annonce|" + idPost);
+const majuscule = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const nbFr = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? "s" : ""}`;
+
+/** Décompose le titre officiel d'un vote final : { nature, court, etape } (« Projet de loi relatif à… », « première lecture »). */
+function decomposerTitreVote(titre) {
+  let t = String(titre || "").trim().replace(/\s+/g, " ");
+  const m = RE_VOTE_FINAL.exec(t);
+  if (!m) return null;
+  t = t.replace(/^(?:sur )?l['’]ensemble (?:du|de la) /i, "").replace(/\s*\.\s*$/, "");
+  let etape = "";
+  const e = /\s*\(([^()]*)\)\s*$/.exec(t);
+  if (e) { etape = e[1].trim(); t = t.slice(0, e.index).trim(); }
+  return { nature: m[2].toLowerCase() === "projet" ? "projet de loi" : "proposition de loi", court: majuscule(t), etape };
+}
+
+/** Fiche d'un post « loi » : null si le vote n'est pas un vote final net (résultat incohérent, voix absentes, titre trop long ou à mot prudent). */
+function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, resultat, pour, contre, abst, url }) {
+  if (resultat !== "adopte" && resultat !== "rejete") return null;
+  const d = decomposerTitreVote(titre);
+  if (!d || d.court.length < 15 || d.court.length > 230 || /[<>{}]/.test(d.court)) return null;
+  if (motExclu(titre) || motExclu(dossierTitre || "") || motExclu(d.court)) return null;
+  if (![pour, contre, abst].every((n) => Number.isInteger(n) && n >= 0) || pour + contre === 0) return null;
+  if (resultat === "adopte" ? !(pour > contre) : !(contre >= pour)) return null; // résultat incohérent avec les voix : on ne publie pas
+  const an = chambre === "an";
+  const nomChambre = an ? "Assemblée nationale" : "Sénat";
+  const verbe = resultat === "adopte" ? "adopté" : "rejeté";
+  const sourceTxt = `Source : ${nomChambre}, scrutin public n°${numero}${an ? "" : ` (session ${id.split("-")[1]}-${Number(id.split("-")[1]) + 1})`} (${an ? "assemblee-nationale.fr" : "senat.fr"}). Résultat officiel.`;
+  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, verdict: resultat, pour, contre, abst, numero, sourceTxt };
+  const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions : ${nbFr(abst)}`;
+  const legende = [
+    `${d.court} — texte ${verbe}`,
+    "",
+    `${an ? "L'Assemblée nationale" : "Le Sénat"} a ${resultat === "adopte" ? "adopté" : "rejeté"}, le ${date}, l'ensemble du texte « ${d.court} »${d.etape ? ` (${d.etape})` : ""}.`,
+    voix + ".",
+    "",
+    `Source officielle : ${nomChambre}, scrutin public n°${numero} — ${url}`,
+    "",
+    `Toute l'actu politique : ${COMPTE}`,
+    `#Politique #${an ? "AssembléeNationale" : "Sénat"} #Loi #Parlement`,
+  ].join("\n");
+  return {
+    spec,
+    titreCourt: d.court,
+    sous: `${an ? "Assemblée nationale" : "Sénat"} · texte ${verbe} · ${date}`,
+    legende,
+    alt: `Post Hémicycle France : ${d.court}, ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${date}. ${voix}.`,
+    source: url,
+    voteId: `${an ? "an" : "senat"}-${an ? numero : id}`,
+  };
+}
+
+/**
+ * Choisit au plus UN vote final récent (Assemblée puis Sénat, du plus récent au plus ancien) à publier en post.
+ * Renvoie { post: { fiche, id, ... }, id, modele: "post-loi" } ou { refus }. Un seul post par vote (id stable) ; jamais deux fois la même loi à
+ * moins de 36 h d'écart (titres proches) ; 2 posts par jour au plus ; rien la nuit ; vote de moins de 2 jours.
+ */
+function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }) {
+  const h = heureParis(now);
+  if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
+  const entrees = file?.entrees || [];
+  if (nbPostsDuJour(entrees, registre, now) >= MAX_POSTS_PAR_JOUR) return { refus: `déjà ${MAX_POSTS_PAR_JOUR} posts aujourd'hui` };
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
+  const votes = new Set(entrees.map((e) => e.voteId).filter(Boolean));
+  const recents = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
+  const limite = new Date(now.getTime() - POST_VOTE_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
+  const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
+  const recent = (iso) => /^\d{4}-\d{2}-\d{2}$/.test(iso || "") && iso >= limite && iso <= demain;
+  const somme = (v, i) => (Array.isArray(v) ? v[i] : [v.pour, v.contre, v.abst][i]) || 0;
+  const candidats = [];
+  for (const l of lois?.lois || []) {
+    if (!l?.numero || !recent(l.dateISO) || !RE_VOTE_FINAL.test(l.titre || "") || !l.votes || !["SPO", "SPS"].includes(l.typeVote)) continue;
+    const g = Object.values(l.votes);
+    const f = ficheLoi({ chambre: "an", id: `an-${l.numero}`, numero: l.numero, titre: l.titre, dossierTitre: l.dossierTitre, date: l.date, dateISO: l.dateISO, resultat: l.resultat, pour: g.reduce((a, v) => a + somme(v, 0), 0), contre: g.reduce((a, v) => a + somme(v, 1), 0), abst: g.reduce((a, v) => a + somme(v, 2), 0), url: `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}` });
+    if (f) candidats.push({ f, dateISO: l.dateISO, ordre: l.numero, id: hashStable("post-loi|an|" + l.numero) });
+  }
+  for (const s of senat?.scrutins || []) {
+    if (!s?.id || !recent(s.dateISO) || !RE_VOTE_FINAL.test(s.titre || "")) continue;
+    if (!/^https:\/\/www\.senat\.fr\//.test(s.sourceUrl || s.dossierUrl || "")) continue;
+    const f = ficheLoi({ chambre: "senat", id: s.id, numero: s.numero, titre: s.titre, date: s.date, dateISO: s.dateISO, resultat: s.resultat, pour: s.pour, contre: s.contre, abst: s.abst, url: s.sourceUrl || s.dossierUrl });
+    if (f) candidats.push({ f, dateISO: s.dateISO, ordre: s.numero, id: hashStable("post-loi|senat|" + s.id) });
+  }
+  candidats.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.ordre - a.ordre);
+  const reserve = reserveSondages(now);
+  for (const c of candidats) {
+    if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId)) continue;
+    if (dejaVu(c.f.titreCourt, recents)) continue; // même loi qu'un post ou une story des dernières 36 h
+    if (reserve && parleDeSondage(c.f.titreCourt)) continue;
+    return { post: { genre: "loi", ...c.f, dateISO: c.dateISO }, id: c.id, modele: "post-loi", nommePersonne: false };
+  }
+  return { refus: "aucun vote final récent à publier en post" };
+}
+
+/** Fiche d'un post « date à retenir » : tirée d'un sujet de data/actualites.json (modèle « post-date »). */
+function ficheDate(s, now = new Date()) {
+  const dt = s.date, jours = joursAvantDate(s, now);
+  const titre = s.titrePropre.titre;
+  const medias = [...new Set((s.articles || []).map((a) => a.media).filter(Boolean))];
+  const motsDate = [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois].map(sansAccent);
+  const art = (s.articles || []).find((a) => motsDate.some((m) => sansAccent(a.titre).includes(m))) || s.articles[0];
+  const citation = String(art.titre || "").replace(/\s+/g, " ").trim().replace(/^[«"“]\s*|\s*[»"”]$/g, "").slice(0, 220);
+  const d = new Date(dt.iso + "T12:00:00Z");
+  const semaine = majuscule(d.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" }));
+  const annee = Number(dt.iso.slice(0, 4));
+  const jourTxt = `${Number(dt.jour) === 1 ? "1er" : dt.jour} ${dt.mois}`;
+  const quand = `${semaine.toLowerCase()} ${jourTxt} ${annee}`;
+  const listeMedias = medias.slice(0, 4).join(", ");
+  const legende = [
+    `Date à retenir : ${jourTxt} ${annee}`,
+    "",
+    `${titre}.`,
+    `Rendez-vous le ${quand}, dans ${pluriel(jours, "jour")}.`,
+    "",
+    `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}) ; l'ordre du jour peut changer, à vérifier auprès de l'institution concernée.`,
+    "",
+    `Toute l'actu politique : ${COMPTE}`,
+    "#Politique #Agenda #Actualité",
+  ].join("\n");
+  return {
+    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, compte: `${jours} jours`, titre, citation, media: art.media || "" },
+    titreCourt: titre,
+    sous: `Date à retenir · ${jourTxt}`,
+    legende,
+    alt: `Post Hémicycle France, date à retenir : ${titre}, le ${quand}. Date annoncée par la presse (${listeMedias}).`,
+    dateIso: dt.iso,
+  };
+}
+
+/** Story d'annonce d'un post : fiche pour le dessin (« annonce-post ») ; la miniature du post est ajoutée au moment du dessin. */
+const ficheAnnonce = (fiche, idPost) => ({ id: idPost, titre: fiche.titreCourt, sous: fiche.sous });
 
 /** Où va la story : « brouillon » (validation humaine) ou « file » (file de publication). */
 function destination(choix, config) {
@@ -647,15 +864,19 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, now = new Date(), config = normaliserConfig(null) }) {
+function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, registre = null, now = new Date(), config = normaliserConfig(null) }) {
   const s = choisirSondage({ sondages, file, now });
   if (!s.refus) return s;
   if (config.monetisation) {
+    const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post (données officielles, sans presse)
+    if (!pl.refus) return pl;
     const p = choisirDonneesPropres({ lois, senat, probas, file, now });
     return p.refus ? { refus: `${p.refus} ; sondage : ${s.refus}` } : p;
   }
-  const a = choisirSujet({ actualites, direct, file, now, candidats });
+  const a = choisirSujet({ actualites, direct, file, now, candidats, registre });
   if (a.dossier || a.modele === "direct") return a; // un dossier non publié et un direct en cours passent avant tout
+  const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post, suivi d'une story d'annonce
+  if (!pl.refus) return pl;
   const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
   if (!b.refus) return b;
   return a.refus ? { refus: `${a.refus} ; sondage : ${s.refus}` } : a;
@@ -669,8 +890,9 @@ function lireEtat(now) {
   const file = lire("data/instagram-file.json", { entrees: [] });
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
-  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), candidats: lire("data/candidats.json", null) };
-  if (config.monetisation) Object.assign(donnees, { lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), probas: lire("data/probabilites.json", null) });
+  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), candidats: lire("data/candidats.json", null),
+    lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null) };
+  if (config.monetisation) donnees.probas = lire("data/probabilites.json", null);
   return { config, file, brouillons, donnees };
 }
 
@@ -715,12 +937,25 @@ function texteAlternatif(type, titre, medias, sujets) {
 const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
 
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
-function decrire(choix) {
-  const d = decrireBase(choix);
+function decrire(choix, now = new Date()) {
+  const d = decrireBase(choix, now);
+  if (d.type === "post") return d; // le texte alternatif d'un post est dans sa fiche (« alt »)
   const titre = d.champs.titrePropre || d.titre;
   return { ...d, champs: { ...d.champs, alt: texteAlternatif(d.type, titre, d.medias, d.champs.sujets) } };
 }
-function decrireBase(choix) {
+/** Décrit un POST (loi adoptée ou rejetée, ou date lointaine) : entrée de file { type: "post" } + fiche de dessin du post et de sa story d'annonce. */
+function decrirePost(choix, now) {
+  if (choix.post) { // loi
+    const f = choix.post;
+    return { titre: f.titreCourt, medias: [], sources: [f.source], type: "post", post: { fiche: f, id: choix.id },
+      champs: { donneesPropres: true, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, legende: f.legende, alt: f.alt } };
+  }
+  const s = choix.sujet, f = ficheDate(s, now), videos = liensVideo(s.articles);
+  return { titre: s.articles[0].titre, medias: [...new Set(s.articles.map((a) => a.media))], sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
+    champs: { titrePropre: f.titreCourt, postGenre: "date", dateIso: f.dateIso, legende: f.legende, alt: f.alt } };
+}
+function decrireBase(choix, now = new Date()) {
+  if (choix.post || choix.modele === "post-date") return decrirePost(choix, now);
   if (choix.sondage) {
     const i = choix.sondage;
     return { titre: `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
@@ -771,24 +1006,52 @@ async function main() {
   if (choix.refus) {
     console.log(`[stories-auto] rien à mettre en file : ${choix.refus}.`);
   } else {
-    const d = decrire(choix);
+    const d = decrire(choix, now);
     const vers = destination(choix, config);
     console.log(`[stories-auto] ${d.type} retenu${choix.medias ? ` (${choix.medias} média(s))` : ""} : ${d.titre} — destination : ${vers}`);
-    const jpeg = await dessiner(...d.args);
-    const dim = dimensionsJpeg(jpeg);
-    if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
-    if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
-    if (vers === "brouillon") {
-      ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: d.type, medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: Boolean(choix.sondage || choix.nommePersonne), ...d.champs }, jpeg);
-      console.log(`[stories-auto] brouillon instagram/brouillons/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko), à valider par un humain ; rien n'est mis en file de publication.`);
-    } else {
+    const urlImage = (id) => `https://tahns.github.io/hemicycle-france/instagram/auto/${id}.jpg`;
+    const ecrireImage = (id, jpeg) => {
       fs.mkdirSync(DOSSIER_IMG, { recursive: true });
-      fs.writeFileSync(path.join(DOSSIER_IMG, `${choix.id}.jpg`), jpeg);
+      fs.writeFileSync(path.join(DOSSIER_IMG, `${id}.jpg`), jpeg);
       // Jamais d'entrée sans image : l'image écrite doit être relisible, sinon rien n'entre dans la file
-      if (!imageValide(path.join(DOSSIER_IMG, `${choix.id}.jpg`))) throw new Error(`l'image instagram/auto/${choix.id}.jpg n'a pas été écrite correctement : aucune entrée ajoutée`);
-      entrees =[...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: `https://tahns.github.io/hemicycle-france/instagram/auto/${choix.id}.jpg`, type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
-      images.add(choix.id);
-      console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+      if (!imageValide(path.join(DOSSIER_IMG, `${id}.jpg`))) throw new Error(`l'image instagram/auto/${id}.jpg n'a pas été écrite correctement : aucune entrée ajoutée`);
+    };
+    if (d.type === "post") {
+      // POST (1080 × 1350) puis, dans la file, sa story d'annonce (1080 × 1920) : publiée par publier-stories.cjs au plus tôt 5 min après le post
+      const { post, annonce } = await dessinerPost(d.post.fiche, choix.id);
+      const dp = dimensionsJpeg(post), da = dimensionsJpeg(annonce);
+      if (!dp || dp.l !== 1080 || dp.h !== 1350) throw new Error(`image de post inattendue (${dp ? `${dp.l}×${dp.h}` : "pas un JPEG"})`);
+      if (!da || da.l !== 1080 || da.h !== 1920) throw new Error(`image d'annonce inattendue (${da ? `${da.l}×${da.h}` : "pas un JPEG"})`);
+      if (post.length > MAX_OCTETS || annonce.length > MAX_OCTETS) throw new Error("image de post ou d'annonce trop lourde");
+      if (vers === "brouillon") {
+        ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: "post", medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: false, ...d.champs }, post);
+        console.log(`[stories-auto] brouillon de post instagram/brouillons/${choix.id}.jpg (${Math.round(post.length / 1024)} Ko), à valider par un humain ; ni post ni annonce en file de publication.`);
+      } else {
+        const idA = idAnnonce(choix.id);
+        ecrireImage(choix.id, post);
+        ecrireImage(idA, annonce);
+        const commun = { cree: now.toISOString(), medias: [], ...(d.champs.donneesPropres ? { donneesPropres: true } : {}) };
+        entrees = [...entrees,
+          { id: choix.id, ...commun, titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), type: "post", sources: d.sources, ...d.champs },
+          { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
+        ].slice(-GARDER);
+        images.add(choix.id); images.add(idA);
+        console.log(`[stories-auto] post instagram/auto/${choix.id}.jpg (${Math.round(post.length / 1024)} Ko) et story d'annonce instagram/auto/${idA}.jpg (${Math.round(annonce.length / 1024)} Ko).`);
+      }
+    } else {
+      const jpeg = await dessiner(...d.args);
+      const dim = dimensionsJpeg(jpeg);
+      if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
+      if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
+      if (vers === "brouillon") {
+        ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: d.type, medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: Boolean(choix.sondage || choix.nommePersonne), ...d.champs }, jpeg);
+        console.log(`[stories-auto] brouillon instagram/brouillons/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko), à valider par un humain ; rien n'est mis en file de publication.`);
+      } else {
+        ecrireImage(choix.id, jpeg);
+        entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
+        images.add(choix.id);
+        console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+      }
     }
   }
 
@@ -801,6 +1064,6 @@ async function main() {
   }
 }
 
-module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide };
+module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

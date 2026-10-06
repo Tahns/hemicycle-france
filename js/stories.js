@@ -806,9 +806,11 @@ STORY_PLUS.meeting = async (ctx, info)=>{
 const STORY_ACTU_TYPES = ["actualite", "actualites", "chiffre", "facea", "date"];
 async function dessinerStory(type, info){
   if(STORY_ACTU_TYPES.includes(type)) await Promise.all(["stories-actu", "stories-actu-liste", "stories-actu-fait"].map(chargerModule));
+  // Publications Instagram automatiques : « post » (image de fil 1080 × 1350) et « annonce-post » (story qui l'annonce), dessinées d'après une fiche (js/stories-post.js)
+  if(type === "post" || type === "annonce-post") await chargerModule("stories-post");
   await Promise.all(["600 60px Newsreader", "700 60px Newsreader", "400 30px \"Public Sans\"", "600 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
-  c.width = STORY.L; c.height = STORY.H;
+  c.width = STORY.L; c.height = type === "post" ? 1350 : STORY.H;
   const ctx = c.getContext("2d");
   const { L, marge, bas } = STORY, largeur = L - 2 * marge;
   let y, nom = "hemicycle-france";

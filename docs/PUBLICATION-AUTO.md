@@ -10,7 +10,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 
 ## Ce que le script respecte (sans réglage)
 
-- une seule story par passage ; 4 par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ;
+- une seule publication par passage ; 4 stories et 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; au moins 60 min entre deux publications (voir « Posts » pour l'annonce d'un post) ;
 - une story préparée depuis plus de 3 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ;
 - aucun sondage pendant la réserve électorale ;
@@ -19,6 +19,40 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 - si l'image n'est pas encore en ligne sur GitHub Pages, nouvel essai au passage suivant ;
 - en cas d'erreur de l'API, la story n'est pas marquée publiée : nouvel essai au passage suivant (tant qu'elle n'est pas périmée) ;
 - le jeton n'apparaît jamais dans les journaux.
+
+## Posts (fil) et stories d'annonce
+
+Deux cas seulement deviennent des **posts** (image de fil 4:5, 1080 × 1350, avec légende) ; tout le reste de l'actualité
+(sujets repris par plusieurs médias, dossiers, direct, face à face, chiffre, en bref, sondages) reste directement en **story** :
+
+1. **Date à retenir lointaine** : un sujet d'actualité qui annonce une date à venir à **plus de 3 jours** (jusqu'à 180 jours), par exemple
+   « le projet de loi casseurs-payeurs sera examiné au Sénat le 27 octobre ». À 3 jours ou moins, c'est toujours la story « Date à retenir ».
+   Mêmes filtres que les stories de presse (3 médias, titre rédigé par le site, aucun mot de la liste prudente, aucun sondage en réserve électorale).
+2. **Loi adoptée ou rejetée** : seulement un **vote final** (« l'ensemble du projet / de la proposition de loi ») de l'Assemblée nationale
+   (`data/lois.json`, scrutins de type ordinaire ou solennel) ou du Sénat (`data/senat.json`), de moins de 2 jours, avec le résultat officiel,
+   la date, les voix (pour, contre, abstentions) et le lien du scrutin. Un résultat incohérent avec les voix, un titre trop long ou un mot de la
+   liste prudente (par exemple « mineurs ») écarte le vote : mieux vaut ne rien publier. Formulation neutre, jamais d'avis ni de qualificatif.
+
+Chaque post est **suivi d'une story d'annonce** (« Nouveau post », titre court, miniature du post, « → @hemicyclefrance », 1080 × 1920,
+même direction artistique bleue). L'API officielle ne permet pas de repartager un post en story : c'est donc une image d'annonce générée en même temps
+que le post (`instagram/auto/<id>.jpg`), publiée **au plus tôt 5 min après le post** (donc au passage suivant du workflow) et **au plus tard 3 h après**.
+
+Entrées de `data/instagram-file.json` : `type: "story"` (1080 × 1920) ou `type: "post"` (1080 × 1350, champ `legende` en français : titre, 2 ou 3 lignes
+factuelles, source citée, `@hemicyclefrance`, quelques hashtags, **jamais le lien du site**). La story d'annonce est une entrée `story` avec le champ `annonceDe`
+(identifiant du post). L'identifiant du post est stable (empreinte du sujet ou du scrutin) : un seul post par vote, jamais de doublon
+(file + registre, titres proches sur 36 h, même date + même sujet pour une date à retenir).
+
+Règles propres aux posts (en plus de celles ci-dessus) :
+
+- **2 posts par jour au maximum** ; le plafond de 4 stories par jour est inchangé et ne compte ni les posts ni les stories d'annonce ;
+- un post non publié depuis plus de **12 h** est périmé (3 h pour une story) ; son annonce l'est alors aussi ;
+- espacement : 60 min entre deux publications, **sauf** la story d'annonce d'un post, qui peut sortir 5 min après CE post (c'est l'unique exception) ;
+- légende contrôlée avant envoi : 20 à 2 200 caractères, 30 hashtags au plus, le compte cité, aucun lien du site ; sinon le post n'est pas publié ;
+- monétisation : le post de loi (données officielles) reste possible, le post « date » (tiré de la presse) et son annonce sont retirés ;
+- validation humaine : le post est écrit en brouillon (`instagram/brouillons/`), sans annonce, et rien n'est publié automatiquement.
+
+L'API utilisée pour un post est `POST /{IG_USER_ID}/media` (`image_url`, `caption`), puis `POST /{IG_USER_ID}/media_publish`, comme pour une story
+(sans `media_type=STORIES`). Le registre `data/instagram-publiees.json` garde pour chaque publication : `id`, `statut`, `publieLe`, `mediaId`, `titre`, `type` (`story` ou `post`) et, pour une annonce, `annonceDe`.
 
 ## 1. Prérequis (à faire une fois, environ 30 minutes)
 
@@ -82,7 +116,8 @@ Autres moyens : mettre `"validationHumaine": true` dans `data/stories-config.jso
 Si l'application Meta est trop lourde, un outil sans code peut faire la même chose, mais il reste soumis aux mêmes
 règles d'Instagram (compte professionnel relié à une Page Facebook) : c'est l'outil qui porte alors l'application Meta, pas vous.
 Le dépôt génère pour cela un flux Atom à jour : **`https://tahns.github.io/hemicycle-france/instagram/file.atom`**
-(une entrée par story, image JPEG en pièce jointe `enclosure`, créé par `scripts/stories-auto.cjs` en même temps que la file).
+(une entrée par story ou par post, catégorie `story` ou `post`, image JPEG en pièce jointe `enclosure`, légende du post dans `<content>`, créé par `scripts/stories-auto.cjs` en même temps que la file).
+Attention : ce flux mélange désormais des images 1080 × 1350 (posts) et 1080 × 1920 (stories) ; filtrez sur la catégorie pour publier chaque type au bon endroit.
 
 Scénario type (Make.com) :
 

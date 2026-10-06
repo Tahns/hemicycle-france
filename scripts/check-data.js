@@ -246,22 +246,51 @@ async function checkDirect() {
   console.log(`[check-data] direct.json : ${d.evenements.length} événement(s) en direct.`);
 }
 
-// File de stories Instagram automatiques (fichier optionnel, écrit par scripts/stories-auto.cjs)
+// Dimensions d'un JPEG ({ l, h }) ou null
+function dimensionsJpeg(buf) {
+  if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return null;
+  let i = 2;
+  while (i + 9 < buf.length) {
+    if (buf[i] !== 0xff) { i++; continue; }
+    const m = buf[i + 1];
+    if (m >= 0xc0 && m <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(m)) return { h: buf.readUInt16BE(i + 5), l: buf.readUInt16BE(i + 7) };
+    i += 2 + buf.readUInt16BE(i + 2);
+  }
+  return null;
+}
+
+// File de stories ET de posts Instagram automatiques (fichier optionnel, écrit par scripts/stories-auto.cjs).
+// type « story » : image 1080 × 1920 ; type « post » : image de fil 1080 × 1350 + légende ; une story d'annonce porte « annonceDe » (id du post).
 async function checkInstagramFile() {
   const d = JSON.parse(await readFile("data/instagram-file.json", "utf-8").catch(() => "null"));
   if (!d) return;
   if (!Array.isArray(d.entrees)) return err("instagram-file.json : entrees absentes");
-  const parJour = {}, ids = new Set();
+  const stories = {}, posts = {}, ids = new Set();
   for (const e of d.entrees) {
     const nom = `instagram-file.json : entrée ${e.id || "?"}`;
-    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || e.type !== "story") { err(`${nom} incomplète`); continue; }
+    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || !["story", "post"].includes(e.type)) { err(`${nom} incomplète (type « story » ou « post » attendu)`); continue; }
     if (ids.has(e.id)) err(`${nom} en double`);
     ids.add(e.id);
     const t = Date.parse(e.cree);
     if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
-    parJour[jour] = (parJour[jour] || 0) + 1;
+    if (e.type === "post") {
+      posts[jour] = (posts[jour] || 0) + 1;
+      const l = e.legende;
+      if (typeof l !== "string" || l.length < 20 || l.length > 2200) err(`${nom} : légende de post absente ou hors limites (20 à 2 200 caractères)`);
+      else {
+        if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 30) err(`${nom} : plus de 30 hashtags`);
+        if (/github\.io|hemicycle-france/i.test(l)) err(`${nom} : la légende ne doit pas contenir de lien du site`);
+        if (!l.includes("@hemicyclefrance")) err(`${nom} : la légende doit citer @hemicyclefrance`);
+      }
+      if (e.annonceDe) err(`${nom} : un post n'a pas de champ annonceDe`);
+    } else if (e.annonceDe) {
+      if (!/^[0-9a-f]{12}$/.test(e.annonceDe)) err(`${nom} : annonceDe invalide`);
+      else if (!d.entrees.some((p) => p.id === e.annonceDe && p.type === "post")) err(`${nom} : annonceDe ne désigne aucun post de la file`);
+    } else {
+      stories[jour] = (stories[jour] || 0) + 1;
+    }
     // Les images de plus de 3 jours sont supprimées par stories-auto.cjs (IMAGE_JOURS) : on n'exige que celles de moins de 2 jours
     if (Date.now() - t < 2 * 24 * 36e5) {
       const f = `instagram/auto/${e.id}.jpg`;
@@ -269,13 +298,18 @@ async function checkInstagramFile() {
       else {
         const buf = await readFile(f);
         if (buf[0] !== 0xff || buf[1] !== 0xd8) err(`${nom} : ${f} n'est pas un JPEG`);
+        else {
+          const dim = dimensionsJpeg(buf), attendu = e.type === "post" ? [1080, 1350] : [1080, 1920];
+          if (!dim || dim.l !== attendu[0] || dim.h !== attendu[1]) err(`${nom} : ${f} doit faire ${attendu[0]}×${attendu[1]} (${dim ? `${dim.l}×${dim.h}` : "dimensions illisibles"})`);
+        }
         if (buf.length > 8 * 1024 * 1024) err(`${nom} : ${f} dépasse 8 Mo`);
       }
     }
   }
-  for (const [j, n] of Object.entries(parJour)) if (n > 4) err(`instagram-file.json : ${n} entrées le ${j} (4 au maximum par jour)`);
+  for (const [j, n] of Object.entries(stories)) if (n > 4) err(`instagram-file.json : ${n} stories le ${j} (4 au maximum par jour, hors annonces de post)`);
+  for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour)`);
   if (d.entrees.length > 30) err("instagram-file.json : plus de 30 entrées");
-  console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s).`);
+  console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s) (stories, posts et annonces).`);
 }
 
 async function checkQuiz() {
