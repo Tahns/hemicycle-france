@@ -16,7 +16,9 @@
  *  - une story créée il y a plus de 3 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
  *  - jamais deux fois le même id (registre) ;
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
- *  - data/stories-config.json : validationHumaine à true => rien n'est publié ; monétisation => seules les entrées
+ *  - SUJETS SENSIBLES (scripts/sujets-sensibles.cjs) : une entrée { sensible: 1 } (fait judiciaire établi) n'est publiée que si son texte passe encore formulationSure
+ *    (2 médias, juridiction, aucun nom, aucun verbe qui accuse) ; une entrée { sensible: 2 } n'est JAMAIS publiée sans valideHumain + valideLe (workflow « Valider un brouillon ») ;
+ *  - data/stories-config.json : validationHumaine à true => rien n'est publié, sauf les entrées validées par un humain (valideHumain) ; monétisation => seules les entrées
  *    « données propres » (sans titre de presse) sont publiables, comme dans la file de stories-auto.cjs ;
  *  - dernier filet de sécurité : une entrée de presse dont un titre contient un mot de la liste prudente (liste durcie depuis la mise en file)
  *    n'est jamais publiée, ni une entrée qui reprend un sujet proche d'une story déjà publiée dans les dernières 24 h ;
@@ -46,6 +48,7 @@ const fs = require("fs");
 const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
 const { reserveSondages, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, titresProches } = require("./stories-auto.cjs");
+const SS = require("./sujets-sensibles.cjs");
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "instagram-file.json");
@@ -97,11 +100,23 @@ function legendeValide(e) {
   return l.includes("@hemicyclefrance");
 }
 
+/** Niveau 1 : au moins 2 médias, une juridiction, aucun nom de personne, formulation sûre (aucun verbe qui accuse), aucun mineur ni fait divers dans les titres de presse. */
+function niveau1Sur(e) {
+  if (e.type !== "story" || !Array.isArray(e.medias) || e.medias.length < 2 || typeof e.juridiction !== "string" || !e.juridiction || e.nommePersonne === true) return false;
+  const texte = [e.titre, e.titrePropre, e.pied, e.alt].filter(Boolean).join(" ");
+  return SS.formulationSure(texte, { juridiction: e.juridiction }).ok && !(Array.isArray(e.sujets) ? e.sujets : []).some((t) => SS.motInterdit(t, true));
+}
+/** Titres d'une entrée pour la détection de doublons (sensible : le titre de presse, jamais notre formule « Selon … »). */
+const titresDeEntree = (e) => (e.sensible ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titrePropre, e.titre]).filter(Boolean);
+
 /** Une entrée dont le contenu est à risque : mot de la liste prudente (presse ou post), légende de post invalide. */
 function risque(e) {
   if (e.sondageId) return false;
   const post = e.type === "post" || e.type === "reel" || e.type === "carousel" || Boolean(e.annonceDe);
   if ((e.type === "post" || e.type === "reel") && !legendeValide(e)) return true;
+  // SUJETS SENSIBLES (scripts/sujets-sensibles.cjs) : le titre de l'entrée est le nôtre, le titre de presse est dans « sujets » (jamais publié tel quel)
+  if (e.sensible === 1) return !niveau1Sur(e); // fait judiciaire établi : texte fabriqué par règles, recontrôlé ici
+  if (e.sensible === 2) return !(e.valideHumain === true && e.valideLe); // niveau 2 : JAMAIS sans validation humaine (workflow « Valider un brouillon »)
   if (e.type === "carousel" && !validerCarrousel(e).ok) return true;
   if (e.contenu && (Array.isArray(e.sujets) ? e.sujets : []).some((t) => motExclu(t))) return true; // contenus récurrents : chaque sujet affiché est contrôlé une dernière fois
   if (e.donneesPropres === true && !post) return false;
@@ -168,7 +183,11 @@ function choisir({ file, registre, config, now = new Date() }) {
   // les annonces d'abord, puis les contenus à créneau (par heure de créneau : « tenir l'heure »), puis l'actualité au fil de l'eau
   candidates.sort((a, b) => Number(estAnnonce(b)) - Number(estAnnonce(a)) || Number(estCreneau(b)) - Number(estCreneau(a)) || (estCreneau(a) && estCreneau(b) ? String(a.pasAvant).localeCompare(String(b.pasAvant)) : 0) || String(a.cree).localeCompare(String(b.cree)));
   const sortie = (refus) => ({ refus, perimees });
-  if (config.validationHumaine) return sortie("validation humaine activée : rien n'est publié automatiquement");
+  if (config.validationHumaine) { // seules les entrées validées par un humain (workflow « Valider un brouillon ») sortent
+    const validees = candidates.filter((e) => e.valideHumain === true);
+    if (!validees.length) return sortie("validation humaine activée : rien n'est publié automatiquement");
+    candidates.splice(0, candidates.length, ...validees);
+  }
   const h = heureParis(now);
   if (h >= 23 || h < 7) return sortie(`nuit (${h} h à Paris)`);
   const jour = jourParis(now);
@@ -191,17 +210,17 @@ function choisir({ file, registre, config, now = new Date() }) {
   }
   if (!ok.length) return sortie(enAttente ? `story d'annonce en attente (${ESPACEMENT_ANNONCE_MIN} min après son post)` : (enCreneau ? "contenu à créneau : l'heure n'est pas encore venue" : "rien à publier"));
   const candidatesBrutes = ok.length;
-  ok = purgerReserve(ok, now).filter((e) => !(reserveSondages(now) && parleDeSondage(e.titre || "")));
+  ok = purgerReserve(ok, now).filter((e) => !(reserveSondages(now) && [e.titre || "", e.citation?.titre || "", ...(Array.isArray(e.sujets) ? e.sujets : [])].some(parleDeSondage)));
   if (config.monetisation) ok = purgerPresse(ok);
   const avant = ok.length;
   const recentes = publiees.filter((d) => now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_H * 36e5);
   const dernieres = new Set(recentes.map((d) => d.id));
   // Titres déjà publiés : ceux du registre (conservés même quand l'entrée a quitté la file) et ceux de la file
   const titresPublies = [
-    ...recentes.flatMap((d) => [d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
-    ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+    ...recentes.flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
+    ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraite = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  const dejaTraite = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => titresPublies.some((p) => titresProches(p, t)));
   ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
   if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente, légende invalide ou sujet déjà publié dans les dernières 36 h");
   if (!ok.length) return sortie(candidatesBrutes ? `${candidatesBrutes} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
@@ -330,7 +349,7 @@ async function main() {
       mode = "story-image";
       mediaId = await publier(e, mode);
     }
-    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : estCarrousel(e) ? "carousel" : estReel(e) ? "reel" : "story", ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
+    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : estCarrousel(e) ? "carousel" : estReel(e) ? "reel" : "story", ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
     resume(`${mode === "post" ? "Post publié" : mode === "carrousel" ? "Carrousel publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée"} : « ${e.titre} » (média ${mediaId}).`);
   } catch (err) {
@@ -345,5 +364,5 @@ async function main() {
   }
 }
 
-module.exports = { choisir, masquer };
+module.exports = { choisir, masquer, legendeValide, risque };
 if (require.main === module) main().catch((e) => { console.error("[publier-stories]", masquer(e.message)); process.exit(1); });

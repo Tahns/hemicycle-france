@@ -187,7 +187,7 @@ jobs:
       # Seulement s'il y a du nouveau (les fichiers dont seul l'horodatage changerait ne sont pas réécrits, voir garde.js) ;
       # échec du push = échec visible de l'exécution (scripts/commit-push.sh)
       - name: Committer les changements s'il y en a
-        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ data/vignettes.json photos/vignettes instagram/auto instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml sitemap-*.xml robots.txt feed.xml actualites.atom feeds/ loi/ candidat/ parti/ index.html
+        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ data/vignettes.json photos/vignettes instagram/auto instagram/brouillons instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml sitemap-*.xml robots.txt feed.xml actualites.atom feeds/ loi/ candidat/ parti/ index.html
 
       - name: Vérifier la fraîcheur des données
         id: fraicheur

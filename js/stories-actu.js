@@ -173,11 +173,11 @@ async function dessineUne(ctx, s){
 
   // en-tête : étiquette rouge, heure, rubrique
   // « À la une » seulement pour un sujet très repris ; sinon un libellé qui ne survend pas
-  const libelle = n >= 4 ? "À la une" : n >= 2 ? "En ce moment" : "Dans la presse";
+  const libelle = s.sensible?.libelle || (n >= 4 ? "À la une" : n >= 2 ? "En ce moment" : "Dans la presse"); // sujet sensible : libellé prudent imposé (scripts/sujets-sensibles.cjs)
   storyCadre(ctx, libelle, { alerte:true });
   const xe = storyEtiquette(ctx, libelle, marge, DA.etiquetteY, "rouge");
   ctx.font = `600 28px "Public Sans"`; ctx.fillStyle = CIEL; ctx.textBaseline = "middle"; ctx.textAlign = "left";
-  ctx.fillText(quandFr(a0.date), xe + 22, DA.etiquetteY + 27 + 2); ctx.textBaseline = "alphabetic";
+  if(!s.sensible?.sansHeure) ctx.fillText(quandFr(a0.date), xe + 22, DA.etiquetteY + 27 + 2); ctx.textBaseline = "alphabetic";
   droite(ctx, theme(s)[2].toUpperCase(), DA.etiquetteY + 27, { taille:24, poids:800, couleur:CIEL, espace:"3px" });
 
   // gros titre : le nôtre ; à défaut, le titre de presse du premier article, entre guillemets et attribué
@@ -191,7 +191,7 @@ async function dessineUne(ctx, s){
   const dispo = Y_BAS - Y_HAUT;
   const tMax = propre ? (pers.length ? 118 : 156) : (pers.length ? 84 : 100);
   // attribution : titre de presse cité (si le titre est le nôtre) ou « — média » (si le titre est celui du média)
-  const variantes = propre ? [{ q:2 }, { q:1 }, { q:0 }] : [{ q:0 }];
+  const variantes = propre && !s.sensible?.sansCitation ? [{ q:2 }, { q:1 }, { q:0 }] : [{ q:0 }]; // niveau 1 sensible : jamais de titre de presse cité
   let plan = null;
   for(const v of variantes){
     let trouve = null;
@@ -251,7 +251,7 @@ async function dessineUne(ctx, s){
     dessinePortraits(ctx, pers, y, bonus);
   }
   const credits = [...new Set(pers.filter(p=> p.img && p.credit).map(p=> p.credit))];
-  const sourceTxt = (plan.v.q || !propre ? "Titre repris de la presse. Chaque média est cité." : "Titre rédigé par Hémicycle France d'après la presse. Chaque média est cité.") + (credits.length ? ` Photos : ${credits.join(" ; ")}.` : "");
+  const sourceTxt = s.sensible?.pied || ((plan.v.q || !propre ? "Titre repris de la presse. Chaque média est cité." : "Titre rédigé par Hémicycle France d'après la presse. Chaque média est cité.") + (credits.length ? ` Photos : ${credits.join(" ; ")}.` : "")); // sujet sensible : mentions (sources, présomption d'innocence) fabriquées par règles
   storyPied(ctx, sourceTxt, { video, accroche:"Toute l'actu politique" });
   return { nom:`actualite-${slugDep(propre || a0.titre).slice(0, 40)}` };
 }

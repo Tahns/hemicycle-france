@@ -14,7 +14,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 - une story préparée depuis plus de 3 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ;
 - aucun sondage pendant la réserve électorale ;
-- `data/stories-config.json` : si `validationHumaine` vaut `true`, rien n'est publié ; en mode `monetisation`,
+- `data/stories-config.json` : si `validationHumaine` vaut `true`, rien n'est publié sauf les brouillons validés par un humain (voir « Sujets sensibles ») ; en mode `monetisation`,
   seules les stories sans titre de presse le sont ;
 - si l'image n'est pas encore en ligne sur GitHub Pages, nouvel essai au passage suivant ;
 - en cas d'erreur de l'API, la story n'est pas marquée publiée : nouvel essai au passage suivant (tant qu'elle n'est pas périmée) ;
@@ -100,6 +100,78 @@ Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée 
 
 Un sujet dont le titre rédigé par le site est un titre de repli (`generique: true` dans `data/actualites.json`, par exemple « Gilley : actualité locale » ou « Politique : l'essentiel du moment »)
 ne devient **jamais** une story, un « en bref » ni un post (sauf prise de parole du président de la République).
+
+## Sujets sensibles : niveaux 1 et 2, comment valider un brouillon
+
+Les sujets de justice et de mise en cause (par exemple une révélation de Mediapart) étaient jusqu'ici **perdus** : leurs mots (accusation, plainte,
+tribunal, condamnation…) les écartaient. Ils ne sont plus perdus, et **aucun garde-fou n'est désactivé** : un sujet sensible devient soit une
+publication aux formulations prudentes (niveau 1), soit un **brouillon** qu'un humain valide ou rejette d'un geste (niveau 2).
+Code : `scripts/sujets-sensibles.cjs` (classement et textes), `scripts/stories-auto.cjs` (choix, brouillons), `scripts/valider-brouillon.cjs`,
+`scripts/story-a-la-demande.cjs`, dernier filet dans `scripts/publier-stories.cjs`. Tests : `tests/sujets-sensibles.test.mjs`, `tests/stories-auto.test.mjs`,
+`tests/valider-brouillon.test.mjs`, `tests/story-a-la-demande.test.mjs`, `tests/publier-stories.test.mjs`.
+
+### Niveau 1 : fait judiciaire établi, publication automatique
+
+Condition : un sujet repris par **au moins 2 médias** (réglage `minMediasSensible`, 2 par défaut) dont **chaque titre cite à la fois une juridiction et une décision rendue** :
+tribunal (correctionnel, judiciaire, administratif…), cour d'appel, Cour de cassation, Conseil constitutionnel, Conseil d'État, parquet qui **annonce l'ouverture d'une enquête**,
+et un jugement, une condamnation, une relaxe, un arrêt, une décision. Sont écartés du niveau 1 : « requiert », « rendra », « pourrait », « serait », « sera jugé », une enquête
+annoncée par un ministre (pas par le parquet), un seul média, un sujet de plus de 3 h.
+
+Le texte est **fabriqué par règles**, jamais écrit librement ni recopié d'un titre de presse :
+
+- titre : `Selon <médias> : <juridiction> a prononcé une condamnation | a prononcé une relaxe | a rendu une décision | a annoncé l'ouverture d'une enquête` ;
+- **aucun nom de personne**, aucun portrait, aucune citation de titre de presse ; aucun verbe ni qualificatif qui accuse, jamais « coupable » (contrôle `formulationSure`, refait par le publieur) ;
+- pied : `Sources : <médias> (articles du <date>)` et, dès qu'une procédure pénale est en jeu, « Toute personne citée est présumée innocente tant qu'elle n'a pas été jugée définitivement » ;
+- jamais « procédure en cours » sans juridiction ; le titre de presse reste seulement dans le champ `sujets` de l'entrée (détection des doublons).
+
+L'entrée va dans la file comme n'importe quelle story (champ `sensible: 1`) : mêmes règles de publication (7 h – 23 h, 60 min, registre sans doublon, plafond de stories, 3 h de fraîcheur).
+Si `validationHumaine` vaut `true`, le niveau 1 devient lui aussi un brouillon.
+
+### Niveau 2 : tout le reste, jamais d'envoi automatique
+
+Accusation, plainte annoncée, polémique, révélation d'un seul média, personne mise en cause sans décision : le script écrit un **brouillon**
+(`instagram/brouillons/<id>.jpg` + `<id>.json`, champ `sensible: 2`) et **rien n'entre dans `data/instagram-file.json`**. Le brouillon porte :
+
+- un titre neutre à nous, attribué : « Selon Mediapart : des faits non établis à ce stade » (ou « une polémique en cours ») ;
+- le titre du média **entre guillemets avec son nom** (la réponse de la personne est signalée quand le titre la cite) ;
+- le pied « Faits non établis par la justice : toute personne citée est présumée innocente » et les sources ; aucun portrait (le média est nommé en toutes lettres : le site ne stocke aucun logo de média).
+
+Au plus 3 brouillons par jour (`brouillonsSensiblesMax`), jamais la nuit ; un sujet de plus de 12 h, déjà en brouillon, déjà publié ou **rejeté depuis moins de 7 jours** n'est pas proposé. Un brouillon de plus de 7 jours est supprimé.
+Chaque brouillon est listé dans le **résumé de l'exécution** (onglet Actions, étape « Story automatique ») avec son identifiant et la marche à suivre.
+
+### Comment valider un brouillon (clics exacts)
+
+1. GitHub > dépôt `Tahns/hemicycle-france` > onglet **Actions**. Ouvrir la dernière exécution « Actualités » (ou « Mise à jour des données ») : le **résumé** (en bas de la page) donne la ligne « Brouillon SENSIBLE à valider », l'identifiant (12 caractères) et les sources.
+2. Relire l'image : dépôt > `instagram/brouillons/<id>.jpg` (et le lien de l'article cité).
+3. Onglet **Actions** > à gauche **« Valider un brouillon »** > bouton **Run workflow** > champ **id** : coller l'identifiant > champ **action** : **publier** ou **rejeter** > **Run workflow**.
+   - **publier** : le brouillon entre dans la file ; « Publier les stories » le sort à son prochain passage (7 h – 23 h, 60 min d'écart, registre sans doublon, plafonds) ; une story non sortie dans les 3 h est périmée.
+     Une story ne se valide qu'entre 7 h et 21 h (heure de Paris) ; un brouillon de plus de 48 h est refusé ; un sondage est refusé pendant la réserve électorale ; en monétisation, aucune presse.
+   - **rejeter** : le brouillon est supprimé et le sujet n'est pas reproposé pendant 7 jours (`data/instagram-rejetes.json`). Par défaut, le menu propose « rejeter » : il faut choisir « publier » volontairement.
+4. Le résumé de l'exécution dit ce qui s'est passé ; un refus est en rouge avec sa raison.
+
+### Demande directe : une story ou un post sur un article précis
+
+Onglet **Actions** > **« Story à la demande »** > **Run workflow** : **lien** de l'article (https, d'un média de `data/medias-connus.json`), **média** (facultatif, doit correspondre au lien),
+**titre** exact publié par le média (facultatif, cité entre guillemets), **type** `story` ou `post`. Le script crée **toujours un brouillon** (jamais de publication directe) puis il faut le valider comme ci-dessus.
+Un lien hors des médias connus (réseau social, site inconnu, `http`, faux domaine) est **refusé** et aucune image n'est créée ; il en va de même pour les mineurs, les violences sexuelles, le suicide et, en réserve électorale, un sondage.
+Pour un **post**, seul le post est publié (pas de story d'annonce ni de Reel). Pour ajouter un média : une ligne dans `data/medias-connus.json`.
+
+### Ce qui ne change pas
+
+Réserve électorale, pas de sondage en réserve, pas de doublon (id, liens, titres proches sur 36 h, registre), seuil de médias des autres sujets, titres génériques jamais publiés, 7 h – 23 h, 60 min, plafonds.
+Restent **écartés sans brouillon** : faits divers, violences, décès, mineurs, violences sexuelles, suicide, sujets hors de la vie politique française.
+Réglages (`data/stories-config.json`, tous facultatifs) : `sensibles` (`false` coupe tout), `minMediasSensible`, `brouillonsSensiblesMax`.
+
+### Limites : ce n'est pas un avis juridique
+
+Ce dispositif **réduit** le risque de poursuites (diffamation, loi du 29 juillet 1881 ; présomption d'innocence, art. 9-1 du Code civil) ; il **ne le supprime pas**.
+Il ne remplace ni l'appréciation d'un humain, ni celle d'un avocat. Points d'attention :
+
+- **Citer un média ne protège pas automatiquement** : reprendre une imputation diffamatoire, même attribuée, peut engager la responsabilité de celui qui la diffuse. C'est pourquoi le niveau 2 passe par une validation humaine et ne publie que le titre exact du média, avec son nom et sa source.
+- **Les brouillons sont dans un dépôt public** (`instagram/brouillons/`, hébergé par GitHub Pages) jusqu'à leur validation ou leur rejet : à relire et trancher vite ; une alternative serait un dépôt privé.
+- Le classement repose sur des **mots et des titres** : il peut se tromper (une décision mal comprise, un titre ambigu). La validation humaine du niveau 2 est le filet ; le niveau 1 est volontairement restrictif (2 médias, juridiction et décision dans le titre) et sans aucun nom.
+- Une décision de justice peut être **frappée d'appel** ou annulée ensuite : la mention « présumée innocente tant qu'elle n'a pas été jugée définitivement » est là pour cela ; le droit de réponse et la rectification d'une erreur restent à traiter à la main.
+- **Faire relire les formulations par un avocat en droit de la presse** est la vraie sécurité : les gabarits sont dans `scripts/sujets-sensibles.cjs` (`ficheNiveau1`, `ficheNiveau2`, `RE_ACCUSE`), faciles à modifier après son avis.
 
 ## 1. Prérequis (à faire une fois, environ 30 minutes)
 

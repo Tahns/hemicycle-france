@@ -498,6 +498,41 @@ try {
       assert.strictEqual(creations().length, 0);
     }
   }
+  // SUJETS SENSIBLES : niveau 1 (fait judiciaire établi) publié ; niveau 2 jamais sans validation humaine ; dernier filet sur la formulation
+  {
+    const titreN1 = "Selon Le Monde et franceinfo : le tribunal judiciaire de Paris a rendu une décision";
+    const n1 = (id, extra = {}) => entree(id, il_y_a(1), { sensible: 1, titre: titreN1, titrePropre: titreN1, medias: ["Le Monde", "franceinfo"], juridiction: "le tribunal judiciaire de Paris", nommePersonne: false,
+      pied: "Sources : Le Monde, franceinfo. Toute personne citée est présumée innocente tant qu'elle n'a pas été jugée définitivement.", sujets: ["Le tribunal judiciaire de Paris condamne un ancien ministre"], ...extra });
+    const n2 = (id, extra = {}) => entree(id, il_y_a(1), { sensible: 2, titre: "Selon Mediapart : des faits non établis à ce stade", titrePropre: "Selon Mediapart : des faits non établis à ce stade", medias: ["Mediapart"], sujets: ["Mediapart accuse un ministre de fraude"], ...extra });
+    const r1 = await lancer({ entrees: [n1("c1c1c1c1c1c1")] });
+    assert.strictEqual(publications().length, 1, "niveau 1 : fait judiciaire établi publié malgré les mots de la liste prudente dans le titre de presse");
+    assert.strictEqual(r1.registre.entrees[0].sensible, true, "le registre note le sujet sensible");
+    jamaisLeJeton(r1);
+    await lancer({ entrees: [n2("c2c2c2c2c2c2")] });
+    assert.strictEqual(publications().length, 0, "niveau 2 sans validation humaine : jamais publié");
+    await lancer({ entrees: [n2("c2c2c2c2c2c2", { valideHumain: true })] });
+    assert.strictEqual(publications().length, 0, "valideHumain sans date de validation : jamais publié");
+    await lancer({ entrees: [n2("c2c2c2c2c2c2", { valideHumain: true, valideLe: il_y_a(0.2) })] });
+    assert.strictEqual(publications().length, 1, "niveau 2 validé par un humain : publié");
+    await lancer({ entrees: [n1("c3c3c3c3c3c3", { titre: "Selon Le Monde : le tribunal a jugé le coupable", titrePropre: "Selon Le Monde : le tribunal a jugé le coupable" })] });
+    assert.strictEqual(publications().length, 0, "niveau 1 : « coupable » refusé par le dernier filet");
+    await lancer({ entrees: [n1("c4c4c4c4c4c4", { medias: ["Le Monde"] })] });
+    assert.strictEqual(publications().length, 0, "niveau 1 : un seul média refusé");
+    await lancer({ entrees: [n1("c5c5c5c5c5c5", { juridiction: "" })] });
+    assert.strictEqual(publications().length, 0, "niveau 1 : sans juridiction refusé");
+    await lancer({ entrees: [n1("c6c6c6c6c6c6", { sujets: ["Un mineur condamné par le tribunal"] })] });
+    assert.strictEqual(publications().length, 0, "niveau 1 : mineur dans le titre de presse refusé");
+    // validation humaine générale : seules les entrées validées par un humain sortent
+    await lancer({ entrees: [n1("c7c7c7c7c7c7")], config: { validationHumaine: true } });
+    assert.strictEqual(publications().length, 0, "validationHumaine : une entrée automatique ne sort pas");
+    await lancer({ entrees: [n2("c8c8c8c8c8c8", { valideHumain: true, valideLe: il_y_a(0.2) })], config: { validationHumaine: true } });
+    assert.strictEqual(publications().length, 1, "validationHumaine : une entrée validée par un humain sort");
+    // doublon : deux sujets sensibles voisins de 36 h ne se bloquent pas par leur formule, mais le même sujet est refusé
+    await lancer({ entrees: [n1("c9c9c9c9c9c9", { sujets: ["Budget : le tribunal administratif suspend la décision de la mairie de Lyon"] })], registre: { entrees: [{ id: "d1d1d1d1d1d1", statut: "publiee", publieLe: il_y_a(5), mediaId: "M", titre: titreN1, sensible: true, sujets: ["Sénat : adoption du projet de loi de finances en première lecture"], type: "story" }] } });
+    assert.strictEqual(publications().length, 1, "formule identique mais sujets différents : publié");
+    await lancer({ entrees: [n1("c9c9c9c9c9c9", { sujets: ["Sénat : adoption du projet de loi de finances en première lecture"] })], registre: { entrees: [{ id: "d1d1d1d1d1d1", statut: "publiee", publieLe: il_y_a(5), mediaId: "M", titre: titreN1, sensible: true, sujets: ["Sénat : adoption du projet de loi de finances en première lecture"], type: "story" }] } });
+    assert.strictEqual(publications().length, 0, "même sujet de presse déjà publié : refusé");
+  }
   console.log("[tests publier-stories] OK");
 } finally {
   serveur.close();

@@ -249,7 +249,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, videos: false, videosMax: 2 };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3 };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
@@ -793,6 +793,105 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   for (const f of ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "bbbbbbbbbbbb.jpg", "bbbbbbbbbbbb.mp4", "autre.txt"]) wf(jn(dossier, f), "x");
   AUTO.nettoyerImages(new Set(["aaaaaaaaaaaa"]), dossier);
   assert.deepStrictEqual(rd(dossier).sort(), ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "autre.txt"]);
+}
+
+// --- SUJETS SENSIBLES (justice, mises en cause) : niveau 1 = publication prudente, niveau 2 = brouillon, jamais en file ---
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const SS = createRequire(import.meta.url)("../scripts/sujets-sensibles.cjs");
+  const cfg = AUTO.normaliserConfig(null);
+  const art = (titre, media) => ({ titre, media, url: `https://www.example.org/${encodeURIComponent(media)}/${idSujet(titre)}`, date: il_y_a(1) });
+  const sens = (articles, extra = {}) => ({ medias: new Set(articles.map((a) => a.media)).size, derniere: il_y_a(1), illustration: { theme: "politique", personnes: [{ nom: "Jean Dupont" }] }, articles, ...extra });
+  const dec = sens([art("Le tribunal correctionnel de Paris condamne l'ancien ministre Jean Dupont", "Le Monde"), art("Jean Dupont condamné par le tribunal correctionnel de Paris, ministre déchu", "franceinfo")], { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] } });
+  const accus = sens([art("Mediapart accuse le ministre Jean Dupont de frais indus, qui dément", "Mediapart")]);
+  const vo = (sujets, extra = {}) => choisir({ actualites: { sujets }, direct: null, sondages: null, file: vide, now, config: cfg, ...extra });
+  const nom = (d) => /dupont/i.test([d.titre, d.champs.pied, d.champs.alt].join(" "));
+
+  // NIVEAU 1 : décision de justice citée par 2 médias -> entrée de file (texte prudent)
+  {
+    const c = vo([dec]);
+    assert.strictEqual(c.niveauSensible, 1);
+    assert.strictEqual(AUTO.destination(c, cfg), "file", "niveau 1 : publication automatique");
+    const d = AUTO.decrire(c, now);
+    assert.strictEqual(d.champs.sensible, 1);
+    assert.match(d.titre, /^Selon Le Monde et franceinfo : le tribunal correctionnel de Paris a prononcé une condamnation$/, "attribution aux médias, juridiction, aucun nom");
+    assert.ok(!nom(d), "aucun nom dans le titre, le pied ni le texte alternatif");
+    assert.match(d.champs.pied, /présumée innocente/);
+    assert.match(d.champs.pied, /Sources : Le Monde, franceinfo/);
+    assert.ok(!/coupable/i.test(JSON.stringify(d.champs)));
+    assert.deepStrictEqual(d.champs.sujets, [dec.articles[0].titre], "le titre de presse sert seulement à repérer les doublons");
+    assert.deepStrictEqual(d.args[7].illustration.personnes, [], "aucun portrait");
+    assert.strictEqual(d.args[7].sensible.sansCitation, true);
+    assert.strictEqual(d.sources.length, 2, "liens des articles pour les sources");
+    // la validation humaine générale transforme le niveau 1 en brouillon
+    assert.strictEqual(AUTO.destination(c, { ...cfg, validationHumaine: true }), "brouillon");
+    // le sujet n'est pas repris par le circuit habituel (mots de la liste prudente) mais est retenu ici
+    assert.ok(choisirSujet({ actualites: { sujets: [dec] }, direct: null, file: vide, now }).refus, "le circuit habituel écarte toujours ce sujet");
+  }
+  // Un seul média qui cite la décision : jamais niveau 1 (brouillon)
+  {
+    const c = vo([sens([art("Le tribunal correctionnel de Lyon condamne le maire de la ville", "Le Monde")], { illustration: { theme: "justice", personnes: [] } })]);
+    assert.strictEqual(c.niveauSensible, 2);
+    assert.strictEqual(AUTO.destination(c, cfg), "brouillon");
+  }
+  // NIVEAU 2 : accusation d'un seul média -> brouillon, JAMAIS en file, même sans validation humaine générale
+  {
+    const c = vo([accus]);
+    assert.strictEqual(c.niveauSensible, 2);
+    for (const conf of [cfg, { ...cfg, validationHumaine: false }, { ...cfg, minMediasSensible: 2 }]) assert.strictEqual(AUTO.destination(c, conf), "brouillon", "niveau 2 : jamais d'envoi automatique");
+    const d = AUTO.decrire(c, now);
+    assert.strictEqual(d.champs.sensible, 2);
+    assert.strictEqual(d.titre, "Selon Mediapart : des faits non établis à ce stade");
+    assert.match(d.champs.pied, /présumée innocente/, "aucun nom accusé sans « présumée innocente »");
+    assert.strictEqual(d.champs.reponseCitee, true, "la réponse de la personne est citée par le titre : signalée");
+    assert.strictEqual(d.champs.citation.media, "Mediapart");
+    assert.strictEqual(d.champs.nommePersonne, true, "personne nommée dans le titre cité : signalé dans le résumé");
+    assert.ok(!/dupont/i.test([d.titre, d.champs.pied].join(" ")), "le texte du site ne nomme personne ; le nom ne figure que dans la citation attribuée");
+    assert.strictEqual(d.args[7].articles[0].titre, accus.articles[0].titre, "titre du média cité tel quel, attribué");
+    const ligne = AUTO.ligneResume({ id: "abcabcabcabc", titre: d.titre, type: "story", sensible: 2, nommePersonne: true, sources: d.sources });
+    assert.match(ligne, /Valider un brouillon/);
+    assert.match(ligne, /abcabcabcabc/);
+    assert.match(ligne, /publier/);
+    assert.strictEqual(AUTO.estStoryComptee({ type: "story", sensible: 2 }), false, "un brouillon sensible ne consomme pas le plafond des stories");
+  }
+  // Priorité : niveau 1 avant un sujet ordinaire ; niveau 2 seulement s'il n'y a rien d'autre
+  {
+    const ordinaire = sujet("Le gouvernement présente son projet de budget pour 2027", 4);
+    assert.strictEqual(vo([accus, ordinaire]).indice, 1, "le sujet ordinaire passe avant un brouillon de niveau 2");
+    assert.strictEqual(vo([ordinaire, dec]).niveauSensible, 1, "le fait judiciaire établi passe avant");
+  }
+  // Garde-fous conservés : pas de doublon, rejets, réserve électorale, nuit, plafonds, fraîcheur, configuration
+  {
+    const c = vo([accus]);
+    assert.ok(vo([accus], { file: { entrees: [{ id: c.id, cree: il_y_a(2), sensible: 2, statut: "a-valider", titre: "x", sources: [] }] } }).refus, "déjà en brouillon : pas de doublon");
+    assert.ok(vo([accus], { file: { entrees: [{ id: "aaaaaaaaaaaa", cree: il_y_a(2), sensible: 2, statut: "a-valider", titre: "x", sources: accus.articles.map((a) => a.url) }] } }).refus, "lien d'article déjà utilisé");
+    assert.ok(vo([accus], { file: { entrees: [{ id: "aaaaaaaaaaaa", cree: il_y_a(2), sensible: 2, statut: "a-valider", titre: "Selon Mediapart : des faits non établis à ce stade", sujets: [accus.articles[0].titre], sources: [] }] } }).refus, "même sujet de presse récent (titresProches 36 h)");
+    assert.ok(vo([accus], { rejetes: { entrees: [{ id: c.id, rejeteLe: il_y_a(30), sources: [], sujets: [] }] } }).refus, "sujet rejeté par un humain : pas reproposé");
+    assert.ok(!vo([accus], { rejetes: { entrees: [{ id: c.id, rejeteLe: new Date(now.getTime() - 8 * 24 * 36e5).toISOString(), sources: [], sujets: [] }] } }).refus, "rejet de plus de 7 jours : de nouveau possible");
+    assert.ok(vo([accus], { now: new Date("2026-10-02T21:30:00Z") }).refus, "nuit (23 h 30 à Paris)");
+    assert.ok(vo([{ ...accus, derniere: il_y_a(13) }]).refus, "plus de 12 h : plus d'actualité");
+    assert.ok(vo([{ ...dec, derniere: il_y_a(4) }]).niveauSensible !== 1, "niveau 1 : plus de 3 h, plus de publication automatique");
+    assert.ok(vo([accus], { config: { ...cfg, sensibles: false } }).refus, "désactivé par la configuration");
+    assert.ok(vo([accus], { config: { ...cfg, monetisation: true } }).refus, "monétisation : aucune presse, donc aucun sujet sensible");
+    assert.ok(vo([accus], { config: { ...cfg, brouillonsSensiblesMax: 0 } }).refus, "plafond de brouillons");
+    const un = { entrees: [{ id: "bbbbbbbbbbbb", cree: il_y_a(1), sensible: 2, statut: "a-valider", titre: "y", sources: [] }] };
+    assert.ok(vo([accus], { file: un, config: { ...cfg, brouillonsSensiblesMax: 1 } }).refus, "1 brouillon sensible par jour au plus quand le plafond est à 1");
+    const pleines = { entrees: Array.from({ length: 4 }, (_, i) => ({ id: `cccccccccc0${i}`, cree: il_y_a(1), titre: `s${i}`, sources: [], type: "story" })) };
+    assert.notStrictEqual(vo([dec], { file: pleines }).niveauSensible, 1, "plafond de stories atteint : pas de niveau 1");
+    // réserve électorale : un sondage, même cité dans un titre sensible, n'est jamais retenu
+    const sondage = sens([art("Sondage Ifop : le maire Jean Dupont accusé par ses adversaires, intentions de vote", "Le Monde")]);
+    assert.ok(vo([sondage], { now: new Date("2027-04-17T10:00:00Z") }).refus, "réserve électorale");
+  }
+  // Fait divers, mineur, violence sexuelle, décès : jamais, ni en brouillon
+  for (const t of ["Un mineur de 16 ans mis en examen : le ministre réagit après la décision du tribunal", "Le maire condamné pour agression sexuelle par le tribunal correctionnel, selon la presse", "Mort d'un ancien ministre : le tribunal rend hommage"]) {
+    assert.ok(vo([sens([art(t, "Le Monde"), art(t + " ", "franceinfo")])]).refus, `jamais publié : ${t}`);
+  }
+  // Aucun nom accusé sans « présumée innocente » : tout texte produit passe formulationSure et mentionne la présomption quand une procédure est en jeu
+  for (const s of [dec, accus]) {
+    const d = AUTO.decrire(vo([s]), now);
+    assert.ok(SS.formulationSure([d.titre, d.champs.pied].join(" "), { juridiction: d.champs.juridiction || "" }).ok);
+    assert.match(d.champs.pied, /présumée innocente/);
+  }
 }
 
 console.log("stories-auto : tous les tests passent.");

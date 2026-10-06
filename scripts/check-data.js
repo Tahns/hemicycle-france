@@ -289,6 +289,10 @@ async function checkInstagramFile() {
     if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
+    // Sujets sensibles (scripts/sujets-sensibles.cjs) : niveau 1 = au moins 2 médias, une juridiction, aucun nom de personne ; niveau 2 = seulement après validation humaine
+    if (e.sensible !== undefined && ![1, 2].includes(e.sensible)) err(`${nom} : champ « sensible » invalide (1 ou 2)`);
+    if (e.sensible === 1 && (!Array.isArray(e.medias) || e.medias.length < 2 || !e.juridiction || e.nommePersonne === true)) err(`${nom} : une entrée sensible de niveau 1 exige au moins 2 médias, une juridiction et aucun nom de personne`);
+    if (e.sensible === 2 && !(e.valideHumain === true && e.valideLe)) err(`${nom} : une entrée sensible de niveau 2 ne peut entrer en file qu'après validation humaine (valideHumain, valideLe)`);
     // Contenu récurrent à créneau : pasAvant / expire cohérents, créneau dans la plage 7 h – 23 h (Paris)
     if (e.contenu !== undefined) {
       if (typeof e.contenu !== "string" || !e.contenu) err(`${nom} : champ « contenu » invalide`);

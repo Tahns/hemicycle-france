@@ -264,3 +264,20 @@ test("titreSujet : jamais un segment de 5 mots d'un titre de presse (sinon titre
   for (let k = 0; k + 5 <= m.length; k++) assert.ok(!pm.includes(` ${m.slice(k, k + 5).join(" ")} `), `segment copié : ${t.titre}`);
   if (brut) assert.ok(t.titre === brut.titre || t.generique === true);
 });
+
+test("sujets sensibles : le titre de repli ne nomme jamais la personne ni ne parle de procédure sans juridiction ; la formule sensible n'est jamais un titre de presse", () => {
+  const SS = createRequire(import.meta.url)("../scripts/sujets-sensibles.cjs");
+  const avecNom = sujet([["Mediapart", "Mediapart accuse le ministre Jean Dupont de frais indus"], ["Le Monde", "Frais indus : le ministre Jean Dupont accusé, il dément"]], { illustration: { theme: "politique", personnes: [{ nom: "Jean Dupont" }] } });
+  const t = titreSujet(avecNom, [], {});
+  assert.ok(!/dupont/i.test(t.titre), "aucun nom accusé dans le titre");
+  assert.ok(!/proc[ée]dure|mis en examen|accus|coupable/i.test(t.titre), "aucune procédure ni accusation sans juridiction");
+  // avec une juridiction : le titre rédigé reste sans nom (le circuit sensible fabrique son propre texte, attribué et daté)
+  const juge = sujet([["Le Monde", "Le tribunal correctionnel de Paris condamne l'ancien ministre Jean Dupont"], ["franceinfo", "Jean Dupont condamné par le tribunal correctionnel de Paris"]], { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] } });
+  assert.ok(!/dupont/i.test(titreSujet(juge, [], {}).titre));
+  // la formule du circuit sensible ne copie jamais un titre de presse et reste sans nom
+  const c = SS.classerSujet(juge, { motExclu: (x) => (/condamn|tribunal/i.test(x) ? "x" : null) });
+  const f = SS.ficheNiveau1(c, juge.derniere);
+  assert.ok(!/dupont|coupable/i.test(f.titre));
+  for (const a of juge.articles) assert.notStrictEqual(plat(f.titre), plat(a.titre));
+  assert.ok(SS.formulationSure(f.titre, { juridiction: c.juridiction }).ok);
+});

@@ -1,0 +1,57 @@
+name: Story à la demande
+# DEMANDE DIRECTE : une story ou un post sur un article précis (par exemple une révélation de Mediapart).
+# Crée TOUJOURS un brouillon prudent (jamais de publication directe) ; ensuite : workflow « Valider un brouillon ».
+# Mode d'emploi : docs/PUBLICATION-AUTO.md, section « Sujets sensibles : niveaux 1 et 2, comment valider un brouillon ».
+on:
+  workflow_dispatch:
+    inputs:
+      lien:
+        description: "Lien de l'article (https, d'un média connu : data/medias-connus.json)"
+        required: true
+        type: string
+      media:
+        description: "Média (facultatif ; s'il est indiqué, il doit correspondre au lien)"
+        required: false
+        type: string
+      titre:
+        description: "Titre de l'article, tel que publié par le média (facultatif ; cité entre guillemets avec le nom du média)"
+        required: false
+        type: string
+      type:
+        description: "story (image 9:16) ou post (image de fil 4:5 avec légende)"
+        required: true
+        type: choice
+        options:
+          - story
+          - post
+        default: story
+permissions:
+  contents: write
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+jobs:
+  demande:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Installer Playwright (Chromium)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      # Les entrées sont passées par l'environnement (jamais interpolées dans le script) ; le script les revérifie
+      - name: Créer le brouillon prudent
+        env:
+          LIEN: ${{ inputs.lien }}
+          MEDIA: ${{ inputs.media }}
+          TITRE: ${{ inputs.titre }}
+          TYPE: ${{ inputs.type }}
+        run: node scripts/story-a-la-demande.cjs
+      - name: Committer le brouillon
+        run: scripts/commit-push.sh "Brouillon à valider (demande directe, $(date -u +%Y-%m-%d\ %H:%M) UTC)" instagram/brouillons
