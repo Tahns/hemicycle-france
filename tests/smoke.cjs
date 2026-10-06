@@ -674,16 +674,24 @@ function verifier(cond, message) {
       verifier(erreurs.length === 0, etiquette(`erreurs JavaScript — ${erreurs.join(" | ")}`));
 
       // Audit axe-core : aucune violation critique ou sérieuse sur les pages principales, en clair et en sombre
+      // content-visibility:auto masque aux outils d'analyse le texte des blocs hors écran (faux positifs « sans nom ») : on le neutralise pour l'audit seulement
+      if (axeSource) await pg.addStyleTag({ content: "*{content-visibility:visible !important}" });
       if (axeSource) for (const theme of ["clair", "sombre"]) {
         await pg.evaluate((t) => { if (t === "sombre") document.documentElement.dataset.theme = "sombre"; else delete document.documentElement.dataset.theme; }, theme);
         for (const h of ["accueil", "actualites", "journal", "deputes", "scrutin", "sondages", "budget", "comprendre", "methode", "mentions"]) {
           await pg.evaluate((x) => { location.hash = x; }, h);
           await pg.waitForTimeout(900);
           if (!(await pg.evaluate("!!window.axe"))) await pg.evaluate(axeSource);
-          const violations = await pg.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa"] } })).violations
+          // Deux passes à une seconde d'écart : une transition de couleur ou un rendu encore en cours n'est pas une violation
+          let violations = [];
+          for (let essai = 0; essai < 2; essai++) {
+            if (essai) await pg.waitForTimeout(1200);
+            violations = await pg.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa"] } })).violations
             .filter((v) => v.impact === "critical" || v.impact === "serious")
             // axe ajoute lui-même un <li> orphelin au <body> pendant l'analyse : on ne le compte pas
             .map((v) => ({ id: v.id, nodes: v.nodes.filter((n) => n.target.join(" ") !== "body > li").map((n) => n.target.join(" ")) })).filter((v) => v.nodes.length));
+            if (!violations.length) break;
+          }
           verifier(violations.length === 0, etiquette(`axe (${theme}) #${h} : ${violations.map((v) => v.id + " " + v.nodes.slice(0, 3).join(", ")).join(" | ")}`));
         }
       }
