@@ -76,6 +76,26 @@ ou un **compteur** (nombre de jours avant une date à retenir), posés dans la z
 Essai local : `node scripts/videos-auto.cjs instagram/modeles/post-loi.jpg /tmp/essai.mp4 reel 276:86` (`reel`, `story`, `pour:contre` ou `jours:N`). Exemple : `instagram/modeles/reel-loi.mp4` (+ `reel-loi.jpg`).
 Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée que si ffmpeg et ffprobe sont installés).
 
+## Contenus récurrents et carrousels (sans dépendre d'un sujet de presse)
+
+`scripts/contenus-auto.cjs` (workflow `contenus-auto.yml`, deux passages par heure) ajoute à la même file des contenus tirés **uniquement de nos données officielles** (jamais de presse tierce, jamais d'avis, source citée dans l'image et la légende) ; `publier-stories.cjs` les publie **à l'heure de leur créneau** (champs `pasAvant` et `expire` de l'entrée).
+
+| Type (`contenu`) | Format | Données | Créneau par défaut |
+|---|---|---|---|
+| `aujourdhui` « Aujourd'hui à l'Assemblée » | story | `data/agenda-an.json` : QAG, votes solennels, textes du jour de séance (un point à mot prudent est écarté) | 8 h 30 |
+| `vote-jour` « Le vote du jour » | story | `data/lois.json` : motion de censure, article ou amendement du Gouvernement du dernier jour de vote (3 jours au plus) ; **jamais un vote final** (resté un post) | 12 h 30 |
+| `comprendre` | story | les 10 notions de la rubrique Comprendre d'`index.html` (lues directement dans la page), une par semaine, rotation sans répétition avant épuisement | samedi 10 h |
+| `chiffre-jour` | story | `data/indicateurs.json`, `data/budget.json`, ou dernier sondage **hors réserve** ; une même donnée au plus une fois tous les 7 jours | 19 h |
+| `carrousel-loi` « Une loi expliquée » | carrousel de 5 images | vote final adopté ou rejeté (AN ou Sénat) : contexte, intitulé officiel, résultat, suites de la procédure, sources | 17 h 30 |
+| `carrousel-hebdo` « Ce qu'il faut retenir cette semaine » | carrousel (4 à 8 images) | `data/digest/AAAA-Wss.json` (résumé hebdomadaire existant, hors presse) | dimanche 18 h 30 |
+
+- **Créneaux** : `data/stories-config.json`, clé `creneaux` : `{ "chiffre-jour": { "heure": "19:00", "jours": [1,2,3,4,5,6,7] } }` (jours : 1 lundi … 7 dimanche ; `false` coupe un créneau). Toujours entre 7 h et 22 h 30 (Paris) ; deux contenus d'un même jour sont espacés de 60 min (le second est repoussé : le dimanche, le chiffre sort à 19 h 30). `"contenusAuto": false` arrête tout. Un contenu est préparé environ 2 h avant son créneau (image en ligne sur GitHub Pages avant l'heure) ; passé son `expire`, il est marqué « périmé » et jamais publié. Le workflow de publication tourne à :11 et :41 de chaque heure : un contenu sort au plus 30 min après son créneau (plus si une autre publication date de moins de 60 min).
+- **Aucun doublon** : id stable par type et période (jour, semaine ou vote), `data/contenus-etat.json` (faits, rotation Comprendre, dernier passage de chaque chiffre), file, brouillons et registre consultés avant toute création. Une fiche Comprendre ou un chiffre jamais publié (périmé) redevient disponible.
+- **Réserve électorale** : aucun sondage ni simulation (chiffre du jour sondage, diapo sondage du résumé) tant que `reserveSondages()` est vraie ; ces entrées portent `reserve: true` (retirées de la file par `stories-auto.cjs`, ignorées par le publieur).
+- **Garde-fous conservés** : mots à risque (contrôle à la création et dernier filet à la publication sur chaque sujet affiché), registre `instagram-publiees.json`, nuit, 60 min, `validationHumaine` / monétisation (brouillons dans `instagram/brouillons/`), plafond de 2 posts par jour (carrousels compris). Ces contenus à créneau n'entrent pas dans `maxParJour` (stories de presse).
+- **Carrousel** (`scripts/carrousel.cjs`) : POST `/{IG_USER_ID}/media` pour chaque image (`is_carousel_item=true`, `alt_text`), attente de `FINISHED` à chaque étape, puis `media_type=CAROUSEL` + `children`, puis `media_publish`. Échec avant `media_publish` : rien n'est publié, nouvel essai au passage suivant ; échec de `media_publish` lui-même : **abandon** (entrée marquée périmée, jamais republiée). Légende : titre, 2-3 lignes factuelles, source officielle, `@hemicyclefrance`, 3 à 5 hashtags, jamais le lien du site. Images `instagram/auto/<id>.jpg`, `<id>-2.jpg`… (1080×1350, vérifiées par `check-data.js`).
+- **Essais** : `node scripts/contenus-auto.cjs --apercus` dessine un exemple de chaque type dans `instagram/modeles/` (`contenu-*.jpg`, `carrousel-loi-1..5.jpg`, `carrousel-hebdo-1..7.jpg`) d'après `tests/fixtures/contenus.json` ; `node tests/contenus-auto.test.mjs` et `node tests/carrousel.test.mjs`.
+
 ## Titres génériques
 
 Un sujet dont le titre rédigé par le site est un titre de repli (`generique: true` dans `data/actualites.json`, par exemple « Gilley : actualité locale » ou « Politique : l'essentiel du moment »)

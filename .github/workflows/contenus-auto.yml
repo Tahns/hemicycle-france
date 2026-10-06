@@ -1,0 +1,52 @@
+name: Contenus récurrents
+# Prépare les contenus Instagram récurrents (« Aujourd'hui à l'Assemblée », « vote du jour », « Comprendre », « chiffre du jour »,
+# carrousels « une loi expliquée » et « ce qu'il faut retenir cette semaine ») : voir scripts/contenus-auto.cjs et docs/PUBLICATION-AUTO.md.
+# Rien n'est publié ici : les images et la file sont committées ; scripts/publier-stories.cjs les publie à l'heure de leur créneau.
+# Deux passages par heure (:20 et :50) : un contenu est préparé environ 2 h avant son créneau (l'image doit être en ligne sur GitHub Pages avant).
+on:
+  schedule:
+    - cron: "20,50 4-20 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+jobs:
+  contenus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Un contenu récurrent est-il à préparer ?
+        id: contenu_choix
+        run: node scripts/contenus-auto.cjs --a-faire >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+      - name: Installer Playwright (Chromium)
+        if: steps.contenu_choix.outputs.a_faire == 'true'
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+        continue-on-error: true
+      - name: Préparer les contenus (images, file d'attente)
+        if: steps.contenu_choix.outputs.a_faire == 'true'
+        run: node scripts/contenus-auto.cjs
+        continue-on-error: true
+      - name: Contrôler la cohérence des données
+        if: steps.contenu_choix.outputs.a_faire == 'true'
+        run: node scripts/check-data.js
+      - name: Committer s'il y a du nouveau
+        if: steps.contenu_choix.outputs.a_faire == 'true'
+        run: scripts/commit-push.sh "Contenus récurrents ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-file.json data/contenus-etat.json instagram/auto instagram/file.atom instagram/brouillons
+      - name: Signaler un problème dans le résumé de l'exécution
+        if: failure()
+        run: |
+          {
+            echo "La préparation des contenus récurrents du $(date -u +%Y-%m-%d\ %H:%M) UTC a échoué : rien n'a été committé par cette exécution."
+            echo "Journal complet : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

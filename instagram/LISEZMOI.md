@@ -15,7 +15,7 @@ Sondages 2027 · Actus sourcées
 Données officielles, chaque heure
 ```
 
-- **À la une** (couvertures 1080×1920, à recadrer en cercle) : `rubrique-votes.png`, `rubrique-sondages.png`, `rubrique-actus.png`, `rubrique-senat.png`, `rubrique-quiz.png`, `rubrique-elysee.png`.
+- **À la une** : 14 couvertures 1080×1920 dans `a-la-une/` (aperçu : `a-la-une/planche.png`, rendu : `scripts/couvertures-a-la-une.cjs`), guide pas à pas et règle de classement dans `docs/A-LA-UNE.md`, liste hebdomadaire « à ajouter » dans `docs/a-la-une-semaine.md`. Création et ajout restent manuels (l'API Instagram ne les permet pas). Les anciennes `rubrique-*.png` restent pour mémoire.
 
 ## Publications automatiques (`instagram/auto/`)
 
@@ -40,3 +40,7 @@ Les sujets de justice ne sont plus perdus (détails, limites et marche à suivre
 Ce n'est pas un avis juridique : le risque est réduit, pas supprimé ; un avocat en droit de la presse peut valider les formulations.
 
 Aperçus des modèles : `modeles/post-date.jpg`, `modeles/post-loi.jpg` (posts) et `modeles/story-annonce-post.jpg` (story d'annonce).
+
+## Contenus récurrents et carrousels
+
+`scripts/contenus-auto.cjs` produit chaque jour, depuis nos seules données officielles, des stories à heure fixe : **Aujourd'hui à l'Assemblée** (8 h 30), **Le vote du jour** (12 h 30), **Comprendre** (une notion par semaine, samedi 10 h), **Le chiffre du jour** (19 h), et des posts **carrousels** : **Une loi expliquée en 5 images** (17 h 30) et **Ce qu'il faut retenir cette semaine** (dimanche 18 h 30). Heures réglables dans `data/stories-config.json` (`creneaux`). Aperçus : `modeles/contenu-aujourdhui.jpg`, `modeles/contenu-vote-jour.jpg`, `modeles/contenu-comprendre.jpg`, `modeles/contenu-chiffre-jour.jpg`, `modeles/carrousel-loi-1.jpg` à `-5.jpg`, `modeles/carrousel-hebdo-1.jpg` à `-7.jpg`. Détails : `docs/PUBLICATION-AUTO.md`.
