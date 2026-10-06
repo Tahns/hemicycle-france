@@ -463,12 +463,17 @@ function dateSujet(sujet, maintenant = new Date()) {
   const trouvees = new Map();
   for (const a of sujet.articles || []) {
     const t = nettoyer(a.titre);
-    for (const m of t.matchAll(/\b(?:le|dès le|jusqu['’]au|du|au)\s+(1er|\d{1,2})\s+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/giu)) {
+    for (const m of t.matchAll(/\b(?:le|dès le|jusqu['’]au|du|au)\s+(1er|\d{1,2})\s+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b(?:\s+((?:19|20)\d{2})\b)?/giu)) {
       const mois = MOIS.map(plat).indexOf(plat(m[2])) + 1;
       const jour = m[1] === "1er" ? 1 : Number(m[1]);
+      // Une date suivie d'une année passée (« loi du 9 décembre 1905 »), ou précédée de « depuis », « loi », « décret » n'est pas un rendez-vous à venir (audit J-18)
+      const avant = plat(t.slice(Math.max(0, m.index - 24), m.index));
+      if (/\bdepuis\s*$/.test(avant) || (/^du\b/i.test(m[0]) && /\b(?:loi|decret|ordonnance|arrete|traite)\s*(?:n°\s*\S+\s*)?$/.test(avant))) continue;
       let an = maintenant.getUTCFullYear();
+      if (m[3] && Number(m[3]) !== an && Number(m[3]) !== an + 1) continue;
+      if (m[3]) an = Number(m[3]);
       let iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`;
-      if (iso < aujourdhui) { an++; iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`; }
+      if (iso < aujourdhui && !m[3]) { an++; iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`; }
       if (iso < aujourdhui || iso > limite) continue;
       const e = trouvees.get(iso) || { iso, jour, mois: MOIS[mois - 1], medias: new Set() };
       e.medias.add(a.media);

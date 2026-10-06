@@ -206,7 +206,7 @@ function idSujet(titre) {
 
 const heureParis = (d) => Number(new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", hourCycle: "h23" }).formatToParts(d).find((p) => p.type === "hour").value);
 /** Jour (AAAA-MM-JJ) en UTC+2. */
-const jourUTC2 = (d) => new Date(new Date(d).getTime() + 2 * 36e5).toISOString().slice(0, 10);
+const jourUTC2 = (d) => jourParis(d); // nom historique : c'est le jour à Paris, été comme hiver (audit J-20 ; l'ancien « +2 h » fixe se trompait en hiver)
 
 const minutesParis = (d) => { const p = Object.fromEntries(new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(d).map((x) => [x.type, x.value])); return Number(p.hour) * 60 + Number(p.minute); };
 
@@ -923,7 +923,7 @@ function ficheDate(s, now = new Date()) {
     `Date à retenir : ${jourTxt} ${annee}`,
     "",
     `${titre}.`,
-    `Rendez-vous le ${quand}, dans ${pluriel(jours, "jour")}.`,
+    `Rendez-vous le ${quand}.`, // date absolue : un post reste au fil, « dans N jours » serait faux dès le lendemain (audit J-19)
     "",
     `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}) ; l'ordre du jour peut changer, à vérifier auprès de l'institution concernée.`,
     "",
@@ -931,7 +931,7 @@ function ficheDate(s, now = new Date()) {
     "#Politique #Agenda #Actualité",
   ].join("\n");
   return {
-    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, compte: `${jours} jours`, titre, citation, media: art.media || "" },
+    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "" },
     titreCourt: titre,
     sous: `Date à retenir · ${jourTxt}`,
     legende,

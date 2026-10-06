@@ -592,7 +592,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const d = AUTO.decrire(c, now);
     assert.strictEqual(d.type, "post");
     assert.strictEqual(d.post.fiche.spec.genre, "date");
-    assert.strictEqual(d.post.fiche.spec.compte, "25 jours");
+    assert.strictEqual(d.post.fiche.spec.compte, undefined, "pas de compte à rebours figé dans un post (J-19)");
     assert.strictEqual(d.post.fiche.spec.semaine, "Mardi");
     assert.strictEqual(d.champs.postGenre, "date");
     assert.strictEqual(d.champs.dateIso, "2026-10-27");

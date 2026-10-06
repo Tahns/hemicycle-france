@@ -240,7 +240,7 @@ test("dateSujet (non-régression) : une date future recoupée par deux médias e
   assert.strictEqual(tp.dateSujet(s(["Le projet de loi sera examiné au Sénat le 27 octobre"]), now), null);
 });
 
-test("dateSujet : une date de loi ancienne (« loi du 9 décembre 1905 ») devient une « date à retenir » à venir", { todo: "J-18 : l'année écrite après le jour/mois est ignorée ; « du 9 décembre 1905 » → 2026-12-09, puis post permanent « Date à retenir »" }, () => {
+test("dateSujet : une date de loi ancienne (« loi du 9 décembre 1905 ») devient une « date à retenir » à venir", () => {
   const now = new Date("2026-10-06T10:00:00Z");
   const r = tp.dateSujet({ articles: [{ media: "A", titre: "Laïcité : la loi du 9 décembre 1905 en débat à l'Assemblée" }, { media: "B", titre: "Loi de 1905 : le débat sur la laïcité, retour sur la loi du 9 décembre 1905" }] }, now);
   assert.strictEqual(r, null);
@@ -253,7 +253,7 @@ test("ficheDate (non-régression) : la citation de presse du post garde le nom d
   assert.match(f.legende, /Date annoncée par la presse \(franceinfo, Le Monde\)/);
 });
 
-test("ficheDate : un post reste au fil, mais sa légende et son image affirment « dans 25 jours »", { todo: "J-19 : le décompte est figé à la date de publication ; le lendemain il est faux. Écrire la date seule (ou « le mardi 27 octobre »), garder le compte à rebours pour la story" }, () => {
+test("ficheDate : un post reste au fil, mais sa légende et son image affirment « dans 25 jours »", () => {
   const s = { titrePropre: { titre: "Loi casseurs-payeurs : examen au Sénat" }, date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, articles: [{ media: "franceinfo", titre: "Examen au Sénat le 27 octobre" }, { media: "Le Monde", titre: "Examen le 27 octobre" }] };
   const f = ficheDate(s, new Date("2026-10-02T10:00:00Z"));
   assert.doesNotMatch(f.legende, /dans \d+ jours?/);
@@ -291,7 +291,7 @@ test("publier-stories (non-régression) : plafond par jour calculé sur le jour 
   assert.ok(r.entree, r.refus);
 });
 
-test("jourUTC2 vs jourParis : en hiver, 23 h 30 à Paris tombe déjà le « lendemain » pour le plafond de stories-auto", { todo: "J-20 (mineur) : jourUTC2 fixe +2 h toute l'année ; en hiver le jour change à 23 h Paris. Sans effet la nuit (rien n'est produit), mais un sondage (autorisé jusqu'à 23 h 30) est compté sur le mauvais jour" }, () => {
+test("jourUTC2 vs jourParis : en hiver, 23 h 30 à Paris tombe déjà le « lendemain » pour le plafond de stories-auto", () => {
   const d = new Date("2026-12-10T22:30:00Z"); // 23 h 30 à Paris (UTC+1)
   assert.strictEqual(jourUTC2(d), jourParis(d));
 });

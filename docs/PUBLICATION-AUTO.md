@@ -12,8 +12,20 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 
 - une seule publication par passage ; 4 stories et 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; au moins 60 min entre deux publications (voir « Posts » pour l'annonce d'un post) ;
 - une story préparée depuis plus de 3 h est marquée « périmée » et n'est jamais publiée ;
-- jamais deux fois la même story (registre `data/instagram-publiees.json`) ;
-- aucun sondage pendant la réserve électorale ;
+- jamais deux fois la même story (registre `data/instagram-publiees.json`) ; l'intention est écrite au registre (« en-cours ») AVANT l'appel `media_publish` ; si la réponse est perdue
+  (timeout, erreur 5xx, coupure) ou si l'exécution est interrompue, le script cherche la publication côté Instagram (`/stories` ou `/media`) : retrouvée, elle est inscrite « publiee » ;
+  sinon elle est marquée « incertaine », comptée dans les plafonds, **jamais rejouée**, et l'exécution se termine en erreur (code 1) : vérifiez alors le compte Instagram ;
+- **échec fermé** : un registre ou une file illisibles (JSON tronqué, conflit de fusion) = rien n'est publié, alerte et code de sortie 1 ; une configuration `data/stories-config.json` illisible
+  = validation humaine active (rien ne sort sans validation), alerte et code 1 ; un fichier absent garde les valeurs par défaut ;
+- une liste unique de mots prudents (`scripts/liste-prudente.cjs`, mots entiers, accents et espaces insécables normalisés) sert à la création des stories, aux titres rédigés, au dernier filet de
+  la publication et aux sujets sensibles ; les **données officielles** (ordre du jour de l'Assemblée, titres de textes et de scrutins, notions de « Comprendre ») suivent un niveau « officiel » réduit
+  (une loi contre les violences sexuelles n'est pas une accusation), les **titres de presse** la liste complète ;
+- « Repris par N médias » et les seuils de médias comptent les médias **distincts** (un groupe de presse comme EBRA, ou une dépêche reprise à l'identique, compte une fois) ;
+- **sondages** : aucune story de sondage (ni chiffre, ni contexte de sondage, ni brouillon) dans les 24 h qui précèdent la réserve électorale ni pendant (une story reste visible 24 h) ; le
+  commanditaire est obligatoire (notice déposée à la Commission des sondages, sinon nom du fichier de la notice) et chaque image qui cite un sondage porte les mentions légales (institut, commanditaire,
+  dates, échantillon, marge d'erreur) ; sans commanditaire connu, pas de story ;
+- **contenus retirés** : `data/instagram-retires.json` liste les identifiants de publications faites hors chaîne qui violent la liste prudente (voir docs/AUDIT-PUBLICATIONS.md, J-23) : jamais republiés,
+  leur texte n'est jamais repris, leurs images sont supprimées du site ; le registre n'est pas modifié ; la story reste à retirer à la main dans l'application Instagram ;
 - `data/stories-config.json` : si `validationHumaine` vaut `true`, rien n'est publié sauf les brouillons validés par un humain (voir « Sujets sensibles ») ; en mode `monetisation`,
   seules les stories sans titre de presse le sont ;
 - si l'image n'est pas encore en ligne sur GitHub Pages, nouvel essai au passage suivant ;
@@ -216,7 +228,8 @@ GitHub masque ensuite ces valeurs ; le script ne les affiche jamais.
    Il faut une story récente (moins de 3 h) dans la file pour que quelque chose parte ; sinon « rien à publier » est normal.
 3. Ensuite, le workflow tourne seul (toutes les 15 minutes et après chaque relevé d'actualités). Le registre `data/instagram-publiees.json` est committé après chaque publication.
 
-Les alertes (jeton invalide, expire dans moins de 10 jours, échec de l'API) apparaissent **uniquement dans le résumé** de l'exécution : aucun e-mail, aucune « issue ». Pensez à le consulter de temps en temps.
+Les alertes apparaissent dans le résumé de l'exécution. Un **jeton invalide ou expiré**, un registre ou une configuration illisibles, une publication « incertaine » font sortir le script en **code 1** : l'exécution est rouge et GitHub envoie un e-mail
+(l'étape suivante, qui enregistre le registre, s'exécute quand même : `if: always()`). L'alerte « le jeton expire dans moins de 10 jours » reste un simple avertissement du résumé ; le renouvellement automatique du jeton n'est pas fait.
 
 ## 4. Renouveler le jeton (tous les ~50 jours)
 

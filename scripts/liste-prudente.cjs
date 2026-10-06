@@ -18,9 +18,9 @@ const sansAccent = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "
 // ── Groupes de termes (écrits sans accent) ──────────────────────────────────────────────────────────────────────────────────────────
 // procédure formelle : enquête, juridiction, décision de justice
 const PROCEDURE_TERMES = [
-  "mis en examen", "mise en examen", "garde a vue", "gardes a vue", "enquete*", "enqueteur*", "poursuiv*", "poursuite", "poursuites", "condamn*", "relaxe*", "relaxer", "inculp*",
+  "mis en examen", "mise en examen", "garde a vue", "gardes a vue", "enquete*", "enqueteur*", "poursuivi", "poursuivie", "poursuivis", "poursuivies", "poursuite", "poursuites", "condamn*", "relaxe*", "relaxer", "inculp*",
   "incarcer*", "ecroue*", "emprisonn*", "prison*", "detention*", "detenu*", "perquisition*", "mandat d'arret", "proces", "tribunal*", "parquet*", "procureur*",
-  "juge", "juges", "magistrat*", "judiciaire*", "justice", "citation directe", "interpell*", "arrestation*", "police arrete", "gendarmes arretent", "ineligib*",
+  "juges", "magistrat*", "judiciaire*", "justice", "citation directe", "interpell*", "arrestation*", "police arrete", "gendarmes arretent", "ineligib*",
   "requis", "requisition*", "requisitoire*", "requiert", "assises", "cour d'appel", "en appel", "cour de cassation", "extradition*", "jugement", "jugements", "juge d'instruction",
   "soupcon*", "victime", "victimes", "mise en danger", "avocat*",
 ];
@@ -33,7 +33,7 @@ const ACCUSATION_TERMES = [
 ];
 // juridictions et décisions de justice explicites (titres propres : sans elles, jamais de procédure affirmée)
 const JURIDICTION_TERMES = ["mis en examen", "mise en examen", "garde a vue", "condamn*", "inculp*", "ecroue*", "proces", "parquet*", "tribunal*", "cour d'appel", "cour de cassation", "cour d'assises", "assises",
-  "conseil d'etat", "juge", "juges", "magistrat*", "mandat d'arret", "relaxe*", "ineligib*", "extradition*", "prison*"];
+  "conseil d'etat", "juges", "magistrat*", "mandat d'arret", "relaxe*", "ineligib*", "extradition*", "prison*"];
 // violences contre les personnes
 const VIOLENCES_TERMES = [
   "viol", "viols", "violer", "viole", "violee", "violees", "violence", "violences", "violent", "violents", "violente", "violentes", "violemment",
@@ -66,8 +66,11 @@ const NOMBRES_LETTRES = "un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|d
 const RE_AGE_MINEUR = new RegExp(`(?:\\b(?:de|d'|a|age|agee|ages|agees)\\s*|[,(]\\s*)(?:\\d{1,2}|${NOMBRES_LETTRES})\\s*-?\\s*ans\\b`);
 
 const echap = (m) => m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-const motif = (termes) => new RegExp(termes.map((m) => (m.endsWith("*") ? `\\b${echap(m.slice(0, -1))}` : `\\b${echap(m)}\\b`)).join("|"));
-const RE = { procedure: motif(PROCEDURE_TERMES), accusation: motif(ACCUSATION_TERMES), juridiction: motif(JURIDICTION_TERMES), violences: motif(VIOLENCES_TERMES), drame: motif(DRAME_TERMES), mineurs: motif(MINEURS_TERMES), polemique: motif(POLEMIQUE_TERMES) };
+// « juge » est aussi un verbe (« Trump juge l'islam ») et « poursuivre » aussi (« poursuivre le mouvement ») : seuls comptent le juge nom (« un juge », « le juge d'instruction ») et la poursuite en justice
+const JUGE_NOM = "\\b(?:un|une|le|ce|cet|du|au|ancien|ancienne|jeune)\\s+juge\\b|\\bjuge\\s+(?:d'|des|de|administratif|judiciaire|antiterroriste|unique)\\b";
+const POURSUITE = "\\bpoursui\\w+\\s+(?:en justice|pour|devant)\\b";
+const motif = (termes, extras = []) => new RegExp([...termes.map((m) => (m.endsWith("*") ? `\\b${echap(m.slice(0, -1))}` : `\\b${echap(m)}\\b`)), ...extras].join("|"));
+const RE = { procedure: motif(PROCEDURE_TERMES, [JUGE_NOM, POURSUITE]), accusation: motif(ACCUSATION_TERMES), juridiction: motif(JURIDICTION_TERMES, [JUGE_NOM, POURSUITE]), violences: motif(VIOLENCES_TERMES), drame: motif(DRAME_TERMES), mineurs: motif(MINEURS_TERMES), polemique: motif(POLEMIQUE_TERMES) };
 
 // Niveau « officiel » : textes de loi, scrutins, ordre du jour, notions du site. Une loi « contre les violences sexuelles » est un texte officiel,
 // pas une accusation. Restent écartés : une personne visée par la justice, un décès, un fait divers, une polémique.
