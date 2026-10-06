@@ -116,7 +116,7 @@ assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027
 // ---------- Déclencheur « nouveau sondage » ----------
 const jour = (h) => new Date(now.getTime() - h * 36e5).toISOString().slice(0, 10);
 const scores = { "Marine Le Pen": [31, 36], "Jean-Luc Mélenchon": [14, 17], "Édouard Philippe": [15, 24] };
-const inst = (nom, hFin, extra = {}) => ({ nom, date: "29 septembre 2026", dateFin: jour(hFin), echantillon: 1500, hypotheses: 3, url: "https://www.commission-des-sondages.fr/notices/files/x.pdf", scores, ...extra });
+const inst = (nom, hFin, extra = {}) => ({ nom, date: "29 septembre 2026", dateFin: jour(hFin), echantillon: 1500, hypotheses: 3, url: "https://www.commission-des-sondages.fr/notices/files/x-sondage-le-figaro-30-septembre.pdf", scores, ...extra });
 const sond = (...instituts) => ({ instituts });
 const choixS = (instituts, opts = {}) => choisirSondage({ sondages: sond(...instituts), file: vide, now, ...opts });
 // Nouveau sondage (terrain fini hier, publié aujourd'hui) : retenu, avec son identifiant

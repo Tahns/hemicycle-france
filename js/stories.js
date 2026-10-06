@@ -417,6 +417,17 @@ async function storyPCredits(noms){
   const liste = (await lireJSON("data/portraits.json"))?.portraits || {};
   return noms.map(n=> liste[n]).filter(p=>p?.fichier).map(p=> `${p.auteur || "auteur inconnu"} (${p.licence})`);
 }
+// Commanditaire d'un sondage (mention obligatoire, loi du 19 juillet 1977, art. 2) : notice déposée (data/sondages-veille.json), à défaut nom du fichier de la notice.
+// Même table que scripts/sondage-commanditaire.cjs. Sans commanditaire connu, aucune image de sondage n'est produite.
+const STORY_COMMANDITAIRES = [["le-figaro","Le Figaro"],["figaro","Le Figaro"],["rtl","RTL"],["politico","Politico"],["cnews","CNews"],["huffpost","HuffPost"],["le-monde","Le Monde"],["lci","LCI"],["bfmtv","BFMTV"],["franceinfo","franceinfo"],["ouest-france","Ouest-France"],["l-opinion","L'Opinion"],["la-tribune","La Tribune"],["le-parisien","Le Parisien"],["marianne","Marianne"],["le-jdd","Le JDD"],["jdd","Le JDD"],["sud-radio","Sud Radio"],["europe-1","Europe 1"],["europe1","Europe 1"],["france-24","France 24"],["l-humanite","L'Humanité"],["la-croix","La Croix"],["challenges","Challenges"],["valeurs-actuelles","Valeurs actuelles"],["le-point","Le Point"],["l-express","L'Express"],["les-echos","Les Échos"],["tf1","TF1"],["m6","M6"],["le-telegramme","Le Télégramme"],["sud-ouest","Sud Ouest"],["la-provence","La Provence"],["le-progres","Le Progrès"],["paris-match","Paris Match"],["l-obs","L'Obs"],["liberation","Libération"]];
+function storyCommanditaire(inst, veille){
+  const platS = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const n = (veille || []).find(e=> e?.media && platS(e.institut) === platS(inst.nom) && e.terrain?.fin === inst.dateFin);
+  if(n) return String(n.media);
+  const fichier = platS(decodeURIComponent(String(inst.url || "").split("?")[0].split("/").pop() || "")).replace(/\.pdf$/, "");
+  for(const [frag, nom] of STORY_COMMANDITAIRES) if(new RegExp("(^|-)" + frag + "(-|$)").test(fichier)) return nom;
+  return "";
+}
 const storyPDateLongue = iso => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
 const storyPPct = v => v === null || v === undefined ? "—" : v < 1 ? (v > 0 ? "< 1 %" : "< 0,1 %") : v > 99 ? "> 99 %" : `${nombreFr(Math.round(v))} %`;
 const storyPCouleurCandidat = nom => CANDIDATS.find(c=>c.id === nom)?.couleur || "#8A8C94";
@@ -900,8 +911,8 @@ async function dessinerStory(type, info){
     if(!liste.length) return null;
     // Commanditaire : relevé sur la notice déposée à la Commission des sondages, quand il est connu
     const veille = (await lireJSON("data/sondages-veille.json"))?.enquetes || [];
-    const notice = veille.find(e=> e.institut === inst.nom && e.terrain?.fin === inst.dateFin);
-    const commanditaire = notice?.media || "";
+    const commanditaire = storyCommanditaire(inst, veille);
+    if(!commanditaire) return null; // mention obligatoire (loi du 19 juillet 1977, art. 2) : pas de commanditaire, pas d'image
     y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:STORY.bleu });
     y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 });
     y = storyTexte(ctx, `${inst.nom}${commanditaire ? ` pour ${commanditaire}` : ""} · terrain : ${inst.date}`, marge, y, { taille:28, poids:600, couleur:STORY.blanc, max:2 });
@@ -920,12 +931,15 @@ async function dessinerStory(type, info){
     });
     // Mentions obligatoires (loi n° 77-808 du 19 juillet 1977) : institut, commanditaire, dates, échantillon, marge d'erreur, notice, source
     const erreur = inst.n ? `±${(1.96 * Math.sqrt(0.25 / inst.n) * 100).toFixed(1).replace(".", ",")} pts` : "";
-    const mentions = `Sondage ${inst.nom}${commanditaire ? ` pour ${commanditaire}` : " (commanditaire non relevé)"}, terrain : ${inst.date}, auprès de ${inst.echantillon}. `
+    // Crédit des portraits affichés (CC BY / CC BY-SA : l'attribution est obligatoire)
+    const credits = [...new Set(await storyPCredits(liste.filter((c, i)=> photos[i]).map(c=>c.nom)))];
+    const mentions = `Sondage ${inst.nom} pour ${commanditaire}, terrain : ${inst.date}, auprès de ${inst.echantillon}. `
       + (erreur ? `Marge d'erreur théorique : ${erreur} à 95 %. ` : "")
       + `Chiffres tels que publiés${inst.nbHyp > 1 ? ` : fourchette selon les ${inst.nbHyp} hypothèses de candidatures testées` : " (hypothèse unique testée)"}. `
       + `Une notice détaillée est déposée à la Commission des sondages (commission-des-sondages.fr), qui précise la méthode. `
-      + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`;
-    storyTexte(ctx, mentions, marge, yLegal + 30, { taille:23, couleur:STORY.ciel, max:9, interligne:1.2 });
+      + `Source : ${inst.source}, via la liste Wikipédia des sondages. Un sondage n'est pas une prévision.`
+      + (credits.length ? ` Portraits : ${credits.join(" ; ")}, Wikimedia Commons.` : "");
+    storyTexte(ctx, mentions, marge, yLegal + 30, { taille:23, couleur:STORY.ciel, max:11, interligne:1.2 });
     storyAccroche(ctx, "Tous les sondages", 1636);
     nom = `sondage-${slugDep(inst.nom)}`;
   }

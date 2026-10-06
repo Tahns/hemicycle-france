@@ -22,6 +22,12 @@ const existe = (f) => access(f).then(() => true, () => false);
 const plat = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, "'").toLowerCase();
 const echap = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+// Une clé de sondage est une personne si elle ressemble à un nom (majuscules, au moins deux mots) : « vote blanc », « abstention », « autres » n'en sont pas
+const NOM_DE_PERSONNE = /^\p{Lu}[\p{L}'’.-]*(?: [\p{L}'’.-]+)+$/u;
+const NON_NOMINATIF = /^(?:vote|abstention|autres?|sans opinion|nsp|blanc|nul)\b/i;
+// Noms de famille qui sont aussi des mots courants : jamais reconnus seuls (« le maire », « une borne », « le blanc »), seulement avec le prénom (audit J-10)
+const FAMILLES_COMMUNES = new Set(["le maire", "maire", "blanc", "royal", "berger", "martin", "borne", "roux", "petit", "grand", "fort", "noir", "brun", "bonne", "lemaire", "vert", "rouge", "gros", "long", "moine", "pape"]);
+
 // Partis cités dans les titres -> logo (icons/partis/<code>.png, codes des groupes de l'Assemblée)
 const PARTIS = [
   ["RN", /\brn\b|rassemblement national|lepeniste/],
@@ -76,12 +82,20 @@ export async function construireIndex() {
   }
   for (const nom of FIGURES) await ajouter(nom, { notable: true });
   // Personnalités testées dans les sondages de la présidentielle (Le Pen, Mélenchon…)
-  for (const [nom, parti] of Object.entries(sondages?.candidats || {})) if (!/\(/.test(nom)) await ajouter(nom, { parti, notable: true });
+  for (const [nom, parti] of Object.entries(sondages?.candidats || {})) if (!/\(/.test(nom) && NOM_DE_PERSONNE.test(nom) && !NON_NOMINATIF.test(nom)) await ajouter(nom, { parti, notable: true });
   for (const [nom, p] of Object.entries(portraits?.portraits || {})) {
     const photo = p.chemin || `photos/personnalites/${slug(nom)}.jpg`;
     if (p.fichier && personnes.has(nom) && (await existe(photo))) {
-      Object.assign(personnes.get(nom), { photo: personnes.get(nom).photo || photo, credit: `${p.auteur || "Auteur inconnu"}, ${p.licence}, Wikimedia Commons` });
+      const pers = personnes.get(nom);
+      // La photo affichée est la photo officielle (Assemblée, Sénat) quand elle existe : le crédit Commons ne s'y applique PAS (audit J-12)
+      if (!pers.photo) Object.assign(pers, { photo, credit: `${p.auteur || "Auteur inconnu"}, ${p.licence}, Wikimedia Commons` });
     }
+  }
+  // Photo officielle : crédit de sa source (licence à confirmer, voir docs/AUDIT-PUBLICATIONS.md J-12)
+  for (const p of personnes.values()) {
+    if (p.credit || !p.photo) continue;
+    if (/^photos\/deputes\//.test(p.photo)) p.credit = "Assemblée nationale";
+    else if (/^photos\/senateurs\//.test(p.photo)) p.credit = "Sénat";
   }
 
   // Version haute définition (stories Instagram nettes) quand elle existe : photos/<dossier>/hd/<fichier>
@@ -98,6 +112,7 @@ export async function construireIndex() {
     motifs.push({ p, re: new RegExp(`(^|[^a-z])${echap(plat(p.nom))}($|[^a-z])`) });
     if (!p.notable) continue;
     const famille = plat(p.nom).split(" ").slice(1).join(" ");
+    if (FAMILLES_COMMUNES.has(famille)) continue;
     if (famille.length >= 4) familles.set(famille, familles.has(famille) ? null : p);
   }
   for (const [famille, p] of familles) {
@@ -117,6 +132,11 @@ export function illustrer(titres, motifs) {
       if (vus.has(m.p.nom)) continue;
       let ok = m.re.test(t);
       if (ok && m.famille) {
+        // Casse du nom propre : « Lecornu », « Le Pen » (jamais « lecornu », ni « Le maire » qui est une fonction) ; en capitales, accepté
+        const famille0 = m.p.nom.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ").slice(1).join(" ");
+        const brut0 = titre.normalize("NFD").replace(/[̀-ͯ]/g, "");
+        const exact = new RegExp(`(^|[^A-Za-z])(?:${echap(famille0)}|${echap(famille0.toUpperCase())})(?![A-Za-z])`);
+        if (!exact.test(brut0)) { continue; }
         // Rejeté si le nom de famille suit un autre prénom ou précède un nom (casse lue dans le titre d'origine)
         const brut = titre.normalize("NFD").replace(/[̀-ͯ]/g, "");
         const famille = m.p.nom.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ").slice(1).join(" ");

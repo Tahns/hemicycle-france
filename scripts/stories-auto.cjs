@@ -103,30 +103,10 @@ const GARDER = 30;
 const IMAGE_JOURS = 3;
 const MAX_OCTETS = 8 * 1024 * 1024;
 
-const sansAccent = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-
-// Mots qui écartent un sujet (comparés sans accents ni casse, dans TOUS les titres du sujet).
-// Liste volontairement large : une story manquée ne coûte rien, une publication à tort si.
-const MOTS_EXCLUS = [
-  "accus", "mis en examen", "mise en examen", "mis en cause", "mise en cause", "garde a vue", "gardes a vue",
-  "plainte", "enquete visant", "enquete ouverte", "enquete judiciaire", "enquete preliminaire", "ouvre une enquete", "enquete pour",
-  "poursuiv", "poursuite", "condamn", "relaxe", "soupcon", "suspect", "inculp", "mise en danger",
-  "incarcer", "ecroue", "emprisonn", "prison", "detention", "perquisition", "mandat d'arret", "mandat d’arret",
-  "proces", "tribunal", "parquet", "juge ", "judiciaire", "justice", "citation directe", "interpell",
-  "agress", "\\bviol", "meurtre", "assassin", "homicide", "\\btue\\b", "\\btuee?s?\\b", "fusillade", "poignard", "coups de couteau", "attentat", "terroris",
-  "mort de", "mort d'", "mort d’", "la mort", "morte", "meurt", "decede", "deces", "deuil", "hommage a", "suicide", "disparition", "disparu",
-  "drame", "tragedie", "fait divers", "faits divers", "blesse",
-  "pedo", "inceste", "harcelement", "sexuel", "sexiste", "antisemit", "racis", "homophob", "discrimination",
-  "mineur", "victime", "fillette", "garconnet", "adolescent", "collegien", "collegienne", "enfant de", "bebe",
-  "menace de mort", "menaces", "diffam", "calomni", "mentir", "mensonge", "fraude", "corruption", "detournement", "escroquerie", "blanchiment",
-  "scandale", "affaire ",
-  // reproches, polémiques et attaques entre personnalités : pas de titre de presse en grand qui vise une personne nommée
-  "polemique", "derapage", "\\bclash", "\\btacle", "fustige", "accable", "recadre", "tolle", "inelegant", "honte", "honteu", "insult", "injur", "propos choquant",
-  "s'excuse", "s’excuse", "desole", "excuses", "\\battaq", "desavoue", "trahi", "trahison",
-];
-const RE_EXCLUS = new RegExp(MOTS_EXCLUS.map((m) => (m.startsWith("\\b") ? m : m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))).join("|"), "i");
-// Âge de moins de 20 ans cité dans un titre (« une adolescente de 15 ans ») : mineur potentiel
-const RE_AGE_MINEUR = /\b(?:1\d|[2-9]|0?\d) ?(?:ans|-ans)\b/;
+// Liste prudente UNIQUE (mots entiers, sans accents) : scripts/liste-prudente.cjs, partagée avec titres-propres, publier-stories, sujets-sensibles et contenus-auto.
+const LP = require("./liste-prudente.cjs");
+const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
+const { sansAccent } = LP;
 
 // Rubriques génériques : un titre rédigé « Énergie » ou « Économie » ne dit rien (pas de story)
 const RUBRIQUES_GENERIQUES = new Set(["energie", "economie", "social", "politique", "societe", "international", "monde", "france", "budget", "justice", "culture", "sante", "education", "ecologie", "environnement", "securite", "sport", "europe", "gouvernement", "vie politique", "elections", "election", "senat", "assemblee"]);
@@ -136,7 +116,8 @@ function titreGenerique(titre) {
   return !t || RUBRIQUES_GENERIQUES.has(t) || t.split(" ").filter((w) => w.length > 2).length < 2;
 }
 
-const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont"]);
+// Mots du gabarit « X : l'essentiel du moment » : ils ne désignent pas un sujet (J-09)
+const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont", "essentiel", "moment", "suivi", "journee", "editorial", "actualite"]);
 const racines = (t) => new Set(sansAccent(t).replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length >= 4 && !MOTS_VIDES.has(w)).map((w) => w.slice(0, 5)));
 /** Deux titres rédigés parlent-ils du même sujet (« Blocage des lycées » / « Blocus des lycées ») ? */
 function titresProches(a, b) {
@@ -173,15 +154,10 @@ function titresRecentsH(entrees, registre, now, h) {
   ].filter((t) => typeof t === "string" && t);
 }
 
-/** Pourquoi un titre est écarté (null s'il passe). */
-function motExclu(titre) {
-  const t = sansAccent(titre);
-  const m = RE_EXCLUS.exec(t);
-  if (m) return m[0].trim();
-  const a = RE_AGE_MINEUR.exec(t);
-  if (a && Number(a[0].match(/\d+/)[0]) < 20) return a[0];
-  return null;
-}
+/** Pourquoi un titre est écarté (null s'il passe). { officiel: true } : donnée officielle (ordre du jour, scrutin, texte de loi), liste réduite. */
+const motExclu = (titre, opts) => LP.motExclu(titre, opts);
+/** Donnée officielle (ordre du jour, scrutin, texte de loi, notion du site) : liste réduite, sans accusation possible (voir liste-prudente.cjs). */
+const OFF = { officiel: true };
 
 /** Réserve électorale : renvoie le tour concerné (« AAAA-MM-JJ ») si now tombe du samedi 0 h au dimanche 20 h (Paris), sinon null. */
 function reserveSondages(now) {
@@ -194,8 +170,17 @@ function reserveSondages(now) {
   }) || null;
 }
 
-// Réserve électorale (loi du 19 juillet 1977) : aucun résultat de sondage, pas même repris d'un titre de presse
-const RE_SONDAGE = /sondage|intentions? de vote|estimations? de vote|enquete d'opinion|barometre/;
+/**
+ * Réserve pour une STORY (ou tout contenu qui reste visible 24 h) : la réserve elle-même, ou le début de la réserve dans les 24 h à venir.
+ * Une story publiée vendredi 22 h reste visible jusqu'à samedi 22 h, donc pendant la réserve (audit J-15) : rien de ce qui cite un sondage ne part
+ * dans les 24 h qui précèdent la réserve. Renvoie le tour concerné ou null.
+ */
+const reserveStory = (now) => reserveSondages(now) || reserveSondages(new Date(new Date(now).getTime() + 24 * 36e5));
+
+// Réserve électorale (loi du 19 juillet 1977) : aucun résultat de sondage, pas même repris d'un titre de presse.
+// Instituts (liste de data/sondages.json et de la Commission des sondages), formulations de résultat (« crédité de », « pourrait recueillir », « sondés »)
+// et pourcentage accolé à un tour de scrutin (« Bardella en tête avec 36 % au premier tour »).
+const RE_SONDAGE = /sondage|sonde(?:e|s|es)?\b|intentions? de (?:vote|suffrage)|estimations? de vote|enquete d'opinion|barometre|\bifop|\belabe\b|\bodoxa|\bipsos|opinion ?way|harris interactive|\btoluna|cluster ?17|\byougov|\bviavoice|\bbva\b|\bkantar|\bverian|\bcsa\b|\bcredite(?:e|s|es)? (?:de|a|d')|\brecueill|\bprojections?\b|\bcotes? de (?:popularite|confiance)|\bpopularite\b|\bpremier tour\b.*\d ?%|\d ?%.*\b(?:premier tour|second tour|1er tour|2e tour|2nd tour)\b|\bdevance\b.*\d ?%|\ben tete\b.*\d ?%|\d ?%.*\ben tete\b|selon (?:l'|le |la |les )?(?:ifop|elabe|odoxa|ipsos|opinionway|harris|toluna|cluster17|yougov|viavoice|bva|kantar)/;
 const parleDeSondage = (titre) => RE_SONDAGE.test(sansAccent(titre));
 
 /** Empreinte stable du titre central du sujet. */
@@ -228,9 +213,9 @@ function jourPublication(inst) {
  * Règles : pas de réserve électorale ; ni la nuit (avant 7 h, après 23 h 30) ; pas plus de 2 sondages par jour ;
  * enquête plus récente que la dernière mise en file, jamais déjà en file, publiée il y a moins de 48 h.
  */
-function choisirSondage({ sondages, file, now = new Date() }) {
-  const reserve = reserveSondages(now);
-  if (reserve) return { refus: `réserve électorale (scrutin du ${reserve})` };
+function choisirSondage({ sondages, file, now = new Date(), veille = null }) {
+  const reserve = reserveStory(now);
+  if (reserve) return { refus: `réserve électorale (scrutin du ${reserve}) : aucune story de sondage dans les 24 h qui précèdent ni pendant la réserve` };
   const m = minutesParis(now);
   if (m < 7 * 60 || m > SONDAGE_DERNIERE_MINUTE) return { refus: "nuit pour un sondage (7 h – 23 h 30 à Paris)" };
   const entrees = file?.entrees || [];
@@ -239,19 +224,21 @@ function choisirSondage({ sondages, file, now = new Date() }) {
   const enFile = new Set(entrees.map((e) => e.sondageId).filter(Boolean));
   const derniere = [...enFile].map((x) => x.split("|")[1]).sort().pop() || "";
   const candidats = [];
+  let sansCommanditaire = 0;
   (sondages?.instituts || []).forEach((inst, indice) => {
     if (!inst?.nom || !/^\d{4}-\d{2}-\d{2}$/.test(inst.dateFin || "") || !inst.scores) return;
     const sondageId = `${inst.nom}|${inst.dateFin}`;
     if (enFile.has(sondageId) || inst.dateFin <= derniere) return;
     if (Object.keys(inst.scores).length < 3 || !(inst.echantillon > 0)) return; // mentions obligatoires impossibles sans échantillon
+    if (!SC.commanditaire(inst, veille)) { sansCommanditaire++; return; } // loi du 19 juillet 1977, art. 2 : le commanditaire est une mention obligatoire (audit J-16)
     const age = now.getTime() - Date.parse(`${jourPublication(inst)}T00:00:00+02:00`);
     if (age > SONDAGE_FRAICHEUR_H * 36e5 || age < -36e5 * 24) return;
     candidats.push({ indice, inst, sondageId });
   });
-  if (!candidats.length) return { refus: "aucun nouveau sondage" };
+  if (!candidats.length) return { refus: sansCommanditaire ? `aucun sondage publiable : commanditaire inconnu (${sansCommanditaire} enquête(s)), mention obligatoire` : "aucun nouveau sondage" };
   candidats.sort((a, b) => b.inst.dateFin.localeCompare(a.inst.dateFin));
   const c = candidats[0];
-  return { sondage: c.inst, indice: c.indice, sondageId: c.sondageId, id: crypto.createHash("sha1").update("sondage|" + c.sondageId).digest("hex").slice(0, 12) };
+  return { sondage: c.inst, commanditaire: SC.commanditaire(c.inst, veille).nom, indice: c.indice, sondageId: c.sondageId, id: crypto.createHash("sha1").update("sondage|" + c.sondageId).digest("hex").slice(0, 12) };
 }
 
 /** La prise de parole du président détectée par detecter-direct.js (non expirée) concerne-t-elle ce sujet ? */
@@ -334,7 +321,7 @@ function choisirDossier({ actualites, file, now = new Date() }) {
     if (titreGenerique(d.titre) || dejaVu(d.titre, recents)) return false;
     if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
-    return !d.articles.some((a) => motExclu(a.titre)) && !(reserveSondages(now) && d.articles.some((a) => parleDeSondage(a.titre)));
+    return !d.articles.some((a) => motExclu(a.titre)) && !(reserveStory(now) && d.articles.some((a) => parleDeSondage(a.titre)));
   });
   if (!candidats.length) return null;
   candidats.sort((a, b) => b.medias.length - a.medias.length || b.nb - a.nb);
@@ -375,7 +362,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (s.illustration?.theme === "justice") return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
-    if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
     if (titreGenerique(s.titrePropre.titre)) return; // « Énergie » seul : trop vague
     if (s.titrePropre.generique === true && !parole) return; // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
@@ -416,7 +403,7 @@ function choisirSensible({ actualites, file, registre = null, rejetes = null, no
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id), ...rejetsRecents.map((r) => r.id)]);
   const urls = new Set([...entrees.flatMap((e) => e.sources || []), ...rejetsRecents.flatMap((r) => r.sources || [])]);
   const recents = [...titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H), ...rejetsRecents.flatMap((r) => r.sujets || [])];
-  const reserve = reserveSondages(now);
+  const reserve = reserveStory(now);
   const candidats = [];
   (actualites?.sujets || []).forEach((s, indice) => {
     const titre = s.articles?.[0]?.titre;
@@ -468,7 +455,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents)) return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
-    if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
   });
   retenus.sort((a, b) => b.medias - a.medias || Date.parse(b.s.derniere) - Date.parse(a.s.derniere));
@@ -727,8 +714,18 @@ function normaliserConfig(c) {
 function appliquerSeuils(config) {
   MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref;
 }
+/**
+ * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
+ * fusion, pas un objet) = « validationHumaine » activée (rien ne sort sans validation humaine) et « invalide: true ». Un interrupteur d'arrêt ne s'ouvre jamais par accident.
+ */
 function lireConfig(fichier = FICHIER_CONFIG) {
-  try { return normaliserConfig(JSON.parse(fs.readFileSync(fichier, "utf-8"))); } catch (e) { return normaliserConfig(null); }
+  let brut;
+  try { brut = fs.readFileSync(fichier, "utf-8"); } catch (e) { return e.code === "ENOENT" ? normaliserConfig(null) : { ...normaliserConfig({ validationHumaine: true }), invalide: true }; }
+  try {
+    const j = JSON.parse(brut);
+    if (!j || typeof j !== "object" || Array.isArray(j)) throw new Error("la configuration n'est pas un objet JSON");
+    return normaliserConfig(j);
+  } catch (e) { return { ...normaliserConfig({ validationHumaine: true }), invalide: true }; }
 }
 
 /** Une entrée (file ou brouillon) tombe sous la réserve électorale : sondage, ou simulation marquée « reserve ». */
@@ -736,7 +733,7 @@ const estSensibleReserve = (e) => Boolean(e && (e.sondageId || e.reserve === tru
 
 /** Pendant la réserve électorale, retire d'une liste d'entrées (file de publication ou brouillons) tout ce qui concerne les sondages. */
 function purgerReserve(entrees, now = new Date()) {
-  return reserveSondages(now) ? (entrees || []).filter((e) => !estSensibleReserve(e)) : (entrees || []);
+  return reserveStory(now) ? (entrees || []).filter((e) => !estSensibleReserve(e)) : (entrees || []);
 }
 
 /** En monétisation : seules restent les entrées sur données propres (sondage ou marquées donneesPropres) ; aucune entrée de presse. */
@@ -761,11 +758,11 @@ function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) 
   const limite = new Date(now.getTime() - PROPRES_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
   const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
   const recent = (iso) => /^\d{4}-\d{2}-\d{2}$/.test(iso || "") && iso >= limite && iso <= demain;
-  const sobre = (t) => typeof t === "string" && t.length >= 15 && t.length <= 400 && !motExclu(t) && !/[<>{}]/.test(t);
+  const sobre = (t) => typeof t === "string" && t.length >= 15 && t.length <= 400 && !motExclu(t, OFF) && !/[<>{}]/.test(t);
   const hash = (x) => crypto.createHash("sha1").update(x).digest("hex").slice(0, 12);
 
   // 1. Vote final récent de l'Assemblée nationale (« l'ensemble du… »), titre sans mot de la liste prudente
-  const an = (lois?.lois || []).filter((l) => l?.numero && l.resultat && l.votes && recent(l.dateISO) && /ensemble/i.test(l.titre || "") && sobre(l.titre) && !motExclu(l.dossierTitre || "") && !ids.has(hash("scrutin|" + l.numero)) && !votesPostes.has(`an-${l.numero}`))
+  const an = (lois?.lois || []).filter((l) => l?.numero && l.resultat && l.votes && recent(l.dateISO) && /ensemble/i.test(l.titre || "") && sobre(l.titre) && !motExclu(l.dossierTitre || "", OFF) && !ids.has(hash("scrutin|" + l.numero)) && !votesPostes.has(`an-${l.numero}`))
     .sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero);
   if (an.length) return { propre: { type: "scrutin", numero: an[0].numero, titre: an[0].titre, source: "Assemblée nationale (open data)" }, id: hash("scrutin|" + an[0].numero), nommePersonne: false };
 
@@ -775,7 +772,7 @@ function choisirDonneesPropres({ lois, senat, probas, file, now = new Date() }) 
   if (sn.length) return { propre: { type: "senat", idScrutin: sn[0].id, titre: sn[0].titre, source: "Sénat (pages officielles)" }, id: hash("senat|" + sn[0].id), nommePersonne: false };
 
   // 3. Simulation « probabilités » : jamais pendant la réserve ; une par jour ; nomme des candidats donc à valider
-  const reserve = reserveSondages(now);
+  const reserve = reserveStory(now);
   if (probas?.candidats?.length && !reserve && Date.parse(probas.lastUpdated) > now.getTime() - 24 * 36e5) {
     const id = hash("probabilites|" + jour);
     if (!ids.has(id)) return { propre: { type: "probabilites", titre: "Présidentielle 2027 · simulation à partir des sondages", source: "Simulation du site à partir des sondages" }, id, nommePersonne: true, reserve: true };
@@ -817,7 +814,7 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   if (resultat !== "adopte" && resultat !== "rejete") return null;
   const d = decomposerTitreVote(titre);
   if (!d || d.court.length < 15 || d.court.length > 230 || /[<>{}]/.test(d.court)) return null;
-  if (motExclu(titre) || motExclu(dossierTitre || "") || motExclu(d.court)) return null;
+  if (motExclu(titre, OFF) || motExclu(dossierTitre || "", OFF) || motExclu(d.court, OFF)) return null;
   if (![pour, contre, abst].every((n) => Number.isInteger(n) && n >= 0) || pour + contre === 0) return null;
   if (resultat === "adopte" ? !(pour > contre) : !(contre >= pour)) return null; // résultat incohérent avec les voix : on ne publie pas
   const an = chambre === "an";
@@ -879,7 +876,7 @@ function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }
     if (f) candidats.push({ f, dateISO: s.dateISO, ordre: s.numero, id: hashStable("post-loi|senat|" + s.id) });
   }
   candidats.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.ordre - a.ordre);
-  const reserve = reserveSondages(now);
+  const reserve = reserveStory(now);
   for (const c of candidats) {
     if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId)) continue;
     if (dejaVu(c.f.titreCourt, recents)) continue; // même loi qu'un post ou une story des dernières 36 h
@@ -953,8 +950,8 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
-  const s = choisirSondage({ sondages, file, now });
+function choisir({ actualites, direct, sondages, veille = null, lois, senat, probas, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
+  const s = choisirSondage({ sondages, file, now, veille });
   if (!s.refus) return s;
   if (config.monetisation) {
     const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post (données officielles, sans presse)
@@ -984,7 +981,7 @@ function lireEtat(now) {
   const file = lire("data/instagram-file.json", { entrees: [] });
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
-  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), candidats: lire("data/candidats.json", null),
+  const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), veille: lire("data/sondages-veille.json", null), candidats: lire("data/candidats.json", null),
     lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null), rejetes: lire("data/instagram-rejetes.json", null) };
   if (config.monetisation) donnees.probas = lire("data/probabilites.json", null);
   return { config, file, brouillons, donnees };
@@ -1138,7 +1135,7 @@ async function main() {
   const { config, file, brouillons, donnees } = lireEtat(now);
   if (config.monetisation || config.validationHumaine) console.log(`[stories-auto] configuration : monétisation=${config.monetisation}, validation humaine=${config.validationHumaine}.`);
   // Réserve électorale : aucun sondage ne reste en file ni en brouillon (le publieur lit la file plus tard). Monétisation : aucune presse en file.
-  const enReserve = reserveSondages(now);
+  const enReserve = reserveStory(now);
   const avant = file.entrees.length;
   file.entrees = purgerReserve(file.entrees, now);
   if (enReserve && file.entrees.length !== avant) console.log(`[stories-auto] réserve électorale (${enReserve}) : ${avant - file.entrees.length} story(s) de sondage retirée(s) de la file.`);
@@ -1236,6 +1233,6 @@ async function main() {
   }
 }
 
-module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

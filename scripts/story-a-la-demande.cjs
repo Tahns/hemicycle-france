@@ -45,7 +45,7 @@ async function demander({ lien, media = "", titre = "", type = "story", racine =
     if (/[<>{}$]/.test(citation)) throw new Refus("titre cité : caractères < > { } $ interdits.");
     const interdit = SS.motInterdit(citation, false);
     if (interdit) throw new Refus(`titre cité : « ${interdit} » (mineur, violence sexuelle ou suicide) : aucun brouillon n'est créé pour ce sujet.`);
-    if (stories.reserveSondages(now) && stories.parleDeSondage(citation)) throw new Refus("réserve électorale : aucun sondage, même cité par la presse (loi du 19 juillet 1977, art. 11).");
+    if (stories.reserveStory(now) && stories.parleDeSondage(citation)) throw new Refus("réserve électorale : aucun sondage, même cité par la presse (loi du 19 juillet 1977, art. 11).");
   }
   const id = SS.idDemande(lien);
   const dossier = path.join(racine, "instagram", "brouillons");
