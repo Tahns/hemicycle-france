@@ -54,6 +54,33 @@ Règles propres aux posts (en plus de celles ci-dessus) :
 L'API utilisée pour un post est `POST /{IG_USER_ID}/media` (`image_url`, `caption`), puis `POST /{IG_USER_ID}/media_publish`, comme pour une story
 (sans `media_type=STORIES`). Le registre `data/instagram-publiees.json` garde pour chaque publication : `id`, `statut`, `publieLe`, `mediaId`, `titre`, `type` (`story` ou `post`) et, pour une annonce, `annonceDe`.
 
+## Vidéos animées (stories vidéo et Reels)
+
+**Désactivées par défaut.** Dans `data/stories-config.json` : `"videos": true` les active, `"videosMax": 2` limite le nombre de vidéos par jour (stories vidéo et Reels, 0 à 6).
+Seuls **nos propres visuels** sont animés : aucune vidéo, aucun extrait, aucune musique ni aucun son d'un média tiers ou de YouTube n'est republié. Les vidéos de médias restent de simples
+liens affichés sur le site. Les vidéos sont générées par `scripts/videos-auto.cjs` (ffmpeg, installé par les workflows quand `videos` vaut `true`) à partir des images déjà dessinées :
+apparition progressive des blocs (fondu d'entrée), zoom lent de type Ken Burns, et, sur un Reel, une **barre qui se remplit** (part des voix pour et contre d'une loi adoptée ou rejetée)
+ou un **compteur** (nombre de jours avant une date à retenir), posés dans la zone libre du post. Aucune ressource externe.
+
+- **story vidéo** : seulement pour un **dossier** ou un **« direct »** (modèles à fort enjeu), 9 s, 1080×1920. L'entrée de la file garde `url_image` ET reçoit `url_video` (`instagram/auto/<id>.mp4`) ;
+- **Reel** : un par **post** (date à retenir lointaine, loi adoptée ou rejetée), 10 s, même légende que le post. Entrée `{ type: "reel", reelDe: id du post, url_image (vignette), url_video, legende }`.
+  Il est publié **après son post** (jamais avant, au plus 12 h après), avec l'espacement de 60 min ; il ne compte ni dans les 4 stories ni dans les 2 posts par jour, mais dans `videosMax` ;
+- format : MP4, H.264 (yuv420p), 30 images/s, piste AAC mono **silencieuse**, 1080×1920, moins de 2 Mo en pratique (25 Mo au maximum, contrôlé par `check-data.js`) ;
+- API : story vidéo = `POST /{IG_USER_ID}/media` `{ media_type: "STORIES", video_url }` ; Reel = `{ media_type: "REELS", video_url, caption, share_to_feed: true, thumb_offset }` ;
+  puis attente du statut `FINISHED` (`GET /{creation_id}?fields=status_code`, jusqu'à ~5 min, délai croissant de 3 à 30 s) et `media_publish` ;
+- avant l'appel, la vidéo doit être en ligne (HEAD 200 et `Content-Type: video/mp4` sur GitHub Pages) ; sinon une story part en **image**, un Reel attend le passage suivant ;
+- repli : si l'API refuse la vidéo d'une story **avant** `media_publish`, la même story est publiée en image (une seule publication, jamais de doublon) ; un Reel refusé est abandonné, le registre reste inchangé ;
+- sans ffmpeg ou si la génération échoue : une ligne dans le résumé de l'exécution, l'image et le post partent seuls. Tous les autres garde-fous (7 h–23 h, 60 min, plafonds, registre sans doublon, titres proches sur 36 h,
+  réserve électorale, mots à risque, présomption d'innocence) s'appliquent aux vidéos comme aux images.
+
+Essai local : `node scripts/videos-auto.cjs instagram/modeles/post-loi.jpg /tmp/essai.mp4 reel 276:86` (`reel`, `story`, `pour:contre` ou `jours:N`). Exemple : `instagram/modeles/reel-loi.mp4` (+ `reel-loi.jpg`).
+Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée que si ffmpeg et ffprobe sont installés).
+
+## Titres génériques
+
+Un sujet dont le titre rédigé par le site est un titre de repli (`generique: true` dans `data/actualites.json`, par exemple « Gilley : actualité locale » ou « Politique : l'essentiel du moment »)
+ne devient **jamais** une story, un « en bref » ni un post (sauf prise de parole du président de la République).
+
 ## 1. Prérequis (à faire une fois, environ 30 minutes)
 
 1. **Un compte Instagram professionnel** (Créateur ou Entreprise) : dans l'application Instagram, Paramètres > Type de compte et outils > Passer à un compte professionnel.

@@ -25,4 +25,7 @@ Données officielles, chaque heure
 - **posts** (1080×1350, légende dans `data/instagram-file.json`) : seulement une **date à retenir lointaine** (plus de 3 jours) et une **loi adoptée ou rejetée** (vote final, résultat officiel), 2 par jour au plus ;
 - **story d'annonce** : chaque post est suivi d'une story « Nouveau post » (miniature du post, « → @hemicyclefrance »), publiée au plus tôt 5 min après lui, car l'API officielle ne permet pas de repartager un post en story.
 
+- **vidéos** (option `"videos": true` de `data/stories-config.json`, `"videosMax"` par jour ; désactivées par défaut) : nos propres visuels animés par ffmpeg (`scripts/videos-auto.cjs`), sans son ni ressource externe :
+  une **story vidéo** pour un dossier ou un « direct » (`url_video`, en plus de `url_image`) et un **Reel** par post, publié après lui. Exemple : `modeles/reel-loi.mp4`. Détails : `docs/PUBLICATION-AUTO.md`.
+
 Aperçus des modèles : `modeles/post-date.jpg`, `modeles/post-loi.jpg` (posts) et `modeles/story-annonce-post.jpg` (story d'annonce).

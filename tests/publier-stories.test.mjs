@@ -20,10 +20,12 @@ const serveur = http.createServer((req, res) => {
     const url = new URL(req.url, "http://x");
     appels.push({ methode: req.method, chemin: url.pathname, corps, auth: req.headers.authorization });
     const json = (code, o) => { res.writeHead(code, { "content-type": "application/json" }); res.end(JSON.stringify(o)); };
+    if (url.pathname.startsWith("/vid/")) { res.writeHead(etat.video === 404 ? 404 : 200, { "content-type": etat.videoType || "video/mp4" }); return res.end(); }
     if (url.pathname.startsWith("/img/")) { res.writeHead(etat.image === 404 ? 404 : 200); return res.end(); }
     if (url.pathname === "/debug_token") return json(200, { data: { is_valid: etat.valide !== false, expires_at: etat.expire ?? 0 } });
+    if (url.pathname === "/IGUSER/media" && req.method === "POST" && etat.erreurVideo && corps.includes("video_url")) return json(400, { error: { message: "Video refusée " + JETON } });
     if (url.pathname === "/IGUSER/media" && req.method === "POST") return etat.erreurMedia ? json(400, { error: { message: "Invalid image " + JETON } }) : json(200, { id: "CONT1" });
-    if (url.pathname === "/CONT1") return json(200, { status_code: "FINISHED", id: "CONT1" });
+    if (url.pathname === "/CONT1") return json(200, { status_code: etat.statuts?.length ? etat.statuts.shift() : "FINISHED", id: "CONT1" });
     if (url.pathname === "/IGUSER/media_publish") return json(200, { id: "MEDIA42" });
     json(404, { error: { message: "inconnu" } });
   });
@@ -36,7 +38,7 @@ function entree(id, cree, extra = {}) {
 }
 
 /** Lance le script dans un dossier temporaire ; renvoie { code, sortie, resume, registre }. */
-async function lancer({ entrees = [], registre = null, config = { monetisation: false, validationHumaine: false }, now = MAINTENANT, secrets = true, args = [], reglages = {} }) {
+async function lancer({ entrees = [], registre = null, config = { monetisation: false, validationHumaine: false }, now = MAINTENANT, secrets = true, args = [], reglages = {}, env: envPlus = {} }) {
   Object.keys(etat).forEach((k) => delete etat[k]);
   Object.assign(etat, reglages);
   appels.length = 0;
@@ -46,6 +48,7 @@ async function lancer({ entrees = [], registre = null, config = { monetisation: 
   if (registre) writeFileSync(join(d, "reg.json"), JSON.stringify(registre));
   writeFileSync(join(d, "resume.md"), "");
   const env = { ...process.env, GRAPH_BASE: BASE, PUBLIER_MAINTENANT: now, PUBLIER_FILE: join(d, "file.json"), PUBLIER_REGISTRE: join(d, "reg.json"), PUBLIER_CONFIG: join(d, "config.json"), PUBLIER_ATTENTE_MS: "10", GITHUB_STEP_SUMMARY: join(d, "resume.md") };
+  Object.assign(env, envPlus);
   delete env.IG_USER_ID; delete env.IG_ACCESS_TOKEN;
   if (secrets) Object.assign(env, { IG_USER_ID: "IGUSER", IG_ACCESS_TOKEN: JETON });
   const p = spawn(process.execPath, ["scripts/publier-stories.cjs", ...args], { env });
@@ -364,6 +367,136 @@ try {
     const r = await lancer({ entrees: [postE(P1, il_y_a(1))], args: ["--a-sec"] });
     assert.match(r.resume, /serait publiée en post/);
     assert.strictEqual(appels.filter((a) => a.chemin === "/IGUSER/media").length, 0);
+  }
+  // ---------- VIDÉOS : story vidéo, Reel, attente du statut, replis ----------
+  {
+    const LEG = "Projet de loi relatif à la simplification — texte adopté\n\nL'Assemblée nationale a adopté, le 1 octobre 2026, l'ensemble du texte.\nPour : 300 · Contre : 100 · Abstentions : 10.\n\nSource officielle : Assemblée nationale, scrutin public n°100 — https://www.assemblee-nationale.fr/dyn/17/scrutins/100\n\nToute l'actu politique : @hemicyclefrance\n#Politique #AssembléeNationale #Loi";
+    const histoire = (id, cree, extra = {}) => entree(id, cree, { url_video: `${BASE}/vid/${id}.mp4`, ...extra });
+    const reelE = (id, cree, de, extra = {}) => ({ id, cree, titre: "Reel : Simplification de la vie économique", titrePropre: "Simplification de la vie économique", medias: [], url_image: `${BASE}/img/${id}.jpg`, url_video: `${BASE}/vid/${id}.mp4`, type: "reel", reelDe: de, sources: [], legende: LEG, donneesPropres: true, ...extra });
+    const regPub = (id, h, extra = {}) => ({ id, statut: "publiee", publieLe: il_y_a(h), mediaId: "m" + id, ...extra });
+    const corps = (a) => Object.fromEntries(new URLSearchParams(a.corps));
+    const creations = () => appels.filter((a) => a.chemin === "/IGUSER/media" && a.methode === "POST").map(corps);
+    const V = { videos: true, videosMax: 2 };
+    const S1 = "c1c1c1c1c1c1", P9 = "d1d1d1d1d1d1", R9 = "e1e1e1e1e1e1";
+
+    // Story vidéo : conteneur STORIES + video_url, registre « video: true »
+    {
+      const r = await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V });
+      assert.strictEqual(r.code, 0);
+      const c = creations();
+      assert.strictEqual(c.length, 1);
+      assert.strictEqual(c[0].media_type, "STORIES");
+      assert.strictEqual(c[0].video_url, `${BASE}/vid/${S1}.mp4`);
+      assert.ok(!c[0].image_url);
+      assert.strictEqual(publications().length, 1);
+      assert.deepStrictEqual(r.registre.entrees.map((x) => [x.id, x.statut, x.type, x.video]), [[S1, "publiee", "story", true]]);
+      assert.match(r.resume, /Story vidéo publiée/);
+      jamaisLeJeton(r);
+    }
+    // Vidéos désactivées (défaut) : l'image part, la vidéo est ignorée
+    for (const config of [{ monetisation: false, validationHumaine: false }, { videos: false }]) {
+      const r = await lancer({ entrees: [histoire(S1, il_y_a(1))], config });
+      const c = creations();
+      assert.strictEqual(c.length, 1);
+      assert.strictEqual(c[0].image_url, `${BASE}/img/${S1}.jpg`);
+      assert.ok(!c[0].video_url);
+      assert.ok(!r.registre.entrees[0].video);
+    }
+    // Vidéo pas en ligne (404) ou mauvais type : repli immédiat sur l'image
+    for (const reglages of [{ video: 404 }, { videoType: "text/html" }]) {
+      const r = await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V, reglages });
+      assert.strictEqual(creations()[0].image_url, `${BASE}/img/${S1}.jpg`);
+      assert.strictEqual(publications().length, 1);
+      assert.match(r.sortie, /la story partira en image/);
+    }
+    // L'API refuse la vidéo avant media_publish : repli sur l'image, UNE seule publication, pas de doublon
+    {
+      const r = await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V, reglages: { erreurVideo: true } });
+      const c = creations();
+      assert.strictEqual(c.length, 2);
+      assert.ok(c[0].video_url && c[1].image_url);
+      assert.strictEqual(publications().length, 1);
+      assert.strictEqual(r.registre.entrees.length, 1);
+      assert.ok(!r.registre.entrees[0].video);
+      assert.match(r.resume, /repli sur l'image/);
+      jamaisLeJeton(r);
+    }
+    // Statut du conteneur : attente (IN_PROGRESS) puis FINISHED ; ERROR : repli sur l'image
+    {
+      const r = await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V, reglages: { statuts: ["IN_PROGRESS", "IN_PROGRESS", "FINISHED"] } });
+      assert.strictEqual(publications().length, 1);
+      assert.strictEqual(appels.filter((a) => a.chemin === "/CONT1").length, 3, "trois interrogations du statut");
+      assert.strictEqual(creations().length, 1);
+      const r2 = await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V, reglages: { statuts: ["ERROR"] } });
+      assert.strictEqual(creations().length, 2, "vidéo en ERROR : nouveau conteneur avec l'image");
+      assert.strictEqual(publications().length, 1);
+      assert.ok(r2.registre.entrees.length === 1 && !r2.registre.entrees[0].video);
+    }
+    // Attente trop longue (vidéo jamais prête) : délai épuisé, repli sur l'image
+    {
+      await lancer({ entrees: [histoire(S1, il_y_a(1))], config: V, reglages: { statuts: Array(500).fill("IN_PROGRESS").concat(["FINISHED"]) }, env: { PUBLIER_VIDEO_MAX_MS: "200" } });
+      assert.ok(creations().length >= 1);
+    }
+    // REEL : seulement après son post publié, légende et share_to_feed
+    {
+      const file = [postE9(), reelE(R9, il_y_a(2), P9)];
+      function postE9() { return { id: P9, cree: il_y_a(2), titre: "Projet de loi relatif à la simplification de la vie économique", titrePropre: "Simplification de la vie économique", medias: [], url_image: `${BASE}/img/${P9}.jpg`, type: "post", sources: [], legende: LEG, donneesPropres: true }; }
+      // le post est choisi d'abord (le Reel attend)
+      const r0 = await lancer({ entrees: file, config: V });
+      assert.deepStrictEqual(r0.registre.entrees.map((x) => [x.id, x.type]), [[P9, "post"]]);
+      // post publié il y a 2 h : le Reel part
+      const r = await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 2, { type: "post", titre: "Simplification de la vie économique" })] } });
+      const c = creations();
+      assert.strictEqual(c.length, 1);
+      assert.strictEqual(c[0].media_type, "REELS");
+      assert.strictEqual(c[0].video_url, `${BASE}/vid/${R9}.mp4`);
+      assert.strictEqual(c[0].caption, LEG);
+      assert.strictEqual(c[0].share_to_feed, "true");
+      assert.deepStrictEqual(r.registre.entrees.filter((x) => x.id === R9).map((x) => [x.type, x.video, x.reelDe]), [["reel", true, P9]]);
+      assert.match(r.resume, /Reel publié/);
+      // espacement de 60 min : post publié il y a 30 min, pas de Reel
+      await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 0.5, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0, "moins de 60 min après la dernière publication");
+      // vidéos désactivées : jamais de Reel
+      await lancer({ entrees: file, config: { videos: false }, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0, "videos false : pas de Reel");
+      // vidéo pas en ligne : nouvel essai au passage suivant, rien d'écrit
+      const r2 = await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] }, reglages: { video: 404 } });
+      assert.strictEqual(publications().length, 0);
+      assert.match(r2.sortie, /vidéo pas encore en ligne/);
+      assert.ok(!r2.registre.entrees.some((x) => x.id === R9));
+      // l'API refuse le Reel (ou statut ERROR) : ni repli ni doublon, registre inchangé
+      for (const reglages of [{ erreurVideo: true }, { statuts: ["ERROR"] }]) {
+        const r3 = await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] }, reglages });
+        assert.strictEqual(publications().length, 0);
+        assert.strictEqual(creations().filter((x) => !x.video_url).length, 0, "aucun repli sur une image");
+        assert.ok(!r3.registre.entrees.some((x) => x.id === R9));
+        assert.match(r3.resume, /échec de publication/);
+        jamaisLeJeton(r3);
+      }
+      // post périmé : le Reel l'est aussi ; Reel plus de 12 h après son post : périmé
+      const r4 = await lancer({ entrees: file, config: V, registre: { entrees: [{ id: P9, statut: "perimee", publieLe: null, mediaId: null, type: "post" }] } });
+      assert.strictEqual(publications().length, 0);
+      assert.strictEqual(r4.registre.entrees.find((x) => x.id === R9).statut, "perimee");
+      const r5 = await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 13, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0);
+      assert.strictEqual(r5.registre.entrees.find((x) => x.id === R9).statut, "perimee");
+      // plafond : videosMax Reels par jour
+      await lancer({ entrees: file, config: { videos: true, videosMax: 1 }, registre: { entrees: [regPub(P9, 2, { type: "post" }), regPub("f1f1f1f1f1f1", 3, { type: "reel" })] } });
+      assert.strictEqual(publications().length, 0, "plafond de Reels atteint");
+      // Reel de légende invalide ou à mot à risque : jamais
+      await lancer({ entrees: [file[0], reelE(R9, il_y_a(2), P9, { legende: "court" })], config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0, "légende de Reel invalide");
+      await lancer({ entrees: [file[0], reelE(R9, il_y_a(2), P9, { titre: "Le procès du texte", titrePropre: "Le procès du texte" })], config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0, "mot à risque dans un Reel");
+      // nuit : jamais
+      await lancer({ entrees: file, config: V, now: "2026-10-05T22:30:00Z", registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      assert.strictEqual(publications().length, 0);
+      // à sec
+      const r6 = await lancer({ entrees: file, config: V, args: ["--a-sec"], registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      assert.match(r6.resume, /serait publiée en Reel/);
+      assert.strictEqual(creations().length, 0);
+    }
   }
   console.log("[tests publier-stories] OK");
 } finally {

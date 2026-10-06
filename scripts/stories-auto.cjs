@@ -146,7 +146,7 @@ function titresRecents(entrees, now) {
 const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
 
 /** Une entrée compte-t-elle dans le plafond des STORIES (hors sondages, posts et stories d'annonce de post) ? */
-const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && !e.annonceDe;
+const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && !e.annonceDe;
 /** Posts du jour (UTC+2) : ceux de la file (et des brouillons) et ceux du registre des publications, sans double compte. */
 function nbPostsDuJour(entrees, registre, now) {
   const jour = jourUTC2(now);
@@ -369,6 +369,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
     if (titreGenerique(s.titrePropre.titre)) return; // « Énergie » seul : trop vague
+    if (s.titrePropre.generique === true && !parole) return; // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
     if (dejaVu(s.titrePropre.titre, recents)) return; // même sujet qu'une story des dernières 24 h
     const modele = modeleSujet(s, { direct, candidats: declares, now });
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
@@ -412,7 +413,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
-    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || dejaVu(s.titrePropre.titre, recents)) return;
+    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents)) return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveSondages(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
@@ -480,12 +481,12 @@ function alerteResume(ligne) {
   if (process.env.GITHUB_STEP_SUMMARY) { try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, ligne + "\n"); } catch (e) { /* sans résumé */ } }
 }
 
-/** Supprime les JPEG de instagram/auto/ qui ne sont plus à garder (noms strictement contrôlés). */
+/** Supprime les JPEG et MP4 de instagram/auto/ qui ne sont plus à garder (noms strictement contrôlés). */
 function nettoyerImages(images, dossier = DOSSIER_IMG) {
   if (!fs.existsSync(dossier)) return [];
   const supprimes = [];
   for (const f of fs.readdirSync(dossier)) {
-    const m = /^([0-9a-f]{12})\.jpg$/.exec(f);
+    const m = /^([0-9a-f]{12})\.(?:jpg|mp4)$/.exec(f);
     if (!m || images.has(m[1])) continue;
     const chemin = path.join(dossier, f);
     if (path.dirname(chemin) !== dossier) continue;
@@ -606,13 +607,14 @@ function fluxAtom(entrees, now = new Date()) {
   const x = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const liste = [...(entrees || [])].sort((a, b) => String(b.cree).localeCompare(String(a.cree)));
   const corps = liste.map((e) => `  <entry>
-    <id>tag:hemicycle-france,2026:${e.type === "post" ? "post" : "story"}:${x(e.id)}</id>
+    <id>tag:hemicycle-france,2026:${e.type === "post" || e.type === "reel" ? e.type : "story"}:${x(e.id)}</id>
     <title>${x(e.titre)}</title>
     <updated>${x(e.cree)}</updated>
-    <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>
+    <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>${e.url_video ? `
+    <link rel="enclosure" type="video/mp4" href="${x(e.url_video)}"/>` : ""}
     <link rel="alternate" href="${x(e.url_image)}"/>
-    <category term="${e.type === "post" ? "post" : "story"}"/>
-    <summary>${x(e.alt || e.titre)}</summary>${e.type === "post" && e.legende ? `
+    <category term="${e.type === "post" || e.type === "reel" ? e.type : "story"}"/>
+    <summary>${x(e.alt || e.titre)}</summary>${(e.type === "post" || e.type === "reel") && e.legende ? `
     <content type="text">${x(e.legende)}</content>` : ""}
   </entry>`).join("\n");
   return `<?xml version="1.0" encoding="utf-8"?>
@@ -632,7 +634,9 @@ function normaliserConfig(c) {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
     minMedias: entier(c?.minMedias, 3, 2, 10), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
-    maxParJour: entier(c?.maxParJour, 4, 1, 8), enBref: c?.enBref !== false
+    maxParJour: entier(c?.maxParJour, 4, 1, 8), enBref: c?.enBref !== false,
+    // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
+    videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6)
   };
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
@@ -978,6 +982,40 @@ function decrireBase(choix, now = new Date()) {
   return { titre, medias: [...new Set(choix.sujet.articles.map((a) => a.media))], sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// VIDÉOS (data/stories-config.json : "videos": true, "videosMax" par jour) : animation de NOS visuels par scripts/videos-auto.cjs (ffmpeg).
+//  - story vidéo : seulement pour un dossier ou un « direct » (l'entrée garde url_image ET reçoit url_video) ;
+//  - Reel : pour chaque POST (entrée { type: "reel", reelDe }), publié par publier-stories.cjs après le post.
+// Sans ffmpeg, ou si la génération échoue : aucune vidéo, l'image et le post partent seuls (jamais d'échec de la file).
+// ---------------------------------------------------------------------------------------------------------------------
+const idReel = (idPost) => hashStable("reel|" + idPost);
+const urlVideo = (id) => `https://tahns.github.io/hemicycle-france/instagram/auto/${id}.mp4`;
+/** Vidéos de la file créées aujourd'hui (UTC+2) : stories vidéo et Reels. */
+const videosDuJour = (entrees, now) => (entrees || []).filter((e) => e.url_video && e.cree && jourUTC2(e.cree) === jourUTC2(now)).length;
+/** Animation propre au post : barre des voix (loi) ou compteur de jours (date) ; null si la fiche n'a pas de donnée chiffrée. */
+function animationPost(fiche) {
+  const sp = fiche?.spec || {};
+  if (sp.genre === "loi" && Number.isInteger(sp.pour) && Number.isInteger(sp.contre) && sp.pour + sp.contre > 0) return { type: "barre", pour: sp.pour, contre: sp.contre };
+  const j = /^(\d+) jours?$/.exec(sp.compte || "");
+  if (sp.genre === "date" && j) return { type: "compteur", valeur: Number(j[1]), avant: "dans ", apres: " jours" };
+  return null;
+}
+/** Génère instagram/auto/<id>.mp4 d'après instagram/auto/<source>.jpg ; renvoie { octets, duree } ou null (avertissement dans le résumé, la file continue sans vidéo). */
+function produireVideo({ id, source = id, type, anim = null }) {
+  try {
+    const v = require("./videos-auto.cjs");
+    const bin = v.trouverFfmpeg();
+    if (!bin) { alerteResume("- **Vidéos** : ffmpeg absent, vidéo non générée (image seule)."); return null; }
+    const r = v.genererVideo({ image: path.join(DOSSIER_IMG, `${source}.jpg`), sortie: path.join(DOSSIER_IMG, `${id}.mp4`), type, anim, bin });
+    console.log(`[stories-auto] vidéo instagram/auto/${id}.mp4 (${(r.octets / 1048576).toFixed(2)} Mo, ${r.duree.toFixed(1)} s, ${r.blocs} blocs${r.anime ? ", barre ou compteur" : ""}).`);
+    return r;
+  } catch (e) {
+    alerteResume(`- **Vidéos** : génération impossible pour ${id} (${e.message}) ; image seule.`);
+    try { fs.unlinkSync(path.join(DOSSIER_IMG, `${id}.mp4`)); } catch (e2) { /* absent */ }
+    return null;
+  }
+}
+
 async function main() {
   const now = process.env.STORIES_AUTO_MAINTENANT ? new Date(process.env.STORIES_AUTO_MAINTENANT) : new Date();
   const { config, file, brouillons, donnees } = lireEtat(now);
@@ -1036,6 +1074,20 @@ async function main() {
           { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
         ].slice(-GARDER);
         images.add(choix.id); images.add(idA);
+        if (config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui
+          const idR = idReel(choix.id), r = produireVideo({ id: idR, source: choix.id, type: "reel", anim: animationPost(d.post.fiche) });
+          if (r) {
+            try {
+              require("./videos-auto.cjs").extraireVignette(path.join(DOSSIER_IMG, `${idR}.mp4`), path.join(DOSSIER_IMG, `${idR}.jpg`), 4.5);
+              if (!imageValide(path.join(DOSSIER_IMG, `${idR}.jpg`))) throw new Error("vignette invalide");
+              entrees = [...entrees, { id: idR, ...commun, titre: `Reel : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idR), url_video: urlVideo(idR), type: "reel", reelDe: choix.id, sources: [], legende: d.champs.legende, alt: `Reel Hémicycle France, version animée du post « ${d.post.fiche.titreCourt} ».` }].slice(-GARDER);
+              images.add(idR);
+            } catch (e) {
+              alerteResume(`- **Vidéos** : vignette du Reel ${idR} impossible (${e.message}) ; pas de Reel.`);
+              for (const ext of ["mp4", "jpg"]) { try { fs.unlinkSync(path.join(DOSSIER_IMG, `${idR}.${ext}`)); } catch (e2) { /* absent */ } }
+            }
+          }
+        }
         console.log(`[stories-auto] post instagram/auto/${choix.id}.jpg (${Math.round(post.length / 1024)} Ko) et story d'annonce instagram/auto/${idA}.jpg (${Math.round(annonce.length / 1024)} Ko).`);
       }
     } else {
@@ -1048,7 +1100,10 @@ async function main() {
         console.log(`[stories-auto] brouillon instagram/brouillons/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko), à valider par un humain ; rien n'est mis en file de publication.`);
       } else {
         ecrireImage(choix.id, jpeg);
-        entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
+        // Story vidéo : seulement pour un dossier ou un « direct » (modèles à fort enjeu), si les vidéos sont activées et le plafond du jour non atteint
+        const video = config.videos && (d.type === "dossier" || choix.modele === "direct") && videosDuJour(entrees, now) < config.videosMax
+          ? produireVideo({ id: choix.id, type: "story" }) : null;
+        entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), ...(video ? { url_video: urlVideo(choix.id) } : {}), type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
         images.add(choix.id);
         console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
       }
@@ -1064,6 +1119,6 @@ async function main() {
   }
 }
 
-module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR };
+module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
