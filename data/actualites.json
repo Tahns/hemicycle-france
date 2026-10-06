@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-06T08:15:51.867Z",
+ "lastUpdated": "2026-10-06T08:31:05.140Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -104,28 +104,28 @@
    "titre": "Blocus des lycées",
    "motifs": [
     "lycéenne",
-    "mobilisation",
     "colère",
-    "blocage"
+    "mobilisation",
+    "mouvement"
    ],
    "medias": [
     "RFI",
+    "Le Dauphiné libéré",
     "Le Figaro",
     "Mediapart",
     "BFMTV",
     "Sud Ouest",
     "Nice-Matin",
-    "Le Dauphiné libéré",
-    "France 24",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "20 Minutes",
     "Public Sénat",
     "Libération",
     "Le Monde",
     "Hugo Décrypte"
    ],
-   "nb": 62,
+   "nb": 58,
    "derniere": "2026-10-06T08:08:02.000Z",
    "articles": [
     {
@@ -133,6 +133,12 @@
      "titre": "Manifestations lycéennes en France: «On n'avait jamais connu un mouvement aussi intense»",
      "url": "https://www.rfi.fr/fr/podcasts/le-grand-invit%C3%A9-international/20261006-manifestations-lyc%C3%A9ennes-en-france-on-n-avait-jamais-connu-un-mouvement-aussi-intense",
      "date": "2026-10-06T08:08:02.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Isère. Mobilisation du 6 octobre : plusieurs centaines de manifestants devant Mounier, à Grenoble, dans une ambiance bon enfant",
+     "url": "https://www.ledauphine.com/education/2026/10/06/mobilisation-du-6-octobre-lycees-bloques-manifestations-suivez-la-journee-en-direct",
+     "date": "2026-10-06T08:00:00.000Z"
     },
     {
      "media": "Le Figaro",
@@ -210,12 +216,6 @@
      "titre": "Présidentielle 2027 : près de 80 % des jeunes estiment que les politiques préparent mal leur avenir, une majorité ne « fait pas confiance aux candidats »",
      "url": "https://www.sudouest.fr/politique/presidentielle-2027-pres-de-80-des-jeunes-estiment-que-les-politiques-preparent-mal-leur-avenir-une-majorite-ne-fait-pas-confiance-aux-candidats-30937253.php",
      "date": "2026-10-06T05:28:34.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Isère. Mobilisation du 6 octobre : Morestel, Bourgoin, Grenoble... les manifestants se rassemblent",
-     "url": "https://www.ledauphine.com/education/2026/10/06/mobilisation-du-6-octobre-lycees-bloques-manifestations-suivez-la-journee-en-direct",
-     "date": "2026-10-06T05:14:00.000Z"
     }
    ]
   },
@@ -225,27 +225,40 @@
    "motifs": [
     "présidentielle",
     "primaire",
-    "sociale-démocrate",
+    "socialiste",
     "inscrits"
    ],
    "medias": [
+    "Le Monde",
     "BFMTV",
     "Libération",
     "Sud Ouest",
-    "Le Monde",
     "20 Minutes",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
+    "L'Est républicain",
     "Public Sénat",
-    "France 24",
     "Le Figaro",
     "RFI",
     "L'Express"
    ],
-   "nb": 35,
-   "derniere": "2026-10-06T06:48:41.000Z",
+   "nb": 36,
+   "derniere": "2026-10-06T08:26:04.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
+     "date": "2026-10-06T08:26:04.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Présidentielle: Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 2032",
+     "url": "https://www.bfmtv.com/politique/front-national/video-presidentielle-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_VN-202610060351.html",
+     "date": "2026-10-06T08:15:58.000Z",
+     "video": true
+    },
     {
      "media": "BFMTV",
      "titre": "Présidentielle 2027: Gérard Larcher, président LR du Sénat, affiche son soutien \"sans réserve\" à Bruno Retailleau",
@@ -298,7 +311,7 @@
     },
     {
      "media": "Le Monde",
-     "titre": "Présidentielle 2027 : les candidats confrontés à la menace d’une crise financière et budgétaire",
+     "titre": "Présidentielle 2027 : pour les candidats, la difficulté de mener campagne alors que plane la menace d’une crise financière et budgétaire",
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-les-candidats-face-a-la-menace-d-une-crise-financiere-et-budgetaire_6788825_823448.html",
      "date": "2026-10-06T03:05:08.000Z"
     },
@@ -319,18 +332,6 @@
      "titre": "Primaire de la gauche : Plus de 140.000 personnes inscrites pour voter les 9 et 10 octobre",
      "url": "https://www.20minutes.fr/politique/4251626-20261005-primaire-gauche-pres-130-000-personnes-inscrites-voter-9-10-octobre?at_medium=display&at_campaign=149",
      "date": "2026-10-05T18:30:41.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Corbas. Logements sociaux : 33 390 euros pour solder un vieux dossier",
-     "url": "https://www.leprogres.fr/politique/2026/10/05/logements-sociaux-33-390-euros-pour-solder-un-vieux-dossier",
-     "date": "2026-10-05T17:58:42.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Présidentielle 2027. Primaire socialiste : les temps forts du dernier débat, plus de 140 000 inscrits au vote",
-     "url": "https://www.leprogres.fr/politique/2026/10/05/primaire-de-la-gauche-ce-qu-il-faut-retenir-du-dernier-debat-avant-le-premier-tour",
-     "date": "2026-10-05T17:44:00.000Z"
     }
    ]
   },
@@ -339,20 +340,36 @@
    "titre": "Euros",
    "motifs": [
     "euros",
-    "milliards"
+    "milliards",
+    "économies"
    ],
    "medias": [
+    "Le Monde",
+    "BFMTV",
     "Le Progrès",
     "Sud Ouest",
+    "L'Est républicain",
     "Dernières Nouvelles d'Alsace",
     "Public Sénat",
-    "Le Monde",
     "20 Minutes",
     "Nice-Matin"
    ],
-   "nb": 10,
-   "derniere": "2026-10-06T05:00:00.000Z",
+   "nb": 15,
+   "derniere": "2026-10-06T08:26:04.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
+     "date": "2026-10-06T08:26:04.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Présidentielle: Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 2032",
+     "url": "https://www.bfmtv.com/politique/front-national/video-presidentielle-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_VN-202610060351.html",
+     "date": "2026-10-06T08:15:58.000Z",
+     "video": true
+    },
     {
      "media": "Le Progrès",
      "titre": "Auvergne-Rhône-Alpes. Manifestations lycéennes : 25 à 30 millions, l’étonnant chiffrage des dégâts par la région",
@@ -366,10 +383,22 @@
      "date": "2026-10-05T20:10:30.000Z"
     },
     {
+     "media": "L'Est républicain",
+     "titre": "Denney. La municipalité a échangé avec le monde économique",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/05/la-municipalite-a-echange-avec-le-monde-economique",
+     "date": "2026-10-05T18:00:25.000Z"
+    },
+    {
      "media": "Le Progrès",
      "titre": "Corbas. Logements sociaux : 33 390 euros pour solder un vieux dossier",
      "url": "https://www.leprogres.fr/politique/2026/10/05/logements-sociaux-33-390-euros-pour-solder-un-vieux-dossier",
      "date": "2026-10-05T17:58:42.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Offemont. 2120 euros pour un écolier",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/05/2120-euros-pour-un-ecolier",
+     "date": "2026-10-05T17:45:13.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -408,17 +437,17 @@
      "date": "2026-10-05T11:51:00.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "Le gouvernement va « prélever » 2,1 milliards d’euros sur l’Unédic en 2027",
-     "url": "https://www.nicematin.com/societe/politique/le-gouvernement-va-prelever-2-1-milliards-d-euros-sur-l-unedic-en-2027-10735290",
-     "date": "2026-10-05T08:05:02.000Z"
+     "media": "Public Sénat",
+     "titre": "Sens Public — Midterms : Trump va-t-il payer le prix de sa politique économique ?",
+     "url": "https://www.publicsenat.fr/emission/sens-public/midterms-trump-va-t-il-payer-le-prix-de-sa-politique-economique-e0",
+     "date": "2026-10-05T09:18:55.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 3,
+   "medias": 4,
    "derniere": "2026-10-06T04:00:00.000Z",
    "illustration": {
     "personnes": [],
@@ -443,11 +472,17 @@
      "url": "https://www.ledauphine.com/politique/2026/10/06/concentre-et-vigilant-face-a-la-colere-lyceenne-le-gouvernement-cherche-la-bonne-reponse",
      "media": "Le Dauphiné libéré",
      "date": "2026-10-06T04:00:00.000Z"
+    },
+    {
+     "titre": "Politique. « Concentré et vigilant » : face à la colère lycéenne, le gouvernement cherche la bonne réponse",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/06/concentre-et-vigilant-face-a-la-colere-lyceenne-le-gouvernement-cherche-la-bonne-reponse",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T04:00:00.000Z"
     }
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "derniere": "2026-10-05T18:30:00.000Z",
    "illustration": {
     "personnes": [],
@@ -475,34 +510,68 @@
      "media": "Le Dauphiné libéré",
      "date": "2026-10-05T18:30:00.000Z",
      "video": true
+    },
+    {
+     "titre": "Vidéo. $content.TitleNoTags",
+     "url": "https://www.estrepublicain.fr/videos/dan-sullivan-ou-dan-sullivan-deux-candidats-pour-les-midterms-aux-etats-unis-ont-le-meme-nom-3m5lfs3",
+     "media": "L'Est républicain",
+     "date": "2026-10-05T18:30:00.000Z",
+     "video": true
     }
    ]
   },
   {
-   "medias": 2,
-   "derniere": "2026-10-06T07:20:58.000Z",
+   "medias": 3,
+   "derniere": "2026-10-06T08:26:04.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Vox España, CC0, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "politique"
+    "theme": "budget"
    },
    "articles": [
     {
-     "titre": "Mobilisation lycéenne, le mouvement change d’échelle: suivez la journée en direct",
-     "url": "https://www.mediapart.fr/journal/france/061026/mobilisation-lyceenne-le-mouvement-change-d-echelle-suivez-la-journee-en-direct",
-     "media": "Mediapart",
-     "date": "2026-10-06T07:20:58.000Z"
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-06T08:26:04.000Z"
     },
     {
-     "titre": "\"Acte III\" : nouvelle journée de mobilisation lycéenne sous haute tension en France",
-     "url": "https://www.france24.com/fr/france/20261006-acte-iii-nouvelle-journ%C3%A9e-de-mobilisation-lyc%C3%A9enne-sous-haute-tension-en-france",
-     "media": "France 24",
-     "date": "2026-10-06T00:22:48.000Z"
+     "titre": "Présidentielle: Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 2032",
+     "url": "https://www.bfmtv.com/politique/front-national/video-presidentielle-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_VN-202610060351.html",
+     "media": "BFMTV",
+     "date": "2026-10-06T08:15:58.000Z",
+     "video": true
+    },
+    {
+     "titre": "Budget : le gouvernement va prélever 2,1 milliards d’euros sur l’assurance-chômage en 2027",
+     "url": "https://www.sudouest.fr/economie/finances/budget-le-gouvernement-va-prelever-2-1-milliards-d-euros-sur-l-assurance-chomage-en-2027-30934964.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-05T20:10:30.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Blocus des lycées",
+    "titre": "Primaire de la gauche",
     "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "140",
+    "unite": "milliards d’euros"
    }
   },
   {
@@ -665,6 +734,57 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T08:24:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election"
+   },
+   "articles": [
+    {
+     "titre": "Drôme. La vente des biens de la Ville de Valence fait débat en conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/10/06/la-vente-des-biens-de-la-ville-de-valence-fait-debat-en-conseil-municipal",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-06T08:24:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:20:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Affaire Alstom : l’ancien procureur américain Daniel Kahn invité en «grand témoin» à l’Assemblée nationale",
+     "url": "https://www.lefigaro.fr/politique/affaire-alstom-l-ancien-procureur-americain-daniel-kahn-invite-en-grand-temoin-a-l-assemblee-nationale-20261005",
+     "media": "Le Figaro",
+     "date": "2026-10-06T08:20:19.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:13:25.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Pourquoi le bonheur des enfants doit être une priorité politique",
+     "url": "https://www.sudouest.fr/politique/education/pourquoi-le-bonheur-des-enfants-doit-etre-une-priorite-politique-30927287.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-06T08:13:25.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-06T08:09:00.000Z",
    "illustration": {
     "personnes": [],
@@ -694,6 +814,27 @@
      "url": "https://www.rfi.fr/fr/podcasts/le-grand-invit%C3%A9-international/20261006-manifestations-lyc%C3%A9ennes-en-france-on-n-avait-jamais-connu-un-mouvement-aussi-intense",
      "media": "RFI",
      "date": "2026-10-06T08:08:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blocus des lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Isère. Mobilisation du 6 octobre : plusieurs centaines de manifestants devant Mounier, à Grenoble, dans une ambiance bon enfant",
+     "url": "https://www.ledauphine.com/education/2026/10/06/mobilisation-du-6-octobre-lycees-bloques-manifestations-suivez-la-journee-en-direct",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-06T08:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -803,6 +944,27 @@
      "date": "2026-10-06T07:40:26.000Z"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T07:20:58.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne, le mouvement change d’échelle: suivez la journée en direct",
+     "url": "https://www.mediapart.fr/journal/france/061026/mobilisation-lyceenne-le-mouvement-change-d-echelle-suivez-la-journee-en-direct",
+     "media": "Mediapart",
+     "date": "2026-10-06T07:20:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blocus des lycées",
+    "origine": "dossier"
+   }
   },
   {
    "medias": 1,
@@ -1164,46 +1326,6 @@
   },
   {
    "medias": 1,
-   "derniere": "2026-10-06T05:14:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Isère. Mobilisation du 6 octobre : Morestel, Bourgoin, Grenoble... les manifestants se rassemblent",
-     "url": "https://www.ledauphine.com/education/2026/10/06/mobilisation-du-6-octobre-lycees-bloques-manifestations-suivez-la-journee-en-direct",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-06T05:14:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Blocus des lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-06T05:09:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Au-delà de la mobilisation lycéenne, une bataille du récit entre LFI et le gouvernement",
-     "url": "https://www.france24.com/fr/france/20261006-france-journee-6-octobre-manifestation-lyceens-bataille-recit-entre-lfi-melenchon-gouvernement",
-     "media": "France 24",
-     "date": "2026-10-06T05:09:50.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
    "derniere": "2026-10-06T05:06:55.000Z",
    "illustration": {
     "personnes": [
@@ -1274,23 +1396,6 @@
   },
   {
    "medias": 1,
-   "derniere": "2026-10-06T04:57:52.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "En direct : mobilisation massive attendue des lycéens en France pour l\"'acte III\"",
-     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
-     "media": "France 24",
-     "date": "2026-10-06T04:57:52.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
    "derniere": "2026-10-06T04:55:07.000Z",
    "illustration": {
     "personnes": [],
@@ -1303,28 +1408,6 @@
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/l-histoire-de-la-dematerialisation-invite-a-la-prudence-l-administration-publique-appelee-a-ne-pas-foncer-tete-baissee-dans-l-ia_6788935_823448.html",
      "media": "Le Monde",
      "date": "2026-10-06T04:55:07.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-06T04:40:15.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Ségolène Royal",
-      "parti": "PS"
-     }
-    ],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Ségolène Royal",
-     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
-     "media": "BFMTV",
-     "date": "2026-10-06T04:40:15.000Z"
     }
    ]
   },
@@ -1358,6 +1441,28 @@
      "type": "personnes",
      "texte": "François Hollande : député SOC (Corrèze)",
      "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:40:15.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Ségolène Royal",
+      "parti": "PS"
+     }
+    ],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Ségolène Royal",
+     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
+     "media": "BFMTV",
+     "date": "2026-10-06T04:40:15.000Z"
     }
    ]
   },
@@ -1417,6 +1522,57 @@
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/mouvement-des-lycees-impuissant-l-executif-a-la-merci-d-un-embrasement_6788869_823448.html",
      "media": "Le Monde",
      "date": "2026-10-06T04:30:04.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Heudicourt-sous-lès-Côtes. « Madine demain » : tourisme, écologie, hébergements… le futur visage du lac de Madine se dessine",
+     "url": "https://www.estrepublicain.fr/culture-loisirs/2026/10/06/madine-demain-tourisme-ecologie-hebergements-le-futur-visage-du-lac-de-madine-se-dessine",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T04:30:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Gilley. Une journée des citoyens d’honneurs du Saugeais fidèle à ses valeurs",
+     "url": "https://www.estrepublicain.fr/culture-loisirs/2026/10/06/une-journee-des-citoyens-d-honneurs-du-saugeais-fidele-a-ses-valeurs",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T04:30:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Gilley. Avec l’arrivée de Ghislain Boucard, le Saugeais compte quatre douaniers pour encore plus de convivialité",
+     "url": "https://www.estrepublicain.fr/culture-loisirs/2026/10/06/avec-l-arrivee-de-ghislain-boucard-le-saugeais-compte-quatre-douaniers-pour-encore-plus-de-convivialite",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T04:30:00.000Z"
     }
    ]
   },
@@ -1528,6 +1684,23 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T04:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. Concours « 101 Femmes entrepreneures 2026 » : éleveuse de chèvres de Lorraine, Adeline Monneret primée",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/06/concours-101-femmes-entrepreneures-2026-eleveuse-de-chevres-de-lorraine-adeline-monneret-primee",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T04:00:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-06T03:58:06.000Z",
    "illustration": {
     "personnes": [
@@ -1560,6 +1733,23 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T03:55:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Humour. Le dessin du jour : un problème ? Interdisons-le !",
+     "url": "https://www.estrepublicain.fr/actualite/2026/10/06/le-dessin-du-jour-un-probleme-interdisons-le",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T03:55:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-06T03:05:08.000Z",
    "illustration": {
     "personnes": [],
@@ -1568,7 +1758,7 @@
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027 : les candidats confrontés à la menace d’une crise financière et budgétaire",
+     "titre": "Présidentielle 2027 : pour les candidats, la difficulté de mener campagne alors que plane la menace d’une crise financière et budgétaire",
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-les-candidats-face-a-la-menace-d-une-crise-financiere-et-budgetaire_6788825_823448.html",
      "media": "Le Monde",
      "date": "2026-10-06T03:05:08.000Z"
@@ -1883,6 +2073,23 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-05T20:30:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election"
+   },
+   "articles": [
+    {
+     "titre": "Viterne. Travaux, bois et déneigement lors du dernier conseil municipal",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/05/travaux-bois-et-deneigement-lors-du-dernier-conseil-municipal",
+     "media": "L'Est républicain",
+     "date": "2026-10-05T20:30:01.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-05T20:22:51.000Z",
    "illustration": {
     "personnes": [],
@@ -1912,13 +2119,6 @@
      "url": "https://www.bfmtv.com/politique/les-republicains/valerie-pecresse-veut-supprimer-les-aides-de-la-region-francilienne-aux-lyceens-qui-seront-sanctionnes-pour-avoir-casse_AV-202610050902.html",
      "media": "BFMTV",
      "date": "2026-10-05T20:22:50.000Z"
-    },
-    {
-     "titre": "Blocage des lycées: Valérie Pécresse veut supprimer \"les aides de la région\" aux lycéens \"sanctionnés pour avoir cassé\"",
-     "url": "https://www.bfmtv.com/politique/video-blocage-des-lycees-valerie-pecresse-veut-supprimer-les-aides-de-la-region-aux-lyceens-sanctionnes-pour-avoir-casse_VN-202610050882.html",
-     "media": "BFMTV",
-     "date": "2026-10-05T19:35:53.000Z",
-     "video": true
     }
    ]
   },
@@ -1936,44 +2136,6 @@
      "url": "https://www.rfi.fr/fr/france/20261005-blocage-des-lyc%C3%A9es-en-france-la-ldh-d%C3%A9nonce-une-d%C3%A9rive-globale-par-rapport-%C3%A0-l-%C3%A9tat-de-droit-de-la-police",
      "media": "RFI",
      "date": "2026-10-05T20:18:02.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T20:10:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget : le gouvernement va prélever 2,1 milliards d’euros sur l’assurance-chômage en 2027",
-     "url": "https://www.sudouest.fr/economie/finances/budget-le-gouvernement-va-prelever-2-1-milliards-d-euros-sur-l-assurance-chomage-en-2027-30934964.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-05T20:10:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Euros",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T20:09:06.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite"
-   },
-   "articles": [
-    {
-     "titre": "\"La France tombe\" : l'extrême-droite anglosaxonne instrumentalise les violences en France",
-     "url": "https://www.france24.com/fr/%C3%A9missions/info-ou-intox/20261005-la-france-tombe-l-extr%C3%AAme-droite-anglosaxonne-instrumentalise-les-violences-en-france",
-     "media": "France 24",
-     "date": "2026-10-05T20:09:06.000Z"
     }
    ]
   },
@@ -2234,154 +2396,6 @@
      "url": "https://www.mediapart.fr/journal/politique/051026/le-pouvoir-tetanise-par-la-mobilisation-lyceenne",
      "media": "Mediapart",
      "date": "2026-10-05T18:34:36.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Grâce à des dons, cette commune près de Grasse s’adonne au cinéma sur grand écran chaque premier mardi du mois",
-     "url": "https://www.nicematin.com/culture/cinema/grace-a-des-dons-cette-commune-pres-de-grasse-s-adonne-au-cinema-sur-grand-ecran-chaque-premier-mardi-du-mois-10734684",
-     "media": "Nice-Matin",
-     "date": "2026-10-05T18:30:00.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:28:17.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC",
-     "LR"
-    ],
-    "theme": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Sénat : LR reste le plus gros groupe après une semaine de tractations, l’Union centriste devance d’un rien le PS",
-     "url": "https://www.liberation.fr/politique/elections/senat-lr-reste-le-plus-gros-groupe-apres-une-semaine-de-tractations-lunion-centriste-devance-dun-rien-le-ps-20261005_DS46VJME4FEA5ON2I67GULOEFI/",
-     "media": "Libération",
-     "date": "2026-10-05T18:28:17.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:27:06.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Lyon : l’ex-directeur d’un établissement catholique accusé de viols en garde à vue",
-     "url": "https://www.sudouest.fr/societe/violences-faites-aux-femmes/lyon-l-ex-directeur-d-un-etablissement-catholique-accuse-de-viols-en-garde-a-vue-30934026.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-05T18:27:06.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:25:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Répression des lycéens : une gestion de crise emblématique de la déconnexion entre pouvoir et société",
-     "url": "https://www.liberation.fr/idees-et-debats/editorial/repression-des-lyceens-une-gestion-de-crise-emblematique-de-la-deconnexion-entre-pouvoir-et-societe-20261005_D6W2IIHMGRA7LG6VU5BSXAX3TU/",
-     "media": "Libération",
-     "date": "2026-10-05T18:25:47.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:15:28.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Blocage de lycée à Lens : ce que l’on sait de l’adolescent qui a eu la main arrachée par une grenade",
-     "url": "https://www.lemonde.fr/societe/video/2026/10/05/blocage-de-lycee-a-lens-ce-que-l-on-sait-du-jeune-homme-qui-a-eu-la-main-arrachee-par-une-grenade_6788576_3224.html",
-     "media": "Le Monde",
-     "date": "2026-10-05T18:15:28.000Z",
-     "video": true
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:14:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "GDR"
-    ],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Romans-sur-Isère. Les communistes soutiennent le mouvement",
-     "url": "https://www.ledauphine.com/politique/2026/10/05/les-communistes-soutiennent-le-mouvement",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-05T18:14:21.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T17:58:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Corbas. Logements sociaux : 33 390 euros pour solder un vieux dossier",
-     "url": "https://www.leprogres.fr/politique/2026/10/05/logements-sociaux-33-390-euros-pour-solder-un-vieux-dossier",
-     "media": "Le Progrès",
-     "date": "2026-10-05T17:58:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire de la gauche",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T17:56:35.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Rassemblement national : une popularité inébranlable?",
-     "url": "https://www.rfi.fr/fr/podcasts/d%C3%A9bat-du-jour/20261005-rassemblement-national-une-popularit%C3%A9-in%C3%A9branlable",
-     "media": "RFI",
-     "date": "2026-10-05T17:56:35.000Z"
     }
    ]
   }
