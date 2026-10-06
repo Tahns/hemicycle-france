@@ -198,7 +198,7 @@ test("titreParRegles : présomption d'innocence, aucun nom ni verbe qui accuse d
   ]) {
     const t = titreSujet(reel(titre, ill), [], {}).titre;
     assert.ok(!/Barella|Zaïd|Le Maire|coupable|accus|dénonc/i.test(t), t);
-    assert.match(t, /procédure judiciaire en cours/);
+    assert.match(t, /actualité judiciaire|l.essentiel du moment/);
   }
 });
 
@@ -233,4 +233,22 @@ test("lieuDuTitre : lieu en tête, pas un thème", () => {
   assert.strictEqual(lieuDuTitre("Politique. Le gouvernement cherche"), null);
   assert.strictEqual(lieuDuTitre("Colère lycéenne: Gérard Larcher estime"), null);
   assert.strictEqual(lieuDuTitre("Éditorial. Colère lycéenne : face au chaos"), null);
+});
+
+test("accusation ou polémique sans juridiction : jamais « procédure judiciaire en cours »", () => {
+  const cas = [
+    ["Politique. Accusé d'antisémitisme, Jordan Bardella nie à nouveau avec fermeté", [pers("Jordan Bardella", "RN")]],
+    ["Parlement européen. Rima Hassan accusée d'avoir renversé les drapeaux d'Israël et de l'UE", [pers("Rima Hassan", "LFI")]],
+    ["Loi intégrale contre les violences sexuelles : les victimes mieux prises en charge", []],
+  ];
+  for (const [titre, personnes] of cas) {
+    const t = titreParRegles(reel(titre, { personnes }), {});
+    assert.ok(t, titre);
+    assert.ok(!/procédure|judiciaire|tribunal|condamn/i.test(t.titre), `${titre} → ${t.titre}`);
+    assert.ok(!personnes.some((x) => t.titre.includes(x.nom)), "aucune personne nommée");
+    assert.strictEqual(t.generique, true, "titre générique : ni story ni post");
+  }
+  // Juridiction explicitement citée : actualité judiciaire, sans nom ni « en cours »
+  const j = titreParRegles(reel("Un homme condamné par le tribunal correctionnel de Lyon", {}), {});
+  assert.ok(/judiciaire|tribunal/i.test(j.titre) && !/en cours/i.test(j.titre), j.titre);
 });

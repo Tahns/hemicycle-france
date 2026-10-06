@@ -191,8 +191,10 @@ const ACTIONS = [
   ["position", /denonce|estime|affirme|declare|critique|juge|indique|exige|reclame|met en garde|souhaite|dit|vent debout|interroge|rappelle|evoque/, "prise de position sur"],
 ];
 const ABREV = { SOC: "PS", ECO: "Écologistes", EPR: "EPR", RN: "RN", LFI: "LFI", LR: "LR", UDR: "UDR", PS: "PS", MODEM: "MoDem", DEM: "MoDem", HOR: "Horizons", LIOT: "LIOT", GDR: "GDR" };
-const JUDICIAIRE_TITRES = /mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement|victime|inéligib|prison|extradition|\baffaire\b/i;
+const JUDICIAIRE_TITRES = /accus[ée]|accusation|mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement|victime|inéligib|prison|extradition|\baffaire\b/i;
 const PROCEDURE = /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement/i;
+// Indice explicite d'une juridiction ou d'une décision de justice : sans lui (simple « accusé de », « plainte », « victime », « soupçonné »), le titre n'affirme JAMAIS une procédure.
+const JURIDICTION = /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|procès|parquet|tribunal|cour d.appel|cour de cassation|conseil d.état|\bjuge\b|juges\b|mandat d.arrêt|relax|inéligib|extradition|prison/i;
 
 /** Acteur nommé dans le titre : personne (sa fonction officielle si elle est au Gouvernement), parti, ou institution ; null sinon. */
 function acteurDe(sujet, donnees, judiciaire) {
@@ -252,8 +254,12 @@ function titreParRegles(sujet, donnees = {}) {
   if (procedure) {
     const ou = lieu ? `${lieu} : ` : theme && theme.S !== "Justice" ? `${theme.S} : ` : "Justice : ";
     if (/tribunal administratif|suspend/.test(p)) return lim([`${ou}décision du tribunal administratif sur ${O || "un arrêté"}`, `${ou}décision du tribunal administratif`, "Justice : décision du tribunal administratif"]);
-    return lim([`${ou}procédure judiciaire en cours`, "Justice : procédure en cours"]);
+    // Aucune juridiction citée : on ne parle pas de procédure (présomption d'innocence), titre générique de thème
+    if (!articles.some((a) => JURIDICTION.test(a.titre || ""))) return lim([theme && theme.S !== "Justice" ? `${theme.S} : l'essentiel du moment` : null, "Politique : l'essentiel du moment"], true);
+    return lim([`${ou}actualité judiciaire`, "Justice : actualité judiciaire"], true);
   }
+  // Accusation ou affaire sans juridiction citée : titre générique de thème, jamais un nom de personne ni une procédure affirmée
+  if (judiciaire && !procedure && (sujet.illustration?.personnes || []).length) return lim([theme && theme.S !== "Justice" ? `${theme.S} : l'essentiel du moment` : null, "Politique : l'essentiel du moment"], true);
   if (acteur && theme) {
     const verbe = action ? action[2] : "actualité sur";
     const l = acteur.label;

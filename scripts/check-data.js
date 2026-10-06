@@ -17,6 +17,8 @@ import { verifierVignettes } from "./check-vignettes.js";
 import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 import { controlerFichierJson } from "./controles-json.js";
+import { controlerPages } from "./controler-pages.js";
+import { HOTE_ANALYTIQUE } from "./appliquer-analytics.js";
 import { controlerDepot } from "./controles-digest.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
@@ -202,6 +204,7 @@ async function checkActualites() {
         if (pm === plat(t)) err(`${nom} : titrePropre identique à un titre de presse`);
         for (let k = 0; k + 5 <= tm.length; k++) if (` ${pm} `.includes(` ${tm.slice(k, k + 5).join(" ")} `)) { err(`${nom} : titrePropre reprend un segment de 5 mots d'un titre de presse`); break; }
       }
+      if (/procédure judiciaire en cours|procédure en cours/i.test(t)) err(`${nom} : titrePropre affirme une procédure en cours (aucune juridiction vérifiable)`);
       if (/\$content|\{\{|\$\{|%[a-z_]+%|TitleNoTags/i.test(t)) err(`${nom} : titrePropre issu d'un gabarit de flux cassé`);
       const procedure = (s.articles || []).some((a) => /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement|\baffaire\b|plainte/i.test(a.titre || ""));
       if (procedure && (s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne dans une affaire judiciaire (présomption d'innocence)`);
@@ -673,6 +676,8 @@ await checkPresidents();
 }
 await secondaire(checkI18n);
 await checkCompte();
+// Pages statiques (loi/, candidat/, parti/), plan du site, flux, adresse du site et mesure d'audience : anomalie signalée sans bloquer la publication des données (bloquante avec --strict)
+await secondaire(async () => { for (const e of await controlerPages(".")) err(`pages : ${e}`); });
 
 /** Comptes (Supabase) : config absente = fonction cachée et CSP stricte ; config présente = URL https …supabase.co, clé publique seulement. */
 async function checkCompte() {
@@ -680,7 +685,7 @@ async function checkCompte() {
   const html = await readFile("index.html", "utf-8");
   const hotes = connectSrc(html);
   if (!hotes) return err("compte : directive connect-src introuvable dans la CSP d'index.html");
-  const autres = hotes.filter((h) => h !== "'self'");
+  const autres = hotes.filter((h) => h !== "'self'" && !HOTE_ANALYTIQUE.test(h)); // la mesure d'audience facultative est contrôlée par checkPages
   if (presente && !config) return err(`compte : data/compte-config.json invalide (${erreur}). L'URL doit être https://<projet>.supabase.co et la clé la clé publique « anon », jamais la clé secrète.`);
   for (const h of autres) if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(h)) err(`compte : la CSP autorise « ${h} » : seule l'URL https://<projet>.supabase.co de la configuration est admise`);
   if (!config) {
