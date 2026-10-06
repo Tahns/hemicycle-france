@@ -35,12 +35,14 @@ const requireCjs = createRequire(import.meta.url);
 const { concerneLaFrance } = requireCjs("./pertinence.cjs");
 const { construireDossiers } = requireCjs("./dossiers.cjs");
 const { estVideo, enrichirSujet } = requireCjs("./titres-propres.cjs");
+const { regrouper, construireReferentiel, sourcesDistinctes, centrale } = requireCjs("./regroupement.cjs");
 
 const DATA_FILE = "data/actualites.json";
 const DRY_RUN = process.argv.includes("--dry-run");
 const DOSSIER = process.argv.find((a) => a.startsWith("--dossier="))?.split("=")[1];
 const JOURS = 4; // titres plus anciens ignorés
-const MAX = 120;
+const MAX = 120; // sujets conservés dans le fichier
+const MAX_REGROUPEMENT = 700; // titres les plus récents soumis au regroupement (le lot du jour sert à pondérer les mots rares)
 const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
 const DECODEX_URL = "https://asset.lemde.fr/medias/mmpub/data/decodex/hoax/hoax_debunks.json";
 
@@ -99,17 +101,7 @@ function lireFlux(xml) {
 const titreCasse = (t) => /\$content\.|\$\{|\{\{|\}\}|%[a-z_]+%|TitleNoTags/i.test(String(t || ""));
 
 // ---------- Regroupement des titres par sujet ----------
-const MOTS_VIDES = new Set(("les des une pour dans avec sans sur par que qui quoi est son ses leur leurs aux du de la le un et ou mais donc car ni " +
-  "pas plus tres tout tous toute toutes cette ces cet elle elles ils nous vous apres avant entre contre chez depuis selon face fait faire veut va " +
-  "etre avoir ont sont sera seront etait comme encore deja aussi ainsi alors quand dont lors vers ceux celle celui quel quelle quels quelles " +
-  "direct video info infos politique france francais francaise gouvernement ministre premier president annonce explique dit").split(" "));
-const mots = (titre) => new Set(titre.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((m) => m.length >= 4 && !MOTS_VIDES.has(m)));
-function memeSujet(a, b) {
-  let communs = 0;
-  for (const m of a) if (b.has(m)) communs++;
-  // 3 mots communs, ou 2 qui pèsent au moins la moitié du titre le plus long (un titre court n'attire pas tout)
-  return communs >= 3 || (communs === 2 && communs / Math.max(a.size, b.size) >= 0.5);
-}
+// Le regroupement par sujet (normalisation, entités, TF-IDF, blocages) est dans scripts/regroupement.cjs
 
 // Loi du 19 juillet 1977, art. 11 : même période de réserve que fetch-sondages.js
 const TOURS_PRESIDENTIELLE = ["2027-04-18", "2027-05-02"];
@@ -191,36 +183,36 @@ async function main() {
   // Un même article peut figurer deux fois dans un flux : dédoublonnage par lien
   const vus = new Set();
   const tous = articles.filter((a) => !vus.has(a.url) && vus.add(a.url)).sort((a, b) => b.date.localeCompare(a.date));
-  const uniques = tous.slice(0, MAX);
+  const uniques = tous.slice(0, MAX_REGROUPEMENT);
   // Dossiers : un sujet dominant éclaté en petits sujets d'un seul média (>= 6 articles, >= 4 médias sur 48 h)
   const dossiers = construireDossiers(tous, maintenant);
 
-  // Sujets : chaque titre est comparé au premier titre du sujet (pas à tous : sinon les sujets s'enchaînent)
-  const sujets = [];
-  for (const a of uniques) {
-    const m = mots(a.titre);
-    const s = m.size >= 2 && sujets.find((x) => memeSujet(m, x.mots));
-    if (s) s.articles.push(a);
-    else sujets.push({ mots: m, articles: [a] });
-  }
-  // Titre de tête : le plus proche des autres titres du sujet (à égalité, le plus récent)
-  const central = (articles) => {
-    const ens = articles.map((a) => mots(a.titre));
-    const score = (i) => ens.reduce((t, e, j) => t + (i === j ? 0 : [...ens[i]].filter((x) => e.has(x)).length), 0);
-    const i = ens.map((_, k) => k).sort((x, y) => score(y) - score(x) || x - y)[0];
-    return [articles[i], ...articles.filter((_, k) => k !== i)];
-  };
-  // Illustration : portraits et logos libres hébergés sur le site, ou pictogramme du thème
-  const motifs = await construireIndex();
-  // Le site suit la vie politique française : un sujet qui ne parle que de l'étranger est écarté
-  const sortieSujets = sujets
-    .filter((s) => concerneLaFrance(s.articles.map((a) => a.titre)))
-    .map((s) => ({ medias: new Set(s.articles.map((a) => a.media)).size, derniere: s.articles[0].date, illustration: illustrer(s.articles.map((a) => a.titre), motifs), articles: central(s.articles) }))
-    .sort((a, b) => b.medias - a.medias || b.derniere.localeCompare(a.derniere));
-
-  // Ce que le site ajoute : titre à nous, contexte tiré de nos données, chiffre, date, liens vidéo (fichiers absents ignorés)
+  // Données du site : personnes à reconnaître dans les titres, contexte des sujets (fichiers absents ignorés)
   const lire = (f) => readFile(`data/${f}.json`, "utf-8").then(JSON.parse).catch(() => null);
   const donnees = { gouvernement: await lire("gouvernement"), dirigeants: await lire("dirigeants"), deputes: await lire("deputes"), sondages: await lire("sondages"), agenda: await lire("agenda-an"), tours: TOURS_PRESIDENTIELLE };
+  const referentiel = construireReferentiel({ ...donnees, candidats: await lire("candidats"), senateurs: await lire("senateurs") });
+
+  // Sujets : scripts/regroupement.cjs (entités, TF-IDF du lot, centroïde, fenêtre de 36 h, blocages des fusions risquées)
+  const sujets = regrouper(uniques, { referentiel });
+  // Illustration : portraits et logos libres hébergés sur le site, ou pictogramme du thème
+  const motifs = await construireIndex();
+  // Le site suit la vie politique française : un sujet qui ne parle que de l'étranger est écarté.
+  // « medias » : nombre de médias cités (inchangé, lu partout) ; « mediasDistincts » / « sources » : même décompte, mais un groupe
+  // de presse (EBRA, France Médias Monde) ou une dépêche reprise à l'identique ne compte qu'une fois.
+  const sortieSujets = sujets
+    .filter((s) => concerneLaFrance(s.articles.map((a) => a.titre)))
+    .map((s) => {
+      const { mediasDistincts, sources } = sourcesDistinctes(s.articles);
+      return {
+        medias: new Set(s.articles.map((a) => a.media)).size, mediasDistincts, sources,
+        derniere: s.articles.reduce((d, a) => (a.date > d ? a.date : d), ""),
+        illustration: illustrer(s.articles.map((a) => a.titre), motifs), articles: centrale(s.articles, referentiel),
+      };
+    })
+    .sort((a, b) => b.mediasDistincts - a.mediasDistincts || b.medias - a.medias || b.derniere.localeCompare(a.derniere))
+    .slice(0, MAX);
+
+  // Ce que le site ajoute : titre à nous, contexte tiré de nos données, chiffre, date, liens vidéo
   for (const d of dossiers) for (const a of d.articles || []) if (estVideo(a.url)) a.video = true;
   for (const s of sortieSujets) enrichirSujet(s, dossiers, donnees, maintenant);
 
@@ -236,7 +228,7 @@ async function main() {
   if (DRY_RUN) return console.log(JSON.stringify(sortie, null, 2));
   // Le volume de l'actualité varie fortement d'une heure à l'autre : seuil de chute plus large (50 %) que les données stables
   const contenu = { lastUpdated: maintenant.toISOString(), ...sortie };
-  if (await ecrireGarde(DATA_FILE, contenu, { nom: DATA_FILE, texte: JSON.stringify(contenu, null, 1) + "\n", liste: (d) => d.sujets, obligatoires: ["articles", "derniere"], seuil: 0.5 })) log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.filter((s) => s.medias >= 2).length} sujet(s) repris par plusieurs médias, ${dossiers.length} dossier(s).`);
+  if (await ecrireGarde(DATA_FILE, contenu, { nom: DATA_FILE, texte: JSON.stringify(contenu, null, 1) + "\n", liste: (d) => d.sujets, obligatoires: ["articles", "derniere"], seuil: 0.5 })) log(`${DATA_FILE} mis à jour : ${uniques.length} titres, ${sortieSujets.length} sujet(s), ${sortieSujets.filter((s) => s.mediasDistincts >= 2).length} repris par plusieurs médias distincts, ${dossiers.length} dossier(s).`);
 }
 
 main().catch((e) => {
