@@ -12,15 +12,14 @@
  *  - p/sondages.html : le dernier sondage de la présidentielle et son image (rien pendant la réserve électorale) ;
  *  - data/alertes.json : derniers votes clés et dernier sondage, lus par le service worker pour les alertes ;
  *  - icons/partage.jpg : image d'aperçu générale du site ;
- *  - sitemap.xml et robots.txt : plan du site pour les moteurs de recherche.
+ *  (le plan du site et robots.txt sont produits par generer-pages.js)
  * Chaque page est lisible sans JavaScript et renvoie vers la version interactive du site.
  * Images en JPEG 800 × 420 (format « grande image » des réseaux, ~45 Ko chacune).
  *
  * Titres et chiffres viennent du site lui-même (index.html?carte), pour être identiques à
  * ce qu'affiche le site. Les images existantes ne sont pas recalculées (un vote ne change plus).
  *
- * Nom de domaine : si un fichier CNAME est présent (créé par GitHub Pages quand on y déclare un
- * domaine), toutes les adresses absolues — y compris les balises og: d'index.html — l'utilisent.
+ * Nom de domaine : toutes les adresses absolues utilisent « baseUrl » de data/site-config.json (voir docs/DOMAINE.md).
  *
  * USAGE : node scripts/partage.cjs   (nécessite le paquet « playwright » et Chromium)
  */
@@ -30,10 +29,17 @@ const path = require("path");
 const { chromium } = require("playwright");
 
 const RACINE = path.resolve(__dirname, "..");
+// Adresse du site : SITE_URL, sinon « baseUrl » de data/site-config.json (une seule variable, voir docs/DOMAINE.md),
+// sinon domaine du fichier CNAME, sinon adresse GitHub Pages déduite du dépôt (suit un renommage du dépôt)
 const CNAME = fs.existsSync(path.join(RACINE, "CNAME")) ? fs.readFileSync(path.join(RACINE, "CNAME"), "utf-8").trim().split(/\s+/)[0] : null;
-// Sans domaine propre : adresse GitHub Pages déduite du dépôt (suit un renommage du dépôt)
 const [PROPRIO, DEPOT] = (process.env.GITHUB_REPOSITORY || "Tahns/hemicycle-france").split("/");
-const SITE = process.env.SITE_URL || (CNAME ? `https://${CNAME}/` : `https://${PROPRIO.toLowerCase()}.github.io/${DEPOT}/`);
+function baseConfig() {
+  try {
+    const u = new URL(JSON.parse(fs.readFileSync(path.join(RACINE, "data", "site-config.json"), "utf-8")).baseUrl);
+    return u.protocol === "https:" ? `${u.origin}${u.pathname.replace(/\/*$/, "/")}` : null;
+  } catch (e) { return null; }
+}
+const SITE = process.env.SITE_URL || baseConfig() || (CNAME ? `https://${CNAME}/` : `https://${PROPRIO.toLowerCase()}.github.io/${DEPOT}/`);
 const NOM_SITE = "Hémicycle France";
 const TYPES = { ".html": "text/html; charset=utf-8", ".json": "application/json", ".js": "text/javascript", ".woff2": "font/woff2", ".png": "image/png", ".css": "text/css" };
 
@@ -303,16 +309,7 @@ function serveur() {
     for (const f of fs.readdirSync(path.join(RACINE, "s"))) if (f.endsWith(".html") && !senActuels.has(f)) fs.unlinkSync(path.join(RACINE, "s", f));
   }
 
-  // 4. Plan du site et robots.txt
-  const urls = [
-    `<url><loc>${SITE}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>`,
-    ...votes.map((v) => `<url><loc>${SITE}v/${v.numero}.html</loc>${v.dateISO ? `<lastmod>${v.dateISO}</lastmod>` : ""}</url>`),
-    ...deputes.map((d) => `<url><loc>${SITE}d/${d.id}.html</loc><changefreq>weekly</changefreq></url>`),
-    ...senateurs.map((x) => `<url><loc>${SITE}s/${x.id}.html</loc><changefreq>weekly</changefreq></url>`),
-    `<url><loc>${SITE}p/sondages.html</loc><changefreq>daily</changefreq></url>`,
-  ];
-  ecrireSiChange(path.join(RACINE, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
-  ecrireSiChange(path.join(RACINE, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
+  // 4. Le plan du site (sitemap.xml) et robots.txt sont produits par scripts/generer-pages.js, qui connaît toutes les pages.
 
   // 4 bis. Flux RSS des derniers votes clés (textes et motions de censure), à suivre dans un lecteur de flux
   const xml = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -336,15 +333,7 @@ ${items}
 </rss>
 `);
 
-  // 5. Adresse du site dans les balises og: d'index.html (utile après un changement de domaine)
-  const indexFichier = path.join(RACINE, "index.html");
-  const index = fs.readFileSync(indexFichier, "utf-8");
-  const maj = index
-    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}$2`)
-    .replace(/(<meta property="og:image" content=")[^"]*(icons\/partage\.jpg")/, `$1${SITE}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}$2`)
-    .replace(/("@type":"WebSite"[^<]*?"url":")[^"]*(")/, `$1${SITE}$2`);
-  if (maj !== index) fs.writeFileSync(indexFichier, maj);
+  // 5. Les balises de tête d'index.html (adresse du site, données structurées) sont mises à jour par scripts/generer-pages.js.
 
   console.log(`[partage] ${votes.length} votes clés, ${deputes.length} députés : ${pages} page(s) écrite(s), ${images} image(s) créée(s). Adresse : ${SITE}`);
 })().catch((e) => {

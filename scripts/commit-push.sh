@@ -2,7 +2,7 @@
 # commit-push.sh : commit des fichiers listés (seulement s'il y a du nouveau) puis push avec reprise.
 # USAGE : scripts/commit-push.sh "message" chemin [chemin...]
 # Partagé par update-data.yml, actualites.yml et publier-stories.yml : une seule logique de reprise.
-#  - les chemins absents sont ignorés ;
+#  - les chemins absents sont ignorés (un motif comme « sitemap-*.xml » est accepté) ;
 #  - plusieurs workflows écrivent dans data/ : on reprend le dernier état distant (nos fichiers l'emportent) et on réessaie ;
 #  - si le push échoue après toutes les tentatives, le script SORT EN ERREUR (avant : échec silencieux) et l'écrit dans le résumé.
 set -u
@@ -11,7 +11,7 @@ branche="${GITHUB_REF_NAME:-main}"
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 for chemin in "$@"; do
-  if [ -e "$chemin" ]; then git add -A -- "$chemin"; fi
+  if [ -e "$chemin" ] || compgen -G "$chemin" > /dev/null; then git add -A -- "$chemin"; fi
 done
 if git diff --cached --quiet; then
   echo "Rien de nouveau — rien à committer."

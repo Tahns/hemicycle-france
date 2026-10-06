@@ -30,3 +30,12 @@ th{font-size:var(--fs-xs); letter-spacing:.05em; text-transform:uppercase; color
 .vote-p{color:var(--vert); font-weight:700;} .vote-c{color:var(--rouge); font-weight:700;} .vote-a{color:var(--ambre); font-weight:700;} .vote-x{color:var(--text-faint);}
 img.apercu{display:block; width:100%; max-width:800px; height:auto; margin:var(--s5) 0 var(--s1); border:var(--filet) solid var(--border);}
 footer{padding-top:var(--s4); padding-bottom:var(--s7); border-top:var(--filet) solid var(--border); font-size:var(--fs-sm); color:var(--text-faint);}
+/* Pages générées par scripts/generer-pages.js (loi/, candidat/, parti/) */
+.fil{font-size:var(--fs-sm); color:var(--text-faint); margin:0 0 var(--s3);}
+.portrait{margin:var(--s3) 0; display:flex; align-items:flex-end; gap:var(--s3); flex-wrap:wrap;}
+.portrait img{display:block; width:120px; height:auto; border:var(--filet) solid var(--border); background:var(--bg-elevated);}
+.portrait.logo img{width:auto; max-width:200px; max-height:120px; padding:var(--s2);}
+.credit{font-size:var(--fs-xs); color:var(--text-faint); max-width:46ch;}
+ul.sources, ul.liste-liens{padding-left:var(--s5);} ul.sources li, ul.liste-liens li{margin:var(--s1) 0;}
+.sources{font-size:var(--fs-md);}
+td small{font-size:var(--fs-xs);}
