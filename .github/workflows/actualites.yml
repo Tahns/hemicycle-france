@@ -55,6 +55,14 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
         continue-on-error: true
+      # Vidéos animées (stories vidéo, Reels) : seulement si "videos": true dans data/stories-config.json ; sans ffmpeg, l'image part seule
+      - name: Installer ffmpeg (vidéos animées)
+        if: steps.story_choix.outputs.a_faire == 'true'
+        run: |
+          if grep -q '"videos": *true' data/stories-config.json; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          fi
+        continue-on-error: true
       # Stories nettes : versions haute définition des portraits des personnes citées (Commons : mêmes licences et crédits ;
       # photos officielles du Parlement : seulement les parlementaires cités). Sans elles, la story utilise la vignette, réduite.
       - name: Portraits HD des personnalités (Wikimedia Commons)

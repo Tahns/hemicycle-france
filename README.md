@@ -67,6 +67,9 @@ Un sujet n'est retenu (un seul par exécution) que s'il remplit **toutes** ces r
 
 Les JPEG de plus de 3 jours sont supprimés par le script lui-même. `scripts/check-data.js` contrôle la file
 (https, date valide, JPEG présent et ≤ 8 Mo, 4 entrées par jour au plus). Test : `node tests/stories-auto.test.mjs`.
+Vidéos (désactivées par défaut, `"videos": true` et `"videosMax"` dans `data/stories-config.json`) : `scripts/videos-auto.cjs` anime nos propres visuels avec ffmpeg
+(blocs qui apparaissent, zoom lent, barre des voix ou compteur de jours) pour une story vidéo de dossier ou de « direct » et un Reel par post, sans aucune vidéo, musique ni son de tiers.
+Test : `node tests/videos-auto.test.mjs`. Voir `docs/PUBLICATION-AUTO.md`.
 Essai local : `NODE_PATH=… CHROMIUM_PATH=/chemin/chrome STORIES_AUTO_MAINTENANT=2026-10-02T13:30:00Z node scripts/stories-auto.cjs`.
 
 ## Nom de domaine (optionnel)

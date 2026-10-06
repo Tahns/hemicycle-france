@@ -9,7 +9,7 @@
  * USAGE : node scripts/check-data.js
  */
 
-import { readFile } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import { existsSync, appendFileSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
@@ -272,16 +272,26 @@ async function checkInstagramFile() {
   const d = JSON.parse(await readFile("data/instagram-file.json", "utf-8").catch(() => "null"));
   if (!d) return;
   if (!Array.isArray(d.entrees)) return err("instagram-file.json : entrees absentes");
-  const stories = {}, posts = {}, ids = new Set();
+  const stories = {}, posts = {}, videos = {}, ids = new Set();
   for (const e of d.entrees) {
     const nom = `instagram-file.json : entrée ${e.id || "?"}`;
-    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || !["story", "post"].includes(e.type)) { err(`${nom} incomplète (type « story » ou « post » attendu)`); continue; }
+    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || !["story", "post", "reel"].includes(e.type)) { err(`${nom} incomplète (type « story », « post » ou « reel » attendu)`); continue; }
     if (ids.has(e.id)) err(`${nom} en double`);
     ids.add(e.id);
     const t = Date.parse(e.cree);
     if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
+    // Vidéo (facultative sur une story, obligatoire sur un Reel) : instagram/auto/<id>.mp4, voir scripts/videos-auto.cjs
+    if (e.type === "reel" && !e.url_video) err(`${nom} : un Reel exige url_video`);
+    if (e.url_video !== undefined && e.url_video !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.mp4`) err(`${nom} : url_video doit être en https et pointer sur instagram/auto/${e.id}.mp4`);
+    if (e.type === "reel") {
+      videos[jour] = (videos[jour] || 0) + 1;
+      if (!/^[0-9a-f]{12}$/.test(e.reelDe || "")) err(`${nom} : reelDe invalide`);
+      else if (!d.entrees.some((p) => p.id === e.reelDe && p.type === "post")) err(`${nom} : reelDe ne désigne aucun post de la file`);
+      const l = e.legende;
+      if (typeof l !== "string" || l.length < 20 || l.length > 2200 || !l.includes("@hemicyclefrance") || /github\.io|hemicycle-france/i.test(l)) err(`${nom} : légende de Reel absente ou invalide`);
+    } else if (e.url_video) videos[jour] = (videos[jour] || 0) + 1;
     if (e.type === "post") {
       posts[jour] = (posts[jour] || 0) + 1;
       const l = e.legende;
@@ -295,10 +305,19 @@ async function checkInstagramFile() {
     } else if (e.annonceDe) {
       if (!/^[0-9a-f]{12}$/.test(e.annonceDe)) err(`${nom} : annonceDe invalide`);
       else if (!d.entrees.some((p) => p.id === e.annonceDe && p.type === "post")) err(`${nom} : annonceDe ne désigne aucun post de la file`);
-    } else {
+    } else if (e.type !== "reel") {
       stories[jour] = (stories[jour] || 0) + 1;
     }
     // Les images de plus de 3 jours sont supprimées par stories-auto.cjs (IMAGE_JOURS) : on n'exige que celles de moins de 2 jours
+    if (e.url_video && Date.now() - t < 2 * 24 * 36e5) {
+      const fv = `instagram/auto/${e.id}.mp4`;
+      if (!existsSync(fv)) err(`${nom} : vidéo absente (${fv})`);
+      else {
+        const bv = await readFile(fv);
+        if (bv.length < 12 || bv.toString("latin1", 4, 8) !== "ftyp") err(`${nom} : ${fv} n'est pas un MP4`);
+        if (bv.length > 25 * 1024 * 1024) err(`${nom} : ${fv} dépasse 25 Mo`);
+      }
+    }
     if (Date.now() - t < 2 * 24 * 36e5) {
       const f = `instagram/auto/${e.id}.jpg`;
       if (!existsSync(f)) err(`${nom} : image absente (${f})`);
@@ -315,8 +334,20 @@ async function checkInstagramFile() {
   }
   for (const [j, n] of Object.entries(stories)) if (n > 4) err(`instagram-file.json : ${n} stories le ${j} (4 au maximum par jour, hors annonces de post)`);
   for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour)`);
+  const config = JSON.parse(await readFile("data/stories-config.json", "utf-8").catch(() => "{}"));
+  const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;
+  for (const [j, n] of Object.entries(videos)) if (n > Math.max(maxVideos, 6)) err(`instagram-file.json : ${n} vidéos le ${j} (videosMax : ${maxVideos})`);
   if (d.entrees.length > 30) err("instagram-file.json : plus de 30 entrées");
-  console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s) (stories, posts et annonces).`);
+  // Tous les MP4 hébergés (vidéos de la file et exemples) : vrai MP4 et poids raisonnable
+  for (const dossier of ["instagram/auto", "instagram/modeles"]) {
+    for (const f of (await readdir(dossier).catch(() => [])).filter((x) => x.endsWith(".mp4"))) {
+      const buf = await readFile(`${dossier}/${f}`);
+      if (buf.length < 12 || buf.toString("latin1", 4, 8) !== "ftyp") err(`${dossier}/${f} n'est pas un MP4`);
+      else if (buf.length > 25 * 1024 * 1024) err(`${dossier}/${f} dépasse 25 Mo`);
+      else if (dossier === "instagram/modeles" && buf.length > 2 * 1024 * 1024) err(`${dossier}/${f} : un exemple doit rester sous 2 Mo`);
+    }
+  }
+  console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s) (stories, posts, Reels et annonces).`);
 }
 
 async function checkQuiz() {

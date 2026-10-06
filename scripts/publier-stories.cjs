@@ -20,6 +20,12 @@
  *    « données propres » (sans titre de presse) sont publiables, comme dans la file de stories-auto.cjs ;
  *  - dernier filet de sécurité : une entrée de presse dont un titre contient un mot de la liste prudente (liste durcie depuis la mise en file)
  *    n'est jamais publiée, ni une entrée qui reprend un sujet proche d'une story déjà publiée dans les dernières 24 h ;
+ *  - VIDÉOS (data/stories-config.json : "videos": true, "videosMax" par jour ; sinon tout reste en image) :
+ *    story vidéo (entrée avec url_video : POST /media {media_type: "STORIES", video_url}) avec REPLI SUR L'IMAGE si la vidéo n'est pas en ligne
+ *    (HEAD 200, video/mp4) ou si l'API la refuse AVANT media_publish ; REEL (entrée { type: "reel", reelDe: id du post, legende, url_video } :
+ *    {media_type: "REELS", video_url, caption, share_to_feed: true}) publié seulement APRÈS son post (au plus 12 h après), avec l'espacement de 60 min,
+ *    sans repli (abandon : le Reel n'est jamais publié en double) ; au plus videosMax Reels par jour, hors plafonds des stories et des posts ;
+ *    attente du statut FINISHED jusqu'à ~5 min (délai croissant) puis media_publish. Registre inchangé en cas d'échec avant media_publish.
  *  - l'image doit être en ligne (HEAD 200 sur l'URL GitHub Pages), sinon nouvel essai au passage suivant ;
  *  - une erreur de l'API ne marque JAMAIS l'entrée comme publiée (nouvel essai au passage suivant, tant qu'elle n'est pas périmée).
  *
@@ -28,7 +34,7 @@
  * alerte dans $GITHUB_STEP_SUMMARY s'il est invalide ou expire dans moins de 10 jours.
  *
  * USAGE : node scripts/publier-stories.cjs [--a-sec]   (--a-sec : tout vérifier, rien envoyer, rien écrire)
- * Variables facultatives (essais) : GRAPH_BASE (défaut https://graph.facebook.com/v21.0), PUBLIER_MAINTENANT (ISO),
+ * Variables facultatives (essais) : GRAPH_BASE (défaut https://graph.instagram.com/v21.0), PUBLIER_MAINTENANT (ISO),
  *   PUBLIER_FILE, PUBLIER_REGISTRE, PUBLIER_CONFIG (chemins), PUBLIER_ATTENTE_MS (intervalle de sondage du statut).
  */
 const fs = require("fs");
@@ -39,7 +45,7 @@ const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "instagram-file.json");
 const FICHIER_REGISTRE = process.env.PUBLIER_REGISTRE || path.join(RACINE, "data", "instagram-publiees.json");
 const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "stories-config.json");
-const GRAPH = (process.env.GRAPH_BASE || "https://graph.facebook.com/v21.0").replace(/\/+$/, "");
+const GRAPH = (process.env.GRAPH_BASE || "https://graph.instagram.com/v21.0").replace(/\/+$/, "");
 const MAX_PAR_JOUR = 4; // stories par jour (hors stories d'annonce de post)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
 const ESPACEMENT_ANNONCE_MIN = 5; // une story d'annonce sort au plus tôt 5 min après son post (seule exception à l'espacement de 60 min)
@@ -49,6 +55,8 @@ const FRAICHEUR_H = 3;
 const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;
 const ESSAIS_STATUT = 20;
+const ATTENTE_VIDEO_MAX_MS = Number(process.env.PUBLIER_VIDEO_MAX_MS) || 5 * 60 * 1000; // une vidéo met plus de temps à être traitée
+const MAX_REELS_PAR_JOUR_DEFAUT = 2;
 const GARDER_REGISTRE = 200;
 const FENETRE_DOUBLON_H = 36; // un sujet proche d'une story publiée depuis moins de 36 h est refusé
 
@@ -86,14 +94,15 @@ function legendeValide(e) {
 /** Une entrée dont le contenu est à risque : mot de la liste prudente (presse ou post), légende de post invalide. */
 function risque(e) {
   if (e.sondageId) return false;
-  const post = e.type === "post" || Boolean(e.annonceDe);
-  if (e.type === "post" && !legendeValide(e)) return true;
+  const post = e.type === "post" || e.type === "reel" || Boolean(e.annonceDe);
+  if ((e.type === "post" || e.type === "reel") && !legendeValide(e)) return true;
   if (e.donneesPropres === true && !post) return false;
   const titres = e.bref === true ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titre || "", ...(post ? [e.titrePropre || ""] : [])];
   return titres.some((t) => motExclu(t));
 }
 const estPost = (e) => e.type === "post";
 const estAnnonce = (e) => Boolean(e.annonceDe);
+const estReel = (e) => e.type === "reel";
 
 /**
  * Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer).
@@ -103,9 +112,9 @@ function choisir({ file, registre, config, now = new Date() }) {
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
   const perimees = [];
   const candidates = [];
-  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post") && e.id && !deja.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
+  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || (e.type === "reel" && config.videos === true && e.url_video)) && e.id && !deja.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
   // 1. posts et stories : périmées après 3 h (story) ou 12 h (post)
-  for (const e of entreesFile.filter((x) => !estAnnonce(x))) {
+  for (const e of entreesFile.filter((x) => !estAnnonce(x) && !estReel(x))) {
     const t = Date.parse(e.cree);
     if (isNaN(t) || now.getTime() - t > (estPost(e) ? FRAICHEUR_POST_H : FRAICHEUR_H) * 36e5) { perimees.push(e.id); continue; }
     candidates.push(e);
@@ -125,6 +134,17 @@ function choisir({ file, registre, config, now = new Date() }) {
     const t = Date.parse(e.cree);
     if (isNaN(t) || now.getTime() - t > (FRAICHEUR_POST_H + FRAICHEUR_H) * 36e5) perimees.push(e.id); else enAttente++; // post pas encore publié
   }
+  // 2 bis. Reels : liés à la publication de leur post (jamais avant lui, au plus 12 h après), ensuite soumis à l'espacement de 60 min comme tout le reste
+  for (const e of entreesFile.filter(estReel)) {
+    const parent = deja.get(e.reelDe);
+    if (parent?.statut === "perimee" || perimees.includes(e.reelDe)) { perimees.push(e.id); continue; }
+    if (parent?.statut === "publiee" && parent.publieLe) {
+      if (now.getTime() - Date.parse(parent.publieLe) > FRAICHEUR_POST_H * 36e5) perimees.push(e.id); else candidates.push(e);
+      continue;
+    }
+    const t = Date.parse(e.cree);
+    if (isNaN(t) || now.getTime() - t > 2 * FRAICHEUR_POST_H * 36e5) perimees.push(e.id); else enAttente++; // post pas encore publié
+  }
   // les annonces d'abord (leur fenêtre est courte), puis l'ordre de création
   candidates.sort((a, b) => Number(estAnnonce(b)) - Number(estAnnonce(a)) || String(a.cree).localeCompare(String(b.cree)));
   const sortie = (refus) => ({ refus, perimees });
@@ -134,8 +154,10 @@ function choisir({ file, registre, config, now = new Date() }) {
   const jour = jourParis(now);
   const publieesJour = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe && jourParis(e.publieLe) === jour);
   const postsJour = publieesJour.filter(estPost).length;
-  const storiesJour = publieesJour.filter((e) => !estPost(e) && !e.annonceDe).length; // les stories d'annonce n'entrent pas dans le plafond des stories
-  const sousPlafond = (e) => (estAnnonce(e) ? true : estPost(e) ? postsJour < MAX_POSTS_PAR_JOUR : storiesJour < MAX_PAR_JOUR);
+  const reelsJour = publieesJour.filter(estReel).length;
+  const maxReels = Number.isInteger(config.videosMax) ? config.videosMax : MAX_REELS_PAR_JOUR_DEFAUT;
+  const storiesJour = publieesJour.filter((e) => !estPost(e) && !estReel(e) && !e.annonceDe).length; // les stories d'annonce n'entrent pas dans le plafond des stories
+  const sousPlafond = (e) => (estAnnonce(e) ? true : estReel(e) ? reelsJour < maxReels : estPost(e) ? postsJour < MAX_POSTS_PAR_JOUR : storiesJour < MAX_PAR_JOUR);
   if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_PAR_JOUR} et ${MAX_POSTS_PAR_JOUR})`);
   let ok = candidates.filter(sousPlafond);
   // Espacement : 60 min entre deux publications ; seule exception, la story d'annonce d'un post (≥ 5 min après CE post)
@@ -158,7 +180,7 @@ function choisir({ file, registre, config, now = new Date() }) {
     ...recentes.flatMap((d) => [d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
     ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraite = (e) => !estAnnonce(e) && [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  const dejaTraite = (e) => !estAnnonce(e) && !estReel(e) && [e.titrePropre, e.titre].filter(Boolean).some((t) => titresPublies.some((p) => titresProches(p, t)));
   ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
   if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente, légende invalide ou sujet déjà publié dans les dernières 36 h");
   if (!ok.length) return sortie(candidatesBrutes ? `${candidatesBrutes} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
@@ -197,28 +219,45 @@ async function controlerJeton(now) {
   return { valide: true, expireLe: exp, jours };
 }
 
-/** Publie une story (conteneur STORIES) ou un post (image de fil + légende) : attente du statut FINISHED, puis media_publish. Renvoie l'identifiant du média. */
-async function publier(entree) {
-  const params = estPost(entree) ? { image_url: entree.url_image, caption: entree.legende } : { media_type: "STORIES", image_url: entree.url_image };
-  const cree = await graph("POST", `/${IG_USER_ID}/media`, params);
-  const creation = cree.id;
-  if (!creation) throw new Error("API : pas d'identifiant de conteneur");
-  let statut = "";
-  for (let i = 0; i < ESSAIS_STATUT; i++) {
-    statut = (await graph("GET", `/${creation}`, { fields: "status_code" })).status_code;
-    if (statut === "FINISHED") break;
-    if (statut === "ERROR" || statut === "EXPIRED") throw new Error(`conteneur en statut ${statut}`);
-    await new Promise((r) => setTimeout(r, ATTENTE_MS));
-  }
-  if (statut !== "FINISHED") throw new Error(`conteneur pas prêt (statut ${statut || "inconnu"})`);
+/**
+ * Publie un média : crée le conteneur, attend le statut FINISHED, puis media_publish. Renvoie l'identifiant du média.
+ * `mode` : "story-image", "story-video", "post" ou "reel". Une erreur levée AVANT media_publish porte avantPublication = true (repli possible, rien n'est publié).
+ */
+async function publier(entree, mode = estPost(entree) ? "post" : estReel(entree) ? "reel" : "story-image") {
+  const video = mode === "story-video" || mode === "reel";
+  const params = { post: { image_url: entree.url_image, caption: entree.legende }, "story-image": { media_type: "STORIES", image_url: entree.url_image },
+    "story-video": { media_type: "STORIES", video_url: entree.url_video },
+    reel: { media_type: "REELS", video_url: entree.url_video, caption: entree.legende, share_to_feed: "true", thumb_offset: "4500" } }[mode];
+  let creation;
+  try {
+    const cree = await graph("POST", `/${IG_USER_ID}/media`, params);
+    creation = cree.id;
+    if (!creation) throw new Error("API : pas d'identifiant de conteneur");
+    let statut = "", essais = 0, delai = ATTENTE_MS;
+    const limite = Date.now() + (video ? ATTENTE_VIDEO_MAX_MS : Infinity);
+    for (;;) {
+      statut = (await graph("GET", `/${creation}`, { fields: "status_code" })).status_code;
+      if (statut === "FINISHED") break;
+      if (statut === "ERROR" || statut === "EXPIRED") throw new Error(`conteneur en statut ${statut}`);
+      essais++;
+      if (video ? Date.now() + delai > limite : essais >= ESSAIS_STATUT) throw new Error(`conteneur pas prêt (statut ${statut || "inconnu"})`);
+      await new Promise((r) => setTimeout(r, delai));
+      if (video) delai = Math.min(Math.round(delai * 1.5), ATTENTE_MS * 10); // 3 s, 4,5 s, … jusqu'à 30 s
+    }
+  } catch (err) { err.avantPublication = true; throw err; }
   const pub = await graph("POST", `/${IG_USER_ID}/media_publish`, { creation_id: creation });
   if (!pub.id) throw new Error("API : media_publish sans identifiant");
   return pub.id;
 }
 
-async function imageEnLigne(url) {
-  try { const r = await fetch(url, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(20000) }); return r.status === 200; } catch (e) { return false; }
+/** La ressource est-elle en ligne (HEAD 200) ? `type` : préfixe de Content-Type exigé (vidéo : video/mp4). */
+async function enLigne(url, type = null) {
+  try {
+    const r = await fetch(url, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(20000) });
+    return r.status === 200 && (!type || String(r.headers.get("content-type") || "").toLowerCase().startsWith(type));
+  } catch (e) { return false; }
 }
+const imageEnLigne = (url) => enLigne(url);
 
 function ecrireRegistre(registre, now) {
   registre.lastUpdated = now.toISOString();
@@ -245,14 +284,31 @@ async function main() {
   if (!c.entree) { log(`rien à publier : ${c.refus}`); finir(); return; }
   if (!jeton.valide) { log("jeton invalide : aucune publication."); finir(); return; }
   const e = c.entree;
-  if (!(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : nouvel essai au prochain passage.`); finir(); return; }
-  if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${estPost(e) ? "post" : "story"}.`); return; }
+  // Mode de publication : le Reel est toujours une vidéo ; une story avec url_video n'est vidéo que si "videos" est activé et la vidéo en ligne (HEAD 200, video/mp4), sinon image
+  let mode = estPost(e) ? "post" : estReel(e) ? "reel" : "story-image";
+  if (estReel(e) && !(await enLigne(e.url_video, "video/mp4"))) { log(`vidéo pas encore en ligne (${e.url_video}) : nouvel essai au prochain passage.`); finir(); return; }
+  if (mode === "story-image" && e.url_video && config.videos === true) {
+    if (await enLigne(e.url_video, "video/mp4")) mode = "story-video"; else log(`vidéo absente ou de type inattendu (${e.url_video}) : la story partira en image.`);
+  }
+  if (mode !== "reel" && mode !== "story-video" && !(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : nouvel essai au prochain passage.`); finir(); return; }
+  const nom = { post: "post", reel: "Reel", "story-image": "story", "story-video": "story vidéo" };
+  if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${nom[mode]}.`); return; }
   finir(); // les périmées sont enregistrées même si la publication échoue
   try {
-    const mediaId = await publier(e);
-    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : "story", ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
+    let mediaId;
+    try {
+      mediaId = await publier(e, mode);
+    } catch (err) {
+      // Repli sur l'image : seulement pour une story vidéo, seulement si l'échec précède media_publish (rien n'a été publié, donc aucun doublon)
+      if (mode !== "story-video" || !err.avantPublication) throw err;
+      alerte(`la vidéo de l'entrée ${e.id} a échoué (${err.message}) : repli sur l'image.`);
+      if (!(await imageEnLigne(e.url_image))) throw new Error("image pas en ligne pour le repli");
+      mode = "story-image";
+      mediaId = await publier(e, mode);
+    }
+    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : estReel(e) ? "reel" : "story", ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
-    resume(`${estPost(e) ? "Post publié" : e.annonceDe ? "Story d'annonce publiée" : "Story publiée"} : « ${e.titre} » (média ${mediaId}).`);
+    resume(`${mode === "post" ? "Post publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée"} : « ${e.titre} » (média ${mediaId}).`);
   } catch (err) {
     alerte(`échec de publication de l'entrée ${e.id} : ${err.message}. Nouvel essai au prochain passage tant qu'elle n'est pas périmée.`);
   }

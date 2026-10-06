@@ -249,11 +249,11 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, videos: false, videosMax: 2 };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")), { monetisation: false, validationHumaine: false, minMedias: 5, dossierMedias: 6, maxParJour: 2, enBref: false }, "valeurs livrées : sélectif (sujets très repris seulement)");
+  assert.deepStrictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")), { monetisation: false, validationHumaine: false, minMedias: 5, dossierMedias: 6, maxParJour: 2, enBref: false, videos: false, videosMax: 2 }, "valeurs livrées : sélectif (sujets très repris seulement)");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
@@ -753,6 +753,46 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.match(AUTO.idAnnonce("a".repeat(12)), /^[0-9a-f]{12}$/);
   assert.deepStrictEqual(AUTO.decomposerTitreVote("sur l'ensemble de la proposition de loi pour une montagne vivante et souveraine"), { nature: "proposition de loi", court: "Proposition de loi pour une montagne vivante et souveraine", etape: "" });
   assert.strictEqual(AUTO.decomposerTitreVote("l'amendement n° 12 du projet de loi"), null);
+}
+
+// Titre propre GÉNÉRIQUE (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const gen = (titre) => sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre, origine: "regles", generique: true } });
+  for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(gen(t)), direct: null, file: vide, now }).refus, `générique refusé : ${t}`);
+  assert.strictEqual(AUTO.choisirSujet({ actualites: actu(sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget 2027 : le gouvernement présente son texte", origine: "regles" } })), direct: null, file: vide, now }).indice, 0, "titre propre non générique : retenu");
+  const g = gen("Politique : l'essentiel du moment");
+  const direct = { evenements: [{ type: "allocution", titre: g.articles[0].titre }] };
+  assert.strictEqual(AUTO.choisirSujet({ actualites: actu(g), direct, file: vide, now }).indice, 0, "direct du président : le filtre ne s'applique pas");
+  // « en bref » : un sujet générique n'y entre pas
+  const trois = [0, 1, 2].map((i) => sujet(`Sujet ${i} du jour présenté par le gouvernement ce matin ${i}`, 3, { titrePropre: { titre: `Thème ${["Budget", "Santé", "Énergie"][i]} : annonce nouvelle ${i}`, origine: "regles", ...(i === 2 ? { generique: true } : {}) }, illustration: { theme: ["budget", "sante", "energie"][i] } }));
+  assert.ok(AUTO.choisirEnBref({ actualites: actu(...trois), file: vide, now: new Date("2026-10-02T07:30:00Z") }).refus, "en bref : 2 sujets seulement (le générique est écarté)");
+}
+
+// Vidéos : configuration, plafond du jour, animation des posts, flux Atom, nettoyage des .mp4
+{
+  const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  assert.strictEqual(AUTO.normaliserConfig({ videos: "oui" }).videos, false, "seul true active les vidéos");
+  assert.strictEqual(AUTO.normaliserConfig({ videos: true }).videos, true);
+  assert.strictEqual(AUTO.normaliserConfig({ videosMax: 3 }).videosMax, 3);
+  assert.strictEqual(AUTO.normaliserConfig({ videosMax: 99 }).videosMax, 2, "hors limites : valeur par défaut");
+  assert.strictEqual(AUTO.videosDuJour([{ cree: il_y_a(1), url_video: "x" }, { cree: il_y_a(2) }, { cree: il_y_a(60), url_video: "y" }], now), 1);
+  assert.deepStrictEqual(AUTO.animationPost({ spec: { genre: "loi", pour: 276, contre: 86 } }), { type: "barre", pour: 276, contre: 86 });
+  assert.deepStrictEqual(AUTO.animationPost({ spec: { genre: "date", compte: "25 jours" } }), { type: "compteur", valeur: 25, avant: "dans ", apres: " jours" });
+  assert.strictEqual(AUTO.animationPost({ spec: { genre: "loi", pour: 0, contre: 0 } }), null);
+  assert.match(AUTO.idReel("a".repeat(12)), /^[0-9a-f]{12}$/);
+  assert.notStrictEqual(AUTO.idReel("a".repeat(12)), AUTO.idAnnonce("a".repeat(12)));
+  const atom = AUTO.fluxAtom([{ id: "b".repeat(12), type: "reel", titre: "Reel : X", cree: il_y_a(1), url_image: "https://x/i.jpg", url_video: "https://x/v.mp4", legende: "Légende" }], now);
+  assert.match(atom, /type="video\/mp4" href="https:\/\/x\/v\.mp4"/);
+  assert.match(atom, /<category term="reel"\/>/);
+  assert.strictEqual(AUTO.estStoryComptee({ type: "reel" }), false, "un Reel ne compte pas dans les 4 stories");
+  const { mkdtempSync: mk, writeFileSync: wf, readdirSync: rd } = await import("fs");
+  const { tmpdir: td } = await import("os");
+  const { join: jn } = await import("path");
+  const dossier = mk(jn(td(), "auto-"));
+  for (const f of ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "bbbbbbbbbbbb.jpg", "bbbbbbbbbbbb.mp4", "autre.txt"]) wf(jn(dossier, f), "x");
+  AUTO.nettoyerImages(new Set(["aaaaaaaaaaaa"]), dossier);
+  assert.deepStrictEqual(rd(dossier).sort(), ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "autre.txt"]);
 }
 
 console.log("stories-auto : tous les tests passent.");
