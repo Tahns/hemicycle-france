@@ -83,26 +83,37 @@ function verifier(cond, message) {
       const j = document.getElementById("journal");
       const liens = [...j.querySelectorAll("a")];
       const tete = j.querySelector(".journal-ligne")?.textContent || "";
+      const titres = [...j.querySelectorAll("h3")].map((h) => h.textContent);
+      const colonnes = (sel) => getComputedStyle(j.querySelector(sel)).gridTemplateColumns.split(" ").filter(Boolean).length;
       return {
-        date: /^(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche) \d{1,2}(er)? \p{L}+ \d{4}/u.test(tete), numero: /N° \d+/.test(tete),
-        une: !!j.querySelector(".journal-une h3 a"), secondaires: j.querySelectorAll(".journal-secondaires article").length,
-        rubriques: ["Dossiers du moment", "En bref", "Dans les médias"].every((t) => [...j.querySelectorAll("h3")].some((h) => h.textContent === t)),
+        date: /^(Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche) \d{1,2}(er)? \p{L}+ \d{4}/u.test(tete), numero: /N° \d+/.test(tete), maj: /\d h \d\d/.test(tete),
+        titre: j.querySelector(".journal-nom")?.textContent === "Hémicycle France", gratuit: /gratuit/i.test(j.querySelector(".journal-haut")?.textContent || ""),
+        une: !!j.querySelector(".journal-une h4 a"), secondaires: j.querySelectorAll(".journal-secondaires article").length,
+        rubriques: ["À la une", "Au Parlement aujourd'hui", "Chiffre du jour", "À retenir", "En bref", "Dans les médias", "Sources et méthode"].every((t) => titres.includes(t)),
         bref: j.querySelectorAll(".journal-bref li").length,
         liensSurs: liens.length > 5 && liens.every((a) => /^https:\/\//.test(a.href) && a.rel.includes("noopener")),
         imprimer: !!document.getElementById("journal-imprimer"), partager: !!document.querySelector('#view-journal [data-partage="journal"]'),
-        police: getComputedStyle(j.querySelector(".journal-une h3")).fontFamily.includes("Newsreader"),
-        h: [...j.querySelectorAll("h1,h2,h4,h5,h6")].length,
+        police: getComputedStyle(j.querySelector(".journal-une h4")).fontFamily.includes("Newsreader"),
+        h: [...j.querySelectorAll("h1,h2,h5,h6")].length,
+        hierarchie: [...j.querySelectorAll("h3,h4")].every((h) => h.tagName === "H3" || h.closest("section")?.querySelector("h3")),
         invite: !!document.querySelector('#view-actualites a[href="#journal"]'),
+        colonnesCorps: colonnes(".journal-corps"), colonnesRubriques: getComputedStyle(j.querySelector(".journal-rubriques")).columnCount,
+        pliables: j.querySelectorAll("details.pli-mobile").length, ouvertes: j.querySelectorAll("details.pli-mobile[open]").length,
+        sondageEnReserve: /Veille et jour de vote/.test(j.querySelector("#journal-sondage")?.closest("details")?.textContent || ""),
       };
     });
-    verifier(journal.date && journal.numero, `${nom} : date ou numéro absents du journal`);
+    verifier(journal.date && journal.numero && journal.maj && journal.titre && journal.gratuit, `${nom} : bandeau du journal (titre, date, numéro, heure, prix) incomplet`);
     verifier(journal.une && journal.secondaires >= 2 && journal.secondaires <= 3, `${nom} : une ou articles secondaires du journal absents`);
-    verifier(journal.rubriques && journal.bref >= 1, `${nom} : rubriques du journal absentes`);
+    verifier(journal.rubriques && journal.bref >= 1, `${nom} : rubriques ou encadrés du journal absents`);
     verifier(journal.liensSurs, `${nom} : liens du journal absents ou non sûrs`);
-    verifier(journal.imprimer && journal.partager && journal.police && journal.h === 0 && journal.invite, `${nom} : boutons, typographie ou titraille du journal incorrects`);
+    verifier(journal.imprimer && journal.partager && journal.police && journal.h === 0 && journal.hierarchie && journal.invite, `${nom} : boutons, typographie ou titraille du journal incorrects`);
+    verifier(journal.pliables >= 6, `${nom} : sections repliables du journal absentes`);
+    if (nom.startsWith("mobile")) verifier(journal.colonnesCorps <= 1 && journal.colonnesRubriques === "auto" && journal.ouvertes < journal.pliables, `${nom} : le journal n'est pas sur une colonne repliable`);
+    else verifier(journal.colonnesCorps === 2 && journal.colonnesRubriques === "2" && journal.ouvertes === journal.pliables, `${nom} : le journal n'est pas en colonnes sur grand écran`);
     verifier((await largeur()) <= 1, `${nom} : défilement horizontal sur le journal`);
     await page.emulateMedia({ media: "print" });
     verifier(await page.evaluate(() => getComputedStyle(document.querySelector(".masthead")).display === "none" && getComputedStyle(document.querySelector(".journal-actions")).display === "none" && getComputedStyle(document.querySelector(".journal")).display !== "none"), `${nom} : feuille de style d'impression du journal incorrecte`);
+    verifier(await page.evaluate(() => getComputedStyle(document.querySelector(".journal-corps")).gridTemplateColumns.split(" ").length === 2 && getComputedStyle(document.querySelector(".journal-rubriques")).columnCount === "2" && getComputedStyle(document.querySelector(".journal-nom")).color === "rgb(0, 0, 0)"), `${nom} : le journal imprimé n'est pas en colonnes noir et blanc`);
     await page.emulateMedia({ media: "screen" });
 
     await page.goto(base + "#scrutin-3054", { waitUntil: "networkidle" });

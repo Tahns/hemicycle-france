@@ -518,7 +518,7 @@
     border-top:1px solid var(--border); font-size:var(--fs-sm); color:var(--text-soft);
   }
   .legend-item{display:flex; align-items:center; gap:var(--s2);}
-  /* ---------- Le journal du jour : les actualités en une de quotidien (rendu à l'ouverture, depuis data/actualites.json) ---------- */
+  /* ---------- Le journal du jour : les actualités en une de quotidien (rendu à l'ouverture, depuis les données du site) ---------- */
   .journal-invite{margin:var(--s4) 0 var(--s2);}
   .journal-invite a{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--s1) var(--s3); padding:var(--s3) var(--s4); min-height:44px; box-sizing:border-box; border:var(--filet-fort) solid var(--ink); border-radius:var(--r-1); background:var(--bg-elevated); color:var(--text); text-decoration:none;}
   .journal-invite a b{font-family:var(--font-display); font-size:var(--fs-h3); font-weight:700;}
@@ -529,56 +529,109 @@
   .journal{background:var(--bg-elevated); color:var(--text); border:1px solid var(--border); padding:var(--s4) var(--s4) var(--s5); font-family:var(--font-body);}
   .journal a{color:inherit; text-decoration-color:var(--border); text-underline-offset:3px;}
   .journal a:hover{text-decoration-color:currentColor;}
-  .journal a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-  .journal-nom{margin:0; text-align:center; font-family:var(--font-display); font-weight:800; font-size:clamp(34px,8vw,64px); line-height:1.05; letter-spacing:-.01em; padding:var(--s2) 0 var(--s3);}
+  .journal a:focus-visible, .journal summary:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .journal h3, .journal h4{margin:0; font-family:var(--font-display); font-weight:700; line-height:1.15; text-wrap:balance;}
+  .journal small{display:block; color:var(--text-soft); font-size:var(--fs-sm); line-height:1.35;}
+  /* Bandeau de titre : filet tricolore, devise, titre, double filet, date et numéro */
+  .journal-tricolore{height:6px; margin:0 0 var(--s3); background:linear-gradient(90deg, var(--bleu-rep) 0 33.34%, var(--blanc) 33.34% 66.67%, var(--rouge-rep) 66.67% 100%); outline:1px solid var(--border);}
+  .journal-haut{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:var(--s1) var(--s4); font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-soft);}
+  .journal-devise{font-family:var(--font-display); font-size:var(--fs-md); font-style:italic; font-weight:500; letter-spacing:0; text-transform:none; color:var(--accent);}
+  .journal-nom{margin:0; text-align:center; font-family:var(--font-display); font-weight:800; font-size:clamp(36px,9vw,80px); line-height:1.02; letter-spacing:-.01em; padding:var(--s2) 0 var(--s3); color:var(--accent);}
   .journal-ligne{display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--s1) var(--s4); padding:var(--s2) 0; border-top:var(--filet-epais) double var(--ink); border-bottom:var(--filet) solid var(--ink); font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase;}
   .journal-ligne .journal-date{font-size:var(--fs-sm);}
-  .journal-etiquette{display:block; margin:0 0 var(--s2); font-size:var(--fs-xs); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);}
-  .journal-etiquette.rouge{color:var(--rouge);}
-  .journal-une{padding:var(--s4) 0; border-bottom:var(--filet-fort) solid var(--ink);}
-  .journal h3{margin:0; font-family:var(--font-display); font-weight:700; line-height:1.15; text-wrap:balance;}
-  .journal-une h3{font-size:clamp(26px,5.4vw,46px); line-height:1.08;}
+  .journal h3.journal-etiquette{display:block; margin:0 0 var(--s2); font-family:var(--font-body); font-size:var(--fs-xs); font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--text-soft);}
+  .journal h3.journal-etiquette.rouge{color:var(--rouge);}
   .journal-meta{margin:var(--s2) 0 0; font-size:var(--fs-sm); color:var(--text-soft);}
   .journal-meta b{color:var(--text);}
   .journal-aussi{margin:var(--s2) 0 0; font-size:var(--fs-sm); color:var(--text-soft);}
   .journal-aussi a{font-weight:600;}
-  .journal-secondaires{display:grid; grid-template-columns:1fr; border-bottom:var(--filet-fort) solid var(--ink);}
-  .journal-secondaires article{padding:var(--s4) 0; border-bottom:1px solid var(--border);}
-  .journal-secondaires article:last-child{border-bottom:0;}
-  .journal-secondaires h3{font-size:var(--fs-xl);}
+  /* Corps : une colonne sur téléphone ; deux colonnes (articles | encadrés) sur grand écran */
+  .journal-corps{display:flex; flex-direction:column;}
+  .journal-gauche{display:contents;}
+  .journal-une, .journal-secondaires{order:1;}
+  .journal-droite{order:2;}
+  .journal-rubriques{order:3;}
+  .journal-une{padding:var(--s4) 0; border-bottom:var(--filet-fort) solid var(--ink);}
+  .journal-une-tete{display:grid; grid-template-columns:minmax(0,1fr) 96px; gap:var(--s3); align-items:start;}
+  .journal-une-tete > div:only-child{grid-column:1 / -1;}
+  .journal-titre-une{font-size:clamp(26px,6vw,46px); line-height:1.07; letter-spacing:-.01em;}
+  .journal-photo{margin:0; width:96px;}
+  .journal-photo img{display:block; width:96px; height:96px; object-fit:cover; object-position:50% 20%; border:1px solid var(--ink); background:var(--bg-elevated-2);}
+  .journal-photo figcaption{margin-top:var(--s1); font-size:var(--fs-xs); line-height:1.3; color:var(--text-soft);}
+  .journal-chapo{margin:var(--s3) 0 0; font-family:var(--font-display); font-size:var(--fs-lg); line-height:1.45; text-wrap:pretty;}
+  .journal-chapo b{font-weight:700;}
+  .journal-reprises{margin:var(--s3) 0 0; padding:0; list-style:none; break-inside:avoid;}
+  .journal-reprises li{padding:var(--s2) 0; border-top:1px solid var(--border); font-family:var(--font-display); font-size:var(--fs-base); font-weight:600; line-height:1.3;}
+  .journal-secondaires{padding:var(--s4) 0 0; border-bottom:var(--filet-fort) solid var(--ink);}
+  .journal-secondaires-liste{display:grid; grid-template-columns:minmax(0,1fr);}
+  .journal-secondaires article{padding:var(--s3) 0; border-top:1px solid var(--border);}
+  .journal-secondaires h4{font-size:var(--fs-xl);}
+  /* Encadrés */
+  .journal-encadre{margin:var(--s4) 0 0; border:var(--filet) solid var(--ink); border-top:var(--filet-epais) solid var(--ink); background:var(--bg); padding:0 var(--s3) var(--s3);}
+  .journal-encadre > summary.pli-h3{padding:var(--s3) 0 var(--s2); border-top:0 !important; min-height:0;}
+  .journal-encadre h3{font-family:var(--font-body); font-size:var(--fs-xs); font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--rouge);}
+  .journal-encadre-corps > :first-child{margin-top:0;}
+  .journal-sous{margin:var(--s2) 0 0; font-size:var(--fs-md); line-height:1.4; color:var(--text-soft);}
+  .journal-sous b{color:var(--text);}
+  .journal-liste{margin:var(--s2) 0 0; padding:0; list-style:none;}
+  .journal-liste li{padding:var(--s2) 0; border-top:1px solid var(--border-soft); font-size:var(--fs-md); line-height:1.35;}
+  .journal-liste a{font-weight:600;}
+  .journal-chiffre-valeur{margin:0; font-family:var(--font-display); font-size:clamp(40px,8vw,56px); font-weight:800; line-height:1; letter-spacing:-.02em; color:var(--accent); font-variant-numeric:lining-nums;}
+  .journal-chiffre-nom{margin:var(--s1) 0 0; font-size:var(--fs-base);}
+  .journal-scores li{display:flex; justify-content:space-between; gap:var(--s3); font-weight:400;}
+  .journal-scores b{font-family:var(--font-display); font-size:var(--fs-lg); font-variant-numeric:lining-nums; white-space:nowrap;}
+  .journal-dates li{display:grid; grid-template-columns:5.2em minmax(0,1fr); gap:var(--s2); align-items:baseline;}
+  .journal-dates time{font-size:var(--fs-sm); font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--rouge);}
+  /* Rubriques */
   .journal-rubriques{padding-top:var(--s4);}
-  .journal-rubrique{break-inside:avoid; margin:0 0 var(--s5);}
-  .journal-rubrique h3{font-size:var(--fs-lg); padding-bottom:var(--s2); margin-bottom:var(--s3); border-bottom:var(--filet-fort) solid var(--ink);}
-  .journal-rubrique ol, .journal-rubrique ul{margin:0; padding:0; list-style:none;}
-  .journal-rubrique li{padding:var(--s2) 0; border-bottom:1px solid var(--border-soft); font-size:var(--fs-base); line-height:1.35;}
+  .journal-rubrique{break-inside:avoid; margin:0 0 var(--s4);}
+  .journal-rubrique > summary.pli-h3{border-top:0 !important;}
+  .journal-rubrique h3{padding-bottom:var(--s2); border-bottom:var(--filet-fort) solid var(--ink); text-transform:uppercase; letter-spacing:.1em; font-family:var(--font-body); font-size:var(--fs-sm);}
+  .journal-rubrique ol, .journal-rubrique ul{margin:var(--s2) 0 0; padding:0; list-style:none;}
+  .journal-rubrique li{padding:var(--s2) 0; border-bottom:1px solid var(--border-soft); font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600; line-height:1.25;}
   .journal-rubrique li:last-child{border-bottom:0;}
-  .journal-bref li{display:grid; grid-template-columns:1.8em 1fr; gap:var(--s2); align-items:baseline;}
+  .journal-rubrique li small{font-family:var(--font-body); font-weight:400;}
+  .journal-bref li{display:grid; grid-template-columns:1.8em minmax(0,1fr); gap:var(--s2); align-items:baseline;}
   .journal-bref .num{font-family:var(--font-display); font-weight:800; font-size:var(--fs-lg); color:var(--rouge); font-variant-numeric:lining-nums;}
-  .journal-bref small, .journal-medias small, .journal-dossier small{display:block; color:var(--text-soft); font-size:var(--fs-sm);}
-  .journal-dossier b{font-family:var(--font-display); font-size:var(--fs-lg); font-weight:700; line-height:1.2; display:block;}
-  .journal-medias li{display:flex; flex-wrap:wrap; gap:0 var(--s2); align-items:baseline; justify-content:space-between;}
-  .journal-pied{margin:var(--s2) 0 0; padding-top:var(--s3); border-top:var(--filet) solid var(--ink); font-size:var(--fs-xs); color:var(--text-soft);}
+  .journal-medias li{display:flex; flex-wrap:wrap; gap:0 var(--s2); align-items:baseline; justify-content:space-between; font-family:var(--font-body); font-size:var(--fs-base); font-weight:400;}
+  .journal-dossier-titre{display:block; font-family:var(--font-display); font-size:var(--fs-lg); font-weight:700; line-height:1.2;}
+  .journal-pied{margin:var(--s3) 0 0; padding:0 0 var(--s2); border-top:var(--filet-epais) double var(--ink); font-size:var(--fs-sm); line-height:1.5; color:var(--text-soft);}
+  .journal-pied > summary.pli-h3{border-top:0 !important;}
+  .journal-pied h3{font-family:var(--font-body); font-size:var(--fs-xs); letter-spacing:.12em; text-transform:uppercase; color:var(--text);}
+  .journal-pied p{margin:var(--s2) 0 0; max-width:none;}
   @media (max-width:700px){
     .journal-invite a span{display:none;}
-    .journal-secondaires article:nth-child(3){display:none;}
-    .journal-bref li:nth-child(n+7), .journal-medias li:nth-child(n+6){display:none;}
     .journal{padding:var(--s3) var(--s3) var(--s4);}
+    .journal-haut{justify-content:center; text-align:center;}
+    .journal-haut span:not(.journal-devise){font-size:11px;}
     .journal-une{padding:var(--s3) 0;}
-    .journal-secondaires article{padding:var(--s3) 0;}
-    .journal-secondaires h3{font-size:var(--fs-h3);}
-    .journal-rubrique{margin-bottom:var(--s4);}
-    .journal-rubrique li{padding:var(--s1) 0; font-size:var(--fs-md);}
-    .journal-pied{display:none;}
+    .journal-secondaires h4{font-size:var(--fs-h3);}
+    .journal-encadre{padding:0 var(--s3);}
+    .journal-encadre[open]{padding-bottom:var(--s3);}
+    .journal-rubrique > summary.pli-h3, .journal-pied > summary.pli-h3{min-height:44px;}
+  }
+  @media (min-width:700px){
+    .journal-une-tete{grid-template-columns:minmax(0,1fr) 160px;}
+    .journal-photo, .journal-photo img{width:160px;}
+    .journal-photo img{height:160px;}
+    .journal-rubriques{column-count:2; column-gap:var(--s5); column-rule:1px solid var(--border);}
   }
   @media (min-width:900px){
     .journal{padding:var(--s5) var(--s6) var(--s6);}
-    .journal-secondaires{grid-template-columns:repeat(3, 1fr);}
-    .journal-secondaires article{padding:var(--s4) var(--s4); border-bottom:0; border-inline-start:1px solid var(--ink);}
+    .journal-corps{display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); gap:0 var(--s5);}
+    .journal-gauche{display:block; min-width:0;}
+    .journal-droite{padding-inline-start:var(--s5); border-inline-start:1px solid var(--ink);}
+    .journal-droite > :first-child{margin-top:var(--s4);}
+    .journal-colonnes{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--s5); align-items:start;}
+    .journal-colonnes .journal-chapo, .journal-colonnes .journal-reprises{margin-top:0;}
+    .journal-colonnes .journal-reprises{padding-inline-start:var(--s4); border-inline-start:1px solid var(--border);}
+    .journal-colonnes .journal-reprises li:first-child{border-top:0; padding-top:0;}
+    .journal-chapo::first-letter{float:left; margin:.06em .08em 0 0; font-size:2.9em; line-height:.85; font-weight:800; color:var(--accent);}
+    .journal-secondaires-liste{grid-template-columns:repeat(3, minmax(0,1fr));}
+    .journal-secondaires article{padding:var(--s3) var(--s3); border-top:0; border-inline-start:1px solid var(--border);}
     .journal-secondaires article:first-child{padding-inline-start:0; border-inline-start:0;}
     .journal-secondaires article:last-child{padding-inline-end:0;}
-    .journal-une{display:grid; grid-template-columns:2fr 1fr; gap:var(--s5); align-items:start;}
-    .journal-une > .journal-aussi-bloc{padding-inline-start:var(--s5); border-inline-start:1px solid var(--ink);}
-    .journal-rubriques{column-count:3; column-gap:var(--s6); column-rule:1px solid var(--ink);}
+    .journal-secondaires h4{font-size:var(--fs-h3);}
   }
   @media print{
     @page{size:A4; margin:11mm;}
@@ -588,20 +641,32 @@
     body[data-page="journal"] .sous-nav, body[data-page="journal"] .direct-bandeau, body[data-page="journal"] noscript{display:none !important;}
     body[data-page="journal"] main, body[data-page="journal"] #view-journal{display:block !important; padding:0; margin:0; max-width:none;}
     .journal{border:0; padding:0; background:#fff; color:#000;}
+    .journal *{color:#000 !important; background:transparent !important; border-color:#000 !important;}
     .journal a{text-decoration:none;}
-    .journal-nom{font-size:42pt;}
-    .journal-une{display:grid; grid-template-columns:2fr 1fr; gap:6mm; break-inside:avoid;}
-    .journal-une h3{font-size:28pt;}
-    .journal-secondaires{grid-template-columns:repeat(3, 1fr);}
-    .journal-secondaires article{display:block !important; padding:3mm 4mm; border-bottom:0; border-inline-start:1px solid #000; break-inside:avoid;}
+    .journal-tricolore{height:2px; background:#000 !important; outline:0;}
+    .journal-nom{font-size:44pt; padding-bottom:2mm;}
+    .journal-corps{display:grid; grid-template-columns:2fr 1fr; gap:0 6mm;}
+    .journal-gauche{display:block; min-width:0;}
+    .journal-droite{padding-inline-start:5mm; border-inline-start:1px solid #000;}
+    .journal-titre-une{font-size:27pt;}
+    .journal-une-tete{grid-template-columns:minmax(0,1fr) 34mm;}
+    .journal-photo, .journal-photo img{width:34mm;}
+    .journal-photo img{height:34mm; filter:grayscale(1);}
+    .journal-colonnes{display:grid; grid-template-columns:1fr 1fr; gap:5mm;}
+    .journal-colonnes .journal-chapo, .journal-colonnes .journal-reprises{margin-top:0; font-size:10pt;}
+    .journal-chapo::first-letter{float:left; font-size:3.4em; line-height:.8; font-weight:800; margin:.06em .08em 0 0;}
+    .journal-secondaires-liste{grid-template-columns:repeat(3, minmax(0,1fr));}
+    .journal-secondaires article{padding:2mm 3mm; border-top:0; border-inline-start:1px solid #000; break-inside:avoid;}
     .journal-secondaires article:first-child{padding-inline-start:0; border-inline-start:0;}
-    .journal-secondaires h3{font-size:15pt;}
-    .journal-rubriques{column-count:3; column-gap:7mm; column-rule:1px solid #000;}
-    .journal-bref li:nth-child(n){display:grid;}
-    .journal-medias li:nth-child(n){display:flex;}
-    .journal-rubrique li{font-size:9.5pt; break-inside:avoid;}
-    .journal-pied{display:block !important;}
-    .journal-etiquette.rouge, .journal-bref .num{color:#000;}
+    .journal-secondaires h4{font-size:13pt;}
+    .journal-une, .journal-secondaires, .journal-encadre{break-inside:avoid;}
+    .journal-rubriques{column-count:2; column-gap:6mm; column-rule:1px solid #000;}
+    .journal-rubrique li{font-size:10pt; break-inside:avoid;}
+    .journal-liste li, .journal-sous{font-size:9pt;}
+    .journal summary.pli-h3{list-style:none; min-height:0; cursor:default;}
+    .journal summary.pli-h3::after{content:none !important;}
+    .journal-pied{font-size:8pt;}
+    .journal-pied a{text-decoration:underline;}
   }
   .actu-liste{margin-top:var(--s2);}
   .actu-sujet{display:grid; grid-template-columns:76px 1fr; gap:var(--s4); align-items:start; padding:var(--s4) 0; border-bottom:1px solid var(--border-soft);}
@@ -4506,66 +4571,211 @@ function renderDirect(){
 }
 setInterval(renderDirect, 60000); // un événement expiré disparaît sans recharger la page
 
-/* ---------- Le journal du jour : rendu à l'ouverture de la vue, à partir de ACTUALITES déjà chargé (rien côté serveur) ----------
-   Titres de presse seuls, médias attribués, liens vers l'original ; chiffres = ceux des données (nombre de médias, d'articles). */
+/* ---------- Le journal du jour : rendu à l'ouverture de la vue, à partir de données déjà présentes (rien côté serveur) ----------
+   Actualités (titres de presse seuls, médias attribués, lien vers l'original), agenda et votes de l'Assemblée, indicateurs Insee,
+   dernière enquête d'opinion (hors réserve électorale), prochaines dates. Aucun texte inventé : chaque ligne vient d'un fichier du site. */
 const JOURNAL_DEPART = Date.UTC(2026, 0, 1); // le numéro 1 est le 1er janvier 2026 ; +1 chaque jour
+/* i18n-ignorer : mots écartant un titre (comparés sans accents ni casse), même liste de prudence que les stories */
+const JOURNAL_MOTS_JUSTICE = ["justice", "judiciaire", "tribunal", "parquet", "juge "]; // tolérés dans la seule rubrique Justice (sans mise en cause)
+const JOURNAL_MOTS_SENSIBLES = [
+  "accus", "mis en examen", "mise en examen", "mis en cause", "mise en cause", "garde a vue", "gardes a vue",
+  "plainte", "enquete visant", "enquete ouverte", "enquete judiciaire", "enquete preliminaire", "ouvre une enquete", "enquete pour",
+  "poursuiv", "poursuite", "condamn", "relaxe", "soupcon", "suspect", "inculp", "mise en danger",
+  "incarcer", "ecroue", "emprisonn", "prison", "detention", "perquisition", "mandat d'arret", "proces", "citation directe", "interpell",
+  "agress", "\\bviol", "meurtre", "assassin", "homicide", "\\btue\\b", "\\btuee?s?\\b", "fusillade", "poignard", "coups de couteau", "attentat", "terroris",
+  "mort de", "mort d'", "la mort", "morte", "meurt", "decede", "deces", "deuil", "hommage a", "suicide", "disparition", "disparu",
+  "drame", "tragedie", "fait divers", "faits divers", "blesse", "pedo", "inceste", "harcelement", "sexuel", "sexiste", "antisemit", "racis", "homophob", "discrimination",
+  "mineur", "victime", "fillette", "garconnet", "adolescent", "collegien", "collegienne", "enfant de", "bebe",
+  "menace de mort", "menaces", "diffam", "calomni", "mentir", "mensonge", "fraude", "corruption", "detournement", "escroquerie", "blanchiment",
+  "scandale", "affaire ", "polemique", "derapage", "\\bclash", "\\btacle", "fustige", "accable", "recadre", "tolle", "inelegant", "honte", "honteu", "insult", "injur", "propos choquant",
+  "s'excuse", "desole", "excuses", "\\battaq", "desavoue", "trahi", "trahison",
+  ...JOURNAL_MOTS_JUSTICE,
+];
+const JOURNAL_ERE = mots => new RegExp(mots.map(m=> m.startsWith("\\b") ? m : m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"));
+const JOURNAL_RE_SENSIBLE = JOURNAL_ERE(JOURNAL_MOTS_SENSIBLES);
+const JOURNAL_RE_JUSTICE = JOURNAL_ERE(JOURNAL_MOTS_SENSIBLES.filter(m=> !JOURNAL_MOTS_JUSTICE.includes(m)));
+const JOURNAL_RE_AGE = /\b(?:1\d|[2-9]|0?\d) ?(?:ans|-ans)\b/; // âge de moins de 20 ans cité : mineur possible
+const JOURNAL_RE_SONDAGE = /sondage|intentions? de vote|estimations? de vote|enquete d'opinion|barometre/; // réserve électorale (loi du 19 juillet 1977)
+const JOURNAL_RUBRIQUES = [
+  { id:"politique", titre:"Politique", themes:["politique", "gouvernement", "election"] },
+  { id:"parlement", titre:"Parlement", themes:["assemblee", "senat"] },
+  { id:"economie", titre:"Économie", themes:["budget"] },
+  { id:"international", titre:"International", themes:["international"] },
+];
+/* i18n-fin-ignorer */
+let JOURNAL_AGENDA = undefined; // undefined : pas demandé ; null : indisponible ; objet : data/agenda-an.json
+function journalChargerAgenda(){
+  if(JOURNAL_AGENDA !== undefined) return;
+  JOURNAL_AGENDA = null;
+  lireJSON("data/agenda-an.json").then(d=>{ JOURNAL_AGENDA = d || null; if(JOURNAL_AGENDA && document.getElementById("view-journal").classList.contains("active")) renderJournal(); });
+}
+// Les sujets de la journée, du plus repris au moins repris, sans ce qui touche une personne mise en cause, un mineur ni (en réserve) un sondage
+function journalSujets(sujets, maintenant, reserve){
+  const titres = s => s.articles.map(a=> norm(a.titre));
+  const ok = (s, re) => !titres(s).some(t=> re.test(t) || JOURNAL_RE_AGE.test(t) || (reserve && JOURNAL_RE_SONDAGE.test(t)));
+  const base = sujets.filter(s=> s?.articles?.length && s.derniere && !/^Bonjour chez vous/.test(s.articles[0].titre));
+  let pool = base.filter(s=> maintenant - Date.parse(s.derniere) < 36 * 36e5);
+  if(pool.length < 4) pool = [...base].sort((a, b)=> b.derniere.localeCompare(a.derniere)).slice(0, 24);
+  const tri = (a, b)=> b.medias - a.medias || b.derniere.localeCompare(a.derniere);
+  const propres = pool.filter(s=> ok(s, JOURNAL_RE_SENSIBLE)).sort(tri);
+  // Justice : seulement des sujets d'institutions, jamais une personne nommée par l'illustration ni un mot d'accusation
+  const justice = pool.filter(s=> s.illustration?.theme === "justice" && !(s.illustration.personnes || []).length && ok(s, JOURNAL_RE_JUSTICE)).sort(tri);
+  return { propres, justice };
+}
 function renderJournal(){
   const el = document.getElementById("journal");
   if(!el) return;
   const sujets = (ACTUALITES?.sujets || []).filter(s=> s?.articles?.length && s.derniere);
-  if(!sujets.length){ el.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; return; }
+  const indispo = ()=>{ el.innerHTML = `<p class="chargement">Actualités indisponibles pour le moment.</p>`; };
+  if(!sujets.length) return indispo();
+  journalChargerAgenda();
   const maintenant = new Date();
-  let pool = sujets.filter(s=> maintenant - Date.parse(s.derniere) < 36 * 36e5);
-  if(pool.length < 4) pool = [...sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere)).slice(0, 12);
-  pool = pool.filter(s=> !/^Bonjour chez vous/.test(s.articles[0].titre)); // émissions sans intérêt pour un résumé de la journée
-  pool.sort((a, b)=> b.medias - a.medias || b.derniere.localeCompare(a.derniere));
-  const [une, ...reste] = pool;
-  const secondaires = reste.slice(0, 3), bref = reste.slice(3, 11);
+  const reserve = !!periodeReserveSondages();
+  const { propres, justice } = journalSujets(sujets, maintenant, reserve);
+  if(!propres.length) return indispo();
   const fmt = (opt)=> new Intl.DateTimeFormat("fr-FR", { timeZone:"Europe/Paris", ...opt });
   const jour = fmt({ weekday:"long", day:"numeric", month:"long", year:"numeric" }).format(maintenant);
   const date = jour.charAt(0).toUpperCase() + jour.slice(1);
   const pp = Object.fromEntries(fmt({ year:"numeric", month:"numeric", day:"numeric" }).formatToParts(maintenant).filter(x=>x.type !== "literal").map(x=>[x.type, +x.value]));
+  const aujourdhui = `${pp.year}-${String(pp.month).padStart(2, "0")}-${String(pp.day).padStart(2, "0")}`;
   const numero = Math.floor((Date.UTC(pp.year, pp.month - 1, pp.day) - JOURNAL_DEPART) / 864e5) + 1;
   const heure = ACTUALITES.lastUpdated ? fmt({ hour:"numeric", minute:"2-digit" }).format(new Date(ACTUALITES.lastUpdated)).replace(":", " h ") : "";
+  const jourCourt = iso => new Date(iso + "T12:00:00Z").toLocaleDateString("fr-FR", { weekday:"short", day:"numeric", month:"short", timeZone:"UTC" });
   const a0 = s => s.articles[0];
   const lienTitre = x => `<a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.titre)}</a>`;
-  // « Aussi chez » : un lien par autre média, vers son propre article
+  const lienMedia = x => `<a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.media)}</a>`;
+  // Un titre par autre média (titres identiques repris d'une agence écartés), chacun attribué et relié à son article
+  const autres = (s, max)=> {
+    const medias = new Set([a0(s).media]), titres = new Set([norm(a0(s).titre)]);
+    return s.articles.filter(x=> !medias.has(x.media) && !titres.has(norm(x.titre)) && medias.add(x.media) && titres.add(norm(x.titre))).slice(0, max);
+  };
   const aussi = (s, max)=> {
-    const vus = new Set([a0(s).media]);
-    const autres = s.articles.filter(x=> !vus.has(x.media) && vus.add(x.media)).slice(0, max);
-    return autres.length ? `<p class="journal-aussi">Aussi chez ${autres.map(x=>`<a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.media)}</a>`).join(", ")}</p>` : "";
+    const liens = [...new Set(s.articles.filter(x=> x.media !== a0(s).media).map(x=>x.media))].slice(0, max).map(m=> lienMedia(s.articles.find(x=> x.media === m)));
+    return liens.length ? `<p class="journal-aussi">Aussi chez ${liens.join(", ")}</p>` : "";
   };
   const repris = s => s.medias >= 2 ? ` · <b>Repris par ${s.medias} médias</b>` : "";
-  const dossiers = dossiersActu().slice(0, 3);
-  // Dans les médias : nombre de titres relevés par média
-  const parMedia = new Map();
-  for(const s of pool) for(const x of s.articles){
-    const m = parMedia.get(x.media) || { nom:x.media, n:0 };
-    m.n++;
-    parMedia.set(x.media, m);
+  const encadre = (id, titre, corps, extra = "")=> `<details class="pli-mobile journal-encadre${extra ? " " + extra : ""}"${id === "journal-parlement" ? ' data-garder="1"' : ""} open><summary class="pli-h3"><h3 id="${id}">${titre}</h3></summary><div class="journal-encadre-corps">${corps}</div></details>`;
+
+  // --- À la une et autres sujets ---
+  const [une, ...reste] = propres;
+  const secondaires = reste.slice(0, 3);
+  const utilises = new Set([une, ...secondaires]);
+  const photoPers = une.illustration?.theme === "justice" ? null : (une.illustration?.personnes || []).find(p=> p.photo);
+  const photo = photoPers ? `<figure class="journal-photo"><img src="${esc(photoPers.photoHd || photoPers.photo)}" alt="" width="180" height="180" decoding="async"><figcaption>${esc(photoPers.nom)}${photoPers.parti ? ` (${esc(photoPers.parti)})` : ""}${photoPers.credit ? ` · ${t("photo : {1}", { 1: esc(photoPers.credit) })}` : ""}</figcaption></figure>` : "";
+  const reprises = autres(une, 3);
+  const chapo = `${t("Titre de {1}, publié {2}.", { 1: `<b>${esc(a0(une).media)}</b>`, 2: esc(ilYA(a0(une).date || une.derniere)) })}${une.medias >= 2 ? ` ${t("Le sujet est repris par {1} médias.", { 1: une.medias })}` : ""}${(une.contexte || []).map(c=>` ${esc(c.texte)} (${esc(c.source)}).`).join("")}`;
+  const blocUne = `<section class="journal-une" aria-labelledby="journal-une-rub">
+      <h3 class="journal-etiquette rouge" id="journal-une-rub">À la une</h3>
+      <div class="journal-une-tete"><div>
+        <h4 class="journal-titre-une">${lienTitre(a0(une))}</h4>
+        <p class="journal-meta"><b>${esc(a0(une).media)}</b>${repris(une)}</p></div>${photo}</div>
+      <div class="journal-colonnes"><p class="journal-chapo">${chapo}</p>
+      ${reprises.length ? `<ul class="journal-reprises" aria-label="Les titres des autres médias">${reprises.map(x=>`<li>${lienTitre(x)}<small>${esc(x.media)}</small></li>`).join("")}</ul>` : ""}</div>
+    </section>`;
+  const blocSecondaires = secondaires.length ? `<section class="journal-secondaires" aria-labelledby="journal-autres">
+      <h3 class="journal-etiquette" id="journal-autres">Les autres sujets du jour</h3>
+      <div class="journal-secondaires-liste">${secondaires.map(s=>`<article><h4>${lienTitre(a0(s))}</h4><p class="journal-meta"><b>${esc(a0(s).media)}</b>${repris(s)}</p>${aussi(s, 2)}</article>`).join("")}</div>
+    </section>` : "";
+
+  // --- Encadrés : Au Parlement aujourd'hui, Chiffre du jour, Sondage du jour, À retenir ---
+  const ag = JOURNAL_AGENDA?.jours || [];
+  const jAujourdhui = ag.find(j=> j.date === aujourdhui);
+  const jAffiche = jAujourdhui || ag.find(j=> j.date > aujourdhui);
+  const urlDossier = p => p.dossier ? `https://www.assemblee-nationale.fr/dyn/17/dossiers/${encodeURIComponent(p.dossier)}` : "";
+  const ptAgenda = p => {
+    const txt = p.type === "qag" ? "Questions au Gouvernement" : p.type === "vote" ? `Vote solennel : ${p.objet}` : p.objet;
+    return `<li>${p.dossier ? `<a href="${lien(urlDossier(p))}" target="_blank" rel="noopener">${esc(txt)}</a>` : esc(txt)}</li>`;
+  };
+  const scrutins = (LOIS || []).filter(l=> l.dateISO && l.typeVote === "SPS" && (l.resultat === "adopte" || l.resultat === "rejete")).sort((a, b)=> b.dateISO.localeCompare(a.dateISO) || b.numero - a.numero).slice(0, 3);
+  const somme = (l, i) => Object.values(l.votes || {}).reduce((n, v)=> n + ((Array.isArray(v) ? v[i] : [v.pour, v.contre][i]) || 0), 0);
+  const majuscule = x => x.charAt(0).toUpperCase() + x.slice(1);
+  const court = x => x.length > 150 ? x.slice(0, 147).replace(/\s+\S*$/, "") + "…" : x;
+  const blocParlement = (jAffiche || scrutins.length) ? encadre("journal-parlement", "Au Parlement aujourd'hui", `
+      ${jAffiche ? `<p class="journal-sous">${jAujourdhui ? "Séance publique à l'Assemblée nationale" : `Prochaine séance publique : ${esc(jourCourt(jAffiche.date))}`}</p><ul class="journal-liste">${jAffiche.points.slice(0, 5).map(ptAgenda).join("")}</ul>` : `<p class="journal-sous">Aucune séance publique inscrite à l'ordre du jour.</p>`}
+      ${scrutins.length ? `<p class="journal-sous">Derniers votes solennels</p><ul class="journal-liste">${scrutins.map(l=>`<li><a href="${lien(l.sourceUrl)}" target="_blank" rel="noopener">${esc(majuscule(court(l.titre)))}</a><small>${esc(l.date)} · ${l.resultat === "adopte" ? t("adopté") : t("rejeté")} · ${t("{1} pour, {2} contre", { 1: somme(l, 0), 2: somme(l, 1) })}</small></li>`).join("")}</ul>` : ""}
+      <p class="journal-sous"><a href="${lien(JOURNAL_AGENDA?.sourceUrl || "https://www2.assemblee-nationale.fr/agendas/les-agendas")}" target="_blank" rel="noopener">Assemblée nationale (données ouvertes)</a></p>`) : "";
+  const ind = INDICATEURS.length ? INDICATEURS[numero % INDICATEURS.length] : null;
+  const blocChiffre = ind ? encadre("journal-chiffre", "Chiffre du jour", `
+      <p class="journal-chiffre-valeur">${esc(ind.valeur)}</p><p class="journal-chiffre-nom"><b>${esc(ind.nom)}</b>${ind.date ? `, ${esc(ind.date)}` : ""}</p>
+      ${ind.detail ? `<p class="journal-sous">${esc(ind.detail)}</p>` : ""}
+      <p class="journal-sous">${t("Source : {1}", { 1: ind.url ? `<a href="${lien(ind.url)}" target="_blank" rel="noopener">${esc(ind.source)}</a>` : esc(ind.source) })}</p>`, "journal-chiffre") : "";
+  let blocSondage = "";
+  if(reserve){
+    blocSondage = encadre("journal-sondage", "Sondage du jour", `<p class="journal-sous">Veille et jour de vote : aucun sondage n'est publié ni commenté (loi du 19 juillet 1977).</p>`);
+  } else {
+    const inst = INSTITUTS[0];
+    if(inst?.scores && inst.dateFin && maintenant - Date.parse(inst.dateFin) < 60 * 864e5){
+      const tete = Object.entries(inst.scores).filter(([, r])=> Array.isArray(r)).sort((a, b)=> (b[1][0] + b[1][1]) - (a[1][0] + a[1][1])).slice(0, 3);
+      blocSondage = encadre("journal-sondage", "Sondage du jour", `
+        <p class="journal-sous">${t("Dernière enquête publiée pour la présidentielle de 2027 : {1}, {2}, {3}.", { 1: `<b>${esc(inst.nom)}</b>`, 2: esc(inst.date), 3: esc(inst.echantillon) })}</p>
+        <ol class="journal-liste journal-scores">${tete.map(([nom, r])=>`<li><span>${esc(nom)}</span><b>${fourchetteTexte(r)}</b></li>`).join("")}</ol>
+        <p class="journal-sous">${esc(inst.hypothese)}</p>
+        <p class="journal-sous">Intentions de vote au premier tour, pas un résultat. <a href="${lien(inst.url)}" target="_blank" rel="noopener">${inst.notice ? "Notice de la Commission des sondages" : "Publication d'origine"}</a></p>`);
+    }
   }
-  const medias = [...parMedia.values()].sort((a, b)=> b.n - a.n || a.nom.localeCompare(b.nom, "fr")).slice(0, 8);
-  const aussiUne = aussi(une, 4);
-  el.innerHTML = `<p class="journal-nom">Hémicycle France</p>
-    <div class="journal-ligne"><span class="journal-date">${esc(date)}</span><span>N° ${numero}</span>${heure ? `<span>Édition de ${esc(heure)}</span>` : ""}</div>
-    <section class="journal-une" aria-labelledby="journal-une-titre">
-      <div><span class="journal-etiquette rouge">À la une</span>
-      <h3 id="journal-une-titre">${lienTitre(a0(une))}</h3>
-      <p class="journal-meta"><b>${esc(a0(une).media)}</b>${repris(une)}</p></div>
-      ${aussiUne ? `<div class="journal-aussi-bloc">${aussiUne}</div>` : ""}
-    </section>
-    ${secondaires.length ? `<div class="journal-secondaires">${secondaires.map(s=>`<article><h3>${lienTitre(a0(s))}</h3><p class="journal-meta"><b>${esc(a0(s).media)}</b>${repris(s)}</p>${aussi(s, 2)}</article>`).join("")}</div>` : ""}
-    <div class="journal-rubriques">
-      ${dossiers.length ? `<section class="journal-rubrique journal-dossier" aria-labelledby="journal-dossiers"><h3 id="journal-dossiers">Dossiers du moment</h3><ul>${dossiers.map(d=>{
-        const x = d.articles[0], nm = new Set(d.articles.map(y=>y.media)).size;
-        return `<li><b>${esc(d.titre)}</b><small>${d.articles.length} articles · ${nm} médias</small><small><a href="${lien(x.url)}" target="_blank" rel="noopener">${esc(x.media)}</a></small></li>`;
-      }).join("")}</ul></section>` : ""}
-      ${bref.length ? `<section class="journal-rubrique journal-bref" aria-labelledby="journal-bref"><h3 id="journal-bref">En bref</h3><ol>${bref.map((s, i)=>`<li><span class="num" aria-hidden="true">${i + 1}</span><span>${lienTitre(a0(s))}<small>${esc(a0(s).media)}</small></span></li>`).join("")}</ol></section>` : ""}
-      <section class="journal-rubrique journal-medias" aria-labelledby="journal-medias"><h3 id="journal-medias">Dans les médias</h3><ul>${medias.map(m=>`<li><b>${esc(m.nom)}</b>${m.n > 1 ? `<small>${m.n} titres</small>` : `<small>1 titre</small>`}</li>`).join("")}</ul></section>
+  // À retenir : prochaines séances, rendez-vous vérifiés et prochain tour de la présidentielle
+  const dates = [];
+  for(const j of ag.filter(x=> x.date > aujourdhui && x !== jAffiche).slice(0, 2)){
+    const p = j.points.find(x=> x.type === "vote") || j.points.find(x=> x.type === "texte");
+    dates.push({ date:j.date, titre:"Assemblée nationale", detail:p ? p.objet : "Questions au Gouvernement", url:p ? urlDossier(p) : "" });
+  }
+  for(const m of MEETINGS.filter(x=> x.verified && (x.fin || x.debut) >= aujourdhui).sort((a, b)=> a.debut.localeCompare(b.debut)).slice(0, 3))
+    dates.push({ date:m.debut > aujourdhui ? m.debut : aujourdhui, titre:m.titre, detail:m.source?.nom || "", url:m.source?.url || "" });
+  for(const tour of TOURS_PRESIDENTIELLE.filter(x=> x >= aujourdhui).slice(0, 1))
+    dates.push({ date:tour, titre:"Tour de l'élection présidentielle", detail:`dans ${Math.round((Date.parse(tour) - Date.parse(aujourdhui)) / 864e5)} jours`, url:"" });
+  dates.sort((a, b)=> a.date.localeCompare(b.date));
+  const blocDates = dates.length ? encadre("journal-retenir", "À retenir", `<ul class="journal-liste journal-dates">${dates.slice(0, 6).map(d=>`<li><time datetime="${esc(d.date)}">${esc(jourCourt(d.date))}</time><span>${d.url ? `<a href="${lien(d.url)}" target="_blank" rel="noopener">${esc(d.titre)}</a>` : esc(d.titre)}${d.detail ? `<small>${esc(d.detail)}</small>` : ""}</span></li>`).join("")}</ul>`) : "";
+
+  // --- Rubriques : tout ce qui n'est pas déjà à la une ---
+  const li = s => `<li>${lienTitre(a0(s))}<small>${esc(a0(s).media)}${s.medias >= 2 ? ` · ${s.medias} médias` : ""}</small></li>`;
+  const rubrique = (id, titre, corps, extra = "")=> `<details class="pli-mobile journal-rubrique${extra ? " " + extra : ""}"${id === "politique" ? ' data-garder="1"' : ""} open><summary class="pli-h3"><h3 id="journal-${id}">${titre}</h3></summary>${corps}</details>`;
+  const rubriques = [];
+  for(const r of JOURNAL_RUBRIQUES){
+    const l = reste.filter(s=> !utilises.has(s) && r.themes.includes(s.illustration?.theme || "politique")).slice(0, 4);
+    l.forEach(s=> utilises.add(s));
+    if(l.length) rubriques.push(rubrique(r.id, r.titre, `<ul>${l.map(li).join("")}</ul>`));
+  }
+  const jus = justice.filter(s=> !utilises.has(s)).slice(0, 3);
+  jus.forEach(s=> utilises.add(s));
+  if(jus.length) rubriques.push(rubrique("justice", "Justice", `<ul>${jus.map(li).join("")}</ul><p class="journal-sous">Textes et décisions d'institutions : aucune personne mise en cause n'est citée.</p>`));
+  const bref = propres.filter(s=> !utilises.has(s)).slice(0, 8);
+  const propre = x => { const t = norm(x); return !(JOURNAL_RE_SENSIBLE.test(t) || JOURNAL_RE_AGE.test(t) || (reserve && JOURNAL_RE_SONDAGE.test(t))); };
+  const dossiers = dossiersActu().filter(d=> propre(d.titre) && d.articles.every(a=> propre(a.titre))).slice(0, 3);
+  if(dossiers.length) rubriques.push(rubrique("dossiers", "Dossiers du moment", `<ul>${dossiers.map(d=>{
+    const x = d.articles[0], nm = new Set(d.articles.map(y=>y.media)).size;
+    return `<li><b class="journal-dossier-titre">${esc(d.titre)}</b><small>${d.articles.length} articles · ${nm} médias</small><small>${lienMedia(x)}</small></li>`;
+  }).join("")}</ul>`, "journal-dossier"));
+  if(bref.length) rubriques.push(rubrique("bref", "En bref", `<ol>${bref.map((s, i)=>`<li><span class="num" aria-hidden="true">${i + 1}</span><span>${lienTitre(a0(s))}<small>${esc(a0(s).media)}</small></span></li>`).join("")}</ol>`, "journal-bref"));
+  const parMedia = new Map();
+  for(const s of propres) for(const x of s.articles) parMedia.set(x.media, (parMedia.get(x.media) || 0) + 1);
+  const medias = [...parMedia].map(([nom, n])=> ({ nom, n })).sort((a, b)=> b.n - a.n || a.nom.localeCompare(b.nom, "fr")).slice(0, 8);
+  rubriques.push(rubrique("medias", "Dans les médias", `<ul>${medias.map(m=>`<li><b>${esc(m.nom)}</b><small>${m.n > 1 ? `${m.n} titres` : t("1 titre")}</small></li>`).join("")}</ul>`, "journal-medias"));
+  const lus = (ACTUALITES.medias || []).filter(m=> m.lu && /^https:\/\//.test(m.site || ""));
+
+  el.innerHTML = `<div class="journal-tricolore" aria-hidden="true"></div>
+    <div class="journal-haut"><span>Édition gratuite</span><span class="journal-devise">La politique française, preuves à l'appui.</span><span>Sources citées</span></div>
+    <p class="journal-nom">Hémicycle France</p>
+    <div class="journal-ligne"><span class="journal-date">${esc(date)}</span><span>N° ${numero}</span>${heure ? `<span>Mis à jour à ${esc(heure)}</span>` : ""}</div>
+    <div class="journal-corps">
+      <div class="journal-gauche">${blocUne}${blocSecondaires}<div class="journal-rubriques">${rubriques.join("")}</div></div>
+      <div class="journal-droite">${blocParlement}${blocChiffre}${blocSondage}${blocDates}</div>
     </div>
-    <p class="journal-pied">Titres reproduits tels quels, choisis par chaque rédaction : le contenu est à lire sur le site du média. Sujets classés selon le nombre de médias qui les reprennent.</p>`;
+    <details class="pli-mobile journal-pied" open><summary class="pli-h3"><h3 id="journal-sources">Sources et méthode</h3></summary>
+      <p>Titres reproduits tels quels, choisis par chaque rédaction : le contenu est à lire sur le site du média. Sujets classés selon le nombre de médias qui les reprennent. Les sujets mettant en cause une personne sont écartés (présomption d'innocence) et aucun sondage n'est affiché la veille et le jour d'un scrutin.</p>
+      ${lus.length ? `<p>Médias relevés : ${lus.map(m=>`<a href="${lien(m.site)}" target="_blank" rel="noopener">${esc(m.nom)}</a>`).join(", ")}.</p>` : ""}
+      <p>Autres sources : Assemblée nationale (agenda et scrutins), Insee et Eurostat (chiffres), Commission des sondages, Wikimedia Commons (portraits libres).</p>
+    </details>`;
 }
 document.getElementById("journal-imprimer")?.addEventListener("click", ()=> window.print());
+// Avant l'impression, les sections repliées sur téléphone sont ouvertes, puis refermées
+{
+  let refermer = [];
+  window.addEventListener("beforeprint", ()=>{
+    refermer = [...document.querySelectorAll("#journal details:not([open])")];
+    refermer.forEach(d=> d.open = true);
+  });
+  window.addEventListener("afterprint", ()=>{ refermer.forEach(d=> d.open = false); refermer = []; });
+}
 
 function renderAccueilActualites(){
   const bloc = document.getElementById("accueil-actualites");
