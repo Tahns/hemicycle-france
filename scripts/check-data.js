@@ -616,6 +616,12 @@ await checkPresidents();
   const e = await verifierPortraits();
   e.forEach(err);
   if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
+  // Couverture : des médaillons d'initiales subsistent = avertissement, jamais bloquant (rapport : data/portraits-couverture.json)
+  const c = JSON.parse(await readFile("data/portraits-couverture.json", "utf-8").catch(() => "null"));
+  if (c) {
+    console.log(`[check-data] portraits : ${c.avecPhoto}/${c.personnes} personnes avec photo, ${c.placeholders} médaillon(s) d'initiales.`);
+    if (c.manquants?.length) console.warn(`::warning::Portraits : ${c.manquants.length} personne(s) sans photo libre (médaillon d'initiales affiché) : ${c.manquants.slice(0, 15).join(", ")}${c.manquants.length > 15 ? "…" : ""}`);
+  }
 }
 await secondaire(checkI18n);
 await checkCompte();

@@ -72,7 +72,7 @@ jobs:
       - name: Contrôler la cohérence des données
         run: node scripts/check-data.js
       - name: Committer s'il y a du nouveau
-        run: scripts/commit-push.sh "Actualités ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/actualites.json data/direct.json data/instagram-file.json data/portraits.json instagram/auto instagram/file.atom photos/personnalites/hd photos/deputes/hd photos/senateurs/hd instagram/brouillons
+        run: scripts/commit-push.sh "Actualités ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/actualites.json data/direct.json data/instagram-file.json data/portraits.json data/portraits-couverture.json photos/personnalites/medaillons instagram/auto instagram/file.atom photos/personnalites/hd photos/deputes/hd photos/senateurs/hd instagram/brouillons
       # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
       - name: Signaler un problème dans le résumé de l'exécution
         if: failure()
