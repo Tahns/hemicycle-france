@@ -80,9 +80,9 @@ Base : audit du 5 octobre 2026 (Playwright, bureau 1300 px et mobile 390 px, 19 
 - **M** : changement de flux RSS d'un média ; sujet sensible (affaires judiciaires) à traiter avec prudence.
 
 ## Agenda et meetings
-- **F** : 8 événements saisis à la main avec source.
-- **f** : saisie manuelle, donc rapidement périmée ; très peu de volume.
-- **O** : alimenter automatiquement depuis les sites des partis (?).
+- **F** : événements sourcés ; relevé automatique (Wikipédia, agenda de l'Assemblée) sans écraser la saisie manuelle.
+- **f** : les meetings de partis restent saisis à la main ; titres d'articles Wikipédia à valider ; pas de calendrier du Sénat lisible par machine.
+- **O** : brancher une source stable pour l'agenda du Sénat.
 - **M** : données périmées qui donnent une image négative ; le contrôle quotidien aide mais ne remplit pas.
 
 ## Justice

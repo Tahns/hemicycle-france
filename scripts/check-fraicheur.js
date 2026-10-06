@@ -16,7 +16,8 @@
  *  - Déficit public de l'année N : remplacé par celui de N+1 publié fin mars N+2 (alerte au 15 avril).
  *  - Justice : relecture au moins tous les 60 jours, et après chaque échéance de data/justice.json.
  *  - Chefs de parti : vérifiés chaque jour sur Wikipédia (fetch-dirigeants.js) ; alerte si l'un a changé.
- *  - Agenda : au moins un rendez-vous à venir, relecture au moins tous les 30 jours.
+ *  - Agenda : relevé automatiquement (fetch-evenements.js) ; seules les entrées SAISIES À LA MAIN (sans « origine: auto »)
+ *    demandent une relecture tous les 30 jours ; au moins un rendez-vous à venir.
  *
  * USAGE : node scripts/check-fraicheur.js [--date=AAAA-MM-JJ]   (la date sert aux tests)
  */
@@ -76,7 +77,7 @@ if (deficitAuto && isoAujourdhui > `${parseInt(deficitAuto.date, 10) + 2}-05-15`
 
 // Fichiers relevés automatiquement : leur horodatage « lastUpdated » est rafraîchi au plus tard toutes les 24 h même sans
 // changement (garde.js, battement), donc un horodatage plus vieux que la limite signifie que le relevé ne tourne plus.
-const LIMITES_H = { "data/actualites.json": 24, "data/direct.json": 12, "data/agenda-an.json": 72, "data/navette.json": 72, "data/commissions.json": 72, "data/budget.json": 72, "data/gouvernement.json": 72, "data/lobbying.json": 72 };
+const LIMITES_H = { "data/actualites.json": 24, "data/direct.json": 12, "data/agenda-an.json": 72, "data/navette.json": 72, "data/commissions.json": 72, "data/budget.json": 72, "data/gouvernement.json": 72, "data/lobbying.json": 72, "data/meetings.json": 72 };
 for (const [f, h] of Object.entries(LIMITES_H)) {
   const d = await lire(f);
   if (!d) continue; // fichier optionnel absent
@@ -131,8 +132,10 @@ if (dirigeants?.verifieLe && joursDepuis(dirigeants.verifieLe) > 90) {
 }
 
 const meetings = await lire("data/meetings.json");
-if (meetings?.verifieLe && joursDepuis(meetings.verifieLe) > 30) {
-  alertes.push(`Agenda : relu pour la dernière fois le ${meetings.verifieLe} ; ajouter les rendez-vous annoncés depuis (congrès, meetings, primaires), puis mettre à jour « verifieLe » dans data/meetings.json.`);
+// La relecture de 30 jours ne concerne que les entrées saisies à la main et encore à venir (les entrées « auto » sont relevées toutes les 15 minutes)
+const manuellesAVenir = (meetings?.meetings || []).filter((m) => m.origine !== "auto" && (m.fin || m.debut) >= isoAujourdhui);
+if (manuellesAVenir.length && meetings?.verifieLe && joursDepuis(meetings.verifieLe) > 30) {
+  alertes.push(`Agenda : ${manuellesAVenir.length} rendez-vous saisi(s) à la main, relus pour la dernière fois le ${meetings.verifieLe} ; vérifier que leurs dates tiennent encore, puis mettre à jour « verifieLe » dans data/meetings.json.`);
 }
 if (meetings?.meetings && !meetings.meetings.some((m) => (m.fin || m.debut) >= isoAujourdhui)) {
   alertes.push("Agenda : aucun rendez-vous à venir dans data/meetings.json (la page Agenda affiche une liste vide).");

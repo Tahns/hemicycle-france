@@ -508,6 +508,35 @@ async function checkGouvernementAgenda() {
   }
 }
 
+/**
+ * Agenda (data/meetings.json) : règles communes à toutes les entrées ; pour celles relevées automatiquement
+ * (« origine: "auto" », voir scripts/fetch-evenements.js) : type, clé unique, confirme, confiance, compteur d'absences.
+ * Deux entrées du même type, du même parti et du même jour sont des doublons. Pure.
+ */
+export function controlerAgenda(liste) {
+  const e = [], cles = new Set(), jours = new Map();
+  for (const m of liste) {
+    const nom = `meetings.json : « ${String(m.titre || "?").slice(0, 60)} »`;
+    if (!m.titre || !m.desc) e.push(`${nom} : titre ou description manquant`);
+    if (m.fin && (!/^\d{4}-\d{2}-\d{2}$/.test(m.fin) || m.fin < m.debut)) e.push(`${nom} : date « fin » invalide`);
+    if (m.source && !/^https:\/\//.test(m.source.url || "")) e.push(`${nom} : source sans lien https`);
+    if (m.origine === undefined) continue; // entrée manuelle : règles communes seulement
+    if (m.origine !== "auto") { e.push(`${nom} : « origine » invalide (« auto » ou absent)`); continue; }
+    if (!m.source?.url) e.push(`${nom} : source manquante`);
+    if (!["congres", "primaire", "election", "examen-loi", "meeting"].includes(m.type)) e.push(`${nom} : « type » invalide`);
+    if (!m.cle || cles.has(m.cle)) e.push(`${nom} : « cle » manquante ou en double`);
+    cles.add(m.cle);
+    const jk = `${m.type}|${m.parti || ""}|${m.debut}`;
+    if (jours.has(jk)) e.push(`${nom} : doublon (même type, parti et jour que « ${jours.get(jk)} »)`);
+    jours.set(jk, m.titre);
+    if (typeof m.confirme !== "boolean") e.push(`${nom} : « confirme » doit être vrai ou faux`);
+    if (!["haute", "moyenne", "basse"].includes(m.confiance)) e.push(`${nom} : « confiance » invalide`);
+    if (!Number.isInteger(m.absences) || m.absences < 0 || m.absences > 1) e.push(`${nom} : « absences » doit valoir 0 ou 1`);
+    if (m.confirme === false && m.verified) e.push(`${nom} : un événement non confirmé ne peut pas être « verified »`);
+  }
+  return e;
+}
+
 async function checkManuels() {
   for (const [fichier, cle] of [["data/dirigeants.json", "dirigeants"], ["data/justice.json", "condamnations"], ["data/meetings.json", "meetings"]]) {
     const data = JSON.parse(await readFile(fichier, "utf-8"));
@@ -520,6 +549,7 @@ async function checkManuels() {
   }
   const meetings = JSON.parse(await readFile("data/meetings.json", "utf-8"));
   for (const m of meetings.meetings) if (!/^\d{4}-\d{2}-\d{2}$/.test(m.debut || "")) err(`meetings.json : date « debut » invalide pour ${m.titre}`);
+  controlerAgenda(meetings.meetings).forEach(err);
   console.log("[check-data] fichiers manuels contrôlés.");
 }
 
@@ -617,6 +647,12 @@ await checkPresidents();
   const e = await verifierPortraits();
   e.forEach(err);
   if (!e.length) console.log("[check-data] portraits : toutes les photos ont une licence.");
+  // Couverture : des médaillons d'initiales subsistent = avertissement, jamais bloquant (rapport : data/portraits-couverture.json)
+  const c = JSON.parse(await readFile("data/portraits-couverture.json", "utf-8").catch(() => "null"));
+  if (c) {
+    console.log(`[check-data] portraits : ${c.avecPhoto}/${c.personnes} personnes avec photo, ${c.placeholders} médaillon(s) d'initiales.`);
+    if (c.manquants?.length) console.warn(`::warning::Portraits : ${c.manquants.length} personne(s) sans photo libre (médaillon d'initiales affiché) : ${c.manquants.slice(0, 15).join(", ")}${c.manquants.length > 15 ? "…" : ""}`);
+  }
 }
 await secondaire(checkI18n);
 await checkCompte();

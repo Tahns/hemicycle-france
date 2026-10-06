@@ -1,0 +1,59 @@
+{
+  "_comment": "Pages Wikipédia FR lues par scripts/fetch-evenements.js (API Action, JSON). Une page introuvable est signalée dans le journal sans bloquer. Seul le résumé de l'article (avant le premier intertitre) est lu ; une phrase incertaine (« pourrait », « devrait », « envisagé »…) est ignorée. Les entrées de data/meetings.json sans « origine: auto » ne sont jamais modifiées. Ajouter une page = ajouter un bloc ici, sans toucher au code.",
+  "pages": [
+    {
+      "id": "presidentielle-2027",
+      "page": "Élection présidentielle française de 2027",
+      "type": "election",
+      "parti": "",
+      "partyColor": "#1B3A8C",
+      "lieu": "Toute la France",
+      "mots": ["tour", "scrutin", "élection"],
+      "libelles": {
+        "premier": "Élection présidentielle : premier tour",
+        "second": "Élection présidentielle : second tour"
+      },
+      "desc": "Date relevée dans l'article de référence ; à confirmer par le décret de convocation des électeurs."
+    },
+    {
+      "id": "primaire-ps",
+      "page": "Primaire socialiste de 2026",
+      "type": "primaire",
+      "parti": "PS",
+      "partyColor": "#D6488A",
+      "mots": ["primaire", "tour", "scrutin", "vote"],
+      "libelles": {
+        "premier": "Primaire du Parti socialiste : premier tour",
+        "second": "Primaire du Parti socialiste : second tour",
+        "unique": "Primaire du Parti socialiste"
+      },
+      "desc": "Date de la primaire relevée dans l'article de référence."
+    },
+    {
+      "id": "congres-rn",
+      "page": "Congrès du Rassemblement national de 2026",
+      "type": "congres",
+      "parti": "RN",
+      "partyColor": "#5B4FC9",
+      "mots": ["congrès"],
+      "libelles": { "unique": "Congrès du Rassemblement national" },
+      "desc": "Date du congrès relevée dans l'article de référence."
+    },
+    {
+      "id": "congres-lr",
+      "page": "Congrès des Républicains de 2026",
+      "type": "congres",
+      "parti": "LR",
+      "partyColor": "#2F6FE0",
+      "mots": ["congrès"],
+      "libelles": { "unique": "Congrès des Républicains" },
+      "desc": "Date du congrès relevée dans l'article de référence."
+    }
+  ],
+  "examensLoi": {
+    "horizonJours": 14,
+    "maximum": 10,
+    "partyColor": "#6B7280",
+    "lieu": "Assemblée nationale, Paris"
+  }
+}

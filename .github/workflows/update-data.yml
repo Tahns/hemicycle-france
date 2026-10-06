@@ -78,6 +78,10 @@ jobs:
         id: agenda
         run: node scripts/fetch-agenda-an.js
         continue-on-error: true
+      - name: Agenda politique à venir (Wikipédia, ordre du jour de l'Assemblée) ; ne touche jamais aux entrées saisies à la main
+        id: evenements
+        run: node scripts/fetch-evenements.js
+        continue-on-error: true
       - name: Vérifications des faits (flux publics des rédactions ; un flux injoignable est signalé sans bloquer)
         id: verifications
         run: node scripts/fetch-verifications.js
@@ -172,7 +176,7 @@ jobs:
 
       # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
       - name: Signaler un problème dans le résumé de l'exécution
-        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.verifications.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure' || steps.direct.outcome == 'failure' || steps.story.outcome == 'failure' || steps.photoshd.outcome == 'failure')
+        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.verifications.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.evenements.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure' || steps.direct.outcome == 'failure' || steps.story.outcome == 'failure' || steps.photoshd.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -192,6 +196,7 @@ jobs:
             [ "${{ steps.elections.outcome }}" = "failure" ] && echo "- **Présidentielle 2022 par commune** : fichiers du ministère introuvables ou incohérents sur data.gouv.fr."
             [ "${{ steps.senateurs.outcome }}" = "failure" ] && echo "- **Sénateurs** : liste officielle illisible ou votes nom par nom qui ne correspondent pas aux totaux officiels."
             [ "${{ steps.agenda.outcome }}" = "failure" ] && echo "- **Ordre du jour de l'Assemblée** : agenda open data illisible (ancien agenda conservé)."
+            [ "${{ steps.evenements.outcome }}" = "failure" ] && echo "- **Agenda à venir** : article Wikipédia illisible ou fichier refusé par le garde-fou (agenda précédent conservé, entrées manuelles intactes)."
             [ "${{ steps.logos.outcome }}" = "failure" ] && echo "- **Logos des partis** : fichier introuvable ou licence non libre sur Wikimedia Commons (vérifier data/logos.json)."
             [ "${{ steps.photos.outcome }}" = "failure" ] && echo "- **Photos des élus** : nombreuses photos impossibles à télécharger."
             [ "${{ steps.navette.outcome }}" = "failure" ] && echo "- **Parcours des textes** : correspondance Assemblée/Sénat impossible à construire."

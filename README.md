@@ -17,7 +17,7 @@ automatiquement, toutes les 15 minutes, à partir de sources officielles.
 | Sondages présidentielle 2027 (dernière enquête de chaque institut, historique des deux derniers semestres pour la courbe, duels du second tour) | `fetch-sondages.js` | liste Wikipédia des sondages, liens vers les notices de la Commission des sondages | `data/sondages.json` |
 | Probabilités d'accéder au second tour et d'être élu (simulation à partir des sondages) | `probabilites.js` | `data/sondages.json` | `data/probabilites.json` |
 | Actualités politiques : titres de presse cités avec leur média et un lien, sujets repris par plusieurs médias mis en avant ; le grand titre est rédigé par le site à partir du recoupement de plusieurs médias (`titres-propres.cjs`, null en cas de doute), le contexte vient des données officielles du site (gouvernement, partis, députés, sondages, agenda), les vidéos sont de simples liens signalés (toutes les heures, workflow `actualites.yml`) | `fetch-actualites.js`, `titres-propres.cjs` | flux RSS publics de franceinfo, Le Monde, Le Figaro, Libération, 20 Minutes, Public Sénat | `data/actualites.json` |
-| Portraits libres des personnalités sans photo officielle (chefs de parti, candidats, Gouvernement), pour illustrer les actualités | `fetch-portraits.js` | image principale de l'article Wikipédia, si elle est sous licence libre sur Wikimedia Commons | `photos/personnalites/`, `data/portraits.json` |
+| Portraits de toutes les personnes affichées : photo officielle (Assemblée, Sénat), puis Wikidata/Wikipédia, puis catégorie Commons, à défaut médaillon d'initiales (voir `docs/portraits-a-completer.md`) | `fetch-portraits.js`, `portraits-chaine.js` | licence libre vérifiée via l'API Commons | `photos/personnalites/`, `data/portraits.json`, `data/portraits-couverture.json` |
 | Candidats déclarés à la présidentielle | `fetch-candidats.js` | page Wikipédia des candidatures (source de chaque annonce) | `data/candidats.json` |
 | Scrutins publics du Sénat, vote de chaque groupe | `fetch-senat.js` | pages officielles senat.fr (recoupées avec le total officiel) | `data/senat.json` |
 | Communes → circonscriptions (trouver son député par sa commune) | `fetch-communes.js` (tous les 90 jours) | résultats des législatives 2024 par commune, ministère de l'Intérieur | `data/communes.json` |
@@ -112,9 +112,8 @@ racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 | Donnée | Fichier | Pourquoi |
 |---|---|---|
 | Condamnations judiciaires | `data/justice.json` | distinguer une condamnation définitive d'un appel demande un jugement humain ; une erreur serait diffamatoire |
-| Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
 
-Désormais automatiques : l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
+Désormais automatiques : l'agenda à venir (`scripts/fetch-evenements.js` : articles Wikipédia listés dans `data/evenements-sources.json` et projets de loi à date lointaine de l'ordre du jour de l'Assemblée ; les entrées `origine: "auto"` sont créées, mises à jour ou retirées après 2 relevés d'absence, les entrées saisies à la main dans `data/meetings.json` ne sont jamais touchées, et seuls les meetings de partis restent à saisir à la main quand on en connaît), l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
 (Eurostat, notification de la France), les chefs de parti (vérifiés toutes les 15 minutes dans l'infobox
 Wikipédia de chaque parti ; un changement est appliqué puis signalé pour relire l'intitulé de la
 fonction) et le thème des votes (commission saisie au fond du dossier législatif).

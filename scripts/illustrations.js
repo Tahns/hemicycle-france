@@ -69,12 +69,15 @@ export async function construireIndex() {
   }
   for (const d of dirigeants?.dirigeants || []) await ajouter(d.nom, { parti: d.parti, notable: true });
   for (const c of candidats?.candidats || []) await ajouter(c.nom, { parti: c.code, notable: true });
-  for (const m of gouvernement?.membres || []) await ajouter(m.nom, { notable: true });
+  for (const m of gouvernement?.membres || []) {
+    const officielle = m.id ? `photos/deputes/${m.id}.jpg` : null; // ministre aussi député : photo officielle de l'Assemblée
+    await ajouter(m.nom, { notable: true, photo: officielle && (await existe(officielle)) ? officielle : null });
+  }
   for (const nom of FIGURES) await ajouter(nom, { notable: true });
   // Personnalités testées dans les sondages de la présidentielle (Le Pen, Mélenchon…)
   for (const [nom, parti] of Object.entries(sondages?.candidats || {})) if (!/\(/.test(nom)) await ajouter(nom, { parti, notable: true });
   for (const [nom, p] of Object.entries(portraits?.portraits || {})) {
-    const photo = `photos/personnalites/${slug(nom)}.jpg`;
+    const photo = p.chemin || `photos/personnalites/${slug(nom)}.jpg`;
     if (p.fichier && personnes.has(nom) && (await existe(photo))) {
       Object.assign(personnes.get(nom), { photo: personnes.get(nom).photo || photo, credit: `${p.auteur || "Auteur inconnu"}, ${p.licence}, Wikimedia Commons` });
     }

@@ -33,6 +33,13 @@ export async function verifierPortraits(dossier = "photos/personnalites", fichie
       if (!String(p.auteur || "").trim()) erreurs.push(`${dir}/${f} : auteur manquant (${p.nom}) ; écrire « Auteur inconnu » si Commons n'en indique pas`);
     }
   }
+  // Photos hébergées à leur chemin officiel (photos/deputes, photos/senateurs) mais créditées dans portraits.json (champ « chemin »)
+  for (const [nom, p] of Object.entries(data.portraits)) {
+    if (!p?.chemin || !p.fichier || !(await readFile(p.chemin).then(() => true, () => false))) continue;
+    if (!p.licence || NON_LIBRE.test(p.licence)) erreurs.push(`${p.chemin} : licence manquante ou non libre (${nom})`);
+    if (!/^https:\/\//.test(p.source || "")) erreurs.push(`${p.chemin} : source manquante (${nom})`);
+    if (!String(p.auteur || "").trim()) erreurs.push(`${p.chemin} : auteur manquant (${nom})`);
+  }
   return erreurs;
 }
 
