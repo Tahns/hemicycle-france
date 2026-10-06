@@ -143,6 +143,11 @@ jobs:
         id: partage
         run: node scripts/partage.cjs
         continue-on-error: true
+      # Alertes sans compte : un flux Atom par député et par texte suivi (feeds/), réécrit seulement si un vote le change
+      - name: Flux d'alertes (députés et textes)
+        id: flux
+        run: node scripts/flux-alertes.js
+        continue-on-error: true
 
       # Vidéos animées (stories vidéo, Reels) : seulement si "videos": true dans data/stories-config.json ; sans ffmpeg, l'image part seule
       - name: Installer ffmpeg (vidéos animées)
@@ -169,7 +174,7 @@ jobs:
       # Seulement s'il y a du nouveau (les fichiers dont seul l'horodatage changerait ne sont pas réécrits, voir garde.js) ;
       # échec du push = échec visible de l'exécution (scripts/commit-push.sh)
       - name: Committer les changements s'il y en a
-        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ data/vignettes.json photos/vignettes instagram/auto instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
+        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ data/vignettes.json photos/vignettes instagram/auto instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml feeds/ index.html
 
       - name: Vérifier la fraîcheur des données
         id: fraicheur

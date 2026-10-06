@@ -3813,6 +3813,8 @@ function updateBreakdown(){
   if(loi.dossierTitre) lignes.push(["Dossier législatif",
     `<a href="${lien(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
   if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
+  // Flux Atom du texte (feeds/loi/, généré en CI) : pour les textes votés dans leur ensemble ou récents
+  if(loi.dossierRef && (loi.typeVote !== "SPO" || Date.now() - Date.parse(loi.dateISO) < 90*864e5)) lignes.push(["Alertes", `<a href="feeds/loi/${encodeURIComponent(loi.dossierRef)}.xml" type="application/atom+xml" rel="alternate" target="_blank">S'abonner (RSS)</a> aux prochains votes sur ce texte`]);
   // Parcours du texte : vote du Sénat sur l'ensemble du même texte (data/navette.json, chargé à la demande)
   if(loi.dossierRef){
     if(NAVETTE === null){ NAVETTE = false; lireJSON("data/navette.json").then(d=>{ NAVETTE = d?.textes || {}; if(currentLoi() === loi) updateBreakdown(); }); }
@@ -6558,6 +6560,8 @@ function renderDeputeFiche(d){
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
   document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", espaceBoutonDepute(d));
+  // Flux Atom du député (feeds/depute/, généré en CI) : alerte sans compte, dans n'importe quel lecteur de flux
+  document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", `<a href="feeds/depute/${encodeURIComponent(d.id)}.xml" type="application/atom+xml" rel="alternate" target="_blank">S'abonner (RSS)</a>`);
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
   afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
