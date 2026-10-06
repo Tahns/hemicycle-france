@@ -12,6 +12,7 @@
  */
 import { readFile, access } from "fs/promises";
 import { slug } from "./fetch-portraits.js";
+import { cleVignette } from "./vignettes-cle.js";
 
 // Personnalités nationales absentes des autres listes
 export const FIGURES = ["Emmanuel Macron", "Raphaël Glucksmann", "François Hollande"];
@@ -140,5 +141,6 @@ export function illustrer(titres, motifs) {
   const tout = plat(titres.join(" "));
   const partis = PARTIS.filter(([, re]) => re.test(tout)).map(([code]) => code).slice(0, 2);
   const theme = THEMES.find(([, re]) => re.test(tout))?.[0] || "politique";
-  return { personnes, partis, theme };
+  // Photo libre d'institution pour la vignette (voir vignettes-cle.js) : null = pictogramme ; jamais de personne dans une affaire
+  return { personnes, partis, theme, vignette: cleVignette(theme, titres, personnes) };
 }
