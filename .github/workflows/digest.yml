@@ -53,11 +53,15 @@ jobs:
       - name: Flux d'alertes (députés et textes)
         run: node scripts/flux-alertes.js
         continue-on-error: true
+      # À la une Instagram : rubrique recommandée de chaque publication et liste « à ajouter cette semaine » (l'ajout reste manuel : docs/A-LA-UNE.md)
+      - name: Suggestions « à la une » (data/a-la-une-suggestions.json, docs/a-la-une-semaine.md)
+        run: node scripts/suggestions-a-la-une.cjs
+        continue-on-error: true
       - name: Contrôler la cohérence avant publication
         run: node scripts/check-data.js
       # Aucun e-mail n'est envoyé : la version e-mail (digest/<semaine>/email.html) est à coller dans un outil d'envoi, voir docs/NEWSLETTER.md
       - name: Committer le résumé
-        run: scripts/commit-push.sh "Résumé hebdomadaire ($(date -u +%Y-%m-%d))" data/digest digest digest.xml feeds
+        run: scripts/commit-push.sh "Résumé hebdomadaire ($(date -u +%Y-%m-%d))" data/digest digest digest.xml feeds data/a-la-une-suggestions.json docs/a-la-une-semaine.md
       - name: Écrire le résumé de l'exécution
         if: always()
         run: |
