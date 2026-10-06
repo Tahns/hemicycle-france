@@ -16,6 +16,7 @@ import { verifierPortraits } from "./check-portraits.js";
 import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 import { controlerFichierJson } from "./controles-json.js";
+import { controlerDepot } from "./controles-digest.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -606,6 +607,13 @@ async function checkFichiersJson() {
   console.log(`[check-data] ${fichiers.length} fichiers data/*.json : JSON valide, taille et horodatage plausibles.`);
 }
 
+// Résumé hebdomadaire (data/digest/, digest/, digest.xml) et flux d'alertes (feeds/) : structure, sources, plafonds
+async function checkDigestEtFlux() {
+  const { erreurs: e, resume } = await controlerDepot();
+  e.forEach(err);
+  console.log(`[check-data] digest et flux : ${resume}.`);
+}
+
 await checkFichiersJson();
 await checkLois();
 await checkIndicateurs();
@@ -625,6 +633,7 @@ await checkSenat();
 await checkActivite();
 await checkLobbying();
 await checkNavette();
+await checkDigestEtFlux();
 await checkSenateurs();
 await checkGouvernementAgenda();
 await checkCommunes();

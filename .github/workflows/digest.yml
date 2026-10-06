@@ -1,0 +1,67 @@
+name: Résumé hebdomadaire et sauvegarde
+on:
+  schedule:
+    # Dimanche 18 h 05 à Paris : 16 h 05 UTC l'été (UTC+2), 17 h 05 UTC l'hiver (UTC+1). Une seule des deux heures tombe à 18 h ;
+    # l'autre régénère la même semaine (résultat identique : le script n'écrit que ce qui change, rien n'est recommitté).
+    - cron: "5 16 * * 0"
+    - cron: "5 17 * * 0"
+  workflow_dispatch:
+    inputs:
+      semaine:
+        description: "Semaine à (re)générer, au format 2026-W41 (vide = semaine en cours)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # 1. Sauvegarde des données : archive compressée téléchargeable 30 jours dans l'exécution (onglet Actions > Artifacts).
+      #    Rien n'est ajouté au dépôt, qui garde déjà l'historique de chaque fichier ; l'archive sert à restaurer sans git.
+      - name: Archive des données (data/*.json)
+        run: |
+          mkdir -p sauvegarde
+          sha256sum data/*.json > sauvegarde/manifeste.sha256
+          tar -czf "sauvegarde/donnees-$(date -u +%Y-%m-%d).tar.gz" data/*.json
+          ls -lh sauvegarde | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Publier la sauvegarde (conservée 30 jours)
+        uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-donnees
+          path: sauvegarde/
+          retention-days: 30
+          compression-level: 0
+
+      # 2. Résumé de la semaine (uniquement à partir des données du site), puis flux d'alertes à jour
+      - name: Résumé hebdomadaire (JSON, page, version e-mail, flux Atom)
+        env:
+          SEMAINE: ${{ github.event.inputs.semaine }}
+        run: |
+          if [ -n "$SEMAINE" ]; then node scripts/digest-hebdo.js "--semaine=$SEMAINE"; else node scripts/digest-hebdo.js; fi
+      - name: Flux d'alertes (députés et textes)
+        run: node scripts/flux-alertes.js
+        continue-on-error: true
+      - name: Contrôler la cohérence avant publication
+        run: node scripts/check-data.js
+      # Aucun e-mail n'est envoyé : la version e-mail (digest/<semaine>/email.html) est à coller dans un outil d'envoi, voir docs/NEWSLETTER.md
+      - name: Committer le résumé
+        run: scripts/commit-push.sh "Résumé hebdomadaire ($(date -u +%Y-%m-%d))" data/digest digest digest.xml feeds
+      - name: Écrire le résumé de l'exécution
+        if: always()
+        run: |
+          {
+            echo "Résumé hebdomadaire du $(date -u +%Y-%m-%d) : voir le dossier digest/ du dépôt."
+            echo "La version e-mail prête à coller est digest/<semaine>/email.html (docs/NEWSLETTER.md)."
+          } >> "$GITHUB_STEP_SUMMARY"
