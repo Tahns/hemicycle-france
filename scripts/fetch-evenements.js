@@ -361,6 +361,21 @@ export function lireReponseWikipedia(json) {
   return c;
 }
 
+/** Titre le plus proche parmi les résultats d'une recherche Wikipédia (list=search, formatversion=2) : même année et au moins un mot distinctif du titre cherché. Pure. */
+export function choisirTitre(json, titreCherche) {
+  const voulu = sansAccent(titreCherche);
+  const annee = voulu.match(/\b(19|20)\d{2}\b/)?.[0];
+  const mots = voulu.split(/[^a-z0-9]+/).filter((m) => m.length >= 5 && !/^(election|francaise|francais)$/.test(m));
+  for (const r of json?.query?.search || []) {
+    const t = sansAccent(r.title);
+    if (/\b(liste|categorie|portail|modele)\b/.test(t)) continue;
+    if (annee && !t.includes(annee)) continue;
+    if (mots.length && !mots.some((m) => t.includes(m))) continue;
+    return r.title;
+  }
+  return null;
+}
+
 async function lirePage(cfg, dossierFixtures) {
   if (dossierFixtures) {
     const f = path.join(dossierFixtures, `${cfg.id}.json`);
@@ -369,7 +384,17 @@ async function lirePage(cfg, dossierFixtures) {
   const url = `${API}?action=query&prop=revisions&rvprop=content&rvslots=main&redirects=1&format=json&formatversion=2&titles=${encodeURIComponent(cfg.page)}`;
   const res = await fetchPoli(url);
   if (!res.ok) throw new Error(`Wikipédia : HTTP ${res.status} pour « ${cfg.page} »`);
-  return lireReponseWikipedia(await res.json());
+  const contenu = lireReponseWikipedia(await res.json());
+  if (contenu !== null) return contenu;
+  // Titre exact introuvable : recherche du titre le plus proche (même année, mot distinctif commun)
+  const rech = await fetchPoli(`${API}?action=query&list=search&srlimit=6&format=json&formatversion=2&srsearch=${encodeURIComponent(cfg.page)}`);
+  if (!rech.ok) return null;
+  const titre = choisirTitre(await rech.json(), cfg.page);
+  if (!titre) return null;
+  log(`${cfg.id} : « ${cfg.page} » introuvable, page voisine retenue : « ${titre} » (à reporter dans data/evenements-sources.json).`);
+  const res2 = await fetchPoli(`${API}?action=query&prop=revisions&rvprop=content&rvslots=main&redirects=1&format=json&formatversion=2&titles=${encodeURIComponent(titre)}`);
+  if (!res2.ok) throw new Error(`Wikipédia : HTTP ${res2.status} pour « ${titre} »`);
+  return lireReponseWikipedia(await res2.json());
 }
 
 export async function releverTout({ sources, agenda, aujourdhui, dossierFixtures }) {
@@ -379,6 +404,7 @@ export async function releverTout({ sources, agenda, aujourdhui, dossierFixtures
     try {
       const wiki = await lirePage(cfg, dossierFixtures);
       if (wiki === null) { warn(`« ${cfg.page} » : page introuvable sur Wikipédia (titre à corriger dans data/evenements-sources.json ?) ; rien retiré.`); continue; }
+      if (!dossierFixtures && process.env.GITHUB_ACTIONS) log(`${cfg.id} : ${wiki.length} caractères lus ; début du résumé : « ${resumeTexte(wiki).slice(0, 200).replace(/\s+/g, " ")} »`);
       const { evenements, ignores } = evenementsDepuisPage(wiki, cfg, aujourdhui);
       ignores.forEach((i) => log(`${cfg.id} : ${i}`));
       log(`${cfg.id} : ${evenements.length} événement(s) à venir lu(s).`);
