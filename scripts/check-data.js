@@ -366,6 +366,31 @@ async function checkQuiz() {
 }
 
 
+// Statistiques Instagram (fichier optionnel, écrit par scripts/stats-instagram.cjs) : forme du fichier, aucun jeton ni donnée personnelle.
+async function checkStatsInstagram() {
+  const brut = await readFile(process.env.CHECK_STATS_FILE || "data/instagram-stats.json", "utf-8").catch(() => null); // CHECK_STATS_FILE : essais seulement
+  if (brut === null) return;
+  let d;
+  try { d = JSON.parse(brut); } catch (e) { return err(`instagram-stats.json : JSON invalide (${e.message})`); }
+  if (!d || typeof d !== "object" || typeof d.medias !== "object" || d.medias === null || Array.isArray(d.medias)) return err("instagram-stats.json : « medias » doit être un objet");
+  if (!d.lastUpdated || Number.isNaN(Date.parse(d.lastUpdated))) err("instagram-stats.json : lastUpdated absent ou invalide");
+  if (/access_token|EAA[A-Za-z0-9]{20,}|IGAA[A-Za-z0-9]{20,}|Bearer /.test(brut)) err("instagram-stats.json : contient ce qui ressemble à un jeton");
+  if (/"(username|from|text|email)"\s*:/.test(brut)) err("instagram-stats.json : donnée personnelle interdite (pseudo, texte de commentaire, e-mail)");
+  const types = ["story", "post", "carrousel", "reel"];
+  for (const [mediaId, m] of Object.entries(d.medias)) {
+    const nom = `instagram-stats.json : média ${mediaId}`;
+    if (!m || typeof m !== "object") { err(`${nom} : entrée invalide`); continue; }
+    if (!types.includes(m.type)) err(`${nom} : type « ${m.type} » inconnu`);
+    if (!m.releveLe || Number.isNaN(Date.parse(m.releveLe))) err(`${nom} : releveLe absent ou invalide`);
+    if (m.publieLe && Number.isNaN(Date.parse(m.publieLe))) err(`${nom} : publieLe invalide`);
+    if (m.heureParis != null && !(Number.isInteger(m.heureParis) && m.heureParis >= 0 && m.heureParis <= 23)) err(`${nom} : heureParis hors de 0 à 23`);
+    if (!m.metriques || typeof m.metriques !== "object") { err(`${nom} : metriques absentes`); continue; }
+    for (const [k, v] of Object.entries(m.metriques)) if (typeof v !== "number" || !Number.isFinite(v) || v < 0) err(`${nom} : métrique ${k} invalide (${v})`);
+  }
+  if (d.abonnes && !(Number.isInteger(d.abonnes.nombre) && d.abonnes.nombre >= 0)) err("instagram-stats.json : abonnes.nombre invalide");
+  console.log(`[check-data] instagram-stats.json : ${Object.keys(d.medias).length} média(s) mesuré(s).`);
+}
+
 // Un workflow GitHub avec une clé en double dans une étape est refusé en bloc (plus aucune mise à jour automatique)
 async function checkWorkflows() {
   const { readdir } = await import("fs/promises");
@@ -631,6 +656,7 @@ await checkActualites();
 await checkVerifications();
 await checkDirect();
 await secondaire(checkInstagramFile);
+await secondaire(checkStatsInstagram);
 await checkDeputes();
 await checkCandidats();
 await checkSenat();
