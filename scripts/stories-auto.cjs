@@ -146,13 +146,13 @@ function titresRecents(entrees, now) {
 const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
 
 /** Une entrée compte-t-elle dans le plafond des STORIES (hors sondages, posts et stories d'annonce de post) ? */
-const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && !e.annonceDe;
+const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && e.type !== "carousel" && !e.annonceDe && !e.contenu; // ni les contenus récurrents (scripts/contenus-auto.cjs)
 /** Posts du jour (UTC+2) : ceux de la file (et des brouillons) et ceux du registre des publications, sans double compte. */
 function nbPostsDuJour(entrees, registre, now) {
   const jour = jourUTC2(now);
   const ids = new Set();
-  for (const e of entrees || []) if (e.type === "post" && jourUTC2(e.cree) === jour) ids.add(e.id);
-  for (const e of registre?.entrees || []) if (e.type === "post" && e.statut === "publiee" && e.publieLe && jourUTC2(e.publieLe) === jour) ids.add(e.id);
+  for (const e of entrees || []) if ((e.type === "post" || e.type === "carousel") && jourUTC2(e.cree) === jour) ids.add(e.id);
+  for (const e of registre?.entrees || []) if ((e.type === "post" || e.type === "carousel") && e.statut === "publiee" && e.publieLe && jourUTC2(e.publieLe) === jour) ids.add(e.id);
   return ids.size;
 }
 /** Titres (rédigés, sujets, titres du registre) des entrées de la file et du registre sur les dernières `h` heures. */
@@ -607,14 +607,15 @@ function fluxAtom(entrees, now = new Date()) {
   const x = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const liste = [...(entrees || [])].sort((a, b) => String(b.cree).localeCompare(String(a.cree)));
   const corps = liste.map((e) => `  <entry>
-    <id>tag:hemicycle-france,2026:${e.type === "post" || e.type === "reel" ? e.type : "story"}:${x(e.id)}</id>
+    <id>tag:hemicycle-france,2026:${["post", "reel", "carousel"].includes(e.type) ? e.type : "story"}:${x(e.id)}</id>
     <title>${x(e.titre)}</title>
     <updated>${x(e.cree)}</updated>
     <link rel="enclosure" type="image/jpeg" href="${x(e.url_image)}"/>${e.url_video ? `
-    <link rel="enclosure" type="video/mp4" href="${x(e.url_video)}"/>` : ""}
+    <link rel="enclosure" type="video/mp4" href="${x(e.url_video)}"/>` : ""}${(Array.isArray(e.url_images) ? e.url_images.slice(1) : []).map((u) => `
+    <link rel="enclosure" type="image/jpeg" href="${x(u)}"/>`).join("")}
     <link rel="alternate" href="${x(e.url_image)}"/>
-    <category term="${e.type === "post" || e.type === "reel" ? e.type : "story"}"/>
-    <summary>${x(e.alt || e.titre)}</summary>${(e.type === "post" || e.type === "reel") && e.legende ? `
+    <category term="${["post", "reel", "carousel"].includes(e.type) ? e.type : "story"}"/>
+    <summary>${x(e.alt || e.titre)}</summary>${["post", "reel", "carousel"].includes(e.type) && e.legende ? `
     <content type="text">${x(e.legende)}</content>` : ""}
   </entry>`).join("\n");
   return `<?xml version="1.0" encoding="utf-8"?>

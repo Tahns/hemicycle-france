@@ -1,7 +1,9 @@
 name: Publier les stories
 on:
+  # Deux passages par heure, de 5 h à 21 h UTC (7 h – 23 h à Paris, été comme hiver) : les contenus à créneau (« Aujourd'hui à l'Assemblée » vers 8 h 30,
+  # « vote du jour » vers 12 h 30, « chiffre du jour » vers 19 h, carrousel du dimanche vers 18 h 30) sortent au plus tard 30 min après leur heure
   schedule:
-    - cron: "11 * * * *"
+    - cron: "11,41 5-21 * * *"
   # Après chaque relevé d'actualités : la story sort sans attendre le quart d'heure suivant
   workflow_run:
     workflows: ["Actualités"]
