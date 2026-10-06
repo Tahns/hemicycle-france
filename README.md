@@ -109,9 +109,8 @@ racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
 | Donnée | Fichier | Pourquoi |
 |---|---|---|
 | Condamnations judiciaires | `data/justice.json` | distinguer une condamnation définitive d'un appel demande un jugement humain ; une erreur serait diffamatoire |
-| Agenda (congrès, primaires, meetings, dates d'élection) | `data/meetings.json` | pas d'agenda officiel structuré ; événements passés masqués automatiquement, relecture rappelée tous les 30 jours (`verifieLe`) |
 
-Désormais automatiques : l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
+Désormais automatiques : l'agenda à venir (`scripts/fetch-evenements.js` : articles Wikipédia listés dans `data/evenements-sources.json` et projets de loi à date lointaine de l'ordre du jour de l'Assemblée ; les entrées `origine: "auto"` sont créées, mises à jour ou retirées après 2 relevés d'absence, les entrées saisies à la main dans `data/meetings.json` ne sont jamais touchées, et seuls les meetings de partis restent à saisir à la main quand on en connaît), l'inflation (série Insee du glissement annuel de l'IPC), le déficit public
 (Eurostat, notification de la France), les chefs de parti (vérifiés toutes les 15 minutes dans l'infobox
 Wikipédia de chaque parti ; un changement est appliqué puis signalé pour relire l'intitulé de la
 fonction) et le thème des votes (commission saisie au fond du dossier législatif).
