@@ -2,11 +2,16 @@ name: Santé des données
 on:
   schedule:
     - cron: "23 6 * * 1"
+    # Toutes les 2 heures : la mise à jour des données a-t-elle tourné récemment ? (job « passage »)
+    - cron: "37 */2 * * *"
   workflow_dispatch: {}
 permissions:
   contents: read
+  actions: read
 jobs:
   sante:
+    # Le contrôle hebdomadaire ne tourne pas à chaque passage de la vérification de la mise à jour (toutes les 2 h)
+    if: github.event.schedule != '37 */2 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -29,3 +34,31 @@ jobs:
         if: steps.controles.outputs.probleme == '1'
         run: |
           { echo "Le contrôle hebdomadaire de santé du $(date -u +%Y-%m-%d) signale un problème."; echo; cat sante.md; } >> "$GITHUB_STEP_SUMMARY"
+
+  # Le dernier passage réussi de « Mise à jour automatique des données » date-t-il de moins de 2 h ?
+  # Sinon : alerte écrite dans le résumé de l'exécution (onglet Actions) et annotation d'avertissement ; pas de ticket ni d'e-mail.
+  passage:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '37 */2 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Dernier passage de la mise à jour des données
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEUIL_MINUTES: "120"
+        run: |
+          url="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/update-data.yml/runs?status=success&per_page=1"
+          dernier=$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$url" | jq -r '.workflow_runs[0].updated_at // empty') || dernier=""
+          if [ -z "$dernier" ]; then
+            message="Aucun passage réussi de la mise à jour des données n'a pu être lu (aucune exécution réussie, ou l'API de GitHub n'a pas répondu)."
+          else
+            age=$(( ( $(date +%s) - $(date -d "$dernier" +%s) ) / 60 ))
+            if [ "$age" -gt "$SEUIL_MINUTES" ]; then
+              message="Le dernier passage réussi de la mise à jour des données date du $dernier (il y a $age minutes, seuil : $SEUIL_MINUTES). Les données du site risquent d'être en retard : voir l'onglet Actions, workflow « Mise à jour automatique des données »."
+            else
+              echo "Mise à jour des données : dernier passage réussi il y a $age minutes (seuil $SEUIL_MINUTES) : tout va bien."
+              exit 0
+            fi
+          fi
+          echo "::warning::$message"
+          { echo "### Alerte : mise à jour des données en retard"; echo; echo "$message"; } >> "$GITHUB_STEP_SUMMARY"

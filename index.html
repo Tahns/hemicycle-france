@@ -722,6 +722,8 @@
   .actu-picto{overflow:hidden;}
   [data-theme="sombre"] .actu-picto{color:color-mix(in srgb, var(--c) 55%, #fff);}
   .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
+  .actu-photo{overflow:hidden; border-radius:var(--r-3); background:var(--border-soft); box-shadow:0 0 0 1px var(--border-soft);}
+  .actu-photo img{display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit;}
   .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
   .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
   .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
@@ -2835,6 +2837,7 @@
         <li><b>Sénateurs :</b> liste officielle (<a href="https://data.senat.fr" target="_blank" rel="noopener">data.senat.fr</a>) et vote de chacun lu dans l'analyse détaillée des scrutins publics ; pour chaque texte, le décompte nom par nom est recoupé avec le total officiel.</li>
         <li><b>Gouvernement et ordre du jour de l'Assemblée :</b> <a href="https://data.assemblee-nationale.fr" target="_blank" rel="noopener">open data de l'Assemblée nationale</a> (mandats des membres du Gouvernement, agenda des séances publiques, feuilles de présence des commissions permanentes), Licence Ouverte.</li>
         <li><b>Portraits :</b> photos officielles de l'Assemblée nationale et du Sénat pour les parlementaires ; pour les autres personnalités, image principale de leur article Wikipédia lorsqu'elle est sous licence libre sur <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>, hébergée sur le site.<span id="credits-portraits"></span></li>
+        <li><b>Illustrations des sujets d'actualité :</b> photos libres de bâtiments d'institutions (Assemblée, Sénat, Élysée, Matignon, tribunaux, ministères), choisies selon le thème du sujet sur <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> et hébergées sur le site ; jamais de photo de presse ni de personne dans une affaire (un sujet de justice met en scène un tribunal neutre ou un pictogramme).<span id="credits-vignettes"></span></li>
         <li><b>Logos des partis :</b> fichiers libres de <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (domaine public, sauf le logo de Renaissance : CC BY-SA 4.0, Stéphane Séjourné, vectorisation Valo139), hébergés sur le site. Les logos restent des marques de leurs partis ; ils ne sont montrés qu'à titre d'identification.</li>
         <li><b>Photos des élus :</b> photos officielles de l'Assemblée nationale et du Sénat, réduites et hébergées sur le site.</li>
         <li><b>Candidatures à la présidentielle :</b> <a href="https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027" target="_blank" rel="noopener">page Wikipédia des candidatures</a> (licence CC BY-SA 4.0), chaque annonce renvoyant à l'article de presse qui la rapporte.</li>
@@ -3953,6 +3956,8 @@ function updateBreakdown(){
   if(loi.dossierTitre) lignes.push(["Dossier législatif",
     `<a href="${lien(loi.dossierUrl)}" target="_blank" rel="noopener">${esc(loi.dossierTitre)}</a> · <button type="button" class="lien-bouton" id="voir-dossier">tous les votes sur ce texte</button>`]);
   if(loi.groupeMoteur) lignes.push(["Contexte", esc(loi.groupeMoteur)]);
+  // Flux Atom du texte (feeds/loi/, généré en CI) : pour les textes votés dans leur ensemble ou récents
+  if(loi.dossierRef && (loi.typeVote !== "SPO" || Date.now() - Date.parse(loi.dateISO) < 90*864e5)) lignes.push(["Alertes", `<a href="feeds/loi/${encodeURIComponent(loi.dossierRef)}.xml" type="application/atom+xml" rel="alternate" target="_blank">S'abonner (RSS)</a> aux prochains votes sur ce texte`]);
   // Parcours du texte : vote du Sénat sur l'ensemble du même texte (data/navette.json, chargé à la demande)
   if(loi.dossierRef){
     if(NAVETTE === null){ NAVETTE = false; lireJSON("data/navette.json").then(d=>{ NAVETTE = d?.textes || {}; if(currentLoi() === loi) updateBreakdown(); }); }
@@ -4585,6 +4590,7 @@ function renderProbabilites(){
 
 /* ---------- Actualités : titres de la rubrique politique des médias (data/actualites.json, toutes les 2 h) ---------- */
 let ACTUALITES = null, actuFiltre = "recoupes";
+let VIGNETTES = {}; // data/vignettes.json : photos libres d'institutions par thème (clé -> { chemin, alt, auteur, licence, source… })
 function ilYA(iso){
   const min = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 6e4));
   if(min < 1) return "à l'instant";
@@ -4647,6 +4653,13 @@ function visuelActu(s){
     const p = ill.personnes[0];
     return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
   }
+  // Photo libre de l'institution du thème (jamais une personne) ; sans photo : pictogramme. `vignette` : clé calculée par scripts/vignettes-cle.js
+  // (null = pictogramme, ex. justice avec une personne nommée) ; fichier d'actualités plus ancien : le thème fait office de clé
+  const cleV = "vignette" in ill ? ill.vignette : ill.theme;
+  const photoV = cleV && VIGNETTES[cleV];
+  if(photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "")){
+    return `<div class="actu-visuel actu-photo"><img src="${esc(photoV.chemin)}" alt="${esc(photoV.alt || "")}" title="${esc(`${photoV.lieu || ""} — photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`)}" loading="lazy" decoding="async" width="160" height="160"></div>`;
+  }
   // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
   const long = !/\s/.test(theme[2]) && theme[2].length > 9;
   return `<div class="actu-visuel actu-picto${long ? " long" : ""}" style="--c:${theme[0]}" role="img" aria-label="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
@@ -4692,6 +4705,9 @@ function sujetsHorsDossiers(sujets){
 let creditsPortraits = null;
 async function renderCreditsPortraits(){
   if(creditsPortraits) return;
+  const vign = Object.values((await lireJSON("data/vignettes.json"))?.vignettes || {}).filter(v=> v.chemin && v.licence);
+  if(vign.length) document.getElementById("credits-vignettes").innerHTML = ` ${t("Crédits des images :")} ${vign.map(v=>
+    `<a href="${lien(v.source)}" target="_blank" rel="noopener">${esc(v.lieu)}</a> (${esc(v.auteur || "auteur inconnu")}, ${esc(v.licence)})`).join(" ; ")}.`;
   creditsPortraits = (await lireJSON("data/portraits.json"))?.portraits || {};
   const liste = Object.entries(creditsPortraits).filter(([, p])=>p.fichier);
   if(liste.length) document.getElementById("credits-portraits").innerHTML = ` Auteurs et licences : ${liste.map(([nom, p])=>
@@ -6735,6 +6751,8 @@ function renderDeputeFiche(d){
     }).join("") : `<p class="no-result-msg">Aucun vote de ce type depuis sa prise de fonction.</p>`}</div>`;
 
   document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", espaceBoutonDepute(d));
+  // Flux Atom du député (feeds/depute/, généré en CI) : alerte sans compte, dans n'importe quel lecteur de flux
+  document.querySelector("#depute-fiche .depute-actions").insertAdjacentHTML("beforeend", `<a href="feeds/depute/${encodeURIComponent(d.id)}.xml" type="application/atom+xml" rel="alternate" target="_blank">S'abonner (RSS)</a>`);
   document.getElementById("depute-retour").addEventListener("click", fermerDepute);
   afficherParcoursCommissions(d);
   photoSecours(document.getElementById("depute-fiche"));
@@ -8024,11 +8042,12 @@ async function lireJSON(url){
 
 // Petits fichiers : affichés immédiatement
 async function loadPetitesDonnees(){
-  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites, quiz, direct] = await Promise.all([
+  const [indic, groupes, sondages, dirigeants, justice, meetings, candidats, probas, actualites, quiz, direct, vignettes] = await Promise.all([
     lireJSON("data/indicateurs.json"), lireJSON("data/groupes.json"), lireJSON("data/sondages.json"),
     lireJSON("data/dirigeants.json"), lireJSON("data/justice.json"), lireJSON("data/meetings.json"),
     lireJSON("data/candidats.json"), lireJSON("data/probabilites.json"), lireJSON("data/actualites.json"), lireJSON("data/quiz.json"),
     lireJSON("data/direct.json"), // fichier optionnel : absent = aucun bandeau
+    lireJSON("data/vignettes.json"), // fichier optionnel : absent = pictogrammes
   ]);
   if(candidats?.candidats){ CANDIDATURES = candidats.candidats; CANDIDATURES_MAJ = candidats.lastUpdated; }
   if(indic?.indicateurs?.length){ INDICATEURS = indic.indicateurs; INDICATEURS_MAJ = indic.lastUpdated; }
@@ -8037,6 +8056,7 @@ async function loadPetitesDonnees(){
   if(probas?.candidats?.length) PROBAS = probas;
   if(actualites?.sujets) ACTUALITES = actualites;
   if(direct?.evenements) DIRECT = direct;
+  if(vignettes?.vignettes) VIGNETTES = vignettes.vignettes;
   if(quiz?.questions) QUIZ_PERSO = quiz.questions;
   if(dirigeants?.dirigeants) LEADERS = dirigeants.dirigeants;
   if(justice?.condamnations) CONDAMNATIONS = justice.condamnations
