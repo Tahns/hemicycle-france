@@ -29,3 +29,7 @@ Données officielles, chaque heure
   une **story vidéo** pour un dossier ou un « direct » (`url_video`, en plus de `url_image`) et un **Reel** par post, publié après lui. Exemple : `modeles/reel-loi.mp4`. Détails : `docs/PUBLICATION-AUTO.md`.
 
 Aperçus des modèles : `modeles/post-date.jpg`, `modeles/post-loi.jpg` (posts) et `modeles/story-annonce-post.jpg` (story d'annonce).
+
+## Contenus récurrents et carrousels
+
+`scripts/contenus-auto.cjs` produit chaque jour, depuis nos seules données officielles, des stories à heure fixe : **Aujourd'hui à l'Assemblée** (8 h 30), **Le vote du jour** (12 h 30), **Comprendre** (une notion par semaine, samedi 10 h), **Le chiffre du jour** (19 h), et des posts **carrousels** : **Une loi expliquée en 5 images** (17 h 30) et **Ce qu'il faut retenir cette semaine** (dimanche 18 h 30). Heures réglables dans `data/stories-config.json` (`creneaux`). Aperçus : `modeles/contenu-aujourdhui.jpg`, `modeles/contenu-vote-jour.jpg`, `modeles/contenu-comprendre.jpg`, `modeles/contenu-chiffre-jour.jpg`, `modeles/carrousel-loi-1.jpg` à `-5.jpg`, `modeles/carrousel-hebdo-1.jpg` à `-7.jpg`. Détails : `docs/PUBLICATION-AUTO.md`.

@@ -804,13 +804,16 @@ STORY_PLUS.meeting = async (ctx, info)=>{
 // Stories d'actualité : modules séparés, chargés ensemble (A « à la une » et E « en direct » : stories-actu ; B « en bref » et D « dossier » : stories-actu-liste ;
 // C « le chiffre », F « face à face » et G « date à retenir » : stories-actu-fait). Chacun remplit STORY_PLUS ; les définitions ci-dessus ne servent que de secours.
 const STORY_ACTU_TYPES = ["actualite", "actualites", "chiffre", "facea", "date"];
+const STORY_CONTENUS_TYPES = ["aujourdhui", "vote-jour", "comprendre", "chiffre-jour", "diapo"];
 async function dessinerStory(type, info){
   if(STORY_ACTU_TYPES.includes(type)) await Promise.all(["stories-actu", "stories-actu-liste", "stories-actu-fait"].map(chargerModule));
   // Publications Instagram automatiques : « post » (image de fil 1080 × 1350) et « annonce-post » (story qui l'annonce), dessinées d'après une fiche (js/stories-post.js)
   if(type === "post" || type === "annonce-post") await chargerModule("stories-post");
+  // Contenus récurrents (scripts/contenus-auto.cjs) : stories « aujourd'hui à l'Assemblée », « vote du jour », « comprendre », « chiffre du jour » et images de carrousel 1080 × 1350 (« diapo »)
+  if(STORY_CONTENUS_TYPES.includes(type)) await chargerModule("stories-contenus");
   await Promise.all(["600 60px Newsreader", "700 60px Newsreader", "400 30px \"Public Sans\"", "600 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
-  c.width = STORY.L; c.height = type === "post" ? 1350 : STORY.H;
+  c.width = STORY.L; c.height = type === "post" || type === "diapo" ? 1350 : STORY.H;
   const ctx = c.getContext("2d");
   const { L, marge, bas } = STORY, largeur = L - 2 * marge;
   let y, nom = "hemicycle-france";

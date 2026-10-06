@@ -272,7 +272,9 @@ function dimensionsJpeg(buf) {
 }
 
 // File de stories ET de posts Instagram automatiques (fichier optionnel, écrit par scripts/stories-auto.cjs).
-// type « story » : image 1080 × 1920 ; type « post » : image de fil 1080 × 1350 + légende ; une story d'annonce porte « annonceDe » (id du post).
+// type « story » : image 1080 × 1920 ; type « post » : image de fil 1080 × 1350 + légende ; une story d'annonce porte « annonceDe » (id du post) ;
+// type « carousel » (scripts/contenus-auto.cjs) : 2 à 10 images 1080 × 1350 (url_images : <id>.jpg, <id>-2.jpg…), légende (3 à 5 hashtags), textes alternatifs ;
+// champ « contenu » (contenus récurrents) : pasAvant et expire (ISO, créneau entre 7 h et 23 h à Paris).
 async function checkInstagramFile() {
   const d = JSON.parse(await readFile("data/instagram-file.json", "utf-8").catch(() => "null"));
   if (!d) return;
@@ -280,13 +282,50 @@ async function checkInstagramFile() {
   const stories = {}, posts = {}, videos = {}, ids = new Set();
   for (const e of d.entrees) {
     const nom = `instagram-file.json : entrée ${e.id || "?"}`;
-    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || !["story", "post", "reel"].includes(e.type)) { err(`${nom} incomplète (type « story », « post » ou « reel » attendu)`); continue; }
+    if (!/^[0-9a-f]{12}$/.test(e.id || "") || !e.titre || !["story", "post", "reel", "carousel"].includes(e.type)) { err(`${nom} incomplète (type « story », « post », « carousel » ou « reel » attendu)`); continue; }
     if (ids.has(e.id)) err(`${nom} en double`);
     ids.add(e.id);
     const t = Date.parse(e.cree);
     if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
+    // Contenu récurrent à créneau : pasAvant / expire cohérents, créneau dans la plage 7 h – 23 h (Paris)
+    if (e.contenu !== undefined) {
+      if (typeof e.contenu !== "string" || !e.contenu) err(`${nom} : champ « contenu » invalide`);
+      const pas = Date.parse(e.pasAvant), exp = Date.parse(e.expire);
+      if (isNaN(pas) || isNaN(exp) || exp <= pas) err(`${nom} : pasAvant et expire (dates ISO, expire après pasAvant) sont obligatoires pour un contenu récurrent`);
+      else {
+        const hp = Number(new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", hourCycle: "h23" }).format(pas));
+        if (hp < 7 || hp >= 23) err(`${nom} : créneau à ${hp} h (Paris) : toujours entre 7 h et 23 h`);
+      }
+      if (e.donneesPropres !== true) err(`${nom} : un contenu récurrent n'utilise que des données propres (donneesPropres: true)`);
+    }
+    if (e.type === "carousel") {
+      posts[jour] = (posts[jour] || 0) + 1;
+      const urls = e.url_images;
+      if (!Array.isArray(urls) || urls.length < 2 || urls.length > 10) err(`${nom} : un carrousel compte de 2 à 10 images (url_images)`);
+      else {
+        urls.forEach((u, i) => { if (u !== `https://tahns.github.io/hemicycle-france/instagram/auto/${i === 0 ? e.id : `${e.id}-${i + 1}`}.jpg`) err(`${nom} : url_images[${i}] doit pointer sur instagram/auto/${i === 0 ? e.id : `${e.id}-${i + 1}`}.jpg`); });
+        if (!Array.isArray(e.alts) || e.alts.length !== urls.length || !e.alts.every((a) => typeof a === "string" && a.length > 0 && a.length <= 1000)) err(`${nom} : un texte alternatif (1 000 caractères au plus) par image est obligatoire (alts)`);
+        if (Date.now() - t < 2 * 24 * 36e5) {
+          for (let i = 1; i < urls.length; i++) {
+            const f = `instagram/auto/${e.id}-${i + 1}.jpg`;
+            if (!existsSync(f)) { err(`${nom} : image absente (${f})`); continue; }
+            const buf = await readFile(f), dim = dimensionsJpeg(buf);
+            if (!dim || dim.l !== 1080 || dim.h !== 1350) err(`${nom} : ${f} doit faire 1080×1350 (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
+            if (buf.length > 8 * 1024 * 1024) err(`${nom} : ${f} dépasse 8 Mo`);
+          }
+        }
+      }
+      const l = e.legende;
+      if (typeof l !== "string" || l.length < 20 || l.length > 2200) err(`${nom} : légende de carrousel absente ou hors limites (20 à 2 200 caractères)`);
+      else {
+        const n = (l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length;
+        if (n < 3 || n > 5) err(`${nom} : ${n} hashtag(s) dans la légende (3 à 5 attendus)`);
+        if (/github\.io|hemicycle-france/i.test(l)) err(`${nom} : la légende ne doit pas contenir de lien du site`);
+        if (!l.includes("@hemicyclefrance")) err(`${nom} : la légende doit citer @hemicyclefrance`);
+      }
+    }
     // Vidéo (facultative sur une story, obligatoire sur un Reel) : instagram/auto/<id>.mp4, voir scripts/videos-auto.cjs
     if (e.type === "reel" && !e.url_video) err(`${nom} : un Reel exige url_video`);
     if (e.url_video !== undefined && e.url_video !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.mp4`) err(`${nom} : url_video doit être en https et pointer sur instagram/auto/${e.id}.mp4`);
@@ -310,8 +349,8 @@ async function checkInstagramFile() {
     } else if (e.annonceDe) {
       if (!/^[0-9a-f]{12}$/.test(e.annonceDe)) err(`${nom} : annonceDe invalide`);
       else if (!d.entrees.some((p) => p.id === e.annonceDe && p.type === "post")) err(`${nom} : annonceDe ne désigne aucun post de la file`);
-    } else if (e.type !== "reel") {
-      stories[jour] = (stories[jour] || 0) + 1;
+    } else if (e.type !== "reel" && e.type !== "carousel" && !e.contenu) {
+      stories[jour] = (stories[jour] || 0) + 1; // ni les annonces, ni les contenus récurrents à créneau
     }
     // Les images de plus de 3 jours sont supprimées par stories-auto.cjs (IMAGE_JOURS) : on n'exige que celles de moins de 2 jours
     if (e.url_video && Date.now() - t < 2 * 24 * 36e5) {
@@ -330,16 +369,19 @@ async function checkInstagramFile() {
         const buf = await readFile(f);
         if (buf[0] !== 0xff || buf[1] !== 0xd8) err(`${nom} : ${f} n'est pas un JPEG`);
         else {
-          const dim = dimensionsJpeg(buf), attendu = e.type === "post" ? [1080, 1350] : [1080, 1920];
+          const dim = dimensionsJpeg(buf), attendu = e.type === "post" || e.type === "carousel" ? [1080, 1350] : [1080, 1920];
           if (!dim || dim.l !== attendu[0] || dim.h !== attendu[1]) err(`${nom} : ${f} doit faire ${attendu[0]}×${attendu[1]} (${dim ? `${dim.l}×${dim.h}` : "dimensions illisibles"})`);
         }
         if (buf.length > 8 * 1024 * 1024) err(`${nom} : ${f} dépasse 8 Mo`);
       }
     }
   }
-  for (const [j, n] of Object.entries(stories)) if (n > 4) err(`instagram-file.json : ${n} stories le ${j} (4 au maximum par jour, hors annonces de post)`);
-  for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour)`);
   const config = JSON.parse(await readFile("data/stories-config.json", "utf-8").catch(() => "{}"));
+  const maxStories = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 ? config.maxParJour : 4;
+  for (const [j, n] of Object.entries(stories)) if (n > maxStories) err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
+  for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour, carrousels compris)`);
+  await checkCreneaux(config);
+  await checkModelesContenus();
   const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;
   for (const [j, n] of Object.entries(videos)) if (n > Math.max(maxVideos, 6)) err(`instagram-file.json : ${n} vidéos le ${j} (videosMax : ${maxVideos})`);
   if (d.entrees.length > 30) err("instagram-file.json : plus de 30 entrées");
@@ -353,6 +395,41 @@ async function checkInstagramFile() {
     }
   }
   console.log(`[check-data] instagram-file.json : ${d.entrees.length} entrée(s) (stories, posts, Reels et annonces).`);
+}
+
+// Créneaux des contenus récurrents (data/stories-config.json, « creneaux ») : heures valides, entre 7 h et 22 h 30, 60 min d'écart d'un même jour
+async function checkCreneaux(config) {
+  const c = config.creneaux;
+  if (c === undefined) return;
+  if (!c || typeof c !== "object" || Array.isArray(c)) return err("stories-config.json : « creneaux » doit être un objet { type: { heure: \"HH:MM\", jours?: [1..7] } }");
+  const connus = ["aujourdhui", "vote-jour", "comprendre", "chiffre-jour", "carrousel-loi", "carrousel-hebdo"];
+  const parJour = {};
+  for (const [nom, v] of Object.entries(c)) {
+    if (!connus.includes(nom)) { err(`stories-config.json : créneau « ${nom} » inconnu (${connus.join(", ")})`); continue; }
+    if (v === false) continue;
+    const m = /^(\d{1,2}):(\d{2})$/.exec(v?.heure || "");
+    if (!m || Number(m[1]) > 23 || Number(m[2]) > 59) { err(`stories-config.json : créneau « ${nom} » : heure « HH:MM » invalide`); continue; }
+    const min = Number(m[1]) * 60 + Number(m[2]);
+    if (min < 7 * 60 || min > 22 * 60 + 30) err(`stories-config.json : créneau « ${nom} » à ${v.heure} : toujours entre 07:00 et 22:30 (Paris)`);
+    const jours = v.jours === undefined ? [1, 2, 3, 4, 5, 6, 7] : v.jours;
+    if (!Array.isArray(jours) || !jours.length || !jours.every((j) => Number.isInteger(j) && j >= 1 && j <= 7)) { err(`stories-config.json : créneau « ${nom} » : jours attendus entre 1 (lundi) et 7 (dimanche)`); continue; }
+    for (const j of jours) (parJour[j] ||= []).push({ nom, min });
+  }
+  // Deux créneaux du même jour trop proches ne sont pas une erreur (le second est repoussé à 60 min par scripts/contenus-auto.cjs), mais deux heures identiques le sont : réglage probablement erroné
+  for (const [j, l] of Object.entries(parJour)) {
+    const vus = new Set();
+    for (const x of l) { if (vus.has(x.min)) err(`stories-config.json : deux créneaux à la même heure le jour ${j}`); vus.add(x.min); }
+  }
+}
+
+// Aperçus des contenus récurrents (instagram/modeles/) : stories 1080 × 1920 (« contenu-*.jpg »), images de carrousel 1080 × 1350 (« carrousel-*.jpg »)
+async function checkModelesContenus() {
+  for (const f of (await readdir("instagram/modeles").catch(() => [])).filter((x) => /^(contenu|carrousel)-.*\.jpg$/.test(x))) {
+    const buf = await readFile(`instagram/modeles/${f}`);
+    const dim = dimensionsJpeg(buf), attendu = f.startsWith("carrousel-") ? [1080, 1350] : [1080, 1920];
+    if (!dim || dim.l !== attendu[0] || dim.h !== attendu[1]) err(`instagram/modeles/${f} doit faire ${attendu[0]}×${attendu[1]} (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
+    if (buf.length > 2 * 1024 * 1024) err(`instagram/modeles/${f} : un exemple doit rester sous 2 Mo`);
+  }
 }
 
 async function checkQuiz() {
