@@ -204,6 +204,7 @@ async function checkActualites() {
         if (pm === plat(t)) err(`${nom} : titrePropre identique à un titre de presse`);
         for (let k = 0; k + 5 <= tm.length; k++) if (` ${pm} `.includes(` ${tm.slice(k, k + 5).join(" ")} `)) { err(`${nom} : titrePropre reprend un segment de 5 mots d'un titre de presse`); break; }
       }
+      if (/procédure judiciaire en cours|procédure en cours/i.test(t)) err(`${nom} : titrePropre affirme une procédure en cours (aucune juridiction vérifiable)`);
       if (/\$content|\{\{|\$\{|%[a-z_]+%|TitleNoTags/i.test(t)) err(`${nom} : titrePropre issu d'un gabarit de flux cassé`);
       const procedure = (s.articles || []).some((a) => /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement|\baffaire\b|plainte/i.test(a.titre || ""));
       if (procedure && (s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne dans une affaire judiciaire (présomption d'innocence)`);
