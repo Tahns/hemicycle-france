@@ -125,6 +125,12 @@ jobs:
         run: node scripts/appliquer-compte.js
         continue-on-error: true
 
+      # Mesure d'audience facultative (désactivée tant que data/site-config.json n'en configure pas) : balise et CSP d'index.html
+      - name: Mesure d'audience (CSP et balise d'index.html selon data/site-config.json)
+        id: analytics
+        run: node scripts/appliquer-analytics.js
+        continue-on-error: true
+
       - name: Contrôler la cohérence des données avant publication
         run: node scripts/check-data.js
       # Pages d'aperçu pour le partage (v/ votes clés, d/ députés) : titres et images tirés du site lui-même
@@ -159,10 +165,17 @@ jobs:
         run: node scripts/photos-hd.cjs
         continue-on-error: true
 
+      # Référencement : pages statiques (loi/, candidat/, parti/), plan du site, robots.txt, flux Atom des actualités, adresse du site
+      # dans index.html (data/site-config.json). Après les photos : les pages ne citent que des photos présentes sur le site.
+      - name: Pages pour les moteurs de recherche, plan du site et flux Atom
+        id: pages
+        run: node scripts/generer-pages.js
+        continue-on-error: true
+
       # Seulement s'il y a du nouveau (les fichiers dont seul l'horodatage changerait ne sont pas réécrits, voir garde.js) ;
       # échec du push = échec visible de l'exécution (scripts/commit-push.sh)
       - name: Committer les changements s'il y en a
-        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ instagram/auto instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml robots.txt feed.xml index.html
+        run: scripts/commit-push.sh "Mise à jour automatique des données ($(date -u +%Y-%m-%d))" data/ instagram/auto instagram/file.atom v/ d/ s/ p/ photos/ icons/partage.jpg icons/partis/ sitemap.xml sitemap-*.xml robots.txt feed.xml actualites.atom loi/ candidat/ parti/ index.html
 
       - name: Vérifier la fraîcheur des données
         id: fraicheur
@@ -176,7 +189,7 @@ jobs:
 
       # Alerte : écrite dans le résumé de l'exécution (onglet Actions), sans ticket ni e-mail
       - name: Signaler un problème dans le résumé de l'exécution
-        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.verifications.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.evenements.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure' || steps.direct.outcome == 'failure' || steps.story.outcome == 'failure' || steps.photoshd.outcome == 'failure')
+        if: always() && (failure() || steps.scrutins.outcome == 'failure' || steps.insee.outcome == 'failure' || steps.budget.outcome == 'failure' || steps.sondages.outcome == 'failure' || steps.compte.outcome == 'failure' || steps.probabilites.outcome == 'failure' || steps.veille.outcome == 'failure' || steps.candidats.outcome == 'failure' || steps.dirigeants.outcome == 'failure' || steps.activite.outcome == 'failure' || steps.lobbying.outcome == 'failure' || steps.elections.outcome == 'failure' || steps.navette.outcome == 'failure' || steps.senat.outcome == 'failure' || steps.communes.outcome == 'failure' || steps.verifications.outcome == 'failure' || steps.fraicheur.outcome == 'failure' || steps.sources.outcome == 'failure' || steps.partage.outcome == 'failure' || steps.senateurs.outcome == 'failure' || steps.agenda.outcome == 'failure' || steps.evenements.outcome == 'failure' || steps.photos.outcome == 'failure' || steps.logos.outcome == 'failure' || steps.direct.outcome == 'failure' || steps.story.outcome == 'failure' || steps.photoshd.outcome == 'failure' || steps.pages.outcome == 'failure' || steps.analytics.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -208,6 +221,8 @@ jobs:
             [ "${{ steps.sondages.outcome }}" = "failure" ] && echo "- **Sondages** : lecture de la liste Wikipédia impossible ou enquêtes écartées par les contrôles."
             [ "${{ steps.direct.outcome }}" = "failure" ] && echo "- **Bandeau En direct** : détection impossible (ancien bandeau conservé)."
             [ "${{ steps.story.outcome }}" = "failure" ] && echo "- **Story automatique** : génération de l'image impossible (rien ajouté à la file)."
+            [ "${{ steps.pages.outcome }}" = "failure" ] && echo "- **Pages de référencement** : au moins une page n'a pas pu être produite (sans source, titre en double…) ou la génération a échoué ; voir le journal (les autres pages et le plan du site sont publiés)."
+            [ "${{ steps.analytics.outcome }}" = "failure" ] && echo "- **Mesure d'audience** : data/site-config.json invalide (fournisseur « goatcounter » ou « plausible » et nom du site) ; la mesure reste désactivée."
             [ "${{ steps.photoshd.outcome }}" = "failure" ] && echo "- **Photos HD** : téléchargement impossible (les stories utilisent la vignette)."
             [ -s fraicheur.txt ] && cat fraicheur.txt
             [ -s sources.txt ] && cat sources.txt

@@ -32,7 +32,9 @@ automatiquement, toutes les 15 minutes, à partir de sources officielles.
 | Pages d'aperçu des sénateurs et du dernier sondage (partage, moteurs de recherche) | `partage.cjs` | `data/senateurs.json`, `data/sondages.json` | `s/`, `p/` |
 | Fichier des nouveautés pour les alertes (derniers votes clés, vote de chaque député, dernier sondage) | `partage.cjs` | `data/deputes.json`, `data/sondages.json` | `data/alertes.json` |
 | Flux RSS des 40 derniers votes clés | `partage.cjs` | `data/lois.json` | `feed.xml` |
-| Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg`, `sitemap.xml` |
+| Pages statiques par dossier législatif, candidat et groupe politique ; plan du site ; `robots.txt` ; flux Atom des actualités ; adresse du site dans la tête d'`index.html` | `generer-pages.js` | `data/lois.json`, `candidats.json`, `groupes.json`, `dirigeants.json`, `portraits.json`, `actualites.json`, `site-config.json` | `loi/`, `candidat/`, `parti/`, `sitemap.xml`, `robots.txt`, `actualites.atom` |
+| Mesure d'audience sans cookie (désactivée par défaut) | `appliquer-analytics.js` | `data/site-config.json` (`analytics`) | balise et CSP d'`index.html` |
+| Pages statiques pour le partage et Google (titre, image, contenu lisible sans JavaScript) | `partage.cjs` | le site lui-même (`index.html?carte`) | `v/<numéro>.html` + `.jpg` (votes clés), `d/<PA…>.html` (députés), `icons/partage.jpg` |
 | File de stories Instagram automatiques : au plus un sujet d'actualité par exécution, image 1080 × 1920 dessinée par le site lui-même (`dessinerStory("actualite", indice)`), voir ci-dessous | `stories-auto.cjs` (Playwright, étape continue-on-error de `actualites.yml` et `update-data.yml`) | `data/actualites.json`, `data/direct.json` | `data/instagram-file.json`, `instagram/auto/<id>.jpg` |
 | Jours fériés (alerte « vote un jour férié ») | calculés dans la page | — | — |
 
@@ -72,20 +74,17 @@ Vidéos (désactivées par défaut, `"videos": true` et `"videosMax"` dans `data
 Test : `node tests/videos-auto.test.mjs`. Voir `docs/PUBLICATION-AUTO.md`.
 Essai local : `NODE_PATH=… CHROMIUM_PATH=/chemin/chrome STORIES_AUTO_MAINTENANT=2026-10-02T13:30:00Z node scripts/stories-auto.cjs`.
 
-## Nom de domaine (optionnel)
+## Nom de domaine (optionnel) et référencement
 
-1. Acheter le domaine (par ex. `hemicycle-france.fr`) chez un registraire (OVH, Gandi…).
-2. Chez le registraire, ajouter les enregistrements DNS de GitHub Pages :
-   `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   (et `CNAME www` vers `tahns.github.io`).
-3. Dans GitHub : *Settings → Pages → Custom domain*, saisir le domaine, puis cocher *Enforce HTTPS*.
-   GitHub ajoute un fichier `CNAME` au dépôt.
-4. C'est tout : au prochain passage du workflow, `scripts/partage.cjs` lit `CNAME` et met à jour
-   toutes les adresses (pages d'aperçu, plan du site, `robots.txt`, balises `og:` d'`index.html`).
+Le site fonctionne avec l'adresse GitHub Pages actuelle. L'adresse publique tient en **une seule variable**, `baseUrl` dans
+`data/site-config.json` : elle sert aux adresses canoniques, au plan du site, aux flux et aux balises de partage.
+Pas à pas pour acheter un domaine, régler le DNS et changer `baseUrl` : voir `docs/DOMAINE.md`.
 
-Référencement : `sitemap.xml` liste l'accueil, les 246 votes clés et les 577 députés. À déclarer une fois
-dans Google Search Console (propriété = adresse du site). `robots.txt` n'est lu par les moteurs qu'à la
-racine d'un domaine : il ne sert qu'avec un nom de domaine propre.
+Référencement (`scripts/generer-pages.js`, étape `continue-on-error` de `update-data.yml`) : pages statiques lisibles sans JavaScript
+`loi/<titre>-<n>/`, `candidat/<nom>/`, `parti/<nom>/` (et leurs listes `loi/`, `candidat/`, `parti/`), `sitemap.xml` (accueil, votes clés,
+députés, sénateurs, sondage et pages ci-dessus ; un fichier par type au-delà de 5 000 adresses), `robots.txt`, flux Atom `actualites.atom`
+et données structurées de l'accueil. `robots.txt` n'est lu par les moteurs qu'à la racine d'un domaine : il ne sert qu'avec un nom de
+domaine propre ; d'ici là, déclarer `sitemap.xml` dans Google Search Console. Mesure d'audience facultative (désactivée) : `docs/ANALYTICS.md`.
 
 ## Protection contre les attaques (DDoS, spam)
 

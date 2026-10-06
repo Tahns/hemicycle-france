@@ -16,6 +16,8 @@ import { verifierPortraits } from "./check-portraits.js";
 import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 import { controlerFichierJson } from "./controles-json.js";
+import { controlerPages } from "./controler-pages.js";
+import { HOTE_ANALYTIQUE } from "./appliquer-analytics.js";
 
 const GROUPES = ["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"];
 const erreurs = [];
@@ -656,6 +658,8 @@ await checkPresidents();
 }
 await secondaire(checkI18n);
 await checkCompte();
+// Pages statiques (loi/, candidat/, parti/), plan du site, flux, adresse du site et mesure d'audience : anomalie signalée sans bloquer la publication des données (bloquante avec --strict)
+await secondaire(async () => { for (const e of await controlerPages(".")) err(`pages : ${e}`); });
 
 /** Comptes (Supabase) : config absente = fonction cachée et CSP stricte ; config présente = URL https …supabase.co, clé publique seulement. */
 async function checkCompte() {
@@ -663,7 +667,7 @@ async function checkCompte() {
   const html = await readFile("index.html", "utf-8");
   const hotes = connectSrc(html);
   if (!hotes) return err("compte : directive connect-src introuvable dans la CSP d'index.html");
-  const autres = hotes.filter((h) => h !== "'self'");
+  const autres = hotes.filter((h) => h !== "'self'" && !HOTE_ANALYTIQUE.test(h)); // la mesure d'audience facultative est contrôlée par checkPages
   if (presente && !config) return err(`compte : data/compte-config.json invalide (${erreur}). L'URL doit être https://<projet>.supabase.co et la clé la clé publique « anon », jamais la clé secrète.`);
   for (const h of autres) if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(h)) err(`compte : la CSP autorise « ${h} » : seule l'URL https://<projet>.supabase.co de la configuration est admise`);
   if (!config) {

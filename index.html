@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Hémicycle France · La politique française, preuves à l'appui</title>
-<meta name="description" content="Ce que votent les députés et les sénateurs, groupe par groupe, les sondages de la présidentielle 2027, les résultats par commune, le Gouvernement et les grands chiffres de l'Insee. Chaque information renvoie à sa source.">
+<meta name="description" content="Ce que votent les députés et les sénateurs, les sondages de la présidentielle 2027, les résultats par commune et les chiffres de l'Insee. Chaque information a sa source.">
 <meta name="theme-color" content="#F5F1E8">
 <link rel="manifest" href="manifest.webmanifest">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Hémicycle France","alternateName":"Hémicycle","url":"https://tahns.github.io/hemicycle-france/","inLanguage":"fr","description":"Ce que votent les députés et les sénateurs, groupe par groupe, les sondages de la présidentielle 2027, les résultats par commune et les grands chiffres du pays. Chaque information renvoie à sa source."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://tahns.github.io/hemicycle-france/#site","name":"Hémicycle France","alternateName":"Hémicycle","url":"https://tahns.github.io/hemicycle-france/","inLanguage":"fr","description":"Ce que votent les députés et les sénateurs, les sondages de la présidentielle 2027, les résultats par commune et les chiffres de l'Insee. Chaque information a sa source.","publisher":{"@id":"https://tahns.github.io/hemicycle-france/#organisation"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://tahns.github.io/hemicycle-france/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Organization","@id":"https://tahns.github.io/hemicycle-france/#organisation","name":"Hémicycle France","url":"https://tahns.github.io/hemicycle-france/","logo":"https://tahns.github.io/hemicycle-france/icons/icon-512.png","sameAs":["https://www.instagram.com/hemicyclefrance/","https://github.com/Tahns/hemicycle-france"]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Hémicycle France · Votes de l'Assemblée" href="feed.xml">
+<link rel="alternate" type="application/atom+xml" title="Hémicycle France · Actualités politiques" href="actualites.atom">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- mesure-audience:debut -->
+<!-- mesure-audience:fin -->
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2726,8 +2730,11 @@
 
       <h3>Données personnelles et cookies</h3>
       <ul>
-        <li id="mention-sans-compte">Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.</li>
-        <li id="mention-avec-compte" hidden>Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité. La création d'un compte est facultative : tout le site fonctionne sans (voir « Compte et données personnelles » plus bas).</li>
+        <li id="mention-sans-compte">Le site ne demande aucune inscription, ne contient aucun formulaire, ne dépose aucun cookie et ne contient aucune publicité.</li>
+        <li id="mention-avec-compte" hidden>Le site ne dépose aucun cookie et ne contient aucune publicité. La création d'un compte est facultative : tout le site fonctionne sans (voir « Compte et données personnelles » plus bas).</li>
+        <li id="mention-mesure-non">Aucun outil de mesure d'audience n'est utilisé.</li>
+        <li id="mention-mesure-goatcounter" hidden>Mesure d'audience : le site compte ses visites de façon anonyme avec GoatCounter. Selon son éditeur, ce service ne dépose aucun cookie, ne conserve pas votre adresse IP et ne constitue aucun profil. Les chiffres servent seulement à savoir quelles rubriques sont lues. Cette mesure, limitée à l'audience du site, est dispensée de consentement dans les conditions fixées par la CNIL.</li>
+        <li id="mention-mesure-plausible" hidden>Mesure d'audience : le site compte ses visites de façon anonyme avec Plausible Analytics. Selon son éditeur, ce service ne dépose aucun cookie, ne conserve pas votre adresse IP et ne constitue aucun profil. Les chiffres servent seulement à savoir quelles rubriques sont lues. Cette mesure, limitée à l'audience du site, est dispensée de consentement dans les conditions fixées par la CNIL.</li>
         <li>Si vous choisissez le mode sombre, ce réglage est enregistré dans votre navigateur (stockage local) pour être retrouvé à votre prochaine visite. Il n'est jamais transmis.</li>
         <li>Si vous activez les alertes, vos choix (et le député suivi) sont gardés sur votre appareil ; votre téléphone vérifie lui-même quelques fois par jour le fichier public des nouveautés du site. Aucun compte, aucune adresse, aucun identifiant de notification n'est transmis ni conservé par le site. Pour les arrêter : « Recevoir les alertes » → « Désactiver », ou les réglages de notification du téléphone.</li>
         <li>La date de votre dernière visite est aussi gardée dans votre navigateur, pour vous signaler les nouveaux votes et sondages depuis. Elle n'est jamais transmise ; effacer les données du site dans votre navigateur la supprime.</li>
@@ -2785,6 +2792,9 @@
         <tbody id="methode-maj"><tr><td colspan="3">Chargement…</td></tr></tbody>
       </table></div>
       <p>Les données saisies à la main (justice, agenda, questions du quiz) portent une date de vérification ; un contrôle quotidien signale celles qui ne bougent plus.</p>
+
+      <h3>Mesure d'audience</h3>
+      <p>Elle est désactivée par défaut. Si elle est activée (la page Mentions légales l'indique), elle ne compte que des visites anonymes, sans cookie, sans suivi d'un site à l'autre et sans profil individuel ; elle ne sert jamais à classer ou à orienter les informations affichées.</p>
 
       <h3>Limites</h3>
       <ul>
@@ -6637,6 +6647,15 @@ function ouvrirRecherche(){
   Promise.all([chargerDeputes(), chargerSenat()]).then(()=>{ if(champ.value.trim()) renderRecherche(); });
   renderRecherche();
 }
+/** Lien de recherche (index.html?q=…, déclaré dans les données structurées WebSite/SearchAction) : ouvre la recherche avec ce terme. */
+function ouvrirRechercheDepuisUrl(){
+  let q = "";
+  try{ q = (new URLSearchParams(location.search).get("q") || "").trim().slice(0, 80); }catch(e){}
+  if(!q) return;
+  ouvrirRecherche();
+  document.getElementById("recherche-champ").value = q;
+  renderRecherche();
+}
 function fermerRecherche(){
   document.getElementById("recherche-fond").hidden = true;
   document.getElementById("recherche").hidden = true;
@@ -7299,6 +7318,15 @@ document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").f
   b.addEventListener("click", ()=> activateTab(b.dataset.tab));
 });
 
+// Mesure d'audience facultative : la mention légale du service configuré (balise posée par scripts/appliquer-analytics.js) remplace « aucun outil »
+(function(){
+  const m = document.querySelector('meta[name="mesure-audience"]');
+  const li = m && document.getElementById("mention-mesure-" + m.content);
+  if(!li) return;
+  li.hidden = false;
+  document.getElementById("mention-mesure-non").hidden = true;
+})();
+
 // Date d'édition affichée dans l'en-tête
 (function(){
   const t = new Date().toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric" }).replace(/ 1 /, " 1er ");
@@ -7915,6 +7943,7 @@ async function initSite(){
   if(MODE_CARTE){ document.body.classList.add("mode-carte"); document.body.dataset.cartePrete = "1"; return; }
   afficherNouveautes();
   ouvrirDepuisHash();
+  ouvrirRechercheDepuisUrl();
   initEspace();
   prechargerProbable();
 }
