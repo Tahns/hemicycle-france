@@ -1,0 +1,48 @@
+name: Valider un brouillon
+# Validation HUMAINE d'un geste d'un brouillon Instagram (instagram/brouillons/<id>.jpg) : publier ou rejeter.
+# Mode d'emploi : docs/PUBLICATION-AUTO.md, section « Sujets sensibles : niveaux 1 et 2, comment valider un brouillon ».
+#  - « publier » : le brouillon entre dans la file ; la publication suit les règles habituelles (7 h – 23 h, 60 min, sans doublon, plafonds) ;
+#  - « rejeter » : le brouillon est supprimé et le sujet n'est pas reproposé pendant 7 jours.
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "Identifiant du brouillon (12 caractères, indiqué dans le résumé de l'exécution qui l'a créé ; fichiers instagram/brouillons/<id>.jpg)"
+        required: true
+        type: string
+      action:
+        description: "publier = entre dans la file de publication ; rejeter = supprime le brouillon"
+        required: true
+        type: choice
+        options:
+          - rejeter
+          - publier
+        default: rejeter
+permissions:
+  contents: write
+# Même groupe que les autres workflows qui écrivent dans data/ : jamais deux écritures en même temps
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+jobs:
+  valider:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      # Les entrées sont passées par l'environnement (jamais interpolées dans le script) ; le script revérifie tout
+      - name: Valider le brouillon
+        env:
+          BROUILLON_ID: ${{ inputs.id }}
+          BROUILLON_ACTION: ${{ inputs.action }}
+        run: node scripts/valider-brouillon.cjs "$BROUILLON_ID" "$BROUILLON_ACTION"
+      - name: Committer la file et les brouillons
+        env:
+          BROUILLON_ID: ${{ inputs.id }}
+          BROUILLON_ACTION: ${{ inputs.action }}
+        run: scripts/commit-push.sh "Brouillon ${BROUILLON_ID} (${BROUILLON_ACTION})" data/instagram-file.json data/instagram-rejetes.json instagram/auto instagram/brouillons instagram/file.atom

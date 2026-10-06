@@ -46,6 +46,12 @@
  * au plus) ; autorisé jusqu'à 23 h 30 (heure de Paris). JAMAIS pendant la réserve électorale (loi du 19 juillet 1977, art. 11 : même
  * calcul que periodeReserveSondages() du site) : les stories de sondage encore en file y sont retirées.
  *
+ * SUJETS SENSIBLES (justice, mises en cause ; scripts/sujets-sensibles.cjs, docs/PUBLICATION-AUTO.md) : les sujets que les règles ci-dessus écartent ne sont plus perdus :
+ *  - niveau 1 (une juridiction ET une décision citées par au moins « minMediasSensible » médias) : story AUTOMATIQUE au texte fabriqué par règles (attribution, juridiction, date, sources,
+ *    aucun nom, « présumée innocente ») ; entrée de file { sensible: 1 } ;
+ *  - niveau 2 (accusation, plainte, polémique, révélation d'un seul média) : JAMAIS en file, seulement un brouillon { sensible: 2 } validé d'un geste (workflow « Valider un brouillon »).
+ *  Faits divers, mineurs, violences sexuelles, décès, suicide : toujours écartés. Mêmes garde-fous (réserve, doublons, 7 h – 23 h, plafonds).
+ *
  * CONFIGURATION (data/stories-config.json, lue à chaque exécution ; absente ou invalide : tout à false) :
  *  - monetisation (false par défaut) : à true, AUCUN dossier ni sujet de presse (aucun titre de média dans l'image) ; seulement
  *    des données propres : sondage (hors réserve), vote final de l'Assemblée ou du Sénat, simulation « probabilités » (hors réserve).
@@ -61,6 +67,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { concerneLaFrance } = require("./pertinence.cjs");
+const SS = require("./sujets-sensibles.cjs");
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = path.join(RACINE, "data", "instagram-file.json");
@@ -139,14 +146,16 @@ function titresProches(a, b) {
   return commun >= 1 && commun / Math.min(x.size, y.size) >= 0.5;
 }
 const RECENT_H = 24;
+/** Titres d'une entrée pour la détection de doublons. Une entrée « sensible » a un titre-formule (« Selon … : … ») semblable d'un sujet à l'autre : on compare le titre de presse (sujets), jamais la formule. */
+const titresDe = (e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])];
 /** Titres rédigés des entrées (file + brouillons) des dernières 24 h : un sujet proche ne repasse pas le même jour. */
 function titresRecents(entrees, now) {
-  return (entrees || []).filter((e) => now.getTime() - Date.parse(e.cree) < RECENT_H * 36e5).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]).filter((t) => typeof t === "string" && t);
+  return (entrees || []).filter((e) => now.getTime() - Date.parse(e.cree) < RECENT_H * 36e5).flatMap(titresDe).filter((t) => typeof t === "string" && t);
 }
 const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
 
 /** Une entrée compte-t-elle dans le plafond des STORIES (hors sondages, posts et stories d'annonce de post) ? */
-const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && !e.annonceDe;
+const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && !e.annonceDe && e.sensible !== 2; // niveau 2 (brouillons, validations humaines) : hors plafond de mise en file
 /** Posts du jour (UTC+2) : ceux de la file (et des brouillons) et ceux du registre des publications, sans double compte. */
 function nbPostsDuJour(entrees, registre, now) {
   const jour = jourUTC2(now);
@@ -159,8 +168,8 @@ function nbPostsDuJour(entrees, registre, now) {
 function titresRecentsH(entrees, registre, now, h) {
   const garde = (iso) => now.getTime() - Date.parse(iso) < h * 36e5;
   return [
-    ...(entrees || []).filter((e) => e.cree && garde(e.cree)).flatMap((e) => [e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
-    ...(registre?.entrees || []).filter((e) => e.statut === "publiee" && e.publieLe && garde(e.publieLe)).flatMap((e) => [e.titre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+    ...(entrees || []).filter((e) => e.cree && garde(e.cree)).flatMap(titresDe),
+    ...(registre?.entrees || []).filter((e) => e.statut === "publiee" && e.publieLe && garde(e.publieLe)).flatMap((e) => [e.sensible ? null : e.titre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter((t) => typeof t === "string" && t);
 }
 
@@ -384,6 +393,50 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
   return candidats[0];
 }
 
+const FRAICHEUR_BROUILLON_H = 12; // un brouillon sensible (niveau 2) peut attendre sa validation : sujet de moins de 12 h
+const REJET_JOURS = 7; // un sujet rejeté par un humain n'est pas reproposé pendant 7 jours
+
+/**
+ * SUJETS SENSIBLES (justice, mises en cause ; scripts/sujets-sensibles.cjs) : les sujets que le circuit habituel écarte ne sont plus perdus.
+ *  - niveau 1 (fait judiciaire établi : juridiction ET décision citées par >= minMediasSensible médias) : { sensible, sujet, ... } publié en file, texte fabriqué par règles ;
+ *  - niveau 2 (accusation, plainte, polémique, révélation d'un seul média) : brouillon à valider, jamais en file.
+ * Mêmes garde-fous que les autres sujets : pas la nuit, fraîcheur, pas de doublon (id, liens, titres proches 36 h, sujets déjà rejetés),
+ * pas de sondage en réserve électorale, plafond des stories (niveau 1) ; niveau 2 : au plus « brouillonsSensiblesMax » brouillons par jour.
+ * niveaux : quels niveaux examiner (le niveau 1 passe avant les autres sujets, le niveau 2 seulement s'il n'y a rien d'autre).
+ */
+function choisirSensible({ actualites, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null), niveaux = [1, 2] }) {
+  if (config.monetisation || config.sensibles === false) return { refus: "sujets sensibles désactivés" };
+  const h = heureParis(now);
+  if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
+  const entrees = file?.entrees || [];
+  const jour = jourUTC2(now);
+  const storiesPleines = entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jour).length >= MAX_PAR_JOUR;
+  const brouillonsJour = entrees.filter((e) => e.sensible === 2 && e.statut === "a-valider" && jourUTC2(e.cree) === jour).length;
+  const rejetsRecents = (rejetes?.entrees || []).filter((r) => now.getTime() - Date.parse(r.rejeteLe) < REJET_JOURS * 24 * 36e5);
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id), ...rejetsRecents.map((r) => r.id)]);
+  const urls = new Set([...entrees.flatMap((e) => e.sources || []), ...rejetsRecents.flatMap((r) => r.sources || [])]);
+  const recents = [...titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H), ...rejetsRecents.flatMap((r) => r.sujets || [])];
+  const reserve = reserveSondages(now);
+  const candidats = [];
+  (actualites?.sujets || []).forEach((s, indice) => {
+    const titre = s.articles?.[0]?.titre;
+    if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
+    const age = now.getTime() - Date.parse(s.derniere);
+    if (!(age < FRAICHEUR_BROUILLON_H * 36e5) || age < -36e5) return;
+    if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
+    if (reserve && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    const c = SS.classerSujet(s, { minMedias: config.minMediasSensible, motExclu });
+    if (!c || c.refus || !niveaux.includes(c.niveau)) return;
+    if (c.niveau === 1 && (storiesPleines || !(age < FRAICHEUR_H * 36e5))) return;
+    if (c.niveau === 2 && (brouillonsJour >= config.brouillonsSensiblesMax || c.medias.length < 1)) return;
+    if ((s.articles || []).some((a) => dejaVu(a.titre, recents))) return; // même sujet qu'une publication ou un brouillon récent
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias: c.medias.length, sensible: c, niveauSensible: c.niveau, modele: "sensible" });
+  });
+  if (!candidats.length) return { refus: "aucun sujet sensible à traiter" };
+  candidats.sort((a, b) => a.niveauSensible - b.niveauSensible || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
+  return candidats[0];
+}
+
 /** Identifiant d'une story « En bref » : une par jour (Paris). */
 const idBref = (jour) => crypto.createHash("sha1").update("bref|" + jour).digest("hex").slice(0, 12);
 
@@ -537,8 +590,29 @@ async function dessinerPost(fiche, idPost) {
   }
 }
 
+/** Dessine un POST seul (1080 × 1350, sans story d'annonce) d'après une fiche (js/stories-post.js, genre « presse » pour une demande directe) ; renvoie un Buffer JPEG. */
+async function dessinerPostSeul(spec) {
+  const { chromium } = require("playwright");
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
+  try {
+    const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 }, serviceWorkers: "block" });
+    const page = await ctx.newPage();
+    await servirSite(page);
+    const erreurs = [];
+    page.on("pageerror", (e) => erreurs.push(e.message));
+    await page.goto(SITE, { waitUntil: "load" });
+    await page.waitForFunction(() => typeof dessinerStory === "function", null, { timeout: 30000 });
+    const url = await page.evaluate(async (s) => { const p = await dessinerStory("post", s); return p ? p.apercu : null; }, spec);
+    if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
+    if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("le post n'a pas pu être dessiné");
+    return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
+  } finally {
+    await browser.close();
+  }
+}
+
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null, synth = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -554,12 +628,18 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
       if (propre.type === "probabilites") await page.waitForFunction(() => typeof PROBAS !== "undefined" && PROBAS?.candidats?.length > 0, null, { timeout: 30000 });
     } else if (sondage) {
       await page.waitForFunction(() => typeof INSTITUTS !== "undefined" && INSTITUTS.length > 0 && typeof CANDIDATS !== "undefined" && typeof dessinerStory === "function", null, { timeout: 30000 });
+    } else if (synth) { // sujet sensible : dessiné d'après une fiche (titre à nous), pas d'après le relevé d'actualités
+      await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && Array.isArray(ACTUALITES?.sujets) && typeof dessinerStory === "function", null, { timeout: 30000 });
     } else if (dossier) {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.dossiers?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth }) => {
+      if (synth) { // sujet synthétique ajouté le temps du dessin, puis retiré
+        ACTUALITES.sujets.push(synth);
+        try { const r = await dessinerStory("actualite", `${ACTUALITES.sujets.length - 1}:une`); return r ? r.apercu : null; } finally { ACTUALITES.sujets.pop(); }
+      }
       if (propre) { // données propres : vote par groupe ou simulation, jamais de presse ; le site doit avoir la même donnée que le fichier
         let r = null;
         if (propre.type === "scrutin") {
@@ -593,7 +673,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
       const r = await dessinerStory("actualite", `${indice}:${modele || "une"}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date »
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -636,7 +716,10 @@ function normaliserConfig(c) {
     minMedias: entier(c?.minMedias, 3, 2, 10), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
     maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
-    videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6)
+    videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
+    // sujets de justice et de mise en cause (scripts/sujets-sensibles.cjs) : activés par défaut ; niveau 1 = au moins « minMediasSensible » médias
+    // citant une juridiction et une décision ; niveau 2 = brouillons à valider, « brouillonsSensiblesMax » par jour
+    sensibles: c?.sensibles !== false, minMediasSensible: entier(c?.minMediasSensible, 2, 2, 10), brouillonsSensiblesMax: entier(c?.brouillonsSensiblesMax, 3, 0, 10)
   };
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
@@ -845,6 +928,7 @@ const ficheAnnonce = (fiche, idPost) => ({ id: idPost, titre: fiche.titreCourt, 
 
 /** Où va la story : « brouillon » (validation humaine) ou « file » (file de publication). */
 function destination(choix, config) {
+  if (choix.sensible) return choix.sensible.niveau === 2 || config.validationHumaine ? "brouillon" : "file"; // niveau 2 : JAMAIS en file ; niveau 1 : en file, sauf validation humaine générale
   const nomme = Boolean(choix.sondage || choix.nommePersonne);
   return config.validationHumaine || (config.monetisation && nomme) ? "brouillon" : "file";
 }
@@ -868,7 +952,7 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, registre = null, now = new Date(), config = normaliserConfig(null) }) {
+function choisir({ actualites, direct, sondages, lois, senat, probas, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
   const s = choisirSondage({ sondages, file, now });
   if (!s.refus) return s;
   if (config.monetisation) {
@@ -879,11 +963,16 @@ function choisir({ actualites, direct, sondages, lois, senat, probas, candidats 
   }
   const a = choisirSujet({ actualites, direct, file, now, candidats, registre });
   if (a.dossier || a.modele === "direct") return a; // un dossier non publié et un direct en cours passent avant tout
+  const s1 = choisirSensible({ actualites, file, registre, rejetes, now, config, niveaux: [1] }); // fait judiciaire établi : publication prudente
+  if (!s1.refus) return s1;
   const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post, suivi d'une story d'annonce
   if (!pl.refus) return pl;
   const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
   if (!b.refus) return b;
-  return a.refus ? { refus: `${a.refus} ; sondage : ${s.refus}` } : a;
+  if (!a.refus) return a;
+  const s2 = choisirSensible({ actualites, file, registre, rejetes, now, config, niveaux: [2] }); // accusation, plainte, polémique : brouillon à valider (jamais en file)
+  if (!s2.refus) return s2;
+  return { refus: `${a.refus} ; sondage : ${s.refus} ; sensibles : ${s2.refus}` };
 }
 
 /** Lit toutes les données utiles au choix (file + brouillons vus comme une seule liste d'entrées). */
@@ -895,7 +984,7 @@ function lireEtat(now) {
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
   const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), candidats: lire("data/candidats.json", null),
-    lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null) };
+    lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null), rejetes: lire("data/instagram-rejetes.json", null) };
   if (config.monetisation) donnees.probas = lire("data/probabilites.json", null);
   return { config, file, brouillons, donnees };
 }
@@ -929,7 +1018,10 @@ function ecrireBrouillon(fiche, jpeg, dossier = DOSSIER_BROUILLONS) {
 }
 
 /** Ligne du résumé d'exécution GitHub pour un brouillon à valider. */
-const ligneResume = (b) => `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
+const ligneResume = (b) => b.sensible
+  ? `- **Brouillon SENSIBLE à valider (niveau ${b.sensible})** : « ${b.titre} » (${b.type}${b.nommePersonne ? ", une personne est nommée dans le titre cité" : ""}), image instagram/brouillons/${b.id}.jpg. `
+    + `Pour le publier ou le rejeter : onglet Actions > « Valider un brouillon » > Run workflow > id « ${b.id} » > action « publier » ou « rejeter ». Relire d'abord l'image et les sources (${(b.sources || []).slice(0, 2).join(" ; ") || "aucune"}).`
+  : `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
 
 /** Texte alternatif de l'image (accessibilité, fiche de publication) : ce que dit la story, sans rien ajouter. */
 function texteAlternatif(type, titre, medias, sujets) {
@@ -943,7 +1035,7 @@ const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
 function decrire(choix, now = new Date()) {
   const d = decrireBase(choix, now);
-  if (d.type === "post") return d; // le texte alternatif d'un post est dans sa fiche (« alt »)
+  if (d.type === "post" || d.champs.sensible) return d; // le texte alternatif d'un post, ou d'un sujet sensible, est dans sa fiche (« alt », fabriqué par règles)
   const titre = d.champs.titrePropre || d.titre;
   return { ...d, champs: { ...d.champs, alt: texteAlternatif(d.type, titre, d.medias, d.champs.sujets) } };
 }
@@ -958,7 +1050,31 @@ function decrirePost(choix, now) {
   return { titre: s.articles[0].titre, medias: [...new Set(s.articles.map((a) => a.media))], sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
     champs: { titrePropre: f.titreCourt, postGenre: "date", dateIso: f.dateIso, legende: f.legende, alt: f.alt } };
 }
+/**
+ * Décrit un sujet SENSIBLE : fiche fabriquée par règles (scripts/sujets-sensibles.cjs), contrôlée par formulationSure (une règle violée = erreur,
+ * rien n'est écrit), sujet « synthétique » dessiné par le site (titre à nous, aucune personnalité, citation attribuée au niveau 2 seulement).
+ * Le titre de presse reste dans « sujets » (détection de doublons) ; le titre de l'entrée est le nôtre.
+ */
+function decrireSensible(choix) {
+  const c = choix.sensible, s = choix.sujet, date = s.derniere;
+  const fiche = c.niveau === 1
+    ? SS.ficheNiveau1(c, date)
+    : SS.ficheNiveau2({ medias: c.medias, categorie: c.categorie, titreCite: c.citee.titre, reponseCitee: c.reponseCitee, date });
+  const verif = SS.formulationSure([fiche.titre, fiche.pied, fiche.mention].join(" "), { juridiction: c.juridiction || "" });
+  if (!verif.ok) throw new Error(`formulation refusée pour un sujet sensible : ${verif.problemes.join(" ; ")}`);
+  const synth = SS.sujetPourDessin(fiche, { articles: c.articles, date, citee: c.niveau === 2 ? c.citee : null, theme: s.illustration?.theme === "justice" ? "justice" : "politique" });
+  const sources = [...new Set(c.articles.map((a) => a.url).filter((u) => /^https:\/\//.test(u || "")))].slice(0, 12);
+  const nommes = c.niveau === 2 ? (s.illustration?.personnes || []).map((p) => p.nom).filter((n) => { const nom = SS.plat(n).split(" ").slice(-1)[0], t = SS.plat(c.citee.titre); return nom.length >= 4 && new RegExp(`\\b${nom}\\b`).test(t); }) : [];
+  return {
+    titre: fiche.titre, medias: c.medias, sources, type: "story", args: [choix.indice, s.articles[0].titre, null, null, null, "une", null, synth],
+    champs: {
+      sensible: c.niveau, titrePropre: fiche.titre, sujets: [s.articles[0].titre], pied: fiche.pied, alt: fiche.alt, nommePersonne: nommes.length > 0,
+      ...(c.niveau === 1 ? { juridiction: c.juridiction, nature: c.nature, penal: c.penal } : { categorie: c.categorie, reponseCitee: c.reponseCitee, citation: { titre: fiche.citation, media: c.citee.media, url: c.citee.url } }),
+    },
+  };
+}
 function decrireBase(choix, now = new Date()) {
+  if (choix.sensible) return decrireSensible(choix);
   if (choix.post || choix.modele === "post-date") return decrirePost(choix, now);
   if (choix.sondage) {
     const i = choix.sondage;
@@ -1119,6 +1235,6 @@ async function main() {
   }
 }
 
-module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo };
+module.exports = { titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

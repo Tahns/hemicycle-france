@@ -1,7 +1,8 @@
 /* Module chargé à la demande (publications Instagram automatiques) : voir chargerModule() dans index.html.
    Deux types, dessinés d'après une fiche (objet « spec ») préparée par scripts/stories-auto.cjs :
    - « post » : image de fil 1080 × 1350 (4:5), soit une « date à retenir » lointaine (spec.genre = "date"),
-     soit le résultat officiel d'un vote final sur une loi (spec.genre = "loi") ;
+     soit le résultat officiel d'un vote final sur une loi (spec.genre = "loi"),
+     soit un titre de presse cité et attribué, validé par un humain (spec.genre = "presse", demande directe : scripts/story-a-la-demande.cjs) ;
    - « annonce-post » : story 1080 × 1920 qui annonce un post (« Nouveau post », titre court, miniature du post, « → @hemicyclefrance »).
    Même direction artistique que les stories (STORY_DA, storyMarque / storyCadre / storyPied de js/stories.js).
    Rien n'est ajouté à l'espace global : tout est dans STORY_PLUS. Aucun avis, aucun qualificatif : les faits et la source. */
@@ -107,6 +108,27 @@ async function postLoi(ctx, s){
   pied(ctx, s.sourceTxt || `Source : ${s.chambre}.`, "Toute l'actu politique");
 }
 
+/* ---------- Post « selon la presse » (sujet sensible, demande directe validée par un humain) ---------- */
+async function postPresse(ctx, s){
+  const bas = H_POST - 150;
+  let y = cadrePost(ctx, s.surtitre || "Selon la presse", { etiquette: "rouge" }); // 190
+  y += 6;
+  // titre à nous, attribué au média (« Selon … : … »)
+  const tt = storyTailleFit(ctx, s.titre, y, y + 4 * 84, { tMax: 76, tMin: 44, police: "Newsreader", poids: 600, interligne: 1.06 });
+  y = storyTexte(ctx, s.titre, marge, y, { taille: tt, poids: 600, police: "Newsreader", couleur: "#fff", max: 4, interligne: 1.06 });
+  y += 34;
+  // titre du média, cité entre guillemets, avec son nom
+  if(s.citation){
+    const ct = 36, hc = Math.min(bas - y, 2 * 28 + storyHauteur(ctx, `« ${s.citation} »`, { taille: ct, poids: 600, police: "Newsreader", largeur: LARG - 64, max: 6, interligne: 1.2 }) + 44);
+    if(hc > 120){
+      storyCarte(ctx, marge, y, LARG, hc);
+      storyTexte(ctx, `« ${s.citation} »`, marge + 32, y + 22, { taille: ct, poids: 600, police: "Newsreader", couleur: STORY.encre, largeur: LARG - 64, max: 6, interligne: 1.2 });
+      gras(ctx, s.media ? `— ${s.media}` : "", marge + 32, y + hc - 22, { taille: 24, couleur: STORY.pale });
+    }
+  }
+  pied(ctx, s.sourceTxt || "Titre cité de la presse. Faits non établis par la justice.", "Toute l'actu politique");
+}
+
 // Pied du post : source (bleu clair) puis « accroche → @compte », remontés d'autant que le cadre
 function pied(ctx, source, accroche){
   storyTexte(ctx, source, marge, H_POST - 128, { taille: 23, couleur: STORY.ciel, max: 2, interligne: 1.2 });
@@ -114,10 +136,10 @@ function pied(ctx, source, accroche){
 }
 
 STORY_PLUS.post = async (ctx, s) => {
-  if(!s || !["date", "loi"].includes(s.genre) || !s.titre) return null;
+  if(!s || !["date", "loi", "presse"].includes(s.genre) || !s.titre) return null;
   await polices();
-  if(s.genre === "date") await postDate(ctx, s); else await postLoi(ctx, s);
-  return { nom: s.genre === "date" ? `post-date-${s.iso || "x"}` : `post-loi-${s.numero || "x"}` };
+  if(s.genre === "date") await postDate(ctx, s); else if(s.genre === "presse") await postPresse(ctx, s); else await postLoi(ctx, s);
+  return { nom: s.genre === "date" ? `post-date-${s.iso || "x"}` : s.genre === "presse" ? "post-presse" : `post-loi-${s.numero || "x"}` };
 };
 
 /* ---------- Story d'annonce d'un post ---------- */

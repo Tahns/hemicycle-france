@@ -287,6 +287,10 @@ async function checkInstagramFile() {
     if (isNaN(t) || !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$/.test(e.cree)) { err(`${nom} : date « cree » invalide`); continue; }
     if (e.url_image !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.jpg`) err(`${nom} : url_image doit être en https et pointer sur instagram/auto/${e.id}.jpg`);
     const jour = new Date(t + 2 * 36e5).toISOString().slice(0, 10); // jour en UTC+2
+    // Sujets sensibles (scripts/sujets-sensibles.cjs) : niveau 1 = au moins 2 médias, une juridiction, aucun nom de personne ; niveau 2 = seulement après validation humaine
+    if (e.sensible !== undefined && ![1, 2].includes(e.sensible)) err(`${nom} : champ « sensible » invalide (1 ou 2)`);
+    if (e.sensible === 1 && (!Array.isArray(e.medias) || e.medias.length < 2 || !e.juridiction || e.nommePersonne === true)) err(`${nom} : une entrée sensible de niveau 1 exige au moins 2 médias, une juridiction et aucun nom de personne`);
+    if (e.sensible === 2 && !(e.valideHumain === true && e.valideLe)) err(`${nom} : une entrée sensible de niveau 2 ne peut entrer en file qu'après validation humaine (valideHumain, valideLe)`);
     // Vidéo (facultative sur une story, obligatoire sur un Reel) : instagram/auto/<id>.mp4, voir scripts/videos-auto.cjs
     if (e.type === "reel" && !e.url_video) err(`${nom} : un Reel exige url_video`);
     if (e.url_video !== undefined && e.url_video !== `https://tahns.github.io/hemicycle-france/instagram/auto/${e.id}.mp4`) err(`${nom} : url_video doit être en https et pointer sur instagram/auto/${e.id}.mp4`);
@@ -337,9 +341,10 @@ async function checkInstagramFile() {
       }
     }
   }
-  for (const [j, n] of Object.entries(stories)) if (n > 4) err(`instagram-file.json : ${n} stories le ${j} (4 au maximum par jour, hors annonces de post)`);
-  for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour)`);
   const config = JSON.parse(await readFile("data/stories-config.json", "utf-8").catch(() => "{}"));
+  const maxStories = Math.max(4, Number.isInteger(config.maxParJour) ? config.maxParJour : 4); // plafond lu dans data/stories-config.json (« maxParJour »)
+  for (const [j, n] of Object.entries(stories)) if (n > maxStories) err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post)`);
+  for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour)`);
   const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;
   for (const [j, n] of Object.entries(videos)) if (n > Math.max(maxVideos, 6)) err(`instagram-file.json : ${n} vidéos le ${j} (videosMax : ${maxVideos})`);
   if (d.entrees.length > 30) err("instagram-file.json : plus de 30 entrées");
