@@ -280,7 +280,27 @@ function titreParRegles(sujet, donnees = {}) {
 }
 
 /** Titre à nous pour tout sujet : dossier, nom d'une loi, règles (thème + acteur + action), puis expression commune des médias si les règles restent génériques. */
+/** Le titre copie-t-il un titre de presse (identique, ou un segment de 5 mots) ? Même règle que le contrôle de data/check-data.js. */
+function copieUnTitre(titre, articles) {
+  const tm = plat(titre).replace(/[^a-z0-9]+/g, " ").trim().split(" ").filter(Boolean);
+  return (articles || []).some((a) => {
+    const pm = plat(a.titre || "").replace(/[^a-z0-9]+/g, " ").trim();
+    if (pm === tm.join(" ")) return true;
+    for (let k = 0; k + 5 <= tm.length; k++) if (` ${pm} `.includes(` ${tm.slice(k, k + 5).join(" ")} `)) return true;
+    return false;
+  });
+}
+
+/** Titre à nous : le meilleur choix, sans jamais copier un titre de presse (sinon titre générique de thème, qui n'ira jamais en story). */
 function titreSujet(sujet, dossiers = [], donnees = {}) {
+  const t = titreSujetBrut(sujet, dossiers, donnees);
+  if (!t || !copieUnTitre(t.titre, sujet?.articles)) return t;
+  const th = THEMES_TITRES.find((x) => x.re.test(plat(sujet.articles[0]?.titre || "")));
+  const repli = th && th.S !== "Justice" ? `${th.S} : l'essentiel du moment` : "Politique : l'essentiel du moment";
+  return { titre: repli, origine: "regles", generique: true };
+}
+
+function titreSujetBrut(sujet, dossiers = [], donnees = {}) {
   const avecDossier = titrePropre(sujet, dossiers);
   let recoupe = avecDossier;
   if (avecDossier?.origine === "dossier") {
