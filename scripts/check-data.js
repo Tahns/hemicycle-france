@@ -13,6 +13,7 @@ import { readFile, readdir } from "fs/promises";
 import { existsSync, appendFileSync } from "fs";
 import { completer } from "./lois-format.js";
 import { verifierPortraits } from "./check-portraits.js";
+import { verifierVignettes } from "./check-vignettes.js";
 import { extraire, controlerDico, controlerDonnees, listerLangues } from "./extraire-i18n.js";
 import { lireConfigCompte, connectSrc } from "./appliquer-compte.js";
 import { controlerFichierJson } from "./controles-json.js";
@@ -662,6 +663,13 @@ await checkPresidents();
     console.log(`[check-data] portraits : ${c.avecPhoto}/${c.personnes} personnes avec photo, ${c.placeholders} médaillon(s) d'initiales.`);
     if (c.manquants?.length) console.warn(`::warning::Portraits : ${c.manquants.length} personne(s) sans photo libre (médaillon d'initiales affiché) : ${c.manquants.slice(0, 15).join(", ")}${c.manquants.length > 15 ? "…" : ""}`);
   }
+}
+{
+  // Vignettes d'institutions : licence, auteur et lien Commons obligatoires (bloquant) ; thème sans photo = avertissement (pictogramme)
+  const v = await verifierVignettes();
+  v.erreurs.forEach(err);
+  v.avertissements.forEach((a) => console.warn(`::warning::${a}`));
+  if (!v.erreurs.length) console.log(`[check-data] vignettes : ${v.avec}/${v.total} thèmes avec photo libre créditée.`);
 }
 await secondaire(checkI18n);
 await checkCompte();
