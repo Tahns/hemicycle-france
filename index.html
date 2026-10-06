@@ -557,6 +557,7 @@
   .journal-titre-une{font-size:clamp(26px,6vw,46px); line-height:1.07; letter-spacing:-.01em;}
   .journal-photo{margin:0; width:96px;}
   .journal-photo img{display:block; width:96px; height:96px; object-fit:cover; object-position:50% 20%; border:1px solid var(--ink); background:var(--bg-elevated-2);}
+  .journal-photo .journal-initiales{display:flex; align-items:center; justify-content:center; width:96px; height:96px; box-sizing:border-box; border:1px solid var(--ink); font-family:var(--font-display); font-size:var(--fs-3xl); font-weight:700;}
   .journal-photo figcaption{margin-top:var(--s1); font-size:var(--fs-xs); line-height:1.3; color:var(--text-soft);}
   .journal-chapo{margin:var(--s3) 0 0; font-family:var(--font-display); font-size:var(--fs-lg); line-height:1.45; text-wrap:pretty;}
   .journal-chapo b{font-weight:700;}
@@ -614,6 +615,7 @@
     .journal-une-tete{grid-template-columns:minmax(0,1fr) 160px;}
     .journal-photo, .journal-photo img{width:160px;}
     .journal-photo img{height:160px;}
+    .journal-photo .journal-initiales{width:160px; height:160px;}
     .journal-rubriques{column-count:2; column-gap:var(--s5); column-rule:1px solid var(--border);}
   }
   @media (min-width:900px){
@@ -652,6 +654,7 @@
     .journal-une-tete{grid-template-columns:minmax(0,1fr) 34mm;}
     .journal-photo, .journal-photo img{width:34mm;}
     .journal-photo img{height:34mm; filter:grayscale(1);}
+    .journal-photo .journal-initiales{width:34mm; height:34mm; background:#fff !important; color:#000 !important;}
     .journal-colonnes{display:grid; grid-template-columns:1fr 1fr; gap:5mm;}
     .journal-colonnes .journal-chapo, .journal-colonnes .journal-reprises{margin-top:0; font-size:10pt;}
     .journal-chapo::first-letter{float:left; font-size:3.4em; line-height:.8; font-weight:800; margin:.06em .08em 0 0;}
@@ -3202,6 +3205,24 @@ let LOIS = [
 
 
 /* i18n-fin-ignorer */
+/* Aucune image cassée : un portrait qui ne charge pas est retiré (les initiales dessinées dessous apparaissent) ; dans les sujets
+   d'actualité, il est remplacé par la pastille d'initiales à la couleur du parti. */
+document.addEventListener("error", e=>{
+  const img = e.target;
+  if(!img || img.tagName !== "IMG") return;
+  if(img.closest(".medaillon, .mini-photo, .depute-avatar, .journal-photo")){ img.remove(); return; }
+  if(img.closest(".actu-portraits")){
+    const nom = (img.title || "").split(" — ")[0];
+    const pastille = document.createElement("span");
+    pastille.className = "actu-pastille-nom";
+    pastille.title = nom;
+    const fond = img.style.borderColor || "#8A8C94";
+    pastille.style.background = fond;
+    pastille.style.color = texteSurCouleur(fond.startsWith("#") ? fond : "#8A8C94");
+    pastille.textContent = nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("") || "?";
+    img.replaceWith(pastille);
+  }
+}, true);
 /* ---------- Outils communs aux scrutins ---------- */
 
 function esc(s){
@@ -4658,8 +4679,13 @@ function renderJournal(){
   const [une, ...reste] = propres;
   const secondaires = reste.slice(0, 3);
   const utilises = new Set([une, ...secondaires]);
-  const photoPers = une.illustration?.theme === "justice" ? null : (une.illustration?.personnes || []).find(p=> p.photo);
-  const photo = photoPers ? `<figure class="journal-photo"><img src="${esc(photoPers.photoHd || photoPers.photo)}" alt="" width="180" height="180" decoding="async"><figcaption>${esc(photoPers.nom)}${photoPers.parti ? ` (${esc(photoPers.parti)})` : ""}${photoPers.credit ? ` · ${t("photo : {1}", { 1: esc(photoPers.credit) })}` : ""}</figcaption></figure>` : "";
+  const photoPers = une.illustration?.theme === "justice" ? null : (une.illustration?.personnes || []).find(p=> p.photo) || (une.illustration?.personnes || [])[0];
+  // Sans portrait : médaillon d'initiales à la couleur du parti (jamais de cadre vide)
+  const couleurJ = photoPers ? couleurPartiActu(photoPers.parti) : "";
+  const visuelJ = !photoPers ? "" : photoPers.photo
+    ? `<img src="${esc(photoPers.photoHd || photoPers.photo)}" alt="" width="180" height="180" decoding="async">`
+    : `<span class="journal-initiales" aria-hidden="true" style="background:${couleurJ}; color:${texteSurCouleur(couleurJ)}">${esc(initialesActu(photoPers.nom))}</span>`;
+  const photo = photoPers ? `<figure class="journal-photo">${visuelJ}<figcaption>${esc(photoPers.nom)}${photoPers.parti ? ` (${esc(photoPers.parti)})` : ""}${photoPers.credit ? ` · ${t("photo : {1}", { 1: esc(photoPers.credit) })}` : ""}</figcaption></figure>` : "";
   const reprises = autres(une, 3);
   const chapo = `${t("Titre de {1}, publié {2}.", { 1: `<b>${esc(a0(une).media)}</b>`, 2: esc(ilYA(a0(une).date || une.derniere)) })}${une.medias >= 2 ? ` ${t("Le sujet est repris par {1} médias.", { 1: une.medias })}` : ""}${(une.contexte || []).map(c=>` ${esc(c.texte)} (${esc(c.source)}).`).join("")}`;
   const blocUne = `<section class="journal-une" aria-labelledby="journal-une-rub">
@@ -6098,7 +6124,7 @@ function photoPersonne(nom){
     const ajoute = (n, chemin)=>{ const k = nomCle(n); if(k && !indexPhotos.has(k)) indexPhotos.set(k, chemin); };
     (DEPUTES || []).forEach(d=> ajoute(d.nom, `photos/deputes/${d.id}.jpg`));
     (SENATEURS || []).forEach(x=> ajoute(x.nom, `photos/senateurs/${x.id}.jpg`));
-    Object.entries(PORTRAITS_LIBRES).forEach(([n, p])=>{ if(p?.fichier) ajoute(n, `photos/personnalites/${slugPortrait(n)}.jpg`); });
+    Object.entries(PORTRAITS_LIBRES).forEach(([n, p])=>{ if(p?.fichier) ajoute(n, p.chemin || `photos/personnalites/${slugPortrait(n)}.jpg`); });
   }
   return indexPhotos.get(nomCle(nom)) || null;
 }
