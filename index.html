@@ -867,6 +867,7 @@
   .direct-chaines{display:flex; flex-wrap:wrap; gap:var(--s2) var(--s2); margin:var(--s3) 0 0; padding:0; list-style:none;}
   .direct-chaines a{display:inline-block; padding:var(--s1) var(--s3); border:1px solid var(--accent); border-radius:var(--r-1); font-size:var(--fs-sm); font-weight:600; text-decoration:none;}
   .direct-chaines a:hover{background:var(--accent-dim);}
+  .note-direct-an{margin:0 0 var(--s3); font-size:var(--fs-xs); color:var(--text-faint);}
   .direct-note{margin:var(--s2) 0 0; font-size:var(--fs-xs); color:var(--text-faint);}
   [data-theme="sombre"] .accueil-rebours{background:#23305E; color:#F0ECE3;}
   .vote-barre{display:flex; gap:2px; height:14px; margin:var(--s4) 0 var(--s2); max-width:560px;}
@@ -4120,6 +4121,7 @@ function renderAgendaAN(){
   const jour = (j)=>`<div class="an-jour"><div class="jour">${esc(jourFr(j.date))}</div><ul>${j.points.some(p=>p.type==="qag") ? `<li><span class="tag">Questions au Gouvernement</span></li>` : ""}${j.points.map(ligne).join("")}</ul></div>`;
   el.innerHTML = `<h3 class="section-titre">Prochainement à l'Assemblée <span>Ordre du jour des séances publiques, publié par l'Assemblée nationale et relevé toutes les 15 minutes. Il peut encore changer.</span></h3>
     ${boutonsPartage("agenda")}
+    ${jours[0].date === aujourdhuiISO() ? `<p class="note-direct-an">Séance aujourd'hui : <a href="https://videos.assemblee-nationale.fr/" target="_blank" rel="noopener">suivre le direct sur le site de l'Assemblée</a>.</p>` : ""}
     ${jours.slice(0,4).map(jour).join("")}
     ${jours.length > 4 ? `<details><summary>Les ${jours.length - 4} jours de séance suivants</summary>${jours.slice(4).map(jour).join("")}</details>` : ""}
     <h3 class="section-titre">Congrès, meetings, élections</h3>`;
