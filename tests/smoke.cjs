@@ -609,6 +609,88 @@ function verifier(cond, message) {
     }
   }
 
+  // Confiance, accessibilité et thème : thème système et bascule mémorisée, lien d'évitement, source et ancienneté,
+  // « Corriger une erreur », notions clés, comparateur de candidats, puis audit axe-core (si le paquet est installé :
+  // il n'est jamais embarqué dans le site, il est injecté dans la page pour le test seulement)
+  {
+    let axeSource = null;
+    try { axeSource = fs.readFileSync(require.resolve("axe-core/axe.min.js"), "utf8"); } catch (e) { console.log("axe-core absent : audit d'accessibilité automatique ignoré (contrôles ciblés seulement)."); }
+    for (const [nom, viewport] of [["ordinateur", { width: 1280, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
+      const etiquette = (x) => `confiance/accessibilité (${nom}) : ${x}`;
+      // Préférence du système sombre, aucun choix mémorisé : le site passe en sombre
+      const ctxSombre = await navigateur.newContext({ viewport, serviceWorkers: "block", locale: "fr-FR", colorScheme: "dark", reducedMotion: "reduce" });
+      const page = await ctxSombre.newPage();
+      const erreurs = [];
+      page.on("pageerror", (e) => erreurs.push(e.message));
+      await page.goto(base, { waitUntil: "networkidle" });
+      verifier(await page.evaluate(() => document.documentElement.dataset.theme === "sombre"), etiquette("la préférence système sombre n'est pas suivie"));
+      // Bascule vers le clair : le choix est mémorisé et l'emporte au rechargement
+      await page.evaluate(() => (document.getElementById("theme-toggle").offsetParent ? document.getElementById("theme-toggle") : document.getElementById("theme-toggle-mobile")).click());
+      verifier(await page.evaluate(() => !document.documentElement.dataset.theme && localStorage.getItem("theme") === "clair"), etiquette("la bascule vers le clair n'est pas mémorisée"));
+      await page.reload({ waitUntil: "networkidle" });
+      verifier(await page.evaluate(() => !document.documentElement.dataset.theme), etiquette("le choix « clair » ne l'emporte pas sur la préférence système"));
+      await ctxSombre.close();
+
+      const ctx = await navigateur.newContext({ viewport, serviceWorkers: "block", locale: "fr-FR", reducedMotion: "reduce" });
+      const pg = await ctx.newPage();
+      pg.on("pageerror", (e) => erreurs.push(e.message));
+      await pg.goto(base, { waitUntil: "networkidle" });
+      // Lien d'évitement : premier élément atteint au clavier, il donne le focus au contenu
+      await pg.keyboard.press("Tab");
+      verifier(await pg.evaluate(() => document.activeElement.id === "lien-evitement"), etiquette("le lien « Aller au contenu » n'est pas le premier élément au clavier"));
+      await pg.keyboard.press("Enter");
+      verifier(await pg.evaluate(() => document.activeElement.id === "contenu"), etiquette("le lien d'évitement ne place pas le focus sur le contenu"));
+      // Accueil : « D'où viennent les chiffres ? » repliable, lien vers la Méthode dans l'en-tête et le pied de page
+      verifier(await pg.evaluate(() => { const d = document.getElementById("accueil-methode"); return !!d && !d.open && !!d.querySelector('a[data-tab-lien="methode"]'); }), etiquette("résumé « D'où viennent les chiffres ? » absent ou déplié"));
+      verifier((await pg.$$('a[data-tab-lien="methode"]')).length >= 3, etiquette("liens vers la Méthode insuffisants (en-tête, accueil, pied de page)"));
+      // Pied de page : bloc « Corriger une erreur » (Instagram en message privé + ticket GitHub pré-rempli avec la page)
+      const liensCorriger = await pg.evaluate(() => { const a = document.querySelector("#corriger-pied a[data-corriger]"); a.dispatchEvent(new Event("pointerover", { bubbles: true })); return { gh: a.href, ig: !!document.querySelector('#corriger-pied a[href*="instagram.com"], #corriger-pied a[href*="ig.me/m/hemicyclefrance"]') }; });
+      verifier(/^https:\/\/github\.com\/Tahns\/hemicycle-france\/issues\/new\?/.test(liensCorriger.gh) && /template=erreur\.yml/.test(liensCorriger.gh) && /page=/.test(liensCorriger.gh) && /title=/.test(liensCorriger.gh), etiquette("ticket GitHub pré-rempli incorrect"));
+      verifier(liensCorriger.ig, etiquette("lien Instagram (message privé) absent du bloc « Corriger une erreur »"));
+      // Chaque page de données : source + ancienneté, bloc « Corriger une erreur » avec la page concernée
+      for (const h of ["budget", "chiffres", "actualites", "sondages", "senat"]) {
+        await pg.evaluate((x) => { location.hash = x; }, h);
+        await pg.waitForTimeout(900);
+        const t = await pg.evaluate(() => { const v = document.querySelector(".view.active"); return { src: v.querySelector(".source-maj")?.textContent || "", cor: !!v.querySelector(".corriger"), gh: (() => { const a = v.querySelector(".corriger a[data-corriger]"); if (!a) return ""; a.dispatchEvent(new Event("pointerover", { bubbles: true })); return decodeURIComponent(a.href); })() }; });
+        verifier(/^Source : .+ · mis à jour (à l'instant|il y a )/.test(t.src), etiquette(`#${h} : « Source · mis à jour il y a X » absent (« ${t.src} »)`));
+        verifier(t.cor && t.gh.includes("#" + h), etiquette(`#${h} : bloc « Corriger une erreur » absent ou sans la page concernée`));
+      }
+      // Comprendre : dix notions clés courtes (150 mots au plus), chacune sourcée
+      await pg.evaluate(() => { location.hash = "comprendre"; });
+      await pg.waitForTimeout(600);
+      const fiches = await pg.evaluate(() => [...document.querySelectorAll("#cp-notions .cp-fiche")].map((f) => ({ mots: f.querySelector("p").textContent.trim().split(/\s+/).length, source: !!f.querySelector(".cp-source a") })));
+      verifier(fiches.length === 10 && fiches.every((f) => f.mots <= 150 && f.source), etiquette(`notions clés : 10 fiches de 150 mots au plus avec source attendues (${JSON.stringify(fiches.map((f) => f.mots))})`));
+      // Comparateur de deux candidats : tableau de faits, sans jugement
+      await pg.evaluate(() => { location.hash = "candidats"; });
+      await pg.waitForTimeout(900);
+      const cmp = await pg.evaluate(() => { const a = document.getElementById("candidat-comparer-a"), b = document.getElementById("candidat-comparer-b"); return a && b ? [a.options.length, b.options.length] : null; });
+      verifier(cmp && cmp[0] > 2, etiquette("comparateur de candidats absent"));
+      if (cmp && cmp[0] > 2) {
+        await pg.evaluate(() => { document.getElementById("candidats-comparer").open = true; });
+        await pg.selectOption("#candidat-comparer-a", { index: 1 });
+        await pg.selectOption("#candidat-comparer-b", { index: 2 });
+        verifier((await pg.$$("#candidats-comparer-corps .comparateur-table tbody tr")).length >= 6, etiquette("le comparateur n'affiche pas ses lignes de faits"));
+      }
+      verifier(erreurs.length === 0, etiquette(`erreurs JavaScript — ${erreurs.join(" | ")}`));
+
+      // Audit axe-core : aucune violation critique ou sérieuse sur les pages principales, en clair et en sombre
+      if (axeSource) for (const theme of ["clair", "sombre"]) {
+        await pg.evaluate((t) => { if (t === "sombre") document.documentElement.dataset.theme = "sombre"; else delete document.documentElement.dataset.theme; }, theme);
+        for (const h of ["accueil", "actualites", "journal", "deputes", "scrutin", "sondages", "budget", "comprendre", "methode", "mentions"]) {
+          await pg.evaluate((x) => { location.hash = x; }, h);
+          await pg.waitForTimeout(900);
+          if (!(await pg.evaluate("!!window.axe"))) await pg.evaluate(axeSource);
+          const violations = await pg.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa"] } })).violations
+            .filter((v) => v.impact === "critical" || v.impact === "serious")
+            // axe ajoute lui-même un <li> orphelin au <body> pendant l'analyse : on ne le compte pas
+            .map((v) => ({ id: v.id, nodes: v.nodes.filter((n) => n.target.join(" ") !== "body > li").map((n) => n.target.join(" ")) })).filter((v) => v.nodes.length));
+          verifier(violations.length === 0, etiquette(`axe (${theme}) #${h} : ${violations.map((v) => v.id + " " + v.nodes.slice(0, 3).join(", ")).join(" | ")}`));
+        }
+      }
+      await ctx.close();
+    }
+  }
+
   await require("./compte-fumee.cjs").testerComptes({ navigateur, base, verifier });
 
   await navigateur.close();

@@ -2732,7 +2732,7 @@
       <div class="cp-notions">
           <div class="cp-fiche">
             <h4>L'article 49, alinéa 3 (« 49.3 »)</h4>
-            <p>Le Premier ministre peut, après délibération du Conseil des ministres, engager la responsabilité du gouvernement devant l'Assemblée nationale sur un texte. Ce texte est alors considéré comme adopté sans vote, sauf si une <span class="gl" data-gl="motion-de-censure">motion de censure</span> est déposée dans les 24 heures et adoptée. Depuis la révision de 2008, cette procédure s'applique sans limite aux projets de loi de finances et de financement de la sécurité sociale, et une seule fois par session pour tout autre texte.</p>
+            <p>Le Premier ministre peut, après délibération du Conseil des ministres, engager la responsabilité du gouvernement devant l'Assemblée nationale sur un texte. Ce texte est alors considéré comme adopté sans vote, sauf si une motion de censure est déposée dans les 24 heures et adoptée. Depuis la révision de 2008, cette procédure s'applique sans limite aux projets de loi de finances et de financement de la sécurité sociale, et une seule fois par session pour tout autre texte.</p>
             <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 49</p>
           </div>
           <div class="cp-fiche">
@@ -5205,7 +5205,7 @@ function renderComparateurCandidats(){
   const noms = CANDIDATURES.map(c=>c.nom).sort((a,b)=> a.localeCompare(b, "fr"));
   const options = choisi => `<option value="">Choisir un candidat…</option>` + noms.map(n=>`<option value="${esc(n)}"${n === choisi ? " selected" : ""}>${esc(n)}</option>`).join("");
   const [a, b] = comparaisonCandidats.map(n => CANDIDATURES.find(c=>c.nom === n));
-  const sondage = c => { const s = sondagesCandidat(c.nom); return s ? `${s.min === s.max ? `${nombreFr(s.min)} %` : `de ${nombreFr(s.min)} à ${nombreFr(s.max)} %`} (${s.n} institut${s.n > 1 ? "s" : ""})` : "Absent des sondages relevés"; };
+  const sondage = c => { const s = sondagesCandidat(c.nom); return s ? `${s.min === s.max ? `${nombreFr(s.min)} %` : `de ${nombreFr(s.min)} à ${nombreFr(s.max)} %`} (${s.n > 1 ? `${s.n} instituts` : "1 institut"})` : "Absent des sondages relevés"; };
   const domaine = c => (String(c.source).match(/^https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "source";
   const lignes = [
     ["Parti", c => esc(c.parti || "Non précisé")],
@@ -7410,7 +7410,7 @@ function urlCorriger(){
 /* i18n-fin-ignorer */
 function blocCorriger(niveau){
   const balise = niveau === 2 ? "div" : "aside"; // un seul repère « aside » par page : celui de la rubrique affichée
-  return `<${balise} class="corriger"${niveau === 2 ? "" : ' aria-label="Corriger une erreur"'}>
+  return "<" + balise + ' class="corriger"' + (niveau === 2 ? "" : ' aria-label="Corriger une erreur"') + ">" + `
     <h${niveau} class="corriger-titre">Corriger une erreur</h${niveau}>
     <p>Une information vous paraît fausse ou périmée ? Dites-le : une correction appuyée sur une source officielle est publiée. Les tickets GitHub sont publics ; pour une demande qui vous concerne personnellement, préférez le message privé.</p>
     <div class="corriger-liens">
