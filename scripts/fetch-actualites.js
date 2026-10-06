@@ -92,8 +92,11 @@ function lireFlux(xml) {
     const url = texte(balise(b, "link")) || b.match(/<link[^>]*href="([^"]+)"/i)?.[1] || texte(balise(b, "guid"));
     const date = new Date(texte(balise(b, "pubDate") || balise(b, "published") || balise(b, "updated") || balise(b, "dc:date")));
     return { titre: texte(balise(b, "title")), url: url?.trim(), date };
-  });
+  }).filter((a) => !titreCasse(a.titre));
 }
+
+/** Titre d'un flux mal généré (gabarit non rempli du type « $content.TitleNoTags », « {{title}} », « %title% ») : l'article est écarté. */
+const titreCasse = (t) => /\$content\.|\$\{|\{\{|\}\}|%[a-z_]+%|TitleNoTags/i.test(String(t || ""));
 
 // ---------- Regroupement des titres par sujet ----------
 const MOTS_VIDES = new Set(("les des une pour dans avec sans sur par que qui quoi est son ses leur leurs aux du de la le un et ou mais donc car ni " +
