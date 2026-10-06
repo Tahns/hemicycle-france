@@ -12,6 +12,7 @@
  */
 const { concerneLaFrance } = require("./pertinence.cjs");
 const { motExclu } = require("./stories-auto.cjs");
+const { sourcesDistinctes } = require("./regroupement.cjs");
 
 const MIN_ARTICLES = 6, MIN_MEDIAS = 4, HEURES = 48, MAX_DOSSIERS = 3, MAX_ARTICLES = 14;
 
@@ -96,7 +97,7 @@ function construireDossiers(articles, now = new Date()) {
   for (const g of groupes) {
     const arts = [...g.arts].map((i) => frais[i]).sort((a, b) => b.date.localeCompare(a.date));
     const medias = [...new Set(arts.map((a) => a.media))];
-    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre))) continue;
+    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || sourcesDistinctes(arts).mediasDistincts < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre))) continue;
     g.liste = arts;
     g.medias = medias;
     g.score = medias.length * 100 + arts.length;
@@ -119,6 +120,8 @@ function construireDossiers(articles, now = new Date()) {
       titre,
       motifs,
       medias: g.medias,
+      mediasDistincts: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).mediasDistincts, // un groupe de presse ou une dépêche reprise compte une fois
+      sources: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).sources,
       nb: g.liste.length,
       derniere: g.liste[0].date,
       articles: g.liste.slice(0, MAX_ARTICLES).map((a) => ({ media: a.media, titre: a.titre, url: a.url, date: a.date })),

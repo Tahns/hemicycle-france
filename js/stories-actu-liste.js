@@ -57,8 +57,9 @@
   }
   const minusculesListe = storyMinuscules;
   function choisirEnBref(){
-    const tous = (ACTUALITES?.sujets || []).filter(s=> s.medias >= 2 && s.articles?.length)
-      .map((s, i)=>({ s, i })).sort((a, b)=> (b.s.medias - a.s.medias) || (a.i - b.i));
+    const nbM = s=> s.mediasDistincts ?? s.medias; // médias distincts (un groupe de presse ou une dépêche reprise compte une fois)
+    const tous = (ACTUALITES?.sujets || []).filter(s=> nbM(s) >= 2 && s.articles?.length)
+      .map((s, i)=>({ s, i })).sort((a, b)=> (nbM(b.s) - nbM(a.s)) || (a.i - b.i));
     const titreDe = s => s.titrePropre?.titre || s.articles[0].titre;
     const pris = [], titres = new Set(), themes = new Set();
     const prendre = (filtre)=> { for(const e of tous){ if(pris.length >= 4) break; if(pris.includes(e)) continue; if(filtre(e)){ pris.push(e); titres.add(titreDe(e.s)); themes.add(e.s.illustration?.theme || "politique"); } } };
@@ -134,7 +135,7 @@
     if(nbMediasVus < 3) return null;
     if(arts.length < 2) return null; // jamais deux fois le même titre (reprises de dépêche) : sans au moins deux titres distincts, pas de dossier
     arts.sort((x, y)=> String(y.date).localeCompare(String(x.date)));
-    const nbMedias = dossier.medias?.length || arts.length, nbArts = dossier.nb || dossier.articles?.length || arts.length;
+    const nbMedias = dossier.mediasDistincts ?? (dossier.medias?.length || arts.length), nbArts = dossier.nb || dossier.articles?.length || arts.length;
     const { L, marge } = STORY, larg = L - 2 * marge;
     // Contexte : un fait tiré du sujet qui recoupe le plus ce dossier
     const urls = new Set((dossier.articles || []).map(a=> a.url));

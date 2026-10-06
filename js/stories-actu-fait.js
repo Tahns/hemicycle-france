@@ -44,7 +44,8 @@ const sujetDe = info => ACTUALITES?.sujets?.[Number(info)] || null;
 const rubrique = s => (THEMES_ACTU[s?.illustration?.theme] || THEMES_ACTU.politique)[2];
 // Notre titre ; à défaut, un titre de repli neutre (jamais un titre de presse en grand titre)
 const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && storyTypo(s.titrePropre.titre)) || `${rubrique(s)} · en\u00A0ce\u00A0moment`;
-const mediasDe = s => [...new Set((s.articles || []).map(a => a.media).filter(Boolean))];
+// Médias DISTINCTS : un groupe de presse (EBRA…) ou une dépêche reprise à l'identique compte une fois (data/actualites.json : « sources », voir scripts/regroupement.cjs)
+const mediasDe = s => (Array.isArray(s.sources) && s.sources.length ? s.sources.filter(Boolean) : [...new Set((s.articles || []).map(a => a.media).filter(Boolean))]);
 const sansAccent = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 // Titre de presse prêt à être cité : sans rubrique en tête, guillemets internes typographiques
 function titreCite(t){

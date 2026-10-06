@@ -55,7 +55,7 @@ const attendreDelai = (base, i) => Math.min(Math.round(base * Math.pow(1.3, i)),
  * Publie le carrousel. `graph(methode, chemin, params)` est le client de l'API (publier-stories.cjs) ; renvoie { mediaId, enfants }.
  * Erreur : err.avantPublication === true (rien de publié, nouvel essai permis) ou err.publicationIncertaine === true (ne jamais réessayer).
  */
-async function publierCarrousel({ graph, userId, entree, attenteMs = 3000, essais = 20, dormir = dormirVraiment }) {
+async function publierCarrousel({ graph, userId, entree, attenteMs = 3000, essais = 20, dormir = dormirVraiment, avantMediaPublish = null }) {
   const v = validerCarrousel(entree);
   if (!v.ok) { const err = new Error("carrousel invalide : " + v.erreurs.join(" ; ")); err.avantPublication = true; throw err; }
   let parent;
@@ -76,6 +76,7 @@ async function publierCarrousel({ graph, userId, entree, attenteMs = 3000, essai
   } catch (err) { err.avantPublication = true; throw err; }
   let pub;
   try {
+    if (avantMediaPublish) avantMediaPublish(parent); // intention « en cours » écrite avant media_publish (audit A-01)
     pub = await graph("POST", `/${userId}/media_publish`, { creation_id: parent });
     if (!pub.id) throw new Error("API : media_publish sans identifiant");
   } catch (err) { err.publicationIncertaine = true; throw err; }

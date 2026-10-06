@@ -133,7 +133,7 @@ test("titresProches : deux titres de repli « X : l'essentiel du moment » sont 
   assert.strictEqual(titresProches("Finances publiques : l'essentiel du moment", "Environnement : l'essentiel du moment"), false);
 });
 
-test("« repris par N médias » : quatre titres du groupe EBRA avec le même titre comptent pour quatre médias", { todo: "J-21 : Le Progrès, DNA, Le Dauphiné libéré et L'Est républicain publient la même dépêche ; choisirSujet les compte comme 4 médias (seuil de 3) et l'image affiche « Repris par 4 médias » (story 09300bde3322). choisirDossier a déjà un garde-fou (3 titres distincts), pas choisirSujet" }, () => {
+test("« repris par N médias » : quatre titres du groupe EBRA avec le même titre comptent pour quatre médias", () => {
   const now = new Date("2026-10-05T10:00:00Z");
   const titre = "Social. Blocus des lycées : Laurent Nuñez réfute toute intervention « disproportionnée » des forces de l'ordre";
   const s = { derniere: "2026-10-05T09:30:00.000Z", illustration: { theme: "politique", personnes: [], partis: [] }, titrePropre: { titre: "Blocus des lycées : position du ministre", origine: "regles" },
@@ -265,6 +265,7 @@ test("ficheDate : un post reste au fil, mais sa légende et son image affirment 
 // ─────────────────────────────────────────────────────────────────────────────
 const entreeFile = (id, cree, extra = {}) => ({ id, cree, titre: "Budget : le gouvernement présente son texte", medias: ["A", "B", "C"], url_image: `https://example.org/img/${id}.jpg`, type: "story", sources: [], ...extra });
 const config = { monetisation: false, validationHumaine: false };
+const choir = ({ file, retires }) => choisir({ file, registre: { entrees: [] }, config, now: new Date("2026-10-05T10:00:00Z"), retires });
 const peutPublier = (now, extra = {}) => !choisir({ file: { entrees: [entreeFile("aaaaaaaaaaaa", new Date(Date.parse(now) - 36e5).toISOString())] }, registre: { entrees: [] }, config, now: new Date(now), ...extra }).refus;
 
 test("publier-stories (non-régression) : plage 7 h – 23 h à Paris, heure d'été comme heure d'hiver", () => {
@@ -317,8 +318,13 @@ const serveur = http.createServer((req, res) => {
       if (etat.refuser && corps.includes(etat.refuser)) return json(400, { error: { message: "Invalid image" } });
       return json(200, { id: "CONT1" });
     }
+    if (url.pathname === "/IGUSER/stories" || url.pathname === "/IGUSER/media") { // vérification côté Instagram après une réponse perdue
+      if (!etat.stories) return json(404, { error: { message: "inconnu" } });
+      return json(200, { data: [{ id: "MEDIATROUVE", timestamp: new Date(Date.parse(MAINTENANT) + 2000).toISOString().replace(/\.\d+Z$/, "+0000") }] });
+    }
     if (url.pathname === "/CONT1") return json(200, { status_code: "FINISHED", id: "CONT1" });
     if (url.pathname === "/IGUSER/media_publish") {
+      etat.surPublication?.(etat.dossierEssai); // espion : état du registre au moment de media_publish
       vraies++; // la publication a bien eu lieu côté Instagram
       return etat.reponsePerdue ? json(500, { error: { message: "Internal error (réponse perdue)" } }) : json(200, { id: "MEDIA" + vraies });
     }
@@ -334,6 +340,7 @@ async function lancer({ entrees = [], registre = null, registreBrut = null, cfg 
   Object.assign(etat, reglages);
   appels.length = 0;
   const d = mkdtempSync(join(tmpdir(), "audit-"));
+  etat.dossierEssai = d;
   writeFileSync(join(d, "file.json"), JSON.stringify({ entrees }));
   writeFileSync(join(d, "config.json"), cfgBrute ?? JSON.stringify(cfg));
   if (registre || registreBrut) writeFileSync(join(d, "reg.json"), registreBrut ?? JSON.stringify(registre));
@@ -397,6 +404,81 @@ test("publier-stories : jeton invalide → l'exécution GitHub reste verte, l'al
   assert.notStrictEqual(r.code, 0, "code de sortie 0 malgré un jeton invalide");
 });
 
+test("publier-stories : réponse perdue, publication retrouvée côté Instagram : inscrite « publiee », jamais rejouée (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const avant = vraies;
+  const r1 = await lancer({ entrees: [e], reglages: { reponsePerdue: true, stories: true } });
+  const ligne = r1.registre.entrees.find((x) => x.id === e.id);
+  assert.strictEqual(ligne.statut, "publiee");
+  assert.strictEqual(ligne.mediaId, "MEDIATROUVE");
+  assert.strictEqual(r1.code, 0);
+  await lancer({ entrees: [e], registre: r1.registre, now: new Date(Date.parse(MAINTENANT) + 2 * 36e5).toISOString() });
+  assert.strictEqual(vraies - avant, 1);
+});
+
+test("publier-stories : réponse perdue et vérification impossible : « incertaine », code 1, comptée dans les plafonds, jamais rejouée (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const r1 = await lancer({ entrees: [e], reglages: { reponsePerdue: true } });
+  const ligne = r1.registre.entrees.find((x) => x.id === e.id);
+  assert.strictEqual(ligne.statut, "incertaine");
+  assert.ok(ligne.publieLe, "datée : elle compte dans l'espacement et les plafonds");
+  assert.notStrictEqual(r1.code, 0, "alerte visible");
+  assert.ok(!r1.sortie.includes(JETON));
+});
+
+test("publier-stories : intention « en-cours » restée au registre (job tué avant l'écriture) : jamais rejouée, marquée « incertaine » (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const avant = vraies;
+  const registre = { entrees: [{ id: e.id, statut: "en-cours", publieLe: il_y_a(0.5), mediaId: null, type: "story" }] };
+  const r = await lancer({ entrees: [e], registre });
+  assert.strictEqual(vraies - avant, 0, "pas de nouvelle publication");
+  assert.strictEqual(r.registre.entrees.find((x) => x.id === e.id).statut, "incertaine");
+  assert.notStrictEqual(r.code, 0);
+  const r2 = await lancer({ entrees: [e], registre, reglages: { stories: true } });
+  assert.strictEqual(r2.registre.entrees.find((x) => x.id === e.id).statut, "publiee", "retrouvée côté Instagram : inscrite sans republier");
+});
+
+test("publier-stories : l'intention « en-cours » est écrite AVANT media_publish (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  let vu = null;
+  const r = await lancer({ entrees: [e], reglages: { surPublication: (d) => { vu = JSON.parse(readFileSync(join(d, "reg.json"), "utf-8")); } } });
+  assert.ok(vu?.entrees.some((x) => x.id === e.id && x.statut === "en-cours"), "au moment de media_publish, le registre contient déjà l'intention « en-cours »");
+  assert.strictEqual(r.registre.entrees.find((x) => x.id === e.id).statut, "publiee", "puis elle devient « publiee »");
+  assert.strictEqual(r.registre.entrees.filter((x) => x.id === e.id).length, 1, "une seule ligne");
+});
+
+test("publier-stories : registre ou configuration illisibles : rien ne part, alerte visible (code 1) (A-02, A-03)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const r1 = await lancer({ entrees: [e], registreBrut: "<<<<<<< HEAD\n{ conflit de fusion" });
+  assert.strictEqual(r1.publications, 0);
+  assert.notStrictEqual(r1.code, 0);
+  const r2 = await lancer({ entrees: [e], cfgBrute: "{ \"validationHumaine\": true, " });
+  assert.strictEqual(r2.publications, 0);
+  assert.notStrictEqual(r2.code, 0);
+  // la configuration absente garde les valeurs par défaut (comportement historique) ; valide, validationHumaine à true : rien ne part, code 0
+  const r3 = await lancer({ entrees: [e], cfg: { ...config, validationHumaine: true } });
+  assert.strictEqual(r3.publications, 0);
+  assert.strictEqual(r3.code, 0);
+});
+
+test("contenus retirés (J-23) : jamais republiés, texte jamais repris, images supprimées", async () => {
+  const { lireRetires } = require("../scripts/retires.cjs");
+  const retires = lireRetires();
+  for (const id of ["bardella-0210", "jour-0310", "lyceens-0310", "lyceens-0410", "post-primaire-0510"]) assert.ok(retires.has(id), id);
+  // le registre n'est pas modifié (trace d'historique)
+  const reg = JSON.parse(readFileSync(join(RACINE, "data", "instagram-publiees.json"), "utf-8"));
+  assert.ok(reg.entrees.some((x) => x.id === "bardella-0210"), "le registre garde la trace");
+  // une entrée de la file qui porte un id retiré n'est jamais publiée
+  const e = entreeFile("bardella-0210", new Date(Date.parse("2026-10-05T10:00:00Z") - 36e5).toISOString());
+  assert.ok(choir({ file: { entrees: [e] }, retires: new Set(["bardella-0210"]) }).refus, "id retiré : refus");
+  assert.ok(!choir({ file: { entrees: [e] } }).refus, "même entrée non retirée : publiable");
+  // le texte d'une publication retirée n'entre pas dans la détection de sujets proches
+  const autre = entreeFile("cccccccccccc", "2026-10-05T09:30:00.000Z", { titre: "Retraites : le gouvernement relance la concertation" });
+  const registre = { entrees: [{ id: "bardella-0210", statut: "publiee", publieLe: "2026-10-05T07:00:00.000Z", mediaId: "windsor", type: "story", titre: "Retraites : le gouvernement relance la concertation", sujets: [] }] };
+  assert.ok(choisir({ file: { entrees: [autre] }, registre, config, now: new Date("2026-10-05T10:00:00Z") }).refus, "sans la liste : sujet proche d'une publication récente");
+  assert.ok(!choisir({ file: { entrees: [autre] }, registre, config, now: new Date("2026-10-05T10:00:00Z"), retires: new Set(["bardella-0210"]) }).refus, "texte retiré ignoré");
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 8. Hygiène du dépôt : contenus publiés hors chaîne
 // ─────────────────────────────────────────────────────────────────────────────
@@ -406,7 +488,7 @@ test("registre : chaque publication « publiee » a un vrai identifiant de médi
   aucun(faux, "entrées sans identifiant Instagram valide");
 });
 
-test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste servie publiquement", { todo: "A-07 : bardella-0210.jpg, jour-0310.jpg, lyceens-0310.jpg, lyceens-0410.jpg… échappent à nettoyerImages (nom ≠ 12 hexa) : jamais supprimées, restent lisibles sur GitHub Pages, et contiennent des mots que la liste prudente exclut (« antisémites », « victimes », « interpellations »)" }, () => {
+test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste servie publiquement", () => {
   const hors = readdirSync(join(RACINE, "instagram", "auto")).filter((f) => !/^[0-9a-f]{12}\.(jpg|mp4)$/.test(f));
   aucun(hors, "fichiers hors convention");
 });
