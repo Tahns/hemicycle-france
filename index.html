@@ -4420,10 +4420,8 @@ function sujetHTML(s, court, une, sup){
     ${visuelActu(s)}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
-    ${s.titrePropre?.titre
-      ? `<h3>${esc(s.titrePropre.titre)}</h3>
-    <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>`
-      : `<h3><a href="${lien(a.url)}" target="_blank" rel="noopener">${pastilleVideo(a)}${esc(a.titre)}</a></h3>`}
+    <h3>${esc(s.titrePropre?.titre || (THEMES_ACTU[s.illustration?.theme] || THEMES_ACTU.politique)[2])}</h3>
+    <p class="actu-citation">${pastilleVideo(a)}« <a href="${lien(a.url)}" target="_blank" rel="noopener">${esc(a.titre)}</a> » <span class="actu-citation-media">${esc(a.media)}</span></p>
     ${(s.contexte || []).length ? `<p class="actu-contexte"><b>Le contexte</b> : ${s.contexte.map(c=>`${esc(c.texte)} <small>(${esc(c.source)})</small>`).join(" · ")}</p>` : ""}
     <div class="actu-meta">${s.medias >= 2 ? `<span class="actu-nb">${s.medias} médias · </span>` : ""}<span class="actu-medias">${esc(medias.join(", "))}</span><span class="actu-quand"> · ${esc(ilYA(s.derniere))}</span>${noms.length ? ` · <span class="actu-noms">${noms.map(esc).join(", ")}</span>` : ""}${idxActu >= 0 ? ` <button type="button" class="lien-bouton bouton-story mini" data-story="actualite" data-id="${idxActu}" aria-label="Créer une story de ce sujet" title="Créer une story de ce sujet"></button>` : ""}</div>
     ${espaceBoutonFav("sujet", a.url, a.titre)}

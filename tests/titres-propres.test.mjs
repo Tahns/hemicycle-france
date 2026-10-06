@@ -2,8 +2,9 @@
 import test from "node:test";
 import assert from "node:assert";
 import { createRequire } from "node:module";
-const { estVideo, titrePropre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+const { estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
 
+const plat = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const art = (media, titre, i = 0) => ({ media, titre, url: `https://example.org/${media.replace(/\W/g, "")}/${i}`, date: "2026-10-05T08:00:00.000Z" });
 const sujet = (titres, extra = {}) => ({ medias: new Set(titres.map(([m]) => m)).size, derniere: "2026-10-05T08:00:00.000Z", illustration: { theme: "politique", personnes: [] }, articles: titres.map(([m, t], i) => art(m, t, i)), ...extra });
 const maintenant = new Date("2026-10-05T10:00:00Z");
@@ -148,8 +149,88 @@ test("enrichirSujet : n'écrit que les champs qui existent, marque les vidéos",
   s.articles[0].url = "https://www.youtube.com/watch?v=1";
   enrichirSujet(s, [], {}, maintenant);
   assert.strictEqual(s.articles[0].video, true);
-  for (const k of ["titrePropre", "contexte", "chiffre", "date"]) assert.ok(!(k in s), `pas de champ ${k} vide`);
+  assert.ok(s.titrePropre?.titre, "tout sujet a désormais un titre à nous");
+  for (const k of ["contexte", "chiffre", "date"]) assert.ok(!(k in s), `pas de champ ${k} vide`);
   s.articles[0].url = "https://www.lemonde.fr/x.html";
   enrichirSujet(s, [], {}, maintenant);
   assert.ok(!("video" in s.articles[0]), "video retiré si le lien n'en est pas une");
+});
+
+// ─── Titres par règles : de vrais sujets (data/actualites.json du 6 octobre 2026) ───
+const gouvernement = { membres: [{ nom: "Laurent Nuñez", fonction: "Ministre de l'intérieur" }, { nom: "Sébastien Lecornu", fonction: "Premier ministre" }] };
+const reel = (titre, ill = {}, plus = []) => ({ illustration: { theme: "politique", personnes: [], partis: [], ...ill }, articles: [{ media: "Le Progrès", titre, url: "https://www.leprogres.fr/a", date: "2026-10-06T04:00:00Z" }, ...plus.map(([m, t], i) => ({ media: m, titre: t, url: `https://x.fr/${i}`, date: "2026-10-06T04:00:00Z" }))] });
+const pers = (nom, parti) => ({ nom, ...(parti ? { parti } : {}) });
+const CAS = [
+  ["Politique. « Concentré et vigilant » : face à la colère lycéenne, le gouvernement cherche la bonne réponse", {}, "Gouvernement : réponse sur la mobilisation lycéenne"],
+  ["Mouvement lycéen: \"Tout est fait pour dénigrer la jeunesse et la terroriser\", estime Danielle Simonnet, députée \"L'Après\" de Paris", { personnes: [pers("Danielle Simonnet")] }, "Danielle Simonnet : prise de position sur la mobilisation lycéenne"],
+  ["Colère lycéenne: Gérard Larcher, président LR du Sénat, estime “qu’il faut rétablir l’ordre”", { personnes: [pers("Gérard Larcher", "LR")], partis: ["LR"] }, "Gérard Larcher (LR) : prise de position sur la mobilisation lycéenne"],
+  ["« Une réponse sécuritaire totalement disproportionnée » : le PS va déposer une proposition de loi contre les armes mutilantes lors des manifestations de mineurs", { partis: ["SOC"] }, "PS : proposition de loi sur le maintien de l'ordre"],
+  ["Grenoble. Plainte, manifestation, mises au point… Le conseil municipal s’est ouvert une semaine après les incidents entre élus et agents", {}, "Grenoble : conseil municipal"],
+  ["Haute-Savoie. Praz-sur-Arly : de nouvelles pistes proposées pour la ZAC des Varins", {}, "Haute-Savoie : projet d'aménagement"],
+  ["Loi intégrale contre les violences sexuelles : les députés adoptent la création d’unités spécialisées au sein de la police", {}, "Assemblée nationale : vote sur la loi contre les violences sexuelles"],
+  ["Pyrénées-Atlantiques : le tribunal administratif suspend l’interdiction de manifester aux abords de deux lycées", { theme: "justice" }, "Pyrénées-Atlantiques : décision du tribunal administratif"],
+  ["L'ÉDITO DE GUILLAUME DARET - Colère des lycéens: Sébastien Lecornu au pied du mur", { personnes: [pers("Sébastien Lecornu")] }, "Premier ministre : point de vue éditorial sur la mobilisation lycéenne"],
+  ["Éditorial. Colère lycéenne : face au chaos, les syndicats à la rescousse", {}, "Syndicats : point de vue éditorial sur la mobilisation lycéenne"],
+  ["Le dessin du mardi 6 octobre : deux poids, deux mesures…", {}, "Dessin de presse : regard sur l'actualité du jour"],
+  ["Jujurieux. Fiscalité, urbanisme : les élus ajustent les outils de gestion communale", { theme: "budget" }, "Jujurieux : finances locales"],
+  ["Blocage des lycées en France: la LDH dénonce une «dérive globale par rapport à l'État de droit» de la police", {}, "LDH : prise de position sur la mobilisation lycéenne"],
+  ["Marine Le Pen: sans \"rupture politique, la France court vers le défaut\" de paiement", { personnes: [pers("Marine Le Pen", "RN")] }, "Marine Le Pen (RN) : actualité sur les finances publiques"],
+  ["Une quarantaine d’enfants incommodés après un repas à la cantine en Dordogne : c’est bien une intoxication alimentaire due à une bactérie", {}, "Santé : l'essentiel du moment"],
+  ["Deux scénarios pour demain — Eau en 2050 : scénario catastrophe ?", {}, "Environnement : l'essentiel du moment"],
+  ["Gilley. Une journée des citoyens d’honneurs du Saugeais fidèle à ses valeurs", {}, "Gilley : actualité locale"],
+  ["Billet. Le mal est ailleurs", {}, "Billet d'humeur : regard sur l'actualité du jour"],
+];
+test("titreParRegles : 18 vrais sujets, titre à nous prévu, ≤ 70 caractères, jamais le titre du média", () => {
+  for (const [titre, ill, attendu] of CAS) {
+    const t = titreSujet(reel(titre, ill), [], { gouvernement });
+    assert.strictEqual(t.titre, attendu, titre);
+    assert.ok(t.titre.length <= 70, `${t.titre} (${t.titre.length})`);
+    assert.notStrictEqual(t.titre.toLowerCase(), titre.toLowerCase());
+  }
+});
+
+test("titreParRegles : présomption d'innocence, aucun nom ni verbe qui accuse dans une procédure", () => {
+  const ill = { personnes: [pers("Bruno Le Maire")] };
+  for (const titre of [
+    "La Roche-sur-Foron. « C’est d’autant plus frustrant » : déclaré inéligible pendant six mois, le maire va faire appel",
+    "« On ne lâche pas » : les larmes de la maman de Rosa, victime présumée de Jérôme Barella, mobilisée à Paris",
+    "Zaïd A., antifa syrien, risque 24 ans de prison en Hongrie : la France doit refuser son extradition",
+  ]) {
+    const t = titreSujet(reel(titre, ill), [], {}).titre;
+    assert.ok(!/Barella|Zaïd|Le Maire|coupable|accus|dénonc/i.test(t), t);
+    assert.match(t, /procédure judiciaire en cours/);
+  }
+});
+
+test("titreParRegles : aucun segment de plus de 4 mots repris d'un titre de média, pour tous les cas", () => {
+  const mots = (x) => plat(x).match(/[a-z0-9]+/g) || [];
+  for (const [titre, ill] of CAS) {
+    const t = mots(titreSujet(reel(titre, ill), [], { gouvernement }).titre), src = mots(titre).join(" ");
+    for (let i = 0; i + 5 <= t.length; i++) assert.ok(!src.includes(t.slice(i, i + 5).join(" ")), `segment repris : ${t.slice(i, i + 5).join(" ")}`);
+  }
+});
+
+test("titreSujet : le titre du dossier ne s'applique qu'à un sujet qui parle du dossier", () => {
+  const dossier = (articles) => [{ id: "presidentielle", titre: "Primaire de la gauche", articles }];
+  const s = reel("Au Sénat, les centristes deviennent la deuxième force politique au détriment des socialistes, fragilisés", { partis: ["SOC"] });
+  assert.strictEqual(titreSujet(s, dossier(s.articles), {}).origine, "regles", "rattaché par le mot « socialistes » : pas le titre du dossier");
+  const s2 = reel("Plus de 140 000 inscrits à la primaire de la gauche : «C’est très au-delà de nos prévisions»");
+  assert.deepStrictEqual(titreSujet(s2, dossier(s2.articles), {}), { titre: "Primaire de la gauche", origine: "dossier" });
+});
+
+test("titreSujet : toujours un titre, même sans rien de reconnu, et jamais celui d'un média", () => {
+  for (const titre of ["Zzz", "François Hollande", "Pourquoi tout cela ?", "$content.TitleNoTags"]) {
+    const t = titreSujet(reel(titre, { personnes: titre === "François Hollande" ? [pers("François Hollande", "SOC")] : [] }), [], {});
+    assert.ok(t?.titre && t.titre.length <= 70 && t.titre !== titre, titre);
+  }
+  assert.strictEqual(titreParRegles({ articles: [] }, {}), null);
+});
+
+test("lieuDuTitre : lieu en tête, pas un thème", () => {
+  assert.strictEqual(lieuDuTitre("Gilley. Avec l’arrivée de Ghislain Boucard"), "Gilley");
+  assert.strictEqual(lieuDuTitre("Pyrénées-Atlantiques : le tribunal administratif"), "Pyrénées-Atlantiques");
+  assert.strictEqual(lieuDuTitre("La Roche-sur-Foron. « C’est frustrant »"), "La Roche-sur-Foron");
+  assert.strictEqual(lieuDuTitre("Politique. Le gouvernement cherche"), null);
+  assert.strictEqual(lieuDuTitre("Colère lycéenne: Gérard Larcher estime"), null);
+  assert.strictEqual(lieuDuTitre("Éditorial. Colère lycéenne : face au chaos"), null);
 });

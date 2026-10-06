@@ -138,11 +138,164 @@ function titrePropre(sujet, dossiers = []) {
   return { titre: meilleur.texte.charAt(0).toUpperCase() + meilleur.texte.slice(1), origine: "recoupement" };
 }
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Titres à nous, par règles (aucune IA, aucun réseau) : thème + acteur + action neutre, jamais un titre de média.
+// ─────────────────────────────────────────────────────────────────────────────
+const LONGUEUR_MAX = 70;
+/** Sujets reconnus (le premier qui correspond gagne) : S = intitulé court, O = complément (« sur … »), local = ce qui se passe sur place. */
+const THEMES_TITRES = [
+  { re: /lyce|blocus|parcoursup|mouvement lyceen/, S: "Lycées", O: "la mobilisation lycéenne", local: "mobilisation lycéenne" },
+  { re: /casseurs.payeurs/, S: "Loi « casseurs-payeurs »", O: "la loi « casseurs-payeurs »", local: "débat sur la loi" },
+  { re: /violences sexuelles/, S: "Violences sexuelles", O: "la loi contre les violences sexuelles", local: "débat sur la loi" },
+  { re: /plein.emploi/, S: "Plein-emploi", O: "la loi sur le plein-emploi", local: "bilan de la loi" },
+  { re: /primaire/, S: "Primaire de la gauche", O: "la primaire de la gauche", local: "primaire de la gauche" },
+  { re: /presidentielle|candidat a l'elysee|2027/, S: "Présidentielle 2027", O: "la présidentielle de 2027", local: "présidentielle" },
+  { re: /budget|dette|deficit|defaut|economies|milliards|impot|fiscal|taxe|carburant|indemnites|finances/, S: "Finances publiques", O: "les finances publiques", local: "finances locales" },
+  { re: /conseil municipal|conseil de la metropole|conseil departemental/, S: "Conseil municipal", O: "le conseil municipal", local: "conseil municipal" },
+  { re: /intelligence artificielle|\bia\b/, S: "Intelligence artificielle", O: "l'intelligence artificielle dans l'administration", local: "intelligence artificielle" },
+  { re: /\beau\b|climat|ecolog|biodiversite|environnement|riviere|energie/, S: "Environnement", O: "l'environnement", local: "environnement" },
+  { re: /cantine|intoxication|sante|hopital|medecin/, S: "Santé", O: "la santé publique", local: "santé publique" },
+  { re: /numerique|piratee|cyber|donnees/, S: "Numérique", O: "le numérique et les données", local: "numérique" },
+  { re: /extradition|hongrie|etranger|international|diplomat/, S: "International", O: "une affaire internationale", local: "affaire internationale" },
+  { re: /tribunal|plainte|proces|victime|ineligib|parquet|justice|procureur|affaire /, S: "Justice", O: "une procédure judiciaire", local: "procédure en cours" },
+  { re: /police|gendarm|securite|armes|lance.grenade|ordre public/, S: "Sécurité", O: "le maintien de l'ordre", local: "sécurité" },
+  { re: /refugie|asile|migrant|immigration|logement|\btoit\b/, S: "Logement et accueil", O: "le logement et l'accueil", local: "logement et accueil" },
+  { re: /\bzac\b|urbanisme|permis de construire|amenagement|terrain|travaux|lac de/, S: "Aménagement", O: "l'aménagement du territoire", local: "projet d'aménagement" },
+  { re: /alsace|metropole|grand paris|grand est|region|departement|collectivit/, S: "Collectivités locales", O: "l'organisation des collectivités", local: "organisation territoriale" },
+  { re: /ecole|enfants\b|scolaire|periscolaire|etudiant|jeunesse|college|education/, S: "Éducation et jeunesse", O: "l'éducation et la jeunesse", local: "actualité scolaire" },
+  { re: /emploi|chomage|association|syndicat|\bsociale?\b|pauvre|retraite/, S: "Social", O: "le social et l'emploi", local: "actualité sociale" },
+  { re: /senat|senateur|centriste/, S: "Sénat", O: "le Sénat", local: "actualité du Sénat" },
+  { re: /\bdeputes?\b|\bdeputees?\b|assemblee nationale|hemicycle/, S: "Assemblée nationale", O: "les débats parlementaires", local: "actualité parlementaire" },
+  { re: /gouvernement|ministre|matignon|elysee/, S: "Gouvernement", O: "l'action du gouvernement", local: "action du gouvernement" },
+  { re: /elu|maire|commune|mairie|municipal|election/, S: "Vie locale", O: "la vie locale", local: "vie municipale" },
+];
+const THEME_ILLUSTRATION = { gouvernement: "Gouvernement", budget: "Finances publiques", politique: "Politique", justice: "Justice", election: "Élections", assemblee: "Assemblée nationale", senat: "Sénat", securite: "Sécurité", international: "International" };
+const PREFIXES_NON_LIEUX = /^(politique|social|editorial|edito|billet|humour|insolite|economie|societe|sport|culture|direct|en direct|video|replay|opinion|tribune|chronique|analyse|enquete|reportage|portrait|international|monde|france|actualite|colere|mouvement|mobilisation|manifestations?|blocage|blocus|contestation|budget|loi|affaire|presidentielle|primaire|gouvernement|assemblee|senat|justice|securite|dessin|le dessin|pourquoi|comment|apres|avant|pas de|un|une)\b/;
+/** « Gilley. Avec… », « Voiron. Loi contre… », « Pyrénées-Atlantiques : le tribunal… » : le lieu en tête de titre, ou null. */
+function lieuDuTitre(titre) {
+  const m = String(titre || "").replace(/^(DIRECT|EN DIRECT|VIDÉO|Vidéo)\s*[.:-]\s*/, "").match(/^(\p{Lu}[\p{L}'’-]*(?:\s+(?:de|du|des|la|le|les|sur|sous|en|d['’]|l['’])?\s*\p{Lu}[\p{L}'’-]*){0,2})\s*[.:]\s+\S/u);
+  if (!m) return null;
+  const lieu = m[1].replace(/\s+/g, " ").trim();
+  if (lieu.length < 3 || lieu.length > 30 || PREFIXES_NON_LIEUX.test(plat(lieu)) || THEMES_TITRES[0].re.test(plat(lieu))) return null;
+  return lieu;
+}
+const ACTIONS = [
+  ["decision", /suspend|annule|invalide|tribunal administratif/, "décision du tribunal administratif sur"],
+  ["vote", /adopt|votent|vote par|votees?\b|rejet/, "vote sur"],
+  ["depot", /deposer|depose|proposition de loi/, "proposition de loi sur"],
+  ["appel", /appelle\b|appellent|appel a|mobilisent|mobilise\b/, "appel sur"],
+  ["reponse", /cherche la|reponse|repond|reagit|face a/, "réponse sur"],
+  ["temoignage", /temoign|ca fait mal|larmes|maman/, "témoignage sur"],
+  ["annonce", /\blance\s|annonce|propose|presente|promet|devoile|detaille/, "annonces sur"],
+  ["position", /denonce|estime|affirme|declare|critique|juge|indique|exige|reclame|met en garde|souhaite|dit|vent debout|interroge|rappelle|evoque/, "prise de position sur"],
+];
+const ABREV = { SOC: "PS", ECO: "Écologistes", EPR: "EPR", RN: "RN", LFI: "LFI", LR: "LR", UDR: "UDR", PS: "PS", MODEM: "MoDem", DEM: "MoDem", HOR: "Horizons", LIOT: "LIOT", GDR: "GDR" };
+const JUDICIAIRE_TITRES = /mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement|victime|inéligib|prison|extradition|\baffaire\b/i;
+const PROCEDURE = /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement/i;
+
+/** Acteur nommé dans le titre : personne (sa fonction officielle si elle est au Gouvernement), parti, ou institution ; null sinon. */
+function acteurDe(sujet, donnees, judiciaire) {
+  const titre = sujet.articles[0].titre, p = plat(titre);
+  const tous = plat(sujet.articles.map((a) => a.titre).join(" | "));
+  if (!judiciaire) {
+    const rang = (x) => (p.includes(plat(x.nom)) ? p.indexOf(plat(x.nom)) : 9999);
+    const nommes = (sujet.illustration?.personnes || []).filter((x) => tous.includes(plat(x.nom)) || (plat(x.nom).split(" ").slice(-1)[0].length >= 5 && new RegExp("\\b" + plat(x.nom).split(" ").slice(-1)[0] + "\\b").test(tous) && !/\bmaire\b/.test(plat(x.nom)))).sort((a, b) => rang(a) - rang(b));
+    const pers = nommes[0];
+    if (pers) {
+      const m = (donnees.gouvernement?.membres || []).find((x) => plat(x.nom) === plat(pers.nom));
+      if (m) {
+        const f = m.fonction.replace(/’/g, "'");
+        return { type: "fonction", label: f.length <= 32 ? f : "Gouvernement" };
+      }
+      const parti = ABREV[String(pers.parti || "").toUpperCase()] || null;
+      return { type: "personne", label: parti ? `${pers.nom} (${parti})` : pers.nom, court: pers.nom };
+    }
+  }
+  const partis = (sujet.illustration?.partis || []).map((x) => ABREV[String(x).toUpperCase()]).filter(Boolean)
+    .filter((x) => new RegExp(`\\b(le |la |les |l')?${x}\\b`, "i").test(titre) || (x === "Écologistes" && /[ée]cologistes/i.test(titre)));
+  if (partis.length) return { type: "parti", label: [...new Set(partis)].slice(0, 2).join(" et ") };
+  const inst = [[/tribunal administratif/, "Tribunal administratif"], [/\bsenat|senateur|centristes/, "Sénat"], [/\bldh\b/, "LDH"], [/syndicats?/, "Syndicats"], [/gouvernement/, "Gouvernement"],
+    [/departement/, "Département"], [/\bregion\b/, "Région"], [/deputes?|assemblee nationale/, "Assemblée nationale"], [/sapeurs.pompiers/, "Sapeurs-pompiers"]];
+  for (const [re, label] of inst) if (re.test(p)) return { type: "institution", label };
+  return null;
+}
+
+/**
+ * Titre à nous construit par règles à partir du thème, de l'acteur (fonction officielle depuis nos données) et d'une action neutre.
+ * Toujours un titre : { titre, origine: "regles", generique? }. Jamais le titre ni un segment cité d'un média ; aucun verbe qui accuse ;
+ * pas de nom de personne dès que les titres relèvent d'une procédure judiciaire (présomption d'innocence).
+ */
+function titreParRegles(sujet, donnees = {}) {
+  const articles = sujet?.articles || [];
+  if (!articles.length) return null;
+  const premier = articles[0].titre || "", p = plat(nettoyer(premier));
+  const brut = articles.slice(0, 6).map((a) => nettoyer(a.titre)).join(" | ");
+  const tous = plat(brut.replace(/\bIA\b/g, "intelligence artificielle"));
+  const judiciaire = articles.some((a) => JUDICIAIRE_TITRES.test(a.titre || ""));
+  const procedure = articles.some((a) => PROCEDURE.test(a.titre || ""));
+  const theme = THEMES_TITRES.find((t) => t.re.test(p)) || THEMES_TITRES.find((t) => t.re.test(tous)) || THEMES_TITRES.find((t) => t.re.test(plat(premier)));
+  const lieu = lieuDuTitre(premier);
+  const acteur = acteurDe(sujet, donnees, judiciaire);
+  const action = ACTIONS.find(([, re]) => re.test(p));
+  const pb = plat(premier);
+  const genre = /edito|editorial|\bbillet\b|chronique|tribune|\bdessin\b|\bhumour\b/.test(pb) ? (/\bdessin\b|\bhumour\b/.test(pb) ? "dessin" : /\bbillet\b/.test(pb) ? "billet" : "edito") : null;
+  const direct = /^(en )?direct\b/i.test(premier.trim());
+  const lim = (cands, generique = false) => {
+    const c = cands.filter(Boolean).map((x) => x.replace(/\s+/g, " ").trim()).find((x) => x.length <= LONGUEUR_MAX);
+    return c ? { titre: c.charAt(0).toUpperCase() + c.slice(1), origine: "regles", ...(generique ? { generique: true } : {}) } : null;
+  };
+  const S = theme?.S, O = theme?.O;
+
+  if (genre === "dessin") return lim(["Dessin de presse : regard sur l'actualité du jour"]);
+  if (genre === "billet" && !theme) return lim(["Billet d'humeur : regard sur l'actualité du jour"]);
+  if (procedure) {
+    const ou = lieu ? `${lieu} : ` : theme && theme.S !== "Justice" ? `${theme.S} : ` : "Justice : ";
+    if (/tribunal administratif|suspend/.test(p)) return lim([`${ou}décision du tribunal administratif sur ${O || "un arrêté"}`, `${ou}décision du tribunal administratif`, "Justice : décision du tribunal administratif"]);
+    return lim([`${ou}procédure judiciaire en cours`, "Justice : procédure en cours"]);
+  }
+  if (acteur && theme) {
+    const verbe = action ? action[2] : "actualité sur";
+    const l = acteur.label;
+    if (plat(l) === plat(S)) return lim([`${S} : l'essentiel du moment`]);
+    // Thème institutionnel seulement : sans verbe clair, on n'invente pas de lien entre la personne et le sujet
+    if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action[0]))) return lim([`${l} : l'essentiel du moment`, `${acteur.court || l} : l'essentiel du moment`], true);
+    if (genre) return lim([`${l} : point de vue éditorial sur ${O}`, `${l} : point de vue éditorial`, `${S} : point de vue éditorial`]);
+    return lim([`${l} : ${verbe} ${O}`, acteur.court ? `${acteur.court} : ${verbe} ${O}` : null, `${S} : ${verbe} ${O}`, `${l} : ${verbe} ${S.toLowerCase()}`, `${S} : ${l}`]);
+  }
+  if (acteur) return lim([`${acteur.label} : l'essentiel du moment`, `${acteur.court || acteur.label} : l'essentiel du moment`], true);
+  if (genre) return lim([lieu && S ? `${lieu} : point de vue éditorial` : null, S ? `${S} : point de vue éditorial` : null, "Politique : point de vue éditorial"]);
+  if (direct && S) return lim([`${S} : suivi de la journée`]);
+  if (lieu && theme) return lim([`${lieu} : ${theme.local}`, `${lieu} : ${S.toLowerCase()}`]);
+  if (lieu) return lim([`${lieu} : actualité locale`], true);
+  if (theme && action) return lim([`${S} : ${action[2]} ${O}`, `${S} : l'essentiel du moment`]);
+  if (theme) return lim([`${S} : l'essentiel du moment`], !/^(Lycées|Primaire|Présidentielle|Finances|Santé|Justice|Numérique|Intelligence|Environnement|Logement|Aménagement|Sécurité|Éducation|Loi|Violences)/.test(S));
+  return lim([`${THEME_ILLUSTRATION[sujet.illustration?.theme] || "Politique"} : l'essentiel du moment`], true);
+}
+
+/** Titre à nous pour tout sujet : dossier, nom d'une loi, règles (thème + acteur + action), puis expression commune des médias si les règles restent génériques. */
+function titreSujet(sujet, dossiers = [], donnees = {}) {
+  const avecDossier = titrePropre(sujet, dossiers);
+  let recoupe = avecDossier;
+  if (avecDossier?.origine === "dossier") {
+    // Le sujet doit vraiment parler du dossier (début d'un mot-clé du titre du dossier dans ses titres) : un article rattaché par un mot banal ne prend pas son titre
+    const t = plat(sujet.articles.map((a) => a.titre).join(" | "));
+    const ancres = plat(avecDossier.titre).split(/[^a-z0-9]+/).filter((m) => m.length >= 5 && !MOTS_VIDES.has(m) && !TROP_GENERIQUES.has(m)).map((m) => m.slice(0, 5));
+    if (ancres.some((m) => t.includes(m))) return avecDossier;
+    recoupe = titrePropre(sujet, []);
+  }
+  if (recoupe && /^(Projet de loi|Proposition de loi|Loi) «/.test(recoupe.titre)) return recoupe;
+  const regles = titreParRegles(sujet, donnees);
+  if (regles && !regles.generique) return regles;
+  if (recoupe && recoupe.titre.length <= LONGUEUR_MAX && !estParticipe(recoupe.titre.split(" ")[0])) return recoupe;
+  return regles;
+}
+
 /** Tous les champs « média » d'un sujet, prêts à écrire (seulement ceux qui existent). Marque aussi les vidéos. */
 function enrichirSujet(sujet, dossiers, donnees, maintenant = new Date()) {
   for (const a of sujet.articles || []) if (estVideo(a.url)) a.video = true; else delete a.video;
   for (const k of ["titrePropre", "contexte", "chiffre", "date"]) delete sujet[k];
-  const tp = titrePropre(sujet, dossiers); if (tp) sujet.titrePropre = tp;
+  const tp = titreSujet(sujet, dossiers, donnees); if (tp) sujet.titrePropre = tp;
   const c = contexteSujet(sujet, donnees, maintenant); if (c.length) sujet.contexte = c;
   const ch = chiffreSujet(sujet); if (ch) sujet.chiffre = ch;
   const da = dateSujet(sujet, maintenant); if (da) sujet.date = da;
@@ -255,4 +408,4 @@ function dateSujet(sujet, maintenant = new Date()) {
   return e ? { iso: e.iso, jour: e.jour, mois: e.mois } : null;
 }
 
-module.exports = { estVideo, titrePropre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
+module.exports = { estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };

@@ -184,20 +184,27 @@ async function checkActualites() {
       }
     }
   }
-  // Ce que le site ajoute (facultatif) : titre à nous, contexte, chiffre, date, liens vidéo
+  // Ce que le site ajoute : titre à nous (obligatoire), contexte, chiffre, date, liens vidéo
   const brefs = [...data.sujets, ...(Array.isArray(data.dossiers) ? data.dossiers : [])];
   for (const a of brefs.flatMap((s) => s.articles || [])) if (a.video !== undefined && a.video !== true) err(`actualites.json : video doit valoir true (${a.url})`);
   data.sujets.forEach((s, i) => {
     const nom = `actualites.json : sujet ${i}`;
-    if (s.titrePropre !== undefined) {
-      const t = s.titrePropre?.titre;
-      if (typeof t !== "string" || t.length < 3 || t.length > 80 || !["dossier", "recoupement"].includes(s.titrePropre.origine)) err(`${nom} : titrePropre invalide`);
-      else {
-        const plat = (x) => String(x).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-        if ((s.articles || []).some((a) => plat(a.titre) === plat(t))) err(`${nom} : titrePropre identique à un titre de presse`);
-        if ((s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne`);
-        if (s.titrePropre.origine === "recoupement" && new Set((s.articles || []).map((a) => a.media)).size < 2) err(`${nom} : titrePropre sans recoupement`);
+    // Tout sujet publié porte un titre à nous (jamais celui d'un média) : court, sans copie de titre de presse, sans nom dans une procédure
+    const t = s.titrePropre?.titre;
+    if (typeof t !== "string" || t.trim().length < 3 || t.length > 70 || !["dossier", "recoupement", "regles"].includes(s.titrePropre.origine)) err(`${nom} : titrePropre absent ou invalide (3 à 70 caractères, origine dossier/recoupement/regles)`);
+    else {
+      const plat = (x) => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      const tm = plat(t).split(" ").filter(Boolean);
+      for (const a of s.articles || []) {
+        const pm = plat(a.titre);
+        if (pm === plat(t)) err(`${nom} : titrePropre identique à un titre de presse`);
+        for (let k = 0; k + 5 <= tm.length; k++) if (` ${pm} `.includes(` ${tm.slice(k, k + 5).join(" ")} `)) { err(`${nom} : titrePropre reprend un segment de 5 mots d'un titre de presse`); break; }
       }
+      if (/\$content|\{\{|\$\{|%[a-z_]+%|TitleNoTags/i.test(t)) err(`${nom} : titrePropre issu d'un gabarit de flux cassé`);
+      const procedure = (s.articles || []).some((a) => /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement|\baffaire\b|plainte/i.test(a.titre || ""));
+      if (procedure && (s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne dans une affaire judiciaire (présomption d'innocence)`);
+      if (s.titrePropre.origine !== "regles" && (s.illustration?.personnes || []).some((p) => plat(t).includes(plat(p.nom)))) err(`${nom} : titrePropre nomme une personne`);
+      if (s.titrePropre.origine === "recoupement" && new Set((s.articles || []).map((a) => a.media)).size < 2) err(`${nom} : titrePropre sans recoupement`);
     }
     if (s.contexte !== undefined && (!Array.isArray(s.contexte) || s.contexte.length === 0 || s.contexte.length > 2 || s.contexte.some((c) => !c?.texte || !c?.source || !c?.type))) err(`${nom} : contexte invalide`);
     if (s.chiffre !== undefined && (!s.chiffre?.valeur || !s.chiffre?.unite)) err(`${nom} : chiffre invalide`);
