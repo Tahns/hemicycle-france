@@ -6,7 +6,12 @@ on:
   workflow_run:
     workflows: ["Actualités"]
     types: [completed]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      a_sec:
+        description: "À sec : tout vérifier, rien publier"
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -29,7 +34,7 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-        run: node scripts/publier-stories.cjs
+        run: node scripts/publier-stories.cjs ${{ inputs.a_sec && '--a-sec' || '' }}
       - name: Committer le registre des publications
         if: always()
         run: scripts/commit-push.sh "Stories publiées ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-publiees.json
