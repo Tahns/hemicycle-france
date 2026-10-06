@@ -487,7 +487,7 @@ try {
       // Reel de légende invalide ou à mot à risque : jamais
       await lancer({ entrees: [file[0], reelE(R9, il_y_a(2), P9, { legende: "court" })], config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
       assert.strictEqual(publications().length, 0, "légende de Reel invalide");
-      await lancer({ entrees: [file[0], reelE(R9, il_y_a(2), P9, { titre: "Le procès du texte", titrePropre: "Le procès du texte" })], config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
+      await lancer({ entrees: [file[0], reelE(R9, il_y_a(2), P9, { titre: "Le scandale du texte", titrePropre: "Le scandale du texte" })], config: V, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
       assert.strictEqual(publications().length, 0, "mot à risque dans un Reel");
       // nuit : jamais
       await lancer({ entrees: file, config: V, now: "2026-10-05T22:30:00Z", registre: { entrees: [regPub(P9, 2, { type: "post" })] } });

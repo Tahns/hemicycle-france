@@ -221,6 +221,13 @@
      "date": "2026-10-06T18:47:59.000Z",
      "video": true
     }
+   ],
+   "mediasDistincts": 4,
+   "sources": [
+    "France 24",
+    "BFMTV",
+    "Libération",
+    "Sud Ouest"
    ]
   },
   {
@@ -332,6 +339,16 @@
      "url": "https://www.lefigaro.fr/politique/en-auvergne-le-grand-defile-des-presidentiables-au-sommet-de-l-elevage-20261005",
      "date": "2026-10-05T16:05:45.000Z"
     }
+   ],
+   "mediasDistincts": 7,
+   "sources": [
+    "BFMTV",
+    "Libération",
+    "Mediapart",
+    "Dernières Nouvelles d'Alsace",
+    "Le Monde",
+    "France 24",
+    "Le Figaro"
    ]
   },
   {
@@ -407,6 +424,16 @@
      "url": "https://www.lefigaro.fr/politique/responsabilite-collective-saisie-des-prestations-sociales-ce-que-contient-la-loi-casseurs-payeurs-dont-l-examen-au-senat-a-ete-avance-20261004",
      "date": "2026-10-05T06:33:50.000Z"
     }
+   ],
+   "mediasDistincts": 7,
+   "sources": [
+    "Mediapart",
+    "EBRA",
+    "Sud Ouest",
+    "RFI",
+    "20 Minutes",
+    "Public Sénat",
+    "Le Figaro"
    ]
   }
  ],
@@ -415,8 +442,8 @@
    "medias": 5,
    "mediasDistincts": 4,
    "sources": [
-    "20 Minutes",
     "Sud Ouest",
+    "20 Minutes",
     "Dernières Nouvelles d'Alsace",
     "France Médias Monde"
    ],
@@ -475,10 +502,10 @@
    "medias": 4,
    "mediasDistincts": 4,
    "sources": [
+    "Dernières Nouvelles d'Alsace",
     "BFMTV",
     "Le Monde",
-    "20 Minutes",
-    "Dernières Nouvelles d'Alsace"
+    "20 Minutes"
    ],
    "derniere": "2026-10-06T20:29:33.000Z",
    "illustration": {
@@ -522,8 +549,8 @@
    "medias": 4,
    "mediasDistincts": 4,
    "sources": [
-    "Libération",
     "RFI",
+    "Libération",
     "Nice-Matin",
     "20 Minutes"
    ],
@@ -536,7 +563,7 @@
       "photoHd": "photos/deputes/hd/PA720614.jpg",
       "parti": "RN",
       "lien": "#depute-PA720614",
-      "credit": "Vox España, CC0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      },
      {
       "nom": "Jordan Bardella",
@@ -579,22 +606,15 @@
    "titrePropre": {
     "titre": "Confiance",
     "origine": "recoupement"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais) · Jordan Bardella : président du Rassemblement national",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
+   }
   },
   {
    "medias": 6,
    "mediasDistincts": 3,
    "sources": [
+    "EBRA",
     "Le Monde",
-    "20 Minutes",
-    "EBRA"
+    "20 Minutes"
    ],
    "derniere": "2026-10-06T19:29:08.000Z",
    "illustration": {
@@ -650,8 +670,8 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Dernières Nouvelles d'Alsace",
     "France 24",
+    "Dernières Nouvelles d'Alsace",
     "Le Monde"
    ],
    "derniere": "2026-10-06T09:51:00.000Z",
@@ -663,7 +683,7 @@
       "photoHd": "photos/deputes/hd/PA720614.jpg",
       "parti": "RN",
       "lien": "#depute-PA720614",
-      "credit": "Vox España, CC0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [
@@ -712,8 +732,8 @@
    "medias": 5,
    "mediasDistincts": 2,
    "sources": [
-    "BFMTV",
-    "EBRA"
+    "EBRA",
+    "BFMTV"
    ],
    "derniere": "2026-10-06T18:33:54.000Z",
    "illustration": {
@@ -785,18 +805,18 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
-     },
-     {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
       "parti": "PP",
       "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Ségolène Royal",
+      "photo": "photos/personnalites/segolene-royal.jpg",
+      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
+      "parti": "PS",
+      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -824,13 +844,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Ségolène Royal (PS) : prise de position sur la primaire de la gauche",
+    "titre": "Raphaël Glucksmann : prise de position sur la primaire de la gauche",
     "origine": "regles"
    },
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop (25-29 septembre 2026) : Royal 3 %, Glucksmann 9–13 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %, Royal 3 %",
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
@@ -876,14 +896,7 @@
    "titrePropre": {
     "titre": "Ecrits antisémites",
     "origine": "recoupement"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
+   }
   },
   {
    "medias": 2,
@@ -957,14 +970,7 @@
    "titrePropre": {
     "titre": "Conteste à nouveau",
     "origine": "recoupement"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
+   }
   },
   {
    "medias": 2,
@@ -1124,13 +1130,6 @@
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
       "parti": "PP",
       "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -1152,13 +1151,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : actualité sur la présidentielle de 2027",
+    "titre": "Raphaël Glucksmann : actualité sur la présidentielle de 2027",
     "origine": "regles"
    },
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop (25-29 septembre 2026) : Mélenchon 14–17 %, Glucksmann 9–13 %, Royal 3 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %, Glucksmann 9–13 %",
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
@@ -1252,7 +1251,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : réponse sur la mobilisation lycéenne",
+    "titre": "Lycées : l'essentiel du moment",
     "origine": "regles"
    }
   },
@@ -1365,7 +1364,7 @@
       "photoHd": "photos/deputes/hd/PA609332.jpg",
       "parti": "SOC",
       "lien": "#depute-PA609332",
-      "credit": "Olivier Faure, CC BY-SA 2.0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      },
      {
       "nom": "Emmanuel Macron",
@@ -1396,7 +1395,7 @@
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop (25-29 septembre 2026) : Faure 3–4 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Faure 3–4 %",
      "source": "Commission des sondages (notice Ifop)"
     },
     {
@@ -1430,7 +1429,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "RN : annonces sur la présidentielle de 2027",
+    "titre": "RN : actualité sur la présidentielle de 2027",
     "origine": "regles"
    }
   },
@@ -1557,7 +1556,7 @@
       "photoHd": "photos/senateurs/hd/19719D.jpg",
       "parti": "Aucun",
       "lien": "#senateur-19719D",
-      "credit": "CollabUDI, CC BY-SA 4.0, Wikimedia Commons"
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -1737,7 +1736,7 @@
       "photoHd": "photos/deputes/hd/PA610002.jpg",
       "parti": "ECO",
       "lien": "#depute-PA610002",
-      "credit": "Éric Coquelin, CC BY-SA 3.0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -1779,7 +1778,7 @@
       "photoHd": "photos/deputes/hd/PA722142.jpg",
       "parti": "ECO",
       "lien": "#depute-PA722142",
-      "credit": "Thinkerview, CC BY-SA 4.0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -1802,7 +1801,7 @@
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop (25-29 septembre 2026) : Ruffin 3 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Ruffin 3 %",
      "source": "Commission des sondages (notice Ifop)"
     },
     {
@@ -1930,7 +1929,8 @@
       "photo": "photos/senateurs/19479G.jpg",
       "photoHd": "photos/senateurs/hd/19479G.jpg",
       "parti": "UC",
-      "lien": "#senateur-19479G"
+      "lien": "#senateur-19479G",
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -2044,7 +2044,7 @@
       "photoHd": "photos/deputes/hd/PA1567.jpg",
       "parti": "SOC",
       "lien": "#depute-PA1567",
-      "credit": "Audrey AK, CC BY-SA 2.0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [
@@ -2162,7 +2162,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Premier ministre : l'essentiel du moment",
+    "titre": "Ministre de l'intérieur : l'essentiel du moment",
     "origine": "regles",
     "generique": true
    },
@@ -2418,7 +2418,7 @@
       "photoHd": "photos/deputes/hd/PA330240.jpg",
       "parti": "UDR",
       "lien": "#depute-PA330240",
-      "credit": "European People's Party, CC BY 2.0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [
@@ -2570,7 +2570,7 @@
       "photoHd": "photos/senateurs/hd/04033B.jpg",
       "parti": "Aucun",
       "lien": "#senateur-04033B",
-      "credit": "Anthonymontardyfr, CC BY 4.0, Wikimedia Commons"
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -2587,16 +2587,10 @@
     }
    ],
    "titrePropre": {
-    "titre": "Bruno Retailleau : prise de position sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2628,17 +2622,10 @@
     }
    ],
    "titrePropre": {
-    "titre": "Jordan Bardella (RN) : l'essentiel du moment",
+    "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
+   }
   },
   {
    "medias": 1,
@@ -2795,7 +2782,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : réponse sur l'action du gouvernement",
+    "titre": "Gouvernement : annonces sur l'action du gouvernement",
     "origine": "regles"
    }
   },
@@ -3032,8 +3019,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : actualité sur une procédure judiciaire",
-    "origine": "regles"
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3078,7 +3066,7 @@
       "photoHd": "photos/deputes/hd/PA720614.jpg",
       "parti": "RN",
       "lien": "#depute-PA720614",
-      "credit": "Vox España, CC0, Wikimedia Commons"
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -3094,7 +3082,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : annonces sur les finances publiques",
+    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
     "origine": "regles"
    },
    "contexte": [
@@ -3509,14 +3497,14 @@
     }
    ],
    "titrePropre": {
-    "titre": "Présidentielle 2027 : l'essentiel du moment",
+    "titre": "Présidentielle 2027 : actualité judiciaire",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop (25-29 septembre 2026) : Mélenchon 14–17 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %",
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
@@ -4099,7 +4087,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Vénissieux : présidentielle",
+    "titre": "Vénissieux : conseil municipal",
     "origine": "regles"
    }
   },
@@ -4263,8 +4251,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {

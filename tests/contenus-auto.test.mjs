@@ -64,18 +64,21 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(textes.includes("Projet de loi de finances pour 2027 (première partie)"));
   assert.ok(p.entree.sources.every((u) => u.startsWith("https://")), "source officielle citée");
   assert.ok(p.rendu.spec.source.includes("Assemblée nationale"));
-  // 13 octobre : les deux votes solennels portent un mot prudent (violences sexuelles, judiciaire) : écartés, jamais publiés
+  // 13 octobre : les deux votes solennels portent des mots « prudents » de la presse (violences sexuelles, judiciaire) mais l'ordre du jour de l'Assemblée est une
+  // donnée OFFICIELLE sans accusation : ils sont gardés (liste « officielle » réduite, audit J-01). Les mots qui visent une personne restent écartés.
   const q = contenu("aujourdhui", "2026-10-13T05:00:00Z");
-  assert.ok(q, "les autres points sont gardés");
-  assert.ok(q.rendu.spec.points.every((x) => x.k !== "vote"), "points à mot prudent écartés");
-  assert.ok(q.rendu.spec.points.every((x) => !motExclu(x.t)));
+  assert.ok(q, "le contenu est préparé");
+  assert.strictEqual(q.rendu.spec.points.filter((x) => x.k === "vote").length, 2, "les deux votes de l'ordre du jour officiel sont gardés");
+  assert.ok(q.rendu.spec.points.every((x) => !motExclu(x.t, { officiel: true })));
+  assert.ok(q.rendu.spec.points.some((x) => /violences sexuelles/.test(x.t)), "titre officiel de la proposition de loi");
+  assert.ok(motExclu("Proposition de loi apportant une réponse intégrale au phénomène de violences sexuelles"), "la même formule dans un titre de presse reste écartée");
   // jour sans séance
   assert.ok(plan("2026-10-17T05:00:00Z").refus.aujourdhui?.includes("pas de séance"), "samedi : pas de séance");
   // agenda trop ancien : refus
   const d = donnees(); d.agenda.lastUpdated = "2026-10-01T00:00:00Z";
   assert.ok(C.planifier({ now: new Date(fx.instants.aujourdhui), donnees: d, file: vide, registre: vide, etat: C.etatVide(), creneaux: CRENEAUX, config: {} }).refus.aujourdhui.includes("trop ancien"));
-  // que des questions au Gouvernement + un point prudent : rien
-  const e = donnees(); e.agenda.jours = [{ date: "2026-10-20", points: [{ type: "qag", objet: "Questions au Gouvernement" }, { type: "texte", objet: "Proposition de loi visant à lutter contre les violences sexuelles" }] }];
+  // que des questions au Gouvernement + un point visant une personne (liste officielle) : rien
+  const e = donnees(); e.agenda.jours = [{ date: "2026-10-20", points: [{ type: "qag", objet: "Questions au Gouvernement" }, { type: "texte", objet: "Débat sur l'affaire Dupont, mis en examen" }] }];
   assert.ok(C.choisirAujourdhui({ agenda: e.agenda, jour: "2026-10-20", now: new Date(fx.instants.aujourdhui) }).refus);
   // pas avant l'heure de préparation (2 h avant 8 h 30 = 6 h 30 Paris)
   assert.ok(!contenu("aujourdhui", "2026-10-20T04:00:00Z"), "trop tôt");
@@ -103,7 +106,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(!/Mmes?|M\. |députés/.test(r.contenu.rendu.spec.objet), `signataires retirés : ${r.contenu.rendu.spec.objet}`);
   assert.ok(r.contenu.entree.sources[0].startsWith("https://www.assemblee-nationale.fr/dyn/17/scrutins/"));
   // jamais d'amendement ordinaire ; mot prudent : écarté ; résultat incohérent : écarté
-  const seul = { lastUpdated: "2026-10-13T02:00:00Z", lois: [{ ...l.lois[2], titre: "l'article 3 de la proposition de loi relative à la lutte contre les violences sexuelles (première lecture)." }] };
+  const seul = { lastUpdated: "2026-10-13T02:00:00Z", lois: [{ ...l.lois[2], titre: "l'article 3 de la proposition de loi visant l'ancien maire mis en examen (première lecture)." }] };
   assert.ok(C.choisirVoteDuJour({ lois: seul, jour: "2026-10-13", now: new Date("2026-10-13T08:30:00Z") }).refus, "mot prudent");
   const incoh = { lastUpdated: "2026-10-13T02:00:00Z", lois: [{ ...l.lois[2], resultat: "rejete", votes: { A: [300, 10, 5, 0] } }] };
   assert.ok(C.choisirVoteDuJour({ lois: incoh, jour: "2026-10-13", now: new Date("2026-10-13T08:30:00Z") }).refus, "résultat incohérent avec les voix");
@@ -233,8 +236,8 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(/transmis au Sénat/.test(C.etapeSuivante({ chambre: "an", resultat: "adopte", etape: "première lecture" }).join(" ")));
   assert.ok(/transmis à l'Assemblée nationale/.test(C.etapeSuivante({ chambre: "senat", resultat: "adopte", etape: "première lecture" }).join(" ")));
   // vote final à mot prudent : jamais expliqué
-  const d = donnees(); d.lois.lois.forEach((l) => { l.titre = l.titre.replace("relative à l'organisation", "relative aux violences sexuelles et à l'organisation"); });
-  assert.ok(!C.planifier({ now: new Date(fx.instants["carrousel-loi"]), donnees: d, file: vide, registre: vide, etat: C.etatVide(), creneaux: CRENEAUX, config: {} }).plan.some((x) => /violences/.test(x.entree.titre)));
+  const d = donnees(); d.lois.lois.forEach((l) => { l.titre = l.titre.replace("relative à l'organisation", "relative à l'ancien ministre mis en examen et à l'organisation"); });
+  assert.ok(!C.planifier({ now: new Date(fx.instants["carrousel-loi"]), donnees: d, file: vide, registre: vide, etat: C.etatVide(), creneaux: CRENEAUX, config: {} }).plan.some((x) => /mis en examen/.test(x.entree.titre)));
 
   // hebdomadaire : le dimanche seulement, d'après le résumé de la semaine
   const h = contenu("carrousel-hebdo", fx.instants["carrousel-hebdo"]);

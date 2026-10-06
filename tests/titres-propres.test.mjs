@@ -82,7 +82,7 @@ const donnees = {
   gouvernement: { membres: [{ nom: "Sébastien Lecornu", fonction: "Premier ministre" }] },
   dirigeants: { dirigeants: [{ nom: "Olivier Faure", role: "Premier secrétaire du Parti socialiste", source: { nom: "site du Parti socialiste" } }] },
   deputes: { deputes: [{ nom: "Jérôme Guedj", groupe: "SOC", dep: "Essonne" }] },
-  sondages: { instituts: [{ nom: "Ifop", date: "25-29 septembre 2026", scores: { "Jean-Luc Mélenchon": [14, 17], "Raphaël Glucksmann": [9, 9] } }] },
+  sondages: { instituts: [{ nom: "Ifop", date: "25-29 septembre 2026", dateFin: "2026-09-29", echantillon: 1527, url: "https://www.commission-des-sondages.fr/notices/files/10284-ifop-le-figaro-30-septembre.pdf", scores: { "Jean-Luc Mélenchon": [14, 17], "Raphaël Glucksmann": [9, 9] } }] },
   agenda: { jours: [] },
   tours: ["2027-04-18", "2027-05-02"],
 };
@@ -92,7 +92,7 @@ const election = (extra = {}) => sujet([["Le Monde", "Primaire à gauche : déba
 test("contexteSujet : sondage seulement pour le thème election, hors réserve", () => {
   const c = contexteSujet(election(), donnees, maintenant);
   assert.strictEqual(c[0].type, "sondage");
-  assert.match(c[0].texte, /Ifop/);
+  assert.match(c[0].texte, /Ifop pour Le Figaro \(terrain : 25-29 septembre 2026, 1 527 personnes, marge d.erreur ±2,5 pts\)/, "mentions légales du sondage");
   assert.match(c[0].texte, /Mélenchon 14–17 %/);
   assert.match(c[0].texte, /Glucksmann 9 %/);
   assert.ok(c[0].source);

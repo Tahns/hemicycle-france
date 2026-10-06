@@ -63,7 +63,7 @@ function valider({ id, action, racine = RACINE_DEFAUT, now = new Date() }) {
   const config = stories.lireConfig(path.join(racine, "data", "stories-config.json"));
   if (config.monetisation && !(b.donneesPropres === true || b.sondageId)) throw new Refus("monétisation activée : aucune publication de presse (data/stories-config.json).");
   const textes = [b.titre, b.citation?.titre, ...(Array.isArray(b.sujets) ? b.sujets : [])].filter(Boolean);
-  if (stories.reserveSondages(now) && (b.sondageId || b.reserve === true || textes.some(stories.parleDeSondage))) throw new Refus("réserve électorale : aucun sondage ni simulation ne peut être publié (loi du 19 juillet 1977, art. 11).");
+  if (stories.reserveStory(now) && (b.sondageId || b.reserve === true || textes.some(stories.parleDeSondage))) throw new Refus("réserve électorale : aucun sondage ni simulation ne peut être publié (loi du 19 juillet 1977, art. 11).");
 
   if (!stories.imageValide(fJpg)) throw new Refus(`image du brouillon absente ou invalide (${fJpg}).`);
   const dim = stories.dimensionsJpeg(fs.readFileSync(fJpg)), attendu = type === "post" ? [1080, 1350] : [1080, 1920];

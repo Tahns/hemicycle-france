@@ -36,7 +36,8 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const SA = require("./stories-auto.cjs");
-const { motExclu, reserveSondages, jourParis, dimensionsJpeg, imageValide, lireConfig, destination, fluxAtom, ficheLoi, decomposerTitreVote } = SA;
+const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage : mention obligatoire (loi du 19 juillet 1977, art. 2)
+const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lireConfig, destination, fluxAtom, ficheLoi, decomposerTitreVote } = SA;
 
 const RACINE = path.resolve(__dirname, "..");
 const COMPTE = "@hemicyclefrance";
@@ -213,7 +214,7 @@ function choisirAujourdhui({ agenda, jour, now }) {
     const objet = plat(p?.objet).replace(/\s*\.\s*$/, "");
     if (!objet) continue;
     const k = p.type === "qag" ? "qag" : p.type === "vote" ? "vote" : "texte";
-    if (k !== "qag" && motExclu(objet)) continue; // mieux vaut manquer un point qu'en publier un à tort
+    if (k !== "qag" && motExclu(objet, OFF)) continue; // mieux vaut manquer un point qu'en publier un à tort
     const t = k === "qag" ? "Questions au Gouvernement" : coupe(majuscule(objet), 230);
     if (vus.has(k + t)) continue;
     vus.add(k + t);
@@ -253,7 +254,7 @@ function choisirVoteDuJour({ lois, jour, now }) {
     for (const l of lois.lois.filter((x) => x.dateISO === d)) {
       const cl = classerScrutin(l);
       if (!cl || !l.numero) continue;
-      if (motExclu(l.titre) || motExclu(l.dossierTitre || "")) continue;
+      if (motExclu(l.titre, OFF) || motExclu(l.dossierTitre || "", OFF)) continue;
       if (l.resultat !== "adopte" && l.resultat !== "rejete") continue;
       const t = totaux(l);
       const censure = cl.type === "Motion de censure"; // seules les voix favorables comptent : adoptée si 289 au moins (majorité absolue)
@@ -304,7 +305,7 @@ function notionsComprendre(html) {
 }
 /** Prochaine notion : la première (dans l'ordre du site) pas encore vue dans le cycle courant ; le cycle repart de zéro quand toutes ont été vues. */
 function prochaineNotion(notions, etat) {
-  const sures = notions.filter((n) => !motExclu(n.titre) && !motExclu(n.texte));
+  const sures = notions.filter((n) => !motExclu(n.titre, OFF) && !motExclu(n.texte, OFF));
   if (!sures.length) return null;
   const connues = new Set(sures.map((n) => n.cle));
   let cycle = etat.comprendre.map((x) => x.cle).filter((c) => connues.has(c));
@@ -316,7 +317,7 @@ function choisirComprendre({ notions, etat, jour }) {
   const n = prochaineNotion(notions, etat);
   if (!n) return { refus: "aucune notion exploitable dans la rubrique Comprendre" };
   const semaine = semaineISO(jour).id;
-  const sures = notions.filter((x) => !motExclu(x.titre) && !motExclu(x.texte));
+  const sures = notions.filter((x) => !motExclu(x.titre, OFF) && !motExclu(x.texte, OFF));
   return { contenu: {
     type: "comprendre", cle: semaine, notion: n.cle,
     rendu: { kind: "story", type: "comprendre", spec: { n: sures.indexOf(n) + 1, total: sures.length, cle: n.cle, titre: n.titre, texte: n.texte, sourceTxt: n.sourceTxt } },
@@ -334,7 +335,7 @@ const hote = (url) => { try { return new URL(url).hostname.replace(/^www\./, "")
 const marge95 = (n) => Math.round(196 * Math.sqrt(0.25 / n) * 10) / 10; // marge d'erreur maximale (points) d'un échantillon aléatoire simple
 
 /** Candidats « chiffre du jour » dans l'ordre de préférence : indicateurs officiels, budget (Eurostat), puis dernier sondage (hors réserve). */
-function candidatsChiffres({ indicateurs, budget, sondages, now }) {
+function candidatsChiffres({ indicateurs, budget, sondages, veille = null, now }) {
   const out = [];
   const ordre = ["Inflation", "Déficit public", "Dette publique", "Chômage", "Croissance du PIB"];
   const inds = (indicateurs?.indicateurs || []).filter((i) => i?.nom && i.valeur && i.source && i.date && /^https:\/\//.test(i.url || ""));
@@ -351,23 +352,23 @@ function candidatsChiffres({ indicateurs, budget, sondages, now }) {
     out.push({ cle: "depenses-publiques", spec: { cle: "depenses-publiques", libelle: "Dépenses des administrations publiques", valeur: `${nbFr(String(dep.totalMd).replace(".", ","))} Md€`, soustitre: "", periode: String(dep.annee), lignes: [dep.postes?.[0]?.libelle && dep.postes[0].pct ? `${dep.postes[0].libelle} : ${String(dep.postes[0].pct).replace(".", ",")} % du total, premier poste de dépenses.` : null].filter(Boolean), sourceTxt: `Source : Eurostat (${hote(dep.url)}), dépenses par fonction (COFOG), comptes établis par l'Insee, ${dep.annee}.` }, titre: `Le chiffre du jour : dépenses publiques ${nbFr(dep.totalMd)} Md€ (${dep.annee})`, sources: [dep.url], texte: `Dépenses des administrations publiques : ${dep.totalMd} milliards d'euros en ${dep.annee}.` });
   }
   // Dernier sondage : jamais pendant la réserve électorale ; terrain de moins de 10 jours ; au moins 3 candidats et un échantillon connu
-  if (!reserveSondages(now)) {
-    const dernier = [...(sondages?.instituts || [])].filter((i) => i?.nom && /^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") && i.scores && Object.keys(i.scores).length >= 3 && i.echantillon > 0 && /^https:\/\//.test(i.url || "")).sort((a, b) => b.dateFin.localeCompare(a.dateFin))[0];
+  if (!reserveStory(now)) {
+    const dernier = [...(sondages?.instituts || [])].filter((i) => i?.nom && /^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") && i.scores && Object.keys(i.scores).length >= 3 && i.echantillon > 0 && /^https:\/\//.test(i.url || "") && SC.commanditaire(i, veille)).sort((a, b) => b.dateFin.localeCompare(a.dateFin))[0];
     if (dernier && now.getTime() - Date.parse(dernier.dateFin + "T12:00:00Z") <= 10 * 864e5) {
       const tetes = Object.entries(dernier.scores).filter(([, v]) => Array.isArray(v) && v.length === 2).sort((a, b) => b[1][1] - a[1][1] || a[0].localeCompare(b[0], "fr")).slice(0, 3);
       if (tetes.length >= 2) {
         const f = ([mn, mx]) => (mn === mx ? `${String(mx).replace(".", ",")} %` : `${String(mn).replace(".", ",")} à ${String(mx).replace(".", ",")} %`);
-        out.push({ cle: `sondage-${slug(dernier.nom)}-${dernier.dateFin}`, sondage: true, spec: { cle: `sondage-${slug(dernier.nom)}`, libelle: `Intentions de vote au 1er tour (${dernier.nom})`, valeur: f(tetes[0][1]), soustitre: tetes[0][0], periode: `Terrain : ${dernier.date}`, lignes: [...tetes.slice(1).map(([n, v]) => `${n} : ${f(v)}`), `Fourchettes selon les hypothèses de candidats testées. ${nbFr(dernier.echantillon)} personnes interrogées, marge d'erreur maximale d'environ ±${String(marge95(dernier.echantillon)).replace(".", ",")} point${marge95(dernier.echantillon) >= 2 ? "s" : ""}. Sondage, pas une prévision.`], sourceTxt: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${dernier.nom}, terrain du ${dernier.date}.` }, titre: `Le chiffre du jour : sondage ${dernier.nom}, intentions de vote au 1er tour (terrain : ${dernier.date})`, sources: [dernier.url], texte: `Sondage ${dernier.nom} (${dernier.date}).` });
+        out.push({ cle: `sondage-${slug(dernier.nom)}-${dernier.dateFin}`, sondage: true, spec: { cle: `sondage-${slug(dernier.nom)}`, libelle: `Intentions de vote au 1er tour (${dernier.nom} pour ${SC.commanditaire(dernier, veille).nom})`, valeur: f(tetes[0][1]), soustitre: tetes[0][0], periode: `Terrain : ${dernier.date}`, lignes: [...tetes.slice(1).map(([n, v]) => `${n} : ${f(v)}`), `Fourchettes selon les hypothèses de candidats testées. ${nbFr(dernier.echantillon)} personnes interrogées, marge d'erreur maximale d'environ ±${String(marge95(dernier.echantillon)).replace(".", ",")} point${marge95(dernier.echantillon) >= 2 ? "s" : ""}. Sondage, pas une prévision.`], sourceTxt: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${dernier.nom}, terrain du ${dernier.date}.` }, titre: `Le chiffre du jour : sondage ${dernier.nom}, intentions de vote au 1er tour (terrain : ${dernier.date})`, sources: [dernier.url], texte: `Sondage ${dernier.nom} (${dernier.date}).` });
       }
     }
   }
   return out;
 }
 /** 4. « Le chiffre du jour » : la donnée jamais montrée, sinon la plus anciennement montrée, à condition qu'elle l'ait été il y a 7 jours au moins. */
-function choisirChiffre({ indicateurs, budget, sondages, etat, jour, now }) {
+function choisirChiffre({ indicateurs, budget, sondages, veille = null, etat, jour, now }) {
   if (!donneesFraiches(indicateurs?.lastUpdated, FRAICHEUR_DONNEES_J.indicateurs, now)) return { refus: "indicateurs absents ou trop anciens" };
-  const cands = candidatsChiffres({ indicateurs, budget, sondages, now })
-    .filter((c) => !motExclu(c.titre) && !(c.sondage && reserveSondages(now)));
+  const cands = candidatsChiffres({ indicateurs, budget, sondages, veille, now })
+    .filter((c) => !motExclu(c.titre, OFF) && !(c.sondage && reserveStory(now)));
   const eligibles = cands.filter((c) => {
     const v = etat.chiffres[c.cle];
     return !v || (Date.parse(jour + "T12:00:00Z") - Date.parse(v.date + "T12:00:00Z")) / 864e5 >= 7;
@@ -487,9 +488,9 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   if (!digest || typeof digest !== "object" || !digest.id) return { refus: "pas de résumé hebdomadaire pour cette semaine" };
   const sem = semaineISO(jour);
   if (digest.id !== sem.id) return { refus: `le résumé hebdomadaire (${digest.id}) n'est pas celui de la semaine en cours (${sem.id})` };
-  const reserve = Boolean(reserveSondages(now));
+  const reserve = Boolean(reserveStory(now));
   const sc = digest.scrutins || {};
-  const sain = (t) => !motExclu(t);
+  const sain = (t) => !motExclu(t, OFF);
   const textes = (digest.textes || []).filter((t) => t?.titre && sain(t.titre) && (t.resultat === "adopte" || t.resultat === "rejete")).slice(0, 5);
   const dossiers = (digest.dossiers || []).filter((d) => d?.titre && sain(d.titre) && d.scrutins > 0).slice(0, 5);
   const seances = (digest.aVenir?.seances || []).map((s) => ({ date: s.date, points: (s.points || []).filter((p) => p?.objet && (p.type === "qag" || sain(p.objet))) })).filter((s) => s.points.some((p) => p.type !== "qag")).slice(0, 5);
@@ -558,7 +559,7 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
     if (c.nom === "aujourdhui") r = choisirAujourdhui({ agenda: donnees.agenda, jour, now });
     else if (c.nom === "vote-jour") r = choisirVoteDuJour({ lois: donnees.lois, jour, now });
     else if (c.nom === "comprendre") r = choisirComprendre({ notions: donnees.notions || [], etat: etatLocal, jour });
-    else if (c.nom === "chiffre-jour") r = choisirChiffre({ indicateurs: donnees.indicateurs, budget: donnees.budget, sondages: donnees.sondages, etat: etatLocal, jour, now });
+    else if (c.nom === "chiffre-jour") r = choisirChiffre({ indicateurs: donnees.indicateurs, budget: donnees.budget, sondages: donnees.sondages, veille: donnees.veille, etat: etatLocal, jour, now });
     else if (c.nom === "carrousel-loi") r = choisirCarrouselLoi({ lois: donnees.lois, senat: donnees.senat, navette: donnees.navette, etat: etatLocal, jour, now });
     else if (c.nom === "carrousel-hebdo") r = choisirCarrouselHebdo({ digest: donnees.digest, jour, now });
     if (!r || r.refus) { refus[c.nom] = r?.refus || "inconnu"; continue; }
@@ -689,7 +690,7 @@ function lireDonnees(ch, maintenant) {
   try { html = fs.readFileSync(path.join(ch.racine, "index.html"), "utf-8"); } catch (e) { /* sans notions */ }
   return {
     agenda: lire("data/agenda-an.json"), lois: lire("data/lois.json"), senat: lire("data/senat.json"), navette: lire("data/navette.json"),
-    indicateurs: lire("data/indicateurs.json"), budget: lire("data/budget.json"), sondages: lire("data/sondages.json"),
+    indicateurs: lire("data/indicateurs.json"), budget: lire("data/budget.json"), sondages: lire("data/sondages.json"), veille: lire("data/sondages-veille.json"),
     digest: lire(`data/digest/${semaineISO(jour).id}.json`), notions: notionsComprendre(html),
   };
 }
@@ -736,7 +737,7 @@ async function main({ ch = chemins(), now = maintenant(), dessiner = (jobs) => d
       etat.faits[p.periodeCle] = { id: p.id, le: now.toISOString() };
       if (p.nom === "comprendre") etat.comprendre.push({ cle: p.notion, id: p.id, date: parisInfos(now).jour });
       if (p.nom === "chiffre-jour") etat.chiffres[p.chiffre] = { id: p.id, date: parisInfos(now).jour };
-      if (p.nom === "comprendre" && new Set(etat.comprendre.map((x) => x.cle)).size >= (s.donnees.notions || []).filter((n) => !motExclu(n.titre) && !motExclu(n.texte)).length) etat.comprendre = []; // cycle terminé : on repart de zéro
+      if (p.nom === "comprendre" && new Set(etat.comprendre.map((x) => x.cle)).size >= (s.donnees.notions || []).filter((n) => !motExclu(n.titre, OFF) && !motExclu(n.texte, OFF)).length) etat.comprendre = []; // cycle terminé : on repart de zéro
       crees.push({ ...entree, vers });
       resumeLigne(`${p.nom} : « ${entree.titre} » (${vers === "file" ? "file de publication" : "brouillon à valider"}, publiable à partir de ${p.pasAvant}).`);
     } catch (e) {

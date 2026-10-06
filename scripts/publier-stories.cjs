@@ -5,7 +5,10 @@
  * Publie AUTOMATIQUEMENT sur Instagram (API officielle Instagram Graph) les stories de la file data/instagram-file.json,
  * sans qu'aucune session Claude ne soit ouverte : lancé par .github/workflows/publier-stories.yml toutes les 15 minutes.
  *
- * Registre : data/instagram-publiees.json  { lastUpdated, entrees: [{ id, statut: "publiee"|"perimee", publieLe, mediaId }] }
+ * Registre : data/instagram-publiees.json  { lastUpdated, entrees: [{ id, statut: "publiee"|"perimee"|"en-cours"|"incertaine", publieLe, mediaId }] }
+ *   « en-cours » : intention écrite AVANT media_publish ; « incertaine » : réponse perdue ou job tué, publication possible non confirmée (comptée dans les plafonds, JAMAIS rejouée) ;
+ *   après une erreur ambiguë (timeout, 5xx), on cherche la publication côté Instagram (/stories ou /media) avant de conclure. ÉCHEC FERMÉ : registre ou configuration illisibles = rien ne part, code de sortie 1.
+ *   data/instagram-retires.json : contenus retirés, jamais republiés, texte jamais repris (scripts/retires.cjs).
  *
  * Garde-fous (tous obligatoires) :
  *  - UNE seule publication par exécution ;
@@ -47,8 +50,9 @@
 const fs = require("fs");
 const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
-const { reserveSondages, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, titresProches } = require("./stories-auto.cjs");
+const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches } = require("./stories-auto.cjs");
 const SS = require("./sujets-sensibles.cjs");
+const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés : jamais republiés, texte jamais repris (audit J-23)
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = process.env.PUBLIER_FILE || path.join(RACINE, "data", "instagram-file.json");
@@ -84,12 +88,30 @@ function resume(ligne) {
   log(ligne);
   if (process.env.GITHUB_STEP_SUMMARY) try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, masquer(ligne) + "\n"); } catch (e) { /* sans résumé */ }
 }
-function alerte(ligne) {
-  console.log("::warning::" + masquer(ligne));
+function alerte(ligne, { echec = false } = {}) {
+  console.log((echec ? "::error::" : "::warning::") + masquer(ligne));
   resume("- ALERTE : " + ligne);
+  if (echec) process.exitCode = 1; // visible : pastille rouge et courriel GitHub ; le workflow commite le registre malgré tout (« if: always() »)
 }
 
 const lireJson = (f, defaut) => { try { return JSON.parse(fs.readFileSync(f, "utf-8")); } catch (e) { return defaut; } };
+/**
+ * Lecture ÉCHEC FERMÉ d'un fichier JSON : { absent: true } si le fichier n'existe pas (première exécution), { erreur } s'il existe mais ne se lit pas
+ * (JSON tronqué, conflit de fusion, type inattendu), sinon { valeur }. Un registre illisible ne vaut jamais « registre vide » : plus d'anti-doublon ni de plafond (audit A-02).
+ */
+function lireStrict(f, attendu = "objet") {
+  let brut;
+  try { brut = fs.readFileSync(f, "utf-8"); } catch (e) { return e.code === "ENOENT" ? { absent: true } : { erreur: e.message }; }
+  try {
+    const v = JSON.parse(brut);
+    if (!v || typeof v !== "object" || Array.isArray(v)) return { erreur: "le contenu n'est pas un objet JSON" };
+    return { valeur: v };
+  } catch (e) { return { erreur: e.message }; }
+}
+// Statuts du registre : « publiee », « perimee », « en-cours » (intention écrite AVANT media_publish), « incertaine » (publication possible mais non confirmée : jamais rejouée)
+const STATUTS_COMPTES = new Set(["publiee", "incertaine", "en-cours"]);
+const enregistree = (e) => STATUTS_COMPTES.has(e.statut) && e.publieLe; // compte dans les plafonds, l'espacement et la détection de sujets proches
+const typeDe = (e) => (e.type === "post" ? "post" : e.type === "carousel" ? "carousel" : e.type === "reel" ? "reel" : "story");
 
 /** Légende d'un post : texte non vide, 2 200 caractères au plus, 30 hashtags au plus, le compte cité, jamais l'adresse du site. */
 function legendeValide(e) {
@@ -118,10 +140,10 @@ function risque(e) {
   if (e.sensible === 1) return !niveau1Sur(e); // fait judiciaire établi : texte fabriqué par règles, recontrôlé ici
   if (e.sensible === 2) return !(e.valideHumain === true && e.valideLe); // niveau 2 : JAMAIS sans validation humaine (workflow « Valider un brouillon »)
   if (e.type === "carousel" && !validerCarrousel(e).ok) return true;
-  if (e.contenu && (Array.isArray(e.sujets) ? e.sujets : []).some((t) => motExclu(t))) return true; // contenus récurrents : chaque sujet affiché est contrôlé une dernière fois
+  if (e.contenu && (Array.isArray(e.sujets) ? e.sujets : []).some((t) => motExclu(t, OFF))) return true; // contenus récurrents : chaque sujet affiché est contrôlé une dernière fois
   if (e.donneesPropres === true && !post) return false;
   const titres = e.bref === true ? (Array.isArray(e.sujets) ? e.sujets : []) : [e.titre || "", ...(post ? [e.titrePropre || ""] : [])];
-  return titres.some((t) => motExclu(t));
+  return titres.some((t) => motExclu(t, e.donneesPropres === true ? OFF : undefined));
 }
 const estPost = (e) => e.type === "post";
 const estCarrousel = (e) => e.type === "carousel";
@@ -135,11 +157,11 @@ const estReel = (e) => e.type === "reel";
  * Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer).
  * Trois sortes d'entrées : story, post (fil, légende) et story d'annonce d'un post (champ annonceDe) ; voir l'en-tête du fichier.
  */
-function choisir({ file, registre, config, now = new Date() }) {
+function choisir({ file, registre, config, now = new Date(), retires = new Set() }) {
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
   const perimees = [];
   const candidates = [];
-  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && config.videos === true && e.url_video)) && e.id && !deja.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
+  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && config.videos === true && e.url_video)) && e.id && !deja.has(e.id) && !retires.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
   // 1. posts et stories : périmées après 3 h (story) ou 12 h (post)
   let enAttente = 0, enCreneau = 0;
   for (const e of entreesFile.filter((x) => !estAnnonce(x) && !estReel(x))) {
@@ -191,7 +213,7 @@ function choisir({ file, registre, config, now = new Date() }) {
   const h = heureParis(now);
   if (h >= 23 || h < 7) return sortie(`nuit (${h} h à Paris)`);
   const jour = jourParis(now);
-  const publieesJour = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe && jourParis(e.publieLe) === jour);
+  const publieesJour = [...deja.values()].filter((e) => enregistree(e) && jourParis(e.publieLe) === jour);
   const postsJour = publieesJour.filter(estPostFil).length;
   const reelsJour = publieesJour.filter(estReel).length;
   const maxReels = Number.isInteger(config.videosMax) ? config.videosMax : MAX_REELS_PAR_JOUR_DEFAUT;
@@ -201,7 +223,7 @@ function choisir({ file, registre, config, now = new Date() }) {
   if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_PAR_JOUR} et ${MAX_POSTS_PAR_JOUR})`);
   let ok = candidates.filter(sousPlafond);
   // Espacement : 60 min entre deux publications ; seule exception, la story d'annonce d'un post (≥ 5 min après CE post)
-  const publiees = [...deja.values()].filter((e) => e.statut === "publiee" && e.publieLe);
+  const publiees = [...deja.values()].filter(enregistree);
   const dernier = publiees.reduce((m, e) => (Date.parse(e.publieLe) > (m ? Date.parse(m.publieLe) : 0) ? e : m), null);
   if (dernier && now.getTime() - Date.parse(dernier.publieLe) < ESPACEMENT_MIN * 60000) {
     const ok2 = ok.filter((e) => estAnnonce(e) && e.annonceDe === dernier.id);
@@ -210,15 +232,15 @@ function choisir({ file, registre, config, now = new Date() }) {
   }
   if (!ok.length) return sortie(enAttente ? `story d'annonce en attente (${ESPACEMENT_ANNONCE_MIN} min après son post)` : (enCreneau ? "contenu à créneau : l'heure n'est pas encore venue" : "rien à publier"));
   const candidatesBrutes = ok.length;
-  ok = purgerReserve(ok, now).filter((e) => !(reserveSondages(now) && [e.titre || "", e.citation?.titre || "", ...(Array.isArray(e.sujets) ? e.sujets : [])].some(parleDeSondage)));
+  ok = purgerReserve(ok, now).filter((e) => !(reserveStory(now) && [e.titre || "", e.citation?.titre || "", ...(Array.isArray(e.sujets) ? e.sujets : [])].some(parleDeSondage)));
   if (config.monetisation) ok = purgerPresse(ok);
   const avant = ok.length;
   const recentes = publiees.filter((d) => now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_H * 36e5);
   const dernieres = new Set(recentes.map((d) => d.id));
   // Titres déjà publiés : ceux du registre (conservés même quand l'entrée a quitté la file) et ceux de la file
   const titresPublies = [
-    ...recentes.flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
-    ...(file?.entrees || []).filter((e) => dernieres.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
+    ...recentes.filter((d) => !retires.has(d.id)).flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
+    ...(file?.entrees || []).filter((e) => dernieres.has(e.id) && !retires.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
   const dejaTraite = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => titresPublies.some((p) => titresProches(p, t)));
   ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
@@ -237,7 +259,7 @@ async function graph(methode, chemin, params = {}) {
   try { r = await fetch(url, opts); texte = await r.text(); } catch (e) { throw new Error(`réseau : ${masquer(e.message)}`); }
   let json = {};
   try { json = JSON.parse(texte); } catch (e) { /* réponse non JSON */ }
-  if (!r.ok || json.error) throw new Error(`API ${r.status} : ${masquer(json.error?.message || texte.slice(0, 200))}`);
+  if (!r.ok || json.error) { const err = new Error(`API ${r.status} : ${masquer(json.error?.message || texte.slice(0, 200))}`); err.status = r.status; throw err; }
   return json;
 }
 
@@ -249,12 +271,12 @@ async function controlerJeton(now) {
   } catch (e) {
     // debug_token peut être refusé selon le type de jeton : repli sur /me (validité seule)
     try { await graph("GET", "/me", { fields: "id" }); return { valide: true, expireLe: null, jours: null }; }
-    catch (e2) { alerte(`le jeton Instagram est invalide ou inutilisable (${e2.message}). Générez-en un nouveau (docs/PUBLICATION-AUTO.md).`); return { valide: false, expireLe: null, jours: null }; }
+    catch (e2) { alerte(`le jeton Instagram est invalide ou inutilisable (${e2.message}). Générez-en un nouveau (docs/PUBLICATION-AUTO.md).`, { echec: true }); return { valide: false, expireLe: null, jours: null }; }
   }
-  if (!d || d.is_valid === false) { alerte("le jeton Instagram est invalide ou expiré. Générez-en un nouveau (docs/PUBLICATION-AUTO.md)."); return { valide: false, expireLe: null, jours: null }; }
+  if (!d || d.is_valid === false) { alerte("le jeton Instagram est invalide ou expiré. Générez-en un nouveau (docs/PUBLICATION-AUTO.md).", { echec: true }); return { valide: false, expireLe: null, jours: null }; }
   const exp = d.expires_at ? new Date(d.expires_at * 1000) : null; // 0 ou absent : n'expire pas
   const jours = exp ? (exp.getTime() - now.getTime()) / 864e5 : null;
-  if (jours !== null && jours < 0) { alerte("le jeton Instagram a expiré. Générez-en un nouveau (docs/PUBLICATION-AUTO.md)."); return { valide: false, expireLe: exp, jours }; }
+  if (jours !== null && jours < 0) { alerte("le jeton Instagram a expiré. Générez-en un nouveau (docs/PUBLICATION-AUTO.md).", { echec: true }); return { valide: false, expireLe: exp, jours }; }
   if (jours !== null && jours < ALERTE_JETON_JOURS) alerte(`le jeton Instagram expire dans ${Math.ceil(jours)} jour(s) (le ${exp.toISOString().slice(0, 10)}). Renouvelez-le (docs/PUBLICATION-AUTO.md).`);
   return { valide: true, expireLe: exp, jours };
 }
@@ -263,8 +285,8 @@ async function controlerJeton(now) {
  * Publie un média : crée le conteneur, attend le statut FINISHED, puis media_publish. Renvoie l'identifiant du média.
  * `mode` : "story-image", "story-video", "post" ou "reel". Une erreur levée AVANT media_publish porte avantPublication = true (repli possible, rien n'est publié).
  */
-async function publier(entree, mode = estPost(entree) ? "post" : estCarrousel(entree) ? "carrousel" : estReel(entree) ? "reel" : "story-image") {
-  if (mode === "carrousel") return (await publierCarrousel({ graph, userId: IG_USER_ID, entree, attenteMs: ATTENTE_MS, essais: ESSAIS_STATUT })).mediaId;
+async function publier(entree, mode = estPost(entree) ? "post" : estCarrousel(entree) ? "carrousel" : estReel(entree) ? "reel" : "story-image", avantMediaPublish = null) {
+  if (mode === "carrousel") return (await publierCarrousel({ graph, userId: IG_USER_ID, entree, attenteMs: ATTENTE_MS, essais: ESSAIS_STATUT, avantMediaPublish })).mediaId;
   const video = mode === "story-video" || mode === "reel";
   const params = { post: { image_url: entree.url_image, caption: entree.legende }, "story-image": { media_type: "STORIES", image_url: entree.url_image },
     "story-video": { media_type: "STORIES", video_url: entree.url_video },
@@ -286,9 +308,37 @@ async function publier(entree, mode = estPost(entree) ? "post" : estCarrousel(en
       if (video) delai = Math.min(Math.round(delai * 1.5), ATTENTE_MS * 10); // 3 s, 4,5 s, … jusqu'à 30 s
     }
   } catch (err) { err.avantPublication = true; throw err; }
-  const pub = await graph("POST", `/${IG_USER_ID}/media_publish`, { creation_id: creation });
-  if (!pub.id) throw new Error("API : media_publish sans identifiant");
+  // L'intention « en cours » est écrite au registre AVANT media_publish : si la réponse est perdue (timeout, 5xx, coupure) ou si le job est tué, l'entrée n'est jamais rejouée (audit A-01)
+  if (avantMediaPublish) avantMediaPublish(creation);
+  let pub;
+  try {
+    pub = await graph("POST", `/${IG_USER_ID}/media_publish`, { creation_id: creation });
+    if (!pub.id) throw new Error("API : media_publish sans identifiant");
+  } catch (err) { err.publicationIncertaine = !(err.status >= 400 && err.status < 500); throw err; } // refus net (4xx) : rien n'est publié ; sinon : peut-être publié
   return pub.id;
+}
+
+/**
+ * Une publication de cette entrée existe-t-elle côté Instagram depuis `debutLe` (réponse de media_publish perdue, job tué) ?
+ * Lit les stories en cours (/stories) ou les médias récents (/media) ; ignore les médias déjà inscrits au registre. Renvoie le média trouvé, null, ou LÈVE si l'API ne répond pas.
+ */
+async function trouverPubliee(entree, debutLe, registre) {
+  const chemin = typeDe(entree) === "story" ? `/${IG_USER_ID}/stories` : `/${IG_USER_ID}/media`;
+  const r = await graph("GET", chemin, { fields: "id,timestamp", limit: "10" });
+  const connus = new Set((registre.entrees || []).map((x) => x.mediaId).filter(Boolean));
+  const seuil = Date.parse(debutLe) - 120000;
+  return (Array.isArray(r.data) ? r.data : []).find((m) => m?.id && !connus.has(String(m.id)) && Date.parse(m.timestamp) >= seuil) || null;
+}
+/** Intentions « en-cours » restées au registre (job tué entre media_publish et l'écriture) : retrouvées côté API, sinon « incertaine » (jamais rejouées). */
+async function reprendreEnCours(registre, now) {
+  for (const e of registre.entrees.filter((x) => x.statut === "en-cours")) {
+    let trouve = null, erreur = null;
+    try { trouve = await trouverPubliee(e, e.publieLe, registre); } catch (err) { erreur = err; }
+    if (trouve) { Object.assign(e, { statut: "publiee", mediaId: String(trouve.id), repris: true }); resume(`Publication de l'entrée ${e.id} retrouvée côté Instagram (média ${trouve.id}) : inscrite au registre.`); continue; }
+    Object.assign(e, { statut: "incertaine", echec: erreur ? "verification-impossible" : "non-retrouvee" });
+    alerte(`publication de l'entrée ${e.id} interrompue : ${erreur ? "vérification côté Instagram impossible (" + erreur.message + ")" : "aucun média retrouvé"}. Elle ne sera JAMAIS rejouée (pas de doublon) ; vérifier le compte Instagram.`);
+    process.exitCode = 1;
+  }
 }
 
 /** La ressource est-elle en ligne (HEAD 200) ? `type` : préfixe de Content-Type exigé (vidéo : video/mp4). */
@@ -310,12 +360,27 @@ async function main() {
   const now = process.env.PUBLIER_MAINTENANT ? new Date(process.env.PUBLIER_MAINTENANT) : new Date();
   if (!IG_USER_ID || !IG_ACCESS_TOKEN) return resume("Publication automatique inactive : secrets absents (IG_USER_ID, IG_ACCESS_TOKEN). Voir docs/PUBLICATION-AUTO.md.");
   if (A_SEC) log("mode --a-sec : rien ne sera envoyé ni écrit.");
-  const jeton = await controlerJeton(now);
-  const registre = lireJson(FICHIER_REGISTRE, null) || { entrees: [] };
-  if (!Array.isArray(registre.entrees)) registre.entrees = [];
+  // ÉCHEC FERMÉ : un registre, une configuration ou une file illisibles = rien ne se publie, alerte visible, code de sortie 1 (audit A-02, A-03)
+  const lReg = lireStrict(FICHIER_REGISTRE), lFile = lireStrict(FICHIER_FILE), lCfg = lireStrict(FICHIER_CONFIG);
+  for (const [nom, l, fichier] of [["registre des publications", lReg, FICHIER_REGISTRE], ["file de publication", lFile, FICHIER_FILE]]) {
+    if (l.erreur || (l.valeur && "entrees" in l.valeur && !Array.isArray(l.valeur.entrees))) {
+      alerte(`${nom} illisible (${path.basename(fichier)} : ${l.erreur || "« entrees » n'est pas une liste"}). RIEN n'est publié tant qu'il n'est pas réparé.`);
+      process.exitCode = 1;
+      return;
+    }
+  }
   const config = lireConfig(FICHIER_CONFIG);
-  const file = lireJson(FICHIER_FILE, { entrees: [] });
-  const c = choisir({ file, registre, config, now });
+  if (lCfg.erreur) {
+    alerte(`configuration illisible (${path.basename(FICHIER_CONFIG)} : ${lCfg.erreur}). Validation humaine activée par défaut : seules les entrées validées à la main sortent.`);
+    process.exitCode = 1;
+  }
+  const jeton = await controlerJeton(now);
+  const registre = lReg.valeur || { entrees: [] };
+  if (!Array.isArray(registre.entrees)) registre.entrees = [];
+  const file = lFile.valeur || { entrees: [] };
+  if (!Array.isArray(file.entrees)) file.entrees = [];
+  if (jeton.valide && !A_SEC && registre.entrees.some((x) => x.statut === "en-cours")) { await reprendreEnCours(registre, now); ecrireRegistre(registre, now); }
+  const c = choisir({ file, registre, config, now, retires: lireRetiresSur() });
 
   if (c.perimees.length) {
     log(`entrée(s) périmée(s) (plus de ${FRAICHEUR_H} h), jamais publiées : ${c.perimees.join(", ")}`);
@@ -337,28 +402,50 @@ async function main() {
   const nom = { post: "post", carrousel: "carrousel", reel: "Reel", "story-image": "story", "story-video": "story vidéo" };
   if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${nom[mode]}.`); return; }
   finir(); // les périmées sont enregistrées même si la publication échoue
+  let enCours = null;
+  const avantMediaPublish = () => { // intention écrite AVANT media_publish (audit A-01)
+    enCours = { id: e.id, statut: "en-cours", publieLe: now.toISOString(), mediaId: null, type: typeDe(e) };
+    registre.entrees.push(enCours);
+    ecrireRegistre(registre, now);
+  };
+  const nomPub = () => (mode === "post" ? "Post publié" : mode === "carrousel" ? "Carrousel publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée");
+  const inscrire = (mediaId) => {
+    const ligne = { id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: typeDe(e), ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined };
+    if (enCours) { delete enCours.echec; Object.assign(enCours, ligne); } else registre.entrees.push(ligne);
+    ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
+  };
   try {
     let mediaId;
     try {
-      mediaId = await publier(e, mode);
+      mediaId = await publier(e, mode, avantMediaPublish);
     } catch (err) {
       // Repli sur l'image : seulement pour une story vidéo, seulement si l'échec précède media_publish (rien n'a été publié, donc aucun doublon)
       if (mode !== "story-video" || !err.avantPublication) throw err;
       alerte(`la vidéo de l'entrée ${e.id} a échoué (${err.message}) : repli sur l'image.`);
       if (!(await imageEnLigne(e.url_image))) throw new Error("image pas en ligne pour le repli");
       mode = "story-image";
-      mediaId = await publier(e, mode);
+      mediaId = await publier(e, mode, avantMediaPublish);
     }
-    registre.entrees.push({ id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: estPost(e) ? "post" : estCarrousel(e) ? "carousel" : estReel(e) ? "reel" : "story", ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined });
-    ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
-    resume(`${mode === "post" ? "Post publié" : mode === "carrousel" ? "Carrousel publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée"} : « ${e.titre} » (média ${mediaId}).`);
+    inscrire(mediaId);
+    resume(`${nomPub()} : « ${e.titre} » (média ${mediaId}).`);
   } catch (err) {
-    if (err.publicationIncertaine) {
-      // media_publish a échoué sans réponse nette : le carrousel est peut-être en ligne. Abandon : jamais de nouvel essai, donc jamais de doublon.
-      registre.entrees.push({ id: e.id, statut: "perimee", publieLe: null, mediaId: null, type: e.type, echec: "publication-incertaine" });
+    if (enCours && err.publicationIncertaine) {
+      // media_publish a échoué sans réponse nette (timeout, 5xx, coupure) : la publication a peut-être eu lieu. On regarde côté Instagram ; dans le doute, « incertaine » : JAMAIS rejouée.
+      let trouve = null;
+      try { trouve = await trouverPubliee(e, enCours.publieLe, registre); } catch (e2) { /* vérification impossible */ }
+      if (trouve) {
+        inscrire(String(trouve.id));
+        resume(`${nomPub()} : « ${e.titre} » (média ${trouve.id}, retrouvé côté Instagram après une réponse perdue).`);
+        return;
+      }
+      Object.assign(enCours, { statut: "incertaine", echec: "publication-incertaine" });
       ecrireRegistre(registre, now);
-      alerte(`publication incertaine de l'entrée ${e.id} (${err.message}) : abandonnée, aucun nouvel essai (pas de doublon). Vérifier le compte Instagram.`);
+      alerte(`publication incertaine de l'entrée ${e.id} (${err.message}) : non rejouée (pas de doublon). Vérifier le compte Instagram.`, { echec: true });
       return;
+    }
+    if (enCours) { // refus net de l'API (4xx) après l'intention : rien n'a été publié, l'intention est retirée
+      registre.entrees = registre.entrees.filter((x) => x !== enCours);
+      ecrireRegistre(registre, now);
     }
     alerte(`échec de publication de l'entrée ${e.id} : ${err.message}. Nouvel essai au prochain passage tant qu'elle n'est pas périmée.`);
   }

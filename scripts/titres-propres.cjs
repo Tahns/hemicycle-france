@@ -149,8 +149,10 @@ const THEMES_TITRES = [
   { re: /casseurs.payeurs/, S: "Loi « casseurs-payeurs »", O: "la loi « casseurs-payeurs »", local: "débat sur la loi" },
   { re: /violences sexuelles/, S: "Violences sexuelles", O: "la loi contre les violences sexuelles", local: "débat sur la loi" },
   { re: /plein.emploi/, S: "Plein-emploi", O: "la loi sur le plein-emploi", local: "bilan de la loi" },
-  { re: /primaire/, S: "Primaire de la gauche", O: "la primaire de la gauche", local: "primaire de la gauche" },
-  { re: /presidentielle|candidat a l'elysee|2027/, S: "Présidentielle 2027", O: "la présidentielle de 2027", local: "présidentielle" },
+  // « primaire » : « de la gauche » seulement si la majorité des titres dit « primaire » et « gauche » (jamais « droite ») ; sinon titre générique (jamais publié)
+  { re: /\bprimaires?\b/, ok: (arts) => partDe(arts, /\bprimaires?\b/, /\bgauche/) >= 0.5 && partDe(arts, /\bprimaires?\b/, /\bdroite\b|\becoles?\b|\bprimates?\b/) === 0, S: "Primaire de la gauche", O: "la primaire de la gauche", local: "primaire de la gauche" },
+  { re: /\bprimaires?\b/, ok: (arts) => partDe(arts, /\bprimaires?\b/, /\bcandidat|\bpresidentielle|\binvestiture|\bscrutin|\bparti\b|\bps\b|\blr\b|\bdroite\b|\bcentre\b|\bgauche/) > 0, S: "Primaire", O: "une primaire", local: "primaire", generique: true },
+  { re: /\bpresidentielle|candidat a l'elysee/, S: "Présidentielle 2027", O: "la présidentielle de 2027", local: "présidentielle" },
   { re: /budget|dette|deficit|defaut|economies|milliards|impot|fiscal|taxe|carburant|indemnites|finances/, S: "Finances publiques", O: "les finances publiques", local: "finances locales" },
   { re: /conseil municipal|conseil de la metropole|conseil departemental/, S: "Conseil municipal", O: "le conseil municipal", local: "conseil municipal" },
   { re: /intelligence artificielle|\bia\b/, S: "Intelligence artificielle", O: "l'intelligence artificielle dans l'administration", local: "intelligence artificielle" },
@@ -159,7 +161,7 @@ const THEMES_TITRES = [
   { re: /numerique|piratee|cyber|donnees/, S: "Numérique", O: "le numérique et les données", local: "numérique" },
   { re: /extradition|hongrie|etranger|international|diplomat/, S: "International", O: "une affaire internationale", local: "affaire internationale" },
   { re: /tribunal|plainte|proces|victime|ineligib|parquet|justice|procureur|affaire /, S: "Justice", O: "une procédure judiciaire", local: "procédure en cours" },
-  { re: /police|gendarm|securite|armes|lance.grenade|ordre public/, S: "Sécurité", O: "le maintien de l'ordre", local: "sécurité" },
+  { re: /police|gendarm|securite(?! sociale)|armes|lance.grenade|ordre public/, S: "Sécurité", O: "le maintien de l'ordre", local: "sécurité" },
   { re: /refugie|asile|migrant|immigration|logement|\btoit\b/, S: "Logement et accueil", O: "le logement et l'accueil", local: "logement et accueil" },
   { re: /\bzac\b|urbanisme|permis de construire|amenagement|terrain|travaux|lac de/, S: "Aménagement", O: "l'aménagement du territoire", local: "projet d'aménagement" },
   { re: /alsace|metropole|grand paris|grand est|region|departement|collectivit/, S: "Collectivités locales", O: "l'organisation des collectivités", local: "organisation territoriale" },
@@ -170,6 +172,26 @@ const THEMES_TITRES = [
   { re: /gouvernement|ministre|matignon|elysee/, S: "Gouvernement", O: "l'action du gouvernement", local: "action du gouvernement" },
   { re: /elu|maire|commune|mairie|municipal|election/, S: "Vie locale", O: "la vie locale", local: "vie municipale" },
 ];
+for (const t of THEMES_TITRES) if (!t.entier) { t.re = new RegExp("\\b(?:" + t.re.source + ")"); t.entier = true; }
+/** Part des titres qui contiennent `a` et, parmi eux, `b` (0 s'il n'y en a aucun). */
+function partDe(arts, a, b) {
+  const l = arts.map((x) => plat(x.titre || "")).filter((t) => a.test(t));
+  return l.length ? l.filter((t) => b.test(t)).length / l.length : 0;
+}
+/** Thème d'un sujet (le premier de la liste qui correspond au titre central, puis à l'ensemble des titres) ; les thèmes à condition `ok` ne comptent que si elle est vraie. Budget l'emporte sur présidentielle s'il est cité en premier. */
+function themeDe(articles, p, tous, premier) {
+  const valide = (t) => !t.ok || t.ok(articles.slice(0, 6));
+  const cherche = (txt) => {
+    const t = THEMES_TITRES.find((x) => valide(x) && x.re.test(txt));
+    if (t?.S === "Présidentielle 2027") { // « Budget 2027 : … » reste un sujet de finances publiques
+      const b = THEMES_TITRES.find((x) => x.S === "Finances publiques");
+      const i = b.re.exec(txt)?.index, j = t.re.exec(txt)?.index;
+      if (i !== undefined && i < j) return b;
+    }
+    return t;
+  };
+  return cherche(p) || cherche(tous) || cherche(plat(premier));
+}
 const THEME_ILLUSTRATION = { gouvernement: "Gouvernement", budget: "Finances publiques", politique: "Politique", justice: "Justice", election: "Élections", assemblee: "Assemblée nationale", senat: "Sénat", securite: "Sécurité", international: "International" };
 const PREFIXES_NON_LIEUX = /^(politique|social|editorial|edito|billet|humour|insolite|economie|societe|sport|culture|direct|en direct|video|replay|opinion|tribune|chronique|analyse|enquete|reportage|portrait|international|monde|france|actualite|colere|mouvement|mobilisation|manifestations?|blocage|blocus|contestation|budget|loi|affaire|presidentielle|primaire|gouvernement|assemblee|senat|justice|securite|dessin|le dessin|pourquoi|comment|apres|avant|pas de|un|une)\b/;
 /** « Gilley. Avec… », « Voiron. Loi contre… », « Pyrénées-Atlantiques : le tribunal… » : le lieu en tête de titre, ou null. */
@@ -180,30 +202,51 @@ function lieuDuTitre(titre) {
   if (lieu.length < 3 || lieu.length > 30 || PREFIXES_NON_LIEUX.test(plat(lieu)) || THEMES_TITRES[0].re.test(plat(lieu))) return null;
   return lieu;
 }
+// Une action n'est affirmée que si SON mot est dans le titre : « suspend la réforme » n'est pas « décision du tribunal administratif », « rejette » n'est pas un vote,
+// « dépose une motion de censure » n'est pas une proposition de loi. Les mots sont des débuts de mot (\b) ; les participes passifs (« critiqué par ») sont écartés.
 const ACTIONS = [
-  ["decision", /suspend|annule|invalide|tribunal administratif/, "décision du tribunal administratif sur"],
-  ["vote", /adopt|votent|vote par|votees?\b|rejet/, "vote sur"],
-  ["depot", /deposer|depose|proposition de loi/, "proposition de loi sur"],
-  ["appel", /appelle\b|appellent|appel a|mobilisent|mobilise\b/, "appel sur"],
-  ["reponse", /cherche la|reponse|repond|reagit|face a/, "réponse sur"],
-  ["temoignage", /temoign|ca fait mal|larmes|maman/, "témoignage sur"],
-  ["annonce", /\blance\s|annonce|propose|presente|promet|devoile|detaille/, "annonces sur"],
-  ["position", /denonce|estime|affirme|declare|critique|juge|indique|exige|reclame|met en garde|souhaite|dit|vent debout|interroge|rappelle|evoque/, "prise de position sur"],
+  ["decision", /tribunal administratif/, "décision du tribunal administratif sur"],
+  ["vote", /\badopt(?:e|ee|es|ees|ent|er)\b|\bvotent\b|\bvote par\b|\bvotee?s?\b|\bvote\b/, "vote sur"],
+  ["depot", /proposition de loi|\bppl\b/, "proposition de loi sur"],
+  ["appel", /\bappelle\b|\bappellent\b|\bappel a\b|\bmobilisent\b|\bmobilise\b/, "appel sur"],
+  ["reponse", /\bcherche la|\breponse\b|\brepond|\breagit|\bface a\b/, "réponse sur"],
+  ["temoignage", /\btemoign|ca fait mal|\blarmes\b|\bmaman\b/, "témoignage sur"],
+  ["annonce", /\blance\s|\bannonce|\bpropose|\bpresente|\bpromet|\bdevoile|\bdetaille/, "annonces sur"],
+  ["position", /\bdenonce|\bestime|\baffirme|\bdeclare|\bcritique|\bindique|\bexige|\breclame|\bmet en garde|\bsouhaite|\bdit\b|\bvent debout|\brappelle|\bevoque/, "prise de position sur"],
 ];
+/** Première action reconnue dans le titre, avec sa position ; null si le verbe est au passif (« critiqué par … ») : alors le sujet subit l'action. */
+function actionDe(p) {
+  for (const a of ACTIONS) {
+    const m = a[1].exec(p);
+    if (!m) continue;
+    const reste = p.slice(m.index + m[0].length);
+    if (/^(?:e|es|s|ee|ees)? ?par\b/.test(reste) || /^[a-z]*(?:e|es|ee|ees)? par\b/.test(reste.slice(0, 12))) continue;
+    return { cle: a[0], phrase: a[2], index: m.index };
+  }
+  return null;
+}
 const ABREV = { SOC: "PS", ECO: "Écologistes", EPR: "EPR", RN: "RN", LFI: "LFI", LR: "LR", UDR: "UDR", PS: "PS", MODEM: "MoDem", DEM: "MoDem", HOR: "Horizons", LIOT: "LIOT", GDR: "GDR" };
-const JUDICIAIRE_TITRES = /accus[ée]|accusation|mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement|victime|inéligib|prison|extradition|\baffaire\b/i;
-const PROCEDURE = /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|poursuivi|procès|soupçonn|parquet|tribunal|victime|inéligib|extradition|mandat d.arrêt|détournement/i;
+// Listes de mots prudents : UNE seule source (scripts/liste-prudente.cjs, mots entiers), la même que stories-auto.cjs (motExclu) et publier-stories.cjs.
+// JUDICIAIRE_TITRES = accusation, procédure, violence contre une personne, mineur identifiable ; PROCEDURE = procédure formelle ; JURIDICTION = juridiction ou décision de justice explicite.
+const { JUDICIAIRE_TITRES, PROCEDURE, JURIDICTION } = require("./liste-prudente.cjs");
+const SC = require("./sondage-commanditaire.cjs"); // commanditaire et marge d'erreur d'un sondage (mentions obligatoires)
 // Indice explicite d'une juridiction ou d'une décision de justice : sans lui (simple « accusé de », « plainte », « victime », « soupçonné »), le titre n'affirme JAMAIS une procédure.
-const JURIDICTION = /mis en examen|mise en examen|garde à vue|condamn|inculp|écroué|procès|parquet|tribunal|cour d.appel|cour de cassation|conseil d.état|\bjuge\b|juges\b|mandat d.arrêt|relax|inéligib|extradition|prison/i;
 
 /** Acteur nommé dans le titre : personne (sa fonction officielle si elle est au Gouvernement), parti, ou institution ; null sinon. */
-function acteurDe(sujet, donnees, judiciaire) {
+function acteurDe(sujet, donnees, judiciaire, action) {
   const titre = sujet.articles[0].titre, p = plat(titre);
   const tous = plat(sujet.articles.map((a) => a.titre).join(" | "));
   if (!judiciaire) {
-    const rang = (x) => (p.includes(plat(x.nom)) ? p.indexOf(plat(x.nom)) : 9999);
+    const rang = (x) => {
+      const n = plat(x.nom), famille = n.split(" ").slice(-1)[0];
+      if (p.includes(n)) return p.indexOf(n);
+      const m = famille.length >= 5 ? new RegExp("\\b" + famille + "\\b").exec(p) : null; // le nom de famille seul (« Lecornu annonce… »)
+      return m ? m.index : 9999;
+    };
     const nommes = (sujet.illustration?.personnes || []).filter((x) => tous.includes(plat(x.nom)) || (plat(x.nom).split(" ").slice(-1)[0].length >= 5 && new RegExp("\\b" + plat(x.nom).split(" ").slice(-1)[0] + "\\b").test(tous) && !/\bmaire\b/.test(plat(x.nom)))).sort((a, b) => rang(a) - rang(b));
-    const pers = nommes[0];
+    // Seule la personne placée avant le verbe fait l'action : « Les sénateurs interrogent Lecornu » n'est pas une prise de position de Lecornu
+    const apresCitation = action && /["»”]\s*,?\s*$/.test(p.slice(0, action.index)); // « … », estime Danielle Simonnet : le verbe de parole suit la citation, la personne parle
+    const pers = nommes.find((x) => !action || apresCitation || rang(x) < action.index);
     if (pers) {
       const m = (donnees.gouvernement?.membres || []).find((x) => plat(x.nom) === plat(pers.nom));
       if (m) {
@@ -236,10 +279,10 @@ function titreParRegles(sujet, donnees = {}) {
   const tous = plat(brut.replace(/\bIA\b/g, "intelligence artificielle"));
   const judiciaire = articles.some((a) => JUDICIAIRE_TITRES.test(a.titre || ""));
   const procedure = articles.some((a) => PROCEDURE.test(a.titre || ""));
-  const theme = THEMES_TITRES.find((t) => t.re.test(p)) || THEMES_TITRES.find((t) => t.re.test(tous)) || THEMES_TITRES.find((t) => t.re.test(plat(premier)));
+  const theme = themeDe(articles, p, tous, premier);
   const lieu = lieuDuTitre(premier);
-  const acteur = acteurDe(sujet, donnees, judiciaire);
-  const action = ACTIONS.find(([, re]) => re.test(p));
+  const acteur = acteurDe(sujet, donnees, judiciaire, actionDe(p));
+  const action = actionDe(p);
   const pb = plat(premier);
   const genre = /edito|editorial|\bbillet\b|chronique|tribune|\bdessin\b|\bhumour\b/.test(pb) ? (/\bdessin\b|\bhumour\b/.test(pb) ? "dessin" : /\bbillet\b/.test(pb) ? "billet" : "edito") : null;
   const direct = /^(en )?direct\b/i.test(premier.trim());
@@ -260,12 +303,14 @@ function titreParRegles(sujet, donnees = {}) {
   }
   // Accusation ou affaire sans juridiction citée : titre générique de thème, jamais un nom de personne ni une procédure affirmée
   if (judiciaire && !procedure && (sujet.illustration?.personnes || []).length) return lim([theme && theme.S !== "Justice" ? `${theme.S} : l'essentiel du moment` : null, "Politique : l'essentiel du moment"], true);
+  // Thème douteux (ex. une primaire dont le camp n'est pas établi) : titre générique, jamais publié
+  if (theme?.generique) return lim([`${S} : l'essentiel du moment`], true);
   if (acteur && theme) {
-    const verbe = action ? action[2] : "actualité sur";
+    const verbe = action ? action.phrase : "actualité sur";
     const l = acteur.label;
     if (plat(l) === plat(S)) return lim([`${S} : l'essentiel du moment`]);
     // Thème institutionnel seulement : sans verbe clair, on n'invente pas de lien entre la personne et le sujet
-    if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action[0]))) return lim([`${l} : l'essentiel du moment`, `${acteur.court || l} : l'essentiel du moment`], true);
+    if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action.cle))) return lim([`${l} : l'essentiel du moment`, `${acteur.court || l} : l'essentiel du moment`], true);
     if (genre) return lim([`${l} : point de vue éditorial sur ${O}`, `${l} : point de vue éditorial`, `${S} : point de vue éditorial`]);
     return lim([`${l} : ${verbe} ${O}`, acteur.court ? `${acteur.court} : ${verbe} ${O}` : null, `${S} : ${verbe} ${O}`, `${l} : ${verbe} ${S.toLowerCase()}`, `${S} : ${l}`]);
   }
@@ -274,7 +319,7 @@ function titreParRegles(sujet, donnees = {}) {
   if (direct && S) return lim([`${S} : suivi de la journée`]);
   if (lieu && theme) return lim([`${lieu} : ${theme.local}`, `${lieu} : ${S.toLowerCase()}`]);
   if (lieu) return lim([`${lieu} : actualité locale`], true);
-  if (theme && action) return lim([`${S} : ${action[2]} ${O}`, `${S} : l'essentiel du moment`]);
+  if (theme && action) return lim([`${S} : ${action.phrase} ${O}`, `${S} : l'essentiel du moment`]);
   if (theme) return lim([`${S} : l'essentiel du moment`], !/^(Lycées|Primaire|Présidentielle|Finances|Santé|Justice|Numérique|Intelligence|Environnement|Logement|Aménagement|Sécurité|Éducation|Loi|Violences)/.test(S));
   return lim([`${THEME_ILLUSTRATION[sujet.illustration?.theme] || "Politique"} : l'essentiel du moment`], true);
 }
@@ -295,7 +340,7 @@ function copieUnTitre(titre, articles) {
 function titreSujet(sujet, dossiers = [], donnees = {}) {
   const t = titreSujetBrut(sujet, dossiers, donnees);
   if (!t || !copieUnTitre(t.titre, sujet?.articles)) return t;
-  const th = THEMES_TITRES.find((x) => x.re.test(plat(sujet.articles[0]?.titre || "")));
+  const th = themeDe(sujet.articles || [], plat(sujet.articles[0]?.titre || ""), "", "");
   const repli = th && th.S !== "Justice" ? `${th.S} : l'essentiel du moment` : "Politique : l'essentiel du moment";
   return { titre: repli, origine: "regles", generique: true };
 }
@@ -342,7 +387,6 @@ function fonctionDe(nom, donnees) {
   return null;
 }
 
-const JUDICIAIRE = /mis en examen|mise en examen|garde à vue|perquisition|condamn|inculp|écroué|mis en cause|mise en cause|plainte|poursuivi|procès|soupçonn|enquête|parquet|relax|tribunal|mandat d.arrêt|corruption|détournement/i;
 function enReserve(maintenant, tours) {
   const p = Object.fromEntries(new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
     .formatToParts(maintenant).map((x) => [x.type, x.value]));
@@ -358,17 +402,19 @@ function contexteSujet(sujet, donnees = {}, maintenant = new Date()) {
   const sortie = [];
   const personnes = (sujet.illustration?.personnes || []).slice(0, 3);
 
-  // 1. Dernier sondage : seulement hors réserve, pour une personne citée qui y figure
+  // 1. Dernier sondage : seulement hors réserve ET à plus de 24 h de la réserve (une story reste visible 24 h), pour une personne citée qui y figure, avec les mentions
+  // obligatoires de la loi du 19 juillet 1977 (art. 2) : institut, commanditaire, dates, échantillon, marge d'erreur. Commanditaire inconnu : aucune ligne (audit J-16, J-17).
   const inst = donnees.sondages?.instituts?.[0];
-  if (inst && personnes.length && sujet.illustration?.theme === "election" && !enReserve(maintenant, donnees.tours)) {
+  const cmd = inst ? SC.commanditaire(inst, donnees.veille) : null;
+  if (inst && cmd && inst.echantillon > 0 && personnes.length && sujet.illustration?.theme === "election" && !enReserve(maintenant, donnees.tours) && !enReserve(new Date(maintenant.getTime() + 24 * 36e5), donnees.tours)) {
     const fr = (n) => String(n).replace(".", ",");
     const l = personnes.map((p) => [p.nom, inst.scores?.[p.nom]]).filter(([, r]) => Array.isArray(r))
       .map(([nom, r]) => `${nom.split(" ").slice(-1)[0]} ${r[0] === r[1] ? fr(r[0]) : `${fr(r[0])}–${fr(r[1])}`} %`);
-    if (l.length) sortie.push({ type: "sondage", texte: `Dernier sondage ${inst.nom} (${inst.date}) : ${l.join(", ")}`, source: `Commission des sondages (notice ${inst.nom})` });
+    if (l.length) sortie.push({ type: "sondage", texte: `Dernier sondage ${inst.nom} pour ${cmd.nom} (terrain : ${inst.date}, ${String(inst.echantillon).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} personnes, marge d'erreur ±${SC.margeErreur(inst.echantillon)} pts) : ${l.join(", ")}`, source: `Commission des sondages (notice ${inst.nom})` });
   }
   // 2. Fonction des personnes citées
   // (jamais quand les titres relèvent d'une affaire judiciaire : on ne qualifie pas une personne mise en cause)
-  const judiciaire = (sujet.articles || []).some((a) => JUDICIAIRE.test(a.titre || ""));
+  const judiciaire = (sujet.articles || []).some((a) => JUDICIAIRE_TITRES.test(a.titre || ""));
   const fonctions = judiciaire ? [] : personnes.map((p) => fonctionDe(p.nom, donnees)).filter(Boolean);
   if (fonctions.length) sortie.push({ type: "personnes", texte: fonctions.slice(0, 2).map((f) => f.texte).join(" · "), source: fonctions[0].source });
   // 3. Ordre du jour de l'Assemblée : au moins 2 mots rares en commun avec le titre propre
@@ -417,12 +463,17 @@ function dateSujet(sujet, maintenant = new Date()) {
   const trouvees = new Map();
   for (const a of sujet.articles || []) {
     const t = nettoyer(a.titre);
-    for (const m of t.matchAll(/\b(?:le|dès le|jusqu['’]au|du|au)\s+(1er|\d{1,2})\s+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b/giu)) {
+    for (const m of t.matchAll(/\b(?:le|dès le|jusqu['’]au|du|au)\s+(1er|\d{1,2})\s+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b(?:\s+((?:19|20)\d{2})\b)?/giu)) {
       const mois = MOIS.map(plat).indexOf(plat(m[2])) + 1;
       const jour = m[1] === "1er" ? 1 : Number(m[1]);
+      // Une date suivie d'une année passée (« loi du 9 décembre 1905 »), ou précédée de « depuis », « loi », « décret » n'est pas un rendez-vous à venir (audit J-18)
+      const avant = plat(t.slice(Math.max(0, m.index - 24), m.index));
+      if (/\bdepuis\s*$/.test(avant) || (/^du\b/i.test(m[0]) && /\b(?:loi|decret|ordonnance|arrete|traite)\s*(?:n°\s*\S+\s*)?$/.test(avant))) continue;
       let an = maintenant.getUTCFullYear();
+      if (m[3] && Number(m[3]) !== an && Number(m[3]) !== an + 1) continue;
+      if (m[3]) an = Number(m[3]);
       let iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`;
-      if (iso < aujourdhui) { an++; iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`; }
+      if (iso < aujourdhui && !m[3]) { an++; iso = `${an}-${String(mois).padStart(2, "0")}-${String(jour).padStart(2, "0")}`; }
       if (iso < aujourdhui || iso > limite) continue;
       const e = trouvees.get(iso) || { iso, jour, mois: MOIS[mois - 1], medias: new Set() };
       e.medias.add(a.media);

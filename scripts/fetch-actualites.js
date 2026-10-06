@@ -189,7 +189,7 @@ async function main() {
 
   // Données du site : personnes à reconnaître dans les titres, contexte des sujets (fichiers absents ignorés)
   const lire = (f) => readFile(`data/${f}.json`, "utf-8").then(JSON.parse).catch(() => null);
-  const donnees = { gouvernement: await lire("gouvernement"), dirigeants: await lire("dirigeants"), deputes: await lire("deputes"), sondages: await lire("sondages"), agenda: await lire("agenda-an"), tours: TOURS_PRESIDENTIELLE };
+  const donnees = { gouvernement: await lire("gouvernement"), dirigeants: await lire("dirigeants"), deputes: await lire("deputes"), sondages: await lire("sondages"), veille: await lire("sondages-veille"), agenda: await lire("agenda-an"), tours: TOURS_PRESIDENTIELLE };
   const referentiel = construireReferentiel({ ...donnees, candidats: await lire("candidats"), senateurs: await lire("senateurs") });
 
   // Sujets : scripts/regroupement.cjs (entités, TF-IDF du lot, centroïde, fenêtre de 36 h, blocages des fusions risquées)

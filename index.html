@@ -725,7 +725,8 @@
   .alerte-donnees[hidden]{display:none;}
   .actu-picto{overflow:hidden;}
   [data-theme="sombre"] .actu-picto{color:color-mix(in srgb, var(--c) 55%, #fff);}
-  .actu-picto small{font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
+  [data-theme="sombre"] .actu-picto small{color:inherit;} /* clair : texte du thème assombri (contraste WCAG AA >= 4,5:1 sur la teinte à 13 %) ; sombre : couleur éclaircie du conteneur */
+  .actu-picto small{color:color-mix(in srgb, var(--c) 72%, #000); font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
   .actu-photo{overflow:hidden; border-radius:var(--r-3); background:var(--border-soft); box-shadow:0 0 0 1px var(--border-soft);}
   .actu-photo img{display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit;}
   .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}

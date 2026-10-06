@@ -20,6 +20,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { concerneLaFrance } = require("./pertinence.cjs");
+const LP = require("./liste-prudente.cjs"); // liste prudente unique (mots entiers) : âge de mineur, lycéen(ne) nommé(e)
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_MEDIAS = path.join(RACINE, "data", "medias-connus.json");
@@ -59,15 +60,13 @@ function mediaDeLien(lien, medias = lireMedias()) {
 // Jamais publié, même en brouillon ni sur demande : mineurs, violences sexuelles, suicide (protection des personnes)
 const RE_INTERDITS = /\b(mineur|mineure|mineurs|enfant|enfants|fillette|garconnet|adolescent|adolescente|collegien|collegienne|bebe|viol|viole|violee|violeur|agression sexuelle|agressions sexuelles|sexuel|sexuelle|sexuels|pedo\w*|pedocriminalite|inceste|incestueux|suicide|suicidaire)\b/;
 // Faits divers, violences, décès : écartés par l'automatisme (non politiques) ; une demande directe validée par un humain peut les traiter
-const RE_FAITS_DIVERS = /\b(meurtre|assassinat|assassine|homicide|tue|tuee|tues|fusillade|poignard\w*|coups de couteau|attentat|terroris\w*|mort|morte|morts|meurt|decede|deces|disparition|disparu|disparue|victime|victimes|drame|tragedie|fait divers|faits divers|blesse|blessee|blesses|feminicide|prostitution|proxenet\w*)\b/;
-const RE_AGE_MINEUR = /\b(?:1\d|[2-9]|0?\d) ?(?:ans|-ans)\b/;
+const RE_FAITS_DIVERS = /\b(meurtre|assassinat|assassine|homicide|tue|tuee|tues|fusillade|poignard\w*|coups de couteau|attentat|terroris\w*|mort|morte|morts|meurt|decede|deces|disparition|disparu|disparue|victime|victimes|drame|tragedie|fait divers|faits divers|blesse|blessee|blesses|feminicide|prostitution|proxenet\w*|tireur|tireurs|tuerie|tueries|explosion|explosions|incendie|incendies|naufrage|cadavre|pendaison)\b/;
 /** Mot interdit d'un texte (ou null). `faitsDivers` : ajoute les faits divers, violences et décès. */
 function motInterdit(texte, faitsDivers = false) {
   const t = plat(texte);
   const m = RE_INTERDITS.exec(t) || (faitsDivers ? RE_FAITS_DIVERS.exec(t) : null);
   if (m) return m[0];
-  const a = RE_AGE_MINEUR.exec(t);
-  return a && Number(a[0].match(/\d+/)[0]) < 20 ? a[0] : null;
+  return LP.mineurIdentifiable(texte);
 }
 
 // Verbes et mots qui ACCUSENT ou qualifient une personne : jamais dans un texte écrit par le site (titre, pied, légende, texte alternatif)

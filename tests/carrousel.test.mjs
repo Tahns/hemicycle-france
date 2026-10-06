@@ -127,7 +127,7 @@ async function lancer({ entrees = [], registre = { entrees: [] }, config = { max
 { // media_publish en échec : ABANDON, jamais de doublon
   const r = await lancer({ entrees: [carrousel("aaaaaaaaaaaa")], reglages: { erreurPublication: true } });
   const e = r.registre.entrees.find((x) => x.id === "aaaaaaaaaaaa");
-  assert.strictEqual(e.statut, "perimee");
+  assert.strictEqual(e.statut, "incertaine");
   const r2 = await lancer({ entrees: [carrousel("aaaaaaaaaaaa")], registre: r.registre });
   assert.strictEqual(r2.appels.filter((a) => a.chemin === "/IGUSER/media").length, 0, "jamais republié");
 }

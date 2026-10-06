@@ -49,7 +49,7 @@ test("motExclu (non-régression) : accusations, procédures, violences, mineurs,
   aucun(legitimes.filter((t) => motExclu(t)), "titres légitimes écartés à tort");
 });
 
-test("motExclu : angles morts (faux négatifs) sur des titres qui devraient être écartés", { todo: "J-01 : « enquête » seul, « inéligible », « requis », « est mort », « tireur », lycéen(ne) nommé(e)… passent la liste prudente" }, () => {
+test("motExclu : angles morts (faux négatifs) sur des titres qui devraient être écartés", () => {
   const doivent = [
     "Une enquête sur les comptes de campagne de Marine Le Pen", // « enquete » seul absent (seules 6 formes composées sont listées)
     "Haute-Savoie. « Si demain je ne suis plus maire, ce n'est pas grave » : déclaré inéligible, le maire de la Roche-sur-Foron s'est expliqué avant de faire appel", // titre réel du 2026-10-06 (data/actualites.json)
@@ -65,12 +65,12 @@ test("motExclu : angles morts (faux négatifs) sur des titres qui devraient êtr
   aucun(doivent.filter((t) => !motExclu(t)), "titres non écartés");
 });
 
-test("motExclu : robustesse typographique (espace insécable) et âge écrit en lettres", { todo: "J-02 : sansAccent ne normalise pas U+00A0/U+202F ; « quinze ans » n'est pas vu comme un âge de mineur" }, () => {
+test("motExclu : robustesse typographique (espace insécable) et âge écrit en lettres", () => {
   const doivent = ["Mise en examen du maire de Nice", "Garde à vue prolongée pour le député", "Un élève de quinze ans élu délégué du mouvement", "Une jeune fille de seize ans prend la parole"];
   aucun(doivent.filter((t) => !motExclu(t)), "titres non écartés");
 });
 
-test("motExclu : faux positifs (titres sans risque écartés)", { todo: "J-03 (mineur) : « processus », « dans 5 ans », « justice sociale » écartent des sujets sans risque" }, () => {
+test("motExclu : faux positifs (titres sans risque écartés)", () => {
   const legitimes = ["Processus de paix : la France plaide pour un cessez-le-feu", "Retraites : le gouvernement vise un déficit à 3 % dans 5 ans", "Justice sociale : le PS veut taxer les hauts patrimoines"];
   aucun(legitimes.filter((t) => motExclu(t)), "titres légitimes écartés");
 });
@@ -91,17 +91,17 @@ test("titreParRegles (non-régression) : titres neutres et accusation sans jurid
   assert.match(titreDe("Le tribunal administratif suspend l'arrêté du maire de Gilley"), /tribunal administratif/);
 });
 
-test("titreParRegles : le thème « 2027 » l'emporte sur « budget » (Budget 2027 devient « présidentielle »)", { todo: "J-04 : THEMES_TITRES place /presidentielle|2027/ avant /budget/ ; « Budget 2027 : le PS appelle Lecornu… » devient « Premier ministre : appel sur la présidentielle de 2027 »" }, () => {
+test("titreParRegles : le thème « 2027 » l'emporte sur « budget » (Budget 2027 devient « présidentielle »)", () => {
   assert.doesNotMatch(titreDe("Budget 2027 : le PS appelle Sébastien Lecornu à modifier « sans délai » son projet", lecornu), /présidentielle/i);
   assert.doesNotMatch(titreDe("Vénissieux. Un conseil municipal des jeunes verra le jour en 2027"), /présidentielle/i);
 });
 
-test("titreParRegles : « primaire » est toujours « de la gauche » (école primaire, primaire de la droite)", { todo: "J-05 : /primaire/ → « Primaire de la gauche » même pour l'école primaire ou la primaire de la droite" }, () => {
+test("titreParRegles : « primaire » est toujours « de la gauche » (école primaire, primaire de la droite)", () => {
   assert.doesNotMatch(titreDe("École primaire : la commune ferme une classe"), /Primaire de la gauche/);
   assert.doesNotMatch(titreDe("Primaire de la droite : Retailleau et Wauquiez se rencontrent"), /Primaire de la gauche/);
 });
 
-test("titreParRegles : ACTIONS affirme une décision du tribunal administratif ou une loi sans fondement", { todo: "J-06 : « suspend/annule/invalide » → « décision du tribunal administratif sur » ; « dépose » → « proposition de loi sur » ; « rejette » → « vote sur »" }, () => {
+test("titreParRegles : ACTIONS affirme une décision du tribunal administratif ou une loi sans fondement", () => {
   assert.doesNotMatch(titreDe("Le Premier ministre suspend la réforme des retraites", lecornu), /tribunal administratif/);
   assert.doesNotMatch(titreDe("Sébastien Lecornu annule son déplacement à Lyon", lecornu), /tribunal administratif/);
   assert.doesNotMatch(titreDe("Le RN dépose une motion de censure contre Sébastien Lecornu", lecornu), /proposition de loi/);
@@ -109,12 +109,12 @@ test("titreParRegles : ACTIONS affirme une décision du tribunal administratif o
   assert.doesNotMatch(titreDe("Sécurité sociale : les députés examinent le financement"), /maintien de l'ordre/);
 });
 
-test("titreParRegles : un « acteur » est nommé alors qu'il subit l'action (interrogé, critiqué)", { todo: "J-07 : l'acteur est la première personne trouvée dans le titre, sans analyse du sujet grammatical" }, () => {
+test("titreParRegles : un « acteur » est nommé alors qu'il subit l'action (interrogé, critiqué)", () => {
   assert.doesNotMatch(titreDe("Les sénateurs interrogent Sébastien Lecornu sur le budget", lecornu), /prise de position/);
   assert.doesNotMatch(titreDe("Sébastien Lecornu critiqué par la gauche pour son budget", lecornu), /prise de position/);
 });
 
-test("dossiers.cjs : un mot-clé « prima » ou « retra » donne un titre faux (Primaire de la gauche, Retraites)", { todo: "J-08 : TITRES_CONNUS compare des radicaux de 5 lettres (prima → primaire, primate ; retra → retrait, retraite)" }, () => {
+test("dossiers.cjs : un mot-clé « prima » ou « retra » donne un titre faux (Primaire de la gauche, Retraites)", () => {
   const base = new Date("2026-10-05T10:00:00Z");
   const medias = ["Le Monde", "BFMTV", "Libération", "Le Figaro", "Sud Ouest", "RFI", "France 24", "20 Minutes"];
   const fill = ["météo pluie Bretagne", "football Marseille victoire", "festival Cannes cinéma", "inflation recule Insee", "grippe épidémie hôpitaux", "tennis Roland-Garros finale", "salon automobile Paris", "météo canicule Provence", "rugby Toulouse victoire", "séisme Japon bilan", "bourse Paris clôture", "SNCF grève trafic perturbé", "agriculture récolte blé", "immobilier prix baisse", "tourisme saison record"];
@@ -128,12 +128,12 @@ test("dossiers.cjs : un mot-clé « prima » ou « retra » donne un titre faux 
   assert.ok(!t2.includes("Retraites"), `retrait des troupes : titre de dossier « ${t2} »`);
 });
 
-test("titresProches : deux titres de repli « X : l'essentiel du moment » sont vus comme le même sujet", { todo: "J-09 (mineur) : les mots du gabarit comptent dans le recoupement ; une story « Sénat : l'essentiel du moment » bloque « Gouvernement : l'essentiel du moment » pendant 24-36 h" }, () => {
+test("titresProches : deux titres de repli « X : l'essentiel du moment » sont vus comme le même sujet", () => {
   assert.strictEqual(titresProches("Sénat : l'essentiel du moment", "Gouvernement : l'essentiel du moment"), false);
   assert.strictEqual(titresProches("Finances publiques : l'essentiel du moment", "Environnement : l'essentiel du moment"), false);
 });
 
-test("« repris par N médias » : quatre titres du groupe EBRA avec le même titre comptent pour quatre médias", { todo: "J-21 : Le Progrès, DNA, Le Dauphiné libéré et L'Est républicain publient la même dépêche ; choisirSujet les compte comme 4 médias (seuil de 3) et l'image affiche « Repris par 4 médias » (story 09300bde3322). choisirDossier a déjà un garde-fou (3 titres distincts), pas choisirSujet" }, () => {
+test("« repris par N médias » : quatre titres du groupe EBRA avec le même titre comptent pour quatre médias", () => {
   const now = new Date("2026-10-05T10:00:00Z");
   const titre = "Social. Blocus des lycées : Laurent Nuñez réfute toute intervention « disproportionnée » des forces de l'ordre";
   const s = { derniere: "2026-10-05T09:30:00.000Z", illustration: { theme: "politique", personnes: [], partis: [] }, titrePropre: { titre: "Blocus des lycées : position du ministre", origine: "regles" },
@@ -153,7 +153,7 @@ test("illustrer (non-régression) : nom complet et nom de famille accolé à un 
   assert.ok(!illustrer(["Philippe Martinez quitte la direction du syndicat"], motifs).personnes.some((p) => p.nom === "Édouard Philippe"), "Philippe Martinez n'est pas Édouard Philippe");
 });
 
-test("illustrer : « le maire » est pris pour Bruno Le Maire (portrait et nom d'un ministre sur un titre local)", { todo: "J-10 : le motif « nom de famille » de « Bruno Le Maire » est « le maire » ; la garde (« mot capitalisé avant ») ne protège pas quand « le maire » suit une virgule ou un verbe" }, () => {
+test("illustrer : « le maire » est pris pour Bruno Le Maire (portrait et nom d'un ministre sur un titre local)", () => {
   const titres = [
     "Haute-Savoie. « Si demain je ne suis plus maire » : déclaré inéligible, le maire de la Roche-sur-Foron s'est expliqué avant de faire appel", // titre réel (data/actualites.json, sujet n° 62 le 2026-10-06)
     "Le maire de Lyon dépose une plainte", "Le maire sortant de Perpignan réélu",
@@ -162,13 +162,15 @@ test("illustrer : « le maire » est pris pour Bruno Le Maire (portrait et nom d
   aucun(faux, "titres illustrés par le portrait de Bruno Le Maire");
 });
 
-test("illustrer : « vote blanc » est traité comme une personne (« blanc de poulet »)", { todo: "J-11 (mineur) : data/sondages.json contient « vote blanc » parmi les candidats ; construireIndex en fait une personnalité notable" }, () => {
+test("illustrer : « vote blanc » est traité comme une personne (« blanc de poulet »)", () => {
   assert.ok(!illustrer(["Le prix du blanc de poulet flambe"], motifs).personnes.some((p) => /blanc/i.test(p.nom)));
 });
 
-test("illustrations : le crédit affiché correspond à la photo affichée (portrait officiel AN/Sénat + crédit Commons)", { todo: "J-12 : pour un parlementaire qui a aussi un portrait Commons, la photo est celle de l'Assemblée/du Sénat mais le crédit est celui du fichier Commons (Le Pen « Vox España, CC0 », Ciotti « EPP, CC BY 2.0 »…)" }, () => {
-  const faux = [...new Set(motifs.map((m) => m.p))].filter((p) => /^photos\/(deputes|senateurs)\//.test(p.photo || "") && p.credit).map((p) => `${p.nom} : ${p.photo} / ${p.credit}`);
-  aucun(faux, "crédit d'une autre photo que celle affichée");
+test("illustrations : le crédit affiché correspond à la photo affichée (portrait officiel AN/Sénat + crédit Commons)", () => {
+  const tous = [...new Set(motifs.map((m) => m.p))].filter((p) => p.photo);
+  const faux = tous.filter((p) => (/^photos\/(deputes|senateurs)\//.test(p.photo) && !/^(Assemblée nationale|Sénat)$/.test(p.credit || "")) || (/^photos\/personnalites\//.test(p.photo) && p.credit && !/Wikimedia Commons/.test(p.credit))).map((p) => `${p.nom} : ${p.photo} / ${p.credit}`);
+  aucun(faux, "crédit d'une autre photo que celle affichée (photo officielle : Assemblée nationale ou Sénat ; photo Commons : auteur, licence, Wikimedia Commons)");
+  assert.ok(!tous.some((p) => /^photos\/(deputes|senateurs)\//.test(p.photo) && /Commons|CC /.test(p.credit || "")), "jamais le crédit d'un fichier Commons sur une photo officielle");
 });
 
 test("noms accentués : data/gouvernement.json et le dessin des stories doivent écrire « Nuñez » comme la presse", { todo: "J-13 (mineur) : « Laurent Nunez » sous le portrait, « Nuñez » dans le titre (story 09300bde3322)" }, () => {
@@ -188,29 +190,44 @@ test("réserve électorale (non-régression) : du samedi 0 h au dimanche 20 h (P
   assert.strictEqual(reserveSondages(new Date("2027-04-30T22:00:00Z")), "2027-05-02", "samedi 0 h Paris (2e tour)");
 });
 
-test("parleDeSondage : un résultat de sondage cité sans le mot « sondage » passe", { todo: "J-14 : RE_SONDAGE ne connaît pas Ifop/Elabe/Odoxa/Ipsos…, « sondés », « crédité de », « pourrait recueillir », « projection »" }, () => {
+test("parleDeSondage : un résultat de sondage cité sans le mot « sondage » passe", () => {
   const doivent = ["Présidentielle : Bardella en tête avec 36 % selon l'Ifop", "Selon Elabe, Le Pen progresse", "Bardella crédité de 33 % au premier tour", "Les sondés jugent Macron sévèrement", "Odoxa : 54 % des Français",
     "Bardella pourrait recueillir 35 %", "Projection : le RN aurait 300 sièges", "Harris Interactive pour RTL : Mélenchon 15 %", "Cote de popularité : Lecornu perd 3 points"];
   aucun(doivent.filter((t) => !parleDeSondage(t)), "titres non reconnus comme sondage");
 });
 
-test("réserve électorale : un sondage mis en story la veille au soir reste visible (24 h) pendant la réserve", { todo: "J-15 : choisirSondage n'arrête qu'à l'entrée dans la réserve ; une story publiée vendredi 22 h reste visible jusqu'à samedi 22 h" }, () => {
+test("réserve électorale : un sondage mis en story la veille au soir reste visible (24 h) pendant la réserve", () => {
   const sondages = { instituts: [{ nom: "Ifop", date: "10-14 avril 2027", dateFin: "2027-04-15", echantillon: 1500, url: "https://x/y.pdf", scores: { a: [1, 2], b: [1, 2], c: [1, 2] } }] };
   const r = choisirSondage({ sondages, file: { entrees: [] }, now: new Date("2027-04-16T20:00:00Z") }); // vendredi 22 h à Paris
   assert.ok(r.refus, "aucune story de sondage ne devrait partir moins de 24 h avant la réserve");
 });
 
-test("story de sondage : la mention du commanditaire est obligatoire (loi du 19 juillet 1977, art. 2), jamais « non relevé »", { todo: "J-16 : js/stories.js imprime « (commanditaire non relevé) » et choisirSondage ne l'exige pas ; le sondage Ifop du 29/09 est dans ce cas (notice « …ifop-le-figaro… »)" }, () => {
+test("story de sondage : la mention du commanditaire est obligatoire (loi du 19 juillet 1977, art. 2), jamais « non relevé »", () => {
   const src = readFileSync(join(RACINE, "js", "stories.js"), "utf-8");
   assert.ok(!/commanditaire non relevé/.test(src), "une story sans commanditaire doit être refusée (ou le commanditaire déduit de la notice), pas publiée avec « non relevé »");
+  // côté sélection : le commanditaire se lit dans la notice (veille) ou dans le nom du fichier de la notice ; sinon le sondage est refusé
+  const inst = (url) => ({ nom: "Ifop", date: "25-29 septembre 2026", dateFin: "2026-09-29", echantillon: 1527, url, scores: { a: [1, 2], b: [1, 2], c: [1, 2] } });
+  const now = new Date("2026-09-30T08:00:00Z");
+  const sans = choisirSondage({ sondages: { instituts: [inst("https://x/notice.pdf")] }, file: { entrees: [] }, now });
+  assert.ok(sans.refus && /commanditaire/.test(sans.refus), "commanditaire inconnu : refus");
+  const deduit = choisirSondage({ sondages: { instituts: [inst("https://x/10284-pres-barometre-ifop-le-figaro-30-septembre.pdf")] }, file: { entrees: [] }, now });
+  assert.strictEqual(deduit.commanditaire, "Le Figaro", "déduit du nom du fichier de la notice");
+  const veille = [{ institut: "Ifop", media: "Le Parisien", terrain: { fin: "2026-09-29" } }];
+  assert.strictEqual(choisirSondage({ sondages: { instituts: [inst("https://x/notice.pdf")] }, file: { entrees: [] }, now, veille }).commanditaire, "Le Parisien", "relevé dans la notice déposée");
 });
 
-test("contexteSujet : un résultat de sondage affiché hors story « sondage » doit porter les mentions légales", { todo: "J-17 : la ligne « Dernier sondage Ifop (dates) : Mélenchon 14–17 %… » (faceAFace, dossier) n'indique ni commanditaire, ni échantillon, ni marge d'erreur" }, () => {
+test("contexteSujet : un résultat de sondage affiché hors story « sondage » doit porter les mentions légales", () => {
   const s = { illustration: { theme: "election", personnes: [{ nom: "Jean-Luc Mélenchon" }] }, articles: [art("A", "Débat à gauche", 0)] };
-  const donnees = { sondages: { instituts: [{ nom: "Ifop", date: "25-29 septembre 2026", dateFin: "2026-09-29", echantillon: 1527, scores: { "Jean-Luc Mélenchon": [14, 17] } }] }, tours: ["2027-04-18", "2027-05-02"] };
-  const c = tp.contexteSujet(s, donnees, new Date("2026-10-06T10:00:00Z")).find((x) => x.type === "sondage");
+  const inst = (url) => ({ nom: "Ifop", date: "25-29 septembre 2026", dateFin: "2026-09-29", echantillon: 1527, url, scores: { "Jean-Luc Mélenchon": [14, 17] } });
+  const donnees = (url) => ({ sondages: { instituts: [inst(url)] }, tours: ["2027-04-18", "2027-05-02"] });
+  const c = tp.contexteSujet(s, donnees("https://x/10284-ifop-le-figaro-30-septembre.pdf"), new Date("2026-10-06T10:00:00Z")).find((x) => x.type === "sondage");
   assert.ok(c, "le jeu d'essai doit produire une ligne de sondage");
-  assert.match(c.texte, /1\s?527|marge/i, "échantillon ou marge d'erreur absents");
+  assert.match(c.texte, /pour Le Figaro/, "commanditaire");
+  assert.match(c.texte, /1\s527 personnes/, "échantillon");
+  assert.match(c.texte, /marge d'erreur ±2,5 pts/, "marge d'erreur");
+  assert.match(c.texte, /terrain : 25-29 septembre 2026/, "dates du terrain");
+  assert.ok(!tp.contexteSujet(s, donnees("https://x/notice.pdf"), new Date("2026-10-06T10:00:00Z")).some((x) => x.type === "sondage"), "commanditaire inconnu : aucune ligne de sondage");
+  assert.ok(!tp.contexteSujet(s, donnees("https://x/ifop-le-figaro.pdf"), new Date("2027-04-16T20:00:00Z")).some((x) => x.type === "sondage"), "à moins de 24 h de la réserve : aucune ligne de sondage");
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -223,7 +240,7 @@ test("dateSujet (non-régression) : une date future recoupée par deux médias e
   assert.strictEqual(tp.dateSujet(s(["Le projet de loi sera examiné au Sénat le 27 octobre"]), now), null);
 });
 
-test("dateSujet : une date de loi ancienne (« loi du 9 décembre 1905 ») devient une « date à retenir » à venir", { todo: "J-18 : l'année écrite après le jour/mois est ignorée ; « du 9 décembre 1905 » → 2026-12-09, puis post permanent « Date à retenir »" }, () => {
+test("dateSujet : une date de loi ancienne (« loi du 9 décembre 1905 ») devient une « date à retenir » à venir", () => {
   const now = new Date("2026-10-06T10:00:00Z");
   const r = tp.dateSujet({ articles: [{ media: "A", titre: "Laïcité : la loi du 9 décembre 1905 en débat à l'Assemblée" }, { media: "B", titre: "Loi de 1905 : le débat sur la laïcité, retour sur la loi du 9 décembre 1905" }] }, now);
   assert.strictEqual(r, null);
@@ -236,7 +253,7 @@ test("ficheDate (non-régression) : la citation de presse du post garde le nom d
   assert.match(f.legende, /Date annoncée par la presse \(franceinfo, Le Monde\)/);
 });
 
-test("ficheDate : un post reste au fil, mais sa légende et son image affirment « dans 25 jours »", { todo: "J-19 : le décompte est figé à la date de publication ; le lendemain il est faux. Écrire la date seule (ou « le mardi 27 octobre »), garder le compte à rebours pour la story" }, () => {
+test("ficheDate : un post reste au fil, mais sa légende et son image affirment « dans 25 jours »", () => {
   const s = { titrePropre: { titre: "Loi casseurs-payeurs : examen au Sénat" }, date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, articles: [{ media: "franceinfo", titre: "Examen au Sénat le 27 octobre" }, { media: "Le Monde", titre: "Examen le 27 octobre" }] };
   const f = ficheDate(s, new Date("2026-10-02T10:00:00Z"));
   assert.doesNotMatch(f.legende, /dans \d+ jours?/);
@@ -248,6 +265,7 @@ test("ficheDate : un post reste au fil, mais sa légende et son image affirment 
 // ─────────────────────────────────────────────────────────────────────────────
 const entreeFile = (id, cree, extra = {}) => ({ id, cree, titre: "Budget : le gouvernement présente son texte", medias: ["A", "B", "C"], url_image: `https://example.org/img/${id}.jpg`, type: "story", sources: [], ...extra });
 const config = { monetisation: false, validationHumaine: false };
+const choir = ({ file, retires }) => choisir({ file, registre: { entrees: [] }, config, now: new Date("2026-10-05T10:00:00Z"), retires });
 const peutPublier = (now, extra = {}) => !choisir({ file: { entrees: [entreeFile("aaaaaaaaaaaa", new Date(Date.parse(now) - 36e5).toISOString())] }, registre: { entrees: [] }, config, now: new Date(now), ...extra }).refus;
 
 test("publier-stories (non-régression) : plage 7 h – 23 h à Paris, heure d'été comme heure d'hiver", () => {
@@ -273,7 +291,7 @@ test("publier-stories (non-régression) : plafond par jour calculé sur le jour 
   assert.ok(r.entree, r.refus);
 });
 
-test("jourUTC2 vs jourParis : en hiver, 23 h 30 à Paris tombe déjà le « lendemain » pour le plafond de stories-auto", { todo: "J-20 (mineur) : jourUTC2 fixe +2 h toute l'année ; en hiver le jour change à 23 h Paris. Sans effet la nuit (rien n'est produit), mais un sondage (autorisé jusqu'à 23 h 30) est compté sur le mauvais jour" }, () => {
+test("jourUTC2 vs jourParis : en hiver, 23 h 30 à Paris tombe déjà le « lendemain » pour le plafond de stories-auto", () => {
   const d = new Date("2026-12-10T22:30:00Z"); // 23 h 30 à Paris (UTC+1)
   assert.strictEqual(jourUTC2(d), jourParis(d));
 });
@@ -300,8 +318,13 @@ const serveur = http.createServer((req, res) => {
       if (etat.refuser && corps.includes(etat.refuser)) return json(400, { error: { message: "Invalid image" } });
       return json(200, { id: "CONT1" });
     }
+    if (url.pathname === "/IGUSER/stories" || url.pathname === "/IGUSER/media") { // vérification côté Instagram après une réponse perdue
+      if (!etat.stories) return json(404, { error: { message: "inconnu" } });
+      return json(200, { data: [{ id: "MEDIATROUVE", timestamp: new Date(Date.parse(MAINTENANT) + 2000).toISOString().replace(/\.\d+Z$/, "+0000") }] });
+    }
     if (url.pathname === "/CONT1") return json(200, { status_code: "FINISHED", id: "CONT1" });
     if (url.pathname === "/IGUSER/media_publish") {
+      etat.surPublication?.(etat.dossierEssai); // espion : état du registre au moment de media_publish
       vraies++; // la publication a bien eu lieu côté Instagram
       return etat.reponsePerdue ? json(500, { error: { message: "Internal error (réponse perdue)" } }) : json(200, { id: "MEDIA" + vraies });
     }
@@ -317,6 +340,7 @@ async function lancer({ entrees = [], registre = null, registreBrut = null, cfg 
   Object.assign(etat, reglages);
   appels.length = 0;
   const d = mkdtempSync(join(tmpdir(), "audit-"));
+  etat.dossierEssai = d;
   writeFileSync(join(d, "file.json"), JSON.stringify({ entrees }));
   writeFileSync(join(d, "config.json"), cfgBrute ?? JSON.stringify(cfg));
   if (registre || registreBrut) writeFileSync(join(d, "reg.json"), registreBrut ?? JSON.stringify(registre));
@@ -341,7 +365,7 @@ test("publier-stories (non-régression) : une publication réussie est inscrite 
   assert.strictEqual(r2.publications, 0, "même id : jamais deux fois");
 });
 
-test("publier-stories : réponse perdue de media_publish (timeout, 5xx) → la même story est republiée au passage suivant", { todo: "A-01 : si media_publish échoue APRÈS que la publication a eu lieu (timeout 60 s, 502, coupure), l'entrée n'est pas inscrite au registre et repart au passage suivant (doublon visible). Solution : inscrire une intention « en cours » avant media_publish et vérifier /stories avant tout nouvel essai" }, async () => {
+test("publier-stories : réponse perdue de media_publish (timeout, 5xx) → la même story est republiée au passage suivant", async () => {
   const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
   const avant = vraies;
   const r1 = await lancer({ entrees: [e], reglages: { reponsePerdue: true } });
@@ -349,13 +373,13 @@ test("publier-stories : réponse perdue de media_publish (timeout, 5xx) → la m
   assert.strictEqual(vraies - avant, 1, `publications réelles côté Instagram : ${vraies - avant} pour une seule entrée`);
 });
 
-test("publier-stories : un registre illisible est traité comme vide (tout ce qui est frais est republié)", { todo: "A-02 : lireJson renvoie la valeur par défaut sur toute erreur ; un registre tronqué ou en conflit remet à zéro les doublons et les plafonds. Fermer en cas d'erreur : si le fichier existe mais ne se lit pas, ne rien publier et alerter" }, async () => {
+test("publier-stories : un registre illisible est traité comme vide (tout ce qui est frais est republié)", async () => {
   const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
   const r = await lancer({ entrees: [e], registreBrut: '{"entrees": [{"id": "aaaaaaaaaaaa", "statut": "publiee"' }); // JSON tronqué
   assert.strictEqual(r.publications, 0, "registre illisible : aucune publication");
 });
 
-test("publier-stories : une configuration illisible désactive « validationHumaine » (le verrou s'ouvre)", { todo: "A-03 : lireConfig renvoie tout à false si data/stories-config.json est invalide ; un interrupteur d'arrêt doit se fermer, pas s'ouvrir. Ici aussi pour stories-auto.cjs" }, async () => {
+test("publier-stories : une configuration illisible désactive « validationHumaine » (le verrou s'ouvre)", async () => {
   const r = await lancer({ entrees: [entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation")], cfgBrute: '{ "validationHumaine": true, ' });
   assert.strictEqual(r.publications, 0, "configuration illisible : aucune publication");
   const dir = mkdtempSync(join(tmpdir(), "cfg-"));
@@ -375,9 +399,84 @@ test("publier-stories : une entrée qui échoue en boucle bloque toutes les suiv
   assert.ok(publieesB > 0, "la 2e entrée n'est jamais tentée tant que la 1re échoue");
 });
 
-test("publier-stories : jeton invalide → l'exécution GitHub reste verte, l'alerte n'est visible que dans le résumé", { todo: "A-05 : alerte() écrit un ::warning:: et un résumé, code de sortie 0 : aucun e-mail GitHub, aucune pastille rouge. Un jeton expiré (60 jours) peut bloquer la publication sans que personne ne le sache. Sortir en code 1 (ou ouvrir une issue) quand le jeton est invalide ou que l'API échoue N fois de suite" }, async () => {
+test("publier-stories : jeton invalide → l'exécution GitHub reste verte, l'alerte n'est visible que dans le résumé", async () => {
   const r = await lancer({ entrees: [entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation")], reglages: { valide: false } });
   assert.notStrictEqual(r.code, 0, "code de sortie 0 malgré un jeton invalide");
+});
+
+test("publier-stories : réponse perdue, publication retrouvée côté Instagram : inscrite « publiee », jamais rejouée (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const avant = vraies;
+  const r1 = await lancer({ entrees: [e], reglages: { reponsePerdue: true, stories: true } });
+  const ligne = r1.registre.entrees.find((x) => x.id === e.id);
+  assert.strictEqual(ligne.statut, "publiee");
+  assert.strictEqual(ligne.mediaId, "MEDIATROUVE");
+  assert.strictEqual(r1.code, 0);
+  await lancer({ entrees: [e], registre: r1.registre, now: new Date(Date.parse(MAINTENANT) + 2 * 36e5).toISOString() });
+  assert.strictEqual(vraies - avant, 1);
+});
+
+test("publier-stories : réponse perdue et vérification impossible : « incertaine », code 1, comptée dans les plafonds, jamais rejouée (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const r1 = await lancer({ entrees: [e], reglages: { reponsePerdue: true } });
+  const ligne = r1.registre.entrees.find((x) => x.id === e.id);
+  assert.strictEqual(ligne.statut, "incertaine");
+  assert.ok(ligne.publieLe, "datée : elle compte dans l'espacement et les plafonds");
+  assert.notStrictEqual(r1.code, 0, "alerte visible");
+  assert.ok(!r1.sortie.includes(JETON));
+});
+
+test("publier-stories : intention « en-cours » restée au registre (job tué avant l'écriture) : jamais rejouée, marquée « incertaine » (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const avant = vraies;
+  const registre = { entrees: [{ id: e.id, statut: "en-cours", publieLe: il_y_a(0.5), mediaId: null, type: "story" }] };
+  const r = await lancer({ entrees: [e], registre });
+  assert.strictEqual(vraies - avant, 0, "pas de nouvelle publication");
+  assert.strictEqual(r.registre.entrees.find((x) => x.id === e.id).statut, "incertaine");
+  assert.notStrictEqual(r.code, 0);
+  const r2 = await lancer({ entrees: [e], registre, reglages: { stories: true } });
+  assert.strictEqual(r2.registre.entrees.find((x) => x.id === e.id).statut, "publiee", "retrouvée côté Instagram : inscrite sans republier");
+});
+
+test("publier-stories : l'intention « en-cours » est écrite AVANT media_publish (A-01)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  let vu = null;
+  const r = await lancer({ entrees: [e], reglages: { surPublication: (d) => { vu = JSON.parse(readFileSync(join(d, "reg.json"), "utf-8")); } } });
+  assert.ok(vu?.entrees.some((x) => x.id === e.id && x.statut === "en-cours"), "au moment de media_publish, le registre contient déjà l'intention « en-cours »");
+  assert.strictEqual(r.registre.entrees.find((x) => x.id === e.id).statut, "publiee", "puis elle devient « publiee »");
+  assert.strictEqual(r.registre.entrees.filter((x) => x.id === e.id).length, 1, "une seule ligne");
+});
+
+test("publier-stories : registre ou configuration illisibles : rien ne part, alerte visible (code 1) (A-02, A-03)", async () => {
+  const e = entreeHttp("aaaaaaaaaaaa", il_y_a(1), "Retraites : le gouvernement relance la concertation");
+  const r1 = await lancer({ entrees: [e], registreBrut: "<<<<<<< HEAD\n{ conflit de fusion" });
+  assert.strictEqual(r1.publications, 0);
+  assert.notStrictEqual(r1.code, 0);
+  const r2 = await lancer({ entrees: [e], cfgBrute: "{ \"validationHumaine\": true, " });
+  assert.strictEqual(r2.publications, 0);
+  assert.notStrictEqual(r2.code, 0);
+  // la configuration absente garde les valeurs par défaut (comportement historique) ; valide, validationHumaine à true : rien ne part, code 0
+  const r3 = await lancer({ entrees: [e], cfg: { ...config, validationHumaine: true } });
+  assert.strictEqual(r3.publications, 0);
+  assert.strictEqual(r3.code, 0);
+});
+
+test("contenus retirés (J-23) : jamais republiés, texte jamais repris, images supprimées", async () => {
+  const { lireRetires } = require("../scripts/retires.cjs");
+  const retires = lireRetires();
+  for (const id of ["bardella-0210", "jour-0310", "lyceens-0310", "lyceens-0410", "post-primaire-0510"]) assert.ok(retires.has(id), id);
+  // le registre n'est pas modifié (trace d'historique)
+  const reg = JSON.parse(readFileSync(join(RACINE, "data", "instagram-publiees.json"), "utf-8"));
+  assert.ok(reg.entrees.some((x) => x.id === "bardella-0210"), "le registre garde la trace");
+  // une entrée de la file qui porte un id retiré n'est jamais publiée
+  const e = entreeFile("bardella-0210", new Date(Date.parse("2026-10-05T10:00:00Z") - 36e5).toISOString());
+  assert.ok(choir({ file: { entrees: [e] }, retires: new Set(["bardella-0210"]) }).refus, "id retiré : refus");
+  assert.ok(!choir({ file: { entrees: [e] } }).refus, "même entrée non retirée : publiable");
+  // le texte d'une publication retirée n'entre pas dans la détection de sujets proches
+  const autre = entreeFile("cccccccccccc", "2026-10-05T09:30:00.000Z", { titre: "Retraites : le gouvernement relance la concertation" });
+  const registre = { entrees: [{ id: "bardella-0210", statut: "publiee", publieLe: "2026-10-05T07:00:00.000Z", mediaId: "windsor", type: "story", titre: "Retraites : le gouvernement relance la concertation", sujets: [] }] };
+  assert.ok(choisir({ file: { entrees: [autre] }, registre, config, now: new Date("2026-10-05T10:00:00Z") }).refus, "sans la liste : sujet proche d'une publication récente");
+  assert.ok(!choisir({ file: { entrees: [autre] }, registre, config, now: new Date("2026-10-05T10:00:00Z"), retires: new Set(["bardella-0210"]) }).refus, "texte retiré ignoré");
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -389,7 +488,7 @@ test("registre : chaque publication « publiee » a un vrai identifiant de médi
   aucun(faux, "entrées sans identifiant Instagram valide");
 });
 
-test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste servie publiquement", { todo: "A-07 : bardella-0210.jpg, jour-0310.jpg, lyceens-0310.jpg, lyceens-0410.jpg… échappent à nettoyerImages (nom ≠ 12 hexa) : jamais supprimées, restent lisibles sur GitHub Pages, et contiennent des mots que la liste prudente exclut (« antisémites », « victimes », « interpellations »)" }, () => {
+test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste servie publiquement", () => {
   const hors = readdirSync(join(RACINE, "instagram", "auto")).filter((f) => !/^[0-9a-f]{12}\.(jpg|mp4)$/.test(f));
   aucun(hors, "fichiers hors convention");
 });

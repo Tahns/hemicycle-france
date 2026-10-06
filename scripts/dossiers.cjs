@@ -12,6 +12,7 @@
  */
 const { concerneLaFrance } = require("./pertinence.cjs");
 const { motExclu } = require("./stories-auto.cjs");
+const { sourcesDistinctes } = require("./regroupement.cjs");
 
 const MIN_ARTICLES = 6, MIN_MEDIAS = 4, HEURES = 48, MAX_DOSSIERS = 3, MAX_ARTICLES = 14;
 
@@ -44,16 +45,22 @@ function motsDuTitre(titre) {
 }
 
 const MAJ = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-// Titres neutres connus (thèmes récurrents) ; sinon les mots-clés eux-mêmes
+// Titres neutres connus (thèmes récurrents) : MOT ENTIER (jamais un radical de 5 lettres : « prima » donne primate, « retra » donne retrait) présent dans
+// au moins les 2/3 des titres du dossier ; sinon le titre est celui du mot-clé lui-même, à condition qu'il couvre aussi 2/3 des articles (voir construireDossiers).
+const COUVERTURE_MIN = 2 / 3;
+const part = (titres, re) => (titres.length ? titres.filter((t) => re.test(plat(t))).length / titres.length : 0);
 const TITRES_CONNUS = [
-  [(m, t) => m.has("lycee") && t.filter((x) => /bloc(us|age|qu)/.test(plat(x))).length >= 3, "Blocus des lycées"],
-  [(m) => m.has("greve"), "Grève"],
-  [(m) => m.has("prima"), "Primaire de la gauche"],
-  [(m) => m.has("retra"), "Retraites"],
-  [(m) => m.has("budge"), "Budget"],
-  [(m) => m.has("manif"), "Manifestations"],
-  [(m) => m.has("lycee"), "Lycées"],
+  [(t) => part(t, /\blycees?\b/) >= COUVERTURE_MIN && t.filter((x) => /\bbloc(?:us|age|ages|que|quent|ques)\b/.test(plat(x))).length >= 3, "Blocus des lycées"],
+  [(t) => part(t, /\bgreves?\b/) >= COUVERTURE_MIN, "Grève"],
+  [(t) => part(t, /\bprimaires?\b/) >= COUVERTURE_MIN && part(t, /\bgauche\b/) >= COUVERTURE_MIN && part(t, /\bdroite\b/) === 0, "Primaire de la gauche"],
+  [(t) => part(t, /\bprimaires?\b/) >= COUVERTURE_MIN && part(t, /\bdroite\b/) >= COUVERTURE_MIN && part(t, /\bgauche\b/) === 0, "Primaire de la droite"],
+  [(t) => part(t, /\bretraites?\b/) >= COUVERTURE_MIN, "Retraites"],
+  [(t) => part(t, /\bbudgets?\b/) >= COUVERTURE_MIN, "Budget"],
+  [(t) => part(t, /\bmanifest\w*/) >= COUVERTURE_MIN, "Manifestations"],
+  [(t) => part(t, /\blyce\w*/) >= COUVERTURE_MIN, "Lycées"],
 ];
+// Mots-clés trop ambigus pour titrer seuls (école primaire, primaire de la droite, retrait des troupes) : pas de dossier plutôt qu'un titre faux
+const AMBIGUS = /^(primaire|prime)$/;
 
 /**
  * articles : [{ titre, url, media, date }] ; renvoie jusqu'à 3 dossiers
@@ -90,7 +97,7 @@ function construireDossiers(articles, now = new Date()) {
   for (const g of groupes) {
     const arts = [...g.arts].map((i) => frais[i]).sort((a, b) => b.date.localeCompare(a.date));
     const medias = [...new Set(arts.map((a) => a.media))];
-    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre))) continue;
+    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || sourcesDistinctes(arts).mediasDistincts < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre))) continue;
     g.liste = arts;
     g.medias = medias;
     g.score = medias.length * 100 + arts.length;
@@ -101,15 +108,20 @@ function construireDossiers(articles, now = new Date()) {
     if (sortie.length >= MAX_DOSSIERS) break;
     const urls = g.liste.map((a) => a.url);
     if (urls.filter((u) => pris.has(u)).length * 2 > urls.length) continue; // recouvre un dossier déjà retenu
-    urls.forEach((u) => pris.add(u));
-    const radicaux = new Set(g.mots.map(([r]) => r));
     const motifs = g.mots.slice(0, 4).map(([, e]) => [...e.formes.entries()].sort((a, b) => b[1] - a[1])[0][0]);
-    const connu = TITRES_CONNUS.find(([t]) => t(radicaux, g.liste.map((a) => a.titre)));
+    const titresAffiches = g.liste.slice(0, MAX_ARTICLES).map((a) => a.titre);
+    const connu = TITRES_CONNUS.find(([t]) => t(titresAffiches));
+    const titre = connu ? connu[1] : MAJ(motifs[0]);
+    // Le titre doit être couvert par au moins 2/3 des articles affichés et ne pas être ambigu : sinon pas de dossier (en cas de doute, rien)
+    if (!connu && (AMBIGUS.test(plat(titre)) || part(titresAffiches, new RegExp("\\b" + plat(motifs[0]).replace(/[^a-z]/g, "").slice(0, 5))) < COUVERTURE_MIN)) continue;
+    urls.forEach((u) => pris.add(u));
     sortie.push({
       id: plat(motifs[0]).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
-      titre: connu ? connu[1] : MAJ(motifs[0]),
+      titre,
       motifs,
       medias: g.medias,
+      mediasDistincts: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).mediasDistincts, // un groupe de presse ou une dépêche reprise compte une fois
+      sources: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).sources,
       nb: g.liste.length,
       derniere: g.liste[0].date,
       articles: g.liste.slice(0, MAX_ARTICLES).map((a) => ({ media: a.media, titre: a.titre, url: a.url, date: a.date })),
