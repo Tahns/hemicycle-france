@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-06T08:31:05.140Z",
+ "lastUpdated": "2026-10-06T08:45:51.372Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -104,18 +104,19 @@
    "titre": "Blocus des lycées",
    "motifs": [
     "lycéenne",
-    "colère",
     "mobilisation",
+    "colère",
     "mouvement"
    ],
    "medias": [
+    "France 24",
+    "Nice-Matin",
     "RFI",
     "Le Dauphiné libéré",
     "Le Figaro",
     "Mediapart",
     "BFMTV",
     "Sud Ouest",
-    "Nice-Matin",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
@@ -125,9 +126,21 @@
     "Le Monde",
     "Hugo Décrypte"
    ],
-   "nb": 58,
-   "derniere": "2026-10-06T08:08:02.000Z",
+   "nb": 63,
+   "derniere": "2026-10-06T08:42:46.000Z",
    "articles": [
+    {
+     "media": "France 24",
+     "titre": "Bâtiments délabrés, horaires, Parcoursup... Une lycéenne et un professeur au micro de France 24",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261006-b%C3%A2timents-d%C3%A9labr%C3%A9s-horaires-parcoursup-une-lyc%C3%A9enne-et-un-professeur-au-micro-de-france-24",
+     "date": "2026-10-06T08:42:46.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Protéger nos enfants dans les manifestations » : les Écologistes appellent parents et élus à manifester en blanc ce mardi dans les cortèges lycéens",
+     "url": "https://www.nicematin.com/societe/social/proteger-nos-enfants-dans-les-manifestations-les-ecologistes-appellent-parents-et-elus-a-manifester-en-blanc-ce-mardi-dans-les-corteges-lyceens-10735845",
+     "date": "2026-10-06T08:22:47.000Z"
+    },
     {
      "media": "RFI",
      "titre": "Manifestations lycéennes en France: «On n'avait jamais connu un mouvement aussi intense»",
@@ -201,21 +214,9 @@
     },
     {
      "media": "Sud Ouest",
-     "titre": "DIRECT. Crise lycéenne : «Acte III» sous haute tension ce mardi, mobilisations dans le Sud-Ouest, premiers blocages à Bordeaux, Lyon et Paris... Suivez toutes les infos",
+     "titre": "DIRECT. Crise lycéenne : «Acte III» sous haute tension ce mardi, dans le Sud-Ouest, un début de mobilisation dans le calme... Suivez toutes les infos",
      "url": "https://www.sudouest.fr/france/direct-crise-lyceenne-acte-iii-ce-mardi-journee-a-tres-haut-risque-pour-les-forces-de-l-ordre-et-le-gouvernement-toutes-les-infos-de-ce-mardi-6-octobre-30937251.php",
      "date": "2026-10-06T05:55:33.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "78 % des jeunes pensent que les responsables politiques « préparent mal leur avenir », révèle une enquête qui liste des propositions concrètes de changement",
-     "url": "https://www.nicematin.com/societe/78-des-jeunes-pensent-que-les-responsables-politiques-preparent-mal-leur-avenir-revele-une-enquete-qui-liste-des-propositions-concretes-de-changement-10735608",
-     "date": "2026-10-06T05:30:11.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : près de 80 % des jeunes estiment que les politiques préparent mal leur avenir, une majorité ne « fait pas confiance aux candidats »",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-pres-de-80-des-jeunes-estiment-que-les-politiques-preparent-mal-leur-avenir-une-majorite-ne-fait-pas-confiance-aux-candidats-30937253.php",
-     "date": "2026-10-06T05:28:34.000Z"
     }
    ]
   },
@@ -225,8 +226,8 @@
    "motifs": [
     "présidentielle",
     "primaire",
-    "socialiste",
-    "inscrits"
+    "inscrits",
+    "socialiste"
    ],
    "medias": [
     "Le Monde",
@@ -239,18 +240,19 @@
     "Le Dauphiné libéré",
     "L'Est républicain",
     "Public Sénat",
+    "France 24",
     "Le Figaro",
     "RFI",
     "L'Express"
    ],
-   "nb": 36,
-   "derniere": "2026-10-06T08:26:04.000Z",
+   "nb": 37,
+   "derniere": "2026-10-06T08:26:03.000Z",
    "articles": [
     {
      "media": "Le Monde",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici à 2032",
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
-     "date": "2026-10-06T08:26:04.000Z"
+     "date": "2026-10-06T08:26:03.000Z"
     },
     {
      "media": "BFMTV",
@@ -337,31 +339,39 @@
   },
   {
    "id": "euros",
-   "titre": "Euros",
+   "titre": "Budget",
    "motifs": [
     "euros",
     "milliards",
+    "budget",
     "économies"
    ],
    "medias": [
-    "Le Monde",
     "BFMTV",
+    "Le Monde",
     "Le Progrès",
     "Sud Ouest",
     "L'Est républicain",
-    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
+    "Dernières Nouvelles d'Alsace",
     "20 Minutes",
     "Nice-Matin"
    ],
-   "nb": 15,
-   "derniere": "2026-10-06T08:26:04.000Z",
+   "nb": 18,
+   "derniere": "2026-10-06T08:40:35.000Z",
    "articles": [
     {
+     "media": "BFMTV",
+     "titre": "Budget: Marine Le Pen dénonce \"l'alternative délirante\" proposée par LFI",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-budget-marine-le-pen-denonce-l-alternative-delirante-proposee-par-lfi_VN-202610060375.html",
+     "date": "2026-10-06T08:40:35.000Z",
+     "video": true
+    },
+    {
      "media": "Le Monde",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici à 2032",
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
-     "date": "2026-10-06T08:26:04.000Z"
+     "date": "2026-10-06T08:26:03.000Z"
     },
     {
      "media": "BFMTV",
@@ -375,6 +385,12 @@
      "titre": "Auvergne-Rhône-Alpes. Manifestations lycéennes : 25 à 30 millions, l’étonnant chiffrage des dégâts par la région",
      "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/06/manifestations-lyceennes-25-a-30-millions-l-etonnant-chiffrage-des-degats-par-la-region-aura",
      "date": "2026-10-06T05:00:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Présidentielle 2027 : pour les candidats, la difficulté de mener campagne alors que plane la menace d’une crise financière et budgétaire",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-les-candidats-face-a-la-menace-d-une-crise-financiere-et-budgetaire_6788825_823448.html",
+     "date": "2026-10-06T03:05:08.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -401,6 +417,12 @@
      "date": "2026-10-05T17:45:13.000Z"
     },
     {
+     "media": "Public Sénat",
+     "titre": "[Info Public Sénat] Christine Lavarde rapporteure générale du budget, vice-présidences et questeurs : les postes clefs du Sénat dévoilés",
+     "url": "https://www.publicsenat.fr/actualites/politique/info-public-senat-christine-lavarde-designee-rapporteure-generale-du-budget-par-le-groupe-lr-du-senat",
+     "date": "2026-10-05T16:37:50.000Z"
+    },
+    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Économie. Budget 2027 : l'État va ponctionner 2,1 milliards d'euros sur l'assurance-chômage",
      "url": "https://www.dna.fr/economie/2026/10/05/budget-2027-l-etat-va-ponctionner-2-1-milliards-d-euros-sur-l-assurance-chomage",
@@ -423,24 +445,6 @@
      "titre": "Budget : Les représentants des hôpitaux et cliniques réclament 1,3 milliard d’euros en plus",
      "url": "https://www.20minutes.fr/societe/4251529-20261005-budget-representants-hopitaux-cliniques-reclament-1-3-milliard-euros-plus-couvrir-besoins?at_medium=display&at_campaign=149",
      "date": "2026-10-05T14:06:07.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Économie. Canicules, sécheresse, incendies : l'été a coûté 16 milliards d'euros à la France",
-     "url": "https://www.dna.fr/environnement/2026/10/05/canicules-secheresse-incendies-l-ete-a-coute-16-milliards-d-euros-a-la-france",
-     "date": "2026-10-05T13:34:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Fiscalité. Dons aux associations : la réduction d’impôt « Coluche » pour les dons restera à 2 000 euros en 2027",
-     "url": "https://www.dna.fr/economie/2026/10/05/la-reduction-d-impot-coluche-pour-les-dons-restera-a-2000-euros-en-2027-annonce-la-ministre",
-     "date": "2026-10-05T11:51:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Sens Public — Midterms : Trump va-t-il payer le prix de sa politique économique ?",
-     "url": "https://www.publicsenat.fr/emission/sens-public/midterms-trump-va-t-il-payer-le-prix-de-sa-politique-economique-e0",
-     "date": "2026-10-05T09:18:55.000Z"
     }
    ]
   }
@@ -482,47 +486,8 @@
    ]
   },
   {
-   "medias": 4,
-   "derniere": "2026-10-05T18:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Vidéo. $content.TitleNoTags",
-     "url": "https://www.leprogres.fr/videos/dan-sullivan-ou-dan-sullivan-deux-candidats-pour-les-midterms-aux-etats-unis-ont-le-meme-nom-3m5lfs3",
-     "media": "Le Progrès",
-     "date": "2026-10-05T18:30:00.000Z",
-     "video": true
-    },
-    {
-     "titre": "Vidéo. $content.TitleNoTags",
-     "url": "https://www.dna.fr/videos/dan-sullivan-ou-dan-sullivan-deux-candidats-pour-les-midterms-aux-etats-unis-ont-le-meme-nom-3m5lfs3",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-05T18:30:00.000Z",
-     "video": true
-    },
-    {
-     "titre": "Vidéo. $content.TitleNoTags",
-     "url": "https://www.ledauphine.com/videos/dan-sullivan-ou-dan-sullivan-deux-candidats-pour-les-midterms-aux-etats-unis-ont-le-meme-nom-3m5lfs3",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-05T18:30:00.000Z",
-     "video": true
-    },
-    {
-     "titre": "Vidéo. $content.TitleNoTags",
-     "url": "https://www.estrepublicain.fr/videos/dan-sullivan-ou-dan-sullivan-deux-candidats-pour-les-midterms-aux-etats-unis-ont-le-meme-nom-3m5lfs3",
-     "media": "L'Est républicain",
-     "date": "2026-10-05T18:30:00.000Z",
-     "video": true
-    }
-   ]
-  },
-  {
    "medias": 3,
-   "derniere": "2026-10-06T08:26:04.000Z",
+   "derniere": "2026-10-06T08:26:03.000Z",
    "illustration": {
     "personnes": [
      {
@@ -539,10 +504,10 @@
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici 2032",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet « 140 milliards d’euros nets d’économies » d’ici à 2032",
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/presidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-economies-d-ici-2032_6788959_823448.html",
      "media": "Le Monde",
-     "date": "2026-10-06T08:26:04.000Z"
+     "date": "2026-10-06T08:26:03.000Z"
     },
     {
      "titre": "Présidentielle: Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 2032",
@@ -575,6 +540,39 @@
    }
   },
   {
+   "medias": 3,
+   "derniere": "2026-10-06T07:20:58.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Crise lycéenne : «Acte III» sous haute tension ce mardi, dans le Sud-Ouest, un début de mobilisation dans le calme... Suivez toutes les infos",
+     "url": "https://www.sudouest.fr/france/direct-crise-lyceenne-acte-iii-ce-mardi-journee-a-tres-haut-risque-pour-les-forces-de-l-ordre-et-le-gouvernement-toutes-les-infos-de-ce-mardi-6-octobre-30937251.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-06T05:55:33.000Z"
+    },
+    {
+     "titre": "Mobilisation lycéenne, le mouvement change d’échelle: suivez la journée en direct",
+     "url": "https://www.mediapart.fr/journal/france/061026/mobilisation-lyceenne-le-mouvement-change-d-echelle-suivez-la-journee-en-direct",
+     "media": "Mediapart",
+     "date": "2026-10-06T07:20:58.000Z"
+    },
+    {
+     "titre": "\"Acte III\" : nouvelle journée de mobilisation lycéenne sous haute tension en France",
+     "url": "https://www.france24.com/fr/france/20261006-acte-iii-nouvelle-journ%C3%A9e-de-mobilisation-lyc%C3%A9enne-sous-haute-tension-en-france",
+     "media": "France 24",
+     "date": "2026-10-06T00:22:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blocus des lycées",
+    "origine": "dossier"
+   }
+  },
+  {
    "medias": 2,
    "derniere": "2026-10-06T05:30:11.000Z",
    "illustration": {
@@ -597,7 +595,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Blocus des lycées",
+    "titre": "Primaire de la gauche",
     "origine": "dossier"
    }
   },
@@ -621,33 +619,6 @@
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-plus-de-140-000-inscrits-appeles-a-voter-a-la-primaire-sociale-democrate_AD-202610060096.html",
      "media": "BFMTV",
      "date": "2026-10-06T04:40:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire de la gauche",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 2,
-   "derniere": "2026-10-06T00:01:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire à gauche : plus de 140 000 personnes se sont inscrites pour désigner leur candidat à la présidentielle",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/06/primaire-a-gauche-plus-de-140-000-inscrits-appeles-a-designer-leur-candidat-a-la-presidentielle_6788654_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-06T00:01:47.000Z"
-    },
-    {
-     "titre": "Primaire de la gauche : Plus de 140.000 personnes inscrites pour voter les 9 et 10 octobre",
-     "url": "https://www.20minutes.fr/politique/4251626-20261005-primaire-gauche-pres-130-000-personnes-inscrites-voter-9-10-octobre?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-05T18:30:41.000Z"
     }
    ],
    "titrePropre": {
@@ -734,6 +705,179 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T08:42:46.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Bâtiments délabrés, horaires, Parcoursup... Une lycéenne et un professeur au micro de France 24",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261006-b%C3%A2timents-d%C3%A9labr%C3%A9s-horaires-parcoursup-une-lyc%C3%A9enne-et-un-professeur-au-micro-de-france-24",
+     "media": "France 24",
+     "date": "2026-10-06T08:42:46.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blocus des lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:40:35.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Vox España, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget: Marine Le Pen dénonce \"l'alternative délirante\" proposée par LFI",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-budget-marine-le-pen-denonce-l-alternative-delirante-proposee-par-lfi_VN-202610060375.html",
+     "media": "BFMTV",
+     "date": "2026-10-06T08:40:35.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:39:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Vox España, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Marine Le Pen: sans \"rupture politique, la France court vers le défaut\" de paiement",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-marine-le-pen-sans-rupture-politique-la-france-court-vers-le-defaut-de-paiement_VN-202610060373.html",
+     "media": "BFMTV",
+     "date": "2026-10-06T08:39:11.000Z",
+     "video": true
+    }
+   ],
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:38:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Edwige Diaz",
+      "parti": "Aucun",
+      "lien": "#senateur-20390P"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Loi « casseurs-payeurs » : « Si les élèves doivent payer toute leur vie, ça me va », indique Edwige Diaz (RN)",
+     "url": "https://www.publicsenat.fr/actualites/politique/loi-casseurs-payeurs-si-les-eleves-doivent-payer-toute-leur-vie-ca-me-va-indique-edwige-diaz-rn",
+     "media": "Public Sénat",
+     "date": "2026-10-06T08:38:22.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:37:57.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "« Une réponse sécuritaire totalement disproportionnée » : le PS va déposer une proposition de loi contre les armes mutilantes lors des manifestations de mineurs",
+     "url": "https://www.nicematin.com/societe/social/une-reponse-securitaire-totalement-disproportionnee-le-ps-va-deposer-une-proposition-de-loi-contre-les-armes-mutilantes-lors-des-manifestations-de-mineurs-10735858",
+     "media": "Nice-Matin",
+     "date": "2026-10-06T08:37:57.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:34:31.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget"
+   },
+   "articles": [
+    {
+     "titre": "« Où est passé l’argent ? » : les sapeurs-pompiers de Charente-Maritime réclament au Département le reversement total de la taxe allouée au Sdis 17",
+     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/ou-est-passe-l-argent-les-sapeurs-pompiers-de-charente-maritime-reclament-au-departement-le-reversement-total-de-la-taxe-allouee-au-sdis-17-30938392.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-06T08:34:31.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:32:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Grenoble. Plainte, manifestation, mises au point,… Le conseil municipal s’est ouvert une semaine après les incidents entre élus et agents",
+     "url": "https://www.ledauphine.com/politique/2026/10/06/isere-grenoble-plainte-manifestation-mises-au-point-le-conseil-municipal-s-est-ouvert-une-semaine-apres-les-incidents-entre-elus-et-agents",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-06T08:32:00.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-06T08:24:00.000Z",
    "illustration": {
     "personnes": [],
@@ -748,6 +892,29 @@
      "date": "2026-10-06T08:24:00.000Z"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T08:22:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "« Protéger nos enfants dans les manifestations » : les Écologistes appellent parents et élus à manifester en blanc ce mardi dans les cortèges lycéens",
+     "url": "https://www.nicematin.com/societe/social/proteger-nos-enfants-dans-les-manifestations-les-ecologistes-appellent-parents-et-elus-a-manifester-en-blanc-ce-mardi-dans-les-corteges-lyceens-10735845",
+     "media": "Nice-Matin",
+     "date": "2026-10-06T08:22:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blocus des lycées",
+    "origine": "dossier"
+   }
   },
   {
    "medias": 1,
@@ -944,27 +1111,6 @@
      "date": "2026-10-06T07:40:26.000Z"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-06T07:20:58.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne, le mouvement change d’échelle: suivez la journée en direct",
-     "url": "https://www.mediapart.fr/journal/france/061026/mobilisation-lyceenne-le-mouvement-change-d-echelle-suivez-la-journee-en-direct",
-     "media": "Mediapart",
-     "date": "2026-10-06T07:20:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Blocus des lycées",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -1182,27 +1328,6 @@
   },
   {
    "medias": 1,
-   "derniere": "2026-10-06T05:55:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Crise lycéenne : «Acte III» sous haute tension ce mardi, mobilisations dans le Sud-Ouest, premiers blocages à Bordeaux, Lyon et Paris... Suivez toutes les infos",
-     "url": "https://www.sudouest.fr/france/direct-crise-lyceenne-acte-iii-ce-mardi-journee-a-tres-haut-risque-pour-les-forces-de-l-ordre-et-le-gouvernement-toutes-les-infos-de-ce-mardi-6-octobre-30937251.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-06T05:55:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Blocus des lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
    "derniere": "2026-10-06T05:47:42.000Z",
    "illustration": {
     "personnes": [],
@@ -1326,6 +1451,25 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T05:09:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Au-delà de la mobilisation lycéenne, une bataille du récit entre LFI et le gouvernement",
+     "url": "https://www.france24.com/fr/france/20261006-france-journee-6-octobre-manifestation-lyceens-bataille-recit-entre-lfi-melenchon-gouvernement",
+     "media": "France 24",
+     "date": "2026-10-06T05:09:50.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-06T05:06:55.000Z",
    "illustration": {
     "personnes": [
@@ -1390,9 +1534,26 @@
     }
    ],
    "titrePropre": {
-    "titre": "Euros",
+    "titre": "Budget",
     "origine": "dossier"
    }
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:57:52.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "En direct : les lycéens manifestent en France pour l\"'acte III\" de la mobilisation",
+     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
+     "media": "France 24",
+     "date": "2026-10-06T04:57:52.000Z"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1408,6 +1569,31 @@
      "url": "https://www.lemonde.fr/politique/article/2026/10/06/l-histoire-de-la-dematerialisation-invite-a-la-prudence-l-administration-publique-appelee-a-ne-pas-foncer-tete-baissee-dans-l-ia_6788935_823448.html",
      "media": "Le Monde",
      "date": "2026-10-06T04:55:07.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-06T04:40:15.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique"
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann",
+     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
+     "media": "BFMTV",
+     "date": "2026-10-06T04:40:15.000Z"
     }
    ]
   },
@@ -1461,31 +1647,6 @@
     {
      "titre": "Ségolène Royal",
      "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
-     "media": "BFMTV",
-     "date": "2026-10-06T04:40:15.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-06T04:40:15.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
      "media": "BFMTV",
      "date": "2026-10-06T04:40:15.000Z"
     }
@@ -1808,6 +1969,27 @@
   },
   {
    "medias": 1,
+   "derniere": "2026-10-06T00:01:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire à gauche : plus de 140 000 personnes se sont inscrites pour désigner leur candidat à la présidentielle",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/primaire-a-gauche-plus-de-140-000-inscrits-appeles-a-designer-leur-candidat-a-la-presidentielle_6788654_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-06T00:01:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire de la gauche",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
    "derniere": "2026-10-05T22:00:41.000Z",
    "illustration": {
     "personnes": [],
@@ -2090,40 +2272,6 @@
   },
   {
    "medias": 1,
-   "derniere": "2026-10-05T20:22:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Valérie Pécresse",
-     "url": "https://www.bfmtv.com/politique/valerie-pecresse_DN-202107220461.html",
-     "media": "BFMTV",
-     "date": "2026-10-05T20:22:51.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T20:22:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Valérie Pécresse veut supprimer les aides de la région francilienne aux lycéens \"qui seront sanctionnés pour avoir cassé\"",
-     "url": "https://www.bfmtv.com/politique/les-republicains/valerie-pecresse-veut-supprimer-les-aides-de-la-region-francilienne-aux-lyceens-qui-seront-sanctionnes-pour-avoir-casse_AV-202610050902.html",
-     "media": "BFMTV",
-     "date": "2026-10-05T20:22:50.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
    "derniere": "2026-10-05T20:18:02.000Z",
    "illustration": {
     "personnes": [],
@@ -2136,6 +2284,23 @@
      "url": "https://www.rfi.fr/fr/france/20261005-blocage-des-lyc%C3%A9es-en-france-la-ldh-d%C3%A9nonce-une-d%C3%A9rive-globale-par-rapport-%C3%A0-l-%C3%A9tat-de-droit-de-la-police",
      "media": "RFI",
      "date": "2026-10-05T20:18:02.000Z"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "derniere": "2026-10-05T20:09:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite"
+   },
+   "articles": [
+    {
+     "titre": "\"La France tombe\" : l'extrême-droite anglosaxonne instrumentalise les violences en France",
+     "url": "https://www.france24.com/fr/%C3%A9missions/info-ou-intox/20261005-la-france-tombe-l-extr%C3%AAme-droite-anglosaxonne-instrumentalise-les-violences-en-france",
+     "media": "France 24",
+     "date": "2026-10-05T20:09:06.000Z"
     }
    ]
   },
@@ -2327,75 +2492,6 @@
      "url": "https://www.sudouest.fr/politique/education/sur-le-campus-bordelais-les-blocages-reconduits-a-montaigne-et-sciences-po-30932400.php",
      "media": "Sud Ouest",
      "date": "2026-10-05T18:45:51.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:44:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Artzenheim. Une convention de rappel à l’ordre signée à la mairie",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/10/05/une-convention-de-rappel-a-l-ordre-signee-a-la-mairie",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-05T18:44:00.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:37:23.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Contre le mouvement lycéen, une utilisation inédite et intensive de l’arme administrative",
-     "url": "https://www.mediapart.fr/journal/france/051026/contre-le-mouvement-lyceen-une-utilisation-inedite-et-intensive-de-l-arme-administrative",
-     "media": "Mediapart",
-     "date": "2026-10-05T18:37:23.000Z"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:34:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Vidéo. Blocage des lycées au Pays basque : une matinée sous tension aux abords du lycée Cantau à Anglet",
-     "url": "https://www.sudouest.fr/pyrenees-atlantiques/anglet/video-blocage-des-lycees-au-pays-basque-une-matinee-sous-tension-aux-abords-du-lycee-cantau-a-anglet-30926417.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-05T18:34:44.000Z",
-     "video": true
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "derniere": "2026-10-05T18:34:36.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique"
-   },
-   "articles": [
-    {
-     "titre": "Le pouvoir tétanisé par la mobilisation lycéenne",
-     "url": "https://www.mediapart.fr/journal/politique/051026/le-pouvoir-tetanise-par-la-mobilisation-lyceenne",
-     "media": "Mediapart",
-     "date": "2026-10-05T18:34:36.000Z"
     }
    ]
   }
