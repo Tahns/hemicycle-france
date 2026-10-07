@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T08:50:46.722Z",
+ "lastUpdated": "2026-10-07T08:55:37.844Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -256,26 +256,30 @@
    "id": "euros",
    "titre": "Euros",
    "motifs": [
-    "euros"
+    "euros",
+    "supermarché"
    ],
    "medias": [
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
     "L'Est républicain",
+    "BFMTV",
     "Sud Ouest",
     "Public Sénat",
     "France 24",
     "20 Minutes"
    ],
-   "mediasDistincts": 5,
+   "mediasDistincts": 6,
    "sources": [
     "EBRA",
+    "BFMTV",
     "Sud Ouest",
     "Public Sénat",
     "France 24",
     "20 Minutes"
    ],
-   "nb": 9,
+   "nb": 12,
    "derniere": "2026-10-07T08:50:00.000Z",
    "articles": [
     {
@@ -291,10 +295,30 @@
      "date": "2026-10-07T08:50:00.000Z"
     },
     {
+     "media": "Le Dauphiné libéré",
+     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.ledauphine.com/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
      "media": "L'Est républicain",
      "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
      "url": "https://www.estrepublicain.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
      "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: \"Si le mouvement continue, il faut qu'il reste dans le calme\", déclare le ministre de l'Enseignement supérieur",
+     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-si-le-mouvement-continue-il-faut-qu-il-reste-dans-le-calme-declare-le-ministre-de-l-enseignement-superieur_VN-202610070319.html",
+     "date": "2026-10-07T07:38:44.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Parcoursup: \"Il faut faire évoluer l'outil\", affirme le ministre de l'Enseignement supérieur",
+     "url": "https://www.bfmtv.com/politique/video-parcoursup-il-faut-faire-evoluer-l-outil-affirme-le-ministre-de-l-enseignement-superieur_VN-202610070315.html",
+     "date": "2026-10-07T07:31:12.000Z",
+     "video": true
     },
     {
      "media": "Sud Ouest",
@@ -1189,6 +1213,54 @@
    "sources": [
     "EBRA"
    ],
+   "derniere": "2026-10-07T08:50:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.leprogres.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "media": "Le Progrès",
+     "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
+     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.dna.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
+     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.ledauphine.com/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
+     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "media": "L'Est républicain",
+     "date": "2026-10-07T08:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Euros",
+    "origine": "dossier"
+   },
+   "chiffre": {
+    "valeur": "25",
+    "unite": "euros"
+   }
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
    "derniere": "2026-10-06T18:10:00.000Z",
    "illustration": {
     "personnes": [
@@ -1236,48 +1308,6 @@
     "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-07T08:50:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.leprogres.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "media": "Le Progrès",
-     "date": "2026-10-07T08:50:00.000Z"
-    },
-    {
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.dna.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T08:50:00.000Z"
-    },
-    {
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T08:50:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Euros",
-    "origine": "dossier"
-   },
-   "chiffre": {
-    "valeur": "25",
-    "unite": "euros"
    }
   },
   {
