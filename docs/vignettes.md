@@ -41,6 +41,12 @@ entre 0,8 et 2,2, nom et catégories sans personnes, foule, manifestation, plan 
 récence, nom évocateur d'une façade. Le meilleur est téléchargé (miniature Commons de 640 px), recadré au centre en **320 × 320 px**, JPEG de
 **40 Ko au plus** (ffmpeg, qualité ajustée).
 
+## Candidats : catégories, sous-catégories, recherche
+Une catégorie Commons ne liste que ses fichiers DIRECTS : le palais du Luxembourg, par exemple, a ses photos dans des sous-catégories (0 fichier examiné
+au premier passage). Si une catégorie ne donne rien d'exploitable, le script explore donc ses sous-catégories (deux niveaux, 10 appels au plus ; intérieurs,
+jardins, personnes, plans, œuvres exclus : `SOUS_CAT_EXCLUES`). Un candidat `Search:…` lance une recherche plein texte dans l'espace Fichier ; le nom du
+fichier doit alors citer le lieu (motif `exige` de la clé), puis la licence et les autres contrôles s'appliquent comme pour une catégorie.
+
 ## Reprises et garde-fous
 - Une vignette acquise n'est ni retéléchargée ni écrasée.
 - Un thème en échec définitif (aucun fichier libre exploitable) n'est retenté qu'une fois par jour (`echecs` dans `data/vignettes.json`) ; la

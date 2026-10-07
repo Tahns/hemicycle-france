@@ -920,6 +920,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.match(f.legende, /Orléans/, "lieu");
   assert.match(f.legende, /à vérifier auprès de l'organisateur/, "mention de vérification");
   assert.ok(!f.spec.citation, "aucune citation de presse");
+  assert.ok(A.decrire(r).titre.trim(), "titre de l'entrée de file jamais vide (check-data l'exige)");
   assert.ok(pa([ev({ verified: false })]).refus, "non vérifié : rien");
   assert.ok(pa([ev({ debut: "2026-10-09", fin: "2026-10-09" })]).refus, "trop proche : une story suffit, pas un post");
   assert.ok(pa([ev({ debut: "2026-10-01", fin: "2026-10-02" })]).refus, "passé : rien");
