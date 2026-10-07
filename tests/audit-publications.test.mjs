@@ -494,3 +494,17 @@ test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste ser
 });
 
 after(() => serveur.close());
+
+// Dossier : les 14 articles affichés gardent tous les médias du dossier (sinon check-data refuse « moins de 4 médias »)
+{
+  const { createRequire } = await import("node:module");
+  const { articlesAffiches } = createRequire(import.meta.url)("../scripts/dossiers.cjs");
+  const liste = [];
+  for (let i = 0; i < 14; i++) liste.push({ media: ["A", "B", "C"][i % 3], url: `https://x/${i}`, date: `2026-10-07T0${i % 10}:00:00Z` });
+  liste.push({ media: "D", url: "https://x/d", date: "2026-10-06T00:00:00Z" }); // quatrième média, article le plus ancien
+  liste.sort((a, b) => b.date.localeCompare(a.date));
+  const vus = articlesAffiches(liste);
+  assert.ok(vus.length <= 14, "14 articles au plus");
+  assert.strictEqual(new Set(vus.map((a) => a.media)).size, 4, "les 4 médias restent représentés");
+  assert.deepStrictEqual(vus.map((a) => a.date), [...vus.map((a) => a.date)].sort().reverse(), "ordre par date décroissante");
+}

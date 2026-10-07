@@ -109,7 +109,8 @@ function construireDossiers(articles, now = new Date()) {
     const urls = g.liste.map((a) => a.url);
     if (urls.filter((u) => pris.has(u)).length * 2 > urls.length) continue; // recouvre un dossier déjà retenu
     const motifs = g.mots.slice(0, 4).map(([, e]) => [...e.formes.entries()].sort((a, b) => b[1] - a[1])[0][0]);
-    const titresAffiches = g.liste.slice(0, MAX_ARTICLES).map((a) => a.titre);
+    const affiches = articlesAffiches(g.liste);
+    const titresAffiches = affiches.map((a) => a.titre);
     const connu = TITRES_CONNUS.find(([t]) => t(titresAffiches));
     const titre = connu ? connu[1] : MAJ(motifs[0]);
     // Le titre doit être couvert par au moins 2/3 des articles affichés et ne pas être ambigu : sinon pas de dossier (en cas de doute, rien)
@@ -120,14 +121,23 @@ function construireDossiers(articles, now = new Date()) {
       titre,
       motifs,
       medias: g.medias,
-      mediasDistincts: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).mediasDistincts, // un groupe de presse ou une dépêche reprise compte une fois
-      sources: sourcesDistinctes(g.liste.slice(0, MAX_ARTICLES)).sources,
+      mediasDistincts: sourcesDistinctes(affiches).mediasDistincts, // un groupe de presse ou une dépêche reprise compte une fois
+      sources: sourcesDistinctes(affiches).sources,
       nb: g.liste.length,
       derniere: g.liste[0].date,
-      articles: g.liste.slice(0, MAX_ARTICLES).map((a) => ({ media: a.media, titre: a.titre, url: a.url, date: a.date })),
+      articles: affiches.map((a) => ({ media: a.media, titre: a.titre, url: a.url, date: a.date })),
     });
   }
   return sortie;
 }
 
-module.exports = { construireDossiers, motsDuTitre, MIN_ARTICLES, MIN_MEDIAS, HEURES, MAX_DOSSIERS };
+/** Les articles affichés d'un dossier : le plus récent de chaque média d'abord (le dossier garde tous ses médias), puis les plus récents, MAX_ARTICLES au plus, par date décroissante. */
+function articlesAffiches(liste) {
+  const retenus = new Set();
+  const vus = new Set();
+  for (const a of liste) if (!vus.has(a.media)) { vus.add(a.media); retenus.add(a); }
+  for (const a of liste) { if (retenus.size >= MAX_ARTICLES) break; retenus.add(a); }
+  return liste.filter((a) => retenus.has(a));
+}
+
+module.exports = { articlesAffiches, construireDossiers, motsDuTitre, MIN_ARTICLES, MIN_MEDIAS, HEURES, MAX_DOSSIERS };
