@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T16:50:52.559Z",
+ "lastUpdated": "2026-10-07T17:01:23.610Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -85,7 +85,7 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "L'Est républicain",
@@ -105,22 +105,22 @@
    "motifs": [
     "lycéenne",
     "mobilisation",
-    "manifestations",
-    "colère"
+    "colère",
+    "manifestations"
    ],
    "medias": [
+    "BFMTV",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
     "L'Est républicain",
     "Le Figaro",
     "Le Monde",
-    "BFMTV",
     "Sud Ouest",
     "Nice-Matin",
     "Public Sénat",
     "20 Minutes",
     "Mediapart",
-    "France 24",
     "Libération",
     "Hugo Décrypte",
     "RFI",
@@ -128,23 +128,29 @@
    ],
    "mediasDistincts": 13,
    "sources": [
+    "BFMTV",
     "EBRA",
     "Le Figaro",
     "Le Monde",
-    "BFMTV",
     "Sud Ouest",
     "Nice-Matin",
     "Public Sénat",
     "20 Minutes",
     "Mediapart",
-    "France Médias Monde",
     "Libération",
     "Hugo Décrypte",
+    "RFI",
     "L'Express"
    ],
-   "nb": 109,
-   "derniere": "2026-10-07T16:48:00.000Z",
+   "nb": 86,
+   "derniere": "2026-10-07T16:58:30.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: Sébastien Lecornu assure que \"les forces de l'ordre n'ont pas pour instruction d'affronter les lycéens\"",
+     "url": "https://www.bfmtv.com/politique/gouvernement/colere-lyceenne-sebastien-lecornu-assure-que-les-forces-de-l-ordre-n-ont-pas-pour-instruction-d-affronter-les-lyceens_AN-202610070756.html",
+     "date": "2026-10-07T16:58:30.000Z"
+    },
     {
      "media": "Le Progrès",
      "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
@@ -155,6 +161,12 @@
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
      "url": "https://www.dna.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
+     "date": "2026-10-07T16:48:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
      "date": "2026-10-07T16:48:00.000Z"
     },
     {
@@ -171,16 +183,9 @@
     },
     {
      "media": "Le Monde",
-     "titre": "EN DIRECT, allocution de Sébastien Lecornu : mobilisation des lycéens, budget, prix du carburant… le premier ministre va prendre la parole",
+     "titre": "EN DIRECT, allocution de Sébastien Lecornu : mobilisation des lycéens, budget, prix du carburant… le premier ministre s’exprime",
      "url": "https://www.lemonde.fr/politique/live/2026/10/07/en-direct-allocution-de-sebastien-lecornu-mobilisation-des-lyceens-budget-prix-du-carburant-le-premier-ministre-va-prendre-la-parole_6789634_823448.html",
      "date": "2026-10-07T16:13:20.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère lycéenne: \"On ne peut pas dire que le chaos règne en France\", estime Laurent Nuñez",
-     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-on-ne-peut-pas-dire-que-le-chaos-regne-en-france-estime-laurent-nunez_VN-202610070668.html",
-     "date": "2026-10-07T15:44:40.000Z",
-     "video": true
     },
     {
      "media": "Sud Ouest",
@@ -211,12 +216,6 @@
      "titre": "Face à la colère lycéenne, un député LR réactive le préjugé raciste du Chinois travailleur",
      "url": "https://www.mediapart.fr/journal/france/071026/face-la-colere-lyceenne-un-depute-lr-reactive-le-prejuge-raciste-du-chinois-travailleur",
      "date": "2026-10-07T11:42:19.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Mouvement lycéen : le gouvernement dans l'impasse",
-     "url": "https://www.france24.com/fr/%C3%A9missions/face-%C3%A0-face/20261007-mouvement-lyc%C3%A9en-le-gouvernement-dans-l-impasse",
-     "date": "2026-10-07T11:15:04.000Z"
     },
     {
      "media": "Libération",
@@ -331,22 +330,21 @@
    ],
    "medias": [
     "Libération",
+    "Le Dauphiné libéré",
     "L'Est républicain",
     "20 Minutes",
     "Le Monde",
     "Sud Ouest",
-    "BFMTV",
-    "France 24"
+    "BFMTV"
    ],
-   "mediasDistincts": 7,
+   "mediasDistincts": 6,
    "sources": [
     "Libération",
-    "L'Est républicain",
+    "EBRA",
     "20 Minutes",
     "Le Monde",
     "Sud Ouest",
-    "BFMTV",
-    "France 24"
+    "BFMTV"
    ],
    "nb": 15,
    "derniere": "2026-10-07T16:23:14.000Z",
@@ -356,6 +354,12 @@
      "titre": "Présidentielle 2027 : au RN, antisémitisme et sionisme font bon mirage",
      "url": "https://www.liberation.fr/politique/presidentielle-2027-au-rn-antisemitisme-et-sionisme-font-bon-mirage-20261007_POOK4QB2OZCVVLFZP3UYZBKI7M/",
      "date": "2026-10-07T16:23:14.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Barcelonnette. Ubaye tourisme : Camille Colas succède à Yvan Bouguyon à la présidence",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/ubaye-tourisme-camille-colas-succede-a-yvan-bouguyon-a-la-presidence",
+     "date": "2026-10-07T16:13:50.000Z"
     },
     {
      "media": "L'Est républicain",
@@ -431,25 +435,19 @@
      "titre": "Présidentielle 2027 : « Je conteste vos preuves… » La présentation du projet économique RN polluée par l’affaire Bardella",
      "url": "https://www.20minutes.fr/politique/4251874-20261006-presidentielle-2027-conteste-preuves-presentation-projet-economique-rn-polluee-affaire-bardella?at_medium=display&at_campaign=149",
      "date": "2026-10-06T15:34:14.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "date": "2026-10-06T09:29:23.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 4,
+   "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "EBRA",
+    "Le Monde",
     "20 Minutes"
    ],
-   "derniere": "2026-10-07T16:48:00.000Z",
+   "derniere": "2026-10-07T16:13:20.000Z",
    "illustration": {
     "personnes": [
      {
@@ -460,39 +458,21 @@
      }
     ],
     "partis": [],
-    "theme": "gouvernement",
+    "theme": "budget",
     "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
-     "url": "https://www.leprogres.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
-     "media": "Le Progrès",
-     "date": "2026-10-07T16:48:00.000Z"
-    },
-    {
-     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
-     "url": "https://www.dna.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T16:48:00.000Z"
-    },
-    {
-     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T16:48:00.000Z"
+     "titre": "EN DIRECT, allocution de Sébastien Lecornu : mobilisation des lycéens, budget, prix du carburant… le premier ministre s’exprime",
+     "url": "https://www.lemonde.fr/politique/live/2026/10/07/en-direct-allocution-de-sebastien-lecornu-mobilisation-des-lyceens-budget-prix-du-carburant-le-premier-ministre-va-prendre-la-parole_6789634_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T16:13:20.000Z"
     },
     {
      "titre": "Lycées, agriculture, carburant… De quoi va parler Sébastien Lecornu ce mercredi soir dans son allocution ?",
      "url": "https://www.20minutes.fr/politique/4252224-20261007-lycees-agriculture-carburant-quoi-va-parler-sebastien-lecornu-mercredi-soir-allocution?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
      "date": "2026-10-07T14:55:10.000Z"
-    },
-    {
-     "titre": "Politique. Lycées, carburants, agriculture : Sébastien Lecornu s'exprimera ce mercredi soir depuis Matignon",
-     "url": "https://www.dna.fr/politique/2026/10/07/lycees-carburants-agriculture-sebastien-lecornu-s-exprimera-ce-mercredi-soir-depuis-matignon",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T06:30:00.000Z"
     }
    ],
    "titrePropre": {
@@ -504,113 +484,6 @@
      "type": "personnes",
      "texte": "Sébastien Lecornu : premier ministre",
      "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-06T17:08:56.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
-    },
-    {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
-    },
-    {
-     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
-     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
-     "media": "France 24",
-     "date": "2026-10-06T09:35:43.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes / Nice-Matin",
-    "RFI"
-   ],
-   "derniere": "2026-10-04T21:00:11.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire de la gauche : Glucksmann se dit « désolé » après ses propos « inélégants » sur Ségolène Royal",
-     "url": "https://www.20minutes.fr/politique/4251195-20261004-primaire-gauche-glucksmann-dit-desole-apres-propos-inelegants-segolene-royal?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-04T21:00:11.000Z"
-    },
-    {
-     "titre": "Primaire de la gauche : Glucksmann se dit « désolé » après ses propos « inélégants » sur Ségolène Royal",
-     "url": "https://www.nicematin.com/societe/politique/primaire-de-la-gauche-glucksmann-se-dit-desole-apres-ses-propos-inelegants-sur-segolene-royal-10734981",
-     "media": "Nice-Matin",
-     "date": "2026-10-04T20:23:07.000Z"
-    },
-    {
-     "titre": "Primaire à gauche: les propos embarrassants de Glucksmann à l'encontre de Royal et Mélenchon",
-     "url": "https://www.rfi.fr/fr/france/20261003-primaire-%C3%A0-gauche-les-propos-g%C3%AAnants-et-peu-d%C3%A9licats-de-glucksmann-%C3%A0-l-encore-de-royal-et-m%C3%A9lenchon",
-     "media": "RFI",
-     "date": "2026-10-03T21:28:18.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : prise de position sur la primaire de la gauche",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %, Royal 3 %",
-     "source": "Commission des sondages (notice Ifop)"
     }
    ]
   },
@@ -778,53 +651,40 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Public Sénat",
-    "France 24"
+    "20 Minutes",
+    "RFI"
    ],
-   "derniere": "2026-10-06T17:31:58.000Z",
+   "derniere": "2026-10-06T17:08:56.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
      }
     ],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
-     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
-     "media": "Public Sénat",
-     "date": "2026-10-06T17:31:58.000Z"
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
     },
     {
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "media": "France 24",
-     "date": "2026-10-06T09:29:23.000Z"
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
+    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
     "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "140",
-    "unite": "milliards d’euros"
    }
   },
   {
@@ -910,7 +770,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -937,6 +797,12 @@
     },
     {
      "titre": "Diplomatie. À Athènes, Marco Rubio appelle l’Europe à sortir de sa « torpeur »",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/a-athenes-marco-rubio-appelle-l-europe-a-sortir-de-sa-torpeur",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:49:00.000Z"
+    },
+    {
+     "titre": "Diplomatie. À Athènes, Marco Rubio appelle l’Europe à sortir de sa « torpeur »",
      "url": "https://www.estrepublicain.fr/politique/2026/10/07/a-athenes-marco-rubio-appelle-l-europe-a-sortir-de-sa-torpeur",
      "media": "L'Est républicain",
      "date": "2026-10-07T16:49:00.000Z"
@@ -946,6 +812,166 @@
     "titre": "Diplomatie : affaire internationale",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-07T16:48:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
+     "media": "Le Progrès",
+     "date": "2026-10-07T16:48:00.000Z"
+    },
+    {
+     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
+     "url": "https://www.dna.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T16:48:00.000Z"
+    },
+    {
+     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:48:00.000Z"
+    },
+    {
+     "titre": "Social. Lycées, carburants, électricité, agriculture... suivez les annonces de Sébastien Lecornu en direct",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-suivez-les-annonces-de-sebastien-lecornu-en-direct",
+     "media": "L'Est républicain",
+     "date": "2026-10-07T16:48:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-07T16:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
+     "url": "https://www.leprogres.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
+     "media": "Le Progrès",
+     "date": "2026-10-07T16:20:00.000Z"
+    },
+    {
+     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
+     "url": "https://www.dna.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T16:20:00.000Z"
+    },
+    {
+     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
+     "url": "https://www.ledauphine.com/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:20:00.000Z"
+    },
+    {
+     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
+     "url": "https://www.estrepublicain.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
+     "media": "L'Est républicain",
+     "date": "2026-10-07T16:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-07T15:30:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
+     "media": "Le Progrès",
+     "date": "2026-10-07T15:30:00.000Z"
+    },
+    {
+     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
+     "url": "https://www.dna.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T15:30:00.000Z"
+    },
+    {
+     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T15:30:00.000Z"
+    },
+    {
+     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
+     "media": "L'Est républicain",
+     "date": "2026-10-07T15:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Premier ministre : actualité sur le numérique et les données",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 3,
@@ -1004,96 +1030,6 @@
     "valeur": "1 000",
     "unite": "%"
    }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-07T16:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
-     "url": "https://www.leprogres.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
-     "media": "Le Progrès",
-     "date": "2026-10-07T16:20:00.000Z"
-    },
-    {
-     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
-     "url": "https://www.dna.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T16:20:00.000Z"
-    },
-    {
-     "titre": "Parlement. Violences sexistes et sexuelles : la loi « intégrale » examinée au Sénat en janvier",
-     "url": "https://www.estrepublicain.fr/societe/2026/10/07/violences-sexistes-et-sexuelles-la-loi-integrale-examinee-au-senat-en-janvier",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T16:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-07T15:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
-     "url": "https://www.leprogres.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
-     "media": "Le Progrès",
-     "date": "2026-10-07T15:30:00.000Z"
-    },
-    {
-     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
-     "url": "https://www.dna.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T15:30:00.000Z"
-    },
-    {
-     "titre": "Cybercriminalité. Le numéro de Sébastien Lecornu a fuité à cause d'une commande sur Le Slip français",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/le-numero-de-sebastien-lecornu-a-fuite-a-cause-d-une-commande-sur-le-slip-francais",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T15:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : actualité sur le numérique et les données",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 3,
@@ -1258,36 +1194,452 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "20 Minutes / Nice-Matin"
    ],
-   "derniere": "2026-10-06T06:54:32.000Z",
+   "derniere": "2026-10-04T21:00:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Ségolène Royal",
+      "photo": "photos/personnalites/segolene-royal.jpg",
+      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
+      "parti": "PS",
+      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la gauche : Glucksmann se dit « désolé » après ses propos « inélégants » sur Ségolène Royal",
+     "url": "https://www.20minutes.fr/politique/4251195-20261004-primaire-gauche-glucksmann-dit-desole-apres-propos-inelegants-segolene-royal?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-04T21:00:11.000Z"
+    },
+    {
+     "titre": "Primaire de la gauche : Glucksmann se dit « désolé » après ses propos « inélégants » sur Ségolène Royal",
+     "url": "https://www.nicematin.com/societe/politique/primaire-de-la-gauche-glucksmann-se-dit-desole-apres-ses-propos-inelegants-sur-segolene-royal-10734981",
+     "media": "Nice-Matin",
+     "date": "2026-10-04T20:23:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Raphaël Glucksmann : prise de position sur la primaire de la gauche",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Royal 3 %, Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-07T17:01:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Thomas Ménagé",
+      "photo": "photos/deputes/PA794322.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA794322",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Colère lycéenne: «On peut comprendre les revendications, mais pas la violence», tranche Thomas Ménagé (RN)",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261007-col%C3%A8re-lyc%C3%A9enne-on-peut-comprendre-les-revendications-mais-pas-la-violence-tranche-thomas-m%C3%A9nag%C3%A9-rn",
+     "media": "RFI",
+     "date": "2026-10-07T17:01:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-07T17:00:00.000Z",
    "illustration": {
     "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Région d’Obernai. Bras de fer sur le tourisme entre la Ville et la communauté de communes : chacune lance sa structure",
+     "url": "https://www.dna.fr/economie/2026/10/08/bras-de-fer-sur-le-tourisme-entre-la-ville-et-la-communaute-de-communes-chacune-lance-sa-structure",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T17:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Région : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-07T17:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Politique. « J’aime le débat et on avance » : Isabelle Suhr rassure après le passage de la Ville d’Obernai dans l’opposition à la communauté de communes",
+     "url": "https://www.dna.fr/economie/2026/10/08/j-aime-le-debat-et-on-avance-isabelle-suhr-rassure-face-a-la-position-d-opposante-de-la-ville-d-obernai-a-la-communaute-de-communes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T17:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:59:28.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Villar-Loubière. Ce qu’il faut retenir du conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/ce-qu-il-faut-retenir-du-conseil-municipal",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:59:28.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Villar-Loubière : conseil municipal",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:58:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Garde-Colombe. Des réunions de proximité avec la municipalité",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/des-reunions-de-proximite-avec-la-municipalite",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:58:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Garde-Colombe : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T16:58:30.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Colère lycéenne: Sébastien Lecornu assure que \"les forces de l'ordre n'ont pas pour instruction d'affronter les lycéens\"",
+     "url": "https://www.bfmtv.com/politique/gouvernement/colere-lyceenne-sebastien-lecornu-assure-que-les-forces-de-l-ordre-n-ont-pas-pour-instruction-d-affronter-les-lyceens_AN-202610070756.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T16:58:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T16:58:30.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Sébastien Lecornu Premier ministre",
+     "url": "https://www.bfmtv.com/politique/gouvernement/sebastien-lecornu-premier-ministre_DN-202509100375.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T16:58:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Premier ministre : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T16:58:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
     "partis": [],
     "theme": "gouvernement",
     "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Mobilisation des lycéens: 450 000 manifestants en France selon les organisateurs, 266 000 selon le gouvernement",
-     "url": "https://www.rfi.fr/fr/france/20261006-en-direct-france-grosse-journ%C3%A9e-de-manifestation-pour-les-lyc%C3%A9es-rejoints-par-des-syndicats-profs-et-%C3%A9tudiants",
-     "media": "RFI",
-     "date": "2026-10-06T06:54:32.000Z"
-    },
-    {
-     "titre": "Colère lycéenne : 450 000 manifestants en France selon les organisateurs, 256 000 selon l'Intérieur",
-     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
-     "media": "France 24",
-     "date": "2026-10-06T04:57:52.000Z"
+     "titre": "Le Premier ministre Sébastien Lecornu déclare que \"nous avons le devoir d'écouter\" les lycéens",
+     "url": "https://www.bfmtv.com/politique/video-le-premier-ministre-sebastien-lecornu-declare-que-nous-avons-le-devoir-d-ecouter-les-lyceens_VN-202610070758.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T16:58:11.000Z",
+     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
+    "titre": "Premier ministre : prise de position sur la mobilisation lycéenne",
     "origine": "regles"
    },
-   "chiffre": {
-    "valeur": "450 000",
-    "unite": "manifestants"
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-07T16:58:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "La jeunesse est-elle prise au sérieux?",
+     "url": "https://www.rfi.fr/fr/podcasts/d%C3%A9bat-du-jour/20261007-la-jeunesse-est-elle-prise-au-s%C3%A9rieux",
+     "media": "RFI",
+     "date": "2026-10-07T16:58:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:53:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Barthélemy-le-Plain. Plantation du Pibou : la tradition respectée dimanche 11 octobre",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/plantation-du-pibou-la-tradition-respectee-dimanche-11-octobre",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:53:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Barthélemy-le-Plain : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:53:21.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "La Bâtie-Neuve | Montgardin. Un premier parking relais pour minimiser le coût des transports",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/un-premier-parking-relais-pour-minimiser-le-cout-des-transports",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:53:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-07T16:53:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Les élus de Paris veulent réduire l’étendue de la zone soumise à la protection du patrimoine dans la capitale",
+     "url": "https://www.lemonde.fr/economie/article/2026/10/07/les-elus-de-paris-veulent-reduire-l-etendue-de-la-zone-soumise-a-la-protection-du-patrimoine-dans-la-capitale_6789639_3234.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T16:53:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:47:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Vallon-Pont-d’Arc. Périscolaire, CMJ et grotte Chauvet au programme du conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/periscolaire-cmj-et-grotte-chauvet-au-programme-du-conseil-municipal",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:47:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vallon-Pont-d’Arc : conseil municipal",
+    "origine": "regles"
    }
   },
   {
@@ -1374,6 +1726,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:39:23.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le Teil. Une fête de l’écologie à Zone 5, samedi",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/une-fete-de-l-ecologie-a-zone-5-samedi",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:39:23.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Le Teil : environnement",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-10-07T16:32:49.000Z",
@@ -1393,6 +1771,32 @@
    ],
    "titrePropre": {
     "titre": "Éducation et jeunesse : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:30:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Crévoux. Comment la nouvelle équipe municipale veut relancer la commune",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/comment-la-nouvelle-equipe-municipale-veut-relancer-la-commune",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:30:14.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Crévoux : vie municipale",
     "origine": "regles"
    }
   },
@@ -1469,6 +1873,59 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:27:17.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lamastre. Le président du Département à la rencontre des maires du canton",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/le-president-du-departement-a-la-rencontre-des-maires-du-canton",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:27:17.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : actualité sur l'organisation des collectivités",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:26:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Carpentras. « L’antisémitisme n’est pas une opinion »: la Ville rend un hommage aux morts du 7-Octobre",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/l-antisemitisme-n-est-pas-une-opinion-la-ville-rend-un-hommage-aux-morts-du-7-octobre",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:26:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Carpentras : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Figaro"
    ],
    "derniere": "2026-10-07T16:25:44.000Z",
@@ -1524,6 +1981,32 @@
    ],
    "titrePropre": {
     "titre": "RN : actualité sur la présidentielle de 2027",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:23:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Tain-l’Hermitage. Fermeture du camping municipal : qu’en pensent les touristes ?",
+     "url": "https://www.ledauphine.com/economie/2026/10/07/fermeture-du-camping-municipal-qu-en-pensent-les-touristes",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:23:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Tain-l’Hermitage : vie municipale",
     "origine": "regles"
    }
   },
@@ -1626,6 +2109,39 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Mont-Blanc. « Un effort beaucoup trop brutal » : les communes de montagne grimacent face au budget 2027",
+     "url": "https://www.ledauphine.com/economie/2026/10/07/un-effort-beaucoup-trop-brutal-les-communes-de-montagne-grimacent-face-au-budget-2027",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mont-Blanc : finances locales",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-10-07T16:14:58.000Z",
@@ -1678,41 +2194,28 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Monde"
+    "Le Dauphiné libéré"
    ],
-   "derniere": "2026-10-07T16:13:20.000Z",
+   "derniere": "2026-10-07T16:13:50.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [],
-    "theme": "budget",
-    "vignette": "education"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "EN DIRECT, allocution de Sébastien Lecornu : mobilisation des lycéens, budget, prix du carburant… le premier ministre va prendre la parole",
-     "url": "https://www.lemonde.fr/politique/live/2026/10/07/en-direct-allocution-de-sebastien-lecornu-mobilisation-des-lyceens-budget-prix-du-carburant-le-premier-ministre-va-prendre-la-parole_6789634_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T16:13:20.000Z"
+     "titre": "Barcelonnette. Ubaye tourisme : Camille Colas succède à Yvan Bouguyon à la présidence",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/ubaye-tourisme-camille-colas-succede-a-yvan-bouguyon-a-la-presidence",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:13:50.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
+    "titre": "Barcelonnette : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1817,6 +2320,49 @@
     "titre": "Sénat : actualité sur les finances publiques",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T16:01:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grenoble. « Une politique de vitrine » : l’efficacité de la majorité Ruffin en débat",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/isere-grenoble-une-politique-de-vitrine-l-efficacite-de-la-majorite-ruffin-en-debat",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T16:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Ruffin (Écologistes) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1952,6 +2498,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T15:49:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gresse-en-Vercors. Un hommage rendu aux héros de la Résistance à Uclaire",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/un-hommage-rendu-aux-heros-de-la-resistance-a-uclaire",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T15:49:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gresse-en-Vercors : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-07T15:46:04.000Z",
@@ -2045,8 +2618,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : prise de position sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -2209,6 +2782,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T15:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Les Houches. La livraison de la salle Olca reportée à octobre 2027",
+     "url": "https://www.ledauphine.com/economie/2026/10/07/la-livraison-de-la-salle-olca-reportee-a-octobre-2027",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T15:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Les Houches : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-10-07T15:26:46.000Z",
@@ -2255,6 +2855,33 @@
    "titrePropre": {
     "titre": "Lycées",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-07T15:21:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Ardèche. La salle polyvalente de Saint-Bauzile a été baptisée salle Michel-Heyraud",
+     "url": "https://www.ledauphine.com/politique/2026/10/07/la-salle-polyvalente-a-ete-baptisee-salle-michel-heyraud",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-07T15:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ardèche : actualité locale",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3458,32 +4085,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-07T11:32:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "France : la jeunesse au pied du mur de la dette",
-     "url": "https://www.france24.com/fr/%C3%A9missions/on-va-plus-loin/20261007-france-la-jeunesse-au-pied-du-mur-de-la-dette",
-     "media": "France 24",
-     "date": "2026-10-07T11:32:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-07T11:30:00.000Z",
@@ -3538,32 +4139,6 @@
    "titrePropre": {
     "titre": "Ségolène Royal (PS) : actualité sur le social et l'emploi",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-07T11:15:04.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mouvement lycéen : le gouvernement dans l'impasse",
-     "url": "https://www.france24.com/fr/%C3%A9missions/face-%C3%A0-face/20261007-mouvement-lyc%C3%A9en-le-gouvernement-dans-l-impasse",
-     "media": "France 24",
-     "date": "2026-10-07T11:15:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
    }
   },
   {
@@ -3827,628 +4402,6 @@
    ],
    "titrePropre": {
     "titre": "Présidentielle 2027 : appel sur la présidentielle de 2027",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:42:30.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Antoine Léaument",
-      "photo": "photos/deputes/PA795746.jpg",
-      "photoHd": "photos/deputes/hd/PA795746.jpg",
-      "parti": "LFI",
-      "lien": "#depute-PA795746",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Blocage de Sciences Po: \"Ce que ça montre, c'est l'unité des jeunes et du peuple français dans la lutte\", assure Antoine Léaument, député LFI",
-     "url": "https://www.bfmtv.com/politique/video-blocage-de-sciences-po-ce-que-ca-montre-c-est-l-unite-des-jeunes-et-du-peuple-francais-dans-la-lutte-assure-antoine-leaument-depute-lfi_VN-202610070469.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:42:30.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Antoine Léaument (LFI) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Antoine Léaument : député LFI (Essonne)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-07T10:42:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Meyzieu. La Ville lance ses conseils de quartier cet automne",
-     "url": "https://www.leprogres.fr/politique/2026/10/07/la-ville-lance-ses-conseils-de-quartier-cet-automne",
-     "media": "Le Progrès",
-     "date": "2026-10-07T10:42:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Meyzieu : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:36:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Geffray",
-      "photo": "photos/personnalites/edouard-geffray.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
-      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Lycées: Édouard Geffray affirme qu'il \"faudra poser la question de la durée des vacances\" pour un même volume d'enseignement avec moins d'heures par semaine",
-     "url": "https://www.bfmtv.com/politique/video-lycees-edouard-geffray-affirme-qu-il-faudra-poser-la-question-de-la-duree-des-vacances-pour-un-meme-volume-d-enseignement-avec-moins-d-heures-par-semaine_VN-202610070465.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:36:32.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : prise de position sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Geffray : ministre de l’éducation nationale",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-07T10:36:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Illkirch-Graffenstaden. Bons d’achat aidés pour relancer le commerce local après-Covid : 268 000 euros se sont envolés",
-     "url": "https://www.dna.fr/economie/2026/10/07/bons-d-achat-aides-pour-relancer-le-commerce-local-apres-covid-268-000-euros-se-sont-envoles",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T10:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Illkirch-Graffenstaden : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-07T10:34:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« J’hésite entre découragement et rébellion » : François Sauvadet dénonce un prélèvement « insupportable » de 1,8 milliard d’euros par l’Etat sur les départements",
-     "url": "https://www.publicsenat.fr/actualites/territoires/jhesite-entre-decouragement-et-rebellion-francois-sauvadet-denonce-un-prelevement-insupportable-de-18-milliard-deuros-par",
-     "media": "Public Sénat",
-     "date": "2026-10-07T10:34:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : prise de position sur l'organisation des collectivités",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-07T10:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Colère lycéenne : des collégiens, près de Villeneuve-sur-Lot, veulent en prendre de la graine, « un cadre sécurisé » leur sera proposé",
-     "url": "https://www.sudouest.fr/politique/education/colere-lyceenne-des-collegiens-pres-de-villeneuve-sur-lot-veulent-en-prendre-de-la-graine-un-cadre-securise-leur-sera-propose-30958506.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-07T10:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : annonces sur la mobilisation lycéenne",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-07T10:24:15.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Colère lycéenne réprimée, facs mobilisées… «Mediapart» a répondu à vos questions",
-     "url": "https://www.mediapart.fr/journal/france/071026/colere-lyceenne-reprimee-facs-mobilisees-mediapart-repondu-vos-questions",
-     "media": "Mediapart",
-     "date": "2026-10-07T10:24:15.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : réponse sur la mobilisation lycéenne",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-07T10:21:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les Forces vives du territoire à Bordeaux : « Les jeunes n’attendent pas des dirigeants qu’ils soient parfaits », le show inspirant des chefs d’entreprise",
-     "url": "https://www.sudouest.fr/gironde/bordeaux/economie-les-forces-vives-du-territoire-le-show-inspirant-des-chefs-d-entreprise-a-bordeaux-les-jeunes-n-attendent-pas-des-dirigeants-qu-ils-soient-parfaits-30816010.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-07T10:21:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-07T10:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Rhône. Nouveau président du département : Verchère officiellement candidat, Valéro cité",
-     "url": "https://www.leprogres.fr/politique/2026/10/07/nouveau-president-du-departement-verchere-officiellement-candidat-valero-cite",
-     "media": "Le Progrès",
-     "date": "2026-10-07T10:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : actualité sur l'organisation des collectivités",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-07T10:10:54.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "7-Octobre : Trois ans après l’attaque du Hamas, les juifs de France continuent de vivre un « traumatisme »",
-     "url": "https://www.publicsenat.fr/actualites/politique/7-octobre-trois-ans-apres-lattaque-du-hamas-les-juifs-de-france-continuent-de-vivre-un-traumatisme",
-     "media": "Public Sénat",
-     "date": "2026-10-07T10:10:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-07T10:08:59.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "EPR"
-    ],
-    "theme": "assemblee",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne : les députés macronistes demandent des comptes au gouvernement Lecornu",
-     "url": "https://www.liberation.fr/politique/mobilisation-lyceenne-les-deputes-macronistes-demandent-des-comptes-au-gouvernement-lecornu-20261007_KUQSPCERGVHFRGCILVVKZOBRME/",
-     "media": "Libération",
-     "date": "2026-10-07T10:08:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:05:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:05:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:05:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027: Jean-Luc Mélenchon estime que la mobilisation lycéenne est bénéfique au \"programme de rupture\" de la France insoumise",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/presidentielle-2027-jean-luc-melenchon-estime-que-la-mobilisation-lyceenne-est-benefique-au-programme-de-rupture-de-la-france-insoumise_AD-202610070439.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:05:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon : prise de position sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-07T10:00:17.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les pompiers applaudis par les manifestants lors d’une intervention à Nation, à Paris.",
-     "url": "https://www.youtube.com/shorts/Rxg-73e02GM",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-07T10:00:17.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-07T10:00:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "justice",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les données personnelles de plusieurs ministres, dont le 06 de Sébastien Lecornu, ont fuité sur Internet, la justice saisie",
-     "url": "https://www.nicematin.com/societe/les-donnees-personnelles-de-plusieurs-ministres-dont-le-06-de-sebastien-lecornu-ont-fuite-sur-internet-la-justice-saisie-10736372",
-     "media": "Nice-Matin",
-     "date": "2026-10-07T10:00:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Numérique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:00:03.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Geffray",
-      "photo": "photos/personnalites/edouard-geffray.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
-      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Blocage des lycées: \"Toute violence illégale doit être sanctionnée\", martèle le ministre Édouard Geffray",
-     "url": "https://www.bfmtv.com/politique/video-blocage-des-lycees-toute-violence-illegale-doit-etre-sanctionnee-martele-le-ministre-edouard-geffray_VN-202610070438.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:00:03.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-07T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Gifi : « Inquiet de la survie de l’entreprise », le CSE va déclencher une procédure de droit d’alerte économique",
-     "url": "https://www.sudouest.fr/economie/philippe-ginestet/gifi-inquiet-de-la-survie-de-l-entreprise-le-cse-va-declencher-une-procedure-de-droit-d-alerte-economique-30957374.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-07T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gifi : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-07T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Association des maires de l’Ain : le financement des collectivités et le réchauffement climatique au coeur des préoccupations",
-     "url": "https://www.leprogres.fr/politique/2026/10/07/association-des-maires-de-l-ain-les-communes-sont-le-socle-de-la-republique",
-     "media": "Le Progrès",
-     "date": "2026-10-07T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Environnement : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-07T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Économie. Fermeture « envisagée » de six bureaux de poste dans la Loire : un calendrier déjà en marche",
-     "url": "https://www.leprogres.fr/economie/2026/10/07/fermeture-envisagee-de-six-bureaux-de-poste-dans-la-loire-un-calendrier-deja-en-marche",
-     "media": "Le Progrès",
-     "date": "2026-10-07T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-07T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Doubs. Lycées, vétusté et autorité : la maire de Montbéliard tape dans le dur",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/lycees-vetuste-et-autorite-la-maire-de-montbeliard-tape-dans-le-dur",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Doubs : mobilisation lycéenne",
     "origine": "regles"
    }
   }
