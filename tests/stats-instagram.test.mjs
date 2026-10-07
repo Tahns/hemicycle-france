@@ -8,6 +8,7 @@ import { join } from "path";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
+const STATS = require("../scripts/stats-instagram.cjs");
 const JETON = "EAAJETONSECRET123";
 const MAINTENANT = "2026-10-06T19:00:00Z"; // 21 h à Paris, semaine 2026-W41
 
@@ -37,6 +38,10 @@ const serveur = http.createServer((req, res) => {
 const x_ = (a, r) => a.find((y) => r.includes(y));
 await new Promise((r) => serveur.listen(0, "127.0.0.1", r));
 const BASE = `http://127.0.0.1:${serveur.address().port}`;
+
+// Métriques obsolètes (refusées par l'API, constatées sur le premier relevé réel) : jamais demandées
+for (const [type, liste] of Object.entries(STATS.METRIQUES)) for (const m of ["impressions", "taps_forward", "taps_back", "exits"]) assert.ok(!liste.includes(m), `${type} : ${m} obsolète`);
+assert.ok(STATS.METRIQUES.story.includes("views") && STATS.METRIQUES.story.includes("reach"));
 
 const reg = (id, mediaId, publieLe, extra = {}) => ({ id, statut: "publiee", publieLe, mediaId, ...extra });
 const STORY = (ts) => ({ media_product_type: "STORY", media_type: "IMAGE", timestamp: ts });
@@ -93,7 +98,7 @@ try {
       reglages: {
         infos: { S1: STORY("2026-10-06T10:30:00Z"), R1: REEL("2026-10-06T07:00:00Z"), P1: FEED("2026-10-05T11:00:00Z"), K1: CARR("2026-10-05T12:00:00Z") },
         valeurs: {
-          S1: { views: 200, reach: 150, shares: 3, replies: 1, taps_forward: 90, taps_back: 10, exits: 20 },
+          S1: { views: 200, reach: 150, shares: 3, replies: 1, total_interactions: 4 },
           R1: { views: 500, reach: 400, likes: 30, comments: 2, saved: 5, shares: 4, ig_reels_avg_watch_time: 3200 },
           P1: { views: 80, reach: 60, likes: 9, comments: 1, saved: 2, shares: 0 },
           K1: { views: 120, reach: 100, likes: 11, comments: 0, saved: 3, shares: 1 },
@@ -105,7 +110,8 @@ try {
     jamaisLeJeton(r);
     assert.deepEqual(Object.keys(r.stats.medias).sort(), ["K1", "P1", "R1", "S1"]);
     const s = r.stats.medias.S1;
-    assert.equal(s.type, "story"); assert.equal(s.metriques.views, 200); assert.equal(s.metriques.taps_forward, 90);
+    assert.equal(s.type, "story"); assert.equal(s.metriques.views, 200); assert.equal(s.metriques.total_interactions, 4);
+    assert.equal(appels.filter((a) => a.chemin === "/S1/insights").length, 1, "story : une seule requête d'insights (aucune métrique obsolète demandée)");
     assert.equal(s.theme, "education"); assert.equal(s.heureParis, 12); assert.equal(s.modele, "actualite");
     assert.equal(r.stats.medias.R1.type, "reel"); assert.equal(r.stats.medias.R1.modele, "dossier");
     assert.equal(r.stats.medias.K1.type, "carrousel"); assert.equal(r.stats.medias.P1.type, "post");
@@ -125,11 +131,11 @@ try {
   {
     const r = await lancer({
       entrees: [reg("aaaaaaaaaaaa", "S2", "2026-10-06T10:30:00Z")],
-      reglages: { infos: { S2: STORY("2026-10-06T10:30:00Z") }, valeurs: { S2: { reach: 100, views: 120, exits: 5 } }, refus: { S2: ["impressions", "taps_back"] } },
+      reglages: { infos: { S2: STORY("2026-10-06T10:30:00Z") }, valeurs: { S2: { reach: 100, views: 120, exits: 5 } }, refus: { S2: ["replies", "shares"] } },
     });
     assert.equal(r.code, 0);
     const m = r.stats.medias.S2;
-    assert.deepEqual(m.refusees.sort(), ["impressions", "taps_back"]);
+    assert.deepEqual(m.refusees.sort(), ["replies", "shares"]);
     assert.equal(m.metriques.reach, 100); assert.equal(m.metriques.views, 120);
     assert.equal(m.sansInsights, false);
     jamaisLeJeton(r);

@@ -37,14 +37,15 @@ const FENETRE_STORY_H = 24; // au-delà, l'API ne donne plus d'insights d'une st
 const SUIVI_POST_JOURS = 30; // un post/Reel est suivi 30 jours, puis figé
 const GARDER_ABONNES = 120; // jours d'historique des abonnés
 
-// Métriques demandées par type (API v21, graph.instagram.com). Chacune peut être refusée : on essaie d'abord en bloc, puis une par une.
-// Stories : impressions/views, reach, shares, replies, taps_forward, taps_back, exits (+ total_interactions).
-// Posts, carrousels : reach, likes, comments, saved, shares, views, total_interactions (+ impressions, ancienne).
+// Métriques demandées par type (API graph.instagram.com). Chacune peut être refusée : on essaie d'abord en bloc, puis une par une.
+// `impressions`, `taps_forward`, `taps_back` et `exits` sont OBSOLÈTES : refusées par l'API au premier relevé réel (2026-10-07), elles faisaient
+// échouer chaque requête en bloc (1 requête ratée + 1 par métrique). Elles ne sont plus demandées ; `views` les remplace.
+// Stories : views, reach, shares, replies, total_interactions. Posts, carrousels : views, reach, likes, comments, saved, shares, total_interactions.
 // Reels : idem + ig_reels_avg_watch_time.
 const METRIQUES = {
-  story: ["views", "impressions", "reach", "shares", "replies", "total_interactions", "taps_forward", "taps_back", "exits"],
-  post: ["views", "impressions", "reach", "likes", "comments", "saved", "shares", "total_interactions"],
-  carrousel: ["views", "impressions", "reach", "likes", "comments", "saved", "shares", "total_interactions"],
+  story: ["views", "reach", "shares", "replies", "total_interactions"],
+  post: ["views", "reach", "likes", "comments", "saved", "shares", "total_interactions"],
+  carrousel: ["views", "reach", "likes", "comments", "saved", "shares", "total_interactions"],
   reel: ["views", "reach", "likes", "comments", "saved", "shares", "total_interactions", "ig_reels_avg_watch_time"],
 };
 

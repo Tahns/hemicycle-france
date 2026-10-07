@@ -23,7 +23,7 @@ Sans les secrets `IG_USER_ID` et `IG_ACCESS_TOKEN` : sortie propre, ligne « INA
 - **Commentaires signalés** (seulement si activés) : identifiants à examiner.
 - **Alertes** : jeton invalide, etc.
 
-Métriques demandées (API v21, `graph.instagram.com`) : stories `views`, `impressions`, `reach`, `shares`, `replies`, `total_interactions`, `taps_forward`, `taps_back`, `exits` ; posts et carrousels `views`, `impressions`, `reach`, `likes`, `comments`, `saved`, `shares`, `total_interactions` ; Reels les mêmes sans `impressions`, plus `ig_reels_avg_watch_time`. L'API refuse certaines métriques selon le type de média et la version : le script essaie en bloc, puis une par une ; les refusées sont listées dans `refusees` et ignorées. Le thème est déduit du titre (mots-clés) et le modèle de l'identifiant ou du champ `dossierId`, faute de champ dédié ; ils sont figés au premier relevé.
+Métriques demandées (API v21, `graph.instagram.com`) : stories `views`, `reach`, `shares`, `replies`, `total_interactions` ; posts et carrousels `views`, `reach`, `likes`, `comments`, `saved`, `shares`, `total_interactions` ; Reels les mêmes, plus `ig_reels_avg_watch_time`. `impressions`, `taps_forward`, `taps_back` et `exits` ne sont plus demandées : l'API les a refusées au premier relevé réel (7 oct. 2026) et `views` remplace `impressions`. L'API refuse certaines métriques selon le type de média et la version : le script essaie en bloc, puis une par une ; les refusées sont listées dans `refusees` et ignorées. Le thème est déduit du titre (mots-clés) et le modèle de l'identifiant ou du champ `dossierId`, faute de champ dédié ; ils sont figés au premier relevé.
 
 ## Limites
 

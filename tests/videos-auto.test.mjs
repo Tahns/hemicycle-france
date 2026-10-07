@@ -2,10 +2,30 @@
 // USAGE : node tests/videos-auto.test.mjs   (sans ffmpeg, seule la partie pure est exécutée)
 import assert from "assert";
 import { createRequire } from "module";
-import { mkdtempSync, writeFileSync, existsSync, statSync, rmSync } from "fs";
+import { mkdtempSync, writeFileSync, existsSync, statSync, rmSync, readFileSync } from "fs";
+import { spawnSync } from "child_process";
 import { tmpdir } from "os";
 import { join } from "path";
 const V = createRequire(import.meta.url)("../scripts/videos-auto.cjs");
+
+// --- Chaîne CI : l'installation de ffmpeg doit se déclencher quand data/stories-config.json active les vidéos ---
+// (régression : « aucune vidéo produite » faisait soupçonner l'étape « Installer ffmpeg » ; le motif grep doit reconnaître la configuration livrée
+// et ses variantes de mise en forme, dans les DEUX workflows qui lancent stories-auto.cjs)
+{
+  const dossierTest = mkdtempSync(join(tmpdir(), "cfg-"));
+  try {
+    for (const wf of ["actualites.yml", "update-data.yml"]) {
+      const yml = readFileSync(new URL(`../.github/workflows/${wf}`, import.meta.url), "utf-8");
+      const m = /if grep (-[A-Za-z]+) '([^']*videos[^']*)' data\/stories-config\.json/.exec(yml);
+      assert.ok(m, `${wf} : étape d'installation de ffmpeg introuvable`);
+      const grep = (contenu) => { const f = join(dossierTest, "c.json"); writeFileSync(f, contenu); return spawnSync("grep", [m[1], m[2], f]).status === 0; };
+      assert.ok(grep(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")) === JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")).videos, `${wf} : le motif doit refléter data/stories-config.json`);
+      for (const ok of ['{"videos": true}', '{"videos":true}', '{ "videos" :  true }']) assert.ok(grep(ok), `${wf} : ${ok}`);
+      for (const ko of ['{"videos": false}', '{"videosMax": 2}', '{"enVideos": true}']) assert.ok(!grep(ko), `${wf} : ${ko}`);
+      assert.ok(/ffmpeg/.test(yml.slice(m.index, m.index + 200)) && /apt-get install/.test(yml.slice(m.index, m.index + 200)), `${wf} : installe bien ffmpeg`);
+    }
+  } finally { rmSync(dossierTest, { recursive: true, force: true }); }
+}
 
 // --- Découpe en blocs : lacunes à l'intérieur du contenu seulement ---
 {
