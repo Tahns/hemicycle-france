@@ -929,4 +929,37 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(A.choisirPostAgenda({ meetings: { meetings: [ev()] }, file: vide, now: new Date("2026-10-07T22:30:00Z") }).refus, "nuit : rien");
 }
 
+// Rappel J-3 : story « Date à retenir » pour un événement de l'agenda déjà annoncé par un post
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const matin = new Date("2026-10-21T08:30:00Z"); // 10 h 30 à Paris, 3 jours avant le 24
+  const ev = (extra = {}) => ({ debut: "2026-10-24", fin: "2026-10-25", jour: "24-25", mois: "OCT.", lieu: "Orléans (Loiret)", titre: "XIXᵉ congrès du Rassemblement National", source: { nom: "franceinfo", url: "https://www.franceinfo.fr/x" }, verified: true, ...extra });
+  const hs = (x) => createRequire(import.meta.url)("crypto").createHash("sha1").update(x).digest("hex").slice(0, 12);
+  const postId = hs("post-agenda|2026-10-24|XIXᵉ congrès du Rassemblement National");
+  const annonce = [{ id: postId, type: "post", cree: "2026-10-07T08:00:00Z" }];
+  const ra = (m, o = {}) => A.choisirRappelAgenda({ meetings: { meetings: m }, file: { entrees: annonce }, now: matin, ...o });
+  const r = ra([ev()]);
+  assert.strictEqual(r.modele, "rappel-agenda", "J-3 d'un événement annoncé : un rappel");
+  assert.strictEqual(r.id, hs("rappel-agenda|2026-10-24|XIXᵉ congrès du Rassemblement National"), "id stable rappel-agenda|debut|titre");
+  assert.strictEqual(r.postId, postId);
+  const d = A.decrire(r, matin);
+  assert.strictEqual(d.type, "story");
+  assert.strictEqual(d.args[5], "date", "modèle « date » existant");
+  assert.strictEqual(d.args[7].modeleImpose, "date");
+  assert.strictEqual(d.champs.rappelDe, postId);
+  assert.match(d.champs.alt, /dans 3 jours/, "compteur dans N jours");
+  assert.ok(ra([ev()], { now: new Date("2026-10-22T08:30:00Z") }).modele, "J-2 : rattrapage d'un J-3 manqué");
+  assert.ok(ra([ev()], { now: new Date("2026-10-20T08:30:00Z") }).refus, "J-4 : trop tôt");
+  assert.ok(ra([ev()], { now: new Date("2026-10-23T08:30:00Z") }).refus, "J-1 : trop tard");
+  assert.ok(A.choisirRappelAgenda({ meetings: { meetings: [ev()] }, file: vide, now: matin }).refus, "jamais annoncé par un post : pas de rappel");
+  assert.ok(ra([ev()], { file: { entrees: [...annonce, { id: r.id, type: "story", cree: matin.toISOString() }] } }).refus, "déjà fait : jamais deux fois");
+  assert.ok(ra([ev()], { file: vide, registre: { entrees: [{ id: postId, type: "post", statut: "publiee", publieLe: "2026-10-07T08:00:00Z" }, { id: r.id, type: "story", statut: "publiee", publieLe: "2026-10-21T06:00:00Z" }] } }).refus, "déjà publié (registre) : jamais deux fois");
+  assert.ok(ra([ev()], { file: vide, registre: { entrees: [{ id: postId, type: "post", statut: "publiee", publieLe: "2026-10-07T08:00:00Z" }] } }).modele, "post connu par le registre : rappel");
+  assert.ok(ra([ev({ verified: false })]).refus, "non vérifié : rien");
+  assert.ok(ra([ev({ confirme: false })]).refus, "non confirmé : rien");
+  assert.ok(ra([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
+  assert.ok(ra([ev()], { now: new Date("2026-10-21T22:30:00Z") }).refus, "nuit : rien");
+  assert.strictEqual(choisir({ actualites: null, direct: null, sondages: sond(), meetings: { meetings: [ev()] }, file: { entrees: annonce }, now: matin }).modele, "rappel-agenda", "choisir() retient le rappel");
+}
+
 console.log("stories-auto : tous les tests passent.");

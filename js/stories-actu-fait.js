@@ -298,7 +298,7 @@ STORY_PLUS.date = async (ctx, info) => {
   const art = articleCite(s, [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois]);
   const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "À noter", { fondEt: "#fff", couleurEt: BLEU });
-  const yPied = pied(ctx, { medias: [], source: "Date annoncée par la presse. L'ordre du jour peut changer.", cta: "Ne rien rater" });
+  const yPied = pied(ctx, { medias: [], source: s.agenda ? "Date relevée auprès de la source. Le programme peut changer." : "Date annoncée par la presse. L'ordre du jour peut changer.", cta: "Ne rien rater" });
   const bas = yPied - 30;
   const n = joursAvant(dt.iso);
   const compte = n > 1 ? { petit: "dans", grand: `${n} jours` } : n === 1 ? { petit: "", grand: "demain" } : n === 0 ? { petit: "", grand: "aujourd'hui" } : null;
