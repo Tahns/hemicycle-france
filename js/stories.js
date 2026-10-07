@@ -222,7 +222,7 @@ function storyCadre(ctx, surtitre, { alerte = false, etiquette = "", sombre = fa
 // Pied commun : phrase de sources en bleu clair (ligne en gras blanche et « ▶ Vidéo : média » facultatives), puis « accroche → @compte » centré en blanc
 function storyPied(ctx, source, { ligne = "", accroche = "Toute l'actu politique", video = "" } = {}){
   const { L, marge } = STORY;
-  let yy = 1524;
+  let yy = video ? 1494 : 1524; // avec une ligne vidéo, le pied monte pour que le texte des sources ne touche pas l'accroche
   if(ligne) yy = storyTexte(ctx, ligne, marge, yy, { taille:26, poids:700, couleur:STORY.blanc, max:1 }) + 4;
   if(video){
     ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = STORY.blanc; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";

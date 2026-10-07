@@ -291,7 +291,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: true, sensibles: false, minMedias: 3, dossierMedias: 3, maxParJour: 20, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, 20 stories par jour, validation humaine, sujets sensibles sans circuit à part");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 3, dossierMedias: 3, maxParJour: 20, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, 20 stories par jour, publication directe, sujets sensibles sans circuit à part");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
