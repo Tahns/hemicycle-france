@@ -605,7 +605,9 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.match(d.champs.legende, /Date annoncée par la presse \(franceinfo, Le Monde, Le Figaro\)/);
     assert.match(d.champs.legende, /@hemicyclefrance/);
     assert.ok(!/github\.io|hemicycle-france|https?:\/\//.test(d.champs.legende), "pas de lien du site dans la légende");
-    assert.ok(d.champs.legende.length < 2200 && (d.champs.legende.match(/#/g) || []).length <= 5, "légende courte, hashtags sobres");
+    assert.ok(d.champs.legende.length < 2200 && (d.champs.legende.match(/#/g) || []).length >= 6 && (d.champs.legende.match(/#/g) || []).length <= 8, "légende courte, 6 à 8 hashtags");
+    assert.match(d.champs.legende, /#Agenda/);
+    assert.ok(!/Toute l'actu/.test(d.champs.legende));
     assert.match(d.champs.alt, /date à retenir/);
     // à 3 jours ou moins : toujours une story « Date à retenir »
     const proche = dateSujet({ date: { iso: "2026-10-05", jour: 5, mois: "octobre" } });
@@ -686,6 +688,10 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.match(d.champs.legende, /Source officielle : Assemblée nationale, scrutin public n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
     assert.match(d.champs.legende, /@hemicyclefrance/);
     assert.ok(!/github\.io|hemicycle-france/.test(d.champs.legende));
+    assert.match(d.champs.legende.split("\n")[0], /^Assemblée nationale : (projet|proposition) de loi adopté/);
+    const nbH = (d.champs.legende.match(/#\S+/g) || []).length;
+    assert.ok(nbH >= 6 && nbH <= 8, "6 à 8 hashtags");
+    assert.match(d.champs.legende, /#AssembléeNationale/);
     assert.deepStrictEqual(d.sources, ["https://www.assemblee-nationale.fr/dyn/17/scrutins/100"]);
     assert.deepStrictEqual(AUTO.ficheAnnonce(d.post.fiche, r.id), { id: r.id, titre: "Projet de loi relatif à la simplification de la vie économique", sous: "Assemblée nationale · texte adopté · 1 octobre 2026" });
   }
@@ -695,7 +701,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(r.post.spec.verdict, "rejete");
     const l = AUTO.decrire(r, now).champs.legende;
     assert.match(l, /a rejeté, le 30 septembre 2026/);
-    assert.match(l, /texte rejeté/);
+    assert.match(l, /proposition de loi rejetée le 30 septembre 2026/);
     assert.ok(!/(enfin|scandale|victoire|défaite|honte|bravo|malheureusement|heureusement)/i.test(l), "aucun qualificatif politique");
   }
   // le Sénat aussi ; vote ancien, non final, incohérent, à mot prudent (mineurs) ou motion : jamais

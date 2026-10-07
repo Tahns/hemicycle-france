@@ -24,7 +24,7 @@ const PAR_THEME = {
 };
 const PAR_GENRE = {
   loi: ["#Loi", "#Vote"],
-  date: ["#Agenda", "#DateÀRetenir"],
+  date: ["#Agenda", "#DateÀRetenir", "#Calendrier", "#Institutions"],
   "carrousel-loi": ["#Loi", "#Vote"],
   "carrousel-hebdo": ["#Parlement", "#SemaineParlementaire"],
   aujourdhui: ["#Parlement", "#Agenda"],

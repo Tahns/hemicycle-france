@@ -222,6 +222,8 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const v = validerCarrousel(fiche);
   assert.ok(v.ok, v.erreurs.join(" ; "));
   assert.ok(p.entree.legende.includes("@hemicyclefrance") && p.entree.legende.includes("assemblee-nationale.fr") && !/github\.io/.test(p.entree.legende));
+  assert.ok(/^5 images pour comprendre/.test(p.entree.legende), "accroche factuelle en 1re ligne");
+  assert.ok(/enregistrer/.test(p.entree.legende) && !/#Politique #Assemblée\S+ #Loi #Parlement$/.test(p.entree.legende) && (p.entree.legende.match(/#\S+/g) || []).length <= 5);
   // un seul carrousel par vote, un seul par jour
   const e = C.etatVide(); e.faits[p.faitCle] = { id: p.id, le: "2026-10-13T14:00:00Z" };
   const autre = contenu("carrousel-loi", fx.instants["carrousel-loi"], { etat: e });
@@ -247,6 +249,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.strictEqual(h.rendu.specs[0].couverture, true);
   assert.strictEqual(h.rendu.specs.at(-1).kicker, "Sources");
   assert.ok(validerCarrousel({ type: "carousel", url_images: h.rendu.specs.map((_, i) => `https://x.test/h${i}.jpg`), legende: h.entree.legende, alts: h.rendu.alts }).ok);
+  assert.ok(/^\d+ images pour retenir/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-10T16:20:00Z"), "pas le samedi");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-11T15:00:00Z"), "pas avant que le résumé (18 h 05) soit écrit");
   const autreSemaine = donnees(); autreSemaine.digest.id = "2026-W40";

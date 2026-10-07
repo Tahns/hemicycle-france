@@ -41,6 +41,7 @@ const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lir
 
 const RACINE = path.resolve(__dirname, "..");
 const COMPTE = "@hemicyclefrance";
+const { hashtags: hashtagsLegende } = require("./legendes.cjs");
 const RE_VOTE_FINAL = /^(?:sur )?l['’]ensemble (du|de la) (projet|proposition) de loi\b/i;
 const MAX_OCTETS = 8 * 1024 * 1024;
 const GARDER = 30; // même plafond que stories-auto.cjs (entrées de la file)
@@ -384,7 +385,7 @@ function choisirChiffre({ indicateurs, budget, sondages, veille = null, etat, jo
 }
 
 // ----- Carrousels --------------------------------------------------------------------------------------------------------
-const legendeCarrousel = ({ titre, lignes, source, hashtags }) => [titre, "", ...lignes, "", source, "", `Chaque jour : ${COMPTE}`, hashtags.join(" ")].join("\n");
+const legendeCarrousel = ({ titre, lignes, source, hashtags, appel = "À enregistrer pour y revenir, à partager pour en parler autour de vous." }) => [titre, "", ...lignes, "", source, "", appel, `Chaque jour : ${COMPTE}`, "", hashtags.join(" ")].join("\n");
 
 const etapeSuivante = ({ chambre, resultat, etape, navetteSenat }) => {
   const an = chambre === "an", autre = an ? "au Sénat" : "à l'Assemblée nationale";
@@ -464,9 +465,9 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now }) {
     ];
     const sourceLegende = `Source officielle : ${an ? "Assemblée nationale" : "Sénat"}, scrutin public n°${sp.numero} — ${f.source}`;
     const legende = legendeCarrousel({
-      titre: `${sp.titre} : texte ${verbe}`,
+      titre: `5 images pour comprendre : ${coupe(sp.titre, 150)} (texte ${verbe})`,
       lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} l'ensemble du texte${sp.etape ? ` (${sp.etape})` : ""}.`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions : ${nbFr(sp.abst)}.`, "En 5 images : contexte, intitulé, résultat du vote, suites de la procédure, sources."],
-      source: sourceLegende, hashtags: ["#Politique", `#${an ? "AssembléeNationale" : "Sénat"}`, "#Loi", "#Parlement"],
+      source: sourceLegende, hashtags: hashtagsLegende({ genre: "carrousel-loi", chambre: an ? "an" : "senat", theme: an ? "assemblee" : "senat", titre: sp.titre, max: 5 }),
     });
     const alts = [
       `Image 1 sur 5. ${sp.titre}, texte ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${sp.date}. ${contexte.join(" ")}`,
@@ -514,7 +515,7 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   const couverture = { n: 1, total, couverture: true, kicker: "Ce qu'il faut retenir", titre: "Ce qu'il faut retenir cette semaine", corps: [{ p: `Au Parlement, semaine ${periode}`, couleur: "ciel", taille: 36, poids: 700 }, { p: sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", taille: 34 }], source: "Source : données officielles de l'Assemblée nationale.", accroche: "Faites défiler" };
   const specs = [couverture, ...corps.map((c, i) => ({ ...c, n: i + 2, total }))];
   const lignes = [sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", `${total} images : ${[textes.length ? "textes votés" : null, dossiers.length ? "textes les plus discutés" : null, seances.length ? "ordre du jour de la semaine prochaine" : null, sondage ? "dernier sondage" : null].filter(Boolean).join(", ") || "les chiffres de la semaine"}, sources.`];
-  const legende = legendeCarrousel({ titre: `Ce qu'il faut retenir cette semaine au Parlement (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr) et ordre du jour (assemblee-nationale.fr).", hashtags: ["#Politique", "#AssembléeNationale", "#Parlement", "#Actualité"] });
+  const legende = legendeCarrousel({ titre: `${total} images pour retenir l'essentiel de la semaine au Parlement (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr) et ordre du jour (assemblee-nationale.fr).", hashtags: hashtagsLegende({ genre: "carrousel-hebdo", chambre: "an", theme: "assemblee", max: 5 }) });
   const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).join(" ")}`.slice(0, 990));
   return { contenu: {
     type: "carrousel-hebdo", cle: digest.id, rendu: { kind: "carrousel", specs, alts },

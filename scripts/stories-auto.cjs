@@ -108,6 +108,7 @@ const MAX_OCTETS = 8 * 1024 * 1024;
 const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
+const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
 
@@ -856,15 +857,15 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, verdict: resultat, pour, contre, abst, numero, sourceTxt };
   const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions : ${nbFr(abst)}`;
   const legende = [
-    `${d.court} — texte ${verbe}`,
+    `${nomChambre} : ${d.nature} ${d.nature === "projet de loi" ? verbe : verbe + "e"} le ${date}`,
     "",
     `${an ? "L'Assemblée nationale" : "Le Sénat"} a ${resultat === "adopte" ? "adopté" : "rejeté"}, le ${date}, l'ensemble du texte « ${d.court} »${d.etape ? ` (${d.etape})` : ""}.`,
     voix + ".",
     "",
     `Source officielle : ${nomChambre}, scrutin public n°${numero} — ${url}`,
     "",
-    `Toute l'actu politique : ${COMPTE}`,
-    `#Politique #${an ? "AssembléeNationale" : "Sénat"} #Loi #Parlement`,
+    `Pour suivre l'actualité politique et parlementaire : ${COMPTE}`,
+    hashtagsLegende({ genre: "loi", chambre, theme: an ? "assemblee" : "senat", titre: d.court, max: 8 }).join(" "),
   ].join("\n");
   return {
     spec,
@@ -1054,15 +1055,15 @@ function ficheDate(s, now = new Date()) {
     quandTxt = `du ${semaine.toLowerCase()} ${jourTxt} au ${majuscule(f.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" })).toLowerCase()} ${jf} ${moisF} ${annee}`;
   }
   const legende = [
-    `Date à retenir : ${jourAff} ${annee}`,
+    `Date à retenir : ${jourAff} ${annee}${titre.length <= 80 ? ` — ${titre}` : ""}`,
     "",
     `${titre}.`,
     ag ? `Rendez-vous ${ag.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}${ag.lieu ? ` (${ag.lieu})` : ""}.` : `Rendez-vous le ${quand}.`, // date absolue : un post reste au fil, « dans N jours » serait faux dès le lendemain (audit J-19)
     "",
     ag ? `Date relevée auprès de ${listeMedias} ; le programme peut changer, à vérifier auprès de l'organisateur.` : `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}) ; l'ordre du jour peut changer, à vérifier auprès de l'institution concernée.`,
     "",
-    `Toute l'actu politique : ${COMPTE}`,
-    "#Politique #Agenda #Actualité",
+    `Pour suivre l'actualité politique : ${COMPTE}`,
+    hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 8 }).join(" "),
   ].join("\n");
   return {
     spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
