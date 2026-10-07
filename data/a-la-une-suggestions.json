@@ -1,78 +1,48 @@
 {
  "semaine": "2026-W41",
- "du": "2026-09-29T18:55:29.898Z",
- "au": "2026-10-06T18:55:29.898Z",
- "aJourAu": "2026-10-06T08:46:31.168Z",
+ "du": "2026-09-30T06:58:35.447Z",
+ "au": "2026-10-07T06:58:35.447Z",
+ "aJourAu": "2026-10-07T06:46:23.344Z",
  "rubriques": [
   {
-   "id": "politique",
-   "libelle": "Politique",
+   "id": "actu",
+   "libelle": "Actualité",
    "ordre": 1
-  },
-  {
-   "id": "parlement",
-   "libelle": "Parlement",
-   "ordre": 2
-  },
-  {
-   "id": "gouvernement",
-   "libelle": "Gouvernement",
-   "ordre": 3
-  },
-  {
-   "id": "elysee",
-   "libelle": "Élysée",
-   "ordre": 4
   },
   {
    "id": "presidentielle",
    "libelle": "2027",
-   "ordre": 5
+   "ordre": 2
   },
   {
    "id": "sondages",
    "libelle": "Sondages",
-   "ordre": 6
+   "ordre": 3
   },
   {
-   "id": "economie",
-   "libelle": "Économie",
-   "ordre": 7
+   "id": "elus",
+   "libelle": "Élus et votes",
+   "ordre": 4
   },
   {
-   "id": "budget",
-   "libelle": "Budget",
-   "ordre": 8
-  },
-  {
-   "id": "justice",
-   "libelle": "Justice",
-   "ordre": 9
-  },
-  {
-   "id": "europe",
-   "libelle": "Europe",
-   "ordre": 10
+   "id": "argent",
+   "libelle": "Argent public",
+   "ordre": 5
   },
   {
    "id": "comprendre",
    "libelle": "Comprendre",
-   "ordre": 11
+   "ordre": 6
   },
   {
    "id": "quiz",
    "libelle": "Quiz",
-   "ordre": 12
-  },
-  {
-   "id": "resultats",
-   "libelle": "Résultats",
-   "ordre": 13
+   "ordre": 7
   },
   {
    "id": "agenda",
    "libelle": "Agenda",
-   "ordre": 14
+   "ordre": 8
   }
  ],
  "aAjouterCetteSemaine": [
@@ -81,8 +51,8 @@
    "titre": null,
    "type": "story",
    "publieLe": "2026-10-02T12:00:00.000Z",
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "confiance": "faible"
   },
   {
@@ -99,8 +69,8 @@
    "titre": null,
    "type": "story",
    "publieLe": "2026-10-03T14:00:00.000Z",
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "confiance": "faible"
   },
   {
@@ -108,8 +78,8 @@
    "titre": null,
    "type": "story",
    "publieLe": "2026-10-04T10:00:00.000Z",
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "confiance": "faible"
   },
   {
@@ -126,8 +96,8 @@
    "titre": null,
    "type": "story",
    "publieLe": "2026-10-05T09:00:00.000Z",
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "confiance": "faible"
   },
   {
@@ -153,60 +123,78 @@
    "titre": "Blocus des lycées",
    "type": "story",
    "publieLe": "2026-10-06T07:20:00.000Z",
-   "rubrique": "politique",
-   "libelle": "Politique",
-   "confiance": "faible"
+   "rubrique": "argent",
+   "libelle": "Argent public",
+   "confiance": "haute"
   },
   {
    "id": "282345be6b68",
    "titre": "Primaire de la gauche",
    "type": "story",
    "publieLe": "2026-10-06T08:46:31.168Z",
-   "rubrique": "presidentielle",
-   "libelle": "2027",
-   "confiance": "moyenne"
+   "rubrique": "argent",
+   "libelle": "Argent public",
+   "confiance": "haute"
+  },
+  {
+   "id": "b9db02f318eb",
+   "titre": "Aujourd'hui à l'Assemblée",
+   "type": "story",
+   "publieLe": "2026-10-07T06:46:23.344Z",
+   "rubrique": "elus",
+   "libelle": "Élus et votes",
+   "confiance": "haute"
   }
  ],
  "parRubrique": {
-  "politique": [
-   "e3f747821771",
+  "actu": [
    "direct-lycees-0510",
    "lyceens-0410",
    "jour-0310",
    "bardella-0210"
   ],
-  "parlement": [],
-  "gouvernement": [],
-  "elysee": [],
   "presidentielle": [
-   "282345be6b68",
    "dossier-primaire-0510",
    "alaune-primaire-0510",
    "f9e54d58ccd3"
   ],
   "sondages": [],
-  "economie": [],
-  "budget": [],
-  "justice": [],
-  "europe": [],
+  "elus": [
+   "b9db02f318eb"
+  ],
+  "argent": [
+   "282345be6b68",
+   "e3f747821771"
+  ],
   "comprendre": [],
   "quiz": [],
-  "resultats": [],
   "agenda": [
    "date-a-retenir-0510"
   ]
  },
  "entrees": [
   {
+   "id": "b9db02f318eb",
+   "titre": "Aujourd'hui à l'Assemblée",
+   "type": "story",
+   "publieLe": "2026-10-07T06:46:23.344Z",
+   "theme": null,
+   "rubrique": "elus",
+   "libelle": "Élus et votes",
+   "source": "titre",
+   "confiance": "haute",
+   "cetteSemaine": true
+  },
+  {
    "id": "282345be6b68",
    "titre": "Primaire de la gauche",
    "type": "story",
    "publieLe": "2026-10-06T08:46:31.168Z",
-   "theme": null,
-   "rubrique": "presidentielle",
-   "libelle": "2027",
-   "source": "titre",
-   "confiance": "moyenne",
+   "theme": "budget",
+   "rubrique": "argent",
+   "libelle": "Argent public",
+   "source": "theme",
+   "confiance": "haute",
    "cetteSemaine": true
   },
   {
@@ -214,11 +202,11 @@
    "titre": "Blocus des lycées",
    "type": "story",
    "publieLe": "2026-10-06T07:20:00.000Z",
-   "theme": "politique",
-   "rubrique": "politique",
-   "libelle": "Politique",
-   "source": "defaut",
-   "confiance": "faible",
+   "theme": "budget",
+   "rubrique": "argent",
+   "libelle": "Argent public",
+   "source": "theme",
+   "confiance": "haute",
    "cetteSemaine": true
   },
   {
@@ -251,8 +239,8 @@
    "type": "story",
    "publieLe": "2026-10-05T09:00:00.000Z",
    "theme": null,
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "source": "defaut",
    "confiance": "faible",
    "cetteSemaine": true
@@ -275,8 +263,8 @@
    "type": "story",
    "publieLe": "2026-10-04T10:00:00.000Z",
    "theme": null,
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "source": "defaut",
    "confiance": "faible",
    "cetteSemaine": true
@@ -287,8 +275,8 @@
    "type": "story",
    "publieLe": "2026-10-03T14:00:00.000Z",
    "theme": null,
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "source": "defaut",
    "confiance": "faible",
    "cetteSemaine": true
@@ -311,8 +299,8 @@
    "type": "story",
    "publieLe": "2026-10-02T12:00:00.000Z",
    "theme": null,
-   "rubrique": "politique",
-   "libelle": "Politique",
+   "rubrique": "actu",
+   "libelle": "Actualité",
    "source": "defaut",
    "confiance": "faible",
    "cetteSemaine": true

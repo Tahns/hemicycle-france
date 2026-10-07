@@ -38,7 +38,7 @@ function pagePlanche(cartes) {
 body{width:1760px;padding:40px 40px 30px;background:${DA.fond};font-family:"Public Sans",sans-serif;color:${DA.creme}}
 h1{font-family:Newsreader,serif;font-size:40px;font-weight:600;margin-bottom:6px}
 p.s{font-size:18px;color:${DA.ciel};margin-bottom:28px}
-.g{display:grid;grid-template-columns:repeat(7,1fr);gap:26px 20px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 20px}
 .k{text-align:center;font-size:17px;letter-spacing:.04em}
 .k i{display:block;width:210px;height:210px;margin:0 auto 10px;border-radius:50%;background-repeat:no-repeat;background-size:210px 373px;background-position:center center;box-shadow:0 0 0 2px rgba(197,206,242,.35)}
 </style><body><h1>Stories à la une : aperçu en cercle</h1><p class="s">Instagram recadre le centre de chaque couverture 1080 × 1920 en cercle : voici ce qui reste visible.</p><div class="g">

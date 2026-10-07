@@ -8,25 +8,25 @@ const { RUBRIQUES } = require("../scripts/a-la-une-rubriques.cjs");
 
 const IDS = RUBRIQUES.map((r) => r.id);
 
-test("rubriques : 14 domaines, libellés de 12 caractères au plus, identifiants uniques, pas de nom de personne", () => {
-  assert.strictEqual(RUBRIQUES.length, 14);
+test("rubriques : 8 rubriques, libellés de 13 caractères au plus, identifiants uniques, pas de nom de personne", () => {
+  assert.strictEqual(RUBRIQUES.length, 8);
   assert.strictEqual(new Set(IDS).size, IDS.length);
   for (const r of RUBRIQUES) {
-    assert.ok(r.libelle.length <= 12, `${r.id} : libellé trop long`);
+    assert.ok(r.libelle.length <= 13, `${r.id} : libellé trop long`);
     assert.ok(r.icone.includes("<"), `${r.id} : icône manquante`);
   }
   assert.ok(!RUBRIQUES.some((r) => /macron|bardella|le pen|m[eé]lenchon/i.test(r.libelle + r.description)));
 });
 
 test("thème d'illustration -> rubrique : tous les thèmes de actualites.json sont couverts, cibles existantes", () => {
-  assert.strictEqual(rubriqueDepuisTheme("assemblee"), "parlement");
-  assert.strictEqual(rubriqueDepuisTheme("senat"), "parlement");
-  assert.strictEqual(rubriqueDepuisTheme("gouvernement"), "gouvernement");
-  assert.strictEqual(rubriqueDepuisTheme("budget"), "budget");
-  assert.strictEqual(rubriqueDepuisTheme("justice"), "justice");
+  assert.strictEqual(rubriqueDepuisTheme("assemblee"), "elus");
+  assert.strictEqual(rubriqueDepuisTheme("senat"), "elus");
+  assert.strictEqual(rubriqueDepuisTheme("gouvernement"), "actu");
+  assert.strictEqual(rubriqueDepuisTheme("budget"), "argent");
+  assert.strictEqual(rubriqueDepuisTheme("justice"), "actu");
   assert.strictEqual(rubriqueDepuisTheme("election"), "presidentielle");
-  assert.strictEqual(rubriqueDepuisTheme("international"), "europe");
-  assert.strictEqual(rubriqueDepuisTheme("securite"), "politique");
+  assert.strictEqual(rubriqueDepuisTheme("international"), "actu");
+  assert.strictEqual(rubriqueDepuisTheme("securite"), "actu");
   assert.strictEqual(rubriqueDepuisTheme("politique"), null, "thème générique : on regarde le titre");
   assert.strictEqual(rubriqueDepuisTheme("inconnu"), null);
   assert.strictEqual(rubriqueDepuisTheme(undefined), null);
@@ -34,12 +34,12 @@ test("thème d'illustration -> rubrique : tous les thèmes de actualites.json so
 });
 
 test("titre -> rubrique (accents et casse ignorés)", () => {
-  assert.strictEqual(rubriqueDepuisTitre("Budget 2027: le PS appelle à modifier le texte"), "budget");
+  assert.strictEqual(rubriqueDepuisTitre("Budget 2027: le PS appelle à modifier le texte"), "argent");
   assert.strictEqual(rubriqueDepuisTitre("Sondage Ifop : intentions de vote au 1er tour"), "sondages");
   assert.strictEqual(rubriqueDepuisTitre("Présidentielle 2027. Une grande coalition ?"), "presidentielle");
-  assert.strictEqual(rubriqueDepuisTitre("Énergie. Prix à la pompe : le G7 agit"), "europe", "G7 avant économie");
-  assert.strictEqual(rubriqueDepuisTitre("Tribunal : décision attendue"), "justice");
-  assert.strictEqual(rubriqueDepuisTitre("Le chômage recule"), "economie");
+  assert.strictEqual(rubriqueDepuisTitre("Énergie. Prix à la pompe : le G7 agit"), "actu");
+  assert.strictEqual(rubriqueDepuisTitre("Tribunal : décision attendue"), "actu");
+  assert.strictEqual(rubriqueDepuisTitre("Le chômage recule"), "actu");
   assert.strictEqual(rubriqueDepuisTitre("Quiz : savez-vous comment on vote ?"), "quiz");
   assert.strictEqual(rubriqueDepuisTitre("Un titre sans mot-clé"), null);
   assert.strictEqual(rubriqueDepuisTitre(""), null);
@@ -47,7 +47,7 @@ test("titre -> rubrique (accents et casse ignorés)", () => {
 
 test("type -> rubrique : post date, post loi, sondage, quiz, simulation", () => {
   assert.strictEqual(rubriqueDepuisType({ id: "x1", type: "post", titre: "Élections municipales, le 15 mars" }), "agenda");
-  assert.strictEqual(rubriqueDepuisType({ id: "x2", type: "post", titre: "Loi sur les retraites : adoptée" }), "resultats");
+  assert.strictEqual(rubriqueDepuisType({ id: "x2", type: "post", titre: "Loi sur les retraites : adoptée" }), "elus");
   assert.strictEqual(rubriqueDepuisType({ id: "date-a-retenir-0510", type: "story" }), "agenda");
   assert.strictEqual(rubriqueDepuisType({ id: "x3", type: "story", titre: "Sondage Odoxa · intentions de vote" }), "sondages");
   assert.strictEqual(rubriqueDepuisType({ id: "probabilites-1", type: "story" }), "presidentielle");
@@ -55,15 +55,15 @@ test("type -> rubrique : post date, post loi, sondage, quiz, simulation", () => 
 });
 
 test("recommander : le type prime, puis un titre explicite, puis le thème, puis le titre, puis Politique", () => {
-  assert.strictEqual(recommander({ id: "p", type: "post", titre: "Budget : loi rejetée" }, "budget").rubrique, "resultats");
+  assert.strictEqual(recommander({ id: "p", type: "post", titre: "Budget : loi rejetée" }, "argent").rubrique, "elus");
   assert.strictEqual(recommander({ id: "a", type: "story", titre: "Sondage : Attal progresse" }, "election").rubrique, "sondages");
   const t = recommander({ id: "b", type: "story", titre: "Blocus des lycées" }, "assemblee");
-  assert.deepStrictEqual([t.rubrique, t.source, t.confiance], ["parlement", "theme", "haute"]);
+  assert.deepStrictEqual([t.rubrique, t.source, t.confiance], ["elus", "theme", "haute"]);
   const m = recommander({ id: "c", type: "story", titre: "Budget 2027 : le PS veut des changements" }, "politique");
-  assert.deepStrictEqual([m.rubrique, m.source, m.confiance], ["budget", "titre", "moyenne"]);
+  assert.deepStrictEqual([m.rubrique, m.source, m.confiance], ["argent", "titre", "moyenne"]);
   const d = recommander({ id: "d", type: "story", titre: "Blocus des lycées" }, null);
-  assert.deepStrictEqual([d.rubrique, d.source, d.confiance], ["politique", "defaut", "faible"]);
-  assert.strictEqual(d.libelle, "Politique");
+  assert.deepStrictEqual([d.rubrique, d.source, d.confiance], ["actu", "defaut", "faible"]);
+  assert.strictEqual(d.libelle, "Actualité");
 });
 
 test("semaine ISO", () => {
@@ -87,9 +87,9 @@ test("construire : fenêtre de 7 jours, jointure avec la file et le thème, peri
   const r = construire({ registre, file, actualites }, maintenant);
   assert.strictEqual(r.entrees.length, 3, "les entrées périmées sont ignorées");
   assert.deepStrictEqual(r.aAjouterCetteSemaine.map((e) => e.id), ["s1", "date-a-retenir-0510"], "ordre chronologique, 7 derniers jours seulement");
-  assert.strictEqual(r.aAjouterCetteSemaine[0].rubrique, "parlement");
+  assert.strictEqual(r.aAjouterCetteSemaine[0].rubrique, "elus");
   assert.strictEqual(r.aAjouterCetteSemaine[1].rubrique, "agenda");
-  assert.deepStrictEqual(r.parRubrique.parlement, ["s1"]);
+  assert.deepStrictEqual(r.parRubrique.elus, ["s1"]);
   assert.strictEqual(r.semaine, "2026-W41");
   assert.deepStrictEqual(Object.keys(r.parRubrique), IDS);
 });
