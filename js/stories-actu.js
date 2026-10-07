@@ -188,6 +188,12 @@ async function dessineUne(ctx, s){
   const hMedias = 30 + 16 + (past.rangs.length - 1) * 62 + 50;
   const mp = mesurePortraits(ctx, pers);
   const gap = 34;
+  // Sans portrait : photo libre de l'institution du thème (data/vignettes.json), jamais un pictogramme ; sans photo, rien
+  const ill = s.illustration || {};
+  const cleV = "vignette" in ill ? ill.vignette : ill.theme;
+  const photoV = !pers.length && cleV && typeof VIGNETTES !== "undefined" ? VIGNETTES[cleV] : null;
+  const imgV = photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "") ? await storyImage(photoV.chemin) : null;
+  const reserveImg = imgV ? 430 : 0;
   const dispo = Y_BAS - Y_HAUT;
   const tMax = propre ? (pers.length ? 118 : 156) : (pers.length ? 84 : 100);
   // attribution : titre de presse cité (si le titre est le nôtre) ou « — média » (si le titre est celui du média)
@@ -200,11 +206,12 @@ async function dessineUne(ctx, s){
       const ls = propre ? storyLignes(ctx, titreTexte, larg, 99) : citation(ctx, titreCite(a0.titre), larg, 9);
       if(!ls.every(l=> ctx.measureText(l).width <= larg)) continue;
       const hT = (ls.length - 1) * t * 1.04 + t;
+      if(ls.length > 4 || hT > dispo * 0.42) continue; // jamais un titre qui occupe toute la page : 4 lignes et 42 % de la hauteur au plus
       let hA = 0, ql = [];
       if(v.q){ ctx.font = `600 32px "Newsreader"`; ql = citation(ctx, titreCite(a0.titre), larg - 28, v.q); hA = 18 + (ql.length - 1) * 32 * 1.2 + 32 + 10 + 30; }
       else hA = 14 + 32;
       const tot = hT + hA + gap + hMedias + (pers.length ? gap + mp.h : 0);
-      if(tot <= dispo) trouve = { t, ls, hT, hA, ql, v, tot };
+      if(tot + reserveImg <= dispo) trouve = { t, ls, hT, hA, ql, v, tot };
     }
     // avec la citation, le titre doit rester gros (≥ 88 px) ; sinon on passe à la variante plus courte
     if(trouve && (!v.q || trouve.t >= 88)){ plan = trouve; break; }
@@ -214,7 +221,7 @@ async function dessineUne(ctx, s){
     const ls = propre ? storyLignes(ctx, titreTexte, larg, 4) : citation(ctx, titreCite(a0.titre), larg, 4);
     plan = { t:56, ls, hT:(ls.length - 1) * 56 * 1.04 + 56, hA:46, ql:[], v:{ q:0 }, tot:0 };
   }
-  let extra = Math.max(0, dispo - plan.tot);
+  let extra = Math.max(0, dispo - plan.tot - reserveImg);
   const bonus = pers.length ? Math.min(Math.max(0, extra - 60), pers.length === 1 ? 90 : 24) : 0;
   extra -= bonus;
   // sans portrait : pas de bloc de remplacement, le texte se répartit sur la hauteur (espaces plus larges, départ un peu plus bas)
@@ -250,6 +257,16 @@ async function dessineUne(ctx, s){
   if(pers.length){
     y += gap + ec;
     dessinePortraits(ctx, pers, y, bonus);
+  } else if(imgV){
+    // photo de l'institution : bloc large aux coins arrondis, légende de crédit dessous
+    y += gap;
+    // les vignettes sont des carrés de 320 px : un carré de 360 px au plus (agrandissement léger), centré, coins arrondis
+    const cote = Math.max(260, Math.min(360, Y_BAS - y - 56)), xi = Math.round(marge + (larg - cote) / 2), hImg = cote;
+    ctx.save(); ctx.beginPath(); ctx.roundRect(xi, y, cote, cote, 28); ctx.clip();
+    ctx.imageSmoothingQuality = "high"; ctx.drawImage(imgV, xi, y, cote, cote);
+    ctx.restore();
+    ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = CIEL; ctx.letterSpacing = "0px";
+    ctx.fillText(storyLignes(ctx, `Photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`, larg, 1)[0], marge, y + hImg + 36);
   }
   const credits = [...new Set(pers.filter(p=> p.img && p.credit).map(p=> p.credit))];
   const sourceTxt = s.sensible?.pied || ((plan.v.q || !propre ? "Titre repris de la presse. Chaque média est cité." : "Titre rédigé par Hémicycle France d'après la presse. Chaque média est cité.") + (credits.length ? ` Photos : ${credits.join(" ; ")}.` : "")); // sujet sensible : mentions (sources, présomption d'innocence) fabriquées par règles
