@@ -919,15 +919,29 @@ function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }
 }
 
 /** Jours (Paris) entre lesquels un événement de l'agenda devient un post « Date à retenir » : ni trop proche (une story suffit), ni trop lointain. */
-const AGENDA_MIN_JOURS = 4, AGENDA_MAX_JOURS = 60;
+const AGENDA_MIN_JOURS = 4, AGENDA_MAX_JOURS = 400; // tout ce qui est prévu : du plus proche au plus lointain (la présidentielle comprise)
 const MOIS_FR = (iso) => new Date(iso + "T12:00:00Z").toLocaleDateString("fr-FR", { month: "long", timeZone: "UTC" });
+
+/**
+ * Les événements à venir annoncés par le site : l'agenda vérifié (data/meetings.json : congrès, primaires, élections) ET les votes solennels de
+ * l'Assemblée nationale (data/agenda-an.json, open data). Même forme que meetings.json : { verified, debut, titre, source: { nom, url } }.
+ */
+function evenementsAgenda(meetings, agendaAn = null) {
+  const liste = [...(meetings?.meetings || [])];
+  const url = /^https:\/\//.test(agendaAn?.sourceUrl || "") ? agendaAn.sourceUrl : null;
+  if (url) for (const j of agendaAn.jours || []) for (const p of j.points || []) {
+    if (p?.type !== "vote" || !p.objet || p.objet.length > 140) continue;
+    liste.push({ verified: true, debut: j.date, titre: `Vote solennel à l'Assemblée : ${p.objet.charAt(0).toLowerCase()}${p.objet.slice(1)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+  }
+  return liste;
+}
 
 /**
  * Un événement de l'agenda (data/meetings.json : congrès, primaires, grands rendez-vous) à 4–60 jours, vérifié, avec source en https, jamais encore publié,
  * devient un POST « Date à retenir » (puis story d'annonce). Titre écrit par le site (celui de l'agenda) ; aucune citation de presse ; aucun sondage ni résultat.
  * Renvoie { indice: -1, sujet, id, medias: 1, parole: false, modele: "post-date" } (même forme qu'un sujet « post-date ») ou { refus }.
  */
-function choisirPostAgenda({ meetings, file, registre = null, now = new Date() }) {
+function choisirPostAgenda({ meetings, agendaAn = null, file, registre = null, now = new Date() }) {
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const entrees = file?.entrees || [];
@@ -936,7 +950,7 @@ function choisirPostAgenda({ meetings, file, registre = null, now = new Date() }
   const recents = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
   const aujourdhui = jourParis(now), reserve = reserveStory(now);
   const candidats = [];
-  for (const m of meetings?.meetings || []) {
+  for (const m of evenementsAgenda(meetings, agendaAn)) {
     if (!m || m.verified !== true || m.confirme === false || !/^\d{4}-\d{2}-\d{2}$/.test(m.debut || "") || !m.titre || !/^https:\/\//.test(m.source?.url || "") || !m.source?.nom) continue;
     const jours = Math.round((Date.parse(m.debut + "T12:00:00Z") - Date.parse(aujourdhui + "T12:00:00Z")) / 864e5);
     if (jours < AGENDA_MIN_JOURS || jours > AGENDA_MAX_JOURS) continue;
@@ -970,7 +984,7 @@ const RAPPEL_AGENDA_JOURS = [2, 3];
  * Mêmes garde-fous que le post (vérifié, source https, mot exclu, réserve électorale, nuit) ; plafond de 4 stories par jour.
  * Renvoie { indice: -1, sujet, id, postId, medias: 1, parole: false, modele: "rappel-agenda" } ou { refus }.
  */
-function choisirRappelAgenda({ meetings, file, registre = null, now = new Date() }) {
+function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null, now = new Date() }) {
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const entrees = file?.entrees || [];
@@ -978,7 +992,7 @@ function choisirRappelAgenda({ meetings, file, registre = null, now = new Date()
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const aujourdhui = jourParis(now), reserve = reserveStory(now);
   const candidats = [];
-  for (const m of meetings?.meetings || []) {
+  for (const m of evenementsAgenda(meetings, agendaAn)) {
     if (!m || m.verified !== true || m.confirme === false || !/^\d{4}-\d{2}-\d{2}$/.test(m.debut || "") || !m.titre || !/^https:\/\//.test(m.source?.url || "") || !m.source?.nom) continue;
     const jours = Math.round((Date.parse(m.debut + "T12:00:00Z") - Date.parse(aujourdhui + "T12:00:00Z")) / 864e5);
     if (!RAPPEL_AGENDA_JOURS.includes(jours)) continue;
@@ -1075,7 +1089,7 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, veille = null, lois, senat, probas, meetings = null, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
+function choisir({ actualites, direct, sondages, veille = null, lois, senat, probas, meetings = null, agendaAn = null, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
   const s = choisirSondage({ sondages, file, now, veille });
   if (!s.refus) return s;
   if (config.monetisation) {
@@ -1090,9 +1104,9 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
   if (!s1.refus) return s1;
   const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post, suivi d'une story d'annonce
   if (!pl.refus) return pl;
-  const ra = choisirRappelAgenda({ meetings, file, registre, now }); // J-3 d'un événement déjà annoncé par un post : story « Date à retenir »
+  const ra = choisirRappelAgenda({ meetings, agendaAn, file, registre, now }); // J-3 d'un événement déjà annoncé par un post : story « Date à retenir »
   if (!ra.refus) return ra;
-  const pa = choisirPostAgenda({ meetings, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
+  const pa = choisirPostAgenda({ meetings, agendaAn, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
   if (!pa.refus) return pa;
   const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
   if (!b.refus) return b;
@@ -1111,7 +1125,7 @@ function lireEtat(now) {
   if (!Array.isArray(file.entrees)) file.entrees = [];
   const brouillons = lireBrouillons();
   const donnees = { actualites: lire("data/actualites.json", null), direct: lire("data/direct.json", null), sondages: lire("data/sondages.json", null), veille: lire("data/sondages-veille.json", null), candidats: lire("data/candidats.json", null),
-    lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null), rejetes: lire("data/instagram-rejetes.json", null), meetings: lire("data/meetings.json", null) };
+    lois: lire("data/lois.json", null), senat: lire("data/senat.json", null), registre: lire("data/instagram-publiees.json", null), rejetes: lire("data/instagram-rejetes.json", null), meetings: lire("data/meetings.json", null), agendaAn: lire("data/agenda-an.json", null) };
   if (config.monetisation) donnees.probas = lire("data/probabilites.json", null);
   return { config, file, brouillons, donnees };
 }
@@ -1372,6 +1386,6 @@ async function main() {
   }
 }
 
-module.exports = { choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

@@ -686,6 +686,7 @@
   .actu-liste{margin-top:var(--s2);}
   .actu-sujet{display:grid; grid-template-columns:76px 1fr; gap:var(--s4); align-items:start; padding:var(--s4) 0; border-bottom:1px solid var(--border-soft);}
   .actu-corps{min-width:0;}
+  .actu-sujet.actu-sujet.sans-visuel, .actu-sujet.actu-une.sans-visuel{grid-template-columns:minmax(0,1fr);}
   .actu-visuel{position:relative; width:76px; height:76px;}
   .actu-pastille-nom{position:absolute; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--blanc); font-family:var(--font-display); font-weight:600; font-size:var(--fs-lg); border:3px solid var(--bg); box-sizing:border-box;}
   .actu-portraits.n1 .actu-pastille-nom{width:76px; height:76px; font-size:var(--fs-xl);}
@@ -4671,9 +4672,8 @@ function visuelActu(s){
   if(photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "")){
     return `<div class="actu-visuel actu-photo"><img src="${esc(photoV.chemin)}" alt="${esc(photoV.alt || "")}" title="${esc(`${photoV.lieu || ""} — photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`)}" loading="lazy" decoding="async" width="160" height="160"></div>`;
   }
-  // Un mot long (« Gouvernement », « International ») ne tient pas dans la petite vignette : l'icône seule y suffit, le nom reste lu par les lecteurs d'écran
-  const long = !/\s/.test(theme[2]) && theme[2].length > 9;
-  return `<div class="actu-visuel actu-picto${long ? " long" : ""}" style="--c:${theme[0]}" role="img" aria-label="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg><small>${esc(theme[2])}</small></div>`;
+  // Pas de photo : pas de vignette du tout (jamais de pictogramme à la place d'une photo), le texte prend toute la largeur
+  return "";
 }
 const pastilleVideo = x => x.video ? `<span class="actu-video">▶ Vidéo</span> ` : "";
 function sujetHTML(s, court, une, sup){
@@ -4681,8 +4681,9 @@ function sujetHTML(s, court, une, sup){
   const medias = [...new Set(s.articles.map(x=>x.media))];
   const noms = (s.illustration?.personnes || []).map(p=>p.nom);
   const idxActu = ACTUALITES.sujets.indexOf(s); // indice dans la liste complète, pas dans la liste filtrée ou triée affichée
-  return `<article class="actu-sujet${une ? " actu-une" : ""}${sup ? " actu-sup" : ""}">
-    ${visuelActu(s)}
+  const visuel = visuelActu(s);
+  return `<article class="actu-sujet${une ? " actu-une" : ""}${sup ? " actu-sup" : ""}${visuel ? "" : " sans-visuel"}">
+    ${visuel}
     <div class="actu-corps">
     ${s.medias >= 2 ? `<span class="actu-recoupe">Repris par ${s.medias} médias</span>` : ""}
     <h3>${esc(s.titrePropre?.titre || (THEMES_ACTU[s.illustration?.theme] || THEMES_ACTU.politique)[2])}</h3>
