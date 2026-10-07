@@ -44,6 +44,9 @@ async function postDate(ctx, s){
   const bas = H_POST - 150; // limite basse du contenu (le pied commence après)
   let y = cadrePost(ctx, "Date à retenir", { etiquette: "rouge" }); // 190
   y += 6;
+  // Sans citation de presse (date d'agenda), le bloc est descendu pour ne pas laisser la moitié basse vide
+  const decal = s.citation ? 0 : Math.max(0, Math.round((bas - y - 760) * 0.45));
+  ctx.save(); ctx.translate(0, decal);
   const jour = String(s.jour), mois = String(s.mois).toUpperCase();
   // le jour, géant
   const T = 350, ls = -T * 0.04;
@@ -67,6 +70,7 @@ async function postDate(ctx, s){
   let x = marge;
   for(const t of [s.semaine, s.annee && String(s.annee)].filter(Boolean)) x = puce(ctx, t, x, y);
   y += 56 + 30;
+  ctx.restore();
   // citation de presse, en carte crème, avec le nom du média
   if(s.citation){
     const ct = 34, hc = Math.min(bas - y, 2 * 28 + storyHauteur(ctx, `« ${s.citation} »`, { taille: ct, poids: 600, police: "Newsreader", largeur: LARG - 64, max: 4, interligne: 1.2 }) + 44);
@@ -76,7 +80,7 @@ async function postDate(ctx, s){
       gras(ctx, s.media ? `— ${s.media}` : "", marge + 32, y + hc - 22, { taille: 24, couleur: STORY.pale });
     }
   }
-  pied(ctx, "Date annoncée par la presse. L'ordre du jour peut changer.", "Ne rien rater");
+  pied(ctx, s.agenda ? "Date relevée auprès de la source. Le programme peut changer." : "Date annoncée par la presse. L'ordre du jour peut changer.", "Ne rien rater");
 }
 
 /* ---------- Post « loi adoptée / rejetée » ---------- */
