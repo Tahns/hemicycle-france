@@ -11,7 +11,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 ## Ce que le script respecte (sans réglage)
 
 - une seule publication par passage ; 4 stories et 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; au moins 60 min entre deux publications (voir « Posts » pour l'annonce d'un post) ;
-- une story préparée depuis plus de 3 h est marquée « périmée » et n'est jamais publiée ;
+- une story préparée depuis plus de 6 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ; l'intention est écrite au registre (« en-cours ») AVANT l'appel `media_publish` ; si la réponse est perdue
   (timeout, erreur 5xx, coupure) ou si l'exécution est interrompue, le script cherche la publication côté Instagram (`/stories` ou `/media`) : retrouvée, elle est inscrite « publiee » ;
   sinon elle est marquée « incertaine », comptée dans les plafonds, **jamais rejouée**, et l'exécution se termine en erreur (code 1) : vérifiez alors le compte Instagram ;
@@ -47,7 +47,7 @@ Deux cas seulement deviennent des **posts** (image de fil 4:5, 1080 × 1350, ave
 
 Chaque post est **suivi d'une story d'annonce** (« Nouveau post », titre court, miniature du post, « → @hemicyclefrance », 1080 × 1920,
 même direction artistique bleue). L'API officielle ne permet pas de repartager un post en story : c'est donc une image d'annonce générée en même temps
-que le post (`instagram/auto/<id>.jpg`), publiée **au plus tôt 5 min après le post** (donc au passage suivant du workflow) et **au plus tard 3 h après**.
+que le post (`instagram/auto/<id>.jpg`), publiée **au plus tôt 5 min après le post** (donc au passage suivant du workflow) et **au plus tard 6 h après**.
 
 Entrées de `data/instagram-file.json` : `type: "story"` (1080 × 1920) ou `type: "post"` (1080 × 1350, champ `legende` en français : titre, 2 ou 3 lignes
 factuelles, source citée, `@hemicyclefrance`, quelques hashtags, **jamais le lien du site**). La story d'annonce est une entrée `story` avec le champ `annonceDe`
@@ -57,7 +57,7 @@ factuelles, source citée, `@hemicyclefrance`, quelques hashtags, **jamais le li
 Règles propres aux posts (en plus de celles ci-dessus) :
 
 - **2 posts par jour au maximum** ; le plafond de 4 stories par jour est inchangé et ne compte ni les posts ni les stories d'annonce ;
-- un post non publié depuis plus de **12 h** est périmé (3 h pour une story) ; son annonce l'est alors aussi ;
+- un post non publié depuis plus de **12 h** est périmé (6 h pour une story) ; son annonce l'est alors aussi ;
 - espacement : 60 min entre deux publications, **sauf** la story d'annonce d'un post, qui peut sortir 5 min après CE post (c'est l'unique exception) ;
 - légende contrôlée avant envoi : 20 à 2 200 caractères, 30 hashtags au plus, le compte cité, aucun lien du site ; sinon le post n'est pas publié ;
 - monétisation : le post de loi (données officielles) reste possible, le post « date » (tiré de la presse) et son annonce sont retirés ;
@@ -136,7 +136,7 @@ Le texte est **fabriqué par règles**, jamais écrit librement ni recopié d'un
 - pied : `Sources : <médias> (articles du <date>)` et, dès qu'une procédure pénale est en jeu, « Toute personne citée est présumée innocente tant qu'elle n'a pas été jugée définitivement » ;
 - jamais « procédure en cours » sans juridiction ; le titre de presse reste seulement dans le champ `sujets` de l'entrée (détection des doublons).
 
-L'entrée va dans la file comme n'importe quelle story (champ `sensible: 1`) : mêmes règles de publication (7 h – 23 h, 60 min, registre sans doublon, plafond de stories, 3 h de fraîcheur).
+L'entrée va dans la file comme n'importe quelle story (champ `sensible: 1`) : mêmes règles de publication (7 h – 23 h, 60 min, registre sans doublon, plafond de stories, 6 h de fraîcheur).
 Si `validationHumaine` vaut `true`, le niveau 1 devient lui aussi un brouillon.
 
 ### Niveau 2 : tout le reste, jamais d'envoi automatique
@@ -156,7 +156,7 @@ Chaque brouillon est listé dans le **résumé de l'exécution** (onglet Actions
 1. GitHub > dépôt `Tahns/hemicycle-france` > onglet **Actions**. Ouvrir la dernière exécution « Actualités » (ou « Mise à jour des données ») : le **résumé** (en bas de la page) donne la ligne « Brouillon SENSIBLE à valider », l'identifiant (12 caractères) et les sources.
 2. Relire l'image : dépôt > `instagram/brouillons/<id>.jpg` (et le lien de l'article cité).
 3. Onglet **Actions** > à gauche **« Valider un brouillon »** > bouton **Run workflow** > champ **id** : coller l'identifiant > champ **action** : **publier** ou **rejeter** > **Run workflow**.
-   - **publier** : le brouillon entre dans la file ; « Publier les stories » le sort à son prochain passage (7 h – 23 h, 60 min d'écart, registre sans doublon, plafonds) ; une story non sortie dans les 3 h est périmée.
+   - **publier** : le brouillon entre dans la file ; « Publier les stories » le sort à son prochain passage (7 h – 23 h, 60 min d'écart, registre sans doublon, plafonds) ; une story non sortie dans les 6 h est périmée.
      Une story ne se valide qu'entre 7 h et 21 h (heure de Paris) ; un brouillon de plus de 48 h est refusé ; un sondage est refusé pendant la réserve électorale ; en monétisation, aucune presse.
    - **rejeter** : le brouillon est supprimé et le sujet n'est pas reproposé pendant 7 jours (`data/instagram-rejetes.json`). Par défaut, le menu propose « rejeter » : il faut choisir « publier » volontairement.
 4. Le résumé de l'exécution dit ce qui s'est passé ; un refus est en rouge avec sa raison.
@@ -225,7 +225,7 @@ GitHub masque ensuite ces valeurs ; le script ne les affiche jamais.
 1. **Essai à sec** : onglet **Actions** > « Publier les stories » > Run workflow. Pour tester sans rien envoyer, lancez en local `IG_USER_ID=... IG_ACCESS_TOKEN=... node scripts/publier-stories.cjs --a-sec`
    (le script contrôle le jeton, l'image et les garde-fous, dit ce qu'il publierait, mais n'envoie ni n'écrit rien).
 2. **Vrai essai** : onglet Actions > « Publier les stories » > **Run workflow** (`workflow_dispatch`). Ouvrez l'exécution : le **résumé** indique « Story publiée » ou la raison de l'attente (nuit, plafond, rien de frais…).
-   Il faut une story récente (moins de 3 h) dans la file pour que quelque chose parte ; sinon « rien à publier » est normal.
+   Il faut une story récente (moins de 6 h) dans la file pour que quelque chose parte ; sinon « rien à publier » est normal.
 3. Ensuite, le workflow tourne seul (toutes les 15 minutes et après chaque relevé d'actualités). Le registre `data/instagram-publiees.json` est committé après chaque publication.
 
 Les alertes apparaissent dans le résumé de l'exécution. Un **jeton invalide ou expiré**, un registre ou une configuration illisibles, une publication « incertaine » font sortir le script en **code 1** : l'exécution est rouge et GitHub envoie un e-mail

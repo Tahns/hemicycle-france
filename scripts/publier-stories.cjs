@@ -16,7 +16,7 @@
  *  - POST (entrée { type: "post", legende }) : image de fil + légende (POST /media {image_url, caption}), légende contrôlée (2 200 caractères, 30 hashtags, jamais le lien du site) ;
  *    STORY D'ANNONCE (entrée { annonceDe: id du post }) : publiée seulement APRÈS son post, au plus tôt 5 min après (seule exception aux 60 min), au plus tard 3 h après ;
  *    elle ne compte pas dans les 4 stories par jour ;
- *  - une story créée il y a plus de 3 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
+ *  - une story créée il y a plus de 6 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
  *  - jamais deux fois le même id (registre) ;
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
  *  - SUJETS SENSIBLES (scripts/sujets-sensibles.cjs) : une entrée { sensible: 1 } (fait judiciaire établi) n'est publiée que si son texte passe encore formulationSure
@@ -64,7 +64,7 @@ const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
 const ESPACEMENT_ANNONCE_MIN = 5; // une story d'annonce sort au plus tôt 5 min après son post (seule exception à l'espacement de 60 min)
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
 const ESPACEMENT_MIN = 60; // minutes minimum entre deux stories publiées (jamais d'enchaînement)
-const FRAICHEUR_H = 3;
+const FRAICHEUR_H = 6; // une story non publiée depuis plus de 6 h est périmée (avec 1 publication par heure, 3 h laissait périmer trop de stories)
 const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;
 const ESSAIS_STATUT = 20;

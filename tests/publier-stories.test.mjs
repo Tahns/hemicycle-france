@@ -121,9 +121,9 @@ try {
     assert.strictEqual(publications().length, 0);
     assert.match(r.sortie, /moins de 60 min/);
   }
-  // Entrée périmée (> 3 h) : marquée « perimee », jamais publiée
+  // Entrée périmée (> 6 h) : marquée « perimee », jamais publiée
   {
-    const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(3.5))] });
+    const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(6.5))] });
     assert.strictEqual(publications().length, 0);
     assert.strictEqual(r.registre.entrees.find((x) => x.id === "dddddddddddd").statut, "perimee");
   }
@@ -261,17 +261,17 @@ try {
     // l'annonce passe avant une autre story en attente
     await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 10 / 60, { type: "post" })] } });
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
-    // 60 min plus tard, le registre n'a plus d'exception mais l'annonce reste publiable (moins de 3 h)
+    // 60 min plus tard, le registre n'a plus d'exception mais l'annonce reste publiable (moins de 6 h)
     await lancer({ entrees: file, registre: { entrees: [regPub(P1, 1.5, { type: "post" })] } });
     assert.strictEqual(publications().length, 1);
     // une annonce n'est publiée qu'une fois
     await lancer({ entrees: file, registre: { entrees: [regPub(P1, 0.2, { type: "post" }), regPub(A1, 0.1, { annonceDe: P1 })] } });
     assert.strictEqual(publications().length, 0, "annonce déjà publiée");
   }
-  // Annonce périmée : post publié il y a plus de 3 h, ou post périmé
+  // Annonce périmée : post publié il y a plus de 6 h, ou post périmé
   {
     const file = [postE(P1, il_y_a(5)), annonceE(A1, il_y_a(5), P1)];
-    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 4, { type: "post" })] } });
+    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 7, { type: "post" })] } });
     assert.strictEqual(publications().length, 0);
     assert.strictEqual(r.registre.entrees.find((x) => x.id === A1).statut, "perimee");
     const r2 = await lancer({ entrees: file, registre: { entrees: [{ id: P1, statut: "perimee", publieLe: null, mediaId: null, type: "post" }] } });
@@ -282,7 +282,7 @@ try {
     assert.strictEqual(publications().length, 0);
     assert.deepStrictEqual(r3.registre.entrees.map((x) => [x.id, x.statut, x.type]).sort(), [[A1, "perimee", "story"], [P1, "perimee", "post"]].sort());
   }
-  // Un post reste publiable 12 h (une story, 3 h)
+  // Un post reste publiable 12 h (une story, 6 h)
   {
     await lancer({ entrees: [postE(P1, il_y_a(8))] });
     assert.strictEqual(publications().length, 1, "post de 8 h : publié");
