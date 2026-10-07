@@ -1,34 +1,27 @@
 # Les stories à la une (Highlights) d'@hemicyclefrance
 
 **Ce qui est automatique, ce qui ne l'est pas.** L'API Instagram ne permet ni de créer une « à la une » ni d'y ajouter une story :
-cela se fait **à la main, dans l'appli**. Le dépôt prépare tout le reste : 14 couvertures aux couleurs du site, une règle de classement
+cela se fait **à la main, dans l'appli**. Le dépôt prépare tout le reste : 8 couvertures aux couleurs du site, une règle de classement
 simple, et chaque dimanche une liste « à ajouter cette semaine » (voir la fin de ce guide). Comptez 2 minutes par une, une seule fois ;
 ensuite, 2 minutes par semaine.
 
 ## 1. Les couvertures
 
-Les 14 couvertures (1080 × 1920 PNG, fond bleu, disque rouge, icône et mot court centrés) sont dans `instagram/a-la-une/`.
+Les 8 couvertures (1080 × 1920 PNG, fond bleu, disque rouge, icône et mot court centrés) sont dans `instagram/a-la-une/`.
 Aperçu de l'ensemble, tel qu'Instagram les recadre en cercle : `instagram/a-la-une/planche.png`.
 
 | Ordre | Fichier | Nom à saisir | Ce qu'on y range |
 |---|---|---|---|
-| 1 | `politique.png` | Politique | actualité politique du jour, dossiers du moment |
-| 2 | `parlement.png` | Parlement | Assemblée, Sénat, textes en discussion, votes |
-| 3 | `gouvernement.png` | Gouvernement | Premier ministre, ministres, remaniements |
-| 4 | `elysee.png` | Élysée | Président de la République, Conseil des ministres |
-| 5 | `presidentielle.png` | 2027 | présidentielle : candidatures, primaires, calendrier |
-| 6 | `sondages.png` | Sondages | sondages d'intentions de vote et de popularité |
-| 7 | `economie.png` | Économie | emploi, prix, énergie, croissance |
-| 8 | `budget.png` | Budget | budget de l'État, Sécurité sociale, impôts, dette |
-| 9 | `justice.png` | Justice | décisions et institutions judiciaires (faits seulement) |
-| 10 | `europe.png` | Europe | Union européenne, international |
-| 11 | `comprendre.png` | Comprendre | explications : comment ça marche, jargon |
-| 12 | `quiz.png` | Quiz | quiz et jeux de connaissances |
-| 13 | `resultats.png` | Résultats | lois adoptées ou rejetées, résultats de scrutins |
-| 14 | `agenda.png` | Agenda | dates à retenir : séances, élections, rendez-vous |
+| 1 | `actu.png` | Actualité | l'actualité politique : gouvernement, Élysée, justice, international (faits seulement) |
+| 2 | `presidentielle.png` | 2027 | présidentielle : candidatures, primaires, calendrier |
+| 3 | `sondages.png` | Sondages | sondages d'intentions de vote et de popularité |
+| 4 | `elus.png` | Élus et votes | députés, sénateurs, lois votées : adoptées ou rejetées |
+| 5 | `argent.png` | Argent public | budget de l'État, impôts, dette, Sécurité sociale |
+| 6 | `comprendre.png` | Comprendre | explications : comment ça marche, jargon |
+| 7 | `quiz.png` | Quiz | quiz et jeux de connaissances |
+| 8 | `agenda.png` | Agenda | dates à retenir : séances, élections, rendez-vous |
 
-**Ordre conseillé sur le profil** : Politique, Parlement, Gouvernement, Élysée, 2027, Sondages en tête (le cœur du site),
-puis Économie, Budget, Justice, Europe, et en fin de rangée Comprendre, Quiz, Résultats, Agenda.
+**Ordre conseillé sur le profil** : celui du tableau (l'actualité et la présidentielle en tête, puis le cœur du site).
 Pour changer l'ordre sur le profil, faites un appui long sur une une puis déplacez-la (selon la version de l'appli) ; sinon, créez-les dans l'ordre du tableau.
 
 Les noms font 12 caractères au plus. Si Instagram en coupe un sous le cercle (« Gouvernement » est le plus long), abrégez-le dans le titre : la couverture, elle, reste complète.

@@ -29,14 +29,14 @@ const plat = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toL
 
 /** Thème d'illustration d'un sujet (data/actualites.json, illustration.theme) -> rubrique. « politique » (thème générique) : null. */
 const THEME_VERS_RUBRIQUE = {
-  assemblee: "parlement",
-  senat: "parlement",
-  gouvernement: "gouvernement",
-  budget: "budget",
-  justice: "justice",
+  assemblee: "elus",
+  senat: "elus",
+  gouvernement: "actu",
+  budget: "argent",
+  justice: "actu",
   election: "presidentielle",
-  international: "europe",
-  securite: "politique",
+  international: "actu",
+  securite: "actu",
   politique: null,
 };
 
@@ -50,16 +50,12 @@ function rubriqueDepuisTheme(theme) {
 const MOTS_TITRE = [
   ["sondages", /sondage|intentions? de vote|barometre|popularite/],
   ["quiz", /\bquiz\b/],
-  ["resultats", /\b(adopte[es]?|rejete[es]?|adoption definitive|vote final)\b/],
+  ["elus", /\b(adopte[es]?|rejete[es]?|adoption definitive|vote final)\b/],
   ["agenda", /date a retenir|a retenir|a noter|agenda|ordre du jour|rendez-vous/],
   ["presidentielle", /presidentielle|primaire|candidat/],
-  ["budget", /budget|deficit|\bdette\b|impot|fiscal|taxe|finances publiques|retraite|securite sociale|\bplf\b/],
-  ["justice", /justice|proces|tribunal|parquet|condamn|mis en examen|cour de cassation|conseil constitutionnel|\bjuge|\bplainte/],
-  ["europe", /europe|\bue\b|bruxelles|otan|ukraine|\bg7\b|diplomat|etats-unis|trump|russie|chine|israel|gaza|bresil|international/],
-  ["economie", /economi|emploi|chomage|inflation|\bprix\b|carburant|gazole|energie|croissance|entreprise|salaire|pouvoir d'achat|industrie|pompe/],
-  ["elysee", /elysee|president de la republique|conseil des ministres/],
-  ["gouvernement", /gouvernement|ministre|matignon|remaniement/],
-  ["parlement", /assemblee|senat|depute|senateur|hemicycle|motion de censure|49\.3|amendement|proposition de loi|projet de loi|commission d'enquete|\bloi\b/],
+  ["argent", /budget|deficit|\bdette\b|impot|fiscal|taxe|finances publiques|retraite|securite sociale|\bplf\b/],
+  ["elus", /assemblee|senat|depute|senateur|hemicycle|motion de censure|49\.3|amendement|proposition de loi|projet de loi|commission d'enquete|\bloi\b/],
+  ["actu", /justice|proces|tribunal|parquet|condamn|mis en examen|cour de cassation|conseil constitutionnel|\bjuge|\bplainte|europe|\bue\b|bruxelles|otan|ukraine|\bg7\b|diplomat|etats-unis|trump|russie|chine|israel|gaza|bresil|international|economi|emploi|chomage|inflation|\bprix\b|carburant|gazole|energie|croissance|entreprise|salaire|pouvoir d'achat|industrie|pompe|elysee|president de la republique|conseil des ministres|gouvernement|ministre|matignon|remaniement/],
   ["presidentielle", /\b2027\b/],
   ["comprendre", /^comprendre|c'est quoi|ce qu'il faut savoir|explique[rz]?\b/],
 ];
@@ -75,12 +71,12 @@ function rubriqueDepuisTitre(titre) {
 /** Rubrique d'après le type de la publication (identifiant, type de file, titre) : id de rubrique ou null. */
 function rubriqueDepuisType({ id, type, titre, dossierId }) {
   const i = plat(id), t = plat(titre);
-  if (type === "post") return /adopte|rejete/.test(t) || /^loi/.test(i) ? "resultats" : "agenda";
+  if (type === "post") return /adopte|rejete/.test(t) || /^loi/.test(i) ? "elus" : "agenda";
   if (/^date-a-retenir/.test(i)) return "agenda";
   if (/^sondage/.test(i) || /^sondage\b/.test(t)) return "sondages";
   if (/^quiz/.test(i)) return "quiz";
   if (/^(probabilites|simulation)/.test(i) || /simulation/.test(t)) return "presidentielle";
-  if (/^(scrutin|senat-)/.test(i) && /adopte|rejete/.test(t)) return "resultats";
+  if (/^(scrutin|senat-)/.test(i) && /adopte|rejete/.test(t)) return "elus";
   return null;
 }
 
@@ -95,11 +91,11 @@ function recommander(pub, theme) {
   if (parType) return fin(parType, "type", "haute");
   const parTitre = rubriqueDepuisTitre(pub.titre);
   // Un titre qui dit explicitement sondage / quiz / résultat / date l'emporte sur le thème du sujet
-  if (parTitre && ["sondages", "quiz", "resultats", "agenda"].includes(parTitre)) return fin(parTitre, "titre", "haute");
+  if (parTitre && ["sondages", "quiz", "elus", "agenda"].includes(parTitre)) return fin(parTitre, "titre", "haute");
   const parTheme = rubriqueDepuisTheme(theme);
   if (parTheme) return fin(parTheme, "theme", "haute");
   if (parTitre) return fin(parTitre, "titre", "moyenne");
-  return fin("politique", "defaut", "faible");
+  return fin("actu", "defaut", "faible");
 }
 
 /** Index « titre normalisé -> thème » depuis data/actualites.json (articles des sujets) et « id de dossier -> thème » (le plus fréquent). */

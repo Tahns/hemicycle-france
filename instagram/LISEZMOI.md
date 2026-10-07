@@ -15,7 +15,7 @@ Sondages 2027 · Actus sourcées
 Données officielles, chaque heure
 ```
 
-- **À la une** : 14 couvertures 1080×1920 dans `a-la-une/` (aperçu : `a-la-une/planche.png`, rendu : `scripts/couvertures-a-la-une.cjs`), guide pas à pas et règle de classement dans `docs/A-LA-UNE.md`, liste hebdomadaire « à ajouter » dans `docs/a-la-une-semaine.md`. Création et ajout restent manuels (l'API Instagram ne les permet pas). Les anciennes `rubrique-*.png` restent pour mémoire.
+- **À la une** : 8 couvertures 1080×1920 dans `a-la-une/` (aperçu : `a-la-une/planche.png`, rendu : `scripts/couvertures-a-la-une.cjs`), guide pas à pas et règle de classement dans `docs/A-LA-UNE.md`, liste hebdomadaire « à ajouter » dans `docs/a-la-une-semaine.md`. Création et ajout restent manuels (l'API Instagram ne les permet pas). Les anciennes `rubrique-*.png` restent pour mémoire.
 
 ## Publications automatiques (`instagram/auto/`)
 
