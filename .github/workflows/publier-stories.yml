@@ -28,6 +28,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 50
+      # Repartir de l'état le plus récent de la branche (et non du SHA de l'événement) : un passage resté en file pendant qu'un autre publiait
+      # repartirait sinon avec l'ANCIEN registre et republierait l'entrée déjà sortie.
+      - name: Se placer sur l'état le plus récent de la branche
+        run: |
+          git fetch --depth=50 origin "${GITHUB_REF_NAME:-main}"
+          git reset --hard "origin/${GITHUB_REF_NAME:-main}"
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
@@ -41,3 +47,10 @@ jobs:
       - name: Committer le registre des publications
         if: always()
         run: scripts/commit-push.sh "Stories publiées ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-publiees.json
+      # Si le push du registre a échoué (la publication, elle, a eu lieu) : nouvel essai après une pause ; le job reste en ÉCHEC visible dans tous les cas où le registre n'est pas poussé
+      - name: Nouvel essai du push du registre
+        if: failure()
+        run: |
+          sleep 30
+          git fetch origin "${GITHUB_REF_NAME:-main}"
+          scripts/commit-push.sh "Stories publiées, registre (reprise $(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-publiees.json

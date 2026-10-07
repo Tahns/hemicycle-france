@@ -326,6 +326,49 @@ try {
     await lancer({ entrees: [postE("c4c4c4c4c4c4", il_y_a(1), { titre: "Projet de loi de programmation militaire", titrePropre: "Programmation militaire" })], registre: { entrees: [regPub(P1, 20, { type: "post", titre: "Simplification de la vie économique" })] } });
     assert.strictEqual(publications().length, 1, "autre loi : publiée");
   }
+  // Fenêtre de 7 jours autour des posts et annonces : même dateIso + titres proches (post, annonce, story date/rappel) ; story de presse proche ; exemptions : annonce de SON post
+  {
+    const D = "2026-10-20";
+    const pubPost = (h, extra = {}) => regPub(P1, h, { type: "post", titre: "Simplification de la vie économique", dateIso: D, ...extra });
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "post même date, titre proche, publié il y a 100 h : refusé");
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: "2026-11-02" })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 1, "date différente : publié");
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: D })], registre: { entrees: [pubPost(24 * 8)] } });
+    assert.strictEqual(publications().length, 1, "plus de 7 jours : possible");
+    // story « date » et « rappel » : jamais exemptées
+    await lancer({ entrees: [annonceE("c6c6c6c6c6c6", il_y_a(1), "zzzzzzzzzzzz", { annonceDe: undefined, rappelDe: P1, dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "story rappel même date : refusée");
+    await lancer({ entrees: [annonceE("c6c6c6c6c6c6", il_y_a(1), "zzzzzzzzzzzz", { annonceDe: undefined, modele: "date", dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "story date même date : refusée");
+    // annonce d'un AUTRE post de même date et de titre proche : refusée ; annonce de SON post : publiée
+    await lancer({ entrees: [annonceE("c7c7c7c7c7c7", il_y_a(1), "d9d9d9d9d9d9", { dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "annonce d'un autre post déjà annoncé : refusée");
+    await lancer({ entrees: [annonceE("c7c7c7c7c7c7", il_y_a(1), P1, { dateIso: D })], registre: { entrees: [pubPost(4)] } });
+    assert.strictEqual(publications().length, 1, "annonce de son propre post : exemptée");
+    // story de presse proche d'un post publié il y a 5 jours : refusée ; à 8 jours : publiée
+    const presse = entree("c8c8c8c8c8c8", il_y_a(1), { titre: "Simplification de la vie économique : le texte adopté", titrePropre: "Simplification de la vie économique" });
+    await lancer({ entrees: [presse], registre: { entrees: [pubPost(24 * 5)] } });
+    assert.strictEqual(publications().length, 0, "story de presse proche d'un post de 5 jours : refusée");
+    await lancer({ entrees: [presse], registre: { entrees: [pubPost(24 * 8)] } });
+    assert.strictEqual(publications().length, 1, "post de 8 jours : publiée");
+    // une story de presse ordinaire d'il y a 5 jours ne bloque pas (reste à 36 h)
+    await lancer({ entrees: [presse], registre: { entrees: [regPub("e1e1e1e1e1e1", 24 * 5, { type: "story", titre: "Simplification de la vie économique" })] } });
+    assert.strictEqual(publications().length, 1, "story ordinaire de 5 jours : fenêtre de 36 h seulement");
+  }
+  // Garde sur le registre distant (origin/main) : un id déjà inscrit là-bas n'est jamais republié, même si la copie locale l'ignore
+  {
+    const d = mkdtempSync(join(tmpdir(), "distant-"));
+    const distant = join(d, "distant.json");
+    writeFileSync(distant, JSON.stringify({ entrees: [{ id: "aaaaaaaaaaaa", statut: "publiee", publieLe: il_y_a(0.2), mediaId: "MX", type: "story", titre: "Budget" }] }));
+    const r = await lancer({ entrees: [frais], registre: { entrees: [] }, env: { PUBLIER_REGISTRE_DISTANT: distant } });
+    assert.strictEqual(publications().length, 0, "id présent au registre distant : refusé");
+    assert.strictEqual(r.registre.entrees.filter((x) => x.id === "aaaaaaaaaaaa").length, 1, "repris une seule fois");
+    // fichier distant illisible : sans effet, la publication suit le registre local
+    writeFileSync(distant, "{pas du json");
+    await lancer({ entrees: [frais], registre: { entrees: [] }, env: { PUBLIER_REGISTRE_DISTANT: distant } });
+    assert.strictEqual(publications().length, 1, "registre distant illisible : garde sans effet");
+  }
   // Réserve électorale, monétisation, validation humaine, mots à risque, légende invalide
   {
     const reserve = "2027-04-17T10:00:00Z";

@@ -528,12 +528,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(AUTO.titresProches("Blocage des lycées", "Blocus des lycées"));
   assert.ok(AUTO.titresProches("Primaire de la gauche", "Primaire de la gauche"));
   assert.ok(!AUTO.titresProches("Primaire de la gauche", "Budget de la Défense"));
-  // Un sujet proche d'une story des dernières 24 h ne repasse pas (même avec un titre de presse différent) ; au-delà de 24 h, oui
+  // Un sujet proche d'une story des dernières 72 h ne repasse pas (même avec un titre de presse différent) ; au-delà de 72 h, oui
   {
     const s = sujet(T, 4, { titrePropre: { titre: "Blocus des lycées", origine: "recoupement" } });
     const recente = { id: "a".repeat(12), cree: il_y_a(5), titre: "autre titre de presse", titrePropre: "Blocage des lycées", sources: [] };
     assert.ok(choix([s], { file: { entrees: [recente] } }).refus, "doublon proche : refusé");
-    assert.strictEqual(choix([s], { file: { entrees: [{ ...recente, cree: il_y_a(30) }] } }).indice, 0, "plus de 24 h : de nouveau possible");
+    assert.ok(choix([s], { file: { entrees: [{ ...recente, cree: il_y_a(30) }] } }).refus, "30 h : toujours refusé (fenêtre de 72 h)");
+    assert.strictEqual(choix([s], { file: { entrees: [{ ...recente, cree: il_y_a(80) }] } }).indice, 0, "plus de 72 h : de nouveau possible");
   }
   // « En bref » : un seul des deux sujets proches
   {
@@ -638,7 +639,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.ok(choix([dateSujet()], { file: { entrees: [post(id)] } }).refus, "id déjà en file");
     assert.ok(choix([dateSujet()], { registre: { entrees: [{ id, statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "x" }] } }).refus, "id déjà au registre");
     assert.ok(choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(30), type: "post", titre: "Loi casseurs-payeurs au Sénat" }] } }).refus, "titre proche publié il y a 30 h");
-    assert.ok(!choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-30" }] } }).refus, "plus de 36 h et autre date : possible");
+    assert.ok(!choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(100), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-11-20" }] } }).refus, "plus de 72 h et autre date (> 3 jours) : possible");
+    assert.ok(choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-30" }] } }).refus, "même titre à 3 jours près : même événement");
     assert.ok(choix([dateSujet()], { registre: { entrees: [{ id: "c".repeat(12), statut: "publiee", publieLe: il_y_a(40), type: "post", titre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-27" }] } }).refus, "même date et même sujet, quel que soit le délai");
     assert.ok(choix([dateSujet()], { file: { entrees: [post("d".repeat(12), { cree: il_y_a(40), titrePropre: "Loi casseurs-payeurs au Sénat", dateIso: "2026-10-27" })] } }).refus, "même date et même sujet en file");
   }
@@ -1017,6 +1019,65 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(ra([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
   assert.ok(ra([ev()], { now: new Date("2026-10-21T22:30:00Z") }).refus, "nuit : rien");
   assert.strictEqual(choisir({ actualites: null, direct: null, sondages: sond(), meetings: { meetings: [ev()] }, file: { entrees: annonce }, now: matin }).modele, "rappel-agenda", "choisir() retient le rappel");
+}
+
+// ---- Doublons : fenêtre de 72 h (file ET registre), liens d'articles, synonymes, événements datés ----
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const hs = (x) => createRequire(import.meta.url)("crypto").createHash("sha1").update(x).digest("hex").slice(0, 12);
+  // (D) synonymes et sigles : même sujet reconnu
+  assert.ok(A.titresProches("Le RN tient son congrès à Perpignan le 24 octobre", "XIXᵉ congrès du Rassemblement National"));
+  assert.ok(A.titresProches("Présidentielle : la primaire de la gauche se précise", "Élection présidentielle : primaire à gauche"));
+  assert.ok(A.titresProches("Le PLF 2027 présenté en Conseil des ministres", "Projet de loi de finances 2027 : le gouvernement dévoile son texte"));
+  assert.ok(A.titresProches("LFI organise ses journées d'été à Valence", "La France insoumise : journées d'été à Valence"));
+  // (D) sujets différents non confondus (le sigle, le parti ou l'institution seuls ne suffisent pas)
+  assert.ok(!A.titresProches("Le RN tient son congrès à Perpignan", "Le RN critique le budget du gouvernement"));
+  assert.ok(!A.titresProches("Le PS vote le budget de la Sécurité sociale", "Le PS choisit son candidat à la présidentielle"));
+  assert.ok(!A.titresProches("LFI dépose une motion de censure", "La France insoumise présente son programme agricole"));
+  assert.ok(!A.titresProches("Vote du budget à l'AN cette semaine", "Réforme des retraites : l'Assemblée nationale divisée"));
+  assert.ok(!A.titresProches("Congrès du Rassemblement National à Perpignan", "Congrès des maires de France à Paris"));
+  assert.ok(!A.titresProches("Il y a un an, la dissolution", "Le budget de l'État pour un an"), "« an » minuscule n'est pas « Assemblée nationale »");
+  // (A) registre : un sujet de presse publié il y a 40 h (registre seul) ne revient pas ; 80 h : oui
+  const T = "Le Rassemblement National tient son congrès à Perpignan en octobre";
+  const s = sujet(T, 4, { titrePropre: { titre: "Congrès du RN à Perpignan", origine: "recoupement" } });
+  const reg = (h, extra = {}) => ({ entrees: [{ id: "b".repeat(12), statut: "publiee", publieLe: il_y_a(h), titre: "XIXᵉ congrès du Rassemblement National", ...extra }] });
+  assert.ok(choix([s], { registre: reg(40) }).refus, "registre 40 h : refusé");
+  assert.strictEqual(choix([s], { registre: reg(80) }).indice, 0, "registre 80 h : possible");
+  // (A) mêmes liens d'articles (premier titre changé) : refusé, dans la file comme dans le registre
+  const memeLien = { sources: [s.articles[1].url] };
+  assert.ok(choix([s], { file: { entrees: [{ id: "c".repeat(12), cree: il_y_a(60), titre: "Tout autre titre", ...memeLien }] } }).refus, "lien déjà publié (file)");
+  assert.ok(choix([s], { registre: reg(60, { titre: "Tout autre titre", ...memeLien }) }).refus, "lien déjà publié (registre)");
+  // (C) événement daté : post-date refusé si le même événement, daté à un jour près, est déjà publié (story « date », rappel ou post)
+  const sd = (iso) => sujet("Le Rassemblement National tient son congrès à Perpignan", 4, { date: { iso, jour: "24", mois: "octobre" }, titrePropre: { titre: "Congrès du RN à Perpignan", origine: "recoupement" } });
+  const dejaDate = (type, dateIso, h = 200) => ({ entrees: [{ id: "d".repeat(12), statut: "publiee", publieLe: il_y_a(h), type, titre: "XIXᵉ congrès du Rassemblement National", dateIso }] });
+  assert.strictEqual(choix([sd("2026-12-10")]).modele, "post-date", "témoin : post-date");
+  assert.ok(choix([sd("2026-12-10")], { registre: dejaDate("post", "2026-12-10") }).refus, "même date : refusé");
+  assert.ok(choix([sd("2026-12-10")], { registre: dejaDate("post", "2026-12-11") }).refus, "date à un jour près : refusé");
+  assert.ok(choix([sd("2026-12-10")], { registre: dejaDate("story", "2026-12-09") }).refus, "story/rappel daté : refusé aussi");
+  assert.ok(choix([sd("2026-12-10")], { registre: dejaDate("post", "2027-02-20") }).modele, "autre date, autre événement : possible");
+  // (C) même titre exact à +/- 3 jours = même événement ; titres différents à 3 jours : pas confondus
+  const exact = { entrees: [{ id: "e".repeat(12), statut: "publiee", publieLe: il_y_a(200), type: "post", titre: "Congrès du RN à Perpignan", dateIso: "2026-12-13" }] };
+  assert.ok(choix([sd("2026-12-10")], { registre: exact }).refus, "même titre à 3 jours : refusé");
+  const autre = { entrees: [{ id: "f".repeat(12), statut: "publiee", publieLe: il_y_a(200), type: "post", titre: "Journées parlementaires des écologistes", dateIso: "2026-12-11" }] };
+  assert.ok(choix([sd("2026-12-10")], { registre: autre }).modele, "autre événement proche en date : possible");
+  // Posts agenda : même contrôle (registre, date à un jour près)
+  const matinA = new Date("2026-10-07T08:30:00Z");
+  const evt = { debut: "2026-10-24", jour: "24", mois: "OCT.", titre: "XIXᵉ congrès du Rassemblement National", source: { nom: "franceinfo", url: "https://www.franceinfo.fr/x" }, verified: true };
+  const pa = (registre) => A.choisirPostAgenda({ meetings: { meetings: [evt] }, file: vide, registre, now: matinA });
+  assert.ok(!pa(null).refus, "témoin : post agenda");
+  assert.ok(pa({ entrees: [{ id: "a1".repeat(6), statut: "publiee", publieLe: "2026-09-20T08:00:00Z", type: "story", titre: "Le RN tient son congrès à Perpignan", dateIso: "2026-10-25" }] }).refus, "événement déjà publié (autre titre, J+1) : pas de post agenda");
+  // (B) rappel J-3 : refus si le même événement a déjà été publié (hors son propre post), ou si une story de presse proche existe sur 72 h
+  const matin = new Date("2026-10-21T08:30:00Z");
+  const ev = { debut: "2026-10-24", fin: "2026-10-25", jour: "24-25", mois: "OCT.", lieu: "Perpignan", titre: "XIXᵉ congrès du Rassemblement National", source: { nom: "franceinfo", url: "https://www.franceinfo.fr/x" }, verified: true };
+  const postId = hs("post-agenda|2026-10-24|XIXᵉ congrès du Rassemblement National");
+  const post = { id: postId, type: "post", cree: "2026-10-19T08:00:00Z", titre: ev.titre, titrePropre: ev.titre, dateIso: "2026-10-24" }; // post à J-5, dans la fenêtre de 72 h : ne bloque pas son propre rappel
+  const rap = (entrees, registre = null) => A.choisirRappelAgenda({ meetings: { meetings: [ev] }, file: { entrees }, registre, now: matin });
+  assert.ok(!rap([post]).refus, "témoin : rappel normal");
+  assert.ok(rap([post, { id: "9".repeat(12), type: "story", cree: "2026-10-20T08:00:00Z", titre: "x", titrePropre: "Le RN tient son congrès à Perpignan", dateIso: "2026-10-24", modele: "date" }]).refus, "story date déjà publiée (même dateIso, titre proche) : refusé");
+  assert.ok(rap([post], { entrees: [{ id: "8".repeat(12), statut: "publiee", publieLe: "2026-10-18T08:00:00Z", type: "post", titre: "Congrès du RN", dateIso: "2026-10-25" }] }).refus, "post du registre à un jour près : refusé");
+  assert.ok(rap([post, { id: "7".repeat(12), type: "story", cree: "2026-10-20T10:00:00Z", titre: "Le RN tient son congrès à Perpignan ce week-end", titrePropre: "Congrès du RN : ce qu'il faut savoir", sources: [] }]).refus, "story de presse proche des 72 h : refusé");
+  assert.ok(!rap([post, { id: "6".repeat(12), type: "story", cree: "2026-10-20T10:00:00Z", titre: "Le RN critique le budget", titrePropre: "Le RN critique le budget", sources: [] }]).refus, "story de presse sur un autre sujet du même parti : rappel possible");
+  assert.ok(!rap([post, { id: "5".repeat(12), type: "story", cree: "2026-10-10T10:00:00Z", titre: "Le RN tient son congrès", titrePropre: "Congrès du RN", sources: [] }]).refus, "story de presse de plus de 72 h : rappel possible");
 }
 
 console.log("stories-auto : tous les tests passent.");
