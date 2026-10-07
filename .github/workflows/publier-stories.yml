@@ -6,7 +6,7 @@ on:
     - cron: "11,41 5-21 * * *"
   # Après chaque relevé d'actualités : la story sort sans attendre le quart d'heure suivant
   workflow_run:
-    workflows: ["Actualités"]
+    workflows: ["Actualités", "Contenus récurrents"]
     types: [completed]
   workflow_dispatch:
     inputs:

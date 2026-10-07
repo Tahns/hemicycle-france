@@ -1174,7 +1174,7 @@ function decrirePost(choix, now) {
       champs: { donneesPropres: true, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, legende: f.legende, alt: f.alt } };
   }
   const s = choix.sujet, f = ficheDate(s, now), videos = liensVideo(s.articles);
-  return { titre: s.articles[0].titre, medias: sourcesDe_(s.articles), sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
+  return { titre: s.agenda ? f.titreCourt : s.articles[0].titre, medias: sourcesDe_(s.articles), sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
     champs: { titrePropre: f.titreCourt, postGenre: "date", dateIso: f.dateIso, legende: f.legende, alt: f.alt } };
 }
 /**
