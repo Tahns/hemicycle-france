@@ -114,12 +114,11 @@ try {
     assert.strictEqual(publications().length, 0);
     assert.match(r.sortie, /plafond/);
   }
-  // Espacement : une story publiée il y a moins d'une heure bloque la suivante
+  // Aucun espacement : une story publiée il y a 15 min ne bloque pas la suivante
   {
     const reg = { entrees: [{ id: "eeeeeeeeeeee", statut: "publiee", publieLe: il_y_a(0.25), mediaId: "m1" }] };
-    const r = await lancer({ entrees: [frais], registre: reg });
-    assert.strictEqual(publications().length, 0);
-    assert.match(r.sortie, /moins de 60 min/);
+    await lancer({ entrees: [frais], registre: reg });
+    assert.strictEqual(publications().length, 1, "pas d'espacement : la story sort");
   }
   // Entrée périmée (> 6 h) : marquée « perimee », jamais publiée
   {
@@ -243,8 +242,7 @@ try {
   {
     const file = [postE(P1, il_y_a(1)), annonceE(A1, il_y_a(1), P1)];
     const tot = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 3 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
-    assert.strictEqual(publications().length, 0, "post publié il y a 3 min : l'annonce attend");
-    assert.match(tot.sortie, /annonce en attente|moins de 60 min/);
+    assert.strictEqual(publications().length, 1, "aucun espacement : l'annonce sort dès que son post l'est");
     const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 6 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
     assert.strictEqual(publications().length, 1, "post publié il y a 6 min : l'annonce sort");
     assert.strictEqual(premier().media_type, "STORIES");
@@ -253,11 +251,6 @@ try {
     assert.strictEqual(e.annonceDe, P1);
     assert.strictEqual(e.type, "story");
     assert.match(r.resume, /Story d'annonce publiée/);
-    // la même fenêtre de 6 min bloque une story ordinaire (60 min) et un autre post
-    await lancer({ entrees: [frais], registre: { entrees: [regPub(P1, 6 / 60, { type: "post" })] } });
-    assert.strictEqual(publications().length, 0, "une story ordinaire reste soumise aux 60 min");
-    await lancer({ entrees: [postE("c2c2c2c2c2c2", il_y_a(1), { titre: "Autre loi sur l'énergie", titrePropre: "Prix de l'énergie" })], registre: { entrees: [regPub(P1, 6 / 60, { type: "post" })] } });
-    assert.strictEqual(publications().length, 0, "un autre post aussi");
     // l'annonce passe avant une autre story en attente
     await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 10 / 60, { type: "post" })] } });
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
@@ -454,9 +447,9 @@ try {
       assert.strictEqual(c[0].share_to_feed, "true");
       assert.deepStrictEqual(r.registre.entrees.filter((x) => x.id === R9).map((x) => [x.type, x.video, x.reelDe]), [["reel", true, P9]]);
       assert.match(r.resume, /Reel publié/);
-      // espacement de 60 min : post publié il y a 30 min, pas de Reel
+      // aucun espacement : le Reel sort même 30 min après son post
       await lancer({ entrees: file, config: V, registre: { entrees: [regPub(P9, 0.5, { type: "post" })] } });
-      assert.strictEqual(publications().length, 0, "moins de 60 min après la dernière publication");
+      assert.strictEqual(publications().length, 1, "pas d'espacement : le Reel sort");
       // vidéos désactivées : jamais de Reel
       await lancer({ entrees: file, config: { videos: false }, registre: { entrees: [regPub(P9, 2, { type: "post" })] } });
       assert.strictEqual(publications().length, 0, "videos false : pas de Reel");

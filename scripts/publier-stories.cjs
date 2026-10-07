@@ -61,9 +61,9 @@ const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.instagram.com/v21.0").replace(/\/+$/, "");
 const MAX_PAR_JOUR_DEFAUT = 4; // stories par jour (hors stories d'annonce de post) ; réglable par data/stories-config.json (« maxParJour », 1 à 99 ; 99 = pas de plafond)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
-const ESPACEMENT_ANNONCE_MIN = 5; // une story d'annonce sort au plus tôt 5 min après son post (seule exception à l'espacement de 60 min)
+const ESPACEMENT_ANNONCE_MIN = 0; // la story d'annonce peut sortir dès que son post est publié
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
-const ESPACEMENT_MIN = 60; // minutes minimum entre deux stories publiées (jamais d'enchaînement)
+const ESPACEMENT_MIN = 0; // aucun espacement : tout ce qui est à publier sort (au plus une publication par passage, un passage toutes les 15 min environ), de 7 h à 23 h
 const FRAICHEUR_H = 6; // une story non publiée depuis plus de 6 h est périmée (avec 1 publication par heure, 3 h laissait périmer trop de stories)
 const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;

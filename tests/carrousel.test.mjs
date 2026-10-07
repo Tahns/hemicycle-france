@@ -161,9 +161,9 @@ async function lancer({ entrees = [], registre = { entrees: [] }, config = { max
   // un sujet à mot prudent dans un contenu à créneau : jamais publié
   r = await lancer({ entrees: [{ ...s, sujets: ["Mise en examen d'un élu"] }] });
   assert.strictEqual(r.publies, 0);
-  // 60 min entre deux publications
+  // aucun espacement entre deux publications
   r = await lancer({ entrees: [s], registre: { entrees: [{ id: "eeeeeeeeeeee", statut: "publiee", publieLe: decale(-30), type: "story", mediaId: "x" }] } });
-  assert.strictEqual(r.publies, 0, "dernière publication il y a moins de 60 min");
+  assert.strictEqual(r.publies, 1, "aucun espacement : le carrousel sort");
   // jamais la nuit
   r = await lancer({ entrees: [s], now: "2026-10-13T21:30:00Z" });
   assert.strictEqual(r.publies, 0);
