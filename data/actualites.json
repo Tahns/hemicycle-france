@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T08:40:52.670Z",
+ "lastUpdated": "2026-10-07T08:45:51.729Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -100,12 +100,12 @@
  ],
  "dossiers": [
   {
-   "id": "lyceenne",
+   "id": "lyceens",
    "titre": "Lycées",
    "motifs": [
-    "lycéenne",
+    "lycéens",
     "mobilisation",
-    "manifestations",
+    "mercredi",
     "mouvement"
    ],
    "medias": [
@@ -113,7 +113,6 @@
     "Libération",
     "Sud Ouest",
     "Le Monde",
-    "France 24",
     "RFI",
     "Public Sénat",
     "Nice-Matin",
@@ -133,7 +132,7 @@
     "Libération",
     "Sud Ouest",
     "Le Monde",
-    "France Médias Monde",
+    "RFI",
     "Public Sénat",
     "Nice-Matin",
     "EBRA",
@@ -143,7 +142,7 @@
     "Hugo Décrypte",
     "20 Minutes"
    ],
-   "nb": 94,
+   "nb": 72,
    "derniere": "2026-10-07T08:33:37.000Z",
    "articles": [
     {
@@ -170,12 +169,6 @@
      "titre": "Mobilisations lycéennes : l’affirmation d’un mouvement social",
      "url": "https://www.lemonde.fr/idees/article/2026/10/07/mobilisations-lyceennes-l-affirmation-d-un-mouvement-social_6789570_3232.html",
      "date": "2026-10-07T08:30:01.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
-     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
-     "date": "2026-10-07T08:10:13.000Z"
     },
     {
      "media": "RFI",
@@ -339,90 +332,73 @@
    ]
   },
   {
-   "id": "presidentielle",
-   "titre": "Présidentielle",
+   "id": "crise",
+   "titre": "Crise",
    "motifs": [
-    "présidentielle"
+    "crise"
    ],
    "medias": [
+    "RFI",
+    "BFMTV",
+    "Sud Ouest",
+    "L'Est républicain",
     "Le Monde",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "France 24",
-    "Le Figaro",
-    "Public Sénat"
+    "Libération"
    ],
    "mediasDistincts": 6,
    "sources": [
+    "RFI",
+    "BFMTV",
+    "Sud Ouest",
+    "L'Est républicain",
     "Le Monde",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "France 24",
-    "Le Figaro",
-    "Public Sénat"
+    "Libération"
    ],
-   "nb": 10,
-   "derniere": "2026-10-07T06:58:16.000Z",
+   "nb": 7,
+   "derniere": "2026-10-07T08:04:21.000Z",
    "articles": [
     {
+     "media": "RFI",
+     "titre": "France: face aux revendications des lycéens, comment le gouvernement peut-il sortir de la crise?",
+     "url": "https://www.rfi.fr/fr/france/20261007-france-face-aux-revendications-des-lyc%C3%A9ens-comment-le-gouvernement-peut-il-sortir-de-la-crise",
+     "date": "2026-10-07T08:04:21.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Crise dans l’Éducation nationale: “Il faut supprimer des postes administratifs”, déclare Jean-Philippe Tanguy, président délégué du groupe RN à l’Assemblée",
+     "url": "https://www.bfmtv.com/politique/front-national/video-crise-dans-l-education-nationale-il-faut-supprimer-des-postes-administratifs-declare-jean-philippe-tanguy-president-delegue-du-groupe-rn-a-l-assemblee_VN-202610070245.html",
+     "date": "2026-10-07T06:42:55.000Z",
+     "video": true
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Colère des lycéens, prix des carburants, crise agricole, dette… Sébastien Lecornu s’exprimera ce mercredi soir depuis Matignon",
+     "url": "https://www.sudouest.fr/politique/sebastien-lecornu/colere-des-lyceens-prix-des-carburants-crise-agricole-dette-sebastien-lecornu-s-exprimera-ce-mercredi-soir-depuis-matignon-30956474.php",
+     "date": "2026-10-07T06:29:43.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "En France, les contrôles aux frontières ont augmenté à la suite de la crise à Ceuta",
+     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261006-en-france-les-contr%C3%B4les-aux-fronti%C3%A8res-ont-augment%C3%A9-%C3%A0-la-suite-de-la-crise-%C3%A0-ceuta",
+     "date": "2026-10-06T22:07:26.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "L'oeil de la rédaction. Edito. « Diplomatie » intérieure : prévenir les crises au lieu d’avoir à réparer les dégâts",
+     "url": "https://www.estrepublicain.fr/education/2026/10/06/edito-diplomatie-interieure-prevenir-les-crises-au-lieu-d-avoir-a-reparer-les-degats",
+     "date": "2026-10-06T18:46:00.000Z"
+    },
+    {
      "media": "Le Monde",
-     "titre": "Présidentielle 2027 : les « mesures magiques » de Marine Le Pen pour convaincre de son sérieux budgétaire",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/07/presidentielle-2027-les-mesures-magiques-de-marine-le-pen-pour-convaincre-de-son-serieux-budgetaire_6789553_823448.html",
-     "date": "2026-10-07T06:58:16.000Z"
+     "titre": "Crise de la dette : l’idée d’un grand emprunt populaire revient dans le débat",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/crise-de-la-dette-l-idee-d-un-grand-emprunt-populaire-revient-dans-le-debat_6789042_823448.html",
+     "date": "2026-10-06T15:58:32.000Z"
     },
     {
      "media": "Libération",
-     "titre": "En Allemagne, l’AfD accède à la présidence d’un Parlement régional, une première depuis 1945",
-     "url": "https://www.liberation.fr/international/europe/en-allemagne-lafd-accede-a-la-presidence-dun-parlement-regional-une-premiere-depuis-1945-20261006_BWNME6DLAZCJPOVOE4MNCW57JA/",
-     "date": "2026-10-06T15:15:34.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Allemagne. Le parti d'extrême droite AfD accède à la présidence d'un Parlement régional",
-     "url": "https://www.dna.fr/politique/2026/10/06/le-parti-d-extreme-droite-afd-accede-a-la-presidence-d-un-parlement-regional",
-     "date": "2026-10-06T11:57:00.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "date": "2026-10-06T09:29:23.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
-     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
-     "date": "2026-10-05T16:14:48.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : François Ruffin veut «passer du Front populaire au CNR»",
-     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-francois-ruffin-veut-passer-du-front-populaire-au-cnr-20261005_2ZMIHR55BFGSLOJ6PAWBNUJMKY/",
-     "date": "2026-10-05T16:09:37.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "En Auvergne, le grand défilé des présidentiables au Sommet de l'élevage",
-     "url": "https://www.lefigaro.fr/politique/en-auvergne-le-grand-defile-des-presidentiables-au-sommet-de-l-elevage-20261005",
-     "date": "2026-10-05T16:05:45.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« Une victoire de Flavio Bolsonaro à la présidentielle au Brésil marquerait un tournant historique vers un régime autoritaire et illibéral » selon l’historienne Armelle Enders",
-     "url": "https://www.publicsenat.fr/actualites/international/une-victoire-de-flavio-bolsonaro-a-la-presidentielle-au-bresil-marquerait-un-tournant-historique-vers-un-regime-autoritaire-et-illiberal-selon-lhistorienne-armelle-end",
-     "date": "2026-10-05T14:53:25.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Même les meetings des candidats à la présidentielle sont percutés par l’inflation",
-     "url": "https://www.liberation.fr/politique/meme-les-meetings-des-candidats-a-la-presidentielle-sont-percutes-par-linflation-20261005_LPMU6M7HYVBG7N44KX7PERGYKQ/",
-     "date": "2026-10-05T10:04:00.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : Edouard Philippe et Gabriel Attal jouent à rassemble-moi si tu peux",
-     "url": "https://www.liberation.fr/politique/presidentielle-2027-edouard-philippe-et-gabriel-attal-jouent-a-rassemble-moi-si-tu-peux-20261005_RIBLAXBATZFE3GCI5FVM224GGQ/",
-     "date": "2026-10-05T09:22:13.000Z"
+     "titre": "Répression des lycéens : une gestion de crise emblématique de la déconnexion entre pouvoir et société",
+     "url": "https://www.liberation.fr/idees-et-debats/editorial/repression-des-lyceens-une-gestion-de-crise-emblematique-de-la-deconnexion-entre-pouvoir-et-societe-20261005_D6W2IIHMGRA7LG6VU5BSXAX3TU/",
+     "date": "2026-10-05T18:25:47.000Z"
     }
    ]
   }
@@ -629,12 +605,12 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 3,
    "sources": [
     "20 Minutes",
     "Dernières Nouvelles d'Alsace",
-    "France Médias Monde"
+    "RFI"
    ],
    "derniere": "2026-10-06T17:08:56.000Z",
    "illustration": {
@@ -668,12 +644,6 @@
      "url": "https://www.dna.fr/defense-guerre-conflit/2026/10/06/pourquoi-macron-a-assiste-ce-mardi-a-un-tir-d-exercice-d-un-missile-nucleaire",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-06T10:23:00.000Z"
-    },
-    {
-     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
-     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
-     "media": "France 24",
-     "date": "2026-10-06T09:35:43.000Z"
     }
    ],
    "titrePropre": {
@@ -804,73 +774,20 @@
      "date": "2026-10-07T08:23:08.000Z"
     },
     {
-     "titre": "Red Bull, Monster Energy, Crazy Tiger… un rapport parlementaire recommande d’interdire la vente de boissons énergisantes aux moins de 16 ans",
+     "titre": "Interdire la vente des boissons énergisantes aux moins de 16 ans et les retirer des distributeurs automatiques, la proposition un rapport parlementaire",
      "url": "https://www.lemonde.fr/politique/article/2026/10/07/red-bull-monster-energy-crazy-tiger-un-rapport-parlementaire-recommande-d-interdire-la-vente-de-boissons-energisantes-aux-moins-de-16-ans_6789568_823448.html",
      "media": "Le Monde",
-     "date": "2026-10-07T08:13:42.000Z"
+     "date": "2026-10-07T08:13:41.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Rapport parlementaire recommande",
+    "titre": "Interdire la vente",
     "origine": "recoupement"
    },
    "chiffre": {
     "valeur": "16",
     "unite": "ans"
    }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "France 24",
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-07T07:51:19.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Mallarmé007, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "En direct : Laurent Nuñez suspend l'utilisation des grenades assourdissantes contre les lycéens",
-     "url": "https://www.france24.com/fr/france/20261007-en-direct-nu%C3%B1ez-suspend-utilisation-grenades-assourdissantes-contre-lyc%C3%A9ens-manifestation",
-     "media": "France 24",
-     "date": "2026-10-07T07:51:19.000Z"
-    },
-    {
-     "titre": "Manifestations lycéennes : Sébastien Lecornu s’exprime ce soir, Laurent Nuñez annonce la suspension de l’usage des grenades assourdissantes",
-     "url": "https://www.publicsenat.fr/actualites/politique/manifestations-lyceennes-sebastien-lecornu-sexprime-ce-soir-laurent-nunez-annonce-la-suspension-de-lusage-des-grenades-assourdissantes",
-     "media": "Public Sénat",
-     "date": "2026-10-07T07:05:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Laurent Nunez : ministre de l'intérieur · Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1006,59 +923,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Public Sénat",
-    "France 24"
-   ],
-   "derniere": "2026-10-06T17:31:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
-     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
-     "media": "Public Sénat",
-     "date": "2026-10-06T17:31:58.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "media": "France 24",
-     "date": "2026-10-06T09:29:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "140",
-    "unite": "milliards d’euros"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Dernières Nouvelles d'Alsace",
     "Le Monde"
    ],
@@ -1135,39 +999,6 @@
    "titrePropre": {
     "titre": "Conteste à nouveau",
     "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "France 24"
-   ],
-   "derniere": "2026-10-06T05:47:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Plus de 140 000 inscrits à la primaire de la gauche : «C’est très au-delà de nos prévisions»",
-     "url": "https://www.liberation.fr/politique/elections/plus-de-140-000-inscrits-a-la-primaire-de-la-gauche-cest-tres-au-dela-de-nos-previsions-20261006_NWQ42SOQ25HMHJ52LOES36CARY/",
-     "media": "Libération",
-     "date": "2026-10-06T05:47:42.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
-     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
-     "media": "France 24",
-     "date": "2026-10-05T16:14:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire de la gauche : l'essentiel du moment",
-    "origine": "regles"
    }
   },
   {
@@ -1355,42 +1186,6 @@
    "titrePropre": {
     "titre": "Lycées : l'essentiel du moment",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-06T06:54:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation des lycéens: 450 000 manifestants en France selon les organisateurs, 266 000 selon le gouvernement",
-     "url": "https://www.rfi.fr/fr/france/20261006-en-direct-france-grosse-journ%C3%A9e-de-manifestation-pour-les-lyc%C3%A9es-rejoints-par-des-syndicats-profs-et-%C3%A9tudiants",
-     "media": "RFI",
-     "date": "2026-10-06T06:54:32.000Z"
-    },
-    {
-     "titre": "Colère lycéenne : 450 000 manifestants en France selon les organisateurs, 256 000 selon l'Intérieur",
-     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
-     "media": "France 24",
-     "date": "2026-10-06T04:57:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "chiffre": {
-    "valeur": "450 000",
-    "unite": "manifestants"
    }
   },
   {
@@ -1732,50 +1527,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-07T08:10:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Eva Sas",
-      "photo": "photos/deputes/PA610002.jpg",
-      "photoHd": "photos/deputes/hd/PA610002.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA610002",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "ECO"
-    ],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
-     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
-     "media": "France 24",
-     "date": "2026-10-07T08:10:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Eva Sas : députée ECO (Paris)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -2201,6 +1952,52 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-07T07:05:47.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Mallarmé007, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Manifestations lycéennes : Sébastien Lecornu s’exprime ce soir, Laurent Nuñez annonce la suspension de l’usage des grenades assourdissantes",
+     "url": "https://www.publicsenat.fr/actualites/politique/manifestations-lyceennes-sebastien-lecornu-sexprime-ce-soir-laurent-nunez-annonce-la-suspension-de-lusage-des-grenades-assourdissantes",
+     "media": "Public Sénat",
+     "date": "2026-10-07T07:05:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre · Laurent Nunez : ministre de l'intérieur",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2796,8 +2593,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Éducation et jeunesse : Jean-Philippe Tanguy (RN)",
-    "origine": "regles"
+    "titre": "Crise",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -3697,9 +3494,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Crise",
+    "origine": "dossier"
    }
   },
   {
@@ -3796,32 +3592,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-06T21:19:34.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Blocage des lycées en France : l'armée en renfort ?",
-     "url": "https://www.france24.com/fr/%C3%A9missions/info-ou-intox/20261006-blocage-des-lyc%C3%A9es-en-france-l-arm%C3%A9e-en-renfortnife",
-     "media": "France 24",
-     "date": "2026-10-06T21:19:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-06T21:00:21.000Z",
@@ -3843,32 +3613,6 @@
    ],
    "titrePropre": {
     "titre": "RN : actualité sur la présidentielle de 2027",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-06T20:39:28.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Manifestation des lycéens : les messages derrière leurs pancartes",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261006-manifestation-des-lyc%C3%A9ens-les-messages-derri%C3%A8re-leurs-pancartes",
-     "media": "France 24",
-     "date": "2026-10-06T20:39:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
     "origine": "regles"
    }
   },
@@ -4383,8 +4127,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "International : point de vue éditorial",
-    "origine": "regles"
+    "titre": "Crise",
+    "origine": "dossier"
    }
   },
   {
@@ -4596,6 +4340,175 @@
    ],
    "titrePropre": {
     "titre": "Gouvernement : réponse sur la mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-06T18:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Charron : une plateforme d’observation à l’étude pour l’aire marine éducative",
+     "url": "https://www.sudouest.fr/charente-maritime/charron/charron-une-plateforme-d-observation-a-l-etude-pour-l-aire-marine-educative-30937259.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-06T18:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Charron : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-06T18:02:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Isère. « On prend part à quelque chose d’important et de plus en plus puissant » : pour le mouvement lycéen, l’heure de la maturité",
+     "url": "https://www.ledauphine.com/social/2026/10/06/on-prend-part-a-quelque-chose-d-important-et-de-plus-en-plus-puissant-pour-le-mouvement-lyceen-l-heure-de-la-maturite",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-06T18:02:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Isère : mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-06T17:58:33.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jordan Bardella convoque une fausse «source» révisionniste pour prouver qu’il n’est pas antisémite",
+     "url": "https://www.mediapart.fr/journal/politique/061026/jordan-bardella-convoque-une-fausse-source-revisionniste-pour-prouver-qu-il-n-est-pas-antisemite",
+     "media": "Mediapart",
+     "date": "2026-10-06T17:58:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-06T17:55:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Le RN présente un contre-budget garanti avec trucages",
+     "url": "https://www.liberation.fr/economie/le-rn-presente-un-contre-budget-garanti-avec-trucages-20261006_7KPGHU5BYJFG7GZUH7FEHXM2TE/",
+     "media": "Libération",
+     "date": "2026-10-06T17:55:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "RN : annonces sur les finances publiques",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-06T17:51:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Brebotte. Le programme des coupes de bois a été validé",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/06/le-programme-des-coupes-de-bois-a-ete-valide",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T17:51:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Brebotte : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-06T17:51:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Giromagny. L’école maternelle pourrait déménager dans la caserne 14",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/06/l-ecole-maternelle-pourrait-demenager-dans-la-caserne-14",
+     "media": "L'Est républicain",
+     "date": "2026-10-06T17:51:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Giromagny : actualité scolaire",
     "origine": "regles"
    }
   }
