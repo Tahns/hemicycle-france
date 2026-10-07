@@ -280,4 +280,73 @@ function sujetPourDessin(fiche, { articles, date, citee = null, theme = "politiq
 /** Identifiant (12 hexadécimaux) d'une demande directe : stable pour un même lien (pas de doublon). */
 const idDemande = (lien) => crypto.createHash("sha1").update("demande|" + String(lien).trim().replace(/#.*$/, "")).digest("hex").slice(0, 12);
 
-module.exports = { plat, dateFr, lireMedias, mediaDeLien, motInterdit, formulationSure, juridictionDuTitre, natureDuTitre, estPolitique, classerSujet, listeMedias, ficheNiveau1, ficheNiveau2, legendePost, sujetPourDessin, idDemande, nettoyerTitre, coupe, MENTION_INNOCENCE, MENTION_NON_ETABLI, RE_REPONSE };
+// ---------------------------------------------------------------------------------------------------------------------
+// « Affaire » : un même feuilleton (ex. « affaire Bardella / Mediapart ») ne donne qu'un seul brouillon / une seule publication par 48 h.
+// Ne change aucune règle de prudence : ce filtre ne fait que REFUSER des sujets de plus.
+// ---------------------------------------------------------------------------------------------------------------------
+const AFFAIRE_FENETRE_H = 48;
+// Mots qui ne désignent pas une affaire (médias, mois, institutions, noms omniprésents) : jamais un mot-clé distinctif
+const MOTS_COMMUNS_AFFAIRE = new Set(("france paris europe francais francaise gouvernement assemblee senat parlement elysee matignon president premier ministre ministere republique etat macron " +
+  "info ebra selon plainte enquete justice tribunal cour proces affaire politique campagne budget loi lundi mardi mercredi jeudi vendredi samedi dimanche janvier fevrier mars avril juin juillet aout septembre octobre novembre decembre " +
+  "monde liberation figaro parisien franceinfo mediapart bfmtv progres dauphine alsace nouvelles dernieres republicain express point humanite croix echos").split(" "));
+const mini = (t) => plat(t).replace(/[^a-z0-9]+/g, " ").trim();
+const racinesTitre = (t) => new Set(mini(t).split(" ").filter((w) => w.length >= 4 && !MOTS_COMMUNS_AFFAIRE.has(w)).map((w) => w.slice(0, 5)));
+function titresVoisins(a, b) {
+  const x = racinesTitre(a), y = racinesTitre(b);
+  if (!x.size || !y.size) return false;
+  const commun = [...x].filter((w) => y.has(w)).length;
+  return commun >= 1 && commun / Math.min(x.size, y.size) >= 0.5;
+}
+/** Noms propres d'un titre (mots en capitale hors début de phrase), sans accent ni majuscule ; `apresAffaire` : ceux qui suivent « affaire ». */
+function nomsPropresDuTitre(titre) {
+  const noms = new Set(), apresAffaire = new Set();
+  const mots = String(titre || "").split(/\s+/).filter(Boolean);
+  mots.forEach((brut, i) => {
+    const m = brut.replace(/^[«"“(]+|[»"”),;:.!?…]+$/g, "");
+    if (!/^\p{Lu}[\p{L}'’-]{2,}$/u.test(m)) return;
+    const prec = i === 0 ? "" : mots[i - 1];
+    const n = mini(m);
+    if (n.length < 4 || MOTS_COMMUNS_AFFAIRE.has(n)) return;
+    const apres = /(?:^|['’\s])affaires?$/i.test(prec.replace(/^[«"“(]+/, ""));
+    if (apres) apresAffaire.add(n);
+    if (i === 0 || /[.:!?…]$/.test(prec)) return; // majuscule de début de phrase : pas un nom propre
+    noms.add(n);
+  });
+  return { noms, apresAffaire };
+}
+/** Normalise un sujet de relevé, une entrée (file, brouillon, registre, rejet) ou un titre en { titres, categorie, personnes }. */
+function affaireDe(x) {
+  if (typeof x === "string") return { titres: [x], categorie: null, personnes: [] };
+  const titres = Array.isArray(x?.titres) ? x.titres
+    : Array.isArray(x?.articles) ? x.articles.map((a) => a?.titre)
+    : [x?.sensible ? null : (x?.titrePropre || x?.titre), ...(Array.isArray(x?.sujets) ? x.sujets : [])];
+  const pers = x?.personnes || x?.illustration?.personnes || [];
+  return { titres: titres.filter((t) => typeof t === "string" && t), categorie: x?.categorie || null, personnes: pers.map((p) => (typeof p === "string" ? p : p?.nom)).filter(Boolean) };
+}
+/**
+ * Deux sujets / entrées parlent-ils de la MÊME AFFAIRE ? Fonction pure. Oui si :
+ *  - deux titres sont proches (mêmes racines de mots significatifs), ou
+ *  - ils partagent au moins deux noms propres distinctifs (« Jordan » + « Bardella », « Bardella » + « Mediapart »), ou
+ *  - ils partagent un seul nom propre distinctif, à condition que ce soit celui d'une personne nommée (illustration.personnes) ou un nom qui suit « affaire ».
+ * Catégories connues et différentes (faits / polémique) : seule la proximité des titres compte.
+ * Deux affaires distinctes (aucun nom propre commun) restent séparées, même dans la même catégorie.
+ */
+function memeAffaire(a, b) {
+  const x = affaireDe(a), y = affaireDe(b);
+  if (!x.titres.length || !y.titres.length) return false;
+  if (x.titres.some((t) => y.titres.some((u) => titresVoisins(t, u)))) return true;
+  if (x.categorie && y.categorie && x.categorie !== y.categorie) return false;
+  const nx = x.titres.map(nomsPropresDuTitre), ny = y.titres.map(nomsPropresDuTitre);
+  const union = (l, k) => new Set(l.flatMap((n) => [...n[k]]));
+  const mx = union(nx, "noms"), my = union(ny, "noms");
+  const communs = [...mx].filter((n) => my.has(n));
+  if (communs.length >= 2) return true;
+  if (communs.length === 1) {
+    const pers = new Set([...x.personnes, ...y.personnes].flatMap((p) => mini(p).split(" ")).filter((n) => n.length >= 4));
+    const apres = new Set([...union(nx, "apresAffaire"), ...union(ny, "apresAffaire")]);
+    return pers.has(communs[0]) || apres.has(communs[0]);
+  }
+  return false;
+}
+
+module.exports = { memeAffaire, affaireDe, nomsPropresDuTitre, AFFAIRE_FENETRE_H, plat, dateFr, lireMedias, mediaDeLien, motInterdit, formulationSure, juridictionDuTitre, natureDuTitre, estPolitique, classerSujet, listeMedias, ficheNiveau1, ficheNiveau2, legendePost, sujetPourDessin, idDemande, nettoyerTitre, coupe, MENTION_INNOCENCE, MENTION_NON_ETABLI, RE_REPONSE };

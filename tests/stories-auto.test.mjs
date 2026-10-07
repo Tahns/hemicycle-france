@@ -886,6 +886,33 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const sondage = sens([art("Sondage Ifop : le maire Jean Dupont accusé par ses adversaires, intentions de vote", "Le Monde")]);
     assert.ok(vo([sondage], { now: new Date("2027-04-17T10:00:00Z") }).refus, "réserve électorale");
   }
+  // Une affaire = un seul brouillon sur 48 h (3 titres de l'affaire Bardella) ; deux affaires distinctes = deux brouillons
+  {
+    const pers = { theme: "politique", personnes: [{ nom: "Jordan Bardella" }] };
+    const b1 = sens([art("Ecrits antisémites : l’affaire Jordan Bardella plombe la séquence budgétaire du RN", "Le Monde")], { illustration: pers });
+    const b2 = sens([art("La campagne de Marine Le Pen lestée par l’affaire Bardella : «A côté, Jordan a l’air d’être un poids»", "Libération")], { illustration: pers });
+    const b3 = sens([art("Info EBRA. Riposte de Jordan Bardella contre Mediapart : une plainte déposée contre le président du RN", "Le Progrès")], { illustration: pers });
+    const autre = sens([art("Rima Hassan accusée d'avoir renversé des drapeaux au Parlement européen, qui dément", "BFMTV")], { illustration: { theme: "politique", personnes: [{ nom: "Rima Hassan" }] } });
+    const tous = [b1, b2, b3];
+    const c1 = vo(tous);
+    assert.strictEqual(c1.niveauSensible, 2);
+    const d1 = AUTO.decrire(c1, now);
+    const brouillon = { id: c1.id, cree: il_y_a(1), statut: "a-valider", sources: d1.sources, ...d1.champs, titre: d1.titre };
+    assert.ok(vo(tous, { file: { entrees: [brouillon] } }).refus, "3 titres de la même affaire : un seul brouillon, les autres sont écartés");
+    assert.ok(vo(tous, { file: { entrees: [{ ...brouillon, cree: il_y_a(47) }] } }).refus, "toujours la même affaire 47 h plus tard");
+    assert.ok(!vo(tous, { file: { entrees: [{ ...brouillon, cree: il_y_a(50) }] } }).refus, "plus de 48 h : de nouveau possible");
+    const reg = { entrees: [{ id: "dddddddddddd", statut: "publiee", publieLe: il_y_a(20), titre: "Selon Le Monde : des faits non établis à ce stade", sensible: 2, sujets: [b1.articles[0].titre] }] };
+    assert.ok(vo([b3], { registre: reg }).refus, "affaire déjà publiée dans le registre");
+    const rej = { entrees: [{ id: "eeeeeeeeeeee", rejeteLe: il_y_a(10), sources: [], sujets: [b2.articles[0].titre] }] };
+    assert.ok(vo([b3], { rejetes: rej }).refus, "affaire rejetée par un humain : pas reproposée");
+    // deux affaires distinctes : deux brouillons
+    const c2 = vo([autre, ...tous], { file: { entrees: [brouillon] } });
+    assert.ok(!c2.refus, "une affaire différente reste proposée");
+    assert.strictEqual(c2.sujet, autre);
+    // règles de prudence inchangées : niveau 2 jamais en file, présomption d'innocence
+    assert.strictEqual(AUTO.destination(c2, { ...cfg, validationHumaine: false }), "brouillon");
+    assert.match(AUTO.decrire(c2, now).champs.pied, /présumée innocente/);
+  }
   // Fait divers, mineur, violence sexuelle, décès : jamais, ni en brouillon
   for (const t of ["Un mineur de 16 ans mis en examen : le ministre réagit après la décision du tribunal", "Le maire condamné pour agression sexuelle par le tribunal correctionnel, selon la presse", "Mort d'un ancien ministre : le tribunal rend hommage"]) {
     assert.ok(vo([sens([art(t, "Le Monde"), art(t + " ", "franceinfo")])]).refus, `jamais publié : ${t}`);
