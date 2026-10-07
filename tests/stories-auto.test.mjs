@@ -951,7 +951,14 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(pa([ev({ verified: false })]).refus, "non vérifié : rien");
   assert.ok(pa([ev({ debut: "2026-10-09", fin: "2026-10-09" })]).refus, "trop proche : une story suffit, pas un post");
   assert.ok(pa([ev({ debut: "2026-10-01", fin: "2026-10-02" })]).refus, "passé : rien");
-  assert.ok(pa([ev({ debut: "2027-03-01", fin: "2027-03-01" })]).refus, "trop lointain : rien");
+  assert.strictEqual(pa([ev({ debut: "2027-04-18", fin: "2027-04-18", titre: "Élection présidentielle : premier tour" })]).modele, "post-date", "tout ce qui est prévu : même à plus de 60 jours");
+  assert.ok(pa([ev({ debut: "2028-06-01", fin: "2028-06-01" })]).refus, "au-delà d'un an : rien");
+  const an = { sourceUrl: "https://www2.assemblee-nationale.fr/agendas/les-agendas", jours: [{ date: "2026-10-14", points: [{ type: "texte", objet: "Projet de loi sans vote" }, { type: "vote", objet: "Projet de loi de finances pour 2027" }] }] };
+  const ra2 = A.choisirPostAgenda({ meetings: { meetings: [] }, agendaAn: an, file: vide, now: matin });
+  assert.strictEqual(ra2.modele, "post-date", "vote solennel de l'Assemblée à 7 jours : un post");
+  assert.match(ra2.sujet.titrePropre.titre, /^Vote solennel à l'Assemblée : projet de loi de finances pour 2027$/);
+  assert.strictEqual(ra2.sujet.articles[0].url, an.sourceUrl);
+  assert.ok(A.choisirPostAgenda({ meetings: { meetings: [] }, agendaAn: { ...an, sourceUrl: "http://x" }, file: vide, now: matin }).refus, "source non https : rien");
   assert.ok(pa([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
   assert.ok(pa([ev()], { file: { entrees: [{ id: r.id, type: "post", cree: matin.toISOString() }] } }).refus, "déjà publié : rien");
   assert.ok(A.choisirPostAgenda({ meetings: { meetings: [ev()] }, file: vide, now: new Date("2026-10-07T22:30:00Z") }).refus, "nuit : rien");
