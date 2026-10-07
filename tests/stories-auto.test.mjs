@@ -56,8 +56,12 @@ assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027
   assert.strictEqual(choix([s], { direct }).indice, 0, "président retenu");
   assert.ok(choix([s]).refus, "sans détection du direct : non");
 }
-// Trop ancien (> 3 h) : non
-assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(3.5) })]).refus, "ancien refusé");
+// Fenêtre de fraîcheur des sujets : 12 h (un sujet arrivé la nuit reste publiable le matin) ; au-delà : non
+assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(8) })]).indice, 0, "sujet de 8 h accepté");
+assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(13) })]).refus, "ancien refusé");
+// Le refus indique le motif des écarts
+assert.ok(/1 plus de 12 h/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(13) })]).refus), "motif journalisé");
+assert.ok(/1 moins de 3 médias/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).refus), "motif médias");
 // Mis en examen et autres mots à risque : exclus
 assert.ok(choix([sujet("Jean Dupont mis en examen pour détournement de fonds publics", 4)]).refus, "mis en examen exclu");
 for (const titre of [
@@ -230,7 +234,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.strictEqual(choisir({ actualites: actus, direct: null, sondages: sond(), file: publie, now }).indice, 0, "dossier déjà publié : le sujet simple suit");
   assert.ok(choisirSujet({ actualites: actus, direct: null, file: { entrees: [1, 2, 3, 4].map((i) => ({ id: `${i}`.repeat(12), cree: il_y_a(i * 1.5), titre: `t${i}`, sources: [] })) }, now }).refus, "plafond de 4 par jour");
   assert.ok(choisirSujet({ actualites: actus, direct: null, file: vide, now: new Date("2026-10-02T21:30:00Z") }).refus, "pas de dossier la nuit");
-  assert.strictEqual(choisirDossier({ actualites: { dossiers: d.map((x) => ({ ...x, derniere: il_y_a(5) })) }, file: vide, now }), null, "dossier trop ancien");
+  assert.strictEqual(choisirDossier({ actualites: { dossiers: d.map((x) => ({ ...x, derniere: il_y_a(14) })) }, file: vide, now }), null, "dossier trop ancien");
   const risqueD = d.map((x) => ({ ...x, derniere: il_y_a(1), articles: x.articles.map((a, i) => (i ? a : { ...a, titre: a.titre + " : un lycéen mis en examen" })) }));
   assert.strictEqual(choisirDossier({ actualites: { dossiers: risqueD }, file: vide, now }), null, "titre à risque dans un dossier");
   // Fiche d'un dossier : titre éditorial du dossier + liens vidéo en tête des sources
@@ -249,11 +253,11 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3 };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3 };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 3, maxParJour: 99, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, sans plafond");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 3, maxParJour: 99, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, sans plafond");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
