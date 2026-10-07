@@ -114,7 +114,16 @@ Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée 
 Un sujet dont le titre rédigé par le site est un titre de repli (`generique: true` dans `data/actualites.json`, par exemple « Gilley : actualité locale » ou « Politique : l'essentiel du moment »)
 ne devient **jamais** une story, un « en bref » ni un post (sauf prise de parole du président de la République).
 
-## Sujets sensibles : niveaux 1 et 2, comment valider un brouillon
+## Décision du propriétaire : plus de circuit des sujets sensibles
+
+Le propriétaire du compte a décidé, et en assume la responsabilité, qu'il n'y a plus de « circuit des sujets sensibles » (brouillons « Selon X : des faits non établis… »). Un sujet de presse qui parle d'une accusation, d'une plainte, d'une polémique, d'une procédure judiciaire ou d'écrits attribués à une personnalité suit le **circuit normal** des stories : titre propre du site, titre de presse cité entre guillemets avec le média, nombre de médias (`minMedias`, 3). Comme toute story, elle reste soumise à la validation humaine (`validationHumaine: true` dans `data/stories-config.json`, inchangé) ; `"sensibles": false` y reste aussi.
+
+- **Ce qui n'est plus écarté** (niveau « presse » de `scripts/liste-prudente.cjs`) : procédure (enquête, tribunal, mis en examen, condamn*…), accusation (accus*, plainte, mis en cause, affaire…), polémique (polémique, dérapage, clash, excuses…) et mots de discours (antisemit*, racis*, homophob*, discriminat*). Le thème « justice » n'écarte plus un sujet non plus.
+- **Ce qui reste écarté** (protections légales, pas choix éditoriaux) : violences physiques et sexuelles contre des personnes (viol, agress*, meurtre*, pedo*, inceste*, sexuel*…), morts, drames et faits divers, mineurs identifiables (âge de moins de 20 ans, lycéen(ne), élève… au singulier). Le niveau « officiel » (ordre du jour, scrutins, textes) est inchangé.
+- **Titre de repli** : si le site n'a pas de titre propre fiable pour un tel sujet (le titre rédigé renvoie une formule générique ou rien, car `titres-propres.cjs` ne nomme jamais une personne visée), la story est quand même retenue sans `titrePropre` : elle est dessinée avec la rubrique « à la une » et le titre de presse en citation (`js/stories-actu.js`). Les autres sujets sans titre propre restent refusés.
+- **Rétablir l'ancien comportement** : dans `scripts/liste-prudente.cjs`, ajouter `"procedure", "accusation", "polemique", "discours"` au tableau `GROUPES_PRESSE_ACTIFS` (ou le remplacer par `GROUPES_TOUS`), et remettre le test des « mots à risque » d'origine. Le circuit sensible lui-même se réactive avec `"sensibles": true`. Il garde sa liste complète (`GROUPES_TOUS`) pour reconnaître un sujet sensible.
+
+## Sujets sensibles : niveaux 1 et 2 (circuit désactivé, voir ci-dessus), comment valider un brouillon
 
 Les sujets de justice et de mise en cause (par exemple une révélation de Mediapart) étaient jusqu'ici **perdus** : leurs mots (accusation, plainte,
 tribunal, condamnation…) les écartaient. Ils ne sont plus perdus, et **aucun garde-fou n'est désactivé** : un sujet sensible devient soit une
