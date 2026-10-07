@@ -806,7 +806,7 @@ function normaliserConfig(c) {
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
     // sujets de justice et de mise en cause (scripts/sujets-sensibles.cjs) : activés par défaut ; niveau 1 = au moins « minMediasSensible » médias
     // citant une juridiction et une décision ; niveau 2 = brouillons à valider, « brouillonsSensiblesMax » par jour
-    fraicheurH: entier(c?.fraicheurH, 12, 3, 24),
+    fraicheurH: entier(c?.fraicheurH, 12, 3, 72),
     sensibles: c?.sensibles !== false, minMediasSensible: entier(c?.minMediasSensible, 2, 2, 10), brouillonsSensiblesMax: entier(c?.brouillonsSensiblesMax, 3, 0, 10)
   };
 }
