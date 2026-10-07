@@ -331,6 +331,10 @@ STORY_PLUS.date = async (ctx, info) => {
   }
   if(!choix) choix = { T: 260, h: hero(260), tc: 24 };
   const { T, h, tc } = choix;
+  // Sans citation, contexte ni vidéo (date d'agenda) : pas de carte vide, et le bloc est descendu pour mieux occuper la page
+  const aCarte = Boolean(d.citation || d.contexte?.length || d.video);
+  const decal = aCarte ? 0 : Math.max(0, Math.round((bas - h.fin) * 0.4));
+  ctx.save(); ctx.translate(0, decal);
   // le jour, géant (« 1er » avec le suffixe en petit)
   const lsJ = -T * 0.04;
   ecrire(ctx, jour, marge, h.yJ, { poids: 900, taille: T, ls: lsJ });
@@ -356,8 +360,8 @@ STORY_PLUS.date = async (ctx, info) => {
       x += w + 14;
     }
   });
-  const hc = carte(ctx, d, 34, marge, 0, LARG, false, { tc });
-  poserCarte(ctx, d, bas, bas - (h.fin + 34), { tc });
+  ctx.restore();
+  if(aCarte) poserCarte(ctx, d, bas, bas - (h.fin + 34), { tc });
   return { nom: nomFichier("date", s) };
 };
 })();

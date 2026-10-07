@@ -1065,7 +1065,7 @@ function ficheDate(s, now = new Date()) {
     "#Politique #Agenda #Actualité",
   ].join("\n");
   return {
-    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "" },
+    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
     titreCourt: titre,
     sous: `Date à retenir · ${jourAff}`,
     legende,
