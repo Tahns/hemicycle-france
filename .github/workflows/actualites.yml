@@ -75,7 +75,7 @@ jobs:
         continue-on-error: true
       - name: Story automatique (file d'attente Instagram)
         if: steps.story_choix.outputs.a_faire == 'true'
-        run: node scripts/stories-auto.cjs
+        run: for i in 1 2 3 4; do node scripts/stories-auto.cjs || break; done # jusqu'à 4 stories préparées par passage (rattrapage) ; chaque tour relit la file mise à jour
         continue-on-error: true
       - name: Contrôler la cohérence des données
         run: node scripts/check-data.js
