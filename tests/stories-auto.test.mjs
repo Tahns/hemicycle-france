@@ -257,7 +257,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 3, maxParJour: 99, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, sans plafond");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, minMedias: 2, dossierMedias: 3, maxParJour: 99, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias, sans plafond");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
@@ -896,6 +896,37 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.ok(SS.formulationSure([d.titre, d.champs.pied].join(" "), { juridiction: d.champs.juridiction || "" }).ok);
     assert.match(d.champs.pied, /présumée innocente/);
   }
+}
+
+// Seuil livré à 2 médias : un sujet à 2 médias passe, un seul média non
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  A.appliquerSeuils(A.normaliserConfig({ minMedias: 2 }));
+  assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).indice, 0, "2 médias retenu au seuil 2");
+  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 1)]).refus, "1 média refusé");
+  A.appliquerSeuils(A.normaliserConfig(null));
+}
+
+// Posts « Date à retenir » tirés de l'agenda (data/meetings.json)
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const matin = new Date("2026-10-07T08:30:00Z"); // 10 h 30 à Paris
+  const ev = (extra = {}) => ({ debut: "2026-10-24", fin: "2026-10-25", jour: "24-25", mois: "OCT.", lieu: "Orléans (Loiret)", titre: "XIXᵉ congrès du Rassemblement National", source: { nom: "franceinfo", url: "https://www.franceinfo.fr/x" }, verified: true, ...extra });
+  const pa = (m, o = {}) => A.choisirPostAgenda({ meetings: { meetings: m }, file: vide, now: matin, ...o });
+  const r = pa([ev()]);
+  assert.strictEqual(r.modele, "post-date", "événement à 17 jours : un post");
+  const f = A.ficheDate(r.sujet, matin);
+  assert.match(f.legende, /24-25 octobre 2026/, "durée affichée");
+  assert.match(f.legende, /Orléans/, "lieu");
+  assert.match(f.legende, /à vérifier auprès de l'organisateur/, "mention de vérification");
+  assert.ok(!f.spec.citation, "aucune citation de presse");
+  assert.ok(pa([ev({ verified: false })]).refus, "non vérifié : rien");
+  assert.ok(pa([ev({ debut: "2026-10-09", fin: "2026-10-09" })]).refus, "trop proche : une story suffit, pas un post");
+  assert.ok(pa([ev({ debut: "2026-10-01", fin: "2026-10-02" })]).refus, "passé : rien");
+  assert.ok(pa([ev({ debut: "2027-03-01", fin: "2027-03-01" })]).refus, "trop lointain : rien");
+  assert.ok(pa([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
+  assert.ok(pa([ev()], { file: { entrees: [{ id: r.id, type: "post", cree: matin.toISOString() }] } }).refus, "déjà publié : rien");
+  assert.ok(A.choisirPostAgenda({ meetings: { meetings: [ev()] }, file: vide, now: new Date("2026-10-07T22:30:00Z") }).refus, "nuit : rien");
 }
 
 console.log("stories-auto : tous les tests passent.");
