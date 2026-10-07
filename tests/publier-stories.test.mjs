@@ -356,6 +356,16 @@ try {
     await lancer({ entrees: [presse], registre: { entrees: [regPub("e1e1e1e1e1e1", 24 * 5, { type: "story", titre: "Simplification de la vie économique" })] } });
     assert.strictEqual(publications().length, 1, "story ordinaire de 5 jours : fenêtre de 36 h seulement");
   }
+  // Le registre garde les liens (12 au plus, https), la date et les sujets (6 au plus)
+  {
+    const liens = Array.from({ length: 15 }, (_, i) => `https://exemple.fr/a${i}`);
+    const r = await lancer({ entrees: [entree("f1f1f1f1f1f1", il_y_a(1), { sources: [...liens, "http://non-https.fr/x"], dateIso: "2026-10-20", sujets: ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"] })] });
+    const l = r.registre.entrees.find((x) => x.id === "f1f1f1f1f1f1");
+    assert.deepStrictEqual(l.sources, liens.slice(0, 12));
+    assert.strictEqual(l.dateIso, "2026-10-20");
+    assert.strictEqual(l.sujets.length, 6);
+    assert.strictEqual(l.statut, "publiee");
+  }
   // Garde sur le registre distant (origin/main) : un id déjà inscrit là-bas n'est jamais republié, même si la copie locale l'ignore
   {
     const d = mkdtempSync(join(tmpdir(), "distant-"));

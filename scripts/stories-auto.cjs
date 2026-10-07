@@ -941,13 +941,21 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
  * Renvoie { post: { fiche, id, ... }, id, modele: "post-loi" } ou { refus }. Un seul post par vote (id stable) ; jamais deux fois la même loi à
  * moins de 36 h d'écart (titres proches) ; 2 posts par jour au plus ; rien la nuit ; vote de moins de 2 jours.
  */
-function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }) {
+/** Faits de data/contenus-etat.json (clés « carrousel-loi|<voteId> »…) ; absent ou illisible : aucun fait. */
+function lireFaitsContenus() {
+  try { const f = JSON.parse(fs.readFileSync(path.join(RACINE, "data", "contenus-etat.json"), "utf-8"))?.faits; return f && typeof f === "object" ? f : {}; } catch (e) { return {}; }
+}
+function choisirPostLoi({ lois, senat, file, registre = null, now = new Date(), faits = null }) {
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const entrees = file?.entrees || [];
   if (nbPostsDuJour(entrees, registre, now) >= MAX_POSTS_PAR_JOUR) return { refus: `déjà ${MAX_POSTS_PAR_JOUR} posts aujourd'hui` };
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const votes = new Set(entrees.map((e) => e.voteId).filter(Boolean));
+  // Un carrousel de loi déjà sorti pour ce vote (même parti de la file élaguée) : jamais aussi un post (ni son annonce)
+  const estCarrousel = (e) => e.type === "carrousel-loi" || e.type === "carrousel" || e.carrousel === true;
+  const faitsContenus = faits || lireFaitsContenus();
+  const carrouselsDeVote = new Set([...entrees, ...(registre?.entrees || [])].filter(estCarrousel).flatMap((e) => [e.voteId, e.cle]).filter(Boolean));
   const recents = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
   const limite = new Date(now.getTime() - POST_VOTE_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
   const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
@@ -969,7 +977,7 @@ function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }
   candidats.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.ordre - a.ordre);
   const reserve = reserveStory(now);
   for (const c of candidats) {
-    if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId)) continue;
+    if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId) || carrouselsDeVote.has(c.f.voteId) || faitsContenus[`carrousel-loi|${c.f.voteId}`]) continue;
     if (dejaVu(c.f.titreCourt, recents)) continue; // même loi qu'un post ou une story des dernières 36 h
     if (reserve && parleDeSondage(c.f.titreCourt)) continue;
     return { post: { genre: "loi", ...c.f, dateISO: c.dateISO }, id: c.id, modele: "post-loi", nommePersonne: false };

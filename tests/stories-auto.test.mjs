@@ -724,6 +724,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [post(r.id)] } }).refus);
     assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, registre: { entrees: [{ id: r.id, statut: "publiee", publieLe: il_y_a(50), type: "post", titre: "x" }] } }).refus, "id au registre");
     assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [post("e".repeat(12), { voteId: "an-100" })] } }).refus, "même vote");
+    // Carrousel de loi déjà sorti pour ce vote : pas de post (état des contenus, registre ou file)
+    const seul = { lois: { lois: [lois.lois[0]] }, senat: null };
+    assert.ok(!loi({ ...seul, faits: {} }).refus, "témoin : pas de carrousel, post possible");
+    assert.ok(loi({ ...seul, faits: { "carrousel-loi|an-100": { id: "x", le: il_y_a(30) } } }).refus, "contenus-etat : carrousel-loi|voteId");
+    assert.ok(!loi({ ...seul, faits: { "carrousel-loi|an-999": { id: "x" } } }).refus, "autre vote : post possible");
+    assert.ok(loi({ ...seul, faits: {}, registre: { entrees: [{ id: "f".repeat(12), statut: "publiee", publieLe: il_y_a(30), type: "carrousel", voteId: "an-100" }] } }).refus, "carrousel du même vote au registre");
+    assert.ok(loi({ ...seul, faits: {}, registre: { entrees: [{ id: "f".repeat(12), statut: "publiee", publieLe: il_y_a(30), type: "carrousel-loi", cle: "an-100" }] } }).refus, "carrousel (clé) au registre");
     assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, registre: { entrees: [{ id: "f".repeat(12), statut: "publiee", publieLe: il_y_a(20), type: "post", titre: "Projet de loi relatif à la simplification de la vie économique" }] } }).refus, "même loi publiée il y a 20 h");
     assert.ok(loi({ lois: { lois: [lois.lois[0]] }, senat: null, file: { entrees: [{ id: "9".repeat(12), cree: il_y_a(5), titre: "t", type: "story", titrePropre: "Simplification de la vie économique", sources: [] }] } }).refus, "même sujet déjà en story");
     assert.ok(loi({ file: { entrees: [post("1".repeat(12)), post("2".repeat(12))] } }).refus, "plafond de 2 posts");
