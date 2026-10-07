@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T11:15:52.070Z",
+ "lastUpdated": "2026-10-07T11:20:54.163Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -100,16 +100,18 @@
  ],
  "dossiers": [
   {
-   "id": "lyceens",
+   "id": "lyceenne",
    "titre": "Lycées",
    "motifs": [
-    "lycéens",
+    "lycéenne",
     "mobilisation",
-    "colère",
-    "manifestations"
+    "manifestations",
+    "colère"
    ],
    "medias": [
+    "Public Sénat",
     "BFMTV",
+    "Le Monde",
     "Sud Ouest",
     "Mediapart",
     "Libération",
@@ -117,9 +119,8 @@
     "Nice-Matin",
     "L'Est républicain",
     "Dernières Nouvelles d'Alsace",
-    "Public Sénat",
     "RFI",
-    "Le Monde",
+    "France 24",
     "Le Dauphiné libéré",
     "Le Progrès",
     "L'Express",
@@ -128,29 +129,41 @@
    ],
    "mediasDistincts": 13,
    "sources": [
+    "Public Sénat",
     "BFMTV",
+    "Le Monde",
     "Sud Ouest",
     "Mediapart",
     "Libération",
     "Hugo Décrypte",
     "Nice-Matin",
     "EBRA",
-    "Public Sénat",
-    "RFI",
-    "Le Monde",
+    "France Médias Monde",
     "L'Express",
     "Le Figaro",
     "20 Minutes"
    ],
-   "nb": 88,
-   "derniere": "2026-10-07T11:09:26.000Z",
+   "nb": 114,
+   "derniere": "2026-10-07T11:16:12.000Z",
    "articles": [
+    {
+     "media": "Public Sénat",
+     "titre": "Bonjour chez vous ! — Ségolène Royal : « Si j’étais aux responsabilités, il n’y aurait pas de mouvement social »",
+     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/segolene-royal-si-jetais-aux-responsabilites-il-ny-aurait-pas-de-mouvement-social-e0",
+     "date": "2026-10-07T11:16:12.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Colère lycéenne: \"Emmanuel Macron est toujours du côté qui consiste à taper sur la police\", déclare Marine Le Pen, candidate RN à l'élection présidentielle",
      "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-emmanuel-macron-est-toujours-du-cote-qui-consiste-a-taper-sur-la-police-declare-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070488.html",
      "date": "2026-10-07T11:09:26.000Z",
      "video": true
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
+     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
+     "date": "2026-10-07T10:46:10.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -196,22 +209,16 @@
      "date": "2026-10-07T09:50:00.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Blocus des lycées : dix-huit enquêtes IGPN ouvertes, l’usage des grenades assourdissantes suspendu",
-     "url": "https://www.publicsenat.fr/actualites/politique/blocus-des-lycees-dix-huit-enquetes-igpn-ouvertes-lusage-des-grenades-assourdissantes-suspendu",
-     "date": "2026-10-07T09:44:16.000Z"
-    },
-    {
      "media": "RFI",
      "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
      "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
      "date": "2026-10-07T09:19:10.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Mobilisations lycéennes : l’affirmation d’un mouvement social",
-     "url": "https://www.lemonde.fr/idees/article/2026/10/07/mobilisations-lyceennes-l-affirmation-d-un-mouvement-social_6789570_3232.html",
-     "date": "2026-10-07T08:30:01.000Z"
+     "media": "France 24",
+     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
+     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
+     "date": "2026-10-07T08:10:13.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
@@ -242,6 +249,127 @@
      "titre": "Colère des lycéens : Villepin et Ruffin vent debout ensemble contre Parcoursup",
      "url": "https://www.20minutes.fr/politique/4251677-20261006-colere-lyceens-villepin-ruffin-vent-debout-ensemble-contre-parcoursup?at_medium=display&at_campaign=149",
      "date": "2026-10-06T03:58:06.000Z"
+    }
+   ]
+  },
+  {
+   "id": "presidentielle",
+   "titre": "Présidentielle",
+   "motifs": [
+    "présidentielle"
+   ],
+   "medias": [
+    "BFMTV",
+    "Le Monde",
+    "Sud Ouest",
+    "20 Minutes",
+    "Libération",
+    "Dernières Nouvelles d'Alsace",
+    "France 24",
+    "Le Figaro",
+    "Public Sénat"
+   ],
+   "mediasDistincts": 9,
+   "sources": [
+    "BFMTV",
+    "Le Monde",
+    "Sud Ouest",
+    "20 Minutes",
+    "Libération",
+    "Dernières Nouvelles d'Alsace",
+    "France 24",
+    "Le Figaro",
+    "Public Sénat"
+   ],
+   "nb": 15,
+   "derniere": "2026-10-07T11:09:26.000Z",
+   "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: \"Emmanuel Macron est toujours du côté qui consiste à taper sur la police\", déclare Marine Le Pen, candidate RN à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-emmanuel-macron-est-toujours-du-cote-qui-consiste-a-taper-sur-la-police-declare-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070488.html",
+     "date": "2026-10-07T11:09:26.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: “Nous n’avons plus l’argent pour payer à fonds perdus ceux qui s’amusent à dégrader”, estime Marine Le Pen, candidate RN à l’élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-nous-n-avons-plus-l-argent-pour-payer-a-fonds-perdus-ceux-qui-s-amusent-a-degrader-estime-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070487.html",
+     "date": "2026-10-07T11:07:39.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: \"Il y a urgence à remettre tout ça en ordre\", affirme Marine Le Pen, candidate RN à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-il-y-a-urgence-a-remettre-tout-ca-en-ordre-affirme-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070486.html",
+     "date": "2026-10-07T11:07:04.000Z",
+     "video": true
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
+     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
+     "date": "2026-10-07T10:46:10.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Présidentielle 2027: Jean-Luc Mélenchon estime que la mobilisation lycéenne est bénéfique au \"programme de rupture\" de la France insoumise",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/presidentielle-2027-jean-luc-melenchon-estime-que-la-mobilisation-lyceenne-est-benefique-au-programme-de-rupture-de-la-france-insoumise_AD-202610070439.html",
+     "date": "2026-10-07T10:05:34.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Présidentielle 2027 : les « mesures magiques » de Marine Le Pen pour convaincre de son sérieux budgétaire",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/07/presidentielle-2027-les-mesures-magiques-de-marine-le-pen-pour-convaincre-de-son-serieux-budgetaire_6789553_823448.html",
+     "date": "2026-10-07T06:58:16.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : le gouvernement fustige le budget présenté par le RN, un programme « en carton-pâte » qui « raserait gratis »",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-le-gouvernement-fustige-le-budget-presente-par-le-rn-un-programme-en-carton-pate-qui-raserait-gratis-30953366.php",
+     "date": "2026-10-06T21:00:21.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : « Je conteste vos preuves… » La présentation du projet économique RN polluée par l’affaire Bardella",
+     "url": "https://www.20minutes.fr/politique/4251874-20261006-presidentielle-2027-conteste-preuves-presentation-projet-economique-rn-polluee-affaire-bardella?at_medium=display&at_campaign=149",
+     "date": "2026-10-06T15:34:14.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "En Allemagne, l’AfD accède à la présidence d’un Parlement régional, une première depuis 1945",
+     "url": "https://www.liberation.fr/international/europe/en-allemagne-lafd-accede-a-la-presidence-dun-parlement-regional-une-premiere-depuis-1945-20261006_BWNME6DLAZCJPOVOE4MNCW57JA/",
+     "date": "2026-10-06T15:15:34.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Allemagne. Le parti d'extrême droite AfD accède à la présidence d'un Parlement régional",
+     "url": "https://www.dna.fr/politique/2026/10/06/le-parti-d-extreme-droite-afd-accede-a-la-presidence-d-un-parlement-regional",
+     "date": "2026-10-06T11:57:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "date": "2026-10-06T09:29:23.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
+     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
+     "date": "2026-10-05T16:14:48.000Z"
+    },
+    {
+     "media": "Le Figaro",
+     "titre": "En Auvergne, le grand défilé des présidentiables au Sommet de l'élevage",
+     "url": "https://www.lefigaro.fr/politique/en-auvergne-le-grand-defile-des-presidentiables-au-sommet-de-l-elevage-20261005",
+     "date": "2026-10-05T16:05:45.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Une victoire de Flavio Bolsonaro à la présidentielle au Brésil marquerait un tournant historique vers un régime autoritaire et illibéral » selon l’historienne Armelle Enders",
+     "url": "https://www.publicsenat.fr/actualites/international/une-victoire-de-flavio-bolsonaro-a-la-presidentielle-au-bresil-marquerait-un-tournant-historique-vers-un-regime-autoritaire-et-illiberal-selon-lhistorienne-armelle-end",
+     "date": "2026-10-05T14:53:25.000Z"
     }
    ]
   },
@@ -353,119 +481,6 @@
      "titre": "Journal d'Outre-mer du 5 octobre 2026",
      "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261005-journal-d-outre-mer-du-5-octobre-2026",
      "date": "2026-10-05T15:20:24.000Z"
-    }
-   ]
-  },
-  {
-   "id": "presidentielle",
-   "titre": "Présidentielle",
-   "motifs": [
-    "présidentielle"
-   ],
-   "medias": [
-    "BFMTV",
-    "Le Monde",
-    "Sud Ouest",
-    "20 Minutes",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "Le Figaro",
-    "Public Sénat"
-   ],
-   "mediasDistincts": 8,
-   "sources": [
-    "BFMTV",
-    "Le Monde",
-    "Sud Ouest",
-    "20 Minutes",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "Le Figaro",
-    "Public Sénat"
-   ],
-   "nb": 13,
-   "derniere": "2026-10-07T11:09:26.000Z",
-   "articles": [
-    {
-     "media": "BFMTV",
-     "titre": "Colère lycéenne: \"Emmanuel Macron est toujours du côté qui consiste à taper sur la police\", déclare Marine Le Pen, candidate RN à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-emmanuel-macron-est-toujours-du-cote-qui-consiste-a-taper-sur-la-police-declare-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070488.html",
-     "date": "2026-10-07T11:09:26.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère lycéenne: “Nous n’avons plus l’argent pour payer à fonds perdus ceux qui s’amusent à dégrader”, estime Marine Le Pen, candidate RN à l’élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-nous-n-avons-plus-l-argent-pour-payer-a-fonds-perdus-ceux-qui-s-amusent-a-degrader-estime-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070487.html",
-     "date": "2026-10-07T11:07:39.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère lycéenne: \"Il y a urgence à remettre tout ça en ordre\", affirme Marine Le Pen, candidate RN à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-il-y-a-urgence-a-remettre-tout-ca-en-ordre-affirme-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610070486.html",
-     "date": "2026-10-07T11:07:04.000Z",
-     "video": true
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
-     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
-     "date": "2026-10-07T10:46:10.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Présidentielle 2027: Jean-Luc Mélenchon estime que la mobilisation lycéenne est bénéfique au \"programme de rupture\" de la France insoumise",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/presidentielle-2027-jean-luc-melenchon-estime-que-la-mobilisation-lyceenne-est-benefique-au-programme-de-rupture-de-la-france-insoumise_AD-202610070439.html",
-     "date": "2026-10-07T10:05:34.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Présidentielle 2027 : les « mesures magiques » de Marine Le Pen pour convaincre de son sérieux budgétaire",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/07/presidentielle-2027-les-mesures-magiques-de-marine-le-pen-pour-convaincre-de-son-serieux-budgetaire_6789553_823448.html",
-     "date": "2026-10-07T06:58:16.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : le gouvernement fustige le budget présenté par le RN, un programme « en carton-pâte » qui « raserait gratis »",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-le-gouvernement-fustige-le-budget-presente-par-le-rn-un-programme-en-carton-pate-qui-raserait-gratis-30953366.php",
-     "date": "2026-10-06T21:00:21.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Présidentielle 2027 : « Je conteste vos preuves… » La présentation du projet économique RN polluée par l’affaire Bardella",
-     "url": "https://www.20minutes.fr/politique/4251874-20261006-presidentielle-2027-conteste-preuves-presentation-projet-economique-rn-polluee-affaire-bardella?at_medium=display&at_campaign=149",
-     "date": "2026-10-06T15:34:14.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "En Allemagne, l’AfD accède à la présidence d’un Parlement régional, une première depuis 1945",
-     "url": "https://www.liberation.fr/international/europe/en-allemagne-lafd-accede-a-la-presidence-dun-parlement-regional-une-premiere-depuis-1945-20261006_BWNME6DLAZCJPOVOE4MNCW57JA/",
-     "date": "2026-10-06T15:15:34.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Allemagne. Le parti d'extrême droite AfD accède à la présidence d'un Parlement régional",
-     "url": "https://www.dna.fr/politique/2026/10/06/le-parti-d-extreme-droite-afd-accede-a-la-presidence-d-un-parlement-regional",
-     "date": "2026-10-06T11:57:00.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : François Ruffin veut «passer du Front populaire au CNR»",
-     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-francois-ruffin-veut-passer-du-front-populaire-au-cnr-20261005_2ZMIHR55BFGSLOJ6PAWBNUJMKY/",
-     "date": "2026-10-05T16:09:37.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "En Auvergne, le grand défilé des présidentiables au Sommet de l'élevage",
-     "url": "https://www.lefigaro.fr/politique/en-auvergne-le-grand-defile-des-presidentiables-au-sommet-de-l-elevage-20261005",
-     "date": "2026-10-05T16:05:45.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« Une victoire de Flavio Bolsonaro à la présidentielle au Brésil marquerait un tournant historique vers un régime autoritaire et illibéral » selon l’historienne Armelle Enders",
-     "url": "https://www.publicsenat.fr/actualites/international/une-victoire-de-flavio-bolsonaro-a-la-presidentielle-au-bresil-marquerait-un-tournant-historique-vers-un-regime-autoritaire-et-illiberal-selon-lhistorienne-armelle-end",
-     "date": "2026-10-05T14:53:25.000Z"
     }
    ]
   }
@@ -662,6 +677,52 @@
    "medias": 3,
    "mediasDistincts": 2,
    "sources": [
+    "20 Minutes",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T17:08:56.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
+    },
+    {
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
+    },
+    {
+     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
+     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
+     "media": "France 24",
+     "date": "2026-10-06T09:35:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
     "20 Minutes / Nice-Matin",
     "RFI"
    ],
@@ -847,40 +908,53 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "RFI"
+    "Public Sénat",
+    "France 24"
    ],
-   "derniere": "2026-10-06T17:08:56.000Z",
+   "derniere": "2026-10-06T17:31:58.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "budget",
+    "vignette": "budget"
    },
    "articles": [
     {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
+     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
+     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
+     "media": "Public Sénat",
+     "date": "2026-10-06T17:31:58.000Z"
     },
     {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "media": "France 24",
+     "date": "2026-10-06T09:29:23.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
+    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
     "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "140",
+    "unite": "milliards d’euros"
    }
   },
   {
@@ -914,6 +988,39 @@
    "titrePropre": {
     "titre": "Octobre",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Libération",
+    "France 24"
+   ],
+   "derniere": "2026-10-06T05:47:42.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Plus de 140 000 inscrits à la primaire de la gauche : «C’est très au-delà de nos prévisions»",
+     "url": "https://www.liberation.fr/politique/elections/plus-de-140-000-inscrits-a-la-primaire-de-la-gauche-cest-tres-au-dela-de-nos-previsions-20261006_NWQ42SOQ25HMHJ52LOES36CARY/",
+     "media": "Libération",
+     "date": "2026-10-06T05:47:42.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
+     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
+     "media": "France 24",
+     "date": "2026-10-05T16:14:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire de la gauche : l'essentiel du moment",
+    "origine": "regles"
    }
   },
   {
@@ -1119,6 +1226,108 @@
     "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-07T09:19:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
+     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
+     "media": "RFI",
+     "date": "2026-10-07T09:19:10.000Z"
+    },
+    {
+     "titre": "Mobilisation lycéenne en direct : les enseignants appellent à la grève, les blocages en recul",
+     "url": "https://www.france24.com/fr/france/20261007-en-direct-nu%C3%B1ez-suspend-utilisation-grenades-assourdissantes-contre-lyc%C3%A9ens-manifestation",
+     "media": "France 24",
+     "date": "2026-10-07T07:51:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T06:54:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation des lycéens: 450 000 manifestants en France selon les organisateurs, 266 000 selon le gouvernement",
+     "url": "https://www.rfi.fr/fr/france/20261006-en-direct-france-grosse-journ%C3%A9e-de-manifestation-pour-les-lyc%C3%A9es-rejoints-par-des-syndicats-profs-et-%C3%A9tudiants",
+     "media": "RFI",
+     "date": "2026-10-06T06:54:32.000Z"
+    },
+    {
+     "titre": "Colère lycéenne : 450 000 manifestants en France selon les organisateurs, 256 000 selon l'Intérieur",
+     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
+     "media": "France 24",
+     "date": "2026-10-06T04:57:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "chiffre": {
+    "valeur": "450 000",
+    "unite": "manifestants"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-07T11:16:12.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Ségolène Royal",
+      "photo": "photos/personnalites/segolene-royal.jpg",
+      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
+      "parti": "PS",
+      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bonjour chez vous ! — Ségolène Royal : « Si j’étais aux responsabilités, il n’y aurait pas de mouvement social »",
+     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/segolene-royal-si-jetais-aux-responsabilites-il-ny-aurait-pas-de-mouvement-social-e0",
+     "media": "Public Sénat",
+     "date": "2026-10-07T11:16:12.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ségolène Royal (PS) : actualité sur le social et l'emploi",
+    "origine": "regles"
    }
   },
   {
@@ -1742,6 +1951,41 @@
       "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T10:05:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T10:05:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
     "partis": [
      "LFI"
     ],
@@ -1767,41 +2011,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:05:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:05:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -2252,8 +2461,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : décision du tribunal administratif",
+    "origine": "regles"
    }
   },
   {
@@ -2667,32 +2876,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-07T09:19:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
-     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
-     "media": "RFI",
-     "date": "2026-10-07T09:19:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-07T09:09:14.000Z",
@@ -2993,7 +3176,14 @@
    ],
    "derniere": "2026-10-07T08:30:05.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Édouard Geffray",
+      "photo": "photos/personnalites/edouard-geffray.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
+      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
     "partis": [],
     "theme": "gouvernement",
     "vignette": "education"
@@ -3005,12 +3195,26 @@
      "media": "BFMTV",
      "date": "2026-10-07T08:30:05.000Z",
      "video": true
+    },
+    {
+     "titre": "Mobilisation lycéenne: \"88 personnels de l'Éducation nationale ont été blessés\", annonce le ministre Édouard Geffray",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-lyceenne-88-personnels-de-l-education-nationale-ont-ete-blesses-annonce-le-ministre-edouard-geffray_VN-202610070363.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T08:28:18.000Z",
+     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
+    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
     "origine": "regles"
-   }
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Geffray : ministre de l’éducation nationale",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3034,50 +3238,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T08:28:18.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Geffray",
-      "photo": "photos/personnalites/edouard-geffray.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
-      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne: \"88 personnels de l'Éducation nationale ont été blessés\", annonce le ministre Édouard Geffray",
-     "url": "https://www.bfmtv.com/politique/video-mobilisation-lyceenne-88-personnels-de-l-education-nationale-ont-ete-blesses-annonce-le-ministre-edouard-geffray_VN-202610070363.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T08:28:18.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : annonces sur la mobilisation lycéenne",
+    "titre": "Lycées : l'essentiel du moment",
     "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Geffray : ministre de l’éducation nationale",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
+   }
   },
   {
    "medias": 1,
@@ -3149,6 +3312,50 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-07T08:10:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Eva Sas",
+      "photo": "photos/deputes/PA610002.jpg",
+      "photoHd": "photos/deputes/hd/PA610002.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA610002",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
+     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
+     "media": "France 24",
+     "date": "2026-10-07T08:10:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Eva Sas : députée ECO (Paris)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4417,119 +4624,6 @@
    ],
    "titrePropre": {
     "titre": "La Rochelle Agglo : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-07T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Herbitzheim. Mathis Grossnickel, 23 ans, s’engage en politique pour lutter contre le réchauffement climatique",
-     "url": "https://www.dna.fr/environnement/2026/10/07/mathis-grossnickel-s-engage-en-politique-pour-lutter-contre-le-rechauffement-climatique",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Herbitzheim : environnement",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-07T04:32:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "« L’extrême droite et la droite, c’est mort ! » : Comment les lycéens mobilisés se préparent à la présidentielle",
-     "url": "https://www.20minutes.fr/societe/4251915-20261007-extreme-droite-droite-mort-comment-lyceens-mobilises-preparent-presidentielle?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-07T04:32:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-07T04:30:03.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« C’est le moment de rétablir certaines vérités » : six mois après son élection, la maire de Toulon Josée Massi met les choses au point",
-     "url": "https://www.nicematin.com/societe/politique/c-est-le-moment-de-retablir-certaines-verites-six-mois-apres-son-election-la-maire-de-toulon-josee-massi-met-les-choses-au-point-10735915",
-     "media": "Nice-Matin",
-     "date": "2026-10-07T04:30:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Express"
-   ],
-   "derniere": "2026-10-07T04:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon et la jeunesse : la leçon de François Mitterrand qu'il n’a jamais oubliée",
-     "url": "https://www.lexpress.fr/politique/melenchon-mitterrand-comment-utiliser-la-jeunesse-dans-une-strategie-presidentielle-EY57ESDQURBHJFWMPXQZN45YKM/",
-     "media": "L'Express",
-     "date": "2026-10-07T04:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : actualité sur l'éducation et la jeunesse",
     "origine": "regles"
    }
   }
