@@ -242,9 +242,9 @@ try {
   {
     const file = [postE(P1, il_y_a(1)), annonceE(A1, il_y_a(1), P1)];
     const tot = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 3 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
-    assert.strictEqual(publications().length, 1, "aucun espacement : l'annonce sort dès que son post l'est");
-    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 6 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
-    assert.strictEqual(publications().length, 1, "post publié il y a 6 min : l'annonce sort");
+    assert.strictEqual(publications().length, 0, "post publié il y a 3 min : l'annonce attend 3 h (jamais le même contenu d'affilée)");
+    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 3.2, { type: "post", titre: "Simplification de la vie économique" })] } });
+    assert.strictEqual(publications().length, 1, "post publié il y a plus de 3 h : l'annonce sort");
     assert.strictEqual(premier().media_type, "STORIES");
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
     const e = r.registre.entrees.find((x) => x.id === A1);
@@ -252,10 +252,10 @@ try {
     assert.strictEqual(e.type, "story");
     assert.match(r.resume, /Story d'annonce publiée/);
     // l'annonce passe avant une autre story en attente
-    await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 10 / 60, { type: "post" })] } });
+    await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 3.5, { type: "post" })] } });
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
-    // 60 min plus tard, le registre n'a plus d'exception mais l'annonce reste publiable (moins de 6 h)
-    await lancer({ entrees: file, registre: { entrees: [regPub(P1, 1.5, { type: "post" })] } });
+    // l'annonce reste publiable (moins de 6 h)
+    await lancer({ entrees: file, registre: { entrees: [regPub(P1, 4.5, { type: "post" })] } });
     assert.strictEqual(publications().length, 1);
     // une annonce n'est publiée qu'une fois
     await lancer({ entrees: file, registre: { entrees: [regPub(P1, 0.2, { type: "post" }), regPub(A1, 0.1, { annonceDe: P1 })] } });
@@ -326,6 +326,59 @@ try {
     await lancer({ entrees: [postE("c4c4c4c4c4c4", il_y_a(1), { titre: "Projet de loi de programmation militaire", titrePropre: "Programmation militaire" })], registre: { entrees: [regPub(P1, 20, { type: "post", titre: "Simplification de la vie économique" })] } });
     assert.strictEqual(publications().length, 1, "autre loi : publiée");
   }
+  // Fenêtre de 7 jours autour des posts et annonces : même dateIso + titres proches (post, annonce, story date/rappel) ; story de presse proche ; exemptions : annonce de SON post
+  {
+    const D = "2026-10-20";
+    const pubPost = (h, extra = {}) => regPub(P1, h, { type: "post", titre: "Simplification de la vie économique", dateIso: D, ...extra });
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "post même date, titre proche, publié il y a 100 h : refusé");
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: "2026-11-02" })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 1, "date différente : publié");
+    await lancer({ entrees: [postE("c5c5c5c5c5c5", il_y_a(1), { dateIso: D })], registre: { entrees: [pubPost(24 * 8)] } });
+    assert.strictEqual(publications().length, 1, "plus de 7 jours : possible");
+    // story « date » et « rappel » : jamais exemptées
+    await lancer({ entrees: [annonceE("c6c6c6c6c6c6", il_y_a(1), "zzzzzzzzzzzz", { annonceDe: undefined, rappelDe: P1, dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "story rappel même date : refusée");
+    await lancer({ entrees: [annonceE("c6c6c6c6c6c6", il_y_a(1), "zzzzzzzzzzzz", { annonceDe: undefined, modele: "date", dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "story date même date : refusée");
+    // annonce d'un AUTRE post de même date et de titre proche : refusée ; annonce de SON post : publiée
+    await lancer({ entrees: [annonceE("c7c7c7c7c7c7", il_y_a(1), "d9d9d9d9d9d9", { dateIso: D })], registre: { entrees: [pubPost(100)] } });
+    assert.strictEqual(publications().length, 0, "annonce d'un autre post déjà annoncé : refusée");
+    await lancer({ entrees: [annonceE("c7c7c7c7c7c7", il_y_a(1), P1, { dateIso: D })], registre: { entrees: [pubPost(4)] } });
+    assert.strictEqual(publications().length, 1, "annonce de son propre post : exemptée");
+    // story de presse proche d'un post publié il y a 5 jours : refusée ; à 8 jours : publiée
+    const presse = entree("c8c8c8c8c8c8", il_y_a(1), { titre: "Simplification de la vie économique : le texte adopté", titrePropre: "Simplification de la vie économique" });
+    await lancer({ entrees: [presse], registre: { entrees: [pubPost(24 * 5)] } });
+    assert.strictEqual(publications().length, 0, "story de presse proche d'un post de 5 jours : refusée");
+    await lancer({ entrees: [presse], registre: { entrees: [pubPost(24 * 8)] } });
+    assert.strictEqual(publications().length, 1, "post de 8 jours : publiée");
+    // une story de presse ordinaire d'il y a 5 jours ne bloque pas (reste à 36 h)
+    await lancer({ entrees: [presse], registre: { entrees: [regPub("e1e1e1e1e1e1", 24 * 5, { type: "story", titre: "Simplification de la vie économique" })] } });
+    assert.strictEqual(publications().length, 1, "story ordinaire de 5 jours : fenêtre de 36 h seulement");
+  }
+  // Le registre garde les liens (12 au plus, https), la date et les sujets (6 au plus)
+  {
+    const liens = Array.from({ length: 15 }, (_, i) => `https://exemple.fr/a${i}`);
+    const r = await lancer({ entrees: [entree("f1f1f1f1f1f1", il_y_a(1), { sources: [...liens, "http://non-https.fr/x"], dateIso: "2026-10-20", sujets: ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"] })] });
+    const l = r.registre.entrees.find((x) => x.id === "f1f1f1f1f1f1");
+    assert.deepStrictEqual(l.sources, liens.slice(0, 12));
+    assert.strictEqual(l.dateIso, "2026-10-20");
+    assert.strictEqual(l.sujets.length, 6);
+    assert.strictEqual(l.statut, "publiee");
+  }
+  // Garde sur le registre distant (origin/main) : un id déjà inscrit là-bas n'est jamais republié, même si la copie locale l'ignore
+  {
+    const d = mkdtempSync(join(tmpdir(), "distant-"));
+    const distant = join(d, "distant.json");
+    writeFileSync(distant, JSON.stringify({ entrees: [{ id: "aaaaaaaaaaaa", statut: "publiee", publieLe: il_y_a(0.2), mediaId: "MX", type: "story", titre: "Budget" }] }));
+    const r = await lancer({ entrees: [frais], registre: { entrees: [] }, env: { PUBLIER_REGISTRE_DISTANT: distant } });
+    assert.strictEqual(publications().length, 0, "id présent au registre distant : refusé");
+    assert.strictEqual(r.registre.entrees.filter((x) => x.id === "aaaaaaaaaaaa").length, 1, "repris une seule fois");
+    // fichier distant illisible : sans effet, la publication suit le registre local
+    writeFileSync(distant, "{pas du json");
+    await lancer({ entrees: [frais], registre: { entrees: [] }, env: { PUBLIER_REGISTRE_DISTANT: distant } });
+    assert.strictEqual(publications().length, 1, "registre distant illisible : garde sans effet");
+  }
   // Réserve électorale, monétisation, validation humaine, mots à risque, légende invalide
   {
     const reserve = "2027-04-17T10:00:00Z";
@@ -362,6 +415,7 @@ try {
     assert.strictEqual(appels.filter((a) => a.chemin === "/IGUSER/media").length, 0);
   }
   // ---------- VIDÉOS : story vidéo, Reel, attente du statut, replis ----------
+  process.env.HEMICYCLE_TEST_REELS = "1"; // les Reels ne sortent jamais en production : activés ici pour tester leur code
   {
     const LEG = "Projet de loi relatif à la simplification — texte adopté\n\nL'Assemblée nationale a adopté, le 1 octobre 2026, l'ensemble du texte.\nPour : 300 · Contre : 100 · Abstentions : 10.\n\nSource officielle : Assemblée nationale, scrutin public n°100 — https://www.assemblee-nationale.fr/dyn/17/scrutins/100\n\nToute l'actu politique : @hemicyclefrance\n#Politique #AssembléeNationale #Loi";
     const histoire = (id, cree, extra = {}) => entree(id, cree, { url_video: `${BASE}/vid/${id}.mp4`, ...extra });
@@ -490,6 +544,13 @@ try {
       assert.match(r6.resume, /serait publiée en Reel/);
       assert.strictEqual(creations().length, 0);
     }
+  }
+  delete process.env.HEMICYCLE_TEST_REELS;
+  // Aucun Reel, jamais : même un Reel prêt dans la file, derrière un post publié, ne sort pas
+  {
+    const P8 = "d8d8d8d8d8d8", R8 = "e8e8e8e8e8e8";
+    await lancer({ entrees: [{ id: R8, cree: il_y_a(3), type: "reel", reelDe: P8, titre: "Reel : x", titrePropre: "x", medias: [], url_image: `${BASE}/img/${R8}.jpg`, url_video: `${BASE}/vid/${R8}.mp4`, legende: "Un Reel de test pour le compte @hemicyclefrance sans aucun lien.", sources: [] }], config: { videos: true, videosMax: 2 }, registre: { entrees: [{ id: P8, statut: "publiee", publieLe: il_y_a(2), mediaId: "m8", type: "post" }] } });
+    assert.strictEqual(publications().length, 0, "aucun Reel, jamais");
   }
   // SUJETS SENSIBLES : niveau 1 (fait judiciaire établi) publié ; niveau 2 jamais sans validation humaine ; dernier filet sur la formulation
   {

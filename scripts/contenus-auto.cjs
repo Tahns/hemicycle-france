@@ -41,6 +41,7 @@ const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lir
 
 const RACINE = path.resolve(__dirname, "..");
 const COMPTE = "@hemicyclefrance";
+const { hashtags: hashtagsLegende } = require("./legendes.cjs");
 const RE_VOTE_FINAL = /^(?:sur )?l['’]ensemble (du|de la) (projet|proposition) de loi\b/i;
 const MAX_OCTETS = 8 * 1024 * 1024;
 const GARDER = 30; // même plafond que stories-auto.cjs (entrées de la file)
@@ -124,6 +125,7 @@ const TYPES = {
   "carrousel-loi": { avance: 120, validite: 360, story: false },
   "carrousel-hebdo": { avance: 20, validite: 300, story: false }, // le résumé hebdomadaire est écrit le dimanche à 18 h 05 : on attend qu'il existe
 };
+const SUJET_UNIQUE_24H = new Set(["aujourdhui", "vote-jour"]); // contenus qui portent un texte de loi : jamais le même texte deux fois en 24 h, tous formats confondus
 const PERIODE_SEMAINE = new Set(["comprendre", "carrousel-hebdo"]); // les autres types : une fois par jour
 /** Créneaux par défaut (heure de Paris ; jours : 1 = lundi … 7 = dimanche, absent = tous les jours). */
 const CRENEAUX_DEFAUT = {
@@ -196,6 +198,26 @@ function reconcilierEtat(etat, registre, now) {
 function dejaCree(id, { file, registre, brouillons }) {
   return (file?.entrees || []).some((e) => e.id === id) || (registre?.entrees || []).some((e) => e.id === id) || (brouillons || []).some((b) => b.id === id);
 }
+
+/** Titre d'entrée de gabarit (« Le vote du jour : … », « Nouveau post : … ») : il ne désigne pas un sujet, on ne le compare jamais. */
+const RE_TITRE_GABARIT = /^(Le vote du jour|Aujourd['’]hui à l['’]Assemblée|Nouveau post|Une loi expliquée|Ce qu['’]il faut retenir|Le chiffre du jour|Comprendre)\b/i;
+/**
+ * Sujets (titres rédigés) déjà présents, dans la file, les brouillons, le registre des publications et la mémoire des faits, depuis `heures` heures :
+ * [{ id, titre, contenu }]. `contenu` = type de contenu à créneau de l'entrée (aucun pour une story ou un post de presse).
+ * Registre : pas de titrePropre ; on y lit `sujets` et, pour un post, son titre (les autres titres de registre sont des gabarits ou des formules).
+ */
+function sujetsRecents({ file, registre, brouillons, etat }, now, heures) {
+  const limite = now.getTime() - heures * 36e5;
+  const recent = (iso) => !iso || !Number.isFinite(Date.parse(iso)) || Date.parse(iso) >= limite;
+  const out = [];
+  const ajoute = (e, titres) => { for (const t of titres) if (typeof t === "string" && t && !RE_TITRE_GABARIT.test(t)) out.push({ id: e.id, titre: t, contenu: e.contenu || null }); };
+  for (const e of [...(file?.entrees || []), ...(brouillons || [])]) if (recent(e.cree)) ajoute(e, [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]);
+  for (const e of registre?.entrees || []) if (e.statut === "publiee" && e.publieLe && recent(e.publieLe)) ajoute(e, [e.type === "post" && !e.sensible ? e.titre : null, ...(Array.isArray(e.sujets) ? e.sujets : [])]);
+  for (const [k, v] of Object.entries(etat?.faits || {})) if (Array.isArray(v?.sujets) && recent(v.le)) ajoute({ id: v.id, contenu: k.split("|")[0] }, v.sujets);
+  return out;
+}
+/** Identifiant du post « loi » (scripts/stories-auto.cjs choisirPostLoi) pour un voteId « an-<numéro> » ou « senat-<id> ». */
+const idPostLoi = (voteId) => { const m = /^(an|senat)-(.+)$/.exec(String(voteId || "")); return m ? hash(`post-loi|${m[1]}|${m[2]}`) : null; };
 
 // ---------------------------------------------------------------------------------------------------------------------
 // SÉLECTEURS (fonctions pures : { refus } ou { contenu })
@@ -384,7 +406,7 @@ function choisirChiffre({ indicateurs, budget, sondages, veille = null, etat, jo
 }
 
 // ----- Carrousels --------------------------------------------------------------------------------------------------------
-const legendeCarrousel = ({ titre, lignes, source, hashtags }) => [titre, "", ...lignes, "", source, "", `Chaque jour : ${COMPTE}`, hashtags.join(" ")].join("\n");
+const legendeCarrousel = ({ titre, lignes, source, hashtags, appel = "À enregistrer pour y revenir, à partager pour en parler autour de vous." }) => [titre, "", ...lignes, "", source, "", appel, `Chaque jour : ${COMPTE}`, "", hashtags.join(" ")].join("\n");
 
 const etapeSuivante = ({ chambre, resultat, etape, navetteSenat }) => {
   const an = chambre === "an", autre = an ? "au Sénat" : "à l'Assemblée nationale";
@@ -429,11 +451,35 @@ function votesFinaux({ lois, senat, jour, jours = 3 }) {
   return out.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.ordre - a.ordre);
 }
 
+/** Le vote final `v` a-t-il déjà un post, une annonce, un carrousel ou un titre proche (file, brouillons, registre, faits) ? Renvoie la raison, ou null. */
+function loiDejaTraitee(v, { etat, file, registre, brouillons }, now) {
+  const postId = idPostLoi(v.voteId);
+  const annonceId = postId ? SA.idAnnonce(postId) : null;
+  const idCarrousel = idContenu("carrousel-loi", v.voteId);
+  const toutes = [...(file?.entrees || []), ...(brouillons || []), ...(registre?.entrees || [])];
+  for (const e of toutes) {
+    if (!e) continue;
+    if (e.statut === "perimee") continue; // jamais publiée : ne compte pas
+    if (postId && (e.id === postId || e.id === annonceId || e.annonceDe === postId || e.reelDe === postId)) return "post ou annonce du même vote";
+    if (e.id === idCarrousel) return "carrousel du même vote";
+    if (e.voteId && e.voteId === v.voteId) return "même vote";
+  }
+  const faits = Object.values(etat?.faits || {}).some((x) => x && (x.id === postId || x.id === annonceId));
+  if (faits) return "post du même vote (mémoire)";
+  const titre = v.f.titreCourt;
+  const proche = sujetsRecents({ file, registre, brouillons, etat }, now, 96).find((x) => x.contenu !== "carrousel-hebdo" && SA.titresProches(x.titre, titre));
+  return proche ? `titre proche : « ${proche.titre.slice(0, 80)} »` : null;
+}
+
 /** 5a. Carrousel « une loi expliquée en 5 images » : un vote final (adopté ou rejeté) récent, pas déjà expliqué. */
-function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now }) {
+function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, registre, brouillons }) {
   if (!donneesFraiches(lois?.lastUpdated, FRAICHEUR_DONNEES_J.lois, now)) return { refus: "data/lois.json absent ou trop ancien" };
+  let refusLoi = "aucun vote final récent à expliquer";
   for (const v of votesFinaux({ lois, senat, jour })) {
     if (etat.faits[`carrousel-loi|${v.voteId}`]) continue;
+    // Un sujet de loi = UN seul format : post (+ son annonce) OU carrousel, jamais les deux (ni deux fois le même texte).
+    const raison = loiDejaTraitee(v, { etat, file, registre, brouillons }, now);
+    if (raison) { refusLoi = `loi déjà traitée (${raison})`; continue; }
     const f = v.f, an = f.spec.chambre === "Assemblée nationale", sp = f.spec;
     const verbe = sp.verdict === "adopte" ? "adopté" : "rejeté";
     const d = decomposerTitreVote(v.l ? v.l.titre : v.s.titre);
@@ -464,9 +510,9 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now }) {
     ];
     const sourceLegende = `Source officielle : ${an ? "Assemblée nationale" : "Sénat"}, scrutin public n°${sp.numero} — ${f.source}`;
     const legende = legendeCarrousel({
-      titre: `${sp.titre} : texte ${verbe}`,
+      titre: `5 images pour comprendre : ${coupe(sp.titre, 150)} (texte ${verbe})`,
       lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} l'ensemble du texte${sp.etape ? ` (${sp.etape})` : ""}.`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions : ${nbFr(sp.abst)}.`, "En 5 images : contexte, intitulé, résultat du vote, suites de la procédure, sources."],
-      source: sourceLegende, hashtags: ["#Politique", `#${an ? "AssembléeNationale" : "Sénat"}`, "#Loi", "#Parlement"],
+      source: sourceLegende, hashtags: hashtagsLegende({ genre: "carrousel-loi", chambre: an ? "an" : "senat", theme: an ? "assemblee" : "senat", titre: sp.titre, max: 5 }),
     });
     const alts = [
       `Image 1 sur 5. ${sp.titre}, texte ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${sp.date}. ${contexte.join(" ")}`,
@@ -480,7 +526,7 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now }) {
       entree: { titre: `Une loi expliquée : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteId: v.voteId, sources: [f.source, urlDossier].filter(Boolean), legende, alt: alts[0] },
     } };
   }
-  return { refus: "aucun vote final récent à expliquer" };
+  return { refus: refusLoi };
 }
 
 /** 5b. Carrousel hebdomadaire d'après data/digest/AAAA-Wss.json (le résumé existant) : le dimanche. */
@@ -514,7 +560,7 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   const couverture = { n: 1, total, couverture: true, kicker: "Ce qu'il faut retenir", titre: "Ce qu'il faut retenir cette semaine", corps: [{ p: `Au Parlement, semaine ${periode}`, couleur: "ciel", taille: 36, poids: 700 }, { p: sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", taille: 34 }], source: "Source : données officielles de l'Assemblée nationale.", accroche: "Faites défiler" };
   const specs = [couverture, ...corps.map((c, i) => ({ ...c, n: i + 2, total }))];
   const lignes = [sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", `${total} images : ${[textes.length ? "textes votés" : null, dossiers.length ? "textes les plus discutés" : null, seances.length ? "ordre du jour de la semaine prochaine" : null, sondage ? "dernier sondage" : null].filter(Boolean).join(", ") || "les chiffres de la semaine"}, sources.`];
-  const legende = legendeCarrousel({ titre: `Ce qu'il faut retenir cette semaine au Parlement (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr) et ordre du jour (assemblee-nationale.fr).", hashtags: ["#Politique", "#AssembléeNationale", "#Parlement", "#Actualité"] });
+  const legende = legendeCarrousel({ titre: `${total} images pour retenir l'essentiel de la semaine au Parlement (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr) et ordre du jour (assemblee-nationale.fr).", hashtags: hashtagsLegende({ genre: "carrousel-hebdo", chambre: "an", theme: "assemblee", max: 5 }) });
   const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).join(" ")}`.slice(0, 990));
   return { contenu: {
     type: "carrousel-hebdo", cle: digest.id, rendu: { kind: "carrousel", specs, alts },
@@ -560,7 +606,7 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
     else if (c.nom === "vote-jour") r = choisirVoteDuJour({ lois: donnees.lois, jour, now });
     else if (c.nom === "comprendre") r = choisirComprendre({ notions: donnees.notions || [], etat: etatLocal, jour });
     else if (c.nom === "chiffre-jour") r = choisirChiffre({ indicateurs: donnees.indicateurs, budget: donnees.budget, sondages: donnees.sondages, veille: donnees.veille, etat: etatLocal, jour, now });
-    else if (c.nom === "carrousel-loi") r = choisirCarrouselLoi({ lois: donnees.lois, senat: donnees.senat, navette: donnees.navette, etat: etatLocal, jour, now });
+    else if (c.nom === "carrousel-loi") r = choisirCarrouselLoi({ lois: donnees.lois, senat: donnees.senat, navette: donnees.navette, etat: etatLocal, jour, now, file, registre, brouillons });
     else if (c.nom === "carrousel-hebdo") r = choisirCarrouselHebdo({ digest: donnees.digest, jour, now });
     if (!r || r.refus) { refus[c.nom] = r?.refus || "inconnu"; continue; }
     const k = r.contenu;
@@ -568,9 +614,21 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
     const faitCle = `${c.nom}|${k.cle}`;
     const periodeCle = `${c.nom}|${PERIODE_SEMAINE.has(c.nom) ? "semaine:" + semaineISO(jour).id : "jour:" + jour}`;
     const id = idContenu(c.nom, k.cle);
-    if (etatLocal.faits[faitCle] || etatLocal.faits[periodeCle] || dejaCree(id, { file, registre, brouillons })) { refus[c.nom] = "déjà produit pour cette période"; continue; }
+    if (etatLocal.faits[faitCle] || etatLocal.faits[periodeCle] || dejaCree(id, { file, registre, brouillons }) || plan.some((x) => x.id === id || x.periodeCle === periodeCle)) { refus[c.nom] = "déjà produit pour cette période"; continue; }
+    // Filet si la mémoire des faits est perdue : une entrée de la file ou un brouillon du même type, pour la même période ou le même contenu
+    const periodeDe = (iso) => (PERIODE_SEMAINE.has(c.nom) ? semaineISO(parisInfos(new Date(iso)).jour).id : parisInfos(new Date(iso)).jour);
+    const memePeriode = (e) => e.contenu === c.nom && (String(e.periode) === String(k.cle) || (Number.isFinite(Date.parse(e.cree)) && periodeDe(e.cree) === periodeDe(now.toISOString())));
+    if ([...(file?.entrees || []), ...(brouillons || [])].some(memePeriode)) { refus[c.nom] = "déjà produit pour cette période"; continue; }
+    // Un même texte (dossier, titre officiel) ne ressort pas dans les 24 h sous un autre format (« Aujourd'hui à l'Assemblée » puis « Le vote du jour »)
+    if (SUJET_UNIQUE_24H.has(c.nom)) {
+      const siens = [k.entree.titrePropre, ...(k.entree.sujets || [])].filter(Boolean);
+      const autre = sujetsRecents({ file, registre, brouillons, etat: etatLocal }, now, 24).concat(plan.flatMap((x) => [x.entree.titrePropre, ...(x.entree.sujets || [])].filter(Boolean).map((t) => ({ id: x.id, titre: t, contenu: x.nom }))))
+        .find((x) => x.contenu !== c.nom && x.id !== id && siens.some((t) => SA.titresProches(x.titre, t)));
+      if (autre) { refus[c.nom] = `sujet déjà publié ou en file depuis moins de 24 h (« ${autre.titre.slice(0, 80)} »)`; continue; }
+    }
     if (!t.story) posts++;
     plan.push({ ...k, nom: c.nom, id, faitCle, periodeCle, pasAvant: pasAvantIso, expire: expireIso });
+    etatLocal.faits[faitCle] = etatLocal.faits[periodeCle] = { id, le: now.toISOString() }; // deux créneaux du même type le même jour : un seul sort
   }
   return { plan, refus };
 }
@@ -733,7 +791,8 @@ async function main({ ch = chemins(), now = maintenant(), dessiner = (jobs) => d
       if (images.length !== jobs.length) throw new Error("nombre d'images inattendu");
       const { entree, vers } = ecrireContenu(p, images, { now, config: s.config, ch });
       if (vers === "file") file = { ...file, entrees: [...file.entrees, entree].slice(-GARDER) };
-      etat.faits[p.faitCle] = { id: p.id, le: now.toISOString() };
+      const sujets = [p.entree.titrePropre, ...(p.entree.sujets || [])].filter((t) => typeof t === "string" && t).slice(0, 12);
+      etat.faits[p.faitCle] = { id: p.id, le: now.toISOString(), sujets };
       etat.faits[p.periodeCle] = { id: p.id, le: now.toISOString() };
       if (p.nom === "comprendre") etat.comprendre.push({ cle: p.notion, id: p.id, date: parisInfos(now).jour });
       if (p.nom === "chiffre-jour") etat.chiffres[p.chiffre] = { id: p.id, date: parisInfos(now).jour };
@@ -795,7 +854,7 @@ async function apercus(ch = chemins()) {
 module.exports = {
   chemins, parisInfos, parisVersIso, semaineISO, dateLongue, TYPES, CRENEAUX_DEFAUT, heureEnMinutes, normaliserCreneaux, creneauxDuJour,
   etatVide, normaliserEtat, reconcilierEtat, dejaCree, idContenu, choisirAujourdhui, classerScrutin, choisirVoteDuJour, notionsComprendre, prochaineNotion, choisirComprendre,
-  separerValeur, candidatsChiffres, choisirChiffre, etapeSuivante, votesFinaux, choisirCarrouselLoi, choisirCarrouselHebdo, planifier, postsDuJour,
+  separerValeur, candidatsChiffres, choisirChiffre, etapeSuivante, votesFinaux, choisirCarrouselLoi, loiDejaTraitee, idPostLoi, sujetsRecents, choisirCarrouselHebdo, planifier, postsDuJour,
   controlerImage, ecrireContenu, nettoyerEnfants, main, aFaire, apercus, tachesDessin,
 };
 

@@ -61,8 +61,9 @@ const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.instagram.com/v21.0").replace(/\/+$/, "");
 const MAX_PAR_JOUR_DEFAUT = 4; // stories par jour (hors stories d'annonce de post) ; réglable par data/stories-config.json (« maxParJour », 1 à 99 ; 99 = pas de plafond)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
-const ESPACEMENT_ANNONCE_MIN = 0; // la story d'annonce peut sortir dès que son post est publié
+const ESPACEMENT_ANNONCE_MIN = 180; // la story d'annonce peut sortir dès que son post est publié
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
+const REELS_ACTIFS = process.env.HEMICYCLE_TEST_REELS === "1"; // décision du propriétaire : aucun Reel, jamais (les Reels déjà en file ne sont pas publiés) ; la variable ne sert qu'aux tests du code Reel
 const ESPACEMENT_MIN = 0; // aucun espacement : tout ce qui est à publier sort (au plus une publication par passage, un passage toutes les 15 min environ), de 7 h à 23 h
 const FRAICHEUR_H = 6; // une story non publiée depuis plus de 6 h est périmée (avec 1 publication par heure, 3 h laissait périmer trop de stories)
 const ALERTE_JETON_JOURS = 10;
@@ -72,6 +73,7 @@ const ATTENTE_VIDEO_MAX_MS = Number(process.env.PUBLIER_VIDEO_MAX_MS) || 5 * 60 
 const MAX_REELS_PAR_JOUR_DEFAUT = 2;
 const GARDER_REGISTRE = 200;
 const FENETRE_DOUBLON_H = 36; // un sujet proche d'une story publiée depuis moins de 36 h est refusé
+const FENETRE_DOUBLON_POST_H = 7 * 24; // un post/une annonce publié depuis moins de 7 jours : même date (dateIso) + titres proches, ou story de presse proche, refusés
 
 const A_SEC = process.argv.includes("--a-sec");
 const IG_USER_ID = (process.env.IG_USER_ID || "").trim();
@@ -161,7 +163,7 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
   const perimees = [];
   const candidates = [];
-  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && config.videos === true && e.url_video)) && e.id && !deja.has(e.id) && !retires.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
+  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && REELS_ACTIFS && config.videos === true && e.url_video)) && e.id && !deja.has(e.id) && !retires.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
   // 1. posts et stories : périmées après 3 h (story) ou 12 h (post)
   let enAttente = 0, enCreneau = 0;
   for (const e of entreesFile.filter((x) => !estAnnonce(x) && !estReel(x))) {
@@ -242,9 +244,27 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
     ...recentes.filter((d) => !retires.has(d.id)).flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
     ...(file?.entrees || []).filter((e) => dernieres.has(e.id) && !retires.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraite = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  const dejaTraiteCourt = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  // Fenêtre de 7 jours autour des posts et annonces publiés (le registre garde titre, sujets et dateIso). Seuls l'annonce et le Reel de LEUR post sont exemptés ;
+  // les stories « date » et « rappel » (rappelDe) ne le sont pas. Les contenus récurrents à créneau restent hors de ce contrôle.
+  const longues = publiees.filter((d) => !retires.has(d.id) && now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_POST_H * 36e5 && (d.type === "post" || d.type === "carousel" || d.annonceDe));
+  const titresRegistre = (d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : []), ...(file?.entrees || []).filter((x) => x.id === d.id && !d.sensible).flatMap((x) => [x.titrePropre, ...(Array.isArray(x.sujets) ? x.sujets : [])])].filter(Boolean);
+  const dateDe = (e) => e.dateIso || (deja.get(e.annonceDe || e.reelDe || e.rappelDe) || {}).dateIso || null;
+  const dejaTraiteLong = (e) => {
+    if (estReel(e) || estCreneau(e)) return false;
+    const titres = titresDeEntree(e);
+    if (!titres.length) return false;
+    const date = dateDe(e);
+    const issueDePost = estPostFil(e) || estAnnonce(e) || Boolean(e.rappelDe) || Boolean(e.dateIso);
+    return longues.some((d) => {
+      if (d.id === e.id || (estAnnonce(e) && (d.id === e.annonceDe || d.reelDe === e.annonceDe))) return false; // l'annonce de LEUR post
+      if (!titresRegistre(d).some((p) => titres.some((t) => titresProches(p, t)))) return false;
+      return issueDePost ? Boolean(date) && d.dateIso === date : true; // post/annonce : même date ; story de presse : titres proches suffisent
+    });
+  };
+  const dejaTraite = (e) => dejaTraiteCourt(e) || dejaTraiteLong(e);
   ok = ok.filter((e) => !risque(e) && !dejaTraite(e));
-  if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente, légende invalide ou sujet déjà publié dans les dernières 36 h");
+  if (ok.length < avant && !ok.length) return sortie("entrée(s) écartée(s) : mot de la liste prudente, légende invalide ou sujet déjà publié (36 h ; 7 jours pour un post ou une annonce)");
   if (!ok.length) return sortie(candidatesBrutes ? `${candidatesBrutes} entrée(s) écartée(s) (réserve électorale ou monétisation)` : "rien à publier");
   return { entree: ok[0], perimees };
 }
@@ -350,10 +370,45 @@ async function enLigne(url, type = null) {
 }
 const imageEnLigne = (url) => enLigne(url);
 
+/** Liens https des sources d'une entrée de file (chaînes ou objets { url }), 12 au plus : recopiés au registre pour comparer les sujets par lien. */
+const liensDe = (e) => (Array.isArray(e.sources) ? e.sources : []).map((x) => (typeof x === "string" ? x : x && x.url)).filter((u) => typeof u === "string" && /^https:\/\//i.test(u)).slice(0, 12);
+
 function ecrireRegistre(registre, now) {
   registre.lastUpdated = now.toISOString();
   registre.entrees = registre.entrees.slice(-GARDER_REGISTRE);
   fs.writeFileSync(FICHIER_REGISTRE, JSON.stringify(registre, null, 1) + "\n");
+}
+
+/**
+ * DEUXIÈME VERROU contre les doublons : le registre le plus récent de origin/main (le workflow fait « git fetch » puis « reset --hard » avant ce script ; on refait un fetch ici
+ * juste avant de lire). Les entrées qu'il contient et que notre copie ignore sont reprises : l'id déjà publié est refusé et les plafonds en tiennent compte.
+ * PUBLIER_REGISTRE_DISTANT (chemin d'un fichier) remplace git dans les essais. Hors dépôt git, ou sans l'option, la garde est sans effet (le registre local reste la référence).
+ */
+function lireRegistreDistant() {
+  try {
+    let brut;
+    if (process.env.PUBLIER_REGISTRE_DISTANT) brut = fs.readFileSync(process.env.PUBLIER_REGISTRE_DISTANT, "utf-8");
+    else if (!process.env.PUBLIER_REGISTRE && process.env.GITHUB_ACTIONS === "true") {
+      const { execFileSync } = require("child_process");
+      try { execFileSync("git", ["fetch", "--quiet", "origin", "main"], { cwd: RACINE, timeout: 30000, stdio: "ignore" }); } catch (e) { /* hors ligne : on lit le dernier état connu */ }
+      brut = execFileSync("git", ["show", "origin/main:data/instagram-publiees.json"], { cwd: RACINE, timeout: 15000, encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 16 * 1024 * 1024 });
+    } else return null;
+    const v = JSON.parse(brut);
+    return v && Array.isArray(v.entrees) ? v : null;
+  } catch (e) { return null; }
+}
+/** Ajoute au registre local les entrées du registre distant qu'il ne connaît pas encore (ou dont le statut est plus avancé : « publiee » l'emporte). Renvoie le nombre d'ajouts. */
+function fusionnerDistant(registre, distant) {
+  if (!distant) return 0;
+  let n = 0;
+  const locaux = new Map(registre.entrees.map((x) => [x.id, x]));
+  for (const d of distant.entrees) {
+    if (!d || !d.id) continue;
+    const l = locaux.get(d.id);
+    if (!l) { registre.entrees.push(d); locaux.set(d.id, d); n++; }
+    else if (l.statut !== "publiee" && d.statut === "publiee") { Object.assign(l, d); n++; }
+  }
+  return n;
 }
 
 async function main() {
@@ -379,6 +434,9 @@ async function main() {
   if (!Array.isArray(registre.entrees)) registre.entrees = [];
   const file = lFile.valeur || { entrees: [] };
   if (!Array.isArray(file.entrees)) file.entrees = [];
+  const ajoutsDistants = fusionnerDistant(registre, lireRegistreDistant());
+  if (ajoutsDistants) log(`${ajoutsDistants} entrée(s) du registre de origin/main reprise(s) (publications faites par un autre passage) : jamais republiées.`);
+  if (ajoutsDistants && !A_SEC) ecrireRegistre(registre, now);
   if (jeton.valide && !A_SEC && registre.entrees.some((x) => x.statut === "en-cours")) { await reprendreEnCours(registre, now); ecrireRegistre(registre, now); }
   const c = choisir({ file, registre, config, now, retires: lireRetiresSur() });
 
@@ -401,6 +459,15 @@ async function main() {
   } else if (mode !== "reel" && mode !== "story-video" && !(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : nouvel essai au prochain passage.`); finir(); return; }
   const nom = { post: "post", carrousel: "carrousel", reel: "Reel", "story-image": "story", "story-video": "story vidéo" };
   if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${nom[mode]}.`); return; }
+  // dernier contrôle, juste avant d'envoyer : l'id figure-t-il déjà au registre de origin/main ? (les vérifications précédentes ont pris du temps)
+  const dernierDistant = lireRegistreDistant();
+  if (dernierDistant && dernierDistant.entrees.some((x) => x && x.id === e.id)) {
+    fusionnerDistant(registre, dernierDistant);
+    alerte(`l'entrée ${e.id} figure déjà au registre de origin/main : refusée (pas de doublon).`);
+    finir();
+    if (!A_SEC) ecrireRegistre(registre, now);
+    return;
+  }
   finir(); // les périmées sont enregistrées même si la publication échoue
   let enCours = null;
   const avantMediaPublish = () => { // intention écrite AVANT media_publish (audit A-01)
@@ -410,7 +477,7 @@ async function main() {
   };
   const nomPub = () => (mode === "post" ? "Post publié" : mode === "carrousel" ? "Carrousel publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée");
   const inscrire = (mediaId) => {
-    const ligne = { id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: typeDe(e), ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 8) : undefined };
+    const ligne = { id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: typeDe(e), ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 6) : undefined, ...(liensDe(e).length ? { sources: liensDe(e) } : {}) };
     if (enCours) { delete enCours.echec; Object.assign(enCours, ligne); } else registre.entrees.push(ligne);
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
   };
@@ -451,5 +518,5 @@ async function main() {
   }
 }
 
-module.exports = { choisir, masquer, legendeValide, risque };
+module.exports = { choisir, fusionnerDistant, masquer, legendeValide, risque };
 if (require.main === module) main().catch((e) => { console.error("[publier-stories]", masquer(e.message)); process.exit(1); });

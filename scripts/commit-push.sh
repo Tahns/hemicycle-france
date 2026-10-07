@@ -14,10 +14,16 @@ for chemin in "$@"; do
   if [ -e "$chemin" ] || compgen -G "$chemin" > /dev/null; then git add -A -- "$chemin"; fi
 done
 if git diff --cached --quiet; then
-  echo "Rien de nouveau — rien à committer."
-  exit 0
+  # Rien de nouveau à committer ; mais un commit local non poussé (essai précédent échoué) doit partir
+  if git fetch -q origin "$branche" 2>/dev/null && [ "$(git rev-list --count "origin/$branche..HEAD" 2>/dev/null || echo 0)" -gt 0 ]; then
+    echo "Commit local non poussé détecté : nouvel essai de push."
+  else
+    echo "Rien de nouveau — rien à committer."
+    exit 0
+  fi
+else
+  git commit -q -m "$message"
 fi
-git commit -q -m "$message"
 for i in 1 2 3 4; do
   if git pull --rebase -X theirs origin "$branche" && git push origin "HEAD:$branche"; then
     git status -sb | head -1
@@ -26,8 +32,8 @@ for i in 1 2 3 4; do
   git rebase --abort 2>/dev/null || true
   sleep $((i * 5))
 done
-echo "::error::Push impossible après 4 tentatives : les données de cette exécution ne sont pas publiées."
+echo "::error::Push impossible après 4 tentatives : les données de cette exécution ne sont pas poussées (pour le registre des publications, une publication Instagram peut avoir eu lieu sans être enregistrée : vérifier tout de suite)."
 if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
-  echo "- **Publication** : le commit des données a échoué (conflit de push répété) ; elles seront recalculées à la prochaine exécution." >> "$GITHUB_STEP_SUMMARY"
+  echo "- **Publication** : le commit des données a échoué (conflit de push répété). ATTENTION : si ce passage a publié sur Instagram, le registre data/instagram-publiees.json n'est PAS à jour sur la branche (risque de doublon) : relancer le workflow ou ajouter l'entrée à la main. Pour les autres fichiers, ils seront recalculés à la prochaine exécution." >> "$GITHUB_STEP_SUMMARY"
 fi
 exit 1

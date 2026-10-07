@@ -108,6 +108,7 @@ const MAX_OCTETS = 8 * 1024 * 1024;
 const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
+const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
 
@@ -121,13 +122,26 @@ function titreGenerique(titre) {
 
 // Mots du gabarit « X : l'essentiel du moment » : ils ne désignent pas un sujet (J-09)
 const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont", "essentiel", "moment", "suivi", "journee", "editorial", "actualite"]);
-const racines = (t) => new Set(sansAccent(t).replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length >= 4 && !MOTS_VIDES.has(w)).map((w) => w.slice(0, 5)));
-/** Deux titres rédigés parlent-ils du même sujet (« Blocage des lycées » / « Blocus des lycées ») ? */
+// Sigles (respect de la casse : « an » est aussi un nom commun) et formes longues ramenés à une même forme avant le calcul des racines (D).
+// Les noms d'institutions ou de partis (« entités ») ne suffisent JAMAIS à eux seuls à dire que deux titres parlent du même sujet.
+const SIGLES = [[/\bRN\b/g, "rassemblement national"], [/\bLFI\b/g, "france insoumise"], [/\bPS\b/g, "parti socialiste"], [/\bLR\b/g, "republicains"], [/\bAN\b/g, "assemblee nationale"], [/\bPLFSS\b/g, "projet loi financement securite sociale"], [/\bPLF\b/g, "projet loi finances"]];
+const FORMES = [[/\bprojet de loi de finances\b/g, "projet loi finances"], [/\bprojet de loi de financement de la securite sociale\b/g, "projet loi financement securite sociale"], [/\belections? presidentielles?\b/g, "presidentielle"], [/\bla france insoumise\b/g, "france insoumise"], [/\bles republicains\b/g, "republicains"]];
+const ENTITES = new Set(["rasse", "natio", "franc", "insou", "parti", "socia", "repub", "assem"]);
+const normaliserSujet = (t) => {
+  let x = String(t || "");
+  for (const [re, par] of SIGLES) x = x.replace(re, par);
+  x = sansAccent(x);
+  for (const [re, par] of FORMES) x = x.replace(re, par);
+  return x;
+};
+const racines = (t) => new Set(normaliserSujet(t).replace(/[^a-z0-9]+/g, " ").split(" ").filter((w) => w.length >= 4 && !MOTS_VIDES.has(w)).map((w) => w.slice(0, 5)));
+/** Deux titres rédigés parlent-ils du même sujet (« Blocage des lycées » / « Blocus des lycées » ; « Le RN tient son congrès » / « Congrès du Rassemblement National ») ? */
 function titresProches(a, b) {
   const x = racines(a), y = racines(b);
   if (!x.size || !y.size) return false;
-  const commun = [...x].filter((w) => y.has(w)).length;
-  return commun >= 1 && commun / Math.min(x.size, y.size) >= 0.5;
+  const communs = [...x].filter((w) => y.has(w));
+  if (!communs.some((w) => !ENTITES.has(w))) return false; // un parti ou une institution en commun ne fait pas un même sujet
+  return communs.length / Math.min(x.size, y.size) >= 0.5;
 }
 const RECENT_H = 24;
 /** Titres d'une entrée pour la détection de doublons. Une entrée « sensible » a un titre-formule (« Selon … : … ») semblable d'un sujet à l'autre : on compare le titre de presse (sujets), jamais la formule. */
@@ -157,6 +171,48 @@ function titresRecentsH(entrees, registre, now, h) {
     ...(entrees || []).filter((e) => e.cree && garde(e.cree) && !retires.has(e.id)).flatMap(titresDe),
     ...(registre?.entrees || []).filter((e) => e.statut === "publiee" && e.publieLe && garde(e.publieLe) && !retires.has(e.id)).flatMap((e) => [e.sensible ? null : e.titre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter((t) => typeof t === "string" && t);
+}
+
+const FENETRE_PRESSE_H = 72; // un sujet de presse déjà publié (file OU registre) ne revient pas avant 72 h
+const normTitre = (t) => sansAccent(String(t || "")).replace(/[^a-z0-9]+/g, " ").trim();
+const ecartJours = (a, b) => (/^\d{4}-\d{2}-\d{2}$/.test(a || "") && /^\d{4}-\d{2}-\d{2}$/.test(b || "")) ? Math.abs(Date.parse(a + "T12:00:00Z") - Date.parse(b + "T12:00:00Z")) / 864e5 : Infinity;
+/**
+ * Entrées de la file ET du registre des publications des dernières `h` heures, fusionnées par id : { id, t, titres, dateIso, sources, presse }.
+ * `titres` = titres rédigés, titres de presse de la fiche et sujets (jamais le titre-formule d'une entrée sensible) ; `presse` = story sans date d'événement ni donnée propre.
+ */
+function entreesRecentes(entrees, registre, now, h) {
+  const retires = lireRetiresSur();
+  const garde = (iso) => iso && now.getTime() - Date.parse(iso) < h * 36e5;
+  const parId = new Map();
+  const ajouter = (e, iso) => {
+    if (!e?.id || retires.has(e.id) || !garde(iso)) return;
+    const r = parId.get(e.id) || { id: e.id, t: 0, titres: [], dateIso: null, sources: [], presse: true };
+    r.t = Math.max(r.t, Date.parse(iso));
+    for (const t of [e.sensible ? null : e.titrePropre, e.sensible ? null : e.titre, ...(Array.isArray(e.sujets) ? e.sujets : [])]) if (typeof t === "string" && t && !r.titres.includes(t)) r.titres.push(t);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(e.dateIso || "")) r.dateIso = e.dateIso;
+    for (const u of Array.isArray(e.sources) ? e.sources : []) if (typeof u === "string" && !r.sources.includes(u)) r.sources.push(u);
+    if (e.type === "post" || e.donneesPropres || e.sondageId || e.annonceDe || e.type === "reel") r.presse = false;
+    parId.set(e.id, r);
+  };
+  for (const e of entrees || []) ajouter(e, e.cree);
+  for (const e of registre?.entrees || []) if (e.statut === "publiee") ajouter(e, e.publieLe);
+  return [...parId.values()];
+}
+/** Deux événements datés sont-ils le même ? Titres proches et dates à un jour près, ou titre identique à 3 jours près (C). */
+function memeEvenement(rec, titre, iso) {
+  if (!rec.dateIso) return false;
+  const ecart = ecartJours(rec.dateIso, iso);
+  if (ecart <= 1 && rec.titres.some((t) => titresProches(t, titre))) return true;
+  return ecart <= 3 && rec.titres.some((t) => normTitre(t) === normTitre(titre));
+}
+/** Un événement daté `iso` de titre `titre` a-t-il déjà été publié (file ou registre, sauf les ids de `sauf`) ? */
+const evenementDejaPublie = (entrees, registre, now, titre, iso, sauf = []) =>
+  entreesRecentes(entrees, registre, now, 400 * 24).some((r) => !sauf.includes(r.id) && memeEvenement(r, titre, iso));
+/** Un article de presse (lien ou titre identique) a-t-il déjà servi dans la file ou le registre des dernières 72 h ? */
+function articlesDejaPublies(articles, recs) {
+  const urls = new Set(recs.flatMap((r) => r.sources));
+  const titres = new Set(recs.flatMap((r) => r.titres).map(normTitre).filter(Boolean));
+  return (articles || []).some((a) => (a?.url && urls.has(a.url)) || (a?.titre && titres.has(normTitre(a.titre))));
 }
 
 /**
@@ -323,18 +379,19 @@ const liensVideo = (articles) => [...new Map((articles || []).filter((a) => a?.v
 const sourcesDe = (articles, videos) => [...new Set([...videos.map((v) => v.url), ...(articles || []).map((a) => a.url).filter((u) => /^https:\/\//.test(u || ""))])].slice(0, 12);
 
 /** Un dossier (actualites.dossiers) non encore publié, frais, sans mot de la liste prudente ; renvoie { dossier, id, medias } ou null. */
-function choisirDossier({ actualites, file, now = new Date() }) {
+function choisirDossier({ actualites, file, registre = null, now = new Date() }) {
   const entrees = file?.entrees || [];
   const enFile = new Set(entrees.map((e) => e.dossierId).filter(Boolean));
-  const ids = new Set(entrees.map((e) => e.id));
-  const recents = titresRecents(entrees, now);
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
+  const recs72 = entreesRecentes(entrees, registre, now, FENETRE_PRESSE_H);
+  const recents = recs72.flatMap((r) => r.titres);
   const candidats = (actualites?.dossiers || []).filter((d) => {
     if (!d?.id || !/^[a-z0-9-]+$/.test(d.id) || !d.titre || !Array.isArray(d.articles) || d.articles.length < 3) return false;
     if (enFile.has(d.id) || ids.has(idDossier(d.id))) return false;
     const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
     if (!(age < FRAICHEUR_SUJET_H * 36e5) || age < -36e5) return false;
     if (mediasDistinctsDe(d.articles, d.mediasDistincts) < MIN_MEDIAS_DOSSIER) return false;
-    if (titreGenerique(d.titre) || dejaVu(d.titre, recents)) return false;
+    if (titreGenerique(d.titre) || dejaVu(d.titre, recents) || articlesDejaPublies(d.articles, recs72)) return false;
     if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
     return !d.articles.some((a) => motExclu(a.titre)) && !(reserveStory(now) && d.articles.some((a) => parleDeSondage(a.titre)));
@@ -360,9 +417,10 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
   if (storiesPleines && postsPleins) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
-  const recents = titresRecents(entrees, now);
+  const recs72 = entreesRecentes(entrees, registre, now, FENETRE_PRESSE_H);
+  const recents = recs72.flatMap((r) => r.titres); // file ET registre sur 72 h (et non plus la seule file sur 24 h)
   const recentsPost = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
-  const dossier = storiesPleines ? null : choisirDossier({ actualites, file, now });
+  const dossier = storiesPleines ? null : choisirDossier({ actualites, file, registre, now });
   if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
   const candidats = [];
@@ -384,12 +442,12 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
     if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
     if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
-    if (dejaVu(s.titrePropre.titre, recents)) return rej("doublon des 24 h"); // même sujet qu'une story des dernières 24 h
+    if (articlesDejaPublies(s.articles, recs72)) return rej("déjà publié (article)"); // l'id repose sur le premier titre, qui change : on compare aussi les liens et titres d'articles déjà publiés
+    if (dejaVu(s.titrePropre.titre, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
     const modele = modeleSujet(s, { direct, candidats: declares, now });
+    if ((modele === "post-date" || modele === "date") && s.date?.iso && evenementDejaPublie(entrees, registre, now, s.titrePropre.titre, s.date.iso)) return rej("même événement déjà publié"); // post, story ou rappel
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
       if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
-      if (entrees.some((e) => e.type === "post" && e.dateIso === s.date.iso && titresProches(e.titrePropre, s.titrePropre.titre))) return;
-      if ((registre?.entrees || []).some((e) => e.type === "post" && e.dateIso === s.date.iso && titresProches(e.titre, s.titrePropre.titre))) return;
     } else if (storiesPleines) return;
     candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele });
   });
@@ -459,7 +517,7 @@ const idBref = (jour) => crypto.createHash("sha1").update("bref|" + jour).digest
  * (4 par jour, rien de 23 h à 7 h), mêmes mots exclus, titre rédigé par le site obligatoire, sujets non déjà publiés.
  * Renvoie { bref: { indices, titres }, id, medias, sources } ou { refus }.
  */
-function choisirEnBref({ actualites, file, now = new Date() }) {
+function choisirEnBref({ actualites, file, registre = null, now = new Date() }) {
   const h = heureParis(now);
   if (!EN_BREF) return { refus: "« en bref » désactivé (data/stories-config.json)" };
   if (h < BREF_DEBUT_H || h >= BREF_FIN_H) return { refus: "« en bref » : seulement le matin" };
@@ -467,9 +525,10 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
   const jour = jourParis(now);
   if (entrees.some((e) => e.bref === true && jourParis(e.cree) === jour)) return { refus: "« en bref » déjà publié aujourd'hui" };
   if (entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
-  const ids = new Set(entrees.map((e) => e.id));
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const urls = new Set(entrees.flatMap((e) => e.sources || []));
-  const recents = titresRecents(entrees, now);
+  const recs72 = entreesRecentes(entrees, registre, now, FENETRE_PRESSE_H);
+  const recents = recs72.flatMap((r) => r.titres);
   const retenus = [];
   (actualites?.sujets || []).forEach((s, indice) => {
     const titre = s.articles?.[0]?.titre;
@@ -480,7 +539,7 @@ function choisirEnBref({ actualites, file, now = new Date() }) {
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
-    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents)) return;
+    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents) || articlesDejaPublies(s.articles, recs72)) return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
@@ -856,15 +915,15 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, verdict: resultat, pour, contre, abst, numero, sourceTxt };
   const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions : ${nbFr(abst)}`;
   const legende = [
-    `${d.court} — texte ${verbe}`,
+    `${nomChambre} : ${d.nature} ${d.nature === "projet de loi" ? verbe : verbe + "e"} le ${date}`,
     "",
     `${an ? "L'Assemblée nationale" : "Le Sénat"} a ${resultat === "adopte" ? "adopté" : "rejeté"}, le ${date}, l'ensemble du texte « ${d.court} »${d.etape ? ` (${d.etape})` : ""}.`,
     voix + ".",
     "",
     `Source officielle : ${nomChambre}, scrutin public n°${numero} — ${url}`,
     "",
-    `Toute l'actu politique : ${COMPTE}`,
-    `#Politique #${an ? "AssembléeNationale" : "Sénat"} #Loi #Parlement`,
+    `Pour suivre l'actualité politique et parlementaire : ${COMPTE}`,
+    hashtagsLegende({ genre: "loi", chambre, theme: an ? "assemblee" : "senat", titre: d.court, max: 8 }).join(" "),
   ].join("\n");
   return {
     spec,
@@ -882,13 +941,21 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
  * Renvoie { post: { fiche, id, ... }, id, modele: "post-loi" } ou { refus }. Un seul post par vote (id stable) ; jamais deux fois la même loi à
  * moins de 36 h d'écart (titres proches) ; 2 posts par jour au plus ; rien la nuit ; vote de moins de 2 jours.
  */
-function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }) {
+/** Faits de data/contenus-etat.json (clés « carrousel-loi|<voteId> »…) ; absent ou illisible : aucun fait. */
+function lireFaitsContenus() {
+  try { const f = JSON.parse(fs.readFileSync(path.join(RACINE, "data", "contenus-etat.json"), "utf-8"))?.faits; return f && typeof f === "object" ? f : {}; } catch (e) { return {}; }
+}
+function choisirPostLoi({ lois, senat, file, registre = null, now = new Date(), faits = null }) {
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
   const entrees = file?.entrees || [];
   if (nbPostsDuJour(entrees, registre, now) >= MAX_POSTS_PAR_JOUR) return { refus: `déjà ${MAX_POSTS_PAR_JOUR} posts aujourd'hui` };
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
   const votes = new Set(entrees.map((e) => e.voteId).filter(Boolean));
+  // Un carrousel de loi déjà sorti pour ce vote (même parti de la file élaguée) : jamais aussi un post (ni son annonce)
+  const estCarrousel = (e) => e.type === "carrousel-loi" || e.type === "carrousel" || e.carrousel === true;
+  const faitsContenus = faits || lireFaitsContenus();
+  const carrouselsDeVote = new Set([...entrees, ...(registre?.entrees || [])].filter(estCarrousel).flatMap((e) => [e.voteId, e.cle]).filter(Boolean));
   const recents = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
   const limite = new Date(now.getTime() - POST_VOTE_FRAICHEUR_J * 24 * 36e5).toISOString().slice(0, 10);
   const demain = new Date(now.getTime() + 24 * 36e5).toISOString().slice(0, 10);
@@ -910,7 +977,7 @@ function choisirPostLoi({ lois, senat, file, registre = null, now = new Date() }
   candidats.sort((a, b) => b.dateISO.localeCompare(a.dateISO) || b.ordre - a.ordre);
   const reserve = reserveStory(now);
   for (const c of candidats) {
-    if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId)) continue;
+    if (ids.has(c.id) || ids.has(idAnnonce(c.id)) || votes.has(c.f.voteId) || carrouselsDeVote.has(c.f.voteId) || faitsContenus[`carrousel-loi|${c.f.voteId}`]) continue;
     if (dejaVu(c.f.titreCourt, recents)) continue; // même loi qu'un post ou une story des dernières 36 h
     if (reserve && parleDeSondage(c.f.titreCourt)) continue;
     return { post: { genre: "loi", ...c.f, dateISO: c.dateISO }, id: c.id, modele: "post-loi", nommePersonne: false };
@@ -971,8 +1038,7 @@ function choisirPostAgenda({ meetings, agendaAn = null, file, registre = null, n
     if (motExclu(m.titre) || titreGenerique(m.titre) || (reserve && parleDeSondage(m.titre + " " + (m.desc || "")))) continue;
     const id = hashStable("post-agenda|" + m.debut + "|" + m.titre);
     if (ids.has(id) || ids.has(idAnnonce(id)) || dejaVu(m.titre, recents)) continue;
-    if (entrees.some((e) => e.type === "post" && e.dateIso === m.debut && titresProches(e.titrePropre, m.titre))) continue;
-    if ((registre?.entrees || []).some((e) => e.type === "post" && e.dateIso === m.debut && titresProches(e.titre, m.titre))) continue;
+    if (evenementDejaPublie(entrees, registre, now, m.titre, m.debut)) continue; // même événement (date à un jour près) déjà publié : post, story, rappel
     candidats.push({ m, jours, id });
   }
   if (!candidats.length) return { refus: "aucun événement de l'agenda à annoncer" };
@@ -1004,6 +1070,7 @@ function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null,
   const entrees = file?.entrees || [];
   if (entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
+  const recs72 = entreesRecentes(entrees, registre, now, FENETRE_PRESSE_H);
   const aujourdhui = jourParis(now), reserve = reserveStory(now);
   const candidats = [];
   for (const m of evenementsAgenda(meetings, agendaAn)) {
@@ -1015,6 +1082,10 @@ function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null,
     if (!ids.has(postId)) continue; // jamais de rappel pour un événement que le site n'a pas annoncé lui-même
     const id = hashStable("rappel-agenda|" + m.debut + "|" + m.titre);
     if (ids.has(id)) continue;
+    // Le post d'origine et son annonce ne comptent pas ; tout autre contenu du même événement (date à un jour près) ou story de presse proche des 72 h : pas de rappel
+    const sauf = [postId, idAnnonce(postId), idReel(postId)];
+    if (evenementDejaPublie(entrees, registre, now, m.titre, m.debut, sauf)) continue;
+    if (recs72.some((r) => !sauf.includes(r.id) && r.presse && r.titres.some((t) => titresProches(t, m.titre)))) continue;
     candidats.push({ m, jours, id, postId });
   }
   if (!candidats.length) return { refus: "aucun rappel d'agenda à publier" };
@@ -1054,15 +1125,15 @@ function ficheDate(s, now = new Date()) {
     quandTxt = `du ${semaine.toLowerCase()} ${jourTxt} au ${majuscule(f.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" })).toLowerCase()} ${jf} ${moisF} ${annee}`;
   }
   const legende = [
-    `Date à retenir : ${jourAff} ${annee}`,
+    `Date à retenir : ${jourAff} ${annee}${titre.length <= 80 ? ` — ${titre}` : ""}`,
     "",
     `${titre}.`,
     ag ? `Rendez-vous ${ag.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}${ag.lieu ? ` (${ag.lieu})` : ""}.` : `Rendez-vous le ${quand}.`, // date absolue : un post reste au fil, « dans N jours » serait faux dès le lendemain (audit J-19)
     "",
     ag ? `Date relevée auprès de ${listeMedias} ; le programme peut changer, à vérifier auprès de l'organisateur.` : `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}) ; l'ordre du jour peut changer, à vérifier auprès de l'institution concernée.`,
     "",
-    `Toute l'actu politique : ${COMPTE}`,
-    "#Politique #Agenda #Actualité",
+    `Pour suivre l'actualité politique : ${COMPTE}`,
+    hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 8 }).join(" "),
   ].join("\n");
   return {
     spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
@@ -1122,7 +1193,7 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
   if (!ra.refus) return ra;
   const pa = choisirPostAgenda({ meetings, agendaAn, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
   if (!pa.refus) return pa;
-  const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
+  const b = choisirEnBref({ actualites, file, registre, now }); // « en bref » : une fois par jour, le matin
   if (!b.refus) return b;
   if (!a.refus) return a;
   const s2 = choisirSensible({ actualites, file, registre, rejetes, now, config, niveaux: [2] }); // accusation, plainte, polémique : brouillon à valider (jamais en file)
@@ -1260,7 +1331,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -1269,6 +1340,7 @@ function decrireBase(choix, now = new Date()) {
 //  - Reel : pour chaque POST (entrée { type: "reel", reelDe }), publié par publier-stories.cjs après le post.
 // Sans ffmpeg, ou si la génération échoue : aucune vidéo, l'image et le post partent seuls (jamais d'échec de la file).
 // ---------------------------------------------------------------------------------------------------------------------
+const REELS_ACTIFS = false; // décision du propriétaire : aucun Reel, jamais (un post ne se répète pas en vidéo)
 const idReel = (idPost) => hashStable("reel|" + idPost);
 const urlVideo = (id) => `https://tahns.github.io/hemicycle-france/instagram/auto/${id}.mp4`;
 /** Vidéos de la file créées aujourd'hui (UTC+2) : stories vidéo et Reels. */
@@ -1355,7 +1427,7 @@ async function main() {
           { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
         ].slice(-GARDER);
         images.add(choix.id); images.add(idA);
-        if (config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui
+        if (REELS_ACTIFS && config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui (JAMAIS : voir REELS_ACTIFS)
           const idR = idReel(choix.id), r = produireVideo({ id: idR, source: choix.id, type: "reel", anim: animationPost(d.post.fiche) });
           if (r) {
             try {

@@ -222,6 +222,8 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const v = validerCarrousel(fiche);
   assert.ok(v.ok, v.erreurs.join(" ; "));
   assert.ok(p.entree.legende.includes("@hemicyclefrance") && p.entree.legende.includes("assemblee-nationale.fr") && !/github\.io/.test(p.entree.legende));
+  assert.ok(/^5 images pour comprendre/.test(p.entree.legende), "accroche factuelle en 1re ligne");
+  assert.ok(/enregistrer/.test(p.entree.legende) && !/#Politique #Assemblée\S+ #Loi #Parlement$/.test(p.entree.legende) && (p.entree.legende.match(/#\S+/g) || []).length <= 5);
   // un seul carrousel par vote, un seul par jour
   const e = C.etatVide(); e.faits[p.faitCle] = { id: p.id, le: "2026-10-13T14:00:00Z" };
   const autre = contenu("carrousel-loi", fx.instants["carrousel-loi"], { etat: e });
@@ -247,6 +249,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.strictEqual(h.rendu.specs[0].couverture, true);
   assert.strictEqual(h.rendu.specs.at(-1).kicker, "Sources");
   assert.ok(validerCarrousel({ type: "carousel", url_images: h.rendu.specs.map((_, i) => `https://x.test/h${i}.jpg`), legende: h.entree.legende, alts: h.rendu.alts }).ok);
+  assert.ok(/^\d+ images pour retenir/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-10T16:20:00Z"), "pas le samedi");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-11T15:00:00Z"), "pas avant que le résumé (18 h 05) soit écrit");
   const autreSemaine = donnees(); autreSemaine.digest.id = "2026-W40";
@@ -358,6 +361,68 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
   const ch = C.chemins(racine);
   const crees = await C.main({ ch, now: new Date("2026-10-11T16:20:00Z"), dessiner: dessinFactice });
   assert.deepStrictEqual(crees.map((c) => c.contenu).sort(), ["carrousel-hebdo", "carrousel-loi", "chiffre-jour"].filter((n) => crees.some((c) => c.contenu === n)).sort());
+}
+
+// ---------- 6. Jamais deux fois le même sujet (non-régression) ----------
+{
+  const crypto = require("crypto");
+  const h = (x) => crypto.createHash("sha1").update(x).digest("hex").slice(0, 12);
+  const SA = require("../scripts/stories-auto.cjs");
+  const inst = fx.instants["carrousel-loi"];
+  const base = contenu("carrousel-loi", inst);
+  assert.ok(base, "témoin : sans post de loi, le carrousel est produit");
+  const num = base.entree.voteId.replace("an-", "");
+  const postId = h("post-loi|an|" + num), annId = SA.idAnnonce(postId);
+  assert.strictEqual(C.idPostLoi(base.entree.voteId), postId);
+  const refuse = (extra, msg) => { const r = plan(inst, extra); assert.ok(!r.plan.some((x) => x.nom === "carrousel-loi" && x.entree.voteId === base.entree.voteId), msg); return r; };
+  // post de loi déjà en file / publié / annonce / voteId / titre proche : carrousel refusé
+  refuse({ file: { entrees: [{ id: postId, type: "post", cree: "2026-10-13T07:00:00Z" }] } }, "post-loi en file");
+  refuse({ registre: { entrees: [{ id: postId, statut: "publiee", publieLe: "2026-10-12T09:00:00Z", type: "post", titre: "x" }] } }, "post-loi au registre");
+  refuse({ registre: { entrees: [{ id: annId, statut: "publiee", publieLe: "2026-10-12T09:00:00Z", type: "story", titre: "x", annonceDe: postId }] } }, "annonce au registre");
+  refuse({ file: { entrees: [{ id: "aaaaaaaaaaaa", type: "story", annonceDe: postId, cree: "2026-10-13T07:00:00Z" }] } }, "annonce (annonceDe) en file");
+  refuse({ file: { entrees: [{ id: "bbbbbbbbbbbb", type: "story", voteId: base.entree.voteId, cree: "2026-10-13T07:00:00Z" }] } }, "même voteId en file");
+  refuse({ brouillons: [{ id: "cccccccccccc", voteId: base.entree.voteId }] }, "même voteId en brouillon");
+  refuse({ registre: { entrees: [{ id: "dddddddddddd", statut: "publiee", publieLe: "2026-10-12T09:00:00Z", type: "post", titre: base.entree.titrePropre }] } }, "titre officiel proche au registre");
+  refuse({ file: { entrees: [{ id: "eeeeeeeeeeee", type: "story", titrePropre: base.entree.titrePropre, cree: "2026-10-12T20:00:00Z" }] } }, "titre proche en file");
+  const m = clone({ faits: { "post-loi|x": { id: postId, le: "2026-10-12T09:00:00Z" } } });
+  refuse({ etat: { ...C.etatVide(), ...m } }, "post-loi dans la mémoire des faits");
+  assert.ok(C.choisirCarrouselLoi({ ...donnees(), etat: C.etatVide(), jour: "2026-10-13", now: new Date(inst), file: { entrees: [{ id: postId }] } }).refus.includes("loi déjà traitée"));
+  // un post périmé (jamais publié) ne bloque pas
+  assert.ok(plan(inst, { registre: { entrees: [{ id: postId, statut: "perimee", publieLe: null, type: "post" }] } }).plan.some((x) => x.nom === "carrousel-loi"), "post périmé : pas de blocage");
+  // un autre sujet ne bloque pas
+  assert.ok(plan(inst, { file: { entrees: [{ id: "ffffffffffff", type: "story", titrePropre: "Blocus des lycées", cree: "2026-10-13T07:00:00Z" }] } }).plan.some((x) => x.nom === "carrousel-loi"));
+
+  // E2 : le vote du jour ne reprend pas un texte déjà présenté par « Aujourd'hui à l'Assemblée » (et inversement) dans les 24 h
+  const vj = contenu("vote-jour", fx.instants["vote-jour"]);
+  assert.ok(vj, "témoin : vote du jour produit");
+  const maintenant = fx.instants["vote-jour"];
+  const enFile = (e) => ({ entrees: [{ id: "111111111111", type: "story", cree: "2026-10-13T06:35:00Z", ...e }] });
+  const r2 = plan(maintenant, { file: enFile({ contenu: "aujourdhui", periode: "2026-10-13", titrePropre: "Aujourd'hui à l'Assemblée", sujets: [vj.entree.sujets[1] || vj.entree.titrePropre] }) });
+  assert.ok(!r2.plan.some((x) => x.nom === "vote-jour") && /24 h/.test(r2.refus["vote-jour"]), "même texte en file : vote du jour refusé");
+  const r3 = plan(maintenant, { registre: { entrees: [{ id: "222222222222", statut: "publiee", publieLe: "2026-10-13T06:40:00Z", type: "story", titre: "Aujourd'hui à l'Assemblée : 13 octobre 2026", sujets: [vj.entree.titrePropre] }] } });
+  assert.ok(!r3.plan.some((x) => x.nom === "vote-jour"), "même texte au registre : refusé");
+  const r3b = plan(maintenant, { etat: { ...C.etatVide(), faits: { "aujourdhui|2026-10-13": { id: "x", le: "2026-10-13T06:35:00Z", sujets: [vj.entree.titrePropre] } } } });
+  assert.ok(!r3b.plan.some((x) => x.nom === "vote-jour"), "même texte dans la mémoire des faits : refusé");
+  assert.ok(plan(maintenant, { file: enFile({ contenu: "aujourdhui", cree: "2026-10-11T06:35:00Z", sujets: [vj.entree.titrePropre] }) }).plan.some((x) => x.nom === "vote-jour"), "plus de 24 h : autorisé");
+  assert.ok(plan(maintenant, { file: enFile({ contenu: "aujourdhui", sujets: ["Régime des retraites des agriculteurs"] }) }).plan.some((x) => x.nom === "vote-jour"), "texte différent : autorisé");
+  // dans la même passe : « Aujourd'hui » planifié, puis « Vote du jour » sur le même texte
+  const dj = donnees(); const ag = dj.agenda.jours.find((j) => j.points.length); ag.date = "2026-10-13"; ag.points = [{ type: "texte", objet: vj.entree.titrePropre }]; dj.agenda.lastUpdated = "2026-10-13T00:00:00Z";
+  const rr = C.planifier({ now: new Date("2026-10-13T08:35:00Z"), donnees: dj, file: vide, registre: vide, etat: C.etatVide(), creneaux: C.normaliserCreneaux({ aujourdhui: { heure: "10:30" }, "vote-jour": { heure: "10:30" } }), config: {} });
+  assert.ok(rr.plan.some((x) => x.nom === "aujourdhui") && !rr.plan.some((x) => x.nom === "vote-jour") && /24 h/.test(rr.refus["vote-jour"] || ""), "Aujourd'hui planifié : le vote du jour sur le même texte est refusé dans la même passe");
+
+  // E3 : un créneau ne sort jamais deux fois pour la même période / le même id
+  const premier = plan("2026-10-10T07:00:00Z").plan.find((x) => x.nom === "comprendre");
+  assert.ok(premier);
+  for (const nom of ["vote-jour", "carrousel-loi"]) {
+    const p1 = contenu(nom, fx.instants[nom]);
+    assert.ok(p1);
+    const entree = { id: p1.id, type: nom === "vote-jour" ? "story" : "carousel", contenu: nom, periode: p1.cle, cree: fx.instants[nom] };
+    assert.ok(!plan(fx.instants[nom], { file: { entrees: [entree] } }).plan.some((x) => x.nom === nom), `${nom} : id déjà en file`);
+    assert.ok(!plan(fx.instants[nom], { registre: { entrees: [{ id: p1.id, statut: "publiee", publieLe: fx.instants[nom], type: "story", titre: "t" }] } }).plan.some((x) => x.nom === nom), `${nom} : id déjà au registre`);
+    assert.ok(!plan(fx.instants[nom], { brouillons: [entree] }).plan.some((x) => x.nom === nom), `${nom} : id déjà en brouillon`);
+    // mémoire des faits perdue, autre id mais même type le même jour : refusé quand même
+    assert.ok(!plan(fx.instants[nom], { file: { entrees: [{ ...entree, id: "999999999999", periode: "autre" }] } }).plan.some((x) => x.nom === nom), `${nom} : même type le même jour déjà en file`);
+  }
 }
 
 console.log("[tests contenus-auto] OK");
