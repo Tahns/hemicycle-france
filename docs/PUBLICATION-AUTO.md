@@ -10,7 +10,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 
 ## Ce que le script respecte (sans réglage)
 
-- une seule publication par passage, un passage toutes les 5 minutes ; aucun plafond de stories par jour (`maxParJour: 99`), 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; aucun espacement imposé entre deux publications ;
+- une seule publication par passage, un passage toutes les 5 minutes ; 20 stories par jour au maximum (`maxParJour: 20`), 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; aucun espacement imposé entre deux publications ;
 - une story préparée depuis plus de 6 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ; l'intention est écrite au registre (« en-cours ») AVANT l'appel `media_publish` ; si la réponse est perdue
   (timeout, erreur 5xx, coupure) ou si l'exécution est interrompue, le script cherche la publication côté Instagram (`/stories` ou `/media`) : retrouvée, elle est inscrite « publiee » ;
@@ -56,7 +56,7 @@ factuelles, source citée, `@hemicyclefrance`, quelques hashtags, **jamais le li
 
 Règles propres aux posts (en plus de celles ci-dessus) :
 
-- **2 posts par jour au maximum** ; il n'y a pas de plafond de stories et les posts ne comptent pas non plus ni les posts ni les stories d'annonce ;
+- **2 posts par jour au maximum** ; le plafond de 20 stories par jour ne compte ni les posts ni les posts ni les stories d'annonce ;
 - un post non publié depuis plus de **12 h** est périmé (6 h pour une story) ; son annonce l'est alors aussi ;
 - aucun espacement imposé : la story d'annonce peut sortir dès que son post est publié ;
 - légende contrôlée avant envoi : 20 à 2 200 caractères, 30 hashtags au plus, le compte cité, aucun lien du site ; sinon le post n'est pas publié ;
