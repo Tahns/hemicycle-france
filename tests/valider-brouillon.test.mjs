@@ -64,7 +64,7 @@ const refus = (opts, motif) => assert.throws(() => valider(opts), (e) => e insta
   const nuit = choisirPublication({ file, registre: { entrees: [] }, config: {}, now: new Date("2026-10-06T22:30:00Z") });
   assert.ok(nuit.refus, "jamais la nuit");
   const deux = choisirPublication({ file, registre: { entrees: [{ id: "dddddddddddd", statut: "publiee", publieLe: new Date(now.getTime() - 20 * 60000).toISOString(), type: "story" }] }, config: {}, now });
-  assert.ok(deux.refus, "60 min entre deux publications");
+  assert.ok(deux.entree, "aucun espacement entre deux publications");
   const double = choisirPublication({ file, registre: { entrees: [{ id, statut: "publiee", publieLe: il_y_a(5), type: "story" }] }, config: {}, now });
   assert.ok(double.refus && !double.entree, "registre sans doublon");
   // même avec la validation humaine générale, l'entrée validée sort

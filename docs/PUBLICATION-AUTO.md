@@ -10,7 +10,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 
 ## Ce que le script respecte (sans réglage)
 
-- une seule publication par passage ; 4 stories et 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; au moins 60 min entre deux publications (voir « Posts » pour l'annonce d'un post) ;
+- une seule publication par passage, un passage toutes les 5 minutes ; aucun plafond de stories par jour (`maxParJour: 99`), 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; aucun espacement imposé entre deux publications ;
 - une story préparée depuis plus de 6 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ; l'intention est écrite au registre (« en-cours ») AVANT l'appel `media_publish` ; si la réponse est perdue
   (timeout, erreur 5xx, coupure) ou si l'exécution est interrompue, le script cherche la publication côté Instagram (`/stories` ou `/media`) : retrouvée, elle est inscrite « publiee » ;
@@ -56,9 +56,9 @@ factuelles, source citée, `@hemicyclefrance`, quelques hashtags, **jamais le li
 
 Règles propres aux posts (en plus de celles ci-dessus) :
 
-- **2 posts par jour au maximum** ; le plafond de 4 stories par jour est inchangé et ne compte ni les posts ni les stories d'annonce ;
+- **2 posts par jour au maximum** ; il n'y a pas de plafond de stories et les posts ne comptent pas non plus ni les posts ni les stories d'annonce ;
 - un post non publié depuis plus de **12 h** est périmé (6 h pour une story) ; son annonce l'est alors aussi ;
-- espacement : 60 min entre deux publications, **sauf** la story d'annonce d'un post, qui peut sortir 5 min après CE post (c'est l'unique exception) ;
+- aucun espacement imposé : la story d'annonce peut sortir dès que son post est publié ;
 - légende contrôlée avant envoi : 20 à 2 200 caractères, 30 hashtags au plus, le compte cité, aucun lien du site ; sinon le post n'est pas publié ;
 - monétisation : le post de loi (données officielles) reste possible, le post « date » (tiré de la presse) et son annonce sont retirés ;
 - validation humaine : le post est écrit en brouillon (`instagram/brouillons/`), sans annonce, et rien n'est publié automatiquement.
@@ -76,7 +76,7 @@ ou un **compteur** (nombre de jours avant une date à retenir), posés dans la z
 
 - **story vidéo** : seulement pour un **dossier** ou un **« direct »** (modèles à fort enjeu), 9 s, 1080×1920. L'entrée de la file garde `url_image` ET reçoit `url_video` (`instagram/auto/<id>.mp4`) ;
 - **Reel** : un par **post** (date à retenir lointaine, loi adoptée ou rejetée), 10 s, même légende que le post. Entrée `{ type: "reel", reelDe: id du post, url_image (vignette), url_video, legende }`.
-  Il est publié **après son post** (jamais avant, au plus 12 h après), avec l'espacement de 60 min ; il ne compte ni dans les 4 stories ni dans les 2 posts par jour, mais dans `videosMax` ;
+  Il est publié **après son post** (jamais avant, au plus 12 h après), sans espacement imposé ; il ne compte ni dans les 4 stories ni dans les 2 posts par jour, mais dans `videosMax` ;
 - format : MP4, H.264 (yuv420p), 30 images/s, piste AAC mono **silencieuse**, 1080×1920, moins de 2 Mo en pratique (25 Mo au maximum, contrôlé par `check-data.js`) ;
 - API : story vidéo = `POST /{IG_USER_ID}/media` `{ media_type: "STORIES", video_url }` ; Reel = `{ media_type: "REELS", video_url, caption, share_to_feed: true, thumb_offset }` ;
   puis attente du statut `FINISHED` (`GET /{creation_id}?fields=status_code`, jusqu'à ~5 min, délai croissant de 3 à 30 s) et `media_publish` ;
@@ -136,7 +136,7 @@ Le texte est **fabriqué par règles**, jamais écrit librement ni recopié d'un
 - pied : `Sources : <médias> (articles du <date>)` et, dès qu'une procédure pénale est en jeu, « Toute personne citée est présumée innocente tant qu'elle n'a pas été jugée définitivement » ;
 - jamais « procédure en cours » sans juridiction ; le titre de presse reste seulement dans le champ `sujets` de l'entrée (détection des doublons).
 
-L'entrée va dans la file comme n'importe quelle story (champ `sensible: 1`) : mêmes règles de publication (7 h – 23 h, 60 min, registre sans doublon, plafond de stories, 6 h de fraîcheur).
+L'entrée va dans la file comme n'importe quelle story (champ `sensible: 1`) : mêmes règles de publication (7 h – 23 h, registre sans doublon, plafond de stories, 6 h de fraîcheur).
 Si `validationHumaine` vaut `true`, le niveau 1 devient lui aussi un brouillon.
 
 ### Niveau 2 : tout le reste, jamais d'envoi automatique
@@ -156,7 +156,7 @@ Chaque brouillon est listé dans le **résumé de l'exécution** (onglet Actions
 1. GitHub > dépôt `Tahns/hemicycle-france` > onglet **Actions**. Ouvrir la dernière exécution « Actualités » (ou « Mise à jour des données ») : le **résumé** (en bas de la page) donne la ligne « Brouillon SENSIBLE à valider », l'identifiant (12 caractères) et les sources.
 2. Relire l'image : dépôt > `instagram/brouillons/<id>.jpg` (et le lien de l'article cité).
 3. Onglet **Actions** > à gauche **« Valider un brouillon »** > bouton **Run workflow** > champ **id** : coller l'identifiant > champ **action** : **publier** ou **rejeter** > **Run workflow**.
-   - **publier** : le brouillon entre dans la file ; « Publier les stories » le sort à son prochain passage (7 h – 23 h, 60 min d'écart, registre sans doublon, plafonds) ; une story non sortie dans les 6 h est périmée.
+   - **publier** : le brouillon entre dans la file ; « Publier les stories » le sort à son prochain passage (7 h – 23 h, registre sans doublon, plafonds) ; une story non sortie dans les 6 h est périmée.
      Une story ne se valide qu'entre 7 h et 21 h (heure de Paris) ; un brouillon de plus de 48 h est refusé ; un sondage est refusé pendant la réserve électorale ; en monétisation, aucune presse.
    - **rejeter** : le brouillon est supprimé et le sujet n'est pas reproposé pendant 7 jours (`data/instagram-rejetes.json`). Par défaut, le menu propose « rejeter » : il faut choisir « publier » volontairement.
 4. Le résumé de l'exécution dit ce qui s'est passé ; un refus est en rouge avec sa raison.
@@ -170,7 +170,7 @@ Pour un **post**, seul le post est publié (pas de story d'annonce ni de Reel). 
 
 ### Ce qui ne change pas
 
-Réserve électorale, pas de sondage en réserve, pas de doublon (id, liens, titres proches sur 36 h, registre), seuil de médias des autres sujets, titres génériques jamais publiés, 7 h – 23 h, 60 min, plafonds.
+Réserve électorale, pas de sondage en réserve, pas de doublon (id, liens, titres proches sur 36 h, registre), seuil de médias des autres sujets, titres génériques jamais publiés, 7 h – 23 h, plafonds.
 Restent **écartés sans brouillon** : faits divers, violences, décès, mineurs, violences sexuelles, suicide, sujets hors de la vie politique française.
 Réglages (`data/stories-config.json`, tous facultatifs) : `sensibles` (`false` coupe tout), `minMediasSensible`, `brouillonsSensiblesMax`.
 
