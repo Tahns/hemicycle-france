@@ -1270,6 +1270,7 @@ function decrireBase(choix, now = new Date()) {
 //  - Reel : pour chaque POST (entrée { type: "reel", reelDe }), publié par publier-stories.cjs après le post.
 // Sans ffmpeg, ou si la génération échoue : aucune vidéo, l'image et le post partent seuls (jamais d'échec de la file).
 // ---------------------------------------------------------------------------------------------------------------------
+const REELS_ACTIFS = false; // décision du propriétaire : aucun Reel, jamais (un post ne se répète pas en vidéo)
 const idReel = (idPost) => hashStable("reel|" + idPost);
 const urlVideo = (id) => `https://tahns.github.io/hemicycle-france/instagram/auto/${id}.mp4`;
 /** Vidéos de la file créées aujourd'hui (UTC+2) : stories vidéo et Reels. */
@@ -1356,7 +1357,7 @@ async function main() {
           { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
         ].slice(-GARDER);
         images.add(choix.id); images.add(idA);
-        if (config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui
+        if (REELS_ACTIFS && config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui (JAMAIS : voir REELS_ACTIFS)
           const idR = idReel(choix.id), r = produireVideo({ id: idR, source: choix.id, type: "reel", anim: animationPost(d.post.fiche) });
           if (r) {
             try {

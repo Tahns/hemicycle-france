@@ -61,8 +61,9 @@ const FICHIER_CONFIG = process.env.PUBLIER_CONFIG || path.join(RACINE, "data", "
 const GRAPH = (process.env.GRAPH_BASE || "https://graph.instagram.com/v21.0").replace(/\/+$/, "");
 const MAX_PAR_JOUR_DEFAUT = 4; // stories par jour (hors stories d'annonce de post) ; réglable par data/stories-config.json (« maxParJour », 1 à 99 ; 99 = pas de plafond)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
-const ESPACEMENT_ANNONCE_MIN = 0; // la story d'annonce peut sortir dès que son post est publié
+const ESPACEMENT_ANNONCE_MIN = 180; // la story d'annonce peut sortir dès que son post est publié
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
+const REELS_ACTIFS = process.env.HEMICYCLE_TEST_REELS === "1"; // décision du propriétaire : aucun Reel, jamais (les Reels déjà en file ne sont pas publiés) ; la variable ne sert qu'aux tests du code Reel
 const ESPACEMENT_MIN = 0; // aucun espacement : tout ce qui est à publier sort (au plus une publication par passage, un passage toutes les 15 min environ), de 7 h à 23 h
 const FRAICHEUR_H = 6; // une story non publiée depuis plus de 6 h est périmée (avec 1 publication par heure, 3 h laissait périmer trop de stories)
 const ALERTE_JETON_JOURS = 10;
@@ -161,7 +162,7 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
   const deja = new Map((registre?.entrees || []).map((e) => [e.id, e]));
   const perimees = [];
   const candidates = [];
-  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && config.videos === true && e.url_video)) && e.id && !deja.has(e.id) && !retires.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
+  const entreesFile = [...(file?.entrees || [])].filter((e) => e && (e.type === "story" || e.type === "post" || e.type === "carousel" || (e.type === "reel" && REELS_ACTIFS && config.videos === true && e.url_video)) && e.id && !deja.has(e.id) && !retires.has(e.id)).sort((a, b) => String(a.cree).localeCompare(String(b.cree)));
   // 1. posts et stories : périmées après 3 h (story) ou 12 h (post)
   let enAttente = 0, enCreneau = 0;
   for (const e of entreesFile.filter((x) => !estAnnonce(x) && !estReel(x))) {

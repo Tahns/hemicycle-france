@@ -242,9 +242,9 @@ try {
   {
     const file = [postE(P1, il_y_a(1)), annonceE(A1, il_y_a(1), P1)];
     const tot = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 3 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
-    assert.strictEqual(publications().length, 1, "aucun espacement : l'annonce sort dès que son post l'est");
-    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 6 / 60, { type: "post", titre: "Simplification de la vie économique" })] } });
-    assert.strictEqual(publications().length, 1, "post publié il y a 6 min : l'annonce sort");
+    assert.strictEqual(publications().length, 0, "post publié il y a 3 min : l'annonce attend 3 h (jamais le même contenu d'affilée)");
+    const r = await lancer({ entrees: file, registre: { entrees: [regPub(P1, 3.2, { type: "post", titre: "Simplification de la vie économique" })] } });
+    assert.strictEqual(publications().length, 1, "post publié il y a plus de 3 h : l'annonce sort");
     assert.strictEqual(premier().media_type, "STORIES");
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
     const e = r.registre.entrees.find((x) => x.id === A1);
@@ -252,10 +252,10 @@ try {
     assert.strictEqual(e.type, "story");
     assert.match(r.resume, /Story d'annonce publiée/);
     // l'annonce passe avant une autre story en attente
-    await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 10 / 60, { type: "post" })] } });
+    await lancer({ entrees: [frais, ...file], registre: { entrees: [regPub(P1, 3.5, { type: "post" })] } });
     assert.strictEqual(premier().image_url, `${BASE}/img/${A1}.jpg`);
-    // 60 min plus tard, le registre n'a plus d'exception mais l'annonce reste publiable (moins de 6 h)
-    await lancer({ entrees: file, registre: { entrees: [regPub(P1, 1.5, { type: "post" })] } });
+    // l'annonce reste publiable (moins de 6 h)
+    await lancer({ entrees: file, registre: { entrees: [regPub(P1, 4.5, { type: "post" })] } });
     assert.strictEqual(publications().length, 1);
     // une annonce n'est publiée qu'une fois
     await lancer({ entrees: file, registre: { entrees: [regPub(P1, 0.2, { type: "post" }), regPub(A1, 0.1, { annonceDe: P1 })] } });
@@ -362,6 +362,7 @@ try {
     assert.strictEqual(appels.filter((a) => a.chemin === "/IGUSER/media").length, 0);
   }
   // ---------- VIDÉOS : story vidéo, Reel, attente du statut, replis ----------
+  process.env.HEMICYCLE_TEST_REELS = "1"; // les Reels ne sortent jamais en production : activés ici pour tester leur code
   {
     const LEG = "Projet de loi relatif à la simplification — texte adopté\n\nL'Assemblée nationale a adopté, le 1 octobre 2026, l'ensemble du texte.\nPour : 300 · Contre : 100 · Abstentions : 10.\n\nSource officielle : Assemblée nationale, scrutin public n°100 — https://www.assemblee-nationale.fr/dyn/17/scrutins/100\n\nToute l'actu politique : @hemicyclefrance\n#Politique #AssembléeNationale #Loi";
     const histoire = (id, cree, extra = {}) => entree(id, cree, { url_video: `${BASE}/vid/${id}.mp4`, ...extra });
@@ -490,6 +491,13 @@ try {
       assert.match(r6.resume, /serait publiée en Reel/);
       assert.strictEqual(creations().length, 0);
     }
+  }
+  delete process.env.HEMICYCLE_TEST_REELS;
+  // Aucun Reel, jamais : même un Reel prêt dans la file, derrière un post publié, ne sort pas
+  {
+    const P8 = "d8d8d8d8d8d8", R8 = "e8e8e8e8e8e8";
+    await lancer({ entrees: [{ id: R8, cree: il_y_a(3), type: "reel", reelDe: P8, titre: "Reel : x", titrePropre: "x", medias: [], url_image: `${BASE}/img/${R8}.jpg`, url_video: `${BASE}/vid/${R8}.mp4`, legende: "Un Reel de test pour le compte @hemicyclefrance sans aucun lien.", sources: [] }], config: { videos: true, videosMax: 2 }, registre: { entrees: [{ id: P8, statut: "publiee", publieLe: il_y_a(2), mediaId: "m8", type: "post" }] } });
+    assert.strictEqual(publications().length, 0, "aucun Reel, jamais");
   }
   // SUJETS SENSIBLES : niveau 1 (fait judiciaire établi) publié ; niveau 2 jamais sans validation humaine ; dernier filet sur la formulation
   {
