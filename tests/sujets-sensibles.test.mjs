@@ -125,4 +125,20 @@ for (const mauvais of ["http://www.mediapart.fr/x", "https://mediapart.fr.evil.e
 assert.match(SS.idDemande("https://www.lemonde.fr/x"), /^[0-9a-f]{12}$/);
 assert.strictEqual(SS.idDemande("https://www.lemonde.fr/x#a"), SS.idDemande("https://www.lemonde.fr/x"));
 
+// --- memeAffaire : une affaire = un seul brouillon (fonction pure) ---
+{
+  const T1 = "Ecrits antisémites : l’affaire Jordan Bardella plombe la séquence budgétaire du RN";
+  const T2 = "La campagne de Marine Le Pen lestée par l’affaire Bardella : «A côté, Jordan a l’air d’être un poids»";
+  const T3 = "Info EBRA. Riposte de Jordan Bardella contre Mediapart : une plainte déposée contre le président du RN";
+  const T4 = "Rima Hassan accusée d'avoir renversé des drapeaux au Parlement européen";
+  const T5 = "Le maire de Lyon visé par une plainte pour des frais de représentation, selon Mediapart";
+  assert.ok(SS.memeAffaire(T1, T2) && SS.memeAffaire(T1, T3) && SS.memeAffaire(T2, T3), "les 3 titres Bardella forment une affaire");
+  assert.ok(SS.memeAffaire({ articles: [{ titre: T3 }], categorie: "faits" }, { sujets: [T1], categorie: "faits" }), "sujet / entrée de brouillon");
+  assert.ok(!SS.memeAffaire(T1, T4) && !SS.memeAffaire(T3, T4), "deux affaires distinctes");
+  assert.ok(!SS.memeAffaire(T5, T3), "« Mediapart » (média) ne suffit pas à lier deux affaires");
+  assert.ok(!SS.memeAffaire(T1, ""), "titre vide");
+  assert.ok(SS.memeAffaire({ titres: ["Le maire Dupont mis en cause par un rapport"], personnes: [DUPONT] }, { titres: ["Face aux critiques, Dupont dément et son avocat dénonce une cabale"], personnes: [DUPONT] }), "une personne nommée commune");
+  assert.ok(!SS.memeAffaire("Le député Retailleau attaque le gouvernement sur la sécurité", "Le sénateur Retailleau interrogé sur la réforme des retraites"), "un nom propre seul, hors personne nommée, ne fait pas une affaire");
+}
+
 console.log("sujets-sensibles : tous les tests passent.");

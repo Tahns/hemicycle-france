@@ -421,6 +421,14 @@ function choisirSensible({ actualites, file, registre = null, rejetes = null, no
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id), ...rejetsRecents.map((r) => r.id)]);
   const urls = new Set([...entrees.flatMap((e) => e.sources || []), ...rejetsRecents.flatMap((r) => r.sources || [])]);
   const recents = [...titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H), ...rejetsRecents.flatMap((r) => r.sujets || [])];
+  // Affaires des dernières 48 h (file, brouillons, registre, rejets) : une même affaire ne donne qu'un brouillon / une publication
+  const dansFenetre = (iso) => now.getTime() - Date.parse(iso) < SS.AFFAIRE_FENETRE_H * 36e5;
+  const retiresAff = lireRetiresSur();
+  const affairesRecentes = [
+    ...entrees.filter((e) => e.cree && dansFenetre(e.cree) && !retiresAff.has(e.id)),
+    ...(registre?.entrees || []).filter((e) => e.statut === "publiee" && e.publieLe && dansFenetre(e.publieLe) && !retiresAff.has(e.id)),
+    ...(rejetes?.entrees || []).filter((r) => r.rejeteLe && dansFenetre(r.rejeteLe)),
+  ];
   const reserve = reserveStory(now);
   const candidats = [];
   (actualites?.sujets || []).forEach((s, indice) => {
@@ -435,6 +443,7 @@ function choisirSensible({ actualites, file, registre = null, rejetes = null, no
     if (c.niveau === 1 && (storiesPleines || !(age < FRAICHEUR_H * 36e5))) return;
     if (c.niveau === 2 && (brouillonsJour >= config.brouillonsSensiblesMax || c.medias.length < 1)) return;
     if ((s.articles || []).some((a) => dejaVu(a.titre, recents))) return; // même sujet qu'une publication ou un brouillon récent
+    if (affairesRecentes.some((r) => SS.memeAffaire(r, { articles: s.articles, categorie: c.categorie, personnes: s.illustration?.personnes }))) return; // même affaire déjà traitée (48 h)
     candidats.push({ indice, sujet: s, id: idSujet(titre), medias: c.medias.length, sensible: c, niveauSensible: c.niveau, modele: "sensible" });
   });
   if (!candidats.length) return { refus: "aucun sujet sensible à traiter" };
