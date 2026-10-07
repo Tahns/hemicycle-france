@@ -96,7 +96,8 @@ const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « réce
 const BROUILLON_JOURS = 7;
 
 let MIN_MEDIAS = 3; // réglable par data/stories-config.json (« minMedias »)
-const FRAICHEUR_H = 3;
+const FRAICHEUR_H = 3; // direct du président et sujets sensibles de niveau 1
+let FRAICHEUR_SUJET_H = 12; // sujets et dossiers (data/stories-config.json, « fraicheurH ») : un sujet à 3 médias arrivé la nuit reste publiable le matin
 let MAX_PAR_JOUR = 4; // réglable par data/stories-config.json (« maxParJour »)
 let MIN_MEDIAS_DOSSIER = 4, EN_BREF = true; // « dossierMedias », « enBref »
 const GARDER = 30;
@@ -331,7 +332,7 @@ function choisirDossier({ actualites, file, now = new Date() }) {
     if (!d?.id || !/^[a-z0-9-]+$/.test(d.id) || !d.titre || !Array.isArray(d.articles) || d.articles.length < 3) return false;
     if (enFile.has(d.id) || ids.has(idDossier(d.id))) return false;
     const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
-    if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return false;
+    if (!(age < FRAICHEUR_SUJET_H * 36e5) || age < -36e5) return false;
     if (mediasDistinctsDe(d.articles, d.mediasDistincts) < MIN_MEDIAS_DOSSIER) return false;
     if (titreGenerique(d.titre) || dejaVu(d.titre, recents)) return false;
     if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
@@ -365,23 +366,25 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
   if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
   const candidats = [];
+  const rejets = {};
+  const rej = (motif) => { rejets[motif] = (rejets[motif] || 0) + 1; };
   (actualites?.sujets || []).forEach((s, indice) => {
     const titre = s.articles?.[0]?.titre;
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
     if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return; // sujet purement étranger : ni site ni story
     const medias = mediasDistinctsDe(s.articles, s.mediasDistincts);
     const parole = presidentParle(s, direct, now);
-    if (medias < MIN_MEDIAS && !parole) return;
+    if (medias < MIN_MEDIAS && !parole) return rej(`moins de ${MIN_MEDIAS} médias`);
     const age = now.getTime() - Date.parse(s.derniere);
-    if (!(age < FRAICHEUR_H * 36e5) || age < -36e5) return;
-    if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
-    if (s.illustration?.theme === "justice") return;
-    if ((s.articles || []).some((a) => motExclu(a.titre))) return;
+    if (!(age < (parole ? FRAICHEUR_H : FRAICHEUR_SUJET_H) * 36e5) || age < -36e5) return rej(`plus de ${parole ? FRAICHEUR_H : FRAICHEUR_SUJET_H} h`);
+    if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return rej("déjà publié");
+    if (s.illustration?.theme === "justice") return rej("justice");
+    if ((s.articles || []).some((a) => motExclu(a.titre))) return rej("mot exclu");
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
-    if (!s.titrePropre?.titre) return; // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
-    if (titreGenerique(s.titrePropre.titre)) return; // « Énergie » seul : trop vague
-    if (s.titrePropre.generique === true && !parole) return; // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
-    if (dejaVu(s.titrePropre.titre, recents)) return; // même sujet qu'une story des dernières 24 h
+    if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
+    if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
+    if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
+    if (dejaVu(s.titrePropre.titre, recents)) return rej("doublon des 24 h"); // même sujet qu'une story des dernières 24 h
     const modele = modeleSujet(s, { direct, candidats: declares, now });
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
       if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
@@ -390,7 +393,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     } else if (storiesPleines) return;
     candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele });
   });
-  if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : "aucun sujet ne remplit toutes les règles" };
+  if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : `aucun sujet ne remplit toutes les règles (${(actualites?.sujets || []).length} sujets examinés${Object.keys(rejets).length ? " ; écartés : " + Object.entries(rejets).map(([k, n]) => `${n} ${k}`).join(", ") : ""})` };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
   return candidats[0];
 }
@@ -726,12 +729,13 @@ function normaliserConfig(c) {
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
     // sujets de justice et de mise en cause (scripts/sujets-sensibles.cjs) : activés par défaut ; niveau 1 = au moins « minMediasSensible » médias
     // citant une juridiction et une décision ; niveau 2 = brouillons à valider, « brouillonsSensiblesMax » par jour
+    fraicheurH: entier(c?.fraicheurH, 12, 3, 24),
     sensibles: c?.sensibles !== false, minMediasSensible: entier(c?.minMediasSensible, 2, 2, 10), brouillonsSensiblesMax: entier(c?.brouillonsSensiblesMax, 3, 0, 10)
   };
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
 function appliquerSeuils(config) {
-  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref;
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH;
 }
 /**
  * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
