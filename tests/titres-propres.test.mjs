@@ -281,3 +281,10 @@ test("sujets sensibles : le titre de repli ne nomme jamais la personne ni ne par
   for (const a of juge.articles) assert.notStrictEqual(plat(f.titre), plat(a.titre));
   assert.ok(SS.formulationSure(f.titre, { juridiction: c.juridiction }).ok);
 });
+
+test("essai de missile : titre propre exploitable (pas un mot seul), jamais « annonces »", () => {
+  const s = reel("Dissuasion nucléaire : Emmanuel Macron a assisté à un tir d’exercice d’un missile nucléaire sous-marin", { personnes: [pers("Emmanuel Macron")] },
+    [["20 Minutes", "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne"], ["RFI", "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire"]]);
+  const t = titreSujet(s, [], {});
+  assert.ok(t.titre.split(" ").length >= 3 && !/annonces/i.test(t.titre) && /dissuasion nucléaire/i.test(t.titre), t.titre);
+});

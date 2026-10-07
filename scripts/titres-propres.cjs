@@ -145,6 +145,7 @@ function titrePropre(sujet, dossiers = []) {
 const LONGUEUR_MAX = 70;
 /** Sujets reconnus (le premier qui correspond gagne) : S = intitulé court, O = complément (« sur … »), local = ce qui se passe sur place. */
 const THEMES_TITRES = [
+  { re: /missile|dissuasion|sous.marin nucleaire|arme nucleaire|force de frappe/, S: "Dissuasion nucléaire", O: "la dissuasion nucléaire", local: "dissuasion nucléaire" },
   { re: /lyce|blocus|parcoursup|mouvement lyceen/, S: "Lycées", O: "la mobilisation lycéenne", local: "mobilisation lycéenne" },
   { re: /casseurs.payeurs/, S: "Loi « casseurs-payeurs »", O: "la loi « casseurs-payeurs »", local: "débat sur la loi" },
   { re: /violences sexuelles/, S: "Violences sexuelles", O: "la loi contre les violences sexuelles", local: "débat sur la loi" },
@@ -205,6 +206,7 @@ function lieuDuTitre(titre) {
 // Une action n'est affirmée que si SON mot est dans le titre : « suspend la réforme » n'est pas « décision du tribunal administratif », « rejette » n'est pas un vote,
 // « dépose une motion de censure » n'est pas une proposition de loi. Les mots sont des débuts de mot (\b) ; les participes passifs (« critiqué par ») sont écartés.
 const ACTIONS = [
+  ["essai", /tir d.(?:essai|exercice)|assiste a un tir|essai d.un|test d.un|reussit un tir|tir de missile|a teste/, "essai lié à"],
   ["decision", /tribunal administratif/, "décision du tribunal administratif sur"],
   ["vote", /\badopt(?:e|ee|es|ees|ent|er)\b|\bvotent\b|\bvote par\b|\bvotee?s?\b|\bvote\b/, "vote sur"],
   ["depot", /proposition de loi|\bppl\b/, "proposition de loi sur"],
