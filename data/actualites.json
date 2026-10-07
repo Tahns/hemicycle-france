@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T10:45:48.575Z",
+ "lastUpdated": "2026-10-07T10:50:22.759Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -100,15 +100,16 @@
  ],
  "dossiers": [
   {
-   "id": "lyceens",
+   "id": "lyceenne",
    "titre": "Lycées",
    "motifs": [
-    "lycéens",
+    "lycéenne",
     "mobilisation",
-    "colère",
-    "manifestations"
+    "manifestations",
+    "colère"
    ],
    "medias": [
+    "Le Monde",
     "BFMTV",
     "Sud Ouest",
     "Mediapart",
@@ -119,14 +120,16 @@
     "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "RFI",
-    "Le Monde",
+    "France 24",
     "Le Dauphiné libéré",
+    "Le Progrès",
     "L'Express",
     "Le Figaro",
     "20 Minutes"
    ],
    "mediasDistincts": 13,
    "sources": [
+    "Le Monde",
     "BFMTV",
     "Sud Ouest",
     "Mediapart",
@@ -135,15 +138,20 @@
     "Nice-Matin",
     "EBRA",
     "Public Sénat",
-    "RFI",
-    "Le Monde",
+    "France Médias Monde",
     "L'Express",
     "Le Figaro",
     "20 Minutes"
    ],
-   "nb": 80,
-   "derniere": "2026-10-07T10:42:30.000Z",
+   "nb": 109,
+   "derniere": "2026-10-07T10:46:10.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
+     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
+     "date": "2026-10-07T10:46:10.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Blocage de Sciences Po: \"Ce que ça montre, c'est l'unité des jeunes et du peuple français dans la lutte\", assure Antoine Léaument, député LFI",
@@ -207,16 +215,22 @@
      "date": "2026-10-07T09:19:10.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Mobilisations lycéennes : l’affirmation d’un mouvement social",
-     "url": "https://www.lemonde.fr/idees/article/2026/10/07/mobilisations-lyceennes-l-affirmation-d-un-mouvement-social_6789570_3232.html",
-     "date": "2026-10-07T08:30:01.000Z"
+     "media": "France 24",
+     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
+     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
+     "date": "2026-10-07T08:10:13.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Isère. Colère des lycéens : situation plus calme après des tensions à Grenoble, une personne interpellée",
      "url": "https://www.ledauphine.com/education/2026/10/07/colere-des-lyceens-deux-lycees-bloques-a-grenoble-suivez-la-nouvelle-journee-de-mobilisation",
      "date": "2026-10-07T07:15:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Politique. Lycées, carburants, agriculture : Sébastien Lecornu s'exprimera ce mercredi soir depuis Matignon",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/lycees-carburants-agriculture-sebastien-lecornu-s-exprimera-ce-mercredi-soir-depuis-matignon",
+     "date": "2026-10-07T06:30:00.000Z"
     },
     {
      "media": "L'Express",
@@ -239,102 +253,120 @@
    ]
   },
   {
-   "id": "budget",
-   "titre": "Budget",
+   "id": "octobre",
+   "titre": "Octobre",
    "motifs": [
-    "budget"
+    "octobre"
    ],
    "medias": [
-    "Libération",
-    "BFMTV",
-    "Le Monde",
-    "Nice-Matin",
-    "Sud Ouest",
-    "RFI",
     "Public Sénat",
-    "20 Minutes"
+    "L'Est républicain",
+    "Sud Ouest",
+    "BFMTV",
+    "Le Progrès",
+    "RFI",
+    "Libération",
+    "Le Monde",
+    "20 Minutes",
+    "Dernières Nouvelles d'Alsace"
    ],
    "mediasDistincts": 8,
    "sources": [
-    "Libération",
-    "BFMTV",
-    "Le Monde",
-    "Nice-Matin",
-    "Sud Ouest",
-    "RFI",
     "Public Sénat",
+    "EBRA",
+    "Sud Ouest",
+    "BFMTV",
+    "RFI",
+    "Libération",
+    "Le Monde",
     "20 Minutes"
    ],
-   "nb": 11,
-   "derniere": "2026-10-07T10:36:34.000Z",
+   "nb": 14,
+   "derniere": "2026-10-07T10:10:54.000Z",
    "articles": [
     {
-     "media": "Libération",
-     "titre": "Budget : les députés rejettent en commission la réforme de l’abattement fiscal de 10 % sur les retraites",
-     "url": "https://www.liberation.fr/economie/budget-les-deputes-rejettent-en-commission-la-reforme-de-labattement-fiscal-de-10-sur-les-retraites-20261007_7VAH27GA6FBN3MYCFAA25FLTAQ/",
-     "date": "2026-10-07T10:36:34.000Z"
+     "media": "Public Sénat",
+     "titre": "7-Octobre : Trois ans après l’attaque du Hamas, les juifs de France continuent de vivre un « traumatisme »",
+     "url": "https://www.publicsenat.fr/actualites/politique/7-octobre-trois-ans-apres-lattaque-du-hamas-les-juifs-de-france-continuent-de-vivre-un-traumatisme",
+     "date": "2026-10-07T10:10:54.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Budget: \"On n'accepte plus de financer un certain nombre de programmes européens\", déclare Jean-Philippe Tanguy (RN)",
-     "url": "https://www.bfmtv.com/politique/front-national/video-budget-on-n-accepte-plus-de-financer-un-certain-nombre-de-programmes-europeens-declare-jean-philippe-tanguy-rn_VN-202610070277.html",
-     "date": "2026-10-07T06:59:41.000Z",
-     "video": true
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Présidentielle 2027 : les « mesures magiques » de Marine Le Pen pour convaincre de son sérieux budgétaire",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/07/presidentielle-2027-les-mesures-magiques-de-marine-le-pen-pour-convaincre-de-son-serieux-budgetaire_6789553_823448.html",
-     "date": "2026-10-07T06:58:16.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Budget: “Marine Le Pen et Jordan Bardella vont s’attaquer aux grands tabous”, promet Jean-Philippe Tanguy, président délégué du groupe RN à l’Assemblée",
-     "url": "https://www.bfmtv.com/politique/front-national/video-budget-marine-le-pen-et-jordan-bardella-vont-s-attaquer-aux-grands-tabous-promet-jean-philippe-tanguy-president-delegue-du-groupe-rn-a-l-assemblee_VN-202610070274.html",
-     "date": "2026-10-07T06:58:12.000Z",
-     "video": true
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Les élus du Conseil national de Monaco bousculent le gouvernement princier au sujet du budget rectificatif 2026",
-     "url": "https://www.nicematin.com/societe/politique/les-elus-du-conseil-national-de-monaco-bousculent-le-gouvernement-princier-au-sujet-du-budget-rectificatif-2026-10735312",
-     "date": "2026-10-07T06:26:05.000Z"
+     "media": "L'Est républicain",
+     "titre": "Neuves-Maisons. Conseil municipal du vendredi 9 octobre",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/05/conseil-municipal-du-vendredi-9-octobre",
+     "date": "2026-10-07T09:41:04.000Z"
     },
     {
      "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : le gouvernement fustige le budget présenté par le RN, un programme « en carton-pâte » qui « raserait gratis »",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-le-gouvernement-fustige-le-budget-presente-par-le-rn-un-programme-en-carton-pate-qui-raserait-gratis-30953366.php",
-     "date": "2026-10-06T21:00:21.000Z"
+     "titre": "Charente-Maritime : des établissements bloqués ce mercredi 7 octobre à La Rochelle, les lycéens ne lâchent pas l’affaire",
+     "url": "https://www.sudouest.fr/economie/social/charente-maritime-des-etablissements-bloques-ce-mercredi-7-octobre-a-la-rochelle-les-lyceens-ne-lachent-pas-l-affaire-30957140.php",
+     "date": "2026-10-07T08:41:36.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "\"Nous n'oublions ni les noms, ni les visages\": trois ans après le 7-Octobre, Emmanuel Macron promet de \"combattre l'antisémitisme\", \"partout et toujours\"",
+     "url": "https://www.bfmtv.com/politique/elysee/nous-n-oublions-ni-les-noms-ni-les-visages-trois-ans-apres-le-7-octobre-emmanuel-macron-promet-de-combattre-l-antisemitisme-partout-et-toujours_AD-202610070310.html",
+     "date": "2026-10-07T07:26:21.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Le dessin du mercredi 7 octobre : pas de bol… dire qu’on avait peur qu’ils sortent les canons à eau",
+     "url": "https://www.sudouest.fr/redaction/le-dessin-du-jour/le-dessin-du-mercredi-7-octobre-pas-de-bol-dire-qu-on-avait-peur-qu-ils-sortent-les-canons-a-eau-30952909.php",
+     "date": "2026-10-07T04:00:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Beauvallon | Saint-Jean-de-Touslas. L’épicerie associative devrait ouvrir ses portes le 30 octobre",
+     "url": "https://www.leprogres.fr/economie/2026/10/06/l-epicerie-associative-devrait-ouvrir-ses-portes-le-30-octobre",
+     "date": "2026-10-06T17:28:54.000Z"
     },
     {
      "media": "RFI",
-     "titre": "Eva Sas, députée EELV de Paris, cheffe de file du groupe sur le budget",
-     "url": "https://www.rfi.fr/fr/podcasts/mardi-politique/20261006-eva-sas-d%C3%A9put%C3%A9e-eelv-de-paris-cheffe-de-file-du-groupe-sur-le-budget",
-     "date": "2026-10-06T19:30:21.000Z"
+     "titre": "Journal d'Outre-mer du 6 octobre 2026",
+     "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261006-journal-d-outre-mer-du-6-octobre-2026",
+     "date": "2026-10-06T16:14:43.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Rima Hassan a-t-elle renversé et piétiné les drapeaux d’Israël et de l’UE lors d’un hommage aux victimes du 7 Octobre au Parlement européen ?",
+     "url": "https://www.liberation.fr/checknews/rima-hassan-a-t-elle-renverse-et-pietine-les-drapeaux-disrael-et-de-lue-lors-dun-hommage-aux-victimes-du-7-octobre-au-parlement-europeen-20261006_4MJUU73SM5DGXBVOSWYL3SQHOA/",
+     "date": "2026-10-06T12:59:13.000Z"
     },
     {
      "media": "Le Monde",
-     "titre": "L’affaire des écrits antisémites attribués à Jordan Bardella gâche la séquence budgétaire du RN",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/06/ecrits-antisemites-l-affaire-jordan-bardella-plombe-la-sequence-budgetaire-du-rn_6789091_823448.html",
-     "date": "2026-10-06T18:16:26.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Investisseurs qui se retirent, écarts avec nos voisins : comment la situation budgétaire française suscite la méfiance croissante des marchés",
-     "url": "https://www.publicsenat.fr/actualites/economie/investisseurs-qui-se-retirent-ecarts-avec-nos-voisins-comment-la-situation-budgetaire-francaise-suscite-la-mefiance-croissante-des-marches",
-     "date": "2026-10-06T15:44:25.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "[Info Public Sénat] Christine Lavarde rapporteure générale du budget, vice-présidences et questeurs : les postes clefs du Sénat dévoilés",
-     "url": "https://www.publicsenat.fr/actualites/politique/info-public-senat-christine-lavarde-designee-rapporteure-generale-du-budget-par-le-groupe-lr-du-senat",
-     "date": "2026-10-05T16:37:50.000Z"
+     "titre": "Rima Hassan accusée d’avoir « dégradé une exposition » sur le 7-Octobre au Parlement européen après avoir retiré un drapeau israélien de son support",
+     "url": "https://www.lemonde.fr/international/article/2026/10/06/rima-hassan-accusee-de-degradation-d-une-exposition-sur-le-7-octobre-au-parlement-europeen_6788993_3210.html",
+     "date": "2026-10-06T12:04:23.000Z"
     },
     {
      "media": "20 Minutes",
-     "titre": "Budget : Les représentants des hôpitaux et cliniques réclament 1,3 milliard d’euros en plus",
-     "url": "https://www.20minutes.fr/societe/4251529-20261005-budget-representants-hopitaux-cliniques-reclament-1-3-milliard-euros-plus-couvrir-besoins?at_medium=display&at_campaign=149",
-     "date": "2026-10-05T14:06:07.000Z"
+     "titre": "Attaques du 7-Octobre : Drapeau israélien renversé… Rima Hassan au centre d’un « incident sérieux » au Parlement européen",
+     "url": "https://www.20minutes.fr/politique/4251816-20261006-attaques-7-octobre-drapeau-israelien-renverse-rima-hassan-incident-serieux-parlement-europeen?at_medium=display&at_campaign=149",
+     "date": "2026-10-06T11:25:06.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "7-Octobre : une manifestation à l’appel du collectif Urgence Palestine interdite à Paris, le jour des commémorations des attaques du Hamas",
+     "url": "https://www.lemonde.fr/international/article/2026/10/06/une-manifestation-du-collectif-urgence-palestine-a-ete-interdite-a-paris-le-jour-des-commemorations-du-7-octobre_6788988_3210.html",
+     "date": "2026-10-06T11:15:43.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Strasbourg. Rima Hassan accusée d'avoir renversé les drapeaux israélien et de l'UE lors d'une exposition sur le 7-Octobre au Parlement européen",
+     "url": "https://www.dna.fr/politique/2026/10/06/rima-hassan-accusee-d-avoir-renverse-deux-drapeaux-lors-d-une-exposition-sur-le-7-octobre",
+     "date": "2026-10-06T11:13:00.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Primaire de la gauche : Plus de 140.000 personnes inscrites pour voter les 9 et 10 octobre",
+     "url": "https://www.20minutes.fr/politique/4251626-20261005-primaire-gauche-pres-130-000-personnes-inscrites-voter-9-10-octobre?at_medium=display&at_campaign=149",
+     "date": "2026-10-05T18:30:41.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Journal d'Outre-mer du 5 octobre 2026",
+     "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261005-journal-d-outre-mer-du-5-octobre-2026",
+     "date": "2026-10-05T15:20:24.000Z"
     }
    ]
   },
@@ -345,29 +377,37 @@
     "présidentielle"
    ],
    "medias": [
-    "BFMTV",
     "Le Monde",
+    "BFMTV",
     "Sud Ouest",
     "20 Minutes",
     "Libération",
     "Dernières Nouvelles d'Alsace",
+    "France 24",
     "Le Figaro",
     "Public Sénat"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
-    "BFMTV",
     "Le Monde",
+    "BFMTV",
     "Sud Ouest",
     "20 Minutes",
     "Libération",
     "Dernières Nouvelles d'Alsace",
+    "France 24",
     "Le Figaro",
     "Public Sénat"
    ],
-   "nb": 9,
-   "derniere": "2026-10-07T10:05:34.000Z",
+   "nb": 12,
+   "derniere": "2026-10-07T10:46:10.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
+     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
+     "date": "2026-10-07T10:46:10.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Présidentielle 2027: Jean-Luc Mélenchon estime que la mobilisation lycéenne est bénéfique au \"programme de rupture\" de la France insoumise",
@@ -403,6 +443,18 @@
      "titre": "Allemagne. Le parti d'extrême droite AfD accède à la présidence d'un Parlement régional",
      "url": "https://www.dna.fr/politique/2026/10/06/le-parti-d-extreme-droite-afd-accede-a-la-presidence-d-un-parlement-regional",
      "date": "2026-10-06T11:57:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "date": "2026-10-06T09:29:23.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
+     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
+     "date": "2026-10-05T16:14:48.000Z"
     },
     {
      "media": "Libération",
@@ -490,7 +542,7 @@
    }
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "EBRA",
@@ -512,6 +564,12 @@
     "vignette": "education"
    },
    "articles": [
+    {
+     "titre": "Politique. Lycées, carburants, agriculture : Sébastien Lecornu s'exprimera ce mercredi soir depuis Matignon",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/lycees-carburants-agriculture-sebastien-lecornu-s-exprimera-ce-mercredi-soir-depuis-matignon",
+     "media": "Le Progrès",
+     "date": "2026-10-07T06:30:00.000Z"
+    },
     {
      "titre": "Politique. Lycées, carburants, agriculture : Sébastien Lecornu s'exprimera ce mercredi soir depuis Matignon",
      "url": "https://www.dna.fr/politique/2026/10/07/lycees-carburants-agriculture-sebastien-lecornu-s-exprimera-ce-mercredi-soir-depuis-matignon",
@@ -563,7 +621,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 3,
    "sources": [
     "Le Monde",
@@ -580,8 +638,8 @@
    "articles": [
     {
      "titre": "Politique. Inceste : les députés créent une infraction spécifique et élargissent la définition aux cousins",
-     "url": "https://www.dna.fr/sante/2026/10/06/inceste-les-deputes-creent-une-infraction-specifique-et-elargissent-la-definition-aux-cousins",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/sante/2026/10/06/inceste-les-deputes-creent-une-infraction-specifique-et-elargissent-la-definition-aux-cousins",
+     "media": "Le Progrès",
      "date": "2026-10-06T18:39:00.000Z"
     },
     {
@@ -595,6 +653,12 @@
      "url": "https://www.20minutes.fr/politique/4251973-20261006-inceste-deputes-votent-elargir-definition-cousins-germains?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
      "date": "2026-10-06T19:01:19.000Z"
+    },
+    {
+     "titre": "Politique. Inceste : les députés créent une infraction spécifique et élargissent la définition aux cousins",
+     "url": "https://www.dna.fr/sante/2026/10/06/inceste-les-deputes-creent-une-infraction-specifique-et-elargissent-la-definition-aux-cousins",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-06T18:39:00.000Z"
     },
     {
      "titre": "Politique. Inceste : les députés créent une infraction spécifique et élargissent la définition aux cousins",
@@ -644,8 +708,54 @@
     }
    ],
    "titrePropre": {
-    "titre": "Parlement européen",
-    "origine": "recoupement"
+    "titre": "Octobre",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T17:08:56.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
+    },
+    {
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
+    },
+    {
+     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
+     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
+     "media": "France 24",
+     "date": "2026-10-06T09:35:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
+    "origine": "regles"
    }
   },
   {
@@ -738,8 +848,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Assemblée nationale : actualité sur les finances publiques",
+    "origine": "regles"
    },
    "chiffre": {
     "valeur": "10",
@@ -799,14 +909,6 @@
       "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
       "parti": "RN",
       "credit": "European Union, European Parliament, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Philippe Tanguy",
-      "photo": "photos/deputes/PA795778.jpg",
-      "photoHd": "photos/deputes/hd/PA795778.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA795778",
-      "credit": "Assemblée nationale"
      }
     ],
     "partis": [
@@ -816,6 +918,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Ecrits antisémites de Jordan Bardella : quelles turbulences au RN ?",
+     "url": "https://www.lemonde.fr/podcasts/article/2026/10/07/ecrits-antisemites-de-jordan-bardella-quelles-turbulences-au-rn_6789432_5463015.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T03:00:13.000Z"
+    },
     {
      "titre": "Écrits antisémites attribués à Jordan Bardella: \"Tout semble permis\" pour \"salir le RN\", juge Jean-Philippe Tanguy, député du Rassemblement national",
      "url": "https://www.bfmtv.com/politique/video-ecrits-antisemites-attribues-a-jordan-bardella-tout-semble-permis-pour-salir-le-rn-juge-jean-philippe-tanguy-depute-du-rassemblement-national_VN-202610070280.html",
@@ -831,48 +939,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "RFI"
-   ],
-   "derniere": "2026-10-06T17:08:56.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
-    },
-    {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
-    "origine": "regles"
+    "titre": "Écrits antisémites",
+    "origine": "recoupement"
    }
   },
   {
@@ -880,40 +948,85 @@
    "mediasDistincts": 2,
    "sources": [
     "Public Sénat",
-    "Le Monde"
+    "France 24"
    ],
-   "derniere": "2026-10-06T14:23:19.000Z",
+   "derniere": "2026-10-06T17:31:58.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
       "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "budget",
+    "vignette": "budget"
    },
    "articles": [
     {
-     "titre": "Accusations d’antisémitisme : Jordan Bardella conteste à nouveau « formellement » les éléments d’authentification de Mediapart",
-     "url": "https://www.publicsenat.fr/actualites/politique/accusation-dantisemitisme-jordan-bardella-conteste-a-nouveau-formellement-les-elements-dauthentification-de-mediapart",
+     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
+     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
      "media": "Public Sénat",
-     "date": "2026-10-06T14:23:19.000Z"
+     "date": "2026-10-06T17:31:58.000Z"
     },
     {
-     "titre": "Ecrits antisémites : Jordan Bardella conteste à nouveau « formellement » les éléments d’authentification de « Mediapart »",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/06/ecrits-antisemites-jordan-bardella-conteste-a-nouveau-formellement-les-elements-d-authentification-de-mediapart_6788982_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-06T10:44:39.000Z"
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "media": "France 24",
+     "date": "2026-10-06T09:29:23.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Conteste à nouveau",
-    "origine": "recoupement"
+    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "140",
+    "unite": "milliards d’euros"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Libération",
+    "France 24"
+   ],
+   "derniere": "2026-10-06T05:47:42.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Plus de 140 000 inscrits à la primaire de la gauche : «C’est très au-delà de nos prévisions»",
+     "url": "https://www.liberation.fr/politique/elections/plus-de-140-000-inscrits-a-la-primaire-de-la-gauche-cest-tres-au-dela-de-nos-previsions-20261006_NWQ42SOQ25HMHJ52LOES36CARY/",
+     "media": "Libération",
+     "date": "2026-10-06T05:47:42.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
+     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
+     "media": "France 24",
+     "date": "2026-10-05T16:14:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire de la gauche : l'essentiel du moment",
+    "origine": "regles"
    }
   },
   {
@@ -972,7 +1085,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -989,6 +1102,12 @@
      "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
      "url": "https://www.dna.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
      "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-07T08:50:00.000Z"
+    },
+    {
+     "titre": "Consommation. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
+     "url": "https://www.leprogres.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
+     "media": "Le Progrès",
      "date": "2026-10-07T08:50:00.000Z"
     },
     {
@@ -1014,7 +1133,7 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1038,6 +1157,12 @@
    },
    "articles": [
     {
+     "titre": "Info EBRA. Riposte de Jordan Bardella contre Mediapart : une plainte déposée contre le président du RN",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/06/riposte-de-jordan-bardella-contre-mediapart-une-plainte-deposee-contre-le-president-du-rn",
+     "media": "Le Progrès",
+     "date": "2026-10-06T18:10:00.000Z"
+    },
+    {
      "titre": "Justice. Riposte de Bardella contre Mediapart : plainte déposée contre le président du RN",
      "url": "https://www.dna.fr/faits-divers-justice/2026/10/06/riposte-de-jordan-bardella-contre-mediapart-une-plainte-deposee-contre-le-president-du-rn",
      "media": "Dernières Nouvelles d'Alsace",
@@ -1052,6 +1177,166 @@
    ],
    "titrePropre": {
     "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-07T09:19:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
+     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
+     "media": "RFI",
+     "date": "2026-10-07T09:19:10.000Z"
+    },
+    {
+     "titre": "Mobilisation lycéenne en direct : les enseignants appellent à la grève, les blocages en recul",
+     "url": "https://www.france24.com/fr/france/20261007-en-direct-nu%C3%B1ez-suspend-utilisation-grenades-assourdissantes-contre-lyc%C3%A9ens-manifestation",
+     "media": "France 24",
+     "date": "2026-10-07T07:51:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-06T17:20:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Blocus des lycées : le gouvernement sur le gril à l’Assemblée, Macron réunit des ministres à l'Élysée",
+     "url": "https://www.leprogres.fr/politique/2026/10/06/blocus-des-lycees-le-gouvernement-sur-le-gril-a-l-assemblee-macron-reunit-des-ministres-a-l-elysee",
+     "media": "Le Progrès",
+     "date": "2026-10-06T17:20:00.000Z"
+    },
+    {
+     "titre": "Politique. Colère lycéenne : Macron réunit des ministres à l'Élysée ce mardi soir",
+     "url": "https://www.dna.fr/politique/2026/10/06/blocus-des-lycees-le-gouvernement-sur-le-gril-a-l-assemblee-macron-reunit-des-ministres-a-l-elysee",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-06T17:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : actualité sur la mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T06:54:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation des lycéens: 450 000 manifestants en France selon les organisateurs, 266 000 selon le gouvernement",
+     "url": "https://www.rfi.fr/fr/france/20261006-en-direct-france-grosse-journ%C3%A9e-de-manifestation-pour-les-lyc%C3%A9es-rejoints-par-des-syndicats-profs-et-%C3%A9tudiants",
+     "media": "RFI",
+     "date": "2026-10-06T06:54:32.000Z"
+    },
+    {
+     "titre": "Colère lycéenne : 450 000 manifestants en France selon les organisateurs, 256 000 selon l'Intérieur",
+     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
+     "media": "France 24",
+     "date": "2026-10-06T04:57:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "chiffre": {
+    "valeur": "450 000",
+    "unite": "manifestants"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-07T10:46:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Appel à témoignages : à six mois du premier tour de l’élection présidentielle, où en est votre réflexion ? Racontez-nous",
+     "url": "https://www.lemonde.fr/politique/appel-temoignages/2026/10/07/appel-a-temoignages-a-six-mois-du-premier-tour-de-l-election-presidentielle-ou-en-est-votre-reflexion-racontez-nous_6789587_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T10:46:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : appel sur la présidentielle de 2027",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-07T10:42:44.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Meyzieu. La Ville lance ses conseils de quartier cet automne",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/la-ville-lance-ses-conseils-de-quartier-cet-automne",
+     "media": "Le Progrès",
+     "date": "2026-10-07T10:42:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Meyzieu : actualité locale",
     "origine": "regles",
     "generique": true
    }
@@ -1278,6 +1563,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-07T10:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Rhône. Nouveau président du département : Verchère officiellement candidat, Valéro cité",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/nouveau-president-du-departement-verchere-officiellement-candidat-valero-cite",
+     "media": "Le Progrès",
+     "date": "2026-10-07T10:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : actualité sur l'organisation des collectivités",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-10-07T10:10:54.000Z",
@@ -1296,9 +1607,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -1360,41 +1670,6 @@
       "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:05:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:05:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
     "partis": [
      "LFI"
     ],
@@ -1420,6 +1695,41 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T10:05:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T10:05:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1541,6 +1851,59 @@
    ],
    "titrePropre": {
     "titre": "Gifi : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-07T10:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Politique. Association des maires de l’Ain : le financement des collectivités et le réchauffement climatique au coeur des préoccupations",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/association-des-maires-de-l-ain-les-communes-sont-le-socle-de-la-republique",
+     "media": "Le Progrès",
+     "date": "2026-10-07T10:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Environnement : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-07T10:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Économie. Fermeture « envisagée » de six bureaux de poste dans la Loire : un calendrier déjà en marche",
+     "url": "https://www.leprogres.fr/economie/2026/10/07/fermeture-envisagee-de-six-bureaux-de-poste-dans-la-loire-un-calendrier-deja-en-marche",
+     "media": "Le Progrès",
+     "date": "2026-10-07T10:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : l'essentiel du moment",
     "origine": "regles",
     "generique": true
    }
@@ -2142,8 +2505,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Neuves-Maisons : conseil municipal",
-    "origine": "regles"
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -2226,32 +2589,6 @@
     "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-07T09:19:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
-     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
-     "media": "RFI",
-     "date": "2026-10-07T09:19:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
    }
   },
   {
@@ -2370,8 +2707,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Charente-Maritime : mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -2620,8 +2957,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles"
    }
   },
   {
@@ -2694,6 +3031,50 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-07T08:10:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Eva Sas",
+      "photo": "photos/deputes/PA610002.jpg",
+      "photoHd": "photos/deputes/hd/PA610002.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA610002",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
+     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
+     "media": "France 24",
+     "date": "2026-10-07T08:10:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Eva Sas : députée ECO (Paris)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3027,9 +3408,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -3090,6 +3470,33 @@
    "titrePropre": {
     "titre": "Lycées",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-07T07:14:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Villefranche-sur-Saône. Démission de Denis Garnier : Alexandre de Franceschi réagit",
+     "url": "https://www.leprogres.fr/politique/2026/10/07/demission-de-denis-garnier-alexandre-de-franceschi-reagit",
+     "media": "Le Progrès",
+     "date": "2026-10-07T07:14:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Villefranche-sur-Saône : actualité locale",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3284,8 +3691,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Jean-Philippe Tanguy : prise de position sur les finances publiques",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -3326,8 +3733,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (RN) : actualité sur la présidentielle de 2027",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -3386,8 +3793,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (RN) : annonces sur les finances publiques",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -3876,8 +4283,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Gouvernement : actualité sur les finances publiques",
+    "origine": "regles"
    }
   },
   {
@@ -4154,295 +4561,6 @@
    "titrePropre": {
     "titre": "Haut-Doubs : environnement",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-07T04:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Besançon. Accès au centre-ville : les règles des bornes assouplies pour « faciliter la vie de tous »",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/bornes-escamotables-a-battant-et-dans-la-boucle-le-dispositif-assoupli-pour-faciliter-la-vie-de-tous",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T04:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Besançon : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T04:05:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Vaucluse. Un maire participe à la Diagonale des fous : « Cette course me fait rêver depuis toujours »",
-     "url": "https://www.ledauphine.com/sport/2026/10/06/le-maire-participe-a-la-diagonale-des-fous-cette-course-me-fait-rever-depuis-toujours",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T04:05:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vaucluse : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T04:05:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Isère. La vidéo de l’intervention d’une voiture de police interroge à Bourgoin-Jallieu",
-     "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/07/isere-a-bourgoin-jallieu-la-video-de-l-intervention-d-une-voiture-de-police-interroge",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T04:05:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Isère : sécurité",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-07T04:00:23.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Emmanuel Roman, patron du géant de la finance Pimco : « Les marchés envoient un signal sérieux à la France » sur sa dette, « l’heure est grave »",
-     "url": "https://www.lemonde.fr/economie/article/2026/10/07/emmanuel-roman-patron-du-geant-de-la-finance-pimco-les-marches-envoient-un-signal-serieux-a-la-france-sur-sa-dette-l-heure-est-grave_6789539_3234.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T04:00:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-07T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le dessin du mercredi 7 octobre : pas de bol… dire qu’on avait peur qu’ils sortent les canons à eau",
-     "url": "https://www.sudouest.fr/redaction/le-dessin-du-jour/le-dessin-du-mercredi-7-octobre-pas-de-bol-dire-qu-on-avait-peur-qu-ils-sortent-les-canons-a-eau-30952909.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-07T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dessin de presse : regard sur l'actualité du jour",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Billet. Quel message à la jeunesse ?",
-     "url": "https://www.ledauphine.com/societe/2026/10/07/quel-message-a-la-jeunesse",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : point de vue éditorial",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-07T03:52:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La campagne de Marine Le Pen lestée par l’affaire Bardella : «A côté, Jordan a l’air d’être un poids»",
-     "url": "https://www.liberation.fr/politique/la-campagne-de-marine-le-pen-lestee-par-laffaire-bardella-a-cote-jordan-a-lair-detre-un-poids-20261007_KEGOFSAHVBDDDLOKHZLZAVKURQ/",
-     "media": "Libération",
-     "date": "2026-10-07T03:52:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-07T03:46:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Humour. Le dessin du jour : surcharge dans les prisons",
-     "url": "https://www.estrepublicain.fr/actualite/2026/10/07/le-dessin-du-jour-surcharge-dans-les-prisons",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T03:46:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dessin de presse : regard sur l'actualité du jour",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-07T03:31:54.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mouvement lycéen : face à la polémique sur le maintien de l’ordre, le gouvernement sur la défensive",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/07/mouvement-lyceen-sebastien-lecornu-sous-la-pression-de-la-rue-des-oppositions-et-d-emmanuel-macron_6789500_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T03:31:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : réponse sur la mobilisation lycéenne",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-07T03:00:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ecrits antisémites de Jordan Bardella : quelles turbulences au RN ?",
-     "url": "https://www.lemonde.fr/podcasts/article/2026/10/07/ecrits-antisemites-de-jordan-bardella-quelles-turbulences-au-rn_6789432_5463015.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T03:00:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
    }
   }
  ]
