@@ -23,6 +23,9 @@ const sa = require("../scripts/stories-auto.cjs");
 const tp = require("../scripts/titres-propres.cjs");
 const { construireDossiers } = require("../scripts/dossiers.cjs");
 const { choisir } = require("../scripts/publier-stories.cjs");
+const LP = require("../scripts/liste-prudente.cjs");
+// Ancienne liste complète (avant la décision du propriétaire) : le rétablissement reste possible et testé
+const ancien = (t) => LP.motExclu(t, { groupes: LP.GROUPES_TOUS });
 const { motExclu, parleDeSondage, reserveSondages, choisirSondage, jourParis, jourUTC2, titresProches, ficheDate, lireConfig } = sa;
 
 const aucun = (liste, msg) => assert.strictEqual(liste.length, 0, `${msg} :\n  - ${liste.join("\n  - ")}`);
@@ -30,7 +33,16 @@ const aucun = (liste, msg) => assert.strictEqual(liste.length, 0, `${msg} :\n  -
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. Liste prudente (motExclu) : ce qui est bien écarté aujourd'hui, et les angles morts
 // ─────────────────────────────────────────────────────────────────────────────
-test("motExclu (non-régression) : accusations, procédures, violences, mineurs, polémiques bien écartés", () => {
+// Décision du propriétaire : accusation, plainte, polémique, procédure judiciaire et écrits attribués suivent le circuit normal des stories (validation humaine) ;
+// restent écartés les violences physiques et sexuelles, les morts et drames, les mineurs identifiables.
+test("motExclu (décision du propriétaire) : accusation, procédure, polémique retenues ; violences, drames, mineurs écartés", () => {
+  for (const t of ["Écrits antisémites attribués à un élu : Mediapart révèle ses preuves", "Plainte déposée contre Jordan Bardella", "Le maire mis en examen pour corruption", "Bardella tacle Macron", "Sébastien Chenu s'excuse après un dérapage", "Procès de l'ancien maire : le tribunal rend sa décision"])
+    assert.strictEqual(motExclu(t), null, `retenu : ${t}`);
+  for (const t of ["Un viol à la mairie : le maire s'explique", "Décès de l'ancien président du Sénat", "Un homme tue sa compagne à Lyon", "Une adolescente de 15 ans hospitalisée", "Un lycéen de 16 ans blessé en marge de la manifestation", "Inceste : les députés créent une infraction spécifique", "Une lycéenne devient porte-parole du mouvement"])
+    assert.ok(motExclu(t), `toujours écarté : ${t}`);
+});
+
+test("motExclu (liste complète, rétablissable) : accusations, procédures, violences, mineurs, polémiques bien écartés", () => {
   const doivent = [
     "Jordan Bardella visé par une plainte", "Écrits antisémites attribués à un élu : Mediapart révèle ses preuves", "Le maire mis en examen pour corruption",
     "Garde à vue prolongée pour le député", "Perquisition au siège du parti", "Condamné à cinq ans, l'ancien ministre fait appel", "Ségolène Royal condamnée",
@@ -40,13 +52,13 @@ test("motExclu (non-régression) : accusations, procédures, violences, mineurs,
     "Mélenchon : « Nous sommes victimes »", "Bardella tacle Macron", "Glucksmann se dit désolé après ses propos inélégants", "Sébastien Chenu s'excuse après un dérapage",
     "Enquête visant un ministre", "Le ministre ouvre une enquête pour fraude", "Procès de l'ancien maire : le tribunal rend sa décision", "Interpellations en marge du blocus",
   ];
-  aucun(doivent.filter((t) => !motExclu(t)), "titres qui auraient dû être écartés");
+  aucun(doivent.filter((t) => !ancien(t)), "titres qui auraient dû être écartés (liste complète rétablie)");
   const legitimes = [
     "Budget 2027 : le PS appelle Sébastien Lecornu à modifier « sans délai » son projet", "Lecornu annonce le gel des dépenses", "Macron réunit des ministres à l'Élysée",
     "Primaire de la gauche : le dernier débat", "Réforme des retraites : l'intersyndicale appelle à la grève", "Présidentielle 2027 : Attal plaide pour une « grande coalition »",
     "Laurent Nuñez promet aux pompiers 1 milliard d'euros d'aide supplémentaire", "Le Parlement ouvre une commission d'enquête sur les prix de l'énergie", "Cour des comptes : un rapport sévère sur la dette",
   ];
-  aucun(legitimes.filter((t) => motExclu(t)), "titres légitimes écartés à tort");
+  aucun(legitimes.filter((t) => ancien(t)), "titres légitimes écartés à tort");
 });
 
 test("motExclu : angles morts (faux négatifs) sur des titres qui devraient être écartés", () => {
@@ -62,12 +74,12 @@ test("motExclu : angles morts (faux négatifs) sur des titres qui devraient êtr
     "Trafic d'influence : l'élu convoqué par les enquêteurs", "Financement libyen : Sarkozy fixé sur son sort en appel", "Après l'affaire", // « affaire » en fin de titre : seul « affaire␠» est listé
     "Mélenchon cherche à attiser la fureur lycéenne", "Glucksmann dézingue Mélenchon", "Le député traité de menteur par le ministre",
   ];
-  aucun(doivent.filter((t) => !motExclu(t)), "titres non écartés");
+  aucun(doivent.filter((t) => !ancien(t)), "titres non écartés (liste complète rétablie)");
 });
 
 test("motExclu : robustesse typographique (espace insécable) et âge écrit en lettres", () => {
   const doivent = ["Mise en examen du maire de Nice", "Garde à vue prolongée pour le député", "Un élève de quinze ans élu délégué du mouvement", "Une jeune fille de seize ans prend la parole"];
-  aucun(doivent.filter((t) => !motExclu(t)), "titres non écartés");
+  aucun(doivent.filter((t) => !ancien(t)), "titres non écartés (liste complète rétablie)");
 });
 
 test("motExclu : faux positifs (titres sans risque écartés)", () => {

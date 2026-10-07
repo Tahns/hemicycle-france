@@ -181,13 +181,18 @@ try {
     assert.match(r.resume, /ALERTE : le jeton Instagram est invalide/);
     assert.strictEqual(publications().length, 0);
   }
-  // Dernier filet : une entrée de presse mise en file avant le durcissement de la liste prudente n'est jamais publiée
+  // Décision du propriétaire : une accusation, une plainte, une polémique ou des écrits attribués ne bloquent plus la publication (l'entrée est validée par un humain en amont)
   {
-    const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(1), { titre: "Primaire de la gauche : Glucksmann se dit désolé après ses propos inélégants" })] });
+    await lancer({ entrees: [entree("cccccccccccc", il_y_a(1), { titre: "Plainte déposée contre Jean Dupont après des écrits antisémites qui lui sont attribués" })] });
+    assert.strictEqual(publications().length, 1, "plainte / écrits attribués : publiés");
+  }
+  // Dernier filet : une entrée de presse mise en file avant le durcissement de la liste prudente n'est jamais publiée (viol, décès, mineur…)
+  {
+    const r = await lancer({ entrees: [entree("dddddddddddd", il_y_a(1), { titre: "Primaire de la gauche : décès de l'ancien ministre, les hommages" })] });
     assert.strictEqual(publications().length, 0, "titre à mot prudent : pas de publication");
     assert.match(r.sortie, /rien à publier/);
     // un « en bref » est contrôlé sujet par sujet
-    const r2 = await lancer({ entrees: [entree("eeeeeeeeeeee", il_y_a(1), { bref: true, titre: "En bref : ce qu'il faut retenir aujourd'hui", sujets: ["Budget 2027", "Polémique sur le budget"] })] });
+    const r2 = await lancer({ entrees: [entree("eeeeeeeeeeee", il_y_a(1), { bref: true, titre: "En bref : ce qu'il faut retenir aujourd'hui", sujets: ["Budget 2027", "Un viol dénoncé dans un parti"] })] });
     assert.strictEqual(publications().length, 0, "en bref avec un sujet à mot prudent : pas de publication");
     jamaisLeJeton(r2);
     // un titre sans mot prudent passe
@@ -390,7 +395,7 @@ try {
     assert.strictEqual(publications().length, 0, "monétisation : post de presse (date) non publié");
     await lancer({ entrees: [postE(P1, il_y_a(1))], config: { validationHumaine: true } });
     assert.strictEqual(publications().length, 0);
-    await lancer({ entrees: [postE(P1, il_y_a(1), { donneesPropres: false, titre: "Le procès du projet de loi sera examiné le 27 octobre" })] });
+    await lancer({ entrees: [postE(P1, il_y_a(1), { donneesPropres: false, titre: "Le décès du rapporteur du projet de loi sera examiné le 27 octobre" })] });
     assert.strictEqual(publications().length, 0, "mot à risque : jamais");
     for (const legende of [undefined, "court", LEGENDE + "\nhttps://tahns.github.io/hemicycle-france/", LEGENDE.replace("@hemicyclefrance", "le compte"), LEGENDE + " " + "#a".repeat(31), "x".repeat(2300) + " @hemicyclefrance"]) {
       const r = await lancer({ entrees: [postE(P1, il_y_a(1), { legende })] });

@@ -28,6 +28,21 @@ test("une seule liste : stories-auto.motExclu et titres-propres utilisent celle 
   assert.match(readFileSync(join(RACINE, "scripts", "titres-propres.cjs"), "utf-8"), /require\("\.\/liste-prudente\.cjs"\)/, "titres-propres importe la liste unique");
 });
 
+test("décision du propriétaire : accusation, plainte, polémique, procédure et écrits attribués ne sont plus écartés (niveau presse) ; violences, drames, mineurs le restent", () => {
+  assert.deepStrictEqual(LP.GROUPES_PRESSE_ACTIFS, ["violences", "drame", "mineurs"]);
+  for (const t of ["Écrits antisémites attribués à X", "Plainte déposée contre X", "Propos racistes : le député s'explique", "Mis en examen, le maire de Nice reste en poste", "Enquête ouverte après des accusations visant X",
+    "Polémique : X accusé de dérapage", "Le tribunal condamne l'ancien ministre", "Discrimination : le Défenseur des droits saisi"]) {
+    assert.strictEqual(motExclu(t), null, `retenu : ${t}`);
+    assert.ok(motExclu(t, { groupes: LP.GROUPES_TOUS }), `la liste complète l'écartait : ${t}`);
+  }
+  for (const t of ["Un viol dénoncé dans un parti", "Agression d'un maire", "Violences sexuelles : X visé", "Pédocriminalité : un élu entendu", "Meurtre d'une élue", "Décès de l'ancien ministre", "Un drame à la sortie du meeting", "Mort de l'ancien président",
+    "Un adolescent de 15 ans blessé", "Une lycéenne devient porte-parole", "Lola, 16 ans, se confie"]) assert.ok(motExclu(t), `toujours écarté : ${t}`);
+  // un fait de discours mêlé à une violence physique reste écarté par la violence
+  assert.ok(motExclu("Agression antisémite : un élu condamne"));
+  // le niveau officiel est inchangé
+  assert.ok(motExclu("Débat sur l'affaire Dupont", { officiel: true }) && motExclu("Polémique sur le budget", { officiel: true }));
+});
+
 test("mots entiers : pas de faux positifs sur des sous-chaînes", () => {
   for (const t of ["Processus de paix : la France plaide pour un cessez-le-feu", "La mortalité infantile baisse", "Retraites : un déficit à 3 % dans 5 ans", "Le budget de la défense : un rapport", "Le déficit s'élève à 150 milliards d'euros",
     "Justice sociale : le PS veut taxer les hauts patrimoines", "Une commission d'enquête sur les prix de l'énergie", "Mobilisation lycéenne : Macron réunit des ministres", "Les lycéens manifestent partout en France", "Les élèves reprennent les cours",
@@ -37,7 +52,12 @@ test("mots entiers : pas de faux positifs sur des sous-chaînes", () => {
 });
 
 test("mots prudents : accents, casse, espaces insécables et typographie normalisés", () => {
-  for (const t of ["ENQUÊTE sur le ministre", "Mise en examen du maire de Nice", "Garde à vue prolongée", "Le député est mort ce matin", "Cour d’appel : décision attendue", "Le maire déclaré INÉLIGIBLE",
+  const tous = (t) => motExclu(t, { groupes: LP.GROUPES_TOUS });
+  for (const t of ["ENQUÊTE sur le ministre", "Mise en examen du maire de Nice", "Garde à vue prolongée", "Cour d’appel : décision attendue", "Le maire déclaré INÉLIGIBLE"]) {
+    assert.ok(tous(t), `liste complète : ${t}`);
+    assert.strictEqual(motExclu(t), null, `retenu depuis la décision du propriétaire : ${t}`);
+  }
+  for (const t of ["Le député est mort ce matin",
     "Un tireur ouvre le feu", "Une lycéenne devient porte-parole", "Un élève de quinze ans élu délégué", "Un adolescent de 15 ans blessé", "Lola, 16 ans, se confie", "Décès de l'ancien président du Sénat", "Suicide d'un élu", "Violences policières : le ministre répond"]) {
     assert.ok(motExclu(t), `devrait être écarté : ${t}`);
   }
@@ -48,7 +68,7 @@ test("niveau officiel : l'ordre du jour, les textes et les scrutins ne sont pas 
   for (const t of ["Proposition de loi apportant une réponse intégrale au phénomène de violences sexuelles et sexistes contre les femmes et les enfants", "Proposition de loi organique visant à adapter l'autorité judiciaire à la lutte contre les violences sexuelles et intrafamiliales",
     "Projet de loi relatif à la lutte contre la fraude sociale", "Débat sur la justice des mineurs"].slice(0, 3)) {
     assert.strictEqual(motExclu(t, off), null, t);
-    assert.ok(motExclu(t), `le même texte dans un titre de presse reste écarté : ${t}`);
+    assert.ok(motExclu(t, { groupes: LP.GROUPES_TOUS }), `liste complète : le même texte dans un titre de presse était écarté : ${t}`);
   }
   for (const t of ["Débat sur l'affaire Dupont", "Hommage à l'ancien député décédé", "Le ministre mis en examen : débat", "Polémique sur le budget"]) assert.ok(motExclu(t, off), `officiel mais vise une personne : ${t}`);
 });
@@ -67,11 +87,11 @@ test("ordre du jour réel du 13 octobre 2026 : aucun point n'est écarté par un
 test("mesure : taux de faux négatifs et de faux positifs de la liste sur les titres de l'audit (voir docs/AUDIT-PUBLICATIONS.md)", () => {
   const src = readFileSync(join(RACINE, "tests", "audit-publications.test.mjs"), "utf-8");
   const liste = (debut) => { const i = src.indexOf(debut); return eval(src.slice(src.indexOf("[", i), src.indexOf("];", i) + 1)); };
-  const aEcarter = [...liste('const doivent = [\n    "Jordan Bardella'), ...liste('const doivent = [\n    "Une enquête'), ...liste('const doivent = ["Mise en examen')];
+  const aEcarter = [...liste('const doivent = [\n    "Jordan Bardella'), ...liste('const doivent = [\n    "Une enquête'), ...liste('const doivent = ["Mise')];
   const legitimes = [...liste('const legitimes = [\n    "Budget 2027'), ...liste('const legitimes = ["Processus')];
-  const fn = aEcarter.filter((t) => !motExclu(t));
-  const fp = legitimes.filter((t) => motExclu(t));
-  assert.ok(aEcarter.length >= 70 && legitimes.length >= 12);
+  const fn = aEcarter.filter((t) => !motExclu(t, { groupes: LP.GROUPES_TOUS }));
+  const fp = legitimes.filter((t) => motExclu(t, { groupes: LP.GROUPES_TOUS }));
+  assert.ok(aEcarter.length >= 50 && legitimes.length >= 12);
   assert.deepStrictEqual(fn, [], `faux négatifs : ${fn.length}/${aEcarter.length}`);
   assert.deepStrictEqual(fp, [], `faux positifs : ${fp.length}/${legitimes.length}`);
 });
