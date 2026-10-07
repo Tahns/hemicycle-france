@@ -656,7 +656,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
     const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth }) => {
       if (synth) { // sujet synthétique ajouté le temps du dessin, puis retiré
         ACTUALITES.sujets.push(synth);
-        try { const r = await dessinerStory("actualite", `${ACTUALITES.sujets.length - 1}:une`); return r ? r.apercu : null; } finally { ACTUALITES.sujets.pop(); }
+        try { const r = await dessinerStory("actualite", `${ACTUALITES.sujets.length - 1}:${synth.modeleImpose || "une"}`); return r ? r.apercu : null; } finally { ACTUALITES.sujets.pop(); }
       }
       if (propre) { // données propres : vote par groupe ou simulation, jamais de presse ; le site doit avoir la même donnée que le fichier
         let r = null;
@@ -961,6 +961,48 @@ function choisirPostAgenda({ meetings, file, registre = null, now = new Date() }
   return { indice: -1, sujet, id, medias: 1, parole: false, modele: "post-date" };
 }
 
+/** Rappel d'un événement de l'agenda déjà annoncé par un post : story « Date à retenir » (« dans N jours ») à J-3 (J-2 si le J-3 a été manqué). */
+const RAPPEL_AGENDA_JOURS = [2, 3];
+
+/**
+ * Story de rappel (modèle « date ») pour un événement vérifié de l'agenda (data/meetings.json) dont le POST « Date à retenir » a déjà été annoncé
+ * (id du post dans la file, le registre ou les brouillons) et qui commence dans 2 à 3 jours. Id stable « rappel-agenda|debut|titre » : jamais deux fois.
+ * Mêmes garde-fous que le post (vérifié, source https, mot exclu, réserve électorale, nuit) ; plafond de 4 stories par jour.
+ * Renvoie { indice: -1, sujet, id, postId, medias: 1, parole: false, modele: "rappel-agenda" } ou { refus }.
+ */
+function choisirRappelAgenda({ meetings, file, registre = null, now = new Date() }) {
+  const h = heureParis(now);
+  if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
+  const entrees = file?.entrees || [];
+  if (entrees.filter((e) => estStoryComptee(e) && jourUTC2(e.cree) === jourUTC2(now)).length >= MAX_PAR_JOUR) return { refus: `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` };
+  const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
+  const aujourdhui = jourParis(now), reserve = reserveStory(now);
+  const candidats = [];
+  for (const m of meetings?.meetings || []) {
+    if (!m || m.verified !== true || m.confirme === false || !/^\d{4}-\d{2}-\d{2}$/.test(m.debut || "") || !m.titre || !/^https:\/\//.test(m.source?.url || "") || !m.source?.nom) continue;
+    const jours = Math.round((Date.parse(m.debut + "T12:00:00Z") - Date.parse(aujourdhui + "T12:00:00Z")) / 864e5);
+    if (!RAPPEL_AGENDA_JOURS.includes(jours)) continue;
+    if (motExclu(m.titre) || titreGenerique(m.titre) || (reserve && parleDeSondage(m.titre + " " + (m.desc || "")))) continue;
+    const postId = hashStable("post-agenda|" + m.debut + "|" + m.titre);
+    if (!ids.has(postId)) continue; // jamais de rappel pour un événement que le site n'a pas annoncé lui-même
+    const id = hashStable("rappel-agenda|" + m.debut + "|" + m.titre);
+    if (ids.has(id)) continue;
+    candidats.push({ m, jours, id, postId });
+  }
+  if (!candidats.length) return { refus: "aucun rappel d'agenda à publier" };
+  candidats.sort((a, b) => a.jours - b.jours);
+  const { m, id, postId } = candidats[0];
+  const d = new Date(m.debut + "T12:00:00Z");
+  const sujet = {
+    date: { iso: m.debut, jour: String(d.getUTCDate()), mois: MOIS_FR(m.debut) },
+    titrePropre: { titre: m.titre },
+    articles: [{ media: m.source.nom, titre: "", url: m.source.url, date: m.debut }],
+    derniere: new Date(now).toISOString(),
+    agenda: { fin: /^\d{4}-\d{2}-\d{2}$/.test(m.fin || "") ? m.fin : null, lieu: m.lieu && m.lieu !== "—" ? m.lieu : "" },
+  };
+  return { indice: -1, sujet, id, postId, medias: 1, parole: false, modele: "rappel-agenda" };
+}
+
 /** Fiche d'un post « date à retenir » : tirée d'un sujet de data/actualites.json (modèle « post-date »). */
 function ficheDate(s, now = new Date()) {
   const dt = s.date, jours = joursAvantDate(s, now);
@@ -1048,6 +1090,8 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
   if (!s1.refus) return s1;
   const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post, suivi d'une story d'annonce
   if (!pl.refus) return pl;
+  const ra = choisirRappelAgenda({ meetings, file, registre, now }); // J-3 d'un événement déjà annoncé par un post : story « Date à retenir »
+  if (!ra.refus) return ra;
   const pa = choisirPostAgenda({ meetings, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
   if (!pa.refus) return pa;
   const b = choisirEnBref({ actualites, file, now }); // « en bref » : une fois par jour, le matin
@@ -1118,7 +1162,7 @@ const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
 function decrire(choix, now = new Date()) {
   const d = decrireBase(choix, now);
-  if (d.type === "post" || d.champs.sensible) return d; // le texte alternatif d'un post, ou d'un sujet sensible, est dans sa fiche (« alt », fabriqué par règles)
+  if (d.type === "post" || d.champs.sensible || choix.modele === "rappel-agenda") return d; // le texte alternatif d'un post, ou d'un sujet sensible, est dans sa fiche (« alt », fabriqué par règles)
   const titre = d.champs.titrePropre || d.titre;
   return { ...d, champs: { ...d.champs, alt: texteAlternatif(d.type, titre, d.medias, d.champs.sujets) } };
 }
@@ -1156,9 +1200,19 @@ function decrireSensible(choix) {
     },
   };
 }
+/** Story de rappel d'un événement de l'agenda : modèle « date », dessinée d'après un sujet synthétique (notre titre, source de l'agenda, aucune citation). */
+function decrireRappelAgenda(choix, now) {
+  const s = choix.sujet, n = joursAvantDate(s, now);
+  const synth = { ...s, modeleImpose: "date" };
+  return {
+    titre: s.titrePropre.titre, medias: [s.articles[0].media], sources: [s.articles[0].url], type: "story", args: [-1, s.articles[0].titre, null, null, null, "date", null, synth],
+    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir : ${s.titrePropre.titre}, dans ${n} jours (${s.date.jour} ${s.date.mois}). Date relevée auprès de ${s.articles[0].media}.` },
+  };
+}
 function decrireBase(choix, now = new Date()) {
   if (choix.sensible) return decrireSensible(choix);
   if (choix.post || choix.modele === "post-date") return decrirePost(choix, now);
+  if (choix.modele === "rappel-agenda") return decrireRappelAgenda(choix, now);
   if (choix.sondage) {
     const i = choix.sondage;
     return { titre: `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
@@ -1318,6 +1372,6 @@ async function main() {
   }
 }
 
-module.exports = { mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
