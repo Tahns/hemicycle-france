@@ -37,8 +37,10 @@ const JURIDICTION_TERMES = ["mis en examen", "mise en examen", "garde a vue", "c
 // violences contre les personnes
 const VIOLENCES_TERMES = [
   "viol", "viols", "violer", "viole", "violee", "violees", "violence", "violences", "violent", "violents", "violente", "violentes", "violemment",
-  "agress*", "meurtre*", "assassin*", "homicide*", "harcel*", "pedo*", "inceste*", "sexuel*", "sexiste*", "sexisme", "antisemit*", "racis*", "homophob*", "discriminat*", "lynch*",
+  "agress*", "meurtre*", "assassin*", "homicide*", "harcel*", "pedo*", "inceste*", "sexuel*", "sexiste*", "sexisme", "lynch*",
 ];
+// discours et propos attribués (écrits, déclarations) : pas des violences physiques ; non écartés du niveau « presse » (décision du propriétaire)
+const DISCOURS_TERMES = ["antisemit*", "racis*", "homophob*", "discriminat*"];
 // morts, faits divers
 const DRAME_TERMES = [
   "tue", "tues", "tuee", "tuees", "tuer", "tuent", "tuerie*", "tireur*", "fusillade*", "coups de feu", "coup de feu", "arme a feu", "poignard*", "coups de couteau", "attentat*", "terroris*",
@@ -70,7 +72,7 @@ const echap = (m) => m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const JUGE_NOM = "\\b(?:un|une|le|ce|cet|du|au|ancien|ancienne|jeune)\\s+juge\\b|\\bjuge\\s+(?:d'|des|de|administratif|judiciaire|antiterroriste|unique)\\b";
 const POURSUITE = "\\bpoursui\\w+\\s+(?:en justice|pour|devant)\\b";
 const motif = (termes, extras = []) => new RegExp([...termes.map((m) => (m.endsWith("*") ? `\\b${echap(m.slice(0, -1))}` : `\\b${echap(m)}\\b`)), ...extras].join("|"));
-const RE = { procedure: motif(PROCEDURE_TERMES, [JUGE_NOM, POURSUITE]), accusation: motif(ACCUSATION_TERMES), juridiction: motif(JURIDICTION_TERMES, [JUGE_NOM, POURSUITE]), violences: motif(VIOLENCES_TERMES), drame: motif(DRAME_TERMES), mineurs: motif(MINEURS_TERMES), polemique: motif(POLEMIQUE_TERMES) };
+const RE = { procedure: motif(PROCEDURE_TERMES, [JUGE_NOM, POURSUITE]), accusation: motif(ACCUSATION_TERMES), juridiction: motif(JURIDICTION_TERMES, [JUGE_NOM, POURSUITE]), violences: motif(VIOLENCES_TERMES), discours: motif(DISCOURS_TERMES), drame: motif(DRAME_TERMES), mineurs: motif(MINEURS_TERMES), polemique: motif(POLEMIQUE_TERMES) };
 
 // Niveau « officiel » : textes de loi, scrutins, ordre du jour, notions du site. Une loi « contre les violences sexuelles » est un texte officiel,
 // pas une accusation. Restent écartés : une personne visée par la justice, un décès, un fait divers, une polémique.
@@ -80,18 +82,29 @@ const OFFICIEL_TERMES = [
 ];
 const RE_OFFICIEL = motif(OFFICIEL_TERMES);
 
+// DÉCISION DU PROPRIÉTAIRE (assumée par lui) : plus de « circuit des sujets sensibles ». Un sujet de presse qui parle d'une accusation, d'une plainte,
+// d'une polémique, d'une procédure judiciaire ou d'écrits attribués à une personnalité suit le circuit normal des stories (validation humaine comprise).
+// Groupes écartés au niveau « presse » ; pour rétablir l'ancien comportement, ajouter à ce tableau : "procedure", "accusation", "polemique", "discours".
+// Restent TOUJOURS écartés (protections légales, pas choix éditoriaux) : violences physiques et sexuelles, morts et drames, mineurs identifiables.
+const GROUPES_PRESSE_ACTIFS = ["violences", "drame", "mineurs"];
+
+const GROUPES_ASSOUPLIS = ["procedure", "accusation", "polemique", "discours"]; // groupes que la décision du propriétaire a retirés du niveau « presse »
+const GROUPES_TOUS = ["procedure", "accusation", "violences", "discours", "drame", "mineurs", "polemique"]; // ancien comportement intégral (tests, circuit sensible)
+
 const nettoyer = (titre) => sansAccent(titre).replace(EXCEPTIONS, " ");
 const valeurAge = (m) => { const n = /\d+/.exec(m); return n ? Number(n[0]) : -1; }; // -1 : nombre écrit en lettres (toujours < 20)
 
 /** Terme prudent trouvé (chaîne) ou null. { officiel: true } pour une donnée officielle (agenda, scrutin, texte de loi, notion du site). */
-function motExclu(titre, { officiel = false } = {}) {
+function motExclu(titre, { officiel = false, groupes = GROUPES_PRESSE_ACTIFS } = {}) {
   const t = nettoyer(titre);
   if (officiel) { const m = RE_OFFICIEL.exec(t); return m ? m[0].trim() : null; }
-  for (const re of [RE.procedure, RE.accusation, RE.violences, RE.drame, RE.mineurs, RE.polemique, ...FORMES_SPECIALES]) { const m = re.exec(t); if (m) return m[0].trim(); }
+  for (const re of [...groupes.map((g) => RE[g]), ...FORMES_SPECIALES]) { const m = re.exec(t); if (m) return m[0].trim(); }
   const a = RE_AGE_MINEUR.exec(t);
   if (a) { const v = valeurAge(a[0]); if (v === -1 || v < 20) return a[0].trim(); }
   return null;
 }
+/** Le titre relève-t-il d'un groupe assoupli (accusation, plainte, polémique, procédure, écrits attribués) ? Le terme trouvé ou null. Sert à tolérer un titre de repli neutre pour ces sujets. */
+const motAssoupli = (titre) => motExclu(titre, { groupes: GROUPES_ASSOUPLIS });
 /** Un mineur identifiable dans le texte (âge de moins de 20 ans, « une lycéenne », « un élève »…) : le terme trouvé ou null. */
 function mineurIdentifiable(titre) {
   const t = nettoyer(titre);
@@ -101,8 +114,8 @@ function mineurIdentifiable(titre) {
   return null;
 }
 /** Compatibles avec les anciennes expressions de titres-propres.cjs (méthode .test) : la même liste pour tous. */
-const JUDICIAIRE_TITRES = { test: (titre) => { const t = nettoyer(titre); return RE.procedure.test(t) || RE.accusation.test(t) || RE.violences.test(t) || mineurIdentifiable(titre) !== null; } };
+const JUDICIAIRE_TITRES = { test: (titre) => { const t = nettoyer(titre); return RE.procedure.test(t) || RE.accusation.test(t) || RE.violences.test(t) || RE.discours.test(t) || mineurIdentifiable(titre) !== null; } };
 const PROCEDURE = { test: (titre) => RE.procedure.test(nettoyer(titre)) };
 const JURIDICTION = { test: (titre) => RE.juridiction.test(nettoyer(titre)) };
 
-module.exports = { sansAccent, motExclu, mineurIdentifiable, JUDICIAIRE_TITRES, PROCEDURE, JURIDICTION, PROCEDURE_TERMES, ACCUSATION_TERMES, VIOLENCES_TERMES, DRAME_TERMES, MINEURS_TERMES, POLEMIQUE_TERMES, OFFICIEL_TERMES, RE_AGE_MINEUR };
+module.exports = { sansAccent, motExclu, motAssoupli, mineurIdentifiable, JUDICIAIRE_TITRES, PROCEDURE, JURIDICTION, PROCEDURE_TERMES, ACCUSATION_TERMES, VIOLENCES_TERMES, DISCOURS_TERMES, GROUPES_PRESSE_ACTIFS, GROUPES_ASSOUPLIS, GROUPES_TOUS, DRAME_TERMES, MINEURS_TERMES, POLEMIQUE_TERMES, OFFICIEL_TERMES, RE_AGE_MINEUR };

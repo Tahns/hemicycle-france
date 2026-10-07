@@ -2,8 +2,9 @@
 import assert from "assert";
 import { readFileSync } from "fs";
 import { createRequire } from "module";
-const { choisirSujet, choisirSondage, choisir, reserveSondages, jourPublication, motExclu, idSujet, jourUTC2, elaguer } = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+const { destination: AUTO_destination, decrire: AUTO_decrireBrut, choisirSujet, choisirSondage, choisir, reserveSondages, jourPublication, motExclu, idSujet, jourUTC2, elaguer } = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
 
+const AUTO_decrire = (r) => AUTO_decrireBrut(r, now);
 const now = new Date("2026-10-02T13:30:00Z"); // 15 h 30 à Paris
 const il_y_a = (h) => new Date(now.getTime() - h * 36e5).toISOString();
 const MEDIAS = ["franceinfo", "Le Monde", "Le Figaro", "Libération", "20 Minutes"];
@@ -62,23 +63,56 @@ assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027
 // Le refus indique le motif des écarts
 assert.ok(/1 plus de 12 h/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(13) })]).refus), "motif journalisé");
 assert.ok(/1 moins de 3 médias/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).refus), "motif médias");
-// Mis en examen et autres mots à risque : exclus
-assert.ok(choix([sujet("Jean Dupont mis en examen pour détournement de fonds publics", 4)]).refus, "mis en examen exclu");
+// DÉCISION DU PROPRIÉTAIRE : accusation, plainte, polémique, procédure, écrits attribués : circuit NORMAL des stories (retenu, brouillon à valider) ; plus de circuit sensible
+for (const titre of ["Jean Dupont mis en examen pour détournement de fonds publics", "Écrits antisémites attribués à Jean Dupont", "Plainte déposée contre Jean Dupont"]) {
+  const r = choix([sujet(titre, 4)]);
+  assert.strictEqual(r.indice, 0, `retenu : ${titre} (${r.refus})`);
+  assert.ok(!r.sensible && r.modele !== "sensible", "pas de circuit sensible");
+}
 for (const titre of [
-  "Un ministre visé par une plainte pour diffamation", "Garde à vue d'un élu local à Lyon", "Le député soupçonné de favoritisme",
-  "Mort de l'ancien ministre Jean Martin", "Décès d'une figure de la gauche", "Drame à la sortie d'un meeting", "Une adolescente de 15 ans victime d'une agression",
-  "Le maire condamné pour prise illégale d'intérêts", "Un fait divers relance le débat sur la sécurité", "Nouvelle enquête visant un parlementaire",
-]) assert.ok(motExclu(titre), `exclu : ${titre}`);
+  "Un ministre visé par une plainte pour diffamation", "Garde à vue d'un élu local à Lyon", "Le député soupçonné de favoritisme", "Le maire condamné pour prise illégale d'intérêts", "Nouvelle enquête visant un parlementaire",
+]) assert.strictEqual(motExclu(titre), null, `retenu : ${titre}`);
+// Protections légales conservées : viol, décès, drame, mineur
+for (const titre of ["Un viol dénoncé dans un parti", "Une adolescente de 15 ans victime d'une agression", "Mort de l'ancien ministre Jean Martin", "Décès d'une figure de la gauche", "Drame à la sortie d'un meeting", "Un fait divers relance le débat sur la sécurité"]) {
+  assert.ok(motExclu(titre), `exclu : ${titre}`);
+  assert.ok(choix([sujet(titre, 4)]).refus, `sujet écarté : ${titre}`);
+}
 for (const titre of ["Le gouvernement présente son projet de budget pour 2027", "Le Sénat adopte la loi de programmation militaire"])
   assert.strictEqual(motExclu(titre), null, `non exclu : ${titre}`);
-// Un seul titre à risque parmi ceux du sujet suffit à l'écarter
+// Un seul titre à risque (protection légale) parmi ceux du sujet suffit à l'écarter
 {
   const s = sujet("Le gouvernement présente son projet de budget pour 2027", 3);
-  s.articles[2].titre = "Budget : un ministre mis en cause par une plainte";
+  s.articles[2].titre = "Budget : un ministre mort dans un accident";
   assert.ok(choix([s]).refus, "un titre à risque écarte le sujet");
 }
-// Thème justice : exclu
-assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { illustration: { theme: "justice" } })]).refus, "justice exclu");
+// Thème justice : plus écarté (décision du propriétaire) ; titre propre fiable conservé
+{
+  const r = choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { illustration: { theme: "justice" } })]);
+  assert.strictEqual(r.indice, 0, "justice retenu");
+  assert.strictEqual(r.repli, false);
+}
+// Accusation, plainte, écrits attribués : circuit normal, titre de repli si le titre propre est vague ou absent, titre de presse conservé pour les doublons, brouillon à valider
+{
+  const cas = [["Écrits antisémites attribués à Jean Dupont", { titre: "Politique : l'essentiel du moment", origine: "regles", generique: true }], ["Plainte déposée contre Jean Dupont", undefined], ["Polémique sur les propos du ministre", { titre: "Polémique", origine: "recoupement" }]];
+  for (const [titre, tp] of cas) {
+    const sj = sujet(titre, 3, { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] }, titrePropre: tp });
+    const r = choix([sj]);
+    assert.strictEqual(r.indice, 0, `retenu : ${titre} (${r.refus})`);
+    assert.strictEqual(r.repli, true, "titre de repli");
+    assert.ok(!r.sensible && r.modele === "une", "circuit normal, jamais le circuit sensible");
+    const cfg = { validationHumaine: true, sensibles: false };
+    assert.strictEqual(AUTO_destination(r, cfg), "brouillon", "brouillon à valider");
+    const d = AUTO_decrire(r);
+    assert.ok(!("titrePropre" in d.champs), "pas de titre propre : rubrique « à la une » + titre de presse cité");
+    assert.strictEqual(d.titre, titre);
+    // moins de 3 médias : refusé comme n'importe quel sujet
+    assert.ok(choix([sujet(titre, 2, { illustration: { theme: "justice" }, titrePropre: tp })]).refus);
+    // doublon sur le titre de presse
+    assert.ok(choix([sj], { file: { entrees: [{ id: "x".repeat(12), cree: il_y_a(5), titre, sources: [] }] } }).refus, "doublon écarté");
+  }
+  // un sujet sans mot d'accusation et sans titre propre reste refusé
+  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" } })]).refus);
+}
 // Déjà en file : exclu (par titre, ou par lien d'article déjà utilisé)
 {
   const titre = "Le gouvernement présente son projet de budget pour 2027";
@@ -257,7 +291,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: true, minMedias: 2, dossierMedias: 3, maxParJour: 20, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias, 20 stories par jour");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: true, sensibles: false, minMedias: 3, dossierMedias: 3, maxParJour: 20, fraicheurH: 12, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 3 médias, 20 stories par jour, validation humaine, sujets sensibles sans circuit à part");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
@@ -547,9 +581,9 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(b.bref.indices.length, 3, "un seul des deux sujets « lycées »");
     assert.ok(!(b.bref.indices.includes(0) && b.bref.indices.includes(1)));
   }
-  // Mots de reproche ou de polémique visant une personne nommée : écartés
+  // Mots de reproche ou de polémique visant une personne nommée : plus écartés (décision du propriétaire) ; la liste complète les écarte toujours
   for (const t of ["Primaire de la gauche : Glucksmann se dit désolé après ses propos inélégants", "Polémique autour des déclarations du ministre sur la réforme", "Retraites : le président du groupe fustige la méthode du gouvernement", "Budget : la députée s'excuse après un dérapage en séance"]) {
-    assert.ok(AUTO.motExclu(t), `écarté : ${t}`);
+    assert.strictEqual(AUTO.motExclu(t), null, `retenu : ${t}`);
   }
   assert.ok(!AUTO.motExclu("Le gouvernement présente son projet de budget pour 2027"));
   // Face à face : il faut un débat, un duel ou une primaire dans les titres (deux candidats cités ensemble ne suffisent pas)
@@ -647,7 +681,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // 4. Nuit, réserve électorale, mots à risque : jamais de post
   {
     assert.ok(AUTO.choisirSujet({ actualites: actu(dateSujet()), direct: null, file: vide, now: new Date("2026-10-02T22:00:00Z") }).refus, "nuit (0 h à Paris)");
-    const risque = sujet("Le procès du projet de loi casseurs-payeurs sera examiné au Sénat le 27 octobre", 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" } });
+    const risque = sujet("Mort du rapporteur : le projet de loi casseurs-payeurs sera examiné au Sénat le 27 octobre", 3, { date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" } });
     assert.ok(choix([risque]).refus, "mot à risque : rien");
     const nuitReserve = new Date("2027-04-17T10:00:00Z");
     const sond = sujet("Sondage : le projet de loi casseurs-payeurs sera examiné au Sénat le 27 avril", 3, { date: { iso: "2027-04-27", jour: 27, mois: "avril" }, derniere: new Date(nuitReserve.getTime() - 36e5).toISOString(), titrePropre: { titre: "Loi casseurs-payeurs au Sénat", origine: "recoupement" } });

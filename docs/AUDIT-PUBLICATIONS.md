@@ -1,5 +1,8 @@
 # Audit critique de la chaîne de publication automatique
 
+> **Décision du propriétaire (postérieure à cet audit).** Les constats sur les accusations, plaintes, polémiques, procédures judiciaires et écrits attribués (liste prudente, circuit sensible) ne s'appliquent plus au niveau « presse » : ces sujets suivent le circuit normal des stories, avec validation humaine, et le propriétaire en assume la responsabilité. Restent écartés : violences physiques et sexuelles, morts et drames, mineurs identifiables. Pour rétablir la liste complète : tableau `GROUPES_PRESSE_ACTIFS` de `scripts/liste-prudente.cjs` (voir `docs/PUBLICATION-AUTO.md`). Les tests de l'audit vérifient la liste complète via `GROUPES_TOUS`.
+
+
 Date : 6 octobre 2026. Périmètre : `scripts/stories-auto.cjs`, `publier-stories.cjs`, `titres-propres.cjs`, `dossiers.cjs`, `illustrations.js`, `js/stories*.js`, `data/stories-config.json`, les données réelles (`data/actualites.json`, `instagram-file.json`, `instagram-publiees.json`), les images de `instagram/auto`, `modeles` et `publications` (24 images regardées). Au moment de l'audit, aucun script de production n'avait été modifié ; l'état des corrections suit.
 Ce document n'est pas un avis juridique : les points de droit sont des risques à faire valider par un juriste.
 

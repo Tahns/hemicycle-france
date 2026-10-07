@@ -3,7 +3,8 @@ import assert from "assert";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const SS = require("../scripts/sujets-sensibles.cjs");
-const { motExclu } = require("../scripts/stories-auto.cjs");
+const LP = require("../scripts/liste-prudente.cjs");
+const motExclu = (t) => LP.motExclu(t, { groupes: LP.GROUPES_TOUS }); // le circuit sensible (désactivé) garde la liste complète d'avant la décision du propriétaire
 
 const art = (titre, media) => ({ titre, media, url: `https://www.example.org/${encodeURIComponent(media)}/${encodeURIComponent(titre).slice(0, 20)}`, date: "2026-10-06T09:00:00Z" });
 const DUPONT = { nom: "Jean Dupont" };

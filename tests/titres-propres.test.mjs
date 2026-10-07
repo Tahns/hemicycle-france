@@ -288,3 +288,13 @@ test("essai de missile : titre propre exploitable (pas un mot seul), jamais « a
   const t = titreSujet(s, [], {});
   assert.ok(t.titre.split(" ").length >= 3 && !/annonces/i.test(t.titre) && /dissuasion nucléaire/i.test(t.titre), t.titre);
 });
+
+test("sujet d'accusation ou de plainte (circuit normal) : le titre propre ne nomme jamais la personne visée et ne copie pas un titre de presse", () => {
+  const pers = [{ nom: "Jean Dupont" }];
+  for (const titres of [["Plainte déposée contre Jean Dupont", "Jean Dupont visé par une plainte", "Une plainte contre Jean Dupont"], ["Écrits antisémites attribués à Jean Dupont", "Jean Dupont : des écrits antisémites qui lui sont attribués", "Écrits antisémites : Jean Dupont réagit"]]) {
+    const s = sujet(titres.map((t, i) => [["Le Monde", "BFMTV", "Le Figaro"][i], t]), { illustration: { theme: "politique", personnes: pers } });
+    const t = titreSujet(s, [], {});
+    assert.ok(t && !/dupont/i.test(t.titre), t?.titre);
+    assert.ok(!titres.some((x) => plat(x) === plat(t.titre)), "pas de copie d'un titre de presse");
+  }
+});

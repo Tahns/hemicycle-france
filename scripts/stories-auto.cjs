@@ -228,6 +228,8 @@ const sourcesDe_ = (articles) => sourcesDistinctes(articles || []).sources;
 
 /** Pourquoi un titre est écarté (null s'il passe). { officiel: true } : donnée officielle (ordre du jour, scrutin, texte de loi), liste réduite. */
 const motExclu = (titre, opts) => LP.motExclu(titre, opts);
+/** Liste complète d'avant la décision du propriétaire (accusation, procédure, polémique, discours) : réservée au circuit sensible, désactivé. */
+const motExcluStrict = (titre) => LP.motExclu(titre, { groupes: LP.GROUPES_TOUS });
 /** Donnée officielle (ordre du jour, scrutin, texte de loi, notion du site) : liste réduite, sans accusation possible (voir liste-prudente.cjs). */
 const OFF = { officiel: true };
 
@@ -436,20 +438,27 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < (parole ? FRAICHEUR_H : FRAICHEUR_SUJET_H) * 36e5) || age < -36e5) return rej(`plus de ${parole ? FRAICHEUR_H : FRAICHEUR_SUJET_H} h`);
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return rej("déjà publié");
-    if (s.illustration?.theme === "justice") return rej("justice");
+    // Décision du propriétaire : le thème « justice » et les mots d'accusation, de procédure ou de polémique ne sont plus écartés (voir liste-prudente.cjs)
     if ((s.articles || []).some((a) => motExclu(a.titre))) return rej("mot exclu");
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
-    if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
-    if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
-    if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
+    // Titre de repli : sans titre propre fiable, un sujet d'accusation, de procédure ou de polémique garde sa story (rubrique « à la une » + titre de presse cité, voir js/stories-actu.js) ; les autres sujets, non
+    const sensibleNormal = !!(s.articles || []).some((a) => LP.motAssoupli(a.titre)) || s.illustration?.theme === "justice";
+    const sansTitrePropre = !s.titrePropre?.titre || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true;
+    const repli = sensibleNormal && sansTitrePropre;
+    if (!repli) {
+      if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
+      if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
+      if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
+    }
+    const titreRef = repli ? titre : s.titrePropre.titre; // doublons : le titre de presse quand la story n'a pas de titre propre
     if (articlesDejaPublies(s.articles, recs72)) return rej("déjà publié (article)"); // l'id repose sur le premier titre, qui change : on compare aussi les liens et titres d'articles déjà publiés
-    if (dejaVu(s.titrePropre.titre, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
-    const modele = modeleSujet(s, { direct, candidats: declares, now });
+    if (dejaVu(titreRef, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
+    const modele = repli ? "une" : modeleSujet(s, { direct, candidats: declares, now });
     if ((modele === "post-date" || modele === "date") && s.date?.iso && evenementDejaPublie(entrees, registre, now, s.titrePropre.titre, s.date.iso)) return rej("même événement déjà publié"); // post, story ou rappel
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
       if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
     } else if (storiesPleines) return;
-    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele });
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele, repli });
   });
   if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : `aucun sujet ne remplit toutes les règles (${(actualites?.sujets || []).length} sujets examinés${Object.keys(rejets).length ? " ; écartés : " + Object.entries(rejets).map(([k, n]) => `${n} ${k}`).join(", ") : ""})` };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
@@ -496,7 +505,7 @@ function choisirSensible({ actualites, file, registre = null, rejetes = null, no
     if (!(age < FRAICHEUR_BROUILLON_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (reserve && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
-    const c = SS.classerSujet(s, { minMedias: config.minMediasSensible, motExclu });
+    const c = SS.classerSujet(s, { minMedias: config.minMediasSensible, motExclu: motExcluStrict }); // circuit sensible (désactivé : config.sensibles === false) : liste complète d'avant la décision du propriétaire
     if (!c || c.refus || !niveaux.includes(c.niveau)) return;
     if (c.niveau === 1 && (storiesPleines || !(age < FRAICHEUR_H * 36e5))) return;
     if (c.niveau === 2 && (brouillonsJour >= config.brouillonsSensiblesMax || c.medias.length < 1)) return;
@@ -539,7 +548,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date() }) 
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
-    if (s.illustration?.theme === "justice" || !s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents) || articlesDejaPublies(s.articles, recs72)) return;
+    if (!s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents) || articlesDejaPublies(s.articles, recs72)) return;
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
@@ -1331,7 +1340,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
