@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-07T10:41:23.340Z",
+ "lastUpdated": "2026-10-07T10:45:48.575Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -100,16 +100,17 @@
  ],
  "dossiers": [
   {
-   "id": "lyceenne",
+   "id": "lyceens",
    "titre": "Lycées",
    "motifs": [
-    "lycéenne",
+    "lycéens",
     "mobilisation",
-    "manifestations",
-    "mouvement"
+    "colère",
+    "manifestations"
    ],
    "medias": [
     "BFMTV",
+    "Sud Ouest",
     "Mediapart",
     "Libération",
     "Hugo Décrypte",
@@ -118,9 +119,7 @@
     "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "RFI",
-    "Sud Ouest",
     "Le Monde",
-    "France 24",
     "Le Dauphiné libéré",
     "L'Express",
     "Le Figaro",
@@ -129,28 +128,34 @@
    "mediasDistincts": 13,
    "sources": [
     "BFMTV",
+    "Sud Ouest",
     "Mediapart",
     "Libération",
     "Hugo Décrypte",
     "Nice-Matin",
     "EBRA",
     "Public Sénat",
-    "France Médias Monde",
-    "Sud Ouest",
+    "RFI",
     "Le Monde",
     "L'Express",
     "Le Figaro",
     "20 Minutes"
    ],
-   "nb": 103,
-   "derniere": "2026-10-07T10:36:32.000Z",
+   "nb": 80,
+   "derniere": "2026-10-07T10:42:30.000Z",
    "articles": [
     {
      "media": "BFMTV",
-     "titre": "Lycées: Édouard Geffray affirme qu'il \"faudra poser la question de la durée des vacances\" pour un même volume d'enseignement avec moins d'heures par semaine",
-     "url": "https://www.bfmtv.com/politique/video-lycees-edouard-geffray-affirme-qu-il-faudra-poser-la-question-de-la-duree-des-vacances-pour-un-meme-volume-d-enseignement-avec-moins-d-heures-par-semaine_VN-202610070465.html",
-     "date": "2026-10-07T10:36:32.000Z",
+     "titre": "Blocage de Sciences Po: \"Ce que ça montre, c'est l'unité des jeunes et du peuple français dans la lutte\", assure Antoine Léaument, député LFI",
+     "url": "https://www.bfmtv.com/politique/video-blocage-de-sciences-po-ce-que-ca-montre-c-est-l-unite-des-jeunes-et-du-peuple-francais-dans-la-lutte-assure-antoine-leaument-depute-lfi_VN-202610070469.html",
+     "date": "2026-10-07T10:42:30.000Z",
      "video": true
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Colère lycéenne : des collégiens, près de Villeneuve-sur-Lot, veulent en prendre de la graine, « un cadre sécurisé » leur sera proposé",
+     "url": "https://www.sudouest.fr/politique/education/colere-lyceenne-des-collegiens-pres-de-villeneuve-sur-lot-veulent-en-prendre-de-la-graine-un-cadre-securise-leur-sera-propose-30958506.php",
+     "date": "2026-10-07T10:30:00.000Z"
     },
     {
      "media": "Mediapart",
@@ -202,22 +207,10 @@
      "date": "2026-10-07T09:19:10.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Charente-Maritime : des établissements bloqués ce mercredi 7 octobre à La Rochelle, les lycéens ne lâchent pas l’affaire",
-     "url": "https://www.sudouest.fr/economie/social/charente-maritime-des-etablissements-bloques-ce-mercredi-7-octobre-a-la-rochelle-les-lyceens-ne-lachent-pas-l-affaire-30957140.php",
-     "date": "2026-10-07T08:41:36.000Z"
-    },
-    {
      "media": "Le Monde",
      "titre": "Mobilisations lycéennes : l’affirmation d’un mouvement social",
      "url": "https://www.lemonde.fr/idees/article/2026/10/07/mobilisations-lyceennes-l-affirmation-d-un-mouvement-social_6789570_3232.html",
      "date": "2026-10-07T08:30:01.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
-     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
-     "date": "2026-10-07T08:10:13.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
@@ -246,6 +239,106 @@
    ]
   },
   {
+   "id": "budget",
+   "titre": "Budget",
+   "motifs": [
+    "budget"
+   ],
+   "medias": [
+    "Libération",
+    "BFMTV",
+    "Le Monde",
+    "Nice-Matin",
+    "Sud Ouest",
+    "RFI",
+    "Public Sénat",
+    "20 Minutes"
+   ],
+   "mediasDistincts": 8,
+   "sources": [
+    "Libération",
+    "BFMTV",
+    "Le Monde",
+    "Nice-Matin",
+    "Sud Ouest",
+    "RFI",
+    "Public Sénat",
+    "20 Minutes"
+   ],
+   "nb": 11,
+   "derniere": "2026-10-07T10:36:34.000Z",
+   "articles": [
+    {
+     "media": "Libération",
+     "titre": "Budget : les députés rejettent en commission la réforme de l’abattement fiscal de 10 % sur les retraites",
+     "url": "https://www.liberation.fr/economie/budget-les-deputes-rejettent-en-commission-la-reforme-de-labattement-fiscal-de-10-sur-les-retraites-20261007_7VAH27GA6FBN3MYCFAA25FLTAQ/",
+     "date": "2026-10-07T10:36:34.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Budget: \"On n'accepte plus de financer un certain nombre de programmes européens\", déclare Jean-Philippe Tanguy (RN)",
+     "url": "https://www.bfmtv.com/politique/front-national/video-budget-on-n-accepte-plus-de-financer-un-certain-nombre-de-programmes-europeens-declare-jean-philippe-tanguy-rn_VN-202610070277.html",
+     "date": "2026-10-07T06:59:41.000Z",
+     "video": true
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Présidentielle 2027 : les « mesures magiques » de Marine Le Pen pour convaincre de son sérieux budgétaire",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/07/presidentielle-2027-les-mesures-magiques-de-marine-le-pen-pour-convaincre-de-son-serieux-budgetaire_6789553_823448.html",
+     "date": "2026-10-07T06:58:16.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Budget: “Marine Le Pen et Jordan Bardella vont s’attaquer aux grands tabous”, promet Jean-Philippe Tanguy, président délégué du groupe RN à l’Assemblée",
+     "url": "https://www.bfmtv.com/politique/front-national/video-budget-marine-le-pen-et-jordan-bardella-vont-s-attaquer-aux-grands-tabous-promet-jean-philippe-tanguy-president-delegue-du-groupe-rn-a-l-assemblee_VN-202610070274.html",
+     "date": "2026-10-07T06:58:12.000Z",
+     "video": true
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Les élus du Conseil national de Monaco bousculent le gouvernement princier au sujet du budget rectificatif 2026",
+     "url": "https://www.nicematin.com/societe/politique/les-elus-du-conseil-national-de-monaco-bousculent-le-gouvernement-princier-au-sujet-du-budget-rectificatif-2026-10735312",
+     "date": "2026-10-07T06:26:05.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : le gouvernement fustige le budget présenté par le RN, un programme « en carton-pâte » qui « raserait gratis »",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-le-gouvernement-fustige-le-budget-presente-par-le-rn-un-programme-en-carton-pate-qui-raserait-gratis-30953366.php",
+     "date": "2026-10-06T21:00:21.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Eva Sas, députée EELV de Paris, cheffe de file du groupe sur le budget",
+     "url": "https://www.rfi.fr/fr/podcasts/mardi-politique/20261006-eva-sas-d%C3%A9put%C3%A9e-eelv-de-paris-cheffe-de-file-du-groupe-sur-le-budget",
+     "date": "2026-10-06T19:30:21.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "L’affaire des écrits antisémites attribués à Jordan Bardella gâche la séquence budgétaire du RN",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/06/ecrits-antisemites-l-affaire-jordan-bardella-plombe-la-sequence-budgetaire-du-rn_6789091_823448.html",
+     "date": "2026-10-06T18:16:26.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Investisseurs qui se retirent, écarts avec nos voisins : comment la situation budgétaire française suscite la méfiance croissante des marchés",
+     "url": "https://www.publicsenat.fr/actualites/economie/investisseurs-qui-se-retirent-ecarts-avec-nos-voisins-comment-la-situation-budgetaire-francaise-suscite-la-mefiance-croissante-des-marches",
+     "date": "2026-10-06T15:44:25.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "[Info Public Sénat] Christine Lavarde rapporteure générale du budget, vice-présidences et questeurs : les postes clefs du Sénat dévoilés",
+     "url": "https://www.publicsenat.fr/actualites/politique/info-public-senat-christine-lavarde-designee-rapporteure-generale-du-budget-par-le-groupe-lr-du-senat",
+     "date": "2026-10-05T16:37:50.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Budget : Les représentants des hôpitaux et cliniques réclament 1,3 milliard d’euros en plus",
+     "url": "https://www.20minutes.fr/societe/4251529-20261005-budget-representants-hopitaux-cliniques-reclament-1-3-milliard-euros-plus-couvrir-besoins?at_medium=display&at_campaign=149",
+     "date": "2026-10-05T14:06:07.000Z"
+    }
+   ]
+  },
+  {
    "id": "presidentielle",
    "titre": "Présidentielle",
    "motifs": [
@@ -258,11 +351,10 @@
     "20 Minutes",
     "Libération",
     "Dernières Nouvelles d'Alsace",
-    "France 24",
     "Le Figaro",
     "Public Sénat"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 8,
    "sources": [
     "BFMTV",
     "Le Monde",
@@ -270,11 +362,10 @@
     "20 Minutes",
     "Libération",
     "Dernières Nouvelles d'Alsace",
-    "France 24",
     "Le Figaro",
     "Public Sénat"
    ],
-   "nb": 11,
+   "nb": 9,
    "derniere": "2026-10-07T10:05:34.000Z",
    "articles": [
     {
@@ -314,18 +405,6 @@
      "date": "2026-10-06T11:57:00.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "date": "2026-10-06T09:29:23.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
-     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
-     "date": "2026-10-05T16:14:48.000Z"
-    },
-    {
      "media": "Libération",
      "titre": "Présidentielle 2027 : François Ruffin veut «passer du Front populaire au CNR»",
      "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-francois-ruffin-veut-passer-du-front-populaire-au-cnr-20261005_2ZMIHR55BFGSLOJ6PAWBNUJMKY/",
@@ -342,95 +421,6 @@
      "titre": "« Une victoire de Flavio Bolsonaro à la présidentielle au Brésil marquerait un tournant historique vers un régime autoritaire et illibéral » selon l’historienne Armelle Enders",
      "url": "https://www.publicsenat.fr/actualites/international/une-victoire-de-flavio-bolsonaro-a-la-presidentielle-au-bresil-marquerait-un-tournant-historique-vers-un-regime-autoritaire-et-illiberal-selon-lhistorienne-armelle-end",
      "date": "2026-10-05T14:53:25.000Z"
-    }
-   ]
-  },
-  {
-   "id": "euros",
-   "titre": "Euros",
-   "motifs": [
-    "euros",
-    "milliards"
-   ],
-   "medias": [
-    "Dernières Nouvelles d'Alsace",
-    "Public Sénat",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Sud Ouest",
-    "France 24",
-    "20 Minutes"
-   ],
-   "mediasDistincts": 5,
-   "sources": [
-    "EBRA",
-    "Public Sénat",
-    "Sud Ouest",
-    "France 24",
-    "20 Minutes"
-   ],
-   "nb": 10,
-   "derniere": "2026-10-07T10:36:00.000Z",
-   "articles": [
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Illkirch-Graffenstaden. Bons d’achat aidés pour relancer le commerce local après-Covid : 268 000 euros se sont envolés",
-     "url": "https://www.dna.fr/economie/2026/10/07/bons-d-achat-aides-pour-relancer-le-commerce-local-apres-covid-268-000-euros-se-sont-envoles",
-     "date": "2026-10-07T10:36:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« J’hésite entre découragement et rébellion » : François Sauvadet dénonce un prélèvement « insupportable » de 1,8 milliard d’euros par l’Etat sur les départements",
-     "url": "https://www.publicsenat.fr/actualites/territoires/jhesite-entre-decouragement-et-rebellion-francois-sauvadet-denonce-un-prelevement-insupportable-de-18-milliard-deuros-par",
-     "date": "2026-10-07T10:34:55.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.dna.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "date": "2026-10-07T08:50:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.ledauphine.com/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "date": "2026-10-07T08:50:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Assemblée nationale. 25 euros au resto, mais que 10 au supermarché ? La loi sur les tickets-restaurant sur le gril",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/07/25-euros-au-resto-mais-que-10-au-supermarche-la-loi-sur-les-tickets-restaurant-sur-le-gril",
-     "date": "2026-10-07T08:50:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Emploi. 80 millions d’euros en moins pour la formation, « ce sont des jeunes qui vont renoncer »",
-     "url": "https://www.sudouest.fr/economie/emploi/emploi-80-millions-d-euros-en-moins-pour-la-formation-ce-sont-des-jeunes-qui-vont-renoncer-30889616.php",
-     "date": "2026-10-06T19:00:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
-     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
-     "date": "2026-10-06T17:31:58.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "date": "2026-10-06T09:29:23.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Des milliards d’euros nécessaires chaque année pour adapter les bâtiments scolaires au changement climatique",
-     "url": "https://www.publicsenat.fr/actualites/education/des-milliards-deuros-necessaires-chaque-annee-pour-adapter-les-batiments-scolaires-au-changement-climatique",
-     "date": "2026-10-05T16:05:39.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Budget : Les représentants des hôpitaux et cliniques réclament 1,3 milliard d’euros en plus",
-     "url": "https://www.20minutes.fr/societe/4251529-20261005-budget-representants-hopitaux-cliniques-reclament-1-3-milliard-euros-plus-couvrir-besoins?at_medium=display&at_campaign=149",
-     "date": "2026-10-05T14:06:07.000Z"
     }
    ]
   }
@@ -662,52 +652,6 @@
    "medias": 3,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-06T17:08:56.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
-    },
-    {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
-    },
-    {
-     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
-     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
-     "media": "France 24",
-     "date": "2026-10-06T09:35:43.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
     "20 Minutes / Nice-Matin",
     "RFI"
    ],
@@ -764,6 +708,43 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Libération",
+    "Le Monde"
+   ],
+   "derniere": "2026-10-07T10:36:34.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Budget : les députés rejettent en commission la réforme de l’abattement fiscal de 10 % sur les retraites",
+     "url": "https://www.liberation.fr/economie/budget-les-deputes-rejettent-en-commission-la-reforme-de-labattement-fiscal-de-10-sur-les-retraites-20261007_7VAH27GA6FBN3MYCFAA25FLTAQ/",
+     "media": "Libération",
+     "date": "2026-10-07T10:36:34.000Z"
+    },
+    {
+     "titre": "Les députés rejettent en commission la réforme de l’abattement fiscal de 10 % dont bénéficient les retraités, jugée « antisociale »",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/07/budget-2027-les-deputes-rejettent-en-commission-la-reforme-de-l-abattement-fiscal-de-10-sur-les-retraites-jugee-antisociale_6789580_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T09:35:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "chiffre": {
+    "valeur": "10",
+    "unite": "%"
+   }
   },
   {
    "medias": 2,
@@ -850,61 +831,48 @@
     }
    ],
    "titrePropre": {
-    "titre": "Écrits antisémites attribués",
-    "origine": "recoupement"
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Public Sénat",
-    "France 24"
+    "20 Minutes",
+    "RFI"
    ],
-   "derniere": "2026-10-06T17:31:58.000Z",
+   "derniere": "2026-10-06T17:08:56.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
      }
     ],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
-     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
-     "media": "Public Sénat",
-     "date": "2026-10-06T17:31:58.000Z"
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
     },
     {
-     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
-     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
-     "media": "France 24",
-     "date": "2026-10-06T09:29:23.000Z"
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
+    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
     "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "140",
-    "unite": "milliards d’euros"
    }
   },
   {
@@ -946,39 +914,6 @@
    "titrePropre": {
     "titre": "Conteste à nouveau",
     "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "France 24"
-   ],
-   "derniere": "2026-10-06T05:47:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Plus de 140 000 inscrits à la primaire de la gauche : «C’est très au-delà de nos prévisions»",
-     "url": "https://www.liberation.fr/politique/elections/plus-de-140-000-inscrits-a-la-primaire-de-la-gauche-cest-tres-au-dela-de-nos-previsions-20261006_NWQ42SOQ25HMHJ52LOES36CARY/",
-     "media": "Libération",
-     "date": "2026-10-06T05:47:42.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : plus de 140 000 inscrits à la primaire de la gauche",
-     "url": "https://www.france24.com/fr/france/20261005-pr%C3%A9sidentielle-2027-plus-de-140-000-inscrits-%C3%A0-la-primaire-de-la-gauche",
-     "media": "France 24",
-     "date": "2026-10-05T16:14:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire de la gauche : l'essentiel du moment",
-    "origine": "regles"
    }
   },
   {
@@ -1070,44 +1005,12 @@
     }
    ],
    "titrePropre": {
-    "titre": "Euros",
-    "origine": "dossier"
+    "titre": "Assemblée nationale : l'essentiel du moment",
+    "origine": "regles"
    },
    "chiffre": {
     "valeur": "25",
     "unite": "euros"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-07T09:19:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
-     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
-     "media": "RFI",
-     "date": "2026-10-07T09:19:10.000Z"
-    },
-    {
-     "titre": "Mobilisation lycéenne en direct : les enseignants appellent à la grève, les blocages en recul",
-     "url": "https://www.france24.com/fr/france/20261007-en-direct-nu%C3%B1ez-suspend-utilisation-grenades-assourdissantes-contre-lyc%C3%A9ens-manifestation",
-     "media": "France 24",
-     "date": "2026-10-07T07:51:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
    }
   },
   {
@@ -1154,40 +1057,49 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "BFMTV"
    ],
-   "derniere": "2026-10-06T06:54:32.000Z",
+   "derniere": "2026-10-07T10:42:30.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
+    "personnes": [
+     {
+      "nom": "Antoine Léaument",
+      "photo": "photos/deputes/PA795746.jpg",
+      "parti": "LFI",
+      "lien": "#depute-PA795746",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
    },
    "articles": [
     {
-     "titre": "Mobilisation des lycéens: 450 000 manifestants en France selon les organisateurs, 266 000 selon le gouvernement",
-     "url": "https://www.rfi.fr/fr/france/20261006-en-direct-france-grosse-journ%C3%A9e-de-manifestation-pour-les-lyc%C3%A9es-rejoints-par-des-syndicats-profs-et-%C3%A9tudiants",
-     "media": "RFI",
-     "date": "2026-10-06T06:54:32.000Z"
-    },
-    {
-     "titre": "Colère lycéenne : 450 000 manifestants en France selon les organisateurs, 256 000 selon l'Intérieur",
-     "url": "https://www.france24.com/fr/france/20261006-en-direct-mobilisation-massive-attendue-des-lyc%C3%A9ens-pour-l-acte-iii-du-mouvement",
-     "media": "France 24",
-     "date": "2026-10-06T04:57:52.000Z"
+     "titre": "Blocage de Sciences Po: \"Ce que ça montre, c'est l'unité des jeunes et du peuple français dans la lutte\", assure Antoine Léaument, député LFI",
+     "url": "https://www.bfmtv.com/politique/video-blocage-de-sciences-po-ce-que-ca-montre-c-est-l-unite-des-jeunes-et-du-peuple-francais-dans-la-lutte-assure-antoine-leaument-depute-lfi_VN-202610070469.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T10:42:30.000Z",
+     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Antoine Léaument (LFI) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    },
-   "chiffre": {
-    "valeur": "450 000",
-    "unite": "manifestants"
-   }
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Antoine Léaument : député LFI (Essonne)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1219,8 +1131,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Gouvernement : prise de position sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -1252,8 +1164,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Euros",
-    "origine": "dossier"
+    "titre": "Illkirch-Graffenstaden : actualité locale",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1278,7 +1191,33 @@
     }
    ],
    "titrePropre": {
-    "titre": "Euros",
+    "titre": "Département : prise de position sur l'organisation des collectivités",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-07T10:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Colère lycéenne : des collégiens, près de Villeneuve-sur-Lot, veulent en prendre de la graine, « un cadre sécurisé » leur sera proposé",
+     "url": "https://www.sudouest.fr/politique/education/colere-lyceenne-des-collegiens-pres-de-villeneuve-sur-lot-veulent-en-prendre-de-la-graine-un-cadre-securise-leur-sera-propose-30958506.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-07T10:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
     "origine": "dossier"
    }
   },
@@ -1421,6 +1360,41 @@
       "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-07T10:05:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-07T10:05:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
     "partis": [
      "LFI"
     ],
@@ -1446,41 +1420,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T10:05:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T10:05:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -2266,32 +2205,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-07T09:35:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Les députés rejettent en commission la réforme de l’abattement fiscal de 10 % dont bénéficient les retraités, jugée « antisociale »",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/07/budget-2027-les-deputes-rejettent-en-commission-la-reforme-de-l-abattement-fiscal-de-10-sur-les-retraites-jugee-antisociale_6789580_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T09:35:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : actualité sur les finances publiques",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-10-07T09:20:58.000Z",
@@ -2313,6 +2226,32 @@
     "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-07T09:19:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT - Mouvement des lycéens: des syndicats de l'Éducation appellent à la grève jeudi en soutien",
+     "url": "https://www.rfi.fr/fr/france/20261007-en-direct-mobilisation-des-lyc%C3%A9es-235-%C3%A9l%C3%A8ves-bless%C3%A9s-et-18-enqu%C3%AAtes-de-l-igpn-en-cours-annonce-laurent-nunez",
+     "media": "RFI",
+     "date": "2026-10-07T09:19:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
    }
   },
   {
@@ -2431,8 +2370,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Charente-Maritime : mobilisation lycéenne",
+    "origine": "regles"
    }
   },
   {
@@ -2755,50 +2694,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-07T08:10:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Eva Sas",
-      "photo": "photos/deputes/PA610002.jpg",
-      "photoHd": "photos/deputes/hd/PA610002.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA610002",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "ECO"
-    ],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Eva Sas (Les Écologistes) : \"Les autorités ont tenté de briser le mouvement lycéen\"",
-     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261007-eva-sas-les-%C3%A9cologistes-les-autorit%C3%A9s-ont-tent%C3%A9-de-briser-le-mouvement-lyc%C3%A9en",
-     "media": "France 24",
-     "date": "2026-10-07T08:10:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Eva Sas : députée ECO (Paris)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -3389,8 +3284,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Philippe Tanguy : prise de position sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -3431,8 +3326,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : actualité sur la présidentielle de 2027",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -3491,8 +3386,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : annonces sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -3981,50 +3876,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : actualité sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T06:10:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Sébastien Lecornu Premier ministre",
-     "url": "https://www.bfmtv.com/politique/gouvernement/sebastien-lecornu-premier-ministre_DN-202509100375.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T06:10:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -4494,6 +4348,95 @@
      "url": "https://www.liberation.fr/politique/la-campagne-de-marine-le-pen-lestee-par-laffaire-bardella-a-cote-jordan-a-lair-detre-un-poids-20261007_KEGOFSAHVBDDDLOKHZLZAVKURQ/",
      "media": "Libération",
      "date": "2026-10-07T03:52:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-07T03:46:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Humour. Le dessin du jour : surcharge dans les prisons",
+     "url": "https://www.estrepublicain.fr/actualite/2026/10/07/le-dessin-du-jour-surcharge-dans-les-prisons",
+     "media": "L'Est républicain",
+     "date": "2026-10-07T03:46:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Dessin de presse : regard sur l'actualité du jour",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-07T03:31:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen : face à la polémique sur le maintien de l’ordre, le gouvernement sur la défensive",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/07/mouvement-lyceen-sebastien-lecornu-sous-la-pression-de-la-rue-des-oppositions-et-d-emmanuel-macron_6789500_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T03:31:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : réponse sur la mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-07T03:00:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Ecrits antisémites de Jordan Bardella : quelles turbulences au RN ?",
+     "url": "https://www.lemonde.fr/podcasts/article/2026/10/07/ecrits-antisemites-de-jordan-bardella-quelles-turbulences-au-rn_6789432_5463015.html",
+     "media": "Le Monde",
+     "date": "2026-10-07T03:00:13.000Z"
     }
    ],
    "titrePropre": {
