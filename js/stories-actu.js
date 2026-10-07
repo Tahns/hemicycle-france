@@ -217,8 +217,9 @@ async function dessineUne(ctx, s){
   let extra = Math.max(0, dispo - plan.tot);
   const bonus = pers.length ? Math.min(Math.max(0, extra - 60), pers.length === 1 ? 90 : 24) : 0;
   extra -= bonus;
-  const ec = Math.min(extra / 4, 40);
-  let y = Y_HAUT + Math.min(extra * 0.1, 20);
+  // sans portrait : pas de bloc de remplacement, le texte se répartit sur la hauteur (espaces plus larges, départ un peu plus bas)
+  const ec = Math.min(extra / 4, pers.length ? 40 : 110);
+  let y = Y_HAUT + (pers.length ? Math.min(extra * 0.1, 20) : Math.min(extra * 0.22, 190));
   ctx.font = `700 ${plan.t}px "Newsreader"`;
   y += lignes(ctx, plan.ls, marge, y, plan.t, 1.04, "#fff");
   // attribution

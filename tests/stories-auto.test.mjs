@@ -958,6 +958,22 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.strictEqual(ra2.modele, "post-date", "vote solennel de l'Assemblée à 7 jours : un post");
   assert.match(ra2.sujet.titrePropre.titre, /^Vote solennel à l'Assemblée : projet de loi de finances pour 2027$/);
   assert.strictEqual(ra2.sujet.articles[0].url, an.sourceUrl);
+  const an2 = { sourceUrl: an.sourceUrl, jours: [
+    { date: "2026-10-13", points: [{ type: "texte", objet: "Projet de loi de finances pour 2027 (première partie)" }, { type: "texte", objet: "Proposition de loi sans lien" }, { type: "texte", objet: "Projet de loi autorisant l'approbation d'une convention" }] },
+    { date: "2026-10-14", points: [{ type: "texte", objet: "Projet de loi de finances pour 2027 (première partie)" }] },
+    { date: "2026-10-16", points: [{ type: "texte", objet: "Projet de loi de finances pour 2027 (première partie)" }] },
+    { date: "2026-10-19", points: [{ type: "texte", objet: "Projet de loi de finances pour 2027 (première partie)" }] },
+    { date: "2026-10-20", points: [{ type: "vote", objet: "Projet de loi de finances pour 2027 (première partie)." }] },
+  ] };
+  const ev2 = A.evenementsAgenda({ meetings: [] }, an2);
+  assert.deepStrictEqual(ev2.map((e) => e.debut + " " + e.titre), [
+    "2026-10-20 Vote solennel à l'Assemblée : projet de loi de finances pour 2027 (première partie)",
+    "2026-10-13 Début de l'examen en séance à l'Assemblée : projet de loi de finances pour 2027 (première partie)",
+  ], "début d'examen d'un projet de loi (premier jour du bloc seulement), ni proposition de loi ni convention, point final retiré");
+  assert.ok(ev2.every((e) => e.verified === true && e.source.url === an.sourceUrl), "source officielle https");
+  const pb = A.choisirPostAgenda({ meetings: { meetings: [] }, agendaAn: an2, file: vide, now: matin });
+  assert.match(pb.sujet.titrePropre.titre, /^Début de l'examen en séance/, "début d'examen à 6 jours : un post");
+  assert.ok(A.evenementsAgenda({ meetings: [] }, { ...an2, sourceUrl: "http://x" }).length === 0, "source non https : aucun événement");
   assert.ok(A.choisirPostAgenda({ meetings: { meetings: [] }, agendaAn: { ...an, sourceUrl: "http://x" }, file: vide, now: matin }).refus, "source non https : rien");
   assert.ok(pa([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
   assert.ok(pa([ev()], { file: { entrees: [{ id: r.id, type: "post", cree: matin.toISOString() }] } }).refus, "déjà publié : rien");
