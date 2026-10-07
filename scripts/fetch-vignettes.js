@@ -44,15 +44,15 @@ const MIMES_OK = /^image\/(jpeg|png|webp|tiff)$/;
  */
 export const CANDIDATS = {
   assemblee: { lieu: "Palais Bourbon", alt: "Photo d'illustration : Palais Bourbon, siège de l'Assemblée nationale", candidats: ["Category:Palais Bourbon", "Category:Facade of the Palais Bourbon", "Category:Assemblée nationale (France)"] },
-  senat: { lieu: "Palais du Luxembourg", alt: "Photo d'illustration : palais du Luxembourg, siège du Sénat", candidats: ["Category:Palais du Luxembourg", "Category:Palais du Luxembourg - Façade", "Category:Sénat (France)"] },
+  senat: { lieu: "Palais du Luxembourg", alt: "Photo d'illustration : palais du Luxembourg, siège du Sénat", exige: "luxembourg|senat", candidats: ["Category:Palais du Luxembourg", "Category:Palais du Luxembourg - Façade", "Category:Sénat (France)", "Category:Palais du Luxembourg (Paris)", "Search:Palais du Luxembourg Sénat façade", "Search:Sénat palais du Luxembourg rue de Vaugirard"] },
   elysee: { lieu: "Palais de l'Élysée", alt: "Photo d'illustration : palais de l'Élysée, résidence du président de la République", candidats: ["Category:Palais de l'Élysée", "Category:Facade of the Élysée Palace", "Category:Élysée Palace"] },
   gouvernement: { lieu: "Hôtel de Matignon", alt: "Photo d'illustration : hôtel de Matignon, siège du Premier ministre", candidats: ["Category:Hôtel de Matignon", "Category:Hôtel Matignon (Paris)", "Category:Matignon Palace"] },
-  budget: { lieu: "Ministère de l'Économie et des Finances (Bercy)", alt: "Photo d'illustration : ministère de l'Économie et des Finances, à Bercy", candidats: ["Category:Ministère de l'Économie et des Finances (Bercy)", "Category:Ministry of the Economy and Finance (France)", "Category:Ministère de l'Économie, des Finances et de la Souveraineté industrielle et numérique"] },
+  budget: { lieu: "Ministère de l'Économie et des Finances (Bercy)", alt: "Photo d'illustration : ministère de l'Économie et des Finances, à Bercy", exige: "bercy|ministere de l.economie|ministry of (the )?economy|ministere des finances", candidats: ["Category:Ministère de l'Économie et des Finances (Bercy)", "Category:Ministry of the Economy and Finance (France)", "Category:Ministère de l'Économie, des Finances et de la Souveraineté industrielle et numérique", "Category:Ministère de l'Économie et des Finances (France)", "Category:Bâtiment Colbert (Paris)", "Category:Ministère de l'Économie et des Finances (Paris)", "Search:Ministère de l'Économie et des Finances Bercy", "Search:Bercy ministère Économie Finances bâtiment Paris"] },
   justice: { lieu: "Palais de justice de Paris", alt: "Photo d'illustration : palais de justice de Paris", candidats: ["Category:Palais de justice de Paris", "Category:Palais de Justice (Paris)", "Category:Tribunal de Paris"] },
-  region: { lieu: "Hôtel de région", alt: "Photo d'illustration : hôtel de région, siège d'une assemblée régionale", candidats: ["Category:Hôtels de région en France", "Category:Hôtel de Région (Île-de-France)"] },
-  education: { lieu: "Ministère de l'Éducation nationale (hôtel de Rochechouart)", alt: "Photo d'illustration : ministère de l'Éducation nationale, rue de Grenelle", candidats: ["Category:Hôtel de Rochechouart (Paris)", "Category:Ministère de l'Éducation nationale (France)"] },
+  region: { lieu: "Hôtel de région", alt: "Photo d'illustration : hôtel de région, siège d'une assemblée régionale", exige: "hotel de region|conseil regional", candidats: ["Category:Hôtels de région en France", "Category:Hôtel de Région (Île-de-France)", "Category:Hôtel de région Auvergne-Rhône-Alpes", "Category:Hôtel de région Occitanie", "Category:Hôtel de région Bretagne", "Category:Hôtel de région des Pays de la Loire", "Category:Hôtel de région Nouvelle-Aquitaine", "Category:Hôtel de région Hauts-de-France", "Search:Hôtel de région siège conseil régional façade", "Search:Hôtel de région bâtiment conseil régional"] },
+  education: { lieu: "Ministère de l'Éducation nationale (hôtel de Rochechouart)", alt: "Photo d'illustration : ministère de l'Éducation nationale, rue de Grenelle", exige: "rochechouart|grenelle|education nationale|ministere de l.education|ministry of (national )?education", candidats: ["Category:Hôtel de Rochechouart (Paris)", "Category:Ministère de l'Éducation nationale (France)", "Category:Hôtel de Rochechouart", "Category:Ministry of National Education (France)", "Category:110 rue de Grenelle (Paris)", "Search:Hôtel de Rochechouart ministère Éducation nationale rue de Grenelle", "Search:Ministère de l'Éducation nationale 110 rue de Grenelle"] },
   securite: { lieu: "Ministère de l'Intérieur (hôtel de Beauvau)", alt: "Photo d'illustration : hôtel de Beauvau, ministère de l'Intérieur", candidats: ["Category:Hôtel de Beauvau", "Category:Ministère de l'Intérieur (France)"] },
-  international: { lieu: "Ministère des Affaires étrangères (Quai d'Orsay)", alt: "Photo d'illustration : Quai d'Orsay, ministère de l'Europe et des Affaires étrangères", candidats: ["Category:Ministère de l'Europe et des Affaires étrangères (Quai d'Orsay)", "Category:Quai d'Orsay (ministry)", "Category:Quai d'Orsay"] },
+  international: { lieu: "Ministère des Affaires étrangères (Quai d'Orsay)", alt: "Photo d'illustration : Quai d'Orsay, ministère de l'Europe et des Affaires étrangères", exige: "quai d.orsay|affaires etrangeres|foreign affairs|ministere de l.europe", candidats: ["Category:Ministère de l'Europe et des Affaires étrangères (Quai d'Orsay)", "Category:Quai d'Orsay (ministry)", "Category:Quai d'Orsay", "Category:Ministère de l'Europe et des Affaires étrangères", "Category:Ministry of Foreign Affairs (France)", "Category:Ministère des Affaires étrangères (France)", "Category:Quai d'Orsay (Paris)", "Search:Quai d'Orsay ministère des Affaires étrangères façade", "Search:Ministère de l'Europe et des Affaires étrangères Quai d'Orsay"] },
   election: { lieu: "Bureau de vote", alt: "Photo d'illustration : urne et bureau de vote", candidats: ["Category:Ballot boxes of France", "Category:Polling stations in France"] },
 };
 
@@ -141,13 +141,48 @@ export function choisirMeilleur(pages, options) {
 }
 
 const PROPS = "prop=imageinfo&iiprop=url|size|mime|timestamp|extmetadata&iiurlwidth=640";
+const BASE_API = "https://commons.wikimedia.org/w/api.php?action=query&format=json&";
+/** Sous-catégories à ne pas explorer (intérieurs, jardins, personnes, plans, œuvres…). */
+export const SOUS_CAT_EXCLUES = /interior|interieur|salle|salon|jardin|garden|park|parc|musee|museum|people|person|politician|portrait|ceremon|demonstration|manifestation|protest|crowd|meeting|police|military|plan\b|map|diagram|drawing|painting|dessin|engraving|gravure|postcard|poster|affiche|statue|sculpture|detail|logo|stamp|timbre|event|evenement|history|histoire|by year|by date|vehicle|metro|exposition|exhibition/i;
 async function pagesDuCandidat(candidat, ctx) {
-  const base = "https://commons.wikimedia.org/w/api.php?action=query&format=json&";
-  const url = /^File:/i.test(candidat)
-    ? `${base}${PROPS}&titles=${encodeURIComponent(candidat)}`
-    : `${base}generator=categorymembers&gcmtype=file&gcmlimit=40&gcmtitle=${encodeURIComponent(candidat)}&${PROPS}`;
+  let url;
+  if (/^Search:/i.test(candidat)) url = `${BASE_API}generator=search&gsrnamespace=6&gsrlimit=40&gsrsearch=${encodeURIComponent(candidat.replace(/^Search:/i, "") + " filetype:bitmap")}&${PROPS}`;
+  else if (/^File:/i.test(candidat)) url = `${BASE_API}${PROPS}&titles=${encodeURIComponent(candidat)}`;
+  else url = `${BASE_API}generator=categorymembers&gcmtype=file&gcmlimit=40&gcmtitle=${encodeURIComponent(candidat)}&${PROPS}`;
   const d = await ctx.api(url);
   return Object.values(d.query?.pages || {}).filter((p) => p.imageinfo);
+}
+/** Sous-catégories directes d'une catégorie Commons (hors exclusions), 12 au plus. */
+async function sousCategories(categorie, ctx) {
+  const d = await ctx.api(`${BASE_API}list=categorymembers&cmtype=subcat&cmlimit=50&cmtitle=${encodeURIComponent(categorie)}`);
+  return (d.query?.categorymembers || []).map((c) => c.title).filter((t) => t && !SOUS_CAT_EXCLUES.test(t.replace(/^Category:/, ""))).slice(0, 12);
+}
+/** Les fichiers d'une catégorie sont souvent rangés dans ses sous-catégories (façade, vue d'ensemble…) : exploration sur deux niveaux, 10 appels au plus. */
+async function pagesDesSousCategories(categorie, ctx) {
+  const vues = new Set([categorie]);
+  let niveau = [categorie], appels = 0;
+  const pages = [];
+  for (let profondeur = 0; profondeur < 2; profondeur++) {
+    const suivant = [];
+    for (const c of niveau) {
+      if (appels >= 10) return pages;
+      appels++;
+      for (const sc of await sousCategories(c, ctx)) {
+        if (vues.has(sc) || appels >= 10) continue;
+        vues.add(sc); suivant.push(sc); appels++;
+        pages.push(...await pagesDuCandidat(sc, ctx));
+      }
+    }
+    niveau = suivant;
+  }
+  return pages;
+}
+
+/** Pour une recherche plein texte (candidat « Search: »), le nom du fichier doit citer le lieu (`exige`) : sinon n'importe quel bâtiment passerait. Pure. */
+export function filtrerNom(pages, def, candidat) {
+  if (!/^Search:/i.test(candidat)) return pages;
+  const re = new RegExp(def.exige || "$^", "i");
+  return pages.filter((p) => re.test(plat(String(p?.title || "").replace(/^File:/, "")).replace(/[_.-]+/g, " ")));
 }
 
 /**
@@ -165,7 +200,14 @@ export async function resoudreCle(cle, ctx) {
       if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true }; // 429 : on n'insiste pas, reprise au passage suivant
       continue;
     }
-    const { meilleur, refus } = choisirMeilleur(pages, ctx);
+    let { meilleur, refus } = choisirMeilleur(filtrerNom(pages, def, candidat), ctx);
+    if (!meilleur && /^Category:/i.test(candidat)) { // rien dans la catégorie elle-même : on explore ses sous-catégories
+      try { pages = pages.concat(await pagesDesSousCategories(candidat, ctx)); } catch (e) {
+        raisons.push(`${candidat} (sous-catégories) : ${e.message}`);
+        if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true };
+      }
+      ({ meilleur, refus } = choisirMeilleur(filtrerNom(pages, def, candidat), ctx));
+    }
     if (!meilleur) { raisons.push(`${candidat} : aucun fichier libre exploitable (${pages.length} examiné(s)${refus[0] ? `, p. ex. « ${refus[0].fichier} » : ${refus[0].raison}` : ""})`); continue; }
     try {
       const res = await ctx.telecharger(meilleur.vignette);

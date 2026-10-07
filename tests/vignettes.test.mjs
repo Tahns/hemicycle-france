@@ -5,7 +5,7 @@ import { spawnSync } from "child_process";
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { tmpdir } from "os";
 import path from "path";
-import { evaluerFichier, choisirMeilleur, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
+import { evaluerFichier, choisirMeilleur, filtrerNom, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
 import { verifierVignettes } from "../scripts/check-vignettes.js";
 import { cleVignette, CLES } from "../scripts/vignettes-cle.js";
 import { illustrer } from "../scripts/illustrations.js";
@@ -98,6 +98,43 @@ const ctxDe = ({ categories = {}, bin = () => rep(200), appels = [] } = {}) => (
   assert.equal(r.statut, "echec"); assert.equal(r.transitoire, false);
   assert.match(r.raison, /aucun fichier libre/);
   assert.equal((await resoudreCle("inconnu", ctxDe())).statut, "echec");
+}
+
+{ // catégorie vide mais sous-catégorie riche (cas réel du Sénat : 0 fichier direct) : exploration des sous-catégories, exclusions respectées
+  const appels = [];
+  const ctx = {
+    aujourdhui: "2026-10-06", maintenant: MAINTENANT, redimensionner: async (o) => o, telecharger: async () => rep(200),
+    api: async (url) => {
+      appels.push(url);
+      const d = decodeURIComponent(url);
+      if (/cmtype=subcat/.test(d)) {
+        const t = d.match(/cmtitle=(.+)$/)[1];
+        if (t === "Category:Palais du Luxembourg") return { query: { categorymembers: [{ title: "Category:Palais du Luxembourg - Façade" }, { title: "Category:Interior of the Palais du Luxembourg" }, { title: "Category:Jardin du Luxembourg" }] } };
+        return { query: { categorymembers: [] } };
+      }
+      if (/gcmtitle=Category:Palais du Luxembourg - Façade/.test(d)) return { query: { pages: { 1: page("Palais_du_Luxembourg_facade_2023.jpg", { date: "2023-05-01" }) } } };
+      if (/Interior|Jardin/.test(d)) throw new Error("sous-catégorie exclue explorée");
+      return { query: { pages: {} } };
+    },
+  };
+  const r = await resoudreCle("senat", ctx);
+  assert.equal(r.statut, "photo");
+  assert.equal(r.entree.fichier, "Palais_du_Luxembourg_facade_2023.jpg");
+  assert.match(r.entree.licence, /CC BY/);
+}
+{ // recherche plein texte : le nom du fichier doit citer le lieu
+  const defSenat = CANDIDATS.senat;
+  const sortie = filtrerNom([{ title: "File:Palais_du_Luxembourg_nord.jpg" }, { title: "File:Tour_Eiffel.jpg" }], defSenat, "Search:Palais du Luxembourg");
+  assert.deepEqual(sortie.map((p) => p.title), ["File:Palais_du_Luxembourg_nord.jpg"]);
+  assert.equal(filtrerNom([{ title: "File:Autre.jpg" }], defSenat, "Category:X").length, 1, "pas de filtre hors recherche");
+  const r = await resoudreCle("budget", ctxDe({ categories: {} }));
+  assert.equal(r.statut, "echec");
+}
+// Chaque thème a au moins une catégorie ET une recherche de repli (sauf les thèmes déjà servis par une photo livrée)
+for (const c of ["senat", "budget", "region", "education", "international"]) {
+  assert.ok(CANDIDATS[c].candidats.some((x) => x.startsWith("Search:")), `${c} : recherche de repli`);
+  assert.ok(CANDIDATS[c].exige, `${c} : motif d'exigence du nom pour les recherches`);
+  new RegExp(CANDIDATS[c].exige, "i");
 }
 
 // --- Reprises : une tentative par jour, sauf panne passagère ---
