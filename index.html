@@ -720,19 +720,10 @@
   [data-theme="sombre"] .actu-logo{border-color:transparent; padding:var(--s2);}
   .actu-logo img:only-of-type{max-height:46px;}
   .actu-initiales{display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--c); color:var(--blanc); font-family:var(--font-display); font-size:var(--fs-xl); font-weight:600;}
-  .actu-picto{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1); border-radius:var(--r-3); background:color-mix(in srgb, var(--c) 13%, transparent); color:var(--c);}
-  .actu-picto svg{width:34px; height:34px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
   .alerte-donnees{margin:var(--s3) 0; padding:var(--s3) var(--s4); border:1px solid var(--rouge-rep); border-left-width:4px; background:var(--bg); color:var(--text); font-size:var(--fs-base);}
   .alerte-donnees[hidden]{display:none;}
-  .actu-picto{overflow:hidden;}
-  [data-theme="sombre"] .actu-picto{color:color-mix(in srgb, var(--c) 55%, #fff);}
-  [data-theme="sombre"] .actu-picto small{color:inherit;} /* clair : texte du thème assombri (contraste WCAG AA >= 4,5:1 sur la teinte à 13 %) ; sombre : couleur éclaircie du conteneur */
-  .actu-picto small{color:color-mix(in srgb, var(--c) 72%, #000); font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; text-align:center; line-height:1.1; max-width:100%;}
   .actu-photo{overflow:hidden; border-radius:var(--r-3); background:var(--border-soft); box-shadow:0 0 0 1px var(--border-soft);}
   .actu-photo img{display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit;}
-  .actu-picto.long small{display:none;} .actu-une .actu-picto.long small{display:block;}
-  .actu-theme{position:absolute; right:-6px; top:-6px; width:24px; height:24px; border-radius:50%; background:var(--c); color:var(--blanc); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
-  .actu-theme svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .actu-noms{color:var(--text-soft);}
   .actu-une{grid-template-columns:140px 1fr; gap:var(--s5); padding:var(--s4) 0 var(--s5);}
   .actu-une .actu-visuel{width:140px; height:140px;}
@@ -740,11 +731,8 @@
   .actu-une .actu-portraits.n2 img{width:100px; height:100px;}
   .actu-une .actu-portraits.n3 img{width:72px; height:72px;}
   .actu-une .actu-portraits.n3 a:nth-child(1) img, .actu-une .actu-portraits.n3 > img:nth-child(1){left:34px;}
-  .actu-une .actu-picto svg{width:60px; height:60px;}
-  .actu-une .actu-picto small{font-size:var(--fs-xs);}
   .actu-une .actu-logo img{max-height:52px;} .actu-une .actu-logo img:only-of-type{max-height:90px;}
   .actu-une .actu-initiales{font-size:var(--fs-3xl);}
-  .actu-une .actu-theme{width:32px; height:32px;} .actu-une .actu-theme svg{width:18px; height:18px;}
   .actu-une h3{font-size:var(--fs-xl);}
   @media (max-width:700px){
     .actu-sujet{grid-template-columns:60px 1fr; gap:var(--s3);}
@@ -753,14 +741,11 @@
     .actu-portraits img{width:44px; height:44px;}
     .actu-portraits.n3 img{width:31px; height:31px;}
     .actu-portraits.n3 a:nth-child(1) img, .actu-portraits.n3 > img:nth-child(1){left:14px;}
-    .actu-picto svg{width:26px; height:26px;} .actu-picto small{display:none;}
     .actu-une{grid-template-columns:1fr; gap:var(--s3);}
     .actu-une .actu-visuel{width:100%; height:120px;}
     .actu-une .actu-portraits{display:flex; justify-content:flex-start; gap:var(--s3);}
     .actu-une .actu-portraits img, .actu-une .actu-portraits.n1 img, .actu-une .actu-portraits.n2 img, .actu-une .actu-portraits.n3 img{position:static; width:110px; height:110px;}
     .actu-une .actu-portraits.n3 img{width:96px; height:96px;}
-    .actu-une .actu-theme{right:auto; left:96px; top:-4px;}
-    .actu-une .actu-picto{flex-direction:row; gap:var(--s3);} .actu-une .actu-picto small{display:block; font-size:var(--fs-sm);}
     .actu-une .actu-initiales{width:110px;}
     .actu-une h3{font-size:var(--fs-h3);}
   }
@@ -1914,18 +1899,12 @@
     .actu-sup{display:grid;}
     .actu-sujet, .actu-sujet.actu-une{grid-template-columns:44px minmax(0,1fr); gap:var(--s3); padding:var(--s2) 0; border-bottom:1px solid var(--border-soft);}
     .actu-sujet .actu-visuel, .actu-sujet.actu-une .actu-visuel{width:44px; height:44px;}
-    .actu-sujet .actu-picto{overflow:hidden;} .actu-sujet .actu-picto small{display:none;}
-    .actu-sujet .actu-picto svg{width:24px; height:24px;}
     .actu-sujet .actu-portraits img, .actu-sujet .actu-portraits.n1 img, .actu-sujet.actu-une .actu-portraits img, .actu-sujet.actu-une .actu-portraits.n1 img, .actu-sujet.actu-une .actu-portraits.n2 img, .actu-sujet.actu-une .actu-portraits.n3 img{position:absolute; width:44px; height:44px; border-width:2px;}
     .actu-sujet .actu-portraits.n2 img, .actu-sujet .actu-portraits.n3 img{width:30px; height:30px;}
     .actu-sujet .actu-portraits.n2 a:nth-child(1) img, .actu-sujet .actu-portraits.n2 > img:nth-child(1){left:0; top:0;}
     .actu-sujet .actu-portraits.n2 a:nth-child(2) img, .actu-sujet .actu-portraits.n2 > img:nth-child(2){right:0; bottom:0; left:auto; top:auto;}
     .actu-sujet .actu-portraits.n3 img{width:26px; height:26px;}
     .actu-sujet .actu-pastille-nom, .actu-sujet.actu-une .actu-pastille-nom{width:44px; height:44px; font-size:var(--fs-md);}
-    .actu-sujet .actu-theme, .actu-sujet.actu-une .actu-theme{width:18px; height:18px; right:-4px; top:-4px; left:auto;}
-    .actu-sujet .actu-theme svg{width:11px; height:11px;}
-    .actu-sujet .actu-picto svg, .actu-sujet.actu-une .actu-picto svg{width:22px; height:22px;}
-    .actu-sujet .actu-picto, .actu-sujet.actu-une .actu-picto{flex-direction:column;}
     .actu-sujet .actu-initiales{font-size:var(--fs-lg);}
     .actu-sujet .actu-logo{padding:2px;} .actu-sujet .actu-logo img{max-height:18px;} .actu-sujet .actu-logo img:only-of-type{max-height:30px;}
     .actu-sujet .actu-recoupe{display:none;}
@@ -4611,7 +4590,7 @@ function ilYA(iso){
   return new Date(iso).toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
 }
 // Illustration d'un sujet : portraits (officiels ou libres de Wikimedia Commons), sinon logo du parti,
-// sinon pictogramme du thème. Aucune image extérieure : tout est hébergé sur le site.
+// sinon photo libre de l'institution, sinon rien. Aucune image extérieure : tout est hébergé sur le site.
 const THEMES_ACTU = {
   justice:      ["#8E6C3A", "M12 4v16M7 20h10M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0L5 8zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0L19 8z", "Justice"],
   budget:       ["#1F7A4D", "M17 6.5A6.5 6.5 0 1 0 17 17.5M4 10h9M4 14h9", "Budget"],
@@ -4647,8 +4626,6 @@ const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).fi
 function visuelActu(s){
   const ill = s.illustration || {};
   const personnes = ill.personnes || [];
-  const theme = THEMES_ACTU[ill.theme] || THEMES_ACTU.politique;
-  const pastille = `<span class="actu-theme" style="--c:${theme[0]}" title="${esc(theme[2])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${theme[1]}"/></svg></span>`;
   // Les personnes citées, dans l'ordre (la plus citée d'abord) : portrait, ou initiales à la couleur du parti
   if(personnes.some(p=>p.photo)){
     return `<div class="actu-visuel actu-portraits n${personnes.length}">${personnes.map(p=>{
@@ -4656,17 +4633,17 @@ function visuelActu(s){
         ? `<img src="${esc(p.photo)}" alt="" loading="lazy" decoding="async" width="120" height="120" title="${esc(p.nom)}${p.credit ? ` — photo : ${esc(p.credit)}` : ""}" style="border-color:${couleurPartiActu(p.parti)}">`
         : `<span class="actu-pastille-nom" title="${esc(p.nom)}" style="background:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}">${esc(initialesActu(p.nom))}</span>`;
       return p.lien ? `<a href="${esc(p.lien)}" aria-label="${esc(p.nom)}">${contenu}</a>` : contenu;
-    }).join("")}${pastille}</div>`;
+    }).join("")}</div>`;
   }
   if((ill.partis || []).length){
-    return `<div class="actu-visuel actu-logo">${ill.partis.map(c=>`<img src="icons/partis/${esc(c)}.png" alt="${esc(c)}" loading="lazy" decoding="async">`).join("")}${pastille}</div>`;
+    return `<div class="actu-visuel actu-logo">${ill.partis.map(c=>`<img src="icons/partis/${esc(c)}.png" alt="${esc(c)}" loading="lazy" decoding="async">`).join("")}</div>`;
   }
   if((ill.personnes || []).length){
     const p = ill.personnes[0];
-    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span>${pastille}</div>`;
+    return `<div class="actu-visuel actu-initiales" style="--c:${couleurPartiActu(p.parti)}; color:${texteSurCouleur(couleurPartiActu(p.parti))}" title="${esc(p.nom)}"><span>${esc(initialesActu(p.nom))}</span></div>`;
   }
-  // Photo libre de l'institution du thème (jamais une personne) ; sans photo : pictogramme. `vignette` : clé calculée par scripts/vignettes-cle.js
-  // (null = pictogramme, ex. justice avec une personne nommée) ; fichier d'actualités plus ancien : le thème fait office de clé
+  // Photo libre de l'institution du thème (jamais une personne) ; sinon rien. `vignette` : clé calculée par scripts/vignettes-cle.js
+  // (null = pas de vignette, ex. justice avec une personne nommée) ; fichier d'actualités plus ancien : le thème fait office de clé
   const cleV = "vignette" in ill ? ill.vignette : ill.theme;
   const photoV = cleV && VIGNETTES[cleV];
   if(photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "")){

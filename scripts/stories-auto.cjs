@@ -929,9 +929,23 @@ const MOIS_FR = (iso) => new Date(iso + "T12:00:00Z").toLocaleDateString("fr-FR"
 function evenementsAgenda(meetings, agendaAn = null) {
   const liste = [...(meetings?.meetings || [])];
   const url = /^https:\/\//.test(agendaAn?.sourceUrl || "") ? agendaAn.sourceUrl : null;
+  const bas = (t) => `${t.charAt(0).toLowerCase()}${t.slice(1)}`.replace(/\s*\.\s*$/, "");
+  const debuts = new Map(); // projet de loi (finances, financement de la Sécurité sociale, autre texte du Gouvernement) : premier jour de chaque bloc d'examen en séance
   if (url) for (const j of agendaAn.jours || []) for (const p of j.points || []) {
-    if (p?.type !== "vote" || !p.objet || p.objet.length > 140) continue;
-    liste.push({ verified: true, debut: j.date, titre: `Vote solennel à l'Assemblée : ${p.objet.charAt(0).toLowerCase()}${p.objet.slice(1)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(j?.date || "") || !p?.objet || p.objet.length > 140) continue;
+    if (p.type === "vote") liste.push({ verified: true, debut: j.date, titre: `Vote solennel à l'Assemblée : ${bas(p.objet)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+    else if (p.type === "texte" && /^Projet de loi(?! autorisant)/.test(p.objet)) {
+      const jours = debuts.get(p.objet) || [];
+      jours.push(j.date);
+      debuts.set(p.objet, jours);
+    }
+  }
+  for (const [objet, jours] of debuts) {
+    jours.sort();
+    jours.forEach((d, i) => {
+      if (i > 0 && (Date.parse(d + "T12:00:00Z") - Date.parse(jours[i - 1] + "T12:00:00Z")) / 864e5 <= 3) return; // même bloc (week-end compris)
+      liste.push({ verified: true, debut: d, titre: `Début de l'examen en séance à l'Assemblée : ${bas(objet)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+    });
   }
   return liste;
 }
