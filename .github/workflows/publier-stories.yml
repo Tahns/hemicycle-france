@@ -43,7 +43,7 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GRAPH_BASE: https://graph.instagram.com/v21.0
-        run: node scripts/publier-stories.cjs ${{ inputs.a_sec && '--a-sec' || '' }}
+        run: for i in 1 2 3 4; do node scripts/publier-stories.cjs ${{ inputs.a_sec && '--a-sec' || '' }} || break; done # jusqu'à 4 publications par passage ; le registre est écrit après chacune
       - name: Committer le registre des publications
         if: always()
         run: scripts/commit-push.sh "Stories publiées ($(date -u +%Y-%m-%d\ %H:%M) UTC)" data/instagram-publiees.json
