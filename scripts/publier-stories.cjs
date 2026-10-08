@@ -477,7 +477,7 @@ async function main() {
   };
   const nomPub = () => (mode === "post" ? "Post publié" : mode === "carrousel" ? "Carrousel publié" : mode === "reel" ? "Reel publié" : e.annonceDe ? "Story d'annonce publiée" : mode === "story-video" ? "Story vidéo publiée" : "Story publiée");
   const inscrire = (mediaId) => {
-    const ligne = { id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: typeDe(e), ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 6) : undefined, ...(liensDe(e).length ? { sources: liensDe(e) } : {}) };
+    const ligne = { id: e.id, statut: "publiee", publieLe: now.toISOString(), mediaId, titre: e.titrePropre || e.titre || null, type: typeDe(e), ...(e.contenu ? { contenu: e.contenu } : {}), ...(mode.endsWith("video") || mode === "reel" ? { video: true } : {}), ...(e.sensible ? { sensible: true } : {}), ...(e.annonceDe ? { annonceDe: e.annonceDe } : {}), ...(e.reelDe ? { reelDe: e.reelDe } : {}), ...(e.dateIso ? { dateIso: e.dateIso } : {}), ...(e.variante ? { variante: e.variante } : {}), sujets: Array.isArray(e.sujets) ? e.sujets.slice(0, 6) : undefined, ...(liensDe(e).length ? { sources: liensDe(e) } : {}) };
     if (enCours) { delete enCours.echec; Object.assign(enCours, ligne); } else registre.entrees.push(ligne);
     ecrireRegistre(registre, now); // écrit tout de suite : un échec ultérieur du workflow ne doit pas provoquer de doublon
   };

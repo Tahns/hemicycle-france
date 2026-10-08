@@ -181,13 +181,13 @@ function storyFondTheme(ctx, sombre = false){
   ctx.fillStyle = sombre === true ? STORY_DA.nuit : STORY_DA.fond; ctx.fillRect(0, 0, STORY.L, STORY.H);
 }
 // Logo : icône d'hémicycle (arcs bleu clair et rose, point blanc) puis « Hémicycle France » en Public Sans gras blanc, sous la zone masquée par Instagram
-function storyMarque(ctx){
+function storyMarque(ctx, { texte = STORY_DA.blanc, arc = "#8FA6F0", rose = STORY_DA.rose } = {}){ // couleurs facultatives : styles « question » sur fond clair
   const { marge } = STORY, cx = marge + 34, cy = STORY_DA.logoY;
   ctx.lineWidth = 7; ctx.lineCap = "round";
-  ctx.strokeStyle = "#8FA6F0"; ctx.beginPath(); ctx.arc(cx, cy, 30, Math.PI, 0); ctx.stroke();
-  ctx.strokeStyle = STORY_DA.rose; ctx.beginPath(); ctx.arc(cx, cy, 15, Math.PI, 0); ctx.stroke();
-  ctx.lineCap = "butt"; ctx.fillStyle = STORY_DA.blanc; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2 * Math.PI); ctx.fill();
-  ctx.font = `700 44px "Public Sans"`; ctx.fillStyle = STORY_DA.blanc; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.letterSpacing = "0px";
+  ctx.strokeStyle = arc; ctx.beginPath(); ctx.arc(cx, cy, 30, Math.PI, 0); ctx.stroke();
+  ctx.strokeStyle = rose; ctx.beginPath(); ctx.arc(cx, cy, 15, Math.PI, 0); ctx.stroke();
+  ctx.lineCap = "butt"; ctx.fillStyle = texte; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2 * Math.PI); ctx.fill();
+  ctx.font = `700 44px "Public Sans"`; ctx.fillStyle = texte; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.letterSpacing = "0px";
   ctx.fillText("Hémicycle France", marge + 86, cy + 14);
 }
 // Pastille plate à capitales espacées ; style : « rouge » (texte blanc), « blanc » (texte bleu), « contour » (filet blanc) ; renvoie le bord droit
@@ -811,6 +811,291 @@ STORY_PLUS.meeting = async (ctx, info)=>{
   storyPied(ctx, `Date annoncée par ${m.source?.nom || "l'organisateur"}. Les programmes peuvent changer : vérifiez auprès de l'organisateur.`, { accroche:"Tous les meetings" });
   return { nom:`meeting-${slugDep(m.titre).slice(0, 40)}` };
 };
+
+/* ---------- Styles de story du test comparatif (instagram/auto, champ « variante ») ----------
+   « bleu » (le dessin historique de chaque module), puis trois styles qui partagent ce dessinateur :
+   - « une-photo » : photo libre de l'institution du thème (data/vignettes.json) plein cadre sous dégradé sombre, accroche géante, « L'essentiel », pastille de catégorie ; sans photo, motif graphique du thème ;
+   - « question » : accroche en question, 3 puces de 8 mots au plus, fond de couleur par thème (rouge, vert, jaune, bleu, noir) ;
+   - « chiffre » : nombre géant et une ligne de contexte.
+   Chaque module (stories-actu, stories-actu-fait, stories-contenus) prépare une fiche `d` puis appelle storyStyleDessiner(ctx, style, d) :
+   { couleur, motif, categorie, accroche, essentiel, puces[], chiffre:{ valeur, legende }, contexte, photo:{ img, credit }, fond, source, video, cta }.
+   Règles : texte essentiel ≥ 52 px, 35 mots au plus, rien d'essentiel dans les ≈ 250 px du haut ni au-dessus des ≈ 340 px du bas (y ≥ 1580) ;
+   la source (mention « Titres relevés dans la presse… ») et le crédit photo restent visibles dans le pied. Jamais de photo de personne : seules les vignettes d'institutions sont utilisées. */
+const STORY_STYLES = ["bleu", "une-photo", "question", "chiffre"];
+const STORY_FONDS_QUESTION = {
+  rouge: { fond:"#A8201A", texte:"#FFFFFF", doux:"#FFE3DF" },
+  vert:  { fond:"#1C6B3C", texte:"#FFFFFF", doux:"#DDF4E4" },
+  jaune: { fond:"#F5C21B", texte:"#1C1B18", doux:"#2E2A12" },
+  bleu:  { fond:"#1B3A8C", texte:"#FFFFFF", doux:"#C5CEF2" },
+  noir:  { fond:"#14161B", texte:"#FFFFFF", doux:"#C5CEF2" },
+};
+const STORY_FOND_THEME = { justice:"noir", budget:"vert", election:"bleu", senat:"rouge", assemblee:"bleu", gouvernement:"noir", international:"vert", securite:"rouge", politique:"jaune" };
+const storyStyleValide = s => STORY_STYLES.includes(s) ? s : "bleu";
+function storyContraste(a, b){ const x = storyLuminance(a), y = storyLuminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+// Couleur assombrie jusqu'à porter du texte blanc à 4,5:1 (WCAG AA)
+function storyAssombri(c){ let x = /^#[0-9a-f]{6}$/i.test(String(c)) ? c : "#3A4A80", t = 0; while(storyContraste(x, "#FFFFFF") < 4.5 && t < 1){ t += 0.08; x = storyMelange(c, "#000000", t); } return x; }
+// Texte coupé aux mots (n au plus), sans mot faible en fin, terminé par « … » s'il a été coupé
+function storyMots(texte, n){
+  const m = storyTypo(texte).split(" ").filter(Boolean);
+  if(m.length <= n) return m.join(" ");
+  return storyCoupePropre(m.slice(0, n)).join(" ").replace(/[?!]$/, "") + "…";
+}
+const storyNbMots = t => storyTypo(t).split(" ").filter(Boolean).length;
+// Thème d'un sujet (clé de THEMES_ACTU) : couleur, motif (tracé SVG 24 × 24) et libellé
+function storyThemeInfos(cle){
+  const t = (typeof THEMES_ACTU !== "undefined" && (THEMES_ACTU[cle] || THEMES_ACTU.politique)) || ["#625D53", "", "Vie politique"];
+  return { cle:THEMES_ACTU?.[cle] ? cle : "politique", couleur:t[0], motif:t[1], categorie:t[2] };
+}
+// Photo libre de l'institution (data/vignettes.json via VIGNETTES) avec son crédit ; null sans photo. Jamais une personne.
+async function storyPhotoTheme(cle){
+  const p = typeof VIGNETTES !== "undefined" && cle ? VIGNETTES[cle] : null;
+  if(!p || !/^photos\/vignettes\/[\w-]+\.jpe?g$/.test(p.chemin || "")) return null;
+  const img = await storyImage(p.chemin);
+  return img ? { img, credit:`Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
+}
+function storyStylePastille(ctx, texte, x, y, fond, couleur){
+  ctx.font = `800 30px "Public Sans"`; ctx.letterSpacing = "3px";
+  const t = storyLignes(ctx, String(texte).toUpperCase(), STORY.L - 2 * STORY.marge - 56, 1)[0];
+  const w = Math.ceil(ctx.measureText(t).width) + 56 - 3, h = 66;
+  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.fill();
+  ctx.fillStyle = couleur; ctx.textBaseline = "middle"; ctx.textAlign = "left"; ctx.fillText(t, x + 28, y + h / 2 + 2);
+  ctx.letterSpacing = "0px"; ctx.textBaseline = "alphabetic";
+  return h;
+}
+// Pied des styles : crédit photo, ligne vidéo, source (mentions légales), puis « accroche → @compte » ; couleurs adaptées au fond
+function storyStylePied(ctx, d, { doux, texte, credit = false }){
+  const { L, marge } = STORY;
+  let y = 1486;
+  if(credit && d.photo?.credit){ ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = doux; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText(storyLignes(ctx, d.photo.credit, L - 2 * marge, 1)[0], marge, y + 22); y += 34; }
+  if(d.video){
+    ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = texte; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.beginPath(); ctx.moveTo(marge, y + 4); ctx.lineTo(marge, y + 28); ctx.lineTo(marge + 22, y + 16); ctx.closePath(); ctx.fill();
+    ctx.fillText(storyLignes(ctx, `Vidéo : ${d.video}`, L - 2 * marge - 40, 1)[0], marge + 38, y + 26);
+    y += 42;
+  }
+  const max = Math.max(1, Math.min(4, Math.floor((1618 - y) / 27.6)));
+  if(d.source) storyTexte(ctx, d.source, marge, y, { taille:23, couleur:doux, max, interligne:1.2 });
+  let t = 34; const accroche = `${d.cta || "Toute l'actu politique"} → ${COMPTE_STORY}`;
+  ctx.font = `700 ${t}px "Public Sans"`;
+  while(ctx.measureText(accroche).width > L - 2 * marge && t > 24){ t -= 2; ctx.font = `700 ${t}px "Public Sans"`; }
+  ctx.fillStyle = texte; ctx.textAlign = "center"; ctx.fillText(accroche, L / 2, 1636); ctx.textAlign = "left";
+}
+// Motif graphique du thème (tracé SVG 24 × 24 agrandi), pour les fiches sans photo
+function storyStyleMotif(ctx, motif, x, y, taille, couleur){
+  if(!motif || typeof Path2D === "undefined") return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(taille / 24, taille / 24);
+  ctx.strokeStyle = couleur; ctx.lineWidth = 0.55; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke(new Path2D(motif));
+  ctx.restore();
+}
+// Hauteur d'un texte (lignes) et lignes elles-mêmes à une taille donnée
+function storyStyleBloc(ctx, texte, { taille, poids, police, largeur, max, interligne }){
+  ctx.font = `${poids} ${taille}px "${police}"`;
+  const l = storyLignes(ctx, texte, largeur, max);
+  return { l, taille, poids, police, interligne, h:taille + (l.length - 1) * taille * interligne, ok:l.every(x => ctx.measureText(x).width <= largeur + 1) && (/…/.test(texte) || !l.some(x => x.endsWith("…"))) }; // « ok » : rien ne dépasse et aucun mot n'a été coupé par « … »
+}
+function storyStyleEcrire(ctx, b, x, y, couleur){
+  ctx.font = `${b.poids} ${b.taille}px "${b.police}"`; ctx.fillStyle = couleur; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  b.l.forEach((l, i) => ctx.fillText(l, x, y + b.taille * 0.82 + i * b.taille * b.interligne));
+  return y + b.h;
+}
+// Plus grande taille (tMax..tMin) pour laquelle le texte tient en `lignes` lignes au plus et `hMax` de haut
+function storyStyleFit(ctx, texte, { tMax, tMin, pas = 2, poids, police, largeur, lignes, hMax, interligne }){
+  let b;
+  for(let t = tMax; t >= tMin; t -= pas){
+    b = storyStyleBloc(ctx, texte, { taille:t, poids, police, largeur, max:99, interligne });
+    if(b.l.length <= lignes && b.h <= hMax && b.ok) return b;
+  }
+  return storyStyleBloc(ctx, texte, { taille:tMin, poids, police, largeur, max:lignes, interligne });
+}
+
+function storyStyleUnePhoto(ctx, d){
+  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1470;
+  // 1. mise en page (de bas en haut), avant de peindre : le dégradé dépend de la hauteur du texte
+  const essentiel = storyMots(d.essentiel || "", 22);
+  let plan = null;
+  for(let tA = 124; tA >= 76 && !plan; tA -= 4){
+    const a = storyStyleFit(ctx, storyMots(d.accroche, 12), { tMax:tA, tMin:tA, poids:700, police:"Newsreader", largeur:larg, lignes:3, hMax:99999, interligne:1.04 });
+    if(a.l.length > 3 || !a.ok) continue;
+    for(const tE of [60, 56, 52]){
+      const e = essentiel ? storyStyleBloc(ctx, essentiel, { taille:tE, poids:600, police:"Public Sans", largeur:larg - 30, max:4, interligne:1.2 }) : null;
+      const total = 66 + 30 + a.h + (e ? 40 + 36 + e.h : 0);
+      if(total <= bas - 400 && (!e || e.l.length <= 4)){ plan = { a, e, total }; break; }
+    }
+  }
+  if(!plan){ // dernier recours : accroche plus petite, essentiel en 3 lignes
+    const a = storyStyleBloc(ctx, storyMots(d.accroche, 12), { taille:72, poids:700, police:"Newsreader", largeur:larg, max:3, interligne:1.04 });
+    const e = essentiel ? storyStyleBloc(ctx, essentiel, { taille:52, poids:600, police:"Public Sans", largeur:larg - 30, max:3, interligne:1.2 }) : null;
+    plan = { a, e, total:66 + 30 + a.h + (e ? 40 + 36 + e.h : 0) };
+  }
+  const haut = bas - plan.total;
+  // 2. fond : photo (carrée, 320 px à l'origine : agrandie et adoucie) ou motif du thème
+  ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
+  if(d.photo?.img){
+    const S = 1300, x = Math.round((L - S) / 2), y = 0;
+    ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.filter = "blur(1.5px) saturate(1.05)";
+    ctx.drawImage(d.photo.img, x, y, S, S); ctx.restore();
+  } else {
+    const c = storyAssombri(d.couleur);
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, storyMelange(c, "#000000", 0.2)); g.addColorStop(1, NUIT);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, L, H);
+    storyStyleMotif(ctx, d.motif, 70, 330, 940, "rgba(255,255,255,0.16)");
+  }
+  // 3. dégradé sombre : léger en haut (logo), presque opaque sous le texte
+  const g = ctx.createLinearGradient(0, 0, 0, H), k = v => Math.max(0, Math.min(1, v / H));
+  g.addColorStop(0, "rgba(20,22,27,0.70)"); g.addColorStop(k(420), "rgba(20,22,27,0.18)");
+  g.addColorStop(k(Math.max(430, haut - 340)), "rgba(20,22,27,0.32)"); g.addColorStop(k(Math.max(450, haut - 100)), "rgba(20,22,27,0.84)");
+  g.addColorStop(k(Math.max(470, haut + 20)), "rgba(20,22,27,0.93)"); g.addColorStop(1, "rgba(20,22,27,0.97)");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, L, H);
+  storyMarque(ctx);
+  // 4. texte
+  let y = haut;
+  storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
+  y += 66 + 30;
+  y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF");
+  if(plan.e){
+    y += 40;
+    ctx.font = `800 28px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = STORY_DA.rose; ctx.textBaseline = "alphabetic";
+    ctx.fillText("L'ESSENTIEL", marge, y + 24); ctx.letterSpacing = "0px";
+    y += 36;
+    ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
+    storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF");
+  }
+  storyStylePied(ctx, d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit de la photo n'est affiché que si la photo l'est
+}
+
+function storyStyleQuestion(ctx, d){
+  const { L, H, marge } = STORY, larg = L - 2 * marge, bas = 1470;
+  const P = STORY_FONDS_QUESTION[d.fond] || STORY_FONDS_QUESTION[STORY_FOND_THEME[d.theme]] || STORY_FONDS_QUESTION.bleu;
+  let question = storyMots(d.accroche, 11);
+  if(!/\?$/.test(question)) question = question.replace(/…$/, "") + " ?";
+  const puces = (d.puces || []).map(p => storyMots(p, 8)).filter(Boolean).slice(0, 3);
+  let plan = null;
+  for(let tQ = 116; tQ >= 76 && !plan; tQ -= 4){
+    const q = storyStyleFit(ctx, question, { tMax:tQ, tMin:tQ, poids:700, police:"Newsreader", largeur:larg, lignes:4, hMax:99999, interligne:1.04 });
+    if(q.l.length > 4 || !q.ok) continue;
+    for(const tP of [56, 54, 52]){
+      const bl = puces.map(p => storyStyleBloc(ctx, p, { taille:tP, poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 }));
+      const hP = bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1);
+      const total = 66 + 44 + q.h + 28 + 10 + 56 + hP;
+      if(total <= bas - 400 && bl.every(b => b.l.length <= 3)){ plan = { q, bl, total, tP }; break; }
+    }
+  }
+  if(!plan){
+    const q = storyStyleBloc(ctx, question, { taille:72, poids:700, police:"Newsreader", largeur:larg, max:4, interligne:1.04 });
+    const bl = puces.map(p => storyStyleBloc(ctx, p, { taille:52, poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 }));
+    plan = { q, bl, total:66 + 44 + q.h + 28 + 10 + 56 + bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1) };
+  }
+  ctx.fillStyle = P.fond; ctx.fillRect(0, 0, L, H);
+  // grand « ? » décoratif en filigrane
+  ctx.font = `700 1250px "Newsreader"`; ctx.fillStyle = storyMelange(P.fond, P.texte, 0.09); ctx.textAlign = "right"; ctx.textBaseline = "alphabetic";
+  ctx.fillText("?", L + 120, 1500); ctx.textAlign = "left";
+  storyMarque(ctx, { texte:P.texte, arc:P.doux, rose:P.texte });
+  const haut = Math.max(400, 400 + (bas - 400 - plan.total) * 0.3);
+  let y = haut;
+  storyStylePastille(ctx, d.categorie, marge, y, P.texte, P.fond);
+  y += 66 + 44;
+  y = storyStyleEcrire(ctx, plan.q, marge, y, P.texte);
+  y += 28; ctx.fillStyle = P.texte; ctx.fillRect(marge, y, 140, 10); y += 10 + 56;
+  plan.bl.forEach((b, i) => {
+    const h = Math.max(b.h, 76), cy = y + 38;
+    ctx.fillStyle = P.texte; ctx.beginPath(); ctx.arc(marge + 38, cy, 38, 0, 2 * Math.PI); ctx.fill();
+    ctx.font = `900 44px "Public Sans"`; ctx.fillStyle = P.fond; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), marge + 38, cy + 3); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    storyStyleEcrire(ctx, b, marge + 104, y + (h - b.h) / 2, P.texte);
+    y += h + 34;
+  });
+  storyStylePied(ctx, d, { doux:P.doux, texte:P.texte });
+}
+
+function storyStyleChiffre(ctx, d){
+  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1470;
+  const valeur = String(d.chiffre.valeur), legende = storyMots(d.chiffre.legende || "", 6), contexte = storyMots(d.contexte || d.accroche || "", 22);
+  ctx.font = `900 440px "Public Sans"`; ctx.letterSpacing = "-12px";
+  const w0 = ctx.measureText(valeur).width;
+  const tN = Math.max(120, Math.min(520, Math.floor(440 * larg / Math.max(w0, 1)))), hN = Math.round(tN * 0.74);
+  ctx.letterSpacing = "0px";
+  let plan = null;
+  for(const tC of [60, 56, 52]){
+    const lg = legende ? storyStyleFit(ctx, legende, { tMax:76, tMin:56, poids:700, police:"Newsreader", largeur:larg, lignes:2, hMax:200, interligne:1.04 }) : null;
+    const c = contexte ? storyStyleBloc(ctx, contexte, { taille:tC, poids:700, police:"Public Sans", largeur:larg, max:4, interligne:1.2 }) : null;
+    const total = 66 + 60 + 14 + 36 + hN + (lg ? 26 + lg.h : 0) + (c ? 56 + 4 + 40 + c.h : 0);
+    if(total <= bas - 400 || tC === 52){ plan = { lg, c, total }; break; }
+  }
+  ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
+  storyStyleMotif(ctx, d.motif, 400, 300, 700, "rgba(255,255,255,0.05)");
+  storyMarque(ctx);
+  const haut = Math.max(400, 400 + (bas - 400 - plan.total) * 0.35);
+  let y = haut;
+  storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
+  y += 66 + 60;
+  ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y, 150, 14); y += 14 + 36;
+  ctx.font = `900 ${tN}px "Public Sans"`; ctx.letterSpacing = `${-Math.round(tN * 0.027)}px`; ctx.fillStyle = "#FFFFFF"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+  ctx.fillText(valeur, marge - 6, y + hN); ctx.letterSpacing = "0px";
+  y += hN;
+  if(plan.lg){ y += 26; y = storyStyleEcrire(ctx, plan.lg, marge, y, STORY_DA.rose); }
+  if(plan.c){
+    y += 56; ctx.fillStyle = "rgba(197,206,242,0.45)"; ctx.fillRect(marge, y, larg, 3); y += 4 + 40;
+    storyStyleEcrire(ctx, plan.c, marge, y, "#FFFFFF");
+  }
+  storyStylePied(ctx, d, { doux:"#C5CEF2", texte:"#FFFFFF" });
+}
+// Point d'entrée : dessine la fiche dans le style demandé ; renvoie le style réellement employé (« chiffre » sans nombre devient « question »), ou null pour « bleu » (le module dessine alors lui-même)
+function storyStyleDessiner(ctx, style, d){
+  style = storyStyleValide(style);
+  if(style === "bleu") return null;
+  if(style === "chiffre" && !(d.chiffre && String(d.chiffre.valeur || "").trim())) style = (d.puces || []).length >= 2 ? "question" : "une-photo";
+  if(style === "question" && !(d.puces || []).length) style = "une-photo";
+  if(style === "une-photo") storyStyleUnePhoto(ctx, d);
+  else if(style === "question") storyStyleQuestion(ctx, d);
+  else storyStyleChiffre(ctx, d);
+  return style;
+}
+
+
+/* ----- Fiche d'un sujet d'actualité pour les styles (utilisée par stories-actu.js et stories-actu-fait.js) ----- */
+// Titre de presse prêt à être cité : sans « DIRECT. » ni rubrique en tête, guillemets internes adoucis, sans point final
+function storyTitreCite(t){
+  let x = storyTypo(t).replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, "");
+  const m = /^[\p{L}0-9'’ -]{4,32}\.\s+(?=\p{Lu})/u.exec(x);
+  if(m && x.length - m[0].length >= 28) x = x.slice(m[0].length);
+  x = x.replace(/«\s*([^»]*?)\s*»/g, "“$1”").replace(/"([^"]*)"/g, "“$1”");
+  return storyMinuscules(x.replace(/\.$/, ""));
+}
+const storyJourFr = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("fr-FR", { timeZone:"Europe/Paris", day:"numeric", month:"long" }); };
+// Fiche prête pour storyStyleDessiner, d'après un sujet d'ACTUALITES.sujets. L'accroche est le champ `accroche` du sujet (ou de son titrePropre), à défaut notre titre
+// (titrePropre.titre) ; sans titre à nous, null (le module dessine alors le style « bleu » : jamais un titre de presse en grand titre).
+// Photo : vignette d'institution du thème (champ illustration.vignette : null = pas de photo, motif du thème), jamais une personne.
+async function storySpecSujet(s){
+  if(!s?.articles?.length || s.sensible) return null;
+  const accroche = storyTypo(s.accroche || s.titrePropre?.accroche || s.titrePropre?.titre || "");
+  if(!accroche) return null;
+  const ill = s.illustration || {}, th = storyThemeInfos(ill.theme);
+  const photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
+  const a0 = s.articles[0];
+  const medias = (Array.isArray(s.sources) && s.sources.length ? s.sources : [...new Set(s.articles.map(a => a.media))]).filter(Boolean);
+  const n = medias.length;
+  const reserve = typeof periodeReserveSondages === "function" && periodeReserveSondages();
+  // L'essentiel : champ `essentiel` ; sinon un fait de contexte court (jamais de sondage en réserve électorale) ; sinon le titre de presse cité et attribué
+  let essentiel = storyTypo(s.essentiel || s.titrePropre?.essentiel || "");
+  if(!essentiel){
+    const fait = (s.contexte || []).map(c => ({ ...c, texte:storyTypo(c.texte).replace(/\.$/, "") })).find(c => c.texte && !(c.type === "sondage" && reserve) && storyNbMots(c.texte) <= 18);
+    if(fait) essentiel = fait.texte;
+  }
+  if(!essentiel && a0.media) essentiel = `« ${storyMots(storyTitreCite(a0.titre), 14)} » (${storyMots(a0.media, 4)})`;
+  const noms = (ill.personnes || []).map(p => p.nom).filter(Boolean).slice(0, 2);
+  const puces = (Array.isArray(s.puces) && s.puces.length ? s.puces : [
+    n >= 2 ? `${n} médias en parlent` : `Titre publié par ${a0.media}`,
+    `Mis à jour le ${storyJourFr(s.derniere || a0.date)}`,
+    noms.length ? `Concerne : ${noms.join(" et ")}` : `Rubrique : ${th.categorie}`,
+  ]).map(storyTypo).filter(Boolean).slice(0, 3);
+  const ch = s.chiffre?.valeur ? { valeur:`${s.chiffre.valeur}${/^[%€$]$/.test(String(s.chiffre.unite || "").trim()) ? " " + String(s.chiffre.unite).trim() : ""}`, legende:/^[%€$]?$/.test(String(s.chiffre.unite || "").trim()) ? "" : s.chiffre.unite }
+    : { valeur:String(n >= 2 ? n : s.articles.length), legende:n >= 2 ? "médias en parlent" : (s.articles.length > 1 ? "articles sur ce sujet" : "article sur ce sujet") };
+  const liste = medias.slice(0, 5).join(", ") + (n > 5 ? ` et ${n - 5} autres` : "");
+  return {
+    theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:th.categorie, accroche, essentiel, puces, chiffre:ch, contexte:accroche, photo,
+    source:`Titre rédigé par Hémicycle France d'après la presse. Titres relevés dans la presse : ${liste}.`,
+    video:(s.articles.find(a => a.video) || {}).media || "", cta:"Toute l'actu politique",
+  };
+}
 
 // Stories d'actualité : modules séparés, chargés ensemble (A « à la une » et E « en direct » : stories-actu ; B « en bref » et D « dossier » : stories-actu-liste ;
 // C « le chiffre », F « face à face » et G « date à retenir » : stories-actu-fait). Chacun remplit STORY_PLUS ; les définitions ci-dessus ne servent que de secours.

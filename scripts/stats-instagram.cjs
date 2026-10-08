@@ -222,6 +222,27 @@ function fusionner(anciennes = {}, nouvelles = {}) {
 }
 const moyenne = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : null);
 
+// --- Test comparatif des styles de story (champ « variante », scripts/stories-auto.cjs) ----------------------------------
+const VARIANTES = ["bleu", "une-photo", "question", "chiffre"]; // même liste que scripts/stories-auto.cjs
+const MIN_PAR_VARIANTE = 10; // en dessous, la moyenne reflète surtout le hasard (voir docs/STATS.md)
+/** Interactions d'un média : `total_interactions` si l'API la donne, sinon la somme des réactions relevées (j'aime, commentaires, enregistrements, partages, réponses) ; null si rien n'est relevé. */
+function interactionsDe(m) {
+  const x = m.metriques || {};
+  if (typeof x.total_interactions === "number") return x.total_interactions;
+  const v = ["likes", "comments", "saved", "shares", "replies"].filter((k) => typeof x[k] === "number");
+  return v.length ? v.reduce((a, k) => a + x[k], 0) : null;
+}
+/** Moyenne de vues et d'interactions par variante : [{ variante, n, vues, interactions }] dans l'ordre des variantes ; seuls les médias avec une variante et des vues relevées comptent. */
+function parVariante(medias) {
+  const liste = Array.isArray(medias) ? medias : Object.values(medias || {});
+  const arrondi = (x) => (x === null ? null : Math.round(x * 10) / 10);
+  return VARIANTES.map((v) => {
+    const ms = liste.filter((m) => m.variante === v && vuesDe(m) !== null);
+    const inter = ms.map(interactionsDe).filter((x) => x !== null);
+    return { variante: v, n: ms.length, vues: arrondi(moyenne(ms.map(vuesDe))), interactions: arrondi(moyenne(inter)) };
+  });
+}
+
 /** Groupes triés par moyenne de vues décroissante : [{ cle, n, moyenne }]. */
 function groupes(medias, cle) {
   const g = new Map();
@@ -262,6 +283,15 @@ function rapportHebdo(stats, etiquette, now, alertes, signalements) {
     L.push(`- **Meilleur format** : ${dire(groupes(medias, (m) => m.type))}`);
     L.push(`- **Meilleur thème** : ${dire(groupes(medias, (m) => m.theme))}`, "");
     if (medias.length < 10) L.push(`Attention : seulement ${medias.length} média(s) cette semaine ; ces classements sont indicatifs (voir docs/STATS.md, minimum conseillé : 10 médias, 3 par groupe).`, "");
+  }
+  const pv = parVariante(stats.medias);
+  if (pv.some((x) => x.n)) {
+    L.push("## Test comparatif des styles de story (cumul depuis le début du test)", "");
+    L.push("| Style | Stories mesurées | Vues (moyenne) | Interactions (moyenne) |", "| --- | --- | --- | --- |");
+    for (const x of pv) L.push(`| ${x.variante} | ${x.n} | ${x.vues ?? "n/d"} | ${x.interactions ?? "n/d"} |`);
+    L.push("");
+    const faibles = pv.filter((x) => x.n < MIN_PAR_VARIANTE);
+    if (faibles.length) L.push(`Attention : moins de ${MIN_PAR_VARIANTE} stories pour ${faibles.map((x) => x.variante).join(", ")} ; ces moyennes sont indicatives (voir docs/STATS.md).`, "");
   }
   if (signalements) {
     L.push("## Commentaires signalés (aucune action automatique)", "");
@@ -316,6 +346,7 @@ async function principal() {
         titre,
         type: info.type,
         modele: ancien?.modele || modeleDe(e.id, entreeFile || e),
+        ...((ancien?.variante || entreeFile?.variante || e.variante) ? { variante: ancien?.variante || entreeFile?.variante || e.variante } : {}), // style de la story (test comparatif)
         theme: ancien?.theme || e.theme || entreeFile?.theme || themeDe(titre),
         nbMedias: ancien?.nbMedias ?? e.nbMedias ?? (Array.isArray(entreeFile?.medias) ? entreeFile.medias.length : null),
         publieLe,
@@ -383,6 +414,6 @@ function fin() {
   if (process.env.GITHUB_STEP_SUMMARY) try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, resumeLignes.join("\n") + "\n"); } catch (e) { /* sans résumé */ }
 }
 
-module.exports = { classerCommentaire, themeDe, modeleDe, groupes, vuesDe, fusionner, etiquetteSemaine, heureParis, masquer, METRIQUES };
+module.exports = { classerCommentaire, themeDe, modeleDe, groupes, vuesDe, interactionsDe, parVariante, rapportHebdo, VARIANTES, fusionner, etiquetteSemaine, heureParis, masquer, METRIQUES };
 
 if (require.main === module) principal().catch((e) => { alerte(`statistiques Instagram interrompues : ${e.message}`); fin(); process.exit(0); });

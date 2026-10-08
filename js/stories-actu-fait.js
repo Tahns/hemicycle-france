@@ -40,7 +40,17 @@ function ecrireLignes(ctx, f, x, yHaut, { poids = 700, fam = NEW, couleur = "#ff
 }
 
 /* ---------- Données ---------- */
-const sujetDe = info => ACTUALITES?.sujets?.[Number(info)] || null;
+const sujetDe = info => ACTUALITES?.sujets?.[Number(String(info).split(":")[0])] || null;
+const styleDe = info => storyStyleValide(String(info).split(":")[1]); // « indice:style » (bleu, une-photo, question, chiffre)
+const sansLead = t => t.replace(/^Titre rédigé par Hémicycle France d'après la presse\.\s*/, "");
+// Styles du test comparatif : la fiche du sujet (storySpecSujet) complétée par le contenu propre au modèle ; renvoie false si le style bleu doit être dessiné
+async function dessinerStyle(ctx, s, info, surcharge){
+  const style = styleDe(info);
+  if(style === "bleu" || s.sensible) return false;
+  const d = await storySpecSujet(s);
+  if(!d) return false;
+  return Boolean(storyStyleDessiner(ctx, style, { ...d, ...surcharge(d) }));
+}
 const rubrique = s => (THEMES_ACTU[s?.illustration?.theme] || THEMES_ACTU.politique)[2];
 // Notre titre ; à défaut, un titre de repli neutre (jamais un titre de presse en grand titre)
 const titreAffiche = s => (typeof s.titrePropre?.titre === "string" && storyTypo(s.titrePropre.titre)) || `${rubrique(s)} · en\u00A0ce\u00A0moment`;
@@ -145,6 +155,7 @@ function poserCarte(ctx, d, bas, dispo, opts = {}){
 }
 const poserOk = (ctx, d, dispo, opts = {}) => (opts.tailles || [40, 38, 36, 34, 32, 30, 28]).some(tq => carte(ctx, d, tq, marge, 0, LARG, false, opts) <= dispo);
 
+const maj1 = t => String(t).charAt(0).toUpperCase() + String(t).slice(1);
 const nomFichier = (pref, s) => `${pref}-${slugDep(titreAffiche(s)).slice(0, 40)}`;
 const joursAvant = iso => {
   const auj = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
@@ -175,6 +186,7 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   const s = sujetDe(info), ch = s?.chiffre;
   if(!ch?.valeur) return null;
   await polices();
+  if(await dessinerStyle(ctx, s, info, d => ({ source:"Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée. " + sansLead(d.source), cta:"Tous les chiffres" }))) return { nom: nomFichier("chiffre", s) };
   const medias = mediasDe(s), titre = titreAffiche(s);
   const cles = String(ch.valeur).match(/\d+/g) || [];
   const art = articleCite(s, cles);
@@ -294,6 +306,18 @@ STORY_PLUS.date = async (ctx, info) => {
   const s = sujetDe(info), dt = s?.date;
   if(!dt?.iso || !dt.jour || !dt.mois) return null;
   await polices();
+  const nj = joursAvant(dt.iso);
+  if(nj >= 0 && await dessinerStyle(ctx, s, info, d => {
+    const quand = nj > 1 ? `dans ${nj} jours` : nj === 1 ? "demain" : "aujourd'hui";
+    const jourDate = `${String(dt.jour) === "1" ? "1er" : dt.jour} ${dt.mois}`;
+    return {
+      chiffre: { valeur: nj > 1 ? String(nj) : maj1(quand), legende: nj > 1 ? "jours avant la date à retenir" : "date à retenir" },
+      essentiel: `Date à retenir : ${jourDate}, ${quand}`,
+      puces: [`Date à retenir : ${jourDate}`, maj1(quand), `Rubrique : ${d.categorie}`],
+      categorie: "À noter", contexte: `${titreAffiche(s)} : ${jourDate}`, cta: "Ne rien rater",
+      source: (s.agenda ? "Date relevée auprès de la source. Le programme peut changer. " : "Date annoncée par la presse. L'ordre du jour peut changer. ") + sansLead(d.source),
+    };
+  })) return { nom: nomFichier("date", s) };
   const medias = mediasDe(s), titre = titreAffiche(s);
   const art = articleCite(s, [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois]);
   const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };

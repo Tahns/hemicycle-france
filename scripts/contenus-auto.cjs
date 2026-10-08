@@ -786,7 +786,10 @@ async function main({ ch = chemins(), now = maintenant(), dessiner = (jobs) => d
   let { file, etat } = s;
   for (const p of plan) {
     try {
-      const jobs = tachesDessin(p);
+      // Test comparatif de styles (js/stories.js) : une story reçoit sa variante (hash de l'id % 4, scripts/stories-auto.cjs) ; « comprendre » n'a pas de nombre à mettre en avant, donc 3 styles
+      const variante = p.rendu.kind === "story" ? SA.varianteDe(p.id, p.nom === "comprendre" ? SA.VARIANTES.filter((v) => v !== "chiffre") : SA.VARIANTES) : null;
+      if (variante) p.entree = { ...p.entree, variante };
+      const jobs = tachesDessin(p).map((j) => (variante && variante !== "bleu" ? { ...j, spec: { ...j.spec, style: variante } } : j));
       const images = await dessiner(jobs);
       if (images.length !== jobs.length) throw new Error("nombre d'images inattendu");
       const { entree, vers } = ecrireContenu(p, images, { now, config: s.config, ch });
@@ -855,7 +858,7 @@ module.exports = {
   chemins, parisInfos, parisVersIso, semaineISO, dateLongue, TYPES, CRENEAUX_DEFAUT, heureEnMinutes, normaliserCreneaux, creneauxDuJour,
   etatVide, normaliserEtat, reconcilierEtat, dejaCree, idContenu, choisirAujourdhui, classerScrutin, choisirVoteDuJour, notionsComprendre, prochaineNotion, choisirComprendre,
   separerValeur, candidatsChiffres, choisirChiffre, etapeSuivante, votesFinaux, choisirCarrouselLoi, loiDejaTraitee, idPostLoi, sujetsRecents, choisirCarrouselHebdo, planifier, postsDuJour,
-  controlerImage, ecrireContenu, nettoyerEnfants, main, aFaire, apercus, tachesDessin,
+  controlerImage, ecrireContenu, nettoyerEnfants, main, aFaire, apercus, tachesDessin, dessinerFiches,
 };
 
 if (require.main === module) {

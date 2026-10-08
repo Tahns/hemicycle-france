@@ -120,7 +120,7 @@
   }
 
   /* ---------- Modèle D : « Dossier » ---------- */
-  async function dossierStory(ctx, dossier){
+  async function dossierStory(ctx, dossier, style){
     dossier = { ...dossier, titre:storyTypo(dossier.titre) };
     // Un média différent par entrée, du plus récent au plus ancien ; on évite de répéter le même titre (reprises de dépêche)
     const triees = [...(dossier.articles || [])].sort((x, y)=> String(y.date).localeCompare(String(x.date)));
@@ -139,12 +139,28 @@
     const { L, marge } = STORY, larg = L - 2 * marge;
     // Contexte : un fait tiré du sujet qui recoupe le plus ce dossier
     const urls = new Set((dossier.articles || []).map(a=> a.url));
-    let contexte = null, meilleur = 0;
+    let contexte = null, meilleur = 0, sujetLie = null;
     for(const s of ACTUALITES?.sujets || []){
       const faits = (s.contexte || []).filter(c=> !(c.type === "sondage" && periodeReserveSondages())); // réserve électorale : aucun sondage
       if(!faits.length) continue;
       const k = s.articles.filter(a=> urls.has(a.url)).length;
-      if(k > meilleur){ meilleur = k; contexte = faits[0]; }
+      if(k > meilleur){ meilleur = k; contexte = faits[0]; sujetLie = s; }
+    }
+    if(style && style !== "bleu"){ // styles du test comparatif (js/stories.js) : photo d'institution du sujet le plus proche, jamais une personne
+      const ill = sujetLie?.illustration || {}, th = storyThemeInfos(ill.theme), photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
+      const cite = storyMots(storyTitreCite(arts[0].titre), 13), noms = [...new Set(triees.map(a=> a.media))];
+      const liste = noms.slice(0, 5).join(", ") + (noms.length > 5 ? ` et ${noms.length - 5} autres` : "");
+      const fait = contexte?.texte && storyNbMots(contexte.texte) <= 18 ? storyTypo(contexte.texte).replace(/\.$/, "") : "";
+      const dessin = storyStyleDessiner(ctx, style, {
+        theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:"Dossier", photo,
+        accroche:style === "question" ? `${dossier.titre} : où en est-on ?` : dossier.titre,
+        essentiel:fait || `Dernier titre relevé : « ${cite} » (${storyMots(arts[0].media, 4)})`,
+        puces:[`${nbArts} articles relevés`, `${nbMedias} médias différents`, `Dernier titre : ${storyMots(arts[0].media, 4)}`],
+        chiffre:{ valeur:String(nbArts), legende:nbArts > 1 ? "articles dans le dossier" : "article dans le dossier" },
+        contexte:`${nbMedias} médias en parlent : ${dossier.titre}`,
+        source:`Titres relevés dans la presse. Seuls les titres sont repris. Médias : ${liste}.`, cta:"Tout le dossier",
+      });
+      if(dessin) return { nom:`dossier-${dossier.id}` };
     }
     storyFondTheme(ctx); storyMarque(ctx);
     const tc = 28, g = 24;
@@ -251,8 +267,9 @@
   STORY_PLUS.actualites = async (ctx, info)=>{
     if(/^bref:/.test(info || "")) return enBref(ctx, info.slice(5).split(",").map(Number).filter(Number.isInteger));
     if(info){
-      const dossier = (ACTUALITES?.dossiers || []).find(d=> d.id === info);
-      return dossier ? dossierStory(ctx, dossier) : null;
+      const [id, style] = String(info).split("|"); // « id » ou « id|style » (style : bleu, une-photo, question, chiffre)
+      const dossier = (ACTUALITES?.dossiers || []).find(d=> d.id === id);
+      return dossier ? dossierStory(ctx, dossier, storyStyleValide(style)) : null;
     }
     return enBref(ctx);
   };
