@@ -341,7 +341,9 @@ function copieUnTitre(titre, articles) {
 /** Titre à nous : le meilleur choix, sans jamais copier un titre de presse (sinon titre générique de thème, qui n'ira jamais en story). */
 function titreSujet(sujet, dossiers = [], donnees = {}) {
   const t = titreSujetBrut(sujet, dossiers, donnees);
-  if (!t || !copieUnTitre(t.titre, sujet?.articles)) return t;
+  // Filet final : un titre à nous n'affirme jamais « procédure (judiciaire) en cours » (présomption d'innocence ; check-data le refuse et bloquerait tout le relevé)
+  const affirmeProcedure = t && /procedures? (judiciaires? )?en cours/.test(plat(t.titre || ""));
+  if (!t || !(affirmeProcedure || copieUnTitre(t.titre, sujet?.articles))) return t;
   const th = themeDe(sujet.articles || [], plat(sujet.articles[0]?.titre || ""), "", "");
   const repli = th && th.S !== "Justice" ? `${th.S} : l'essentiel du moment` : "Politique : l'essentiel du moment";
   return { titre: repli, origine: "regles", generique: true };

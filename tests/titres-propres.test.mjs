@@ -298,3 +298,12 @@ test("sujet d'accusation ou de plainte (circuit normal) : le titre propre ne nom
     assert.ok(!titres.some((x) => plat(x) === plat(t.titre)), "pas de copie d'un titre de presse");
   }
 });
+
+test("jamais « procédure (judiciaire) en cours » : expression commune des médias remplacée par un titre générique", () => {
+  const sujet = { mediasDistincts: 3, illustration: { theme: "politique" }, articles: [
+    art("Le Monde", "Procédure judiciaire en cours à Lyon", 1), art("Libération", "Procédure judiciaire en cours à Lyon pour un maire", 2), art("RFI", "Lyon : procédure judiciaire en cours", 3),
+  ] };
+  const t = titreSujet(sujet, [], {});
+  assert.ok(!/proc[ée]dure/i.test(t.titre), `pas de procédure affirmée : ${t.titre}`);
+  assert.strictEqual(t.generique, true, "titre de repli, jamais publié");
+});
