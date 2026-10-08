@@ -913,6 +913,7 @@ function decomposerTitreVote(titre) {
 function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, resultat, pour, contre, abst, url }) {
   if (resultat !== "adopte" && resultat !== "rejete") return null;
   const d = decomposerTitreVote(titre);
+  if (d) { try { d.simple = require("./titres-propres.cjs").simplifierTexteLoi(d.court); } catch (e) { d.simple = null; } } // affichage seulement : `court` (officiel) reste la référence des registres
   if (!d || d.court.length < 15 || d.court.length > 230 || /[<>{}]/.test(d.court)) return null;
   if (motExclu(titre, OFF) || motExclu(dossierTitre || "", OFF) || motExclu(d.court, OFF)) return null;
   if (![pour, contre, abst].every((n) => Number.isInteger(n) && n >= 0) || pour + contre === 0) return null;
@@ -921,7 +922,7 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const nomChambre = an ? "Assemblée nationale" : "Sénat";
   const verbe = resultat === "adopte" ? "adopté" : "rejeté";
   const sourceTxt = `Source : ${nomChambre}, scrutin public n°${numero}${an ? "" : ` (session ${id.split("-")[1]}-${Number(id.split("-")[1]) + 1})`} (${an ? "assemblee-nationale.fr" : "senat.fr"}). Résultat officiel.`;
-  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, verdict: resultat, pour, contre, abst, numero, sourceTxt };
+  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, ...(d.simple ? { titreSimple: d.simple } : {}), verdict: resultat, pour, contre, abst, numero, sourceTxt };
   const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions : ${nbFr(abst)}`;
   const legende = [
     `${nomChambre} : ${d.nature} ${d.nature === "projet de loi" ? verbe : verbe + "e"} le ${date}`,
@@ -937,6 +938,7 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   return {
     spec,
     titreCourt: d.court,
+    ...(d.simple ? { accroche: d.simple } : {}),
     sous: `${an ? "Assemblée nationale" : "Sénat"} · texte ${verbe} · ${date}`,
     legende,
     alt: `Post Hémicycle France : ${d.court}, ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${date}. ${voix}.`,
@@ -1308,7 +1310,7 @@ function decrirePost(choix, now) {
   if (choix.post) { // loi
     const f = choix.post;
     return { titre: f.titreCourt, medias: [], sources: [f.source], type: "post", post: { fiche: f, id: choix.id },
-      champs: { donneesPropres: true, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, legende: f.legende, alt: f.alt } };
+      champs: { donneesPropres: true, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, ...(f.accroche ? { accroche: f.accroche } : {}), legende: f.legende, alt: f.alt } };
   }
   const s = choix.sujet, f = ficheDate(s, now), videos = liensVideo(s.articles);
   return { titre: s.articles[0].titre || f.titreCourt, medias: sourcesDe_(s.articles), sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
@@ -1346,6 +1348,10 @@ function decrireRappelAgenda(choix, now) {
     champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir : ${s.titrePropre.titre}, dans ${n} jours (${s.date.jour} ${s.date.mois}). Date relevée auprès de ${s.articles[0].media}.` },
   };
 }
+/** Accroche d'affichage d'un sujet de presse (titres-propres.accroche) ; null si elle n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
+function accrocheDe(sujet) {
+  try { const a = require("./titres-propres.cjs").accroche(sujet); return a && a !== sujet?.titrePropre?.titre ? a : null; } catch (e) { return null; }
+}
 function decrireBase(choix, now = new Date()) {
   if (choix.sensible) return decrireSensible(choix);
   if (choix.post || choix.modele === "post-date") return decrirePost(choix, now);
@@ -1369,7 +1375,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(!choix.repli && accrocheDe(choix.sujet) ? { accroche: accrocheDe(choix.sujet) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -1462,7 +1468,7 @@ async function main() {
         const commun = { cree: now.toISOString(), medias: [], ...(d.champs.donneesPropres ? { donneesPropres: true } : {}) };
         entrees = [...entrees,
           { id: choix.id, ...commun, titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), type: "post", sources: d.sources, ...d.champs },
-          { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
+          { id: idA, ...commun, titre: `Nouveau post : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, ...(d.champs.accroche ? { accroche: d.champs.accroche } : {}), url_image: urlImage(idA), type: "story", annonceDe: choix.id, sources: [], alt: `Story Hémicycle France qui annonce le nouveau post « ${d.post.fiche.titreCourt} ».` },
         ].slice(-GARDER);
         images.add(choix.id); images.add(idA);
         if (REELS_ACTIFS && config.videos && config.videosMax > 0 && videosDuJour(entrees, now) < config.videosMax) { // Reel : version animée du post, publiée après lui (JAMAIS : voir REELS_ACTIFS)
@@ -1471,7 +1477,7 @@ async function main() {
             try {
               require("./videos-auto.cjs").extraireVignette(path.join(DOSSIER_IMG, `${idR}.mp4`), path.join(DOSSIER_IMG, `${idR}.jpg`), 4.5);
               if (!imageValide(path.join(DOSSIER_IMG, `${idR}.jpg`))) throw new Error("vignette invalide");
-              entrees = [...entrees, { id: idR, ...commun, titre: `Reel : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, url_image: urlImage(idR), url_video: urlVideo(idR), type: "reel", reelDe: choix.id, sources: [], legende: d.champs.legende, alt: `Reel Hémicycle France, version animée du post « ${d.post.fiche.titreCourt} ».` }].slice(-GARDER);
+              entrees = [...entrees, { id: idR, ...commun, titre: `Reel : ${d.post.fiche.titreCourt}`, titrePropre: d.champs.titrePropre, ...(d.champs.accroche ? { accroche: d.champs.accroche } : {}), url_image: urlImage(idR), url_video: urlVideo(idR), type: "reel", reelDe: choix.id, sources: [], legende: d.champs.legende, alt: `Reel Hémicycle France, version animée du post « ${d.post.fiche.titreCourt} ».` }].slice(-GARDER);
               images.add(idR);
             } catch (e) {
               alerteResume(`- **Vidéos** : vignette du Reel ${idR} impossible (${e.message}) ; pas de Reel.`);
