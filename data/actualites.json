@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-08T15:25:33.693Z",
+ "lastUpdated": "2026-10-08T15:31:02.695Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -106,7 +106,7 @@
     "lycéens",
     "mobilisation",
     "mouvement",
-    "colère"
+    "manifestations"
    ],
    "medias": [
     "BFMTV",
@@ -136,7 +136,7 @@
     "EBRA",
     "Nice-Matin"
    ],
-   "nb": 64,
+   "nb": 62,
    "derniere": "2026-10-08T15:18:28.000Z",
    "articles": [
     {
@@ -360,8 +360,8 @@
     "budget"
    ],
    "medias": [
-    "Le Dauphiné libéré",
     "Le Monde",
+    "Le Dauphiné libéré",
     "Le Figaro",
     "Sud Ouest",
     "20 Minutes",
@@ -373,8 +373,8 @@
    ],
    "mediasDistincts": 9,
    "sources": [
-    "EBRA",
     "Le Monde",
+    "EBRA",
     "Le Figaro",
     "Sud Ouest",
     "20 Minutes",
@@ -383,9 +383,15 @@
     "Libération",
     "RFI"
    ],
-   "nb": 20,
-   "derniere": "2026-10-08T14:59:00.000Z",
+   "nb": 21,
+   "derniere": "2026-10-08T15:23:51.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Budget 2027 : la gauche sauve le seul projet du gouvernement ciblant les ultrariches",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/08/budget-2027-la-gauche-sauve-le-seul-projet-du-gouvernement-ciblant-les-ultrariches_6790245_823448.html",
+     "date": "2026-10-08T15:23:51.000Z"
+    },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Politique. « Injuste et aveugle à la réalité », le budget 2027 fait grincer les stations de montagne",
@@ -433,12 +439,6 @@
      "titre": "Présidentielle 2027 : « Enfumage », « amateurisme »… Maud Bregeon et Bruno Retailleau raillent le budget présenté par Marine Le Pen",
      "url": "https://www.sudouest.fr/politique/marine-le-pen/presidentielle-2027-enfumage-amateurisme-maud-bregeon-et-bruno-retailleau-raillent-le-budget-presente-par-marine-le-pen-30973191.php",
      "date": "2026-10-08T09:20:46.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Présidentielle 2027 : les propositions radicales et les chiffres flous de Marine Le Pen sur le budget de l’UE",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/08/presidentielle-2027-les-propositions-radicales-et-les-chiffres-flous-de-marine-le-pen-sur-le-budget-de-l-union-europeenne_6790175_823448.html",
-     "date": "2026-10-08T08:13:23.000Z"
     },
     {
      "media": "Le Progrès",
@@ -1092,6 +1092,67 @@
    "chiffre": {
     "valeur": "10",
     "unite": "millions"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-08T15:24:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Devant des entrepreneurs, Emmanuel Macron assure que la France n'est pas \"foutue\"",
+     "url": "https://www.bfmtv.com/politique/video-devant-des-entrepreneurs-emmanuel-macron-assure-que-la-france-n-est-pas-foutue_VN-202610080693.html",
+     "media": "BFMTV",
+     "date": "2026-10-08T15:24:20.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-08T15:23:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : la gauche sauve le seul projet du gouvernement ciblant les ultrariches",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/08/budget-2027-la-gauche-sauve-le-seul-projet-du-gouvernement-ciblant-les-ultrariches_6790245_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-08T15:23:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
@@ -3386,13 +3447,6 @@
      "media": "BFMTV",
      "date": "2026-10-08T10:28:49.000Z",
      "video": true
-    },
-    {
-     "titre": "Colère des lycéens: \"Je suis en train de mener un plan d'urgence pour pouvoir remplacer les professeurs absents de manière durable\", indique le ministre de l'Éducation nationale",
-     "url": "https://www.bfmtv.com/politique/video-colere-des-lyceens-je-suis-en-train-de-mener-un-plan-d-urgence-pour-pouvoir-remplacer-les-professeurs-absents-de-maniere-durable-indique-le-ministre-de-l-education-nationale_VN-202610080433.html",
-     "media": "BFMTV",
-     "date": "2026-10-08T10:03:56.000Z",
-     "video": true
     }
    ],
    "titrePropre": {
@@ -4523,78 +4577,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-08T08:07:36.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "En images - Blocus des lycéens : Ces politiques qui se sont fait connaître lors de manifestations étudiantes",
-     "url": "https://www.20minutes.fr/diaporama/diaporama-4252211-images-blocus-lyceens-politiques-fait-connaitre-lors-manifestations-etudiantes?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-08T08:07:36.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Figaro"
-   ],
-   "derniere": "2026-10-08T08:03:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Lycées, carburants, budget : Emmanuel Macron et Sébastien Lecornu cherchent les voies de l’apaisement",
-     "url": "https://www.lefigaro.fr/politique/lycees-carburants-budget-emmanuel-macron-et-sebastien-lecornu-cherchent-les-voies-de-l-apaisement-20261007",
-     "media": "Le Figaro",
-     "date": "2026-10-08T08:03:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   }
  ]
 }
