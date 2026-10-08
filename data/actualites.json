@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-08T14:10:41.373Z",
+ "lastUpdated": "2026-10-08T14:20:40.562Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -108,6 +108,7 @@
     "meeting"
    ],
    "medias": [
+    "L'Express",
     "BFMTV",
     "Sud Ouest",
     "20 Minutes",
@@ -118,11 +119,11 @@
     "Le Monde",
     "Libération",
     "Nice-Matin",
-    "L'Express",
     "Public Sénat"
    ],
    "mediasDistincts": 9,
    "sources": [
+    "L'Express",
     "BFMTV",
     "Sud Ouest",
     "20 Minutes",
@@ -130,12 +131,17 @@
     "Le Monde",
     "Libération",
     "Nice-Matin",
-    "L'Express",
     "Public Sénat"
    ],
-   "nb": 24,
-   "derniere": "2026-10-08T12:58:30.000Z",
+   "nb": 25,
+   "derniere": "2026-10-08T14:12:26.000Z",
    "articles": [
+    {
+     "media": "L'Express",
+     "titre": "La vidéo d'Ursula von der Leyen qui circule à l'Elysée, le coup de pouce de Jean-Luc Mélenchon à Gabriel Attal",
+     "url": "https://www.lexpress.fr/politique/la-video-dursula-von-der-leyen-qui-circule-a-lelysee-le-coup-de-pouce-de-jean-luc-melenchon-a-6M7EY6FYYRA4TIMMQPOQRRMKNU/",
+     "date": "2026-10-08T14:12:26.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Jeunesse, LFI, tifos… À quoi va ressembler le meeting de Gabriel Attal ce samedi à Lyon?",
@@ -209,12 +215,6 @@
      "titre": "« Les Départements ne peuvent plus être la variable d’ajustement de l’État » : le coup de colère du président du conseil départemental Jean-Louis Masson",
      "url": "https://www.nicematin.com/societe/politique/les-departements-ne-peuvent-plus-etre-la-variable-d-ajustement-de-l-etat-le-coup-de-colere-du-president-du-conseil-departemental-jean-louis-masson-10736445",
      "date": "2026-10-07T15:09:29.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "Jean-Luc Mélenchon et la jeunesse : la leçon de François Mitterrand qu'il n’a jamais oubliée",
-     "url": "https://www.lexpress.fr/politique/melenchon-mitterrand-comment-utiliser-la-jeunesse-dans-une-strategie-presidentielle-EY57ESDQURBHJFWMPXQZN45YKM/",
-     "date": "2026-10-07T04:30:00.000Z"
     },
     {
      "media": "Public Sénat",
@@ -703,60 +703,6 @@
     "jour": 5,
     "mois": "décembre"
    }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "BFMTV",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-08T10:45:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Geffray",
-      "photo": "photos/personnalites/edouard-geffray.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
-      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne en direct : un \"plan d'urgence\" imminent pour remplacer les enseignants absents",
-     "url": "https://www.france24.com/fr/france/20261008-en-direct-etudiants-lyceens-appeles-de-nouveau-mobiliser-jeudi-acte-iv-mouvement-france-sebastien-lecornu-syndicats-manifestations-parcoursup",
-     "media": "France 24",
-     "date": "2026-10-08T02:45:19.000Z"
-    },
-    {
-     "titre": "Édouard Geffray, ministre de l'Éducation nationale, annonce mener \"un plan d'urgence\" pour remplacer les profs absents",
-     "url": "https://www.bfmtv.com/politique/video-edouard-geffray-ministre-de-l-education-nationale-annonce-mener-un-plan-d-urgence-pour-remplacer-les-profs-absents_VN-202610080468.html",
-     "media": "BFMTV",
-     "date": "2026-10-08T10:45:26.000Z",
-     "video": true
-    },
-    {
-     "titre": "DIRECT - Mobilisation des lycéens en France: le gouvernement promet un «plan d'urgence» imminent pour remplacer les enseignants absents",
-     "url": "https://www.rfi.fr/fr/france/20261008-direct-mobilisation-des-lyc%C3%A9ens-en-france-224-%C3%A9tablissements-restent-ferm%C3%A9s-ce-jeudi",
-     "media": "RFI",
-     "date": "2026-10-08T07:09:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Geffray : ministre de l’éducation nationale",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1276,27 +1222,51 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
+    "L'Express"
    ],
-   "derniere": "2026-10-08T14:09:42.000Z",
+   "derniere": "2026-10-08T14:12:26.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "securite",
-    "vignette": null
+    "theme": "gouvernement",
+    "vignette": "elysee"
    },
    "articles": [
     {
-     "titre": "Derrière l'image : quand un dessin d’enfant devient un témoignage de violences sexuelles",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-derri%C3%A8re-l-image-quand-un-dessin-d-enfant-devient-un-t%C3%A9moignage-de-violences-sexuelles",
-     "media": "France 24",
-     "date": "2026-10-08T14:09:42.000Z"
+     "titre": "La vidéo d'Ursula von der Leyen qui circule à l'Elysée, le coup de pouce de Jean-Luc Mélenchon à Gabriel Attal",
+     "url": "https://www.lexpress.fr/politique/la-video-dursula-von-der-leyen-qui-circule-a-lelysee-le-coup-de-pouce-de-jean-luc-melenchon-a-6M7EY6FYYRA4TIMMQPOQRRMKNU/",
+     "media": "L'Express",
+     "date": "2026-10-08T14:12:26.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Dessin de presse : regard sur l'actualité du jour",
-    "origine": "regles"
-   }
+    "titre": "Jean-Luc Mélenchon (LFI) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1414,26 +1384,27 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
+    "Le Dauphiné libéré"
    ],
-   "derniere": "2026-10-08T13:58:58.000Z",
+   "derniere": "2026-10-08T14:00:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
     "theme": "politique",
-    "vignette": "education"
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "Colère lycéenne : des jeunes déterminés à continuer de se mobiliser pour obtenir ce qu'ils réclament",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-col%C3%A8re-lyc%C3%A9enne-des-jeunes-d%C3%A9termin%C3%A9s-%C3%A0-continuer-de-se-mobiliser-pour-obtenir-ce-qu-ils-r%C3%A9clament",
-     "media": "France 24",
-     "date": "2026-10-08T13:58:58.000Z"
+     "titre": "Saint-Martin-de-la-Cluze. Les élus souhaitent que les trains s’arrêtent à nouveau à la gare",
+     "url": "https://www.ledauphine.com/politique/2026/10/08/les-elus-souhaitent-que-les-trains-s-arretent-a-nouveau-a-la-gare",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-08T14:00:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : prise de position sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Vie locale : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1992,32 +1963,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T12:52:06.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisations en France : étudiants et lycéens font front commun",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-mobilisations-en-france-%C3%A9tudiants-et-lyc%C3%A9ens-font-front-commun",
-     "media": "France 24",
-     "date": "2026-10-08T12:52:06.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Mobilisations en France : mobilisation lycéenne",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-08T12:50:25.000Z",
@@ -2039,32 +1984,6 @@
     "titre": "Vie locale : l'essentiel du moment",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T12:46:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne : le gouvernement peine à convaincre",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-mobilisation-lyc%C3%A9enne-le-gouvernement-peine-%C3%A0-convaincre",
-     "media": "France 24",
-     "date": "2026-10-08T12:46:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
    }
   },
   {
@@ -2595,32 +2514,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T10:56:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "France : nouvelle journée de mobilisation des lycéens et étudiants",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-france-nouvelle-journ%C3%A9e-de-mobilisation-des-lyc%C3%A9ens-et-%C3%A9tudiants",
-     "media": "France 24",
-     "date": "2026-10-08T10:56:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Figaro"
    ],
    "derniere": "2026-10-08T10:52:25.000Z",
@@ -2672,6 +2565,47 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-08T10:45:26.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Geffray",
+      "photo": "photos/personnalites/edouard-geffray.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
+      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Édouard Geffray, ministre de l'Éducation nationale, annonce mener \"un plan d'urgence\" pour remplacer les profs absents",
+     "url": "https://www.bfmtv.com/politique/video-edouard-geffray-ministre-de-l-education-nationale-annonce-mener-un-plan-d-urgence-pour-remplacer-les-profs-absents_VN-202610080468.html",
+     "media": "BFMTV",
+     "date": "2026-10-08T10:45:26.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : annonces sur l'éducation et la jeunesse",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Geffray : ministre de l’éducation nationale",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3240,59 +3174,6 @@
    "titrePropre": {
     "titre": "Meurthe-et-Moselle : environnement",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T09:50:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "En France, la colère des lycéens et la mobilisation ne faiblissent pas",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-en-france-la-col%C3%A8re-des-lyc%C3%A9ens-et-la-mobilisation-ne-faiblissent-pas",
-     "media": "France 24",
-     "date": "2026-10-08T09:50:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T09:49:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France-Algérie : Yasmina Khadra, une voix littéraire sans frontières",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-france-alg%C3%A9rie-yasmina-khadra-une-voix-litt%C3%A9raire-sans-fronti%C3%A8res",
-     "media": "France 24",
-     "date": "2026-10-08T09:49:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -3880,39 +3761,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T09:06:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Carburant en France : 10 millions de barils libérés pour faire baisser les prix",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-carburant-en-france-10-millions-de-barils-lib%C3%A9r%C3%A9s-pour-faire-baisser-les-prix",
-     "media": "France 24",
-     "date": "2026-10-08T09:06:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Carburant en France : finances locales",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-08T09:00:05.000Z",
@@ -4062,58 +3910,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T08:35:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Colère lycéenne : le mouvement gagne de nouveaux établissements et l'Outre mer",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-col%C3%A8re-lyc%C3%A9enne-le-mouvement-gagne-de-nouveaux-%C3%A9tablissements-et-l-outre-mer",
-     "media": "France 24",
-     "date": "2026-10-08T08:35:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T08:34:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "France : \"acte IV\" de la mobilisation lycéenne, le mouvement grandit",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-france-acte-iv-de-la-mobilisation-lyc%C3%A9enne-le-mouvement-grandit",
-     "media": "France 24",
-     "date": "2026-10-08T08:34:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "20 Minutes"
    ],
    "derniere": "2026-10-08T08:33:57.000Z",
@@ -4216,33 +4012,6 @@
    "titrePropre": {
     "titre": "Lycées : l'essentiel du moment",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-08T08:28:48.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "L'usage des grenades assourdissantes projetées par lanceur suspendu provisoirement",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-l-usage-des-grenades-assourdissantes-projet%C3%A9es-par-lanceur-suspendu-provisoirement",
-     "media": "France 24",
-     "date": "2026-10-08T08:28:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -4523,6 +4292,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-08T07:09:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT - Mobilisation des lycéens en France: le gouvernement promet un «plan d'urgence» imminent pour remplacer les enseignants absents",
+     "url": "https://www.rfi.fr/fr/france/20261008-direct-mobilisation-des-lyc%C3%A9ens-en-france-224-%C3%A9tablissements-restent-ferm%C3%A9s-ce-jeudi",
+     "media": "RFI",
+     "date": "2026-10-08T07:09:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : annonces sur la mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "20 Minutes"
    ],
    "derniere": "2026-10-08T07:00:19.000Z",
@@ -4640,6 +4435,233 @@
    ],
    "titrePropre": {
     "titre": "RN et LFI : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-08T06:50:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Mouvement lycéen en Gironde : «On manifestera autant de jours qu’il le faudra », nouvelle mobilisation ce jeudi à Bordeaux, des incidents à Lormont et Talence, suivez le fil de la journée",
+     "url": "https://www.sudouest.fr/gironde/bordeaux/direct-mouvement-lyceen-en-gironde-nouvelle-mobilisation-ce-jeudi-8-octobre-a-bordeaux-suivez-le-fil-de-la-journee-30971419.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-08T06:50:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : suivi de la journée",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-08T06:33:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la gauche les 9 et 10 octobre : ces fluctuations passées que les cinq candidats se renvoient à la figure",
+     "url": "https://www.sudouest.fr/elections/presidentielle/primaire-de-la-gauche-les-9-et-10-octobre-ces-fluctuations-passees-que-les-cinq-candidats-se-renvoient-a-la-figure-30971325.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-08T06:33:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire de la gauche : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-08T06:11:59.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Edouard Philippe, un passage à «l’Heure de vérité» pour tenter de renouer avec les Français",
+     "url": "https://www.liberation.fr/politique/edouard-philippe-un-passage-a-lheure-de-verite-pour-tenter-de-renouer-avec-les-francais-20261008_MM7X7BQ5YRHMRLV4G5OB2MODH4/",
+     "media": "Libération",
+     "date": "2026-10-08T06:11:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-08T06:04:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Illkirch-Graffenstaden. Un prêt de 3 millions d’euros pour couvrir les investissements",
+     "url": "https://www.dna.fr/economie/2026/10/08/stade-de-la-schlossmatt-arena-de-basket-un-pret-de-3-millions-d-euros-pour-couvrir-les-investissements",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-08T06:04:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Illkirch-Graffenstaden : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-08T06:00:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bernard Kalaora, socio-anthropologue : « Sous prétexte de parler des juifs, chacun parle finalement de soi »",
+     "url": "https://www.lemonde.fr/idees/article/2026/10/08/bernard-kalaora-socio-anthropologue-sous-pretexte-de-parler-des-juifs-chacun-parle-finalement-de-soi_6790099_3232.html",
+     "media": "Le Monde",
+     "date": "2026-10-08T06:00:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-08T05:55:13.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Premier cours à 9 heures, adapter les bâtiments au changement climatique… : la mobilisation des lycées, un « écho » à une convention citoyenne restée lettre morte",
+     "url": "https://www.nicematin.com/societe/blocage-des-lycees/premier-cours-a-9-heures-adapter-les-batiments-au-changement-climatique-la-mobilisation-des-lycees-un-echo-a-une-convention-citoyenne-restee-lettre-morte-10736565",
+     "media": "Nice-Matin",
+     "date": "2026-10-08T05:55:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-08T05:30:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Caroline Roux, journaliste de « L’Heure de vérité » sur France 2 : « La présidentielle ne se passera pas comme on l’écrit aujourd’hui »",
+     "url": "https://www.lemonde.fr/culture/article/2026/10/08/caroline-roux-journaliste-et-animatrice-de-l-heure-de-verite-sur-france-2-la-presidentielle-ne-se-passera-pas-comme-on-l-ecrit-aujourd-hui_6790032_3246.html",
+     "media": "Le Monde",
+     "date": "2026-10-08T05:30:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-08T05:17:35.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Nouvelle coupe drastique et nouvelle stratégie pour l'aide française au développement",
+     "url": "https://www.rfi.fr/fr/france/20261008-nouvelle-coupe-drastique-et-nouvelle-strat%C3%A9gie-pour-l-aide-fran%C3%A7aise-au-d%C3%A9veloppement",
+     "media": "RFI",
+     "date": "2026-10-08T05:17:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
     "origine": "regles",
     "generique": true
    }
