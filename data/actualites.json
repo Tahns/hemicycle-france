@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-08T09:50:42.428Z",
+ "lastUpdated": "2026-10-08T09:52:27.616Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -369,9 +369,10 @@
     "Le Figaro",
     "Le Monde",
     "Hugo Décrypte",
-    "Nice-Matin"
+    "Nice-Matin",
+    "France 24"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
     "BFMTV",
     "EBRA",
@@ -380,9 +381,10 @@
     "Le Figaro",
     "Le Monde",
     "Hugo Décrypte",
-    "Nice-Matin"
+    "Nice-Matin",
+    "France 24"
    ],
-   "nb": 18,
+   "nb": 19,
    "derniere": "2026-10-08T09:47:26.000Z",
    "articles": [
     {
@@ -436,13 +438,6 @@
      "video": true
     },
     {
-     "media": "BFMTV",
-     "titre": "\"Moment de démocratie interne\": \"C'est de la foutaise\", juge Robert Ménard, maire DVD de Béziers",
-     "url": "https://www.bfmtv.com/politique/video-moment-de-democratie-interne-c-est-de-la-foutaise-juge-robert-menard-maire-dvd-de-beziers_VN-202610080259.html",
-     "date": "2026-10-08T06:47:06.000Z",
-     "video": true
-    },
-    {
      "media": "Sud Ouest",
      "titre": "Blocage des lycées en Gironde : les interdictions de rassemblements autour d’une liste secrète d’établissements fermés sont contestées",
      "url": "https://www.sudouest.fr/politique/education/mouvement-des-lyceens-en-gironde-les-interdictions-concernant-une-liste-secrete-de-lycees-sont-contestees-30965180.php",
@@ -472,6 +467,12 @@
      "titre": "Les données personnelles de plusieurs ministres, dont le 06 de Sébastien Lecornu, ont fuité sur Internet, la justice saisie",
      "url": "https://www.nicematin.com/societe/les-donnees-personnelles-de-plusieurs-ministres-dont-le-06-de-sebastien-lecornu-ont-fuite-sur-internet-la-justice-saisie-10736372",
      "date": "2026-10-07T10:00:07.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Sophie Adenot a quitté la Station spatiale internationale, direction la Terre",
+     "url": "https://www.france24.com/fr/france/20261007-sophie-adenot-a-quitt%C3%A9-l-iss-direction-la-terre",
+     "date": "2026-10-07T06:20:50.000Z"
     }
    ]
   }
@@ -714,6 +715,52 @@
    ]
   },
   {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T17:08:56.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
+    },
+    {
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
+    },
+    {
+     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
+     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
+     "media": "France 24",
+     "date": "2026-10-06T09:35:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
+    "origine": "regles"
+   }
+  },
+  {
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
@@ -874,40 +921,53 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "RFI"
+    "Public Sénat",
+    "France 24"
    ],
-   "derniere": "2026-10-06T17:08:56.000Z",
+   "derniere": "2026-10-06T17:31:58.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "budget",
+    "vignette": "budget"
    },
    "articles": [
     {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
+     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
+     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
+     "media": "Public Sénat",
+     "date": "2026-10-06T17:31:58.000Z"
     },
     {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "media": "France 24",
+     "date": "2026-10-06T09:29:23.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
+    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
     "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "140",
+    "unite": "milliards d’euros"
    }
   },
   {
@@ -1038,6 +1098,85 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-08T09:51:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Meurthe-et-Moselle. 22 000 pneus abandonnés sur un site naturel près de Pont-à-Mousson, un désastre environnemental et un cauchemar pour le maire",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/08/au-buzion-le-cauchemar-des-pneus-enfouis-continue",
+     "media": "L'Est républicain",
+     "date": "2026-10-08T09:51:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Meurthe-et-Moselle : environnement",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T09:50:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "En France, la colère des lycéens et la mobilisation ne faiblissent pas",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-en-france-la-col%C3%A8re-des-lyc%C3%A9ens-et-la-mobilisation-ne-faiblissent-pas",
+     "media": "France 24",
+     "date": "2026-10-08T09:50:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T09:49:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France-Algérie : Yasmina Khadra, une voix littéraire sans frontières",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-france-alg%C3%A9rie-yasmina-khadra-une-voix-litt%C3%A9raire-sans-fronti%C3%A8res",
+     "media": "France 24",
+     "date": "2026-10-08T09:49:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-08T09:47:26.000Z",
@@ -1126,33 +1265,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-08T09:43:25.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Belleau. Au Buzion, le cauchemar des pneus enfouis continue",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/08/au-buzion-le-cauchemar-des-pneus-enfouis-continue",
-     "media": "L'Est républicain",
-     "date": "2026-10-08T09:43:25.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Belleau : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -1599,6 +1711,39 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T09:06:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Carburant en France : 10 millions de barils libérés pour faire baisser les prix",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-carburant-en-france-10-millions-de-barils-lib%C3%A9r%C3%A9s-pour-faire-baisser-les-prix",
+     "media": "France 24",
+     "date": "2026-10-08T09:06:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Carburant en France : finances locales",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-08T09:00:07.000Z",
@@ -1770,6 +1915,58 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T08:35:45.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Colère lycéenne : le mouvement gagne de nouveaux établissements et l'Outre mer",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-col%C3%A8re-lyc%C3%A9enne-le-mouvement-gagne-de-nouveaux-%C3%A9tablissements-et-l-outre-mer",
+     "media": "France 24",
+     "date": "2026-10-08T08:35:45.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T08:34:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "France : \"acte IV\" de la mobilisation lycéenne, le mouvement grandit",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-france-acte-iv-de-la-mobilisation-lyc%C3%A9enne-le-mouvement-grandit",
+     "media": "France 24",
+     "date": "2026-10-08T08:34:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : l'essentiel du moment",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-08T08:32:12.000Z",
@@ -1825,6 +2022,33 @@
    "titrePropre": {
     "titre": "Intercepte",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T08:28:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L'usage des grenades assourdissantes projetées par lanceur suspendu provisoirement",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-l-usage-des-grenades-assourdissantes-projet%C3%A9es-par-lanceur-suspendu-provisoirement",
+     "media": "France 24",
+     "date": "2026-10-08T08:28:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2558,8 +2782,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intercepte",
-    "origine": "dossier"
+    "titre": "Vie locale : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3670,6 +3895,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T02:45:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "En direct : la mobilisation lycéenne continue, 375 établissements \"totalement ou partiellement fermés\"",
+     "url": "https://www.france24.com/fr/france/20261008-en-direct-etudiants-lyceens-appeles-de-nouveau-mobiliser-jeudi-acte-iv-mouvement-france-sebastien-lecornu-syndicats-manifestations-parcoursup",
+     "media": "France 24",
+     "date": "2026-10-08T02:45:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : suivi de la journée",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-08T00:35:30.000Z",
@@ -4436,281 +4687,6 @@
      "type": "sondage",
      "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Roussel 2–3,5 %",
      "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T19:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Vallon-Pont-d’Arc. Périscolaire, CMJ et grotte Chauvet au programme du conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/10/07/periscolaire-cmj-et-grotte-chauvet-au-programme-du-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T19:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vallon-Pont-d’Arc : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-07T19:12:51.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Fabien Roussel",
-      "photo": "photos/personnalites/fabien-roussel.jpg",
-      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
-      "parti": "GDR",
-      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "GDR"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fabien Roussel, secrétaire national du PCF, craint \"un risque de pénurie\" de gazole",
-     "url": "https://www.bfmtv.com/politique/video-fabien-roussel-secretaire-national-du-pcf-craint-un-risque-de-penurie-de-gazole_VN-202610070862.html",
-     "media": "BFMTV",
-     "date": "2026-10-07T19:12:51.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fabien Roussel (GDR) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-07T19:12:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Allocution de Sébastien Lecornu : quatre crises et une mesure",
-     "url": "https://www.liberation.fr/politique/allocution-de-sebastien-lecornu-quatre-crises-et-une-mesure-20261007_3QSWOUHA2ZDJXB3WHQGO56H6VE/",
-     "media": "Libération",
-     "date": "2026-10-07T19:12:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-07T19:10:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne : face au monde en crise, la joie comme arme politique",
-     "url": "https://www.liberation.fr/idees-et-debats/mobilisation-lyceenne-face-au-monde-en-crise-la-joie-comme-arme-politique-20261007_QOYXMO4XZZBXPGANGFKN2MAIZY/",
-     "media": "Libération",
-     "date": "2026-10-07T19:10:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-07T19:07:15.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Université à Bordeaux : face à un mouvement qui se poursuit, les blocages et les fermetures sont maintenus",
-     "url": "https://www.sudouest.fr/politique/education/universite-a-bordeaux-face-a-un-mouvement-qui-se-poursuit-les-blocages-et-les-fermetures-sont-maintenus-30965242.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-07T19:07:15.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-07T18:59:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: imperturbable, la leader de l’extrême droite Marine Le Pen reprend sa campagne malgré l’affaire Bardella",
-     "url": "https://www.rfi.fr/fr/france/20261007-france-imperturbable-la-leader-de-l-extr%C3%AAme-droite-marine-le-pen-reprend-sa-campagne-malgr%C3%A9-l-affaire-bardella",
-     "media": "RFI",
-     "date": "2026-10-07T18:59:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T18:51:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Avignon. « La police, c’est sur le terrain, pas dans des bureaux ! » : comme promis par Olivier Galzi, la Ville va fermer plusieurs postes de proximité",
-     "url": "https://www.ledauphine.com/politique/2026/10/07/la-police-c-est-sur-le-terrain-pas-dans-des-bureaux-la-ville-va-fermer-plusieurs-postes-de-proximite",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T18:51:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Avignon : sécurité",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-07T18:48:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Que retenez-vous de la prise de parole de Sébastien Lecornu ?",
-     "url": "https://www.ledauphine.com/societe/2026/10/07/que-retenez-vous-de-la-prise-de-parole-de-sebastien-lecornu",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-07T18:48:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
   }
