@@ -698,7 +698,7 @@ async function dessinerPostSeul(spec) {
 }
 
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null, synth = null, variante = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null, synth = null, variante = null, extras = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -721,7 +721,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth, variante }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth, variante, extras }) => {
       if (synth) { // sujet synthétique ajouté le temps du dessin, puis retiré
         ACTUALITES.sujets.push(synth);
         try { const r = await dessinerStory("actualite", `${ACTUALITES.sujets.length - 1}:${synth.modeleImpose || "une"}`); return r ? r.apercu : null; } finally { ACTUALITES.sujets.pop(); }
@@ -757,9 +757,10 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
         return r ? r.apercu : null;
       }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
+      if (extras?.accroche) ACTUALITES.sujets[indice].accroche = extras.accroche; // accroche de l'entrée (titres-propres.accroche), lue par les styles du test comparatif (js/stories.js : storySpecSujet)
       const r = await dessinerStory("actualite", `${indice}:${modele || "une"}${variante ? ":" + variante : ""}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date » ; puis le style (variante)
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth, variante: variante && variante !== "bleu" ? variante : null });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth, variante: variante && variante !== "bleu" ? variante : null, extras });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -1290,11 +1291,12 @@ function varianteChoix(choix, d) {
   return varianteDe(choix.id);
 }
 /** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
-function argsAvecVariante(args, variante) {
+function argsAvecVariante(args, variante, accroche = null) {
   if (!variante || variante === "bleu") return args;
   const a = [...args];
   while (a.length < 8) a.push(null);
   a[8] = variante;
+  if (accroche) a[9] = { accroche }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
   return a;
 }
 
@@ -1489,7 +1491,7 @@ async function main() {
       }
     } else {
       const variante = varianteChoix(choix, d); // test comparatif de styles (« bleu » = dessin historique)
-      const jpeg = await dessiner(...argsAvecVariante(d.args, variante));
+      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche));
       const dim = dimensionsJpeg(jpeg);
       if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
       if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);

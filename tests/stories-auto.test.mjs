@@ -1146,6 +1146,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], null), [0, "t", null, null, null]);
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question"), [0, "t", null, null, null, null, null, null, "question"]);
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null, "chiffre"], "chiffre").slice(5), ["chiffre", null, null, "chiffre"]);
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question", "Qui paie la facture ?").slice(8), ["question", { accroche: "Qui paie la facture ?" }], "l'accroche de l'entrée est transmise au dessin");
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu", "x"), [0, "t", null, null, null], "style bleu : rien à transmettre");
   // le dessin des styles vit dans js/stories.js : mêmes règles que le cahier des charges (taille de texte, nombre de mots, zones de sécurité)
   const src = readFileSync(new URL("../js/stories.js", import.meta.url), "utf-8");
   for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'ESSENTIEL"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);
