@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-08T08:25:42.914Z",
+ "lastUpdated": "2026-10-08T08:31:34.126Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -105,20 +105,21 @@
    "motifs": [
     "lycéens",
     "mobilisation",
-    "retenir",
-    "mouvement"
+    "mouvement",
+    "manifestations"
    ],
    "medias": [
+    "Public Sénat",
     "Le Figaro",
     "Libération",
     "RFI",
     "BFMTV",
     "Sud Ouest",
     "Le Monde",
+    "France 24",
     "Le Progrès",
     "L'Est républicain",
     "Le Dauphiné libéré",
-    "Public Sénat",
     "Mediapart",
     "20 Minutes",
     "Dernières Nouvelles d'Alsace",
@@ -128,23 +129,29 @@
    ],
    "mediasDistincts": 13,
    "sources": [
+    "Public Sénat",
     "Le Figaro",
     "Libération",
-    "RFI",
+    "France Médias Monde",
     "BFMTV",
     "Sud Ouest",
     "Le Monde",
     "EBRA",
-    "Public Sénat",
     "Mediapart",
     "20 Minutes",
     "Nice-Matin",
     "Hugo Décrypte",
     "L'Express"
    ],
-   "nb": 82,
-   "derniere": "2026-10-08T08:03:24.000Z",
+   "nb": 106,
+   "derniere": "2026-10-08T08:29:23.000Z",
    "articles": [
+    {
+     "media": "Public Sénat",
+     "titre": "« Images troublantes », « Gilets Jeunes » : les blocus lycéens vus par la presse internationale",
+     "url": "https://www.publicsenat.fr/actualites/politique/images-troublantes-gilets-jeunes-les-blocus-lyceens-vus-par-la-presse-internationale",
+     "date": "2026-10-08T08:29:23.000Z"
+    },
     {
      "media": "Le Figaro",
      "titre": "Lycées, carburants, budget : Emmanuel Macron et Sébastien Lecornu cherchent les voies de l’apaisement",
@@ -183,6 +190,12 @@
      "date": "2026-10-08T03:29:42.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "En direct : la mobilisation lycéenne continue, 375 établissements \"totalement ou partiellement fermés\"",
+     "url": "https://www.france24.com/fr/france/20261008-en-direct-etudiants-lyceens-appeles-de-nouveau-mobiliser-jeudi-acte-iv-mouvement-france-sebastien-lecornu-syndicats-manifestations-parcoursup",
+     "date": "2026-10-08T02:45:19.000Z"
+    },
+    {
      "media": "Le Progrès",
      "titre": "Vénissieux. Manifestation interdite du 7-Octobre : sept personnes verbalisées, le rassemblement dispersé",
      "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/07/manifestation-interdite-du-7-octobre-sept-personnes-verbalisees-le-rassemblement-a-ete-disperse",
@@ -199,12 +212,6 @@
      "titre": "Avignon. « La police, c’est sur le terrain, pas dans des bureaux ! » : comme promis par Olivier Galzi, la Ville va fermer plusieurs postes de proximité",
      "url": "https://www.ledauphine.com/politique/2026/10/07/la-police-c-est-sur-le-terrain-pas-dans-des-bureaux-la-ville-va-fermer-plusieurs-postes-de-proximite",
      "date": "2026-10-07T18:51:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Lycéens, carburant, agriculteurs : Sébastien Lecornu appelle à l’apaisement sans annoncer de moyens supplémentaires",
-     "url": "https://www.publicsenat.fr/actualites/politique/lyceens-carburant-agriculteurs-sebastien-lecornu-appelle-a-lapaisement-sans-annoncer-de-moyens-supplementaires",
-     "date": "2026-10-07T18:04:00.000Z"
     },
     {
      "media": "Mediapart",
@@ -366,110 +373,125 @@
    ]
   },
   {
-   "id": "agriculture",
-   "titre": "Agriculture",
+   "id": "internationale",
+   "titre": "Internationale",
    "motifs": [
-    "agriculture",
-    "sécheresse",
-    "prêts"
+    "internationale"
    ],
    "medias": [
-    "Sud Ouest",
+    "Public Sénat",
     "BFMTV",
-    "Le Progrès",
+    "Sud Ouest",
     "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
+    "Le Progrès",
     "L'Est républicain",
-    "Public Sénat",
-    "20 Minutes",
+    "Le Figaro",
+    "Le Monde",
+    "Hugo Décrypte",
     "Nice-Matin",
-    "RFI"
+    "France 24"
    ],
-   "mediasDistincts": 7,
+   "mediasDistincts": 9,
    "sources": [
-    "Sud Ouest",
-    "BFMTV",
-    "EBRA",
     "Public Sénat",
-    "20 Minutes",
+    "BFMTV",
+    "Sud Ouest",
+    "EBRA",
+    "Le Figaro",
+    "Le Monde",
+    "Hugo Décrypte",
     "Nice-Matin",
-    "RFI"
+    "France 24"
    ],
-   "nb": 12,
-   "derniere": "2026-10-08T08:22:14.000Z",
+   "nb": 14,
+   "derniere": "2026-10-08T08:29:23.000Z",
    "articles": [
     {
-     "media": "Sud Ouest",
-     "titre": "Sécheresse : la ministre de l’Agriculture Annie Genevard annonce des prêts à taux zéro pour les exploitants touchés",
-     "url": "https://www.sudouest.fr/economie/agriculture/secheresse-la-ministre-de-l-agriculture-annie-genevard-annonce-des-prets-a-taux-zero-pour-les-exploitants-touches-30972331.php",
-     "date": "2026-10-08T08:22:14.000Z"
+     "media": "Public Sénat",
+     "titre": "« Images troublantes », « Gilets Jeunes » : les blocus lycéens vus par la presse internationale",
+     "url": "https://www.publicsenat.fr/actualites/politique/images-troublantes-gilets-jeunes-les-blocus-lyceens-vus-par-la-presse-internationale",
+     "date": "2026-10-08T08:29:23.000Z"
     },
     {
      "media": "BFMTV",
-     "titre": "Sécheresse: la ministre de l'Agriculture annonce des \"prêts à taux zéro\" pour les agriculteurs",
-     "url": "https://www.bfmtv.com/politique/video-secheresse-la-ministre-de-l-agriculture-annonce-des-prets-a-taux-zero-pour-les-agriculteurs_VN-202610080338.html",
-     "date": "2026-10-08T08:00:08.000Z",
+     "titre": "\"Tu es tombé sur la tête!\": Robert Ménard a parlé à Bruno Retailleau de ses propos \"saugrenus\" sur l'interdiction de LFI",
+     "url": "https://www.bfmtv.com/politique/tu-es-tombe-sur-la-tete-robert-menard-a-parle-a-bruno-retailleau-de-ses-propos-saugrenus-sur-l-interdiction-de-lfi_AV-202610080322.html",
+     "date": "2026-10-08T07:50:26.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Interdire LFI: \"Ça n'a pas de sens\", déclare Robert Ménard, maire DVD de Béziers, après les déclarations de Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/les-republicains/video-interdire-lfi-ca-n-a-pas-de-sens-declare-robert-menard-maire-dvd-de-beziers-apres-les-declarations-de-bruno-retailleau_VN-202610080264.html",
+     "date": "2026-10-08T06:54:09.000Z",
      "video": true
     },
     {
-     "media": "Le Progrès",
-     "titre": "Agriculture. Le gouvernement prévoit des prêts à taux zéro pour les exploitants touchés par la sécheresse",
-     "url": "https://www.leprogres.fr/economie/2026/10/08/le-gouvernement-prevoit-des-prets-a-taux-zero-pour-les-exploitants-touches-par-la-secheresse",
-     "date": "2026-10-08T07:55:00.000Z"
+     "media": "BFMTV",
+     "titre": "\"Moment de démocratie interne\": \"C'est de la foutaise\", juge Robert Ménard, maire DVD de Béziers",
+     "url": "https://www.bfmtv.com/politique/video-moment-de-democratie-interne-c-est-de-la-foutaise-juge-robert-menard-maire-dvd-de-beziers_VN-202610080259.html",
+     "date": "2026-10-08T06:47:06.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "\"Arrêtez! Reculez!\": les images de Bally Bagayoko s'interposant entre lycéens et forces de l'ordre à Paris font le tour de la presse internationale",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/arretez-reculez-les-images-de-bally-bagayoko-s-interposant-entre-lyceens-et-forces-de-l-ordre-a-paris-font-le-tour-de-la-presse-internationale_AN-202610080201.html",
+     "date": "2026-10-08T06:18:30.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Blocage des lycées en Gironde : les interdictions de rassemblements autour d’une liste secrète d’établissements fermés sont contestées",
+     "url": "https://www.sudouest.fr/politique/education/mouvement-des-lyceens-en-gironde-les-interdictions-concernant-une-liste-secrete-de-lycees-sont-contestees-30965180.php",
+     "date": "2026-10-08T04:30:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Agriculture. Le gouvernement prévoit des prêts à taux zéro pour les exploitants touchés par la sécheresse",
-     "url": "https://www.dna.fr/economie/2026/10/08/le-gouvernement-prevoit-des-prets-a-taux-zero-pour-les-exploitants-touches-par-la-secheresse",
-     "date": "2026-10-08T07:55:00.000Z"
+     "titre": "Région d’Obernai. Vote mal interprété, cadeau raté et scission d’un service à la communauté de communes",
+     "url": "https://www.dna.fr/politique/2026/10/08/vote-mal-interprete-cadeau-rate-et-scission-d-un-service-a-la-communaute-de-communes",
+     "date": "2026-10-08T04:00:00.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Agriculture. Le gouvernement prévoit des prêts à taux zéro pour les exploitants touchés par la sécheresse",
-     "url": "https://www.ledauphine.com/economie/2026/10/08/le-gouvernement-prevoit-des-prets-a-taux-zero-pour-les-exploitants-touches-par-la-secheresse",
-     "date": "2026-10-08T07:55:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Agriculture. Le gouvernement prévoit des prêts à taux zéro pour les exploitants touchés par la sécheresse",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/08/le-gouvernement-prevoit-des-prets-a-taux-zero-pour-les-exploitants-touches-par-la-secheresse",
-     "date": "2026-10-08T07:55:00.000Z"
+     "media": "Le Progrès",
+     "titre": "Vénissieux. Manifestation interdite du 7-Octobre : sept personnes verbalisées, le rassemblement dispersé",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/07/manifestation-interdite-du-7-octobre-sept-personnes-verbalisees-le-rassemblement-a-ete-disperse",
+     "date": "2026-10-07T20:16:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Lycées, carburants, électricité, agriculture... Les annonces de Sébastien Lecornu vous ont-elles rassuré ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/lycees-carburants-electricite-agriculture-les-annonces-de-sebastien-lecornu-vous-ont-elles-rassure",
-     "date": "2026-10-07T19:24:00.000Z"
+     "titre": "Nancy. Blocus des lycées : « Dans la grande majorité, les interpellés ne sont pas connus de la justice »",
+     "url": "https://www.estrepublicain.fr/education/2026/10/07/blocus-des-lycees-dans-la-grande-majorite-les-interpelles-ne-sont-pas-connus-de-la-justice",
+     "date": "2026-10-07T18:19:00.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Lycéens, carburant, agriculteurs : Sébastien Lecornu appelle à l’apaisement sans annoncer de moyens supplémentaires",
-     "url": "https://www.publicsenat.fr/actualites/politique/lyceens-carburant-agriculteurs-sebastien-lecornu-appelle-a-lapaisement-sans-annoncer-de-moyens-supplementaires",
-     "date": "2026-10-07T18:04:00.000Z"
+     "media": "Le Figaro",
+     "titre": "Guillaume Tabard : « Intervention de Sébastien Lecornu, gagner du temps ou avouer son impuissance ? »",
+     "url": "https://www.lefigaro.fr/politique/guillaume-tabard-intervention-de-sebastien-lecornu-gagner-du-temps-ou-avouer-son-impuissance-20261007",
+     "date": "2026-10-07T18:07:54.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Blocus des lycées, prix du gazole, dette, agriculteurs… Ce qu'il faut retenir de l’allocution de Sébastien Lecornu",
-     "url": "https://www.20minutes.fr/politique/4252316-20261007-blocus-lycees-gazole-budget-retenir-allocution-sebastien-lecornu?at_medium=display&at_campaign=149",
-     "date": "2026-10-07T17:46:29.000Z"
+     "media": "Le Monde",
+     "titre": "7-Octobre : la justice lève l’interdiction d’un rassemblement propalestinien à Paris, pas à Lyon",
+     "url": "https://www.lemonde.fr/societe/article/2026/10/07/7-octobre-la-justice-leve-l-interdiction-d-un-rassemblement-propalestinien-a-paris-pas-a-lyon_6789638_3224.html",
+     "date": "2026-10-07T16:44:27.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Lycées, agriculture, carburant… De quoi va parler Sébastien Lecornu ce mercredi soir dans son allocution ?",
-     "url": "https://www.20minutes.fr/politique/4252224-20261007-lycees-agriculture-carburant-quoi-va-parler-sebastien-lecornu-mercredi-soir-allocution?at_medium=display&at_campaign=149",
-     "date": "2026-10-07T14:55:10.000Z"
+     "media": "Hugo Décrypte",
+     "titre": "Les pompiers applaudis par les manifestants lors d’une intervention à Nation, à Paris.",
+     "url": "https://www.youtube.com/shorts/Rxg-73e02GM",
+     "date": "2026-10-07T10:00:17.000Z",
+     "video": true
     },
     {
      "media": "Nice-Matin",
-     "titre": "« Les élus locaux ont le pouvoir de sauver notre agriculture » : cet oléiculteur du Rouret salue l’unification du prix de l’eau agricole sur le territoire de Sophia Antipolis",
-     "url": "https://www.nicematin.com/economie/agriculture/les-elus-locaux-ont-le-pouvoir-de-sauver-notre-agriculture-cet-oleiculteur-du-rouret-salue-l-unification-du-prix-de-l-eau-agricole-sur-le-territoire-de-sophia-antipolis-10735305",
-     "date": "2026-10-07T07:00:08.000Z"
+     "titre": "Les données personnelles de plusieurs ministres, dont le 06 de Sébastien Lecornu, ont fuité sur Internet, la justice saisie",
+     "url": "https://www.nicematin.com/societe/les-donnees-personnelles-de-plusieurs-ministres-dont-le-06-de-sebastien-lecornu-ont-fuite-sur-internet-la-justice-saisie-10736372",
+     "date": "2026-10-07T10:00:07.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "France: près de 100 000 personnes ont un accès réduit à l'accès à l'eau potable en raison de la sécheresse",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-pr%C3%A8s-de-100-000-personnes-ont-un-acc%C3%A8s-r%C3%A9duit-%C3%A0-l-acc%C3%A8s-%C3%A0-l-eau-potable-en-raison-de-la-s%C3%A9cheresse",
-     "date": "2026-10-06T23:08:58.000Z"
+     "media": "France 24",
+     "titre": "Sophie Adenot a quitté la Station spatiale internationale, direction la Terre",
+     "url": "https://www.france24.com/fr/france/20261007-sophie-adenot-a-quitt%C3%A9-l-iss-direction-la-terre",
+     "date": "2026-10-07T06:20:50.000Z"
     }
    ]
   }
@@ -537,8 +559,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Agriculture",
-    "origine": "dossier"
+    "titre": "Gouvernement : l'essentiel du moment",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -619,6 +641,135 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 2,
+   "sources": [
+    "EBRA",
+    "BFMTV"
+   ],
+   "derniere": "2026-10-08T08:27:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. « Défier Édouard Philippe » : Jean-Luc Mélenchon en meeting au Havre le 5 décembre",
+     "url": "https://www.leprogres.fr/elections/2026/10/08/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre",
+     "media": "Le Progrès",
+     "date": "2026-10-08T08:27:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Défier Édouard Philippe » : Jean-Luc Mélenchon en meeting au Havre le 5 décembre",
+     "url": "https://www.dna.fr/elections/2026/10/08/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-08T08:27:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Défier Édouard Philippe » : Jean-Luc Mélenchon en meeting au Havre le 5 décembre",
+     "url": "https://www.ledauphine.com/elections/2026/10/08/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-08T08:27:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Défier Édouard Philippe » : Jean-Luc Mélenchon en meeting au Havre le 5 décembre",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/08/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre",
+     "media": "L'Est républicain",
+     "date": "2026-10-08T08:27:00.000Z"
+    },
+    {
+     "titre": "\"Défier Édouard Philippe\": Jean-Luc Mélenchon en meeting au Havre le 5 décembre en vue de la présidentielle 2027",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre-en-vue-de-la-presidentielle-2027_AD-202610080335.html",
+     "media": "BFMTV",
+     "date": "2026-10-08T07:59:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : actualité sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %, Mélenchon 14–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ],
+   "date": {
+    "iso": "2026-12-05",
+    "jour": 5,
+    "mois": "décembre"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-06T17:08:56.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
+     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
+     "media": "RFI",
+     "date": "2026-10-06T10:22:12.000Z"
+    },
+    {
+     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
+     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-06T17:08:56.000Z"
+    },
+    {
+     "titre": "La France a testé un nouveau missile nucléaire sans charge depuis un sous-marin",
+     "url": "https://www.france24.com/fr/france/20261006-la-france-a-test%C3%A9-un-nouveau-missile-nucl%C3%A9aire-sans-charge-depuis-un-sous-marin",
+     "media": "France 24",
+     "date": "2026-10-06T09:35:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : essai lié à la dissuasion nucléaire",
+    "origine": "regles"
+   }
   },
   {
    "medias": 2,
@@ -867,40 +1018,53 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "RFI"
+    "Public Sénat",
+    "France 24"
    ],
-   "derniere": "2026-10-06T17:08:56.000Z",
+   "derniere": "2026-10-06T17:31:58.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "budget",
+    "vignette": "budget"
    },
    "articles": [
     {
-     "titre": "La France réussit un tir de missile nucléaire sous-marin au large de la Bretagne, sous les yeux de Macron",
-     "url": "https://www.20minutes.fr/politique/4251954-20261006-france-reussit-tir-missile-nucleaire-sous-marin-large-bretagne-sous-yeux-macron?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-06T17:08:56.000Z"
+     "titre": "140 milliards d’euros d’économies d’ici 2032 : « l’effort radical » proposé par Marine Le Pen pour « redresser » les finances publiques",
+     "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f",
+     "media": "Public Sénat",
+     "date": "2026-10-06T17:31:58.000Z"
     },
     {
-     "titre": "France: Emmanuel Macron a assisté à l’essai d’un nouveau missile nucléaire M51 tiré depuis un sous-marin",
-     "url": "https://www.rfi.fr/fr/france/20261006-france-emmanuel-macron-a-assist%C3%A9-%C3%A0-l-essai-d-un-nouveau-missile-nucl%C3%A9aire-m51-tir%C3%A9-depuis-un-sous-marin",
-     "media": "RFI",
-     "date": "2026-10-06T10:22:12.000Z"
+     "titre": "Présidentielle 2027 : Marine Le Pen promet \"140 milliards d'euros nets d'économies\" d'ici 5 ans",
+     "url": "https://www.france24.com/fr/france/20261006-pr%C3%A9sidentielle-2027-marine-le-pen-promet-140-milliards-d-euros-nets-d-%C3%A9conomies-d-ici-5-ans",
+     "media": "France 24",
+     "date": "2026-10-06T09:29:23.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Dissuasion nucléaire : essai lié à la dissuasion nucléaire",
+    "titre": "Marine Le Pen (RN) : actualité sur les finances publiques",
     "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "140",
+    "unite": "milliards d’euros"
    }
   },
   {
@@ -1061,35 +1225,56 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
+    "Public Sénat"
    ],
-   "derniere": "2026-10-07T16:49:00.000Z",
+   "derniere": "2026-10-08T08:29:23.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "international",
-    "vignette": "international"
+    "theme": "politique",
+    "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Diplomatie. À Athènes, Marco Rubio appelle l’Europe à sortir de sa « torpeur »",
-     "url": "https://www.dna.fr/politique/2026/10/07/a-athenes-marco-rubio-appelle-l-europe-a-sortir-de-sa-torpeur",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-07T16:49:00.000Z"
-    },
-    {
-     "titre": "Diplomatie. À Athènes, Marco Rubio appelle l’Europe à sortir de sa « torpeur »",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/a-athenes-marco-rubio-appelle-l-europe-a-sortir-de-sa-torpeur",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T16:49:00.000Z"
+     "titre": "« Images troublantes », « Gilets Jeunes » : les blocus lycéens vus par la presse internationale",
+     "url": "https://www.publicsenat.fr/actualites/politique/images-troublantes-gilets-jeunes-les-blocus-lyceens-vus-par-la-presse-internationale",
+     "media": "Public Sénat",
+     "date": "2026-10-08T08:29:23.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Diplomatie : affaire internationale",
-    "origine": "regles"
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T08:28:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L'usage des grenades assourdissantes projetées par lanceur suspendu provisoirement",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-l-usage-des-grenades-assourdissantes-projet%C3%A9es-par-lanceur-suspendu-provisoirement",
+     "media": "France 24",
+     "date": "2026-10-08T08:28:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1323,59 +1508,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "\"Défier Édouard Philippe\": Jean-Luc Mélenchon en meeting au Havre le 5 décembre en vue de la présidentielle 2027",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/defier-edouard-philippe-jean-luc-melenchon-en-meeting-au-havre-le-5-decembre-en-vue-de-la-presidentielle-2027_AD-202610080335.html",
-     "media": "BFMTV",
-     "date": "2026-10-08T07:59:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : actualité sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %, Mélenchon 14–17 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-08T07:59:31.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Jean-Luc Mélenchon",
       "photo": "photos/personnalites/jean-luc-melenchon.jpg",
       "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
@@ -1477,9 +1609,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Bruno Retailleau (LR) : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Internationale",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -1783,8 +1914,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Bruno Retailleau (LR) : prise de position sur la vie locale",
-    "origine": "regles"
+    "titre": "Internationale",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -1900,9 +2031,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Vie locale : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Internationale",
+    "origine": "dossier"
    }
   },
   {
@@ -1953,8 +2083,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
+    "titre": "Internationale",
+    "origine": "dossier"
    }
   },
   {
@@ -2571,8 +2701,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
+    "titre": "Internationale",
+    "origine": "dossier"
    }
   },
   {
@@ -2867,8 +2997,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Région : vote sur la vie locale",
-    "origine": "regles"
+    "titre": "Internationale",
+    "origine": "dossier"
    }
   },
   {
@@ -3007,6 +3137,32 @@
     "titre": "RN : l'essentiel du moment",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-08T02:45:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "En direct : la mobilisation lycéenne continue, 375 établissements \"totalement ou partiellement fermés\"",
+     "url": "https://www.france24.com/fr/france/20261008-en-direct-etudiants-lyceens-appeles-de-nouveau-mobiliser-jeudi-acte-iv-mouvement-france-sebastien-lecornu-syndicats-manifestations-parcoursup",
+     "media": "France 24",
+     "date": "2026-10-08T02:45:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
    }
   },
   {
@@ -4344,9 +4500,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
+    "titre": "Internationale",
+    "origine": "dossier"
    }
   },
   {
@@ -4479,114 +4634,6 @@
     "titre": "Finances publiques : l'essentiel du moment",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-07T18:08:28.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Carburants : Sébastien Lecornu annonce que 10 millions de barils de gazole seront mis à la disposition des distributeurs et espère une baisse des prix comprise « entre 12 à 18 centimes » le litre à la pompe",
-     "url": "https://www.lemonde.fr/economie/article/2026/10/07/carburants-sebastien-lecornu-annonce-que-dix-millions-de-barils-de-gazole-seront-mis-a-la-disposition-des-distributeurs-et-espere-une-baisse-des-prix-comprise-entre-12-a-18-centimes-le-litre-a-la-pompe_6789646_3234.html",
-     "media": "Le Monde",
-     "date": "2026-10-07T18:08:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : annonces sur les finances publiques",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-07T18:08:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Tomblaine. Une micro-forêt participative verra le jour au Faubourg Sandor-Kiss",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/07/une-micro-foret-participative-verra-le-jour-au-faubourg-sandor-kiss",
-     "media": "L'Est républicain",
-     "date": "2026-10-07T18:08:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Tomblaine : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Figaro"
-   ],
-   "derniere": "2026-10-07T18:07:54.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Guillaume Tabard : « Intervention de Sébastien Lecornu, gagner du temps ou avouer son impuissance ? »",
-     "url": "https://www.lefigaro.fr/politique/guillaume-tabard-intervention-de-sebastien-lecornu-gagner-du-temps-ou-avouer-son-impuissance-20261007",
-     "media": "Le Figaro",
-     "date": "2026-10-07T18:07:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : l'essentiel du moment",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   }
  ]
 }
