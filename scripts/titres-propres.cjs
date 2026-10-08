@@ -489,4 +489,171 @@ function dateSujet(sujet, maintenant = new Date()) {
   return e ? { iso: e.iso, jour: e.jour, mois: e.mois } : null;
 }
 
-module.exports = { estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
+// ─────────────────────────────────────────────────────────────────────────────
+// Accroche : phrase simple, 6 à 10 mots, « sujet + enjeu », compréhensible en 2 secondes. Champ d'AFFICHAGE : n'entre jamais dans les registres anti-doublon.
+// ─────────────────────────────────────────────────────────────────────────────
+/** Nombre de mots d'une phrase (« l'État » = 1 mot, « tout-petit » = 1 mot). */
+const nbMots = (t) => (String(t || "").match(/[\p{L}0-9]+(?:['’-][\p{L}0-9]+)*/gu) || []).length;
+/** Enjeu en une question, par thème (clé = THEMES_TITRES[].S). Aucun nom de personne, aucune accusation, aucune procédure. */
+const ENJEUX = {
+  "Dissuasion nucléaire": "ce qu'il faut savoir sur la dissuasion",
+  "Lycées": "la mobilisation, que veulent les élèves ?",
+  "Finances publiques": "quels enjeux pour les finances de l'État ?",
+  "Présidentielle 2027": "où en est la course à l'Élysée ?",
+  "Conseil municipal": "quelles décisions pour la commune ?",
+  "Intelligence artificielle": "quels usages et quelles règles ?",
+  "Environnement": "quels enjeux pour le climat et l'eau ?",
+  "Santé": "quels enjeux pour la santé publique ?",
+  "Numérique": "quels enjeux pour nos données ?",
+  "International": "quels enjeux pour la France ?",
+  "Sécurité": "quels enjeux pour l'ordre public ?",
+  "Logement et accueil": "quels enjeux pour le logement ?",
+  "Aménagement": "quel projet pour le territoire ?",
+  "Collectivités locales": "ce que change l'organisation locale",
+  "Éducation et jeunesse": "quels enjeux pour les jeunes ?",
+  "Social": "quels enjeux pour l'emploi et le social ?",
+  "Sénat": "ce qui se joue au Sénat",
+  "Assemblée nationale": "ce qui se joue à l'Assemblée",
+  "Gouvernement": "quelles décisions pour le pays ?",
+  "Vie locale": "ce qui change près de chez vous",
+};
+/** Phrase d'enjeu quand l'action est reconnue dans le titre (une action n'est dite que si son mot y est). */
+const ENJEU_ACTION = {
+  vote: "un vote, que change-t-il ?",
+  depot: "une proposition de loi, que prévoit-elle ?",
+  appel: "un appel lancé, quel est l'enjeu ?",
+  annonce: "de nouvelles annonces, que retenir ?",
+  essai: "un essai, que faut-il savoir ?",
+};
+
+/**
+ * Accroche d'un sujet : « Lycées : des blocages, que veulent les élèves ? ». Dérivée du thème (THEMES_TITRES) et de l'action reconnue (ACTIONS) ;
+ * ne nomme jamais une personne ni un parti, n'affirme ni accusation ni procédure, ne recopie jamais un titre de presse.
+ * Repli : le titrePropre actuel (sujet.titrePropre.titre, sinon titreParRegles), ou null s'il n'y en a pas.
+ */
+function accroche(sujet, donnees = {}) {
+  const articles = sujet?.articles || [];
+  const repli = sujet?.titrePropre?.titre || titreParRegles(sujet, donnees)?.titre || null;
+  if (!articles.length) return repli;
+  if (sujet?.titrePropre?.generique === true) return repli;
+  // Prudence : accusation, procédure, violence, mineur → on garde le titre prudent déjà rédigé
+  if (articles.some((a) => JUDICIAIRE_TITRES.test(a.titre || "") || PROCEDURE.test(a.titre || ""))) return repli;
+  const premier = articles[0].titre || "", p = plat(nettoyer(premier));
+  const tous = plat(articles.slice(0, 6).map((a) => nettoyer(a.titre)).join(" | ").replace(/\bIA\b/g, "intelligence artificielle"));
+  const theme = themeDe(articles, p, tous, premier);
+  if (!theme || theme.generique || theme.S === "Justice" || !ENJEUX[theme.S]) return repli;
+  const action = actionDe(p);
+  let enjeu = ENJEUX[theme.S];
+  if (theme.S === "Lycées") enjeu = /\bblocus|\bblocage/.test(tous) ? "des blocages, que veulent les élèves ?" : "la mobilisation, que veulent les élèves ?";
+  else if (action && ENJEU_ACTION[action.cle]) enjeu = ENJEU_ACTION[action.cle];
+  const phrase = `${theme.S} : ${enjeu}`;
+  const n = nbMots(phrase);
+  if (n < 6 || n > 10 || phrase.length > 80) return repli;
+  if (copieUnTitre(phrase, articles) || /proc[ée]dure|accus|mis en cause|poursuiv|condamn/i.test(phrase)) return repli;
+  return phrase;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Intitulés de textes de loi, sans jargon.
+// ─────────────────────────────────────────────────────────────────────────────
+/** Thèmes d'un intitulé de loi, du plus précis au plus large (premier qui correspond). */
+const THEMES_LOIS = [
+  [/globe|fiscal|impot|taxe|imposition|douane|\btva\b/, "Fiscalité"],
+  [/budget|financ|securite sociale/, "Finances publiques"],
+  [/sante|medic|hopita|soins|maladie|handicap|dependance|bioethique|fin de vie|aide a mourir/, "Santé"],
+  [/justice|penal|judiciaire|magistrat|tribunal|prison|detention|casier/, "Justice"],
+  [/violences? sexuelles|sexistes/, "Violences sexuelles"],
+  [/ecole|enseignement|education|etudiant|universit|scolaire|jeunesse/, "Éducation"],
+  [/environnement|climat|energie|nucleaire|\beau\b|biodiversite|dechets|ecolog|renouvelable|pollution/, "Environnement"],
+  [/agricult|agricole|elevage|paysan|alimentation|peche|\bforets?\b/, "Agriculture"],
+  [/defense|armee|militaire|\barmes?\b/, "Défense"],
+  [/numerique|donnees|internet|intelligence artificielle|cyber|reseaux sociaux|audiovisuel|presse|\bmedias?\b/, "Numérique"],
+  [/police|gendarm|securite|terroris|ordre public|delinquance|violences?/, "Sécurité"],
+  [/logement|loyer|habitat|urbanisme|construction/, "Logement"],
+  [/travail|emploi|chomage|retraite|salari|syndicat|entreprise|apprentissage/, "Travail"],
+  [/immigration|etranger|asile|nationalite|titre de sejour/, "Immigration"],
+  [/collectivit|commune|departement|region|outre.mer|territoire|decentralisation|elus? locaux/, "Collectivités"],
+  [/transport|ferroviaire|route|aerien|mobilite|\bsncf\b/, "Transports"],
+  [/election|electoral|referendum|constitution|institution|parlement/, "Institutions"],
+  [/famille|enfant|parent|egalite|femmes/, "Famille et société"],
+  [/culture|patrimoine|sport|cinema|langue/, "Culture et sport"],
+  [/accord|convention|traite|cooperation|ratification|approbation|international|etat membre|union europeenne/, "International"],
+];
+/** Mots à ne pas laisser en fin de phrase après une coupe. */
+const FIN_INTERDITE = new Set(["de", "du", "des", "la", "le", "les", "l", "d", "et", "ou", "en", "au", "aux", "à", "a", "pour", "par", "sur", "dans", "entre", "avec", "sans", "un", "une", "qui", "que", "relatif", "relative", "portant", "contre", "lutte", "vers", "selon", "afin"]);
+const ART = "(?:l['’]|la\\s+|le\\s+|les\\s+|une?\\s+)?";
+
+/**
+ * Simplifie un intitulé officiel : retire « Projet de loi autorisant l'approbation de… », « relatif à… », « portant sur… », « adopté par le Sénat »…
+ * Rend « Thème : objet » (9 mots au plus, thème compris), ou null si rien de clair n'en ressort (l'appelant garde alors l'intitulé d'origine).
+ */
+function simplifierTexteLoi(titre) {
+  let t = String(titre || "").replace(/\s+/g, " ").trim().replace(/\s*\.\s*$/, "");
+  if (!t) return null;
+  if (/^questions?\s+(?:orales?\s+)?au\s+gouvernement/i.test(t)) return null;
+  const bud = /^(?:projet de loi de (finances|financement de la sécurité sociale)( rectificative)?)\s+pour\s+(\d{4})\b/i.exec(t);
+  if (bud) return `${/finances/i.test(bud[1]) ? "Finances publiques" : "Sécurité sociale"} : budget${bud[2] ? " rectificatif" : ""} ${bud[3]}`;
+  // Compléments de procédure en fin d'intitulé
+  t = t.replace(/\s*\([^()]*(?:lecture|adopt|nouvelle|commission|procédure accélérée|CMP|urgence)[^()]*\)\s*$/i, "")
+    .replace(/[,;]?\s*(?:adopté|adoptée|modifié|modifiée|rejeté|rejetée|transmis|transmise)\s+(?:par|en)\s+(?:le|la|l['’])\s*[\p{L}' -]{2,40}$/iu, "")
+    .replace(/[,;]?\s*après\s+(?:engagement\s+de\s+)?(?:la\s+)?procédure\s+accélérée\s*$/i, "")
+    .replace(/\s*[-–—]\s*(?:première|deuxième|nouvelle|lecture définitive|CMP).*$/i, "").trim();
+  // Débuts de point d'ordre du jour
+  t = t.replace(/^(?:suite\s+de\s+la\s+|reprise\s+de\s+la\s+)?(?:discussion|lecture|vote\s+solennel|explications?\s+de\s+vote)\s+(?:générale\s+|définitive\s+)?(?:(?:du|de la|de l['’]|des|sur)\s+)(?:l['’]ensemble\s+(?:du|de la)\s+)?/i, "")
+    .replace(/^(?:nouvelle|deuxième|troisième|première)\s+lecture\s+(?:du|de la)\s+/i, "")
+    .replace(/^(?:l['’]ensemble\s+)?(?:du|de la)\s+(?=(?:projet|proposition)\s+de\s+loi)/i, "");
+  // Nature du texte
+  t = t.replace(/^(?:projet|proposition)\s+de\s+(?:loi|résolution)(?:\s+(?:organique|constitutionnelle|de finances(?: rectificative)?|de financement de la sécurité sociale))?\s*/i, "")
+    .replace(/^loi\s+(?:organique\s+)?/i, "");
+  // Forme fréquente des accords : « accord multilatéral entre autorités compétentes portant sur l'échange des informations GloBE »
+  const echange = /(?:accord|convention)[^,;]*?(?:portant sur|relatif à|concernant)\s+l['’]échange\s+(?:automatique\s+)?(?:des|de|d['’])\s*(?:informations?|renseignements?)\s*(.*)$/i.exec(t);
+  let objet;
+  if (echange) {
+    const sigle = echange[1].replace(/^\s*(?:relatives?\s+(?:à|aux?)\s+)?(?:de\s+|du\s+|des\s+)?/i, "").replace(/[()]/g, "").trim();
+    objet = `échange d'informations entre pays${sigle && nbMots(sigle) <= 3 ? ` (accord ${sigle})` : ""}`;
+  } else {
+    objet = t
+      .replace(new RegExp(`^(?:autorisant|portant|relatifs?|relatives?|visant|tendant|habilitant|instituant|créant|garantissant|renforçant)\\s+(?:l['’]approbation de\\s+|la ratification de\\s+|sur\\s+|à\\s+|aux?\\s+)?${ART}`, "i"), "")
+      .replace(new RegExp(`^(?:pour|en faveur de|concernant|sur)\\s+${ART}`, "i"), "")
+      .replace(/\b(?:entre autorités compétentes|multilatérale?s?)\b/gi, "").replace(/\s+/g, " ")
+      .replace(/\s+(?:portant sur|portant|relatif à|relative à|tendant à|visant à)\s+/gi, " : ")
+      .replace(/^[\s:,;-]+|[\s:,;-]+$/g, "");
+  }
+  if (!objet || nbMots(objet) < 1) return null;
+  const txt = plat(String(titre));
+  const lo = THEMES_LOIS.find(([re]) => re.test(txt));
+  const theme = lo ? lo[1] : (THEMES_TITRES.find((x) => !x.generique && !x.ok && x.re.test(txt)) || {}).S || null;
+  objet = objet.charAt(0).toLowerCase() + objet.slice(1);
+  // Formules creuses, verbe à l'infinitif en tête (« renforcer la protection de… ») et article d'ouverture : inutiles dans un titre
+  objet = objet.replace(/^(?:apportant\s+)?(?:une\s+)?réponse\s+(?:intégrale\s+|globale\s+)?(?:au|à)\s+(?:phénomène|problème)\s+(?:de la\s+|du\s+|des\s+|de l['’]|de\s+)?/i, "")
+    .replace(/^(?:apportant|adapter|moderniser|renforcer|améliorer|garantir|assurer|permettre|instaurer|créer|encadrer|faciliter|simplifier)\s+/i, "")
+    .replace(/^(?:l['’]|la\s+|le\s+|les\s+|une?\s+)/i, "");
+  if (!objet) return null;
+  // Pas de doublon « Fiscalité : fiscalité … » : si l'objet commence par le thème, le thème n'est pas répété
+  const tete = theme && !plat(objet).startsWith(plat(theme)) ? `${theme} : ` : "";
+  const budget = 9 - nbMots(tete);
+  if (nbMots(objet) > budget) {
+    // Trop long : on part de l'idée centrale (« lutte contre… »), puis on coupe à la plus longue proposition qui tient (avant « et », virgule…)
+    const centre = /\b(?:lutte contre|protection d[eu]s?|prévention d[eu]s?)\b/i.exec(objet);
+    if (centre && centre.index > 0) objet = objet.slice(centre.index);
+    if (nbMots(objet) > budget) {
+      const coupes = [...objet.matchAll(/,?\s+(?:et|ainsi que)\s+|,\s+/gi)].map((m) => objet.slice(0, m.index)).filter((c) => nbMots(c) >= 2 && nbMots(c) <= budget);
+      if (coupes.length) objet = coupes[coupes.length - 1];
+    }
+  }
+  if (nbMots(objet) > budget) {
+    // Coupe aux mots entiers, sans finir sur un mot de liaison ni dans une parenthèse ouverte
+    const mots = []; let n = 0;
+    for (const m of objet.split(" ")) { const k = nbMots(m); if (n + k > budget) break; mots.push(m); n += k; }
+    while (mots.length && (FIN_INTERDITE.has(plat(mots[mots.length - 1]).replace(/^.*['’]/, "")) || /[,;:]$/.test(mots[mots.length - 1]))) mots.pop();
+    let r = mots.join(" ");
+    if ((r.match(/\(/g) || []).length > (r.match(/\)/g) || []).length) r = r.replace(/\s*\([^)]*$/, "");
+    objet = r;
+  }
+  objet = objet.replace(/[\s,;:]+$/, "");
+  if (nbMots(objet) < 2) return null;
+  const sortie = (tete + objet).replace(/\s+/g, " ").trim();
+  return sortie.charAt(0).toUpperCase() + sortie.slice(1);
+}
+
+module.exports = { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };

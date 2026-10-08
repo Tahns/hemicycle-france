@@ -37,6 +37,7 @@ const path = require("path");
 const crypto = require("crypto");
 const SA = require("./stories-auto.cjs");
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage : mention obligatoire (loi du 19 juillet 1977, art. 2)
+const { simplifierTexteLoi } = require("./titres-propres.cjs");
 const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lireConfig, destination, fluxAtom, ficheLoi, decomposerTitreVote } = SA;
 
 const RACINE = path.resolve(__dirname, "..");
@@ -237,20 +238,23 @@ function choisirAujourdhui({ agenda, jour, now }) {
     if (!objet) continue;
     const k = p.type === "qag" ? "qag" : p.type === "vote" ? "vote" : "texte";
     if (k !== "qag" && motExclu(objet, OFF)) continue; // mieux vaut manquer un point qu'en publier un à tort
-    const t = k === "qag" ? "Questions au Gouvernement" : coupe(majuscule(objet), 230);
-    if (vus.has(k + t)) continue;
-    vus.add(k + t);
-    points.push({ k, t });
+    const brut = k === "qag" ? "Questions au Gouvernement" : coupe(majuscule(objet), 230);
+    if (vus.has(k + brut)) continue;
+    vus.add(k + brut);
+    // Affichage : intitulé sans jargon (simplifierTexteLoi) ; `brut` garde l'intitulé officiel pour sujets, alt et anti-doublon
+    const t = k === "qag" ? brut : (simplifierTexteLoi(brut) || brut);
+    points.push({ k, t, brut });
   }
   if (!points.some((p) => p.k !== "qag")) return { refus: "aucun point à présenter (tous écartés ou questions au Gouvernement seules)" };
   const ordre = { qag: 0, vote: 1, texte: 2 };
   points.sort((a, b) => ordre[a.k] - ordre[b.k]);
   const sourceUrl = /^https:\/\//.test(agenda.sourceUrl || "") ? agenda.sourceUrl : "https://www2.assemblee-nationale.fr/agendas/les-agendas";
   const jourTxt = dateLongue(jour);
-  const sujets = points.filter((p) => p.k !== "qag").map((p) => p.t);
+  const sujets = points.filter((p) => p.k !== "qag").map((p) => p.brut);
+  const nTextes = sujets.length;
   return { contenu: {
     type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer." } },
-    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", sujets, sources: [sourceUrl], alt: `Story Hémicycle France : ordre du jour de la séance publique de l'Assemblée nationale du ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote solennel : " : "") + p.t).join(" ; ")}. Source : Assemblée nationale.` },
+    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `À l'Assemblée aujourd'hui : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : ordre du jour de la séance publique de l'Assemblée nationale du ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote solennel : " : "") + p.brut).join(" ; ")}. Source : Assemblée nationale.` },
   } };
 }
 
@@ -502,7 +506,7 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
     const total = 5;
     const base = { total, accroche: undefined };
     const specs = [
-      { ...base, n: 1, couverture: true, kicker: "Une loi expliquée", titre: sp.titre, corps: [{ p: `Texte ${verbe} · ${sp.chambre} · ${sp.date}`, couleur: "ciel", taille: 32, poids: 700 }, { li: contexte }], source: "Source : données officielles de l'Assemblée nationale et du Sénat." },
+      { ...base, n: 1, couverture: true, kicker: "Une loi expliquée", titre: f.accroche || sp.titre, corps: [{ p: `Texte ${verbe} · ${sp.chambre} · ${sp.date}`, couleur: "ciel", taille: 32, poids: 700 }, { li: contexte }], source: "Source : données officielles de l'Assemblée nationale et du Sénat." },
       { ...base, n: 2, kicker: "Ce que dit le texte", titre: "L'intitulé officiel du texte", corps: [{ carte: `« ${sp.titre} »` }, { p: "Hémicycle France ne résume pas le contenu des articles : le texte intégral est consultable sur le site officiel.", couleur: "ciel", taille: 30 }, ...(v.l?.dossierTitre ? [{ p: `Dossier : ${coupe(v.l.dossierTitre, 200)}`, taille: 32, poids: 600 }] : [])], source: `Source : ${an ? "Assemblée nationale (assemblee-nationale.fr)" : "Sénat (senat.fr)"}, intitulé officiel.` },
       { ...base, n: 3, kicker: "Le résultat du vote", titre: `Vote sur l'ensemble · ${sp.date}`, corps: [{ gros: sp.verdict === "adopte" ? "Adopté" : "Rejeté" }, { cases: [["Pour", sp.pour], ["Contre", sp.contre], ["Abstentions", sp.abst]] }], source: sp.sourceTxt },
       { ...base, n: 4, kicker: "Ce qui suit", titre: "Et maintenant ?", corps: [{ li: etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }) }], source: "Règles : Constitution du 4 octobre 1958 (article 45) ; vie-publique.fr." },
