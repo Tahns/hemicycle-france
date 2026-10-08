@@ -162,7 +162,13 @@ function dessinePastilles(ctx, bloc, x, y){
 }
 
 /* ----- Modèle A : « À la une » ----- */
-async function dessineUne(ctx, s){
+async function dessineStyle(ctx, s, style){ // styles du test comparatif (une-photo, question, chiffre) : voir storyStyleDessiner dans js/stories.js
+  const d = await storySpecSujet(s);
+  if(!d || !storyStyleDessiner(ctx, style, d)) return null;
+  return { nom:`actualite-${slugDep(d.accroche).slice(0, 40)}` };
+}
+async function dessineUne(ctx, s, style){
+  if(style && style !== "bleu" && !s.sensible){ const r = await dessineStyle(ctx, s, style); if(r) return r; } // sujet sensible ou sans titre à nous : toujours le style bleu
   const { L, marge } = STORY, larg = L - 2 * marge, a0 = s.articles[0];
   const medias = [...new Set(s.articles.map(a=> a.media))].filter(Boolean), n = medias.length;
   const propre = norm(s.titrePropre?.titre);
@@ -330,7 +336,7 @@ async function dessineDirect(ctx, s){
 
 /* ----- Point d'entrée et aiguillage ----- */
 STORY_PLUS.actualite = async (ctx, info)=>{
-  const [ind, force] = String(info ?? "").split(":");
+  const [ind, force, style] = String(info ?? "").split(":"); // « indice:modèle:style » (style : bleu, une-photo, question ou chiffre)
   const s = ACTUALITES?.sujets?.[Number(ind)];
   if(!s?.articles?.length) return null;
   const nbPers = (s.illustration?.personnes || []).length;
@@ -343,9 +349,9 @@ STORY_PLUS.actualite = async (ctx, info)=>{
       : "une";
   }
   if(["facea", "chiffre", "date"].includes(modele) && STORY_PLUS[modele]){
-    const r = await STORY_PLUS[modele](ctx, String(Number(ind)));
+    const r = await STORY_PLUS[modele](ctx, String(Number(ind)) + (style ? ":" + style : ""));
     if(r) return r;
   }
-  return modele === "direct" ? dessineDirect(ctx, s) : dessineUne(ctx, s);
+  return modele === "direct" ? dessineDirect(ctx, s) : dessineUne(ctx, s, modele === "facea" ? "bleu" : style); // « en direct » et « face à face » (portraits) gardent leur dessin
 };
 })();

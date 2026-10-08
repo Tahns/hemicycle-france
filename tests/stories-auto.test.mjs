@@ -1121,4 +1121,38 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(!rap([post, { id: "5".repeat(12), type: "story", cree: "2026-10-10T10:00:00Z", titre: "Le RN tient son congrès", titrePropre: "Congrès du RN", sources: [] }]).refus, "story de presse de plus de 72 h : rappel possible");
 }
 
+// Test comparatif des styles de story : attribution déterministe (hash de l'id % 4), « bleu » garde sa part, variante absente pour les contenus à dessin unique
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  assert.deepStrictEqual(A.VARIANTES, ["bleu", "une-photo", "question", "chiffre"]);
+  assert.strictEqual(A.varianteDe("abc123"), A.varianteDe("abc123"), "déterministe");
+  const ids = Array.from({ length: 400 }, (_, i) => `id-${i}`);
+  const parts = Object.fromEntries(A.VARIANTES.map((v) => [v, ids.filter((i) => A.varianteDe(i) === v).length]));
+  for (const v of A.VARIANTES) assert.ok(parts[v] > 60 && parts[v] < 140, `part du style ${v} : ${parts[v]} sur 400 (environ un quart)`);
+  assert.ok(ids.every((i) => A.VARIANTES.includes(A.varianteDe(i))));
+  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "une-photo", "question"]) !== "chiffre"), "liste réduite : jamais le style exclu");
+  const sj = sujet("Le gouvernement présente son projet de budget pour 2027", 4);
+  const c = choix([sj]);
+  const d = AUTO_decrire(c);
+  assert.strictEqual(A.varianteChoix(c, d), A.varianteDe(c.id), "un sujet avec titre à nous reçoit sa variante");
+  assert.strictEqual(A.varianteChoix({ ...c, sensible: { niveau: 1 } }, d), null, "sujet sensible : dessin unique");
+  assert.strictEqual(A.varianteChoix({ ...c, modele: "direct" }, d), null, "direct : dessin unique");
+  assert.strictEqual(A.varianteChoix({ ...c, modele: "facea" }, d), null, "face à face (portraits) : dessin unique");
+  assert.strictEqual(A.varianteChoix({ ...c, repli: true }, d), null, "sans titre à nous : dessin unique");
+  assert.strictEqual(A.varianteChoix({ ...c, post: {} }, d), null, "post : dessin unique");
+  assert.strictEqual(A.varianteChoix({ ...c, bref: {} }, { ...d, type: "en-bref" }), null, "en bref : dessin unique");
+  // arguments de dessiner() : inchangés pour « bleu », complétés (9e argument) sinon
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu"), [0, "t", null, null, null]);
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], null), [0, "t", null, null, null]);
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question"), [0, "t", null, null, null, null, null, null, "question"]);
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null, "chiffre"], "chiffre").slice(5), ["chiffre", null, null, "chiffre"]);
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question", "Qui paie la facture ?").slice(8), ["question", { accroche: "Qui paie la facture ?" }], "l'accroche de l'entrée est transmise au dessin");
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu", "x"), [0, "t", null, null, null], "style bleu : rien à transmettre");
+  // le dessin des styles vit dans js/stories.js : mêmes règles que le cahier des charges (taille de texte, nombre de mots, zones de sécurité)
+  const src = readFileSync(new URL("../js/stories.js", import.meta.url), "utf-8");
+  for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'ESSENTIEL"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);
+  assert.match(src, /storyStylePied\(ctx, d, \{ doux:"#D9DEF2", texte:"#FFFFFF", credit:true \}\)/, "le crédit de la photo est affiché avec la photo");
+  assert.ok(!/https?:\/\/[^"'`\s]*\.(?:jpe?g|png|woff2?)/.test(src.slice(src.indexOf("Styles de story du test comparatif"), src.indexOf("Stories d'actualité : modules séparés"))), "aucune ressource externe dans les styles (CSP)");
+}
+
 console.log("stories-auto : tous les tests passent.");

@@ -465,6 +465,7 @@ async function checkStatsInstagram() {
     if (!m.releveLe || Number.isNaN(Date.parse(m.releveLe))) err(`${nom} : releveLe absent ou invalide`);
     if (m.publieLe && Number.isNaN(Date.parse(m.publieLe))) err(`${nom} : publieLe invalide`);
     if (m.heureParis != null && !(Number.isInteger(m.heureParis) && m.heureParis >= 0 && m.heureParis <= 23)) err(`${nom} : heureParis hors de 0 à 23`);
+    if (m.variante != null && !["bleu", "une-photo", "question", "chiffre"].includes(m.variante)) err(`${nom} : variante « ${m.variante} » inconnue`);
     if (!m.metriques || typeof m.metriques !== "object") { err(`${nom} : metriques absentes`); continue; }
     for (const [k, v] of Object.entries(m.metriques)) if (typeof v !== "number" || !Number.isFinite(v) || v < 0) err(`${nom} : métrique ${k} invalide (${v})`);
   }

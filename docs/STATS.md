@@ -9,7 +9,7 @@ Lecture seule de l'API officielle Instagram (même compte et mêmes secrets que 
 | `.github/workflows/stats-instagram.yml` | Deux relevés par jour (20 h 37 et 6 h 23 UTC) + lancement manuel. Groupe de concurrence `update-data`. |
 | `scripts/stats-instagram.cjs` | Relève les insights de chaque média du registre `data/instagram-publiees.json` (le `mediaId` « windsor » est ignoré), le nombre d'abonnés, et écrit les fichiers ci-dessous. |
 | `scripts/recommandations.cjs` | Lit les statistiques et écrit des **suggestions**. Ne modifie jamais un réglage. |
-| `data/instagram-stats.json` | Une entrée par média : `type` (story, post, carrousel, reel), `modele`, `theme`, `nbMedias` (médias du sujet), `publieLe`, `heureParis`, `metriques`, `refusees`, `releveLe`. Contrôlé par `scripts/check-data.js`. |
+| `data/instagram-stats.json` | Une entrée par média : `type` (story, post, carrousel, reel), `modele`, `variante` (style de la story, voir « Test comparatif »), `theme`, `nbMedias` (médias du sujet), `publieLe`, `heureParis`, `metriques`, `refusees`, `releveLe`. Contrôlé par `scripts/check-data.js`. |
 | `docs/stats/AAAA-Wss.md` | Résumé de la semaine (aussi dans le résumé de l'exécution GitHub). |
 | `docs/stats/recommandations.md` | Pistes calculées sur tout l'historique. |
 
@@ -24,6 +24,22 @@ Sans les secrets `IG_USER_ID` et `IG_ACCESS_TOKEN` : sortie propre, ligne « INA
 - **Alertes** : jeton invalide, etc.
 
 Métriques demandées (API v21, `graph.instagram.com`) : stories `views`, `reach`, `shares`, `replies`, `total_interactions` ; posts et carrousels `views`, `reach`, `likes`, `comments`, `saved`, `shares`, `total_interactions` ; Reels les mêmes, plus `ig_reels_avg_watch_time`. `impressions`, `taps_forward`, `taps_back` et `exits` ne sont plus demandées : l'API les a refusées au premier relevé réel (7 oct. 2026) et `views` remplace `impressions`. L'API refuse certaines métriques selon le type de média et la version : le script essaie en bloc, puis une par une ; les refusées sont listées dans `refusees` et ignorées. Le thème est déduit du titre (mots-clés) et le modèle de l'identifiant ou du champ `dossierId`, faute de champ dédié ; ils sont figés au premier relevé.
+
+## Test comparatif des styles de story
+
+Depuis le 8 octobre 2026, les stories d'un sujet d'actualité (« à la une », chiffre, date à retenir), les dossiers et les stories des contenus récurrents (« Aujourd'hui à l'Assemblée », vote du jour, Comprendre, chiffre du jour) sont dessinées dans l'un de quatre styles, pour savoir lesquels sont les plus vus :
+
+| `variante` | Dessin |
+| --- | --- |
+| `bleu` | Le style historique : fond bleu uni, texte et pastilles de médias. |
+| `une-photo` | Photo libre d'une institution (`data/vignettes.json`, jamais une personne) sous un dégradé sombre, accroche géante, une phrase « L'essentiel », pastille de catégorie, crédit de la photo ; sans photo, un motif graphique du thème. |
+| `question` | L'accroche posée en question, trois puces de huit mots au plus, fond de couleur selon le thème (rouge, vert, jaune, bleu, noir). |
+| `chiffre` | Un nombre géant (médias, articles, voix pour…) et une ligne de contexte. |
+
+- **Attribution** : déterministe, `variante = ["bleu", "une-photo", "question", "chiffre"][sha1("variante|" + id) % 4]` (`varianteDe` dans `scripts/stories-auto.cjs`) ; chaque style garde donc environ un quart des stories, et le même contenu a toujours le même style. « Comprendre » n'a pas de nombre à mettre en avant : il se partage entre trois styles (hors `chiffre`). Les « en direct », « en bref », « face à face » (portraits), sondages, sujets sensibles, posts et rappels d'agenda gardent leur dessin sans champ `variante` : ils ne comptent pas dans la comparaison.
+- **Enregistrement** : `variante` est écrit dans l'entrée de `data/instagram-file.json`, puis recopié par `stats-instagram.cjs` dans `data/instagram-stats.json` (figé au premier relevé).
+- **Lecture** : le rapport hebdomadaire contient un tableau « Test comparatif des styles de story » : nombre de stories mesurées, moyenne de vues et moyenne d'interactions (`total_interactions`, à défaut la somme des j'aime, commentaires, enregistrements, partages et réponses) par style, sur tout l'historique. Avec 9 à 13 vues par story, un écart de quelques vues n'est pas une conclusion : attendez au moins 10 stories par style (environ 40 stories, un mois de publication) et un écart net avant de retenir un style.
+- **Règles de dessin** (`js/stories.js`, `storyStyleDessiner`) : texte essentiel de 52 px au moins, 35 mots au plus, rien d'essentiel dans les 250 px du haut ni les 340 px du bas, contraste AA, source et mention « Titres relevés dans la presse… » conservées, crédit de la photo visible. Aperçus : `instagram/modeles/styles/`.
 
 ## Limites
 

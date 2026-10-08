@@ -24,6 +24,22 @@ function largeur(ctx, txt, poids, taille, fam = "Public Sans", ls = 0){
   const w = ctx.measureText(txt).width; ctx.letterSpacing = "0px"; return w;
 }
 const T = t => storyTypo(t); // apostrophes typographiques, espaces normalisées
+/* Styles du test comparatif (champ `style` de la fiche : bleu, une-photo, question, chiffre) : la fiche `d` complète le thème (clé de THEMES_ACTU : photo d'institution ou motif) ;
+   renvoie false si le style bleu historique doit être dessiné. Fiches officielles : aucune presse, aucun portrait. */
+async function dessinerStyle(ctx, s, d){
+  const style = storyStyleValide(s?.style);
+  if(style === "bleu") return false;
+  const th = storyThemeInfos(d.cle), photo = await storyPhotoTheme(d.cle);
+  return Boolean(storyStyleDessiner(ctx, style, { theme:th.cle, couleur:th.couleur, motif:th.motif, photo, ...d }));
+}
+// Intitulé d'un point d'ordre du jour sans la formule d'introduction (« Proposition de résolution, déposée en application de l'article 34-1… visant à X » -> « Résolution : X »)
+function condenser(t){
+  t = T(t);
+  const genre = /^proposition de résolution/i.test(t) ? "Résolution" : /^proposition de loi/i.test(t) ? "Proposition de loi" : /^projet de loi/i.test(t) ? "Projet de loi" : "";
+  const m = genre && /\b(visant à|tendant à|visant|portant sur)\s+(.+)$/i.exec(t), r = genre && /\b(relati(?:f|ve)s? (?:à|au|aux)\s+.+)$/i.exec(t);
+  return m ? `${genre} : ${m[2]}` : r ? `${genre} ${r[1]}` : t;
+}
+const phrases = t => T(t).split(/(?<=[.!?])\s+/).filter(Boolean);
 const maj = t => String(t || "").charAt(0).toUpperCase() + String(t || "").slice(1);
 
 // Trois cases « pour / contre / abstentions » (aucune couleur partisane) ; renvoie l'ordonnée sous les cases
@@ -42,6 +58,12 @@ function cases(ctx, y, h, liste, taille = 92){
 STORY_PLUS.aujourdhui = async (ctx, s) => {
   if(!s || !Array.isArray(s.points) || !s.points.length) return null;
   await polices();
+  const nbPoints = s.points.length + (s.autres || 0), source = s.source || "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer.";
+  if(await dessinerStyle(ctx, s, {
+    cle: "assemblee", fond: "bleu", categorie: "Séance publique", accroche: s.style === "question" ? "Que se passe-t-il aujourd'hui à l'Assemblée ?" : T("Aujourd'hui à l'Assemblée"), essentiel: `${maj(s.jour)} : ${condenser(s.points[0].t)}`,
+    puces: s.style === "question" ? s.points.slice(0, 3).map(p => condenser(p.t)) : [], contexte: `${maj(s.jour)} : ${condenser(s.points[0].t)}`,
+    chiffre: { valeur: String(nbPoints), legende: nbPoints > 1 ? "points à l'ordre du jour" : "point à l'ordre du jour" }, source, cta: "Tout l'agenda",
+  })) return { nom: `aujourdhui-${s.iso || "x"}` };
   let y = storyCadre(ctx, "Séance publique", { etiquette: "rouge" });
   const titre = T("Aujourd'hui à l'Assemblée");
   const tt = storyTailleFit(ctx, titre, y, y + 2 * 92, { tMax: 88, tMin: 60, police: "Newsreader", poids: 600, interligne: 1.04 });
@@ -69,6 +91,16 @@ STORY_PLUS.aujourdhui = async (ctx, s) => {
 STORY_PLUS["vote-jour"] = async (ctx, s) => {
   if(!s || !s.objet || !["adopte", "rejete"].includes(s.verdict)) return null;
   await polices();
+  const verdict = s.verdict === "adopte" ? "Adopté" : "Rejeté";
+  const voix = (n, mot) => `${fr(n ?? 0)} ${mot}`;
+  if(await dessinerStyle(ctx, s, {
+    cle: "assemblee", fond: "noir", categorie: "Le vote du jour",
+    accroche: s.style === "question" ? "Ce texte a-t-il été adopté ?" : `${verdict} à l'Assemblée`,
+    essentiel: `${voix(s.pour, "voix pour")}, ${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstention${(s.abst ?? 0) > 1 ? "s" : ""} : ${storyMots(T(s.dossier || s.objet), 10)}`,
+    puces: [`${verdict} : ${voix(s.pour, "voix pour")}`, voix(s.contre, "voix contre"), voix(s.abst, (s.abst ?? 0) > 1 ? "abstentions" : "abstention")],
+    chiffre: { valeur: fr(s.pour ?? 0), legende: "voix pour" }, contexte: `${verdict} (${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstentions) : ${storyMots(T(s.dossier || s.objet), 12)}`,
+    source: s.sourceTxt, cta: "Chaque jour de séance",
+  })) return { nom: `vote-jour-${s.numero || "x"}` };
   let y = storyCadre(ctx, `Le vote du jour · ${s.date}`, { etiquette: "blanc" });
   gras(ctx, String(s.type || "Scrutin public").toUpperCase(), marge, y + 30, { poids: 700, taille: 28, couleur: DA.ciel, ls: 4 });
   y += 62;
@@ -89,6 +121,11 @@ STORY_PLUS["vote-jour"] = async (ctx, s) => {
 STORY_PLUS.comprendre = async (ctx, s) => {
   if(!s || !s.titre || !s.texte) return null;
   await polices();
+  if(await dessinerStyle(ctx, s, {
+    cle: "politique", fond: "jaune", categorie: `Comprendre · ${s.n}/${s.total}`,
+    accroche: s.style === "question" ? `${T(s.titre)} : de quoi parle-t-on ?` : T(s.titre), essentiel: phrases(s.texte)[0] || T(s.texte),
+    puces: phrases(s.texte).slice(0, 3), source: s.sourceTxt, cta: "Une notion par semaine",
+  })) return { nom: `comprendre-${s.cle || "x"}` };
   let y = storyCadre(ctx, `Comprendre · notion ${s.n}/${s.total}`, { etiquette: "blanc" });
   const titre = T(s.titre), texte = T(s.texte);
   const tt = storyTailleFit(ctx, titre, y, y + 3 * 90, { tMax: 82, tMin: 50, police: "Newsreader", poids: 600, interligne: 1.05 });
@@ -106,6 +143,12 @@ STORY_PLUS.comprendre = async (ctx, s) => {
 STORY_PLUS["chiffre-jour"] = async (ctx, s) => {
   if(!s || !s.libelle || !s.valeur) return null;
   await polices();
+  if(await dessinerStyle(ctx, s, {
+    cle: "budget", fond: "vert", categorie: "Le chiffre du jour",
+    accroche: s.style === "question" ? `${T(s.libelle)} : combien ?` : T(s.libelle), essentiel: [s.valeur, s.soustitre, s.periode].filter(Boolean).map(T).join(" · "),
+    puces: [[s.valeur, s.soustitre].filter(Boolean).map(T).join(" "), s.periode && T(s.periode), ...(s.lignes || []).filter(Boolean).map(T)].filter(Boolean).slice(0, 3),
+    chiffre: { valeur: T(s.valeur), legende: T(s.soustitre || s.periode || "") }, contexte: T(s.libelle), source: s.sourceTxt, cta: "Un chiffre par jour",
+  })) return { nom: `chiffre-${s.cle || "x"}` };
   let y = storyCadre(ctx, "Le chiffre du jour", { etiquette: "rouge" });
   const libelle = T(s.libelle);
   const tl = storyTailleFit(ctx, libelle, y, y + 2 * 80, { tMax: 76, tMin: 46, police: "Newsreader", poids: 600, interligne: 1.05 });

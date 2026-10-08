@@ -698,7 +698,7 @@ async function dessinerPostSeul(spec) {
 }
 
 /** Ouvre le site (servi depuis le disque sous son adresse publique) et dessine la story ; renvoie un Buffer JPEG. */
-async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null, synth = null) {
+async function dessiner(indice, titre, sondage = null, dossier = null, propre = null, modele = null, bref = null, synth = null, variante = null, extras = null) {
   const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
   try {
@@ -721,7 +721,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
     } else {
       await page.waitForFunction(() => typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.length > 0 && typeof dessinerStory === "function", null, { timeout: 30000 });
     }
-    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth }) => {
+    const url = await page.evaluate(async ({ indice, titre, sondage, dossier, propre, modele, bref, synth, variante, extras }) => {
       if (synth) { // sujet synthétique ajouté le temps du dessin, puis retiré
         ACTUALITES.sujets.push(synth);
         try { const r = await dessinerStory("actualite", `${ACTUALITES.sujets.length - 1}:${synth.modeleImpose || "une"}`); return r ? r.apercu : null; } finally { ACTUALITES.sujets.pop(); }
@@ -742,7 +742,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
       }
       if (dossier) { // story du dossier : le site doit avoir le même dossier que le fichier
         if (!ACTUALITES.dossiers.some((d) => d.id === dossier)) return null;
-        const r = await dessinerStory("actualites", dossier);
+        const r = await dessinerStory("actualites", variante ? `${dossier}|${variante}` : dossier); // « id|style » : style de la variante (js/stories-actu-liste.js)
         return r ? r.apercu : null;
       }
       if (sondage) { // story « sondages » limitée à CETTE enquête ; le site doit avoir le même relevé que le fichier
@@ -757,9 +757,10 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
         return r ? r.apercu : null;
       }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
-      const r = await dessinerStory("actualite", `${indice}:${modele || "une"}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date »
+      if (extras?.accroche) ACTUALITES.sujets[indice].accroche = extras.accroche; // accroche de l'entrée (titres-propres.accroche), lue par les styles du test comparatif (js/stories.js : storySpecSujet)
+      const r = await dessinerStory("actualite", `${indice}:${modele || "une"}${variante ? ":" + variante : ""}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date » ; puis le style (variante)
       return r ? r.apercu : null;
-    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth });
+    }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth, variante: variante && variante !== "bleu" ? variante : null, extras });
     if (erreurs.length) console.warn("[stories-auto] erreurs JavaScript du site :", erreurs.join(" | "));
     if (!url || !url.startsWith("data:image/jpeg;base64,")) throw new Error("la story n'a pas pu être dessinée");
     return Buffer.from(url.slice("data:image/jpeg;base64,".length), "base64");
@@ -1269,6 +1270,36 @@ function texteAlternatif(type, titre, medias, sujets) {
 
 const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
 
+// ---------------------------------------------------------------------------------------------------------------------
+// TEST COMPARATIF DE STYLES (champ « variante » de l'entrée de file, recopié par scripts/stats-instagram.cjs) :
+// « bleu » (dessin historique), « une-photo », « question », « chiffre » (js/stories.js : storyStyleDessiner).
+// Attribution déterministe : variante = VARIANTES[hash(id) % 4] ; « bleu » garde donc sa part (1 story sur 4). Seules les stories d'un SUJET avec un titre à nous
+// (actualité « à la une », chiffre, date à retenir) et les dossiers sont concernées : « en direct », « en bref », « face à face » (portraits), sondages, données propres,
+// sujets sensibles et rappels d'agenda gardent leur dessin, sans variante.
+// ---------------------------------------------------------------------------------------------------------------------
+const VARIANTES = ["bleu", "une-photo", "question", "chiffre"];
+/** Variante d'un id : hash(id) % nombre de styles (4 par défaut ; une liste plus courte quand un style ne s'applique pas au contenu). */
+function varianteDe(id, styles = VARIANTES) {
+  return styles[parseInt(crypto.createHash("sha1").update("variante|" + String(id)).digest("hex").slice(0, 8), 16) % styles.length];
+}
+/** Variante d'un choix décrit par decrire() ; null si le contenu garde son dessin unique (aucune variante dans l'entrée). */
+function varianteChoix(choix, d) {
+  if (!choix || choix.sensible || choix.post || choix.propre || choix.sondage || choix.bref || choix.repli) return null;
+  if (choix.modele === "direct" || choix.modele === "facea" || choix.modele === "rappel-agenda" || choix.modele === "post-date") return null;
+  if (!["actualite", "chiffre", "date", "dossier"].includes(d?.type)) return null;
+  if (d.type !== "dossier" && !choix.sujet?.titrePropre?.titre) return null;
+  return varianteDe(choix.id);
+}
+/** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
+function argsAvecVariante(args, variante, accroche = null) {
+  if (!variante || variante === "bleu") return args;
+  const a = [...args];
+  while (a.length < 8) a.push(null);
+  a[8] = variante;
+  if (accroche) a[9] = { accroche }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
+  return a;
+}
+
 /** Prépare le dessin et la fiche pour un choix : { titre, medias, sources, champs, dessin: [indice, titre, sondage, dossier, propre] }. */
 function decrire(choix, now = new Date()) {
   const d = decrireBase(choix, now);
@@ -1459,21 +1490,22 @@ async function main() {
         console.log(`[stories-auto] post instagram/auto/${choix.id}.jpg (${Math.round(post.length / 1024)} Ko) et story d'annonce instagram/auto/${idA}.jpg (${Math.round(annonce.length / 1024)} Ko).`);
       }
     } else {
-      const jpeg = await dessiner(...d.args);
+      const variante = varianteChoix(choix, d); // test comparatif de styles (« bleu » = dessin historique)
+      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche));
       const dim = dimensionsJpeg(jpeg);
       if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
       if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
       if (vers === "brouillon") {
-        ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: d.type, medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: Boolean(choix.sondage || choix.nommePersonne), ...d.champs }, jpeg);
+        ecrireBrouillon({ id: choix.id, cree: now.toISOString(), titre: d.titre, type: d.type, medias: d.medias, sources: d.sources, statut: "a-valider", nommePersonne: Boolean(choix.sondage || choix.nommePersonne), ...(variante ? { variante } : {}), ...d.champs }, jpeg);
         console.log(`[stories-auto] brouillon instagram/brouillons/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko), à valider par un humain ; rien n'est mis en file de publication.`);
       } else {
         ecrireImage(choix.id, jpeg);
         // Story vidéo : seulement pour un dossier ou un « direct » (modèles à fort enjeu), si les vidéos sont activées et le plafond du jour non atteint
         const video = config.videos && (d.type === "dossier" || choix.modele === "direct") && videosDuJour(entrees, now) < config.videosMax
           ? produireVideo({ id: choix.id, type: "story" }) : null;
-        entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), ...(video ? { url_video: urlVideo(choix.id) } : {}), type: "story", sources: d.sources, ...d.champs }].slice(-GARDER);
+        entrees = [...entrees, { id: choix.id, cree: now.toISOString(), titre: d.titre, medias: d.medias, url_image: urlImage(choix.id), ...(video ? { url_video: urlVideo(choix.id) } : {}), type: "story", sources: d.sources, ...(variante ? { variante } : {}), ...d.champs }].slice(-GARDER);
         images.add(choix.id);
-        console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko).`);
+        console.log(`[stories-auto] instagram/auto/${choix.id}.jpg (${Math.round(jpeg.length / 1024)} Ko${variante ? `, variante « ${variante} »` : ""}).`);
       }
     }
   }
@@ -1487,6 +1519,6 @@ async function main() {
   }
 }
 
-module.exports = { evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

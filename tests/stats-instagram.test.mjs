@@ -245,6 +245,35 @@ try {
     assert.match(perso.stdout + perso.stderr, /donnée personnelle/);
   }
 
+  // Test comparatif des styles de story : moyenne de vues et d'interactions par variante
+  {
+    const m = (variante, views, metriques = {}) => ({ type: "story", variante, metriques: { views, ...metriques } });
+    const pv = STATS.parVariante({
+      A: m("bleu", 10, { total_interactions: 1 }), B: m("bleu", 20, { total_interactions: 3 }),
+      C: m("question", 30, { likes: 2, shares: 1 }), D: m("chiffre", 0), E: { type: "story", metriques: { views: 99 } }, F: m("une-photo", null), G: { type: "story", variante: "question", metriques: {} },
+    });
+    assert.deepStrictEqual(pv.map((x) => x.variante), ["bleu", "une-photo", "question", "chiffre"]);
+    assert.deepStrictEqual(pv[0], { variante: "bleu", n: 2, vues: 15, interactions: 2 });
+    assert.deepStrictEqual(pv[1], { variante: "une-photo", n: 0, vues: null, interactions: null }, "sans vues relevées : ignoré");
+    assert.deepStrictEqual(pv[2], { variante: "question", n: 1, vues: 30, interactions: 3 }, "sans total_interactions : somme des réactions");
+    assert.deepStrictEqual(pv[3], { variante: "chiffre", n: 1, vues: 0, interactions: null });
+    assert.strictEqual(STATS.interactionsDe({ metriques: { views: 5 } }), null);
+    // le rapport hebdomadaire contient le tableau et l'avertissement « peu de données »
+    const stats = { abonnes: null, medias: { A: { ...m("bleu", 10, { total_interactions: 1 }), publieLe: MAINTENANT, id: "a", modele: "actualite", theme: "autre" }, C: { ...m("question", 30), publieLe: MAINTENANT, id: "c", modele: "actualite", theme: "autre" } } };
+    const rapport = STATS.rapportHebdo(stats, "2026-W41", new Date(MAINTENANT), [], null);
+    assert.match(rapport, /## Test comparatif des styles de story/);
+    assert.match(rapport, /\| bleu \| 1 \| 10 \| 1 \|/);
+    assert.match(rapport, /\| question \| 1 \| 30 \| n\/d \|/);
+    assert.match(rapport, /moins de 10 stories pour/);
+    assert.ok(!/Test comparatif/.test(STATS.rapportHebdo({ abonnes: null, medias: { A: { type: "story", metriques: { views: 4 }, publieLe: MAINTENANT, id: "a", modele: "actualite", theme: "autre" } } }, "2026-W41", new Date(MAINTENANT), [], null)), "sans variante : pas de tableau");
+    // check-data.js : une variante inconnue est refusée
+    const d = mkdtempSync(join(tmpdir(), "chk-"));
+    const bonV = { lastUpdated: MAINTENANT, medias: { S1: { type: "story", variante: "question", releveLe: MAINTENANT, publieLe: MAINTENANT, heureParis: 12, metriques: { views: 10 } } }, abonnes: { nombre: 5 } };
+    const lancer = (o) => { writeFileSync(join(d, "s.json"), JSON.stringify(o)); const r = spawnSync(process.execPath, ["scripts/check-data.js"], { env: { ...process.env, CHECK_STATS_FILE: join(d, "s.json") }, encoding: "utf-8" }); return r.stdout + r.stderr; };
+    assert.ok(!/variante/.test(lancer(bonV)), "variante valide acceptée");
+    assert.match(lancer({ ...bonV, medias: { S1: { ...bonV.medias.S1, variante: "rose" } } }), /variante « rose » inconnue/);
+  }
+
   console.log("stats-instagram : tous les tests passent");
 } catch (e) {
   console.error(e);
