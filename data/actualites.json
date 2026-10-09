@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T06:55:31.105Z",
+ "lastUpdated": "2026-10-09T07:01:09.691Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Public Sénat",
@@ -100,12 +100,12 @@
  ],
  "dossiers": [
   {
-   "id": "lyceen",
+   "id": "lyceens",
    "titre": "Lycées",
    "motifs": [
-    "lycéen",
-    "mouvement",
+    "lycéens",
     "mobilisation",
+    "mouvement",
     "arrivée"
    ],
    "medias": [
@@ -121,12 +121,13 @@
     "L'Express",
     "Public Sénat",
     "Mediapart",
+    "Hugo Décrypte",
     "RFI",
     "Le Monde",
     "Libération",
     "Le Figaro"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 13,
    "sources": [
     "France Médias Monde",
     "20 Minutes",
@@ -137,11 +138,12 @@
     "L'Express",
     "Public Sénat",
     "Mediapart",
+    "Hugo Décrypte",
     "Le Monde",
     "Libération",
     "Le Figaro"
    ],
-   "nb": 91,
+   "nb": 95,
    "derniere": "2026-10-09T06:45:24.000Z",
    "articles": [
     {
@@ -158,9 +160,9 @@
     },
     {
      "media": "Sud Ouest",
-     "titre": "Budget : les députés adoptent plusieurs amendements ciblant les holdings et les grands groupes et soutenant l’agriculture",
-     "url": "https://www.sudouest.fr/economie/impots/budget-les-deputes-adoptent-plusieurs-amendements-ciblant-les-holdings-et-les-grands-groupes-et-soutenant-l-agriculture-30987347.php",
-     "date": "2026-10-09T05:40:15.000Z"
+     "titre": "Mobilisation lycéenne : « Ils font semblant de vouloir nous entendre »… La plateforme de concertation laisse les élèves indifférents",
+     "url": "https://www.sudouest.fr/ile-de-france/paris/mobilisation-lyceenne-ils-font-semblant-de-vouloir-nous-entendre-la-plateforme-de-concertation-laisse-les-eleves-indifferents-30987018.php",
+     "date": "2026-10-09T04:48:20.000Z"
     },
     {
      "media": "L'Est républicain",
@@ -216,6 +218,13 @@
      "titre": "Mouvement lycéen: à Montpellier, une «colère porteuse de beaucoup d’espoir»",
      "url": "https://www.mediapart.fr/journal/france/081026/mouvement-lyceen-montpellier-une-colere-porteuse-de-beaucoup-d-espoir",
      "date": "2026-10-08T18:33:23.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Un 4x4 de la police fonce sur des lycéens qui manifestent à Dunkerque",
+     "url": "https://www.youtube.com/shorts/OGZsyDhw_IQ",
+     "date": "2026-10-08T17:19:20.000Z",
+     "video": true
     },
     {
      "media": "RFI",
@@ -896,6 +905,39 @@
    ],
    "titrePropre": {
     "titre": "Eure : décision du tribunal administratif sur une procédure judiciaire",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-08T08:28:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "L'usage des grenades assourdissantes projetées par lanceur suspendu provisoirement",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261008-l-usage-des-grenades-assourdissantes-projet%C3%A9es-par-lanceur-suspendu-provisoirement",
+     "media": "France 24",
+     "date": "2026-10-08T08:28:48.000Z"
+    },
+    {
+     "titre": "Blocus des lycées : dix-huit enquêtes IGPN ouvertes, l’usage des grenades assourdissantes suspendu",
+     "url": "https://www.publicsenat.fr/actualites/politique/blocus-des-lycees-dix-huit-enquetes-igpn-ouvertes-lusage-des-grenades-assourdissantes-suspendu",
+     "media": "Public Sénat",
+     "date": "2026-10-07T09:44:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : décision du tribunal administratif",
     "origine": "regles"
    }
   },
@@ -1940,8 +1982,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
+    "titre": "Lycées",
+    "origine": "dossier"
    }
   },
   {
@@ -4469,32 +4511,6 @@
     "titre": "Vie locale : l'essentiel du moment",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Figaro"
-   ],
-   "derniere": "2026-10-08T17:46:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Elles servent à emmerder le voisin » : pourquoi les niches parlementaires vont électriser l’Assemblée nationale jusqu’à la présidentielle 2027",
-     "url": "https://www.lefigaro.fr/politique/elles-servent-a-emmerder-le-voisin-pourquoi-les-niches-parlementaires-vont-electriser-l-assemblee-nationale-jusqu-a-la-presidentielle-2027-20261008",
-     "media": "Le Figaro",
-     "date": "2026-10-08T17:46:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : actualité sur la présidentielle de 2027",
-    "origine": "regles"
    }
   }
  ]
