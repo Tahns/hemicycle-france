@@ -95,12 +95,19 @@ async function dessiner(ctx, f){
 
   // 3. titre du texte en langage simple, puis l'auteur s'il est connu
   let y = y0 + 6;
-  const tMax = post ? 56 : 66, nMax = post ? 3 : 3;
+  const tMax = post ? 56 : 60, nMax = post ? 3 : 3;
   const tt = storyTailleFit(ctx, f.titre, y, y + nMax * tMax * 1.1, { tMax, tMin:44, police:"Newsreader", poids:600, interligne:1.06, largeur:LARG, max:99 });
   y = storyTexte(ctx, f.titre, marge, y, { taille:tt, poids:600, police:"Newsreader", couleur:"#fff", max:nMax, interligne:1.06 });
-  if(f.auteur){
-    ecrire(ctx, "QUI A PROPOSÉ CE TEXTE ?", marge, y + 40, { poids:700, taille:26, couleur:DA.ciel, ls:3 });
-    y = storyTexte(ctx, f.auteur, marge, y + 50, { taille:post ? 32 : 36, poids:700, couleur:"#fff", max:1 }) - 2;
+  if(f.auteur){ // une seule ligne si elle tient, sinon deux
+    const wl = mesure(ctx, "QUI A PROPOSÉ CE TEXTE ?", 700, 24, "Public Sans", 3), wn = mesure(ctx, f.auteur, 700, 32);
+    if(wl + 24 + wn <= LARG){
+      ecrire(ctx, "QUI A PROPOSÉ CE TEXTE ?", marge, y + 36, { poids:700, taille:24, couleur:DA.ciel, ls:3 });
+      ecrire(ctx, f.auteur, marge + wl + 24, y + 36, { poids:700, taille:32, couleur:"#fff" });
+      y += 50;
+    } else {
+      ecrire(ctx, "QUI A PROPOSÉ CE TEXTE ?", marge, y + 36, { poids:700, taille:24, couleur:DA.ciel, ls:3 });
+      y = storyTexte(ctx, f.auteur, marge, y + 44, { taille:32, poids:700, couleur:"#fff", max:1 }) - 2;
+    }
   }
   y += 6;
 
@@ -113,18 +120,50 @@ async function dessiner(ctx, f){
   const hLeg = hRang.reduce((s, h) => s + h, 0);
   const yLeg = bas - hLeg + 6;
   // 5. voix (rangée sous l'hémicycle)
-  const hVoix = post ? 118 : 134;
+  const hVoix = post ? 118 : 124;
   const yVoix = yLeg - hVoix - (post ? 8 : 12);
   // 6. hémicycle : la place restante fixe le rayon
-  const hPastille = 56, ecart = 16;
+  const hPastille = 52, ecart = 16;
   const dispo = yVoix - y - 6;
-  const R = Math.max(210, Math.min(310, dispo - hPastille - ecart - 8)), r = R * 0.6;
-  const reste = Math.max(0, dispo - (R + hPastille + ecart + 8)); // place en trop : répartie au-dessus et au-dessous de l'hémicycle
-  const cx = L / 2, cy = Math.round(yVoix - 8 - reste * 0.5);
-
-  // secteurs
+  ctx.font = `800 28px "Public Sans"`;
+  gs.forEach(g => { g.w = mesure(ctx, g.id, 800, 28, "Public Sans", 1) + 28 + 8 + 28; g.h = hPastille; });
   let a = Math.PI; const pas = 0.012; // demi-espace entre deux secteurs
   gs.forEach(g => { const w = Math.PI * g.n / total; g.a0 = a; g.a1 = a + w; g.am = a + w / 2; a += w; });
+  let R, r, cx = L / 2, cy, centre;
+  // Disposition pour un rayon donné : pastilles écartées par glissement le long de l'anneau, puis décalées vers l'extérieur si besoin ; renvoie l'ordonnée du haut de la pastille la plus haute
+  const disposer = rayon => {
+    R = rayon; r = R * 0.6;
+    const reste = Math.max(0, dispo - (R + hPastille + ecart + 8)); // place en trop : répartie au-dessus et au-dessous de l'hémicycle
+    cy = Math.round(yVoix - 8 - reste * 0.5);
+    gs.forEach(g => { g.ang = g.am; g.off = 0; });
+    centre = g => { // support du rectangle : la pastille reste hors de l'anneau quel que soit l'angle
+      const c = Math.cos(g.ang), sn = Math.sin(g.ang), rp = R + ecart + g.off + Math.abs(c) * g.w / 2 + Math.abs(sn) * g.h / 2;
+      return { x: cx + rp * c, y: cy + rp * sn };
+    };
+    const bornes = [Math.PI + 0.05, 2 * Math.PI - 0.05];
+    for(let it = 0; it < 400; it++){
+      let bouge = false;
+      for(let i = 0; i < gs.length - 1; i++){
+        const p = gs[i], q = gs[i + 1], cp = centre(p), cq = centre(q);
+        const rx = (p.w + q.w) / 2 + 12 - Math.abs(cp.x - cq.x), ry = (p.h + q.h) / 2 + 10 - Math.abs(cp.y - cq.y);
+        if(rx > 0 && ry > 0){ p.ang -= 0.004; q.ang += 0.004; bouge = true; }
+      }
+      gs.forEach(g => { g.ang = Math.max(bornes[0], Math.min(bornes[1], g.ang)); });
+      for(let i = 1; i < gs.length; i++) if(gs[i].ang < gs[i - 1].ang) gs[i].ang = gs[i - 1].ang;
+      if(!bouge) break;
+    }
+    const choc = (p, q) => { const cp = centre(p), cq = centre(q); return (p.w + q.w) / 2 + 8 - Math.abs(cp.x - cq.x) > 0 && (p.h + q.h) / 2 + 6 - Math.abs(cp.y - cq.y) > 0; };
+    for(let it = 0; it < 6; it++){
+      let bouge = false;
+      for(let i = 1; i < gs.length; i++) for(let j = Math.max(0, i - 3); j < i; j++) if(choc(gs[j], gs[i])){ gs[i].off += 28; bouge = true; break; }
+      if(!bouge) break;
+    }
+    return Math.min(...gs.map(g => centre(g).y - g.h / 2));
+  };
+  const rMax = Math.max(190, Math.min(310, dispo - hPastille - ecart - 8));
+  for(let rr = rMax; rr >= 190; rr -= 8){ if(disposer(rr) >= y + 4 || rr - 8 < 190) break; } // le rayon baisse jusqu'à ce que rien ne touche le titre
+
+  // secteurs
   gs.forEach(g => {
     const a0 = g.a0 + pas, a1 = g.a1 - pas;
     chemin(ctx, cx, cy, r, R, a0, a1);
@@ -140,32 +179,6 @@ async function dessiner(ctx, f){
     if(arc >= 44 && g.pos) repere(ctx, g.pos, cx + rm * Math.cos(g.am), cy + rm * Math.sin(g.am), Math.min(40, arc * 0.6), ENCRE);
   });
 
-  // pastilles : sigle + repère, posées autour de l'anneau ; écartées si elles se chevauchent
-  ctx.font = `800 30px "Public Sans"`;
-  gs.forEach(g => { g.w = mesure(ctx, g.id, 800, 30, "Public Sans", 1) + 34 + 20 + 14; g.h = hPastille; g.ang = g.am; });
-  const centre = g => { // support du rectangle : la pastille reste hors de l'anneau quel que soit l'angle
-    const c = Math.cos(g.ang), s = Math.sin(g.ang), rp = R + ecart + (g.off || 0) + Math.abs(c) * g.w / 2 + Math.abs(s) * g.h / 2;
-    return { x: cx + rp * c, y: cy + rp * s };
-  };
-  const bornes = [Math.PI + 0.05, 2 * Math.PI - 0.05];
-  for(let it = 0; it < 400; it++){
-    let bouge = false;
-    for(let i = 0; i < gs.length - 1; i++){
-      const p = gs[i], q = gs[i + 1], cp = centre(p), cq = centre(q);
-      const rx = (p.w + q.w) / 2 + 12 - Math.abs(cp.x - cq.x), ry = (p.h + q.h) / 2 + 10 - Math.abs(cp.y - cq.y);
-      if(rx > 0 && ry > 0){ p.ang -= 0.004; q.ang += 0.004; bouge = true; }
-    }
-    gs.forEach(g => { g.ang = Math.max(bornes[0], Math.min(bornes[1], g.ang)); });
-    for(let i = 1; i < gs.length; i++) if(gs[i].ang < gs[i - 1].ang) gs[i].ang = gs[i - 1].ang;
-    if(!bouge) break;
-  }
-  // si des pastilles se chevauchent encore (anneau étroit), les voisines sont décalées vers l'extérieur
-  const choc = (p, q) => { const cp = centre(p), cq = centre(q); return (p.w + q.w) / 2 + 8 - Math.abs(cp.x - cq.x) > 0 && (p.h + q.h) / 2 + 6 - Math.abs(cp.y - cq.y) > 0; };
-  for(let it = 0; it < 6; it++){
-    let bouge = false;
-    for(let i = 1; i < gs.length; i++) for(let j = Math.max(0, i - 3); j < i; j++) if(choc(gs[j], gs[i])){ gs[i].off = (gs[i].off || 0) + 34; bouge = true; break; }
-    if(!bouge) break;
-  }
   // traits de liaison puis pastilles
   gs.forEach(g => {
     const c = centre(g), rb = R + 4;
@@ -176,8 +189,8 @@ async function dessiner(ctx, f){
     const c = centre(g), x = c.x - g.w / 2, yy = c.y - g.h / 2;
     ctx.fillStyle = STORY.creme; ctx.beginPath(); ctx.roundRect(x, yy, g.w, g.h, 14); ctx.fill();
     ctx.strokeStyle = teinte(g.pos); ctx.lineWidth = 5; ctx.beginPath(); ctx.roundRect(x + 2.5, yy + 2.5, g.w - 5, g.h - 5, 12); ctx.stroke();
-    repere(ctx, g.pos || "partage", x + 14 + 17, c.y, 30, teinteTexte(g.pos));
-    ecrire(ctx, g.id, x + 14 + 34 + 12, c.y + 11, { poids:800, taille:30, couleur:STORY.encre, ls:1 });
+    repere(ctx, g.pos || "partage", x + 14 + 14, c.y, 28, teinteTexte(g.pos));
+    ecrire(ctx, g.id, x + 14 + 28 + 8, c.y + 10, { poids:800, taille:28, couleur:STORY.encre, ls:1 });
   });
 
   // 7. au centre : le verdict ; dessous, les voix
@@ -193,7 +206,7 @@ async function dessiner(ctx, f){
   const cw = LARG / 3;
   cases.forEach(([k, n, nom], i) => {
     const mx = marge + cw * i + cw / 2, c = storyVoixCouleur(k, STORY_DA.fond) || teinte(k);
-    const tn = post ? 64 : 76, yb = yVoix + tn * 0.8;
+    const tn = post ? 64 : 72, yb = yVoix + tn * 0.8;
     ecrire(ctx, fr(n), mx, yb + 10, { poids:900, taille:tn, couleur:c, align:"center", ls:-2 });
     const wn = mesure(ctx, nom, 800, 28, "Public Sans", 3) + 40, x0 = mx - wn / 2, yn = yb + (post ? 42 : 50);
     repere(ctx, k, x0 + 13, yn - 10, 26, c);
@@ -211,7 +224,7 @@ async function dessiner(ctx, f){
     });
     yy += hRang[k];
   }
-  return { yVoix, R };
+  return { yVoix, R, partage: gs.some(g => g.pos === "partage") };
 }
 
 STORY_PLUS["vote-groupes"] = async (ctx, f) => {
@@ -220,7 +233,7 @@ STORY_PLUS["vote-groupes"] = async (ctx, f) => {
   const r = await dessiner(ctx, f);
   if(!r) return null;
   // mention + accroche (même pied que les stories ; pour le post, remonté comme dans js/stories-post.js)
-  const mention = f.sourceTxt || "Position majoritaire de chaque groupe d'après les votes de ses membres. Largeur d'un secteur : nombre de députés du groupe. Source : Assemblée nationale.";
+  const mention = f.sourceTxt || `Position majoritaire de chaque groupe d'après les votes de ses membres${r.partage ? " (hachures : partagé)" : ""}. Largeur = nombre de députés. Source : Assemblée nationale.`;
   if(f.format === "post"){
     storyTexte(ctx, mention, marge, H_POST - 128, { taille:23, couleur:STORY.ciel, max:2, interligne:1.2 });
     storyAccroche(ctx, "Toute l'actu politique", H_POST - 40);
