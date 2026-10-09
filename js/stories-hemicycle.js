@@ -113,26 +113,32 @@ async function dessiner(ctx, f){
   // 2. secteurs : groupes voisins de même position réunis, coupés en secteurs de 4 groupes au plus
   const blocs = [];
   gs.forEach(g => { const d = blocs[blocs.length - 1]; if(d && d.pos === g.pos) d.g.push(g); else blocs.push({ pos:g.pos, g:[g] }); });
-  const secteurs = [];
-  blocs.forEach(b => { const n = Math.ceil(b.g.length / 4), taille = Math.ceil(b.g.length / n); for(let k = 0; k < b.g.length; k += taille) secteurs.push({ pos:b.pos, g:b.g.slice(k, k + taille) }); });
+  const secteurs = blocs.map(b => ({ pos:b.pos, g:b.g })); // un seul secteur par position : jamais de coupure à l'intérieur d'un « pour » ou d'un « contre »
   const poids = sc => sc.g.reduce((t, g) => t + 0.8 + 0.2 * g.n / total * gs.length, 0), somme = secteurs.reduce((t, sc) => t + poids(sc), 0);
-  let a = Math.PI; secteurs.forEach(sc => { sc.a0 = a; a += Math.PI * poids(sc) / somme; sc.a1 = a; sc.am = (sc.a0 + sc.a1) / 2; });
-  const R = Math.min(W / 2 - 50, 480), r = R * 0.52, gap = 0.014, cx = W / 2;
+  let a = Math.PI; secteurs.forEach(sc => { sc.a0 = a; a += Math.PI * poids(sc) / somme; sc.a1 = a; sc.am = (sc.a0 + sc.a1) / 2; const tot = poids(sc); let u = sc.a0; sc.g.forEach(g => { const w = (sc.a1 - sc.a0) * (0.8 + 0.2 * g.n / total * gs.length) / tot; g.a0 = u; u += w; g.a1 = u; }); });
+  const R = Math.min(W / 2 - 50, 480), r = R * 0.52, GAP = 16, cx = W / 2; // GAP : écart constant (en pixels) entre deux secteurs, quel que soit le rayon
   const hDessous = post ? 400 : 480;
   const cy = Math.round(Math.min(y + 50 + R, yPied - hDessous));
   const col = pos => C[pos] || C.partage;
+  // secteur dont les bords latéraux sont écartés d'une distance constante (et non d'un angle constant)
+  const part = (r0, r1, sc) => {
+    const h = GAP / 2; ctx.beginPath();
+    ctx.arc(cx, cy, r1, sc.a0 + h / r1, sc.a1 - h / r1); ctx.arc(cx, cy, r0, sc.a1 - h / r0, sc.a0 + h / r0, true); ctx.closePath();
+  };
   secteurs.forEach(sc => {
-    const a0 = sc.a0 + gap, a1 = sc.a1 - gap;
-    chemin(ctx, cx, cy, r, R, a0, a1); ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = col(sc.pos); ctx.lineWidth = 5; ctx.lineJoin = "round"; ctx.stroke();
-    if(sc.pos === "partage"){ ctx.save(); chemin(ctx, cx, cy, r, R, a0, a1); ctx.clip(); ctx.strokeStyle = "rgba(107,111,128,0.22)"; ctx.lineWidth = 5; ctx.beginPath(); for(let k = -R; k < 2 * R; k += 20){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore(); }
-    chemin(ctx, cx, cy, r - 44, r - 20, a0, a1); ctx.fillStyle = col(sc.pos); ctx.fill(); // arc de couleur sous le secteur
-    // logos empilés au centre du secteur, sans cadre, du haut vers le bas
-    const rc = r + (R - r) * 0.52, mx = cx + rc * Math.cos(sc.am), my = cy + rc * Math.sin(sc.am), n = sc.g.length;
-    const pas = Math.min(62, ((R - r) * Math.abs(Math.sin(sc.am)) * 0.9 + (r * (sc.a1 - sc.a0)) * Math.abs(Math.cos(sc.am)) * 0.9) / n + 18);
+    part(r, R, sc); ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = col(sc.pos); ctx.lineWidth = 5; ctx.lineJoin = "round"; ctx.stroke();
+    if(sc.pos === "partage"){ ctx.save(); part(r, R, sc); ctx.clip(); ctx.strokeStyle = "rgba(107,111,128,0.22)"; ctx.lineWidth = 5; ctx.beginPath(); for(let k = -R; k < 2 * R; k += 20){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore(); }
+    part(r - 44, r - 20, sc); ctx.fillStyle = col(sc.pos); ctx.fill(); // arc de couleur sous le secteur
+    // un logo par groupe, au centre de sa part, sans cadre ; deux rayons en alternance
     sc.g.forEach((g, k) => {
-      const py = my + (k - (n - 1) / 2) * pas, px = mx + (n > 1 ? (k % 2 ? 14 : -14) : 0);
-      const wMax = Math.min(132, Math.max(96, rc * (sc.a1 - sc.a0) * 0.5)), hMax = Math.min(50, pas - 10);
-      if(g.logo){ const kk = Math.min(wMax / g.logo.width, hMax / g.logo.height), lw = g.logo.width * kk, lh = g.logo.height * kk; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
+      const rr = r + (R - r) * (k % 2 ? 0.30 : 0.70), hMax = 44;
+      let lw = 80, lh = 40; // sigle seul : LIOT, NI
+      if(g.logo){ const wMax = Math.min(120, Math.max(60, rr * (g.a1 - g.a0) * 1.4)), kk = Math.min(wMax / g.logo.width, hMax / g.logo.height); lw = g.logo.width * kk; lh = g.logo.height * kk; }
+      let am = (g.a0 + g.a1) / 2;
+      const ext = (lw * Math.abs(Math.sin(am)) + lh * Math.abs(Math.cos(am))) / 2 + 18; // le logo ne touche jamais le bord du secteur
+      const mini = sc.a0 + ext / rr, maxi = sc.a1 - ext / rr; am = mini < maxi ? Math.max(mini, Math.min(maxi, am)) : (sc.a0 + sc.a1) / 2;
+      const px = cx + rr * Math.cos(am), py = cy + rr * Math.sin(am);
+      if(g.logo) ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh);
       else ecrire(ctx, g.id, px, py + 12, { poids:900, taille:36, couleur:C.encre, align:"center", ls:1 });
     });
   });
