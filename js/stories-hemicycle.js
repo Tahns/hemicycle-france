@@ -75,6 +75,7 @@ function chemin(ctx, cx, cy, r0, r1, a0, a1){
 
 // Palette de ce modèle (fond clair, comme un tableau de vote lisible d'un coup d'œil) : textes foncés ≥ 4,5:1 sur le blanc
 const C = { fond:"#F4F5FA", encre:"#16245E", pour:"#1E8A4C", contre:"#C8283B", abst:"#D97A06", partage:"#6B6F80" };
+const TEINTE_FOND = { pour:"#E3F3EA", contre:"#FBE6E9", abst:"#FCEFD9", partage:"#ECEDF2" };
 const MOT_BLOC = { pour:"POUR", contre:"CONTRE", abst:"ABSTENTION", partage:"PARTAGÉ" };
 
 async function dessiner(ctx, f){
@@ -119,16 +120,28 @@ async function dessiner(ctx, f){
   const col = pos => C[pos] || C.partage;
   blocs.forEach(b => {
     const a0 = b.a0 + gap, a1 = b.a1 - gap;
-    chemin(ctx, cx, cy, r, R, a0, a1); ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = col(b.pos); ctx.lineWidth = 6; ctx.lineJoin = "round"; ctx.stroke();
+    chemin(ctx, cx, cy, r, R, a0, a1); ctx.fillStyle = TEINTE_FOND[b.pos] || "#fff"; ctx.fill(); ctx.strokeStyle = col(b.pos); ctx.lineWidth = 6; ctx.lineJoin = "round"; ctx.stroke();
     if(b.pos === "partage"){ ctx.save(); chemin(ctx, cx, cy, r, R, a0, a1); ctx.clip(); ctx.strokeStyle = "rgba(107,111,128,0.25)"; ctx.lineWidth = 5; ctx.beginPath(); for(let k = -R; k < 2 * R; k += 20){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore(); }
     chemin(ctx, cx, cy, r - 38, r - 18, a0, a1); ctx.fillStyle = col(b.pos); ctx.fill(); // arc de couleur sous le secteur
   });
-  // logos : un par groupe, au centre de sa part, rayons alternés pour que les logos larges ne se touchent pas
+  // traits fins entre les groupes d'un même secteur
   gs.forEach((g, k) => {
-    const am = (g.a0 + g.a1) / 2, rr = r + (R - r) * [0.76, 0.5, 0.24][k % 3], px = cx + rr * Math.cos(am), py = cy + rr * Math.sin(am);
-    const arc = rr * (g.a1 - g.a0), wMax = Math.max(50, Math.min(arc * 1.25, 118)), hMax = Math.min(58, (R - r) * 0.3);
-    if(g.logo){ const kk = Math.min(wMax / g.logo.width, hMax / g.logo.height), lw = g.logo.width * kk, lh = g.logo.height * kk; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
-    else ecrire(ctx, g.id, px, py + 12, { poids:900, taille:30, couleur:C.encre, align:"center", ls:1 });
+    const suivant = gs[k + 1]; if(!suivant || suivant.pos !== g.pos) return;
+    ctx.strokeStyle = "rgba(22,36,94,0.18)"; ctx.lineWidth = 2; ctx.setLineDash([6, 8]); ctx.beginPath();
+    ctx.moveTo(cx + (r + 8) * Math.cos(g.a1), cy + (r + 8) * Math.sin(g.a1)); ctx.lineTo(cx + (R - 8) * Math.cos(g.a1), cy + (R - 8) * Math.sin(g.a1)); ctx.stroke(); ctx.setLineDash([]);
+  });
+  // logos : chacun dans sa carte blanche aux bords arrondis, de hauteur identique, centrée sur la part de son groupe ; deux rayons en alternance
+  gs.forEach((g, k) => {
+    const am = (g.a0 + g.a1) / 2, rr = r + (R - r) * (k % 2 ? 0.25 : 0.76), px = cx + rr * Math.cos(am), py = cy + rr * Math.sin(am);
+    const hC = 70, wMax = Math.min(124, Math.max(84, rr * (g.a1 - g.a0) * 1.6));
+    let wC;
+    if(g.logo){ wC = Math.max(76, Math.min(wMax, g.logo.width * ((hC - 24) / g.logo.height) + 28)); }
+    else wC = 84;
+    ctx.save(); ctx.shadowColor = "rgba(22,36,94,0.18)"; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(px - wC / 2, py - hC / 2, wC, hC, 16); ctx.fill(); ctx.restore();
+    ctx.strokeStyle = "rgba(22,36,94,0.14)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(px - wC / 2, py - hC / 2, wC, hC, 16); ctx.stroke();
+    if(g.logo){ const kk = Math.min((wC - 28) / g.logo.width, (hC - 24) / g.logo.height), lw = g.logo.width * kk, lh = g.logo.height * kk; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
+    else ecrire(ctx, g.id, px, py + 11, { poids:900, taille:32, couleur:C.encre, align:"center", ls:1 });
   });
   // étiquettes aux deux bouts : couleur du premier et du dernier secteur
   const bg = blocs[0], bd = blocs[blocs.length - 1];
