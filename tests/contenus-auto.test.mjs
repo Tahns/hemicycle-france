@@ -453,4 +453,28 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
   }
 }
 
+// ---------- Lisibilité (FALC) : aucun sigle non expliqué, phrases de 20 mots au plus, aucun jargon, sur les exemples de chaque contenu ----------
+{
+  const { siglesNonExpliques, motsParPhrase } = require("../scripts/titres-propres.cjs");
+  const JARGON = /scrutin public|\bamendement|motion de censure|première lecture|commission mixte paritaire|séance publique|dossier législatif|\bprojet de loi\b|\bproposition de loi\b|\b(?:PLFSS|PLF|LFI|CMP)\b/i;
+  // tous les textes que le lecteur voit : spécifications d'image, légendes, textes alternatifs, accroches
+  const textes = (o, sortie = []) => { if (typeof o === "string") sortie.push(o); else if (Array.isArray(o)) o.forEach((x) => textes(x, sortie)); else if (o && typeof o === "object") Object.entries(o).forEach(([k, x]) => { if (k !== "brut") textes(x, sortie); }); return sortie; }; // `brut` = intitulé officiel gardé pour les registres, jamais affiché
+  const jours = { aujourdhui: fx.instants.aujourdhui, "vote-jour": fx.instants["vote-jour"], "chiffre-jour": fx.instants["chiffre-jour"], "carrousel-loi": fx.instants["carrousel-loi"], "carrousel-hebdo": fx.instants["carrousel-hebdo"] };
+  let vus = 0;
+  for (const [nom, instant] of Object.entries(jours)) {
+    const p = contenu(nom, instant);
+    if (!p) continue;
+    // le texte officiel cité entre guillemets (« … ») et l'adresse des sources restent tels quels : on les retire avant de mesurer
+    const propres = (t) => t.replace(/«[^»]*»/g, " ").replace(/https?:\/\/\S+|\b[\w.-]+\.(?:fr|com)\S*/g, " ").replace(/#\S+/g, " ");
+    const lus = [...textes(p.rendu), p.entree.legende, p.entree.alt, p.entree.accroche].filter(Boolean).map(propres);
+    for (const t of lus) {
+      vus++;
+      assert.deepStrictEqual(siglesNonExpliques(t), [], `${nom} : sigle non expliqué dans « ${t.slice(0, 120)} »`);
+      for (const { phrase, mots } of motsParPhrase(t)) assert.ok(mots <= 20, `${nom} : phrase de ${mots} mots : « ${phrase} »`);
+      assert.ok(!JARGON.test(t), `${nom} : jargon dans « ${t.slice(0, 160)} »`);
+    }
+  }
+  assert.ok(vus > 20, "le test a bien lu des textes");
+}
+
 console.log("[tests contenus-auto] OK");
