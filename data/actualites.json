@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T21:20:37.975Z",
+ "lastUpdated": "2026-10-09T21:25:31.325Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -103,7 +103,8 @@
    "id": "presidentielle",
    "titre": "Présidentielle",
    "motifs": [
-    "présidentielle"
+    "présidentielle",
+    "bruno"
    ],
    "medias": [
     "BFMTV",
@@ -112,23 +113,25 @@
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
+    "Le Figaro",
     "Le Monde",
     "Public Sénat",
     "20 Minutes",
-    "Le Figaro"
+    "L'Express"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
     "BFMTV",
     "Libération",
     "Nice-Matin",
     "EBRA",
+    "Le Figaro",
     "Le Monde",
     "Public Sénat",
     "20 Minutes",
-    "Le Figaro"
+    "L'Express"
    ],
-   "nb": 25,
+   "nb": 28,
    "derniere": "2026-10-09T20:43:43.000Z",
    "articles": [
     {
@@ -169,6 +172,12 @@
      "date": "2026-10-09T17:45:00.000Z"
     },
     {
+     "media": "Le Figaro",
+     "titre": "Michel Barnier au Figaro : «Je souhaite un seul candidat à la fin et que ce soit Bruno Retailleau»",
+     "url": "https://www.lefigaro.fr/elections/presidentielles/michel-barnier-au-figaro-je-souhaite-un-seul-candidat-a-la-fin-et-que-ce-soit-bruno-retailleau-20261009",
+     "date": "2026-10-09T16:24:56.000Z"
+    },
+    {
      "media": "Libération",
      "titre": "Présidentielle 2027 : Bruno Retailleau reçoit le soutien de François Baroin (qui croit encore aux miracles)",
      "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-bruno-retailleau-recoit-le-soutien-de-francois-baroin-qui-croit-encore-aux-miracles-20261009_GJRDICS3OZGYVGBYYRS2DPQQRI/",
@@ -199,22 +208,16 @@
      "date": "2026-10-09T14:51:20.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Présidentielle 2027: le maire divers droite de Chalon-sur-Saône Gilles Platret annonce sa candidature",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-le-maire-divers-droite-de-chalon-sur-saone-gilles-platret-annonce-sa-candidature_AN-202610090630.html",
-     "date": "2026-10-09T14:33:42.000Z"
-    },
-    {
      "media": "20 Minutes",
      "titre": "Présidentielle 2027 : S’il est élu, Edouard Philippe n’habitera pas à l’Elysée avec sa famille",
      "url": "https://www.20minutes.fr/politique/4252883-20261009-presidentielle-2027-elu-edouard-philippe-habitera-elysee-famille?at_medium=display&at_campaign=149",
      "date": "2026-10-09T13:17:40.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "« Elles servent à emmerder le voisin » : pourquoi les niches parlementaires vont électriser l’Assemblée nationale jusqu’à la présidentielle 2027",
-     "url": "https://www.lefigaro.fr/politique/elles-servent-a-emmerder-le-voisin-pourquoi-les-niches-parlementaires-vont-electriser-l-assemblee-nationale-jusqu-a-la-presidentielle-2027-20261008",
-     "date": "2026-10-08T17:46:19.000Z"
+     "media": "L'Express",
+     "titre": "Bruno Retailleau et l'interdiction de LFI : de Paris à Strasbourg, histoire secrète d’un coup d’épée dans l’eau",
+     "url": "https://www.lexpress.fr/politique/bruno-retailleau-et-linterdiction-de-lfi-de-paris-a-strasbourg-histoire-secrete-dun-coup-depee-dans-5DNYUUP4ZFBNBNGWNZ73FWSRLI/",
+     "date": "2026-10-09T04:30:00.000Z"
     }
    ]
   },
@@ -3241,8 +3244,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Candidat",
-    "origine": "dossier"
+    "titre": "Michel Barnier (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -4145,6 +4149,49 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "François Hollande",
+     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T13:44:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T13:44:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4188,12 +4235,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "François Hollande",
-      "photo": "photos/deputes/PA1654.jpg",
-      "photoHd": "photos/deputes/hd/PA1654.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA1654",
-      "credit": "Assemblée nationale"
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -4202,22 +4249,22 @@
    },
    "articles": [
     {
-     "titre": "François Hollande",
-     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "François Hollande : député SOC (Corrèze)",
-     "source": "Assemblée nationale (open data)"
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -4262,41 +4309,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ségolène Royal",
-     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ségolène Royal (Parti socialiste) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
