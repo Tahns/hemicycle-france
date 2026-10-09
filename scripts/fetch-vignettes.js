@@ -11,6 +11,9 @@
  * 640 px, récent, nom sans personne ni foule) ; la LICENCE est vérifiée par l'API extmetadata de Commons (CC0, CC BY, CC BY-SA,
  * domaine public ; NC, ND, non libre, fair use et panorama sans liberté refusés) ; le meilleur fichier retenu est recadré au
  * centre en carré de 320 × 320 px, JPEG de 40 Ko au plus (ffmpeg, présent sur les exécuteurs GitHub), dans photos/vignettes/<clé>.jpg.
+ * EN PLUS, une version haute définition du même fichier (même licence, même crédit) pour le fond des stories : photos/vignettes/<clé>-hd.jpg,
+ * photo entière (pas de recadrage), au moins 1080 px et au plus 1600 px de large, jamais agrandie, JPEG de 220 Ko au plus ; notée `chemin_hd`
+ * dans data/vignettes.json. Une source de moins de 1080 px n'a pas de HD (`hd_indisponible`). Les anciennes entrées sans HD sont complétées au passage suivant.
  * Auteur, licence et lien Commons sont notés dans data/vignettes.json (crédités au survol et dans la page Méthode).
  *
  * Garde-fous : une bonne vignette n'est jamais écrasée par un échec (ni même retéléchargée) ; un thème en échec n'est retenté qu'une
@@ -35,7 +38,12 @@ const DOSSIER = "photos/vignettes";
 export const LARGEUR_MIN = 640;
 export const COTE = 320;
 export const MAX_OCTETS = 40 * 1024;
+// Version haute définition (fond de story 1080 × 1920) : photos/vignettes/<clé>-hd.jpg, jamais agrandie
+export const LARGEUR_HD_MIN = 1080;
+export const LARGEUR_HD_MAX = 1600;
+export const MAX_OCTETS_HD = 220 * 1024;
 const QUALITES = [4, 6, 8, 11, 14, 18, 24, 31]; // qscale ffmpeg : du meilleur au plus léger
+const QUALITES_HD = [3, 5, 7, 9, 12, 15, 19, 24, 31];
 const MIMES_OK = /^image\/(jpeg|png|webp|tiff)$/;
 
 /**
@@ -95,6 +103,57 @@ export async function redimensionner(octets) {
     await unlink(entree).catch(() => {});
     await unlink(sortie).catch(() => {});
   }
+}
+
+/**
+ * Plan de la version HD d'un fichier de largeur `largeur` : { largeur } (largeur finale, 1600 px au plus, jamais d'agrandissement,
+ * photo gardée entière sans recadrage) ou null si la source est trop étroite (moins de LARGEUR_HD_MIN px). Pure.
+ */
+export function planHd(largeur) {
+  const l = Number(largeur) || 0;
+  return l >= LARGEUR_HD_MIN ? { largeur: Math.min(LARGEUR_HD_MAX, Math.floor(l)) } : null;
+}
+/** Adresse de la miniature Commons de largeur `largeur` à partir de celle de 640 px (…/640px-Nom.jpg) ; null si le motif est inconnu. Pure. */
+export function urlHd(thumburl, largeur) {
+  const u = String(thumburl || "");
+  return /\/\d+px-[^/]+$/.test(u) ? u.replace(/\/\d+px-([^/]+)$/, `/${largeur}px-$1`) : null;
+}
+
+/** Redimensionne à `largeur` px (hauteur proportionnelle), JPEG le plus fidèle qui tient en MAX_OCTETS_HD (ffmpeg). Renvoie un Buffer. */
+export async function redimensionnerHd(octets, largeur = LARGEUR_HD_MAX) {
+  const dossier = path.join(tmpdir(), `vignette-hd-${process.pid}-${Date.now()}`);
+  await mkdir(dossier, { recursive: true });
+  const entree = path.join(dossier, "entree"), sortie = path.join(dossier, "sortie.jpg");
+  await writeFile(entree, octets);
+  try {
+    for (const q of QUALITES_HD) {
+      const r = spawnSync("ffmpeg", ["-v", "error", "-y", "-i", entree, "-vf", `scale='min(${largeur},iw)':-2:flags=lanczos`, "-frames:v", "1", "-q:v", String(q), "-pix_fmt", "yuvj420p", sortie], { encoding: "utf-8" });
+      if (r.error) throw erreur(`ffmpeg indisponible (${r.error.message})`);
+      if (r.status !== 0) throw erreur(`ffmpeg : ${String(r.stderr).trim().slice(0, 160)}`);
+      const jpeg = await readFile(sortie);
+      if (jpeg.length <= MAX_OCTETS_HD) return jpeg;
+    }
+    throw erreur(`image HD trop lourde même à la plus basse qualité (maximum ${MAX_OCTETS_HD / 1024} Ko)`);
+  } finally {
+    await unlink(entree).catch(() => {});
+    await unlink(sortie).catch(() => {});
+  }
+}
+
+/**
+ * Version HD d'un fichier déjà évalué et retenu (`meilleur` : sortie d'evaluerFichier). Renvoie { octets, largeur } ou null si la source
+ * est trop étroite ; lève une erreur (transitoire ou non) en cas d'échec de téléchargement ou de réduction. Même fichier, donc même licence et même crédit.
+ */
+export async function produireHd(meilleur, ctx) {
+  const plan = planHd(meilleur?.largeur);
+  if (!plan) return null;
+  const url = urlHd(meilleur.vignette, plan.largeur);
+  if (!url) return null;
+  const res = await ctx.telecharger(url);
+  if (!res.ok) throw erreur(`téléchargement HD impossible (HTTP ${res.status})`, res.status === 429 || res.status >= 500);
+  const brut = Buffer.from(await res.arrayBuffer());
+  const octets = await (ctx.redimensionnerHd || redimensionnerHd)(brut, plan.largeur);
+  return { octets, largeur: plan.largeur };
 }
 
 const PANORAMA = /panorama|\bfop\b|no freedom/i;
@@ -215,13 +274,35 @@ export async function resoudreCle(cle, ctx) {
       const brut = Buffer.from(await res.arrayBuffer());
       const octets = await (ctx.redimensionner || redimensionner)(brut);
       const { vignette: _v, note: _n, ...credit } = meilleur;
-      return { statut: "photo", octets, entree: { lieu: def.lieu, alt: def.alt, ...credit, candidat, octets: octets.length, ajoutLe: ctx.aujourdhui } };
+      // Version HD : au mieux (un échec ne fait pas perdre la vignette carrée ; reprise au passage suivant)
+      let hd = null, hdErreur = null;
+      try { hd = await produireHd(meilleur, ctx); } catch (e) { hdErreur = e; }
+      return { statut: "photo", octets, octetsHd: hd?.octets, hdErreur, entree: { lieu: def.lieu, alt: def.alt, ...credit, candidat, octets: octets.length, ...(hd ? { largeur_hd: hd.largeur, octets_hd: hd.octets.length } : {}), ajoutLe: ctx.aujourdhui } };
     } catch (e) {
       raisons.push(`${meilleur.fichier} : ${e.message}`);
       if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true };
     }
   }
   return { statut: "echec", raison: raisons.join(" ; ") || "aucun candidat", transitoire: false };
+}
+
+/**
+ * Complète une entrée existante (sans `chemin_hd`) : retrouve le fichier Commons, revérifie sa licence puis produit la HD.
+ * Renvoie { octets, largeur } ou null (source trop étroite / fichier introuvable) ; lève une erreur en cas de panne.
+ */
+export async function completerHd(entree, ctx) {
+  if (!entree?.fichier) return null;
+  const pages = await pagesDuCandidat(`File:${entree.fichier}`, ctx);
+  const ev = evaluerFichier(pages[0], ctx);
+  if (!ev.retenu) return null;
+  return produireHd(ev, ctx);
+}
+
+/** Une entrée avec photo carrée mais sans HD est-elle à compléter ? Une fois par jour au plus après un échec, jamais si la source est trop étroite. Pure. */
+export function hdAFaire(entree, aujourdhui) {
+  if (!entree || entree.chemin_hd) return false;
+  if (entree.hd_indisponible) return false;
+  return entree.hd_essai !== aujourdhui;
 }
 
 /** Une clé en échec est-elle à retenter ? Jamais deux fois le même jour, sauf après une panne passagère (429…). Pure. */
@@ -249,7 +330,19 @@ async function main() {
   let essais = 0, ajouts = 0, definitifs = 0, limites = 0;
   for (const cle of CLES) {
     const fichierLa = data.vignettes[cle] && (await existe(`${DOSSIER}/${cle}.jpg`));
-    if (fichierLa) continue; // une bonne vignette n'est jamais écrasée (ni retéléchargée)
+    if (fichierLa) { // une bonne vignette n'est jamais écrasée (ni retéléchargée) ; seule la HD manquante est complétée
+      const e = data.vignettes[cle];
+      if (e.chemin_hd && !(await existe(e.chemin_hd))) { delete e.chemin_hd; delete e.largeur_hd; delete e.octets_hd; }
+      if (!hdAFaire(e, aujourdhui) || essais >= MAX) continue;
+      essais++;
+      try {
+        const hd = await completerHd(e, ctx);
+        if (hd) { await writeFile(`${DOSSIER}/${cle}-hd.jpg`, hd.octets); Object.assign(e, { chemin_hd: `${DOSSIER}/${cle}-hd.jpg`, largeur_hd: hd.largeur, octets_hd: hd.octets.length }); delete e.hd_essai; limites = 0; log(`${cle} : version HD (${hd.largeur} px, ${Math.round(hd.octets.length / 1024)} Ko).`); }
+        else e.hd_indisponible = true; // source trop étroite ou fichier retiré de Commons
+      } catch (err) { e.hd_essai = aujourdhui; if (err.transitoire) limites++; warn(`${cle} : HD impossible (${err.message}).`); }
+      if (limites >= 2) { warn("limite de débit (HTTP 429) ou panne à répétition : arrêt de ce passage, reprise au suivant."); break; }
+      continue;
+    }
     if (data.vignettes[cle]) delete data.vignettes[cle]; // entrée sans fichier : à refaire
     if (!doitRetenter(data.echecs[cle], aujourdhui)) continue;
     if (essais++ >= MAX) break;
@@ -257,6 +350,9 @@ async function main() {
     if (r.statut === "photo") {
       await writeFile(`${DOSSIER}/${cle}.jpg`, r.octets);
       data.vignettes[cle] = { chemin: `${DOSSIER}/${cle}.jpg`, ...r.entree };
+      if (r.octetsHd) { await writeFile(`${DOSSIER}/${cle}-hd.jpg`, r.octetsHd); data.vignettes[cle].chemin_hd = `${DOSSIER}/${cle}-hd.jpg`; }
+      else if (r.hdErreur) data.vignettes[cle].hd_essai = aujourdhui;
+      else data.vignettes[cle].hd_indisponible = true;
       delete data.echecs[cle];
       ajouts++; limites = 0;
       log(`${cle} : ${r.entree.fichier} (${r.entree.licence}, ${Math.round(r.octets.length / 1024)} Ko).`);

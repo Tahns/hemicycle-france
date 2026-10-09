@@ -18,6 +18,8 @@ const RACINE = path.resolve(__dirname, "..");
 const F_STATS = process.env.STATS_SORTIE || path.join(RACINE, "data", "instagram-stats.json");
 const D_DOCS = process.env.STATS_DOCS || path.join(RACINE, "docs", "stats");
 const MIN_TOTAL = 10; // médias mesurés d'un même type avant toute conclusion
+const MIN_STYLE = 10; // stories mesurées PAR STYLE avant de désigner un style gagnant (test comparatif, docs/STATS.md)
+const STYLES = ["bleu", "une-photo", "question", "chiffre"]; // même liste que scripts/stories-auto.cjs (VARIANTES)
 const MIN_GROUPE = 3; // médias dans le groupe comparé ET dans le reste
 const SEUIL_PCT = 15; // écart minimal pour être signalé
 
@@ -46,6 +48,27 @@ function comparer(medias, cle) {
     sorties.push({ cle: k, n: vs.length, nReste: reste.length, moyenne: mg, pct: ((mg - mr) / mr) * 100 });
   }
   return { sorties: sorties.sort((a, b) => b.pct - a.pct), trop };
+}
+
+/**
+ * Conclusion du test comparatif des styles de story (champ « variante ») : { conclu, lignes }. Il faut au moins MIN_STYLE stories mesurées pour
+ * CHAQUE style ; sinon « pas assez de données ». Suggestion seulement : le réglage « styleFixe » est à écrire par vous dans data/stories-config.json.
+ */
+function styleGagnant(medias) {
+  const stories = medias.filter((m) => m.type === "story" && STYLES.includes(m.variante) && vuesDe(m) !== null);
+  if (!stories.length) return null;
+  const stats = STYLES.map((v) => { const vs = stories.filter((m) => m.variante === v).map(vuesDe); return { v, n: vs.length, m: vs.length ? moyenne(vs) : 0 }; });
+  const detail = stats.map((x) => `${x.v} : ${x.n} stories` + (x.n ? `, ${Math.round(x.m)} vues en moyenne` : "")).join(" ; ");
+  const manque = stats.filter((x) => x.n < MIN_STYLE);
+  if (manque.length) return { conclu: false, lignes: [`Style gagnant : pas assez de données (il faut ${MIN_STYLE} stories mesurées par style ; il en manque pour ${manque.map((x) => `${x.v} (${x.n})`).join(", ")}). ${detail}.`] };
+  const tri = [...stats].sort((a, b) => b.m - a.m);
+  const [premier, second] = tri;
+  const ecart = second.m > 0 ? ((premier.m - second.m) / second.m) * 100 : 100;
+  if (ecart < SEUIL_PCT) return { conclu: false, lignes: [`Style gagnant : aucun net. « ${premier.v} » est en tête (${Math.round(premier.m)} vues) mais l'écart avec « ${second.v} » (${Math.round(second.m)} vues) est inférieur à ${SEUIL_PCT} %. ${detail}.`] };
+  return { conclu: true, lignes: [
+    `Style gagnant : « ${premier.v} », ${Math.round(premier.m)} vues en moyenne sur ${premier.n} stories, soit ${Math.round(ecart)} % de plus que « ${second.v} » (${Math.round(second.m)} vues). ${detail}.`,
+    `Piste : pour l'adopter, écrire "styleFixe": "${premier.v}" dans data/stories-config.json (null remet le test comparatif). Rien n'est modifié automatiquement.`,
+  ] };
 }
 
 function construire(stats, now = new Date()) {
@@ -78,6 +101,8 @@ function construire(stats, now = new Date()) {
     const f = Object.entries(parType).filter(([, l]) => l.length >= MIN_GROUPE).map(([t, l]) => ({ t, n: l.length, m: moyenne(l.map(vuesDe)) })).sort((a, b) => b.m - a.m);
     if (f.length > 1) L.push("## Formats (indicatif)", "", `Vues moyennes : ${f.map((x) => `${PLURIEL[x.t] || x.t} ${Math.round(x.m)} (${x.n})`).join(" ; ")}. Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.`, "");
   }
+  const sg = styleGagnant(medias);
+  if (sg) { L.push("## Test comparatif des styles de story", "", ...sg.lignes.map((l) => "- " + l), ""); if (sg.conclu) conclusions++; }
   if (!medias.length) L.push("Aucune donnée mesurée pour l'instant.", "");
   return { texte: L.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd() + "\n", conclusions };
 }
@@ -92,5 +117,5 @@ function principal() {
   if (process.env.GITHUB_STEP_SUMMARY) try { fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "\n" + texte); } catch (e) { /* sans résumé */ }
 }
 
-module.exports = { construire, comparer };
+module.exports = { construire, comparer, styleGagnant };
 if (require.main === module) principal();

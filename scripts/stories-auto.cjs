@@ -808,12 +808,14 @@ function normaliserConfig(c) {
     // sujets de justice et de mise en cause (scripts/sujets-sensibles.cjs) : activés par défaut ; niveau 1 = au moins « minMediasSensible » médias
     // citant une juridiction et une décision ; niveau 2 = brouillons à valider, « brouillonsSensiblesMax » par jour
     fraicheurH: entier(c?.fraicheurH, 12, 3, 72),
+    // test comparatif de styles : null = attribution par hash (4 styles) ; « bleu », « une-photo », « question » ou « chiffre » = ce style pour toutes les nouvelles stories (conclusion du test)
+    styleFixe: VARIANTES.includes(c?.styleFixe) ? c.styleFixe : null,
     sensibles: c?.sensibles !== false, minMediasSensible: entier(c?.minMediasSensible, 2, 2, 10), brouillonsSensiblesMax: entier(c?.brouillonsSensiblesMax, 3, 0, 10)
   };
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
 function appliquerSeuils(config) {
-  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH;
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
 }
 /**
  * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
@@ -1278,8 +1280,11 @@ const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre
 // sujets sensibles et rappels d'agenda gardent leur dessin, sans variante.
 // ---------------------------------------------------------------------------------------------------------------------
 const VARIANTES = ["bleu", "une-photo", "question", "chiffre"];
-/** Variante d'un id : hash(id) % nombre de styles (4 par défaut ; une liste plus courte quand un style ne s'applique pas au contenu). */
-function varianteDe(id, styles = VARIANTES) {
+/** Style imposé (réglage « styleFixe » de data/stories-config.json, une valeur de VARIANTES) ; null = test comparatif. Renseigné une fois par exécution (appliquerSeuils). */
+let STYLE_FIXE = null;
+/** Variante d'un id : hash(id) % nombre de styles (4 par défaut ; une liste plus courte quand un style ne s'applique pas au contenu). Avec « styleFixe », ce style partout où il s'applique. */
+function varianteDe(id, styles = VARIANTES, fixe = STYLE_FIXE) {
+  if (fixe && VARIANTES.includes(fixe)) return styles.includes(fixe) ? fixe : "bleu"; // style non applicable à ce contenu (ex. « chiffre » pour « comprendre ») : dessin historique
   return styles[parseInt(crypto.createHash("sha1").update("variante|" + String(id)).digest("hex").slice(0, 8), 16) % styles.length];
 }
 /** Variante d'un choix décrit par decrire() ; null si le contenu garde son dessin unique (aucune variante dans l'entrée). */

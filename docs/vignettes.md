@@ -41,6 +41,15 @@ entre 0,8 et 2,2, nom et catégories sans personnes, foule, manifestation, plan 
 récence, nom évocateur d'une façade. Le meilleur est téléchargé (miniature Commons de 640 px), recadré au centre en **320 × 320 px**, JPEG de
 **40 Ko au plus** (ffmpeg, qualité ajustée).
 
+## Version haute définition (fond de story)
+Le carré de 320 px est flou en 1080 × 1920. Pour le même fichier (même licence, même crédit), le script produit aussi
+`photos/vignettes/<clé>-hd.jpg` : photo **entière** (pas de recadrage), de **1080 px au moins et 1600 px au plus de large**, jamais agrandie (miniature
+Commons demandée à `min(1600, largeur de la source)`), JPEG de **220 Ko au plus** (ffmpeg, qualité ajustée). `data/vignettes.json` reçoit `chemin_hd`,
+`largeur_hd` et `octets_hd` ; le champ `chemin` (carré 320, utilisé par le site) ne change pas. Une source de moins de 1080 px n'a pas de HD
+(`hd_indisponible: true`). Les anciennes entrées sans `chemin_hd` restent valides : au passage suivant le script les complète (licence revérifiée sur
+Commons ; un échec HD n'est retenté qu'une fois par jour, `hd_essai`) sans toucher à la photo carrée. `check-vignettes.js` accepte les deux cas et, si la
+HD existe, vérifie qu'elle est désignée par `chemin_hd`, qu'elle pèse 220 Ko au plus et que le fichier est bien là.
+
 ## Candidats : catégories, sous-catégories, recherche
 Une catégorie Commons ne liste que ses fichiers DIRECTS : le palais du Luxembourg, par exemple, a ses photos dans des sous-catégories (0 fichier examiné
 au premier passage). Si une catégorie ne donne rien d'exploitable, le script explore donc ses sous-catégories (deux niveaux, 10 appels au plus ; intérieurs,

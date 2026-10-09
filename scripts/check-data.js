@@ -385,6 +385,7 @@ async function checkInstagramFile() {
   for (const [j, n] of Object.entries(stories)) if (n > maxStories) err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
   for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour, carrousels compris)`);
   await checkCreneaux(config);
+  if (config.styleFixe != null && !["bleu", "une-photo", "question", "chiffre"].includes(config.styleFixe)) err(`stories-config.json : « styleFixe » doit valoir null, "bleu", "une-photo", "question" ou "chiffre" (reçu : ${JSON.stringify(config.styleFixe)})`);
   await checkModelesContenus();
   const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;
   for (const [j, n] of Object.entries(videos)) if (n > Math.max(maxVideos, 6)) err(`instagram-file.json : ${n} vidéos le ${j} (videosMax : ${maxVideos})`);
