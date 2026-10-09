@@ -493,6 +493,89 @@ function dateSujet(sujet, maintenant = new Date()) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Langage simple (FALC : « facile à lire et à comprendre », lecteur d'environ 12-14 ans, sans culture politique).
+// Aucun avis : on remplace un mot technique par des mots courants, on garde les faits et les chiffres tels quels.
+// ─────────────────────────────────────────────────────────────────────────────
+const SIGLES_PARTIS = [[/\bLFI\b/g, "La France insoumise"], [/\bRN\b/g, "Rassemblement national"], [/\bPS\b/g, "Parti socialiste"], [/\bLR\b/g, "Les Républicains"], [/\bUDR\b/g, "Union des droites pour la République"], [/\bLDH\b/g, "Ligue des droits de l'Homme"]];
+const SIGLES_TEXTES = [[/\bPLFSS\b/g, "loi de financement de la Sécurité sociale"], [/\bPLF\b/g, "loi de finances (le budget de l'État)"], [/\bCMP\b/g, "réunion de députés et sénateurs pour s'accorder sur un texte"], [/\bAN\b/g, "Assemblée nationale"], [/\bBIT\b/g, "Bureau international du travail"]];
+const aMaj = (m, t) => (/^\p{Lu}/u.test(m) ? t.charAt(0).toUpperCase() + t.slice(1) : t);
+const LOCUTIONS = [
+  // textes de loi (les plus longs d'abord)
+  [/\bprojets? de loi de finances rectificatives?\b/gi, (m) => aMaj(m, "loi de finances rectificative (budget de l'État corrigé en cours d'année)")],
+  [/\bprojets? de loi de finances\b/gi, (m) => aMaj(m, "loi de finances (le budget de l'État)")],
+  [/\bprojets? de loi de financement de la sécurité sociale\b/gi, (m) => aMaj(m, "loi de financement de la Sécurité sociale (le budget de la Sécurité sociale)")],
+  [/\bprojets? de loi constitutionnelle\b/gi, (m) => aMaj(m, "loi proposée par le Gouvernement pour changer la Constitution")],
+  [/\bpropositions? de loi constitutionnelle\b/gi, (m) => aMaj(m, "loi proposée par des parlementaires pour changer la Constitution")],
+  [/\bprojets? de loi organique\b/gi, (m) => aMaj(m, "loi organique (elle complète la Constitution) proposée par le Gouvernement")],
+  [/\bpropositions? de loi organique\b/gi, (m) => aMaj(m, "loi organique (elle complète la Constitution) proposée par des parlementaires")],
+  [/\bpropositions? de résolution\b/gi, (m) => aMaj(m, "texte proposé par des parlementaires, sans valeur de loi (une résolution)")],
+  [/\bprojets? de loi\b(?!\s+[«"“])/gi, (m) => aMaj(m, "loi proposée par le Gouvernement")],
+  [/\bpropositions? de loi\b(?!\s+[«"“])/gi, (m) => aMaj(m, "loi proposée par des parlementaires")],
+  [/\b(loi proposée par (?:le Gouvernement|des parlementaires)),?\s+(?:relatif|relative)s?\s+(?:à l['’]|à la |au |aux |à )/gi, (m, a) => `${a} sur ${/l['’]\s*$/.test(m) ? "l'" : /à la $/.test(m) ? "la " : /au $/.test(m) ? "le " : /aux $/.test(m) ? "les " : ""}`],
+  [/\bprocédure accélérée\b/gi, (m) => aMaj(m, "procédure rapide")],
+  // vote et débat
+  [/\bmotions? de censure\b/gi, (m) => aMaj(m, "vote pour renverser le Gouvernement")],
+  [/\b(?:le recours (?:à|au) )?(?:l['’]article )?49[.\-]3\b/g, () => "le Gouvernement fait passer un texte sans vote (article 49.3)"],
+  [/\bsous-amendements?\b/gi, (m) => aMaj(m, "modification d'une modification proposée")],
+  [/\bl['’]amendements?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "les modifications proposées" : "la modification proposée")],
+  [/\b(un|cet|cet) amendement\b/gi, (m) => aMaj(m, "une modification proposée")],
+  [/\bamendements\b/gi, (m) => aMaj(m, "modifications proposées")],
+  [/\bamendement\b/gi, (m) => aMaj(m, "modification proposée")],
+  [/\bscrutins? publics?\b/gi, (m) => aMaj(m, /^scrutins/i.test(m) ? "votes des députés" : "vote des députés")],
+  [/\bvotes? solennels?\b/gi, (m) => aMaj(m, /^votes/i.test(m) ? "votes des députés" : "vote des députés")],
+  [/\bséances? publiques?\b/gi, (m) => aMaj(m, /^séances/i.test(m) ? "débats dans l'hémicycle" : "débat dans l'hémicycle")],
+  [/\bexamen en séance\b/gi, (m) => aMaj(m, "examen dans l'hémicycle")],
+  [/\bs['’]abstiennent\b/gi, () => "ne votent ni pour ni contre"],
+  [/\bs['’]abstient\b/gi, () => "ne vote ni pour ni contre"],
+  [/(?<!taux d['’])\babstentions?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "abstentions" : "abstention")],
+  // étapes du texte
+  [/\bcommissions? mixtes? paritaires?\b/gi, (m) => aMaj(m, "réunion de députés et sénateurs pour s'accorder sur un texte")],
+  [/\bpremière lecture\b/gi, (m) => aMaj(m, "premier examen du texte")],
+  [/\bdeuxième lecture\b/gi, (m) => aMaj(m, "deuxième examen du texte")],
+  [/\btroisième lecture\b/gi, (m) => aMaj(m, "troisième examen du texte")],
+  [/\bnouvelle lecture\b/gi, (m) => aMaj(m, "nouvel examen du texte")],
+  [/\blecture définitive\b/gi, (m) => aMaj(m, "dernier examen du texte (l'Assemblée nationale a le dernier mot)")],
+  [/\bnavette parlementaire\b/gi, (m) => aMaj(m, "va-et-vient du texte entre les deux assemblées")],
+  [/\bdossiers? législatifs?\b/gi, (m) => aMaj(m, /^dossiers/i.test(m) ? "parcours des lois" : "parcours de la loi")],
+  [/\bà l['’]ordre du jour\b/gi, (m) => aMaj(m, "au programme")],
+  [/\bordre du jour\b/gi, (m) => aMaj(m, "programme")],
+  [/\bQuestions au Gouvernement\b/g, () => "Questions des députés au Gouvernement"],
+  [/\bintitulés?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "titres" : "titre")],
+];
+/**
+ * Réécrit un texte en mots simples : sigles dits en toutes lettres, jargon remplacé (voir la liste ci-dessus).
+ * Texte déjà simple : renvoyé tel quel. Ne change ni chiffres ni faits. `abstentions` : la première est expliquée « (ni pour ni contre) ».
+ */
+function simplifierJargon(texte, { chambre = "an" } = {}) {
+  let t = String(texte || "");
+  if (!t) return t;
+  for (const [re, par] of SIGLES_PARTIS) t = t.replace(re, par);
+  for (const [re, par] of SIGLES_TEXTES) t = t.replace(re, par);
+  for (const [re, par] of LOCUTIONS) t = t.replace(re, par);
+  if (chambre === "senat") t = t.replace(/\b(votes?) des députés\b/gi, "$1 des sénateurs");
+  // les abstentions : expliquées une seule fois
+  let vu = false;
+  t = t.replace(/\babstentions?\b(?! \(ni pour ni contre\))/gi, (m) => { if (vu) return m; vu = true; return `${m} (ni pour ni contre)`; });
+  return t.replace(/\s+/g, " ").trim();
+}
+/** « première lecture » -> « premier examen du texte » (étape d'un texte, sans majuscule initiale). */
+const etapeSimple = (etape) => { const e = simplifierJargon(String(etape || "")); return e.charAt(0).toLowerCase() + e.slice(1); };
+/** « projet de loi » -> « loi proposée par le Gouvernement » ; « proposition de loi » -> « loi proposée par des parlementaires ». */
+const natureSimple = (nature) => (/^projet/i.test(nature) ? "loi proposée par le Gouvernement" : "loi proposée par des parlementaires");
+/** Nombre de mots de chaque phrase d'un texte (phrases séparées par . ! ? ; ou un saut de ligne). */
+function motsParPhrase(texte) {
+  return String(texte || "").split(/(?<=[.!?;])\s+|\n+/).map((p) => p.trim()).filter(Boolean).map((p) => ({ phrase: p, mots: nbMots(p) }));
+}
+/** Sigles (2 capitales ou plus) d'un texte qui ne sont pas dits en toutes lettres : [] si tout est expliqué. `autorises` : sigles d'usage courant. */
+const SIGLES_AUTORISES = new Set(["TVA", "SNCF", "SMIC", "RSA", "CSG", "JO", "II", "III", "IV", "VI", "VII", "XIV", "XV", "UE", "ONU", "OTAN", "USA", "ADN"]);
+const EXPLICATION_SIGLE = { PIB: /richesse produite/i, EPR: /Ensemble pour la République/i, IA: /intelligence artificielle/i, LIOT: /Libertés, indépendants/i, GDR: /Gauche démocrate/i, LR: /Les Républicains/i, RN: /Rassemblement national/i, PS: /Parti socialiste/i, LFI: /France insoumise/i, UDR: /Union des droites/i, MODEM: /Mouvement démocrate/i, TGV: /train/i, QAG: /Questions/i };
+function siglesNonExpliques(texte) {
+  const t = String(texte || "");
+  const trouves = new Set(t.match(/\b\p{Lu}{2,}\b/gu) || []);
+  return [...trouves].filter((x) => !SIGLES_AUTORISES.has(x) && !(EXPLICATION_SIGLE[x] && EXPLICATION_SIGLE[x].test(t)) && !/^[IVXLC]+$/.test(x));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Accroche : phrase simple, 6 à 10 mots, « sujet + enjeu », compréhensible en 2 secondes. Champ d'AFFICHAGE : n'entre jamais dans les registres anti-doublon.
 // ─────────────────────────────────────────────────────────────────────────────
 /** Nombre de mots d'une phrase (« l'État » = 1 mot, « tout-petit » = 1 mot). */
@@ -659,4 +742,4 @@ function simplifierTexteLoi(titre) {
   return sortie.charAt(0).toUpperCase() + sortie.slice(1);
 }
 
-module.exports = { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
+module.exports = { simplifierJargon, etapeSimple, natureSimple, motsParPhrase, siglesNonExpliques, nomParti, accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
