@@ -1212,4 +1212,25 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   verifier("alt story", A.texteAlternatif("actualite", "Le PS dépose un amendement sur le PLF", ["Le Monde", "franceinfo"], []));
 }
 
+// Titre-fait : sans fait clair en 6 à 12 mots, le sujet n'est pas publié (raison journalisée) ; avec, il devient le gros titre (champ `accroche`), le titre propre reste la clé
+{
+  const vague = sujet("Marine Le Pen (RN) : actualité sur la présidentielle", 3, { fait: undefined, titrePropre: { titre: "Marine Le Pen : actualité sur la présidentielle", origine: "regles" } });
+  vague.articles = vague.articles.map((a, i) => ({ ...a, titre: `Marine Le Pen et la présidentielle, bilan ${["de la semaine", "du mois", "de l'année"][i]} à Paris` })); // aucun verbe, aucun fait
+  const r = choix([vague]);
+  assert.ok(r.refus && /1 sans fait clair/.test(r.refus), r.refus);
+  const bon = sujet("Le gouvernement présente son projet de budget pour 2027", 3);
+  const c = choix([bon]);
+  assert.strictEqual(c.fait, "Le gouvernement présente son projet de budget pour 2027");
+  const d = AUTO_decrire(c);
+  assert.strictEqual(d.champs.accroche, c.fait, "le gros titre est le titre-fait");
+  assert.strictEqual(d.champs.titrePropre, "Budget 2027", "la clé anti-doublon ne change pas");
+  assert.strictEqual(d.args[1], bon.articles[0].titre, "l'identifiant reste celui du titre de presse");
+  assert.strictEqual(A_id(c), idSujet(bon.articles[0].titre));
+  // calculé à partir des titres de presse quand le relevé n'a pas encore le champ
+  const calc = sujet("x", 3, { fait: undefined });
+  calc.articles = [{ ...calc.articles[0], titre: "Mouvement lycéen : le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants" }, { ...calc.articles[1], titre: "Mobilisation des lycéens : le ministre de l'Education promet l'arrivée de 3 000 professeurs remplaçants" }, { ...calc.articles[2], titre: "Colère des lycéens: le ministre de l'Éducation annonce l'arrivée de 3.000 professeurs remplaçants dans les établissements en difficulté" }];
+  assert.strictEqual(choix([calc]).fait, "Le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants");
+}
+function A_id(c) { return c.id; }
+
 console.log("stories-auto : tous les tests passent.");
