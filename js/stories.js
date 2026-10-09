@@ -1026,7 +1026,7 @@ function storyStyleUnePhoto(ctx, d){
   if(plan.e){
     y += 40;
     ctx.font = `800 28px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = STORY_DA.rose; ctx.textBaseline = "alphabetic";
-    ctx.fillText("L'ESSENTIEL", marge, y + 24); ctx.letterSpacing = "0px";
+    ctx.fillText("L'ESSENTIEL", marge, y + 12); ctx.letterSpacing = "0px";
     y += 36;
     ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
     storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
