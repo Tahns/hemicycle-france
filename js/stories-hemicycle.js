@@ -73,10 +73,10 @@ function chemin(ctx, cx, cy, r0, r1, a0, a1){
   ctx.beginPath(); ctx.arc(cx, cy, r1, a0, a1); ctx.arc(cx, cy, r0, a1, a0, true); ctx.closePath();
 }
 
-// Palette de ce modèle (fond clair, comme un tableau de vote lisible d'un coup d'œil) : textes foncés ≥ 4,5:1 sur le blanc
-const C = { fond:"#F4F5FA", encre:"#16245E", pour:"#1E8A4C", contre:"#C8283B", abst:"#D97A06", partage:"#6B6F80" };
-const TEINTE_FOND = { pour:"#E3F3EA", contre:"#FBE6E9", abst:"#FCEFD9", partage:"#ECEDF2" };
+// Palette de ce modèle (fond clair, lisible d'un coup d'œil) : textes foncés ≥ 4,5:1 sur le blanc
+const C = { fond:"#E9EBF1", encre:"#17307A", pour:"#1E8A4C", contre:"#C8283B", abst:"#D97A06", partage:"#6B6F80" };
 const MOT_BLOC = { pour:"POUR", contre:"CONTRE", abst:"ABSTENTION", partage:"PARTAGÉ" };
+const JOURS = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 
 async function dessiner(ctx, f){
   const post = f.format === "post", H = post ? H_POST : STORY.H, W = L;
@@ -90,80 +90,80 @@ async function dessiner(ctx, f){
   if(!gs.length) return null;
   const total = gs.reduce((t, g) => t + g.n, 0);
   await Promise.all(gs.map(async g => { g.logo = await storyImage(`icons/partis/${g.id}.png`); })); // logos hébergés sur le site ; LIOT et NI : sigle
+  const marque = await storyImage("icons/icon-192.png");
 
-  // fond clair
+  // fond : gris clair, grands arcs d'hémicycle très pâles
   ctx.fillStyle = C.fond; ctx.fillRect(0, 0, W, H);
-  const haut = post ? 0 : 150, bas = post ? 0 : 150; // les stories laissent libres le haut et le bas (zones de l'application)
-  const adopte = f.verdict === "adopte", motVote = adopte ? "pour" : "contre";
+  ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 26;
+  for(let k = 0; k < 7; k++){ ctx.beginPath(); ctx.arc(W / 2, H * 0.62, 260 + k * 150, Math.PI, 2 * Math.PI); ctx.stroke(); }
+  const haut = post ? 0 : 150, bas = post ? 0 : 150;
+  const adopte = f.verdict === "adopte";
+  const hPied = 150, yPied = H - bas - hPied;
 
-  // 1. en-tête et titre (centrés, en majuscules)
-  let y = haut + 62;
-  ecrire(ctx, `${f.chambre || "Assemblée nationale"} · ${f.date || ""}`.replace(/ · $/, "").toUpperCase(), W / 2, y, { poids:800, taille:25, couleur:C.encre, align:"center", ls:3 });
-  ctx.fillStyle = C.encre; ctx.fillRect(W / 2 - 60, y + 16, 120, 4);
-  let tt = post ? 56 : 60; let lignes;
-  for(; tt >= 38; tt -= 2){ ctx.font = `900 ${tt}px "Public Sans"`; lignes = storyLignes(ctx, String(f.titre).toUpperCase(), W - 2 * 70, 4); if(lignes.length <= 3) break; }
-  y += 40 + tt;
-  lignes.forEach((ln, k) => ecrire(ctx, ln, W / 2, y + k * tt * 1.12, { poids:900, taille:tt, couleur:C.encre, align:"center" }));
-  y += (lignes.length - 1) * tt * 1.12;
+  // 1. en-tête : mention centrée, filet, titre en gros
+  let y = haut + 60;
+  ecrire(ctx, "VOTE À L'ASSEMBLÉE NATIONALE", W / 2, y, { poids:800, taille:25, couleur:C.encre, align:"center", ls:4 });
+  ctx.fillStyle = C.encre; ctx.fillRect(W / 2 - 150, y + 18, 300, 3);
+  let tt = post ? 64 : 70; let lignes;
+  for(; tt >= 38; tt -= 2){ ctx.font = `900 ${tt}px "Public Sans"`; lignes = storyLignes(ctx, String(f.titre).toUpperCase(), W - 2 * 60, 4); if(lignes.length <= 3) break; }
+  y += 48 + tt;
+  lignes.forEach((ln, k) => ecrire(ctx, ln, W / 2, y + k * tt * 1.08, { poids:900, taille:tt, couleur:C.encre, align:"center", ls:-1 }));
+  y += (lignes.length - 1) * tt * 1.08;
 
-  // 2. blocs : groupes voisins ayant la même position = un seul secteur
-  const parts = gs.map(g => 0.7 / gs.length + 0.3 * g.n / total); // largeur : surtout égale (chaque logo doit tenir), un peu proportionnelle aux sièges
-  let a = Math.PI; const blocs = [];
-  gs.forEach((g, k) => {
-    const dernier = blocs[blocs.length - 1];
-    if(!dernier || dernier.pos !== g.pos) blocs.push({ pos:g.pos, groupes:[], a0:a });
-    blocs[blocs.length - 1].groupes.push(g); g.a0 = a; a += Math.PI * parts[k]; g.a1 = a; blocs[blocs.length - 1].a1 = a;
-  });
-  const R = Math.min(W / 2 - 50, 480), r = R * 0.5, gap = 0.012, cx = W / 2;
-  const hDessous = post ? 400 : 470; // « Ils ont voté » + mot géant + totaux
-  const cy = Math.round(Math.min(y + 40 + R, H - bas - hDessous)) ;
+  // 2. secteurs : groupes voisins de même position réunis, coupés en secteurs de 4 groupes au plus
+  const blocs = [];
+  gs.forEach(g => { const d = blocs[blocs.length - 1]; if(d && d.pos === g.pos) d.g.push(g); else blocs.push({ pos:g.pos, g:[g] }); });
+  const secteurs = [];
+  blocs.forEach(b => { const n = Math.ceil(b.g.length / 4), taille = Math.ceil(b.g.length / n); for(let k = 0; k < b.g.length; k += taille) secteurs.push({ pos:b.pos, g:b.g.slice(k, k + taille) }); });
+  const poids = sc => sc.g.reduce((t, g) => t + 0.8 + 0.2 * g.n / total * gs.length, 0), somme = secteurs.reduce((t, sc) => t + poids(sc), 0);
+  let a = Math.PI; secteurs.forEach(sc => { sc.a0 = a; a += Math.PI * poids(sc) / somme; sc.a1 = a; sc.am = (sc.a0 + sc.a1) / 2; });
+  const R = Math.min(W / 2 - 50, 480), r = R * 0.52, gap = 0.014, cx = W / 2;
+  const hDessous = post ? 400 : 480;
+  const cy = Math.round(Math.min(y + 50 + R, yPied - hDessous));
   const col = pos => C[pos] || C.partage;
-  blocs.forEach(b => {
-    const a0 = b.a0 + gap, a1 = b.a1 - gap;
-    chemin(ctx, cx, cy, r, R, a0, a1); ctx.fillStyle = TEINTE_FOND[b.pos] || "#fff"; ctx.fill(); ctx.strokeStyle = col(b.pos); ctx.lineWidth = 6; ctx.lineJoin = "round"; ctx.stroke();
-    if(b.pos === "partage"){ ctx.save(); chemin(ctx, cx, cy, r, R, a0, a1); ctx.clip(); ctx.strokeStyle = "rgba(107,111,128,0.25)"; ctx.lineWidth = 5; ctx.beginPath(); for(let k = -R; k < 2 * R; k += 20){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore(); }
-    chemin(ctx, cx, cy, r - 38, r - 18, a0, a1); ctx.fillStyle = col(b.pos); ctx.fill(); // arc de couleur sous le secteur
+  secteurs.forEach(sc => {
+    const a0 = sc.a0 + gap, a1 = sc.a1 - gap;
+    chemin(ctx, cx, cy, r, R, a0, a1); ctx.fillStyle = "#fff"; ctx.fill(); ctx.strokeStyle = col(sc.pos); ctx.lineWidth = 5; ctx.lineJoin = "round"; ctx.stroke();
+    if(sc.pos === "partage"){ ctx.save(); chemin(ctx, cx, cy, r, R, a0, a1); ctx.clip(); ctx.strokeStyle = "rgba(107,111,128,0.22)"; ctx.lineWidth = 5; ctx.beginPath(); for(let k = -R; k < 2 * R; k += 20){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore(); }
+    chemin(ctx, cx, cy, r - 44, r - 20, a0, a1); ctx.fillStyle = col(sc.pos); ctx.fill(); // arc de couleur sous le secteur
+    // logos empilés au centre du secteur, sans cadre, du haut vers le bas
+    const rc = r + (R - r) * 0.52, mx = cx + rc * Math.cos(sc.am), my = cy + rc * Math.sin(sc.am), n = sc.g.length;
+    const pas = Math.min(62, ((R - r) * Math.abs(Math.sin(sc.am)) * 0.9 + (r * (sc.a1 - sc.a0)) * Math.abs(Math.cos(sc.am)) * 0.9) / n + 18);
+    sc.g.forEach((g, k) => {
+      const py = my + (k - (n - 1) / 2) * pas, px = mx + (n > 1 ? (k % 2 ? 14 : -14) : 0);
+      const wMax = Math.min(132, Math.max(96, rc * (sc.a1 - sc.a0) * 0.5)), hMax = Math.min(50, pas - 10);
+      if(g.logo){ const kk = Math.min(wMax / g.logo.width, hMax / g.logo.height), lw = g.logo.width * kk, lh = g.logo.height * kk; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
+      else ecrire(ctx, g.id, px, py + 12, { poids:900, taille:36, couleur:C.encre, align:"center", ls:1 });
+    });
   });
-  // traits fins entre les groupes d'un même secteur
-  gs.forEach((g, k) => {
-    const suivant = gs[k + 1]; if(!suivant || suivant.pos !== g.pos) return;
-    ctx.strokeStyle = "rgba(22,36,94,0.18)"; ctx.lineWidth = 2; ctx.setLineDash([6, 8]); ctx.beginPath();
-    ctx.moveTo(cx + (r + 8) * Math.cos(g.a1), cy + (r + 8) * Math.sin(g.a1)); ctx.lineTo(cx + (R - 8) * Math.cos(g.a1), cy + (R - 8) * Math.sin(g.a1)); ctx.stroke(); ctx.setLineDash([]);
-  });
-  // logos : chacun dans sa carte blanche aux bords arrondis, de hauteur identique, centrée sur la part de son groupe ; deux rayons en alternance
-  gs.forEach((g, k) => {
-    const am = (g.a0 + g.a1) / 2, rr = r + (R - r) * (k % 2 ? 0.25 : 0.76), px = cx + rr * Math.cos(am), py = cy + rr * Math.sin(am);
-    const hC = 70, wMax = Math.min(124, Math.max(84, rr * (g.a1 - g.a0) * 1.6));
-    let wC;
-    if(g.logo){ wC = Math.max(76, Math.min(wMax, g.logo.width * ((hC - 24) / g.logo.height) + 28)); }
-    else wC = 84;
-    ctx.save(); ctx.shadowColor = "rgba(22,36,94,0.18)"; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
-    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(px - wC / 2, py - hC / 2, wC, hC, 16); ctx.fill(); ctx.restore();
-    ctx.strokeStyle = "rgba(22,36,94,0.14)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(px - wC / 2, py - hC / 2, wC, hC, 16); ctx.stroke();
-    if(g.logo){ const kk = Math.min((wC - 28) / g.logo.width, (hC - 24) / g.logo.height), lw = g.logo.width * kk, lh = g.logo.height * kk; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
-    else ecrire(ctx, g.id, px, py + 11, { poids:900, taille:32, couleur:C.encre, align:"center", ls:1 });
-  });
-  // étiquettes aux deux bouts : couleur du premier et du dernier secteur
-  const bg = blocs[0], bd = blocs[blocs.length - 1];
-  ecrire(ctx, MOT_BLOC[bg.pos], cx - R, cy + 52, { poids:900, taille:34, couleur:col(bg.pos), ls:1 });
-  ecrire(ctx, MOT_BLOC[bd.pos], cx + R, cy + 52, { poids:900, taille:34, couleur:col(bd.pos), align:"right", ls:1 });
+  // étiquettes aux deux bouts
+  const bg = secteurs[0], bd = secteurs[secteurs.length - 1];
+  ecrire(ctx, MOT_BLOC[bg.pos], cx - R + 4, cy + 50, { poids:900, taille:34, couleur:col(bg.pos), ls:1 });
+  ecrire(ctx, MOT_BLOC[bd.pos], cx + R - 4, cy + 50, { poids:900, taille:34, couleur:col(bd.pos), align:"right", ls:1 });
 
-  // 3. résultat : « Ils ont voté » et le mot géant
+  // 3. « Ils ont voté » et le mot géant
   const mot = (censure ? (adopte ? "ADOPTÉE" : "REJETÉE") : (adopte ? "POUR" : "CONTRE"));
-  ecrire(ctx, "Ils ont voté", W / 2, cy + (post ? 130 : 150), { poids:900, taille:post ? 50 : 56, couleur:C.encre, align:"center" });
-  let tg = post ? 190 : 210; while(tg > 100 && mesure(ctx, mot, 900, tg, "Public Sans", -3) > W - 140) tg -= 6;
-  ecrire(ctx, mot, W / 2, cy + (post ? 130 : 150) + tg * 0.95, { poids:900, taille:tg, couleur:col(adopte ? "pour" : "contre"), align:"center", ls:-3 });
-  const yt = cy + (post ? 130 : 150) + tg * 0.95 + 56;
+  const yI = cy + (post ? 110 : 130);
+  ecrire(ctx, "Ils ont voté", W / 2, yI, { poids:900, taille:post ? 52 : 58, couleur:C.encre, align:"center" });
+  let tg = post ? 200 : 220; while(tg > 100 && mesure(ctx, mot, 900, tg, "Public Sans", -3) > W - 120) tg -= 6;
+  const yG = yI + tg * 0.92;
+  ecrire(ctx, mot, W / 2, yG, { poids:900, taille:tg, couleur:col(adopte ? "pour" : "contre"), align:"center", ls:-3 });
   const bilan = [[fr(f.pour), "pour", C.pour], [fr(f.contre), "contre", C.contre], [fr(f.abst), f.abst > 1 ? "abstentions" : "abstention", C.abst]];
-  const larg = bilan.map(([n, m]) => mesure(ctx, n + " " + m, 800, 32)), espace = 44, tot = larg.reduce((t, w) => t + w, 0) + espace * 2;
+  const larg = bilan.map(([n, m]) => mesure(ctx, n + " " + m, 800, 30)), espace = 40, tot = larg.reduce((t, w) => t + w, 0) + espace * 2;
   let x = (W - tot) / 2;
-  bilan.forEach(([n, m, c], k) => { ecrire(ctx, n + " " + m, x, yt, { poids:800, taille:32, couleur:c }); x += larg[k] + espace; });
+  bilan.forEach(([n, m, c], k) => { ecrire(ctx, n + " " + m, x, yG + 56, { poids:800, taille:30, couleur:c }); x += larg[k] + espace; });
 
-  // 4. pied : source, marque
-  const ys = H - bas - (post ? 70 : 70);
-  ecrire(ctx, f.auteur ? `Texte proposé par ${f.auteur} · Source : Assemblée nationale` : "Position majoritaire de chaque groupe · Source : Assemblée nationale", W / 2, ys, { poids:600, taille:23, couleur:"#4A4D57", align:"center" });
-  ecrire(ctx, "Hémicycle France  ·  @hemicyclefrance", W / 2, ys + 46, { poids:800, taille:28, couleur:C.encre, align:"center" });
-  return { yVoix:yt, R, partage: gs.some(g => g.pos === "partage") };
+  // 4. pied blanc : marque à gauche, filet, date et source à droite
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, yPied, W, hPied);
+  if(marque) ctx.drawImage(marque, 70, yPied + 28, 94, 94);
+  ecrire(ctx, "Hémicycle", 182, yPied + 74, { poids:900, taille:32, couleur:C.encre });
+  ecrire(ctx, "France", 182, yPied + 110, { poids:900, taille:32, couleur:C.encre });
+  ctx.fillStyle = "#C9CCD6"; ctx.fillRect(398, yPied + 30, 3, 90);
+  const d = f.dateIso ? new Date(f.dateIso + "T12:00:00") : null, dateTxt = d && !isNaN(d) ? `${JOURS[d.getDay()]} ${f.date}` : (f.date || "");
+  ecrire(ctx, dateTxt, 430, yPied + 70, { poids:900, taille:36, couleur:C.encre });
+  ecrire(ctx, f.auteur ? `Texte de ${f.auteur}` : "Position majoritaire de chaque groupe", 430, yPied + 104, { poids:600, taille:24, couleur:"#4A4D57" });
+  ecrire(ctx, "Source : Assemblée nationale · @hemicyclefrance", 430, yPied + 134, { poids:600, taille:22, couleur:"#4A4D57" });
+  return { yVoix:yG, R, partage: gs.some(g => g.pos === "partage") };
 }
 
 STORY_PLUS["vote-groupes"] = async (ctx, f) => {
