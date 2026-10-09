@@ -322,7 +322,7 @@ STORY_PLUS.date = async (ctx, info) => {
       chiffre: { valeur: nj > 1 ? String(nj) : maj1(quand), legende: nj > 1 ? "jours avant la date à retenir" : "date à retenir" },
       essentiel: `Date à retenir : ${jourDate}, ${quand}`,
       puces: [`Date à retenir : ${jourDate}`, maj1(quand), `Rubrique : ${d.categorie}`],
-      categorie: "À noter", contexte: `${storyMots(titreAffiche(s), 12)} : ${jourDate}`, cta: "Ne rien rater",
+      categorie: "À noter", contexte: `${storyMots(titreAffiche(s), 8)} : ${jourDate}`, cta: "Ne rien rater",
       source: sansLead(d.source),
     };
   })) return { nom: nomFichier("date", s) };

@@ -1415,7 +1415,8 @@ async function dessinerStory(type, info){
     y = storyTexte(ctx, `Nommé le ${dateCourte(g.depuis)} · ${g.membres.length} membres`, marge, y, { taille:28, couleur:STORY.ciel, max:1 }) + 10;
     const delegue = m => /délégué|Secrétaire/i.test(m.qualite + " " + m.fonction.split(",")[0]);
     const pm = g.membres.find(m=>m.qualite === "Premier ministre");
-    const liste = g.membres.filter(m=>!delegue(m) && m !== pm);
+    let liste = g.membres.filter(m=>!delegue(m) && m !== pm);
+    const nbListe = liste.length;
     if(pm){
       const hh = 170;
       storyCarte(ctx, marge, y, largeur, hh);
@@ -1424,6 +1425,7 @@ async function dessinerStory(type, info){
       ctx.font = `700 64px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, pm.nom, largeur - 100, 1)[0], marge + 58, y + 138);
       y += hh + 22;
     }
+    liste = liste.slice(0, 2 * Math.max(1, Math.floor((bas - y - 30) / 56))); // jamais plus de lignes qu'on ne peut en lire (56 px mini par ministre)
     const rangs = Math.ceil(liste.length / 2), pas = Math.min(72, (bas - y - 30) / rangs);
     storyCarte(ctx, marge, y, largeur, rangs * pas + 24, "#fff", 24);
     const cw = (largeur - 56) / 2, r = Math.min(24, pas * 0.34);
@@ -1438,7 +1440,7 @@ async function dessinerStory(type, info){
       while(ctx.measureText(fct).width > tl && fct.includes(" et ")) fct = fct.slice(0, fct.lastIndexOf(" et "));
       ctx.fillText(storyLignes(ctx, fct, tl, 1)[0], tx, cy + pas * 0.33);
     });
-    storyPied(ctx, `Et ${g.membres.length - liste.length - (pm ? 1 : 0)} ministres délégués. Source : Assemblée nationale, mandats des membres du Gouvernement.`, { accroche:"Qui gouverne ?" });
+    storyPied(ctx, `Et ${g.membres.length - liste.length - (pm ? 1 : 0)} ${liste.length < nbListe ? "autres membres" : "ministres délégués"}. Source : Assemblée nationale, mandats des membres du Gouvernement.`, { accroche:"Qui gouverne ?" });
     nom = "gouvernement";
   }
 

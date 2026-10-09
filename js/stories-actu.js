@@ -189,7 +189,7 @@ function dessinePastilles(ctx, bloc, x, y){
 /* ----- Modèle A : « À la une » ----- */
 async function dessineStyle(ctx, s, style){ // styles du test comparatif (une-photo, question, chiffre) : voir storyStyleDessiner dans js/stories.js
   const d = await storySpecSujet(s);
-  if(!d || !storyStyleDessiner(ctx, style, { ...d, contexte:storyMots(d.contexte || d.accroche, 14) })) return null; // 14 mots au plus dans le bloc du bas : il ne doit pas toucher la ligne vidéo
+  if(!d || !storyStyleDessiner(ctx, style, { ...d, contexte:storyMots(d.contexte || d.accroche, 10) })) return null; // 10 mots au plus dans le bloc du bas : il ne doit pas toucher la ligne vidéo
   return { nom:`actualite-${slugDep(d.accroche).slice(0, 40)}` };
 }
 async function dessineUne(ctx, s, style){
