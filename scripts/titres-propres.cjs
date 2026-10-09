@@ -209,7 +209,7 @@ const ACTIONS = [
   ["essai", /tir d.(?:essai|exercice)|assiste a un tir|essai d.un|test d.un|reussit un tir|tir de missile|a teste/, "essai lié à"],
   ["decision", /tribunal administratif/, "décision du tribunal administratif sur"],
   ["vote", /\badopt(?:e|ee|es|ees|ent|er)\b|\bvotent\b|\bvote par\b|\bvotee?s?\b|\bvote\b/, "vote sur"],
-  ["depot", /proposition de loi|\bppl\b/, "loi proposée par des parlementaires sur"],
+  ["depot", /proposition de loi|\bppl\b/, "loi proposée sur"],
   ["appel", /\bappelle\b|\bappellent\b|\bappel a\b|\bmobilisent\b|\bmobilise\b/, "appel sur"],
   ["reponse", /\bcherche la|\breponse\b|\brepond|\breagit|\bface a\b/, "réponse sur"],
   ["temoignage", /\btemoign|ca fait mal|\blarmes\b|\bmaman\b/, "témoignage sur"],
@@ -316,11 +316,11 @@ function titreParRegles(sujet, donnees = {}) {
     if (plat(l) === plat(S)) return lim([`${S} : ce que disent les médias`]);
     // Thème institutionnel seulement : sans verbe clair, on n'invente pas de lien entre la personne et le sujet
     if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action.cle))) return lim([`${l} : ce que disent les médias`, `${acteur.court || l} : ce que disent les médias`], true);
-    if (genre) return lim([`${l} : opinion publiée par un média sur ${O}`, `${l} : opinion publiée par un média`, `${S} : opinion publiée par un média`]);
+    if (genre) return lim([`${l} : opinion d'un média sur ${O}`, `${l} : opinion d'un média`, `${S} : opinion d'un média`]);
     return lim([`${l} : ${verbe} ${O}`, acteur.court ? `${acteur.court} : ${verbe} ${O}` : null, `${S} : ${verbe} ${O}`, `${l} : ${verbe} ${S.toLowerCase()}`, `${S} : ${l}`]);
   }
   if (acteur) return lim([`${acteur.label} : ce que disent les médias`, `${acteur.court || acteur.label} : ce que disent les médias`], true);
-  if (genre) return lim([lieu && S ? `${lieu} : opinion publiée par un média` : null, S ? `${S} : opinion publiée par un média` : null, "Politique : opinion publiée par un média"]);
+  if (genre) return lim([lieu && S ? `${lieu} : opinion d'un média` : null, S ? `${S} : opinion d'un média` : null, "Politique : opinion d'un média"]);
   if (direct && S) return lim([`${S} : suivi en direct`]);
   if (lieu && theme) return lim([`${lieu} : ${theme.local}`, `${lieu} : ${S.toLowerCase()}`]);
   if (lieu) return lim([`${lieu} : actualité locale`], true);
@@ -514,8 +514,10 @@ const LOCUTIONS = [
   [/\b(loi proposée par (?:le Gouvernement|des parlementaires)),?\s+(?:relatif|relative)s?\s+(?:à l['’]|à la |au |aux |à )/gi, (m, a) => `${a} sur ${/l['’]\s*$/.test(m) ? "l'" : /à la $/.test(m) ? "la " : /au $/.test(m) ? "le " : /aux $/.test(m) ? "les " : ""}`],
   [/\bprocédure accélérée\b/gi, (m) => aMaj(m, "procédure rapide")],
   // vote et débat
-  [/\bmotions? de censure\b/gi, (m) => aMaj(m, "vote pour renverser le Gouvernement")],
-  [/\b(?:le recours (?:à|au) )?(?:l['’]article )?49[.\-]3\b/g, () => "le Gouvernement fait passer un texte sans vote (article 49.3)"],
+  [/\b(la |une |cette )?motions? de censure\b/gi, (m, art) => { const a = String(art || "").toLowerCase(); return aMaj(m, `${a === "la " ? "le " : a === "une " ? "un " : a === "cette " ? "ce " : ""}vote pour renverser le Gouvernement`); }],
+  [/\b(?:(?:le )?recours (?:à |au )(?:l['’]article )?|(?:au |du |le |l['’]article )?)49[.\-]3\b/g, () => "le Gouvernement fait passer un texte sans vote (article 49.3)"],
+  [/\ben séances? publiques?\b/gi, (m) => aMaj(m, "dans l'hémicycle")],
+  [/\ben séance\b/gi, (m) => aMaj(m, "dans l'hémicycle")],
   [/\bsous-amendements?\b/gi, (m) => aMaj(m, "modification d'une modification proposée")],
   [/\bl['’]amendements?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "les modifications proposées" : "la modification proposée")],
   [/\b(un|cet|cet) amendement\b/gi, (m) => aMaj(m, "une modification proposée")],
@@ -524,12 +526,14 @@ const LOCUTIONS = [
   [/\bscrutins? publics?\b/gi, (m) => aMaj(m, /^scrutins/i.test(m) ? "votes des députés" : "vote des députés")],
   [/\bvotes? solennels?\b/gi, (m) => aMaj(m, /^votes/i.test(m) ? "votes des députés" : "vote des députés")],
   [/\bséances? publiques?\b/gi, (m) => aMaj(m, /^séances/i.test(m) ? "débats dans l'hémicycle" : "débat dans l'hémicycle")],
-  [/\bexamen en séance\b/gi, (m) => aMaj(m, "examen dans l'hémicycle")],
   [/\bs['’]abstiennent\b/gi, () => "ne votent ni pour ni contre"],
   [/\bs['’]abstient\b/gi, () => "ne vote ni pour ni contre"],
   [/(?<!taux d['’])\babstentions?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "abstentions" : "abstention")],
   // étapes du texte
   [/\bcommissions? mixtes? paritaires?\b/gi, (m) => aMaj(m, "réunion de députés et sénateurs pour s'accorder sur un texte")],
+  [/\ben première lecture\b/gi, (m) => aMaj(m, "lors du premier examen du texte")],
+  [/\ben deuxième lecture\b/gi, (m) => aMaj(m, "lors du deuxième examen du texte")],
+  [/\ben nouvelle lecture\b/gi, (m) => aMaj(m, "lors d'un nouvel examen du texte")],
   [/\bpremière lecture\b/gi, (m) => aMaj(m, "premier examen du texte")],
   [/\bdeuxième lecture\b/gi, (m) => aMaj(m, "deuxième examen du texte")],
   [/\btroisième lecture\b/gi, (m) => aMaj(m, "troisième examen du texte")],
@@ -542,6 +546,19 @@ const LOCUTIONS = [
   [/\bQuestions au Gouvernement\b/g, () => "Questions des députés au Gouvernement"],
   [/\bintitulés?\b/gi, (m) => aMaj(m, /s$/i.test(m) ? "titres" : "titre")],
 ];
+/** Accords après remplacement (« du loi » -> « de la loi », « la vote » -> « le vote ») : les noms remplacés n'ont pas le genre des noms d'origine. */
+const ACCORDS = [
+  [/\b(le|un|ce) (loi|modification|réunion|déclaration)\b/gi, (m, a, n) => `${{ le: "la", un: "une", ce: "cette" }[a.toLowerCase()]} ${n}`],
+  [/\bdu (loi|modification|réunion)\b/gi, "de la $1"],
+  [/\bau (loi|modification|réunion)\b/gi, "à la $1"],
+  [/\b(la|une|cette) (vote|premier examen|deuxième examen|troisième examen|nouvel examen|dernier examen)\b/gi, (m, a, n) => `${{ la: "le", une: "un", cette: "ce" }[a.toLowerCase()]} ${n}`],
+  [/\bde la (vote|premier examen|deuxième examen|nouvel examen|dernier examen)\b/gi, "du $1"],
+  [/\bà la (vote|premier examen|deuxième examen|nouvel examen|dernier examen)\b/gi, "au $1"],
+  [/\b(?:le|la) (La France insoumise)/g, "$1"], [/\bdu (La France insoumise)/g, "de $1"], [/\bau (La France insoumise)/g, "à $1"],
+  [/\b(?:le|la) (Les Républicains)/g, "$1"], [/\bdu Les Républicains/g, "des Républicains"], [/\bau Les Républicains/g, "aux Républicains"],
+  [/(renverser le Gouvernement) (?:déposée?|présentée?)\b/gi, "$1, déposé"],
+  [/(renverser le Gouvernement (?:est |a été |sont )?)(adopt|rejet)ée\b/gi, "$1$2é"],
+];
 /**
  * Réécrit un texte en mots simples : sigles dits en toutes lettres, jargon remplacé (voir la liste ci-dessus).
  * Texte déjà simple : renvoyé tel quel. Ne change ni chiffres ni faits. `abstentions` : la première est expliquée « (ni pour ni contre) ».
@@ -552,6 +569,7 @@ function simplifierJargon(texte, { chambre = "an" } = {}) {
   for (const [re, par] of SIGLES_PARTIS) t = t.replace(re, par);
   for (const [re, par] of SIGLES_TEXTES) t = t.replace(re, par);
   for (const [re, par] of LOCUTIONS) t = t.replace(re, par);
+  for (const [re, par] of ACCORDS) t = t.replace(re, par);
   if (chambre === "senat") t = t.replace(/\b(votes?) des députés\b/gi, "$1 des sénateurs");
   // les abstentions : expliquées une seule fois
   let vu = false;
@@ -576,50 +594,60 @@ function siglesNonExpliques(texte) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Accroche : phrase simple, 6 à 10 mots, « sujet + enjeu », compréhensible en 2 secondes. Champ d'AFFICHAGE : n'entre jamais dans les registres anti-doublon.
+// Accroche : une phrase simple (20 mots au plus) qui dit de quoi ça parle, en mots courants. Champ d'AFFICHAGE : n'entre jamais dans les registres anti-doublon.
 // ─────────────────────────────────────────────────────────────────────────────
 /** Nombre de mots d'une phrase (« l'État » = 1 mot, « tout-petit » = 1 mot). */
 const nbMots = (t) => (String(t || "").match(/[\p{L}0-9]+(?:['’-][\p{L}0-9]+)*/gu) || []).length;
-/** Enjeu en une question, par thème (clé = THEMES_TITRES[].S). Aucun nom de personne, aucune accusation, aucune procédure. */
+/** Nom du thème en mots courants (clé = THEMES_TITRES[].S) quand l'intitulé du thème est technique. */
+const THEME_AFFICHE = {
+  "Présidentielle 2027": "Élection du président en 2027",
+  "Finances publiques": "L'argent de l'État",
+  "Numérique": "Internet et données personnelles",
+  "Aménagement": "Aménagement d'un lieu",
+  "Collectivités locales": "Communes, départements et régions",
+  "Sécurité": "Police et sécurité",
+};
+/** Ce dont il s'agit, en une proposition simple (clé = THEMES_TITRES[].S). Aucun nom de personne, aucune accusation, aucune procédure. */
 const ENJEUX = {
-  "Dissuasion nucléaire": "ce qu'il faut savoir sur la dissuasion",
-  "Lycées": "la mobilisation, que veulent les élèves ?",
-  "Finances publiques": "quels enjeux pour les finances de l'État ?",
-  "Présidentielle 2027": "où en est la course à l'Élysée ?",
+  "Dissuasion nucléaire": "l'idée est de décourager une attaque avec l'arme atomique",
+  "Lycées": "des élèves se mobilisent, que demandent-ils ?",
+  "Finances publiques": "d'où vient-il et à quoi sert-il ?",
+  "Présidentielle 2027": "ce qui se prépare avant le vote",
   "Conseil municipal": "quelles décisions pour la commune ?",
-  "Intelligence artificielle": "quels usages et quelles règles ?",
-  "Environnement": "quels enjeux pour le climat et l'eau ?",
-  "Santé": "quels enjeux pour la santé publique ?",
-  "Numérique": "quels enjeux pour nos données ?",
-  "International": "quels enjeux pour la France ?",
-  "Sécurité": "quels enjeux pour l'ordre public ?",
-  "Logement et accueil": "quels enjeux pour le logement ?",
-  "Aménagement": "quel projet pour le territoire ?",
-  "Collectivités locales": "ce que change l'organisation locale",
-  "Éducation et jeunesse": "quels enjeux pour les jeunes ?",
-  "Social": "quels enjeux pour l'emploi et le social ?",
-  "Sénat": "ce qui se joue au Sénat",
-  "Assemblée nationale": "ce qui se joue à l'Assemblée",
-  "Gouvernement": "quelles décisions pour le pays ?",
+  "Intelligence artificielle": "à quoi sert-elle et quelles règles ?",
+  "Environnement": "ce qui change pour le climat et l'eau",
+  "Santé": "ce qui change pour la santé de tous",
+  "Numérique": "ce qui se passe pour nos données sur internet",
+  "International": "un sujet qui concerne la France et d'autres pays",
+  "Sécurité": "ce qui concerne la police et la sécurité",
+  "Logement et accueil": "ce qui concerne le logement et l'accueil des personnes",
+  "Aménagement": "un projet pour construire ou aménager un lieu",
+  "Collectivités locales": "comment sont organisées les communes et les régions",
+  "Éducation et jeunesse": "ce qui concerne l'école et les jeunes",
+  "Social": "ce qui concerne le travail et l'aide aux personnes",
+  "Sénat": "ce qui se passe au Sénat, la chambre des sénateurs",
+  "Assemblée nationale": "ce qui se passe chez les députés",
+  "Gouvernement": "ce que décide le Gouvernement",
   "Vie locale": "ce qui change près de chez vous",
 };
-/** Phrase d'enjeu quand l'action est reconnue dans le titre (une action n'est dite que si son mot y est). */
+/** Phrase quand l'action est reconnue dans le titre (une action n'est dite que si son mot y est). */
 const ENJEU_ACTION = {
-  vote: "un vote, que change-t-il ?",
-  depot: "une proposition de loi, que prévoit-elle ?",
-  appel: "un appel lancé, quel est l'enjeu ?",
-  annonce: "de nouvelles annonces, que retenir ?",
-  essai: "un essai, que faut-il savoir ?",
+  vote: "un vote a lieu, qu'est-ce que cela change ?",
+  depot: "une loi est proposée, que prévoit-elle ?",
+  appel: "un appel est lancé, que demande-t-il ?",
+  annonce: "de nouvelles annonces, que faut-il retenir ?",
+  essai: "un essai a lieu, de quoi s'agit-il ?",
 };
 
 /**
- * Accroche d'un sujet : « Lycées : des blocages, que veulent les élèves ? ». Dérivée du thème (THEMES_TITRES) et de l'action reconnue (ACTIONS) ;
- * ne nomme jamais une personne ni un parti, n'affirme ni accusation ni procédure, ne recopie jamais un titre de presse.
+ * Accroche d'un sujet : « Lycées : des élèves se mobilisent, que demandent-ils ? ». Dérivée du thème (THEMES_TITRES) et de l'action reconnue (ACTIONS) ;
+ * ne nomme jamais une personne ni un parti, n'affirme ni accusation ni procédure, ne recopie jamais un titre de presse. 20 mots au plus, sans sigle ni jargon.
  * Repli : le titrePropre actuel (sujet.titrePropre.titre, sinon titreParRegles), ou null s'il n'y en a pas.
  */
 function accroche(sujet, donnees = {}) {
   const articles = sujet?.articles || [];
-  const repli = sujet?.titrePropre?.titre || titreParRegles(sujet, donnees)?.titre || null;
+  const brut = sujet?.titrePropre?.titre || titreParRegles(sujet, donnees)?.titre || null;
+  const repli = brut ? simplifierJargon(brut) : null;
   if (!articles.length) return repli;
   if (sujet?.titrePropre?.generique === true) return repli;
   // Prudence : accusation, procédure, violence, mineur → on garde le titre prudent déjà rédigé
@@ -630,11 +658,11 @@ function accroche(sujet, donnees = {}) {
   if (!theme || theme.generique || theme.S === "Justice" || !ENJEUX[theme.S]) return repli;
   const action = actionDe(p);
   let enjeu = ENJEUX[theme.S];
-  if (theme.S === "Lycées") enjeu = /\bblocus|\bblocage/.test(tous) ? "des blocages, que veulent les élèves ?" : "la mobilisation, que veulent les élèves ?";
+  if (theme.S === "Lycées") enjeu = /\bblocus|\bblocage/.test(tous) ? "des blocages, que demandent les élèves ?" : "des élèves se mobilisent, que demandent-ils ?";
   else if (action && ENJEU_ACTION[action.cle]) enjeu = ENJEU_ACTION[action.cle];
-  const phrase = `${theme.S} : ${enjeu}`;
+  const phrase = `${THEME_AFFICHE[theme.S] || theme.S} : ${enjeu}`;
   const n = nbMots(phrase);
-  if (n < 6 || n > 10 || phrase.length > 80) return repli;
+  if (n < 6 || n > 18 || phrase.length > 120) return repli;
   if (copieUnTitre(phrase, articles) || /proc[ée]dure|accus|mis en cause|poursuiv|condamn/i.test(phrase)) return repli;
   return phrase;
 }
@@ -678,7 +706,7 @@ function simplifierTexteLoi(titre) {
   if (!t) return null;
   if (/^questions?\s+(?:orales?\s+)?au\s+gouvernement/i.test(t)) return null;
   const bud = /^(?:projet de loi de (finances|financement de la sécurité sociale)( rectificative)?)\s+pour\s+(\d{4})\b/i.exec(t);
-  if (bud) return `${/finances/i.test(bud[1]) ? "Finances publiques" : "Sécurité sociale"} : budget${bud[2] ? " rectificatif" : ""} ${bud[3]}`;
+  if (bud) return `${/finances/i.test(bud[1]) ? "Budget de l'État" : "Budget de la Sécurité sociale"} ${bud[3]}${bud[2] ? " (version corrigée en cours d'année)" : ""}`;
   // Compléments de procédure en fin d'intitulé
   t = t.replace(/\s*\([^()]*(?:lecture|adopt|nouvelle|commission|procédure accélérée|CMP|urgence)[^()]*\)\s*$/i, "")
     .replace(/[,;]?\s*(?:adopté|adoptée|modifié|modifiée|rejeté|rejetée|transmis|transmise)\s+(?:par|en)\s+(?:le|la|l['’])\s*[\p{L}' -]{2,40}$/iu, "")
@@ -696,7 +724,8 @@ function simplifierTexteLoi(titre) {
   let objet;
   if (echange) {
     const sigle = echange[1].replace(/^\s*(?:relatives?\s+(?:à|aux?)\s+)?(?:de\s+|du\s+|des\s+)?/i, "").replace(/[()]/g, "").trim();
-    objet = `échange d'informations entre pays${sigle && nbMots(sigle) <= 3 ? ` (accord ${sigle})` : ""}`;
+    objet = "échange d'informations entre pays"; // le sigle de l'accord (ex. GloBE) n'est pas repris : le lecteur ne le connaît pas
+    void sigle;
   } else {
     objet = t
       .replace(new RegExp(`^(?:autorisant|portant|relatifs?|relatives?|visant|tendant|habilitant|instituant|créant|garantissant|renforçant)\\s+(?:l['’]approbation de\\s+|la ratification de\\s+|sur\\s+|à\\s+|aux?\\s+)?${ART}`, "i"), "")
@@ -739,7 +768,8 @@ function simplifierTexteLoi(titre) {
   objet = objet.replace(/[\s,;:]+$/, "");
   if (nbMots(objet) < 2) return null;
   const sortie = (tete + objet).replace(/\s+/g, " ").trim();
-  return sortie.charAt(0).toUpperCase() + sortie.slice(1);
+  const complet = [...SIGLES_PARTIS, ...SIGLES_TEXTES].reduce((x, [re, par]) => x.replace(re, par), sortie); // aucun sigle de parti ou de texte laissé tel quel
+  return complet.charAt(0).toUpperCase() + complet.slice(1);
 }
 
 module.exports = { simplifierJargon, etapeSimple, natureSimple, motsParPhrase, siglesNonExpliques, nomParti, accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
