@@ -939,7 +939,7 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
     "",
     `${quelle} a ${verbe}, le ${date}, le texte en entier${etapeTxt ? ` (${etapeTxt})` : ""}.`,
     `Ce texte est une ${natureTxt}.`,
-    ...(sujetTxt ? [`Il porte sur : ${sujetTxt}.`] : []),
+    ...(sujetTxt ? [`Il porte sur : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`] : []),
     `Titre officiel : « ${d.court} ».`,
     voix + ".",
     suite,

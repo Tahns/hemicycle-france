@@ -609,7 +609,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const d = AUTO.decrire(choix([sujet(T, 4)]));
     assert.match(d.champs.alt, /Budget 2027/);
     assert.match(d.champs.alt, /Repris par 4 médias/);
-    assert.match(d.champs.alt, /chaque média nommé/);
+    assert.match(d.champs.alt, /avec le nom de chaque média/);
     const flux = AUTO.fluxAtom([{ id: "c".repeat(12), cree: now.toISOString(), titre: "t", alt: "Texte <alt> & plus", url_image: "https://x/y.jpg" }], now);
     assert.match(flux, /<summary>Texte &lt;alt&gt; &amp; plus<\/summary>/);
   }
@@ -719,17 +719,17 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(d.type, "post");
     assert.strictEqual(d.champs.donneesPropres, true);
     assert.strictEqual(d.champs.voteId, "an-100");
-    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, l'ensemble du texte/);
-    assert.match(d.champs.legende, /Pour : 300 · Contre : 100 · Abstentions : 10/);
-    assert.match(d.champs.legende, /Source officielle : Assemblée nationale, scrutin public n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
+    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, le texte en entier \(premier examen du texte\)/);
+    assert.match(d.champs.legende, /Pour : 300 · Contre : 100 · Abstentions \(ni pour ni contre\) : 10/);
+    assert.match(d.champs.legende, /Source officielle : Assemblée nationale, vote n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
     assert.match(d.champs.legende, /@hemicyclefrance/);
     assert.ok(!/github\.io|hemicycle-france/.test(d.champs.legende));
-    assert.match(d.champs.legende.split("\n")[0], /^Assemblée nationale : (projet|proposition) de loi adopté/);
+    assert.match(d.champs.legende.split("\n")[0], /^Assemblée nationale : texte adopté le 1 octobre 2026$/);
     const nbH = (d.champs.legende.match(/#\S+/g) || []).length;
     assert.ok(nbH >= 6 && nbH <= 8, "6 à 8 hashtags");
     assert.match(d.champs.legende, /#AssembléeNationale/);
     assert.deepStrictEqual(d.sources, ["https://www.assemblee-nationale.fr/dyn/17/scrutins/100"]);
-    assert.deepStrictEqual(AUTO.ficheAnnonce(d.post.fiche, r.id), { id: r.id, titre: "Projet de loi relatif à la simplification de la vie économique", sous: "Assemblée nationale · texte adopté · 1 octobre 2026" });
+    assert.deepStrictEqual(AUTO.ficheAnnonce(d.post.fiche, r.id), { id: r.id, titre: "Simplification de la vie économique (loi proposée par le Gouvernement)", sous: "Assemblée nationale · texte adopté · 1 octobre 2026" });
   }
   // rejetée : formulation neutre, résultat officiel
   {
@@ -737,7 +737,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(r.post.spec.verdict, "rejete");
     const l = AUTO.decrire(r, now).champs.legende;
     assert.match(l, /a rejeté, le 30 septembre 2026/);
-    assert.match(l, /proposition de loi rejetée le 30 septembre 2026/);
+    assert.match(l, /texte rejeté le 30 septembre 2026/);
     assert.ok(!/(enfin|scandale|victoire|défaite|honte|bravo|malheureusement|heureusement)/i.test(l), "aucun qualificatif politique");
   }
   // le Sénat aussi ; vote ancien, non final, incohérent, à mot prudent (mineurs) ou motion : jamais
@@ -994,7 +994,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const f = A.ficheDate(r.sujet, matin);
   assert.match(f.legende, /24-25 octobre 2026/, "durée affichée");
   assert.match(f.legende, /Orléans/, "lieu");
-  assert.match(f.legende, /à vérifier auprès de l'organisateur/, "mention de vérification");
+  assert.match(f.legende, /vérifiez auprès de l'organisateur/, "mention de vérification");
   assert.ok(!f.spec.citation, "aucune citation de presse");
   assert.ok(A.decrire(r).titre.trim(), "titre de l'entrée de file jamais vide (check-data l'exige)");
   assert.ok(pa([ev({ verified: false })]).refus, "non vérifié : rien");

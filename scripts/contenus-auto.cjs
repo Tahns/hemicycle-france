@@ -37,7 +37,7 @@ const path = require("path");
 const crypto = require("crypto");
 const SA = require("./stories-auto.cjs");
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage : mention obligatoire (loi du 19 juillet 1977, art. 2)
-const { simplifierTexteLoi } = require("./titres-propres.cjs");
+const { simplifierTexteLoi, simplifierJargon, etapeSimple, natureSimple } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lireConfig, destination, fluxAtom, ficheLoi, decomposerTitreVote } = SA;
 
 const RACINE = path.resolve(__dirname, "..");
@@ -242,7 +242,7 @@ function choisirAujourdhui({ agenda, jour, now }) {
     if (vus.has(k + brut)) continue;
     vus.add(k + brut);
     // Affichage : intitulé sans jargon (simplifierTexteLoi) ; `brut` garde l'intitulé officiel pour sujets, alt et anti-doublon
-    const t = k === "qag" ? brut : (simplifierTexteLoi(brut) || brut);
+    const t = k === "qag" ? "Questions des députés au Gouvernement" : (simplifierTexteLoi(brut) || simplifierJargon(brut));
     points.push({ k, t, brut });
   }
   if (!points.some((p) => p.k !== "qag")) return { refus: "aucun point à présenter (tous écartés ou questions au Gouvernement seules)" };
@@ -253,8 +253,8 @@ function choisirAujourdhui({ agenda, jour, now }) {
   const sujets = points.filter((p) => p.k !== "qag").map((p) => p.brut);
   const nTextes = sujets.length;
   return { contenu: {
-    type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer." } },
-    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `À l'Assemblée aujourd'hui : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : ordre du jour de la séance publique de l'Assemblée nationale du ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote solennel : " : "") + p.brut).join(" ; ")}. Source : Assemblée nationale.` },
+    type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, programme des débats dans l'hémicycle (assemblee-nationale.fr). Il peut encore changer." } },
+    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `Aujourd'hui, les députés se réunissent : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : le programme du débat dans l'hémicycle de l'Assemblée nationale, ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote des députés : " : "") + p.t).join(" ; ")}. Source : Assemblée nationale.` },
   } };
 }
 
@@ -296,13 +296,20 @@ function choisirVoteDuJour({ lois, jour, now }) {
     // « l'article 3 … » -> « Article 3 … » ; une motion de censure : sans les noms de ses signataires (l'intitulé officiel les cite)
     let brut = plat(l.titre).replace(/\s*\.\s*$/, "").replace(/^l['’]/i, "");
     if (cl.type === "Motion de censure") brut = brut.replace(/\s*,?\s+par\s+(?:Mmes?|MM?\.)\s.*$/i, "").replace(/\s*,?\s*$/, "");
-    const objet = coupe(majuscule(brut), 330);
+    const objetOfficiel = coupe(majuscule(brut), 330);
+    // Affichage en mots simples : le texte officiel reste dans `sujets` (anti-doublon) et le titre officiel du dossier est expliqué
+    const apres49 = /alin[ée]a 3|49[.\-]3/i.test(brut);
+    const objet = cl.type === "Motion de censure"
+      ? `Les députés votent pour renverser le Gouvernement${apres49 ? " : il a fait passer un texte sans vote (article 49.3)" : ""}.`
+      : coupe(majuscule(simplifierJargon(brut)), 330);
+    const typeAff = { "Motion de censure": "Vote pour renverser le Gouvernement", Article: "Vote sur un article du texte", "Amendement du Gouvernement": "Modification proposée (Gouvernement)" }[cl.type] || cl.type;
+    const typeCourt = { "Motion de censure": "vote pour renverser le Gouvernement", Article: "vote sur un article", "Amendement du Gouvernement": "modification proposée par le Gouvernement" }[cl.type] || cl.type.toLowerCase();
     const verbe = l.resultat === "adopte" ? "adopté" : "rejeté";
     const url = `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
     return { contenu: {
-      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: cl.type, objet, dossier: l.dossierTitre ? coupe(l.dossierTitre, 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, scrutin public n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
-      entree: { titre: `Le vote du jour : ${cl.type === "Amendement du Gouvernement" ? "amendement du Gouvernement" : cl.type.toLowerCase()} ${verbe} le ${l.date}`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objet, 150), sujets: [objet, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
-        alt: `Story Hémicycle France, le vote du jour : ${cl.type === "Amendement du Gouvernement" ? "amendement du Gouvernement" : cl.type.toLowerCase()} ${verbe} par l'Assemblée nationale le ${l.date} (scrutin public n°${l.numero}). Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions : ${nbFr(t.abst)}. ${objet}` },
+      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(simplifierJargon(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
+      entree: { titre: `Le vote du jour : ${cl.type === "Amendement du Gouvernement" ? "amendement du Gouvernement" : cl.type.toLowerCase()} ${verbe} le ${l.date}`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
+        alt: `Story Hémicycle France, le vote du jour : ${typeCourt} ${verbe} par l'Assemblée nationale le ${l.date} (vote n°${l.numero}). Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. ${objet}` },
     } };
   }
   return { refus: "aucun scrutin de la veille à présenter (ni motion de censure, ni article, ni amendement du Gouvernement)" };
