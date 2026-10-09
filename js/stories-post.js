@@ -106,7 +106,8 @@ async function postLoi(ctx, s){
   cases.forEach(([nom, n], i) => {
     const x = marge + i * (w + gap);
     storyCarte(ctx, x, y, w, hc);
-    gras(ctx, fr(n ?? 0), x + w / 2, y + hc * 0.58, { poids: 900, taille: 92, couleur: STORY.encre, align: "center", ls: -2 });
+    const cv = storyVoixCouleur(["pour", "contre", "abst"][i], "creme"); // « Pour » vert, « Contre » rouge, « Abstentions » orange ; le libellé reste écrit
+    gras(ctx, fr(n ?? 0), x + w / 2, y + hc * 0.58, { poids: 900, taille: 92, couleur: cv, align: "center", ls: -2 });
     gras(ctx, nom.toUpperCase(), x + w / 2, y + hc * 0.58 + 44, { poids: 800, taille: 24, couleur: STORY.pale, align: "center", ls: 3 });
   });
   pied(ctx, s.sourceTxt || `Source : ${s.chambre}.`, "Toute l'actu politique");

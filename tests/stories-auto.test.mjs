@@ -287,11 +287,11 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3 };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, dossierMedias: 3, maxParJour: 20, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias, 20 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, dossierMedias: 3, maxParJour: 20, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias, 20 stories par jour, publication directe, sujets sensibles sans circuit à part");
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
@@ -1131,6 +1131,20 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   for (const v of A.VARIANTES) assert.ok(parts[v] > 60 && parts[v] < 140, `part du style ${v} : ${parts[v]} sur 400 (environ un quart)`);
   assert.ok(ids.every((i) => A.VARIANTES.includes(A.varianteDe(i))));
   assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "une-photo", "question"]) !== "chiffre"), "liste réduite : jamais le style exclu");
+  // « styleFixe » (data/stories-config.json) : null par défaut (test comparatif inchangé), sinon ce style partout
+  assert.strictEqual(A.normaliserConfig(null).styleFixe, null, "défaut : test comparatif");
+  assert.strictEqual(A.normaliserConfig({ styleFixe: "inconnu" }).styleFixe, null, "valeur invalide ignorée");
+  assert.strictEqual(A.normaliserConfig({ styleFixe: 3 }).styleFixe, null);
+  for (const v of A.VARIANTES) {
+    assert.strictEqual(A.normaliserConfig({ styleFixe: v }).styleFixe, v, `valeur valide : ${v}`);
+    assert.ok(ids.every((i) => A.varianteDe(i, A.VARIANTES, v) === v), `styleFixe ${v} imposé`);
+  }
+  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "une-photo", "question"], "chiffre") === "bleu"), "style inapplicable : dessin historique");
+  assert.strictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")).styleFixe, null, "la valeur livrée reste null (test comparatif)");
+  A.appliquerSeuils(A.normaliserConfig({ styleFixe: "chiffre" }));
+  assert.strictEqual(A.varianteDe("abc123"), "chiffre", "appliquerSeuils active le style imposé");
+  A.appliquerSeuils(A.normaliserConfig(null));
+  assert.strictEqual(A.varianteDe("abc123"), A.varianteDe("abc123", A.VARIANTES, null), "puis retour au test comparatif");
   const sj = sujet("Le gouvernement présente son projet de budget pour 2027", 4);
   const c = choix([sj]);
   const d = AUTO_decrire(c);

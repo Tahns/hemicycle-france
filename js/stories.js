@@ -14,31 +14,27 @@ const STORY_DA = {
 // directement sur le fond bleu utilise « blanc » et « ciel ».
 const STORY = { L:1080, H:1920, marge:84, fond:STORY_DA.fond, papier:STORY_DA.creme, creme:STORY_DA.creme, blanc:STORY_DA.blanc, ciel:STORY_DA.ciel, rose:STORY_DA.rose, encre:STORY_DA.encre, doux:"#47443D", pale:"#625D53", filet:"#D3CBBA", bleu:STORY_DA.fond, rouge:STORY_DA.rougeVote, vert:STORY_DA.vert, ambre:STORY_DA.ambre, ambreTxt:STORY_DA.ambreTxt, alerte:STORY_DA.rouge, alerteTxt:STORY_DA.rouge, bas:1490, haut:STORY_DA.haut, yBande:338 };
 const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
-/* ---------- Couleur du verdict « Adopté / Rejeté » ----------
-   Vert et rouge assourdis (jamais fluo), JAMAIS seuls : le mot reste écrit en grand et un ✓ ou un ✕ l'accompagne (daltonisme).
-   Variantes : "mot" (le mot coloré), "bloc" (mot blanc sur un bloc coloré), "barre" (mot blanc, barre colorée à gauche).
-   Même emprise verticale dans les trois cas : de yBase - 0,82 × taille à yBase. Fonds bleus ou sombres. */
-const STORY_VERDICT = { adopte:{ clair:"#6FD79B", fond:"#1E7A4B", glyphe:"✓" }, rejete:{ clair:"#FF8F86", fond:"#B3342B", glyphe:"✕" } };
-let STORY_VERDICT_VARIANTE = "mot";
-function storyVerdict(ctx, verdict, mot, x, yBase, taille, variante = STORY_VERDICT_VARIANTE){
+/* ---------- Couleur du verdict « Adopté / Rejeté » et des voix « pour / contre / abstentions » ----------
+   Vert et rouge assourdis (jamais fluo), orange pour l'abstention. JAMAIS seule : le mot reste écrit et un ✓ ou un ✕ accompagne le verdict (daltonisme).
+   Teintes par fond : « clair » (fonds bleus ou sombres), « creme » (cartes crème), « jaune » (fond jaune) ; contraste ≥ 4,5:1 dans chaque cas. */
+const STORY_VERDICT = { adopte:{ clair:"#6FD79B", glyphe:"✓" }, rejete:{ clair:"#FF8F86", glyphe:"✕" } };
+const STORY_VOIX = {
+  clair:{ pour:"#6FD79B", contre:"#FF8F86", abst:"#FFC247", adopte:"#6FD79B", rejete:"#FF8F86" },
+  creme:{ pour:"#2E6E41", contre:"#B8261E", abst:"#8A5F00", adopte:"#2E6E41", rejete:"#B8261E" },
+  jaune:{ pour:"#0F5A33", contre:"#8E1B14", abst:"#6B4500", adopte:"#0F5A33", rejete:"#8E1B14" },
+};
+// Couleur d'un type (pour, contre, abst, adopte, rejete) sur un fond (« creme » ou couleur hex) ; null si aucune teinte n'atteint 4,5:1 (le texte garde alors sa couleur)
+function storyVoixCouleur(type, fond){
+  if(fond === "creme") return STORY_VOIX.creme[type] || null;
+  for(const k of ["clair", "jaune"]){ const c = STORY_VOIX[k][type]; if(c && storyContraste(c, fond) >= 4.5) return c; }
+  return null;
+}
+function storyVerdict(ctx, verdict, mot, x, yBase, taille){
   const c = STORY_VERDICT[verdict === "adopte" ? "adopte" : "rejete"], ls = -taille * 0.03;
   ctx.save(); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-  const ecrire = (t, px, py, tt, couleur) => { ctx.font = `900 ${tt}px "Public Sans"`; ctx.letterSpacing = `${tt === taille ? ls : 0}px`; ctx.fillStyle = couleur; ctx.fillText(t, px, py); const w = ctx.measureText(t).width; ctx.letterSpacing = "0px"; return w; };
-  ctx.font = `900 ${taille}px "Public Sans"`; ctx.letterSpacing = `${ls}px`; const wMot = ctx.measureText(mot).width; ctx.letterSpacing = "0px";
-  const tg = Math.round(taille * 0.55);
-  if(variante === "bloc"){
-    const pad = 34, w = wMot + 2 * pad + tg * 1.1 + 22;
-    ctx.fillStyle = c.fond; ctx.beginPath(); ctx.roundRect(x - 4, yBase - taille * 0.82 - 10, w, taille * 0.82 + 10 + 30, 26); ctx.fill();
-    ecrire(mot, x - 4 + pad, yBase, taille, "#fff");
-    ecrire(c.glyphe, x - 4 + pad + wMot + 22, yBase - taille * 0.06, tg, "#fff");
-  } else if(variante === "barre"){
-    ctx.fillStyle = c.clair; ctx.beginPath(); ctx.roundRect(x - 4, yBase - taille * 0.82, 16, taille * 0.82 + 8, 8); ctx.fill();
-    ecrire(mot, x + 38, yBase, taille, "#fff");
-    ecrire(c.glyphe, x + 38 + wMot + 24, yBase - taille * 0.06, tg, c.clair);
-  } else {
-    ecrire(mot, x - 4, yBase, taille, c.clair);
-    ecrire(c.glyphe, x - 4 + wMot + 24, yBase - taille * 0.06, tg, c.clair);
-  }
+  ctx.font = `900 ${taille}px "Public Sans"`; ctx.letterSpacing = `${ls}px`; ctx.fillStyle = c.clair; ctx.fillText(mot, x - 4, yBase);
+  const wMot = ctx.measureText(mot).width; ctx.letterSpacing = "0px";
+  ctx.font = `900 ${Math.round(taille * 0.55)}px "Public Sans"`; ctx.fillText(c.glyphe, x - 4 + wMot + 24, yBase - taille * 0.06);
   ctx.restore();
 }
 const COMPTE_STORY = "@hemicyclefrance"; // les stories n'affichent que le compte Instagram, pas l'adresse du site
@@ -877,7 +873,8 @@ function storyThemeInfos(cle){
 async function storyPhotoTheme(cle){
   const p = typeof VIGNETTES !== "undefined" && cle ? VIGNETTES[cle] : null;
   if(!p || !/^photos\/vignettes\/[\w-]+\.jpe?g$/.test(p.chemin || "")) return null;
-  const img = await storyImage(p.chemin);
+  const okHd = /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(p.chemin_hd || "");
+  const img = (okHd && await storyImage(p.chemin_hd)) || await storyImage(p.chemin);
   return img ? { img, credit:`Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
 }
 function storyStylePastille(ctx, texte, x, y, fond, couleur){
@@ -920,9 +917,24 @@ function storyStyleBloc(ctx, texte, { taille, poids, police, largeur, max, inter
   const l = storyLignes(ctx, texte, largeur, max);
   return { l, taille, poids, police, interligne, h:taille + (l.length - 1) * taille * interligne, ok:l.every(x => ctx.measureText(x).width <= largeur + 1) && (/…/.test(texte) || !l.some(x => x.endsWith("…"))) }; // « ok » : rien ne dépasse et aucun mot n'a été coupé par « … »
 }
-function storyStyleEcrire(ctx, b, x, y, couleur){
+// fond (hex) fourni : colore le verdict « Adopté\u2060✓ » / « Rejeté\u2060✕ » et les voix (« 98 voix pour », « 16 contre », « 2 abstentions ») ; le mot et le signe restent écrits
+const STORY_RE_VOIX = /((?:Adopt|Rejet)ée?)\u2060([✓✕])|(\d[\d ]*(?:voix )?pour)\b|(\d[\d ]*(?:voix )?contre)\b|(\d[\d ]*abstentions?)/g;
+function storyStyleEcrire(ctx, b, x, y, couleur, fond = null){
   ctx.font = `${b.poids} ${b.taille}px "${b.police}"`; ctx.fillStyle = couleur; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-  b.l.forEach((l, i) => ctx.fillText(l, x, y + b.taille * 0.82 + i * b.taille * b.interligne));
+  b.l.forEach((l, i) => {
+    const yl = y + b.taille * 0.82 + i * b.taille * b.interligne;
+    if(!fond || !/Adopt|Rejet|pour|contre|abstention/.test(l)){ ctx.fillText(l.replace(/\u2060/g, ""), x, yl); return; }
+    let px = x, dernier = 0, m;
+    const ecrire = (t, c) => { if(!t) return; ctx.fillStyle = c; ctx.fillText(t, px, yl); px += ctx.measureText(t).width; };
+    STORY_RE_VOIX.lastIndex = 0;
+    while((m = STORY_RE_VOIX.exec(l))){
+      ecrire(l.slice(dernier, m.index), couleur);
+      if(m[1]){ const t = /^Adopt/.test(m[1]) ? "adopte" : "rejete", c = storyVoixCouleur(t, fond) || couleur; ecrire(m[1], c); px += b.taille * 0.12; ecrire(m[2], c); }
+      else ecrire(m[0], storyVoixCouleur(m[3] ? "pour" : m[4] ? "contre" : "abst", fond) || couleur);
+      dernier = m.index + m[0].length;
+    }
+    ecrire(l.slice(dernier), couleur);
+  });
   return y + b.h;
 }
 // Plus grande taille (tMax..tMin) pour laquelle le texte tient en `lignes` lignes au plus et `hMax` de haut
@@ -978,14 +990,14 @@ function storyStyleUnePhoto(ctx, d){
   let y = haut;
   storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
   y += 66 + 30;
-  y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF");
+  y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   if(plan.e){
     y += 40;
     ctx.font = `800 28px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = STORY_DA.rose; ctx.textBaseline = "alphabetic";
     ctx.fillText("L'ESSENTIEL", marge, y + 24); ctx.letterSpacing = "0px";
     y += 36;
     ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
-    storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF");
+    storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   }
   storyStylePied(ctx, d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit de la photo n'est affiché que si la photo l'est
 }
@@ -1021,13 +1033,13 @@ function storyStyleQuestion(ctx, d){
   let y = haut;
   storyStylePastille(ctx, d.categorie, marge, y, P.texte, P.fond);
   y += 66 + 44;
-  y = storyStyleEcrire(ctx, plan.q, marge, y, P.texte);
+  y = storyStyleEcrire(ctx, plan.q, marge, y, P.texte, d.colorerVoix ? P.fond : null);
   y += 28; ctx.fillStyle = P.texte; ctx.fillRect(marge, y, 140, 10); y += 10 + 56;
   plan.bl.forEach((b, i) => {
     const h = Math.max(b.h, 76), cy = y + 38;
     ctx.fillStyle = P.texte; ctx.beginPath(); ctx.arc(marge + 38, cy, 38, 0, 2 * Math.PI); ctx.fill();
     ctx.font = `900 44px "Public Sans"`; ctx.fillStyle = P.fond; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), marge + 38, cy + 3); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    storyStyleEcrire(ctx, b, marge + 104, y + (h - b.h) / 2, P.texte);
+    storyStyleEcrire(ctx, b, marge + 104, y + (h - b.h) / 2, P.texte, d.colorerVoix ? P.fond : null);
     y += h + 34;
   });
   storyStylePied(ctx, d, { doux:P.doux, texte:P.texte });
@@ -1047,6 +1059,7 @@ function storyStyleChiffre(ctx, d){
     const total = 66 + 60 + 14 + 36 + hN + (lg ? 26 + lg.h : 0) + (c ? 56 + 4 + 40 + c.h : 0);
     if(total <= bas - 400 || tC === 52){ plan = { lg, c, total }; break; }
   }
+  const vc = d.chiffre.type ? storyVoixCouleur(d.chiffre.type, NUIT) : null; // chiffre et légende teintés (voix pour / contre / abstentions)
   ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
   storyStyleMotif(ctx, d.motif, 400, 300, 700, "rgba(255,255,255,0.05)");
   storyMarque(ctx);
@@ -1055,13 +1068,13 @@ function storyStyleChiffre(ctx, d){
   storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
   y += 66 + 60;
   ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y, 150, 14); y += 14 + 36;
-  ctx.font = `900 ${tN}px "Public Sans"`; ctx.letterSpacing = `${-Math.round(tN * 0.027)}px`; ctx.fillStyle = "#FFFFFF"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+  ctx.font = `900 ${tN}px "Public Sans"`; ctx.letterSpacing = `${-Math.round(tN * 0.027)}px`; ctx.fillStyle = vc || "#FFFFFF"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
   ctx.fillText(valeur, marge - 6, y + hN); ctx.letterSpacing = "0px";
   y += hN;
-  if(plan.lg){ y += 26; y = storyStyleEcrire(ctx, plan.lg, marge, y, STORY_DA.rose); }
+  if(plan.lg){ y += 26; y = storyStyleEcrire(ctx, plan.lg, marge, y, vc || STORY_DA.rose); }
   if(plan.c){
     y += 56; ctx.fillStyle = "rgba(197,206,242,0.45)"; ctx.fillRect(marge, y, larg, 3); y += 4 + 40;
-    storyStyleEcrire(ctx, plan.c, marge, y, "#FFFFFF");
+    storyStyleEcrire(ctx, plan.c, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   }
   storyStylePied(ctx, d, { doux:"#C5CEF2", texte:"#FFFFFF" });
 }
@@ -1180,7 +1193,7 @@ async function dessinerStory(type, info){
     // Carte réponse
     const lignes = [];
     if(censure){
-      lignes.push(["Pour la censure", `${formatNombre(pour)} voix sur 289 requises`, adopte ? STORY.vert : STORY.rouge]);
+      lignes.push(["Pour la censure", `${formatNombre(pour)} voix sur 289 requises`, STORY.vert]);
       const ids = groupes.filter(g=>g.pour > 0 && g.pour >= (g.membres || 0) / 2).map(g=>g.id);
       lignes.push(["Groupes qui l'ont votée", ids.length ? ids.join(", ") : "aucun", STORY.encre]);
     } else {
@@ -1195,13 +1208,20 @@ async function dessinerStory(type, info){
     const cx = marge, cw = largeur, pad = 56, hCarte = 300 + lignes.length * 70 + (censure ? 0 : 50);
     const cyc = Math.min(Math.max(y, 780), 1500 - hCarte);
     storyCarte(ctx, cx, cyc, cw, hCarte);
-    const verdict = (adopte ? "Adopté" : "Rejeté") + (censure ? "e" : "") + ".";
+    const verdict = (adopte ? "Adopté" : "Rejeté") + (censure ? "e" : "") + ".", glyphe = adopte ? "✓" : "✕", cVerdict = storyVoixCouleur(adopte ? "adopte" : "rejete", "creme");
     let tv = 150; ctx.letterSpacing = "-4px";
-    do { ctx.font = `900 ${tv}px "Public Sans"`; } while(ctx.measureText(verdict.toUpperCase()).width > cw - 2 * pad && (tv -= 6) > 80);
-    ctx.fillStyle = adopte ? STORY.vert : STORY.rouge;
-    ctx.fillText(verdict.toUpperCase(), cx + pad, cyc + 176); ctx.letterSpacing = "0px";
-    ctx.font = `600 36px "Public Sans"`; ctx.fillStyle = STORY.doux;
-    ctx.fillText(censure ? (adopte ? "Le Gouvernement est renversé." : "Le Gouvernement reste en place.") : `${formatNombre(pour)} pour · ${formatNombre(contre)} contre · ${formatNombre(abst)} abstention${abst > 1 ? "s" : ""}`, cx + pad, cyc + 236);
+    do { ctx.font = `900 ${tv}px "Public Sans"`; } while(ctx.measureText(verdict.toUpperCase()).width + tv * 0.62 > cw - 2 * pad && (tv -= 6) > 80);
+    ctx.fillStyle = cVerdict;
+    ctx.fillText(verdict.toUpperCase(), cx + pad, cyc + 176); const wV = ctx.measureText(verdict.toUpperCase()).width; ctx.letterSpacing = "0px";
+    ctx.font = `900 ${Math.round(tv * 0.55)}px "Public Sans"`; ctx.fillText(glyphe, cx + pad + wV + 24, cyc + 176 - tv * 0.06);
+    ctx.font = `600 36px "Public Sans"`; ctx.textAlign = "left";
+    if(censure){ ctx.fillStyle = STORY.doux; ctx.fillText(adopte ? "Le Gouvernement est renversé." : "Le Gouvernement reste en place.", cx + pad, cyc + 236); }
+    else {
+      let px = cx + pad;
+      [[`${formatNombre(pour)} pour`, "pour"], [" · ", null], [`${formatNombre(contre)} contre`, "contre"], [" · ", null], [`${formatNombre(abst)} abstention${abst > 1 ? "s" : ""}`, "abst"]].forEach(([t, k]) => {
+        ctx.fillStyle = k ? storyVoixCouleur(k, "creme") : STORY.doux; ctx.fillText(t, px, cyc + 236); px += ctx.measureText(t).width;
+      });
+    }
     let ly = cyc + 270;
     if(!censure){ storyBarre(ctx, cx + pad, ly, cw - 2 * pad, 16, [[pour, STORY.vert], [contre, STORY.rouge], [abst, STORY.ambre]], (pour + contre + abst) || 1); ly += 46; }
     for(const [lib, val, coul] of lignes){

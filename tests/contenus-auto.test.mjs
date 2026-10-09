@@ -379,6 +379,18 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
   assert.deepStrictEqual(crees.map((c) => c.contenu).sort(), ["carrousel-hebdo", "carrousel-loi", "chiffre-jour"].filter((n) => crees.some((c) => c.contenu === n)).sort());
 }
 
+// ---------- 5 bis. « styleFixe » : le style imposé remplace l'attribution du test comparatif ----------
+{
+  const ch = C.chemins(racineEssai({ config: { styleFixe: "question" } }));
+  await C.main({ ch, now: new Date(fx.instants["carrousel-loi"]), dessiner: dessinFactice });
+  const story = JSON.parse(readFileSync(ch.file, "utf-8")).entrees.find((e) => e.type === "story");
+  assert.strictEqual(story.variante, "question", "styleFixe : toutes les nouvelles stories reçoivent ce style");
+  const ch2 = C.chemins(racineEssai({ config: { styleFixe: "style-inconnu" } }));
+  await C.main({ ch: ch2, now: new Date(fx.instants["carrousel-loi"]), dessiner: dessinFactice });
+  const story2 = JSON.parse(readFileSync(ch2.file, "utf-8")).entrees.find((e) => e.type === "story");
+  assert.strictEqual(story2.variante, require("../scripts/stories-auto.cjs").varianteDe(story2.id), "valeur invalide ignorée : test comparatif");
+}
+
 // ---------- 6. Jamais deux fois le même sujet (non-régression) ----------
 {
   const crypto = require("crypto");

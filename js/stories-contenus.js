@@ -48,7 +48,8 @@ function cases(ctx, y, h, liste, taille = 92){
   liste.forEach(([nom, n], i) => {
     const x = marge + i * (w + gap);
     storyCarte(ctx, x, y, w, h);
-    gras(ctx, fr(n ?? 0), x + w / 2, y + h * 0.58, { poids: 900, taille, couleur: STORY.encre, align: "center", ls: -2 });
+    const type = /^pour/i.test(nom) ? "pour" : /^contre/i.test(nom) ? "contre" : /^abst/i.test(nom) ? "abst" : null; // « Pour » vert, « Contre » rouge, « Abstentions » orange (le libellé reste écrit)
+    gras(ctx, fr(n ?? 0), x + w / 2, y + h * 0.58, { poids: 900, taille, couleur: (type && storyVoixCouleur(type, "creme")) || STORY.encre, align: "center", ls: -2 });
     gras(ctx, nom.toUpperCase(), x + w / 2, y + h * 0.58 + 44, { poids: 800, taille: 24, couleur: STORY.pale, align: "center", ls: 3 });
   });
   return y + h;
@@ -91,15 +92,15 @@ STORY_PLUS.aujourdhui = async (ctx, s) => {
 STORY_PLUS["vote-jour"] = async (ctx, s) => {
   if(!s || !s.objet || !["adopte", "rejete"].includes(s.verdict)) return null;
   await polices();
-  const verdict = s.verdict === "adopte" ? "Adopté" : "Rejeté";
+  const verdict = s.verdict === "adopte" ? "Adopté\u2060✓" : "Rejeté\u2060✕"; // signe collé au mot : la couleur n'est jamais seule
   const voix = (n, mot) => `${fr(n ?? 0)} ${mot}`;
   if(await dessinerStyle(ctx, s, {
     cle: "assemblee", fond: "noir", categorie: "Le vote du jour",
     accroche: s.style === "question" ? "Ce texte a-t-il été adopté ?" : `${verdict} à l'Assemblée`,
     essentiel: `${voix(s.pour, "voix pour")}, ${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstention${(s.abst ?? 0) > 1 ? "s" : ""} : ${storyMots(T(s.dossier || s.objet), 10)}`,
     puces: [`${verdict} : ${voix(s.pour, "voix pour")}`, voix(s.contre, "voix contre"), voix(s.abst, (s.abst ?? 0) > 1 ? "abstentions" : "abstention")],
-    chiffre: { valeur: fr(s.pour ?? 0), legende: "voix pour" }, contexte: `${verdict} (${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstentions) : ${storyMots(T(s.dossier || s.objet), 12)}`,
-    source: s.sourceTxt, cta: "Chaque jour de séance",
+    chiffre: { valeur: fr(s.pour ?? 0), legende: "voix pour", type: "pour" }, contexte: `${verdict} (${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstentions) : ${storyMots(T(s.dossier || s.objet), 12)}`,
+    source: s.sourceTxt, cta: "Chaque jour de séance", colorerVoix: true,
   })) return { nom: `vote-jour-${s.numero || "x"}` };
   let y = storyCadre(ctx, `Le vote du jour · ${s.date}`, { etiquette: "blanc" });
   gras(ctx, String(s.type || "Scrutin public").toUpperCase(), marge, y + 30, { poids: 700, taille: 28, couleur: DA.ciel, ls: 4 });

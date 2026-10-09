@@ -791,7 +791,7 @@ async function main({ ch = chemins(), now = maintenant(), dessiner = (jobs) => d
   for (const p of plan) {
     try {
       // Test comparatif de styles (js/stories.js) : une story reçoit sa variante (hash de l'id % 4, scripts/stories-auto.cjs) ; « comprendre » n'a pas de nombre à mettre en avant, donc 3 styles
-      const variante = p.rendu.kind === "story" ? SA.varianteDe(p.id, p.nom === "comprendre" ? SA.VARIANTES.filter((v) => v !== "chiffre") : SA.VARIANTES) : null;
+      const variante = p.rendu.kind === "story" ? SA.varianteDe(p.id, p.nom === "comprendre" ? SA.VARIANTES.filter((v) => v !== "chiffre") : SA.VARIANTES, s.config?.styleFixe) : null; // styleFixe (data/stories-config.json) : style imposé, sinon test comparatif
       if (variante) p.entree = { ...p.entree, variante };
       const jobs = tachesDessin(p).map((j) => (variante && variante !== "bleu" ? { ...j, spec: { ...j.spec, style: variante } } : j));
       const images = await dessiner(jobs);

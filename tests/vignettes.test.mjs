@@ -2,10 +2,10 @@
 // USAGE : node tests/vignettes.test.mjs
 import assert from "assert";
 import { spawnSync } from "child_process";
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, unlinkSync } from "fs";
 import { tmpdir } from "os";
 import path from "path";
-import { evaluerFichier, choisirMeilleur, filtrerNom, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
+import { planHd, urlHd, produireHd, completerHd, hdAFaire, LARGEUR_HD_MIN, LARGEUR_HD_MAX, MAX_OCTETS_HD, evaluerFichier, choisirMeilleur, filtrerNom, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
 import { verifierVignettes } from "../scripts/check-vignettes.js";
 import { cleVignette, CLES } from "../scripts/vignettes-cle.js";
 import { illustrer } from "../scripts/illustrations.js";
@@ -204,5 +204,72 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const p = spawnSync("ffprobe", ["-v", "error", "-show_entries", "stream=width,height", "-of", "csv=p=0", sortie], { encoding: "utf-8" });
   if (p.status === 0) assert.equal(p.stdout.trim(), `${COTE},${COTE}`, "carré recadré");
 } else console.log("ffmpeg absent : essai de redimensionnement ignoré");
+
+// --- Version HD : plan, adresse, production (fonctions pures + faux téléchargement) ---
+{
+  assert.equal(planHd(1079), null, "source trop étroite : pas de HD");
+  assert.equal(planHd(undefined), null);
+  assert.deepEqual(planHd(1080), { largeur: 1080 });
+  assert.deepEqual(planHd(1300), { largeur: 1300 }, "jamais d'agrandissement");
+  assert.deepEqual(planHd(4000), { largeur: LARGEUR_HD_MAX }, "1600 px au plus");
+  assert.equal(LARGEUR_HD_MIN, 1080); assert.equal(MAX_OCTETS_HD, 220 * 1024);
+  assert.equal(urlHd("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/640px-X.jpg", 1600), "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/1600px-X.jpg");
+  assert.equal(urlHd("https://thumb.test/X.jpg", 1600), null, "motif inconnu : pas de HD");
+  assert.equal(urlHd(null, 1600), null);
+  const vus = [];
+  const ctx = { telecharger: async (u) => { vus.push(u); return { ok: true, status: 200, arrayBuffer: async () => Uint8Array.from([1, 2, 3]).buffer }; }, redimensionnerHd: async (o, l) => Buffer.concat([o, Buffer.from([l % 256])]) };
+  const meilleur = { largeur: 2592, vignette: "https://x.test/thumb/a/ab/F.jpg/640px-F.jpg" };
+  const hd = await produireHd(meilleur, ctx);
+  assert.deepEqual(vus, ["https://x.test/thumb/a/ab/F.jpg/1600px-F.jpg"]);
+  assert.equal(hd.largeur, 1600); assert.ok(hd.octets.length > 3);
+  assert.equal(await produireHd({ ...meilleur, largeur: 900 }, ctx), null, "source étroite : null, aucun téléchargement");
+  assert.equal(vus.length, 1);
+  await assert.rejects(produireHd(meilleur, { ...ctx, telecharger: async () => ({ ok: false, status: 429 }) }), (e) => e.transitoire === true, "429 HD : transitoire");
+  // résolution complète : la HD est jointe à la photo carrée, un échec HD ne fait pas perdre la vignette
+  const catPages = [page("Palais_Bourbon_facade.jpg", { l: 2400, h: 1600 })];
+  catPages[0].imageinfo[0].thumburl = "https://x.test/thumb/a/ab/Palais_Bourbon_facade.jpg/640px-Palais_Bourbon_facade.jpg";
+  const base = { aujourdhui: "2026-10-06", maintenant: MAINTENANT, redimensionner: async (o) => o, redimensionnerHd: async (o) => o, telecharger: async () => ({ ok: true, status: 200, arrayBuffer: async () => Uint8Array.from([9, 9]).buffer }), api: async (u) => (/categorymembers/.test(u) && /gcmtitle=Category%3APalais%20Bourbon&/.test(u) ? { query: { pages: Object.fromEntries(catPages.map((p, i) => [i, p])) } } : { query: { pages: {} } }) };
+  const r = await resoudreCle("assemblee", base);
+  assert.equal(r.statut, "photo");
+  assert.ok(r.octetsHd?.length, "HD produite");
+  assert.equal(r.entree.largeur_hd, 1600); assert.equal(r.entree.octets_hd, r.octetsHd.length);
+  assert.equal(r.entree.licence, "CC BY-SA 4.0", "même crédit");
+  const r2 = await resoudreCle("assemblee", { ...base, redimensionnerHd: async () => { throw new Error("ffmpeg HS"); } });
+  assert.equal(r2.statut, "photo", "échec HD : la vignette carrée reste"); assert.ok(!r2.octetsHd && r2.hdErreur);
+  // complément d'une ancienne entrée sans HD : licence revérifiée
+  const hd2 = await completerHd({ fichier: "Palais_Bourbon_facade.jpg" }, { ...base, api: async () => ({ query: { pages: { 1: catPages[0] } } }) });
+  assert.equal(hd2.largeur, 1600);
+  const nc = [page("Palais_Bourbon_facade.jpg", { licence: "CC BY-NC 4.0", l: 2400, h: 1600 })];
+  assert.equal(await completerHd({ fichier: "Palais_Bourbon_facade.jpg" }, { ...base, api: async () => ({ query: { pages: { 1: nc[0] } } }) }), null, "licence devenue non libre : pas de HD");
+  assert.equal(hdAFaire({ chemin: "a" }, "2026-10-06"), true);
+  assert.equal(hdAFaire({ chemin_hd: "a-hd.jpg" }, "2026-10-06"), false);
+  assert.equal(hdAFaire({ hd_indisponible: true }, "2026-10-06"), false);
+  assert.equal(hdAFaire({ hd_essai: "2026-10-06" }, "2026-10-06"), false, "une fois par jour");
+  assert.equal(hdAFaire({ hd_essai: "2026-10-05" }, "2026-10-06"), true);
+}
+// --- check-vignettes : anciennes entrées sans HD valides ; HD contrôlée si présente ---
+{
+  const d = mkdtempSync(path.join(tmpdir(), "vig-hd-"));
+  mkdirSync(path.join(d, "photos"));
+  const v = { lieu: "L", alt: "a", licence: "CC BY 4.0", auteur: "A", source: "https://commons.wikimedia.org/wiki/File:X.jpg" };
+  const fichier = path.join(d, "v.json");
+  const ecrire = (e) => writeFileSync(fichier, JSON.stringify({ vignettes: { assemblee: e } }));
+  writeFileSync(path.join(d, "photos", "assemblee.jpg"), Buffer.alloc(1000));
+  ecrire({ ...v, chemin: "photos/vignettes/assemblee.jpg" });
+  assert.deepEqual((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs, [], "ancienne entrée sans chemin_hd");
+  writeFileSync(path.join(d, "photos", "assemblee-hd.jpg"), Buffer.alloc(100 * 1024));
+  assert.ok((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs.some((e) => /chemin_hd/.test(e)), "fichier HD sans chemin_hd");
+  ecrire({ ...v, chemin: "photos/vignettes/assemblee.jpg", chemin_hd: "photos/vignettes/assemblee-hd.jpg" });
+  const ok = await verifierVignettes(path.join(d, "photos"), fichier);
+  assert.deepEqual(ok.erreurs, [], "HD déclarée et présente"); assert.equal(ok.avec, 1, "la HD ne compte pas comme un thème");
+  writeFileSync(path.join(d, "photos", "assemblee-hd.jpg"), Buffer.alloc(400 * 1024));
+  assert.ok((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs.some((e) => /trop lourde/.test(e)), "HD trop lourde");
+  writeFileSync(path.join(d, "photos", "assemblee-hd.jpg"), Buffer.alloc(100 * 1024));
+  ecrire({ ...v, chemin: "photos/vignettes/assemblee.jpg", chemin_hd: "photos/vignettes/autre-hd.jpg" });
+  assert.ok((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs.length >= 1, "chemin_hd incohérent");
+  unlinkSync(path.join(d, "photos", "assemblee-hd.jpg"));
+  ecrire({ ...v, chemin: "photos/vignettes/assemblee.jpg", chemin_hd: "photos/vignettes/assemblee-hd.jpg" });
+  assert.ok((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs.some((e) => /fichier absent/.test(e)), "chemin_hd sans fichier");
+}
 
 console.log("vignettes : tous les essais passent");

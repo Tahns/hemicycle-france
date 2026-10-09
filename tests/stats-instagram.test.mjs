@@ -215,6 +215,16 @@ try {
     assert.match(bon.texte, /vers 12 h .* 50 % de vues de plus/);
     assert.match(bon.texte, /suggestions|rien n'est modifié/);
     assert.ok(bon.conclusions >= 1);
+    // style gagnant (test comparatif) : 10 stories par style au moins, sinon « pas assez de données »
+    const sv = (variante, vues) => ({ type: "story", variante, heureParis: 12, metriques: { views: vues } });
+    const stylesMedias = (vues, n = 10) => Object.fromEntries(Object.entries(vues).flatMap(([v, x]) => Array.from({ length: n }, (_, i) => [`${v}${i}`, sv(v, x)])));
+    assert.equal(rec.styleGagnant([]), null, "aucune variante : rien à dire");
+    assert.match(rec.construire({ medias: stylesMedias({ bleu: 10, "une-photo": 20, question: 10, chiffre: 10 }, 9) }).texte, /Style gagnant : pas assez de données/);
+    const gagne = rec.construire({ medias: stylesMedias({ bleu: 10, "une-photo": 20, question: 12, chiffre: 11 }) });
+    assert.match(gagne.texte, /Style gagnant : « une-photo », 20 vues en moyenne sur 10 stories, soit 67 % de plus que « question »/);
+    assert.match(gagne.texte, /"styleFixe": "une-photo"/); assert.match(gagne.texte, /Rien n'est modifié automatiquement/);
+    assert.ok(gagne.conclusions >= 1);
+    assert.match(rec.construire({ medias: stylesMedias({ bleu: 10, "une-photo": 11, question: 10, chiffre: 10 }) }).texte, /Style gagnant : aucun net/);
     // fichier : lancé en processus
     const d = mkdtempSync(join(tmpdir(), "rec-"));
     writeFileSync(join(d, "stats.json"), JSON.stringify({ medias }));
