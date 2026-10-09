@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T22:15:36.829Z",
+ "lastUpdated": "2026-10-09T22:20:39.808Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -1455,6 +1455,32 @@
      "url": "https://www.france24.com/fr/france/20261009-en-direct-france-mouvement-lyceen-acte-v-syndicats-lecornu",
      "media": "France 24",
      "date": "2026-10-09T06:45:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-09T22:15:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "En France, la difficile couverture médiatique des manifestations de lycéens",
+     "url": "https://www.rfi.fr/fr/podcasts/chronique-des-m%C3%A9dias/20261009-en-france-la-difficile-couverture-m%C3%A9diatique-des-manifestations-de-lyc%C3%A9ens",
+     "media": "RFI",
+     "date": "2026-10-09T22:15:49.000Z"
     }
    ],
    "titrePropre": {
@@ -4313,10 +4339,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -4325,17 +4353,24 @@
    },
    "articles": [
     {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
+     "titre": "Marine Le Pen",
+     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4397,52 +4432,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-09T13:17:40.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : S’il est élu, Edouard Philippe n’habitera pas à l’Elysée avec sa famille",
-     "url": "https://www.20minutes.fr/politique/4252883-20261009-presidentielle-2027-elu-edouard-philippe-habitera-elysee-famille?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-09T13:17:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   }
  ]
 }
