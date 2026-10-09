@@ -209,12 +209,12 @@ const ACTIONS = [
   ["essai", /tir d.(?:essai|exercice)|assiste a un tir|essai d.un|test d.un|reussit un tir|tir de missile|a teste/, "essai lié à"],
   ["decision", /tribunal administratif/, "décision du tribunal administratif sur"],
   ["vote", /\badopt(?:e|ee|es|ees|ent|er)\b|\bvotent\b|\bvote par\b|\bvotee?s?\b|\bvote\b/, "vote sur"],
-  ["depot", /proposition de loi|\bppl\b/, "proposition de loi sur"],
+  ["depot", /proposition de loi|\bppl\b/, "loi proposée par des parlementaires sur"],
   ["appel", /\bappelle\b|\bappellent\b|\bappel a\b|\bmobilisent\b|\bmobilise\b/, "appel sur"],
   ["reponse", /\bcherche la|\breponse\b|\brepond|\breagit|\bface a\b/, "réponse sur"],
   ["temoignage", /\btemoign|ca fait mal|\blarmes\b|\bmaman\b/, "témoignage sur"],
   ["annonce", /\blance\s|\bannonce|\bpropose|\bpresente|\bpromet|\bdevoile|\bdetaille/, "annonces sur"],
-  ["position", /\bdenonce|\bestime|\baffirme|\bdeclare|\bcritique|\bindique|\bexige|\breclame|\bmet en garde|\bsouhaite|\bdit\b|\bvent debout|\brappelle|\bevoque/, "prise de position sur"],
+  ["position", /\bdenonce|\bestime|\baffirme|\bdeclare|\bcritique|\bindique|\bexige|\breclame|\bmet en garde|\bsouhaite|\bdit\b|\bvent debout|\brappelle|\bevoque/, "déclaration sur"],
 ];
 /** Première action reconnue dans le titre, avec sa position ; null si le verbe est au passif (« critiqué par … ») : alors le sujet subit l'action. */
 function actionDe(p) {
@@ -228,6 +228,9 @@ function actionDe(p) {
   return null;
 }
 const ABREV = { SOC: "PS", ECO: "Écologistes", EPR: "EPR", RN: "RN", LFI: "LFI", LR: "LR", UDR: "UDR", PS: "PS", MODEM: "MoDem", DEM: "MoDem", HOR: "Horizons", LIOT: "LIOT", GDR: "GDR" };
+/** Nom complet affiché pour un parti (jamais un sigle seul : le lecteur n'a pas forcément la culture politique). La clé reste le sigle, qui sert à repérer le parti dans un titre de presse. */
+const NOM_PARTI = { PS: "Parti socialiste", "Écologistes": "Écologistes", EPR: "Ensemble pour la République", RN: "Rassemblement national", LFI: "La France insoumise", LR: "Les Républicains", UDR: "Union des droites pour la République", MoDem: "Mouvement démocrate", Horizons: "Horizons", LIOT: "groupe Liot (Libertés, indépendants, outre-mer et territoires)", GDR: "Gauche démocrate et républicaine" };
+const nomParti = (k) => NOM_PARTI[k] || k;
 // Listes de mots prudents : UNE seule source (scripts/liste-prudente.cjs, mots entiers), la même que stories-auto.cjs (motExclu) et publier-stories.cjs.
 // JUDICIAIRE_TITRES = accusation, procédure, violence contre une personne, mineur identifiable ; PROCEDURE = procédure formelle ; JURIDICTION = juridiction ou décision de justice explicite.
 const { JUDICIAIRE_TITRES, PROCEDURE, JURIDICTION } = require("./liste-prudente.cjs");
@@ -256,13 +259,13 @@ function acteurDe(sujet, donnees, judiciaire, action) {
         return { type: "fonction", label: f.length <= 32 ? f : "Gouvernement" };
       }
       const parti = ABREV[String(pers.parti || "").toUpperCase()] || null;
-      return { type: "personne", label: parti ? `${pers.nom} (${parti})` : pers.nom, court: pers.nom };
+      return { type: "personne", label: parti ? `${pers.nom} (${nomParti(parti)})` : pers.nom, court: pers.nom };
     }
   }
   const partis = (sujet.illustration?.partis || []).map((x) => ABREV[String(x).toUpperCase()]).filter(Boolean)
     .filter((x) => new RegExp(`\\b(le |la |les |l')?${x}\\b`, "i").test(titre) || (x === "Écologistes" && /[ée]cologistes/i.test(titre)));
-  if (partis.length) return { type: "parti", label: [...new Set(partis)].slice(0, 2).join(" et ") };
-  const inst = [[/tribunal administratif/, "Tribunal administratif"], [/\bsenat|senateur|centristes/, "Sénat"], [/\bldh\b/, "LDH"], [/syndicats?/, "Syndicats"], [/gouvernement/, "Gouvernement"],
+  if (partis.length) return { type: "parti", label: [...new Set(partis)].slice(0, 2).map(nomParti).join(" et ") };
+  const inst = [[/tribunal administratif/, "Tribunal administratif"], [/\bsenat|senateur|centristes/, "Sénat"], [/\bldh\b/, "Ligue des droits de l'Homme"], [/syndicats?/, "Syndicats"], [/gouvernement/, "Gouvernement"],
     [/departement/, "Département"], [/\bregion\b/, "Région"], [/deputes?|assemblee nationale/, "Assemblée nationale"], [/sapeurs.pompiers/, "Sapeurs-pompiers"]];
   for (const [re, label] of inst) if (re.test(p)) return { type: "institution", label };
   return null;
@@ -300,30 +303,30 @@ function titreParRegles(sujet, donnees = {}) {
     const ou = lieu ? `${lieu} : ` : theme && theme.S !== "Justice" ? `${theme.S} : ` : "Justice : ";
     if (/tribunal administratif|suspend/.test(p)) return lim([`${ou}décision du tribunal administratif sur ${O || "un arrêté"}`, `${ou}décision du tribunal administratif`, "Justice : décision du tribunal administratif"]);
     // Aucune juridiction citée : on ne parle pas de procédure (présomption d'innocence), titre générique de thème
-    if (!articles.some((a) => JURIDICTION.test(a.titre || ""))) return lim([theme && theme.S !== "Justice" ? `${theme.S} : l'essentiel du moment` : null, "Politique : l'essentiel du moment"], true);
-    return lim([`${ou}actualité judiciaire`, "Justice : actualité judiciaire"], true);
+    if (!articles.some((a) => JURIDICTION.test(a.titre || ""))) return lim([theme && theme.S !== "Justice" ? `${theme.S} : ce que disent les médias` : null, "Politique : ce que disent les médias"], true);
+    return lim([`${ou}actualité de la justice`, "Justice : actualité de la justice"], true);
   }
   // Accusation ou affaire sans juridiction citée : titre générique de thème, jamais un nom de personne ni une procédure affirmée
-  if (judiciaire && !procedure && (sujet.illustration?.personnes || []).length) return lim([theme && theme.S !== "Justice" ? `${theme.S} : l'essentiel du moment` : null, "Politique : l'essentiel du moment"], true);
+  if (judiciaire && !procedure && (sujet.illustration?.personnes || []).length) return lim([theme && theme.S !== "Justice" ? `${theme.S} : ce que disent les médias` : null, "Politique : ce que disent les médias"], true);
   // Thème douteux (ex. une primaire dont le camp n'est pas établi) : titre générique, jamais publié
-  if (theme?.generique) return lim([`${S} : l'essentiel du moment`], true);
+  if (theme?.generique) return lim([`${S} : ce que disent les médias`], true);
   if (acteur && theme) {
-    const verbe = action ? action.phrase : "actualité sur";
+    const verbe = action ? action.phrase : "ce qu'il faut savoir sur";
     const l = acteur.label;
-    if (plat(l) === plat(S)) return lim([`${S} : l'essentiel du moment`]);
+    if (plat(l) === plat(S)) return lim([`${S} : ce que disent les médias`]);
     // Thème institutionnel seulement : sans verbe clair, on n'invente pas de lien entre la personne et le sujet
-    if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action.cle))) return lim([`${l} : l'essentiel du moment`, `${acteur.court || l} : l'essentiel du moment`], true);
-    if (genre) return lim([`${l} : point de vue éditorial sur ${O}`, `${l} : point de vue éditorial`, `${S} : point de vue éditorial`]);
+    if (/^(Assemblée nationale|Sénat|Gouvernement|Vie locale)$/.test(S) && !(action && ["vote", "depot", "position"].includes(action.cle))) return lim([`${l} : ce que disent les médias`, `${acteur.court || l} : ce que disent les médias`], true);
+    if (genre) return lim([`${l} : opinion publiée par un média sur ${O}`, `${l} : opinion publiée par un média`, `${S} : opinion publiée par un média`]);
     return lim([`${l} : ${verbe} ${O}`, acteur.court ? `${acteur.court} : ${verbe} ${O}` : null, `${S} : ${verbe} ${O}`, `${l} : ${verbe} ${S.toLowerCase()}`, `${S} : ${l}`]);
   }
-  if (acteur) return lim([`${acteur.label} : l'essentiel du moment`, `${acteur.court || acteur.label} : l'essentiel du moment`], true);
-  if (genre) return lim([lieu && S ? `${lieu} : point de vue éditorial` : null, S ? `${S} : point de vue éditorial` : null, "Politique : point de vue éditorial"]);
-  if (direct && S) return lim([`${S} : suivi de la journée`]);
+  if (acteur) return lim([`${acteur.label} : ce que disent les médias`, `${acteur.court || acteur.label} : ce que disent les médias`], true);
+  if (genre) return lim([lieu && S ? `${lieu} : opinion publiée par un média` : null, S ? `${S} : opinion publiée par un média` : null, "Politique : opinion publiée par un média"]);
+  if (direct && S) return lim([`${S} : suivi en direct`]);
   if (lieu && theme) return lim([`${lieu} : ${theme.local}`, `${lieu} : ${S.toLowerCase()}`]);
   if (lieu) return lim([`${lieu} : actualité locale`], true);
-  if (theme && action) return lim([`${S} : ${action.phrase} ${O}`, `${S} : l'essentiel du moment`]);
-  if (theme) return lim([`${S} : l'essentiel du moment`], !/^(Lycées|Primaire|Présidentielle|Finances|Santé|Justice|Numérique|Intelligence|Environnement|Logement|Aménagement|Sécurité|Éducation|Loi|Violences)/.test(S));
-  return lim([`${THEME_ILLUSTRATION[sujet.illustration?.theme] || "Politique"} : l'essentiel du moment`], true);
+  if (theme && action) return lim([`${S} : ${action.phrase} ${O}`, `${S} : ce que disent les médias`]);
+  if (theme) return lim([`${S} : ce que disent les médias`], !/^(Lycées|Primaire|Présidentielle|Finances|Santé|Justice|Numérique|Intelligence|Environnement|Logement|Aménagement|Sécurité|Éducation|Loi|Violences)/.test(S));
+  return lim([`${THEME_ILLUSTRATION[sujet.illustration?.theme] || "Politique"} : ce que disent les médias`], true);
 }
 
 /** Titre à nous pour tout sujet : dossier, nom d'une loi, règles (thème + acteur + action), puis expression commune des médias si les règles restent génériques. */
@@ -345,7 +348,7 @@ function titreSujet(sujet, dossiers = [], donnees = {}) {
   const affirmeProcedure = t && /procedures? (judiciaires? )?en cours/.test(plat(t.titre || ""));
   if (!t || !(affirmeProcedure || copieUnTitre(t.titre, sujet?.articles))) return t;
   const th = themeDe(sujet.articles || [], plat(sujet.articles[0]?.titre || ""), "", "");
-  const repli = th && th.S !== "Justice" ? `${th.S} : l'essentiel du moment` : "Politique : l'essentiel du moment";
+  const repli = th && th.S !== "Justice" ? `${th.S} : ce que disent les médias` : "Politique : ce que disent les médias";
   return { titre: repli, origine: "regles", generique: true };
 }
 
