@@ -1171,7 +1171,7 @@ function ficheDate(s, now = new Date()) {
     titreAffiche: titreAff,
     sous: `Date à retenir · ${jourAff}`,
     legende,
-    alt: `Post Hémicycle France, date à retenir : ${titreAff}, ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date indiquée par ${listeMedias}.` : `Date annoncée par la presse (${listeMedias}).`}`,
+    alt: `Post Hémicycle France, date à retenir. ${titreAff.replace(/[.\s]+$/, "")}. Rendez-vous ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date indiquée par ${listeMedias}.` : `Date annoncée par la presse (${listeMedias}).`}`,
     dateIso: dt.iso,
   };
 }
@@ -1286,7 +1286,7 @@ const TYPE_LIBELLE = { actualite: "actualité du jour", dossier: "dossier : plus
 function texteAlternatif(type, titre, medias, sujets) {
   const m = (medias || []).length ? ` Repris par ${medias.length} média${medias.length > 1 ? "s" : ""} : ${medias.slice(0, 5).join(", ")}${medias.length > 5 ? "…" : ""}.` : "";
   if (type === "en-bref") return `Story Hémicycle France, en bref : ${(sujets || []).join(" ; ")}. Les titres de presse sont cités, avec le nom de chaque média.`;
-  return `Story Hémicycle France, ${TYPE_LIBELLE[type] || type} : ${simplifierJargon(titre)}.${m} Les titres de presse sont cités, avec le nom de chaque média.`;
+  return `Story Hémicycle France, ${TYPE_LIBELLE[type] || type}. Sujet : ${simplifierJargon(titre).replace(/[.\s]+$/, "")}.${m} Les titres de presse sont cités, avec le nom de chaque média.`;
 }
 
 const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
@@ -1372,7 +1372,7 @@ function decrireRappelAgenda(choix, now) {
   const synth = { ...s, titrePropre: { ...s.titrePropre, titre: affichage }, modeleImpose: "date" }; // le dessin affiche le titre en mots simples ; l'entrée garde le titre d'origine
   return {
     titre: s.titrePropre.titre, medias: [s.articles[0].media], sources: [s.articles[0].url], type: "story", args: [-1, s.articles[0].titre, null, null, null, "date", null, synth],
-    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir : ${affichage}, dans ${n} jours (${s.date.jour} ${s.date.mois}). Date indiquée par ${s.articles[0].media}.` },
+    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir. ${affichage.replace(/[.\s]+$/, "")}. C'est dans ${n} jours, le ${s.date.jour} ${s.date.mois}. Date indiquée par ${s.articles[0].media}.` },
   };
 }
 /** Accroche d'affichage d'un sujet de presse (titres-propres.accroche) ; null si elle n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
