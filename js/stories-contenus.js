@@ -59,7 +59,7 @@ function cases(ctx, y, h, liste, taille = 92){
 STORY_PLUS.aujourdhui = async (ctx, s) => {
   if(!s || !Array.isArray(s.points) || !s.points.length) return null;
   await polices();
-  const nbPoints = s.points.length + (s.autres || 0), source = s.source || "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer.";
+  const nbPoints = s.points.length + (s.autres || 0), source = s.source || "Source : Assemblée nationale, ordre du jour des séances publiques.";
   if(await dessinerStyle(ctx, s, {
     cle: "assemblee", fond: "bleu", categorie: "Séance publique", accroche: s.style === "question" ? "Que se passe-t-il aujourd'hui à l'Assemblée ?" : T("Aujourd'hui à l'Assemblée"), essentiel: `${maj(s.jour)} : ${condenser(s.points[0].t)}`,
     puces: s.style === "question" ? s.points.slice(0, 3).map(p => condenser(p.t)) : [], contexte: `${maj(s.jour)} : ${condenser(s.points[0].t)}`,
@@ -84,7 +84,7 @@ STORY_PLUS.aujourdhui = async (ctx, s) => {
   }
   const autres = (s.autres || 0) + reste;
   if(autres > 0) gras(ctx, `+ ${autres} autre${autres > 1 ? "s" : ""} point${autres > 1 ? "s" : ""} à l'ordre du jour`, marge, Math.min(y + 30, bas + 24), { poids: 700, taille: 28, couleur: DA.ciel });
-  storyPied(ctx, s.source || "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer.", { accroche: "Tout l'agenda" });
+  storyPied(ctx, s.source || "Source : Assemblée nationale, ordre du jour des séances publiques.", { accroche: "Tout l'agenda" });
   return { nom: `aujourdhui-${s.iso || "x"}` };
 };
 

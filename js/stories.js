@@ -837,7 +837,7 @@ STORY_PLUS.meeting = async (ctx, info)=>{
   y = storyTexte(ctx, m.desc, marge, y, { taille:tdm, couleur:STORY.blanc, max:tdm > 32 ? 99 : 8, interligne:1.3 }) + 14;
   if((m.fin || m.debut) < aujourdhuiISO()) storyTexte(ctx, "Événement passé", marge, y, { taille:30, poids:700, couleur:STORY.ciel, max:1 });
   else if(!m.verified) storyTexte(ctx, "Date à confirmer", marge, y, { taille:30, poids:700, couleur:"#FFD27A", max:1 });
-  storyPied(ctx, `Date annoncée par ${m.source?.nom || "l'organisateur"}. Les programmes peuvent changer : vérifiez auprès de l'organisateur.`, { accroche:"Tous les meetings" });
+  storyPied(ctx, "", { accroche:"Tous les meetings" });
   return { nom:`meeting-${slugDep(m.titre).slice(0, 40)}` };
 };
 
@@ -849,7 +849,7 @@ STORY_PLUS.meeting = async (ctx, info)=>{
    Chaque module (stories-actu, stories-actu-fait, stories-contenus) prépare une fiche `d` puis appelle storyStyleDessiner(ctx, style, d) :
    { couleur, motif, categorie, accroche, essentiel, puces[], chiffre:{ valeur, legende }, contexte, photo:{ img, credit }, fond, source, video, cta }.
    Règles : texte essentiel ≥ 52 px, 35 mots au plus, rien d'essentiel dans les ≈ 250 px du haut ni au-dessus des ≈ 340 px du bas (y ≥ 1580) ;
-   la source (mention « Titres relevés dans la presse… ») et le crédit photo restent visibles dans le pied. Jamais de photo de personne : seules les vignettes d'institutions sont utilisées. */
+   seules la source officielle (une ligne) et le crédit photo exigé par la licence figurent dans le pied. Jamais de photo de personne : seules les vignettes d'institutions sont utilisées. */
 const STORY_STYLES = ["bleu", "une-photo", "question", "chiffre"];
 const STORY_FONDS_QUESTION = {
   rouge: { fond:"#A8201A", texte:"#FFFFFF", doux:"#FFE3DF" },
@@ -881,7 +881,8 @@ async function storyPhotoTheme(cle){
   if(!p || !/^photos\/vignettes\/[\w-]+\.jpe?g$/.test(p.chemin || "")) return null;
   const okHd = /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(p.chemin_hd || "");
   const img = (okHd && await storyImage(p.chemin_hd)) || await storyImage(p.chemin);
-  return img ? { img, credit:`Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
+  const libre = /CC0|domaine public|public domain/i.test(p.licence || ""); // crédit exigé par CC BY / CC BY-SA, pas par CC0 ni le domaine public
+  return img ? { img, credit:libre ? "" : `Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
 }
 function storyStylePastille(ctx, texte, x, y, fond, couleur){
   ctx.font = `800 30px "Public Sans"`; ctx.letterSpacing = "3px";
@@ -1135,7 +1136,7 @@ async function storySpecSujet(s){
   const liste = medias.slice(0, 5).join(", ") + (n > 5 ? ` et ${n - 5} autres` : "");
   return {
     theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:th.categorie, accroche, essentiel, puces, chiffre:ch, contexte:accroche, photo,
-    source:`Titre rédigé par Hémicycle France d'après la presse. Titres relevés dans la presse : ${liste}.`,
+    source:"",
     video:(s.articles.find(a => a.video) || {}).media || "", cta:"Toute l'actu politique",
   };
 }
@@ -1470,7 +1471,7 @@ async function dessinerStory(type, info){
       }
       y += h + 28;
     }
-    storyPied(ctx, "Ordre du jour des séances publiques publié par l'Assemblée nationale. Il peut encore changer.", { accroche:"Tout l'agenda" });
+    storyPied(ctx, "Source : Assemblée nationale, ordre du jour des séances publiques.", { accroche:"Tout l'agenda" });
     nom = "agenda-assemblee";
   }
 

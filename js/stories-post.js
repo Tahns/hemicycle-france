@@ -81,7 +81,7 @@ async function postDate(ctx, s){
       gras(ctx, s.media ? `— ${s.media}` : "", marge + 32, y + hc - 22, { taille: 24, couleur: STORY.pale });
     }
   }
-  pied(ctx, s.agenda ? "Date relevée auprès de la source. Le programme peut changer." : "Date annoncée par la presse. L'ordre du jour peut changer.", "Ne rien rater");
+  pied(ctx, "", "Ne rien rater");
 }
 
 /* ---------- Post « loi adoptée / rejetée » ---------- */

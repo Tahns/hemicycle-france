@@ -115,7 +115,7 @@
       yy += hs[i] + pad;
       ctx.fillStyle = storyAlpha(C.ciel, 0.35); ctx.fillRect(marge, yy, L - 2 * marge, 2);
     });
-    pied(ctx, "Sujets les plus repris par la presse française. Seuls les titres sont repris ; chaque média est cité.", "Toute l'actu du jour");
+    pied(ctx, "", "Toute l'actu du jour");
     return { nom:"en-bref" };
   }
 
@@ -159,7 +159,7 @@
         puces:[`${nbArts} articles relevés`, `${nbMedias} médias différents`, `Dernier titre : ${storyMots(arts[0].media, 4)}`],
         chiffre:{ valeur:String(nbArts), legende:nbArts > 1 ? "articles dans le dossier" : "article dans le dossier" },
         contexte:`${nbMedias} médias en parlent : ${dossier.titre}`,
-        source:`Titres relevés dans la presse. Seuls les titres sont repris. Médias : ${liste}.`, cta:"Tout le dossier",
+        source:"", cta:"Tout le dossier",
       });
       if(dessin) return { nom:`dossier-${dossier.id}` };
     }
@@ -260,7 +260,7 @@
       c += hauteurLignes(lc.length, tc, 1.25) + 8;
       if(ls){ ctx.font = `500 22px "Public Sans"`; ctx.fillStyle = C.ciel; ctx.fillText(ls, marge, c + 20); }
     }
-    pied(ctx, "Titres relevés dans la presse. Seuls les titres sont repris ; chaque média est cité.", "Tout le dossier");
+    pied(ctx, "", "Tout le dossier");
     return { nom:`dossier-${dossier.id}` };
   }
 

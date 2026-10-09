@@ -275,7 +275,7 @@ async function dessineUne(ctx, s, style){
     ctx.fillText(storyLignes(ctx, `Photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`, larg, 1)[0], marge, y + hImg + 36);
   }
   const credits = [...new Set(pers.filter(p=> p.img && p.credit).map(p=> p.credit))];
-  const sourceTxt = s.sensible?.pied || ((plan.v.q || !propre ? "Titre repris de la presse. Chaque média est cité." : "Titre rédigé par Hémicycle France d'après la presse. Chaque média est cité.") + (credits.length ? ` Photos : ${credits.join(" ; ")}.` : "")); // sujet sensible : mentions (sources, présomption d'innocence) fabriquées par règles
+  const sourceTxt = s.sensible?.pied || (credits.length ? `Photos : ${credits.join(" ; ")}.` : ""); // sujet sensible : mentions (sources, présomption d'innocence) fabriquées par règles
   storyPied(ctx, sourceTxt, { video, accroche:"Toute l'actu politique" });
   return { nom:`actualite-${slugDep(propre || a0.titre).slice(0, 40)}` };
 }
@@ -330,7 +330,7 @@ async function dessineDirect(ctx, s){
     y += b.h;
   }
 
-  storyPied(ctx, "Information en cours : elle peut changer. Titres relevés dans la presse.", { video, accroche:"Suivez le direct" });
+  storyPied(ctx, "", { video, accroche:"Suivez le direct" });
   return { nom:`actualite-${slugDep(norm(s.titrePropre?.titre) || s.articles[0].titre).slice(0, 40)}` };
 }
 
