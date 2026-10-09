@@ -78,7 +78,7 @@
     let tB = 96;
     for(; tB > 64; tB -= 2){ ctx.font = `700 ${tB}px "Newsreader"`; if(storyLignes(ctx, titreB, larg0, 99).length <= 2) break; }
     let y = storyTexte(ctx, titreB, marge, yHaut - 8, { taille:tB, poids:700, police:"Newsreader", couleur:C.blanc, max:2, interligne:0.98 });
-    y += 18;
+    y += 32;
 
     // Contenu de chaque sujet : notre titre ; à défaut, le titre de presse du premier article (la ligne des médias le rattache à son média)
     const items = top.map(s=>{
@@ -170,12 +170,12 @@
     if(contexte?.texte){
       ctx.font = `600 ${tc}px "Public Sans"`; lc = storyLignes(ctx, contexte.texte, larg, 2);
       ctx.font = `500 22px "Public Sans"`; ls = contexte.source ? storyLignes(ctx, contexte.source, larg, 1)[0] : "";
-      hC = 20 + 24 + 10 + hauteurLignes(lc.length, tc, 1.25) + (ls ? 8 + 22 : 0) + 8;
+      hC = 20 + 24 + 10 + hauteurLignes(lc.length, tc, 1.25) + (ls ? 14 + 22 : 0) + 8;
     }
     const yC = 1490 - hC, yFin = (hC ? yC : 1490) - 34;
     const mesure = (n, tq)=> arts.slice(0, n).map(a=>{
       ctx.font = `700 ${tq}px "Public Sans"`;
-      return 26 + 8 + hauteurLignes(citer(ctx, a.titre, larg - 56, 2).length, tq, 1.18) + g;
+      return 26 + 14 + hauteurLignes(citer(ctx, a.titre, larg - 56, 2).length, tq, 1.18) + g;
     });
     const total = h => h.reduce((a, b)=> a + b, 0) - g;
     // Mise en page du haut : grand titre sur 2 lignes (ou sur une seule ligne), chiffres géants plus ou moins grands.
@@ -240,7 +240,7 @@
       // Citation
       ctx.font = `700 ${tq}px "Public Sans"`; ctx.fillStyle = C.blanc;
       const lq = citer(ctx, a.titre, larg - 56, 2);
-      lignesTexte(ctx, lq, tx, yy + 26 + 8 + tq * 0.84, tq, 1.18);
+      lignesTexte(ctx, lq, tx, yy + 26 + 14 + tq * 0.84, tq, 1.18);
       yy += hs[i] + ecart;
     });
     // Filet vertical + points
@@ -258,7 +258,7 @@
       c += 24 + 10;
       ctx.font = `600 ${tc}px "Public Sans"`; ctx.fillStyle = C.blanc; lignesTexte(ctx, lc, marge, c + tc * 0.85, tc, 1.25);
       c += hauteurLignes(lc.length, tc, 1.25) + 8;
-      if(ls){ ctx.font = `500 22px "Public Sans"`; ctx.fillStyle = C.ciel; ctx.fillText(ls, marge, c + 20); }
+      if(ls){ ctx.font = `500 22px "Public Sans"`; ctx.fillStyle = C.ciel; ctx.fillText(ls, marge, c + 26); }
     }
     pied(ctx, "", "Tout le dossier");
     return { nom:`dossier-${dossier.id}` };
