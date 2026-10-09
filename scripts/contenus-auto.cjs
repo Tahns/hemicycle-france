@@ -299,17 +299,21 @@ function choisirVoteDuJour({ lois, jour, now }) {
     const objetOfficiel = coupe(majuscule(brut), 330);
     // Affichage en mots simples : le texte officiel reste dans `sujets` (anti-doublon) et le titre officiel du dossier est expliqué
     const apres49 = /alin[ée]a 3|49[.\-]3/i.test(brut);
+    const clair = (t) => simplifierTexteLoi(t) || simplifierJargon(t);
+    const numeroAmend = (/n°\s*(\d+)/.exec(brut) || [])[1], numeroArticle = (/^article\s+(\S+)/i.exec(brut) || [])[1];
     const objet = cl.type === "Motion de censure"
       ? `Les députés votent pour renverser le Gouvernement${apres49 ? " : il a fait passer un texte sans vote (article 49.3)" : ""}.`
-      : coupe(majuscule(simplifierJargon(brut)), 330);
+      : cl.type === "Amendement du Gouvernement" ? `Modification ${numeroAmend ? `n° ${numeroAmend} ` : ""}proposée par le Gouvernement.`
+      : numeroArticle ? `Article ${numeroArticle} du texte.`
+      : coupe(majuscule(clair(brut)), 330);
     const typeAff = { "Motion de censure": "Vote pour renverser le Gouvernement", Article: "Vote sur un article du texte", "Amendement du Gouvernement": "Modification proposée (Gouvernement)" }[cl.type] || cl.type;
     const typeCourt = { "Motion de censure": "vote pour renverser le Gouvernement", Article: "vote sur un article", "Amendement du Gouvernement": "modification proposée par le Gouvernement" }[cl.type] || cl.type.toLowerCase();
     const verbe = l.resultat === "adopte" ? "adopté" : "rejeté";
     const url = `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
     return { contenu: {
-      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(simplifierJargon(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
-      entree: { titre: `Le vote du jour : ${typeCourt} ${verbe} le ${l.date}`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
-        alt: `Story Hémicycle France, le vote du jour : ${typeCourt} ${verbe} par l'Assemblée nationale le ${l.date} (vote n°${l.numero}). Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. ${objet}` },
+      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
+      entree: { titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
+        alt: `Story Hémicycle France, le vote du jour. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Vote n°${l.numero}. ${objet}` },
     } };
   }
   return { refus: "aucun scrutin de la veille à présenter (ni motion de censure, ni article, ni amendement du Gouvernement)" };
@@ -397,7 +401,7 @@ function candidatsChiffres({ indicateurs, budget, sondages, veille = null, now }
   inds.sort((a, b) => (ordre.indexOf(a.nom) + 1 || 99) - (ordre.indexOf(b.nom) + 1 || 99));
   for (const i of inds) {
     const v = separerValeur(i.valeur);
-    out.push({ cle: slug(i.nom), spec: { cle: slug(i.nom), libelle: LIBELLES_SIMPLES[i.nom] || i.nom, valeur: v.hero, soustitre: v.suite.replace(/\bdu PIB\b/, "de la richesse produite en un an (PIB)"), periode: i.date, lignes: [DEFINITIONS[slug(i.nom)], detailSimple(i.detail)].filter(Boolean), sourceTxt: `Source : ${i.source} (${hote(i.url)}). Donnée officielle, ${i.date}.` }, titre: `Le chiffre du jour : ${i.nom} ${i.valeur} (${i.date})`, sources: [i.url], texte: `${i.nom} : ${i.valeur}, ${i.date}. ${i.detail || ""}` });
+    out.push({ cle: slug(i.nom), spec: { cle: slug(i.nom), libelle: LIBELLES_SIMPLES[i.nom] || i.nom, valeur: v.hero, soustitre: v.suite.replace(/\bdu PIB\b/, "de la richesse produite en un an (PIB)"), periode: i.date, lignes: [DEFINITIONS[slug(i.nom)], detailSimple(i.detail)].filter(Boolean), sourceTxt: `Source : ${i.source} (${hote(i.url)}). Donnée officielle, ${i.date}.` }, titre: `Le chiffre du jour : ${i.nom} ${i.valeur} (${i.date})`, sources: [i.url], texte: `${i.nom} : ${i.valeur.replace(/\bdu PIB\b/, "de la richesse produite en un an (PIB)")}, ${i.date}. ${DEFINITIONS[slug(i.nom)] || ""} ${detailSimple(i.detail).replace(/[.\s]+$/, "")}.` });
   }
   const dette = budget?.dette, dep = budget?.depenses;
   if (dette?.interetsMd > 0 && dette.annee && /^https:\/\//.test(dette.url || "")) {
@@ -538,7 +542,7 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
     const base = { total, accroche: undefined };
     const specs = [
       { ...base, n: 1, couverture: true, kicker: "Une loi expliquée", titre: f.accroche || simplifierJargon(sp.titre), corps: [{ p: `Texte ${verbe} · ${sp.chambre} · ${sp.date}`, couleur: "ciel", taille: 32, poids: 700 }, { li: contexte }], source: "Source : données officielles de l'Assemblée nationale et du Sénat." },
-      { ...base, n: 2, kicker: "Ce que dit le texte", titre: "Le titre officiel du texte", corps: [{ carte: `« ${sp.titre} »` }, { p: `En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`, taille: 32, poids: 600 }, { p: "Hémicycle France ne résume pas les articles. Le texte complet est à lire sur le site officiel.", couleur: "ciel", taille: 30 }, ...(v.l?.dossierTitre ? [{ p: `Le parcours de la loi : ${coupe(v.l.dossierTitre, 200)}`, taille: 32, poids: 600 }] : [])], source: `Source : ${an ? "Assemblée nationale (assemblee-nationale.fr)" : "Sénat (senat.fr)"}, titre officiel.` },
+      { ...base, n: 2, kicker: "Ce que dit le texte", titre: "Le titre officiel du texte", corps: [{ carte: `« ${sp.titre} »` }, { p: `En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`, taille: 32, poids: 600 }, { p: "Hémicycle France ne résume pas les articles. Le texte complet est à lire sur le site officiel.", couleur: "ciel", taille: 30 }, ...(v.l?.dossierTitre ? [{ p: `Le parcours de la loi : ${coupe(simplifierTexteLoi(v.l.dossierTitre) || simplifierJargon(v.l.dossierTitre), 200)}`, taille: 32, poids: 600 }] : [])], source: `Source : ${an ? "Assemblée nationale (assemblee-nationale.fr)" : "Sénat (senat.fr)"}, titre officiel.` },
       { ...base, n: 3, kicker: "Le résultat du vote", titre: `Vote sur le texte en entier · ${sp.date}`, corps: [{ gros: sp.verdict === "adopte" ? "Adopté" : "Rejeté" }, { cases: [["Pour", sp.pour], ["Contre", sp.contre], ["Ni pour ni contre", sp.abst]] }], source: sp.sourceTxt },
       { ...base, n: 4, kicker: "Ce qui suit", titre: "Et ensuite ?", corps: [{ li: etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }) }], source: "Règles : Constitution du 4 octobre 1958 (article 45) ; vie-publique.fr." },
       { ...base, n: 5, kicker: "Sources", titre: "Pour vérifier", corps: [{ li: sources }, { p: "Résultat officiel, sans avis ni commentaire.", couleur: "ciel", taille: 30 }], source: "Hémicycle France : données officielles uniquement.", accroche: "Toute l'actu politique" },
@@ -546,12 +550,12 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
     const sourceLegende = `Source officielle : ${an ? "Assemblée nationale" : "Sénat"}, vote n°${sp.numero} — ${f.source}`;
     const legende = legendeCarrousel({
       titre: `5 images pour comprendre : ${f.accroche || coupe(simplifierJargon(sp.titre), 150)} (texte ${verbe})`,
-      lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} le texte en entier${etapeTxt ? ` (${etapeTxt})` : ""}.`, `Titre officiel : « ${coupe(sp.titre, 150)} ».`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions (ni pour ni contre) : ${nbFr(sp.abst)}.`, "En 5 images : le contexte, le titre officiel, le résultat du vote, la suite, les sources."],
+      lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} le texte en entier.`, ...(etapeTxt ? [`Étape du texte : ${etapeTxt}.`] : []), `Titre officiel : « ${coupe(sp.titre, 150)} ».`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions (ni pour ni contre) : ${nbFr(sp.abst)}.`, "En 5 images : le contexte, le titre officiel, le résultat du vote, la suite, les sources."],
       source: sourceLegende, hashtags: hashtagsLegende({ genre: "carrousel-loi", chambre: an ? "an" : "senat", theme: an ? "assemblee" : "senat", titre: sp.titre, max: 5 }),
     });
     const alts = [
       `Image 1 sur 5. ${f.accroche || simplifierJargon(sp.titre)}, texte ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${sp.date}. ${contexte.join(" ")}`,
-      `Image 2 sur 5. Titre officiel du texte : ${sp.titre}. En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`,
+      `Image 2 sur 5. Titre officiel du texte : « ${sp.titre} ». En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`,
       `Image 3 sur 5. Résultat du vote sur le texte en entier : ${verbe}. Pour : ${nbFr(sp.pour)}, contre : ${nbFr(sp.contre)}, abstentions (ni pour ni contre) : ${nbFr(sp.abst)}.`,
       `Image 4 sur 5. Ce qui suit : ${etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }).join(" ")}`,
       `Image 5 sur 5. Sources officielles : ${sources.join(" ; ")}.`,
@@ -596,7 +600,7 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   const specs = [couverture, ...corps.map((c, i) => ({ ...c, n: i + 2, total }))];
   const lignes = [sc.total ? `${nbFr(sc.total)} vote${sc.total > 1 ? "s" : ""} des députés à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun vote des députés à l'Assemblée nationale cette semaine.", `${total} images : ${[textes.length ? "textes votés" : null, dossiers.length ? "textes les plus discutés" : null, seances.length ? "programme de la semaine prochaine" : null, sondage ? "dernier sondage" : null].filter(Boolean).join(", ") || "les chiffres de la semaine"}, sources.`];
   const legende = legendeCarrousel({ titre: `${total} images pour comprendre la semaine à l'Assemblée nationale (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, votes des députés (data.assemblee-nationale.fr) et programme des débats (assemblee-nationale.fr).", hashtags: hashtagsLegende({ genre: "carrousel-hebdo", chambre: "an", theme: "assemblee", max: 5 }) });
-  const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).join(" ")}`.slice(0, 990));
+  const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).map((x) => (/[.!?]$/.test(x) ? x : x + ".")).join(" ")}`.slice(0, 990));
   return { contenu: {
     type: "carrousel-hebdo", cle: digest.id, rendu: { kind: "carrousel", specs, alts },
     entree: { titre: `Ce qu'il faut retenir cette semaine (${digest.id})`, titrePropre: "Résumé de la semaine au Parlement", sujets: [...textes.map((t) => t.titre), ...dossiers.map((d) => d.titre)], sources: ["https://data.assemblee-nationale.fr/travaux-parlementaires/votes", ...(sondage ? [sondage.url] : [])], legende, alt: alts[0], ...(sondage ? { reserve: true, nommePersonne: true } : {}) },

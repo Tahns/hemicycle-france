@@ -577,7 +577,7 @@ function simplifierJargon(texte, { chambre = "an" } = {}) {
   return t.replace(/\s+/g, " ").trim();
 }
 /** « première lecture » -> « premier examen du texte » (étape d'un texte, sans majuscule initiale). */
-const etapeSimple = (etape) => { const e = simplifierJargon(String(etape || "")); return e.charAt(0).toLowerCase() + e.slice(1); };
+const etapeSimple = (etape) => { const e = simplifierJargon(String(etape || "").replace(/^(?:texte|conclusions?|rapport|lecture des conclusions)(?: \w+)? de la (?:commission mixte paritaire|CMP).*$/i, "texte écrit par députés et sénateurs réunis")); return e.charAt(0).toLowerCase() + e.slice(1); };
 /** « projet de loi » -> « loi proposée par le Gouvernement » ; « proposition de loi » -> « loi proposée par des parlementaires ». */
 const natureSimple = (nature) => (/^projet/i.test(nature) ? "loi proposée par le Gouvernement" : "loi proposée par des parlementaires");
 /** Nombre de mots de chaque phrase d'un texte (phrases séparées par . ! ? ; ou un saut de ligne). */

@@ -719,7 +719,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(d.type, "post");
     assert.strictEqual(d.champs.donneesPropres, true);
     assert.strictEqual(d.champs.voteId, "an-100");
-    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, le texte en entier \(premier examen du texte\)/);
+    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, le texte en entier\.\nÉtape du texte : premier examen du texte/);
     assert.match(d.champs.legende, /Pour : 300 · Contre : 100 · Abstentions \(ni pour ni contre\) : 10/);
     assert.match(d.champs.legende, /Source officielle : Assemblée nationale, vote n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
     assert.match(d.champs.legende, /@hemicyclefrance/);

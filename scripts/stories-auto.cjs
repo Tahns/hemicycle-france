@@ -937,7 +937,8 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const legende = [
     `${nomChambre} : texte ${verbe} le ${date}`,
     "",
-    `${quelle} a ${verbe}, le ${date}, le texte en entier${etapeTxt ? ` (${etapeTxt})` : ""}.`,
+    `${quelle} a ${verbe}, le ${date}, le texte en entier.`,
+    ...(etapeTxt ? [`Étape du texte : ${etapeTxt}.`] : []),
     `Ce texte est une ${natureTxt}.`,
     ...(sujetTxt ? [`Il porte sur : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`] : []),
     `Titre officiel : « ${d.court} ».`,
