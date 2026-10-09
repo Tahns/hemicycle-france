@@ -1164,7 +1164,7 @@ async function dessinerStory(type, info){
   // Contenus récurrents (scripts/contenus-auto.cjs) : stories « aujourd'hui à l'Assemblée », « vote du jour », « comprendre », « chiffre du jour » et images de carrousel 1080 × 1350 (« diapo »)
   if(STORY_CONTENUS_TYPES.includes(type)) await chargerModule("stories-contenus");
   // « Vote par groupe » : hémicycle coloré selon la position majoritaire de chaque groupe (js/stories-hemicycle.js), story ou post (info.format)
-  if(type === "vote-groupes") await chargerModule("stories-hemicycle");
+  if(type === "vote-groupes" || (type === "vote-jour" && info && info.votes)) await chargerModule("stories-hemicycle");
   await Promise.all(["600 60px Newsreader", "700 60px Newsreader", "400 30px \"Public Sans\"", "600 30px \"Public Sans\"", "700 30px \"Public Sans\""].map(f=> document.fonts.load(f).catch(()=>{})));
   const c = document.createElement("canvas");
   c.width = STORY.L; c.height = type === "post" || type === "diapo" || (type === "vote-groupes" && info && info.format === "post") ? 1350 : STORY.H;

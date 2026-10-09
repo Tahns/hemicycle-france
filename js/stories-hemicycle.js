@@ -88,6 +88,8 @@ async function dessiner(ctx, f){
     return { id, v, n, pos:position({ ...v, membres:n }, censure) || "partage" };
   }).filter(g => g.n > 0);
   if(!gs.length) return null;
+  const ni = gs.find(g => g.id === "NI"); // les non-inscrits n'ont pas de place sur l'échelle gauche-droite : ils sont indiqués à part, au centre
+  if(ni && gs.length > 1) gs.splice(gs.indexOf(ni), 1);
   const total = gs.reduce((t, g) => t + g.n, 0);
   await Promise.all(gs.map(async g => { g.logo = await storyImage(`icons/partis/${g.id}.png`); })); // logos hébergés sur le site ; LIOT et NI : sigle
   const marque = await storyImage("icons/icon-192.png");
@@ -142,6 +144,13 @@ async function dessiner(ctx, f){
       else ecrire(ctx, g.id, px, py + 12, { poids:900, taille:36, couleur:C.encre, align:"center", ls:1 });
     });
   });
+  // au centre de l'hémicycle : l'échelle gauche - droite (ordre des bancs de l'Assemblée) et, à part, les non-inscrits
+  const yE = cy - 60;
+  ecrire(ctx, "GAUCHE", cx - 68, yE, { poids:800, taille:20, couleur:C.encre, align:"right", ls:3 });
+  ecrire(ctx, "DROITE", cx + 68, yE, { poids:800, taille:20, couleur:C.encre, ls:3 });
+  ctx.strokeStyle = C.encre; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx - 54, yE - 8); ctx.lineTo(cx + 54, yE - 8);
+  ctx.moveTo(cx - 54, yE - 8); ctx.lineTo(cx - 44, yE - 16); ctx.moveTo(cx - 54, yE - 8); ctx.lineTo(cx - 44, yE); ctx.moveTo(cx + 54, yE - 8); ctx.lineTo(cx + 44, yE - 16); ctx.moveTo(cx + 54, yE - 8); ctx.lineTo(cx + 44, yE); ctx.stroke();
+  if(ni){ const t = `Non-inscrits : ${ {pour:"pour", contre:"contre", abst:"abstention", partage:"partagés"}[ni.pos] }`; ecrire(ctx, t, cx, yE + 40, { poids:800, taille:22, couleur:col(ni.pos), align:"center" }); }
   // étiquettes aux deux bouts
   const bg = secteurs[0], bd = secteurs[secteurs.length - 1];
   ecrire(ctx, MOT_BLOC[bg.pos], cx - R + 4, cy + 50, { poids:900, taille:34, couleur:col(bg.pos), ls:1 });

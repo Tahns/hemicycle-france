@@ -311,7 +311,7 @@ function choisirVoteDuJour({ lois, jour, now }) {
     const verbe = l.resultat === "adopte" ? "adopté" : "rejeté";
     const url = `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
     return { contenu: {
-      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
+      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, votes: l.votes, censure: cl.type === "Motion de censure", sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
       entree: { titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
         alt: `Story Hémicycle France, le vote du jour. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Vote n°${l.numero}. ${objet}` },
     } };
