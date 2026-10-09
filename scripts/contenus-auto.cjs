@@ -37,7 +37,7 @@ const path = require("path");
 const crypto = require("crypto");
 const SA = require("./stories-auto.cjs");
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage : mention obligatoire (loi du 19 juillet 1977, art. 2)
-const { simplifierTexteLoi } = require("./titres-propres.cjs");
+const { simplifierTexteLoi, simplifierJargon, etapeSimple, natureSimple } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const { OFF, motExclu, reserveStory, jourParis, dimensionsJpeg, imageValide, lireConfig, destination, fluxAtom, ficheLoi, decomposerTitreVote } = SA;
 
 const RACINE = path.resolve(__dirname, "..");
@@ -242,7 +242,7 @@ function choisirAujourdhui({ agenda, jour, now }) {
     if (vus.has(k + brut)) continue;
     vus.add(k + brut);
     // Affichage : intitulé sans jargon (simplifierTexteLoi) ; `brut` garde l'intitulé officiel pour sujets, alt et anti-doublon
-    const t = k === "qag" ? brut : (simplifierTexteLoi(brut) || brut);
+    const t = k === "qag" ? "Questions des députés au Gouvernement" : (simplifierTexteLoi(brut) || simplifierJargon(brut));
     points.push({ k, t, brut });
   }
   if (!points.some((p) => p.k !== "qag")) return { refus: "aucun point à présenter (tous écartés ou questions au Gouvernement seules)" };
@@ -253,8 +253,8 @@ function choisirAujourdhui({ agenda, jour, now }) {
   const sujets = points.filter((p) => p.k !== "qag").map((p) => p.brut);
   const nTextes = sujets.length;
   return { contenu: {
-    type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut encore changer." } },
-    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `À l'Assemblée aujourd'hui : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : ordre du jour de la séance publique de l'Assemblée nationale du ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote solennel : " : "") + p.brut).join(" ; ")}. Source : Assemblée nationale.` },
+    type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, programme des débats dans l'hémicycle (assemblee-nationale.fr). Il peut encore changer." } },
+    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `Aujourd'hui, les députés se réunissent : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : le programme du débat dans l'hémicycle de l'Assemblée nationale, ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote des députés : " : "") + p.t).join(" ; ")}. Source : Assemblée nationale.` },
   } };
 }
 
@@ -296,13 +296,24 @@ function choisirVoteDuJour({ lois, jour, now }) {
     // « l'article 3 … » -> « Article 3 … » ; une motion de censure : sans les noms de ses signataires (l'intitulé officiel les cite)
     let brut = plat(l.titre).replace(/\s*\.\s*$/, "").replace(/^l['’]/i, "");
     if (cl.type === "Motion de censure") brut = brut.replace(/\s*,?\s+par\s+(?:Mmes?|MM?\.)\s.*$/i, "").replace(/\s*,?\s*$/, "");
-    const objet = coupe(majuscule(brut), 330);
+    const objetOfficiel = coupe(majuscule(brut), 330);
+    // Affichage en mots simples : le texte officiel reste dans `sujets` (anti-doublon) et le titre officiel du dossier est expliqué
+    const apres49 = /alin[ée]a 3|49[.\-]3/i.test(brut);
+    const clair = (t) => simplifierTexteLoi(t) || simplifierJargon(t);
+    const numeroAmend = (/n°\s*(\d+)/.exec(brut) || [])[1], numeroArticle = (/^article\s+(\S+)/i.exec(brut) || [])[1];
+    const objet = cl.type === "Motion de censure"
+      ? `Les députés votent pour renverser le Gouvernement${apres49 ? " : il a fait passer un texte sans vote (article 49.3)" : ""}.`
+      : cl.type === "Amendement du Gouvernement" ? `Modification ${numeroAmend ? `n° ${numeroAmend} ` : ""}proposée par le Gouvernement.`
+      : numeroArticle ? `Article ${numeroArticle} du texte.`
+      : coupe(majuscule(clair(brut)), 330);
+    const typeAff = { "Motion de censure": "Vote pour renverser le Gouvernement", Article: "Vote sur un article du texte", "Amendement du Gouvernement": "Modification proposée (Gouvernement)" }[cl.type] || cl.type;
+    const typeCourt = { "Motion de censure": "vote pour renverser le Gouvernement", Article: "vote sur un article", "Amendement du Gouvernement": "modification proposée par le Gouvernement" }[cl.type] || cl.type.toLowerCase();
     const verbe = l.resultat === "adopte" ? "adopté" : "rejeté";
     const url = `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
     return { contenu: {
-      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: cl.type, objet, dossier: l.dossierTitre ? coupe(l.dossierTitre, 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, scrutin public n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
-      entree: { titre: `Le vote du jour : ${cl.type === "Amendement du Gouvernement" ? "amendement du Gouvernement" : cl.type.toLowerCase()} ${verbe} le ${l.date}`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objet, 150), sujets: [objet, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
-        alt: `Story Hémicycle France, le vote du jour : ${cl.type === "Amendement du Gouvernement" ? "amendement du Gouvernement" : cl.type.toLowerCase()} ${verbe} par l'Assemblée nationale le ${l.date} (scrutin public n°${l.numero}). Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions : ${nbFr(t.abst)}. ${objet}` },
+      type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
+      entree: { titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
+        alt: `Story Hémicycle France, le vote du jour. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Vote n°${l.numero}. ${objet}` },
     } };
   }
   return { refus: "aucun scrutin de la veille à présenter (ni motion de censure, ni article, ni amendement du Gouvernement)" };
@@ -360,6 +371,28 @@ function separerValeur(v) {
 const hote = (url) => { try { return new URL(url).hostname.replace(/^www\./, ""); } catch (e) { return ""; } };
 const marge95 = (n) => Math.round(196 * Math.sqrt(0.25 / n) * 10) / 10; // marge d'erreur maximale (points) d'un échantillon aléatoire simple
 
+/** Ce que mesure chaque indicateur, en une phrase simple (définition, aucun avis). */
+const DEFINITIONS = {
+  inflation: "L'inflation, c'est la hausse générale des prix.",
+  chomage: "Le chômage, c'est le fait de chercher un emploi sans en avoir.",
+  "croissance-du-pib": "Le PIB est la richesse produite en France. La croissance dit si elle augmente ou diminue.",
+  "deficit-public": "Le déficit, c'est quand l'État dépense plus d'argent qu'il n'en reçoit.",
+  "dette-publique": "La dette, c'est l'argent que l'État a emprunté et doit rembourser.",
+  population: "La population, c'est le nombre de personnes qui vivent en France.",
+};
+const LIBELLES_SIMPLES = { "Croissance du PIB": "Croissance de la richesse produite (PIB)", "Déficit public": "Déficit public (dépenses en trop)", "Dette publique": "Dette publique (argent à rembourser)" };
+/** Détail officiel d'un indicateur sans jargon statistique (les chiffres ne changent pas). */
+function detailSimple(d) {
+  return plat(String(d || "")
+    .replace(/Évolution du PIB en volume par rapport au trimestre précédent/i, "Évolution de la richesse produite (le PIB) par rapport aux 3 mois précédents")
+    .replace(/Évolution des prix à la consommation sur un an, ensemble des ménages, France/i, "Hausse des prix en un an pour l'ensemble des ménages, en France")
+    .replace(/Taux de chômage(?: au sens du BIT)?/i, "Part des personnes sans emploi qui en cherchent un")
+    .replace(/\s*\((?:données|données) corrigées[^)]*\)/gi, "").replace(/,\s*données corrigées[^;—()]*/gi, "")
+    .replace(/\s*au sens (?:du BIT|de Maastricht)/gi, "")
+    .replace(/estimation Insee/i, "estimation de l'Insee, l'institut de statistiques")
+    .replace(/administrations publiques/gi, "l'État, la Sécurité sociale et les collectivités")
+    .replace(/\bdu PIB\b/g, "de la richesse produite en un an (PIB)"));
+}
 /** Candidats « chiffre du jour » dans l'ordre de préférence : indicateurs officiels, budget (Eurostat), puis dernier sondage (hors réserve). */
 function candidatsChiffres({ indicateurs, budget, sondages, veille = null, now }) {
   const out = [];
@@ -368,14 +401,14 @@ function candidatsChiffres({ indicateurs, budget, sondages, veille = null, now }
   inds.sort((a, b) => (ordre.indexOf(a.nom) + 1 || 99) - (ordre.indexOf(b.nom) + 1 || 99));
   for (const i of inds) {
     const v = separerValeur(i.valeur);
-    out.push({ cle: slug(i.nom), spec: { cle: slug(i.nom), libelle: i.nom, valeur: v.hero, soustitre: v.suite, periode: i.date, lignes: [i.detail].filter(Boolean), sourceTxt: `Source : ${i.source} (${hote(i.url)}). Donnée officielle, ${i.date}.` }, titre: `Le chiffre du jour : ${i.nom} ${i.valeur} (${i.date})`, sources: [i.url], texte: `${i.nom} : ${i.valeur}, ${i.date}. ${i.detail || ""}` });
+    out.push({ cle: slug(i.nom), spec: { cle: slug(i.nom), libelle: LIBELLES_SIMPLES[i.nom] || i.nom, valeur: v.hero, soustitre: v.suite.replace(/\bdu PIB\b/, "de la richesse produite en un an (PIB)"), periode: i.date, lignes: [DEFINITIONS[slug(i.nom)], detailSimple(i.detail)].filter(Boolean), sourceTxt: `Source : ${i.source} (${hote(i.url)}). Donnée officielle, ${i.date}.` }, titre: `Le chiffre du jour : ${i.nom} ${i.valeur} (${i.date})`, sources: [i.url], texte: `${i.nom} : ${i.valeur.replace(/\bdu PIB\b/, "de la richesse produite en un an (PIB)")}, ${i.date}. ${DEFINITIONS[slug(i.nom)] || ""} ${detailSimple(i.detail).replace(/[.\s]+$/, "")}.` });
   }
   const dette = budget?.dette, dep = budget?.depenses;
   if (dette?.interetsMd > 0 && dette.annee && /^https:\/\//.test(dette.url || "")) {
-    out.push({ cle: "charge-de-la-dette", spec: { cle: "charge-de-la-dette", libelle: "Charge de la dette publique", valeur: `${String(dette.interetsMd).replace(".", ",")} Md€`, soustitre: `${String(dette.interetsPctDepenses).replace(".", ",")} % des dépenses publiques`, periode: String(dette.annee), lignes: ["Intérêts payés par l'ensemble des administrations publiques (État, Sécurité sociale, collectivités), au sens de la comptabilité nationale."], sourceTxt: `Source : Eurostat (${hote(dette.url)}), comptes des administrations publiques de la France établis par l'Insee, ${dette.annee}.` }, titre: `Le chiffre du jour : charge de la dette publique ${String(dette.interetsMd).replace(".", ",")} Md€ (${dette.annee})`, sources: [dette.url], texte: `Charge de la dette publique : ${dette.interetsMd} milliards d'euros en ${dette.annee}.` });
+    out.push({ cle: "charge-de-la-dette", spec: { cle: "charge-de-la-dette", libelle: "Intérêts payés sur la dette publique", valeur: `${String(dette.interetsMd).replace(".", ",")} Md€`, soustitre: `${String(dette.interetsPctDepenses).replace(".", ",")} % des dépenses publiques`, periode: String(dette.annee), lignes: ["La dette, c'est l'argent que l'État a emprunté. Ce chiffre est ce qu'il paie chaque année pour cela (intérêts).", "Il couvre l'État, la Sécurité sociale et les collectivités locales. Md€ veut dire milliards d'euros."], sourceTxt: `Source : Eurostat (${hote(dette.url)}), comptes publics de la France établis par l'Insee (institut de statistiques), ${dette.annee}.` }, titre: `Le chiffre du jour : charge de la dette publique ${String(dette.interetsMd).replace(".", ",")} Md€ (${dette.annee})`, sources: [dette.url], texte: `Charge de la dette publique : ${dette.interetsMd} milliards d'euros en ${dette.annee}.` });
   }
   if (dep?.totalMd > 0 && dep.annee && /^https:\/\//.test(dep.url || "")) {
-    out.push({ cle: "depenses-publiques", spec: { cle: "depenses-publiques", libelle: "Dépenses des administrations publiques", valeur: `${nbFr(String(dep.totalMd).replace(".", ","))} Md€`, soustitre: "", periode: String(dep.annee), lignes: [dep.postes?.[0]?.libelle && dep.postes[0].pct ? `${dep.postes[0].libelle} : ${String(dep.postes[0].pct).replace(".", ",")} % du total, premier poste de dépenses.` : null].filter(Boolean), sourceTxt: `Source : Eurostat (${hote(dep.url)}), dépenses par fonction (COFOG), comptes établis par l'Insee, ${dep.annee}.` }, titre: `Le chiffre du jour : dépenses publiques ${nbFr(dep.totalMd)} Md€ (${dep.annee})`, sources: [dep.url], texte: `Dépenses des administrations publiques : ${dep.totalMd} milliards d'euros en ${dep.annee}.` });
+    out.push({ cle: "depenses-publiques", spec: { cle: "depenses-publiques", libelle: "Dépenses de l'État, de la Sécurité sociale et des collectivités", valeur: `${nbFr(String(dep.totalMd).replace(".", ","))} Md€`, soustitre: "", periode: String(dep.annee), lignes: [dep.postes?.[0]?.libelle && dep.postes[0].pct ? `${dep.postes[0].libelle} : ${String(dep.postes[0].pct).replace(".", ",")} % du total, premier poste de dépenses.` : null, "Md€ veut dire milliards d'euros."].filter(Boolean), sourceTxt: `Source : Eurostat (${hote(dep.url)}), dépenses classées par fonction, comptes établis par l'Insee (institut de statistiques), ${dep.annee}.` }, titre: `Le chiffre du jour : dépenses publiques ${nbFr(dep.totalMd)} Md€ (${dep.annee})`, sources: [dep.url], texte: `Dépenses des administrations publiques : ${dep.totalMd} milliards d'euros en ${dep.annee}.` });
   }
   // Dernier sondage : jamais pendant la réserve électorale ; terrain de moins de 10 jours ; au moins 3 candidats et un échantillon connu
   if (!reserveStory(now)) {
@@ -384,7 +417,7 @@ function candidatsChiffres({ indicateurs, budget, sondages, veille = null, now }
       const tetes = Object.entries(dernier.scores).filter(([, v]) => Array.isArray(v) && v.length === 2).sort((a, b) => b[1][1] - a[1][1] || a[0].localeCompare(b[0], "fr")).slice(0, 3);
       if (tetes.length >= 2) {
         const f = ([mn, mx]) => (mn === mx ? `${String(mx).replace(".", ",")} %` : `${String(mn).replace(".", ",")} à ${String(mx).replace(".", ",")} %`);
-        out.push({ cle: `sondage-${slug(dernier.nom)}-${dernier.dateFin}`, sondage: true, spec: { cle: `sondage-${slug(dernier.nom)}`, libelle: `Intentions de vote au 1er tour (${dernier.nom} pour ${SC.commanditaire(dernier, veille).nom})`, valeur: f(tetes[0][1]), soustitre: tetes[0][0], periode: `Terrain : ${dernier.date}`, lignes: [...tetes.slice(1).map(([n, v]) => `${n} : ${f(v)}`), `Fourchettes selon les hypothèses de candidats testées. ${nbFr(dernier.echantillon)} personnes interrogées, marge d'erreur maximale d'environ ±${String(marge95(dernier.echantillon)).replace(".", ",")} point${marge95(dernier.echantillon) >= 2 ? "s" : ""}. Sondage, pas une prévision.`], sourceTxt: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${dernier.nom}, terrain du ${dernier.date}.` }, titre: `Le chiffre du jour : sondage ${dernier.nom}, intentions de vote au 1er tour (terrain : ${dernier.date})`, sources: [dernier.url], texte: `Sondage ${dernier.nom} (${dernier.date}).` });
+        out.push({ cle: `sondage-${slug(dernier.nom)}-${dernier.dateFin}`, sondage: true, spec: { cle: `sondage-${slug(dernier.nom)}`, libelle: `Pour qui voteraient les personnes interrogées au 1er tour (${dernier.nom} pour ${SC.commanditaire(dernier, veille).nom})`, valeur: f(tetes[0][1]), soustitre: tetes[0][0], periode: `Enquête menée : ${dernier.date}`, lignes: [...tetes.slice(1).map(([n, v]) => `${n} : ${f(v)}`), `Les chiffres varient selon les candidats proposés aux personnes interrogées.`, `${nbFr(dernier.echantillon)} personnes interrogées. La marge d'erreur maximale est d'environ ±${String(marge95(dernier.echantillon)).replace(".", ",")} point${marge95(dernier.echantillon) >= 2 ? "s" : ""}. Un sondage n'est pas une prévision.`], sourceTxt: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${dernier.nom}, terrain du ${dernier.date}.` }, titre: `Le chiffre du jour : sondage ${dernier.nom}, pour qui voteraient les personnes interrogées au 1er tour (enquête : ${dernier.date})`, sources: [dernier.url], texte: `Sondage ${dernier.nom} (${dernier.date}).` });
       }
     }
   }
@@ -417,22 +450,23 @@ const etapeSuivante = ({ chambre, resultat, etape, navetteSenat }) => {
   const e = String(etape || "").toLowerCase();
   const lignes = [];
   if (resultat === "rejete") {
-    lignes.push("Un texte rejeté dans son ensemble ne poursuit en général pas son parcours à ce stade de la procédure.");
-    lignes.push("L'état exact du dossier est à vérifier sur le site officiel de l'Assemblée nationale ou du Sénat.");
+    lignes.push("Un texte rejeté en entier n'avance généralement pas à ce stade.");
+    lignes.push("Pour connaître la situation exacte, voir le site de l'Assemblée nationale ou du Sénat.");
   } else if (/commission mixte paritaire|cmp/.test(e)) {
-    lignes.push("Le texte issu de la commission mixte paritaire doit être approuvé, dans les mêmes termes, par l'Assemblée nationale et par le Sénat.");
-    lignes.push("Une fois adopté par les deux assemblées, il peut être promulgué par le président de la République dans les 15 jours ; le Conseil constitutionnel peut être saisi avant.");
+    lignes.push("Un texte a été écrit lors d'une réunion de députés et de sénateurs.");
+    lignes.push("L'Assemblée nationale et le Sénat doivent maintenant l'approuver tel quel.");
+    lignes.push("Ensuite, le président de la République a 15 jours pour signer la loi. Avant, on peut demander au Conseil constitutionnel de vérifier que la loi respecte la Constitution.");
   } else if (/lecture définitive/.test(e)) {
-    lignes.push("L'Assemblée nationale a le dernier mot : le texte est adopté définitivement.");
-    lignes.push("Il peut être promulgué dans les 15 jours ; le Conseil constitutionnel peut être saisi avant.");
+    lignes.push("L'Assemblée nationale a le dernier mot : le texte est adopté pour de bon.");
+    lignes.push("Le président de la République a 15 jours pour signer la loi. Avant, on peut demander au Conseil constitutionnel de vérifier que la loi respecte la Constitution.");
   } else if (/première lecture/.test(e) && !navetteSenat) {
-    lignes.push(`Le texte est transmis ${autre}, qui doit à son tour l'examiner : c'est la navette parlementaire.`);
-    lignes.push("Pour devenir une loi, il doit être adopté dans les mêmes termes par les deux assemblées (Constitution, article 45).");
+    lignes.push(`Le texte est envoyé ${autre}, qui doit à son tour l'examiner.`);
+    lignes.push("Pour devenir une loi, il doit être adopté, mot pour mot, par les deux assemblées.");
   } else {
-    lignes.push("Pour devenir une loi, le texte doit être adopté dans les mêmes termes par l'Assemblée nationale et par le Sénat (Constitution, article 45).");
-    lignes.push("Si les deux assemblées ne s'accordent pas, une commission mixte paritaire (7 députés, 7 sénateurs) peut être réunie.");
+    lignes.push("Pour devenir une loi, le texte doit être adopté, mot pour mot, par l'Assemblée nationale et par le Sénat.");
+    lignes.push("S'ils ne sont pas d'accord, 7 députés et 7 sénateurs peuvent se réunir pour chercher un accord.");
   }
-  if (navetteSenat) lignes.push(`Le Sénat s'est déjà prononcé sur ce dossier le ${navetteSenat.date} : ${navetteSenat.resultat === "adopte" ? "adopté" : "rejeté"} (${nbFr(navetteSenat.pour)} pour, ${nbFr(navetteSenat.contre)} contre).`);
+  if (navetteSenat) lignes.push(`Le Sénat a déjà voté sur ce texte le ${navetteSenat.date} : ${navetteSenat.resultat === "adopte" ? "adopté" : "rejeté"} (${nbFr(navetteSenat.pour)} pour, ${nbFr(navetteSenat.contre)} contre).`);
   return lignes;
 };
 
@@ -491,37 +525,38 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
     const nav = dossierRef ? navette?.textes?.[dossierRef] : null;
     const navetteSenat = an && nav?.votes?.length ? [...nav.votes].filter((x) => x.dateISO && x.dateISO <= v.dateISO).sort((a, b) => b.dateISO.localeCompare(a.dateISO))[0] || null : null;
     const urlDossier = dossierRef ? `https://www.assemblee-nationale.fr/dyn/17/dossiers/${dossierRef}` : (v.s?.dossierUrl || null);
-    const auteur = v.l?.auteur ? (/^gouvernement$/i.test(v.l.auteur) ? "Projet de loi déposé par le Gouvernement" : `Proposition de loi déposée par ${v.l.auteur}`) : null;
+    const auteur = v.l?.auteur ? (/^gouvernement$/i.test(v.l.auteur) ? "Loi proposée par le Gouvernement." : `Loi proposée par ${v.l.auteur}.`) : null;
+    const natureTxt = natureSimple(sp.nature), etapeTxt = d.etape ? etapeSimple(d.etape) : "";
     const contexte = [
-      `${sp.nature === "projet de loi" ? "Projet de loi examiné" : "Proposition de loi examinée"} par ${an ? "l'Assemblée nationale" : "le Sénat"}${d.etape ? ` (${d.etape})` : ""}.`,
+      `Ce texte est une ${natureTxt}. Il est examiné par ${an ? "l'Assemblée nationale" : "le Sénat"}${etapeTxt ? ` (${etapeTxt})` : ""}.`,
       auteur,
       v.l?.theme ? `Thème : ${v.l.theme}.` : null,
-      `Vote sur l'ensemble du texte le ${sp.date}.`,
+      `Vote sur le texte en entier le ${sp.date}.`,
     ].filter(Boolean);
     const sources = [
-      `${an ? "Assemblée nationale" : "Sénat"}, scrutin public n°${sp.numero} : ${f.source.replace(/^https?:\/\/(www\.)?/, "")}`,
-      urlDossier ? `Dossier législatif : ${urlDossier.replace(/^https?:\/\/(www\.)?/, "")}` : null,
-      navetteSenat?.url ? `Sénat, scrutin public : ${navetteSenat.url.replace(/^https?:\/\/(www\.)?/, "")}` : null,
+      `${an ? "Assemblée nationale" : "Sénat"}, vote n°${sp.numero} : ${f.source.replace(/^https?:\/\/(www\.)?/, "")}`,
+      urlDossier ? `Le parcours de la loi : ${urlDossier.replace(/^https?:\/\/(www\.)?/, "")}` : null,
+      navetteSenat?.url ? `Sénat, vote : ${navetteSenat.url.replace(/^https?:\/\/(www\.)?/, "")}` : null,
     ].filter(Boolean);
     const total = 5;
     const base = { total, accroche: undefined };
     const specs = [
-      { ...base, n: 1, couverture: true, kicker: "Une loi expliquée", titre: f.accroche || sp.titre, corps: [{ p: `Texte ${verbe} · ${sp.chambre} · ${sp.date}`, couleur: "ciel", taille: 32, poids: 700 }, { li: contexte }], source: "Source : données officielles de l'Assemblée nationale et du Sénat." },
-      { ...base, n: 2, kicker: "Ce que dit le texte", titre: "L'intitulé officiel du texte", corps: [{ carte: `« ${sp.titre} »` }, { p: "Hémicycle France ne résume pas le contenu des articles : le texte intégral est consultable sur le site officiel.", couleur: "ciel", taille: 30 }, ...(v.l?.dossierTitre ? [{ p: `Dossier : ${coupe(v.l.dossierTitre, 200)}`, taille: 32, poids: 600 }] : [])], source: `Source : ${an ? "Assemblée nationale (assemblee-nationale.fr)" : "Sénat (senat.fr)"}, intitulé officiel.` },
-      { ...base, n: 3, kicker: "Le résultat du vote", titre: `Vote sur l'ensemble · ${sp.date}`, corps: [{ gros: sp.verdict === "adopte" ? "Adopté" : "Rejeté" }, { cases: [["Pour", sp.pour], ["Contre", sp.contre], ["Abstentions", sp.abst]] }], source: sp.sourceTxt },
-      { ...base, n: 4, kicker: "Ce qui suit", titre: "Et maintenant ?", corps: [{ li: etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }) }], source: "Règles : Constitution du 4 octobre 1958 (article 45) ; vie-publique.fr." },
+      { ...base, n: 1, couverture: true, kicker: "Une loi expliquée", titre: f.accroche || simplifierJargon(sp.titre), corps: [{ p: `Texte ${verbe} · ${sp.chambre} · ${sp.date}`, couleur: "ciel", taille: 32, poids: 700 }, { li: contexte }], source: "Source : données officielles de l'Assemblée nationale et du Sénat." },
+      { ...base, n: 2, kicker: "Ce que dit le texte", titre: "Le titre officiel du texte", corps: [{ carte: `« ${sp.titre} »` }, { p: `En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`, taille: 32, poids: 600 }, { p: "Hémicycle France ne résume pas les articles. Le texte complet est à lire sur le site officiel.", couleur: "ciel", taille: 30 }, ...(v.l?.dossierTitre ? [{ p: `Le parcours de la loi : ${coupe(simplifierTexteLoi(v.l.dossierTitre) || simplifierJargon(v.l.dossierTitre), 200)}`, taille: 32, poids: 600 }] : [])], source: `Source : ${an ? "Assemblée nationale (assemblee-nationale.fr)" : "Sénat (senat.fr)"}, titre officiel.` },
+      { ...base, n: 3, kicker: "Le résultat du vote", titre: `Vote sur le texte en entier · ${sp.date}`, corps: [{ gros: sp.verdict === "adopte" ? "Adopté" : "Rejeté" }, { cases: [["Pour", sp.pour], ["Contre", sp.contre], ["Ni pour ni contre", sp.abst]] }], source: sp.sourceTxt },
+      { ...base, n: 4, kicker: "Ce qui suit", titre: "Et ensuite ?", corps: [{ li: etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }) }], source: "Règles : Constitution du 4 octobre 1958 (article 45) ; vie-publique.fr." },
       { ...base, n: 5, kicker: "Sources", titre: "Pour vérifier", corps: [{ li: sources }, { p: "Résultat officiel, sans avis ni commentaire.", couleur: "ciel", taille: 30 }], source: "Hémicycle France : données officielles uniquement.", accroche: "Toute l'actu politique" },
     ];
-    const sourceLegende = `Source officielle : ${an ? "Assemblée nationale" : "Sénat"}, scrutin public n°${sp.numero} — ${f.source}`;
+    const sourceLegende = `Source officielle : ${an ? "Assemblée nationale" : "Sénat"}, vote n°${sp.numero} — ${f.source}`;
     const legende = legendeCarrousel({
-      titre: `5 images pour comprendre : ${coupe(sp.titre, 150)} (texte ${verbe})`,
-      lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} l'ensemble du texte${sp.etape ? ` (${sp.etape})` : ""}.`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions : ${nbFr(sp.abst)}.`, "En 5 images : contexte, intitulé, résultat du vote, suites de la procédure, sources."],
+      titre: `5 images pour comprendre : ${f.accroche || coupe(simplifierJargon(sp.titre), 150)} (texte ${verbe})`,
+      lignes: [`Le ${sp.date}, ${an ? "l'Assemblée nationale" : "le Sénat"} a ${verbe} le texte en entier.`, ...(etapeTxt ? [`Étape du texte : ${etapeTxt}.`] : []), `Titre officiel : « ${coupe(sp.titre, 150)} ».`, `Pour : ${nbFr(sp.pour)} · Contre : ${nbFr(sp.contre)} · Abstentions (ni pour ni contre) : ${nbFr(sp.abst)}.`, "En 5 images : le contexte, le titre officiel, le résultat du vote, la suite, les sources."],
       source: sourceLegende, hashtags: hashtagsLegende({ genre: "carrousel-loi", chambre: an ? "an" : "senat", theme: an ? "assemblee" : "senat", titre: sp.titre, max: 5 }),
     });
     const alts = [
-      `Image 1 sur 5. ${sp.titre}, texte ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${sp.date}. ${contexte.join(" ")}`,
-      `Image 2 sur 5. Intitulé officiel du texte : ${sp.titre}.`,
-      `Image 3 sur 5. Résultat du vote sur l'ensemble : ${verbe}. Pour : ${nbFr(sp.pour)}, contre : ${nbFr(sp.contre)}, abstentions : ${nbFr(sp.abst)}.`,
+      `Image 1 sur 5. ${f.accroche || simplifierJargon(sp.titre)}, texte ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${sp.date}. ${contexte.join(" ")}`,
+      `Image 2 sur 5. Titre officiel du texte : « ${sp.titre} ». En mots simples : ${f.accroche || simplifierJargon(sp.titre)}.`,
+      `Image 3 sur 5. Résultat du vote sur le texte en entier : ${verbe}. Pour : ${nbFr(sp.pour)}, contre : ${nbFr(sp.contre)}, abstentions (ni pour ni contre) : ${nbFr(sp.abst)}.`,
       `Image 4 sur 5. Ce qui suit : ${etapeSuivante({ chambre: an ? "an" : "senat", resultat: sp.verdict, etape: sp.etape, navetteSenat }).join(" ")}`,
       `Image 5 sur 5. Sources officielles : ${sources.join(" ; ")}.`,
     ];
@@ -548,27 +583,27 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   const periode = `du ${dateSansJour(digest.debut).replace(/ \d{4}$/, "")} au ${dateSansJour(digest.fin)}`;
   const fmt = ([mn, mx]) => (mn === mx ? `${String(mx).replace(".", ",")} %` : `${String(mn).replace(".", ",")} à ${String(mx).replace(".", ",")} %`);
   const corps = [];
-  corps.push({ kicker: "Les chiffres", titre: "Les scrutins publics de la semaine", corps: [{ kv: [["Scrutins publics", nbFr(sc.total || 0)], ["Adoptés", nbFr(sc.adoptes || 0)], ["Rejetés", nbFr(sc.rejetes || 0)], ["Textes votés sur l'ensemble", nbFr((digest.textes || []).length)]] }, { p: "Votes de l'Assemblée nationale : amendements, articles et textes.", couleur: "ciel", taille: 30 }], source: "Source : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr)." });
-  if (textes.length) corps.push({ kicker: "Textes votés", titre: "Les textes votés dans la semaine", corps: [{ li: textes.map((t) => `${coupe(t.titre, 150)} : ${t.resultat === "adopte" ? "adopté" : "rejeté"} (${nbFr(t.pour)} pour, ${nbFr(t.contre)} contre)`) }], source: "Source : Assemblée nationale, scrutins publics sur l'ensemble d'un texte (assemblee-nationale.fr)." });
-  if (dossiers.length) corps.push({ kicker: "Les plus discutés", titre: "Les textes les plus discutés", corps: [{ li: dossiers.map((d) => `${coupe(d.titre, 150)} : ${nbFr(d.scrutins)} scrutin${d.scrutins > 1 ? "s" : ""}`) }, { p: "Nombre de scrutins publics par texte au cours de la semaine.", couleur: "ciel", taille: 30 }], source: "Source : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr)." });
-  if (seances.length) corps.push({ kicker: "La semaine prochaine", titre: "À l'ordre du jour de l'Assemblée", corps: [{ li: seances.map((s) => `${majuscule(new Date(s.date + "T12:00:00Z").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }))} : ${coupe(s.points.filter((p) => p.type !== "qag").map((p) => p.objet).join(" ; "), 150)}`) }], source: "Source : Assemblée nationale, ordre du jour des séances publiques (assemblee-nationale.fr). Il peut changer." });
-  if (sondage) corps.push({ kicker: "Dernier sondage", titre: `Présidentielle 2027 : sondage ${sondage.institut}`, corps: [{ li: sondage.tetes.slice(0, 4).map((t) => `${t.nom} : ${fmt([t.min, t.max])}`) }, { p: `Fourchettes selon les hypothèses de candidats testées. Terrain jusqu'au ${dateSansJour(sondage.dateFin)}${sondage.echantillon ? `, ${nbFr(sondage.echantillon)} personnes interrogées, marge d'erreur maximale d'environ ±${String(marge95(sondage.echantillon)).replace(".", ",")} point${marge95(sondage.echantillon) >= 2 ? "s" : ""}` : ""}. Un sondage n'est pas une prévision.`, couleur: "ciel", taille: 28 }], source: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${sondage.institut}.` });
+  corps.push({ kicker: "Les chiffres", titre: "Les votes de la semaine", corps: [{ kv: [["Votes des députés", nbFr(sc.total || 0)], ["Adoptés", nbFr(sc.adoptes || 0)], ["Rejetés", nbFr(sc.rejetes || 0)], ["Textes votés en entier", nbFr((digest.textes || []).length)]] }, { p: "Les députés votent sur des modifications proposées, des articles et des textes en entier.", couleur: "ciel", taille: 30 }], source: "Source : Assemblée nationale, votes des députés (data.assemblee-nationale.fr)." });
+  if (textes.length) corps.push({ kicker: "Textes votés", titre: "Les textes votés dans la semaine", corps: [{ li: textes.map((t) => `${coupe(simplifierTexteLoi(t.titre) || simplifierJargon(t.titre), 150)} : ${t.resultat === "adopte" ? "adopté" : "rejeté"} (${nbFr(t.pour)} pour, ${nbFr(t.contre)} contre)`) }], source: "Source : Assemblée nationale, votes sur des textes en entier (assemblee-nationale.fr)." });
+  if (dossiers.length) corps.push({ kicker: "Les plus discutés", titre: "Les textes les plus discutés", corps: [{ li: dossiers.map((d) => `${coupe(simplifierTexteLoi(d.titre) || simplifierJargon(d.titre), 150)} : ${nbFr(d.scrutins)} vote${d.scrutins > 1 ? "s" : ""}`) }, { p: "Nombre de votes par texte cette semaine.", couleur: "ciel", taille: 30 }], source: "Source : Assemblée nationale, votes des députés (data.assemblee-nationale.fr)." });
+  if (seances.length) corps.push({ kicker: "La semaine prochaine", titre: "Au programme de l'Assemblée nationale", corps: [{ li: seances.map((s) => `${majuscule(new Date(s.date + "T12:00:00Z").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }))} : ${coupe(s.points.filter((p) => p.type !== "qag").map((p) => simplifierTexteLoi(p.objet) || simplifierJargon(p.objet)).join(" ; "), 150)}`) }], source: "Source : Assemblée nationale, programme des débats dans l'hémicycle (assemblee-nationale.fr). Il peut changer." });
+  if (sondage) corps.push({ kicker: "Dernier sondage", titre: `Élection du président 2027 : sondage ${sondage.institut}`, corps: [{ li: sondage.tetes.slice(0, 4).map((t) => `${t.nom} : ${fmt([t.min, t.max])}`) }, { p: `Les chiffres varient selon les candidats proposés. Enquête menée jusqu'au ${dateSansJour(sondage.dateFin)}${sondage.echantillon ? ` auprès de ${nbFr(sondage.echantillon)} personnes interrogées. La marge d'erreur maximale est d'environ ±${String(marge95(sondage.echantillon)).replace(".", ",")} point${marge95(sondage.echantillon) >= 2 ? "s" : ""}` : ""}. Un sondage n'est pas une prévision.`, couleur: "ciel", taille: 28 }], source: `Source : notice de la Commission des sondages (commission-des-sondages.fr), enquête ${sondage.institut}.` });
   if (corps.length < 2) return { refus: "résumé hebdomadaire trop pauvre pour un carrousel" };
   const sourcesLi = [
-    "Assemblée nationale, scrutins publics : data.assemblee-nationale.fr/travaux-parlementaires/votes",
-    `Assemblée nationale, ordre du jour : ${(digest.sources?.find((s) => /ordre du jour/i.test(s.nom))?.url || "https://www2.assemblee-nationale.fr/agendas/les-agendas").replace(/^https?:\/\/(www2?\.)?/, "")}`,
+    "Assemblée nationale, votes des députés : data.assemblee-nationale.fr/travaux-parlementaires/votes",
+    `Assemblée nationale, programme des débats : ${(digest.sources?.find((s) => /ordre du jour/i.test(s.nom))?.url || "https://www2.assemblee-nationale.fr/agendas/les-agendas").replace(/^https?:\/\/(www2?\.)?/, "")}`,
     ...(sondage ? [`Commission des sondages : ${sondage.url.replace(/^https?:\/\/(www\.)?/, "").replace(/(.{60}).*(\.pdf)$/, "$1…$2")}`] : []),
   ];
   corps.push({ kicker: "Sources", titre: "Pour vérifier", corps: [{ li: sourcesLi }, { p: "Chaque chiffre vient de données officielles, sans avis ni commentaire.", couleur: "ciel", taille: 30 }], source: "Hémicycle France : données officielles uniquement.", accroche: "Toute l'actu politique" });
   const total = corps.length + 1;
-  const couverture = { n: 1, total, couverture: true, kicker: "Ce qu'il faut retenir", titre: "Ce qu'il faut retenir cette semaine", corps: [{ p: `Au Parlement, semaine ${periode}`, couleur: "ciel", taille: 36, poids: 700 }, { p: sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", taille: 34 }], source: "Source : données officielles de l'Assemblée nationale.", accroche: "Faites défiler" };
+  const couverture = { n: 1, total, couverture: true, kicker: "Ce qu'il faut retenir", titre: "Ce qu'il faut retenir cette semaine", corps: [{ p: `Au Parlement, semaine ${periode}`, couleur: "ciel", taille: 36, poids: 700 }, { p: sc.total ? `${nbFr(sc.total)} vote${sc.total > 1 ? "s" : ""} des députés : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun vote des députés cette semaine.", taille: 34 }], source: "Source : données officielles de l'Assemblée nationale.", accroche: "Faites défiler" };
   const specs = [couverture, ...corps.map((c, i) => ({ ...c, n: i + 2, total }))];
-  const lignes = [sc.total ? `${nbFr(sc.total)} scrutin${sc.total > 1 ? "s" : ""} public${sc.total > 1 ? "s" : ""} à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun scrutin public à l'Assemblée nationale cette semaine.", `${total} images : ${[textes.length ? "textes votés" : null, dossiers.length ? "textes les plus discutés" : null, seances.length ? "ordre du jour de la semaine prochaine" : null, sondage ? "dernier sondage" : null].filter(Boolean).join(", ") || "les chiffres de la semaine"}, sources.`];
-  const legende = legendeCarrousel({ titre: `${total} images pour retenir l'essentiel de la semaine au Parlement (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, scrutins publics (data.assemblee-nationale.fr) et ordre du jour (assemblee-nationale.fr).", hashtags: hashtagsLegende({ genre: "carrousel-hebdo", chambre: "an", theme: "assemblee", max: 5 }) });
-  const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).join(" ")}`.slice(0, 990));
+  const lignes = [sc.total ? `${nbFr(sc.total)} vote${sc.total > 1 ? "s" : ""} des députés à l'Assemblée nationale : ${nbFr(sc.adoptes || 0)} adopté${(sc.adoptes || 0) > 1 ? "s" : ""}, ${nbFr(sc.rejetes || 0)} rejeté${(sc.rejetes || 0) > 1 ? "s" : ""}.` : "Aucun vote des députés à l'Assemblée nationale cette semaine.", `${total} images : ${[textes.length ? "textes votés" : null, dossiers.length ? "textes les plus discutés" : null, seances.length ? "programme de la semaine prochaine" : null, sondage ? "dernier sondage" : null].filter(Boolean).join(", ") || "les chiffres de la semaine"}, sources.`];
+  const legende = legendeCarrousel({ titre: `${total} images pour comprendre la semaine à l'Assemblée nationale (${periode})`, lignes, source: "Sources officielles : Assemblée nationale, votes des députés (data.assemblee-nationale.fr) et programme des débats (assemblee-nationale.fr).", hashtags: hashtagsLegende({ genre: "carrousel-hebdo", chambre: "an", theme: "assemblee", max: 5 }) });
+  const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).map((x) => (/[.!?]$/.test(x) ? x : x + ".")).join(" ")}`.slice(0, 990));
   return { contenu: {
     type: "carrousel-hebdo", cle: digest.id, rendu: { kind: "carrousel", specs, alts },
-    entree: { titre: `Ce qu'il faut retenir cette semaine (${digest.id})`, titrePropre: "Résumé hebdomadaire du Parlement", sujets: [...textes.map((t) => t.titre), ...dossiers.map((d) => d.titre)], sources: ["https://data.assemblee-nationale.fr/travaux-parlementaires/votes", ...(sondage ? [sondage.url] : [])], legende, alt: alts[0], ...(sondage ? { reserve: true, nommePersonne: true } : {}) },
+    entree: { titre: `Ce qu'il faut retenir cette semaine (${digest.id})`, titrePropre: "Résumé de la semaine au Parlement", sujets: [...textes.map((t) => t.titre), ...dossiers.map((d) => d.titre)], sources: ["https://data.assemblee-nationale.fr/travaux-parlementaires/votes", ...(sondage ? [sondage.url] : [])], legende, alt: alts[0], ...(sondage ? { reserve: true, nommePersonne: true } : {}) },
   } };
 }
 

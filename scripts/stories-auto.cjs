@@ -109,6 +109,7 @@ const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
 const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
+const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
 
@@ -121,7 +122,7 @@ function titreGenerique(titre) {
 }
 
 // Mots du gabarit « X : l'essentiel du moment » : ils ne désignent pas un sujet (J-09)
-const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont", "essentiel", "moment", "suivi", "journee", "editorial", "actualite"]);
+const MOTS_VIDES = new Set(["des", "les", "une", "pour", "par", "dans", "avec", "sans", "cette", "ces", "que", "qui", "sur", "aux", "est", "sont", "essentiel", "moment", "suivi", "journee", "editorial", "actualite", "disent", "medias", "direct", "opinion"]);
 // Sigles (respect de la casse : « an » est aussi un nom commun) et formes longues ramenés à une même forme avant le calcul des racines (D).
 // Les noms d'institutions ou de partis (« entités ») ne suffisent JAMAIS à eux seuls à dire que deux titres parlent du même sujet.
 const SIGLES = [[/\bRN\b/g, "rassemblement national"], [/\bLFI\b/g, "france insoumise"], [/\bPS\b/g, "parti socialiste"], [/\bLR\b/g, "republicains"], [/\bAN\b/g, "assemblee nationale"], [/\bPLFSS\b/g, "projet loi financement securite sociale"], [/\bPLF\b/g, "projet loi finances"]];
@@ -916,7 +917,7 @@ function decomposerTitreVote(titre) {
 function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, resultat, pour, contre, abst, url }) {
   if (resultat !== "adopte" && resultat !== "rejete") return null;
   const d = decomposerTitreVote(titre);
-  if (d) { try { d.simple = require("./titres-propres.cjs").simplifierTexteLoi(d.court); } catch (e) { d.simple = null; } } // affichage seulement : `court` (officiel) reste la référence des registres
+  if (d) { try { d.simple = simplifierTexteLoi(d.court); } catch (e) { d.simple = null; } } // affichage seulement : `court` (officiel) reste la référence des registres
   if (!d || d.court.length < 15 || d.court.length > 230 || /[<>{}]/.test(d.court)) return null;
   if (motExclu(titre, OFF) || motExclu(dossierTitre || "", OFF) || motExclu(d.court, OFF)) return null;
   if (![pour, contre, abst].every((n) => Number.isInteger(n) && n >= 0) || pour + contre === 0) return null;
@@ -924,27 +925,40 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const an = chambre === "an";
   const nomChambre = an ? "Assemblée nationale" : "Sénat";
   const verbe = resultat === "adopte" ? "adopté" : "rejeté";
-  const sourceTxt = `Source : ${nomChambre}, scrutin public n°${numero}${an ? "" : ` (session ${id.split("-")[1]}-${Number(id.split("-")[1]) + 1})`} (${an ? "assemblee-nationale.fr" : "senat.fr"}). Résultat officiel.`;
-  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, titre: d.court, etape: d.etape, ...(d.simple ? { titreSimple: d.simple } : {}), verdict: resultat, pour, contre, abst, numero, sourceTxt };
-  const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions : ${nbFr(abst)}`;
+  const quelle = an ? "L'Assemblée nationale" : "Le Sénat";
+  const natureTxt = natureSimple(d.nature), etapeTxt = d.etape ? etapeSimple(d.etape) : "";
+  const sujetTxt = d.simple ? d.simple.replace(/^([^:]+) : (.+)$/, (m, th, o) => `${o} (thème : ${th.toLowerCase()})`) : "";
+  const sourceTxt = `Source : ${nomChambre}, vote n°${numero}${an ? "" : ` (session ${id.split("-")[1]}-${Number(id.split("-")[1]) + 1})`} (${an ? "assemblee-nationale.fr" : "senat.fr"}). Résultat officiel.`;
+  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, natureSimple: natureTxt, titre: d.court, etape: d.etape, ...(etapeTxt ? { etapeSimple: etapeTxt } : {}), ...(d.simple ? { titreSimple: d.simple } : {}), verdict: resultat, pour, contre, abst, numero, sourceTxt };
+  const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions (ni pour ni contre) : ${nbFr(abst)}`;
+  const suite = resultat === "adopte"
+    ? "Un texte devient une loi quand l'Assemblée nationale et le Sénat l'ont adopté dans les mêmes termes."
+    : "Un texte rejeté n'est pas accepté par ce vote : à ce stade, il ne devient pas une loi.";
   const legende = [
-    `${nomChambre} : ${d.nature} ${d.nature === "projet de loi" ? verbe : verbe + "e"} le ${date}`,
+    `${nomChambre} : texte ${verbe} le ${date}`,
     "",
-    `${an ? "L'Assemblée nationale" : "Le Sénat"} a ${resultat === "adopte" ? "adopté" : "rejeté"}, le ${date}, l'ensemble du texte « ${d.court} »${d.etape ? ` (${d.etape})` : ""}.`,
+    `${quelle} a ${verbe}, le ${date}, le texte en entier.`,
+    ...(etapeTxt ? [`Étape du texte : ${etapeTxt}.`] : []),
+    `Ce texte est une ${natureTxt}.`,
+    ...(sujetTxt ? [`Il porte sur : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`] : []),
+    `Titre officiel : « ${d.court} ».`,
     voix + ".",
+    suite,
     "",
-    `Source officielle : ${nomChambre}, scrutin public n°${numero} — ${url}`,
+    `Source officielle : ${nomChambre}, vote n°${numero} — ${url}`,
     "",
-    `Pour suivre l'actualité politique et parlementaire : ${COMPTE}`,
+    `Pour suivre l'actualité politique, expliquée simplement : ${COMPTE}`,
     hashtagsLegende({ genre: "loi", chambre, theme: an ? "assemblee" : "senat", titre: d.court, max: 8 }).join(" "),
   ].join("\n");
+  const accroche = d.simple ? `${d.simple} (${natureTxt})` : null;
   return {
     spec,
     titreCourt: d.court,
-    ...(d.simple ? { accroche: d.simple } : {}),
-    sous: `${an ? "Assemblée nationale" : "Sénat"} · texte ${verbe} · ${date}`,
+    titreAffiche: accroche || d.court,
+    ...(accroche ? { accroche } : {}),
+    sous: `${nomChambre} · texte ${verbe} · ${date}`,
     legende,
-    alt: `Post Hémicycle France : ${d.court}, ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${date}. ${voix}.`,
+    alt: `Post Hémicycle France : le texte « ${d.court} » (${natureTxt}) est ${verbe} par ${an ? "l'Assemblée nationale" : "le Sénat"} le ${date}. ${voix}.`,
     source: url,
     voteId: `${an ? "an" : "senat"}-${an ? numero : id}`,
   };
@@ -1014,7 +1028,8 @@ function evenementsAgenda(meetings, agendaAn = null) {
   const debuts = new Map(); // projet de loi (finances, financement de la Sécurité sociale, autre texte du Gouvernement) : premier jour de chaque bloc d'examen en séance
   if (url) for (const j of agendaAn.jours || []) for (const p of j.points || []) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(j?.date || "") || !p?.objet || p.objet.length > 140) continue;
-    if (p.type === "vote") liste.push({ verified: true, debut: j.date, titre: `Vote solennel à l'Assemblée : ${bas(p.objet)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+    const clair = (o) => simplifierTexteLoi(o) || simplifierJargon(bas(o)); // affichage : sans jargon (le titre d'origine reste la clé des registres)
+    if (p.type === "vote") liste.push({ verified: true, debut: j.date, titre: `Vote solennel à l'Assemblée : ${bas(p.objet)}`, affichage: `Vote des députés à l'Assemblée nationale : ${clair(p.objet)}`, source: { nom: "Assemblée nationale (programme des débats)", url } });
     else if (p.type === "texte" && /^Projet de loi(?! autorisant)/.test(p.objet)) {
       const jours = debuts.get(p.objet) || [];
       jours.push(j.date);
@@ -1025,7 +1040,7 @@ function evenementsAgenda(meetings, agendaAn = null) {
     jours.sort();
     jours.forEach((d, i) => {
       if (i > 0 && (Date.parse(d + "T12:00:00Z") - Date.parse(jours[i - 1] + "T12:00:00Z")) / 864e5 <= 3) return; // même bloc (week-end compris)
-      liste.push({ verified: true, debut: d, titre: `Début de l'examen en séance à l'Assemblée : ${bas(objet)}`, source: { nom: "Assemblée nationale (ordre du jour)", url } });
+      liste.push({ verified: true, debut: d, titre: `Début de l'examen en séance à l'Assemblée : ${bas(objet)}`, affichage: `Début du débat dans l'hémicycle de l'Assemblée nationale : ${simplifierTexteLoi(objet) || simplifierJargon(bas(objet))}`, source: { nom: "Assemblée nationale (programme des débats)", url } });
     });
   }
   return liste;
@@ -1061,7 +1076,7 @@ function choisirPostAgenda({ meetings, agendaAn = null, file, registre = null, n
   const d = new Date(m.debut + "T12:00:00Z");
   const sujet = {
     date: { iso: m.debut, jour: String(d.getUTCDate()), mois: MOIS_FR(m.debut) },
-    titrePropre: { titre: m.titre },
+    titrePropre: { titre: m.titre, affichage: m.affichage || simplifierJargon(m.titre) },
     articles: [{ media: m.source.nom, titre: "", url: m.source.url, date: m.debut }],
     derniere: new Date(now).toISOString(),
     agenda: { fin: /^\d{4}-\d{2}-\d{2}$/.test(m.fin || "") ? m.fin : null, lieu: m.lieu && m.lieu !== "—" ? m.lieu : "" },
@@ -1108,7 +1123,7 @@ function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null,
   const d = new Date(m.debut + "T12:00:00Z");
   const sujet = {
     date: { iso: m.debut, jour: String(d.getUTCDate()), mois: MOIS_FR(m.debut) },
-    titrePropre: { titre: m.titre },
+    titrePropre: { titre: m.titre, affichage: m.affichage || simplifierJargon(m.titre) },
     articles: [{ media: m.source.nom, titre: "", url: m.source.url, date: m.debut }],
     derniere: new Date(now).toISOString(),
     agenda: { fin: /^\d{4}-\d{2}-\d{2}$/.test(m.fin || "") ? m.fin : null, lieu: m.lieu && m.lieu !== "—" ? m.lieu : "" },
@@ -1120,6 +1135,7 @@ function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null,
 function ficheDate(s, now = new Date()) {
   const dt = s.date, jours = joursAvantDate(s, now);
   const titre = s.titrePropre.titre;
+  const titreAff = s.titrePropre.affichage || simplifierJargon(titre); // affichage en mots simples ; `titre` reste la clé des registres
   const medias = [...new Set((s.articles || []).map((a) => a.media).filter(Boolean))];
   const motsDate = [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois].map(sansAccent);
   const art = (s.articles || []).find((a) => motsDate.some((m) => sansAccent(a.titre).includes(m))) || s.articles[0];
@@ -1139,28 +1155,29 @@ function ficheDate(s, now = new Date()) {
     quandTxt = `du ${semaine.toLowerCase()} ${jourTxt} au ${majuscule(f.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" })).toLowerCase()} ${jf} ${moisF} ${annee}`;
   }
   const legende = [
-    `Date à retenir : ${jourAff} ${annee}${titre.length <= 80 ? ` — ${titre}` : ""}`,
+    `Date à retenir : ${jourAff} ${annee}${titreAff.length <= 80 ? ` — ${titreAff}` : ""}`,
     "",
-    `${titre}.`,
+    `${titreAff.replace(/[.\s]+$/, "")}.`,
     ag ? `Rendez-vous ${ag.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}${ag.lieu ? ` (${ag.lieu})` : ""}.` : `Rendez-vous le ${quand}.`, // date absolue : un post reste au fil, « dans N jours » serait faux dès le lendemain (audit J-19)
     "",
-    ag ? `Date relevée auprès de ${listeMedias} ; le programme peut changer, à vérifier auprès de l'organisateur.` : `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}) ; l'ordre du jour peut changer, à vérifier auprès de l'institution concernée.`,
+    ag ? `Date indiquée par ${listeMedias}. Le programme peut changer : vérifiez auprès de l'organisateur.` : `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}). Le programme peut changer : vérifiez auprès de l'institution concernée.`,
     "",
-    `Pour suivre l'actualité politique : ${COMPTE}`,
+    `Pour suivre l'actualité politique, expliquée simplement : ${COMPTE}`,
     hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 8 }).join(" "),
   ].join("\n");
   return {
-    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
+    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre: titreAff, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
     titreCourt: titre,
+    titreAffiche: titreAff,
     sous: `Date à retenir · ${jourAff}`,
     legende,
-    alt: `Post Hémicycle France, date à retenir : ${titre}, ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date relevée auprès de ${listeMedias}.` : `Date annoncée par la presse (${listeMedias}).`}`,
+    alt: `Post Hémicycle France, date à retenir. ${titreAff.replace(/[.\s]+$/, "")}. Rendez-vous ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date indiquée par ${listeMedias}.` : `Date annoncée par la presse (${listeMedias}).`}`,
     dateIso: dt.iso,
   };
 }
 
 /** Story d'annonce d'un post : fiche pour le dessin (« annonce-post ») ; la miniature du post est ajoutée au moment du dessin. */
-const ficheAnnonce = (fiche, idPost) => ({ id: idPost, titre: fiche.titreCourt, sous: fiche.sous });
+const ficheAnnonce = (fiche, idPost) => ({ id: idPost, titre: fiche.titreAffiche || fiche.titreCourt, sous: fiche.sous });
 
 /** Où va la story : « brouillon » (validation humaine) ou « file » (file de publication). */
 function destination(choix, config) {
@@ -1263,11 +1280,13 @@ const ligneResume = (b) => b.sensible
     + `Pour le publier ou le rejeter : onglet Actions > « Valider un brouillon » > Run workflow > id « ${b.id} » > action « publier » ou « rejeter ». Relire d'abord l'image et les sources (${(b.sources || []).slice(0, 2).join(" ; ") || "aucune"}).`
   : `- Brouillon à valider avant publication : « ${b.titre} » (${b.type}${b.nommePersonne ? ", nomme une personne" : ""}), fichier instagram/brouillons/${b.id}.jpg`;
 
-/** Texte alternatif de l'image (accessibilité, fiche de publication) : ce que dit la story, sans rien ajouter. */
+/** Nature de la story en mots courants, pour le texte alternatif. */
+const TYPE_LIBELLE = { actualite: "actualité du jour", dossier: "dossier : plusieurs articles sur un même sujet", direct: "prise de parole en direct", "face-a-face": "face-à-face", chiffre: "un chiffre à retenir", date: "date à retenir", sondage: "sondage", scrutin: "vote des députés", senat: "vote des sénateurs", probabilites: "simulation à partir des sondages" };
+/** Texte alternatif de l'image (accessibilité, fiche de publication) : ce que dit la story, en mots simples, sans rien ajouter. */
 function texteAlternatif(type, titre, medias, sujets) {
   const m = (medias || []).length ? ` Repris par ${medias.length} média${medias.length > 1 ? "s" : ""} : ${medias.slice(0, 5).join(", ")}${medias.length > 5 ? "…" : ""}.` : "";
-  if (type === "en-bref") return `Story Hémicycle France, En bref : ${(sujets || []).join(" ; ")}. Titres de presse cités, chaque média nommé dans l'image.`;
-  return `Story Hémicycle France (${type}) : ${titre}.${m} Titres de presse cités, chaque média nommé dans l'image.`;
+  if (type === "en-bref") return `Story Hémicycle France, en bref : ${(sujets || []).join(" ; ")}. Les titres de presse sont cités, avec le nom de chaque média.`;
+  return `Story Hémicycle France, ${TYPE_LIBELLE[type] || type}. Sujet : ${simplifierJargon(titre).replace(/[.\s]+$/, "")}.${m} Les titres de presse sont cités, avec le nom de chaque média.`;
 }
 
 const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre", date: "date" };
@@ -1349,10 +1368,11 @@ function decrireSensible(choix) {
 /** Story de rappel d'un événement de l'agenda : modèle « date », dessinée d'après un sujet synthétique (notre titre, source de l'agenda, aucune citation). */
 function decrireRappelAgenda(choix, now) {
   const s = choix.sujet, n = joursAvantDate(s, now);
-  const synth = { ...s, modeleImpose: "date" };
+  const affichage = s.titrePropre.affichage || simplifierJargon(s.titrePropre.titre);
+  const synth = { ...s, titrePropre: { ...s.titrePropre, titre: affichage }, modeleImpose: "date" }; // le dessin affiche le titre en mots simples ; l'entrée garde le titre d'origine
   return {
     titre: s.titrePropre.titre, medias: [s.articles[0].media], sources: [s.articles[0].url], type: "story", args: [-1, s.articles[0].titre, null, null, null, "date", null, synth],
-    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir : ${s.titrePropre.titre}, dans ${n} jours (${s.date.jour} ${s.date.mois}). Date relevée auprès de ${s.articles[0].media}.` },
+    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir. ${affichage.replace(/[.\s]+$/, "")}. C'est dans ${n} jours, le ${s.date.jour} ${s.date.mois}. Date indiquée par ${s.articles[0].media}.` },
   };
 }
 /** Accroche d'affichage d'un sujet de presse (titres-propres.accroche) ; null si elle n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
@@ -1365,7 +1385,7 @@ function decrireBase(choix, now = new Date()) {
   if (choix.modele === "rappel-agenda") return decrireRappelAgenda(choix, now);
   if (choix.sondage) {
     const i = choix.sondage;
-    return { titre: `Sondage ${i.nom} · intentions de vote au 1er tour (terrain : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
+    return { titre: `Sondage ${i.nom} : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
   }
   if (choix.propre) {
     const p = choix.propre;

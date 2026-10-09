@@ -115,7 +115,7 @@
       yy += hs[i] + pad;
       ctx.fillStyle = storyAlpha(C.ciel, 0.35); ctx.fillRect(marge, yy, L - 2 * marge, 2);
     });
-    pied(ctx, "Sujets les plus repris par la presse française. Seuls les titres sont repris ; chaque média est cité.", "Toute l'actu du jour");
+    pied(ctx, "", "Toute l'actu du jour");
     return { nom:"en-bref" };
   }
 
@@ -146,6 +146,7 @@
       const k = s.articles.filter(a=> urls.has(a.url)).length;
       if(k > meilleur){ meilleur = k; contexte = faits[0]; sujetLie = s; }
     }
+    storyFondContexte({ theme:sujetLie?.illustration?.theme, cle:dossier.titre }); // fond généré : thème du sujet le plus proche, clé = titre du dossier
     if(style && style !== "bleu"){ // styles du test comparatif (js/stories.js) : photo d'institution du sujet le plus proche, jamais une personne
       const ill = sujetLie?.illustration || {}, th = storyThemeInfos(ill.theme), photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
       const cite = storyMots(storyTitreCite(arts[0].titre), 13), noms = [...new Set(triees.map(a=> a.media))];
@@ -158,7 +159,7 @@
         puces:[`${nbArts} articles relevés`, `${nbMedias} médias différents`, `Dernier titre : ${storyMots(arts[0].media, 4)}`],
         chiffre:{ valeur:String(nbArts), legende:nbArts > 1 ? "articles dans le dossier" : "article dans le dossier" },
         contexte:`${nbMedias} médias en parlent : ${dossier.titre}`,
-        source:`Titres relevés dans la presse. Seuls les titres sont repris. Médias : ${liste}.`, cta:"Tout le dossier",
+        source:"", cta:"Tout le dossier",
       });
       if(dessin) return { nom:`dossier-${dossier.id}` };
     }
@@ -259,7 +260,7 @@
       c += hauteurLignes(lc.length, tc, 1.25) + 8;
       if(ls){ ctx.font = `500 22px "Public Sans"`; ctx.fillStyle = C.ciel; ctx.fillText(ls, marge, c + 20); }
     }
-    pied(ctx, "Titres relevés dans la presse. Seuls les titres sont repris ; chaque média est cité.", "Tout le dossier");
+    pied(ctx, "", "Tout le dossier");
     return { nom:`dossier-${dossier.id}` };
   }
 

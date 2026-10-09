@@ -61,10 +61,10 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(Date.parse(p.expire) > Date.parse(p.pasAvant));
   const textes = p.rendu.spec.points.map((x) => x.t);
   assert.deepStrictEqual(p.rendu.spec.points.map((x) => x.k), ["qag", "vote", "texte"], "QAG, vote solennel puis textes");
-  assert.ok(textes.includes("Finances publiques : budget 2027"), "intitulé simplifié à l'affichage");
+  assert.ok(textes.includes("Budget de l'État 2027"), "intitulé simplifié à l'affichage");
   assert.ok(p.entree.sujets.includes("Projet de loi de finances pour 2027 (première partie)"), "sujets (anti-doublon) : intitulé officiel d'origine");
   assert.ok(p.rendu.spec.points.every((x) => x.t.split(/\s+/).length <= 12), "intitulés courts");
-  assert.ok(/^À l'Assemblée aujourd'hui : \d+ textes? au programme$/.test(p.entree.accroche));
+  assert.ok(/^Aujourd'hui, les députés se réunissent : \d+ textes? au programme$/.test(p.entree.accroche));
   assert.ok(p.entree.sources.every((u) => u.startsWith("https://")), "source officielle citée");
   assert.ok(p.rendu.spec.source.includes("Assemblée nationale"));
   // 13 octobre : les deux votes solennels portent des mots « prudents » de la presse (violences sexuelles, judiciaire) mais l'ordre du jour de l'Assemblée est une
@@ -96,11 +96,11 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(g, "le contenu du 7 octobre est préparé");
   const globe = g.rendu.spec.points.find((x) => /GloBE/.test(x.brut));
   assert.ok(globe, "le point GloBE est présent");
-  assert.strictEqual(globe.t, "Fiscalité : échange d'informations entre pays (accord GloBE)", "affichage lisible en 2 secondes");
+  assert.strictEqual(globe.t, "Fiscalité : échange d'informations entre pays", "affichage lisible en 2 secondes");
   assert.ok(/^Projet de loi autorisant/.test(globe.brut), "intitulé officiel gardé (alt, registre)");
   assert.ok(g.entree.sujets.some((x) => /^Projet de loi autorisant l.approbation/.test(x)), "sujets d'origine pour l'anti-doublon");
   assert.ok(!g.entree.sujets.some((x) => /^Fiscalité :/.test(x)), "le texte simplifié n'entre pas dans les sujets");
-  assert.ok(g.entree.alt.includes("autorisant"), "texte alternatif : intitulé officiel complet");
+  assert.ok(g.entree.alt.includes("échange d'informations entre pays") && !g.entree.alt.includes("autorisant"), "texte alternatif : en mots simples");
 }
 
 // ---------- 2. Le vote du jour ----------
@@ -118,8 +118,8 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   // la motion de censure l'emporte, sans les noms de ses signataires
   const m = l.lois.find((x) => x.typeVote === "MOC"); m.dateISO = "2026-10-12"; m.date = "12 octobre 2026";
   const r = C.choisirVoteDuJour({ lois: l, jour: "2026-10-13", now: new Date("2026-10-13T08:30:00Z") });
-  assert.strictEqual(r.contenu.rendu.spec.type, "Motion de censure");
-  assert.ok(!/Mmes?|M\. |députés/.test(r.contenu.rendu.spec.objet), `signataires retirés : ${r.contenu.rendu.spec.objet}`);
+  assert.strictEqual(r.contenu.rendu.spec.type, "Vote pour renverser le Gouvernement");
+  assert.ok(!/Mmes?|M\. /.test(r.contenu.rendu.spec.objet), `signataires retirés : ${r.contenu.rendu.spec.objet}`);
   assert.ok(r.contenu.entree.sources[0].startsWith("https://www.assemblee-nationale.fr/dyn/17/scrutins/"));
   // jamais d'amendement ordinaire ; mot prudent : écarté ; résultat incohérent : écarté
   const seul = { lastUpdated: "2026-10-13T02:00:00Z", lois: [{ ...l.lois[2], titre: "l'article 3 de la proposition de loi visant l'ancien maire mis en examen (première lecture)." }] };
@@ -210,7 +210,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const cands = C.candidatsChiffres({ ...dSond, now: new Date("2026-10-13T15:30:00Z") });
   const so = cands.find((c) => c.sondage);
   assert.ok(so, "dernier sondage hors réserve");
-  assert.ok(so.spec.sourceTxt.includes("Commission des sondages") && /marge d'erreur/.test(so.spec.lignes.join(" ")) && so.spec.periode.includes("Terrain"), "mentions obligatoires");
+  assert.ok(so.spec.sourceTxt.includes("Commission des sondages") && /marge d'erreur/.test(so.spec.lignes.join(" ")) && so.spec.periode.includes("Enquête menée"), "mentions obligatoires");
   const etatSo = C.etatVide(); for (const c of cands.filter((x) => !x.sondage)) etatSo.chiffres[c.cle] = { id: "dddddddddddd", date: "2026-10-12" };
   const rs = C.planifier({ now: new Date("2026-10-13T15:30:00Z"), donnees: dSond, file: vide, registre: vide, etat: etatSo, creneaux: CRENEAUX, config: {} });
   const cs = rs.plan.find((x) => x.nom === "chiffre-jour");
@@ -250,9 +250,9 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const posts = { entrees: [{ id: "111111111111", type: "post", cree: "2026-10-13T07:00:00Z" }, { id: "222222222222", type: "carousel", cree: "2026-10-13T09:00:00Z" }] };
   assert.ok(plan(fx.instants["carrousel-loi"], { file: posts }).refus["carrousel-loi"].includes("2 posts"));
   // un texte rejeté : « ce qui suit » prudent
-  assert.ok(/ne poursuit en général pas/.test(C.etapeSuivante({ chambre: "an", resultat: "rejete", etape: "première lecture" }).join(" ")));
-  assert.ok(/transmis au Sénat/.test(C.etapeSuivante({ chambre: "an", resultat: "adopte", etape: "première lecture" }).join(" ")));
-  assert.ok(/transmis à l'Assemblée nationale/.test(C.etapeSuivante({ chambre: "senat", resultat: "adopte", etape: "première lecture" }).join(" ")));
+  assert.ok(/n'avance généralement pas/.test(C.etapeSuivante({ chambre: "an", resultat: "rejete", etape: "première lecture" }).join(" ")));
+  assert.ok(/envoyé au Sénat/.test(C.etapeSuivante({ chambre: "an", resultat: "adopte", etape: "première lecture" }).join(" ")));
+  assert.ok(/envoyé à l'Assemblée nationale/.test(C.etapeSuivante({ chambre: "senat", resultat: "adopte", etape: "première lecture" }).join(" ")));
   // vote final à mot prudent : jamais expliqué
   const d = donnees(); d.lois.lois.forEach((l) => { l.titre = l.titre.replace("relative à l'organisation", "relative à l'ancien ministre mis en examen et à l'organisation"); });
   assert.ok(!C.planifier({ now: new Date(fx.instants["carrousel-loi"]), donnees: d, file: vide, registre: vide, etat: C.etatVide(), creneaux: CRENEAUX, config: {} }).plan.some((x) => /mis en examen/.test(x.entree.titre)));
@@ -265,7 +265,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.strictEqual(h.rendu.specs[0].couverture, true);
   assert.strictEqual(h.rendu.specs.at(-1).kicker, "Sources");
   assert.ok(validerCarrousel({ type: "carousel", url_images: h.rendu.specs.map((_, i) => `https://x.test/h${i}.jpg`), legende: h.entree.legende, alts: h.rendu.alts }).ok);
-  assert.ok(/^\d+ images pour retenir/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
+  assert.ok(/^\d+ images pour comprendre/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-10T16:20:00Z"), "pas le samedi");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-11T15:00:00Z"), "pas avant que le résumé (18 h 05) soit écrit");
   const autreSemaine = donnees(); autreSemaine.digest.id = "2026-W40";
@@ -451,6 +451,30 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
     // mémoire des faits perdue, autre id mais même type le même jour : refusé quand même
     assert.ok(!plan(fx.instants[nom], { file: { entrees: [{ ...entree, id: "999999999999", periode: "autre" }] } }).plan.some((x) => x.nom === nom), `${nom} : même type le même jour déjà en file`);
   }
+}
+
+// ---------- Lisibilité (FALC) : aucun sigle non expliqué, phrases de 20 mots au plus, aucun jargon, sur les exemples de chaque contenu ----------
+{
+  const { siglesNonExpliques, motsParPhrase } = require("../scripts/titres-propres.cjs");
+  const JARGON = /scrutin public|\bamendement|motion de censure|première lecture|commission mixte paritaire|séance publique|dossier législatif|\bprojet de loi\b|\bproposition de loi\b|\b(?:PLFSS|PLF|LFI|CMP)\b/i;
+  // tous les textes que le lecteur voit : spécifications d'image, légendes, textes alternatifs, accroches
+  const textes = (o, sortie = []) => { if (typeof o === "string") sortie.push(o); else if (Array.isArray(o)) o.forEach((x) => textes(x, sortie)); else if (o && typeof o === "object") Object.entries(o).forEach(([k, x]) => { if (k !== "brut") textes(x, sortie); }); return sortie; }; // `brut` = intitulé officiel gardé pour les registres, jamais affiché
+  const jours = { aujourdhui: fx.instants.aujourdhui, "vote-jour": fx.instants["vote-jour"], "chiffre-jour": fx.instants["chiffre-jour"], "carrousel-loi": fx.instants["carrousel-loi"], "carrousel-hebdo": fx.instants["carrousel-hebdo"] };
+  let vus = 0;
+  for (const [nom, instant] of Object.entries(jours)) {
+    const p = contenu(nom, instant);
+    if (!p) continue;
+    // le texte officiel cité entre guillemets (« … ») et l'adresse des sources restent tels quels : on les retire avant de mesurer
+    const propres = (t) => t.replace(/«[^»]*»/g, " ").replace(/https?:\/\/\S+|\b[\w.-]+\.(?:fr|com)\S*/g, " ").replace(/#\S+/g, " ");
+    const lus = [...textes(p.rendu), p.entree.legende, p.entree.alt, p.entree.accroche].filter(Boolean).map(propres);
+    for (const t of lus) {
+      vus++;
+      assert.deepStrictEqual(siglesNonExpliques(t), [], `${nom} : sigle non expliqué dans « ${t.slice(0, 120)} »`);
+      for (const { phrase, mots } of motsParPhrase(t)) assert.ok(mots <= 20, `${nom} : phrase de ${mots} mots : « ${phrase} »`);
+      assert.ok(!JARGON.test(t), `${nom} : jargon dans « ${t.slice(0, 160)} »`);
+    }
+  }
+  assert.ok(vus > 20, "le test a bien lu des textes");
 }
 
 console.log("[tests contenus-auto] OK");

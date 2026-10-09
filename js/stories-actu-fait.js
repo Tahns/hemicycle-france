@@ -186,7 +186,7 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   const s = sujetDe(info), ch = s?.chiffre;
   if(!ch?.valeur) return null;
   await polices();
-  if(await dessinerStyle(ctx, s, info, d => ({ source:"Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée. " + sansLead(d.source), cta:"Tous les chiffres" }))) return { nom: nomFichier("chiffre", s) };
+  if(await dessinerStyle(ctx, s, info, d => ({ source:sansLead(d.source), cta:"Tous les chiffres" }))) return { nom: nomFichier("chiffre", s) };
   const medias = mediasDe(s), titre = titreAffiche(s);
   const cles = String(ch.valeur).match(/\d+/g) || [];
   const art = articleCite(s, cles);
@@ -196,7 +196,7 @@ STORY_PLUS.chiffre = async (ctx, info) => {
     contexte: contexteSur(s), video: videoDe(s)
   };
   const y0 = fond(ctx, "Le chiffre du jour");
-  const yPied = pied(ctx, { medias, source: "Titres relevés dans la presse. Le chiffre peut évoluer au fil de la journée.", cta: "Tous les chiffres" });
+  const yPied = pied(ctx, { medias, source: "", cta: "Tous les chiffres" });
   const bas = yPied - 30, jt = jetons(ch.valeur);
   let tnMax = 300; while(tnMax > 44 && largeurChiffre(ctx, jt, tnMax) > LARG) tnMax -= 2; // chiffre très long : il rétrécit plutôt que de sortir de l'image
   const unite = String(ch.unite || "").trim();
@@ -266,7 +266,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "Face à face");
   const uniq = [...new Set(credits)];
-  const yPied = pied(ctx, { medias, source: `Titres relevés dans la presse.${uniq.length ? ` Photos : ${uniq.join(" ; ")}.` : ""}` });
+  const yPied = pied(ctx, { medias, source: uniq.length ? `Photos : ${uniq.join(" ; ")}.` : "" });
   const bas = yPied - 26;
   const ft = ajuster(ctx, titre, { poids: 600, tMax: 92, tMin: 54, hMax: 3 * 92 * 1.04, max: 3, inter: 1.04 });
   const yT = y0 + 40, yP0 = yT + ft.h + 44;
@@ -315,14 +315,14 @@ STORY_PLUS.date = async (ctx, info) => {
       essentiel: `Date à retenir : ${jourDate}, ${quand}`,
       puces: [`Date à retenir : ${jourDate}`, maj1(quand), `Rubrique : ${d.categorie}`],
       categorie: "À noter", contexte: `${titreAffiche(s)} : ${jourDate}`, cta: "Ne rien rater",
-      source: (s.agenda ? "Date relevée auprès de la source. Le programme peut changer. " : "Date annoncée par la presse. L'ordre du jour peut changer. ") + sansLead(d.source),
+      source: sansLead(d.source),
     };
   })) return { nom: nomFichier("date", s) };
   const medias = mediasDe(s), titre = titreAffiche(s);
   const art = articleCite(s, [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois]);
   const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "À noter", { fondEt: "#fff", couleurEt: BLEU });
-  const yPied = pied(ctx, { medias: [], source: s.agenda ? "Date relevée auprès de la source. Le programme peut changer." : "Date annoncée par la presse. L'ordre du jour peut changer.", cta: "Ne rien rater" });
+  const yPied = pied(ctx, { medias: [], source: "", cta: "Ne rien rater" });
   const bas = yPied - 30;
   const n = joursAvant(dt.iso);
   const compte = n > 1 ? { petit: "dans", grand: `${n} jours` } : n === 1 ? { petit: "", grand: "demain" } : n === 0 ? { petit: "", grand: "aujourd'hui" } : null;

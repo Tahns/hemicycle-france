@@ -2180,10 +2180,10 @@
     <div class="accueil-highlight-grid" id="accueil-highlight-grid"></div>
     <a class="accueil-quiz" href="#quiz" data-tab-lien="quiz">
       <span class="accueil-quiz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span>
-      <span class="accueil-quiz-texte"><b>Faites le quiz : avec quel groupe pensez-vous voter pareil ?</b><span>Quelques votes réels de l'Assemblée, à vous de choisir. Une minute, sans compte.</span></span>
+      <span class="accueil-quiz-texte"><b>Faites le quiz : avec quel groupe pensez-vous voter pareil ?</b><span>Quelques vrais votes de l'Assemblée : à vous de choisir. Une minute, sans compte.</span></span>
       <span class="accueil-quiz-bouton">Faire le quiz</span>
     </a>
-    <a class="debutant" href="#comprendre" data-tab-lien="comprendre"><b>Nouveau en politique ? Commencez ici</b><span>Qui décide quoi, comment naît une loi, comment lire un vote : l'essentiel en quelques fiches courtes.</span></a>
+    <a class="debutant" href="#comprendre" data-tab-lien="comprendre"><b>Nouveau en politique ? Commencez ici</b><span>Qui décide quoi, comment une loi est créée, comment lire un vote : l'essentiel en quelques fiches courtes.</span></a>
     <details class="accueil-plie accueil-chiffres"><summary>Les chiffres clés</summary>
       <div class="accueil-hero-stats" id="accueil-hero-stats"></div>
     </details>
@@ -2218,19 +2218,19 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Votes</h2>
-      <p class="chapo">Tous les votes publics de l'Assemblée depuis juillet 2024 (un <span class="gl" data-gl="scrutin">scrutin</span>, c'est un vote en séance). Choisissez un texte : chaque point est un député, selon qu'il a voté pour, contre, ou pas du tout.
+      <p class="chapo">Tous les votes des députés à l'Assemblée depuis juillet 2024 (on dit aussi un <span class="gl" data-gl="scrutin">scrutin</span>). Choisissez un texte : chaque point est un député. Il a voté pour, contre, ou pas du tout.
         <small id="scrutin-banner-detail">Données de l'Assemblée nationale, relevées toutes les 15 minutes.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment les députés ont voté sur chaque texte : pour, contre, ou pas de vote.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment chaque député a voté sur chaque texte : oui, non, ou pas de vote.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins">
       <div class="filtre-groupe">
-        <span class="filtre-label" id="loi-type-label">Type de <span class="gl" data-gl="scrutin">scrutin</span></span>
+        <span class="filtre-label" id="loi-type-label">Type de <span class="gl" data-gl="scrutin">vote</span></span>
         <div class="theme-filter-bar" id="theme-filter-bar" role="group" aria-labelledby="loi-type-label"></div>
       </div>
       <div class="filtre-champs">
         <label class="filtre-champ"><span class="filtre-label">Rechercher</span>
           <input type="search" id="loi-search" placeholder="Retraites, logement, budget…" /></label>
-        <label class="filtre-champ"><span class="filtre-label">Thème <small>(commission saisie au fond)</small></span>
+        <label class="filtre-champ"><span class="filtre-label">Thème <small>(groupe de députés qui a étudié le texte)</small></span>
           <select id="loi-theme"><option value="">Tous les thèmes</option></select></label>
       </div>
       <div class="filtres-pied">
@@ -2269,8 +2269,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Groupes</h2>
-      <p class="chapo">Choisissez un <span class="gl" data-gl="groupe">groupe</span> pour voir comment il a voté, texte par texte, et avec qui il vote le plus souvent.</p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Comparer la façon de voter des groupes et repérer ceux qui votent souvent ensemble.</p>
+      <p class="chapo">Choisissez un <span class="gl" data-gl="groupe">groupe</span> de députés. Vous verrez ses votes, texte par texte, et les groupes qui votent le plus souvent comme lui.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Comparer les groupes de députés et voir lesquels votent souvent pareil.</p>
     </div>
     <div class="filtres" role="search" aria-label="Filtrer les votes du groupe">
       <div class="filtre-groupe filtre-toujours">
@@ -2285,7 +2285,7 @@
       <div class="filtre-champs">
         <label class="filtre-champ"><span class="filtre-label">Rechercher dans ses votes</span>
           <input type="search" id="histo-search" placeholder="Retraites, logement, budget…" /></label>
-        <label class="filtre-champ"><span class="filtre-label">Thème <small>(commission saisie au fond)</small></span>
+        <label class="filtre-champ"><span class="filtre-label">Thème <small>(groupe de députés qui a étudié le texte)</small></span>
           <select id="histo-theme"><option value="">Tous les thèmes</option></select></label>
       </div>
       <div class="filtres-pied">
@@ -2305,9 +2305,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Assemblée nationale</div>
       <h2>Députés</h2>
-      <p class="chapo">Entrez le nom de votre commune pour trouver votre <span class="gl" data-gl="depute">député</span>, puis voyez s'il vient voter et ce qu'il a voté.
+      <p class="chapo">Tapez le nom de votre commune pour trouver votre <span class="gl" data-gl="depute">député</span>. Voyez s'il vient voter et ce qu'il a voté.
         <small id="deputes-maj">Votes nominatifs publiés par l'Assemblée nationale, relevés toutes les 15 minutes.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Trouver votre député, voir s'il est présent et comment il vote.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Trouver votre député, voir s'il vient voter et ce qu'il vote.</p>
     </div>
     <div id="deputes-recherche">
       <div class="filtres" role="search" aria-label="Trouver un député">
@@ -2334,9 +2334,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Sénat</div>
       <h2>Sénat</h2>
-      <p class="chapo">L'autre chambre du <span class="gl" data-gl="parlement">Parlement</span> : elle peut modifier ou rejeter ce que l'Assemblée a adopté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
+      <p class="chapo">Le Sénat est la deuxième assemblée du <span class="gl" data-gl="parlement">Parlement</span>. Il peut changer ou refuser ce que les députés ont voté. Voici ses votes, groupe par groupe, puis sénateur par sénateur.
         <small id="senat-maj">Pages officielles des scrutins publics du Sénat, relues toutes les 15 minutes.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment votent les sénateurs et leurs groupes.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir comment les sénateurs et leurs groupes votent.</p>
     </div>
     <div id="senat-principal">
     <div class="senat-hemi" id="senat-hemi">
@@ -2356,7 +2356,7 @@
     <h3 class="section-titre">Les scrutins publics</h3>
     <div class="filtres" role="search" aria-label="Filtrer les scrutins du Sénat">
       <div class="filtre-groupe">
-        <span class="filtre-label" id="senat-type-label">Type de <span class="gl" data-gl="scrutin">scrutin</span></span>
+        <span class="filtre-label" id="senat-type-label">Type de <span class="gl" data-gl="scrutin">vote</span></span>
         <div class="theme-filter-bar" id="senat-filtre" role="group" aria-labelledby="senat-type-label"></div>
       </div>
       <div class="filtre-champs">
@@ -2377,9 +2377,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Partis</h2>
-      <p class="chapo">Qui dirige chaque parti, qui préside son <span class="gl" data-gl="groupe">groupe</span> à l'Assemblée, et qui siège au <span class="gl" data-gl="gouvernement">Gouvernement</span>.
+      <p class="chapo">Qui dirige chaque parti, qui préside son <span class="gl" data-gl="groupe">groupe</span> de députés, et qui fait partie du <span class="gl" data-gl="gouvernement">Gouvernement</span>.
         <small>Chefs de parti vérifiés le <span id="dirigeants-verifie">3 septembre 2026</span>. Présidences et effectifs des groupes : Assemblée nationale, mis à jour automatiquement.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui dirige les partis et qui fait partie du Gouvernement.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui dirige les partis (groupes de personnes qui défendent les mêmes idées) et qui est au Gouvernement.</p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="dirigeants">Partager</button></div>
     <div class="leader-grid" id="leader-grid"></div>
@@ -2391,7 +2391,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Le pays en chiffres</div>
       <h2>Économie</h2>
-      <p class="chapo">Chômage, <span class="gl" data-gl="inflation">inflation</span>, <span class="gl" data-gl="croissance">croissance</span>, <span class="gl" data-gl="deficit">déficit</span>, <span class="gl" data-gl="dette">dette</span> : la dernière valeur officielle, avec sa date et sa source.</p>
+      <p class="chapo">Chômage, <span class="gl" data-gl="inflation">inflation</span>, <span class="gl" data-gl="croissance">croissance</span>, <span class="gl" data-gl="deficit">déficit</span>, <span class="gl" data-gl="dette">dette</span> : le dernier chiffre officiel, avec sa date et sa source.</p>
       <p class="sert"><b>À quoi sert cette page ?</b> Suivre les grands chiffres du pays (emploi, prix, croissance, dette), avec leur date et leur source.</p>
     </div>
     <div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="chiffres">Partager</button></div>
@@ -2404,8 +2404,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">L'argent public</div>
       <h2>Budget</h2>
-      <p class="chapo">Où va l'argent public, d'où il vient, combien il manque et ce que pèse la <span class="gl" data-gl="dette">dette</span>. Les chiffres concernent l'ensemble des <span class="gl" data-gl="administrations-publiques">administrations publiques</span> : État, collectivités locales et Sécurité sociale. Ils sont donnés tels que publiés, sans commentaire.</p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Comprendre d'où vient l'argent public et où il va.</p>
+      <p class="chapo">D'où vient l'argent public, où il va, combien il manque et combien le pays doit (la <span class="gl" data-gl="dette">dette</span>). Les chiffres concernent l'ensemble des <span class="gl" data-gl="administrations-publiques">administrations publiques</span> : l'État, les villes, départements et régions, et la Sécurité sociale. Ils sont donnés tels que publiés, sans commentaire.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Comprendre d'où vient l'argent public et à quoi il sert.</p>
     </div>
     <div id="budget-contenu"><p class="chargement">Chargement du budget…</p></div>
   </section>
@@ -2415,9 +2415,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Actualités</h2>
-      <p class="chapo">Les derniers titres de médias nationaux de sensibilités différentes, relus toutes les 15 minutes. Chaque ligne renvoie à l'article d'origine ; un sujet repris par plusieurs rédactions passe en premier.
+      <p class="chapo">Les derniers titres de médias nationaux aux opinions différentes, relus toutes les 15 minutes. Chaque ligne mène à l'article d'origine. Un sujet repris par plusieurs journaux passe en premier.
         <small id="actualites-maj">Flux publics des rédactions, relus toutes les 15 minutes.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Lire au même endroit les titres politiques de plusieurs médias, avec le lien vers chaque article.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Lire au même endroit les titres politiques de plusieurs journaux, avec le lien vers chaque article.</p>
     </div>
     <p class="journal-invite"><a href="#journal" data-tab-lien="journal"><b>Le journal du jour</b> <span>Les actualités du jour, mises en page comme la une d'un quotidien</span> <span aria-hidden="true">→</span></a></p>
     <div class="filtre-inline"><span class="filtre-label" id="actualites-filtre-label">Afficher</span>
@@ -2436,7 +2436,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Vie politique</div>
       <h2>Le journal du jour</h2>
-      <p class="chapo">Les actualités politiques du jour, en une de quotidien : titres seuls, médias cités, lien vers chaque article.</p>
+      <p class="chapo">Les nouvelles politiques du jour, comme à la une d'un journal : seulement les titres, avec le nom du média et le lien vers l'article.</p>
     </div>
     <div class="journal-actions">
       <button type="button" class="lien-bouton" id="journal-imprimer">Imprimer / enregistrer en PDF</button>
@@ -2449,7 +2449,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Agenda</h2>
-      <p class="chapo">Ce que les députés examinent bientôt, puis les rendez-vous à venir : congrès, <span class="gl" data-gl="primaire">primaires</span>, meetings, élections. Seules les dates confirmées figurent ici.</p>
+      <p class="chapo">Ce que les députés vont bientôt étudier, puis les rendez-vous à venir : <span class="gl" data-gl="congres">congrès</span>, <span class="gl" data-gl="primaire">primaires</span>, meetings (grandes réunions publiques), élections. Seules les dates confirmées figurent ici.</p>
       <p class="sert"><b>À quoi sert cette page ?</b> Savoir ce qui se prépare : débats à l'Assemblée, congrès, meetings.</p>
     </div>
     <div class="an-agenda" id="an-agenda"></div>
@@ -2460,9 +2460,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Probité</div>
       <h2>Justice</h2>
-      <p class="chapo">Des responsables politiques condamnés par un tribunal. Seules les décisions de justice sont citées, avec leur état : définitive, ou en <span class="gl" data-gl="appel">appel</span> et donc susceptible de changer.
+      <p class="chapo">Des responsables politiques condamnés par un tribunal. Seules les décisions de justice sont citées. Elles sont soit définitives, soit en <span class="gl" data-gl="appel">appel</span> (un nouveau procès) : la décision peut alors changer.
         <small>Liste vérifiée le <span id="justice-verifie">3 septembre 2026</span>.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Connaître les décisions de justice qui concernent des responsables politiques, et où elles en sont.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Connaître les décisions de justice qui concernent des responsables politiques, et savoir où elles en sont.</p>
       <p class="criteres"><b>Qui figure ici ?</b> Des personnalités de premier plan (anciens présidents de la République, Premiers ministres et ministres, chefs de parti, présidents de groupe parlementaire, élus nationaux ou maires de grandes villes) condamnées pour des faits liés à leur fonction ou à la vie politique : atteintes à la probité, financement politique, fraude. La liste n'est pas exhaustive et ne reflète pas le nombre de condamnations par parti. Vous pouvez <a href="https://github.com/Tahns/hemicycle-france/issues/new?template=erreur.yml&title=Justice%20%3A%20proposition%20d%27ajout" target="_blank" rel="noopener">proposer un ajout</a>, avec la référence de la décision.</p>
     </div>
     <div class="justice-summary" id="justice-summary"></div>
@@ -2476,8 +2476,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Sondages</h2>
-      <p class="chapo">Qui est en tête au premier tour ? Chaque institut a sa méthode : ses chiffres sont donc montrés tels qu'il les a publiés, de l'hypothèse la plus basse à la plus haute.</p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Voir les <span class="gl" data-gl="intention-de-vote">intentions de vote</span> pour la présidentielle. Un <span class="gl" data-gl="sondage">sondage</span> n'est pas un résultat : gardez sa <span class="gl" data-gl="marge-erreur">marge d'erreur</span> en tête.</p>
+      <p class="chapo">Qui est en tête au premier tour ? Chaque institut de sondage a sa méthode. Ses chiffres sont donc montrés tels qu'il les a publiés, de l'hypothèse la plus basse à la plus haute.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir pour qui les gens disent vouloir voter à la présidentielle (<span class="gl" data-gl="intention-de-vote">intentions de vote</span>). Un <span class="gl" data-gl="sondage">sondage</span> n'est pas un résultat : il peut se tromper un peu (<span class="gl" data-gl="marge-erreur">marge d'erreur</span>).</p>
     </div>
     <div class="annonce" id="annonce-president" hidden></div>
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="sondages">Partager les sondages</button> <button type="button" class="lien-bouton bouton-story" data-story="sondages">Story</button></div>
@@ -2508,9 +2508,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Présidentielle 2027</div>
       <h2>Candidats</h2>
-      <p class="chapo">Les personnes qui se sont déclarées, avec leur parti, leurs fonctions et la source de leur annonce. Pour être candidat, il faut encore 500 <span class="gl" data-gl="parrainage">parrainages</span> d'élus ; la liste officielle sera connue au printemps 2027.
+      <p class="chapo">Les personnes qui ont annoncé leur candidature, avec leur parti, leur métier politique et la source de l'annonce. Pour être candidat, il faut encore le soutien de 500 élus (<span class="gl" data-gl="parrainage">parrainages</span>). La liste officielle sera connue au printemps 2027.
         <small id="candidats-maj">D'après la page Wikipédia des candidatures, relue toutes les 15 minutes.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui s'est déclaré pour la présidentielle, et d'où vient l'information.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a annoncé sa candidature à la présidentielle, et d'où vient l'information.</p>
     </div>
     <div class="filtre-inline"><span class="filtre-label" id="candidats-tri-label">Trier par</span>
       <div class="theme-filter-bar" id="candidats-tri" role="group" aria-labelledby="candidats-tri-label"></div></div>
@@ -2526,8 +2526,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Pour débuter</div>
       <h2>Comprendre</h2>
-      <p class="chapo">La politique française expliquée simplement : cinq fiches courtes, dix notions clés, puis un lexique. Seulement les règles du jeu, sans avis.</p>
-      <p class="sert"><b>À quoi sert cette page ?</b> À comprendre les mots et les règles que vous croiserez sur tout le site.</p>
+      <p class="chapo">La politique française expliquée simplement : cinq fiches courtes, dix mots clés, puis un lexique (la liste des mots difficiles). Seulement les règles du jeu, sans avis.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Comprendre les mots et les règles que vous allez voir partout sur le site.</p>
     </div>
     <div class="cp-nav" role="group" aria-label="Aller à une fiche">
       <button type="button" data-cp="cp-qui">Qui fait quoi</button>
@@ -2588,9 +2588,9 @@
           <ol class="cp-etapes">
             <li><b>Dépôt.</b> Le gouvernement dépose un <span class="gl" data-gl="projet-de-loi">projet de loi</span>, ou des parlementaires une <span class="gl" data-gl="proposition-de-loi">proposition de loi</span>.</li>
             <li><b>Commission.</b> Quelques élus spécialistes du sujet étudient le texte. Un <span class="gl" data-gl="rapporteur">rapporteur</span> le présente. On peut le modifier par des <span class="gl" data-gl="amendement">amendements</span>.</li>
-            <li><b>Vote dans une première chambre</b> (Assemblée ou Sénat). Le texte est débattu en séance publique, puis voté.</li>
+            <li><b>Vote dans une première chambre</b> (Assemblée ou Sénat). Tous les élus en débattent dans la grande salle, puis votent.</li>
             <li><b>Vote dans l'autre chambre.</b> Si elle change le texte, il repart dans la première : c'est la <span class="gl" data-gl="navette">navette</span>.</li>
-            <li><b>Commission mixte paritaire.</b> Si les deux chambres ne s'accordent pas, 7 députés et 7 sénateurs cherchent un texte commun. Si cela échoue, le gouvernement peut donner le dernier mot à l'Assemblée.</li>
+            <li><b>Commission mixte paritaire.</b> Si les deux chambres ne sont pas d'accord, 7 députés et 7 sénateurs cherchent un texte commun. Si cela échoue, le gouvernement peut donner le dernier mot à l'Assemblée.</li>
             <li><b>Promulgation.</b> Le président de la République signe la loi dans les 15 jours, puis elle paraît au Journal officiel. Avant cela, le Conseil constitutionnel peut vérifier le texte s'il est saisi.</li>
           </ol>
         </div>
@@ -2610,8 +2610,8 @@
       </div>
       <div class="cp-encart">
         <h4>Le 49.3 et la motion de censure, en clair</h4>
-        <p>Le <span class="gl" data-gl="49-3">49.3</span> est un article de la Constitution. Il permet au Premier ministre de faire adopter un texte <b>sans vote</b>. Depuis 2008, il ne sert que pour les lois de finances, celles de la Sécurité sociale, et un autre texte par session.</p>
-        <p>Les députés ont une réponse : la <span class="gl" data-gl="motion-de-censure">motion de censure</span>. Elle doit être signée par au moins un dixième des députés. Si 289 députés au moins la votent, le texte n'est pas adopté et le gouvernement doit démissionner. Sinon, le texte est adopté.</p>
+        <p>Le <span class="gl" data-gl="49-3">49.3</span> est un article de la Constitution. Le Premier ministre peut s'en servir pour faire adopter un texte <b>sans vote</b>. Depuis 2008, c'est possible pour les lois sur le budget de l'État et de la Sécurité sociale, et pour un seul autre texte par session.</p>
+        <p>Les députés peuvent répondre avec une <span class="gl" data-gl="motion-de-censure">motion de censure</span> : un vote pour renverser le gouvernement. Au moins un dixième des députés doit la signer. Si 289 députés au moins la votent, le texte n'est pas adopté et le gouvernement doit démissionner. Sinon, le texte est adopté.</p>
       </div>
       <p class="cp-source">Pour vérifier : <a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">vie-publique.fr</a> · <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> · <a href="https://www.senat.fr/" target="_blank" rel="noopener">senat.fr</a></p>
     </article>
@@ -2654,11 +2654,11 @@
       <div class="cp-corps">
         <div class="cp-texte">
           <ul class="cp-points">
-            <li><b>Pour, contre, abstention.</b> Un député peut voter pour, contre, ou s'abstenir (ni oui ni non). Il peut aussi ne pas voter du tout.</li>
+            <li><b>Pour, contre, abstention.</b> Un député peut voter pour (oui), contre (non), ou s'abstenir (ni oui ni non). Il peut aussi ne pas voter du tout.</li>
             <li><b>« Adopté » :</b> il y a plus de « pour » que de « contre ». Les abstentions et les absents ne comptent pas dans ce calcul.</li>
             <li><b>Majorité absolue :</b> plus de la moitié de tous les députés, présents ou non : 289 sur 577. Elle n'est exigée que dans certains cas, comme la motion de censure.</li>
             <li><b>Groupe parlementaire :</b> des députés de sensibilité proche, au moins 15. Ceux d'un groupe votent souvent pareil, mais pas toujours. Un <span class="gl" data-gl="non-inscrit">non-inscrit</span> n'appartient à aucun groupe.</li>
-            <li><b>Sur ce site,</b> chaque point de l'hémicycle est un député, coloré selon son vote. La page <a href="#scrutin" data-tab-lien="scrutin">Votes</a> montre tous les <span class="gl" data-gl="scrutin">scrutins</span>.</li>
+            <li><b>Sur ce site,</b> chaque point du dessin de l'Assemblée est un député, coloré selon son vote. La page <a href="#scrutin" data-tab-lien="scrutin">Votes</a> montre tous les <span class="gl" data-gl="scrutin">scrutins</span>.</li>
           </ul>
         </div>
         <figure class="cp-fig">
@@ -2717,17 +2717,17 @@
       <div class="cp-notions">
           <div class="cp-fiche">
             <h4>L'article 49, alinéa 3 (« 49.3 »)</h4>
-            <p>Le Premier ministre peut, après délibération du Conseil des ministres, engager la responsabilité du gouvernement devant l'Assemblée nationale sur un texte. Ce texte est alors considéré comme adopté sans vote, sauf si une motion de censure est déposée dans les 24 heures et adoptée. Depuis la révision de 2008, cette procédure s'applique sans limite aux projets de loi de finances et de financement de la sécurité sociale, et une seule fois par session pour tout autre texte.</p>
+            <p>Le Premier ministre peut dire que le gouvernement s'engage sur un texte devant l'Assemblée nationale. Le texte est alors adopté sans vote, sauf si les députés votent une motion de censure dans les 24 heures. Depuis la révision de 2008, cette procédure s'applique sans limite aux projets de loi de finances et de financement de la sécurité sociale, et une seule fois par session pour tout autre texte.</p>
             <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 49</p>
           </div>
           <div class="cp-fiche">
             <h4>La motion de censure</h4>
-            <p>Les députés peuvent renverser le gouvernement en adoptant une motion de censure. Elle doit être signée par au moins un dixième des députés (58). Le vote a lieu au plus tôt 48 heures après son dépôt. Seuls les votes favorables sont comptés : il faut la majorité absolue des membres de l'Assemblée, soit 289 voix sur 577. Si elle est adoptée, le Premier ministre remet la démission du gouvernement au président de la République. Un député ne peut signer que trois motions par session ordinaire et une par session extraordinaire, hors cas du 49.3.</p>
+            <p>Les députés peuvent renverser le gouvernement en votant une motion de censure. Elle doit être signée par au moins un dixième des députés (58). Le vote a lieu au plus tôt 48 heures après son dépôt. Seuls les votes favorables sont comptés : il faut la majorité absolue des membres de l'Assemblée, soit 289 voix sur 577. Si elle est adoptée, le Premier ministre remet la démission du gouvernement au président de la République. Un député ne peut signer que trois motions par session ordinaire et une par session extraordinaire, hors cas du 49.3.</p>
             <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, articles 49 et 50</p>
           </div>
           <div class="cp-fiche">
             <h4>La navette parlementaire</h4>
-            <p>Pour devenir une loi, un texte doit être adopté dans les mêmes termes par l'Assemblée nationale et par le Sénat. Il passe donc de l'une à l'autre : c'est la navette. Chaque passage dans une assemblée est une lecture. Si le désaccord persiste après deux lectures dans chaque assemblée (une seule si le gouvernement a engagé la procédure accélérée), une commission mixte paritaire peut être réunie.</p>
+            <p>Pour devenir une loi, un texte doit être adopté, mot pour mot, par l'Assemblée nationale et par le Sénat. Il passe donc de l'une à l'autre : c'est la navette. Chaque passage dans une assemblée s'appelle une lecture. Si le désaccord persiste après deux lectures dans chaque assemblée (une seule si le gouvernement a engagé la procédure accélérée), une commission mixte paritaire peut être réunie.</p>
             <p class="cp-source">Texte : <a href="https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur" target="_blank" rel="noopener">Constitution du 4 octobre 1958</a>, article 45</p>
           </div>
           <div class="cp-fiche">
@@ -2737,7 +2737,7 @@
           </div>
           <div class="cp-fiche">
             <h4>Le vote solennel</h4>
-            <p>À l'Assemblée nationale, le vote solennel est un scrutin public sur l'ensemble d'un texte important. Sa date est fixée à l'avance par la Conférence des présidents, qui réunit le président de l'Assemblée et les responsables des groupes. Le vote de chaque député est publié. Il se distingue des votes sur un amendement ou sur un article, qui ont lieu au fil du débat.</p>
+            <p>À l'Assemblée nationale, le vote solennel est un vote de tous les députés, ouvert au public, sur l'ensemble d'un texte important. Sa date est fixée à l'avance par la Conférence des présidents, qui réunit le président de l'Assemblée et les responsables des groupes. Le vote de chaque député est publié. Il se distingue des votes sur un amendement ou sur un article, qui ont lieu au fil du débat.</p>
             <p class="cp-source">Texte : <a href="https://www.assemblee-nationale.fr/" target="_blank" rel="noopener">assemblee-nationale.fr</a> (règlement de l'Assemblée nationale)</p>
           </div>
           <div class="cp-fiche">
@@ -2783,9 +2783,9 @@
     <div class="rubrique-tete">
       <div class="surtitre">Pour débuter</div>
       <h2>Les présidents</h2>
-      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> sous la Ve République, du plus récent au plus ancien. Des dates et des faits, sans avis.
+      <p class="chapo">Les personnes qui ont été <span class="gl" data-gl="president">président de la République</span> depuis 1958 (la Ve République), du plus récent au plus ancien. Des dates et des faits, sans avis.
         <small>Liste relue le <span id="presidents-verifie">2 octobre 2026</span>. Sources : site de l'Élysée et Wikipédia, un lien vers la fiche de chacun.</small></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> s'est terminé.</p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Savoir qui a présidé la France, quand, et comment chaque <span class="gl" data-gl="mandat">mandat</span> (la période au pouvoir) s'est terminé.</p>
     </div>
     <div id="presidents-bandeau"></div>
     <div id="presidents-frise"></div>
@@ -2892,7 +2892,7 @@
     <div class="rubrique-tete">
       <div class="surtitre">Transparence</div>
       <h2>Méthode</h2>
-      <p class="chapo">D'où viennent les chiffres, à quelle fréquence ils sont mis à jour, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
+      <p class="chapo">D'où viennent les chiffres, quand ils sont mis à jour, ce qu'ils ne disent pas, et comment le site reste neutre.</p>
     </div>
     <div class="texte-legal">
       <h3>Sources</h3>
@@ -2949,8 +2949,8 @@
     <div class="rubrique-tete">
       <div class="surtitre">Jeu civique</div>
       <h2>Quiz</h2>
-      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> vous êtes le plus proche. <span id="quiz-vie-privee">Vos réponses ne sont enregistrées nulle part.</span></p>
-      <p class="sert"><b>À quoi sert cette page ?</b> Vous situer par rapport aux groupes en votant à votre tour sur de vrais textes.</p>
+      <p class="chapo" id="quiz-banner-detail">Et si vous étiez député ? Votez sur des textes récents et voyez de quels <span class="gl" data-gl="groupe">groupes</span> de députés vous êtes le plus proche. <span id="quiz-vie-privee">Vos réponses ne sont enregistrées nulle part.</span></p>
+      <p class="sert"><b>À quoi sert cette page ?</b> Voir de quels groupes de députés vous êtes proche, en votant sur de vrais textes.</p>
     </div>
     <div id="quiz-container"></div>
   </section>
@@ -3423,65 +3423,65 @@ function formatNombre(n){ return n.toLocaleString("fr-FR"); }
    Dans le HTML : <span class="gl" data-gl="navette">navette</span> devient un bouton au chargement.
    Dans le JavaScript : gl("navette", "Navette") renvoie le bouton prêt à insérer. */
 const GLOSSAIRE = [
-  ["49-3", "49.3", "Article de la Constitution qui permet au Premier ministre de faire adopter un texte sans vote. Les députés peuvent répondre par une motion de censure : si elle échoue, le texte est adopté.", "article 49 alinéa 3"],
-  ["abstention", "Abstention", "Au vote, s'abstenir, c'est ne dire ni oui ni non. Dans une élection, c'est aussi ne pas aller voter."],
-  ["adopte", "Adopté", "Un texte est adopté quand il y a plus de « pour » que de « contre ». Les abstentions et les absents ne comptent pas dans ce calcul."],
-  ["amendement", "Amendement", "Proposition pour modifier un texte de loi : ajouter, changer ou supprimer une phrase. Les parlementaires et le gouvernement peuvent en déposer."],
-  ["appel", "Appel", "Nouveau procès devant une juridiction supérieure. La première décision peut y être confirmée ou changée."],
-  ["administrations-publiques", "Administrations publiques", "L'État, les collectivités locales (communes, départements, régions) et la Sécurité sociale, pris ensemble."],
-  ["assemblee", "Assemblée nationale", "Chambre du Parlement composée de 577 députés élus pour 5 ans. Elle vote les lois et contrôle le gouvernement."],
-  ["budget", "Budget de l'État", "Chaque année, le Parlement vote une loi de finances. Elle fixe les recettes et les dépenses prévues de l'État.", "loi de finances"],
-  ["circonscription", "Circonscription", "Territoire où les électeurs élisent un député. La France en compte 577 : un député par circonscription."],
-  ["cohabitation", "Cohabitation", "Situation où le président de la République et la majorité de l'Assemblée nationale sont de camps opposés. Le Premier ministre vient alors de la majorité de l'Assemblée."],
-  ["cohesion", "Cohésion", "Sur ce site : à quel point les membres d'un groupe votent de la même façon. 100 % veut dire que tous ont voté dans le même sens."],
-  ["commission", "Commission", "Petit groupe de parlementaires spécialisé dans un domaine (finances, défense, affaires sociales…). Elle étudie un texte et peut le modifier avant le vote en séance."],
-  ["cmp", "Commission mixte paritaire (CMP)", "Réunion de 7 députés et 7 sénateurs, chargée de proposer un texte commun quand l'Assemblée et le Sénat ne sont pas d'accord."],
-  ["conseil-constitutionnel", "Conseil constitutionnel", "9 membres qui vérifient qu'une loi respecte la Constitution. Ils veillent aussi à la régularité des élections nationales."],
-  ["congres", "Congrès", "Réunion des députés et des sénateurs au même endroit, à Versailles aujourd'hui. Il sert à réviser la Constitution. Sous les IIIe et IVe Républiques, il élisait aussi le président de la République."],
-  ["constitution", "Constitution", "Texte qui organise les pouvoirs et fixe les règles du pays. Celle de la Ve République date de 1958."],
-  ["croissance", "Croissance", "Hausse de la production du pays d'une année sur l'autre, mesurée par l'évolution du PIB."],
-  ["deficit", "Déficit public", "Somme qui manque quand l'État, les collectivités et la Sécurité sociale dépensent plus qu'ils ne reçoivent pendant une année."],
-  ["depute", "Député", "Élu qui représente les habitants d'une circonscription à l'Assemblée nationale, pour 5 ans."],
-  ["dette", "Dette publique", "Total de l'argent emprunté par les administrations publiques et pas encore remboursé. Chaque déficit s'ajoute à la dette."],
-  ["dissolution", "Dissolution", "Décision du président de la République de mettre fin au mandat des députés avant la date prévue. De nouvelles élections législatives ont lieu 20 à 40 jours plus tard."],
-  ["gouvernement", "Gouvernement", "Le Premier ministre et les ministres. Ils dirigent le pays au quotidien et proposent des lois."],
-  ["grands-electeurs", "Grands électeurs", "Élus qui votent pour désigner les sénateurs. Ce sont surtout des délégués des conseils municipaux, avec les députés, les sénateurs et les conseillers régionaux et départementaux."],
-  ["groupe", "Groupe parlementaire", "Regroupement de députés (ou de sénateurs) de sensibilités proches. À l'Assemblée, il faut au moins 15 députés pour former un groupe.", "groupe"],
-  ["hemicycle", "Hémicycle", "Salle en demi-cercle où siègent les députés (ou les sénateurs). Par extension, l'Assemblée elle-même."],
+  ["49-3", "49.3", "Article de la Constitution. Le Premier ministre peut s'en servir pour faire adopter un texte sans vote. Les députés peuvent répondre par une motion de censure. Si elle échoue, le texte est adopté.", "article 49 alinéa 3"],
+  ["abstention", "Abstention", "S'abstenir, c'est ne dire ni oui ni non. Lors d'une élection, c'est aussi ne pas aller voter."],
+  ["adopte", "Adopté", "Un texte est adopté quand il y a plus de « pour » que de « contre ». Ceux qui s'abstiennent ou sont absents ne comptent pas."],
+  ["amendement", "Amendement", "Proposition pour changer un texte de loi : ajouter, modifier ou enlever une phrase. Les députés, les sénateurs et le gouvernement peuvent en proposer."],
+  ["appel", "Appel", "Nouveau procès devant un tribunal plus haut. La première décision peut y être confirmée ou changée."],
+  ["administrations-publiques", "Administrations publiques", "L'État, les villes, départements et régions, et la Sécurité sociale, pris ensemble."],
+  ["assemblee", "Assemblée nationale", "Une des deux assemblées du Parlement. Elle compte 577 députés, élus pour 5 ans. Elle vote les lois et surveille le gouvernement."],
+  ["budget", "Budget de l'État", "Chaque année, le Parlement vote une loi de finances. Elle fixe l'argent que l'État pense recevoir et dépenser.", "loi de finances"],
+  ["circonscription", "Circonscription", "Zone où les habitants élisent un député. La France en compte 577 : un député par zone."],
+  ["cohabitation", "Cohabitation", "Le président et la majorité des députés sont de camps opposés. Le Premier ministre vient alors du camp de la majorité des députés."],
+  ["cohesion", "Cohésion", "Sur ce site : à quel point les membres d'un groupe votent pareil. 100 % veut dire que tous ont voté dans le même sens."],
+  ["commission", "Commission", "Petit groupe de députés (ou de sénateurs) spécialisé dans un domaine, comme les finances ou la défense. Il étudie un texte et peut le modifier avant le vote de tous."],
+  ["cmp", "Commission mixte paritaire (CMP)", "Réunion de 7 députés et 7 sénateurs. Ils proposent un texte commun quand l'Assemblée et le Sénat ne sont pas d'accord."],
+  ["conseil-constitutionnel", "Conseil constitutionnel", "9 membres qui vérifient qu'une loi respecte la Constitution. Ils vérifient aussi que les élections nationales se passent selon les règles."],
+  ["congres", "Congrès", "Réunion des députés et des sénateurs au même endroit, aujourd'hui à Versailles. Il sert à changer la Constitution. Avant 1958, il élisait aussi le président de la République."],
+  ["constitution", "Constitution", "Texte qui dit qui a le pouvoir et fixe les règles du pays. Celle de la Ve République date de 1958."],
+  ["croissance", "Croissance", "Hausse de ce que le pays produit d'une année sur l'autre. On la mesure avec le PIB."],
+  ["deficit", "Déficit public", "Argent qui manque quand l'État, les collectivités et la Sécurité sociale dépensent plus qu'ils ne reçoivent en une année."],
+  ["depute", "Député", "Élu qui représente les habitants d'une zone (circonscription) à l'Assemblée nationale, pour 5 ans."],
+  ["dette", "Dette publique", "Total de l'argent que les administrations publiques ont emprunté et n'ont pas encore rendu. Chaque déficit s'ajoute à la dette."],
+  ["dissolution", "Dissolution", "Le président de la République met fin au travail des députés avant la date prévue. De nouvelles élections de députés ont lieu 20 à 40 jours plus tard."],
+  ["gouvernement", "Gouvernement", "Le Premier ministre et les ministres. Ils dirigent le pays au jour le jour et proposent des lois."],
+  ["grands-electeurs", "Grands électeurs", "Élus qui votent pour choisir les sénateurs. Ce sont surtout des délégués des conseils des villes, avec les députés, les sénateurs et les élus des régions et des départements."],
+  ["groupe", "Groupe parlementaire", "Des députés (ou des sénateurs) qui ont des idées proches et se réunissent. À l'Assemblée, il faut au moins 15 députés pour former un groupe.", "groupe"],
+  ["hemicycle", "Hémicycle", "Grande salle en demi-cercle où siègent les députés (ou les sénateurs). On dit aussi « l'hémicycle » pour parler de l'Assemblée elle-même."],
   ["inflation", "Inflation", "Hausse générale des prix sur une période, le plus souvent un an."],
-  ["intention-de-vote", "Intention de vote", "Réponse d'une personne sondée à la question « pour qui voteriez-vous ? ». Ce n'est pas un vote : l'avis peut changer jusqu'au scrutin."],
-  ["journal-officiel", "Journal officiel", "Publication de l'État où paraissent les lois, les décrets et les nominations."],
+  ["intention-de-vote", "Intention de vote", "Réponse à la question « pour qui voteriez-vous ? » dans un sondage. Ce n'est pas un vote : la personne peut changer d'avis avant l'élection."],
+  ["journal-officiel", "Journal officiel", "Journal de l'État où paraissent les lois, les décrets (décisions du gouvernement) et les nominations."],
   ["majorite-absolue", "Majorité absolue", "Plus de la moitié de tous les membres d'une assemblée, présents ou non. À l'Assemblée nationale : 289 voix sur 577."],
-  ["mandat", "Mandat", "Durée pendant laquelle un élu exerce sa fonction. Celui du président de la République dure 5 ans depuis 2002 ; il durait 7 ans avant."],
-  ["marge-erreur", "Marge d'erreur", "Écart possible entre le résultat d'un sondage et la réalité, car on interroge une partie des gens seulement. Pour 1 000 personnes interrogées, elle est d'environ 3 points."],
-  ["motion-de-censure", "Motion de censure", "Vote par lequel les députés peuvent renverser le gouvernement. Elle doit être signée par au moins un dixième des députés et votée par 289 d'entre eux. Si elle l'est, le gouvernement doit démissionner."],
-  ["navette", "Navette parlementaire", "Allers-retours d'un texte entre l'Assemblée et le Sénat, jusqu'à ce que les deux votent le même texte."],
+  ["mandat", "Mandat", "Temps pendant lequel un élu garde sa fonction. Pour le président de la République, c'est 5 ans depuis 2002. Avant, c'était 7 ans."],
+  ["marge-erreur", "Marge d'erreur", "Écart possible entre le résultat d'un sondage et la réalité, car on interroge seulement une partie des gens. Pour 1 000 personnes interrogées, elle est d'environ 3 points."],
+  ["motion-de-censure", "Motion de censure", "Vote par lequel les députés peuvent renverser le gouvernement. Au moins un dixième des députés doit la signer, et 289 doivent la voter. Dans ce cas, le gouvernement doit démissionner."],
+  ["navette", "Navette parlementaire", "Un texte va et vient entre l'Assemblée et le Sénat, jusqu'à ce que les deux votent exactement le même texte."],
   ["non-inscrit", "Non-inscrit", "Député (ou sénateur) qui n'appartient à aucun groupe parlementaire."],
-  ["ordonnance", "Ordonnance", "Texte pris par le gouvernement dans un domaine normalement réservé à la loi, avec l'accord du Parlement. Le Parlement doit ensuite la ratifier."],
-  ["ordre-du-jour", "Ordre du jour", "Liste des textes que l'Assemblée ou le Sénat examine, jour après jour. Il est partagé entre le gouvernement et le Parlement."],
-  ["parlement", "Parlement", "L'Assemblée nationale et le Sénat réunis. Il vote les lois et contrôle le gouvernement."],
-  ["parrainage", "Parrainage", "Pour se présenter à la présidentielle, un candidat doit être soutenu par 500 élus (maires, parlementaires…)."],
-  ["pib", "PIB", "Produit intérieur brut : valeur de tout ce qui est produit dans le pays en un an. Il sert à comparer déficit et dette à la taille de l'économie."],
-  ["premier-ministre", "Premier ministre", "Nommé par le président de la République. Il dirige le gouvernement et répond de son action devant l'Assemblée nationale."],
-  ["president", "Président de la République", "Chef de l'État, élu pour 5 ans au suffrage universel direct. Il nomme le Premier ministre et promulgue les lois."],
-  ["primaire", "Primaire", "Élection organisée par un parti ou un camp pour choisir son candidat à une élection."],
-  ["procedure-acceleree", "Procédure accélérée", "Le gouvernement peut demander que chaque chambre n'examine le texte qu'une fois avant la commission mixte paritaire. Le texte avance plus vite."],
+  ["ordonnance", "Ordonnance", "Texte écrit par le gouvernement, dans un domaine qui relève normalement de la loi, avec l'accord du Parlement. Le Parlement doit ensuite la confirmer."],
+  ["ordre-du-jour", "Ordre du jour", "Liste des textes que l'Assemblée ou le Sénat étudie, jour après jour. Le gouvernement et le Parlement la fixent ensemble."],
+  ["parlement", "Parlement", "L'Assemblée nationale et le Sénat ensemble. Il vote les lois et surveille le gouvernement."],
+  ["parrainage", "Parrainage", "Pour se présenter à la présidentielle, un candidat doit être soutenu par 500 élus (maires, députés, sénateurs…)."],
+  ["pib", "PIB", "Produit intérieur brut : valeur de tout ce que le pays produit en un an. Il sert à comparer le déficit et la dette à la taille de l'économie."],
+  ["premier-ministre", "Premier ministre", "Nommé par le président de la République. Il dirige le gouvernement et doit rendre des comptes à l'Assemblée nationale."],
+  ["president", "Président de la République", "Chef de l'État, élu pour 5 ans directement par les citoyens. Il nomme le Premier ministre et signe les lois pour les rendre officielles."],
+  ["primaire", "Primaire", "Élection organisée par un parti ou un camp pour choisir son candidat à une autre élection."],
+  ["procedure-acceleree", "Procédure accélérée", "Le gouvernement peut demander que chaque assemblée étudie le texte une seule fois avant la commission mixte paritaire. Le texte avance plus vite."],
   ["projet-de-loi", "Projet de loi", "Texte de loi proposé par le gouvernement."],
-  ["promulgation", "Promulgation", "Acte du président de la République qui rend une loi officielle, dans les 15 jours après son adoption définitive."],
-  ["proposition-de-loi", "Proposition de loi", "Texte de loi proposé par des députés ou des sénateurs."],
-  ["quorum", "Quorum", "Nombre minimum de présents exigé pour qu'une réunion ou un vote soit valable."],
-  ["rapporteur", "Rapporteur", "Parlementaire chargé d'étudier un texte en commission et de présenter son analyse à ses collègues."],
+  ["promulgation", "Promulgation", "Le président de la République signe la loi pour la rendre officielle. Il le fait dans les 15 jours après le dernier vote."],
+  ["proposition-de-loi", "Proposition de loi", "Texte de loi proposé par des députés ou des sénateurs. Exemple : une idée de loi lancée par un député."],
+  ["quorum", "Quorum", "Nombre minimum de personnes présentes pour qu'une réunion ou un vote compte."],
+  ["rapporteur", "Rapporteur", "Député ou sénateur chargé d'étudier un texte et d'expliquer son contenu à ses collègues."],
   ["recettes", "Recettes et dépenses", "Recettes : l'argent qui rentre (impôts, cotisations). Dépenses : l'argent qui sort (salaires, retraites, santé, intérêts de la dette…).", "recette depense"],
   ["referendum", "Référendum", "Vote où tous les électeurs répondent par oui ou non à une même question."],
-  ["report-de-voix", "Report de voix", "Électeurs d'un candidat éliminé au premier tour qui votent pour un autre au second. On parle aussi de réserve de voix.", "reserve electorale reserve de voix"],
-  ["scrutin", "Scrutin", "Un vote, ou la manière de voter. Sur ce site, un scrutin est un vote des députés en séance : pour chacun, pour, contre ou abstention."],
-  ["seance-publique", "Séance publique", "Réunion de tous les députés (ou sénateurs) dans l'hémicycle, ouverte au public et filmée. C'est là qu'on débat et qu'on vote."],
-  ["senat", "Sénat", "Chambre du Parlement composée de 348 sénateurs élus pour 6 ans par des élus locaux. Il est renouvelé par moitié tous les 3 ans."],
-  ["senateur", "Sénateur", "Élu au Sénat par des grands électeurs (vote indirect) pour 6 ans."],
-  ["sondage", "Sondage", "Enquête auprès de quelques centaines ou milliers de personnes pour estimer l'opinion de tous. Une photo d'un moment, pas une prévision."],
-  ["suffrage-direct", "Suffrage direct et indirect", "Direct : les électeurs choisissent eux-mêmes l'élu. Indirect : ils choisissent des intermédiaires (les grands électeurs), qui élisent l'élu.", "suffrage universel"],
-  ["suffrages-exprimes", "Suffrages exprimés", "Voix données à un candidat ou à une liste. Les votes blancs et nuls n'en font pas partie."],
-  ["vote-blanc", "Vote blanc", "Enveloppe vide ou bulletin sans nom. Il est compté à part et n'entre pas dans les suffrages exprimés."]
+  ["report-de-voix", "Report de voix", "Les électeurs d'un candidat éliminé au premier tour votent pour un autre au second tour. On dit aussi « réserve de voix ».", "reserve electorale reserve de voix"],
+  ["scrutin", "Scrutin", "Un vote. Sur ce site, c'est un vote des députés dans l'hémicycle : chacun vote pour, contre, ou s'abstient."],
+  ["seance-publique", "Séance publique", "Réunion de tous les députés (ou sénateurs) dans la grande salle, ouverte au public et filmée. C'est là qu'on débat et qu'on vote."],
+  ["senat", "Sénat", "Une des deux assemblées du Parlement. Elle compte 348 sénateurs, élus pour 6 ans par des élus locaux. La moitié est remplacée tous les 3 ans."],
+  ["senateur", "Sénateur", "Élu au Sénat pour 6 ans par des grands électeurs (des élus locaux), et non directement par les citoyens."],
+  ["sondage", "Sondage", "Questions posées à quelques centaines ou milliers de personnes pour deviner l'avis de tous. C'est une photo d'un moment, pas une prévision."],
+  ["suffrage-direct", "Suffrage direct et indirect", "Direct : les électeurs choisissent eux-mêmes l'élu. Indirect : ils choisissent des intermédiaires (les grands électeurs), qui choisissent l'élu.", "suffrage universel"],
+  ["suffrages-exprimes", "Suffrages exprimés", "Voix données à un candidat ou à une liste. Les votes blancs et les votes nuls n'en font pas partie."],
+  ["vote-blanc", "Vote blanc", "Enveloppe vide ou bulletin sans nom. On le compte à part. Il n'entre pas dans les suffrages exprimés."]
 ];
 const GL_PAR_ID = new Map(GLOSSAIRE.map(g => [g[0], g]));
 

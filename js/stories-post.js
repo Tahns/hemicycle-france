@@ -14,8 +14,9 @@ const fr = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 // Cadre commun des stories (fond, logo, étiquette) décalé vers le haut pour le format 4:5 ; renvoie l'ordonnée où commence le contenu
 function cadrePost(ctx, surtitre, opts){
+  storyFondTheme(ctx); // fond généré à la taille du post (1080 × 1350), puis cadre décalé sans refaire le fond
   ctx.save(); ctx.translate(0, -DECALAGE);
-  const y = storyCadre(ctx, surtitre, opts) - DECALAGE;
+  const y = storyCadre(ctx, surtitre, { ...opts, sansFond: true }) - DECALAGE;
   ctx.restore();
   return y;
 }
@@ -80,7 +81,7 @@ async function postDate(ctx, s){
       gras(ctx, s.media ? `— ${s.media}` : "", marge + 32, y + hc - 22, { taille: 24, couleur: STORY.pale });
     }
   }
-  pied(ctx, s.agenda ? "Date relevée auprès de la source. Le programme peut changer." : "Date annoncée par la presse. L'ordre du jour peut changer.", "Ne rien rater");
+  pied(ctx, "", "Ne rien rater");
 }
 
 /* ---------- Post « loi adoptée / rejetée » ---------- */

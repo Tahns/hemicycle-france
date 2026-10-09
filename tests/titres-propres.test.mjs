@@ -2,7 +2,7 @@
 import test from "node:test";
 import assert from "node:assert";
 import { createRequire } from "node:module";
-const { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+const { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet, simplifierJargon, siglesNonExpliques, motsParPhrase, etapeSimple, natureSimple } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
 
 const plat = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const art = (media, titre, i = 0) => ({ media, titre, url: `https://example.org/${media.replace(/\W/g, "")}/${i}`, date: "2026-10-05T08:00:00.000Z" });
@@ -162,21 +162,21 @@ const reel = (titre, ill = {}, plus = []) => ({ illustration: { theme: "politiqu
 const pers = (nom, parti) => ({ nom, ...(parti ? { parti } : {}) });
 const CAS = [
   ["Politique. « Concentré et vigilant » : face à la colère lycéenne, le gouvernement cherche la bonne réponse", {}, "Gouvernement : réponse sur la mobilisation lycéenne"],
-  ["Mouvement lycéen: \"Tout est fait pour dénigrer la jeunesse et la terroriser\", estime Danielle Simonnet, députée \"L'Après\" de Paris", { personnes: [pers("Danielle Simonnet")] }, "Danielle Simonnet : prise de position sur la mobilisation lycéenne"],
-  ["Colère lycéenne: Gérard Larcher, président LR du Sénat, estime “qu’il faut rétablir l’ordre”", { personnes: [pers("Gérard Larcher", "LR")], partis: ["LR"] }, "Gérard Larcher (LR) : prise de position sur la mobilisation lycéenne"],
-  ["« Une réponse sécuritaire totalement disproportionnée » : le PS va déposer une proposition de loi contre les armes mutilantes lors des manifestations de mineurs", { partis: ["SOC"] }, "PS : proposition de loi sur le maintien de l'ordre"],
+  ["Mouvement lycéen: \"Tout est fait pour dénigrer la jeunesse et la terroriser\", estime Danielle Simonnet, députée \"L'Après\" de Paris", { personnes: [pers("Danielle Simonnet")] }, "Danielle Simonnet : déclaration sur la mobilisation lycéenne"],
+  ["Colère lycéenne: Gérard Larcher, président LR du Sénat, estime “qu’il faut rétablir l’ordre”", { personnes: [pers("Gérard Larcher", "LR")], partis: ["LR"] }, "Gérard Larcher : déclaration sur la mobilisation lycéenne"],
+  ["« Une réponse sécuritaire totalement disproportionnée » : le PS va déposer une proposition de loi contre les armes mutilantes lors des manifestations de mineurs", { partis: ["SOC"] }, "Parti socialiste : loi proposée sur le maintien de l'ordre"],
   ["Grenoble. Plainte, manifestation, mises au point… Le conseil municipal s’est ouvert une semaine après les incidents entre élus et agents", {}, "Grenoble : conseil municipal"],
   ["Haute-Savoie. Praz-sur-Arly : de nouvelles pistes proposées pour la ZAC des Varins", {}, "Haute-Savoie : projet d'aménagement"],
   ["Loi intégrale contre les violences sexuelles : les députés adoptent la création d’unités spécialisées au sein de la police", {}, "Assemblée nationale : vote sur la loi contre les violences sexuelles"],
   ["Pyrénées-Atlantiques : le tribunal administratif suspend l’interdiction de manifester aux abords de deux lycées", { theme: "justice" }, "Pyrénées-Atlantiques : décision du tribunal administratif"],
-  ["L'ÉDITO DE GUILLAUME DARET - Colère des lycéens: Sébastien Lecornu au pied du mur", { personnes: [pers("Sébastien Lecornu")] }, "Premier ministre : point de vue éditorial sur la mobilisation lycéenne"],
-  ["Éditorial. Colère lycéenne : face au chaos, les syndicats à la rescousse", {}, "Syndicats : point de vue éditorial sur la mobilisation lycéenne"],
+  ["L'ÉDITO DE GUILLAUME DARET - Colère des lycéens: Sébastien Lecornu au pied du mur", { personnes: [pers("Sébastien Lecornu")] }, "Premier ministre : opinion d'un média sur la mobilisation lycéenne"],
+  ["Éditorial. Colère lycéenne : face au chaos, les syndicats à la rescousse", {}, "Syndicats : opinion d'un média sur la mobilisation lycéenne"],
   ["Le dessin du mardi 6 octobre : deux poids, deux mesures…", {}, "Dessin de presse : regard sur l'actualité du jour"],
   ["Jujurieux. Fiscalité, urbanisme : les élus ajustent les outils de gestion communale", { theme: "budget" }, "Jujurieux : finances locales"],
-  ["Blocage des lycées en France: la LDH dénonce une «dérive globale par rapport à l'État de droit» de la police", {}, "LDH : prise de position sur la mobilisation lycéenne"],
-  ["Marine Le Pen: sans \"rupture politique, la France court vers le défaut\" de paiement", { personnes: [pers("Marine Le Pen", "RN")] }, "Marine Le Pen (RN) : actualité sur les finances publiques"],
-  ["Une quarantaine d’enfants incommodés après un repas à la cantine en Dordogne : c’est bien une intoxication alimentaire due à une bactérie", {}, "Santé : l'essentiel du moment"],
-  ["Deux scénarios pour demain — Eau en 2050 : scénario catastrophe ?", {}, "Environnement : l'essentiel du moment"],
+  ["Blocage des lycées en France: la LDH dénonce une «dérive globale par rapport à l'État de droit» de la police", {}, "Ligue des droits de l'Homme : déclaration sur la mobilisation lycéenne"],
+  ["Marine Le Pen: sans \"rupture politique, la France court vers le défaut\" de paiement", { personnes: [pers("Marine Le Pen", "RN")] }, "Marine Le Pen : ce qu'il faut savoir sur les finances publiques"],
+  ["Une quarantaine d’enfants incommodés après un repas à la cantine en Dordogne : c’est bien une intoxication alimentaire due à une bactérie", {}, "Santé : ce que disent les médias"],
+  ["Deux scénarios pour demain — Eau en 2050 : scénario catastrophe ?", {}, "Environnement : ce que disent les médias"],
   ["Gilley. Une journée des citoyens d’honneurs du Saugeais fidèle à ses valeurs", {}, "Gilley : actualité locale"],
   ["Billet. Le mal est ailleurs", {}, "Billet d'humeur : regard sur l'actualité du jour"],
 ];
@@ -198,7 +198,7 @@ test("titreParRegles : présomption d'innocence, aucun nom ni verbe qui accuse d
   ]) {
     const t = titreSujet(reel(titre, ill), [], {}).titre;
     assert.ok(!/Barella|Zaïd|Le Maire|coupable|accus|dénonc/i.test(t), t);
-    assert.match(t, /actualité judiciaire|l.essentiel du moment/);
+    assert.match(t, /actualité de la justice|ce que disent les médias/);
   }
 });
 
@@ -250,7 +250,7 @@ test("accusation ou polémique sans juridiction : jamais « procédure judiciair
   }
   // Juridiction explicitement citée : actualité judiciaire, sans nom ni « en cours »
   const j = titreParRegles(reel("Un homme condamné par le tribunal correctionnel de Lyon", {}), {});
-  assert.ok(/judiciaire|tribunal/i.test(j.titre) && !/en cours/i.test(j.titre), j.titre);
+  assert.ok(/justice|judiciaire|tribunal/i.test(j.titre) && !/en cours/i.test(j.titre), j.titre);
 });
 
 test("titreSujet : jamais un segment de 5 mots d'un titre de presse (sinon titre générique)", () => {
@@ -310,9 +310,9 @@ test("jamais « procédure (judiciaire) en cours » : expression commune des mé
 
 test("simplifierTexteLoi : retire le jargon, thème en tête, 9 mots au plus", () => {
   const cas = [
-    ["Projet de loi autorisant l'approbation de l'accord multilatéral entre autorités compétentes portant sur l'échange des informations GloBE", "Fiscalité : échange d'informations entre pays (accord GloBE)"],
-    ["Projet de loi autorisant l’approbation de l’accord multilatéral entre autorités compétentes portant sur l’échange des informations GloBE", "Fiscalité : échange d'informations entre pays (accord GloBE)"],
-    ["Projet de loi de finances pour 2027", "Finances publiques : budget 2027"],
+    ["Projet de loi autorisant l'approbation de l'accord multilatéral entre autorités compétentes portant sur l'échange des informations GloBE", "Fiscalité : échange d'informations entre pays"],
+    ["Projet de loi autorisant l’approbation de l’accord multilatéral entre autorités compétentes portant sur l’échange des informations GloBE", "Fiscalité : échange d'informations entre pays"],
+    ["Projet de loi de finances pour 2027", "Budget de l'État 2027"],
     ["Projet de loi relatif à la résilience des infrastructures critiques et au renforcement de la cybersécurité, adopté par le Sénat", "Numérique : résilience des infrastructures critiques"],
     ["Proposition de loi visant à renforcer la protection des enfants sur les réseaux sociaux (nouvelle lecture)", "Numérique : protection des enfants sur les réseaux sociaux"],
     ["Proposition de loi organique visant à adapter l'autorité judiciaire à la lutte contre les violences sexuelles et intrafamiliales", "Justice : lutte contre les violences sexuelles et intrafamiliales"],
@@ -329,25 +329,76 @@ test("simplifierTexteLoi : retire le jargon, thème en tête, 9 mots au plus", (
   assert.ok(long === null || (nbMots(long) <= 9 && !/(?:\bde|du|des|la|le|les|et|contre|à)$/i.test(long)), `ne finit jamais sur un mot de liaison : ${long}`);
 });
 
-test("accroche : sujet + enjeu en 6 à 10 mots, repli sur le titre propre, aucune accusation", () => {
+test("accroche : sujet + enjeu en 6 à 18 mots, repli sur le titre propre, aucune accusation", () => {
   const lycees = sujet([["Le Monde", "Blocus des lycées : « on ne lâchera rien », disent les élèves"], ["BFMTV", "Lycées bloqués ce matin dans plusieurs villes"]]);
   const a = accroche(lycees);
-  assert.strictEqual(a, "Lycées : des blocages, que veulent les élèves ?");
-  assert.ok(nbMots(a) >= 6 && nbMots(a) <= 10, a);
+  assert.strictEqual(a, "Lycées : des blocages, que demandent les élèves ?");
+  assert.ok(nbMots(a) >= 6 && nbMots(a) <= 18, a);
   // jamais un titre de presse ni une citation
   assert.ok(!lycees.articles.some((x) => plat(x.titre).includes(plat(a))));
   assert.ok(!/ne lâchera/.test(a));
   // vote : l'action n'est dite que si son mot est dans le titre
   const vote = sujet([["Le Monde", "Le Sénat adopte la loi sur la dette"], ["BFMTV", "Budget : vote au Sénat"]]);
-  assert.strictEqual(accroche(vote), "Finances publiques : un vote, que change-t-il ?");
+  assert.strictEqual(accroche(vote), "L'argent de l'État : un vote a lieu, qu'est-ce que cela change ?");
   const sansVote = sujet([["Le Monde", "Budget : le point sur la dette"], ["BFMTV", "Dette publique, où en est-on ?"]]);
   assert.ok(!/vote/.test(accroche(sansVote) || ""), "pas de vote affirmé sans le mot");
   // prudence : accusation ou procédure -> repli sur le titre propre, jamais de nom de personne
-  const affaire = sujet([["Le Monde", "Jean Dupont mis en examen pour détournement"], ["BFMTV", "L'élu Jean Dupont accusé de fraude"]], { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] }, titrePropre: { titre: "Politique : l'essentiel du moment", origine: "regles", generique: true } });
-  assert.strictEqual(accroche(affaire), "Politique : l'essentiel du moment");
+  const affaire = sujet([["Le Monde", "Jean Dupont mis en examen pour détournement"], ["BFMTV", "L'élu Jean Dupont accusé de fraude"]], { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] }, titrePropre: { titre: "Politique : ce que disent les médias", origine: "regles", generique: true } });
+  assert.strictEqual(accroche(affaire), "Politique : ce que disent les médias");
   assert.ok(!/dupont|procédure|accus/i.test(accroche(affaire)));
   // repli : thème introuvable -> titre propre existant
   const flou = sujet([["Le Monde", "Rien de précis aujourd'hui"]], { titrePropre: { titre: "Quelque chose de neutre" } });
   assert.strictEqual(accroche(flou), "Quelque chose de neutre");
   assert.strictEqual(accroche({ articles: [] }), null);
+});
+
+// ─── Langage simple (FALC) : sigles dits en toutes lettres, jargon remplacé, phrases de 20 mots au plus ───
+test("simplifierJargon : le jargon parlementaire devient des mots courants", () => {
+  const cas = [
+    ["scrutin public n° 12", /vote des députés n° 12/],
+    ["la motion de censure", /le vote pour renverser le Gouvernement/],
+    ["recours à l'article 49.3", /le Gouvernement fait passer un texte sans vote/],
+    ["en séance publique", /dans l'hémicycle/],
+    ["adopté en première lecture", /premier examen du texte/],
+    ["la commission mixte paritaire", /réunion de députés et sénateurs pour s'accorder sur un texte/],
+    ["le dossier législatif", /parcours de la loi/],
+    ["un amendement du Gouvernement", /modification proposée/],
+    ["le projet de loi de finances pour 2027", /loi de finances \(le budget de l'État\)/],
+    ["Projet de loi relatif à la santé", /^Loi proposée par le Gouvernement sur la santé$/],
+    ["une proposition de loi", /loi proposée par des parlementaires/],
+    ["Le PS et le RN, la LFI et LR", /Parti socialiste.*Rassemblement national.*La France insoumise.*Les Républicains/],
+    ["l'AN a voté", /Assemblée nationale a voté/],
+    ["PLFSS", /loi de financement de la Sécurité sociale/],
+  ];
+  for (const [entree, attendu] of cas) assert.match(simplifierJargon(entree), attendu, entree);
+  // « abstention » : expliquée une seule fois ; le taux d'abstention d'une élection n'est pas touché
+  assert.strictEqual(simplifierJargon("10 abstentions, puis 2 abstentions"), "10 abstentions (ni pour ni contre), puis 2 abstentions");
+  assert.strictEqual(simplifierJargon("le taux d'abstention"), "le taux d'abstention");
+  // un texte déjà simple ne change pas ; les titres officiels entre guillemets sont gardés
+  assert.strictEqual(simplifierJargon("Les députés ont voté ce texte."), "Les députés ont voté ce texte.");
+  assert.strictEqual(simplifierJargon("Projet de loi « casseurs-payeurs »"), "Projet de loi « casseurs-payeurs »");
+  assert.strictEqual(etapeSimple("première lecture"), "premier examen du texte");
+  assert.strictEqual(natureSimple("projet de loi"), "loi proposée par le Gouvernement");
+});
+
+test("sigles : aucun sigle non expliqué dans les textes fabriqués", () => {
+  assert.deepStrictEqual(siglesNonExpliques("Le texte de l'Assemblée nationale et du Sénat, vote n°3"), []);
+  assert.deepStrictEqual(siglesNonExpliques("La TVA a changé"), [], "TVA : sigle d'usage courant");
+  assert.deepStrictEqual(siglesNonExpliques("Le PLF et la CMP de l'AN"), ["PLF", "CMP", "AN"]);
+  assert.deepStrictEqual(siglesNonExpliques("5,1 % du PIB"), ["PIB"]);
+  assert.deepStrictEqual(siglesNonExpliques("5,1 % de la richesse produite en un an (PIB)"), []);
+  // tout ce que les fonctions fabriquent sur nos exemples : titres par règles, accroches, intitulés de loi
+  const textes = [];
+  for (const [titre, ill] of CAS) { const t = titreSujet(reel(titre, ill), [], { gouvernement }); textes.push(t.titre); textes.push(accroche({ ...reel(titre, ill), titrePropre: t }) || ""); }
+  for (const t of ["Projet de loi de finances pour 2027", "Projet de loi de financement de la sécurité sociale pour 2027", "Proposition de loi visant à renforcer la protection des enfants sur les réseaux sociaux (nouvelle lecture)", "Projet de loi autorisant l'approbation de l'accord entre autorités compétentes portant sur l'échange des informations GloBE"]) textes.push(simplifierTexteLoi(t));
+  for (const t of textes) assert.deepStrictEqual(siglesNonExpliques(t), [], `sigle dans « ${t} »`);
+});
+
+test("phrases : 20 mots au plus, sur les accroches et intitulés fabriqués", () => {
+  const textes = [];
+  const lycees = sujet([["Le Monde", "Blocus des lycées : « on ne lâchera rien », disent les élèves"], ["BFMTV", "Lycées bloqués ce matin dans plusieurs villes"]]);
+  textes.push(accroche(lycees), accroche(sujet([["Le Monde", "Le Sénat adopte la loi sur la dette"], ["BFMTV", "Budget : vote au Sénat"]])));
+  for (const [titre, ill] of CAS) textes.push(titreSujet(reel(titre, ill), [], { gouvernement }).titre);
+  for (const t of textes) for (const { phrase, mots } of motsParPhrase(t)) assert.ok(mots <= 20, `${mots} mots : « ${phrase} »`);
+  assert.deepStrictEqual(motsParPhrase("Une phrase. Une autre, plus longue ! Et la fin ?").map((x) => x.mots), [2, 4, 3]);
 });
