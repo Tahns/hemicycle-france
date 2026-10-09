@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T05:40:38.466Z",
+ "lastUpdated": "2026-10-09T05:45:42.680Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Public Sénat",
@@ -109,11 +109,11 @@
     "enfant"
    ],
    "medias": [
+    "BFMTV",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "BFMTV",
     "Libération",
     "Sud Ouest",
     "Le Monde",
@@ -125,8 +125,8 @@
    ],
    "mediasDistincts": 10,
    "sources": [
-    "EBRA",
     "BFMTV",
+    "EBRA",
     "Libération",
     "Sud Ouest",
     "Le Monde",
@@ -136,9 +136,16 @@
     "Nice-Matin",
     "20 Minutes"
    ],
-   "nb": 36,
-   "derniere": "2026-10-09T05:30:00.000Z",
+   "nb": 37,
+   "derniere": "2026-10-09T05:40:44.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Élection présidentielle: les électeurs de Marine Le Pen sont-ils prêts à financer sa campagne?",
+     "url": "https://www.bfmtv.com/politique/front-national/video-election-presidentielle-les-electeurs-de-marine-le-pen-sont-ils-prets-a-financer-sa-campagne_VN-202610090165.html",
+     "date": "2026-10-09T05:40:44.000Z",
+     "video": true
+    },
     {
      "media": "Le Progrès",
      "titre": "Présidentielle 2027. Gabriel Attal en meeting à Lyon samedi pour tenter de rebondir",
@@ -168,12 +175,6 @@
      "titre": "Présidentielle 2027. Pour qui voteront les socialistes alsaciens? La primaire à gauche vue d’Alsace",
      "url": "https://www.dna.fr/elections/2026/10/09/pour-qui-voteront-les-socialistes-alsaciens-la-primaire-a-gauche-vue-d-alsace",
      "date": "2026-10-09T04:23:00.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Il faudra aller vite\": Édouard Philippe présentera une vingtaine d'ordonnances dès juillet 2027 s'il remporte la présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/il-faudra-aller-vite-edouard-philippe-presentera-une-vingtaine-d-ordonnances-des-juillet-2027-s-il-remporte-la-presidentielle_AD-202610081001.html",
-     "date": "2026-10-08T21:07:11.000Z"
     },
     {
      "media": "Libération",
@@ -573,6 +574,61 @@
      "type": "personnes",
      "texte": "Édouard Geffray : ministre de l’éducation nationale",
      "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "BFMTV",
+    "Le Monde"
+   ],
+   "derniere": "2026-10-09T05:40:44.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Élection présidentielle: les électeurs de Marine Le Pen sont-ils prêts à financer sa campagne?",
+     "url": "https://www.bfmtv.com/politique/front-national/video-election-presidentielle-les-electeurs-de-marine-le-pen-sont-ils-prets-a-financer-sa-campagne_VN-202610090165.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T05:40:44.000Z",
+     "video": true
+    },
+    {
+     "titre": "Marine Le Pen espère financer sa campagne pour la présidentielle 2027 grâce aux prêts de particuliers",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/08/marine-le-pen-espere-financer-sa-campagne-pour-la-presidentielle-2027-grace-aux-prets-de-particuliers_6790273_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-08T17:20:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen (RN) : actualité sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Pen 31–36 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -3521,51 +3577,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-08T18:29:01.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Ciotti",
-      "photo": "photos/deputes/PA330240.jpg",
-      "photoHd": "photos/deputes/hd/PA330240.jpg",
-      "parti": "UDR",
-      "lien": "#depute-PA330240",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "UDR"
-    ],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Colère lycéenne: \"L'ordre doit être maintenu\", martèle Éric Ciotti, président de l'UDR. \"Merci aux policiers, merci aux gendarmes\"",
-     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-l-ordre-doit-etre-maintenu-martele-eric-ciotti-president-de-l-udr-merci-aux-policiers-merci-aux-gendarmes_VN-202610080897.html",
-     "media": "BFMTV",
-     "date": "2026-10-08T18:29:01.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Ciotti (UDR) : actualité sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Éric Ciotti : président de l'UDR",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-10-08T18:25:30.000Z",
@@ -4392,18 +4403,45 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Monde"
+    "Le Progrès"
    ],
-   "derniere": "2026-10-08T17:20:51.000Z",
+   "derniere": "2026-10-08T17:18:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Paul-en-Cornillon. Conseil municipal : un nouveau bail commercial pour La Détente",
+     "url": "https://www.leprogres.fr/politique/2026/10/08/conseil-municipal-un-nouveau-bail-commercial-pour-la-detente",
+     "media": "Le Progrès",
+     "date": "2026-10-08T17:18:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Conseil municipal : l'essentiel du moment",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-08T17:17:22.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -4412,55 +4450,28 @@
    },
    "articles": [
     {
-     "titre": "Marine Le Pen espère financer sa campagne pour la présidentielle 2027 grâce aux prêts de particuliers",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/08/marine-le-pen-espere-financer-sa-campagne-pour-la-presidentielle-2027-grace-aux-prets-de-particuliers_6790273_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-08T17:20:51.000Z"
+     "titre": "Présidentielle 2027 : François Baroin assure que Bruno Retailleau a « toutes les qualités pour créer les conditions de la surprise du premier tour »",
+     "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-francois-baroin-assure-que-bruno-retailleau-a-toutes-les-qualites-pour-creer-les-conditions-de-la-surprise-du-premier-tour",
+     "media": "Public Sénat",
+     "date": "2026-10-08T17:17:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (RN) : actualité sur la présidentielle de 2027",
+    "titre": "Bruno Retailleau (LR) : actualité sur la présidentielle de 2027",
     "origine": "regles"
    },
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Pen 31–36 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Retailleau 5–11 %",
      "source": "Commission des sondages (notice Ifop)"
     },
     {
      "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-08T17:19:20.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Un 4x4 de la police fonce sur des lycéens qui manifestent à Dunkerque",
-     "url": "https://www.youtube.com/shorts/OGZsyDhw_IQ",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-08T17:19:20.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : l'essentiel du moment",
-    "origine": "regles"
-   }
   }
  ]
 }
