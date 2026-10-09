@@ -111,111 +111,36 @@ async function dessiner(ctx, f){
   }
   y += 6;
 
-  // 4. légende (bas) : sigle + nom court, dans l'ordre, deux colonnes
-  const nl = Math.ceil(gs.length / 2), hl = post ? 32 : 38, tl = post ? 24 : 25;
-  const cl = LARG / 2, wi = mesure(ctx, "LIOT", 800, tl, "Public Sans", 1) + 14;
-  ctx.font = `400 ${tl}px "Public Sans"`;
-  const noms = gs.map(g => storyLignes(ctx, NOMS[g.id] || g.id, cl - wi - 6, 2)); // noms longs : deux lignes
-  const hRang = Array.from({ length: nl }, (_, k) => Math.max(...[noms[k], noms[k + nl]].filter(Boolean).map(l => l.length)) > 1 ? hl + tl * 1.05 : hl);
-  const hLeg = hRang.reduce((s, h) => s + h, 0);
-  const yLeg = bas - hLeg + 6;
-  // 5. voix (rangée sous l'hémicycle)
-  const hVoix = post ? 118 : 124;
-  const yVoix = yLeg - hVoix - (post ? 8 : 12);
-  // 6. hémicycle : la place restante fixe le rayon
-  const hPastille = 66, ecart = 14;
-  await Promise.all(gs.map(async g => { g.logo = await storyImage(`icons/partis/${g.id}.png`); })); // logos hébergés sur le site (Wikimedia Commons) ; LIOT et NI n'en ont pas : sigle
-  const dispo = yVoix - y - 6;
-  gs.forEach(g => { g.w = 128; g.h = hPastille; });
-  let a = Math.PI; const pas = 0.012; // demi-espace entre deux secteurs
-  gs.forEach(g => { const w = Math.PI * g.n / total; g.a0 = a; g.a1 = a + w; g.am = a + w / 2; a += w; });
-  let R, r, cx = L / 2, cy, centre;
-  // Disposition pour un rayon donné : pastilles écartées par glissement le long de l'anneau, puis décalées vers l'extérieur si besoin ; renvoie l'ordonnée du haut de la pastille la plus haute
-  const disposer = rayon => {
-    R = rayon; r = R * 0.6;
-    const reste = Math.max(0, dispo - (R + hPastille + ecart + 8)); // place en trop : répartie au-dessus et au-dessous de l'hémicycle
-    cy = Math.round(yVoix - 8 - reste * 0.5);
-    gs.forEach(g => { g.ang = g.am; g.off = 0; });
-    centre = g => { // support du rectangle : la pastille reste hors de l'anneau quel que soit l'angle
-      const c = Math.cos(g.ang), sn = Math.sin(g.ang), rp = R + ecart + g.off + Math.abs(c) * g.w / 2 + Math.abs(sn) * g.h / 2;
-      return { x: cx + rp * c, y: cy + rp * sn };
-    };
-    const bornes = [Math.PI + 0.05, 2 * Math.PI - 0.05];
-    for(let it = 0; it < 400; it++){
-      let bouge = false;
-      for(let i = 0; i < gs.length - 1; i++){
-        const p = gs[i], q = gs[i + 1], cp = centre(p), cq = centre(q);
-        const rx = (p.w + q.w) / 2 + 12 - Math.abs(cp.x - cq.x), ry = (p.h + q.h) / 2 + 10 - Math.abs(cp.y - cq.y);
-        if(rx > 0 && ry > 0){ p.ang -= 0.004; q.ang += 0.004; bouge = true; }
-      }
-      gs.forEach(g => { g.ang = Math.max(bornes[0], Math.min(bornes[1], g.ang)); });
-      for(let i = 1; i < gs.length; i++) if(gs[i].ang < gs[i - 1].ang) gs[i].ang = gs[i - 1].ang;
-      if(!bouge) break;
+  // 4. bas : les trois totaux ; entre le titre et eux, l'hémicycle
+  const yVoix = (post ? H_POST - 330 : 1330);
+  await Promise.all(gs.map(async g => { g.logo = await storyImage(`icons/partis/${g.id}.png`); })); // logos hébergés sur le site ; LIOT et NI : sigle
+  // 5. hémicycle simple : un secteur par groupe, vert / rouge / orange selon sa position majoritaire, son logo au milieu
+  const cx = L / 2, R = Math.min(LARG / 2 + 10, 450), r = R * 0.42, rm = (r + R) / 2;
+  const cy = Math.round(Math.max(y + R + 30, yVoix - 70)), pas = 0.014;
+  const parts = gs.map(g => 0.55 / gs.length + 0.45 * g.n / total); // largeur : un peu d'égalité pour que chaque logo tienne, le reste suit le nombre de députés
+  let a = Math.PI;
+  gs.forEach((g, k) => { g.a0 = a; a += Math.PI * parts[k]; g.a1 = a; g.am = (g.a0 + g.a1) / 2; });
+  gs.forEach(g => {
+    chemin(ctx, cx, cy, r, R, g.a0 + pas, g.a1 - pas); ctx.fillStyle = teinte(g.pos); ctx.fill();
+    if(g.pos === "partage" || !g.pos){
+      ctx.save(); chemin(ctx, cx, cy, r, R, g.a0 + pas, g.a1 - pas); ctx.clip(); ctx.strokeStyle = "rgba(16,24,58,0.45)"; ctx.lineWidth = 6; ctx.beginPath();
+      for(let k = -R; k < 2 * R; k += 22){ ctx.moveTo(cx - R + k, cy); ctx.lineTo(cx - R + k + R, cy - R); } ctx.stroke(); ctx.restore();
     }
-    const choc = (p, q) => { const cp = centre(p), cq = centre(q); return (p.w + q.w) / 2 + 8 - Math.abs(cp.x - cq.x) > 0 && (p.h + q.h) / 2 + 6 - Math.abs(cp.y - cq.y) > 0; };
-    for(let it = 0; it < 6; it++){
-      let bouge = false;
-      for(let i = 1; i < gs.length; i++) for(let j = Math.max(0, i - 3); j < i; j++) if(choc(gs[j], gs[i])){ gs[i].off += 28; bouge = true; break; }
-      if(!bouge) break;
-    }
-    return Math.min(...gs.map(g => centre(g).y - g.h / 2));
-  };
-  const rMax = Math.max(190, Math.min(310, dispo - hPastille - ecart - 8));
-  for(let rr = rMax; rr >= 190; rr -= 8){ if(disposer(rr) >= y + 4 || rr - 8 < 190) break; } // le rayon baisse jusqu'à ce que rien ne touche le titre
-
-  // sièges : un point par député, rangées concentriques ; chaque groupe occupe un bloc continu, ses points sont colorés selon le vote réel de ses membres
-  const lignes = 8, rayons = Array.from({ length: lignes }, (_, k) => r + (R - r) * (k + 0.5) / lignes);
-  const somme = rayons.reduce((t, x) => t + x, 0), parLigne = rayons.map(x => Math.round(total * x / somme));
-  const pt = Math.min((R - r) / lignes, Math.PI * rayons[0] / parLigne[0]) * 0.44;
-  gs.forEach(g => { g.sieges = []; });
-  rayons.forEach((rr, k) => { // chaque rangée est coupée aux mêmes proportions : des parts bien droites, du centre vers l'extérieur
-    const n = parLigne[k]; let cumul = 0, debut = 0;
-    gs.forEach(g => {
-      cumul += g.n; const fin = Math.round(n * cumul / total);
-      for(let j = debut; j < fin; j++) g.sieges.push({ ang: Math.PI + Math.PI * (j + 0.5) / n, rr });
-      debut = fin;
-    });
+    const arc = rm * (g.a1 - g.a0 - 2 * pas), d = Math.max(40, Math.min(arc - 8, R - r - 40, 92)), px = cx + rm * Math.cos(g.am), py = cy + rm * Math.sin(g.am);
+    ctx.fillStyle = STORY.creme; ctx.beginPath(); ctx.arc(px, py, d / 2, 0, 2 * Math.PI); ctx.fill();
+    if(g.logo){ const k = Math.min((d - 10) / g.logo.width, (d - 18) / g.logo.height), lw = g.logo.width * k, lh = g.logo.height * k; ctx.drawImage(g.logo, px - lw / 2, py - lh / 2, lw, lh); }
+    else ecrire(ctx, g.id, px, py + d * 0.12, { poids:800, taille:Math.round(d * 0.32), couleur:STORY.encre, align:"center" });
   });
-  gs.forEach(g => {
-    g.sieges.sort((p, q) => p.ang - q.ang || p.rr - q.rr);
-    const m = g.sieges.length, v = g.v;
-    g.sieges.forEach((st, k) => {
-      const q = (k + 0.5) / m * g.n; // rang proportionnel : les votes se répartissent en blocs pour, contre, abstention, puis absents
-      const c = censure ? teinte(g.pos) : q < v.pour ? STORY_VOIX.clair.pour : q < v.pour + v.contre ? STORY_VOIX.clair.contre : q < v.pour + v.contre + v.abst ? STORY_VOIX.clair.abst : "rgba(255,255,255,0.22)";
-      ctx.beginPath(); ctx.arc(cx + st.rr * Math.cos(st.ang), cy + st.rr * Math.sin(st.ang), pt, 0, 2 * Math.PI); ctx.fillStyle = c; ctx.fill();
-    });
-  });
-
-  // traits de liaison puis pastilles
-  gs.forEach(g => {
-    const c = centre(g), rb = R + 4;
-    ctx.strokeStyle = "rgba(255,255,255,0.7)"; ctx.lineWidth = 3; ctx.beginPath();
-    ctx.moveTo(cx + rb * Math.cos(g.am), cy + rb * Math.sin(g.am)); ctx.lineTo(c.x, c.y); ctx.stroke();
-  });
-  gs.forEach(g => {
-    const c = centre(g), x = c.x - g.w / 2, yy = c.y - g.h / 2;
-    ctx.fillStyle = STORY.creme; ctx.beginPath(); ctx.roundRect(x, yy, g.w, g.h, 16); ctx.fill();
-    ctx.strokeStyle = teinte(g.pos); ctx.lineWidth = 6; ctx.beginPath(); ctx.roundRect(x + 3, yy + 3, g.w - 6, g.h - 6, 13); ctx.stroke();
-    if(g.logo){ // logo centré, sigle dessous
-      const k = Math.min((g.w - 28) / g.logo.width, 34 / g.logo.height), lw = g.logo.width * k, lh = g.logo.height * k;
-      ctx.drawImage(g.logo, c.x - lw / 2, yy + 9 + (34 - lh) / 2, lw, lh);
-      ecrire(ctx, g.id, c.x, yy + g.h - 10, { poids:800, taille:17, couleur:STORY.encre, align:"center", ls:1 });
-    } else ecrire(ctx, g.id, c.x, c.y + 11, { poids:800, taille:30, couleur:STORY.encre, align:"center", ls:1 });
-    // pastille de position (✓ ✕ ○ ▨) accrochée au coin
-    const bx = x + g.w - 6, by = yy + 6;
-    ctx.fillStyle = STORY.creme; ctx.beginPath(); ctx.arc(bx, by, 22, 0, 2 * Math.PI); ctx.fill();
-    ctx.strokeStyle = teinte(g.pos); ctx.lineWidth = 4; ctx.stroke();
-    repere(ctx, g.pos || "partage", bx, by, 22, teinteTexte(g.pos));
-  });
+  const hLeg = 0, yLeg = H_POST - 150, noms = [], nl = 0;
 
   // 7. au centre : le verdict ; dessous, les voix
   const adopte = f.verdict === "adopte";
   const mot = (adopte ? "Adopté" : "Rejeté") + (censure ? "e" : "");
-  const tv = Math.round(r * 0.34);
+  const tv = Math.round(r * 0.36);
   ctx.font = `900 ${tv}px "Public Sans"`; ctx.letterSpacing = `${-tv * 0.03}px`; const wm = ctx.measureText(mot).width; ctx.letterSpacing = "0px";
   ctx.font = `900 ${Math.round(tv * 0.55)}px "Public Sans"`; const wg = ctx.measureText(adopte ? "✓" : "✕").width;
   const wt = wm + 24 + wg;
-  storyVerdict(ctx, adopte ? "adopte" : "rejete", mot, cx - wt / 2 + 4, cy - r * 0.2, tv);
+  storyVerdict(ctx, adopte ? "adopte" : "rejete", mot, cx - wt / 2 + 4, cy - r * 0.15, tv);
 
   const cases = [["pour", f.pour, "POUR"], ["contre", f.contre, "CONTRE"], ["abst", f.abst, "ABSTENTIONS"]];
   const cw = LARG / 3;
@@ -228,17 +153,6 @@ async function dessiner(ctx, f){
     ecrire(ctx, nom, x0 + 40, yn, { poids:800, taille:28, couleur:c, ls:3 });
   });
 
-  // 8. légende : sigle + nom court
-  let yy = yLeg;
-  for(let k = 0; k < nl; k++){
-    [k, k + nl].forEach((i, col) => {
-      const g = gs[i]; if(!g) return;
-      const x = marge + col * cl;
-      ecrire(ctx, g.id, x, yy + tl, { poids:800, taille:tl, couleur:"#fff", ls:1 });
-      noms[i].forEach((ln, j) => ecrire(ctx, ln, x + wi, yy + tl + j * tl * 1.05, { poids:400, taille:tl, couleur:DA.ciel }));
-    });
-    yy += hRang[k];
-  }
   return { yVoix, R, partage: gs.some(g => g.pos === "partage") };
 }
 
@@ -248,7 +162,7 @@ STORY_PLUS["vote-groupes"] = async (ctx, f) => {
   const r = await dessiner(ctx, f);
   if(!r) return null;
   // mention + accroche (même pied que les stories ; pour le post, remonté comme dans js/stories-post.js)
-  const mention = f.sourceTxt || `Position majoritaire de chaque groupe d'après les votes de ses membres${r.partage ? " (hachures : partagé)" : ""}. Un point = un député (points éteints : absents ou n'ayant pas voté). Source : Assemblée nationale.`;
+  const mention = f.sourceTxt || `Position majoritaire de chaque groupe. Source : Assemblée nationale.`;
   if(f.format === "post"){
     storyTexte(ctx, mention, marge, H_POST - 128, { taille:23, couleur:STORY.ciel, max:2, interligne:1.2 });
     storyAccroche(ctx, "Toute l'actu politique", H_POST - 40);
