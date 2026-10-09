@@ -117,8 +117,8 @@ function carte(ctx, d, tq, x, y, w, dessiner, { maxQ = 99, tc = 27 } = {}){
     }
     if(dessiner) lq.forEach((l, i) => ecrire(ctx, l, xi, c + tq * 0.95 + i * lh, { poids: 700, taille: tq, couleur: ENCRE }));
     c += lq.length * lh;
-    if(d.media){ c += 8; if(dessiner) ecrire(ctx, "— " + d.media, xi, c + 26, { poids: 800, taille: 27, couleur: BLEU }); c += 36; }
-    if(d.note){ if(dessiner) ecrire(ctx, d.note, xi, c + 22, { poids: 600, taille: 24, couleur: PALE }); c += 32; }
+    if(d.media){ c += 14; if(dessiner) ecrire(ctx, "— " + d.media, xi, c + 26, { poids: 800, taille: 27, couleur: BLEU }); c += 36; }
+    if(d.note){ c += 4; if(dessiner) ecrire(ctx, d.note, xi, c + 22, { poids: 600, taille: 24, couleur: PALE }); c += 32; }
   }
   if(d.contexte?.length){
     c += 22;
@@ -132,8 +132,8 @@ function carte(ctx, d, tq, x, y, w, dessiner, { maxQ = 99, tc = 27 } = {}){
       c += lc.length * ih;
       if(e.source){
         const src = lignes(ctx, `Source : ${e.source}`, 600, 22, PUB, wi, 1)[0];
-        if(dessiner) ecrire(ctx, src, xi, c + 20, { poids: 600, taille: 22, couleur: PALE });
-        c += 28;
+        if(dessiner) ecrire(ctx, src, xi, c + 26, { poids: 600, taille: 22, couleur: PALE });
+        c += 34;
       }
       c += 8;
     }
@@ -153,6 +153,8 @@ function poserCarte(ctx, d, bas, dispo, opts = {}){
   carte(ctx, d, choix.tq, marge, bas - choix.h, LARG, choix.h, { ...opts, maxQ: choix.maxQ || 99 });
   return choix.h;
 }
+// Variantes d'une carte du plus complet au plus court : le contexte perd ses derniers faits plutôt que la carte ne recouvre le reste de la page
+const variantesCarte = d => { const n = d.contexte?.length || 0, v = [d]; for(let k = Math.min(n - 1, 2); k >= 0; k--) v.push({ ...d, contexte: d.contexte.slice(0, k) }); return v; };
 const poserOk = (ctx, d, dispo, opts = {}) => (opts.tailles || [40, 38, 36, 34, 32, 30, 28]).some(tq => carte(ctx, d, tq, marge, 0, LARG, false, opts) <= dispo);
 
 const maj1 = t => String(t).charAt(0).toUpperCase() + String(t).slice(1);
@@ -210,21 +212,24 @@ STORY_PLUS.chiffre = async (ctx, info) => {
     const yT = y; y += ft.h;
     return { yN, fu, yU, ft, yT, bas: y };
   };
-  let choix = null;
-  for(const tq of [38, 34, 30, 28]){
-    for(let tn = tnMax; tn >= Math.min(tnMax, Math.max(170, tnMax * 0.8)); tn -= 10){
-      const h = hero(tn);
-      if(carte(ctx, d, tq, marge, 0, LARG, false) <= bas - h.bas - 40){ choix = { tn, tq, h }; break; }
+  let choix = null, dc = d;
+  for(const dv of variantesCarte(d)){
+    for(const tq of [38, 34, 30, 28]){
+      for(let tn = tnMax; tn >= Math.min(tnMax, Math.max(170, tnMax * 0.8)); tn -= 10){
+        const h = hero(tn);
+        if(carte(ctx, dv, tq, marge, 0, LARG, false) <= bas - h.bas - 40){ choix = { tn, tq, h }; break; }
+      }
+      if(choix) break;
     }
-    if(choix) break;
+    if(choix){ dc = dv; break; }
   }
-  if(!choix){ const tn = Math.min(tnMax, Math.max(170, tnMax * 0.8)); choix = { tn, tq: 28, h: hero(tn), maxQ: 2 }; }
+  if(!choix){ dc = { ...d, contexte: [] }; const tn = Math.min(tnMax, Math.max(170, tnMax * 0.8)); choix = { tn, tq: 28, h: hero(tn), maxQ: 2 }; }
   const { tn, h } = choix;
   ecrireChiffre(ctx, jt, marge, h.yN, tn);
   if(h.fu) ecrireLignes(ctx, h.fu, marge, h.yU, { poids: 700, inter: 1.04 });
   ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, couleur: CIEL, inter: 1.08 });
-  const hc = carte(ctx, d, choix.tq, marge, 0, LARG, false, { maxQ: choix.maxQ || 99 });
-  carte(ctx, d, choix.tq, marge, bas - hc, LARG, hc, { maxQ: choix.maxQ || 99 });
+  const hc = carte(ctx, dc, choix.tq, marge, 0, LARG, false, { maxQ: choix.maxQ || 99 });
+  carte(ctx, dc, choix.tq, marge, bas - hc, LARG, hc, { maxQ: choix.maxQ || 99 });
   return { nom: nomFichier("chiffre", s) };
 };
 
@@ -273,15 +278,18 @@ STORY_PLUS.facea = async (ctx, info) => {
   // noms (2 lignes au plus) et partis sous chaque portrait
   const nl = S => pers.map(p => lignes(ctx, p.nom, 800, 38, PUB, S + 40, 2));
   let choix = null;
-  for(const S of [416, 396, 376, 356, 336, 316, 296, 276, 256, 236, 216]){
-    const nn = Math.max(...nl(S).map(l => l.length)), hNoms = 22 + nn * 42 + (pers.some(p => p.parti) ? 40 : 0) + 10;
-    const yCarte = yP0 + S + hNoms + 30;
-    for(const tc of [27, 24]){
-      if(poserOk(ctx, d, bas - yCarte, { tc })){ choix = { S, nn, hNoms, tc }; break; }
+  for(const dv of variantesCarte(d)){
+    for(const S of [416, 396, 376, 356, 336, 316, 296, 276, 256, 236, 216]){
+      const nn = Math.max(...nl(S).map(l => l.length)), hNoms = 22 + nn * 42 + (pers.some(p => p.parti) ? 46 : 0) + 10;
+      const yCarte = yP0 + S + hNoms + 30;
+      for(const tc of [27, 24]){
+        if(poserOk(ctx, dv, bas - yCarte, { tc })){ choix = { S, nn, hNoms, tc, dv }; break; }
+      }
+      if(choix) break;
     }
     if(choix) break;
   }
-  if(!choix){ const S = 216, nn = Math.max(...nl(S).map(l => l.length)); choix = { S, nn, hNoms: 22 + nn * 42 + 50, tc: 24 }; }
+  if(!choix){ const S = 216, nn = Math.max(...nl(S).map(l => l.length)); choix = { S, nn, hNoms: 22 + nn * 42 + 56, tc: 24, dv: { ...d, contexte: [] } }; }
   const { S, nn, tc } = choix, gap = 80, x1 = marge + Math.round((LARG - 2 * S - gap) / 2), x2 = x1 + S + gap;
   ecrireLignes(ctx, ft, marge, yT, { poids: 600, inter: 1.04 });
   const cy = yP0 + S / 2, lignesNoms = nl(S);
@@ -289,7 +297,7 @@ STORY_PLUS.facea = async (ctx, info) => {
     portrait(ctx, imgs[i], pers[i].nom, pers[i].parti, x, yP0, S);
     const cx = x + S / 2;
     lignesNoms[i].forEach((l, k) => ecrire(ctx, l, cx, yP0 + S + 22 + 34 + k * 42, { poids: 800, taille: 38, align: "center" }));
-    if(pers[i].parti) ecrire(ctx, libelleParti(pers[i].parti).toUpperCase(), cx, yP0 + S + 22 + 34 + (nn - 1) * 42 + 40, { poids: 800, taille: 24, couleur: CIEL, align: "center", ls: 3 });
+    if(pers[i].parti) ecrire(ctx, libelleParti(pers[i].parti).toUpperCase(), cx, yP0 + S + 22 + 34 + (nn - 1) * 42 + 46, { poids: 800, taille: 24, couleur: CIEL, align: "center", ls: 3 });
   });
   // « VS » : pastille rose entre les deux portraits
   const rv = 54, xv = L / 2;
@@ -297,7 +305,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   ctx.beginPath(); ctx.arc(xv, cy, rv, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
   ctx.font = fnt(900, 46); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#fff"; ctx.fillText("VS", xv, cy + 3); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   const yCarte = yP0 + S + choix.hNoms + 30, dispo = bas - yCarte;
-  poserCarte(ctx, d, bas, dispo, { tc });
+  poserCarte(ctx, choix.dv, bas, dispo, { tc });
   return { nom: nomFichier("face-a-face", s) };
 };
 
@@ -320,7 +328,7 @@ STORY_PLUS.date = async (ctx, info) => {
   })) return { nom: nomFichier("date", s) };
   const medias = mediasDe(s), titre = titreAffiche(s);
   const art = articleCite(s, [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois]);
-  const d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
+  let d = { citation: art ? titreCite(art.titre) : "", media: art?.media || "", contexte: contexteSur(s), video: videoDe(s) };
   const y0 = fond(ctx, "À noter", { fondEt: "#fff", couleurEt: BLEU });
   const yPied = pied(ctx, { medias: [], source: "", cta: "Ne rien rater" });
   const bas = yPied - 30;
@@ -346,15 +354,19 @@ STORY_PLUS.date = async (ctx, info) => {
     return { yJ, yM, tm, ft, yT, yPu, fin: yPu + hPuces };
   };
   let choix = null;
-  for(const tc of [27]){
-    for(let T = 440; T >= 260; T -= 20){
-      const h = hero(T);
-      if(poserOk(ctx, d, bas - h.fin - 34, { tc })){ choix = { T, h, tc }; break; }
+  for(const dv of variantesCarte(d)){
+    for(const tc of [27]){
+      for(let T = 440; T >= 260; T -= 20){
+        const h = hero(T);
+        if(poserOk(ctx, dv, bas - h.fin - 34, { tc })){ choix = { T, h, tc, dv }; break; }
+      }
+      if(choix) break;
     }
     if(choix) break;
   }
-  if(!choix) choix = { T: 260, h: hero(260), tc: 24 };
+  if(!choix) choix = { T: 260, h: hero(260), tc: 24, dv: { ...d, contexte: [] } };
   const { T, h, tc } = choix;
+  d = choix.dv;
   // Sans citation, contexte ni vidéo (date d'agenda) : pas de carte vide, et le bloc est descendu pour mieux occuper la page
   const aCarte = Boolean(d.citation || d.contexte?.length || d.video);
   const decal = aCarte ? 0 : Math.max(0, Math.round((bas - h.fin) * 0.4));
@@ -363,7 +375,7 @@ STORY_PLUS.date = async (ctx, info) => {
   const lsJ = -T * 0.04;
   ecrire(ctx, jour, marge, h.yJ, { poids: 900, taille: T, ls: lsJ });
   let xDroit = marge + mesurer(ctx, jour, 900, T, PUB, lsJ);
-  if(Number(dt.jour) === 1){ ecrire(ctx, "er", xDroit + 6, h.yJ - T * 0.42, { poids: 900, taille: T * 0.26 }); xDroit += mesurer(ctx, "er", 900, T * 0.26) + 10; }
+  if(Number(dt.jour) === 1){ ecrire(ctx, "er", xDroit + 14, h.yJ - T * 0.42, { poids: 900, taille: T * 0.26 }); xDroit += mesurer(ctx, "er", 900, T * 0.26) + 18; }
   // décompte à droite du jour, aligné sur sa base
   if(compte){
     const dispo = L - marge - xDroit - 40;
