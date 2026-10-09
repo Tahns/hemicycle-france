@@ -180,8 +180,9 @@ STORY_PLUS["chiffre-jour"] = async (ctx, s) => {
 /* ---------- Image de carrousel (1080 × 1350) ---------- */
 // Cadre des stories décalé vers le haut ; renvoie l'ordonnée où commence le contenu
 function cadreDiapo(ctx, surtitre, opts){
+  storyFondTheme(ctx); // fond généré à la taille de l'image (1080 × 1350), puis cadre décalé sans refaire le fond
   ctx.save(); ctx.translate(0, -DECALAGE);
-  const y = storyCadre(ctx, surtitre, opts) - DECALAGE;
+  const y = storyCadre(ctx, surtitre, { ...opts, sansFond: true }) - DECALAGE;
   ctx.restore();
   return y;
 }

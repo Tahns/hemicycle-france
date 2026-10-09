@@ -146,6 +146,7 @@
       const k = s.articles.filter(a=> urls.has(a.url)).length;
       if(k > meilleur){ meilleur = k; contexte = faits[0]; sujetLie = s; }
     }
+    storyFondContexte({ theme:sujetLie?.illustration?.theme, cle:dossier.titre }); // fond généré : thème du sujet le plus proche, clé = titre du dossier
     if(style && style !== "bleu"){ // styles du test comparatif (js/stories.js) : photo d'institution du sujet le plus proche, jamais une personne
       const ill = sujetLie?.illustration || {}, th = storyThemeInfos(ill.theme), photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
       const cite = storyMots(storyTitreCite(arts[0].titre), 13), noms = [...new Set(triees.map(a=> a.media))];

@@ -158,7 +158,7 @@ async function storyPortrait(src, hd){
    storyMelange(couleur, autre, t)             -> couleur mélangée (t = 0..1 vers « autre »)
    storyLisible(couleur)                       -> la couleur, assombrie si trop claire pour du texte sur carte crème
    storyClair(couleur)                         -> la couleur, éclaircie si trop sombre pour du texte sur le fond bleu
-   storyFondTheme(ctx, sombre)                 -> fond bleu uni (ou « nuit » pour les sujets EN DIRECT)
+   storyFondTheme(ctx, sombre)                 -> fond généré (js/stories-fond.js) du thème courant, bleu #1B3A8C par défaut (ou « nuit » pour les sujets EN DIRECT)
    storyMarque(ctx)                            -> logo « Hémicycle France » (icône d'hémicycle + nom blanc)
    storyEtiquette(ctx, texte, x, y, style)     -> pastille plate à capitales espacées : « rouge » (À LA UNE), « blanc » (DOSSIER, À NOTER), « contour » ; renvoie le bord droit
    storyCadre(ctx, surtitre, { alerte, etiquette, sombre })
@@ -200,7 +200,13 @@ function storyClair(c){
 }
 
 // Fond bleu uni de la direction artistique (« sombre » : fond nuit des sujets EN DIRECT)
+// Fond généré (js/stories-fond.js : dégradé du thème, arcs d'hémicycle, sièges, grain) d'après le thème et la clé du contexte (storyFondContexte) ; uni si le module n'est pas chargé
 function storyFondTheme(ctx, sombre = false){
+  if(typeof storyFondGenere === "function"){
+    const c = storyFondContexteLire();
+    storyFondGenere(ctx, { theme:c.theme, cle:c.cle, largeur:STORY.L, hauteur:ctx.canvas.height, sombre:sombre === true });
+    return;
+  }
   ctx.fillStyle = sombre === true ? STORY_DA.nuit : STORY_DA.fond; ctx.fillRect(0, 0, STORY.L, STORY.H);
 }
 // Logo : icône d'hémicycle (arcs bleu clair et rose, point blanc) puis « Hémicycle France » en Public Sans gras blanc, sous la zone masquée par Instagram
@@ -226,9 +232,9 @@ function storyEtiquette(ctx, texte, x, y, style = "rouge", { taille = 26, h = 54
   return x + w;
 }
 // Cadre commun : fond, logo, puis kicker en capitales bleu clair (ou, avec alerte / etiquette, pastille) ; renvoie l'ordonnée où commencer le contenu
-function storyCadre(ctx, surtitre, { alerte = false, etiquette = "", sombre = false } = {}){
+function storyCadre(ctx, surtitre, { alerte = false, etiquette = "", sombre = false, sansFond = false } = {}){
   const { L, marge, haut } = STORY;
-  storyFondTheme(ctx, sombre);
+  if(!sansFond) storyFondTheme(ctx, sombre);
   storyMarque(ctx);
   const style = etiquette || (alerte ? "rouge" : "");
   if(style){
@@ -974,10 +980,7 @@ function storyStyleUnePhoto(ctx, d){
     ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.filter = "blur(1.5px) saturate(1.05)";
     ctx.drawImage(d.photo.img, x, y, S, S); ctx.restore();
   } else {
-    const c = storyAssombri(d.couleur);
-    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, storyMelange(c, "#000000", 0.2)); g.addColorStop(1, NUIT);
-    ctx.fillStyle = g; ctx.fillRect(0, 0, L, H);
-    storyStyleMotif(ctx, d.motif, 70, 330, 940, "rgba(255,255,255,0.16)");
+    storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H }); // sans photo : fond généré du thème (jamais un pictogramme)
   }
   // 3. dégradé sombre : léger en haut (logo), presque opaque sous le texte
   const g = ctx.createLinearGradient(0, 0, 0, H), k = v => Math.max(0, Math.min(1, v / H));
@@ -1024,7 +1027,7 @@ function storyStyleQuestion(ctx, d){
     const bl = puces.map(p => storyStyleBloc(ctx, p, { taille:52, poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 }));
     plan = { q, bl, total:66 + 44 + q.h + 28 + 10 + 56 + bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1) };
   }
-  ctx.fillStyle = P.fond; ctx.fillRect(0, 0, L, H);
+  storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, couleur:P.fond, textes:[P.texte, P.doux] });
   // grand « ? » décoratif en filigrane
   ctx.font = `700 1250px "Newsreader"`; ctx.fillStyle = storyMelange(P.fond, P.texte, 0.09); ctx.textAlign = "right"; ctx.textBaseline = "alphabetic";
   ctx.fillText("?", L + 120, 1500); ctx.textAlign = "left";
@@ -1060,8 +1063,7 @@ function storyStyleChiffre(ctx, d){
     if(total <= bas - 400 || tC === 52){ plan = { lg, c, total }; break; }
   }
   const vc = d.chiffre.type ? storyVoixCouleur(d.chiffre.type, NUIT) : null; // chiffre et légende teintés (voix pour / contre / abstentions)
-  ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
-  storyStyleMotif(ctx, d.motif, 400, 300, 700, "rgba(255,255,255,0.05)");
+  storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, sombre:true });
   storyMarque(ctx);
   const haut = Math.max(400, 400 + (bas - 400 - plan.total) * 0.35);
   let y = haut;
@@ -1081,6 +1083,7 @@ function storyStyleChiffre(ctx, d){
 // Point d'entrée : dessine la fiche dans le style demandé ; renvoie le style réellement employé (« chiffre » sans nombre devient « question »), ou null pour « bleu » (le module dessine alors lui-même)
 function storyStyleDessiner(ctx, style, d){
   style = storyStyleValide(style);
+  storyFondContexte({ theme:d.theme || d.cle, cle:d.accroche || d.titre || d.cle });
   if(style === "bleu") return null;
   if(style === "chiffre" && !(d.chiffre && String(d.chiffre.valeur || "").trim())) style = (d.puces || []).length >= 2 ? "question" : "une-photo";
   if(style === "question" && !(d.puces || []).length) style = "une-photo";
@@ -1141,7 +1144,19 @@ async function storySpecSujet(s){
 // C « le chiffre », F « face à face » et G « date à retenir » : stories-actu-fait). Chacun remplit STORY_PLUS ; les définitions ci-dessus ne servent que de secours.
 const STORY_ACTU_TYPES = ["actualite", "actualites", "chiffre", "facea", "date"];
 const STORY_CONTENUS_TYPES = ["aujourdhui", "vote-jour", "comprendre", "chiffre-jour", "diapo"];
+// Thème et clé du fond généré : sujet d'actualité (indice), dossier, fiche d'un post ou d'un contenu ; à défaut, le type et l'argument (fond bleu de la charte)
+function storyFondDepuis(type, info){
+  const sujet = i => { const s = typeof ACTUALITES !== "undefined" && ACTUALITES?.sujets?.[Number(String(i).split(":")[0])]; return s ? { theme:s.illustration?.theme, cle:s.titrePropre?.titre || s.articles?.[0]?.titre || String(i) } : null; };
+  const objet = info && typeof info === "object" ? info : null;
+  const THEMES_TYPE = { aujourdhui:"assemblee", "vote-jour":"assemblee", comprendre:"politique", "chiffre-jour":"budget" };
+  let r = null;
+  if(["actualite", "chiffre", "facea", "date"].includes(type) && !objet) r = sujet(info);
+  else if(objet) r = { theme:objet.theme || objet.cle || THEMES_TYPE[type] || (/s[ée]nat/i.test(objet.chambre || "") ? "senat" : objet.chambre ? "assemblee" : "politique"), cle:objet.titre || objet.objet || objet.accroche || objet.libelle || objet.id || objet.iso || JSON.stringify(objet).slice(0, 80) };
+  return r || { theme:THEMES_TYPE[type] || "politique", cle:`${type}|${typeof info === "object" ? JSON.stringify(info) : String(info ?? "")}`.slice(0, 120) };
+}
 async function dessinerStory(type, info){
+  await chargerModule("stories-fond");
+  const fd = storyFondDepuis(type, info); storyFondContexte({ theme:fd.theme, cle:fd.cle || type });
   if(STORY_ACTU_TYPES.includes(type)) await Promise.all(["stories-actu", "stories-actu-liste", "stories-actu-fait"].map(chargerModule));
   // Publications Instagram automatiques : « post » (image de fil 1080 × 1350) et « annonce-post » (story qui l'annonce), dessinées d'après une fiche (js/stories-post.js)
   if(type === "post" || type === "annonce-post") await chargerModule("stories-post");
