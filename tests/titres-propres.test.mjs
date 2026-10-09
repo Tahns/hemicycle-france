@@ -402,3 +402,121 @@ test("phrases : 20 mots au plus, sur les accroches et intitulés fabriqués", ()
   for (const t of textes) for (const { phrase, mots } of motsParPhrase(t)) assert.ok(mots <= 20, `${mots} mots : « ${phrase} »`);
   assert.deepStrictEqual(motsParPhrase("Une phrase. Une autre, plus longue ! Et la fin ?").map((x) => x.mots), [2, 4, 3]);
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Titre-fait : le gros titre dit ce qui s'est passé (6 à 12 mots), sinon null
+// ─────────────────────────────────────────────────────────────────────────────
+const TP = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+const { titreFait, titreFaitDetail, defautsFait, sansBandeauEtat, titreVague } = TP;
+const nm = (t) => (String(t).match(/[\p{L}0-9]+(?:['’-][\p{L}0-9]+)*/gu) || []).length;
+const CREUSES = /actualité sur|ce qu'il faut savoir|l'essentiel|ce que disent|voici|…/i;
+
+test("titreFait : cas du propriétaire (Le Pen, Philippe, lycées, Poissy, Evreux)", () => {
+  const lepen = sujet([["BFMTV", "Élection présidentielle: les électeurs de Marine Le Pen sont-ils prêts à financer sa campagne?"], ["Le Monde", "Marine Le Pen espère financer sa campagne pour la présidentielle 2027 grâce aux prêts de particuliers"]], { illustration: { theme: "election", personnes: [{ nom: "Marine Le Pen", parti: "RN" }] } });
+  const a = titreFait(lepen);
+  assert.ok(/financer sa campagne/.test(a), a);
+  assert.ok(nm(a) >= 6 && nm(a) <= 12 && !CREUSES.test(a), a);
+  const philippe = sujet([["BFMTV", "\"Il faudra aller vite\": Édouard Philippe présentera une vingtaine d'ordonnances dès juillet 2027 s'il remporte la présidentielle"], ["Sud Ouest", "Présidentielle 2027 : « Cesser cet état d’indécision », Édouard Philippe présentera une vingtaine d’ordonnances dès juillet s’il est élu"]], { illustration: { theme: "election", personnes: [{ nom: "Édouard Philippe", parti: "HOR" }] } });
+  assert.strictEqual(titreFait(philippe), "Édouard Philippe présentera une vingtaine d’ordonnances dès juillet s’il est élu", "la condition « s'il est élu » est gardée");
+  const lycees = sujet([["Sud Ouest", "Mouvement lycéen : avant une nouvelle mobilisation le 13 octobre, le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants"], ["L'Express", "Mobilisation des lycéens : le ministre de l'Education promet l'arrivée de 3 000 professeurs remplaçants"]]);
+  assert.strictEqual(titreFait(lycees), "Le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants");
+  const poissy = sujet([["20 Minutes", "Municipales 2026 à Poissy : L’élection annulée par la justice à cause du candidat arrivé 6e au premier tour"], ["Le Monde", "Municipales à Poissy : la justice annule les élections, la maire annonce faire appel"]]);
+  assert.ok(/Poissy/.test(titreFait(poissy)), titreFait(poissy));
+  const evreux = sujet([["20 Minutes", "Eure : L’élection municipale d’Evreux, qui s’est joué à 520 voix, annulée par le tribunal administratif"], ["Libération", "Les élections municipales à Evreux annulées par la justice"]]);
+  assert.strictEqual(titreFait(evreux), "L’élection municipale d’Evreux annulée par le tribunal administratif");
+});
+
+test("titreFait : retire préfixes de rubrique, citations et formules ; jamais de formule creuse ni de « … » ; null sans fait", () => {
+  const t = (titres, ill) => titreFait(sujet(titres, ill ? { illustration: ill } : {}));
+  assert.strictEqual(t([["A", "Politique. Le Sénat adopte le budget de la Sécurité sociale"], ["B", "Le Sénat adopte le projet de budget de la Sécurité sociale"]]).startsWith("Le Sénat adopte"), true);
+  assert.ok(!/voici|savoir/i.test(t([["A", "Top départ pour la primaire sociale-démocrate : 140.000 électeurs appelés à choisir leur candidat pour la présidentielle 2027, voici ce qu’il faut savoir"], ["B", "140.000 électeurs vont choisir leur candidat pour la présidentielle: le premier tour de la primaire sociale-démocrate a débuté"]]) || ""));
+  // formules creuses, titres tronqués, un seul média qui recopie : aucun fait
+  assert.strictEqual(t([["A", "Édouard Philippe : actualité sur la présidentielle de 2027"], ["B", "Ce qu'il faut savoir sur la présidentielle de 2027"]]), null);
+  assert.strictEqual(t([["A", "Le gouvernement prépare un texte sur l'énergie et les…"], ["B", "Énergie : le gouvernement prépare un texte sur les prix de…"]]), null);
+  assert.strictEqual(t([["A", "Colère des lycéens"], ["B", "Mobilisation lycéenne"]]), null, "sans verbe ni fait");
+  for (const [m, tt] of [["A", "Le ministre balaie les critiques de l'opposition sur le budget"], ["B", "Le ministre fustige les critiques de l'opposition sur le budget"]]) assert.strictEqual(defautsFait(tt).includes("verbe d'opinion ou emphase"), true, `${m}`);
+});
+
+test("titreFait : accusation visant une personne nommée, jamais de titre-fait (Bardella, Ciotti)", () => {
+  const b = sujet([["Libération", "Accusé d’antisémitisme, Bardella balaie « une affaire dont tout le monde se moque »"], ["BFMTV", "Écrits antisémites attribués à Jordan Bardella: le président du RN balaie \"une affaire dont tout le monde se moque\""]], { illustration: { theme: "politique", personnes: [{ nom: "Jordan Bardella", parti: "RN" }] } });
+  assert.strictEqual(titreFait(b), null);
+  const c = sujet([["20 Minutes", "Colère des lycéens : Ciotti accuse Bagayoko d’« attiser la violence » et demande « sa révocation »"], ["Nice-Matin", "Pourquoi le maire de Nice Éric Ciotti (UDR) demande la « révocation » du maire de Saint-Denis Bally Bagayoko (LFI)"]], { illustration: { theme: "securite", personnes: [{ nom: "Éric Ciotti", parti: "UDR" }] } });
+  assert.strictEqual(titreFait(c), null);
+});
+
+test("enrichirSujet : le titre-fait est un champ d'affichage, titrePropre.titre reste la clé", () => {
+  const s = sujet([["Sud Ouest", "Mouvement lycéen : avant une nouvelle mobilisation le 13 octobre, le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants"], ["L'Express", "Mobilisation des lycéens : le ministre de l'Education promet l'arrivée de 3 000 professeurs remplaçants"]]);
+  const avant = titreSujet(s, [], {}).titre;
+  enrichirSujet(s, [], {}, maintenant);
+  assert.strictEqual(s.titrePropre.titre, avant);
+  assert.strictEqual(s.fait, s.accroche);
+  assert.ok(/ministre de l’Éducation/.test(s.fait));
+  assert.strictEqual(accroche(s), s.fait);
+});
+
+// ─── Audit de neutralité (sections 1 à 3) : erreurs de fait publiées ────────────────────────────────────────────────────
+const PHILIPPE = { nom: "Édouard Philippe", parti: "HOR" }, MELENCHON = { nom: "Jean-Luc Mélenchon", parti: "LFI" };
+test("acteur : jamais une personne citée entre guillemets ou en complément (T1 : meeting de Mélenchon, pas Philippe)", () => {
+  const s = sujet([["Le Progrès", "5 décembre : « Défier Édouard Philippe », Jean-Luc Mélenchon en meeting au Havre"]], { illustration: { theme: "election", personnes: [PHILIPPE, MELENCHON] } });
+  const t = titreParRegles(s, {}).titre;
+  assert.ok(!/Philippe|Horizons/.test(t), t);
+  const contre = sujet([["Le Monde", "Face à Édouard Philippe, Jean-Luc Mélenchon annonce un meeting au Havre"], ["Le Progrès", "Contre Édouard Philippe : Jean-Luc Mélenchon annonce un meeting au Havre"]], { illustration: { theme: "election", personnes: [PHILIPPE, MELENCHON] } });
+  assert.ok(!/Philippe/.test(titreParRegles(contre, {}).titre), titreParRegles(contre, {}).titre);
+  assert.ok(/Mélenchon/.test(titreParRegles(contre, {}).titre) || /Insoumise/.test(titreParRegles(contre, {}).titre) || !/Philippe/.test(titreParRegles(contre, {}).titre));
+  // une personne qui n'est nommée que dans un titre sur deux n'est pas l'acteur du sujet
+  const minorite = sujet([["Le Monde", "Édouard Philippe annonce un meeting à Lyon"], ["BFMTV", "Meeting à Lyon : les candidats se préparent"], ["Libération", "Lyon : un meeting annoncé pour samedi"]], { illustration: { theme: "election", personnes: [PHILIPPE] } });
+  assert.ok(!/Philippe/.test(titreParRegles(minorite, {}).titre), titreParRegles(minorite, {}).titre);
+  // le sujet grammatical, présent partout, reste l'acteur
+  const sujetOk = sujet([["Le Monde", "Édouard Philippe annonce un meeting à Lyon"], ["BFMTV", "Édouard Philippe annonce un grand meeting à Lyon samedi"]], { illustration: { theme: "election", personnes: [PHILIPPE] } });
+  assert.ok(/Philippe/.test(titreParRegles(sujetOk, {}).titre), titreParRegles(sujetOk, {}).titre);
+});
+
+test("thèmes : confirmés par au moins 2 articles ; tribunal administratif jamais « procédure judiciaire » ; primaire au nom exact", () => {
+  // T3 : « environnement » ne vient que d'un mot isolé dans un seul titre
+  const retailleau = sujet([["Libération", "Bruno Retailleau et l'interdiction de LFI : de Paris à Strasbourg, histoire secrète d'un coup de force"], ["Le Monde", "L'interdiction de LFI, un sujet de crispation pour le climat politique"]], { illustration: { theme: "politique", personnes: [{ nom: "Bruno Retailleau", parti: "LR" }] } });
+  assert.ok(!/environnement/i.test(titreParRegles(retailleau, {}).titre), titreParRegles(retailleau, {}).titre);
+  // T2 : contentieux administratif d'une élection annulée
+  const eure = sujet([["20 Minutes", "Eure : L’élection municipale d’Evreux, qui s’est joué à 520 voix, annulée par le tribunal administratif"], ["Libération", "Les élections municipales à Evreux annulées par le tribunal administratif"]], { illustration: { theme: "justice", personnes: [] } });
+  const te = titreSujet(eure, [], {}).titre;
+  assert.ok(/tribunal administratif/.test(te) && !/procédure judiciaire/.test(te), te);
+  // T4 et T6 : la primaire garde son nom exact (data/meetings.json), « vote » n'est pas un vote
+  const maurel = sujet([["Le Monde", "Emmanuel Maurel, la surprise des débats de la primaire sociale-démocrate"], ["BFMTV", "Primaire sociale-démocrate : Emmanuel Maurel s'impose dans le débat"]], { illustration: { theme: "election", personnes: [{ nom: "Emmanuel Maurel", parti: "GDR" }] } });
+  const tm = titreSujet(maurel, [], {}).titre;
+  assert.ok(!/social et l'emploi/.test(tm) && !/GDR/.test(tm), tm);
+  assert.ok(/Primaire (socialiste et démocrate|sociale-démocrate)/.test(tm) || /ce que disent/.test(tm), tm);
+  const recit = sujet([["Le Monde", "De son organisation disputée aux lignes de fracture entre les candidats, le récit de la primaire de gauche"], ["Libération", "Primaire de gauche : le vote, de 2007 à 2027"]], { illustration: { theme: "election", personnes: [] } });
+  assert.ok(!/vote sur la primaire/.test(titreSujet(recit, [], {}).titre), titreSujet(recit, [], {}).titre);
+  assert.ok(!/Primaire de la gauche/.test(titreSujet(recit, [], {}).titre));
+  // T8 : conseil départemental distinct du conseil municipal
+  const dep = sujet([["Est républicain", "Meuse : le conseil départemental vote son budget"], ["Le Progrès", "Le conseil départemental de la Meuse vote le budget 2027"]], { illustration: { theme: "politique", personnes: [] } });
+  assert.ok(!/municipal/.test(titreParRegles(dep, {}).titre), titreParRegles(dep, {}).titre);
+  // T9 : un thème d'un seul titre sur deux n'est pas affiché
+  const pompiers = sujet([["Le Provençal", "Sapeurs-pompiers du Luc-en-Provence : une affaire de noms de médecins"], ["Var-Matin", "Le Luc : les sapeurs-pompiers répondent à la polémique des listes"]], { illustration: { theme: "politique", personnes: [] } });
+  assert.ok(!/santé publique/.test(titreParRegles(pompiers, {}).titre), titreParRegles(pompiers, {}).titre);
+});
+
+test("titres tronqués ou d'un mot : jamais publiés (« Deux rues près », « Maintient », « Confiance », « Octobre », « Maire annonce faire appel », « Vice-président du Sénat »)", () => {
+  for (const t of ["Deux rues près", "Maintient", "Confiance", "Octobre", "Maire annonce faire appel", "Vice-président du Sénat", "Révocation", "Lycées"]) assert.strictEqual(titreVague(t), true, t);
+  for (const t of ["Primaire socialiste et démocrate : ce que disent les médias", "Municipales à Poissy : élection annulée", "Finances publiques"]) assert.strictEqual(titreVague(t), false, t);
+  // via la chaîne complète : un recoupement qui n'a que « près » ou un mot seul devient un titre générique de repli, que la publication refuse
+  const rues = sujet([["Le Parisien", "La Ville de Paris confie à Louis Vuitton le réaménagement de deux rues près des Champs-Elysées"], ["Le Monde", "Paris : Louis Vuitton va réaménager deux rues près des Champs-Élysées"]], { illustration: { theme: "gouvernement", personnes: [] } });
+  const tr = titreSujet(rues, [], {});
+  assert.ok(!titreVague(tr.titre) || tr.generique === true, JSON.stringify(tr));
+  assert.notStrictEqual(tr.titre, "Deux rues près");
+  const mot = sujet([["Libération", "Marine Le Pen maintient sa confiance en Jordan Bardella"], ["BFMTV", "Marine Le Pen réaffirme sa confiance en Jordan Bardella après trois jours de silence"]]);
+  const tc = titreSujet(mot, [], {});
+  assert.ok(tc.generique === true || !titreVague(tc.titre), JSON.stringify(tc));
+  assert.ok(!["Confiance", "Maintient"].includes(tc.titre));
+  // titrePropre (recoupement) ne renvoie jamais un mot seul
+  const sept = sujet([["A", "Rima Hassan et l'exposition sur le 7-Octobre"], ["B", "Exposition sur le 7-Octobre : Rima Hassan répond"]]);
+  assert.ok(titrePropre(sept, []) === null || nm(titrePropre(sept, []).titre) >= 2);
+  assert.notStrictEqual(titreSujet(sept, [], {}).titre, "Octobre");
+});
+
+test("bandeau « Gouvernement » : seulement si le fait concerne l'État central", () => {
+  const paris = sujet([["Le Parisien", "La Ville de Paris confie à Louis Vuitton le réaménagement de deux rues près des Champs-Elysées"], ["Le Monde", "Paris : la mairie confie à Louis Vuitton deux rues près des Champs-Élysées"]], { illustration: { theme: "gouvernement", personnes: [] } });
+  assert.strictEqual(sansBandeauEtat(paris), true, "décision municipale : pas de bandeau Gouvernement");
+  const etat = sujet([["Le Monde", "Le gouvernement présente son budget"], ["BFMTV", "Budget : le Premier ministre détaille les mesures"]], { illustration: { theme: "gouvernement", personnes: [] } });
+  assert.strictEqual(sansBandeauEtat(etat), false);
+  assert.strictEqual(sansBandeauEtat(sujet([["A", "Le maire annonce un budget"]], { illustration: { theme: "budget", personnes: [] } })), false, "autre thème : rien à retirer");
+});

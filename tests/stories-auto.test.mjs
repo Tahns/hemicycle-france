@@ -13,6 +13,7 @@ const sujet = (titre, nb, extra = {}) => ({
   derniere: il_y_a(1),
   illustration: { theme: "budget", ...(extra.illustration || {}) },
   titrePropre: { titre: "Budget 2027", origine: "recoupement" },
+  fait: "Le gouvernement présente son projet de budget pour 2027", // titre-fait déjà extrait (champ d'affichage) ; null dans les tests « sans fait clair »
   articles: Array.from({ length: Math.max(nb, 1) }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il_y_a(1) })),
   ...extra,
 });
@@ -485,7 +486,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   {
     const matin = new Date("2026-10-02T06:30:00Z"); // 8 h 30 à Paris
     const il = (h) => new Date(matin.getTime() - h * 36e5).toISOString();
-    const fort = (titre, theme, nb = 3) => ({ medias: nb, derniere: il(2), illustration: { theme }, titrePropre: { titre: titre.split(":")[0].slice(0, 45), origine: "recoupement" }, articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
+    const fort = (titre, theme, nb = 3) => ({ medias: nb, derniere: il(2), illustration: { theme }, fait: titre, titrePropre: { titre: titre.split(":")[0].slice(0, 45), origine: "recoupement" }, articles: Array.from({ length: nb }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
     const sujets = [fort("Le gouvernement présente son projet de budget pour 2027", "budget"), fort("Le Sénat examine la loi de programmation militaire", "senat", 4), fort("Réforme des retraites : les partenaires sociaux reçus à Matignon", "gouvernement"), fort("Élections municipales : la date du scrutin est fixée", "election", 5)];
     const bref = (opts = {}) => AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: matin, ...opts });
     const b = bref();
@@ -574,7 +575,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   {
     const matin = new Date("2026-10-02T06:30:00Z");
     const il = (h) => new Date(matin.getTime() - h * 36e5).toISOString();
-    const f = (titre, propre, theme) => ({ medias: 3, derniere: il(2), illustration: { theme }, titrePropre: { titre: propre, origine: "recoupement" }, articles: Array.from({ length: 3 }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
+    const f = (titre, propre, theme) => ({ medias: 3, derniere: il(2), illustration: { theme }, fait: titre, titrePropre: { titre: propre, origine: "recoupement" }, articles: Array.from({ length: 3 }, (_, i) => ({ titre: i ? `${titre} (suite ${i})` : titre, url: `https://example.org/${idSujet(titre)}/${i}`, media: MEDIAS[i], date: il(2) })) });
     const sujets = [f("Blocage des lycées : les syndicats appellent à la grève", "Blocage des lycées", "gouvernement"), f("Blocus des lycées : le ministre reçoit les syndicats ce matin", "Blocus des lycées", "politique"), f("Le Sénat examine la loi de programmation militaire", "Loi de programmation militaire", "senat"), f("Élections municipales : la date du scrutin est fixée", "Municipales : la date fixée", "election")];
     const b = AUTO.choisirEnBref({ actualites: actu(...sujets), file: vide, now: matin });
     assert.ok(!b.refus, b.refus);
@@ -1161,7 +1162,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question"), [0, "t", null, null, null, null, null, null, "question"]);
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null, "chiffre"], "chiffre").slice(5), ["chiffre", null, null, "chiffre"]);
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "question", "Qui paie la facture ?").slice(8), ["question", { accroche: "Qui paie la facture ?" }], "l'accroche de l'entrée est transmise au dessin");
-  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu", "x"), [0, "t", null, null, null], "style bleu : rien à transmettre");
+  assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu", "x").slice(8), [null, { accroche: "x" }], "style bleu : le titre-fait est transmis lui aussi (gros titre)");
   // le dessin des styles vit dans js/stories.js : mêmes règles que le cahier des charges (taille de texte, nombre de mots, zones de sécurité)
   const src = readFileSync(new URL("../js/stories.js", import.meta.url), "utf-8");
   for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'ESSENTIEL"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);

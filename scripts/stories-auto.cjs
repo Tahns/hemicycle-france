@@ -109,7 +109,7 @@ const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
 const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
-const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
+const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait, sansBandeauEtat } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
 /** Titre-fait du sujet (gros titre d'affichage : ce qui s'est passé, en 6 à 12 mots) : le champ `fait` du relevé, sinon calculé à partir des titres de presse ; null = aucun fait clair, le sujet n'est pas publié. Jamais une clé anti-doublon (le titre propre reste la clé). */
@@ -764,6 +764,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
         return r ? r.apercu : null;
       }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
+      if (extras?.sansEtat) { const sj = ACTUALITES.sujets[indice]; sj.illustration = { ...(sj.illustration || {}), theme: "politique", vignette: null }; } // décision locale : pas de bandeau « Gouvernement » ni de photo de l'Élysée
       if (extras?.accroche) { // titre-fait : affiché en gros par tous les styles (le titre propre de l'entrée, lui, ne change pas : il reste la clé anti-doublon)
         const sj = ACTUALITES.sujets[indice];
         sj.accroche = extras.accroche;
@@ -1326,12 +1327,12 @@ function varianteChoix(choix, d) {
   return varianteDe(choix.id);
 }
 /** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
-function argsAvecVariante(args, variante, accroche = null) {
-  if ((!variante || variante === "bleu") && !accroche) return args;
+function argsAvecVariante(args, variante, accroche = null, sansEtat = false) {
+  if ((!variante || variante === "bleu") && !accroche && !sansEtat) return args;
   const a = [...args];
   while (a.length < 8) a.push(null);
   a[8] = variante && variante !== "bleu" ? variante : null;
-  if (accroche) a[9] = { accroche }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
+  if (accroche || sansEtat) a[9] = { ...(accroche ? { accroche } : {}), ...(sansEtat ? { sansEtat: true } : {}) }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
   return a;
 }
 
@@ -1530,7 +1531,7 @@ async function main() {
       }
     } else {
       const variante = varianteChoix(choix, d); // test comparatif de styles (« bleu » = dessin historique)
-      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche));
+      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche, Boolean(choix.sujet && sansBandeauEtat(choix.sujet))));
       const dim = dimensionsJpeg(jpeg);
       if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
       if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
