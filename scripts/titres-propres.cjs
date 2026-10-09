@@ -573,7 +573,7 @@ function simplifierJargon(texte, { chambre = "an" } = {}) {
   if (chambre === "senat") t = t.replace(/\b(votes?) des députés\b/gi, "$1 des sénateurs");
   // les abstentions : expliquées une seule fois
   let vu = false;
-  t = t.replace(/\babstentions?\b(?! \(ni pour ni contre\))/gi, (m) => { if (vu) return m; vu = true; return `${m} (ni pour ni contre)`; });
+  t = t.replace(/(?<!taux d['’])\babstentions?\b(?! \(ni pour ni contre\))/gi, (m) => { if (vu) return m; vu = true; return `${m} (ni pour ni contre)`; });
   return t.replace(/\s+/g, " ").trim();
 }
 /** « première lecture » -> « premier examen du texte » (étape d'un texte, sans majuscule initiale). */

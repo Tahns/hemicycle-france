@@ -2,7 +2,7 @@
 import test from "node:test";
 import assert from "node:assert";
 import { createRequire } from "node:module";
-const { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+const { accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, enrichirSujet, simplifierJargon, siglesNonExpliques, motsParPhrase, etapeSimple, natureSimple } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
 
 const plat = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const art = (media, titre, i = 0) => ({ media, titre, url: `https://example.org/${media.replace(/\W/g, "")}/${i}`, date: "2026-10-05T08:00:00.000Z" });
@@ -350,4 +350,55 @@ test("accroche : sujet + enjeu en 6 à 18 mots, repli sur le titre propre, aucun
   const flou = sujet([["Le Monde", "Rien de précis aujourd'hui"]], { titrePropre: { titre: "Quelque chose de neutre" } });
   assert.strictEqual(accroche(flou), "Quelque chose de neutre");
   assert.strictEqual(accroche({ articles: [] }), null);
+});
+
+// ─── Langage simple (FALC) : sigles dits en toutes lettres, jargon remplacé, phrases de 20 mots au plus ───
+test("simplifierJargon : le jargon parlementaire devient des mots courants", () => {
+  const cas = [
+    ["scrutin public n° 12", /vote des députés n° 12/],
+    ["la motion de censure", /le vote pour renverser le Gouvernement/],
+    ["recours à l'article 49.3", /le Gouvernement fait passer un texte sans vote/],
+    ["en séance publique", /dans l'hémicycle/],
+    ["adopté en première lecture", /premier examen du texte/],
+    ["la commission mixte paritaire", /réunion de députés et sénateurs pour s'accorder sur un texte/],
+    ["le dossier législatif", /parcours de la loi/],
+    ["un amendement du Gouvernement", /modification proposée/],
+    ["le projet de loi de finances pour 2027", /loi de finances \(le budget de l'État\)/],
+    ["Projet de loi relatif à la santé", /^Loi proposée par le Gouvernement sur la santé$/],
+    ["une proposition de loi", /loi proposée par des parlementaires/],
+    ["Le PS et le RN, la LFI et LR", /Parti socialiste.*Rassemblement national.*La France insoumise.*Les Républicains/],
+    ["l'AN a voté", /Assemblée nationale a voté/],
+    ["PLFSS", /loi de financement de la Sécurité sociale/],
+  ];
+  for (const [entree, attendu] of cas) assert.match(simplifierJargon(entree), attendu, entree);
+  // « abstention » : expliquée une seule fois ; le taux d'abstention d'une élection n'est pas touché
+  assert.strictEqual(simplifierJargon("10 abstentions, puis 2 abstentions"), "10 abstentions (ni pour ni contre), puis 2 abstentions");
+  assert.strictEqual(simplifierJargon("le taux d'abstention"), "le taux d'abstention");
+  // un texte déjà simple ne change pas ; les titres officiels entre guillemets sont gardés
+  assert.strictEqual(simplifierJargon("Les députés ont voté ce texte."), "Les députés ont voté ce texte.");
+  assert.strictEqual(simplifierJargon("Projet de loi « casseurs-payeurs »"), "Projet de loi « casseurs-payeurs »");
+  assert.strictEqual(etapeSimple("première lecture"), "premier examen du texte");
+  assert.strictEqual(natureSimple("projet de loi"), "loi proposée par le Gouvernement");
+});
+
+test("sigles : aucun sigle non expliqué dans les textes fabriqués", () => {
+  assert.deepStrictEqual(siglesNonExpliques("Le texte de l'Assemblée nationale et du Sénat, vote n°3"), []);
+  assert.deepStrictEqual(siglesNonExpliques("La TVA a changé"), [], "TVA : sigle d'usage courant");
+  assert.deepStrictEqual(siglesNonExpliques("Le PLF et la CMP de l'AN"), ["PLF", "CMP", "AN"]);
+  assert.deepStrictEqual(siglesNonExpliques("5,1 % du PIB"), ["PIB"]);
+  assert.deepStrictEqual(siglesNonExpliques("5,1 % de la richesse produite en un an (PIB)"), []);
+  // tout ce que les fonctions fabriquent sur nos exemples : titres par règles, accroches, intitulés de loi
+  const textes = [];
+  for (const [titre, ill] of CAS) { const t = titreSujet(reel(titre, ill), [], { gouvernement }); textes.push(t.titre); textes.push(accroche({ ...reel(titre, ill), titrePropre: t }) || ""); }
+  for (const t of ["Projet de loi de finances pour 2027", "Projet de loi de financement de la sécurité sociale pour 2027", "Proposition de loi visant à renforcer la protection des enfants sur les réseaux sociaux (nouvelle lecture)", "Projet de loi autorisant l'approbation de l'accord entre autorités compétentes portant sur l'échange des informations GloBE"]) textes.push(simplifierTexteLoi(t));
+  for (const t of textes) assert.deepStrictEqual(siglesNonExpliques(t), [], `sigle dans « ${t} »`);
+});
+
+test("phrases : 20 mots au plus, sur les accroches et intitulés fabriqués", () => {
+  const textes = [];
+  const lycees = sujet([["Le Monde", "Blocus des lycées : « on ne lâchera rien », disent les élèves"], ["BFMTV", "Lycées bloqués ce matin dans plusieurs villes"]]);
+  textes.push(accroche(lycees), accroche(sujet([["Le Monde", "Le Sénat adopte la loi sur la dette"], ["BFMTV", "Budget : vote au Sénat"]])));
+  for (const [titre, ill] of CAS) textes.push(titreSujet(reel(titre, ill), [], { gouvernement }).titre);
+  for (const t of textes) for (const { phrase, mots } of motsParPhrase(t)) assert.ok(mots <= 20, `${mots} mots : « ${phrase} »`);
+  assert.deepStrictEqual(motsParPhrase("Une phrase. Une autre, plus longue ! Et la fin ?").map((x) => x.mots), [2, 4, 3]);
 });

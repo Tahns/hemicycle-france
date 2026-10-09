@@ -1169,4 +1169,46 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(!/https?:\/\/[^"'`\s]*\.(?:jpe?g|png|woff2?)/.test(src.slice(src.indexOf("Styles de story du test comparatif"), src.indexOf("Stories d'actualité : modules séparés"))), "aucune ressource externe dans les styles (CSP)");
 }
 
+// ─── Lisibilité (FALC) des textes fabriqués pour les posts : sigles dits en toutes lettres, phrases de 20 mots au plus, pas de jargon ───
+{
+  const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
+  const { siglesNonExpliques, motsParPhrase } = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+  const JARGON = /scrutin public|\bamendement|motion de censure|première lecture|commission mixte paritaire|séance publique|dossier législatif|\bprojet de loi\b(?! «)|\bproposition de loi\b|\b(?:PLFSS|PLF|LFI|CMP)\b/i;
+  const lu = (t) => t.replace(/«[^»]*»/g, " ").replace(/https?:\/\/\S+|\b[\w.-]+\.(?:fr|com)\S*/g, " ").replace(/#\S+/g, " ");
+  const verifier = (nom, t) => {
+    const x = lu(t);
+    assert.deepStrictEqual(siglesNonExpliques(x), [], `${nom} : sigle non expliqué dans « ${x.slice(0, 120)} »`);
+    for (const { phrase, mots } of motsParPhrase(x)) assert.ok(mots <= 20, `${nom} : ${mots} mots : « ${phrase} »`);
+    assert.ok(!JARGON.test(x), `${nom} : jargon dans « ${x.slice(0, 160)} »`);
+  };
+  const fiche = (o) => A.ficheLoi({ chambre: "an", id: "an-200", numero: 200, date: "1 octobre 2026", dateISO: "2026-10-01", pour: 300, contre: 100, abst: 10, url: "https://www.assemblee-nationale.fr/dyn/17/scrutins/200", resultat: "adopte", ...o });
+  const exemples = [
+    fiche({ titre: "l'ensemble du projet de loi relatif à la simplification de la vie économique (première lecture)." }),
+    fiche({ titre: "l'ensemble de la proposition de loi visant à protéger les enfants sur les réseaux sociaux (nouvelle lecture).", resultat: "rejete", pour: 80, contre: 200 }),
+    fiche({ titre: "l'ensemble du projet de loi de finances pour 2027 (lecture définitive).", abst: 3 }),
+    fiche({ chambre: "senat", id: "senat-2026-77", titre: "sur l'ensemble du projet de loi de programmation militaire", url: "https://www.senat.fr/scrutin-public/2026/scr2026-77.html" }),
+  ];
+  for (const f of exemples) {
+    assert.ok(f, "fiche produite");
+    verifier("légende", f.legende); verifier("alt", f.alt); verifier("sous", f.sous);
+    if (f.accroche) verifier("accroche", f.accroche);
+    assert.ok(/Abstentions \(ni pour ni contre\)/.test(f.legende), "l'abstention est expliquée");
+    assert.ok(/loi proposée par/.test(f.legende), "le type de texte est dit en mots simples");
+    assert.ok(f.spec.pour >= 0 && f.spec.titre === f.titreCourt, "les chiffres et le titre officiel (clé des registres) ne changent pas");
+  }
+  // date à retenir : le titre affiché est en mots simples ; le titre d'origine reste la clé des registres
+  const ev = A.evenementsAgenda({ meetings: [] }, { sourceUrl: "https://www.assemblee-nationale.fr/agendas", jours: [{ date: "2026-10-20", points: [{ type: "vote", objet: "Projet de loi de finances pour 2027 (première partie)" }] }] })[0];
+  assert.match(ev.titre, /^Vote solennel à l'Assemblée : projet de loi de finances/, "titre d'origine gardé pour l'anti-doublon");
+  assert.match(ev.affichage, /^Vote des députés à l'Assemblée nationale : /);
+  assert.ok(!JARGON.test(ev.affichage), ev.affichage);
+  const sujetDate = { date: { iso: "2026-10-20", jour: "20", mois: "octobre" }, titrePropre: { titre: ev.titre, affichage: ev.affichage }, articles: [{ media: "Assemblée nationale", titre: "", url: "https://www.assemblee-nationale.fr/agendas", date: "2026-10-20" }], derniere: now.toISOString() };
+  const fd = A.ficheDate(sujetDate, now);
+  assert.strictEqual(fd.titreCourt, ev.titre);
+  assert.strictEqual(fd.spec.titre, ev.affichage);
+  verifier("date", fd.legende); verifier("date alt", fd.alt);
+  assert.strictEqual(A.ficheAnnonce(fd, "abc").titre, ev.affichage, "la story d'annonce affiche le titre simple");
+  // texte alternatif d'une story de presse : sans sigle ni mot technique
+  verifier("alt story", A.texteAlternatif("actualite", "Le PS dépose un amendement sur le PLF", ["Le Monde", "franceinfo"], []));
+}
+
 console.log("stories-auto : tous les tests passent.");
