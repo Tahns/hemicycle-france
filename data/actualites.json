@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T12:35:31.241Z",
+ "lastUpdated": "2026-10-09T12:40:41.667Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -140,7 +140,7 @@
     "Public Sénat",
     "Le Figaro"
    ],
-   "nb": 73,
+   "nb": 72,
    "derniere": "2026-10-09T11:24:23.000Z",
    "articles": [
     {
@@ -371,6 +371,7 @@
     "défense"
    ],
    "medias": [
+    "BFMTV",
     "20 Minutes",
     "Sud Ouest",
     "Le Monde",
@@ -379,23 +380,34 @@
     "L'Est républicain",
     "Libération",
     "Mediapart",
-    "BFMTV",
     "L'Express"
    ],
    "mediasDistincts": 8,
    "sources": [
+    "BFMTV",
     "20 Minutes",
     "Sud Ouest",
     "Le Monde",
     "EBRA",
     "Libération",
     "Mediapart",
-    "BFMTV",
     "L'Express"
    ],
-   "nb": 21,
-   "derniere": "2026-10-09T12:09:35.000Z",
+   "nb": 22,
+   "derniere": "2026-10-09T12:37:42.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Jordan Bardella",
+     "url": "https://www.bfmtv.com/politique/front-national/jordan-bardella_DN-202403060432.html",
+     "date": "2026-10-09T12:37:42.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Propos antisémites attribués à Jordan Bardella: le président du RN va porter plainte en diffamation après de nouvelles révélations du Canard Enchaîné",
+     "url": "https://www.bfmtv.com/politique/front-national/propos-antisemites-attribues-a-jordan-bardella-le-president-du-rn-va-porter-plainte-en-diffamation-apres-de-nouvelles-revelations-du-canard-enchaine_AD-202610090541.html",
+     "date": "2026-10-09T12:37:41.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Jordan Bardella accusé d’antisémitisme : Compte effacé, contenus relayés sur X… De nouvelles révélations",
@@ -461,18 +473,6 @@
      "titre": "Marseille : L’élu RN Franck Allisio licencie son collaborateur après des accusations d’apologie du nazisme et de racisme",
      "url": "https://www.20minutes.fr/politique/4252761-20261009-marseille-elu-rn-franck-allisio-licencie-collaborateur-apres-accusations-apologie-nazisme-racisme?at_medium=display&at_campaign=149",
      "date": "2026-10-09T08:25:57.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Accusé d’antisémitisme, Bardella balaie «une affaire dont tout le monde se moque»",
-     "url": "https://www.liberation.fr/politique/accuse-dantisemitisme-bardella-balaie-une-affaire-dont-tout-le-monde-se-moque-20261009_SQIUH2TX2BBHLEBRFA7WCXYCBE/",
-     "date": "2026-10-09T05:45:30.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Jordan Bardella",
-     "url": "https://www.bfmtv.com/politique/front-national/jordan-bardella_DN-202403060432.html",
-     "date": "2026-10-09T04:59:28.000Z"
     },
     {
      "media": "L'Express",
@@ -869,8 +869,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Antisémites",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1376,6 +1377,84 @@
     "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T12:37:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jordan Bardella",
+     "url": "https://www.bfmtv.com/politique/front-national/jordan-bardella_DN-202403060432.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T12:37:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T12:37:41.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Propos antisémites attribués à Jordan Bardella: le président du RN va porter plainte en diffamation après de nouvelles révélations du Canard Enchaîné",
+     "url": "https://www.bfmtv.com/politique/front-national/propos-antisemites-attribues-a-jordan-bardella-le-president-du-rn-va-porter-plainte-en-diffamation-apres-de-nouvelles-revelations-du-canard-enchaine_AD-202610090541.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T12:37:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Antisémites",
+    "origine": "dossier"
    }
   },
   {
@@ -3802,48 +3881,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T04:59:28.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jordan Bardella",
-     "url": "https://www.bfmtv.com/politique/front-national/jordan-bardella_DN-202403060432.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T04:59:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-09T04:48:20.000Z",
@@ -4461,32 +4498,6 @@
    ],
    "titrePropre": {
     "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-08T22:48:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Santé: les aidants ont besoin d'«être vus, entendus et reconnus», confie Pauline Mangin, mère d'une fille handicapée",
-     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261008-sant%C3%A9-les-aidants-ont-besoin-d-%C3%AAtre-vus-entendus-et-reconnus-confie-pauline-mangin-m%C3%A8re-d-une-fille-handicap%C3%A9e",
-     "media": "RFI",
-     "date": "2026-10-08T22:48:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : santé publique",
     "origine": "regles"
    }
   }
