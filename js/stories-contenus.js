@@ -91,6 +91,10 @@ STORY_PLUS.aujourdhui = async (ctx, s) => {
 /* ---------- Story « Le vote du jour » ---------- */
 STORY_PLUS["vote-jour"] = async (ctx, s) => {
   if(!s || !s.objet || !["adopte", "rejete"].includes(s.verdict)) return null;
+  if(s.votes && STORY_PLUS["vote-groupes"]){ // votes par groupe connus : modèle « Ils ont voté » (js/stories-hemicycle.js)
+    const r = await STORY_PLUS["vote-groupes"](ctx, { format:"story", titre:s.dossier || s.objet, date:s.date, numero:s.numero, verdict:s.verdict, pour:s.pour, contre:s.contre, abst:s.abst, votes:s.votes, censure:s.censure === true });
+    if(r) return { nom:`vote-jour-${s.numero || "x"}` };
+  }
   await polices();
   const verdict = s.verdict === "adopte" ? "Adopté\u2060✓" : "Rejeté\u2060✕"; // signe collé au mot : la couleur n'est jamais seule
   const voix = (n, mot) => `${fr(n ?? 0)} ${mot}`;

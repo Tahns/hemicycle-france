@@ -74,7 +74,7 @@ function enDirectDe(s){
 }
 function premiereVideo(s){ return s.articles.find(a=> a.video)?.media || ""; }
 function titreDe(s, suffixe){
-  const propre = norm(s.titrePropre?.titre);
+  const propre = norm(s.accroche) || norm(s.titrePropre?.titre);
   return { texte:propre, propre:!!propre, rub:theme(s)[2], suffixe };
 }
 
