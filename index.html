@@ -4623,6 +4623,8 @@ function fondLisible(hex){
 }
 const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
+const VIGNETTES_VUES = new Set(); // photos déjà affichées dans la liste en cours (remise à zéro avant chaque liste)
+const VIGNETTES_VOISINES = { election:["assemblee", "gouvernement", "elysee"], assemblee:["election", "senat", "gouvernement"], senat:["assemblee", "election"], gouvernement:["elysee", "assemblee", "election"], elysee:["gouvernement", "election"], budget:["gouvernement", "assemblee"], international:["elysee", "gouvernement"], region:["election", "gouvernement"], education:["gouvernement", "assemblee"] };
 function visuelActu(s){
   const ill = s.illustration || {};
   const personnes = ill.personnes || [];
@@ -4644,7 +4646,13 @@ function visuelActu(s){
   }
   // Photo libre de l'institution du thème (jamais une personne) ; sinon rien. `vignette` : clé calculée par scripts/vignettes-cle.js
   // (null = pas de vignette, ex. justice avec une personne nommée) ; fichier d'actualités plus ancien : le thème fait office de clé
-  const cleV = "vignette" in ill ? ill.vignette : ill.theme;
+  let cleV = "vignette" in ill ? ill.vignette : ill.theme;
+  // Une même photo ne sert pas deux sujets d'une même liste : le second prend une photo voisine (autre institution proche) qui n'a pas encore servi
+  if(cleV && VIGNETTES_VUES.has(cleV)){
+    const voisine = (VIGNETTES_VOISINES[cleV] || []).find(c => !VIGNETTES_VUES.has(c) && VIGNETTES[c]?.chemin);
+    if(voisine) cleV = voisine; else return ""; // plus de photo voisine disponible : jamais deux fois la même image dans une liste
+  }
+  if(cleV) VIGNETTES_VUES.add(cleV);
   const photoV = cleV && VIGNETTES[cleV];
   if(photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "")){
     return `<div class="actu-visuel actu-photo"><img src="${esc(photoV.chemin)}" alt="${esc(photoV.alt || "")}" title="${esc(`${photoV.lieu || ""} — photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`)}" loading="lazy" decoding="async" width="160" height="160"></div>`;
@@ -4725,6 +4733,7 @@ function renderActualites(){
   document.querySelectorAll("#actualites-filtre .theme-chip").forEach(b=> b.addEventListener("click", ()=>{ actuFiltre = b.dataset.f; renderActualites(); }));
   const sujets = actuFiltre === "recoupes" && recoupes.length ? recoupes
     : [...ACTUALITES.sujets].sort((a, b)=> b.derniere.localeCompare(a.derniere));
+  VIGNETTES_VUES.clear();
   liste.innerHTML = `<div class="depute-actions partage-actions"><button type="button" class="lien-bouton bouton-partage" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` + dossiersActu().map(d=> dossierHTML(d, 8)).join("") + sujetsHorsDossiers(sujets).slice(0, 60).map((s, i)=> sujetHTML(s, false, i === 0 && !dossiersActu().length)).join("");
 }
 /* ---------- Bandeau « En direct » (data/direct.json, écrit par scripts/detecter-direct.js) ----------
@@ -4966,6 +4975,7 @@ function renderAccueilActualites(){
   const dossiers = dossiersActu().slice(0, 2);
   const top = sujetsHorsDossiers((ACTUALITES?.sujets || []).filter(s=>s.medias >= 2)).slice(0, dossiers.length ? 3 : 5); // 3 sur bureau, 5 sur téléphone (liste dense)
   if(!top.length && !dossiers.length){ bloc.hidden = true; return; }
+  VIGNETTES_VUES.clear();
   bloc.innerHTML = `<div class="actu-accueil-tete"><h2>Les sujets du moment</h2><a href="#actualites" data-tab-lien="actualites">Toutes les actualités →</a></div>
     <div class="depute-actions actu-actions"><button type="button" class="lien-bouton bouton-partage solo-mobile" data-partage="actualites">Partager</button><button type="button" class="lien-bouton bouton-story" data-story="actualites" data-id="">Story des sujets du moment</button></div>` +
     dossiers.map(d=> dossierHTML(d, 5)).join("") +
