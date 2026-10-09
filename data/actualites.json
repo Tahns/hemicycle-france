@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T19:30:56.612Z",
+ "lastUpdated": "2026-10-09T19:35:32.474Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -541,19 +541,19 @@
    },
    "articles": [
     {
-     "titre": "Politique. Violences sexuelles : la loi « intégrale » coûterait trois à quatre milliards d’euros de plus par an",
+     "titre": "Politique. Violences sexuelles : la loi intégrale coûterait trois à quatre milliards d’euros de plus par an",
      "url": "https://www.leprogres.fr/politique/2026/10/09/violences-sexuelles-la-loi-integrale-couterait-3-a-4-milliards-d-euros-de-plus-par-an",
      "media": "Le Progrès",
      "date": "2026-10-09T19:15:00.000Z"
     },
     {
-     "titre": "Politique. Violences sexuelles : la loi « intégrale » coûterait trois à quatre milliards d’euros de plus par an",
+     "titre": "Politique. Violences sexuelles : la loi intégrale coûterait trois à quatre milliards d’euros de plus par an",
      "url": "https://www.dna.fr/politique/2026/10/09/violences-sexuelles-la-loi-integrale-couterait-3-a-4-milliards-d-euros-de-plus-par-an",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-09T19:15:00.000Z"
     },
     {
-     "titre": "Politique. Violences sexuelles : la loi « intégrale » coûterait trois à quatre milliards d’euros de plus par an",
+     "titre": "Politique. Violences sexuelles : la loi intégrale coûterait trois à quatre milliards d’euros de plus par an",
      "url": "https://www.estrepublicain.fr/politique/2026/10/09/violences-sexuelles-la-loi-integrale-couterait-3-a-4-milliards-d-euros-de-plus-par-an",
      "media": "L'Est républicain",
      "date": "2026-10-09T19:15:00.000Z"
@@ -566,9 +566,16 @@
     }
    ],
    "titrePropre": {
-    "titre": "Loi « intégrale »",
-    "origine": "recoupement"
-   }
+    "titre": "Violences sexuelles : ce que disent les médias",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 9 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
   },
   {
    "medias": 4,
@@ -3926,49 +3933,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "François Hollande",
-      "photo": "photos/deputes/PA1654.jpg",
-      "photoHd": "photos/deputes/hd/PA1654.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA1654",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "François Hollande",
-     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "François Hollande : député SOC (Corrèze)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4012,12 +3976,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -4026,22 +3990,22 @@
    },
    "articles": [
     {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "titre": "François Hollande",
+     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -4132,10 +4096,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
      }
     ],
     "partis": [],
@@ -4144,56 +4110,21 @@
    },
    "articles": [
     {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Fabien Roussel",
-      "photo": "photos/personnalites/fabien-roussel.jpg",
-      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
-      "parti": "GDR",
-      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fabien Roussel",
-     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fabien Roussel : ce que disent les médias",
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "texte": "Bruno Retailleau : président des Républicains",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -4267,6 +4198,82 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T13:44:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron",
+     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T13:44:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T13:44:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Fabien Roussel",
+      "photo": "photos/personnalites/fabien-roussel.jpg",
+      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
+      "parti": "GDR",
+      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Fabien Roussel",
+     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T13:44:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fabien Roussel : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
