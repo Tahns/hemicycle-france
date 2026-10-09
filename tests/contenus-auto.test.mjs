@@ -100,7 +100,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(/^Projet de loi autorisant/.test(globe.brut), "intitulé officiel gardé (alt, registre)");
   assert.ok(g.entree.sujets.some((x) => /^Projet de loi autorisant l.approbation/.test(x)), "sujets d'origine pour l'anti-doublon");
   assert.ok(!g.entree.sujets.some((x) => /^Fiscalité :/.test(x)), "le texte simplifié n'entre pas dans les sujets");
-  assert.ok(g.entree.alt.includes("autorisant"), "texte alternatif : intitulé officiel complet");
+  assert.ok(g.entree.alt.includes("échange d'informations entre pays") && !g.entree.alt.includes("autorisant"), "texte alternatif : en mots simples");
 }
 
 // ---------- 2. Le vote du jour ----------
@@ -118,8 +118,8 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   // la motion de censure l'emporte, sans les noms de ses signataires
   const m = l.lois.find((x) => x.typeVote === "MOC"); m.dateISO = "2026-10-12"; m.date = "12 octobre 2026";
   const r = C.choisirVoteDuJour({ lois: l, jour: "2026-10-13", now: new Date("2026-10-13T08:30:00Z") });
-  assert.strictEqual(r.contenu.rendu.spec.type, "Motion de censure");
-  assert.ok(!/Mmes?|M\. |députés/.test(r.contenu.rendu.spec.objet), `signataires retirés : ${r.contenu.rendu.spec.objet}`);
+  assert.strictEqual(r.contenu.rendu.spec.type, "Vote pour renverser le Gouvernement");
+  assert.ok(!/Mmes?|M\. /.test(r.contenu.rendu.spec.objet), `signataires retirés : ${r.contenu.rendu.spec.objet}`);
   assert.ok(r.contenu.entree.sources[0].startsWith("https://www.assemblee-nationale.fr/dyn/17/scrutins/"));
   // jamais d'amendement ordinaire ; mot prudent : écarté ; résultat incohérent : écarté
   const seul = { lastUpdated: "2026-10-13T02:00:00Z", lois: [{ ...l.lois[2], titre: "l'article 3 de la proposition de loi visant l'ancien maire mis en examen (première lecture)." }] };
@@ -210,7 +210,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const cands = C.candidatsChiffres({ ...dSond, now: new Date("2026-10-13T15:30:00Z") });
   const so = cands.find((c) => c.sondage);
   assert.ok(so, "dernier sondage hors réserve");
-  assert.ok(so.spec.sourceTxt.includes("Commission des sondages") && /marge d'erreur/.test(so.spec.lignes.join(" ")) && so.spec.periode.includes("Terrain"), "mentions obligatoires");
+  assert.ok(so.spec.sourceTxt.includes("Commission des sondages") && /marge d'erreur/.test(so.spec.lignes.join(" ")) && so.spec.periode.includes("Enquête menée"), "mentions obligatoires");
   const etatSo = C.etatVide(); for (const c of cands.filter((x) => !x.sondage)) etatSo.chiffres[c.cle] = { id: "dddddddddddd", date: "2026-10-12" };
   const rs = C.planifier({ now: new Date("2026-10-13T15:30:00Z"), donnees: dSond, file: vide, registre: vide, etat: etatSo, creneaux: CRENEAUX, config: {} });
   const cs = rs.plan.find((x) => x.nom === "chiffre-jour");
@@ -250,9 +250,9 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   const posts = { entrees: [{ id: "111111111111", type: "post", cree: "2026-10-13T07:00:00Z" }, { id: "222222222222", type: "carousel", cree: "2026-10-13T09:00:00Z" }] };
   assert.ok(plan(fx.instants["carrousel-loi"], { file: posts }).refus["carrousel-loi"].includes("2 posts"));
   // un texte rejeté : « ce qui suit » prudent
-  assert.ok(/ne poursuit en général pas/.test(C.etapeSuivante({ chambre: "an", resultat: "rejete", etape: "première lecture" }).join(" ")));
-  assert.ok(/transmis au Sénat/.test(C.etapeSuivante({ chambre: "an", resultat: "adopte", etape: "première lecture" }).join(" ")));
-  assert.ok(/transmis à l'Assemblée nationale/.test(C.etapeSuivante({ chambre: "senat", resultat: "adopte", etape: "première lecture" }).join(" ")));
+  assert.ok(/n'avance généralement pas/.test(C.etapeSuivante({ chambre: "an", resultat: "rejete", etape: "première lecture" }).join(" ")));
+  assert.ok(/envoyé au Sénat/.test(C.etapeSuivante({ chambre: "an", resultat: "adopte", etape: "première lecture" }).join(" ")));
+  assert.ok(/envoyé à l'Assemblée nationale/.test(C.etapeSuivante({ chambre: "senat", resultat: "adopte", etape: "première lecture" }).join(" ")));
   // vote final à mot prudent : jamais expliqué
   const d = donnees(); d.lois.lois.forEach((l) => { l.titre = l.titre.replace("relative à l'organisation", "relative à l'ancien ministre mis en examen et à l'organisation"); });
   assert.ok(!C.planifier({ now: new Date(fx.instants["carrousel-loi"]), donnees: d, file: vide, registre: vide, etat: C.etatVide(), creneaux: CRENEAUX, config: {} }).plan.some((x) => /mis en examen/.test(x.entree.titre)));
@@ -265,7 +265,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.strictEqual(h.rendu.specs[0].couverture, true);
   assert.strictEqual(h.rendu.specs.at(-1).kicker, "Sources");
   assert.ok(validerCarrousel({ type: "carousel", url_images: h.rendu.specs.map((_, i) => `https://x.test/h${i}.jpg`), legende: h.entree.legende, alts: h.rendu.alts }).ok);
-  assert.ok(/^\d+ images pour retenir/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
+  assert.ok(/^\d+ images pour comprendre/.test(h.entree.legende) && /#SemaineParlementaire/.test(h.entree.legende), "accroche et hashtags du genre");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-10T16:20:00Z"), "pas le samedi");
   assert.ok(!contenu("carrousel-hebdo", "2026-10-11T15:00:00Z"), "pas avant que le résumé (18 h 05) soit écrit");
   const autreSemaine = donnees(); autreSemaine.digest.id = "2026-W40";
