@@ -105,7 +105,7 @@ STORY_PLUS["vote-jour"] = async (ctx, s) => {
   gras(ctx, String(s.type || "Scrutin public").toUpperCase(), marge, y + 30, { poids: 700, taille: 28, couleur: DA.ciel, ls: 4 });
   y += 62;
   const tv = 170;
-  gras(ctx, s.verdict === "adopte" ? "Adopté" : "Rejeté", marge - 4, y + tv * 0.82, { poids: 900, taille: tv, ls: -tv * 0.03 });
+  storyVerdict(ctx, s.verdict, s.verdict === "adopte" ? "Adopté" : "Rejeté", marge, y + tv * 0.82, tv);
   y += tv * 0.82 + 40;
   const yCases = 1180;
   const objet = T(s.objet);

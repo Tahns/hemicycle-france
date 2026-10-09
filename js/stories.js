@@ -14,6 +14,33 @@ const STORY_DA = {
 // directement sur le fond bleu utilise « blanc » et « ciel ».
 const STORY = { L:1080, H:1920, marge:84, fond:STORY_DA.fond, papier:STORY_DA.creme, creme:STORY_DA.creme, blanc:STORY_DA.blanc, ciel:STORY_DA.ciel, rose:STORY_DA.rose, encre:STORY_DA.encre, doux:"#47443D", pale:"#625D53", filet:"#D3CBBA", bleu:STORY_DA.fond, rouge:STORY_DA.rougeVote, vert:STORY_DA.vert, ambre:STORY_DA.ambre, ambreTxt:STORY_DA.ambreTxt, alerte:STORY_DA.rouge, alerteTxt:STORY_DA.rouge, bas:1490, haut:STORY_DA.haut, yBande:338 };
 const COULEURS_2022 = { Arthaud:"#8E1B1B", Roussel:"#A32E22", Macron:"#E0B400", Lassalle:"#A67C0A", "Le Pen":"#5B4FC9", Zemmour:"#2B2B6E", "Mélenchon":"#D6284B", Hidalgo:"#D6488A", Jadot:"#1E9F58", "Pécresse":"#2F6FE0", Poutou:"#B3261E", "Dupont-Aignan":"#4B5AA8" };
+/* ---------- Couleur du verdict « Adopté / Rejeté » ----------
+   Vert et rouge assourdis (jamais fluo), JAMAIS seuls : le mot reste écrit en grand et un ✓ ou un ✕ l'accompagne (daltonisme).
+   Variantes : "mot" (le mot coloré), "bloc" (mot blanc sur un bloc coloré), "barre" (mot blanc, barre colorée à gauche).
+   Même emprise verticale dans les trois cas : de yBase - 0,82 × taille à yBase. Fonds bleus ou sombres. */
+const STORY_VERDICT = { adopte:{ clair:"#6FD79B", fond:"#1E7A4B", glyphe:"✓" }, rejete:{ clair:"#FF8F86", fond:"#B3342B", glyphe:"✕" } };
+let STORY_VERDICT_VARIANTE = "mot";
+function storyVerdict(ctx, verdict, mot, x, yBase, taille, variante = STORY_VERDICT_VARIANTE){
+  const c = STORY_VERDICT[verdict === "adopte" ? "adopte" : "rejete"], ls = -taille * 0.03;
+  ctx.save(); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  const ecrire = (t, px, py, tt, couleur) => { ctx.font = `900 ${tt}px "Public Sans"`; ctx.letterSpacing = `${tt === taille ? ls : 0}px`; ctx.fillStyle = couleur; ctx.fillText(t, px, py); const w = ctx.measureText(t).width; ctx.letterSpacing = "0px"; return w; };
+  ctx.font = `900 ${taille}px "Public Sans"`; ctx.letterSpacing = `${ls}px`; const wMot = ctx.measureText(mot).width; ctx.letterSpacing = "0px";
+  const tg = Math.round(taille * 0.55);
+  if(variante === "bloc"){
+    const pad = 34, w = wMot + 2 * pad + tg * 1.1 + 22;
+    ctx.fillStyle = c.fond; ctx.beginPath(); ctx.roundRect(x - 4, yBase - taille * 0.82 - 10, w, taille * 0.82 + 10 + 30, 26); ctx.fill();
+    ecrire(mot, x - 4 + pad, yBase, taille, "#fff");
+    ecrire(c.glyphe, x - 4 + pad + wMot + 22, yBase - taille * 0.06, tg, "#fff");
+  } else if(variante === "barre"){
+    ctx.fillStyle = c.clair; ctx.beginPath(); ctx.roundRect(x - 4, yBase - taille * 0.82, 16, taille * 0.82 + 8, 8); ctx.fill();
+    ecrire(mot, x + 38, yBase, taille, "#fff");
+    ecrire(c.glyphe, x + 38 + wMot + 24, yBase - taille * 0.06, tg, c.clair);
+  } else {
+    ecrire(mot, x - 4, yBase, taille, c.clair);
+    ecrire(c.glyphe, x - 4 + wMot + 24, yBase - taille * 0.06, tg, c.clair);
+  }
+  ctx.restore();
+}
 const COMPTE_STORY = "@hemicyclefrance"; // les stories n'affichent que le compte Instagram, pas l'adresse du site
 
 // Mots « faibles » : une coupe « … » ne doit jamais s'arrêter sur l'un d'eux (« … le vote de la… »)

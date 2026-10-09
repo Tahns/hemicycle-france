@@ -92,7 +92,7 @@ async function postLoi(ctx, s){
   // résultat officiel, en grand
   const verdict = s.verdict === "adopte" ? "Adopté" : "Rejeté";
   const tv = 150;
-  gras(ctx, verdict, marge - 4, y + tv * 0.82, { poids: 900, taille: tv, ls: -tv * 0.03 });
+  storyVerdict(ctx, s.verdict, verdict, marge, y + tv * 0.82, tv);
   y += tv * 0.82 + 34;
   // texte voté
   const tt = storyTailleFit(ctx, s.titre, y, y + 4 * 70, { tMax: 62, tMin: 40, police: "Newsreader", poids: 600, interligne: 1.08 });
