@@ -820,7 +820,7 @@ STORY_PLUS.groupe = async (ctx, info)=>{
   y += 330;
   y = storyTexte(ctx, eff > 1 ? "députés" : "député", marge, y, { taille:56, poids:600, police:"Newsreader", max:1 }) + 28;
   const total = TOTAL_SIEGES || 577;
-  storyBarre(ctx, marge, y, storyPLarg, 36, [[eff, storyClair(coul)]], total, storyAlpha(STORY.ciel, 0.25));
+  storyBarre(ctx, marge, y, storyPLarg, 36, [[Math.min(eff, total), storyClair(coul)]], total, storyAlpha(STORY.ciel, 0.25));
   const maj = Math.floor(total / 2) + 1, xm = marge + storyPLarg * maj / total;
   ctx.fillStyle = STORY.blanc; ctx.fillRect(xm - 2, y - 12, 4, 60);
   y += 80;
@@ -852,7 +852,12 @@ STORY_PLUS.meeting = async (ctx, info)=>{
   y += 290;
   const mois = String(m.mois).toUpperCase();
   ctx.font = `700 64px "Public Sans"`; ctx.fillStyle = STORY.rose; ctx.letterSpacing = "4px"; ctx.fillText(mois, marge, y + 56); ctx.letterSpacing = "0px";
-  if(m.parti) storyPastille(ctx, m.parti, marge + ctx.measureText(mois).width + 60, y + 6, storyClair(coul), storyLuminance(storyClair(coul)) > 0.45 ? STORY.encre : "#fff", 36);
+  if(m.parti){
+    // pastille du parti : à droite du mois, réduite puis tronquée pour rester dans la marge droite
+    const xp = marge + ctx.measureText(mois).width + 60; let tp = 36; ctx.font = `700 ${tp}px "Public Sans"`;
+    while(ctx.measureText(m.parti).width + tp * 1.2 > L - marge - xp && tp > 20){ tp -= 2; ctx.font = `700 ${tp}px "Public Sans"`; }
+    storyPastille(ctx, storyLignes(ctx, m.parti, L - marge - xp - tp * 1.2, 1)[0], xp, y + 6, storyClair(coul), storyLuminance(storyClair(coul)) > 0.45 ? STORY.encre : "#fff", tp);
+  }
   y += 130;
   y = storyTexte(ctx, m.titre, marge, y, { taille:68, poids:600, police:"Newsreader", max:4, interligne:1.08 }) + 14;
   const ou = [m.heure && m.heure !== "—" ? m.heure : "", m.lieu].filter(Boolean).join(" · ");
@@ -1361,7 +1366,7 @@ async function dessinerStory(type, info){
     ctx.fillStyle = coulG; ctx.beginPath(); ctx.rect(marge + 24, y + 40, 8, hh - 80); ctx.fill();
     ctx.font = `700 22px "Public Sans"`; ctx.letterSpacing = "2px"; ctx.fillStyle = storyLisible(coulG);
     ctx.fillText(r.t2 ? "EN TÊTE AU 2D TOUR" : "EN TÊTE AU 1ER TOUR", marge + 44, y + 56); ctx.letterSpacing = "0px";
-    ctx.font = `600 46px "Newsreader"`; ctx.fillStyle = STORY.encre; ctx.fillText(storyLignes(ctx, gagnant, largeur - 44 - 24, 1)[0], marge + 44, y + 108);
+    storyPLigneSure(ctx, gagnant, marge + 44, y + 108, { taille:46, poids:600, couleur:STORY.encre, largeur:largeur - 44 - 24, mini:30 });
     storyChiffreHeros(ctx, pct(vg), marge + 44, y + 224, storyLisible(coulG), 130);
     y += hh + 24;
     const nbL = tours.reduce((a, t)=>a + t[2], 0), entetes = tours.length * 54;

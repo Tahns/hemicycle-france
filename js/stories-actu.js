@@ -59,7 +59,13 @@ function titreFit(ctx, d, largeur, hMax, tMax, tMin){
   };
   let r;
   for(let t = tMax; t >= tMin; t -= 2){ r = essai(t); if(r.ok && r.h <= hMax) return r; }
-  return r || essai(tMin);
+  r = essai(tMin);
+  if(d.propre && r.h > hMax){ // titre trop long même à la taille minimale : coupé proprement (« … ») plutôt que de déborder
+    ctx.font = `700 ${tMin}px "Newsreader"`;
+    const n = Math.max(1, Math.floor((hMax - tMin) / (tMin * 1.04)) + 1);
+    r.ls = storyLignes(ctx, d.texte, largeur, n); r.h = (r.ls.length - 1) * tMin * 1.04 + tMin; r.ok = r.ls.every(l=> ctx.measureText(l).width <= largeur);
+  }
+  return r;
 }
 const couleurTitre = r => i => (!r.propre && i === r.ls.length - 1) ? ROSE : "#fff";
 function droite(ctx, texte, yMilieu, { taille = 26, poids = 700, couleur = CIEL, espace = "0px" } = {}){
@@ -183,7 +189,7 @@ function dessinePastilles(ctx, bloc, x, y){
 /* ----- Modèle A : « À la une » ----- */
 async function dessineStyle(ctx, s, style){ // styles du test comparatif (une-photo, question, chiffre) : voir storyStyleDessiner dans js/stories.js
   const d = await storySpecSujet(s);
-  if(!d || !storyStyleDessiner(ctx, style, d)) return null;
+  if(!d || !storyStyleDessiner(ctx, style, { ...d, contexte:storyMots(d.contexte || d.accroche, 14) })) return null; // 14 mots au plus dans le bloc du bas : il ne doit pas toucher la ligne vidéo
   return { nom:`actualite-${slugDep(d.accroche).slice(0, 40)}` };
 }
 async function dessineUne(ctx, s, style){
@@ -331,13 +337,16 @@ async function dessineDirect(ctx, s){
   let plan = null;
   const dispo = Y_BAS - 438;
   const options = [[42, 3], [40, 3], [38, 3], [36, 3], [34, 3], [32, 2], [30, 2], [28, 2], [26, 2]];
-  for(const [tq, mq] of options){
-    ctx.font = `700 ${tq}px "Public Sans"`;
-    const bl = cites.map(c=>{ const ls = citation(ctx, c.titre, larg - 36, mq); return { ...c, ls, h: 26 + (ls.length - 1) * tq * 1.24 + tq + 10 + 28 + 26 }; });
-    const hc = bl.reduce((a, b)=> a + b.h, 0);
-    const f = titreFit(ctx, dT, larg, dispo - hc - 50, 112, 52);
-    plan = { bl, f, tq };
-    if(f.h + 50 + hc <= dispo && f.t >= 96) break;
+  for(let nb = cites.length; nb >= 1; nb--){ // titre très long : moins de citations plutôt qu'un titre minuscule ou des blocs qui se touchent
+    for(const [tq, mq] of options){
+      ctx.font = `700 ${tq}px "Public Sans"`;
+      const bl = cites.slice(0, nb).map(c=>{ const ls = citation(ctx, c.titre, larg - 36, mq); return { ...c, ls, h: 26 + (ls.length - 1) * tq * 1.24 + tq + 10 + 28 + 26 }; });
+      const hc = bl.reduce((a, b)=> a + b.h, 0);
+      const f = titreFit(ctx, dT, larg, dispo - hc - 50, 112, 52);
+      plan = { bl, f, tq };
+      if(f.h + 50 + hc <= dispo && f.t >= 96) break;
+    }
+    if(plan.f.h + 50 + plan.bl.reduce((a, b)=> a + b.h, 0) <= dispo && plan.f.t >= 64) break;
   }
   let y = 438;
   ctx.font = `700 ${plan.f.t}px "Newsreader"`;
