@@ -109,9 +109,11 @@ const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
 const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
-const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
+const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
+/** Titre-fait du sujet (gros titre d'affichage : ce qui s'est passé, en 6 à 12 mots) : le champ `fait` du relevé, sinon calculé à partir des titres de presse ; null = aucun fait clair, le sujet n'est pas publié. Jamais une clé anti-doublon (le titre propre reste la clé). */
+const faitDe = (s) => (typeof s?.fait === "string" && s.fait.trim() ? s.fait.trim() : titreFait(s));
 
 // Rubriques génériques : un titre rédigé « Énergie » ou « Économie » ne dit rien (pas de story)
 const RUBRIQUES_GENERIQUES = new Set(["energie", "economie", "social", "politique", "societe", "international", "monde", "france", "budget", "justice", "culture", "sante", "education", "ecologie", "environnement", "securite", "sport", "europe", "gouvernement", "vie politique", "elections", "election", "senat", "assemblee"]);
@@ -451,6 +453,8 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
       if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
       if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
     }
+    const fait = faitDe(s);
+    if (!fait && !repli && !parole) return rej("sans fait clair"); // le gros titre doit dire le fait en une phrase ; sinon rien (un sujet sensible garde son titre de repli : titre de presse cité et attribué)
     const titreRef = repli ? titre : s.titrePropre.titre; // doublons : le titre de presse quand la story n'a pas de titre propre
     if (articlesDejaPublies(s.articles, recs72)) return rej("déjà publié (article)"); // l'id repose sur le premier titre, qui change : on compare aussi les liens et titres d'articles déjà publiés
     if (dejaVu(titreRef, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
@@ -459,7 +463,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
       if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
     } else if (storiesPleines) return;
-    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele, repli });
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele, repli, fait });
   });
   if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : `aucun sujet ne remplit toutes les règles (${(actualites?.sujets || []).length} sujets examinés${Object.keys(rejets).length ? " ; écartés : " + Object.entries(rejets).map(([k, n]) => `${n} ${k}`).join(", ") : ""})` };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
@@ -550,6 +554,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date() }) 
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
     if (!s.titrePropre?.titre || motExclu(s.titrePropre.titre) || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true || dejaVu(s.titrePropre.titre, recents) || articlesDejaPublies(s.articles, recs72)) return;
+    if (!faitDe(s)) return; // sans fait clair, pas dans « en bref » non plus
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
@@ -563,7 +568,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date() }) 
   if (pris.length < BREF_MIN) return { refus: `« en bref » : seulement ${pris.length} sujet(s) fort(s)` };
   const medias = mediasDistinctsDe(pris.flatMap((r) => r.s.articles));
   return {
-    bref: { indices: pris.map((r) => r.indice), titres: pris.map((r) => r.s.articles[0].titre), titresPropres: pris.map((r) => r.s.titrePropre.titre) },
+    bref: { indices: pris.map((r) => r.indice), titres: pris.map((r) => r.s.articles[0].titre), titresPropres: pris.map((r) => r.s.titrePropre.titre), faits: pris.map((r) => faitDe(r.s)) },
     id: idBref(jour), medias,
     // un lien par sujet d'abord (pour qu'aucun de ces sujets ne soit repris seul), puis les autres, 12 au plus
     sources: [...new Set([...pris.map((r) => r.s.articles[0].url), ...pris.flatMap((r) => r.s.articles.map((a) => a.url))].filter((u) => /^https:\/\//.test(u || "")))].slice(0, 12),
@@ -754,11 +759,17 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
       }
       if (bref) { // « en bref » : les sujets choisis doivent être les mêmes sur le site
         if (!bref.indices.every((i, k) => ACTUALITES.sujets[i]?.articles?.[0]?.titre === bref.titres[k])) return null;
+        (bref.faits || []).forEach((f, k) => { if (f) { const sj = ACTUALITES.sujets[bref.indices[k]]; sj.titrePropre = { ...(sj.titrePropre || {}), titre: f }; } }); // chaque ligne dit le fait
         const r = await dessinerStory("actualites", "bref:" + bref.indices.join(","));
         return r ? r.apercu : null;
       }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
-      if (extras?.accroche) ACTUALITES.sujets[indice].accroche = extras.accroche; // accroche de l'entrée (titres-propres.accroche), lue par les styles du test comparatif (js/stories.js : storySpecSujet)
+      if (extras?.accroche) { // titre-fait : affiché en gros par tous les styles (le titre propre de l'entrée, lui, ne change pas : il reste la clé anti-doublon)
+        const sj = ACTUALITES.sujets[indice];
+        sj.accroche = extras.accroche;
+        sj.titrePropre = { ...(sj.titrePropre || {}), titre: extras.accroche };
+      }
+      // accroche de l'entrée (titres-propres.accroche), lue par les styles du test comparatif (js/stories.js : storySpecSujet)
       const r = await dessinerStory("actualite", `${indice}:${modele || "une"}${variante ? ":" + variante : ""}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date » ; puis le style (variante)
       return r ? r.apercu : null;
     }, { indice, titre, sondage: sondage ? { nom: sondage.nom, dateFin: sondage.dateFin } : null, dossier, propre, modele, bref, synth, variante: variante && variante !== "bleu" ? variante : null, extras });
@@ -1316,10 +1327,10 @@ function varianteChoix(choix, d) {
 }
 /** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
 function argsAvecVariante(args, variante, accroche = null) {
-  if (!variante || variante === "bleu") return args;
+  if ((!variante || variante === "bleu") && !accroche) return args;
   const a = [...args];
   while (a.length < 8) a.push(null);
-  a[8] = variante;
+  a[8] = variante && variante !== "bleu" ? variante : null;
   if (accroche) a[9] = { accroche }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
   return a;
 }
@@ -1375,8 +1386,11 @@ function decrireRappelAgenda(choix, now) {
     champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir. ${affichage.replace(/[.\s]+$/, "")}. C'est dans ${n} jours, le ${s.date.jour} ${s.date.mois}. Date indiquée par ${s.articles[0].media}.` },
   };
 }
-/** Accroche d'affichage d'un sujet de presse (titres-propres.accroche) ; null si elle n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
-function accrocheDe(sujet) {
+/** Accroche d'affichage d'un sujet de presse : le titre-fait (ce qui s'est passé) ; à défaut, titres-propres.accroche pour un sujet normal (pas pour un titre de repli) ; null s'il n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
+function accrocheDe(sujet, repli = false) {
+  const fait = faitDe(sujet);
+  if (fait) return fait;
+  if (repli) return null;
   try { const a = require("./titres-propres.cjs").accroche(sujet); return a && a !== sujet?.titrePropre?.titre ? a : null; } catch (e) { return null; }
 }
 function decrireBase(choix, now = new Date()) {
@@ -1402,7 +1416,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(!choix.repli && accrocheDe(choix.sujet) ? { accroche: accrocheDe(choix.sujet) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

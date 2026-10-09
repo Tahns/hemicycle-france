@@ -372,8 +372,10 @@ function titreSujetBrut(sujet, dossiers = [], donnees = {}) {
 /** Tous les champs « média » d'un sujet, prêts à écrire (seulement ceux qui existent). Marque aussi les vidéos. */
 function enrichirSujet(sujet, dossiers, donnees, maintenant = new Date()) {
   for (const a of sujet.articles || []) if (estVideo(a.url)) a.video = true; else delete a.video;
-  for (const k of ["titrePropre", "contexte", "chiffre", "date"]) delete sujet[k];
+  for (const k of ["titrePropre", "fait", "accroche", "contexte", "chiffre", "date"]) delete sujet[k];
   const tp = titreSujet(sujet, dossiers, donnees); if (tp) sujet.titrePropre = tp;
+  // Titre-fait : champ d'AFFICHAGE (gros titre des stories, lu par js/stories.js sous le nom « accroche ») ; titrePropre.titre reste la clé anti-doublon
+  const fait = titreFait(sujet); if (fait) { sujet.fait = fait; sujet.accroche = fait; }
   const c = contexteSujet(sujet, donnees, maintenant); if (c.length) sujet.contexte = c;
   const ch = chiffreSujet(sujet); if (ch) sujet.chiffre = ch;
   const da = dateSujet(sujet, maintenant); if (da) sujet.date = da;
@@ -603,7 +605,7 @@ const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 12;
 /** Formules creuses : elles annoncent un sujet sans dire le fait. */
 const FORMULES_CREUSES = /actualite (?:sur|de|du|des|autour)|ce qu'il faut (?:savoir|retenir)|ce qu'on (?:sait|retient)|ce que l'on (?:sait|retient)|l'essentiel|ce que (?:disent|dit|pensent)|tout (?:savoir|comprendre)|on vous (?:explique|dit)|\bvoici\b|\bvoila\b|decryptage|en ce moment|a la une|en direct|\bles reactions\b|ce qui change|ce qu'il faut|ce que l'on|\bles coulisses\b|\bretour sur\b|\bfocus sur\b|\bzoom sur\b|\bdossier\b/;
 /** Verbes d'opinion et mots de mise en scène : le fait n'est pas dit, une humeur l'est. */
-const OPINION_FAIT = /\b(?:balaie\w*|fustige\w*|tacle\w*|etrille\w*|flingue\w*|tance\w*|s'indigne\w*|s'insurge\w*|regrette\w*|deplore\w*|salue\w*|se felicite\w*|craint\w*|redoute\w*|estime\w*|pense\w*|considere\w*|critique\w*|denonce\w*|dezingue\w*|cingle\w*|torpille\w*|sermonne\w*|recadre\w*|rabroue\w*|attaque\w*|s'en prend\w*|accable\w*|ridiculise\w*|enfonce\w*|s'enflamme\w*|monte au creneau|crie\w*|choc|chocant\w*|coup de tonnerre|bombe|incroyable\w*|inacceptable\w*|scandaleu\w*|honteu\w*|catastroph\w*|spectaculaire\w*|fiasco|bataille|guerre|clash\w*|tempete|ouragan|sidere\w*|hallucinant\w*|inquiet\w*|alarmant\w*|choquant\w*|polemi\w*|buzz)\b/;
+const OPINION_FAIT = /\b(?:balaie\w*|fustige\w*|tacle\w*|etrille\w*|flingue\w*|tance\w*|s'indigne\w*|s'insurge\w*|regrette\w*|deplore\w*|salue\w*|se felicite\w*|craint\w*|redoute\w*|estime\w*|pense\w*|considere\w*|critique\w*|denonce\w*|dezingue\w*|cingle\w*|torpille\w*|sermonne\w*|recadre\w*|rabroue\w*|attaque\w*|s'en prend\w*|accable\w*|ridiculise\w*|enfonce\w*|s'enflamme\w*|monte au creneau|crie\w*|choc|chocant\w*|coup de tonnerre|bombe|incroyable\w*|inacceptable\w*|scandaleu\w*|honteu\w*|catastroph\w*|spectaculaire\w*|fiasco|bataille|guerre|clash\w*|tempete|ouragan|sidere\w*|hallucinant\w*|inquiet\w*|alarmant\w*|choquant\w*|polemi\w*|buzz|piege\w*|stratege\w*|humili\w*|deroute|cuisant\w*|triomph\w*|naufrage|debacle|plebiscit\w*|flou)\b/;
 const DEBUT_INTERDIT = /^(?:et|mais|ou|ni|car|donc|or|puis|alors|pourquoi|comment|quand|qu'est|quel(?:le)?s?\s+(?:est|sont))\b/;
 const FIN_COUPEE = /\b(?:de|du|des|d|la|le|les|l|un|une|et|ou|en|au|aux|a|pour|par|sur|dans|avec|sans|que|qui|dont|ce|cette|ces|son|sa|ses|leur|leurs|mais|si|s|ne|pas|plus|apres|avant|vers|chez|selon|est|sont|sera|ont|a)$/;
 const NOMS_EN_E = new Set(["sante", "societe", "securite", "majorite", "minorite", "universite", "communaute", "egalite", "liberte", "qualite", "quantite", "unite", "cite", "ete", "difficulte", "fraternite", "priorite", "autorite", "activite", "realite", "identite", "laicite", "facilite", "opportunite", "fonction", "feminite", "pauvrete", "propriete", "etablissement", "annee", "journee", "soiree", "idee", "armee", "arrivee", "denree", "duree", "entree", "gelee", "pensee", "lycee", "musee", "comite", "parti", "ami", "mi", "midi", "pays", "avis", "fois", "bruit", "projet", "budget", "debut", "benefice"]);
@@ -699,7 +701,7 @@ function aUnVerbe(t) {
   return w.some(({ o, i, x }) => {
     const nu = x.replace(/^[ldjmtsc]'/, "");
     if (o === "à") return false;
-    if (VERBES_COURANTS.test(nu) && !/(?:tion|tions|ment|ments|eur|eurs|isme|ismes|ture|tures|ance|ances|ence|ences|ite|ites)$/.test(nu)) return true;
+    if (VERBES_COURANTS.test(nu) && !NOMS_EN_E.has(nu) && !/(?:tion|tions|ment|ments|eur|eurs|isme|ismes|ture|tures|ance|ances|ence|ences|ite|ites)$/.test(nu)) return true;
     if (/-(?:ils?|elles?|on|t-il|t-elle)$/.test(x)) return true; // inversion : « sont-ils prêts »
     if (i === 0) return false;
     if (/^\w{3,}(?:era|eront|erait|eraient|ira|iront|iraient|ront)$/.test(nu) && nu.length >= 6) return true;
@@ -718,7 +720,8 @@ function defautsFait(t, { personnes = [], judiciaire = false } = {}) {
   if (n < FAIT_MIN_MOTS) d.push("trop court");
   if (n > FAIT_MAX_MOTS) d.push("trop long");
   if (/…|\.{2,}/.test(t)) d.push("tronqué");
-  if (/[!]/.test(t)) d.push("exclamation");
+  if (/[!]/.test(t) || /\?\s*\S/.test(t)) d.push("exclamation ou plusieurs phrases");
+  if (/^(?:avec|malgre|apres|avant|face a|pour|sans|sous|devant|en)\b[^,]{0,60},/.test(p)) d.push("ouverture subordonnée");
   if (FORMULES_CREUSES.test(p)) d.push("formule creuse");
   if (OPINION_FAIT.test(p)) d.push("verbe d'opinion ou emphase");
   if (DEBUT_INTERDIT.test(p) || /^pourquoi\b/.test(p)) d.push("début interdit");
@@ -828,6 +831,8 @@ const ENJEU_ACTION = {
  */
 function accroche(sujet, donnees = {}) {
   const articles = sujet?.articles || [];
+  const fait = titreFait(sujet); // ce qui s'est passé, en une phrase (voir titreFait) ; sinon l'accroche par thème ci-dessous
+  if (fait) return fait;
   const brut = sujet?.titrePropre?.titre || titreParRegles(sujet, donnees)?.titre || null;
   const repli = brut ? simplifierJargon(brut) : null;
   if (!articles.length) return repli;
