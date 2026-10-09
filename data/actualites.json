@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-09T20:52:47.357Z",
+ "lastUpdated": "2026-10-09T20:55:31.459Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -484,15 +484,23 @@
    }
   },
   {
-   "medias": 4,
-   "mediasDistincts": 2,
+   "medias": 5,
+   "mediasDistincts": 3,
    "sources": [
+    "BFMTV",
     "EBRA",
     "Sud Ouest"
    ],
-   "derniere": "2026-10-09T19:15:00.000Z",
+   "derniere": "2026-10-09T20:50:54.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "David Amiel",
+      "photo": "photos/personnalites/david-amiel.jpg",
+      "photoHd": "photos/personnalites/hd/david-amiel.jpg",
+      "credit": "B.MODIFICATEUR, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
     "partis": [],
     "theme": "gouvernement",
     "vignette": "gouvernement"
@@ -503,6 +511,13 @@
      "url": "https://www.leprogres.fr/politique/2026/10/09/violences-sexuelles-la-loi-integrale-couterait-3-a-4-milliards-d-euros-de-plus-par-an",
      "media": "Le Progrès",
      "date": "2026-10-09T19:15:00.000Z"
+    },
+    {
+     "titre": "Violences sexuelles: la loi intégrale coûtera \"entre 3 et 4 milliards d'euros\", selon le ministre David Amiel",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-violences-sexuelles-la-loi-integrale-coutera-entre-3-et-4-milliards-d-euros-selon-le-ministre-david-amiel_VN-202610090891.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T20:50:54.000Z",
+     "video": true
     },
     {
      "titre": "Politique. Violences sexuelles : la loi intégrale coûterait trois à quatre milliards d’euros de plus par an",
@@ -524,16 +539,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Violences sexuelles : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Milliards d euros",
+    "origine": "recoupement"
    },
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 9 octobre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
+   "chiffre": {
+    "valeur": "4",
+    "unite": "milliards d'euros"
+   }
   },
   {
    "medias": 4,
@@ -1482,6 +1494,49 @@
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance",
      "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T20:50:26.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sandrine Josso",
+      "photo": "photos/deputes/PA720038.jpg",
+      "parti": "DEM",
+      "lien": "#depute-PA720038",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "\"À deux reprises, je dois exposer mon histoire\": le combat de la députée Sandrine Josso pour obtenir la protection fonctionnelle",
+     "url": "https://www.bfmtv.com/politique/parlement/video-a-deux-reprises-je-dois-exposer-mon-histoire-le-combat-de-la-deputee-sandrine-josso-pour-obtenir-la-protection-fonctionnelle_VN-202610090892.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T20:50:26.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sandrine Josso (Mouvement démocrate) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sandrine Josso : députée DEM (Loire-Atlantique)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -4054,12 +4109,11 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "François Hollande",
-      "photo": "photos/deputes/PA1654.jpg",
-      "photoHd": "photos/deputes/hd/PA1654.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA1654",
-      "credit": "Assemblée nationale"
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -4068,24 +4122,59 @@
    },
    "articles": [
     {
-     "titre": "François Hollande",
-     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
+     "titre": "Edouard Philippe",
+     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "François Hollande : député SOC (Corrèze)",
-     "source": "Assemblée nationale (open data)"
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-09T13:44:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Ségolène Royal",
+      "photo": "photos/personnalites/segolene-royal.jpg",
+      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
+      "parti": "PS",
+      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Ségolène Royal",
+     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
+     "media": "BFMTV",
+     "date": "2026-10-09T13:44:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ségolène Royal (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -4183,11 +4272,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -4196,59 +4286,24 @@
    },
    "articles": [
     {
-     "titre": "Edouard Philippe",
-     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
+     "titre": "François Hollande",
+     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
      "media": "BFMTV",
      "date": "2026-10-09T13:44:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ségolène Royal",
-     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ségolène Royal (Parti socialiste) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -4281,75 +4336,6 @@
    ],
    "titrePropre": {
     "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Xavier Bertrand",
-      "photo": "photos/personnalites/xavier-bertrand.jpg",
-      "photoHd": "photos/personnalites/hd/xavier-bertrand.jpg",
-      "parti": "LR",
-      "credit": "Claudio Centonze / European Union, 2025 / EC - Audiovisual Service, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Xavier Bertrand",
-     "url": "https://www.bfmtv.com/politique/xavier-bertrand_DN-202106280528.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Xavier Bertrand (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-09T13:44:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
-     "media": "BFMTV",
-     "date": "2026-10-09T13:44:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -4414,6 +4400,52 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-09T13:17:40.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : S’il est élu, Edouard Philippe n’habitera pas à l’Elysée avec sa famille",
+     "url": "https://www.20minutes.fr/politique/4252883-20261009-presidentielle-2027-elu-edouard-philippe-habitera-elysee-famille?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-09T13:17:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   }
  ]
 }
