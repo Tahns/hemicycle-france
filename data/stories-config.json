@@ -3,8 +3,12 @@
   "validationHumaine": false,
   "sensibles": false,
   "minMedias": 2,
+  "_commentaire_minMedias": "Seuil UNIQUE de médias distincts pour un sujet de presse (et pour « en bref ») : le code lit cette valeur, aucune constante ne diverge (scripts/stories-auto.cjs, test tests/stories-auto.test.mjs). Entre 2 et 10.",
+  "minMediasPersonneNommee": 3,
+  "_commentaire_minMediasPersonneNommee": "Accusation, plainte, procédure ou polémique visant une PERSONNE NOMMÉE (présomption d'innocence) : publiée seulement si au moins ce nombre de médias DISTINCTS la reprennent (jamais moins de 3, même si on écrit 2 ici), et JAMAIS avec le portrait de la personne. Sinon refus, avec la raison dans le journal de l'exécution (résumé GitHub Actions). Valeur entre 3 et 10.",
   "dossierMedias": 3,
-  "maxParJour": 20,
+  "maxParJour": 8,
+  "_commentaire_maxParJour": "Stories de presse par jour (hors posts, annonces de post et contenus à créneau). 8 depuis la décision du propriétaire du 2026-10-10 ; ancienne valeur : 20. Pour revenir en arrière, remettre 20 ici (clé lue par stories-auto.cjs, publier-stories.cjs et check-data.js).",
   "fraicheurH": 72,
   "enBref": false,
   "videos": true,
@@ -14,9 +18,11 @@
   "creneaux": {
     "aujourdhui": { "heure": "08:30" },
     "vote-jour": { "heure": "12:30" },
+    "vote-jour-post": { "heure": "13:30" },
     "comprendre": { "heure": "10:00", "jours": [6] },
     "carrousel-loi": { "heure": "17:30" },
     "carrousel-hebdo": { "heure": "18:30", "jours": [7] },
-    "chiffre-jour": { "heure": "19:00" }
+    "chiffre-jour": { "heure": "19:00" },
+    "vote-loi": { "heure": "20:00" }
   }
 }

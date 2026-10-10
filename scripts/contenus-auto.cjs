@@ -10,6 +10,10 @@
  *  - aujourdhui       story  « Aujourd'hui à l'Assemblée » : ordre du jour de la séance du jour (data/agenda-an.json : textes, votes solennels, QAG), chaque jour de séance, vers 8 h 30 ;
  *  - vote-jour        story  « Le vote du jour » : le scrutin public le plus important de la veille (data/lois.json : motion de censure, article, amendement du Gouvernement),
  *                            résultat officiel et voix ; JAMAIS un vote final de loi (ils restent des POSTS, stories-auto.cjs), vers 12 h 30 ;
+ *  - vote-jour-post   POST   « Le vote du jour par groupe » (1080 × 1350, modèle « vote-groupes » du site) : le MÊME scrutin que la story « vote du jour », publié aussi en post, vers 13 h 30 ;
+ *                            un seul post par scrutin (mémoire des faits, file, registre), jamais de Reel, compte dans les 2 posts par jour ;
+ *  - vote-loi         story  « Le vote final par groupe » : le vote final d'un texte de loi (projet ou proposition, jamais un amendement) de l'Assemblée déjà publié en post (stories-auto.cjs)
+ *                            ou en carrousel (carrousel-loi), avec la position de chaque groupe ; l'auteur du texte n'est affiché que pour un texte déposé par un seul député, vers 20 h ;
  *  - comprendre       story  « Comprendre » : une notion de la rubrique Comprendre d'index.html (10 notions), une par semaine, en rotation sans répétition avant épuisement ;
  *  - chiffre-jour     story  « Le chiffre du jour » : une donnée officielle (data/indicateurs.json, data/budget.json) ou le dernier sondage HORS réserve électorale,
  *                            avec sa source et sa date ; pas plus d'une fois par semaine pour une même donnée, vers 19 h ;
@@ -123,19 +127,25 @@ const TYPES = {
   "vote-jour": { avance: 120, validite: 300, story: true },
   comprendre: { avance: 120, validite: 600, story: true },
   "chiffre-jour": { avance: 120, validite: 180, story: true },
+  "vote-jour-post": { avance: 120, validite: 360, story: false }, // POST : compte dans les 2 posts par jour
+  "vote-loi": { avance: 120, validite: 180, story: true },
   "carrousel-loi": { avance: 120, validite: 360, story: false },
   "carrousel-hebdo": { avance: 20, validite: 300, story: false }, // le résumé hebdomadaire est écrit le dimanche à 18 h 05 : on attend qu'il existe
 };
-const SUJET_UNIQUE_24H = new Set(["aujourdhui", "vote-jour"]); // contenus qui portent un texte de loi : jamais le même texte deux fois en 24 h, tous formats confondus
+const SUJET_UNIQUE_24H = new Set(["aujourdhui", "vote-jour", "vote-jour-post"]);
+/** La story « vote du jour » et son post sont deux formats du MÊME scrutin voulus ensemble : ils ne se comptent pas comme doublons l'un de l'autre. */
+const FORMATS_JUMEAUX = { "vote-jour": "vote-jour-post", "vote-jour-post": "vote-jour" }; // contenus qui portent un texte de loi : jamais le même texte deux fois en 24 h, tous formats confondus
 const PERIODE_SEMAINE = new Set(["comprendre", "carrousel-hebdo"]); // les autres types : une fois par jour
 /** Créneaux par défaut (heure de Paris ; jours : 1 = lundi … 7 = dimanche, absent = tous les jours). */
 const CRENEAUX_DEFAUT = {
   aujourdhui: { heure: "08:30" },
   "vote-jour": { heure: "12:30" },
+  "vote-jour-post": { heure: "13:30" },
   comprendre: { heure: "10:00", jours: [6] },
   "chiffre-jour": { heure: "19:00" },
   "carrousel-loi": { heure: "17:30" },
   "carrousel-hebdo": { heure: "18:30", jours: [7] },
+  "vote-loi": { heure: "20:00" },
 };
 
 /** « 08:30 » -> minutes ; valeur invalide : null. */
@@ -311,6 +321,7 @@ function choisirVoteDuJour({ lois, jour, now }) {
     const verbe = l.resultat === "adopte" ? "adopté" : "rejeté";
     const url = `https://www.assemblee-nationale.fr/dyn/17/scrutins/${l.numero}`;
     return { contenu: {
+      _vote: { l, t, objet, objetOfficiel, typeCourt, verbe, url, censure: cl.type === "Motion de censure" },
       type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, votes: l.votes, censure: cl.type === "Motion de censure", sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
       entree: { titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
         alt: `Story Hémicycle France, le vote du jour. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Vote n°${l.numero}. ${objet}` },
@@ -568,6 +579,95 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
   return { refus: refusLoi };
 }
 
+// ----- Vote par groupe : post du vote du jour, story du vote final d'une loi --------------------------------------------------------
+// Les deux utilisent le modèle « vote-groupes » du site (js/stories-hemicycle.js, STORY_PLUS["vote-groupes"]) : un hémicycle dont chaque groupe est teinté selon sa position majoritaire.
+const GROUPES_AN = new Set(["LFI", "GDR", "ECO", "SOC", "LIOT", "EPR", "DEM", "HOR", "LR", "UDR", "RN", "NI"]);
+const RE_AUTEUR_DEPUTE = new RegExp(`^[^()]{3,60}\\s\\((?:${[...GROUPES_AN].join("|")})\\)$`);
+/**
+ * Auteur affiché sous « Qui a proposé ce texte ? » : seulement pour un texte DÉPOSÉ (vote final sur un projet ou une proposition de loi), par UN seul député
+ * (« Prénom Nom (RN) »). Jamais pour un amendement, un article ou une motion ; jamais « et N autres », ni le Gouvernement, ni un sénateur.
+ */
+function auteurTexteDepose(l) {
+  if (!RE_VOTE_FINAL.test(plat(l?.titre))) return null;
+  const a = plat(l.auteur);
+  return RE_AUTEUR_DEPUTE.test(a) ? a : null;
+}
+/** Position majoritaire d'un groupe (mêmes règles que le dessin) : pour, contre, abstention, partagé, ou null. */
+function positionGroupe(v, censure) {
+  const [pour, contre, abst, membres] = [0, 1, 2, 3].map((i) => (Array.isArray(v) ? v[i] : [v?.pour, v?.contre, v?.abst, v?.membres][i]) || 0);
+  if (censure) return membres ? (pour * 2 > membres ? "pour" : "contre") : null;
+  const exprimes = pour + contre + abst;
+  if (!exprimes) return null;
+  const [[nom, n]] = [["pour", pour], ["contre", contre], ["abstention", abst]].sort((a, b) => b[1] - a[1]);
+  return n * 2 > exprimes ? nom : "partagé";
+}
+/** Texte alternatif : la position de chaque groupe (le dessin la montre par couleur ET par repère ✓ ✕ ○). */
+const alternatifGroupes = (votes, censure) => Object.entries(votes || {}).filter(([g]) => GROUPES_AN.has(g)).map(([g, v]) => ({ g, pos: positionGroupe(v, censure) })).filter((x) => x.pos).map((x) => `${x.g} : ${x.pos}`).join(" ; ");
+
+/** 2 bis. « Le vote du jour » en POST : le même scrutin que la story (choisirVoteDuJour), avec la position de chaque groupe ; un seul post par scrutin. */
+function choisirVoteDuJourPost({ lois, jour, now }) {
+  const r = choisirVoteDuJour({ lois, jour, now });
+  if (r.refus) return r;
+  const k = r.contenu, { l, t, objet, typeCourt, verbe, url, censure } = k._vote, sp = k.rendu.spec;
+  if (!l.votes || typeof l.votes !== "object" || !Object.keys(l.votes).some((g) => GROUPES_AN.has(g))) return { refus: "scrutin sans détail par groupe" };
+  if (reserveStory(now) && [sp.objet, sp.dossier, k.entree.titre].some(SA.parleDeSondage)) return { refus: "réserve électorale : texte qui parle de sondages" };
+  const hashtags = hashtagsLegende({ genre: "autre", chambre: "an", theme: "assemblee", titre: sp.dossier || sp.objet, max: 5 });
+  const legende = [
+    `Le vote du jour à l'Assemblée nationale : ${typeCourt}, ${verbe} (${l.date})`,
+    "",
+    objet,
+    ...(sp.dossier ? [`Texte concerné : ${sp.dossier}.`] : []),
+    `Résultat : ${verbe}. Pour : ${nbFr(t.pour)} · Contre : ${nbFr(t.contre)} · Abstentions (ni pour ni contre) : ${nbFr(t.abst)}.`,
+    "L'image montre la position majoritaire de chaque groupe politique sur ce vote.",
+    "",
+    `Source officielle : Assemblée nationale, vote n°${l.numero} — ${url}`,
+    "",
+    `Pour suivre l'actualité politique, expliquée simplement : ${COMPTE}`,
+    hashtags.join(" "),
+  ].join("\n");
+  const positions = alternatifGroupes(l.votes, censure);
+  return { contenu: {
+    type: "vote-jour-post", cle: String(l.numero),
+    rendu: { kind: "post", type: "vote-groupes", spec: { format: "post", titre: sp.dossier || sp.objet, date: l.date, numero: l.numero, verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, votes: l.votes, censure, sourceTxt: sp.sourceTxt } },
+    entree: { ...k.entree, legende, alt: `Post Hémicycle France, le vote du jour par groupe. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Position majoritaire de chaque groupe : ${positions}. Vote n°${l.numero}.` },
+  } };
+}
+
+/** Le vote final `v` a-t-il DÉJÀ été publié (registre : statut « publiee ») en post (stories-auto.cjs) ou en carrousel (carrousel-loi) ? Renvoie le format, ou null. */
+function formatPublieDe(v, registre) {
+  const postId = idPostLoi(v.voteId), carrouselId = idContenu("carrousel-loi", v.voteId);
+  const e = (registre?.entrees || []).find((x) => x && x.statut === "publiee" && (x.id === postId || x.id === carrouselId));
+  return e ? (e.id === postId ? "post" : "carrousel") : null;
+}
+
+/**
+ * 5c. Story « vote final par groupe » : le vote final (projet ou proposition de loi, jamais un amendement) de l'Assemblée nationale déjà publié en post ou en carrousel,
+ * avec la position de chaque groupe. Elle complète cette publication (jamais seule : elle n'empêche ni le post ni le carrousel) ; une seule fois par vote ; Assemblée nationale
+ * seulement (le détail par groupe du Sénat n'a pas les mêmes groupes). L'auteur n'est affiché que pour un texte déposé par un seul député.
+ */
+function choisirVoteLoi({ lois, etat, jour, now, registre }) {
+  if (!donneesFraiches(lois?.lastUpdated, FRAICHEUR_DONNEES_J.lois, now)) return { refus: "data/lois.json absent ou trop ancien" };
+  let refusLoi = "aucun vote final récent de l'Assemblée";
+  for (const v of votesFinaux({ lois, senat: null, jour })) {
+    const l = v.l, f = v.f, sp = f.spec;
+    if (etat.faits[`vote-loi|${v.voteId}`]) { refusLoi = "vote final déjà présenté par groupe"; continue; }
+    if (!l?.votes || typeof l.votes !== "object" || !Object.keys(l.votes).some((g) => GROUPES_AN.has(g))) { refusLoi = "vote final sans détail par groupe"; continue; }
+    const format = formatPublieDe(v, registre);
+    if (!format) { refusLoi = "le vote final n'a pas encore été publié en post ni en carrousel"; continue; }
+    if (reserveStory(now) && [sp.titre, f.titreCourt].some(SA.parleDeSondage)) { refusLoi = "réserve électorale : texte qui parle de sondages"; continue; }
+    const verbe = sp.verdict === "adopte" ? "adopté" : "rejeté";
+    const auteur = auteurTexteDepose(l);
+    const positions = alternatifGroupes(l.votes, false);
+    return { contenu: {
+      type: "vote-loi", cle: v.voteId,
+      rendu: { kind: "story", type: "vote-groupes", spec: { format: "story", titre: f.titreAffiche, date: sp.date, chambre: "Assemblée nationale", numero: sp.numero, verdict: sp.verdict, pour: sp.pour, contre: sp.contre, abst: sp.abst, votes: l.votes, ...(auteur ? { auteur } : {}), sourceTxt: sp.sourceTxt } },
+      entree: { titre: `Le vote final par groupe : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteIdGroupes: v.voteId, sources: [f.source], ...(auteur ? { nommePersonne: true } : {}),
+        alt: `Story Hémicycle France, le vote final par groupe. Texte « ${f.titreCourt} », ${verbe} par l'Assemblée nationale le ${sp.date}. Pour : ${nbFr(sp.pour)}, contre : ${nbFr(sp.contre)}, abstentions (ni pour ni contre) : ${nbFr(sp.abst)}. Position majoritaire de chaque groupe : ${positions}.${auteur ? ` Texte de ${auteur}.` : ""} ${sp.sourceTxt}` },
+    } };
+  }
+  return { refus: refusLoi };
+}
+
 /** 5b. Carrousel hebdomadaire d'après data/digest/AAAA-Wss.json (le résumé existant) : le dimanche. */
 function choisirCarrouselHebdo({ digest, jour, now }) {
   if (!digest || typeof digest !== "object" || !digest.id) return { refus: "pas de résumé hebdomadaire pour cette semaine" };
@@ -631,7 +731,8 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
   const etatLocal = normaliserEtat(etat);
   const nowMs = now.getTime();
   let posts = postsDuJour({ file, registre }, jour);
-  for (const c of creneauxDuJour(creneaux, isoWeekday)) {
+  const creneauxJour = creneauxDuJour(creneaux, isoWeekday);
+  for (const c of creneauxJour) {
     const t = TYPES[c.nom];
     if (!t) continue;
     const pasAvantIso = parisVersIso(jour, c.minutes);
@@ -640,9 +741,17 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
     const expireIso = new Date(pasAvant + t.validite * 60000).toISOString();
     if (nowMs >= Date.parse(expireIso)) { refus[c.nom] = "créneau dépassé"; continue; }
     if (!t.story && posts >= MAX_POSTS_PAR_JOUR) { refus[c.nom] = `déjà ${MAX_POSTS_PAR_JOUR} posts aujourd'hui`; continue; }
+    // Le post « vote du jour » est le moins prioritaire des posts : il ne prend jamais la dernière place du jour (réservée à une loi expliquée ou au résumé de la semaine)
+    // et ne sort pas le jour du résumé hebdomadaire (dimanche par défaut)
+    if (c.nom === "vote-jour-post") {
+      if (posts >= MAX_POSTS_PAR_JOUR - 1) { refus[c.nom] = "une place de post reste réservée aux lois et au résumé de la semaine"; continue; }
+      if (creneauxJour.some((x) => x.nom === "carrousel-hebdo")) { refus[c.nom] = "jour du résumé hebdomadaire : ses deux places de post lui sont laissées"; continue; }
+    }
     let r;
     if (c.nom === "aujourdhui") r = choisirAujourdhui({ agenda: donnees.agenda, jour, now });
     else if (c.nom === "vote-jour") r = choisirVoteDuJour({ lois: donnees.lois, jour, now });
+    else if (c.nom === "vote-jour-post") r = choisirVoteDuJourPost({ lois: donnees.lois, jour, now });
+    else if (c.nom === "vote-loi") r = choisirVoteLoi({ lois: donnees.lois, etat: etatLocal, jour, now, registre });
     else if (c.nom === "comprendre") r = choisirComprendre({ notions: donnees.notions || [], etat: etatLocal, jour });
     else if (c.nom === "chiffre-jour") r = choisirChiffre({ indicateurs: donnees.indicateurs, budget: donnees.budget, sondages: donnees.sondages, veille: donnees.veille, etat: etatLocal, jour, now });
     else if (c.nom === "carrousel-loi") r = choisirCarrouselLoi({ lois: donnees.lois, senat: donnees.senat, navette: donnees.navette, etat: etatLocal, jour, now, file, registre, brouillons });
@@ -662,7 +771,7 @@ function planifier({ now = new Date(), donnees, file, registre, brouillons = [],
     if (SUJET_UNIQUE_24H.has(c.nom)) {
       const siens = [k.entree.titrePropre, ...(k.entree.sujets || [])].filter(Boolean);
       const autre = sujetsRecents({ file, registre, brouillons, etat: etatLocal }, now, 24).concat(plan.flatMap((x) => [x.entree.titrePropre, ...(x.entree.sujets || [])].filter(Boolean).map((t) => ({ id: x.id, titre: t, contenu: x.nom }))))
-        .find((x) => x.contenu !== c.nom && x.id !== id && siens.some((t) => SA.titresProches(x.titre, t)));
+        .find((x) => x.contenu !== c.nom && x.contenu !== FORMATS_JUMEAUX[c.nom] && x.id !== id && siens.some((t) => SA.titresProches(x.titre, t)));
       if (autre) { refus[c.nom] = `sujet déjà publié ou en file depuis moins de 24 h (« ${autre.titre.slice(0, 80)} »)`; continue; }
     }
     if (!t.story) posts++;
@@ -724,7 +833,7 @@ function controlerImage(buf, l, h, nom) {
 const nomImage = (id, i) => (i === 0 ? id : `${id}-${i + 1}`);
 
 /** Tâches de dessin d'un élément du plan. */
-const tachesDessin = (p) => (p.rendu.kind === "story" ? [{ type: p.rendu.type, spec: p.rendu.spec }] : p.rendu.specs.map((spec) => ({ type: "diapo", spec })));
+const tachesDessin = (p) => (p.rendu.kind === "story" || p.rendu.kind === "post" ? [{ type: p.rendu.type, spec: p.rendu.spec }] : p.rendu.specs.map((spec) => ({ type: "diapo", spec })));
 
 /**
  * Écrit un contenu (images + entrée de file ou brouillon). `images` : Buffers dans l'ordre. Renvoie l'entrée créée (ou la fiche de brouillon).
@@ -732,7 +841,7 @@ const tachesDessin = (p) => (p.rendu.kind === "story" ? [{ type: p.rendu.type, s
  */
 function ecrireContenu(p, images, { now, config, ch }) {
   const story = p.rendu.kind === "story";
-  const [l, h] = story ? [1080, 1920] : [1080, 1350];
+  const [l, h] = story ? [1080, 1920] : [1080, 1350]; // story 1080 × 1920 ; post ou carrousel 1080 × 1350
   images.forEach((b, i) => controlerImage(b, l, h, `${p.nom} (image ${i + 1})`));
   const vers = destination({ nommePersonne: Boolean(p.entree.nommePersonne) }, config);
   const dossier = vers === "brouillon" ? ch.brouillons : ch.img;
@@ -746,6 +855,8 @@ function ecrireContenu(p, images, { now, config, ch }) {
   const commun = { id: p.id, cree: now.toISOString(), medias: [], donneesPropres: true, contenu: p.nom, periode: p.cle, pasAvant: p.pasAvant, expire: p.expire, ...champs };
   const entree = story
     ? { ...commun, url_image: urlImage(p.id), type: "story" }
+    : p.rendu.kind === "post"
+    ? { ...commun, url_image: urlImage(p.id), type: "post" } // image de fil + légende (champ legende de l'entrée)
     : { ...commun, url_image: urlImage(p.id), url_images: images.map((_, i) => urlImage(nomImage(p.id, i))), type: "carousel", alts: p.rendu.alts };
   if (vers === "brouillon") {
     fs.writeFileSync(path.join(ch.brouillons, `${p.id}.json`), JSON.stringify({ ...entree, statut: "a-valider", nommePersonne: Boolean(nommePersonne) }, null, 1) + "\n");
@@ -826,7 +937,7 @@ async function main({ ch = chemins(), now = maintenant(), dessiner = (jobs) => d
   for (const p of plan) {
     try {
       // Test comparatif de styles (js/stories.js) : une story reçoit sa variante (hash de l'id % 4, scripts/stories-auto.cjs) ; « comprendre » n'a pas de nombre à mettre en avant, donc 3 styles
-      const variante = p.rendu.kind === "story" ? SA.varianteDe(p.id, p.nom === "comprendre" ? SA.VARIANTES.filter((v) => v !== "chiffre") : SA.VARIANTES, s.config?.styleFixe) : null; // styleFixe (data/stories-config.json) : style imposé, sinon test comparatif
+      const variante = p.rendu.kind === "story" && p.rendu.type !== "vote-groupes" ? SA.varianteDe(p.id, p.nom === "comprendre" ? SA.VARIANTES.filter((v) => v !== "chiffre") : SA.VARIANTES, s.config?.styleFixe) : null; // styleFixe (data/stories-config.json) : style imposé, sinon test comparatif
       if (variante) p.entree = { ...p.entree, variante };
       const jobs = tachesDessin(p).map((j) => (variante && variante !== "bleu" ? { ...j, spec: { ...j.spec, style: variante } } : j));
       const images = await dessiner(jobs);
@@ -895,7 +1006,7 @@ async function apercus(ch = chemins()) {
 
 module.exports = {
   chemins, parisInfos, parisVersIso, semaineISO, dateLongue, TYPES, CRENEAUX_DEFAUT, heureEnMinutes, normaliserCreneaux, creneauxDuJour,
-  etatVide, normaliserEtat, reconcilierEtat, dejaCree, idContenu, choisirAujourdhui, classerScrutin, choisirVoteDuJour, notionsComprendre, prochaineNotion, choisirComprendre,
+  etatVide, normaliserEtat, reconcilierEtat, dejaCree, idContenu, choisirAujourdhui, classerScrutin, choisirVoteDuJour, choisirVoteDuJourPost, choisirVoteLoi, auteurTexteDepose, positionGroupe, formatPublieDe, notionsComprendre, prochaineNotion, choisirComprendre,
   separerValeur, candidatsChiffres, choisirChiffre, etapeSuivante, votesFinaux, choisirCarrouselLoi, loiDejaTraitee, idPostLoi, sujetsRecents, choisirCarrouselHebdo, planifier, postsDuJour,
   controlerImage, ecrireContenu, nettoyerEnfants, main, aFaire, apercus, tachesDessin, dessinerFiches,
 };

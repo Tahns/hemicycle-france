@@ -524,6 +524,25 @@
   .siege.hovered{stroke:var(--ink); stroke-width:1.6;}
   #hemicycle.sur-siege{cursor:pointer;}
   .siege.pointe{stroke:var(--ink); stroke-width:2.4; opacity:1;}
+  /* Votes : une forme ET une couleur par position (bleu/orange/violet, distincts aussi en daltonisme) */
+  :root{--hemi-pour:#1B3A8C; --hemi-contre:#B85500; --hemi-abst:#7B3FA0; --hemi-absent:#625D53;}
+  :root[data-theme="sombre"]{--hemi-pour:#9DB1F5; --hemi-contre:#F2A24A; --hemi-abst:#CBA3EA; --hemi-absent:#B5AFA2;}
+  .siege.v-pour{fill:var(--hemi-pour);}
+  .siege.v-contre{fill:var(--hemi-contre);}
+  .siege.v-abst{fill:var(--hemi-abst);}
+  .siege.v-absent{fill:none; stroke:var(--hemi-absent); stroke-width:1.6;}
+  .siege.v-absent.hovered, .siege.v-absent.pointe{stroke:var(--ink); stroke-width:2.4;}
+  .dot.f-pour{background:var(--hemi-pour);}
+  .dot.f-contre{background:var(--hemi-contre); border-radius:1px;}
+  .dot.f-abst{background:var(--hemi-abst); border-radius:0; transform:rotate(45deg) scale(.85);}
+  .dot.f-absent{background:none; border:2px solid var(--hemi-absent);}
+  @media (forced-colors:active){ .siege{forced-color-adjust:none; stroke:CanvasText; stroke-width:.8;} .siege.v-pour{fill:Highlight;} .siege.v-contre{fill:LinkText;} .siege.v-abst{fill:GrayText;} .dot{forced-color-adjust:none;} .dot.f-pour{background:Highlight;} .dot.f-contre{background:LinkText;} .dot.f-abst{background:GrayText;} .theme-chip[aria-pressed="true"]{outline:2px solid Highlight;} }
+  .hemi-tableau{margin-top:var(--s3); font-size:var(--fs-sm);}
+  .hemi-tableau summary{cursor:pointer; min-height:44px; display:flex; align-items:center; font-weight:600; color:var(--accent);}
+  .hemi-tableau table{width:100%; border-collapse:collapse; margin-top:var(--s2);}
+  .hemi-tableau th, .hemi-tableau td{padding:var(--s1) var(--s2); text-align:right; border-bottom:1px solid var(--border-soft); font-variant-numeric:tabular-nums;}
+  .hemi-tableau th:first-child, .hemi-tableau td:first-child{text-align:left;}
+  .hemi-tableau thead th{font-size:var(--fs-xs); color:var(--text-faint); border-bottom:1px solid var(--ink);}
   @media (prefers-reduced-motion:reduce){ .siege{transition:none;} }
   .legend{
     display:flex; flex-wrap:wrap; gap:var(--s2) var(--s4); margin-top:var(--s4); padding-top:var(--s3);
@@ -792,11 +811,11 @@
   }
   .tooltip.visible{opacity:1;}
   .tooltip b{display:block; font-family:var(--font-display); font-size:var(--fs-base); margin-bottom:2px;}
-  .tooltip .vote-pour{color:#8FD4A5;}
-  .tooltip .vote-contre{color:#F4A097;}
+  .tooltip .vote-pour{color:#A9B8F2;}
+  .tooltip .vote-contre{color:#F7B267;}
   .tooltip .vote-abst{opacity:.8;}
-  [data-theme="sombre"] .tooltip .vote-pour{color:#2E6B3F;}
-  [data-theme="sombre"] .tooltip .vote-contre{color:#B3261E;}
+  [data-theme="sombre"] .tooltip .vote-pour{color:#1B3A8C;}
+  [data-theme="sombre"] .tooltip .vote-contre{color:#A34A00;}
 
   .breakdown h3{
     margin:0 0 var(--s3); font-family:var(--font-display); font-size:var(--fs-h3); font-weight:600; line-height:1.25; color:var(--text);
@@ -825,8 +844,8 @@
   .party-membres{font-weight:400; color:var(--text-faint); font-size:var(--fs-xs);}
   .party-votes{display:flex; gap:var(--s3); font-size:var(--fs-sm); color:var(--text-faint); font-variant-numeric:tabular-nums;}
   .party-votes span b{color:var(--text-soft); font-weight:700;}
-  .party-votes .vote-pour b{color:var(--vert);}
-  .party-votes .vote-contre b{color:var(--rouge);}
+  .party-votes .vote-pour b{color:var(--hemi-pour);}
+  .party-votes .vote-contre b{color:var(--hemi-contre);}
   .vote-nd{color:var(--text-faint); font-style:italic; font-size:var(--fs-sm);}
 
   /* ---------- Historique ---------- */
@@ -836,7 +855,7 @@
   .comparateur-select{margin:var(--s2) 0 var(--s3); max-width:100%;}
   .comparateur-resume{font-family:var(--font-display); font-size:var(--fs-lg); margin:var(--s2) 0 var(--s2);}
   .proximite-row{display:grid; grid-template-columns:190px 1fr 52px; gap:var(--s3); align-items:center; padding:var(--s1) 0; font-size:var(--fs-sm);}
-  .proximite-row .nom{font-weight:600; display:flex; align-items:center; gap:var(--s2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .proximite-row .nom{font-weight:600; display:flex; align-items:center; gap:var(--s2); min-width:0; overflow-wrap:anywhere;}
   .proximite-row .track{height:6px; background:var(--border-soft);}
   .proximite-row .fill{height:100%;}
   .proximite-row .pct{text-align:right; font-family:var(--font-display); font-size:var(--fs-16); font-weight:600; font-variant-numeric:tabular-nums;}
@@ -909,7 +928,12 @@
     .accueil-highlight-grid{grid-template-columns:1.7fr 1fr; grid-template-rows:auto 1fr; column-gap:var(--s6); align-items:start;}
     .accueil-highlight-card:first-child{grid-row:span 2; padding-right:var(--s6); border-right:1px solid var(--border);}
   }
-  .accueil-highlight-card{padding:var(--s1) 0 var(--s5); cursor:pointer;}
+  .accueil-highlight-card{padding:var(--s1) 0 var(--s5); cursor:pointer; position:relative;}
+  .accueil-highlight-lien{color:inherit; text-decoration:none;}
+  .accueil-highlight-lien::after{content:""; position:absolute; inset:0;}
+  .accueil-highlight-lien:focus-visible{outline:none;}
+  .accueil-highlight-lien:focus-visible::after{outline:3px solid var(--accent); outline-offset:2px;}
+  .accueil-highlight-card details, .accueil-highlight-card .autre-texte{position:relative; z-index:1;}
   .accueil-highlight-card + .accueil-highlight-card{border-top:1px solid var(--border); padding-top:var(--s4);}
   @media(min-width:860px){ .accueil-highlight-card:nth-child(2){border-top:none; padding-top:var(--s1);} }
   .accueil-highlight-eyebrow{font-size:var(--fs-xs); font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); margin-bottom:var(--s2);}
@@ -942,14 +966,14 @@
   .vote-barre{display:flex; gap:2px; height:14px; margin:var(--s4) 0 var(--s2); max-width:560px;}
   .vote-barre span{display:block; height:100%;}
   .vote-barre span:first-child{border-radius:var(--r-1) 0 0 var(--r-1);} .vote-barre span:last-child{border-radius:0 var(--r-1) var(--r-1) 0;}
-  .vote-barre .p{background:var(--vert);} .vote-barre .c{background:var(--rouge);} .vote-barre .a{background:var(--ambre);}
+  .vote-barre .p{background:var(--hemi-pour);} .vote-barre .c{background:var(--hemi-contre);} .vote-barre .a{background:var(--hemi-abst);}
   .vote-legende{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s4); font-size:var(--fs-sm); color:var(--text-soft); margin-bottom:var(--s3);}
   .vote-groupes{display:grid; gap:var(--s2); margin:0 0 var(--s4); font-size:var(--fs-md); color:var(--text-soft);}
   .vote-groupes b{color:var(--text); font-weight:600; margin-right:var(--s2);}
   .vote-legende i{display:inline-block; width:10px; height:10px; border-radius:var(--r-1); margin-right:var(--s2); vertical-align:-1px;}
   .mini-sondage{list-style:none; margin:var(--s3) 0 var(--s1); padding:0; display:grid; gap:var(--s2);}
   .mini-sondage li{display:grid; grid-template-columns:minmax(80px,8em) 1fr 5em; align-items:center; gap:var(--s3); font-size:var(--fs-sm);}
-  .mini-sondage .nom{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text);}
+  .mini-sondage .nom{min-width:0; overflow-wrap:anywhere; color:var(--text);}
   .mini-sondage .barre{height:10px; background:var(--border-soft); border-radius:0 var(--r-1) var(--r-1) 0;}
   .mini-sondage .barre span{display:block; height:100%; border-radius:0 var(--r-1) var(--r-1) 0;}
   .mini-sondage .val{white-space:nowrap; min-width:3.2em; text-align:right; color:var(--text-soft); font-variant-numeric:tabular-nums;}
@@ -981,7 +1005,7 @@
     display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:0 var(--s5); align-items:start;
     margin-top:var(--s6); border-top:3px double var(--ink);
   }
-  .accueil-rubrique{padding:var(--s4) 0; border-bottom:1px solid var(--border); cursor:pointer;}
+  .accueil-rubrique{padding:var(--s4) 0; border-bottom:1px solid var(--border); cursor:pointer; color:inherit; text-decoration:none;}
   .accueil-rubrique b{display:block; font-family:var(--font-display); font-size:var(--fs-lg); font-weight:600;}
   .accueil-rubrique span{font-size:var(--fs-sm); color:var(--text-soft);}
   .accueil-rubrique:hover b{text-decoration:underline; text-underline-offset:3px;}
@@ -1093,7 +1117,7 @@
   .duel{padding:var(--s3) 0; border-bottom:1px solid var(--border-soft);}
   .duel-titre{font-weight:600; font-size:var(--fs-base); margin-bottom:var(--s2);}
   .duel-ligne{display:grid; grid-template-columns:minmax(90px,11em) 1fr; gap:var(--s3); align-items:center; font-size:var(--fs-sm); margin:var(--s1) 0;}
-  .duel-ligne .inst{color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .duel-ligne .inst{color:var(--text-soft); min-width:0; overflow-wrap:anywhere;}
   .duel-barre{position:relative; display:flex; height:20px; font-size:var(--fs-xs); font-weight:600; color:var(--blanc); font-variant-numeric:tabular-nums;}
   .duel-barre::after{content:""; position:absolute; left:50%; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:var(--ink); opacity:.55;}
   .duel-barre span{display:flex; align-items:center; padding:0 var(--s2); white-space:nowrap; overflow:hidden;}
@@ -1198,7 +1222,7 @@
   .senat-totaux small{display:block; font-weight:500; color:var(--text-faint);}
   .senat-groupes{margin:var(--s3) 0 2px; display:grid; gap:var(--s1);}
   .senat-groupe{display:grid; grid-template-columns:minmax(120px,240px) 1fr 108px; gap:var(--s3); align-items:center; font-size:var(--fs-sm);}
-  .senat-groupe .nom{display:flex; align-items:center; gap:var(--s2); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .senat-groupe .nom{display:flex; align-items:center; gap:var(--s2); font-weight:600; min-width:0; overflow-wrap:anywhere;}
   .senat-groupe .nom .dot{flex:none; width:9px; height:9px; border-radius:50%;}
   .senat-groupe .barre{display:flex; height:8px; background:var(--border-soft);}
   .senat-groupe .chiffres{text-align:right; color:var(--text-soft); font-variant-numeric:tabular-nums;}
@@ -1435,7 +1459,6 @@
   .budget-chiffres > div{padding:var(--s4) 0 var(--s4); border-bottom:1px solid var(--border);}
   .budget-chiffres .petit{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:var(--s1);}
   .budget-chiffres .gros{font-family:var(--font-display); font-size:var(--fs-2xl); font-weight:600; line-height:1.1; font-variant-numeric:lining-nums;}
-  .budget-chiffres .gros.rouge{color:var(--rouge);} .budget-chiffres .gros.vert{color:var(--vert);}
   .budget-chiffres .note{font-size:var(--fs-sm); color:var(--text-soft); margin-top:var(--s1);}
   .budget-serie{display:grid; grid-template-columns:1fr; gap:var(--s5) var(--s6);}
   @media(min-width:760px){ .budget-serie{grid-template-columns:1fr 1fr;} }
@@ -1469,8 +1492,8 @@
   .chiffre-card{padding:var(--s4) 0 var(--s4); border-bottom:1px solid var(--border); display:flex; flex-direction:column;}
   .chiffre-card .chiffre-label{font-size:var(--fs-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:var(--s1);}
   .chiffre-card .chiffre-value{font-family:var(--font-display); font-size:var(--fs-2xl); font-weight:600; line-height:1.1; font-variant-numeric:lining-nums;}
-  .chiffre-card .chiffre-value.up{color:var(--rouge);}
-  .chiffre-card .chiffre-value.down{color:var(--vert);}
+  /* Sens de variation : flèche neutre (une hausse n'est ni bonne ni mauvaise en soi : le jugement revient au lecteur) */
+  .chiffre-card .chiffre-fleche{margin-left:.35em; font-family:var(--font-body); font-size:.5em; color:var(--text-soft); vertical-align:.2em;}
   .chiffre-card .chiffre-sub{font-size:var(--fs-sm); color:var(--text-soft); margin-top:var(--s2); flex:1;}
   .chiffre-card .chiffre-source{font-size:var(--fs-xs); color:var(--text-faint); margin-top:var(--s3);}
   .no-result-msg, .chargement{color:var(--text-faint); font-family:var(--font-display); font-style:italic; font-size:var(--fs-lg); padding:var(--s5) 0;}
@@ -1554,16 +1577,15 @@
     .rubrique-tete h2{font-size:var(--fs-xl);}
     .chapo{font-size:var(--fs-16);}
 
-    /* Filtres : une seule ligne qu'on fait glisser, cibles d'au moins 40 px */
+    /* Filtres : les options passent à la ligne (pas de défilement horizontal, WCAG 1.4.10 / 1.4.12), cibles d'au moins 40 px */
     .theme-filter-bar, .party-select-bar, .source-bar, .justice-filter-bar, .evolution-chips{
-      flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-left:-16px; margin-right:-16px; padding:0 var(--s4) 2px;
-      -webkit-mask-image:linear-gradient(90deg, #000 88%, transparent); mask-image:linear-gradient(90deg, #000 88%, transparent);
+      flex-wrap:wrap; overflow:visible; margin-left:0; margin-right:0; padding:0 0 2px;
     }
     .theme-filter-bar::-webkit-scrollbar, .party-select-bar::-webkit-scrollbar, .source-bar::-webkit-scrollbar, .justice-filter-bar::-webkit-scrollbar, .evolution-chips::-webkit-scrollbar{display:none;}
-    .evolution-chip{flex:0 0 auto; min-height:40px; white-space:nowrap;}
+    .evolution-chip{flex:0 1 auto; min-height:40px; max-width:100%;}
     .evolution-bulle.en-dessous{position:static; margin-top:var(--s2); box-shadow:none;}
     .evolution-graphe .etiquette{font-size:var(--fs-xs);}
-    .theme-chip, .party-chip, .source-chip{flex:0 0 auto; min-height:40px; white-space:nowrap;}
+    .theme-chip, .party-chip, .source-chip{flex:0 1 auto; min-height:40px; max-width:100%;}
     .filtres{padding:var(--s3) var(--s3) var(--s3);}
     /* Dans le panneau, toutes les options restent visibles (deux colonnes) plutôt que cachées dans un défilement */
     .filtres .theme-filter-bar{display:grid; grid-template-columns:1fr 1fr; gap:var(--s2); overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none;}
@@ -1690,6 +1712,8 @@
   .cp-fiche p{margin:0 0 var(--s2); color:var(--text-soft); font-size:var(--fs-md); line-height:1.5;}
   .cp-fiche .cp-source{margin:var(--s2) 0 0;}
 
+  /* Cibles d'au moins 24 px partout (WCAG 2.5.8) */
+  .lien-bouton, footer a, .actu-sources a{display:inline-flex; align-items:center; min-height:24px;}
   /* Cibles tactiles d'au moins 44 px (écrans tactiles et téléphones) */
   @media (pointer:coarse), (max-width:700px){
     .theme-chip, .party-chip, .source-chip, .evolution-chip{min-height:44px;}
@@ -1871,7 +1895,7 @@
     /* Accueil : bandeau « En direct » compact, compte à rebours en une ligne, actualités en liste dense, quiz compact */
     .direct-bandeau{margin:0 0 var(--s2); padding:var(--s2) var(--s3);}
     .direct-tete{gap:0 var(--s3);}
-    .direct-titre{margin:2px 0 0; font-size:var(--fs-base); line-height:1.3; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden;}
+    .direct-titre{margin:2px 0 0; font-size:var(--fs-base); line-height:1.3;}
     .direct-media{display:block; margin:0; font-size:var(--fs-xs);}
     .direct-chaines{margin:0; display:flex;}
     .direct-chaines a{display:inline-flex; align-items:center; min-height:44px; padding:0 var(--s2); border:0; font-size:var(--fs-sm); text-decoration:underline;}
@@ -1909,9 +1933,9 @@
     .actu-sujet .actu-logo{padding:2px;} .actu-sujet .actu-logo img{max-height:18px;} .actu-sujet .actu-logo img:only-of-type{max-height:30px;}
     .actu-sujet .actu-recoupe{display:none;}
     .actu-sujet h3, .actu-sujet.actu-une h3{margin:0; font-size:var(--fs-base); line-height:1.25; font-weight:600;}
-    .actu-sujet .actu-meta{display:flex; align-items:baseline; margin-top:2px; font-size:var(--fs-xs); line-height:1.3; white-space:nowrap;}
+    .actu-sujet .actu-meta{display:flex; flex-wrap:wrap; align-items:baseline; margin-top:2px; font-size:var(--fs-xs); line-height:1.3;}
     .actu-sujet .actu-nb{display:inline; flex:none; margin-right:4px; font-weight:700; color:var(--accent);}
-    .actu-sujet .actu-medias{flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;}
+    .actu-sujet .actu-medias{flex:0 1 auto; min-width:0; overflow-wrap:anywhere;}
     .actu-sujet .actu-quand{flex:none; margin-left:4px;}
     .actu-sujet .actu-noms, .actu-sujet .actu-meta .bouton-story{display:none;}
     .actu-sujet .actu-autres{margin:0; padding-left:var(--s3);}
@@ -2189,12 +2213,12 @@
     </details>
     <details class="accueil-plie accueil-explorer"><summary>Explorer toutes les rubriques</summary>
     <div class="accueil-rubriques">
-      <div class="accueil-rubrique" data-tab="accueil" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg></span><b>À la une</b><span>Les faits marquants du moment.</span><small class="rubrique-pages">Sondages, votes, actualités du jour</small></div>
-      <div class="accueil-rubrique" data-tab="actualites" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span><small class="rubrique-pages">Titres, sujets du moment</small></div>
-      <div class="accueil-rubrique" data-tab="sondages" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></div>
-      <div class="accueil-rubrique" data-tab="budget" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></div>
-      <div class="accueil-rubrique" data-tab="scrutin" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></div>
-      <div class="accueil-rubrique" data-tab="quiz" tabindex="0" role="link"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre · Les présidents</small></div>
+      <a class="accueil-rubrique" href="#accueil" data-tab="accueil"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg></span><b>À la une</b><span>Les faits marquants du moment.</span><small class="rubrique-pages">Sondages, votes, actualités du jour</small></a>
+      <a class="accueil-rubrique" href="#actualites" data-tab="actualites"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span><b>Actualités</b><span>Les titres politiques des grands médias, recoupés.</span><small class="rubrique-pages">Titres, sujets du moment</small></a>
+      <a class="accueil-rubrique" href="#sondages" data-tab="sondages"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span><b>Présidentielle 2027</b><span>Sondages, candidats déclarés, meetings.</span><small class="rubrique-pages">Sondages · Candidats · Agenda</small></a>
+      <a class="accueil-rubrique" href="#budget" data-tab="budget"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><b>Argent public</b><span>Où va l'argent, déficit, dette, chômage, inflation.</span><small class="rubrique-pages">Budget · Économie</small></a>
+      <a class="accueil-rubrique" href="#scrutin" data-tab="scrutin"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7.5 18a4.5 4.5 0 0 1 9 0"/><path d="M2 18h20"/></svg></span><b>Élus et votes</b><span>Chaque vote, chaque député, chaque parti.</span><small class="rubrique-pages">Votes · Députés · Sénat · Groupes · Partis · Justice</small></a>
+      <a class="accueil-rubrique" href="#quiz" data-tab="quiz"><span class="rubrique-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></svg></span><b>Quiz</b><span>Avec quel groupe pensez-vous voter pareil ? Et les bases pour comprendre.</span><small class="rubrique-pages">Quiz · Comprendre · Les présidents</small></a>
     </div>
     </details>
     <div class="faire-connaitre">
@@ -2255,6 +2279,7 @@
         <div class="theme-filter-bar hemi-mode" id="hemi-mode"></div>
         <svg id="hemicycle" viewBox="0 0 1000 560" role="img" aria-label="Hémicycle : répartition des votes par siège"></svg>
         <div class="legend" id="legend"></div>
+        <details class="hemi-tableau" id="hemi-tableau"></details>
       </div>
 
       <div class="breakdown">
@@ -3489,7 +3514,7 @@ const GL_PAR_ID = new Map(GLOSSAIRE.map(g => [g[0], g]));
 function gl(id, texte){
   const g = GL_PAR_ID.get(id);
   if(!g) return esc(texte || id);
-  return `<button type="button" class="gl" data-gl="${id}" aria-expanded="false" aria-controls="gl-pop">${esc(texte || g[1])}</button>`;
+  return `<button type="button" class="gl" data-gl="${id}" aria-expanded="false" aria-haspopup="dialog" aria-controls="gl-pop">${esc(texte || g[1])}</button>`;
 }
 
 let glOuvert = null;
@@ -3617,7 +3642,7 @@ const svg = document.getElementById("hemicycle");
 const CX = 500, CY = 520;
 const R_MIN = 90, R_MAX = 470;
 const N_ROWS = 11;
-const COULEURS_VOTE = { pour:"var(--vert)", contre:"var(--rouge)", abst:"#E0A800", absent:"var(--border)" };
+const COULEURS_VOTE = { pour:"var(--hemi-pour)", contre:"var(--hemi-contre)", abst:"var(--hemi-abst)", absent:"var(--hemi-absent)" };
 
 let seatNodes = [];
 let modeHemicycle = "votes"; // "votes" | "groupes"
@@ -3723,12 +3748,21 @@ function renderHemicycle(){
       : modeHemicycle === "votes" ? "var(--border)"
       : party.couleur;
 
-    const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    dot.setAttribute("cx", s.x.toFixed(1));
-    dot.setAttribute("cy", s.y.toFixed(1));
-    dot.setAttribute("r", seatR);
-    dot.setAttribute("fill", couleur);
-    dot.style.color = couleur;
+    // Mode « votes » : pour = disque, contre = carré, abstention = losange, non-votant = anneau vide (la forme double la couleur)
+    const forme = modeHemicycle === "votes" && party && s.vote ? s.vote : null;
+    const cx = s.x.toFixed(1), cy = s.y.toFixed(1);
+    const dot = document.createElementNS("http://www.w3.org/2000/svg", forme === "contre" || forme === "abst" ? "rect" : "circle");
+    if(forme === "contre" || forme === "abst"){
+      const c = forme === "contre" ? 10.6 : 9.2;
+      dot.setAttribute("x", (s.x - c/2).toFixed(1)); dot.setAttribute("y", (s.y - c/2).toFixed(1));
+      dot.setAttribute("width", c); dot.setAttribute("height", c);
+      if(forme === "abst") dot.setAttribute("transform", "rotate(45 " + cx + " " + cy + ")");
+    } else {
+      dot.setAttribute("cx", cx); dot.setAttribute("cy", cy);
+      dot.setAttribute("r", forme === "absent" ? seatR - 1.4 : seatR);
+    }
+    if(forme) dot.classList.add("v-" + forme);
+    else { dot.setAttribute("fill", couleur); dot.style.color = couleur; }
     dot.classList.add("siege");
 
     if(party) seatsByParty[party.id].push(dot);
@@ -3975,6 +4009,7 @@ function updateBreakdown(){
   });
 
   renderStatCards(loi);
+  majAlternativeHemicycle(loi);
 
   const list = document.getElementById("breakdown-list");
   list.innerHTML = PARTIES.map((p,idx)=>{
@@ -4015,8 +4050,10 @@ function renderStatCards(loi){
     </div>`;
 
   if(categorieLoi(loi) === "censure" && loi.typeVote === "MOC"){
-    // Une motion de censure n'enregistre que des voix « pour » ; il en faut 289 (majorité absolue des 577 sièges)
-    const requis = 289;
+    // Une motion de censure n'enregistre que des voix « pour » ; il faut la majorité absolue des membres de l'Assemblée
+    // (art. 49, al. 2) : la moitié plus un des sièges pourvus au moment du vote (289 sur 577 ou 576, 288 sur 574 ou 575)
+    const siegesPourvus = membres || TOTAL_SIEGES;
+    const requis = Math.floor(siegesPourvus / 2) + 1;
     document.getElementById("stat-cards").innerHTML =
       card("Voix pour la censure", formatNombre(pour), `sur ${requis} nécessaires`, true) +
       card(pour >= requis ? "Marge" : "Il a manqué", `${Math.abs(pour-requis)} voix`, pour >= requis ? "le gouvernement est renversé" : "le gouvernement reste en place") +
@@ -4045,7 +4082,7 @@ function renderLegend(){
   const el = document.getElementById("legend");
   if(modeHemicycle === "votes"){
     el.innerHTML = [["pour","Pour"],["abst","Abstention"],["contre","Contre"],["absent","Non-votant / absent"]].map(([k,l])=>`
-      <span class="legend-item"><span class="dot" style="background:${COULEURS_VOTE[k]}"></span>${l}</span>
+      <span class="legend-item"><span class="dot f-${k}" aria-hidden="true"></span>${l}</span>
     `).join("") + `<details class="pli-mobile legend-note-plie" open><summary class="pli-titre">Lire le graphique</summary><span class="legend-item legend-note">De gauche à droite : ${PARTIES.map(p=>p.id).join(", ")}. Pointez ou touchez un siège pour le détail du groupe.</span></details>`;
   } else {
     const loi = currentLoi();
@@ -4053,6 +4090,24 @@ function renderLegend(){
       <span class="legend-item"><span class="dot" style="background:${party.couleur}"></span>${party.id} (${n})</span>
     `).join("");
   }
+}
+
+/* Alternative textuelle de l'hémicycle : résumé dans le nom accessible + tableau des votes par groupe */
+function majAlternativeHemicycle(loi){
+  const lignes = PARTIES.map(p => ({ p, v: loi.votes[p.id] }));
+  const connus = lignes.filter(x => x.v);
+  const pour = connus.reduce((t,x)=>t+x.v.pour,0), contre = connus.reduce((t,x)=>t+x.v.contre,0), abst = connus.reduce((t,x)=>t+x.v.abst,0);
+  const membres = connus.reduce((t,x)=>t+(x.v.membres||0),0);
+  const nv = Math.max(0, membres - pour - contre - abst);
+  svg.setAttribute("aria-label", loi.typeVote === "MOC"
+    ? `Hémicycle : ${pour} voix pour la censure sur ${membres || TOTAL_SIEGES} sièges. Le détail par groupe est dans le tableau sous le graphique.`
+    : `Hémicycle : ${pour} pour, ${contre} contre, ${abst} abstentions, ${nv} non-votants ou absents. Le détail par groupe est dans le tableau sous le graphique.`);
+  const cel = (x, k) => x.v ? x.v[k] : "—";
+  document.getElementById("hemi-tableau").innerHTML = `<summary>Voir le tableau des votes par groupe</summary>
+    <table><caption class="sr-only">Votes par groupe</caption>
+      <thead><tr><th scope="col">Groupe</th><th scope="col">Pour</th><th scope="col">Contre</th><th scope="col">Abstention</th><th scope="col">Non-votants</th></tr></thead>
+      <tbody>${lignes.map(x => `<tr><th scope="row">${esc(x.p.nom)}</th><td>${cel(x,"pour")}</td><td>${cel(x,"contre")}</td><td>${cel(x,"abst")}</td><td>${x.v && x.v.membres ? Math.max(0, x.v.membres - x.v.pour - x.v.contre - x.v.abst) : "—"}</td></tr>`).join("")}</tbody>
+    </table>`;
 }
 
 /* ---------- Position majoritaire d'un groupe ---------- */
@@ -4561,7 +4616,7 @@ function renderProbabilites(){
     <div class="depute-actions"><button type="button" class="lien-bouton bouton-story" data-story="probabilites" data-id="">Story</button></div>
     <p class="probas-sub">Estimation recalculée à chaque mise à jour à partir des sondages ci-dessus : ${formatNombre(m.tirages)} élections simulées, en ajoutant à chaque score une erreur aléatoire d'autant plus grande que le vote est loin (aujourd'hui environ ±${nombreFr(m.ecartPremierTour)} points au premier tour pour un candidat à 20 %, ±${nombreFr(m.ecartSecondTour)} au second). Ce n'est pas une prédiction : les sondages ne mesurent que l'opinion du moment, et certains candidats testés ne se présenteront pas.</p>
     <table class="probas-table">
-      <thead><tr><th>Candidat</th><th>Intentions (moy.)</th><th>Au second tour</th><th class="barre-cell"><span class="sr-only">Répartition</span></th>${avecVictoire ? "<th>Élu</th>" : ""}</tr></thead>
+      <thead><tr><th scope="col">Candidat</th><th scope="col">Intentions (moy.)</th><th scope="col">Au second tour</th><th scope="col" class="barre-cell"><span class="sr-only">Répartition</span></th>${avecVictoire ? `<th scope="col">Élu</th>` : ""}</tr></thead>
       <tbody>${liste.map(c=>`<tr>
         <td>${esc(c.nom)}${c.parti ? ` <small class="parti-sigle">${esc(c.parti)}</small>` : ""}</td>
         <td>${nombreFr(c.intention)} %</td>
@@ -4621,10 +4676,34 @@ function fondLisible(hex){
   }
   return "#" + c.map(x=>x.toString(16).padStart(2,"0")).join("");
 }
-const couleurPartiActu = code => PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94";
+const couleurPartiActu = code => fondLisible(PARTIES.find(p=>p.id===code)?.couleur || GROUPES_SENAT[code]?.couleur || COULEURS_PARTIS[code] || "#8A8C94"); // assombrie au besoin : texte des initiales à 4,5:1 minimum
 const initialesActu = nom => nom.split(/[\s-]+/).filter(Boolean).map(x=>x[0]).filter(c=>/\p{Lu}/u.test(c)).slice(0,2).join("");
-const VIGNETTES_VUES = new Set(); // photos déjà affichées dans la liste en cours (remise à zéro avant chaque liste)
+const VIGNETTES_VUES = new Set(); // photos déjà affichées dans la liste en cours, « clé#rang » (remise à zéro avant chaque liste)
 const VIGNETTES_VOISINES = { election:["assemblee", "gouvernement", "elysee"], assemblee:["election", "senat", "gouvernement"], senat:["assemblee", "election"], gouvernement:["elysee", "assemblee", "election"], elysee:["gouvernement", "election"], budget:["gouvernement", "assemblee"], international:["elysee", "gouvernement"], region:["election", "gouvernement"], education:["gouvernement", "assemblee"] };
+// Photos d'une institution : `variantes` (liste complète, première = champs de l'entrée) ou, sans elle (format d'origine), l'entrée seule
+function variantesVignette(cle){
+  const e = VIGNETTES[cle];
+  if(!e?.chemin) return [];
+  const liste = Array.isArray(e.variantes) ? e.variantes.filter(v => v?.chemin) : [];
+  const toutes = liste.length && liste[0].chemin === e.chemin ? [e, ...liste.slice(1)] : [e, ...liste.filter(v => v.chemin !== e.chemin)];
+  return toutes.map(v => ({ lieu: e.lieu, alt: e.alt, ...v }));
+}
+// Hash stable (FNV-1a) de l'identifiant du sujet : la même photo pour le même sujet d'un affichage à l'autre
+const hashVignette = txt => { let h = 2166136261; for(const c of String(txt)) h = Math.imul(h ^ c.codePointAt(0), 16777619); return h >>> 0; };
+// Photo d'un sujet : variante de sa clé choisie par le hash du sujet, parmi celles qui n'ont pas déjà servi dans la liste ; si toutes ont servi,
+// mêmes règles pour les clés voisines ; sinon null (le sujet reste sans photo)
+function choisirVignette(cleV, idSujet){
+  if(!variantesVignette(cleV).length) return null; // pas de photo pour ce thème : pictogramme/rien, jamais l'image d'une autre institution
+  for(const cle of [cleV, ...(VIGNETTES_VOISINES[cleV] || [])]){
+    const vs = variantesVignette(cle);
+    const depart = hashVignette(idSujet) % (vs.length || 1);
+    for(let i = 0; i < vs.length; i++){
+      const rang = (depart + i) % vs.length, marque = cle + "#" + rang;
+      if(!VIGNETTES_VUES.has(marque)){ VIGNETTES_VUES.add(marque); return vs[rang]; }
+    }
+  }
+  return null;
+}
 function visuelActu(s){
   const ill = s.illustration || {};
   const personnes = ill.personnes || [];
@@ -4647,13 +4726,9 @@ function visuelActu(s){
   // Photo libre de l'institution du thème (jamais une personne) ; sinon rien. `vignette` : clé calculée par scripts/vignettes-cle.js
   // (null = pas de vignette, ex. justice avec une personne nommée) ; fichier d'actualités plus ancien : le thème fait office de clé
   let cleV = "vignette" in ill ? ill.vignette : ill.theme;
-  // Une même photo ne sert pas deux sujets d'une même liste : le second prend une photo voisine (autre institution proche) qui n'a pas encore servi
-  if(cleV && VIGNETTES_VUES.has(cleV)){
-    const voisine = (VIGNETTES_VOISINES[cleV] || []).find(c => !VIGNETTES_VUES.has(c) && VIGNETTES[c]?.chemin);
-    if(voisine) cleV = voisine; else return ""; // plus de photo voisine disponible : jamais deux fois la même image dans une liste
-  }
-  if(cleV) VIGNETTES_VUES.add(cleV);
-  const photoV = cleV && VIGNETTES[cleV];
+  // Une même photo ne sert pas deux sujets d'une même liste : variante propre au sujet (hash de son identifiant) parmi celles de la clé qui n'ont pas servi,
+  // puis photos des institutions voisines ; plus aucune disponible : pas de vignette (jamais deux fois la même image dans une liste)
+  const photoV = cleV ? choisirVignette(cleV, s.articles?.[0]?.url || s.derniere || "") : null;
   if(photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "")){
     return `<div class="actu-visuel actu-photo"><img src="${esc(photoV.chemin)}" alt="${esc(photoV.alt || "")}" title="${esc(`${photoV.lieu || ""} — photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`)}" loading="lazy" decoding="async" width="160" height="160"></div>`;
   }
@@ -4702,7 +4777,7 @@ function sujetsHorsDossiers(sujets){
 let creditsPortraits = null;
 async function renderCreditsPortraits(){
   if(creditsPortraits) return;
-  const vign = Object.values((await lireJSON("data/vignettes.json"))?.vignettes || {}).filter(v=> v.chemin && v.licence);
+  const vign = Object.values((await lireJSON("data/vignettes.json"))?.vignettes || {}).flatMap(e=> [e, ...(e.variantes || []).slice(1)]).filter(v=> v.chemin && v.licence); // toutes les photos, variantes comprises
   if(vign.length) document.getElementById("credits-vignettes").innerHTML = ` ${t("Crédits des images :")} ${vign.map(v=>
     `<a href="${lien(v.source)}" target="_blank" rel="noopener">${esc(v.lieu)}</a> (${esc(v.auteur || "auteur inconnu")}, ${esc(v.licence)})`).join(" ; ")}.`;
   creditsPortraits = (await lireJSON("data/portraits.json"))?.portraits || {};
@@ -5064,7 +5139,7 @@ let evolutionSeries = [];
 function remplirTableEvolution(){
   const series = evolutionSeries;
   document.getElementById("evolution-table").innerHTML = `<table>
-    <thead><tr><th>Fin du terrain</th><th>Institut</th>${series.map(n=>`<th>${esc(nomCourt(n))}</th>`).join("")}</tr></thead>
+    <thead><tr><th scope="col">Fin du terrain</th><th scope="col">Institut</th>${series.map(n=>`<th scope="col">${esc(nomCourt(n))}</th>`).join("")}</tr></thead>
     <tbody>${[...HISTORIQUE].reverse().map(e=>`<tr><td>${esc(dateCourte(e.dateFin) || e.dateFin)}</td><td>${esc(e.institut)}</td>${series.map(n=>`<td>${e.scores[n] ? fourchetteTexte(e.scores[n]) : "—"}</td>`).join("")}</tr>`).join("")}</tbody>
   </table>`;
 }
@@ -5616,7 +5691,7 @@ function renderChiffres(filter=""){
   grid.innerHTML = filtres.map((i,idx)=>`
     <div class="chiffre-card" style="animation-delay:${idx*25}ms">
       <div class="chiffre-label">${i.nom}</div>
-      <div class="chiffre-value ${i.tendance==='up'?'up':i.tendance==='down'?'down':''}">${i.valeur}</div>
+      <div class="chiffre-value">${i.valeur}${i.tendance==='up'?'<span class="chiffre-fleche" role="img" aria-label="en hausse">▲</span>':i.tendance==='down'?'<span class="chiffre-fleche" role="img" aria-label="en baisse">▼</span>':''}</div>
       <div class="chiffre-sub">${i.detail}</div>
       <div class="chiffre-source">${esc(i.source)}, ${esc(i.date)} · <a href="${lien(i.url)}" target="_blank" rel="noopener">voir la série</a></div>
     </div>
@@ -5647,8 +5722,8 @@ function makeGaugeSVG(label, pct, maxScale, colorFill, seuil){
 function renderBudgetGauges(){
   // Alimenté par INDICATEURS (data/indicateurs.json) : une mise à jour des chiffres met aussi à jour les jauges
   const jauges = [
-    { nom:"Déficit public", echelle:10, couleur:"var(--rouge)", seuil:"Seuil européen : 3 % du PIB.", repere:3 },
-    { nom:"Dette publique", echelle:130, couleur:"var(--ambre)", seuil:"Seuil de Maastricht : 60 % du PIB.", repere:60 },
+    { nom:"Déficit public", echelle:10, couleur:"var(--accent)", seuil:"Seuil européen : 3 % du PIB.", repere:3 },
+    { nom:"Dette publique", echelle:130, couleur:"var(--accent)", seuil:"Seuil de Maastricht : 60 % du PIB.", repere:60 },
   ];
   document.getElementById("budget-hero").innerHTML = jauges.map(j=>{
     const i = INDICATEURS.find(x=>x.nom===j.nom);
@@ -5782,7 +5857,7 @@ function budgetEquilibre(e){
       { nom:"Recettes (impôts, cotisations…)", val:`<b>${fmtMd(e.recettesMd)}</b>${nbOk(e.recettesPib) ? ` · ${fmtPct(e.recettesPib)} du PIB` : ""}`, part:e.recettesMd / max * 100, couleur:"var(--bud-2)" },
       { nom:"Dépenses", val:`<b>${fmtMd(e.depensesMd)}</b>${nbOk(e.depensesPib) ? ` · ${fmtPct(e.depensesPib)} du PIB` : ""}`, part:e.depensesMd / max * 100, couleur:"var(--bud-3)" },
     ])}
-    <div class="budget-chiffres"><div><div class="petit">${deficit ? "Déficit" : "Excédent"}</div><div class="gros ${deficit ? "rouge" : "vert"}">${fmtMd(Math.abs(e.soldeMd))}</div><div class="note">${fmtPct(Math.abs(e.soldePib))} du PIB, en ${e.annee}</div></div></div>
+    <div class="budget-chiffres"><div><div class="petit">${deficit ? "Déficit" : "Excédent"}</div><div class="gros">${fmtMd(Math.abs(e.soldeMd))}</div><div class="note">${fmtPct(Math.abs(e.soldePib))} du PIB, en ${e.annee}</div></div></div>
     ${budgetSource(e, e.annee)}</div>`;
 }
 
@@ -6041,7 +6116,7 @@ function renderAccueil(){
     <div class="vote-barre" role="img" aria-label="${formatNombre(totaux.pour)} pour, ${formatNombre(totaux.contre)} contre, ${formatNombre(abst)} abstentions">
       ${[["p",totaux.pour],["c",totaux.contre],["a",abst]].filter(([,n])=>n).map(([k,n])=>`<span class="${k}" style="flex:${n}"></span>`).join("")}
     </div>
-    <div class="vote-legende"><span><i style="background:var(--vert)"></i>${formatNombre(totaux.pour)} pour</span><span><i style="background:var(--rouge)"></i>${formatNombre(totaux.contre)} contre</span>${abst ? `<span><i style="background:var(--ambre)"></i>${formatNombre(abst)} abstentions</span>` : ""}</div>
+    <div class="vote-legende"><span><i style="background:var(--hemi-pour)"></i>${formatNombre(totaux.pour)} pour</span><span><i style="background:var(--hemi-contre)"></i>${formatNombre(totaux.contre)} contre</span>${abst ? `<span><i style="background:var(--hemi-abst)"></i>${formatNombre(abst)} abstentions</span>` : ""}</div>
     ${(()=>{
       // Position majoritaire de chaque groupe (le détail député par député est sur la page du vote)
       const pos = { pour:[], contre:[], abst:[] };
@@ -6067,9 +6142,9 @@ function renderAccueil(){
   }
 
   document.getElementById("accueil-highlight-grid").innerHTML = highlights.map(h=>`
-    <div class="accueil-highlight-card" data-tab="${h.tab}" ${h.loi ? `data-loi="${h.loi}"` : ""} tabindex="0" role="link">
+    <div class="accueil-highlight-card" data-tab="${h.tab}" ${h.loi ? `data-loi="${h.loi}"` : ""}>
       <div class="accueil-highlight-eyebrow">${h.eyebrow}</div>
-      <div class="accueil-highlight-title">${esc(h.titre)}</div>
+      <div class="accueil-highlight-title"><a class="accueil-highlight-lien" href="#${h.loi ? "scrutin-" + (LOIS.find(l=>l.id===h.loi)?.numero ?? h.loi) : h.tab}">${esc(h.titre)}</a></div>
       ${h.extra || ""}
       <div class="accueil-highlight-sub">${esc(h.sous)}</div>
       <span class="carte-cta">${h.cta || "Voir"} <span aria-hidden="true">→</span></span>
@@ -6091,6 +6166,7 @@ function renderAccueil(){
 
   // Un lien de la liste « autres textes » ouvre son propre vote, pas celui de la carte
   document.querySelectorAll(".autre-texte, .accueil-highlight-card details").forEach(a=> a.addEventListener("click", e=> e.stopPropagation()));
+  document.querySelectorAll(".accueil-highlight-lien").forEach(a=> a.addEventListener("click", e=> e.preventDefault())); // la carte gère la navigation (le lien reste natif pour le clavier et les lecteurs d'écran)
   document.querySelectorAll(".accueil-highlight-card").forEach(card=>{
     card.addEventListener("click", ()=>{
       if(card.dataset.loi){
@@ -7539,7 +7615,7 @@ document.querySelectorAll("[data-tab-lien]").forEach(a=>{
   a.addEventListener("click", (e)=>{ e.preventDefault(); activateTab(a.dataset.tabLien); });
 });
 document.querySelectorAll(".accueil-rubrique").forEach(el=>{
-  el.addEventListener("click", ()=> activateTab(el.dataset.tab));
+  el.addEventListener("click", (e)=>{ e.preventDefault(); activateTab(el.dataset.tab); });
 });
 
 // Éléments cliquables non-boutons (rubriques, cartes de l'accueil) : activables au clavier (Entrée / Espace)
@@ -7609,6 +7685,46 @@ document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") fermerFeuille
 document.querySelectorAll(".onglet-mobile[data-tab], .feuille-lien[data-tab]").forEach(b=>{
   b.addEventListener("click", ()=> activateTab(b.dataset.tab));
 });
+
+/* ---------- Fenêtres modales (recherche, story, alertes) : reste de la page inerte, focus retenu dedans, retour au déclencheur ---------- */
+(function(){
+  const modales = ["recherche", "story-fond", "alertes-fond"].map(id => document.getElementById(id)).filter(Boolean);
+  const garder = new Set([...modales, document.getElementById("recherche-fond"), document.getElementById("toast")]);
+  const dansModale = el => modales.some(m => m.contains(el));
+  const SEL = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+  const focalisables = m => [...m.querySelectorAll(SEL)].filter(el => el.getClientRects().length && !el.closest("[hidden]"));
+  let declencheur = null, ouverte = null, rendus = [];
+  document.addEventListener("focusin", e => { if(e.target !== document.body && !dansModale(e.target)) declencheur = e.target; }, true);
+  document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("button, a, summary"); if(b && !dansModale(b)) declencheur = b; }, true);
+  function ouvrir(m){
+    ouverte = m;
+    rendus = [...document.body.children].filter(el => el.tagName !== "SCRIPT" && !garder.has(el) && !el.inert);
+    rendus.forEach(el => { el.inert = true; });
+    if(!m.contains(document.activeElement)){
+      const premier = focalisables(m)[0];
+      if(premier) premier.focus({ preventScroll:true });
+    }
+  }
+  function fermer(){
+    ouverte = null;
+    rendus.forEach(el => { el.inert = false; });
+    rendus = [];
+    if(declencheur && declencheur.isConnected && declencheur.getClientRects().length) declencheur.focus({ preventScroll:true });
+  }
+  modales.forEach(m => new MutationObserver(() => {
+    if(!m.hidden && ouverte !== m){ if(ouverte) fermer(); ouvrir(m); }
+    else if(m.hidden && ouverte === m) fermer();
+  }).observe(m, { attributes:true, attributeFilter:["hidden"] }));
+  document.addEventListener("keydown", e => {
+    if(e.key !== "Tab" || !ouverte) return;
+    const liste = focalisables(ouverte);
+    if(!liste.length){ e.preventDefault(); return; }
+    const premier = liste[0], dernier = liste[liste.length - 1], actif = document.activeElement;
+    if(!ouverte.contains(actif)){ e.preventDefault(); premier.focus(); }
+    else if(e.shiftKey && actif === premier){ e.preventDefault(); dernier.focus(); }
+    else if(!e.shiftKey && actif === dernier){ e.preventDefault(); premier.focus(); }
+  }, true);
+})();
 
 // Mesure d'audience facultative : la mention légale du service configuré (balise posée par scripts/appliquer-analytics.js) remplace « aucun outil »
 (function(){

@@ -94,6 +94,7 @@ const NEGATION_NE = /\bn(?:e|')\s?\w+\s+(?:pas|jamais|plus)\b|\bpas d[e']|\b(?:a
 const GROUPES = {
   "Le Progrès": "EBRA", "Dernières Nouvelles d'Alsace": "EBRA", "Le Dauphiné libéré": "EBRA", "L'Est républicain": "EBRA",
   "France 24": "France Médias Monde", RFI: "France Médias Monde",
+  "Europe 1": "Groupe Bolloré", "Le JDD": "Groupe Bolloré",
 };
 // Médias régionaux (hors EBRA) dont les titres identiques à ceux d'un autre média sont une même dépêche
 const REGIONAUX = new Set(["Sud Ouest", "Nice-Matin", "Le Progrès", "Dernières Nouvelles d'Alsace", "Le Dauphiné libéré", "L'Est républicain"]);

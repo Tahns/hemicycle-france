@@ -68,6 +68,7 @@ const path = require("path");
 const crypto = require("crypto");
 const { concerneLaFrance } = require("./pertinence.cjs");
 const SS = require("./sujets-sensibles.cjs");
+const PN = require("./personne-nommee.cjs"); // accusations visant une personne nommée : 3 médias au moins, jamais de portrait
 
 const RACINE = path.resolve(__dirname, "..");
 const FICHIER_FILE = path.join(RACINE, "data", "instagram-file.json");
@@ -85,7 +86,7 @@ const SONDAGE_DERNIERE_MINUTE = 23 * 60 + 30; // un sondage qui vient de sortir 
 const MOIS = { janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6, juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12 };
 
 const BREF_DEBUT_H = 7, BREF_FIN_H = 11; // « En bref » : une fois par jour, le matin (heure de Paris)
-const BREF_FRAICHEUR_H = 12, BREF_MIN = 3, BREF_MAX = 4, BREF_MIN_MEDIAS = 3;
+const BREF_FRAICHEUR_H = 12, BREF_MIN = 3, BREF_MAX = 4; // « en bref » : même seuil de médias que les autres sujets (MIN_MEDIAS, « minMedias »)
 const DATE_MAX_JOURS = 180;
 const DATE_STORY_MAX_JOURS = 3; // date à venir à 3 jours ou moins : story « Date à retenir » ; au-delà : POST (puis story d'annonce)
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil Instagram) par jour ; les stories d'annonce n'entrent pas dans le plafond des stories
@@ -95,7 +96,11 @@ const MAX_PROPRES_PAR_JOUR = 3; // stories « données propres » (monétisation
 const PROPRES_FRAICHEUR_J = 2; // un vote de plus de 2 jours n'est plus « récent »
 const BROUILLON_JOURS = 7;
 
-let MIN_MEDIAS = 3; // réglable par data/stories-config.json (« minMedias »)
+// Seuils de médias : UNE seule source, data/stories-config.json (« minMedias », « minMediasPersonneNommee »). Les valeurs ci-dessous ne servent que si le fichier est absent ;
+// elles sont identiques à celles du fichier livré (un test le vérifie : plus de constante qui diverge de la configuration).
+const DEFAUT_MIN_MEDIAS = 2, DEFAUT_MIN_MEDIAS_PERSONNE = PN.SEUIL_MIN;
+let MIN_MEDIAS = DEFAUT_MIN_MEDIAS; // sujets de presse ET « en bref » (réglé par appliquerSeuils)
+let MIN_MEDIAS_PERSONNE = DEFAUT_MIN_MEDIAS_PERSONNE; // accusation / polémique visant une personne nommée (scripts/personne-nommee.cjs)
 const FRAICHEUR_H = 3; // direct du président et sujets sensibles de niveau 1
 let FRAICHEUR_SUJET_H = 12; // sujets et dossiers (data/stories-config.json, « fraicheurH ») : un sujet à 3 médias arrivé la nuit reste publiable le matin
 let MAX_PAR_JOUR = 4; // réglable par data/stories-config.json (« maxParJour »)
@@ -383,8 +388,20 @@ const liensVideo = (articles) => [...new Map((articles || []).filter((a) => a?.v
 /** Sources de la fiche : les liens vidéo en tête, puis les articles (12 au plus, sans doublon). */
 const sourcesDe = (articles, videos) => [...new Set([...videos.map((v) => v.url), ...(articles || []).map((a) => a.url).filter((u) => /^https:\/\//.test(u || ""))])].slice(0, 12);
 
+/**
+ * Accusation, procédure ou polémique visant une PERSONNE NOMMÉE (présomption d'innocence, scripts/personne-nommee.cjs) : le sujet (ou dossier) doit être repris par au moins
+ * MIN_MEDIAS_PERSONNE médias distincts. Renvoie la raison du refus (aussi ajoutée à `journal`, lu par main()) ou null s'il passe.
+ */
+function refusPersonneNommee(sujet, medias, titre, journal) {
+  const v = PN.visePersonneNommee(sujet);
+  if (!v.vise || medias >= MIN_MEDIAS_PERSONNE) return null;
+  const raison = PN.raisonRefus(medias, MIN_MEDIAS_PERSONNE, v.mot);
+  if (Array.isArray(journal)) journal.push(`« ${String(titre || "").slice(0, 110)} » : ${raison}`);
+  return raison;
+}
+
 /** Un dossier (actualites.dossiers) non encore publié, frais, sans mot de la liste prudente ; renvoie { dossier, id, medias } ou null. */
-function choisirDossier({ actualites, file, registre = null, now = new Date() }) {
+function choisirDossier({ actualites, file, registre = null, now = new Date(), journal = [] }) {
   const entrees = file?.entrees || [];
   const enFile = new Set(entrees.map((e) => e.dossierId).filter(Boolean));
   const ids = new Set([...entrees.map((e) => e.id), ...(registre?.entrees || []).map((e) => e.id)]);
@@ -396,6 +413,7 @@ function choisirDossier({ actualites, file, registre = null, now = new Date() })
     const age = now.getTime() - Date.parse(d.derniere || d.articles[0].date);
     if (!(age < FRAICHEUR_SUJET_H * 36e5) || age < -36e5) return false;
     if (mediasDistinctsDe(d.articles, d.mediasDistincts) < MIN_MEDIAS_DOSSIER) return false;
+    if (refusPersonneNommee(d, mediasDistinctsDe(d.articles, d.mediasDistincts), d.titre, journal)) return false; // accusation visant une personne nommée : 3 médias au moins (le dossier ne montre aucun portrait)
     if (titreGenerique(d.titre) || dejaVu(d.titre, recents) || articlesDejaPublies(d.articles, recs72)) return false;
     if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
     if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
@@ -411,7 +429,7 @@ function choisirDossier({ actualites, file, registre = null, now = new Date() })
  * Choisit au plus un sujet. Renvoie { indice, sujet, id } ou { refus: "raison" }.
  * file : { entrees: [...] } ; now : Date.
  */
-function choisirSujet({ actualites, direct, file, now = new Date(), candidats: declares = null, registre = null }) {
+function choisirSujet({ actualites, direct, file, now = new Date(), candidats: declares = null, registre = null, journal = [] }) {
   const entrees = file?.entrees || [];
   const h = heureParis(now);
   if (h >= 23 || h < 7) return { refus: `nuit (${h} h à Paris)` };
@@ -425,7 +443,7 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
   const recs72 = entreesRecentes(entrees, registre, now, FENETRE_PRESSE_H);
   const recents = recs72.flatMap((r) => r.titres); // file ET registre sur 72 h (et non plus la seule file sur 24 h)
   const recentsPost = titresRecentsH(entrees, registre, now, POST_FENETRE_DOUBLON_H);
-  const dossier = storiesPleines ? null : choisirDossier({ actualites, file, registre, now });
+  const dossier = storiesPleines ? null : choisirDossier({ actualites, file, registre, now, journal });
   if (dossier) return dossier; // un dossier non publié passe avant les sujets simples
 
   const candidats = [];
@@ -444,6 +462,9 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     // Décision du propriétaire : le thème « justice » et les mots d'accusation, de procédure ou de polémique ne sont plus écartés (voir liste-prudente.cjs)
     if ((s.articles || []).some((a) => motExclu(a.titre))) return rej("mot exclu");
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    // Accusation, procédure ou polémique visant une personne nommée : au moins MIN_MEDIAS_PERSONNE médias (une prise de parole du président n'en dispense pas) et JAMAIS de portrait
+    const vise = PN.visePersonneNommee(s).vise;
+    if (vise && refusPersonneNommee(s, medias, titre, journal)) return rej(`accusation visant une personne nommée : moins de ${MIN_MEDIAS_PERSONNE} médias (présomption d'innocence)`);
     // Titre de repli : sans titre propre fiable, un sujet d'accusation, de procédure ou de polémique garde sa story (rubrique « à la une » + titre de presse cité, voir js/stories-actu.js) ; les autres sujets, non
     const sensibleNormal = !!(s.articles || []).some((a) => LP.motAssoupli(a.titre)) || s.illustration?.theme === "justice";
     const sansTitrePropre = !s.titrePropre?.titre || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true;
@@ -458,12 +479,12 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     const titreRef = repli ? titre : s.titrePropre.titre; // doublons : le titre de presse quand la story n'a pas de titre propre
     if (articlesDejaPublies(s.articles, recs72)) return rej("déjà publié (article)"); // l'id repose sur le premier titre, qui change : on compare aussi les liens et titres d'articles déjà publiés
     if (dejaVu(titreRef, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
-    const modele = repli ? "une" : modeleSujet(s, { direct, candidats: declares, now });
+    const modele = repli || vise ? "une" : modeleSujet(s, { direct, candidats: declares, now }); // une personne nommée visée : jamais « direct » ni « face à face » (portraits)
     if ((modele === "post-date" || modele === "date") && s.date?.iso && evenementDejaPublie(entrees, registre, now, s.titrePropre.titre, s.date.iso)) return rej("même événement déjà publié"); // post, story ou rappel
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
       if (postsPleins || dejaVu(s.titrePropre.titre, recentsPost)) return;
     } else if (storiesPleines) return;
-    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele, repli, fait });
+    candidats.push({ indice, sujet: s, id: idSujet(titre), medias, parole, modele, repli, fait, ...(vise ? { sansPortrait: true } : {}) });
   });
   if (!candidats.length) return { refus: storiesPleines ? `déjà ${MAX_PAR_JOUR} entrées aujourd'hui` : `aucun sujet ne remplit toutes les règles (${(actualites?.sujets || []).length} sujets examinés${Object.keys(rejets).length ? " ; écartés : " + Object.entries(rejets).map(([k, n]) => `${n} ${k}`).join(", ") : ""})` };
   candidats.sort((a, b) => Number(b.parole) - Number(a.parole) || b.medias - a.medias || Date.parse(b.sujet.derniere) - Date.parse(a.sujet.derniere));
@@ -531,7 +552,7 @@ const idBref = (jour) => crypto.createHash("sha1").update("bref|" + jour).digest
  * (4 par jour, rien de 23 h à 7 h), mêmes mots exclus, titre rédigé par le site obligatoire, sujets non déjà publiés.
  * Renvoie { bref: { indices, titres }, id, medias, sources } ou { refus }.
  */
-function choisirEnBref({ actualites, file, registre = null, now = new Date() }) {
+function choisirEnBref({ actualites, file, registre = null, now = new Date(), journal = [] }) {
   const h = heureParis(now);
   if (!EN_BREF) return { refus: "« en bref » désactivé (data/stories-config.json)" };
   if (h < BREF_DEBUT_H || h >= BREF_FIN_H) return { refus: "« en bref » : seulement le matin" };
@@ -549,7 +570,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date() }) 
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
     if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return;
     const medias = mediasDistinctsDe(s.articles, s.mediasDistincts);
-    if (medias < BREF_MIN_MEDIAS) return;
+    if (medias < MIN_MEDIAS) return;
     const age = now.getTime() - Date.parse(s.derniere);
     if (!(age < BREF_FRAICHEUR_H * 36e5) || age < -36e5) return;
     if (ids.has(idSujet(titre)) || (s.articles || []).some((a) => urls.has(a.url))) return;
@@ -557,6 +578,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date() }) 
     if (!faitDe(s)) return; // sans fait clair, pas dans « en bref » non plus
     if ((s.articles || []).some((a) => motExclu(a.titre))) return;
     if (reserveStory(now) && (s.articles || []).some((a) => parleDeSondage(a.titre))) return; // réserve électorale : aucun sondage, même cité par la presse
+    if (refusPersonneNommee(s, medias, titre, journal)) return; // accusation visant une personne nommée sous le seuil de médias
     retenus.push({ indice, s, medias, theme: s.illustration?.theme || "politique" });
   });
   retenus.sort((a, b) => b.medias - a.medias || Date.parse(b.s.derniere) - Date.parse(a.s.derniere));
@@ -765,6 +787,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
       }
       if (ACTUALITES.sujets[indice]?.articles?.[0]?.titre !== titre) return null; // le site n'a pas le même relevé que le fichier
       if (extras?.sansEtat) { const sj = ACTUALITES.sujets[indice]; sj.illustration = { ...(sj.illustration || {}), theme: "politique", vignette: null }; } // décision locale : pas de bandeau « Gouvernement » ni de photo de l'Élysée
+      if (extras?.sansPortrait) { const sj = ACTUALITES.sujets[indice]; sj.illustration = { ...(sj.illustration || {}), personnes: [] }; } // accusation visant une personne nommée : jamais son portrait ni son nom en légende de portrait (scripts/personne-nommee.cjs)
       if (extras?.accroche) { // titre-fait : affiché en gros par tous les styles (le titre propre de l'entrée, lui, ne change pas : il reste la clé anti-doublon)
         const sj = ACTUALITES.sujets[indice];
         sj.accroche = extras.accroche;
@@ -814,7 +837,7 @@ function normaliserConfig(c) {
   return {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
-    minMedias: entier(c?.minMedias, 3, 2, 10), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
+    minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
     maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
@@ -828,7 +851,7 @@ function normaliserConfig(c) {
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
 function appliquerSeuils(config) {
-  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_PERSONNE = config.minMediasPersonneNommee; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
 }
 /**
  * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
@@ -1217,7 +1240,7 @@ function brouillonsASupprimer(brouillons, now = new Date()) {
 }
 
 /** Sondage d'abord (déclencheur prioritaire), sinon un sujet d'actualité ; en monétisation, sinon une donnée propre (jamais de presse). */
-function choisir({ actualites, direct, sondages, veille = null, lois, senat, probas, meetings = null, agendaAn = null, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null) }) {
+function choisir({ actualites, direct, sondages, veille = null, lois, senat, probas, meetings = null, agendaAn = null, candidats = null, file, registre = null, rejetes = null, now = new Date(), config = normaliserConfig(null), journal = [] }) {
   const s = choisirSondage({ sondages, file, now, veille });
   if (!s.refus) return s;
   if (config.monetisation) {
@@ -1226,7 +1249,7 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
     const p = choisirDonneesPropres({ lois, senat, probas, file, now });
     return p.refus ? { refus: `${p.refus} ; sondage : ${s.refus}` } : p;
   }
-  const a = choisirSujet({ actualites, direct, file, now, candidats, registre });
+  const a = choisirSujet({ actualites, direct, file, now, candidats, registre, journal });
   if (a.dossier || a.modele === "direct") return a; // un dossier non publié et un direct en cours passent avant tout
   const s1 = choisirSensible({ actualites, file, registre, rejetes, now, config, niveaux: [1] }); // fait judiciaire établi : publication prudente
   if (!s1.refus) return s1;
@@ -1236,7 +1259,7 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
   if (!ra.refus) return ra;
   const pa = choisirPostAgenda({ meetings, agendaAn, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
   if (!pa.refus) return pa;
-  const b = choisirEnBref({ actualites, file, registre, now }); // « en bref » : une fois par jour, le matin
+  const b = choisirEnBref({ actualites, file, registre, now, journal }); // « en bref » : une fois par jour, le matin
   if (!b.refus) return b;
   if (!a.refus) return a;
   const s2 = choisirSensible({ actualites, file, registre, rejetes, now, config, niveaux: [2] }); // accusation, plainte, polémique : brouillon à valider (jamais en file)
@@ -1327,12 +1350,12 @@ function varianteChoix(choix, d) {
   return varianteDe(choix.id);
 }
 /** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
-function argsAvecVariante(args, variante, accroche = null, sansEtat = false) {
-  if ((!variante || variante === "bleu") && !accroche && !sansEtat) return args;
+function argsAvecVariante(args, variante, accroche = null, sansEtat = false, sansPortrait = false) {
+  if ((!variante || variante === "bleu") && !accroche && !sansEtat && !sansPortrait) return args;
   const a = [...args];
   while (a.length < 8) a.push(null);
   a[8] = variante && variante !== "bleu" ? variante : null;
-  if (accroche || sansEtat) a[9] = { ...(accroche ? { accroche } : {}), ...(sansEtat ? { sansEtat: true } : {}) }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
+  if (accroche || sansEtat || sansPortrait) a[9] = { ...(accroche ? { accroche } : {}), ...(sansEtat ? { sansEtat: true } : {}), ...(sansPortrait ? { sansPortrait: true } : {}) }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
   return a;
 }
 
@@ -1417,7 +1440,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}), ...(choix.sansPortrait ? { personneNommee: true, sansPortrait: true } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -1473,7 +1496,9 @@ async function main() {
   if (aSupprimer.length) console.log(`[stories-auto] brouillons supprimés (réserve électorale ou ancienneté) : ${aSupprimer.join(", ")}`);
   const restants = brouillons.filter((b) => !aSupprimer.includes(b.id));
 
-  const choix = choisir({ ...donnees, file: { entrees: [...file.entrees, ...restants] }, now, config });
+  const journal = []; // refus motivés (accusation visant une personne nommée sous le seuil de médias) : écrits dans le journal et le résumé de l'exécution
+  const choix = choisir({ ...donnees, file: { entrees: [...file.entrees, ...restants] }, now, config, journal });
+  for (const l of journal) alerteResume(`- **Refusé (personne nommée, présomption d'innocence)** : ${l}`);
   const { gardees, images } = elaguer(file.entrees, now);
   // Une entrée récente dont l'image manque (ou n'est pas un JPEG) est retirée de la file, avec alerte : elle ne bloque rien
   const { gardees: saines, retirees } = retirerSansImage(gardees, images, (id) => imageValide(path.join(DOSSIER_IMG, `${id}.jpg`)));
@@ -1531,7 +1556,7 @@ async function main() {
       }
     } else {
       const variante = varianteChoix(choix, d); // test comparatif de styles (« bleu » = dessin historique)
-      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche, Boolean(choix.sujet && sansBandeauEtat(choix.sujet))));
+      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche, Boolean(choix.sujet && sansBandeauEtat(choix.sujet)), Boolean(choix.sansPortrait)));
       const dim = dimensionsJpeg(jpeg);
       if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
       if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
@@ -1559,6 +1584,6 @@ async function main() {
   }
 }
 
-module.exports = { VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

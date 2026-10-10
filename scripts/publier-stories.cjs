@@ -19,6 +19,8 @@
  *  - une story créée il y a plus de 6 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
  *  - jamais deux fois le même id (registre) ;
  *  - aucun sondage pendant la réserve électorale (mêmes fonctions que stories-auto.cjs) ;
+ *  - PERSONNE NOMMÉE (scripts/personne-nommee.cjs) : une entrée { personneNommee: true } (accusation, procédure ou polémique visant une personne nommée) n'est publiée que dessinée
+ *    sans portrait (sansPortrait) et reprise par au moins 3 médias distincts (champ medias) ;
  *  - SUJETS SENSIBLES (scripts/sujets-sensibles.cjs) : une entrée { sensible: 1 } (fait judiciaire établi) n'est publiée que si son texte passe encore formulationSure
  *    (2 médias, juridiction, aucun nom, aucun verbe qui accuse) ; une entrée { sensible: 2 } n'est JAMAIS publiée sans valideHumain + valideLe (workflow « Valider un brouillon ») ;
  *  - data/stories-config.json : validationHumaine à true => rien n'est publié, sauf les entrées validées par un humain (valideHumain) ; monétisation => seules les entrées
@@ -52,6 +54,7 @@ const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
 const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches } = require("./stories-auto.cjs");
 const SS = require("./sujets-sensibles.cjs");
+const PN = require("./personne-nommee.cjs"); // accusation visant une personne nommée : 3 médias au moins, jamais de portrait
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés : jamais republiés, texte jamais repris (audit J-23)
 
 const RACINE = path.resolve(__dirname, "..");
@@ -139,6 +142,8 @@ function risque(e) {
   const post = e.type === "post" || e.type === "reel" || e.type === "carousel" || Boolean(e.annonceDe);
   if ((e.type === "post" || e.type === "reel") && !legendeValide(e)) return true;
   // SUJETS SENSIBLES (scripts/sujets-sensibles.cjs) : le titre de l'entrée est le nôtre, le titre de presse est dans « sujets » (jamais publié tel quel)
+  // Accusation ou polémique visant une personne nommée (présomption d'innocence) : au moins 3 médias distincts ET dessinée sans portrait, sinon jamais publiée
+  if (e.personneNommee === true && (e.sansPortrait !== true || new Set((Array.isArray(e.medias) ? e.medias : []).filter(Boolean)).size < PN.SEUIL_MIN)) return true;
   if (e.sensible === 1) return !niveau1Sur(e); // fait judiciaire établi : texte fabriqué par règles, recontrôlé ici
   if (e.sensible === 2) return !(e.valideHumain === true && e.valideLe); // niveau 2 : JAMAIS sans validation humaine (workflow « Valider un brouillon »)
   if (e.type === "carousel" && !validerCarrousel(e).ok) return true;

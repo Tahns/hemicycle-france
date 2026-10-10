@@ -46,6 +46,10 @@ const MAX_REGROUPEMENT = 700; // titres les plus récents soumis au regroupement
 const USER_AGENT = "hemicycle-france-bot/1.0 (https://github.com/Tahns/hemicycle-france)";
 const DECODEX_URL = "https://asset.lemde.fr/medias/mmpub/data/decodex/hoax/hoax_debunks.json";
 
+// Flux généralistes (toutes rubriques) : seuls les titres de vie politique sont gardés (mots-clés du titre, ou rubrique « /politique/ » du lien)
+const FILTRE_POLITIQUE = /gouvernement|pr[ée]sident|[ée]lys[ée]e|macron|matignon|premier ministre|lecornu|assembl[ée]e|s[ée]nat|d[ée]put[ée]|ministre|minist[èe]re|[ée]lection|[ée]lecteur|pr[ée]sidentielle|municipales|l[ée]gislatives|r[ée]gionales|d[ée]partementales|scrutin|candidat|primaire|motion de censure|49[.,]3|budget|projet de loi|proposition de loi|r[ée]forme|conseil constitutionnel|r[ée]f[ée]rendum|dissolution|majorit[ée]|opposition|politique|\bRN\b|\bLFI\b|\bPS\b|\bLR\b|insoumis|socialiste|r[ée]publicains|rassemblement national|[ée]cologistes|renaissance|horizons|modem|bardella|le pen|m[ée]lenchon|attal|retailleau|philippe/i;
+const URL_POLITIQUE = /\/politique(\/|-|\?|$)/i;
+
 const MEDIAS = [
   { id: "franceinfo", nom: "franceinfo", flux: "https://www.francetvinfo.fr/politique.rss", domaine: "francetvinfo.fr" },
   { id: "lemonde", nom: "Le Monde", flux: "https://www.lemonde.fr/politique/rss_full.xml", domaine: "lemonde.fr" },
@@ -66,6 +70,18 @@ const MEDIAS = [
   { id: "ledauphine", nom: "Le Dauphiné libéré", flux: "https://www.ledauphine.com/politique/rss", domaine: "ledauphine.com" },
   { id: "estrepublicain", nom: "L'Est républicain", flux: "https://www.estrepublicain.fr/politique/rss", domaine: "estrepublicain.fr" },
   { id: "nicematin", nom: "Nice-Matin", flux: "https://www.nicematin.com/politique/rss", domaine: "nicematin.com" },
+  // Panel élargi (audit de neutralité du 9 octobre 2026) : sensibilités et territoires variés. Adresses vérifiées (HTTP 200, flux RSS lisible) le 10 octobre 2026.
+  // Flux généralistes : filtre « vie politique » (FILTRE_POLITIQUE / URL_POLITIQUE). Liens vers leur propre site seulement, comme pour les autres.
+  { id: "humanite", nom: "L'Humanité", flux: "https://www.humanite.fr/feed", domaine: "humanite.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "lacroix", nom: "La Croix", flux: "https://www.la-croix.com/RSS/France", domaine: "la-croix.com", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "ouestfrance", nom: "Ouest-France", flux: "https://www.ouest-france.fr/rss/france", domaine: "ouest-france.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "lobs", nom: "L'Obs", flux: "https://www.nouvelobs.com/politique/rss.xml", domaine: "nouvelobs.com" },
+  { id: "franceinter", nom: "France Inter", flux: "https://www.radiofrance.fr/franceinter/rss", domaine: "radiofrance.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "ladepeche", nom: "La Dépêche", flux: "https://www.ladepeche.fr/rss.xml", domaine: "ladepeche.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "letelegramme", nom: "Le Télégramme", flux: "https://www.letelegramme.fr/france/rss.xml", domaine: "letelegramme.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "valeursactuelles", nom: "Valeurs actuelles", flux: "https://www.valeursactuelles.com/feed", domaine: "valeursactuelles.com", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "lejdd", nom: "Le JDD", flux: "https://www.lejdd.fr/rss.xml", domaine: "lejdd.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
+  { id: "europe1", nom: "Europe 1", flux: "https://www.europe1.fr/rss.xml", domaine: "europe1.fr", filtre: FILTRE_POLITIQUE, filtreUrl: URL_POLITIQUE },
 ];
 
 const log = (...m) => console.log("[fetch-actualites]", ...m);
@@ -159,7 +175,7 @@ async function main() {
       try { hote = new URL(a.url).hostname.replace(/^www\./, ""); } catch { continue; }
       if (!a.titre || isNaN(a.date) || !/^https:/.test(a.url)) continue;
       if (hote !== m.domaine && !hote.endsWith("." + m.domaine)) continue;
-      if (m.filtre && !m.filtre.test(a.titre)) continue;
+      if ((m.filtre || m.filtreUrl) && !(m.filtre?.test(a.titre) || m.filtreUrl?.test(a.url))) continue;
       if ((maintenant - a.date) / 864e5 > JOURS || a.date - maintenant > 36e5) continue;
       if (dementis.has(normaliser(a.url))) continue;
       if (reserve && /sondage|intentions? de vote/i.test(a.titre)) continue;

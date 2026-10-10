@@ -5,9 +5,12 @@ import { spawnSync } from "child_process";
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, unlinkSync } from "fs";
 import { tmpdir } from "os";
 import path from "path";
-import { planHd, urlHd, produireHd, completerHd, hdAFaire, LARGEUR_HD_MIN, LARGEUR_HD_MAX, MAX_OCTETS_HD, evaluerFichier, choisirMeilleur, filtrerNom, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
+import vm from "vm";
+import { readFileSync as lireFichier } from "fs";
+import { fileURLToPath } from "url";
+import { choisirVariantes, tropProches, variantesAFaire, rangLibre, planHd, urlHd, produireHd, completerHd, hdAFaire, LARGEUR_HD_MIN, LARGEUR_HD_MAX, MAX_OCTETS_HD, evaluerFichier, choisirMeilleur, filtrerNom, resoudreCle, doitRetenter, ligneRapport, redimensionner, CANDIDATS, MAX_OCTETS, COTE } from "../scripts/fetch-vignettes.js";
 import { verifierVignettes } from "../scripts/check-vignettes.js";
-import { cleVignette, CLES } from "../scripts/vignettes-cle.js";
+import { cleVignette, CLES, NB_VARIANTES, MIN_VARIANTES, variantesDe, composerEntree, nomFichierVariante, lireNomFichier } from "../scripts/vignettes-cle.js";
 import { illustrer } from "../scripts/illustrations.js";
 
 const MAINTENANT = Date.parse("2026-10-06");
@@ -207,21 +210,20 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
 
 // --- Version HD : plan, adresse, production (fonctions pures + faux téléchargement) ---
 {
-  assert.equal(planHd(1079), null, "source trop étroite : pas de HD");
+  assert.equal(planHd(1279), null, "source trop étroite : pas de HD");
   assert.equal(planHd(undefined), null);
-  assert.deepEqual(planHd(1080), { largeur: 1080 });
-  assert.deepEqual(planHd(1300), { largeur: 1300 }, "jamais d'agrandissement");
-  assert.deepEqual(planHd(4000), { largeur: LARGEUR_HD_MAX }, "1600 px au plus");
-  assert.equal(LARGEUR_HD_MIN, 1080); assert.equal(MAX_OCTETS_HD, 220 * 1024);
-  assert.equal(urlHd("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/640px-X.jpg", 1600), "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/1600px-X.jpg");
-  assert.equal(urlHd("https://thumb.test/X.jpg", 1600), null, "motif inconnu : pas de HD");
-  assert.equal(urlHd(null, 1600), null);
+  assert.deepEqual(planHd(1280), { largeur: 1280 }, "jamais d'agrandissement");
+  assert.deepEqual(planHd(4000), { largeur: LARGEUR_HD_MAX }, "largeur standard de miniature Commons (hors liste : HTTP 400)");
+  assert.equal(LARGEUR_HD_MAX, 1280); assert.equal(LARGEUR_HD_MIN, 1280); assert.equal(MAX_OCTETS_HD, 220 * 1024);
+  assert.equal(urlHd("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/640px-X.jpg", 1280), "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/1280px-X.jpg");
+  assert.equal(urlHd("https://thumb.test/X.jpg", 1280), null, "motif inconnu : pas de HD");
+  assert.equal(urlHd(null, 1280), null);
   const vus = [];
   const ctx = { telecharger: async (u) => { vus.push(u); return { ok: true, status: 200, arrayBuffer: async () => Uint8Array.from([1, 2, 3]).buffer }; }, redimensionnerHd: async (o, l) => Buffer.concat([o, Buffer.from([l % 256])]) };
   const meilleur = { largeur: 2592, vignette: "https://x.test/thumb/a/ab/F.jpg/640px-F.jpg" };
   const hd = await produireHd(meilleur, ctx);
-  assert.deepEqual(vus, ["https://x.test/thumb/a/ab/F.jpg/1600px-F.jpg"]);
-  assert.equal(hd.largeur, 1600); assert.ok(hd.octets.length > 3);
+  assert.deepEqual(vus, ["https://x.test/thumb/a/ab/F.jpg/1280px-F.jpg"]);
+  assert.equal(hd.largeur, 1280); assert.ok(hd.octets.length > 3);
   assert.equal(await produireHd({ ...meilleur, largeur: 900 }, ctx), null, "source étroite : null, aucun téléchargement");
   assert.equal(vus.length, 1);
   await assert.rejects(produireHd(meilleur, { ...ctx, telecharger: async () => ({ ok: false, status: 429 }) }), (e) => e.transitoire === true, "429 HD : transitoire");
@@ -232,13 +234,13 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   const r = await resoudreCle("assemblee", base);
   assert.equal(r.statut, "photo");
   assert.ok(r.octetsHd?.length, "HD produite");
-  assert.equal(r.entree.largeur_hd, 1600); assert.equal(r.entree.octets_hd, r.octetsHd.length);
+  assert.equal(r.entree.largeur_hd, 1280); assert.equal(r.entree.octets_hd, r.octetsHd.length);
   assert.equal(r.entree.licence, "CC BY-SA 4.0", "même crédit");
   const r2 = await resoudreCle("assemblee", { ...base, redimensionnerHd: async () => { throw new Error("ffmpeg HS"); } });
   assert.equal(r2.statut, "photo", "échec HD : la vignette carrée reste"); assert.ok(!r2.octetsHd && r2.hdErreur);
   // complément d'une ancienne entrée sans HD : licence revérifiée
   const hd2 = await completerHd({ fichier: "Palais_Bourbon_facade.jpg" }, { ...base, api: async () => ({ query: { pages: { 1: catPages[0] } } }) });
-  assert.equal(hd2.largeur, 1600);
+  assert.equal(hd2.largeur, 1280);
   const nc = [page("Palais_Bourbon_facade.jpg", { licence: "CC BY-NC 4.0", l: 2400, h: 1600 })];
   assert.equal(await completerHd({ fichier: "Palais_Bourbon_facade.jpg" }, { ...base, api: async () => ({ query: { pages: { 1: nc[0] } } }) }), null, "licence devenue non libre : pas de HD");
   assert.equal(hdAFaire({ chemin: "a" }, "2026-10-06"), true);
@@ -270,6 +272,193 @@ if (spawnSync("ffmpeg", ["-version"]).status === 0) {
   unlinkSync(path.join(d, "photos", "assemblee-hd.jpg"));
   ecrire({ ...v, chemin: "photos/vignettes/assemblee.jpg", chemin_hd: "photos/vignettes/assemblee-hd.jpg" });
   assert.ok((await verifierVignettes(path.join(d, "photos"), fichier)).erreurs.some((e) => /fichier absent/.test(e)), "chemin_hd sans fichier");
+}
+
+// ===================== Plusieurs photos par institution (variantes) =====================
+{ // format : première photo à plat (compatible), `variantes` = liste complète
+  const v1 = { chemin: "photos/vignettes/senat.jpg", lieu: "Palais du Luxembourg", alt: "Photo d'illustration : X", fichier: "A.jpg", licence: "CC BY 4.0", auteur: "A", source: "https://commons.wikimedia.org/wiki/File:A.jpg" };
+  const v2 = { chemin: "photos/vignettes/senat-2.jpg", fichier: "B.jpg", licence: "CC0", auteur: "B", source: "https://commons.wikimedia.org/wiki/File:B.jpg" };
+  assert.deepEqual(variantesDe(v1), [v1], "format d'origine : l'entrée est sa propre unique variante");
+  assert.deepEqual(variantesDe(undefined), []); assert.deepEqual(variantesDe({}), []);
+  const entree = composerEntree([v1, { ...v2, lieu: v1.lieu, alt: v1.alt }]);
+  assert.equal(entree.chemin, v1.chemin, "première photo à plat"); assert.equal(entree.variantes.length, 2);
+  const vs = variantesDe(entree);
+  assert.equal(vs.length, 2); assert.equal(vs[1].chemin, "photos/vignettes/senat-2.jpg");
+  assert.equal(vs[1].alt, v1.alt, "lieu et texte alternatif hérités"); assert.equal(vs[1].licence, "CC0");
+  assert.equal(composerEntree([v1]).variantes, undefined, "une seule photo : pas de champ variantes");
+  assert.deepEqual(composerEntree([]), null);
+  // les champs à plat font foi pour la première (HD complétée à plat, ancienne copie dans variantes)
+  assert.equal(variantesDe({ ...entree, chemin_hd: "photos/vignettes/senat-hd.jpg" })[0].chemin_hd, "photos/vignettes/senat-hd.jpg");
+  // variantes sans la première : elle est ajoutée en tête
+  assert.deepEqual(variantesDe({ ...v1, variantes: [v2] }).map((v) => v.chemin), [v1.chemin, v2.chemin]);
+  assert.equal(variantesDe({ ...v1, variantes: [null, { fichier: "sans chemin" }] }).length, 1);
+  assert.deepEqual([1, 2, 3].map((k) => nomFichierVariante("senat", k)), ["senat.jpg", "senat-2.jpg", "senat-3.jpg"]);
+  assert.equal(nomFichierVariante("senat", 3, true), "senat-3-hd.jpg");
+  assert.deepEqual(lireNomFichier("senat-3-hd.jpg"), { cle: "senat", rang: 3, hd: true });
+  assert.deepEqual(lireNomFichier("elysee.jpg"), { cle: "elysee", rang: 1, hd: false });
+  assert.equal(lireNomFichier("?"), null);
+  assert.equal(rangLibre("senat", [{ chemin: "photos/vignettes/senat.jpg" }]), 2);
+  assert.equal(rangLibre("senat", [{ chemin: "photos/vignettes/senat.jpg" }, { chemin: "photos/vignettes/senat-2.jpg" }, { chemin: "photos/vignettes/senat-4.jpg" }]), 3, "premier rang libre");
+  assert.ok(NB_VARIANTES >= 4 && MIN_VARIANTES >= 3 && MIN_VARIANTES <= NB_VARIANTES);
+}
+{ // distinctes : pas le même fichier, ni le même auteur le même jour, ni la même série de noms du même auteur
+  const f = (fichier, auteur, date, note = 50) => ({ fichier, auteur, date, note });
+  assert.equal(tropProches(f("A.jpg", "X", "2024-01-01"), f("A.jpg", "Y", "2020-01-01")), true, "même fichier");
+  assert.equal(tropProches(f("A.jpg", "X", "2024-01-01"), f("B.jpg", "X", "2024-01-01")), true, "même auteur, même jour");
+  assert.equal(tropProches(f("Palais 1.jpg", "X", "2024-01-01"), f("Palais 2.jpg", "X", "2025-02-02")), true, "même série de noms, même auteur");
+  assert.equal(tropProches(f("Palais 1.jpg", "X", "2024-01-01"), f("Palais 2.jpg", "Y", "2024-01-01")), false, "auteurs différents");
+  assert.equal(tropProches(f("A.jpg", "Auteur inconnu", "2024-01-01"), f("B.jpg", "Auteur inconnu", "2024-01-01")), false, "auteur inconnu : pas de rapprochement");
+  const pris = choisirVariantes([f("A.jpg", "X", "2024-01-01", 90), f("B.jpg", "X", "2024-01-01", 80), f("C.jpg", "Y", "2023-01-01", 70), f("D.jpg", "Z", "2022-01-01", 60), f("E.jpg", "W", "2021-01-01", 50), f("F.jpg", "V", "2020-01-01", 40)]);
+  assert.deepEqual(pris.map((x) => x.fichier), ["A.jpg", "C.jpg", "D.jpg", "E.jpg"], "4 au plus, la meilleure note d'abord, B écartée (même auteur, même jour)");
+  assert.deepEqual(choisirVariantes([f("A.jpg", "X", "2024-01-01")], [f("A.jpg", "Q", "1999-01-01")]), [], "déjà en place");
+  assert.equal(choisirVariantes([f("A.jpg", "X", "d1"), f("B.jpg", "Y", "d2")], [], 1).length, 1);
+}
+{ // resoudreCle : plusieurs photos libres distinctes pour une même clé
+  const lot = [
+    page("Palais_Bourbon_facade_1.jpg", { date: "2025-06-01", l: 3000, h: 2250, extra: { Artist: { value: "Alice" } } }),
+    page("Palais_Bourbon_facade_nuit.jpg", { date: "2024-03-01", l: 2800, h: 2000, extra: { Artist: { value: "Bob" } } }),
+    page("Palais_Bourbon_vue_2023.jpg", { date: "2023-03-01", l: 2800, h: 2000, extra: { Artist: { value: "Carole" } } }),
+    page("Palais_Bourbon_facade_doublon.jpg", { date: "2025-06-01", l: 3000, h: 2250, extra: { Artist: { value: "Alice" } } }), // même auteur, même jour que la 1re
+    page("Palais_Bourbon_exterieur_2022.jpg", { date: "2022-03-01", l: 2800, h: 2000, extra: { Artist: { value: "Denis" } } }),
+    page("Insigne_Assemblee_Palais_Bourbon_2025.jpg", { date: "2025-01-01", l: 2800, h: 2000, extra: { Artist: { value: "Eve" } } }), // objet, pas un bâtiment
+    page("Palais_Bourbon_NC.jpg", { licence: "CC BY-NC 4.0", date: "2025-06-01", extra: { Artist: { value: "Fred" } } }),
+    page("Assemblee_photo_quelconque.jpg", { date: "2025-06-01", l: 3000, h: 2250, extra: { Artist: { value: "Gilles" } } }), // nom sans mot de bâtiment : refusée comme variante
+  ];
+  const appels = [];
+  const r = await resoudreCle("assemblee", ctxDe({ appels, categories: { "Category:Palais Bourbon": lot } }), { nombre: NB_VARIANTES });
+  assert.equal(r.statut, "photo");
+  assert.equal(r.variantes.length, 4, "4 variantes");
+  assert.equal(r.entree.fichier, r.variantes[0].entree.fichier, "la première variante garde la forme historique");
+  const noms = r.variantes.map((v) => v.entree.fichier);
+  assert.equal(new Set(noms).size, 4, "distinctes");
+  assert.ok(!noms.includes("Palais_Bourbon_NC.jpg") && !noms.includes("Palais_Bourbon_facade_doublon.jpg") && !noms.some((n) => /Insigne/.test(n)), noms.join(","));
+  for (const v of r.variantes) { assert.ok(v.entree.licence && v.entree.auteur && /^https:\/\/commons/.test(v.entree.source), "crédit complet par variante"); assert.match(v.entree.alt, /^Photo d'illustration : Palais Bourbon/); }
+  assert.equal(appels.length, 1, "une seule catégorie suffit");
+  // photos déjà en place : jamais reprises, les nouvelles leur sont distinctes
+  const deja = [{ fichier: "Palais_Bourbon_facade_1.jpg", auteur: "Alice", date: "2025-06-01" }];
+  const r2 = await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot } }), { nombre: NB_VARIANTES - 1, existantes: deja });
+  assert.equal(r2.variantes.length, 3);
+  assert.ok(!r2.variantes.some((v) => v.entree.fichier === "Palais_Bourbon_facade_1.jpg" || v.entree.fichier === "Palais_Bourbon_facade_doublon.jpg"));
+  // pas assez de photos dans le premier candidat : on passe au suivant
+  const r3 = await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot.slice(0, 2), "Category:Facade of the Palais Bourbon": [page("Facade_Bourbon_autre.jpg", { extra: { Artist: { value: "Hugo" } } }), lot[2]] } }), { nombre: 4 });
+  assert.equal(r3.variantes.length, 4);
+  assert.equal(r3.variantes[3].entree.candidat === "Category:Facade of the Palais Bourbon" || r3.variantes[2].entree.candidat === "Category:Facade of the Palais Bourbon", true);
+  // une seule photo libre existe : succès partiel (la clé reste complétable plus tard)
+  const r4 = await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot.slice(0, 1) } }), { nombre: 4 });
+  assert.equal(r4.statut, "photo"); assert.equal(r4.variantes.length, 1);
+  // 429 pendant la recherche : ce qui est acquis est gardé, marqué transitoire
+  const e429 = new Error("HTTP 429"); e429.transitoire = true;
+  const r5 = await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot.slice(0, 2), "Category:Facade of the Palais Bourbon": e429 } }), { nombre: 4 });
+  assert.equal(r5.statut, "photo"); assert.equal(r5.transitoire, true); assert.equal(r5.variantes.length, 2);
+  // aucune photo supplémentaire (tout déjà en place) : échec non transitoire
+  const r6 = await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot.slice(0, 1) } }), { nombre: 3, existantes: [{ fichier: "Palais_Bourbon_facade_1.jpg" }] });
+  assert.equal(r6.statut, "echec"); assert.equal(r6.transitoire, false);
+  // nombre = 1 (défaut) : comportement d'origine
+  assert.equal((await resoudreCle("assemblee", ctxDe({ categories: { "Category:Palais Bourbon": lot } }))).variantes.length, 1);
+  // objets, insignes, sculptures : jamais retenus comme photo d'institution
+  for (const n of ["Sculpture_Laurent_Perbos_Assemblee_nationale.jpg", "Insigne_Palais_Bourbon.jpg", "Drapeau_Assemblee_nationale.jpg", "Blason_Palais_Bourbon.jpg"]) assert.equal(evaluerFichier(page(n), opt).retenu, false, n);
+  assert.equal(evaluerFichier(page("Palais_Bourbon_facade.jpg"), opt).bonNom, true);
+}
+// Rapport et reprises des variantes
+assert.match(ligneRapport({ vignettes: { assemblee: composerEntree([{ chemin: "a.jpg" }, { chemin: "a-2.jpg" }]), senat: { chemin: "s.jpg" } } }), /3 photo\(s\) au total/);
+assert.equal(variantesAFaire(1, undefined, "2026-10-10"), true);
+assert.equal(variantesAFaire(1, "2026-10-10", "2026-10-10"), false, "une tentative par jour");
+assert.equal(variantesAFaire(1, "2026-10-09", "2026-10-10"), true);
+assert.equal(variantesAFaire(NB_VARIANTES, undefined, "2026-10-10"), false, "complet");
+assert.equal(variantesAFaire(0, undefined, "2026-10-10"), false, "pas de photo : c'est le chemin normal de première recherche");
+
+// check-vignettes avec variantes : crédit exigé pour chaque photo, cohérence des fichiers
+{
+  const d = mkdtempSync(path.join(tmpdir(), "vig-var-"));
+  mkdirSync(path.join(d, "photos"));
+  const ph = (n) => writeFileSync(path.join(d, "photos", n), Buffer.alloc(1000));
+  const v = (cle, rang, extra = {}) => ({ chemin: `photos/vignettes/${nomFichierVariante(cle, rang)}`, lieu: "L", alt: "a", fichier: `F${rang}.jpg`, licence: "CC BY 4.0", auteur: "A", source: "https://commons.wikimedia.org/wiki/File:X.jpg", ...extra });
+  const fichier = path.join(d, "v.json");
+  const ecrire = (e) => writeFileSync(fichier, JSON.stringify({ vignettes: { assemblee: e } }));
+  const verif = () => verifierVignettes(path.join(d, "photos"), fichier);
+  ph("assemblee.jpg"); ph("assemblee-2.jpg"); ph("assemblee-3.jpg");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2), v("assemblee", 3)]));
+  let r = await verif();
+  assert.deepEqual(r.erreurs, [], "trois variantes créditées"); assert.equal(r.avec, 1); assert.equal(r.photos, 3);
+  assert.ok(r.avertissements.some((a) => /moins de/.test(a)) === (3 < MIN_VARIANTES), "avertissement si moins de MIN_VARIANTES photos");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2, { licence: "CC BY-NC 4.0" }), v("assemblee", 3)]));
+  assert.ok((await verif()).erreurs.some((e) => /assemblee-2\.jpg : licence non libre/.test(e)), "licence d'une variante contrôlée");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2, { auteur: "" }), v("assemblee", 3)]));
+  assert.ok((await verif()).erreurs.some((e) => /assemblee-2\.jpg : auteur manquant/.test(e)));
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2)]));
+  assert.ok((await verif()).erreurs.some((e) => /assemblee-3\.jpg : aucune variante correspondante/.test(e)), "fichier sans variante crédité");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2), v("assemblee", 3), v("assemblee", 4)]));
+  assert.ok((await verif()).erreurs.some((e) => /variante 4 de « assemblee » annonce .*assemblee-4\.jpg, fichier absent/.test(e)), "variante annoncée mais fichier absent");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2), v("assemblee", 3, { fichier: "F2.jpg" })]));
+  assert.ok((await verif()).erreurs.some((e) => /deux fois la même photo/.test(e)), "doublon");
+  // HD d'une variante
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2, { chemin_hd: "photos/vignettes/assemblee-2-hd.jpg" }), v("assemblee", 3)]));
+  writeFileSync(path.join(d, "photos", "assemblee-2-hd.jpg"), Buffer.alloc(50 * 1024));
+  assert.deepEqual((await verif()).erreurs, [], "HD de variante déclarée et présente");
+  ecrire(composerEntree([v("assemblee", 1), v("assemblee", 2), v("assemblee", 3)]));
+  assert.ok((await verif()).erreurs.some((e) => /assemblee-2-hd\.jpg : « assemblee » n'a pas de chemin_hd/.test(e)), "HD sans chemin_hd");
+  // état d'origine (une seule photo, aucune variantes) : valide
+  ecrire(v("assemblee", 1)); unlinkSync(path.join(d, "photos", "assemblee-2.jpg")); unlinkSync(path.join(d, "photos", "assemblee-3.jpg")); unlinkSync(path.join(d, "photos", "assemblee-2-hd.jpg"));
+  assert.deepEqual((await verif()).erreurs, [], "format d'origine");
+}
+
+// --- index.html : choix d'une variante par sujet (code réel de visuelActu extrait de la page, exécuté dans un bac à sable) ---
+{
+  const html = lireFichier(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "index.html"), "utf-8");
+  const debut = html.indexOf("const VIGNETTES_VUES"), fin = html.indexOf("const pastilleVideo");
+  assert.ok(debut > 0 && fin > debut, "bloc visuelActu trouvé");
+  const bac = (vignettes) => {
+    const ctx = vm.createContext({ VIGNETTES: vignettes, esc: (x) => String(x ?? "").replace(/"/g, "&quot;"), couleurPartiActu: () => "#000", texteSurCouleur: () => "#fff", initialesActu: () => "X" });
+    vm.runInContext(html.slice(debut, fin) + "\nthis.visuelActu = visuelActu; this.VUES = VIGNETTES_VUES;", ctx);
+    return ctx;
+  };
+  const photo = (cle, rang) => ({ chemin: `photos/vignettes/${nomFichierVariante(cle, rang)}`, lieu: cle, alt: `Photo d'illustration : ${cle} ${rang}`, auteur: `Auteur ${rang}`, licence: "CC BY 4.0", source: "https://commons.wikimedia.org/wiki/File:X.jpg" });
+  const entree = (cle, n) => composerEntree(Array.from({ length: n }, (_, i) => photo(cle, i + 1)));
+  const sujet = (i, vignette = "assemblee") => ({ illustration: { vignette }, articles: [{ url: `https://exemple.test/article-${i}` }], derniere: "2026-10-10" });
+  const src = (h) => h.match(/src="([^"]+)"/)?.[1] || null;
+  // plusieurs variantes : jamais deux fois la même photo dans une liste, tant qu'il en reste
+  let b = bac({ assemblee: entree("assemblee", 4) });
+  const premiers = [0, 1, 2, 3].map((i) => src(b.visuelActu(sujet(i))));
+  assert.equal(new Set(premiers).size, 4, "4 sujets d'une même clé : 4 photos différentes : " + premiers.join(","));
+  assert.ok(premiers.every((x) => /^photos\/vignettes\/assemblee(-\d)?\.jpg$/.test(x)));
+  assert.equal(b.visuelActu(sujet(4)), "", "toutes les variantes ont servi (et pas de voisine avec photo) : sans photo");
+  // déterministe : même sujet, même photo, d'un affichage à l'autre
+  const b2 = bac({ assemblee: entree("assemblee", 4) });
+  assert.equal(src(b2.visuelActu(sujet(2))), src(bac({ assemblee: entree("assemblee", 4) }).visuelActu(sujet(2))));
+  b2.VUES.clear();
+  assert.equal(src(b2.visuelActu(sujet(2))), src(bac({ assemblee: entree("assemblee", 4) }).visuelActu(sujet(2))), "remise à zéro de la liste : même choix");
+  // des sujets différents ne démarrent pas tous sur la même variante
+  const departs = new Set(Array.from({ length: 12 }, (_, i) => src(bac({ assemblee: entree("assemblee", 4) }).visuelActu(sujet(i)))));
+  assert.ok(departs.size >= 3, "le hash répartit les sujets : " + [...departs].join(","));
+  // crédit propre à la variante (alt et survol)
+  const h = bac({ assemblee: entree("assemblee", 3) }).visuelActu(sujet(7));
+  const rang = Number(src(h).match(/-(\d)\.jpg$/)?.[1] || 1);
+  assert.ok(h.includes(`alt="Photo d'illustration : assemblee ${rang}"`) && h.includes(`Auteur ${rang}, CC BY 4.0, Wikimedia Commons`), h);
+  // une seule variante (état actuel, format d'origine) : le 2e sujet prend une photo voisine, le 3e rien (comportement d'avant)
+  b = bac({ assemblee: photo("assemblee", 1), election: photo("election", 1), senat: photo("senat", 1) });
+  assert.equal(src(b.visuelActu(sujet(0))), "photos/vignettes/assemblee.jpg");
+  const voisine = src(b.visuelActu(sujet(1)));
+  assert.ok(["photos/vignettes/election.jpg", "photos/vignettes/senat.jpg"].includes(voisine), "voisine : " + voisine);
+  assert.ok(src(b.visuelActu(sujet(2))), "la dernière voisine");
+  assert.equal(b.visuelActu(sujet(3)), "", "plus aucune photo disponible");
+  // les variantes de la clé passent avant les voisines
+  b = bac({ assemblee: entree("assemblee", 2), election: photo("election", 1) });
+  const deux = [0, 1].map((i) => src(b.visuelActu(sujet(i))));
+  assert.ok(deux.every((x) => /assemblee/.test(x)), "la clé d'abord : " + deux);
+  assert.match(src(b.visuelActu(sujet(2))), /election/, "puis la voisine");
+  // thème sans photo : jamais l'image d'une autre institution ; clé nulle (justice avec personne) : rien
+  b = bac({ assemblee: photo("assemblee", 1) });
+  assert.equal(b.visuelActu(sujet(0, "senat")), "");
+  assert.equal(b.visuelActu(sujet(0, null)), "");
+  // personnes et logos de partis priment toujours (inchangé)
+  assert.match(bac({}).visuelActu({ illustration: { partis: ["RN"] }, articles: [] }), /actu-logo/);
+}
+
+// --- le workflow GitHub lance bien fetch-vignettes (les nouvelles photos n'arrivent que par lui) et publie photos/vignettes ---
+{
+  const wf = lireFichier(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".github", "workflows", "update-data.yml"), "utf-8");
+  assert.match(wf, /node scripts\/fetch-vignettes\.js/, "étape fetch-vignettes dans update-data.yml");
+  assert.match(wf, /commit-push\.sh[^\n]*photos\/vignettes/, "photos/vignettes commitées");
 }
 
 console.log("vignettes : tous les essais passent");
