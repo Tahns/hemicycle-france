@@ -12,9 +12,15 @@
  * domaine public ; NC, ND, non libre, fair use et panorama sans liberté refusés) ; le meilleur fichier retenu est recadré au
  * centre en carré de 320 × 320 px, JPEG de 40 Ko au plus (ffmpeg, présent sur les exécuteurs GitHub), dans photos/vignettes/<clé>.jpg.
  * EN PLUS, une version haute définition du même fichier (même licence, même crédit) pour le fond des stories : photos/vignettes/<clé>-hd.jpg,
- * photo entière (pas de recadrage), au moins 1080 px et au plus 1600 px de large, jamais agrandie, JPEG de 220 Ko au plus ; notée `chemin_hd`
- * dans data/vignettes.json. Une source de moins de 1080 px n'a pas de HD (`hd_indisponible`). Les anciennes entrées sans HD sont complétées au passage suivant.
+ * photo entière (pas de recadrage), de 1280 px de large (taille standard de miniature Commons : une taille hors liste est refusée en HTTP 400), jamais agrandie, JPEG de 220 Ko au plus ; notée `chemin_hd`
+ * dans data/vignettes.json. Une source de moins de 1280 px n'a pas de HD (`hd_indisponible`). Les anciennes entrées sans HD sont complétées au passage suivant.
  * Auteur, licence et lien Commons sont notés dans data/vignettes.json (crédités au survol et dans la page Méthode).
+ *
+ * PLUSIEURS PHOTOS PAR INSTITUTION : le script retient jusqu'à NB_VARIANTES (4) photos libres et DISTINCTES par clé (fichiers différents, pas le même
+ * photographe le même jour ni la même série de noms), pour que deux sujets d'une même liste n'affichent pas la même image. La première reste à plat dans
+ * l'entrée de data/vignettes.json (compatibilité : stories, crédits) ; la liste complète est dans `variantes: [ {chemin, lieu, alt, auteur, licence, source,
+ * fichier, chemin_hd…}, … ]` (voir scripts/vignettes-cle.js). Fichiers : <clé>.jpg, <clé>-2.jpg, <clé>-3.jpg…, et leurs -hd. Une clé qui n'a qu'une photo
+ * (état d'origine) est complétée au fil des passages (une tentative par clé et par jour), sans toucher aux photos déjà en place.
  *
  * Garde-fous : une bonne vignette n'est jamais écrasée par un échec (ni même retéléchargée) ; un thème en échec n'est retenté qu'une
  * fois par jour ; HTTP 429 ou panne passagère = reprise au passage suivant, arrêt du passage après deux refus d'affilée.
@@ -31,7 +37,7 @@ import { pathToFileURL } from "url";
 import { fetchPoli, USER_AGENT } from "./http.js";
 import { ecrireSiChange } from "./garde.js";
 import { licenceLibre } from "./portraits-chaine.js";
-import { CLES } from "./vignettes-cle.js";
+import { CLES, NB_VARIANTES, variantesDe, composerEntree, nomFichierVariante, lireNomFichier } from "./vignettes-cle.js";
 
 const DATA_FILE = "data/vignettes.json";
 const DOSSIER = "photos/vignettes";
@@ -39,8 +45,9 @@ export const LARGEUR_MIN = 640;
 export const COTE = 320;
 export const MAX_OCTETS = 40 * 1024;
 // Version haute définition (fond de story 1080 × 1920) : photos/vignettes/<clé>-hd.jpg, jamais agrandie
-export const LARGEUR_HD_MIN = 1080;
-export const LARGEUR_HD_MAX = 1600;
+// Wikimedia Commons ne sert les miniatures qu'aux largeurs standard (… 960, 1280, 1920…) : toute autre largeur répond HTTP 400, d'où 1280 px fixes
+export const LARGEUR_HD_MIN = 1280;
+export const LARGEUR_HD_MAX = 1280;
 export const MAX_OCTETS_HD = 220 * 1024;
 const QUALITES = [4, 6, 8, 11, 14, 18, 24, 31]; // qscale ffmpeg : du meilleur au plus léger
 const QUALITES_HD = [3, 5, 7, 9, 12, 15, 19, 24, 31];
@@ -106,7 +113,7 @@ export async function redimensionner(octets) {
 }
 
 /**
- * Plan de la version HD d'un fichier de largeur `largeur` : { largeur } (largeur finale, 1600 px au plus, jamais d'agrandissement,
+ * Plan de la version HD d'un fichier de largeur `largeur` : { largeur } (largeur finale : 1280 px, taille standard de miniature Commons, jamais d'agrandissement,
  * photo gardée entière sans recadrage) ou null si la source est trop étroite (moins de LARGEUR_HD_MIN px). Pure.
  */
 export function planHd(largeur) {
@@ -157,7 +164,7 @@ export async function produireHd(meilleur, ctx) {
 }
 
 const PANORAMA = /panorama|\bfop\b|no freedom/i;
-const MAUVAIS_NOM = /portrait|avec |\bwith\b|\band\b| et |visite|visit|ceremon|manifestation|demonstration|protest|greve|strike|foule|crowd|meeting|conference|seance|session|ministre|minister|president|depute|senateur|maire|police|cordon|attentat|attack|plaque|logo|\bmap\b|carte|plan |schema|diagram|interior of|interieur de|interieur du|salle|statue|detail|fresque|dessin|painting|gravure|engraving|affiche|poster|timbre|stamp|postcard/;
+const MAUVAIS_NOM = /portrait|avec |\bwith\b|\band\b| et |visite|visit|ceremon|manifestation|demonstration|protest|greve|strike|foule|crowd|meeting|conference|seance|session|ministre|minister|president|depute|senateur|maire|police|cordon|attentat|attack|plaque|logo|\bmap\b|carte|plan |schema|diagram|interior of|interieur de|interieur du|salle|statue|detail|fresque|dessin|painting|gravure|engraving|affiche|poster|timbre|stamp|postcard|sculpture|insigne|badge|embleme|emblem|blason|armoiries|coat of arms|drapeau|\bflags?\b|buste|\bbust\b|tableau|mosaique|vitrail|escalier|staircase|maquette|\bmodel\b|miniature|tapisserie|medaille|medal|\bcoin\b|sceau|\bseal\b|signature|document|lettre|\bbook\b|livre/;
 const BON_NOM = /facade|exterieur|exterior|vue |view|palais|hotel|ministere|ministry|batiment|building|entree|entrance|cour |nuit|night/;
 const MAUVAISES_CATEGORIES = /people|persons|politicians|portrait|demonstration|manifestation|protest|crowd|riot|ceremon|meeting|military|police|interiors? of|plan|diagram|map|drawing|painting|engraving|postcard|poster/i;
 
@@ -188,8 +195,9 @@ export function evaluerFichier(page, { maintenant = Date.now() } = {}) {
   note += Math.min(20, Math.round(Math.min(l, h) / 150));
   const date = Date.parse(texte(m.DateTimeOriginal?.value)) || Date.parse(info.timestamp || "");
   if (date) { const ans = (maintenant - date) / (365.25 * 864e5); note += ans < 5 ? 20 : ans < 10 ? 12 : ans < 15 ? 6 : 0; }
-  if (BON_NOM.test(nom)) note += 12;
-  return { retenu: true, fichier, note, licence, auteur: texte(m.Artist?.value).slice(0, 120) || "Auteur inconnu", source: info.descriptionurl, largeur: l, hauteur: h, vignette: info.thumburl, date: date ? new Date(date).toISOString().slice(0, 10) : undefined };
+  const bonNom = BON_NOM.test(nom);
+  if (bonNom) note += 12;
+  return { retenu: true, fichier, note, bonNom, licence, auteur: texte(m.Artist?.value).slice(0, 120) || "Auteur inconnu", source: info.descriptionurl, largeur: l, hauteur: h, vignette: info.thumburl, date: date ? new Date(date).toISOString().slice(0, 10) : undefined };
 }
 
 /** Meilleur fichier retenu d'une liste de pages (note décroissante, puis nom pour un résultat stable). */
@@ -197,6 +205,29 @@ export function choisirMeilleur(pages, options) {
   const evalues = pages.map((p) => evaluerFichier(p, options));
   const retenus = evalues.filter((e) => e.retenu).sort((a, b) => b.note - a.note || a.fichier.localeCompare(b.fichier));
   return { meilleur: retenus[0] || null, refus: evalues.filter((e) => !e.retenu) };
+}
+
+const racine = (fichier) => plat(fichier).replace(/\.[^.]+$/, "").replace(/[\d_\s.-]+/g, " ").trim();
+const memeAuteur = (a, b) => !!a.auteur && a.auteur !== "Auteur inconnu" && plat(a.auteur) === plat(b.auteur);
+/** Deux photos trop proches pour être des variantes : même fichier, même auteur le même jour, ou même auteur et même série de noms (« X 1.jpg », « X 2.jpg »). Pure. */
+export function tropProches(a, b) {
+  if (a.fichier === b.fichier) return true;
+  if (!memeAuteur(a, b)) return false;
+  return (!!a.date && a.date === b.date) || racine(a.fichier) === racine(b.fichier);
+}
+/**
+ * Variantes à retenir parmi des fichiers déjà évalués (`retenus`, sortie d'evaluerFichier) : par note décroissante, distinctes entre elles et des photos
+ * `deja` (déjà en place ou déjà prises), au plus `max`. Pure.
+ */
+export function choisirVariantes(retenus, deja = [], max = NB_VARIANTES) {
+  const tries = [...retenus].sort((a, b) => b.note - a.note || a.fichier.localeCompare(b.fichier));
+  const pris = [];
+  for (const r of tries) {
+    if (pris.length >= max) break;
+    if ([...deja, ...pris].some((x) => tropProches(r, x))) continue;
+    pris.push(r);
+  }
+  return pris;
 }
 
 const PROPS = "prop=imageinfo&iiprop=url|size|mime|timestamp|extmetadata&iiurlwidth=640";
@@ -245,45 +276,66 @@ export function filtrerNom(pages, def, candidat) {
 }
 
 /**
- * Trouve, vérifie, télécharge et réduit la photo d'une clé. `ctx` : { api, telecharger, redimensionner, aujourdhui } (injectables :
- * essais hors ligne). Renvoie { statut:"photo", octets, entree } ou { statut:"echec", raison, transitoire }.
+ * Trouve, vérifie, télécharge et réduit les photos d'une clé. `ctx` : { api, telecharger, redimensionner, aujourdhui } (injectables :
+ * essais hors ligne). `nombre` : photos voulues (1 par défaut ; le passage normal en demande NB_VARIANTES) ; `existantes` : photos déjà en place
+ * (entrées de data/vignettes.json : jamais reprises, et les nouvelles doivent en être distinctes). Les candidats sont parcourus dans l'ordre et on
+ * s'arrête dès que `nombre` photos distinctes sont téléchargées. Renvoie { statut:"photo", octets, octetsHd, hdErreur, entree } (= la première photo, forme
+ * historique) + { variantes:[{octets, octetsHd, hdErreur, entree}], transitoire? } (transitoire : un 429 a interrompu la recherche, reprise au passage suivant),
+ * ou { statut:"echec", raison, transitoire }.
  */
-export async function resoudreCle(cle, ctx) {
+export async function resoudreCle(cle, ctx, { nombre = 1, existantes = [] } = {}) {
   const def = CANDIDATS[cle];
   if (!def) return { statut: "echec", raison: "clé inconnue", transitoire: false };
   const raisons = [];
+  const pool = []; // fichiers retenus (évalués), tous candidats confondus
+  const obtenus = [];
+  const tentes = new Set(existantes.map((e) => e.fichier).filter(Boolean));
+  let interrompu = false;
+  const evaluer = (pages, candidat) => {
+    const evalues = pages.map((p) => evaluerFichier(p, ctx));
+    for (const e of evalues) if (e.retenu && !pool.some((x) => x.fichier === e.fichier)) pool.push({ ...e, candidat });
+    return { retenus: evalues.filter((e) => e.retenu), refus: evalues.filter((e) => !e.retenu) };
+  };
   for (const candidat of def.candidats) {
     let pages;
     try { pages = await pagesDuCandidat(candidat, ctx); } catch (e) {
       raisons.push(`${candidat} : ${e.message}`);
-      if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true }; // 429 : on n'insiste pas, reprise au passage suivant
+      if (e.transitoire) { interrompu = true; break; } // 429 : on n'insiste pas, reprise au passage suivant
       continue;
     }
-    let { meilleur, refus } = choisirMeilleur(filtrerNom(pages, def, candidat), ctx);
-    if (!meilleur && /^Category:/i.test(candidat)) { // rien dans la catégorie elle-même : on explore ses sous-catégories
+    let { retenus, refus } = evaluer(filtrerNom(pages, def, candidat), candidat);
+    if (!retenus.length && /^Category:/i.test(candidat)) { // rien dans la catégorie elle-même : on explore ses sous-catégories
       try { pages = pages.concat(await pagesDesSousCategories(candidat, ctx)); } catch (e) {
         raisons.push(`${candidat} (sous-catégories) : ${e.message}`);
-        if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true };
+        if (e.transitoire) { interrompu = true; break; }
       }
-      ({ meilleur, refus } = choisirMeilleur(filtrerNom(pages, def, candidat), ctx));
+      ({ retenus, refus } = evaluer(filtrerNom(pages, def, candidat), candidat));
     }
-    if (!meilleur) { raisons.push(`${candidat} : aucun fichier libre exploitable (${pages.length} examiné(s)${refus[0] ? `, p. ex. « ${refus[0].fichier} » : ${refus[0].raison}` : ""})`); continue; }
-    try {
-      const res = await ctx.telecharger(meilleur.vignette);
-      if (!res.ok) throw erreur(`téléchargement impossible (HTTP ${res.status})`, res.status === 429 || res.status >= 500);
-      const brut = Buffer.from(await res.arrayBuffer());
-      const octets = await (ctx.redimensionner || redimensionner)(brut);
-      const { vignette: _v, note: _n, ...credit } = meilleur;
-      // Version HD : au mieux (un échec ne fait pas perdre la vignette carrée ; reprise au passage suivant)
-      let hd = null, hdErreur = null;
-      try { hd = await produireHd(meilleur, ctx); } catch (e) { hdErreur = e; }
-      return { statut: "photo", octets, octetsHd: hd?.octets, hdErreur, entree: { lieu: def.lieu, alt: def.alt, ...credit, candidat, octets: octets.length, ...(hd ? { largeur_hd: hd.largeur, octets_hd: hd.octets.length } : {}), ajoutLe: ctx.aujourdhui } };
-    } catch (e) {
-      raisons.push(`${meilleur.fichier} : ${e.message}`);
-      if (e.transitoire) return { statut: "echec", raison: raisons.join(" ; "), transitoire: true };
+    if (!retenus.length) { raisons.push(`${candidat} : aucun fichier libre exploitable (${pages.length} examiné(s)${refus[0] ? `, p. ex. « ${refus[0].fichier} » : ${refus[0].raison}` : ""})`); continue; }
+    // La première photo d'une clé garde le critère historique ; les variantes suivantes doivent en plus avoir un nom de fichier de bâtiment (façade, palais, hôtel, vue…) : pas d'objet, d'insigne ni de détail
+    const dispo = pool.filter((x) => !tentes.has(x.fichier)), deja = [...existantes, ...obtenus.map((o) => o.entree)], reste = nombre - obtenus.length;
+    const choix = deja.length ? choisirVariantes(dispo.filter((x) => x.bonNom), deja, reste) : (() => { const p = choisirVariantes(dispo, deja, 1); return [...p, ...choisirVariantes(dispo.filter((x) => x.bonNom), p, reste - 1)]; })();
+    for (const meilleur of choix) {
+      tentes.add(meilleur.fichier);
+      try {
+        const res = await ctx.telecharger(meilleur.vignette);
+        if (!res.ok) throw erreur(`téléchargement impossible (HTTP ${res.status})`, res.status === 429 || res.status >= 500);
+        const brut = Buffer.from(await res.arrayBuffer());
+        const octets = await (ctx.redimensionner || redimensionner)(brut);
+        const { vignette: _v, note: _n, bonNom: _b, candidat: _c, ...credit } = meilleur;
+        // Version HD : au mieux (un échec ne fait pas perdre la vignette carrée ; reprise au passage suivant)
+        let hd = null, hdErreur = null;
+        try { hd = await produireHd(meilleur, ctx); } catch (e) { hdErreur = e; }
+        obtenus.push({ octets, octetsHd: hd?.octets, hdErreur, entree: { lieu: def.lieu, alt: def.alt, ...credit, candidat: meilleur.candidat, octets: octets.length, ...(hd ? { largeur_hd: hd.largeur, octets_hd: hd.octets.length } : {}), ajoutLe: ctx.aujourdhui } });
+      } catch (e) {
+        raisons.push(`${meilleur.fichier} : ${e.message}`);
+        if (e.transitoire) { interrompu = true; break; }
+      }
     }
+    if (interrompu || obtenus.length >= nombre) break;
   }
-  return { statut: "echec", raison: raisons.join(" ; ") || "aucun candidat", transitoire: false };
+  if (!obtenus.length) return { statut: "echec", raison: raisons.join(" ; ") || "aucun candidat", transitoire: interrompu };
+  return { statut: "photo", ...obtenus[0], variantes: obtenus, ...(interrompu ? { transitoire: true } : {}) };
 }
 
 /**
@@ -316,7 +368,21 @@ export function doitRetenter(echec, aujourdhui) {
 export function ligneRapport(data, cles = CLES) {
   const avec = cles.filter((c) => data.vignettes?.[c]);
   const sans = cles.filter((c) => !data.vignettes?.[c]);
-  return `Vignettes d'actualité : ${avec.length}/${cles.length} institutions avec photo libre${sans.length ? ` ; pictogramme pour : ${sans.join(", ")}` : ""}.`;
+  const photos = avec.reduce((n, c) => n + Math.max(1, variantesDe(data.vignettes[c]).length), 0);
+  return `Vignettes d'actualité : ${avec.length}/${cles.length} institutions avec photo libre${sans.length ? ` ; pictogramme pour : ${sans.join(", ")}` : ""} ; ${photos} photo(s) au total (objectif ${NB_VARIANTES} par institution).`;
+}
+
+/** Une institution qui a des photos mais moins que NB_VARIANTES est-elle à compléter ? Une tentative par jour au plus (le tri Commons ne change pas d'une heure à l'autre). Pure. */
+export function variantesAFaire(nombre, essai, aujourdhui) {
+  return nombre > 0 && nombre < NB_VARIANTES && essai !== aujourdhui;
+}
+
+/** Premier rang libre (>= 2) pour une nouvelle variante de `cle`, d'après les fichiers déjà pris. Pure. */
+export function rangLibre(cle, variantes) {
+  const pris = new Set(variantes.map((v) => lireNomFichier(String(v.chemin || "").split("/").pop() || "")?.rang));
+  let k = 2;
+  while (pris.has(k)) k++;
+  return k;
 }
 
 async function main() {
@@ -325,37 +391,69 @@ async function main() {
   const data = (await lire(DATA_FILE)) || { source: "Wikimedia Commons (licences libres vérifiées) ; table des candidats : scripts/fetch-vignettes.js", vignettes: {}, echecs: {} };
   data.vignettes ||= {};
   data.echecs ||= {};
+  data.variantesEssais ||= {}; // clé -> date du dernier passage de complément des variantes (une tentative par jour)
   await mkdir(DOSSIER, { recursive: true });
   const ctx = { api, telecharger, aujourdhui };
-  let essais = 0, ajouts = 0, definitifs = 0, limites = 0;
+  let essais = 0, ajouts = 0, definitifs = 0, limites = 0, nouvellesVariantes = 0;
+  const ecrireVariante = async (cle, v, rang) => { // écrit les fichiers d'une variante et renvoie son enregistrement
+    const carre = `${DOSSIER}/${nomFichierVariante(cle, rang)}`, hdChemin = `${DOSSIER}/${nomFichierVariante(cle, rang, true)}`;
+    await writeFile(carre, v.octets);
+    const e = { chemin: carre, ...v.entree };
+    if (v.octetsHd) { await writeFile(hdChemin, v.octetsHd); e.chemin_hd = hdChemin; }
+    else if (v.hdErreur) e.hd_essai = aujourdhui;
+    else e.hd_indisponible = true;
+    return e;
+  };
   for (const cle of CLES) {
-    const fichierLa = data.vignettes[cle] && (await existe(`${DOSSIER}/${cle}.jpg`));
-    if (fichierLa) { // une bonne vignette n'est jamais écrasée (ni retéléchargée) ; seule la HD manquante est complétée
-      const e = data.vignettes[cle];
-      if (e.chemin_hd && !(await existe(e.chemin_hd))) { delete e.chemin_hd; delete e.largeur_hd; delete e.octets_hd; }
-      if (!hdAFaire(e, aujourdhui) || essais >= MAX) continue;
-      essais++;
-      try {
-        const hd = await completerHd(e, ctx);
-        if (hd) { await writeFile(`${DOSSIER}/${cle}-hd.jpg`, hd.octets); Object.assign(e, { chemin_hd: `${DOSSIER}/${cle}-hd.jpg`, largeur_hd: hd.largeur, octets_hd: hd.octets.length }); delete e.hd_essai; limites = 0; log(`${cle} : version HD (${hd.largeur} px, ${Math.round(hd.octets.length / 1024)} Ko).`); }
-        else e.hd_indisponible = true; // source trop étroite ou fichier retiré de Commons
-      } catch (err) { e.hd_essai = aujourdhui; if (err.transitoire) limites++; warn(`${cle} : HD impossible (${err.message}).`); }
-      if (limites >= 2) { warn("limite de débit (HTTP 429) ou panne à répétition : arrêt de ce passage, reprise au suivant."); break; }
+    let vs = variantesDe(data.vignettes[cle]);
+    // Une variante dont le fichier manque est retirée ; si c'est la première, toute l'entrée est à refaire
+    if (vs.length && !(await existe(`${DOSSIER}/${nomFichierVariante(cle, 1)}`))) {
+      for (const v of vs.slice(1)) for (const f of [v.chemin, v.chemin_hd]) if (f) await unlink(f).catch(() => {});
+      delete data.vignettes[cle]; vs = [];
+    }
+    const gardees = [];
+    for (const v of vs) if (await existe(v.chemin)) gardees.push(v);
+    vs = gardees;
+    if (vs.length) { // une bonne vignette n'est jamais écrasée (ni retéléchargée) ; seules les HD manquantes sont complétées
+      let arret = false;
+      for (const e of vs) {
+        if (e.chemin_hd && !(await existe(e.chemin_hd))) { delete e.chemin_hd; delete e.largeur_hd; delete e.octets_hd; }
+        if (!hdAFaire(e, aujourdhui) || essais >= MAX) continue;
+        essais++;
+        try {
+          const hd = await completerHd(e, ctx);
+          if (hd) { const cheminHd = e.chemin.replace(/\.jpe?g$/i, "-hd.jpg"); await writeFile(cheminHd, hd.octets); Object.assign(e, { chemin_hd: cheminHd, largeur_hd: hd.largeur, octets_hd: hd.octets.length }); delete e.hd_essai; limites = 0; log(`${cle} : version HD de ${e.chemin} (${hd.largeur} px, ${Math.round(hd.octets.length / 1024)} Ko).`); }
+          else e.hd_indisponible = true; // source trop étroite ou fichier retiré de Commons
+        } catch (err) { e.hd_essai = aujourdhui; if (err.transitoire) limites++; warn(`${cle} : HD impossible (${err.message}).`); }
+        if (limites >= 2) { arret = true; break; }
+      }
+      // Compléter les variantes (photos distinctes de la même institution) : une tentative par jour, sans toucher à l'existant
+      if (!arret && essais < MAX && variantesAFaire(vs.length, data.variantesEssais[cle], aujourdhui)) {
+        essais++;
+        const r = await resoudreCle(cle, ctx, { nombre: NB_VARIANTES - vs.length, existantes: vs });
+        if (r.statut === "photo") {
+          for (const v of r.variantes) { vs.push(await ecrireVariante(cle, v, rangLibre(cle, vs))); nouvellesVariantes++; log(`${cle} : variante ${vs.length} : ${vs[vs.length - 1].fichier} (${vs[vs.length - 1].licence}).`); }
+          limites = r.transitoire ? limites + 1 : 0;
+          if (!r.transitoire) data.variantesEssais[cle] = aujourdhui;
+        } else if (r.transitoire) { limites++; warn(`${cle} : variantes : ${r.raison} ; reprise au prochain passage.`); }
+        else { data.variantesEssais[cle] = aujourdhui; warn(`${cle} : pas de variante supplémentaire (${r.raison.slice(0, 200)}).`); }
+        if (limites >= 2) arret = true;
+      }
+      data.vignettes[cle] = composerEntree(vs);
+      if (arret) { warn("limite de débit (HTTP 429) ou panne à répétition : arrêt de ce passage, reprise au suivant."); break; }
       continue;
     }
-    if (data.vignettes[cle]) delete data.vignettes[cle]; // entrée sans fichier : à refaire
     if (!doitRetenter(data.echecs[cle], aujourdhui)) continue;
     if (essais++ >= MAX) break;
-    const r = await resoudreCle(cle, ctx);
+    const r = await resoudreCle(cle, ctx, { nombre: NB_VARIANTES });
     if (r.statut === "photo") {
-      await writeFile(`${DOSSIER}/${cle}.jpg`, r.octets);
-      data.vignettes[cle] = { chemin: `${DOSSIER}/${cle}.jpg`, ...r.entree };
-      if (r.octetsHd) { await writeFile(`${DOSSIER}/${cle}-hd.jpg`, r.octetsHd); data.vignettes[cle].chemin_hd = `${DOSSIER}/${cle}-hd.jpg`; }
-      else if (r.hdErreur) data.vignettes[cle].hd_essai = aujourdhui;
-      else data.vignettes[cle].hd_indisponible = true;
+      const nouvelles = [];
+      for (const [i, v] of r.variantes.entries()) nouvelles.push(await ecrireVariante(cle, v, i + 1));
+      data.vignettes[cle] = composerEntree(nouvelles);
+      if (!r.transitoire) data.variantesEssais[cle] = aujourdhui;
       delete data.echecs[cle];
-      ajouts++; limites = 0;
-      log(`${cle} : ${r.entree.fichier} (${r.entree.licence}, ${Math.round(r.octets.length / 1024)} Ko).`);
+      ajouts++; limites = r.transitoire ? limites + 1 : 0;
+      log(`${cle} : ${nouvelles.map((e) => `${e.fichier} (${e.licence}, ${Math.round(e.octets / 1024)} Ko)`).join(" ; ")}.`);
     } else {
       data.echecs[cle] = { dernierEssai: aujourdhui, raison: r.raison.slice(0, 400), ...(r.transitoire ? { transitoire: true } : {}) };
       if (r.transitoire) limites++; else { definitifs++; limites = 0; }
@@ -365,10 +463,11 @@ async function main() {
   }
   data.vignettes = Object.fromEntries(CLES.filter((c) => data.vignettes[c]).map((c) => [c, data.vignettes[c]]));
   data.echecs = Object.fromEntries(Object.entries(data.echecs).filter(([c]) => CANDIDATS[c] && !data.vignettes[c]));
+  data.variantesEssais = Object.fromEntries(Object.entries(data.variantesEssais).filter(([c]) => data.vignettes[c]));
   data.lastUpdated = new Date().toISOString();
   await ecrireSiChange(DATA_FILE, JSON.stringify(data, null, 1) + "\n");
   const resume = ligneRapport(data);
-  log(`${ajouts} vignette(s) ajoutée(s) ; ${resume}`);
+  log(`${ajouts} institution(s) nouvelle(s), ${nouvellesVariantes} variante(s) ajoutée(s) ; ${resume}`);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n${resume}\n`).catch(() => {});
   if (definitifs) { warn(`${definitifs} institution(s) sans photo libre exploitable (pictogramme conservé).`); process.exitCode = 1; }
 }

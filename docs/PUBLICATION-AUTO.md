@@ -10,7 +10,7 @@ Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait 
 
 ## Ce que le script respecte (sans réglage)
 
-- une seule publication par passage, un passage toutes les 5 minutes ; 20 stories par jour au maximum (`maxParJour: 20`), 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; aucun espacement imposé entre deux publications ;
+- une seule publication par passage, un passage toutes les 5 minutes ; 8 stories de presse par jour au maximum (`maxParJour: 8` ; ancienne valeur 20, à remettre dans `data/stories-config.json` pour revenir en arrière), 2 posts par jour au maximum ; jamais entre 23 h et 7 h (heure de Paris) ; aucun espacement imposé entre deux publications ;
 - une story préparée depuis plus de 6 h est marquée « périmée » et n'est jamais publiée ;
 - jamais deux fois la même story (registre `data/instagram-publiees.json`) ; l'intention est écrite au registre (« en-cours ») AVANT l'appel `media_publish` ; si la réponse est perdue
   (timeout, erreur 5xx, coupure) ou si l'exécution est interrompue, le script cherche la publication côté Instagram (`/stories` ou `/media`) : retrouvée, elle est inscrite « publiee » ;
@@ -96,6 +96,8 @@ Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée 
 |---|---|---|---|
 | `aujourdhui` « Aujourd'hui à l'Assemblée » | story | `data/agenda-an.json` : QAG, votes solennels, textes du jour de séance (un point à mot prudent est écarté) | 8 h 30 |
 | `vote-jour` « Le vote du jour » | story | `data/lois.json` : motion de censure, article ou amendement du Gouvernement du dernier jour de vote (3 jours au plus) ; **jamais un vote final** (resté un post) | 12 h 30 |
+| `vote-jour-post` « Le vote du jour par groupe » | **post** (1080 × 1350, modèle « vote-groupes » : position de chaque groupe) | le MÊME scrutin que `vote-jour` ; un seul post par scrutin (`data/contenus-etat.json`, file, registre) ; jamais de Reel ; compte dans les 2 posts par jour, mais ne prend jamais la dernière place du jour ni celle du jour du résumé hebdomadaire | 13 h 30 |
+| `vote-loi` « Le vote final par groupe » | story (modèle « vote-groupes ») | vote final d'un projet ou d'une proposition de loi de l'Assemblée **déjà publié** en post ou en carrousel (jamais un amendement, jamais seul : il complète). L'auteur du texte n'apparaît que pour un texte déposé par un seul député (« Prénom Nom (RN) »), jamais le Gouvernement, un sénateur ou plusieurs auteurs. Pas de `voteId` dans l'entrée : elle ne bloque ni le post ni le carrousel | 20 h |
 | `comprendre` | story | les 10 notions de la rubrique Comprendre d'`index.html` (lues directement dans la page), une par semaine, rotation sans répétition avant épuisement | samedi 10 h |
 | `chiffre-jour` | story | `data/indicateurs.json`, `data/budget.json`, ou dernier sondage **hors réserve** ; une même donnée au plus une fois tous les 7 jours | 19 h |
 | `carrousel-loi` « Une loi expliquée » | carrousel de 5 images | vote final adopté ou rejeté (AN ou Sénat) : contexte, intitulé officiel, résultat, suites de la procédure, sources | 17 h 30 |
@@ -110,6 +112,14 @@ Test : `node tests/videos-auto.test.mjs` (la génération réelle n'est testée 
 - **Carrousel** (`scripts/carrousel.cjs`) : POST `/{IG_USER_ID}/media` pour chaque image (`is_carousel_item=true`, `alt_text`), attente de `FINISHED` à chaque étape, puis `media_type=CAROUSEL` + `children`, puis `media_publish`. Échec avant `media_publish` : rien n'est publié, nouvel essai au passage suivant ; échec de `media_publish` lui-même : **abandon** (entrée marquée périmée, jamais republiée). Légende : titre, 2-3 lignes factuelles, source officielle, `@hemicyclefrance`, 3 à 5 hashtags, jamais le lien du site. Images `instagram/auto/<id>.jpg`, `<id>-2.jpg`… (1080×1350, vérifiées par `check-data.js`).
 - **Essais** : `node scripts/contenus-auto.cjs --apercus` dessine un exemple de chaque type dans `instagram/modeles/` (`contenu-*.jpg`, `carrousel-loi-1..5.jpg`, `carrousel-hebdo-1..7.jpg`) d'après `tests/fixtures/contenus.json` ; `node tests/contenus-auto.test.mjs` et `node tests/carrousel.test.mjs`.
 
+## Règles de publication décidées par le propriétaire (octobre 2026)
+
+Réglages de `data/stories-config.json` (chaque clé a son commentaire `_commentaire_<clé>` dans le fichier) :
+
+- **`maxParJour`** : 8 stories de presse par jour (20 auparavant ; remettre 20 pour revenir en arrière). Hors posts, annonces de post et contenus à créneau.
+- **`minMedias`** : 2, seuil UNIQUE de médias distincts pour un sujet de presse **et pour « en bref »**. Le code lit cette valeur partout (`MIN_MEDIAS`, plus de constante à 3 ; un test compare les valeurs par défaut du code au fichier livré).
+- **`minMediasPersonneNommee`** : 3 (jamais moins, même si on écrit 2 : le code et `check-data.js` imposent 3 à 10). Une accusation, plainte, procédure, polémique ou propos attribués qui **vise une personne nommée** (présomption d'innocence) n'est publiée que si au moins 3 médias DISTINCTS la reprennent, et **jamais avec le portrait de la personne** (`scripts/personne-nommee.cjs` : la story est dessinée sans portrait, modèle « à la une », jamais « en direct » ni « face à face »). Une prise de parole du président n'en dispense pas. Sinon : refus, avec la raison dans le journal (« 2 médias distincts sur 3 exigés (présomption d'innocence) », ligne « Refusé (personne nommée…) » du résumé de l'exécution). Une personne est « nommée » si le relevé du site en a reconnu une, ou si un titre contient un « Prénom Nom » qui n'est pas une institution. Le dernier filet du publieur refuse aussi une entrée `personneNommee` sans `sansPortrait` ou à moins de 3 médias. La liste prudente (violences, décès, mineurs) n'est pas modifiée.
+
 ## Titres génériques
 
 Un sujet dont le titre rédigé par le site est un titre de repli (`generique: true` dans `data/actualites.json`, par exemple « Gilley : actualité locale » ou « Politique : l'essentiel du moment »)
@@ -117,7 +127,7 @@ ne devient **jamais** une story, un « en bref » ni un post (sauf prise de paro
 
 ## Décision du propriétaire : plus de circuit des sujets sensibles
 
-Le propriétaire du compte a décidé, et en assume la responsabilité, qu'il n'y a plus de « circuit des sujets sensibles » (brouillons « Selon X : des faits non établis… »). Un sujet de presse qui parle d'une accusation, d'une plainte, d'une polémique, d'une procédure judiciaire ou d'écrits attribués à une personnalité suit le **circuit normal** des stories : titre propre du site, titre de presse cité entre guillemets avec le média, nombre de médias (`minMedias`, 3). Comme toute story, elle reste soumise à la validation humaine (`validationHumaine: true` dans `data/stories-config.json`, inchangé) ; `"sensibles": false` y reste aussi.
+Le propriétaire du compte a décidé, et en assume la responsabilité, qu'il n'y a plus de « circuit des sujets sensibles » (brouillons « Selon X : des faits non établis… »). Un sujet de presse qui parle d'une accusation, d'une plainte, d'une polémique, d'une procédure judiciaire ou d'écrits attribués à une personnalité suit le **circuit normal** des stories : titre propre du site, titre de presse cité entre guillemets avec le média, nombre de médias (`minMedias`, 2 ; 3 si une personne nommée est visée, voir ci-dessus). Comme toute story, elle reste soumise à la validation humaine (`validationHumaine: true` dans `data/stories-config.json`, inchangé) ; `"sensibles": false` y reste aussi.
 
 - **Ce qui n'est plus écarté** (niveau « presse » de `scripts/liste-prudente.cjs`) : procédure (enquête, tribunal, mis en examen, condamn*…), accusation (accus*, plainte, mis en cause, affaire…), polémique (polémique, dérapage, clash, excuses…) et mots de discours (antisemit*, racis*, homophob*, discriminat*). Le thème « justice » n'écarte plus un sujet non plus.
 - **Ce qui reste écarté** (protections légales, pas choix éditoriaux) : violences physiques et sexuelles contre des personnes (viol, agress*, meurtre*, pedo*, inceste*, sexuel*…), morts, drames et faits divers, mineurs identifiables (âge de moins de 20 ans, lycéen(ne), élève… au singulier). Le niveau « officiel » (ordre du jour, scrutins, textes) est inchangé.

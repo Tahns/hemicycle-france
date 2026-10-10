@@ -5,7 +5,7 @@
  * Polices et icônes, qui ne changent pas : cache d'abord.
  * Incrémenter VERSION pour vider les anciens caches.
  */
-const VERSION = "v6";
+const VERSION = "v7";
 const CACHE = `politique-fr-${VERSION}`;
 const COQUILLE = ["./", "index.html", "lois-worker.js", "manifest.webmanifest", "icons/icon-192.png"];
 

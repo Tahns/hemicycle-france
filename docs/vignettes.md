@@ -43,12 +43,28 @@ récence, nom évocateur d'une façade. Le meilleur est téléchargé (miniature
 
 ## Version haute définition (fond de story)
 Le carré de 320 px est flou en 1080 × 1920. Pour le même fichier (même licence, même crédit), le script produit aussi
-`photos/vignettes/<clé>-hd.jpg` : photo **entière** (pas de recadrage), de **1080 px au moins et 1600 px au plus de large**, jamais agrandie (miniature
-Commons demandée à `min(1600, largeur de la source)`), JPEG de **220 Ko au plus** (ffmpeg, qualité ajustée). `data/vignettes.json` reçoit `chemin_hd`,
-`largeur_hd` et `octets_hd` ; le champ `chemin` (carré 320, utilisé par le site) ne change pas. Une source de moins de 1080 px n'a pas de HD
+`photos/vignettes/<clé>-hd.jpg` : photo **entière** (pas de recadrage), de **1280 px de large** (largeur standard de miniature Commons : toute autre largeur répond HTTP 400), jamais agrandie (sources de moins de 1280 px : pas de HD), JPEG de **220 Ko au plus** (ffmpeg, qualité ajustée). `data/vignettes.json` reçoit `chemin_hd`,
+`largeur_hd` et `octets_hd` ; le champ `chemin` (carré 320, utilisé par le site) ne change pas. Une source de moins de 1280 px n'a pas de HD
 (`hd_indisponible: true`). Les anciennes entrées sans `chemin_hd` restent valides : au passage suivant le script les complète (licence revérifiée sur
 Commons ; un échec HD n'est retenté qu'une fois par jour, `hd_essai`) sans toucher à la photo carrée. `check-vignettes.js` accepte les deux cas et, si la
 HD existe, vérifie qu'elle est désignée par `chemin_hd`, qu'elle pèse 220 Ko au plus et que le fichier est bien là.
+
+## Plusieurs photos par institution (variantes)
+Pour que deux sujets d'une même liste n'affichent pas la même image, chaque clé peut porter **jusqu'à 4 photos libres et distinctes** (`NB_VARIANTES`).
+- **Format** de `data/vignettes.json` : les champs de l'entrée (`chemin`, `lieu`, `alt`, `auteur`, `licence`, `source`, `chemin_hd`…) sont ceux de la
+  **première photo** (compatibilité : stories, crédits). S'il y en a d'autres, l'entrée porte `variantes: [ {chemin, lieu, alt, auteur, licence, source,
+  fichier, chemin_hd…}, … ]` : la liste complète, premier élément = copie de la première photo (voir `variantesDe` / `composerEntree` dans
+  `scripts/vignettes-cle.js`). Sans `variantes`, l'entrée est sa propre unique variante (état d'origine, toujours valide).
+- **Fichiers** : `<clé>.jpg`, `<clé>-2.jpg`, `<clé>-3.jpg`… et leurs `-hd.jpg`. Chaque variante a sa licence, son auteur et son lien Commons.
+- **Choix des variantes** (`fetch-vignettes.js`) : mêmes candidats et mêmes contrôles de licence que pour la première photo ; deux photos sont « trop proches »
+  si c'est le même fichier, le même auteur le même jour ou la même série de noms du même auteur. Les variantes au-delà de la première doivent en plus avoir un nom
+  de bâtiment (façade, palais, hôtel, vue…) : jamais d'insigne, de sculpture, de drapeau ou de détail. Une clé qui n'a qu'une photo est complétée par une
+  tentative par jour (`variantesEssais`), sans jamais toucher aux photos déjà en place ; 429 = reprise au passage suivant.
+- **Affichage** (`visuelActu` dans `index.html`) : pour un sujet, variante de sa clé choisie par un hash de l'adresse de son premier article (même sujet = même
+  photo), parmi celles qui n'ont pas déjà servi dans la liste en cours ; si toutes ont servi, mêmes règles pour les clés voisines (`VIGNETTES_VOISINES`) ; sinon le
+  sujet reste sans photo. Avec une seule variante, le comportement est celui d'avant.
+- **Contrôle** : `check-vignettes.js` exige le crédit de chaque variante (erreur bloquante) et avertit si une clé a moins de 3 photos.
+- Les nouvelles photos ne se téléchargent que depuis l'étape `vignettes` du workflow `update-data.yml` (Wikimedia limite les requêtes des autres machines).
 
 ## Candidats : catégories, sous-catégories, recherche
 Une catégorie Commons ne liste que ses fichiers DIRECTS : le palais du Luxembourg, par exemple, a ses photos dans des sous-catégories (0 fichier examiné

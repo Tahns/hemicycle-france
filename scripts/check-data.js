@@ -293,6 +293,8 @@ async function checkInstagramFile() {
     if (e.sensible !== undefined && ![1, 2].includes(e.sensible)) err(`${nom} : champ « sensible » invalide (1 ou 2)`);
     if (e.sensible === 1 && (!Array.isArray(e.medias) || e.medias.length < 2 || !e.juridiction || e.nommePersonne === true)) err(`${nom} : une entrée sensible de niveau 1 exige au moins 2 médias, une juridiction et aucun nom de personne`);
     if (e.sensible === 2 && !(e.valideHumain === true && e.valideLe)) err(`${nom} : une entrée sensible de niveau 2 ne peut entrer en file qu'après validation humaine (valideHumain, valideLe)`);
+    // Accusation visant une personne nommée (scripts/personne-nommee.cjs) : dessinée sans portrait, reprise par au moins 3 médias distincts
+    if (e.personneNommee === true && (e.sansPortrait !== true || !Array.isArray(e.medias) || new Set(e.medias).size < 3)) err(`${nom} : une accusation visant une personne nommée exige au moins 3 médias distincts et une image sans portrait (sansPortrait)`);
     // Contenu récurrent à créneau : pasAvant / expire cohérents, créneau dans la plage 7 h – 23 h (Paris)
     if (e.contenu !== undefined) {
       if (typeof e.contenu !== "string" || !e.contenu) err(`${nom} : champ « contenu » invalide`);
@@ -385,6 +387,10 @@ async function checkInstagramFile() {
   for (const [j, n] of Object.entries(stories)) if (n > maxStories) err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
   for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour, carrousels compris)`);
   await checkCreneaux(config);
+  // Seuils de médias (data/stories-config.json) : une seule source de vérité, lue par stories-auto.cjs
+  if (config.minMedias !== undefined && !(Number.isInteger(config.minMedias) && config.minMedias >= 2 && config.minMedias <= 10)) err("stories-config.json : « minMedias » doit être un entier de 2 à 10");
+  if (config.minMediasPersonneNommee !== undefined && !(Number.isInteger(config.minMediasPersonneNommee) && config.minMediasPersonneNommee >= 3 && config.minMediasPersonneNommee <= 10)) err("stories-config.json : « minMediasPersonneNommee » (accusation visant une personne nommée) doit être un entier de 3 à 10 : jamais moins de 3 médias");
+  if (config.maxParJour !== undefined && !(Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 99)) err("stories-config.json : « maxParJour » doit être un entier de 1 à 99");
   if (config.styleFixe != null && !["bleu", "une-photo", "question", "chiffre"].includes(config.styleFixe)) err(`stories-config.json : « styleFixe » doit valoir null, "bleu", "une-photo", "question" ou "chiffre" (reçu : ${JSON.stringify(config.styleFixe)})`);
   await checkModelesContenus();
   const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;
@@ -407,7 +413,7 @@ async function checkCreneaux(config) {
   const c = config.creneaux;
   if (c === undefined) return;
   if (!c || typeof c !== "object" || Array.isArray(c)) return err("stories-config.json : « creneaux » doit être un objet { type: { heure: \"HH:MM\", jours?: [1..7] } }");
-  const connus = ["aujourdhui", "vote-jour", "comprendre", "chiffre-jour", "carrousel-loi", "carrousel-hebdo"];
+  const connus = ["aujourdhui", "vote-jour", "vote-jour-post", "comprendre", "chiffre-jour", "carrousel-loi", "carrousel-hebdo", "vote-loi"];
   const parJour = {};
   for (const [nom, v] of Object.entries(c)) {
     if (!connus.includes(nom)) { err(`stories-config.json : créneau « ${nom} » inconnu (${connus.join(", ")})`); continue; }

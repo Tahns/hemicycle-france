@@ -43,7 +43,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(!C.normaliserCreneaux({ "chiffre-jour": false })["chiffre-jour"]);
   // 60 min d'écart au moins entre deux contenus du même jour : le dimanche, le chiffre (19 h) est repoussé après le carrousel (18 h 30)
   const dim = C.creneauxDuJour(CRENEAUX, 7);
-  assert.deepStrictEqual(dim.map((x) => [x.nom, x.minutes]), [["aujourdhui", 510], ["vote-jour", 750], ["carrousel-loi", 1050], ["carrousel-hebdo", 1110], ["chiffre-jour", 1170]].filter(([n]) => dim.some((x) => x.nom === n)));
+  assert.deepStrictEqual(dim.map((x) => [x.nom, x.minutes]), [["aujourdhui", 510], ["vote-jour", 750], ["vote-jour-post", 810], ["carrousel-loi", 1050], ["carrousel-hebdo", 1110], ["chiffre-jour", 1170], ["vote-loi", 1230]].filter(([n]) => dim.some((x) => x.nom === n)));
   for (let i = 1; i < dim.length; i++) assert.ok(dim[i].minutes - dim[i - 1].minutes >= 60, "60 min d'écart");
   for (const j of [1, 2, 3, 4, 5, 6, 7]) for (const x of C.creneauxDuJour(CRENEAUX, j)) assert.ok(x.minutes >= 7 * 60 && x.minutes <= 22 * 60 + 30, "toujours entre 7 h et 22 h 30");
   // créneaux identiques : le second est repoussé ; au-delà de 22 h 30, abandonné
@@ -295,7 +295,7 @@ function jpegFactice(l, h) {
   b[0] = 0xff; b[1] = 0xd8; b[2] = 0xff; b[3] = 0xc0; b.writeUInt16BE(17, 4); b[6] = 8; b.writeUInt16BE(h, 7); b.writeUInt16BE(l, 9);
   return b;
 }
-const dessinFactice = (jobs) => Promise.resolve(jobs.map((j) => jpegFactice(1080, j.type === "diapo" ? 1350 : 1920)));
+const dessinFactice = (jobs) => Promise.resolve(jobs.map((j) => jpegFactice(1080, j.type === "diapo" || j.spec?.format === "post" ? 1350 : 1920)));
 function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees: [] } } = {}) {
   const r = mkdtempSync(join(tmpdir(), "contenus-"));
   mkdirSync(join(r, "data", "digest"), { recursive: true });
@@ -314,9 +314,9 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
   const now = new Date(fx.instants["carrousel-loi"]); // 16 h Paris, mardi 13 octobre : vote-jour (12 h 30) et carrousel-loi (17 h 30)
   const crees = await C.main({ ch, now, dessiner: dessinFactice });
   const noms = crees.map((c) => c.contenu).sort();
-  assert.deepStrictEqual(noms, ["carrousel-loi", "vote-jour"]);
+  assert.deepStrictEqual(noms, ["carrousel-loi", "vote-jour", "vote-jour-post"]);
   const file = JSON.parse(readFileSync(ch.file, "utf-8"));
-  assert.strictEqual(file.entrees.length, 2);
+  assert.strictEqual(file.entrees.length, 3);
   const car = file.entrees.find((e) => e.type === "carousel");
   assert.strictEqual(car.url_images.length, 5);
   assert.strictEqual(car.url_images[0], `https://tahns.github.io/hemicycle-france/instagram/auto/${car.id}.jpg`);
@@ -334,7 +334,7 @@ function racineEssai({ config = {}, file = { entrees: [] }, registre = { entrees
   assert.ok(Object.keys(etat.faits).length >= 4);
   assert.deepStrictEqual(await C.main({ ch, now, dessiner: dessinFactice }), [], "rien de nouveau au passage suivant");
   assert.deepStrictEqual(await C.main({ ch, now: new Date(Date.parse(fx.instants["carrousel-loi"]) + 30 * 60000), dessiner: dessinFactice }), []);
-  assert.strictEqual(JSON.parse(readFileSync(ch.file, "utf-8")).entrees.length, 2, "aucun doublon dans la file");
+  assert.strictEqual(JSON.parse(readFileSync(ch.file, "utf-8")).entrees.length, 3, "aucun doublon dans la file");
   // même si l'état est perdu, la file et le registre empêchent le doublon (ids stables)
   writeFileSync(ch.etat, "{}");
   assert.deepStrictEqual(await C.main({ ch, now, dessiner: dessinFactice }), [], "id stable : pas de doublon sans l'état");

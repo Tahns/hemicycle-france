@@ -49,8 +49,9 @@ assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget 
   const sans = createRequire(import.meta.url)("../scripts/stories-auto.cjs").decrire(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3)]));
   assert.ok(!("videos" in sans.champs), "pas de champ videos sans vidéo");
 }
-// Sujet à 2 médias : non
-assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).refus, "2 médias refusé");
+// Seuil de médias : celui de data/stories-config.json (2), lu partout ; un seul média : non
+assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).indice, 0, "2 médias retenu (minMedias = 2)");
+assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 1)]).refus, "1 média refusé");
 // 2 médias mais prise de parole du président (data/direct.json) : retenu
 {
   const s = sujet("Emmanuel Macron s'exprimera ce soir à 20 h sur le budget", 1);
@@ -63,7 +64,7 @@ assert.strictEqual(choix([sujet("Le gouvernement présente son projet de budget 
 assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(13) })]).refus, "ancien refusé");
 // Le refus indique le motif des écarts
 assert.ok(/1 plus de 12 h/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { derniere: il_y_a(13) })]).refus), "motif journalisé");
-assert.ok(/1 moins de 3 médias/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 2)]).refus), "motif médias");
+assert.ok(/1 moins de 2 médias/.test(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 1)]).refus), "motif médias");
 // DÉCISION DU PROPRIÉTAIRE : accusation, plainte, polémique, procédure, écrits attribués : circuit NORMAL des stories (retenu, brouillon à valider) ; plus de circuit sensible
 for (const titre of ["Jean Dupont mis en examen pour détournement de fonds publics", "Écrits antisémites attribués à Jean Dupont", "Plainte déposée contre Jean Dupont"]) {
   const r = choix([sujet(titre, 4)]);
@@ -106,8 +107,17 @@ for (const titre of ["Le gouvernement présente son projet de budget pour 2027",
     const d = AUTO_decrire(r);
     assert.ok(!("titrePropre" in d.champs), "pas de titre propre : rubrique « à la une » + titre de presse cité");
     assert.strictEqual(d.titre, titre);
-    // moins de 3 médias : refusé comme n'importe quel sujet
-    assert.ok(choix([sujet(titre, 2, { illustration: { theme: "justice" }, titrePropre: tp })]).refus);
+    // un seul média : refusé comme n'importe quel sujet
+    assert.ok(choix([sujet(titre, 1, { illustration: { theme: "justice" }, titrePropre: tp })]).refus);
+    // la personne nommée (Jean Dupont) : retenue à 3 médias, mais dessinée SANS portrait ; à 2 médias, refus motivé (présomption d'innocence)
+    if (titre.includes("Jean Dupont")) {
+      assert.strictEqual(r.sansPortrait, true, "jamais le portrait de la personne visée");
+      assert.strictEqual(r.modele, "une", "ni « direct » ni « face à face » (portraits)");
+      const jr = [];
+      const deux = choix([sujet(titre, 2, { illustration: { theme: "justice", personnes: [{ nom: "Jean Dupont" }] }, titrePropre: tp })], { journal: jr });
+      assert.ok(deux.refus && /personne nommée/.test(deux.refus), "refus motivé : " + deux.refus);
+      assert.ok(jr.length === 1 && /2 médias distincts sur 3 exigés \(présomption d'innocence\)/.test(jr[0]), "raison explicite dans le journal : " + jr[0]);
+    }
     // doublon sur le titre de presse
     assert.ok(choix([sj], { file: { entrees: [{ id: "x".repeat(12), cree: il_y_a(5), titre, sources: [] }] } }).refus, "doublon écarté");
   }
@@ -288,11 +298,33 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
-  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => reste)(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"))), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, dossierMedias: 3, maxParJour: 20, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias, 20 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  const livree = JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"));
+  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, maxParJour: 8, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 8 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  for (const k of ["minMedias", "minMediasPersonneNommee", "maxParJour"]) assert.ok(typeof livree[`_commentaire_${k}`] === "string" && livree[`_commentaire_${k}`].length > 40, `la clé ${k} est documentée dans le fichier`);
+  assert.ok(/20/.test(livree._commentaire_maxParJour), "l'ancienne valeur (20) est rappelée pour revenir en arrière");
+  // Seuil de médias : UNE seule source (la configuration). Aucune constante du code ne diverge de data/stories-config.json, avant comme après appliquerSeuils
+  {
+    assert.strictEqual(A.DEFAUT_MIN_MEDIAS, livree.minMedias, "valeur par défaut du code = valeur livrée");
+    assert.strictEqual(A.normaliserConfig(null).minMedias, livree.minMedias);
+    assert.strictEqual(A.seuilsActuels().minMedias, livree.minMedias, "avant tout appel : le seuil actif est celui de la configuration");
+    A.appliquerSeuils(A.lireConfig(new URL("../data/stories-config.json", import.meta.url).pathname));
+    assert.deepStrictEqual(A.seuilsActuels(), { minMedias: 2, minMediasPersonneNommee: 3, maxParJour: 8 }, "la configuration livrée est appliquée telle quelle");
+    const src = readFileSync(new URL("../scripts/stories-auto.cjs", import.meta.url), "utf-8");
+    assert.ok(!/BREF_MIN_MEDIAS/.test(src) && !/let MIN_MEDIAS = 3/.test(src), "plus de seuil de médias codé en dur (« en bref » compris)");
+    // « en bref » suit le même seuil : 2 médias suffisent s'ils suffisent aux autres sujets
+    const matin = new Date("2026-10-02T07:30:00Z"), avantMatin = new Date(matin.getTime() - 36e5).toISOString();
+    const sujetsBref = ["Le gouvernement présente son projet de budget pour 2027", "Les députés examinent la réforme des retraites en séance", "Le Sénat adopte le texte sur l'énergie nucléaire", "La ministre annonce un plan pour les hôpitaux publics"]
+      .map((t, i) => sujet(t, 2, { derniere: avantMatin, illustration: { theme: ["budget", "retraites", "energie", "sante"][i] }, titrePropre: { titre: ["Budget 2027", "Retraites", "Énergie nucléaire", "Plan hôpitaux"][i], origine: "recoupement" }, fait: `${t} aujourd'hui en France` }));
+    A.appliquerSeuils(A.normaliserConfig({ minMedias: 2, enBref: true }));
+    assert.ok(!A.choisirEnBref({ actualites: { sujets: sujetsBref }, file: vide, now: matin }).refus, "« en bref » avec des sujets à 2 médias quand minMedias vaut 2");
+    A.appliquerSeuils(A.normaliserConfig({ minMedias: 3, enBref: true }));
+    assert.ok(A.choisirEnBref({ actualites: { sujets: sujetsBref }, file: vide, now: matin }).refus, "minMedias = 3 : « en bref » suit");
+    A.appliquerSeuils(A.normaliserConfig(null));
+  }
 
   // Seuils « très intéressant » : avec 3 médias, un sujet passe par défaut mais pas avec minMedias = 5 ; « en bref » se coupe
   {
@@ -300,6 +332,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const base = { actualites: trois, direct: null, file: vide, now };
     A.appliquerSeuils(A.normaliserConfig(null));
     assert.ok(!A.choisirSujet(base).refus, "seuil par défaut : 3 médias suffisent");
+    A.appliquerSeuils(A.normaliserConfig({ minMedias: 3 }));
+    assert.ok(A.choisirSujet({ ...base, actualites: { sujets: [sujet("Le gouvernement présente son projet de budget pour 2027", 2)] } }).refus, "minMedias = 3 : 2 médias ne suffisent plus");
     A.appliquerSeuils(A.normaliserConfig({ minMedias: 5, enBref: false }));
     assert.ok(A.choisirSujet(base).refus, "minMedias = 5 : 3 médias ne suffisent plus");
     assert.ok(A.choisirEnBref({ actualites: trois, file: vide, now }).refus, "enBref = false : refusé");
@@ -510,8 +544,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.ok(bref({ file: { entrees: quatre } }).refus, "plafond du jour");
     // au moins 3 sujets forts
     assert.ok(AUTO.choisirEnBref({ actualites: actu(...sujets.slice(0, 2)), file: vide, now: matin }).refus, "2 sujets : pas assez");
-    // sujets à 2 médias, sans titre rédigé par le site, justice : écartés
-    const faibles = [fort("Le gouvernement présente son projet de budget pour 2027", "budget", 2), { ...sujets[1], titrePropre: undefined }, { ...sujets[2], illustration: { theme: "justice" } }];
+    // sujet à 1 seul média (seuil minMedias = 2), sans titre rédigé par le site : écartés
+    const faibles = [fort("Le gouvernement présente son projet de budget pour 2027", "budget", 1), { ...sujets[1], titrePropre: undefined }, { ...sujets[2], illustration: { theme: "justice" } }];
     assert.ok(AUTO.choisirEnBref({ actualites: actu(...faibles, sujets[3]), file: vide, now: matin }).refus, "sujets faibles écartés");
     const risque = fort("Réforme : un ministre mis en cause par une plainte", "gouvernement");
     assert.strictEqual(AUTO.choisirEnBref({ actualites: actu(...sujets, risque), file: vide, now: matin }).bref.indices.includes(4), false, "titre à risque écarté");

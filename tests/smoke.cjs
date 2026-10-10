@@ -119,7 +119,7 @@ function verifier(cond, message) {
     await page.goto(base + "#scrutin-3054", { waitUntil: "networkidle" });
     await page.waitForTimeout(300);
     verifier((await page.$eval("#loi-select", (s) => s.value)) === "an-scrutin-3054", `${nom} : lien direct #scrutin-3054 inopérant`);
-    verifier((await page.$$("#hemicycle circle.siege")).length >= 570, `${nom} : hémicycle incomplet`);
+    verifier((await page.$$("#hemicycle .siege")).length >= 570, `${nom} : hémicycle incomplet`);
     verifier((await page.$$("#breakdown-list .party-row")).length === 12, `${nom} : détail par groupe incomplet`);
 
     // Filtres : un filtre actif fait apparaître « Réinitialiser », qui rétablit l'état par défaut
