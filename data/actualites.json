@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-10T19:05:31.525Z",
+ "lastUpdated": "2026-10-10T19:10:41.530Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -85,12 +85,12 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Nice-Matin",
@@ -161,15 +161,11 @@
    "medias": [
     "BFMTV",
     "Sud Ouest",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
     "Mediapart",
     "La Dépêche",
     "Libération",
     "Le Télégramme",
-    "L'Humanité",
     "Le Monde",
     "20 Minutes",
     "Le JDD",
@@ -177,29 +173,26 @@
     "RFI",
     "Le Figaro",
     "Public Sénat",
-    "France 24",
-    "L'Express"
+    "France 24"
    ],
-   "mediasDistincts": 16,
+   "mediasDistincts": 14,
    "sources": [
     "BFMTV",
     "Sud Ouest",
-    "EBRA",
+    "Dernières Nouvelles d'Alsace",
     "Mediapart",
     "La Dépêche",
     "Libération",
     "Le Télégramme",
-    "L'Humanité",
     "Le Monde",
     "20 Minutes",
     "Le JDD",
     "Nice-Matin",
     "France Médias Monde",
     "Le Figaro",
-    "Public Sénat",
-    "L'Express"
+    "Public Sénat"
    ],
-   "nb": 74,
+   "nb": 60,
    "derniere": "2026-10-10T18:57:50.000Z",
    "articles": [
     {
@@ -216,27 +209,9 @@
      "date": "2026-10-10T18:30:51.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Présidentielle 2027. Gabriel Attal mise sur son pacte pour la jeunesse pour rester dans le match",
-     "url": "https://www.leprogres.fr/education/2026/10/11/gabriel-attal-mise-sur-son-pacte-pour-la-jeunesse-pour-rester-dans-le-match",
-     "date": "2026-10-10T18:30:00.000Z"
-    },
-    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
      "url": "https://www.dna.fr/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
-     "date": "2026-10-10T18:25:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
-     "url": "https://www.ledauphine.com/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
-     "date": "2026-10-10T18:25:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
      "date": "2026-10-10T18:25:00.000Z"
     },
     {
@@ -262,12 +237,6 @@
      "titre": "Présidentielle : Attal présente son « pacte pour la jeunesse » et vise Mélenchon",
      "url": "https://www.letelegramme.fr/france/presidentielle-attal-presente-son-pacte-pour-la-jeunesse-et-vise-melenchon-7135634.php",
      "date": "2026-10-10T15:53:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Lecornu accorde 50 millions aux communes rurales et promet une « réponse spécifique » aux stations-service",
-     "url": "https://www.humanite.fr/politique/sebastien-lecornu/lecornu-accorde-50-millions-aux-communes-rurales-et-promet-une-reponse-specifique-aux-stations-service",
-     "date": "2026-10-10T14:50:24.000Z"
     },
     {
      "media": "Le Monde",
@@ -317,12 +286,129 @@
      "titre": "Mobilisations des lycées en France : donner la parole aux jeunes",
      "url": "https://www.france24.com/fr/vid%C3%A9o/20261009-mobilisations-des-lyc%C3%A9es-en-france-donner-la-parole-aux-jeunes",
      "date": "2026-10-09T11:24:23.000Z"
+    }
+   ]
+  },
+  {
+   "id": "budget",
+   "titre": "Budget",
+   "motifs": [
+    "budget",
+    "partie"
+   ],
+   "medias": [
+    "RFI",
+    "BFMTV",
+    "L'Obs",
+    "L'Humanité",
+    "Le Télégramme",
+    "Libération",
+    "Le Monde",
+    "Europe 1",
+    "Public Sénat",
+    "Le JDD",
+    "20 Minutes"
+   ],
+   "mediasDistincts": 10,
+   "sources": [
+    "RFI",
+    "BFMTV",
+    "L'Obs",
+    "L'Humanité",
+    "Le Télégramme",
+    "Libération",
+    "Le Monde",
+    "Groupe Bolloré",
+    "Public Sénat",
+    "20 Minutes"
+   ],
+   "nb": 15,
+   "derniere": "2026-10-10T17:05:46.000Z",
+   "articles": [
+    {
+     "media": "RFI",
+     "titre": "France: l'essor de l'IA participe à la chute des visites des sites d'actualité",
+     "url": "https://www.rfi.fr/fr/france/20261010-france-l-essor-de-l-ia-participe-%C3%A0-la-chute-des-visites-des-sites-d-actualit%C3%A9",
+     "date": "2026-10-10T17:05:46.000Z"
     },
     {
-     "media": "L'Express",
-     "titre": "Mobilisation des lycéens : le ministre de l'Education promet l'arrivée de 3 000 professeurs remplaçants",
-     "url": "https://www.lexpress.fr/politique/mobilisation-des-lyceens-le-ministre-de-leducation-promet-larrivee-de-3-000-professeurs-remplacants-4FJXN5BYRZCPJCF5NNO2GTNEFY/",
-     "date": "2026-10-08T19:07:07.000Z"
+     "media": "BFMTV",
+     "titre": "Mobilisation lycéenne: François Ruffin souhaite \"l'abandon des poursuites, de Parcoursup et d'un budget qui prévoit de supprimer encore 1.588 postes d'enseignants\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-mobilisation-lyceenne-francois-ruffin-souhaite-l-abandon-des-poursuites-de-parcoursup-et-d-un-budget-qui-prevoit-de-supprimer-encore-1-588-postes-d-enseignants_VN-202610100242.html",
+     "date": "2026-10-10T13:25:16.000Z",
+     "video": true
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Le budget 2027 retoqué en commission à quelques jours du débat à l’Assemblée",
+     "url": "https://www.nouvelobs.com/politique/20261010.OBS119092/le-budget-2027-retoque-en-commission-a-quelques-jours-du-debat-a-l-assemblee.html",
+     "date": "2026-10-10T12:22:30.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Loi intégrale VSS : une loi sans budget ? S. Rousseau face à S. Josso – L’HUMATCH",
+     "url": "https://www.humanite.fr/politique/budget-2027/loi-integrale-vss-une-loi-sans-budget-s-rousseau-face-a-s-josso-lhumatch",
+     "date": "2026-10-10T10:01:00.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Budget 2027 : le volet recette rejeté en commission, la gauche dénonce l’injustice fiscale",
+     "url": "https://www.humanite.fr/politique/budget-2027/budget-2027-le-volet-recette-rejete-en-commission-la-gauche-denonce-linjustice-fiscale",
+     "date": "2026-10-10T10:00:00.000Z"
+    },
+    {
+     "media": "Le Télégramme",
+     "titre": "La partie « recettes » du budget 2027 largement retoqué en commission : de difficiles tractations à venir pour le gouvernement",
+     "url": "https://www.letelegramme.fr/politique/la-partie-recettes-du-budget-2027-largement-retoque-en-commission-de-difficiles-tractations-a-venir-pour-le-gouvernement-7135447.php",
+     "date": "2026-10-10T06:49:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Budget 2027 : la partie «recettes» rejetée en commission, avant l’entrée dans le vif du sujet mardi dans l’hémicycle",
+     "url": "https://www.liberation.fr/economie/budget-2027-la-partie-recettes-rejetee-en-commission-avant-lentree-dans-le-vif-du-sujet-mardi-dans-lhemicycle-20261010_BMRJXUP5GVDNBL4EPFOHTIIE3U/",
+     "date": "2026-10-10T06:43:41.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Budget 2027 : les députés rejettent largement la partie « recettes » en commission, le texte débattu à partir de mardi dans l’hémicycle",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/09/budget-2027-les-deputes-rejettent-la-partie-recettes-en-commission_6790637_823448.html",
+     "date": "2026-10-09T20:49:41.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Budget 2027 : les députés rejettent la partie «recettes» en commission, débat mardi dans l'hémicycle",
+     "url": "https://www.europe1.fr/politique/budget-2027-les-deputes-rejettent-la-partie-recettes-en-commission-debat-mardi-dans-lhemicycle-1134734?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-09T19:40:00.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Budget 2027 : un nouveau mode de calcul des retraites provoque la colère du chef d'état-major des armées",
+     "url": "https://www.europe1.fr/politique/budget-2027-un-nouveau-mode-de-calcul-des-retraites-provoque-la-colere-du-chef-detat-major-des-armees-1134374?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-09T18:46:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Budget 2027 : les acteurs de la formation dénoncent la rétroactivité de la réforme du CPF",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/09/budget-2027-les-acteurs-de-la-formation-denoncent-la-retroactivite-de-la-reforme-du-cpf_6790603_823448.html",
+     "date": "2026-10-09T15:30:07.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Budget 2027 de la Sécurité sociale : le gouvernement veut à nouveau dérembourser les cures thermales",
+     "url": "https://www.publicsenat.fr/actualites/sante/budget-2027-de-la-securite-sociale-le-gouvernement-veut-a-nouveau-derembourser-les-cures-thermales",
+     "date": "2026-10-09T14:35:57.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Budget : l'UDR veut suspendre les indemnités des élus en cas de dérapage des comptes",
+     "url": "https://www.lejdd.fr/politique/budget-ludr-veut-suspendre-les-indemnites-des-elus-en-cas-de-derapage-des-comptes-185580",
+     "date": "2026-10-09T08:10:05.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Blocus des lycéens : Profs remplaçants, recrutements et budget… Le point sur les annonces d’Edouard Geffray",
+     "url": "https://www.20minutes.fr/politique/4252678-20261008-profs-remplacants-recrutements-budget-point-annonces-edouard-geffray?at_medium=display&at_campaign=149",
+     "date": "2026-10-08T20:17:47.000Z"
     }
    ]
   },
@@ -335,8 +421,6 @@
     "bally"
    ],
    "medias": [
-    "Le Dauphiné libéré",
-    "L'Est républicain",
     "Le Figaro",
     "Sud Ouest",
     "Nice-Matin",
@@ -350,32 +434,20 @@
    ],
    "mediasDistincts": 10,
    "sources": [
-    "EBRA",
     "Le Figaro",
     "Sud Ouest",
     "Nice-Matin",
     "Ouest-France",
+    "Dernières Nouvelles d'Alsace",
     "Valeurs actuelles",
     "La Dépêche",
     "Le JDD",
     "Le Monde",
     "France 24"
    ],
-   "nb": 21,
-   "derniere": "2026-10-10T16:49:00.000Z",
+   "nb": 19,
+   "derniere": "2026-10-10T13:53:39.000Z",
    "articles": [
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Le Pouzin. À l’Association des maires, « le grand public ne le voit pas, mais on s’entraide énormément »",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/a-l-association-des-maires-le-grand-public-ne-le-voit-pas-mais-on-s-entraide-enormement",
-     "date": "2026-10-10T16:49:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Champenoux. Philippe Guezet, 1er adjoint au maire, démissionne",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/philippe-guezet-1-sup-er-sup-adjoint-au-maire-demissionne",
-     "date": "2026-10-10T16:24:17.000Z"
-    },
     {
      "media": "Le Figaro",
      "titre": "«La honte» : Bally Bagayoko attaqué après s’être abstenu sur un vote contre l’excision",
@@ -439,141 +511,28 @@
      "date": "2026-10-10T07:58:10.000Z"
     },
     {
+     "media": "Nice-Matin",
+     "titre": "« Les anciens du village me répétaient que j’étais le dernier vrai Moissacais » : nouveau maire d’un village près de Draguignan, Michel Blanc dresse un premier bilan",
+     "url": "https://www.nicematin.com/societe/les-anciens-du-village-me-repetaient-que-j-etais-le-dernier-vrai-moissacais-nouveau-maire-d-un-village-pres-de-draguignan-michel-blanc-dresse-un-premier-bilan-10724207",
+     "date": "2026-10-10T06:30:07.000Z"
+    },
+    {
      "media": "Le Monde",
      "titre": "Vincent Duclert, historien : « L’extrême droite n’a rien de patriotique. Sa victoire serait le tombeau des traditions qui font la France »",
      "url": "https://www.lemonde.fr/idees/article/2026/10/10/vincent-duclert-historien-l-extreme-droite-n-a-rien-de-patriotique-sa-victoire-serait-le-tombeau-des-traditions-qui-font-la-france_6790938_3232.html",
      "date": "2026-10-10T04:00:07.000Z"
     },
     {
+     "media": "Nice-Matin",
+     "titre": "Une idée pour demain au salon des maires du Var : un piétonnier drainant pour contrer les fortes pluies",
+     "url": "https://www.nicematin.com/societe/urbanisme/une-idee-pour-demain-au-salon-des-maires-du-var-un-pietonnier-drainant-pour-contrer-les-fortes-pluies-10737238",
+     "date": "2026-10-09T18:42:09.000Z"
+    },
+    {
      "media": "France 24",
      "titre": "Le basketteur Victor Wembanyama apporte son soutien aux manifestations lycéennes",
      "url": "https://www.france24.com/fr/france/20261009-basketteur-victor-wembanyama-soutien-manifestations-lyceennes-en-france",
      "date": "2026-10-09T13:29:52.000Z"
-    }
-   ]
-  },
-  {
-   "id": "budget",
-   "titre": "Budget",
-   "motifs": [
-    "budget",
-    "partie"
-   ],
-   "medias": [
-    "RFI",
-    "L'Est républicain",
-    "BFMTV",
-    "L'Humanité",
-    "Le Télégramme",
-    "Libération",
-    "Le Monde",
-    "Europe 1",
-    "Public Sénat",
-    "L'Obs",
-    "Le JDD",
-    "20 Minutes"
-   ],
-   "mediasDistincts": 11,
-   "sources": [
-    "RFI",
-    "L'Est républicain",
-    "BFMTV",
-    "L'Humanité",
-    "Le Télégramme",
-    "Libération",
-    "Le Monde",
-    "Groupe Bolloré",
-    "Public Sénat",
-    "L'Obs",
-    "20 Minutes"
-   ],
-   "nb": 15,
-   "derniere": "2026-10-10T17:05:46.000Z",
-   "articles": [
-    {
-     "media": "RFI",
-     "titre": "France: l'essor de l'IA participe à la chute des visites des sites d'actualité",
-     "url": "https://www.rfi.fr/fr/france/20261010-france-l-essor-de-l-ia-participe-%C3%A0-la-chute-des-visites-des-sites-d-actualit%C3%A9",
-     "date": "2026-10-10T17:05:46.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Neuves-Maisons. Budget : 1,174 million d’euros de modifications",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/budget-2026-1-174-million-d-euros-de-modifications",
-     "date": "2026-10-10T16:18:21.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Mobilisation lycéenne: François Ruffin souhaite \"l'abandon des poursuites, de Parcoursup et d'un budget qui prévoit de supprimer encore 1.588 postes d'enseignants\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-mobilisation-lyceenne-francois-ruffin-souhaite-l-abandon-des-poursuites-de-parcoursup-et-d-un-budget-qui-prevoit-de-supprimer-encore-1-588-postes-d-enseignants_VN-202610100242.html",
-     "date": "2026-10-10T13:25:16.000Z",
-     "video": true
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Loi intégrale VSS : une loi sans budget ? S. Rousseau face à S. Josso – L’HUMATCH",
-     "url": "https://www.humanite.fr/politique/budget-2027/loi-integrale-vss-une-loi-sans-budget-s-rousseau-face-a-s-josso-lhumatch",
-     "date": "2026-10-10T10:01:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Budget 2027 : le volet recette rejeté en commission, la gauche dénonce l’injustice fiscale",
-     "url": "https://www.humanite.fr/politique/budget-2027/budget-2027-le-volet-recette-rejete-en-commission-la-gauche-denonce-linjustice-fiscale",
-     "date": "2026-10-10T10:00:00.000Z"
-    },
-    {
-     "media": "Le Télégramme",
-     "titre": "La partie « recettes » du budget 2027 largement retoqué en commission : de difficiles tractations à venir pour le gouvernement",
-     "url": "https://www.letelegramme.fr/politique/la-partie-recettes-du-budget-2027-largement-retoque-en-commission-de-difficiles-tractations-a-venir-pour-le-gouvernement-7135447.php",
-     "date": "2026-10-10T06:49:00.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Budget 2027 : la partie «recettes» rejetée en commission, avant l’entrée dans le vif du sujet mardi dans l’hémicycle",
-     "url": "https://www.liberation.fr/economie/budget-2027-la-partie-recettes-rejetee-en-commission-avant-lentree-dans-le-vif-du-sujet-mardi-dans-lhemicycle-20261010_BMRJXUP5GVDNBL4EPFOHTIIE3U/",
-     "date": "2026-10-10T06:43:41.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Budget 2027 : les députés rejettent largement la partie « recettes » en commission, le texte débattu à partir de mardi dans l’hémicycle",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/09/budget-2027-les-deputes-rejettent-la-partie-recettes-en-commission_6790637_823448.html",
-     "date": "2026-10-09T20:49:41.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Budget 2027 : les députés rejettent la partie «recettes» en commission, débat mardi dans l'hémicycle",
-     "url": "https://www.europe1.fr/politique/budget-2027-les-deputes-rejettent-la-partie-recettes-en-commission-debat-mardi-dans-lhemicycle-1134734?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-09T19:40:00.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Budget 2027 : un nouveau mode de calcul des retraites provoque la colère du chef d'état-major des armées",
-     "url": "https://www.europe1.fr/politique/budget-2027-un-nouveau-mode-de-calcul-des-retraites-provoque-la-colere-du-chef-detat-major-des-armees-1134374?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-09T18:46:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 de la Sécurité sociale : le gouvernement veut à nouveau dérembourser les cures thermales",
-     "url": "https://www.publicsenat.fr/actualites/sante/budget-2027-de-la-securite-sociale-le-gouvernement-veut-a-nouveau-derembourser-les-cures-thermales",
-     "date": "2026-10-09T14:35:57.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "« Chez LFI comme chez les macronistes, l’autoritarisme partisan est devenu un gage d’efficacité, et c’est assez effrayant »",
-     "url": "https://www.nouvelobs.com/politique/20261009.OBS119043/chez-lfi-comme-chez-les-macronistes-l-autoritarisme-partisan-est-devenu-un-gage-d-efficacite-et-c-est-assez-effrayant.html",
-     "date": "2026-10-09T10:16:00.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Budget : l'UDR veut suspendre les indemnités des élus en cas de dérapage des comptes",
-     "url": "https://www.lejdd.fr/politique/budget-ludr-veut-suspendre-les-indemnites-des-elus-en-cas-de-derapage-des-comptes-185580",
-     "date": "2026-10-09T08:10:05.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Blocus des lycéens : Profs remplaçants, recrutements et budget… Le point sur les annonces d’Edouard Geffray",
-     "url": "https://www.20minutes.fr/politique/4252678-20261008-profs-remplacants-recrutements-budget-point-annonces-edouard-geffray?at_medium=display&at_campaign=149",
-     "date": "2026-10-08T20:17:47.000Z"
     }
    ]
   }
@@ -1320,202 +1279,6 @@
    }
   },
   {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-10T18:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
-     "url": "https://www.dna.fr/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-10T18:25:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Gabriel Attal mise sur son pacte pour la jeunesse pour rester dans le match",
-     "url": "https://www.leprogres.fr/education/2026/10/11/gabriel-attal-mise-sur-son-pacte-pour-la-jeunesse-pour-rester-dans-le-match",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:30:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
-     "url": "https://www.ledauphine.com/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T18:25:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T18:25:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rester dans le match",
-    "origine": "recoupement"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-10T16:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Écrits antisémites : combien de temps la stratégie de déni de Jordan Bardella tiendra-t-elle ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/ecrits-antisemites-combien-de-temps-la-strategie-de-deni-de-jordan-bardella-tiendra-t-elle",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites : combien de temps la stratégie de déni de Jordan Bardella tiendra-t-elle ?",
-     "url": "https://www.dna.fr/politique/2026/10/10/ecrits-antisemites-combien-de-temps-la-strategie-de-deni-de-jordan-bardella-tiendra-t-elle",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-10T16:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites : combien de temps la stratégie de déni de Jordan Bardella tiendra-t-elle ?",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/ecrits-antisemites-combien-de-temps-la-strategie-de-deni-de-jordan-bardella-tiendra-t-elle",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites : combien de temps la stratégie de déni de Jordan Bardella tiendra-t-elle ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/ecrits-antisemites-combien-de-temps-la-strategie-de-deni-de-jordan-bardella-tiendra-t-elle",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-10T14:40:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Primaire socialiste : déjà plus de 91 000 votants, les résultats attendus dimanche",
-     "url": "https://www.leprogres.fr/elections/2026/10/10/primaire-socialiste-deja-plus-de-91-000-votants-les-resultats-attendus-dimanche",
-     "media": "Le Progrès",
-     "date": "2026-10-10T14:40:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Primaire socialiste : déjà plus de 91 000 votants, les résultats attendus dimanche",
-     "url": "https://www.dna.fr/elections/2026/10/10/primaire-socialiste-deja-plus-de-91-000-votants-les-resultats-attendus-dimanche",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-10T14:40:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Primaire socialiste : déjà plus de 91 000 votants, les résultats attendus dimanche",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/10/primaire-socialiste-deja-plus-de-91-000-votants-les-resultats-attendus-dimanche",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T14:40:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-10T12:55:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Proche-Orient. Mahmoud Abbas reporte les élections, les Palestiniens iront aux urnes le 11 septembre 2027",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/mahmoud-abbas-reporte-les-elections-les-palestiniens-iront-aux-urnes-le-11-septembre-2027",
-     "media": "Le Progrès",
-     "date": "2026-10-10T12:55:00.000Z"
-    },
-    {
-     "titre": "Proche-Orient. Mahmoud Abbas reporte les élections, les Palestiniens iront aux urnes le 11 septembre 2027",
-     "url": "https://www.dna.fr/politique/2026/10/10/mahmoud-abbas-reporte-les-elections-les-palestiniens-iront-aux-urnes-le-11-septembre-2027",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-10T12:55:00.000Z"
-    },
-    {
-     "titre": "Proche-Orient. Mahmoud Abbas reporte les élections, les Palestiniens iront aux urnes le 11 septembre 2027",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/mahmoud-abbas-reporte-les-elections-les-palestiniens-iront-aux-urnes-le-11-septembre-2027",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T12:55:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Proche-Orient : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
@@ -1689,137 +1452,49 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
+    "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-10-10T18:45:52.000Z",
+   "derniere": "2026-10-10T18:25:00.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Civrieux. Après un long chantier, la nouvelle station d’épuration inaugurée",
-     "url": "https://www.leprogres.fr/environnement/2026/10/10/apres-un-long-chantier-la-nouvelle-station-d-epuration-inauguree",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:45:52.000Z"
+     "titre": "Présidentielle 2027. En meeting à Lyon, Gabriel Attal mise sur la jeunesse pour rester dans le match",
+     "url": "https://www.dna.fr/elections/2026/10/10/en-meeting-a-lyon-gabriel-attal-mise-sur-la-jeunesse-pour-rester-dans-le-match",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-10T18:25:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Civrieux : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T18:45:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Villette-sur-Ain. L’église et la mairie se parent de rose en octobre",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/l-eglise-et-la-mairie-se-parent-de-rose-en-octobre",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:45:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Villette-sur-Ain : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T18:41:24.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Arc-et-Senans. Plusieurs projets communaux passent en phase opérationnelle",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/plusieurs-projets-passent-en-phase-operationnelle",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T18:41:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Arc-et-Senans : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T18:15:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Rives de l’Ain pays de Cerdon. Le conseil communautaire cultive son plan Paysage",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/le-conseil-communautaire-cultive-son-plan-paysage",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:15:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T18:15:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montréal-la-Cluse. Tranquillité en ville : des citoyens référents vont être désignés",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/tranquillite-en-ville-des-citoyens-referents-vont-etre-designes",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:15:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montréal-la-Cluse : actualité locale",
+    "titre": "Gabriel Attal : ce qu'il faut savoir sur l'éducation et la jeunesse",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Tranquillité en ville : des citoyens référents vont être désignés",
-   "accroche": "Tranquillité en ville : des citoyens référents vont être désignés"
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1850,39 +1525,6 @@
    },
    "fait": "Primaire du Parti socialiste et de Place publique",
    "accroche": "Primaire du Parti socialiste et de Place publique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T18:04:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "La Fouillouse. La Mife, un outil pour redynamiser les économies locales",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/la-mife-un-outil-pour-redynamiser-les-economies-locales",
-     "media": "Le Progrès",
-     "date": "2026-10-10T18:04:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Fouillouse : finances locales",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -1960,141 +1602,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:53:17.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montgenèvre. Pour Muriel Jourdain, à la mairie, « il y avait un problème de ressources humaines »",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/pour-muriel-jourdain-a-la-mairie-il-y-avait-un-probleme-de-ressources-humaines",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:53:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montgenèvre : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:39:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Genis-Pouilly. Ferme Crétin : pourquoi la mairie va verser près d’un million d’euros à la Semcoda",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/ferme-cretin-pourquoi-la-mairie-va-verser-pres-d-un-million-d-euros-a-la-semcoda",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:39:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Genis-Pouilly : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:39:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Genis-Pouilly. « On veut conserver le peu de patrimoine architectural qui existe encore »",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/on-veut-conserver-le-peu-de-patrimoine-architectural-qui-existe-encore",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:39:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Genis-Pouilly : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:37:34.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Allevard. Le conseil municipal se réunira ce lundi 12 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/le-conseil-municipal-se-reunira-ce-lundi-12-octobre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:37:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Allevard : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Le conseil municipal se réunira ce lundi 12 octobre",
-   "accroche": "Le conseil municipal se réunira ce lundi 12 octobre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:35:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Denis-en-Bugey. Le nouveau conseil municipal des jeunes a arrêté ses projets de l’année",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/le-nouveau-conseil-municipal-des-jeunes-a-arrete-ses-projets-de-l-annee",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:35:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Denis-en-Bugey : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Le nouveau conseil municipal des jeunes a arrêté ses projets de l’année",
-   "accroche": "Le nouveau conseil municipal des jeunes a arrêté ses projets de l’année"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-10T17:33:40.000Z",
@@ -2139,32 +1646,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:30:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Serres. Conseil municipal : erratum",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/conseil-municipal-erratum",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:30:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Serres : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-10T17:30:00.000Z",
@@ -2186,223 +1667,6 @@
     "titre": "Social : appel sur le social et l'emploi",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Ornans. « Nous avions promis de nous occuper des commerçants » : un office municipal du commerce et de l’artisanat voit le jour",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/10/nous-avions-promis-de-nous-occuper-des-commercants-l-office-municipal-du-commerce-et-de-l-artisanat-leve-le-rideau",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ornans : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:27:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Belmont. Le sous-préfet Richard-Daniel Boisson a rencontré les élus de la commune",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/le-sous-prefet-richard-daniel-boisson-a-rencontre-les-elus-de-la-commune",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:27:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Belmont : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Le sous-préfet Richard-Daniel Boisson a rencontré les élus de la commune",
-   "accroche": "Le sous-préfet Richard-Daniel Boisson a rencontré les élus de la commune"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:19:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Abriès-Ristolas. Au menu du conseil municipal ce lundi",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/au-menu-du-conseil-municipal-ce-lundi",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:19:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Abriès-Ristolas : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T17:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Billet. Conseil municipal à Montbéliard : l’opposition s’étrangle avec les escargots",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/conseil-municipal-a-montbeliard-l-opposition-s-etrangle-avec-les-escargots",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T17:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : opinion d'un média",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:11:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Victor. Frais de scolarité : une note trop salée pour le conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/frais-de-scolarite-une-note-trop-salee-pour-le-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:11:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Victor : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Frais de scolarité : une note trop salée pour le conseil municipal",
-   "accroche": "Frais de scolarité : une note trop salée pour le conseil municipal"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:10:53.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Chalmazel-Jeansagnière. Le premier Conseil municipal des jeunes est désormais en place",
-     "url": "https://www.leprogres.fr/elections/2026/10/10/le-premier-conseil-municipal-des-jeunes-est-desormais-en-place",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:10:53.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Chalmazel-Jeansagnière : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Le premier Conseil municipal des jeunes est en place",
-   "accroche": "Le premier Conseil municipal des jeunes est en place"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:10:04.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Sainte-Foy-lès-Lyon. Sécurité et mobilités au cœur des préoccupations des habitants du quartier Provinces Chavril",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/securite-et-mobilites-au-coeur-des-preoccupations-des-habitants-du-quartier-provinces-chavril",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:10:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:08:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Valréas. Bassin-versant du Lez : d’importants travaux sont prévus à Taulignan",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/bassin-versant-du-lez-d-importants-travaux-sont-prevus-a-taulignan",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:08:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Valréas : projet d'aménagement",
-    "origine": "regles"
-   },
-   "fait": "Bassin-versant du Lez : d’importants travaux sont prévus à Taulignan",
-   "accroche": "Bassin-versant du Lez : d’importants travaux sont prévus à Taulignan"
   },
   {
    "medias": 1,
@@ -2457,33 +1721,6 @@
    "titrePropre": {
     "titre": "Intelligence artificielle : ce que disent les médias",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:05:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Avignon. Université de rentrée d'Oser la France déprogrammée : Julien Aubert dénonce « une atteinte au pluralisme politique »",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/universite-de-rentree-d-oser-la-france-deprogrammee-julien-aubert-denonce-une-atteinte-au-pluralisme-politique",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:05:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Avignon : actualité locale",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -2586,35 +1823,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T17:03:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Alpes-de-Haute-Provence. Barcelonnette : un conseil communautaire consacré à la compétence tourisme le 13 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/un-conseil-communautaire-consacre-a-la-competence-tourisme",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T17:03:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Alpes-de-Haute-Provence : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Un conseil communautaire consacré à la compétence tourisme le 13 octobre",
-   "accroche": "Un conseil communautaire consacré à la compétence tourisme le 13 octobre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-10-10T17:02:00.000Z",
@@ -2685,35 +1893,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jura. Dermatose nodulaire contagieuse : l’origine de la contamination des bovins à Écleux toujours inconnue ?",
-     "url": "https://www.leprogres.fr/economie/2026/10/10/dermatose-nodulaire-contagieuse-l-origine-de-la-contamination-des-bovins-a-ecleux-toujours-inconnue",
-     "media": "Le Progrès",
-     "date": "2026-10-10T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jura : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L’origine de la contamination des bovins à Écleux toujours inconnue ?",
-   "accroche": "L’origine de la contamination des bovins à Écleux toujours inconnue ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-10-10T17:00:00.000Z",
@@ -2735,34 +1914,6 @@
     "titre": "Soultz : conseil municipal",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Codecom Côtes de Meuse Woëvre. Photovoltaïque : les chantiers d’installation des panneaux sur les toitures des écoles sont lancés",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/photovoltaique-les-chantiers-d-installation-des-panneaux-sur-les-toitures-des-ecoles-sont-lances",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Les chantiers d’installation des panneaux sur les toitures des écoles sont lancés",
-   "accroche": "Les chantiers d’installation des panneaux sur les toitures des écoles sont lancés"
   },
   {
    "medias": 1,
@@ -2807,171 +1958,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:51:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le Lac-d’Issarlès. Les élections du 15 mars invalidées, le conseil municipal est dissous",
-     "url": "https://www.ledauphine.com/elections/2026/10/10/les-elections-du-15-mars-invalidees-le-conseil-municipal-est-dissous",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:51:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Le Lac-d’Issarlès : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:50:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Martin-de-Valamas. Au menu du prochain conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/au-menu-du-prochain-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:50:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Martin-de-Valamas : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:49:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Labeaume. Le prochain conseil municipal se réunit ce lundi 12 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/le-prochain-conseil-municipal-se-reunit-ce-lundi-12-octobre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:49:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Labeaume : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Le prochain conseil municipal se réunit ce lundi 12 octobre",
-   "accroche": "Le prochain conseil municipal se réunit ce lundi 12 octobre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:49:28.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Chèvremont. Mobilisés face à la menace de fermeture du bureau de poste",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/mobilises-face-a-la-menace-de-fermeture-du-bureau-de-poste",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:49:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Chèvremont : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Mobilisés face à la menace de fermeture du bureau de poste",
-   "accroche": "Mobilisés face à la menace de fermeture du bureau de poste"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:49:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le Pouzin. À l’Association des maires, « le grand public ne le voit pas, mais on s’entraide énormément »",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/a-l-association-des-maires-le-grand-public-ne-le-voit-pas-mais-on-s-entraide-enormement",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:49:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
-   },
-   "fait": "Le Pouzin. À l’Association des maires",
-   "accroche": "Le Pouzin. À l’Association des maires"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T16:44:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Thurins. Conseil municipal : les pompiers et le réseau de chaleur sont au cœur des discussions",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/conseil-municipal-les-pompiers-et-le-reseau-de-chaleur-sont-au-coeur-des-discussions",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:44:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Thurins : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Les pompiers et le réseau de chaleur sont au cœur des discussions",
-   "accroche": "Les pompiers et le réseau de chaleur sont au cœur des discussions"
   },
   {
    "medias": 1,
@@ -3076,165 +2062,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:44:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Table. Le plan communal de sauvegarde a été approuvé",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/le-plan-communal-de-sauvegarde-a-ete-approuve",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:44:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Table : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T16:44:11.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Symphorien-sur-Coise. Accueil, équipements numériques... Le local France Services a été rénové",
-     "url": "https://www.leprogres.fr/economie/2026/10/10/accueil-equipements-numeriques-le-local-france-services-a-ete-renove",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:44:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Symphorien-sur-Coise : numérique",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T16:43:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montagny. Pôle technique, vidéoprotection... La ville pour la mutualisation des dépenses",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/pole-technique-videoprotection-la-ville-pour-la-mutualisation-des-depenses",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:43:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montagny : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:41:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Grignon. Séance du conseil municipal ce lundi 12 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/seance-du-conseil-municipal-ce-lundi-12-octobre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:41:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Grignon : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:41:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Groisy. Réunion du conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/reunion-du-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:41:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Groisy : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:32:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Just-de-Claix. Conseil municipal : prochaine séance ce mardi 13 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/conseil-municipal-prochaine-seance-ce-mardi-13-octobre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:32:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-10-10T16:31:55.000Z",
@@ -3270,135 +2097,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
+    "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-10-10T16:27:28.000Z",
+   "derniere": "2026-10-10T16:30:00.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Buzy-Darmont. La structure de jeux de l’école Jean-Ferrat sera remplacée",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/la-structure-de-jeux-de-l-ecole-jean-ferrat-sera-remplacee",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:27:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Buzy-Darmont : actualité scolaire",
-    "origine": "regles"
-   },
-   "fait": "La structure de jeux de l’école Jean-Ferrat sera remplacée",
-   "accroche": "La structure de jeux de l’école Jean-Ferrat sera remplacée"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-10T16:27:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Voiron. Primaire de la gauche : « Notre but est d’offrir une alternative pour la présidentielle »",
-     "url": "https://www.ledauphine.com/politique/2026/10/10/isere-voiron-primaire-de-la-gauche-notre-but-est-d-offrir-une-alternative-pour-la-presidentielle",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-10T16:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:26:36.000Z",
-   "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
     "partis": [],
     "theme": "politique",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "Conseil communautaire le 15 octobre",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/conseil-communautaire-le-15-octobre",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:26:36.000Z"
+     "titre": "Politique. Écrits antisémites : combien de temps la stratégie de déni de Jordan Bardella tiendra-t-elle ?",
+     "url": "https://www.dna.fr/politique/2026/10/10/ecrits-antisemites-combien-de-temps-la-strategie-de-deni-de-jordan-bardella-tiendra-t-elle",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-10T16:30:00.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:26:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Maurice-sous-les-Côtes. Agence postale : une nouvelle employée et des horaires élargis",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/agence-postale-une-nouvelle-employee-et-des-horaires-elargis",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:26:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:25:52.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Seichamps. Une nouvelle directrice générale des services à la mairie",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/une-nouvelle-directrice-generale-des-services-a-la-mairie",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:25:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Seichamps : vie municipale",
-    "origine": "regles"
    }
   },
   {
@@ -3428,32 +2155,6 @@
    },
    "fait": "La création d’un service de police municipale validée par le conseil municipal",
    "accroche": "La création d’un service de police municipale validée par le conseil municipal"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:24:17.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Champenoux. Philippe Guezet, 1er adjoint au maire, démissionne",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/philippe-guezet-1-sup-er-sup-adjoint-au-maire-demissionne",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:24:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -3513,87 +2214,6 @@
      "source": "Assemblée nationale (agenda officiel)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T16:18:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Neuves-Maisons. Budget : 1,174 million d’euros de modifications",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/budget-2026-1-174-million-d-euros-de-modifications",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T16:18:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T16:09:09.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Michel-sur-Rhône. Les écoliers ont élu le conseil municipal des jeunes",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/les-ecoliers-ont-elu-le-conseil-municipal-des-jeunes",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:09:09.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Michel-sur-Rhône : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Les écoliers ont élu le conseil municipal des jeunes",
-   "accroche": "Les écoliers ont élu le conseil municipal des jeunes"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-10T16:07:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lyon. « Des cortèges revendicatifs et festifs » pour la pride lyonnaise",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/des-corteges-revendicatifs-et-festifs-pour-la-pride-lyonnaise",
-     "media": "Le Progrès",
-     "date": "2026-10-10T16:07:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lyon : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -3712,35 +2332,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T15:47:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fêche-l’Église. Les règles fixées pour l’affouage changent",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/les-regles-fixees-pour-l-affouage-changent",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T15:47:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fêche-l’Église : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les règles fixées pour l’affouage changent",
-   "accroche": "Les règles fixées pour l’affouage changent"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Ouest-France"
    ],
    "derniere": "2026-10-10T15:46:46.000Z",
@@ -3761,33 +2352,6 @@
    "titrePropre": {
     "titre": "Lycées : annonces sur la mobilisation lycéenne",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T15:44:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Gy. Des mesures de sauvegarde pour le lavoir dodécagonal",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/des-mesures-de-sauvegarde-pour-le-lavoir-dodecagonal",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T15:44:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -3892,32 +2456,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-10T15:38:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bavans. Affouage : inscriptions en mairie et 10 €/stère",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/affouage-inscriptions-en-mairie-et-10-stere",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T15:38:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bavans : vie municipale",
-    "origine": "regles"
-   }
   },
   {
    "medias": 1,
@@ -4316,25 +2854,27 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
+    "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-10-10T14:41:19.000Z",
+   "derniere": "2026-10-10T14:40:00.000Z",
    "illustration": {
     "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Vandœuvre-lès-Nancy. Ecoles, équipements sportifs et mobilités au programme",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/10/ecoles-equipements-sportifs-et-mobilites-au-programme",
-     "media": "L'Est républicain",
-     "date": "2026-10-10T14:41:19.000Z"
+     "titre": "Présidentielle 2027. Primaire socialiste : déjà plus de 91 000 votants, les résultats attendus dimanche",
+     "url": "https://www.dna.fr/elections/2026/10/10/primaire-socialiste-deja-plus-de-91-000-votants-les-resultats-attendus-dimanche",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-10T14:40:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Vandœuvre-lès-Nancy : actualité scolaire",
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
     "origine": "regles"
    }
   },
@@ -4704,6 +3244,1533 @@
    },
    "fait": "Une prof de maths relate être affectée en lettres modernes",
    "accroche": "Une prof de maths relate être affectée en lettres modernes"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T14:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Péage du pont d’Oléron : « On a bien trouvé de l’argent pour le fort Boyard ou pour Marans », l’ouverture de la concertation face à l’épineuse question du financement",
+     "url": "https://www.sudouest.fr/charente-maritime/ile-d-oleron/peage-du-pont-d-oleron-on-a-bien-trouve-de-l-argent-pour-le-fort-boyard-ou-pour-marans-l-ouverture-de-la-concertation-face-a-l-epineuse-question-du-financement-31007937.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T14:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-10T13:58:37.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "EPR"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle: \"Si je suis élu, je donnerai cinq ans maximum à mon gouvernement pour adapter au changement climatique l'ensemble de nos établissements scolaires\", promet Gabriel Attal, candidat \"Renaissance\"",
+     "url": "https://www.bfmtv.com/politique/video-presidentielle-si-je-suis-elu-je-donnerai-cinq-ans-maximum-a-mon-gouvernement-pour-adapter-au-changement-climatique-l-ensemble-de-nos-etablissements-scolaires-promet-gabriel-attal-candidat-renaissance_VN-202610100253.html",
+     "media": "BFMTV",
+     "date": "2026-10-10T13:58:37.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gabriel Attal : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-10T13:44:18.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "EPR"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"Pendant que l'extrême gauche exploite la colère de la jeunesse, l'extrême droite se frotte les mains\", déclare Gabriel Attal, candidat \"Renaissance\" à la présidentielle, en meeting à Lyon",
+     "url": "https://www.bfmtv.com/politique/extreme-gauche/video-pendant-que-l-extreme-gauche-exploite-la-colere-de-la-jeunesse-l-extreme-droite-se-frotte-les-mains-declare-gabriel-attal-candidat-renaissance-a-la-presidentielle-en-meeting-a-lyon_VN-202610100248.html",
+     "media": "BFMTV",
+     "date": "2026-10-10T13:44:18.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T13:30:03.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "A Public Sénat, les notes de frais embarrassantes de Jean-Emmanuel Casalta, président de la chaîne",
+     "url": "https://www.lemonde.fr/economie/article/2026/10/10/a-public-senat-les-notes-de-frais-embarrassantes-de-jean-emmanuel-casalta-president-de-la-chaine_6791002_3234.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T13:30:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-10T13:25:16.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne: François Ruffin souhaite \"l'abandon des poursuites, de Parcoursup et d'un budget qui prévoit de supprimer encore 1.588 postes d'enseignants\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-mobilisation-lyceenne-francois-ruffin-souhaite-l-abandon-des-poursuites-de-parcoursup-et-d-un-budget-qui-prevoit-de-supprimer-encore-1-588-postes-d-enseignants_VN-202610100242.html",
+     "media": "BFMTV",
+     "date": "2026-10-10T13:25:16.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T13:23:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«Pour Stephen King, le mal a une capacité exponentielle à se régénérer»",
+     "url": "https://www.mediapart.fr/journal/culture-et-idees/101026/pour-stephen-king-le-mal-une-capacite-exponentielle-se-regenerer",
+     "media": "Mediapart",
+     "date": "2026-10-10T13:23:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T13:23:39.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Contre les illusions de la souveraineté, le pari de la coopération",
+     "url": "https://www.mediapart.fr/journal/international/101026/contre-les-illusions-de-la-souverainete-le-pari-de-la-cooperation",
+     "media": "Mediapart",
+     "date": "2026-10-10T13:23:39.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-10T13:23:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Marckolsheim. Le site de l’étang de pêche interdit d’accès pour raisons de sécurité",
+     "url": "https://www.dna.fr/culture-loisirs/2026/10/10/le-site-de-l-etang-de-peche-interdit-d-acces-pour-raisons-de-securite",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-10T13:23:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marckolsheim : sécurité",
+    "origine": "regles"
+   },
+   "fait": "Le site de l’étang de pêche interdit d’accès pour raisons de sécurité",
+   "accroche": "Le site de l’étang de pêche interdit d’accès pour raisons de sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Valeurs actuelles"
+   ],
+   "derniere": "2026-10-10T13:00:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le maire LFI Bally Bagayoko accuse la police de racisme face aux lycéens et persiste sur la violence légitime",
+     "url": "https://www.valeursactuelles.com/politique/le-maire-lfi-bally-bagayoko-accuse-la-police-de-racisme-face-aux-lyceens-et-persiste-sur-la-violence-legitime",
+     "media": "Valeurs actuelles",
+     "date": "2026-10-10T13:00:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-10T12:55:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Proche-Orient. Mahmoud Abbas reporte les élections, les Palestiniens iront aux urnes le 11 septembre 2027",
+     "url": "https://www.dna.fr/politique/2026/10/10/mahmoud-abbas-reporte-les-elections-les-palestiniens-iront-aux-urnes-le-11-septembre-2027",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-10T12:55:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Proche-Orient : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T12:38:57.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Amiel",
+      "photo": "photos/personnalites/david-amiel.jpg",
+      "photoHd": "photos/personnalites/hd/david-amiel.jpg",
+      "credit": "B.MODIFICATEUR, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : le taux d’emprunt à 10 ans de la France approche les 5 %, « c’est préoccupant » assure le ministre des Comptes publics David Amiel",
+     "url": "https://www.sudouest.fr/politique/budget-2027-le-taux-d-emprunt-a-10-ans-de-la-france-approche-les-5-c-est-preoccupant-assure-le-ministre-des-comptes-publics-david-amiel-31007826.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T12:38:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T12:30:09.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "A Autun, la tentation d’un vote RN à la présidentielle de 2027 progresse chez les seniors et les retraités : « On n’a plus le choix »",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/10/a-autun-la-tentation-d-un-vote-rn-a-la-presidentielle-de-2027-progresse-chez-les-seniors-et-les-retraites-on-n-a-plus-le-choix_6790995_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T12:30:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rassemblement national : ce qu'il faut savoir sur présidentielle 2027",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-10T12:22:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Le budget 2027 retoqué en commission à quelques jours du débat à l’Assemblée",
+     "url": "https://www.nouvelobs.com/politique/20261010.OBS119092/le-budget-2027-retoque-en-commission-a-quelques-jours-du-debat-a-l-assemblee.html",
+     "media": "L'Obs",
+     "date": "2026-10-10T12:22:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-10T12:17:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Canon Français : une centaine de personnalités basques se mobilisent contre la tenue d’un banquet à Biarritz",
+     "url": "https://www.humanite.fr/politique/pierre-edouard-sterin/canon-francais-une-centaine-de-personnalites-basques-se-mobilisent-contre-la-tenue-dun-banquet-a-biarritz",
+     "media": "L'Humanité",
+     "date": "2026-10-10T12:17:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Canon Français : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T12:11:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bally Bagayoko « vient de quartiers comme nous », comment le maire LFI s’est fait une place au cœur du mouvement",
+     "url": "https://www.sudouest.fr/politique/education/video-colere-des-lyceens-bally-bagayoko-vient-de-quartiers-comme-nous-comment-le-maire-lfi-s-est-fait-une-place-au-coeur-du-mouvement-31007481.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T12:11:16.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-10T12:09:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Sur nos écrans, dans nos gares, nos écoles, nos manifestations… Contre l’extrême droite, une lutte quotidienne sur tous les fronts",
+     "url": "https://www.humanite.fr/politique/chronique/sur-nos-ecrans-dans-nos-gares-nos-ecoles-nos-manifestations-contre-lextreme-droite-une-lutte-quotidienne-sur-tous-les-fronts",
+     "media": "L'Humanité",
+     "date": "2026-10-10T12:09:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-10T11:19:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Attal vs Mélenchon, ou la bataille pour conquérir la jeunesse",
+     "url": "https://www.20minutes.fr/politique/4253077-20261010-presidentielle-2027-attal-vs-melenchon-bataille-conquerir-jeunesse?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-10T11:19:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gabriel Attal : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %, Mélenchon 14–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Télégramme"
+   ],
+   "derniere": "2026-10-10T11:08:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Aides au reboisement : le gouvernement publie un nouveau décret après l’annulation du précédent par le Conseil d’État",
+     "url": "https://www.letelegramme.fr/environnement/aides-au-reboisement-le-gouvernement-publie-un-nouveau-decret-apres-lannulation-du-precedent-par-le-conseil-detat-7135473.php",
+     "media": "Le Télégramme",
+     "date": "2026-10-10T11:08:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-10T11:06:04.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le théâtre Anthéa perd 700.000 euros de subvention : le coup de gueule du maire d’Antibes Jean Leonetti",
+     "url": "https://www.nicematin.com/societe/politique/le-theatre-anthea-perd-700-000-euros-de-subvention-le-coup-de-gueule-du-maire-d-antibes-jean-leonetti-10737188",
+     "media": "Nice-Matin",
+     "date": "2026-10-10T11:06:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   },
+   "fait": "Le théâtre Anthéa perd 700 000 euros de subvention",
+   "accroche": "Le théâtre Anthéa perd 700 000 euros de subvention"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-10T11:00:58.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : Philippe Geluck critiqué pour avoir refusé de se prononcer entre Le Pen et Mélenchon",
+     "url": "https://www.lejdd.fr/International/presidentielle-philippe-geluck-critique-pour-avoir-refuse-de-se-prononcer-entre-le-pen-et-melenchon-185631",
+     "media": "Le JDD",
+     "date": "2026-10-10T11:00:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Pen 31–36 %, Mélenchon 14–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Ouest-France"
+   ],
+   "derniere": "2026-10-10T10:45:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne : emploi du temps, Parcoursup... Ce que disent les doléances sur la plateforme du gouvernement",
+     "url": "https://www.ouest-france.fr/education/mobilisation-lyceenne-lemploi-du-temps-et-letat-des-lycees-preoccuperaient-plus-que-parcoursup-ou-les-telephones-d47945b4-c48c-11f1-92e9-819eb738846b?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-10T10:45:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Croix"
+   ],
+   "derniere": "2026-10-10T10:43:43.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "D’où viennent les 3 000 professeurs remplaçants annoncés par le ministre de l’éducation nationale ?",
+     "url": "https://www.la-croix.com/societe/d-ou-viennent-les-3-000-professeurs-remplacants-annonces-par-le-ministre-de-leducation-nationale-20261010",
+     "media": "La Croix",
+     "date": "2026-10-10T10:43:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-10-10T10:37:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Amiel",
+      "photo": "photos/personnalites/david-amiel.jpg",
+      "photoHd": "photos/personnalites/hd/david-amiel.jpg",
+      "credit": "B.MODIFICATEUR, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "David Amiel, ministre des Comptes publics : \"Nous ne sommes pas en crise financière mais il y a urgence à agir\"",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-d-on-n-arrete-pas-l-eco/l-invite-d-on-n-arrete-pas-l-eco-du-samedi-10-octobre-2026-2561657",
+     "media": "France Inter",
+     "date": "2026-10-10T10:37:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "David Amiel, ministre des Comptes publics",
+   "accroche": "David Amiel, ministre des Comptes publics",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "David Amiel : ministre de l'action et des comptes publics",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-10T10:34:29.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Patrimoine : les bassins du château de Versailles bientôt restaurés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-patrimoine-les-bassins-du-ch%C3%A2teau-de-versailles-bient%C3%B4t-restaur%C3%A9s",
+     "media": "France 24",
+     "date": "2026-10-10T10:34:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Patrimoine : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-10T10:30:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "UDR"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "À Roquebrune-Cap-Martin, les liens du maire Patrick Cesari avec l’UDR interrogent à droite",
+     "url": "https://www.nicematin.com/societe/politique/a-roquebrune-cap-martin-les-liens-du-maire-patrick-cesari-avec-l-udr-interrogent-a-droite-10737262",
+     "media": "Nice-Matin",
+     "date": "2026-10-10T10:30:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T10:27:21.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation des lycéens : de Ryad Rani à Suzanne Nijdam, qui sont les figures et voix qui incarnent le mouvement ?",
+     "url": "https://www.sudouest.fr/ile-de-france/paris/mobilisation-des-lyceens-de-ryad-rani-a-suzanne-nijdam-qui-sont-les-figures-et-voix-qui-incarnent-le-mouvement-31006237.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T10:27:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T10:26:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la gauche sociale-démocrate : plus de 91 000 personnes ont déjà voté, selon la commission d’organisation",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/10/primaire-a-gauche-plus-de-71-000-personnes-ont-deja-vote-selon-la-commission-d-organisation_6790987_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T10:26:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Plus de 91 000 personnes ont déjà voté, selon la commission d’organisation",
+   "accroche": "Plus de 91 000 personnes ont déjà voté, selon la commission d’organisation"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-10T10:12:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN",
+     "LFI"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "DÉCRYPTAGE. Présidentielle 2027 : \"C’est vrai que seuls le RN et LFI impriment\", pourquoi les candidats modérés peinent à capter l'attention",
+     "url": "https://www.ladepeche.fr/2026/10/10/decryptage-presidentielle-2027-cest-vrai-que-seuls-le-rn-et-lfi-impriment-pourquoi-les-candidats-moderes-peinent-a-capter-lattention-13593494.php",
+     "media": "La Dépêche",
+     "date": "2026-10-10T10:12:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "DÉCRYPTAGE : présidentielle",
+    "origine": "regles"
+   },
+   "fait": "Présidentielle 2027 : pourquoi les candidats modérés peinent à capter l'attention",
+   "accroche": "Présidentielle 2027 : pourquoi les candidats modérés peinent à capter l'attention"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T10:11:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen: à Lyon, la loi Ripost facilite l’usage de drones par la police",
+     "url": "https://www.mediapart.fr/journal/france/101026/mouvement-lyceen-lyon-la-loi-ripost-facilite-l-usage-de-drones-par-la-police",
+     "media": "Mediapart",
+     "date": "2026-10-10T10:11:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "À Lyon, la loi Ripost facilite l’usage de drones par la police",
+   "accroche": "À Lyon, la loi Ripost facilite l’usage de drones par la police"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-10-10T10:11:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Préférence nationale, lutte contre la fraude, UE... Peut-on croire au programme économique du Rassemblement national ?",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/le-debat-d-on-n-arrete-pas-l-eco/le-debat-d-on-n-arrete-pas-l-eco-du-samedi-10-octobre-2026-1118504",
+     "media": "France Inter",
+     "date": "2026-10-10T10:11:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-10-10T10:04:50.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Amiel",
+      "photo": "photos/personnalites/david-amiel.jpg",
+      "photoHd": "photos/personnalites/hd/david-amiel.jpg",
+      "credit": "B.MODIFICATEUR, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Avec David Amiel, ministre de l'Action et des Comptes publics",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/on-n-arrete-pas-l-eco/on-n-arrete-pas-l-eco-du-samedi-10-octobre-2026-6083125",
+     "media": "France Inter",
+     "date": "2026-10-10T10:04:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "David Amiel : ministre de l'action et des comptes publics",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T10:04:46.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Loi intégrale: de vraies avancées en santé, mais des soins aux victimes au rabais",
+     "url": "https://www.mediapart.fr/journal/france/101026/loi-integrale-de-vraies-avancees-en-sante-mais-des-soins-aux-victimes-au-rabais",
+     "media": "Mediapart",
+     "date": "2026-10-10T10:04:46.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Santé : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "De vraies avancées en santé, mais des soins aux victimes au rabais",
+   "accroche": "De vraies avancées en santé, mais des soins aux victimes au rabais"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-10T10:01:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Loi intégrale VSS : une loi sans budget ? S. Rousseau face à S. Josso – L’HUMATCH",
+     "url": "https://www.humanite.fr/politique/budget-2027/loi-integrale-vss-une-loi-sans-budget-s-rousseau-face-a-s-josso-lhumatch",
+     "media": "L'Humanité",
+     "date": "2026-10-10T10:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-10T10:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : le volet recette rejeté en commission, la gauche dénonce l’injustice fiscale",
+     "url": "https://www.humanite.fr/politique/budget-2027/budget-2027-le-volet-recette-rejete-en-commission-la-gauche-denonce-linjustice-fiscale",
+     "media": "L'Humanité",
+     "date": "2026-10-10T10:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Budget 2027 : le volet recette rejeté en commission",
+   "accroche": "Budget 2027 : le volet recette rejeté en commission"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-10T09:58:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Les tableaux de Renoir volés sur la Côte d'Azur ont été retrouvés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-les-tableaux-de-renoir-vol%C3%A9s-sur-la-c%C3%B4te-d-azur-ont-%C3%A9t%C3%A9-retrouv%C3%A9s",
+     "media": "France 24",
+     "date": "2026-10-10T09:58:06.000Z"
+    },
+    {
+     "titre": "France : les deux tableaux de Renoir retrouvés un mois après leur vol sur la Côte d'Azur",
+     "url": "https://www.france24.com/fr/france/20261009-france-les-deux-tableaux-de-renoir-retrouv%C3%A9s-un-mois-apr%C3%A8s-leur-vol-sur-la-c%C3%B4te-d-azur",
+     "media": "France 24",
+     "date": "2026-10-09T11:33:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-10T09:56:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire sociale-démocrate : le vote prolongé jusqu'à dimanche soir",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-primaire-sociale-d%C3%A9mocrate-le-vote-prolong%C3%A9-jusqu-%C3%A0-dimanche-soir",
+     "media": "France 24",
+     "date": "2026-10-10T09:56:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Valeurs actuelles"
+   ],
+   "derniere": "2026-10-10T09:30:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Des polémiques montées de toutes pièces » : le maire LFI Bally Bagayoko tente de s’expliquer sur l’excision",
+     "url": "https://www.valeursactuelles.com/politique/des-polemiques-montees-de-toutes-pieces-le-maire-lfi-bally-bagayoko-tente-de-sexpliquer-sur-lexcision",
+     "media": "Valeurs actuelles",
+     "date": "2026-10-10T09:30:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   },
+   "fait": "Le maire La France insoumise Bally Bagayoko tente de s’expliquer sur l’excision",
+   "accroche": "Le maire La France insoumise Bally Bagayoko tente de s’expliquer sur l’excision"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T09:30:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne : ce que nous dit le recours massif à la garde à vue",
+     "url": "https://www.lemonde.fr/idees/article/2026/10/10/lyceens-ce-que-nous-dit-le-recours-massif-a-la-garde-vue_6790982_3232.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T09:30:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Ce que nous dit le recours massif à la garde à vue",
+   "accroche": "Ce que nous dit le recours massif à la garde à vue"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-10T09:29:28.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Francis Lalanne",
+      "photo": "photos/personnalites/francis-lalanne.jpg",
+      "photoHd": "photos/personnalites/hd/francis-lalanne.jpg",
+      "parti": "EXD",
+      "credit": "Thomas Bresson, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : « Ils me font rire »… Lalanne et Dieudonné lancent leur campagne à Valenciennes",
+     "url": "https://www.20minutes.fr/politique/4253051-20261010-presidentielle-2027-font-rire-lalanne-dieudonne-lancent-campagne-presidentielle-valenciennes?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-10T09:29:28.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Francis Lalanne : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-10T09:28:31.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisations lycéennes : des risques de sanctions académiques ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-mobilisations-lyc%C3%A9ennes-des-risques-de-sanctions-acad%C3%A9miques",
+     "media": "France 24",
+     "date": "2026-10-10T09:28:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-10T09:08:18.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Les revendications des lycéens doivent être \"traduits en actes, en décisions\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-les-revendications-des-lyc%C3%A9ens-doivent-%C3%AAtre-traduits-en-actes-en-d%C3%A9cisions",
+     "media": "France 24",
+     "date": "2026-10-10T09:08:18.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Les revendications des lycéens doivent être",
+   "accroche": "Les revendications des lycéens doivent être"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T09:03:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Landes : nostalgie, désaccord entre socialistes et sport dans nos échos satiriques",
+     "url": "https://www.sudouest.fr/politique/landes-nostalgie-desaccord-entre-socialistes-et-sport-dans-nos-echos-satiriques-30988200.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T09:03:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Landes : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-10T08:44:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "\"J'accepte la décision de justice\" : l’élection du maire de Laroque-d'Olmes définitivement annulée par le Conseil d'État six mois après sa victoire au premier tour, les habitants rappelés aux urnes d’ici trois mois",
+     "url": "https://www.ladepeche.fr/2026/10/10/lelection-du-maire-de-laroque-dolmes-definitivement-annulee-par-le-conseil-detat-six-mois-apres-sa-victoire-au-premier-tour-les-habitants-rappeles-aux-13593752.php",
+     "media": "La Dépêche",
+     "date": "2026-10-10T08:44:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-10T08:32:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la gauche : Après la cyberattaque, le vote prolongé d’une journée mobilise déjà plus de 70.000 votants",
+     "url": "https://www.20minutes.fr/politique/4253062-20261010-primaire-gauche-apres-cyberattaque-vote-prolonge-journee-mobilise-deja-plus-70-000-votants?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-10T08:32:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le vote prolongé d’une journée mobilise déjà plus de 70 000 votants",
+   "accroche": "Le vote prolongé d’une journée mobilise déjà plus de 70 000 votants"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T08:30:08.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Qu’est-ce que le marché européen de l’électricité, dont plusieurs candidats à la présidentielle veulent sortir ?",
+     "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/10/qu-est-ce-que-le-marche-europeen-de-l-electricite-dont-plusieurs-candidats-a-la-presidentielle-veulent-sortir_6790978_4355770.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T08:30:08.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T08:29:57.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Omnibus pesticides: comment l’agro-industrie a tenu la plume du commissaire Olivér Várhelyi",
+     "url": "https://www.mediapart.fr/journal/ecologie/101026/omnibus-pesticides-comment-l-agro-industrie-tenu-la-plume-du-commissaire-oliver-varhelyi",
+     "media": "Mediapart",
+     "date": "2026-10-10T08:29:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T08:29:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Pesticides: l’Union européenne dérégule à tout-va",
+     "url": "https://www.mediapart.fr/journal/ecologie/101026/pesticides-l-union-europeenne-deregule-tout-va",
+     "media": "Mediapart",
+     "date": "2026-10-10T08:29:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Pesticides : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-10T08:22:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Cartographier le vivant, le périlleux graal des écologues",
+     "url": "https://www.mediapart.fr/journal/ecologie/101026/cartographier-le-vivant-le-perilleux-graal-des-ecologues",
+     "media": "Mediapart",
+     "date": "2026-10-10T08:22:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Environnement : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-10T08:00:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "La Guadeloupe instaure un bouclier qualité/prix sur des prestations automobiles",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/10/la-guadeloupe-instaure-un-bouclier-qualite-prix-sur-des-prestations-automobiles_6790976_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-10T08:00:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-10T08:00:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne, sécurité, projets et présidentielle : Frédéric Masquelier, maire de Saint-Raphaël, est l’invité de « L’Interview à la une »",
+     "url": "https://www.nicematin.com/societe/politique/video-mobilisation-lyceenne-securite-projets-et-presidentielle-frederic-masquelier-maire-de-saint-raphael-est-l-invite-de-l-interview-a-la-une-10737296",
+     "media": "Nice-Matin",
+     "date": "2026-10-10T08:00:02.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
   }
  ]
 }
