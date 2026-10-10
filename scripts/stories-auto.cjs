@@ -13,6 +13,8 @@
  *  - pas déjà en file (id = empreinte du titre central, ou lien d'article déjà utilisé) ;
  *  - aucun mot de la liste prudente (mise en cause, accusation, enquête, violence, décès, mineur,
  *    victime, fait divers…), pas de thème « justice » : mieux vaut manquer une story que publier à tort ;
+ *  - repris par au moins « minMedias » médias (data/stories-config.json, source unique du seuil, « en bref » compris) ; une accusation, plainte, procédure ou polémique qui vise une PERSONNE NOMMÉE
+ *    exige « minMediasPersonneNommee » médias distincts (3 au moins) et est dessinée SANS portrait ; sinon refus motivé dans le journal (scripts/personne-nommee.cjs) ;
  *  - un sujet de presse n'est retenu que s'il a un titre rédigé par le site (« titrePropre », scripts/titres-propres.cjs) ;
  *    un dossier a toujours le sien. Sinon on passe : mieux vaut ne rien publier qu'un titre de presse en grand titre.
  *    L'entrée de file reçoit « titrePropre » et « videos » [{ media, url }] (liens vidéo, placés en tête de « sources »).

@@ -293,10 +293,10 @@ function choisirVoteDuJour({ lois, jour, now }) {
       if (motExclu(l.titre, OFF) || motExclu(l.dossierTitre || "", OFF)) continue;
       if (l.resultat !== "adopte" && l.resultat !== "rejete") continue;
       const t = totaux(l);
-      const censure = cl.type === "Motion de censure"; // seules les voix favorables comptent : adoptée si 289 au moins (majorité absolue)
+      const censure = cl.type === "Motion de censure"; // seules les voix favorables comptent : adoptée si la moitié des sièges pourvus + 1 (majorité absolue : 289 sur 577, 288 sur 574)
       const votants = censure ? t.pour : t.pour + t.contre;
       if (votants < 50) continue;
-      if (censure ? (l.resultat === "adopte") !== (t.pour >= 289) : l.resultat === "adopte" ? !(t.pour > t.contre) : !(t.contre >= t.pour)) continue; // résultat incohérent avec les voix : on ne publie pas
+      if (censure ? (l.resultat === "adopte") !== (t.pour >= Math.floor(Object.values(l.votes || {}).reduce((a, v) => a + somme(v, 3), 0) / 2) + 1) : l.resultat === "adopte" ? !(t.pour > t.contre) : !(t.contre >= t.pour)) continue; // résultat incohérent avec les voix : on ne publie pas
       const serre = censure ? 1 : 1 - Math.abs(t.pour - t.contre) / votants;
       candidats.push({ l, cl, t, score: cl.base + Math.min(30, votants / 20) + 20 * serre });
     }
