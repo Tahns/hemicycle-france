@@ -122,7 +122,7 @@ for (const titre of ["Le gouvernement présente son projet de budget pour 2027",
     assert.ok(choix([sj], { file: { entrees: [{ id: "x".repeat(12), cree: il_y_a(5), titre, sources: [] }] } }).refus, "doublon écarté");
   }
   // un sujet sans mot d'accusation, sans titre propre clair ET sans fait clair reste refusé ; avec un fait clair, le titre-fait remplace le titre de thème vague
-  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus);
+  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus);
   assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" } })]).refus);
 }
 // Déjà en file : exclu (par titre, ou par lien d'article déjà utilisé)
@@ -299,12 +299,12 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 4, grosSujetMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
   const livree = JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"));
-  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, maxParJour: 8, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 8 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, grosSujetMedias: 4, maxParJour: 8, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 8 stories par jour, publication directe, sujets sensibles sans circuit à part");
   for (const k of ["minMedias", "minMediasPersonneNommee", "maxParJour"]) assert.ok(typeof livree[`_commentaire_${k}`] === "string" && livree[`_commentaire_${k}`].length > 40, `la clé ${k} est documentée dans le fichier`);
   assert.ok(/20/.test(livree._commentaire_maxParJour), "l'ancienne valeur (20) est rappelée pour revenir en arrière");
   // Seuil de médias : UNE seule source (la configuration). Aucune constante du code ne diverge de data/stories-config.json, avant comme après appliquerSeuils
@@ -593,7 +593,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // Titre rédigé trop vague (« Énergie » seul, une rubrique) : pas de story
   assert.ok(AUTO.titreGenerique("Énergie") && AUTO.titreGenerique("Vie politique") && AUTO.titreGenerique("Économie") && AUTO.titreGenerique(""));
   assert.ok(!AUTO.titreGenerique("Primaire de la gauche") && !AUTO.titreGenerique("Blocage des lycées"));
-  assert.ok(choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique sans fait clair : refusé");
+  assert.ok(choix([sujet(T, 3, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique sans fait clair (3 médias) : refusé");
   assert.ok(!choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" } })]).refus, "titre générique mais fait clair (affiché à la place) : accepté");
   // Sujets proches (« Blocage » / « Blocus » des lycées) reconnus ; sujets différents non
   assert.ok(AUTO.titresProches("Blocage des lycées", "Blocus des lycées"));
@@ -848,7 +848,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
 // Titre propre GÉNÉRIQUE (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
 {
   const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
-  const gen = (titre, extra = {}) => sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre, origine: "regles", generique: true }, ...extra });
+  const gen = (titre, extra = {}) => sujet("Le gouvernement présente son projet de budget pour 2027", extra.fait === null ? 3 : 4, { titrePropre: { titre, origine: "regles", generique: true }, ...extra });
   for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(gen(t, { fait: null })), direct: null, file: vide, now }).refus, `générique sans fait clair refusé : ${t}`);
   // avec un titre-fait clair (ce qui s'est passé), c'est lui qui s'affiche : le titre de thème générique ne bloque plus
   assert.ok(!AUTO.choisirSujet({ actualites: actu(gen("Politique : l'essentiel du moment")), direct: null, file: vide, now }).refus, "générique mais fait clair : accepté");
@@ -885,6 +885,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   for (const f of ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "bbbbbbbbbbbb.jpg", "bbbbbbbbbbbb.mp4", "autre.txt"]) wf(jn(dossier, f), "x");
   AUTO.nettoyerImages(new Set(["aaaaaaaaaaaa"]), dossier);
   assert.deepStrictEqual(rd(dossier).sort(), ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "autre.txt"]);
+  // Pages d'un carrousel « <id>-2.jpg » : elles suivent leur entrée (jamais supprimées seules : leur absence bloquait toute la file) ; celles d'une entrée disparue partent avec elle
+  const d2 = mk(jn(td(), "auto-"));
+  for (const f of ["cccccccccccc.jpg", "cccccccccccc-2.jpg", "cccccccccccc-3.jpg", "dddddddddddd.jpg", "dddddddddddd-2.jpg"]) wf(jn(d2, f), "x");
+  AUTO.nettoyerImages(new Set(["cccccccccccc"]), d2);
+  assert.deepStrictEqual(rd(d2).sort(), ["cccccccccccc-2.jpg", "cccccccccccc-3.jpg", "cccccccccccc.jpg"], "les pages du carrousel gardé restent");
+  assert.strictEqual(AUTO.pagesManquantes({ url_images: ["https://x/instagram/auto/zzzzzzzzzzzz-2.jpg"] }), true, "carrousel dont une page manque : à retirer de la file");
+  assert.strictEqual(AUTO.pagesManquantes({ id: "x" }), false, "entrée sans carrousel : rien à vérifier");
 }
 
 // --- SUJETS SENSIBLES (justice, mises en cause) : niveau 1 = publication prudente, niveau 2 = brouillon, jamais en file ---
@@ -1281,6 +1288,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const apres = { entrees: [...avant.entrees, { id: "d".repeat(12), cree: il_y_a(1), type: "story", titre: "Raphaël Glucksmann élu dès le premier tour avec 66 % des voix", sujets: ["Primaire de la gauche : Raphaël Glucksmann élu dès le premier tour avec 66 % des voix"] }] };
   const bis = primaire("Primaire socialiste : Raphaël Glucksmann élu candidat dès le premier tour", "Raphaël Glucksmann élu candidat dès le premier tour");
   assert.ok(choisirSujet({ actualites: actu(bis), direct: null, file: apres, now }).refus, "le même résultat répété reste un doublon");
+}
+
+// GROS sujet (>= grosSujetMedias médias) sans titre propre ni fait clair : jamais perdu (story « à la une », titre de presse cité) ; un petit sujet, si
+{
+  const sansTitre = (nb) => sujet("Le gouvernement présente son projet de budget pour 2027", nb, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null });
+  assert.ok(!choix([sansTitre(4)]).refus, "gros sujet (4 médias) sans fait clair : publié en repli");
+  assert.ok(choix([sansTitre(3)]).refus, "sujet moyen (3 médias) sans fait clair : refusé");
 }
 function A_id(c) { return c.id; }
 

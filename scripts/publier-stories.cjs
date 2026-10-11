@@ -452,16 +452,28 @@ async function main() {
   const finir = () => { if (!A_SEC && c.perimees.length) ecrireRegistre(registre, now); };
   if (!c.entree) { log(`rien à publier : ${c.refus}`); finir(); return; }
   if (!jeton.valide) { log("jeton invalide : aucune publication."); finir(); return; }
-  const e = c.entree;
-  // Mode de publication : le Reel est toujours une vidéo ; une story avec url_video n'est vidéo que si "videos" est activé et la vidéo en ligne (HEAD 200, video/mp4), sinon image
-  let mode = estPost(e) ? "post" : estCarrousel(e) ? "carrousel" : estReel(e) ? "reel" : "story-image";
-  if (estReel(e) && !(await enLigne(e.url_video, "video/mp4"))) { log(`vidéo pas encore en ligne (${e.url_video}) : nouvel essai au prochain passage.`); finir(); return; }
-  if (mode === "story-image" && e.url_video && config.videos === true) {
-    if (await enLigne(e.url_video, "video/mp4")) mode = "story-video"; else log(`vidéo absente ou de type inattendu (${e.url_video}) : la story partira en image.`);
+  // Une entrée dont les images ne sont pas (encore) en ligne ne bloque JAMAIS celles qui la suivent : on la saute pour ce passage et on essaie la suivante (elle sera retentée au prochain passage)
+  let e = c.entree, mode = null;
+  const exclus = new Set();
+  for (let essai = 0; essai < 6 && e; essai++) {
+    // Mode de publication : le Reel est toujours une vidéo ; une story avec url_video n'est vidéo que si "videos" est activé et la vidéo en ligne (HEAD 200, video/mp4), sinon image
+    mode = estPost(e) ? "post" : estCarrousel(e) ? "carrousel" : estReel(e) ? "reel" : "story-image";
+    let pret = true;
+    if (estReel(e) && !(await enLigne(e.url_video, "video/mp4"))) { log(`vidéo pas encore en ligne (${e.url_video}) : entrée ${e.id} sautée, nouvel essai au prochain passage.`); pret = false; }
+    else {
+      if (mode === "story-image" && e.url_video && config.videos === true) {
+        if (await enLigne(e.url_video, "video/mp4")) mode = "story-video"; else log(`vidéo absente ou de type inattendu (${e.url_video}) : la story partira en image.`);
+      }
+      if (mode === "carrousel") {
+        for (const u of e.url_images) if (!(await imageEnLigne(u))) { log(`image du carrousel pas encore en ligne (${u}) : entrée ${e.id} sautée, nouvel essai au prochain passage.`); pret = false; break; }
+      } else if (mode !== "reel" && mode !== "story-video" && !(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : entrée ${e.id} sautée, nouvel essai au prochain passage.`); pret = false; }
+    }
+    if (pret) break;
+    exclus.add(e.id);
+    const suivant = choisir({ file: { ...file, entrees: file.entrees.filter((x) => !exclus.has(x.id)) }, registre, config, now, retires: lireRetiresSur() });
+    e = suivant.entree || null; mode = null;
   }
-  if (mode === "carrousel") {
-    for (const u of e.url_images) if (!(await imageEnLigne(u))) { log(`image du carrousel pas encore en ligne (${u}) : nouvel essai au prochain passage.`); finir(); return; }
-  } else if (mode !== "reel" && mode !== "story-video" && !(await imageEnLigne(e.url_image))) { log(`image pas encore en ligne (${e.url_image}) : nouvel essai au prochain passage.`); finir(); return; }
+  if (!e || !mode) { log("aucune entrée prête (images pas encore en ligne)."); finir(); return; }
   const nom = { post: "post", carrousel: "carrousel", reel: "Reel", "story-image": "story", "story-video": "story vidéo" };
   if (A_SEC) { resume(`À sec : l'entrée ${e.id} (« ${e.titre} ») serait publiée en ${nom[mode]}.`); return; }
   // dernier contrôle, juste avant d'envoyer : l'id figure-t-il déjà au registre de origin/main ? (les vérifications précédentes ont pris du temps)

@@ -102,6 +102,7 @@ const BROUILLON_JOURS = 7;
 // elles sont identiques à celles du fichier livré (un test le vérifie : plus de constante qui diverge de la configuration).
 const DEFAUT_MIN_MEDIAS = 2, DEFAUT_MIN_MEDIAS_PERSONNE = PN.SEUIL_MIN;
 let MIN_MEDIAS = DEFAUT_MIN_MEDIAS; // sujets de presse ET « en bref » (réglé par appliquerSeuils)
+let GROS_SUJET_MEDIAS = 4; // « grosSujetMedias » : un sujet repris par autant de médias est un GROS sujet (voir choisirSujet et scripts/alerte-gros-sujets.cjs) : jamais perdu faute de titre propre
 let MIN_MEDIAS_PERSONNE = DEFAUT_MIN_MEDIAS_PERSONNE; // accusation / polémique visant une personne nommée (scripts/personne-nommee.cjs)
 const FRAICHEUR_H = 3; // direct du président et sujets sensibles de niveau 1
 let FRAICHEUR_SUJET_H = 12; // sujets et dossiers (data/stories-config.json, « fraicheurH ») : un sujet à 3 médias arrivé la nuit reste publiable le matin
@@ -477,8 +478,10 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     // Titre de repli : sans titre propre fiable, un sujet d'accusation, de procédure ou de polémique garde sa story (rubrique « à la une » + titre de presse cité, voir js/stories-actu.js) ; les autres sujets, non
     const sensibleNormal = !!(s.articles || []).some((a) => LP.motAssoupli(a.titre)) || s.illustration?.theme === "justice";
     const sansTitrePropre = !s.titrePropre?.titre || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true;
-    const repli = sensibleNormal && sansTitrePropre;
     const fait = faitDe(s);
+    // GROS sujet (>= « grosSujetMedias » médias) sans titre propre ni titre-fait : il garde sa story en « à la une » (titre de presse cité et attribué) au lieu d'être perdu ; les garde-fous (mots exclus, personne nommée, réserve) ont déjà joué
+    const grosSujet = medias >= GROS_SUJET_MEDIAS;
+    const repli = (sensibleNormal && sansTitrePropre) || (grosSujet && sansTitrePropre && !fait);
     if (!repli) {
       if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
       // Un titre-fait clair (ce qui s'est passé, 6 à 12 mots) remplace le titre propre à l'affichage : un titre de thème générique (« Primaire : ce que disent les médias ») ne bloque alors plus le sujet
@@ -637,11 +640,16 @@ function imageValide(chemin) {
   } catch (e) { return false; }
 }
 
+/** Un carrousel dont une page (« <id>-N.jpg ») manque ne peut plus être publié : il ne doit pas rester en tête de file. */
+function pagesManquantes(e) {
+  return Array.isArray(e?.url_images) && e.url_images.some((u) => !imageValide(path.join(DOSSIER_IMG, path.basename(String(u)))));
+}
+
 /** Retire des entrées dont l'image doit encore exister (ids de `images`) celles dont `existe(id)` est faux. Fonction pure (testable). */
 function retirerSansImage(entrees, images, existe) {
   const retirees = [];
   const gardees = entrees.filter((e) => {
-    if (!images.has(e.id) || existe(e.id)) return true;
+    if (!images.has(e.id) || existe(e.id, e)) return true;
     retirees.push(e.id);
     return false;
   });
@@ -661,7 +669,7 @@ function nettoyerImages(images, dossier = DOSSIER_IMG, retires = lireRetiresSur(
   for (const f of fs.readdirSync(dossier)) {
     // Convention « <12 hexa>.jpg|mp4 » ; tout autre fichier de ce dossier (publication manuelle, id libre) est aussi retiré dès qu'il n'est plus dans la file (audit A-07),
     // et les images des contenus « retirés » (data/instagram-retires.json) sont supprimées d'office (audit J-23).
-    const m = /^([0-9a-f]{12})\.(?:jpg|mp4)$/.exec(f);
+    const m = /^([0-9a-f]{12})(?:-\d+)?\.(?:jpg|mp4)$/.exec(f); // « <id>.jpg » et les pages d'un carrousel « <id>-2.jpg »… (elles suivent leur entrée : ne jamais les supprimer seules)
     const base = m ? m[1] : f.replace(/\.[a-z0-9]+$/i, "");
     if (!m && !/\.(?:jpe?g|png|mp4)$/i.test(f)) continue; // ni README ni autre fichier : seules les images et vidéos sont concernées
     if (!retires.has(base) && images.has(base)) continue;
@@ -847,7 +855,7 @@ function normaliserConfig(c) {
   return {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
-    minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
+    minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12), grosSujetMedias: entier(c?.grosSujetMedias, 4, 3, 10),
     maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
@@ -861,7 +869,7 @@ function normaliserConfig(c) {
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
 function appliquerSeuils(config) {
-  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_PERSONNE = config.minMediasPersonneNommee; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_PERSONNE = config.minMediasPersonneNommee; MIN_MEDIAS_DOSSIER = config.dossierMedias; GROS_SUJET_MEDIAS = config.grosSujetMedias || 4; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
 }
 /**
  * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
@@ -1305,7 +1313,7 @@ function aFaire() {
   const vue = { entrees: [...nettoyerFile(file.entrees, config, now), ...purgerReserve(brouillons, now)] };
   const c = choisir({ ...donnees, file: vue, now, config });
   // Des entrées à retirer (réserve électorale, presse en monétisation) ou des brouillons périmés : main() s'en charge
-  const aRetirer = nettoyerFile(file.entrees, config, now).length !== file.entrees.length || brouillonsASupprimer(brouillons, now).length > 0;
+  const aRetirer = nettoyerFile(file.entrees, config, now).length !== file.entrees.length || brouillonsASupprimer(brouillons, now).length > 0 || file.entrees.some(pagesManquantes);
   console.log(`a_faire=${c.refus && !aRetirer ? "false" : "true"}`);
 }
 
@@ -1511,7 +1519,7 @@ async function main() {
   for (const l of journal) alerteResume(`- **Refusé (personne nommée, présomption d'innocence)** : ${l}`);
   const { gardees, images } = elaguer(file.entrees, now);
   // Une entrée récente dont l'image manque (ou n'est pas un JPEG) est retirée de la file, avec alerte : elle ne bloque rien
-  const { gardees: saines, retirees } = retirerSansImage(gardees, images, (id) => imageValide(path.join(DOSSIER_IMG, `${id}.jpg`)));
+  const { gardees: saines, retirees } = retirerSansImage(gardees, images, (id, e) => imageValide(path.join(DOSSIER_IMG, `${id}.jpg`)) && !pagesManquantes(e));
   if (retirees.length) alerteResume(`- **File des stories** : entrée(s) retirée(s) faute d'image valide : ${retirees.join(", ")}.`);
   let entrees = saines;
 
@@ -1594,6 +1602,6 @@ async function main() {
   }
 }
 
-module.exports = { seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { pagesManquantes, dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });
