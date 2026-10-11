@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-11T13:55:31.241Z",
+ "lastUpdated": "2026-10-11T14:01:03.257Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -309,8 +309,8 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
+    "candidat",
     "jeunesse",
-    "programme",
     "meeting"
    ],
    "medias": [
@@ -319,7 +319,6 @@
     "20 Minutes",
     "La Dépêche",
     "Le JDD",
-    "Le Progrès",
     "Le Monde",
     "Europe 1",
     "Mediapart",
@@ -328,6 +327,7 @@
     "France 24",
     "Nice-Matin",
     "RFI",
+    "Le Figaro",
     "Public Sénat"
    ],
    "mediasDistincts": 13,
@@ -337,23 +337,23 @@
     "20 Minutes",
     "La Dépêche",
     "Groupe Bolloré",
-    "Le Progrès",
     "Le Monde",
     "Mediapart",
     "Libération",
     "Le Télégramme",
     "France Médias Monde",
     "Nice-Matin",
+    "Le Figaro",
     "Public Sénat"
    ],
-   "nb": 45,
-   "derniere": "2026-10-11T13:50:11.000Z",
+   "nb": 50,
+   "derniere": "2026-10-11T13:58:06.000Z",
    "articles": [
     {
      "media": "BFMTV",
      "titre": "DIRECT. Jean-Luc Mélenchon assure que \"cette élection présidentielle ne ressemble à aucune autre avant'",
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-du-parti-socialiste-et-de-place-publique-la-gauche-sociale-democrate-choisit-son-candidat-pour-la-presidentielle-2027-plus-de-100-00-votants-pour-l-heure-recenses_LN-202610110078.html",
-     "date": "2026-10-11T13:50:11.000Z"
+     "date": "2026-10-11T13:58:06.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -380,12 +380,6 @@
      "date": "2026-10-11T10:04:04.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Rive-de-Gier. « Augmenter progressivement les effectifs » : la Ville renforce les moyens de sa police municipale",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/11/la-ville-renforce-les-moyens-de-sa-police-municipale",
-     "date": "2026-10-11T04:00:00.000Z"
-    },
-    {
      "media": "Le Monde",
      "titre": "Présidentielle 2027 : en raison du mouvement lycéen, Gabriel Attal réajuste son programme et défend un « pacte pour la jeunesse »",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/article/2026/10/11/presidentielle-2027-face-au-mouvement-lyceen-gabriel-attal-reajuste-son-programme-et-defend-un-pacte-pour-la-jeunesse_6791096_6205049.html",
@@ -393,9 +387,9 @@
     },
     {
      "media": "Europe 1",
-     "titre": "Colère des lycéens : en meeting à Lyon, Gabriel Attal lance un appel à la jeunesse",
-     "url": "https://www.europe1.fr/politique/colere-des-lyceens-en-meeting-a-lyon-gabriel-attal-lance-un-appel-a-la-jeunesse-1136894?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-10T19:20:49.000Z"
+     "titre": "Au Pérou, un candidat prénommé Hitler Mussolini élu maire d'un village",
+     "url": "https://www.europe1.fr/insolite/au-perou-un-candidat-prenomme-hitler-mussolini-elu-maire-dun-village-1136552?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-10T20:00:00.000Z"
     },
     {
      "media": "Mediapart",
@@ -435,6 +429,12 @@
      "date": "2026-10-10T05:00:41.000Z"
     },
     {
+     "media": "Le Figaro",
+     "titre": "Michel Barnier au Figaro : «Je souhaite un seul candidat à la fin et que ce soit Bruno Retailleau»",
+     "url": "https://www.lefigaro.fr/elections/presidentielles/michel-barnier-au-figaro-je-souhaite-un-seul-candidat-a-la-fin-et-que-ce-soit-bruno-retailleau-20261009",
+     "date": "2026-10-09T16:24:56.000Z"
+    },
+    {
      "media": "Public Sénat",
      "titre": "Politique familiale, allocations, crèches : que proposent les candidats à la présidentielle ?",
      "url": "https://www.publicsenat.fr/actualites/politique/politique-familiale-allocations-creches-que-proposent-les-candidats-a-la-presidentielle",
@@ -443,135 +443,102 @@
    ]
   },
   {
-   "id": "candidat",
-   "titre": "Candidat",
+   "id": "budget",
+   "titre": "Budget",
    "motifs": [
-    "candidat"
+    "budget"
    ],
    "medias": [
-    "BFMTV",
     "La Dépêche",
-    "Le Progrès",
+    "France 24",
     "Europe 1",
-    "Le Monde",
+    "Le JDD",
+    "L'Obs",
     "Libération",
-    "Le Figaro",
-    "Nice-Matin",
+    "Le Monde",
     "Public Sénat"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 7,
    "sources": [
-    "BFMTV",
     "La Dépêche",
-    "Le Progrès",
-    "Europe 1",
-    "Le Monde",
+    "France 24",
+    "Groupe Bolloré",
+    "L'Obs",
     "Libération",
-    "Le Figaro",
-    "Nice-Matin",
+    "Le Monde",
     "Public Sénat"
    ],
-   "nb": 14,
-   "derniere": "2026-10-11T12:17:30.000Z",
+   "nb": 9,
+   "derniere": "2026-10-11T12:52:24.000Z",
    "articles": [
     {
-     "media": "BFMTV",
-     "titre": "Meeting de Jean-Luc Mélenchon: la mobilisation lycéenne sera au cœur du discours du candidat LFI à la présidentielle ce dimanche",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-meeting-de-jean-luc-melenchon-la-mobilisation-lyceenne-sera-au-c-ur-du-discours-du-candidat-lfi-a-la-presidentielle-ce-dimanche_VN-202610110220.html",
-     "date": "2026-10-11T12:17:30.000Z",
-     "video": true
-    },
-    {
      "media": "La Dépêche",
-     "titre": "Présidentielle 2027 - Sondage : Le Pen et Bardella perdent en popularité, qui est cet autre candidat auteur d'une percée surprise ?",
-     "url": "https://www.ladepeche.fr/2026/10/11/presidentielle-2027-sondage-le-pen-et-bardella-perdent-en-popularite-qui-est-cet-autre-candidat-auteur-dune-percee-surprise-13595579.php",
-     "date": "2026-10-11T08:37:32.000Z"
+     "titre": "DIRECT. Présidentielle 2027 : \"Dans une période d’ajustement budgétaire important, on fait le choix de préserver l'Éducation nationale\", indique le ministre des Comptes publics",
+     "url": "https://www.ladepeche.fr/2026/10/11/direct-presidentielle-2027-plus-de-107-000-personnes-ont-participe-au-vote-de-la-primaire-de-la-gauche-les-resultats-attendus-a-18-h-13595558.php",
+     "date": "2026-10-11T12:52:24.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Star Academy : qui est Mélina, 22 ans, la seule candidate d'Occitanie de la promotion 2026 ?",
-     "url": "https://www.ladepeche.fr/2026/10/11/star-academy-qui-est-melina-22-ans-la-seule-candidate-doccitanie-de-la-promotion-2026-13592042.php",
-     "date": "2026-10-11T06:01:06.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Star Academy : qui sont les 17 candidats de la saison 2026 ? Découvrez leurs visages, leurs parcours et leurs premières prestations en direct",
-     "url": "https://www.ladepeche.fr/2026/10/11/star-academy-qui-sont-les-17-candidats-de-la-saison-2026-decouvrez-leurs-visages-leurs-parcours-et-leurs-premieres-prestations-en-direct-13592043.php",
-     "date": "2026-10-11T05:01:05.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "En images. Dans une ambiance de supporters survoltés, le candidat Renaissance Gabriel Attal présente à Lyon son « nouveau pacte pour la jeunesse »",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/dans-une-ambiance-de-supporters-le-candidat-renaissance-gabriel-attal-presente-a-lyon-son-nouveau-pacte-pour-la-jeunesse",
-     "date": "2026-10-10T20:45:00.000Z"
+     "media": "France 24",
+     "titre": "Mobilisations lycéennes, budget ... l'exécutif français sous pression",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261011-mobilisations-lyc%C3%A9ennes-d%C3%A9bat-sur-le-budget-l-ex%C3%A9cutif-sous-pression",
+     "date": "2026-10-11T11:41:49.000Z"
     },
     {
      "media": "Europe 1",
-     "titre": "Au Pérou, un candidat prénommé Hitler Mussolini élu maire d'un village",
-     "url": "https://www.europe1.fr/insolite/au-perou-un-candidat-prenomme-hitler-mussolini-elu-maire-dun-village-1136552?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-10T20:00:00.000Z"
+     "titre": "Frontières, budget, monnaie... «L'UE est en train de nous étrangler», affirme Nicolas Dupont-Aignan",
+     "url": "https://www.europe1.fr/politique/frontieres-budget-monnaie-lue-est-en-train-de-nous-etrangler-affirme-nicolas-dupont-aignan-1138523?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-11T09:28:10.000Z"
     },
     {
      "media": "La Dépêche",
-     "titre": "\"J'ai rien à perdre\" : muni d'une barre de fer, un candidat recalé deux fois au permis de conduire vient régler ses comptes avec un inspecteur devant un centre d'examen à Toulouse",
-     "url": "https://www.ladepeche.fr/2026/10/10/jai-rien-a-perdre-muni-dune-barre-de-fer-un-candidat-recale-deux-fois-au-permis-de-conduire-vient-regler-ses-comptes-avec-un-inspecteur-devant-un-13594761.php",
-     "date": "2026-10-10T15:00:02.000Z"
+     "titre": "Paiement en plusieurs fois sans frais : PayPal, Alma, Oney, Klarna... pourquoi cette facilité peut-elle devenir un piège pour le budget ?",
+     "url": "https://www.ladepeche.fr/2026/10/11/paiement-en-plusieurs-fois-sans-frais-paypal-alma-oney-klarna-pourquoi-cette-facilite-peut-elle-devenir-un-piege-pour-le-budget-13584835.php",
+     "date": "2026-10-11T05:24:03.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Qu’est-ce que le marché européen de l’électricité, dont plusieurs candidats à la présidentielle veulent sortir ?",
-     "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/10/qu-est-ce-que-le-marche-europeen-de-l-electricite-dont-plusieurs-candidats-a-la-presidentielle-veulent-sortir_6790978_4355770.html",
-     "date": "2026-10-10T08:30:08.000Z"
+     "media": "Le JDD",
+     "titre": "Présidentielle : le programme budgétaire de Marine Le Pen en question",
+     "url": "https://www.lejdd.fr/politique/presidentielle-le-programme-budgetaire-de-marine-le-pen-en-question-185712",
+     "date": "2026-10-11T05:15:05.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Francis Lalanne, candidat à l'élection présidentielle de 2027, condamné par la justice pour abandon de famille et non-paiement d’une pension alimentaire",
-     "url": "https://www.ladepeche.fr/2026/10/10/francis-lalanne-candidat-a-lelection-presidentielle-de-2027-condamne-par-la-justice-pour-abandon-de-famille-et-non-paiement-dune-pension-alimentaire-13594480.php",
-     "date": "2026-10-10T07:42:34.000Z"
+     "media": "L'Obs",
+     "titre": "Le budget 2027 retoqué en commission à quelques jours du débat à l’Assemblée",
+     "url": "https://www.nouvelobs.com/politique/20261010.OBS119092/le-budget-2027-retoque-en-commission-a-quelques-jours-du-debat-a-l-assemblee.html",
+     "date": "2026-10-10T12:22:30.000Z"
     },
     {
      "media": "Libération",
-     "titre": "Présidentielle 2027 : le très droitier Gilles Platret présente sa candidature et embouteille son espace politique",
-     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-le-tres-droitier-gilles-platret-presente-sa-candidature-et-embouteille-son-espace-politique-20261009_AKT3J6HRJJFFBJK6I7QQ6TSJ4Q/",
-     "date": "2026-10-09T20:01:47.000Z"
+     "titre": "Budget 2027 : la partie «recettes» rejetée en commission, avant l’entrée dans le vif du sujet mardi dans l’hémicycle",
+     "url": "https://www.liberation.fr/economie/budget-2027-la-partie-recettes-rejetee-en-commission-avant-lentree-dans-le-vif-du-sujet-mardi-dans-lhemicycle-20261010_BMRJXUP5GVDNBL4EPFOHTIIE3U/",
+     "date": "2026-10-10T06:43:41.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "Michel Barnier au Figaro : «Je souhaite un seul candidat à la fin et que ce soit Bruno Retailleau»",
-     "url": "https://www.lefigaro.fr/elections/presidentielles/michel-barnier-au-figaro-je-souhaite-un-seul-candidat-a-la-fin-et-que-ce-soit-bruno-retailleau-20261009",
-     "date": "2026-10-09T16:24:56.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Son nom interpelle plus que sa victoire : le candidat Hitler Mussolini Simeon Flores remporte une élection municipale au Pérou",
-     "url": "https://www.nicematin.com/societe/politique/son-nom-interpelle-plus-que-sa-victoire-le-candidat-hitler-mussolini-simeon-flores-remporte-une-election-municipale-au-perou-10737246",
-     "date": "2026-10-09T15:10:14.000Z"
+     "media": "Le Monde",
+     "titre": "Budget 2027 : les députés rejettent largement la partie « recettes » en commission, le texte débattu à partir de mardi dans l’hémicycle",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/09/budget-2027-les-deputes-rejettent-la-partie-recettes-en-commission_6790637_823448.html",
+     "date": "2026-10-09T20:49:41.000Z"
     },
     {
      "media": "Public Sénat",
-     "titre": "Politique familiale, allocations, crèches : que proposent les candidats à la présidentielle ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/politique-familiale-allocations-creches-que-proposent-les-candidats-a-la-presidentielle",
-     "date": "2026-10-09T15:07:37.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Je suis dans la majorité municipale » : à Toulon, le député Yannick Chenevard est candidat à sa succession",
-     "url": "https://www.nicematin.com/societe/politique/je-suis-dans-la-majorite-municipale-a-toulon-le-depute-yannick-chenevard-est-candidat-a-sa-succession-10737193",
-     "date": "2026-10-09T14:45:05.000Z"
+     "titre": "Budget 2027 de la Sécurité sociale : le gouvernement veut à nouveau dérembourser les cures thermales",
+     "url": "https://www.publicsenat.fr/actualites/sante/budget-2027-de-la-securite-sociale-le-gouvernement-veut-a-nouveau-derembourser-les-cures-thermales",
+     "date": "2026-10-09T14:35:57.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 5,
-   "mediasDistincts": 5,
+   "medias": 6,
+   "mediasDistincts": 6,
    "sources": [
     "Libération",
     "20 Minutes",
     "Le JDD",
     "Le Monde",
-    "Sud Ouest"
+    "Sud Ouest",
+    "La Dépêche"
    ],
    "derniere": "2026-10-11T09:13:27.000Z",
    "illustration": {
@@ -586,10 +553,11 @@
      }
     ],
     "partis": [
-     "RN"
+     "RN",
+     "LFI"
     ],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
+    "theme": "assemblee",
+    "vignette": "assemblee"
    },
    "articles": [
     {
@@ -621,10 +589,16 @@
      "url": "https://www.sudouest.fr/politique/je-ne-le-porterai-pas-mathilde-panot-suscite-une-vive-polemique-apres-son-refus-de-porter-le-ruban-d-octobre-rose-31015296.php",
      "media": "Sud Ouest",
      "date": "2026-10-10T20:02:03.000Z"
+    },
+    {
+     "titre": "L'Insoumise Mathilde Panot fait polémique : \"Nous ne voulons pas un Octobre rose, mais un Octobre colère\", la députée explique pourquoi elle refuse de porter le célèbre ruban rose",
+     "url": "https://www.ladepeche.fr/2026/10/10/linsoumise-mathilde-panot-fait-polemique-nous-ne-voulons-pas-un-octobre-rose-mais-un-octobre-colere-la-deputee-explique-pourquoi-elle-refuse-de-porter-13594834.php",
+     "media": "La Dépêche",
+     "date": "2026-10-10T15:42:02.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Porter le ruban",
+    "titre": "Refuse de porter",
     "origine": "recoupement"
    },
    "fait": "Octobre rose : Mathilde Panot refuse de porter le ruban",
@@ -638,59 +612,78 @@
    ]
   },
   {
-   "medias": 4,
-   "mediasDistincts": 4,
+   "medias": 5,
+   "mediasDistincts": 5,
    "sources": [
-    "BFMTV",
-    "Le Progrès",
+    "La Dépêche",
+    "Nice-Matin",
+    "L'Obs",
     "20 Minutes",
     "Sud Ouest"
    ],
-   "derniere": "2026-10-11T04:05:02.000Z",
+   "derniere": "2026-10-11T10:04:31.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
      }
     ],
-    "partis": [],
+    "partis": [
+     "SOC"
+    ],
     "theme": "election",
     "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Politique. La popularité d'Emmanuel Macron atteint son niveau le plus bas depuis 2017, selon un sondage",
-     "url": "https://www.leprogres.fr/politique/2026/10/10/la-popularite-d-emmanuel-macron-atteint-son-niveau-le-plus-bas-depuis-2017-selon-un-sondage",
-     "media": "Le Progrès",
-     "date": "2026-10-10T20:56:00.000Z"
+     "titre": "Primaire sociale-démocrate : Raphaël Glucksmann espère l’emporter au premier tour, les résultats connus ce soir",
+     "url": "https://www.nouvelobs.com/politique/20261011.OBS119108/primaire-sociale-democrate-raphael-glucksmann-espere-l-emporter-au-premier-tour-les-resultats-connus-ce-soir.html",
+     "media": "L'Obs",
+     "date": "2026-10-11T08:52:58.000Z"
     },
     {
-     "titre": "Seulement 15% d'opinions favorables: la popularité d'Emmanuel Macron au plus bas depuis 2017, selon un sondage",
-     "url": "https://www.bfmtv.com/politique/elysee/seulement-15-d-opinions-favorables-la-popularite-d-emmanuel-macron-au-plus-bas-depuis-2017-selon-un-sondage_AN-202610110052.html",
-     "media": "BFMTV",
-     "date": "2026-10-11T04:05:02.000Z"
+     "titre": "Primaire de la gauche : à quelle heure les résultats du premier tour seront-ils connus ?",
+     "url": "https://www.ladepeche.fr/2026/10/09/presidentielle-2027-primaire-a-gauche-mode-demploi-13591597.php",
+     "media": "La Dépêche",
+     "date": "2026-10-11T10:04:31.000Z"
     },
     {
-     "titre": "La popularité d’Emmanuel Macron atteint un nouveau cap historique",
-     "url": "https://www.20minutes.fr/politique/4253152-20261010-popularite-emmanuel-macron-atteint-nouveau-cap-historique?at_medium=display&at_campaign=149",
+     "titre": "Dernière ligne droite pour la primaire de la gauche : Raphaël Glucksmann espère l’emporter dès le premier tour ce dimanche soir",
+     "url": "https://www.nicematin.com/societe/politique/derniere-ligne-droite-pour-la-primaire-de-la-gauche-raphael-glucksmann-espere-l-emporter-des-le-premier-tour-ce-dimanche-soir-10739106",
+     "media": "Nice-Matin",
+     "date": "2026-10-11T09:50:02.000Z"
+    },
+    {
+     "titre": "Primaire du PS : Les résultats attendus vers 18 heures, Glucksmann désigné dès le premier tour ?",
+     "url": "https://www.20minutes.fr/politique/4253217-20261011-primaire-ps-resultats-attendus-vers-18-heures-glucksmann-designe-premier-tour?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
-     "date": "2026-10-10T20:31:50.000Z"
+     "date": "2026-10-11T08:51:22.000Z"
     },
     {
-     "titre": "Sondage : la popularité d’Emmanuel Macron chute à son plus bas niveau historique depuis 2017",
-     "url": "https://www.sudouest.fr/elections/sondages/sondage-la-popularite-d-emmanuel-macron-chute-a-son-plus-bas-niveau-historique-depuis-2017-31015569.php",
+     "titre": "Primaire de la gauche : plus de 100 000 votants samedi à 22 heures, Glucksmann espère l’emporter dès le premier tour… Verdict attendu ce dimanche soir",
+     "url": "https://www.sudouest.fr/elections/presidentielle/primaire-de-la-gauche-plus-de-100-000-votants-samedi-a-22-heures-glucksmann-espere-l-emporter-des-le-premier-tour-verdict-attendu-ce-dimanche-soir-31017678.php",
      "media": "Sud Ouest",
-     "date": "2026-10-10T20:31:35.000Z"
+     "date": "2026-10-11T05:37:16.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
+    "titre": "Primaire : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
+   },
+   "fait": "Primaire sociale-démocrate : Raphaël Glucksmann espère l’emporter au premier tour",
+   "accroche": "Primaire sociale-démocrate : Raphaël Glucksmann espère l’emporter au premier tour",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
   },
   {
    "medias": 4,
@@ -808,61 +801,49 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Nice-Matin",
+    "BFMTV",
     "20 Minutes",
     "Sud Ouest"
    ],
-   "derniere": "2026-10-11T09:50:02.000Z",
+   "derniere": "2026-10-11T04:05:02.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
      }
     ],
-    "partis": [
-     "SOC"
-    ],
+    "partis": [],
     "theme": "election",
     "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Primaire de la gauche : plus de 100 000 votants samedi à 22 heures, Glucksmann espère l’emporter dès le premier tour… Verdict attendu ce dimanche soir",
-     "url": "https://www.sudouest.fr/elections/presidentielle/primaire-de-la-gauche-plus-de-100-000-votants-samedi-a-22-heures-glucksmann-espere-l-emporter-des-le-premier-tour-verdict-attendu-ce-dimanche-soir-31017678.php",
+     "titre": "Sondage : la popularité d’Emmanuel Macron chute à son plus bas niveau historique depuis 2017",
+     "url": "https://www.sudouest.fr/elections/sondages/sondage-la-popularite-d-emmanuel-macron-chute-a-son-plus-bas-niveau-historique-depuis-2017-31015569.php",
      "media": "Sud Ouest",
-     "date": "2026-10-11T05:37:16.000Z"
+     "date": "2026-10-10T20:31:35.000Z"
     },
     {
-     "titre": "Dernière ligne droite pour la primaire de la gauche : Raphaël Glucksmann espère l’emporter dès le premier tour ce dimanche soir",
-     "url": "https://www.nicematin.com/societe/politique/derniere-ligne-droite-pour-la-primaire-de-la-gauche-raphael-glucksmann-espere-l-emporter-des-le-premier-tour-ce-dimanche-soir-10739106",
-     "media": "Nice-Matin",
-     "date": "2026-10-11T09:50:02.000Z"
+     "titre": "Seulement 15% d'opinions favorables: la popularité d'Emmanuel Macron au plus bas depuis 2017, selon un sondage",
+     "url": "https://www.bfmtv.com/politique/elysee/seulement-15-d-opinions-favorables-la-popularite-d-emmanuel-macron-au-plus-bas-depuis-2017-selon-un-sondage_AN-202610110052.html",
+     "media": "BFMTV",
+     "date": "2026-10-11T04:05:02.000Z"
     },
     {
-     "titre": "Primaire du PS : Les résultats attendus vers 18 heures, Glucksmann désigné dès le premier tour ?",
-     "url": "https://www.20minutes.fr/politique/4253217-20261011-primaire-ps-resultats-attendus-vers-18-heures-glucksmann-designe-premier-tour?at_medium=display&at_campaign=149",
+     "titre": "La popularité d’Emmanuel Macron atteint un nouveau cap historique",
+     "url": "https://www.20minutes.fr/politique/4253152-20261010-popularite-emmanuel-macron-atteint-nouveau-cap-historique?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
-     "date": "2026-10-11T08:51:22.000Z"
+     "date": "2026-10-10T20:31:50.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
+    "titre": "Emmanuel Macron : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   },
-   "fait": "Raphaël Glucksmann espère l’emporter dès le premier tour",
-   "accroche": "Raphaël Glucksmann espère l’emporter dès le premier tour",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
+   }
   },
   {
    "medias": 2,
@@ -1052,43 +1033,6 @@
    },
    "fait": "Qui arrivera en tête à l'issue du premier tour ?",
    "accroche": "Qui arrivera en tête à l'issue du premier tour ?"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Progrès",
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-11T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Santé. Boissons énergisantes : « Il faut interdire leur vente aux moins de 16 ans »",
-     "url": "https://www.leprogres.fr/politique/2026/10/11/boissons-energisantes-il-faut-interdire-leur-vente-aux-moins-de-16-ans",
-     "media": "Le Progrès",
-     "date": "2026-10-11T10:00:00.000Z"
-    },
-    {
-     "titre": "DÉCRYPTAGE. Boissons énergisantes : Red Bull, Monster, Ciao Energy... pourquoi les députés veulent-ils les interdire aux moins de 16 ans ?",
-     "url": "https://www.ladepeche.fr/2026/10/11/decryptage-boissons-energisantes-red-bull-monster-ciao-energy-pourquoi-les-deputes-veulent-ils-les-interdire-aux-moins-de-16-ans-13592947.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T08:33:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Boissons énergisantes",
-    "origine": "recoupement"
-   },
-   "chiffre": {
-    "valeur": "16",
-    "unite": "ans"
-   }
   },
   {
    "medias": 2,
@@ -1372,7 +1316,7 @@
    "sources": [
     "BFMTV"
    ],
-   "derniere": "2026-10-11T13:50:11.000Z",
+   "derniere": "2026-10-11T13:58:06.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1392,13 +1336,57 @@
      "titre": "DIRECT. Jean-Luc Mélenchon assure que \"cette élection présidentielle ne ressemble à aucune autre avant'",
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-du-parti-socialiste-et-de-place-publique-la-gauche-sociale-democrate-choisit-son-candidat-pour-la-presidentielle-2027-plus-de-100-00-votants-pour-l-heure-recenses_LN-202610110078.html",
      "media": "BFMTV",
-     "date": "2026-10-11T13:50:11.000Z"
+     "date": "2026-10-11T13:58:06.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Présidentielle 2027 : Jean-Luc Mélenchon (La France insoumise)",
     "origine": "regles",
     "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-11T13:56:41.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"Monsieur Trump est un adversaire pour nous, et rien de plus\", déclare Jean-Luc Mélenchon, candidat LFI à la présidentielle, en meeting à Clermont-Ferrand",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-monsieur-trump-est-un-adversaire-pour-nous-et-rien-de-plus-declare-jean-luc-melenchon-candidat-lfi-a-la-presidentielle-en-meeting-a-clermont-ferrand_VN-202610110248.html",
+     "media": "BFMTV",
+     "date": "2026-10-11T13:56:41.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "La France insoumise : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -2628,35 +2616,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-11T10:04:31.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire de la gauche : à quelle heure les résultats du premier tour seront-ils connus ?",
-     "url": "https://www.ladepeche.fr/2026/10/09/presidentielle-2027-primaire-a-gauche-mode-demploi-13591597.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T10:04:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "À quelle heure les résultats du premier tour seront-ils connus ?",
-   "accroche": "À quelle heure les résultats du premier tour seront-ils connus ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-10-11T10:04:04.000Z",
@@ -2719,7 +2678,7 @@
     "personnes": [],
     "partis": [],
     "theme": "budget",
-    "vignette": "education"
+    "vignette": "budget"
    },
    "articles": [
     {
@@ -2727,18 +2686,12 @@
      "url": "https://www.nicematin.com/societe/politique/l-etat-est-tellement-endette-qu-il-n-a-plus-de-marge-de-manuvre-face-aux-crises-frederic-masquelier-maire-de-saint-raphael-est-l-invite-de-l-interview-a-la-une-10737491",
      "media": "Nice-Matin",
      "date": "2026-10-11T09:30:02.000Z"
-    },
-    {
-     "titre": "Mobilisation lycéenne, sécurité, projets et présidentielle : Frédéric Masquelier, maire de Saint-Raphaël, est l’invité de « L’Interview à la une »",
-     "url": "https://www.nicematin.com/societe/politique/video-mobilisation-lyceenne-securite-projets-et-presidentielle-frederic-masquelier-maire-de-saint-raphael-est-l-invite-de-l-interview-a-la-une-10737296",
-     "media": "Nice-Matin",
-     "date": "2026-10-10T08:00:02.000Z",
-     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2770,8 +2723,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Nicolas Dupont-Aignan : déclaration sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
@@ -2995,8 +2948,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Candidat",
-    "origine": "dossier"
+    "titre": "Jordan Bardella : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Présidentielle 2027 - Sondage : Le Pen et Bardella perdent en popularité",
    "accroche": "Présidentielle 2027 - Sondage : Le Pen et Bardella perdent en popularité",
@@ -3012,6 +2966,32 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-11T08:33:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "DÉCRYPTAGE. Boissons énergisantes : Red Bull, Monster, Ciao Energy... pourquoi les députés veulent-ils les interdire aux moins de 16 ans ?",
+     "url": "https://www.ladepeche.fr/2026/10/11/decryptage-boissons-energisantes-red-bull-monster-ciao-energy-pourquoi-les-deputes-veulent-ils-les-interdire-aux-moins-de-16-ans-13592947.php",
+     "media": "La Dépêche",
+     "date": "2026-10-11T08:33:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -3825,8 +3805,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Candidat",
-    "origine": "dossier"
+    "titre": "Star Academy : actualité locale",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Star Academy : qui est Mélina, 22 ans",
    "accroche": "Star Academy : qui est Mélina, 22 ans"
@@ -3977,8 +3958,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
@@ -4033,41 +4014,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-11T05:18:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-11T05:18:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
@@ -4103,11 +4049,11 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -4116,24 +4062,17 @@
    },
    "articles": [
     {
-     "titre": "Edouard Philippe",
-     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
      "media": "BFMTV",
      "date": "2026-10-11T05:18:13.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
+   }
   },
   {
    "medias": 1,
@@ -4231,6 +4170,83 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Ségolène Royal",
+      "photo": "photos/personnalites/segolene-royal.jpg",
+      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
+      "parti": "PS",
+      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Ségolène Royal",
+     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
+     "media": "BFMTV",
+     "date": "2026-10-11T05:18:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ségolène Royal (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-11T05:18:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Edouard Philippe",
+     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
+     "media": "BFMTV",
+     "date": "2026-10-11T05:18:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-11T05:18:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Bruno Retailleau",
       "photo": "photos/senateurs/04033B.jpg",
       "photoHd": "photos/senateurs/hd/04033B.jpg",
@@ -4268,41 +4284,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-11T05:18:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Ségolène Royal",
-      "photo": "photos/personnalites/segolene-royal.jpg",
-      "photoHd": "photos/personnalites/hd/segolene-royal.jpg",
-      "parti": "PS",
-      "credit": "Jackolan1, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ségolène Royal",
-     "url": "https://www.bfmtv.com/politique/segolene-royal_DN-201307180076.html",
-     "media": "BFMTV",
-     "date": "2026-10-11T05:18:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ségolène Royal (Parti socialiste) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-10-11T05:15:05.000Z",
@@ -4330,9 +4311,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -4364,8 +4344,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Candidat",
-    "origine": "dossier"
+    "titre": "Star Academy : actualité locale",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -4449,34 +4430,6 @@
     "titre": "Primaire socialiste et démocrate : opinion d'un média",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-11T04:45:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Rhône. « Attalistes » plutôt que « fatalistes » : l'ancien Premier ministre est venu chercher des soutiens à Lyon",
-     "url": "https://www.leprogres.fr/politique/2026/10/11/attalistes-plutot-que-fatalistes",
-     "media": "Le Progrès",
-     "date": "2026-10-11T04:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rhône : action du gouvernement",
-    "origine": "regles"
-   },
-   "fait": "L'ancien Premier ministre est venu chercher des soutiens à Lyon",
-   "accroche": "L'ancien Premier ministre est venu chercher des soutiens à Lyon"
   },
   {
    "medias": 1,
@@ -4590,116 +4543,6 @@
     "titre": "Environnement : ce que disent les médias",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-11T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Étienne Métropole. Le Plan vélo en a encore sous la pédale : de nouvelles pistes et des stationnements sécurisés",
-     "url": "https://www.leprogres.fr/economie/2026/10/11/le-plan-velo-en-a-encore-sous-la-pedale-de-nouvelles-pistes-et-des-stationnements-securises",
-     "media": "Le Progrès",
-     "date": "2026-10-11T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Étienne Métropole : organisation territoriale",
-    "origine": "regles"
-   },
-   "fait": "Le Plan vélo en a encore sous la pédale",
-   "accroche": "Le Plan vélo en a encore sous la pédale"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-11T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Lyon. Jugée pour « pantouflage » : le procès qui rouvre les portes du cabinet de Gérard Collomb",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/11/le-proces-qui-rouvre-les-portes-du-cabinet-de-gerard-collomb",
-     "media": "Le Progrès",
-     "date": "2026-10-11T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lyon : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-11T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bron. La Ville lance une nouvelle instance citoyenne : qu’est-ce que le conseil territorial des habitants ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/11/la-ville-lance-une-nouvelle-instance-citoyenne-qu-est-ce-que-le-conseil-territorial-des-habitants",
-     "media": "Le Progrès",
-     "date": "2026-10-11T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bron : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-11T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Rive-de-Gier. « Augmenter progressivement les effectifs » : la Ville renforce les moyens de sa police municipale",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/11/la-ville-renforce-les-moyens-de-sa-police-municipale",
-     "media": "Le Progrès",
-     "date": "2026-10-11T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rive-de-Gier : sécurité",
-    "origine": "regles"
-   },
-   "fait": "La Ville renforce les moyens de sa police municipale",
-   "accroche": "La Ville renforce les moyens de sa police municipale"
   },
   {
    "medias": 1,
@@ -4831,6 +4674,180 @@
    },
    "fait": "Des élus La France insoumise impliqués dans la préparation des blocus",
    "accroche": "Des élus La France insoumise impliqués dans la préparation des blocus"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-10T21:01:42.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Le mouvement des lycéens approuvé par 54 % des Français, selon un sondage",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/le-mouvement-des-lyceens-approuve-par-54-des-francais-selon-un-sondage-31015760.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-10T21:01:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-10T20:51:27.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "REPLAY. Présidentielle 2027 : Gabriel Attal promet \"la plus forte augmentation de salaire pour les enseignants\" lors de son meeting à Lyon",
+     "url": "https://www.ladepeche.fr/2026/10/10/direct-presidentielle-2027-cible-par-une-cyberattaque-le-vote-du-premier-tour-de-la-primaire-sociale-democrate-est-prolonge-jusqua-dimanche-18-h-13594458.php",
+     "media": "La Dépêche",
+     "date": "2026-10-10T20:51:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gabriel Attal : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-10T20:15:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : Gabriel Attal à la conquête des étudiants et des jeunes actifs",
+     "url": "https://www.lejdd.fr/politique/presidentielle-gabriel-attal-a-la-conquete-des-etudiants-et-des-jeunes-actifs-185718",
+     "media": "Le JDD",
+     "date": "2026-10-10T20:15:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gabriel Attal : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-10T20:05:05.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Blocus lycéens : les policiers en colère contre le pouvoir politique",
+     "url": "https://www.lejdd.fr/Societe/blocus-lyceens-les-policiers-en-colere-contre-le-pouvoir-politique-185742",
+     "media": "Le JDD",
+     "date": "2026-10-10T20:05:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-10T20:00:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : la primaire de la gauche, de Charybde en Scylla",
+     "url": "https://www.lejdd.fr/politique/presidentielle-la-primaire-de-la-gauche-de-charybde-en-scylla-185721",
+     "media": "Le JDD",
+     "date": "2026-10-10T20:00:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   }
  ]
 }
