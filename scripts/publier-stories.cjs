@@ -52,8 +52,8 @@
 const fs = require("fs");
 const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
-const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches, dejaVuEntreeSaufResultat, RESULTAT } = require("./stories-auto.cjs");
-const RESULTAT_PUB = RESULTAT; // mots d'un résultat (voir stories-auto.cjs)
+const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches, dejaVuEntreeSaufResultat } = require("./stories-auto.cjs");
+const RESULTAT_PUB = /\b(?:elu|elue|elus|l'emporte|remporte|vainqueur|victoire|designe|designee)\b/; // résultat d'une élection (la fenêtre de 7 jours autour des posts reste stricte pour un texte de loi « adopté »)
 const platPub = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’]/g, "'").toLowerCase();
 const SS = require("./sujets-sensibles.cjs");
 const PN = require("./personne-nommee.cjs"); // accusation visant une personne nommée : 3 médias au moins, jamais de portrait
