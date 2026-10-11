@@ -62,12 +62,13 @@ Instagram ne permet pas d'ajouter une story à une une automatiquement : à fair
 | 11 octobre 2026 | **Argent public** | story | Budget | haute |
 | 11 octobre 2026 | **2027** | story | Primaire socialiste et démocrate : ce que disent les médias | moyenne |
 | 11 octobre 2026 | **2027** | story | François Hollande (Parti socialiste) : ce que disent les médias | haute |
+| 11 octobre 2026 | **Actualité** | story | Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation | haute |
 
 Confiance « faible » : aucun indice net, la rubrique par défaut (Politique) est proposée ; à vérifier d'un coup d'œil.
 
 ## Par rubrique (toutes les publications suivies)
 
-- **Actualité** : 29 publication(s), la plus récente le 11 octobre 2026
+- **Actualité** : 30 publication(s), la plus récente le 11 octobre 2026
 - **2027** : 15 publication(s), la plus récente le 11 octobre 2026
 - **Sondages** : aucune pour l'instant
 - **Élus et votes** : 8 publication(s), la plus récente le 11 octobre 2026
