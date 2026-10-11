@@ -162,6 +162,13 @@ function titresRecents(entrees, now) {
   return (entrees || []).filter((e) => !retires.has(e.id) && now.getTime() - Date.parse(e.cree) < RECENT_H * 36e5).flatMap(titresDe).filter((t) => typeof t === "string" && t);
 }
 const dejaVu = (titre, recents) => recents.some((t) => titresProches(t, titre));
+// Un résultat (« Glucksmann élu… ») n'est pas un doublon de l'avant-première (« Glucksmann espère l'emporter… ») : même sujet, mais le fait décisif est nouveau
+const RESULTAT = /\b(?:elu|elue|elus|l'emporte|remporte|remporter|vainqueur|victoire|designe|designee|nomme|nommee|demission\w*|adopte|adoptee|rejete|rejetee|condamne\w*|relaxe\w*|acquitte\w*)\b/;
+const platR = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’]/g, "'").toLowerCase();
+const dejaVuSaufResultat = (titre, recents) => {
+  const nouveau = RESULTAT.test(platR(titre));
+  return recents.some((t) => titresProches(t, titre) && !(nouveau && !RESULTAT.test(platR(t))));
+};
 
 /** Une entrée compte-t-elle dans le plafond des STORIES (hors sondages, posts et stories d'annonce de post) ? */
 const estStoryComptee = (e) => !e.sondageId && e.type !== "post" && e.type !== "reel" && e.type !== "carousel" && !e.annonceDe && !e.contenu && e.sensible !== 2; // niveau 2 sensible (brouillons, validations humaines) hors plafond ; ni les contenus récurrents (scripts/contenus-auto.cjs)
@@ -471,16 +478,17 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     const sensibleNormal = !!(s.articles || []).some((a) => LP.motAssoupli(a.titre)) || s.illustration?.theme === "justice";
     const sansTitrePropre = !s.titrePropre?.titre || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true;
     const repli = sensibleNormal && sansTitrePropre;
+    const fait = faitDe(s);
     if (!repli) {
       if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
-      if (titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
-      if (s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
+      // Un titre-fait clair (ce qui s'est passé, 6 à 12 mots) remplace le titre propre à l'affichage : un titre de thème générique (« Primaire : ce que disent les médias ») ne bloque alors plus le sujet
+      if (!fait && titreGenerique(s.titrePropre.titre)) return rej("titre trop vague"); // « Énergie » seul : trop vague
+      if (!fait && s.titrePropre.generique === true && !parole) return rej("titre de repli"); // titre de repli (« Gilley : actualité locale », « Politique : l'essentiel du moment ») sans fait clair : jamais de story ni de post, sauf direct du président
     }
-    const fait = faitDe(s);
     if (!fait && !repli && !parole) return rej("sans fait clair"); // le gros titre doit dire le fait en une phrase ; sinon rien (un sujet sensible garde son titre de repli : titre de presse cité et attribué)
-    const titreRef = repli ? titre : s.titrePropre.titre; // doublons : le titre de presse quand la story n'a pas de titre propre
+    const titreRef = repli ? titre : (s.titrePropre.generique === true && fait ? fait : s.titrePropre.titre); // titre de thème générique : on compare le fait (« Glucksmann élu… »), sinon toute la primaire serait un doublon de la veille // doublons : le titre de presse quand la story n'a pas de titre propre
     if (articlesDejaPublies(s.articles, recs72)) return rej("déjà publié (article)"); // l'id repose sur le premier titre, qui change : on compare aussi les liens et titres d'articles déjà publiés
-    if (dejaVu(titreRef, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
+    if (dejaVuSaufResultat(titreRef, recents)) return rej("doublon des 72 h"); // même sujet qu'une story ou un post des dernières 72 h (file ou registre)
     const modele = repli || vise ? "une" : modeleSujet(s, { direct, candidats: declares, now }); // une personne nommée visée : jamais « direct » ni « face à face » (portraits)
     if ((modele === "post-date" || modele === "date") && s.date?.iso && evenementDejaPublie(entrees, registre, now, s.titrePropre.titre, s.date.iso)) return rej("même événement déjà publié"); // post, story ou rappel
     if (modele === "post-date") { // date lointaine : un POST (2 par jour au plus), jamais deux fois le même sujet ni la même date
