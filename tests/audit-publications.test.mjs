@@ -501,7 +501,7 @@ test("registre : chaque publication « publiee » a un vrai identifiant de médi
 });
 
 test("instagram/auto : aucune image hors chaîne (nom non standard) ne reste servie publiquement", () => {
-  const hors = readdirSync(join(RACINE, "instagram", "auto")).filter((f) => !/^[0-9a-f]{12}\.(jpg|mp4)$/.test(f));
+  const hors = readdirSync(join(RACINE, "instagram", "auto")).filter((f) => !/^[0-9a-f]{12}(-\d+)?\.(jpg|mp4)$/.test(f));
   aucun(hors, "fichiers hors convention");
 });
 

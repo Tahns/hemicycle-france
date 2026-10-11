@@ -121,8 +121,9 @@ for (const titre of ["Le gouvernement présente son projet de budget pour 2027",
     // doublon sur le titre de presse
     assert.ok(choix([sj], { file: { entrees: [{ id: "x".repeat(12), cree: il_y_a(5), titre, sources: [] }] } }).refus, "doublon écarté");
   }
-  // un sujet sans mot d'accusation et sans titre propre reste refusé
-  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" } })]).refus);
+  // un sujet sans mot d'accusation, sans titre propre clair ET sans fait clair reste refusé ; avec un fait clair, le titre-fait remplace le titre de thème vague
+  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus);
+  assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" } })]).refus);
 }
 // Déjà en file : exclu (par titre, ou par lien d'article déjà utilisé)
 {
@@ -592,7 +593,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // Titre rédigé trop vague (« Énergie » seul, une rubrique) : pas de story
   assert.ok(AUTO.titreGenerique("Énergie") && AUTO.titreGenerique("Vie politique") && AUTO.titreGenerique("Économie") && AUTO.titreGenerique(""));
   assert.ok(!AUTO.titreGenerique("Primaire de la gauche") && !AUTO.titreGenerique("Blocage des lycées"));
-  assert.ok(choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" } })]).refus, "titre générique : refusé");
+  assert.ok(choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique sans fait clair : refusé");
+  assert.ok(!choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" } })]).refus, "titre générique mais fait clair (affiché à la place) : accepté");
   // Sujets proches (« Blocage » / « Blocus » des lycées) reconnus ; sujets différents non
   assert.ok(AUTO.titresProches("Blocage des lycées", "Blocus des lycées"));
   assert.ok(AUTO.titresProches("Primaire de la gauche", "Primaire de la gauche"));
@@ -846,10 +848,12 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
 // Titre propre GÉNÉRIQUE (« Gilley : actualité locale », « Politique : l'essentiel du moment ») : jamais de story ni de post, sauf direct du président
 {
   const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
-  const gen = (titre) => sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre, origine: "regles", generique: true } });
-  for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(gen(t)), direct: null, file: vide, now }).refus, `générique refusé : ${t}`);
+  const gen = (titre, extra = {}) => sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre, origine: "regles", generique: true }, ...extra });
+  for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(gen(t, { fait: null })), direct: null, file: vide, now }).refus, `générique sans fait clair refusé : ${t}`);
+  // avec un titre-fait clair (ce qui s'est passé), c'est lui qui s'affiche : le titre de thème générique ne bloque plus
+  assert.ok(!AUTO.choisirSujet({ actualites: actu(gen("Politique : l'essentiel du moment")), direct: null, file: vide, now }).refus, "générique mais fait clair : accepté");
   assert.strictEqual(AUTO.choisirSujet({ actualites: actu(sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget 2027 : le gouvernement présente son texte", origine: "regles" } })), direct: null, file: vide, now }).indice, 0, "titre propre non générique : retenu");
-  const g = gen("Politique : l'essentiel du moment");
+  const g = gen("Politique : l'essentiel du moment", { fait: null });
   const direct = { evenements: [{ type: "allocution", titre: g.articles[0].titre }] };
   assert.strictEqual(AUTO.choisirSujet({ actualites: actu(g), direct, file: vide, now }).indice, 0, "direct du président : le filtre ne s'applique pas");
   // « en bref » : un sujet générique n'y entre pas
@@ -1264,6 +1268,19 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const calc = sujet("x", 3, { fait: undefined });
   calc.articles = [{ ...calc.articles[0], titre: "Mouvement lycéen : le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants" }, { ...calc.articles[1], titre: "Mobilisation des lycéens : le ministre de l'Education promet l'arrivée de 3 000 professeurs remplaçants" }, { ...calc.articles[2], titre: "Colère des lycéens: le ministre de l'Éducation annonce l'arrivée de 3.000 professeurs remplaçants dans les établissements en difficulté" }];
   assert.strictEqual(choix([calc]).fait, "Le ministre de l’Éducation annonce l’arrivée de 3 000 professeurs remplaçants");
+}
+
+// Un résultat n'est pas un doublon de l'avant-première, et un titre de thème générique n'empêche pas un sujet qui a un fait clair
+{
+  const primaire = (titreArticle, fait) => sujet(titreArticle, 4, { titrePropre: { titre: "Primaire socialiste et démocrate : ce que disent les médias", generique: true, origine: "recoupement" }, fait, illustration: { theme: "election" } });
+  const avant = { entrees: [{ id: "c".repeat(12), cree: il_y_a(5), type: "story", titre: "Primaire : Glucksmann espère l’emporter dès le premier tour", sujets: ["Primaire sociale-démocrate : Raphaël Glucksmann espère l’emporter dès le premier tour ce soir"] }] };
+  const res = primaire("Primaire de la gauche : Raphaël Glucksmann élu dès le premier tour avec 66 % des voix", "Raphaël Glucksmann élu dès le premier tour avec 66 % des voix");
+  const c = choisirSujet({ actualites: actu(res), direct: null, file: avant, now });
+  assert.ok(!c.refus, "le résultat (élu) est publié malgré l'avant-première : " + c.refus);
+  // un second sujet qui répète le résultat reste un doublon une fois le résultat dans la file
+  const apres = { entrees: [...avant.entrees, { id: "d".repeat(12), cree: il_y_a(1), type: "story", titre: "Raphaël Glucksmann élu dès le premier tour avec 66 % des voix", sujets: ["Primaire de la gauche : Raphaël Glucksmann élu dès le premier tour avec 66 % des voix"] }] };
+  const bis = primaire("Primaire socialiste : Raphaël Glucksmann élu candidat dès le premier tour", "Raphaël Glucksmann élu candidat dès le premier tour");
+  assert.ok(choisirSujet({ actualites: actu(bis), direct: null, file: apres, now }).refus, "le même résultat répété reste un doublon");
 }
 function A_id(c) { return c.id; }
 
