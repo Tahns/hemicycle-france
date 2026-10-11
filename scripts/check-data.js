@@ -389,6 +389,7 @@ async function checkInstagramFile() {
   await checkCreneaux(config);
   // Seuils de médias (data/stories-config.json) : une seule source de vérité, lue par stories-auto.cjs
   if (config.minMedias !== undefined && !(Number.isInteger(config.minMedias) && config.minMedias >= 2 && config.minMedias <= 10)) err("stories-config.json : « minMedias » doit être un entier de 2 à 10");
+  if (config.grosSujetMedias !== undefined && !(Number.isInteger(config.grosSujetMedias) && config.grosSujetMedias >= 3 && config.grosSujetMedias <= 10)) err("stories-config.json : « grosSujetMedias » (gros sujet : jamais perdu, alerte) doit être un entier de 3 à 10");
   if (config.minMediasPersonneNommee !== undefined && !(Number.isInteger(config.minMediasPersonneNommee) && config.minMediasPersonneNommee >= 3 && config.minMediasPersonneNommee <= 10)) err("stories-config.json : « minMediasPersonneNommee » (accusation visant une personne nommée) doit être un entier de 3 à 10 : jamais moins de 3 médias");
   if (config.maxParJour !== undefined && !(Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 99)) err("stories-config.json : « maxParJour » doit être un entier de 1 à 99");
   if (config.styleFixe != null && !["bleu", "une-photo", "question", "chiffre"].includes(config.styleFixe)) err(`stories-config.json : « styleFixe » doit valoir null, "bleu", "une-photo", "question" ou "chiffre" (reçu : ${JSON.stringify(config.styleFixe)})`);

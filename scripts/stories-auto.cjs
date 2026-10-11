@@ -102,6 +102,7 @@ const BROUILLON_JOURS = 7;
 // elles sont identiques à celles du fichier livré (un test le vérifie : plus de constante qui diverge de la configuration).
 const DEFAUT_MIN_MEDIAS = 2, DEFAUT_MIN_MEDIAS_PERSONNE = PN.SEUIL_MIN;
 let MIN_MEDIAS = DEFAUT_MIN_MEDIAS; // sujets de presse ET « en bref » (réglé par appliquerSeuils)
+let GROS_SUJET_MEDIAS = 4; // « grosSujetMedias » : un sujet repris par autant de médias est un GROS sujet (voir choisirSujet et scripts/alerte-gros-sujets.cjs) : jamais perdu faute de titre propre
 let MIN_MEDIAS_PERSONNE = DEFAUT_MIN_MEDIAS_PERSONNE; // accusation / polémique visant une personne nommée (scripts/personne-nommee.cjs)
 const FRAICHEUR_H = 3; // direct du président et sujets sensibles de niveau 1
 let FRAICHEUR_SUJET_H = 12; // sujets et dossiers (data/stories-config.json, « fraicheurH ») : un sujet à 3 médias arrivé la nuit reste publiable le matin
@@ -477,8 +478,10 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     // Titre de repli : sans titre propre fiable, un sujet d'accusation, de procédure ou de polémique garde sa story (rubrique « à la une » + titre de presse cité, voir js/stories-actu.js) ; les autres sujets, non
     const sensibleNormal = !!(s.articles || []).some((a) => LP.motAssoupli(a.titre)) || s.illustration?.theme === "justice";
     const sansTitrePropre = !s.titrePropre?.titre || titreGenerique(s.titrePropre.titre) || s.titrePropre.generique === true;
-    const repli = sensibleNormal && sansTitrePropre;
     const fait = faitDe(s);
+    // GROS sujet (>= « grosSujetMedias » médias) sans titre propre ni titre-fait : il garde sa story en « à la une » (titre de presse cité et attribué) au lieu d'être perdu ; les garde-fous (mots exclus, personne nommée, réserve) ont déjà joué
+    const grosSujet = medias >= GROS_SUJET_MEDIAS;
+    const repli = (sensibleNormal && sansTitrePropre) || (grosSujet && sansTitrePropre && !fait);
     if (!repli) {
       if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
       // Un titre-fait clair (ce qui s'est passé, 6 à 12 mots) remplace le titre propre à l'affichage : un titre de thème générique (« Primaire : ce que disent les médias ») ne bloque alors plus le sujet
@@ -847,7 +850,7 @@ function normaliserConfig(c) {
   return {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
-    minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12),
+    minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12), grosSujetMedias: entier(c?.grosSujetMedias, 4, 3, 10),
     maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
@@ -861,7 +864,7 @@ function normaliserConfig(c) {
 }
 /** Applique les seuils de la configuration (appelé une fois par exécution). */
 function appliquerSeuils(config) {
-  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_PERSONNE = config.minMediasPersonneNommee; MIN_MEDIAS_DOSSIER = config.dossierMedias; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
+  MIN_MEDIAS = config.minMedias; MIN_MEDIAS_PERSONNE = config.minMediasPersonneNommee; MIN_MEDIAS_DOSSIER = config.dossierMedias; GROS_SUJET_MEDIAS = config.grosSujetMedias || 4; MAX_PAR_JOUR = config.maxParJour; EN_BREF = config.enBref; FRAICHEUR_SUJET_H = config.fraicheurH; STYLE_FIXE = config.styleFixe || null;
 }
 /**
  * Lit la configuration. ÉCHEC FERMÉ (audit A-03) : fichier absent = valeurs par défaut (tout désactivé) ; fichier PRÉSENT mais illisible (JSON tronqué, conflit de
@@ -1594,6 +1597,6 @@ async function main() {
   }
 }
 
-module.exports = { seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

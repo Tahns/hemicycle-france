@@ -13,6 +13,7 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+  issues: write # alerte « gros sujet non publié » (scripts/alerte-gros-sujets.cjs)
 concurrency:
   group: update-data
   cancel-in-progress: false
@@ -77,6 +78,11 @@ jobs:
         if: steps.story_choix.outputs.a_faire == 'true'
         run: for i in 1 2 3 4; do node scripts/stories-auto.cjs || break; done # jusqu'à 4 stories préparées par passage (rattrapage) ; chaque tour relit la file mise à jour
         continue-on-error: true
+      - name: Alerte si un gros sujet n'est pas publié
+        run: node scripts/alerte-gros-sujets.cjs
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Contrôler la cohérence des données
         run: node scripts/check-data.js
       - name: Committer s'il y a du nouveau
