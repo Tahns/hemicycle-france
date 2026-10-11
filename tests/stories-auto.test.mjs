@@ -885,6 +885,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   for (const f of ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "bbbbbbbbbbbb.jpg", "bbbbbbbbbbbb.mp4", "autre.txt"]) wf(jn(dossier, f), "x");
   AUTO.nettoyerImages(new Set(["aaaaaaaaaaaa"]), dossier);
   assert.deepStrictEqual(rd(dossier).sort(), ["aaaaaaaaaaaa.jpg", "aaaaaaaaaaaa.mp4", "autre.txt"]);
+  // Pages d'un carrousel « <id>-2.jpg » : elles suivent leur entrée (jamais supprimées seules : leur absence bloquait toute la file) ; celles d'une entrée disparue partent avec elle
+  const d2 = mk(jn(td(), "auto-"));
+  for (const f of ["cccccccccccc.jpg", "cccccccccccc-2.jpg", "cccccccccccc-3.jpg", "dddddddddddd.jpg", "dddddddddddd-2.jpg"]) wf(jn(d2, f), "x");
+  AUTO.nettoyerImages(new Set(["cccccccccccc"]), d2);
+  assert.deepStrictEqual(rd(d2).sort(), ["cccccccccccc-2.jpg", "cccccccccccc-3.jpg", "cccccccccccc.jpg"], "les pages du carrousel gardé restent");
+  assert.strictEqual(AUTO.pagesManquantes({ url_images: ["https://x/instagram/auto/zzzzzzzzzzzz-2.jpg"] }), true, "carrousel dont une page manque : à retirer de la file");
+  assert.strictEqual(AUTO.pagesManquantes({ id: "x" }), false, "entrée sans carrousel : rien à vérifier");
 }
 
 // --- SUJETS SENSIBLES (justice, mises en cause) : niveau 1 = publication prudente, niveau 2 = brouillon, jamais en file ---
