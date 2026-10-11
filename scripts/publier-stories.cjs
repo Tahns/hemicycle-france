@@ -52,7 +52,7 @@
 const fs = require("fs");
 const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
-const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches } = require("./stories-auto.cjs");
+const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches, dejaVuSaufResultat } = require("./stories-auto.cjs");
 const SS = require("./sujets-sensibles.cjs");
 const PN = require("./personne-nommee.cjs"); // accusation visant une personne nommée : 3 médias au moins, jamais de portrait
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés : jamais republiés, texte jamais repris (audit J-23)
@@ -249,7 +249,7 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
     ...recentes.filter((d) => !retires.has(d.id)).flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
     ...(file?.entrees || []).filter((e) => dernieres.has(e.id) && !retires.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraiteCourt = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => titresPublies.some((p) => titresProches(p, t)));
+  const dejaTraiteCourt = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => dejaVuSaufResultat(t, titresPublies)); // un RÉSULTAT (« élu », « adopté »…) n'est pas un doublon de l'avant-première déjà publiée
   // Fenêtre de 7 jours autour des posts et annonces publiés (le registre garde titre, sujets et dateIso). Seuls l'annonce et le Reel de LEUR post sont exemptés ;
   // les stories « date » et « rappel » (rappelDe) ne le sont pas. Les contenus récurrents à créneau restent hors de ce contrôle.
   const longues = publiees.filter((d) => !retires.has(d.id) && now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_POST_H * 36e5 && (d.type === "post" || d.type === "carousel" || d.annonceDe));
