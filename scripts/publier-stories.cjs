@@ -52,7 +52,9 @@
 const fs = require("fs");
 const path = require("path");
 const { validerCarrousel, publierCarrousel } = require("./carrousel.cjs");
-const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches, dejaVuSaufResultat } = require("./stories-auto.cjs");
+const { reserveStory, parleDeSondage, purgerReserve, purgerPresse, lireConfig, jourParis, heureParis, motExclu, OFF, titresProches, dejaVuEntreeSaufResultat, RESULTAT } = require("./stories-auto.cjs");
+const RESULTAT_PUB = RESULTAT; // mots d'un résultat (voir stories-auto.cjs)
+const platPub = (t) => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’]/g, "'").toLowerCase();
 const SS = require("./sujets-sensibles.cjs");
 const PN = require("./personne-nommee.cjs"); // accusation visant une personne nommée : 3 médias au moins, jamais de portrait
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés : jamais republiés, texte jamais repris (audit J-23)
@@ -249,7 +251,7 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
     ...recentes.filter((d) => !retires.has(d.id)).flatMap((d) => [d.sensible ? null : d.titre, ...(Array.isArray(d.sujets) ? d.sujets : [])]),
     ...(file?.entrees || []).filter((e) => dernieres.has(e.id) && !retires.has(e.id)).flatMap((e) => [e.sensible ? null : e.titrePropre, ...(Array.isArray(e.sujets) ? e.sujets : [])]),
   ].filter(Boolean);
-  const dejaTraiteCourt = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && titresDeEntree(e).some((t) => dejaVuSaufResultat(t, titresPublies)); // un RÉSULTAT (« élu », « adopté »…) n'est pas un doublon de l'avant-première déjà publiée
+  const dejaTraiteCourt = (e) => !estAnnonce(e) && !estReel(e) && !estCreneau(e) && dejaVuEntreeSaufResultat(titresDeEntree(e), titresPublies); // un RÉSULTAT (« élu », « adopté »…) n'est pas un doublon de l'avant-première déjà publiée
   // Fenêtre de 7 jours autour des posts et annonces publiés (le registre garde titre, sujets et dateIso). Seuls l'annonce et le Reel de LEUR post sont exemptés ;
   // les stories « date » et « rappel » (rappelDe) ne le sont pas. Les contenus récurrents à créneau restent hors de ce contrôle.
   const longues = publiees.filter((d) => !retires.has(d.id) && now.getTime() - Date.parse(d.publieLe) < FENETRE_DOUBLON_POST_H * 36e5 && (d.type === "post" || d.type === "carousel" || d.annonceDe));
@@ -263,6 +265,8 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
     const issueDePost = estPostFil(e) || estAnnonce(e) || Boolean(e.rappelDe) || Boolean(e.dateIso);
     return longues.some((d) => {
       if (d.id === e.id || (estAnnonce(e) && (d.id === e.annonceDe || d.reelDe === e.annonceDe))) return false; // l'annonce de LEUR post
+      const nouveauResultat = !issueDePost && titres.some((t) => RESULTAT_PUB.test(platPub(t))) && !titresRegistre(d).some((p) => RESULTAT_PUB.test(platPub(p))); // story de presse qui annonce un RÉSULTAT (« élu », « adopté »…) : l'avant-première ou la date annoncée par un post n'en fait pas un doublon
+      if (nouveauResultat) return false;
       if (!titresRegistre(d).some((p) => titres.some((t) => titresProches(p, t)))) return false;
       return issueDePost ? Boolean(date) && d.dateIso === date : true; // post/annonce : même date ; story de presse : titres proches suffisent
     });
