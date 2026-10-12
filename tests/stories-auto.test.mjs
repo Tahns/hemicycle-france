@@ -1174,13 +1174,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
 // Test comparatif des styles de story : attribution déterministe (hash de l'id % 4), « bleu » garde sa part, variante absente pour les contenus à dessin unique
 {
   const A = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
-  assert.deepStrictEqual(A.VARIANTES, ["bleu", "une-photo", "question", "chiffre"]);
+  assert.deepStrictEqual(A.VARIANTES, ["bleu", "une-photo", "question"], "le style « chiffre » (N médias en parlent en gros plan) est retiré");
   assert.strictEqual(A.varianteDe("abc123"), A.varianteDe("abc123"), "déterministe");
   const ids = Array.from({ length: 400 }, (_, i) => `id-${i}`);
   const parts = Object.fromEntries(A.VARIANTES.map((v) => [v, ids.filter((i) => A.varianteDe(i) === v).length]));
-  for (const v of A.VARIANTES) assert.ok(parts[v] > 60 && parts[v] < 140, `part du style ${v} : ${parts[v]} sur 400 (environ un quart)`);
+  for (const v of A.VARIANTES) assert.ok(parts[v] > 100 && parts[v] < 170, `part du style ${v} : ${parts[v]} sur 400 (environ un tiers)`);
   assert.ok(ids.every((i) => A.VARIANTES.includes(A.varianteDe(i))));
-  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "une-photo", "question"]) !== "chiffre"), "liste réduite : jamais le style exclu");
+  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "question"]) !== "une-photo"), "liste réduite : jamais le style exclu");
   // « styleFixe » (data/stories-config.json) : null par défaut (test comparatif inchangé), sinon ce style partout
   assert.strictEqual(A.normaliserConfig(null).styleFixe, null, "défaut : test comparatif");
   assert.strictEqual(A.normaliserConfig({ styleFixe: "inconnu" }).styleFixe, null, "valeur invalide ignorée");
@@ -1189,10 +1189,10 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(A.normaliserConfig({ styleFixe: v }).styleFixe, v, `valeur valide : ${v}`);
     assert.ok(ids.every((i) => A.varianteDe(i, A.VARIANTES, v) === v), `styleFixe ${v} imposé`);
   }
-  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "une-photo", "question"], "chiffre") === "bleu"), "style inapplicable : dessin historique");
+  assert.ok(ids.every((i) => A.varianteDe(i, ["bleu", "question"], "une-photo") === "bleu"), "style inapplicable : dessin historique");
   assert.strictEqual(JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8")).styleFixe, null, "la valeur livrée reste null (test comparatif)");
-  A.appliquerSeuils(A.normaliserConfig({ styleFixe: "chiffre" }));
-  assert.strictEqual(A.varianteDe("abc123"), "chiffre", "appliquerSeuils active le style imposé");
+  A.appliquerSeuils(A.normaliserConfig({ styleFixe: "question" }));
+  assert.strictEqual(A.varianteDe("abc123"), "question", "appliquerSeuils active le style imposé");
   A.appliquerSeuils(A.normaliserConfig(null));
   assert.strictEqual(A.varianteDe("abc123"), A.varianteDe("abc123", A.VARIANTES, null), "puis retour au test comparatif");
   const sj = sujet("Le gouvernement présente son projet de budget pour 2027", 4);
