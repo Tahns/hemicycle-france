@@ -19,7 +19,7 @@ const F_STATS = process.env.STATS_SORTIE || path.join(RACINE, "data", "instagram
 const D_DOCS = process.env.STATS_DOCS || path.join(RACINE, "docs", "stats");
 const MIN_TOTAL = 10; // médias mesurés d'un même type avant toute conclusion
 const MIN_STYLE = 10; // stories mesurées PAR STYLE avant de désigner un style gagnant (test comparatif, docs/STATS.md)
-const STYLES = ["bleu", "une-photo", "question", "chiffre"]; // même liste que scripts/stories-auto.cjs (VARIANTES)
+const STYLES = ["bleu", "une-photo", "question"]; // même liste que scripts/stories-auto.cjs (VARIANTES)
 const MIN_GROUPE = 3; // médias dans le groupe comparé ET dans le reste
 const SEUIL_PCT = 15; // écart minimal pour être signalé
 

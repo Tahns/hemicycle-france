@@ -1380,7 +1380,7 @@ const MODELES_TYPE = { direct: "direct", facea: "face-a-face", chiffre: "chiffre
 // (actualité « à la une », chiffre, date à retenir) et les dossiers sont concernées : « en direct », « en bref », « face à face » (portraits), sondages, données propres,
 // sujets sensibles et rappels d'agenda gardent leur dessin, sans variante.
 // ---------------------------------------------------------------------------------------------------------------------
-const VARIANTES = ["bleu", "une-photo", "question", "chiffre"];
+const VARIANTES = ["bleu", "une-photo", "question"]; // le style « chiffre » (« N médias en parlent » en gros plan) est retiré : il n'apprenait rien au lecteur
 /** Style imposé (réglage « styleFixe » de data/stories-config.json, une valeur de VARIANTES) ; null = test comparatif. Renseigné une fois par exécution (appliquerSeuils). */
 let STYLE_FIXE = null;
 /** Variante d'un id : hash(id) % nombre de styles (4 par défaut ; une liste plus courte quand un style ne s'applique pas au contenu). Avec « styleFixe », ce style partout où il s'applique. */
