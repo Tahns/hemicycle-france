@@ -61,7 +61,7 @@ const FORMES_SPECIALES = [
   /(?:\b(?:un|une|le|la|cet|cette|ce|jeune|ancien|ancienne)\s+|\bl'|,\s*)(?:lyceen(?:ne)?|collegien(?:ne)?|ecolier|ecoliere|eleve)\b/,
 ];
 // légitime, mais attrapé par les mots ci-dessus : retiré du texte avant le contrôle
-const EXCEPTIONS = /\b(?:commissions? d'enquetes?|missions? d'enquetes?|justice (?:sociale|fiscale|climatique|environnementale|energetique|intergenerationnelle)|enquetes? (?:d'opinion|statistique|emploi))\b/g;
+const EXCEPTIONS = /\b(?:commissions? d'enquetes?|missions? d'enquetes?|justice (?:sociale|fiscale|climatique|environnementale|energetique|intergenerationnelle)|enquetes? (?:d'opinion|statistique|emploi)|(?:droit de vote|vote|majorite(?: penale| sexuelle)?|age legal|permis de conduire|service civique|service national)\s+a\s+\d{1,2}\s*ans)\b/g; // « droit de vote à 16 ans » : une mesure, pas un mineur identifiable (« Lola, 16 ans » reste écarté)
 
 // ── Âge de mineur : « de 15 ans », « âgé de quinze ans », « Lola, 16 ans » (pas « dans 5 ans ») ────────────────────────────────────
 const NOMBRES_LETTRES = "un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|treize|quatorze|quinze|seize|dix-sept|dix-huit|dix-neuf";

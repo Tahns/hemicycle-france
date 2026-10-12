@@ -427,10 +427,13 @@ function titreSujetBrut(sujet, dossiers = [], donnees = {}) {
 /** Tous les champs « média » d'un sujet, prêts à écrire (seulement ceux qui existent). Marque aussi les vidéos. */
 function enrichirSujet(sujet, dossiers, donnees, maintenant = new Date()) {
   for (const a of sujet.articles || []) if (estVideo(a.url)) a.video = true; else delete a.video;
-  for (const k of ["titrePropre", "fait", "accroche", "contexte", "chiffre", "date"]) delete sujet[k];
+  for (const k of ["titrePropre", "fait", "accroche", "essentiel", "contexte", "chiffre", "date"]) delete sujet[k];
   const tp = titreSujet(sujet, dossiers, donnees); if (tp) sujet.titrePropre = tp;
   // Titre-fait : champ d'AFFICHAGE (gros titre des stories, lu par js/stories.js sous le nom « accroche ») ; titrePropre.titre reste la clé anti-doublon
   const fait = titreFait(sujet); if (fait) { sujet.fait = fait; sujet.accroche = fait; }
+  // Message complet (voir messageComplet) : `accroche` = phrase complète, `essentiel` = une ou deux phrases de contexte (js/stories-actu.js lit s.accroche et s.essentiel)
+  const msg = messageComplet(sujet);
+  if (msg) { sujet.accroche = msg.accroche; sujet.essentiel = msg.essentiel; if (!sujet.fait) sujet.fait = msg.accroche; }
   const c = contexteSujet(sujet, donnees, maintenant); if (c.length) sujet.contexte = c;
   const ch = chiffreSujet(sujet); if (ch) sujet.chiffre = ch;
   const da = dateSujet(sujet, maintenant); if (da) sujet.date = da;
@@ -660,7 +663,7 @@ const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 20, FAIT_MAX_CAR = 135; // décision du
 /** Formules creuses : elles annoncent un sujet sans dire le fait. */
 const FORMULES_CREUSES = /actualite (?:sur|de|du|des|autour)|ce qu'il faut (?:savoir|retenir)|ce qu'on (?:sait|retient)|ce que l'on (?:sait|retient)|l'essentiel|ce que (?:disent|dit|pensent)|tout (?:savoir|comprendre)|on vous (?:explique|dit)|\bvoici\b|\bvoila\b|decryptage|en ce moment|a la une|en direct|\bles reactions\b|ce qui change|ce qu'il faut|ce que l'on|\bles coulisses\b|\bretour sur\b|\bfocus sur\b|\bzoom sur\b|\bdossier\b/;
 /** Verbes d'opinion et mots de mise en scène : le fait n'est pas dit, une humeur l'est. */
-const OPINION_FAIT = /\b(?:balaie\w*|fustige\w*|tacle\w*|etrille\w*|flingue\w*|tance\w*|s'indigne\w*|s'insurge\w*|regrette\w*|deplore\w*|salue\w*|se felicite\w*|craint\w*|redoute\w*|estime\w*|pense\w*|considere\w*|critique\w*|denonce\w*|dezingue\w*|cingle\w*|torpille\w*|sermonne\w*|recadre\w*|rabroue\w*|attaque\w*|s'en prend\w*|accable\w*|ridiculise\w*|enfonce\w*|s'enflamme\w*|monte au creneau|crie\w*|choc|chocant\w*|coup de tonnerre|bombe|incroyable\w*|inacceptable\w*|scandaleu\w*|honteu\w*|catastroph\w*|spectaculaire\w*|fiasco|bataille|guerre|clash\w*|tempete|ouragan|sidere\w*|hallucinant\w*|inquiet\w*|alarmant\w*|choquant\w*|polemi\w*|buzz|piege\w*|stratege\w*|humili\w*|deroute|cuisant\w*|triomph\w*|naufrage|debacle|plebiscit\w*|flou)\b/;
+const OPINION_FAIT = /\b(?:balaie\w*|fustige\w*|tacle\w*|etrille\w*|flingue\w*|tance\w*|s'indigne\w*|s'insurge\w*|regrette\w*|deplore\w*|salue\w*|se felicite\w*|craint\w*|redoute\w*|estime\w*|pense\w*|considere\w*|critique\w*|denonce\w*|dezingue\w*|cingle\w*|torpille\w*|sermonne\w*|recadre\w*|rabroue\w*|attaque\w*|s'en prend\w*|accable\w*|ridiculise\w*|enfonce\w*|s'enflamme\w*|monte au creneau|crie\w*|choc|chocant\w*|coup de tonnerre|bombe|incroyable\w*|inacceptable\w*|scandaleu\w*|honteu\w*|catastroph\w*|spectaculaire\w*|fiasco|bataille|guerre|clash\w*|tempete|ouragan|sidere\w*|hallucinant\w*|inquietant\w*|alarmant\w*|choquant\w*|polemi\w*|buzz|piege\w*|stratege\w*|humili\w*|deroute|cuisant\w*|triomph\w*|naufrage|debacle|plebiscit\w*|flou)\b/;
 const DEBUT_INTERDIT = /^(?:et|mais|ou|ni|car|donc|or|puis|alors|pourquoi|comment|quand|qu'est|quel(?:le)?s?\s+(?:est|sont))\b/;
 const FIN_COUPEE = /\b(?:de|du|des|d|la|le|les|l|un|une|et|ou|en|au|aux|a|pour|par|sur|dans|avec|sans|que|qui|dont|ce|cette|ces|son|sa|ses|leur|leurs|mais|si|s|ne|pas|plus|apres|avant|vers|chez|selon|est|sont|sera|ont|a)$/;
 const NOMS_EN_E = new Set(["sante", "societe", "securite", "majorite", "minorite", "universite", "communaute", "egalite", "liberte", "qualite", "quantite", "unite", "cite", "ete", "difficulte", "fraternite", "priorite", "autorite", "activite", "realite", "identite", "laicite", "facilite", "opportunite", "fonction", "feminite", "pauvrete", "propriete", "etablissement", "annee", "journee", "soiree", "idee", "armee", "arrivee", "denree", "duree", "entree", "gelee", "pensee", "lycee", "musee", "comite", "parti", "ami", "mi", "midi", "pays", "avis", "fois", "bruit", "projet", "budget", "debut", "benefice"]);
@@ -680,12 +683,14 @@ function netFait(titre) {
   t = t.replace(/^(?:Politique|France|Monde|International|Société|Economie|Économie|Social|Analyse|Éditorial|Edito|Opinion|Info\s+\w+)\s*:\s+/u, "");
   t = t.replace(/(\d)\.(\d{3})(?!\d)/g, "$1 $2"); // 3.000 -> 3 000
   t = t.replace(/\s+(?:ce\s+)?(?:(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)(?:\s+(?:matin|soir))?|matin|soir|week-end)\b(?=\s*(?:[,;.?]|$))/giu, "");
+  t = t.replace(/\s+(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)(?=\s+(?:à la|au|aux|après|dans|lors|devant|sur)\b)/giu, ""); // « enfariné dimanche à la sortie » : un jour relatif qui ne veut plus rien dire le lendemain
   t = t.replace(/\s+(?:hier|aujourd['’]hui|ce jour)\b(?=\s*(?:[,;.?]|$))/giu, "");
   t = t.replace(/\b(?:vraiment|finalement|véritablement|notamment|désormais|enfin)\s+/giu, "");
   t = t.replace(/\s*[,:–—-]?\s*(?:voici|voilà)\b.*$/iu, "").replace(/\s*[,:–—-]\s*(?:tout )?ce qu['’](?:il faut|on) (?:savoir|retenir|sait)\b.*$/iu, "").replace(/\s*[,:–—-]\s*on (?:vous )?explique\b.*$/iu, "");
   t = t.replace(/\s*[.]+\s*$/, "").replace(/\s+([?!,;:])/g, "$1").replace(/\s{2,}/g, " ").trim();
   return t;
 }
+const QUALIFICATIF_POLITIQUE = /\b(?:extreme droite|extreme gauche|d'extreme|ultra\w*|populiste\w*|fasciste\w*|complotiste\w*|haineu\w*|deversoir)\b/;
 const GUILLEMETS = "«\"“”»";
 /** Retire les citations en tête ou en fin de titre (ce sont les mots de quelqu'un, pas le fait) et les incises entre virgules. */
 function sansCitations(t) {
@@ -743,25 +748,28 @@ function candidatsDe(brut) {
 // Tête de titre (« Rassemblement national : … », « Budget 2027 : … ») remise dans la phrase par une préposition courante : le contexte reste, la phrase est complète
 const CONTEXTES = [
   [/^(?:rassemblement national|parti socialiste|parti communiste|mouvement démocrate)\b/i, "Au "], [/^(?:la france insoumise|les républicains|les écologistes|les insoumis)\b/i, "Chez "],
-  [/^primaire\b/i, "Dans la "], [/^présidentielle\b/i, "Pour la "], [/^(?:budget|projet de loi)\b/i, "Sur le "], [/^(?:mobilisation|colère|manifestations?)\b/i, "Pendant la "], [/^(?:blocus|mouvement)\b/i, "Pendant le "],
+  [/^primaire\b/i, "Dans la "], [/^attaque\b/i, "Après l'"], [/^présidentielle\b/i, "Pour la "], [/^(?:budget|projet de loi)\b/i, "Sur le "], [/^(?:mobilisation|colère|manifestations?)\b/i, "Pendant la "], [/^(?:blocus|mouvement)\b/i, "Pendant le "],
 ];
 const DEBUT_CONTEXTE = /^(?:Au|Chez|Dans la|Pour la|Sur le|Pendant l[ae])\s\S[^,]{2,60},\s/;
 /** « Tête : suite » -> « Au Rassemblement national, le député X… » ; null si la tête n'est pas un contexte connu. */
 function enContexte(tete, suite) {
   const c = CONTEXTES.find(([re]) => re.test(tete.trim()));
-  if (!c || /[«»"“”]/.test(tete)) return null;
+  if (!c || /[«»"“”]/.test(tete) || motsFait(suite).length < 5 || !verbeConjugue(suite)) return null; // la suite doit déjà être une phrase (un verbe conjugué), sinon la tête seule ferait le fait
   const mots = suite.trim().split(" "), premier = mots[0];
+  if (!/^\p{Lu}/u.test(premier) && !/^(?:le|la|les|l['’]|un|une|des|ce|cette|ces)$/i.test(premier.replace(/['’].*$/, "'"))) return null; // « victime d'une cyberattaque, … » ne se rattache pas à une tête : phrase bancale
   const bas = MOTS_VIDES.has(plat(premier)) || /^[a-zà-ÿ]/.test(premier);
   const tete2 = tete.trim().replace(/^./, (x) => x.toLowerCase());
   const corps = (bas ? premier.charAt(0).toLowerCase() + premier.slice(1) : premier) + " " + mots.slice(1).join(" ");
   return `${c[1]}${/^(?:Au|Chez)/.test(c[1]) ? tete.trim().replace(/^(?:la france insoumise|les républicains|les écologistes)/i, (x) => (/^la/i.test(x) ? "La France insoumise" : x.replace(/^./, (y) => y))) : tete2}, ${corps.trim()}`;
 }
 /** Raccourcis de formulation sans changer le fait (« a engagé une procédure de dissolution contre X » -> « engage la dissolution d'X »). */
-function raccourcisFixes(t) {
-  return t.replace(/\bEgalité\b/g, "Égalité")
-    .replace(/\b(?:a|ont) engagé une procédure de dissolution contre (?:l['’]association |le groupe |le mouvement )?(?=(\p{L}))/giu, (m, c) => `engage la dissolution ${/^[AEIOUYÉÈÊH]/i.test(c) ? "d'" : "de "}`);
+function normaliserLangue(t) {
+  return String(t).replace(/\bEgalité(?!\p{L})/gu, "Égalité")
+    .replace(/\b(l['’]\p{Lu}[\p{L}]+|\p{Lu}[\p{L}]+)\s+[«"“]\s*(?:s['’])?inquiète\s*[»"”]\s+face\s+(aux|au|à la|à l['’]|à)\s*(?=\S)/gu, (m, suj, art) => `${suj} s'inquiète ${{ aux: "des ", au: "du ", "à la": "de la ", "à": "de " }[art] || "de l'"}`); // « l'ONU "inquiète" face aux X » : l'ONU s'inquiète des X
 }
-// Compléments de fin retirables sans casser la phrase : un lieu (« à Clermont-Ferrand ») ou une circonstance (« devant une salle comble », « lors du meeting ») ; jamais un complément du verbe (« en ordre de bataille »)
+function raccourcisFixes(t) {
+  return t.replace(/\b(?:a|ont) engagé une procédure de dissolution contre (?:l['’]association |le groupe |le mouvement )?(?=(\p{L}))/giu, (m, c) => `engage la dissolution ${/^[AEIOUYÉÈÊH]/i.test(c) ? "d'" : "de "}`);
+}
 const PP_FINAL = /\s+(?:(?:à|au|aux|en|dans)\s+\p{Lu}[^,:;]*|(?:devant|lors de|lors du|lors d['’])\s*[^,:;]+)$/u;
 /** Formes plus courtes d'une phrase : citation d'une ou deux mots collée à un nom propre retirée, complément de lieu ou de circonstance de tête retiré, raccourcis fixes, compléments de fin retirés un à un. Les contrôles de qualité (défautsFait) tranchent. */
 function variantesCourtes(x) {
@@ -804,7 +812,7 @@ function aUnVerbe(t) {
   return w.some(({ o, i, x }) => {
     const nu = x.replace(/^[ldjmtsc]'/, "");
     if (o === "à") return false;
-    if (VERBES_COURANTS.test(nu) && !NOMS_EN_E.has(nu) && !/(?:tion|tions|ment|ments|eur|eurs|isme|ismes|ture|tures|ance|ances|ence|ences|ite|ites)$/.test(nu)) return true;
+    if (VERBES_COURANTS.test(nu) && !NOMS_EN_E.has(nu) && (VERBES_EN_NOM.test(nu) || !/(?:tion|tions|ment|ments|eur|eurs|isme|ismes|ture|tures|ance|ances|ence|ences|ite|ites)$/.test(nu))) return true;
     if (/-(?:ils?|elles?|on|t-il|t-elle)$/.test(x)) return true; // inversion : « sont-ils prêts »
     if (i === 0) return false;
     if (/^\w{3,}(?:era|eront|erait|eraient|ira|iront|iraient|ront)$/.test(nu) && nu.length >= 6) return true;
@@ -815,9 +823,10 @@ function aUnVerbe(t) {
     return false;
   });
 }
+const VERBES_EN_NOM = /^(?:lance|figure|commence|avance|finance|menace|annonce|renonce|prononce|dénonce|denonce|entame|reconnait|dement|promet|remet|admet|permet|transmet)$/; // verbes conjugués que la finale d'un nom ferait écarter
 const apostropheNue = (t) => plat(t).replace(/['’]/g, "'");
 /** Contrôle de qualité d'un titre-fait : liste des défauts (vide = bon). */
-function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOTS, car = FAIT_MAX_CAR, ouverture = false } = {}) {
+function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOTS, car = FAIT_MAX_CAR, ouverture = false, citationOk = false } = {}) {
   const d = [];
   const n = motsFait(t).length, p = apostropheNue(t);
   if (n < FAIT_MIN_MOTS) d.push("trop court");
@@ -826,11 +835,13 @@ function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOT
   if (/[!]/.test(t) || /\?\s*\S/.test(t)) d.push("exclamation ou plusieurs phrases");
   if (!ouverture && /^(?:avec|malgre|apres|avant|face a|pour|sans|sous|devant|en|a la|au|aux|lors|dans|depuis)\b[^,]{0,60},/.test(p)) d.push("ouverture subordonnée");
   if (FORMULES_CREUSES.test(p)) d.push("formule creuse");
-  if (OPINION_FAIT.test(p)) d.push("verbe d'opinion ou emphase");
+  if (QUALIFICATIF_POLITIQUE.test(p)) d.push("qualificatif politique ou moral (aucun avis)");
+  if (!citationOk && OPINION_FAIT.test(p.replace(/\b(?:l'|la |une |cette |de l'|d'une |l’)attaques?\b|\battaques? (?:de|du|des|d'|sur|contre|au|a l')/g, " "))) // « l'attaque de l'aéroport » : un événement (nom), pas le verbe « X attaque Y »
+    d.push("verbe d'opinion ou emphase");
   if (DEBUT_INTERDIT.test(p) || /^pourquoi\b/.test(p)) d.push("début interdit");
   if (FIN_COUPEE.test(p.replace(/\s*\?$/, ""))) d.push("fin coupée");
   const guillemets = (t.match(/[«»"“”]/g) || []).length;
-  if (guillemets) { const q = t.match(/[«"“]\s*([^»"”]*)[»"”]/u); if (guillemets % 2 || !q || motsFait(q[1]).length > 4 || /^[«"“]/.test(t)) d.push("citation"); }
+  if (guillemets && !citationOk) { const q = t.match(/[«"“]\s*([^»"”]*)[»"”]/u); if (guillemets % 2 || !q || motsFait(q[1]).length > 4 || /^[«"“]/.test(t)) d.push("citation"); }
   if ((t.match(/\(/g) || []).length !== (t.match(/\)/g) || []).length) d.push("parenthèse ouverte");
   if (/[:;,]\s*$/.test(t) || /\s:\s.*\s:\s/.test(t)) d.push("ponctuation");
   if (/\b[dlnsmtcj]['’]\s*(?:[,.:;?!]|$)/iu.test(t)) d.push("fin coupée (apostrophe)");
@@ -838,7 +849,7 @@ function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOT
   if (/(?:^|: )(?:affirm\w*|declar\w*|dit|disent|expliqu\w*|indiqu\w*|assur\w*|estim\w*|confi\w*|precis\w*|ajout\w*|selon)\b/.test(p)) d.push("début sans sujet");
   if (/[«"“]/.test(t) === false && /,\s*(?:alert|point|estim|jug|dit|disent|expliq|previen|admet|regrett|denonc|reclam|exig|souhait|appell|soulign|plaid|martel|repond)\w*\s+(?:[a-z'-]+\s*){1,5}$/.test(apostropheNue(t)) && motsFait(t.slice(0, t.lastIndexOf(","))).length < 8) d.push("citation retirée : « …, dit X » sans la citation");
   if (/\([^)]*\)/.test(t)) d.push("incise entre parenthèses");
-  { const apres = t.slice(t.lastIndexOf(",") + 1).trim(); if (t.includes(",") && /^(?:les?|la|l['’]|des|un|une)\b/i.test(apres) && !verbeConjugue(apres) && !aUnVerbe(apres)) d.push("fin sans verbe (proposition nominale)"); }
+  { const apres = t.slice(t.lastIndexOf(",") + 1).trim(); if (t.includes(",") && /^(?:les?|la|l['’]|des|un|une)\b/i.test(apres) && !verbeConjugue(apres) && !aUnVerbe(apres) && /(?:é|ée|és|ées|us|ue|ues|is)$/i.test(apres)) d.push("fin sans verbe (proposition nominale)"); }
   if (siglesNonExpliques(t).length) d.push("sigle non expliqué");
   if (!aUnVerbe(t)) d.push("sans verbe");
   // Sujet sensible (accusation, procédure, polémique, violence) : jamais avec le nom d'une personne
@@ -864,7 +875,7 @@ function verbeConjugue(t) {
     if (AUXILIAIRES.has(x)) return i > 0 || true;
     if (ARTICLES_ET_PREP.has(prec)) return false;
     if (/(?:é|ée|és|ées|i|is|ie|u|us)$/.test(o.toLowerCase())) return false; // participe : seulement après un auxiliaire (traité plus haut par l'auxiliaire)
-    if (/(?:tion|tions|ment|ments|eur|eurs|isme|ture|ance|ence|ite|ites)$/.test(x) || NOMS_EN_E.has(x)) return false;
+    if ((/(?:tion|tions|ment|ments|eur|eurs|isme|ture|ance|ence|ite|ites)$/.test(x) && !VERBES_EN_NOM.test(x)) || NOMS_EN_E.has(x)) return false;
     if (VERBES_COURANTS.test(x)) return true;
     return i > 0 && /^\p{Lu}/u.test(w[i - 1]) && /^[a-zà-ÿ]{4,}(?:e|ent|it|ait|aient|ra|ront|t|nd)$/.test(o) && !ARTICLES_ET_PREP.has(x); // « Gabriel Attal dégaine », « Tanguy admet »
   });
@@ -873,41 +884,66 @@ function verbeConjugue(t) {
 function besoinDeContexte(t) {
   const aTete = /^[^:]{3,60}\s:\s/.test(t) || DEBUT_CONTEXTE.test(t);
   const renvoie = /(?<!['’])\b(?:son|sa|ses|leur|leurs|il|elle|ils)\b/i.test(t);
-  return renvoie ? (aTete ? 1.5 : -3) : (aTete ? -1.5 : 0); // sans renvoi, la tête (rubrique) va dans « l'essentiel », pas dans le gros titre
+  const flou = /^(?:Un|Une|Des)\s/.test(t.replace(/^[^:]{3,60}\s:\s/, "")); // « Une Française figure parmi les blessés… » : de quoi parle-t-on ?
+  return renvoie || flou ? (aTete ? 1.5 : -3) : (aTete ? -1.5 : 0); // sans renvoi, la tête (rubrique) va dans « l'essentiel », pas dans le gros titre
+}
+const VERBES_CITATION = "alerte|pointe|affirme|assure|estime|juge|dit|déclare|explique|prévient|admet|regrette|dénonce|réclame|exige|souhaite|appelle|souligne|plaide|martèle|répond|ajoute|confie|reconnaît";
+/**
+ * « Blocus : « Ce n'est plus un mouvement lycéen… », alerte Nicolas Dupont-Aignan » -> « Nicolas Dupont-Aignan alerte : « Ce n'est plus un mouvement lycéen… » ».
+ * Une opinion ne devient jamais un fait : elle est citée ENTIÈRE, entre guillemets, avec son auteur (nommé) devant ; une citation coupée ou sans auteur est refusée.
+ */
+function citationsAuteur(titre) {
+  const t = netFait(titre);
+  const re = new RegExp(`^(?:[^:«»"“”]{3,70}:\\s*)?[«"“]\\s*([^»"”]{15,220}?)\\s*[»"”]\\s*,\\s*(${VERBES_CITATION})\\s+((?:\\p{Lu}[\\p{L}'’-]*\\s*){1,4})$`, "u");
+  const m = re.exec(t);
+  if (!m) return [];
+  const cit = m[1].replace(/\s+/g, " ").trim();
+  if (/…|\.{2,}|[«»"“”]/.test(cit) || !/[\p{L}0-9?!.]$/u.test(cit) || motsFait(cit).length > 22) return [];
+  const sortie = [`${m[3].trim()} ${m[2]} : « ${cit.replace(/[.!]$/, "")} »`];
+  const tete = /^([^:«»"“”]{3,70}):\s/.exec(t);
+  if (tete) { const c = enContexte(tete[1], `${m[3].trim()} ${m[2]} : « ${cit.replace(/[.!]$/, "")} »`); if (c) sortie.push(c); }
+  return sortie;
 }
 /**
  * Titre-fait d'un sujet de presse : { titre, article, partage } ou null. Candidats = chaque titre de presse condensé (voir candidatsDe) ;
  * on garde ceux qui passent le contrôle de qualité (défautsFait), puis le plus partagé avec les titres des AUTRES médias (mots communs) et le plus informatif
  * (verbe, nom propre ou chiffre, longueur de 8 à 11 mots). Un titre repris tel quel d'un seul média est écarté : il faut une condensation, ou un libellé que deux médias emploient.
  */
-function titreFaitDetail(sujet) {
+/** Sujet de procédure, d'accusation, de violence ou de mineur : aucun nom de personne reconnue dans les phrases. Les propos attribués (« discours ») ne comptent pas ici : la phrase elle-même est contrôlée mot à mot. */
+const sujetSensible = (articles) => articles.some((a) => LISTE_PRUDENTE.motExclu(a.titre || "", { groupes: ["procedure", "accusation", "violences"] }) || LISTE_PRUDENTE.mineurIdentifiable(a.titre || ""));
+function evaluerFaits(sujet, { copie = false, max = FAIT_MAX_MOTS, car = FAIT_MAX_CAR } = {}) {
   const articles = (sujet?.articles || []).filter((a) => a?.titre);
-  if (!articles.length) return null;
+  if (!articles.length) return [];
   const personnes = sujet.illustration?.personnes || [];
-  const judiciaire = articles.some((a) => JUDICIAIRE_TITRES.test(a.titre));
+  const judiciaire = sujetSensible(articles);
   const complets = articles.map((a) => plat(a.titre).replace(/[^a-z0-9]+/g, " ").trim());
   const rac = articles.map((a) => racines(a.titre));
-  const cands = [];
+  const cands = [], vus = new Set();
   articles.forEach((a, ia) => {
-    for (const txt of candidatsDe(a.titre)) {
-      const t = maj1(simplifierJargon(txt).replace(/\s*\?$/, " ?").replace(/\s*:\s+/g, " : "));
-      if (defautsFait(t, { personnes, judiciaire, ouverture: DEBUT_CONTEXTE.test(t) }).length) continue;
+    const sources = [...candidatsDe(a.titre).map((txt) => ({ txt, citation: false })), ...citationsAuteur(a.titre).map((txt) => ({ txt, citation: true }))];
+    for (const { txt, citation } of sources) {
+      const t = maj1(simplifierJargon(normaliserLangue(txt)).replace(/\s*\?$/, " ?").replace(/\s*:\s+/g, " : "));
+      if (defautsFait(t, { personnes, judiciaire, max, car, ouverture: DEBUT_CONTEXTE.test(t), citationOk: citation }).length) continue;
       const cle = plat(t).replace(/[^a-z0-9]+/g, " ").trim();
       const reprisTelQuel = complets.filter((c) => c === cle).length; // médias dont le titre est exactement celui-ci
-      if (reprisTelQuel === 1) continue; // titre d'un seul média recopié : pas de condensation, pas de partage
+      if (reprisTelQuel === 1 && !copie) continue; // titre d'un seul média recopié : pas de condensation, pas de partage
       const r = racines(t);
       const autres = rac.filter((_, ib) => ib !== ia && articles[ib].media !== a.media);
       const partage = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length / Math.max(1, r.size), 0) / autres.length : 0;
       const n = motsFait(t).length;
       const commun = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length, 0) / autres.length : 0;
-      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (verbeConjugue(t) ? 3 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 14 ? 1 : 0) - Math.abs(n - 14) * 0.15
-        - (/[«»"“”]/.test(t) ? 0.8 : 0) + besoinDeContexte(t);
-      cands.push({ titre: t, article: ia, partage: Math.round(partage * 100) / 100, note });
+      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (verbeConjugue(t) ? 3 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 14 ? 1 : 0) + Math.min(n, 13) * 0.2 + (personnes.some((x) => plat(t).includes(plat(x.nom))) ? 1.5 : 0)
+        - (/[«»"“”]/.test(t) ? 0.8 : 0) - (citation ? 2 : 0) + besoinDeContexte(t);
+      const k = cle + "|" + ia;
+      if (vus.has(k)) continue;
+      vus.add(k);
+      cands.push({ titre: t, article: ia, media: a.media, mots: n, citation, partage: Math.round(partage * 100) / 100, note });
     }
   });
   cands.sort((x, y) => y.note - x.note || x.titre.length - y.titre.length || x.article - y.article);
-  return cands[0] || null;
+  return cands;
 }
+function titreFaitDetail(sujet) { return evaluerFaits(sujet)[0] || null; }
 /**
  * Le bandeau « Gouvernement » (rubrique et photo de l'Élysée) n'est affiché que si le fait concerne l'État central. Une décision de mairie, de département ou de région
  * ne l'est pas : true = retirer ce bandeau (rubrique générale « Vie politique », pas de photo d'institution).
@@ -922,6 +958,88 @@ function sansBandeauEtat(sujet) {
 /** Titre-fait (texte) ou null : aucun fait clair ne peut être extrait de façon sûre, le sujet n'est pas publié. */
 const titreFait = (sujet) => titreFaitDetail(sujet)?.titre || null;
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MESSAGE COMPLET d'une story ou d'un post de presse : `accroche` (gros titre, une phrase complète) + `essentiel` (une ou deux phrases complètes de contexte).
+// Tout est rédigé PAR RÈGLES à partir des titres des médias du sujet : aucun fait inventé, aucune citation tronquée, aucune opinion reprise comme un fait
+// (une opinion n'apparaît qu'ENTIÈRE, entre guillemets, avec son auteur). Décision du propriétaire : « quitte à ce que ce soit plus long, qu'on comprenne » :
+// accroche jusqu'à 20 mots, essentiel jusqu'à 45 mots (18 au moins). Quand aucune phrase ne se termine proprement, null : le sujet n'est pas publié
+// (un gros sujet est alors signalé par scripts/alerte-gros-sujets.cjs).
+// ─────────────────────────────────────────────────────────────────────────────
+const ESSENTIEL_MIN_MOTS = 18, ESSENTIEL_MAX_MOTS = 45, PHRASE_MAX_MOTS = 26, PHRASE_MAX_CAR = 185;
+const finDePhrase = (t) => { t = String(t).replace(/\s+/g, " ").trim().replace(/\s*[.;,:]+$/, ""); return /[?!»"”.]$/.test(t) && !/[»"”]$/.test(t) ? t : `${t}.`; };
+/** Phrase complète d'un titre ou null : mêmes contrôles que le titre-fait, plus longue (le contexte peut dire davantage que le gros titre). */
+function phrasesDe(sujet, opts = {}) { return evaluerFaits(sujet, { copie: true, max: PHRASE_MAX_MOTS, car: PHRASE_MAX_CAR, ...opts }); }
+/** Nombre de médias distincts, en toutes lettres pour les petits nombres. */
+const NB_LETTRES = ["", "Un", "Deux", "Trois", "Quatre", "Cinq", "Six", "Sept", "Huit", "Neuf", "Dix"];
+const listeNoms = (noms) => (noms.length <= 1 ? noms.join("") : `${noms.slice(0, -1).join(", ")} et ${noms[noms.length - 1]}`);
+/** Phrase d'appui : combien de médias en parlent, et lesquels. `propos` : l'accroche est une citation, on dit que ce sont leurs propos. */
+function phraseMedias(medias, { propos = false, avecNoms = true } = {}) {
+  const n = medias.length, nb = NB_LETTRES[n] || String(n);
+  const noms = avecNoms && n <= 6 ? ` : ${listeNoms(medias)}` : "";
+  return propos ? `Ces propos sont rapportés par ${nb.toLowerCase()} médias${noms}.` : `${nb} médias en parlent${noms}.`;
+}
+const sansCasse = (t) => plat(t).replace(/[^a-z0-9]+/g, " ").trim();
+/** Part des racines de `t` absentes de `deja` (0 à 1). */
+const nouveaute = (t, deja) => { const r = [...racines(t)]; return r.length ? r.filter((m) => !deja.has(m)).length / r.length : 0; };
+/** Dernier recours : de l'acteur nommé (personne ou parti du sujet) jusqu'à la fin de sa proposition, si un verbe conjugué la porte. */
+function propositionActeur(sujet) {
+  const personnes = sujet.illustration?.personnes || [], judiciaire = sujetSensible(sujet.articles || []);
+  const sortie = [];
+  for (const a of sujet.articles || []) {
+    const t = sansCitations(netFait(a.titre));
+    for (const x of personnes) {
+      const i = plat(t).indexOf(plat(x.nom));
+      if (i < 0) continue;
+      const reste = t.slice(i).split(/[;:]|,\s+(?=[a-zà-ÿ])/)[0].trim();
+      const c = maj1(simplifierJargon(reste));
+      if (motsFait(c).length >= FAIT_MIN_MOTS && verbeConjugue(c) && !defautsFait(c, { personnes, judiciaire, max: FAIT_MAX_MOTS, car: FAIT_MAX_CAR }).length) sortie.push({ titre: c, media: a.media });
+    }
+  }
+  return sortie[0] || null;
+}
+/**
+ * { accroche, essentiel, origine, medias } ou null.
+ * accroche : le meilleur titre-fait (titreFaitDetail) ; sinon une citation entière avec son auteur ; sinon la phrase la plus partagée entre médias, même recopiée d'un titre,
+ * sinon la proposition de l'acteur nommé. essentiel : une ou deux phrases complètes de médias DIFFÉRENTS (la plus complète d'abord, puis une qui apporte des mots nouveaux),
+ * plus le nombre de médias ; 18 à 45 mots. Un sujet repris par moins de 2 médias, ou dont aucune phrase propre n'existe, donne null.
+ */
+function messageComplet(sujet) {
+  const articles = (sujet?.articles || []).filter((a) => a?.titre);
+  const medias = [...new Set(articles.map((a) => a.media).filter(Boolean))];
+  if (medias.length < 2) return null;
+  const fortes = evaluerFaits(sujet); // titres-faits habituels
+  let choix = fortes[0] || null, origine = choix ? (choix.citation ? "citation" : "fait") : null;
+  const pool = phrasesDe(sujet);
+  if (!choix) { choix = pool.find((c) => c.mots <= FAIT_MAX_MOTS && c.titre.length <= FAIT_MAX_CAR) || null; if (choix) origine = choix.citation ? "citation" : "phrase-partagee"; }
+  if (!choix) { const pa = propositionActeur(sujet); if (pa) { choix = { titre: pa.titre, media: pa.media, mots: motsFait(pa.titre).length, citation: false }; origine = "acteur-action"; } }
+  if (!choix) return null;
+  const accroche = choix.titre.replace(/\s*\?$/, " ?"), citation = choix.citation === true;
+  const rAcc = racines(accroche), deja = new Set(rAcc);
+  const total = (parts) => motsFait(parts.join(" ")).length;
+  // 1re phrase : la forme la plus complète (celle qui contient l'accroche et son contexte), sinon l'accroche elle-même
+  const autres = pool.filter((c) => sansCasse(c.titre) !== sansCasse(accroche) && c.mots <= PHRASE_MAX_MOTS && !/\?\s*$/.test(c.titre)); // une question n'est pas un fait
+  const noteS1 = (c) => { const r = racines(c.titre); const couvre = rAcc.size ? [...rAcc].filter((m) => r.has(m)).length / rAcc.size : 0; return couvre * 3 + (DEBUT_CONTEXTE.test(c.titre) ? 1.5 : 0) + (verbeConjugue(c.titre) ? 1 : 0) + (c.citation === citation ? 0.5 : 0) + Math.min(c.mots, 20) * 0.05 - (c.mots > 24 ? 1 : 0) - (!citation && /[«»"“”]/.test(c.titre) ? 1 : 0); };
+  const s1 = autres.filter((c) => nouveaute(c.titre, new Set()) > 0 && (racines(c.titre).size && [...rAcc].filter((m) => racines(c.titre).has(m)).length / Math.max(1, rAcc.size) >= 0.6) && c.mots >= choix.mots + 2).sort((x, y) => noteS1(y) - noteS1(x))[0] || null;
+  const parts = [finDePhrase(s1 ? s1.titre : accroche)];
+  const deJa = new Set([...deja, ...racines(parts[0])]);
+  // 2e phrase : un AUTRE média, qui apporte au moins 2 mots nouveaux et au moins 40 % de nouveauté
+  const base = s1 || choix;
+  const s2 = autres.filter((c) => c.media !== base.media && c !== s1 && verbeConjugue(c.titre)).map((c) => ({ c, nv: nouveaute(c.titre, deJa), nb: [...racines(c.titre)].filter((m) => !deJa.has(m)).length }))
+    .filter((x) => (x.nv >= 0.4 && x.nb >= 2) || (!s1 && x.nv >= 0.25 && x.nb >= 2)).sort((x, y) => y.nv - x.nv || y.nb - x.nb)[0];
+  const appui = (noms) => phraseMedias(medias, { propos: citation && !s2, avecNoms: noms });
+  let essentiel = null;
+  for (const avecS2 of s2 ? [true, false] : [false]) {
+    for (const noms of [true, false]) {
+      const ps = [...parts, ...(avecS2 ? [finDePhrase(s2.c.titre)] : []), appui(noms)];
+      const n = total(ps);
+      if (n >= ESSENTIEL_MIN_MOTS && n <= ESSENTIEL_MAX_MOTS) { essentiel = ps.join(" "); break; }
+    }
+    if (essentiel) break;
+  }
+  if (!essentiel) return null;
+  return { accroche, essentiel, origine, medias: medias.length };
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Accroche : une phrase simple (20 mots au plus) qui dit de quoi ça parle, en mots courants. Champ d'AFFICHAGE : n'entre jamais dans les registres anti-doublon.
@@ -1104,4 +1222,4 @@ function simplifierTexteLoi(titre) {
   return complet.charAt(0).toUpperCase() + complet.slice(1);
 }
 
-module.exports = { sansBandeauEtat, titreVague, titreFait, titreFaitDetail, defautsFait, candidatsDe, aUnVerbe, simplifierJargon, etapeSimple, natureSimple, motsParPhrase, siglesNonExpliques, nomParti, accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };
+module.exports = { messageComplet, citationsAuteur, enContexte, verbeConjugue, evaluerFaits, ESSENTIEL_MIN_MOTS, ESSENTIEL_MAX_MOTS, sansBandeauEtat, titreVague, titreFait, titreFaitDetail, defautsFait, candidatsDe, aUnVerbe, simplifierJargon, etapeSimple, natureSimple, motsParPhrase, siglesNonExpliques, nomParti, accroche, simplifierTexteLoi, nbMots, estVideo, titrePropre, titreParRegles, titreSujet, lieuDuTitre, contexteSujet, chiffreSujet, dateSujet, fonctionDe, enReserve, nettoyer, enrichirSujet };

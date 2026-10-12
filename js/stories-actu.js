@@ -49,7 +49,7 @@ function titreFit(ctx, d, largeur, hMax, tMax, tMin){
   const essai = (t, texte)=>{
     ctx.font = `700 ${t}px "Newsreader"`;
     const ls = d.propre ? storyLignes(ctx, texte, largeur, 99) : storyLignes(ctx, d.rub, largeur, 99).concat([d.suffixe]);
-    return { t, ls, h:(ls.length - 1) * t * 1.12 + t, ok:ls.every(l=> ctx.measureText(l).width <= largeur && !(l.endsWith("…") && !/…/.test(texte || ""))), propre:d.propre };
+    return { t, ls, h:(ls.length - 1) * t * 1.18 + t, ok:ls.every(l=> ctx.measureText(l).width <= largeur && !(l.endsWith("…") && !/…/.test(texte || ""))), propre:d.propre };
   };
   // l'accroche n'est JAMAIS coupée : elle rétrécit (jusqu'à tMin) et prend jusqu'à 6 lignes ; trop = true si elle ne tient pas quand même
   for(let t = tMax; t >= tMin; t -= 2){ const r = essai(t, d.texte); if(r.ok && r.h <= hMax && r.ls.length <= 6) return r; }
@@ -216,7 +216,7 @@ async function dessineUne(ctx, s, style){
   const photoV = !pers.length && cleV && typeof VIGNETTES !== "undefined" ? VIGNETTES[cleV] : null;
   const imgV = photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "") ? await storyImage(photoV.chemin) : null;
   const dispo = Y_BAS - Y_HAUT;
-  const tMax = propre ? (pers.length ? 118 : 156) : (pers.length ? 84 : 100);
+  const tMax = propre ? (pers.length ? 108 : 128) : (pers.length ? 84 : 100);
   // Sous le titre : l'essentiel (champ `essentiel`, entier), à défaut le titre de presse cité (entier), à défaut « — média ». Jamais de phrase coupée : on réduit la police,
   // on ajoute des lignes, puis on retire d'abord les éléments secondaires (photo, pastilles de médias) ; niveau 1 sensible : jamais de titre de presse cité
   const essentielTxt = s.sensible ? "" : norm(s.essentiel || s.titrePropre?.essentiel);
@@ -231,18 +231,18 @@ async function dessineUne(ctx, s, style){
     let ql = [], te = 0, hA = 14 + 32;
     if(at.k === "q"){ ctx.font = `600 32px "Newsreader"`; ql = citation(ctx, titreCite(a0.titre), larg - 28); if(ql.length > at.q) continue; hA = 18 + (ql.length - 1) * 32 * 1.2 + 32 + 16 + 30; }
     if(at.k === "e"){
-      for(let t = 44; t >= 34 && !te; t -= 2){ ctx.font = `600 ${t}px "Public Sans"`; const l = storyLignes(ctx, at.texte, larg - 28, 99); if(l.every(x=> ctx.measureText(x).width <= larg - 28 && !(x.endsWith("…") && !/…/.test(at.texte)))){ te = t; ql = l; } }
+      for(let t = 44; t >= 34 && !te; t -= 2){ ctx.font = `600 ${t}px "Public Sans"`; const l = storyLignesEq(ctx, at.texte, larg - 28); if(l.every(x=> ctx.measureText(x).width <= larg - 28 && !(x.endsWith("…") && !/…/.test(at.texte)))){ te = t; ql = l; } }
       if(!te) continue;
-      hA = 18 + 40 + (ql.length - 1) * te * 1.22 + te + 20;
+      hA = 34 + 40 + (ql.length - 1) * te * 1.22 + te + 20;
     }
-    for(const cb of combos){
+    for(const tMinTitre of [72, 52]) for(const cb of combos){ // d'abord un gros titre (≥ 72 px) en retirant photo et pastilles, puis seulement un titre plus petit (≥ 52 px)
       const hMed = cb.med ? hMedias : 0, rImg = cb.img && imgV ? 430 : 0;
-      for(let t = tMax; t >= 52; t -= 2){
+      for(let t = tMax; t >= tMinTitre; t -= 2){
         ctx.font = `700 ${t}px "Newsreader"`;
-        const ls = propre ? storyLignes(ctx, titreTexte, larg, 99) : citation(ctx, titreCite(a0.titre), larg);
+        const ls = propre ? storyLignesEq(ctx, titreTexte, larg) : citation(ctx, titreCite(a0.titre), larg);
         if(!ls.every(l=> ctx.measureText(l).width <= larg && !(l.endsWith("…") && !/…/.test(titreTexte)))) continue;
-        const hT = (ls.length - 1) * t * 1.12 + t;
-        if(ls.length > 6 || hT > dispo * 0.6) continue; // le titre ne prend pas toute la page : 6 lignes et 60 % de la hauteur au plus
+        const hT = (ls.length - 1) * t * 1.18 + t;
+        if(ls.length > (tMinTitre >= 72 ? 4 : 6) || hT > dispo * 0.6) continue; // le titre ne prend pas toute la page : 6 lignes et 60 % de la hauteur au plus
         const tot = hT + hA + gap + hMed + (pers.length ? gap + mp.h : 0);
         if(tot + rImg > dispo) continue;
         // avec une citation de presse, le titre doit rester gros (≥ 88 px) ; sinon on passe à la variante plus courte
@@ -261,7 +261,7 @@ async function dessineUne(ctx, s, style){
   const ec = Math.min(extra / 4, pers.length ? 40 : 110);
   let y = Y_HAUT + (pers.length ? Math.min(extra * 0.1, 20) : Math.min(extra * 0.22, 190));
   ctx.font = `700 ${plan.t}px "Newsreader"`;
-  y += lignes(ctx, plan.ls, marge, y, plan.t, 1.12, "#fff");
+  y += lignes(ctx, plan.ls, marge, y, plan.t, 1.18, "#fff");
   // attribution
   if(plan.at.k === "q"){
     y += 18 + ec / 2;
@@ -273,8 +273,9 @@ async function dessineUne(ctx, s, style){
     y += hq + 16 + 30;
     ctx.fillStyle = ROSE; ctx.fillRect(marge, yq, 8, y - yq - 4);
   } else if(plan.at.k === "e"){
-    y += 18 + ec / 2;
+    y += 34 + ec / 2;
     const yq = y;
+    ctx.fillStyle = "rgba(255,255,255,0.22)"; ctx.fillRect(marge, yq - 17, larg, 2); // filet de séparation
     ctx.font = `800 24px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "4px"; ctx.fillText("L'ESSENTIEL", marge + 28, y + 22); ctx.letterSpacing = "0px";
     y += 40;
     ctx.font = `600 ${plan.te}px "Public Sans"`;
@@ -362,7 +363,7 @@ async function dessineDirect(ctx, s){
   if(!plan || plan.f.trop) return null; // le titre ne tient pas en entier : pas de story plutôt qu'une phrase coupée
   let y = 438;
   ctx.font = `700 ${plan.f.t}px "Newsreader"`;
-  y += lignes(ctx, plan.f.ls, marge, y, plan.f.t, 1.12, couleurTitre(plan.f)) + 46;
+  y += lignes(ctx, plan.f.ls, marge, y, plan.f.t, 1.18, couleurTitre(plan.f)) + 46;
   for(const b of plan.bl){
     ctx.fillStyle = "rgba(255,255,255,0.18)"; ctx.fillRect(marge, y, larg, 2);
     ctx.fillStyle = ROSE; ctx.beginPath(); ctx.arc(marge + 8, y + 26 + plan.tq * 0.5, 7, 0, 2 * Math.PI); ctx.fill();

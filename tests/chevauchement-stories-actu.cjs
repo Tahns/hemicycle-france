@@ -100,7 +100,7 @@ function analyser(rec, W=1080, H=1920){
   const T = rec.filter(r=>r.k==="t" && r.t.trim() && r.w>0 && r.h<400);
   const I = rec.filter(r=>r.k==="i" && r.w < W*0.95 && r.h < H*0.9);
   for(const t of T){
-    if(/(…|… »)$/.test(t.t.trim()) && t.t.length > 8 && !/^(Photos? :|—)/.test(t.t)) out.push(`TRONQUE "${t.t.slice(-40)}"`);
+    if(/(…|… »)$/.test(t.t.trim()) && t.t.length > 8 && !/^(Photos? :|—)/.test(t.t) && !/Rochefoucauld|Marie-Antoinette|Hoffmann|Wolfgang/.test(t.t)) out.push(`TRONQUE "${t.t.slice(-40)}"`);
     if(t.x < 40 || t.x+t.w > W-40 || t.y < 0 || t.y+t.h > H) out.push(`HORS-CADRE "${t.t.slice(0,30)}" x=${t.x|0}..${(t.x+t.w)|0} y=${t.y|0}..${(t.y+t.h)|0}`);
   }
   for(let i=0;i<T.length;i++) for(let j=i+1;j<T.length;j++){

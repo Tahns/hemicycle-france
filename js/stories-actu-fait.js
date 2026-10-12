@@ -23,7 +23,7 @@ function mesurer(ctx, txt, poids, taille, fam = PUB, ls = 0){
 }
 function lignes(ctx, txt, poids, taille, fam, largeur, max){
   ctx.font = fnt(poids, taille, fam); ctx.letterSpacing = "0px";
-  return storyLignes(ctx, txt, largeur, max);
+  return max >= 99 ? storyLignesEq(ctx, txt, largeur) : storyLignes(ctx, txt, largeur, max);
 }
 // Plus grande taille (entre tMax et tMin) pour laquelle le texte ENTIER tient dans la largeur, sur au plus hMax de haut ; à défaut sa dernière proposition complète
 // (terminée par un point, jamais « … ») ; null si rien ne tient : l'appelant n'affiche alors pas le bloc
@@ -111,6 +111,7 @@ function carte(ctx, d, tq, x, y, w, dessiner, { tc = 27 } = {}){
   if(!(d.essentiel || d.citation || d.contexte?.length || d.video)) return 0;
   const wi = w - 96, xi = x + 48, lh = tq * 1.26;
   let c = y + 44;
+  if(d.essentiel && tq < 34) return Infinity; // l'essentiel reste lisible sur téléphone : 34 px au minimum
   const ess = d.essentiel ? lignes(ctx, d.essentiel, 700, tq, PUB, wi, 99) : null;
   if(ess && !entier(ess, d.essentiel)) return Infinity;
   const tCit = d.essentiel ? Math.max(24, tq - 10) : tq, lhC = tCit * 1.26;
@@ -228,8 +229,8 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   let tnMax = 300; while(tnMax > 44 && largeurChiffre(ctx, jt, tnMax) > LARG) tnMax -= 2; // chiffre très long : il rétrécit plutôt que de sortir de l'image
   const unite = String(ch.unite || "").trim();
   // Mise en page du haut : chiffre, unité, notre titre
-  const fu = unite ? ajuster(ctx, unite, { poids: 700, tMax: 84, tMin: 52, hMax: 300, max: 4, inter: 1.1 }) : null;
-  const ft = ajuster(ctx, titre, { poids: 600, tMax: 66, tMin: 52, hMax: 400, max: 5, inter: 1.08, coupe: false }); // l'accroche n'est jamais coupée
+  const fu = unite ? ajuster(ctx, unite, { poids: 700, tMax: 84, tMin: 52, hMax: 300, max: 4, inter: 1.18 }) : null;
+  const ft = ajuster(ctx, titre, { poids: 600, tMax: 66, tMin: 52, hMax: 400, max: 5, inter: 1.18, coupe: false }); // l'accroche n'est jamais coupée
   if(!ft) return null;
   const hero = tn => {
     const yN = y0 + 56 + Math.round(tn * 0.71);
@@ -241,7 +242,7 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   let choix = null, dc = d;
   for(const dv of variantesCarte(d)){
     for(const tq of [38, 34, 30, 28, 26]){
-      for(let tn = tnMax; tn >= Math.min(tnMax, Math.max(130, tnMax * 0.6)); tn -= 10){
+      for(let tn = tnMax; tn >= Math.min(tnMax, Math.max(110, tnMax * 0.45)); tn -= 10){
         const h = hero(tn);
         if(carte(ctx, dv, tq, marge, 0, LARG, false) <= bas - h.bas - 40){ choix = { tn, tq, h }; break; }
       }
@@ -252,8 +253,8 @@ STORY_PLUS.chiffre = async (ctx, info) => {
   if(!choix) return null; // l'accroche et le chiffre ne laissent aucune place : pas de story plutôt qu'un texte coupé
   const { tn, h } = choix;
   ecrireChiffre(ctx, jt, marge, h.yN, tn);
-  if(h.fu) ecrireLignes(ctx, h.fu, marge, h.yU, { poids: 700, inter: 1.1 });
-  ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, couleur: CIEL, inter: 1.08 });
+  if(h.fu) ecrireLignes(ctx, h.fu, marge, h.yU, { poids: 700, inter: 1.18 });
+  ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, couleur: CIEL, inter: 1.18 });
   const hc = carte(ctx, dc, choix.tq, marge, 0, LARG, false);
   if(hc) carte(ctx, dc, choix.tq, marge, bas - hc, LARG, hc);
   return { nom: nomFichier("chiffre", s) };
@@ -299,7 +300,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   const uniq = [...new Set(credits)];
   const yPied = pied(ctx, { medias, source: uniq.length ? `Photos : ${uniq.join(" ; ")}.` : "" });
   const bas = yPied - 26;
-  const ft = ajuster(ctx, titre, { poids: 600, tMax: 92, tMin: 52, hMax: 5 * 92 * 1.04, max: 5, inter: 1.1, coupe: false }); // l'accroche n'est jamais coupée
+  const ft = ajuster(ctx, titre, { poids: 600, tMax: 92, tMin: 52, hMax: 5 * 92 * 1.18, max: 5, inter: 1.18, coupe: false }); // l'accroche n'est jamais coupée
   if(!ft) return null;
   const yT = y0 + 40, yP0 = yT + ft.h + 44;
   // noms (2 lignes au plus) et partis sous chaque portrait
@@ -318,7 +319,7 @@ STORY_PLUS.facea = async (ctx, info) => {
   }
   if(!choix){ const S = 216, nn = Math.max(...nl(S).map(l => l.length)), hNoms = 22 + nn * 42 + 56; if(yP0 + S + hNoms > bas) return null; choix = { S, nn, hNoms, tc: 24, dv: {} }; }
   const { S, nn, tc } = choix, gap = 80, x1 = marge + Math.round((LARG - 2 * S - gap) / 2), x2 = x1 + S + gap;
-  ecrireLignes(ctx, ft, marge, yT, { poids: 600, inter: 1.1 });
+  ecrireLignes(ctx, ft, marge, yT, { poids: 600, inter: 1.18 });
   const cy = yP0 + S / 2, lignesNoms = nl(S);
   [x1, x2].forEach((x, i) => {
     portrait(ctx, imgs[i], pers[i].nom, pers[i].parti, x, yP0, S);
@@ -372,12 +373,13 @@ STORY_PLUS.date = async (ctx, info) => {
   const rangees = [[]]; let xr = 0;
   for(const t of puce){ const w = pw(t); if(xr + w > LARG && rangees[rangees.length - 1].length){ rangees.push([]); xr = 0; } rangees[rangees.length - 1].push(t); xr += w + 14; }
   const hPuces = rangees.length * 56 + (rangees.length - 1) * 14;
-  const ft = ajuster(ctx, titre, { poids: 600, tMax: 80, tMin: 52, hMax: 5 * 80 * 1.06, max: 5, inter: 1.06, coupe: false }); // l'accroche n'est jamais coupée
-  if(!ft) return null;
-  const hero = (T, pu = true) => {
+  // l'accroche n'est jamais coupée : plusieurs tailles possibles (80 à 52 px), la plus grande qui laisse la place à l'essentiel entier
+  const fts = [80, 72, 64, 58, 52].map(t => ajuster(ctx, titre, { poids: 600, tMax: t, tMin: t, hMax: 5 * 80 * 1.18, max: 5, inter: 1.18, coupe: false })).filter(Boolean);
+  if(!fts.length) return null;
+  const hero = (T, pu = true, ft = fts[0]) => {
     const yJ = y0 + 52 + Math.round(T * 0.72);
     const tm = Math.min(120, Math.floor(120 * (LARG / Math.max(LARG, mesurer(ctx, mois, 800, 120, PUB, 6)))));
-    const yM = yJ + 30 + Math.round(tm * 0.72);
+    const yM = yJ + 46 + Math.round(tm * 0.72);
     const yT = yM + 40, yPu = yT + ft.h + 26;
     return { yJ, yM, tm, ft, yT, yPu, fin: pu ? yPu + hPuces : yT + ft.h };
   };
@@ -385,9 +387,12 @@ STORY_PLUS.date = async (ctx, info) => {
   for(const dv of variantesCarte(d)){
     for(const tc of [27]){
       for(const pu of [true, false]){ // les pastilles (jour, rubrique, médias) sont secondaires : retirées avant de couper un texte
-        for(let T = 440; T >= 200; T -= 20){
-          const h = hero(T, pu);
-          if(poserOk(ctx, dv, bas - h.fin - 34, { tc })){ choix = { T, h, tc, dv, pu }; break; }
+        for(const ft of fts){
+          for(let T = 440; T >= 120; T -= 20){
+            const h = hero(T, pu, ft);
+            if(poserOk(ctx, dv, bas - h.fin - 34, { tc })){ choix = { T, h, tc, dv, pu }; break; }
+          }
+          if(choix) break;
         }
         if(choix) break;
       }
@@ -416,7 +421,7 @@ STORY_PLUS.date = async (ctx, info) => {
     if(compte.petit) ecrire(ctx, compte.petit.toUpperCase(), L - marge, yb - fc.t - 24, { poids: 800, taille: 30, couleur: ROSE2, align: "right", ls: 4 });
   }
   ecrire(ctx, mois, marge + 4, h.yM, { poids: 800, taille: h.tm, couleur: ROSE2, ls: 6 });
-  ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, inter: 1.06 });
+  ecrireLignes(ctx, h.ft, marge, h.yT, { poids: 600, inter: 1.18 });
   // pastilles
   if(choix.pu) rangees.forEach((r, i) => {
     let x = marge; const y = h.yPu + i * 70;
