@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-12T06:30:55.669Z",
+ "lastUpdated": "2026-10-12T06:35:31.558Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,7 +80,7 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Dauphiné libéré",
@@ -157,16 +157,15 @@
     "second"
    ],
    "medias": [
-    "La Dépêche",
-    "L'Obs",
-    "L'Express",
     "Sud Ouest",
+    "La Dépêche",
+    "L'Express",
     "Le Monde",
     "20 Minutes",
     "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
     "France 24",
     "BFMTV",
+    "L'Obs",
     "Nice-Matin",
     "Libération",
     "RFI",
@@ -174,26 +173,31 @@
     "Valeurs actuelles",
     "Le JDD"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 13,
    "sources": [
-    "La Dépêche",
-    "L'Obs",
-    "L'Express",
     "Sud Ouest",
+    "La Dépêche",
+    "L'Express",
     "Le Monde",
     "20 Minutes",
     "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
     "France Médias Monde",
     "BFMTV",
+    "L'Obs",
     "Nice-Matin / Le Télégramme",
     "Libération",
     "Valeurs actuelles",
     "Le JDD"
    ],
-   "nb": 45,
-   "derniere": "2026-10-12T06:17:05.000Z",
+   "nb": 42,
+   "derniere": "2026-10-12T06:30:49.000Z",
    "articles": [
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : les choses sérieuses commencent pour Raphaël Glucksmann après sa victoire à la primaire, avec une famille politique à apaiser et rassembler",
+     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/presidentielle-2027-les-choses-serieuses-commencent-pour-raphael-glucksmann-apres-sa-victoire-a-la-primaire-avec-une-famille-politique-a-apaiser-et-rassembler-31029723.php",
+     "date": "2026-10-12T06:30:49.000Z"
+    },
     {
      "media": "La Dépêche",
      "titre": "DIRECT. Présidentielle 2027 : un nouveau sondage place Jean-Luc Mélenchon qualifié au second tour dans chaque hypothèse, devant Édouard Philippe ou Gabriel Attal",
@@ -201,23 +205,10 @@
      "date": "2026-10-12T06:17:05.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
-     "date": "2026-10-12T06:00:17.000Z"
-    },
-    {
      "media": "L'Express",
      "titre": "Présidentielle 2027 : pour Raphaël Glucksmann, enfin les difficultés commencent",
      "url": "https://www.lexpress.fr/politique/presidentielle-2027-pour-raphael-glucksmann-enfin-les-difficultes-commencent-HJUP6SKLJFALHH2SSRDXHWGVDI/",
      "date": "2026-10-12T05:18:58.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "VIDEOS. Présidentielle 2027 : Raphaël Glucksmann enfariné dimanche à la sortie du bar parisien où il célébrait sa victoire à la primaire",
-     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/videos-presidentielle-2027-raphael-glucksmann-enfarine-dimanche-a-la-sortie-du-bar-parisien-ou-il-celebrait-sa-victoire-a-la-primaire-31029295.php",
-     "date": "2026-10-12T04:27:52.000Z",
-     "video": true
     },
     {
      "media": "Le Monde",
@@ -238,12 +229,6 @@
      "date": "2026-10-11T21:07:41.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
      "media": "France 24",
      "titre": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate pour la présidentielle",
      "url": "https://www.france24.com/fr/france/20261011-glucksmann-largement-%C3%A9lu-candidat-de-la-gauche-sociale-d%C3%A9mocrate-pour-la-pr%C3%A9sidentielle-france",
@@ -255,6 +240,12 @@
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-victoire-de-raphael-glucksmann-a-la-primaire-sociale-democrate-a-partir-de-maintenant-plus-une-seconde-ne-doit-etre-perdue-declare-le-candidat-a-la-presidentielle-devant-ses-partisans_VN-202610110379.html",
      "date": "2026-10-11T20:01:08.000Z",
      "video": true
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Glucksmann balaie Faure et impose sa ligne pour la présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261011.OBS119130/glucksmann-balaie-faure-et-impose-sa-ligne-pour-la-presidentielle.html",
+     "date": "2026-10-11T18:59:11.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -303,7 +294,6 @@
    "medias": [
     "France Inter",
     "BFMTV",
-    "Dernières Nouvelles d'Alsace",
     "France 24",
     "Mediapart",
     "Nice-Matin",
@@ -316,11 +306,10 @@
     "La Dépêche",
     "Europe 1"
    ],
-   "mediasDistincts": 13,
+   "mediasDistincts": 12,
    "sources": [
     "France Inter",
     "BFMTV",
-    "Dernières Nouvelles d'Alsace",
     "France Médias Monde",
     "Mediapart",
     "Nice-Matin",
@@ -332,7 +321,7 @@
     "La Dépêche",
     "Europe 1"
    ],
-   "nb": 28,
+   "nb": 27,
    "derniere": "2026-10-12T05:15:00.000Z",
    "articles": [
     {
@@ -349,16 +338,17 @@
      "video": true
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
      "media": "France 24",
      "titre": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate pour la présidentielle",
      "url": "https://www.france24.com/fr/france/20261011-glucksmann-largement-%C3%A9lu-candidat-de-la-gauche-sociale-d%C3%A9mocrate-pour-la-pr%C3%A9sidentielle-france",
      "date": "2026-10-11T20:30:35.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Victoire de Raphaël Glucksmann à la primaire sociale-démocrate: \"Je suis content d'avoir fait cette primaire\", déclare Jérôme Guedj, candidat perdant",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-victoire-de-raphael-glucksmann-a-la-primaire-sociale-democrate-je-suis-content-d-avoir-fait-cette-primaire-declare-jerome-guedj-candidat-perdant_VN-202610110386.html",
+     "date": "2026-10-11T20:29:06.000Z",
+     "video": true
     },
     {
      "media": "Mediapart",
@@ -428,18 +418,19 @@
    "motifs": [
     "lycéens",
     "mobilisation",
-    "mouvement"
+    "mouvement",
+    "police"
    ],
    "medias": [
+    "Europe 1",
     "RFI",
-    "Dernières Nouvelles d'Alsace",
     "Le Monde",
     "Sud Ouest",
     "Le JDD",
     "L'Humanité",
     "France 24",
     "Mediapart",
-    "Europe 1",
+    "La Dépêche",
     "Le Télégramme",
     "Le Figaro",
     "20 Minutes",
@@ -447,32 +438,32 @@
    ],
    "mediasDistincts": 11,
    "sources": [
+    "Groupe Bolloré",
     "France Médias Monde",
-    "Dernières Nouvelles d'Alsace",
     "Le Monde",
     "Sud Ouest",
-    "Groupe Bolloré",
     "L'Humanité",
     "Mediapart",
+    "La Dépêche",
     "Le Télégramme",
     "Le Figaro",
     "20 Minutes",
     "Nice-Matin"
    ],
-   "nb": 29,
-   "derniere": "2026-10-12T05:07:18.000Z",
+   "nb": 27,
+   "derniere": "2026-10-12T06:31:20.000Z",
    "articles": [
+    {
+     "media": "Europe 1",
+     "titre": "Michel Barnier : «La France insoumise cherche à tester les forces de police»",
+     "url": "https://www.europe1.fr/politique/michel-barnier-la-france-insoumise-cherche-a-tester-les-forces-de-police-1140974?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-12T06:31:20.000Z"
+    },
     {
      "media": "RFI",
      "titre": "Mobilisation des lycéens en France: la suppression de Parcoursup, au cœur des revendications",
      "url": "https://www.rfi.fr/fr/france/20261012-mobilisation-des-lyc%C3%A9ens-en-france-la-suppression-de-parcoursup-au-c%C5%93ur-des-revendications",
      "date": "2026-10-12T05:07:18.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.dna.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "date": "2026-10-12T04:15:00.000Z"
     },
     {
      "media": "Le Monde",
@@ -487,12 +478,6 @@
      "date": "2026-10-11T19:46:09.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation",
-     "url": "https://www.dna.fr/education/2026/10/11/lyceens-emplois-du-temps-batiments-ce-qui-ressort-des-contributions-sur-la-plateforme-de-concertation",
-     "date": "2026-10-11T18:00:00.000Z"
-    },
-    {
      "media": "Le JDD",
      "titre": "Blocus : «Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», alerte Nicolas Dupont-Aignan",
      "url": "https://www.lejdd.fr/politique/blocus-ce-nest-plus-un-mouvement-lyceen-cest-un-debut-de-guerre-civile-alerte-nicolas-dupont-aignan-185805",
@@ -503,6 +488,12 @@
      "titre": "Alors que la semaine s’annonce sous haute tension policière, le mouvement lycéen se structure",
      "url": "https://www.humanite.fr/politique/mouvement-lyceen/alors-que-la-semaine-sannonce-sous-haute-tension-policiere-le-mouvement-lyceen-se-structure",
      "date": "2026-10-11T15:52:14.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Colère lycéenne : Marie-Estelle Dupont dénonce une «mascarade politique cynique»",
+     "url": "https://www.lejdd.fr/Societe/colere-lyceenne-marie-estelle-dupont-denonce-une-mascarade-politique-cynique-185757",
+     "date": "2026-10-11T15:33:26.000Z"
     },
     {
      "media": "France 24",
@@ -517,10 +508,10 @@
      "date": "2026-10-11T10:39:05.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "«Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», pointe Nicolas Dupont-Aignan",
-     "url": "https://www.europe1.fr/politique/ce-nest-plus-un-mouvement-lyceen-cest-un-debut-de-guerre-civile-pointe-nicolas-dupont-aignan-1138352?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-11T08:09:51.000Z"
+     "media": "La Dépêche",
+     "titre": "\"Ensauvagement chronique\", \"insécurité galopante\" : à Castres, le maire RN Florian Azéma affiche les muscles de sa police municipale",
+     "url": "https://www.ladepeche.fr/2026/10/11/ensauvagement-chronique-insecurite-galopante-a-castres-le-maire-rn-florian-azema-affiche-les-muscles-de-sa-police-municipale-13592576.php",
+     "date": "2026-10-11T09:01:02.000Z"
     },
     {
      "media": "Le Télégramme",
@@ -552,12 +543,11 @@
  ],
  "sujets": [
   {
-   "medias": 6,
-   "mediasDistincts": 6,
+   "medias": 5,
+   "mediasDistincts": 5,
    "sources": [
     "RFI",
     "Le Monde",
-    "Dernières Nouvelles d'Alsace",
     "Sud Ouest",
     "Le Télégramme",
     "Libération"
@@ -590,12 +580,6 @@
      "date": "2026-10-11T16:12:14.000Z"
     },
     {
-     "titre": "Politique. Une procédure de dissolution engagée contre l'association d'Alain Soral, Égalité et Réconciliation",
-     "url": "https://www.dna.fr/politique/2026/10/11/une-procedure-de-dissolution-engagee-contre-l-association-d-alain-soral-egalite-et-reconciliation",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T15:40:00.000Z"
-    },
-    {
      "titre": "Extrême droite : une procédure de dissolution engagée contre l’association Égalité et Réconciliation d’Alain Soral",
      "url": "https://www.sudouest.fr/societe/racisme/extreme-droite-une-procedure-de-dissolution-engagee-contre-l-association-egalite-et-reconciliation-d-alain-soral-31024024.php",
      "media": "Sud Ouest",
@@ -621,6 +605,76 @@
    },
    "fait": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
    "accroche": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral"
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 4,
+   "sources": [
+    "France 24 / Ouest-France",
+    "Sud Ouest",
+    "20 Minutes",
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-12T05:52:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
+     "url": "https://www.france24.com/fr/france/20261012-raphael-glucksmann-enfarin%C3%A9-apr%C3%A8s-victoire-primaire-gauche-sociale-d%C3%A9mocrate",
+     "media": "France 24",
+     "date": "2026-10-12T05:52:11.000Z"
+    },
+    {
+     "titre": "VIDEOS. Présidentielle 2027 : Raphaël Glucksmann enfariné dimanche à la sortie du bar parisien où il célébrait sa victoire à la primaire",
+     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/videos-presidentielle-2027-raphael-glucksmann-enfarine-dimanche-a-la-sortie-du-bar-parisien-ou-il-celebrait-sa-victoire-a-la-primaire-31029295.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T04:27:52.000Z",
+     "video": true
+    },
+    {
+     "titre": "Présidentielle 2027 : Raphaël Glucksmann enfariné à Paris à l’issue de sa victoire à la primaire",
+     "url": "https://www.20minutes.fr/politique/4253331-20261012-presidentielle-2027-raphael-glucksmann-enfarine-paris-issue-victoire-primaire?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-11T23:52:07.000Z"
+    },
+    {
+     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
+     "url": "https://www.ouest-france.fr/politique/raphael-glucksmann/raphael-glucksmann-enfarine-apres-sa-victoire-a-la-primaire-de-la-gauche-sociale-democrate-6a49b536-c5c5-11f1-bba2-d026901fbfe4?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-11T22:54:33.000Z"
+    },
+    {
+     "titre": "REPLAY. Primaire de la gauche : Raphaël Glucksmann enfariné après sa soirée de victoire",
+     "url": "https://www.ladepeche.fr/2026/10/11/direct-primaire-de-la-gauche-glucksmann-favori-royal-en-embuscade-qui-arrivera-en-tete-du-premier-tour-suivez-lannonce-des-resultats-13595853.php",
+     "media": "La Dépêche",
+     "date": "2026-10-11T20:55:23.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
   },
   {
    "medias": 4,
@@ -1066,108 +1120,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Dernières Nouvelles d'Alsace",
-    "RFI"
-   ],
-   "derniere": "2026-10-11T21:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027: Raphaël Glucksmann désigné candidat de la gauche sociale-démocrate au terme de la primaire",
-     "url": "https://www.rfi.fr/fr/france/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-d%C3%A9sign%C3%A9-candidat-de-la-gauche-sociale-d%C3%A9mocrate-au-terme-de-la-primaire",
-     "media": "RFI",
-     "date": "2026-10-11T16:35:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "La Dépêche",
-    "Libération"
-   ],
-   "derniere": "2026-10-11T20:55:23.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "REPLAY. Primaire de la gauche : Raphaël Glucksmann enfariné après sa soirée de victoire",
-     "url": "https://www.ladepeche.fr/2026/10/11/direct-primaire-de-la-gauche-glucksmann-favori-royal-en-embuscade-qui-arrivera-en-tete-du-premier-tour-suivez-lannonce-des-resultats-13595853.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T20:55:23.000Z"
-    },
-    {
-     "titre": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann : «Laissez-nous savourer la victoire !»",
-     "url": "https://www.liberation.fr/politique/a-la-soiree-de-la-primaire-ps-remportee-par-raphael-glucksmann-laissez-nous-savourer-la-victoire-20261011_6IJD6HZPNRFERK57TMBVODCAC4/",
-     "media": "Libération",
-     "date": "2026-10-11T18:45:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann",
-   "accroche": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "BFMTV",
     "Sud Ouest"
    ],
@@ -1214,84 +1166,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Sud Ouest",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-11T19:46:09.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation des lycéens : les emplois du temps et l’état des bâtiments au cœur des plaintes sur la plateforme de concertation du gouvernement",
-     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-des-lyceens-les-emplois-du-temps-et-l-etat-des-batiments-au-coeur-des-plaintes-sur-la-plateforme-de-concertation-du-gouvernement-31027534.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-11T19:46:09.000Z"
-    },
-    {
-     "titre": "Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation",
-     "url": "https://www.dna.fr/education/2026/10/11/lyceens-emplois-du-temps-batiments-ce-qui-ressort-des-contributions-sur-la-plateforme-de-concertation",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "La Dépêche",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-11T16:40:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Philippe Tanguy",
-      "photo": "photos/deputes/PA795778.jpg",
-      "photoHd": "photos/deputes/hd/PA795778.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA795778",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"J'en ai viré beaucoup des dingues\", affirme Jean-Philippe Tanguy après l'éviction du RN d'une attachée parlementaire aux opinions racistes",
-     "url": "https://www.ladepeche.fr/2026/10/11/jen-ai-vire-beaucoup-des-dingues-affirme-jean-philippe-tanguy-apres-leviction-du-rn-dune-attachee-parlementaire-aux-opinions-racistes-13595954.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T16:40:38.000Z"
-    },
-    {
-     "titre": "Politique. « J'en ai viré beaucoup des dingues » : Jean-Philippe Tanguy réagit à l'éviction d'un attaché parlementaire RN",
-     "url": "https://www.dna.fr/politique/2026/10/11/j-en-ai-vire-beaucoup-des-dingues-jean-philippe-tanguy-reagit-a-l-eviction-d-un-attache-parlementaire-rn",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T15:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 2,
@@ -1380,43 +1254,6 @@
    },
    "fait": "Une Française figure parmi les blessés, annonce le ministère des Affaires étrangères",
    "accroche": "Une Française figure parmi les blessés, annonce le ministère des Affaires étrangères"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Dernières Nouvelles d'Alsace",
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-11T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Santé. Boissons énergisantes : « Il faut interdire leur vente aux moins de 16 ans »",
-     "url": "https://www.dna.fr/politique/2026/10/11/boissons-energisantes-il-faut-interdire-leur-vente-aux-moins-de-16-ans",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T10:00:00.000Z"
-    },
-    {
-     "titre": "DÉCRYPTAGE. Boissons énergisantes : Red Bull, Monster, Ciao Energy... pourquoi les députés veulent-ils les interdire aux moins de 16 ans ?",
-     "url": "https://www.ladepeche.fr/2026/10/11/decryptage-boissons-energisantes-red-bull-monster-ciao-energy-pourquoi-les-deputes-veulent-ils-les-interdire-aux-moins-de-16-ans-13592947.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T08:33:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Boissons énergisantes",
-    "origine": "recoupement"
-   },
-   "chiffre": {
-    "valeur": "16",
-    "unite": "ans"
-   }
   },
   {
    "medias": 2,
@@ -1567,54 +1404,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "France 24 / Ouest-France"
-   ],
-   "derniere": "2026-10-12T05:52:11.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
-     "url": "https://www.france24.com/fr/france/20261012-raphael-glucksmann-enfarin%C3%A9-apr%C3%A8s-victoire-primaire-gauche-sociale-d%C3%A9mocrate",
-     "media": "France 24",
-     "date": "2026-10-12T05:52:11.000Z"
-    },
-    {
-     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
-     "url": "https://www.ouest-france.fr/politique/raphael-glucksmann/raphael-glucksmann-enfarine-apres-sa-victoire-a-la-primaire-de-la-gauche-sociale-democrate-6a49b536-c5c5-11f1-bba2-d026901fbfe4?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "media": "Ouest-France",
-     "date": "2026-10-11T22:54:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "Nice-Matin / Le Télégramme"
    ],
    "derniere": "2026-10-11T18:59:03.000Z",
@@ -1736,30 +1525,198 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "BFMTV"
    ],
-   "derniere": "2026-10-12T06:30:00.000Z",
+   "derniere": "2026-10-12T06:32:57.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "personnes": [
+     {
+      "nom": "Philippe Brun",
+      "photo": "photos/deputes/PA793624.jpg",
+      "parti": "NI",
+      "lien": "#depute-PA793624",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Olivier Faure",
+      "photo": "photos/deputes/PA609332.jpg",
+      "photoHd": "photos/deputes/hd/PA609332.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA609332",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Décryptage. Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau",
-     "url": "https://www.dna.fr/economie/2026/10/12/loi-sur-les-tickets-restaurant-restaurateurs-et-grande-distribution-veulent-leur-part-du-gateau",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T06:30:00.000Z"
+     "titre": "DIRECT. Primaire socialiste: Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-raphael-glucksmann-large-vainqueur-de-la-primaire-socialiste-un-nouveau-sondage-conforte-marine-le-pen-en-tete-du-premier-tour_LN-202610120095.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:32:57.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Décryptage : actualité locale",
+    "titre": "Philippe Brun : appel sur la primaire socialiste et démocrate",
+    "origine": "regles"
+   },
+   "fait": "Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
+   "accroche": "Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Faure 3–4 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Philippe Brun : député NI (Eure) · Olivier Faure : premier secrétaire du Parti socialiste",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-12T06:31:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Michel Barnier",
+      "photo": "photos/deputes/PA368.jpg",
+      "photoHd": "photos/deputes/hd/PA368.jpg",
+      "parti": "LR",
+      "lien": "#depute-PA368",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Michel Barnier : «La France insoumise cherche à tester les forces de police»",
+     "url": "https://www.europe1.fr/politique/michel-barnier-la-france-insoumise-cherche-a-tester-les-forces-de-police-1140974?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-12T06:31:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Michel Barnier (Les Républicains) : essai lié à le maintien de l'ordre",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Michel Barnier : député LR (Paris)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-12T06:30:49.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : les choses sérieuses commencent pour Raphaël Glucksmann après sa victoire à la primaire, avec une famille politique à apaiser et rassembler",
+     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/presidentielle-2027-les-choses-serieuses-commencent-pour-raphael-glucksmann-apres-sa-victoire-a-la-primaire-avec-une-famille-politique-a-apaiser-et-rassembler-31029723.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T06:30:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Restaurateurs et grande distribution veulent leur part du gâteau",
-   "accroche": "Restaurateurs et grande distribution veulent leur part du gâteau"
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T06:29:46.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire PS-Place publique: Raphaël Glucksmann enfariné après sa victoire",
+     "url": "https://www.bfmtv.com/politique/video-primaire-ps-place-publique-raphael-glucksmann-enfarine-apres-sa-victoire_VN-202610120205.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:29:46.000Z",
+     "video": true
+    },
+    {
+     "titre": "Primaire PS-Place publique: Raphaël Glucksmann enfariné après sa victoire",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/primaire-ps-place-publique-raphael-glucksmann-enfarine-apres-sa-victoire_AV-202610110397.html",
+     "media": "BFMTV",
+     "date": "2026-10-11T21:38:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Primaire Parti socialiste-Place publique : Raphaël Glucksmann enfariné après sa victoire",
+   "accroche": "Primaire Parti socialiste-Place publique : Raphaël Glucksmann enfariné après sa victoire",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1827,159 +1784,11 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T06:12:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Philippe Brun",
-      "photo": "photos/deputes/PA793624.jpg",
-      "parti": "NI",
-      "lien": "#depute-PA793624",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Olivier Faure",
-      "photo": "photos/deputes/PA609332.jpg",
-      "photoHd": "photos/deputes/hd/PA609332.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA609332",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Primaire socialiste: Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-raphael-glucksmann-large-vainqueur-de-la-primaire-socialiste-un-nouveau-sondage-conforte-marine-le-pen-en-tete-du-premier-tour_LN-202610120095.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T06:12:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Philippe Brun : appel sur la primaire socialiste et démocrate",
-    "origine": "regles"
-   },
-   "fait": "Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
-   "accroche": "Philippe Brun appelle Olivier Faure \"à tirer les conséquences\" de sa défaite",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Faure 3–4 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Philippe Brun : député NI (Eure) · Olivier Faure : premier secrétaire du Parti socialiste",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T06:00:17.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "François Ruffin",
-      "photo": "photos/deputes/PA722142.jpg",
-      "photoHd": "photos/deputes/hd/PA722142.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA722142",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T06:00:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Ruffin 3 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "François Ruffin : député ECO (Somme)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T05:56:22.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Comment la lutte contre l’inceste est devenue un sujet majeur : « La société y est prête. Ce n’était pas le cas il y a quelques années »",
-     "url": "https://www.nouvelobs.com/societe/20261012.OBS119131/comment-la-lutte-contre-l-inceste-est-devenue-un-sujet-majeur-la-societe-y-est-prete-ce-n-etait-pas-le-cas-il-y-a-quelques-annees.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T05:56:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-12T05:49:00.000Z",
    "illustration": {
     "personnes": [
-     {
-      "nom": "Philippe Brun",
-      "photo": "photos/deputes/PA793624.jpg",
-      "parti": "NI",
-      "lien": "#depute-PA793624",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Olivier Faure",
-      "photo": "photos/deputes/PA609332.jpg",
-      "photoHd": "photos/deputes/hd/PA609332.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA609332",
-      "credit": "Assemblée nationale"
-     },
      {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
@@ -1988,34 +1797,28 @@
       "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
      }
     ],
-    "partis": [
-     "SOC"
-    ],
+    "partis": [],
     "theme": "election",
     "vignette": "election"
    },
    "articles": [
     {
-     "titre": "EN DIRECT, primaire à gauche : « Les socialistes ont dit qu’ils souhaitaient mettre fin à la politique de zig-zag d’Olivier Faure », estime Philippe Brun au lendemain de la victoire de Raphaël Glucksmann",
+     "titre": "EN DIRECT, primaire à gauche : « Je n’en peux plus de cette gauche qui ne croit pas à la victoire », clame Raphaël Glucksmann au lendemain de sa victoire",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/10/12/en-direct-primaire-a-gauche-les-socialistes-ont-dit-qu-ils-souhaitaient-mettre-fin-a-la-politique-de-zig-zag-d-olivier-faure-estime-philippe-brun-au-lendemain-de-la-victoire-de-raphael-glucksmann_6791926_6205049.html",
      "media": "Le Monde",
      "date": "2026-10-12T05:49:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : suivi en direct",
-    "origine": "regles"
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
      "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Faure 3–4 %, Glucksmann 9–13 %",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
      "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Philippe Brun : député NI (Eure) · Olivier Faure : premier secrétaire du Parti socialiste",
-     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -2900,6 +2703,76 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T04:58:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T04:58:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann",
+     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T04:58:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T04:58:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -2930,49 +2803,6 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T04:58:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T04:58:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -3106,6 +2936,49 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T04:58:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T04:58:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Emmanuel Macron",
       "photo": "photos/personnalites/emmanuel-macron.jpg",
       "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
@@ -3161,76 +3034,6 @@
    ],
    "titrePropre": {
     "titre": "Éric Zemmour : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T04:58:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T04:58:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T04:58:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T04:58:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -3321,49 +3124,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-12T04:27:52.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "VIDEOS. Présidentielle 2027 : Raphaël Glucksmann enfariné dimanche à la sortie du bar parisien où il célébrait sa victoire à la primaire",
-     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/videos-presidentielle-2027-raphael-glucksmann-enfarine-dimanche-a-la-sortie-du-bar-parisien-ou-il-celebrait-sa-victoire-a-la-primaire-31029295.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-12T04:27:52.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France Inter"
    ],
    "derniere": "2026-10-12T04:21:00.000Z",
@@ -3431,32 +3191,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-12T04:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.dna.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T04:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -3621,32 +3355,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-12T04:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "L’éditorial. Après la rupture",
-     "url": "https://www.dna.fr/politique/2026/10/12/apres-la-rupture",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T04:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : opinion d'un média",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-12T03:33:09.000Z",
@@ -3762,48 +3470,6 @@
     {
      "type": "sondage",
      "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %, Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-11T23:52:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Raphaël Glucksmann enfariné à Paris à l’issue de sa victoire à la primaire",
-     "url": "https://www.20minutes.fr/politique/4253331-20261012-presidentielle-2027-raphael-glucksmann-enfarine-paris-issue-victoire-primaire?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-11T23:52:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
@@ -3956,52 +3622,6 @@
      "type": "personnes",
      "texte": "Jordan Bardella : président du Rassemblement national",
      "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-11T21:38:37.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire PS-Place publique: Raphaël Glucksmann enfariné après sa victoire",
-     "url": "https://www.bfmtv.com/politique/parti-socialiste/primaire-ps-place-publique-raphael-glucksmann-enfarine-apres-sa-victoire_AV-202610110397.html",
-     "media": "BFMTV",
-     "date": "2026-10-11T21:38:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Primaire Parti socialiste-Place publique : Raphaël Glucksmann enfariné après sa victoire",
-   "accroche": "Primaire Parti socialiste-Place publique : Raphaël Glucksmann enfariné après sa victoire",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
     }
    ]
   },
@@ -4232,8 +3852,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Raphaël Glucksmann : déclaration sur primaire socialiste et démocrate",
-    "origine": "regles"
+    "titre": "Candidat",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -4474,6 +4094,32 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-11T19:46:09.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation des lycéens : les emplois du temps et l’état des bâtiments au cœur des plaintes sur la plateforme de concertation du gouvernement",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-des-lyceens-les-emplois-du-temps-et-l-etat-des-batiments-au-coeur-des-plaintes-sur-la-plateforme-de-concertation-du-gouvernement-31027534.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-11T19:46:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
   },
   {
    "medias": 1,
@@ -4802,61 +4448,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-11T19:21:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Alexis Corbière",
-      "photo": "photos/deputes/PA721210.jpg",
-      "photoHd": "photos/deputes/hd/PA721210.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA721210",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire sociale-démocrate : Alexis Corbière estime que Raphaël Glucksmann \"n'est pas lucide sur la réalité des rapports de force\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-primaire-sociale-democrate-alexis-corbiere-estime-que-raphael-glucksmann-n-est-pas-lucide-sur-la-realite-des-rapports-de-force_VN-202610110361.html",
-     "media": "BFMTV",
-     "date": "2026-10-11T19:21:38.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Alexis Corbière : déclaration sur la primaire socialiste et démocrate",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Alexis Corbière : député ECO (Seine-Saint-Denis)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -5237,9 +4828,9 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "Libération"
    ],
-   "derniere": "2026-10-11T18:45:00.000Z",
+   "derniere": "2026-10-11T18:45:28.000Z",
    "illustration": {
     "personnes": [
      {
@@ -5250,25 +4841,26 @@
       "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
      }
     ],
-    "partis": [],
+    "partis": [
+     "SOC"
+    ],
     "theme": "election",
     "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027. Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-sociale-democrate-comment-raphael-glucksmann-a-ecrase-le-match",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T18:45:00.000Z"
+     "titre": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann : «Laissez-nous savourer la victoire !»",
+     "url": "https://www.liberation.fr/politique/a-la-soiree-de-la-primaire-ps-remportee-par-raphael-glucksmann-laissez-nous-savourer-la-victoire-20261011_6IJD6HZPNRFERK57TMBVODCAC4/",
+     "media": "Libération",
+     "date": "2026-10-11T18:45:28.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
-    "origine": "regles",
-    "generique": true
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
+    "origine": "regles"
    },
-   "fait": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-   "accroche": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
+   "fait": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann",
+   "accroche": "A la soirée de la primaire socialiste, remportée par Raphaël Glucksmann",
    "contexte": [
     {
      "type": "sondage",
@@ -5512,6 +5104,370 @@
     "titre": "Candidat",
     "origine": "dossier"
    },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-11T18:09:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "REPLAY. Présidentielle 2027 : \"Il nous faut le droit de vote à 16 ans\", propose Jean-Luc Mélenchon face au mouvement des lycéens",
+     "url": "https://www.ladepeche.fr/2026/10/11/direct-presidentielle-2027-plus-de-107-000-personnes-ont-participe-au-vote-de-la-primaire-de-la-gauche-les-resultats-attendus-a-18-h-13595558.php",
+     "media": "La Dépêche",
+     "date": "2026-10-11T18:09:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Mélenchon 14–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Valeurs actuelles"
+   ],
+   "derniere": "2026-10-11T18:09:08.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Maintenant, c’est à Raphaël de faire le job » : le pari gagné de Glucksman à la primaire socialiste",
+     "url": "https://www.valeursactuelles.com/politique/maintenant-cest-a-raphael-de-faire-le-job-le-pari-gagne-de-glucksman-a-la-primaire-socialiste",
+     "media": "Valeurs actuelles",
+     "date": "2026-10-11T18:09:08.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le pari gagné de Glucksman à la primaire socialiste",
+   "accroche": "Le pari gagné de Glucksman à la primaire socialiste"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-11T18:00:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Prix des carburants : nouveaux bénéficiaires, montant doublé... le gouvernement détaille sa nouvelle aide aux \"grands rouleurs\"",
+     "url": "https://www.ladepeche.fr/2026/10/11/prix-des-carburants-nouveaux-beneficiaires-montant-double-le-gouvernement-detaille-sa-nouvelle-aide-aux-grands-rouleurs-13596050.php",
+     "media": "La Dépêche",
+     "date": "2026-10-11T18:00:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : annonces sur les finances publiques",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-11T17:59:16.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "En meeting à Clermont-Ferrand, Jean-Luc Mélenchon installe la jeunesse comme moteur de sa campagne",
+     "url": "https://www.humanite.fr/politique/france-insoumise/en-meeting-a-clermont-ferrand-jean-luc-melenchon-installe-la-jeunesse-comme-moteur-de-sa-campagne",
+     "media": "L'Humanité",
+     "date": "2026-10-11T17:59:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : Jean-Luc Mélenchon (La France insoumise)",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-11T17:55:26.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire socialiste : après la victoire écrasante de Raphaël Glucksmann, les socialistes landais « se mettent en ordre de bataille »",
+     "url": "https://www.sudouest.fr/landes/mont-de-marsan/primaire-socialiste-apres-la-victoire-ecrasante-de-raphael-glucksmann-les-socialistes-landais-se-mettent-en-ordre-de-bataille-31026520.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-11T17:55:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-11T17:54:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Ce résultat dit quelque chose de puissant » : Raphaël Glucksmann écrase la primaire sociale-démocrate et acte la rupture avec LFI",
+     "url": "https://www.humanite.fr/politique/emmanuel-maurel/ce-resultat-dit-quelque-chose-de-puissant-raphael-glucksmann-ecrase-la-primaire-sociale-democrate-et-acte-la-rupture-avec-lfi",
+     "media": "L'Humanité",
+     "date": "2026-10-11T17:54:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "La France insoumise : déclaration sur primaire socialiste et démocrate",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-11T17:53:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Les faire profiter de leur réseau professionnel et personnel » : des bénévoles recherchés à Villeneuve-sur-Lot pour devenir mentors de jeunes « vulnérables »",
+     "url": "https://www.sudouest.fr/initiatives/lot-et-garonne/les-faire-profiter-de-leur-reseau-professionnel-et-personnel-des-benevoles-recherches-a-villeneuve-sur-lot-pour-devenir-mentors-de-jeunes-vulnerables-30947207.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-11T17:53:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Des bénévoles recherchés à Villeneuve-sur-Lot pour devenir mentors de jeunes",
+   "accroche": "Des bénévoles recherchés à Villeneuve-sur-Lot pour devenir mentors de jeunes"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-11T17:50:21.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Vainqueur de la primaire, Raphaël Glucksmann promet «une campagne punk» pour la présidentielle",
+     "url": "https://www.liberation.fr/politique/elections/victoire-a-la-primaire-ps-raphael-glucksmann-promet-une-campagne-punk-pour-la-presidentielle-20261011_2DHRWSQNWNHVDLRSBXRH4VKSEI/",
+     "media": "Libération",
+     "date": "2026-10-11T17:50:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-11T17:42:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Sans le secteur non lucratif, l’État ne pourra pas développer de politiques sanitaires et sociales à la hauteur des enjeux », prévient Daniel Goldberg, président de l’Uniopss",
+     "url": "https://www.humanite.fr/societe/associations/sans-le-secteur-non-lucratif-letat-ne-pourra-developper-de-politiques-sanitaires-et-sociales-previent-daniel-goldberg-president-de-luniopss",
+     "media": "L'Humanité",
+     "date": "2026-10-11T17:42:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-11T17:31:59.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Résultats de la primaire socialiste : Raphaël Glucksmann élu dès le premier tour et propulsé vers la présidentielle",
+     "url": "https://www.liberation.fr/politique/elections/resultats-de-la-primaire-socialiste-raphael-glucksmann-elu-des-le-premier-tour-et-propulse-vers-la-presidentielle-20261011_HSXHVD45NJFOHG7JCKCGCYDVDY/",
+     "media": "Libération",
+     "date": "2026-10-11T17:31:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Raphaël Glucksmann élu dès le premier tour et propulsé vers la présidentielle",
+   "accroche": "Raphaël Glucksmann élu dès le premier tour et propulsé vers la présidentielle",
    "contexte": [
     {
      "type": "sondage",
