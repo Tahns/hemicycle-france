@@ -656,7 +656,7 @@ function siglesNonExpliques(texte) {
 // incises, citations, jour relatif retirés) mais jamais inversé ni enrichi. Champ d'AFFICHAGE : n'entre jamais dans les clés anti-doublon
 // (titrePropre.titre reste la clé). null quand aucun fait clair ne ressort de façon sûre : mieux vaut rien qu'un titre vague.
 // ─────────────────────────────────────────────────────────────────────────────
-const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 16;
+const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 16, FAIT_MAX_CAR = 95; // le rendu des stories coupe au-delà de 4 lignes : jamais plus de 16 mots ni ~95 caractères
 /** Formules creuses : elles annoncent un sujet sans dire le fait. */
 const FORMULES_CREUSES = /actualite (?:sur|de|du|des|autour)|ce qu'il faut (?:savoir|retenir)|ce qu'on (?:sait|retient)|ce que l'on (?:sait|retient)|l'essentiel|ce que (?:disent|dit|pensent)|tout (?:savoir|comprendre)|on vous (?:explique|dit)|\bvoici\b|\bvoila\b|decryptage|en ce moment|a la une|en direct|\bles reactions\b|ce qui change|ce qu'il faut|ce que l'on|\bles coulisses\b|\bretour sur\b|\bfocus sur\b|\bzoom sur\b|\bdossier\b/;
 /** Verbes d'opinion et mots de mise en scène : le fait n'est pas dit, une humeur l'est. */
@@ -691,7 +691,7 @@ const GUILLEMETS = "«\"“”»";
 function sansCitations(t) {
   let x = t;
   x = x.replace(/^[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*[,:]\s*/u, "");
-  x = x.replace(/\s*[,:]?\s*[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*$/u, (m, off) => (off >= 25 ? "" : m));
+  x = x.replace(/\s*[,:]\s*[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*$/u, (m, off) => (off >= 25 ? "" : m)); // citation finale APRÈS une virgule ou deux-points : détachée ; sans ponctuation (« attire « des dingues » »), c'est le complément du verbe : on la garde
   x = x.replace(/,\s*[«"“][^»"”]{3,120}?[»"”]\s*(?=,)/gu, "");
   x = x.replace(/\s*[«"“]\s*[^»"”]{20,120}?\s*[»"”]\s*(?=[,;.?]|$)/gu, "");
   x = x.replace(/,\s*(?:qui|que|dont|où|alors que|lequel|laquelle)\b[^,]{3,70},\s*/giu, " "); // incise relative : « Evreux, qui s'est joué à 520 voix, annulée… »
@@ -736,12 +736,38 @@ function candidatsDe(brut) {
       ajoute(x);
     }
   }
+  // Variantes de condensation (sens inchangé) : accroche trop longue ou mal tournée
+  for (const x of [...sorties]) for (const v of variantesCourtes(x)) ajoute(v);
   return [...sorties];
+}
+/** Raccourcis de formulation sans changer le fait (« a engagé une procédure de dissolution contre X » -> « engage la dissolution d'X »). */
+function raccourcisFixes(t) {
+  return t.replace(/\bEgalité\b/g, "Égalité")
+    .replace(/\b(?:a|ont) engagé une procédure de dissolution contre (?:l['’]association |le groupe |le mouvement )?(?=(\p{L}))/giu, (m, c) => `engage la dissolution ${/^[AEIOUYÉÈÊH]/i.test(c) ? "d'" : "de "}`);
+}
+const PP_FINAL = /\s+(?:à|au|aux|en|dans|devant|lors de|lors du|après|avant|sur|vers|pour|depuis|ce|cette)\s+[^,:;]+$/iu;
+/** Formes plus courtes d'une phrase : citation d'une ou deux mots collée à un nom propre retirée, complément de lieu ou de circonstance de tête retiré, raccourcis fixes, compléments de fin retirés un à un. Les contrôles de qualité (défautsFait) tranchent. */
+function variantesCourtes(x) {
+  const sortie = new Set();
+  const garde = (y) => { y = String(y || "").replace(/\s+/g, " ").replace(/^[,;:\s—–-]+|[,;:\s—–-]+$/g, "").trim(); if (y && y !== x && motsFait(y).length >= FAIT_MIN_MOTS) sortie.add(y); };
+  const bases = [x];
+  const r = raccourcisFixes(x); if (r !== x) { garde(r); bases.push(r); }
+  for (const b of [...bases]) {
+    const sq = b.replace(/\s*[«"“]\s*[^»"”]{2,40}?\s*[»"”]\s*(?=\p{Lu})/gu, " "); // « l'ignominie » Parcoursup -> Parcoursup (opinion en un mot collée à un nom propre)
+    if (sq !== b) { garde(sq); bases.push(sq); }
+    const sa = b.replace(/^(?:en|à|au|aux|dans|lors de|lors du|devant|depuis)\s+[^,]{3,50},\s+(?=\p{Lu})/u, ""); // « En meeting à Lyon, Gabriel Attal… » -> « Gabriel Attal… »
+    if (sa !== b) { garde(sa); bases.push(sa); }
+  }
+  for (const b of bases) {
+    let y = b;
+    for (let i = 0; i < 3 && (motsFait(y).length > FAIT_MAX_MOTS || y.length > FAIT_MAX_CAR); i++) { const z = y.replace(PP_FINAL, ""); if (z === y) break; y = z; garde(y); }
+  }
+  return [...sortie];
 }
 const aUnNomPropre = (t, personnes = []) => {
   const p = plat(t);
   if (personnes.some((x) => { const n = plat(x.nom), f = n.split(" ").slice(-1)[0]; return p.includes(n) || (f.length >= 4 && new RegExp("\\b" + f + "\\b").test(p)); })) return true;
-  const w = motsFait(t);
+  const w = motsFait(t.replace(/\s&\s/g, " et ")); // « Égalité & Réconciliation » : une association, pas un prénom + nom
   return w.some((x, i) => i > 0 && /^\p{Lu}/u.test(x) && /^\p{Lu}/u.test(w[i - 1]) && !MOTS_VIDES.has(plat(x)) && !INSTITUTIONS.has(plat(x)));
 };
 const PAS_VERBE_AIT = new Set(["souhait", "portrait", "attrait", "retrait", "extrait", "forfait", "benefait", "trait", "distrait", "mefait"]);
@@ -769,14 +795,14 @@ function aUnVerbe(t) {
 }
 const apostropheNue = (t) => plat(t).replace(/['’]/g, "'");
 /** Contrôle de qualité d'un titre-fait : liste des défauts (vide = bon). */
-function defautsFait(t, { personnes = [], judiciaire = false } = {}) {
+function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOTS, car = FAIT_MAX_CAR, ouverture = false } = {}) {
   const d = [];
   const n = motsFait(t).length, p = apostropheNue(t);
   if (n < FAIT_MIN_MOTS) d.push("trop court");
-  if (n > FAIT_MAX_MOTS) d.push("trop long");
+  if (n > max || (car && t.length > car)) d.push("trop long");
   if (/…|\.{2,}/.test(t)) d.push("tronqué");
   if (/[!]/.test(t) || /\?\s*\S/.test(t)) d.push("exclamation ou plusieurs phrases");
-  if (/^(?:avec|malgre|apres|avant|face a|pour|sans|sous|devant|en)\b[^,]{0,60},/.test(p)) d.push("ouverture subordonnée");
+  if (!ouverture && /^(?:avec|malgre|apres|avant|face a|pour|sans|sous|devant|en|a la|au|aux|lors|dans|depuis)\b[^,]{0,60},/.test(p)) d.push("ouverture subordonnée");
   if (FORMULES_CREUSES.test(p)) d.push("formule creuse");
   if (OPINION_FAIT.test(p)) d.push("verbe d'opinion ou emphase");
   if (DEBUT_INTERDIT.test(p) || /^pourquoi\b/.test(p)) d.push("début interdit");
@@ -798,6 +824,29 @@ function defautsFait(t, { personnes = [], judiciaire = false } = {}) {
 const MOTS_BANALS = new Set(["candidat", "electeurs", "electeur", "mesures", "mesure", "premier", "tour", "annonce", "annoncent", "nouvelle", "nouveau", "grand", "grande", "plus", "dont", "apres", "avant", "pour", "dans", "avec", "leur", "leurs"]);
 const racines = (t) => new Set(motsFait(apostropheNue(t).replace(/['-]/g, " ")).filter((m) => m.length >= 4 && !MOTS_VIDES.has(m) && !TROP_GENERIQUES.has(m) && !MOTS_BANALS.has(m)).map((m) => m.slice(0, 5)));
 
+const ARTICLES_ET_PREP = new Set(["le", "la", "les", "l", "un", "une", "des", "du", "de", "d", "au", "aux", "ce", "cet", "cette", "ces", "son", "sa", "ses", "leur", "leurs", "mon", "ma", "en", "par", "pour", "sur", "dans", "avec", "sans", "et", "ou"]);
+const AUXILIAIRES = new Set(["est", "sont", "a", "ont", "etait", "etaient", "sera", "seront", "serait", "va", "vont", "avait", "aura", "fut", "ete"]);
+/** Un verbe CONJUGUÉ (« promet », « est prolongé », « a engagé ») : un participe seul (« élu », « victime ») ou un nom (« le vote ») ne comptent pas. Heuristique pour le CLASSEMENT des phrases, pas pour les refuser. */
+function verbeConjugue(t) {
+  const w = motsFait(t);
+  return w.some((o, i) => {
+    const x = plat(o).replace(/^[ldjmtsc]'/, "");
+    if (o === "à" || !x) return false;
+    const prec = i ? plat(w[i - 1]).replace(/^.*'/, "") : "";
+    if (AUXILIAIRES.has(x)) return i > 0 || true;
+    if (ARTICLES_ET_PREP.has(prec)) return false;
+    if (/(?:é|ée|és|ées|i|is|ie|u|us)$/.test(o.toLowerCase())) return false; // participe : seulement après un auxiliaire (traité plus haut par l'auxiliaire)
+    if (/(?:tion|tions|ment|ments|eur|eurs|isme|ture|ance|ence|ite|ites)$/.test(x) || NOMS_EN_E.has(x)) return false;
+    if (VERBES_COURANTS.test(x)) return true;
+    return i > 0 && /^\p{Lu}/u.test(w[i - 1]) && /^[a-zà-ÿ]{4,}(?:e|ent|it|ait|aient|ra|ront|t|nd)$/.test(o) && !ARTICLES_ET_PREP.has(x); // « Gabriel Attal dégaine », « Tanguy admet »
+  });
+}
+/** Une phrase qui renvoie à un « son parti », « il », « elle » a besoin de sa tête (« Rassemblement national : … ») : bonus à la forme complète, malus à la forme nue. */
+function besoinDeContexte(t) {
+  const aTete = /^[^:]{3,60}\s:\s/.test(t);
+  const renvoie = /\b(?:son|sa|ses|leur|leurs|il|elle|ils)\b/i.test(t);
+  return renvoie ? (aTete ? 1.5 : -3) : 0;
+}
 /**
  * Titre-fait d'un sujet de presse : { titre, article, partage } ou null. Candidats = chaque titre de presse condensé (voir candidatsDe) ;
  * on garde ceux qui passent le contrôle de qualité (défautsFait), puis le plus partagé avec les titres des AUTRES médias (mots communs) et le plus informatif
@@ -823,7 +872,8 @@ function titreFaitDetail(sujet) {
       const partage = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length / Math.max(1, r.size), 0) / autres.length : 0;
       const n = motsFait(t).length;
       const commun = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length, 0) / autres.length : 0;
-      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 11 ? 1 : 0) - Math.abs(n - 10) * 0.1;
+      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (verbeConjugue(t) ? 3 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 14 ? 1 : 0) - Math.abs(n - 12) * 0.1
+        - (/[«»"“”]/.test(t) ? 0.8 : 0) + besoinDeContexte(t);
       cands.push({ titre: t, article: ia, partage: Math.round(partage * 100) / 100, note });
     }
   });
