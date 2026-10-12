@@ -770,7 +770,8 @@ function normaliserLangue(t) {
 function raccourcisFixes(t) {
   return t.replace(/\b(?:a|ont) engagé une procédure de dissolution contre (?:l['’]association |le groupe |le mouvement )?(?=(\p{L}))/giu, (m, c) => `engage la dissolution ${/^[AEIOUYÉÈÊH]/i.test(c) ? "d'" : "de "}`);
 }
-const PP_FINAL = /\s+(?:(?:à|au|aux|en|dans)\s+\p{Lu}[^,:;]*|(?:devant|lors de|lors du|lors d['’])\s*[^,:;]+)$/u;
+const PP_FINAL = /\s+(?:(?:à|au|aux|en|dans)\s+\p{Lu}[^,:;]*|(?:devant|lors de|lors du|lors d['’]|dès|d['’]ici|à partir (?:de|du|des))\s*[^,:;]+|dans\s+(?:les|des|plusieurs|tous les|toutes les|l['’]ensemble)\s[^,:;]+)$/u;
+const VERBE_A_COMPLEMENT = /\b(?:mettre|met|mettent|place|placer|remettre|rend|rendre|transforme|ranger|verse|verser|ajoute|ajouter|fait|font|faire|tient|tenir|porte|porter)\b[^,]{0,40}$/i; // couper la fin de « mettre X en ordre », « porter X devant » changerait le sens
 /** Formes plus courtes d'une phrase : citation d'une ou deux mots collée à un nom propre retirée, complément de lieu ou de circonstance de tête retiré, raccourcis fixes, compléments de fin retirés un à un. Les contrôles de qualité (défautsFait) tranchent. */
 function variantesCourtes(x) {
   const sortie = new Set();
@@ -790,7 +791,7 @@ function variantesCourtes(x) {
   }
   for (const b of bases) {
     let y = b;
-    for (let i = 0; i < 3 && (motsFait(y).length > FAIT_MAX_MOTS || y.length > FAIT_MAX_CAR); i++) { const z = y.replace(PP_FINAL, ""); if (z === y) break; y = z; garde(y); }
+    for (let i = 0; i < 3 && (motsFait(y).length > FAIT_MAX_MOTS || y.length > FAIT_MAX_CAR); i++) { const z = y.replace(PP_FINAL, ""); if (z === y || VERBE_A_COMPLEMENT.test(z)) break; y = z; garde(y); }
   }
   return [...sortie];
 }
