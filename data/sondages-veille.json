@@ -1,8 +1,19 @@
 {
- "lastUpdated": "2026-10-12T02:30:48.242Z",
+ "lastUpdated": "2026-10-12T09:47:57.112Z",
  "source": "Commission des sondages — notices déposées",
  "sourceUrl": "https://www.commission-des-sondages.fr/notices/",
  "enquetes": [
+  {
+   "institut": "Harris",
+   "media": null,
+   "terrain": {
+    "debut": "2026-10-05",
+    "fin": "2026-10-08"
+   },
+   "echantillon": 2004,
+   "notice": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2321",
+   "integre": false
+  },
   {
    "institut": "Harris",
    "media": "RTL",
@@ -126,6 +137,42 @@
   }
  ],
  "notices": [
+  {
+   "id": 2321,
+   "titre": "10305 Pres IV TOLUNA HARRIS INTERACTIVE 12 octobre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2321",
+   "iv": true,
+   "terrain": {
+    "debut": "2026-10-05",
+    "fin": "2026-10-08"
+   },
+   "echantillon": 2004,
+   "institut": "Harris",
+   "media": null
+  },
+  {
+   "id": 2320,
+   "titre": "10304 Pres Primaire PS TOLUNA HARRIS INTERACTIVE 9 octobre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2320",
+   "iv": false,
+   "terrain": null,
+   "echantillon": 3000,
+   "institut": "Harris",
+   "media": "Primaire PS"
+  },
+  {
+   "id": 2322,
+   "titre": "10303 Pres Barometre IPSOS BVA La Tribune Dimanche 10 octobre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2322",
+   "iv": false,
+   "terrain": {
+    "debut": "2026-10-07",
+    "fin": "2026-10-08"
+   },
+   "echantillon": 1000,
+   "institut": "Ipsos",
+   "media": "La Tribune Dimanche"
+  },
   {
    "id": 2319,
    "titre": "10301 Pres CSA Cnews 10 octobre",
@@ -833,26 +880,6 @@
    "echantillon": 1000,
    "institut": "Elabe",
    "media": "Les Français et la condamnation MLP en appel"
-  },
-  {
-   "id": 2225,
-   "titre": "10220 Pres candidature MLP ODOXA 8 juillet",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2225",
-   "iv": false,
-   "terrain": null,
-   "echantillon": null,
-   "institut": "Odoxa",
-   "media": "candidature MLP"
-  },
-  {
-   "id": 2223,
-   "titre": "10219 Pres Les Français et E. Philippe ODOXA 3 juillet",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2223",
-   "iv": false,
-   "terrain": null,
-   "echantillon": null,
-   "institut": "Odoxa",
-   "media": "Les Français et E. Philippe"
   }
  ]
 }
