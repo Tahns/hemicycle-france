@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-12T13:35:37.295Z",
+ "lastUpdated": "2026-10-12T13:40:43.605Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,7 +80,7 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Dauphiné libéré",
@@ -154,16 +154,15 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidat",
     "rassembler",
-    "promet"
+    "promet",
+    "économies"
    ],
    "medias": [
     "La Dépêche",
+    "RFI",
     "Sud Ouest",
-    "L'Obs",
     "Le JDD",
-    "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Le Monde",
     "Europe 1",
@@ -174,37 +173,42 @@
     "20 Minutes",
     "France 24",
     "Public Sénat",
-    "Libération",
+    "L'Obs",
     "Nice-Matin",
-    "Le Télégramme",
-    "RFI"
+    "Libération",
+    "Le Télégramme"
    ],
-   "mediasDistincts": 15,
+   "mediasDistincts": 14,
    "sources": [
     "La Dépêche / Le JDD / Europe 1",
+    "France Médias Monde",
     "Sud Ouest",
-    "L'Obs",
-    "EBRA",
+    "L'Est républicain",
     "Le Monde",
     "Valeurs actuelles",
     "Mediapart",
     "BFMTV",
     "L'Express",
     "20 Minutes",
-    "France Médias Monde",
     "Public Sénat",
-    "Libération",
-    "Nice-Matin",
-    "Le Télégramme"
+    "L'Obs",
+    "Nice-Matin / Le Télégramme",
+    "Libération"
    ],
-   "nb": 71,
-   "derniere": "2026-10-12T13:23:09.000Z",
+   "nb": 56,
+   "derniere": "2026-10-12T13:41:00.000Z",
    "articles": [
     {
      "media": "La Dépêche",
      "titre": "DIRECT. Présidentielle 2027 : Bruno Retailleau promet des économies de près de 200 milliards d'euros jusqu'en 2032",
      "url": "https://www.ladepeche.fr/2026/10/12/direct-presidentielle-2027-un-nouveau-sondage-place-jean-luc-melenchon-qualifie-au-second-tour-dans-chaque-hypothese-devant-edouard-philippe-ou-13596594.php",
-     "date": "2026-10-12T13:23:09.000Z"
+     "date": "2026-10-12T13:41:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Présidentielle 2027: «Seul Glucksmann permettra de gagner contre le RN», assure Pierre Jouvet, secrétaire général du PS",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261012-pr%C3%A9sidentielle-2027-seul-glucksmann-permettra-de-gagner-contre-le-rn-assure-pierre-jouvet-secr%C3%A9taire-g%C3%A9n%C3%A9ral-du-ps",
+     "date": "2026-10-12T13:37:29.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -213,22 +217,10 @@
      "date": "2026-10-12T13:11:42.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
-     "date": "2026-10-12T13:00:42.000Z"
-    },
-    {
      "media": "Le JDD",
      "titre": "Présidentielle : Le Pen loin en tête, Mélenchon au second tour dans toutes les hypothèses, selon un nouveau sondage",
      "url": "https://www.lejdd.fr/politique/presidentielle-le-pen-loin-en-tete-melenchon-au-second-tour-dans-toutes-les-hypotheses-selon-un-nouveau-sondage-185856",
      "date": "2026-10-12T12:30:57.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. « Un coup de frein » de 197 milliards : Retailleau présente à son tour un plan d'économies",
-     "url": "https://www.dna.fr/elections/2026/10/12/un-coup-de-frein-de-197-milliards-retailleau-presente-a-son-tour-un-plan-d-economies",
-     "date": "2026-10-12T11:27:00.000Z"
     },
     {
      "media": "L'Est républicain",
@@ -291,10 +283,10 @@
      "date": "2026-10-11T21:07:41.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Primaire PS : avec sa large victoire, Raphaël Glucksmann assoit sa légitimité, mais le plus dur commence",
-     "url": "https://www.liberation.fr/politique/primaire-ps-avec-sa-large-victoire-raphael-glucksmann-assoit-sa-legitimite-mais-le-plus-dur-commence-20261011_VFKE7CVTBZBR5JO55WN6KILQ4M/",
-     "date": "2026-10-11T19:01:55.000Z"
+     "media": "L'Obs",
+     "titre": "Glucksmann balaie Faure et impose sa ligne pour la présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261011.OBS119130/glucksmann-balaie-faure-et-impose-sa-ligne-pour-la-presidentielle.html",
+     "date": "2026-10-11T18:59:11.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -303,139 +295,16 @@
      "date": "2026-10-11T18:59:03.000Z"
     },
     {
+     "media": "Libération",
+     "titre": "Vainqueur de la primaire, Raphaël Glucksmann promet «une campagne punk» pour la présidentielle",
+     "url": "https://www.liberation.fr/politique/elections/victoire-a-la-primaire-ps-raphael-glucksmann-promet-une-campagne-punk-pour-la-presidentielle-20261011_2DHRWSQNWNHVDLRSBXRH4VKSEI/",
+     "date": "2026-10-11T17:50:21.000Z"
+    },
+    {
      "media": "Le Télégramme",
-     "titre": "Raphaël Glucksmann, candidat de la gauche sociale-démocrate, désormais au défi de dissiper les doutes",
-     "url": "https://www.letelegramme.fr/france/raphael-glucksmann-candidat-de-la-gauche-sociale-democrate-desormais-au-defi-de-dissiper-les-doutes-7136322.php",
-     "date": "2026-10-11T18:18:00.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Présidentielle 2027: Raphaël Glucksmann désigné candidat de la gauche sociale-démocrate au terme de la primaire",
-     "url": "https://www.rfi.fr/fr/france/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-d%C3%A9sign%C3%A9-candidat-de-la-gauche-sociale-d%C3%A9mocrate-au-terme-de-la-primaire",
-     "date": "2026-10-11T16:35:30.000Z"
-    }
-   ]
-  },
-  {
-   "id": "lyceens",
-   "titre": "Lycées",
-   "motifs": [
-    "lycéens",
-    "mobilisation",
-    "colère"
-   ],
-   "medias": [
-    "Sud Ouest",
-    "Le Monde",
-    "BFMTV",
-    "Europe 1",
-    "20 Minutes",
-    "RFI",
-    "Dernières Nouvelles d'Alsace",
-    "L'Est républicain",
-    "France 24",
-    "La Dépêche",
-    "Le JDD"
-   ],
-   "mediasDistincts": 8,
-   "sources": [
-    "Sud Ouest",
-    "Le Monde",
-    "BFMTV",
-    "Groupe Bolloré",
-    "20 Minutes",
-    "France Médias Monde",
-    "EBRA",
-    "La Dépêche"
-   ],
-   "nb": 30,
-   "derniere": "2026-10-12T11:41:56.000Z",
-   "articles": [
-    {
-     "media": "Sud Ouest",
-     "titre": "Colère des lycéens en Gironde : des heurts ce lundi au lycée Fernand-Daguin de Mérignac, de nombreuses personnes interpellées",
-     "url": "https://www.sudouest.fr/gironde/merignac/gironde-des-heurts-au-lycee-fernand-daguin-de-merignac-de-nombreuses-personnes-interpellees-31033167.php",
-     "date": "2026-10-12T11:41:56.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "« Les lycéens souhaitent que le système marche, une revendication devenue quasiment révolutionnaire tant elle a du mal à être exaucée »",
-     "url": "https://www.lemonde.fr/idees/article/2026/10/12/les-lyceens-souhaitent-que-le-systeme-marche-une-revendication-devenue-quasiment-revolutionnaire-tant-elle-a-du-mal-a-etre-exaucee_6792615_3232.html",
-     "date": "2026-10-12T10:53:03.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère des lycéens: Emmanuel Macron affirme que la mobilisation doit se faire \"dans le calme, dans l'ordre\"",
-     "url": "https://www.bfmtv.com/politique/video-colere-des-lyceens-emmanuel-macron-affirme-que-la-mobilisation-doit-se-faire-dans-le-calme-dans-l-ordre_VN-202610120430.html",
-     "date": "2026-10-12T10:11:57.000Z",
-     "video": true
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Blocage des lycées : à Lille, les lycéens restent sceptiques face aux annonces du gouvernement",
-     "url": "https://www.europe1.fr/societe/blocage-des-lycees-a-lille-les-lyceens-restent-sceptiques-face-aux-annonces-du-gouvernement-1141559?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-12T09:55:55.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Journée d’action du 17 octobre : la CGT annonce qu’elle soutiendra cette mobilisation « partout où les conditions seront réunies »",
-     "url": "https://www.sudouest.fr/economie/social/journee-d-action-du-17-octobre-la-cgt-annonce-qu-elle-soutiendra-cette-mobilisation-partout-ou-les-conditions-seront-reunies-31031632.php",
-     "date": "2026-10-12T09:42:27.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Mobilisation lycéenne à La Rochelle : tentative de blocage avortée à Dautet, les élèves repoussés vers la place de Verdun",
-     "url": "https://www.sudouest.fr/economie/social/mobilisation-lyceenne-a-la-rochelle-tentative-de-blocage-avortee-a-dautet-les-eleves-repousses-vers-la-place-de-verdun-31030771.php",
-     "date": "2026-10-12T09:28:15.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère des lycéens: Emmanuel Macron affirme que les mobilisations doivent se faire \"dans le calme\"",
-     "url": "https://www.bfmtv.com/politique/video-colere-des-lyceens-emmanuel-macron-affirme-que-les-mobilisations-doivent-se-faire-dans-le-calme_VN-202610120355.html",
-     "date": "2026-10-12T08:59:24.000Z",
-     "video": true
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Toute l’info en 2 minutes : Glucksmann gagne la primaire, Trump lâche Zelensky et colère des lycéens",
-     "url": "https://www.20minutes.fr/societe/4253487-20261012-toute-info-2-minutes-glucksmann-gagne-primaire-trump-lache-zelensky-colere-lyceens?at_medium=display&at_campaign=149",
-     "date": "2026-10-12T06:01:45.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mobilisation des lycéens en France: la suppression de Parcoursup, au cœur des revendications",
-     "url": "https://www.rfi.fr/fr/france/20261012-mobilisation-des-lyc%C3%A9ens-en-france-la-suppression-de-parcoursup-au-c%C5%93ur-des-revendications",
-     "date": "2026-10-12T05:07:18.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.dna.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "date": "2026-10-12T04:15:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.estrepublicain.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "date": "2026-10-12T04:15:00.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Mouvement lycéen : nouvelle semaine de mobilisation en France, le gouvernement espère une accalmie",
-     "url": "https://www.france24.com/fr/france/20261012-mouvement-lyc%C3%A9en-nouvelle-semaine-de-mobilisation-le-gouvernement-esp%C3%A8re-une-accalmie",
-     "date": "2026-10-12T00:07:45.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "REPLAY. Présidentielle 2027 : \"Il nous faut le droit de vote à 16 ans\", propose Jean-Luc Mélenchon face au mouvement des lycéens",
-     "url": "https://www.ladepeche.fr/2026/10/11/direct-presidentielle-2027-plus-de-107-000-personnes-ont-participe-au-vote-de-la-primaire-de-la-gauche-les-resultats-attendus-a-18-h-13595558.php",
-     "date": "2026-10-11T18:09:54.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Blocus : «Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», alerte Nicolas Dupont-Aignan",
-     "url": "https://www.lejdd.fr/politique/blocus-ce-nest-plus-un-mouvement-lyceen-cest-un-debut-de-guerre-civile-alerte-nicolas-dupont-aignan-185805",
-     "date": "2026-10-11T16:46:49.000Z"
+     "titre": "Raphaël Glucksmann élu candidat de la gauche sociale-démocrate à la présidentielle",
+     "url": "https://www.letelegramme.fr/france/raphael-glucksmann-elu-candidat-de-la-gauche-a-la-presidentielle-7136268.php",
+     "date": "2026-10-11T16:34:00.000Z"
     }
    ]
   },
@@ -549,145 +418,132 @@
      "date": "2026-10-11T11:41:49.000Z"
     }
    ]
+  },
+  {
+   "id": "lyceens",
+   "titre": "Lycées",
+   "motifs": [
+    "lycéens",
+    "mobilisation",
+    "colère"
+   ],
+   "medias": [
+    "Sud Ouest",
+    "Le Monde",
+    "BFMTV",
+    "Europe 1",
+    "20 Minutes",
+    "RFI",
+    "L'Est républicain",
+    "France 24",
+    "La Dépêche",
+    "Le JDD"
+   ],
+   "mediasDistincts": 8,
+   "sources": [
+    "Sud Ouest",
+    "Le Monde",
+    "BFMTV",
+    "Groupe Bolloré",
+    "20 Minutes",
+    "France Médias Monde",
+    "L'Est républicain",
+    "La Dépêche"
+   ],
+   "nb": 27,
+   "derniere": "2026-10-12T11:41:56.000Z",
+   "articles": [
+    {
+     "media": "Sud Ouest",
+     "titre": "Colère des lycéens en Gironde : des heurts ce lundi au lycée Fernand-Daguin de Mérignac, de nombreuses personnes interpellées",
+     "url": "https://www.sudouest.fr/gironde/merignac/gironde-des-heurts-au-lycee-fernand-daguin-de-merignac-de-nombreuses-personnes-interpellees-31033167.php",
+     "date": "2026-10-12T11:41:56.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "« Les lycéens souhaitent que le système marche, une revendication devenue quasiment révolutionnaire tant elle a du mal à être exaucée »",
+     "url": "https://www.lemonde.fr/idees/article/2026/10/12/les-lyceens-souhaitent-que-le-systeme-marche-une-revendication-devenue-quasiment-revolutionnaire-tant-elle-a-du-mal-a-etre-exaucee_6792615_3232.html",
+     "date": "2026-10-12T10:53:03.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère des lycéens: Emmanuel Macron affirme que la mobilisation doit se faire \"dans le calme, dans l'ordre\"",
+     "url": "https://www.bfmtv.com/politique/video-colere-des-lyceens-emmanuel-macron-affirme-que-la-mobilisation-doit-se-faire-dans-le-calme-dans-l-ordre_VN-202610120430.html",
+     "date": "2026-10-12T10:11:57.000Z",
+     "video": true
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Blocage des lycées : à Lille, les lycéens restent sceptiques face aux annonces du gouvernement",
+     "url": "https://www.europe1.fr/societe/blocage-des-lycees-a-lille-les-lyceens-restent-sceptiques-face-aux-annonces-du-gouvernement-1141559?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-12T09:55:55.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Journée d’action du 17 octobre : la CGT annonce qu’elle soutiendra cette mobilisation « partout où les conditions seront réunies »",
+     "url": "https://www.sudouest.fr/economie/social/journee-d-action-du-17-octobre-la-cgt-annonce-qu-elle-soutiendra-cette-mobilisation-partout-ou-les-conditions-seront-reunies-31031632.php",
+     "date": "2026-10-12T09:42:27.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Mobilisation lycéenne à La Rochelle : tentative de blocage avortée à Dautet, les élèves repoussés vers la place de Verdun",
+     "url": "https://www.sudouest.fr/economie/social/mobilisation-lyceenne-a-la-rochelle-tentative-de-blocage-avortee-a-dautet-les-eleves-repousses-vers-la-place-de-verdun-31030771.php",
+     "date": "2026-10-12T09:28:15.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère des lycéens: Emmanuel Macron affirme que les mobilisations doivent se faire \"dans le calme\"",
+     "url": "https://www.bfmtv.com/politique/video-colere-des-lyceens-emmanuel-macron-affirme-que-les-mobilisations-doivent-se-faire-dans-le-calme_VN-202610120355.html",
+     "date": "2026-10-12T08:59:24.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère lycéenne: Emmanuel Macron affirme que la mobilisation doit se faire \"dans le calme, dans l'ordre\"",
+     "url": "https://www.bfmtv.com/politique/video-colere-lyceenne-emmanuel-macron-affirme-que-la-mobilisation-doit-se-faire-dans-le-calme-dans-l-ordre_VN-202610120351.html",
+     "date": "2026-10-12T08:57:07.000Z",
+     "video": true
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Toute l’info en 2 minutes : Glucksmann gagne la primaire, Trump lâche Zelensky et colère des lycéens",
+     "url": "https://www.20minutes.fr/societe/4253487-20261012-toute-info-2-minutes-glucksmann-gagne-primaire-trump-lache-zelensky-colere-lyceens?at_medium=display&at_campaign=149",
+     "date": "2026-10-12T06:01:45.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mobilisation des lycéens en France: la suppression de Parcoursup, au cœur des revendications",
+     "url": "https://www.rfi.fr/fr/france/20261012-mobilisation-des-lyc%C3%A9ens-en-france-la-suppression-de-parcoursup-au-c%C5%93ur-des-revendications",
+     "date": "2026-10-12T05:07:18.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
+     "url": "https://www.estrepublicain.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
+     "date": "2026-10-12T04:15:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Mouvement lycéen : nouvelle semaine de mobilisation en France, le gouvernement espère une accalmie",
+     "url": "https://www.france24.com/fr/france/20261012-mouvement-lyc%C3%A9en-nouvelle-semaine-de-mobilisation-le-gouvernement-esp%C3%A8re-une-accalmie",
+     "date": "2026-10-12T00:07:45.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "REPLAY. Présidentielle 2027 : \"Il nous faut le droit de vote à 16 ans\", propose Jean-Luc Mélenchon face au mouvement des lycéens",
+     "url": "https://www.ladepeche.fr/2026/10/11/direct-presidentielle-2027-plus-de-107-000-personnes-ont-participe-au-vote-de-la-primaire-de-la-gauche-les-resultats-attendus-a-18-h-13595558.php",
+     "date": "2026-10-11T18:09:54.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Blocus : «Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», alerte Nicolas Dupont-Aignan",
+     "url": "https://www.lejdd.fr/politique/blocus-ce-nest-plus-un-mouvement-lyceen-cest-un-debut-de-guerre-civile-alerte-nicolas-dupont-aignan-185805",
+     "date": "2026-10-11T16:46:49.000Z"
+    }
+   ]
   }
  ],
  "sujets": [
-  {
-   "medias": 5,
-   "mediasDistincts": 5,
-   "sources": [
-    "RFI",
-    "Le Monde",
-    "Dernières Nouvelles d'Alsace",
-    "Le Télégramme",
-    "Libération"
-   ],
-   "derniere": "2026-10-12T02:56:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Mallarmé007, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
-     "url": "https://www.rfi.fr/fr/france/20261012-france-proc%C3%A9dure-de-dissolution-engag%C3%A9e-contre-l-association-%C3%A9galit%C3%A9-et-r%C3%A9conciliation-d-alain-soral",
-     "media": "RFI",
-     "date": "2026-10-12T02:56:05.000Z"
-    },
-    {
-     "titre": "Egalité et réconciliation, l’association d’extrême droite fondée par Alain Soral, visée par une procédure de dissolution",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/11/egalite-et-reconciliation-l-association-d-extreme-droite-fondee-par-alain-soral-visee-par-une-procedure-de-dissolution_6792072_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-11T16:12:14.000Z"
-    },
-    {
-     "titre": "Politique. Une procédure de dissolution engagée contre l'association d'Alain Soral, Égalité et Réconciliation",
-     "url": "https://www.dna.fr/politique/2026/10/11/une-procedure-de-dissolution-engagee-contre-l-association-d-alain-soral-egalite-et-reconciliation",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T15:40:00.000Z"
-    },
-    {
-     "titre": "Une procédure de dissolution engagée contre l’association d’Alain Soral",
-     "url": "https://www.letelegramme.fr/france/une-procedure-de-dissolution-engagee-contre-lassociation-dalain-soral-7136217.php",
-     "media": "Le Télégramme",
-     "date": "2026-10-11T15:14:00.000Z"
-    },
-    {
-     "titre": "Laurent Nuñez lance la dissolution d’Egalité & Réconciliation, l’association de l’antisémite Alain Soral",
-     "url": "https://www.liberation.fr/politique/laurent-nunez-lance-la-dissolution-degalite-reconciliation-lassociation-de-lantisemite-alain-soral-20261011_KAVHRS2AS5D6DD5NTIARXHQKDI/",
-     "media": "Libération",
-     "date": "2026-10-11T11:21:41.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
-   "accroche": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
-   "essentiel": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral. Laurent Nuñez lance la dissolution d’Égalité & Réconciliation. Cinq médias en parlent : RFI, Le Monde, Dernières Nouvelles d'Alsace, Le Télégramme et Libération."
-  },
-  {
-   "medias": 5,
-   "mediasDistincts": 4,
-   "sources": [
-    "Sud Ouest",
-    "EBRA",
-    "20 Minutes",
-    "Le Télégramme"
-   ],
-   "derniere": "2026-10-12T07:51:55.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     },
-     {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Propos antisémites attribués à Jordan Bardella : Éric Zemmour ne le croit « pas vraiment » sincère",
-     "url": "https://www.dna.fr/politique/2026/10/12/propos-antisemites-attribues-a-jordan-bardella-eric-zemmour-ne-le-croit-pas-vraiment-sincere",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T07:25:00.000Z"
-    },
-    {
-     "titre": "Accusations d’antisémitisme contre Jordan Bardella : Éric Zemmour « ne croit pas vraiment » aux dénégations du président du RN",
-     "url": "https://www.sudouest.fr/politique/jordan-bardella/accusations-d-antisemitisme-contre-jordan-bardella-eric-zemmour-ne-croit-pas-vraiment-aux-denegations-du-president-du-rn-31030250.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-12T07:51:55.000Z"
-    },
-    {
-     "titre": "Politique. Propos antisémites attribués à Jordan Bardella : Éric Zemmour ne le croit « pas vraiment » sincère",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/propos-antisemites-attribues-a-jordan-bardella-eric-zemmour-ne-le-croit-pas-vraiment-sincere",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T07:25:00.000Z"
-    },
-    {
-     "titre": "Bardella accusé d’antisémitisme : Zemmour « ne croit pas vraiment » en la sincérité du président du RN",
-     "url": "https://www.20minutes.fr/politique/4253511-20261012-bardella-accuse-antisemitisme-zemmour-croit-vraiment-sincerite-president-rn?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-12T07:16:23.000Z"
-    },
-    {
-     "titre": "« Est-ce que je le crois sincère ? Pas vraiment » : Zemmour pas convaincu par Bardella",
-     "url": "https://www.letelegramme.fr/politique/est-ce-que-je-le-crois-sincere-pas-vraiment-zemmour-pas-convaincu-par-bardella-7136394.php",
-     "media": "Le Télégramme",
-     "date": "2026-10-12T07:14:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
   {
    "medias": 4,
    "mediasDistincts": 4,
@@ -820,6 +676,129 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 4,
+   "sources": [
+    "Sud Ouest",
+    "L'Est républicain",
+    "20 Minutes",
+    "Le Télégramme"
+   ],
+   "derniere": "2026-10-12T07:51:55.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     },
+     {
+      "nom": "Éric Zemmour",
+      "photo": "photos/personnalites/eric-zemmour.jpg",
+      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
+      "parti": "REC",
+      "credit": "Anh De France, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Accusations d’antisémitisme contre Jordan Bardella : Éric Zemmour « ne croit pas vraiment » aux dénégations du président du RN",
+     "url": "https://www.sudouest.fr/politique/jordan-bardella/accusations-d-antisemitisme-contre-jordan-bardella-eric-zemmour-ne-croit-pas-vraiment-aux-denegations-du-president-du-rn-31030250.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T07:51:55.000Z"
+    },
+    {
+     "titre": "Politique. Propos antisémites attribués à Jordan Bardella : Éric Zemmour ne le croit « pas vraiment » sincère",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/12/propos-antisemites-attribues-a-jordan-bardella-eric-zemmour-ne-le-croit-pas-vraiment-sincere",
+     "media": "L'Est républicain",
+     "date": "2026-10-12T07:25:00.000Z"
+    },
+    {
+     "titre": "Bardella accusé d’antisémitisme : Zemmour « ne croit pas vraiment » en la sincérité du président du RN",
+     "url": "https://www.20minutes.fr/politique/4253511-20261012-bardella-accuse-antisemitisme-zemmour-croit-vraiment-sincerite-president-rn?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-12T07:16:23.000Z"
+    },
+    {
+     "titre": "« Est-ce que je le crois sincère ? Pas vraiment » : Zemmour pas convaincu par Bardella",
+     "url": "https://www.letelegramme.fr/politique/est-ce-que-je-le-crois-sincere-pas-vraiment-zemmour-pas-convaincu-par-bardella-7136394.php",
+     "media": "Le Télégramme",
+     "date": "2026-10-12T07:14:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 4,
+   "sources": [
+    "RFI",
+    "Le Monde",
+    "Le Télégramme",
+    "Libération"
+   ],
+   "derniere": "2026-10-12T02:56:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Mallarmé007, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
+     "url": "https://www.rfi.fr/fr/france/20261012-france-proc%C3%A9dure-de-dissolution-engag%C3%A9e-contre-l-association-%C3%A9galit%C3%A9-et-r%C3%A9conciliation-d-alain-soral",
+     "media": "RFI",
+     "date": "2026-10-12T02:56:05.000Z"
+    },
+    {
+     "titre": "Egalité et réconciliation, l’association d’extrême droite fondée par Alain Soral, visée par une procédure de dissolution",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/11/egalite-et-reconciliation-l-association-d-extreme-droite-fondee-par-alain-soral-visee-par-une-procedure-de-dissolution_6792072_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-11T16:12:14.000Z"
+    },
+    {
+     "titre": "Une procédure de dissolution engagée contre l’association d’Alain Soral",
+     "url": "https://www.letelegramme.fr/france/une-procedure-de-dissolution-engagee-contre-lassociation-dalain-soral-7136217.php",
+     "media": "Le Télégramme",
+     "date": "2026-10-11T15:14:00.000Z"
+    },
+    {
+     "titre": "Laurent Nuñez lance la dissolution d’Egalité & Réconciliation, l’association de l’antisémite Alain Soral",
+     "url": "https://www.liberation.fr/politique/laurent-nunez-lance-la-dissolution-degalite-reconciliation-lassociation-de-lantisemite-alain-soral-20261011_KAVHRS2AS5D6DD5NTIARXHQKDI/",
+     "media": "Libération",
+     "date": "2026-10-11T11:21:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
+   "accroche": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
+   "essentiel": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral. Laurent Nuñez lance la dissolution d’Égalité & Réconciliation. Quatre médias en parlent : RFI, Le Monde, Le Télégramme et Libération."
   },
   {
    "medias": 4,
@@ -1075,7 +1054,7 @@
     "La Dépêche / Europe 1",
     "Sud Ouest"
    ],
-   "derniere": "2026-10-12T13:23:09.000Z",
+   "derniere": "2026-10-12T13:41:00.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1096,7 +1075,7 @@
      "titre": "DIRECT. Présidentielle 2027 : Bruno Retailleau promet des économies de près de 200 milliards d'euros jusqu'en 2032",
      "url": "https://www.ladepeche.fr/2026/10/12/direct-presidentielle-2027-un-nouveau-sondage-place-jean-luc-melenchon-qualifie-au-second-tour-dans-chaque-hypothese-devant-edouard-philippe-ou-13596594.php",
      "media": "La Dépêche",
-     "date": "2026-10-12T13:23:09.000Z"
+     "date": "2026-10-12T13:41:00.000Z"
     },
     {
      "titre": "Présidentielle 2027 : Retailleau promet de faire « au bulldozer » près de 200 milliards d’euros d’économies jusqu’en 2032",
@@ -1129,165 +1108,6 @@
     "valeur": "200",
     "unite": "milliards d'euros"
    }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Monde",
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T12:03:48.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Rhône. Les élections municipales de Saint-Fons, remportées par LFI, annulées par la justice",
-     "url": "https://www.dna.fr/politique/2026/10/12/les-elections-municipales-de-saint-fons-remportees-par-lfi-annulees-par-la-justice",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T10:54:00.000Z"
-    },
-    {
-     "titre": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par LFI, en raison d’irrégularités sur une liste concurrente",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/12/municipales-a-saint-fons-pres-de-lyon-la-justice-annule-les-elections-remportees-par-lfi-en-raison-d-irregularites-sur-une-liste-concurrente_6792629_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-12T12:03:48.000Z"
-    },
-    {
-     "titre": "Rhône. Les élections municipales de Saint-Fons, remportées par LFI, annulées par la justice",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/les-elections-municipales-de-saint-fons-remportees-par-lfi-annulees-par-la-justice",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T10:54:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
-   "accroche": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
-   "essentiel": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par La France insoumise, en raison d’irrégularités sur une liste concurrente. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Monde et L'Est républicain."
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "L'Humanité",
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T10:59:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-sociale-democrate-comment-raphael-glucksmann-a-ecrase-le-match",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T18:45:00.000Z"
-    },
-    {
-     "titre": "Glucksmann écrase la primaire sociale-démocrate et acte la rupture avec LFI",
-     "url": "https://www.humanite.fr/politique/jerome-guedj/glucksmann-ecrase-la-primaire-sociale-democrate-et-acte-la-rupture-avec-lfi",
-     "media": "L'Humanité",
-     "date": "2026-10-12T10:59:32.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/11/primaire-sociale-democrate-comment-raphael-glucksmann-a-ecrase-le-match",
-     "media": "L'Est républicain",
-     "date": "2026-10-11T18:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire sociale-démocrate",
-    "origine": "recoupement"
-   },
-   "fait": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-   "accroche": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
-   "essentiel": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match. Trois médias en parlent : Dernières Nouvelles d'Alsace, L'Humanité et L'Est républicain.",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "EBRA",
-    "RFI"
-   ],
-   "derniere": "2026-10-11T21:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.dna.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "media": "L'Est républicain",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027: Raphaël Glucksmann désigné candidat de la gauche sociale-démocrate au terme de la primaire",
-     "url": "https://www.rfi.fr/fr/france/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-d%C3%A9sign%C3%A9-candidat-de-la-gauche-sociale-d%C3%A9mocrate-au-terme-de-la-primaire",
-     "media": "RFI",
-     "date": "2026-10-11T16:35:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1432,6 +1252,97 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Le Monde",
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-12T12:03:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par LFI, en raison d’irrégularités sur une liste concurrente",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/12/municipales-a-saint-fons-pres-de-lyon-la-justice-annule-les-elections-remportees-par-lfi-en-raison-d-irregularites-sur-une-liste-concurrente_6792629_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T12:03:48.000Z"
+    },
+    {
+     "titre": "Rhône. Les élections municipales de Saint-Fons, remportées par LFI, annulées par la justice",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/12/les-elections-municipales-de-saint-fons-remportees-par-lfi-annulees-par-la-justice",
+     "media": "L'Est républicain",
+     "date": "2026-10-12T10:54:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
+   "accroche": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
+   "essentiel": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par La France insoumise, en raison d’irrégularités sur une liste concurrente. Deux médias en parlent : Le Monde et L'Est républicain."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Humanité",
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-12T10:59:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Glucksmann écrase la primaire sociale-démocrate et acte la rupture avec LFI",
+     "url": "https://www.humanite.fr/politique/jerome-guedj/glucksmann-ecrase-la-primaire-sociale-democrate-et-acte-la-rupture-avec-lfi",
+     "media": "L'Humanité",
+     "date": "2026-10-12T10:59:32.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/11/primaire-sociale-democrate-comment-raphael-glucksmann-a-ecrase-le-match",
+     "media": "L'Est républicain",
+     "date": "2026-10-11T18:45:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire sociale-démocrate",
+    "origine": "recoupement"
+   },
+   "fait": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
+   "accroche": "Primaire sociale-démocrate : comment Raphaël Glucksmann a écrasé le match",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "France 24",
     "Le Monde"
    ],
@@ -1553,8 +1464,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : déclaration sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Lycées",
+    "origine": "dossier"
    },
    "fait": "Emmanuel Macron dit que la mobilisation des jeunes doit se faire",
    "accroche": "Emmanuel Macron dit que la mobilisation des jeunes doit se faire",
@@ -1704,66 +1615,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "L'Obs",
-    "Libération"
-   ],
-   "derniere": "2026-10-12T07:38:25.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Bonne nouvelle pour la suite », « candidat du repli »… Comment la gauche réagit après la victoire de Glucksmann à la primaire",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119134/bonne-nouvelle-pour-la-suite-candidat-du-repli-la-gauche-reagit-apres-la-victoire-de-glucksmann-a-la-primaire.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T07:38:25.000Z"
-    },
-    {
-     "titre": "Primaire PS : pourquoi la victoire de Raphaël Glucksmann est une bonne nouvelle pour Jean-Luc Mélenchon",
-     "url": "https://www.liberation.fr/politique/elections/primaire-ps-pourquoi-la-victoire-de-raphael-glucksmann-est-une-bonne-nouvelle-pour-jean-luc-melenchon-20261012_Y4NJUICFOJG23DKSAZXZLNQ42M/",
-     "media": "Libération",
-     "date": "2026-10-12T03:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bonne nouvelle",
-    "origine": "recoupement"
-   },
-   "fait": "Primaire Parti socialiste : pourquoi la victoire de Raphaël Glucksmann est une bonne nouvelle pour Jean-Luc Mélenchon",
-   "accroche": "Primaire Parti socialiste : pourquoi la victoire de Raphaël Glucksmann est une bonne nouvelle pour Jean-Luc Mélenchon",
-   "essentiel": "Primaire Parti socialiste : pourquoi la victoire de Raphaël Glucksmann est une bonne nouvelle pour Jean-Luc Mélenchon. Deux médias en parlent : L'Obs et Libération.",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %, Mélenchon 14–17 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Le Monde",
     "France 24"
    ],
@@ -1805,6 +1656,55 @@
    "fait": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate",
    "accroche": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate",
    "essentiel": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate à la présidentielle 2027. Deux médias en parlent : Le Monde et France 24.",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Est républicain",
+    "RFI"
+   ],
+   "derniere": "2026-10-11T21:00:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
+     "media": "L'Est républicain",
+     "date": "2026-10-11T21:00:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027: Raphaël Glucksmann désigné candidat de la gauche sociale-démocrate au terme de la primaire",
+     "url": "https://www.rfi.fr/fr/france/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-d%C3%A9sign%C3%A9-candidat-de-la-gauche-sociale-d%C3%A9mocrate-au-terme-de-la-primaire",
+     "media": "RFI",
+     "date": "2026-10-11T16:35:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
    "contexte": [
     {
      "type": "sondage",
@@ -2107,193 +2007,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T11:27:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. « Un coup de frein » de 197 milliards : Retailleau présente à son tour un plan d'économies",
-     "url": "https://www.dna.fr/elections/2026/10/12/un-coup-de-frein-de-197-milliards-retailleau-presente-a-son-tour-un-plan-d-economies",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T11:27:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Un coup de frein » de 197 milliards : Retailleau présente à son tour un plan d'économies",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/12/un-coup-de-frein-de-197-milliards-retailleau-presente-a-son-tour-un-plan-d-economies",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T11:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : annonces sur les finances publiques",
-    "origine": "regles"
-   },
-   "fait": "Retailleau présente à son tour un plan d'économies",
-   "accroche": "Retailleau présente à son tour un plan d'économies",
-   "essentiel": "Retailleau présente à son tour un plan d'économies. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "197",
-    "unite": "milliards"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T09:36:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Guerre en Ukraine. L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-     "url": "https://www.dna.fr/defense-guerre-conflit/2026/10/12/l-ue-sanctionne-1-600-individus-et-entites-lies-a-la-russie-macron-ne-veut-pas-ceder",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T09:36:00.000Z"
-    },
-    {
-     "titre": "Guerre en Ukraine. L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/10/12/l-ue-sanctionne-1-600-individus-et-entites-lies-a-la-russie-macron-ne-veut-pas-ceder",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T09:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-   "accroche": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-   "essentiel": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder ». Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T08:07:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. À Dijon, Édouard Philippe remercie (deux fois) « Monsieur le maire »... qui est une femme",
-     "url": "https://www.dna.fr/elections/2026/10/12/a-dijon-edouard-philippe-remercie-(deux-fois)-monsieur-le-maire-qui-est-une-femme",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T08:07:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. À Dijon, Édouard Philippe remercie (deux fois) « Monsieur le maire »... qui est une femme",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/12/a-dijon-edouard-philippe-remercie-(deux-fois)-monsieur-le-maire-qui-est-une-femme",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T08:07:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T06:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Décryptage. Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau",
-     "url": "https://www.dna.fr/economie/2026/10/12/loi-sur-les-tickets-restaurant-restaurateurs-et-grande-distribution-veulent-leur-part-du-gateau",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T06:30:00.000Z"
-    },
-    {
-     "titre": "Décryptage. Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/12/loi-sur-les-tickets-restaurant-restaurateurs-et-grande-distribution-veulent-leur-part-du-gateau",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T06:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Décryptage : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau",
-   "accroche": "Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau",
-   "essentiel": "Loi sur les tickets-restaurant : restaurateurs et grande distribution veulent leur part du gâteau. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24 / Ouest-France"
    ],
    "derniere": "2026-10-12T05:52:11.000Z",
@@ -2337,38 +2050,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T04:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.dna.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T04:15:00.000Z"
-    },
-    {
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.estrepublicain.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T04:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 2,
@@ -2425,74 +2106,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-11T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation",
-     "url": "https://www.dna.fr/education/2026/10/11/lyceens-emplois-du-temps-batiments-ce-qui-ressort-des-contributions-sur-la-plateforme-de-concertation",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T18:00:00.000Z"
-    },
-    {
-     "titre": "Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation",
-     "url": "https://www.estrepublicain.fr/education/2026/10/11/lyceens-emplois-du-temps-batiments-ce-qui-ressort-des-contributions-sur-la-plateforme-de-concertation",
-     "media": "L'Est républicain",
-     "date": "2026-10-11T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-11T17:10:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Interview. « Une victoire pour le pouvoir d’achat » : une loi sur les tickets-restaurant, pour quoi faire ?",
-     "url": "https://www.dna.fr/economie/2026/10/11/une-victoire-pour-le-pouvoir-d-achat-une-loi-sur-les-tickets-restaurant-pour-quoi-faire",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-11T17:10:00.000Z"
-    },
-    {
-     "titre": "Interview. « Une victoire pour le pouvoir d’achat » : une loi sur les tickets-restaurant, pour quoi faire ?",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/11/une-victoire-pour-le-pouvoir-d-achat-une-loi-sur-les-tickets-restaurant-pour-quoi-faire",
-     "media": "L'Est républicain",
-     "date": "2026-10-11T17:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Interview : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Une loi sur les tickets-restaurant, pour quoi faire ?",
-   "accroche": "Une loi sur les tickets-restaurant, pour quoi faire ?",
-   "essentiel": "Une loi sur les tickets-restaurant, pour quoi faire ? Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "France Médias Monde"
    ],
    "derniere": "2026-10-10T15:04:48.000Z",
@@ -2523,6 +2136,36 @@
    "fait": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "accroche": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "essentiel": "Pendant la mobilisation des lycéens en France, l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-12T13:37:29.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN",
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027: «Seul Glucksmann permettra de gagner contre le RN», assure Pierre Jouvet, secrétaire général du PS",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261012-pr%C3%A9sidentielle-2027-seul-glucksmann-permettra-de-gagner-contre-le-rn-assure-pierre-jouvet-secr%C3%A9taire-g%C3%A9n%C3%A9ral-du-ps",
+     "media": "RFI",
+     "date": "2026-10-12T13:37:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Parti socialiste : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2764,54 +2407,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T13:00:42.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "François Ruffin",
-      "photo": "photos/deputes/PA722142.jpg",
-      "photoHd": "photos/deputes/hd/PA722142.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA722142",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T13:00:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Ruffin 3 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "François Ruffin : député ECO (Somme)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-10-12T12:48:12.000Z",
@@ -2976,34 +2571,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-12T11:43:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lautenbach. Pêche, chasse et forêts au menu des élus municipaux",
-     "url": "https://www.dna.fr/politique/2026/10/12/peche-chasse-et-forets-au-menu-des-elus-municipaux",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T11:43:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lautenbach : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Pêche, chasse et forêts au menu des élus municipaux",
-   "accroche": "Pêche, chasse et forêts au menu des élus municipaux"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-12T11:41:56.000Z",
@@ -3054,6 +2621,50 @@
    },
    "fait": "Charente-Maritime : pour, la Ville de Rochefort étend les plages horaires d’éclairage public",
    "accroche": "Charente-Maritime : pour, la Ville de Rochefort étend les plages horaires d’éclairage public"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-12T11:27:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. « Un coup de frein » de 197 milliards : Retailleau présente à son tour un plan d'économies",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/12/un-coup-de-frein-de-197-milliards-retailleau-presente-a-son-tour-un-plan-d-economies",
+     "media": "L'Est républicain",
+     "date": "2026-10-12T11:27:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : annonces sur les finances publiques",
+    "origine": "regles"
+   },
+   "fait": "Retailleau présente à son tour un plan d'économies",
+   "accroche": "Retailleau présente à son tour un plan d'économies",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3577,105 +3188,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T10:09:02.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire de la gauche : Raphaël Glucksmann élu candidat à la présidentielle dès le premier tour",
-     "url": "https://www.nouvelobs.com/politique/20261011.OBS119125/primaire-de-la-gauche-raphael-glucksmann-elu-candidat-a-la-presidentielle-des-le-premier-tour.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T10:09:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Raphaël Glucksmann élu candidat à la présidentielle dès le premier tour",
-   "accroche": "Raphaël Glucksmann élu candidat à la présidentielle dès le premier tour",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T10:03:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Olivier Faure",
-      "photo": "photos/deputes/PA609332.jpg",
-      "photoHd": "photos/deputes/hd/PA609332.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA609332",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Glucksmann balaie Faure et impose sa ligne pour la présidentielle",
-     "url": "https://www.nouvelobs.com/politique/20261011.OBS119130/glucksmann-balaie-faure-et-impose-sa-ligne-pour-la-presidentielle.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T10:03:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce qu'il faut savoir sur présidentielle 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Faure 3–4 %, Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Olivier Faure : premier secrétaire du Parti socialiste",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-10-12T10:02:00.000Z",
@@ -4071,6 +3583,42 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-12T09:36:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Guerre en Ukraine. L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
+     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/10/12/l-ue-sanctionne-1-600-individus-et-entites-lies-a-la-russie-macron-ne-veut-pas-ceder",
+     "media": "L'Est républicain",
+     "date": "2026-10-12T09:36:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
+   "accroche": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-12T09:33:46.000Z",
@@ -4352,50 +3900,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-12T09:08:19.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "De la victoire écrasante à l’enfarinage, la folle soirée où Glucksmann est officiellement devenu candidat à la présidentielle",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119135/de-la-victoire-ecrasante-a-l-enfarinage-la-folle-soiree-ou-glucksmann-est-officiellement-devenu-candidat-a-la-presidentielle.html",
-     "media": "L'Obs",
-     "date": "2026-10-12T09:08:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce qu'il faut savoir sur présidentielle 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "De la victoire écrasante à l’enfarinage, la folle soirée où Glucksmann est officiellement devenu candidat",
-   "accroche": "De la victoire écrasante à l’enfarinage, la folle soirée où Glucksmann est officiellement devenu candidat",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-12T09:05:47.000Z",
@@ -4632,6 +4136,53 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-12T08:07:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. À Dijon, Édouard Philippe remercie (deux fois) « Monsieur le maire »... qui est une femme",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/12/a-dijon-edouard-philippe-remercie-(deux-fois)-monsieur-le-maire-qui-est-une-femme",
+     "media": "L'Est républicain",
+     "date": "2026-10-12T08:07:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Philippe 15–24 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Figaro"
    ],
    "derniere": "2026-10-12T08:06:04.000Z",
@@ -4674,11 +4225,12 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -4687,56 +4239,21 @@
    },
    "articles": [
     {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "titre": "Gabriel Attal",
+     "url": "https://www.bfmtv.com/politique/gabriel-attal_DN-202108310662.html",
      "media": "BFMTV",
      "date": "2026-10-12T07:58:52.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T07:58:52.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Fabien Roussel",
-      "photo": "photos/personnalites/fabien-roussel.jpg",
-      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
-      "parti": "GDR",
-      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fabien Roussel",
-     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T07:58:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fabien Roussel : ce que disent les médias",
+    "titre": "Gabriel Attal (Ensemble pour la République) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
    "contexte": [
     {
      "type": "personnes",
-     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -4836,49 +4353,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Gabriel Attal",
-     "url": "https://www.bfmtv.com/politique/gabriel-attal_DN-202108310662.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T07:58:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gabriel Attal (Ensemble pour la République) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T07:58:52.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4911,6 +4385,83 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T07:58:52.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Fabien Roussel",
+      "photo": "photos/personnalites/fabien-roussel.jpg",
+      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
+      "parti": "GDR",
+      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Fabien Roussel",
+     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T07:58:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fabien Roussel : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T07:58:52.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T07:58:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -5472,6 +5023,390 @@
    },
    "fait": "Coup d’envoi de l’examen à l’Assemblée avec des divergences abyssales et une menace de censure",
    "accroche": "Coup d’envoi de l’examen à l’Assemblée avec des divergences abyssales et une menace de censure"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T07:01:19.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     },
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle: Maud Bregeon, porte parole du gouvernement, appelle \"l'ensemble des responsables politiques de la droite et du centre\" incluant \"Gabriel Attal et Bruno Retailleau\" à \"se rassembler derrière Édouard Philippe\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-maud-bregeon-porte-parole-du-gouvernement-appelle-l-ensemble-des-responsables-politiques-de-la-droite-et-du-centre-incluant-gabriel-attal-et-bruno-retailleau-a-se-rassembler-derriere-edouard-philippe_VN-202610120248.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T07:01:19.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : appel sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %, Retailleau 5–11 %, Philippe 15–24 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-12T07:00:07.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Michel Fournier",
+      "photo": "photos/personnalites/michel-fournier.jpg",
+      "credit": "Service photographique de Matignon, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Congrès des maires ruraux à Auch : après son départ du gouvernement, Michel Fournier retrouve des édiles divisés",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/12/congres-des-maires-ruraux-a-auch-apres-son-depart-du-gouvernement-michel-fournier-retrouve-des-ediles-divises_6792529_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T07:00:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Michel Fournier : ministre délégué chargé de la ruralité",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T06:57:25.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Maud Bregeon",
+      "photo": "photos/personnalites/maud-bregeon.jpg",
+      "photoHd": "photos/personnalites/hd/maud-bregeon.jpg",
+      "credit": "Ministère de l'Europe et des Affaires étrangères, CC BY 3.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "“C’est inadmissible”: Maud Bregeon condamne l’enfarinage de Raphaël Glucksmann après sa victoire à la primaire sociale-démocrate",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-c-est-inadmissible-maud-bregeon-condamne-l-enfarinage-de-raphael-glucksmann-apres-sa-victoire-a-la-primaire-sociale-democrate_VN-202610120244.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:57:25.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-12T06:56:44.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la gauche : Raphaël Glucksmann enfariné à la sortie du bar où il célébrait sa victoire",
+     "url": "https://www.lejdd.fr/politique/primaire-de-la-gauche-raphael-glucksmann-enfarine-a-la-sortie-du-bar-ou-il-celebrait-sa-victoire-185814",
+     "media": "Le JDD",
+     "date": "2026-10-12T06:56:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Raphaël Glucksmann enfariné à la sortie du bar où il célébrait sa victoire",
+   "accroche": "Raphaël Glucksmann enfariné à la sortie du bar où il célébrait sa victoire",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T06:55:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Colère des lycéens: le gouvernement “ne ferme pas la porte” à l’augmentation du budget alloué à l’Éducation nationale",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-colere-des-lyceens-le-gouvernement-ne-ferme-pas-la-porte-a-l-augmentation-du-budget-alloue-a-l-education-nationale_VN-202610120240.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:55:02.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T06:53:02.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Maud Bregeon",
+      "photo": "photos/personnalites/maud-bregeon.jpg",
+      "photoHd": "photos/personnalites/hd/maud-bregeon.jpg",
+      "credit": "Ministère de l'Europe et des Affaires étrangères, CC BY 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Manifestations lycéennes: \"La question de l'orientation ne se résume pas à Parcoursup\", estime Maud Bregeon, porte-parole du gouvernement",
+     "url": "https://www.bfmtv.com/politique/video-manifestations-lyceennes-la-question-de-l-orientation-ne-se-resume-pas-a-parcoursup-estime-maud-bregeon-porte-parole-du-gouvernement_VN-202610120239.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:53:02.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : déclaration sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Maud Bregeon : ministre déléguée, porte-parole du Gouvernement, chargée de l'énergie",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T06:47:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Maud Bregeon",
+      "photo": "photos/personnalites/maud-bregeon.jpg",
+      "photoHd": "photos/personnalites/hd/maud-bregeon.jpg",
+      "credit": "Ministère de l'Europe et des Affaires étrangères, CC BY 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "\"Il n'y aura pas de carburant russe demain dans les pompes et les stations services françaises\", assure Maud Bregeon, porte-parole du gouvernement",
+     "url": "https://www.bfmtv.com/politique/video-il-n-y-aura-pas-de-carburant-russe-demain-dans-les-pompes-et-les-stations-services-francaises-assure-maud-bregeon-porte-parole-du-gouvernement_VN-202610120230.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T06:47:29.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Maud Bregeon : ministre déléguée, porte-parole du Gouvernement, chargée de l'énergie",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-12T06:40:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Michel Barnier",
+      "photo": "photos/deputes/PA368.jpg",
+      "photoHd": "photos/deputes/hd/PA368.jpg",
+      "parti": "LR",
+      "lien": "#depute-PA368",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Michel Barnier : «Nous sommes en pré-crise financière», affirme l'ancien Premier ministre",
+     "url": "https://www.europe1.fr/politique/michel-barnier-nous-sommes-en-pre-crise-financiere-affirme-lancien-premier-ministre-1141076?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-12T06:40:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Michel Barnier : déclaration sur l'action du gouvernement",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Michel Barnier : député LR (Paris)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-12T06:31:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Michel Barnier",
+      "photo": "photos/deputes/PA368.jpg",
+      "photoHd": "photos/deputes/hd/PA368.jpg",
+      "parti": "LR",
+      "lien": "#depute-PA368",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Michel Barnier : «La France insoumise cherche à tester les forces de police»",
+     "url": "https://www.europe1.fr/politique/michel-barnier-la-france-insoumise-cherche-a-tester-les-forces-de-police-1140974?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-12T06:31:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Michel Barnier (Les Républicains) : essai lié à le maintien de l'ordre",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Michel Barnier : député LR (Paris)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   }
  ]
 }
