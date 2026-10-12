@@ -122,7 +122,9 @@ for (const titre of ["Le gouvernement présente son projet de budget pour 2027",
     assert.ok(choix([sj], { file: { entrees: [{ id: "x".repeat(12), cree: il_y_a(5), titre, sources: [] }] } }).refus, "doublon écarté");
   }
   // un sujet sans mot d'accusation, sans titre propre clair ET sans fait clair reste refusé ; avec un fait clair, le titre-fait remplace le titre de thème vague
-  assert.ok(choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus);
+  assert.ok(choix([sujet("Budget 2027 : le dossier de la semaine à l'Assemblée nationale", 3, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus, "aucun fait clair ni message complet : rien");
+  // titre de presse clair mais sans fait dans le relevé : le message complet (titres-propres.messageComplet) le remplace
+  assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 3, { titrePropre: { titre: "Budget", origine: "recoupement" }, fait: null })]).refus, "message complet calculé à partir des titres");
   assert.ok(!choix([sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget", origine: "recoupement" } })]).refus);
 }
 // Déjà en file : exclu (par titre, ou par lien d'article déjà utilisé)
@@ -593,7 +595,9 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // Titre rédigé trop vague (« Énergie » seul, une rubrique) : pas de story
   assert.ok(AUTO.titreGenerique("Énergie") && AUTO.titreGenerique("Vie politique") && AUTO.titreGenerique("Économie") && AUTO.titreGenerique(""));
   assert.ok(!AUTO.titreGenerique("Primaire de la gauche") && !AUTO.titreGenerique("Blocage des lycées"));
-  assert.ok(choix([sujet(T, 3, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique sans fait clair (3 médias) : refusé");
+  const FLOU = "Budget 2027 : le dossier de la semaine à l'Assemblée nationale";
+  assert.ok(choix([sujet(FLOU, 3, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique sans fait clair (3 médias) : refusé");
+  assert.ok(!choix([sujet(T, 3, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null })]).refus, "titre générique : le message complet calculé prend le relais");
   assert.ok(!choix([sujet(T, 4, { titrePropre: { titre: "Énergie", origine: "dossier" } })]).refus, "titre générique mais fait clair (affiché à la place) : accepté");
   // Sujets proches (« Blocage » / « Blocus » des lycées) reconnus ; sujets différents non
   assert.ok(AUTO.titresProches("Blocage des lycées", "Blocus des lycées"));
@@ -849,7 +853,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
 {
   const AUTO = createRequire(import.meta.url)("../scripts/stories-auto.cjs");
   const gen = (titre, extra = {}) => sujet("Le gouvernement présente son projet de budget pour 2027", extra.fait === null ? 3 : 4, { titrePropre: { titre, origine: "regles", generique: true }, ...extra });
-  for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(gen(t, { fait: null })), direct: null, file: vide, now }).refus, `générique sans fait clair refusé : ${t}`);
+  for (const t of ["Gilley : actualité locale", "Politique : l'essentiel du moment"]) assert.ok(AUTO.choisirSujet({ actualites: actu(sujet("Budget 2027 : le dossier de la semaine à l'Assemblée nationale", 3, { titrePropre: { titre: t, origine: "regles", generique: true }, fait: null })), direct: null, file: vide, now }).refus, `générique sans fait clair refusé : ${t}`);
   // avec un titre-fait clair (ce qui s'est passé), c'est lui qui s'affiche : le titre de thème générique ne bloque plus
   assert.ok(!AUTO.choisirSujet({ actualites: actu(gen("Politique : l'essentiel du moment")), direct: null, file: vide, now }).refus, "générique mais fait clair : accepté");
   assert.strictEqual(AUTO.choisirSujet({ actualites: actu(sujet("Le gouvernement présente son projet de budget pour 2027", 4, { titrePropre: { titre: "Budget 2027 : le gouvernement présente son texte", origine: "regles" } })), direct: null, file: vide, now }).indice, 0, "titre propre non générique : retenu");
@@ -1290,11 +1294,21 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(choisirSujet({ actualites: actu(bis), direct: null, file: apres, now }).refus, "le même résultat répété reste un doublon");
 }
 
-// GROS sujet (>= grosSujetMedias médias) sans titre propre ni fait clair : jamais perdu (story « à la une », titre de presse cité) ; un petit sujet, si
+// GROS sujet (>= grosSujetMedias médias) sans titre propre ni fait : il garde sa story seulement avec un MESSAGE COMPLET (accroche + essentiel, jamais coupés) ; sinon il n'est pas publié
+// (jamais de titre de thème générique ni de citation coupée) et reste signalé par scripts/alerte-gros-sujets.cjs
 {
-  const sansTitre = (nb) => sujet("Le gouvernement présente son projet de budget pour 2027", nb, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null });
-  assert.ok(!choix([sansTitre(4)]).refus, "gros sujet (4 médias) sans fait clair : publié en repli");
-  assert.ok(choix([sansTitre(3)]).refus, "sujet moyen (3 médias) sans fait clair : refusé");
+  const sansTitre = (nb, titre = "Le gouvernement présente son projet de budget pour 2027") => sujet(titre, nb, { titrePropre: { titre: "Énergie", origine: "dossier" }, fait: null });
+  const r = choix([sansTitre(4)]);
+  assert.ok(!r.refus, "gros sujet (4 médias) avec un message complet : publié");
+  assert.strictEqual(r.repli, false, "plus de titre de repli : l'accroche dit ce qui s'est passé");
+  const d = AUTO_decrire(r);
+  assert.ok(d.champs.accroche && d.champs.essentiel, "accroche ET essentiel dans l'entrée de file");
+  assert.ok(!/\.\.\.|…/.test(d.champs.essentiel) && /médias en parlent/.test(d.champs.essentiel), d.champs.essentiel);
+  assert.ok(choix([sansTitre(3, "Budget 2027 : le dossier de la semaine à l'Assemblée nationale")]).refus, "sujet moyen (3 médias) sans titre propre ni phrase propre : refusé");
+  const sans = choix([sansTitre(4, "Budget 2027 : le dossier de la semaine à l'Assemblée nationale")]);
+  assert.ok(sans.refus && /gros sujet sans message complet/.test(sans.refus), "gros sujet sans phrase propre : pas publié, signalé : " + sans.refus);
+  // l'essentiel et l'accroche voyagent jusqu'au dessin (10e argument de dessiner)
+  assert.deepStrictEqual(createRequire(import.meta.url)("../scripts/stories-auto.cjs").argsAvecVariante([0, "t", null, null, null], "bleu", "a", false, false, "e").slice(8), [null, { accroche: "a", essentiel: "e" }]);
 }
 function A_id(c) { return c.id; }
 

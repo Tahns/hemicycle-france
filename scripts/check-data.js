@@ -279,6 +279,8 @@ async function checkInstagramFile() {
   const d = JSON.parse(await readFile("data/instagram-file.json", "utf-8").catch(() => "null"));
   if (!d) return;
   if (!Array.isArray(d.entrees)) return err("instagram-file.json : entrees absentes");
+  // Un post déjà publié a quitté la file : son annonce (3 h plus tard) se rattache alors au registre des publications
+  const registrePublie = (JSON.parse(await readFile("data/instagram-publiees.json", "utf-8").catch(() => "null")) || {}).entrees || [];
   const stories = {}, posts = {}, videos = {}, ids = new Set();
   for (const e of d.entrees) {
     const nom = `instagram-file.json : entrée ${e.id || "?"}`;
@@ -354,7 +356,7 @@ async function checkInstagramFile() {
       if (e.annonceDe) err(`${nom} : un post n'a pas de champ annonceDe`);
     } else if (e.annonceDe) {
       if (!/^[0-9a-f]{12}$/.test(e.annonceDe)) err(`${nom} : annonceDe invalide`);
-      else if (!d.entrees.some((p) => p.id === e.annonceDe && p.type === "post")) err(`${nom} : annonceDe ne désigne aucun post de la file`);
+      else if (!d.entrees.some((p) => p.id === e.annonceDe && p.type === "post") && !registrePublie.some((p) => p.id === e.annonceDe && p.type === "post")) err(`${nom} : annonceDe ne désigne aucun post de la file`);
     } else if (e.type !== "reel" && e.type !== "carousel" && !e.contenu) {
       stories[jour] = (stories[jour] || 0) + 1; // ni les annonces, ni les contenus récurrents à créneau
     }

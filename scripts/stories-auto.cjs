@@ -24,6 +24,14 @@
  *  - au plus 4 entrées par jour (UTC+2) ; aucune entre 23 h et 7 h, heure de Paris.
  * On garde les 30 dernières entrées ; les images de plus de 3 jours sont supprimées.
  *
+ * MESSAGE COMPLET (contrat avec le dessin, js/stories-actu.js) : chaque story de presse porte deux champs rédigés par règles à partir des titres des médias (scripts/titres-propres.cjs : messageComplet),
+ * jamais coupés, jamais une opinion reprise comme un fait (une opinion n'apparaît qu'entière, entre guillemets, avec son auteur) :
+ *  - `accroche` : le gros titre, UNE phrase complète (6 à 20 mots, ~135 caractères au plus) : qui fait quoi (« Jean-Luc Mélenchon promet de supprimer Parcoursup… ») ;
+ *  - `essentiel` : une ou deux phrases complètes de contexte (18 à 45 mots) + le nombre de médias.
+ *  Présents dans le relevé (sujet.accroche, sujet.essentiel, écrits par enrichirSujet) puis dans l'entrée de file (champs `accroche` et `essentiel`) ; le dessin lit s.accroche et s.essentiel
+ *  (le 10e argument de dessiner() porte { accroche, essentiel }). Un GROS sujet (>= grosSujetMedias médias) sans titre propre ni message complet n'est PAS publié (« gros sujet sans message complet »)
+ *  et reste signalé par scripts/alerte-gros-sujets.cjs ; un message complet remplace le titre de thème générique (« Lycées : ce que disent les médias »).
+ *
  * MODÈLES D'IMAGE (direction artistique « fond bleu », js/stories-actu*.js) : le choix du modèle est automatique, avec les mêmes règles de prudence :
  *  - « À la une »      : le sujet fort retenu ci-dessus (modèle par défaut) ;
  *  - « Dossier »       : un dossier non publié (voir plus haut) ;
@@ -117,11 +125,24 @@ const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
 const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
-const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait, sansBandeauEtat } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
+const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait, messageComplet, sansBandeauEtat } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
-/** Titre-fait du sujet (gros titre d'affichage : ce qui s'est passé, en 6 à 12 mots) : le champ `fait` du relevé, sinon calculé à partir des titres de presse ; null = aucun fait clair, le sujet n'est pas publié. Jamais une clé anti-doublon (le titre propre reste la clé). */
-const faitDe = (s) => (typeof s?.fait === "string" && s.fait.trim() ? s.fait.trim() : titreFait(s));
+/**
+ * MESSAGE COMPLET d'un sujet de presse (scripts/titres-propres.cjs : messageComplet) : { accroche, essentiel } ou null.
+ * Les champs `accroche` et `essentiel` du relevé (enrichirSujet) sont lus d'abord ; sinon calculés à partir des titres de presse.
+ */
+const messagesCalcules = new WeakMap();
+function messageDe(s) {
+  if (!s || typeof s !== "object") return null;
+  if (typeof s.accroche === "string" && s.accroche.trim() && typeof s.essentiel === "string" && s.essentiel.trim()) return { accroche: s.accroche.trim(), essentiel: s.essentiel.trim() };
+  if (!messagesCalcules.has(s)) { let m = null; try { m = messageComplet(s); } catch (e) { m = null; } messagesCalcules.set(s, m); }
+  return messagesCalcules.get(s);
+}
+/** Titre-fait du sujet (gros titre d'affichage : une phrase complète, jusqu'à 20 mots) : le champ `fait` du relevé, sinon calculé à partir des titres de presse, sinon le message complet ; null = aucun fait clair, le sujet n'est pas publié. Jamais une clé anti-doublon (le titre propre reste la clé). */
+const faitDe = (s) => (typeof s?.fait === "string" && s.fait.trim() ? s.fait.trim() : titreFait(s) || messageDe(s)?.accroche || null);
+/** « L'essentiel » : une ou deux phrases complètes de contexte (18 à 45 mots), ou null. */
+const essentielDe = (s) => (typeof s?.essentiel === "string" && s.essentiel.trim() ? s.essentiel.trim() : messageDe(s)?.essentiel || null);
 
 // Rubriques génériques : un titre rédigé « Énergie » ou « Économie » ne dit rien (pas de story)
 const RUBRIQUES_GENERIQUES = new Set(["energie", "economie", "social", "politique", "societe", "international", "monde", "france", "budget", "justice", "culture", "sante", "education", "ecologie", "environnement", "securite", "sport", "europe", "gouvernement", "vie politique", "elections", "election", "senat", "assemblee"]);
@@ -486,7 +507,9 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     const fait = faitDe(s);
     // GROS sujet (>= « grosSujetMedias » médias) sans titre propre ni titre-fait : il garde sa story en « à la une » (titre de presse cité et attribué) au lieu d'être perdu ; les garde-fous (mots exclus, personne nommée, réserve) ont déjà joué
     const grosSujet = medias >= GROS_SUJET_MEDIAS;
-    const repli = (sensibleNormal && sansTitrePropre) || (grosSujet && sansTitrePropre && !fait);
+        const repli = sensibleNormal && sansTitrePropre; // sujet d'accusation, de procédure ou de polémique sans titre propre : circuit prudent inchangé (titre de presse cité et attribué)
+    // GROS sujet sans titre propre ni message complet : jamais de titre de thème générique ni de citation coupée ; pas publié, et signalé par scripts/alerte-gros-sujets.cjs
+    if (grosSujet && sansTitrePropre && !fait && !repli) return rej("gros sujet sans message complet (signalé par l'alerte gros sujets)");
     if (!repli) {
       if (!s.titrePropre?.titre) return rej("sans titre propre"); // sans titre rédigé par le site, on ne publie pas : jamais un titre de presse en grand titre
       // Un titre-fait clair (ce qui s'est passé, 6 à 12 mots) remplace le titre propre à l'affichage : un titre de thème générique (« Primaire : ce que disent les médias ») ne bloque alors plus le sujet
@@ -816,6 +839,7 @@ async function dessiner(indice, titre, sondage = null, dossier = null, propre = 
         sj.accroche = extras.accroche;
         sj.titrePropre = { ...(sj.titrePropre || {}), titre: extras.accroche };
       }
+      if (extras?.essentiel) ACTUALITES.sujets[indice].essentiel = extras.essentiel; // « l'essentiel » : phrases complètes de contexte, lues par js/stories-actu.js (s.essentiel)
       // accroche de l'entrée (titres-propres.accroche), lue par les styles du test comparatif (js/stories.js : storySpecSujet)
       const r = await dessinerStory("actualite", `${indice}:${modele || "une"}${variante ? ":" + variante : ""}`); // modèle imposé : « une », « direct », « facea », « chiffre » ou « date » ; puis le style (variante)
       return r ? r.apercu : null;
@@ -1373,12 +1397,12 @@ function varianteChoix(choix, d) {
   return varianteDe(choix.id);
 }
 /** Arguments de dessiner() complétés par la variante (9e argument) ; inchangés pour « bleu » ou sans variante. */
-function argsAvecVariante(args, variante, accroche = null, sansEtat = false, sansPortrait = false) {
-  if ((!variante || variante === "bleu") && !accroche && !sansEtat && !sansPortrait) return args;
+function argsAvecVariante(args, variante, accroche = null, sansEtat = false, sansPortrait = false, essentiel = null) {
+  if ((!variante || variante === "bleu") && !accroche && !essentiel && !sansEtat && !sansPortrait) return args;
   const a = [...args];
   while (a.length < 8) a.push(null);
   a[8] = variante && variante !== "bleu" ? variante : null;
-  if (accroche || sansEtat || sansPortrait) a[9] = { ...(accroche ? { accroche } : {}), ...(sansEtat ? { sansEtat: true } : {}), ...(sansPortrait ? { sansPortrait: true } : {}) }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
+  if (accroche || essentiel || sansEtat || sansPortrait) a[9] = { ...(accroche ? { accroche } : {}), ...(essentiel ? { essentiel } : {}), ...(sansEtat ? { sansEtat: true } : {}), ...(sansPortrait ? { sansPortrait: true } : {}) }; // l'accroche de l'entrée (champ `accroche`) est celle que les styles affichent ; sans elle, le titre propre
   return a;
 }
 
@@ -1435,7 +1459,7 @@ function decrireRappelAgenda(choix, now) {
 }
 /** Accroche d'affichage d'un sujet de presse : le titre-fait (ce qui s'est passé) ; à défaut, titres-propres.accroche pour un sujet normal (pas pour un titre de repli) ; null s'il n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
 function accrocheDe(sujet, repli = false) {
-  const fait = faitDe(sujet);
+  const fait = (typeof sujet?.accroche === "string" && sujet.accroche.trim() && !repli ? sujet.accroche.trim() : null) || faitDe(sujet);
   if (fait) return fait;
   if (repli) return null;
   try { const a = require("./titres-propres.cjs").accroche(sujet); return a && a !== sujet?.titrePropre?.titre ? a : null; } catch (e) { return null; }
@@ -1463,7 +1487,7 @@ function decrireBase(choix, now = new Date()) {
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}), ...(choix.sansPortrait ? { personneNommee: true, sansPortrait: true } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(essentielDe(choix.sujet) ? { essentiel: essentielDe(choix.sujet) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}), ...(choix.sansPortrait ? { personneNommee: true, sansPortrait: true } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -1579,7 +1603,7 @@ async function main() {
       }
     } else {
       const variante = varianteChoix(choix, d); // test comparatif de styles (« bleu » = dessin historique)
-      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche, Boolean(choix.sujet && sansBandeauEtat(choix.sujet)), Boolean(choix.sansPortrait)));
+      const jpeg = await dessiner(...argsAvecVariante(d.args, variante, d.champs.accroche, Boolean(choix.sujet && sansBandeauEtat(choix.sujet)), Boolean(choix.sansPortrait), d.champs.essentiel));
       const dim = dimensionsJpeg(jpeg);
       if (!dim || dim.l !== 1080 || dim.h !== 1920) throw new Error(`image inattendue (${dim ? `${dim.l}×${dim.h}` : "pas un JPEG"})`);
       if (jpeg.length > MAX_OCTETS) throw new Error(`image trop lourde (${jpeg.length} octets)`);
@@ -1607,6 +1631,6 @@ async function main() {
   }
 }
 
-module.exports = { RESULTAT, dejaVuEntreeSaufResultat, pagesManquantes, dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { messageDe, essentielDe, faitDe, RESULTAT, dejaVuEntreeSaufResultat, pagesManquantes, dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

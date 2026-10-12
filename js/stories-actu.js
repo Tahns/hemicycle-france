@@ -39,33 +39,21 @@ function titreCite(t){
   return minuscules(x.replace(/\.$/, ""));
 }
 const minuscules = storyMinuscules;
-// Citation « … » mise en lignes ; si elle est trop longue, on coupe aux mots et on termine par « … »
-function citation(ctx, titre, largeur, maxLignes){
-  let mots = guillemets(norm(titre)).split(" ");
-  let coupe = false;
-  const fabrique = ()=> "« " + mots.join(" ").replace(/[\s,;:.\-–]+$/, "") + (coupe ? "…" : "") + " »";
-  let ls = storyLignes(ctx, fabrique(), largeur, 99);
-  while(ls.length > maxLignes && mots.length > 3){ mots.pop(); coupe = true; ls = storyLignes(ctx, fabrique(), largeur, 99); }
-  if(coupe){ mots = storyCoupePropre(mots); ls = storyLignes(ctx, fabrique(), largeur, 99); } // jamais « … de la… »
-  return ls;
+// Citation « … » mise en lignes, TOUJOURS entière (jamais coupée ni terminée par « … ») : l'appelant compare le nombre de lignes à ce qu'il peut afficher
+function citation(ctx, titre, largeur){
+  return storyLignes(ctx, "« " + guillemets(norm(titre)).replace(/[\s,;:.\-–]+$/, "") + " »", largeur, 99);
 }
 // Titre à nous ; à défaut, la rubrique du thème sur une ligne et « à la une » (ou « en direct ») en rose dessous.
 // Renvoie la plus grande taille (≤ tMax) pour laquelle il tient dans hMax, sans mot coupé.
 function titreFit(ctx, d, largeur, hMax, tMax, tMin){
-  const essai = t => {
+  const essai = (t, texte)=>{
     ctx.font = `700 ${t}px "Newsreader"`;
-    const ls = d.propre ? storyLignes(ctx, d.texte, largeur, 99) : storyLignes(ctx, d.rub, largeur, 99).concat([d.suffixe]);
-    return { t, ls, h:(ls.length - 1) * t * 1.04 + t, ok:ls.every(l=> ctx.measureText(l).width <= largeur), propre:d.propre };
+    const ls = d.propre ? storyLignes(ctx, texte, largeur, 99) : storyLignes(ctx, d.rub, largeur, 99).concat([d.suffixe]);
+    return { t, ls, h:(ls.length - 1) * t * 1.18 + t, ok:ls.every(l=> ctx.measureText(l).width <= largeur && !(l.endsWith("…") && !/…/.test(texte || ""))), propre:d.propre };
   };
-  let r;
-  for(let t = tMax; t >= tMin; t -= 2){ r = essai(t); if(r.ok && r.h <= hMax) return r; }
-  r = essai(tMin);
-  if(d.propre && r.h > hMax){ // titre trop long même à la taille minimale : coupé proprement (« … ») plutôt que de déborder
-    ctx.font = `700 ${tMin}px "Newsreader"`;
-    const n = Math.max(1, Math.floor((hMax - tMin) / (tMin * 1.04)) + 1);
-    r.ls = storyLignes(ctx, d.texte, largeur, n); r.h = (r.ls.length - 1) * tMin * 1.04 + tMin; r.ok = r.ls.every(l=> ctx.measureText(l).width <= largeur);
-  }
-  return r;
+  // l'accroche n'est JAMAIS coupée : elle rétrécit (jusqu'à tMin) et prend jusqu'à 6 lignes ; trop = true si elle ne tient pas quand même
+  for(let t = tMax; t >= tMin; t -= 2){ const r = essai(t, d.texte); if(r.ok && r.h <= hMax && r.ls.length <= 6) return r; }
+  return { ...essai(tMin, d.texte), trop:true };
 }
 const couleurTitre = r => i => (!r.propre && i === r.ls.length - 1) ? ROSE : "#fff";
 function droite(ctx, texte, yMilieu, { taille = 26, poids = 700, couleur = CIEL, espace = "0px" } = {}){
@@ -97,7 +85,7 @@ function enDirectDe(s){
 }
 function premiereVideo(s){ return s.articles.find(a=> a.video)?.media || ""; }
 function titreDe(s, suffixe){
-  const propre = norm(s.accroche) || norm(s.titrePropre?.titre);
+  const propre = norm(s.accroche) || norm(s.titrePropre?.accroche) || norm(s.titrePropre?.titre);
   return { texte:propre, propre:!!propre, rub:theme(s)[2], suffixe };
 }
 
@@ -189,14 +177,14 @@ function dessinePastilles(ctx, bloc, x, y){
 /* ----- Modèle A : « À la une » ----- */
 async function dessineStyle(ctx, s, style){ // styles du test comparatif (une-photo, question, chiffre) : voir storyStyleDessiner dans js/stories.js
   const d = await storySpecSujet(s);
-  if(!d || !storyStyleDessiner(ctx, style, { ...d, contexte:storyMots(d.contexte || d.accroche, 10) })) return null; // 10 mots au plus dans le bloc du bas : il ne doit pas toucher la ligne vidéo
+  if(!d || !storyStyleDessiner(ctx, style, d)) return null; // le bloc du bas s'ajuste (taille, lignes) pour tenir en entier sans toucher la ligne vidéo
   return { nom:`actualite-${slugDep(d.accroche).slice(0, 40)}` };
 }
 async function dessineUne(ctx, s, style){
   if(style && style !== "bleu" && !s.sensible){ const r = await dessineStyle(ctx, s, style); if(r) return r; } // sujet sensible ou sans titre à nous : toujours le style bleu
   const { L, marge } = STORY, larg = L - 2 * marge, a0 = s.articles[0];
   const medias = [...new Set(s.articles.map(a=> a.media))].filter(Boolean), n = medias.length;
-  const propre = norm(s.titrePropre?.titre);
+  const propre = norm(s.accroche) || norm(s.titrePropre?.accroche) || norm(s.titrePropre?.titre);
   const pers = (await personnes(s, 2)).slice(0, 2);
   const video = premiereVideo(s);
   const mediaTitre = norm(a0.media);
@@ -227,34 +215,45 @@ async function dessineUne(ctx, s, style){
   const cleV = "vignette" in ill ? ill.vignette : ill.theme;
   const photoV = !pers.length && cleV && typeof VIGNETTES !== "undefined" ? VIGNETTES[cleV] : null;
   const imgV = photoV && /^photos\/vignettes\/[\w-]+\.jpe?g$/.test(photoV.chemin || "") ? await storyImage(photoV.chemin) : null;
-  const reserveImg = imgV ? 430 : 0;
   const dispo = Y_BAS - Y_HAUT;
-  const tMax = propre ? (pers.length ? 118 : 156) : (pers.length ? 84 : 100);
-  // attribution : titre de presse cité (si le titre est le nôtre) ou « — média » (si le titre est celui du média)
-  const variantes = propre && !s.sensible?.sansCitation ? [{ q:2 }, { q:1 }, { q:0 }] : [{ q:0 }]; // niveau 1 sensible : jamais de titre de presse cité
+  const tMax = propre ? (pers.length ? 108 : 128) : (pers.length ? 84 : 100);
+  // Sous le titre : l'essentiel (champ `essentiel`, entier), à défaut le titre de presse cité (entier), à défaut « — média ». Jamais de phrase coupée : on réduit la police,
+  // on ajoute des lignes, puis on retire d'abord les éléments secondaires (photo, pastilles de médias) ; niveau 1 sensible : jamais de titre de presse cité
+  const essentielTxt = s.sensible ? "" : norm(s.essentiel || s.titrePropre?.essentiel);
+  const attributions = [];
+  if(essentielTxt) for(const e of storyVariantes(essentielTxt)) attributions.push({ k:"e", texte:e });
+  if(propre && !s.sensible?.sansCitation && !essentielTxt) for(const q of [3, 2, 1]) attributions.push({ k:"q", q });
+  attributions.push({ k:"0" });
+  const combos = [{ med:true, img:true }, { med:true, img:false }, { med:false, img:false }];
   let plan = null;
-  for(const v of variantes){
-    let trouve = null;
-    for(let t = tMax; t >= 60 && !trouve; t -= 2){
-      ctx.font = `700 ${t}px "Newsreader"`;
-      const ls = propre ? storyLignes(ctx, titreTexte, larg, 99) : citation(ctx, titreCite(a0.titre), larg, 9);
-      if(!ls.every(l=> ctx.measureText(l).width <= larg)) continue;
-      const hT = (ls.length - 1) * t * 1.04 + t;
-      if(ls.length > 4 || hT > dispo * 0.42) continue; // jamais un titre qui occupe toute la page : 4 lignes et 42 % de la hauteur au plus
-      let hA = 0, ql = [];
-      if(v.q){ ctx.font = `600 32px "Newsreader"`; ql = citation(ctx, titreCite(a0.titre), larg - 28, v.q); hA = 18 + (ql.length - 1) * 32 * 1.2 + 32 + 16 + 30; }
-      else hA = 14 + 32;
-      const tot = hT + hA + gap + hMedias + (pers.length ? gap + mp.h : 0);
-      if(tot + reserveImg <= dispo) trouve = { t, ls, hT, hA, ql, v, tot };
+  parcours: for(const at of attributions){
+    // bloc d'attribution mesuré une fois (indépendant de la taille du titre)
+    let ql = [], te = 0, hA = 14 + 32;
+    if(at.k === "q"){ ctx.font = `600 32px "Newsreader"`; ql = citation(ctx, titreCite(a0.titre), larg - 28); if(ql.length > at.q) continue; hA = 18 + (ql.length - 1) * 32 * 1.2 + 32 + 16 + 30; }
+    if(at.k === "e"){
+      for(let t = 44; t >= 34 && !te; t -= 2){ ctx.font = `600 ${t}px "Public Sans"`; const l = storyLignesEq(ctx, at.texte, larg - 28); if(l.every(x=> ctx.measureText(x).width <= larg - 28 && !(x.endsWith("…") && !/…/.test(at.texte)))){ te = t; ql = l; } }
+      if(!te) continue;
+      hA = 34 + 40 + (ql.length - 1) * te * 1.22 + te + 20;
     }
-    // avec la citation, le titre doit rester gros (≥ 88 px) ; sinon on passe à la variante plus courte
-    if(trouve && (!v.q || trouve.t >= 88)){ plan = trouve; break; }
+    for(const tMinTitre of [72, 52]) for(const cb of combos){ // d'abord un gros titre (≥ 72 px) en retirant photo et pastilles, puis seulement un titre plus petit (≥ 52 px)
+      const hMed = cb.med ? hMedias : 0, rImg = cb.img && imgV ? 430 : 0;
+      for(let t = tMax; t >= tMinTitre; t -= 2){
+        ctx.font = `700 ${t}px "Newsreader"`;
+        const ls = propre ? storyLignesEq(ctx, titreTexte, larg) : citation(ctx, titreCite(a0.titre), larg);
+        if(!ls.every(l=> ctx.measureText(l).width <= larg && !(l.endsWith("…") && !/…/.test(titreTexte)))) continue;
+        const hT = (ls.length - 1) * t * 1.18 + t;
+        if(ls.length > (tMinTitre >= 72 ? 4 : 6) || hT > dispo * 0.6) continue; // le titre ne prend pas toute la page : 6 lignes et 60 % de la hauteur au plus
+        const tot = hT + hA + gap + hMed + (pers.length ? gap + mp.h : 0);
+        if(tot + rImg > dispo) continue;
+        // avec une citation de presse, le titre doit rester gros (≥ 88 px) ; sinon on passe à la variante plus courte
+        if(at.k === "q" && t < 88) continue;
+        plan = { t, ls, hT, hA, ql, te, at, tot, med:cb.med, hMed, reserveImg:rImg };
+        break parcours;
+      }
+    }
   }
-  if(!plan){ // dernier recours : titre minimal, sans citation
-    ctx.font = `700 56px "Newsreader"`;
-    const ls = propre ? storyLignes(ctx, titreTexte, larg, 4) : citation(ctx, titreCite(a0.titre), larg, 4);
-    plan = { t:56, ls, hT:(ls.length - 1) * 56 * 1.04 + 56, hA:46, ql:[], v:{ q:0 }, tot:0 };
-  }
+  if(!plan) return null; // le texte ne tient pas en entier : pas de story plutôt qu'une phrase coupée
+  const reserveImg = plan.reserveImg, imgAffichee = imgV && plan.reserveImg ? imgV : null;
   let extra = Math.max(0, dispo - plan.tot - reserveImg);
   const bonus = pers.length ? Math.min(Math.max(0, extra - 60), pers.length === 1 ? 90 : 24) : 0;
   extra -= bonus;
@@ -262,9 +261,9 @@ async function dessineUne(ctx, s, style){
   const ec = Math.min(extra / 4, pers.length ? 40 : 110);
   let y = Y_HAUT + (pers.length ? Math.min(extra * 0.1, 20) : Math.min(extra * 0.22, 190));
   ctx.font = `700 ${plan.t}px "Newsreader"`;
-  y += lignes(ctx, plan.ls, marge, y, plan.t, 1.04, "#fff");
+  y += lignes(ctx, plan.ls, marge, y, plan.t, 1.18, "#fff");
   // attribution
-  if(plan.v.q){
+  if(plan.at.k === "q"){
     y += 18 + ec / 2;
     const yq = y;
     ctx.font = `600 32px "Newsreader"`;
@@ -273,6 +272,16 @@ async function dessineUne(ctx, s, style){
     ctx.fillText(storyLignes(ctx, `— ${mediaTitre}`, larg - 28, 1)[0], marge + 28, y + hq + 16 + 22); ctx.letterSpacing = "0px";
     y += hq + 16 + 30;
     ctx.fillStyle = ROSE; ctx.fillRect(marge, yq, 8, y - yq - 4);
+  } else if(plan.at.k === "e"){
+    y += 34 + ec / 2;
+    const yq = y;
+    ctx.fillStyle = "rgba(255,255,255,0.22)"; ctx.fillRect(marge, yq - 17, larg, 2); // filet de séparation
+    ctx.font = `800 24px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "4px"; ctx.fillText("L'ESSENTIEL", marge + 28, y + 22); ctx.letterSpacing = "0px";
+    y += 40;
+    ctx.font = `600 ${plan.te}px "Public Sans"`;
+    const hq = lignes(ctx, plan.ql, marge + 28, y, plan.te, 1.22, "#fff");
+    y += hq + 20;
+    ctx.fillStyle = ROSE; ctx.fillRect(marge, yq, 8, y - yq - 4);
   } else {
     y += 14;
     ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = ROSE; ctx.letterSpacing = "1px";
@@ -280,24 +289,26 @@ async function dessineUne(ctx, s, style){
     ctx.letterSpacing = "0px";
     y += 32;
   }
-  // « N médias en parlent » + pastilles
-  y += gap + ec;
-  ctx.font = `800 24px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = CIEL;
-  ctx.fillText(kick.toUpperCase(), marge, y + 22); ctx.letterSpacing = "0px";
-  y += 30 + 16;
-  dessinePastilles(ctx, past, marge, y);
-  y += hMedias - 46;
+  // « N médias en parlent » + pastilles (élément secondaire : retiré avant de couper une phrase)
+  if(plan.med){
+    y += gap + ec;
+    ctx.font = `800 24px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = CIEL;
+    ctx.fillText(kick.toUpperCase(), marge, y + 22); ctx.letterSpacing = "0px";
+    y += 30 + 16;
+    dessinePastilles(ctx, past, marge, y);
+    y += hMedias - 46;
+  }
   // personnalités
   if(pers.length){
-    y += gap + ec;
+    y += gap + (plan.med ? ec : 0);
     dessinePortraits(ctx, pers, y, bonus);
-  } else if(imgV){
+  } else if(imgAffichee){
     // photo de l'institution : bloc large aux coins arrondis, légende de crédit dessous
     y += gap;
     // les vignettes sont des carrés de 320 px : un carré de 360 px au plus (agrandissement léger), centré, coins arrondis
     const cote = Math.max(260, Math.min(360, Y_BAS - y - 56)), xi = Math.round(marge + (larg - cote) / 2), hImg = cote;
     ctx.save(); ctx.beginPath(); ctx.roundRect(xi, y, cote, cote, 28); ctx.clip();
-    ctx.imageSmoothingQuality = "high"; ctx.drawImage(imgV, xi, y, cote, cote);
+    ctx.imageSmoothingQuality = "high"; ctx.drawImage(imgAffichee, xi, y, cote, cote);
     ctx.restore();
     ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = CIEL; ctx.letterSpacing = "0px";
     ctx.fillText(storyLignes(ctx, `Photo : ${photoV.auteur || "auteur inconnu"}, ${photoV.licence}, Wikimedia Commons`, larg, 1)[0], marge, y + hImg + 36);
@@ -336,21 +347,23 @@ async function dessineDirect(ctx, s){
   // le titre prend le reste de la place (jusqu'à 112 px) ; les citations se resserrent si besoin
   let plan = null;
   const dispo = Y_BAS - 438;
-  const options = [[42, 3], [40, 3], [38, 3], [36, 3], [34, 3], [32, 2], [30, 2], [28, 2], [26, 2]];
-  for(let nb = cites.length; nb >= 1; nb--){ // titre très long : moins de citations plutôt qu'un titre minuscule ou des blocs qui se touchent
+  const options = [[42, 3], [40, 3], [38, 3], [36, 3], [34, 3], [34, 4], [32, 4], [30, 4], [28, 4]];
+  for(let nb = cites.length; nb >= 0; nb--){ // titre très long : moins de citations plutôt qu'un titre minuscule ou des blocs qui se touchent (jamais de citation coupée)
     for(const [tq, mq] of options){
       ctx.font = `700 ${tq}px "Public Sans"`;
-      const bl = cites.slice(0, nb).map(c=>{ const ls = citation(ctx, c.titre, larg - 36, mq); return { ...c, ls, h: 26 + (ls.length - 1) * tq * 1.24 + tq + 10 + 28 + 26 }; });
+      const bl = cites.slice(0, nb).map(c=>{ const ls = citation(ctx, c.titre, larg - 36); return { ...c, ls, h: 26 + (ls.length - 1) * tq * 1.24 + tq + 10 + 28 + 26 }; });
+      if(bl.some(b=> b.ls.length > mq)) continue;
       const hc = bl.reduce((a, b)=> a + b.h, 0);
       const f = titreFit(ctx, dT, larg, dispo - hc - 50, 112, 52);
       plan = { bl, f, tq };
-      if(f.h + 50 + hc <= dispo && f.t >= 96) break;
+      if(!f.trop && f.h + 50 + hc <= dispo && f.t >= 96) break;
     }
-    if(plan.f.h + 50 + plan.bl.reduce((a, b)=> a + b.h, 0) <= dispo && plan.f.t >= 64) break;
+    if(plan && !plan.f.trop && plan.f.h + 50 + plan.bl.reduce((a, b)=> a + b.h, 0) <= dispo && plan.f.t >= 64) break;
   }
+  if(!plan || plan.f.trop) return null; // le titre ne tient pas en entier : pas de story plutôt qu'une phrase coupée
   let y = 438;
   ctx.font = `700 ${plan.f.t}px "Newsreader"`;
-  y += lignes(ctx, plan.f.ls, marge, y, plan.f.t, 1.04, couleurTitre(plan.f)) + 46;
+  y += lignes(ctx, plan.f.ls, marge, y, plan.f.t, 1.18, couleurTitre(plan.f)) + 46;
   for(const b of plan.bl){
     ctx.fillStyle = "rgba(255,255,255,0.18)"; ctx.fillRect(marge, y, larg, 2);
     ctx.fillStyle = ROSE; ctx.beginPath(); ctx.arc(marge + 8, y + 26 + plan.tq * 0.5, 7, 0, 2 * Math.PI); ctx.fill();

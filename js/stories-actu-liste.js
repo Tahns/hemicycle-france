@@ -25,19 +25,14 @@
     return w;
   }
 
-  // Citation « … » : guillemets français, guillemets internes adoucis, tronquée proprement (« … ») si trop longue.
+  // Citation « … » : guillemets français, guillemets internes adoucis ; TOUJOURS entière (jamais coupée ni terminée par « … » : l'appelant réduit la taille ou retire l'entrée).
   // La police du contexte doit déjà être réglée.
-  function citer(ctx, titre, larg, max){
+  function citer(ctx, titre, larg){
     const t = minusculesListe(storyTypo(titre).replace(/^(?:DIRECT|EN DIRECT|En direct)\s*[.:]\s*/, ""))
       .replace(/"([^"]*)"/g, "“$1”").replace(/«\s*([^»]*?)\s*»/g, "“$1”").replace(/(\p{L})'(\p{L})/gu, "$1’$2");
-    const l = storyLignes(ctx, `« ${t} »`, larg, 99);
-    if(l.length <= max) return l;
-    const r = l.slice(0, max);
-    let d = r[max - 1];
-    while(d.includes(" ") && ctx.measureText(d + "… »").width > larg) d = d.slice(0, d.lastIndexOf(" "));
-    r[max - 1] = storyCoupePropre(d.split(" ")).join(" ").replace(/[\s,;:.\-–—]+$/, "") + "… »";
-    return r;
+    return storyLignes(ctx, `« ${t} »`, larg, 99);
   }
+  const entier = ls => !ls.some(l=> l.endsWith("…"));
   const hauteurLignes = (n, t, inter) => n ? t + (n - 1) * t * inter : 0;
   function lignesTexte(ctx, lignes, x, yBase, t, inter){
     lignes.forEach((l, i)=> ctx.fillText(l, x, yBase + i * t * inter));
@@ -70,7 +65,7 @@
 
   // indices : sujets imposés (stories automatiques, déjà triés sur leurs règles de prudence) ; sinon les sujets les plus recoupés du moment
   async function enBref(ctx, indices){
-    const top = indices ? indices.map(i=> ACTUALITES?.sujets?.[i]).filter(s=> s?.articles?.length).slice(0, 4) : choisirEnBref();
+    let top = indices ? indices.map(i=> ACTUALITES?.sujets?.[i]).filter(s=> s?.articles?.length).slice(0, 4) : choisirEnBref();
     if(top.length < 2) return null;
     const { L, marge } = STORY, xt = 200, larg = L - marge - xt, bas = STORY.bas;
     let yHaut = storyCadre(ctx, "En bref");
@@ -81,17 +76,22 @@
     y += 32;
 
     // Contenu de chaque sujet : notre titre ; à défaut, le titre de presse du premier article (la ligne des médias le rattache à son média)
-    const items = top.map(s=>{
-      const arts = s.articles, medias = [...new Set(arts.map(a=>a.media))].filter(Boolean), propre = s.titrePropre?.titre;
+    let items = top.map(s=>{
+      const arts = s.articles, medias = [...new Set(arts.map(a=>a.media))].filter(Boolean), propre = s.accroche || s.titrePropre?.accroche || s.titrePropre?.titre;
       return { s, medias, titre: propre || titrePresse(arts[0].titre), propre:!!propre, video: aVideo(arts) };
     });
-    // lignes d'un titre : le nôtre tel quel ; un titre de presse entre guillemets, refermés même s'il est coupé
-    const lignesDe = (it, tt)=>{ ctx.font = `800 ${tt}px "Public Sans"`; return it.propre ? storyLignes(ctx, storyTypo(it.titre), larg, 3) : citer(ctx, it.titre, larg, 3); };
+    // lignes d'un titre : le nôtre tel quel ; un titre de presse entre guillemets. JAMAIS coupés : la taille diminue (34 px au plus bas), et si cela ne suffit pas on retire le dernier sujet
+    const lignesDe = (it, tt)=>{ ctx.font = `800 ${tt}px "Public Sans"`; return it.propre ? storyLignes(ctx, storyTypo(it.titre), larg, 99) : citer(ctx, it.titre, larg); };
     const mesure = (tt)=> items.map(it=> hauteurLignes(lignesDe(it, tt).length, tt, 1.14) + 14 + 26);
     const tz = 22; // médias : une ligne
-    let tt = 62, hs = mesure(tt);
-    const dispo = bas - y - items.length * 44;
-    while(tt > 34 && hs.reduce((a, b)=>a + b, 0) > dispo){ tt -= 2; hs = mesure(tt); }
+    let tt = 62, hs = mesure(tt), dispo = bas - y - items.length * 44;
+    for(;;){
+      dispo = bas - y - items.length * 44;
+      for(tt = 62; tt >= 34; tt -= 2){ hs = mesure(tt); if(hs.reduce((a, b)=>a + b, 0) <= dispo && items.every(it=> entier(lignesDe(it, tt)))) break; }
+      if(tt >= 34) break;
+      if(items.length <= 2) return null; // les titres ne tiennent pas en entier : pas de story plutôt qu'une phrase coupée
+      items = items.slice(0, -1);
+    }
     const reste = Math.max(0, dispo - hs.reduce((a, b)=>a + b, 0)), pad = (items.length * 44 + Math.min(reste, items.length * 60)) / items.length;
     let yy = y;
     ctx.fillStyle = storyAlpha(C.ciel, 0.35); ctx.fillRect(marge, yy, L - 2 * marge, 2);
@@ -131,12 +131,14 @@
       if(titresVus.has(cle(a.titre))){ reportes.push(a); continue; }
       vus.add(a.media); titresVus.add(cle(a.titre)); arts.push(a);
     }
+    const { L, marge } = STORY, larg = L - 2 * marge;
+    { const c = document.createElement("canvas").getContext("2d"); c.font = `700 28px "Public Sans"`; // un titre de presse qui ne tient pas en entier (4 lignes à 28 px) n'est pas cité
+      for(let i = arts.length - 1; i >= 0; i--){ const l = citer(c, arts[i].titre, larg - 56); if(l.length > 4 || !entier(l)) arts.splice(i, 1); } }
     const nbMediasVus = new Set(triees.map(a=> a.media)).size;
     if(nbMediasVus < 3) return null;
     if(arts.length < 2) return null; // jamais deux fois le même titre (reprises de dépêche) : sans au moins deux titres distincts, pas de dossier
     arts.sort((x, y)=> String(y.date).localeCompare(String(x.date)));
     const nbMedias = dossier.mediasDistincts ?? (dossier.medias?.length || arts.length), nbArts = dossier.nb || dossier.articles?.length || arts.length;
-    const { L, marge } = STORY, larg = L - 2 * marge;
     // Contexte : un fait tiré du sujet qui recoupe le plus ce dossier
     const urls = new Set((dossier.articles || []).map(a=> a.url));
     let contexte = null, meilleur = 0, sujetLie = null;
@@ -149,14 +151,14 @@
     storyFondContexte({ theme:sujetLie?.illustration?.theme, cle:dossier.titre }); // fond généré : thème du sujet le plus proche, clé = titre du dossier
     if(style && style !== "bleu"){ // styles du test comparatif (js/stories.js) : photo d'institution du sujet le plus proche, jamais une personne
       const ill = sujetLie?.illustration || {}, th = storyThemeInfos(ill.theme), photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
-      const cite = storyMots(storyTitreCite(arts[0].titre), 13), noms = [...new Set(triees.map(a=> a.media))];
+      const cite = storyTitreCite(arts[0].titre), noms = [...new Set(triees.map(a=> a.media))];
       const liste = noms.slice(0, 5).join(", ") + (noms.length > 5 ? ` et ${noms.length - 5} autres` : "");
-      const fait = contexte?.texte && storyNbMots(contexte.texte) <= 18 ? storyTypo(contexte.texte).replace(/\.$/, "") : "";
+      const fait = contexte?.texte && storyNbMots(contexte.texte) <= 30 ? storyTypo(contexte.texte).replace(/\.$/, "") : "";
       const dessin = storyStyleDessiner(ctx, style, {
         theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:"Dossier", photo,
         accroche:style === "question" ? `${dossier.titre} : où en est-on ?` : dossier.titre,
-        essentiel:fait || `Dernier titre relevé : « ${cite} » (${storyMots(arts[0].media, 4)})`,
-        puces:[`${nbArts} articles relevés`, `${nbMedias} médias différents`, `Dernier titre : ${storyMots(arts[0].media, 4)}`],
+        essentiel:fait || `Dernier titre relevé : « ${cite} » (${storyTypo(arts[0].media)})`,
+        puces:[`${nbArts} articles relevés`, `${nbMedias} médias différents`, `Dernier titre : ${storyTypo(arts[0].media)}`],
         chiffre:{ valeur:String(nbArts), legende:nbArts > 1 ? "articles dans le dossier" : "article dans le dossier" },
         contexte:`${nbMedias} médias en parlent : ${dossier.titre}`,
         source:"", cta:"Tout le dossier",
@@ -168,21 +170,22 @@
     // Contexte (bas de la page)
     let hC = 0, lc = [], ls = "";
     if(contexte?.texte){
-      ctx.font = `600 ${tc}px "Public Sans"`; lc = storyLignes(ctx, contexte.texte, larg, 2);
-      ctx.font = `500 22px "Public Sans"`; ls = contexte.source ? storyLignes(ctx, contexte.source, larg, 1)[0] : "";
-      hC = 20 + 24 + 10 + hauteurLignes(lc.length, tc, 1.25) + (ls ? 14 + 22 : 0) + 8;
+      ctx.font = `600 ${tc}px "Public Sans"`; lc = storyLignes(ctx, contexte.texte, larg, 99);
+      if(lc.length > 3 || !entier(lc)){ lc = []; contexte = null; } // un contexte qui ne tient pas en entier n'est pas affiché
+      ctx.font = `500 22px "Public Sans"`; ls = contexte?.source ? storyLignes(ctx, contexte.source, larg, 1)[0] : "";
+      hC = !contexte ? 0 : 20 + 24 + 10 + hauteurLignes(lc.length, tc, 1.25) + (ls ? 14 + 22 : 0) + 8;
     }
     const yC = 1490 - hC, yFin = (hC ? yC : 1490) - 34;
     const mesure = (n, tq)=> arts.slice(0, n).map(a=>{
       ctx.font = `700 ${tq}px "Public Sans"`;
-      return 26 + 14 + hauteurLignes(citer(ctx, a.titre, larg - 56, 2).length, tq, 1.18) + g;
+      return 26 + 14 + hauteurLignes(citer(ctx, a.titre, larg - 56).length, tq, 1.18) + g;
     });
     const total = h => h.reduce((a, b)=> a + b, 0) - g;
     // Mise en page du haut : grand titre sur 2 lignes (ou sur une seule ligne), chiffres géants plus ou moins grands.
     // On retient la première configuration qui laisse de la place à 4-5 entrées lisibles (citation ≥ 32 px).
     const titreFit = (maxLignes, tMin)=>{
       for(let t = 108; t >= tMin; t -= 2){ ctx.font = `700 ${t}px "Newsreader"`; const l = storyLignes(ctx, dossier.titre, larg, 99); if(l.length <= maxLignes) return { t, l }; }
-      ctx.font = `700 ${tMin}px "Newsreader"`; return { t:tMin, l:storyLignes(ctx, dossier.titre, larg, maxLignes) };
+      ctx.font = `700 ${tMin}px "Newsreader"`; return { t:tMin, l:storyLignes(ctx, dossier.titre, larg, 99) }; // le titre n'est jamais coupé : il prend des lignes en plus
     };
     const yEtiq = STORY_DA.etiquetteY, yTit = yEtiq + 54 + 26;
     const haut = (ft, tn)=>{ const yN = yTit + hauteurLignes(ft.l.length, ft.t, 1.0) + 44; return { ...ft, tn, yN, yDeb: yN + tn * 0.74 + 40 + 58 }; };
@@ -239,7 +242,7 @@
       if(a.video) pastilleVideo(ctx, tx + ctx.measureText(entete).width + 20, mid);
       // Citation
       ctx.font = `700 ${tq}px "Public Sans"`; ctx.fillStyle = C.blanc;
-      const lq = citer(ctx, a.titre, larg - 56, 2);
+      const lq = citer(ctx, a.titre, larg - 56);
       lignesTexte(ctx, lq, tx, yy + 26 + 14 + tq * 0.84, tq, 1.18);
       yy += hs[i] + ecart;
     });

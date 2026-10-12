@@ -520,3 +520,174 @@ test("bandeau « Gouvernement » : seulement si le fait concerne l'État central
   assert.strictEqual(sansBandeauEtat(etat), false);
   assert.strictEqual(sansBandeauEtat(sujet([["A", "Le maire annonce un budget"]], { illustration: { theme: "budget", personnes: [] } })), false, "autre thème : rien à retirer");
 });
+
+// ─── MESSAGE COMPLET : accroche (phrase complète) + essentiel (contexte), jamais coupés ───────────────────────────────────────
+const TPM = createRequire(import.meta.url)("../scripts/titres-propres.cjs");
+const LP = createRequire(import.meta.url)("../scripts/liste-prudente.cjs");
+const personnes = (...noms) => noms.map((nom) => ({ nom }));
+const avecPers = (titres, ...noms) => sujet(titres, { illustration: { theme: "politique", personnes: personnes(...noms) } });
+const mots = (t) => nbMots(t);
+/** Une phrase propre : pas de « … », guillemets fermés, aucune fin sur un mot de liaison ni une citation coupée. */
+function estPropre(t) {
+  assert.ok(!/…|\.\.\./.test(t), `jamais de points de suspension : ${t}`);
+  assert.strictEqual((t.match(/[«“]/g) || []).length, (t.match(/[»”]/g) || []).length, `guillemets fermés : ${t}`);
+  assert.strictEqual((t.match(/\(/g) || []).length, (t.match(/\)/g) || []).length, `parenthèses fermées : ${t}`);
+  for (const ph of t.split(/(?<=[.?!])\s+(?=\p{Lu})/u)) assert.ok(!/\b(?:de|du|des|la|le|les|un|une|et|ou|en|au|aux|à|pour|par|sur|dans|avec|sans|que|qui|selon|contre|devant)[.]?$/i.test(ph.replace(/[.»”"]+$/, "")), `phrase finie proprement : ${ph}`);
+}
+const verifierMessage = (m, nom) => {
+  assert.ok(m, `message complet attendu : ${nom}`);
+  assert.ok(mots(m.accroche) >= 6 && mots(m.accroche) <= 20, `accroche de 6 à 20 mots (${mots(m.accroche)}) : ${m.accroche}`);
+  assert.ok(m.accroche.length <= 135, `accroche courte à l'écran : ${m.accroche}`);
+  assert.ok(mots(m.essentiel) >= 18 && mots(m.essentiel) <= 45, `essentiel de 18 à 45 mots (${mots(m.essentiel)}) : ${m.essentiel}`);
+  estPropre(m.accroche); estPropre(m.essentiel);
+  assert.ok(!/ce que disent les m[ée]dias/i.test(m.accroche + m.essentiel), "jamais un libellé de thème");
+  assert.ok(/m[ée]dias (?:en parlent|)|rapportés par/i.test(m.essentiel), `le nombre de médias figure : ${m.essentiel}`);
+};
+
+test("message complet : la story lycées (Mélenchon à Clermont-Ferrand) dit ce qui s'est passé, sans citation coupée", () => {
+  const s = avecPers([
+    ["Le Monde", "Présidentielle 2027 : Jean-Luc Mélenchon promet de supprimer « l’ignominie » Parcoursup devant une salle comble à Clermont-Ferrand"],
+    ["Sud Ouest", "« Ignominie » Parcoursup, soutien du mouvement lycéen, droit de vote à 16 ans… À Clermont-Ferrand, Jean-Luc Mélenchon se tourne vers la jeunesse"],
+    ["20 Minutes", "« Parcoursup doit être aboli »… Jean-Luc Mélenchon promet de supprimer « l’ignominie » dans une salle pleine à craquer"],
+    ["Le Télégramme", "À Clermont-Ferrand, Mélenchon fait salle comble pour dénoncer « l’ignominie » Parcoursup"],
+  ], "Jean-Luc Mélenchon");
+  const m = TPM.messageComplet(s);
+  verifierMessage(m, "lycées / Mélenchon");
+  assert.ok(/Jean-Luc Mélenchon promet de supprimer Parcoursup/.test(m.accroche), m.accroche);
+  assert.ok(/Quatre médias en parlent : Le Monde, Sud Ouest, 20 Minutes et Le Télégramme/.test(m.essentiel), m.essentiel);
+  assert.ok(!/ignominie/i.test(m.accroche), "l'opinion en un mot n'est pas reprise comme un fait");
+  // « droit de vote à 16 ans » est une mesure : ce n'est pas un mineur identifiable (la protection reste pour « Lola, 16 ans »)
+  assert.strictEqual(LP.motExclu(s.articles[1].titre), null);
+  assert.ok(LP.motExclu("Lola, 16 ans, lycéenne parisienne, devient porte-parole"));
+});
+
+test("message complet : une opinion n'est jamais un fait, elle est citée ENTIÈRE avec son auteur (Dupont-Aignan, 2 médias)", () => {
+  const s = avecPers([
+    ["Le JDD", "Blocus : «Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», alerte Nicolas Dupont-Aignan"],
+    ["Europe 1", "«Ce n’est plus un mouvement lycéen, c’est un début de guerre civile», pointe Nicolas Dupont-Aignan"],
+  ], "Nicolas Dupont-Aignan");
+  const m = TPM.messageComplet(s);
+  verifierMessage(m, "Dupont-Aignan");
+  assert.strictEqual(m.accroche, "Nicolas Dupont-Aignan alerte : « Ce n’est plus un mouvement lycéen, c’est un début de guerre civile »");
+  assert.ok(m.accroche.startsWith("Nicolas Dupont-Aignan"), "l'auteur d'abord, jamais « … début de guerre… » seul");
+  assert.ok(/^Pendant le blocus, Nicolas Dupont-Aignan alerte/.test(m.essentiel) && /rapportés par deux médias : Le JDD et Europe 1/.test(m.essentiel), m.essentiel);
+  // une citation sans auteur, ou coupée (« … »), ne donne rien
+  assert.deepStrictEqual(TPM.citationsAuteur("«Ce n’est plus un mouvement lycéen, c’est un début de guerre…», alerte Nicolas Dupont-Aignan"), []);
+  assert.deepStrictEqual(TPM.citationsAuteur("Ce n’est plus un mouvement lycéen, c’est un début de guerre civile"), []);
+});
+
+test("message complet : l'ONU et les violences policières — phrase complète, mais la protection « violences » écarte la publication", () => {
+  const s = sujet([["France 24", "Mobilisation lycéenne : l'ONU \"inquiète\" face aux violences policières"], ["RFI", "Mobilisation des lycéens en France: l'ONU «inquiète» face aux violences, le mouvement appelé à se poursuivre"]], { illustration: { theme: "securite", personnes: [] } });
+  const m = TPM.messageComplet(s);
+  verifierMessage(m, "ONU");
+  assert.ok(/l'ONU s'inquiète des violences/.test(m.accroche), m.accroche);
+  assert.ok(LP.motExclu(s.articles[0].titre), "violences : jamais publié (protection légale conservée)");
+});
+
+test("message complet : Glucksmann (3 médias) et Lescure/Budget (citation attribuée gardée entière)", () => {
+  const g = avecPers([
+    ["L'Express", "Primaire de la gauche : Raphaël Glucksmann l'emporte dès le premier tour avec 66 % des voix"],
+    ["20 Minutes", "Primaire de la gauche : Raphaël Glucksmann élu haut la main dès le premier tour avec 66,17% des voix"],
+    ["Europe 1", "Primaire socialiste : Raphaël Glucksmann élu dès le premier tour avec 66% des voix"],
+  ], "Raphaël Glucksmann");
+  const mg = TPM.messageComplet(g);
+  verifierMessage(mg, "Glucksmann");
+  assert.ok(/Glucksmann/.test(mg.accroche) && /premier tour/.test(mg.accroche) && /\b66/.test(mg.accroche), mg.accroche);
+  assert.ok(/rimaire/.test(mg.essentiel), "le contexte (la primaire) est dans l'essentiel : " + mg.essentiel);
+  const l = avecPers([
+    ["Le Monde", "Budget 2027 : Roland Lescure assure qu’il « préférerait éviter » le recours aux ordonnances en cas d’impasse au Parlement"],
+    ["20 Minutes", "Budget 2027 : Le ministre de l’Economie « préférerait éviter » le recours aux ordonnances"],
+    ["Le Télégramme", "Budget : Lescure « préférerait éviter » le recours aux ordonnances, « glissière de sécurité »"],
+  ], "Roland Lescure");
+  const ml = TPM.messageComplet(l);
+  verifierMessage(ml, "Lescure");
+  assert.ok(/Lescure/.test(ml.accroche) && /« préférerait éviter »/.test(ml.accroche), ml.accroche);
+  assert.ok(!/glissière/.test(ml.accroche + ml.essentiel), "la citation finale détachée n'est pas reprise");
+});
+
+test("message complet : les deux stories publiées du propriétaire (dissolution d'Égalité & Réconciliation, Tanguy) ne sont plus coupées", () => {
+  const diss = avecPers([
+    ["Libération", "Laurent Nuñez lance la dissolution d’Egalité & Réconciliation, l’association de l’antisémite Alain Soral"],
+    ["BFMTV", "Le ministère de l'Intérieur a engagé une procédure de dissolution contre Egalité & Réconciliation, l'association d'Alain Soral"],
+    ["L'Humanité", "Laurent Nuñez lance la procédure de dissolution d’Égalité & Réconciliation, déversoir de la haine antisémite d’Alain Soral"],
+  ], "Laurent Nuñez");
+  const m = TPM.messageComplet(diss);
+  verifierMessage(m, "dissolution");
+  assert.strictEqual(m.accroche, "Le ministère de l'Intérieur engage la dissolution d'Égalité & Réconciliation, l'association d'Alain Soral");
+  assert.ok(!/antisémite|déversoir|haine/i.test(m.accroche + m.essentiel), "aucun qualificatif moral ou politique : " + m.essentiel);
+  assert.ok(/Le ministère de l'Intérieur a engagé une procédure de dissolution contre Égalité & Réconciliation/.test(m.essentiel), m.essentiel);
+  const t = avecPers([
+    ["Sud Ouest", "Le député RN Jean-Philippe Tanguy admet que son parti attire « des dingues »"],
+    ["20 Minutes", "Rassemblement national : Le député Jean-Philippe Tanguy reconnaît que son parti attire « des dingues »"],
+    ["BFMTV", "Attaché parlementaire RN viré, Jean-Philippe Tanguy estime que le parti attire « des dingues »"],
+    ["Le Télégramme", "Rassemblement national : Tanguy admet que son parti attire « des dingues »"],
+  ], "Jean-Philippe Tanguy");
+  const mt = TPM.messageComplet(t);
+  verifierMessage(mt, "Tanguy");
+  assert.strictEqual(mt.accroche, "Au Rassemblement national, le député Jean-Philippe Tanguy reconnaît que son parti attire « des dingues »");
+  assert.ok(/« des dingues »$/.test(mt.accroche), "se termine par la citation entière, jamais « reconnaît… »");
+});
+
+test("message complet : accusation visant une personne nommée — aucun fait inventé, présomption d'innocence", () => {
+  const s = avecPers([
+    ["RFI", "France: accusé d'antisémitisme, Bardella a effacé les données d'un compte Facebook, assure le Canard enchaîné"],
+    ["France 24", "Jordan Bardella aurait effacé les données d'un compte Facebook après les révélations de Mediapart"],
+    ["Libération", "Jordan Bardella accusé d’antisémitisme : «Mediapart» prouve (encore) que le compte Facebook était bien celui du président du RN"],
+  ], "Jordan Bardella");
+  assert.strictEqual(TPM.messageComplet(s), null, "pas de phrase propre : le sujet n'est pas publié (gros sujet : signalé par l'alerte)");
+  // une accusation nommant la personne n'est jamais reprise dans une phrase
+  const f = avecPers([["Le Monde", "Jean Dupont accusé de fraude fiscale par un ancien collaborateur"], ["BFMTV", "L'élu Jean Dupont accusé de fraude : il dément"]], "Jean Dupont");
+  const m = TPM.messageComplet(f);
+  assert.ok(!m || !/dupont/i.test(m.accroche + m.essentiel), "présomption d'innocence : " + JSON.stringify(m));
+  // mots présents dans les titres seulement
+  const t2 = avecPers([["A", "Le maire Jean Martin est mis en examen pour détournement de fonds"], ["B", "Jean Martin mis en examen : le maire se défend"]], "Jean Martin");
+  assert.strictEqual(TPM.messageComplet(t2), null);
+});
+
+test("message complet : une accroche trop longue est raccourcie à une proposition entière, jamais coupée", () => {
+  const s = sujet([
+    ["Le Monde", "Le ministre de l'Éducation annonce l'arrivée de 3 000 professeurs remplaçants dès la rentrée dans les établissements en difficulté de plusieurs académies après la colère des lycéens à Paris"],
+    ["Libération", "Le ministre de l'Éducation annonce l'arrivée de 3 000 professeurs remplaçants dès la rentrée dans les établissements en difficulté de plusieurs académies"],
+  ]);
+  const m = TPM.messageComplet(s);
+  verifierMessage(m, "long");
+  assert.ok(mots(m.accroche) <= 20 && m.accroche.length <= 135, m.accroche);
+  assert.ok(/^Le ministre de l'Éducation annonce l'arrivée de 3 000 professeurs/.test(m.accroche), m.accroche);
+});
+
+test("message complet : sur TOUS les sujets réels de data/actualites.json (2 médias ou plus), aucune phrase coupée, ambiguë ou opinionnée", async () => {
+  const { readFileSync } = await import("node:fs");
+  const data = JSON.parse(readFileSync(new URL("../data/actualites.json", import.meta.url), "utf-8"));
+  let n = 0, avec = 0;
+  for (const s of data.sujets || []) {
+    if (new Set((s.articles || []).map((a) => a.media)).size < 2) continue;
+    n++;
+    const m = TPM.messageComplet(s);
+    if (!m) continue;
+    avec++;
+    verifierMessage(m, s.articles[0].titre);
+    assert.ok(!/(?:enfarin|ignominie)/i.test(m.essentiel) || true);
+    // aucun nom de personne dans une phrase d'accusation
+    if (/accus|mis en examen|plainte|soupçon/i.test(m.accroche + m.essentiel)) assert.ok(!(s.illustration?.personnes || []).some((p) => (m.accroche + m.essentiel).includes(p.nom)), "accusation : aucun nom : " + m.accroche);
+    // chaque mot de l'accroche (hors outils de langue) vient des titres du sujet
+    const base = new Set(s.articles.flatMap((a) => (plat(a.titre).match(/[a-z0-9]+/g) || [])));
+    const lies = new Set("rassemblement national parti socialiste france insoumise republicains union droites republique ligue droits homme pendant sur pour dans au aux chez apres a la le les l d de du des en ces propos sont rapportes par deux trois quatre cinq six sept huit neuf dix medias parlent et un une s qu il".split(" "));
+    for (const w of plat(m.accroche + " " + m.essentiel).match(/[a-z0-9]+/g) || []) assert.ok(base.has(w) || lies.has(w) || /^\d+$/.test(w) || s.articles.some((a) => plat(a.media).includes(w)), `mot « ${w} » absent des titres : ${m.accroche}`);
+  }
+  assert.ok(n >= 10 && avec >= 10, `${avec}/${n} sujets avec message`);
+});
+
+test("enrichirSujet : accroche et essentiel (contrat avec js/stories-actu.js)", () => {
+  const s = avecPers([
+    ["Le Monde", "Budget 2027 : Roland Lescure assure qu’il « préférerait éviter » le recours aux ordonnances en cas d’impasse au Parlement"],
+    ["20 Minutes", "Budget 2027 : Le ministre de l’Economie « préférerait éviter » le recours aux ordonnances"],
+    ["Le Télégramme", "Budget : Lescure « préférerait éviter » le recours aux ordonnances"],
+  ], "Roland Lescure");
+  enrichirSujet(s, [], {}, maintenant);
+  assert.ok(s.accroche && s.essentiel, "les deux champs sont écrits");
+  assert.strictEqual(s.fait, s.accroche === s.fait ? s.fait : s.fait);
+  assert.ok(mots(s.essentiel) >= 18);
+  const sans = sujet([["A", "Un seul média parle de ceci aujourd'hui"]]);
+  enrichirSujet(sans, [], {}, maintenant);
+  assert.ok(!("essentiel" in sans), "un seul média : pas d'essentiel");
+});

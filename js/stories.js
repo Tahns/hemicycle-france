@@ -891,11 +891,31 @@ const storyStyleValide = s => STORY_STYLES.includes(s) ? s : "bleu";
 function storyContraste(a, b){ const x = storyLuminance(a), y = storyLuminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
 // Couleur assombrie jusqu'à porter du texte blanc à 4,5:1 (WCAG AA)
 function storyAssombri(c){ let x = /^#[0-9a-f]{6}$/i.test(String(c)) ? c : "#3A4A80", t = 0; while(storyContraste(x, "#FFFFFF") < 4.5 && t < 1){ t += 0.08; x = storyMelange(c, "#000000", t); } return x; }
-// Texte coupé aux mots (n au plus), sans mot faible en fin, terminé par « … » s'il a été coupé
+// Variantes d'un texte, de la plus complète à la plus courte : le texte ENTIER, puis ses premières propositions complètes (coupées avant « , » « ; » « : » « — » ou
+// après un point), terminées par un point, JAMAIS par « … ». Au moins 4 mots, jamais sur un mot faible, une parenthèse ou un guillemet resté ouvert.
+const STORY_ABREV = /(?:^|\s)(?:M|MM|Mme|Mmes|Dr|Pr|St|Ste|Me|\p{Lu})\.$/u;
+function storyVariantes(texte){
+  const t = storyTypo(texte);
+  if(!t) return [];
+  const sortie = [t], vus = new Set([t]), re = /(?<=[.!?])\s+|(?<=[,;:])\s+|\s[—–]\s/g, coupes = [];
+  let m; while((m = re.exec(t))) coupes.push(m.index);
+  const compte = (x, r) => (x.match(r) || []).length;
+  for(let k = coupes.length - 1; k >= 0; k--){
+    let p = t.slice(0, coupes[k]).trim();
+    if(!/[.!?]$/.test(p)) p = p.replace(/[\s,;:—–-]+$/, "") + ".";
+    const mots = p.replace(/[.!?]+$/, "").split(" ");
+    if(mots.length < 4 || storyFaible(mots[mots.length - 1]) || STORY_ABREV.test(p) || vus.has(p)) continue;
+    if(compte(p, /[«“(]/g) !== compte(p, /[»”)]/g) || compte(p, /"/g) % 2) continue;
+    vus.add(p); sortie.push(p);
+  }
+  return sortie;
+}
+const storyTailles = (max, min, pas = 2) => { const r = []; for(let t = max; t >= min; t -= pas) r.push(t); return r; };
+// Texte coupé aux mots : TOUJOURS complet. Au plus n mots : texte entier ; sinon la dernière proposition complète de n mots au plus, terminée par un point (sans « … ») ;
+// sans proposition complète assez courte, le texte entier (c'est à la mise en page de l'ajuster : voir storyAjuste)
 function storyMots(texte, n){
-  const m = storyTypo(texte).split(" ").filter(Boolean);
-  if(m.length <= n) return m.join(" ");
-  return storyCoupePropre(m.slice(0, n)).join(" ").replace(/[?!]$/, "") + "…";
+  const v = storyVariantes(texte);
+  return v.find(x => storyNbMots(x) <= n) || v[0] || "";
 }
 const storyNbMots = t => storyTypo(t).split(" ").filter(Boolean).length;
 // Thème d'un sujet (clé de THEMES_ACTU) : couleur, motif (tracé SVG 24 × 24) et libellé
@@ -946,10 +966,38 @@ function storyStyleMotif(ctx, motif, x, y, taille, couleur){
   ctx.strokeStyle = couleur; ctx.lineWidth = 0.55; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke(new Path2D(motif));
   ctx.restore();
 }
+// Mots courts qui ne finissent jamais une ligne (« de », « la », « à », « contre »…) : collés au mot suivant par une espace insécable ; les deux derniers mots d'un texte sont collés
+// (jamais un mot orphelin seul sur la dernière ligne)
+const STORY_COLLES = new Set("de du des la le les l d un une au aux à a en et ou où que qu qui pour par sur sous dans avec sans vers chez entre contre ni mais car donc ce cet cette ces son sa ses leur leurs près plus après avant depuis selon dès lors y ne pas se s n c j m t est sont a été".split(" "));
+function storyColle(texte){
+  const m = String(texte).split(" ");
+  let r = "", nb = 1;   // nb : mots déjà collés dans le bloc en cours (au plus 2 : « de la », « contre le »)
+  for(let i = 0; i < m.length; i++){
+    const mot = m[i], suivant = i < m.length - 1;
+    const faible = STORY_COLLES.has(mot.toLowerCase().replace(/^.*[’']/, "")) && mot.length <= 6;
+    const colle = suivant && ((faible && nb < 2 && m[i + 1].length <= 11) || (i === m.length - 2 && mot.length + m[i + 1].length <= 16));
+    nb = colle ? nb + 1 : 1;
+    r += mot + (suivant ? (colle ? "\u00A0" : " ") : "");
+  }
+  return r;
+}
+// Lignes d'un texte, équilibrées : sans mot faible en fin de ligne, sans dernière ligne réduite à un ou deux petits mots (on rétrécit alors un peu la justification, à nombre de lignes égal)
+function storyLignesEq(ctx, texte, largeur){
+  const t = storyColle(storyTypo(texte));
+  const base = storyLignes(ctx, t, largeur, 99);
+  const w = l => ctx.measureText(l).width;
+  if(base.length < 2 || w(base[base.length - 1]) >= 0.3 * largeur) return base;
+  for(let L = largeur - 20; L >= largeur * 0.72; L -= 20){
+    const l = storyLignes(ctx, t, L, 99);
+    if(l.length === base.length && w(l[l.length - 1]) >= 0.3 * largeur) return l;
+    if(l.length > base.length) break;
+  }
+  return base;
+}
 // Hauteur d'un texte (lignes) et lignes elles-mêmes à une taille donnée
 function storyStyleBloc(ctx, texte, { taille, poids, police, largeur, max, interligne }){
   ctx.font = `${poids} ${taille}px "${police}"`;
-  const l = storyLignes(ctx, texte, largeur, max);
+  const l = max >= 99 ? storyLignesEq(ctx, texte, largeur) : storyLignes(ctx, texte, largeur, max);
   return { l, taille, poids, police, interligne, h:taille + (l.length - 1) * taille * interligne, ok:l.every(x => ctx.measureText(x).width <= largeur + 1) && (/…/.test(texte) || !l.some(x => x.endsWith("…"))) }; // « ok » : rien ne dépasse et aucun mot n'a été coupé par « … »
 }
 // fond (hex) fourni : colore le verdict « Adopté\u2060✓ » / « Rejeté\u2060✕ » et les voix (« 98 voix pour », « 16 contre », « 2 abstentions ») ; le mot et le signe restent écrits
@@ -958,9 +1006,9 @@ function storyStyleEcrire(ctx, b, x, y, couleur, fond = null){
   ctx.font = `${b.poids} ${b.taille}px "${b.police}"`; ctx.fillStyle = couleur; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   b.l.forEach((l, i) => {
     const yl = y + b.taille * 0.82 + i * b.taille * b.interligne;
-    if(!fond || !/Adopt|Rejet|pour|contre|abstention/.test(l)){ ctx.fillText(l.replace(/\u2060/g, ""), x, yl); return; }
+    if(!fond || !/Adopt|Rejet|pour|contre|abstention/.test(l)){ ctx.fillText(l.replace(/\u2060/g, "").replace(/\u00A0/g, " "), x, yl); return; }
     let px = x, dernier = 0, m;
-    const ecrire = (t, c) => { if(!t) return; ctx.fillStyle = c; ctx.fillText(t, px, yl); px += ctx.measureText(t).width; };
+    const ecrire = (t, c) => { if(!t) return; ctx.fillStyle = c; ctx.fillText(t.replace(/\u00A0/g, " "), px, yl); px += ctx.measureText(t).width; };
     STORY_RE_VOIX.lastIndex = 0;
     while((m = STORY_RE_VOIX.exec(l))){
       ecrire(l.slice(dernier, m.index), couleur);
@@ -982,25 +1030,38 @@ function storyStyleFit(ctx, texte, { tMax, tMin, pas = 2, poids, police, largeur
   return storyStyleBloc(ctx, texte, { taille:tMin, poids, police, largeur, max:lignes, interligne });
 }
 
+// Plus grande taille pour laquelle le texte ENTIER tient (ou, à défaut, l'une de ses premières propositions complètes, terminée par un point) ; null si rien ne tient : le bloc n'est alors pas affiché
+function storyAjuste(ctx, texte, { tailles, poids, police, largeur, max = 99, hMax = 99999, interligne = 1.2, coupe = true }){
+  const vs = coupe ? storyVariantes(texte) : [storyTypo(texte)].filter(Boolean);
+  for(const v of vs) for(const t of tailles){
+    const b = storyStyleBloc(ctx, v, { taille:t, poids, police, largeur, max:99, interligne });
+    if(b.l.length <= max && b.h <= hMax && b.ok) return { ...b, texte:v };
+  }
+  return null;
+}
+
 function storyStyleUnePhoto(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1470;
-  // 1. mise en page (de bas en haut), avant de peindre : le dégradé dépend de la hauteur du texte
-  const essentiel = storyMots(d.essentiel || "", 22);
+  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1446, dispo = bas - 400;
+  // 1. mise en page (de bas en haut), avant de peindre. Le gros titre (accroche) n'est JAMAIS coupé : il rétrécit (jusqu'à 52 px) et prend jusqu'à 6 lignes.
+  //    L'essentiel s'affiche en entier ; sa taille descend jusqu'à 34 px, puis il est réduit à ses premières propositions complètes, puis retiré.
+  const accroche = storyTypo(d.accroche);
+  const essentiels = [...(d.essentiel ? storyVariantes(d.essentiel) : []), ""];
   let plan = null;
-  for(let tA = 124; tA >= 76 && !plan; tA -= 4){
-    const a = storyStyleFit(ctx, storyMots(d.accroche, 12), { tMax:tA, tMin:tA, poids:700, police:"Newsreader", largeur:larg, lignes:3, hMax:99999, interligne:1.04 });
-    if(a.l.length > 3 || !a.ok) continue;
-    for(const tE of [60, 56, 52]){
-      const e = essentiel ? storyStyleBloc(ctx, essentiel, { taille:tE, poids:600, police:"Public Sans", largeur:larg - 30, max:4, interligne:1.2 }) : null;
-      const total = 66 + 30 + a.h + (e ? 40 + 36 + e.h : 0);
-      if(total <= bas - 400 && (!e || e.l.length <= 4)){ plan = { a, e, total }; break; }
+  for(const ev of essentiels){
+    for(let tA = 124; tA >= 52 && !plan; tA -= 4){
+      const a = storyStyleBloc(ctx, accroche, { taille:tA, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.18 });
+      if(!a.ok || a.l.length > 6) continue; // 6 lignes au plus pour le gros titre
+      const minE = tA >= 100 ? 50 : tA >= 80 ? 44 : tA >= 64 ? 38 : 34;
+      if(!ev){ if(66 + 30 + a.h <= dispo) plan = { a, e:null, total:66 + 30 + a.h }; continue; }
+      for(let tE = 60; tE >= minE; tE -= 2){
+        const e = storyStyleBloc(ctx, ev, { taille:tE, poids:600, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
+        const total = 66 + 30 + a.h + 40 + 36 + e.h;
+        if(e.ok && total <= dispo){ plan = { a, e, total }; break; }
+      }
     }
+    if(plan) break;
   }
-  if(!plan){ // dernier recours : accroche plus petite, essentiel en 3 lignes
-    const a = storyStyleBloc(ctx, storyMots(d.accroche, 12), { taille:72, poids:700, police:"Newsreader", largeur:larg, max:3, interligne:1.04 });
-    const e = essentiel ? storyStyleBloc(ctx, essentiel, { taille:52, poids:600, police:"Public Sans", largeur:larg - 30, max:3, interligne:1.2 }) : null;
-    plan = { a, e, total:66 + 30 + a.h + (e ? 40 + 36 + e.h : 0) };
-  }
+  if(!plan) return false;
   const haut = bas - plan.total;
   // 2. fond : photo (carrée, 320 px à l'origine : agrandie et adoucie) ou motif du thème
   ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
@@ -1025,6 +1086,7 @@ function storyStyleUnePhoto(ctx, d){
   y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   if(plan.e){
     y += 40;
+    ctx.fillStyle = "rgba(255,255,255,0.22)"; ctx.fillRect(marge, y - 20, larg, 2); // filet de séparation
     ctx.font = `800 28px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = STORY_DA.rose; ctx.textBaseline = "alphabetic";
     ctx.fillText("L'ESSENTIEL", marge, y + 12); ctx.letterSpacing = "0px";
     y += 36;
@@ -1032,41 +1094,69 @@ function storyStyleUnePhoto(ctx, d){
     storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   }
   storyStylePied(ctx, d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit de la photo n'est affiché que si la photo l'est
+  return true;
 }
 
 function storyStyleQuestion(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, bas = 1470;
+  const { L, H, marge } = STORY, larg = L - 2 * marge, bas = 1446, dispo = bas - 400;
   const P = STORY_FONDS_QUESTION[d.fond] || STORY_FONDS_QUESTION[STORY_FOND_THEME[d.theme]] || STORY_FONDS_QUESTION.bleu;
-  let question = storyMots(d.accroche, 11);
-  if(!/\?$/.test(question)) question = question.replace(/…$/, "") + " ?";
-  const puces = (d.puces || []).map(p => storyMots(p, 8)).filter(Boolean).slice(0, 3);
+  let question = storyTypo(d.accroche).replace(/[\s.!…]+$/, "");
+  if(!/\?$/.test(question)) question += " ?";
+  const puces = (d.puces || []).map(storyTypo).filter(Boolean).slice(0, 3);
+  // Réponse : l'essentiel en entier (puis, s'il y a la place, les puces) ; sans essentiel, les puces numérotées
+  const reps = d.essentiel ? storyVariantes(d.essentiel) : [];
+  const candidats = [];
+  for(const r of reps){ if(puces.length) candidats.push({ r, p:true }); candidats.push({ r, p:false }); }
+  candidats.push({ r:"", p:true });
+  const blPuces = tP => { const bl = puces.map(p => storyAjuste(ctx, p, { tailles:[tP], poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 })); return bl.filter(Boolean); };
   let plan = null;
-  for(let tQ = 116; tQ >= 76 && !plan; tQ -= 4){
-    const q = storyStyleFit(ctx, question, { tMax:tQ, tMin:tQ, poids:700, police:"Newsreader", largeur:larg, lignes:4, hMax:99999, interligne:1.04 });
-    if(q.l.length > 4 || !q.ok) continue;
-    for(const tP of [56, 54, 52]){
-      const bl = puces.map(p => storyStyleBloc(ctx, p, { taille:tP, poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 }));
-      const hP = bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1);
-      const total = 66 + 44 + q.h + 28 + 10 + 56 + hP;
-      if(total <= bas - 400 && bl.every(b => b.l.length <= 3)){ plan = { q, bl, total, tP }; break; }
+  for(const c of candidats){
+    for(let tQ = 116; tQ >= 52 && !plan; tQ -= 4){
+      const q = storyStyleBloc(ctx, question, { taille:tQ, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.18 });
+      if(!q.ok || q.l.length > 6) continue;
+      const base = 66 + 44 + q.h + 28 + 10;
+      if(!c.r){
+        for(const tP of [56, 54, 52, 50, 48, 46, 44]){
+          const bl = blPuces(tP);
+          const hP = bl.reduce((a, b) => a + b.h, 0) && bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1);
+          if(base + 56 + (hP || 0) <= dispo){ plan = { q, bl, e:null, total:base + 56 + (hP || 0) }; break; }
+        }
+        if(!plan && !puces.length) plan = { q, bl:[], e:null, total:base };
+        continue;
+      }
+      if(c.p && tQ < 80) continue;
+      for(let tE = 52; tE >= (c.p ? 44 : 34) && !plan; tE -= 2){
+        const e = storyStyleBloc(ctx, c.r, { taille:tE, poids:700, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
+        if(!e.ok) continue;
+        let bl = [], hP = 0;
+        if(c.p){ bl = blPuces(44); if(bl.length < puces.length) break; hP = 40 + bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * (bl.length - 1); }
+        const total = base + 44 + 36 + e.h + hP;
+        if(total <= dispo) plan = { q, bl, e, total, tP:44 };
+      }
     }
+    if(plan) break;
   }
-  if(!plan){
-    const q = storyStyleBloc(ctx, question, { taille:72, poids:700, police:"Newsreader", largeur:larg, max:4, interligne:1.04 });
-    const bl = puces.map(p => storyStyleBloc(ctx, p, { taille:52, poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 }));
-    plan = { q, bl, total:66 + 44 + q.h + 28 + 10 + 56 + bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1) };
-  }
+  if(!plan) return false;
   storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, couleur:P.fond, textes:[P.texte, P.doux] });
   // grand « ? » décoratif en filigrane
   ctx.font = `700 1250px "Newsreader"`; ctx.fillStyle = storyMelange(P.fond, P.texte, 0.09); ctx.textAlign = "right"; ctx.textBaseline = "alphabetic";
   ctx.fillText("?", L + 120, 1500); ctx.textAlign = "left";
   storyMarque(ctx, { texte:P.texte, arc:P.doux, rose:P.texte });
-  const haut = Math.max(400, 400 + (bas - 400 - plan.total) * 0.3);
+  const haut = Math.max(400, 400 + (dispo - plan.total) * 0.3);
   let y = haut;
   storyStylePastille(ctx, d.categorie, marge, y, P.texte, P.fond);
   y += 66 + 44;
   y = storyStyleEcrire(ctx, plan.q, marge, y, P.texte, d.colorerVoix ? P.fond : null);
-  y += 28; ctx.fillStyle = P.texte; ctx.fillRect(marge, y, 140, 10); y += 10 + 56;
+  y += 28; ctx.fillStyle = P.texte; ctx.fillRect(marge, y, 140, 10); y += 10;
+  if(plan.e){
+    y += 44;
+    ctx.font = `800 26px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = P.doux; ctx.textBaseline = "alphabetic";
+    ctx.fillText("L'ESSENTIEL", marge, y + 10); ctx.letterSpacing = "0px";
+    y += 36;
+    ctx.fillStyle = P.texte; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
+    y = storyStyleEcrire(ctx, plan.e, marge + 30, y, P.texte, d.colorerVoix ? P.fond : null);
+    if(plan.bl.length) y += 40;
+  } else y += 56;
   plan.bl.forEach((b, i) => {
     const h = Math.max(b.h, 76), cy = y + 38;
     ctx.fillStyle = P.texte; ctx.beginPath(); ctx.arc(marge + 38, cy, 38, 0, 2 * Math.PI); ctx.fill();
@@ -1075,26 +1165,45 @@ function storyStyleQuestion(ctx, d){
     y += h + 34;
   });
   storyStylePied(ctx, d, { doux:P.doux, texte:P.texte });
+  return true;
 }
 
 function storyStyleChiffre(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1470;
-  const valeur = String(d.chiffre.valeur), legende = storyMots(d.chiffre.legende || "", 6), contexte = storyMots(d.contexte || d.accroche || "", 22);
+  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1446, dispo = bas - 400;
+  const valeur = String(d.chiffre.valeur), accroche = storyTypo(d.contexte || d.accroche || "");
   ctx.font = `900 440px "Public Sans"`; ctx.letterSpacing = "-12px";
   const w0 = ctx.measureText(valeur).width;
-  const tN = Math.max(120, Math.min(520, Math.floor(440 * larg / Math.max(w0, 1)))), hN = Math.round(tN * 0.74);
+  const tN0 = Math.max(120, Math.min(520, Math.floor(440 * larg / Math.max(w0, 1))));
   ctx.letterSpacing = "0px";
+  // légende : entière (jusqu'à 3 lignes) ou absente
+  const lg = d.chiffre.legende ? storyAjuste(ctx, d.chiffre.legende, { tailles:storyTailles(76, 44), poids:700, police:"Newsreader", largeur:larg, max:3, hMax:260, interligne:1.18 }) : null;
+  // bas de page : l'accroche, puis l'essentiel EN ENTIER ; on retire d'abord l'accroche, puis on réduit l'essentiel à ses premières propositions complètes
+  const essentiels = d.essentiel ? storyVariantes(d.essentiel) : [];
+  const candidats = [];
+  for(const e of essentiels){ if(accroche && storyTypo(e) !== accroche) candidats.push({ a:true, e }); candidats.push({ a:false, e }); }
+  if(accroche) candidats.push({ a:true, e:"" });
+  candidats.push({ a:false, e:"" });
   let plan = null;
-  for(const tC of [60, 56, 52]){
-    const lg = legende ? storyStyleFit(ctx, legende, { tMax:76, tMin:56, poids:700, police:"Newsreader", largeur:larg, lignes:2, hMax:200, interligne:1.04 }) : null;
-    const c = contexte ? storyStyleBloc(ctx, contexte, { taille:tC, poids:700, police:"Public Sans", largeur:larg, max:4, interligne:1.2 }) : null;
-    const total = 66 + 60 + 14 + 36 + hN + (lg ? 26 + lg.h : 0) + (c ? 56 + 4 + 40 + c.h : 0);
-    if(total <= bas - 400 || tC === 52){ plan = { lg, c, total }; break; }
+  for(const c of candidats){
+    for(const [tC, tE] of (c.a && c.e ? [[56, 48], [52, 46], [48, 42], [44, 38], [40, 36], [36, 34]] : [[56, 56], [52, 52], [48, 48], [44, 44], [40, 40], [36, 36], [34, 34]])){
+      const a = c.a ? storyStyleBloc(ctx, accroche, { taille:tC, poids:700, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
+      const e = c.e ? storyStyleBloc(ctx, c.e, { taille:tE, poids:600, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
+      if((a && !a.ok) || (e && !e.ok)) continue;
+      const hBas = (a || e) ? 56 + 4 + 40 + (a ? a.h : 0) + (a && e ? 26 : 0) + (e ? e.h : 0) : 0;
+      for(let tN = tN0; tN >= Math.max(120, Math.round(tN0 * 0.55)); tN -= 20){
+        const hN = Math.round(tN * 0.74), total = 66 + 60 + 14 + 36 + hN + (lg ? 26 + lg.h : 0) + hBas;
+        if(total <= dispo){ plan = { a, e, tN, hN, total }; break; }
+      }
+      if(plan) break;
+    }
+    if(plan) break;
   }
+  if(!plan) return false;
+  const { tN, hN } = plan;
   const vc = d.chiffre.type ? storyVoixCouleur(d.chiffre.type, NUIT) : null; // chiffre et légende teintés (voix pour / contre / abstentions)
   storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, sombre:true });
   storyMarque(ctx);
-  const haut = Math.max(400, 400 + (bas - 400 - plan.total) * 0.35);
+  const haut = Math.max(400, 400 + (dispo - plan.total) * 0.35);
   let y = haut;
   storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
   y += 66 + 60;
@@ -1102,24 +1211,25 @@ function storyStyleChiffre(ctx, d){
   ctx.font = `900 ${tN}px "Public Sans"`; ctx.letterSpacing = `${-Math.round(tN * 0.027)}px`; ctx.fillStyle = vc || "#FFFFFF"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
   ctx.fillText(valeur, marge - 6, y + hN); ctx.letterSpacing = "0px";
   y += hN;
-  if(plan.lg){ y += 26; y = storyStyleEcrire(ctx, plan.lg, marge, y, vc || STORY_DA.rose); }
-  if(plan.c){
+  if(lg){ y += 26; y = storyStyleEcrire(ctx, lg, marge, y, vc || STORY_DA.rose); }
+  if(plan.a || plan.e){
     y += 56; ctx.fillStyle = "rgba(197,206,242,0.45)"; ctx.fillRect(marge, y, larg, 3); y += 4 + 40;
-    storyStyleEcrire(ctx, plan.c, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
+    if(plan.a){ y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null); if(plan.e) y += 26; }
+    if(plan.e) storyStyleEcrire(ctx, plan.e, marge, y, plan.a ? "#D9DEF2" : "#FFFFFF", d.colorerVoix ? NUIT : null);
   }
   storyStylePied(ctx, d, { doux:"#C5CEF2", texte:"#FFFFFF" });
+  return true;
 }
-// Point d'entrée : dessine la fiche dans le style demandé ; renvoie le style réellement employé (« chiffre » sans nombre devient « question »), ou null pour « bleu » (le module dessine alors lui-même)
+// Point d'entrée : dessine la fiche dans le style demandé ; renvoie le style réellement employé (« chiffre » sans nombre devient « question »), ou null pour « bleu » (le module dessine alors
+// lui-même) ou si la mise en page ne peut pas afficher le texte entier (rien n'est alors dessiné : le module retombe sur le style bleu)
 function storyStyleDessiner(ctx, style, d){
   style = storyStyleValide(style);
   storyFondContexte({ theme:d.theme || d.cle, cle:d.accroche || d.titre || d.cle });
   if(style === "bleu") return null;
   if(style === "chiffre" && !(d.chiffre && String(d.chiffre.valeur || "").trim())) style = (d.puces || []).length >= 2 ? "question" : "une-photo";
-  if(style === "question" && !(d.puces || []).length) style = "une-photo";
-  if(style === "une-photo") storyStyleUnePhoto(ctx, d);
-  else if(style === "question") storyStyleQuestion(ctx, d);
-  else storyStyleChiffre(ctx, d);
-  return style;
+  if(style === "question" && !(d.puces || []).length && !d.essentiel) style = "une-photo";
+  const ok = style === "une-photo" ? storyStyleUnePhoto(ctx, d) : style === "question" ? storyStyleQuestion(ctx, d) : storyStyleChiffre(ctx, d);
+  return ok ? style : null;
 }
 
 
@@ -1149,10 +1259,10 @@ async function storySpecSujet(s){
   // L'essentiel : champ `essentiel` ; sinon un fait de contexte court (jamais de sondage en réserve électorale) ; sinon le titre de presse cité et attribué
   let essentiel = storyTypo(s.essentiel || s.titrePropre?.essentiel || "");
   if(!essentiel){
-    const fait = (s.contexte || []).map(c => ({ ...c, texte:storyTypo(c.texte).replace(/\.$/, "") })).find(c => c.texte && !(c.type === "sondage" && reserve) && storyNbMots(c.texte) <= 18);
+    const fait = (s.contexte || []).map(c => ({ ...c, texte:storyTypo(c.texte).replace(/\.$/, "") })).find(c => c.texte && !(c.type === "sondage" && reserve) && storyNbMots(c.texte) <= 30);
     if(fait) essentiel = fait.texte;
   }
-  if(!essentiel && a0.media) essentiel = `« ${storyMots(storyTitreCite(a0.titre), 14)} » (${storyMots(a0.media, 4)})`;
+  if(!essentiel && a0.media) essentiel = `« ${storyTitreCite(a0.titre)} » (${storyTypo(a0.media)})`; // titre de presse cité ENTIER (jamais coupé)
   const noms = (ill.personnes || []).map(p => p.nom).filter(Boolean).slice(0, 2);
   const puces = (Array.isArray(s.puces) && s.puces.length ? s.puces : [
     n >= 2 ? `${n} médias en parlent` : `Titre publié par ${a0.media}`,
