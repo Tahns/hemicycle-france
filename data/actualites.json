@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-12T16:31:00.033Z",
+ "lastUpdated": "2026-10-12T16:35:30.034Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Nice-Matin",
@@ -154,13 +154,12 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidat",
     "milliards",
+    "euros",
     "économies"
    ],
    "medias": [
     "Le JDD",
-    "L'Est républicain",
     "Public Sénat",
     "Valeurs actuelles",
     "La Dépêche",
@@ -168,36 +167,35 @@
     "France Inter",
     "20 Minutes",
     "Sud Ouest",
-    "Mediapart",
     "RFI",
     "L'Obs",
     "Le Monde",
     "Europe 1",
+    "Mediapart",
     "L'Express",
+    "France 24",
     "Nice-Matin",
-    "Le Télégramme",
-    "Libération"
+    "Libération",
+    "Le Télégramme"
    ],
-   "mediasDistincts": 16,
+   "mediasDistincts": 14,
    "sources": [
     "Le JDD / La Dépêche / Europe 1",
-    "L'Est républicain",
     "Public Sénat",
     "Valeurs actuelles",
     "BFMTV",
     "France Inter",
     "20 Minutes",
     "Sud Ouest",
-    "Mediapart",
-    "RFI",
+    "France Médias Monde",
     "L'Obs",
     "Le Monde",
+    "Mediapart",
     "L'Express",
-    "Nice-Matin",
-    "Le Télégramme",
+    "Nice-Matin / Le Télégramme",
     "Libération"
    ],
-   "nb": 57,
+   "nb": 51,
    "derniere": "2026-10-12T16:21:26.000Z",
    "articles": [
     {
@@ -205,12 +203,6 @@
      "titre": "Présidentielle : le plan de Bruno Retailleau pour faire 200 milliards d'euros d'économies d'ici 2032",
      "url": "https://www.lejdd.fr/politique/presidentielle-le-plan-de-bruno-retailleau-pour-faire-200-milliards-deconomies-dici-2032-185877",
      "date": "2026-10-12T16:21:26.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Politique. Glucksmann enfariné : comment est assurée la sécurité des candidats ?",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/12/glucksmann-enfarine-comment-est-assuree-la-securite-des-candidats",
-     "date": "2026-10-12T16:15:00.000Z"
     },
     {
      "media": "Public Sénat",
@@ -256,12 +248,6 @@
      "date": "2026-10-12T14:10:23.000Z"
     },
     {
-     "media": "Mediapart",
-     "titre": "La chronique de Waly Dia. «Des candidats au bac frappés par ceux qui ne l’ont pas eu»",
-     "url": "https://www.mediapart.fr/journal/culture-et-idees/121026/la-chronique-de-waly-dia-des-candidats-au-bac-frappes-par-ceux-qui-ne-l-ont-pas-eu",
-     "date": "2026-10-12T13:47:22.000Z"
-    },
-    {
      "media": "RFI",
      "titre": "Présidentielle 2027: «Seul Glucksmann permettra de gagner contre le RN», assure Pierre Jouvet, secrétaire général du PS",
      "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261012-pr%C3%A9sidentielle-2027-seul-glucksmann-permettra-de-gagner-contre-le-rn-assure-pierre-jouvet-secr%C3%A9taire-g%C3%A9n%C3%A9ral-du-ps",
@@ -286,10 +272,22 @@
      "date": "2026-10-12T10:47:09.000Z"
     },
     {
+     "media": "Mediapart",
+     "titre": "Les soutiens d’Anasse Kazib sur les routes pour envoyer un ouvrier à la présidentielle",
+     "url": "https://www.mediapart.fr/journal/politique/121026/les-soutiens-d-anasse-kazib-sur-les-routes-pour-envoyer-un-ouvrier-la-presidentielle",
+     "date": "2026-10-12T08:59:51.000Z"
+    },
+    {
      "media": "L'Express",
      "titre": "Présidentielle 2027 : pour Raphaël Glucksmann, enfin les difficultés commencent",
      "url": "https://www.lexpress.fr/politique/presidentielle-2027-pour-raphael-glucksmann-enfin-les-difficultes-commencent-HJUP6SKLJFALHH2SSRDXHWGVDI/",
      "date": "2026-10-12T05:18:58.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : Raphaël Glucksmann élu dès le premier tour de la primaire à gauche",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-%C3%A9lu-d%C3%A8s-le-premier-tour-de-la-primaire-%C3%A0-gauche",
+     "date": "2026-10-11T21:34:20.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -298,16 +296,16 @@
      "date": "2026-10-11T18:59:03.000Z"
     },
     {
-     "media": "Le Télégramme",
-     "titre": "Raphaël Glucksmann, candidat de la gauche sociale-démocrate, désormais au défi de dissiper les doutes",
-     "url": "https://www.letelegramme.fr/france/raphael-glucksmann-candidat-de-la-gauche-sociale-democrate-desormais-au-defi-de-dissiper-les-doutes-7136322.php",
-     "date": "2026-10-11T18:18:00.000Z"
-    },
-    {
      "media": "Libération",
      "titre": "Vainqueur de la primaire, Raphaël Glucksmann promet «une campagne punk» pour la présidentielle",
      "url": "https://www.liberation.fr/politique/elections/victoire-a-la-primaire-ps-raphael-glucksmann-promet-une-campagne-punk-pour-la-presidentielle-20261011_2DHRWSQNWNHVDLRSBXRH4VKSEI/",
      "date": "2026-10-11T17:50:21.000Z"
+    },
+    {
+     "media": "Le Télégramme",
+     "titre": "Raphaël Glucksmann élu candidat de la gauche sociale-démocrate à la présidentielle",
+     "url": "https://www.letelegramme.fr/france/raphael-glucksmann-elu-candidat-de-la-gauche-a-la-presidentielle-7136268.php",
+     "date": "2026-10-11T16:34:00.000Z"
     }
    ]
   },
@@ -317,7 +315,8 @@
    "motifs": [
     "lycéens",
     "mobilisation",
-    "colère"
+    "colère",
+    "mouvement"
    ],
    "medias": [
     "La Dépêche",
@@ -327,12 +326,13 @@
     "Le JDD",
     "Public Sénat",
     "Nice-Matin",
+    "L'Humanité",
     "Mediapart",
     "Libération",
     "Le Monde",
     "20 Minutes",
     "RFI",
-    "L'Est républicain"
+    "France 24"
    ],
    "mediasDistincts": 12,
    "sources": [
@@ -342,14 +342,14 @@
     "BFMTV",
     "Public Sénat",
     "Nice-Matin",
+    "L'Humanité",
     "Mediapart",
     "Libération",
     "Le Monde",
     "20 Minutes",
-    "RFI",
-    "L'Est républicain"
+    "France Médias Monde"
    ],
-   "nb": 31,
+   "nb": 34,
    "derniere": "2026-10-12T16:13:24.000Z",
    "articles": [
     {
@@ -384,12 +384,6 @@
      "date": "2026-10-12T15:45:05.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Blocages des lycées : «LFI a chauffé à blanc la jeunesse», fustige Louise Montangon",
-     "url": "https://www.lejdd.fr/politique/blocages-des-lycees-lfi-a-chauffe-a-blanc-la-jeunesse-fustige-louise-montangon-185874",
-     "date": "2026-10-12T15:41:10.000Z"
-    },
-    {
      "media": "Public Sénat",
      "titre": "Mobilisation lycéenne : le recours aux gardes à vue est-il justifié ?",
      "url": "https://www.publicsenat.fr/actualites/politique/mobilisation-lyceenne-le-recours-aux-gardes-a-vue-est-il-justifie",
@@ -400,6 +394,12 @@
      "titre": "« Je comprends les interrogations et parfois l’angoisse d’une génération qui s’inquiète pour son avenir » : interrogé sur le mouvement lycéen en conseil municipal, Jean Leonetti prône la sagesse",
      "url": "https://www.nicematin.com/societe/vie-locale/je-comprends-les-interrogations-et-parfois-l-angoisse-d-une-generation-qui-s-inquiete-pour-son-avenir-interroge-sur-le-mouvement-lyceen-en-conseil-municipal-jean-leonetti-prone-la-sagesse-10738283",
      "date": "2026-10-12T15:08:07.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Avec la jeunesse en mouvement, l’espoir se lève",
+     "url": "https://www.humanite.fr/politique/macronisme/avec-la-jeunesse-en-mouvement-lespoir-se-leve",
+     "date": "2026-10-12T14:51:59.000Z"
     },
     {
      "media": "Mediapart",
@@ -432,10 +432,10 @@
      "date": "2026-10-12T05:07:18.000Z"
     },
     {
-     "media": "L'Est républicain",
-     "titre": "Social. Mobilisation lycéenne, retour annoncé des gilets jaunes… À quoi s’attendre cette semaine ?",
-     "url": "https://www.estrepublicain.fr/social/2026/10/12/mobilisation-lyceenne-retour-annonce-des-gilets-jaunes-a-quoi-s-attendre-cette-semaine",
-     "date": "2026-10-12T04:15:00.000Z"
+     "media": "France 24",
+     "titre": "Mouvement lycéen : nouvelle semaine de mobilisation en France, le gouvernement espère une accalmie",
+     "url": "https://www.france24.com/fr/france/20261012-mouvement-lyc%C3%A9en-nouvelle-semaine-de-mobilisation-le-gouvernement-esp%C3%A8re-une-accalmie",
+     "date": "2026-10-12T00:07:45.000Z"
     }
    ]
   },
@@ -647,6 +647,71 @@
    }
   },
   {
+   "medias": 4,
+   "mediasDistincts": 4,
+   "sources": [
+    "France 24",
+    "Nice-Matin",
+    "Libération",
+    "L'Obs"
+   ],
+   "derniere": "2026-10-10T09:56:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire sociale-démocrate : la plateforme de vote victime d’une cyberattaque, le vote prolongé jusqu’à dimanche 18 heures",
+     "url": "https://www.liberation.fr/politique/primaire-a-gauche-la-plateforme-de-vote-victime-dune-cyberattaque-20261009_ZT2BXQYMPFAKXO4LSCDOABMER4/",
+     "media": "Libération",
+     "date": "2026-10-09T17:44:14.000Z"
+    },
+    {
+     "titre": "Primaire sociale-démocrate : le vote prolongé jusqu'à dimanche soir",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-primaire-sociale-d%C3%A9mocrate-le-vote-prolong%C3%A9-jusqu-%C3%A0-dimanche-soir",
+     "media": "France 24",
+     "date": "2026-10-10T09:56:38.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
+     "url": "https://www.nicematin.com/societe/politique/presidentielle-2027-victime-d-une-cyberattaque-le-premier-tour-de-la-primaire-sociale-democrate-est-prolonge-jusqu-a-dimanche-18-heures-10737294",
+     "media": "Nice-Matin",
+     "date": "2026-10-09T18:55:19.000Z"
+    },
+    {
+     "titre": "Cyberattaque contre la primaire PS : le vote enrayé mais prolongé jusqu’à dimanche",
+     "url": "https://www.liberation.fr/politique/elections/cyberattaque-contre-la-primaire-ps-le-vote-enraye-mais-prolonge-jusqua-dimanche-20261009_FX7I2EVBCZB5RLQBOVCN3KBQVE/",
+     "media": "Libération",
+     "date": "2026-10-09T18:11:34.000Z"
+    },
+    {
+     "titre": "Primaire de la gauche sociale-démocrate : la plateforme victime d’une cyberattaque, le vote de prolongé jusqu’à dimanche 18h",
+     "url": "https://www.nouvelobs.com/politique/20261009.OBS119050/primaire-sociale-democrate-la-plateforme-de-vote-victime-d-une-cyberattaque.html",
+     "media": "L'Obs",
+     "date": "2026-10-09T18:01:54.000Z"
+    },
+    {
+     "titre": "La plateforme de vote pour la primaire sociale-démocrate victime d’une cyberattaque, affirment les organisateurs du scrutin",
+     "url": "https://www.nicematin.com/societe/politique/la-plateforme-de-vote-pour-la-primaire-sociale-democrate-victime-d-une-cyberattaque-affirment-les-organisateurs-du-scrutin-10737159",
+     "media": "Nice-Matin",
+     "date": "2026-10-09T09:35:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
+   "accroche": "Victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
+   "essentiel": "Présidentielle 2027 : victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures. Quatre médias en parlent : Libération, France 24, Nice-Matin et L'Obs."
+  },
+  {
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
@@ -707,52 +772,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
-    "20 Minutes",
-    "Le Monde",
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T14:25:58.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Rhône. Les élections municipales de Saint-Fons, remportées par LFI, annulées par la justice",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/les-elections-municipales-de-saint-fons-remportees-par-lfi-annulees-par-la-justice",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T10:54:00.000Z"
-    },
-    {
-     "titre": "Rhône : Le tribunal administratif annule l’élection municipale de Saint-Fons, remportée par LFI",
-     "url": "https://www.20minutes.fr/justice/4253662-20261012-rhone-tribunal-administratif-annule-election-municipale-saint-fons-remportee-lfi?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-12T14:25:58.000Z"
-    },
-    {
-     "titre": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par LFI, en raison d’irrégularités sur une liste concurrente",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/12/municipales-a-saint-fons-pres-de-lyon-la-justice-annule-les-elections-remportees-par-lfi-en-raison-d-irregularites-sur-une-liste-concurrente_6792629_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-12T12:03:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rhône : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
-   "accroche": "Les élections municipales de Saint-Fons, remportées par La France insoumise, annulées par la justice",
-   "essentiel": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par La France insoumise, en raison d’irrégularités sur une liste concurrente. Trois médias en parlent : L'Est républicain, 20 Minutes et Le Monde."
   },
   {
    "medias": 3,
@@ -871,64 +890,6 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "L'Est républicain",
-    "20 Minutes",
-    "Le Télégramme"
-   ],
-   "derniere": "2026-10-12T07:25:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     },
-     {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Propos antisémites attribués à Jordan Bardella : Éric Zemmour ne le croit « pas vraiment » sincère",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/propos-antisemites-attribues-a-jordan-bardella-eric-zemmour-ne-le-croit-pas-vraiment-sincere",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T07:25:00.000Z"
-    },
-    {
-     "titre": "Bardella accusé d’antisémitisme : Zemmour « ne croit pas vraiment » en la sincérité du président du RN",
-     "url": "https://www.20minutes.fr/politique/4253511-20261012-bardella-accuse-antisemitisme-zemmour-croit-vraiment-sincerite-president-rn?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-12T07:16:23.000Z"
-    },
-    {
-     "titre": "« Est-ce que je le crois sincère ? Pas vraiment » : Zemmour pas convaincu par Bardella",
-     "url": "https://www.letelegramme.fr/politique/est-ce-que-je-le-crois-sincere-pas-vraiment-zemmour-pas-convaincu-par-bardella-7136394.php",
-     "media": "Le Télégramme",
-     "date": "2026-10-12T07:14:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
     "L'Express",
     "20 Minutes",
     "Europe 1"
@@ -992,61 +953,122 @@
   },
   {
    "medias": 3,
-   "mediasDistincts": 3,
+   "mediasDistincts": 2,
    "sources": [
-    "Nice-Matin",
-    "Libération",
-    "L'Obs"
+    "France Médias Monde",
+    "Sud Ouest"
    ],
-   "derniere": "2026-10-09T18:55:19.000Z",
+   "derniere": "2026-10-12T14:04:32.000Z",
    "illustration": {
     "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Primaire sociale-démocrate : la plateforme de vote victime d’une cyberattaque, le vote prolongé jusqu’à dimanche 18 heures",
-     "url": "https://www.liberation.fr/politique/primaire-a-gauche-la-plateforme-de-vote-victime-dune-cyberattaque-20261009_ZT2BXQYMPFAKXO4LSCDOABMER4/",
-     "media": "Libération",
-     "date": "2026-10-09T17:44:14.000Z"
+     "titre": "France: à Aubagne, un collégien tire au fusil de chasse sur le principal et une professeure",
+     "url": "https://www.rfi.fr/fr/france/20261012-france-%C3%A0-aubagne-un-coll%C3%A9gien-tire-au-fusil-de-chasse-sur-le-principal-et-une-professeure",
+     "media": "RFI",
+     "date": "2026-10-12T14:04:32.000Z"
     },
     {
-     "titre": "Présidentielle 2027 : victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
-     "url": "https://www.nicematin.com/societe/politique/presidentielle-2027-victime-d-une-cyberattaque-le-premier-tour-de-la-primaire-sociale-democrate-est-prolonge-jusqu-a-dimanche-18-heures-10737294",
-     "media": "Nice-Matin",
-     "date": "2026-10-09T18:55:19.000Z"
+     "titre": "Un principal de collège blessé par un tir de fusil de chasse à Aubagne, un jeune interpellé",
+     "url": "https://www.france24.com/fr/france/20261012-un-principal-de-coll%C3%A8ge-bless%C3%A9-par-un-tir-de-fusil-de-chasse-%C3%A0-aubagne-un-jeune-interpell%C3%A9",
+     "media": "France 24",
+     "date": "2026-10-12T09:39:10.000Z"
     },
     {
-     "titre": "Cyberattaque contre la primaire PS : le vote enrayé mais prolongé jusqu’à dimanche",
-     "url": "https://www.liberation.fr/politique/elections/cyberattaque-contre-la-primaire-ps-le-vote-enraye-mais-prolonge-jusqua-dimanche-20261009_FX7I2EVBCZB5RLQBOVCN3KBQVE/",
-     "media": "Libération",
-     "date": "2026-10-09T18:11:34.000Z"
-    },
-    {
-     "titre": "Primaire de la gauche sociale-démocrate : la plateforme victime d’une cyberattaque, le vote de prolongé jusqu’à dimanche 18h",
-     "url": "https://www.nouvelobs.com/politique/20261009.OBS119050/primaire-sociale-democrate-la-plateforme-de-vote-victime-d-une-cyberattaque.html",
-     "media": "L'Obs",
-     "date": "2026-10-09T18:01:54.000Z"
-    },
-    {
-     "titre": "La plateforme de vote pour la primaire sociale-démocrate victime d’une cyberattaque, affirment les organisateurs du scrutin",
-     "url": "https://www.nicematin.com/societe/politique/la-plateforme-de-vote-pour-la-primaire-sociale-democrate-victime-d-une-cyberattaque-affirment-les-organisateurs-du-scrutin-10737159",
-     "media": "Nice-Matin",
-     "date": "2026-10-09T09:35:05.000Z"
+     "titre": "Aubagne : un collégien blesse le principal et une enseignante avec un fusil de chasse, avec « au moins » quatre tirs, son père en garde à vue",
+     "url": "https://www.sudouest.fr/politique/education/college/le-principal-d-un-college-d-aubagne-et-une-enseignante-blesses-par-un-tir-de-fusil-de-chasse-un-jeune-eleve-interpelle-31031787.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T09:27:46.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Fusil de chasse",
+    "origine": "recoupement"
    },
-   "fait": "Victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
-   "accroche": "Victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures",
-   "essentiel": "Présidentielle 2027 : victime d’une cyberattaque, le premier tour de la primaire sociale-démocrate est prolongé jusqu’à dimanche 18 heures. Trois médias en parlent : Libération, Nice-Matin et L'Obs."
+   "fait": "Un principal de collège blessé par un tir de fusil de chasse à Aubagne",
+   "accroche": "Un principal de collège blessé par un tir de fusil de chasse à Aubagne",
+   "essentiel": "Un principal de collège blessé par un tir de fusil de chasse à Aubagne. Trois médias en parlent : RFI, France 24 et Sud Ouest."
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "Mediapart",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-12T13:22:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: plusieurs centaines de supermarchés victimes d'une cyberattaque visant leurs installations frigorifiques",
+     "url": "https://www.rfi.fr/fr/france/20261012-france-plusieurs-centaines-de-supermarch%C3%A9s-victimes-d-une-cyberattaque-visant-leurs-installations-frigorifiques",
+     "media": "RFI",
+     "date": "2026-10-12T12:09:43.000Z"
+    },
+    {
+     "titre": "Des supermarchés victimes d’une cyberattaque visant leurs installations frigorifiques",
+     "url": "https://www.mediapart.fr/journal/france/121026/des-supermarches-victimes-d-une-cyberattaque-visant-leurs-installations-frigorifiques",
+     "media": "Mediapart",
+     "date": "2026-10-12T13:22:10.000Z"
+    },
+    {
+     "titre": "Les réfrigérateurs de centaines de supermarchés français victimes d'une cyberattaque",
+     "url": "https://www.france24.com/fr/france/20261012-des-supermarch%C3%A9s-fran%C3%A7ais-victimes-d-une-cyberattaque-contre-leurs-installations-frigorifiques",
+     "media": "France 24",
+     "date": "2026-10-12T11:51:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Victimes d une cyberattaque",
+    "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "Le Monde"
+   ],
+   "derniere": "2026-10-12T14:25:58.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Rhône : Le tribunal administratif annule l’élection municipale de Saint-Fons, remportée par LFI",
+     "url": "https://www.20minutes.fr/justice/4253662-20261012-rhone-tribunal-administratif-annule-election-municipale-saint-fons-remportee-lfi?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-12T14:25:58.000Z"
+    },
+    {
+     "titre": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par LFI, en raison d’irrégularités sur une liste concurrente",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/12/municipales-a-saint-fons-pres-de-lyon-la-justice-annule-les-elections-remportees-par-lfi-en-raison-d-irregularites-sur-une-liste-concurrente_6792629_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T12:03:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rhône : décision du tribunal administratif sur une élection municipale",
+    "origine": "regles"
+   },
+   "fait": "Le tribunal administratif annule l’élection municipale de Saint-Fons, remportée par La France insoumise",
+   "accroche": "Le tribunal administratif annule l’élection municipale de Saint-Fons, remportée par La France insoumise",
+   "essentiel": "Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par La France insoumise, en raison d’irrégularités sur une liste concurrente. Deux médias en parlent : 20 Minutes et Le Monde."
   },
   {
    "medias": 2,
@@ -1086,39 +1108,6 @@
     "titre": "Renaud Muselier : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "RFI",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-12T14:04:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "France: à Aubagne, un collégien tire au fusil de chasse sur le principal et une professeure",
-     "url": "https://www.rfi.fr/fr/france/20261012-france-%C3%A0-aubagne-un-coll%C3%A9gien-tire-au-fusil-de-chasse-sur-le-principal-et-une-professeure",
-     "media": "RFI",
-     "date": "2026-10-12T14:04:32.000Z"
-    },
-    {
-     "titre": "Aubagne : un collégien blesse le principal et une enseignante avec un fusil de chasse, avec « au moins » quatre tirs, son père en garde à vue",
-     "url": "https://www.sudouest.fr/politique/education/college/le-principal-d-un-college-d-aubagne-et-une-enseignante-blesses-par-un-tir-de-fusil-de-chasse-un-jeune-eleve-interpelle-31031787.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-12T09:27:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fusil de chasse",
-    "origine": "recoupement"
    }
   },
   {
@@ -1169,40 +1158,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Mediapart",
-    "RFI"
-   ],
-   "derniere": "2026-10-12T13:22:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Des supermarchés victimes d’une cyberattaque visant leurs installations frigorifiques",
-     "url": "https://www.mediapart.fr/journal/france/121026/des-supermarches-victimes-d-une-cyberattaque-visant-leurs-installations-frigorifiques",
-     "media": "Mediapart",
-     "date": "2026-10-12T13:22:10.000Z"
-    },
-    {
-     "titre": "France: plusieurs centaines de supermarchés victimes d'une cyberattaque visant leurs installations frigorifiques",
-     "url": "https://www.rfi.fr/fr/france/20261012-france-plusieurs-centaines-de-supermarch%C3%A9s-victimes-d-une-cyberattaque-visant-leurs-installations-frigorifiques",
-     "media": "RFI",
-     "date": "2026-10-12T12:09:43.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Numérique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "BFMTV",
     "Europe 1"
    ],
@@ -1240,6 +1195,54 @@
    },
    "fait": "Proviseur et enseignante blessés par balle à Aubagne",
    "accroche": "Proviseur et enseignante blessés par balle à Aubagne"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "Le Monde"
+   ],
+   "derniere": "2026-10-12T10:33:31.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le marché des Enfants-Rouges, à Paris, « totalement détruit » après un incendie",
+     "url": "https://www.lemonde.fr/societe/article/2026/10/12/le-marche-des-enfants-rouges-a-paris-ravage-par-les-flammes-annonce-le-maire-d-arrondissement_6792525_3224.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T05:22:42.000Z"
+    },
+    {
+     "titre": "France : le marché parisien des Enfants rouges détruit par une incendie",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261012-france-le-march%C3%A9-parisien-des-enfants-rouges-d%C3%A9truit-par-une-incendie",
+     "media": "France 24",
+     "date": "2026-10-12T10:33:31.000Z"
+    },
+    {
+     "titre": "Après l’incendie au marché des Enfants-Rouges, à Paris, les premières images des dégâts",
+     "url": "https://www.lemonde.fr/societe/video/2026/10/12/apres-l-incendie-au-marche-des-enfants-rouges-a-paris-les-premieres-images-des-degats_6792614_3224.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T10:20:38.000Z",
+     "video": true
+    },
+    {
+     "titre": "Le marché des Enfants-Rouges, à Paris, \"ravagé\" par un incendie",
+     "url": "https://www.france24.com/fr/france/20261012-march%C3%A9-des-enfants-rouges-paris-ravag%C3%A9-par-incendie",
+     "media": "France 24",
+     "date": "2026-10-12T06:06:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "À Paris, les premières images des dégâts",
+   "accroche": "À Paris, les premières images des dégâts"
   },
   {
    "medias": 2,
@@ -1296,6 +1299,59 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Le Monde",
+    "France 24"
+   ],
+   "derniere": "2026-10-12T06:47:53.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate à la présidentielle 2027",
+     "url": "https://www.lemonde.fr/politique/video/2026/10/12/raphael-glucksmann-largement-elu-candidat-de-la-gauche-sociale-democrate-a-la-presidentielle_6792528_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T06:47:53.000Z",
+     "video": true
+    },
+    {
+     "titre": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate pour la présidentielle",
+     "url": "https://www.france24.com/fr/france/20261011-glucksmann-largement-%C3%A9lu-candidat-de-la-gauche-sociale-d%C3%A9mocrate-pour-la-pr%C3%A9sidentielle-france",
+     "media": "France 24",
+     "date": "2026-10-11T20:30:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate",
+   "accroche": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate",
+   "essentiel": "Raphaël Glucksmann largement élu candidat de la gauche sociale-démocrate à la présidentielle 2027. Deux médias en parlent : Le Monde et France 24.",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "RFI",
     "Libération"
    ],
@@ -1335,55 +1391,6 @@
    "fait": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
    "accroche": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
    "essentiel": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral. Laurent Nuñez lance la dissolution d’Égalité & Réconciliation. Deux médias en parlent : RFI et Libération."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "L'Est républicain",
-    "RFI"
-   ],
-   "derniere": "2026-10-11T21:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Raphaël Glucksmann, désigné candidat de la gauche sociale-démocrate, enfariné après sa victoire",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/11/primaire-socialiste-un-candidat-designe-des-le-premier-tour-les-resultats-connus-ce-soir",
-     "media": "L'Est républicain",
-     "date": "2026-10-11T21:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027: Raphaël Glucksmann désigné candidat de la gauche sociale-démocrate au terme de la primaire",
-     "url": "https://www.rfi.fr/fr/france/20261011-pr%C3%A9sidentielle-2027-rapha%C3%ABl-glucksmann-d%C3%A9sign%C3%A9-candidat-de-la-gauche-sociale-d%C3%A9mocrate-au-terme-de-la-primaire",
-     "media": "RFI",
-     "date": "2026-10-11T16:35:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1670,6 +1677,54 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
+    "France 24 / Ouest-France"
+   ],
+   "derniere": "2026-10-12T05:52:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
+     "url": "https://www.france24.com/fr/france/20261012-raphael-glucksmann-enfarin%C3%A9-apr%C3%A8s-victoire-primaire-gauche-sociale-d%C3%A9mocrate",
+     "media": "France 24",
+     "date": "2026-10-12T05:52:11.000Z"
+    },
+    {
+     "titre": "Raphaël Glucksmann enfariné après sa victoire à la primaire de la gauche sociale-démocrate",
+     "url": "https://www.ouest-france.fr/politique/raphael-glucksmann/raphael-glucksmann-enfarine-apres-sa-victoire-a-la-primaire-de-la-gauche-sociale-democrate-6a49b536-c5c5-11f1-bba2-d026901fbfe4?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-11T22:54:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin / Le Télégramme"
    ],
    "derniere": "2026-10-11T18:59:03.000Z",
@@ -1718,6 +1773,99 @@
    ]
   },
   {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-10T15:04:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne : l'ONU \"inquiète\" face aux violences policières",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261010-semaine-en-france",
+     "media": "France 24",
+     "date": "2026-10-10T15:04:48.000Z"
+    },
+    {
+     "titre": "Mobilisation des lycéens en France: l'ONU «inquiète» face aux violences, le mouvement appelé à se poursuivre",
+     "url": "https://www.rfi.fr/fr/france/20261009-mobilisation-des-lyc%C3%A9ens-en-france-l-onu-inqui%C3%A8te-face-aux-violences-le-mouvement-appel%C3%A9-%C3%A0-se-poursuivre",
+     "media": "RFI",
+     "date": "2026-10-09T14:46:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
+   "accroche": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
+   "essentiel": "Pendant la mobilisation des lycéens en France, l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-12T16:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gironde : la Ville du Haillan propose une convention pour enlever gratuitement les tags et graffitis sur le domaine privé",
+     "url": "https://www.sudouest.fr/gironde/le-haillan/gironde-la-ville-du-haillan-propose-une-convention-pour-enlever-gratuitement-les-tags-et-graffitis-sur-le-domaine-prive-30985518.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T16:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gironde : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La Ville du Haillan propose une convention pour enlever gratuitement les tags et graffitis sur le domaine privé",
+   "accroche": "La Ville du Haillan propose une convention pour enlever gratuitement les tags et graffitis sur le domaine privé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-12T16:25:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Nous nous étions engagés pour la commune et les habitant, pas pour ça… » : dénonçant une gestion « autocratique », les élus de La Lande-de-Fronsac mettent leur maire en minorité",
+     "url": "https://www.sudouest.fr/gironde/la-lande-de-fronsac/nous-nous-etions-engages-pour-la-commune-et-les-habitant-pas-pour-ca-denoncant-une-gestion-autocratique-les-elus-de-la-lande-de-fronsac-mettent-leur-maire-en-minorite-31036382.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T16:25:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Dénonçant une gestion « autocratique », les élus de La Lande-de-Fronsac mettent leur maire en minorité",
+   "accroche": "Dénonçant une gestion « autocratique », les élus de La Lande-de-Fronsac mettent leur maire en minorité"
+  },
+  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
@@ -1747,77 +1895,6 @@
    },
    "fait": "Le Rassemblement national veut couper les vivres au savoir et supprimer le campus Condorcet",
    "accroche": "Le Rassemblement national veut couper les vivres au savoir et supprimer le campus Condorcet"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T16:16:54.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Conseil départemental le 13 octobre",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/conseil-departemental-le-13-octobre",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T16:16:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : ce qu'il faut savoir sur le conseil départemental",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T16:15:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Glucksmann enfariné : comment est assurée la sécurité des candidats ?",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/12/glucksmann-enfarine-comment-est-assuree-la-securite-des-candidats",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T16:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce qu'il faut savoir sur le maintien de l'ordre",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Glucksmann enfariné : comment est assurée la sécurité des candidats ?",
-   "accroche": "Glucksmann enfariné : comment est assurée la sécurité des candidats ?",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -2079,39 +2156,6 @@
     "titre": "Emmanuel",
     "origine": "dossier"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T16:00:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Benney. Affouages, taxe d’aménagement et travaux au conseil municipal",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/affouages-taxe-d-amenagement-et-travaux-au-conseil-municipal",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T16:00:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Benney : finances locales",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -2439,8 +2483,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -2663,33 +2707,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T15:29:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Besançon. Assimilé à un nazi sur les réseaux sociaux, Ludovic Fagaut porte plainte",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/10/12/assimile-a-un-nazi-sur-les-reseaux-sociaux-ludovic-fagaut-porte-plainte",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T15:29:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-10-12T15:28:39.000Z",
@@ -2713,35 +2730,6 @@
    },
    "fait": "Le recours aux gardes à vue est-il justifié ?",
    "accroche": "Le recours aux gardes à vue est-il justifié ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T15:28:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Laxou. Laxou dévoile sa plaque Ville Amie des aînés",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/laxou-devoile-sa-plaque-ville-amie-des-aines",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T15:28:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Laxou : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Laxou dévoile sa plaque Ville Amie des aînés",
-   "accroche": "Laxou dévoile sa plaque Ville Amie des aînés"
   },
   {
    "medias": 1,
@@ -3431,6 +3419,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-12T14:06:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Un élève ouvre le feu dans un collège d'Aubagne, le proviseur et une enseignante blessés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261012-un-%C3%A9l%C3%A8ve-ouvre-le-feu-dans-un-coll%C3%A8ge-d-aubagne-le-proviseur-et-une-enseignante-bless%C3%A9s",
+     "media": "France 24",
+     "date": "2026-10-12T14:06:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-10-12T13:58:54.000Z",
@@ -4111,50 +4125,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T11:27:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. « Un coup de frein » de 197 milliards : Retailleau présente à son tour un plan d'économies",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/12/un-coup-de-frein-de-197-milliards-retailleau-presente-a-son-tour-un-plan-d-economies",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T11:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : annonces sur les finances publiques",
-    "origine": "regles"
-   },
-   "fait": "Retailleau présente à son tour un plan d'économies",
-   "accroche": "Retailleau présente à son tour un plan d'économies",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-12T11:20:04.000Z",
@@ -4311,33 +4281,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T10:35:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ornans. La Ville met en place une mutuelle sur mesure pour les Ornanais",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/12/la-ville-met-en-place-une-mutuelle-sur-mesure-pour-les-ornanais",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T10:35:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ornans : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-10-12T10:32:32.000Z",
@@ -4360,6 +4303,76 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-12T10:32:31.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "France : après la primaire, Raphaël Glucksmann face au casse-tête de la gauche",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261012-france-apr%C3%A8s-la-primaire-rapha%C3%ABl-glucksmann-face-au-casse-t%C3%AAte-de-la-gauche",
+     "media": "France 24",
+     "date": "2026-10-12T10:32:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Glucksmann 9–13 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-12T10:31:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "France : plusieurs personnes blessées par balle dans un lycée à Aubagne",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261012-france-plusieurs-personnes-bless%C3%A9es-par-balle-dans-un-lyc%C3%A9e-%C3%A0-aubagne",
+     "media": "France 24",
+     "date": "2026-10-12T10:31:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Plusieurs personnes blessées par balle dans un lycée à Aubagne",
+   "accroche": "Plusieurs personnes blessées par balle dans un lycée à Aubagne"
   },
   {
    "medias": 1,
@@ -4473,41 +4486,6 @@
     "titre": "Lycées : ce que disent les médias",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-12T10:20:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Après l’incendie au marché des Enfants-Rouges, à Paris, les premières images des dégâts",
-     "url": "https://www.lemonde.fr/societe/video/2026/10/12/apres-l-incendie-au-marche-des-enfants-rouges-a-paris-les-premieres-images-des-degats_6792614_3224.html",
-     "media": "Le Monde",
-     "date": "2026-10-12T10:20:38.000Z",
-     "video": true
-    },
-    {
-     "titre": "Le marché des Enfants-Rouges, à Paris, « totalement détruit » après un incendie",
-     "url": "https://www.lemonde.fr/societe/article/2026/10/12/le-marche-des-enfants-rouges-a-paris-ravage-par-les-flammes-annonce-le-maire-d-arrondissement_6792525_3224.html",
-     "media": "Le Monde",
-     "date": "2026-10-12T05:22:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "À Paris, les premières images des dégâts",
-   "accroche": "À Paris, les premières images des dégâts"
   },
   {
    "medias": 1,
@@ -5097,42 +5075,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-12T09:36:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Guerre en Ukraine. L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/10/12/l-ue-sanctionne-1-600-individus-et-entites-lies-a-la-russie-macron-ne-veut-pas-ceder",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T09:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »",
-   "accroche": "L'UE sanctionne 1 600 individus et entités liés à la Russie, Macron ne veut pas « céder »"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-12T09:33:46.000Z",
@@ -5220,6 +5162,62 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-12T09:28:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation lycéenne à La Rochelle : tentative de blocage avortée à Dautet, les élèves repoussés vers la place de Verdun",
+     "url": "https://www.sudouest.fr/economie/social/mobilisation-lyceenne-a-la-rochelle-tentative-de-blocage-avortee-a-dautet-les-eleves-repousses-vers-la-place-de-verdun-31030771.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-12T09:28:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Mobilisation lycéenne à La Rochelle : tentative de blocage avortée à Dautet",
+   "accroche": "Mobilisation lycéenne à La Rochelle : tentative de blocage avortée à Dautet"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-12T09:24:34.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "A l’approche de la présidentielle 2027, les inspecteurs généraux de l’Etat s’inquiètent pour leur indépendance",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/12/des-inspecteurs-generaux-de-l-etat-s-inquietent-pour-leur-independance-a-l-aube-de-la-presidentielle_6792605_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-12T09:24:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "A l’approche de la présidentielle 2027",
+   "accroche": "A l’approche de la présidentielle 2027"
   }
  ]
 }
