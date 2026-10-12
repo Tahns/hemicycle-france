@@ -656,7 +656,7 @@ function siglesNonExpliques(texte) {
 // incises, citations, jour relatif retirés) mais jamais inversé ni enrichi. Champ d'AFFICHAGE : n'entre jamais dans les clés anti-doublon
 // (titrePropre.titre reste la clé). null quand aucun fait clair ne ressort de façon sûre : mieux vaut rien qu'un titre vague.
 // ─────────────────────────────────────────────────────────────────────────────
-const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 12;
+const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 16;
 /** Formules creuses : elles annoncent un sujet sans dire le fait. */
 const FORMULES_CREUSES = /actualite (?:sur|de|du|des|autour)|ce qu'il faut (?:savoir|retenir)|ce qu'on (?:sait|retient)|ce que l'on (?:sait|retient)|l'essentiel|ce que (?:disent|dit|pensent)|tout (?:savoir|comprendre)|on vous (?:explique|dit)|\bvoici\b|\bvoila\b|decryptage|en ce moment|a la une|en direct|\bles reactions\b|ce qui change|ce qu'il faut|ce que l'on|\bles coulisses\b|\bretour sur\b|\bfocus sur\b|\bzoom sur\b|\bdossier\b/;
 /** Verbes d'opinion et mots de mise en scène : le fait n'est pas dit, une humeur l'est. */
