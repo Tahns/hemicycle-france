@@ -932,6 +932,17 @@ async function storyPhotoTheme(cle){
   const libre = /CC0|domaine public|public domain/i.test(p.licence || ""); // crédit exigé par CC BY / CC BY-SA, pas par CC0 ni le domaine public
   return img ? { img, credit:libre ? "" : `Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
 }
+// Fonds « une-photo » générés par IA (instagram/modeles/fonds/, sans personne ni texte) : un fond par thème, jamais une photo hors sujet. Les thèmes d'institution
+// (assemblée, budget) alternent hémicycle et Palais Bourbon d'après l'accroche ; le Sénat n'a pas le sien (pas d'image de l'Assemblée pour le Sénat) : paysage neutre.
+const STORY_FONDS_IA = { assemblee:["hemicycle", "palais-bourbon"], budget:["hemicycle", "palais-bourbon"], election:["drapeau"], international:["drapeau"],
+  securite:["paris-seine"], justice:["paris-seine"], gouvernement:["paris-seine"], senat:["paris-seine"], politique:["paris-seine"] };
+const STORY_FOND_IA_CREDIT = "Illustration générée par IA";
+async function storyFondIA(cle, graine = ""){
+  const liste = STORY_FONDS_IA[cle] || STORY_FONDS_IA.politique;
+  let h = 0; for(const c of String(graine)) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const img = await storyImage(`instagram/modeles/fonds/${liste[h % liste.length]}.jpg`);
+  return img ? { img, credit:STORY_FOND_IA_CREDIT } : null;
+}
 function storyStylePastille(ctx, texte, x, y, fond, couleur){
   ctx.font = `800 30px "Public Sans"`; ctx.letterSpacing = "3px";
   const t = storyLignes(ctx, String(texte).toUpperCase(), STORY.L - 2 * STORY.marge - 56, 1)[0];
@@ -1065,7 +1076,9 @@ function storyStyleUnePhoto(ctx, d){
   const haut = bas - plan.total;
   // 2. fond : photo (carrée, 320 px à l'origine : agrandie et adoucie) ou motif du thème
   ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
-  if(d.photo?.img){
+  if(d.fondIA?.img){
+    ctx.drawImage(d.fondIA.img, 0, 0, L, H); // fond généré (1080 × 1920) : plein cadre, net
+  } else if(d.photo?.img){
     const S = 1300, x = Math.round((L - S) / 2), y = 0;
     ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.filter = "blur(1.5px) saturate(1.05)";
     ctx.drawImage(d.photo.img, x, y, S, S); ctx.restore();
@@ -1093,7 +1106,7 @@ function storyStyleUnePhoto(ctx, d){
     ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
     storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
   }
-  storyStylePied(ctx, d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit de la photo n'est affiché que si la photo l'est
+  storyStylePied(ctx, d.fondIA?.img ? { ...d, photo:d.fondIA } : d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit (photo ou « Illustration générée par IA ») n'est affiché que si l'image l'est
   return true;
 }
 
@@ -1251,7 +1264,7 @@ async function storySpecSujet(s){
   const accroche = storyTypo(s.accroche || s.titrePropre?.accroche || s.titrePropre?.titre || "");
   if(!accroche) return null;
   const ill = s.illustration || {}, th = storyThemeInfos(ill.theme);
-  const photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme);
+  const photo = await storyPhotoTheme("vignette" in ill ? ill.vignette : ill.theme), fondIA = await storyFondIA(th.cle, accroche);
   const a0 = s.articles[0];
   const medias = (Array.isArray(s.sources) && s.sources.length ? s.sources : [...new Set(s.articles.map(a => a.media))]).filter(Boolean);
   const n = medias.length;
@@ -1273,7 +1286,7 @@ async function storySpecSujet(s){
     : { valeur:String(n >= 2 ? n : s.articles.length), legende:n >= 2 ? "médias en parlent" : (s.articles.length > 1 ? "articles sur ce sujet" : "article sur ce sujet") };
   const liste = medias.slice(0, 5).join(", ") + (n > 5 ? ` et ${n - 5} autres` : "");
   return {
-    theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:th.categorie, accroche, essentiel, puces, chiffre:ch, contexte:accroche, photo,
+    theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:th.categorie, accroche, essentiel, puces, chiffre:ch, contexte:accroche, photo, fondIA,
     source:"",
     video:(s.articles.find(a => a.video) || {}).media || "", cta:"Toute l'actu politique",
   };

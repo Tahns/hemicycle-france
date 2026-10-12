@@ -1215,7 +1215,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // le dessin des styles vit dans js/stories.js : mêmes règles que le cahier des charges (taille de texte, nombre de mots, zones de sécurité)
   const src = readFileSync(new URL("../js/stories.js", import.meta.url), "utf-8");
   for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'ESSENTIEL"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);
-  assert.match(src, /storyStylePied\(ctx, d, \{ doux:"#D9DEF2", texte:"#FFFFFF", credit:true \}\)/, "le crédit de la photo est affiché avec la photo");
+  assert.match(src, /storyStylePied\(ctx, d\.fondIA\?\.img \? \{ \.\.\.d, photo:d\.fondIA \} : d, \{ doux:"#D9DEF2", texte:"#FFFFFF", credit:true \}\)/, "le crédit (photo, ou « Illustration générée par IA ») est affiché avec l'image");
   assert.ok(!/https?:\/\/[^"'`\s]*\.(?:jpe?g|png|woff2?)/.test(src.slice(src.indexOf("Styles de story du test comparatif"), src.indexOf("Stories d'actualité : modules séparés"))), "aucune ressource externe dans les styles (CSP)");
 }
 

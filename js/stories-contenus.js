@@ -61,8 +61,8 @@ async function dessinerStyle(ctx, s, d){
   const style = storyStyleValide(s?.style);
   if(style === "bleu") return false;
   if(d.source){ ctx.font = '400 23px "Public Sans"'; d = { ...d, source: storyLignes(ctx, String(d.source), LARG, 2).join(" ") }; } // source : 2 lignes au plus (jamais jusqu'à l'accroche)
-  const th = storyThemeInfos(d.cle), photo = await storyPhotoTheme(d.cle);
-  return Boolean(storyStyleDessiner(ctx, style, { theme:th.cle, couleur:th.couleur, motif:th.motif, photo, ...d }));
+  const th = storyThemeInfos(d.cle), photo = await storyPhotoTheme(d.cle), fondIA = await storyFondIA(th.cle, d.accroche);
+  return Boolean(storyStyleDessiner(ctx, style, { theme:th.cle, couleur:th.couleur, motif:th.motif, photo, fondIA, ...d }));
 }
 // Intitulé d'un point d'ordre du jour sans la formule d'introduction (« Proposition de résolution, déposée en application de l'article 34-1… visant à X » -> « Résolution : X »)
 function condenser(t){
