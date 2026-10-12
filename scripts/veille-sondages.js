@@ -74,6 +74,14 @@ export function terrain(t) {
 // « ne constituent ni une intention de vote » ne suffit pas.
 export const estIntentionsDeVote = (t, titre = "") => /\bIV\b|intentions? de vote|enqu[eê]te [ée]lectorale|presitrack/i.test(titre) ||
   /intentions? de vote\s*(?:[–-]\s*|(?:à|pour|de) l.\s*|au premier tour de l.\s*)?(?:élection )?présidentielle/i.test(t);
+/** Commanditaire lu dans le texte de la notice : « … mentionner le nom de l'institut et du commanditaire « Toluna Harris Interactive pour M 6 et RTL » » ou « Étude réalisée pour M6 & RTL ». null si introuvable. */
+export function commanditaireNotice(t) {
+  const propre = (c) => String(c || "").replace(/\b([A-Z]) (\d)\b/g, "$1$2").replace(/\s*&\s*/g, " et ").replace(/\s+/g, " ").trim();
+  const m1 = String(t).match(/commanditaire\s*[«"]\s*[^»"]*?\s+pour\s+([^»"]{2,70}?)\s*[»"]/iu);
+  if (m1) return propre(m1[1]);
+  const m2 = String(t).match(/(?:[eé]tude|enqu[eê]te|sondage)\s+r[eé]alis[eé]e?\s+(?:en ligne\s+)?pour\s+(?:le journal\s+|le quotidien\s+|la chaîne\s+)?(.{2,70}?)(?=\s+(?:par|du|le|en|\d{1,2}\s+\p{L}+\s+\d{4})\b|[.:;,]|\s{2,}|$)/iu);
+  return m2 ? propre(m2[1]) : null;
+}
 const echantillon = (t) => { const m = t.match(/échantillon de ([\d  ]{3,7}) personnes/i); return m ? parseInt(m[1].replace(/\D/g, ""), 10) : null; };
 
 async function main() {
@@ -90,14 +98,15 @@ async function main() {
   // Les notices sont listées de la plus récente à la plus ancienne ; on ne garde que les 45 derniers jours
   const limite = new Date(Date.now() - JOURS * 864e5).toISOString().slice(0, 10);
   const notices = [];
-  let lues = 0, echecs = 0;
+  let lues = 0, echecs = 0, relues = 0;
   for (const n of lignes.slice(0, 80)) {
     let info = connues.get(n.id);
+    if (info && info.iv && info.commanditaire === undefined && relues < 10) info = undefined; // notices déjà lues avant l'ajout du champ : relues une fois
     if (!info) {
       try {
         const t = await lirePdf(n.url);
-        info = { id: n.id, titre: n.titre, url: n.url, iv: estIntentionsDeVote(t, n.titre), terrain: terrain(t), echantillon: echantillon(t) };
-        lues++;
+        info = { id: n.id, titre: n.titre, url: n.url, iv: estIntentionsDeVote(t, n.titre), terrain: terrain(t), echantillon: echantillon(t), commanditaire: commanditaireNotice(t) };
+        lues++; if (connues.has(n.id)) relues++;
         await pause(300);
       } catch (e) {
         echecs++;
@@ -110,7 +119,7 @@ async function main() {
     const media = n.titre.replace(/^\d+\s+Pres\s+/i, "").replace(/\b\d{1,2}\s+\p{L}+\s*$/u, "")
       .replace(/\b(IV|V\d+|1er tour|Barometre|Baromètre|election|pres|Enquete electorale|Presitrack)\b/gi, "")
       .replace(INSTITUTS.find(([re]) => re.test(n.titre))?.[0] || /$^/, "").replace(/\s+/g, " ").trim();
-    notices.push({ ...info, institut, media: media || null });
+    notices.push({ ...info, institut, media: info.commanditaire || media || null }); // le commanditaire écrit dans la notice prime sur le titre du fichier
   }
 
   // Comparaison avec les chiffres affichés
