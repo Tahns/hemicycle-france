@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-12T06:01:09.249Z",
+ "lastUpdated": "2026-10-12T06:05:31.349Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -157,6 +157,7 @@
     "second"
    ],
    "medias": [
+    "L'Obs",
     "La Dépêche",
     "L'Express",
     "Sud Ouest",
@@ -166,7 +167,6 @@
     "Dernières Nouvelles d'Alsace",
     "France 24",
     "BFMTV",
-    "L'Obs",
     "Nice-Matin",
     "Libération",
     "RFI",
@@ -176,6 +176,7 @@
    ],
    "mediasDistincts": 14,
    "sources": [
+    "L'Obs",
     "La Dépêche",
     "L'Express",
     "Sud Ouest",
@@ -185,15 +186,20 @@
     "Dernières Nouvelles d'Alsace",
     "France Médias Monde",
     "BFMTV",
-    "L'Obs",
     "Nice-Matin / Le Télégramme",
     "Libération",
     "Valeurs actuelles",
     "Le JDD"
    ],
-   "nb": 44,
-   "derniere": "2026-10-12T05:45:26.000Z",
+   "nb": 45,
+   "derniere": "2026-10-12T06:00:17.000Z",
    "articles": [
+    {
+     "media": "L'Obs",
+     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
+     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
+     "date": "2026-10-12T06:00:17.000Z"
+    },
     {
      "media": "La Dépêche",
      "titre": "DIRECT. Présidentielle 2027 : un nouveau sondage place Jean-Luc Mélenchon qualifié au second tour dans chaque hypothèse, devant Édouard Philippe ou Gabriel Attal",
@@ -249,12 +255,6 @@
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-victoire-de-raphael-glucksmann-a-la-primaire-sociale-democrate-a-partir-de-maintenant-plus-une-seconde-ne-doit-etre-perdue-declare-le-candidat-a-la-presidentielle-devant-ses-partisans_VN-202610110379.html",
      "date": "2026-10-11T20:01:08.000Z",
      "video": true
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Glucksmann balaie Faure et impose sa ligne pour la présidentielle",
-     "url": "https://www.nouvelobs.com/politique/20261011.OBS119130/glucksmann-balaie-faure-et-impose-sa-ligne-pour-la-presidentielle.html",
-     "date": "2026-10-11T18:59:11.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -1703,6 +1703,81 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-12T06:00:17.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
+     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
+     "media": "L'Obs",
+     "date": "2026-10-12T06:00:17.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Ruffin 3 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-12T05:56:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Comment la lutte contre l’inceste est devenue un sujet majeur : « La société y est prête. Ce n’était pas le cas il y a quelques années »",
+     "url": "https://www.nouvelobs.com/societe/20261012.OBS119131/comment-la-lutte-contre-l-inceste-est-devenue-un-sujet-majeur-la-societe-y-est-prete-ce-n-etait-pas-le-cas-il-y-a-quelques-annees.html",
+     "media": "L'Obs",
+     "date": "2026-10-12T05:56:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-12T05:53:45.000Z",
@@ -2748,11 +2823,10 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -2761,14 +2835,14 @@
    },
    "articles": [
     {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "titre": "Emmanuel Macron",
+     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
      "media": "BFMTV",
      "date": "2026-10-12T04:58:24.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "titre": "Emmanuel Macron : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -2783,11 +2857,11 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+      "nom": "Éric Zemmour",
+      "photo": "photos/personnalites/eric-zemmour.jpg",
+      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
+      "parti": "REC",
+      "credit": "Anh De France, CC0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -2796,14 +2870,14 @@
    },
    "articles": [
     {
-     "titre": "Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
+     "titre": "Eric Zemmour",
+     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
      "media": "BFMTV",
      "date": "2026-10-12T04:58:24.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "titre": "Éric Zemmour : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -2904,48 +2978,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Edouard Philippe",
-     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T04:58:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T04:58:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Gabriel Attal",
       "photo": "photos/deputes/PA722190.jpg",
       "photoHd": "photos/deputes/hd/PA722190.jpg",
@@ -2975,6 +3007,48 @@
     {
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T04:58:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Edouard Philippe",
+     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T04:58:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -3024,10 +3098,11 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -3036,14 +3111,14 @@
    },
    "articles": [
     {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
      "media": "BFMTV",
      "date": "2026-10-12T04:58:24.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -3058,11 +3133,11 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -3071,14 +3146,14 @@
    },
    "articles": [
     {
-     "titre": "Eric Zemmour",
-     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
+     "titre": "Raphaël Glucksmann",
+     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
      "media": "BFMTV",
      "date": "2026-10-12T04:58:24.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Éric Zemmour : ce que disent les médias",
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -5439,67 +5514,6 @@
    },
    "fait": "Le pari gagné de Glucksman à la primaire socialiste",
    "accroche": "Le pari gagné de Glucksman à la primaire socialiste"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-11T18:00:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Prix des carburants : nouveaux bénéficiaires, montant doublé... le gouvernement détaille sa nouvelle aide aux \"grands rouleurs\"",
-     "url": "https://www.ladepeche.fr/2026/10/11/prix-des-carburants-nouveaux-beneficiaires-montant-double-le-gouvernement-detaille-sa-nouvelle-aide-aux-grands-rouleurs-13596050.php",
-     "media": "La Dépêche",
-     "date": "2026-10-11T18:00:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : annonces sur les finances publiques",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Humanité"
-   ],
-   "derniere": "2026-10-11T17:59:16.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "En meeting à Clermont-Ferrand, Jean-Luc Mélenchon installe la jeunesse comme moteur de sa campagne",
-     "url": "https://www.humanite.fr/politique/france-insoumise/en-meeting-a-clermont-ferrand-jean-luc-melenchon-installe-la-jeunesse-comme-moteur-de-sa-campagne",
-     "media": "L'Humanité",
-     "date": "2026-10-11T17:59:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : Jean-Luc Mélenchon (La France insoumise)",
-    "origine": "regles",
-    "generique": true
-   }
   }
  ]
 }
