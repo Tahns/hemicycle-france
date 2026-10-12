@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-12T14:10:42.181Z",
+ "lastUpdated": "2026-10-12T14:15:41.086Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -163,10 +163,10 @@
     "La Dépêche",
     "RFI",
     "Sud Ouest",
+    "L'Obs",
     "Le JDD",
     "L'Est républicain",
     "Europe 1",
-    "L'Obs",
     "Valeurs actuelles",
     "Mediapart",
     "BFMTV",
@@ -184,8 +184,8 @@
     "La Dépêche / Le JDD / Europe 1",
     "France Médias Monde",
     "Sud Ouest",
-    "L'Est républicain",
     "L'Obs",
+    "L'Est républicain",
     "Valeurs actuelles",
     "Mediapart",
     "BFMTV",
@@ -223,6 +223,12 @@
      "date": "2026-10-12T13:11:42.000Z"
     },
     {
+     "media": "L'Obs",
+     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
+     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
+     "date": "2026-10-12T13:00:42.000Z"
+    },
+    {
      "media": "Le JDD",
      "titre": "Présidentielle : Le Pen loin en tête, Mélenchon au second tour dans toutes les hypothèses, selon un nouveau sondage",
      "url": "https://www.lejdd.fr/politique/presidentielle-le-pen-loin-en-tete-melenchon-au-second-tour-dans-toutes-les-hypotheses-selon-un-nouveau-sondage-185856",
@@ -239,12 +245,6 @@
      "titre": "Présidentielle 2027 : Bruno Retailleau promet des économies de près de 200 milliards d'euros jusqu'en 2032",
      "url": "https://www.europe1.fr/politique/presidentielle-2027-bruno-retailleau-promet-des-economies-de-pres-de-200-milliards-deuros-jusquen-2032-1141661?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-10-12T10:47:09.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Primaire de la gauche : Raphaël Glucksmann élu candidat à la présidentielle dès le premier tour",
-     "url": "https://www.nouvelobs.com/politique/20261011.OBS119125/primaire-de-la-gauche-raphael-glucksmann-elu-candidat-a-la-presidentielle-des-le-premier-tour.html",
-     "date": "2026-10-12T10:09:02.000Z"
     },
     {
      "media": "Valeurs actuelles",
@@ -2155,7 +2155,7 @@
    "sources": [
     "Public Sénat"
    ],
-   "derniere": "2026-10-12T14:00:38.000Z",
+   "derniere": "2026-10-12T14:10:37.000Z",
    "illustration": {
     "personnes": [
      {
@@ -2171,6 +2171,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/10/21 Me P1",
+     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-10-21-me-p1-e0",
+     "media": "Public Sénat",
+     "date": "2026-10-12T14:10:37.000Z"
+    },
     {
      "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/10/20 Ma P2",
      "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-10-20-ma-p2-e0",
@@ -2658,6 +2664,54 @@
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance",
      "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-12T13:00:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« On fait de la France une colonie numérique ! » : François Ruffin plante les data centers au milieu de la campagne (présidentielle)",
+     "url": "https://www.nouvelobs.com/politique/20261012.OBS119132/on-fait-de-la-france-une-colonie-numerique-francois-ruffin-plante-les-data-centers-au-milieu-de-la-campagne-presidentielle.html",
+     "media": "L'Obs",
+     "date": "2026-10-12T13:00:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Ruffin 3 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -4661,48 +4715,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Fabien Roussel",
-      "photo": "photos/personnalites/fabien-roussel.jpg",
-      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
-      "parti": "GDR",
-      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fabien Roussel",
-     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T07:58:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fabien Roussel : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T07:58:52.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Édouard Philippe",
       "photo": "photos/personnalites/edouard-philippe.jpg",
       "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
@@ -4861,6 +4873,48 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-12T07:58:52.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Fabien Roussel",
+      "photo": "photos/personnalites/fabien-roussel.jpg",
+      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
+      "parti": "GDR",
+      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Fabien Roussel",
+     "url": "https://www.bfmtv.com/politique/fabien-roussel_DN-202105090296.html",
+     "media": "BFMTV",
+     "date": "2026-10-12T07:58:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fabien Roussel : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -5351,69 +5405,6 @@
    },
    "fait": "Coup d’envoi de l’examen à l’Assemblée avec des divergences abyssales et une menace de censure",
    "accroche": "Coup d’envoi de l’examen à l’Assemblée avec des divergences abyssales et une menace de censure"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-12T07:01:19.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     },
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle: Maud Bregeon, porte parole du gouvernement, appelle \"l'ensemble des responsables politiques de la droite et du centre\" incluant \"Gabriel Attal et Bruno Retailleau\" à \"se rassembler derrière Édouard Philippe\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-maud-bregeon-porte-parole-du-gouvernement-appelle-l-ensemble-des-responsables-politiques-de-la-droite-et-du-centre-incluant-gabriel-attal-et-bruno-retailleau-a-se-rassembler-derriere-edouard-philippe_VN-202610120248.html",
-     "media": "BFMTV",
-     "date": "2026-10-12T07:01:19.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : appel sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour Le Figaro (terrain : 25-29 septembre 2026, 1 527 personnes, marge d'erreur ±2,5 pts) : Attal 7–17 %, Retailleau 5–11 %, Philippe 15–24 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   }
  ]
 }
