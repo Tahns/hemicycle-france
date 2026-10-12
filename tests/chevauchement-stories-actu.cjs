@@ -69,7 +69,7 @@ const long1 = {...P1, nom:"Jean-Christophe Marie-Antoinette de la Rochefoucauld-
 const long2 = {...P2, nom:"Anne-Charlotte Wolfgang-Aleksandrovitch Hoffmann-Schwarzenberg", parti:"LR"};
 const sans = {nom:"Hélène Dupont-Castelnaudary", parti:"PS"};
 const arts = (n, titre, video) => Array.from({length:n},(_,i)=>({titre: i? titre+" "+i : titre, url:"https://ex.fr/"+i, media:M[i], date:new Date(Date.now()-3600e3*(i+1)).toISOString(), ...(video&&i===0?{video:true}:{})}));
-const mk = (o)=>({medias:o.n,mediasDistincts:o.n,sources:M.slice(0,o.n),derniere:new Date().toISOString(),illustration:{personnes:o.pers||[],partis:[],theme:o.theme||"gouvernement",vignette:o.theme||"gouvernement"},articles:arts(o.n,o.titrePresse||longT(22),o.video),titrePropre:o.propre?{titre:o.propre,origine:"regles"}:undefined,...(o.extra||{})});
+const mk = (o)=>({medias:o.n,mediasDistincts:o.n,sources:M.slice(0,o.n),derniere:new Date().toISOString(),illustration:{personnes:o.pers||[],partis:[],theme:o.theme||"gouvernement",vignette:o.theme||"gouvernement"},articles:arts(o.n,o.titrePresse||longT(22),o.video),titrePropre:o.propre?{titre:o.propre,origine:"regles"}:undefined,...(o.accroche?{accroche:o.accroche}:{}),...(o.essentiel?{essentiel:o.essentiel}:{}),...(o.extra||{})});
 const F = [
  ["f0",{n:6,propre:longT(34)}],
  ["f1",{n:1,propre:longT(40),pers:[long1,long2]}],
@@ -82,6 +82,10 @@ const F = [
  ["f8",{n:2,propre:"Duel",pers:[long1,sans],extra:{chiffre:{valeur:"4",unite:"milliards"}}}],
  ["f9",{n:6,titrePresse:longT(40),pers:[long1]}],
  ["f10",{n:1,propre:"Titre court",pers:[sans]}],
+ ["f12",{n:4,accroche:"Le ministère de l'Intérieur a engagé une procédure de dissolution contre Égalité & Réconciliation, l'association d'Alain Soral",essentiel:"Le gouvernement veut dissoudre l'association après des propos jugés haineux. Elle dispose de quelques jours pour répondre avant la décision du conseil des ministres, qui peut être contestée devant le Conseil d'État.",pers:[P1]}],
+ ["f13",{n:5,accroche:longT(19).replace(/ /g," ").replace(/^Le /,"Le "),essentiel:longT(44)+".",pers:[]}],
+ ["f14",{n:3,accroche:"Lycées : ce que disent les médias de la réforme",essentiel:"Supercalifragilisticexpialidocious"+"x".repeat(14)+" est un mot très long, suivi d'une phrase complète qui doit rester lisible sur un téléphone, même avec des « guillemets » et des chiffres comme 3,5 milliards d'euros.",extra:{chiffre:{valeur:"4",unite:"médias"},contexte:[{type:"fait",texte:"Rassemblement national : le député Jean-Philippe Tanguy reconnaît que son parti attire des dingues",source:"INSEE"}]}}],
+ ["f15",{n:2,accroche:"Budget 2027 : la droite et la gauche s'opposent sur la hausse des impôts des plus riches, le gouvernement hésite",essentiel:longT(30)+".",video:true,extra:{date:{iso:"2026-12-25",jour:25,mois:"décembre"}}}],
  ["f11",{n:2,propre:longT(30),pers:[sans,P2],video:true,extra:{chiffre:{valeur:"12 %",unite:"en un mois"},contexte:[{type:"fait",texte:"Un fait court.",source:"INSEE"}]}}],
 ];
 window.__F = {};
@@ -96,6 +100,7 @@ function analyser(rec, W=1080, H=1920){
   const T = rec.filter(r=>r.k==="t" && r.t.trim() && r.w>0 && r.h<400);
   const I = rec.filter(r=>r.k==="i" && r.w < W*0.95 && r.h < H*0.9);
   for(const t of T){
+    if(/(…|… »)$/.test(t.t.trim()) && t.t.length > 8 && !/^(Photos? :|—)/.test(t.t)) out.push(`TRONQUE "${t.t.slice(-40)}"`);
     if(t.x < 40 || t.x+t.w > W-40 || t.y < 0 || t.y+t.h > H) out.push(`HORS-CADRE "${t.t.slice(0,30)}" x=${t.x|0}..${(t.x+t.w)|0} y=${t.y|0}..${(t.y+t.h)|0}`);
   }
   for(let i=0;i<T.length;i++) for(let j=i+1;j<T.length;j++){

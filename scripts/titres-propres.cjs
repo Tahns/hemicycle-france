@@ -656,7 +656,7 @@ function siglesNonExpliques(texte) {
 // incises, citations, jour relatif retirés) mais jamais inversé ni enrichi. Champ d'AFFICHAGE : n'entre jamais dans les clés anti-doublon
 // (titrePropre.titre reste la clé). null quand aucun fait clair ne ressort de façon sûre : mieux vaut rien qu'un titre vague.
 // ─────────────────────────────────────────────────────────────────────────────
-const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 16, FAIT_MAX_CAR = 95; // le rendu des stories coupe au-delà de 4 lignes : jamais plus de 16 mots ni ~95 caractères
+const FAIT_MIN_MOTS = 6, FAIT_MAX_MOTS = 20, FAIT_MAX_CAR = 135; // décision du propriétaire : « quitte à ce que ce soit plus long, qu'on comprenne » ; au-delà, on raccourcit par règles à une proposition entière, jamais en coupant
 /** Formules creuses : elles annoncent un sujet sans dire le fait. */
 const FORMULES_CREUSES = /actualite (?:sur|de|du|des|autour)|ce qu'il faut (?:savoir|retenir)|ce qu'on (?:sait|retient)|ce que l'on (?:sait|retient)|l'essentiel|ce que (?:disent|dit|pensent)|tout (?:savoir|comprendre)|on vous (?:explique|dit)|\bvoici\b|\bvoila\b|decryptage|en ce moment|a la une|en direct|\bles reactions\b|ce qui change|ce qu'il faut|ce que l'on|\bles coulisses\b|\bretour sur\b|\bfocus sur\b|\bzoom sur\b|\bdossier\b/;
 /** Verbes d'opinion et mots de mise en scène : le fait n'est pas dit, une humeur l'est. */
@@ -664,7 +664,7 @@ const OPINION_FAIT = /\b(?:balaie\w*|fustige\w*|tacle\w*|etrille\w*|flingue\w*|t
 const DEBUT_INTERDIT = /^(?:et|mais|ou|ni|car|donc|or|puis|alors|pourquoi|comment|quand|qu'est|quel(?:le)?s?\s+(?:est|sont))\b/;
 const FIN_COUPEE = /\b(?:de|du|des|d|la|le|les|l|un|une|et|ou|en|au|aux|a|pour|par|sur|dans|avec|sans|que|qui|dont|ce|cette|ces|son|sa|ses|leur|leurs|mais|si|s|ne|pas|plus|apres|avant|vers|chez|selon|est|sont|sera|ont|a)$/;
 const NOMS_EN_E = new Set(["sante", "societe", "securite", "majorite", "minorite", "universite", "communaute", "egalite", "liberte", "qualite", "quantite", "unite", "cite", "ete", "difficulte", "fraternite", "priorite", "autorite", "activite", "realite", "identite", "laicite", "facilite", "opportunite", "fonction", "feminite", "pauvrete", "propriete", "etablissement", "annee", "journee", "soiree", "idee", "armee", "arrivee", "denree", "duree", "entree", "gelee", "pensee", "lycee", "musee", "comite", "parti", "ami", "mi", "midi", "pays", "avis", "fois", "bruit", "projet", "budget", "debut", "benefice"]);
-const VERBES_COURANTS = /^(?:est|sont|etait|etaient|sera|seront|serait|a|ont|avait|aura|auront|aurait|va|vont|veut|veulent|doit|doivent|peut|peuvent|pourra|pourront|fait|font|fera|feront|reste|restent|devient|devrait|devraient|annule\w*|annonc\w*|promet\w*|presente\w*|propos\w*|adopt\w*|vote\w*|rejet\w*|demand\w*|lanc\w*|depos\w*|ouvr\w*|ouvert\w*|decid\w*|confirm\w*|prepar\w*|prevoi\w*|prevu\w*|fixe\w*|rend\w*|nomm\w*|elu\w*|elit|choisi\w*|financ\w*|arriv\w*|debute\w*|debutent|commenc\w*|termin\w*|quitt\w*|rejoin\w*|retir\w*|suspend\w*|saisi\w*|refus\w*|accept\w*|signe\w*|ratifi\w*|examin\w*|interdi\w*|autoris\w*|obtien\w*|perd\w*|gagn\w*|remport\w*|maintien(?:t|nent|dra|dront)|supprim\w*|cree\w*|ferm\w*|verse\w*|lev\w*|baiss\w*|augment\w*|hauss\w*|reunit\w*|reuni\w*|rencontr\w*|visit\w*|tient|tiennent|tenu\w*|organis\w*|consult\w*|appell\w*|invit\w*|denonc\w*|explique\w*|dit|disent|reçoi\w*|recoi\w*|publi\w*|dévoil\w*|devoil\w*|livr\w*|abandonn\w*|renonc\w*|reporte\w*|reprend\w*|repris\w*|revient|reviennent|sortent|sortira|partent|pretes?|pret|coute\w*|couter\w*|comptent|espere\w*|souhait\w*|exige\w*|reclam\w*|enclench\w*|engag\w*|saisit|ordonn\w*|condamn\w*|relax\w*|entend\w*|entame\w*|poursui\w*|obtient|obtenu\w*|valid\w*|approuv\w*|bloqu\w*|boycott\w*|defend\w*|emet\w*|instaur\w*|rembours\w*|cesse\w*|manifest\w*|mobilis\w*|rassembl\w*|defil\w*|blocu\w*|bloquent|manqu\w*|disparait\w*|expuls\w*|evacu\w*|licenci\w*|recrut\w*|embauch\w*|quitte\w*|vont|ira|iront|ouvre\w*|etend\w*|prolong\w*|durci\w*|assoupli\w*|renforc\w*|relev\w*|gele\w*|debloq\w*|alloue\w*|attribu\w*|distribu\w*)$/;
+const VERBES_COURANTS = /^(?:est|sont|etait|etaient|sera|seront|serait|a|ont|avait|aura|auront|aurait|va|vont|veut|veulent|doit|doivent|peut|peuvent|pourra|pourront|fait|font|fera|feront|reste|restent|devient|devrait|devraient|annule\w*|annonc\w*|promet\w*|presente\w*|propos\w*|adopt\w*|vote\w*|rejet\w*|demand\w*|lanc\w*|depos\w*|ouvr\w*|ouvert\w*|decid\w*|confirm\w*|prepar\w*|prevoi\w*|prevu\w*|fixe\w*|rend\w*|nomm\w*|elu\w*|elit|choisi\w*|financ\w*|arriv\w*|debute\w*|debutent|commenc\w*|termin\w*|quitt\w*|rejoin\w*|retir\w*|suspend\w*|saisi\w*|refus\w*|accept\w*|signe\w*|ratifi\w*|examin\w*|interdi\w*|autoris\w*|obtien\w*|perd\w*|gagn\w*|remport\w*|maintien(?:t|nent|dra|dront)|supprim\w*|cree\w*|ferm\w*|verse\w*|lev\w*|baiss\w*|augment\w*|hauss\w*|reunit\w*|reuni\w*|rencontr\w*|visit\w*|tient|tiennent|tenu\w*|organis\w*|consult\w*|appell\w*|invit\w*|denonc\w*|explique\w*|dit|disent|reçoi\w*|recoi\w*|publi\w*|dévoil\w*|devoil\w*|livr\w*|abandonn\w*|renonc\w*|reporte\w*|reprend\w*|repris\w*|revient|reviennent|sortent|sortira|partent|pretes?|pret|coute\w*|couter\w*|comptent|espere\w*|souhait\w*|exige\w*|reclam\w*|enclench\w*|engag\w*|saisit|ordonn\w*|condamn\w*|relax\w*|entend\w*|entame\w*|poursui\w*|obtient|obtenu\w*|valid\w*|approuv\w*|bloqu\w*|boycott\w*|defend\w*|emet\w*|instaur\w*|rembours\w*|cesse\w*|manifest\w*|mobilis\w*|rassembl\w*|defil\w*|blocu\w*|bloquent|manqu\w*|disparait\w*|expuls\w*|evacu\w*|licenci\w*|recrut\w*|embauch\w*|quitte\w*|vont|ira|iront|ouvre\w*|etend\w*|prolong\w*|durci\w*|assoupli\w*|renforc\w*|relev\w*|gele\w*|debloq\w*|alloue\w*|attribu\w*|distribu\w*|admet\w*|reconnai\w*|attir\w*|alert\w*|pointe\w*|previen\w*|plaide\w*|souligne\w*|degain\w*|dissol\w*|figur\w*|tourn\w*|engage\w*|engag\w*|dement\w*|juge\w*|martel\w*)$/;
 const LISTE_PRUDENTE = require("./liste-prudente.cjs");
 const motsFait = (t) => String(t || "").match(/[\p{L}0-9]+(?:['’-][\p{L}0-9]+)*/gu) || [];
 const pasDeMarqueurDAttribution = /\b(?:selon|d'apres|aurait|auraient|serait|seraient|affirme\w*|assure\w*|dit-on|dement\w*|nie|nient|aurait|presume\w*|supposé\w*|suppose\w*|rumeur\w*)\b/;
@@ -690,10 +690,10 @@ const GUILLEMETS = "«\"“”»";
 /** Retire les citations en tête ou en fin de titre (ce sont les mots de quelqu'un, pas le fait) et les incises entre virgules. */
 function sansCitations(t) {
   let x = t;
-  x = x.replace(/^[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*[,:]\s*/u, "");
+  x = x.replace(/^[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*[,:]\s*(?!(?:alerte|pointe|affirme|assure|estime|juge|dit|disent|déclare|explique|prévient|admet|regrette|dénonce|réclame|exige|souhaite|appelle|souligne|plaide|martèle|répond|ajoute|lance|reconnaît|confie|indique|annonce)\b)/u, "");
   x = x.replace(/\s*[,:]\s*[«"“]\s*[^»"”]{3,120}?\s*[»"”]\s*$/u, (m, off) => (off >= 25 ? "" : m)); // citation finale APRÈS une virgule ou deux-points : détachée ; sans ponctuation (« attire « des dingues » »), c'est le complément du verbe : on la garde
   x = x.replace(/,\s*[«"“][^»"”]{3,120}?[»"”]\s*(?=,)/gu, "");
-  x = x.replace(/\s*[«"“]\s*[^»"”]{20,120}?\s*[»"”]\s*(?=[,;.?]|$)/gu, "");
+  x = x.replace(/\s*[«"“]\s*[^»"”]{20,120}?\s*[»"”]\s*(?=[;.?]|$|,(?!\s*(?:alerte|pointe|affirme|assure|estime|juge|dit|disent|déclare|explique|prévient|admet|regrette|dénonce|réclame|exige|souhaite|appelle|souligne|plaide|martèle|répond|ajoute|lance|reconnaît|confie|indique|annonce)))/gu, "");
   x = x.replace(/,\s*(?:qui|que|dont|où|alors que|lequel|laquelle)\b[^,]{3,70},\s*/giu, " "); // incise relative : « Evreux, qui s'est joué à 520 voix, annulée… »
   return x.replace(/:\s*,/g, ":").replace(/\s{2,}/g, " ").replace(/\s+,/g, ",").trim();
 }
@@ -723,7 +723,7 @@ function candidatsDe(brut) {
   // « Tête : suite » (une tête de ≤ 8 mots) : la suite seule, la tête seule, ou les deux
   const morceaux = [t0];
   const m = /^(.{3,120}?)\s*:\s+(.{12,})$/u.exec(t0);
-  if (m && motsFait(m[1]).length <= 14) { morceaux.push(m[2], m[1], `${m[1]} : ${m[2]}`); }
+  if (m && motsFait(m[1]).length <= 14) { morceaux.push(m[2], m[1], `${m[1]} : ${m[2]}`); const ctx = enContexte(m[1], m[2]); if (ctx) morceaux.push(ctx); }
   for (const base of morceaux) {
     const attribue = pasDeMarqueurDAttribution.test(plat(base));
     for (const ajouts of [false, true]) for (const tete of [false, true]) for (const fin of [false, true]) {
@@ -740,12 +740,29 @@ function candidatsDe(brut) {
   for (const x of [...sorties]) for (const v of variantesCourtes(x)) ajoute(v);
   return [...sorties];
 }
+// Tête de titre (« Rassemblement national : … », « Budget 2027 : … ») remise dans la phrase par une préposition courante : le contexte reste, la phrase est complète
+const CONTEXTES = [
+  [/^(?:rassemblement national|parti socialiste|parti communiste|mouvement démocrate)\b/i, "Au "], [/^(?:la france insoumise|les républicains|les écologistes|les insoumis)\b/i, "Chez "],
+  [/^primaire\b/i, "Dans la "], [/^présidentielle\b/i, "Pour la "], [/^(?:budget|projet de loi)\b/i, "Sur le "], [/^(?:mobilisation|colère|manifestations?)\b/i, "Pendant la "], [/^(?:blocus|mouvement)\b/i, "Pendant le "],
+];
+const DEBUT_CONTEXTE = /^(?:Au|Chez|Dans la|Pour la|Sur le|Pendant l[ae])\s\S[^,]{2,60},\s/;
+/** « Tête : suite » -> « Au Rassemblement national, le député X… » ; null si la tête n'est pas un contexte connu. */
+function enContexte(tete, suite) {
+  const c = CONTEXTES.find(([re]) => re.test(tete.trim()));
+  if (!c || /[«»"“”]/.test(tete)) return null;
+  const mots = suite.trim().split(" "), premier = mots[0];
+  const bas = MOTS_VIDES.has(plat(premier)) || /^[a-zà-ÿ]/.test(premier);
+  const tete2 = tete.trim().replace(/^./, (x) => x.toLowerCase());
+  const corps = (bas ? premier.charAt(0).toLowerCase() + premier.slice(1) : premier) + " " + mots.slice(1).join(" ");
+  return `${c[1]}${/^(?:Au|Chez)/.test(c[1]) ? tete.trim().replace(/^(?:la france insoumise|les républicains|les écologistes)/i, (x) => (/^la/i.test(x) ? "La France insoumise" : x.replace(/^./, (y) => y))) : tete2}, ${corps.trim()}`;
+}
 /** Raccourcis de formulation sans changer le fait (« a engagé une procédure de dissolution contre X » -> « engage la dissolution d'X »). */
 function raccourcisFixes(t) {
   return t.replace(/\bEgalité\b/g, "Égalité")
     .replace(/\b(?:a|ont) engagé une procédure de dissolution contre (?:l['’]association |le groupe |le mouvement )?(?=(\p{L}))/giu, (m, c) => `engage la dissolution ${/^[AEIOUYÉÈÊH]/i.test(c) ? "d'" : "de "}`);
 }
-const PP_FINAL = /\s+(?:à|au|aux|en|dans|devant|lors de|lors du|après|avant|sur|vers|pour|depuis|ce|cette)\s+[^,:;]+$/iu;
+// Compléments de fin retirables sans casser la phrase : un lieu (« à Clermont-Ferrand ») ou une circonstance (« devant une salle comble », « lors du meeting ») ; jamais un complément du verbe (« en ordre de bataille »)
+const PP_FINAL = /\s+(?:(?:à|au|aux|en|dans)\s+\p{Lu}[^,:;]*|(?:devant|lors de|lors du|lors d['’])\s*[^,:;]+)$/u;
 /** Formes plus courtes d'une phrase : citation d'une ou deux mots collée à un nom propre retirée, complément de lieu ou de circonstance de tête retiré, raccourcis fixes, compléments de fin retirés un à un. Les contrôles de qualité (défautsFait) tranchent. */
 function variantesCourtes(x) {
   const sortie = new Set();
@@ -758,15 +775,20 @@ function variantesCourtes(x) {
     const sa = b.replace(/^(?:en|à|au|aux|dans|lors de|lors du|devant|depuis)\s+[^,]{3,50},\s+(?=\p{Lu})/u, ""); // « En meeting à Lyon, Gabriel Attal… » -> « Gabriel Attal… »
     if (sa !== b) { garde(sa); bases.push(sa); }
   }
+  for (const b of [...bases]) { const sp = b.replace(/\s*\([^)]*\)\s*/g, " "); if (sp !== b) { garde(sp); bases.push(sp); } } // incise entre parenthèses (souvent un commentaire du média) retirée
+  for (const b of [...bases]) { // incise d'apposition entre virgules après un nom propre : « Raphaël Glucksmann, vainqueur de la primaire, doit… » -> « Raphaël Glucksmann doit… »
+    const si = b.replace(/(\p{Lu}[\p{L}'’-]+\s+\p{Lu}[\p{L}'’-]+),\s+([^,:;]{8,70}),\s+(?=[a-zà-ÿ])/u, (m, nom, incise) => (verbeConjugue(incise) || /[«»"“”]/.test(incise) ? m : `${nom} `));
+    if (si !== b) { garde(si); bases.push(si); }
+  }
   for (const b of bases) {
     let y = b;
     for (let i = 0; i < 3 && (motsFait(y).length > FAIT_MAX_MOTS || y.length > FAIT_MAX_CAR); i++) { const z = y.replace(PP_FINAL, ""); if (z === y) break; y = z; garde(y); }
   }
   return [...sortie];
 }
+const nomme = (t, personnes = []) => { const p = plat(t); return personnes.some((x) => { const n = plat(x.nom), f = n.split(" ").slice(-1)[0]; return p.includes(n) || (f.length >= 4 && new RegExp("\\b" + f + "\\b").test(p)); }); };
 const aUnNomPropre = (t, personnes = []) => {
-  const p = plat(t);
-  if (personnes.some((x) => { const n = plat(x.nom), f = n.split(" ").slice(-1)[0]; return p.includes(n) || (f.length >= 4 && new RegExp("\\b" + f + "\\b").test(p)); })) return true;
+  if (nomme(t, personnes)) return true;
   const w = motsFait(t.replace(/\s&\s/g, " et ")); // « Égalité & Réconciliation » : une association, pas un prénom + nom
   return w.some((x, i) => i > 0 && /^\p{Lu}/u.test(x) && /^\p{Lu}/u.test(w[i - 1]) && !MOTS_VIDES.has(plat(x)) && !INSTITUTIONS.has(plat(x)));
 };
@@ -814,10 +836,16 @@ function defautsFait(t, { personnes = [], judiciaire = false, max = FAIT_MAX_MOT
   if (/\b[dlnsmtcj]['’]\s*(?:[,.:;?!]|$)/iu.test(t)) d.push("fin coupée (apostrophe)");
   if (/\b(?:annonce|promet|demande|affirme|declare|dit|explique|confie|revele|veut|doit|peut|propose|presente|lance|exige|reclame|souhaite|appelle|rappelle|indique|precise|assure|estime|disent|veulent|affirment|declarent|demandent|exigent|reclament|assurent|estiment|annoncent|promettent|selon\s+[\p{L}' -]+)$/.test(p.replace(/\s*\?$/, ""))) d.push("fin coupée (verbe ou « selon » sans suite)");
   if (/(?:^|: )(?:affirm\w*|declar\w*|dit|disent|expliqu\w*|indiqu\w*|assur\w*|estim\w*|confi\w*|precis\w*|ajout\w*|selon)\b/.test(p)) d.push("début sans sujet");
+  if (/[«"“]/.test(t) === false && /,\s*(?:alert|point|estim|jug|dit|disent|expliq|previen|admet|regrett|denonc|reclam|exig|souhait|appell|soulign|plaid|martel|repond)\w*\s+(?:[a-z'-]+\s*){1,5}$/.test(apostropheNue(t)) && motsFait(t.slice(0, t.lastIndexOf(","))).length < 8) d.push("citation retirée : « …, dit X » sans la citation");
+  if (/\([^)]*\)/.test(t)) d.push("incise entre parenthèses");
+  { const apres = t.slice(t.lastIndexOf(",") + 1).trim(); if (t.includes(",") && /^(?:les?|la|l['’]|des|un|une)\b/i.test(apres) && !verbeConjugue(apres) && !aUnVerbe(apres)) d.push("fin sans verbe (proposition nominale)"); }
   if (siglesNonExpliques(t).length) d.push("sigle non expliqué");
   if (!aUnVerbe(t)) d.push("sans verbe");
   // Sujet sensible (accusation, procédure, polémique, violence) : jamais avec le nom d'une personne
-  if ((judiciaire || LISTE_PRUDENTE.motAssoupli(t) || LISTE_PRUDENTE.mineurIdentifiable(t)) && aUnNomPropre(t, personnes)) d.push("sujet sensible avec un nom");
+  // Phrase sensible (accusation, procédure, polémique, mineur) : aucun nom. Sujet sensible par ailleurs : aucune personne reconnue (illustration.personnes) ; une association ou un autre nom neutre peut rester (« l'association d'Alain Soral »).
+  const phraseSensible = LISTE_PRUDENTE.motAssoupli(t) || LISTE_PRUDENTE.mineurIdentifiable(t) || JUDICIAIRE_TITRES.test(t);
+  if (phraseSensible && aUnNomPropre(t, personnes)) d.push("sujet sensible avec un nom");
+  else if (judiciaire && nomme(t, personnes)) d.push("sujet sensible avec un nom");
   if (LISTE_PRUDENTE.mineurIdentifiable(t)) d.push("mineur identifiable");
   return d;
 }
@@ -843,9 +871,9 @@ function verbeConjugue(t) {
 }
 /** Une phrase qui renvoie à un « son parti », « il », « elle » a besoin de sa tête (« Rassemblement national : … ») : bonus à la forme complète, malus à la forme nue. */
 function besoinDeContexte(t) {
-  const aTete = /^[^:]{3,60}\s:\s/.test(t);
-  const renvoie = /\b(?:son|sa|ses|leur|leurs|il|elle|ils)\b/i.test(t);
-  return renvoie ? (aTete ? 1.5 : -3) : 0;
+  const aTete = /^[^:]{3,60}\s:\s/.test(t) || DEBUT_CONTEXTE.test(t);
+  const renvoie = /(?<!['’])\b(?:son|sa|ses|leur|leurs|il|elle|ils)\b/i.test(t);
+  return renvoie ? (aTete ? 1.5 : -3) : (aTete ? -1.5 : 0); // sans renvoi, la tête (rubrique) va dans « l'essentiel », pas dans le gros titre
 }
 /**
  * Titre-fait d'un sujet de presse : { titre, article, partage } ou null. Candidats = chaque titre de presse condensé (voir candidatsDe) ;
@@ -863,7 +891,7 @@ function titreFaitDetail(sujet) {
   articles.forEach((a, ia) => {
     for (const txt of candidatsDe(a.titre)) {
       const t = maj1(simplifierJargon(txt).replace(/\s*\?$/, " ?").replace(/\s*:\s+/g, " : "));
-      if (defautsFait(t, { personnes, judiciaire }).length) continue;
+      if (defautsFait(t, { personnes, judiciaire, ouverture: DEBUT_CONTEXTE.test(t) }).length) continue;
       const cle = plat(t).replace(/[^a-z0-9]+/g, " ").trim();
       const reprisTelQuel = complets.filter((c) => c === cle).length; // médias dont le titre est exactement celui-ci
       if (reprisTelQuel === 1) continue; // titre d'un seul média recopié : pas de condensation, pas de partage
@@ -872,7 +900,7 @@ function titreFaitDetail(sujet) {
       const partage = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length / Math.max(1, r.size), 0) / autres.length : 0;
       const n = motsFait(t).length;
       const commun = autres.length ? autres.reduce((s, x) => s + [...r].filter((m) => x.has(m)).length, 0) / autres.length : 0;
-      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (verbeConjugue(t) ? 3 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 14 ? 1 : 0) - Math.abs(n - 12) * 0.1
+      const note = partage * 4 + Math.min(commun, 6) * 1.2 + (aUnVerbe(t) ? 2 : 0) + (verbeConjugue(t) ? 3 : 0) + (aUnNomPropre(t, personnes) || /\d/.test(t) ? 1 : 0) + (n >= 8 && n <= 14 ? 1 : 0) - Math.abs(n - 14) * 0.15
         - (/[«»"“”]/.test(t) ? 0.8 : 0) + besoinDeContexte(t);
       cands.push({ titre: t, article: ia, partage: Math.round(partage * 100) / 100, note });
     }

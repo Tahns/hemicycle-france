@@ -564,7 +564,7 @@ STORY_PLUS.secondtour = async (ctx, info)=>{
   let cb = storyPCouleurCandidat(b); if(cb === ca) cb = "#6B6E78";
   const premier = d.instituts[0], sa = premier.scores[a], sb = premier.scores[b];
   let y = storyCadre(ctx, "Présidentielle 2027 · second tour");
-  y = storyTexte(ctx, "Le duel testé par les sondages", marge, y, { taille:60, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 14;
+  y = storyTexte(ctx, "Le duel testé par les sondages", marge, y, { taille:60, poids:600, police:"Newsreader", max:2, interligne:1.12 }) + 14;
   // Carte du duel : noms, scores, barre
   const hCarte = 74 + 30 + 200 + 44 + 56 + 36 + 20;
   storyCarte(ctx, marge, y, storyPLarg, hCarte);
@@ -859,7 +859,7 @@ STORY_PLUS.meeting = async (ctx, info)=>{
     storyPastille(ctx, storyLignes(ctx, m.parti, L - marge - xp - tp * 1.2, 1)[0], xp, y + 6, storyClair(coul), storyLuminance(storyClair(coul)) > 0.45 ? STORY.encre : "#fff", tp);
   }
   y += 130;
-  y = storyTexte(ctx, m.titre, marge, y, { taille:68, poids:600, police:"Newsreader", max:4, interligne:1.08 }) + 14;
+  y = storyTexte(ctx, m.titre, marge, y, { taille:68, poids:600, police:"Newsreader", max:4, interligne:1.12 }) + 14;
   const ou = [m.heure && m.heure !== "—" ? m.heure : "", m.lieu].filter(Boolean).join(" · ");
   if(ou) y = storyTexte(ctx, ou, marge, y, { taille:34, poids:700, couleur:STORY.ciel, max:3, interligne:1.2 }) + 14;
   y = storyBlocFit(ctx, m.desc, marge, y, 1400, { tMax:46, tMin:32, interligne:1.3, couleur:STORY.blanc }) + 14;
@@ -1014,16 +1014,16 @@ function storyAjuste(ctx, texte, { tailles, poids, police, largeur, max = 99, hM
 
 function storyStyleUnePhoto(ctx, d){
   const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1470, dispo = bas - 400;
-  // 1. mise en page (de bas en haut), avant de peindre. Le gros titre (accroche) n'est JAMAIS coupé : il rétrécit (jusqu'à 56 px) et prend jusqu'à 6 lignes.
-  //    L'essentiel s'affiche en entier ; sa taille descend jusqu'à 40 px, puis il est réduit à ses premières propositions complètes, puis retiré.
+  // 1. mise en page (de bas en haut), avant de peindre. Le gros titre (accroche) n'est JAMAIS coupé : il rétrécit (jusqu'à 52 px) et prend jusqu'à 6 lignes.
+  //    L'essentiel s'affiche en entier ; sa taille descend jusqu'à 34 px, puis il est réduit à ses premières propositions complètes, puis retiré.
   const accroche = storyTypo(d.accroche);
   const essentiels = [...(d.essentiel ? storyVariantes(d.essentiel) : []), ""];
   let plan = null;
   for(const ev of essentiels){
-    for(let tA = 124; tA >= 56 && !plan; tA -= 4){
-      const a = storyStyleBloc(ctx, accroche, { taille:tA, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.04 });
-      if(!a.ok || a.l.length > 6) continue;
-      const minE = tA >= 100 ? 52 : tA >= 80 ? 46 : 40;
+    for(let tA = 124; tA >= 52 && !plan; tA -= 4){
+      const a = storyStyleBloc(ctx, accroche, { taille:tA, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.12 });
+      if(!a.ok || a.l.length > 6) continue; // 6 lignes au plus pour le gros titre
+      const minE = tA >= 100 ? 50 : tA >= 80 ? 44 : tA >= 64 ? 38 : 34;
       if(!ev){ if(66 + 30 + a.h <= dispo) plan = { a, e:null, total:66 + 30 + a.h }; continue; }
       for(let tE = 60; tE >= minE; tE -= 2){
         const e = storyStyleBloc(ctx, ev, { taille:tE, poids:600, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
@@ -1082,9 +1082,9 @@ function storyStyleQuestion(ctx, d){
   const blPuces = tP => { const bl = puces.map(p => storyAjuste(ctx, p, { tailles:[tP], poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 })); return bl.filter(Boolean); };
   let plan = null;
   for(const c of candidats){
-    for(let tQ = 116; tQ >= 56 && !plan; tQ -= 4){
-      const q = storyStyleBloc(ctx, question, { taille:tQ, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.04 });
-      if(!q.ok || q.l.length > 5) continue;
+    for(let tQ = 116; tQ >= 52 && !plan; tQ -= 4){
+      const q = storyStyleBloc(ctx, question, { taille:tQ, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.12 });
+      if(!q.ok || q.l.length > 6) continue;
       const base = 66 + 44 + q.h + 28 + 10;
       if(!c.r){
         for(const tP of [56, 54, 52, 50, 48, 46, 44]){
@@ -1096,7 +1096,7 @@ function storyStyleQuestion(ctx, d){
         continue;
       }
       if(c.p && tQ < 80) continue;
-      for(let tE = 52; tE >= (c.p ? 44 : 40) && !plan; tE -= 2){
+      for(let tE = 52; tE >= (c.p ? 44 : 34) && !plan; tE -= 2){
         const e = storyStyleBloc(ctx, c.r, { taille:tE, poids:700, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
         if(!e.ok) continue;
         let bl = [], hP = 0;
@@ -1147,7 +1147,7 @@ function storyStyleChiffre(ctx, d){
   const tN0 = Math.max(120, Math.min(520, Math.floor(440 * larg / Math.max(w0, 1))));
   ctx.letterSpacing = "0px";
   // légende : entière (jusqu'à 3 lignes) ou absente
-  const lg = d.chiffre.legende ? storyAjuste(ctx, d.chiffre.legende, { tailles:storyTailles(76, 44), poids:700, police:"Newsreader", largeur:larg, max:3, hMax:260, interligne:1.04 }) : null;
+  const lg = d.chiffre.legende ? storyAjuste(ctx, d.chiffre.legende, { tailles:storyTailles(76, 44), poids:700, police:"Newsreader", largeur:larg, max:3, hMax:260, interligne:1.12 }) : null;
   // bas de page : l'accroche, puis l'essentiel EN ENTIER ; on retire d'abord l'accroche, puis on réduit l'essentiel à ses premières propositions complètes
   const essentiels = d.essentiel ? storyVariantes(d.essentiel) : [];
   const candidats = [];
@@ -1156,7 +1156,7 @@ function storyStyleChiffre(ctx, d){
   candidats.push({ a:false, e:"" });
   let plan = null;
   for(const c of candidats){
-    for(const [tC, tE] of (c.a && c.e ? [[56, 48], [52, 46], [48, 44], [44, 42], [42, 40]] : [[56, 56], [52, 52], [48, 48], [44, 44], [40, 40]])){
+    for(const [tC, tE] of (c.a && c.e ? [[56, 48], [52, 46], [48, 42], [44, 38], [40, 36], [36, 34]] : [[56, 56], [52, 52], [48, 48], [44, 44], [40, 40], [36, 36], [34, 34]])){
       const a = c.a ? storyStyleBloc(ctx, accroche, { taille:tC, poids:700, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
       const e = c.e ? storyStyleBloc(ctx, c.e, { taille:tE, poids:600, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
       if((a && !a.ok) || (e && !e.ok)) continue;
@@ -1376,7 +1376,7 @@ async function dessinerStory(type, info){
     const commanditaire = storyCommanditaire(inst, veille);
     if(!commanditaire) return null; // mention obligatoire (loi du 19 juillet 1977, art. 2) : pas de commanditaire, pas d'image
     y = storyCadre(ctx, "Présidentielle 2027 · sondage", { couleur:STORY.bleu });
-    y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 });
+    y = storyTexte(ctx, "Intentions de vote au 1er tour", marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.12 });
     y = storyTexte(ctx, `${inst.nom}${commanditaire ? ` pour ${commanditaire}` : ""} · terrain : ${inst.date}`, marge, y, { taille:28, poids:600, couleur:STORY.blanc, max:2 });
     y = storyTexte(ctx, `${liste.length} candidats sur ${tous.length} testés, classés par milieu de fourchette`, marge, y, { taille:24, couleur:STORY.ciel, max:1 }) + 10;
     const score = c => c.r[0] === c.r[1] ? `${fr1(c.r[0])} %` : `${fr1(c.r[0])}–${fr1(c.r[1])} %`;
@@ -1532,7 +1532,7 @@ async function dessinerStory(type, info){
     if(!top.length) return null;
     const p1 = partiDepute(top[0][0]);
     y = storyCadre(ctx, "Classement des députés", { couleur:p1.couleur });
-    y = storyTexte(ctx, k.titre, marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.08 }) + 10;
+    y = storyTexte(ctx, k.titre, marge, y, { taille:56, poids:600, police:"Newsreader", max:2, interligne:1.12 }) + 10;
     const photos = await Promise.all(top.map(([d]) => storyPortrait(`photos/deputes/${d.id}.jpg`)));
     const hh = 290;
     storyCarte(ctx, marge, y, largeur, hh);
@@ -1602,7 +1602,7 @@ async function dessinerStory(type, info){
     y = storyTexte(ctx, "Qu'aurais-je voté à la place des députés ?", marge, y, { taille:44, poids:600, police:"Newsreader", max:2, interligne:1.1 });
     y = storyChiffreHeros(ctx, `${sc[0].pct} %`, marge, y + 190, storyClair(coul), 230);
     ctx.font = `600 50px "Newsreader"`; ctx.fillStyle = STORY.blanc;
-    y = storyTexte(ctx, seul ? `d'accord avec ${sc[0].nom}` : `d'accord avec ${ex.length} groupes`, marge, y - 14, { taille:50, poids:600, police:"Newsreader", max:2, interligne:1.08 });
+    y = storyTexte(ctx, seul ? `d'accord avec ${sc[0].nom}` : `d'accord avec ${ex.length} groupes`, marge, y - 14, { taille:50, poids:600, police:"Newsreader", max:2, interligne:1.12 });
     y = storyTexte(ctx, quizPhrase(sc, "Mes"), marge, y, { taille:27, couleur:STORY.ciel, max:3 }) + 12;
     const lignes = sc.slice(0, 8), fin = bas - 110;
     const logos = await Promise.all(lignes.map(x=>{ const p = PARTIES.find(q=>q.nom === x.nom); return p ? storyImage(`icons/partis/${p.id}.png`) : null; }));
