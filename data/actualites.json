@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-13T21:20:42.972Z",
+ "lastUpdated": "2026-10-13T21:30:57.635Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Public Sénat",
@@ -155,8 +155,8 @@
    "motifs": [
     "lycéens",
     "mobilisation",
-    "manifestants",
-    "mouvement"
+    "mouvement",
+    "colère"
    ],
    "medias": [
     "La Dépêche",
@@ -165,7 +165,6 @@
     "Europe 1",
     "France 24",
     "Public Sénat",
-    "Hugo Décrypte",
     "Mediapart",
     "L'Humanité",
     "Le Télégramme",
@@ -179,7 +178,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "mediasDistincts": 17,
+   "mediasDistincts": 16,
    "sources": [
     "La Dépêche",
     "BFMTV",
@@ -187,7 +186,6 @@
     "Groupe Bolloré",
     "France Médias Monde",
     "Public Sénat",
-    "Hugo Décrypte",
     "Mediapart",
     "L'Humanité",
     "Le Télégramme",
@@ -199,7 +197,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 61,
+   "nb": 56,
    "derniere": "2026-10-13T20:28:19.000Z",
    "articles": [
     {
@@ -238,13 +236,6 @@
      "titre": "Mobilisation lycéenne : Laurent Nuñez annonce l’ouverture de 36 enquêtes par l’IGPN dont quatre pour des « blessures mutilantes »",
      "url": "https://www.publicsenat.fr/actualites/politique/mobilisation-lyceenne-laurent-nunez-annonce-louverture-de-36-enquetes-par-ligpn-dont-quatre-pour-des-blessures-mutilantes",
      "date": "2026-10-13T18:15:53.000Z"
-    },
-    {
-     "media": "Hugo Décrypte",
-     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
-     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
-     "date": "2026-10-13T18:12:13.000Z",
-     "video": true
     },
     {
      "media": "Mediapart",
@@ -1642,6 +1633,49 @@
       "parti": "SOC",
       "lien": "#depute-PA1654",
       "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "François Hollande",
+     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
+     "media": "BFMTV",
+     "date": "2026-10-13T20:15:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-13T20:15:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
      },
      {
       "nom": "Raphaël Glucksmann",
@@ -1714,49 +1748,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-13T20:15:51.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "François Hollande",
-      "photo": "photos/deputes/PA1654.jpg",
-      "photoHd": "photos/deputes/hd/PA1654.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA1654",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "François Hollande",
-     "url": "https://www.bfmtv.com/politique/francois-hollande_DN-200804100007.html",
-     "media": "BFMTV",
-     "date": "2026-10-13T20:15:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "François Hollande : député SOC (Corrèze)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -2597,126 +2588,6 @@
     "titre": "Lycées : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-13T18:12:13.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
-     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-13T18:12:13.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "fait": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre",
-   "accroche": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-13T18:10:09.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Sur cette carte partagée par un politique allemand, l’Alsace et la Moselle ne sont plus françaises",
-     "url": "https://www.youtube.com/shorts/75FLbjR8Evs",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-13T18:10:09.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Collectivités locales : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-13T18:08:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "ECO"
-    ],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "La réaction de la militante écologiste Greta Thunberg lors d’une battle d’aura devant un lycée.",
-     "url": "https://www.youtube.com/shorts/iWI28DNUqOk",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-13T18:08:55.000Z",
-     "video": true
-    },
-    {
-     "titre": "La militante écologiste Greta Thunberg en France pour soutenir les lycéens",
-     "url": "https://www.youtube.com/shorts/TD7oMOkvDc8",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-13T18:06:53.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-13T18:07:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Cet homme propose aux lycéens d’imprimer leurs pancartes pendant les manifestations.",
-     "url": "https://www.youtube.com/shorts/rORzSCzZ7k4",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-13T18:07:40.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : annonces sur la mobilisation lycéenne",
-    "origine": "regles"
    }
   },
   {
@@ -4703,6 +4574,114 @@
    },
    "fait": "Le chantier de la Maison des internes est lancé à Brignoles",
    "accroche": "Le chantier de la Maison des internes est lancé à Brignoles"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-13T15:05:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 de la Sécurité sociale : les sénateurs alertent sur le niveau « très ambitieux », voire « intenable » de l’objectif de dépenses de santé",
+     "url": "https://www.publicsenat.fr/actualites/sante/budget-2027-de-la-securite-sociale-les-senateurs-alertent-sur-le-niveau-tres-ambitieux-voire-intenable-de-lobjectif-de-depenses-de-sant",
+     "media": "Public Sénat",
+     "date": "2026-10-13T15:05:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Budget 2027 de la Sécurité sociale : les sénateurs alertent sur le niveau « très ambitieux »",
+   "accroche": "Budget 2027 de la Sécurité sociale : les sénateurs alertent sur le niveau « très ambitieux »"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-13T15:05:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "À La Rochelle, un tableau de maître victime du dégât des eaux dans le bâtiment des Archives municipales livré en 2024",
+     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/a-la-rochelle-un-tableau-de-maitre-victime-du-degat-des-eaux-dans-le-batiment-des-archives-municipales-livre-en-2024-31045748.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-13T15:05:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Ouest-France"
+   ],
+   "derniere": "2026-10-13T15:00:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : les retraités sont-ils des « nantis » qu’il faudrait surtaxer ? Deux économistes ferraillent",
+     "url": "https://www.ouest-france.fr/economie/retraites/budget-2027-les-retraites-sont-ils-des-nantis-quil-faudrait-surtaxer-deux-economistes-ferraillent-5484dc4c-c1a3-11f1-97ef-829bf84bf59f?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-13T15:00:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-10-13T14:56:17.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Aide au développement : la politique française étrillée par un rapport de l’Inspection générale",
+     "url": "https://www.lejdd.fr/economie/elle-ne-promeut-pas-assez-les-interets-de-la-france-laide-au-developpement-etrillee-par-un-rapport-de-linspection-generale-185955",
+     "media": "Le JDD",
+     "date": "2026-10-13T14:56:17.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   }
  ]
 }
