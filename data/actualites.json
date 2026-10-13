@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-13T12:55:32.564Z",
+ "lastUpdated": "2026-10-13T13:01:12.297Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,7 +80,7 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Dauphiné libéré",
@@ -310,18 +310,19 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidat"
+    "candidat",
+    "bruno"
    ],
    "medias": [
+    "BFMTV",
     "Le Télégramme",
     "La Dépêche",
+    "L'Humanité",
     "Le Monde",
     "L'Obs",
-    "BFMTV",
     "Le JDD",
     "Sud Ouest",
     "20 Minutes",
-    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "RFI",
     "Europe 1",
@@ -332,24 +333,31 @@
    ],
    "mediasDistincts": 14,
    "sources": [
+    "BFMTV",
     "Le Télégramme",
     "La Dépêche",
+    "L'Humanité",
     "Le Monde",
     "L'Obs",
-    "BFMTV",
     "Groupe Bolloré",
     "Sud Ouest",
     "20 Minutes",
-    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "France Médias Monde",
     "L'Express",
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 51,
-   "derniere": "2026-10-13T12:00:00.000Z",
+   "nb": 50,
+   "derniere": "2026-10-13T12:54:14.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Bruno Retailleau: \"L'Europe ne doit pas devenir un protectorat industriel chinois\"",
+     "url": "https://www.bfmtv.com/politique/video-bruno-retailleau-l-europe-ne-doit-pas-devenir-un-protectorat-industriel-chinois_VN-202610130570.html",
+     "date": "2026-10-13T12:54:14.000Z",
+     "video": true
+    },
     {
      "media": "Le Télégramme",
      "titre": "Dette de la France : l’impossible consensus chez les candidats à la présidentielle",
@@ -364,6 +372,12 @@
      "video": true
     },
     {
+     "media": "L'Humanité",
+     "titre": "« C’est ça, ou la Grèce » : pour le budget 2027, Bruno Retailleau et Édouard Philippe rivalisent d’idées pour toujours plus d’austérité",
+     "url": "https://www.humanite.fr/politique/austerite/cest-ca-ou-la-grece-pour-le-budget-2027-bruno-retailleau-et-edouard-philippe-rivalisent-didees-pour-toujours-plus-dausterite",
+     "date": "2026-10-13T11:26:43.000Z"
+    },
+    {
      "media": "Le Monde",
      "titre": "Présidentielle 2027 : Raphaël Glucksmann doit sortir du flou programmatique",
      "url": "https://www.lemonde.fr/idees/article/2026/10/13/presidentielle-2027-raphael-glucksmann-doit-sortir-du-flou-programmatique_6793086_3232.html",
@@ -374,13 +388,6 @@
      "titre": "Sa stratégie, son image… et Olivier Faure : les urgences du candidat Glucksmann pour lancer sa campagne",
      "url": "https://www.nouvelobs.com/politique/20261013.OBS119159/sa-strategie-son-image-et-olivier-faure-les-urgences-du-candidat-glucksmann-pour-lancer-sa-campagne.html",
      "date": "2026-10-13T09:27:41.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "David Lisnard, candidat “Nouvelle Énergie” à la présidentielle, veut “revoir l’excuse de minorité”",
-     "url": "https://www.bfmtv.com/politique/video-david-lisnard-candidat-nouvelle-energie-a-la-presidentielle-veut-revoir-l-excuse-de-minorite_VN-202610130287.html",
-     "date": "2026-10-13T07:02:19.000Z",
-     "video": true
     },
     {
      "media": "Le JDD",
@@ -399,12 +406,6 @@
      "titre": "Présidentielle 2027 : « Pensée pour Léa Salamé »… Message de Valérie Trierweiler après la désignation de Glucksmann",
      "url": "https://www.20minutes.fr/politique/4253753-20261012-presidentielle-2027-pensee-lea-salame-message-valerie-trierweiler-apres-designation-glucksmann?at_medium=display&at_campaign=149",
      "date": "2026-10-12T20:43:23.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. Victoire de Glucksmann à la primaire : le Parti socialiste peut-il survivre ?",
-     "url": "https://www.dna.fr/elections/2026/10/12/victoire-de-glucksmann-a-la-primaire-le-parti-socialiste-peut-il-survivre",
-     "date": "2026-10-12T17:00:00.000Z"
     },
     {
      "media": "Public Sénat",
@@ -465,7 +466,6 @@
     "Le Figaro",
     "La Dépêche",
     "Europe 1",
-    "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Libération",
     "France 24",
@@ -481,12 +481,12 @@
     "Le Figaro",
     "La Dépêche",
     "Europe 1",
-    "EBRA",
+    "L'Est républicain",
     "Libération",
     "France 24",
     "Nice-Matin"
    ],
-   "nb": 30,
+   "nb": 27,
    "derniere": "2026-10-13T12:44:32.000Z",
    "articles": [
     {
@@ -520,6 +520,12 @@
      "date": "2026-10-13T11:50:27.000Z"
     },
     {
+     "media": "L'Humanité",
+     "titre": "« C’est ça, ou la Grèce » : pour le budget 2027, Bruno Retailleau et Édouard Philippe rivalisent d’idées pour toujours plus d’austérité",
+     "url": "https://www.humanite.fr/politique/austerite/cest-ca-ou-la-grece-pour-le-budget-2027-bruno-retailleau-et-edouard-philippe-rivalisent-didees-pour-toujours-plus-dausterite",
+     "date": "2026-10-13T11:26:43.000Z"
+    },
+    {
      "media": "Sud Ouest",
      "titre": "Région Nouvelle-Aquitaine : La ligne budgétaire bifurque sur la Pau-Canfranc",
      "url": "https://www.sudouest.fr/politique/region-nouvelle-aquitaine-la-ligne-budgetaire-bifurque-sur-la-pau-canfranc-31046794.php",
@@ -542,12 +548,6 @@
      "titre": "Budget 2027 : Horizons propose 10 milliards d'économies supplémentaires",
      "url": "https://www.europe1.fr/economie/budget-2027-horizons-propose-10-milliards-deconomies-supplementaires-1144583?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-10-13T08:52:30.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "date": "2026-10-13T04:30:00.000Z"
     },
     {
      "media": "L'Est républicain",
@@ -878,10 +878,10 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "EBRA",
+    "L'Est républicain",
     "Le Télégramme"
    ],
    "derniere": "2026-10-13T12:54:00.000Z",
@@ -900,13 +900,7 @@
    },
    "articles": [
     {
-     "titre": "Justice. Rachida Dati : le Conseil supérieur de la magistrature “défavorable” à son retour",
-     "url": "https://www.dna.fr/politique/2026/10/13/rachida-dati-le-conseil-superieur-de-la-magistrature-defavorable-a-son-retour",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T12:54:00.000Z"
-    },
-    {
-     "titre": "Justice. Rachida Dati : le Conseil supérieur de la magistrature “défavorable” à son retour",
+     "titre": "Justice. Rachida Dati : le Conseil supérieur de la magistrature « défavorable » à son retour",
      "url": "https://www.estrepublicain.fr/politique/2026/10/13/rachida-dati-le-conseil-superieur-de-la-magistrature-defavorable-a-son-retour",
      "media": "L'Est républicain",
      "date": "2026-10-13T12:54:00.000Z"
@@ -916,6 +910,40 @@
      "url": "https://www.letelegramme.fr/politique/le-conseil-superieur-de-la-magistrature-rend-un-avis-defavorable-a-la-reintegration-de-rachida-dati-dans-la-magistrature-la-decision-dans-les-mains-de-gerald-darmanin-7137425.php",
      "media": "Le Télégramme",
      "date": "2026-10-13T12:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Humanité",
+    "Mediapart"
+   ],
+   "derniere": "2026-10-13T12:52:28.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le très conservateur Défenseur des droits recrute un conseiller d’extrême droite puis plaide la « naïveté »",
+     "url": "https://www.humanite.fr/politique/defenseur-des-droits/le-tres-conservateur-defenseur-des-droits-recrute-un-conseiller-dextreme-droite-puis-plaide-la-naivete",
+     "media": "L'Humanité",
+     "date": "2026-10-13T12:52:28.000Z"
+    },
+    {
+     "titre": "Le nouveau défenseur des droits recrute un conseiller d’extrême droite puis plaide la «naïveté»",
+     "url": "https://www.mediapart.fr/journal/france/121026/le-nouveau-defenseur-des-droits-recrute-un-conseiller-d-extreme-droite-puis-plaide-la-naivete",
+     "media": "Mediapart",
+     "date": "2026-10-12T18:08:17.000Z"
     }
    ],
    "titrePropre": {
@@ -1472,167 +1500,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-13T12:43:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Arabie saoudite. Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad, Djeddah et Dammam",
-     "url": "https://www.dna.fr/defense-guerre-conflit/2026/10/13/face-aux-offensives-des-houthis-l-ambassade-francaise-deconseille-de-se-rendre-a-riyad-djeddah-et-dammam",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T12:43:00.000Z"
-    },
-    {
-     "titre": "Arabie Saoudite. Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad, Djeddah et Dammam",
-     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/10/13/face-aux-offensives-des-houthis-l-ambassade-francaise-deconseille-de-se-rendre-a-riyad-djeddah-et-dammam",
-     "media": "L'Est républicain",
-     "date": "2026-10-13T12:43:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad",
-   "accroche": "Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad",
-   "essentiel": "Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad, Djeddah et Dammam. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-13T11:21:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
-     "url": "https://www.dna.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T11:21:00.000Z"
-    },
-    {
-     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
-     "media": "L'Est républicain",
-     "date": "2026-10-13T11:21:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Bardella propose une hausse de 4% par an pour les enseignants",
-   "accroche": "Bardella propose une hausse de 4% par an pour les enseignants",
-   "essentiel": "Bardella propose une hausse de 4% par an pour les enseignants. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "4",
-    "unite": "%"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-13T04:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T04:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "media": "L'Est républicain",
-     "date": "2026-10-13T04:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
-   "accroche": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
-   "essentiel": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ? Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T20:40:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
-     "url": "https://www.dna.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T20:40:00.000Z"
-    },
-    {
-     "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
-     "url": "https://www.estrepublicain.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
-     "media": "L'Est républicain",
-     "date": "2026-10-12T20:40:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Télévision : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "France Médias Monde"
    ],
    "derniere": "2026-10-12T12:09:43.000Z",
@@ -1695,6 +1562,50 @@
    "fait": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "accroche": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "essentiel": "Pendant la mobilisation des lycéens en France, l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-13T12:54:14.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau: \"L'Europe ne doit pas devenir un protectorat industriel chinois\"",
+     "url": "https://www.bfmtv.com/politique/video-bruno-retailleau-l-europe-ne-doit-pas-devenir-un-protectorat-industriel-chinois_VN-202610130570.html",
+     "media": "BFMTV",
+     "date": "2026-10-13T12:54:14.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1841,6 +1752,35 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T12:43:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Arabie Saoudite. Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad, Djeddah et Dammam",
+     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/10/13/face-aux-offensives-des-houthis-l-ambassade-francaise-deconseille-de-se-rendre-a-riyad-djeddah-et-dammam",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T12:43:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Arabie Saoudite : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad",
+   "accroche": "Face aux offensives des Houthis, l'ambassade française déconseille de se rendre à Riyad"
   },
   {
    "medias": 1,
@@ -2572,6 +2512,50 @@
     "titre": "Lycées",
     "origine": "dossier"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T11:21:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T11:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Bardella propose une hausse de 4% par an pour les enseignants",
+   "accroche": "Bardella propose une hausse de 4% par an pour les enseignants",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4334,41 +4318,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-13T06:54:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget: “L’État profond en France, c’est Bercy”, déclare David Lisnard, candidat “Nouvelle Énergie” à la présidentielle",
-     "url": "https://www.bfmtv.com/politique/video-budget-l-etat-profond-en-france-c-est-bercy-declare-david-lisnard-candidat-nouvelle-energie-a-la-presidentielle_VN-202610130270.html",
-     "media": "BFMTV",
-     "date": "2026-10-13T06:54:26.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : déclaration sur les finances publiques",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-10-13T06:45:05.000Z",
@@ -4930,35 +4879,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-13T05:01:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Strasbourg. Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
-     "url": "https://www.dna.fr/economie/2026/10/13/habitat-indigne-le-permis-de-louer-entre-en-vigueur-le-1-er-novembre-dans-le-quartier-gare",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T05:01:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Strasbourg : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
-   "accroche": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-13T05:00:50.000Z",
@@ -5006,6 +4926,62 @@
    "titrePropre": {
     "titre": "Lycées : ce que disent les médias",
     "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. Le Département dégage un million d’euros pour soutenir financièrement les Ehpad",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/13/le-departement-degage-un-million-d-euros-pour-soutenir-financierement-les-ehpad",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce qu'il faut savoir sur collectivités locales",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le Département dégage un million d’euros pour soutenir financièrement les Ehpad",
+   "accroche": "Le Département dégage un million d’euros pour soutenir financièrement les Ehpad"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-13T04:46:52.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "En direct : environ 35 % des établissements du supérieur perturbés, selon le ministère",
+     "url": "https://www.france24.com/fr/france/20261013-en-direct-france-manifestations-lyceens-acte-v-mouvement",
+     "media": "France 24",
+     "date": "2026-10-13T04:46:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   }
  ]
