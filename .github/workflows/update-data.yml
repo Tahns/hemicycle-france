@@ -46,18 +46,18 @@ jobs:
         id: sondages
         run: node scripts/fetch-sondages.js
         continue-on-error: true
-      - name: Probabilités (qualification au second tour, victoire) calculées depuis les sondages
-        id: probabilites
-        run: node scripts/probabilites.js
-        continue-on-error: true
-
-      - name: Veille des sondages (notices de la Commission des sondages)
+      # La veille lit dans la notice PDF les résultats d'une enquête que Wikipédia n'a pas encore recopiée (origine « notice » dans
+      # data/sondages.json) : elle passe APRÈS fetch-sondages (qui conserve ces entrées) et AVANT le calcul des probabilités.
+      - name: Veille des sondages (notices de la Commission des sondages ; résultats lus dans la notice si Wikipédia a du retard)
         id: veille
         run: |
           npm install --no-save --no-package-lock pdfjs-dist@4
           node scripts/veille-sondages.js
         continue-on-error: true
-
+      - name: Probabilités (qualification au second tour, victoire) calculées depuis les sondages
+        id: probabilites
+        run: node scripts/probabilites.js
+        continue-on-error: true
       - name: Communes et circonscriptions (reconstruit tous les 90 jours)
         id: communes
         run: node scripts/fetch-communes.js

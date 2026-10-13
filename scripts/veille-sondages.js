@@ -12,7 +12,13 @@
  *  - sinon, l'enquête est « en attente » : ses chiffres ne sont pas encore publiés sous forme
  *    exploitable (la notice ne donne que la méthode). check-fraicheur.js alerte si l'attente dure.
  *
- * Résultat : data/sondages-veille.json (affiché dans la rubrique Sondages).
+ * Quand Wikipédia (seule source de data/sondages.json) n'a pas encore recopié l'enquête, ses RÉSULTATS sont lus dans la notice
+ * elle-même (PDF complet de l'institut, voir resultats-notice.js) : contrôles stricts (autant de nombres que de noms, somme à
+ * 100 %, nombre d'hypothèses égal à celui du récapitulatif) ; au moindre doute rien n'est publié et la raison est journalisée.
+ * L'enquête est alors ajoutée à data/sondages.json avec `origine: "notice"` ; fetch-sondages.js la conserve tant que Wikipédia
+ * ne l'a pas (Wikipédia prime ensuite). Le commanditaire doit être connu (mention obligatoire).
+ *
+ * Résultat : data/sondages-veille.json (affiché dans la rubrique Sondages) et data/sondages.json (entrées « notice »).
  *
  * USAGE : node scripts/veille-sondages.js [--dry-run]
  * Dépendance (installée par le workflow) : pdfjs-dist.
@@ -22,6 +28,7 @@ import { ecrireSiChange } from "./garde.js";
 import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
+import { extraireResultats, construireEntrees, fusionnerNotices, regrouperEntrees, ouvrirPdf, textePages, periodeReserve, cleInstitut } from "./resultats-notice.js";
 
 const DATA_FILE = path.resolve("data/sondages-veille.json");
 const SONDAGES = path.resolve("data/sondages.json");
@@ -44,15 +51,13 @@ const ENTITES = { amp: "&", rsquo: "’", eacute: "é", egrave: "è", agrave: "�
 const texte = (h) => h.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&([a-z]+);/gi, (m, e) => ENTITES[e] ?? m).replace(/\s+/g, " ").trim();
 const iso = (a, m, j) => `${a}-${String(m).padStart(2, "0")}-${String(j).padStart(2, "0")}`;
 
+/** Ouvre la notice (PDF) : texte nettoyé des 8 premières pages (méthode, dates, échantillon), document ouvert et URL finale après redirection. */
 async function lirePdf(url) {
-  const res = await fetchPoli(url, { headers: { "User-Agent": USER_AGENT }, redirect: "follow" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const { getDocument } = await import("pdfjs-dist/legacy/build/pdf.mjs");
-  const doc = await getDocument({ data: new Uint8Array(await res.arrayBuffer()), useSystemFonts: true, verbosity: 0 }).promise;
-  let t = "";
-  for (let i = 1; i <= Math.min(doc.numPages, 8); i++) t += " " + (await (await doc.getPage(i)).getTextContent()).items.map((x) => x.str).join(" ");
+  const { doc, urlFinale } = await ouvrirPdf(url, fetchPoli, { "User-Agent": USER_AGENT });
+  const debut = await textePages(doc, 1, 8);
   // Texte extrait des PDF : chiffres parfois coupés (« 20 2 6 », « 1 1 septembre »)
-  return t.replace(/\s+/g, " ").replace(/ - /g, "-").replace(/1 er/g, "1er").replace(/(\d) (?=\d)/g, "$1");
+  const t = debut.join(" ").replace(/\s+/g, " ").replace(/ - /g, "-").replace(/1 er/g, "1er").replace(/(\d) (?=\d)/g, "$1");
+  return { t, doc, debut, urlFinale };
 }
 
 /** Dates de terrain : « du 15 au 16 septembre 2026 », « du 29 août au 1er septembre 2026 », « les 15 et 16 … », « le 15 … ». */
@@ -95,49 +100,89 @@ async function main() {
     .filter((n) => /^\d+\s+Pres\b/i.test(n.titre));
   if (lignes.length < 10) throw new Error(`seulement ${lignes.length} notice(s) « Pres » trouvée(s) : format de la page changé ?`);
 
+  const sondagesActuels = JSON.parse(await readFile(SONDAGES, "utf-8"));
+  const candidatsConnus = Object.keys(sondagesActuels.candidats || {});
+
   // Les notices sont listées de la plus récente à la plus ancienne ; on ne garde que les 45 derniers jours
   const limite = new Date(Date.now() - JOURS * 864e5).toISOString().slice(0, 10);
+  const recente = (i) => !(i.terrain && i.terrain.fin < limite);
   const notices = [];
   let lues = 0, echecs = 0, relues = 0;
   for (const n of lignes.slice(0, 80)) {
     let info = connues.get(n.id);
-    if (info && info.iv && info.commanditaire === undefined && relues < 10) info = undefined; // notices déjà lues avant l'ajout du champ : relues une fois
+    // Notices déjà lues avant l'ajout d'un champ (commanditaire, résultats) : relues, quelques-unes par passage
+    if (info && info.iv && recente(info) && (info.commanditaire === undefined || info.resultats === undefined) && relues < 10) info = undefined;
     if (!info) {
       try {
-        const t = await lirePdf(n.url);
-        info = { id: n.id, titre: n.titre, url: n.url, iv: estIntentionsDeVote(t, n.titre), terrain: terrain(t), echantillon: echantillon(t), commanditaire: commanditaireNotice(t) };
+        const { t, doc, debut, urlFinale } = await lirePdf(n.url);
+        const iv = estIntentionsDeVote(t, n.titre), term = terrain(t);
+        info = { id: n.id, titre: n.titre, url: n.url, iv, terrain: term, echantillon: echantillon(t), commanditaire: commanditaireNotice(t) };
+        if (/\.pdf(?:$|\?)/i.test(urlFinale)) info.pdf = urlFinale.replace(/^http:/i, "https:"); // le site officiel ne se consulte qu'en https
+        // Résultats : lus dans TOUTES les pages de la notice, seulement pour une enquête récente d'intentions de vote
+        if (iv && term && recente(info)) {
+          const pages = [...debut, ...(await textePages(doc, 9))];
+          info.resultats = extraireResultats(pages, { candidats: candidatsConnus, journal: (m) => warn(`notice ${n.id} (${n.titre}) : ${m}`) });
+          if (info.resultats) log(`notice ${n.id} : ${info.resultats.hypotheses1T.length} hypothèse(s) de 1er tour et ${info.resultats.hypotheses2T.length} duel(s) de 2nd tour lus.`);
+        }
         lues++; if (connues.has(n.id)) relues++;
         await pause(300);
       } catch (e) {
         echecs++;
         warn(`notice ${n.id} (${n.titre}) illisible : ${e.message}`);
-        continue;
+        const ancien = connues.get(n.id);
+        if (ancien) info = ancien; else continue; // une notice déjà connue reste dans le cache même si sa relecture échoue
       }
     }
-    if (info.terrain && info.terrain.fin < limite) continue;
+    if (!recente(info)) continue;
     const institut = INSTITUTS.find(([re]) => re.test(n.titre))?.[1] || null;
     const media = n.titre.replace(/^\d+\s+Pres\s+/i, "").replace(/\b\d{1,2}\s+\p{L}+\s*$/u, "")
       .replace(/\b(IV|V\d+|1er tour|Barometre|Baromètre|election|pres|Enquete electorale|Presitrack)\b/gi, "")
       .replace(INSTITUTS.find(([re]) => re.test(n.titre))?.[0] || /$^/, "").replace(/\s+/g, " ").trim();
-    notices.push({ ...info, institut, media: info.commanditaire || media || null }); // le commanditaire écrit dans la notice prime sur le titre du fichier
+    notices.push({ ...info, ...(info.pdf ? { pdf: info.pdf.replace(/^http:/i, "https:") } : {}), institut, media: info.commanditaire || media || null }); // le commanditaire écrit dans la notice prime sur le titre du fichier
   }
 
-  // Comparaison avec les chiffres affichés
-  const sondages = JSON.parse(await readFile(SONDAGES, "utf-8"));
-  const affiche = new Map(sondages.instituts.map((i) => [i.nom, i.dateFin]));
   const enquetes = notices.filter((n) => n.iv && n.institut && n.terrain).map((n) => ({
-    institut: n.institut, media: n.media, terrain: n.terrain, echantillon: n.echantillon, notice: n.url,
-    integre: (affiche.get(n.institut) || "") >= n.terrain.fin,
+    institut: n.institut, media: n.media, terrain: n.terrain, echantillon: n.echantillon, notice: n.url, ...(n.pdf ? { pdf: n.pdf.replace(/^http:/i, "https:") } : {}),
+    _resultats: n.resultats || null,
   })).sort((a, b) => b.terrain.fin.localeCompare(a.terrain.fin));
   // Une même enquête peut faire l'objet de deux notices (deux médias) : une seule ligne
   const vues = new Set();
   const uniques = enquetes.filter((e) => { const k = `${e.institut}|${e.terrain.fin}`; if (vues.has(k)) return false; vues.add(k); return true; });
+
+  // Enquêtes que Wikipédia n'a pas encore : leurs résultats, lus dans la notice, rejoignent data/sondages.json
+  const affiche0 = new Map(sondagesActuels.instituts.map((i) => [cleInstitut(i.nom), i.dateFin]));
+  const manquantes = uniques.filter((e) => (affiche0.get(cleInstitut(e.institut)) || "") < e.terrain.fin);
+  let sondages = sondagesActuels;
+  const reserve = periodeReserve();
+  if (reserve) log(`Période de réserve électorale (scrutin du ${reserve}) : aucune intégration de résultats.`);
+  else {
+    const construites = [];
+    for (const e of manquantes) {
+      const nom = `${e.institut} (terrain jusqu'au ${e.terrain.fin})`;
+      if (!e._resultats) { warn(`${nom} : résultats non lus dans la notice, rien n'est publié (voir ci-dessus).`); continue; }
+      if (!e.media) { warn(`${nom} : commanditaire inconnu, mention obligatoire : rien n'est publié.`); continue; }
+      if (!(e.echantillon >= 500)) { warn(`${nom} : échantillon illisible ou trop faible, rien n'est publié.`); continue; }
+      const fich = construireEntrees({ institut: e.institut, terrain: e.terrain, echantillon: e.echantillon, url: e.pdf || e.notice }, e._resultats);
+      construites.push(fich);
+      log(`  résultats lus dans la notice : ${e.institut} (${e.media}), terrain jusqu'au ${e.terrain.fin}, ${fich.institut.hypotheses} hypothèse(s), ${fich.duels.length} duel(s).`);
+    }
+    const { sondages: fusion, ajoutees } = fusionnerNotices(sondagesActuels, regrouperEntrees(construites));
+    sondages = fusion;
+    if (ajoutees.length) log(`data/sondages.json : ${ajoutees.length} entrée(s) issue(s) de la notice (${ajoutees.join(" ; ")}).`);
+  }
+  const affiche = new Map(sondages.instituts.map((i) => [cleInstitut(i.nom), i.dateFin]));
+  for (const e of uniques) { e.integre = (affiche.get(cleInstitut(e.institut)) || "") >= e.terrain.fin; delete e._resultats; }
 
   const attente = uniques.filter((e) => !e.integre);
   log(`${lignes.length} notices « Pres » listées, ${lues} lue(s), ${uniques.length} enquête(s) d'intentions de vote sur ${JOURS} jours, ${attente.length} en attente de chiffres.`);
   for (const e of attente) log(`  en attente : ${e.institut}${e.media ? ` (${e.media})` : ""}, terrain jusqu'au ${e.terrain.fin}`);
   if (echecs > 5) process.exitCode = 1;
   if (DRY_RUN) return;
+  const { lastUpdated: _l, ...avant } = sondagesActuels, { lastUpdated: _m, ...apres } = sondages;
+  if (JSON.stringify(avant) !== JSON.stringify(apres)) {
+    await writeFile(SONDAGES, JSON.stringify({ ...sondages, lastUpdated: new Date().toISOString() }, null, 2) + "\n");
+    log("data/sondages.json mis à jour avec les résultats lus dans la notice.");
+  }
   await ecrireSiChange(DATA_FILE, JSON.stringify({
     lastUpdated: new Date().toISOString(),
     source: "Commission des sondages — notices déposées",

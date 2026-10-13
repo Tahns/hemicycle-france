@@ -16,6 +16,10 @@
  *  - le lien source doit pointer vers la Commission des sondages ou vers le site d'un institut.
  * Si moins de 2 enquêtes valides sont trouvées, le fichier n'est pas modifié.
  *
+ * ENQUÊTES LUES DANS LA NOTICE (origine: "notice") : quand Wikipédia a du retard, scripts/veille-sondages.js ajoute à ce fichier les
+ * résultats d'une enquête lus dans la notice PDF de l'institut. Ce script réécrit le fichier depuis Wikipédia mais CONSERVE ces
+ * entrées, sauf si Wikipédia a désormais la même enquête (même institut, fin de terrain égale ou plus récente) : Wikipédia prime alors.
+ *
  * USAGE :
  *   node scripts/fetch-sondages.js
  *   node scripts/fetch-sondages.js --dry-run
@@ -26,6 +30,7 @@ import { fetchPoli } from "./http.js";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { ecrireGarde } from "./garde.js";
+import { periodeReserve, entreesDeNotice, fusionnerNotices } from "./resultats-notice.js";
 
 const DATA_FILE = path.resolve("data/sondages.json");
 const PAGE = "Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027";
@@ -93,10 +98,29 @@ function parseDate(texte, annee) {
 }
 
 /**
- * Parse le premier tableau de la section « Second semestre / Premier semestre <année> ».
- * Retourne [{ institut, dateTexte, dateFin, echantillon, url, hypotheses: [{ nom: score }] }].
+ * Parse TOUS les tableaux de la section « Second semestre / Premier semestre <année> » : Wikipédia découpe un semestre en
+ * trimestres (« Octobre-décembre 2026 », « Juillet-septembre 2026 »), chacun avec son propre tableau et ses propres colonnes.
+ * (Lire seulement le premier tableau faisait échouer le relevé dès qu'un nouveau trimestre s'ouvrait : une seule enquête valide.)
  */
 function parseTableau(texte, annee) {
+  const enquetes = [];
+  let pos = 0;
+  for (;;) {
+    const d = texte.indexOf("{|", pos);
+    if (d < 0) break;
+    const f = texte.indexOf("\n|}", d);
+    if (f < 0) break;
+    enquetes.push(...parseUnTableau(texte.slice(d, f + 3), annee));
+    pos = f + 3;
+  }
+  return enquetes;
+}
+
+/**
+ * Parse un tableau de sondages.
+ * Retourne [{ institut, dateTexte, dateFin, echantillon, url, hypotheses: [{ nom: score }] }].
+ */
+function parseUnTableau(texte, annee) {
   const debut = texte.indexOf("{|");
   const fin = texte.indexOf("\n|}", debut);
   if (debut < 0 || fin < 0) return [];
@@ -262,21 +286,7 @@ function valider(e, maintenant) {
   return null;
 }
 
-// Loi n° 77-808 du 19 juillet 1977, art. 11 : aucun sondage publié la veille et le jour de chaque tour
-// (présidentielle : du samedi 0 h au dimanche 20 h, heure de Paris). Aucun relevé pendant cette période.
-const TOURS_PRESIDENTIELLE = ["2027-04-18", "2027-05-02"];
-function periodeReserve(maintenant = new Date()) {
-  const p = Object.fromEntries(
-    new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
-      .formatToParts(maintenant)
-      .map((x) => [x.type, x.value])
-  );
-  const paris = `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
-  return TOURS_PRESIDENTIELLE.find((tour) => {
-    const veille = new Date(Date.parse(tour + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
-    return paris >= `${veille}T00:00` && paris < `${tour}T20:00`;
-  }) || null;
-}
+// Réserve électorale (loi n° 77-808 du 19 juillet 1977, art. 11) : voir periodeReserve() dans resultats-notice.js. Aucun relevé pendant cette période.
 
 async function main() {
   const tour = periodeReserve();
@@ -382,12 +392,25 @@ async function main() {
     .sort((a, b) => b.instituts.length - a.instituts.length || b.instituts[0].dateFin.localeCompare(a.instituts[0].dateFin));
   log(`Second tour : ${lusSecond.length} ligne(s) lue(s), ${secondTour.length} duel(s) retenu(s).`);
 
+  // Enquêtes lues dans la notice (origine « notice ») et pas encore sur Wikipédia : conservées (45 jours au plus pour la fiche, 200 pour l'historique)
+  const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "{}"));
+  for (const [nom, parti] of Object.entries(ancien.candidats || {})) if (!(nom in PARTIS) && parti) PARTIS[nom] = parti;
+  const depuis = (j) => new Date(Date.now() - j * 864e5).toISOString().slice(0, 10);
+  const conservees = entreesDeNotice(ancien);
+  conservees.instituts = conservees.instituts.filter((e) => e.dateFin >= depuis(JOURS_MAX));
+  conservees.duels = conservees.duels.filter((d) => d.entree.dateFin >= depuis(JOURS_MAX));
+  conservees.historique = conservees.historique.filter((e) => e.dateFin >= depuis(200));
+  const { sondages: fusion, ajoutees } = fusionnerNotices({ candidats: {}, instituts, historique, secondTour }, conservees);
+  if (ajoutees.length) log(`Enquêtes lues dans la notice et conservées (absentes de Wikipédia) : ${ajoutees.join(" ; ")}.`);
+  instituts.splice(0, instituts.length, ...fusion.instituts);
+  historique.splice(0, historique.length, ...fusion.historique);
+  secondTour.splice(0, secondTour.length, ...(fusion.secondTour || []));
+
   const candidats = {};
   for (const i of [...instituts, ...historique]) for (const nom of Object.keys(i.scores)) candidats[nom] = PARTIS[nom] || null;
   for (const d of secondTour) for (const nom of d.candidats) if (!(nom in candidats)) candidats[nom] = PARTIS[nom] || null;
   const sortie = { source: "Wikipédia — liste des sondages (notices de la Commission des sondages)", sourceUrl: PAGE_URL, candidats, instituts, historique };
   if (secondTour.length) sortie.secondTour = secondTour;
-  const ancien = JSON.parse(await readFile(DATA_FILE, "utf-8").catch(() => "{}"));
   delete ancien.lastUpdated;
   if (JSON.stringify(ancien) === JSON.stringify(sortie)) return log("Aucun changement.");
   if (DRY_RUN) return console.log(JSON.stringify(sortie, null, 2));
