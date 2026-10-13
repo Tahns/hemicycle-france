@@ -239,7 +239,7 @@ assert.strictEqual(C.semaineISO("2026-10-12").id, "2026-W42");
   assert.ok(v.ok, v.erreurs.join(" ; "));
   assert.ok(p.entree.legende.includes("@hemicyclefrance") && p.entree.legende.includes("assemblee-nationale.fr") && !/github\.io/.test(p.entree.legende));
   assert.ok(/^5 images pour comprendre/.test(p.entree.legende), "accroche factuelle en 1re ligne");
-  assert.ok(/enregistrer/.test(p.entree.legende) && !/#Politique #Assemblée\S+ #Loi #Parlement$/.test(p.entree.legende) && (p.entree.legende.match(/#\S+/g) || []).length <= 5);
+  assert.ok(/enregistr|garder|partager/.test(p.entree.legende) && !/#Politique #Assemblée\S+ #Loi #Parlement$/.test(p.entree.legende) && (p.entree.legende.match(/#\S+/g) || []).length <= 5);
   // un seul carrousel par vote, un seul par jour
   const e = C.etatVide(); e.faits[p.faitCle] = { id: p.id, le: "2026-10-13T14:00:00Z" };
   const autre = contenu("carrousel-loi", fx.instants["carrousel-loi"], { etat: e });

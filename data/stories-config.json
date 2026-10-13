@@ -9,8 +9,12 @@
   "dossierMedias": 3,
   "_commentaire_grosSujetMedias": "Un sujet repris par au moins ce nombre de médias est un GROS sujet : il ne peut plus être perdu faute de titre propre (story « à la une » avec titre de presse cité) et, s'il n'est pas publié, une alerte (ticket GitHub) prévient le propriétaire (scripts/alerte-gros-sujets.cjs).",
   "grosSujetMedias": 4,
-  "maxParJour": 8,
-  "_commentaire_maxParJour": "Stories de presse par jour (hors posts, annonces de post et contenus à créneau). 8 depuis la décision du propriétaire du 2026-10-10 ; ancienne valeur : 20. Pour revenir en arrière, remettre 20 ici (clé lue par stories-auto.cjs, publier-stories.cjs et check-data.js).",
+  "maxParJour": 5,
+  "_commentaire_maxParJour": "Stories de presse par jour (hors posts, annonces de post et contenus à créneau). 5 depuis la décision du propriétaire du 2026-10-13 (éviter la saturation et le shadow ban) ; avant : 8, puis 20. Pour revenir en arrière, remettre 20 ici (clé lue par stories-auto.cjs, publier-stories.cjs et check-data.js).",
+  "maxStoriesTotalJour": 8,
+  "_commentaire_maxStoriesTotalJour": "Plafond TOTAL d'éléments story par jour (presse + annonces de post + contenus à créneau), décision anti-shadow-ban du 2026-10-13. Un GROS sujet (grosSujetMedias) peut dépasser de 2. Pire jour théorique : 8 stories (+2 si gros sujets) et 2 posts. Lu par publier-stories.cjs.",
+  "espacementMin": 30,
+  "_commentaire_espacementMin": "Minutes minimales entre deux publications (anti-rafale). Exceptions : story d'annonce de SON post et GROS sujet de presse. 0 = aucun espacement (ancien comportement).",
   "fraicheurH": 72,
   "enBref": false,
   "videos": true,
@@ -24,7 +28,7 @@
     "comprendre": { "heure": "10:00", "jours": [6] },
     "carrousel-loi": { "heure": "17:30" },
     "carrousel-hebdo": { "heure": "18:30", "jours": [7] },
-    "chiffre-jour": { "heure": "19:00" },
+    "chiffre-jour": false,
     "vote-loi": { "heure": "20:00" }
   }
 }

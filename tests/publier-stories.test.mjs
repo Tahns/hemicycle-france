@@ -114,11 +114,28 @@ try {
     assert.strictEqual(publications().length, 0);
     assert.match(r.sortie, /plafond/);
   }
-  // Aucun espacement : une story publiée il y a 15 min ne bloque pas la suivante
+  // Espacement de 30 min (anti-rafale) : une story publiée il y a 15 min bloque la suivante, 45 min non ; « espacementMin: 0 » rétablit l'absence d'espacement ; un GROS sujet passe
   {
     const reg = { entrees: [{ id: "eeeeeeeeeeee", statut: "publiee", publieLe: il_y_a(0.25), mediaId: "m1" }] };
-    await lancer({ entrees: [frais], registre: reg });
-    assert.strictEqual(publications().length, 1, "pas d'espacement : la story sort");
+    let r = await lancer({ entrees: [frais], registre: reg });
+    assert.strictEqual(publications().length, 0, "15 min : l'espacement de 30 min bloque");
+    assert.match(r.sortie, /moins de 30 min/);
+    await lancer({ entrees: [frais], registre: { entrees: [{ id: "eeeeeeeeeeee", statut: "publiee", publieLe: il_y_a(0.75), mediaId: "m1" }] } });
+    assert.strictEqual(publications().length, 1, "45 min : la story sort");
+    await lancer({ entrees: [frais], registre: reg, config: { monetisation: false, validationHumaine: false, espacementMin: 0 } });
+    assert.strictEqual(publications().length, 1, "espacementMin 0 : la story sort");
+    await lancer({ entrees: [{ ...frais, medias: ["A", "B", "C", "D"] }], registre: reg });
+    assert.strictEqual(publications().length, 1, "GROS sujet (4 médias) : exempt d'espacement");
+  }
+  // Plafond TOTAL de 8 éléments story par jour (presse + annonces + contenus à créneau) ; un GROS sujet peut le dépasser de 2
+  {
+    const reg = { entrees: Array.from({ length: 8 }, (_, i) => ({ id: `${"ab"[i % 2]}${String(i).padStart(11, "0")}`, statut: "publiee", publieLe: il_y_a(3 + i * 0.4), mediaId: "m" + i, contenu: "aujourdhui" })) };
+    const cfg = { monetisation: false, validationHumaine: false, maxParJour: 5 };
+    let r = await lancer({ entrees: [frais], registre: reg, config: cfg });
+    assert.strictEqual(publications().length, 0, "8 éléments story déjà publiés : la presse s'arrête");
+    assert.match(r.sortie, /au total \(maximum 8\)/);
+    await lancer({ entrees: [{ ...frais, medias: ["A", "B", "C", "D"] }], registre: reg, config: cfg });
+    assert.strictEqual(publications().length, 1, "GROS sujet : marge de 2 sur le plafond total");
   }
   // Entrée périmée (> 6 h) : marquée « perimee », jamais publiée
   {

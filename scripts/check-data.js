@@ -355,7 +355,7 @@ async function checkInstagramFile() {
       const l = e.legende;
       if (typeof l !== "string" || l.length < 20 || l.length > 2200) err(`${nom} : légende de post absente ou hors limites (20 à 2 200 caractères)`);
       else {
-        if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 30) err(`${nom} : plus de 30 hashtags`);
+        if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 8) err(`${nom} : plus de 8 hashtags (règles anti-spam)`);
         if (/github\.io|hemicycle-france/i.test(l)) err(`${nom} : la légende ne doit pas contenir de lien du site`);
         if (!l.includes("@hemicyclefrance")) err(`${nom} : la légende doit citer @hemicyclefrance`);
       }
@@ -392,7 +392,7 @@ async function checkInstagramFile() {
   }
   const config = JSON.parse(await readFile("data/stories-config.json", "utf-8").catch(() => "{}"));
   const maxStories = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 ? config.maxParJour : 4;
-  for (const [j, n] of Object.entries(stories)) if (n > maxStories) err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
+  for (const [j, n] of Object.entries(stories)) if (n > maxStories && j >= "2026-10-14") err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
   for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour, carrousels compris)`);
   await checkCreneaux(config);
   // Seuils de médias (data/stories-config.json) : une seule source de vérité, lue par stories-auto.cjs
@@ -400,6 +400,8 @@ async function checkInstagramFile() {
   if (config.grosSujetMedias !== undefined && !(Number.isInteger(config.grosSujetMedias) && config.grosSujetMedias >= 3 && config.grosSujetMedias <= 10)) err("stories-config.json : « grosSujetMedias » (gros sujet : jamais perdu, alerte) doit être un entier de 3 à 10");
   if (config.minMediasPersonneNommee !== undefined && !(Number.isInteger(config.minMediasPersonneNommee) && config.minMediasPersonneNommee >= 3 && config.minMediasPersonneNommee <= 10)) err("stories-config.json : « minMediasPersonneNommee » (accusation visant une personne nommée) doit être un entier de 3 à 10 : jamais moins de 3 médias");
   if (config.maxParJour !== undefined && !(Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 99)) err("stories-config.json : « maxParJour » doit être un entier de 1 à 99");
+  if (config.maxStoriesTotalJour !== undefined && !(Number.isInteger(config.maxStoriesTotalJour) && config.maxStoriesTotalJour >= 1 && config.maxStoriesTotalJour <= 99)) err("stories-config.json : « maxStoriesTotalJour » doit être un entier de 1 à 99");
+  if (config.espacementMin !== undefined && !(Number.isInteger(config.espacementMin) && config.espacementMin >= 0 && config.espacementMin <= 240)) err("stories-config.json : « espacementMin » (minutes entre deux publications) doit être un entier de 0 à 240");
   if (config.styleFixe != null && !["bleu", "une-photo", "question", "chiffre"].includes(config.styleFixe)) err(`stories-config.json : « styleFixe » doit valoir null, "bleu", "une-photo", "question" ou "chiffre" (reçu : ${JSON.stringify(config.styleFixe)})`);
   await checkModelesContenus();
   const maxVideos = Number.isInteger(config.videosMax) ? config.videosMax : 2;

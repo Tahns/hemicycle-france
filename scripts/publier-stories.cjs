@@ -3,7 +3,7 @@
  * publier-stories.cjs
  * -------------------
  * Publie AUTOMATIQUEMENT sur Instagram (API officielle Instagram Graph) les stories de la file data/instagram-file.json,
- * sans qu'aucune session Claude ne soit ouverte : lancé par .github/workflows/publier-stories.yml toutes les 15 minutes.
+ * sans intervention manuelle : lancé par .github/workflows/publier-stories.yml toutes les 15 minutes.
  *
  * Registre : data/instagram-publiees.json  { lastUpdated, entrees: [{ id, statut: "publiee"|"perimee"|"en-cours"|"incertaine", publieLe, mediaId }] }
  *   « en-cours » : intention écrite AVANT media_publish ; « incertaine » : réponse perdue ou job tué, publication possible non confirmée (comptée dans les plafonds, JAMAIS rejouée) ;
@@ -12,8 +12,10 @@
  *
  * Garde-fous (tous obligatoires) :
  *  - UNE seule publication par exécution ;
- *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus 4 stories et 2 posts par jour (Paris) ; au moins 60 min entre deux publications ;
- *  - POST (entrée { type: "post", legende }) : image de fil + légende (POST /media {image_url, caption}), légende contrôlée (2 200 caractères, 30 hashtags, jamais le lien du site) ;
+ *  - jamais entre 23 h et 7 h (heure de Paris) ; au plus « maxParJour » stories de presse, « maxStoriesTotalJour » (8) éléments story TOUT COMPRIS (presse + annonces + contenus à créneau)
+ *    et 2 posts par jour (Paris) ; au moins « espacementMin » (30) min entre deux publications, sauf la story d'annonce de son post et un GROS sujet de presse
+ *    (>= grosSujetMedias médias : jamais perdu, il peut aussi dépasser le plafond total de 2) ;
+ *  - POST (entrée { type: "post", legende }) : image de fil + légende (POST /media {image_url, caption}), légende contrôlée (2 200 caractères, 8 hashtags, jamais le lien du site) ;
  *    STORY D'ANNONCE (entrée { annonceDe: id du post }) : publiée seulement APRÈS son post, au plus tôt 5 min après (seule exception aux 60 min), au plus tard 3 h après ;
  *    elle ne compte pas dans les 4 stories par jour ;
  *  - une story créée il y a plus de 6 h (un post : plus de 12 h) est marquée « perimee » et n'est jamais publiée ;
@@ -69,7 +71,9 @@ const MAX_POSTS_PAR_JOUR = 2; // posts (fil) par jour
 const ESPACEMENT_ANNONCE_MIN = 180; // la story d'annonce peut sortir dès que son post est publié
 const FRAICHEUR_POST_H = 12; // un post non publié depuis plus de 12 h est périmé (une date lointaine ou un vote ne se périment pas en 3 h)
 const REELS_ACTIFS = process.env.HEMICYCLE_TEST_REELS === "1"; // décision du propriétaire : aucun Reel, jamais (les Reels déjà en file ne sont pas publiés) ; la variable ne sert qu'aux tests du code Reel
-const ESPACEMENT_MIN = 0; // aucun espacement : tout ce qui est à publier sort (au plus une publication par passage, un passage toutes les 15 min environ), de 7 h à 23 h
+const ESPACEMENT_MIN_DEFAUT = 30; // minutes entre deux publications (anti-rafale, règles Instagram sur le spam) ; réglable par « espacementMin » (0 à 240) ; exceptions : story d'annonce de SON post, GROS sujet de presse
+const MAX_STORIES_TOTAL_DEFAUT = 8; // éléments « story » par jour, TOUT COMPRIS (presse + annonces de post + contenus à créneau) ; réglable par « maxStoriesTotalJour » (1 à 99)
+const MARGE_GROS_SUJET = 2; // un GROS sujet (>= grosSujetMedias médias) peut dépasser le plafond total de cette marge : il n'est jamais perdu faute de place
 const FRAICHEUR_H = 6; // une story non publiée depuis plus de 6 h est périmée (avec 1 publication par heure, 3 h laissait périmer trop de stories)
 const ALERTE_JETON_JOURS = 10;
 const ATTENTE_MS = Number(process.env.PUBLIER_ATTENTE_MS) || 3000;
@@ -124,7 +128,7 @@ const typeDe = (e) => (e.type === "post" ? "post" : e.type === "carousel" ? "car
 function legendeValide(e) {
   const l = e.legende;
   if (typeof l !== "string" || l.length < 20 || l.length > 2200) return false;
-  if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 30) return false;
+  if ((l.match(/#\p{L}[\p{L}\p{N}_]*/gu) || []).length > 8) return false; // règles anti-spam : 8 hashtags au plus (3 à 5 en pratique)
   if (/github\.io|hemicycle-france|hémicycle-france\.|https?:\/\/(www\.)?hemicycle/i.test(l)) return false;
   return l.includes("@hemicyclefrance");
 }
@@ -161,6 +165,9 @@ const estCreneau = (e) => Boolean(e.contenu); // contenu récurrent à créneau 
 const instant = (iso) => { const t = Date.parse(iso); return Number.isNaN(t) ? null : t; };
 const estAnnonce = (e) => Boolean(e.annonceDe);
 const estReel = (e) => e.type === "reel";
+const entier = (v, defaut, min, max) => (Number.isInteger(v) && v >= min && v <= max ? v : defaut);
+/** GROS sujet de presse : repris par au moins « grosSujetMedias » médias distincts (jamais perdu : exempt d'espacement, marge sur le plafond total). */
+const estGrosSujet = (e, config) => !estPostFil(e) && !estReel(e) && !estAnnonce(e) && !estCreneau(e) && !e.donneesPropres && new Set((Array.isArray(e.medias) ? e.medias : []).filter(Boolean)).size >= entier(config?.grosSujetMedias, 4, 3, 10);
 
 /**
  * Choisit l'entrée à publier. Pure : renvoie { entree, perimees } ou { refus, perimees } (perimees : ids à marquer).
@@ -228,14 +235,18 @@ function choisir({ file, registre, config, now = new Date(), retires = new Set()
   const maxReels = Number.isInteger(config.videosMax) ? config.videosMax : MAX_REELS_PAR_JOUR_DEFAUT;
   const storiesJour = publieesJour.filter((e) => !estPostFil(e) && !estReel(e) && !e.annonceDe && !e.contenu).length; // ni les stories d'annonce, ni les contenus récurrents à créneau, n'entrent dans le plafond des stories
   const MAX_PAR_JOUR = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 && config.maxParJour <= 99 ? config.maxParJour : MAX_PAR_JOUR_DEFAUT;
-  const sousPlafond = (e) => (estAnnonce(e) ? true : estReel(e) ? reelsJour < maxReels : estPostFil(e) ? postsJour < MAX_POSTS_PAR_JOUR : estCreneau(e) ? true : storiesJour < MAX_PAR_JOUR);
-  if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_PAR_JOUR} et ${MAX_POSTS_PAR_JOUR})`);
+  const storiesTotalJour = publieesJour.filter((e) => !estPostFil(e) && !estReel(e)).length; // presse + annonces + contenus à créneau
+  const MAX_TOTAL = entier(config.maxStoriesTotalJour, MAX_STORIES_TOTAL_DEFAUT, 1, 99);
+  const ESPACEMENT_MIN = entier(config.espacementMin, ESPACEMENT_MIN_DEFAUT, 0, 240);
+  // plafond total : annonces et contenus à créneau (en nombre limité et planifiés) tiennent leur heure ; la presse s'arrête au plafond total, sauf un GROS sujet (marge)
+  const sousPlafond = (e) => (estAnnonce(e) ? true : estReel(e) ? reelsJour < maxReels : estPostFil(e) ? postsJour < MAX_POSTS_PAR_JOUR : estCreneau(e) ? true : storiesJour < MAX_PAR_JOUR && storiesTotalJour < MAX_TOTAL + (estGrosSujet(e, config) ? MARGE_GROS_SUJET : 0));
+  if (candidates.length && !candidates.some(sousPlafond)) return sortie(`plafond atteint : ${storiesJour} story(ies) de presse (maximum ${MAX_PAR_JOUR}), ${storiesTotalJour} élément(s) story au total (maximum ${MAX_TOTAL}) et ${postsJour} post(s) aujourd'hui (maximum ${MAX_POSTS_PAR_JOUR})`);
   let ok = candidates.filter(sousPlafond);
-  // Espacement : 60 min entre deux publications ; seule exception, la story d'annonce d'un post (≥ 5 min après CE post)
+  // Espacement : ESPACEMENT_MIN entre deux publications ; exceptions : la story d'annonce d'un post (>= 5 min après CE post) et un GROS sujet de presse
   const publiees = [...deja.values()].filter(enregistree);
   const dernier = publiees.reduce((m, e) => (Date.parse(e.publieLe) > (m ? Date.parse(m.publieLe) : 0) ? e : m), null);
   if (dernier && now.getTime() - Date.parse(dernier.publieLe) < ESPACEMENT_MIN * 60000) {
-    const ok2 = ok.filter((e) => estAnnonce(e) && e.annonceDe === dernier.id);
+    const ok2 = ok.filter((e) => (estAnnonce(e) && e.annonceDe === dernier.id) || estGrosSujet(e, config));
     if (!ok2.length) return sortie(ok.length ? `dernière publication il y a moins de ${ESPACEMENT_MIN} min` : (enAttente ? `story d'annonce en attente (${ESPACEMENT_ANNONCE_MIN} min après son post)` : (enCreneau ? "contenu à créneau : l'heure n'est pas encore venue" : "rien à publier")));
     ok = ok2;
   }
