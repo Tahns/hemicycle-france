@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-13T12:15:47.020Z",
+ "lastUpdated": "2026-10-13T12:20:42.030Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,17 +80,17 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -150,25 +150,24 @@
  ],
  "dossiers": [
   {
-   "id": "lyceenne",
+   "id": "lyceens",
    "titre": "Lycées",
    "motifs": [
-    "lycéenne",
+    "lycéens",
     "mobilisation",
     "mouvement",
     "colère"
    ],
    "medias": [
+    "La Dépêche",
     "BFMTV",
     "RFI",
-    "Le Dauphiné libéré",
     "Europe 1",
     "Sud Ouest",
     "Le Télégramme",
     "Le JDD",
     "Valeurs actuelles",
     "L'Express",
-    "La Dépêche",
     "L'Humanité",
     "Mediapart",
     "L'Obs",
@@ -182,27 +181,33 @@
    ],
    "mediasDistincts": 17,
    "sources": [
+    "La Dépêche",
     "BFMTV",
     "France Médias Monde",
-    "EBRA",
     "Groupe Bolloré",
     "Sud Ouest",
     "Le Télégramme",
     "Valeurs actuelles",
     "L'Express",
-    "La Dépêche",
     "L'Humanité",
     "Mediapart",
     "L'Obs",
+    "Le Progrès",
     "Nice-Matin",
     "Libération",
     "Hugo Décrypte",
     "Public Sénat",
     "20 Minutes"
    ],
-   "nb": 44,
-   "derniere": "2026-10-13T12:12:17.000Z",
+   "nb": 46,
+   "derniere": "2026-10-13T12:16:07.000Z",
    "articles": [
+    {
+     "media": "La Dépêche",
+     "titre": "DIRECT. Colère des lycéens : début de la manifestation à Toulouse, Jean-Luc Mélenchon présent dans le cortège parisien",
+     "url": "https://www.ladepeche.fr/2026/10/13/direct-colere-des-lyceens-de-nouvelles-manifestations-prevues-partout-en-france-pour-lacte-v-suivez-cette-journee-de-mobilisation-avec-nous-13598316.php",
+     "date": "2026-10-13T12:16:07.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Mobilisation lycéenne et étudiante: Jean-Luc Mélenchon est arrivé pour participer à la manifestation de Paris",
@@ -215,12 +220,6 @@
      "titre": "DIRECT - France: de nouveau dans la rue, lycéens et étudiants appellent à une «convergence des luttes»",
      "url": "https://www.rfi.fr/fr/france/20261013-direct-mouvement-lyc%C3%A9en-en-france-90-des-universit%C3%A9s-bloqu%C3%A9es-pour-une-nouvelle-journ%C3%A9e-de-mobilisation-selon-un-syndicat",
      "date": "2026-10-13T11:55:04.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Isère. Mobilisation du 13 octobre : 5 400 manifestants selon la police dans le cortège à Grenoble",
-     "url": "https://www.ledauphine.com/education/2026/10/13/isere-mobilisation-du-13-octobre-une-manifestation-prevue-a-11-h-a-grenoble-avant-une-assemblee-de-l-intersyndicale-a-15-h",
-     "date": "2026-10-13T11:54:00.000Z"
     },
     {
      "media": "Europe 1",
@@ -258,12 +257,6 @@
      "titre": "La jeunesse, oui, mais celle des villes : l’impasse de Jean-Luc Mélenchon",
      "url": "https://www.lexpress.fr/politique/la-jeunesse-oui-mais-celle-des-villes-limpasse-de-jean-luc-melenchon-WNJOTL7TONBWXKQKCPVGCAPNQY/",
      "date": "2026-10-13T09:16:39.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "ENTRETIEN. Blocage des lycées : \"Le sous-investissement dans l'éducation : tôt ou tard, ça se paye !\" Lycées, canicule, budget... Carole Delga tape du poing sur la table",
-     "url": "https://www.ladepeche.fr/2026/10/12/entretien-blocage-des-lycees-le-sous-investissement-dans-leducation-tot-ou-tard-ca-se-paye-lycees-canicule-budget-carole-delga-tape-du-poing-sur-la-13597169.php",
-     "date": "2026-10-13T09:10:08.000Z"
     },
     {
      "media": "L'Humanité",
@@ -348,6 +341,7 @@
     "Le JDD",
     "Sud Ouest",
     "20 Minutes",
+    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "RFI",
     "L'Express",
@@ -355,7 +349,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 15,
    "sources": [
     "Le Télégramme",
     "La Dépêche",
@@ -366,13 +360,14 @@
     "BFMTV",
     "Sud Ouest",
     "20 Minutes",
+    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "France Médias Monde",
     "L'Express",
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 62,
+   "nb": 64,
    "derniere": "2026-10-13T12:00:00.000Z",
    "articles": [
     {
@@ -438,6 +433,12 @@
      "date": "2026-10-12T20:43:23.000Z"
     },
     {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Présidentielle 2027. Victoire de Glucksmann à la primaire : le Parti socialiste peut-il survivre ?",
+     "url": "https://www.dna.fr/elections/2026/10/12/victoire-de-glucksmann-a-la-primaire-le-parti-socialiste-peut-il-survivre",
+     "date": "2026-10-12T17:00:00.000Z"
+    },
+    {
      "media": "Public Sénat",
      "titre": "Présidentielle : de quels moyens va bénéficier Raphaël Glucksmann, désormais candidat du PS, pour faire campagne ?",
      "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-de-quels-moyens-va-beneficier-raphael-glucksmann-desormais-candidat-du-ps-pour-faire-campagne",
@@ -490,7 +491,8 @@
     "La Dépêche",
     "Europe 1",
     "Le Progrès",
-    "Le Dauphiné libéré",
+    "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "Libération",
     "France 24",
     "20 Minutes",
@@ -511,7 +513,7 @@
     "20 Minutes",
     "Nice-Matin"
    ],
-   "nb": 27,
+   "nb": 29,
    "derniere": "2026-10-13T11:56:04.000Z",
    "articles": [
     {
@@ -531,12 +533,6 @@
      "titre": "DIRECT. Budget 2027: Sébastien Lecornu écrit aux socialistes et leur propose de discuter \"autour de trois chantiers primordiaux\"",
      "url": "https://www.bfmtv.com/politique/direct-budget-2027-la-partie-recettes-arrive-a-l-assemblee-dans-un-contexte-social-tendu_LN-202610130334.html",
      "date": "2026-10-13T11:36:13.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "« C’est ça, ou la Grèce » : pour le budget 2027, Bruno Retailleau et Édouard Philippe rivalisent d’idées pour toujours plus d’austérité",
-     "url": "https://www.humanite.fr/politique/austerite/cest-ca-ou-la-grece-pour-le-budget-2027-bruno-retailleau-et-edouard-philippe-rivalisent-didees-pour-toujours-plus-dausterite",
-     "date": "2026-10-13T11:26:43.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -569,9 +565,15 @@
      "date": "2026-10-13T04:30:00.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
+     "media": "Dernières Nouvelles d'Alsace",
      "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.ledauphine.com/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "date": "2026-10-13T04:30:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
      "date": "2026-10-13T04:30:00.000Z"
     },
     {
@@ -1453,7 +1455,7 @@
    ]
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1482,8 +1484,14 @@
     },
     {
      "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
-     "url": "https://www.ledauphine.com/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.dna.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-13T11:21:00.000Z"
+    },
+    {
+     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
+     "media": "L'Est républicain",
      "date": "2026-10-13T11:21:00.000Z"
     }
    ],
@@ -1494,7 +1502,7 @@
    },
    "fait": "Bardella propose une hausse de 4% par an pour les enseignants",
    "accroche": "Bardella propose une hausse de 4% par an pour les enseignants",
-   "essentiel": "Bardella propose une hausse de 4% par an pour les enseignants. Deux médias en parlent : Le Progrès et Le Dauphiné libéré.",
+   "essentiel": "Bardella propose une hausse de 4% par an pour les enseignants. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
    "contexte": [
     {
      "type": "personnes",
@@ -1508,7 +1516,7 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1531,8 +1539,14 @@
     },
     {
      "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.ledauphine.com/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-13T04:30:00.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "media": "L'Est républicain",
      "date": "2026-10-13T04:30:00.000Z"
     }
    ],
@@ -1542,10 +1556,10 @@
    },
    "fait": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
    "accroche": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
-   "essentiel": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ? Deux médias en parlent : Le Progrès et Le Dauphiné libéré."
+   "essentiel": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ? Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain."
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1566,8 +1580,14 @@
     },
     {
      "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
-     "url": "https://www.ledauphine.com/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.dna.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-12T20:40:00.000Z"
+    },
+    {
+     "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
+     "url": "https://www.estrepublicain.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
+     "media": "L'Est républicain",
      "date": "2026-10-12T20:40:00.000Z"
     }
    ],
@@ -1648,6 +1668,40 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-13T12:16:07.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Colère des lycéens : début de la manifestation à Toulouse, Jean-Luc Mélenchon présent dans le cortège parisien",
+     "url": "https://www.ladepeche.fr/2026/10/13/direct-colere-des-lyceens-de-nouvelles-manifestations-prevues-partout-en-france-pour-lacte-v-suivez-cette-journee-de-mobilisation-avec-nous-13598316.php",
+     "media": "La Dépêche",
+     "date": "2026-10-13T12:16:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-13T12:12:17.000Z",
@@ -1680,33 +1734,6 @@
    },
    "fait": "Jean-Luc Mélenchon est arrivé pour participer à la manifestation de Paris",
    "accroche": "Jean-Luc Mélenchon est arrivé pour participer à la manifestation de Paris"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-13T12:01:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Savoie. « Dès que ça les arrange, nous sommes squeezés et l’Agglo nous lâche » : la suppression d'une priorité aux vélos passe mal",
-     "url": "https://www.ledauphine.com/politique/2026/10/13/pour-l-association-roue-libre-la-suppression-d-une-priorite-aux-velos-passe-mal-des-que-ca-les-arrange-nous-sommes-squeezes-et-l-agglo-nous-lache",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-13T12:01:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Savoie : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -1947,34 +1974,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-13T11:54:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Isère. Mobilisation du 13 octobre : 5 400 manifestants selon la police dans le cortège à Grenoble",
-     "url": "https://www.ledauphine.com/education/2026/10/13/isere-mobilisation-du-13-octobre-une-manifestation-prevue-a-11-h-a-grenoble-avant-une-assemblee-de-l-intersyndicale-a-15-h",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-13T11:54:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Isère : sécurité",
-    "origine": "regles"
-   },
-   "fait": "5 400 manifestants selon la police dans le cortège à Grenoble",
-   "accroche": "5 400 manifestants selon la police dans le cortège à Grenoble"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-10-13T11:50:27.000Z",
@@ -2040,6 +2039,33 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T11:36:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Vesoul. « Pesticides illimités, non merci ! » : atteint d’un lymphome, il lutte contre la loi Omnibus X",
+     "url": "https://www.estrepublicain.fr/sante/2026/10/13/pesticides-illimites-non-merci-atteint-d-un-lymphome-il-lutte-contre-la-loi-omnibus-x",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T11:36:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vesoul : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2186,34 +2212,6 @@
     "titre": "Lycées",
     "origine": "dossier"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-13T11:07:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Chambéry. « Il est temps de transformer ce point noir en un aménagement exemplaire » : les travaux du premier rond-point hollandais de Savoie annoncés pour 2028",
-     "url": "https://www.ledauphine.com/politique/2026/10/13/il-est-temps-de-transformer-ce-point-noir-en-un-amenagement-exemplaire-les-travaux-du-premier-rond-point-hollandais-de-savoie-annonces-pour-2028",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-13T11:07:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Chambéry : projet d'aménagement",
-    "origine": "regles"
-   },
-   "fait": "Les travaux du premier rond-point hollandais de Savoie annoncés pour 2028",
-   "accroche": "Les travaux du premier rond-point hollandais de Savoie annoncés pour 2028"
   },
   {
    "medias": 1,
@@ -2829,6 +2827,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T09:57:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Franche-Comté. Dermatose nodulaire contagieuse : l’origine de la contamination toujours inconnue ?",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/13/dermatose-nodulaire-contagieuse-l-origine-de-la-contamination-toujours-inconnue",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T09:57:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Franche-Comté : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Dermatose nodulaire contagieuse : l’origine de la contamination toujours inconnue ?",
+   "accroche": "Dermatose nodulaire contagieuse : l’origine de la contamination toujours inconnue ?"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-13T09:54:18.000Z",
@@ -3410,7 +3437,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
+    "titre": "Budget",
     "origine": "dossier"
    }
   },
@@ -3695,33 +3722,6 @@
    ],
    "titrePropre": {
     "titre": "Lycées : ce qu'il faut savoir sur la mobilisation lycéenne",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-13T08:17:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Vaucluse. Edwy Plenel en conférence à Avignon : « Je vais expliquer pourquoi la démocratie c’est notre affaire »",
-     "url": "https://www.ledauphine.com/politique/2026/10/13/edwy-plenel-je-vais-expliquer-pourquoi-la-democratie-c-est-notre-affaire",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-13T08:17:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -4824,6 +4824,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-13T05:01:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Strasbourg. Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
+     "url": "https://www.dna.fr/economie/2026/10/13/habitat-indigne-le-permis-de-louer-entre-en-vigueur-le-1-er-novembre-dans-le-quartier-gare",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-13T05:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Strasbourg : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
+   "accroche": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-13T05:00:50.000Z",
@@ -4872,6 +4901,35 @@
     "titre": "Lycées : ce que disent les médias",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-13T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. Le Département dégage un million d’euros pour soutenir financièrement les Ehpad",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/13/le-departement-degage-un-million-d-euros-pour-soutenir-financierement-les-ehpad",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce qu'il faut savoir sur collectivités locales",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le Département dégage un million d’euros pour soutenir financièrement les Ehpad",
+   "accroche": "Le Département dégage un million d’euros pour soutenir financièrement les Ehpad"
   },
   {
    "medias": 1,
@@ -4964,51 +5022,6 @@
    },
    "fait": "Présidentielle 2027 : après les tensions de la primaire, Raphaël Glucksmann doit rassembler son camp",
    "accroche": "Présidentielle 2027 : après les tensions de la primaire, Raphaël Glucksmann doit rassembler son camp",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Harris pour M6 et RTL (terrain : 5-8 octobre 2026, 2 004 personnes, marge d'erreur ±2,2 pts) : Glucksmann 10–11 %",
-     "source": "Commission des sondages (notice Harris)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-13T04:34:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI",
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«C'est notre adversaire idéal» : pourquoi LFI se réjouit-elle de la victoire de Raphaël Glucksmann à la primaire socialiste ?",
-     "url": "https://www.europe1.fr/politique/cest-notre-adversaire-ideal-pourquoi-lfi-se-rejouit-elle-de-la-victoire-de-raphael-glucksmann-a-la-primaire-socialiste-1142960?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-13T04:34:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire socialiste et démocrate : Raphaël Glucksmann",
-    "origine": "regles",
-    "generique": true
-   },
    "contexte": [
     {
      "type": "sondage",
