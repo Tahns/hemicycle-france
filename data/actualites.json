@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-13T12:05:35.813Z",
+ "lastUpdated": "2026-10-13T12:10:44.538Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,17 +75,17 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "L'Est républicain",
@@ -154,13 +154,14 @@
    "titre": "Lycées",
    "motifs": [
     "lycéen",
-    "mouvement",
     "mobilisation",
+    "mouvement",
     "colère"
    ],
    "medias": [
     "BFMTV",
     "RFI",
+    "Le Dauphiné libéré",
     "Europe 1",
     "Sud Ouest",
     "Le Télégramme",
@@ -171,7 +172,6 @@
     "L'Humanité",
     "Mediapart",
     "L'Obs",
-    "Le Progrès",
     "Nice-Matin",
     "Libération",
     "Hugo Décrypte",
@@ -183,6 +183,7 @@
    "sources": [
     "BFMTV",
     "France Médias Monde",
+    "Le Dauphiné libéré",
     "Groupe Bolloré",
     "Sud Ouest",
     "Le Télégramme",
@@ -192,14 +193,13 @@
     "L'Humanité",
     "Mediapart",
     "L'Obs",
-    "Le Progrès",
     "Nice-Matin",
     "Libération",
     "Hugo Décrypte",
     "Public Sénat",
     "20 Minutes"
    ],
-   "nb": 41,
+   "nb": 42,
    "derniere": "2026-10-13T11:55:17.000Z",
    "articles": [
     {
@@ -211,9 +211,15 @@
     },
     {
      "media": "RFI",
-     "titre": "DIRECT - Mouvement lycéen en France: 90% des universités bloquées pour une nouvelle journée de mobilisation, selon un syndicat",
+     "titre": "DIRECT - France: de nouveau dans la rue, lycéens et étudiants appellent à une «convergence des luttes»",
      "url": "https://www.rfi.fr/fr/france/20261013-direct-mouvement-lyc%C3%A9en-en-france-90-des-universit%C3%A9s-bloqu%C3%A9es-pour-une-nouvelle-journ%C3%A9e-de-mobilisation-selon-un-syndicat",
      "date": "2026-10-13T11:55:04.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Isère. Mobilisation du 13 octobre : 5 400 manifestants selon la police dans le cortège à Grenoble",
+     "url": "https://www.ledauphine.com/education/2026/10/13/isere-mobilisation-du-13-octobre-une-manifestation-prevue-a-11-h-a-grenoble-avant-une-assemblee-de-l-intersyndicale-a-15-h",
+     "date": "2026-10-13T11:54:00.000Z"
     },
     {
      "media": "Europe 1",
@@ -277,12 +283,6 @@
      "date": "2026-10-13T07:54:34.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Métropole de Lyon. Elle aurait été matraquée en marge d’une manifestation des lycéens : une élue LFI porte plainte",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/13/elle-aurait-ete-matraquee-en-marge-d-une-manifestation-des-lyceens-une-elue-lfi-porte-plainte",
-     "date": "2026-10-13T04:00:00.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "« Avec Michel Rossi, il n’y a pas eu de passation de pouvoir et il s’obstine en faisant appel » : le plus jeune maire des Alpes-Maritimes se confie",
      "url": "https://www.nicematin.com/societe/politique/avec-michel-rossi-il-n-y-a-pas-eu-de-passation-de-pouvoir-et-il-s-obstine-en-faisant-appel-le-plus-jeune-maire-des-alpes-maritimes-se-confie-10737258",
@@ -341,7 +341,6 @@
     "Le JDD",
     "Sud Ouest",
     "20 Minutes",
-    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "RFI",
     "L'Express",
@@ -349,7 +348,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "mediasDistincts": 15,
+   "mediasDistincts": 14,
    "sources": [
     "Le Télégramme",
     "La Dépêche",
@@ -360,14 +359,13 @@
     "BFMTV",
     "Sud Ouest",
     "20 Minutes",
-    "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "France Médias Monde",
     "L'Express",
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 64,
+   "nb": 62,
    "derniere": "2026-10-13T12:00:00.000Z",
    "articles": [
     {
@@ -433,12 +431,6 @@
      "date": "2026-10-12T20:43:23.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. Victoire de Glucksmann à la primaire : le Parti socialiste peut-il survivre ?",
-     "url": "https://www.dna.fr/elections/2026/10/12/victoire-de-glucksmann-a-la-primaire-le-parti-socialiste-peut-il-survivre",
-     "date": "2026-10-12T17:00:00.000Z"
-    },
-    {
      "media": "Public Sénat",
      "titre": "Présidentielle : de quels moyens va bénéficier Raphaël Glucksmann, désormais candidat du PS, pour faire campagne ?",
      "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-de-quels-moyens-va-beneficier-raphael-glucksmann-desormais-candidat-du-ps-pour-faire-campagne",
@@ -490,8 +482,7 @@
     "Le Figaro",
     "La Dépêche",
     "Europe 1",
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
     "Libération",
     "France 24",
     "20 Minutes",
@@ -506,13 +497,13 @@
     "Le Figaro",
     "La Dépêche",
     "Europe 1",
-    "EBRA",
+    "Le Dauphiné libéré",
     "Libération",
     "France 24",
     "20 Minutes",
     "Nice-Matin"
    ],
-   "nb": 28,
+   "nb": 26,
    "derniere": "2026-10-13T11:56:04.000Z",
    "articles": [
     {
@@ -552,6 +543,13 @@
      "date": "2026-10-13T10:46:01.000Z"
     },
     {
+     "media": "BFMTV",
+     "titre": "Budget: \"Dans les propositions de Marine Le Pen, il y a quelque chose de nature à fissurer l'Europe\", estime Édouard Philippe",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-budget-dans-les-propositions-de-marine-le-pen-il-y-a-quelque-chose-de-nature-a-fissurer-l-europe-estime-edouard-philippe_VN-202610130428.html",
+     "date": "2026-10-13T09:40:14.000Z",
+     "video": true
+    },
+    {
      "media": "La Dépêche",
      "titre": "ENTRETIEN. Blocage des lycées : \"Le sous-investissement dans l'éducation : tôt ou tard, ça se paye !\" Lycées, canicule, budget... Carole Delga tape du poing sur la table",
      "url": "https://www.ladepeche.fr/2026/10/12/entretien-blocage-des-lycees-le-sous-investissement-dans-leducation-tot-ou-tard-ca-se-paye-lycees-canicule-budget-carole-delga-tape-du-poing-sur-la-13597169.php",
@@ -564,15 +562,9 @@
      "date": "2026-10-13T08:52:30.000Z"
     },
     {
-     "media": "Le Progrès",
+     "media": "Le Dauphiné libéré",
      "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.leprogres.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "date": "2026-10-13T04:30:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "url": "https://www.ledauphine.com/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
      "date": "2026-10-13T04:30:00.000Z"
     },
     {
@@ -1501,131 +1493,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-13T11:21:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
-     "url": "https://www.leprogres.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
-     "media": "Le Progrès",
-     "date": "2026-10-13T11:21:00.000Z"
-    },
-    {
-     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
-     "url": "https://www.dna.fr/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T11:21:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Bardella propose une hausse de 4% par an pour les enseignants",
-   "accroche": "Bardella propose une hausse de 4% par an pour les enseignants",
-   "essentiel": "Bardella propose une hausse de 4% par an pour les enseignants. Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace.",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "4",
-    "unite": "%"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-13T04:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.leprogres.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "media": "Le Progrès",
-     "date": "2026-10-13T04:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
-     "url": "https://www.dna.fr/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T04:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
-   "accroche": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
-   "essentiel": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ? Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-10-12T20:40:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
-     "url": "https://www.leprogres.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
-     "media": "Le Progrès",
-     "date": "2026-10-12T20:40:00.000Z"
-    },
-    {
-     "titre": "Télévision. Après Radio Nova et les Inrocks, Matthieu Pigasse vise la TNT",
-     "url": "https://www.dna.fr/societe/2026/10/12/apres-radio-nova-et-les-inrocks-matthieu-pigasse-vise-la-tnt",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-12T20:40:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Télévision : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "France Médias Monde"
    ],
    "derniere": "2026-10-12T12:09:43.000Z",
@@ -1688,6 +1555,33 @@
    "fait": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "accroche": "Mobilisation des lycéens en France : l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre",
    "essentiel": "Pendant la mobilisation des lycéens en France, l'ONU s'inquiète des violences, le mouvement appelé à se poursuivre. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T12:01:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Savoie. « Dès que ça les arrange, nous sommes squeezés et l’Agglo nous lâche » : la suppression d'une priorité aux vélos passe mal",
+     "url": "https://www.ledauphine.com/politique/2026/10/13/pour-l-association-roue-libre-la-suppression-d-une-priorite-aux-velos-passe-mal-des-que-ca-les-arrange-nous-sommes-squeezes-et-l-agglo-nous-lache",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T12:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Savoie : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1913,7 +1807,7 @@
    },
    "articles": [
     {
-     "titre": "DIRECT - Mouvement lycéen en France: 90% des universités bloquées pour une nouvelle journée de mobilisation, selon un syndicat",
+     "titre": "DIRECT - France: de nouveau dans la rue, lycéens et étudiants appellent à une «convergence des luttes»",
      "url": "https://www.rfi.fr/fr/france/20261013-direct-mouvement-lyc%C3%A9en-en-france-90-des-universit%C3%A9s-bloqu%C3%A9es-pour-une-nouvelle-journ%C3%A9e-de-mobilisation-selon-un-syndicat",
      "media": "RFI",
      "date": "2026-10-13T11:55:04.000Z"
@@ -1922,9 +1816,35 @@
    "titrePropre": {
     "titre": "Lycées",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T11:54:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
    },
-   "fait": "90% des universités bloquées pour une nouvelle journée de mobilisation, selon un syndicat",
-   "accroche": "90% des universités bloquées pour une nouvelle journée de mobilisation, selon un syndicat"
+   "articles": [
+    {
+     "titre": "Isère. Mobilisation du 13 octobre : 5 400 manifestants selon la police dans le cortège à Grenoble",
+     "url": "https://www.ledauphine.com/education/2026/10/13/isere-mobilisation-du-13-octobre-une-manifestation-prevue-a-11-h-a-grenoble-avant-une-assemblee-de-l-intersyndicale-a-15-h",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T11:54:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Isère : sécurité",
+    "origine": "regles"
+   },
+   "fait": "5 400 manifestants selon la police dans le cortège à Grenoble",
+   "accroche": "5 400 manifestants selon la police dans le cortège à Grenoble"
   },
   {
    "medias": 1,
@@ -2078,6 +1998,50 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T11:21:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Politique. « Un effort extrêmement ambitieux » : Bardella propose une hausse de 4% par an pour les enseignants",
+     "url": "https://www.ledauphine.com/politique/2026/10/13/un-effort-extremement-ambitieux-bardella-propose-une-hausse-de-4-par-an-pour-les-enseignants",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T11:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Bardella propose une hausse de 4% par an pour les enseignants",
+   "accroche": "Bardella propose une hausse de 4% par an pour les enseignants",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-10-13T11:14:56.000Z",
@@ -2141,6 +2105,34 @@
     "titre": "Lycées",
     "origine": "dossier"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T11:07:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Chambéry. « Il est temps de transformer ce point noir en un aménagement exemplaire » : les travaux du premier rond-point hollandais de Savoie annoncés pour 2028",
+     "url": "https://www.ledauphine.com/politique/2026/10/13/il-est-temps-de-transformer-ce-point-noir-en-un-amenagement-exemplaire-les-travaux-du-premier-rond-point-hollandais-de-savoie-annonces-pour-2028",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T11:07:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Chambéry : projet d'aménagement",
+    "origine": "regles"
+   },
+   "fait": "Les travaux du premier rond-point hollandais de Savoie annoncés pour 2028",
+   "accroche": "Les travaux du premier rond-point hollandais de Savoie annoncés pour 2028"
   },
   {
    "medias": 1,
@@ -2452,32 +2444,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-13T10:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Ain. Après la disparition de Guy Larmanjat et les sénatoriales, un hommage et de nouveaux visages",
-     "url": "https://www.leprogres.fr/politique/2026/10/13/apres-la-disparition-de-guy-larmanjat-et-les-senatoriales-un-hommage-et-de-nouveaux-visages",
-     "media": "Le Progrès",
-     "date": "2026-10-13T10:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France Inter"
    ],
    "derniere": "2026-10-13T10:13:00.000Z",
@@ -2621,79 +2587,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-13T10:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Ciotti",
-      "photo": "photos/deputes/PA330240.jpg",
-      "photoHd": "photos/deputes/hd/PA330240.jpg",
-      "parti": "UDR",
-      "lien": "#depute-PA330240",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Loire. Deux élus municipaux rejoignent le parti d'Éric Ciotti, pour « sa vision d’une droite assumée, attachée à l’autorité »",
-     "url": "https://www.leprogres.fr/politique/2026/10/13/deux-elus-municipaux-laurent-caruana-et-marcel-jacob-rejoignent-l-udr",
-     "media": "Le Progrès",
-     "date": "2026-10-13T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Ciotti : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Deux élus municipaux rejoignent le parti d'Éric Ciotti",
-   "accroche": "Deux élus municipaux rejoignent le parti d'Éric Ciotti",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Éric Ciotti : président de l'UDR",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-13T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Étienne. Alors que la fin du Plan de relance inquiétait les maires, la Métropole annonce l'arrivée d'un fonds de soutien",
-     "url": "https://www.leprogres.fr/economie/2026/10/12/un-nouveau-fonds-de-soutien-aux-communes-va-remplacer-le-plan-de-relance",
-     "media": "Le Progrès",
-     "date": "2026-10-13T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Étienne : organisation territoriale",
-    "origine": "regles"
-   },
-   "fait": "La Métropole annonce l'arrivée d'un fonds de soutien",
-   "accroche": "La Métropole annonce l'arrivée d'un fonds de soutien"
   },
   {
    "medias": 1,
@@ -2952,8 +2845,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : déclaration sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "fait": "Édouard Philippe estime : « Dans les propositions de Marine Le Pen, il y a quelque chose de nature à fissurer l'Europe »",
    "accroche": "Édouard Philippe estime : « Dans les propositions de Marine Le Pen, il y a quelque chose de nature à fissurer l'Europe »",
@@ -3648,6 +3541,33 @@
    ],
    "titrePropre": {
     "titre": "Lycées : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T08:17:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Vaucluse. Edwy Plenel en conférence à Avignon : « Je vais expliquer pourquoi la démocratie c’est notre affaire »",
+     "url": "https://www.ledauphine.com/politique/2026/10/13/edwy-plenel-je-vais-expliquer-pourquoi-la-democratie-c-est-notre-affaire",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T08:17:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -4793,35 +4713,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-13T05:01:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Strasbourg. Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
-     "url": "https://www.dna.fr/economie/2026/10/13/habitat-indigne-le-permis-de-louer-entre-en-vigueur-le-1-er-novembre-dans-le-quartier-gare",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-13T05:01:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Strasbourg : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare",
-   "accroche": "Habitat indigne : le permis de louer entre en vigueur le 1er novembre dans le quartier Gare"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-13T05:00:50.000Z",
@@ -5019,6 +4910,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-13T04:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget 2027 : une motion déposée par le PS, le texte va-t-il être rejeté avant d’être examiné ?",
+     "url": "https://www.ledauphine.com/economie/2026/10/13/budget-2027-une-motion-deposee-par-le-ps-le-texte-va-t-il-etre-rejete-avant-d-etre-examine",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T04:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?",
+   "accroche": "Budget 2027 : une motion déposée par le Parti socialiste, le texte va-t-il être rejeté avant d’être examiné ?"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-10-13T04:20:09.000Z",
@@ -5039,6 +4960,33 @@
    "titrePropre": {
     "titre": "Politique : opinion d'un média",
     "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-13T04:12:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Loi contre la sérophobie : «On pense que le VIH c’est fini, or il existe des discriminations en chaîne»",
+     "url": "https://www.liberation.fr/societe/sante/loi-contre-la-serophobie-on-pense-que-le-vih-cest-fini-or-il-existe-des-discriminations-en-chaine-20261013_3MTRTL6UI5CGFKVX56MOHABFVA/",
+     "media": "Libération",
+     "date": "2026-10-13T04:12:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   }
  ]
