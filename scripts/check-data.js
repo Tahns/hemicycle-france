@@ -139,6 +139,12 @@ async function checkGroupes() {
 async function checkSondages() {
   const data = JSON.parse(await readFile("data/sondages.json", "utf-8"));
   if (!Array.isArray(data.instituts) || data.instituts.length === 0) return err("sondages.json : aucun institut");
+  // Entrées lues dans la notice PDF (scripts/resultats-notice.js) : origine « notice » seulement, lien vers la Commission des sondages, 2 à 12 hypothèses
+  for (const e of [...data.instituts, ...(data.historique || []), ...(data.secondTour || []).flatMap((d) => d.instituts || [])]) {
+    if (e.origine === undefined) continue;
+    if (e.origine !== "notice") err(`sondages.json : ${e.nom || e.institut || "?"}, origine « ${e.origine} » inconnue`);
+    else if (e.url !== undefined && !/^https:\/\/www\.commission-des-sondages\.fr\//.test(e.url)) err(`sondages.json : ${e.nom || e.institut}, entrée « notice » sans lien vers la Commission des sondages`);
+  }
   for (const i of data.instituts) {
     if (!i.nom || !/^\d{4}-\d{2}-\d{2}$/.test(i.dateFin || "") || !/^https:\/\//.test(i.url || "")) err(`sondages.json : ${i.nom || "?"} incomplet`);
     for (const [nom, [min, max]] of Object.entries(i.scores || {})) {
