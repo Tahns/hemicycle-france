@@ -306,7 +306,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
   const livree = JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"));
-  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, grosSujetMedias: 4, maxParJour: 8, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 8 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, grosSujetMedias: 4, maxParJour: 5, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 5 stories par jour, publication directe, sujets sensibles sans circuit à part");
   for (const k of ["minMedias", "minMediasPersonneNommee", "maxParJour"]) assert.ok(typeof livree[`_commentaire_${k}`] === "string" && livree[`_commentaire_${k}`].length > 40, `la clé ${k} est documentée dans le fichier`);
   assert.ok(/20/.test(livree._commentaire_maxParJour), "l'ancienne valeur (20) est rappelée pour revenir en arrière");
   // Seuil de médias : UNE seule source (la configuration). Aucune constante du code ne diverge de data/stories-config.json, avant comme après appliquerSeuils
@@ -315,7 +315,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(A.normaliserConfig(null).minMedias, livree.minMedias);
     assert.strictEqual(A.seuilsActuels().minMedias, livree.minMedias, "avant tout appel : le seuil actif est celui de la configuration");
     A.appliquerSeuils(A.lireConfig(new URL("../data/stories-config.json", import.meta.url).pathname));
-    assert.deepStrictEqual(A.seuilsActuels(), { minMedias: 2, minMediasPersonneNommee: 3, maxParJour: 8 }, "la configuration livrée est appliquée telle quelle");
+    assert.deepStrictEqual(A.seuilsActuels(), { minMedias: 2, minMediasPersonneNommee: 3, maxParJour: 5 }, "la configuration livrée est appliquée telle quelle");
     const src = readFileSync(new URL("../scripts/stories-auto.cjs", import.meta.url), "utf-8");
     assert.ok(!/BREF_MIN_MEDIAS/.test(src) && !/let MIN_MEDIAS = 3/.test(src), "plus de seuil de médias codé en dur (« en bref » compris)");
     // « en bref » suit le même seuil : 2 médias suffisent s'ils suffisent aux autres sujets
@@ -494,7 +494,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const ch = { chiffre: { valeur: "400 à 500", unite: "établissements" } };
     const s = sujet("Blocage des lycées : 400 à 500 établissements fermés ce lundi", 3, ch);
     s.articles[1].titre = "Lycées : de 400 à 500 établissements bloqués en France";
-    assert.strictEqual(modele(s), "chiffre");
+    assert.strictEqual(modele(s), "une", "plus de story « le chiffre » (décision du propriétaire, anti-saturation)");
     const un = sujet("Blocage des lycées : 400 à 500 établissements fermés ce lundi", 3, ch);
     un.articles[1].titre = "Lycées : la mobilisation se poursuit dans plusieurs académies"; un.articles[2].titre = "Blocage des lycées : le gouvernement réclame un retour au calme";
     assert.strictEqual(modele(un), "une", "chiffre présent dans un seul titre : non sourcé");
@@ -505,8 +505,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const d = (iso) => ({ date: { iso, jour: Number(iso.slice(8)), mois: "octobre" } });
     assert.strictEqual(modele(sujet(T1, 3, d("2026-10-27"))), "post-date", "date lointaine (> 3 jours) : un POST, plus une story");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-10-06"))), "post-date", "dans 4 jours : post");
-    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-05"))), "date", "dans 3 jours : toujours une story");
-    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-03"))), "date", "demain");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-05"))), "post-date", "dans 3 jours : post aussi");
+    assert.strictEqual(modele(sujet(T1, 3, d("2026-10-03"))), "post-date", "demain : post");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-10-02"))), "une", "aujourd'hui : pas à venir");
     assert.strictEqual(modele(sujet(T1, 3, d("2026-09-20"))), "une", "passée");
     assert.strictEqual(modele(sujet(T1, 3, d("2028-01-01"))), "une", "trop lointaine");
@@ -514,10 +514,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   // Un modèle spécial s'ajoute à l'entrée ; le dessin reçoit le modèle en 6e argument
   {
     const s = sujet("Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 3 octobre", 3, { date: { iso: "2026-10-03", jour: 3, mois: "octobre" } });
-    const d = AUTO.decrire(choix([s], { candidats }));
-    assert.strictEqual(d.champs.modele, "date");
-    assert.strictEqual(d.type, "date");
-    assert.deepStrictEqual(d.args, [0, s.articles[0].titre, null, null, null, "date"]);
+    const c = choix([s], { candidats });
+    assert.strictEqual(c.modele, "post-date", "une date à retenir n'est plus jamais une story (anti-saturation)");
   }
   // En bref : une fois par jour, le matin, 3 ou 4 sujets forts, sans doublon, dans les plafonds
   {
@@ -687,8 +685,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.match(d.champs.alt, /date à retenir/);
     // à 3 jours ou moins : toujours une story « Date à retenir »
     const proche = dateSujet({ date: { iso: "2026-10-05", jour: 5, mois: "octobre" } });
-    assert.strictEqual(choix([proche]).modele, "date");
-    assert.strictEqual(AUTO.decrire(choix([proche]), now).type, "date");
+    assert.strictEqual(choix([proche]).modele, "post-date", "même à 3 jours : un post, plus de story");
   }
   // 2. Plafonds distincts : 2 posts par jour ; les stories (4 par jour) et les annonces n'y comptent pas
   {
@@ -1109,7 +1106,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.ok(ra([ev({ confirme: false })]).refus, "non confirmé : rien");
   assert.ok(ra([ev({ source: { nom: "x", url: "http://x" } })]).refus, "source non https : rien");
   assert.ok(ra([ev()], { now: new Date("2026-10-21T22:30:00Z") }).refus, "nuit : rien");
-  assert.strictEqual(choisir({ actualites: null, direct: null, sondages: sond(), meetings: { meetings: [ev()] }, file: { entrees: annonce }, now: matin }).modele, "rappel-agenda", "choisir() retient le rappel");
+  assert.strictEqual(choisir({ actualites: null, direct: null, sondages: sond(), meetings: { meetings: [ev()] }, file: { entrees: annonce }, now: matin }).modele !== "rappel-agenda", true, "choisir() ne retient plus de rappel en story (dates à retenir : posts seulement)");
 }
 
 // ---- Doublons : fenêtre de 72 h (file ET registre), liens d'articles, synonymes, événements datés ----

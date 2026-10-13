@@ -98,7 +98,7 @@ const MOIS = { janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6, juill
 const BREF_DEBUT_H = 7, BREF_FIN_H = 11; // « En bref » : une fois par jour, le matin (heure de Paris)
 const BREF_FRAICHEUR_H = 12, BREF_MIN = 3, BREF_MAX = 4; // « en bref » : même seuil de médias que les autres sujets (MIN_MEDIAS, « minMedias »)
 const DATE_MAX_JOURS = 180;
-const DATE_STORY_MAX_JOURS = 3; // date à venir à 3 jours ou moins : story « Date à retenir » ; au-delà : POST (puis story d'annonce)
+const DATE_STORY_MAX_JOURS = 0; // décision du propriétaire (2026-10-13, risque de saturation Instagram) : une date à retenir est TOUJOURS un POST, jamais une story
 const MAX_POSTS_PAR_JOUR = 2; // posts (fil Instagram) par jour ; les stories d'annonce n'entrent pas dans le plafond des stories
 const POST_FENETRE_DOUBLON_H = 36; // un post proche d'un post/story publié depuis moins de 36 h est refusé
 const POST_VOTE_FRAICHEUR_J = 2; // un vote final de plus de 2 jours n'est plus « récent » : pas de post
@@ -411,7 +411,7 @@ const joursAvantDate = (sujet, now = new Date()) => Math.round((Date.parse(sujet
 function modeleSujet(sujet, { direct = null, candidats = null, now = new Date() } = {}) {
   if (presidentParle(sujet, direct, now)) return "direct";
   if (faceAFace(sujet, candidats)) return "facea";
-  if (chiffreSource(sujet)) return "chiffre";
+  // « Le chiffre » n'est plus une story (décision du propriétaire, 2026-10-13) : le sujet repasse en story « à la une »
   if (dateAVenir(sujet, now)) return joursAvantDate(sujet, now) > DATE_STORY_MAX_JOURS ? "post-date" : "date"; // date lointaine : un POST, pas une story
   return "une";
 }
@@ -1302,8 +1302,7 @@ function choisir({ actualites, direct, sondages, veille = null, lois, senat, pro
   if (!s1.refus) return s1;
   const pl = choisirPostLoi({ lois, senat, file, registre, now }); // une loi adoptée ou rejetée : un post, suivi d'une story d'annonce
   if (!pl.refus) return pl;
-  const ra = choisirRappelAgenda({ meetings, agendaAn, file, registre, now }); // J-3 d'un événement déjà annoncé par un post : story « Date à retenir »
-  if (!ra.refus) return ra;
+  // Plus de story de rappel « Date à retenir » (décision du propriétaire, 2026-10-13 : anti-saturation) ; choisirRappelAgenda reste disponible.
   const pa = choisirPostAgenda({ meetings, agendaAn, file, registre, now }); // un grand rendez-vous de l'agenda (congrès, primaire) : un post « Date à retenir »
   if (!pa.refus) return pa;
   const b = choisirEnBref({ actualites, file, registre, now, journal }); // « en bref » : une fois par jour, le matin
