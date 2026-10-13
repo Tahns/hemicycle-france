@@ -2,7 +2,7 @@
 
 Le dépôt prépare déjà les stories (image JPEG + ligne dans `data/instagram-file.json`). Le workflow GitHub
 **« Publier les stories »** (`.github/workflows/publier-stories.yml`) les publie ensuite tout seul sur Instagram,
-toutes les 15 minutes environ, sans qu'aucune session Claude ne soit ouverte. Il utilise l'API officielle
+toutes les 15 minutes environ, sans intervention manuelle. Il utilise l'API officielle
 « Instagram Graph » de Meta.
 
 Tant que les deux secrets décrits plus bas n'existent pas, le workflow ne fait rien : il écrit seulement

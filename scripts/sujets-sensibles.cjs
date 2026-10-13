@@ -250,6 +250,7 @@ function ficheNiveau2({ medias, categorie = "faits", titreCite = "", reponseCite
 }
 
 /** Légende d'un POST sensible (niveau 2 ou demande) : attribution, citation, mention, source (lien de l'article), compte. */
+const LG = require("./legendes.cjs");
 function legendePost({ titre, citation = "", media = "", mention, lien = "" }) {
   return [
     `${titre}.`,
@@ -258,8 +259,8 @@ function legendePost({ titre, citation = "", media = "", mention, lien = "" }) {
     mention,
     ...(lien ? ["", `Source : ${media}, ${lien}`] : []),
     "",
-    "Toute l'actu politique : @hemicyclefrance",
-    "#Politique #Presse #Actualité",
+    LG.pied("@hemicyclefrance", "sens|" + titre),
+    LG.hashtags({ genre: "autre", seed: "sens|" + titre, max: 4 }).join(" "),
   ].join("\n");
 }
 

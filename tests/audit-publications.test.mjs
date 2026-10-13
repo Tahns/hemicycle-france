@@ -262,7 +262,7 @@ test("ficheDate (non-régression) : la citation de presse du post garde le nom d
   const s = { titrePropre: { titre: "Loi casseurs-payeurs : examen au Sénat" }, date: { iso: "2026-10-27", jour: 27, mois: "octobre" }, articles: [{ media: "franceinfo", titre: "Le projet de loi « casseurs-payeurs » sera examiné au Sénat le 27 octobre" }, { media: "Le Monde", titre: "Casseurs-payeurs : examen le 27 octobre au Sénat" }] };
   const f = ficheDate(s, new Date("2026-10-02T10:00:00Z"));
   assert.strictEqual(f.spec.media, "franceinfo");
-  assert.match(f.legende, /Date annoncée par la presse \(franceinfo, Le Monde\)/);
+  assert.match(f.legende, /(Annoncé par la presse \(|D'après )franceinfo, Le Monde\)?/);
 });
 
 test("ficheDate : un post reste au fil, mais sa légende et son image affirment « dans 25 jours »", () => {

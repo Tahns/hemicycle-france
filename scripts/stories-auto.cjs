@@ -124,7 +124,7 @@ const MAX_OCTETS = 8 * 1024 * 1024;
 const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
-const { hashtags: hashtagsLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
+const { hashtags: hashtagsLegende, pied: piedLegende, variante: varLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
 const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait, messageComplet, sansBandeauEtat } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
 const { sansAccent } = LP;
@@ -885,7 +885,7 @@ function normaliserConfig(c) {
     monetisation: c?.monetisation === true, validationHumaine: c?.validationHumaine === true,
     // seuils « très intéressant » : valeurs par défaut = comportement historique
     minMedias: entier(c?.minMedias, DEFAUT_MIN_MEDIAS, 2, 10), minMediasPersonneNommee: PN.seuil(entier(c?.minMediasPersonneNommee, DEFAUT_MIN_MEDIAS_PERSONNE, PN.SEUIL_MIN, 10)), dossierMedias: entier(c?.dossierMedias, 4, 3, 12), grosSujetMedias: entier(c?.grosSujetMedias, 4, 3, 10),
-    maxParJour: entier(c?.maxParJour, 4, 1, 99), enBref: c?.enBref !== false,
+    maxParJour: entier(c?.maxParJour, 4, 1, 99), maxStoriesTotalJour: entier(c?.maxStoriesTotalJour, 8, 1, 99), espacementMin: entier(c?.espacementMin, 30, 0, 240), enBref: c?.enBref !== false,
     // vidéos animées de NOS visuels (scripts/videos-auto.cjs) : désactivées par défaut ; videosMax : vidéos par jour (stories vidéo + Reels)
     videos: c?.videos === true, videosMax: entier(c?.videosMax, 2, 0, 6),
     // sujets de justice et de mise en cause (scripts/sujets-sensibles.cjs) : activés par défaut ; niveau 1 = au moins « minMediasSensible » médias
@@ -1016,21 +1016,22 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const suite = resultat === "adopte"
     ? "Un texte devient une loi quand l'Assemblée nationale et le Sénat l'ont adopté dans les mêmes termes."
     : "Un texte rejeté n'est pas accepté par ce vote : à ce stade, il ne devient pas une loi.";
+  const gr = `loi|${id}|${numero}`, quelleMin = quelle.charAt(0).toLowerCase() + quelle.slice(1);
   const legende = [
-    `${nomChambre} : texte ${verbe} le ${date}`,
+    varLegende(gr, "t", [`${nomChambre} : texte ${verbe} le ${date}`, `Texte ${verbe} (${nomChambre}, ${date})`, `${quelle} a ${verbe} un texte le ${date}`, `Vote du ${date} : texte ${verbe} (${nomChambre})`]),
     "",
-    `${quelle} a ${verbe}, le ${date}, le texte en entier.`,
-    ...(etapeTxt ? [`Étape du texte : ${etapeTxt}.`] : []),
-    `Ce texte est une ${natureTxt}.`,
-    ...(sujetTxt ? [`Il porte sur : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`] : []),
+    varLegende(gr, "a", [`Vote sur l'ensemble du texte : ${quelleMin} l'a ${verbe} le ${date}.`, `${quelle} s'est prononcé${an ? "e" : ""} sur l'ensemble du texte le ${date} et l'a ${verbe}.`, `Le ${date}, ${quelleMin} a ${verbe} le texte en entier.`]),
+    ...(etapeTxt ? [varLegende(gr, "e", [`Où on en est : ${etapeTxt}.`, `Étape : ${etapeTxt}.`, `À ce stade, ${etapeTxt.charAt(0).toLowerCase()}${etapeTxt.slice(1)}.`])] : []),
+    `C'est une ${natureTxt}.`,
+    ...(sujetTxt ? [varLegende(gr, "s", [`En clair : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`, `De quoi parle-t-on ? ${sujetTxt}.`])] : []),
     `Titre officiel : « ${d.court} ».`,
     voix + ".",
     suite,
     "",
-    `Source officielle : ${nomChambre}, vote n°${numero} — ${url}`,
+    `Source officielle : ${nomChambre}, vote n°${numero} ${url}`,
     "",
-    `Pour suivre l'actualité politique, expliquée simplement : ${COMPTE}`,
-    hashtagsLegende({ genre: "loi", chambre, theme: an ? "assemblee" : "senat", titre: d.court, max: 8 }).join(" "),
+    piedLegende(COMPTE, gr),
+    hashtagsLegende({ genre: "loi", chambre, theme: an ? "assemblee" : "senat", titre: d.court, max: 5, seed: gr }).join(" "),
   ].join("\n");
   const accroche = d.simple ? `${d.simple} (${natureTxt})` : null;
   return {
@@ -1214,10 +1215,19 @@ function choisirRappelAgenda({ meetings, agendaAn = null, file, registre = null,
 }
 
 /** Fiche d'un post « date à retenir » : tirée d'un sujet de data/actualites.json (modèle « post-date »). */
+/** Un titre de date « nom sans article + complément + verbe conjugué » (« Prix du gazole baisseront », « Hausse des tarifs entre en vigueur ») est grammaticalement bancal : à ne pas afficher tel quel. */
+const DETERMINANTS_TITRE = /^(?:le|la|les|l['’]|un|une|des|du|de|d['’]|ce|cette|ces|son|sa|ses|leur|leurs|notre|nos|au|aux)\b/i;
+function titreDateMalForme(t) {
+  const x = String(t || "").trim();
+  if (!x || DETERMINANTS_TITRE.test(x) || /[:«»]/.test(x)) return false;
+  const nomNu = /^\p{Lu}\p{Ll}+ (?:du|de la|de l['’]|des|d['’]|de) /u.test(x);
+  const verbe = /\b\p{L}{3,}(?:eront|iront|ront|era|ira|ra)\b/u.test(x.replace(/^\S+ (?:du|de la|de l['’]|des|d['’]|de) \S+ ?/u, "")) || /\b(?:sera|seront|aura|auront|va|vont|entre|entrent)\b/i.test(x);
+  return nomNu && verbe;
+}
 function ficheDate(s, now = new Date()) {
   const dt = s.date, jours = joursAvantDate(s, now);
   const titre = s.titrePropre.titre;
-  const titreAff = s.titrePropre.affichage || simplifierJargon(titre); // affichage en mots simples ; `titre` reste la clé des registres
+  const titreBrut = s.titrePropre.affichage || simplifierJargon(titre); // affichage en mots simples ; `titre` reste la clé des registres
   const medias = [...new Set((s.articles || []).map((a) => a.media).filter(Boolean))];
   const motsDate = [`${dt.jour} ${dt.mois}`, String(dt.jour), dt.mois].map(sansAccent);
   const art = (s.articles || []).find((a) => motsDate.some((m) => sansAccent(a.titre).includes(m))) || s.articles[0];
@@ -1226,6 +1236,8 @@ function ficheDate(s, now = new Date()) {
   const semaine = majuscule(d.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" }));
   const annee = Number(dt.iso.slice(0, 4));
   const jourTxt = `${Number(dt.jour) === 1 ? "1er" : dt.jour} ${dt.mois}`;
+  // Titre mal formé (nom sans article suivi d'un verbe conjugué : « Prix du gazole baisseront ») : on n'affiche jamais une phrase bancale, mais une formule neutre ; la citation de presse (attribuée) porte le détail
+  const titreAff = titreDateMalForme(titreBrut) ? `Rendez-vous annoncé le ${jourTxt}` : titreBrut;
   const quand = `${semaine.toLowerCase()} ${jourTxt} ${annee}`;
   const listeMedias = medias.slice(0, 4).join(", ");
   const ag = s.agenda || null; // entrée de l'agenda (data/meetings.json) : date relevée auprès d'une source, pas dans la presse ; peut durer plusieurs jours
@@ -1236,16 +1248,20 @@ function ficheDate(s, now = new Date()) {
     jourAff = moisF === dt.mois ? `${dt.jour}-${jf} ${dt.mois}` : `${jourTxt} - ${jf} ${moisF}`;
     quandTxt = `du ${semaine.toLowerCase()} ${jourTxt} au ${majuscule(f.toLocaleDateString("fr-FR", { weekday: "long", timeZone: "UTC" })).toLowerCase()} ${jf} ${moisF} ${annee}`;
   }
+  const gr = `date|${dt.iso}|${titre}`;
+  const quandPhrase = ag ? (ag.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt) : `le ${quand}`;
+  const lieuTxt = ag?.lieu ? ` (${ag.lieu})` : "";
+  const sujetPropre = titreAff.replace(/[.\s]+$/, "");
   const legende = [
-    `Date à retenir : ${jourAff} ${annee}${titreAff.length <= 80 ? ` — ${titreAff}` : ""}`,
+    varLegende(gr, "t", [`À noter dans l'agenda : ${jourAff} ${annee}`, `Gardez cette date : ${jourAff} ${annee}`, `${jourAff} ${annee} : un rendez-vous à ne pas manquer`, `Date à retenir, ${jourAff} ${annee}`]),
     "",
-    `${titreAff.replace(/[.\s]+$/, "")}.`,
-    ag ? `Rendez-vous ${ag.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}${ag.lieu ? ` (${ag.lieu})` : ""}.` : `Rendez-vous le ${quand}.`, // date absolue : un post reste au fil, « dans N jours » serait faux dès le lendemain (audit J-19)
+    `${sujetPropre}.`,
+    varLegende(gr, "q", [`Ça se passera ${quandPhrase}${lieuTxt}.`, `Rendez-vous ${quandPhrase}${lieuTxt}.`, `Dans le calendrier : ${quandPhrase}${lieuTxt}.`]),
     "",
-    ag ? `Date indiquée par ${listeMedias}. Le programme peut changer : vérifiez auprès de l'organisateur.` : `Date annoncée par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}). Le programme peut changer : vérifiez auprès de l'institution concernée.`,
+    ag ? varLegende(gr, "m", [`Date relevée par ${listeMedias}. Le programme peut encore bouger, vérifiez auprès de l'organisateur.`, `Source de la date : ${listeMedias}. Le programme peut changer, vérifiez auprès de l'organisateur.`]) : varLegende(gr, "m", [`Annoncé par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}). Le programme peut encore changer : vérifiez auprès de l'institution concernée.`, `D'après ${listeMedias}${medias.length > 4 ? "…" : ""}. Le programme peut changer, vérifiez auprès de l'institution concernée.`]),
     "",
-    `Pour suivre l'actualité politique, expliquée simplement : ${COMPTE}`,
-    hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 8 }).join(" "),
+    piedLegende(COMPTE, gr),
+    hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 5, seed: gr }).join(" "),
   ].join("\n");
   return {
     spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre: titreAff, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
@@ -1253,7 +1269,7 @@ function ficheDate(s, now = new Date()) {
     titreAffiche: titreAff,
     sous: `Date à retenir · ${jourAff}`,
     legende,
-    alt: `Post Hémicycle France, date à retenir. ${titreAff.replace(/[.\s]+$/, "")}. Rendez-vous ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date indiquée par ${listeMedias}.` : `Date annoncée par la presse (${listeMedias}).`}`,
+    alt: `Post Hémicycle France, date à retenir. ${titreAff.replace(/[.\s]+$/, "")}. ${varLegende(gr, "alt", ["À noter", "Rendez-vous", "Prévu"])} ${ag?.fin && ag.fin > dt.iso ? quandTxt : "le " + quandTxt}. ${ag ? `Date relevée par ${listeMedias}.` : `D'après ${listeMedias}.`}`,
     dateIso: dt.iso,
   };
 }
@@ -1630,6 +1646,6 @@ async function main() {
   }
 }
 
-module.exports = { messageDe, essentielDe, faitDe, RESULTAT, dejaVuEntreeSaufResultat, pagesManquantes, dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
+module.exports = { titreDateMalForme, messageDe, essentielDe, faitDe, RESULTAT, dejaVuEntreeSaufResultat, pagesManquantes, dejaVuSaufResultat, grosSujetMedias: () => GROS_SUJET_MEDIAS, seuilsActuels: () => ({ minMedias: MIN_MEDIAS, minMediasPersonneNommee: MIN_MEDIAS_PERSONNE, maxParJour: MAX_PAR_JOUR }), DEFAUT_MIN_MEDIAS, refusPersonneNommee, VARIANTES, varianteDe, varianteChoix, argsAvecVariante, evenementsAgenda, choisirRappelAgenda, mediasDistinctsDe, OFF, titreGenerique, titresProches, titresRecents, texteAlternatif, appliquerSeuils, fluxAtom, dessiner, parleDeSondage, choisirSondage, choisir, reserveSondages, reserveStory, jourPublication, choisirSujet, choisirDossier, choisirEnBref, modeleSujet, faceAFace, chiffreSource, dateAVenir, jourParis, idBref, choisirDonneesPropres, idDossier, motExclu, idSujet, jourUTC2, heureParis, elaguer, nettoyerImages, dimensionsJpeg, normaliserConfig, lireConfig, purgerReserve, purgerPresse, destination, decrire, ecrireBrouillon, lireBrouillons, brouillonsASupprimer, ligneResume, MAX_PAR_JOUR, GARDER, retirerSansImage, imageValide, choisirPostLoi, choisirPostAgenda, ficheLoi, ficheDate, ficheAnnonce, decomposerTitreVote, idAnnonce, dessinerPost, nbPostsDuJour, joursAvantDate, estStoryComptee, titresRecentsH, MAX_POSTS_PAR_JOUR, idReel, videosDuJour, animationPost, produireVideo, choisirSensible, decrireSensible, dessinerPostSeul, titresDe, RACINE, DOSSIER_IMG, DOSSIER_BROUILLONS, FICHIER_FILE };
 
 if (require.main === module) (process.argv.includes("--a-faire") ? Promise.resolve(aFaire()) : main()).catch((e) => { console.error("[stories-auto]", e.message); process.exit(1); });

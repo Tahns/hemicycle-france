@@ -301,12 +301,12 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   const { join } = await import("path");
 
   // Configuration : tout à false par défaut ; le fichier du dépôt est à false/false (comportement actuel)
-  const DEF = { monetisation: false, validationHumaine: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 4, grosSujetMedias: 4, maxParJour: 4, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
+  const DEF = { monetisation: false, validationHumaine: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 4, grosSujetMedias: 4, maxParJour: 4, maxStoriesTotalJour: 8, espacementMin: 30, enBref: true, fraicheurH: 12, videos: false, videosMax: 2, sensibles: true, minMediasSensible: 2, brouillonsSensiblesMax: 3, styleFixe: null };
   assert.deepStrictEqual(A.normaliserConfig(null), DEF);
   assert.deepStrictEqual(A.normaliserConfig({ monetisation: "oui", validationHumaine: 1 }), DEF, "seul true (booléen) active");
   assert.deepStrictEqual(A.lireConfig(join(tmpdir(), "inexistant-stories-config.json")), DEF);
   const livree = JSON.parse(readFileSync(new URL("../data/stories-config.json", import.meta.url), "utf-8"));
-  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, grosSujetMedias: 4, maxParJour: 5, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 5 stories par jour, publication directe, sujets sensibles sans circuit à part");
+  assert.deepStrictEqual((({ contenusAuto, creneaux, styleFixe, ...reste }) => Object.fromEntries(Object.entries(reste).filter(([k]) => !k.startsWith("_"))))(livree), { monetisation: false, validationHumaine: false, sensibles: false, minMedias: 2, minMediasPersonneNommee: 3, dossierMedias: 3, grosSujetMedias: 4, maxParJour: 5, maxStoriesTotalJour: 8, espacementMin: 30, fraicheurH: 72, enBref: false, videos: true, videosMax: 2 }, "valeurs livrées : seuil à 2 médias (3 pour une personne nommée), 5 stories par jour, publication directe, sujets sensibles sans circuit à part");
   for (const k of ["minMedias", "minMediasPersonneNommee", "maxParJour"]) assert.ok(typeof livree[`_commentaire_${k}`] === "string" && livree[`_commentaire_${k}`].length > 40, `la clé ${k} est documentée dans le fichier`);
   assert.ok(/20/.test(livree._commentaire_maxParJour), "l'ancienne valeur (20) est rappelée pour revenir en arrière");
   // Seuil de médias : UNE seule source (la configuration). Aucune constante du code ne diverge de data/stories-config.json, avant comme après appliquerSeuils
@@ -675,12 +675,13 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(d.champs.postGenre, "date");
     assert.strictEqual(d.champs.dateIso, "2026-10-27");
     assert.strictEqual(d.champs.titrePropre, "Loi casseurs-payeurs au Sénat");
-    assert.match(d.champs.legende, /Date à retenir : 27 octobre 2026/);
-    assert.match(d.champs.legende, /Date annoncée par la presse \(franceinfo, Le Monde, Le Figaro\)/);
+    assert.match(d.champs.legende, /27 octobre 2026/);
+    assert.match(d.champs.legende, /(Annoncé par la presse \(|D'après )franceinfo, Le Monde, Le Figaro/);
     assert.match(d.champs.legende, /@hemicyclefrance/);
     assert.ok(!/github\.io|hemicycle-france|https?:\/\//.test(d.champs.legende), "pas de lien du site dans la légende");
-    assert.ok(d.champs.legende.length < 2200 && (d.champs.legende.match(/#/g) || []).length >= 6 && (d.champs.legende.match(/#/g) || []).length <= 8, "légende courte, 6 à 8 hashtags");
-    assert.match(d.champs.legende, /#Agenda/);
+    assert.ok(d.champs.legende.length < 2200 && (d.champs.legende.match(/#/g) || []).length >= 3 && (d.champs.legende.match(/#/g) || []).length <= 5, "légende courte, 3 à 5 hashtags");
+    assert.match(d.champs.legende, /#(Agenda|DateÀRetenir|Calendrier|Institutions)/);
+    assert.ok(!/ — /.test(d.champs.legende), "pas de tiret long dans la légende");
     assert.ok(!/Toute l'actu/.test(d.champs.legende));
     assert.match(d.champs.alt, /date à retenir/);
     // à 3 jours ou moins : toujours une story « Date à retenir »
@@ -757,14 +758,17 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     assert.strictEqual(d.type, "post");
     assert.strictEqual(d.champs.donneesPropres, true);
     assert.strictEqual(d.champs.voteId, "an-100");
-    assert.match(d.champs.legende, /Assemblée nationale a adopté, le 1 octobre 2026, le texte en entier\.\nÉtape du texte : premier examen du texte/);
+    assert.match(d.champs.legende, /adopté/);
+    assert.match(d.champs.legende, /1 octobre 2026/);
+    assert.match(d.champs.legende, /premier examen du texte/);
     assert.match(d.champs.legende, /Pour : 300 · Contre : 100 · Abstentions \(ni pour ni contre\) : 10/);
-    assert.match(d.champs.legende, /Source officielle : Assemblée nationale, vote n°100 — https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
+    assert.match(d.champs.legende, /Source officielle : Assemblée nationale, vote n°100 https:\/\/www\.assemblee-nationale\.fr\/dyn\/17\/scrutins\/100/);
     assert.match(d.champs.legende, /@hemicyclefrance/);
     assert.ok(!/github\.io|hemicycle-france/.test(d.champs.legende));
-    assert.match(d.champs.legende.split("\n")[0], /^Assemblée nationale : texte adopté le 1 octobre 2026$/);
+    assert.match(d.champs.legende.split("\n")[0], /adopté/);
+    assert.ok(!/ — /.test(d.champs.legende), "pas de tiret long dans la légende");
     const nbH = (d.champs.legende.match(/#\S+/g) || []).length;
-    assert.ok(nbH >= 6 && nbH <= 8, "6 à 8 hashtags");
+    assert.ok(nbH >= 3 && nbH <= 5, "3 à 5 hashtags");
     assert.match(d.champs.legende, /#AssembléeNationale/);
     assert.deepStrictEqual(d.sources, ["https://www.assemblee-nationale.fr/dyn/17/scrutins/100"]);
     assert.deepStrictEqual(AUTO.ficheAnnonce(d.post.fiche, r.id), { id: r.id, titre: "Simplification de la vie économique (loi proposée par le Gouvernement)", sous: "Assemblée nationale · texte adopté · 1 octobre 2026" });
@@ -774,8 +778,8 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const r = loi({ lois: { lois: [lois.lois[2]] }, senat: null });
     assert.strictEqual(r.post.spec.verdict, "rejete");
     const l = AUTO.decrire(r, now).champs.legende;
-    assert.match(l, /a rejeté, le 30 septembre 2026/);
-    assert.match(l, /texte rejeté le 30 septembre 2026/);
+    assert.match(l, /rejeté/);
+    assert.match(l, /30 septembre 2026/);
     assert.ok(!/(enfin|scandale|victoire|défaite|honte|bravo|malheureusement|heureusement)/i.test(l), "aucun qualificatif politique");
   }
   // le Sénat aussi ; vote ancien, non final, incohérent, à mot prudent (mineurs) ou motion : jamais
@@ -783,7 +787,7 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
     const r = loi({ lois: { lois: [] } });
     assert.strictEqual(r.post.spec.chambre, "Sénat");
     assert.deepStrictEqual([r.post.spec.pour, r.post.spec.contre, r.post.spec.abst], [214, 111, 20]);
-    assert.match(AUTO.decrire(r, now).champs.legende, /Le Sénat a adopté/);
+    assert.match(AUTO.decrire(r, now).champs.legende, /Sénat[^\n]*adopté|adopté[^\n]*Sénat/);
     assert.match(r.post.source, /^https:\/\/www\.senat\.fr\//);
     for (const n of [101, 103, 104, 105, 106]) assert.ok(loi({ lois: { lois: [lois.lois.find((x) => x.numero === n)] }, senat: null }).refus, `vote ${n} : jamais en post`);
     assert.ok(loi({ senat: { scrutins: [{ ...senat.scrutins[0], dateISO: "2026-07-01" }] }, lois: { lois: [] } }).refus, "vote de plus de 2 jours");

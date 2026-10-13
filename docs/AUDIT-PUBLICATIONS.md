@@ -8,7 +8,7 @@ Ce document n'est pas un avis juridique : les points de droit sont des risques �
 
 **Tests** : `tests/audit-publications.test.mjs`. Les tests ordinaires verrouillent ce qui marche ; les tests `todo` (identifiants J-xx et A-xx ci-dessous) échouent aujourd'hui et démontrent chaque défaut sans casser `lancer-tous.mjs`. Quand un défaut est corrigé, l'option `todo` est retirée ; les `todo` restants sont des défauts acceptés (voir ci-dessous).
 
-## État des corrections (branche `claude/corrections-audit`)
+## État des corrections (série de corrections)
 
 Les constats ci-dessous (§ 1 à 3) décrivent l'état AVANT correction. Statut après correction : **corrigé** (test ordinaire dans `tests/audit-publications.test.mjs`, `tests/liste-prudente.test.mjs`, `tests/publier-stories.test.mjs`), **accepté** (le test reste `todo`, avec la raison), **non traité** (hors périmètre de cette série de corrections).
 
