@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-14T16:50:41.704Z",
+ "lastUpdated": "2026-10-14T16:55:33.699Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -155,12 +155,13 @@
    "motifs": [
     "présidentielle",
     "candidature",
-    "natacha",
-    "sondage"
+    "sondage",
+    "déclarés"
    ],
    "medias": [
     "BFMTV",
     "La Dépêche",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Public Sénat",
     "L'Obs",
@@ -172,16 +173,16 @@
     "France 24",
     "L'Express",
     "Le JDD",
+    "RFI",
     "Nice-Matin",
     "Europe 1",
-    "RFI",
     "Le Figaro"
    ],
    "mediasDistincts": 15,
    "sources": [
     "BFMTV",
     "La Dépêche",
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "Public Sénat",
     "L'Obs",
     "France Inter",
@@ -195,7 +196,7 @@
     "Nice-Matin",
     "Le Figaro"
    ],
-   "nb": 40,
+   "nb": 46,
    "derniere": "2026-10-14T16:44:19.000Z",
    "articles": [
     {
@@ -210,6 +211,12 @@
      "titre": "EXCLUSIF. Présidentielle 2027 - sondage : comment votent les Occitans et chaque région ? Le Pen caracole en tête, Mélenchon se détache... découvrez notre vaste étude",
      "url": "https://www.ladepeche.fr/2026/10/14/exclusif-presidentielle-2027-sondage-comment-votent-les-occitans-et-chaque-region-le-pen-caracole-en-tete-melenchon-se-detache-decouvrez-notre-vaste-13602056.php",
      "date": "2026-10-14T16:33:15.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Présidentielle 2027. Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/plus-de-30-personnes-dont-sept-femmes-qui-sont-les-candidats-declares-ou-potentiels",
+     "date": "2026-10-14T16:20:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -278,6 +285,12 @@
      "date": "2026-10-14T06:27:30.000Z"
     },
     {
+     "media": "RFI",
+     "titre": "Ingérences étrangères: la France durcit le ton, les cyberattaques se poursuivent",
+     "url": "https://www.rfi.fr/fr/france/20261014-ing%C3%A9rences-%C3%A9trang%C3%A8res-la-france-durcit-le-ton-les-cyberattaques-se-poursuivent",
+     "date": "2026-10-14T06:25:39.000Z"
+    },
+    {
      "media": "Nice-Matin",
      "titre": "Elle veut proposer « une politique de production » : l’essayiste Natacha Polony annonce sa candidature à l’élection présidentielle",
      "url": "https://www.nicematin.com/societe/politique/elle-veut-proposer-une-politique-de-production-l-essayiste-natacha-polony-annonce-sa-candidature-a-l-election-presidentielle-10740789",
@@ -290,16 +303,165 @@
      "date": "2026-10-14T06:08:18.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "Mobilisation lycéenne en France: un déclic politique pour des jeunes avant la présidentielle",
-     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261013-mobilisation-lyc%C3%A9enne-en-france-un-d%C3%A9clic-politique-pour-des-jeunes-avant-la-pr%C3%A9sidentielle",
-     "date": "2026-10-13T22:02:42.000Z"
-    },
-    {
      "media": "Le Figaro",
      "titre": "Présidentielle 2027 : Marine Tondelier précipite les Écologistes vers une candidature autonome et incertaine",
      "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-marine-tondelier-precipite-les-ecologistes-vers-une-candidature-autonome-et-incertaine-20261013",
      "date": "2026-10-13T21:32:49.000Z"
+    }
+   ]
+  },
+  {
+   "id": "lyceenne",
+   "titre": "Lycées",
+   "motifs": [
+    "lycéenne",
+    "mobilisation",
+    "jeunesse",
+    "mouvement"
+   ],
+   "medias": [
+    "L'Obs",
+    "RFI",
+    "Sud Ouest",
+    "Public Sénat",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Monde",
+    "France 24",
+    "BFMTV",
+    "Mediapart",
+    "La Dépêche",
+    "Le JDD",
+    "Hugo Décrypte",
+    "20 Minutes",
+    "Nice-Matin",
+    "L'Express",
+    "Libération"
+   ],
+   "mediasDistincts": 15,
+   "sources": [
+    "L'Obs",
+    "France Médias Monde",
+    "Sud Ouest",
+    "Public Sénat",
+    "EBRA",
+    "Le Monde",
+    "BFMTV",
+    "Mediapart",
+    "La Dépêche",
+    "Le JDD",
+    "Hugo Décrypte",
+    "20 Minutes",
+    "Nice-Matin",
+    "L'Express",
+    "Libération"
+   ],
+   "nb": 50,
+   "derniere": "2026-10-14T16:50:16.000Z",
+   "articles": [
+    {
+     "media": "L'Obs",
+     "titre": "« Génération 6-7 fait son 68 » : le réveil d’une jeunesse politique qui veut prendre son destin en main",
+     "url": "https://www.nouvelobs.com/societe/20261014.OBS119212/generation-6-7-fait-son-68-le-reveil-d-une-jeunesse-politique-qui-veut-prendre-son-destin-en-main.html",
+     "date": "2026-10-14T16:50:16.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mouvement lycéen en France: la promesse du gouvernement de déployer 3000 professeurs soulève des questions",
+     "url": "https://www.rfi.fr/fr/france/20261014-mouvement-lyc%C3%A9en-en-france-la-promesse-du-gouvernement-de-d%C3%A9ployer-3000-professeurs-soul%C3%A8ve-des-questions",
+     "date": "2026-10-14T16:38:43.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Pyrénées-Atlantiques. « Les retraités sont dans le collimateur au moment d’établir les budgets de l’État et de la Sécurité Sociale » : environ 130 manifestants entre Pau et Bayonne",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/pyrenees-atlantiques-les-retraites-sont-dans-le-collimateur-au-moment-d-etablir-les-budgets-de-l-etat-et-de-la-securite-sociale-environ-130-manifestants-entre-pau-et-bayonne-31069148.php",
+     "date": "2026-10-14T16:15:00.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Crise lycéenne : Bruno Retailleau veut « une sélection à l’université »",
+     "url": "https://www.publicsenat.fr/actualites/politique/crise-lyceenne-bruno-retailleau-veut-une-selection-a-luniversite",
+     "date": "2026-10-14T15:32:30.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
+     "url": "https://www.leprogres.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
+     "date": "2026-10-14T15:19:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
+     "url": "https://www.dna.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
+     "date": "2026-10-14T15:19:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Les pompiers professionnels reconduisent leur grève jusqu’au 4 décembre",
+     "url": "https://www.lemonde.fr/societe/article/2026/10/14/les-pompiers-professionnels-reconduisent-leur-greve-jusqu-au-4-decembre_6793751_3224.html",
+     "date": "2026-10-14T13:58:33.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Attention à ces fausses pancartes créées par l'IA pour décrédibiliser les lycéens",
+     "url": "https://www.france24.com/fr/france/20261014-attention-%C3%A0-ces-fausses-pancartes-cr%C3%A9%C3%A9es-par-l-ia-pour-d%C3%A9cr%C3%A9dibiliser-les-lyc%C3%A9ens",
+     "date": "2026-10-14T13:18:59.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère des lycéens: LFI veut créer \"10.000 postes\" et mettre en place \"la gratuité de la cantine\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-colere-des-lyceens-lfi-veut-creer-10-000-postes-et-mettre-en-place-la-gratuite-de-la-cantine_VN-202610140462.html",
+     "date": "2026-10-14T11:35:11.000Z",
+     "video": true
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Mobilisation lycéenne: «Sur le terrain, rien n’indique l’essoufflement prédit par le gouvernement»",
+     "url": "https://www.mediapart.fr/journal/france/141026/mobilisation-lyceenne-sur-le-terrain-rien-n-indique-l-essoufflement-predit-par-le-gouvernement",
+     "date": "2026-10-14T10:18:40.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Blocages des lycées : \"Une instrumentalisation politicienne\" dénonce Françoise Gatel, ministre de l'Aménagement du territoire",
+     "url": "https://www.ladepeche.fr/2026/10/14/blocages-des-lycees-une-instrumentalisation-politicienne-denonce-francoise-gatel-ministre-de-lamenagement-du-territoire-13601236.php",
+     "date": "2026-10-14T07:53:04.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Émeutes lycéennes : «Il faut en finir avec l'excuse de minorité», martèle Éric Zemmour",
+     "url": "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988",
+     "date": "2026-10-13T21:45:43.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
+     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
+     "date": "2026-10-13T18:12:13.000Z",
+     "video": true
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
+     "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
+     "date": "2026-10-13T16:45:20.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Un outil formidable bientôt offert aux professionnels de santé » : le chantier de la Maison des internes est lancé à Brignoles",
+     "url": "https://www.nicematin.com/societe/urbanisme/un-outil-formidable-bientot-offert-aux-professionnels-de-sante-le-chantier-de-la-maison-des-internes-est-lance-a-brignoles-10740421",
+     "date": "2026-10-13T15:10:03.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "La jeunesse, oui, mais celle des villes : l’impasse de Jean-Luc Mélenchon",
+     "url": "https://www.lexpress.fr/politique/la-jeunesse-oui-mais-celle-des-villes-limpasse-de-jean-luc-melenchon-WNJOTL7TONBWXKQKCPVGCAPNQY/",
+     "date": "2026-10-13T09:16:39.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Mouvement lycéen et budget 2027 : deux fronts pour sauver l’avenir des jeunes",
+     "url": "https://www.liberation.fr/idees-et-debats/mouvement-lyceen-et-budget-2027-deux-fronts-pour-sauver-lavenir-des-jeunes-20261012_GFXPY7AYPJFEZK3KCPR4P5STUY/",
+     "date": "2026-10-12T18:49:56.000Z"
     }
    ]
   },
@@ -311,9 +473,9 @@
     "retraités"
    ],
    "medias": [
+    "RFI",
     "Sud Ouest",
     "Europe 1",
-    "RFI",
     "France 24",
     "Libération",
     "Public Sénat",
@@ -330,9 +492,9 @@
    ],
    "mediasDistincts": 14,
    "sources": [
+    "France Médias Monde",
     "Sud Ouest",
     "Groupe Bolloré",
-    "France Médias Monde",
     "Libération",
     "Public Sénat",
     "20 Minutes",
@@ -345,9 +507,15 @@
     "Nice-Matin",
     "L'Express"
    ],
-   "nb": 45,
-   "derniere": "2026-10-14T16:15:00.000Z",
+   "nb": 46,
+   "derniere": "2026-10-14T16:31:39.000Z",
    "articles": [
+    {
+     "media": "RFI",
+     "titre": "France: en pleine bataille budgétaire, LFI dévoile sa contre-proposition pour 2027",
+     "url": "https://www.rfi.fr/fr/france/20261014-france-en-pleine-bataille-budg%C3%A9taire-lfi-d%C3%A9voile-sa-contre-proposition-pour-2027",
+     "date": "2026-10-14T16:31:39.000Z"
+    },
     {
      "media": "Sud Ouest",
      "titre": "Pyrénées-Atlantiques. « Les retraités sont dans le collimateur au moment d’établir les budgets de l’État et de la Sécurité Sociale » : environ 130 manifestants entre Pau et Bayonne",
@@ -359,12 +527,6 @@
      "titre": "Le chancelier allemand Friedrich Merz insiste sur la réduction du budget de l'Union européenne",
      "url": "https://www.europe1.fr/international/le-chancelier-allemand-friedrich-merz-insiste-sur-la-reduction-du-budget-de-lunion-europeenne-1148549?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-10-14T15:41:00.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Budget 2027: «On n'est pas allé chercher l'argent là où il est», pointe le député LFI Damien Maudet",
-     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261014-budget-2027-on-n-est-pas-all%C3%A9-chercher-l-argent-l%C3%A0-o%C3%B9-il-est-pointe-le-d%C3%A9put%C3%A9-lfi-damien-maudet",
-     "date": "2026-10-14T15:07:39.000Z"
     },
     {
      "media": "France 24",
@@ -446,154 +608,6 @@
      "date": "2026-10-13T04:00:00.000Z"
     }
    ]
-  },
-  {
-   "id": "lyceenne",
-   "titre": "Lycées",
-   "motifs": [
-    "lycéenne",
-    "mobilisation",
-    "jeunesse",
-    "manifestants"
-   ],
-   "medias": [
-    "Sud Ouest",
-    "L'Obs",
-    "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
-    "France 24",
-    "BFMTV",
-    "Mediapart",
-    "Le Monde",
-    "La Dépêche",
-    "RFI",
-    "Le JDD",
-    "Hugo Décrypte",
-    "20 Minutes",
-    "L'Express",
-    "Nice-Matin",
-    "Libération"
-   ],
-   "mediasDistincts": 15,
-   "sources": [
-    "Sud Ouest",
-    "L'Obs",
-    "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
-    "France Médias Monde",
-    "BFMTV",
-    "Mediapart",
-    "Le Monde",
-    "La Dépêche",
-    "Le JDD",
-    "Hugo Décrypte",
-    "20 Minutes",
-    "L'Express",
-    "Nice-Matin",
-    "Libération"
-   ],
-   "nb": 43,
-   "derniere": "2026-10-14T16:15:00.000Z",
-   "articles": [
-    {
-     "media": "Sud Ouest",
-     "titre": "Pyrénées-Atlantiques. « Les retraités sont dans le collimateur au moment d’établir les budgets de l’État et de la Sécurité Sociale » : environ 130 manifestants entre Pau et Bayonne",
-     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/pyrenees-atlantiques-les-retraites-sont-dans-le-collimateur-au-moment-d-etablir-les-budgets-de-l-etat-et-de-la-securite-sociale-environ-130-manifestants-entre-pau-et-bayonne-31069148.php",
-     "date": "2026-10-14T16:15:00.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "« Génération 6-7 fait son 68 » : le réveil d’une jeunesse politique qui veut prendre son destin en main",
-     "url": "https://www.nouvelobs.com/societe/20261014.OBS119212/generation-6-7-fait-son-68-le-reveil-d-une-jeunesse-politique-qui-veut-prendre-son-destin-en-main.html",
-     "date": "2026-10-14T16:02:08.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Crise lycéenne : Bruno Retailleau veut « une sélection à l’université »",
-     "url": "https://www.publicsenat.fr/actualites/politique/crise-lyceenne-bruno-retailleau-veut-une-selection-a-luniversite",
-     "date": "2026-10-14T15:32:30.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
-     "url": "https://www.dna.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
-     "date": "2026-10-14T15:19:00.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Attention à ces fausses pancartes créées par l'IA pour décrédibiliser les lycéens",
-     "url": "https://www.france24.com/fr/france/20261014-attention-%C3%A0-ces-fausses-pancartes-cr%C3%A9%C3%A9es-par-l-ia-pour-d%C3%A9cr%C3%A9dibiliser-les-lyc%C3%A9ens",
-     "date": "2026-10-14T13:18:59.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère des lycéens: LFI veut créer \"10.000 postes\" et mettre en place \"la gratuité de la cantine\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-colere-des-lyceens-lfi-veut-creer-10-000-postes-et-mettre-en-place-la-gratuite-de-la-cantine_VN-202610140462.html",
-     "date": "2026-10-14T11:35:11.000Z",
-     "video": true
-    },
-    {
-     "media": "Mediapart",
-     "titre": "Mobilisation lycéenne: «Sur le terrain, rien n’indique l’essoufflement prédit par le gouvernement»",
-     "url": "https://www.mediapart.fr/journal/france/141026/mobilisation-lyceenne-sur-le-terrain-rien-n-indique-l-essoufflement-predit-par-le-gouvernement",
-     "date": "2026-10-14T10:18:40.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Mobilisation lycéenne : la stratégie erratique d’un gouvernement pris de court",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/14/mobilisation-lyceenne-la-strategie-erratique-d-un-gouvernement-pris-de-court_6793714_823448.html",
-     "date": "2026-10-14T09:33:17.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Blocages des lycées : \"Une instrumentalisation politicienne\" dénonce Françoise Gatel, ministre de l'Aménagement du territoire",
-     "url": "https://www.ladepeche.fr/2026/10/14/blocages-des-lycees-une-instrumentalisation-politicienne-denonce-francoise-gatel-ministre-de-lamenagement-du-territoire-13601236.php",
-     "date": "2026-10-14T07:53:04.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mobilisation lycéenne en France: un déclic politique pour des jeunes avant la présidentielle",
-     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261013-mobilisation-lyc%C3%A9enne-en-france-un-d%C3%A9clic-politique-pour-des-jeunes-avant-la-pr%C3%A9sidentielle",
-     "date": "2026-10-13T22:02:42.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Émeutes lycéennes : «Il faut en finir avec l'excuse de minorité», martèle Éric Zemmour",
-     "url": "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988",
-     "date": "2026-10-13T21:45:43.000Z"
-    },
-    {
-     "media": "Hugo Décrypte",
-     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
-     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
-     "date": "2026-10-13T18:12:13.000Z",
-     "video": true
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
-     "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
-     "date": "2026-10-13T16:45:20.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "La jeunesse, oui, mais celle des villes : l’impasse de Jean-Luc Mélenchon",
-     "url": "https://www.lexpress.fr/politique/la-jeunesse-oui-mais-celle-des-villes-limpasse-de-jean-luc-melenchon-WNJOTL7TONBWXKQKCPVGCAPNQY/",
-     "date": "2026-10-13T09:16:39.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Avec Michel Rossi, il n’y a pas eu de passation de pouvoir et il s’obstine en faisant appel » : le plus jeune maire des Alpes-Maritimes se confie",
-     "url": "https://www.nicematin.com/societe/politique/avec-michel-rossi-il-n-y-a-pas-eu-de-passation-de-pouvoir-et-il-s-obstine-en-faisant-appel-le-plus-jeune-maire-des-alpes-maritimes-se-confie-10737258",
-     "date": "2026-10-13T03:00:02.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Mouvement lycéen et budget 2027 : deux fronts pour sauver l’avenir des jeunes",
-     "url": "https://www.liberation.fr/idees-et-debats/mouvement-lyceen-et-budget-2027-deux-fronts-pour-sauver-lavenir-des-jeunes-20261012_GFXPY7AYPJFEZK3KCPR4P5STUY/",
-     "date": "2026-10-12T18:49:56.000Z"
-    }
-   ]
   }
  ],
  "sujets": [
@@ -668,13 +682,13 @@
    "essentiel": "L’Assemblée nationale adopte la loi proposée par des parlementaires intégrale contre les violences sexistes et sexuelles. L'Assemblée nationale adopte à l’unanimité des votants la loi intégrale. Six médias en parlent : La Croix, L'Obs, 20 Minutes, Le JDD, Nice-Matin et France 24."
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 4,
    "sources": [
     "20 Minutes",
     "Groupe Bolloré",
     "Nice-Matin",
-    "Dernières Nouvelles d'Alsace"
+    "EBRA"
    ],
    "derniere": "2026-10-14T06:43:41.000Z",
    "illustration": {
@@ -710,6 +724,12 @@
     },
     {
      "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
+     "media": "Le Progrès",
+     "date": "2026-10-14T06:09:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
      "url": "https://www.dna.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-14T06:09:00.000Z"
@@ -721,7 +741,7 @@
    },
    "fait": "Pour la présidentielle 2027, l'essayiste Natacha Polony annonce sa candidature à l'élection présidentielle",
    "accroche": "Pour la présidentielle 2027, l'essayiste Natacha Polony annonce sa candidature à l'élection présidentielle",
-   "essentiel": "Elle veut proposer « une politique de production » : l’essayiste Natacha Polony annonce sa candidature à l’élection présidentielle. L'essayiste Natacha Polony se lance dans la course à l'Élysée. Cinq médias en parlent : Europe 1, 20 Minutes, Le JDD, Nice-Matin et Dernières Nouvelles d'Alsace."
+   "essentiel": "Elle veut proposer « une politique de production » : l’essayiste Natacha Polony annonce sa candidature à l’élection présidentielle. L'essayiste Natacha Polony se lance dans la course à l'Élysée. Six médias en parlent : Europe 1, 20 Minutes, Le JDD, Nice-Matin, Le Progrès et Dernières Nouvelles d'Alsace."
   },
   {
    "medias": 4,
@@ -788,12 +808,12 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 3,
    "sources": [
     "BFMTV",
     "Public Sénat",
-    "Dernières Nouvelles d'Alsace"
+    "EBRA"
    ],
    "derniere": "2026-10-14T10:47:26.000Z",
    "illustration": {
@@ -811,16 +831,22 @@
    },
    "articles": [
     {
-     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
-     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
-     "media": "Public Sénat",
-     "date": "2026-10-14T10:28:45.000Z"
+     "titre": "Politique. Mobilisation lycéenne : Emmanuel Macron déplore l’exploitation des « angoisses » de la jeune génération",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "media": "Le Progrès",
+     "date": "2026-10-14T10:20:00.000Z"
     },
     {
      "titre": "Emmanuel Macron reconnaît des \"angoisses légitimes\" de la jeunesse \"exploitées politiquement et transformées en violences urbaines\"",
      "url": "https://www.bfmtv.com/politique/elysee/emmanuel-macron-reconnait-des-angoisses-legitimes-de-la-jeunesse-exploitees-politiquement-et-transformees-en-violences-urbaines_AD-202610140421.html",
      "media": "BFMTV",
      "date": "2026-10-14T10:47:26.000Z"
+    },
+    {
+     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
+     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
+     "media": "Public Sénat",
+     "date": "2026-10-14T10:28:45.000Z"
     },
     {
      "titre": "Politique. Mobilisation lycéenne : Emmanuel Macron déplore l’exploitation des « angoisses » de la jeune génération",
@@ -831,6 +857,54 @@
    ],
    "titrePropre": {
     "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Dernières Nouvelles d'Alsace",
+    "La Croix",
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-14T16:54:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron propose l’ex-président de Vinci Autoroutes, Pierre Coppey, comme Contrôleur des prisons",
+     "url": "https://www.sudouest.fr/justice/prison/emmanuel-macron-propose-l-ex-president-de-vinci-autoroutes-pierre-coppey-comme-controleur-des-prisons-31072274.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-14T15:59:18.000Z"
+    },
+    {
+     "titre": "Justice. Un ex-dirigeant du groupe Vinci comme « contrôleur des prisons », annonce Emmanuel Macron",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/10/14/un-ex-dirigeant-du-groupe-vinci-comme-controleur-des-prisons-annonce-emmanuel-macron",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T16:54:00.000Z"
+    },
+    {
+     "titre": "Contrôleur des prisons : Macron propose Pierre Coppey, l’ex-président de Vinci Autoroutes",
+     "url": "https://www.la-croix.com/societe/controleur-des-prisons-macron-propose-pierre-coppey-l-ex-president-de-vinci-autoroutes-20261014",
+     "media": "La Croix",
+     "date": "2026-10-14T16:03:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Justice : actualité de la justice",
     "origine": "regles",
     "generique": true
    }
@@ -895,6 +969,53 @@
      "source": "Commission des sondages (notice Harris)"
     }
    ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T13:39:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Société. Féminicides : 111 femmes tuées en 2025, en hausse de 4% sur un an",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/feminicides-111-femmes-tuees-en-2025-en-hausse-de-4-sur-un-an",
+     "media": "Le Progrès",
+     "date": "2026-10-14T13:37:00.000Z"
+    },
+    {
+     "titre": "Les féminicides en hausse en 2025, avec 111 femmes victimes de leur ex ou leur conjoint",
+     "url": "https://www.france24.com/fr/france/20261014-les-f%C3%A9minicides-en-hausse-en-2025-avec-111-femmes-victimes-de-leur-ex-ou-leur-conjoint",
+     "media": "France 24",
+     "date": "2026-10-14T13:39:14.000Z"
+    },
+    {
+     "titre": "Société. Féminicides : 111 femmes tuées en 2025, en hausse de 4% sur un an",
+     "url": "https://www.dna.fr/politique/2026/10/14/feminicides-111-femmes-tuees-en-2025-en-hausse-de-4-sur-un-an",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T13:37:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "111 femmes tuées en 2025, en hausse de 4% sur un an",
+   "accroche": "111 femmes tuées en 2025, en hausse de 4% sur un an",
+   "essentiel": "Les féminicides en hausse en 2025, avec 111 femmes victimes de leur ex ou leur conjoint. Trois médias en parlent : Le Progrès, France 24 et Dernières Nouvelles d'Alsace.",
+   "chiffre": {
+    "valeur": "4",
+    "unite": "%"
+   }
   },
   {
    "medias": 3,
@@ -1009,47 +1130,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "La Croix",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T16:03:24.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Contrôleur des prisons : Macron propose Pierre Coppey, l’ex-président de Vinci Autoroutes",
-     "url": "https://www.la-croix.com/societe/controleur-des-prisons-macron-propose-pierre-coppey-l-ex-president-de-vinci-autoroutes-20261014",
-     "media": "La Croix",
-     "date": "2026-10-14T16:03:24.000Z"
-    },
-    {
-     "titre": "Emmanuel Macron propose l’ex-président de Vinci Autoroutes, Pierre Coppey, comme Contrôleur des prisons",
-     "url": "https://www.sudouest.fr/justice/prison/emmanuel-macron-propose-l-ex-president-de-vinci-autoroutes-pierre-coppey-comme-controleur-des-prisons-31072274.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T15:59:18.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Sud Ouest",
     "Public Sénat"
    ],
@@ -1144,43 +1224,6 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "France 24",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T13:39:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les féminicides en hausse en 2025, avec 111 femmes victimes de leur ex ou leur conjoint",
-     "url": "https://www.france24.com/fr/france/20261014-les-f%C3%A9minicides-en-hausse-en-2025-avec-111-femmes-victimes-de-leur-ex-ou-leur-conjoint",
-     "media": "France 24",
-     "date": "2026-10-14T13:39:14.000Z"
-    },
-    {
-     "titre": "Société. Féminicides : 111 femmes tuées en 2025, en hausse de 4% sur un an",
-     "url": "https://www.dna.fr/politique/2026/10/14/feminicides-111-femmes-tuees-en-2025-en-hausse-de-4-sur-un-an",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T13:37:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Féminicides : 111 femmes tuées en 2025, en hausse de 4% sur un an",
-   "accroche": "Féminicides : 111 femmes tuées en 2025, en hausse de 4% sur un an",
-   "essentiel": "Les féminicides en hausse en 2025, avec 111 femmes victimes de leur ex ou leur conjoint. Deux médias en parlent : France 24 et Dernières Nouvelles d'Alsace."
   },
   {
    "medias": 2,
@@ -1687,6 +1730,299 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T16:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/plus-de-30-personnes-dont-sept-femmes-qui-sont-les-candidats-declares-ou-potentiels",
+     "media": "Le Progrès",
+     "date": "2026-10-14T16:20:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
+     "url": "https://www.dna.fr/elections/2026/10/14/plus-de-30-personnes-dont-sept-femmes-qui-sont-les-candidats-declares-ou-potentiels",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T16:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
+   "accroche": "Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
+   "essentiel": "Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ? Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace.",
+   "chiffre": {
+    "valeur": "30",
+    "unite": "personnes"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T15:19:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
+     "url": "https://www.leprogres.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
+     "media": "Le Progrès",
+     "date": "2026-10-14T15:19:00.000Z"
+    },
+    {
+     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
+     "url": "https://www.dna.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T15:19:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T14:30:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Éducation. Mobilisation lycéenne : près de 150 blessés parmi le personnel enseignant, selon Sébastien Lecornu",
+     "url": "https://www.leprogres.fr/education/2026/10/14/blocus-lyceens-pres-de-150-blesses-parmi-le-personnel-enseignant-selon-lecornu",
+     "media": "Le Progrès",
+     "date": "2026-10-14T14:30:00.000Z"
+    },
+    {
+     "titre": "Éducation. Mobilisation lycéenne : près de 150 blessés parmi le personnel enseignant, selon Sébastien Lecornu",
+     "url": "https://www.dna.fr/education/2026/10/14/blocus-lyceens-pres-de-150-blesses-parmi-le-personnel-enseignant-selon-lecornu",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T14:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation : mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T13:56:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Éducation. Lycées : sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/sur-les-3-000-professeurs-remplacants-annonces-les-deux-tiers-ont-ete-affectes",
+     "media": "Le Progrès",
+     "date": "2026-10-14T13:56:00.000Z"
+    },
+    {
+     "titre": "Éducation. Lycées : sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
+     "url": "https://www.dna.fr/politique/2026/10/14/sur-les-3-000-professeurs-remplacants-annonces-les-deux-tiers-ont-ete-affectes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T13:56:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation : mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "Sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
+   "accroche": "Sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
+   "essentiel": "Sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés. Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T11:55:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "Le Progrès",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "titre": "Politique. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.dna.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T11:55:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : vote sur une affaire internationale",
+    "origine": "regles"
+   },
+   "fait": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+   "accroche": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+   "essentiel": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin. Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T11:34:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Seine-Saint-Denis. « 15 à 20 détonations » : une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/14/15-a-20-detonations-une-senatrice-prise-dans-une-fusillade-alors-qu-elle-accompagnait-des-policiers",
+     "media": "Le Progrès",
+     "date": "2026-10-14T11:34:00.000Z"
+    },
+    {
+     "titre": "Seine-Saint-Denis. « 15 à 20 détonations » : une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/10/14/15-a-20-detonations-une-senatrice-prise-dans-une-fusillade-alors-qu-elle-accompagnait-des-policiers",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T11:34:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
+   "accroche": "Une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
+   "essentiel": "Une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers. Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T11:19:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.leprogres.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "Le Progrès",
+     "date": "2026-10-14T11:19:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.dna.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T11:19:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+   "accroche": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+   "essentiel": "Le gouvernement renforce la prévention face à la détresse des agriculteurs. Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T09:49:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire mais il est « réduit »",
+     "url": "https://www.leprogres.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "Le Progrès",
+     "date": "2026-10-14T09:49:00.000Z"
+    },
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire mais il est « réduit »",
+     "url": "https://www.dna.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T09:49:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Télévision : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire mais il est « réduit »",
+   "accroche": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire mais il est « réduit »",
+   "essentiel": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire mais il est « réduit ». Deux médias en parlent : Le Progrès et Dernières Nouvelles d'Alsace."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
     "France Médias Monde"
    ],
    "derniere": "2026-10-13T13:51:17.000Z",
@@ -1754,6 +2090,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-14T16:50:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Génération 6-7 fait son 68 » : le réveil d’une jeunesse politique qui veut prendre son destin en main",
+     "url": "https://www.nouvelobs.com/societe/20261014.OBS119212/generation-6-7-fait-son-68-le-reveil-d-une-jeunesse-politique-qui-veut-prendre-son-destin-en-main.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T16:50:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le réveil d’une jeunesse politique qui veut prendre son destin en main",
+   "accroche": "Le réveil d’une jeunesse politique qui veut prendre son destin en main"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-14T16:44:19.000Z",
@@ -1813,6 +2177,69 @@
    },
    "fait": "Pierre Coppey choisi comme nouveau contrôleur général des lieux de privation de liberté par Emmanuel Macron",
    "accroche": "Pierre Coppey choisi comme nouveau contrôleur général des lieux de privation de liberté par Emmanuel Macron"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-14T16:38:43.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen en France: la promesse du gouvernement de déployer 3000 professeurs soulève des questions",
+     "url": "https://www.rfi.fr/fr/france/20261014-mouvement-lyc%C3%A9en-en-france-la-promesse-du-gouvernement-de-d%C3%A9ployer-3000-professeurs-soul%C3%A8ve-des-questions",
+     "media": "RFI",
+     "date": "2026-10-14T16:38:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "fait": "La promesse du gouvernement de déployer 3000 professeurs soulève des questions",
+   "accroche": "La promesse du gouvernement de déployer 3000 professeurs soulève des questions"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-14T16:38:37.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jordan Bardella au FN dès 2013: le reportage de RFI qui contredit sa défense sur ses propos antisémites",
+     "url": "https://www.rfi.fr/fr/france/20261014-jordan-bardella-au-fn-d%C3%A8s-2013-le-reportage-de-rfi-qui-contredit-sa-d%C3%A9fense-sur-ses-propos-antis%C3%A9mites",
+     "media": "RFI",
+     "date": "2026-10-14T16:38:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1975,6 +2402,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-14T16:31:39.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "France: en pleine bataille budgétaire, LFI dévoile sa contre-proposition pour 2027",
+     "url": "https://www.rfi.fr/fr/france/20261014-france-en-pleine-bataille-budg%C3%A9taire-lfi-d%C3%A9voile-sa-contre-proposition-pour-2027",
+     "media": "RFI",
+     "date": "2026-10-14T16:31:39.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "La France insoumise dévoile sa contre-proposition pour 2027",
+   "accroche": "La France insoumise dévoile sa contre-proposition pour 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-14T16:31:00.000Z",
@@ -1999,6 +2456,32 @@
    },
    "fait": "Pays royannais : avec, les collégiens vont réfléchir eux-mêmes aux bonnes pratiques liées au téléphone",
    "accroche": "Pays royannais : avec, les collégiens vont réfléchir eux-mêmes aux bonnes pratiques liées au téléphone"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T16:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Oyonnax. « Les masques tombent » : premières vives tensions au conseil municipal",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/les-masques-tombent-premieres-vives-tensions-au-conseil-municipa",
+     "media": "Le Progrès",
+     "date": "2026-10-14T16:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Oyonnax : conseil municipal",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -2032,34 +2515,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T16:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
-     "url": "https://www.dna.fr/elections/2026/10/14/plus-de-30-personnes-dont-sept-femmes-qui-sont-les-candidats-declares-ou-potentiels",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T16:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?",
-   "accroche": "Plus de 30 personnes, dont sept femmes : qui sont les candidats déclarés ou potentiels ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-14T16:15:00.000Z",
@@ -2078,11 +2533,18 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Pyrénées-Atlantiques : finances locales",
+    "origine": "regles"
    },
    "fait": "Environ 130 manifestants entre Pau et Bayonne",
-   "accroche": "Environ 130 manifestants entre Pau et Bayonne"
+   "accroche": "Environ 130 manifestants entre Pau et Bayonne",
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 19 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2121,34 +2583,6 @@
    },
    "fait": "Que contient la loi proposée par des parlementaires de la sénatrice écologiste Antoinette Guhl ?",
    "accroche": "Que contient la loi proposée par des parlementaires de la sénatrice écologiste Antoinette Guhl ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-14T16:02:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Génération 6-7 fait son 68 » : le réveil d’une jeunesse politique qui veut prendre son destin en main",
-     "url": "https://www.nouvelobs.com/societe/20261014.OBS119212/generation-6-7-fait-son-68-le-reveil-d-une-jeunesse-politique-qui-veut-prendre-son-destin-en-main.html",
-     "media": "L'Obs",
-     "date": "2026-10-14T16:02:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Le réveil d’une jeunesse politique qui veut prendre son destin en main",
-   "accroche": "Le réveil d’une jeunesse politique qui veut prendre son destin en main"
   },
   {
    "medias": 1,
@@ -2415,6 +2849,33 @@
    ],
    "titrePropre": {
     "titre": "Conseil municipal : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T16:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bourg-en-Bresse. Traitement des déchets : l’Agglo réaffirme son soutien à Organom",
+     "url": "https://www.leprogres.fr/environnement/2026/10/14/traitement-des-dechets-l-agglo-reaffirme-son-soutien-a-organom",
+     "media": "Le Progrès",
+     "date": "2026-10-14T16:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bourg-en-Bresse : actualité locale",
     "origine": "regles",
     "generique": true
    }
@@ -2697,6 +3158,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T15:40:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Vénissieux. La réorganisation des conseils de quartier fait grincer l’opposition",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/la-reorganisation-des-conseils-de-quartier-fait-grincer-l-opposition",
+     "media": "Le Progrès",
+     "date": "2026-10-14T15:40:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vénissieux : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La réorganisation des conseils de quartier fait grincer l’opposition",
+   "accroche": "La réorganisation des conseils de quartier fait grincer l’opposition"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "RFI"
    ],
    "derniere": "2026-10-14T15:39:47.000Z",
@@ -2854,6 +3344,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T15:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Belley. Police municipale : la Ville va de nouveau partager ses agents",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/police-municipale-la-villeva-de-nouveau-partager-ses-agents",
+     "media": "Le Progrès",
+     "date": "2026-10-14T15:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Belley : sécurité",
+    "origine": "regles"
+   },
+   "fait": "Police municipale : la Ville va de nouveau partager ses agents",
+   "accroche": "Police municipale : la Ville va de nouveau partager ses agents"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-14T15:25:00.000Z",
@@ -2878,32 +3396,6 @@
    },
    "fait": "Les retraités lot-et-garonnais mobilisés devant le siège du Medef pour réclamer une revalorisation de leurs pensions",
    "accroche": "Les retraités lot-et-garonnais mobilisés devant le siège du Medef pour réclamer une revalorisation de leurs pensions"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T15:19:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Social. Mobilisation lycéenne : près de 8 000 gardes à vue et 26 détentions provisoires depuis le début du mouvement",
-     "url": "https://www.dna.fr/education/2026/10/14/blocus-des-lycees-pres-de-8000-gardes-a-vue-et-26-detentions-provisoires-annonce-la-chancellerie",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T15:19:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -2938,8 +3430,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Damien Maudet : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Pointe le député La France insoumise Damien Maudet",
    "accroche": "Pointe le député La France insoumise Damien Maudet",
@@ -3337,46 +3830,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T14:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Éducation. Mobilisation lycéenne : près de 150 blessés parmi le personnel enseignant, selon Sébastien Lecornu",
-     "url": "https://www.dna.fr/education/2026/10/14/blocus-lyceens-pres-de-150-blesses-parmi-le-personnel-enseignant-selon-lecornu",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T14:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation : mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-14T14:26:00.000Z",
@@ -3595,34 +4048,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T13:56:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Éducation. Lycées : sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
-     "url": "https://www.dna.fr/politique/2026/10/14/sur-les-3-000-professeurs-remplacants-annonces-les-deux-tiers-ont-ete-affectes",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T13:56:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation : mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "fait": "Sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés",
-   "accroche": "Sur les 3 000 professeurs remplaçants annoncés, les deux tiers ont été affectés"
   },
   {
    "medias": 1,
@@ -4042,6 +4467,48 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T12:56:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Philippe Tabarot",
+      "photo": "photos/personnalites/philippe-tabarot.jpg",
+      "credit": "Nicolas Kovarik / European Union, 2025 / EC - Audiovisual Service, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Haute-Loire. Philippe Tabarot, ministre des Transports, visitera le chantier de la RN88 ce jeudi",
+     "url": "https://www.leprogres.fr/economie/2026/10/14/philippe-tabarot-ministre-des-transports-visitera-le-chantier-de-la-rn88-ce-jeudi",
+     "media": "Le Progrès",
+     "date": "2026-10-14T12:56:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ministre des transports : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Philippe Tabarot, ministre des Transports, visitera le chantier de la RN88",
+   "accroche": "Philippe Tabarot, ministre des Transports, visitera le chantier de la RN88",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Philippe Tabarot : ministre des transports",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-10-14T12:55:14.000Z",
@@ -4454,34 +4921,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T11:55:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
-     "url": "https://www.dna.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T11:55:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : vote sur une affaire internationale",
-    "origine": "regles"
-   },
-   "fait": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
-   "accroche": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Obs"
    ],
    "derniere": "2026-10-14T11:42:59.000Z",
@@ -4546,62 +4985,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T11:34:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Seine-Saint-Denis. « 15 à 20 détonations » : une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/10/14/15-a-20-detonations-une-senatrice-prise-dans-une-fusillade-alors-qu-elle-accompagnait-des-policiers",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T11:34:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers",
-   "accroche": "Une sénatrice prise dans une fusillade alors qu'elle accompagnait des policiers"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T11:19:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
-     "url": "https://www.dna.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T11:19:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
-   "accroche": "Le gouvernement renforce la prévention face à la détresse des agriculteurs"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24"
    ],
    "derniere": "2026-10-14T11:06:42.000Z",
@@ -4643,302 +5026,6 @@
      "source": "Commission des sondages (notice Harris)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-14T11:02:55.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Edwige Diaz",
-      "photo": "photos/personnalites/edwige-diaz.jpg",
-      "photoHd": "photos/personnalites/hd/edwige-diaz.jpg",
-      "parti": "UNT",
-      "lien": "#senateur-20390P",
-      "credit": "Marsouinduteich, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Écrits antisémites attribués à Jordan Bardella: “Je sais très bien que Jordan Bardella n’a pas écrit ces propos”, soutient Edwige Diaz, présidente du groupe RN au Sénat",
-     "url": "https://www.bfmtv.com/politique/video-ecrits-antisemites-attribues-a-jordan-bardella-je-sais-tres-bien-que-jordan-bardella-n-a-pas-ecrit-ces-propos-soutient-edwige-diaz-presidente-du-groupe-rn-au-senat_VN-202610140445.html",
-     "media": "BFMTV",
-     "date": "2026-10-14T11:02:55.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-10-14T11:01:04.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Les Misérables, l'expo Gustave Fayet : la sélection culturelle de la semaine",
-     "url": "https://www.lejdd.fr/culture/les-miserables-lexpo-gustave-fayet-la-selection-culturelle-de-la-semaine-186024",
-     "media": "Le JDD",
-     "date": "2026-10-14T11:01:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Élections : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-14T10:57:10.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Edwige Diaz",
-      "photo": "photos/personnalites/edwige-diaz.jpg",
-      "photoHd": "photos/personnalites/hd/edwige-diaz.jpg",
-      "parti": "UNT",
-      "lien": "#senateur-20390P",
-      "credit": "Marsouinduteich, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "\"On ne peut pas soutenir ce budget\", assure Edwige Diaz, sénatrice RN de Gironde",
-     "url": "https://www.bfmtv.com/politique/video-on-ne-peut-pas-soutenir-ce-budget-assure-edwige-diaz-senatrice-rn-de-gironde_VN-202610140441.html",
-     "media": "BFMTV",
-     "date": "2026-10-14T10:57:10.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-14T10:40:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Charles Alloncle",
-      "photo": "photos/deputes/PA841207.jpg",
-      "photoHd": "photos/deputes/hd/PA841207.jpg",
-      "parti": "UDR",
-      "lien": "#depute-PA841207",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "UDR"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Le député UDR Charles Alloncle sera en dédicace ce samedi 17 octobre 2026 à Menton",
-     "url": "https://www.nicematin.com/societe/politique/le-depute-udr-charles-alloncle-sera-en-dedicace-ce-samedi-17-octobre-2026-a-menton-10740823",
-     "media": "Nice-Matin",
-     "date": "2026-10-14T10:40:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Charles Alloncle : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le député Union des droites pour la République Charles Alloncle sera en dédicace ce samedi 17 octobre 2026 à Menton",
-   "accroche": "Le député Union des droites pour la République Charles Alloncle sera en dédicace ce samedi 17 octobre 2026 à Menton",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Charles Alloncle : député UDR (Hérault)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-14T10:37:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Loi sur la fin de vie : «Les députés ont voté sans mode d'emploi», regrette Laurent Frémont",
-     "url": "https://www.europe1.fr/societe/loi-sur-la-fin-de-vie-les-deputes-ont-vote-sans-mode-demploi-regrette-laurent-fremont-1147952?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-14T10:37:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : vote sur le social et l'emploi",
-    "origine": "regles"
-   },
-   "fait": "Laurent Frémont regrette : « Les députés ont voté sans mode d'emploi »",
-   "accroche": "Laurent Frémont regrette : « Les députés ont voté sans mode d'emploi »"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T10:36:35.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : parler ou rester muet ? Comment les candidats à la présidentielle abordent les tentatives d’ingérence",
-     "url": "https://www.sudouest.fr/politique/raphael-glucksmann/parler-ou-rester-muet-comment-les-candidats-a-la-presidentielle-abordent-les-tentatives-d-ingerence-31066997.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T10:36:35.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-14T10:33:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fin de vie : la mise en oeuvre de la loi se poursuit malgré le malaise de certaines équipes de soins palliatifs",
-     "url": "https://www.europe1.fr/politique/fin-de-vie-la-mise-en-oeuvre-de-la-loi-se-poursuit-malgre-le-malaise-de-certaines-equipes-de-soins-palliatifs-1147160?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-14T10:33:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La mise en oeuvre de la loi se poursuit malgré le malaise de certaines équipes de soins palliatifs",
-   "accroche": "La mise en oeuvre de la loi se poursuit malgré le malaise de certaines équipes de soins palliatifs"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T10:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "« J’ai la perception qu’Habitat 17 dépense moins que ce qu’il annonce » : à Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public",
-     "url": "https://www.sudouest.fr/charente-maritime/royan/j-ai-la-perception-qu-habitat-17-depense-moins-que-ce-qu-il-annonce-a-royan-l-elu-d-opposition-nicolas-calbrix-revient-a-la-charge-sur-l-abattement-fiscal-accorde-au-bailleur-social-public-31057010.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T10:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : annonces sur les finances publiques",
-    "origine": "regles"
-   },
-   "fait": "À Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public",
-   "accroche": "À Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-14T10:18:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation lycéenne: «Sur le terrain, rien n’indique l’essoufflement prédit par le gouvernement»",
-     "url": "https://www.mediapart.fr/journal/france/141026/mobilisation-lyceenne-sur-le-terrain-rien-n-indique-l-essoufflement-predit-par-le-gouvernement",
-     "media": "Mediapart",
-     "date": "2026-10-14T10:18:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
   }
  ]
 }
