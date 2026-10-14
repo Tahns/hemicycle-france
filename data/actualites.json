@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-13T23:55:34.352Z",
+ "lastUpdated": "2026-10-14T00:01:15.123Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Public Sénat",
@@ -155,8 +155,8 @@
    "motifs": [
     "lycéens",
     "mobilisation",
-    "mouvement",
-    "colère"
+    "manifestants",
+    "mouvement"
    ],
    "medias": [
     "RFI",
@@ -167,6 +167,7 @@
     "Europe 1",
     "France 24",
     "Public Sénat",
+    "Hugo Décrypte",
     "Mediapart",
     "L'Humanité",
     "Le Télégramme",
@@ -177,7 +178,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "mediasDistincts": 15,
+   "mediasDistincts": 16,
    "sources": [
     "France Médias Monde",
     "Groupe Bolloré",
@@ -185,6 +186,7 @@
     "BFMTV",
     "Sud Ouest",
     "Public Sénat",
+    "Hugo Décrypte",
     "Mediapart",
     "L'Humanité",
     "Le Télégramme",
@@ -195,7 +197,7 @@
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 56,
+   "nb": 61,
    "derniere": "2026-10-13T22:02:42.000Z",
    "articles": [
     {
@@ -246,6 +248,13 @@
      "titre": "Mobilisation lycéenne : Laurent Nuñez annonce l’ouverture de 36 enquêtes par l’IGPN dont quatre pour des « blessures mutilantes »",
      "url": "https://www.publicsenat.fr/actualites/politique/mobilisation-lyceenne-laurent-nunez-annonce-louverture-de-36-enquetes-par-ligpn-dont-quatre-pour-des-blessures-mutilantes",
      "date": "2026-10-13T18:15:53.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
+     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
+     "date": "2026-10-13T18:12:13.000Z",
+     "video": true
     },
     {
      "media": "Mediapart",
@@ -1010,7 +1019,7 @@
    "contexte": [
     {
      "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
+     "texte": "À l'ordre du jour de l'Assemblée le 29 octobre",
      "source": "Assemblée nationale (agenda officiel)"
     }
    ]
@@ -1852,14 +1861,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "François Hollande",
-      "photo": "photos/deputes/PA1654.jpg",
-      "photoHd": "photos/deputes/hd/PA1654.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA1654",
-      "credit": "Assemblée nationale"
-     },
-     {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
@@ -1868,33 +1869,22 @@
      }
     ],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "\"À lui de créer la dynamique\": François Hollande réagit à la victoire de Raphaël Glucksmann à la primaire sociale-démocrate",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/a-lui-de-creer-la-dynamique-francois-hollande-reagit-a-la-victoire-de-raphael-glucksmann-a-la-primaire-sociale-democrate_AV-202610130910.html",
+     "titre": "Raphaël Glucksmann",
+     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
      "media": "BFMTV",
      "date": "2026-10-13T20:15:51.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "François Hollande : réponse sur la primaire socialiste et démocrate",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Harris pour M6 et RTL (terrain : 5-8 octobre 2026, 2 004 personnes, marge d'erreur ±2,2 pts) : Hollande 7 %, Glucksmann 10–11 %",
-     "source": "Commission des sondages (notice Harris)"
-    },
-    {
-     "type": "personnes",
-     "texte": "François Hollande : député SOC (Corrèze)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1949,6 +1939,14 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
+     },
+     {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
@@ -1957,22 +1955,33 @@
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
+     "titre": "\"À lui de créer la dynamique\": François Hollande réagit à la victoire de Raphaël Glucksmann à la primaire sociale-démocrate",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/a-lui-de-creer-la-dynamique-francois-hollande-reagit-a-la-victoire-de-raphael-glucksmann-a-la-primaire-sociale-democrate_AV-202610130910.html",
      "media": "BFMTV",
      "date": "2026-10-13T20:15:51.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
+    "titre": "François Hollande : réponse sur la primaire socialiste et démocrate",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Harris pour M6 et RTL (terrain : 5-8 octobre 2026, 2 004 personnes, marge d'erreur ±2,2 pts) : Hollande 7 %, Glucksmann 10–11 %",
+     "source": "Commission des sondages (notice Harris)"
+    },
+    {
+     "type": "personnes",
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2819,6 +2828,126 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-10-13T18:12:13.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
+     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-13T18:12:13.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "fait": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre",
+   "accroche": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-10-13T18:10:09.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sur cette carte partagée par un politique allemand, l’Alsace et la Moselle ne sont plus françaises",
+     "url": "https://www.youtube.com/shorts/75FLbjR8Evs",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-13T18:10:09.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Collectivités locales : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-10-13T18:08:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "La réaction de la militante écologiste Greta Thunberg lors d’une battle d’aura devant un lycée.",
+     "url": "https://www.youtube.com/shorts/iWI28DNUqOk",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-13T18:08:55.000Z",
+     "video": true
+    },
+    {
+     "titre": "La militante écologiste Greta Thunberg en France pour soutenir les lycéens",
+     "url": "https://www.youtube.com/shorts/TD7oMOkvDc8",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-13T18:06:53.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-10-13T18:07:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Cet homme propose aux lycéens d’imprimer leurs pancartes pendant les manifestations.",
+     "url": "https://www.youtube.com/shorts/rORzSCzZ7k4",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-13T18:07:40.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : annonces sur la mobilisation lycéenne",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "La Croix"
    ],
    "derniere": "2026-10-13T18:01:01.000Z",
@@ -3412,7 +3541,7 @@
    "contexte": [
     {
      "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
+     "texte": "À l'ordre du jour de l'Assemblée le 29 octobre",
      "source": "Assemblée nationale (agenda officiel)"
     }
    ]
@@ -3647,7 +3776,7 @@
    "contexte": [
     {
      "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
+     "texte": "À l'ordre du jour de l'Assemblée le 29 octobre",
      "source": "Assemblée nationale (agenda officiel)"
     }
    ]
@@ -4594,131 +4723,6 @@
    },
    "fait": "Le nouveau conseil des enfants et des jeunes est installé",
    "accroche": "Le nouveau conseil des enfants et des jeunes est installé"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-10-13T15:26:25.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grand oral, Zemmour au Mondial de l'Auto, Nord Stream... Les 4 infos dont vous allez entendre parler demain",
-     "url": "https://www.lejdd.fr/politique/grand-oral-zemmour-au-mondial-de-lauto-nord-stream-les-4-infos-dont-vous-allez-entendre-parler-demain-185958",
-     "media": "Le JDD",
-     "date": "2026-10-13T15:26:25.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Zemmour : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-13T15:24:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Sainte-Soline: le gouvernement méprise encore la biodiversité",
-     "url": "https://www.mediapart.fr/journal/ecologie/131026/sainte-soline-le-gouvernement-meprise-encore-la-biodiversite",
-     "media": "Mediapart",
-     "date": "2026-10-13T15:24:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce qu'il faut savoir sur l'environnement",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-13T15:19:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "« Quand il n’y a plus d’argent, on le ressent » : en Dordogne, la mobilisation lycéenne faiblit mais se poursuit",
-     "url": "https://www.sudouest.fr/dordogne/perigueux/quand-il-n-y-a-plus-d-argent-on-le-ressent-en-dordogne-la-mobilisation-lyceenne-faiblit-mais-se-poursuit-31049218.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-13T15:19:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-13T15:17:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Loi intégrale: l'Assemblée nationale vote la création d'un congé pour violences sexuelles",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-loi-integrale-l-assemblee-nationale-vote-la-creation-d-un-conge-pour-violences-sexuelles_VN-202610130688.html",
-     "media": "BFMTV",
-     "date": "2026-10-13T15:17:14.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : ce qu'il faut savoir sur violences sexuelles",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L'Assemblée nationale vote la création d'un congé pour violences sexuelles",
-   "accroche": "L'Assemblée nationale vote la création d'un congé pour violences sexuelles",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 13 octobre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
   }
  ]
 }
