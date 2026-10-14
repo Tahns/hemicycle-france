@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-14T12:31:01.169Z",
+ "lastUpdated": "2026-10-14T12:35:33.613Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -85,12 +85,12 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -150,55 +150,255 @@
  ],
  "dossiers": [
   {
+   "id": "lyceens",
+   "titre": "Lycées",
+   "motifs": [
+    "lycéens",
+    "jeunesse",
+    "mobilisation",
+    "macron"
+   ],
+   "medias": [
+    "BFMTV",
+    "L'Humanité",
+    "Le Télégramme",
+    "L'Est républicain",
+    "Public Sénat",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "Mediapart",
+    "Le Monde",
+    "France 24",
+    "La Dépêche",
+    "Sud Ouest",
+    "Valeurs actuelles",
+    "Europe 1",
+    "RFI",
+    "Le JDD",
+    "Hugo Décrypte",
+    "20 Minutes",
+    "L'Express",
+    "L'Obs",
+    "Nice-Matin",
+    "Libération"
+   ],
+   "mediasDistincts": 18,
+   "sources": [
+    "BFMTV",
+    "L'Humanité",
+    "Le Télégramme",
+    "EBRA",
+    "Public Sénat",
+    "Mediapart",
+    "Le Monde",
+    "France Médias Monde",
+    "La Dépêche",
+    "Sud Ouest",
+    "Valeurs actuelles",
+    "Groupe Bolloré",
+    "Hugo Décrypte",
+    "20 Minutes",
+    "L'Express",
+    "L'Obs",
+    "Nice-Matin",
+    "Libération"
+   ],
+   "nb": 76,
+   "derniere": "2026-10-14T12:23:25.000Z",
+   "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "DIRECT. Colère des lycéens: Emmanuel Macron déplore que les \"angoisses légitimes\" de la jeunesse soient \"exploitées politiquement\"",
+     "url": "https://www.bfmtv.com/politique/direct-budget-les-deputes-poursuivent-l-etude-du-projet-de-loi-de-finances-a-l-assemblee-nationale-la-dette-et-la-presidentielle-dans-les-esprits_LN-202610140147.html",
+     "date": "2026-10-14T12:23:25.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Budget 2027 : l’Union confédérale des Retraités se mobilise contre le gel des pensions",
+     "url": "https://www.humanite.fr/social-et-economie/financement-des-retraites/budget-2027-lunion-confederale-des-retraites-lance-un-appel-a-la-mobilisation-contre-le-gel-des-pensions",
+     "date": "2026-10-14T11:18:23.000Z"
+    },
+    {
+     "media": "Le Télégramme",
+     "titre": "Remous à Diwan, colère lycéenne en Bretagne, Polony candidate à la présidentielle : le point à la mi-journée",
+     "url": "https://www.letelegramme.fr/bretagne/toutes-les-infos/remous-a-diwan-colere-lyceenne-en-bretagne-polony-candidate-a-la-presidentielle-le-point-a-la-mi-journee-7138013.php",
+     "date": "2026-10-14T11:00:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Lucey. L’avenir se construit avec Les Mirabelles, un espace d’échanges",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/l-avenir-se-construit-avec-les-mirabelles-un-espace-d-echanges",
+     "date": "2026-10-14T10:56:26.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
+     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
+     "date": "2026-10-14T10:28:45.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "date": "2026-10-14T10:20:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.dna.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "date": "2026-10-14T10:20:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "date": "2026-10-14T10:20:00.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Mobilisation lycéenne: «Sur le terrain, rien n’indique l’essoufflement prédit par le gouvernement»",
+     "url": "https://www.mediapart.fr/journal/france/141026/mobilisation-lyceenne-sur-le-terrain-rien-n-indique-l-essoufflement-predit-par-le-gouvernement",
+     "date": "2026-10-14T10:18:40.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Mobilisation lycéenne : la stratégie erratique d’un gouvernement pris de court",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/14/mobilisation-lyceenne-la-strategie-erratique-d-un-gouvernement-pris-de-court_6793714_823448.html",
+     "date": "2026-10-14T09:33:17.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Mouvement lycéen : les blocages se poursuivent avant la nouvelle journée de mobilisation samedi",
+     "url": "https://www.france24.com/fr/france/20261014-mouvement-lyc%C3%A9en-les-blocages-se-poursuivent-avant-la-nouvelle-journ%C3%A9e-de-mobilisation-samedi",
+     "date": "2026-10-14T09:19:45.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Blocages des lycées : \"Une instrumentalisation politicienne\" dénonce Françoise Gatel, ministre de l'Aménagement du territoire",
+     "url": "https://www.ladepeche.fr/2026/10/14/blocages-des-lycees-une-instrumentalisation-politicienne-denonce-francoise-gatel-ministre-de-lamenagement-du-territoire-13601236.php",
+     "date": "2026-10-14T07:53:04.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "DIRECT. Mobilisation des lycéens : Macron appelle le gouvernement à fournir « des réponses concrètes dans les semaines à venir », appel à rejoindre les gilets jaunes samedi... suivez le fil de la journée",
+     "url": "https://www.sudouest.fr/politique/education/direct-mobilisation-des-lyceens-toujours-des-blocages-appel-a-rejoindre-les-gilets-jaunes-samedi-le-point-ce-mercredi-14-octobre-31064864.php",
+     "date": "2026-10-14T07:29:15.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "À gauche, la victoire de Raphaël Glucksmann met l’avenir du PS en sursis",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/politique/a-gauche-la-victoire-de-raphael-glucksmann-met-lavenir-du-ps-en-sursis",
+     "date": "2026-10-14T07:05:18.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Emmanuel Macron réunit un conseil de défense sur l'IA",
+     "url": "https://www.europe1.fr/technologies/emmanuel-macron-reunit-un-conseil-de-defense-sur-lia-1147322?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-14T06:38:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mobilisation lycéenne en France: un déclic politique pour des jeunes avant la présidentielle",
+     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261013-mobilisation-lyc%C3%A9enne-en-france-un-d%C3%A9clic-politique-pour-des-jeunes-avant-la-pr%C3%A9sidentielle",
+     "date": "2026-10-13T22:02:42.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Émeutes lycéennes : «Il faut en finir avec l'excuse de minorité», martèle Éric Zemmour",
+     "url": "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988",
+     "date": "2026-10-13T21:45:43.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
+     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
+     "date": "2026-10-13T18:12:13.000Z",
+     "video": true
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
+     "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
+     "date": "2026-10-13T16:45:20.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "La jeunesse, oui, mais celle des villes : l’impasse de Jean-Luc Mélenchon",
+     "url": "https://www.lexpress.fr/politique/la-jeunesse-oui-mais-celle-des-villes-limpasse-de-jean-luc-melenchon-WNJOTL7TONBWXKQKCPVGCAPNQY/",
+     "date": "2026-10-13T09:16:39.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Laurent Nuñez face au mouvement lycéen : « Le président ne m’a jamais reproché une pseudo-répression policière »",
+     "url": "https://www.nouvelobs.com/politique/20261012.OBS119151/le-president-ne-m-a-jamais-reproche-une-pseudo-repression-policiere-laurent-nunez-un-ministre-de-l-interieur-face-au-mouvement-lyceen.html",
+     "date": "2026-10-13T07:54:34.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Avec Michel Rossi, il n’y a pas eu de passation de pouvoir et il s’obstine en faisant appel » : le plus jeune maire des Alpes-Maritimes se confie",
+     "url": "https://www.nicematin.com/societe/politique/avec-michel-rossi-il-n-y-a-pas-eu-de-passation-de-pouvoir-et-il-s-obstine-en-faisant-appel-le-plus-jeune-maire-des-alpes-maritimes-se-confie-10737258",
+     "date": "2026-10-13T03:00:02.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Mouvement lycéen et budget 2027 : deux fronts pour sauver l’avenir des jeunes",
+     "url": "https://www.liberation.fr/idees-et-debats/mouvement-lyceen-et-budget-2027-deux-fronts-pour-sauver-lavenir-des-jeunes-20261012_GFXPY7AYPJFEZK3KCPR4P5STUY/",
+     "date": "2026-10-12T18:49:56.000Z"
+    }
+   ]
+  },
+  {
    "id": "presidentielle",
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
     "candidature",
-    "milliards",
-    "économies"
+    "essayiste",
+    "ingérences"
    ],
    "medias": [
     "Public Sénat",
     "La Dépêche",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
     "Le Télégramme",
     "Sud Ouest",
-    "BFMTV",
     "France 24",
     "L'Express",
     "France Inter",
     "Valeurs actuelles",
     "20 Minutes",
     "Libération",
+    "BFMTV",
     "Le JDD",
     "Le Monde",
     "RFI",
     "Nice-Matin",
     "Europe 1",
     "Le Figaro",
-    "Ouest-France",
     "L'Obs"
    ],
-   "mediasDistincts": 18,
+   "mediasDistincts": 17,
    "sources": [
     "Public Sénat",
     "La Dépêche",
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "Le Télégramme",
     "Sud Ouest",
-    "BFMTV",
     "France Médias Monde",
     "L'Express",
     "France Inter",
     "Valeurs actuelles",
     "20 Minutes",
     "Libération",
+    "BFMTV",
     "Groupe Bolloré",
     "Le Monde",
     "Nice-Matin",
     "Le Figaro",
-    "Ouest-France",
     "L'Obs"
    ],
    "nb": 57,
@@ -217,9 +417,27 @@
      "date": "2026-10-14T12:07:10.000Z"
     },
     {
+     "media": "Le Progrès",
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
      "url": "https://www.dna.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.ledauphine.com/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
      "date": "2026-10-14T11:55:00.000Z"
     },
     {
@@ -233,13 +451,6 @@
      "titre": "Présidentielle 2027 : parler ou rester muet ? Comment les candidats à la présidentielle abordent les tentatives d’ingérence",
      "url": "https://www.sudouest.fr/politique/raphael-glucksmann/parler-ou-rester-muet-comment-les-candidats-a-la-presidentielle-abordent-les-tentatives-d-ingerence-31066997.php",
      "date": "2026-10-14T10:36:35.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Le budget 2027 de LFI prévoit que 25 milliards d'euros soient dédiés à la \"diminution\" de la dette",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-le-budget-2027-de-lfi-prevoit-que-25-milliards-d-euros-soient-dedies-a-la-diminution-de-la-dette_VN-202610140414.html",
-     "date": "2026-10-14T10:17:44.000Z",
-     "video": true
     },
     {
      "media": "France 24",
@@ -278,6 +489,13 @@
      "date": "2026-10-14T06:41:51.000Z"
     },
     {
+     "media": "BFMTV",
+     "titre": "Présidentielle 2027: Natacha Polony, éditorialiste politique, annonce sa candidature à l'élection",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-2027-natacha-polony-editorialiste-politique-annonce-sa-candidature-a-l-election_VN-202610140222.html",
+     "date": "2026-10-14T06:40:41.000Z",
+     "video": true
+    },
+    {
      "media": "Le JDD",
      "titre": "Présidentielle 2027 : Natacha Polony annonce sa candidature",
      "url": "https://www.lejdd.fr/politique/presidentielle-2027-natacha-polony-annonce-sa-candidature-185994",
@@ -314,12 +532,6 @@
      "date": "2026-10-13T21:32:49.000Z"
     },
     {
-     "media": "Ouest-France",
-     "titre": "Budget 2027 : les retraités sont-ils des « nantis » qu’il faudrait surtaxer ? Deux économistes ferraillent",
-     "url": "https://www.ouest-france.fr/economie/retraites/budget-2027-les-retraites-sont-ils-des-nantis-quil-faudrait-surtaxer-deux-economistes-ferraillent-5484dc4c-c1a3-11f1-97ef-829bf84bf59f?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "date": "2026-10-13T15:00:47.000Z"
-    },
-    {
      "media": "L'Obs",
      "titre": "Sa stratégie, son image… et Olivier Faure : les urgences du candidat Glucksmann pour lancer sa campagne",
      "url": "https://www.nouvelobs.com/politique/20261013.OBS119159/sa-strategie-son-image-et-olivier-faure-les-urgences-du-candidat-glucksmann-pour-lancer-sa-campagne.html",
@@ -328,63 +540,74 @@
    ]
   },
   {
-   "id": "lyceens",
-   "titre": "Lycées",
+   "id": "budget",
+   "titre": "Budget",
    "motifs": [
-    "lycéens",
-    "mobilisation",
-    "jeunesse",
-    "colère"
+    "budget",
+    "rejet",
+    "ouvert",
+    "compromis"
    ],
    "medias": [
-    "BFMTV",
-    "L'Humanité",
-    "Le Télégramme",
-    "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
-    "Mediapart",
     "Le Monde",
-    "France 24",
+    "Libération",
     "La Dépêche",
-    "Sud Ouest",
-    "RFI",
-    "Le JDD",
+    "L'Humanité",
+    "BFMTV",
+    "Public Sénat",
     "Europe 1",
-    "Hugo Décrypte",
-    "20 Minutes",
-    "Nice-Matin",
-    "L'Express",
-    "L'Obs",
-    "Libération"
-   ],
-   "mediasDistincts": 17,
-   "sources": [
-    "BFMTV",
-    "L'Humanité",
-    "Le Télégramme",
-    "Public Sénat",
-    "Dernières Nouvelles d'Alsace",
-    "Mediapart",
-    "Le Monde",
-    "France Médias Monde",
-    "La Dépêche",
     "Sud Ouest",
-    "Groupe Bolloré",
-    "Hugo Décrypte",
+    "Le Télégramme",
     "20 Minutes",
+    "Le Figaro",
+    "France 24",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
     "Nice-Matin",
-    "L'Express",
-    "L'Obs",
-    "Libération"
+    "Ouest-France",
+    "L'Express"
    ],
-   "nb": 59,
-   "derniere": "2026-10-14T12:23:25.000Z",
+   "mediasDistincts": 16,
+   "sources": [
+    "Le Monde",
+    "Libération",
+    "La Dépêche",
+    "L'Humanité",
+    "BFMTV",
+    "Public Sénat",
+    "Europe 1",
+    "Sud Ouest",
+    "Le Télégramme",
+    "20 Minutes",
+    "Le Figaro",
+    "France 24",
+    "EBRA",
+    "Nice-Matin",
+    "Ouest-France",
+    "L'Express"
+   ],
+   "nb": 53,
+   "derniere": "2026-10-14T12:13:52.000Z",
    "articles": [
     {
-     "media": "BFMTV",
-     "titre": "DIRECT. Colère des lycéens: Emmanuel Macron déplore que les \"angoisses légitimes\" de la jeunesse soient \"exploitées politiquement\"",
-     "url": "https://www.bfmtv.com/politique/direct-budget-les-deputes-poursuivent-l-etude-du-projet-de-loi-de-finances-a-l-assemblee-nationale-la-dette-et-la-presidentielle-dans-les-esprits_LN-202610140147.html",
-     "date": "2026-10-14T12:23:25.000Z"
+     "media": "Le Monde",
+     "titre": "Budget 2027 : 32 % des dépenses du ministère de l’éducation nationale dévolues aux retraites des fonctionnaires",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/14/budget-2027-32-des-depenses-du-ministere-de-l-education-nationale-devolues-aux-retraites-des-fonctionnaires_6793737_823448.html",
+     "date": "2026-10-14T12:13:52.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Elections municipales à Toulouse : le tribunal administratif rejette le recours de l’insoumis François Piquemal",
+     "url": "https://www.liberation.fr/politique/elections/elections-municipales-a-toulouse-le-tribunal-administratif-rejette-le-recours-de-linsoumis-francois-piquemal-20261014_FEFLYE3RFRBBRP2RRW3T6ZVNAU/",
+     "date": "2026-10-14T12:01:31.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Municipales à Toulouse : le tribunal rejette le recours de François Piquemal (LFI) contre l'élection de Jean-Luc Moudenc",
+     "url": "https://www.ladepeche.fr/2026/10/14/les-toulousains-ne-retourneront-pas-voter-le-tribunal-rejette-le-recours-de-francois-piquemal-lfi-contre-lelection-de-jean-luc-moudenc-13601515.php",
+     "date": "2026-10-14T11:20:40.000Z"
     },
     {
      "media": "L'Humanité",
@@ -393,212 +616,95 @@
      "date": "2026-10-14T11:18:23.000Z"
     },
     {
-     "media": "Le Télégramme",
-     "titre": "Remous à Diwan, colère lycéenne en Bretagne, Polony candidate à la présidentielle : le point à la mi-journée",
-     "url": "https://www.letelegramme.fr/bretagne/toutes-les-infos/remous-a-diwan-colere-lyceenne-en-bretagne-polony-candidate-a-la-presidentielle-le-point-a-la-mi-journee-7138013.php",
-     "date": "2026-10-14T11:00:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
-     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
-     "date": "2026-10-14T10:28:45.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
-     "url": "https://www.dna.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
-     "date": "2026-10-14T10:20:00.000Z"
-    },
-    {
-     "media": "Mediapart",
-     "titre": "Mobilisation lycéenne: «Sur le terrain, rien n’indique l’essoufflement prédit par le gouvernement»",
-     "url": "https://www.mediapart.fr/journal/france/141026/mobilisation-lyceenne-sur-le-terrain-rien-n-indique-l-essoufflement-predit-par-le-gouvernement",
-     "date": "2026-10-14T10:18:40.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Mobilisation lycéenne : la stratégie erratique d’un gouvernement pris de court",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/14/mobilisation-lyceenne-la-strategie-erratique-d-un-gouvernement-pris-de-court_6793714_823448.html",
-     "date": "2026-10-14T09:33:17.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Mouvement lycéen : les blocages se poursuivent avant la nouvelle journée de mobilisation samedi",
-     "url": "https://www.france24.com/fr/france/20261014-mouvement-lyc%C3%A9en-les-blocages-se-poursuivent-avant-la-nouvelle-journ%C3%A9e-de-mobilisation-samedi",
-     "date": "2026-10-14T09:19:45.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Blocages des lycées : \"Une instrumentalisation politicienne\" dénonce Françoise Gatel, ministre de l'Aménagement du territoire",
-     "url": "https://www.ladepeche.fr/2026/10/14/blocages-des-lycees-une-instrumentalisation-politicienne-denonce-francoise-gatel-ministre-de-lamenagement-du-territoire-13601236.php",
-     "date": "2026-10-14T07:53:04.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "DIRECT. Mobilisation des lycéens : Macron appelle le gouvernement à fournir « des réponses concrètes dans les semaines à venir », appel à rejoindre les gilets jaunes samedi... suivez le fil de la journée",
-     "url": "https://www.sudouest.fr/politique/education/direct-mobilisation-des-lyceens-toujours-des-blocages-appel-a-rejoindre-les-gilets-jaunes-samedi-le-point-ce-mercredi-14-octobre-31064864.php",
-     "date": "2026-10-14T07:29:15.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mobilisation lycéenne en France: un déclic politique pour des jeunes avant la présidentielle",
-     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261013-mobilisation-lyc%C3%A9enne-en-france-un-d%C3%A9clic-politique-pour-des-jeunes-avant-la-pr%C3%A9sidentielle",
-     "date": "2026-10-13T22:02:42.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Émeutes lycéennes : «Il faut en finir avec l'excuse de minorité», martèle Éric Zemmour",
-     "url": "https://www.lejdd.fr/politique/emeutes-lyceennes-il-faut-en-finir-avec-lexcuse-de-minorite-martele-eric-zemmour-185988",
-     "date": "2026-10-13T21:45:43.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Lycées, universités... «Cela fait des années que l'on désinvestit dans l'éducation», regrette le président de Paris-Dauphine",
-     "url": "https://www.europe1.fr/politique/lycees-universites-cela-fait-des-annees-que-lon-desinvestit-dans-leducation-regrette-le-president-de-paris-dauphine-1145294?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-13T19:00:00.000Z"
-    },
-    {
-     "media": "Hugo Décrypte",
-     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
-     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
-     "date": "2026-10-13T18:12:13.000Z",
+     "media": "BFMTV",
+     "titre": "\"On ne peut pas soutenir ce budget\", assure Edwige Diaz, sénatrice RN de Gironde",
+     "url": "https://www.bfmtv.com/politique/video-on-ne-peut-pas-soutenir-ce-budget-assure-edwige-diaz-senatrice-rn-de-gironde_VN-202610140441.html",
+     "date": "2026-10-14T10:57:10.000Z",
      "video": true
     },
     {
-     "media": "20 Minutes",
-     "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
-     "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
-     "date": "2026-10-13T16:45:20.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Les 14 millions de retraités concernés seront fixés mercredi : l’Agirc-Arrco tranchera sur le niveau d’augmentation des pensions complémentaires",
-     "url": "https://www.nicematin.com/conso/les-14-millions-de-retraites-concernes-seront-fixes-mercredi-l-agirc-arrco-tranchera-sur-le-niveau-d-augmentation-des-pensions-complementaires-10740393",
-     "date": "2026-10-13T10:02:51.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "La jeunesse, oui, mais celle des villes : l’impasse de Jean-Luc Mélenchon",
-     "url": "https://www.lexpress.fr/politique/la-jeunesse-oui-mais-celle-des-villes-limpasse-de-jean-luc-melenchon-WNJOTL7TONBWXKQKCPVGCAPNQY/",
-     "date": "2026-10-13T09:16:39.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Laurent Nuñez face au mouvement lycéen : « Le président ne m’a jamais reproché une pseudo-répression policière »",
-     "url": "https://www.nouvelobs.com/politique/20261012.OBS119151/le-president-ne-m-a-jamais-reproche-une-pseudo-repression-policiere-laurent-nunez-un-ministre-de-l-interieur-face-au-mouvement-lyceen.html",
-     "date": "2026-10-13T07:54:34.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Mouvement lycéen et budget 2027 : deux fronts pour sauver l’avenir des jeunes",
-     "url": "https://www.liberation.fr/idees-et-debats/mouvement-lyceen-et-budget-2027-deux-fronts-pour-sauver-lavenir-des-jeunes-20261012_GFXPY7AYPJFEZK3KCPR4P5STUY/",
-     "date": "2026-10-12T18:49:56.000Z"
-    }
-   ]
-  },
-  {
-   "id": "sociaux",
-   "titre": "Sociaux",
-   "motifs": [
-    "sociaux"
-   ],
-   "medias": [
-    "Sud Ouest",
-    "Europe 1",
-    "France Inter",
-    "L'Humanité",
-    "Le JDD",
-    "Le Monde",
-    "20 Minutes",
-    "Public Sénat",
-    "Libération"
-   ],
-   "mediasDistincts": 8,
-   "sources": [
-    "Sud Ouest",
-    "Groupe Bolloré",
-    "France Inter",
-    "L'Humanité",
-    "Le Monde",
-    "20 Minutes",
-    "Public Sénat",
-    "Libération"
-   ],
-   "nb": 12,
-   "derniere": "2026-10-14T10:30:00.000Z",
-   "articles": [
-    {
-     "media": "Sud Ouest",
-     "titre": "« J’ai la perception qu’Habitat 17 dépense moins que ce qu’il annonce » : à Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public",
-     "url": "https://www.sudouest.fr/charente-maritime/royan/j-ai-la-perception-qu-habitat-17-depense-moins-que-ce-qu-il-annonce-a-royan-l-elu-d-opposition-nicolas-calbrix-revient-a-la-charge-sur-l-abattement-fiscal-accorde-au-bailleur-social-public-31057010.php",
-     "date": "2026-10-14T10:30:00.000Z"
+     "media": "Public Sénat",
+     "titre": "Budget des collectivités territoriales : « On va demander une contribution progressive » pour 14 000 collectivités affirme Françoise Gatel",
+     "url": "https://www.publicsenat.fr/actualites/territoires/budget-des-collectivites-territoriales-on-va-demander-une-contribution-progressive-pour-14-000-collectivites-affirme-francoise-gatel",
+     "date": "2026-10-14T08:26:03.000Z"
     },
     {
      "media": "Europe 1",
-     "titre": "«Il se passe quelque chose» : sur les réseaux sociaux, le succès grandissant de David Lisnard",
-     "url": "https://www.europe1.fr/politique/il-se-passe-quelque-chose-sur-les-reseaux-sociaux-le-succes-grandissant-de-david-lisnard-1147643?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-14T10:11:32.000Z"
+     "titre": "Budget 2027 : l’Assemblée s’enflamme dès les premiers débats, le compromis s’éloigne",
+     "url": "https://www.europe1.fr/politique/budget-2027-lassemblee-senflamme-des-les-premiers-debats-le-compromis-seloigne-1147277?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-14T07:19:00.000Z"
     },
     {
      "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : « Il se passe quelque chose », David Lisnard, star des réseaux sociaux, espère une vraie percée dans les sondages",
-     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-il-se-passe-quelque-chose-david-lisnard-star-des-reseaux-sociaux-espere-une-vraie-percee-dans-les-sondages-31065752.php",
-     "date": "2026-10-14T09:10:18.000Z"
+     "titre": "Colère des lycéens : toujours des blocages au lendemain de la cinquième journée de mobilisation, 96 % des lycées ouverts ce mercredi",
+     "url": "https://www.sudouest.fr/france/colere-des-lyceens-toujours-des-blocages-au-lendemain-de-la-cinquieme-journee-de-mobilisation-96-des-lycees-ouverts-ce-mercredi-31064689.php",
+     "date": "2026-10-14T07:15:05.000Z"
     },
     {
-     "media": "France Inter",
-     "titre": "Présidentielle 2027 : l'ascension fulgurante de David Lisnard sur les réseaux sociaux",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/david-lisnard-est-il-en-train-de-se-faire-sa-place-a-droite-pour-la-presidentielle-6959727",
-     "date": "2026-10-14T08:45:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Retraités et lycéens refusent le concours Lépine de la casse sociale",
-     "url": "https://www.humanite.fr/politique/budget-2027/retraites-et-lyceens-refusent-le-concours-lepine-de-la-casse-sociale",
-     "date": "2026-10-14T07:56:03.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "«Ces vieux nous font la misère» : LFI accusée de jeter des proviseurs en pâture sur les réseaux sociaux",
-     "url": "https://www.lejdd.fr/Societe/ces-vieux-nous-font-la-misere-lfi-accusee-de-jeter-des-chefs-detablissement-en-pature-sur-les-reseaux-sociaux-185997",
-     "date": "2026-10-14T07:06:43.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Budget 2027 : après l’échec de la motion de rejet déposée par le Parti socialiste, les débats reprendront mercredi après-midi",
-     "url": "https://www.lemonde.fr/politique/live/2026/10/13/en-direct-budget-2027-les-debats-sur-le-projet-de-loi-de-finances-commencent-a-l-assemblee-nationale_6793072_823448.html",
-     "date": "2026-10-13T16:48:14.000Z"
+     "media": "Le Télégramme",
+     "titre": "« 96 % des lycées ouverts » ce mercredi, selon le ministre de l’Éducation nationale",
+     "url": "https://www.letelegramme.fr/france/96-des-lycees-ouverts-ce-mercredi-selon-le-ministre-de-leducation-nationale-7137816.php",
+     "date": "2026-10-14T07:02:00.000Z"
     },
     {
      "media": "20 Minutes",
-     "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
-     "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
-     "date": "2026-10-13T16:45:20.000Z"
+     "titre": "Budget 2027 : Le gouvernement est prêt à faire des « compromis », tant que le déficit public ne dépasse pas 5 %",
+     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4254153-20261014-budget-2027-gouvernement-pret-faire-compromis-tant-deficit-public-depasse-5?at_medium=display&at_campaign=149",
+     "date": "2026-10-14T07:00:43.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 de la Sécurité sociale : les sénateurs alertent sur le niveau « très ambitieux », voire « intenable » de l’objectif de dépenses de santé",
-     "url": "https://www.publicsenat.fr/actualites/sante/budget-2027-de-la-securite-sociale-les-senateurs-alertent-sur-le-niveau-tres-ambitieux-voire-intenable-de-lobjectif-de-depenses-de-sant",
-     "date": "2026-10-13T15:05:16.000Z"
+     "media": "Le Figaro",
+     "titre": "Ce que révèlent les données inédites sur le poids des retraites des fonctionnaires dans les dépenses budgétaires françaises",
+     "url": "https://www.lefigaro.fr/conjoncture/ce-que-revelent-les-donnees-inedites-sur-le-poids-des-retraites-dans-les-depenses-budgetaires-francaises-20261013",
+     "date": "2026-10-14T06:17:42.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Associé au nazisme sur les réseaux sociaux, le maire de Besançon porte plainte",
-     "url": "https://www.20minutes.fr/politique/4253782-20261013-associe-nazisme-reseaux-sociaux-maire-besancon-porte-plainte?at_medium=display&at_campaign=149",
-     "date": "2026-10-13T02:25:17.000Z"
+     "media": "France 24",
+     "titre": "Budget 2027 de la France : le débat s'est ouvert à l'Assemblée nationale, objectif déficit à 5 %",
+     "url": "https://www.france24.com/fr/france/20261013-budget-2027-debat-ouvert-assemblee-nationale-deficit-dette-retraites",
+     "date": "2026-10-13T23:18:53.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "« L’union, ça ne peut pas être l’union des seuls socialistes », prévient François Hollande",
-     "url": "https://www.publicsenat.fr/actualites/politique/lunion-ca-ne-peut-pas-etre-lunion-des-seuls-socialistes-previent-francois-hollande",
-     "date": "2026-10-12T17:10:54.000Z"
+     "media": "Le Progrès",
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "date": "2026-10-13T22:01:00.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Raphaël Glucksmann peut-il rendre désirable la social-démocratie ?",
-     "url": "https://www.liberation.fr/politique/raphael-glucksmann-peut-il-rendre-desirable-la-social-democratie-20261012_QMQZMGVMYBCEBEEPO6ZJVOVUYE/",
-     "date": "2026-10-12T14:24:29.000Z"
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.dna.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Il est temps d’accepter la défaite » : le recours contre les élections municipales de Draguignan a été rejeté par la justice",
+     "url": "https://www.nicematin.com/societe/politique/il-est-temps-d-accepter-la-defaite-le-recours-contre-les-elections-municipales-de-draguignan-a-ete-rejete-par-la-justice-10740431",
+     "date": "2026-10-13T15:17:04.000Z"
+    },
+    {
+     "media": "Ouest-France",
+     "titre": "Budget 2027 : les retraités sont-ils des « nantis » qu’il faudrait surtaxer ? Deux économistes ferraillent",
+     "url": "https://www.ouest-france.fr/economie/retraites/budget-2027-les-retraites-sont-ils-des-nantis-quil-faudrait-surtaxer-deux-economistes-ferraillent-5484dc4c-c1a3-11f1-97ef-829bf84bf59f?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "date": "2026-10-13T15:00:47.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "Réforme des retraites : la manoeuvre de Gabriel Attal et Edouard Philippe qui gêne Sébastien Lecornu",
+     "url": "https://www.lexpress.fr/politique/gabriel-attal-et-edouard-philippe-vont-remettre-la-reforme-des-retraites-dans-les-pattes-de-7GAPP4NVRZHV5EK3L5IS75F75E/",
+     "date": "2026-10-13T04:00:00.000Z"
     }
    ]
   }
@@ -608,13 +714,13 @@
    "medias": 6,
    "mediasDistincts": 5,
    "sources": [
+    "L'Obs",
     "20 Minutes",
     "Groupe Bolloré",
-    "L'Obs",
     "Le Monde",
     "France 24"
    ],
-   "derniere": "2026-10-14T03:58:46.000Z",
+   "derniere": "2026-10-14T09:07:47.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -627,6 +733,12 @@
      "url": "https://www.europe1.fr/societe/violences-sexistes-et-sexuelles-la-proposition-de-loi-integrale-adoptee-a-lunanimite-a-lassemblee-1145636?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "media": "Europe 1",
      "date": "2026-10-13T16:22:55.000Z"
+    },
+    {
+     "titre": "Loi intégrale : que contient le texte contre les violences sexuelles adopté à l’unanimité à l’Assemblée ?",
+     "url": "https://www.nouvelobs.com/politique/20261013.OBS119178/loi-integrale-que-contient-le-texte-contre-les-violences-sexuelles-adopte-a-l-unanimite-a-l-assemblee.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T09:07:47.000Z"
     },
     {
      "titre": "Violences sexistes et sexuelles : Que contient la « loi intégrale » votée à l’unanimité par les députés ?",
@@ -647,12 +759,6 @@
      "date": "2026-10-13T17:15:25.000Z"
     },
     {
-     "titre": "Loi intégrale : que contient le texte contre les violences sexuelles adopté à l’unanimité à l’Assemblée ?",
-     "url": "https://www.nouvelobs.com/politique/20261013.OBS119178/loi-integrale-que-contient-le-texte-contre-les-violences-sexuelles-adopte-a-l-unanimite-a-l-assemblee.html",
-     "media": "L'Obs",
-     "date": "2026-10-13T16:51:13.000Z"
-    },
-    {
      "titre": "VSS : l’Assemblée adopte la proposition de loi intégrale contre les violences sexistes et sexuelles, à l’unanimité des votants",
      "url": "https://www.lemonde.fr/politique/article/2026/10/13/vss-l-assemblee-adopte-la-proposition-de-loi-integrale-contre-les-violences-sexistes-et-sexuelles-a-l-unanimite-des-votants_6793147_823448.html",
      "media": "Le Monde",
@@ -671,7 +777,7 @@
    },
    "fait": "Que contient le texte contre les violences sexuelles adopté à l’unanimité à l’Assemblée ?",
    "accroche": "Que contient le texte contre les violences sexuelles adopté à l’unanimité à l’Assemblée ?",
-   "essentiel": "L’Assemblée adopte la loi proposée par des parlementaires intégrale contre les violences sexistes et sexuelles, à l’unanimité des votants. Six médias en parlent : Europe 1, 20 Minutes, Le JDD, L'Obs, Le Monde et France 24.",
+   "essentiel": "L’Assemblée adopte la loi proposée par des parlementaires intégrale contre les violences sexistes et sexuelles, à l’unanimité des votants. Six médias en parlent : Europe 1, L'Obs, 20 Minutes, Le JDD, Le Monde et France 24.",
    "contexte": [
     {
      "type": "agenda",
@@ -738,12 +844,12 @@
    "essentiel": "Elle veut proposer « une politique de production » : l’essayiste Natacha Polony annonce sa candidature à l’élection présidentielle. Quatre médias en parlent : BFMTV, La Dépêche, Nice-Matin et Europe 1."
   },
   {
-   "medias": 3,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "BFMTV",
     "Public Sénat",
-    "Dernières Nouvelles d'Alsace"
+    "EBRA"
    ],
    "derniere": "2026-10-14T12:23:25.000Z",
    "illustration": {
@@ -761,10 +867,10 @@
    },
    "articles": [
     {
-     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
-     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
-     "media": "Public Sénat",
-     "date": "2026-10-14T10:28:45.000Z"
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "media": "Le Progrès",
+     "date": "2026-10-14T10:20:00.000Z"
     },
     {
      "titre": "DIRECT. Colère des lycéens: Emmanuel Macron déplore que les \"angoisses légitimes\" de la jeunesse soient \"exploitées politiquement\"",
@@ -779,9 +885,27 @@
      "date": "2026-10-14T10:47:26.000Z"
     },
     {
+     "titre": "Blocus lycéen : Emmanuel Macron déplore que les « angoisses légitimes » des jeunes soient « exploitées politiquement »",
+     "url": "https://www.publicsenat.fr/actualites/politique/blocus-lyceen-emmanuel-macron-deplore-que-les-angoisses-legitimes-des-jeunes-soient-exploitees-politiquement",
+     "media": "Public Sénat",
+     "date": "2026-10-14T10:28:45.000Z"
+    },
+    {
      "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
      "url": "https://www.dna.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
      "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T10:20:00.000Z"
+    },
+    {
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T10:20:00.000Z"
+    },
+    {
+     "titre": "Politique. Blocus lycéen : Macron déplore l’exploitation politique des « angoisses » de la jeune génération",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/blocus-lyceen-macron-deplore-l-exploitation-politique-des-angoisses-de-la-jeune-generation",
+     "media": "L'Est républicain",
      "date": "2026-10-14T10:20:00.000Z"
     }
    ],
@@ -834,8 +958,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociaux",
-    "origine": "dossier"
+    "titre": "Réseaux sociaux",
+    "origine": "recoupement"
    },
    "fait": "David Lisnard, star des réseaux sociaux, espère une vraie percée dans les sondages",
    "accroche": "David Lisnard, star des réseaux sociaux, espère une vraie percée dans les sondages",
@@ -901,6 +1025,172 @@
      "source": "Commission des sondages (notice Harris)"
     }
    ]
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 2,
+   "sources": [
+    "EBRA",
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-14T11:55:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "Le Progrès",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.dna.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.ledauphine.com/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
+     "media": "L'Est républicain",
+     "date": "2026-10-14T11:55:00.000Z"
+    },
+    {
+     "titre": "Un projet de loi de lutte contre les ingérences étrangères arrive au Sénat, à six mois de l’élection présidentielle",
+     "url": "https://www.nicematin.com/societe/politique/un-projet-de-loi-de-lutte-contre-les-ingerences-etrangeres-arrive-au-senat-a-six-mois-de-l-election-presidentielle-10740559",
+     "media": "Nice-Matin",
+     "date": "2026-10-14T04:44:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : vote sur une affaire internationale",
+    "origine": "regles"
+   },
+   "fait": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+   "accroche": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
+   "essentiel": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin. Une loi proposée par le Gouvernement de lutte contre les ingérences étrangères arrive au Sénat, à six mois de l’élection présidentielle. Cinq médias en parlent."
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T06:43:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+     "url": "https://www.leprogres.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
+     "media": "Le Progrès",
+     "date": "2026-10-14T06:09:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : L’essayiste et journaliste Natacha Polony se déclare candidate, ce n’est que la 28e",
+     "url": "https://www.20minutes.fr/politique/4254145-20261014-presidentielle-2027-essayiste-journaliste-natacha-polony-declare-candidate-28e?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-14T06:43:41.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+     "url": "https://www.dna.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T06:09:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+     "url": "https://www.ledauphine.com/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T06:09:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
+     "media": "L'Est républicain",
+     "date": "2026-10-14T06:09:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : annonces sur l'action du gouvernement",
+    "origine": "regles"
+   },
+   "fait": "L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+   "accroche": "L'essayiste Natacha Polony se lance dans la course à l'Élysée",
+   "essentiel": "L'essayiste Natacha Polony se lance dans la course à l'Élysée. Cinq médias en parlent : Le Progrès, 20 Minutes, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "EBRA"
+   ],
+   "derniere": "2026-10-13T23:18:53.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "media": "Le Progrès",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "titre": "Budget 2027 de la France : le débat s'est ouvert à l'Assemblée nationale, objectif déficit à 5 %",
+     "url": "https://www.france24.com/fr/france/20261013-budget-2027-debat-ouvert-assemblee-nationale-deficit-dette-retraites",
+     "media": "France 24",
+     "date": "2026-10-13T23:18:53.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.dna.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-13T22:01:00.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/budget-2027-le-gouvernement-ouvert-au-compromis-mais-pas-au-dela-de-5-de-deficit",
+     "media": "L'Est républicain",
+     "date": "2026-10-13T22:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+   "accroche": "Budget 2027 : le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit",
+   "essentiel": "Sur le budget 2027, le gouvernement ouvert au compromis, mais pas au-delà de 5 % de déficit. Le débat s'est ouvert à l'Assemblée nationale, objectif déficit à 5 %. Cinq médias en parlent : Le Progrès, France 24, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "chiffre": {
+    "valeur": "5",
+    "unite": "%"
+   }
   },
   {
    "medias": 3,
@@ -1076,6 +1366,53 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "L'Obs",
+    "Le Télégramme"
+   ],
+   "derniere": "2026-10-14T11:42:59.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gérald Darmanin",
+      "photo": "photos/personnalites/gerald-darmanin.jpg",
+      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
+      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Avis défavorable » pour Rachida Dati : le Conseil supérieur de la Magistrature s’oppose à sa réintégration",
+     "url": "https://www.nouvelobs.com/justice/20261013.OBS119174/avis-defavorable-pour-rachida-dati-le-conseil-superieur-de-la-magistrature-s-oppose-a-sa-reintegration.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T06:48:48.000Z"
+    },
+    {
+     "titre": "Sans poste et sans solde : la réintégration fantôme de Rachida Dati dans la magistrature",
+     "url": "https://www.nouvelobs.com/justice/20261014.OBS119204/sans-poste-et-sans-solde-la-reintegration-fantome-de-rachida-dati-dans-la-magistrature.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T11:42:59.000Z"
+    },
+    {
+     "titre": "Le Conseil supérieur de la magistrature rend un avis « défavorable » à la réintégration de Rachida Dati dans la magistrature : la décision dans les mains de Gérald Darmanin",
+     "url": "https://www.letelegramme.fr/politique/le-conseil-superieur-de-la-magistrature-rend-un-avis-defavorable-a-la-reintegration-de-rachida-dati-dans-la-magistrature-la-decision-dans-les-mains-de-gerald-darmanin-7137425.php",
+     "media": "Le Télégramme",
+     "date": "2026-10-13T12:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Justice : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Valeurs actuelles",
     "Le JDD"
    ],
@@ -1203,43 +1540,6 @@
    "fait": "Pour la présidentielle 2027, Natacha Polony, éditorialiste politique, annonce sa candidature à l'élection",
    "accroche": "Pour la présidentielle 2027, Natacha Polony, éditorialiste politique, annonce sa candidature à l'élection",
    "essentiel": "Pour la présidentielle 2027, Natacha Polony, éditorialiste politique, annonce sa candidature à l'élection. Deux médias en parlent : Sud Ouest et BFMTV."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T06:43:41.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : L’essayiste et journaliste Natacha Polony se déclare candidate, ce n’est que la 28e",
-     "url": "https://www.20minutes.fr/politique/4254145-20261014-presidentielle-2027-essayiste-journaliste-natacha-polony-declare-candidate-28e?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-14T06:43:41.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. L'essayiste Natacha Polony se lance dans la course à l'Élysée",
-     "url": "https://www.dna.fr/elections/2026/10/14/l-essayiste-natacha-polony-se-lance-dans-la-course-a-l-elysee",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T06:09:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Élections : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L'essayiste Natacha Polony se lance dans la course à l'Élysée",
-   "accroche": "L'essayiste Natacha Polony se lance dans la course à l'Élysée",
-   "essentiel": "L'essayiste Natacha Polony se lance dans la course à l'Élysée. Deux médias en parlent : 20 Minutes et Dernières Nouvelles d'Alsace."
   },
   {
    "medias": 2,
@@ -1449,47 +1749,6 @@
    "mediasDistincts": 2,
    "sources": [
     "L'Obs",
-    "Le Télégramme"
-   ],
-   "derniere": "2026-10-13T15:04:21.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gérald Darmanin",
-      "photo": "photos/personnalites/gerald-darmanin.jpg",
-      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
-      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Avis défavorable » pour Rachida Dati : le Conseil supérieur de la magistrature s’oppose à sa réintégration",
-     "url": "https://www.nouvelobs.com/justice/20261013.OBS119174/avis-defavorable-pour-rachida-dati-le-conseil-superieur-de-la-magistrature-s-oppose-a-sa-reintegration.html",
-     "media": "L'Obs",
-     "date": "2026-10-13T15:04:21.000Z"
-    },
-    {
-     "titre": "Le Conseil supérieur de la magistrature rend un avis « défavorable » à la réintégration de Rachida Dati dans la magistrature : la décision dans les mains de Gérald Darmanin",
-     "url": "https://www.letelegramme.fr/politique/le-conseil-superieur-de-la-magistrature-rend-un-avis-defavorable-a-la-reintegration-de-rachida-dati-dans-la-magistrature-la-decision-dans-les-mains-de-gerald-darmanin-7137425.php",
-     "media": "Le Télégramme",
-     "date": "2026-10-13T12:21:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "L'Obs",
     "Libération"
    ],
    "derniere": "2026-10-12T22:01:11.000Z",
@@ -1635,7 +1894,7 @@
     "L'Obs",
     "Libération"
    ],
-   "derniere": "2026-10-12T07:38:25.000Z",
+   "derniere": "2026-10-12T06:39:18.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1661,10 +1920,10 @@
    },
    "articles": [
     {
-     "titre": "« Bonne nouvelle pour la suite », « candidat du repli »… Comment la gauche réagit après la victoire de Glucksmann à la primaire",
+     "titre": "« Bonne nouvelle pour la suite », « candidat du repli »... La gauche réagit après la victoire de Glucksmann à la primaire",
      "url": "https://www.nouvelobs.com/politique/20261012.OBS119134/bonne-nouvelle-pour-la-suite-candidat-du-repli-la-gauche-reagit-apres-la-victoire-de-glucksmann-a-la-primaire.html",
      "media": "L'Obs",
-     "date": "2026-10-12T07:38:25.000Z"
+     "date": "2026-10-12T06:39:18.000Z"
     },
     {
      "titre": "Primaire PS : pourquoi la victoire de Raphaël Glucksmann est une bonne nouvelle pour Jean-Luc Mélenchon",
@@ -1731,6 +1990,101 @@
    "fait": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
    "accroche": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral",
    "essentiel": "Procédure de dissolution engagée contre l'association Égalité et Réconciliation d'Alain Soral. Laurent Nuñez lance la dissolution d’Égalité & Réconciliation. Deux médias en parlent : RFI et Libération."
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T11:19:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.dna.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T11:19:00.000Z"
+    },
+    {
+     "titre": "Social. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.leprogres.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "Le Progrès",
+     "date": "2026-10-14T11:19:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.ledauphine.com/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T11:19:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
+     "media": "L'Est républicain",
+     "date": "2026-10-14T11:19:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+   "accroche": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
+   "essentiel": "Le gouvernement renforce la prévention face à la détresse des agriculteurs. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Progrès, Le Dauphiné libéré et L'Est républicain."
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-14T09:49:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+     "url": "https://www.leprogres.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "Le Progrès",
+     "date": "2026-10-14T09:49:00.000Z"
+    },
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+     "url": "https://www.dna.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-14T09:49:00.000Z"
+    },
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+     "url": "https://www.ledauphine.com/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T09:49:00.000Z"
+    },
+    {
+     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+     "url": "https://www.estrepublicain.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
+     "media": "L'Est républicain",
+     "date": "2026-10-14T09:49:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Télévision : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+   "accroche": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
+   "essentiel": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit ». Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
   },
   {
    "medias": 2,
@@ -1932,8 +2286,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
@@ -2022,29 +2376,57 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "Le Dauphiné libéré"
    ],
-   "derniere": "2026-10-14T11:55:00.000Z",
+   "derniere": "2026-10-14T12:00:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027. Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
-     "url": "https://www.dna.fr/elections/2026/10/14/le-senat-adopte-un-texte-contre-les-ingerences-etrangeres-mais-appelle-a-aller-plus-loin",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T11:55:00.000Z"
+     "titre": "Isère. « Je ne suis pas un pigeon » : un graphiste accuse cette ville d’avoir utilisé une de ses œuvres sans son autorisation",
+     "url": "https://www.ledauphine.com/culture-loisirs/2026/10/14/je-ne-suis-pas-un-pigeon-un-graphiste-accuse-cette-ville-d-avoir-utilise-une-de-ses-oeuvres-sans-son-autorisation",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T12:00:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sénat : vote sur une affaire internationale",
-    "origine": "regles"
+    "titre": "Isère : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-14T12:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique",
+    "vignette": null
    },
-   "fait": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin",
-   "accroche": "Le Sénat adopte un texte contre les ingérences étrangères, mais appelle à aller plus loin"
+   "articles": [
+    {
+     "titre": "Ardèche. Les écologistes traitent le président du Département Olivier Amrane d’« influenceur de bas niveau »",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/les-ecologistes-traitent-olivier-amrane-d-influenceur-de-bas-niveau",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T12:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Écologistes : ce qu'il faut savoir sur l'environnement",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2103,34 +2485,6 @@
     "titre": "Présidentielle 2027 : ce que disent les médias",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T11:19:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Agriculture. Le gouvernement renforce la prévention face à la détresse des agriculteurs",
-     "url": "https://www.dna.fr/economie/2026/10/14/le-gouvernement-renforce-la-prevention-face-a-la-detresse-des-agriculteurs",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T11:19:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Le gouvernement renforce la prévention face à la détresse des agriculteurs",
-   "accroche": "Le gouvernement renforce la prévention face à la détresse des agriculteurs"
   },
   {
    "medias": 1,
@@ -2333,7 +2687,33 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce qu'il faut savoir sur les finances publiques",
+    "titre": "Budget",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-14T10:56:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lucey. L’avenir se construit avec Les Mirabelles, un espace d’échanges",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/l-avenir-se-construit-avec-les-mirabelles-un-espace-d-echanges",
+     "media": "L'Est républicain",
+     "date": "2026-10-14T10:56:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lucey : actualité locale",
     "origine": "regles",
     "generique": true
    }
@@ -2490,8 +2870,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociaux",
-    "origine": "dossier"
+    "titre": "Finances publiques : annonces sur les finances publiques",
+    "origine": "regles"
    },
    "fait": "À Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public",
    "accroche": "À Royan, l’élu d’opposition Nicolas Calbrix revient à la charge sur l’abattement fiscal accordé au bailleur social public"
@@ -2584,6 +2964,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-14T10:17:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Alban-Leysse. Le conseil municipal se réunit ce mercredi",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/le-conseil-municipal-se-reunit-ce-mercredi",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T10:17:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Alban-Leysse : conseil municipal",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-10-14T10:15:42.000Z",
@@ -2603,6 +3009,32 @@
    ],
    "titrePropre": {
     "titre": "Logement et accueil : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-14T10:11:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Entre Bièvre et Rhône. Gens du voyage : le maire de Roussillon appelle « à un sursaut citoyen »",
+     "url": "https://www.ledauphine.com/politique/2026/10/14/gens-du-voyage-le-maire-de-roussillon-appelle-a-un-sursaut-citoyen",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T10:11:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : appel sur la vie locale",
     "origine": "regles"
    }
   },
@@ -2630,6 +3062,48 @@
    "titrePropre": {
     "titre": "Présidentielle 2027 : ce que disent les médias",
     "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-14T10:07:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Raphaël Glucksmann ou Jean-Luc Mélenchon ? « Celui qui sera capable de sortir de son couloir de nage pour s’adresser à ce peuple de gauche “orphelin” prendra le dessus »",
+     "url": "https://www.nouvelobs.com/opinions/20261014.OBS119202/raphael-glucksmann-ou-jean-luc-melenchon-celui-qui-sera-capable-de-sortir-de-son-couloir-de-nage-pour-s-adresser-a-ce-peuple-de-gauche-orphelin-prendra-le-dessus.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T10:07:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2768,6 +3242,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-14T10:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Montrond-les-Bains. Il est champion de France cycliste des élus : « Je suis trop fier de ramener le maillot tricolore »",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/il-est-champion-de-france-cycliste-des-elus-je-suis-trop-fier-de-ramener-le-maillot-tricolore",
+     "media": "Le Progrès",
+     "date": "2026-10-14T10:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Montrond-les-Bains : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "Il est champion de France cycliste des élus",
+   "accroche": "Il est champion de France cycliste des élus"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-14T09:59:15.000Z",
@@ -2790,35 +3292,6 @@
     "titre": "Gouvernement : ce que disent les médias",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T09:49:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Télévision. Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
-     "url": "https://www.dna.fr/societe/2026/10/14/25-000-euros-par-mois-ecartee-du-20h-de-france-2-lea-salame-continue-de-percevoir-son-salaire",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T09:49:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Télévision : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »",
-   "accroche": "Écartée du 20h de France 2, Léa Salamé continue de percevoir son salaire « réduit »"
   },
   {
    "medias": 1,
@@ -2878,36 +3351,30 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
+    "Le Dauphiné libéré"
    ],
-   "derniere": "2026-10-14T09:32:50.000Z",
+   "derniere": "2026-10-14T09:33:00.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [],
     "theme": "politique",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-10-14T09:32:50.000Z"
+     "titre": "Aix-les-Bains. « Je suis impressionné par le nombre de problématiques que nous avons en commun » : les lacs alpins sont-ils des zones litorales comme les autres ?",
+     "url": "https://www.ledauphine.com/economie/2026/10/14/je-suis-impressionne-par-le-nombre-de-problematiques-que-nous-avons-en-commun-les-lacs-alpins-sont-ils-des-zones-litorales-comme-les-autres",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T09:33:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "titre": "Aix-les-Bains : actualité locale",
     "origine": "regles",
     "generique": true
-   }
+   },
+   "fait": "Les lacs alpins sont-ils des zones litorales comme les autres ?",
+   "accroche": "Les lacs alpins sont-ils des zones litorales comme les autres ?"
   },
   {
    "medias": 1,
@@ -2954,6 +3421,41 @@
      "source": "Commission des sondages (notice Harris)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-14T09:32:50.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-14T09:32:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -3071,6 +3573,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-14T09:16:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Haute-Savoie. Harcèlement sexuel sur mineurs : l'ex-maire d'Andilly fait appel de sa condamnation",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/14/harcelement-sexuel-sur-mineurs-vincent-humbert-fait-appel-de-sa-condamnation-a-18-mois-de-prison-avec-sursis",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-14T09:16:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Haute-Savoie : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Harcèlement sexuel sur mineurs : l'ex-maire d'Andilly fait appel de sa condamnation",
+   "accroche": "Harcèlement sexuel sur mineurs : l'ex-maire d'Andilly fait appel de sa condamnation"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-14T09:05:27.000Z",
@@ -3139,6 +3670,39 @@
     "titre": "Christine Bergeon : débat sur la loi",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-14T08:58:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Adoption de la loi intégrale contre les violences sexuelles et sexistes : « Une avancée incroyable » pour ses défenseurs, une « loi angle mort » pour ses détracteurs",
+     "url": "https://www.nouvelobs.com/politique/20261014.OBS119197/adoption-de-la-loi-integrale-contre-les-violences-sexuelles-une-avancee-incroyable-selon-les-feministes.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T08:58:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Violences sexuelles : ce que disent les médias",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 29 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3252,8 +3816,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : déclaration sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -3367,8 +3931,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociaux",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -3531,6 +4095,50 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-14T07:19:23.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Exclusif. La lanceuse d’alerte qui fait trembler Edouard Philippe prend la parole",
+     "url": "https://www.nouvelobs.com/politique/20261014.OBS119194/exclusif-la-lanceuse-d-alerte-qui-fait-trembler-edouard-philippe-prend-la-parole.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T07:19:23.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Exclusif : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La lanceuse d’alerte qui fait trembler Edouard Philippe prend la parole",
+   "accroche": "La lanceuse d’alerte qui fait trembler Edouard Philippe prend la parole",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-10-14T07:19:00.000Z",
@@ -3549,8 +4157,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
   },
   {
@@ -3681,8 +4289,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociaux",
-    "origine": "dossier"
+    "titre": "La France insoumise : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "La France insoumise accusée de jeter des proviseurs en pâture sur les réseaux sociaux",
    "accroche": "La France insoumise accusée de jeter des proviseurs en pâture sur les réseaux sociaux"
@@ -3817,9 +4426,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
+    "titre": "Budget",
+    "origine": "dossier"
    },
    "fait": "Le gouvernement est prêt à faire des « compromis », tant que le déficit public ne dépasse pas 5 %",
    "accroche": "Le gouvernement est prêt à faire des « compromis », tant que le déficit public ne dépasse pas 5 %"
@@ -4252,6 +4860,59 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-14T06:30:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Bayrou",
+      "photo": "photos/personnalites/francois-bayrou.jpg",
+      "photoHd": "photos/personnalites/hd/francois-bayrou.jpg",
+      "parti": "DEM",
+      "credit": "Service photographique de Matignon, Licence Ouverte, Wikimedia Commons"
+     },
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LR"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "François Bayrou veut une primaire du bloc central, un départ de Bardella fait fantasmer chez LR… Retrouvez les indiscrétions du « Nouvel Obs »",
+     "url": "https://www.nouvelobs.com/politique/20261014.OBS119196/francois-bayrou-veut-une-primaire-du-bloc-central-un-depart-de-bardella-fait-fantasmer-chez-lr-retrouvez-les-indiscretions-du-nouvel-obs.html",
+     "media": "L'Obs",
+     "date": "2026-10-14T06:30:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "François Bayrou veut une primaire du bloc central",
+   "accroche": "François Bayrou veut une primaire du bloc central",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Bayrou : président du MoDem · Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-10-14T06:27:30.000Z",
@@ -4378,368 +5039,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Budget",
+    "origine": "dossier"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T06:13:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Moi maire de La Rochelle, ce permis n’aurait jamais été signé » : au conseil municipal, volée de bois vert contre l’abattage de l’if centenaire",
-     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/moi-maire-de-la-rochelle-ce-permis-n-aurait-jamais-ete-signe-au-conseil-municipal-volee-de-bois-vert-contre-l-abattage-de-l-if-centenaire-31052516.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T06:13:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Au conseil municipal, volée de bois vert contre l’abattage de l’if centenaire",
-   "accroche": "Au conseil municipal, volée de bois vert contre l’abattage de l’if centenaire"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Télégramme"
-   ],
-   "derniere": "2026-10-14T06:13:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Natacha Polony annonce sa candidature à l’élection présidentielle",
-     "url": "https://www.letelegramme.fr/elections/presidentielle/natacha-polony-annonce-sa-candidature-a-lelection-presidentielle-7137809.php",
-     "media": "Le Télégramme",
-     "date": "2026-10-14T06:13:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-14T06:01:04.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Lac de Caussade : deux anciens présidents de la chambre d'agriculture de Lot-et-Garonne de retour devant la justice pour prise illégale d’intérêt",
-     "url": "https://www.ladepeche.fr/2026/10/14/lac-de-caussade-deux-anciens-presidents-de-la-chambre-dagriculture-de-lot-et-garonne-de-retour-devant-la-justice-pour-prise-illegale-dinteret-13588526.php",
-     "media": "La Dépêche",
-     "date": "2026-10-14T06:01:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-10-14T06:00:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "[EXCLUSIF] « Un peuple de droite se dessine » : le sondage qui révèle la convergence inédite",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/politique/exclusif-un-peuple-de-droite-se-dessine-le-sondage-qui-revele-la-convergence-inedite",
-     "media": "Valeurs actuelles",
-     "date": "2026-10-14T06:00:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Élections : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T06:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Tourisme. « Nos territoires sont aussi attractifs en dehors de la haute saison » : entre Lot-et-Garonne et Dordogne, un week-end pour célébrer les bastides",
-     "url": "https://www.sudouest.fr/tourisme/lot-et-garonne/tourisme-nos-territoires-sont-aussi-attractifs-en-dehors-de-la-haute-saison-entre-lot-et-garonne-et-dordogne-un-week-end-pour-celebrer-les-bastides-30734738.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T06:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Tourisme : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Entre Lot-et-Garonne et Dordogne, un week-end pour célébrer les bastides",
-   "accroche": "Entre Lot-et-Garonne et Dordogne, un week-end pour célébrer les bastides"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T06:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Haguenau. Au collège Kléber, une rencontre avec Tom Paulus, maire de Niederschaeffolsheim et ancien élève",
-     "url": "https://www.dna.fr/education/2026/10/14/tom-paulus-a-rencontre-les-delegues-du-college-kleber",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T06:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haguenau : actualité scolaire",
-    "origine": "regles"
-   },
-   "fait": "Au collège Kléber, une rencontre avec Tom Paulus",
-   "accroche": "Au collège Kléber, une rencontre avec Tom Paulus"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-14T05:56:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Votée à l’Assemblée, la loi intégrale laisse la gauche et les féministes divisées",
-     "url": "https://www.mediapart.fr/journal/france/141026/votee-l-assemblee-la-loi-integrale-laisse-la-gauche-et-les-feministes-divisees",
-     "media": "Mediapart",
-     "date": "2026-10-14T05:56:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-14T05:52:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget européen : combien la France verse-t-elle à l'Union européenne et combien reçoit-elle en retour ?",
-     "url": "https://www.europe1.fr/politique/budget-europeen-combien-la-france-verse-t-elle-a-lunion-europeenne-et-combien-recoit-elle-en-retour-1147157?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-14T05:52:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Combien la France verse-t-elle à l'Union européenne et combien reçoit-elle en retour ?",
-   "accroche": "Combien la France verse-t-elle à l'Union européenne et combien reçoit-elle en retour ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-14T05:36:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Des députés RN pris en flagrant délit d’«Assemblée buissonnière»",
-     "url": "https://www.mediapart.fr/journal/politique/141026/des-deputes-rn-pris-en-flagrant-delit-d-assemblee-buissonniere",
-     "media": "Mediapart",
-     "date": "2026-10-14T05:36:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-14T05:36:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Bischheim. Voûte étoilée, cœur de ville et cession foncière au programme du conseil municipal",
-     "url": "https://www.dna.fr/politique/2026/10/14/voute-etoilee-coeur-de-ville-et-cession-fonciere-au-programme-du-conseil-municipal",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-14T05:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bischheim : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-14T05:34:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le géant des puces Nvidia investit dans Doctolib et trois start-up françaises d’IA",
-     "url": "https://www.mediapart.fr/journal/economie-et-social/141026/le-geant-des-puces-nvidia-investit-dans-doctolib-et-trois-start-francaises-d-ia",
-     "media": "Mediapart",
-     "date": "2026-10-14T05:34:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Intelligence artificielle : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-14T05:34:05.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Le rôle de l’élu doit être plus respecté » : après des agressions, plusieurs maires des Alpes-Maritimes alertent sur des comportements de plus en plus préoccupants",
-     "url": "https://www.nicematin.com/societe/le-role-de-l-elu-doit-etre-plus-respecte-apres-des-agressions-plusieurs-maires-des-alpes-maritimes-alertent-sur-des-comportements-de-plus-en-plus-preoccupants-10740486",
-     "media": "Nice-Matin",
-     "date": "2026-10-14T05:34:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Plusieurs maires des Alpes-Maritimes alertent sur des comportements de plus en plus préoccupants",
-   "accroche": "Plusieurs maires des Alpes-Maritimes alertent sur des comportements de plus en plus préoccupants"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-14T05:30:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Tout pour nous déstabiliser », les opérations d’ingérences étrangères et de désinformation sont déjà « massives » et « précoces »",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-tout-pour-nous-destabiliser-les-operations-d-ingerences-etrangeres-et-de-desinformation-sont-deja-massives-et-precoces-31063453.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-14T05:30:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Les opérations d’ingérences étrangères et de désinformation sont déjà « massives » et « précoces »",
-   "accroche": "Les opérations d’ingérences étrangères et de désinformation sont déjà « massives » et « précoces »"
   }
  ]
 }
