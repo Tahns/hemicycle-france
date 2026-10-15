@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-15T06:55:32.736Z",
+ "lastUpdated": "2026-10-15T07:01:08.458Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Public Sénat",
@@ -60,7 +60,7 @@
   {
    "nom": "Le Parisien",
    "site": "https://www.leparisien.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Mediapart",
@@ -155,12 +155,13 @@
    "motifs": [
     "budget",
     "dépenses",
-    "sujets",
-    "attendent"
+    "déficit",
+    "sujets"
    ],
    "medias": [
     "Mediapart",
     "Le Monde",
+    "L'Obs",
     "20 Minutes",
     "Europe 1",
     "Nice-Matin",
@@ -177,10 +178,11 @@
     "La Dépêche",
     "Le Figaro"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 13,
    "sources": [
     "Mediapart",
     "Le Monde",
+    "L'Obs",
     "20 Minutes",
     "Europe 1 / Ouest-France / Le JDD",
     "Nice-Matin",
@@ -192,7 +194,7 @@
     "La Dépêche",
     "Le Figaro"
    ],
-   "nb": 48,
+   "nb": 51,
    "derniere": "2026-10-15T06:49:28.000Z",
    "articles": [
     {
@@ -205,7 +207,13 @@
      "media": "Le Monde",
      "titre": "Budget 2027 : à l’Assemblée nationale, la contribution française à l’UE objet de vifs débats sur fond de campagne présidentielle",
      "url": "https://www.lemonde.fr/politique/article/2026/10/15/budget-2027-a-l-assemblee-nationale-la-contribution-francaise-a-l-ue-objet-de-vifs-debats-sur-fond-de-campagne-presidentielle_6794218_823448.html",
-     "date": "2026-10-15T06:31:26.000Z"
+     "date": "2026-10-15T06:31:25.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "« Pour réduire le déficit sans compromettre l’avenir, il faut s’attaquer aux niches fiscales »",
+     "url": "https://www.nouvelobs.com/opinions/20261015.OBS119223/pour-reduire-le-deficit-sans-compromettre-l-avenir-il-faut-s-attaquer-aux-niches-fiscales.html",
+     "date": "2026-10-15T06:30:13.000Z"
     },
     {
      "media": "20 Minutes",
@@ -321,10 +329,11 @@
     "RFI",
     "Le Monde",
     "Le JDD",
+    "Hugo Décrypte",
     "20 Minutes",
     "L'Obs"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 11,
    "sources": [
     "Sud Ouest",
     "France Médias Monde",
@@ -334,10 +343,11 @@
     "Mediapart",
     "Le Monde",
     "Le JDD",
+    "Hugo Décrypte",
     "20 Minutes",
     "L'Obs"
    ],
-   "nb": 37,
+   "nb": 41,
    "derniere": "2026-10-15T06:00:00.000Z",
    "articles": [
     {
@@ -345,12 +355,6 @@
      "titre": "« On nous fait passer pour des cow-boys, on nous compare à des écoterroristes » : à l’aube d’une nouvelle mobilisation agricole, l’OFB assure travailler « sans aucun parti pris et en toute neutralité »",
      "url": "https://www.sudouest.fr/economie/agriculture/on-nous-fait-passer-pour-des-cow-boys-on-nous-compare-a-des-ecoterroristes-a-l-aube-d-une-nouvelle-mobilisation-agricole-l-ofb-assure-travailler-sans-aucun-parti-pris-et-en-toute-neutralite-31023607.php",
      "date": "2026-10-15T06:00:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "DIRECT. Colère des lycéens : Édouard Geffray vient à Bordeaux, les organisations lycéennes reçues par le ministre... Toutes les infos de ce jeudi 15 octobre",
-     "url": "https://www.sudouest.fr/france/direct-colere-des-lyceens-edouard-geffray-vient-a-bordeaux-les-organisations-lyceennes-recues-par-le-ministre-toutes-les-infos-de-ce-jeudi-15-octobre-31079108.php",
-     "date": "2026-10-15T05:49:50.000Z"
     },
     {
      "media": "France 24",
@@ -413,6 +417,13 @@
      "date": "2026-10-13T21:45:43.000Z"
     },
     {
+     "media": "Hugo Décrypte",
+     "titre": "Le rappeur Médine est venu apporter son soutien aux manifestations lycéens au Havre ce mardi",
+     "url": "https://www.youtube.com/shorts/mBLL1HZTcKU",
+     "date": "2026-10-13T18:12:13.000Z",
+     "video": true
+    },
+    {
      "media": "20 Minutes",
      "titre": "Blocus des lycéens : Parcoursup, « c’est le contraire du tri social », s’emporte le ministre de l’Enseignement supérieur",
      "url": "https://www.20minutes.fr/politique/4254053-20261013-colere-lyceens-parcoursup-contraire-tri-social-emporte-ministre-enseignement-superieur?at_medium=display&at_campaign=149",
@@ -427,46 +438,72 @@
    ]
   },
   {
-   "id": "interroges",
-   "titre": "Interrogés",
+   "id": "constitutionnel",
+   "titre": "Constitutionnel",
    "motifs": [
-    "interrogés"
+    "constitutionnel",
+    "réclame",
+    "départ"
    ],
    "medias": [
-    "Nice-Matin",
-    "Europe 1",
+    "Le JDD",
+    "France Inter",
     "Le Progrès",
+    "BFMTV",
+    "Europe 1",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
-    "L'Humanité",
-    "Libération",
-    "Public Sénat",
-    "RFI"
+    "Sud Ouest",
+    "20 Minutes",
+    "L'Obs",
+    "Le Monde",
+    "Public Sénat"
    ],
-   "mediasDistincts": 7,
+   "mediasDistincts": 9,
    "sources": [
-    "Nice-Matin",
-    "Europe 1",
+    "Groupe Bolloré",
+    "France Inter",
     "EBRA",
-    "L'Humanité",
-    "Libération",
-    "Public Sénat",
-    "RFI"
+    "BFMTV",
+    "Sud Ouest",
+    "20 Minutes",
+    "L'Obs",
+    "Le Monde",
+    "Public Sénat"
    ],
-   "nb": 13,
-   "derniere": "2026-10-15T03:30:00.000Z",
+   "nb": 16,
+   "derniere": "2026-10-15T05:50:19.000Z",
    "articles": [
     {
-     "media": "Nice-Matin",
-     "titre": "Cannes l’a adoptée, Provence verte y réfléchit : SafetyCase, la valise de télécommunication d’urgence qui intéresse nos élus en cas de catastrophe naturelle",
-     "url": "https://www.nicematin.com/economie/cannes-l-a-adoptee-provence-verte-y-reflechit-safetycase-la-valise-de-telecommunication-d-urgence-qui-interesse-nos-elus-en-cas-de-catastrophe-naturelle-10740101",
-     "date": "2026-10-15T03:30:00.000Z"
+     "media": "Le JDD",
+     "titre": "«Il doit quitter la tête du Conseil constitutionnel» : Marine Le Pen réclame la démission de Richard Ferrand",
+     "url": "https://www.lejdd.fr/politique/il-doit-quitter-la-tete-du-conseil-constitutionnel-marine-le-pen-reclame-la-demission-de-richard-ferrand-186072",
+     "date": "2026-10-15T05:50:19.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Budget 2027 : FMI, BCE... Les mises en garde des grandes institutions internationales se multiplient",
-     "url": "https://www.europe1.fr/economie/budget-2027-fmi-bce-les-mises-en-garde-des-grandes-institutions-internationales-se-multiplient-1149140?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-14T20:33:00.000Z"
+     "media": "France Inter",
+     "titre": "Marine Le Pen à l'assaut du Conseil constitutionnel",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-edito-politique/l-edito-politique-du-jeudi-15-octobre-2026-2652181",
+     "date": "2026-10-15T05:42:20.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Rhône. « J’ai toujours assumé » : au Département, Christophe Guilloteau tire sa révérence",
+     "url": "https://www.leprogres.fr/politique/2026/10/15/meme-si-ca-m-a-valu-d-etre-mis-en-vente-a-1-euro-j-ai-toujours-assume-au-departement-christophe-guilloteau-tire-sa-reverence",
+     "date": "2026-10-15T04:00:00.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Mobilisation du 17 octobre: \"La Macronie a réussi à se mettre tout le monde à dos\", constate Aleksandar Nikolic, porte-parole du Rassemblement national",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-du-17-octobre-la-macronie-a-reussi-a-se-mettre-tout-le-monde-a-dos-constate-aleksandar-nikolic-porte-parole-du-rassemblement-national_VN-202610140902.html",
+     "date": "2026-10-14T21:19:13.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Marine Le Pen estime que Richard Ferrand \"doit quitter la tête\" du Conseil constitutionnel après avoir balayé sa proposition de recourir au référendum pour réviser la Constitution",
+     "url": "https://www.bfmtv.com/politique/front-national/marine-le-pen-estime-que-richard-ferrand-doit-quitter-la-tete-du-conseil-constitutionnel-apres-avoir-balaye-sa-proposition-de-recourir-au-referendum-pour-reviser-la-constitution_AD-202610140875.html",
+     "date": "2026-10-14T20:07:05.000Z"
     },
     {
      "media": "Europe 1",
@@ -476,63 +513,51 @@
     },
     {
      "media": "Le Progrès",
-     "titre": "Présidentielle 2027. IA, subventions, concentration… les candidats interrogés par les patrons de presse",
-     "url": "https://www.leprogres.fr/elections/2026/10/14/ia-subventions-concentration-les-candidats-interroges-par-les-patrons-de-presse",
-     "date": "2026-10-14T19:22:00.000Z"
+     "titre": "Politique. Marine Le Pen réclame le départ de Richard Ferrand du Conseil constitutionnel",
+     "url": "https://www.leprogres.fr/politique/2026/10/14/marine-le-pen-reclame-le-depart-de-richard-ferrand-du-conseil-constitutionnel",
+     "date": "2026-10-14T19:31:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. IA, subventions, concentration… les candidats interrogés par les patrons de presse",
-     "url": "https://www.dna.fr/elections/2026/10/14/ia-subventions-concentration-les-candidats-interroges-par-les-patrons-de-presse",
-     "date": "2026-10-14T19:22:00.000Z"
+     "titre": "Politique. Marine Le Pen réclame le départ de Richard Ferrand du Conseil constitutionnel",
+     "url": "https://www.dna.fr/politique/2026/10/14/marine-le-pen-reclame-le-depart-de-richard-ferrand-du-conseil-constitutionnel",
+     "date": "2026-10-14T19:31:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Présidentielle 2027. IA, subventions, concentration… les candidats interrogés par les patrons de presse",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/14/ia-subventions-concentration-les-candidats-interroges-par-les-patrons-de-presse",
-     "date": "2026-10-14T19:22:00.000Z"
+     "titre": "Politique. Marine Le Pen réclame le départ de Richard Ferrand du Conseil constitutionnel",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/14/marine-le-pen-reclame-le-depart-de-richard-ferrand-du-conseil-constitutionnel",
+     "date": "2026-10-14T19:31:00.000Z"
     },
     {
-     "media": "L'Humanité",
-     "titre": "Féminicides : 111 dit le ministère de l’intérieur, « beaucoup plus » répond Nous Toutes",
-     "url": "https://www.humanite.fr/societe/droit-des-femmes/feminicides-111-dit-le-ministere-de-linterieur-beaucoup-plus-repond-nous-toutes",
-     "date": "2026-10-14T15:56:31.000Z"
+     "media": "Sud Ouest",
+     "titre": "Référendum : Marine Le Pen demande la démission de Richard Ferrand de la présidence du Conseil constitutionnel",
+     "url": "https://www.sudouest.fr/politique/marine-le-pen/referendum-marine-le-pen-demande-la-demission-de-richard-ferrand-de-la-presidence-du-conseil-constitutionnel-31075077.php",
+     "date": "2026-10-14T19:25:34.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "«C’est la deuxième fois que vous me faites le coup !» : David Lisnard se fait remonter les bretelles par Apolline de Malherbe en pleine interview",
-     "url": "https://www.liberation.fr/politique/cest-la-deuxieme-fois-que-vous-me-faites-le-coup-david-lisnard-se-fait-remonter-les-bretelles-par-apolline-de-malherbe-en-pleine-interview-20261013_FCVPZF4MLFEJFPC5GEL4OK2RVA/",
-     "date": "2026-10-13T16:08:04.000Z"
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : Richard Ferrand « doit quitter la tête du Conseil constitutionnel », estime Marine Le Pen",
+     "url": "https://www.20minutes.fr/politique/4254402-20261014-presidentielle-richard-ferrand-doit-quitter-tete-conseil-constitutionnel-estime-marine-pen?at_medium=display&at_campaign=149",
+     "date": "2026-10-14T18:54:06.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "« Je ne suis pas là pour faire l’intérim » : successeur de Renaud Muselier, François de Canson ne veut pas jouer les figurants à la tête de la Région Sud",
-     "url": "https://www.nicematin.com/societe/je-ne-suis-pas-la-pour-faire-l-interim-successeur-de-renaud-muselier-francois-de-canson-ne-veut-pas-jouer-les-figurants-a-la-tete-de-la-region-sud-10740387",
-     "date": "2026-10-13T15:35:35.000Z"
+     "media": "L'Obs",
+     "titre": "François Bayrou veut une primaire du bloc central, un départ de Bardella fait fantasmer chez LR… Retrouvez les indiscrétions du « Nouvel Obs »",
+     "url": "https://www.nouvelobs.com/politique/20261014.OBS119196/francois-bayrou-veut-une-primaire-du-bloc-central-un-depart-de-bardella-fait-fantasmer-chez-lr-retrouvez-les-indiscretions-du-nouvel-obs.html",
+     "date": "2026-10-14T17:45:27.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "« Un outil formidable bientôt offert aux professionnels de santé » : le chantier de la Maison des internes est lancé à Brignoles",
-     "url": "https://www.nicematin.com/societe/urbanisme/un-outil-formidable-bientot-offert-aux-professionnels-de-sante-le-chantier-de-la-maison-des-internes-est-lance-a-brignoles-10740421",
-     "date": "2026-10-13T15:10:03.000Z"
+     "media": "Le Monde",
+     "titre": "Un collectif réclame le rétablissement du fonds du CNC alloué aux créateurs et créatrices de contenu",
+     "url": "https://www.lemonde.fr/pixels/article/2026/10/14/un-collectif-reclame-le-retablissement-du-fonds-du-cnc-alloue-aux-createurs-et-creatrices-de-contenu_6793760_4408996.html",
+     "date": "2026-10-14T15:00:12.000Z"
     },
     {
      "media": "Public Sénat",
-     "titre": "Cyberattaque contre des frigos connectés de supermarchés : « Des systèmes de réfrigération exposés sur Internet », alertent des experts en cybersécurité",
-     "url": "https://www.publicsenat.fr/actualites/politique/cyberattaque-contre-des-frigos-connectes-de-supermarches-des-systemes-de-refrigeration-exposes-sur-internet-alertent-des-experts-en-cybersecurite",
-     "date": "2026-10-13T14:17:27.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mouvement lycéen en France: environ 480 000 manifestants selon l'intersyndicale",
-     "url": "https://www.rfi.fr/fr/france/20261013-direct-mouvement-lyc%C3%A9en-en-france-90-des-universit%C3%A9s-bloqu%C3%A9es-pour-une-nouvelle-journ%C3%A9e-de-mobilisation-selon-un-syndicat",
-     "date": "2026-10-13T11:55:04.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« C’est la deuxième fois que vous me faites le coup » : Apolline de Malherbe reprend David Lisnard à la volée après qu’il soit arrivé en retard pour l’interview, ce mardi matin",
-     "url": "https://www.nicematin.com/societe/politique/c-est-la-deuxieme-fois-que-vous-me-faites-le-coup-appoline-de-malherbe-reprend-david-lisnard-a-la-volee-apres-qu-il-soit-arrive-en-retard-pour-l-interview-ce-mardi-matin-10740386",
-     "date": "2026-10-13T09:36:23.000Z"
+     "titre": "Projet de loi de finances 2027 : « On va construire un château avec des fondations en sable ! » avertit la rapporteure générale du budget au Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/projet-de-loi-de-finances-2027-on-va-construire-un-chateau-avec-des-fondations-en-sable-avertit-la-rapporteure-generale-du-budget-au-senat",
+     "date": "2026-10-14T13:53:54.000Z"
     }
    ]
   }
@@ -679,8 +704,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Conseil constitutionnel",
-    "origine": "recoupement"
+    "titre": "Constitutionnel",
+    "origine": "dossier"
    },
    "fait": "Marine Le Pen réclame le départ de Richard Ferrand du Conseil constitutionnel",
    "accroche": "Marine Le Pen réclame le départ de Richard Ferrand du Conseil constitutionnel",
@@ -1637,8 +1662,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interrogés",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "David Lisnard se fait remonter les bretelles par Apolline de Malherbe en pleine interview",
    "accroche": "David Lisnard se fait remonter les bretelles par Apolline de Malherbe en pleine interview",
@@ -1921,8 +1947,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interrogés",
-    "origine": "dossier"
+    "titre": "Intelligence artificielle : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -2022,9 +2048,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-15T06:37:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Robert Ménard : «On ne peut pas avoir 80% d'une même classe d'âge qui a le bac»",
+     "url": "https://www.europe1.fr/politique/robert-menard-on-ne-peut-pas-avoir-80-dune-meme-classe-dage-qui-a-le-bac-1150499?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-15T06:37:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Robert Ménard : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-10-15T06:31:26.000Z",
+   "derniere": "2026-10-15T06:31:25.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2036,7 +2089,7 @@
      "titre": "Budget 2027 : à l’Assemblée nationale, la contribution française à l’UE objet de vifs débats sur fond de campagne présidentielle",
      "url": "https://www.lemonde.fr/politique/article/2026/10/15/budget-2027-a-l-assemblee-nationale-la-contribution-francaise-a-l-ue-objet-de-vifs-debats-sur-fond-de-campagne-presidentielle_6794218_823448.html",
      "media": "Le Monde",
-     "date": "2026-10-15T06:31:26.000Z"
+     "date": "2026-10-15T06:31:25.000Z"
     }
    ],
    "titrePropre": {
@@ -2045,6 +2098,32 @@
    },
    "fait": "À l’Assemblée nationale, la contribution française à l’UE objet de vifs débats sur fond de campagne présidentielle",
    "accroche": "À l’Assemblée nationale, la contribution française à l’UE objet de vifs débats sur fond de campagne présidentielle"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-15T06:30:13.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "« Pour réduire le déficit sans compromettre l’avenir, il faut s’attaquer aux niches fiscales »",
+     "url": "https://www.nouvelobs.com/opinions/20261015.OBS119223/pour-reduire-le-deficit-sans-compromettre-l-avenir-il-faut-s-attaquer-aux-niches-fiscales.html",
+     "media": "L'Obs",
+     "date": "2026-10-15T06:30:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -2078,6 +2157,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-15T06:00:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "« La France brûle et le budget regarde ailleurs » : 20 mesures d’urgence pour l’adaptation climatique",
+     "url": "https://www.nouvelobs.com/ecologie/20261015.OBS119222/la-france-brule-et-le-budget-regarde-ailleurs-20-mesures-d-urgence-pour-l-adaptation-climatique.html",
+     "media": "L'Obs",
+     "date": "2026-10-15T06:00:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-15T06:00:00.000Z",
@@ -2100,6 +2205,61 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-15T05:53:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Sondage exclusif : l’hypothèse d’un second tour Le Pen-Mélenchon s’installe",
+     "url": "https://www.nouvelobs.com/politique/20261014.OBS119213/sondage-exclusif-l-hypothese-d-un-second-tour-le-pen-melenchon-s-installe.html",
+     "media": "L'Obs",
+     "date": "2026-10-15T05:53:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 12-14 octobre 2026, 1 390 personnes, marge d'erreur ±2,6 pts) : Pen 32–36 %, Mélenchon 16–17 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2130,8 +2290,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -2199,9 +2360,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Constitutionnel",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -2926,8 +3086,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interrogés",
-    "origine": "dossier"
+    "titre": "Vie locale : vote sur la vie locale",
+    "origine": "regles"
    },
    "fait": "Cannes l’a adoptée, Provence verte y réfléchit",
    "accroche": "Cannes l’a adoptée, Provence verte y réfléchit"
@@ -3305,9 +3465,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Constitutionnel",
+    "origine": "dossier"
    }
   },
   {
@@ -3545,8 +3704,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interrogés",
-    "origine": "dossier"
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -3638,8 +3797,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interrogés",
-    "origine": "dossier"
+    "titre": "Rassemblement national : déclaration sur les débats parlementaires",
+    "origine": "regles"
    },
    "fait": "Une députée Rassemblement national réclame l’interdiction d’un festival antifasciste",
    "accroche": "Une députée Rassemblement national réclame l’interdiction d’un festival antifasciste"
@@ -4881,134 +5040,6 @@
     "titre": "Finances publiques : opinion d'un média",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-14T17:42:23.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lay-Saint-Christophe. Un nouvel ensemble scolaire parmi les projets prioritaires",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/14/un-nouvel-ensemble-scolaire-parmi-les-projets-prioritaires",
-     "media": "L'Est républicain",
-     "date": "2026-10-14T17:42:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lay-Saint-Christophe : actualité scolaire",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-14T17:42:09.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Frouard. Un départ chez les retraités CGT",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/14/un-depart-chez-les-retraites-cgt",
-     "media": "L'Est républicain",
-     "date": "2026-10-14T17:42:09.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Frouard : actualité sociale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-10-14T17:39:29.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gilles Platret",
-      "photo": "photos/personnalites/gilles-platret.jpg",
-      "photoHd": "photos/personnalites/hd/gilles-platret.jpg",
-      "parti": "DVD",
-      "credit": "Jérémy Viger, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Nous sommes à l’heure des grands choix », le maire de Chalon-sur-Saône Gilles Platret se déclare candidat",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/regions/bourgogne-franche-comte/saone-et-loire/chalon-sur-saone/politique/presidentielle-2027-nous-sommes-a-lheure-des-grands-choix-le-maire-de-chalon-sur-saone-gilles-platret-se-declare-candidat",
-     "media": "Valeurs actuelles",
-     "date": "2026-10-14T17:39:29.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gilles Platret : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-14T17:39:20.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Geffray",
-      "photo": "photos/personnalites/edouard-geffray.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
-      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "« Plus démocratique que les mortiers » : Édouard Geffray défend sa réponse à la crise des lycées",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/plus-democratique-que-les-mortiers-edouard-geffray-defend-sa-reponse-a-la-crise-des-lycees",
-     "media": "Public Sénat",
-     "date": "2026-10-14T17:39:20.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "fait": "Édouard Geffray défend sa réponse à la crise des lycées",
-   "accroche": "Édouard Geffray défend sa réponse à la crise des lycées",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Geffray : ministre de l’éducation nationale",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   }
  ]
 }
