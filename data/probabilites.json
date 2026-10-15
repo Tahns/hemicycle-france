@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-10-15T10:38:38.528Z",
+  "lastUpdated": "2026-10-15T19:18:03.945Z",
   "methode": {
     "instituts": 6,
-    "duels": 6,
+    "duels": 5,
     "tirages": 20000,
     "ecartPremierTour": 5.6,
     "ecartSecondTour": 5.8,
@@ -15,63 +15,49 @@
     {
       "nom": "Marine Le Pen",
       "parti": "RN",
-      "intention": 34.2,
-      "secondTour": 99,
-      "victoire": 89.3
+      "intention": 34.7,
+      "secondTour": 99.1,
+      "victoire": 89.2
     },
     {
       "nom": "Jean-Luc Mélenchon",
       "parti": "LFI",
-      "intention": 17.6,
-      "secondTour": 50,
+      "intention": 17.3,
+      "secondTour": 47.7,
       "victoire": 0.1
     },
     {
       "nom": "Édouard Philippe",
       "parti": "HOR",
-      "intention": 16.6,
-      "secondTour": 39.4,
-      "victoire": 8.8
+      "intention": 16.3,
+      "secondTour": 37.9,
+      "victoire": 8.3
     },
     {
       "nom": "Raphaël Glucksmann",
       "parti": "PP",
-      "intention": 11.5,
-      "secondTour": 7.3,
-      "victoire": 0.4
+      "intention": 12.4,
+      "secondTour": 10.7,
+      "victoire": 0.7
     },
     {
       "nom": "Gabriel Attal",
       "parti": "RE",
-      "intention": 10,
-      "secondTour": 3.4,
-      "victoire": 0.5
+      "intention": 10.3,
+      "secondTour": 3.8,
+      "victoire": 0.6
     },
     {
       "nom": "Bruno Retailleau",
       "parti": "LR",
-      "intention": 7.8,
-      "secondTour": 0.7,
-      "victoire": 0
-    },
-    {
-      "nom": "François Hollande",
-      "parti": "PS",
-      "intention": 7.2,
-      "secondTour": 0.3,
-      "victoire": 0
-    },
-    {
-      "nom": "David Lisnard",
-      "parti": "NÉ",
-      "intention": 4.3,
-      "secondTour": 0,
+      "intention": 8,
+      "secondTour": 0.8,
       "victoire": 0
     },
     {
       "nom": "Éric Zemmour",
       "parti": "REC",
-      "intention": 3.6,
+      "intention": 4,
       "secondTour": 0,
       "victoire": 0
     },
@@ -85,14 +71,14 @@
     {
       "nom": "Fabien Roussel",
       "parti": "PCF",
-      "intention": 2.6,
+      "intention": 2.5,
       "secondTour": 0,
       "victoire": 0
     },
     {
       "nom": "Nicolas Dupont-Aignan",
       "parti": "DLF",
-      "intention": 2.3,
+      "intention": 2.2,
       "secondTour": 0,
       "victoire": 0
     },
@@ -104,14 +90,14 @@
       "victoire": 0
     }
   ],
-  "duelNonTeste": 0.9,
+  "duelNonTeste": 1.1,
   "finales": [
     {
       "candidats": [
         "Jean-Luc Mélenchon",
         "Marine Le Pen"
       ],
-      "probabilite": 49.1,
+      "probabilite": 47,
       "victoire": {
         "Jean-Luc Mélenchon": 0.2,
         "Marine Le Pen": 99.8
@@ -122,7 +108,7 @@
         "Marine Le Pen",
         "Édouard Philippe"
       ],
-      "probabilite": 38.6,
+      "probabilite": 37.2,
       "victoire": {
         "Marine Le Pen": 79.1,
         "Édouard Philippe": 20.9
@@ -133,10 +119,10 @@
         "Marine Le Pen",
         "Raphaël Glucksmann"
       ],
-      "probabilite": 7.1,
+      "probabilite": 10.4,
       "victoire": {
-        "Marine Le Pen": 94.4,
-        "Raphaël Glucksmann": 5.6
+        "Marine Le Pen": 92.9,
+        "Raphaël Glucksmann": 7.1
       }
     },
     {
@@ -144,21 +130,10 @@
         "Gabriel Attal",
         "Marine Le Pen"
       ],
-      "probabilite": 3.3,
+      "probabilite": 3.8,
       "victoire": {
-        "Gabriel Attal": 14.7,
-        "Marine Le Pen": 85.3
-      }
-    },
-    {
-      "candidats": [
-        "Jean-Luc Mélenchon",
-        "Édouard Philippe"
-      ],
-      "probabilite": 0.8,
-      "victoire": {
-        "Jean-Luc Mélenchon": 3.3,
-        "Édouard Philippe": 96.7
+        "Gabriel Attal": 15.3,
+        "Marine Le Pen": 84.7
       }
     },
     {
@@ -166,8 +141,19 @@
         "Bruno Retailleau",
         "Marine Le Pen"
       ],
-      "probabilite": 0.7,
+      "probabilite": 0.8,
       "victoire": null
+    },
+    {
+      "candidats": [
+        "Jean-Luc Mélenchon",
+        "Édouard Philippe"
+      ],
+      "probabilite": 0.6,
+      "victoire": {
+        "Jean-Luc Mélenchon": 4.3,
+        "Édouard Philippe": 95.7
+      }
     }
   ]
 }
