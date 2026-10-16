@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-16T11:45:43.065Z",
+ "lastUpdated": "2026-10-16T11:50:44.224Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -322,19 +322,18 @@
    "titre": "Budget",
    "motifs": [
     "budget",
-    "retraités",
+    "rejettent",
     "fiscal",
-    "rejettent"
+    "abattement"
    ],
    "medias": [
+    "Nice-Matin",
     "BFMTV",
     "Dernières Nouvelles d'Alsace",
-    "Nice-Matin",
     "L'Humanité",
     "Le Monde",
     "Le Figaro",
     "Sud Ouest",
-    "Le Progrès",
     "Europe 1",
     "Public Sénat",
     "La Dépêche",
@@ -348,9 +347,9 @@
    ],
    "mediasDistincts": 15,
    "sources": [
-    "BFMTV",
-    "EBRA",
     "Nice-Matin",
+    "BFMTV",
+    "Dernières Nouvelles d'Alsace",
     "L'Humanité",
     "Le Monde",
     "Le Figaro",
@@ -364,9 +363,15 @@
     "L'Obs",
     "France Médias Monde"
    ],
-   "nb": 39,
-   "derniere": "2026-10-16T10:27:15.000Z",
+   "nb": 36,
+   "derniere": "2026-10-16T11:48:30.000Z",
    "articles": [
+    {
+     "media": "Nice-Matin",
+     "titre": "« C’est l’article le plus grave et le plus préoccupant » : en commission, les députés rejettent le gel de certaines retraites en fonction de l’inflation",
+     "url": "https://www.nicematin.com/economie/c-est-l-article-le-plus-grave-et-le-plus-preoccupant-en-commission-les-deputes-rejettent-le-gel-de-certaines-retraites-en-fonction-de-l-inflation-10741768",
+     "date": "2026-10-16T11:48:30.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Budget 2027: l'Assemblée vote l'article prévoyant des mesures temporaires pour aller la fiscalité des donations",
@@ -379,12 +384,6 @@
      "titre": "Sainte-Marie-aux-Mines. Abattage d'arbres : la route du col fermée toute la semaine prochaine",
      "url": "https://www.dna.fr/environnement/2026/10/16/la-route-du-col-fermee-toute-la-semaine-prochaine",
      "date": "2026-10-16T09:35:00.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "À Monaco, les parlementaires plaident pour que la future réforme des retraites ne vienne pas perturber les élections nationales de 2028",
-     "url": "https://www.nicematin.com/societe/politique/a-monaco-les-parlementaires-plaident-pour-que-la-future-reforme-des-retraites-ne-vienne-pas-perturber-les-elections-nationales-de-2028-10741441",
-     "date": "2026-10-16T09:30:06.000Z"
     },
     {
      "media": "L'Humanité",
@@ -409,12 +408,6 @@
      "titre": "Budget de l’UE : Emmanuel Macron prévient qu’un accord sera difficile en 2027 à l’approche d’élections clés, dont la présidentielle en France",
      "url": "https://www.sudouest.fr/politique/emmanuel-macron/budget-de-l-ue-emmanuel-macron-previent-qu-un-accord-sera-difficile-en-2027-a-l-approche-d-elections-cles-dont-la-presidentielle-en-france-31092103.php",
      "date": "2026-10-15T20:43:54.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Pommiers. Conseil municipal : retrait d’une délibération et examen des rapports sur les services d’eau",
-     "url": "https://www.leprogres.fr/politique/2026/10/15/conseil-municipal-retrait-d-une-deliberation-et-examen-des-rapports-sur-les-services-d-eau",
-     "date": "2026-10-15T18:02:08.000Z"
     },
     {
      "media": "Europe 1",
@@ -2144,6 +2137,33 @@
    "fait": "Le parquet antiterroriste se saisit de l'enquête après une fusillade dans un collège",
    "accroche": "Le parquet antiterroriste se saisit de l'enquête après une fusillade dans un collège",
    "essentiel": "Le parquet antiterroriste se saisit de l'enquête après une fusillade dans un collège. Deux médias en parlent : RFI et France 24."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-16T11:48:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "« C’est l’article le plus grave et le plus préoccupant » : en commission, les députés rejettent le gel de certaines retraites en fonction de l’inflation",
+     "url": "https://www.nicematin.com/economie/c-est-l-article-le-plus-grave-et-le-plus-preoccupant-en-commission-les-deputes-rejettent-le-gel-de-certaines-retraites-en-fonction-de-l-inflation-10741768",
+     "media": "Nice-Matin",
+     "date": "2026-10-16T11:48:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -4184,41 +4204,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Eric Zemmour",
-     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
-     "media": "BFMTV",
-     "date": "2026-10-16T07:28:41.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Zemmour : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-16T07:28:41.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4379,6 +4364,41 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-16T07:28:41.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Éric Zemmour",
+      "photo": "photos/personnalites/eric-zemmour.jpg",
+      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
+      "parti": "REC",
+      "credit": "Anh De France, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Eric Zemmour",
+     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
+     "media": "BFMTV",
+     "date": "2026-10-16T07:28:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éric Zemmour : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -5023,33 +5043,6 @@
    "titrePropre": {
     "titre": "Présidentielle 2027 : ce que disent les médias",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-16T06:00:07.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Deux ex-responsables nationaux de la CFE-CGC demandent l’exclusion du syndicat de policiers Alliance, affilié à la confédération",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/16/deux-ex-responsables-nationaux-de-la-cfe-cgc-demandent-l-exclusion-du-syndicat-de-policiers-alliance_6795321_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-16T06:00:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Syndicats : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
    }
   }
  ]
