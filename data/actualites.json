@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-17T17:20:40.063Z",
+ "lastUpdated": "2026-10-17T17:25:30.264Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -150,98 +150,177 @@
  ],
  "dossiers": [
   {
-   "id": "lyceens",
-   "titre": "Lycées",
+   "id": "octobre",
+   "titre": "Octobre",
    "motifs": [
-    "lycéens"
+    "octobre",
+    "manifestations",
+    "mobilisation",
+    "déclare"
    ],
    "medias": [
+    "La Dépêche",
+    "Le Progrès",
     "Le Dauphiné libéré",
     "Hugo Décrypte",
-    "Le JDD",
-    "Le Monde",
-    "L'Est républicain",
+    "L'Humanité",
     "BFMTV",
-    "France 24",
-    "L'Obs",
-    "Libération",
-    "Le Figaro",
+    "Dernières Nouvelles d'Alsace",
+    "Le JDD",
+    "Europe 1",
+    "Valeurs actuelles",
+    "Sud Ouest",
     "RFI",
-    "La Croix"
+    "L'Est républicain",
+    "Le Figaro",
+    "La Croix",
+    "Mediapart",
+    "20 Minutes",
+    "Le Monde",
+    "Libération",
+    "L'Obs",
+    "Public Sénat",
+    "Nice-Matin"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 18,
    "sources": [
+    "La Dépêche",
     "EBRA",
     "Hugo Décrypte",
-    "Le JDD",
-    "Le Monde",
+    "L'Humanité",
     "BFMTV",
-    "France Médias Monde",
-    "L'Obs",
-    "Libération",
+    "Groupe Bolloré",
+    "Valeurs actuelles",
+    "Sud Ouest",
+    "RFI",
     "Le Figaro",
-    "La Croix"
+    "La Croix",
+    "Mediapart",
+    "20 Minutes",
+    "Le Monde",
+    "Libération",
+    "L'Obs",
+    "Public Sénat",
+    "Nice-Matin"
    ],
-   "nb": 16,
-   "derniere": "2026-10-17T16:37:00.000Z",
+   "nb": 77,
+   "derniere": "2026-10-17T17:01:00.000Z",
    "articles": [
     {
+     "media": "La Dépêche",
+     "titre": "Manifestations du 17 octobre : des étudiants en tête de cortège, quelques Gilets jaunes... Plus de 300 personnes rassemblées à Montauban",
+     "url": "https://www.ladepeche.fr/2026/10/17/manifestations-du-17-octobre-des-etudiants-en-tete-de-cortege-quelques-gilets-jaunes-plus-de-300-personnes-rassemblees-a-montauban-13607377.php",
+     "date": "2026-10-17T17:01:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "La question du jour. Les mouvements lycéens et gilets jaunes peuvent-ils survivre aux scènes de chaos du 17 octobre ?",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/les-mouvements-lyceens-et-gilets-jaunes-peuvent-ils-survivre-aux-scenes-de-chaos-du-17-octobre",
+     "date": "2026-10-17T17:00:00.000Z"
+    },
+    {
      "media": "Le Dauphiné libéré",
-     "titre": "Gap. Mobilisation lycéenne : un temps d’échanges au siège du PS",
-     "url": "https://www.ledauphine.com/education/2026/10/17/mobilisation-lyceenne-un-temps-d-echanges-au-siege-du-ps",
-     "date": "2026-10-17T16:37:00.000Z"
+     "titre": "Drôme-Ardèche. Mobilisation du 17 octobre : de “graves troubles” à Valence, neuf gardes à vue ; ailleurs, des cortèges calmes",
+     "url": "https://www.ledauphine.com/social/2026/10/17/mobilisation-du-17-octobre-ronds-points-peages-stations-service-suivez-les-actions-des-gilets-jaunes-en-direct",
+     "date": "2026-10-17T16:44:00.000Z"
     },
     {
      "media": "Hugo Décrypte",
-     "titre": "« On soutient la révolte des lycéens face aux méthodes de police » nous déclare cet avocat à Lyon",
-     "url": "https://www.youtube.com/shorts/zPikr0bJfpI",
-     "date": "2026-10-17T14:57:36.000Z",
+     "titre": "Un jeune homme a eu la main arrachée lors d’une manifestation à Saint-Etienne (17/10)",
+     "url": "https://www.youtube.com/shorts/Ym3kBM23WPM",
+     "date": "2026-10-17T16:42:37.000Z",
      "video": true
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Pas un mot sur le fond des manifestations de la part du Premier ministre…",
+     "url": "https://www.humanite.fr/-/-/pas-un-mot-sur-le-fond-des-manifestations-de-la-part-du-premier-ministre",
+     "date": "2026-10-17T16:31:51.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Mobilisations du 17 octobre: \"Les consignes données sont claires: empêcher les exactions, protéger les biens et les personnes, interpeller leurs auteurs et les déférer à la justice\", déclare sur X le Premier ministre Sébastien Lecornu",
+     "url": "https://www.bfmtv.com/politique/video-mobilisations-du-17-octobre-les-consignes-donnees-sont-claires-empecher-les-exactions-proteger-les-biens-et-les-personnes-interpeller-leurs-auteurs-et-les-deferer-a-la-justice-declare-sur-x-le-premier-ministre-sebastien-lecornu_VN-202610170289.html",
+     "date": "2026-10-17T16:21:17.000Z",
+     "video": true
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Wingen-sur-Moder. Le ras-le-bol des quelques contestataires venus manifester",
+     "url": "https://www.dna.fr/politique/2026/10/17/le-ras-le-bol-des-quelques-contestataires-venus-manifester",
+     "date": "2026-10-17T16:03:00.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "«Bismillah, c’est les ténèbres» : Emma Fourreau critiquée pour avoir repris le slogan lycéen jugé «islamophobe»",
-     "url": "https://www.lejdd.fr/politique/bismillah-cest-les-tenebres-emma-fourreau-critiquee-pour-avoir-repris-le-slogan-lyceen-juge-islamophobe-186228",
-     "date": "2026-10-17T10:24:32.000Z"
+     "titre": "Mobilisation du 17 octobre : Sandrine Rousseau estime qu’il faut «calmer» la police",
+     "url": "https://www.lejdd.fr/politique/mobilisation-du-17-octobre-sandrine-rousseau-estime-quil-faut-calmer-la-police-186288",
+     "date": "2026-10-17T15:56:07.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "« La gestion du mouvement lycéen et le projet de budget 2027 montrent que le pouvoir ne prend pas la mesure des bouleversements que traverse notre pays »",
-     "url": "https://www.lemonde.fr/idees/article/2026/10/17/la-gestion-du-mouvement-lyceen-et-le-projet-de-budget-2027-montrent-que-le-pouvoir-ne-prend-pas-la-mesure-des-bouleversements-que-traverse-notre-pays_6796165_3232.html",
-     "date": "2026-10-17T09:00:11.000Z"
+     "media": "Europe 1",
+     "titre": "Paris : rassemblement au bas des Champs-Elysées, périmètre interdit à la manifestation",
+     "url": "https://www.europe1.fr/societe/paris-rassemblement-au-bas-des-champs-elysees-perimetre-interdit-a-la-manifestation-1157595?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-17T15:56:04.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "Manifestations du 17 octobre : à qui profitera la colère sociale ?",
+     "url": "https://www.valeursactuelles.com/politique/manifestations-du-17-octobre-a-qui-profitera-la-colere-sociale",
+     "date": "2026-10-17T10:30:40.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Landes : thermalisme, calculs et manifestations dans nos échos satiriques",
+     "url": "https://www.sudouest.fr/politique/landes-thermalisme-calculs-et-manifestations-dans-nos-echos-satiriques-31094937.php",
+     "date": "2026-10-17T09:12:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "DIRECT - Journée de mobilisation en France: 800000 manifestants, selon les organisateurs",
+     "url": "https://www.rfi.fr/fr/france/20261017-direct-lyc%C3%A9ens-gilets-jaunes-suivez-la-journ%C3%A9e-de-mobilisation-%C3%A0-travers-la-france",
+     "date": "2026-10-17T08:43:17.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "L’interview du samedi. Blocus des lycées: « S’ils pensent qu’on va s’arrêter, ils se mettent le doigt dans l’œil »",
-     "url": "https://www.estrepublicain.fr/education/2026/10/17/blocus-des-lycees-s-ils-pensent-qu-on-va-s-arreter-ils-se-mettent-le-doigt-dans-l-oeil-qjpp",
-     "date": "2026-10-17T03:00:00.000Z"
+     "titre": "Enquête. L’aéroport d’Épinal - Mirecourt menacé de déclassement de la part de l’État : l’existence de la plateforme vosgienne mise en péril",
+     "url": "https://www.estrepublicain.fr/enquete/2026/10/17/l-aeroport-d-epinal-mirecourt-menace-de-declassement-de-la-part-de-l-etat-l-existence-de-la-plateforme-vosgienne-mise-en-peril",
+     "date": "2026-10-17T04:30:00.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Mobilisations lycéennes: \"Monsieur Macron à chaque fois qu'il a été confronté à un mouvement social d'ampleur, il est resté Jupiter\", déplore Benjamin Lucas-Lundy (Écologiste et Social)",
-     "url": "https://www.bfmtv.com/politique/video-mobilisations-lyceennes-monsieur-macron-a-chaque-fois-qu-il-a-ete-confronte-a-un-mouvement-social-d-ampleur-il-est-reste-jupiter-deplore-benjamin-lucas-lundy-ecologiste-et-social_VN-202610160864.html",
-     "date": "2026-10-16T21:24:02.000Z",
-     "video": true
+     "media": "Le Figaro",
+     "titre": "Mobilisation du 17 octobre : comment Jean-Luc Mélenchon espère tirer profit d’une «convergence des luttes»",
+     "url": "https://www.lefigaro.fr/politique/mobilisation-du-17-octobre-comment-jean-luc-melenchon-espere-tirer-profit-d-une-convergence-des-luttes-20261016",
+     "date": "2026-10-16T17:55:00.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Mobilisations lycéennes: \"Le budget Lecornu est au pied du mur\", estime Olivier Besancenot, membre du Nouveau Parti anticapitaliste",
-     "url": "https://www.bfmtv.com/politique/video-mobilisations-lyceennes-le-budget-lecornu-est-au-pied-du-mur-estime-olivier-besancenot-membre-du-nouveau-parti-anticapitaliste_VN-202610160854.html",
-     "date": "2026-10-16T21:05:15.000Z",
-     "video": true
+     "media": "La Croix",
+     "titre": "Mobilisation du 17 octobre : Élysée, Matignon… Quels secteurs de Paris sont interdits aux manifestations ?",
+     "url": "https://www.la-croix.com/societe/mobilisation-du-17-octobre-elysee-matignon-a-paris-plusieurs-secteurs-interdits-a-la-manifestation-20261016",
+     "date": "2026-10-16T17:50:51.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "\"Le problème du lycée, ce n'est pas un problème de moyens financiers mis dans l'Éducation nationale\", assure Jean-Philippe Tanguy, député du Rassemblement national",
-     "url": "https://www.bfmtv.com/politique/video-le-probleme-du-lycee-ce-n-est-pas-un-probleme-de-moyens-financiers-mis-dans-l-education-nationale-assure-jean-philippe-tanguy-depute-du-rassemblement-national_VN-202610160805.html",
-     "date": "2026-10-16T18:56:00.000Z",
-     "video": true
+     "media": "Mediapart",
+     "titre": "Mobilisation du 17 octobre: un rendez-vous hors des cadres habituels qui inquiète le pouvoir",
+     "url": "https://www.mediapart.fr/journal/france/161026/mobilisation-du-17-octobre-un-rendez-vous-hors-des-cadres-habituels-qui-inquiete-le-pouvoir",
+     "date": "2026-10-16T17:13:33.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Gilets jaunes, lycéens, syndicats : à quoi va ressembler la mobilisation du 17 octobre ?",
-     "url": "https://www.france24.com/fr/france/20261016-france-gilets-jaunes-lyceens-syndicats-a-quoi-va-ressembler-la-mobilisation-du-17-octobre",
-     "date": "2026-10-16T14:23:34.000Z"
+     "media": "20 Minutes",
+     "titre": "Cyberattaque : Le site de LR affiche un appel à manifester le 17 octobre après un piratage",
+     "url": "https://www.20minutes.fr/politique/4255004-20261016-cyberattaque-site-lr-affiche-appel-manifester-17-octobre-apres-piratage?at_medium=display&at_campaign=149",
+     "date": "2026-10-16T14:16:32.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Le site du parti Les Républicains brièvement détourné pour appeler à manifester ce 17 octobre",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/16/le-site-des-republicains-brievement-detourne-pour-appeler-a-manifester-ce-17-octobre_6795547_823448.html",
+     "date": "2026-10-16T12:16:26.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "«Vive le 17 octobre» : le site des Républicains brièvement transformé en appel à la mobilisation",
+     "url": "https://www.liberation.fr/politique/vive-le-17-octobre-le-site-des-republicains-brievement-transforme-en-appel-a-la-mobilisation-20261016_YVYRHCJ4RBHQLKUBIVRJSADODY/",
+     "date": "2026-10-16T11:36:42.000Z"
     },
     {
      "media": "L'Obs",
@@ -250,28 +329,16 @@
      "date": "2026-10-16T11:19:33.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Laurent Nuñez reconnaît une «censure» de certaines pancartes des lycéens mobilisés",
-     "url": "https://www.liberation.fr/politique/laurent-nunez-reconnait-une-censure-de-certaines-pancartes-des-lyceens-mobilises-20261016_DRQMF72PINH4XFY2NV3CIJZKHM/",
-     "date": "2026-10-16T09:20:33.000Z"
+     "media": "Public Sénat",
+     "titre": "17 octobre : En cas d’« affrontements graves et lourds », « tous les types d’armes intermédiaires peuvent être utilisées », déclare le ministre de l’Intérieur",
+     "url": "https://www.publicsenat.fr/actualites/societe/17-octobre-en-cas-d-affrontements-graves-et-lourds-tous-les-types-darmes-intermediaires-peuvent-etre-utilises-declare-le-ministre-d",
+     "date": "2026-10-16T10:34:53.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "Lycées, carburants, budget : Emmanuel Macron et Sébastien Lecornu cherchent les voies de l’apaisement",
-     "url": "https://www.lefigaro.fr/politique/lycees-carburants-budget-emmanuel-macron-et-sebastien-lecornu-cherchent-les-voies-de-l-apaisement-20261007",
-     "date": "2026-10-16T07:12:21.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Comment et pourquoi s'informer au lycée ?",
-     "url": "https://www.rfi.fr/fr/podcasts/pourquoi-rfi-dit-%C3%A7a/20261016-comment-et-pourquoi-s-informer-au-lyc%C3%A9e",
-     "date": "2026-10-16T05:00:54.000Z"
-    },
-    {
-     "media": "La Croix",
-     "titre": "Blocus des lycées : les « réponses concrètes » du gouvernement se font attendre",
-     "url": "https://www.la-croix.com/politique/blocus-des-lycees-les-reponses-concretes-du-gouvernement-se-font-attendre-20261015",
-     "date": "2026-10-16T04:55:06.000Z"
+     "media": "Nice-Matin",
+     "titre": "« S’acheter des tomates, des courgettes ou faire le plein, ça devient une consommation de luxe » : pour Sophie Binet, la mobilisation du 17 octobre montre « l’ampleur de la colère »",
+     "url": "https://www.nicematin.com/societe/s-acheter-des-tomates-des-courgettes-ou-faire-le-plein-ca-devient-une-consommation-de-luxe-pour-sophie-binet-la-mobilisation-du-17-octobre-montre-l-ampleur-de-la-colere-10741713",
+     "date": "2026-10-16T06:56:41.000Z"
     }
    ]
   },
@@ -399,121 +466,126 @@
    ]
   },
   {
-   "id": "interview",
-   "titre": "Interview",
+   "id": "sociale",
+   "titre": "Sociale",
    "motifs": [
-    "interview"
+    "sociale",
+    "sécurité"
    ],
    "medias": [
-    "Le Dauphiné libéré",
     "L'Est républicain",
+    "Le Progrès",
     "BFMTV",
-    "Europe 1",
-    "La Croix",
-    "Public Sénat",
+    "Valeurs actuelles",
     "Nice-Matin",
-    "Le Figaro",
-    "Le JDD",
-    "France 24"
+    "Libération",
+    "Le Monde",
+    "Ouest-France",
+    "L'Obs",
+    "20 Minutes"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
     "EBRA",
     "BFMTV",
-    "Groupe Bolloré",
-    "La Croix",
-    "Public Sénat",
+    "Valeurs actuelles",
     "Nice-Matin",
-    "Le Figaro",
-    "France 24"
+    "Libération",
+    "Le Monde",
+    "Ouest-France",
+    "L'Obs",
+    "20 Minutes"
    ],
-   "nb": 16,
-   "derniere": "2026-10-17T17:13:06.000Z",
+   "nb": 15,
+   "derniere": "2026-10-17T17:19:32.000Z",
    "articles": [
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Serre-Ponçon. Intercommunalité : « La compétence Gémapi nous coûte très cher »",
-     "url": "https://www.ledauphine.com/politique/2026/10/17/intercommunalite-la-competence-gemapi-nous-coute-tres-cher",
-     "date": "2026-10-17T17:13:06.000Z"
-    },
-    {
      "media": "L'Est républicain",
-     "titre": "Écrouves. Face à la crise municipale, les habitants interpellent leurs élus",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/17/face-a-la-crise-municipale-les-habitants-interpellent-leurs-elus",
-     "date": "2026-10-17T16:52:00.000Z"
+     "titre": "Cour-Saint-Maurice. Trois semaines de travaux pour sécuriser la falaise",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/17/trois-semaines-de-travaux-pour-securiser-la-falaise",
+     "date": "2026-10-17T17:19:32.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Drôme. « Ma seule boussole, préserver l’intérêt général » : Anna Place récupère l’écharpe de maire de Bourg-de-Péage",
-     "url": "https://www.ledauphine.com/politique/2026/10/17/a-anna-place-l-echarpe-de-maire-tout-naturellement",
-     "date": "2026-10-17T16:48:00.000Z"
+     "media": "Le Progrès",
+     "titre": "Courzieu. La commune poursuit la réflexion sur la sécurité de la traversée du bourg",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/la-commune-poursuit-la-reflexion-sur-la-securite-de-la-traversee-du-bourg",
+     "date": "2026-10-17T17:05:51.000Z"
     },
     {
      "media": "BFMTV",
-     "titre": "Mobilisations du 17 octobre: \"Les consignes données sont claires: empêcher les exactions, protéger les biens et les personnes, interpeller leurs auteurs et les déférer à la justice\", déclare sur X le Premier ministre Sébastien Lecornu",
-     "url": "https://www.bfmtv.com/politique/video-mobilisations-du-17-octobre-les-consignes-donnees-sont-claires-empecher-les-exactions-proteger-les-biens-et-les-personnes-interpeller-leurs-auteurs-et-les-deferer-a-la-justice-declare-sur-x-le-premier-ministre-sebastien-lecornu_VN-202610170289.html",
-     "date": "2026-10-17T16:21:17.000Z",
+     "titre": "Manifestations du 17 octobre: \"La police n'a pas été à la hauteur de l'enjeu\", estime Sandrine Rousseau, députée \"Écologiste et Social\" de Paris",
+     "url": "https://www.bfmtv.com/politique/video-manifestations-du-17-octobre-la-police-n-a-pas-ete-a-la-hauteur-de-l-enjeu-estime-sandrine-rousseau-deputee-ecologiste-et-social-de-paris_VN-202610170252.html",
+     "date": "2026-10-17T14:37:48.000Z",
      "video": true
     },
     {
-     "media": "Europe 1",
-     "titre": "Paris : rassemblement au bas des Champs-Elysées, périmètre interdit à la manifestation",
-     "url": "https://www.europe1.fr/societe/paris-rassemblement-au-bas-des-champs-elysees-perimetre-interdit-a-la-manifestation-1157595?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-17T15:56:04.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Bonneville. Un ajustement du budget 2026 interroge l’opposition",
-     "url": "https://www.ledauphine.com/politique/2026/10/17/un-ajustement-du-budget-2026-interroge-l-opposition",
-     "date": "2026-10-17T14:47:20.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "L’interview du samedi. Blocus des lycées: « S’ils pensent qu’on va s’arrêter, ils se mettent le doigt dans l’œil »",
-     "url": "https://www.estrepublicain.fr/education/2026/10/17/blocus-des-lycees-s-ils-pensent-qu-on-va-s-arreter-ils-se-mettent-le-doigt-dans-l-oeil-qjpp",
-     "date": "2026-10-17T03:00:00.000Z"
-    },
-    {
-     "media": "La Croix",
-     "titre": "Mobilisation du 17 octobre : Élysée, Matignon… Quels secteurs de Paris sont interdits aux manifestations ?",
-     "url": "https://www.la-croix.com/societe/mobilisation-du-17-octobre-elysee-matignon-a-paris-plusieurs-secteurs-interdits-a-la-manifestation-20261016",
-     "date": "2026-10-16T17:50:51.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Mobilisation du 17 octobre : Élysée, Matignon... Interdiction de manifester dans plusieurs secteurs de Paris",
-     "url": "https://www.europe1.fr/societe/mobilisation-du-17-octobre-elysee-matignon-interdiction-de-manifester-dans-plusieurs-secteurs-de-paris-1154933?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-16T16:53:01.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "17 octobre : En cas d’« affrontements graves et lourds », « tous les types d’armes intermédiaires peuvent être utilisées », déclare le ministre de l’Intérieur",
-     "url": "https://www.publicsenat.fr/actualites/societe/17-octobre-en-cas-d-affrontements-graves-et-lourds-tous-les-types-darmes-intermediaires-peuvent-etre-utilises-declare-le-ministre-d",
-     "date": "2026-10-16T10:34:53.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "Manifestations du 17 octobre : à qui profitera la colère sociale ?",
+     "url": "https://www.valeursactuelles.com/politique/manifestations-du-17-octobre-a-qui-profitera-la-colere-sociale",
+     "date": "2026-10-17T10:30:40.000Z"
     },
     {
      "media": "Nice-Matin",
-     "titre": "Impôts, montée des extrêmes, immigration... David Lisnard, maire de Cannes, est l’invité de « L’interview à la Une »",
-     "url": "https://www.nicematin.com/societe/politique/impots-montee-des-extremes-immigration-david-lisnard-maire-de-cannes-est-l-invite-de-l-interview-a-la-une-10741719",
-     "date": "2026-10-16T08:41:46.000Z"
+     "titre": "Le maire du Beausset négocie in extremis à la baisse un projet immobilier social et apaise la colère des habitants",
+     "url": "https://www.nicematin.com/societe/vie-locale/le-maire-du-beausset-negocie-in-extremis-a-la-baisse-un-projet-immobilier-social-et-apaise-la-colere-des-habitants-10741826",
+     "date": "2026-10-17T08:40:02.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "Guillaume Tabard : « Intervention de Sébastien Lecornu, gagner du temps ou avouer son impuissance ? »",
-     "url": "https://www.lefigaro.fr/politique/guillaume-tabard-intervention-de-sebastien-lecornu-gagner-du-temps-ou-avouer-son-impuissance-20261007",
-     "date": "2026-10-16T07:12:24.000Z"
+     "media": "BFMTV",
+     "titre": "Mobilisations lycéennes: \"Monsieur Macron à chaque fois qu'il a été confronté à un mouvement social d'ampleur, il est resté Jupiter\", déplore Benjamin Lucas-Lundy (Écologiste et Social)",
+     "url": "https://www.bfmtv.com/politique/video-mobilisations-lyceennes-monsieur-macron-a-chaque-fois-qu-il-a-ete-confronte-a-un-mouvement-social-d-ampleur-il-est-reste-jupiter-deplore-benjamin-lucas-lundy-ecologiste-et-social_VN-202610160864.html",
+     "date": "2026-10-16T21:24:02.000Z",
+     "video": true
     },
     {
-     "media": "Le JDD",
-     "titre": "Lycées, Bardella, présidentielle… Ce qu’il faut retenir de l’interview de Marine Le Pen sur CNews",
-     "url": "https://www.lejdd.fr/politique/lycees-bardella-presidentielle-ce-quil-faut-retenir-de-linterview-de-marine-le-pen-sur-cnews-186144",
-     "date": "2026-10-15T21:12:00.000Z"
+     "media": "BFMTV",
+     "titre": "Taxe Zucman: \"Les très grandes fortunes trouvent des détours\", affirme le député socialiste Mickaël Bouloux",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-taxe-zucman-les-tres-grandes-fortunes-trouvent-des-detours-affirme-le-depute-socialiste-mickael-bouloux_VN-202610160761.html",
+     "date": "2026-10-16T17:45:49.000Z",
+     "video": true
     },
     {
-     "media": "France 24",
-     "titre": "Manifestation du 17 octobre à Paris : le préfet interdit un parcours et propose une alternative",
-     "url": "https://www.france24.com/fr/france/20261015-manifestation-17-octobre-paris-pr%C3%A9fet-police-interdit-parcours-et-propose-alternative",
-     "date": "2026-10-15T20:12:52.000Z"
+     "media": "BFMTV",
+     "titre": "Ce serait \"considérer que notre sécurité ne vaut pas grand-chose\": Emmanuel Macron réagit à la proposition de Marine Le Pen de suspendre les aides à l’Ukraine",
+     "url": "https://www.bfmtv.com/politique/video-ce-serait-considerer-que-notre-securite-ne-vaut-pas-grand-chose-emmanuel-macron-reagit-a-la-proposition-de-marine-le-pen-de-suspendre-les-aides-a-l-ukraine_VN-202610160754.html",
+     "date": "2026-10-16T17:35:03.000Z",
+     "video": true
+    },
+    {
+     "media": "Libération",
+     "titre": "«Ils sont obscurantistes et ignares» : le RN s’attaque à deux institutions des sciences humaines et sociales, puis se ravise",
+     "url": "https://www.liberation.fr/idees-et-debats/ils-sont-obscurantistes-et-ignares-le-rn-sattaque-a-deux-institutions-des-sciences-humaines-et-sociales-puis-se-ravise-20261016_3GEF5UZQFZEIBKAEDNCJGXQVD4/",
+     "date": "2026-10-16T15:59:37.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Après le budget de l’Etat, les députés rejettent en commission celui de la Sécurité sociale",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/16/apres-le-budget-de-l-etat-les-deputes-rejettent-en-commission-celui-de-la-securite-sociale_6795575_823448.html",
+     "date": "2026-10-16T15:58:50.000Z"
+    },
+    {
+     "media": "Ouest-France",
+     "titre": "Le budget de la Sécurité sociale rejeté par les députés en commission, les débats prévus mardi dans l’hémicycle",
+     "url": "https://www.ouest-france.fr/sante/securite-sociale/le-budget-de-la-securite-sociale-rejete-par-les-deputes-en-commission-les-debats-prevus-mardi-dans-lhemicycle-a7f08990-c972-11f1-b8bc-a46147b584ed?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "date": "2026-10-16T15:21:50.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Le projet de Bolloré pour l’éducation, le million de la primaire socialiste… Retrouvez les indiscrétions du « Nouvel Obs »",
+     "url": "https://www.nouvelobs.com/politique/20261016.OBS119261/le-projet-de-bollore-pour-l-education-le-million-de-la-primaire-socialiste-retrouvez-les-indiscretions-du-nouvel-obs.html",
+     "date": "2026-10-16T14:30:19.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Rémi Boussemart, président des Jeunes Socialistes : «Dans dix ans, j’espère que la gauche aura gagné»",
+     "url": "https://www.liberation.fr/politique/remi-boussemart-president-des-jeunes-socialistes-dans-dix-ans-jespere-que-la-gauche-aura-gagne-20261016_36ZKUSFXPJA3VJCBMNRT7MK2YU/",
+     "date": "2026-10-16T10:56:30.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Sécurité sociale : En commission, les députés votent pour la délivrance à l’unité des médicaments",
+     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4254814-20261016-securite-sociale-commission-deputes-votent-delivrance-unite-medicaments?at_medium=display&at_campaign=149",
+     "date": "2026-10-16T05:31:41.000Z"
     }
    ]
   }
@@ -693,8 +765,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Site du parti",
-    "origine": "recoupement"
+    "titre": "Octobre",
+    "origine": "dossier"
    },
    "fait": "Le site des Républicains brièvement transformé en appel à la mobilisation",
    "accroche": "Le site des Républicains brièvement transformé en appel à la mobilisation",
@@ -706,7 +778,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -729,6 +801,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Alpes-Maritimes. Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse, le maire de Nice réagit",
+     "url": "https://www.leprogres.fr/insolite/2026/10/17/un-nicois-se-fait-tatouer-le-portrait-d-eric-ciotti-sur-la-cuisse-le-maire-de-nice-reagit",
+     "media": "Le Progrès",
+     "date": "2026-10-17T05:10:00.000Z"
+    },
     {
      "titre": "Alpes-Maritimes. Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse, le maire de Nice réagit",
      "url": "https://www.dna.fr/insolite/2026/10/17/un-nicois-se-fait-tatouer-le-portrait-d-eric-ciotti-sur-la-cuisse-le-maire-de-nice-reagit",
@@ -754,7 +832,7 @@
    },
    "fait": "Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse",
    "accroche": "Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse",
-   "essentiel": "Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse, le maire de Nice réagit. Trois médias en parlent : Dernières Nouvelles d'Alsace, L'Est républicain et Nice-Matin.",
+   "essentiel": "Un Niçois se fait tatouer le portrait d'Éric Ciotti sur la cuisse, le maire de Nice réagit. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, L'Est républicain et Nice-Matin.",
    "contexte": [
     {
      "type": "personnes",
@@ -764,73 +842,45 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "EBRA"
+    "Le Progrès",
+    "L'Obs"
    ],
-   "derniere": "2026-10-16T22:16:42.000Z",
+   "derniere": "2026-10-17T17:00:00.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Politique. « Manque d'humilité » : Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
-     "url": "https://www.dna.fr/politique/2026/10/16/manque-d-humilite-emmanuel-macron-repond-a-marine-le-pen-qui-veut-couper-l-aide-a-l-ukraine",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-16T19:59:00.000Z"
+     "titre": "La question du jour. Les mouvements lycéens et gilets jaunes peuvent-ils survivre aux scènes de chaos du 17 octobre ?",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/les-mouvements-lyceens-et-gilets-jaunes-peuvent-ils-survivre-aux-scenes-de-chaos-du-17-octobre",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:00:00.000Z"
     },
     {
-     "titre": "Présidentielle 2027 : Quand Emmanuel Macron s’étonne du « manque d’humilité » de Marine Le Pen",
-     "url": "https://www.20minutes.fr/politique/4255111-20261017-presidentielle-2027-quand-emmanuel-macron-etonne-manque-humilite-marine-pen?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-16T22:16:42.000Z"
-    },
-    {
-     "titre": "Politique. « Manque d'humilité » : Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/16/manque-d-humilite-emmanuel-macron-repond-a-marine-le-pen-qui-veut-couper-l-aide-a-l-ukraine",
-     "media": "L'Est républicain",
-     "date": "2026-10-16T19:59:00.000Z"
+     "titre": "Mobilisation du 17 octobre : « gilets jaunes », lycéens, syndicats… qui sera dans la rue samedi ?",
+     "url": "https://www.nouvelobs.com/politique/20261016.OBS119257/mobilisation-du-17-octobre-gilets-jaunes-lyceens-syndicats-qui-sera-dans-la-rue-samedi.html",
+     "media": "L'Obs",
+     "date": "2026-10-16T11:19:33.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Manque d humilité",
-    "origine": "recoupement"
+    "titre": "Octobre",
+    "origine": "dossier"
    },
-   "fait": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
-   "accroche": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
-   "essentiel": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine. Trois médias en parlent : Dernières Nouvelles d'Alsace, 20 Minutes et L'Est républicain.",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage OpinionWay pour Cnews (terrain : 13-14 octobre 2026, 1 043 personnes, marge d'erreur ±3,0 pts) : Pen 35 %",
-     "source": "Commission des sondages (notice OpinionWay)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
+   "accroche": "La question du jour. Les mouvements lycéens et gilets jaunes peuvent-ils survivre aux scènes de chaos du 17 octobre ?",
+   "essentiel": "La question du jour. Les mouvements lycéens et gilets jaunes peuvent-ils survivre aux scènes de chaos du 17 octobre ? Deux médias en parlent : Le Progrès et L'Obs.",
+   "fait": "La question du jour. Les mouvements lycéens et gilets jaunes peuvent-ils survivre aux scènes de chaos du 17 octobre ?",
+   "date": {
+    "iso": "2026-10-17",
+    "jour": 17,
+    "mois": "octobre"
+   }
   },
   {
    "medias": 2,
@@ -861,8 +911,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Rassemblement au bas des Champs-Elysées, périmètre interdit à la manifestation",
    "accroche": "Rassemblement au bas des Champs-Elysées, périmètre interdit à la manifestation",
@@ -1008,6 +1059,105 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "20 Minutes",
+    "RFI"
+   ],
+   "derniere": "2026-10-17T06:17:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : La « convergence des luttes » ce samedi peut-elle noyer les revendications des lycéens ?",
+     "url": "https://www.20minutes.fr/societe/4255041-20261017-mobilisation-17-octobre-convergence-luttes-samedi-peut-noyer-revendications-lyceens?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-17T06:17:36.000Z"
+    },
+    {
+     "titre": "France: de multiples mobilisations annoncées ce 17 octobre pour une «convergence des luttes»",
+     "url": "https://www.rfi.fr/fr/france/20261016-france-de-multiples-mobilisations-annonc%C3%A9es-ce-17-octobre-pour-une-convergence-des-luttes",
+     "media": "RFI",
+     "date": "2026-10-16T20:39:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Convergence des luttes",
+    "origine": "recoupement"
+   },
+   "fait": "La « convergence des luttes » ce samedi peut-elle noyer les revendications des lycéens ?",
+   "accroche": "La « convergence des luttes » ce samedi peut-elle noyer les revendications des lycéens ?",
+   "essentiel": "La « convergence des luttes » ce samedi peut-elle noyer les revendications des lycéens ? Deux médias en parlent : 20 Minutes et RFI."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-16T22:16:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Quand Emmanuel Macron s’étonne du « manque d’humilité » de Marine Le Pen",
+     "url": "https://www.20minutes.fr/politique/4255111-20261017-presidentielle-2027-quand-emmanuel-macron-etonne-manque-humilite-marine-pen?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-16T22:16:42.000Z"
+    },
+    {
+     "titre": "Politique. « Manque d'humilité » : Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
+     "url": "https://www.dna.fr/politique/2026/10/16/manque-d-humilite-emmanuel-macron-repond-a-marine-le-pen-qui-veut-couper-l-aide-a-l-ukraine",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-16T19:59:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manque d humilité",
+    "origine": "recoupement"
+   },
+   "fait": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
+   "accroche": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine",
+   "essentiel": "Emmanuel Macron répond à Marine Le Pen, qui veut couper l'aide à l'Ukraine. Deux médias en parlent : 20 Minutes et Dernières Nouvelles d'Alsace.",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage OpinionWay pour Cnews (terrain : 13-14 octobre 2026, 1 043 personnes, marge d'erreur ±3,0 pts) : Pen 35 %",
+     "source": "Commission des sondages (notice OpinionWay)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Europe 1",
     "Sud Ouest"
    ],
@@ -1069,7 +1219,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
+    "titre": "Octobre",
     "origine": "dossier"
    },
    "date": {
@@ -1113,46 +1263,6 @@
    "fait": "Les députés rejettent en commission celui de la Sécu",
    "accroche": "Les députés rejettent en commission celui de la Sécu",
    "essentiel": "Les députés rejettent en commission celui de la Sécu. Les députés rejettent en commission celui de la Sécurité sociale. Deux médias en parlent : Libération et Le Monde."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "France 24",
-    "L'Obs"
-   ],
-   "derniere": "2026-10-16T14:23:34.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Gilets jaunes, lycéens, syndicats : à quoi va ressembler la mobilisation du 17 octobre ?",
-     "url": "https://www.france24.com/fr/france/20261016-france-gilets-jaunes-lyceens-syndicats-a-quoi-va-ressembler-la-mobilisation-du-17-octobre",
-     "media": "France 24",
-     "date": "2026-10-16T14:23:34.000Z"
-    },
-    {
-     "titre": "Mobilisation du 17 octobre : « gilets jaunes », lycéens, syndicats… qui sera dans la rue samedi ?",
-     "url": "https://www.nouvelobs.com/politique/20261016.OBS119257/mobilisation-du-17-octobre-gilets-jaunes-lyceens-syndicats-qui-sera-dans-la-rue-samedi.html",
-     "media": "L'Obs",
-     "date": "2026-10-16T11:19:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "fait": "À quoi va ressembler la mobilisation du 17 octobre ?",
-   "accroche": "À quoi va ressembler la mobilisation du 17 octobre ?",
-   "date": {
-    "iso": "2026-10-17",
-    "jour": 17,
-    "mois": "octobre"
-   }
   },
   {
    "medias": 2,
@@ -1237,7 +1347,7 @@
    "mediasDistincts": 2,
    "sources": [
     "La Croix",
-    "France 24"
+    "Public Sénat"
    ],
    "derniere": "2026-10-15T15:51:06.000Z",
    "illustration": {
@@ -1254,19 +1364,17 @@
      "date": "2026-10-15T15:51:06.000Z"
     },
     {
-     "titre": "Périscolaire : un rapport du Sénat pointe des dysfonctionnements \"systémiques\" à l'échelle nationale",
-     "url": "https://www.france24.com/fr/france/20261015-p%C3%A9riscolaire-un-rapport-du-s%C3%A9nat-pointe-des-dysfonctionnements-syst%C3%A9miques-%C3%A0-l-%C3%A9chelle-nationale",
-     "media": "France 24",
-     "date": "2026-10-15T12:25:30.000Z"
+     "titre": "« La France ne protège pas assez ses enfants » : un rapport du Sénat dénonce des défaillances « systémiques » dans le périscolaire",
+     "url": "https://www.publicsenat.fr/actualites/parlementaire/la-france-ne-protege-pas-assez-ses-enfants-un-rapport-du-senat-denonce-des-defaillances-systemiques-dans-le-periscolaire",
+     "media": "Public Sénat",
+     "date": "2026-10-15T14:39:36.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sénat pointe",
-    "origine": "recoupement"
-   },
-   "fait": "Un rapport du Sénat pointe des dysfonctionnements \"systémiques\" à l'échelle nationale",
-   "accroche": "Un rapport du Sénat pointe des dysfonctionnements \"systémiques\" à l'échelle nationale",
-   "essentiel": "Un rapport du Sénat pointe des dysfonctionnements \"systémiques\" à l'échelle nationale. Deux médias en parlent : La Croix et France 24."
+    "titre": "Sénat : ce qu'il faut savoir sur l'éducation et la jeunesse",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 2,
@@ -1477,7 +1585,7 @@
    "essentiel": "Elle veut proposer « une politique de production » : l’essayiste Natacha Polony annonce sa candidature à l’élection présidentielle. Deux médias en parlent : Libération et Nice-Matin."
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1490,6 +1598,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Paris. Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show",
+     "url": "https://www.leprogres.fr/culture-loisirs/2026/10/17/concerts-de-celine-dion-emmanuel-et-brigitte-macron-ont-assiste-a-son-avant-dernier-show",
+     "media": "Le Progrès",
+     "date": "2026-10-17T09:52:00.000Z"
+    },
     {
      "titre": "Paris. Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show",
      "url": "https://www.dna.fr/culture-loisirs/2026/10/17/concerts-de-celine-dion-emmanuel-et-brigitte-macron-ont-assiste-a-son-avant-dernier-show",
@@ -1510,7 +1624,7 @@
    },
    "fait": "Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show",
    "accroche": "Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show",
-   "essentiel": "Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
+   "essentiel": "Concerts de Céline Dion : Emmanuel et Brigitte Macron ont assisté à son avant-dernier show. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain."
   },
   {
    "medias": 2,
@@ -1590,6 +1704,176 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:24:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Ceyzériat. « De petites voix pour de grandes idées » : le conseil municipal enfants a été élu",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/de-petites-voix-pour-de-grandes-idees-le-conseil-municipal-enfants-a-ete-elu",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:24:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ceyzériat : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Le conseil municipal enfants a été élu",
+   "accroche": "Le conseil municipal enfants a été élu"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-17T17:24:35.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Giromagny. Un troisième distributeur de colis bientôt place de la Tuilerie",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/17/un-troisieme-distributeur-de-colis-bientot-place-de-la-tuilerie",
+     "media": "L'Est républicain",
+     "date": "2026-10-17T17:24:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Giromagny : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-17T17:23:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Phaffans. Des mesures pour économiser",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/17/des-mesures-pour-economiser",
+     "media": "L'Est républicain",
+     "date": "2026-10-17T17:23:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Phaffans : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:22:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Renaison. Les nouveaux élus rejoignent leurs aînés au conseil municipal des enfants",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/les-nouveaux-elus-rejoignent-leurs-aines-au-conseil-municipal-des-enfants",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:22:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Renaison : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Les nouveaux élus rejoignent leurs aînés au conseil municipal des enfants",
+   "accroche": "Les nouveaux élus rejoignent leurs aînés au conseil municipal des enfants"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-17T17:22:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Autrechêne. Instauration de la nouvelle taxe sur les logements vacants",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/17/instauration-de-la-nouvelle-taxe-sur-les-logements-vacants",
+     "media": "L'Est républicain",
+     "date": "2026-10-17T17:22:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Autrechêne : finances locales",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 19 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-17T17:22:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bavilliers. Les charges de personnel : 62,4 % des dépenses de fonctionnement",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/17/les-charges-de-personnel-62-4-des-depenses-de-fonctionnement",
+     "media": "L'Est républicain",
+     "date": "2026-10-17T17:22:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bavilliers : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-17T17:19:32.000Z",
@@ -1636,8 +1920,35 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
-    "origine": "dossier"
+    "titre": "Serre-Ponçon : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:13:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "L’Étoile. L’équipe municipale dresse un premier bilan après six mois",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/l-equipe-municipale-dresse-un-premier-bilan-apres-six-mois",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:13:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "L’Étoile : vie municipale",
+    "origine": "regles"
    }
   },
   {
@@ -1817,6 +2128,62 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:05:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Courzieu. La commune poursuit la réflexion sur la sécurité de la traversée du bourg",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/la-commune-poursuit-la-reflexion-sur-la-securite-de-la-traversee-du-bourg",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:05:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Courzieu : sécurité",
+    "origine": "regles"
+   },
+   "fait": "La commune poursuit la réflexion sur la sécurité de la traversée du bourg",
+   "accroche": "La commune poursuit la réflexion sur la sécurité de la traversée du bourg"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:05:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Lentilly. Conseil municipal : le restaurant scolaire s’ouvre aux associations",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/conseil-municipal-le-restaurant-scolaire-s-ouvre-aux-associations",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:05:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lentilly : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Le restaurant scolaire s’ouvre aux associations",
+   "accroche": "Le restaurant scolaire s’ouvre aux associations"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-17T17:05:30.000Z",
@@ -1838,6 +2205,35 @@
     "titre": "Eygliers : conseil municipal",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T17:05:03.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Claveisolles. Un festival d’orientation Obiwak proposé en 2027",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/un-festival-d-orientation-obiwak-propose-en-2027",
+     "media": "Le Progrès",
+     "date": "2026-10-17T17:05:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Claveisolles : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Un festival d’orientation Obiwak proposé en 2027",
+   "accroche": "Un festival d’orientation Obiwak proposé en 2027"
   },
   {
    "medias": 1,
@@ -1915,8 +2311,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -1968,8 +2364,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
-    "origine": "dossier"
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2051,8 +2448,118 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
-    "origine": "dossier"
+    "titre": "Drôme : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:46:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Longes. Délinquance : un bilan satisfaisant pour la participation citoyenne",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/delinquance-un-bilan-satisfaisant-pour-la-participation-citoyenne",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:46:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Longes : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:46:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Millery. La ville organisera des opérations d’achats groupés pour les habitants",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/la-ville-organisera-des-operations-d-achats-groupes-pour-les-habitants",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:46:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Millery : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La ville organisera des opérations d’achats groupés pour les habitants",
+   "accroche": "La ville organisera des opérations d’achats groupés pour les habitants"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:46:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Irigny. Mathilde Blethon est la nouvelle maire des enfants",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/mathilde-blethon-est-la-nouvelle-maire-des-enfants",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:46:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Irigny : actualité scolaire",
+    "origine": "regles"
+   },
+   "fait": "Mathilde Blethon est la nouvelle maire des enfants",
+   "accroche": "Mathilde Blethon est la nouvelle maire des enfants"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:46:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Chaponost. La mobilisation lycéenne s’invite au conseil municipal",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/la-mobilisation-lyceenne-s-invite-au-conseil-municipal",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:46:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Chaponost : mobilisation lycéenne",
+    "origine": "regles"
    }
   },
   {
@@ -2104,9 +2611,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -2249,17 +2755,18 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Parti socialiste : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
+    "Le Progrès"
    ],
-   "derniere": "2026-10-17T16:33:01.000Z",
+   "derniere": "2026-10-17T16:33:53.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2268,17 +2775,19 @@
    },
    "articles": [
     {
-     "titre": "\"Ça bouge pas, donc il faut employer les grands moyens\" : à Paris, les colères convergent",
-     "url": "https://www.france24.com/fr/france/20261017-%C3%A7a-bouge-pas-donc-il-faut-employer-grands-moyens-paris-manifestation-les-col%C3%A8res-convergent",
-     "media": "France 24",
-     "date": "2026-10-17T16:33:01.000Z"
+     "titre": "Vaux-en-Bugey. Les tarifs pour louer la salle des fêtes en 2028 ont été dévoilés",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/les-tarifs-pour-louer-la-salle-des-fetes-en-2028-ont-ete-devoiles",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:33:53.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
+    "titre": "Vaux-en-Bugey : actualité locale",
     "origine": "regles",
     "generique": true
-   }
+   },
+   "fait": "Les tarifs pour louer la salle des fêtes en 2028 ont été dévoilés",
+   "accroche": "Les tarifs pour louer la salle des fêtes en 2028 ont été dévoilés"
   },
   {
    "medias": 1,
@@ -2368,6 +2877,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Claude. Stop Manonpoly : deux collectifs appellent les habitants à se mobiliser pour revoir le PLUi",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/stop-manonpoly-deux-collectifs-appellent-les-habitants-a-se-mobiliser-pour-revoir-le-plui",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Claude : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Deux collectifs appellent les habitants à se mobiliser pour revoir le PLUi",
+   "accroche": "Deux collectifs appellent les habitants à se mobiliser pour revoir le PLUi"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-17T16:30:00.000Z",
@@ -2391,6 +2929,32 @@
    },
    "fait": "Quai de transfert des déchets : le casse-tête pour trouver un autre terrain",
    "accroche": "Quai de transfert des déchets : le casse-tête pour trouver un autre terrain"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T16:29:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Reyrieux. Covoiturage et sécheresse au programme du conseil municipal",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/covoiturage-et-secheresse-au-programme-du-conseil-municipal",
+     "media": "Le Progrès",
+     "date": "2026-10-17T16:29:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Reyrieux : conseil municipal",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -2451,7 +3015,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interview",
+    "titre": "Octobre",
     "origine": "dossier"
    }
   },
@@ -2757,8 +3321,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sandrine Rousseau : déclaration sur le maintien de l'ordre",
-    "origine": "regles"
+    "titre": "Octobre",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -2767,33 +3331,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T15:52:29.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "17 octobre : le \"Ras le bol face à la vie chère, à la répression\"",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-17-octobre-le-ras-le-bol-face-%C3%A0-la-vie-ch%C3%A8re-%C3%A0-la-r%C3%A9pression",
-     "media": "France 24",
-     "date": "2026-10-17T15:52:29.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -2974,9 +3511,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Sociale",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -2985,6 +3521,32 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T15:17:42.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Romain-de-Jalionas. Un nouveau médecin arrive et il va consulter… dans le bureau du maire",
+     "url": "https://www.leprogres.fr/politique/2026/10/17/un-nouveau-medecin-arrive-et-il-va-consulter-dans-le-bureau-du-maire",
+     "media": "Le Progrès",
+     "date": "2026-10-17T15:17:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Romain-de-Jalionas : santé publique",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -3184,8 +3746,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3387,6 +3950,32 @@
    },
    "fait": "Un cortège sauvage aux abords de l'Elysée a été «refoulé», selon la préfecture de police",
    "accroche": "Un cortège sauvage aux abords de l'Elysée a été «refoulé», selon la préfecture de police"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-17T14:32:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Viriat. Une nouvelle page d’histoire avec l’inauguration de la mairie rénovée",
+     "url": "https://www.leprogres.fr/economie/2026/10/17/une-nouvelle-page-d-histoire-avec-l-inauguration-de-la-nouvelle-mairie",
+     "media": "Le Progrès",
+     "date": "2026-10-17T14:32:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Viriat : vie municipale",
+    "origine": "regles"
+   }
   },
   {
    "medias": 1,
@@ -3679,33 +4268,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T13:08:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Un dialogue est-il encore possible entre le gouvernement et la jeunesse ?",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-un-dialogue-est-il-encore-possible-entre-le-gouvernement-et-la-jeunesse",
-     "media": "France 24",
-     "date": "2026-10-17T13:08:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce qu'il faut savoir sur l'éducation et la jeunesse",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-10-17T13:05:35.000Z",
@@ -3931,33 +4493,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T11:49:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation du 17 octobre : vers une convergence des colères ?",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-mobilisation-du-17-octobre-vers-une-convergence-des-col%C3%A8res",
-     "media": "France 24",
-     "date": "2026-10-17T11:49:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-10-17T11:37:00.000Z",
@@ -4010,481 +4545,6 @@
    },
    "fait": "A Villeneuve-sur-Lot, les élèves de Descartes ont voté : leur école va changer de nom et porter celui d’une femme",
    "accroche": "A Villeneuve-sur-Lot, les élèves de Descartes ont voté : leur école va changer de nom et porter celui d’une femme"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T11:28:58.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation du 17 octobre : tensions en marge des rassemblements à Paris",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-mobilisation-du-17-octobre-tensions-en-marge-des-rassemblements-%C3%A0-paris",
-     "media": "France 24",
-     "date": "2026-10-17T11:28:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-17T11:12:44.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
-     "media": "BFMTV",
-     "date": "2026-10-17T11:12:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-17T10:59:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation du 17 octobre : «LFI se sert des Gilets Jaunes comme d'un cheval de Troie pour la bordélisation», pointe Benjamin Cauchy",
-     "url": "https://www.europe1.fr/societe/mobilisation-du-17-octobre-lfi-se-sert-des-gilets-jaunes-comme-dun-cheval-de-troie-pour-la-bordelisation-pointe-benjamin-cauchy-1156970?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-17T10:59:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Benjamin Cauchy pointe : « La France insoumise se sert des Gilets Jaunes comme d'un cheval de Troie pour la bordélisation »",
-   "accroche": "Benjamin Cauchy pointe : « La France insoumise se sert des Gilets Jaunes comme d'un cheval de Troie pour la bordélisation »"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-17T10:45:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Tondelier",
-      "photo": "photos/personnalites/marine-tondelier.jpg",
-      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
-      "parti": "ECO",
-      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Je trace ma route de candidate et de maman » : comment Marine Tondelier va tenter de sauver sa campagne",
-     "url": "https://www.nouvelobs.com/politique/20261017.OBS119280/je-trace-ma-route-de-candidate-et-de-maman-comment-marine-tondelier-va-tenter-de-sauver-sa-campagne.html",
-     "media": "L'Obs",
-     "date": "2026-10-17T10:45:06.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Élections : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage OpinionWay pour Cnews (terrain : 13-14 octobre 2026, 1 043 personnes, marge d'erreur ±3,0 pts) : Tondelier 2 %",
-     "source": "Commission des sondages (notice OpinionWay)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T10:31:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "17 Octobre : des milliers de manifestants attendus dans toute la France",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-17-octobre-des-milliers-de-manifestants-attendus-dans-toute-la-france",
-     "media": "France 24",
-     "date": "2026-10-17T10:31:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Des milliers de manifestants attendus dans toute la France",
-   "accroche": "Des milliers de manifestants attendus dans toute la France"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-17T10:31:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Richard Ferrand attaqué par le RN: la rançon d’un régime laissé vulnérable aux assauts de l’extrême droite",
-     "url": "https://www.mediapart.fr/journal/politique/171026/richard-ferrand-attaque-par-le-rn-la-rancon-d-un-regime-laisse-vulnerable-aux-assauts-de-l-extreme-droi",
-     "media": "Mediapart",
-     "date": "2026-10-17T10:31:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-10-17T10:30:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 17 octobre : à qui profitera la colère sociale ?",
-     "url": "https://www.valeursactuelles.com/politique/manifestations-du-17-octobre-a-qui-profitera-la-colere-sociale",
-     "media": "Valeurs actuelles",
-     "date": "2026-10-17T10:30:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "À qui profitera la colère sociale ?",
-   "accroche": "À qui profitera la colère sociale ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-17T10:27:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "17 Octobre : journée de mobilisation en France des jeunes et gilets jaunes",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-17-octobre-journ%C3%A9e-de-mobilisation-en-france-des-jeunes-et-gilets-jaunes",
-     "media": "France 24",
-     "date": "2026-10-17T10:27:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Inter"
-   ],
-   "derniere": "2026-10-17T10:25:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Banco Master, le scandale financier qui percute l'élection présidentielle brésilienne",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-eco-en-vo/l-eco-en-vo-du-samedi-17-octobre-2026-3780275",
-     "media": "France Inter",
-     "date": "2026-10-17T10:25:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-10-17T10:24:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "«Bismillah, c’est les ténèbres» : Emma Fourreau critiquée pour avoir repris le slogan lycéen jugé «islamophobe»",
-     "url": "https://www.lejdd.fr/politique/bismillah-cest-les-tenebres-emma-fourreau-critiquee-pour-avoir-repris-le-slogan-lyceen-juge-islamophobe-186228",
-     "media": "Le JDD",
-     "date": "2026-10-17T10:24:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-17T10:07:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Herrlisheim. Le conseil municipal des jeunes officiellement installé",
-     "url": "https://www.dna.fr/politique/2026/10/17/le-conseil-municipal-des-jeunes-officiellement-installe",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-17T10:07:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Herrlisheim : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Inter"
-   ],
-   "derniere": "2026-10-17T10:04:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Avec Régine Hatchondo, présidente du Centre national du livre",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/on-n-arrete-pas-l-eco/on-n-arrete-pas-l-eco-du-samedi-17-octobre-2026-8861286",
-     "media": "France Inter",
-     "date": "2026-10-17T10:04:50.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-17T10:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Charente-Maritime : après les canicules et la sécheresse, le Conseil départemental porte son aide aux agriculteurs à 340 000 euros",
-     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/charente-maritime-apres-les-canicules-et-la-secheresse-le-conseil-departemental-porte-son-aide-aux-agriculteurs-a-340-000-euros-31104178.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-17T10:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : ce qu'il faut savoir sur le conseil départemental",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-17T09:33:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "À la recherche de notre ancêtre microbien",
-     "url": "https://www.mediapart.fr/journal/ecologie/171026/la-recherche-de-notre-ancetre-microbien",
-     "media": "Mediapart",
-     "date": "2026-10-17T09:33:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-17T09:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Hier c’était mieux demain, par Guénaëlle Gault",
-     "url": "https://www.liberation.fr/idees-et-debats/opinions/hier-cetait-mieux-demain-par-guenaelle-gault-20261017_VX7D2S7Z45GKBJDESK3O2AMGOA/",
-     "media": "Libération",
-     "date": "2026-10-17T09:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Express"
-   ],
-   "derniere": "2026-10-17T09:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Pierre Raffarin : \"Si les démocraties ne se réveillent pas, elles souffriront terriblement\"",
-     "url": "https://www.lexpress.fr/politique/jean-pierre-raffarin-si-les-democraties-ne-se-reveillent-pas-elles-souffriront-terriblement-OX23BGOPE5DZBD7IZ4S75VIGIE/",
-     "media": "L'Express",
-     "date": "2026-10-17T09:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Pierre Raffarin : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   }
  ]
 }
