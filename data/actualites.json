@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-17T10:45:43.915Z",
+ "lastUpdated": "2026-10-17T10:50:42.806Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -159,6 +159,7 @@
    ],
    "medias": [
     "France Inter",
+    "L'Obs",
     "Libération",
     "La Dépêche",
     "Le Dauphiné libéré",
@@ -168,7 +169,6 @@
     "Nice-Matin",
     "Dernières Nouvelles d'Alsace",
     "Le Monde",
-    "L'Obs",
     "L'Express",
     "Ouest-France",
     "Le Figaro",
@@ -178,6 +178,7 @@
    "mediasDistincts": 15,
    "sources": [
     "France Inter",
+    "L'Obs",
     "Libération",
     "La Dépêche",
     "EBRA",
@@ -186,14 +187,13 @@
     "Valeurs actuelles",
     "Nice-Matin",
     "Le Monde",
-    "L'Obs",
     "L'Express",
     "Ouest-France",
     "Le Figaro",
     "Public Sénat",
     "Le JDD"
    ],
-   "nb": 39,
+   "nb": 40,
    "derniere": "2026-10-17T10:25:00.000Z",
    "articles": [
     {
@@ -201,6 +201,12 @@
      "titre": "Banco Master, le scandale financier qui percute l'élection présidentielle brésilienne",
      "url": "https://www.radiofrance.fr/franceinter/podcasts/l-eco-en-vo/l-eco-en-vo-du-samedi-17-octobre-2026-3780275",
      "date": "2026-10-17T10:25:00.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "« Je trace ma route de candidate et de maman » : comment Marine Tondelier va tenter de sauver sa campagne",
+     "url": "https://www.nouvelobs.com/politique/20261017.OBS119280/je-trace-ma-route-de-candidate-et-de-maman-comment-marine-tondelier-va-tenter-de-sauver-sa-campagne.html",
+     "date": "2026-10-17T07:17:29.000Z"
     },
     {
      "media": "Libération",
@@ -256,12 +262,6 @@
      "titre": "L’élection présidentielle de 2027, moment démocratique ou combat algorithmique ?",
      "url": "https://www.lemonde.fr/politique/article/2026/10/16/l-election-presidentielle-de-2027-moment-democratique-ou-combat-algorithmique_6795573_823448.html",
      "date": "2026-10-16T15:45:08.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Affaire des assistants parlementaires du FN : Marine Le Pen sera bien fixée sur son sort avant la présidentielle",
-     "url": "https://www.nouvelobs.com/justice/20261016.OBS119265/affaire-des-assistants-parlementaires-du-fn-marine-le-pen-sera-bien-fixee-sur-son-sort-avant-la-presidentielle.html",
-     "date": "2026-10-16T15:19:05.000Z"
     },
     {
      "media": "L'Express",
@@ -1768,33 +1768,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Inter"
-   ],
-   "derniere": "2026-10-17T10:37:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Régine Hatchondo, présidente du Centre national du livre",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-d-on-n-arrete-pas-l-eco/l-invite-d-on-n-arrete-pas-l-eco-du-samedi-17-octobre-2026-7515848",
-     "media": "France Inter",
-     "date": "2026-10-17T10:37:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24"
    ],
    "derniere": "2026-10-17T10:31:19.000Z",
@@ -2751,6 +2724,53 @@
     "titre": "Politique : opinion d'un média",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-17T07:17:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Tondelier",
+      "photo": "photos/personnalites/marine-tondelier.jpg",
+      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
+      "parti": "ECO",
+      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Je trace ma route de candidate et de maman » : comment Marine Tondelier va tenter de sauver sa campagne",
+     "url": "https://www.nouvelobs.com/politique/20261017.OBS119280/je-trace-ma-route-de-candidate-et-de-maman-comment-marine-tondelier-va-tenter-de-sauver-sa-campagne.html",
+     "media": "L'Obs",
+     "date": "2026-10-17T07:17:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage OpinionWay pour Cnews (terrain : 13-14 octobre 2026, 1 043 personnes, marge d'erreur ±3,0 pts) : Tondelier 2 %",
+     "source": "Commission des sondages (notice OpinionWay)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
