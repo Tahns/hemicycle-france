@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-18T20:45:41.603Z",
+ "lastUpdated": "2026-10-18T20:50:43.157Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -160,10 +160,10 @@
    ],
    "medias": [
     "Libération",
+    "BFMTV",
     "Le Monde",
     "L'Obs",
     "Sud Ouest",
-    "BFMTV",
     "Europe 1",
     "La Dépêche",
     "Le Progrès",
@@ -183,10 +183,10 @@
    "mediasDistincts": 16,
    "sources": [
     "Libération",
+    "BFMTV",
     "Le Monde",
     "L'Obs",
     "Sud Ouest",
-    "BFMTV",
     "Groupe Bolloré",
     "La Dépêche",
     "EBRA",
@@ -200,13 +200,20 @@
     "Hugo Décrypte"
    ],
    "nb": 105,
-   "derniere": "2026-10-18T20:35:56.000Z",
+   "derniere": "2026-10-18T20:49:18.000Z",
    "articles": [
     {
      "media": "Libération",
      "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris",
      "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
-     "date": "2026-10-18T20:35:56.000Z"
+     "date": "2026-10-18T20:49:18.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Journée du 17-octobre: \"Le gouvernement a perdu le contrôle de la situation\", déclare Sébastien Chenu, vice-président du RN",
+     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-le-gouvernement-a-perdu-le-controle-de-la-situation-declare-sebastien-chenu-vice-president-du-rn_VN-202610180375.html",
+     "date": "2026-10-18T20:45:27.000Z",
+     "video": true
     },
     {
      "media": "Le Monde",
@@ -225,13 +232,6 @@
      "titre": "Mobilisation du 17 octobre : de nouvelles tensions et des pillages à Paris et Lyon après une journée de chaos",
      "url": "https://www.sudouest.fr/societe/mobilisation-du-17-octobre-de-nouvelles-tensions-et-des-pillages-a-paris-et-lyon-apres-une-journee-de-chaos-31136046.php",
      "date": "2026-10-18T20:24:33.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Journée du 17-octobre: \"En France, on est en train de vivre un moment de colère\", observe Philippe Poutou, porte-parole du NPA",
-     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-en-france-on-est-en-train-de-vivre-un-moment-de-colere-observe-philippe-poutou-porte-parole-du-npa_VN-202610180371.html",
-     "date": "2026-10-18T20:21:07.000Z",
-     "video": true
     },
     {
      "media": "Europe 1",
@@ -772,6 +772,58 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "BFMTV",
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-18T20:45:27.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Chenu",
+      "photo": "photos/deputes/PA720468.jpg",
+      "photoHd": "photos/deputes/hd/PA720468.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720468",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Journée du 17-octobre: \"Le gouvernement a perdu le contrôle de la situation\", déclare Sébastien Chenu, vice-président du RN",
+     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-le-gouvernement-a-perdu-le-controle-de-la-situation-declare-sebastien-chenu-vice-president-du-rn_VN-202610180375.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T20:45:27.000Z",
+     "video": true
+    },
+    {
+     "titre": "17 octobre : comment le gouvernement a perdu le contrôle",
+     "url": "https://www.humanite.fr/politique/laurent-nunez/17-octobre-comment-le-gouvernement-a-perdu-le-controle",
+     "media": "L'Humanité",
+     "date": "2026-10-18T14:51:08.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Chenu : député RN (Nord)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Sud Ouest",
     "Le Monde"
    ],
@@ -1083,48 +1135,6 @@
    "titrePropre": {
     "titre": "Pose des questions",
     "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "BFMTV",
-    "Europe 1"
-   ],
-   "derniere": "2026-10-18T16:16:10.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 17 octobre: Jordan Bardella estime que \"l'ordre n'existe plus aujourd'hui en France\"",
-     "url": "https://www.bfmtv.com/politique/front-national/manifestations-du-17-octobre-jordan-bardella-estime-que-l-ordre-n-existe-plus-aujourd-hui-en-france_AD-202610180288.html",
-     "media": "BFMTV",
-     "date": "2026-10-18T16:16:10.000Z"
-    },
-    {
-     "titre": "Violences du 17 octobre : «L'ordre n'existe plus aujourd'hui en France», affirme Jordan Bardella",
-     "url": "https://www.europe1.fr/politique/violences-du-17-octobre-lordre-nexiste-plus-aujourdhui-en-france-affirme-jordan-bardella-1160559?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-18T15:43:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -1468,6 +1478,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-18T20:49:18.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris",
+     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
+     "media": "Libération",
+     "date": "2026-10-18T20:49:18.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   },
+   "fait": "Les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris",
+   "accroche": "Les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France 24"
    ],
    "derniere": "2026-10-18T20:39:08.000Z",
@@ -1490,34 +1528,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-18T20:35:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
-     "media": "Libération",
-     "date": "2026-10-18T20:35:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   },
-   "fait": "Les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris",
-   "accroche": "Les scènes de dégradations ont repris ce dimanche soir au Forum des Halles à Paris"
   },
   {
    "medias": 1,
@@ -1652,8 +1662,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
