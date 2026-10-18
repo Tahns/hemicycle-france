@@ -7,7 +7,6 @@ Instagram ne permet pas d'ajouter une story à une une automatiquement : à fair
 
 | Publiée le | À ajouter à la une | Type | Story ou post | Confiance |
 |---|---|---|---|---|
-| 11 octobre 2026 | **2027** | story | Primaire socialiste et démocrate : ce que disent les médias | moyenne |
 | 11 octobre 2026 | **Actualité** | story | François Hollande (Parti socialiste) : ce que disent les médias | faible |
 | 11 octobre 2026 | **Actualité** | story | Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation | moyenne |
 | 12 octobre 2026 | **Élus et votes** | story | Vote solennel à l'Assemblée : projet de loi de finances pour 2027 (première partie) | haute |
@@ -66,12 +65,13 @@ Instagram ne permet pas d'ajouter une story à une une automatiquement : à fair
 | 18 octobre 2026 | **2027** | story | David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027 | moyenne |
 | 18 octobre 2026 | **Actualité** | story | Place de la République | faible |
 | 18 octobre 2026 | **Sondages** | story | Sondage YouGov : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : 12-15 octobre 2026) | haute |
+| 18 octobre 2026 | **Actualité** | carousel | Résumé de la semaine au Parlement | faible |
 
 Confiance « faible » : aucun indice net, la rubrique par défaut (Politique) est proposée ; à vérifier d'un coup d'œil.
 
 ## Par rubrique (toutes les publications suivies)
 
-- **Actualité** : 64 publication(s), la plus récente le 18 octobre 2026
+- **Actualité** : 65 publication(s), la plus récente le 18 octobre 2026
 - **2027** : 17 publication(s), la plus récente le 18 octobre 2026
 - **Sondages** : 1 publication(s), la plus récente le 18 octobre 2026
 - **Élus et votes** : 23 publication(s), la plus récente le 17 octobre 2026

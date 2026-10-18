@@ -1,8 +1,8 @@
 {
  "semaine": "2026-W42",
- "du": "2026-10-11T18:32:12.358Z",
- "au": "2026-10-18T18:32:12.358Z",
- "aJourAu": "2026-10-18T14:02:28.961Z",
+ "du": "2026-10-11T19:23:03.946Z",
+ "au": "2026-10-18T19:23:03.946Z",
+ "aJourAu": "2026-10-18T18:39:00.414Z",
  "rubriques": [
   {
    "id": "actu",
@@ -46,15 +46,6 @@
   }
  ],
  "aAjouterCetteSemaine": [
-  {
-   "id": "b26fc68ed7ee",
-   "titre": "Primaire socialiste et démocrate : ce que disent les médias",
-   "type": "story",
-   "publieLe": "2026-10-11T18:46:28.147Z",
-   "rubrique": "presidentielle",
-   "libelle": "2027",
-   "confiance": "moyenne"
-  },
   {
    "id": "1b6b0041497e",
    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
@@ -576,10 +567,20 @@
    "rubrique": "sondages",
    "libelle": "Sondages",
    "confiance": "haute"
+  },
+  {
+   "id": "cb106e351b9e",
+   "titre": "Résumé de la semaine au Parlement",
+   "type": "carousel",
+   "publieLe": "2026-10-18T18:39:00.414Z",
+   "rubrique": "actu",
+   "libelle": "Actualité",
+   "confiance": "faible"
   }
  ],
  "parRubrique": {
   "actu": [
+   "cb106e351b9e",
    "355aadead845",
    "6d62a54c9218",
    "3c8dac8509ea",
@@ -711,6 +712,18 @@
   ]
  },
  "entrees": [
+  {
+   "id": "cb106e351b9e",
+   "titre": "Résumé de la semaine au Parlement",
+   "type": "carousel",
+   "publieLe": "2026-10-18T18:39:00.414Z",
+   "theme": null,
+   "rubrique": "actu",
+   "libelle": "Actualité",
+   "source": "defaut",
+   "confiance": "faible",
+   "cetteSemaine": true
+  },
   {
    "id": "4254654878f8",
    "titre": "Sondage YouGov : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : 12-15 octobre 2026)",
@@ -1417,7 +1430,7 @@
    "libelle": "2027",
    "source": "titre",
    "confiance": "moyenne",
-   "cetteSemaine": true
+   "cetteSemaine": false
   },
   {
    "id": "c6d1256321e6",
