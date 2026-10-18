@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-18T19:15:40.623Z",
+ "lastUpdated": "2026-10-18T19:20:42.296Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Nice-Matin",
@@ -159,6 +159,7 @@
     "ordre"
    ],
    "medias": [
+    "L'Obs",
     "Libération",
     "BFMTV",
     "La Dépêche",
@@ -167,7 +168,6 @@
     "Valeurs actuelles",
     "Europe 1",
     "France 24",
-    "L'Est républicain",
     "Sud Ouest",
     "L'Humanité",
     "Le JDD",
@@ -181,8 +181,9 @@
     "RFI",
     "Hugo Décrypte"
    ],
-   "mediasDistincts": 16,
+   "mediasDistincts": 17,
    "sources": [
+    "L'Obs",
     "Libération",
     "BFMTV",
     "La Dépêche",
@@ -201,8 +202,14 @@
     "Hugo Décrypte"
    ],
    "nb": 116,
-   "derniere": "2026-10-18T19:06:57.000Z",
+   "derniere": "2026-10-18T19:09:44.000Z",
    "articles": [
+    {
+     "media": "L'Obs",
+     "titre": "« Honte », « colère » et appel au calme : ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
+     "url": "https://www.nouvelobs.com/politique/20261018.OBS119331/honte-colere-et-appel-au-calme-et-ce-qu-a-dit-emmanuel-macron-apres-les-evenements-du-17-octobre.html",
+     "date": "2026-10-18T19:09:44.000Z"
+    },
     {
      "media": "Libération",
      "titre": "EN DIRECT – Lendemain du 17 octobre : Emmanuel Macron promet des «propositions concrètes» aux lycéens dans les prochains jours",
@@ -251,12 +258,6 @@
      "titre": "17 octobre : Emmanuel Macron face aux français",
      "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-17-octobre-macron-face-aux-fran%C3%A7ais",
      "date": "2026-10-18T18:25:34.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Lycées, énergie, sécurité intérieure... Le président Macron a répondu aux attentes des Français, au lendemain de la mobilisation du 17 octobre ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/lycees-energie-securite-interieure-le-president-macron-a-repondu-aux-attentes-des-francais-au-lendemain-de-la-mobilisation-du-17-octobre",
-     "date": "2026-10-18T18:23:00.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -501,14 +502,15 @@
  ],
  "sujets": [
   {
-   "medias": 3,
-   "mediasDistincts": 3,
+   "medias": 4,
+   "mediasDistincts": 4,
    "sources": [
+    "Public Sénat",
     "Nice-Matin",
     "La Dépêche",
     "Le Figaro"
    ],
-   "derniere": "2026-10-18T19:09:44.000Z",
+   "derniere": "2026-10-18T19:17:23.000Z",
    "illustration": {
     "personnes": [
      {
@@ -524,16 +526,22 @@
    },
    "articles": [
     {
-     "titre": "Manifestations du 17 octobre : Emmanuel Macron exprime \"sa honte\" et promet d'être \"intraitable\" face aux casseurs... que retenir de son allocution ?",
-     "url": "https://www.ladepeche.fr/2026/10/18/manifestations-du-17-octobre-emmanuel-macron-exprime-sa-honte-et-promet-detre-intraitable-face-aux-casseurs-que-retenir-de-son-allocution-13608901.php",
-     "media": "La Dépêche",
-     "date": "2026-10-18T19:05:56.000Z"
+     "titre": "Violences du 17 octobre : Macron exprime sa « colère » et sa « honte » et promet « toute la transparence »",
+     "url": "https://www.publicsenat.fr/actualites/politique/violences-du-17-octobre-macron-exprime-sa-colere-et-sa-honte-et-promet-toute-la-transparence",
+     "media": "Public Sénat",
+     "date": "2026-10-18T19:17:23.000Z"
     },
     {
      "titre": "« De la honte et de la colère » : ce qu’il faut retenir de l’allocution télé d’Emmanuel Macron après les violences urbaines en France ce week-end",
      "url": "https://www.nicematin.com/societe/politique/de-la-honte-et-de-la-colere-ce-qu-il-faut-retenir-de-l-allocution-tele-d-emmanuel-macron-apres-les-violences-urbaines-en-france-ce-week-end-10743352",
      "media": "Nice-Matin",
      "date": "2026-10-18T19:09:44.000Z"
+    },
+    {
+     "titre": "Manifestations du 17 octobre : Emmanuel Macron exprime \"sa honte\" et promet d'être \"intraitable\" face aux casseurs... que retenir de son allocution ?",
+     "url": "https://www.ladepeche.fr/2026/10/18/manifestations-du-17-octobre-emmanuel-macron-exprime-sa-honte-et-promet-detre-intraitable-face-aux-casseurs-que-retenir-de-son-allocution-13608901.php",
+     "media": "La Dépêche",
+     "date": "2026-10-18T19:05:56.000Z"
     },
     {
      "titre": "Violences du 17 octobre : critiqué de toutes parts, Emmanuel Macron promet d’être « intraitable »",
@@ -543,8 +551,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Promet d être",
-    "origine": "recoupement"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -651,7 +660,7 @@
    "essentiel": "Le Rassemblement national et l’Union des droites pour la République saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand. Trois médias en parlent : 20 Minutes, RFI et Libération."
   },
   {
-   "medias": 5,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
     "Ouest-France",
@@ -694,12 +703,6 @@
      "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
      "url": "https://www.ledauphine.com/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
      "media": "Le Dauphiné libéré",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "L'Est républicain",
      "date": "2026-10-18T18:24:00.000Z"
     }
    ],
@@ -888,6 +891,50 @@
     "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "BFMTV",
+    "Europe 1"
+   ],
+   "derniere": "2026-10-18T17:52:07.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "EPR"
+    ],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Violences du 17 octobre: Marine Le Pen dénonce \"une crise profonde\" qui fait peser une menace sur la démocratie",
+     "url": "https://www.bfmtv.com/politique/extreme-droite/violences-du-17-octobre-marine-le-pen-denonce-une-crise-profonde-qui-fait-peser-une-menace-sur-la-democratie_AN-202610180322.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T17:52:07.000Z"
+    },
+    {
+     "titre": "Violences du 17 octobre : Marine Le Pen dénonce «une menace sur la démocratie» et «un pouvoir macroniste épuisé»",
+     "url": "https://www.europe1.fr/politique/violences-du-17-octobre-marine-le-pen-denonce-une-menace-sur-la-democratie-et-un-pouvoir-macroniste-epuise-1160592?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-18T16:12:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Menace sur la démocratie",
+    "origine": "recoupement"
    }
   },
   {
@@ -1327,7 +1374,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1357,12 +1404,6 @@
      "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
      "media": "Le Dauphiné libéré",
      "date": "2026-10-18T19:00:00.000Z"
-    },
-    {
-     "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T19:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1371,7 +1412,7 @@
    },
    "fait": "Le gouvernement sommé de rendre des comptes",
    "accroche": "Le gouvernement sommé de rendre des comptes",
-   "essentiel": "Le gouvernement sommé de rendre des comptes. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
+   "essentiel": "Le gouvernement sommé de rendre des comptes. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et Le Dauphiné libéré."
   },
   {
    "medias": 1,
@@ -1441,6 +1482,41 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-10-18T19:09:44.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Honte », « colère » et appel au calme : ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
+     "url": "https://www.nouvelobs.com/politique/20261018.OBS119331/honte-colere-et-appel-au-calme-et-ce-qu-a-dit-emmanuel-macron-apres-les-evenements-du-17-octobre.html",
+     "media": "L'Obs",
+     "date": "2026-10-18T19:09:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   },
+   "fait": "Ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
+   "accroche": "Ce qu’a dit Emmanuel Macron après les événements du 17 octobre"
   },
   {
    "medias": 1,
@@ -1750,32 +1826,6 @@
     "titre": "Emmanuel Macron : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T18:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "L'oeil de la rédaction. Edito. Violences et pillages : les plaies à vif d’un terrible 17 octobre",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/18/edito-violences-et-pillages-les-plaies-a-vif-d-un-terrible-17-octobre",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T18:39:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : opinion d'un média",
-    "origine": "regles"
    }
   },
   {
@@ -2164,39 +2214,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T18:23:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Lycées, énergie, sécurité intérieure... Le président Macron a répondu aux attentes des Français, au lendemain de la mobilisation du 17 octobre ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/lycees-energie-securite-interieure-le-president-macron-a-repondu-aux-attentes-des-francais-au-lendemain-de-la-mobilisation-du-17-octobre",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T18:23:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-18T18:16:14.000Z",
@@ -2225,33 +2242,6 @@
    "titrePropre": {
     "titre": "Finances publiques : déclaration sur les finances publiques",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T18:13:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Tout le monde condamne, mais différemment",
-     "url": "https://www.estrepublicain.fr/economie/2026/10/18/tout-le-monde-condamne-mais-pas-au-meme-niveau",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T18:13:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -2633,70 +2623,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-18T17:52:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre: Marine Le Pen dénonce \"une crise profonde\" qui fait peser une menace sur la démocratie",
-     "url": "https://www.bfmtv.com/politique/extreme-droite/violences-du-17-octobre-marine-le-pen-denonce-une-crise-profonde-qui-fait-peser-une-menace-sur-la-democratie_AN-202610180322.html",
-     "media": "BFMTV",
-     "date": "2026-10-18T17:52:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:47:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Dampierre-les-Bois. Coupes de bois au menu des élus",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/coupes-de-bois-au-menu-des-elus",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:47:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dampierre-les-Bois : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Coupes de bois au menu des élus",
-   "accroche": "Coupes de bois au menu des élus"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-10-18T17:45:49.000Z",
@@ -2718,118 +2644,6 @@
     "titre": "La Tour-de-Salvagny : logement et accueil",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:43:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Suarce. Les tarifs du bois de chauffage sont fixés, le programme des coupes aussi",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/les-tarifs-du-bois-de-chauffage-sont-fixes-le-programme-des-coupes-aussi",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:43:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Suarce : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les tarifs du bois de chauffage sont fixés, le programme des coupes aussi",
-   "accroche": "Les tarifs du bois de chauffage sont fixés, le programme des coupes aussi"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:43:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Rougemont-le-Château. Un logement mis à disposition d’un médecin généraliste",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/un-logement-mis-a-disposition-d-un-medecin-generaliste",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:43:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rougemont-le-Château : santé publique",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:43:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Rougegoutte. Rénovation des ponts : des subventions à trouver",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/renovation-des-ponts-des-subventions-a-trouver",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:43:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rougegoutte : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Rénovation des ponts : des subventions à trouver",
-   "accroche": "Rénovation des ponts : des subventions à trouver"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:43:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Bavilliers. Le comité consultatif se prononce pour un sens unique rue des Écoles",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/le-comite-consultatif-se-prononce-pour-un-sens-unique-rue-des-ecoles",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:43:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bavilliers : actualité scolaire",
-    "origine": "regles"
-   },
-   "fait": "Le comité consultatif se prononce pour un sens unique rue des Écoles",
-   "accroche": "Le comité consultatif se prononce pour un sens unique rue des Écoles"
   },
   {
    "medias": 1,
@@ -2884,33 +2698,6 @@
    },
    "fait": "La mairie recrute un agent recenseur pour 2027",
    "accroche": "La mairie recrute un agent recenseur pour 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:40:15.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Hérimoncourt. Le coût et l’avenir du Relais petite enfance en question",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/le-cout-et-l-avenir-du-relais-petite-enfance-en-question",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:40:15.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Hérimoncourt : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -2996,34 +2783,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:35:11.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Méziré. Les sept membres élus du comité des fêtes",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/les-sept-membres-elus-du-comite-des-fetes",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:35:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Méziré : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Les sept membres élus du comité des fêtes",
-   "accroche": "Les sept membres élus du comité des fêtes"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-18T17:34:00.000Z",
@@ -3047,33 +2806,6 @@
    },
    "fait": "La commune prépare l’avenir de ses bâtiments publics avec les habitants",
    "accroche": "La commune prépare l’avenir de ses bâtiments publics avec les habitants"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:33:48.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Phaffans. Décorations de Noël : un sapin à mettre dans le jardin",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/decorations-de-noel-un-sapin-a-mettre-dans-le-jardin",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:33:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Phaffans : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -3487,64 +3219,6 @@
    },
    "fait": "Deux arrivées pour compléter l’équipe de direction du collège Henri-de-Navarre",
    "accroche": "Deux arrivées pour compléter l’équipe de direction du collège Henri-de-Navarre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Besançon. Conseil des sages : dix nominations qui font tiquer l’opposition",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/conseil-des-sages-dix-nominations-qui-font-tiquer-l-opposition",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Besançon : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Conseil des sages : dix nominations qui font tiquer l’opposition",
-   "accroche": "Conseil des sages : dix nominations qui font tiquer l’opposition"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-18T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Haute-Saône. Notre rubrique « Écoute voir » : le devenir de l’abattoir de Luxeuil fait parler",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/notre-rubrique-ecoute-voir-le-devenir-de-l-abattoir-de-luxeuil-fait-parler",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haute-Saône : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le devenir de l’abattoir de Luxeuil fait parler",
-   "accroche": "Le devenir de l’abattoir de Luxeuil fait parler"
   },
   {
    "medias": 1,
@@ -4155,44 +3829,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-18T16:12:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "EPR"
-    ],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre : Marine Le Pen dénonce «une menace sur la démocratie» et «un pouvoir macroniste épuisé»",
-     "url": "https://www.europe1.fr/politique/violences-du-17-octobre-marine-le-pen-denonce-une-menace-sur-la-democratie-et-un-pouvoir-macroniste-epuise-1160592?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-18T16:12:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-10-18T16:11:24.000Z",
@@ -4437,25 +4073,428 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
+    "Sud Ouest"
    ],
-   "derniere": "2026-10-18T15:50:00.000Z",
+   "derniere": "2026-10-18T15:45:54.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "international",
+    "vignette": "international"
    },
    "articles": [
     {
-     "titre": "Vote. Ecrouves : selon vous, comment sortir de la crise municipale ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/ecrouves-selon-vous-comment-sortir-de-la-crise-municipale",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T15:50:00.000Z"
+     "titre": "Moyen-Orient : le chef de la diplomatie française à Ryad en amont d’une visite de Macron dans la région",
+     "url": "https://www.sudouest.fr/international/moyen-orient-la-france-deploie-des-moyens-militaires-en-arabie-saoudite-pour-securiser-les-approvisionnements-en-carburants-31132134.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:45:54.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Vote : vie municipale",
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur une affaire internationale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:44:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Violences du 17 octobre: Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\"",
+     "url": "https://www.bfmtv.com/politique/extreme-droite/violences-du-17-octobre-marion-marechal-assimile-les-manifestants-pacifiques-aux-casseurs_AN-202610180278.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:44:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\"",
+   "accroche": "Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\""
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-18T15:37:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Grégoire, maire de Paris : «Des casseurs ont pu passer de magasin en magasin sans croiser un seul policier»",
+     "url": "https://www.liberation.fr/politique/emmanuel-gregoire-maire-de-paris-des-casseurs-ont-pu-passer-de-magasin-en-magasin-sans-croiser-un-seul-policier-20261018_XESNI2SAL5E4ZO7SDR6SLTXTME/",
+     "media": "Libération",
+     "date": "2026-10-18T15:37:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:36:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : « État dépassé », « dispositif sous-dimensionné »… La gestion du maintien de l’ordre sous le feu des critiques",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-du-17-octobre-etat-depasse-dispositif-sous-dimensionne-la-gestion-du-maintien-de-l-ordre-sous-le-feu-des-critiques-31131826.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:36:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:25:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Jeunesse en lutte, système en chute » : à Pau, les manifestants avaient de nombreux messages à faire passer",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/jeunesse-en-lutte-systeme-en-chute-a-pau-les-manifestants-avaient-de-nombreux-messages-a-faire-passer-31129953.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:25:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jeunes",
+    "origine": "dossier"
+   },
+   "fait": "À Pau, les manifestants avaient de nombreux messages à faire passer",
+   "accroche": "À Pau, les manifestants avaient de nombreux messages à faire passer"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:22:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre à Bordeaux : les images de la résidence préfectorale saccagée par les casseurs",
+     "url": "https://www.sudouest.fr/gironde/bordeaux/mobilisation-du-17-octobre-a-bordeaux-les-images-de-la-residence-prefectorale-saccagee-par-les-casseurs-31130799.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:22:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Les images de la résidence préfectorale saccagée par les casseurs",
+   "accroche": "Les images de la résidence préfectorale saccagée par les casseurs"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:19:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Pouria Amirshahi",
+      "photo": "photos/deputes/PA610968.jpg",
+      "photoHd": "photos/deputes/hd/PA610968.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA610968",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN",
+     "ECO"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "\"Vous vous frottez les mains de cette situation\": Pouria Amirshahi, député Écologiste et Social, interpelle le président du RN Jordan Bardella, au sujet des violences du 17 octobre",
+     "url": "https://www.bfmtv.com/politique/video-vous-vous-frottez-les-mains-de-cette-situation-pouria-amirshahi-depute-ecologiste-et-social-interpelle-le-president-du-rn-jordan-bardella-au-sujet-des-violences-du-17-octobre_VN-202610180272.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:19:20.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Environnement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:15:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 17 octobre: \"Le dispositif policier a été sous-dimensionné\", estime Jordan Bardella, président du Rassemblement national",
+     "url": "https://www.bfmtv.com/politique/front-national/video-manifestations-du-17-octobre-le-dispositif-policier-a-ete-sous-dimensionne-estime-jordan-bardella-president-du-rassemblement-national_VN-202610180271.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:15:51.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-18T15:15:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Etat dépassé », « mauvaise anticipation », « dispositif policier sous-dimensionné », défaut « de réponse politique » : élus, policiers et experts décrivent une situation « dramatique »",
+     "url": "https://www.nicematin.com/societe/securite/etat-depasse-mauvaise-anticipation-dispositif-policier-sous-dimensionne-defaut-de-reponse-politique-elus-policiers-et-experts-decrivent-une-situation-dramatique-10743134",
+     "media": "Nice-Matin",
+     "date": "2026-10-18T15:15:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : réponse sur les finances publiques",
+    "origine": "regles"
+   },
+   "fait": "Élus, policiers et experts décrivent une situation « dramatique »",
+   "accroche": "Élus, policiers et experts décrivent une situation « dramatique »"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:10:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mairie incendiée de Limoges: \"Un acte gravissime et innommable\", dénonce le préfet de la Haute-Vienne, Maurice Barate",
+     "url": "https://www.bfmtv.com/politique/video-mairie-incendiee-de-limoges-un-acte-gravissime-et-innommable-denonce-le-prefet-de-la-haute-vienne-maurice-barate_VN-202610180266.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:10:32.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : déclaration sur la vie locale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-18T15:08:18.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 17 octobre : faiblesse du gouvernement français, focus sur les Gilets jaunes... qu'en pense la presse étrangère ?",
+     "url": "https://www.ladepeche.fr/2026/10/18/manifestations-du-17-octobre-faiblesse-du-gouvernement-francais-focus-sur-les-gilets-jaunes-quen-pense-la-presse-etrangere-13608272.php",
+     "media": "La Dépêche",
+     "date": "2026-10-18T15:08:18.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur une affaire internationale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-18T15:07:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le RN rétropédale après avoir ciblé la Fondation Maison des sciences de l’homme et le campus Condorcet",
+     "url": "https://www.humanite.fr/politique/budget-2027/le-rn-retropedale-apres-avoir-cible-la-fondation-maison-des-sciences-de-lhomme-et-le-campus-condorcet",
+     "media": "L'Humanité",
+     "date": "2026-10-18T15:07:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rassemblement national : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-18T14:57:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : au lendemain des violences, le gouvernement sous forte pression",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-17-octobre-au-lendemain-des-violences-le-gouvernement-sous-forte-pression",
+     "media": "France 24",
+     "date": "2026-10-18T14:57:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-18T14:51:08.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : comment le gouvernement a perdu le contrôle",
+     "url": "https://www.humanite.fr/politique/laurent-nunez/17-octobre-comment-le-gouvernement-a-perdu-le-controle",
+     "media": "L'Humanité",
+     "date": "2026-10-18T14:51:08.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
     "origine": "regles"
    }
   }
