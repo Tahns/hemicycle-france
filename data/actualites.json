@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-18T19:40:42.431Z",
+ "lastUpdated": "2026-10-18T19:45:41.379Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -154,21 +154,20 @@
    "titre": "Octobre",
    "motifs": [
     "octobre",
-    "manifestations",
     "mobilisation",
+    "manifestations",
     "ordre"
    ],
    "medias": [
-    "Europe 1",
-    "Libération",
-    "La Dépêche",
+    "L'Est républicain",
     "BFMTV",
+    "Libération",
+    "Europe 1",
+    "La Dépêche",
     "Le Monde",
-    "L'Obs",
-    "Le Progrès",
     "Le Dauphiné libéré",
     "Valeurs actuelles",
-    "L'Est républicain",
+    "France 24",
     "Sud Ouest",
     "L'Humanité",
     "Le JDD",
@@ -181,16 +180,16 @@
     "RFI",
     "Hugo Décrypte"
    ],
-   "mediasDistincts": 17,
+   "mediasDistincts": 16,
    "sources": [
-    "Groupe Bolloré",
-    "Libération",
-    "La Dépêche",
-    "BFMTV",
-    "Le Monde",
-    "L'Obs",
     "EBRA",
+    "BFMTV",
+    "Libération",
+    "Groupe Bolloré",
+    "La Dépêche",
+    "Le Monde",
     "Valeurs actuelles",
+    "France Médias Monde",
     "Sud Ouest",
     "L'Humanité",
     "Mediapart",
@@ -198,23 +197,35 @@
     "L'Express",
     "Le Figaro",
     "France Inter",
-    "RFI",
     "Hugo Décrypte"
    ],
-   "nb": 101,
-   "derniere": "2026-10-18T19:35:00.000Z",
+   "nb": 114,
+   "derniere": "2026-10-18T19:41:37.000Z",
    "articles": [
     {
-     "media": "Europe 1",
-     "titre": "Émeutes du 17 octobre : «Il faut dissoudre La France insoumise», estime François-Xavier Bellamy",
-     "url": "https://www.europe1.fr/politique/emeutes-du-17-octobre-il-faut-dissoudre-la-france-insoumise-estime-francois-xavier-bellamy-1161000?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-18T19:35:00.000Z"
+     "media": "L'Est républicain",
+     "titre": "Territoire de Belfort. Un appel au rassemblement devant la mairie de Belfort ce lundi à midi",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/18/un-appel-au-rassemblement-devant-la-mairie-de-belfort-ce-lundi-a-midi",
+     "date": "2026-10-18T19:41:37.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Journée du 17-octobre: \"L'inquiétude, c’est qu'on ait une escalade jusqu'au bout\", déclare Jean-Pierre Raffarin, ancien Premier ministre",
+     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-l-inquietude-c-est-qu-on-ait-une-escalade-jusqu-au-bout-declare-jean-pierre-raffarin-ancien-premier-ministre_VN-202610180359.html",
+     "date": "2026-10-18T19:40:37.000Z",
+     "video": true
     },
     {
      "media": "Libération",
      "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris au Forum des Halles à Paris",
      "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
-     "date": "2026-10-18T19:34:57.000Z"
+     "date": "2026-10-18T19:40:24.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Émeutes du 17 octobre : «Il faut dissoudre La France insoumise», estime François-Xavier Bellamy",
+     "url": "https://www.europe1.fr/politique/emeutes-du-17-octobre-il-faut-dissoudre-la-france-insoumise-estime-francois-xavier-bellamy-1161000?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-18T19:35:00.000Z"
     },
     {
      "media": "La Dépêche",
@@ -223,30 +234,11 @@
      "date": "2026-10-18T19:22:40.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "17-octobre: Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
-     "url": "https://www.bfmtv.com/politique/video-17-octobre-emmanuel-macron-veut-toute-la-transparence-sur-le-maintien-de-l-ordre_VN-202610180356.html",
-     "date": "2026-10-18T19:22:17.000Z",
-     "video": true
-    },
-    {
      "media": "Le Monde",
      "titre": "Manifestation du 17 octobre : l’essentiel de la déclaration d’Emmanuel Macron en vidéo",
      "url": "https://www.lemonde.fr/politique/video/2026/10/18/manifestation-du-17-octobre-l-essentiel-de-la-declaration-d-emmanuel-macron-en-video_6797231_823448.html",
      "date": "2026-10-18T19:19:57.000Z",
      "video": true
-    },
-    {
-     "media": "L'Obs",
-     "titre": "« Honte », « colère » et appel au calme : ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
-     "url": "https://www.nouvelobs.com/politique/20261018.OBS119331/honte-colere-et-appel-au-calme-et-ce-qu-a-dit-emmanuel-macron-apres-les-evenements-du-17-octobre.html",
-     "date": "2026-10-18T19:09:44.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "La question du jour. Le chaos du 17 octobre aura-t-il un impact sur la présidentielle ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/le-chaos-du-17-octobre-aura-t-il-un-impact-sur-la-presidentielle",
-     "date": "2026-10-18T19:00:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
@@ -261,10 +253,10 @@
      "date": "2026-10-18T18:38:29.000Z"
     },
     {
-     "media": "L'Est républicain",
-     "titre": "Lycées, énergie, sécurité intérieure... Le président Macron a répondu aux attentes des Français, au lendemain de la mobilisation du 17 octobre ?",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/lycees-energie-securite-interieure-le-president-macron-a-repondu-aux-attentes-des-francais-au-lendemain-de-la-mobilisation-du-17-octobre",
-     "date": "2026-10-18T18:23:00.000Z"
+     "media": "France 24",
+     "titre": "17 octobre : Emmanuel Macron face aux français",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-17-octobre-macron-face-aux-fran%C3%A7ais",
+     "date": "2026-10-18T18:25:34.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -336,52 +328,44 @@
    ]
   },
   {
-   "id": "saint-romain-le-puy",
-   "titre": "Saint-romain-le-puy",
+   "id": "jeunes",
+   "titre": "Jeunes",
    "motifs": [
-    "saint-romain-le-puy"
+    "jeunes",
+    "saint-vallier"
    ],
    "medias": [
-    "Le Progrès",
     "Le Dauphiné libéré",
     "Sud Ouest",
+    "Le Monde",
     "Dernières Nouvelles d'Alsace",
     "Hugo Décrypte",
-    "Nice-Matin"
+    "Nice-Matin",
+    "France 24"
    ],
-   "mediasDistincts": 4,
+   "mediasDistincts": 6,
    "sources": [
     "EBRA",
     "Sud Ouest",
+    "Le Monde",
     "Hugo Décrypte",
-    "Nice-Matin"
+    "Nice-Matin",
+    "France 24"
    ],
-   "nb": 9,
-   "derniere": "2026-10-18T17:30:37.000Z",
+   "nb": 11,
+   "derniere": "2026-10-18T18:32:46.000Z",
    "articles": [
     {
-     "media": "Le Progrès",
-     "titre": "Saint-Romain-le-Puy. Encore des travaux imprévus pour terminer la déconstruction de l’école",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/encore-des-travaux-imprevus-pour-terminer-la-deconstruction-de-l-ecole",
-     "date": "2026-10-18T17:30:37.000Z"
+     "media": "Le Dauphiné libéré",
+     "titre": "Pisieu. Un nouveau conseil municipal des jeunes élu",
+     "url": "https://www.ledauphine.com/politique/2026/10/18/un-nouveau-conseil-municipal-des-jeunes-elu",
+     "date": "2026-10-18T18:32:46.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Saint-Vallier. Le conseil municipal des jeunes est installé : voici les élus",
      "url": "https://www.ledauphine.com/politique/2026/10/18/le-conseil-municipal-des-jeunes-est-installe-voici-les-elus",
      "date": "2026-10-18T17:03:59.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Saint-Étienne-la-Varenne. La requalification du centre bourg est désormais officielle",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/la-requalification-du-centre-bourg-est-desormais-officielle",
-     "date": "2026-10-18T16:52:34.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Saint-Didier-de-Formans. Climatisation de l’école : le projet avance",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/climatisation-de-l-ecole-le-projet-avance",
-     "date": "2026-10-18T16:46:32.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
@@ -391,9 +375,27 @@
     },
     {
      "media": "Sud Ouest",
+     "titre": "« Jeunesse en lutte, système en chute » : à Pau, les manifestants avaient de nombreux messages à faire passer",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/jeunesse-en-lutte-systeme-en-chute-a-pau-les-manifestants-avaient-de-nombreux-messages-a-faire-passer-31129953.php",
+     "date": "2026-10-18T15:25:54.000Z"
+    },
+    {
+     "media": "Sud Ouest",
      "titre": "« Est-ce qu’une boîte plus établie aurait pris le risque ? » Le distributeur saintais Vraivrai Films dans la tempête médiatique du documentaire « Fini de rire »",
      "url": "https://www.sudouest.fr/charente-maritime/saintes/est-ce-qu-une-boite-plus-etablie-aurait-pris-le-risque-le-distributeur-saintais-vraivrai-films-dans-la-tempete-mediatique-du-documentaire-fini-de-rire-31100598.php",
      "date": "2026-10-18T11:00:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "« On est des enfants placés, ça ne nous empêche pas d’être motivés et d’avoir un avenir prometteur » : les jeunes de l’Aide sociale à l’enfance célèbrent leur réussite",
+     "url": "https://www.sudouest.fr/lot-et-garonne/on-est-des-enfants-places-ca-ne-nous-empeche-pas-d-etre-motives-et-d-avoir-un-avenir-prometteur-les-jeunes-de-l-aide-sociale-a-l-enfance-celebrent-leur-reussite-31051012.php",
+     "date": "2026-10-18T09:58:50.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "« Si nous n’étions pas aveuglés par le marché, nous pourrions tout de suite proposer un autre horizon à la jeunesse »",
+     "url": "https://www.lemonde.fr/idees/article/2026/10/18/si-nous-n-etions-pas-aveugles-par-le-marche-nous-pourrions-tout-de-suite-proposer-un-autre-horizon-a-la-jeunesse_6797037_3232.html",
+     "date": "2026-10-18T04:30:13.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -413,6 +415,86 @@
      "titre": "« Face à la fonte des glaciers, nous ne pourrons plus compter que sur l’eau des Alpes » : un accord-cadre explore la possibilité d’exploiter les sources d’eau de la Sainte-Baume",
      "url": "https://www.nicematin.com/environnement/face-a-la-fonte-des-glaciers-nous-ne-pourrons-plus-compter-que-sur-l-eau-des-alpes-un-accord-cadre-explore-la-possibilite-d-exploiter-les-sources-d-eau-de-la-sainte-baume-10741727",
      "date": "2026-10-17T16:15:09.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Un dialogue est-il encore possible entre le gouvernement et la jeunesse ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261017-un-dialogue-est-il-encore-possible-entre-le-gouvernement-et-la-jeunesse",
+     "date": "2026-10-17T13:08:10.000Z"
+    }
+   ]
+  },
+  {
+   "id": "transparence",
+   "titre": "Transparence",
+   "motifs": [
+    "transparence"
+   ],
+   "medias": [
+    "France 24",
+    "BFMTV",
+    "Le Dauphiné libéré",
+    "RFI",
+    "Nice-Matin"
+   ],
+   "mediasDistincts": 4,
+   "sources": [
+    "France Médias Monde",
+    "BFMTV",
+    "Le Dauphiné libéré",
+    "Nice-Matin"
+   ],
+   "nb": 8,
+   "derniere": "2026-10-18T19:22:47.000Z",
+   "articles": [
+    {
+     "media": "France 24",
+     "titre": "\"Colère et honte\", \"transparence\" attendue... Ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
+     "url": "https://www.france24.com/fr/france/20261018-col%C3%A8re-et-honte-transparence-attendue-ce-qu-il-faut-retenir-de-l-allocution-d-emmanuel-macron",
+     "date": "2026-10-18T19:22:47.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "17-octobre: Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
+     "url": "https://www.bfmtv.com/politique/video-17-octobre-emmanuel-macron-veut-toute-la-transparence-sur-le-maintien-de-l-ordre_VN-202610180356.html",
+     "date": "2026-10-18T19:22:17.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "17 octobre: Emmanuel Macron demande que \"toute la transparence soit faite\" sur la stratégie du maintien de l'ordre",
+     "url": "https://www.bfmtv.com/politique/elysee/17-octobre-emmanuel-macron-demande-que-toute-la-transparence-soit-faite-sur-la-strategie-du-maintien-de-l-ordre_AV-202610180346.html",
+     "date": "2026-10-18T18:39:43.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Embrunais | Savinois. Le réseau de transport se développe avec “Vaï à la demande”",
+     "url": "https://www.ledauphine.com/politique/2026/10/18/le-reseau-de-transport-se-developpe-avec-vai-a-la-demande",
+     "date": "2026-10-18T18:02:55.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "DIRECT - Mobilisation du 17 octobre: Macron dénonce l'«ultra-gauche» et promet «toute la transparence» sur le maintien de l’ordre",
+     "url": "https://www.rfi.fr/fr/france/20261018-direct-mobilisation-du-17-octobre-la-france-se-r%C3%A9veille-groggy-au-lendemain-d-une-journ%C3%A9e-de-col%C3%A8re-et-de-chaos",
+     "date": "2026-10-18T09:38:10.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "En direct : Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre",
+     "url": "https://www.france24.com/fr/france/20261018-manifestations-en-france-en-direct-855-personnes-interpell%C3%A9es-%C3%A0-paris-samedi-un-chiffre-record",
+     "date": "2026-10-18T07:16:50.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« On est dans une démocratie de façade » : à Trans-en-Provence, l’opposition dénonce une absence de dialogue et de débats, le maire répond",
+     "url": "https://www.nicematin.com/societe/politique/on-est-dans-une-democratie-de-facade-a-trans-en-provence-l-opposition-denonce-une-absence-de-dialogue-et-de-debats-le-maire-repond-10730642",
+     "date": "2026-10-17T05:30:05.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Ou tu es avec nous, ou contre nous » : révélations sur l’emprise des frères Otto-Bruc dans les transports publics à Nice",
+     "url": "https://www.nicematin.com/societe/transports/ou-tu-es-avec-nous-ou-contre-nous-revelations-sur-l-emprise-des-freres-otto-bruc-dans-les-transports-publics-a-nice-10740941",
+     "date": "2026-10-17T05:00:02.000Z"
     }
    ]
   }
@@ -620,7 +702,7 @@
    "essentiel": "Le Rassemblement national et l’Union des droites pour la République saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand. Trois médias en parlent : 20 Minutes, RFI et Libération."
   },
   {
-   "medias": 5,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
     "Ouest-France",
@@ -643,8 +725,8 @@
    "articles": [
     {
      "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-18T18:24:00.000Z"
     },
     {
@@ -652,12 +734,6 @@
      "url": "https://www.ouest-france.fr/politique/emmanuel-macron/violences-du-17-octobre-debordements-reponses-judiciaires-ce-quil-faut-retenir-de-lallocution-demmanuel-macron-c176b488-caef-11f1-b8bc-a46147b584ed?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
      "media": "Ouest-France",
      "date": "2026-10-18T19:00:29.000Z"
-    },
-    {
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.dna.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-18T18:24:00.000Z"
     },
     {
      "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
@@ -682,56 +758,8 @@
    "medias": 3,
    "mediasDistincts": 2,
    "sources": [
-    "L'Humanité",
-    "BFMTV / Europe 1"
-   ],
-   "derniere": "2026-10-18T15:55:57.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Yaël Braun-Pivet",
-      "photo": "photos/deputes/PA721908.jpg",
-      "photoHd": "photos/deputes/hd/PA721908.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA721908",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "justice",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "17 octobre: Yaël Braun-Pivet va proposer une commission d'enquête parlementaire sur les violences et la stratégie de maintien de l'ordre",
-     "url": "https://www.bfmtv.com/politique/parlement/17-octobre-yael-braun-pivet-va-proposer-une-commission-d-enquete-parlementaire-sur-les-violences-et-la-strategie-de-maintien-de-l-ordre_AD-202610180263.html",
-     "media": "BFMTV",
-     "date": "2026-10-18T15:02:03.000Z"
-    },
-    {
-     "titre": "17 octobre : même en Macronie, le fiasco du maintien de l’ordre pose question, Braun-Pivet demande une commission d’enquête",
-     "url": "https://www.humanite.fr/politique/commission-denquete-parlementaire/17-octobre-meme-en-macronie-le-fiasco-du-maintien-de-lordre-pose-question-braun-pivet-demande-une-commission-denquete",
-     "media": "L'Humanité",
-     "date": "2026-10-18T15:55:57.000Z"
-    },
-    {
-     "titre": "17 octobre : Yaël Braun-Pivet va proposer une commission d'enquête parlementaire sur les violences et la stratégie de maintien de l'ordre",
-     "url": "https://www.europe1.fr/politique/17-octobre-yael-braun-pivet-va-proposer-une-commission-denquete-parlementaire-sur-les-violences-et-la-strategie-de-maintien-de-lordre-1160313?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-18T13:57:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Maintien de l ordre",
-    "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "BFMTV",
-    "RFI"
+    "France Médias Monde"
    ],
    "derniere": "2026-10-18T19:22:17.000Z",
    "illustration": {
@@ -766,15 +794,57 @@
      "url": "https://www.rfi.fr/fr/france/20261018-direct-mobilisation-du-17-octobre-la-france-se-r%C3%A9veille-groggy-au-lendemain-d-une-journ%C3%A9e-de-col%C3%A8re-et-de-chaos",
      "media": "RFI",
      "date": "2026-10-18T09:38:10.000Z"
+    },
+    {
+     "titre": "En direct : Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre",
+     "url": "https://www.france24.com/fr/france/20261018-manifestations-en-france-en-direct-855-personnes-interpell%C3%A9es-%C3%A0-paris-samedi-un-chiffre-record",
+     "media": "France 24",
+     "date": "2026-10-18T07:16:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Transparence",
+    "origine": "dossier"
+   },
+   "fait": "Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre",
+   "accroche": "Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre",
+   "essentiel": "Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre. Trois médias en parlent : BFMTV, RFI et France 24."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Est républicain",
+    "Europe 1"
+   ],
+   "derniere": "2026-10-18T19:41:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Territoire de Belfort. Un appel au rassemblement devant la mairie de Belfort ce lundi à midi",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/18/un-appel-au-rassemblement-devant-la-mairie-de-belfort-ce-lundi-a-midi",
+     "media": "L'Est républicain",
+     "date": "2026-10-18T19:41:37.000Z"
+    },
+    {
+     "titre": "Violences du 17 octobre : l'Association des maires de France appelle au rassemblement devant les mairies lundi midi",
+     "url": "https://www.europe1.fr/politique/violences-du-17-octobre-lassociation-des-maires-de-france-appelle-au-rassemblement-devant-les-mairies-lundi-midi-1160406?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-18T14:36:00.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Octobre",
     "origine": "dossier"
    },
-   "fait": "Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
-   "accroche": "Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
-   "essentiel": "Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre. Deux médias en parlent : BFMTV et RFI."
+   "fait": "L'Association des maires de France appelle au rassemblement devant les mairies lundi midi",
+   "accroche": "L'Association des maires de France appelle au rassemblement devant les mairies lundi midi",
+   "essentiel": "Violences du 17 octobre : l'Association des maires de France appelle au rassemblement devant les mairies lundi midi. Deux médias en parlent : L'Est républicain et Europe 1."
   },
   {
    "medias": 2,
@@ -807,6 +877,48 @@
    "titrePropre": {
     "titre": "Après l incendie",
     "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T18:37:12.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Macron appelle \"partis politiques à condamner sans ambiguïté\" les violences",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-macron-appelle-partis-politiques-%C3%A0-condamner-sans-ambigu%C3%AFt%C3%A9-les-violences",
+     "media": "France 24",
+     "date": "2026-10-18T18:37:12.000Z"
+    },
+    {
+     "titre": "\"J'appelle l'ensemble des partis politiques à condamner sans ambiguïté toutes les violences\", déclare Emmanuel Macron",
+     "url": "https://www.bfmtv.com/politique/video-j-appelle-l-ensemble-des-partis-politiques-a-condamner-sans-ambiguite-toutes-les-violences-declare-emmanuel-macron_VN-202610180334.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T18:17:34.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -995,6 +1107,48 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "L'Humanité",
+    "Europe 1"
+   ],
+   "derniere": "2026-10-18T15:55:57.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Yaël Braun-Pivet",
+      "photo": "photos/deputes/PA721908.jpg",
+      "photoHd": "photos/deputes/hd/PA721908.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA721908",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : même en Macronie, le fiasco du maintien de l’ordre pose question, Braun-Pivet demande une commission d’enquête",
+     "url": "https://www.humanite.fr/politique/commission-denquete-parlementaire/17-octobre-meme-en-macronie-le-fiasco-du-maintien-de-lordre-pose-question-braun-pivet-demande-une-commission-denquete",
+     "media": "L'Humanité",
+     "date": "2026-10-18T15:55:57.000Z"
+    },
+    {
+     "titre": "17 octobre : Yaël Braun-Pivet va proposer une commission d'enquête parlementaire sur les violences et la stratégie de maintien de l'ordre",
+     "url": "https://www.europe1.fr/politique/17-octobre-yael-braun-pivet-va-proposer-une-commission-denquete-parlementaire-sur-les-violences-et-la-strategie-de-maintien-de-lordre-1160313?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-18T13:57:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maintien de l ordre",
+    "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "La Dépêche",
     "Dernières Nouvelles d'Alsace"
    ],
@@ -1091,58 +1245,6 @@
    "fait": "Les pompiers applaudis par les manifestants près de la place de la République a Paris",
    "accroche": "Les pompiers applaudis par les manifestants près de la place de la République a Paris",
    "essentiel": "Les pompiers applaudis par les manifestants près de la place de la République a Paris. A Paris, place de la République, les premières images des dégâts après le 17 octobre. Deux médias en parlent : Le Monde et Hugo Décrypte."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le JDD",
-    "L'Obs"
-   ],
-   "derniere": "2026-10-17T18:30:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Référendum : Marine Le Pen met Richard Ferrand sous pression",
-     "url": "https://www.lejdd.fr/politique/referendum-marine-le-pen-met-richard-ferrand-sous-pression-186291",
-     "media": "Le JDD",
-     "date": "2026-10-17T18:30:06.000Z"
-    },
-    {
-     "titre": "Le Pen veut sa peau : le Conseil constitutionnel de Ferrand résistera-t-il à la pression ?",
-     "url": "https://www.nouvelobs.com/politique/20261016.OBS119249/le-pen-veut-sa-peau-le-conseil-constitutionnel-de-ferrand-resistera-t-il-a-la-pression.html",
-     "media": "L'Obs",
-     "date": "2026-10-16T18:56:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Référendum : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le Conseil constitutionnel de Ferrand résistera-t-il à la pression ?",
-   "accroche": "Le Conseil constitutionnel de Ferrand résistera-t-il à la pression ?",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1298,7 +1400,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1311,12 +1413,6 @@
     "vignette": "gouvernement"
    },
    "articles": [
-    {
-     "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
-     "media": "Le Progrès",
-     "date": "2026-10-18T19:00:00.000Z"
-    },
     {
      "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
      "url": "https://www.dna.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
@@ -1342,7 +1438,119 @@
    },
    "fait": "Le gouvernement sommé de rendre des comptes",
    "accroche": "Le gouvernement sommé de rendre des comptes",
-   "essentiel": "Le gouvernement sommé de rendre des comptes. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
+   "essentiel": "Le gouvernement sommé de rendre des comptes. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-18T19:44:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Alsace. La mairie d’Illkirch-Graffenstaden sera fermée pendant une semaine, annonce Thibaud Philipps",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/10/18/la-mairie-d-illkirch-graffenstaden-sera-fermee-pendant-une-semaine-annonce-thibaud-philipps",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-18T19:44:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Alsace : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "La mairie d’Illkirch-Graffenstaden sera fermée pendant une semaine, annonce Thibaud Philipps",
+   "accroche": "La mairie d’Illkirch-Graffenstaden sera fermée pendant une semaine, annonce Thibaud Philipps"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T19:40:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Journée du 17-octobre: \"L'inquiétude, c’est qu'on ait une escalade jusqu'au bout\", déclare Jean-Pierre Raffarin, ancien Premier ministre",
+     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-l-inquietude-c-est-qu-on-ait-une-escalade-jusqu-au-bout-declare-jean-pierre-raffarin-ancien-premier-ministre_VN-202610180359.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T19:40:37.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-18T19:40:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris au Forum des Halles à Paris",
+     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
+     "media": "Libération",
+     "date": "2026-10-18T19:40:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   },
+   "fait": "Les scènes de dégradations ont repris au Forum des Halles à Paris",
+   "accroche": "Les scènes de dégradations ont repris au Forum des Halles à Paris"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T19:40:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Rassemblement à Paris: \"Des dégradations et feux ont repris dans Paris et son centre\", annonce le maire Ariel Weil sur X",
+     "url": "https://www.bfmtv.com/politique/video-rassemblement-a-paris-des-degradations-et-feux-ont-repris-dans-paris-et-son-centre-annonce-le-maire-ariel-weil-sur-x_VN-202610180358.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T19:40:22.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : annonces sur la vie locale",
+    "origine": "regles"
+   },
+   "fait": "Annonce le maire Ariel Weil sur X",
+   "accroche": "Annonce le maire Ariel Weil sur X"
   },
   {
    "medias": 1,
@@ -1371,34 +1579,6 @@
     "titre": "Octobre",
     "origine": "dossier"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-18T19:34:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT – Lendemain du 17 octobre : les scènes de dégradations ont repris au Forum des Halles à Paris",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
-     "media": "Libération",
-     "date": "2026-10-18T19:34:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   },
-   "fait": "Les scènes de dégradations ont repris au Forum des Halles à Paris",
-   "accroche": "Les scènes de dégradations ont repris au Forum des Halles à Paris"
   },
   {
    "medias": 1,
@@ -1510,6 +1690,39 @@
     "titre": "Emmanuel Macron : ce que disent les médias",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-18T19:22:47.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Colère et honte\", \"transparence\" attendue... Ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
+     "url": "https://www.france24.com/fr/france/20261018-col%C3%A8re-et-honte-transparence-attendue-ce-qu-il-faut-retenir-de-l-allocution-d-emmanuel-macron",
+     "media": "France 24",
+     "date": "2026-10-18T19:22:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Transparence",
+    "origine": "dossier"
    }
   },
   {
@@ -1714,41 +1927,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-18T19:09:44.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Honte », « colère » et appel au calme : ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
-     "url": "https://www.nouvelobs.com/politique/20261018.OBS119331/honte-colere-et-appel-au-calme-et-ce-qu-a-dit-emmanuel-macron-apres-les-evenements-du-17-octobre.html",
-     "media": "L'Obs",
-     "date": "2026-10-18T19:09:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   },
-   "fait": "Ce qu’a dit Emmanuel Macron après les événements du 17 octobre",
-   "accroche": "Ce qu’a dit Emmanuel Macron après les événements du 17 octobre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-18T19:06:27.000Z",
@@ -1788,32 +1966,6 @@
    },
    "fait": "Emmanuel Macron déclare : « À l'égard des casseurs, nous serons intraitables »",
    "accroche": "Emmanuel Macron déclare : « À l'égard des casseurs, nous serons intraitables »"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T19:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "La question du jour. Le chaos du 17 octobre aura-t-il un impact sur la présidentielle ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/le-chaos-du-17-octobre-aura-t-il-un-impact-sur-la-presidentielle",
-     "media": "Le Progrès",
-     "date": "2026-10-18T19:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -2159,8 +2311,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pisieu : conseil municipal",
-    "origine": "regles"
+    "titre": "Jeunes",
+    "origine": "dossier"
    },
    "fait": "Un nouveau conseil municipal des jeunes élu",
    "accroche": "Un nouveau conseil municipal des jeunes élu"
@@ -2332,6 +2484,39 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-18T18:25:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : Emmanuel Macron face aux français",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-17-octobre-macron-face-aux-fran%C3%A7ais",
+     "media": "France 24",
+     "date": "2026-10-18T18:25:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-18T18:24:50.000Z",
@@ -2392,43 +2577,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-18T18:17:34.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "justice",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"J'appelle l'ensemble des partis politiques à condamner sans ambiguïté toutes les violences\", déclare Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/video-j-appelle-l-ensemble-des-partis-politiques-a-condamner-sans-ambiguite-toutes-les-violences-declare-emmanuel-macron_VN-202610180334.html",
-     "media": "BFMTV",
-     "date": "2026-10-18T18:17:34.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
+    "titre": "Emmanuel Macron : réponse sur la mobilisation lycéenne",
+    "origine": "regles"
    }
   },
   {
@@ -2619,89 +2769,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T18:08:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Tence. Conseil municipal : le bassin d’orage à proximité de la station d’épuration acté pour 1 million d’euros",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/conseil-municipal-le-bassin-d-orage-a-proximite-de-la-station-d-epuration-acte-pour-1-million-d-euros",
-     "media": "Le Progrès",
-     "date": "2026-10-18T18:08:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Tence : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Le bassin d’orage à proximité de la station d’épuration acté pour 1 million d’euros",
-   "accroche": "Le bassin d’orage à proximité de la station d’épuration acté pour 1 million d’euros"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T18:05:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Veauche. L’extension du cimetière est prévue derrière le cimetière actuel",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/l-extension-du-cimetiere-est-prevue-derriere-le-cimetiere-actuel",
-     "media": "Le Progrès",
-     "date": "2026-10-18T18:05:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Veauche : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L’extension du cimetière est prévue derrière le cimetière actuel",
-   "accroche": "L’extension du cimetière est prévue derrière le cimetière actuel"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T18:04:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Villars. Un animateur municipal détaché auprès du club de foot",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/un-animateur-municipal-detache-aupres-du-club-de-foot",
-     "media": "Le Progrès",
-     "date": "2026-10-18T18:04:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Villars : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-18T18:02:55.000Z",
@@ -2720,9 +2787,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Transparence",
+    "origine": "dossier"
    }
   },
   {
@@ -2899,32 +2965,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:45:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Tour-de-Salvagny. 50 logements neufs disponibles quartier du Vallon de la Charrière",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/50-logements-neufs-disponibles-quartier-du-vallon-de-la-charriere",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:45:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Tour-de-Salvagny : logement et accueil",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-18T17:43:51.000Z",
@@ -3063,34 +3103,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:40:24.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jullianges. La mairie recrute un agent recenseur pour 2027",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/la-mairie-recrute-un-agent-recenseur-pour-2027",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:40:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jullianges : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "La mairie recrute un agent recenseur pour 2027",
-   "accroche": "La mairie recrute un agent recenseur pour 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-18T17:40:15.000Z",
@@ -3163,33 +3175,6 @@
    ],
    "titrePropre": {
     "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:35:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les Villettes. Démocratie en herbe : les petits Villettois élisent leurs représentants",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/democratie-en-herbe-les-petits-villettois-elisent-leurs-representants",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:35:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Villettes : actualité locale",
     "origine": "regles",
     "generique": true
    }
@@ -3307,61 +3292,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:30:37.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Romain-le-Puy. Encore des travaux imprévus pour terminer la déconstruction de l’école",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/encore-des-travaux-imprevus-pour-terminer-la-deconstruction-de-l-ecole",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:30:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-romain-le-puy",
-    "origine": "dossier"
-   },
-   "fait": "Encore des travaux imprévus pour terminer la déconstruction de l’école",
-   "accroche": "Encore des travaux imprévus pour terminer la déconstruction de l’école"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:26:20.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Écotay-l’Olme. Conseil municipal : conventions et travaux à l’ordre du jour",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/conseil-municipal-conventions-et-travaux-a-l-ordre-du-jour",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:26:20.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-10-18T17:25:07.000Z",
@@ -3384,90 +3314,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:24:03.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Noailly. Huit nouveaux conseillers municipaux enfants ont été élus",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/huit-nouveaux-conseillers-municipaux-enfants-ont-ete-elus",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:24:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Noailly : actualité scolaire",
-    "origine": "regles"
-   },
-   "fait": "Huit nouveaux conseillers municipaux enfants ont été élus",
-   "accroche": "Huit nouveaux conseillers municipaux enfants ont été élus"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:21:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Coutouvre. Conseil municipal : la traversée du village bientôt en priorité à droite ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/conseil-municipal-la-traversee-du-village-bientot-en-priorite-a-droite",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:21:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Coutouvre : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "La traversée du village bientôt en priorité à droite ?",
-   "accroche": "La traversée du village bientôt en priorité à droite ?"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:19:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Riorges. La municipalité a installé le nouveau conseil municipal des enfants",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/la-municipalite-a-installe-le-nouveau-conseil-municipal-des-enfants",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:19:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Riorges : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "La municipalité a installé le nouveau conseil municipal des enfants",
-   "accroche": "La municipalité a installé le nouveau conseil municipal des enfants"
   },
   {
    "medias": 1,
@@ -3497,60 +3343,6 @@
    },
    "fait": "Le territoire du Pays de Dieulefit-Bourdeaux s’engage",
    "accroche": "Le territoire du Pays de Dieulefit-Bourdeaux s’engage"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:04:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Charlieu Belmont Communauté. L’alimentation en eau potable sous tension",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/l-alimentation-en-eau-potable-sous-tension",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:04:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Charlieu Belmont Communauté : environnement",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T17:04:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jarnosse. Les travaux du gîte communal vont bientôt commencer : un chantier de 176 416 euros",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/les-travaux-du-gite-communal-vont-bientot-commencer-un-chantier-de-176-416-euros",
-     "media": "Le Progrès",
-     "date": "2026-10-18T17:04:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jarnosse : projet d'aménagement",
-    "origine": "regles"
-   },
-   "fait": "Les travaux du gîte communal vont bientôt commencer : un chantier de 176 416 euros",
-   "accroche": "Les travaux du gîte communal vont bientôt commencer : un chantier de 176 416 euros"
   },
   {
    "medias": 1,
@@ -3603,7 +3395,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Saint-romain-le-puy",
+    "titre": "Jeunes",
     "origine": "dossier"
    },
    "fait": "Le conseil municipal des jeunes est installé",
@@ -3756,61 +3548,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T16:52:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Claveisolles. Nouveaux tarifs de location de la salle des fêtes",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/nouveaux-tarifs-de-location-de-la-salle-des-fetes",
-     "media": "Le Progrès",
-     "date": "2026-10-18T16:52:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Claveisolles : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T16:52:34.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Étienne-la-Varenne. La requalification du centre bourg est désormais officielle",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/la-requalification-du-centre-bourg-est-desormais-officielle",
-     "media": "Le Progrès",
-     "date": "2026-10-18T16:52:34.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-romain-le-puy",
-    "origine": "dossier"
-   },
-   "fait": "La requalification du centre bourg est officielle",
-   "accroche": "La requalification du centre bourg est officielle"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-18T16:52:23.000Z",
@@ -3835,60 +3572,6 @@
    },
    "fait": "Violences du 17 octobre à Bordeaux. Les manifestants sont déçus et choqués",
    "accroche": "Violences du 17 octobre à Bordeaux. Les manifestants sont déçus et choqués"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T16:51:29.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Courzieu. Courzieu veut ouvrir son conseil municipal aux jeunes jusqu’à la 3e",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/courzieu-veut-ouvrir-son-conseil-municipal-aux-jeunes-jusqu-a-la-3e",
-     "media": "Le Progrès",
-     "date": "2026-10-18T16:51:29.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Courzieu : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Courzieu veut ouvrir son conseil municipal aux jeunes jusqu’à la 3e",
-   "accroche": "Courzieu veut ouvrir son conseil municipal aux jeunes jusqu’à la 3e"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-18T16:46:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Didier-de-Formans. Climatisation de l’école : le projet avance",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/climatisation-de-l-ecole-le-projet-avance",
-     "media": "Le Progrès",
-     "date": "2026-10-18T16:46:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-romain-le-puy",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -4009,8 +3692,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Saint-romain-le-puy",
-    "origine": "dossier"
+    "titre": "Saint-Alban-Leysse : actualité locale",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "La halle sportive Marius-Pillet a été inaugurée",
    "accroche": "La halle sportive Marius-Pillet a été inaugurée"
@@ -4357,6 +4041,40 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-18T16:02:21.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 17 Octobre : Emmanuel Macron prendra la parole à 20h",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-manifestations-du-17-octobre-emmanuel-macron-prendra-la-parole-%C3%A0-20h",
+     "media": "France 24",
+     "date": "2026-10-18T16:02:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-10-18T16:01:05.000Z",
@@ -4421,6 +4139,427 @@
     "titre": "Éducation et jeunesse : ce que disent les médias",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T16:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "PAU - Nos plus belles photos du boulevard des Pyrénées depuis 2020",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/pau-nos-plus-belles-photos-du-boulevard-des-pyrenees-depuis-2020-31070145.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T16:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-18T15:54:33.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Macron s'adressera aux Français après les violences en marge des manifestations",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261018-macron-s-adressera-aux-fran%C3%A7ais-apr%C3%A8s-les-violences-en-marge-des-manifestations",
+     "media": "France 24",
+     "date": "2026-10-18T15:54:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-18T15:50:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Vote. Ecrouves : selon vous, comment sortir de la crise municipale ?",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/18/ecrouves-selon-vous-comment-sortir-de-la-crise-municipale",
+     "media": "L'Est républicain",
+     "date": "2026-10-18T15:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vote : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:45:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Moyen-Orient : le chef de la diplomatie française à Ryad en amont d’une visite de Macron dans la région",
+     "url": "https://www.sudouest.fr/international/moyen-orient-la-france-deploie-des-moyens-militaires-en-arabie-saoudite-pour-securiser-les-approvisionnements-en-carburants-31132134.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:45:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur une affaire internationale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:44:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Violences du 17 octobre: Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\"",
+     "url": "https://www.bfmtv.com/politique/extreme-droite/violences-du-17-octobre-marion-marechal-assimile-les-manifestants-pacifiques-aux-casseurs_AN-202610180278.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:44:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\"",
+   "accroche": "Marion Maréchal assimile les \"manifestants pacifiques\" aux \"casseurs\""
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-18T15:37:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Grégoire, maire de Paris : «Des casseurs ont pu passer de magasin en magasin sans croiser un seul policier»",
+     "url": "https://www.liberation.fr/politique/emmanuel-gregoire-maire-de-paris-des-casseurs-ont-pu-passer-de-magasin-en-magasin-sans-croiser-un-seul-policier-20261018_XESNI2SAL5E4ZO7SDR6SLTXTME/",
+     "media": "Libération",
+     "date": "2026-10-18T15:37:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:36:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : « État dépassé », « dispositif sous-dimensionné »… La gestion du maintien de l’ordre sous le feu des critiques",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-du-17-octobre-etat-depasse-dispositif-sous-dimensionne-la-gestion-du-maintien-de-l-ordre-sous-le-feu-des-critiques-31131826.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:36:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-18T15:28:41.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT, mobilisation du 17 octobre : Emmanuel Macron exprime « sa honte » après les violences ; Sébastien Lecornu chargé de réunir partis politiques et syndicats ; situation toujours tendue à Paris",
+     "url": "https://www.lemonde.fr/societe/live/2026/10/18/en-direct-mobilisation-du-17-octobre-a-paris-nouvelles-tensions-sur-la-place-de-la-republique-et-ses-alentours_6795855_3224.html",
+     "media": "Le Monde",
+     "date": "2026-10-18T15:28:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:25:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Jeunesse en lutte, système en chute » : à Pau, les manifestants avaient de nombreux messages à faire passer",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/jeunesse-en-lutte-systeme-en-chute-a-pau-les-manifestants-avaient-de-nombreux-messages-a-faire-passer-31129953.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:25:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jeunes",
+    "origine": "dossier"
+   },
+   "fait": "À Pau, les manifestants avaient de nombreux messages à faire passer",
+   "accroche": "À Pau, les manifestants avaient de nombreux messages à faire passer"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-18T15:22:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre à Bordeaux : les images de la résidence préfectorale saccagée par les casseurs",
+     "url": "https://www.sudouest.fr/gironde/bordeaux/mobilisation-du-17-octobre-a-bordeaux-les-images-de-la-residence-prefectorale-saccagee-par-les-casseurs-31130799.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-18T15:22:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Les images de la résidence préfectorale saccagée par les casseurs",
+   "accroche": "Les images de la résidence préfectorale saccagée par les casseurs"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:19:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Pouria Amirshahi",
+      "photo": "photos/deputes/PA610968.jpg",
+      "photoHd": "photos/deputes/hd/PA610968.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA610968",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN",
+     "ECO"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "\"Vous vous frottez les mains de cette situation\": Pouria Amirshahi, député Écologiste et Social, interpelle le président du RN Jordan Bardella, au sujet des violences du 17 octobre",
+     "url": "https://www.bfmtv.com/politique/video-vous-vous-frottez-les-mains-de-cette-situation-pouria-amirshahi-depute-ecologiste-et-social-interpelle-le-president-du-rn-jordan-bardella-au-sujet-des-violences-du-17-octobre_VN-202610180272.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:19:20.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Environnement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-18T15:15:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 17 octobre: \"Le dispositif policier a été sous-dimensionné\", estime Jordan Bardella, président du Rassemblement national",
+     "url": "https://www.bfmtv.com/politique/front-national/video-manifestations-du-17-octobre-le-dispositif-policier-a-ete-sous-dimensionne-estime-jordan-bardella-president-du-rassemblement-national_VN-202610180271.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T15:15:51.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-18T15:15:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Etat dépassé », « mauvaise anticipation », « dispositif policier sous-dimensionné », défaut « de réponse politique » : élus, policiers et experts décrivent une situation « dramatique »",
+     "url": "https://www.nicematin.com/societe/securite/etat-depasse-mauvaise-anticipation-dispositif-policier-sous-dimensionne-defaut-de-reponse-politique-elus-policiers-et-experts-decrivent-une-situation-dramatique-10743134",
+     "media": "Nice-Matin",
+     "date": "2026-10-18T15:15:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : réponse sur les finances publiques",
+    "origine": "regles"
+   },
+   "fait": "Élus, policiers et experts décrivent une situation « dramatique »",
+   "accroche": "Élus, policiers et experts décrivent une situation « dramatique »"
   }
  ]
 }
