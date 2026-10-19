@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-19T17:15:45.799Z",
+ "lastUpdated": "2026-10-19T17:20:54.391Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -85,7 +85,7 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
@@ -150,49 +150,55 @@
  ],
  "dossiers": [
   {
-   "id": "pillages",
-   "titre": "Pillages",
+   "id": "commerces",
+   "titre": "Commerces",
    "motifs": [
-    "pillages",
-    "commerçants"
+    "commerces",
+    "pillés",
+    "aides"
    ],
    "medias": [
-    "Dernières Nouvelles d'Alsace",
+    "L'Humanité",
     "Le Progrès",
     "Public Sénat",
-    "Le Monde",
     "France Inter",
     "France 24",
     "BFMTV",
+    "Hugo Décrypte",
     "Sud Ouest",
     "RFI",
-    "Europe 1",
     "Libération",
+    "Le Monde",
+    "Le JDD",
+    "Mediapart",
     "La Dépêche",
     "Nice-Matin"
    ],
-   "mediasDistincts": 11,
+   "mediasDistincts": 14,
    "sources": [
-    "EBRA",
+    "L'Humanité",
+    "Le Progrès",
     "Public Sénat",
-    "Le Monde",
     "France Inter",
     "France Médias Monde",
     "BFMTV",
+    "Hugo Décrypte",
     "Sud Ouest",
-    "Europe 1",
     "Libération",
+    "Le Monde",
+    "Le JDD",
+    "Mediapart",
     "La Dépêche",
     "Nice-Matin"
    ],
-   "nb": 24,
-   "derniere": "2026-10-19T16:50:00.000Z",
+   "nb": 21,
+   "derniere": "2026-10-19T17:20:00.000Z",
    "articles": [
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Colmar. Manifestations du 17 octobre: oui aux revendications, non aux pillages",
-     "url": "https://www.dna.fr/politique/2026/10/19/manifestations-du-17-octobre-oui-aux-revendications-non-aux-pillages",
-     "date": "2026-10-19T16:50:00.000Z"
+     "media": "L'Humanité",
+     "titre": "17 octobre : 3 000 commerces pillés et vandalisés, le gouvernement forcé de sortir son porte-monnaie",
+     "url": "https://www.humanite.fr/social-et-economie/alexandre-bompard/17-octobre-3-000-commerces-pilles-et-vandalises-le-gouvernement-force-de-sortir-son-porte-monnaie",
+     "date": "2026-10-19T17:20:00.000Z"
     },
     {
      "media": "Le Progrès",
@@ -205,18 +211,6 @@
      "titre": "Pillages : « Au moins 3 000 » commerces touchées pour des « centaines de millions d’euros » de dégâts",
      "url": "https://www.publicsenat.fr/actualites/economie/pillages-au-moins-3-000-commerces-touchees-pour-des-centaines-de-millions-deuros-de-degats",
      "date": "2026-10-19T16:07:44.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Pillages du 17 octobre : Vinted, eBay et Leboncoin sommés d’empêcher la revente d’objets volés",
-     "url": "https://www.lemonde.fr/pixels/article/2026/10/19/pillages-du-17-octobre-vinted-ebay-et-leboncoin-sommes-d-empecher-la-revente-d-objets-voles_6797561_4408996.html",
-     "date": "2026-10-19T16:02:08.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Après les pillages du 17 octobre, faut-il couper les réseaux sociaux ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/apres-les-pillages-du-17-octobre-faut-il-couper-les-reseaux-sociaux",
-     "date": "2026-10-19T16:00:08.000Z"
     },
     {
      "media": "France Inter",
@@ -232,9 +226,16 @@
     },
     {
      "media": "BFMTV",
-     "titre": "Pillages à Paris: \"On est en discussion avec les assurances\", indique Serge Papin, ministre des PME",
-     "url": "https://www.bfmtv.com/politique/video-pillages-a-paris-on-est-en-discussion-avec-les-assurances-indique-serge-papin-ministre-des-pme_VN-202610190665.html",
-     "date": "2026-10-19T15:29:08.000Z",
+     "titre": "\"Vous ne pouvez pas dire qu'on abandonne\": Serge Papin, ministre des PME, travail à des mesures de soutiens aux commerçants pillés",
+     "url": "https://www.bfmtv.com/politique/video-vous-ne-pouvez-pas-dire-qu-on-abandonne-serge-papin-ministre-des-pme-travail-a-des-mesures-de-soutiens-aux-commercants-pilles_VN-202610190661.html",
+     "date": "2026-10-19T15:26:11.000Z",
+     "video": true
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Les commerçants touchés devraient obtenir des aides, selon Emmanuel Macron.",
+     "url": "https://www.youtube.com/shorts/IrYH4pQ4A-o",
+     "date": "2026-10-19T14:54:41.000Z",
      "video": true
     },
     {
@@ -250,22 +251,34 @@
      "date": "2026-10-19T14:08:08.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Après les pillages, Jordan Bardella affirme que «LFI pousse à la guerre civile»",
-     "url": "https://www.europe1.fr/politique/apres-les-pillages-jordan-bardella-affirme-que-lfi-pousse-a-la-guerre-civile-1162437?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-19T06:11:50.000Z"
+     "media": "Libération",
+     "titre": "Oui, tout le monde condamne les casseurs et les pilleurs, mais le débat politique n’est pas là !",
+     "url": "https://www.liberation.fr/politique/oui-tout-le-monde-condamne-les-casseurs-et-les-pilleurs-mais-le-debat-politique-nest-pas-la-20261019_6YB3FNEDOJFP3JTDBKJKYZ7EUE/",
+     "date": "2026-10-19T12:52:20.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Des scènes de dégradations et de pillages ce dimanche soir près du Forum des Halles à Paris",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-du-17-octobre-gerald-darmanin-demande-aux-parquets-une-reponse-extremement-ferme-20261018_OXTKJ7XVGFBXXNVJP34RG2BQCI/",
-     "date": "2026-10-18T21:37:22.000Z"
+     "media": "Le Monde",
+     "titre": "Après les pillages du 17 octobre, les cagnottes en soutien aux commerçants se multiplient en ligne, avec des risques d’arnaques",
+     "url": "https://www.lemonde.fr/pixels/article/2026/10/19/apres-les-pillages-du-17-octobre-les-cagnottes-en-soutien-aux-commercants-se-multiplient-en-ligne-avec-des-risques-d-arnaques_6797523_4408996.html",
+     "date": "2026-10-19T12:35:33.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "«Pourquoi n’êtes-vous pas en prison ?» : Bellamy fustige la complaisance de Poutou envers les pilleurs",
+     "url": "https://www.lejdd.fr/politique/pourquoi-netes-vous-pas-en-prison-bellamy-fustige-la-complaisance-de-poutou-envers-les-pilleurs-186429",
+     "date": "2026-10-19T11:35:18.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Les aides publiques aux entreprises: l’éléphant dans la pièce du budget 2027",
+     "url": "https://www.mediapart.fr/journal/economie-et-social/191026/les-aides-publiques-aux-entreprises-l-elephant-dans-la-piece-du-budget-2027",
+     "date": "2026-10-19T10:11:24.000Z"
     },
     {
      "media": "La Dépêche",
-     "titre": "REPLAY. Manifestations du 17 octobre : les pillages se poursuivent ce soir à Paris, Lyon et Marseille, le maire de Lille demande des \"comptes\" au président",
-     "url": "https://www.ladepeche.fr/2026/10/18/direct-manifestations-du-17-octobre-lincendie-de-la-mairie-de-limoges-est-circonscrit-855-personnes-interpellees-a-paris-13608154.php",
-     "date": "2026-10-18T20:59:46.000Z"
+     "titre": "REPORTAGE. \"On nous supprime les aides, et après on va dire qu'on est des assistés\" : ces apprentis de centres de formation s'unissent pour s'opposer aux coupes budgétaires prévues par le gouvernement",
+     "url": "https://www.ladepeche.fr/2026/10/19/reportage-on-nous-supprime-les-aides-et-apres-on-va-dire-quon-est-des-assistes-ces-apprentis-de-centres-de-formation-sunissent-pour-sopposer-aux-13605318.php",
+     "date": "2026-10-19T04:19:03.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -283,7 +296,6 @@
    ],
    "medias": [
     "Le Progrès",
-    "Le Dauphiné libéré",
     "BFMTV",
     "Sud Ouest",
     "La Dépêche",
@@ -291,12 +303,11 @@
     "Nice-Matin",
     "France 24",
     "Public Sénat",
-    "Le Monde",
     "Europe 1",
     "Libération",
     "Mediapart"
    ],
-   "mediasDistincts": 11,
+   "mediasDistincts": 10,
    "sources": [
     "EBRA",
     "BFMTV",
@@ -305,12 +316,11 @@
     "Nice-Matin",
     "France 24",
     "Public Sénat",
-    "Le Monde",
     "Europe 1",
     "Libération",
     "Mediapart"
    ],
-   "nb": 21,
+   "nb": 18,
    "derniere": "2026-10-19T17:15:00.000Z",
    "articles": [
     {
@@ -324,12 +334,6 @@
      "titre": "La Fouillouse. Lors du rassemblement citoyen, le maire déplore l’absence de réponse",
      "url": "https://www.leprogres.fr/politique/2026/10/19/lors-du-rassemblement-citoyen-le-maire-deplore-l-absence-de-reponse",
      "date": "2026-10-19T17:08:18.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Valence. David Lisnard, président de l’Association des maires de France, attendu à Valence le 29 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/david-lisnard-president-de-l-association-des-maires-de-france-attendu-a-valence-le-29-octobre",
-     "date": "2026-10-19T16:56:00.000Z"
     },
     {
      "media": "BFMTV",
@@ -357,6 +361,13 @@
      "date": "2026-10-19T14:32:31.000Z"
     },
     {
+     "media": "BFMTV",
+     "titre": "\"Pourquoi pas la sollicitation de l'armée\": le maire d'arrondissement de Paris Centre, Ariel Weil estime que \"si on est pris de court, il vaut mieux un couvre-feu ou l'armée\" dans certains quartiers de la capitale",
+     "url": "https://www.bfmtv.com/politique/video-pourquoi-pas-la-sollicitation-de-l-armee-le-maire-d-arrondissement-de-paris-centre-ariel-weil-estime-que-si-on-est-pris-de-court-il-vaut-mieux-un-couvre-feu-ou-l-armee-dans-certains-quartiers-de-la-capitale_VN-202610190606.html",
+     "date": "2026-10-19T14:21:29.000Z",
+     "video": true
+    },
+    {
      "media": "Nice-Matin",
      "titre": "François de Canson frappé par la loi sur le cumul des mandats : ce mardi, La Londe-les-Maures élit un nouveau maire",
      "url": "https://www.nicematin.com/societe/politique/francois-de-canson-frappe-par-la-loi-sur-le-cumul-des-mandats-ce-mardi-la-londe-les-maures-elit-un-nouveau-maire-10742670",
@@ -375,10 +386,10 @@
      "date": "2026-10-19T09:44:16.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Après les saccages du 17 octobre, les maires, indignés, demandent des comptes",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/19/apres-les-saccages-du-17-octobre-les-maires-indignes-demandent-des-comptes_6797507_823448.html",
-     "date": "2026-10-19T09:00:08.000Z"
+     "media": "Nice-Matin",
+     "titre": "« J’ai besoin de rendre les gens heureux » : réélu à la tête de Saint-Cézaire-sur-Siagne, le maire Christian Zedet place les relations humaines au cœur de son mandat",
+     "url": "https://www.nicematin.com/societe/politique/j-ai-besoin-de-rendre-les-gens-heureux-reelu-a-la-tete-de-saint-cezaire-sur-siagne-le-maire-christian-zedet-place-les-relations-humaines-au-cur-de-son-mandat-10740426",
+     "date": "2026-10-19T09:00:04.000Z"
     },
     {
      "media": "Europe 1",
@@ -401,38 +412,55 @@
    ]
   },
   {
-   "id": "couvre-feux",
-   "titre": "Couvre-feux",
+   "id": "partiel",
+   "titre": "Partiel",
    "motifs": [
-    "couvre-feux",
-    "sébastien",
+    "partiel",
     "localisés"
    ],
    "medias": [
+    "France Inter",
     "France 24",
+    "Le JDD",
     "Hugo Décrypte",
-    "BFMTV",
-    "L'Humanité",
     "Le Monde",
-    "L'Obs",
-    "Valeurs actuelles",
+    "BFMTV",
     "RFI",
+    "Public Sénat",
     "Mediapart"
    ],
    "mediasDistincts": 8,
    "sources": [
+    "France Inter",
     "France Médias Monde",
+    "Le JDD",
     "Hugo Décrypte",
-    "BFMTV",
-    "L'Humanité",
     "Le Monde",
-    "L'Obs",
-    "Valeurs actuelles",
+    "BFMTV",
+    "Public Sénat",
     "Mediapart"
    ],
-   "nb": 16,
-   "derniere": "2026-10-19T15:22:03.000Z",
+   "nb": 14,
+   "derniere": "2026-10-19T16:00:00.000Z",
    "articles": [
+    {
+     "media": "France Inter",
+     "titre": "Commerces pillés : le chômage partiel 100 % pris en charge pendant \"trois mois\", annonce le ministre du Travail",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/commerces-pilles-le-chomage-partiel-100-pris-en-charge-pendant-trois-mois-annonce-le-ministre-du-travail-1497024",
+     "date": "2026-10-19T16:00:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Commerces saccagés : chômage partiel, fonds de soutien… les aides annoncées par le gouvernement",
+     "url": "https://www.france24.com/fr/france/20261019-commerces-saccag%C3%A9s-ch%C3%B4mage-partiel-fonds-de-soutien-les-aides-annonc%C3%A9es-par-le-gouvernement",
+     "date": "2026-10-19T15:45:36.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Démissions refusées : quand Emmanuel Macron ne laisse pas partir ses ministres",
+     "url": "https://www.lejdd.fr/politique/demissions-refusees-quand-emmanuel-macron-ne-laisse-pas-partir-ses-ministres-186450",
+     "date": "2026-10-19T15:37:03.000Z"
+    },
     {
      "media": "France 24",
      "titre": "France : des couvre-feux \"localisés\" après les scènes de chaos du week-end",
@@ -447,29 +475,10 @@
      "video": true
     },
     {
-     "media": "BFMTV",
-     "titre": "\"Pourquoi pas la sollicitation de l'armée\": le maire d'arrondissement de Paris Centre, Ariel Weil estime que \"si on est pris de court, il vaut mieux un couvre-feu ou l'armée\" dans certains quartiers de la capitale",
-     "url": "https://www.bfmtv.com/politique/video-pourquoi-pas-la-sollicitation-de-l-armee-le-maire-d-arrondissement-de-paris-centre-ariel-weil-estime-que-si-on-est-pris-de-court-il-vaut-mieux-un-couvre-feu-ou-l-armee-dans-certains-quartiers-de-la-capitale_VN-202610190606.html",
-     "date": "2026-10-19T14:21:29.000Z",
-     "video": true
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Interdiction de manifester, couvre-feux, état d’urgence… Après le 17 octobre, la dangereuse tentation autoritaire",
-     "url": "https://www.humanite.fr/politique/democratie/interdiction-de-manifester-couvre-feux-etat-durgence-apres-le-17-octobre-la-dangereuse-tentation-autoritaire",
-     "date": "2026-10-19T14:11:08.000Z"
-    },
-    {
      "media": "Le Monde",
      "titre": "EN DIRECT, manifestations du 17 octobre : Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord, dont Lille",
      "url": "https://www.lemonde.fr/societe/live/2026/10/19/en-direct-manifestations-du-17-octobre-couvre-feux-localises-aides-aux-commerces-touches-annonce-d-un-acte-ii-samedi-prochain-le-point-sur-la-situation_6795855_3224.html",
      "date": "2026-10-19T13:36:10.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée, acte II des « gilets jaunes »…",
-     "url": "https://www.nouvelobs.com/social/20261019.OBS119339/que-se-passe-t-il-apres-les-manifestations-du-17-octobre-couvres-feux-marseille-bouclee-acte-ii-des-gilets-jaunes.html",
-     "date": "2026-10-19T13:27:59.000Z"
     },
     {
      "media": "Le Monde",
@@ -480,9 +489,21 @@
     },
     {
      "media": "Le Monde",
+     "titre": "Budget 2027 : le vote solennel sur la première partie du PLF repoussé",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/19/budget-2027-le-vote-solennel-sur-la-premiere-partie-du-plf-repousse_6797526_823448.html",
+     "date": "2026-10-19T12:49:45.000Z"
+    },
+    {
+     "media": "Le Monde",
      "titre": "Des couvre-feux « partiels » et « localisés » annoncés par Sébastien Lecornu pour lundi soir après un week-end marqué par des scènes de chaos dans plusieurs villes",
      "url": "https://www.lemonde.fr/politique/article/2026/10/19/des-couvre-feux-partiels-et-localises-annonces-par-sebastien-lecornu-pour-lundi-soir-apres-un-week-end-marque-par-des-scenes-de-chaos-dans-plusieurs-villes_6797524_823448.html",
      "date": "2026-10-19T12:36:10.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "17 octobre : le Premier ministre annonce déclencher le chômage partiel pour les commerçants touchés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261019-17-octobre-le-premier-ministre-annonce-d%C3%A9clencher-le-ch%C3%B4mage-partiel-pour-les-commer%C3%A7ants-touch%C3%A9s",
+     "date": "2026-10-19T12:33:13.000Z"
     },
     {
      "media": "BFMTV",
@@ -492,30 +513,16 @@
      "video": true
     },
     {
-     "media": "BFMTV",
-     "titre": "Démission refusée de Laurent Nuñez: \"Quand c'est difficile, on réaffirme la confiance dans les gens qui ont le courage de prendre des décisions\", soutient Sébastien Lecornu",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-demission-refusee-de-laurent-nunez-quand-c-est-difficile-on-reaffirme-la-confiance-dans-les-gens-qui-ont-le-courage-de-prendre-des-decisions-soutient-sebastien-lecornu_VN-202610190467.html",
-     "date": "2026-10-19T11:13:01.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "L'état d'urgence \"si c'est nécessaire, évidemment que nous pourrions le faire\", assure Sébastien Lecornu",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-l-etat-d-urgence-si-c-est-necessaire-evidemment-que-nous-pourrions-le-faire-assure-sebastien-lecornu_VN-202610190462.html",
-     "date": "2026-10-19T11:08:59.000Z",
-     "video": true
-    },
-    {
-     "media": "Valeurs actuelles",
-     "titre": "Prix des carburants : l’élixir de Sébastien Lecornu ne fera pas baisser la fièvre",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/economie/prix-des-carburants-lelixir-de-sebastien-lecornu-ne-fera-pas-baisser-la-fievre",
-     "date": "2026-10-19T11:01:27.000Z"
-    },
-    {
      "media": "RFI",
-     "titre": "DIRECT - Matignon annonce de premiers couvre-feux dans quatre communes du Nord, dont Lille",
+     "titre": "DIRECT - Couvre-feu à Paris à partir de 23H00 ce lundi dans certains quartiers, annonce la préfecture de police",
      "url": "https://www.rfi.fr/fr/france/20261019-direct-mobilisation-sociale-en-france-l-acc%C3%A8s-au-mus%C3%A9e-du-louvre-bloqu%C3%A9-par-des-manifestants",
      "date": "2026-10-19T09:48:22.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« L’État est responsable en partie de ce qu’il s’est passé samedi à Limoges », déclare le maire de la ville",
+     "url": "https://www.publicsenat.fr/actualites/societe/letat-est-responsable-en-partie-de-ce-quil-sest-passe-samedi-a-limoges-declare-le-maire-de-la-ville",
+     "date": "2026-10-19T09:44:16.000Z"
     },
     {
      "media": "Mediapart",
@@ -657,49 +664,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
-    "La Dépêche",
-    "Le Monde",
-    "RFI"
-   ],
-   "derniere": "2026-10-19T17:02:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT - Matignon annonce de premiers couvre-feux dans quatre communes du Nord, dont Lille",
-     "url": "https://www.rfi.fr/fr/france/20261019-direct-mobilisation-sociale-en-france-l-acc%C3%A8s-au-mus%C3%A9e-du-louvre-bloqu%C3%A9-par-des-manifestants",
-     "media": "RFI",
-     "date": "2026-10-19T09:48:22.000Z"
-    },
-    {
-     "titre": "DIRECT. Violences du 17 octobre : Matignon annonce de premiers couvre-feux pour les nuits de lundi et mardi",
-     "url": "https://www.ladepeche.fr/2026/10/19/violences-du-17-octobre-laurent-nunez-a-presente-sa-demission-a-emmanuel-macron-le-president-la-refusee-13609454.php",
-     "media": "La Dépêche",
-     "date": "2026-10-19T17:02:51.000Z"
-    },
-    {
-     "titre": "EN DIRECT, manifestations du 17 octobre : Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord, dont Lille",
-     "url": "https://www.lemonde.fr/societe/live/2026/10/19/en-direct-manifestations-du-17-octobre-couvre-feux-localises-aides-aux-commerces-touches-annonce-d-un-acte-ii-samedi-prochain-le-point-sur-la-situation_6795855_3224.html",
-     "media": "Le Monde",
-     "date": "2026-10-19T13:36:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Couvre-feux",
-    "origine": "dossier"
-   },
-   "fait": "Matignon annonce de premiers couvre-feux dans quatre communes du Nord, dont Lille",
-   "accroche": "Matignon annonce de premiers couvre-feux dans quatre communes du Nord, dont Lille",
-   "essentiel": "Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord, dont Lille. Trois médias en parlent : RFI, La Dépêche et Le Monde."
   },
   {
    "medias": 3,
@@ -902,6 +866,42 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "La Dépêche",
+    "Le Monde"
+   ],
+   "derniere": "2026-10-19T17:17:28.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Violences du 17 octobre : Matignon annonce de premiers couvre-feux pour les nuits de lundi et mardi",
+     "url": "https://www.ladepeche.fr/2026/10/19/violences-du-17-octobre-laurent-nunez-a-presente-sa-demission-a-emmanuel-macron-le-president-la-refusee-13609454.php",
+     "media": "La Dépêche",
+     "date": "2026-10-19T17:17:28.000Z"
+    },
+    {
+     "titre": "EN DIRECT, manifestations du 17 octobre : Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord, dont Lille",
+     "url": "https://www.lemonde.fr/societe/live/2026/10/19/en-direct-manifestations-du-17-octobre-couvre-feux-localises-aides-aux-commerces-touches-annonce-d-un-acte-ii-samedi-prochain-le-point-sur-la-situation_6795855_3224.html",
+     "media": "Le Monde",
+     "date": "2026-10-19T13:36:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Partiel",
+    "origine": "dossier"
+   },
+   "fait": "Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord",
+   "accroche": "Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord",
+   "essentiel": "Matignon annonce de premiers couvre-feux à partir de 20 heures dans plusieurs quartiers de quatre communes du Nord, dont Lille. Deux médias en parlent : La Dépêche et Le Monde."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Sud Ouest",
     "L'Humanité"
    ],
@@ -999,8 +999,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pillages",
-    "origine": "dossier"
+    "titre": "Réseaux sociaux",
+    "origine": "recoupement"
    }
   },
   {
@@ -1039,7 +1039,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Couvre-feux",
+    "titre": "Partiel",
     "origine": "dossier"
    },
    "contexte": [
@@ -1115,8 +1115,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Commerces",
+    "origine": "dossier"
    },
    "fait": "Au moins 3 000 commerces touchés, le gouvernement annonce des aides",
    "accroche": "Au moins 3 000 commerces touchés, le gouvernement annonce des aides",
@@ -1358,7 +1358,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1385,12 +1385,6 @@
     },
     {
      "titre": "Décryptage. Violences du 17 octobre : couvre-feux, état d’urgence... Jusqu’où le gouvernement peut-il aller ?",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/violences-du-17-octobre-couvre-feux-etat-d-urgence-jusqu-ou-le-gouvernement-peut-il-aller",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:50:00.000Z"
-    },
-    {
-     "titre": "Décryptage. Violences du 17 octobre : couvre-feux, état d’urgence... Jusqu’où le gouvernement peut-il aller ?",
      "url": "https://www.estrepublicain.fr/politique/2026/10/19/violences-du-17-octobre-couvre-feux-etat-d-urgence-jusqu-ou-le-gouvernement-peut-il-aller",
      "media": "L'Est républicain",
      "date": "2026-10-19T16:50:00.000Z"
@@ -1400,6 +1394,42 @@
     "titre": "Gouvernement : ce que disent les médias",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-10-19T17:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Photos. Plusieurs centaines de personnes devant les mairies du département ce lundi",
+     "url": "https://www.estrepublicain.fr/social/2026/10/19/plusieurs-centaines-de-personnes-devant-les-mairies-du-departement-ce-lundi",
+     "media": "L'Est républicain",
+     "date": "2026-10-19T17:00:00.000Z"
+    },
+    {
+     "titre": "Erstein. Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie",
+     "url": "https://www.dna.fr/education/2026/10/19/manifester-est-legitime-les-violences-jamais",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-19T16:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie",
+   "accroche": "Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie",
+   "essentiel": "Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie. Deux médias en parlent : L'Est républicain et Dernières Nouvelles d'Alsace."
   },
   {
    "medias": 2,
@@ -1478,6 +1508,175 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-10-19T17:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : 3 000 commerces pillés et vandalisés, le gouvernement forcé de sortir son porte-monnaie",
+     "url": "https://www.humanite.fr/social-et-economie/alexandre-bompard/17-octobre-3-000-commerces-pilles-et-vandalises-le-gouvernement-force-de-sortir-son-porte-monnaie",
+     "media": "L'Humanité",
+     "date": "2026-10-19T17:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Commerces",
+    "origine": "dossier"
+   },
+   "fait": "3 000 commerces pillés et vandalisés, le gouvernement forcé de sortir son porte-monnaie",
+   "accroche": "3 000 commerces pillés et vandalisés, le gouvernement forcé de sortir son porte-monnaie"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-19T17:19:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. Projet de loi de finances pour 2027 : ce que le Département devrait « rendre » à l’État",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/19/projet-de-loi-de-finances-pour-2027-ce-que-le-departement-devrait-rendre-a-l-etat",
+     "media": "L'Est républicain",
+     "date": "2026-10-19T17:19:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Ce que le Département devrait « rendre » à l’État",
+   "accroche": "Ce que le Département devrait « rendre » à l’État"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-10-19T17:19:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "A six mois de la présidentielle, à qui profite le désordre ?",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/le-telephone-sonne/le-18-20-le-telephone-sonne-du-lundi-19-octobre-2026-8648011",
+     "media": "France Inter",
+     "date": "2026-10-19T17:19:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "A six mois de la présidentielle",
+   "accroche": "A six mois de la présidentielle"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-19T17:16:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« C’est important de montrer leur regard, leur pertinence » : des adolescents deviennent commissaires d’exposition dans cette bastide du Lot-et-Garonne",
+     "url": "https://www.sudouest.fr/lot-et-garonne/monflanquin/c-est-important-de-montrer-leur-regard-leur-pertinence-des-adolescents-deviennent-commissaires-d-exposition-dans-cette-bastide-du-lot-et-garonne-31121399.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-19T17:16:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-19T17:15:01.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : face à l’impopularité d’Emmanuel Macron, Edouard Philippe et Gabriel Attal rejouent la stratégie de la rupture",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/19/presidentielle-2027-face-a-l-impopularite-d-emmanuel-macron-edouard-philippe-et-gabriel-attal-rejouent-la-strategie-de-la-rupture_6797573_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-19T17:15:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : réponse sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Présidentielle 2027 : face à l’impopularité d’Emmanuel Macron",
+   "accroche": "Présidentielle 2027 : face à l’impopularité d’Emmanuel Macron",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-10-19T17:15:00.000Z",
@@ -1504,25 +1703,25 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
+    "Le Progrès"
    ],
-   "derniere": "2026-10-19T17:14:08.000Z",
+   "derniere": "2026-10-19T17:12:48.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Rumilly. « Ce qui s’est passé nous affecte en tant qu’élus et en tant que citoyens »",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/ce-qui-s-est-passe-nous-affecte-en-tant-qu-elus-et-en-tant-que-citoyens",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T17:14:08.000Z"
+     "titre": "Trèves. Élections du Conseil Municipal des Enfants",
+     "url": "https://www.leprogres.fr/education/2026/10/19/elections-du-conseil-municipal-des-enfants",
+     "media": "Le Progrès",
+     "date": "2026-10-19T17:12:48.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Rumilly : vie municipale",
+    "titre": "Trèves : conseil municipal",
     "origine": "regles"
    }
   },
@@ -1666,34 +1865,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T17:06:36.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Agrève. Élus et habitants réunis lors du rassemblement citoyen",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/elus-et-habitants-reunis-lors-du-rassemblement-citoyen",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T17:06:36.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Agrève : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Élus et habitants réunis lors du rassemblement citoyen",
-   "accroche": "Élus et habitants réunis lors du rassemblement citoyen"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-19T17:06:00.000Z",
@@ -1819,32 +1990,6 @@
    ],
    "titrePropre": {
     "titre": "Mulhouse : vie municipale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T17:03:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le Bourget-du-Lac. Le plan climat de Grand Lac sera présenté lors du prochain conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/le-plan-climat-de-grand-lac-sera-presente-lors-du-prochain-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T17:03:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Le Bourget-du-Lac : conseil municipal",
     "origine": "regles"
    }
   },
@@ -2023,33 +2168,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-19T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Photos. Plusieurs centaines de personnes devant les mairies du département ce lundi",
-     "url": "https://www.estrepublicain.fr/social/2026/10/19/plusieurs-centaines-de-personnes-devant-les-mairies-du-departement-ce-lundi",
-     "media": "L'Est républicain",
-     "date": "2026-10-19T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : ce qu'il faut savoir sur collectivités locales",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-10-19T16:59:12.000Z",
@@ -2129,40 +2247,6 @@
    },
    "fait": "Le chantier de la Madeleine dévoilé au public",
    "accroche": "Le chantier de la Madeleine dévoilé au public"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:56:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Valence. David Lisnard, président de l’Association des maires de France, attendu à Valence le 29 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/david-lisnard-president-de-l-association-des-maires-de-france-attendu-a-valence-le-29-octobre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:56:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -2359,8 +2443,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pillages",
-    "origine": "dossier"
+    "titre": "Colmar : actualité locale",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2443,33 +2528,6 @@
    ],
    "titrePropre": {
     "titre": "Jura : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:42:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Alpes du Sud. « Il faut continuer de se mobiliser ! » : les syndicats préparent la suite",
-     "url": "https://www.ledauphine.com/education/2026/10/19/il-faut-continuer-de-se-mobiliser-les-syndicats-preparent-la-suite",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:42:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Syndicats : ce qu'il faut savoir sur le social et l'emploi",
     "origine": "regles",
     "generique": true
    }
@@ -2578,60 +2636,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bassin de Romans-sur-Isère. La mobilisation du 17 octobre occultée par « ceux qui ont choisi la délinquance et le crime » dénoncent les élus",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/face-aux-violences-les-elus-et-les-citoyens-se-mobilisent",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:39:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bourg-de-Péage. À Bourg-de-Péage, une cinquantaine de personnes se rassemblent après les violences du 17 octobre",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/a-bourg-de-peage-une-cinquantaine-de-personnes",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:39:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bourg-de-Péage : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24"
    ],
    "derniere": "2026-10-19T16:37:00.000Z",
@@ -2688,33 +2692,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:35:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grenoble. « La violence n’a pas sa place en démocratie »",
-     "url": "https://www.ledauphine.com/societe/2026/10/19/isere-grenoble-la-violence-n-a-pas-sa-place-en-democratie",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:35:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Grenoble : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-19T16:34:45.000Z",
@@ -2746,34 +2723,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:34:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. L’appel d’Amine El Khatmi, ancien élu d'Avignon, chroniqueur sur CNews, à ces Français qui veulent quitter la France",
-     "url": "https://www.ledauphine.com/culture-loisirs/2026/10/19/l-appel-d-amine-el-khatmi-ancien-elu-d-avignon-chroniqueur-sur-cnews-a-ces-francais-qui-veulent-quitter-la-france",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:34:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : opinion d'un média",
-    "origine": "regles"
-   },
-   "fait": "L’appel d’Amine El Khatmi chroniqueur sur CNews, à ces Français qui veulent quitter la France",
-   "accroche": "L’appel d’Amine El Khatmi chroniqueur sur CNews, à ces Français qui veulent quitter la France"
   },
   {
    "medias": 1,
@@ -2823,61 +2772,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:32:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Haute-Savoie. Rassemblements devant de nombreuses mairies après les violences de samedi : des élus « révoltés par la casse »",
-     "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/19/rassemblements-devant-de-nombreuses-mairies-apres-les-violences-de-samedi-des-elus-revoltes-par-la-casse",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:32:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haute-Savoie : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Rassemblements devant de nombreuses mairies après les violences de samedi : des élus",
-   "accroche": "Rassemblements devant de nombreuses mairies après les violences de samedi : des élus"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:32:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Chabeuil. Une centaine d’habitants rassemblés contre les violences du week-end",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/une-centaine-d-habitants-rassembles-contre-les-violences-du-week-end",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:32:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Chabeuil : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-10-19T16:31:55.000Z",
@@ -2922,39 +2816,11 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pillages",
+    "titre": "Commerces",
     "origine": "dossier"
    },
    "fait": "La mairie lance son plan d’urgence pour les commerçants",
    "accroche": "La mairie lance son plan d’urgence pour les commerçants"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-10-19T16:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Erstein. Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie",
-     "url": "https://www.dna.fr/education/2026/10/19/manifester-est-legitime-les-violences-jamais",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-19T16:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Erstein : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie",
-   "accroche": "Manifestations du 17 octobre : une centaine de personnes rassemblées devant la mairie"
   },
   {
    "medias": 1,
@@ -3073,143 +2939,6 @@
    },
    "fait": "La halle du Pin bientôt démontée pour apporter plus de sécurité",
    "accroche": "La halle du Pin bientôt démontée pour apporter plus de sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:26:31.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Aix-les-Bains. « Nous appelons au calme et au retour à l’ordre »",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/nous-appelons-au-calme-et-au-retour-a-l-ordre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:26:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Aix-les-Bains : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:26:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Veyras. Municipalité et habitants ont répondu à l’appel de l’Association des maires de France",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/municipalite-et-habitants-ont-repondu-a-l-appel-de-l-association-des-maires-de-france",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:26:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Veyras : actualité sociale",
-    "origine": "regles"
-   },
-   "fait": "Municipalité et habitants ont répondu à l’appel de l’Association des maires de France",
-   "accroche": "Municipalité et habitants ont répondu à l’appel de l’Association des maires de France"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:25:37.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Gervais. Le refuge Durier va être déplacé",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/le-refuge-durier-va-etre-deplace",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:25:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Gervais : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le refuge Durier va être déplacé",
-   "accroche": "Le refuge Durier va être déplacé"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:23:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Embrun. Glissement de terrain : « C’est à l’État de dire s’il est arrêté et terminé »",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/glissement-de-terrain-c-est-a-l-etat-de-dire-s-il-est-arrete-et-termine",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:23:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Embrun : projet d'aménagement",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:23:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Embrun. Visites de quartiers : ce qu’il faut retenir",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/visites-de-quartiers-ce-qu-il-faut-retenir",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:23:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Embrun : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -3459,58 +3188,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:10:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre. “À ceux qui détruisent, nous répondons par l’unité” déclare l'association des maires du Vaucluse",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/degats-du-17-octobre-a-ceux-qui-detruisent-nous-repondons-par-l-unite-declare-l-association-des-maires",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : déclaration sur le social et l'emploi",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T16:09:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Orcières. Conseil municipal : un ordre du jour explosif",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/conseil-municipal-un-ordre-du-jour-explosif",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T16:09:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Orcières : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-19T16:09:00.000Z",
@@ -3555,7 +3232,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pillages",
+    "titre": "Commerces",
     "origine": "dossier"
    }
   },
@@ -3681,8 +3358,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pillages",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -3905,8 +3583,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social : annonces sur le social et l'emploi",
-    "origine": "regles"
+    "titre": "Commerces",
+    "origine": "dossier"
    },
    "fait": "Le chômage partiel 100 % pris en charge pendant \"trois mois\", annonce le ministre du Travail",
    "accroche": "Le chômage partiel 100 % pris en charge pendant \"trois mois\", annonce le ministre du Travail"
@@ -3949,32 +3627,6 @@
    },
    "fait": "Violences du 17 octobre : peut-on bloquer les réseaux sociaux",
    "accroche": "Violences du 17 octobre : peut-on bloquer les réseaux sociaux"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-10-19T15:55:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Cordon. Un conseil municipal exceptionnel organisé ce vendredi",
-     "url": "https://www.ledauphine.com/politique/2026/10/19/un-conseil-municipal-exceptionnel-organise-ce-vendredi",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T15:55:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Cordon : conseil municipal",
-    "origine": "regles"
-   }
   },
   {
    "medias": 1,
@@ -4133,9 +3785,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
+    "titre": "Commerces",
+    "origine": "dossier"
    }
   },
   {
@@ -4277,9 +3928,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Partiel",
+    "origine": "dossier"
    }
   },
   {
@@ -4309,6 +3959,482 @@
    },
    "fait": "Trois élus récompensés pour leurs années au service de la commune",
    "accroche": "Trois élus récompensés pour leurs années au service de la commune"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-19T15:30:15.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : après un week-end chaotique, Emmanuel Macron et le gouvernement s’en remettent aux préfets",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/19/mobilisation-du-17-octobre-apres-un-week-end-chaotique-emmanuel-macron-et-le-gouvernement-s-en-remettent-aux-prefets_6797553_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-19T15:30:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-19T15:29:08.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Serge Papin",
+      "photo": "photos/personnalites/serge-papin.jpg",
+      "photoHd": "photos/personnalites/hd/serge-papin.jpg",
+      "credit": "Bogdan Hoyaux / European Union, 2025 / EC - Audiovisual Service, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Pillages à Paris: \"On est en discussion avec les assurances\", indique Serge Papin, ministre des PME",
+     "url": "https://www.bfmtv.com/politique/video-pillages-a-paris-on-est-en-discussion-avec-les-assurances-indique-serge-papin-ministre-des-pme_VN-202610190665.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T15:29:08.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Serge Papin : ministre des petites et moyennes entreprises, du commerce, de l’artisanat, du tourisme et du pouvoir d’achat",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-19T15:26:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Serge Papin",
+      "photo": "photos/personnalites/serge-papin.jpg",
+      "photoHd": "photos/personnalites/hd/serge-papin.jpg",
+      "credit": "Bogdan Hoyaux / European Union, 2025 / EC - Audiovisual Service, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "\"Vous ne pouvez pas dire qu'on abandonne\": Serge Papin, ministre des PME, travail à des mesures de soutiens aux commerçants pillés",
+     "url": "https://www.bfmtv.com/politique/video-vous-ne-pouvez-pas-dire-qu-on-abandonne-serge-papin-ministre-des-pme-travail-a-des-mesures-de-soutiens-aux-commercants-pilles_VN-202610190661.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T15:26:11.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Commerces",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Serge Papin : ministre des petites et moyennes entreprises, du commerce, de l’artisanat, du tourisme et du pouvoir d’achat",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-19T15:25:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Pays basque. « Nous ne pouvons pas accepter que la violence prenne le pas sur le dialogue » : à Bayonne, des élus réunis pour dénoncer exactions du week-end",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pays-basque/pays-basque-nous-ne-pouvons-pas-accepter-que-la-violence-prenne-le-pas-sur-le-dialogue-a-bayonne-des-elus-reunis-pour-denoncer-exactions-du-week-end-31141671.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-19T15:25:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : déclaration sur la vie locale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-19T15:24:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LR"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"On peut manger par terre et c’est ce que j’aimerais pour la ville\" : le maire Les Républicains de Roanne veut tracer les crottes de chien par ADN et démasquer les maîtres indélicats",
+     "url": "https://www.ladepeche.fr/2026/10/19/on-peut-manger-par-terre-et-cest-ce-que-jaimerais-pour-la-ville-le-maire-les-republicains-de-roanne-veut-tracer-les-crottes-de-chien-par-adn-et-13609855.php",
+     "media": "La Dépêche",
+     "date": "2026-10-19T15:24:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maire",
+    "origine": "dossier"
+   },
+   "fait": "Le maire Les Républicains de Roanne veut tracer les crottes de chien par ADN et démasquer les maîtres indélicats",
+   "accroche": "Le maire Les Républicains de Roanne veut tracer les crottes de chien par ADN et démasquer les maîtres indélicats"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-19T15:21:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Amance. Affouages, finances et associations au conseil",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/19/affouages-finances-et-associations-au-conseil",
+     "media": "L'Est républicain",
+     "date": "2026-10-19T15:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Amance : finances locales",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 19 octobre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-19T15:20:44.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation en France: attention à ces images mensongères",
+     "url": "https://www.rfi.fr/fr/france/20261019-mobilisation-en-france-attention-%C3%A0-ces-images-mensong%C3%A8res",
+     "media": "RFI",
+     "date": "2026-10-19T15:20:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-10-19T15:18:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Métropole de Lyon. Violences du 17 octobre : « Cinq commerces ont été touchés » à Villeurbanne, des voitures pleines arrêtées par la police",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/19/violences-du-17-octobre-cinq-commerces-ont-ete-touches-a-villeurbanne-des-voitures-pleines-arretees-par-la-police",
+     "media": "Le Progrès",
+     "date": "2026-10-19T15:18:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Métropole de Lyon : sécurité",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-10-19T15:15:35.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Paul Vannier",
+      "photo": "photos/deputes/PA795596.jpg",
+      "photoHd": "photos/deputes/hd/PA795596.jpg",
+      "parti": "LFI",
+      "lien": "#depute-PA795596",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "LFI",
+     "SOC"
+    ],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "École publique: la gauche ferait-elle mieux? Le débat entre Paul Vannier (LFI) et Yannick Trigance (PS)",
+     "url": "https://www.mediapart.fr/journal/politique/191026/ecole-publique-la-gauche-ferait-elle-mieux-le-debat-entre-paul-vannier-lfi-et-yannick-trigance-ps",
+     "media": "Mediapart",
+     "date": "2026-10-19T15:15:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Paul Vannier : ce qu'il faut savoir sur l'éducation et la jeunesse",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Paul Vannier : député LFI (Val-d'Oise)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-19T15:15:23.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : le cumul des colères, par Serge July",
+     "url": "https://www.liberation.fr/idees-et-debats/opinions/le-cumul-des-coleres-par-serge-july-20261019_RDGGBVQ4SZCYTMDD4ZO3E4IA7U/",
+     "media": "Libération",
+     "date": "2026-10-19T15:15:23.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Express"
+   ],
+   "derniere": "2026-10-19T15:15:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Ce sont les images qui font campagne pour elle\" : Marine Le Pen, la stratégie de la stature",
+     "url": "https://www.lexpress.fr/politique/rn/ce-sont-les-images-qui-font-campagne-pour-elle-marine-le-pen-la-strategie-de-la-stature-YFE4SFYBRZEU5PCXFXNIXN6RFU/",
+     "media": "L'Express",
+     "date": "2026-10-19T15:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-19T15:15:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Dimitri Doussot",
+      "parti": "LR",
+      "lien": "#senateur-21644W"
+     }
+    ],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. « Une dose de protectionnisme est nécessaire » : le nouveau sénateur de Haute-Saône, Dimitri Doussot, interpelle le gouvernement sur la filière automobile",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/19/une-dose-de-protectionnisme-est-necessaire-le-nouveau-senateur-de-haute-saone-dimitri-roussot-interpelle-le-gouvernement-sur-la-filiere-automobile",
+     "media": "L'Est républicain",
+     "date": "2026-10-19T15:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-19T15:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lorraine. Mobilisation du 17 octobre : après les violences, les maires réunis devant les mairies pour « défendre la République et ses valeurs »",
+     "url": "https://www.estrepublicain.fr/social/2026/10/19/mobilisation-du-17-octobre-apres-les-violences-les-maires-reunis-devant-les-mairies-pour-defendre-la-republique-et-ses-valeurs",
+     "media": "L'Est républicain",
+     "date": "2026-10-19T15:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lorraine : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-19T15:11:09.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Pierre Farandou",
+      "photo": "photos/personnalites/jean-pierre-farandou.jpg",
+      "photoHd": "photos/personnalites/hd/jean-pierre-farandou.jpg",
+      "credit": "Matthieu Raffard, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Pillages à Paris: Jean-Pierre Farandou, ministre du Travail, à la rencontre des commerçants",
+     "url": "https://www.bfmtv.com/politique/video-pillages-a-paris-jean-pierre-farandou-ministre-du-travail-a-la-rencontre-des-commercants_VN-202610190655.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T15:11:09.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Jean-Pierre Farandou, ministre du Travail, à la rencontre des commerçants",
+   "accroche": "Jean-Pierre Farandou, ministre du Travail, à la rencontre des commerçants",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jean-Pierre Farandou : ministre du travail et des solidarités",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   }
  ]
 }
