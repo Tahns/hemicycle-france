@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-19T07:55:35.479Z",
+ "lastUpdated": "2026-10-19T08:01:09.740Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Nice-Matin",
@@ -150,38 +150,150 @@
  ],
  "dossiers": [
   {
-   "id": "allocution",
-   "titre": "Allocution",
+   "id": "octobre",
+   "titre": "Octobre",
    "motifs": [
-    "allocution"
+    "octobre",
+    "mobilisation",
+    "manifestations",
+    "pillages"
    ],
    "medias": [
-    "20 Minutes",
+    "Le Figaro",
+    "BFMTV",
+    "Nice-Matin",
+    "L'Obs",
+    "Libération",
+    "Europe 1",
+    "L'Humanité",
+    "RFI",
+    "Le JDD",
     "Sud Ouest",
     "Le Monde",
-    "France 24",
-    "La Dépêche",
-    "L'Humanité",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Europe 1"
-   ],
-   "mediasDistincts": 8,
-   "sources": [
-    "20 Minutes",
-    "Sud Ouest",
-    "Le Monde",
     "France 24",
     "La Dépêche",
-    "L'Humanité",
-    "EBRA",
-    "Europe 1"
+    "20 Minutes",
+    "Valeurs actuelles",
+    "Mediapart",
+    "L'Express",
+    "Hugo Décrypte"
    ],
-   "nb": 11,
-   "derniere": "2026-10-18T20:56:14.000Z",
+   "mediasDistincts": 17,
+   "sources": [
+    "Le Figaro",
+    "BFMTV",
+    "Nice-Matin",
+    "L'Obs",
+    "Libération",
+    "Groupe Bolloré",
+    "L'Humanité",
+    "France Médias Monde",
+    "Sud Ouest",
+    "Le Monde",
+    "EBRA",
+    "La Dépêche",
+    "20 Minutes",
+    "Valeurs actuelles",
+    "Mediapart",
+    "L'Express",
+    "Hugo Décrypte"
+   ],
+   "nb": 123,
+   "derniere": "2026-10-19T07:57:02.000Z",
    "articles": [
+    {
+     "media": "Le Figaro",
+     "titre": "Mobilisation du 17 octobre : comment Jean-Luc Mélenchon espère tirer profit d’une «convergence des luttes»",
+     "url": "https://www.lefigaro.fr/politique/mobilisation-du-17-octobre-comment-jean-luc-melenchon-espere-tirer-profit-d-une-convergence-des-luttes-20261016",
+     "date": "2026-10-19T07:57:02.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Mobilisation du 17 octobre: le maire de Lyon pointe des réponses du gouvernement \"pas à la hauteur\"",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-du-17-octobre-le-maire-de-lyon-pointe-des-reponses-du-gouvernement-pas-a-la-hauteur_VN-202610190293.html",
+     "date": "2026-10-19T07:49:49.000Z",
+     "video": true
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Logement social, artificialisation, zones économiques : venez donner votre avis sur la trajectoire que doit prendre l’agglomération Est-varoise dans les 20 prochaines années",
+     "url": "https://www.nicematin.com/societe/logement-social-artificialisation-zones-economiques-venez-donner-votre-avis-sur-la-trajectoire-que-doit-prendre-l-agglomeration-est-varoise-dans-les-20-prochaines-annees-10740488",
+     "date": "2026-10-19T07:49:16.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Mobilisation du 17 octobre : « Je suis responsable de tout ce qui se passe »… Nuñez remet sa démission à Macron qui la refuse",
+     "url": "https://www.nouvelobs.com/social/20261019.OBS119336/manifestations-du-17-octobre-je-suis-responsable-de-tout-ce-qui-se-passe-nunez-remet-sa-demission-a-macron-qui-la-refuse.html",
+     "date": "2026-10-19T07:18:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "«Le 17 octobre, des pans entiers de nos villes ont été laissés sans protection», par Emmanuel Grégoire, Benoît Payan et Grégory Doucet",
+     "url": "https://www.liberation.fr/politique/le-17-octobre-des-pans-entiers-de-nos-villes-ont-ete-laisses-sans-protection-par-emmanuel-gregoire-benoit-payan-et-gregory-doucet-20261019_JMSGE2DLYZCU3JK5DMPA4UDI3Y/",
+     "date": "2026-10-19T07:00:00.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Émeutes du 17 octobre : «Il faut arrêter l'immigration», martèle Jordan Bardella",
+     "url": "https://www.europe1.fr/politique/emeutes-du-17-octobre-il-faut-arreter-limmigration-martele-jordan-bardella-1162443?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-19T06:51:00.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Coup de bluff ? Emmanuel Macron refuse la démission du ministre de l’Intérieur Laurent Nunez",
+     "url": "https://www.humanite.fr/politique/emmanuel-macron/coup-de-bluff-emmanuel-macron-refuse-la-demission-du-ministre-de-linterieur-laurent-nunez",
+     "date": "2026-10-19T06:11:05.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mobilisation en France: Emmanuel Macron admet des «défaillances» mais refuse le départ de Laurent Nuñez",
+     "url": "https://www.rfi.fr/fr/france/20261019-mobilisation-en-france-emmanuel-macron-reconna%C3%AEt-d%C3%A9faillances-mais-refuse-la-d%C3%A9mission-du-ministre-de-l-int%C3%A9rieur",
+     "date": "2026-10-19T06:09:32.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Émeutes du 17 octobre : Emmanuel Macron a refusé la démission de Laurent Nuñez et demande de déployer «de nouveaux modes d'action contre les casseurs»",
+     "url": "https://www.lejdd.fr/Societe/emeutes-du-17-octobre-emmanuel-macron-a-refuse-la-demission-de-laurent-nunez-et-demande-de-deployer-de-nouveaux-modes-daction-contre-les-casseurs-186384",
+     "date": "2026-10-19T05:59:09.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "DIRECT. Mobilisation du 17 octobre : Laurent Nuñez admet “une perte de contrôle”, “nous avons failli” reconnaît Gérald Darmanin... Suivez les dernières infos ce lundi",
+     "url": "https://www.sudouest.fr/politique/direct-mobilisation-du-17-octobre-laurent-nunez-a-presente-sa-demission-emmanuel-macron-l-a-refusee-suivez-les-dernieres-infos-ce-lundi-19-octobre-2026-31138743.php",
+     "date": "2026-10-19T05:48:32.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "EN DIRECT, mobilisation du 17 octobre : « Nous avons failli incontestablement », reconnaît Gérald Darmanin ; Laurent Nuñez « prend [sa] part de responsabilité »",
+     "url": "https://www.lemonde.fr/societe/live/2026/10/19/en-direct-mobilisation-du-17-octobre-emmanuel-macron-a-refuse-la-demission-du-ministre-de-l-interieur-laurent-nunez_6795855_3224.html",
+     "date": "2026-10-19T05:17:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Social. Manifestation du 17 octobre : après les destructions et les pillages, des conséquences politiques incertaines",
+     "url": "https://www.dna.fr/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
+     "date": "2026-10-19T04:02:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Social. 17 octobre : après les destructions et les pillages, des conséquences politiques incertaines",
+     "url": "https://www.ledauphine.com/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
+     "date": "2026-10-19T04:02:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Après des manifestations ayant viré au chaos, l'exécutif sommé de rendre des comptes",
+     "url": "https://www.france24.com/fr/france/20261019-apr%C3%A8s-des-manifestations-qui-ont-vir%C3%A9-au-chaos-l-ex%C3%A9cutif-somm%C3%A9-de-rendre-des-comptes",
+     "date": "2026-10-19T03:21:28.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "REPLAY. Manifestations du 17 octobre : les pillages se poursuivent ce soir à Paris, Lyon et Marseille, le maire de Lille demande des \"comptes\" au président",
+     "url": "https://www.ladepeche.fr/2026/10/18/direct-manifestations-du-17-octobre-lincendie-de-la-mairie-de-limoges-est-circonscrit-855-personnes-interpellees-a-paris-13608154.php",
+     "date": "2026-10-18T20:59:46.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Manifestation du 17 octobre : « Lamentable », « irresponsable »… La déception face à l’allocution de Macron",
@@ -189,64 +301,29 @@
      "date": "2026-10-18T20:56:14.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Mobilisation du 17 octobre. Allocution du chef de l’État : de la solennité mais peu d’annonces",
-     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-du-17-octobre-allocution-du-chef-de-l-etat-de-la-solennite-mais-peu-d-annonces-31136192.php",
-     "date": "2026-10-18T20:55:02.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "17 octobre : Emmanuel Macron présente une méthode claire, mais peu d’actes",
+     "url": "https://www.valeursactuelles.com/politique/17-octobre-emmanuel-macron-presente-une-methode-claire-mais-peu-dactes",
+     "date": "2026-10-18T18:38:29.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Mobilisation du 17 octobre : ce qu’il faut retenir de l’allocution d’Emmanuel Macron",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/18/mobilisation-du-17-octobre-ce-qu-il-faut-retenir-de-l-allocution-d-emmanuel-macron_6797267_823448.html",
-     "date": "2026-10-18T20:19:18.000Z"
+     "media": "Mediapart",
+     "titre": "Fiasco sécuritaire du 17 octobre: aucune leçon n’a été tirée des Gilets jaunes",
+     "url": "https://www.mediapart.fr/journal/france/181026/fiasco-securitaire-du-17-octobre-aucune-lecon-n-ete-tiree-des-gilets-jaunes",
+     "date": "2026-10-18T16:30:15.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "\"Colère et honte\", \"transparence\" attendue... Ce qu'il faut retenir de l'allocution de Macron",
-     "url": "https://www.france24.com/fr/france/20261018-col%C3%A8re-et-honte-transparence-attendue-ce-qu-il-faut-retenir-de-l-allocution-d-emmanuel-macron",
-     "date": "2026-10-18T19:22:47.000Z"
+     "media": "L'Express",
+     "titre": "\"Il n'y a plus de De Gaulle, même pas de Daladier\" : l'historien Julian Jakson sur le chaos en France",
+     "url": "https://www.lexpress.fr/politique/il-ny-a-plus-de-de-gaulle-meme-pas-de-daladier-lhistorien-julian-jakson-sur-le-chaos-en-france-NJHETRQKURBYXEXWQQLOC57EVA/",
+     "date": "2026-10-18T14:25:20.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Manifestations du 17 octobre : Emmanuel Macron exprime \"sa honte\" et promet d'être \"intraitable\" face aux casseurs... que retenir de son allocution ?",
-     "url": "https://www.ladepeche.fr/2026/10/18/manifestations-du-17-octobre-emmanuel-macron-exprime-sa-honte-et-promet-detre-intraitable-face-aux-casseurs-que-retenir-de-son-allocution-13608901.php",
-     "date": "2026-10-18T19:05:56.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "« Ceux qui vous expliquent que l’urgence est d’aller dans la rue n’ont qu’un but : abîmer la république » : ce qu’il faut retenir de l’allocution d’Emmanuel Macron",
-     "url": "https://www.humanite.fr/politique/emmanuel-macron/ceux-qui-vous-expliquent-que-lurgence-est-daller-dans-la-rue-nont-quun-but-abimer-la-republique-ce-quil-faut-retenir",
-     "date": "2026-10-18T18:43:10.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.dna.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.ledauphine.com/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "En direct - Émeutes du 17 octobre : RN, Horizons, LR, LFI... Les réactions de la classe politique après l'allocution d'Emmanuel Macron",
-     "url": "https://www.europe1.fr/societe/en-direct-emeutes-du-17-octobre-emmanuel-macron-sadressera-aux-francais-a-20-heures-1159713?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-18T10:56:47.000Z"
+     "media": "Hugo Décrypte",
+     "titre": "Un jeune homme a eu la main arrachée lors d’une manifestation à Saint-Etienne (17/10)",
+     "url": "https://www.youtube.com/shorts/Ym3kBM23WPM",
+     "date": "2026-10-17T16:42:37.000Z",
+     "video": true
     }
    ]
   },
@@ -262,26 +339,24 @@
     "L'Obs",
     "Valeurs actuelles",
     "Sud Ouest",
-    "Le Progrès",
     "Europe 1",
     "Libération",
     "20 Minutes",
     "Le JDD",
     "Ouest-France"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 8,
    "sources": [
     "La Dépêche",
     "L'Obs",
     "Valeurs actuelles",
     "Sud Ouest",
-    "Le Progrès",
     "Groupe Bolloré",
     "Libération",
     "20 Minutes",
     "Ouest-France"
    ],
-   "nb": 22,
+   "nb": 20,
    "derniere": "2026-10-19T06:54:51.000Z",
    "articles": [
     {
@@ -307,12 +382,6 @@
      "titre": "Manifestation du 17 octobre : « La casse, ce n’est pas une politique » rappelle Nathalie Arthaud, candidate à l’élection présidentielle",
      "url": "https://www.sudouest.fr/societe/greves-et-manifestations/manifestation-du-17-octobre-la-casse-ce-n-est-pas-une-politique-rappelle-nathalie-arthaud-candidate-a-l-election-presidentielle-31131426.php",
      "date": "2026-10-18T20:06:24.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "La question du jour. Le chaos du 17 octobre aura-t-il un impact sur la présidentielle ?",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/le-chaos-du-17-octobre-aura-t-il-un-impact-sur-la-presidentielle",
-     "date": "2026-10-18T19:00:00.000Z"
     },
     {
      "media": "Europe 1",
@@ -351,6 +420,12 @@
      "date": "2026-10-18T09:36:04.000Z"
     },
     {
+     "media": "Europe 1",
+     "titre": "Présidentielle 2027 : «On a mis au congélateur la réforme des retraites», déplore Thierry Breton",
+     "url": "https://www.europe1.fr/societe/presidentielle-2027-on-a-mis-au-congelateur-la-reforme-des-retraites-deplore-thierry-breton-1159680?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-18T09:01:10.000Z"
+    },
+    {
      "media": "20 Minutes",
      "titre": "« À présent, il faut avancer » : Olivier Faure souhaite « la victoire » de Raphaël Glucksmann à la présidentielle",
      "url": "https://www.20minutes.fr/politique/4255298-20261018-present-faut-avancer-olivier-faure-souhaite-victoire-raphael-glucksmann-presidentielle?at_medium=display&at_campaign=149",
@@ -371,72 +446,36 @@
    ]
   },
   {
-   "id": "refuse",
-   "titre": "Refuse",
+   "id": "controle",
+   "titre": "Contrôle",
    "motifs": [
-    "refuse",
-    "démission"
+    "contrôle"
    ],
    "medias": [
-    "L'Obs",
-    "L'Humanité",
-    "RFI",
-    "Le JDD",
-    "France Inter",
-    "BFMTV",
+    "Sud Ouest",
     "France 24",
-    "Europe 1",
-    "La Dépêche"
-   ],
-   "mediasDistincts": 7,
-   "sources": [
-    "L'Obs",
-    "L'Humanité",
-    "France Médias Monde",
-    "Groupe Bolloré",
-    "France Inter",
+    "Le Monde",
     "BFMTV",
-    "La Dépêche"
+    "L'Humanité",
+    "Le JDD"
    ],
-   "nb": 12,
-   "derniere": "2026-10-19T07:18:00.000Z",
+   "mediasDistincts": 6,
+   "sources": [
+    "Sud Ouest",
+    "France 24",
+    "Le Monde",
+    "BFMTV",
+    "L'Humanité",
+    "Le JDD"
+   ],
+   "nb": 7,
+   "derniere": "2026-10-19T05:48:32.000Z",
    "articles": [
     {
-     "media": "L'Obs",
-     "titre": "Mobilisation du 17 octobre : « Je suis responsable de tout ce qui se passe »… Nuñez remet sa démission à Macron qui la refuse",
-     "url": "https://www.nouvelobs.com/social/20261019.OBS119336/manifestations-du-17-octobre-je-suis-responsable-de-tout-ce-qui-se-passe-nunez-remet-sa-demission-a-macron-qui-la-refuse.html",
-     "date": "2026-10-19T07:18:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Coup de bluff ? Emmanuel Macron refuse la démission du ministre de l’Intérieur Laurent Nunez",
-     "url": "https://www.humanite.fr/politique/emmanuel-macron/coup-de-bluff-emmanuel-macron-refuse-la-demission-du-ministre-de-linterieur-laurent-nunez",
-     "date": "2026-10-19T06:11:05.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mobilisation en France: Emmanuel Macron admet des «défaillances» mais refuse le départ de Laurent Nuñez",
-     "url": "https://www.rfi.fr/fr/france/20261019-mobilisation-en-france-emmanuel-macron-reconna%C3%AEt-d%C3%A9faillances-mais-refuse-la-d%C3%A9mission-du-ministre-de-l-int%C3%A9rieur",
-     "date": "2026-10-19T06:09:32.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Émeutes du 17 octobre : Emmanuel Macron a refusé la démission de Laurent Nuñez et demande de déployer «de nouveaux modes d'action contre les casseurs»",
-     "url": "https://www.lejdd.fr/Societe/emeutes-du-17-octobre-emmanuel-macron-a-refuse-la-demission-de-laurent-nunez-et-demande-de-deployer-de-nouveaux-modes-daction-contre-les-casseurs-186384",
-     "date": "2026-10-19T05:59:09.000Z"
-    },
-    {
-     "media": "France Inter",
-     "titre": "\"Je suis responsable de tout ce qui se passe\" : Laurent Nuñez a remis sa démission au Président, qui l'a refusée",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-7h50/l-invite-de-7h50-du-lundi-19-octobre-2026-4052226",
-     "date": "2026-10-19T05:47:45.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Défaillances d'anticipation et de renseignements\": le ministre de l'Intérieur, Laurent Nuñez, présente sa démission, Emmanuel Macron la refuse",
-     "url": "https://www.bfmtv.com/politique/video-defaillances-d-anticipation-et-de-renseignements-le-ministre-de-l-interieur-laurent-nunez-presente-sa-demission-emmanuel-macron-la-refuse_VN-202610190129.html",
-     "date": "2026-10-19T05:21:37.000Z",
-     "video": true
+     "media": "Sud Ouest",
+     "titre": "DIRECT. Mobilisation du 17 octobre : Laurent Nuñez admet “une perte de contrôle”, “nous avons failli” reconnaît Gérald Darmanin... Suivez les dernières infos ce lundi",
+     "url": "https://www.sudouest.fr/politique/direct-mobilisation-du-17-octobre-laurent-nunez-a-presente-sa-demission-emmanuel-macron-l-a-refusee-suivez-les-dernieres-infos-ce-lundi-19-octobre-2026-31138743.php",
+     "date": "2026-10-19T05:48:32.000Z"
     },
     {
      "media": "France 24",
@@ -445,41 +484,43 @@
      "date": "2026-10-19T05:18:15.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Émeutes du 17 octobre : Laurent Nuñez a présenté sa démission à Emmanuel Macron qui l'a refusée",
-     "url": "https://www.europe1.fr/politique/emeutes-du-17-octobre-laurent-nunez-a-presente-sa-demission-a-emmanuel-macron-qui-la-refusee-1162167?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-19T05:05:00.000Z"
+     "media": "Le Monde",
+     "titre": "« La France ne peut pas demander à bénéficier de la puissance collective de l’Europe quand ça l’arrange, sans en assumer les contraintes »",
+     "url": "https://www.lemonde.fr/idees/article/2026/10/19/la-france-ne-peut-pas-demander-a-beneficier-de-la-puissance-collective-de-l-europe-quand-ca-l-arrange-sans-en-assumer-les-contraintes_6797479_3232.html",
+     "date": "2026-10-19T04:00:17.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "REPLAY. Présidentielle 2027 : après les tensions du 17 octobre, Marine Tondelier réclame la démission du ministre de l'Intérieur",
-     "url": "https://www.ladepeche.fr/2026/10/18/direct-presidentielle-2027-personne-nimposera-son-agenda-politique-par-la-violence-assure-sebastien-lecornu-apres-les-incendies-et-les-pillages-de-13607190.php",
-     "date": "2026-10-18T16:32:21.000Z"
+     "media": "BFMTV",
+     "titre": "Rassemblement à Paris: \"Ce soir, la situation est hors de contrôle\", observe François Kalfon, député européen PS-Place publique",
+     "url": "https://www.bfmtv.com/politique/video-rassemblement-a-paris-ce-soir-la-situation-est-hors-de-controle-observe-francois-kalfon-depute-europeen-ps-place-publique_VN-202610180400.html",
+     "date": "2026-10-18T21:32:01.000Z",
+     "video": true
     },
     {
-     "media": "Europe 1",
-     "titre": "Albanie : sixième jour de manifestations à Tirana, le Premier ministre refuse de démissionner",
-     "url": "https://www.europe1.fr/international/albanie-sixieme-jour-de-manifestations-a-tirana-le-premier-ministre-refuse-de-demissionner-1160436?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-18T14:53:00.000Z"
+     "media": "BFMTV",
+     "titre": "Journée du 17-octobre: \"Le gouvernement a perdu le contrôle de la situation\", déclare Sébastien Chenu, vice-président du RN",
+     "url": "https://www.bfmtv.com/politique/video-journee-du-17-octobre-le-gouvernement-a-perdu-le-controle-de-la-situation-declare-sebastien-chenu-vice-president-du-rn_VN-202610180375.html",
+     "date": "2026-10-18T20:45:27.000Z",
+     "video": true
     },
     {
-     "media": "La Dépêche",
-     "titre": "ENTRETIEN. Manifestations du 17 octobre : \"Quand un gouvernement refuse le dialogue social, il nourrit lui-même la recherche de modes d'action plus radicaux\"",
-     "url": "https://www.ladepeche.fr/2026/10/18/entretien-debordements-du-17-octobre-quand-un-gouvernement-refuse-le-dialogue-social-il-nourrit-lui-meme-la-recherche-de-modes-daction-plus-radicaux-13607429.php",
-     "date": "2026-10-18T09:36:25.000Z"
+     "media": "L'Humanité",
+     "titre": "17 octobre : comment le gouvernement a perdu le contrôle",
+     "url": "https://www.humanite.fr/politique/laurent-nunez/17-octobre-comment-le-gouvernement-a-perdu-le-controle",
+     "date": "2026-10-18T14:51:08.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "Jacline Mouraud : «Je refuse de gonfler les rangs de Mélenchon»",
-     "url": "https://www.lejdd.fr/Societe/jacline-mouraud-je-refuse-de-gonfler-les-rangs-de-melenchon-186309",
-     "date": "2026-10-18T06:12:48.000Z"
+     "titre": "Périscolaire : le Sénat veut renforcer les contrôles",
+     "url": "https://www.lejdd.fr/Societe/periscolaire-le-senat-veut-renforcer-les-controles-186267",
+     "date": "2026-10-18T08:00:07.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 7,
+   "medias": 5,
    "mediasDistincts": 4,
    "sources": [
     "Sud Ouest",
@@ -499,8 +540,8 @@
    "articles": [
     {
      "titre": "Paris. L’eurodéputée LFI Rima Hassan jugée pour apologie du terrorisme ce lundi",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/19/l-eurodeputee-lfi-rima-hassan-jugee-pour-apologie-du-terrorisme-ce-lundi",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/10/19/l-eurodeputee-lfi-rima-hassan-jugee-pour-apologie-du-terrorisme-ce-lundi",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-19T05:16:00.000Z"
     },
     {
@@ -511,20 +552,8 @@
     },
     {
      "titre": "Paris. L’eurodéputée LFI Rima Hassan jugée pour apologie du terrorisme ce lundi",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/10/19/l-eurodeputee-lfi-rima-hassan-jugee-pour-apologie-du-terrorisme-ce-lundi",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-19T05:16:00.000Z"
-    },
-    {
-     "titre": "Paris. L’eurodéputée LFI Rima Hassan jugée pour apologie du terrorisme ce lundi",
      "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/19/l-eurodeputee-lfi-rima-hassan-jugee-pour-apologie-du-terrorisme-ce-lundi",
      "media": "Le Dauphiné libéré",
-     "date": "2026-10-19T05:16:00.000Z"
-    },
-    {
-     "titre": "Paris. L’eurodéputée LFI Rima Hassan jugée pour apologie du terrorisme ce lundi",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/10/19/l-eurodeputee-lfi-rima-hassan-jugee-pour-apologie-du-terrorisme-ce-lundi",
-     "media": "L'Est républicain",
      "date": "2026-10-19T05:16:00.000Z"
     },
     {
@@ -546,7 +575,60 @@
    },
    "fait": "L’eurodéputée La France insoumise Rima Hassan jugée pour apologie du terrorisme",
    "accroche": "L’eurodéputée La France insoumise Rima Hassan jugée pour apologie du terrorisme",
-   "essentiel": "Rima Hassan : l’eurodéputée insoumise est jugée ce lundi et mardi à Paris pour apologie du terrorisme. Sept médias en parlent."
+   "essentiel": "Rima Hassan : l’eurodéputée insoumise est jugée ce lundi et mardi à Paris pour apologie du terrorisme. Cinq médias en parlent : Dernières Nouvelles d'Alsace, Sud Ouest, Le Dauphiné libéré, L'Humanité et RFI."
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 4,
+   "sources": [
+    "RFI",
+    "Libération",
+    "20 Minutes",
+    "Le Figaro"
+   ],
+   "derniere": "2026-10-16T22:06:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN",
+     "UDR"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Le RN et l’UDR saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand",
+     "url": "https://www.20minutes.fr/politique/4255026-20261016-rn-udr-saisissent-conseil-constitutionnel-demander-tete-richard-ferrand?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-16T13:56:34.000Z"
+    },
+    {
+     "titre": "France: le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du RN",
+     "url": "https://www.rfi.fr/fr/france/20261016-france-le-pr%C3%A9sident-du-conseil-constitutionnel-richard-ferrand-s-attire-les-foudres-du-rn",
+     "media": "RFI",
+     "date": "2026-10-16T22:06:40.000Z"
+    },
+    {
+     "titre": "Débat sur l’article 11 : les députés d’extrême droite saisissent le Conseil constitutionnel pour obtenir la tête de Richard Ferrand",
+     "url": "https://www.liberation.fr/politique/debat-sur-larticle-11-les-deputes-rn-udr-saisissent-le-conseil-constitutionnel-pour-obtenir-la-tete-de-richard-ferrand-20261016_HKTRNX5ST5BABEAT7IFXWLB7UA/",
+     "media": "Libération",
+     "date": "2026-10-16T17:08:46.000Z"
+    },
+    {
+     "titre": "Le Rassemblement national part en guerre contre le Conseil constitutionnel et Richard Ferrand",
+     "url": "https://www.lefigaro.fr/politique/le-rassemblement-national-part-en-guerre-contre-le-conseil-constitutionnel-et-richard-ferrand-20261015",
+     "media": "Le Figaro",
+     "date": "2026-10-15T17:10:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Conseil constitutionnel",
+    "origine": "recoupement"
+   },
+   "fait": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
+   "accroche": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
+   "essentiel": "Le Rassemblement national et l’Union des droites pour la République saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand. Quatre médias en parlent : 20 Minutes, RFI, Libération et Le Figaro."
   },
   {
    "medias": 4,
@@ -572,10 +654,11 @@
    },
    "articles": [
     {
-     "titre": "Violences du 17 octobre : Macron exprime sa « colère » et sa « honte » et promet « toute la transparence »",
-     "url": "https://www.publicsenat.fr/actualites/politique/violences-du-17-octobre-macron-exprime-sa-colere-et-sa-honte-et-promet-toute-la-transparence",
-     "media": "Public Sénat",
-     "date": "2026-10-18T19:17:23.000Z"
+     "titre": "17-octobre: Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
+     "url": "https://www.bfmtv.com/politique/video-17-octobre-emmanuel-macron-veut-toute-la-transparence-sur-le-maintien-de-l-ordre_VN-202610180356.html",
+     "media": "BFMTV",
+     "date": "2026-10-18T19:22:17.000Z",
+     "video": true
     },
     {
      "titre": "«Honte et colère»: après les violences du 17 octobre en France, Macron promet fermeté et dialogue",
@@ -584,17 +667,10 @@
      "date": "2026-10-18T19:57:12.000Z"
     },
     {
-     "titre": "\"Colère et honte\", \"transparence\" attendue... Ce qu'il faut retenir de l'allocution de Macron",
-     "url": "https://www.france24.com/fr/france/20261018-col%C3%A8re-et-honte-transparence-attendue-ce-qu-il-faut-retenir-de-l-allocution-d-emmanuel-macron",
-     "media": "France 24",
-     "date": "2026-10-18T19:22:47.000Z"
-    },
-    {
-     "titre": "17-octobre: Emmanuel Macron veut \"toute la transparence\" sur le maintien de l'ordre",
-     "url": "https://www.bfmtv.com/politique/video-17-octobre-emmanuel-macron-veut-toute-la-transparence-sur-le-maintien-de-l-ordre_VN-202610180356.html",
-     "media": "BFMTV",
-     "date": "2026-10-18T19:22:17.000Z",
-     "video": true
+     "titre": "Violences du 17 octobre : Macron exprime sa « colère » et sa « honte » et promet « toute la transparence »",
+     "url": "https://www.publicsenat.fr/actualites/politique/violences-du-17-octobre-macron-exprime-sa-colere-et-sa-honte-et-promet-toute-la-transparence",
+     "media": "Public Sénat",
+     "date": "2026-10-18T19:17:23.000Z"
     },
     {
      "titre": "Emmanuel Macron promet \"toute la transparence\" sur la stratégie du maintien de l'ordre",
@@ -735,52 +811,6 @@
   },
   {
    "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
-    "RFI",
-    "Libération",
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-16T22:06:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN",
-     "UDR"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Le RN et l’UDR saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand",
-     "url": "https://www.20minutes.fr/politique/4255026-20261016-rn-udr-saisissent-conseil-constitutionnel-demander-tete-richard-ferrand?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-16T13:56:34.000Z"
-    },
-    {
-     "titre": "France: le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du RN",
-     "url": "https://www.rfi.fr/fr/france/20261016-france-le-pr%C3%A9sident-du-conseil-constitutionnel-richard-ferrand-s-attire-les-foudres-du-rn",
-     "media": "RFI",
-     "date": "2026-10-16T22:06:40.000Z"
-    },
-    {
-     "titre": "Débat sur l’article 11 : les députés d’extrême droite saisissent le Conseil constitutionnel pour obtenir la tête de Richard Ferrand",
-     "url": "https://www.liberation.fr/politique/debat-sur-larticle-11-les-deputes-rn-udr-saisissent-le-conseil-constitutionnel-pour-obtenir-la-tete-de-richard-ferrand-20261016_HKTRNX5ST5BABEAT7IFXWLB7UA/",
-     "media": "Libération",
-     "date": "2026-10-16T17:08:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil constitutionnel",
-    "origine": "recoupement"
-   },
-   "fait": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
-   "accroche": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
-   "essentiel": "Le Rassemblement national et l’Union des droites pour la République saisissent le Conseil constitutionnel pour demander la tête de Richard Ferrand. Trois médias en parlent : 20 Minutes, RFI et Libération."
-  },
-  {
-   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "Ouest-France",
@@ -803,8 +833,8 @@
    "articles": [
     {
      "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.leprogres.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-18T18:24:00.000Z"
     },
     {
@@ -815,26 +845,15 @@
     },
     {
      "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.dna.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
      "url": "https://www.ledauphine.com/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
      "media": "Le Dauphiné libéré",
-     "date": "2026-10-18T18:24:00.000Z"
-    },
-    {
-     "titre": "Politique. « Colère, honte, suites judiciaires »... : ce qu'il faut retenir de l'allocution d'Emmanuel Macron",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/18/emmanuel-macron-s-adresse-aux-francais-ce-qu-il-faut-retenir-de-son-allocution",
-     "media": "L'Est républicain",
      "date": "2026-10-18T18:24:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Allocution",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -879,7 +898,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
+    "titre": "Octobre",
     "origine": "dossier"
    },
    "fait": "Laurent Nuñez a remis sa démission au Président, qui l'a refusée",
@@ -929,8 +948,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Allocution",
-    "origine": "dossier"
+    "titre": "Promet d être",
+    "origine": "recoupement"
    }
   },
   {
@@ -968,19 +987,19 @@
      "date": "2026-10-19T05:48:32.000Z"
     },
     {
-     "titre": "EN DIRECT, mobilisation du 17 octobre : « Nous avons failli incontestablement », reconnaît Gérald Darmanin",
+     "titre": "EN DIRECT, mobilisation du 17 octobre : « Nous avons failli incontestablement », reconnaît Gérald Darmanin ; Laurent Nuñez « prend [sa] part de responsabilité »",
      "url": "https://www.lemonde.fr/societe/live/2026/10/19/en-direct-mobilisation-du-17-octobre-emmanuel-macron-a-refuse-la-demission-du-ministre-de-l-interieur-laurent-nunez_6795855_3224.html",
      "media": "Le Monde",
      "date": "2026-10-19T05:17:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Avons failli",
-    "origine": "recoupement"
+    "titre": "Octobre",
+    "origine": "dossier"
    },
-   "fait": "Gérald Darmanin reconnaît : « Nous avons failli incontestablement »",
-   "accroche": "Gérald Darmanin reconnaît : « Nous avons failli incontestablement »",
-   "essentiel": "Gérald Darmanin reconnaît : « Nous avons failli incontestablement ». Pendant la mobilisation du 17 octobre, Laurent Nuñez admet. Deux médias en parlent : Sud Ouest et Le Monde.",
+   "fait": "Pendant la mobilisation du 17 octobre, Laurent Nuñez admet",
+   "accroche": "Pendant la mobilisation du 17 octobre, Laurent Nuñez admet",
+   "essentiel": "Pendant la mobilisation du 17 octobre, Laurent Nuñez admet. Deux médias en parlent : Sud Ouest et Le Monde.",
    "contexte": [
     {
      "type": "personnes",
@@ -1032,8 +1051,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1101,9 +1121,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    },
    "fait": "Les pillages se poursuivent ce soir à Paris, Lyon et Marseille, le maire de Lille demande des \"comptes\" au président",
    "accroche": "Les pillages se poursuivent ce soir à Paris, Lyon et Marseille, le maire de Lille demande des \"comptes\" au président",
@@ -1145,7 +1164,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Allocution",
+    "titre": "Octobre",
     "origine": "dossier"
    }
   },
@@ -1190,8 +1209,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Contrôle",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -1522,7 +1541,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 2,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1536,12 +1555,6 @@
    },
    "articles": [
     {
-     "titre": "Social. 17 octobre : après les destructions et les pillages, des conséquences politiques incertaines",
-     "url": "https://www.leprogres.fr/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
-     "media": "Le Progrès",
-     "date": "2026-10-19T04:02:00.000Z"
-    },
-    {
      "titre": "Social. Manifestation du 17 octobre : après les destructions et les pillages, des conséquences politiques incertaines",
      "url": "https://www.dna.fr/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
      "media": "Dernières Nouvelles d'Alsace",
@@ -1552,21 +1565,15 @@
      "url": "https://www.ledauphine.com/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
      "media": "Le Dauphiné libéré",
      "date": "2026-10-19T04:02:00.000Z"
-    },
-    {
-     "titre": "Social. 17 octobre : après les destructions et les pillages, des conséquences politiques incertaines",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/19/17-octobre-apres-les-destructions-et-les-pillages-des-consequences-politiques-incertaines",
-     "media": "L'Est républicain",
-     "date": "2026-10-19T04:02:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Destructions et les pillages",
-    "origine": "recoupement"
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
-   "medias": 4,
+   "medias": 2,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1581,12 +1588,6 @@
    "articles": [
     {
      "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
-     "media": "Le Progrès",
-     "date": "2026-10-18T19:00:00.000Z"
-    },
-    {
-     "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
      "url": "https://www.dna.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-18T19:00:00.000Z"
@@ -1596,12 +1597,6 @@
      "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
      "media": "Le Dauphiné libéré",
      "date": "2026-10-18T19:00:00.000Z"
-    },
-    {
-     "titre": "Sécurité. Après les violences du 17 octobre, le gouvernement sommé de rendre des comptes",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/10/18/apres-les-violences-du-17-octobre-le-gouvernement-somme-de-rendre-des-comptes",
-     "media": "L'Est républicain",
-     "date": "2026-10-18T19:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1610,7 +1605,76 @@
    },
    "fait": "Le gouvernement sommé de rendre des comptes",
    "accroche": "Le gouvernement sommé de rendre des comptes",
-   "essentiel": "Le gouvernement sommé de rendre des comptes. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
+   "essentiel": "Le gouvernement sommé de rendre des comptes. Deux médias en parlent : Dernières Nouvelles d'Alsace et Le Dauphiné libéré."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-19T07:57:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Violences du 17 octobre: \"Nous sommes la honte de l'Europe\", juge Benoît Payan, maire DVG de Marseille",
+     "url": "https://www.bfmtv.com/politique/video-violences-du-17-octobre-nous-sommes-la-honte-de-l-europe-juge-benoit-payan-maire-dvg-de-marseille_VN-202610190295.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T07:57:32.000Z",
+     "video": true
+    },
+    {
+     "titre": "Violences du 17 octobre: \"Nous sommes la honte de l'Europe ce matin\", dénonce Benoît Payan, maire divers gauche de Marseille",
+     "url": "https://www.bfmtv.com/politique/video-violences-du-17-octobre-nous-sommes-la-honte-de-l-europe-ce-matin-denonce-benoit-payan-maire-divers-gauche-de-marseille_VN-202610190245.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T07:01:55.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Figaro"
+   ],
+   "derniere": "2026-10-19T07:57:02.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : comment Jean-Luc Mélenchon espère tirer profit d’une «convergence des luttes»",
+     "url": "https://www.lefigaro.fr/politique/mobilisation-du-17-octobre-comment-jean-luc-melenchon-espere-tirer-profit-d-une-convergence-des-luttes-20261016",
+     "media": "Le Figaro",
+     "date": "2026-10-19T07:57:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   }
   },
   {
    "medias": 1,
@@ -1638,6 +1702,35 @@
     "titre": "Vie locale : déclaration sur la vie locale",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-19T07:49:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre: le maire de Lyon pointe des réponses du gouvernement \"pas à la hauteur\"",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-du-17-octobre-le-maire-de-lyon-pointe-des-reponses-du-gouvernement-pas-a-la-hauteur_VN-202610190293.html",
+     "media": "BFMTV",
+     "date": "2026-10-19T07:49:49.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Octobre",
+    "origine": "dossier"
+   },
+   "fait": "Le maire de Lyon pointe des réponses du gouvernement \"pas à la hauteur\"",
+   "accroche": "Le maire de Lyon pointe des réponses du gouvernement \"pas à la hauteur\""
   },
   {
    "medias": 1,
@@ -1777,33 +1870,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-19T07:01:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre: \"Nous sommes la honte de l'Europe ce matin\", dénonce Benoît Payan, maire divers gauche de Marseille",
-     "url": "https://www.bfmtv.com/politique/video-violences-du-17-octobre-nous-sommes-la-honte-de-l-europe-ce-matin-denonce-benoit-payan-maire-divers-gauche-de-marseille_VN-202610190245.html",
-     "media": "BFMTV",
-     "date": "2026-10-19T07:01:55.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : déclaration sur la vie locale",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Valeurs actuelles"
    ],
    "derniere": "2026-10-19T07:01:14.000Z",
@@ -1848,9 +1914,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    }
   },
   {
@@ -2017,9 +2082,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Jordan Bardella : ce qu'il faut savoir sur le logement et l'accueil",
-    "origine": "regles",
-    "generique": true
+    "titre": "Octobre",
+    "origine": "dossier"
    },
    "fait": "Jordan Bardella martèle : « Il faut arrêter l'immigration »",
    "accroche": "Jordan Bardella martèle : « Il faut arrêter l'immigration »",
@@ -2351,8 +2415,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
-    "origine": "dossier"
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -2397,8 +2462,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
-    "origine": "dossier"
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Emmanuel Macron admet des «défaillances» mais refuse le départ de Laurent Nuñez",
    "accroche": "Emmanuel Macron admet des «défaillances» mais refuse le départ de Laurent Nuñez",
@@ -3060,7 +3126,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
+    "titre": "Octobre",
     "origine": "dossier"
    },
    "fait": "Emmanuel Macron a refusé la démission de Laurent Nuñez et demande de déployer",
@@ -3226,7 +3292,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Refuse",
+    "titre": "Contrôle",
     "origine": "dossier"
    },
    "fait": "Macron refuse la démission de Nuñez, le ministre admet une \"perte de contrôle\" de la police",
@@ -3399,33 +3465,6 @@
    "titrePropre": {
     "titre": "Éducation et jeunesse : ce que disent les médias",
     "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-19T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Meurthe-et-Moselle. 17 octobre, Samy Naceri, Grand Nancy : les indiscrétions politiques de la semaine",
-     "url": "https://www.estrepublicain.fr/elections/2026/10/19/17-octobre-samy-naceri-grand-nancy-les-indiscretions-politiques-de-la-semaine",
-     "media": "L'Est républicain",
-     "date": "2026-10-19T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Meurthe-et-Moselle : actualité locale",
-    "origine": "regles",
-    "generique": true
    }
   },
   {
@@ -3706,9 +3745,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "International : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Contrôle",
+    "origine": "dossier"
    }
   },
   {
@@ -3844,32 +3882,6 @@
     "titre": "Lyon : actualité locale",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-10-19T03:45:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Humour. Le dessin du jour : le bus pour un monde meilleur",
-     "url": "https://www.estrepublicain.fr/actualite/2026/10/19/le-dessin-du-jour-le-bus-pour-un-monde-meilleur",
-     "media": "L'Est républicain",
-     "date": "2026-10-19T03:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dessin de presse : regard sur l'actualité du jour",
-    "origine": "regles"
    }
   },
   {
@@ -4125,9 +4137,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Parti socialiste : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Contrôle",
+    "origine": "dossier"
    },
    "fait": "Observe François Kalfon, député européen Parti socialiste-Place publique",
    "accroche": "Observe François Kalfon, député européen Parti socialiste-Place publique"
@@ -4235,8 +4246,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Allocution",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "De la solennité mais peu d’annonces",
    "accroche": "De la solennité mais peu d’annonces"
@@ -4460,8 +4472,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Allocution",
-    "origine": "dossier"
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
