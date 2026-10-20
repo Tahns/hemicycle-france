@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-20T14:01:15.742Z",
+ "lastUpdated": "2026-10-20T14:10:42.977Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -156,12 +156,14 @@
     "octobre",
     "manifestations",
     "mobilisation",
-    "étudiante"
+    "commerçants"
    ],
    "medias": [
     "BFMTV",
+    "France 24",
     "La Croix",
     "Dernières Nouvelles d'Alsace",
+    "L'Obs",
     "Nice-Matin",
     "Le Monde",
     "Mediapart",
@@ -176,7 +178,6 @@
     "Le Dauphiné libéré",
     "RFI",
     "Europe 1",
-    "L'Obs",
     "Hugo Décrypte",
     "L'Est républicain",
     "Public Sénat"
@@ -184,8 +185,10 @@
    "mediasDistincts": 17,
    "sources": [
     "BFMTV",
+    "France Médias Monde",
     "La Croix",
     "EBRA",
+    "L'Obs",
     "Nice-Matin",
     "Le Monde",
     "Mediapart",
@@ -196,19 +199,24 @@
     "Le Figaro",
     "Libération",
     "20 Minutes",
-    "RFI",
-    "L'Obs",
     "Hugo Décrypte",
     "Public Sénat"
    ],
-   "nb": 79,
-   "derniere": "2026-10-20T13:58:43.000Z",
+   "nb": 102,
+   "derniere": "2026-10-20T14:03:43.000Z",
    "articles": [
     {
      "media": "BFMTV",
-     "titre": "Soldats de l'opération Sentinelle, GIGN, RAID... Le gouvernement annonce des moyens renforcés pour la journée de mobilisation du 24 octobre",
-     "url": "https://www.bfmtv.com/politique/gouvernement/soldats-de-l-operation-sentinelle-gign-raid-le-gouvernement-annonce-des-moyens-renforces-pour-la-journee-de-mobilisation-du-24-octobre_AN-202610200594.html",
-     "date": "2026-10-20T13:58:43.000Z"
+     "titre": "\"Notre renseignement a vu beaucoup de choses mais pas tout\": Sébastien Lecornu reconnaît des faiblesses dans le dispositif de maintien de l'ordre ce week-end",
+     "url": "https://www.bfmtv.com/politique/modem/video-notre-renseignement-a-vu-beaucoup-de-choses-mais-pas-tout-sebastien-lecornu-reconnait-des-faiblesses-dans-le-dispositif-de-maintien-de-l-ordre-ce-week-end_VN-202610200605.html",
+     "date": "2026-10-20T14:03:43.000Z",
+     "video": true
+    },
+    {
+     "media": "France 24",
+     "titre": "L'origine des manifestations en France : la Gen Z, une génération mobilisée",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-l-origine-des-manifestations-en-france-la-gen-z-une-g%C3%A9n%C3%A9ration-mobilis%C3%A9e",
+     "date": "2026-10-20T13:59:15.000Z"
     },
     {
      "media": "La Croix",
@@ -220,7 +228,13 @@
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Alsace. Avant la présidentielle, le fédéralisme en débat à Colmar ce jeudi 22 octobre",
      "url": "https://www.dna.fr/elections/2026/10/20/avant-la-presidentielle-le-federalisme-en-debat-a-colmar-ce-jeudi-22-octobre",
-     "date": "2026-10-20T13:53:11.000Z"
+     "date": "2026-10-20T13:53:00.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée, acte II des « gilets jaunes »…",
+     "url": "https://www.nouvelobs.com/social/20261019.OBS119339/que-se-passe-t-il-apres-les-manifestations-du-17-octobre-couvres-feux-marseille-bouclee-acte-ii-des-gilets-jaunes.html",
+     "date": "2026-10-20T13:50:51.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -308,12 +322,6 @@
      "date": "2026-10-20T04:32:00.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée, acte II des « gilets jaunes »…",
-     "url": "https://www.nouvelobs.com/social/20261019.OBS119339/que-se-passe-t-il-apres-les-manifestations-du-17-octobre-couvres-feux-marseille-bouclee-acte-ii-des-gilets-jaunes.html",
-     "date": "2026-10-19T19:03:31.000Z"
-    },
-    {
      "media": "Hugo Décrypte",
      "titre": "Quand les revendications lycéennes deviennent AUSSI celles des étudiants.",
      "url": "https://www.youtube.com/shorts/qTNq5_W4rCE",
@@ -322,9 +330,9 @@
     },
     {
      "media": "L'Est républicain",
-     "titre": "Paris. « Nous avons été abandonnés par l’État » : les commerçants pillés le 17 octobre tentent de se relever",
-     "url": "https://www.estrepublicain.fr/social/2026/10/19/nous-avons-ete-abandonnes-par-l-etat-les-commercants-pilles-le-17-octobre-tentent-de-se-relever",
-     "date": "2026-10-19T18:00:00.000Z"
+     "titre": "Territoire de Belfort. Rassemblements devant les mairies : « Un commerce pillé, c’est une vie de travail saccagée », pour la maire de Delle",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/19/rassemblements-devant-les-mairies-un-commerce-pille-c-est-une-vie-de-travail-saccagee-pour-la-maire-de-delle",
+     "date": "2026-10-19T18:14:00.000Z"
     },
     {
      "media": "Public Sénat",
@@ -435,153 +443,123 @@
    ]
   },
   {
-   "id": "policier",
-   "titre": "Policier",
+   "id": "maire",
+   "titre": "Maire",
    "motifs": [
-    "policier"
+    "maire"
    ],
    "medias": [
-    "La Croix",
-    "L'Humanité",
+    "Le JDD",
+    "Valeurs actuelles",
+    "L'Est républicain",
     "Libération",
-    "Le Monde",
-    "RFI",
-    "Le Dauphiné libéré",
-    "Hugo Décrypte",
-    "Nice-Matin"
+    "La Dépêche",
+    "Nice-Matin",
+    "France 24",
+    "Public Sénat"
    ],
    "mediasDistincts": 8,
    "sources": [
-    "La Croix",
-    "L'Humanité",
+    "Le JDD",
+    "Valeurs actuelles",
+    "L'Est républicain",
     "Libération",
-    "Le Monde",
-    "RFI",
-    "Le Dauphiné libéré",
-    "Hugo Décrypte",
-    "Nice-Matin"
+    "La Dépêche",
+    "Nice-Matin",
+    "France 24",
+    "Public Sénat"
    ],
-   "nb": 9,
-   "derniere": "2026-10-20T13:57:39.000Z",
+   "nb": 14,
+   "derniere": "2026-10-20T09:23:12.000Z",
    "articles": [
     {
-     "media": "La Croix",
-     "titre": "DIRECT. Manifestation du 17 octobre : Nuñez accuse LFI, dispositif policier « massif » pour samedi",
-     "url": "https://www.la-croix.com/societe/direct-manifestation-17-octobre-jour-4-violences-couvre-feu-etat-durgence-annonces-nunez-20261020",
-     "date": "2026-10-20T13:57:39.000Z"
+     "media": "Le JDD",
+     "titre": "Saccages : le maire socialiste de Paris Centre souhaite «un couvre-feu ou l'armée» si la situation dégénère de nouveau",
+     "url": "https://www.lejdd.fr/politique/saccages-le-maire-socialiste-de-paris-centre-souhaite-un-couvre-feu-ou-larmee-186492",
+     "date": "2026-10-20T09:23:12.000Z"
     },
     {
-     "media": "L'Humanité",
-     "titre": "Sébastien Lecornu dément tout « renseignement politique » dans la police",
-     "url": "https://www.humanite.fr/-/-/sebastien-lecornu-dement-tout-renseignement-politique-dans-la-police",
-     "date": "2026-10-20T13:52:13.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "« Je veux la mairie reconstruite à l’identique », aux frais de l’État, réclame le maire de Limoges, Guillaume Guérin",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/regions/nouvelle-aquitaine/haute-vienne/limoges/politique/je-veux-la-mairie-reconstruite-a-lidentique-aux-frais-de-letat-reclame-le-maire-de-limoges-guillaume-guerin",
+     "date": "2026-10-20T07:00:41.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Baume-les-Dames. Élu sénateur, Arnaud Marthey a quitté son fauteuil de maire et fait ses adieux au conseil municipal",
+     "url": "https://www.estrepublicain.fr/elections/2026/10/20/les-adieux-d-arnaud-marthey-au-conseil-municipal",
+     "date": "2026-10-20T05:00:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Territoire de Belfort. Rassemblements devant les mairies : « Un commerce pillé, c’est une vie de travail saccagée », pour la maire de Delle",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/19/rassemblements-devant-les-mairies-un-commerce-pille-c-est-une-vie-de-travail-saccagee-pour-la-maire-de-delle",
+     "date": "2026-10-19T18:14:00.000Z"
     },
     {
      "media": "Libération",
-     "titre": "Slogans racistes et croix celtique : à Lyon, une centaine de militants d’extrême droite défilent sans intervention de la police",
-     "url": "https://www.liberation.fr/politique/slogans-racistes-et-croix-celtique-a-lyon-une-centaine-de-militants-dextreme-droite-defilent-sans-intervention-de-la-police-20261020_LQHPBVBRKZDVXINPMEABIEEY44/",
-     "date": "2026-10-20T13:50:30.000Z"
+     "titre": "Après le 17 octobre, des maires solidaires dans l’Aveyron : «L’argent de la reconstruction, il n’ira pas à nos projets de territoires»",
+     "url": "https://www.liberation.fr/politique/apres-le-17-octobre-des-maires-solidaires-dans-laveyron-largent-de-la-reconstruction-il-nira-pas-a-nos-projets-de-territoires-20261019_6AXK6CSASFGYLKEUBQDV7GJE4Y/",
+     "date": "2026-10-19T17:16:26.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "EN DIRECT, manifestations du 17 octobre : Sébastien Lecornu affirme que le dispositif policier « sera massif » pour encadrer les nouvelles manifestations prévues samedi",
-     "url": "https://www.lemonde.fr/societe/live/2026/10/20/en-direct-manifestations-du-17-octobre-sebastien-lecornu-affirme-que-le-dispositif-policier-sera-massif-pour-encadrer-les-nouvelles-manifestations-prevues-samedi_6795855_3224.html",
-     "date": "2026-10-20T13:28:40.000Z"
+     "media": "Libération",
+     "titre": "«Un avant-goût de ce qu’on va subir si Le Pen l’emporte en 2027» : à Amilly, le maire RN sabre les subventions du centre d’art des Tanneries",
+     "url": "https://www.liberation.fr/culture/un-avant-gout-de-ce-quon-va-subir-si-le-pen-lemporte-en-2027-a-amilly-le-maire-rn-sabre-les-subventions-du-centre-dart-des-tanneries-20261019_BL5E7VXNSJFU7CD7WDBVZZTT3U/",
+     "date": "2026-10-19T17:15:39.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "DIRECT - France: le dispositif policier pour les manifestations du samedi 24 octobre «sera massif», annonce le Premier ministre",
-     "url": "https://www.rfi.fr/fr/france/20261020-direct-france-une-premi%C3%A8re-nuit-sous-couvre-feu-apr%C3%A8s-les-violences-du-week-end",
-     "date": "2026-10-20T05:32:13.000Z"
+     "media": "La Dépêche",
+     "titre": "\"On peut manger par terre et c’est ce que j’aimerais pour la ville\" : le maire Les Républicains de Roanne veut tracer les crottes de chien par ADN et démasquer les maîtres indélicats",
+     "url": "https://www.ladepeche.fr/2026/10/19/on-peut-manger-par-terre-et-cest-ce-que-jaimerais-pour-la-ville-le-maire-les-republicains-de-roanne-veut-tracer-les-crottes-de-chien-par-adn-et-13609855.php",
+     "date": "2026-10-19T15:24:02.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Grenoble. « Pourquoi les policiers les ont laissés faire ! » : la gérante du magasin Damart réagit après les émeutes",
-     "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/20/grenoble-pourquoi-les-policiers-les-ont-laisses-faire-la-gerante-du-magasin-damart-reagit-apres-les-emeutes",
-     "date": "2026-10-20T04:01:00.000Z"
+     "media": "Nice-Matin",
+     "titre": "François de Canson frappé par la loi sur le cumul des mandats : ce mardi, La Londe-les-Maures élit un nouveau maire",
+     "url": "https://www.nicematin.com/societe/politique/francois-de-canson-frappe-par-la-loi-sur-le-cumul-des-mandats-ce-mardi-la-londe-les-maures-elit-un-nouveau-maire-10742670",
+     "date": "2026-10-19T14:15:03.000Z"
     },
     {
-     "media": "Hugo Décrypte",
-     "titre": "Un véhicule de police a été pris pour cible à Paris.",
-     "url": "https://www.youtube.com/shorts/g1K3q404I-0",
-     "date": "2026-10-19T15:01:16.000Z",
-     "video": true
+     "media": "France 24",
+     "titre": "Le maire de Paris prend la parole suite au 17 octobre : une image de la France écornée",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261019-le-maire-de-paris-prend-la-parole-suite-au-17-octobre-une-image-de-la-france-%C3%A9corn%C3%A9e",
+     "date": "2026-10-19T12:29:51.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« L’État est responsable en partie de ce qu’il s’est passé samedi à Limoges », déclare le maire de la ville",
+     "url": "https://www.publicsenat.fr/actualites/societe/letat-est-responsable-en-partie-de-ce-quil-sest-passe-samedi-a-limoges-declare-le-maire-de-la-ville",
+     "date": "2026-10-19T09:44:16.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« J’ai besoin de rendre les gens heureux » : réélu à la tête de Saint-Cézaire-sur-Siagne, le maire Christian Zedet place les relations humaines au cœur de son mandat",
+     "url": "https://www.nicematin.com/societe/politique/j-ai-besoin-de-rendre-les-gens-heureux-reelu-a-la-tete-de-saint-cezaire-sur-siagne-le-maire-christian-zedet-place-les-relations-humaines-au-cur-de-son-mandat-10740426",
+     "date": "2026-10-19T09:00:04.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Menace de suppression d’arrêts TGV aux Arcs-Draguignan : le maire lance une pétition, des milliers de signataires",
+     "url": "https://www.nicematin.com/societe/transports/menace-de-suppression-d-arrets-tgv-aux-arcs-draguignan-le-maire-lance-une-petition-des-milliers-de-signataires-10742907",
+     "date": "2026-10-19T08:45:03.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Limoges, Paris, Marseille, Lyon… Après les dégradations du 17 octobre, les maires demandent des comptes",
+     "url": "https://www.liberation.fr/politique/limoges-paris-marseille-lyon-apres-les-degradations-du-17-octobre-les-maires-demandent-des-comptes-20261018_A5EPOPVGWVCNNCGVRXH55ABQTU/",
+     "date": "2026-10-18T18:13:12.000Z"
     },
     {
      "media": "Libération",
      "titre": "Emmanuel Grégoire, maire de Paris : «Des casseurs ont pu passer de magasin en magasin sans croiser un seul policier»",
      "url": "https://www.liberation.fr/politique/emmanuel-gregoire-maire-de-paris-des-casseurs-ont-pu-passer-de-magasin-en-magasin-sans-croiser-un-seul-policier-20261018_XESNI2SAL5E4ZO7SDR6SLTXTME/",
      "date": "2026-10-18T15:37:27.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Etat dépassé », « mauvaise anticipation », « dispositif policier sous-dimensionné », défaut « de réponse politique » : élus, policiers et experts décrivent une situation « dramatique »",
-     "url": "https://www.nicematin.com/societe/securite/etat-depasse-mauvaise-anticipation-dispositif-policier-sous-dimensionne-defaut-de-reponse-politique-elus-policiers-et-experts-decrivent-une-situation-dramatique-10743134",
-     "date": "2026-10-18T15:15:27.000Z"
     }
    ]
   }
  ],
  "sujets": [
-  {
-   "medias": 5,
-   "mediasDistincts": 5,
-   "sources": [
-    "Le Monde",
-    "La Dépêche",
-    "L'Express",
-    "L'Obs",
-    "RFI"
-   ],
-   "derniere": "2026-10-20T07:31:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre : Paris, Lyon, Lille, Nice… Les villes concernées par un couvre-feu",
-     "url": "https://www.nouvelobs.com/social/20261019.OBS119349/lille-douai-les-villes-concernees-par-un-couvre-feu-apres-les-violences-du-17-octobre.html",
-     "media": "L'Obs",
-     "date": "2026-10-19T18:19:18.000Z"
-    },
-    {
-     "titre": "Les images du couvre-feu à Paris, Lille, Nice ou Lyon",
-     "url": "https://www.lemonde.fr/politique/video/2026/10/20/paris-lille-nice-lyon-les-images-du-couvre-feu-dans-les-villes-de-france_6797883_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-20T07:31:32.000Z",
-     "video": true
-    },
-    {
-     "titre": "REPLAY. Violences du 17 octobre : Matignon annonce de premiers couvre-feux pour les nuits de lundi et mardi... Paris, Lyon, Nice et Lille concernées",
-     "url": "https://www.ladepeche.fr/2026/10/19/violences-du-17-octobre-laurent-nunez-a-presente-sa-demission-a-emmanuel-macron-le-president-la-refusee-13609454.php",
-     "media": "La Dépêche",
-     "date": "2026-10-19T20:36:20.000Z"
-    },
-    {
-     "titre": "Violences du 17 octobre : des couvre-feux instaurés à Paris, à Lyon, à Lille, et à Nice",
-     "url": "https://www.lexpress.fr/france/en-direct-violences-du-17-octobre-emmanuel-macron-a-refuse-la-demission-de-laurent-nunez-XYIBTFJ2M5DUXLRZZUWZUJJM6I/",
-     "media": "L'Express",
-     "date": "2026-10-19T19:01:19.000Z"
-    },
-    {
-     "titre": "Après les violences, des couvre-feux dans plusieurs villes de France, dont Paris, Lyon et Lille",
-     "url": "https://www.rfi.fr/fr/france/20261019-direct-mobilisation-sociale-en-france-l-acc%C3%A8s-au-mus%C3%A9e-du-louvre-bloqu%C3%A9-par-des-manifestants",
-     "media": "RFI",
-     "date": "2026-10-19T09:48:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Violences du 17 octobre : des couvre-feux instaurés à Paris, à Lyon, à Lille",
-   "accroche": "Violences du 17 octobre : des couvre-feux instaurés à Paris, à Lyon, à Lille",
-   "essentiel": "Violences du 17 octobre : des couvre-feux instaurés à Paris, à Lyon, à Lille, et à Nice. Cinq médias en parlent : L'Obs, Le Monde, La Dépêche, L'Express et RFI."
-  },
   {
    "medias": 4,
    "mediasDistincts": 4,
@@ -647,7 +625,7 @@
     "BFMTV",
     "EBRA"
    ],
-   "derniere": "2026-10-20T13:52:37.000Z",
+   "derniere": "2026-10-20T14:02:02.000Z",
    "illustration": {
     "personnes": [
      {
@@ -672,7 +650,7 @@
      "titre": "DIRECT. Violences du 17 octobre : Sébastien Lecornu annonce un dispositif \"massif\" pour la manifestation de samedi prochain",
      "url": "https://www.ladepeche.fr/2026/10/20/direct-violences-du-17-octobre-vers-un-acte-ii-ce-samedi-24-octobre-apres-lappel-des-gilets-jaunes-13611170.php",
      "media": "La Dépêche",
-     "date": "2026-10-20T13:52:37.000Z"
+     "date": "2026-10-20T14:02:02.000Z"
     },
     {
      "titre": "Sébastien Lecornu annonce un dispositif \"massif\" pour samedi prochain",
@@ -705,6 +683,108 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 5,
+   "mediasDistincts": 3,
+   "sources": [
+    "Libération",
+    "EBRA",
+    "RFI"
+   ],
+   "derniere": "2026-10-20T14:05:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Paris. Procès de Rima Hassan pour apologie du terrorisme : prison avec sursis et inéligibilité requises",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/10/20/dix-mois-de-prison-avec-sursis-et-deux-ans-d-ineligibilite-requis-contre-rima-hassan",
+     "media": "Le Progrès",
+     "date": "2026-10-20T13:58:00.000Z"
+    },
+    {
+     "titre": "Procès de Rima Hassan pour apologie du terrorisme : 10 mois de prison avec sursis requis contre l’élue LFI",
+     "url": "https://www.liberation.fr/societe/police-justice/proces-de-rima-hassan-pour-apologie-du-terrorisme-10-mois-de-prison-avec-sursis-requis-contre-lelue-lfi-20261020_NJREW6N4K5A7DGS6BRDN672A4E/",
+     "media": "Libération",
+     "date": "2026-10-20T14:05:47.000Z"
+    },
+    {
+     "titre": "Paris. Procès de Rima Hassan pour apologie du terrorisme : prison avec sursis et inéligibilité requises",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/10/20/dix-mois-de-prison-avec-sursis-et-deux-ans-d-ineligibilite-requis-contre-rima-hassan",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-20T13:58:00.000Z"
+    },
+    {
+     "titre": "Paris. Procès de Rima Hassan pour apologie du terrorisme : prison avec sursis et inéligibilité requises",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/10/20/dix-mois-de-prison-avec-sursis-et-deux-ans-d-ineligibilite-requis-contre-rima-hassan",
+     "media": "L'Est républicain",
+     "date": "2026-10-20T13:58:00.000Z"
+    },
+    {
+     "titre": "France: le procès pour «apologie du terrorisme» de l'eurodéputée insoumise Rima Hassan s'ouvre à Paris",
+     "url": "https://www.rfi.fr/fr/france/20261019-france-le-proc%C3%A8s-pour-apologie-du-terrorisme-de-l-eurod%C3%A9put%C3%A9e-insoumise-rima-hassan-s-ouvre-%C3%A0-paris",
+     "media": "RFI",
+     "date": "2026-10-19T03:12:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Apologie du terrorisme",
+    "origine": "recoupement"
+   },
+   "fait": "10 mois de prison avec sursis requis contre l’élue La France insoumise",
+   "accroche": "10 mois de prison avec sursis requis contre l’élue La France insoumise",
+   "essentiel": "10 mois de prison avec sursis requis contre l’élue La France insoumise. Cinq médias en parlent : Le Progrès, Libération, Le Dauphiné libéré, L'Est républicain et RFI."
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "L'Humanité",
+    "France 24",
+    "Mediapart"
+   ],
+   "derniere": "2026-10-20T13:48:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Révélations Mediapart : \"la fabrique de LFI comme bouc émissaire\" du 17-Octobre",
+     "url": "https://www.france24.com/fr/%C3%A9missions/dans-la-presse/20261020-r%C3%A9v%C3%A9lations-mediapart-la-fabrique-de-lfi-comme-bouc-%C3%A9missaire-du-17-octobre",
+     "media": "France 24",
+     "date": "2026-10-20T09:15:10.000Z"
+    },
+    {
+     "titre": "Le gouvernement fait pression pour imputer les violences du 17 à LFI : les révélations de Mediapart",
+     "url": "https://www.humanite.fr/politique/la-france-insoumise/le-gouvernement-fait-pression-pour-imputer-les-violences-du-17-a-lfi-les-revelations-de-mediapart",
+     "media": "L'Humanité",
+     "date": "2026-10-20T13:48:24.000Z"
+    },
+    {
+     "titre": "«On nous demande d’écrire que LFI est derrière le mouvement»: autour du 17 octobre, la fabrique d’un bouc émissaire",
+     "url": "https://www.mediapart.fr/journal/france/191026/nous-demande-d-ecrire-que-lfi-est-derriere-le-mouvement-autour-du-17-octobre-la-fabrique-d-un-bouc-emissai",
+     "media": "Mediapart",
+     "date": "2026-10-19T19:35:46.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bouc émissaire",
+    "origine": "recoupement"
+   },
+   "fait": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart",
+   "accroche": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart",
+   "essentiel": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart. Trois médias en parlent : France 24, L'Humanité et Mediapart."
   },
   {
    "medias": 3,
@@ -764,47 +844,37 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "L'Humanité",
-    "La Dépêche"
+    "France 24",
+    "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-10-20T13:48:24.000Z",
+   "derniere": "2026-10-20T09:45:55.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Mallarmé007, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "justice",
-    "vignette": null
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
    },
    "articles": [
     {
-     "titre": "Le gouvernement fait pression pour imputer les violences du 17 à LFI : les révélations de Mediapart",
-     "url": "https://www.humanite.fr/politique/la-france-insoumise/le-gouvernement-fait-pression-pour-imputer-les-violences-du-17-a-lfi-les-revelations-de-mediapart",
-     "media": "L'Humanité",
-     "date": "2026-10-20T13:48:24.000Z"
+     "titre": "Couvre-feux, armée, état d'urgence : que peut faire l'État ?",
+     "url": "https://www.france24.com/fr/%C3%A9missions/les-cl%C3%A9s-de-l-info/20261020-couvre-feux-arm%C3%A9e-%C3%A9tat-d-urgence-que-peut-faire-l-%C3%A9tat",
+     "media": "France 24",
+     "date": "2026-10-20T09:45:55.000Z"
     },
     {
-     "titre": "Violences du 17 octobre : les renseignements territoriaux manipulés ? LFI veut attaquer Laurent Nuñez en justice après des révélations de \"Mediapart\"",
-     "url": "https://www.ladepeche.fr/2026/10/20/violences-du-17-octobre-les-renseignements-territoriaux-manipules-lfi-veut-attaquer-laurent-nunez-en-justice-apres-des-revelations-de-mediapart-13611292.php",
-     "media": "La Dépêche",
-     "date": "2026-10-20T10:33:48.000Z"
+     "titre": "Décryptage. Violences du 17 octobre : couvre-feux, état d’urgence... Jusqu’où le gouvernement peut-il aller ?",
+     "url": "https://www.dna.fr/politique/2026/10/19/violences-du-17-octobre-couvre-feux-etat-d-urgence-jusqu-ou-le-gouvernement-peut-il-aller",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-19T16:50:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "État d urgence",
+    "origine": "recoupement"
    },
-   "fait": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart",
-   "accroche": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart",
-   "essentiel": "Le gouvernement fait pression pour imputer les violences du 17 à La France insoumise : les révélations de Mediapart. Deux médias en parlent : L'Humanité et La Dépêche."
+   "accroche": "Couvre-feux, armée, état d'urgence : que peut faire l'État ?",
+   "essentiel": "Couvre-feux, armée, état d'urgence : que peut faire l'État ? Deux médias en parlent : France 24 et Dernières Nouvelles d'Alsace.",
+   "fait": "Couvre-feux, armée, état d'urgence : que peut faire l'État ?"
   },
   {
    "medias": 2,
@@ -881,86 +951,10 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Mediapart",
-    "Libération"
+    "La Dépêche",
+    "L'Obs"
    ],
-   "derniere": "2026-10-19T19:35:46.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "«On nous demande d’écrire que LFI est derrière le mouvement»: autour du 17 octobre, la fabrique d’un bouc émissaire",
-     "url": "https://www.mediapart.fr/journal/france/191026/nous-demande-d-ecrire-que-lfi-est-derriere-le-mouvement-autour-du-17-octobre-la-fabrique-d-un-bouc-emissai",
-     "media": "Mediapart",
-     "date": "2026-10-19T19:35:46.000Z"
-    },
-    {
-     "titre": "Mobilisations du 17 octobre : LFI est un bouc émissaire bien trop facile",
-     "url": "https://www.liberation.fr/politique/mobilisations-du-17-octobre-lfi-est-un-bouc-emissaire-bien-trop-facile-20261019_2NU56RSNIBDLHBB7IOI67I6NJA/",
-     "media": "Libération",
-     "date": "2026-10-19T09:12:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bouc émissaire",
-    "origine": "recoupement"
-   },
-   "fait": "Mobilisations du 17 octobre : La France insoumise est un bouc émissaire bien trop facile",
-   "accroche": "Mobilisations du 17 octobre : La France insoumise est un bouc émissaire bien trop facile",
-   "essentiel": "Mobilisations du 17 octobre : La France insoumise est un bouc émissaire bien trop facile. Deux médias en parlent : Mediapart et Libération."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Dernières Nouvelles d'Alsace",
-    "RFI"
-   ],
-   "derniere": "2026-10-19T17:34:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Paris. Jugée pour apologie du terrorisme, l'eurodéputée LFI Rima Hassan exerce son droit au silence",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/10/19/jugee-pour-apologie-du-terrorisme-rima-hassan-exerce-son-droit-au-silence",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-19T17:34:00.000Z"
-    },
-    {
-     "titre": "France: le procès pour «apologie du terrorisme» de l'eurodéputée insoumise Rima Hassan s'ouvre à Paris",
-     "url": "https://www.rfi.fr/fr/france/20261019-france-le-proc%C3%A8s-pour-apologie-du-terrorisme-de-l-eurod%C3%A9put%C3%A9e-insoumise-rima-hassan-s-ouvre-%C3%A0-paris",
-     "media": "RFI",
-     "date": "2026-10-19T03:12:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Apologie du terrorisme",
-    "origine": "recoupement"
-   },
-   "fait": "Jugée pour apologie du terrorisme, l'eurodéputée La France insoumise Rima Hassan exerce son droit au silence",
-   "accroche": "Jugée pour apologie du terrorisme, l'eurodéputée La France insoumise Rima Hassan exerce son droit au silence",
-   "essentiel": "Jugée pour apologie du terrorisme, l'eurodéputée La France insoumise Rima Hassan exerce son droit au silence. Deux médias en parlent : Dernières Nouvelles d'Alsace et RFI."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "RFI",
-    "Europe 1"
-   ],
-   "derniere": "2026-10-19T14:08:08.000Z",
+   "derniere": "2026-10-19T20:36:20.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -969,25 +963,66 @@
    },
    "articles": [
     {
-     "titre": "Manifestations en France: «au moins 3000 commerces» vandalisés, le gouvernement annonce des aides",
-     "url": "https://www.rfi.fr/fr/france/20261019-manifestations-en-france-au-moins-3000-commerces-vandalis%C3%A9s-le-gouvernement-annonce-des-aides",
-     "media": "RFI",
-     "date": "2026-10-19T14:08:08.000Z"
+     "titre": "REPLAY. Violences du 17 octobre : Matignon annonce de premiers couvre-feux pour les nuits de lundi et mardi... Paris, Lyon, Nice et Lille concernées",
+     "url": "https://www.ladepeche.fr/2026/10/19/violences-du-17-octobre-laurent-nunez-a-presente-sa-demission-a-emmanuel-macron-le-president-la-refusee-13609454.php",
+     "media": "La Dépêche",
+     "date": "2026-10-19T20:36:20.000Z"
     },
     {
-     "titre": "Violences urbaines : au moins 3.000 commerces touchés, le gouvernement annonce des aides",
-     "url": "https://www.europe1.fr/economie/violences-urbaines-au-moins-3000-commerces-touches-le-gouvernement-annonce-des-aides-1163322?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-19T11:40:00.000Z"
+     "titre": "Violences du 17 octobre : Paris, Lyon, Lille, Nice… Les villes concernées par un couvre-feu",
+     "url": "https://www.nouvelobs.com/social/20261019.OBS119349/lille-douai-les-villes-concernees-par-un-couvre-feu-apres-les-violences-du-17-octobre.html",
+     "media": "L'Obs",
+     "date": "2026-10-19T18:19:18.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "Ouest-France"
+   ],
+   "derniere": "2026-10-19T12:33:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
    },
-   "fait": "Au moins 3 000 commerces touchés, le gouvernement annonce des aides",
-   "accroche": "Au moins 3 000 commerces touchés, le gouvernement annonce des aides",
-   "essentiel": "Violences urbaines : au moins 3 000 commerces touchés, le gouvernement annonce des aides. Manifestations en France : «au moins 3000 commerces» vandalisés, le gouvernement annonce des aides. Deux médias en parlent : RFI et Europe 1."
+   "articles": [
+    {
+     "titre": "17 octobre : le Premier ministre annonce déclencher le chômage partiel pour les commerçants touchés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261019-17-octobre-le-premier-ministre-annonce-d%C3%A9clencher-le-ch%C3%B4mage-partiel-pour-les-commer%C3%A7ants-touch%C3%A9s",
+     "media": "France 24",
+     "date": "2026-10-19T12:33:13.000Z"
+    },
+    {
+     "titre": "Violences du 17 octobre : couvre-feu, chômage partiel… Ce qu’il faut retenir des annonces de Sébastien Lecornu",
+     "url": "https://www.ouest-france.fr/societe/manifestation/violences-du-17-octobre-couvre-feu-chomage-partiel-ce-quil-faut-retenir-des-annonces-de-sebastien-lecornu-5a700f38-cbac-11f1-b8bc-a46147b584ed?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-19T12:12:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Chômage partiel",
+    "origine": "recoupement"
+   },
+   "fait": "Le Premier ministre annonce déclencher le chômage partiel pour les commerçants touchés",
+   "accroche": "Le Premier ministre annonce déclencher le chômage partiel pour les commerçants touchés",
+   "essentiel": "17 octobre : le Premier ministre annonce déclencher le chômage partiel pour les commerçants touchés. Deux médias en parlent : France 24 et Ouest-France."
   },
   {
    "medias": 2,
@@ -1126,25 +1161,16 @@
    "mediasDistincts": 2,
    "sources": [
     "RFI",
-    "Public Sénat"
+    "Libération"
    ],
    "derniere": "2026-10-16T22:06:40.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
+    "personnes": [],
     "partis": [
      "RN"
     ],
-    "theme": "politique",
-    "vignette": null
+    "theme": "assemblee",
+    "vignette": "assemblee"
    },
    "articles": [
     {
@@ -1154,27 +1180,19 @@
      "date": "2026-10-16T22:06:40.000Z"
     },
     {
-     "titre": "Marine Le Pen demande la démission de Richard Ferrand : le président du Conseil constitutionnel est-il vraiment sorti de sa réserve ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/marine-le-pen-demande-la-demission-de-richard-ferrand-le-president-du-conseil-constitutionnel-est-il-vraiment-sorti-de-sa-reserve",
-     "media": "Public Sénat",
-     "date": "2026-10-16T16:03:54.000Z"
+     "titre": "Débat sur l’article 11 : les députés d’extrême droite saisissent le Conseil constitutionnel pour obtenir la tête de Richard Ferrand",
+     "url": "https://www.liberation.fr/politique/debat-sur-larticle-11-les-deputes-rn-udr-saisissent-le-conseil-constitutionnel-pour-obtenir-la-tete-de-richard-ferrand-20261016_HKTRNX5ST5BABEAT7IFXWLB7UA/",
+     "media": "Libération",
+     "date": "2026-10-16T17:08:46.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Conseil constitutionnel",
+    "origine": "recoupement"
    },
-   "fait": "Marine Le Pen demande la démission de Richard Ferrand : le président du Conseil constitutionnel est-il sorti de sa réserve ?",
-   "accroche": "Marine Le Pen demande la démission de Richard Ferrand : le président du Conseil constitutionnel est-il sorti de sa réserve ?",
-   "essentiel": "Marine Le Pen demande la démission de Richard Ferrand : le président du Conseil constitutionnel est-il sorti de sa réserve ? Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national. Deux médias en parlent : RFI et Public Sénat.",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
+   "fait": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
+   "accroche": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national",
+   "essentiel": "Le président du Conseil constitutionnel Richard Ferrand s'attire les foudres du Rassemblement national. Deux médias en parlent : RFI et Libération."
   },
   {
    "medias": 4,
@@ -1331,12 +1349,209 @@
     }
    ],
    "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
+    "titre": "Paris : actualité locale",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Les commerçants pillés le 17 octobre tentent de se relever",
    "accroche": "Les commerçants pillés le 17 octobre tentent de se relever",
    "essentiel": "Les commerçants pillés le 17 octobre tentent de se relever. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-19T15:27:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Narcotrafic en France : ouverture du procès de l'assasinat du frère d'Amine Kessaci",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261019-narcotrafic-en-france-ouverture-du-proc%C3%A8s-de-l-assasinat-du-fr%C3%A8re-d-amine-kessaci",
+     "media": "France 24",
+     "date": "2026-10-19T15:27:33.000Z"
+    },
+    {
+     "titre": "France: ouverture du procès de trois meurtres liés au narcotrafic, dont le frère d'Amine Kessaci",
+     "url": "https://www.rfi.fr/fr/france/20261019-france-ouverture-du-proc%C3%A8s-de-trois-meurtres-li%C3%A9s-au-narcotrafic-dont-celui-de-mehdi-kessaci",
+     "media": "RFI",
+     "date": "2026-10-19T04:44:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Narcotrafic en France : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-20T14:09:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Violences du 17 octobre: le gouvernement promet un dispositif de sécurité renforcé samedi",
+     "url": "https://www.bfmtv.com/politique/direct-violences-du-17-octobre-des-couvre-feux-mis-en-place-dans-plusieurs-villes-sebastien-lecornu-a-limoges-vendredi_LN-202610200080.html",
+     "media": "BFMTV",
+     "date": "2026-10-20T14:09:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : annonces sur le maintien de l'ordre",
+    "origine": "regles"
+   },
+   "fait": "Violences du 17 octobre : le gouvernement promet un dispositif de sécurité renforcé",
+   "accroche": "Violences du 17 octobre : le gouvernement promet un dispositif de sécurité renforcé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T14:05:56.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France : de fortes intempéries font un mort près de Marseille",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-france-de-fortes-intemp%C3%A9ries-font-en-mort-pr%C3%A8s-de-marseille",
+     "media": "France 24",
+     "date": "2026-10-20T14:05:56.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "De fortes intempéries font un mort près de Marseille",
+   "accroche": "De fortes intempéries font un mort près de Marseille"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-20T14:03:43.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Notre renseignement a vu beaucoup de choses mais pas tout\": Sébastien Lecornu reconnaît des faiblesses dans le dispositif de maintien de l'ordre ce week-end",
+     "url": "https://www.bfmtv.com/politique/modem/video-notre-renseignement-a-vu-beaucoup-de-choses-mais-pas-tout-sebastien-lecornu-reconnait-des-faiblesses-dans-le-dispositif-de-maintien-de-l-ordre-ce-week-end_VN-202610200605.html",
+     "media": "BFMTV",
+     "date": "2026-10-20T14:03:43.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Premier ministre : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Sébastien Lecornu reconnaît des faiblesses dans le dispositif de maintien de l'ordre",
+   "accroche": "Sébastien Lecornu reconnaît des faiblesses dans le dispositif de maintien de l'ordre",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T14:00:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Crise en France : la clé dans le Golfe ? Parlons-en avec H. Falakshahi, P. Azmoudeh T. Bros...",
+     "url": "https://www.france24.com/fr/%C3%A9missions/parlons-en-les-invit%C3%A9s/20261020-crise-en-france-la-cl%C3%A9-dans-le-golfe-parlons-en-avec-h-falakshahi-p-azmoudeh-t-bros",
+     "media": "France 24",
+     "date": "2026-10-20T14:00:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Crise en France : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-20T14:00:37.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Roland Lescure",
+      "photo": "photos/personnalites/roland-lescure.jpg",
+      "photoHd": "photos/personnalites/hd/roland-lescure.jpg",
+      "credit": "Lukasz Kobus / European Union, 2022 / EC - Audiovisual Service, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "17 octobre: \"Cette question sociétale de l'impact des réseaux sociaux sur les violences urbaines doit se poser\", assure Roland Lescure",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-17-octobre-cette-question-societale-de-l-impact-des-reseaux-sociaux-sur-les-violences-urbaines-doit-se-poser-assure-roland-lescure_VN-202610200598.html",
+     "media": "BFMTV",
+     "date": "2026-10-20T14:00:37.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -1344,7 +1559,7 @@
    "sources": [
     "Le Progrès"
    ],
-   "derniere": "2026-10-20T14:00:23.000Z",
+   "derniere": "2026-10-20T14:00:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1356,7 +1571,7 @@
      "titre": "Loire. Francise Lalanne et Dieudonné tiendront un meeting dans le Roannais en vue de l’élection présidentielle",
      "url": "https://www.leprogres.fr/politique/2026/10/20/francise-lalanne-et-dieudonne-tiendront-un-meeting-dans-le-roannais-en-vue-de-l-election-presidentielle",
      "media": "Le Progrès",
-     "date": "2026-10-20T14:00:23.000Z"
+     "date": "2026-10-20T14:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1365,6 +1580,35 @@
    },
    "fait": "Francise Lalanne et Dieudonné tiendront un meeting dans le Roannais",
    "accroche": "Francise Lalanne et Dieudonné tiendront un meeting dans le Roannais"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T13:59:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L'origine des manifestations en France : la Gen Z, une génération mobilisée",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-l-origine-des-manifestations-en-france-la-gen-z-une-g%C3%A9n%C3%A9ration-mobilis%C3%A9e",
+     "media": "France 24",
+     "date": "2026-10-20T13:59:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La Gen Z, une génération mobilisée",
+   "accroche": "La Gen Z, une génération mobilisée"
   },
   {
    "medias": 1,
@@ -1388,8 +1632,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -1425,6 +1669,33 @@
    "titrePropre": {
     "titre": "Octobre",
     "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T13:57:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "En France, la \"Génération Paty\" se souvient, six ans après l'assassinat du professeur",
+     "url": "https://www.france24.com/fr/%C3%A9missions/focus/20261020-en-france-la-g%C3%A9n%C3%A9ration-paty-se-souvient-six-ans-apr%C3%A8s-l-assassinat-du-professeur",
+     "media": "France 24",
+     "date": "2026-10-20T13:57:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1491,7 +1762,7 @@
    "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-10-20T13:53:11.000Z",
+   "derniere": "2026-10-20T13:53:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1503,7 +1774,7 @@
      "titre": "Alsace. Avant la présidentielle, le fédéralisme en débat à Colmar ce jeudi 22 octobre",
      "url": "https://www.dna.fr/elections/2026/10/20/avant-la-presidentielle-le-federalisme-en-debat-a-colmar-ce-jeudi-22-octobre",
      "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-20T13:53:11.000Z"
+     "date": "2026-10-20T13:53:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1540,8 +1811,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Policier",
-    "origine": "dossier"
+    "titre": "Premier ministre : ce qu'il faut savoir sur le maintien de l'ordre",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -1555,29 +1827,29 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
+    "L'Obs"
    ],
-   "derniere": "2026-10-20T13:51:29.000Z",
+   "derniere": "2026-10-20T13:50:51.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "DIRECT. Violences du 17 octobre: le gouvernement promet un dispositif de sécurité renforcé samedi",
-     "url": "https://www.bfmtv.com/politique/direct-violences-du-17-octobre-des-couvre-feux-mis-en-place-dans-plusieurs-villes-sebastien-lecornu-a-limoges-vendredi_LN-202610200080.html",
-     "media": "BFMTV",
-     "date": "2026-10-20T13:51:29.000Z"
+     "titre": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée, acte II des « gilets jaunes »…",
+     "url": "https://www.nouvelobs.com/social/20261019.OBS119339/que-se-passe-t-il-apres-les-manifestations-du-17-octobre-couvres-feux-marseille-bouclee-acte-ii-des-gilets-jaunes.html",
+     "media": "L'Obs",
+     "date": "2026-10-20T13:50:51.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : annonces sur le maintien de l'ordre",
-    "origine": "regles"
+    "titre": "Octobre",
+    "origine": "dossier"
    },
-   "fait": "Violences du 17 octobre : le gouvernement promet un dispositif de sécurité renforcé",
-   "accroche": "Violences du 17 octobre : le gouvernement promet un dispositif de sécurité renforcé"
+   "fait": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée",
+   "accroche": "Que se passe-t-il après les manifestations du 17 octobre : couvre-feux, Marseille bouclée"
   },
   {
    "medias": 1,
@@ -1644,8 +1916,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Policier",
-    "origine": "dossier"
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -1676,6 +1948,35 @@
    },
    "fait": "Le couvre-feu, une mesure historique et controversée de nouveau utilisée en France",
    "accroche": "Le couvre-feu, une mesure historique et controversée de nouveau utilisée en France"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T13:48:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "17 octobre : un couvre-feu prolongé qui ne fait pas l'unanimité",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-17-octobre-un-couvre-feu-prolong%C3%A9-qui-ne-fait-pas-l-unanimit%C3%A9",
+     "media": "France 24",
+     "date": "2026-10-20T13:48:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Un couvre-feu prolongé qui ne fait pas l'unanimité",
+   "accroche": "Un couvre-feu prolongé qui ne fait pas l'unanimité"
   },
   {
    "medias": 1,
@@ -1915,6 +2216,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T13:33:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France : première nuit sous couvre-feu dans certaines villes",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-france-premi%C3%A8re-nuit-sous-couvre-feu-dans-certaines-villes",
+     "media": "France 24",
+     "date": "2026-10-20T13:33:36.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-20T13:30:51.000Z",
@@ -2039,8 +2367,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Policier",
-    "origine": "dossier"
+    "titre": "Premier ministre : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Sébastien Lecornu affirme que le dispositif policier « sera massif » pour encadrer les nouvelles manifestations prévues",
    "accroche": "Sébastien Lecornu affirme que le dispositif policier « sera massif » pour encadrer les nouvelles manifestations prévues",
@@ -2963,6 +3292,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T10:55:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisation du 17 octobre : un dispositif policier défaillant ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-mobilisation-du-17-octobre-un-dispositif-policier-d%C3%A9faillant",
+     "media": "France 24",
+     "date": "2026-10-20T10:55:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-20T10:55:10.000Z",
@@ -3124,6 +3480,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T10:49:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L'image de la France se fissure à l'étranger",
+     "url": "https://www.france24.com/fr/%C3%A9missions/questions-directes/20261020-l-image-du-pays-se-fissure-%C3%A0-l-%C3%A9tranger",
+     "media": "France 24",
+     "date": "2026-10-20T10:49:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "International : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-20T10:46:58.000Z",
@@ -3213,6 +3596,42 @@
      "media": "BFMTV",
      "date": "2026-10-20T10:45:17.000Z",
      "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-10-20T10:33:48.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Mallarmé007, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Violences du 17 octobre : les renseignements territoriaux manipulés ? LFI veut attaquer Laurent Nuñez en justice après des révélations de \"Mediapart\"",
+     "url": "https://www.ladepeche.fr/2026/10/20/violences-du-17-octobre-les-renseignements-territoriaux-manipules-lfi-veut-attaquer-laurent-nunez-en-justice-apres-des-revelations-de-mediapart-13611292.php",
+     "media": "La Dépêche",
+     "date": "2026-10-20T10:33:48.000Z"
     }
    ],
    "titrePropre": {
@@ -3414,6 +3833,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T10:25:44.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Couvre-feux à Paris, Nice et Lille après les violences : la France a-t-elle perdu le contrôle ?",
+     "url": "https://www.france24.com/fr/%C3%A9missions/le-d%C3%A9bat/20261020-couvre-feux-%C3%A0-paris-nice-et-lille-apr%C3%A8s-les-violences-la-france-a-t-elle-perdu-le-contr%C3%B4le",
+     "media": "France 24",
+     "date": "2026-10-20T10:25:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La France a-t-elle perdu le contrôle ?",
+   "accroche": "La France a-t-elle perdu le contrôle ?"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-10-20T10:20:00.000Z",
@@ -3435,6 +3883,34 @@
     "titre": "Rochefort : actualité scolaire",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-20T10:18:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Je suis vivant\" : le \"street medic\" censé avoir été tué par la police le 17 octobre est en vie",
+     "url": "https://www.france24.com/fr/france/20261020-je-suis-vivant-le-street-medic-cens%C3%A9-avoir-%C3%A9t%C3%A9-tu%C3%A9-par-la-police-le-17-octobre-est-en-vie",
+     "media": "France 24",
+     "date": "2026-10-20T10:18:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le \"street medic\" censé avoir été tué par la police le 17 octobre est en vie",
+   "accroche": "Le \"street medic\" censé avoir été tué par la police le 17 octobre est en vie"
   },
   {
    "medias": 1,
@@ -4166,452 +4642,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-20T09:36:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisations du 17 octobre : le gouvernement est comptable du fiasco du maintien de l’ordre",
-     "url": "https://www.lemonde.fr/idees/article/2026/10/20/mobilisations-du-17-octobre-le-gouvernement-est-comptable-du-fiasco-du-maintien-de-l-ordre_6797903_3232.html",
-     "media": "Le Monde",
-     "date": "2026-10-20T09:36:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-20T09:30:18.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "A Limoges, l’hôtel de ville incendié en marge des manifestations « n’est pas encore sauvé »",
-     "url": "https://www.lemonde.fr/culture/article/2026/10/20/a-limoges-l-hotel-de-ville-incendie-en-marge-des-manifestations-n-est-pas-encore-sauve_6797901_3246.html",
-     "media": "Le Monde",
-     "date": "2026-10-20T09:30:18.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "A Limoges, l’hôtel de ville incendié en marge des manifestations",
-   "accroche": "A Limoges, l’hôtel de ville incendié en marge des manifestations"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-20T09:26:31.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Narcotrafic: à Aix-en-Provence, le procès du triple homicide démarre par une confrontation tendue entre accusés et familles de victimes",
-     "url": "https://www.mediapart.fr/journal/france/201026/narcotrafic-aix-en-provence-le-proces-du-triple-homicide-demarre-par-une-confrontation-tendue-entre-accuse",
-     "media": "Mediapart",
-     "date": "2026-10-20T09:26:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Narcotrafic : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-10-20T09:24:52.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Comment une manifestation est censée se dérouler, de la déclaration préalable à l’encadrement sur le terrain",
-     "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/20/comment-une-manifestation-est-censee-se-derouler-de-la-declaration-prealable-a-l-encadrement-sur-le-terrain_6797897_4355770.html",
-     "media": "Le Monde",
-     "date": "2026-10-20T09:24:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Aménagement : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Figaro"
-   ],
-   "derniere": "2026-10-20T09:23:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "17 octobre : comment les forces de l’ordre vont tirer les leçons d’un fiasco pour rétablir le calme",
-     "url": "https://www.lefigaro.fr/actualite-france/17-octobre-comment-les-forces-de-l-ordre-vont-tirer-les-lecons-d-un-fiasco-pour-retablir-le-calme-20261019",
-     "media": "Le Figaro",
-     "date": "2026-10-20T09:23:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-10-20T09:23:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saccages : le maire socialiste de Paris Centre souhaite «un couvre-feu ou l'armée» si la situation dégénère de nouveau",
-     "url": "https://www.lejdd.fr/politique/saccages-le-maire-socialiste-de-paris-centre-souhaite-un-couvre-feu-ou-larmee-186492",
-     "media": "Le JDD",
-     "date": "2026-10-20T09:23:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-20T09:22:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Yaël Braun-Pivet",
-      "photo": "photos/deputes/PA721908.jpg",
-      "photoHd": "photos/deputes/hd/PA721908.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA721908",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation sociale et violence : Yaël Braun-Pivet ne veut pas que les revendications des manifestants soient « éclipsées »",
-     "url": "https://www.sudouest.fr/politique/mobilisation-sociale-et-violence-yael-braun-pivet-ne-veut-pas-que-les-revendications-des-manifestants-soient-eclipsees-31154619.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-20T09:22:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-20T09:14:23.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Hervé Marseille",
-      "photo": "photos/senateurs/11085T.jpg",
-      "photoHd": "photos/senateurs/hd/11085T.jpg",
-      "parti": "UCI",
-      "lien": "#senateur-11085T",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Après les violences urbaines et les pillages du 17 octobre, « le président de la République n’a apporté aucune solution, aucun cap », déplore Hervé Marseille",
-     "url": "https://www.publicsenat.fr/actualites/politique/apres-les-violences-urbaines-et-les-pillages-du-17-octobre-le-president-de-la-republique-na-apporte-aucune-solution-aucun-cap-deplore-herve-marseille",
-     "media": "Public Sénat",
-     "date": "2026-10-20T09:14:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-20T09:08:17.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Arthur Delaporte",
-      "photo": "photos/deputes/PA793394.jpg",
-      "photoHd": "photos/deputes/hd/PA793394.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA793394",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre: \"L'État a échoué\", déclare Arthur Delaporte, député PS du Calvados",
-     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-violences-du-17-octobre-l-etat-a-echoue-declare-arthur-delaporte-depute-ps-du-calvados_VN-202610200381.html",
-     "media": "BFMTV",
-     "date": "2026-10-20T09:08:17.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-20T09:05:54.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France : quel est le profil des casseurs qui ont semé le chaos ce week-end?",
-     "url": "https://www.rfi.fr/fr/podcasts/appels-sur-l-actualit%C3%A9/20261020-france-quel-est-le-profil-des-casseurs-qui-ont-sem%C3%A9-le-chaos-ce-week-end",
-     "media": "RFI",
-     "date": "2026-10-20T09:05:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-20T09:02:46.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gérard Larcher",
-      "photo": "photos/senateurs/86034E.jpg",
-      "photoHd": "photos/senateurs/hd/86034E.jpg",
-      "parti": "LR",
-      "lien": "#senateur-86034E",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Dérive autoritaire, suite : au tour de Gérard Larcher d’envisager une interdiction de LFI",
-     "url": "https://www.liberation.fr/politique/derive-autoritaire-suite-au-tour-de-gerard-larcher-denvisager-une-interdiction-de-lfi-20261020_LAGIGMA7L5EYPJH7VLEPQDDNBQ/",
-     "media": "Libération",
-     "date": "2026-10-20T09:02:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gérard Larcher (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-20T08:53:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montagnat. Une cinquantaine de personnes affirment leur soutien aux communes sinistrées après le 17 octobre",
-     "url": "https://www.leprogres.fr/politique/2026/10/20/une-cinquantaine-de-personnes-affirment-leur-soutien-aux-communes-sinistrees-apres-le-17-octobre",
-     "media": "Le Progrès",
-     "date": "2026-10-20T08:53:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Octobre",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-20T08:48:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "A Paris, devant une mairie d’arrondissement touchée par les violences du 17 octobre, un rassemblement pour « faire société »",
-     "url": "https://www.nouvelobs.com/social/20261019.OBS119352/a-paris-devant-une-mairie-d-arrondissement-touchee-par-les-violences-du-17-octobre-un-rassemblement-pour-faire-societe.html",
-     "media": "L'Obs",
-     "date": "2026-10-20T08:48:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-20T08:45:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"Une forme de punition collective\": la gauche critique face à l'instauration de couvre-feux dans plusieurs villes",
-     "url": "https://www.bfmtv.com/politique/une-forme-de-punition-collective-la-gauche-critique-face-a-l-instauration-de-couvre-feux-dans-plusieurs-villes_AN-202610200366.html",
-     "media": "BFMTV",
-     "date": "2026-10-20T08:45:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-20T08:42:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Villemotier. Une quinzaine d’élus et citoyens rassemblés devant la mairie pour réaffirmer les valeurs de la République",
-     "url": "https://www.leprogres.fr/politique/2026/10/20/une-quinzaine-d-elus-et-citoyens-rassembles-devant-la-mairie-pour-reaffirmer-les-valeurs-de-la-republique",
-     "media": "Le Progrès",
-     "date": "2026-10-20T08:42:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Villemotier : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Une quinzaine d’élus et citoyens rassemblés devant la mairie pour réaffirmer les valeurs de la République",
-   "accroche": "Une quinzaine d’élus et citoyens rassemblés devant la mairie pour réaffirmer les valeurs de la République"
   }
  ]
 }
