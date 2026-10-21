@@ -1,6 +1,6 @@
 # Recommandations (suggestions, rien n'est modifié automatiquement)
 
-Calculées le 2026-10-20 à partir de 108 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
+Calculées le 2026-10-21 à partir de 108 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
 
 ## Stories (96 mesuré(s))
 
