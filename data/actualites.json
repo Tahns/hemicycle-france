@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-21T03:25:32.486Z",
+ "lastUpdated": "2026-10-21T03:35:36.082Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Public Sénat",
@@ -412,9 +412,10 @@
     "RFI",
     "Dernières Nouvelles d'Alsace",
     "Libération",
-    "20 Minutes"
+    "20 Minutes",
+    "Hugo Décrypte"
    ],
-   "mediasDistincts": 7,
+   "mediasDistincts": 8,
    "sources": [
     "BFMTV",
     "Le JDD",
@@ -422,9 +423,10 @@
     "EBRA",
     "RFI",
     "Libération",
-    "20 Minutes"
+    "20 Minutes",
+    "Hugo Décrypte"
    ],
-   "nb": 12,
+   "nb": 13,
    "derniere": "2026-10-20T20:12:46.000Z",
    "articles": [
     {
@@ -499,6 +501,13 @@
      "titre": "« Je m’en fous »… Interrogé sur le 17 octobre 1961, David Lisnard s’énerve",
      "url": "https://www.20minutes.fr/politique/4255857-20261020-fous-interroge-17-octobre-1961-david-lisnard-enerve?at_medium=display&at_campaign=149",
      "date": "2026-10-20T06:47:15.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Charges des forces de l’ordre sur les manifestations interdites à Paris.",
+     "url": "https://www.youtube.com/shorts/S48B45kA1ic",
+     "date": "2026-10-19T15:03:45.000Z",
+     "video": true
     }
    ]
   }
@@ -1044,6 +1053,56 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Ouest-France",
+    "France 24"
+   ],
+   "derniere": "2026-10-21T03:31:25.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Le Premier ministre Sébastien Lecornu reçoit les syndicats, avant de prochaines manifestations",
+     "url": "https://www.ouest-france.fr/politique/sebastien-lecornu/le-premier-ministre-sebastien-lecornu-recoit-les-syndicats-avant-de-prochaines-manifestations-e2f9d592-ccd7-11f1-bf87-17eca79cb13c?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-10-21T03:31:25.000Z"
+    },
+    {
+     "titre": "France en direct : Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
+     "url": "https://www.france24.com/fr/france/20261020-en-direct-france-sebastien-lecornu-recoit-syndicats-avant-nouvelles-manifestations-police-lyceens",
+     "media": "France 24",
+     "date": "2026-10-20T23:40:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Reçoit les syndicats",
+    "origine": "recoupement"
+   },
+   "fait": "Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
+   "accroche": "Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
+   "essentiel": "Le Premier ministre Sébastien Lecornu reçoit les syndicats, avant de prochaines manifestations. Deux médias en parlent : Ouest-France et France 24.",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "La Dépêche",
     "Valeurs actuelles"
    ],
@@ -1092,6 +1151,42 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Mediapart",
+    "France 24"
+   ],
+   "derniere": "2026-10-20T19:24:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Comparutions immédiates à Paris: «Il va payer pour tous ceux qui sont sortis le 17 octobre»",
+     "url": "https://www.mediapart.fr/journal/france/201026/comparutions-immediates-paris-il-va-payer-pour-tous-ceux-qui-sont-sortis-le-17-octobre",
+     "media": "Mediapart",
+     "date": "2026-10-20T19:24:14.000Z"
+    },
+    {
+     "titre": "Plus de 2 500 gardes à vue depuis le 17 octobre : les premières comparutions immédiates ont lieu",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261020-plus-de-2-500-gardes-%C3%A0-vue-depuis-le-17-octobre-les-premi%C3%A8res-comparutions-imm%C3%A9diates-ont-lieu",
+     "media": "France 24",
+     "date": "2026-10-20T09:20:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Comparutions immédiates",
+    "origine": "recoupement"
+   },
+   "fait": "Les premières comparutions immédiates ont lieu",
+   "accroche": "Les premières comparutions immédiates ont lieu",
+   "essentiel": "Plus de 2 500 gardes à vue depuis le 17 octobre : les premières comparutions immédiates ont lieu. Deux médias en parlent : Mediapart et France 24."
   },
   {
    "medias": 2,
@@ -1644,7 +1739,7 @@
    "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-10-21T01:10:08.000Z",
+   "derniere": "2026-10-21T01:10:06.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1656,7 +1751,7 @@
      "titre": "Violences sexuelles : le Sénat adopte la proposition de loi obligeant à informer les victimes lors de la libération de leur agresseur",
      "url": "https://www.lemonde.fr/societe/article/2026/10/21/violences-sexuelles-le-senat-adopte-la-proposition-de-loi-obligeant-a-informer-les-victimes-lors-de-la-liberation-de-leur-agresseur_6798083_3224.html",
      "media": "Le Monde",
-     "date": "2026-10-21T01:10:08.000Z"
+     "date": "2026-10-21T01:10:06.000Z"
     }
    ],
    "titrePropre": {
@@ -1671,49 +1766,6 @@
      "type": "agenda",
      "texte": "À l'ordre du jour de l'Assemblée le 29 octobre",
      "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-20T23:40:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France en direct : Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
-     "url": "https://www.france24.com/fr/france/20261020-en-direct-france-sebastien-lecornu-recoit-syndicats-avant-nouvelles-manifestations-police-lyceens",
-     "media": "France 24",
-     "date": "2026-10-20T23:40:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
-   "accroche": "Sébastien Lecornu reçoit les syndicats avant de nouvelles manifestations",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
   },
@@ -3122,33 +3174,6 @@
    ],
    "titrePropre": {
     "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-10-20T19:24:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Comparutions immédiates à Paris: «Il va payer pour tous ceux qui sont sortis le 17 octobre»",
-     "url": "https://www.mediapart.fr/journal/france/201026/comparutions-immediates-paris-il-va-payer-pour-tous-ceux-qui-sont-sortis-le-17-octobre",
-     "media": "Mediapart",
-     "date": "2026-10-20T19:24:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
