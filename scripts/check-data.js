@@ -391,8 +391,8 @@ async function checkInstagramFile() {
     }
   }
   const config = JSON.parse(await readFile("data/stories-config.json", "utf-8").catch(() => "{}"));
-  const maxStories = Number.isInteger(config.maxParJour) && config.maxParJour >= 1 ? config.maxParJour : 4;
-  for (const [j, n] of Object.entries(stories)) if (n > maxStories && j >= "2026-10-14") err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour, hors annonces de post et contenus récurrents)`);
+  const maxStories = Number.isInteger(config.maxStoriesTotalJour) ? config.maxStoriesTotalJour + 2 : Number.isInteger(config.maxParJour) && config.maxParJour >= 1 ? config.maxParJour : 4; // plafond total (+2 de marge pour les gros sujets) : le fichier compte aussi les sondages et contenus à créneau
+  for (const [j, n] of Object.entries(stories)) if (n > maxStories && j >= "2026-10-14") err(`instagram-file.json : ${n} stories le ${j} (${maxStories} au maximum par jour)`);
   for (const [j, n] of Object.entries(posts)) if (n > 2) err(`instagram-file.json : ${n} posts le ${j} (2 au maximum par jour, carrousels compris)`);
   await checkCreneaux(config);
   // Seuils de médias (data/stories-config.json) : une seule source de vérité, lue par stories-auto.cjs
