@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-23T18:40:43.777Z",
+ "lastUpdated": "2026-10-23T18:45:47.925Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -150,9 +150,10 @@
  ],
  "dossiers": [
   {
-   "id": "interdiction",
+   "id": "manifestations",
    "titre": "Manifestations",
    "motifs": [
+    "manifestations",
     "interdiction",
     "droit"
    ],
@@ -162,38 +163,42 @@
     "Mediapart",
     "L'Obs",
     "Le Monde",
+    "Le Figaro",
+    "La Dépêche",
     "Sud Ouest",
+    "L'Est républicain",
     "France 24",
     "BFMTV",
     "Dernières Nouvelles d'Alsace",
-    "L'Est républicain",
     "L'Humanité",
-    "RFI",
-    "Le Progrès",
-    "La Dépêche",
     "Public Sénat",
+    "RFI",
     "Nice-Matin",
     "20 Minutes",
+    "Europe 1",
+    "La Croix",
     "Le JDD"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 16,
    "sources": [
     "EBRA",
     "Libération",
     "Mediapart",
     "L'Obs",
     "Le Monde",
+    "Le Figaro",
+    "La Dépêche",
     "Sud Ouest",
     "France Médias Monde",
     "BFMTV",
     "L'Humanité",
-    "La Dépêche",
     "Public Sénat",
     "Nice-Matin",
     "20 Minutes",
-    "Le JDD"
+    "Groupe Bolloré",
+    "La Croix"
    ],
-   "nb": 35,
+   "nb": 58,
    "derniere": "2026-10-23T18:21:00.000Z",
    "articles": [
     {
@@ -227,10 +232,28 @@
      "date": "2026-10-23T17:28:59.000Z"
     },
     {
+     "media": "Le Figaro",
+     "titre": "Manifestations du 24 octobre : après le fiasco, l’épreuve de vérité pour le gouvernement",
+     "url": "https://www.lefigaro.fr/actualite-france/manifestations-du-24-octobre-apres-le-fiasco-l-epreuve-de-verite-pour-le-gouvernement-20261023",
+     "date": "2026-10-23T17:25:46.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "DIRECT. Manifestations du 24 octobre : \"On appelle les lycéens à continuer à se mobiliser\", indiquent les syndicats après la réunion avec Emmanuel Macron",
+     "url": "https://www.ladepeche.fr/2026/10/23/direct-manifestations-du-24-octobre-emmanuel-macron-va-recevoir-les-lyceens-et-aller-a-la-rencontre-des-forces-de-lordre-ce-vendredi-sebastien-lecornu-13616424.php",
+     "date": "2026-10-23T17:23:45.000Z"
+    },
+    {
      "media": "Sud Ouest",
      "titre": "Interdictions de manifester le 24 octobre : sept partis de gauche déposent un recours devant le Conseil d’État",
      "url": "https://www.sudouest.fr/politique/interdictions-de-manifester-le-24-octobre-sept-partis-de-gauche-deposent-un-recours-devant-le-conseil-d-etat-31209307.php",
      "date": "2026-10-23T17:16:57.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Vesoul. À Vesoul, une quarantaine de manifestants dans les rues en avance sur le 24 octobre",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/23/a-vesoul-une-quarantaine-de-manifestants-dans-les-rues-en-avance-sur-le-24-octobre",
+     "date": "2026-10-23T16:56:00.000Z"
     },
     {
      "media": "France 24",
@@ -251,40 +274,22 @@
      "date": "2026-10-23T16:15:00.000Z"
     },
     {
-     "media": "L'Est républicain",
-     "titre": "Thiaucourt-Regniéville. Modification du projet retenu pour la résidence intergénérationnelle",
-     "url": "https://www.estrepublicain.fr/politique/2026/10/23/modification-du-projet-retenu-pour-la-residence-intergenerationnelle",
-     "date": "2026-10-23T15:14:39.000Z"
-    },
-    {
      "media": "L'Humanité",
      "titre": "Armée, interdictions… À quoi s’attendre pour les manifestations du 24 octobre ?",
      "url": "https://www.humanite.fr/politique/armee-francaise/armee-interdictions-a-quoi-sattendre-pour-les-manifestations-du-24-octobre",
      "date": "2026-10-23T15:01:00.000Z"
     },
     {
+     "media": "Public Sénat",
+     "titre": "Manifestation contre le RN à Orléans : un « aveu de faiblesse » pour la gauche ou un échec de la dédiabolisation de Marine Le Pen ?",
+     "url": "https://www.publicsenat.fr/actualites/politique/manifestation-contre-le-rn-a-orleans-un-aveu-de-faiblesse-pour-la-gauche-ou-un-echec-de-la-dediabolisation-de-marine-le-pen",
+     "date": "2026-10-23T14:52:39.000Z"
+    },
+    {
      "media": "RFI",
      "titre": "Interdictions de manifester en France: «Une attaque des fondements de la démocratie»",
      "url": "https://www.rfi.fr/fr/france/20261023-interdictions-de-manifester-en-france-une-attaque-des-fondements-de-la-d%C3%A9mocratie",
      "date": "2026-10-23T14:39:35.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Décryptage. Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ?",
-     "url": "https://www.leprogres.fr/social/2026/10/23/mobilisation-du-24-octobre-que-risquez-vous-si-vous-participer-a-une-manifestation-interdite",
-     "date": "2026-10-23T14:30:00.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Il avait été filmé jetant un projectile lors d'une manifestation de lycéens : l'individu interpellé par un député était bien un policier",
-     "url": "https://www.ladepeche.fr/2026/10/23/il-avait-ete-filme-jetant-un-projectile-lors-dune-manifestation-de-lyceens-lindividu-interpelle-par-un-depute-etait-bien-un-policier-13616568.php",
-     "date": "2026-10-23T14:11:38.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« En droit, vous ne pouvez pas avoir une interdiction générale de manifester », explique le constitutionnaliste Benjamin Morel",
-     "url": "https://www.publicsenat.fr/actualites/politique/en-droit-vous-ne-pouvez-pas-avoir-une-interdiction-generale-de-manifester-explique-le-constitutionnaliste-benjamin-morel",
-     "date": "2026-10-23T11:29:26.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -298,6 +303,18 @@
      "url": "https://www.20minutes.fr/tv/videos/4256897-20261023-interdiction-manifester-risque-si-manifeste-quand?at_medium=display&at_campaign=149",
      "date": "2026-10-23T09:37:53.000Z",
      "video": true
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Manifestation contre le congrès du RN à Orléans : «Nous ne nous tairons pas», clame Sébastien Chenu",
+     "url": "https://www.europe1.fr/societe/manifestation-contre-le-congres-du-rn-a-orleans-nous-ne-nous-tairons-pas-clame-sebastien-chenu-1175595?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-23T07:02:43.000Z"
+    },
+    {
+     "media": "La Croix",
+     "titre": "Manifestations du 17 octobre : comment lutter contre la polarisation politique en pleine crise sociale",
+     "url": "https://www.la-croix.com/politique/manifestations-du-17-octobre-comment-lutter-contre-la-polarisation-politique-en-pleine-crise-sociale-20261022",
+     "date": "2026-10-23T04:30:03.000Z"
     },
     {
      "media": "Le JDD",
@@ -316,11 +333,10 @@
    ],
    "medias": [
     "BFMTV",
+    "Libération",
     "Mediapart",
     "Sud Ouest",
-    "Libération",
     "Le Dauphiné libéré",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Le Monde",
@@ -336,9 +352,9 @@
    "mediasDistincts": 14,
    "sources": [
     "BFMTV",
+    "Libération",
     "Mediapart",
     "Sud Ouest",
-    "Libération",
     "EBRA",
     "Le Monde",
     "Nice-Matin",
@@ -351,13 +367,19 @@
     "20 Minutes"
    ],
    "nb": 28,
-   "derniere": "2026-10-23T18:26:16.000Z",
+   "derniere": "2026-10-23T18:41:48.000Z",
    "articles": [
     {
      "media": "BFMTV",
      "titre": "DIRECT. Colère sociale: des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron",
      "url": "https://www.bfmtv.com/politique/direct-colere-sociale-conseil-de-defense-rencontre-avec-les-organisations-lyceennes-et-les-forces-de-l-ordre-la-journee-tres-chargee-d-emmanuel-macron-avant-une-nouvelle-mobilisation-attendue-le-24-octobre_LN-202610230108.html",
-     "date": "2026-10-23T18:26:16.000Z"
+     "date": "2026-10-23T18:41:48.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "EN DIRECT – Mouvement social : le parcours parisien changé par la préfecture",
+     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-macron-recoit-les-lyceens-ce-vendredi-alors-que-les-arretes-dinterdiction-se-multiplient-20261023_PJGBRMNUHJDWRH47JQNWLR3FPA/",
+     "date": "2026-10-23T18:36:41.000Z"
     },
     {
      "media": "Mediapart",
@@ -372,22 +394,10 @@
      "date": "2026-10-23T17:37:15.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "EN DIRECT – Mouvement social : après plusieurs heures de réunion avec Macron, les représentants lycéens appellent à «continuer à se mobiliser»",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-macron-recoit-les-lyceens-ce-vendredi-alors-que-les-arretes-dinterdiction-se-multiplient-20261023_PJGBRMNUHJDWRH47JQNWLR3FPA/",
-     "date": "2026-10-23T17:01:08.000Z"
-    },
-    {
      "media": "Le Dauphiné libéré",
      "titre": "Crise sociale. Interdiction de manifester : un cadre “inapproprié et disproportionné” pour Les Écologistes de la Drôme",
      "url": "https://www.ledauphine.com/politique/2026/10/23/interdiction-de-manifester-inapproprie-et-disproportionne-pour-les-ecologistes",
      "date": "2026-10-23T16:57:00.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Social. Mobilisation du 24 octobre : Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
-     "url": "https://www.leprogres.fr/social/2026/10/23/mobilisation-du-24-octobre-macron-recoit-les-lyceens-et-reunit-un-conseil-de-defense-lecornu-a-limoges",
-     "date": "2026-10-23T16:45:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -585,16 +595,15 @@
  "sujets": [
   {
    "medias": 6,
-   "mediasDistincts": 6,
+   "mediasDistincts": 5,
    "sources": [
     "BFMTV",
     "La Croix",
     "La Dépêche",
-    "Libération",
     "L'Humanité",
-    "RFI"
+    "France Médias Monde"
    ],
-   "derniere": "2026-10-23T18:26:16.000Z",
+   "derniere": "2026-10-23T18:41:48.000Z",
    "illustration": {
     "personnes": [
      {
@@ -619,19 +628,13 @@
      "titre": "DIRECT. Colère sociale: des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron",
      "url": "https://www.bfmtv.com/politique/direct-colere-sociale-conseil-de-defense-rencontre-avec-les-organisations-lyceennes-et-les-forces-de-l-ordre-la-journee-tres-chargee-d-emmanuel-macron-avant-une-nouvelle-mobilisation-attendue-le-24-octobre_LN-202610230108.html",
      "media": "BFMTV",
-     "date": "2026-10-23T18:26:16.000Z"
+     "date": "2026-10-23T18:41:48.000Z"
     },
     {
      "titre": "DIRECT. Manifestations du 24 octobre : \"On appelle les lycéens à continuer à se mobiliser\", indiquent les syndicats après la réunion avec Emmanuel Macron",
      "url": "https://www.ladepeche.fr/2026/10/23/direct-manifestations-du-24-octobre-emmanuel-macron-va-recevoir-les-lyceens-et-aller-a-la-rencontre-des-forces-de-lordre-ce-vendredi-sebastien-lecornu-13616424.php",
      "media": "La Dépêche",
      "date": "2026-10-23T17:23:45.000Z"
-    },
-    {
-     "titre": "EN DIRECT – Mouvement social : après plusieurs heures de réunion avec Macron, les représentants lycéens appellent à «continuer à se mobiliser»",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-macron-recoit-les-lyceens-ce-vendredi-alors-que-les-arretes-dinterdiction-se-multiplient-20261023_PJGBRMNUHJDWRH47JQNWLR3FPA/",
-     "media": "Libération",
-     "date": "2026-10-23T17:01:08.000Z"
     },
     {
      "titre": "Après la rencontre avec Emmanuel Macron, les représentants des lycéens appellent à « continuer à se mobiliser »",
@@ -644,15 +647,21 @@
      "url": "https://www.rfi.fr/fr/france/20261023-direct-col%C3%A8re-sociale-en-france-emmanuel-macron-re%C3%A7oit-les-lyc%C3%A9ens-et-va-%C3%A0-la-rencontre-des-forces-de-l-ordre",
      "media": "RFI",
      "date": "2026-10-23T09:21:31.000Z"
+    },
+    {
+     "titre": "En direct : après leur rencontre avec Macron, les représentants lycéens appellent à poursuivre la mobilisation",
+     "url": "https://www.france24.com/fr/france/20261022-en-direct-france-macron-recoit-lyceens-rencontre-forces-de-l-ordre-lecornu-limoges-manifestations",
+     "media": "France 24",
+     "date": "2026-10-22T22:55:51.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
+    "titre": "Lycées : appel sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "fait": "Colère sociale : des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron",
    "accroche": "Colère sociale : des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron",
-   "essentiel": "Pendant la colère sociale, des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron. Six médias en parlent : La Croix, BFMTV, La Dépêche, Libération, L'Humanité et RFI."
+   "essentiel": "Pendant la colère sociale, des représentants lycéens appellent à \"continuer à se mobiliser\" après une rencontre avec Emmanuel Macron. Six médias en parlent : La Croix, BFMTV, La Dépêche, L'Humanité, RFI et France 24."
   },
   {
    "medias": 5,
@@ -718,7 +727,7 @@
    }
   },
   {
-   "medias": 6,
+   "medias": 5,
    "mediasDistincts": 3,
    "sources": [
     "Le Monde",
@@ -742,8 +751,8 @@
    "articles": [
     {
      "titre": "Social. Mobilisation du 24 octobre : Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
-     "url": "https://www.leprogres.fr/social/2026/10/23/mobilisation-du-24-octobre-macron-recoit-les-lyceens-et-reunit-un-conseil-de-defense-lecornu-a-limoges",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/social/2026/10/23/mobilisation-du-24-octobre-macron-recoit-les-lyceens-et-reunit-un-conseil-de-defense-lecornu-a-limoges",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-10-23T16:45:00.000Z"
     },
     {
@@ -760,12 +769,6 @@
     },
     {
      "titre": "Social. Mobilisation du 24 octobre : Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
-     "url": "https://www.dna.fr/social/2026/10/23/mobilisation-du-24-octobre-macron-recoit-les-lyceens-et-reunit-un-conseil-de-defense-lecornu-a-limoges",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-10-23T16:45:00.000Z"
-    },
-    {
-     "titre": "Social. Mobilisation du 24 octobre : Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
      "url": "https://www.ledauphine.com/social/2026/10/23/mobilisation-du-24-octobre-macron-recoit-les-lyceens-et-reunit-un-conseil-de-defense-lecornu-a-limoges",
      "media": "Le Dauphiné libéré",
      "date": "2026-10-23T16:45:00.000Z"
@@ -778,12 +781,12 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
+    "titre": "Conseil d État",
+    "origine": "recoupement"
    },
    "fait": "Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
    "accroche": "Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État",
-   "essentiel": "Pendant la mobilisation du 24 octobre, Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État. Sept partis politiques de gauche déposent un recours auprès du Conseil d’Etat contre les interdictions de manifester. Six médias en parlent.",
+   "essentiel": "Pendant la mobilisation du 24 octobre, Sébastien Lecornu est à Limoges, un recours de partis de gauche devant le Conseil d'État. Sept partis politiques de gauche déposent un recours auprès du Conseil d’Etat contre les interdictions de manifester. Cinq médias en parlent.",
    "contexte": [
     {
      "type": "personnes",
@@ -998,7 +1001,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -1019,12 +1022,6 @@
     "vignette": "budget"
    },
    "articles": [
-    {
-     "titre": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français",
-     "url": "https://www.leprogres.fr/elections/2026/10/23/dans-six-mois-pourquoi-emmanuel-macron-va-couter-2-3-millions-d-euros-aux-francais",
-     "media": "Le Progrès",
-     "date": "2026-10-23T15:30:00.000Z"
-    },
     {
      "titre": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français",
      "url": "https://www.dna.fr/elections/2026/10/23/dans-six-mois-pourquoi-emmanuel-macron-va-couter-2-3-millions-d-euros-aux-francais",
@@ -1048,9 +1045,9 @@
     "titre": "Millions d euros",
     "origine": "recoupement"
    },
-   "fait": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2",
-   "accroche": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2",
-   "essentiel": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, L'Est républicain et Libération.",
+   "fait": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français",
+   "accroche": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français",
+   "essentiel": "La vidéo du jour. Fin du mandat d'Emmanuel Macron : ses futurs bureaux coûteront 2,3 millions d'euros aux Français. Trois médias en parlent : Dernières Nouvelles d'Alsace, L'Est républicain et Libération.",
    "chiffre": {
     "valeur": "2,3",
     "unite": "millions d'euros"
@@ -1339,50 +1336,6 @@
    "mediasDistincts": 2,
    "sources": [
     "BFMTV",
-    "France 24"
-   ],
-   "derniere": "2026-10-23T16:21:51.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "\"On a une brèche dans un pouvoir désorganisé\": l'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/video-on-a-une-breche-dans-un-pouvoir-desorganise-l-organisation-les-lyceens-appelle-a-poursuivre-la-mobilisation-apres-sa-rencontre-avec-emmanuel-macron_VN-202610230703.html",
-     "media": "BFMTV",
-     "date": "2026-10-23T16:21:51.000Z",
-     "video": true
-    },
-    {
-     "titre": "En direct : après leur rencontre avec Macron, les représentants lycéens appellent à poursuivre la mobilisation",
-     "url": "https://www.france24.com/fr/france/20261022-en-direct-france-macron-recoit-lyceens-rencontre-forces-de-l-ordre-lecornu-limoges-manifestations",
-     "media": "France 24",
-     "date": "2026-10-22T22:55:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : appel sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "fait": "L'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron",
-   "accroche": "L'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron",
-   "essentiel": "L'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron. Deux médias en parlent : BFMTV et France 24."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "BFMTV",
     "Europe 1"
    ],
    "derniere": "2026-10-23T16:13:40.000Z",
@@ -1644,7 +1597,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 2,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1657,12 +1610,6 @@
     "vignette": null
    },
    "articles": [
-    {
-     "titre": "Décryptage. Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ?",
-     "url": "https://www.leprogres.fr/social/2026/10/23/mobilisation-du-24-octobre-que-risquez-vous-si-vous-participer-a-une-manifestation-interdite",
-     "media": "Le Progrès",
-     "date": "2026-10-23T14:30:00.000Z"
-    },
     {
      "titre": "Décryptage. Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ?",
      "url": "https://www.dna.fr/social/2026/10/23/mobilisation-du-24-octobre-que-risquez-vous-si-vous-participer-a-une-manifestation-interdite",
@@ -1683,7 +1630,7 @@
    },
    "fait": "Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ?",
    "accroche": "Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ?",
-   "essentiel": "Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ? Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "essentiel": "Mobilisation du 24 octobre : que risquez-vous si vous participez à une manifestation interdite ? Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
    "date": {
     "iso": "2026-10-24",
     "jour": 24,
@@ -1794,6 +1741,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-23T18:37:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mineurs retenus au dépôt de Bobigny : le président de Seine-Saint-Denis saisit le Défenseur des droits",
+     "url": "https://www.sudouest.fr/societe/mineurs-retenus-au-depot-de-bobigny-le-president-de-seine-saint-denis-saisit-le-defenseur-des-droits-31210452.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-23T18:37:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le président de Seine-Saint-Denis saisit le Défenseur des droits",
+   "accroche": "Le président de Seine-Saint-Denis saisit le Défenseur des droits"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-23T18:37:26.000Z",
@@ -1831,6 +1807,70 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-23T18:36:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Mouvement social : le parcours parisien changé par la préfecture",
+     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-macron-recoit-les-lyceens-ce-vendredi-alors-que-les-arretes-dinterdiction-se-multiplient-20261023_PJGBRMNUHJDWRH47JQNWLR3FPA/",
+     "media": "Libération",
+     "date": "2026-10-23T18:36:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sociale",
+    "origine": "dossier"
+   },
+   "fait": "Le parcours parisien changé par la préfecture",
+   "accroche": "Le parcours parisien changé par la préfecture"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-23T18:36:04.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Contestation sociale : Macron écarte les siens pour reprendre la main",
+     "url": "https://www.liberation.fr/politique/contestation-sociale-macron-ecarte-les-siens-pour-reprendre-la-main-20261023_SDFS4PBUXFEQ3DARHHOQVBXPXU/",
+     "media": "Libération",
+     "date": "2026-10-23T18:36:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Macron écarte les siens pour reprendre la main",
+   "accroche": "Macron écarte les siens pour reprendre la main"
   },
   {
    "medias": 1,
@@ -2309,59 +2349,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T18:05:24.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Dagneux. Le projet de la médiathèque se construit avec les habitants",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/le-projet-de-la-mediatheque-se-construit-avec-les-habitants",
-     "media": "Le Progrès",
-     "date": "2026-10-23T18:05:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dagneux : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T18:05:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Miribel. Premiers pas pour le conseil municipal des enfants",
-     "url": "https://www.leprogres.fr/education/2026/10/23/premiers-pas-pour-le-conseil-municipal-des-enfants",
-     "media": "Le Progrès",
-     "date": "2026-10-23T18:05:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Miribel : conseil municipal",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-23T18:01:35.000Z",
@@ -2421,33 +2408,6 @@
    },
    "fait": "Un pot de l’amitié pour rapprocher les familles du regroupement pédagogique",
    "accroche": "Un pot de l’amitié pour rapprocher les familles du regroupement pédagogique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T17:52:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montmorot. Un nouveau règlement bientôt en vigueur pour le cimetière",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/un-nouveau-reglement-bientot-en-vigueur-pour-le-cimetiere",
-     "media": "Le Progrès",
-     "date": "2026-10-23T17:52:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montmorot : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -2772,35 +2732,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Meyzieu. La Ville acquiert un nouveau garage pour éviter les dégradations",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/la-ville-acquiert-un-nouveau-garage-pour-eviter-les-degradations",
-     "media": "Le Progrès",
-     "date": "2026-10-23T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Meyzieu : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La Ville acquiert un nouveau garage pour éviter les dégradations",
-   "accroche": "La Ville acquiert un nouveau garage pour éviter les dégradations"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Figaro"
    ],
    "derniere": "2026-10-23T17:25:46.000Z",
@@ -2819,8 +2750,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "fait": "L’épreuve de vérité pour le gouvernement",
    "accroche": "L’épreuve de vérité pour le gouvernement"
@@ -2875,32 +2806,6 @@
    ],
    "titrePropre": {
     "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T17:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montmorot - Lons-le-Saunier. « Nous avons pris beaucoup de mesures » : la mairie répond aux grévistes de La Châtelaine",
-     "url": "https://www.leprogres.fr/social/2026/10/23/nous-avons-pris-beaucoup-de-mesures-la-mairie-repond-aux-grevistes-de-la-chatelaine",
-     "media": "Le Progrès",
-     "date": "2026-10-23T17:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : réponse sur la vie locale",
     "origine": "regles"
    }
   },
@@ -3244,59 +3149,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Région. « Petit bras », quand l’opposition critique les choix budgétaires de la Région",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/petit-bras-quand-l-opposition-critique-les-choix-budgetaires-de-la-region",
-     "media": "Le Progrès",
-     "date": "2026-10-23T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Région : déclaration sur les finances publiques",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Laurent-de-Mure. La Ville bientôt sous tutelle ? Selon l’opposition, « des ressources il y en a »",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/la-ville-bientot-sous-tutelle-selon-l-opposition-des-ressources-il-y-en-a",
-     "media": "Le Progrès",
-     "date": "2026-10-23T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Laurent-de-Mure : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-10-23T17:00:00.000Z",
@@ -3594,9 +3446,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Vesoul : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "fait": "À Vesoul, une quarantaine de manifestants dans les rues en avance sur le 24 octobre",
    "accroche": "À Vesoul, une quarantaine de manifestants dans les rues en avance sur le 24 octobre"
@@ -3695,34 +3546,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:51:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Pays d’Urfé. Un local attribué aux médecins juniors à la suite du conseil communautaire d’octobre",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/un-local-attribue-aux-medecins-juniors-a-la-suite-du-conseil-communautaire-d-octobre",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:51:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Pays d’Urfé : santé publique",
-    "origine": "regles"
-   },
-   "fait": "Un local attribué aux médecins juniors à la suite du conseil communautaire d’octobre",
-   "accroche": "Un local attribué aux médecins juniors à la suite du conseil communautaire d’octobre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-23T16:51:06.000Z",
@@ -3770,32 +3593,6 @@
    ],
    "titrePropre": {
     "titre": "La Biolle : sécurité",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:49:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Bénisson-Dieu. Les élus approuvent un conseil des enfants avec une nouvelle formule",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/les-elus-approuvent-un-conseil-des-enfants-avec-une-nouvelle-formule",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:49:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Bénisson-Dieu : actualité scolaire",
     "origine": "regles"
    }
   },
@@ -3856,34 +3653,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:46:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Vaugneray. Un programme de 38 logements validé au lieu-dit “La Maletière”",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/un-programme-de-38-logements-valide-au-lieu-dit-la-maletiere",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:46:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vaugneray : logement et accueil",
-    "origine": "regles"
-   },
-   "fait": "Un programme de 38 logements validé au lieu-dit “La Maletière”",
-   "accroche": "Un programme de 38 logements validé au lieu-dit “La Maletière”"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-23T16:46:20.000Z",
@@ -3907,35 +3676,6 @@
    },
    "fait": "La création d’un office de tourisme au menu des élus",
    "accroche": "La création d’un office de tourisme au menu des élus"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:45:36.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Poule-les-Écharmeaux. Conseil municipal : Claudie Blanc est la nouvelle secrétaire de mairie",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/conseil-municipal-claudie-blanc-est-la-nouvelle-secretaire-de-mairie",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:45:36.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Claudie Blanc est la nouvelle secrétaire de mairie",
-   "accroche": "Claudie Blanc est la nouvelle secrétaire de mairie"
   },
   {
    "medias": 1,
@@ -4224,119 +3964,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:35:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Pays Mornantais. « Notre jeunesse est en souffrance » : l’idée d’un forum pour échanger et mieux comprendre",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/notre-jeunesse-est-en-souffrance-l-idee-d-un-forum-pour-echanger-et-mieux-comprendre",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:35:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Pays Mornantais : actualité scolaire",
-    "origine": "regles"
-   },
-   "fait": "L’idée d’un forum pour échanger et mieux comprendre",
-   "accroche": "L’idée d’un forum pour échanger et mieux comprendre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:33:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Symphorien-sur-Coise. Centre hospitalier des Monts du Lyonnais : le projet choisi en fin d’année",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/centre-hospitalier-des-monts-du-lyonnais-le-projet-choisi-en-fin-d-annee",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:33:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Symphorien-sur-Coise : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Centre hospitalier des Monts du Lyonnais : le projet choisi en fin d’année",
-   "accroche": "Centre hospitalier des Monts du Lyonnais : le projet choisi en fin d’année"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:33:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Symphorien-sur-Coise. Point d’apport volontaire : près de 1 000 colonnes à nettoyer",
-     "url": "https://www.leprogres.fr/environnement/2026/10/23/point-d-apport-volontaire-pres-de-1-000-colonnes-a-nettoyer",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:33:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Symphorien-sur-Coise : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Point d’apport volontaire : près de 1 000 colonnes à nettoyer",
-   "accroche": "Point d’apport volontaire : près de 1 000 colonnes à nettoyer"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:33:55.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Duerne. Dernier volet de la réhabilitation de l’église",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/dernier-volet-de-la-rehabilitation-de-l-eglise",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:33:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Duerne : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24"
    ],
    "derniere": "2026-10-23T16:33:00.000Z",
@@ -4384,35 +4011,6 @@
     "titre": "Syndicats : déclaration sur le social et l'emploi",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-23T16:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Haut-Bugey. Le député écrit aux habitants au sujet du prix de l'eau : les élus communautaires voient rouge",
-     "url": "https://www.leprogres.fr/politique/2026/10/23/le-depute-ecrit-aux-habitants-au-sujet-du-prix-de-l-eau-les-elus-cummunautaires-voient-rouge",
-     "media": "Le Progrès",
-     "date": "2026-10-23T16:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : ce qu'il faut savoir sur l'environnement",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le député écrit aux habitants au sujet du prix de l'eau : les élus communautaires voient rouge",
-   "accroche": "Le député écrit aux habitants au sujet du prix de l'eau : les élus communautaires voient rouge"
   },
   {
    "medias": 1,
@@ -4472,6 +4070,42 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-23T16:21:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "\"On a une brèche dans un pouvoir désorganisé\": l'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron",
+     "url": "https://www.bfmtv.com/politique/video-on-a-une-breche-dans-un-pouvoir-desorganise-l-organisation-les-lyceens-appelle-a-poursuivre-la-mobilisation-apres-sa-rencontre-avec-emmanuel-macron_VN-202610230703.html",
+     "media": "BFMTV",
+     "date": "2026-10-23T16:21:51.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : appel sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "L'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron",
+   "accroche": "L'organisation \"Les lycéens\" appelle \"à poursuivre la mobilisation\" après sa rencontre avec Emmanuel Macron"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-10-23T16:21:16.000Z",
@@ -4496,6 +4130,405 @@
    },
    "fait": "Les députés sabordent la loi proposée par le Gouvernement à l’Assemblée nationale",
    "accroche": "Les députés sabordent la loi proposée par le Gouvernement à l’Assemblée nationale"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-23T16:19:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-10-23T16:19:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-23T16:19:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Peut-on interdire un parti politique, comme le suggère Bruno Retailleau à propos de La France insoumise?",
+     "url": "https://www.bfmtv.com/politique/peut-on-interdire-un-parti-politique-comme-le-suggere-bruno-retailleau-a-propos-de-la-france-insoumise_AN-202610230697.html",
+     "media": "BFMTV",
+     "date": "2026-10-23T16:19:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-23T16:19:24.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "media": "BFMTV",
+     "date": "2026-10-23T16:19:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-23T16:19:21.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Interdiction de manifestation : Macron se cogne contre les murs du droit",
+     "url": "https://www.liberation.fr/politique/interdiction-de-manifestation-macron-se-cogne-contre-les-murs-du-droit-20261023_5VGMKB6URJGI3BL2VMNAD6WJH4/",
+     "media": "Libération",
+     "date": "2026-10-23T16:19:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-23T16:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Illzach. Gestion de crise, travaux confirmés et coopération intercommunale plébiscitée",
+     "url": "https://www.dna.fr/politique/2026/10/23/gestion-de-crise-travaux-confirmes-et-cooperation-intercommunale-plebiscitee",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-23T16:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Illzach : projet d'aménagement",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-23T16:13:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Vaucouleurs. Les travaux de réhabilitation du presbytère vont débuter",
+     "url": "https://www.estrepublicain.fr/economie/2026/10/23/les-travaux-de-rehabilitation-du-presbytere-vont-debuter",
+     "media": "L'Est républicain",
+     "date": "2026-10-23T16:13:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vaucouleurs : projet d'aménagement",
+    "origine": "regles"
+   },
+   "fait": "Les travaux de réhabilitation du presbytère vont débuter",
+   "accroche": "Les travaux de réhabilitation du presbytère vont débuter"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-10-23T16:13:09.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "À Draguignan, encore quelques jours pour départager les neuf projets citoyens en lice pour les cent mille euros du budget participatif",
+     "url": "https://www.nicematin.com/societe/politique/a-draguignan-encore-quelques-jours-pour-departager-les-neuf-projets-citoyens-en-lice-pour-les-cent-mille-euros-du-budget-participatif-10744306",
+     "media": "Nice-Matin",
+     "date": "2026-10-23T16:13:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-23T16:06:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Fausse image d'un couple agressé : quel est le site d'actualité pro-israélien derrière cette intox ?",
+     "url": "https://www.france24.com/fr/france/20261023-fausse-image-couple-agress%C3%A9-quel-est-site-d-actualit%C3%A9-pro-isra%C3%A9lien-derri%C3%A8re-intox",
+     "media": "France 24",
+     "date": "2026-10-23T16:06:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "International : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-10-23T16:02:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Rosheim. Les membres de trois nouveaux comités consultatifs communaux ont été nommés",
+     "url": "https://www.dna.fr/politique/2026/10/23/les-membres-de-trois-nouveaux-comites-consultatifs-communaux-ont-ete-nommes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-10-23T16:02:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rosheim : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Les membres de trois nouveaux comités consultatifs communaux ont été nommés",
+   "accroche": "Les membres de trois nouveaux comités consultatifs communaux ont été nommés"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-23T16:00:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "El Niño : sécheresse, feux de forêt... quels impacts en Nouvelle-Calédonie ?",
+     "url": "https://www.france24.com/fr/%C3%A9missions/outre-mer/20261023-el-ni%C3%B1o-s%C3%A9cheresse-feux-de-for%C3%AAt-quels-impacts-en-nouvelle-cal%C3%A9donie",
+     "media": "France 24",
+     "date": "2026-10-23T16:00:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "El Niño : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-23T16:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Comment sécuriser les prochaines manifestations ? « Il faut un consensus sur les tactiques utilisées pour le maintien de l‘ordre »",
+     "url": "https://www.sudouest.fr/gironde/bordeaux/comment-securiser-les-prochaines-manifestations-il-faut-un-consensus-sur-les-tactiques-utilisees-pour-le-maintien-de-l-ordre-31159142.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-23T16:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-23T16:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mille Étangs. Foire d’empoigne au sujet de la maison de santé de Faucogney : « On est en train de foutre la comcom en l’air ! »",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/23/foire-d-empoigne-au-sujet-de-la-maison-de-sante-de-faucogney-on-est-en-train-de-foutre-la-comcom-en-l-air",
+     "media": "L'Est républicain",
+     "date": "2026-10-23T16:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mille Étangs : santé publique",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-10-23T15:51:05.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Maron. Forêt communale : l’espoir de nouvelles recettes",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/23/foret-communale-l-espoir-de-nouvelles-recettes",
+     "media": "L'Est républicain",
+     "date": "2026-10-23T15:51:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maron : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
   }
  ]
 }
