@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-24T14:35:34.781Z",
+ "lastUpdated": "2026-10-24T14:40:49.824Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -150,56 +150,75 @@
  ],
  "dossiers": [
   {
-   "id": "mobilisation",
-   "titre": "Mobilisation",
+   "id": "manifestations",
+   "titre": "Manifestations",
    "motifs": [
+    "manifestations",
+    "octobre",
     "mobilisation",
-    "appellent",
-    "attendus"
+    "interdiction"
    ],
    "medias": [
+    "Libération",
+    "Le Monde",
     "Le Dauphiné libéré",
     "Sud Ouest",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "BFMTV",
-    "Le Monde",
     "Ouest-France",
     "L'Humanité",
-    "La Dépêche",
+    "Hugo Décrypte",
+    "Mediapart",
     "RFI",
     "Europe 1",
-    "Libération",
-    "France 24",
-    "La Croix",
-    "Le JDD",
     "Public Sénat",
+    "La Dépêche",
+    "La Croix",
     "L'Obs",
     "Le Figaro",
+    "Le JDD",
+    "Nice-Matin",
     "20 Minutes"
    ],
-   "mediasDistincts": 15,
+   "mediasDistincts": 18,
    "sources": [
+    "Libération",
+    "Le Monde",
     "EBRA",
     "Sud Ouest",
     "BFMTV",
-    "Le Monde",
     "Ouest-France",
     "L'Humanité",
-    "La Dépêche",
-    "France Médias Monde",
+    "Hugo Décrypte",
+    "Mediapart",
+    "RFI",
     "Groupe Bolloré",
-    "Libération",
-    "La Croix",
     "Public Sénat",
+    "La Dépêche",
+    "La Croix",
     "L'Obs",
     "Le Figaro",
+    "Nice-Matin",
     "20 Minutes"
    ],
-   "nb": 43,
-   "derniere": "2026-10-24T14:28:00.000Z",
+   "nb": 109,
+   "derniere": "2026-10-24T14:34:52.000Z",
    "articles": [
+    {
+     "media": "Libération",
+     "titre": "EN DIRECT – Manifestation du 24 octobre : à Lyon, les lacrymos pleuvent pour disperser les manifestants",
+     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-nouvelle-journee-de-mobilisation-ce-samedi-sous-haute-tension-20261024_3M2CMHWFRJBM7PMWOQ47Q4DYHU/",
+     "date": "2026-10-24T14:34:52.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Manifestations du 24 octobre : les premières images du cortège parisien",
+     "url": "https://www.lemonde.fr/videos/video/2026/10/24/manifestations-du-24-octobre-les-premieres-images-du-cortege-parisien_6799710_1669088.html",
+     "date": "2026-10-24T14:29:09.000Z",
+     "video": true
+    },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Pays de Savoie . Mobilisation du 24 octobre : un manifestant arrêté à Chambéry par la Bac sur la VRU, interpellation à Thonon",
@@ -237,12 +256,6 @@
      "date": "2026-10-24T13:07:47.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Les « gilets jaunes » appellent à une nouvelle mobilisation samedi 31 octobre pour « la défense des libertés publiques » et contre « la dérive autoritaire »",
-     "url": "https://www.lemonde.fr/societe/article/2026/10/24/les-gilets-jaunes-appellent-a-une-nouvelle-mobilisation-samedi-31-octobre-pour-la-defense-des-libertes-publiques-et-contre-la-derive-autoritaire_6799698_3224.html",
-     "date": "2026-10-24T11:48:56.000Z"
-    },
-    {
      "media": "Ouest-France",
      "titre": "Les Gilets jaunes confirment une nouvelle mobilisation le 31 octobre contre une « dérive autoritaire » du gouvernement",
      "url": "https://www.ouest-france.fr/societe/gilets-jaunes/les-gilets-jaunes-confirment-une-nouvelle-mobilisation-le-31-octobre-contre-une-derive-autoritaire-du-gouvernement-70429fca-cf9d-11f1-95ba-26d2045f6620?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
@@ -255,34 +268,41 @@
      "date": "2026-10-24T11:18:39.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Prix des carburants : \"Cette baisse est attendue à compter du 1er novembre\", Sébastien Lecornu annonce la signature du décret visant à réduire le prix du litre de gazole de 18 centimes",
-     "url": "https://www.ladepeche.fr/2026/10/24/prix-des-carburants-cette-baisse-est-attendue-a-compter-du-1er-novembre-sebastien-lecornu-annonce-la-signature-du-decret-visant-a-reduire-le-prix-du-13618356.php",
-     "date": "2026-10-24T10:01:38.000Z"
+     "media": "Hugo Décrypte",
+     "titre": "Le parcours de la manifestation à Paris définitif !",
+     "url": "https://www.youtube.com/shorts/MZtYHYR4x5w",
+     "date": "2026-10-24T10:46:53.000Z",
+     "video": true
+    },
+    {
+     "media": "Mediapart",
+     "titre": "17 octobre, 12 h 19, place de la République à Paris: les policiers provoquent le chaos",
+     "url": "https://www.mediapart.fr/journal/france/241026/17-octobre-12-h-19-place-de-la-republique-paris-les-policiers-provoquent-le-chaos",
+     "date": "2026-10-24T08:18:46.000Z"
     },
     {
      "media": "RFI",
-     "titre": "DIRECT - Mobilisation en France: Jean-Luc Mélenchon exhorte Emmanuel Macron à «céder» face aux revendications",
+     "titre": "DIRECT - Mobilisation en France: des manifestations sous très haute sécurité et sans incident majeur",
      "url": "https://www.rfi.fr/fr/france/20261024-direct-manifestations-en-france-des-nombreux-d%C3%A9fil%C3%A9s-attendus-dans-un-contexte-de-fortes-tensions-s%C3%A9curitaires",
      "date": "2026-10-24T06:57:30.000Z"
     },
     {
      "media": "Europe 1",
-     "titre": "Mobilisation du 24 octobre : une journée décisive pour l'exécutif",
-     "url": "https://www.europe1.fr/politique/mobilisation-du-24-octobre-une-journee-decisive-pour-lexecutif-1178004?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-24T06:26:00.000Z"
+     "titre": "Manifestation devant le congrès du RN : Laure Lavalette dénonce un «grave déni de démocratie»",
+     "url": "https://www.europe1.fr/politique/manifestation-devant-le-congres-du-rn-laure-lavalette-denonce-un-grave-deni-de-democratie-1178001?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-24T06:50:53.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Dans la France de Macron, on ne dit plus «bonne manif !» mais «tu fais attention, hein !»",
-     "url": "https://www.liberation.fr/politique/dans-la-france-de-macron-on-ne-dit-plus-bonne-manif-mais-tu-fais-attention-hein-20261024_4NWIEE4J6FCXJIZNIANL56NK3Y/",
-     "date": "2026-10-24T06:15:07.000Z"
+     "media": "Public Sénat",
+     "titre": "Budget de l’Union européenne : « une taxe sur les transactions financières rapporterait 350 milliards d’euros sur 7 ans », assure cet eurodéputé La France Insoumise",
+     "url": "https://www.publicsenat.fr/actualites/economie/budget-de-lunion-europeenne-une-taxe-sur-les-transactions-financieres-rapporterait-350-milliards-deuros-sur-7-ans-assure-cet-eurodepute-la-france",
+     "date": "2026-10-24T04:47:00.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Mobilisation du 24 octobre en direct : 135 interpellations et des armes saisies, selon le ministre de l'Intérieur",
-     "url": "https://www.france24.com/fr/france/20261024-en-direct-centaines-manifestations-france-climat-fortes-tensions-mobilisation-revendications-salaires-education-syndicats-pouvoir-d-achat-lycee-police-macron",
-     "date": "2026-10-24T05:00:19.000Z"
+     "media": "La Dépêche",
+     "titre": "REPLAY. Manifestations du 24 octobre : \"Le niveau de menace reste élevé demain\", indique Sébastien Lecornu",
+     "url": "https://www.ladepeche.fr/2026/10/23/direct-manifestations-du-24-octobre-emmanuel-macron-va-recevoir-les-lyceens-et-aller-a-la-rencontre-des-forces-de-lordre-ce-vendredi-sebastien-lecornu-13616424.php",
+     "date": "2026-10-23T20:42:37.000Z"
     },
     {
      "media": "La Croix",
@@ -291,170 +311,44 @@
      "date": "2026-10-23T19:18:54.000Z"
     },
     {
+     "media": "L'Obs",
+     "titre": "Manifestations du 24 octobre : mic-mac sur le parcours à Paris, interdictions, sécurité… A quoi faut-il s’attendre ?",
+     "url": "https://www.nouvelobs.com/societe/20261023.OBS119457/manifestations-du-24-octobre-parcours-a-paris-interdictions-securite-a-quoi-faut-il-s-attendre.html",
+     "date": "2026-10-23T19:03:54.000Z"
+    },
+    {
+     "media": "Le Figaro",
+     "titre": "Manifestations du 24 octobre : après le fiasco, l’épreuve de vérité pour le gouvernement",
+     "url": "https://www.lefigaro.fr/actualite-france/manifestations-du-24-octobre-apres-le-fiasco-l-epreuve-de-verite-pour-le-gouvernement-20261023",
+     "date": "2026-10-23T17:25:46.000Z"
+    },
+    {
      "media": "Le JDD",
      "titre": "Journée de mobilisation, congrès du RN… Les 4 infos dont vous allez entendre parler demain",
      "url": "https://www.lejdd.fr/Societe/journee-de-mobilisation-congres-du-rn-les-4-infos-dont-vous-allez-entendre-parler-demain-186783",
      "date": "2026-10-23T14:45:05.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Mobilisation du 24 octobre : Laurent Nuñez annonce le déploiement de « 70 000 policiers et gendarmes », dont plusieurs unités d’élite",
-     "url": "https://www.publicsenat.fr/actualites/territoires/mobilisation-du-24-octobre-laurent-nunez-annonce-le-deploiement-de-70-000-policiers-et-gendarmes-dont-plusieurs-unites-delite",
-     "date": "2026-10-23T13:26:09.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Le Congrès du RN à Orléans s’annonce sous haute tension, entre mobilisation et interdiction de manifester",
-     "url": "https://www.nouvelobs.com/politique/20261022.OBS119442/le-congres-du-rn-a-orleans-s-annonce-sous-haute-tension-entre-mobilisation-et-interdiction-de-manifester.html",
-     "date": "2026-10-23T09:47:22.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "« Acte II » le 24 octobre : avec Sentinelle, l’armée appelée en renfort pour assurer la protection de zones sensibles",
-     "url": "https://www.lefigaro.fr/actualite-france/acte-ii-le-24-octobre-avec-sentinelle-l-armee-appelee-en-renfort-pour-assurer-la-protection-de-zones-sensibles-20261022",
-     "date": "2026-10-22T18:45:00.000Z"
+     "media": "Nice-Matin",
+     "titre": "« Manifester, c’est bien. Contester, on a le droit. Dégrader et casser, c’est inadmissible » : la Région débloque 6 millions d’euros après les dégradations dans les lycées",
+     "url": "https://www.nicematin.com/societe/politique/manifester-c-est-bien-contester-on-a-le-droit-degrader-et-casser-c-est-inadmissible-la-region-debloque-6-millions-d-euros-apres-les-degradations-dans-les-lycees-10745065",
+     "date": "2026-10-23T11:13:38.000Z"
     },
     {
      "media": "20 Minutes",
-     "titre": "Congrès du RN : Jusqu’à 30.000 opposants attendus à Orléans, 3.000 policiers et gendarmes mobilisés",
-     "url": "https://www.20minutes.fr/politique/4256744-20261022-congres-rn-jusqu-30-000-opposants-attendus-orleans-3-000-policiers-gendarmes-mobilises?at_medium=display&at_campaign=149",
-     "date": "2026-10-22T16:04:25.000Z"
-    }
-   ]
-  },
-  {
-   "id": "social",
-   "titre": "Social",
-   "motifs": [
-    "social",
-    "colère"
-   ],
-   "medias": [
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "L'Humanité",
-    "BFMTV",
-    "RFI",
-    "Le Monde",
-    "Libération",
-    "Mediapart",
-    "Nice-Matin",
-    "L'Obs",
-    "Le Figaro",
-    "La Croix"
-   ],
-   "mediasDistincts": 11,
-   "sources": [
-    "EBRA",
-    "L'Humanité",
-    "BFMTV",
-    "RFI",
-    "Le Monde",
-    "Libération",
-    "Mediapart",
-    "Nice-Matin",
-    "L'Obs",
-    "Le Figaro",
-    "La Croix"
-   ],
-   "nb": 20,
-   "derniere": "2026-10-24T13:30:00.000Z",
-   "articles": [
-    {
-     "media": "Le Progrès",
-     "titre": "Social. Mobilisation du 24 octobre : des milliers de manifestants défilent dans le calme à Paris",
-     "url": "https://www.leprogres.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T13:30:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Mobilisation du 24 octobre : des milliers de manifestants défilent dans le calme à Paris",
-     "url": "https://www.dna.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T13:30:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Social. Mobilisation du 24 octobre : des milliers de manifestants défilent dans le calme à Paris",
-     "url": "https://www.ledauphine.com/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T13:30:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Social. Mobilisation du 24 octobre : des milliers de manifestants défilent dans le calme à Paris",
-     "url": "https://www.estrepublicain.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T13:30:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Baisse des budgets culturels et sociaux, prix du carburant… Le coût de la guerre",
-     "url": "https://www.humanite.fr/politique/chronique/baisse-des-budgets-culturels-et-sociaux-prix-du-carburant-le-cout-de-la-guerre",
-     "date": "2026-10-24T12:33:00.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Manifestation du 24 octobre à Paris: Clémentine Autain exprime sa \"colère profonde contre un pouvoir qui désorganise les manifestations\"",
-     "url": "https://www.bfmtv.com/politique/video-manifestation-du-24-octobre-a-paris-clementine-autain-exprime-sa-colere-profonde-contre-un-pouvoir-qui-desorganise-les-manifestations_VN-202610240232.html",
-     "date": "2026-10-24T10:52:01.000Z",
+     "titre": "Interdiction de manifester : que risque-t-on si on manifeste quand même ?",
+     "url": "https://www.20minutes.fr/tv/videos/4256897-20261023-interdiction-manifester-risque-si-manifeste-quand?at_medium=display&at_campaign=149",
+     "date": "2026-10-23T09:37:53.000Z",
      "video": true
-    },
-    {
-     "media": "RFI",
-     "titre": "France: réuni à Orléans autour de Marine Le Pen, le RN cherche une démonstration de force en pleines tensions sociales",
-     "url": "https://www.rfi.fr/fr/france/20261024-france-r%C3%A9uni-%C3%A0-orl%C3%A9ans-autour-de-marine-le-pen-le-rn-cherche-une-d%C3%A9monstration-de-force-en-pleines-tensions-sociales",
-     "date": "2026-10-24T05:09:52.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "A Trappes, après les tirs meurtriers, la colère et le fatalisme face au racisme ambiant : « On savait qu’un jour ou l’autre, une telle attaque allait arriver »",
-     "url": "https://www.lemonde.fr/societe/article/2026/10/24/a-trappes-apres-les-tirs-meurtriers-la-colere-et-le-fatalisme-face-au-racisme-ambiant-on-savait-qu-un-jour-ou-l-autre-une-telle-attaque-allait-arriver_6799654_3224.html",
-     "date": "2026-10-24T04:50:11.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Mouvement social : le parcours parisien changé par la préfecture",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-macron-recoit-les-lyceens-ce-vendredi-alors-que-les-arretes-dinterdiction-se-multiplient-20261023_PJGBRMNUHJDWRH47JQNWLR3FPA/",
-     "date": "2026-10-23T20:15:15.000Z"
-    },
-    {
-     "media": "Mediapart",
-     "titre": "En première ligne, les maires oscillent entre inquiétude, colère et volontarisme",
-     "url": "https://www.mediapart.fr/journal/france/231026/en-premiere-ligne-les-maires-oscillent-entre-inquietude-colere-et-volontarisme",
-     "date": "2026-10-23T18:21:08.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "4 à 5 étages, supérette, logements sociaux… À quoi va ressembler ce futur immeuble du centre-ville de La Trinité ?",
-     "url": "https://www.nicematin.com/societe/4-a-5-etages-superette-logements-sociaux-a-quoi-va-ressembler-ce-futur-immeuble-du-centre-ville-de-la-trinite-10745122",
-     "date": "2026-10-23T14:45:04.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Mouvement social : « Les images ne créent pas de comportement d’imitation »",
-     "url": "https://www.nouvelobs.com/social/20261023.OBS119455/mouvement-social-les-images-ne-creent-pas-de-comportement-d-imitation.html",
-     "date": "2026-10-23T09:17:01.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "17 octobre : Sébastien Lecornu au défi de trouver une réponse politique à la colère sociale",
-     "url": "https://www.lefigaro.fr/politique/17-octobre-sebastien-lecornu-au-defi-de-trouver-une-reponse-politique-a-la-colere-sociale-20261020",
-     "date": "2026-10-23T06:56:56.000Z"
-    },
-    {
-     "media": "La Croix",
-     "titre": "Manifestations du 17 octobre : comment lutter contre la polarisation politique en pleine crise sociale",
-     "url": "https://www.la-croix.com/politique/manifestations-du-17-octobre-comment-lutter-contre-la-polarisation-politique-en-pleine-crise-sociale-20261022",
-     "date": "2026-10-23T04:30:03.000Z"
     }
    ]
   },
   {
-   "id": "reelu",
-   "titre": "Réélu",
+   "id": "national",
+   "titre": "National",
    "motifs": [
-    "réélu",
-    "national"
+    "national",
+    "réélu"
    ],
    "medias": [
     "Le Progrès",
@@ -462,7 +356,6 @@
     "Le Dauphiné libéré",
     "L'Est républicain",
     "Le Monde",
-    "France 24",
     "Europe 1",
     "20 Minutes",
     "La Dépêche",
@@ -470,11 +363,10 @@
     "Libération",
     "Nice-Matin"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 8,
    "sources": [
     "EBRA",
     "Le Monde",
-    "France 24",
     "Europe 1",
     "20 Minutes",
     "La Dépêche",
@@ -482,7 +374,7 @@
     "Libération",
     "Nice-Matin"
    ],
-   "nb": 15,
+   "nb": 14,
    "derniere": "2026-10-24T14:11:00.000Z",
    "articles": [
     {
@@ -511,7 +403,7 @@
     },
     {
      "media": "Le Progrès",
-     "titre": "Métropole de Lyon. L’ancien maire de Chassieu, Jean-Jacques Sellès rallie le Rassemblement national",
+     "titre": "Chassieu. L’ancien maire, Jean-Jacques Sellès, rallie le Rassemblement national",
      "url": "https://www.leprogres.fr/politique/2026/10/24/l-ancien-maire-de-chassieu-jean-jacques-selles-rallie-le-rassemblement-national",
      "date": "2026-10-24T14:09:00.000Z"
     },
@@ -520,12 +412,6 @@
      "titre": "Au congrès du RN à Orléans, Jordan Bardella, seul candidat à sa succession, est réélu président du parti avec 98,98 % des voix",
      "url": "https://www.lemonde.fr/politique/article/2026/10/24/au-congres-du-rn-a-orleans-jordan-bardella-seul-candidat-a-sa-succession-est-reelu-president-du-parti-avec-98-98-des-voix_6799707_823448.html",
      "date": "2026-10-24T14:06:15.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Jordan Bardella, réélu président du RN avec 98,98 % des voix",
-     "url": "https://www.france24.com/fr/france/20261024-jordan-bardella-r%C3%A9%C3%A9lu-pr%C3%A9sident-du-rn-avec-98-98-des-voix",
-     "date": "2026-10-24T14:04:58.000Z"
     },
     {
      "media": "Europe 1",
@@ -559,6 +445,12 @@
      "video": true
     },
     {
+     "media": "Europe 1",
+     "titre": "Rassemblement national : les enjeux du congrès d'Orléans pour Marine Le Pen et Jordan Bardella",
+     "url": "https://www.europe1.fr/politique/rassemblement-national-les-enjeux-du-congres-dorleans-pour-marine-le-pen-et-jordan-bardella-1177161?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-24T05:02:00.000Z"
+    },
+    {
      "media": "Libération",
      "titre": "Entre le Rassemblement national et la macronie, le nouvel en même temps",
      "url": "https://www.liberation.fr/politique/elections/entre-le-rassemblement-national-et-la-macronie-le-nouvel-en-meme-temps-20261024_FMKHEXGWJJF73M27DKH4P4PMSE/",
@@ -569,6 +461,113 @@
      "titre": "Congrès du Rassemblement national à Orléans ce week-end : un dispositif de sécurité « exceptionnel » face aux craintes de débordements",
      "url": "https://www.nicematin.com/societe/politique/congres-du-rassemblement-national-a-orleans-ce-week-end-un-dispositif-de-securite-exceptionnel-face-aux-craintes-de-debordements-10744725",
      "date": "2026-10-22T16:25:05.000Z"
+    }
+   ]
+  },
+  {
+   "id": "presidentielle",
+   "titre": "Présidentielle",
+   "motifs": [
+    "présidentielle"
+   ],
+   "medias": [
+    "Mediapart",
+    "La Dépêche",
+    "Valeurs actuelles",
+    "BFMTV",
+    "Public Sénat",
+    "Libération",
+    "L'Obs",
+    "Ouest-France",
+    "Le JDD"
+   ],
+   "mediasDistincts": 9,
+   "sources": [
+    "Mediapart",
+    "La Dépêche",
+    "Valeurs actuelles",
+    "BFMTV",
+    "Public Sénat",
+    "Libération",
+    "L'Obs",
+    "Ouest-France",
+    "Le JDD"
+   ],
+   "nb": 12,
+   "derniere": "2026-10-24T13:59:20.000Z",
+   "articles": [
+    {
+     "media": "Mediapart",
+     "titre": "Au Brésil, c’est «le plus compromis du clan» Bolsonaro qui veut reconquérir la présidence",
+     "url": "https://www.mediapart.fr/journal/international/241026/au-bresil-c-est-le-plus-compromis-du-clan-bolsonaro-qui-veut-reconquerir-la-presidence",
+     "date": "2026-10-24T13:59:20.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "DIRECT. Présidentielle 2027 : seul candidat, Jordan Bardella réélu président du RN avec 98,98 % des voix au congrès d’Orléans",
+     "url": "https://www.ladepeche.fr/2026/10/24/direct-presidentielle-2027-un-congres-du-rn-sous-haute-surveillance-ce-week-end-a-orleans-ou-un-rassemblement-contre-le-racisme-le-fascisme-et-13618227.php",
+     "date": "2026-10-24T13:50:32.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "Présidentielle 2027 : « Je suis très inquiet sur le financement », la campagne de Marine Le Pen au risque de l’impasse bancaire",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/politique/la-campagne-de-marine-le-pen-au-risque-de-limpasse-financiere",
+     "date": "2026-10-24T13:02:51.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Changement du parcours de la manifestation à Paris: Jean-Luc Mélenchon, candidat LFI à la présidentielle, souligne \"une discipline collective magnifique\"",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-changement-du-parcours-de-la-manifestation-a-paris-jean-luc-melenchon-candidat-lfi-a-la-presidentielle-souligne-une-discipline-collective-magnifique_VN-202610240273.html",
+     "date": "2026-10-24T12:37:35.000Z",
+     "video": true
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Cap sur l’Élysée » : Public Sénat lance sa série documentaire sur la présidentielle, à voir en avant-première",
+     "url": "https://www.publicsenat.fr/actualites/politique/cap-sur-lelysee-public-senat-lance-sa-serie-documentaire-sur-la-presidentielle-a-voir-en-avant-premiere",
+     "date": "2026-10-24T06:00:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Manifestations du 24 octobre : à six mois de la présidentielle, le pouvoir politique est nu",
+     "url": "https://www.liberation.fr/idees-et-debats/manifestations-du-24-octobre-a-six-mois-de-la-presidentielle-le-pouvoir-politique-est-nu-20261023_6GJXECVYJ5FLVC5YQCNP2S3WYY/",
+     "date": "2026-10-23T18:11:41.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Comment le 17 octobre a mis la présidentielle encore plus sous tension",
+     "url": "https://www.nouvelobs.com/politique/20261021.OBS119387/comment-le-17-octobre-a-mis-la-presidentielle-encore-plus-sous-tension.html",
+     "date": "2026-10-23T17:25:50.000Z"
+    },
+    {
+     "media": "Ouest-France",
+     "titre": "Présidentielle 2027 : pour Marine Le Pen et Jordan Bardella, les 4 enjeux d’un congrès RN sous haute tension à Orléans",
+     "url": "https://www.ouest-france.fr/politique/marine-le-pen/pour-marine-le-pen-et-jordan-bardella-les-quatre-enjeux-dun-congres-du-rn-sous-haute-tension-a-orleans-05140f04-cee9-11f1-a953-ed5fcc297d72?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "date": "2026-10-23T16:07:00.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 : 3 000 policiers et gendarmes mobilisés face aux 30 000 opposants attendus, le congrès du RN à Orléans sous haute surveillance",
+     "url": "https://www.ladepeche.fr/2026/10/23/presidentielle-2027-3-000-policiers-et-gendarmes-mobilises-face-aux-30-000-opposants-attendus-le-congres-du-rn-a-orleans-sous-haute-surveillance-13616927.php",
+     "date": "2026-10-23T14:23:57.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 - sondage : Marine Le Pen recueillerait 70 % des voix face à Jean-Luc Mélenchon au second tour selon une nouvelle enquête d’intentions de vote",
+     "url": "https://www.ladepeche.fr/2026/10/23/presidentielle-2027-sondage-marine-le-pen-recueillerait-70-des-voix-face-a-jean-luc-melenchon-au-second-tour-selon-une-nouvelle-enquete-dintentions-de-13616878.php",
+     "date": "2026-10-23T12:12:22.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "SONDAGE. Présidentielle 2027 : Marine Le Pen domine à 36 %, Lisnard devance Attal",
+     "url": "https://www.lejdd.fr/politique/sondage-presidentielle-2027-marine-le-pen-domine-a-36-lisnard-devance-attal-186765",
+     "date": "2026-10-23T06:54:16.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Présidentielle 2027 : Edouard Philippe lance ses idées sans imprimer",
+     "url": "https://www.liberation.fr/politique/presidentielle-2027-edouard-philippe-lance-ses-idees-sans-imprimer-20261023_P4O7AV4C2NHR3DAU5QWB36QFTE/",
+     "date": "2026-10-23T03:52:00.000Z"
     }
    ]
   }
@@ -659,7 +658,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Réélu",
+    "titre": "National",
     "origine": "dossier"
    },
    "fait": "Seul à se présenter, Jordan Bardella est réélu à la tête du Rassemblement national",
@@ -802,151 +801,6 @@
    ]
   },
   {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "La Dépêche",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-24T04:47:48.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "REPLAY. Fusillade à Trappes : Emmanuel Macron dénonce un \"attentat\" commis \"sur la base d'une idéologie raciste\"",
-     "url": "https://www.ladepeche.fr/2026/10/23/direct-fusillade-a-trappes-un-mort-et-quatre-blesses-graves-le-parquet-antiterroriste-saisi-laurent-nunez-attendu-sur-place-13616859.php",
-     "media": "La Dépêche",
-     "date": "2026-10-24T04:47:48.000Z"
-    },
-    {
-     "titre": "France: attentat meurtrier à Trappes, Emmanuel Macron dénonce un acte fondé sur «une idéologie raciste»",
-     "url": "https://www.rfi.fr/fr/france/20261023-france-un-homme-tire-en-rafales-en-banlieue-parisienne-le-parquet-antiterroriste-se-saisit",
-     "media": "RFI",
-     "date": "2026-10-23T12:53:58.000Z"
-    },
-    {
-     "titre": "Tirs à Trappes : Macron évoque \"un tournant\" et dénonce un \"attentat\" commis \"sur la base d'une idéologie raciste\"",
-     "url": "https://www.france24.com/fr/france/20261023-homme-tire-rue-yvelines-un-mort-plusieurs-bless%C3%A9s-pnat",
-     "media": "France 24",
-     "date": "2026-10-23T10:41:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Idéologie raciste",
-    "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "La Croix",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-23T19:18:54.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mouvement lycéen : après leur rencontre avec Macron, les représentants appellent à continuer à se mobiliser",
-     "url": "https://www.la-croix.com/politique/mouvement-lyceen-apres-leur-rencontre-avec-macron-les-representants-appellent-a-continuer-a-se-mobiliser-20261023",
-     "media": "La Croix",
-     "date": "2026-10-23T19:18:54.000Z"
-    },
-    {
-     "titre": "Colère sociale en France: des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée",
-     "url": "https://www.rfi.fr/fr/france/20261023-direct-col%C3%A8re-sociale-en-france-emmanuel-macron-re%C3%A7oit-les-lyc%C3%A9ens-et-va-%C3%A0-la-rencontre-des-forces-de-l-ordre",
-     "media": "RFI",
-     "date": "2026-10-23T09:21:31.000Z"
-    },
-    {
-     "titre": "Après leur rencontre avec Macron, les représentants lycéens appellent à poursuivre la mobilisation",
-     "url": "https://www.france24.com/fr/france/20261022-en-direct-france-macron-recoit-lyceens-rencontre-forces-de-l-ordre-lecornu-limoges-manifestations",
-     "media": "France 24",
-     "date": "2026-10-22T22:55:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : appel sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "fait": "Les représentants lycéens appellent à poursuivre la mobilisation",
-   "accroche": "Les représentants lycéens appellent à poursuivre la mobilisation",
-   "essentiel": "Pendant la colère sociale en France, des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée. Trois médias en parlent : La Croix, RFI et France 24."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "BFMTV",
-    "RFI"
-   ],
-   "derniere": "2026-10-24T13:07:47.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 24 octobre: Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car \"après, il ne lui restera plus que la porte de sortie\"",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/manifestations-du-24-octobre-jean-luc-melenchon-appelle-emmanuel-macron-a-ceder-face-aux-revendications-car-apres-il-ne-lui-restera-plus-que-la-porte-de-sortie_AD-202610240286.html",
-     "media": "BFMTV",
-     "date": "2026-10-24T13:07:47.000Z"
-    },
-    {
-     "titre": "DIRECT - Mobilisation en France: Jean-Luc Mélenchon exhorte Emmanuel Macron à «céder» face aux revendications",
-     "url": "https://www.rfi.fr/fr/france/20261024-direct-manifestations-en-france-des-nombreux-d%C3%A9fil%C3%A9s-attendus-dans-un-contexte-de-fortes-tensions-s%C3%A9curitaires",
-     "media": "RFI",
-     "date": "2026-10-24T06:57:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Mobilisation",
-    "origine": "dossier"
-   },
-   "fait": "Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car",
-   "accroche": "Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car",
-   "essentiel": "Pendant la manifestations du 24 octobre, Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car. Deux médias en parlent : BFMTV et RFI."
-  },
-  {
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
@@ -975,8 +829,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
-    "origine": "dossier"
+    "titre": "Nouvelle mobilisation",
+    "origine": "recoupement"
    },
    "fait": "Les « gilets jaunes » appellent à une nouvelle mobilisation samedi 31 octobre pour « la défense des libertés publiques » et contre",
    "accroche": "Les « gilets jaunes » appellent à une nouvelle mobilisation samedi 31 octobre pour « la défense des libertés publiques » et contre",
@@ -1134,9 +988,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "National",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -1150,6 +1003,89 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "La Dépêche",
+    "RFI"
+   ],
+   "derniere": "2026-10-24T04:47:48.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "REPLAY. Fusillade à Trappes : Emmanuel Macron dénonce un \"attentat\" commis \"sur la base d'une idéologie raciste\"",
+     "url": "https://www.ladepeche.fr/2026/10/23/direct-fusillade-a-trappes-un-mort-et-quatre-blesses-graves-le-parquet-antiterroriste-saisi-laurent-nunez-attendu-sur-place-13616859.php",
+     "media": "La Dépêche",
+     "date": "2026-10-24T04:47:48.000Z"
+    },
+    {
+     "titre": "France: attentat meurtrier à Trappes, Emmanuel Macron dénonce un acte fondé sur «une idéologie raciste»",
+     "url": "https://www.rfi.fr/fr/france/20261023-france-un-homme-tire-en-rafales-en-banlieue-parisienne-le-parquet-antiterroriste-se-saisit",
+     "media": "RFI",
+     "date": "2026-10-23T12:53:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Idéologie raciste",
+    "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "La Croix",
+    "RFI"
+   ],
+   "derniere": "2026-10-23T19:18:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen : après leur rencontre avec Macron, les représentants appellent à continuer à se mobiliser",
+     "url": "https://www.la-croix.com/politique/mouvement-lyceen-apres-leur-rencontre-avec-macron-les-representants-appellent-a-continuer-a-se-mobiliser-20261023",
+     "media": "La Croix",
+     "date": "2026-10-23T19:18:54.000Z"
+    },
+    {
+     "titre": "Colère sociale en France: des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée",
+     "url": "https://www.rfi.fr/fr/france/20261023-direct-col%C3%A8re-sociale-en-france-emmanuel-macron-re%C3%A7oit-les-lyc%C3%A9ens-et-va-%C3%A0-la-rencontre-des-forces-de-l-ordre",
+     "media": "RFI",
+     "date": "2026-10-23T09:21:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : appel sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "Les représentants appellent à continuer à se mobiliser",
+   "accroche": "Les représentants appellent à continuer à se mobiliser",
+   "essentiel": "Pendant la colère sociale en France, des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée. Deux médias en parlent : La Croix et RFI."
   },
   {
    "medias": 2,
@@ -1221,8 +1157,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
-    "origine": "dossier"
+    "titre": "Policiers et gendarmes mobilisés",
+    "origine": "recoupement"
    },
    "fait": "Jusqu’à 30 000 opposants attendus à Orléans, 3 000 policiers et gendarmes mobilisés",
    "accroche": "Jusqu’à 30 000 opposants attendus à Orléans, 3 000 policiers et gendarmes mobilisés",
@@ -1409,7 +1345,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
+    "titre": "Manifestations",
     "origine": "dossier"
    },
    "fait": "Mobilisation du 24 octobre : des milliers de manifestants défilent dans le calme à Paris",
@@ -1556,12 +1492,12 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "L'Est républicain"
    ],
-   "derniere": "2026-10-22T16:12:38.000Z",
+   "derniere": "2026-10-24T14:40:10.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1570,26 +1506,47 @@
    },
    "articles": [
     {
-     "titre": "Le virus Shamonda détecté pour la première fois chez l'être humain en France, un patient immunodéprimé décède",
-     "url": "https://www.rfi.fr/fr/france/20261022-le-virus-shamonda-d%C3%A9tect%C3%A9-pour-la-premi%C3%A8re-fois-chez-l-%C3%AAtre-humain-en-france-un-patient-immunod%C3%A9prim%C3%A9-d%C3%A9c%C3%A8de",
-     "media": "RFI",
-     "date": "2026-10-22T16:12:38.000Z"
-    },
-    {
-     "titre": "Le virus Shamonda détecté pour la première fois chez un être humain en France",
-     "url": "https://www.france24.com/fr/france/20261022-virus-shamonda-d%C3%A9tect%C3%A9-premi%C3%A8re-fois-%C3%AAtre-humain-france",
-     "media": "France 24",
-     "date": "2026-10-22T11:02:47.000Z"
+     "titre": "Villecey-sur-Mad. Natura 2000 : quatorze arbres seront préservés pendant 30 ans",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/24/natura-2000-quatorze-arbres-seront-preserves-pendant-30-ans",
+     "media": "L'Est républicain",
+     "date": "2026-10-24T14:40:10.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
+    "titre": "Villecey-sur-Mad : actualité locale",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Le virus Shamonda détecté pour la première fois chez l'être humain en France",
-   "accroche": "Le virus Shamonda détecté pour la première fois chez l'être humain en France",
-   "essentiel": "Le virus Shamonda détecté pour la première fois chez l'être humain en France, un patient immunodéprimé décède. Deux médias en parlent : RFI et France 24."
+   "fait": "Quatorze arbres seront préservés pendant 30 ans",
+   "accroche": "Quatorze arbres seront préservés pendant 30 ans"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-24T14:34:52.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Manifestation du 24 octobre : à Lyon, les lacrymos pleuvent pour disperser les manifestants",
+     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-nouvelle-journee-de-mobilisation-ce-samedi-sous-haute-tension-20261024_3M2CMHWFRJBM7PMWOQ47Q4DYHU/",
+     "media": "Libération",
+     "date": "2026-10-24T14:34:52.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   },
+   "fait": "À Lyon, les lacrymos pleuvent pour disperser les manifestants",
+   "accroche": "À Lyon, les lacrymos pleuvent pour disperser les manifestants"
   },
   {
    "medias": 1,
@@ -1614,9 +1571,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    }
   },
   {
@@ -1641,7 +1597,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
+    "titre": "Manifestations",
     "origine": "dossier"
    }
   },
@@ -1682,35 +1638,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-10-24T14:21:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT – Manifestation du 24 octobre : à Lyon, les lacrymos pleuvent pour disperser les manifestants",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-nouvelle-journee-de-mobilisation-ce-samedi-sous-haute-tension-20261024_3M2CMHWFRJBM7PMWOQ47Q4DYHU/",
-     "media": "Libération",
-     "date": "2026-10-24T14:21:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "À Lyon, les lacrymos pleuvent pour disperser les manifestants",
-   "accroche": "À Lyon, les lacrymos pleuvent pour disperser les manifestants"
   },
   {
    "medias": 1,
@@ -1784,15 +1711,15 @@
    },
    "articles": [
     {
-     "titre": "Métropole de Lyon. L’ancien maire de Chassieu, Jean-Jacques Sellès rallie le Rassemblement national",
+     "titre": "Chassieu. L’ancien maire, Jean-Jacques Sellès, rallie le Rassemblement national",
      "url": "https://www.leprogres.fr/politique/2026/10/24/l-ancien-maire-de-chassieu-jean-jacques-selles-rallie-le-rassemblement-national",
      "media": "Le Progrès",
      "date": "2026-10-24T14:09:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Métropole de Lyon : vie municipale",
-    "origine": "regles"
+    "titre": "National",
+    "origine": "dossier"
    }
   },
   {
@@ -1822,49 +1749,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-24T14:04:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jordan Bardella, réélu président du RN avec 98,98 % des voix",
-     "url": "https://www.france24.com/fr/france/20261024-jordan-bardella-r%C3%A9%C3%A9lu-pr%C3%A9sident-du-rn-avec-98-98-des-voix",
-     "media": "France 24",
-     "date": "2026-10-24T14:04:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Réélu",
-    "origine": "dossier"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -1943,8 +1827,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2090,6 +1975,48 @@
    },
    "fait": "La manifestation scindée en deux à Grenoble, des affrontements entre jeunes encagoulés et policiers",
    "accroche": "La manifestation scindée en deux à Grenoble, des affrontements entre jeunes encagoulés et policiers"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-24T13:07:47.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 24 octobre: Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car \"après, il ne lui restera plus que la porte de sortie\"",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/manifestations-du-24-octobre-jean-luc-melenchon-appelle-emmanuel-macron-a-ceder-face-aux-revendications-car-apres-il-ne-lui-restera-plus-que-la-porte-de-sortie_AD-202610240286.html",
+     "media": "BFMTV",
+     "date": "2026-10-24T13:07:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   },
+   "fait": "Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car",
+   "accroche": "Jean-Luc Mélenchon appelle Emmanuel Macron à \"céder\" face aux revendications car"
   },
   {
    "medias": 1,
@@ -2347,8 +2274,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
-    "origine": "dossier"
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
    },
    "fait": "Baisse des budgets culturels et sociaux",
    "accroche": "Baisse des budgets culturels et sociaux"
@@ -2767,9 +2694,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Orléans : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "National",
+    "origine": "dossier"
    },
    "fait": "Des manifestants défilent contre la tenue d'un congrès du Rassemblement national",
    "accroche": "Des manifestants défilent contre la tenue d'un congrès du Rassemblement national"
@@ -2804,9 +2730,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "fait": "Jean-Luc Mélenchon appelle les manifestants à rejoindre la Porte d’Italie",
    "accroche": "Jean-Luc Mélenchon appelle les manifestants à rejoindre la Porte d’Italie"
@@ -2839,35 +2764,6 @@
    },
    "fait": "Premières glissades dès ce lundi pour les jeunes qui ont imaginé le pumptrack",
    "accroche": "Premières glissades dès ce lundi pour les jeunes qui ont imaginé le pumptrack"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-24T11:11:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Fusillade meurtrière dans les Yvelines : la garde à vue du suspect prolongée",
-     "url": "https://www.france24.com/fr/france/20261024-fusillade-meurtri%C3%A8re-dans-les-yvelines-la-garde-%C3%A0-vue-du-suspect-prolong%C3%A9e",
-     "media": "France 24",
-     "date": "2026-10-24T11:11:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La garde à vue du suspect prolongée",
-   "accroche": "La garde à vue du suspect prolongée"
   },
   {
    "medias": 1,
@@ -3041,9 +2937,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    }
   },
   {
@@ -4661,6 +4556,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-10-24T06:57:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT - Mobilisation en France: des manifestations sous très haute sécurité et sans incident majeur",
+     "url": "https://www.rfi.fr/fr/france/20261024-direct-manifestations-en-france-des-nombreux-d%C3%A9fil%C3%A9s-attendus-dans-un-contexte-de-fortes-tensions-s%C3%A9curitaires",
+     "media": "RFI",
+     "date": "2026-10-24T06:57:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-10-24T06:50:53.000Z",
@@ -4690,9 +4611,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Laure Lavalette (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "contexte": [
     {
@@ -4763,6 +4683,35 @@
      "source": "Assemblée nationale (agenda officiel)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-24T06:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Des évangélistes aux salafistes : une conférence sur les fanatismes religieux pour la rentrée de cette association à Marmande",
+     "url": "https://www.sudouest.fr/tourisme/agenda/des-evangelistes-aux-salafistes-une-conference-sur-les-fanatismes-religieux-pour-la-rentree-de-cette-association-a-marmande-30975407.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-24T06:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Une conférence sur les fanatismes religieux pour la rentrée de cette association à Marmande",
+   "accroche": "Une conférence sur les fanatismes religieux pour la rentrée de cette association à Marmande"
   }
  ]
 }
