@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-25T17:10:40.088Z",
+ "lastUpdated": "2026-10-25T17:15:44.410Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -154,11 +154,13 @@
    "titre": "Congrès",
    "motifs": [
     "congrès",
-    "réélu",
     "perturbé",
+    "réélu",
     "discours"
    ],
    "medias": [
+    "Le Monde",
+    "Sud Ouest",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
@@ -167,37 +169,46 @@
     "BFMTV",
     "L'Humanité",
     "Europe 1",
-    "Sud Ouest",
-    "Le Monde",
     "20 Minutes",
     "L'Obs",
     "RFI",
     "Mediapart",
     "Public Sénat",
     "Libération",
-    "L'Express",
-    "France 24"
+    "L'Express"
    ],
    "mediasDistincts": 14,
    "sources": [
+    "Le Monde",
+    "Sud Ouest",
     "EBRA",
     "La Dépêche",
     "BFMTV",
     "L'Humanité",
     "Europe 1",
-    "Sud Ouest",
-    "Le Monde",
     "20 Minutes",
     "L'Obs",
-    "France Médias Monde",
+    "RFI",
     "Mediapart",
     "Public Sénat",
     "Libération",
     "L'Express"
    ],
    "nb": 41,
-   "derniere": "2026-10-25T16:57:00.000Z",
+   "derniere": "2026-10-25T17:10:16.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Congrès du RN : pour son premier discours de campagne, Marine Le Pen dit vouloir présider à la « Renaissance » de la France",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/25/congres-du-rn-pour-son-premier-discours-de-campagne-marine-le-pen-dit-vouloir-presider-a-la-renaissance-de-la-france_6800086_823449.html",
+     "date": "2026-10-25T17:10:16.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Israël : Benjamin Netanyahu met en garde l’Iran contre toute tentative de perturber les élections législatives",
+     "url": "https://www.sudouest.fr/international/israel-benjamin-netanyahu-met-en-garde-l-iran-contre-toute-tentative-de-perturber-les-elections-legislatives-31238972.php",
+     "date": "2026-10-25T17:07:56.000Z"
+    },
     {
      "media": "Le Progrès",
      "titre": "La vidéo du jour. Congrès du RN : le discours de Jordan Bardella perturbé, plusieurs personnes expulsées de la salle",
@@ -248,18 +259,6 @@
      "date": "2026-10-25T16:02:56.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Congrès du RN à Orléans : une centaine de militants antifascistes rassemblés malgré les interdictions",
-     "url": "https://www.sudouest.fr/politique/congres-du-rn-a-orleans-une-centaine-de-militants-antifascistes-rassembles-malgre-les-interdictions-31237169.php",
-     "date": "2026-10-25T15:46:32.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Congrès du RN : Marine Le Pen lance sa campagne à Orléans avec un premier meeting",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/25/congres-du-rn-a-orleans-une-centaine-de-militants-antifascistes-se-rassemblent-malgre-les-interdictions_6800086_823448.html",
-     "date": "2026-10-25T13:42:55.000Z"
-    },
-    {
      "media": "20 Minutes",
      "titre": "Des contrôles de soutien-gorge ont-ils été menés au congrès du RN à Orléans ?",
      "url": "https://www.20minutes.fr/politique/4257320-20261025-controles-soutien-gorge-menes-congres-rn-orleans?at_medium=display&at_campaign=149",
@@ -300,136 +299,150 @@
      "titre": "Congrès du RN : Jordan Bardella est réélu sans concurrence à la tête du parti, avec 98,98 % des voix",
      "url": "https://www.lexpress.fr/politique/rn/congres-du-rn-jordan-bardella-est-reelu-president-du-parti-a-9898-des-voix-TEQRTZIBTVCZXLAUCC5Z45DRBU/",
      "date": "2026-10-24T15:07:54.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Jordan Bardella, réélu président du Rassemblement national avec 98,98 % des voix",
-     "url": "https://www.france24.com/fr/france/20261024-jordan-bardella-r%C3%A9%C3%A9lu-pr%C3%A9sident-du-rn-avec-98-98-des-voix",
-     "date": "2026-10-24T14:04:58.000Z"
     }
    ]
   },
   {
-   "id": "interdictions",
-   "titre": "Interdictions",
+   "id": "presidentielle",
+   "titre": "Présidentielle",
    "motifs": [
-    "interdictions"
+    "présidentielle",
+    "candidate",
+    "lance",
+    "menace"
    ],
    "medias": [
-    "BFMTV",
-    "Europe 1",
-    "Sud Ouest",
     "Le Monde",
-    "L'Obs",
+    "Le JDD",
+    "La Dépêche",
+    "BFMTV",
+    "L'Est républicain",
+    "L'Humanité",
+    "Le Dauphiné libéré",
+    "L'Express",
+    "Sud Ouest",
+    "20 Minutes",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
-    "L'Est républicain",
-    "France 24",
     "Libération",
-    "La Dépêche",
-    "La Croix",
-    "RFI"
-   ],
-   "mediasDistincts": 10,
-   "sources": [
-    "BFMTV",
     "Europe 1",
-    "Sud Ouest",
-    "Le Monde",
-    "L'Obs",
-    "EBRA",
-    "France Médias Monde",
-    "Libération",
-    "La Dépêche",
+    "Public Sénat",
     "La Croix"
    ],
-   "nb": 19,
-   "derniere": "2026-10-25T16:17:40.000Z",
+   "mediasDistincts": 12,
+   "sources": [
+    "Le Monde",
+    "Groupe Bolloré",
+    "La Dépêche",
+    "BFMTV",
+    "EBRA",
+    "L'Humanité",
+    "L'Express",
+    "Sud Ouest",
+    "20 Minutes",
+    "Libération",
+    "Public Sénat",
+    "La Croix"
+   ],
+   "nb": 48,
+   "derniere": "2026-10-25T17:10:16.000Z",
    "articles": [
     {
-     "media": "BFMTV",
-     "titre": "\"Nous abolirons la stupide loi Hulot qui interdit la recherche d'hydrocarbures sur le sol français\", annonce Marine Le Pen, candidate RN à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-nous-abolirons-la-stupide-loi-hulot-qui-interdit-la-recherche-d-hydrocarbures-sur-le-sol-francais-annonce-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610250292.html",
-     "date": "2026-10-25T16:17:40.000Z",
-     "video": true
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Congrès du RN : une centaine de militants antifascistes rassemblés malgré les interdictions",
-     "url": "https://www.europe1.fr/politique/congres-du-rn-une-centaine-de-militants-antifascistes-rassembles-malgre-les-interdictions-1181040?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-25T15:55:38.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Congrès du RN à Orléans : une centaine de militants antifascistes rassemblés malgré les interdictions",
-     "url": "https://www.sudouest.fr/politique/congres-du-rn-a-orleans-une-centaine-de-militants-antifascistes-rassembles-malgre-les-interdictions-31237169.php",
-     "date": "2026-10-25T15:46:32.000Z"
-    },
-    {
      "media": "Le Monde",
-     "titre": "Manifestations du 24 octobre : 1 314 personnes interpellées dans toute la France, annonce le ministère de l’intérieur",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/25/manifestations-du-24-octobre-1-314-personnes-interpellees-dans-toute-la-france-annonce-le-ministere-de-l-interieur_6800057_823449.html",
-     "date": "2026-10-25T10:56:52.000Z"
+     "titre": "Congrès du RN : pour son premier discours de campagne, Marine Le Pen dit vouloir présider à la « Renaissance » de la France",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/25/congres-du-rn-pour-son-premier-discours-de-campagne-marine-le-pen-dit-vouloir-presider-a-la-renaissance-de-la-france_6800086_823449.html",
+     "date": "2026-10-25T17:10:16.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "« Il n’est pas normal, en France, d’avoir peur de manifester » : à Dijon le cortège brave l’interdiction préfectorale",
-     "url": "https://www.nouvelobs.com/societe/20261025.OBS119509/il-n-est-pas-normal-en-france-d-avoir-peur-de-manifester-a-dijon-le-cortege-brave-l-interdiction-prefectorale.html",
-     "date": "2026-10-25T09:09:05.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Social. Manifestations du 24 octobre : la mobilisation toujours forte malgré les interdictions, quelques heurts constatés",
-     "url": "https://www.leprogres.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T21:30:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Manifestations du 24 octobre : la mobilisation toujours forte malgré les interdictions, quelques heurts constatés",
-     "url": "https://www.dna.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T21:30:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Social. Manifestations du 24 octobre : la mobilisation toujours forte malgré les interdictions, quelques heurts constatés",
-     "url": "https://www.estrepublicain.fr/social/2026/10/24/mobilisation-du-24-octobre-une-nouvelle-journee-de-manifestations-sous-haute-tension",
-     "date": "2026-10-24T21:30:00.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Mobilisation du 24 octobre : Nuñez salue le déroulé des cortèges, près de 1 000 interpellations",
-     "url": "https://www.france24.com/fr/france/20261024-les-cort%C3%A8ges-se-sont-bien-pass%C3%A9s-d%C3%A9clare-nu%C3%B1ez-qui-comptabilise-pr%C3%A8s-de-1-000-interpellations",
-     "date": "2026-10-24T20:24:19.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Mobilisation du 24 octobre : «Les cortèges se sont bien passés» pour le ministre de l’Intérieur, Laurent Nuñez, qui annonce 1 000 interpellations",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-nouvelle-journee-de-mobilisation-ce-samedi-sous-haute-tension-20261024_3M2CMHWFRJBM7PMWOQ47Q4DYHU/",
-     "date": "2026-10-24T19:52:42.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "A Lyon, la manifestation interdite et étouffée par le gaz lacrymogène",
-     "url": "https://www.lemonde.fr/societe/article/2026/10/24/a-lyon-la-manifestation-interdite-etouffee-par-le-gaz-lacrymogene_6799727_3224.html",
-     "date": "2026-10-24T18:40:14.000Z"
+     "media": "Le JDD",
+     "titre": "«Nous croyons en la France» : Marine Le Pen lance sa campagne sur un ton résolument optimiste",
+     "url": "https://www.lejdd.fr/politique/nous-croyons-en-la-france-marine-le-pen-lance-sa-campagne-sur-un-ton-resolument-optimiste-187002",
+     "date": "2026-10-25T17:06:23.000Z"
     },
     {
      "media": "La Dépêche",
-     "titre": "\"On avait l’impression de vivre un rêve\" : interview d'Élise Lucet, rencontre avec un ministre, visite de l'Assemblée... Le voyage insolite de ces lycéens ariégeois à Paris",
-     "url": "https://www.ladepeche.fr/2026/10/24/on-avait-limpression-de-vivre-un-reve-interview-delise-lucet-rencontre-avec-un-ministre-visite-de-lassemblee-le-voyage-insolite-de-ces-lyceens-13617279.php",
-     "date": "2026-10-24T16:14:02.000Z"
+     "titre": "DIRECT. Présidentielle 2027 : \"Je ne vous propose pas de refaire la France d'avant\", affirme Marine Le Pen au congrès du RN à Orléans, qui veut une \"Renaissance pour la France\"",
+     "url": "https://www.ladepeche.fr/2026/10/25/direct-presidentielle-2027-marine-le-pen-va-tenir-son-premier-grand-meeting-de-campagne-au-congres-du-rn-a-orleans-ce-dimanche-13619521.php",
+     "date": "2026-10-25T16:43:56.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "\"Mon Premier ministre sera Jordan Bardella, il sera le chef d'un gouvernement ouvert et pluraliste\", déclare Marine Le Pen, candidate RN à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-mon-premier-ministre-sera-jordan-bardella-il-sera-le-chef-d-un-gouvernement-ouvert-et-pluraliste-declare-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610250298.html",
+     "date": "2026-10-25T16:34:16.000Z",
+     "video": true
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Chonville-Malaumont. La commune lance son premier conseil municipal des jeunes",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/25/la-commune-lance-son-premier-conseil-municipal-des-jeunes",
+     "date": "2026-10-25T16:29:25.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Midterms 2026 : dans le Michigan Abdul El-Sayed, candidat démocrate défend le Medicare for All",
+     "url": "https://www.humanite.fr/monde/etats-unis/midterms-2026-dans-le-michigan-abdul-el-sayed-candidat-democrate-defend-le-medicare-for-all",
+     "date": "2026-10-25T16:11:22.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Savoie. Face à la menace de déremboursement des cures thermales, des élus en colère contre la ministre de la Santé",
+     "url": "https://www.ledauphine.com/economie/2026/10/25/face-a-la-menace-de-deremboursement-des-cures-thermales-des-elus-en-colere-contre-la-ministre-de-la-sante",
+     "date": "2026-10-25T15:58:00.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "Présidentielle 2027 : Raphaël Glucksmann et le piège du \"moment populiste\"",
+     "url": "https://www.lexpress.fr/politique/presidentielle-2027-raphael-glucksmann-et-le-piege-du-moment-populiste-P42S77ZEVJGEZNHPWUALXGHDEI/",
+     "date": "2026-10-25T15:00:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle : Marine Le Pen lance sa campagne à Orléans et souhaite l’axer sur la « renaissance » avec l’ambition « d’insuffler un peu d’optimisme »",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-marine-le-pen-lance-sa-campagne-a-orleans-et-souhaite-l-axer-sur-la-renaissance-avec-l-ambition-d-insuffler-un-peu-d-optimisme-31234926.php",
+     "date": "2026-10-25T13:22:35.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "En images : Ces acteurs qui se sont lancés dans une élection présidentielle (et ceux qui ont réussi)",
+     "url": "https://www.20minutes.fr/diaporama/diaporama-4256551-images-acteurs-lances-election-presidentielle-ceux-reussi?at_medium=display&at_campaign=149",
+     "date": "2026-10-25T12:07:36.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Brésil. Présidentielle : Lula en danger face à la menace Flavio Bolsonaro",
+     "url": "https://www.leprogres.fr/politique/2026/10/25/presidentielle-lula-en-danger-face-a-la-menace-flavio-bolsonaro",
+     "date": "2026-10-25T07:00:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Brésil. Présidentielle : Lula en danger face à la menace Flavio Bolsonaro",
+     "url": "https://www.dna.fr/politique/2026/10/25/presidentielle-lula-en-danger-face-a-la-menace-flavio-bolsonaro",
+     "date": "2026-10-25T07:00:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Présidentielle 2027 : derrière la percée de David Lisnard, une stratégie d’occupation minutieuse des réseaux sociaux",
+     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-derriere-la-percee-de-david-lisnard-une-strategie-doccupation-minutieuse-des-reseaux-sociaux-20261025_TZN6AHJZE5AHXCRXLTJEJ5U34Y/",
+     "date": "2026-10-25T06:06:00.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Seul candidat, Bardella réélu président du RN avec 98,98% des voix",
+     "url": "https://www.europe1.fr/police-justice/seul-candidat-bardella-reelu-president-du-rn-avec-9898-des-voix-1178640?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-24T13:54:11.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Cap sur l’Élysée » : Public Sénat lance sa série documentaire sur la présidentielle, à voir en avant-première",
+     "url": "https://www.publicsenat.fr/actualites/politique/cap-sur-lelysee-public-senat-lance-sa-serie-documentaire-sur-la-presidentielle-a-voir-en-avant-premiere",
+     "date": "2026-10-24T06:00:00.000Z"
     },
     {
      "media": "La Croix",
-     "titre": "« Le RN n’a sa place ni ici ni ailleurs » : à Orléans, intersyndicale et militants s’affichent unis contre l’extrême droite",
-     "url": "https://www.la-croix.com/societe/le-rn-n-a-sa-place-ni-ici-ni-ailleurs-a-orleans-intersyndicale-et-militants-saffichent-unis-contre-lextreme-droite-20261024",
-     "date": "2026-10-24T14:47:23.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Une loi pour dématérialiser l'état civil des personnes sous protection internationale",
-     "url": "https://www.rfi.fr/fr/podcasts/vivre-ailleurs/20261023-une-loi-pour-d%C3%A9mat%C3%A9rialiser-l-%C3%A9tat-civil-des-personnes-sous-protection-internationale",
-     "date": "2026-10-23T22:02:49.000Z"
+     "titre": "Véhicules autonomes : des villes d’Île-de-France candidates pour tester les robots-taxis",
+     "url": "https://www.la-croix.com/societe/vehicules-autonomes-des-villes-d-ile-de-france-candidates-pour-tester-les-robots-taxis-20261023",
+     "date": "2026-10-23T18:55:50.000Z"
     }
    ]
   },
@@ -662,12 +675,6 @@
      "url": "https://www.ladepeche.fr/2026/10/25/direct-presidentielle-2027-marine-le-pen-va-tenir-son-premier-grand-meeting-de-campagne-au-congres-du-rn-a-orleans-ce-dimanche-13619521.php",
      "media": "La Dépêche",
      "date": "2026-10-25T16:43:56.000Z"
-    },
-    {
-     "titre": "DIRECT. Congrès du RN: Marine Le Pen plaide en faveur d'une \"Renaissance pour la France\"",
-     "url": "https://www.bfmtv.com/politique/direct-le-rassemblement-national-poursuit-son-congres-a-orleans-avec-des-craintes-de-manifestations-d-opposants_LN-202610250042.html",
-     "media": "BFMTV",
-     "date": "2026-10-25T16:34:37.000Z"
     }
    ],
    "titrePropre": {
@@ -733,13 +740,6 @@
      "url": "https://www.estrepublicain.fr/politique/2026/10/25/congres-du-rn-le-discours-de-jordan-bardella-perturbe-plusieurs-personnes-expulsees-de-la-salle",
      "media": "L'Est républicain",
      "date": "2026-10-25T16:57:00.000Z"
-    },
-    {
-     "titre": "\"Rétablir l’État de droit\": les discours de Jordan Bardella et Marine Le Pen au congrès du RN",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-retablir-l-etat-de-droit-les-discours-de-jordan-bardella-et-marine-le-pen-au-congres-du-rn_VN-202610250311.html",
-     "media": "BFMTV",
-     "date": "2026-10-25T16:43:09.000Z",
-     "video": true
     },
     {
      "titre": "Congrès du RN perturbé par l'Union des étudiants juifs de France: \"L'ultragauche est un véritable danger pour la démocratie\", estime Jordan Bardella, président du RN",
@@ -826,55 +826,6 @@
    "essentiel": "Manifestations du 24 octobre : enquête ouverte. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Le Monde."
   },
   {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "La Croix",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-10-23T19:18:54.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mouvement lycéen : après leur rencontre avec Macron, les représentants appellent à continuer à se mobiliser",
-     "url": "https://www.la-croix.com/politique/mouvement-lyceen-apres-leur-rencontre-avec-macron-les-representants-appellent-a-continuer-a-se-mobiliser-20261023",
-     "media": "La Croix",
-     "date": "2026-10-23T19:18:54.000Z"
-    },
-    {
-     "titre": "Colère sociale en France: des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée",
-     "url": "https://www.rfi.fr/fr/france/20261023-direct-col%C3%A8re-sociale-en-france-emmanuel-macron-re%C3%A7oit-les-lyc%C3%A9ens-et-va-%C3%A0-la-rencontre-des-forces-de-l-ordre",
-     "media": "RFI",
-     "date": "2026-10-23T09:21:31.000Z"
-    },
-    {
-     "titre": "Après leur rencontre avec Macron, les représentants lycéens appellent à poursuivre la mobilisation",
-     "url": "https://www.france24.com/fr/france/20261022-en-direct-france-macron-recoit-lyceens-rencontre-forces-de-l-ordre-lecornu-limoges-manifestations",
-     "media": "France 24",
-     "date": "2026-10-22T22:55:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : appel sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "fait": "Les représentants lycéens appellent à poursuivre la mobilisation",
-   "accroche": "Les représentants lycéens appellent à poursuivre la mobilisation",
-   "essentiel": "Pendant la colère sociale en France, des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée. Trois médias en parlent : La Croix, RFI et France 24."
-  },
-  {
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
@@ -905,66 +856,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Congrès",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Congrès du Rassemblement national : une centaine de militants antifascistes rassemblés malgré les interdictions",
    "accroche": "Congrès du Rassemblement national : une centaine de militants antifascistes rassemblés malgré les interdictions",
    "essentiel": "Congrès du Rassemblement national à Orléans : une centaine de militants antifascistes rassemblés malgré les interdictions. Deux médias en parlent : Europe 1 et Sud Ouest."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "France 24",
-    "Le Monde"
-   ],
-   "derniere": "2026-10-25T15:00:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Marine Le Pen promet de ne pas \"refaire la France d'avant\", à son premier meeting de campagne",
-     "url": "https://www.france24.com/fr/france/20261025-marine-le-pen-veut-miser-sur-l-optimisme-pour-son-premier-meeting-de-campagne",
-     "media": "France 24",
-     "date": "2026-10-25T15:00:22.000Z"
-    },
-    {
-     "titre": "Congrès du RN : Marine Le Pen lance sa campagne à Orléans avec un premier meeting",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/25/congres-du-rn-a-orleans-une-centaine-de-militants-antifascistes-se-rassemblent-malgre-les-interdictions_6800086_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-25T13:42:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Congrès",
-    "origine": "dossier"
-   },
-   "fait": "Congrès du Rassemblement national : Marine Le Pen lance sa campagne à Orléans avec un premier meeting",
-   "accroche": "Congrès du Rassemblement national : Marine Le Pen lance sa campagne à Orléans avec un premier meeting",
-   "essentiel": "Congrès du Rassemblement national : Marine Le Pen lance sa campagne à Orléans avec un premier meeting. Deux médias en parlent : France 24 et Le Monde.",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1040,46 +938,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "France 24",
-    "Libération"
-   ],
-   "derniere": "2026-10-24T20:24:19.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation du 24 octobre : Nuñez salue le déroulé des cortèges, près de 1 000 interpellations",
-     "url": "https://www.france24.com/fr/france/20261024-les-cort%C3%A8ges-se-sont-bien-pass%C3%A9s-d%C3%A9clare-nu%C3%B1ez-qui-comptabilise-pr%C3%A8s-de-1-000-interpellations",
-     "media": "France 24",
-     "date": "2026-10-24T20:24:19.000Z"
-    },
-    {
-     "titre": "Mobilisation du 24 octobre : «Les cortèges se sont bien passés» pour le ministre de l’Intérieur, Laurent Nuñez, qui annonce 1 000 interpellations",
-     "url": "https://www.liberation.fr/societe/en-direct-mouvement-social-nouvelle-journee-de-mobilisation-ce-samedi-sous-haute-tension-20261024_3M2CMHWFRJBM7PMWOQ47Q4DYHU/",
-     "media": "Libération",
-     "date": "2026-10-24T19:52:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Interdictions",
-    "origine": "dossier"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "La Dépêche",
     "Ouest-France"
    ],
@@ -1116,6 +974,49 @@
     "jour": 31,
     "mois": "octobre"
    }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "La Croix",
+    "RFI"
+   ],
+   "derniere": "2026-10-23T19:18:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen : après leur rencontre avec Macron, les représentants appellent à continuer à se mobiliser",
+     "url": "https://www.la-croix.com/politique/mouvement-lyceen-apres-leur-rencontre-avec-macron-les-representants-appellent-a-continuer-a-se-mobiliser-20261023",
+     "media": "La Croix",
+     "date": "2026-10-23T19:18:54.000Z"
+    },
+    {
+     "titre": "Colère sociale en France: des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée",
+     "url": "https://www.rfi.fr/fr/france/20261023-direct-col%C3%A8re-sociale-en-france-emmanuel-macron-re%C3%A7oit-les-lyc%C3%A9ens-et-va-%C3%A0-la-rencontre-des-forces-de-l-ordre",
+     "media": "RFI",
+     "date": "2026-10-23T09:21:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : appel sur la mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "Les représentants appellent à continuer à se mobiliser",
+   "accroche": "Les représentants appellent à continuer à se mobiliser",
+   "essentiel": "Pendant la colère sociale en France, des représentants lycéens appellent à «continuer à se mobiliser» après leur venue à l'Élysée. Deux médias en parlent : La Croix et RFI."
   },
   {
    "medias": 2,
@@ -1300,7 +1201,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdictions",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -1340,43 +1241,105 @@
    }
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "L'Obs"
    ],
-   "derniere": "2026-10-23T12:53:58.000Z",
+   "derniere": "2026-10-25T17:15:12.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [],
-    "theme": "securite",
+    "theme": "politique",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "France: attentat meurtrier à Trappes, Emmanuel Macron dénonce un acte fondé sur «une idéologie raciste»",
-     "url": "https://www.rfi.fr/fr/france/20261023-france-un-homme-tire-en-rafales-en-banlieue-parisienne-le-parquet-antiterroriste-se-saisit",
-     "media": "RFI",
-     "date": "2026-10-23T12:53:58.000Z"
-    },
-    {
-     "titre": "Tirs à Trappes : Macron évoque \"un tournant\" et dénonce un \"attentat\" commis \"sur la base d'une idéologie raciste\"",
-     "url": "https://www.france24.com/fr/france/20261023-homme-tire-rue-yvelines-un-mort-plusieurs-bless%C3%A9s-pnat",
-     "media": "France 24",
-     "date": "2026-10-23T10:41:27.000Z"
+     "titre": "Nice, Montpellier, Rouen… Des groupes d’extrême droite répérés dans au moins 17 villes lors des manifestations samedi",
+     "url": "https://www.nouvelobs.com/societe/20261025.OBS119530/nice-montpellier-rouen-des-groupes-d-extreme-droite-reperes-dans-au-moins-17-villes-lors-des-manifestations-samedi.html",
+     "media": "L'Obs",
+     "date": "2026-10-25T17:15:12.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Idéologie raciste",
-    "origine": "recoupement"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-10-25T17:10:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bonvillard. Un projet de city stade à l’étude à côté de la salle des fêtes",
+     "url": "https://www.ledauphine.com/politique/2026/10/25/un-projet-de-city-stade-a-l-etude-a-cote-de-la-salle-des-fetes",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-10-25T17:10:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bonvillard : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-25T17:10:16.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN",
+     "EPR"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Congrès du RN : pour son premier discours de campagne, Marine Le Pen dit vouloir présider à la « Renaissance » de la France",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/25/congres-du-rn-pour-son-premier-discours-de-campagne-marine-le-pen-dit-vouloir-presider-a-la-renaissance-de-la-france_6800086_823449.html",
+     "media": "Le Monde",
+     "date": "2026-10-25T17:10:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Congrès",
+    "origine": "dossier"
+   },
+   "fait": "Marine Le Pen dit vouloir présider à la « Renaissance » de la France",
+   "accroche": "Marine Le Pen dit vouloir présider à la « Renaissance » de la France",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1876,6 +1839,113 @@
    "sources": [
     "BFMTV"
    ],
+   "derniere": "2026-10-25T16:43:09.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"Rétablir l’État de droit\": les discours de Jordan Bardella et Marine Le Pen au congrès du RN",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-retablir-l-etat-de-droit-les-discours-de-jordan-bardella-et-marine-le-pen-au-congres-du-rn_VN-202610250311.html",
+     "media": "BFMTV",
+     "date": "2026-10-25T16:43:09.000Z",
+     "video": true
+    },
+    {
+     "titre": "\"Nous allons rétablir l’État de droit,\", lance Marine Le Pen, candidate RN à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-nous-allons-retablir-l-etat-de-droit-lance-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610250294.html",
+     "media": "BFMTV",
+     "date": "2026-10-25T16:19:58.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Congrès",
+    "origine": "dossier"
+   },
+   "fait": "Lance Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
+   "accroche": "Lance Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais) · Jordan Bardella : président du Rassemblement national",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-25T16:34:37.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN",
+     "EPR"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Congrès du RN: Marine Le Pen plaide en faveur d'une \"Renaissance pour la France\"",
+     "url": "https://www.bfmtv.com/politique/direct-le-rassemblement-national-poursuit-son-congres-a-orleans-avec-des-craintes-de-manifestations-d-opposants_LN-202610250042.html",
+     "media": "BFMTV",
+     "date": "2026-10-25T16:34:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
    "derniere": "2026-10-25T16:31:10.000Z",
    "illustration": {
     "personnes": [
@@ -2121,53 +2191,6 @@
    "sources": [
     "BFMTV"
    ],
-   "derniere": "2026-10-25T16:19:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "\"Nous allons rétablir l’État de droit,\", lance Marine Le Pen, candidate RN à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-nous-allons-retablir-l-etat-de-droit-lance-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202610250294.html",
-     "media": "BFMTV",
-     "date": "2026-10-25T16:19:58.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Lance Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
-   "accroche": "Lance Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
    "derniere": "2026-10-25T16:18:47.000Z",
    "illustration": {
     "personnes": [
@@ -2242,8 +2265,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdictions",
-    "origine": "dossier"
+    "titre": "Marine Le Pen : annonces sur la présidentielle de 2027",
+    "origine": "regles"
    },
    "fait": "Annonce Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
    "accroche": "Annonce Marine Le Pen, candidate Rassemblement national à l'élection présidentielle",
@@ -3262,33 +3285,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-25T15:11:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"La Chute\" : un historien britannique décrypte la défaite française de 1940",
-     "url": "https://www.france24.com/fr/france/20261025-chute-1940-historien-julian-jackson-defaite-debacle-armee-francaise",
-     "media": "France 24",
-     "date": "2026-10-25T15:11:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-25T15:07:00.000Z",
@@ -4165,32 +4161,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-25T11:15:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Manifestations en France, frappes en Ukraine, présidentielle au Brésil : la semaine en images",
-     "url": "https://www.france24.com/fr/france/20261025-manifestations-en-france-frappes-en-ukraine-pr%C3%A9sidentielle-au-br%C3%A9sil-la-semaine-en-images",
-     "media": "France 24",
-     "date": "2026-10-25T11:15:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-10-25T11:00:12.000Z",
@@ -4289,8 +4259,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdictions",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "1 314 personnes interpellées dans toute la France, annonce le ministère de l’intérieur",
    "accroche": "1 314 personnes interpellées dans toute la France, annonce le ministère de l’intérieur"
@@ -4376,33 +4347,6 @@
    },
    "fait": "Les maires de Villard-Saint-Pancrace et Saint-Martin-de-Queyrières veulent un garde champêtre",
    "accroche": "Les maires de Villard-Saint-Pancrace et Saint-Martin-de-Queyrières veulent un garde champêtre"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-25T10:33:22.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation du 24 octobre : plus de 1 300 interpellations, une cinquantaine de policiers blessés",
-     "url": "https://www.france24.com/fr/france/20261025-mobilisation-du-24-octobre-plus-de-1-300-interpellations-une-cinquantaine-de-policiers-bless%C3%A9s",
-     "media": "France 24",
-     "date": "2026-10-25T10:33:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -4513,33 +4457,6 @@
    ],
    "titrePropre": {
     "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-10-25T10:15:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Attentat dans les Yvelines : le suspect sous traitement pour schizophrénie",
-     "url": "https://www.france24.com/fr/france/20261025-fusillade-meurtri%C3%A8re-dans-les-yvelines-le-suspect-plac%C3%A9-en-observation-psychiatrique",
-     "media": "France 24",
-     "date": "2026-10-25T10:15:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
     "origine": "regles",
     "generique": true
    }
@@ -4747,6 +4664,106 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-25T09:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gaëtan Roussel, l’art du déséquilibre",
+     "url": "https://www.publicsenat.fr/actualites/culture/gaetan-roussel-lart-du-desequilibre",
+     "media": "Public Sénat",
+     "date": "2026-10-25T09:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-25T09:23:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Colère sociale : Le patron des députés Horizon veut faire payer LFI pour les dégradations",
+     "url": "https://www.20minutes.fr/politique/4257293-20261025-colere-sociale-patron-deputes-horizon-veut-faire-payer-lfi-degradations?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-25T09:23:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sociale",
+    "origine": "dossier"
+   },
+   "fait": "Le patron des députés Horizon veut faire payer La France insoumise pour les dégradations",
+   "accroche": "Le patron des députés Horizon veut faire payer La France insoumise pour les dégradations"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-25T09:20:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Éric Coquerel",
+      "photo": "photos/deputes/PA721202.jpg",
+      "photoHd": "photos/deputes/hd/PA721202.jpg",
+      "parti": "LFI",
+      "lien": "#depute-PA721202",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«Casseurs-payeurs» : «C’est une loi liberticide», juge Éric Coquerel",
+     "url": "https://www.europe1.fr/politique/casseurs-payeurs-cest-une-loi-liberticide-juge-eric-coquerel-1180530?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-25T09:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éric Coquerel : ce qu'il faut savoir sur la loi « casseurs-payeurs »",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Éric Coquerel : député LFI (Seine-Saint-Denis)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   }
  ]
 }
