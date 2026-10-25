@@ -1,81 +1,57 @@
 # À la une : à ajouter cette semaine
 
-Semaine 2026-W42 (du 11 octobre 2026 au 18 octobre 2026). Fichier généré par `scripts/suggestions-a-la-une.cjs` ; ne pas modifier à la main.
+Semaine 2026-W43 (du 18 octobre 2026 au 25 octobre 2026). Fichier généré par `scripts/suggestions-a-la-une.cjs` ; ne pas modifier à la main.
 Instagram ne permet pas d'ajouter une story à une une automatiquement : à faire dans l'appli, voir [A-LA-UNE.md](A-LA-UNE.md).
 
 ## À ajouter cette semaine
 
 | Publiée le | À ajouter à la une | Type | Story ou post | Confiance |
 |---|---|---|---|---|
-| 11 octobre 2026 | **Actualité** | story | François Hollande (Parti socialiste) : ce que disent les médias | faible |
-| 11 octobre 2026 | **Actualité** | story | Social. Lycéens : emplois du temps, bâtiments... ce qui ressort des contributions sur la plateforme de concertation | moyenne |
-| 12 octobre 2026 | **Élus et votes** | story | Vote solennel à l'Assemblée : projet de loi de finances pour 2027 (première partie) | haute |
-| 12 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
-| 12 octobre 2026 | **Actualité** | story | Politique. Propos antisémites attribués à Jordan Bardella : Éric Zemmour ne le croit « pas vraiment » sincère | faible |
-| 12 octobre 2026 | **Élus et votes** | story | Vote solennel à l'Assemblée : projet de loi de finances pour 2027 (première partie) | haute |
-| 12 octobre 2026 | **Actualité** | story | Jean-Luc Mélenchon : annonces sur la mobilisation lycéenne | faible |
-| 12 octobre 2026 | **Actualité** | story | Sortie du bar | faible |
-| 12 octobre 2026 | **2027** | story | Bruno Retailleau : ce qu'il faut savoir sur la présidentielle de 2027 | moyenne |
-| 12 octobre 2026 | **Actualité** | story | Choix du repli | faible |
-| 12 octobre 2026 | **Actualité** | story | Menace russe | faible |
-| 12 octobre 2026 | **Actualité** | story | Emmanuel Macron : ce que disent les médias | faible |
-| 12 octobre 2026 | **Actualité** | story | Municipales à Saint-Fons, près de Lyon : la justice annule les élections, remportées par LFI, en raison d’irrégularités sur une liste concurrente | moyenne |
-| 12 octobre 2026 | **Actualité** | story | Population | faible |
-| 12 octobre 2026 | **Actualité** | story | Prix du gazole baisseront | moyenne |
-| 13 octobre 2026 | **Argent public** | story | « Un milliardaire paie moins d’impôts qu’une infirmière ou un pompier ! » : Oxfam poursuit l’Etat en justice pour inégalité fiscale | moyenne |
-| 13 octobre 2026 | **Élus et votes** | story | Assemblée nationale : ce que disent les médias | haute |
-| 13 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
-| 13 octobre 2026 | **Actualité** | story | Seuls socialistes | faible |
-| 13 octobre 2026 | **Actualité** | story | Région : ce que disent les médias | faible |
-| 13 octobre 2026 | **Actualité** | story | Moderniser et rééquilibrer le fonctionnement du titre-restaurant | faible |
-| 13 octobre 2026 | **Actualité** | story | Moderniser et rééquilibrer le fonctionnement du titre-restaurant | faible |
-| 13 octobre 2026 | **Élus et votes** | story | Proposition de loi relative à l'expérimentation d'une gouvernance territoriale unifiée pour le centre de ressources, d'expertise et de performance sportive (CREPS) de Vichy | haute |
-| 13 octobre 2026 | **Élus et votes** | story | Proposition de loi relative à l'expérimentation d'une gouvernance territoriale unifiée pour le centre de ressources, d'expertise et de performance sportive (CREPS) de Vichy | haute |
-| 14 octobre 2026 | **Élus et votes** | story | Proposition de loi visant à assouplir la procédure d'autorisation des établissements et services sociaux et médico-sociaux à caractère expérimental | haute |
-| 14 octobre 2026 | **Actualité** | story | Politique : ce que disent les médias | faible |
-| 14 octobre 2026 | **Actualité** | story | « Avis défavorable » pour Rachida Dati : le Conseil supérieur de la magistrature s’oppose à sa réintégration | faible |
-| 14 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
-| 14 octobre 2026 | **Actualité** | story | Municipales : décision du tribunal administratif | moyenne |
-| 14 octobre 2026 | **Actualité** | story | Élections : ce que disent les médias | faible |
-| 14 octobre 2026 | **Élus et votes** | story | Proposition de loi visant à assouplir la procédure d'autorisation des établissements et services sociaux et médico-sociaux à caractère expérimental | haute |
-| 14 octobre 2026 | **Actualité** | story | Réseaux sociaux | faible |
-| 14 octobre 2026 | **Actualité** | story | Apporter une réponse intégrale au phénomène des violences sexuelles et sexistes contre les femmes et les enfants | faible |
-| 14 octobre 2026 | **Élus et votes** | story | Proposition de loi visant à assouplir la procédure d'autorisation des établissements et services sociaux et médico-sociaux à caractère expérimental | haute |
-| 15 octobre 2026 | **Argent public** | story | Budget | moyenne |
-| 15 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
-| 15 octobre 2026 | **Actualité** | story | Six mois | faible |
-| 15 octobre 2026 | **Actualité** | story | Contrôleur général des lieux de privation de liberté : Macron propose Pierre Coppey… ancien président de Vinci Autoroutes | faible |
-| 15 octobre 2026 | **Argent public** | story | Emmanuel Macron : ce qu'il faut savoir sur les finances publiques | moyenne |
-| 15 octobre 2026 | **Agenda** | post | Meurthe-et-Moselle : actualité locale | haute |
-| 15 octobre 2026 | **Actualité** | story | Meurthe-et-Moselle : actualité locale | faible |
-| 16 octobre 2026 | **Actualité** | story | Plan de relance agricole | faible |
-| 16 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
-| 16 octobre 2026 | **Actualité** | story | Ségolène Royal (Parti socialiste) : ce que disent les médias | faible |
-| 16 octobre 2026 | **Actualité** | story | Loin devant | faible |
-| 16 octobre 2026 | **Actualité** | story | Gilets jaunes | faible |
-| 17 octobre 2026 | **Actualité** | story | «Vive le 17 octobre» : le site des Républicains brièvement transformé en appel à la mobilisation | faible |
-| 17 octobre 2026 | **Actualité** | story | État de droit | faible |
-| 17 octobre 2026 | **Actualité** | story | Éric Ciotti : ce que disent les médias | faible |
-| 17 octobre 2026 | **Argent public** | story | Nationale rejette la taxe | moyenne |
-| 17 octobre 2026 | **Actualité** | story | Manque d humilité | faible |
-| 17 octobre 2026 | **Élus et votes** | story | La motion de censure | haute |
-| 17 octobre 2026 | **Élus et votes** | story | Projet de loi de finances pour 2027 | haute |
-| 17 octobre 2026 | **Agenda** | post | Projet de loi de finances pour 2027 | haute |
-| 18 octobre 2026 | **Actualité** | story | Cellule de crise | faible |
-| 18 octobre 2026 | **2027** | story | David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027 | moyenne |
-| 18 octobre 2026 | **Actualité** | story | Place de la République | faible |
-| 18 octobre 2026 | **Sondages** | story | Sondage YouGov : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : 12-15 octobre 2026) | haute |
-| 18 octobre 2026 | **Actualité** | carousel | Résumé de la semaine au Parlement | faible |
+| 19 octobre 2026 | **Actualité** | story | Conseil constitutionnel | moyenne |
+| 19 octobre 2026 | **Actualité** | story | Maintien de l ordre | faible |
+| 19 octobre 2026 | **Élus et votes** | story | Sénat : ce que disent les médias | haute |
+| 19 octobre 2026 | **Élus et votes** | story | Députés rejettent en commission | haute |
+| 19 octobre 2026 | **Actualité** | story | Politique : ce que disent les médias | faible |
+| 20 octobre 2026 | **Actualité** | story | Bouc émissaire | faible |
+| 20 octobre 2026 | **Actualité** | story | Ai rien à cirer | faible |
+| 20 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
+| 20 octobre 2026 | **Actualité** | story | Abroger définitivement | faible |
+| 22 octobre 2026 | **Argent public** | story | Vote solennel à l'Assemblée : projet de loi de financement de la sécurité sociale pour 2027 | moyenne |
+| 22 octobre 2026 | **2027** | story | Candidatures de témoignages | moyenne |
+| 22 octobre 2026 | **Élus et votes** | story | Sénat : ce que disent les médias | haute |
+| 22 octobre 2026 | **Actualité** | story | Sociale | faible |
+| 22 octobre 2026 | **Argent public** | story | Vote solennel à l'Assemblée : projet de loi de financement de la sécurité sociale pour 2027 | moyenne |
+| 22 octobre 2026 | **Actualité** | story | Protéger nos centres-villes | faible |
+| 23 octobre 2026 | **Comprendre** | story | Sécurité : ce qu'il faut savoir sur le maintien de l'ordre | moyenne |
+| 23 octobre 2026 | **Agenda** | post | Recevra les organisations lycéennes | haute |
+| 23 octobre 2026 | **Actualité** | story | Emmanuel Macron : ce qu'il faut savoir sur le social et l'emploi | moyenne |
+| 23 octobre 2026 | **Sondages** | story | Sondage Harris : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : 19-21 octobre 2026) | haute |
+| 23 octobre 2026 | **Actualité** | story | Conseil de défense | faible |
+| 23 octobre 2026 | **Agenda** | post | Sociale | haute |
+| 23 octobre 2026 | **Actualité** | story | Recevra les organisations lycéennes | faible |
+| 23 octobre 2026 | **Actualité** | story | Sociale | faible |
+| 24 octobre 2026 | **Actualité** | story | Politique : ce que disent les médias | faible |
+| 24 octobre 2026 | **Actualité** | story | Fuite de données | faible |
+| 24 octobre 2026 | **Actualité** | story | Sociale | faible |
+| 24 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
+| 24 octobre 2026 | **Actualité** | story | La navette parlementaire | faible |
+| 24 octobre 2026 | **Actualité** | story | DIRECT. Mobilisation du 24 octobre : des gilets jaunes, syndicats, lycéens, étudiants attendus partout en France, dispositif de “haute sécurité”, polémique sur le cortège parisien... Suivez le fil de la journée | faible |
+| 25 octobre 2026 | **Actualité** | story | Mobilisation du 24 octobre : «Les cortèges se sont bien passés» pour le ministre de l’Intérieur, Laurent Nuñez, qui annonce 1 000 interpellations | haute |
+| 25 octobre 2026 | **Élus et votes** | story | Aujourd'hui à l'Assemblée | haute |
+| 25 octobre 2026 | **Actualité** | story | Social. Manifestations à Paris : 142 personnes interpellées, contre 855 samedi dernier | faible |
+| 25 octobre 2026 | **2027** | story | Seul candidat | moyenne |
+| 25 octobre 2026 | **Actualité** | story | Gouvernement : ce que disent les médias | moyenne |
+| 25 octobre 2026 | **Actualité** | story | Politique : ce que disent les médias | faible |
 
 Confiance « faible » : aucun indice net, la rubrique par défaut (Politique) est proposée ; à vérifier d'un coup d'œil.
 
 ## Par rubrique (toutes les publications suivies)
 
-- **Actualité** : 65 publication(s), la plus récente le 18 octobre 2026
-- **2027** : 17 publication(s), la plus récente le 18 octobre 2026
-- **Sondages** : 1 publication(s), la plus récente le 18 octobre 2026
-- **Élus et votes** : 23 publication(s), la plus récente le 17 octobre 2026
-- **Argent public** : 8 publication(s), la plus récente le 17 octobre 2026
-- **Comprendre** : aucune pour l'instant
+- **Actualité** : 87 publication(s), la plus récente le 25 octobre 2026
+- **2027** : 19 publication(s), la plus récente le 25 octobre 2026
+- **Sondages** : 2 publication(s), la plus récente le 23 octobre 2026
+- **Élus et votes** : 30 publication(s), la plus récente le 25 octobre 2026
+- **Argent public** : 10 publication(s), la plus récente le 22 octobre 2026
+- **Comprendre** : 1 publication(s), la plus récente le 23 octobre 2026
 - **Quiz** : aucune pour l'instant
-- **Agenda** : 3 publication(s), la plus récente le 17 octobre 2026
+- **Agenda** : 3 publication(s), la plus récente le 23 octobre 2026
