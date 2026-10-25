@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-25T07:25:35.742Z",
+ "lastUpdated": "2026-10-25T07:31:07.152Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -159,13 +159,13 @@
     "samedi"
    ],
    "medias": [
+    "Le Monde",
     "BFMTV",
     "La Dépêche",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "Le Monde",
     "RFI",
     "France 24",
     "L'Obs",
@@ -186,10 +186,10 @@
    ],
    "mediasDistincts": 19,
    "sources": [
+    "Le Monde",
     "BFMTV",
     "La Dépêche",
     "EBRA",
-    "Le Monde",
     "France Médias Monde",
     "L'Obs",
     "Libération",
@@ -206,9 +206,15 @@
     "Le Figaro",
     "Nice-Matin"
    ],
-   "nb": 127,
-   "derniere": "2026-10-25T07:20:57.000Z",
+   "nb": 128,
+   "derniere": "2026-10-25T07:24:46.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Manifestations : le patron des députés Horizons, Laurent Marcangeli, suggère de faire payer les dégradations par LFI, jugeant le mouvement « solidaire des casseurs »",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/25/manifestations-le-patron-des-deputes-horizons-laurent-marcangeli-suggere-de-faire-payer-les-degradations-par-lfi-jugeant-le-mouvement-solidaire-des-casseurs_6800056_823448.html",
+     "date": "2026-10-25T07:24:46.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "24 octobre: \"Il y avait deux fois plus d'effectifs de police mobile qui ont permis un maintien de l'ordre qui n'a rien à voir avec samedi dernier\", note le maire de Saint-Etienne",
@@ -245,12 +251,6 @@
      "titre": "Social. Manifestations interdites ce dimanche à Orléans pour le meeting du RN, après le rassemblement pacifique de samedi",
      "url": "https://www.estrepublicain.fr/social/2026/10/25/des-manifestations-massives-et-plutot-calmes-samedi-macron-promet-aux-lyceens-des-reponses-lundi",
      "date": "2026-10-25T06:59:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "A Orléans, une manifestation antifasciste empreinte de gravité et marquée par la division des gauches",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/25/a-orleans-une-manifestation-antifasciste-empreinte-de-gravite-et-marquee-par-la-division-des-gauches_6799962_823448.html",
-     "date": "2026-10-25T04:00:09.000Z"
     },
     {
      "media": "RFI",
@@ -1362,6 +1362,53 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-25T07:24:46.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Laurent Marcangeli",
+      "photo": "photos/deputes/PA605782.jpg",
+      "photoHd": "photos/deputes/hd/PA605782.jpg",
+      "parti": "HOR",
+      "lien": "#depute-PA605782",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "LFI",
+     "HOR"
+    ],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Manifestations : le patron des députés Horizons, Laurent Marcangeli, suggère de faire payer les dégradations par LFI, jugeant le mouvement « solidaire des casseurs »",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/25/manifestations-le-patron-des-deputes-horizons-laurent-marcangeli-suggere-de-faire-payer-les-degradations-par-lfi-jugeant-le-mouvement-solidaire-des-casseurs_6800056_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-25T07:24:46.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   },
+   "fait": "Le patron des députés Horizons, Laurent Marcangeli jugeant le mouvement",
+   "accroche": "Le patron des députés Horizons, Laurent Marcangeli jugeant le mouvement",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Laurent Marcangeli : député HOR (Corse-du-Sud)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-25T07:20:57.000Z",
@@ -2151,8 +2198,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Manifestations",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -4664,32 +4712,6 @@
    },
    "fait": "Les projets du Fort de Montessuy et du cinéma sont sur la bonne voie",
    "accroche": "Les projets du Fort de Montessuy et du cinéma sont sur la bonne voie"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-24T17:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Un chantier de neuf mois démarre sur le réseau d’eau potable du côté du Marché-Gare à Villeneuve-sur-Lot",
-     "url": "https://www.sudouest.fr/politique/urbanisme/un-chantier-de-neuf-mois-demarre-sur-le-reseau-d-eau-potable-du-cote-du-marche-gare-a-villeneuve-sur-lot-31204800.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-24T17:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Environnement : ce que disent les médias",
-    "origine": "regles"
-   }
   }
  ]
 }
