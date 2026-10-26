@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-26T10:45:43.948Z",
+ "lastUpdated": "2026-10-26T10:50:41.845Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -168,6 +168,7 @@
     "RFI",
     "Europe 1",
     "Nice-Matin",
+    "France Inter",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
@@ -178,7 +179,7 @@
     "L'Express",
     "France 24"
    ],
-   "mediasDistincts": 13,
+   "mediasDistincts": 14,
    "sources": [
     "Sud Ouest",
     "L'Humanité",
@@ -188,13 +189,14 @@
     "BFMTV",
     "France Médias Monde",
     "Nice-Matin",
+    "France Inter",
     "EBRA",
     "Libération",
     "Le Monde",
     "Valeurs actuelles",
     "L'Express"
    ],
-   "nb": 54,
+   "nb": 55,
    "derniere": "2026-10-26T10:32:22.000Z",
    "articles": [
     {
@@ -251,6 +253,12 @@
      "titre": "Brésil : Lula décroche un quatrième mandat, Bolsonaro réclame l’annulation du scrutin",
      "url": "https://www.nicematin.com/societe/politique/bresil-lula-decroche-un-quatrieme-mandat-bolsonaro-reclame-l-annulation-du-scrutin-10746762",
      "date": "2026-10-26T06:42:53.000Z"
+    },
+    {
+     "media": "France Inter",
+     "titre": "Optimisme : la nouvelle stratégie de Marine Le Pen pour la présidentielle",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-edito-politique/l-edito-politique-du-lundi-26-octobre-2026-7215139",
+     "date": "2026-10-26T06:42:20.000Z"
     },
     {
      "media": "Le Progrès",
@@ -1448,6 +1456,37 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-26T10:43:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LR"
+    ],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Centre national du livre : ces sénateurs LR qui veulent supprimer à bas bruit l’institution indispensable à la création littéraire",
+     "url": "https://www.liberation.fr/culture/livres/centre-national-du-livre-ces-senateurs-lr-qui-veulent-supprimer-a-bas-bruit-linstitution-indispensable-a-la-creation-litteraire-20261026_2K2DF57I4NEVPLRIMMTWNIPK3U/",
+     "media": "Libération",
+     "date": "2026-10-26T10:43:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Les Républicains : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Ces sénateurs Les Républicains qui veulent supprimer à bas bruit l’institution indispensable à la création littéraire",
+   "accroche": "Ces sénateurs Les Républicains qui veulent supprimer à bas bruit l’institution indispensable à la création littéraire"
   },
   {
    "medias": 1,
@@ -4047,23 +4086,45 @@
    ],
    "derniere": "2026-10-26T06:42:20.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "L'édito politique du lundi 26 octobre 2026",
+     "titre": "Optimisme : la nouvelle stratégie de Marine Le Pen pour la présidentielle",
      "url": "https://www.radiofrance.fr/franceinter/podcasts/l-edito-politique/l-edito-politique-du-lundi-26-octobre-2026-7215139",
      "media": "France Inter",
      "date": "2026-10-26T06:42:20.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : opinion d'un média",
-    "origine": "regles"
-   }
+    "titre": "Marine Le Pen : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Pen 32–33,5 %",
+     "source": "Commission des sondages (notice Ipsos)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4935,48 +4996,6 @@
     "titre": "Laneuvelotte : vie municipale",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-25T22:06:15.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Nathalie Arthaud",
-      "photo": "photos/personnalites/nathalie-arthaud.jpg",
-      "photoHd": "photos/personnalites/hd/nathalie-arthaud.jpg",
-      "parti": "LO",
-      "credit": "Kokluts, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "\"Je suis convaincue qu'à moins de 2.200 euros net par mois, on ne peut pas avoir une vie digne aujourd'hui\", déclare Nathalie Arthaud, porte-parole de Lutte ouvrière et candidate à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-je-suis-convaincue-qu-a-moins-de-2-200-euros-net-par-mois-on-ne-peut-pas-avoir-une-vie-digne-aujourd-hui-declare-nathalie-arthaud-porte-parole-de-lutte-ouvriere-et-candidate-a-l-election-presidentielle_VN-202610250411.html",
-     "media": "BFMTV",
-     "date": "2026-10-25T22:06:15.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Arthaud 0,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    }
-   ]
   }
  ]
 }
