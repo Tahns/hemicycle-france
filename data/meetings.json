@@ -1,7 +1,7 @@
 {
   "_comment": "Entrées sans « origine » : saisies à la main, jamais modifiées par les scripts. Entrées « origine: auto » : relevées par scripts/fetch-evenements.js (Wikipédia, ordre du jour de l'Assemblée). debut/fin au format AAAA-MM-JJ ; les événements passés sont masqués automatiquement ; « confirme: false » = non affiché.",
   "verifieLe": "2026-09-24",
-  "lastUpdated": "2026-10-25T21:56:11.331Z",
+  "lastUpdated": "2026-10-27T06:13:38.176Z",
   "meetings": [
     {
       "debut": "2026-10-24",
@@ -134,6 +134,30 @@
         "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34852/4_0"
       },
       "verified": true
+    },
+    {
+      "debut": "2026-11-17",
+      "jour": "17",
+      "mois": "NOV.",
+      "heure": "—",
+      "lieu": "Assemblée nationale, Paris",
+      "parti": "",
+      "partyColor": "#6B7280",
+      "titre": "Examen à l'Assemblée nationale : projet de loi, adopté par le Sénat, visant la relance et la décentralisation du logement",
+      "desc": "Examen en séance publique d'après l'ordre du jour publié par l'Assemblée nationale ; il peut encore changer.",
+      "source": {
+        "nom": "Assemblée nationale (ordre du jour)",
+        "url": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54608"
+      },
+      "verified": true,
+      "confirme": true,
+      "origine": "auto",
+      "type": "examen-loi",
+      "cle": "examen-loi|-|DLR5L17N54608",
+      "sourceId": "agenda-an",
+      "confiance": "haute",
+      "vuLe": "2026-10-27",
+      "absences": 0
     }
   ]
 }
