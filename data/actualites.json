@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-28T22:35:35.391Z",
+ "lastUpdated": "2026-10-28T22:40:46.221Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -135,7 +135,7 @@
   {
    "nom": "Valeurs actuelles",
    "site": "https://www.valeursactuelles.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le JDD",
@@ -159,9 +159,11 @@
     "gabriel"
    ],
    "medias": [
+    "BFMTV",
     "La Dépêche",
     "Europe 1",
     "Libération",
+    "France 24",
     "Sud Ouest",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
@@ -169,7 +171,6 @@
     "L'Est républicain",
     "Le Monde",
     "20 Minutes",
-    "BFMTV",
     "Ouest-France",
     "L'Humanité",
     "L'Obs",
@@ -180,15 +181,16 @@
     "La Croix",
     "Nice-Matin"
    ],
-   "mediasDistincts": 15,
+   "mediasDistincts": 16,
    "sources": [
+    "BFMTV",
     "La Dépêche",
     "Groupe Bolloré",
     "Libération",
+    "France 24",
     "Sud Ouest / Le Monde",
     "EBRA",
     "20 Minutes",
-    "BFMTV",
     "Ouest-France",
     "L'Humanité",
     "L'Obs",
@@ -198,9 +200,16 @@
     "La Croix",
     "Nice-Matin"
    ],
-   "nb": 59,
-   "derniere": "2026-10-28T21:51:10.000Z",
+   "nb": 63,
+   "derniere": "2026-10-28T22:33:40.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Crise sociale: \"On est obligé de poser la question des dates de l'élection présidentielle\", estime Julien Aubert, vice-président des Républicains, ancien député",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-crise-sociale-on-est-oblige-de-poser-la-question-des-dates-de-l-election-presidentielle-estime-julien-aubert-vice-president-des-republicains-ancien-depute_VN-202610280990.html",
+     "date": "2026-10-28T22:33:40.000Z",
+     "video": true
+    },
     {
      "media": "La Dépêche",
      "titre": "REPLAY. Présidentielle 2027 : Gabriel Attal plaide pour une \"grande primaire des démocrates\", Retailleau s'y oppose",
@@ -218,6 +227,12 @@
      "titre": "Avec son appel à une «grande primaire», Attal joint sa voix à ceux qui veulent faire craquer Philippe",
      "url": "https://www.liberation.fr/politique/avec-son-appel-a-une-grande-primaire-attal-joint-sa-voix-a-ceux-qui-veulent-faire-craquer-philippe-20261028_KOSAWAUGVRHOHNMGQAPTT5SOC4/",
      "date": "2026-10-28T20:55:17.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Gabriel Attal prône une \"primaire des démocrates\" avant l'élection présidentielle en France",
+     "url": "https://www.france24.com/fr/france/20261028-gabriel-attal-pr%C3%B4ne-une-primaire-des-d%C3%A9mocrates-avant-l-%C3%A9lection-pr%C3%A9sidentielle-en-france",
+     "date": "2026-10-28T20:38:40.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -260,12 +275,6 @@
      "titre": "Présidentielle 2027 : Enfarinage, insultes… Raphaël Glucksmann a du mal à faire campagne sur le terrain",
      "url": "https://www.20minutes.fr/politique/4258431-20261028-presidentielle-2027-enfarinage-insultes-raphael-glucksmann-mal-faire-campagne-terrain?at_medium=display&at_campaign=149",
      "date": "2026-10-28T19:57:54.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Il est temps d'être tous responsables\": Gabriel Attal appelle à l'organisation d'une \"grande primaire des démocrates\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/il-est-temps-d-etre-tous-responsables-gabriel-attal-appelle-a-l-organisation-d-une-grande-primaire-des-democrates_AN-202610280880.html",
-     "date": "2026-10-28T19:48:51.000Z"
     },
     {
      "media": "Ouest-France",
@@ -324,172 +333,13 @@
    ]
   },
   {
-   "id": "lyceenne",
-   "titre": "Lycées",
-   "motifs": [
-    "lycéenne",
-    "colère",
-    "mobilisation",
-    "mesures"
-   ],
-   "medias": [
-    "BFMTV",
-    "La Dépêche",
-    "Europe 1",
-    "Sud Ouest",
-    "RFI",
-    "Ouest-France",
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Le Monde",
-    "La Croix",
-    "Public Sénat",
-    "Libération",
-    "20 Minutes",
-    "Le JDD",
-    "Nice-Matin",
-    "L'Obs"
-   ],
-   "mediasDistincts": 14,
-   "sources": [
-    "BFMTV",
-    "La Dépêche",
-    "Groupe Bolloré",
-    "Sud Ouest",
-    "RFI",
-    "Ouest-France",
-    "EBRA",
-    "Le Monde",
-    "La Croix",
-    "Public Sénat",
-    "Libération",
-    "20 Minutes",
-    "Nice-Matin",
-    "L'Obs"
-   ],
-   "nb": 49,
-   "derniere": "2026-10-28T22:28:00.000Z",
-   "articles": [
-    {
-     "media": "BFMTV",
-     "titre": "DIRECT. Colère lycéenne: Sébastien Lecornu estime que les mesures annoncées \"forment une réponse aux attentes\" des lycéens",
-     "url": "https://www.bfmtv.com/politique/direct-le-senat-approuve-le-projet-de-loi-casseurs-payeurs-apres-les-debordements-du-17-octobre-le-gouvernement-reste-sous-pression-avant-la-prochaine-mobilisation-du-31-octobre_LN-202610280162.html",
-     "date": "2026-10-28T22:28:00.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "REPLAY. Colère sociale en France : Emmanuel Macron appelle à la reprise des cours dans le \"calme\" à la rentrée lundi",
-     "url": "https://www.ladepeche.fr/2026/10/28/direct-colere-sociale-en-france-ce-nest-pas-au-ministre-de-le-decider-la-france-insoumise-appelle-a-poursuivre-la-mobilisation-lyceenne-13624114.php",
-     "date": "2026-10-28T21:59:22.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Parcoursup : Sébastien Lecornu confirme son remplacement en 2028, malgré la colère persistante des lycéens",
-     "url": "https://www.europe1.fr/societe/parcoursup-sebastien-lecornu-confirme-son-remplacement-en-2028-malgre-la-colere-persistante-des-lyceens-1190154?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-10-28T21:15:35.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Remplacement de Parcoursup : Sébastien Lecornu renvoie la balle aux députés pour trouver une alternative au dispositif d’orientation des lycéens",
-     "url": "https://www.sudouest.fr/etudiant/lycee/parcoursup/remplacement-de-parcoursup-sebastien-lecornu-renvoie-la-balle-aux-deputes-pour-trouver-une-alternative-au-dispositif-d-orientation-des-lyceens-31282873.php",
-     "date": "2026-10-28T20:40:41.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mobilisation lycéenne en France: Parcoursup «est vu par beaucoup d'étudiants et de familles comme un supplice»",
-     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261028-mobilisation-lyc%C3%A9enne-en-france-parcoursup-est-vu-par-beaucoup-d-%C3%A9tudiants-et-de-familles-comme-un-supplice",
-     "date": "2026-10-28T20:35:07.000Z"
-    },
-    {
-     "media": "Ouest-France",
-     "titre": "« Je ne prendrai pas parti » : Jimmy Gressier évoque la présidentielle 2027 et revient sur la polémique des lycéens",
-     "url": "https://www.ouest-france.fr/sport/athletisme/jimmy-gressier/je-ne-prendrai-pas-parti-jimmy-gressier-evoque-les-futures-presidentielles-et-revient-sur-la-polemique-des-lyceens-51b9b5a0-d2ec-11f1-af78-2d36ec019942?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "date": "2026-10-28T18:37:57.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Interview. Colère lycéenne : pour la vice-présidente de France Universités, les mesures sont « un début de réponse »",
-     "url": "https://www.leprogres.fr/education/2026/10/28/colere-lyceenne-pour-la-vice-presidente-de-france-universites-les-mesures-sont-un-debut-de-reponse",
-     "date": "2026-10-28T18:10:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Interview. Colère lycéenne : pour la vice-présidente de France Universités, les mesures sont « un début de réponse »",
-     "url": "https://www.dna.fr/education/2026/10/28/colere-lyceenne-pour-la-vice-presidente-de-france-universites-les-mesures-sont-un-debut-de-reponse",
-     "date": "2026-10-28T18:10:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Interview. Colère lycéenne : pour la vice-présidente de France Universités, les mesures sont « un début de réponse »",
-     "url": "https://www.ledauphine.com/education/2026/10/28/colere-lyceenne-pour-la-vice-presidente-de-france-universites-les-mesures-sont-un-debut-de-reponse",
-     "date": "2026-10-28T18:10:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Interview. Colère lycéenne : pour la présidente de l'université de Lorraine, les mesures sont « un début de réponse »",
-     "url": "https://www.estrepublicain.fr/education/2026/10/28/colere-lyceenne-pour-la-vice-presidente-de-france-universites-les-mesures-sont-un-debut-de-reponse",
-     "date": "2026-10-28T18:10:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Remplacement de Parcoursup : Sébastien Lecornu dit attendre « des propositions et des engagements précis » de la part des différents partis politiques",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/28/remplacement-de-parcoursup-sebastien-lecornu-dit-attendre-des-propositions-et-des-engagements-precis-de-la-part-des-differents-partis-politiques_6801626_823448.html",
-     "date": "2026-10-28T18:01:03.000Z"
-    },
-    {
-     "media": "La Croix",
-     "titre": "Mobilisation lycéenne : les organisations de lycéens reçues jeudi par Nuñez",
-     "url": "https://www.la-croix.com/politique/mobilisation-lyceenne-les-organisations-de-lyceens-recues-jeudi-par-nunez-20261028",
-     "date": "2026-10-28T17:26:41.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Influenceurs reçus avant les lycéens par Sébastien Lecornu : « Prendre le pouls de la société, à travers ceux qui prétendent l’influencer, ce n’est pas forcément idiot », justifie Edouard Geffray",
-     "url": "https://www.publicsenat.fr/actualites/education/influenceurs-recus-avant-les-lyceens-par-sebastien-lecornu-prendre-le-pouls-de-la-societe-a-travers-ceux-qui-pretendent-linfluencer-ce-nest-pas-forcement-id",
-     "date": "2026-10-28T15:52:44.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Rénovation des lycées : la promesse à 4 milliards du gouvernement qui «ne sert à rien», selon un président de région",
-     "url": "https://www.liberation.fr/politique/renovation-des-lycees-la-promesse-a-4-milliards-du-gouvernement-qui-ne-sert-a-rien-selon-un-president-de-region-20261028_JASHG6R24FC3HKWND5PMSGSHOA/",
-     "date": "2026-10-28T13:33:10.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Colère sociale : Le gouvernement rejette l’idée de changer les dates de la présidentielle 2027",
-     "url": "https://www.20minutes.fr/politique/4258259-20261028-colere-sociale-gouvernement-rejette-idee-changer-dates-presidentielle-2027?at_medium=display&at_campaign=149",
-     "date": "2026-10-28T13:04:36.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Présidentielle : Le Pen et Mélenchon boostés par la colère sociale, Lisnard et Glucksmann en nette progression, selon un nouveau sondage",
-     "url": "https://www.lejdd.fr/politique/presidentielle-le-pen-et-melenchon-boostes-par-la-colere-sociale-lisnard-et-glucksmann-en-nette-progression-selon-un-nouveau-sondage-187188",
-     "date": "2026-10-28T08:15:14.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Des mesures absolument scandaleuses » : Pourquoi ce maire des Alpes-Maritimes s’oppose farouchement au projet de loi de finances déposé par le gouvernement ?",
-     "url": "https://www.nicematin.com/economie/des-mesures-absolument-scandaleuses-pourquoi-ce-maire-des-alpes-maritimes-s-oppose-farouchement-au-projet-de-loi-de-finances-depose-par-le-gouvernement-10747068",
-     "date": "2026-10-27T17:15:02.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Colère lycéenne : Parcoursup remplacé, classes de seconde plafonnées… Les annonces du gouvernement",
-     "url": "https://www.nouvelobs.com/societe/20261026.OBS119563/colere-lyceenne-parcoursup-remplace-classes-de-seconde-plafonnees-les-annonces-du-gouvernement.html",
-     "date": "2026-10-27T09:30:06.000Z"
-    }
-   ]
-  },
-  {
    "id": "social",
    "titre": "Social",
    "motifs": [
     "social",
+    "estime",
     "reprise",
-    "calme",
-    "réseaux"
+    "crise"
    ],
    "medias": [
     "BFMTV",
@@ -499,34 +349,37 @@
     "L'Est républicain",
     "La Dépêche",
     "Sud Ouest",
-    "Public Sénat",
+    "Europe 1",
+    "France 24",
     "Le Monde",
+    "Public Sénat",
     "20 Minutes",
     "Libération",
     "Le JDD",
     "Nice-Matin"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 11,
    "sources": [
     "BFMTV",
     "EBRA",
     "La Dépêche",
     "Sud Ouest",
-    "Public Sénat",
+    "Groupe Bolloré",
+    "France 24",
     "Le Monde",
+    "Public Sénat",
     "20 Minutes",
     "Libération",
-    "Le JDD",
     "Nice-Matin"
    ],
-   "nb": 24,
-   "derniere": "2026-10-28T22:22:20.000Z",
+   "nb": 38,
+   "derniere": "2026-10-28T22:35:40.000Z",
    "articles": [
     {
      "media": "BFMTV",
-     "titre": "Colère des lycéens: Emmanuel Macron appelle à la reprise des cours dans le \"calme\" à la rentrée lundi",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-colere-des-lyceens-emmanuel-macron-appelle-a-la-reprise-des-cours-dans-le-calme-a-la-rentree-lundi_VN-202610280981.html",
-     "date": "2026-10-28T22:22:20.000Z",
+     "titre": "Crise sociale: \"Le gouvernement n'a pas pris la mesure de la colère\", estime Sabrina Sebaihi, députée Écologiste et social des Hauts-de-Seine",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-crise-sociale-le-gouvernement-n-a-pas-pris-la-mesure-de-la-colere-estime-sabrina-sebaihi-deputee-ecologiste-et-social-des-hauts-de-seine_VN-202610280993.html",
+     "date": "2026-10-28T22:35:40.000Z",
      "video": true
     },
     {
@@ -560,28 +413,34 @@
      "date": "2026-10-28T21:59:22.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Colère lycéenne: Emmanuel Macron appelle à la reprise des cours à la rentrée lundi et \"que le calme revienne\"",
-     "url": "https://www.bfmtv.com/politique/elysee/colere-lyceenne-emmanuel-macron-appelle-a-la-reprise-des-cours-a-la-rentree-lundi-et-que-le-calme-revienne_AD-202610280960.html",
-     "date": "2026-10-28T21:56:40.000Z"
+     "media": "Sud Ouest",
+     "titre": "Rochefort : crise au sein du conservatoire Michel-Legrand, des enseignants mobilisés contre les méthodes de leur direction",
+     "url": "https://www.sudouest.fr/charente-maritime/rochefort/rochefort-crise-au-sein-du-conservatoire-michel-legrand-des-enseignants-mobilises-contre-les-methodes-de-leur-direction-31278375.php",
+     "date": "2026-10-28T20:05:00.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Ils ont évité le licenciement de 25 personnes et le départ de 14 jeunes placés : qui a repris la Maison d’enfants à caractère social de Clairac ?",
-     "url": "https://www.sudouest.fr/lot-et-garonne/clairac/ils-ont-evite-le-licenciement-de-25-personnes-et-le-depart-de-14-jeunes-places-qui-a-repris-la-maison-d-enfants-a-caractere-social-de-clairac-31141103.php",
-     "date": "2026-10-28T17:30:00.000Z"
+     "media": "Europe 1",
+     "titre": "Interview polémique de Sarah Knafo sur Franceinfo : «L'ensemble des partis de droite vont être diabolisés dans les médias», estime Éric, un auditeur",
+     "url": "https://www.europe1.fr/politique/interview-polemique-de-sarah-knafo-sur-franceinfo-lensemble-des-partis-de-droite-vont-etre-diabolises-dans-les-medias-estime-eric-un-auditeur-1189686?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-10-28T17:00:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "La jungle de Calais : le symbole de la crise migratoire européenne 10 ans après sa destruction",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261028-la-jungle-de-calais-le-symbole-de-la-crise-migratoire-europ%C3%A9enne-10-ans-apr%C3%A8s-sa-destruction",
+     "date": "2026-10-28T15:52:03.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Enseignement supérieur : le « sous-financement » reste sans réponse, malgré un « premier pas » gouvernemental, estiment les présidents d’universités",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/28/enseignement-superieur-le-sous-financement-reste-sans-reponse-malgre-un-premier-pas-gouvernemental-estiment-les-presidents-d-universites_6801597_823448.html",
+     "date": "2026-10-28T15:25:53.000Z"
     },
     {
      "media": "Public Sénat",
      "titre": "« Dérive autoritaire » : la gauche sénatoriale vent debout après l’adoption d’un amendement sur le blocage de certains contenus sur les réseaux sociaux",
      "url": "https://www.publicsenat.fr/actualites/politique/derive-autoritaire-la-gauche-senatoriale-vent-debout-apres-ladoption-dun-amendement-sur-le-blocage-de-certains-contenus-sur-les-reseaux-sociaux",
      "date": "2026-10-28T13:23:09.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Mobilisations sociales : Emmanuel Macron a présidé un conseil de défense pour préparer les manifestations du week-end",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/28/mobilisations-sociales-emmanuel-macron-a-preside-un-conseil-de-defense-pour-preparer-les-manifestations-du-week-end_6801580_823448.html",
-     "date": "2026-10-28T13:22:57.000Z"
     },
     {
      "media": "20 Minutes",
@@ -608,17 +467,141 @@
      "date": "2026-10-27T06:30:08.000Z"
     }
    ]
+  },
+  {
+   "id": "porte-parole",
+   "titre": "Porte-parole",
+   "motifs": [
+    "porte-parole",
+    "autonomie"
+   ],
+   "medias": [
+    "BFMTV",
+    "L'Est républicain",
+    "L'Obs",
+    "Nice-Matin",
+    "Libération",
+    "Le Figaro",
+    "RFI",
+    "Public Sénat",
+    "Le JDD",
+    "La Croix",
+    "France 24"
+   ],
+   "mediasDistincts": 10,
+   "sources": [
+    "BFMTV",
+    "L'Est républicain",
+    "L'Obs",
+    "Nice-Matin",
+    "Libération",
+    "Le Figaro",
+    "France Médias Monde",
+    "Public Sénat",
+    "Le JDD",
+    "La Croix"
+   ],
+   "nb": 17,
+   "derniere": "2026-10-28T18:32:52.000Z",
+   "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Conseil de défense pour préparer les manifestations: le gouvernement \"montre les muscles parce qu'il a été très faible\", fustige Laurent Jacobelli, porte-parole du Rassemblement national",
+     "url": "https://www.bfmtv.com/politique/front-national/video-conseil-de-defense-pour-preparer-les-manifestations-le-gouvernement-montre-les-muscles-parce-qu-il-a-ete-tres-faible-fustige-laurent-jacobelli-porte-parole-du-rassemblement-national_VN-202610280829.html",
+     "date": "2026-10-28T18:32:52.000Z",
+     "video": true
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Portes de Meuse. Plusieurs points traités lors du dernier conseil communautaire",
+     "url": "https://www.estrepublicain.fr/politique/2026/10/28/plusieurs-points-traites-lors-du-dernier-conseil-communautaire",
+     "date": "2026-10-28T17:03:38.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Dates de la présidentielle 2027 : le gouvernement ferme la porte aux exigences de Bruno Retailleau et du RN",
+     "url": "https://www.nouvelobs.com/politique/20261028.OBS119613/dates-de-la-presidentielle-2027-le-gouvernement-ferme-la-porte-aux-exigences-de-bruno-retailleau-et-du-rn.html",
+     "date": "2026-10-28T16:51:57.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« On a tous un Alloncle raciste » : Éric Ciotti réclame une « sanction » à l’encontre d’un député après sa publication sur un porte-parole de Marine Le Pen",
+     "url": "https://www.nicematin.com/societe/politique/on-a-tous-un-alloncle-raciste-eric-ciotti-reclame-une-sanction-a-l-encontre-d-un-depute-apres-sa-publication-sur-un-porte-parole-de-marine-le-pen-10748243",
+     "date": "2026-10-28T16:50:47.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Le porte-parole de Raphaël Glucksmann propose par erreur d’augmenter le Smic de 100 euros… par an",
+     "url": "https://www.liberation.fr/politique/le-porte-parole-de-raphael-glucksmann-propose-par-erreur-daugmenter-le-smic-de-100-euros-par-an-20261028_RX4EYXKXZ5F7XGQ4NWVZAHVMLE/",
+     "date": "2026-10-28T12:15:07.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Charles Alloncle nommé porte-parole de la campagne de Marine Le Pen",
+     "url": "https://www.liberation.fr/politique/charles-alloncle-nomme-porte-parole-de-la-campagne-de-marine-le-pen-20261028_X46MVDNIOZEONJTEC65K4JWY2M/",
+     "date": "2026-10-28T11:28:14.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Autonomie de la Corse : les nationalistes amers après le rejet du projet de loi par le Sénat",
+     "url": "https://www.liberation.fr/politique/autonomie-de-la-corse-les-nationalistes-amers-apres-le-rejet-du-projet-de-loi-par-le-senat-20261027_G6NLQEHZTVGWFBIDXSDVYIUCK4/",
+     "date": "2026-10-27T17:38:54.000Z"
+    },
+    {
+     "media": "Le Figaro",
+     "titre": "Benjamin Morel: «Tout le monde savait que ce texte sur l’autonomie de la Corse n’aboutirait pas mais personne ne voulait en porter la responsabilité»",
+     "url": "https://www.lefigaro.fr/politique/benjamin-morel-tout-le-monde-savait-que-ce-texte-sur-l-autonomie-de-la-corse-n-aboutirait-pas-mais-personne-ne-voulait-en-porter-la-responsabilite-20261027",
+     "date": "2026-10-27T16:36:37.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Rejet de la réforme sur l'autonomie de la Corse: «Ce texte portait en son sein un risque de communautarisme»",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261027-rejet-de-la-r%C3%A9forme-sur-l-autonomie-de-la-corse-ce-texte-portait-en-son-sein-un-risque-de-communautarisme",
+     "date": "2026-10-27T15:34:07.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Autonomie de la Corse : après le rejet du Sénat, les soutiens du texte expriment un « sentiment de déception »",
+     "url": "https://www.publicsenat.fr/actualites/parlementaire/autonomie-de-la-corse-apres-le-rejet-du-senat-les-soutiens-du-texte-expriment-un-sentiment-de-deception",
+     "date": "2026-10-27T13:34:56.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Présidentielle : Charles Alloncle nommé porte-parole de la campagne de Marine Le Pen",
+     "url": "https://www.lejdd.fr/politique/presidentielle-charles-alloncle-nomme-porte-parole-de-la-campagne-de-marine-le-pen-187116",
+     "date": "2026-10-27T10:58:26.000Z"
+    },
+    {
+     "media": "La Croix",
+     "titre": "Statut de la Corse : le Sénat rejette la réforme, les autonomistes quittent les négociations",
+     "url": "https://www.la-croix.com/statut-de-la-corse-le-senat-rejette-la-reforme-le-camp-autonomiste-claque-la-porte-20261026",
+     "date": "2026-10-27T08:21:48.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Statut de la Corse : le Sénat rejette la réforme, le camp autonomiste claque la porte",
+     "url": "https://www.publicsenat.fr/actualites/politique/statut-de-la-corse-le-senat-rejette-la-reforme-le-camp-autonomiste-claque-la-porte",
+     "date": "2026-10-27T07:43:05.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Statut de la Corse : le camp autonomiste claque la porte après le rejet de la réforme au Sénat",
+     "url": "https://www.france24.com/fr/france/20261027-statut-corse-camp-autonomiste-claque-porte-rejet-reforme-senat-processus-beauvau",
+     "date": "2026-10-27T01:37:27.000Z"
+    }
+   ]
   }
  ],
  "sujets": [
   {
-   "medias": 5,
-   "mediasDistincts": 5,
+   "medias": 6,
+   "mediasDistincts": 6,
    "sources": [
     "Sud Ouest",
     "Public Sénat",
     "Libération",
     "20 Minutes",
+    "France 24",
     "Europe 1"
    ],
    "derniere": "2026-10-28T17:31:56.000Z",
@@ -637,10 +620,10 @@
    },
    "articles": [
     {
-     "titre": "Attentat de Trappes : un hommage national va être organisé, présidé par Sébastien Lecornu",
-     "url": "https://www.liberation.fr/politique/attentat-de-trappes-un-hommage-national-va-etre-organise-annonce-le-gouvernement-20261028_2P43SEXRMJFNPKTD2KLM5UWH5U/",
-     "media": "Libération",
-     "date": "2026-10-28T15:49:02.000Z"
+     "titre": "Attentat de Trappes : un hommage national sera organisé, annonce le gouvernement",
+     "url": "https://www.europe1.fr/societe/attentat-de-trappes-un-hommage-national-sera-organise-annonce-le-gouvernement-1188885?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-28T10:45:00.000Z"
     },
     {
      "titre": "Attentat de Trappes : un hommage national à Pengo Bossio Wangi sera organisé, présidé par Sébastien Lecornu",
@@ -655,83 +638,38 @@
      "date": "2026-10-28T15:51:40.000Z"
     },
     {
+     "titre": "Attentat de Trappes : un hommage national va être organisé, présidé par Sébastien Lecornu",
+     "url": "https://www.liberation.fr/politique/attentat-de-trappes-un-hommage-national-va-etre-organise-annonce-le-gouvernement-20261028_2P43SEXRMJFNPKTD2KLM5UWH5U/",
+     "media": "Libération",
+     "date": "2026-10-28T15:49:02.000Z"
+    },
+    {
      "titre": "Attentat raciste à Trappes et La Verrière : Un hommage national sera organisé, annonce le gouvernement",
      "url": "https://www.20minutes.fr/politique/4258272-20261028-attentat-trappes-verriere-hommage-national-organise-annonce-gouvernement?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
      "date": "2026-10-28T13:05:43.000Z"
     },
     {
-     "titre": "Attentat de Trappes : un hommage national sera organisé, annonce le gouvernement",
-     "url": "https://www.europe1.fr/societe/attentat-de-trappes-un-hommage-national-sera-organise-annonce-le-gouvernement-1188885?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T10:45:00.000Z"
+     "titre": "Attentat de Trappes : un hommage national à la victime sera bien organisé",
+     "url": "https://www.france24.com/fr/france/20261028-attentat-de-trappes-un-hommage-national-%C3%A0-la-victime-sera-bien-organis%C3%A9",
+     "media": "France 24",
+     "date": "2026-10-28T11:22:42.000Z"
+    },
+    {
+     "titre": "Attentat raciste de Trappes : des hommages aux victimes dans plusieurs villes",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-attentat-raciste-de-trappes-des-hommages-aux-victimes-dans-plusieurs-villes",
+     "media": "France 24",
+     "date": "2026-10-27T11:04:34.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Hommage national",
-    "origine": "recoupement"
-   },
-   "fait": "Attentat raciste de Trappes : l’hommage national sera présidé par le Premier ministre",
-   "accroche": "Attentat raciste de Trappes : l’hommage national sera présidé par le Premier ministre",
-   "essentiel": "Attentat de Trappes : un hommage national à Pengo Bossio Wangi sera organisé, présidé par Sébastien Lecornu. L’hommage national sera présidé par le Premier ministre, annonce Aurore Bergé. Cinq médias en parlent : Libération, Sud Ouest, Public Sénat, 20 Minutes et Europe 1."
-  },
-  {
-   "medias": 5,
-   "mediasDistincts": 5,
-   "sources": [
-    "RFI",
-    "Nice-Matin",
-    "La Croix",
-    "20 Minutes",
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-28T08:38:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le projet de loi « casseurs-payeurs » adopté et élargi au Sénat après les violences du 17 octobre",
-     "url": "https://www.la-croix.com/casseurs-payeurs-un-projet-de-loi-critique-au-senat-en-plein-coeur-de-la-contestation-20261026",
-     "media": "La Croix",
-     "date": "2026-10-28T06:38:24.000Z"
-    },
-    {
-     "titre": "France: le Sénat adopte le projet de loi «casseurs-payeurs», après les manifestations du 17 octobre",
-     "url": "https://www.rfi.fr/fr/france/20261028-france-le-s%C3%A9nat-adopte-le-projet-de-loi-casseurs-payeurs-apr%C3%A8s-les-manifestations-du-17-octobre",
-     "media": "RFI",
-     "date": "2026-10-28T08:38:21.000Z"
-    },
-    {
-     "titre": "Projet de loi « casseurs payeurs » adopté au Sénat : comment ont voté les parlementaires varois et azuréens de la chambre haute ?",
-     "url": "https://www.nicematin.com/societe/politique/projet-de-loi-casseurs-payeurs-adopte-au-senat-comment-ont-vote-les-parlementaires-varois-et-azureens-de-la-chambre-haute-10748083",
-     "media": "Nice-Matin",
-     "date": "2026-10-28T07:18:39.000Z"
-    },
-    {
-     "titre": "Colère sociale : Le Sénat adopte le projet de loi « casseurs-payeurs » après les violences du 17 octobre",
-     "url": "https://www.20minutes.fr/politique/4258150-20261028-colere-sociale-senat-adopte-projet-loi-casseurs-payeurs-apres-violences-17-octobre?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-28T02:58:01.000Z"
-    },
-    {
-     "titre": "Le Sénat adopte le projet de loi « casseurs-payeurs » après l’avoir largement durci",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/le-senat-adopte-le-projet-de-loi-casseurs-payeurs-apres-lavoir-largement-durci",
-     "media": "Public Sénat",
-     "date": "2026-10-28T00:27:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Loi « casseurs-payeurs » : ce que disent les médias",
+    "titre": "Gouvernement : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Le Sénat adopte le projet de loi « casseurs-payeurs » après les violences du 17 octobre",
-   "accroche": "Le Sénat adopte le projet de loi « casseurs-payeurs » après les violences du 17 octobre",
-   "essentiel": "Pendant la colère sociale, le Sénat adopte le projet de loi « casseurs-payeurs » après les violences du 17 octobre. Le Sénat adopte le projet de loi « casseurs-payeurs » après l’avoir largement durci. Cinq médias en parlent : La Croix, RFI, Nice-Matin, 20 Minutes et Public Sénat."
+   "fait": "Attentat raciste de Trappes : l’hommage national sera présidé par le Premier ministre",
+   "accroche": "Attentat raciste de Trappes : l’hommage national sera présidé par le Premier ministre",
+   "essentiel": "Attentat raciste de Trappes : l’hommage national sera présidé par le Premier ministre. Un hommage national à la victime sera bien organisé. Six médias en parlent : Europe 1, Sud Ouest, Public Sénat, Libération, 20 Minutes et France 24."
   },
   {
    "medias": 8,
@@ -910,6 +848,48 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
+    "France 24",
+    "Libération",
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-28T18:21:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "La gauche dénonce la tenue de manifestations \"néofascistes\" ce week-end à Paris",
+     "url": "https://www.france24.com/fr/france/20261028-gauche-d%C3%A9nonce-tenue-manifestations-n%C3%A9ofascistes-week-end-paris-lfi-ps-pcf-objectif-remigration",
+     "media": "France 24",
+     "date": "2026-10-28T18:21:16.000Z"
+    },
+    {
+     "titre": "La gauche dénonce la tenue de manifestations et d’évènements «néofascistes» ce week-end à Paris et dans les Hauts-de-Seine",
+     "url": "https://www.liberation.fr/politique/la-gauche-denonce-la-tenue-de-manifestations-et-devenements-neofascistes-ce-week-end-a-paris-20261028_LYRJRKK7S5E3HH5ZSW7E2RFZWE/",
+     "media": "Libération",
+     "date": "2026-10-28T17:18:14.000Z"
+    },
+    {
+     "titre": "Attentat à Trappes : Dédicaces, défilé… LFI dénonce la tenue de manifestations « néofascistes » ce week-end à Paris",
+     "url": "https://www.20minutes.fr/politique/4258362-20261028-attentat-trappes-dedicaces-defile-lfi-denonce-tenue-manifestations-neofascistes-week-end-paris?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-28T16:49:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Tenue de manifestations",
+    "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
     "20 Minutes",
     "La Dépêche",
     "Sud Ouest"
@@ -954,10 +934,10 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
-    "Public Sénat / RFI",
+    "Public Sénat / RFI / France 24",
     "Libération"
    ],
    "derniere": "2026-10-27T07:43:05.000Z",
@@ -985,15 +965,75 @@
      "url": "https://www.rfi.fr/fr/france/20261027-statut-de-la-corse-le-s%C3%A9nat-rejette-la-r%C3%A9forme-le-camp-autonomiste-claque-la-porte",
      "media": "RFI",
      "date": "2026-10-27T04:00:49.000Z"
+    },
+    {
+     "titre": "Statut de la Corse : le camp autonomiste claque la porte après le rejet de la réforme au Sénat",
+     "url": "https://www.france24.com/fr/france/20261027-statut-corse-camp-autonomiste-claque-porte-rejet-reforme-senat-processus-beauvau",
+     "media": "France 24",
+     "date": "2026-10-27T01:37:27.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Porte-parole",
+    "origine": "dossier"
    },
    "fait": "Le Sénat rejette la réforme, le camp autonomiste claque la porte",
    "accroche": "Le Sénat rejette la réforme, le camp autonomiste claque la porte",
-   "essentiel": "Statut de la Corse : le Sénat rejette la réforme, le camp autonomiste claque la porte. La droite sénatoriale fait capoter la réforme. Trois médias en parlent : Public Sénat, Libération et RFI."
+   "essentiel": "Statut de la Corse : le Sénat rejette la réforme, le camp autonomiste claque la porte. La droite sénatoriale fait capoter la réforme. Quatre médias en parlent : Public Sénat, Libération, RFI et France 24."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Europe 1",
+    "France 24"
+   ],
+   "derniere": "2026-10-28T20:57:23.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Gabriel Attal franchit le pas et prône une «primaire des démocrates»",
+     "url": "https://www.europe1.fr/politique/presidentielle-2027-gabriel-attal-franchit-le-pas-et-prone-une-primaire-des-democrates-1190208?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-28T20:57:23.000Z"
+    },
+    {
+     "titre": "Gabriel Attal prône une \"primaire des démocrates\" avant l'élection présidentielle en France",
+     "url": "https://www.france24.com/fr/france/20261028-gabriel-attal-pr%C3%B4ne-une-primaire-des-d%C3%A9mocrates-avant-l-%C3%A9lection-pr%C3%A9sidentielle-en-france",
+     "media": "France 24",
+     "date": "2026-10-28T20:38:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire des démocrates",
+    "origine": "recoupement"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Attal 4–9,5 %",
+     "source": "Commission des sondages (notice Ipsos)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -1031,8 +1071,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -1262,8 +1303,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    },
    "contexte": [
     {
@@ -1272,41 +1314,6 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "20 Minutes"
-   ],
-   "derniere": "2026-10-28T17:18:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La gauche dénonce la tenue de manifestations et d’évènements «néofascistes» ce week-end à Paris et dans les Hauts-de-Seine",
-     "url": "https://www.liberation.fr/politique/la-gauche-denonce-la-tenue-de-manifestations-et-devenements-neofascistes-ce-week-end-a-paris-20261028_LYRJRKK7S5E3HH5ZSW7E2RFZWE/",
-     "media": "Libération",
-     "date": "2026-10-28T17:18:14.000Z"
-    },
-    {
-     "titre": "Attentat à Trappes : Dédicaces, défilé… LFI dénonce la tenue de manifestations « néofascistes » ce week-end à Paris",
-     "url": "https://www.20minutes.fr/politique/4258362-20261028-attentat-trappes-dedicaces-defile-lfi-denonce-tenue-manifestations-neofascistes-week-end-paris?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-28T16:49:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Tenue de manifestations",
-    "origine": "recoupement"
-   }
   },
   {
    "medias": 2,
@@ -1388,6 +1395,46 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "La Dépêche",
+    "Europe 1"
+   ],
+   "derniere": "2026-10-28T15:50:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "elysee"
+   },
+   "articles": [
+    {
+     "titre": "Incendie de l'hôtel de ville de Limoges : le maire a reçu le soutien du vice-président américain J.D. Vance, mais pas de l'Élysée... \"Je n'ai pas eu Emmanuel Macron ni en ligne, ni par SMS\"",
+     "url": "https://www.ladepeche.fr/2026/10/28/incendie-de-lhotel-de-ville-de-limoges-le-maire-a-recu-le-soutien-du-vice-president-americain-jd-vance-mais-pas-de-lelysee-je-nai-pas-eu-emmanuel-13624971.php",
+     "media": "La Dépêche",
+     "date": "2026-10-28T15:50:29.000Z"
+    },
+    {
+     "titre": "Limoges : le maire ne «comprend pas» l'absence d'appel de Macron après l'incendie de l'hôtel de ville",
+     "url": "https://www.europe1.fr/politique/limoges-le-maire-ne-comprend-pas-labsence-dappel-de-macron-apres-lincendie-de-lhotel-de-ville-1188828?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-28T10:16:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Incendie de l hôtel",
+    "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "La Croix",
     "Le Monde"
    ],
@@ -1426,46 +1473,6 @@
    "fait": "Sébastien Lecornu présidera un « hommage national », à une date encore inconnue",
    "accroche": "Sébastien Lecornu présidera un « hommage national », à une date encore inconnue",
    "essentiel": "Sébastien Lecornu présidera un « hommage national », à une date encore inconnue. Deux médias en parlent : La Croix et Le Monde."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T14:18:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre : Le maire de Limoges ne « comprend pas » pourquoi Macron ne l’a pas appelé après l’incendie",
-     "url": "https://www.20minutes.fr/politique/4258285-20261028-violences-17-octobre-maire-limoges-comprend-pourquoi-macron-appele-apres-incendie?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-28T14:18:26.000Z"
-    },
-    {
-     "titre": "Limoges : le maire ne «comprend pas» l'absence d'appel de Macron après l'incendie de l'hôtel de ville",
-     "url": "https://www.europe1.fr/politique/limoges-le-maire-ne-comprend-pas-labsence-dappel-de-macron-apres-lincendie-de-lhotel-de-ville-1188828?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T10:16:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Après l incendie",
-    "origine": "recoupement"
-   }
   },
   {
    "medias": 2,
@@ -1513,9 +1520,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Porte-parole",
+    "origine": "dossier"
    },
    "accroche": "Charles Alloncle nommé porte-parole de la campagne de Marine Le Pen",
    "essentiel": "Charles Alloncle nommé porte-parole de la campagne de Marine Le Pen. Deux médias en parlent : Libération et Le JDD.",
@@ -1537,10 +1543,10 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "L'Obs",
-    "Public Sénat"
+    "La Croix",
+    "France 24"
    ],
-   "derniere": "2026-10-28T09:24:53.000Z",
+   "derniere": "2026-10-28T06:38:24.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1549,25 +1555,26 @@
    },
    "articles": [
     {
-     "titre": "La droite se lâche au Sénat sur la loi casseur-payeur, un texte « liberticide » et « autoritaire » dénonce la gauche",
-     "url": "https://www.nouvelobs.com/politique/20261027.OBS119578/la-loi-casseur-payeur-un-cheval-de-troie-liberticide-et-autoritaire-face-a-la-mobilisation-sociale-denoncent-des-senateurs-de-gauche.html",
-     "media": "L'Obs",
-     "date": "2026-10-28T09:24:53.000Z"
+     "titre": "Le projet de loi « casseurs-payeurs » adopté et élargi au Sénat après les violences du 17 octobre",
+     "url": "https://www.la-croix.com/casseurs-payeurs-un-projet-de-loi-critique-au-senat-en-plein-coeur-de-la-contestation-20261026",
+     "media": "La Croix",
+     "date": "2026-10-28T06:38:24.000Z"
     },
     {
-     "titre": "Loi « casseurs-payeurs » : que contient le texte examiné au Sénat ?",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/loi-casseurs-payeurs-que-contient-le-texte-examine-au-senat",
-     "media": "Public Sénat",
-     "date": "2026-10-27T15:27:13.000Z"
+     "titre": "Contestation sociale en France : le projet de loi \"casseurs-payeurs\" adopté et élargi au Sénat",
+     "url": "https://www.france24.com/fr/france/20261027-contestation-sociale-en-france-le-projet-de-loi-casseurs-payeurs-adopt%C3%A9-et-%C3%A9largi-au-s%C3%A9nat",
+     "media": "France 24",
+     "date": "2026-10-27T01:22:59.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
+    "titre": "Loi « casseurs-payeurs » : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Que contient le texte examiné au Sénat ?",
-   "accroche": "Que contient le texte examiné au Sénat ?"
+   "fait": "Le projet de loi \"casseurs-payeurs\" adopté et élargi au Sénat",
+   "accroche": "Le projet de loi \"casseurs-payeurs\" adopté et élargi au Sénat",
+   "essentiel": "Contestation sociale en France : le projet de loi \"casseurs-payeurs\" adopté et élargi au Sénat. Deux médias en parlent : La Croix et France 24."
   },
   {
    "medias": 2,
@@ -1634,8 +1641,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Gouvernement : annonces sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "fait": "Ce que le gouvernement promet aux lycéens",
    "accroche": "Ce que le gouvernement promet aux lycéens",
@@ -1809,8 +1816,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Interview : mobilisation lycéenne",
+    "origine": "regles"
    }
   },
   {
@@ -1887,6 +1894,113 @@
    ]
   },
   {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-28T09:05:56.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Attentat à Trappes : que sait-on aujourd'hui des motivations du suspect?",
+     "url": "https://www.rfi.fr/fr/podcasts/appels-sur-l-actualit%C3%A9/20261028-attentat-%C3%A0-trappes-que-sait-on-aujourd-hui-des-motivations-du-suspect",
+     "media": "RFI",
+     "date": "2026-10-28T09:05:56.000Z"
+    },
+    {
+     "titre": "Que sait-on du profil de Kévin T., le suspect de l’attentat raciste de Trappes ?",
+     "url": "https://www.france24.com/fr/france/20261027-que-sait-on-profil-k%C3%A9vin-t-suspect-attentat-raciste-trappes",
+     "media": "France 24",
+     "date": "2026-10-27T13:28:53.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Que sait-on aujourd'hui des motivations du suspect ?",
+   "accroche": "Que sait-on aujourd'hui des motivations du suspect ?"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-28T22:35:40.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sabrina Sebaihi",
+      "photo": "photos/deputes/PA795808.jpg",
+      "photoHd": "photos/deputes/hd/PA795808.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA795808",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Crise sociale: \"Le gouvernement n'a pas pris la mesure de la colère\", estime Sabrina Sebaihi, députée Écologiste et social des Hauts-de-Seine",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-crise-sociale-le-gouvernement-n-a-pas-pris-la-mesure-de-la-colere-estime-sabrina-sebaihi-deputee-ecologiste-et-social-des-hauts-de-seine_VN-202610280993.html",
+     "media": "BFMTV",
+     "date": "2026-10-28T22:35:40.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social",
+    "origine": "dossier"
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sabrina Sebaihi : députée ECO (Hauts-de-Seine)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-28T22:33:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Crise sociale: \"On est obligé de poser la question des dates de l'élection présidentielle\", estime Julien Aubert, vice-président des Républicains, ancien député",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-crise-sociale-on-est-oblige-de-poser-la-question-des-dates-de-l-election-presidentielle-estime-julien-aubert-vice-president-des-republicains-ancien-depute_VN-202610280990.html",
+     "media": "BFMTV",
+     "date": "2026-10-28T22:33:40.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   }
+  },
+  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
@@ -1944,8 +2058,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Premier ministre : réponse sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "contexte": [
     {
@@ -2204,8 +2318,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Premier ministre : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Parcoursup : Sébastien Lecornu confirme son remplacement en 2028",
    "accroche": "Parcoursup : Sébastien Lecornu confirme son remplacement en 2028",
@@ -2214,54 +2329,6 @@
      "type": "personnes",
      "texte": "Sébastien Lecornu : premier ministre",
      "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T20:57:23.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Gabriel Attal franchit le pas et prône une «primaire des démocrates»",
-     "url": "https://www.europe1.fr/politique/presidentielle-2027-gabriel-attal-franchit-le-pas-et-prone-une-primaire-des-democrates-1190208?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T20:57:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Attal 4–9,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -2349,8 +2416,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Premier ministre : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Sébastien Lecornu renvoie la balle aux députés pour trouver une alternative au dispositif d’orientation des lycéens",
    "accroche": "Sébastien Lecornu renvoie la balle aux députés pour trouver une alternative au dispositif d’orientation des lycéens",
@@ -2411,8 +2479,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -3650,9 +3718,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Laurent Jacobelli (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Porte-parole",
+    "origine": "dossier"
    },
    "fait": "Conseil de défense pour préparer les manifestations",
    "accroche": "Conseil de défense pour préparer les manifestations",
@@ -4791,58 +4858,6 @@
     "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-28T17:30:01.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "De la piscine à l’école de la Ferrage en passant par la sécurité du quartier Plan Ouest, plusieurs chantiers à l’étude à Fayence",
-     "url": "https://www.nicematin.com/societe/politique/de-la-piscine-a-l-ecole-de-la-ferrage-en-passant-par-la-securite-du-quartier-plan-ouest-plusieurs-chantiers-a-l-etude-a-fayence-10748217",
-     "media": "Nice-Matin",
-     "date": "2026-10-28T17:30:01.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-10-28T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ils ont évité le licenciement de 25 personnes et le départ de 14 jeunes placés : qui a repris la Maison d’enfants à caractère social de Clairac ?",
-     "url": "https://www.sudouest.fr/lot-et-garonne/clairac/ils-ont-evite-le-licenciement-de-25-personnes-et-le-depart-de-14-jeunes-places-qui-a-repris-la-maison-d-enfants-a-caractere-social-de-clairac-31141103.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-28T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social",
-    "origine": "dossier"
    }
   }
  ]
