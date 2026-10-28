@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-10-28T13:31:00.680Z",
+ "lastUpdated": "2026-10-28T13:35:35.903Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -155,18 +155,18 @@
    "motifs": [
     "présidentielle",
     "marine",
-    "brésil",
-    "changer"
+    "candidat",
+    "brésil"
    ],
    "medias": [
+    "BFMTV",
     "Le Monde",
     "20 Minutes",
     "La Dépêche",
     "Europe 1",
-    "BFMTV",
+    "Sud Ouest",
     "Mediapart",
     "Libération",
-    "Sud Ouest",
     "Ouest-France",
     "Public Sénat",
     "Le JDD",
@@ -179,31 +179,38 @@
     "RFI",
     "L'Express",
     "La Croix",
+    "France 24",
     "Nice-Matin"
    ],
    "mediasDistincts": 17,
    "sources": [
+    "BFMTV",
     "Le Monde",
     "20 Minutes",
     "La Dépêche",
     "Groupe Bolloré",
-    "BFMTV",
+    "Sud Ouest",
     "Mediapart",
     "Libération",
-    "Sud Ouest",
     "Ouest-France",
     "Public Sénat",
     "Valeurs actuelles",
     "L'Obs",
     "EBRA",
-    "RFI",
+    "France Médias Monde",
     "L'Express",
     "La Croix",
     "Nice-Matin"
    ],
-   "nb": 56,
-   "derniere": "2026-10-28T13:22:59.000Z",
+   "nb": 58,
+   "derniere": "2026-10-28T13:30:26.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "\"Double casquette\": Marc Fesneau dénonce le \"mélange des genres\" de David Lisnard, candidat à la présidentielle et président de l'AMF",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/double-casquette-marc-fesneau-denonce-le-melange-des-genres-de-david-lisnard-candidat-a-la-presidentielle-et-president-de-l-amf_AD-202610280551.html",
+     "date": "2026-10-28T13:30:26.000Z"
+    },
     {
      "media": "Le Monde",
      "titre": "Mobilisations sociales : Emmanuel Macron a présidé un conseil de défense pour préparer les manifestations du week-end",
@@ -229,11 +236,10 @@
      "date": "2026-10-28T12:50:02.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Présidentielle 2027: Gabriel Attal souhaite un \"choc massif de simplification\" pour les entreprises",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-2027-gabriel-attal-souhaite-un-choc-massif-de-simplification-pour-les-entreprises_VN-202610280475.html",
-     "date": "2026-10-28T11:42:00.000Z",
-     "video": true
+     "media": "Sud Ouest",
+     "titre": "Charente-Maritime : deux centres de formation des apprentis s’ouvrent aux collégiens le 4 novembre pour la découverte des métiers",
+     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/charente-maritime-deux-centres-de-formation-des-apprentis-s-ouvrent-aux-collegiens-le-4-novembre-pour-la-decouverte-des-metiers-31274086.php",
+     "date": "2026-10-28T12:00:00.000Z"
     },
     {
      "media": "Mediapart",
@@ -246,12 +252,6 @@
      "titre": "Charles Alloncle nommé porte-parole de la campagne de Marine Le Pen",
      "url": "https://www.liberation.fr/politique/charles-alloncle-nomme-porte-parole-de-la-campagne-de-marine-le-pen-20261028_X46MVDNIOZEONJTEC65K4JWY2M/",
      "date": "2026-10-28T11:28:14.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Inéligibilité de Marine Le Pen : la candidate d’extrême droite saisit le Conseil supérieur de la magistrature après les propos d’une juge",
-     "url": "https://www.sudouest.fr/justice/ineligibilite-de-marine-le-pen-la-candidate-d-extreme-droite-saisit-le-conseil-superieur-de-la-magistrature-apres-les-propos-d-une-juge-31275142.php",
-     "date": "2026-10-28T11:25:51.000Z"
     },
     {
      "media": "Ouest-France",
@@ -326,6 +326,12 @@
      "date": "2026-10-27T16:43:00.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "Culture : découvrez les finalistes du prix Goncourt et le livre de Mory Sacko",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-culture-d%C3%A9couvrez-le-livre-de-mory-sacko-le-food-samoura%C3%AF",
+     "date": "2026-10-27T16:05:56.000Z"
+    },
+    {
      "media": "Nice-Matin",
      "titre": "« Une date de bordélisation » : Bruno Retailleau et le RN demandent à changer les dates de la présidentielle en 2027",
      "url": "https://www.nicematin.com/societe/politique/une-date-de-bordelisation-bruno-retailleau-et-le-rn-demandent-a-changer-les-dates-de-la-presidentielle-en-2027-10747783",
@@ -354,6 +360,7 @@
     "Sud Ouest",
     "Public Sénat",
     "Europe 1",
+    "France 24",
     "20 Minutes",
     "Le Figaro",
     "Le JDD"
@@ -365,7 +372,7 @@
     "L'Obs",
     "L'Humanité",
     "Mediapart",
-    "RFI",
+    "France Médias Monde",
     "Nice-Matin",
     "EBRA",
     "Sud Ouest",
@@ -374,7 +381,7 @@
     "20 Minutes",
     "Le Figaro"
    ],
-   "nb": 19,
+   "nb": 21,
    "derniere": "2026-10-28T12:06:17.000Z",
    "articles": [
     {
@@ -462,6 +469,12 @@
      "date": "2026-10-27T21:23:49.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "Projet de loi \"Casseurs-payeurs\" : le gouvernement face aux réseaux sociaux",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-projet-de-loi-casseurs-payeurs-le-gouvernement-face-aux-r%C3%A9seaux-sociaux",
+     "date": "2026-10-27T12:24:20.000Z"
+    },
+    {
      "media": "20 Minutes",
      "titre": "Colère sociale : « Casseurs-payeurs », le projet de loi critiqué examiné au Sénat",
      "url": "https://www.20minutes.fr/politique/assemblee_nationale/4257872-20261027-colere-sociale-casseurs-payeurs-projet-loi-critique-examine-senat?at_medium=display&at_campaign=149",
@@ -501,6 +514,7 @@
     "Libération",
     "Nice-Matin",
     "Mediapart",
+    "France 24",
     "Le JDD",
     "L'Obs",
     "20 Minutes",
@@ -519,13 +533,13 @@
     "Libération",
     "Nice-Matin",
     "Mediapart",
+    "France Médias Monde",
     "L'Obs",
     "20 Minutes",
     "La Croix",
-    "L'Express",
-    "RFI"
+    "L'Express"
    ],
-   "nb": 27,
+   "nb": 31,
    "derniere": "2026-10-28T11:16:30.000Z",
    "articles": [
     {
@@ -590,6 +604,12 @@
      "date": "2026-10-27T19:37:49.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "Les principales annonces du gouvernement face à la crise lycéenne",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-les-principales-annonces-du-gouvernement-face-%C3%A0-la-crise-lyc%C3%A9enne",
+     "date": "2026-10-27T13:52:03.000Z"
+    },
+    {
      "media": "Le JDD",
      "titre": "Remplacement de Parcoursup, 28 élèves par classe… Les annonces du gouvernement pour calmer la colère lycéenne",
      "url": "https://www.lejdd.fr/Societe/remplacement-de-parcoursup-28-eleves-par-classe-les-annonces-du-gouvernement-pour-calmer-la-colere-lyceenne-187119",
@@ -629,69 +649,6 @@
   }
  ],
  "sujets": [
-  {
-   "medias": 5,
-   "mediasDistincts": 5,
-   "sources": [
-    "20 Minutes",
-    "BFMTV",
-    "Libération",
-    "La Croix",
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T13:05:43.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Attentat de Trappes : un hommage national va être organisé, annonce le gouvernement",
-     "url": "https://www.liberation.fr/politique/attentat-de-trappes-un-hommage-national-va-etre-organise-annonce-le-gouvernement-20261028_2P43SEXRMJFNPKTD2KLM5UWH5U/",
-     "media": "Libération",
-     "date": "2026-10-28T12:09:10.000Z"
-    },
-    {
-     "titre": "Attentat raciste à Trappes et La Verrière : Un hommage national sera organisé, annonce le gouvernement",
-     "url": "https://www.20minutes.fr/politique/4258272-20261028-attentat-trappes-verriere-hommage-national-organise-annonce-gouvernement?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-10-28T13:05:43.000Z"
-    },
-    {
-     "titre": "DIRECT. Attentat raciste à Trappes: un hommage national sera organisé",
-     "url": "https://www.bfmtv.com/politique/direct-le-senat-approuve-le-projet-de-loi-casseurs-payeurs-apres-les-debordements-du-17-octobre-le-gouvernement-reste-sous-pression-avant-la-prochaine-mobilisation-du-31-octobre_LN-202610280162.html",
-     "media": "BFMTV",
-     "date": "2026-10-28T13:02:09.000Z"
-    },
-    {
-     "titre": "Attentat raciste de Trappes : le gouvernement annonce qu’un hommage national sera organisé",
-     "url": "https://www.la-croix.com/societe/attentat-raciste-de-trappes-le-gouvernement-annonce-qu-un-hommage-national-sera-organise-20261028",
-     "media": "La Croix",
-     "date": "2026-10-28T10:52:41.000Z"
-    },
-    {
-     "titre": "Attentat de Trappes : un hommage national sera organisé, annonce le gouvernement",
-     "url": "https://www.europe1.fr/societe/attentat-de-trappes-un-hommage-national-sera-organise-annonce-le-gouvernement-1188885?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T10:45:00.000Z"
-    },
-    {
-     "titre": "Attentat de Trappes: le gouvernement annonce qu'un hommage national sera organisé",
-     "url": "https://www.bfmtv.com/politique/gouvernement/attentat-de-trappes-le-gouvernement-annonce-qu-un-hommage-national-sera-organise_AD-202610280419.html",
-     "media": "BFMTV",
-     "date": "2026-10-28T10:43:01.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Attentat raciste à Trappes : un hommage national sera organisé",
-   "accroche": "Attentat raciste à Trappes : un hommage national sera organisé",
-   "essentiel": "Attentat raciste de Trappes : le gouvernement annonce qu’un hommage national sera organisé. Cinq médias en parlent : Libération, 20 Minutes, BFMTV, La Croix et Europe 1."
-  },
   {
    "medias": 4,
    "mediasDistincts": 4,
@@ -815,6 +772,106 @@
    }
   },
   {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "France 24",
+    "Europe 1",
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-10-28T10:47:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Attentat raciste de Trappes : une minute de silence observée à l'Assemblée",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-attentat-raciste-de-trappes-une-minute-de-silence-observ%C3%A9e-%C3%A0-l-assembl%C3%A9e",
+     "media": "France 24",
+     "date": "2026-10-27T14:35:58.000Z"
+    },
+    {
+     "titre": "Attentat raciste dans les Yvelines : de la minute de silences aux invectives",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261028-attentat-raciste-dans-les-yvelines-de-la-minute-de-silences-aux-invectives",
+     "media": "France 24",
+     "date": "2026-10-28T10:47:55.000Z"
+    },
+    {
+     "titre": "Attentat raciste de Trappes : une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes",
+     "url": "https://www.europe1.fr/politique/attentat-raciste-de-trappes-une-seance-sous-tension-a-lassemblee-apres-la-minute-de-silence-en-hommage-aux-victimes-1186986?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-27T19:11:00.000Z"
+    },
+    {
+     "titre": "Une minute de silence observée à l’Assemblée nationale en hommage aux victimes de l’attentat raciste",
+     "url": "https://www.youtube.com/shorts/LVLHT-xW_As",
+     "media": "Hugo Décrypte",
+     "date": "2026-10-27T15:41:48.000Z",
+     "video": true
+    },
+    {
+     "titre": "Attentat raciste de Trappes : minute de silence à l'Assemblée",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261027-attentat-raciste-de-trappes-minute-de-silence-%C3%A0-l-assembl%C3%A9e",
+     "media": "France 24",
+     "date": "2026-10-27T14:32:28.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Attentat raciste",
+    "origine": "recoupement"
+   },
+   "fait": "Une minute de silence observée à l'Assemblée",
+   "accroche": "Une minute de silence observée à l'Assemblée",
+   "essentiel": "Attentat raciste de Trappes : une minute de silence observée à l'Assemblée. Attentat raciste de Trappes : une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes. Trois médias en parlent : France 24, Europe 1 et Hugo Décrypte."
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "La Croix",
+    "Le Monde",
+    "France 24"
+   ],
+   "derniere": "2026-10-28T06:38:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Le projet de loi « casseurs-payeurs » adopté et élargi au Sénat après les violences du 17 octobre",
+     "url": "https://www.la-croix.com/casseurs-payeurs-un-projet-de-loi-critique-au-senat-en-plein-coeur-de-la-contestation-20261026",
+     "media": "La Croix",
+     "date": "2026-10-28T06:38:24.000Z"
+    },
+    {
+     "titre": "Mobilisations sociales : le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/28/mobilisations-sociales-le-projet-de-loi-casseurs-payeurs-approuve-et-elargi-par-le-senat-apres-les-violences-du-17-octobre_6801416_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-28T00:26:38.000Z"
+    },
+    {
+     "titre": "Contestation sociale en France : le projet de loi \"casseurs-payeurs\" adopté et élargi au Sénat",
+     "url": "https://www.france24.com/fr/france/20261027-contestation-sociale-en-france-le-projet-de-loi-casseurs-payeurs-adopt%C3%A9-et-%C3%A9largi-au-s%C3%A9nat",
+     "media": "France 24",
+     "date": "2026-10-27T01:22:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Loi « casseurs-payeurs » : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
+   "accroche": "Le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
+   "essentiel": "Mobilisations sociales : le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre. Trois médias en parlent : La Croix, Le Monde et France 24."
+  },
+  {
    "medias": 5,
    "mediasDistincts": 2,
    "sources": [
@@ -867,10 +924,10 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
-    "Public Sénat / RFI",
+    "Public Sénat / RFI / France 24",
     "Libération"
    ],
    "derniere": "2026-10-27T07:43:05.000Z",
@@ -898,6 +955,12 @@
      "url": "https://www.rfi.fr/fr/france/20261027-statut-de-la-corse-le-s%C3%A9nat-rejette-la-r%C3%A9forme-le-camp-autonomiste-claque-la-porte",
      "media": "RFI",
      "date": "2026-10-27T04:00:49.000Z"
+    },
+    {
+     "titre": "Statut de la Corse : le camp autonomiste claque la porte après le rejet de la réforme au Sénat",
+     "url": "https://www.france24.com/fr/france/20261027-statut-corse-camp-autonomiste-claque-porte-rejet-reforme-senat-processus-beauvau",
+     "media": "France 24",
+     "date": "2026-10-27T01:37:27.000Z"
     }
    ],
    "titrePropre": {
@@ -906,7 +969,68 @@
    },
    "fait": "Le Sénat rejette la réforme, le camp autonomiste claque la porte",
    "accroche": "Le Sénat rejette la réforme, le camp autonomiste claque la porte",
-   "essentiel": "Statut de la Corse : le Sénat rejette la réforme, le camp autonomiste claque la porte. La droite sénatoriale fait capoter la réforme. Trois médias en parlent : Public Sénat, Libération et RFI."
+   "essentiel": "Statut de la Corse : le Sénat rejette la réforme, le camp autonomiste claque la porte. La droite sénatoriale fait capoter la réforme. Quatre médias en parlent : Public Sénat, Libération, RFI et France 24."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "BFMTV",
+    "Public Sénat"
+   ],
+   "derniere": "2026-10-28T13:30:26.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marc Fesneau",
+      "photo": "photos/deputes/PA719938.jpg",
+      "photoHd": "photos/deputes/hd/PA719938.jpg",
+      "parti": "DEM",
+      "lien": "#depute-PA719938",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"Double casquette\": Marc Fesneau dénonce le \"mélange des genres\" de David Lisnard, candidat à la présidentielle et président de l'AMF",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/double-casquette-marc-fesneau-denonce-le-melange-des-genres-de-david-lisnard-candidat-a-la-presidentielle-et-president-de-l-amf_AD-202610280551.html",
+     "media": "BFMTV",
+     "date": "2026-10-28T13:30:26.000Z"
+    },
+    {
+     "titre": "Candidat à la présidentielle et à la présidence de l’AMF : Marc Fesneau dénonce le « mélange des genres » de David Lisnard",
+     "url": "https://www.publicsenat.fr/actualites/politique/candidat-a-la-presidentielle-et-a-la-presidence-de-lamf-marc-fesneau-denonce-le-melange-des-genres-de-david-lisnard",
+     "media": "Public Sénat",
+     "date": "2026-10-28T09:40:17.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marc Fesneau : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Lisnard 6,5 %",
+     "source": "Commission des sondages (notice Ipsos)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marc Fesneau : député DEM (Loir-et-Cher)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -988,43 +1112,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "La Croix",
-    "Le Monde"
-   ],
-   "derniere": "2026-10-28T06:38:24.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Le projet de loi « casseurs-payeurs » adopté et élargi au Sénat après les violences du 17 octobre",
-     "url": "https://www.la-croix.com/casseurs-payeurs-un-projet-de-loi-critique-au-senat-en-plein-coeur-de-la-contestation-20261026",
-     "media": "La Croix",
-     "date": "2026-10-28T06:38:24.000Z"
-    },
-    {
-     "titre": "Mobilisations sociales : le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
-     "url": "https://www.lemonde.fr/politique/article/2026/10/28/mobilisations-sociales-le-projet-de-loi-casseurs-payeurs-approuve-et-elargi-par-le-senat-apres-les-violences-du-17-octobre_6801416_823448.html",
-     "media": "Le Monde",
-     "date": "2026-10-28T00:26:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Loi « casseurs-payeurs » : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
-   "accroche": "Le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre",
-   "essentiel": "Mobilisations sociales : le projet de loi « casseurs-payeurs » approuvé et élargi par le Sénat après les violences du 17 octobre. Deux médias en parlent : La Croix et Le Monde."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "20 Minutes",
     "Le Monde"
    ],
@@ -1075,79 +1162,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Europe 1",
-    "Hugo Décrypte"
-   ],
-   "derniere": "2026-10-27T19:11:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Attentat raciste de Trappes : une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes",
-     "url": "https://www.europe1.fr/politique/attentat-raciste-de-trappes-une-seance-sous-tension-a-lassemblee-apres-la-minute-de-silence-en-hommage-aux-victimes-1186986?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-27T19:11:00.000Z"
-    },
-    {
-     "titre": "Une minute de silence observée à l’Assemblée nationale en hommage aux victimes de l’attentat raciste",
-     "url": "https://www.youtube.com/shorts/LVLHT-xW_As",
-     "media": "Hugo Décrypte",
-     "date": "2026-10-27T15:41:48.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Minute de silence",
-    "origine": "recoupement"
-   },
-   "fait": "Une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes",
-   "accroche": "Une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes",
-   "essentiel": "Attentat raciste de Trappes : une séance sous tension à l'Assemblée après la minute de silence en hommage aux victimes. Deux médias en parlent : Europe 1 et Hugo Décrypte."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-27T17:38:54.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Autonomie de la Corse : les nationalistes amers après le rejet du projet de loi par le Sénat",
-     "url": "https://www.liberation.fr/politique/autonomie-de-la-corse-les-nationalistes-amers-apres-le-rejet-du-projet-de-loi-par-le-senat-20261027_G6NLQEHZTVGWFBIDXSDVYIUCK4/",
-     "media": "Libération",
-     "date": "2026-10-27T17:38:54.000Z"
-    },
-    {
-     "titre": "Autonomie de la Corse : après le rejet du Sénat, les soutiens du texte expriment un « sentiment de déception »",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/autonomie-de-la-corse-apres-le-rejet-du-senat-les-soutiens-du-texte-expriment-un-sentiment-de-deception",
-     "media": "Public Sénat",
-     "date": "2026-10-27T13:34:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Autonomie de la Corse : après le rejet du Sénat",
-   "accroche": "Autonomie de la Corse : après le rejet du Sénat",
-   "essentiel": "Autonomie de la Corse : les nationalistes amers après le rejet de la loi proposée par le Gouvernement par le Sénat. Deux médias en parlent : Libération et Public Sénat."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Libération",
     "Europe 1"
    ],
@@ -1179,6 +1193,52 @@
    "fait": "La commission d'enquête à l'Assemblée nationale toujours bloquée",
    "accroche": "La commission d'enquête à l'Assemblée nationale toujours bloquée",
    "essentiel": "Violences du 17 octobre : la commission d'enquête à l'Assemblée nationale toujours bloquée. Deux médias en parlent : Libération et Europe 1."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "France 24"
+   ],
+   "derniere": "2026-10-27T16:25:02.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Attentat à Trappes et La Verrière : La gauche quitte l’Hémicycle, Lecornu l’accuse de « faire le jeu de l’extrême droite »",
+     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4258068-20261027-attentat-trappes-verriere-gauche-quitte-hemicycle-lecornu-accuse-faire-jeu-extreme-droite?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-27T16:25:02.000Z"
+    },
+    {
+     "titre": "Trappes : minute de silence à l'Assemblée, Lecornu accuse la gauche de \"faire le jeu du RN\"",
+     "url": "https://www.france24.com/fr/france/20261027-attentat-trappes-minute-silence-assembl%C3%A9e-lecornu-accuse-gauche-faire-jeu-rassemblement-national",
+     "media": "France 24",
+     "date": "2026-10-27T15:36:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Attentat à Trappes et La Verrière : La gauche quitte l’Hémicycle",
+   "accroche": "Attentat à Trappes et La Verrière : La gauche quitte l’Hémicycle",
+   "essentiel": "Attentat à Trappes et La Verrière : La gauche quitte l’Hémicycle. Trappes : minute de silence à l'Assemblée. Deux médias en parlent : 20 Minutes et France 24."
   },
   {
    "medias": 2,
@@ -1770,6 +1830,41 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-28T09:05:56.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Attentat à Trappes : que sait-on aujourd'hui des motivations du suspect?",
+     "url": "https://www.rfi.fr/fr/podcasts/appels-sur-l-actualit%C3%A9/20261028-attentat-%C3%A0-trappes-que-sait-on-aujourd-hui-des-motivations-du-suspect",
+     "media": "RFI",
+     "date": "2026-10-28T09:05:56.000Z"
+    },
+    {
+     "titre": "Que sait-on du profil de Kévin T., le suspect de l’attentat raciste de Trappes ?",
+     "url": "https://www.france24.com/fr/france/20261027-que-sait-on-profil-k%C3%A9vin-t-suspect-attentat-raciste-trappes",
+     "media": "France 24",
+     "date": "2026-10-27T13:28:53.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Que sait-on aujourd'hui des motivations du suspect ?",
+   "accroche": "Que sait-on aujourd'hui des motivations du suspect ?"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
     "EBRA"
    ],
    "derniere": "2026-10-28T05:00:00.000Z",
@@ -1854,6 +1949,132 @@
    "fait": "Manifestations : des appels à poursuivre la mobilisation, les chiffres des dégradations de commerces dévoilés",
    "accroche": "Manifestations : des appels à poursuivre la mobilisation, les chiffres des dégradations de commerces dévoilés",
    "essentiel": "Pendant la manifestations, des appels à poursuivre la mobilisation, les chiffres des dégradations de commerces dévoilés. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-26T18:53:31.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mouvement lycéen en France: malgré les changements annoncés pour Parcoursup, la mobilisation se poursuit",
+     "url": "https://www.rfi.fr/fr/france/20261026-mouvement-lyc%C3%A9en-en-france-malgr%C3%A9-les-changements-annonc%C3%A9s-pour-parcoursup-la-mobilisation-se-poursuit",
+     "media": "RFI",
+     "date": "2026-10-26T18:53:31.000Z"
+    },
+    {
+     "titre": "Parcoursup, contrôle continu... La mobilisation se poursuit malgré les annonces du gouvernement",
+     "url": "https://www.france24.com/fr/france/20261026-france-en-direct-emmanuel-macron-juge-que-samedi-prochain-sera-%C3%A0-risque",
+     "media": "France 24",
+     "date": "2026-10-26T12:30:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "fait": "Malgré les changements annoncés pour Parcoursup",
+   "accroche": "Malgré les changements annoncés pour Parcoursup",
+   "essentiel": "Mouvement lycéen en France : malgré les changements annoncés pour Parcoursup, la mobilisation se poursuit. Deux médias en parlent : RFI et France 24."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-10-26T07:36:53.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Mort de Cédric Chouviat : début du procès de trois policiers jugés pour homicide involontaire",
+     "url": "https://www.france24.com/fr/france/20261026-d%C3%A9c%C3%A8s-c%C3%A9dric-chouviat-trois-policiers-jug%C3%A9s-homicide-involontaire-partir-lundi",
+     "media": "France 24",
+     "date": "2026-10-26T07:36:53.000Z"
+    },
+    {
+     "titre": "Mort de Cédric Chouviat en France: trois policiers jugés pour «homicide involontaire»",
+     "url": "https://www.rfi.fr/fr/france/20261026-mort-de-c%C3%A9dric-chouviat-en-france-trois-policiers-jug%C3%A9s-pour-homicide-involontaire",
+     "media": "RFI",
+     "date": "2026-10-26T07:15:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Trois policiers jugés",
+    "origine": "recoupement"
+   },
+   "fait": "Début du procès de trois policiers jugés pour homicide involontaire",
+   "accroche": "Début du procès de trois policiers jugés pour homicide involontaire",
+   "essentiel": "Début du procès de trois policiers jugés pour homicide involontaire. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-28T13:31:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Attentat raciste à Trappes: un hommage national sera organisé",
+     "url": "https://www.bfmtv.com/politique/direct-le-senat-approuve-le-projet-de-loi-casseurs-payeurs-apres-les-debordements-du-17-octobre-le-gouvernement-reste-sous-pression-avant-la-prochaine-mobilisation-du-31-octobre_LN-202610280162.html",
+     "media": "BFMTV",
+     "date": "2026-10-28T13:31:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Attentat raciste à Trappes : un hommage national sera organisé",
+   "accroche": "Attentat raciste à Trappes : un hommage national sera organisé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-10-28T13:30:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Face au basculement démographique, le CESE plaide pour une approche globale, loin seules des incantations natalistes",
+     "url": "https://www.lemonde.fr/politique/article/2026/10/28/face-au-basculement-demographique-le-cese-plaide-pour-une-approche-globale-loin-seules-des-incantations-natalistes_6801581_823448.html",
+     "media": "Le Monde",
+     "date": "2026-10-28T13:30:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2041,6 +2262,34 @@
     "titre": "Éducation et jeunesse : ce que disent les médias",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "20 Minutes"
+   ],
+   "derniere": "2026-10-28T13:05:43.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat raciste à Trappes et La Verrière : Un hommage national sera organisé, annonce le gouvernement",
+     "url": "https://www.20minutes.fr/politique/4258272-20261028-attentat-trappes-verriere-hommage-national-organise-annonce-gouvernement?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-10-28T13:05:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Un hommage national sera organisé, annonce le gouvernement",
+   "accroche": "Un hommage national sera organisé, annonce le gouvernement"
   },
   {
    "medias": 1,
@@ -2327,6 +2576,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-28T12:24:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes : bataille politique à l'Assemblée nationale",
+     "url": "https://www.france24.com/fr/%C3%A9missions/face-%C3%A0-face/20261028-attentat-de-trappes-bataille-politique-%C3%A0-l-assembl%C3%A9e-nationale",
+     "media": "France 24",
+     "date": "2026-10-28T12:24:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-28T12:15:07.000Z",
@@ -2357,6 +2632,63 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-28T12:10:53.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "HOR"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gilles Boyer (Horizons) : \"Je ne suis pas pour qu'on interdise quiconque de s'exprimer\"",
+     "url": "https://www.france24.com/fr/%C3%A9missions/mardi-politique/20261028-gilles-boyer-horizons-je-ne-suis-pas-pour-qu-on-interdise-quiconque-de-s-exprimer",
+     "media": "France 24",
+     "date": "2026-10-28T12:10:53.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Horizons : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-10-28T12:09:10.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes : un hommage national va être organisé, annonce le gouvernement",
+     "url": "https://www.liberation.fr/politique/attentat-de-trappes-un-hommage-national-va-etre-organise-annonce-le-gouvernement-20261028_2P43SEXRMJFNPKTD2KLM5UWH5U/",
+     "media": "Libération",
+     "date": "2026-10-28T12:09:10.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Attentat de Trappes : un hommage national va être organisé",
+   "accroche": "Attentat de Trappes : un hommage national va être organisé"
   },
   {
    "medias": 1,
@@ -2588,6 +2920,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-28T11:31:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Chine : la star française Kylian Mbappé s'excuse, Pékin dit prendre ses mots au \"sérieux\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261028-chine-la-star-fran%C3%A7aise-kylian-mbapp%C3%A9-s-excuse-p%C3%A9kin-dit-prendre-ses-mots-au-s%C3%A9rieux",
+     "media": "France 24",
+     "date": "2026-10-28T11:31:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Chine : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-10-28T11:30:00.000Z",
@@ -2796,6 +3155,35 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-10-28T11:22:42.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes : un hommage national à la victime sera bien organisé",
+     "url": "https://www.france24.com/fr/france/20261028-attentat-de-trappes-un-hommage-national-%C3%A0-la-victime-sera-bien-organis%C3%A9",
+     "media": "France 24",
+     "date": "2026-10-28T11:22:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Un hommage national à la victime sera bien organisé",
+   "accroche": "Un hommage national à la victime sera bien organisé"
   },
   {
    "medias": 1,
@@ -3182,6 +3570,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "La Croix"
+   ],
+   "derniere": "2026-10-28T10:52:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat raciste de Trappes : le gouvernement annonce qu’un hommage national sera organisé",
+     "url": "https://www.la-croix.com/societe/attentat-raciste-de-trappes-le-gouvernement-annonce-qu-un-hommage-national-sera-organise-20261028",
+     "media": "La Croix",
+     "date": "2026-10-28T10:52:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le gouvernement annonce qu’un hommage national sera organisé",
+   "accroche": "Le gouvernement annonce qu’un hommage national sera organisé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-10-28T10:48:17.000Z",
@@ -3219,6 +3635,62 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-10-28T10:45:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes : un hommage national sera organisé, annonce le gouvernement",
+     "url": "https://www.europe1.fr/societe/attentat-de-trappes-un-hommage-national-sera-organise-annonce-le-gouvernement-1188885?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-10-28T10:45:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Attentat de Trappes : un hommage national sera organisé",
+   "accroche": "Attentat de Trappes : un hommage national sera organisé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-10-28T10:43:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes: le gouvernement annonce qu'un hommage national sera organisé",
+     "url": "https://www.bfmtv.com/politique/gouvernement/attentat-de-trappes-le-gouvernement-annonce-qu-un-hommage-national-sera-organise_AD-202610280419.html",
+     "media": "BFMTV",
+     "date": "2026-10-28T10:43:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Le gouvernement annonce qu'un hommage national sera organisé",
+   "accroche": "Le gouvernement annonce qu'un hommage national sera organisé"
   },
   {
    "medias": 1,
@@ -3721,60 +4193,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-10-28T09:40:17.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marc Fesneau",
-      "photo": "photos/deputes/PA719938.jpg",
-      "photoHd": "photos/deputes/hd/PA719938.jpg",
-      "parti": "DEM",
-      "lien": "#depute-PA719938",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Candidat à la présidentielle et à la présidence de l’AMF : Marc Fesneau dénonce le « mélange des genres » de David Lisnard",
-     "url": "https://www.publicsenat.fr/actualites/politique/candidat-a-la-presidentielle-et-a-la-presidence-de-lamf-marc-fesneau-denonce-le-melange-des-genres-de-david-lisnard",
-     "media": "Public Sénat",
-     "date": "2026-10-28T09:40:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marc Fesneau : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Lisnard 6,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Marc Fesneau : député DEM (Loir-et-Cher)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Libération"
    ],
    "derniere": "2026-10-28T09:35:43.000Z",
@@ -3919,35 +4337,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-10-28T09:05:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Attentat à Trappes : que sait-on aujourd'hui des motivations du suspect?",
-     "url": "https://www.rfi.fr/fr/podcasts/appels-sur-l-actualit%C3%A9/20261028-attentat-%C3%A0-trappes-que-sait-on-aujourd-hui-des-motivations-du-suspect",
-     "media": "RFI",
-     "date": "2026-10-28T09:05:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Que sait-on aujourd'hui des motivations du suspect ?",
-   "accroche": "Que sait-on aujourd'hui des motivations du suspect ?"
   },
   {
    "medias": 1,
@@ -4693,445 +5082,6 @@
     "titre": "Les Républicains : déclaration sur l'environnement",
     "origine": "regles"
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-28T07:45:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LR"
-    ],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"Il y a eu une défaillance de l'État\", estime Guillaume Guérin, maire LR-Nouvelle Énergie de Limoges, à propos des violences du 17 octobre",
-     "url": "https://www.bfmtv.com/politique/video-il-y-a-eu-une-defaillance-de-l-etat-estime-guillaume-guerin-maire-lr-nouvelle-energie-de-limoges-a-propos-des-violences-du-17-octobre_VN-202610280256.html",
-     "media": "BFMTV",
-     "date": "2026-10-28T07:45:38.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : déclaration sur l'environnement",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-28T07:43:34.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LR"
-    ],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre: \"Les LBD ne suffisaient pas à faire reculer une partie des casseurs\", assure le maire LR-Nouvelle Énergie de Limoges Guillaume Guérin",
-     "url": "https://www.bfmtv.com/politique/video-violences-du-17-octobre-les-lbd-ne-suffisaient-pas-a-faire-reculer-une-partie-des-casseurs-assure-le-maire-lr-nouvelle-energie-de-limoges-guillaume-guerin_VN-202610280254.html",
-     "media": "BFMTV",
-     "date": "2026-10-28T07:43:34.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : ce qu'il faut savoir sur l'environnement",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-28T07:41:37.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LR"
-    ],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17 octobre: Guillaume Guérin, maire LR-Nouvelle Énergie de Limoges, assure que \"certains policiers municipaux se sont vu mourir\"",
-     "url": "https://www.bfmtv.com/politique/video-violences-du-17-octobre-guillaume-guerin-maire-lr-nouvelle-energie-de-limoges-assure-que-certains-policiers-municipaux-se-sont-vu-mourir_VN-202610280249.html",
-     "media": "BFMTV",
-     "date": "2026-10-28T07:41:37.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : ce qu'il faut savoir sur l'environnement",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T07:38:48.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [
-     "LR"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "«Il y a un lien entre le désordre migratoire et le désordre sécuritaire», constate Bruno Retailleau, président Les Républicains",
-     "url": "https://www.europe1.fr/politique/il-y-a-un-lien-entre-le-desordre-migratoire-et-le-desordre-securitaire-constate-bruno-retailleau-president-les-republicains-1188405?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T07:38:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T07:34:27.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire à droite : «Il faut qu'Edouard Phillipe y soit», déclare Bruno Retailleau",
-     "url": "https://www.europe1.fr/politique/primaire-a-droite-il-faut-quedouard-phillipe-y-soit-declare-bruno-retailleau-1188435?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T07:34:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Retailleau 5,5–11,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T07:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«Il faut changer les dates» : Bruno Retailleau appelle une nouvelle fois à reprogrammer l'élection présidentielle",
-     "url": "https://www.europe1.fr/politique/il-faut-changer-les-dates-bruno-retailleau-appelle-une-nouvelle-fois-a-reprogrammer-lelection-presidentielle-1188360?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T07:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau : appel sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Bruno Retailleau appelle une nouvelle fois à reprogrammer l'élection présidentielle",
-   "accroche": "Bruno Retailleau appelle une nouvelle fois à reprogrammer l'élection présidentielle",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Retailleau 5,5–11,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T07:24:12.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«La violence est légitimée par La France insoumise», assure Bruno Retailleau, candidat des Républicains à la présidentielle",
-     "url": "https://www.europe1.fr/politique/la-violence-est-legitimee-par-la-france-insoumise-assure-bruno-retailleau-candidat-des-republicains-a-la-presidentielle-1188342?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T07:24:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ipsos pour Fiche méthodologique Ce rapport a été élaboré dans (terrain : 21-22 octobre 2026, 1 500 personnes, marge d'erreur ±2,5 pts) : Retailleau 5,5–11,5 %",
-     "source": "Commission des sondages (notice Ipsos)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-10-28T07:22:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montmorot. L’Unité mobile de secours aux animaux signe une convention avec la Ville",
-     "url": "https://www.leprogres.fr/politique/2026/10/28/l-unite-mobile-de-secours-aux-animaux-signe-une-convention-avec-la-ville",
-     "media": "Le Progrès",
-     "date": "2026-10-28T07:22:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montmorot : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L’Unité mobile de secours aux animaux signe une convention avec la Ville",
-   "accroche": "L’Unité mobile de secours aux animaux signe une convention avec la Ville"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-10-28T07:18:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Projet de loi « casseurs payeurs » adopté au Sénat : comment ont voté les parlementaires varois et azuréens de la chambre haute ?",
-     "url": "https://www.nicematin.com/societe/politique/projet-de-loi-casseurs-payeurs-adopte-au-senat-comment-ont-vote-les-parlementaires-varois-et-azureens-de-la-chambre-haute-10748083",
-     "media": "Nice-Matin",
-     "date": "2026-10-28T07:18:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Casseurs-payeurs",
-    "origine": "dossier"
-   },
-   "fait": "Projet de loi « casseurs payeurs » adopté au Sénat",
-   "accroche": "Projet de loi « casseurs payeurs » adopté au Sénat"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-10-28T07:08:25.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Élections au Brésil : défait, Flavio Bolsonaro en fuite vers l'Équateur... le sénateur était visé par des enquêtes pour des soupçons de corruption et de blanchiment d'argent",
-     "url": "https://www.ladepeche.fr/2026/10/28/elections-au-bresil-defait-flavio-bolsonaro-en-fuite-vers-lequateur-le-senateur-etait-vise-par-des-enquetes-pour-des-soupcons-de-corruption-et-de-13624075.php",
-     "media": "La Dépêche",
-     "date": "2026-10-28T07:08:25.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-10-28T07:00:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Edouard Philippe surveille David Lisnard, le RN cible la presse… Retrouvez les indiscrétions du « Nouvel Obs »",
-     "url": "https://www.nouvelobs.com/politique/20261028.OBS119602/edouard-philippe-surveille-david-lisnard-le-rn-cible-la-presse-retrouvez-les-indiscretions-du-nouvel-obs.html",
-     "media": "L'Obs",
-     "date": "2026-10-28T07:00:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-10-28T06:40:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mouvement des lycéens : le gouvernement mobilisé pour encourager le retour des élèves en classe",
-     "url": "https://www.europe1.fr/politique/mouvement-des-lyceens-le-gouvernement-mobilise-pour-encourager-le-retour-des-eleves-en-classe-1188228?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-10-28T06:40:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
-   },
-   "fait": "Le gouvernement mobilisé pour encourager le retour des élèves en classe",
-   "accroche": "Le gouvernement mobilisé pour encourager le retour des élèves en classe"
   }
  ]
 }
