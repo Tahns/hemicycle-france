@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: "22"
       - name: Mémoire HTTP (relevés récents)
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/http
           key: http-${{ github.run_id }}

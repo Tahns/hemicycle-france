@@ -23,7 +23,7 @@ jobs:
           node-version: "22"
       # Mémoire des requêtes conditionnelles (ETag / Last-Modified) : évite de retélécharger les grosses archives inchangées
       - name: Mémoire HTTP (validateurs des sources)
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/http
           key: http-${{ github.run_id }}
