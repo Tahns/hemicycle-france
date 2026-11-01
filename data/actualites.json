@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-01T13:10:44.871Z",
+ "lastUpdated": "2026-11-01T13:15:44.405Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -162,6 +162,7 @@
     "Le Progrès",
     "Nice-Matin",
     "Le Monde",
+    "France Inter",
     "BFMTV",
     "Sud Ouest",
     "Le Dauphiné libéré",
@@ -179,11 +180,12 @@
     "France 24",
     "L'Obs"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 15,
    "sources": [
     "EBRA",
     "Nice-Matin",
     "Le Monde",
+    "France Inter",
     "BFMTV",
     "Sud Ouest",
     "Groupe Bolloré",
@@ -196,7 +198,7 @@
     "La Croix",
     "L'Obs"
    ],
-   "nb": 66,
+   "nb": 67,
    "derniere": "2026-11-01T13:00:00.000Z",
    "articles": [
     {
@@ -216,6 +218,12 @@
      "titre": "EN DIRECT, manifestations du 31 octobre : enquête ouverte après le jet d’un cocktail Molotov sur des gendarmes à Paris ; appel au blocus lancé par trois organisations lycéennes et étudiantes",
      "url": "https://www.lemonde.fr/societe/live/2026/11/01/en-direct-manifestations-en-france-enquete-ouverte-apres-le-jet-d-un-cocktail-molotov-sur-des-gendarmes-a-paris-appel-au-blocus-lance-par-trois-organisations-lyceennes-et-etudiantes_6803391_3224.html",
      "date": "2026-11-01T12:12:27.000Z"
+    },
+    {
+     "media": "France Inter",
+     "titre": "Après le 31 octobre : le gouvernement cherche une issue face à la menace de nouveaux blocages",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/mobilisation-quelles-sont-les-marges-de-manoeuvre-du-gouvernement-7874304",
+     "date": "2026-11-01T12:11:00.000Z"
     },
     {
      "media": "BFMTV",
@@ -592,12 +600,6 @@
      "url": "https://www.lemonde.fr/societe/live/2026/11/01/en-direct-manifestations-en-france-enquete-ouverte-apres-le-jet-d-un-cocktail-molotov-sur-des-gendarmes-a-paris-appel-au-blocus-lance-par-trois-organisations-lyceennes-et-etudiantes_6803391_3224.html",
      "media": "Le Monde",
      "date": "2026-11-01T12:12:27.000Z"
-    },
-    {
-     "titre": "Manifestation du 31 octobre : un gendarme visé par un cocktail Molotov à Paris",
-     "url": "https://www.sudouest.fr/ile-de-france/paris/manifestation-du-31-octobre-un-gendarme-vise-par-un-cocktail-molotov-a-paris-31326298.php",
-     "media": "Sud Ouest",
-     "date": "2026-10-31T21:12:00.000Z"
     },
     {
      "titre": "VIDEO. Manifestations du 31 octobre : un gendarme prend feu après un jet de cocktail molotov, le ministre de l'Intérieur dénonce une \"tentative de meurtre\"",
@@ -1492,48 +1494,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Edouard Philippe",
-     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
-     "media": "BFMTV",
-     "date": "2026-11-01T12:54:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-01T12:54:16.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Gabriel Attal",
       "photo": "photos/deputes/PA722190.jpg",
       "photoHd": "photos/deputes/hd/PA722190.jpg",
@@ -1563,6 +1523,48 @@
     {
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-01T12:54:16.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Edouard Philippe",
+     "url": "https://www.bfmtv.com/politique/edouard-philippe_DN-202108310657.html",
+     "media": "BFMTV",
+     "date": "2026-11-01T12:54:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -1986,6 +1988,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-11-01T12:11:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Après le 31 octobre : le gouvernement cherche une issue face à la menace de nouveaux blocages",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/mobilisation-quelles-sont-les-marges-de-manoeuvre-du-gouvernement-7874304",
+     "media": "France Inter",
+     "date": "2026-11-01T12:11:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-01T12:09:06.000Z",
@@ -2215,6 +2243,32 @@
     "titre": "Les Républicains : ce que disent les médias",
     "origine": "regles",
     "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-01T11:56:05.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Jet de cocktail Molotov sur des gendarmes à Paris : ce que l’on sait",
+     "url": "https://www.nouvelobs.com/politique/20261101.OBS119750/jet-de-cocktail-molotov-sur-des-gendarmes-a-paris-ce-que-l-on-sait.html",
+     "media": "L'Obs",
+     "date": "2026-11-01T11:56:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -4441,6 +4495,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-10-31T21:12:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Manifestation du 31 octobre : un gendarme visé par un cocktail Molotov à Paris",
+     "url": "https://www.sudouest.fr/ile-de-france/paris/manifestation-du-31-octobre-un-gendarme-vise-par-un-cocktail-molotov-a-paris-31326298.php",
+     "media": "Sud Ouest",
+     "date": "2026-10-31T21:12:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-10-31T21:10:08.000Z",
@@ -4537,110 +4617,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-31T20:40:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LR"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Manifestation parisienne du 31 octobre: Hervé Gicquel, maire \"Les Républicains\" de Charenton-le-Pont, exprime \"son soulagement\" après \"une journée qui s'est bien déroulée globalement\"",
-     "url": "https://www.bfmtv.com/politique/les-republicains/video-manifestation-parisienne-du-31-octobre-herve-gicquel-maire-les-republicains-de-charenton-le-pont-exprime-son-soulagement-apres-une-journee-qui-s-est-bien-deroulee-globalement_VN-202610310374.html",
-     "media": "BFMTV",
-     "date": "2026-10-31T20:40:40.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-31T20:37:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Gendarme ciblé par un jet de cocktail Molotov: \"Ce qui passé ce soir est scandaleux\", fustige Jonas Haddad, porte-parole adjoint des Républicains",
-     "url": "https://www.bfmtv.com/politique/les-republicains/video-gendarme-cible-par-un-jet-de-cocktail-molotov-ce-qui-passe-ce-soir-est-scandaleux-fustige-jonas-haddad-porte-parole-adjoint-des-republicains_VN-202610310372.html",
-     "media": "BFMTV",
-     "date": "2026-10-31T20:37:26.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Gendarme ciblé par un jet de cocktail Molotov",
-   "accroche": "Gendarme ciblé par un jet de cocktail Molotov"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-10-31T20:36:39.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Léa Balage El Mariky",
-      "photo": "photos/deputes/PA841701.jpg",
-      "photoHd": "photos/deputes/hd/PA841701.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA841701",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "ECO"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 31 octobre: \"On est dans un moment de bascule\", estime Léa Balage El Mariky, députée \"Les Écologistes\" de Paris",
-     "url": "https://www.bfmtv.com/politique/video-manifestations-du-31-octobre-on-est-dans-un-moment-de-bascule-estime-lea-balage-el-mariky-deputee-les-ecologistes-de-paris_VN-202610310371.html",
-     "media": "BFMTV",
-     "date": "2026-10-31T20:36:39.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Léa Balage El Mariky (Écologistes) : déclaration sur l'environnement",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Léa Balage El Mariky : députée ECO (Paris)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   }
  ]
 }
