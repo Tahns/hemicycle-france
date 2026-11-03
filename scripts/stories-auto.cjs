@@ -77,6 +77,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { concerneLaFrance } = require("./pertinence.cjs");
+const { estUtile } = require("./utilite.cjs"); // sujet sans lien avec la vie politique (culture, sport, local, fait divers) : jamais publié
 const SS = require("./sujets-sensibles.cjs");
 const PN = require("./personne-nommee.cjs"); // accusations visant une personne nommée : 3 médias au moins, jamais de portrait
 
@@ -452,7 +453,7 @@ function choisirDossier({ actualites, file, registre = null, now = new Date(), j
     if (refusPersonneNommee(d, mediasDistinctsDe(d.articles, d.mediasDistincts), d.titre, journal)) return false; // accusation visant une personne nommée : 3 médias au moins (le dossier ne montre aucun portrait)
     if (titreGenerique(d.titre) || dejaVu(d.titre, recents) || articlesDejaPublies(d.articles, recs72)) return false;
     if (new Set(d.articles.map((a) => sansAccent(a.titre).replace(/[^a-z0-9]+/g, " ").trim())).size < 3) return false; // des reprises d'une même dépêche ne font pas un dossier
-    if (!concerneLaFrance(d.articles.map((a) => a.titre)) || motExclu(d.titre)) return false;
+    if (!concerneLaFrance(d.articles.map((a) => a.titre)) || !estUtile(d.articles.map((a) => a.titre)).utile || motExclu(d.titre)) return false;
     return !d.articles.some((a) => motExclu(a.titre)) && !(reserveStory(now) && d.articles.some((a) => parleDeSondage(a.titre)));
   });
   if (!candidats.length) return null;
@@ -489,6 +490,8 @@ function choisirSujet({ actualites, direct, file, now = new Date(), candidats: d
     const titre = s.articles?.[0]?.titre;
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
     if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return; // sujet purement étranger : ni site ni story
+    const utile = estUtile([...(s.articles || []).map((x) => x.titre), s.titrePropre?.titre, s.fait, s.accroche]); // titres de presse + nos propres titres (titre propre, fait, accroche)
+    if (!utile.utile) return rej(`pas assez utile : ${utile.motif}`); // culture, sport, local, fait divers : mieux vaut ne rien publier
     const medias = mediasDistinctsDe(s.articles, s.mediasDistincts);
     const parole = presidentParle(s, direct, now);
     if (medias < MIN_MEDIAS && !parole) return rej(`moins de ${MIN_MEDIAS} médias`);
@@ -610,6 +613,7 @@ function choisirEnBref({ actualites, file, registre = null, now = new Date(), jo
     const titre = s.articles?.[0]?.titre;
     if (!titre || titre.length < 25 || titre.length > 220 || /[$<>{}]/.test(titre)) return;
     if (!concerneLaFrance((s.articles || []).map((x) => x.titre))) return;
+    if (!estUtile((s.articles || []).map((x) => x.titre)).utile) return;
     const medias = mediasDistinctsDe(s.articles, s.mediasDistincts);
     if (medias < MIN_MEDIAS) return;
     const age = now.getTime() - Date.parse(s.derniere);

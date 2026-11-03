@@ -86,7 +86,7 @@ const TITRE = "Plainte déposée contre le député Jean Dupont pour des propos 
   assert.strictEqual(ok.indice, 0);
   assert.ok(!ok.sansPortrait, "pas d'accusation : portrait autorisé");
   // accusation sans personne nommée : seuil ordinaire (2)
-  assert.strictEqual(choix([sujet("Plainte déposée contre un élu local pour des propos tenus en séance", 2)]).indice, 0);
+  assert.strictEqual(choix([sujet("Plainte déposée contre un député pour des propos tenus en séance", 2)]).indice, 0);
   // une prise de parole du président n'en dispense pas
   const s1 = sujet(TITRE, 1, DUPONT);
   const direct = { evenements: [{ type: "allocution", titre: s1.articles[0].titre }] };
@@ -103,7 +103,7 @@ const TITRE = "Plainte déposée contre le député Jean Dupont pour des propos 
 
 // ---------- Dossier et « en bref » : mêmes seuils ----------
 {
-  const dossier = (nb, titre = "Plainte contre Jean Dupont : l'élu répond aux accusations") => ({ id: "affaire-dupont", titre: "Affaire Dupont", nb: 8, medias: MEDIAS.slice(0, nb), mediasDistincts: nb, derniere: il_y_a(1), articles: Array.from({ length: 8 }, (_, i) => ({ titre: `${titre} (épisode ${i})`, url: `https://example.org/d/${i}`, media: MEDIAS[i % nb], date: il_y_a(1) })) });
+  const dossier = (nb, titre = "Plainte contre le député Jean Dupont : l'élu répond aux accusations") => ({ id: "affaire-dupont", titre: "Affaire Dupont", nb: 8, medias: MEDIAS.slice(0, nb), mediasDistincts: nb, derniere: il_y_a(1), articles: Array.from({ length: 8 }, (_, i) => ({ titre: `${titre} (épisode ${i})`, url: `https://example.org/d/${i}`, media: MEDIAS[i % nb], date: il_y_a(1) })) });
   A.appliquerSeuils(A.normaliserConfig({ minMedias: 2, dossierMedias: 3 }));
   assert.ok(A.choisirDossier({ actualites: { dossiers: [dossier(3)] }, file: vide, now }), "3 médias distincts : dossier retenu");
   A.appliquerSeuils(A.normaliserConfig({ minMedias: 2, dossierMedias: 3, minMediasPersonneNommee: 5 }));

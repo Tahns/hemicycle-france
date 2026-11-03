@@ -52,3 +52,7 @@ Les stories, posts et carrousels sont maintenant écrits en **SVG** (formes et t
 **Style « presse »** : quand une photo libre d'une institution existe pour le thème (`data/vignettes.json`), l'actualité et la couverture des carrousels sont dessinées photo plein cadre sous un dégradé sombre, gros titre blanc, trait jaune, crédit de la photo visible (« Photo d'illustration »). Sans photo : la carte claire. `window.STORY_SANS_PHOTO = true` désactive ce style.
 
 **Mise en page et ton** : titres jamais coupés (la taille baisse d'abord, retours à la ligne équilibrés), sous-titres coupés à la phrase entière, agenda réduit à quelques points plutôt qu'un texte minuscule, hémicycle vectoriel pâle en décor. Mots simples partout (« Ont voté pour / contre », « Se sont abstenus », « On vous explique », « Glissez pour la suite »).
+
+## Filtre d'utilité (`scripts/utilite.cjs`)
+
+Un sujet de presse n'est mis en story ou en post que s'il a un lien clair avec la vie politique (Parlement, gouvernement, élections, partis, lois, budget, institutions, mobilisations nationales). Les prix littéraires, le sport, la météo, les faits divers, le people et la vie municipale locale sont écartés, même repris par beaucoup de médias ; le motif apparaît dans le journal (« pas assez utile : … »). Les listes de mots sont simples, en tête du fichier : à compléter si un sujet utile est écarté à tort. Test : `tests/utilite.test.mjs`.
