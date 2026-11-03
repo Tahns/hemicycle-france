@@ -26,7 +26,18 @@ function mesure(txt, poids, taille){
   return _m.measureText(txt).width;
 }
 // Retour à la ligne : renvoie au plus `max` lignes ; si le texte est trop long, la dernière finit par « … » (jamais sur un mot faible)
-function lignes(txt, poids, taille, larg, max = 99){
+function lignes(txt, poids, taille, larg, max = 99, equilibre = false){
+  const r = lignesBrut(txt, poids, taille, larg, max);
+  if(!equilibre || r.coupe || r.l.length < 2) return r;
+  // rag équilibré : la plus petite largeur qui garde le même nombre de lignes (plus de mot orphelin sur la dernière)
+  let lo = larg * 0.55, hi = larg, best = r;
+  for(let i = 0; i < 9; i++){
+    const mid = (lo + hi) / 2, t = lignesBrut(txt, poids, taille, mid, max);
+    if(!t.coupe && t.l.length === r.l.length){ best = t; hi = mid; } else lo = mid;
+  }
+  return best;
+}
+function lignesBrut(txt, poids, taille, larg, max = 99){
   const mots = typo(txt).split(" ").filter(Boolean), out = [];
   let cur = "";
   for(const m of mots){
@@ -45,8 +56,15 @@ function lignes(txt, poids, taille, larg, max = 99){
 const txtSvg = (t, x, y, { taille = 40, poids = 500, couleur = ENCRE, ancre = "start", ls = 0 } = {}) =>
   `<text x="${x}" y="${y}" font-family="${FAM}" font-size="${taille}" font-weight="${poids}" fill="${couleur}" text-anchor="${ancre}"${ls ? ` letter-spacing="${ls}"` : ""}>${esc(t)}</text>`;
 // Paragraphe : renvoie { svg, h }. `y` = haut du bloc
-function para(txt, x, y, { taille = 40, poids = 500, couleur = ENCRE, larg = LARG, max = 99, inter = 1.28, ls = 0 } = {}){
-  const r = lignes(txt, poids, taille, larg, max), pas = Math.round(taille * inter);
+function para(txt, x, y, { taille = 40, poids = 500, couleur = ENCRE, larg = LARG, max = 99, inter = 1.28, ls = 0, eq = false, entier = false, min = 30, phrases = false } = {}){
+  if(phrases && lignes(txt, poids, taille, larg, max).coupe){ // trop long : on garde les phrases entières qui tiennent plutôt qu'une coupe au milieu
+    const ph = typo(txt).match(/[^.!?]+[.!?]+(?:\s|$)/g) || [];
+    let ok = "";
+    for(const f of ph){ const t = (ok + f).trim(); if(lignes(t, poids, taille, larg, max).coupe) break; ok = t + " "; }
+    if(ok.trim()) txt = ok.trim();
+  }
+  if(entier) while(taille > min && lignes(txt, poids, taille, larg, max).coupe) taille -= 2; // un titre n'est jamais coupé : on réduit d'abord la taille
+  const r = lignes(txt, poids, taille, larg, max, eq), pas = Math.round(taille * inter);
   const svg = r.l.map((s, i) => txtSvg(s, x, y + Math.round(taille * 0.92) + i * pas, { taille, poids, couleur, ls })).join("");
   return { svg, h: r.l.length * pas, n: r.l.length };
 }
@@ -55,6 +73,8 @@ function logo(x, y, s = 64, couleur = BLEU){
   const c = s / 2, arc = (r, e) => `<path d="M ${c - r} ${s * 0.78} A ${r} ${r} 0 0 1 ${c + r} ${s * 0.78}" fill="none" stroke="${couleur}" stroke-width="${e}" stroke-linecap="round" opacity="${r > c * 0.8 ? 0.35 : r > c * 0.45 ? 0.65 : 1}"/>`;
   return `<g transform="translate(${x} ${y})">${arc(s * 0.46, s * 0.1)}${arc(s * 0.3, s * 0.1)}<circle cx="${c}" cy="${s * 0.74}" r="${s * 0.09}" fill="${couleur}"/></g>`;
 }
+// Grand hémicycle stylisé, très pâle, en bas à droite : remplit le vide sans gêner la lecture (forme vectorielle pure)
+const decor = (col, H) => { const cx = L - 40, cy = H - 120; return [620, 500, 380, 260].map((r, i) => `<path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="${col}" stroke-width="${i % 2 ? 26 : 44}" opacity="${0.045 + i * 0.01}"/>`).join(""); };
 const bandeauTricolore = () => `<rect x="0" y="0" width="${L / 3}" height="14" fill="#1D3F9A"/><rect x="${L / 3}" y="0" width="${L / 3}" height="14" fill="#FFFFFF"/><rect x="${2 * L / 3}" y="0" width="${L / 3}" height="14" fill="#C8102E"/><rect x="0" y="14" width="${L}" height="2" fill="${FILET}"/>`;
 // Pastille (étiquette) : renvoie { svg, w }
 function pastille(txt, x, y, { fond = BLEU, texte = BLANC, taille = 30 } = {}){
@@ -70,8 +90,8 @@ const VERT = "#1F6B45", ROUGEV = "#B8261E", AMBRE = "#8A5F00";
 function bloc(b, x, y, k){ // renvoie { svg, h } ; y = haut
   const S = n => Math.round(n * k);
   switch(b.t){
-    case "titre": { const o = { taille: S(b.taille || 84), poids: 800, couleur: ENCRE, max: b.max || 5, inter: 1.08, ls: -1 }; const p = para(b.txt, x, y, o); return { svg: p.svg, h: p.h + S(22) }; }
-    case "p": { const p = para(b.txt, x, y, { taille: S(b.taille || 42), poids: b.poids || 500, couleur: b.couleur || DOUX, max: b.max || 6, larg: b.larg || LARG }); return { svg: p.svg, h: p.h + S(b.espace == null ? 22 : b.espace) }; }
+    case "titre": { const o = { taille: S(b.taille || 84), poids: 800, couleur: ENCRE, max: (b.max || 5) + 2, inter: 1.08, ls: -1, eq: true, entier: true, min: 34 }; const p = para(b.txt, x, y, o); return { svg: p.svg, h: p.h + S(22) }; }
+    case "p": { const p = para(b.txt, x, y, { taille: S(b.taille || 42), poids: b.poids || 500, couleur: b.couleur || DOUX, max: b.max || 6, larg: b.larg || LARG, phrases: Boolean(b.phrases) }); return { svg: p.svg, h: p.h + S(b.espace == null ? 22 : b.espace) }; }
     case "hero": { // grand nombre + légende
       let t = S(b.taille || 230); while(t > 70 && mesure(b.txt, 900, t) > LARG) t -= 6;
       const svg = txtSvg(b.txt, x - 6, y + Math.round(t * 0.82), { taille: t, poids: 900, couleur: b.couleur || BLEU, ls: -t * 0.03 });
@@ -107,7 +127,7 @@ function bloc(b, x, y, k){ // renvoie { svg, h } ; y = haut
     }
     case "voix": { // Pour / Contre / Abstentions : une barre proportionnelle + trois lignes lisibles
       const tot = Math.max(1, b.pour + b.contre + b.abst), S2 = S(1);
-      const parts = [["Pour", b.pour, VERT], ["Contre", b.contre, ROUGEV], ["Abstentions (ni pour ni contre)", b.abst, AMBRE]];
+      const parts = [["Ont voté pour", b.pour, VERT], ["Ont voté contre", b.contre, ROUGEV], ["Se sont abstenus", b.abst, AMBRE]];
       let svg = "", xx = x; const hb = S(44);
       svg += `<clipPath id="cb"><rect x="${x}" y="${y}" width="${LARG}" height="${hb}" rx="${hb / 2}"/></clipPath><g clip-path="url(#cb)">`;
       for(const [, n, c] of parts){ const w = LARG * n / tot; if(w > 0) svg += `<rect x="${xx}" y="${y}" width="${w}" height="${hb}" fill="${c}"/>`; xx += w; }
@@ -132,7 +152,7 @@ function image(o){
   const col = accent(o.couleur);
   const yLogo = haut, yKick = yLogo + 108;
   let svg = `<rect width="${L}" height="${H}" fill="${FOND}"/>${bandeauTricolore()}`;
-  svg += logo(MARGE, yLogo, 64, col) + txtSvg("Hémicycle France", MARGE + 82, yLogo + 44, { taille: 38, poids: 800, couleur: ENCRE });
+  svg += decor(col, H) + logo(MARGE, yLogo, 64, col) + txtSvg("Hémicycle France", MARGE + 82, yLogo + 44, { taille: 38, poids: 800, couleur: ENCRE });
   if(o.total > 1) svg += txtSvg(`${o.n}/${o.total}`, L - MARGE, yLogo + 44, { taille: 36, poids: 800, couleur: PALE, ancre: "end" });
   const p = pastille(o.kicker || "Actualité", MARGE, yKick, { fond: col });
   svg += p.svg;
@@ -155,7 +175,7 @@ function image(o){
   svg += `<rect x="${MARGE}" y="${yFiletPied}" width="${LARG}" height="2" fill="${FILET}"/>`;
   src.l.forEach((t, i) => { svg += txtSvg(t, MARGE, yFiletPied + 44 + i * 34, { taille: 26, poids: 500, couleur: PALE }); });
   svg += txtSvg(cta, MARGE, yCta, { taille: 34, poids: 800, couleur: col });
-  return { svg, H };
+  return { svg, H, k: choix.k };
 }
 
 
@@ -171,7 +191,7 @@ function photoUrl(img){
 function imagePhoto(o){
   const H = o.H, post = H < 1500, col = accent(o.couleur);
   const haut = post ? 70 : 250, bas = post ? H - 70 : H - 250;
-  let svg = `<defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0F1E" stop-opacity="0.55"/><stop offset="0.28" stop-color="#0A0F1E" stop-opacity="0.05"/><stop offset="0.5" stop-color="#0A0F1E" stop-opacity="0.72"/><stop offset="1" stop-color="#0A0F1E" stop-opacity="0.97"/></linearGradient></defs>`;
+  let svg = `<defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0F1E" stop-opacity="0.82"/><stop offset="0.16" stop-color="#0A0F1E" stop-opacity="0.5"/><stop offset="0.32" stop-color="#0A0F1E" stop-opacity="0.08"/><stop offset="0.5" stop-color="#0A0F1E" stop-opacity="0.72"/><stop offset="1" stop-color="#0A0F1E" stop-opacity="0.97"/></linearGradient></defs>`;
   const im = o.photo.img, r = Math.max(L / im.naturalWidth, H / im.naturalHeight);
   svg += `<rect width="${L}" height="${H}" fill="#0A0F1E"/><image href="${photoUrl(im)}" x="${(L - im.naturalWidth * r) / 2}" y="${(H - im.naturalHeight * r) / 2}" width="${im.naturalWidth * r}" height="${im.naturalHeight * r}" preserveAspectRatio="none"/><rect width="${L}" height="${H}" fill="url(#gd)"/>`;
   svg += bandeauTricolore();
@@ -186,12 +206,12 @@ function imagePhoto(o){
   lc.l.forEach((t, i) => { svg += txtSvg(t, MARGE, yCred - (lc.l.length - 1 - i) * 30, { taille: 24, poids: 500, couleur: "#C9CFDD" }); });
   const yBasTexte = yCred - lc.l.length * 30 - 44;
   // titre + sous-titre, calés en bas, plus grande taille qui tient
-  const hMax = (post ? 700 : 1000);
+  const hMax = (post ? 760 : 1060);
   let k = post ? 1.2 : 1.5, t = null;
   for(; k >= 0.6; k -= 0.05){
     const tt = Math.round(86 * k), so = Math.round(40 * k);
-    const pt = para(o.titre, MARGE, 0, { taille: tt, poids: 900, couleur: BLANC, max: 6, inter: 1.06, ls: -1 });
-    const ps = o.sous ? para(o.sous, MARGE, 0, { taille: so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28 }) : { h: 0, n: 0 };
+    const pt = para(o.titre, MARGE, 0, { taille: tt, poids: 900, couleur: BLANC, max: 8, inter: 1.06, ls: -1, eq: true, entier: true, min: 44 });
+    const ps = o.sous ? para(o.sous, MARGE, 0, { taille: so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28, phrases: true }) : { h: 0, n: 0 };
     const h = 66 + 34 + pt.h + (o.sous ? 26 + 8 + ps.h : 0);
     if(h <= hMax || k < 0.61){ t = { tt, so, h }; break; }
   }
@@ -199,10 +219,10 @@ function imagePhoto(o){
   const pas = pastille(o.kicker || "Actualité", MARGE, y0, { fond: col });
   svg += pas.svg;
   let y = y0 + pas.h + 34;
-  const pt = para(o.titre, MARGE, y, { taille: t.tt, poids: 900, couleur: BLANC, max: 6, inter: 1.06, ls: -1 });
+  const pt = para(o.titre, MARGE, y, { taille: t.tt, poids: 900, couleur: BLANC, max: 8, inter: 1.06, ls: -1, eq: true, entier: true, min: 44 });
   svg += pt.svg; y += pt.h;
   svg += `<rect x="${MARGE}" y="${y + 10}" width="120" height="8" rx="4" fill="${JAUNE}"/>`;
-  if(o.sous){ y += 26 + 8; svg += para(o.sous, MARGE, y + 8, { taille: t.so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28 }).svg; }
+  if(o.sous){ y += 26 + 8; svg += para(o.sous, MARGE, y + 8, { taille: t.so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28, phrases: true }).svg; }
   return { svg, H };
 }
 
@@ -241,13 +261,13 @@ MODELES.actualite = async (info) => {
   const medias = (Array.isArray(s.sources) && s.sources.length ? s.sources : [...new Set(s.articles.map(a => a.media))]).filter(Boolean), n = medias.length;
   const direct = force === "direct" || (typeof enDirectDe === "function" && enDirectDe(s));
   const quand0 = typeof storyJourFr === "function" && (s.derniere || s.articles[0].date) ? `Mis à jour le ${storyJourFr(s.derniere || s.articles[0].date)}.` : "";
-  if(d.photo && !window.STORY_SANS_PHOTO) return imagePhoto({ H: H_S, photo: d.photo, kicker: direct ? "En direct" : d.categorie, couleur: direct ? "direct" : d.theme, titre: d.accroche, sous: d.essentiel, source: n >= 2 ? `${n} médias en parlent. ${quand0}` : quand0, cta: d.cta });
+  if(d.photo && !window.STORY_SANS_PHOTO) return imagePhoto({ H: H_S, photo: d.photo, kicker: direct ? "En direct" : d.categorie, couleur: direct ? "direct" : d.theme, titre: d.accroche, sous: d.essentiel, source: [n >= 2 ? `${n} médias en parlent` : `Raconté par ${medias[0]}`, quand0.replace(/\.$/, "")].filter(Boolean).join(" · "), cta: "Suivez l'actu avec nous" });
   const blocs = [{ t: "titre", txt: d.accroche, taille: 84, max: 6 }, { t: "ligne", couleur: accent(direct ? "direct" : d.theme) }];
   if(d.chiffre && s.chiffre?.valeur) blocs.push({ t: "hero", txt: d.chiffre.valeur, sous: d.chiffre.legende, couleur: accent(d.theme), taille: 190 });
-  if(d.essentiel) blocs.push({ t: "p", txt: d.essentiel, taille: 44, max: 5 });
-  blocs.push({ t: "p", txt: n >= 2 ? `${n} médias en parlent : ${medias.slice(0, 4).join(", ")}${n > 4 ? "…" : ""}.` : `Publié par ${medias[0]}.`, taille: 34, poids: 700, couleur: PALE, max: 3 });
+  if(d.essentiel) blocs.push({ t: "p", txt: d.essentiel, taille: 44, max: 5, phrases: true });
+  blocs.push({ t: "p", txt: n >= 2 ? `À lire chez ${medias.slice(0, 4).join(", ")}${n > 4 ? " et d'autres" : ""}.` : `À lire chez ${medias[0]}.`, taille: 34, poids: 700, couleur: PALE, max: 3 });
   const a0 = s.articles[0], quand = typeof storyJourFr === "function" && (s.derniere || a0.date) ? `Mis à jour le ${storyJourFr(s.derniere || a0.date)}.` : "";
-  return image({ H: H_S, kicker: direct ? "En direct" : d.categorie, couleur: direct ? "direct" : d.theme, blocs, source: ["Titres relevés dans la presse, sources citées.", quand].filter(Boolean).join(" "), cta: d.cta });
+  return image({ H: H_S, kicker: direct ? "En direct" : d.categorie, couleur: direct ? "direct" : d.theme, blocs, source: ["D'après la presse, sources citées", quand.replace(/\.$/, "").replace(/^Mis à jour/, "mis à jour")].filter(Boolean).join(" · "), cta: "Suivez l'actu avec nous" });
 };
 
 // Post « date à retenir » / « loi » / « presse »
@@ -256,11 +276,11 @@ MODELES.post = async (s) => {
   if(s.genre === "date"){
     const blocs = [{ t: "hero", txt: `${s.jour} ${maj(s.mois || "")}`.trim(), sous: s.annee ? `${s.semaine || ""} ${s.annee}`.trim() : s.semaine || "", couleur: BLEU, taille: 180 }, { t: "titre", txt: s.titre, taille: 64, max: 4 }];
     if(s.citation) blocs.push({ t: "carte", txt: `« ${typo(s.citation)} »`, taille: 36, max: 5 });
-    return image({ H: H_P, kicker: "Date à retenir", couleur: "politique", blocs, source: s.media ? `Selon ${s.media}. ${s.agenda ? "Agenda officiel." : "Date à vérifier à la source."}` : "Date annoncée par la presse.", cta: "À retenir" });
+    return image({ H: H_P, kicker: "À noter dans l'agenda", couleur: "politique", blocs, source: s.media ? `Annoncé par ${s.media}${s.agenda ? " · agenda officiel" : " · pensez à vérifier la date à la source"}` : "Date annoncée par la presse", cta: "Gardez-la en tête" });
   }
   if(s.genre === "presse"){
     const blocs = [{ t: "titre", txt: s.titre, taille: 64, max: 4 }, { t: "carte", txt: `« ${typo(s.citation || "")} »`, taille: 38, max: 6 }];
-    return image({ H: H_P, kicker: s.surtitre || "Dans la presse", couleur: "politique", blocs, source: s.sourceTxt || (s.media ? `Titre cité de ${s.media}.` : ""), cta: "Toute l'actu politique" });
+    return image({ H: H_P, kicker: s.surtitre || "Ce que dit la presse", couleur: "politique", blocs, source: s.sourceTxt || (s.media ? `Titre cité de ${s.media}.` : ""), cta: "Toute l'actu politique" });
   }
   const adopte = s.verdict === "adopte", c = adopte ? VERT : ROUGEV;
   const blocs = [
@@ -269,7 +289,7 @@ MODELES.post = async (s) => {
   ];
   if(s.etapeSimple || s.etape) blocs.push({ t: "p", txt: maj(s.etapeSimple || s.etape), taille: 32, poids: 600, couleur: PALE, max: 2 });
   blocs.push({ t: "voix", pour: s.pour || 0, contre: s.contre || 0, abst: s.abst || 0 });
-  return image({ H: H_P, kicker: `${s.chambre || "Parlement"} · ${s.date || ""}`.replace(/ · $/, ""), couleur: /s[ée]nat/i.test(s.chambre || "") ? "senat" : "assemblee", blocs, source: s.sourceTxt || "Source officielle.", cta: "Le vote en entier" });
+  return image({ H: H_P, kicker: `${s.chambre || "Parlement"} · ${s.date || ""}`.replace(/ · $/, ""), couleur: /s[ée]nat/i.test(s.chambre || "") ? "senat" : "assemblee", blocs, source: s.sourceTxt || "Source officielle.", cta: "Retrouvez tous les votes" });
 };
 
 // Story qui annonce un post
@@ -277,7 +297,7 @@ MODELES["annonce-post"] = async (s) => {
   if(!s || !s.titre) return null;
   const blocs = [{ t: "titre", txt: s.titre, taille: 76, max: 4 }];
   if(s.sous) blocs.push({ t: "p", txt: s.sous, taille: 40, poids: 700, max: 2 });
-  const im = image({ H: H_S, kicker: "Nouveau post", couleur: "politique", blocs, source: "Le post vient d'être publié sur le fil du compte.", cta: "À voir sur le fil" });
+  const im = image({ H: H_S, kicker: "Nouveau post", couleur: "politique", blocs, source: "Le post vient d'être publié sur notre fil", cta: "À voir sur notre fil" });
   if(s.miniature){ // la miniature (JPEG) est le seul élément « image » : elle est insérée telle quelle, avec un cadre
     const w = 400, h = 500, x = (L - w) / 2, y = H_S - 250 - 74 - 34 - 60 - h;
     im.svg += `<rect x="${x - 10}" y="${y - 10}" width="${w + 20}" height="${h + 20}" rx="14" fill="${BLANC}" stroke="${FILET}" stroke-width="3"/><image href="${esc(s.miniature)}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice"/>`;
@@ -299,18 +319,24 @@ MODELES.diapo = async (s) => {
   }
   if(s.couverture && !window.STORY_SANS_PHOTO){
     const ph = await storyPhotoTheme(/s[ée]nat/i.test(`${s.titre} ${s.source || ""}`) ? "senat" : "assemblee").catch(() => null);
-    if(ph) return imagePhoto({ H: H_P, photo: ph, kicker: s.kicker || "Hémicycle France", couleur: "assemblee", titre: s.titre, sous: (s.corps.find(b => b.p) || {}).p || "", n: s.n, total: s.total, source: s.source || "", cta: "Faites défiler" });
+    if(ph) return imagePhoto({ H: H_P, photo: ph, kicker: s.kicker || "Hémicycle France", couleur: "assemblee", titre: s.titre, sous: (s.corps.find(b => b.p) || {}).p || "", n: s.n, total: s.total, source: s.source || "", cta: "Glissez pour la suite" });
   }
-  return image({ H: H_P, kicker: s.kicker || "Hémicycle France", couleur: s.couverture ? "direct" : "politique", n: s.n, total: s.total, blocs, source: s.source || "Source : données officielles.", cta: s.accroche || (s.n < s.total ? "Faites défiler" : "Toute l'actu politique") });
+  return image({ H: H_P, kicker: s.kicker || "Hémicycle France", couleur: s.couverture ? "direct" : "politique", n: s.n, total: s.total, blocs, source: s.source || "Source : données officielles.", cta: s.accroche || (s.n < s.total ? "Glissez pour la suite" : "À bientôt") });
 };
 
 // Aujourd'hui à l'Assemblée
 MODELES.aujourdhui = async (s) => {
   if(!s || !Array.isArray(s.points) || !s.points.length) return null;
-  const items = s.points.map(p => typo(p.t));
-  const blocs = [{ t: "titre", txt: "Aujourd'hui à l'Assemblée", taille: 84, max: 3 }, { t: "p", txt: maj(s.jour), taille: 42, poids: 700, couleur: BLEU }, { t: "li", items, taille: 38, max: 3 }];
-  if(s.autres > 0) blocs.push({ t: "p", txt: `+ ${s.autres} autre${s.autres > 1 ? "s" : ""} point${s.autres > 1 ? "s" : ""} à l'ordre du jour`, taille: 32, poids: 700, couleur: PALE });
-  return image({ H: H_S, kicker: "Séance publique", couleur: "assemblee", blocs, source: s.source || "Source : Assemblée nationale, ordre du jour.", cta: "Tout l'agenda" });
+  const tous = s.points.map(p => typo(p.t));
+  let img = null;
+  for(let n = tous.length; n >= Math.min(3, tous.length); n--){ // on montre moins de points plutôt que du texte minuscule
+    const reste = s.autres + tous.length - n;
+    const blocs = [{ t: "titre", txt: "Que se passe-t-il à l'Assemblée aujourd'hui ?", taille: 80, max: 4 }, { t: "p", txt: maj(s.jour), taille: 42, poids: 700, couleur: BLEU }, { t: "li", items: tous.slice(0, n), taille: 38, max: 3 }];
+    if(reste > 0) blocs.push({ t: "p", txt: `… et ${reste} autre${reste > 1 ? "s" : ""} sujet${reste > 1 ? "s" : ""} au programme`, taille: 32, poids: 700, couleur: PALE });
+    img = image({ H: H_S, kicker: "Aujourd'hui à l'Assemblée", couleur: "assemblee", blocs, source: s.source || "Source : Assemblée nationale, ordre du jour", cta: "Tout l'agenda" });
+    if(img.k >= 0.85) break;
+  }
+  return img;
 };
 
 // Le vote du jour (sans hémicycle : le détail par groupe reste dans le modèle « vote-groupes »)
@@ -320,14 +346,14 @@ MODELES["vote-jour"] = async (s) => {
   const blocs = [{ t: "hero", txt: adopte ? "Adopté" : "Rejeté", couleur: adopte ? VERT : ROUGEV, taille: 200 }, { t: "titre", txt: s.dossier || s.objet, taille: 60, max: 4 }];
   if(s.dossier && s.objet && s.objet !== s.dossier) blocs.push({ t: "p", txt: s.objet, taille: 34, poids: 600, couleur: PALE, max: 3 });
   blocs.push({ t: "voix", pour: s.pour || 0, contre: s.contre || 0, abst: s.abst || 0 });
-  return image({ H: H_S, kicker: "Le vote du jour", couleur: "assemblee", blocs, source: s.sourceTxt || "Source : Assemblée nationale. Résultat officiel.", cta: "Et votre député ?" });
+  return image({ H: H_S, kicker: "Le vote du jour", couleur: "assemblee", blocs, source: s.sourceTxt || "Source : Assemblée nationale. Résultat officiel.", cta: "Et votre député, il a voté quoi ?" });
 };
 
 // Comprendre
 MODELES.comprendre = async (s) => {
   if(!s || !s.titre || !s.texte) return null;
   const blocs = [{ t: "titre", txt: s.titre, taille: 84, max: 4 }, { t: "ligne", couleur: ACCENTS.social }, { t: "p", txt: s.texte, taille: 46, couleur: ENCRE, max: 12, inter: 1.3 }];
-  return image({ H: H_S, kicker: `Comprendre · ${s.n}/${s.total}`, couleur: "social", blocs, source: s.sourceTxt || "", cta: "Une notion par semaine" });
+  return image({ H: H_S, kicker: `On vous explique · ${s.n}/${s.total}`, couleur: "social", blocs, source: s.sourceTxt || "", cta: "Une notion simple chaque semaine" });
 };
 
 // Le chiffre du jour
@@ -335,7 +361,7 @@ MODELES["chiffre-jour"] = async (s) => {
   if(!s || !s.libelle || !s.valeur) return null;
   const blocs = [{ t: "titre", txt: s.libelle, taille: 64, max: 3 }, { t: "hero", txt: typo(s.valeur), sous: [s.soustitre, s.periode].filter(Boolean).map(typo).join(" · "), couleur: VERT, taille: 260 }];
   for(const l of (s.lignes || []).filter(Boolean).slice(0, 3)) blocs.push({ t: "p", txt: l, taille: 38, max: 3 });
-  return image({ H: H_S, kicker: "Le chiffre du jour", couleur: "budget", blocs, source: s.sourceTxt || "", cta: "Un chiffre par jour" });
+  return image({ H: H_S, kicker: "Le chiffre du jour", couleur: "budget", blocs, source: s.sourceTxt || "", cta: "Un chiffre à retenir chaque jour" });
 };
 
 window.STORY_VECTO_TYPES = Object.keys(MODELES);
