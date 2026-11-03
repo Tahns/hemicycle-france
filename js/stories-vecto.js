@@ -158,6 +158,54 @@ function image(o){
   return { svg, H };
 }
 
+
+/* ---------- Mise en page « photo » (style presse) : photo plein cadre, dégradé sombre, gros titre blanc, mot-clé en jaune ----------
+   `o` : { H, photo: { img, credit }, kicker, couleur, titre, sous, n, total, source, cta } */
+const JAUNE = "#FFD60A";
+function photoUrl(img){
+  const c = document.createElement("canvas"), k = Math.min(1, 1500 / Math.max(img.naturalWidth, img.naturalHeight));
+  c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+  return c.toDataURL("image/jpeg", 0.86);
+}
+function imagePhoto(o){
+  const H = o.H, post = H < 1500, col = accent(o.couleur);
+  const haut = post ? 70 : 250, bas = post ? H - 70 : H - 250;
+  let svg = `<defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0F1E" stop-opacity="0.55"/><stop offset="0.28" stop-color="#0A0F1E" stop-opacity="0.05"/><stop offset="0.5" stop-color="#0A0F1E" stop-opacity="0.72"/><stop offset="1" stop-color="#0A0F1E" stop-opacity="0.97"/></linearGradient></defs>`;
+  const im = o.photo.img, r = Math.max(L / im.naturalWidth, H / im.naturalHeight);
+  svg += `<rect width="${L}" height="${H}" fill="#0A0F1E"/><image href="${photoUrl(im)}" x="${(L - im.naturalWidth * r) / 2}" y="${(H - im.naturalHeight * r) / 2}" width="${im.naturalWidth * r}" height="${im.naturalHeight * r}" preserveAspectRatio="none"/><rect width="${L}" height="${H}" fill="url(#gd)"/>`;
+  svg += bandeauTricolore();
+  svg += logo(MARGE, haut, 64, BLANC) + txtSvg("Hémicycle France", MARGE + 82, haut + 44, { taille: 38, poids: 800, couleur: BLANC });
+  if(o.total > 1) svg += txtSvg(`${o.n}/${o.total}`, L - MARGE, haut + 44, { taille: 36, poids: 800, couleur: "#E6E9F2", ancre: "end" });
+  // pied : crédit, appel
+  const yCta = bas, yCred = yCta - 66;
+  const cta = typo(o.cta || "Toute l'actu politique") + " → @hemicyclefrance";
+  svg += txtSvg(cta, MARGE, yCta, { taille: 34, poids: 800, couleur: JAUNE });
+  const cred = [o.source, o.photo.credit ? "Photo d'illustration : " + o.photo.credit.replace(/^Photo : /, "") : "Photo d'illustration"].filter(Boolean).join(" · ");
+  const lc = lignes(cred, 500, 24, LARG, 2);
+  lc.l.forEach((t, i) => { svg += txtSvg(t, MARGE, yCred - (lc.l.length - 1 - i) * 30, { taille: 24, poids: 500, couleur: "#C9CFDD" }); });
+  const yBasTexte = yCred - lc.l.length * 30 - 44;
+  // titre + sous-titre, calés en bas, plus grande taille qui tient
+  const hMax = (post ? 700 : 1000);
+  let k = post ? 1.2 : 1.5, t = null;
+  for(; k >= 0.6; k -= 0.05){
+    const tt = Math.round(86 * k), so = Math.round(40 * k);
+    const pt = para(o.titre, MARGE, 0, { taille: tt, poids: 900, couleur: BLANC, max: 6, inter: 1.06, ls: -1 });
+    const ps = o.sous ? para(o.sous, MARGE, 0, { taille: so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28 }) : { h: 0, n: 0 };
+    const h = 66 + 34 + pt.h + (o.sous ? 26 + 8 + ps.h : 0);
+    if(h <= hMax || k < 0.61){ t = { tt, so, h }; break; }
+  }
+  const y0 = yBasTexte - t.h;
+  const pas = pastille(o.kicker || "Actualité", MARGE, y0, { fond: col });
+  svg += pas.svg;
+  let y = y0 + pas.h + 34;
+  const pt = para(o.titre, MARGE, y, { taille: t.tt, poids: 900, couleur: BLANC, max: 6, inter: 1.06, ls: -1 });
+  svg += pt.svg; y += pt.h;
+  svg += `<rect x="${MARGE}" y="${y + 10}" width="120" height="8" rx="4" fill="${JAUNE}"/>`;
+  if(o.sous){ y += 26 + 8; svg += para(o.sous, MARGE, y + 8, { taille: t.so, poids: 500, couleur: "#E6E9F2", max: 4, inter: 1.28 }).svg; }
+  return { svg, H };
+}
+
 /* ---------- Export : SVG (police embarquée) -> JPEG ---------- */
 let _polices = null;
 async function css(){
@@ -192,6 +240,8 @@ MODELES.actualite = async (info) => {
   if(!d) return null;
   const medias = (Array.isArray(s.sources) && s.sources.length ? s.sources : [...new Set(s.articles.map(a => a.media))]).filter(Boolean), n = medias.length;
   const direct = force === "direct" || (typeof enDirectDe === "function" && enDirectDe(s));
+  const quand0 = typeof storyJourFr === "function" && (s.derniere || s.articles[0].date) ? `Mis à jour le ${storyJourFr(s.derniere || s.articles[0].date)}.` : "";
+  if(d.photo && !window.STORY_SANS_PHOTO) return imagePhoto({ H: H_S, photo: d.photo, kicker: direct ? "En direct" : d.categorie, couleur: direct ? "direct" : d.theme, titre: d.accroche, sous: d.essentiel, source: n >= 2 ? `${n} médias en parlent. ${quand0}` : quand0, cta: d.cta });
   const blocs = [{ t: "titre", txt: d.accroche, taille: 84, max: 6 }, { t: "ligne", couleur: accent(direct ? "direct" : d.theme) }];
   if(d.chiffre && s.chiffre?.valeur) blocs.push({ t: "hero", txt: d.chiffre.valeur, sous: d.chiffre.legende, couleur: accent(d.theme), taille: 190 });
   if(d.essentiel) blocs.push({ t: "p", txt: d.essentiel, taille: 44, max: 5 });
@@ -246,6 +296,10 @@ MODELES.diapo = async (s) => {
     else if(b.gros) blocs.push({ t: "hero", txt: b.gros, couleur: /rejet/i.test(b.gros) ? ROUGEV : /adopt/i.test(b.gros) ? VERT : BLEU, taille: 150 });
     else if(b.cases){ const g = n => Number(String(b.cases.find(c => new RegExp("^" + n, "i").test(c[0]))?.[1] ?? 0)) || 0; blocs.push({ t: "voix", pour: g("Pour"), contre: g("Contre"), abst: g("Ni") || g("Abst") }); }
     else if(b.kv) blocs.push({ t: "kv", rows: b.kv.map(([k, v]) => [typo(k), typo(v)]) });
+  }
+  if(s.couverture && !window.STORY_SANS_PHOTO){
+    const ph = await storyPhotoTheme(/s[ée]nat/i.test(`${s.titre} ${s.source || ""}`) ? "senat" : "assemblee").catch(() => null);
+    if(ph) return imagePhoto({ H: H_P, photo: ph, kicker: s.kicker || "Hémicycle France", couleur: "assemblee", titre: s.titre, sous: (s.corps.find(b => b.p) || {}).p || "", n: s.n, total: s.total, source: s.source || "", cta: "Faites défiler" });
   }
   return image({ H: H_P, kicker: s.kicker || "Hémicycle France", couleur: s.couverture ? "direct" : "politique", n: s.n, total: s.total, blocs, source: s.source || "Source : données officielles.", cta: s.accroche || (s.n < s.total ? "Faites défiler" : "Toute l'actu politique") });
 };
