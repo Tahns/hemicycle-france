@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-03T10:50:50.481Z",
+ "lastUpdated": "2026-11-03T10:55:35.982Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -175,9 +175,9 @@
     "Europe 1",
     "France Inter",
     "Libération",
+    "RFI",
     "L'Obs",
-    "France 24",
-    "RFI"
+    "France 24"
    ],
    "mediasDistincts": 14,
    "sources": [
@@ -193,10 +193,10 @@
     "La Dépêche",
     "France Inter",
     "Libération",
-    "L'Obs",
-    "France Médias Monde"
+    "France Médias Monde",
+    "L'Obs"
    ],
-   "nb": 70,
+   "nb": 73,
    "derniere": "2026-11-03T10:40:35.000Z",
    "articles": [
     {
@@ -296,6 +296,12 @@
      "date": "2026-11-03T04:00:00.000Z"
     },
     {
+     "media": "RFI",
+     "titre": "Mouvement des lycéens: «Les propositions du gouvernement restent insuffisantes», estime l'eurodéputée PS Chloé Ridel",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261102-mouvement-des-lyc%C3%A9ens-les-propositions-du-gouvernement-restent-insuffisantes-estime-l-eurod%C3%A9put%C3%A9e-ps-chlo%C3%A9-ridel",
+     "date": "2026-11-02T15:20:34.000Z"
+    },
+    {
      "media": "L'Obs",
      "titre": "Le paradoxe de Lula : ce que la gauche française doit retenir de la présidentielle au Brésil",
      "url": "https://www.nouvelobs.com/opinions/20261102.OBS119776/le-paradoxe-de-lula-ce-que-la-gauche-francaise-doit-retenir-de-la-presidentielle-au-bresil.html",
@@ -306,12 +312,6 @@
      "titre": "Présidentielle 2027 : Édouard Philippe refuse de participer à une primaire, source de \"division\"",
      "url": "https://www.france24.com/fr/france/20261101-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-source-de-division",
      "date": "2026-11-01T20:35:14.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Présidentielle française: Édouard Philippe refuse de participer à une primaire de la droite et du centre",
-     "url": "https://www.rfi.fr/fr/france/20261101-pr%C3%A9sidentielle-fran%C3%A7aise-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-de-la-droite-et-du-centre",
-     "date": "2026-11-01T20:11:41.000Z"
     }
    ]
   },
@@ -320,18 +320,18 @@
    "titre": "Sociale",
    "motifs": [
     "sociale",
-    "colère",
     "grève",
-    "jeudi"
+    "jeudi",
+    "informatique"
    ],
    "medias": [
-    "BFMTV",
     "Le Dauphiné libéré",
     "Le Monde",
     "Libération",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
+    "BFMTV",
     "Sud Ouest",
     "La Dépêche",
     "Mediapart",
@@ -342,10 +342,10 @@
    ],
    "mediasDistincts": 10,
    "sources": [
-    "BFMTV",
     "EBRA",
     "Le Monde",
     "Libération",
+    "BFMTV",
     "Sud Ouest",
     "La Dépêche",
     "Mediapart",
@@ -353,15 +353,9 @@
     "Le JDD",
     "Le Figaro"
    ],
-   "nb": 33,
-   "derniere": "2026-11-03T10:28:00.000Z",
+   "nb": 30,
+   "derniere": "2026-11-03T10:26:00.000Z",
    "articles": [
-    {
-     "media": "BFMTV",
-     "titre": "DIRECT. Colère lycéenne: 48 lycées bloqués ce mardi matin, un nombre quasiment stable par rapport à lundi",
-     "url": "https://www.bfmtv.com/politique/direct-colere-sociale-nouvel-appel-a-bloquer-les-lycees-et-les-universites-laurent-nunez-auditionne-par-l-assemblee-nationale-cet-apres-midi_LN-202611030137.html",
-     "date": "2026-11-03T10:28:00.000Z"
-    },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Rumilly Terre de Savoie. « La collectivité n’est pas une vache à lait » : des subventions destinées à la production de logements sociaux qui font grincer des dents",
@@ -397,6 +391,13 @@
      "titre": "Politique. Primaire socialiste : derrière les accusations de cyberattaque, un simple bug informatique",
      "url": "https://www.estrepublicain.fr/politique/2026/11/03/primaire-socialiste-derriere-les-accusations-de-cyberattaque-un-simple-bug-informatique",
      "date": "2026-11-03T09:42:00.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère sociale: Gérald Darmanin fait état de \"329 incarcérations\" depuis le début du mouvement",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-colere-sociale-gerald-darmanin-fait-etat-de-329-incarcerations-depuis-le-debut-du-mouvement_VN-202611030372.html",
+     "date": "2026-11-03T08:59:13.000Z",
+     "video": true
     },
     {
      "media": "Sud Ouest",
@@ -443,46 +444,65 @@
    ]
   },
   {
-   "id": "mobilisation",
-   "titre": "Mobilisation",
+   "id": "lycees",
+   "titre": "Lycées",
    "motifs": [
-    "mobilisation",
-    "novembre"
+    "lycées",
+    "colère",
+    "bloqués",
+    "mouvement"
    ],
    "medias": [
-    "Le Monde",
-    "Sud Ouest",
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "La Dépêche",
-    "Nice-Matin",
+    "BFMTV",
     "Europe 1",
-    "France 24",
-    "RFI",
-    "Le JDD",
-    "Libération"
-   ],
-   "mediasDistincts": 8,
-   "sources": [
     "Le Monde",
     "Sud Ouest",
-    "EBRA",
     "La Dépêche",
-    "Nice-Matin",
-    "Groupe Bolloré",
-    "France Médias Monde",
-    "Libération"
+    "RFI",
+    "L'Humanité",
+    "Le Progrès",
+    "Valeurs actuelles",
+    "Libération",
+    "France 24",
+    "Public Sénat",
+    "Hugo Décrypte"
    ],
-   "nb": 26,
-   "derniere": "2026-11-03T10:00:11.000Z",
+   "mediasDistincts": 12,
+   "sources": [
+    "BFMTV",
+    "Europe 1",
+    "Le Monde",
+    "Sud Ouest",
+    "La Dépêche",
+    "France Médias Monde",
+    "L'Humanité",
+    "Le Progrès",
+    "Valeurs actuelles",
+    "Libération",
+    "Public Sénat",
+    "Hugo Décrypte"
+   ],
+   "nb": 33,
+   "derniere": "2026-11-03T10:50:38.000Z",
    "articles": [
     {
-     "media": "Le Monde",
-     "titre": "Mobilisations sociales : « Couper les réseaux sociaux ne peut être une variable d’ajustement de la gestion des manifestations »",
-     "url": "https://www.lemonde.fr/idees/article/2026/11/03/mobilisations-sociales-couper-les-reseaux-sociaux-ne-peut-etre-une-variable-d-ajustement-de-la-gestion-des-manifestations_6805562_3232.html",
-     "date": "2026-11-03T10:00:11.000Z"
+     "media": "BFMTV",
+     "titre": "DIRECT. Colère lycéenne et étudiante: plus de 50 campus universitaires bloqués ce mardi, selon l'Union étudiante",
+     "url": "https://www.bfmtv.com/politique/direct-colere-sociale-nouvel-appel-a-bloquer-les-lycees-et-les-universites-laurent-nunez-auditionne-par-l-assemblee-nationale-cet-apres-midi_LN-202611030137.html",
+     "date": "2026-11-03T10:50:38.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "48 lycées bloqués mardi selon le ministère, dix fois plus selon un syndicat lycéen",
+     "url": "https://www.europe1.fr/societe/48-lycees-bloques-mardi-selon-le-ministere-dix-fois-plus-selon-un-syndicat-lyceen-1205147?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-03T10:50:00.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Lycées: Éric Coquerel propose de flécher les annonces budgétaires dans le projet de loi de fin de gestion",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-lycees-eric-coquerel-propose-de-flecher-les-annonces-budgetaires-dans-le-projet-de-loi-de-fin-de-gestion_VN-202611030440.html",
+     "date": "2026-11-03T10:29:40.000Z",
+     "video": true
     },
     {
      "media": "Le Monde",
@@ -497,70 +517,59 @@
      "date": "2026-11-03T08:16:03.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Social. Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation jeudi ?",
-     "url": "https://www.leprogres.fr/social/2026/11/03/greve-du-5-novembre-a-quoi-faut-il-s-attendre-pour-cette-nouvelle-journee-de-mobilisation-jeudi",
-     "date": "2026-11-03T06:30:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation jeudi ?",
-     "url": "https://www.dna.fr/social/2026/11/03/greve-du-5-novembre-a-quoi-faut-il-s-attendre-pour-cette-nouvelle-journee-de-mobilisation-jeudi",
-     "date": "2026-11-03T06:30:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Social. Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation jeudi ?",
-     "url": "https://www.ledauphine.com/social/2026/11/03/greve-du-5-novembre-a-quoi-faut-il-s-attendre-pour-cette-nouvelle-journee-de-mobilisation-jeudi",
-     "date": "2026-11-03T06:30:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Social. Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation jeudi ?",
-     "url": "https://www.estrepublicain.fr/social/2026/11/03/greve-du-5-novembre-a-quoi-faut-il-s-attendre-pour-cette-nouvelle-journee-de-mobilisation-jeudi",
-     "date": "2026-11-03T06:30:00.000Z"
-    },
-    {
      "media": "La Dépêche",
      "titre": "EXCLUSIF. Mobilisation des lycéens : que veulent les élèves en Occitanie ? Le ministre de l'Éducation Édouard Geffray révèle leurs doléances et répond à La Dépêche du Midi",
      "url": "https://www.ladepeche.fr/2026/11/03/exclusif-mobilisation-des-lyceens-que-veulent-les-eleves-en-occitanie-le-ministre-de-leducation-edouard-geffray-revele-leurs-doleances-et-repond-a-la-13632196.php",
      "date": "2026-11-03T05:31:03.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "À Cannes ce mardi 3 novembre, les secrets de famille des grandes fortunes industrielles de France sont dévoilés lors d’une conférence de Raphaëlle Bacqué, grand reporter au Monde et coauteur des livres « Successions »",
-     "url": "https://www.nicematin.com/societe/a-cannes-ce-mardi-3-novembre-les-secrets-de-famille-des-grandes-fortunes-industrielles-de-france-sont-devoiles-lors-d-une-conference-de-raphaelle-bacque-grand-reporter-au-monde-et-coauteur-des-livres-successions-10752409",
-     "date": "2026-11-02T19:35:04.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Mobilisation des lycéens : Laurent Nuñez adresse un message de soutien aux policiers et gendarmes",
-     "url": "https://www.europe1.fr/politique/mobilisation-des-lyceens-laurent-nunez-adresse-un-message-de-soutien-aux-policiers-et-gendarmes-1203345?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-02T17:20:00.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Mobilisations en France : \"Nous les Français\", une autre histoire de la France",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261102-mobilisations-en-france-nous-les-fran%C3%A7ais-une-autre-histoire-de-la-france",
-     "date": "2026-11-02T16:29:16.000Z"
-    },
-    {
      "media": "RFI",
-     "titre": "Colère sociale en France: la mobilisation lycéenne se poursuit, le gouvernement sous pression",
-     "url": "https://www.rfi.fr/fr/france/20261102-col%C3%A8re-sociale-en-france-la-mobilisation-lyc%C3%A9enne-se-poursuit-le-gouvernement-sous-pression",
-     "date": "2026-11-02T16:05:24.000Z"
+     "titre": "Colère sociale en France: des avocats dénoncent des assignations à résidence de certains militants",
+     "url": "https://www.rfi.fr/fr/france/20261102-col%C3%A8re-sociale-en-france-des-avocats-d%C3%A9noncent-des-assignations-%C3%A0-r%C3%A9sidence-de-certains-militants",
+     "date": "2026-11-02T20:30:01.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Mobilisations sociales : l'offensive politique de la gauche radicale",
-     "url": "https://www.lejdd.fr/politique/mobilisations-sociales-loffensive-politique-de-la-gauche-radicale-187614",
-     "date": "2026-11-02T15:01:18.000Z"
+     "media": "L'Humanité",
+     "titre": "« Les syndicats lycéens et étudiants appellent à reprendre le blocus dès ce mardi », prévient Sabrine Kharbach porte-parole de l’Union Étudiante",
+     "url": "https://www.humanite.fr/politique/etudiants/les-syndicats-lyceens-et-etudiants-appellent-a-reprendre-le-blocus-des-ce-mardi-previent-sabrine-kharbach-porte-parole-de-lunion-etudiante",
+     "date": "2026-11-02T19:21:59.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Riotord. Pollution de l’eau : la commune étudie la mise en place de la téléalerte",
+     "url": "https://www.leprogres.fr/politique/2026/11/02/pollution-de-l-eau-la-commune-etudie-la-mise-en-place-de-la-telealerte",
+     "date": "2026-11-02T17:44:31.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "Présidentielle 2027 : le parti de David Lisnard talonne le RN et LFI, combien d’adhérents ont vraiment les mouvements politiques ?",
+     "url": "https://www.valeursactuelles.com/politique/presidentielle-2027-le-parti-de-david-lisnard-talonne-le-rn-et-lfi-combien-dadherents-ont-vraiment-les-mouvements-politiques",
+     "date": "2026-11-02T17:05:45.000Z"
     },
     {
      "media": "Libération",
-     "titre": "Blocages dans les lycées, grève interprofessionnelle, «six-seven populaire» des gilets jaunes… A quelles mobilisations s’attendre cette semaine ?",
-     "url": "https://www.liberation.fr/societe/blocages-dans-les-lycees-greve-interprofessionnelle-six-seven-populaire-des-gilets-jaunes-a-quelles-mobilisations-sattendre-cette-semaine-20261102_FYNP42Z5QZADHHZR67PDWS4CPQ/",
-     "date": "2026-11-02T05:30:00.000Z"
+     "titre": "«Ces fous vont nous mettre au fond du ravin» : après le vote d’une taxe sur les données numériques, la colère d’utilisateurs et de patrons",
+     "url": "https://www.liberation.fr/politique/ces-fous-vont-nous-mettre-au-fond-du-ravin-apres-le-vote-dune-taxe-sur-les-donnees-numeriques-la-colere-dutilisateurs-et-de-patrons-20261102_I2BBRYQFHFDIBFPK344MVWZHVI/",
+     "date": "2026-11-02T15:21:51.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Mobilisations lycéennes en France : un mal-être social partagé par les jeunesses du monde",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261102-mobilisations-lyc%C3%A9ennes-en-france-un-mal-%C3%AAtre-social-partag%C3%A9-par-les-jeunesses-du-monde",
+     "date": "2026-11-02T14:11:56.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Mouvement lycéen : où en est-on des blocus ?",
+     "url": "https://www.publicsenat.fr/actualites/politique/mouvement-lyceen-ou-en-est-on-des-blocus",
+     "date": "2026-11-02T10:52:47.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Après les vacances, les blocus lycéens se poursuivent",
+     "url": "https://www.youtube.com/shorts/eaOUGrVo2q8",
+     "date": "2026-11-02T08:47:55.000Z",
+     "video": true
     }
    ]
   }
@@ -973,39 +982,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Le Monde",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-02T23:53:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget 2027 : les députés ont voté des amendements au devenir incertain, remaniant la TVA sur l’électricité ou encore la télévision payante",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/03/budget-2027-les-deputes-remanient-la-tva-sur-l-electricite-la-television-payante-ou-encore-les-produits-de-premiere-necessite_6805244_823449.html",
-     "media": "Le Monde",
-     "date": "2026-11-02T23:53:56.000Z"
-    },
-    {
-     "titre": "Budget 2027 : les députés remanient la TVA sur l’électricité et la télévision payante",
-     "url": "https://www.sudouest.fr/economie/impots/budget-2027-les-deputes-remanient-la-tva-sur-l-electricite-et-la-television-payante-31355741.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-02T21:14:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : vote sur les finances publiques",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "20 Minutes",
     "Le Monde"
    ],
@@ -1051,43 +1027,6 @@
      "source": "Commission des sondages (notice Ipsos)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Mediapart",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-02T20:35:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Nucléaire: fronde à gauche contre l’utilisation du livret A pour financer les nouveaux réacteurs",
-     "url": "https://www.mediapart.fr/journal/ecologie/021126/nucleaire-fronde-gauche-contre-l-utilisation-du-livret-pour-financer-les-nouveaux-reacteurs",
-     "media": "Mediapart",
-     "date": "2026-11-02T20:35:19.000Z"
-    },
-    {
-     "titre": "Livret A : des élus de gauche et des associations s’opposent à son utilisation pour le nucléaire",
-     "url": "https://www.sudouest.fr/economie/finances/livret-a-des-elus-de-gauche-et-des-associations-s-opposent-a-son-utilisation-pour-le-nucleaire-31355533.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-02T20:32:20.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Nucléaire : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Fronde à gauche contre l’utilisation du livret A pour financer les nouveaux réacteurs",
-   "accroche": "Fronde à gauche contre l’utilisation du livret A pour financer les nouveaux réacteurs",
-   "essentiel": "Fronde à gauche contre l’utilisation du livret A pour financer les nouveaux réacteurs. Livret A : des élus de gauche et des associations s’opposent à son utilisation pour le nucléaire. Deux médias en parlent : Mediapart et Sud Ouest."
   },
   {
    "medias": 2,
@@ -1448,8 +1387,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
-    "origine": "dossier"
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation ?",
    "accroche": "Grève du 5 novembre : à quoi faut-il s'attendre pour cette nouvelle journée de mobilisation ?",
@@ -1668,6 +1608,115 @@
    "fait": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
    "accroche": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
    "essentiel": "Le procès pour fraude fiscale internationale s'ouvre à Paris. Trois sociétés et 13 personnes seront jugées à Paris. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-03T10:55:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Miel Abitbol, Grande Bavardeuse, Mathilde Study… Qui sont les créateurs et créatrices de contenus venus à Matignon pour parler d’éducation ?",
+     "url": "https://www.nouvelobs.com/societe/20261028.OBS119610/miel-abitbol-grande-bavardeuse-mathilde-study-qui-sont-les-createurs-et-creatrices-de-contenus-venus-a-matignon-pour-parler-d-education.html",
+     "media": "L'Obs",
+     "date": "2026-11-03T10:55:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-03T10:50:38.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Colère lycéenne et étudiante: plus de 50 campus universitaires bloqués ce mardi, selon l'Union étudiante",
+     "url": "https://www.bfmtv.com/politique/direct-colere-sociale-nouvel-appel-a-bloquer-les-lycees-et-les-universites-laurent-nunez-auditionne-par-l-assemblee-nationale-cet-apres-midi_LN-202611030137.html",
+     "media": "BFMTV",
+     "date": "2026-11-03T10:50:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   },
+   "fait": "Colère lycéenne et étudiante : plus de 50 campus universitaires bloqués, selon l'Union étudiante",
+   "accroche": "Colère lycéenne et étudiante : plus de 50 campus universitaires bloqués, selon l'Union étudiante"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-03T10:50:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Pays basque. « Un total irrespect ! » : l’opposition à la tenue du banquet du Canon français à Biarritz déborde à Saint-Jean-de-Luz",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/saint-jean-de-luz/pays-basque-un-total-irrespect-l-opposition-a-la-tenue-du-canon-francais-a-biarritz-deborde-a-saint-jean-de-luz-31359390.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-03T10:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "L’opposition à la tenue du banquet du Canon français à Biarritz déborde à Saint-Jean-de-Luz",
+   "accroche": "L’opposition à la tenue du banquet du Canon français à Biarritz déborde à Saint-Jean-de-Luz"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-03T10:50:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "48 lycées bloqués mardi selon le ministère, dix fois plus selon un syndicat lycéen",
+     "url": "https://www.europe1.fr/societe/48-lycees-bloques-mardi-selon-le-ministere-dix-fois-plus-selon-un-syndicat-lyceen-1205147?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-03T10:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées",
+    "origine": "dossier"
+   }
   },
   {
    "medias": 1,
@@ -2009,8 +2058,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Éric Coquerel : annonces sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Lycées",
+    "origine": "dossier"
    },
    "fait": "Éric Coquerel propose de flécher les annonces budgétaires dans la loi proposée par le Gouvernement de fin de gestion",
    "accroche": "Éric Coquerel propose de flécher les annonces budgétaires dans la loi proposée par le Gouvernement de fin de gestion",
@@ -2021,32 +2070,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-03T10:28:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Colère lycéenne: 48 lycées bloqués ce mardi matin, un nombre quasiment stable par rapport à lundi",
-     "url": "https://www.bfmtv.com/politique/direct-colere-sociale-nouvel-appel-a-bloquer-les-lycees-et-les-universites-laurent-nunez-auditionne-par-l-assemblee-nationale-cet-apres-midi_LN-202611030137.html",
-     "media": "BFMTV",
-     "date": "2026-11-03T10:28:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : suivi en direct",
-    "origine": "regles"
-   }
   },
   {
    "medias": 1,
@@ -2829,7 +2852,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
+    "titre": "Lycées",
     "origine": "dossier"
    }
   },
@@ -4370,7 +4393,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mobilisation",
+    "titre": "Lycées",
     "origine": "dossier"
    },
    "fait": "Mobilisation des lycéens : que veulent les élèves",
@@ -4946,33 +4969,6 @@
      "url": "https://www.lemonde.fr/societe/article/2026/11/03/au-fil-d-un-mois-de-mobilisations-sociales-des-manifestants-victimes-de-graves-blessures-je-crie-je-panique-j-ai-l-impression-que-j-ai-perdu-ma-jambe_6805525_3224.html",
      "media": "Le Monde",
      "date": "2026-11-03T04:00:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-03T04:00:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "A Paris, les « trottoirs Vuitton » électrisent le débat sur le financement de l’espace public",
-     "url": "https://www.lemonde.fr/economie/article/2026/11/03/a-paris-les-trottoirs-vuitton-electrisent-le-debat-sur-le-financement-de-l-espace-public_6805526_3234.html",
-     "media": "Le Monde",
-     "date": "2026-11-03T04:00:19.000Z"
     }
    ],
    "titrePropre": {
