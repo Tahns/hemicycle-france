@@ -133,7 +133,10 @@ assert.equal(fusionner([{ ...passe, debut: "2026-08-01", fin: "2026-08-02" }], [
 assert.equal(fusionner([autreManuelle], [], { aujourdhui: "2030-01-01", sourcesLues: lues }).meetings.length, 1, "une entrée autreManuelle passée n'est jamais supprimée");
 
 // ---------- Chaîne complète sur les fixtures (sans réseau) ----------
-const reel = JSON.parse(readFileSync("data/meetings.json", "utf-8"));
+const reelBrut = JSON.parse(readFileSync("data/meetings.json", "utf-8"));
+// Le vrai fichier reçoit des entrées automatiques à chaque mise à jour des données : le test ne garde que les entrées saisies à la main,
+// pour ne pas dépendre de l'état du jour (sinon un « examen-loi » déjà présent s'ajoute à celui des fixtures).
+const reel = { ...reelBrut, meetings: reelBrut.meetings.filter((m) => m.origine !== "auto") };
 const rel = await releverTout({ sources, agenda, aujourdhui: AUJ, dossierFixtures: "tests/fixtures/evenements" });
 assert(rel.sourcesLues.has("presidentielle-2027") && !rel.sourcesLues.has("congres-rn") && rel.echecs === 0, "page introuvable : pas lue, pas un échec");
 const fin = fusionner(reel.meetings, rel.releves, { aujourdhui: AUJ, sourcesLues: rel.sourcesLues });
