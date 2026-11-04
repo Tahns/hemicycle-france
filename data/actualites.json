@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-04T17:45:40.593Z",
+ "lastUpdated": "2026-11-04T17:50:42.120Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -155,10 +155,11 @@
    "motifs": [
     "présidentielle",
     "candidats",
-    "sondage",
-    "primaire"
+    "primaire",
+    "sondage"
    ],
    "medias": [
+    "Le Figaro",
     "BFMTV",
     "Sud Ouest",
     "La Dépêche",
@@ -175,12 +176,11 @@
     "Valeurs actuelles",
     "Nice-Matin",
     "L'Est républicain",
-    "RFI",
-    "Le Figaro",
-    "France 24"
+    "RFI"
    ],
    "mediasDistincts": 16,
    "sources": [
+    "Le Figaro",
     "BFMTV",
     "Sud Ouest",
     "La Dépêche",
@@ -195,12 +195,17 @@
     "Ouest-France",
     "Valeurs actuelles",
     "Nice-Matin",
-    "France Médias Monde",
-    "Le Figaro"
+    "RFI"
    ],
    "nb": 74,
-   "derniere": "2026-11-04T17:32:12.000Z",
+   "derniere": "2026-11-04T17:34:05.000Z",
    "articles": [
+    {
+     "media": "Le Figaro",
+     "titre": "Présidentielle 2027 : plutôt qu’une primaire, Macron veut une coalition allant de Glucksmann à Lisnard pour déjouer le duel Le Pen-Mélenchon",
+     "url": "https://www.lefigaro.fr/elections/presidentielles/candidats/presidentielle-2027-plutot-qu-une-primaire-macron-veut-une-coalition-allant-de-glucksmann-a-lisnard-pour-dejouer-le-duel-le-pen-melenchon-20261104",
+     "date": "2026-11-04T17:34:05.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "\"LE 20.27\" - \"Toc toc, c'est moi qui frappe à la porte\", David Lisnard se réjouit du soutien de Patrick Sébastien",
@@ -303,18 +308,6 @@
      "titre": "Présidentielle française: le candidat Nouvelle Énergie David Lisnard fait-il peur à ses concurrents?",
      "url": "https://www.rfi.fr/fr/france/20261103-pr%C3%A9sidentielle-fran%C3%A7aise-la-candidat-nouvelle-%C3%A9nergie-david-lisnard-fait-il-peur-%C3%A0-ses-concurrents",
      "date": "2026-11-03T18:14:20.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "Présidentielle : Darmanin, Lisnard, Attal, Philippe, Bayrou, Retailleau… Qui dit quoi sur la primaire ?",
-     "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-darmanin-lisnard-attal-philippe-bayrou-retailleau-qui-dit-quoi-sur-la-primaire-20261103",
-     "date": "2026-11-03T16:52:27.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Présidentielle en France : y aura-t-il une primaire de la droite ?",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261103-pr%C3%A9sidentielle-en-france-y-aura-t-il-une-primaire-de-la-droite",
-     "date": "2026-11-03T15:38:53.000Z"
     }
    ]
   },
@@ -338,10 +331,9 @@
     "Public Sénat",
     "Ouest-France",
     "Libération",
-    "L'Obs",
-    "France 24"
+    "L'Obs"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 11,
    "sources": [
     "Valeurs actuelles",
     "EBRA",
@@ -353,10 +345,9 @@
     "Public Sénat",
     "Ouest-France",
     "Libération",
-    "L'Obs",
-    "France 24"
+    "L'Obs"
    ],
-   "nb": 19,
+   "nb": 18,
    "derniere": "2026-11-04T17:31:34.000Z",
    "articles": [
     {
@@ -443,12 +434,6 @@
      "titre": "« Calomnies racistes », « responsabilité immense »… Passe d’armes entre Mélenchon et Philippe après son interview sur TF1",
      "url": "https://www.nouvelobs.com/politique/20261102.OBS119788/calomnies-racistes-responsabilite-immense-passe-d-armes-entre-melenchon-et-philippe-apres-son-interview-sur-tf1.html",
      "date": "2026-11-03T11:30:16.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "La préfecture de police interdit la manifestation prévue par l'Interfac mardi au cœur de Paris",
-     "url": "https://www.france24.com/fr/france/20261102-pr%C3%A9fecture-interdit-manifestation-pr%C3%A9vue-interfac-mardi-coeur-paris",
-     "date": "2026-11-02T18:30:33.000Z"
     }
    ]
   },
@@ -642,47 +627,60 @@
    ]
   },
   {
-   "medias": 3,
-   "mediasDistincts": 3,
+   "medias": 5,
+   "mediasDistincts": 2,
    "sources": [
-    "Nice-Matin",
-    "20 Minutes",
-    "France 24"
+    "Sud Ouest",
+    "EBRA"
    ],
-   "derniere": "2026-11-03T09:06:14.000Z",
+   "derniere": "2026-11-04T16:33:23.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": "education"
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
-     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-03T08:28:24.000Z"
+     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
+     "url": "https://www.leprogres.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
+     "media": "Le Progrès",
+     "date": "2026-11-04T15:10:00.000Z"
     },
     {
-     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
-     "media": "Nice-Matin",
-     "date": "2026-11-03T09:06:14.000Z"
+     "titre": "Grève du 5 novembre : éducation, transports, santé… Quels sont les secteurs qui se mobilisent ?",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/greve-du-5-novembre-education-transports-sante-quels-sont-les-secteurs-qui-se-mobilisent-31381810.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-04T16:33:23.000Z"
     },
     {
-     "titre": "Jean-François Copé appelle la droite à cesser de \"chercher sans arrêt le général de Gaulle\"",
-     "url": "https://www.france24.com/fr/france/20261103-jean-fran%C3%A7ois-cop%C3%A9-appelle-la-droite-%C3%A0-cesser-de-chercher-sans-arr%C3%AAt-le-g%C3%A9n%C3%A9ral-de-gaulle",
-     "media": "France 24",
-     "date": "2026-11-03T07:51:09.000Z"
+     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
+     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T15:10:00.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
+     "url": "https://www.ledauphine.com/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-04T15:10:00.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
+     "url": "https://www.estrepublicain.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
+     "media": "L'Est républicain",
+     "date": "2026-11-04T15:10:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "titre": "Santé : ce que disent les médias",
     "origine": "regles"
    },
-   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Trois médias en parlent : 20 Minutes, Nice-Matin et France 24."
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
   },
   {
    "medias": 4,
@@ -824,6 +822,48 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "France Inter",
+    "Mediapart"
+   ],
+   "derniere": "2026-11-04T17:04:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-mercredi-04-novembre-2026-1942906",
+     "media": "France Inter",
+     "date": "2026-11-04T15:04:50.000Z"
+    },
+    {
+     "titre": "Midterms 2026 : qui est Abdul El-Sayed, premier sénateur musulman, élu dans le Michigan ?",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/midterms-2026-qui-est-abdul-el-sayed-premier-senateur-musulman-elu-dans-le-michigan-5807587",
+     "media": "France Inter",
+     "date": "2026-11-04T17:04:00.000Z"
+    },
+    {
+     "titre": "Dans le Michigan, Abdul el-Sayed ouvre une nouvelle voie aux progressistes",
+     "url": "https://www.mediapart.fr/journal/international/041126/dans-le-michigan-abdul-el-sayed-ouvre-une-nouvelle-voie-aux-progressistes",
+     "media": "Mediapart",
+     "date": "2026-11-04T09:51:43.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Qui est Abdul El-Sayed élu dans le Michigan ?",
+   "accroche": "Qui est Abdul El-Sayed élu dans le Michigan ?",
+   "essentiel": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan. Deux médias en parlent : France Inter et Mediapart."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Sud Ouest",
     "Public Sénat"
    ],
@@ -856,39 +896,6 @@
    "fait": "À quoi s’attendre pour ce jour de grève et de mobilisation ?",
    "accroche": "À quoi s’attendre pour ce jour de grève et de mobilisation ?",
    "essentiel": "À quoi s’attendre pour ce jour de grève et de mobilisation ? Deux médias en parlent : Sud Ouest et Public Sénat."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Sud Ouest",
-    "France 24"
-   ],
-   "derniere": "2026-11-04T16:33:23.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grève du 5 novembre : éducation, transports, santé… Quels sont les secteurs qui se mobilisent ?",
-     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/greve-du-5-novembre-education-transports-sante-quels-sont-les-secteurs-qui-se-mobilisent-31381810.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-04T16:33:23.000Z"
-    },
-    {
-     "titre": "Éducation, transports, santé... à quoi s'attendre pour la journée de mobilisation de jeudi ?",
-     "url": "https://www.france24.com/fr/france/20261104-%C3%A9ducation-transports-sant%C3%A9-%C3%A0-quoi-s-attendre-journ%C3%A9e-mobilisation-jeudi",
-     "media": "France 24",
-     "date": "2026-11-04T15:35:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : appel sur la santé publique",
-    "origine": "regles"
-   }
   },
   {
    "medias": 2,
@@ -932,43 +939,6 @@
    },
    "fait": "Des messages privés d’Emmanuel Macron dévoilés dans un livre",
    "accroche": "Des messages privés d’Emmanuel Macron dévoilés dans un livre"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "France Inter",
-    "Mediapart"
-   ],
-   "derniere": "2026-11-04T15:04:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/zoom-zoom-zen/zoom-zoom-zen-du-mercredi-04-novembre-2026-1942906",
-     "media": "France Inter",
-     "date": "2026-11-04T15:04:50.000Z"
-    },
-    {
-     "titre": "Dans le Michigan, Abdul el-Sayed ouvre une nouvelle voie aux progressistes",
-     "url": "https://www.mediapart.fr/journal/international/041126/dans-le-michigan-abdul-el-sayed-ouvre-une-nouvelle-voie-aux-progressistes",
-     "media": "Mediapart",
-     "date": "2026-11-04T09:51:43.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "accroche": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan",
-   "essentiel": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan. Deux médias en parlent : France Inter et Mediapart.",
-   "fait": "Abdul El-Sayed a remporté un siège de sénateur dans le Michigan"
   },
   {
    "medias": 2,
@@ -1328,6 +1298,42 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Nice-Matin",
+    "20 Minutes"
+   ],
+   "derniere": "2026-11-03T09:06:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
+     "media": "Nice-Matin",
+     "date": "2026-11-03T09:06:14.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
+     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-03T08:28:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : appel sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Deux médias en parlent : Nice-Matin et 20 Minutes."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Libération",
     "Nice-Matin"
    ],
@@ -1421,6 +1427,62 @@
    "accroche": "Jean-Luc Mélenchon annule son passage au «20 heures» de TF1, la chaîne assure que l’interview",
    "essentiel": "Jean-Luc Mélenchon annule son passage au «20 heures» de TF1, la chaîne assure que l’interview. Fâché contre TF1 et l’interview de Philippe, Mélenchon annule un passage au 20H. Deux médias en parlent : Libération et Nice-Matin.",
    "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Nice-Matin",
+    "RFI"
+   ],
+   "derniere": "2026-11-01T20:47:33.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : Edouard Philippe refuse de participer à une primaire, source de « division »",
+     "url": "https://www.nicematin.com/societe/politique/presidentielle-edouard-philippe-refuse-de-participer-a-une-primaire-source-de-division-10751976",
+     "media": "Nice-Matin",
+     "date": "2026-11-01T20:47:33.000Z"
+    },
+    {
+     "titre": "Présidentielle française: Édouard Philippe refuse de participer à une primaire de la droite et du centre",
+     "url": "https://www.rfi.fr/fr/france/20261101-pr%C3%A9sidentielle-fran%C3%A7aise-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-de-la-droite-et-du-centre",
+     "media": "RFI",
+     "date": "2026-11-01T20:11:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Participer à une primaire",
+    "origine": "recoupement"
+   },
+   "fait": "Edouard Philippe refuse de participer à une primaire",
+   "accroche": "Edouard Philippe refuse de participer à une primaire",
+   "essentiel": "Pour la présidentielle française, Édouard Philippe refuse de participer à une primaire de la droite et du centre. Deux médias en parlent : Nice-Matin et RFI.",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
     {
      "type": "personnes",
      "texte": "Édouard Philippe : président d'Horizons",
@@ -1580,55 +1642,6 @@
    ]
   },
   {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-04T15:10:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
-     "url": "https://www.leprogres.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
-     "media": "Le Progrès",
-     "date": "2026-11-04T15:10:00.000Z"
-    },
-    {
-     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
-     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T15:10:00.000Z"
-    },
-    {
-     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
-     "url": "https://www.ledauphine.com/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-04T15:10:00.000Z"
-    },
-    {
-     "titre": "Social. Grève du 5 novembre : écoles, santé, transports... Quelles perturbations sont à prévoir jeudi ?",
-     "url": "https://www.estrepublicain.fr/social/2026/11/04/greve-du-5-novembre-ecoles-sante-transports-quelles-perturbations-sont-a-prevoir-jeudi",
-     "media": "L'Est républicain",
-     "date": "2026-11-04T15:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : ce que disent les médias",
-    "origine": "regles"
-   },
-   "date": {
-    "iso": "2026-11-05",
-    "jour": 5,
-    "mois": "novembre"
-   }
-  },
-  {
    "medias": 3,
    "mediasDistincts": 1,
    "sources": [
@@ -1659,99 +1672,6 @@
      "url": "https://www.estrepublicain.fr/elections/2026/11/04/midterms-2026-senat-chambre-des-representants-le-resultat-des-elections-en-un-coup-d-oeil",
      "media": "L'Est républicain",
      "date": "2026-11-04T13:52:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin / France 24 / RFI"
-   ],
-   "derniere": "2026-11-01T20:47:33.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle : Edouard Philippe refuse de participer à une primaire, source de « division »",
-     "url": "https://www.nicematin.com/societe/politique/presidentielle-edouard-philippe-refuse-de-participer-a-une-primaire-source-de-division-10751976",
-     "media": "Nice-Matin",
-     "date": "2026-11-01T20:47:33.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Édouard Philippe refuse de participer à une primaire, source de \"division\"",
-     "url": "https://www.france24.com/fr/france/20261101-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-source-de-division",
-     "media": "France 24",
-     "date": "2026-11-01T20:35:14.000Z"
-    },
-    {
-     "titre": "Présidentielle française: Édouard Philippe refuse de participer à une primaire de la droite et du centre",
-     "url": "https://www.rfi.fr/fr/france/20261101-pr%C3%A9sidentielle-fran%C3%A7aise-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-de-la-droite-et-du-centre",
-     "media": "RFI",
-     "date": "2026-11-01T20:11:41.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Participer à une primaire",
-    "origine": "recoupement"
-   },
-   "fait": "Édouard Philippe refuse de participer à une primaire, source de \"division\"",
-   "accroche": "Édouard Philippe refuse de participer à une primaire, source de \"division\"",
-   "essentiel": "Pour la présidentielle française, Édouard Philippe refuse de participer à une primaire de la droite et du centre. Trois médias en parlent : Nice-Matin, France 24 et RFI.",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-04T09:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "États-Unis. Midterms 2026 : un sénateur musulman, un autre ouvertement gay... des victoires historiques pour les minorités",
-     "url": "https://www.leprogres.fr/elections/2026/11/04/midterms-2026-plusieurs-avancees-historiques-dont-un-senateur-musulman-et-un-autre-ouvertement-gay",
-     "media": "Le Progrès",
-     "date": "2026-11-04T09:39:00.000Z"
-    },
-    {
-     "titre": "États-Unis. Midterms 2026 : un sénateur musulman, un autre ouvertement gay... des victoires historiques pour les minorités",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/04/midterms-2026-plusieurs-avancees-historiques-dont-un-senateur-musulman-et-un-autre-ouvertement-gay",
-     "media": "L'Est républicain",
-     "date": "2026-11-04T09:39:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1795,48 +1715,12 @@
    "essentiel": "Midterms 2026 : les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès. Deux médias en parlent : Le JDD et Europe 1."
   },
   {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Médias Monde"
-   ],
-   "derniere": "2026-11-02T15:36:15.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "\"Dubaï Papers\" : le procès pour fraude fiscale internationale s'ouvre à Paris",
-     "url": "https://www.france24.com/fr/france/20261102-duba%C3%AF-papers-proc%C3%A8s-pour-fraude-fiscale-internationale-ouvre-paris",
-     "media": "France 24",
-     "date": "2026-11-02T15:36:15.000Z"
-    },
-    {
-     "titre": "Procès des «Dubaï Papers»: trois sociétés et 13 personnes, dont un prince belge, seront jugées à Paris",
-     "url": "https://www.rfi.fr/fr/france/20261101-proc%C3%A8s-des-duba%C3%AF-papers-trois-soci%C3%A9t%C3%A9s-et-14-personnes-dont-un-prince-belge-seront-jug%C3%A9es-%C3%A0-paris",
-     "media": "RFI",
-     "date": "2026-11-01T18:14:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
-   "accroche": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
-   "essentiel": "Le procès pour fraude fiscale internationale s'ouvre à Paris. Trois sociétés et 13 personnes seront jugées à Paris. Deux médias en parlent : France 24 et RFI."
-  },
-  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "Europe 1"
    ],
-   "derniere": "2026-11-04T17:45:11.000Z",
+   "derniere": "2026-11-04T17:47:16.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1845,16 +1729,125 @@
    },
    "articles": [
     {
-     "titre": "Strasbourg. Lancement officiel des bières de Noël d’Alsace",
+     "titre": "«Brigitte ne veut pas que ce soit un musée» : Max Guazzini, nouveau président de la Fondation Brigitte Bardot, donne des nouvelles de la Madrague",
+     "url": "https://www.europe1.fr/societe/brigitte-ne-veut-pas-que-ce-soit-un-musee-max-guazzini-nouveau-president-de-la-fondation-brigitte-bardot-donne-des-nouvelles-de-la-madrague-1208420?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-04T17:47:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-04T17:46:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "La Chapelle-de-la-Tour. Le conseil municipal des enfants a été mis en place",
+     "url": "https://www.ledauphine.com/politique/2026/11/04/le-conseil-municipal-des-enfants-a-ete-mis-en-place",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-04T17:46:36.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Conseil municipal : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-04T17:45:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Haut Jura. Déneigement des chemins privés : un dilemme entre économies et service aux habitants",
+     "url": "https://www.leprogres.fr/politique/2026/11/04/deneigement-des-chemins-prives-un-dilemme-entre-economies-et-service-aux-habitants",
+     "media": "Le Progrès",
+     "date": "2026-11-04T17:45:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Haut Jura : finances locales",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-04T17:45:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Strasbourg. « Elles illustrent la créativité des brasseurs » : top départ pour les bières de Noël d’Alsace",
      "url": "https://www.dna.fr/culture-loisirs/2026/11/04/lancement-officiel-des-bieres-de-noel-d-alsace",
      "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T17:45:11.000Z"
+     "date": "2026-11-04T17:45:00.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Strasbourg : organisation territoriale",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-04T17:43:58.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2026 : le gouvernement tente un ultime tour de vis pour éviter un dérapage XXL",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2026-le-gouvernement-tente-un-ultime-tour-de-vis-pour-eviter-un-derapage-xxl_6806410_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-04T17:43:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le gouvernement tente un ultime tour de vis pour éviter un dérapage XXL",
+   "accroche": "Le gouvernement tente un ultime tour de vis pour éviter un dérapage XXL"
   },
   {
    "medias": 1,
@@ -1935,6 +1928,70 @@
    },
    "fait": "Le conseil municipal vote des aides pour les écoles et les associations",
    "accroche": "Le conseil municipal vote des aides pour les écoles et les associations"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Figaro"
+   ],
+   "derniere": "2026-11-04T17:34:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : plutôt qu’une primaire, Macron veut une coalition allant de Glucksmann à Lisnard pour déjouer le duel Le Pen-Mélenchon",
+     "url": "https://www.lefigaro.fr/elections/presidentielles/candidats/presidentielle-2027-plutot-qu-une-primaire-macron-veut-une-coalition-allant-de-glucksmann-a-lisnard-pour-dejouer-le-duel-le-pen-melenchon-20261104",
+     "media": "Le Figaro",
+     "date": "2026-11-04T17:34:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Plutôt qu’une primaire, Macron veut une coalition allant de Glucksmann à Lisnard pour déjouer le duel Le Pen-Mélenchon",
+   "accroche": "Plutôt qu’une primaire, Macron veut une coalition allant de Glucksmann à Lisnard pour déjouer le duel Le Pen-Mélenchon",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Pen 35–37 %, Mélenchon 17,5–18 %, Lisnard 7–9 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4558,65 +4615,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-04T15:10:09.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"J’ai caché une phrase de ChatGPT dans le livre\" : le prix Goncourt 2026, Philippe Jaenada, révèle avoir sollicité l'IA pour son ouvrage primé",
-     "url": "https://www.ladepeche.fr/2026/11/04/jai-cache-une-phrase-de-chatgpt-dans-le-livre-le-prix-goncourt-2026-philippe-jaenada-revele-avoir-utilise-lia-pour-son-ouvrage-prime-13635923.php",
-     "media": "La Dépêche",
-     "date": "2026-11-04T15:10:09.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Intelligence artificielle : ce que disent les médias",
-    "origine": "regles"
-   },
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 19 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-11-04T15:02:19.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Jean-Baptiste Nouailhac : « Mobilisations lycéennes, la véritable réforme à opérer est celle de l’exigence »",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/societe/jean-baptiste-nouailhac-mobilisations-lyceennes-la-veritable-reforme-a-operer-est-celle-de-lexigence",
-     "media": "Valeurs actuelles",
-     "date": "2026-11-04T15:02:19.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Baptiste Nouailhac : mobilisation lycéenne",
-    "origine": "regles"
-   }
   }
  ]
 }
