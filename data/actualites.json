@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-04T07:10:46.182Z",
+ "lastUpdated": "2026-11-04T07:15:50.516Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -178,6 +178,7 @@
     "Public Sénat",
     "Le Figaro",
     "Valeurs actuelles",
+    "France 24",
     "L'Obs"
    ],
    "mediasDistincts": 16,
@@ -193,13 +194,13 @@
     "France Inter",
     "L'Express",
     "20 Minutes",
-    "RFI",
+    "France Médias Monde",
     "Public Sénat",
     "Le Figaro",
     "Valeurs actuelles",
     "L'Obs"
    ],
-   "nb": 99,
+   "nb": 100,
    "derniere": "2026-11-04T07:00:00.000Z",
    "articles": [
     {
@@ -317,6 +318,12 @@
      "date": "2026-11-03T16:02:55.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "Présidentielle en France : y aura-t-il une primaire de la droite ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261103-pr%C3%A9sidentielle-en-france-y-aura-t-il-une-primaire-de-la-droite",
+     "date": "2026-11-03T15:38:53.000Z"
+    },
+    {
      "media": "L'Obs",
      "titre": "Fake news sur Brigitte Macron : revers partiel pour le couple présidentiel face à Candace Owens",
      "url": "https://www.nouvelobs.com/justice/20261103.OBS119808/fake-news-sur-brigitte-macron-revers-partiel-pour-le-couple-presidentiel-face-a-candace-owens.html",
@@ -329,7 +336,6 @@
    "titre": "Interview",
    "motifs": [
     "interview",
-    "pétition",
     "soutien",
     "crise"
    ],
@@ -339,13 +345,13 @@
     "Le Monde",
     "Le Dauphiné libéré",
     "BFMTV",
-    "Sud Ouest",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Libération",
-    "Public Sénat",
     "L'Obs",
+    "France 24",
+    "Public Sénat",
     "Le JDD"
    ],
    "mediasDistincts": 10,
@@ -355,13 +361,13 @@
     "Le Monde",
     "EBRA",
     "BFMTV",
-    "Sud Ouest",
     "Libération",
-    "Public Sénat",
     "L'Obs",
+    "France 24",
+    "Public Sénat",
     "Le JDD"
    ],
-   "nb": 30,
+   "nb": 26,
    "derniere": "2026-11-04T06:50:07.000Z",
    "articles": [
     {
@@ -403,12 +409,6 @@
      "video": true
     },
     {
-     "media": "Sud Ouest",
-     "titre": "CNews : la pétition appelant à fermer la chaîne dépasse les 760 000 signatures, décision sur son sort dans les prochains jours",
-     "url": "https://www.sudouest.fr/culture/medias/cnews-la-petition-appelant-a-fermer-la-chaine-atteint-les-quelque-750-000-signatures-decision-sur-son-sort-dans-les-prochains-jours-31369739.php",
-     "date": "2026-11-03T19:59:30.000Z"
-    },
-    {
      "media": "Le Progrès",
      "titre": "Interview. Carburants : effets du déstockage, soutien aux petites stations… le ministre Serge Papin revient sur la crise",
      "url": "https://www.leprogres.fr/politique/2026/11/03/carburants-effets-du-destockage-soutien-aux-petites-stations-le-ministre-serge-papin-revient-sur-la-crise",
@@ -433,16 +433,22 @@
      "date": "2026-11-03T18:01:08.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Pétition : la chaîne CNews peut-elle disparaître de la TNT ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/petition-la-chaine-cnews-peut-elle-disparaitre-de-la-tnt",
-     "date": "2026-11-03T15:34:31.000Z"
-    },
-    {
      "media": "L'Obs",
      "titre": "« Calomnies racistes », « responsabilité immense »… Passe d’armes entre Mélenchon et Philippe après son interview sur TF1",
      "url": "https://www.nouvelobs.com/politique/20261102.OBS119788/calomnies-racistes-responsabilite-immense-passe-d-armes-entre-melenchon-et-philippe-apres-son-interview-sur-tf1.html",
      "date": "2026-11-03T11:30:16.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "La préfecture de police interdit la manifestation prévue par l'Interfac mardi au cœur de Paris",
+     "url": "https://www.france24.com/fr/france/20261102-pr%C3%A9fecture-interdit-manifestation-pr%C3%A9vue-interfac-mardi-coeur-paris",
+     "date": "2026-11-02T18:30:33.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Le racisme ne naît pas de nulle part » : Les écologistes ont déposé une proposition de loi visant à interdire la théorie du grand remplacement",
+     "url": "https://www.publicsenat.fr/actualites/politique/le-racisme-ne-nait-pas-de-nulle-part-les-ecologistes-ont-depose-une-proposition-de-loi-visant-a-interdire-la-theorie-du-grand-remplacement",
+     "date": "2026-11-02T16:54:19.000Z"
     },
     {
      "media": "Le JDD",
@@ -453,135 +459,140 @@
    ]
   },
   {
-   "id": "public",
-   "titre": "Public",
+   "id": "petition",
+   "titre": "Pétition",
    "motifs": [
-    "public",
-    "journaliste"
+    "pétition",
+    "fermer",
+    "chaîne"
    ],
    "medias": [
+    "L'Est républicain",
     "Sud Ouest",
-    "Le Monde",
-    "L'Humanité",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
-    "L'Est républicain",
-    "RFI",
-    "L'Obs",
+    "Le Monde",
     "Public Sénat",
-    "Libération"
+    "Libération",
+    "L'Obs",
+    "Le JDD",
+    "France 24",
+    "Nice-Matin"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
+    "EBRA",
     "Sud Ouest",
     "Le Monde",
-    "L'Humanité",
-    "EBRA",
-    "RFI",
-    "L'Obs",
     "Public Sénat",
-    "Libération"
+    "Libération",
+    "L'Obs",
+    "Le JDD",
+    "France 24",
+    "Nice-Matin"
    ],
    "nb": 18,
-   "derniere": "2026-11-03T20:41:17.000Z",
+   "derniere": "2026-11-04T05:30:00.000Z",
    "articles": [
     {
+     "media": "L'Est républicain",
+     "titre": "Haute-Saône. Fermeture de l’usine Fuji Seal à Fougerolles : Force ouvrière monte au créneau",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/04/fermeture-de-l-usine-fuji-seal-a-fougerolles-force-ouvriere-monte-au-creneau",
+     "date": "2026-11-04T05:30:00.000Z"
+    },
+    {
      "media": "Sud Ouest",
-     "titre": "Colère sociale : « droit au travail », « service public », prix des logements… En Europe, les syndicats appellent à des « manifestations coordonnées » fin novembre",
-     "url": "https://www.sudouest.fr/economie/social/greve/colere-sociale-droit-au-travail-service-public-prix-des-logements-en-europe-les-syndicats-appellent-a-des-manifestations-coordonnees-fin-novembre-31369712.php",
-     "date": "2026-11-03T20:41:17.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "« Net de toutes dettes, notre secteur public est riche de 750 milliards d’euros. Et c’est sans compter “La Joconde” »",
-     "url": "https://www.lemonde.fr/idees/article/2026/11/03/net-de-toutes-dettes-notre-secteur-public-est-riche-de-750-milliards-d-euros-et-c-est-sans-compter-la-joconde_6805662_3232.html",
-     "date": "2026-11-03T20:00:10.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Commission d’enquête sur le 17 octobre : pour Laurent Nunez, les libertés publiques passent après l’ordre",
-     "url": "https://www.humanite.fr/politique/laurent-nunez/commission-denquete-sur-le-17-octobre-pour-laurent-nunez-les-libertes-publiques-passent-apres-lordre",
-     "date": "2026-11-03T19:29:48.000Z"
+     "titre": "CNews : la pétition appelant à fermer la chaîne dépasse les 760 000 signatures, décision sur son sort dans les prochains jours",
+     "url": "https://www.sudouest.fr/culture/medias/cnews-la-petition-appelant-a-fermer-la-chaine-atteint-les-quelque-750-000-signatures-decision-sur-son-sort-dans-les-prochains-jours-31369739.php",
+     "date": "2026-11-03T19:59:30.000Z"
     },
     {
      "media": "Le Progrès",
-     "titre": "Politique. « Vous êtes tous trop durs avec moi » : une journaliste publie ses échanges avec Emmanuel Macron",
-     "url": "https://www.leprogres.fr/politique/2026/11/03/vous-etes-tous-trop-durs-avec-moi-une-journaliste-publie-ses-echanges-avec-emmanuel-macron",
-     "date": "2026-11-03T18:15:00.000Z"
+     "titre": "Interview. Carburants : effets du déstockage, soutien aux petites stations… le ministre Serge Papin revient sur la crise",
+     "url": "https://www.leprogres.fr/politique/2026/11/03/carburants-effets-du-destockage-soutien-aux-petites-stations-le-ministre-serge-papin-revient-sur-la-crise",
+     "date": "2026-11-03T19:00:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. « Vous êtes tous trop durs avec moi » : une journaliste publie ses échanges avec Emmanuel Macron",
-     "url": "https://www.dna.fr/politique/2026/11/03/vous-etes-tous-trop-durs-avec-moi-une-journaliste-publie-ses-echanges-avec-emmanuel-macron",
-     "date": "2026-11-03T18:15:00.000Z"
+     "titre": "Interview. Carburants : effets du déstockage, soutien aux petites stations… le ministre Serge Papin revient sur la crise",
+     "url": "https://www.dna.fr/politique/2026/11/03/carburants-effets-du-destockage-soutien-aux-petites-stations-le-ministre-serge-papin-revient-sur-la-crise",
+     "date": "2026-11-03T19:00:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
-     "titre": "Politique. « Vous êtes tous trop durs avec moi » : une journaliste publie ses échanges avec Emmanuel Macron",
-     "url": "https://www.ledauphine.com/politique/2026/11/03/vous-etes-tous-trop-durs-avec-moi-une-journaliste-publie-ses-echanges-avec-emmanuel-macron",
-     "date": "2026-11-03T18:15:00.000Z"
+     "titre": "Interview. Carburants : effets du déstockage, soutien aux petites stations… le ministre Serge Papin revient sur la crise",
+     "url": "https://www.ledauphine.com/politique/2026/11/03/carburants-effets-du-destockage-soutien-aux-petites-stations-le-ministre-serge-papin-revient-sur-la-crise",
+     "date": "2026-11-03T19:00:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Politique. « Vous êtes tous trop durs avec moi » : une journaliste publie ses échanges avec Emmanuel Macron",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/03/vous-etes-tous-trop-durs-avec-moi-une-journaliste-publie-ses-echanges-avec-emmanuel-macron",
-     "date": "2026-11-03T18:15:00.000Z"
+     "titre": "Interview. Carburants : effets du déstockage, soutien aux petites stations… le ministre Serge Papin revient sur la crise",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/03/carburants-effets-du-destockage-soutien-aux-petites-stations-le-ministre-serge-papin-revient-sur-la-crise",
+     "date": "2026-11-03T19:00:00.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "Journal d'Outre-mer du 3 novembre 2026",
-     "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261103-journal-d-outre-mer-du-3-novembre-2026",
-     "date": "2026-11-03T15:02:29.000Z"
+     "media": "Le Dauphiné libéré",
+     "titre": "Orange. Deux anciens élus demandent un moratoire sur la fermeture de l’école du Coudoulet",
+     "url": "https://www.ledauphine.com/politique/2026/11/03/deux-anciens-elus-demandent-un-moratoire-sur-la-fermeture-de-l-ecole-du-coudoulet",
+     "date": "2026-11-03T18:13:00.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "Budget : comment libérer les finances publiques de la tyrannie du court terme",
-     "url": "https://www.nouvelobs.com/economie/20261103.OBS119798/budget-comment-liberer-les-finances-publiques-de-la-tyrannie-du-court-terme.html",
-     "date": "2026-11-03T11:00:18.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Sens Public — SENS PUBLIC 26/11/10 Ma P1",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-10-ma-p1-e0",
-     "date": "2026-11-02T16:12:25.000Z"
+     "media": "Le Monde",
+     "titre": "Pétition pour interdire CNews : l’Assemblée nationale votera en commission sur l’opportunité d’un débat",
+     "url": "https://www.lemonde.fr/economie/article/2026/11/03/petition-pour-interdire-cnews-l-assemblee-nationale-votera-en-commission-sur-l-opportunite-d-un-debat_6805641_3234.html",
+     "date": "2026-11-03T17:34:20.000Z"
     },
     {
      "media": "Public Sénat",
-     "titre": "Sens Public — SENS PUBLIC 26/11/09 Lu P1",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-09-lu-p1-e0",
-     "date": "2026-11-02T15:52:30.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Journal d'Outre-mer du 2 novembre 2026",
-     "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261102-journal-d-outre-mer-du-2-novembre-2026",
-     "date": "2026-11-02T15:25:47.000Z"
+     "titre": "Pétition : la chaîne CNews peut-elle disparaître de la TNT ?",
+     "url": "https://www.publicsenat.fr/actualites/politique/petition-la-chaine-cnews-peut-elle-disparaitre-de-la-tnt",
+     "date": "2026-11-03T15:34:31.000Z"
     },
     {
      "media": "Libération",
-     "titre": "CNews, cette chaîne de désinformation et de propagande qui ne devrait pas bénéficier d’un canal hertzien public",
-     "url": "https://www.liberation.fr/politique/cnews-cette-chaine-de-desinformation-et-de-propagande-qui-ne-devrait-pas-beneficier-dun-canal-hertzien-public-20261102_LZZBSUCG7FGKNEFV2YPXCW3IVI/",
-     "date": "2026-11-02T14:50:16.000Z"
+     "titre": "«CNews n’est pas une chaîne d’information» : la pétition contre la chaîne d’extrême droite dépasse les 700 000 signatures",
+     "url": "https://www.liberation.fr/economie/medias/cnews-nest-pas-une-chaine-dinformation-une-petition-reclamant-la-suppression-du-media-dextreme-droite-cartonne-sur-le-site-de-lassemblee-20261101_TMYHVXPZ75H6BM5G6OSMBX2HUM/",
+     "date": "2026-11-03T09:54:24.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Le Grand Jury — Le grand jury RTL – Public Sénat",
-     "url": "https://www.publicsenat.fr/emission/le-grand-jury-rtl-public-senat-ouest-france-m6/le-grand-jury-rtl-public-senat-e14",
-     "date": "2026-11-02T07:57:23.000Z"
+     "media": "L'Obs",
+     "titre": "Pétition contre CNews : comment la chaîne de Bolloré est rattrapée par un climat de dégagisme",
+     "url": "https://www.nouvelobs.com/medias/20261102.OBS119791/petition-contre-cnews-comment-la-chaine-de-bollore-a-ete-rattrapee-par-un-climat-de-degagisme.html",
+     "date": "2026-11-02T19:39:17.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "«En démocratie, on ne ferme pas les médias !» : le député Jérémie Patrier-Leitus prend la défense de CNews",
+     "url": "https://www.lejdd.fr/politique/en-democratie-on-ne-ferme-pas-les-medias-le-depute-jeremie-patrier-leitus-prend-la-defense-de-cnews-187632",
+     "date": "2026-11-02T17:26:03.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Appel à fermer CNews : une pétition récolte plus de 600 000 signatures",
+     "url": "https://www.france24.com/fr/france/20261102-appel-%C3%A0-fermer-cnews-une-p%C3%A9tition-r%C3%A9colte-plus-d-un-demi-million-de-signatures",
+     "date": "2026-11-02T12:59:07.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« C’est une machine de propagande » : une pétition appelant à fermer CNews dépasse 500.000 signatures sur le site de l’Assemblée nationale",
+     "url": "https://www.nicematin.com/culture/medias/c-est-une-machine-de-propagande-une-petition-appelant-a-fermer-cnews-depasse-500-000-signatures-sur-le-site-de-l-assemblee-nationale-10752438",
+     "date": "2026-11-02T12:27:51.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 7,
-   "mediasDistincts": 4,
+   "medias": 9,
+   "mediasDistincts": 6,
    "sources": [
     "Mediapart",
     "Public Sénat",
     "EBRA",
-    "Nice-Matin"
+    "Nice-Matin",
+    "Europe 1",
+    "France Inter"
    ],
    "derniere": "2026-11-04T07:09:34.000Z",
    "illustration": {
@@ -632,6 +643,18 @@
      "url": "https://www.nicematin.com/societe/politique/aux-etats-unis-donald-trump-reconnait-la-defaite-des-elections-de-mi-mandat-mais-n-en-prend-pas-la-responsabilite-10753494",
      "media": "Nice-Matin",
      "date": "2026-11-04T06:47:12.000Z"
+    },
+    {
+     "titre": "Midterms 2026 : les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès",
+     "url": "https://www.europe1.fr/international/midterms-2026-les-democrates-obtiennent-la-majorite-au-senat-et-prennent-le-controle-total-du-congres-1207133?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-04T06:06:00.000Z"
+    },
+    {
+     "titre": "États-Unis : les démocrates remportent le Sénat et prennent le contrôle du Congrès, Donald Trump salue leur \"bon boulot\"",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/aux-etats-unis-les-democrates-remportent-le-senat-et-sont-sur-le-point-de-decrocher-la-chambre-des-representants-3173878",
+     "media": "France Inter",
+     "date": "2026-11-04T05:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -640,15 +663,16 @@
    },
    "fait": "Donald Trump reconnaît la défaite, les démocrates s'emparent de six Etats au Sénat",
    "accroche": "Donald Trump reconnaît la défaite, les démocrates s'emparent de six Etats au Sénat",
-   "essentiel": "Midterms 2026 : Donald Trump reconnaît la défaite, les démocrates s'emparent de six Etats au Sénat. Les démocrates remportent largement les élections de mi-mandat. Sept médias en parlent."
+   "essentiel": "Midterms 2026 : Donald Trump reconnaît la défaite, les démocrates s'emparent de six Etats au Sénat. Les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès. Neuf médias en parlent."
   },
   {
-   "medias": 4,
-   "mediasDistincts": 4,
+   "medias": 5,
+   "mediasDistincts": 5,
    "sources": [
     "France Inter",
     "Valeurs actuelles",
     "La Dépêche",
+    "France 24",
     "Europe 1"
    ],
    "derniere": "2026-11-04T06:47:45.000Z",
@@ -684,6 +708,12 @@
      "date": "2026-11-03T13:07:24.000Z"
     },
     {
+     "titre": "Goncourt 2026 : le prix décerné à Philippe Jaenada pour \"L'inconnue du quai de Javel\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261103-goncourt-2026-le-prix-d%C3%A9cern%C3%A9-%C3%A0-philippe-jaenada-pour-l-inconnue-du-quai-de-javel",
+     "media": "France 24",
+     "date": "2026-11-03T12:22:51.000Z"
+    },
+    {
      "titre": "Le prix Goncourt 2026 est attribué à Philippe Jaenada pour «L'Inconnue du quai de Javel»",
      "url": "https://www.europe1.fr/culture/le-prix-goncourt-2026-est-attribue-a-philippe-jaenada-pour-linconnue-du-quai-de-javel-1205300?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "media": "Europe 1",
@@ -697,7 +727,7 @@
    },
    "fait": "Prix Goncourt 2026 : Philippe Jaenada récompensé pour son ouvrage, l'écrivain présent à Toulouse",
    "accroche": "Prix Goncourt 2026 : Philippe Jaenada récompensé pour son ouvrage, l'écrivain présent à Toulouse",
-   "essentiel": "Prix Goncourt 2026 : Philippe Jaenada récompensé pour son ouvrage, l'écrivain présent à Toulouse. Quatre médias en parlent : Europe 1, France Inter, Valeurs actuelles et La Dépêche."
+   "essentiel": "Prix Goncourt 2026 : Philippe Jaenada récompensé pour son ouvrage, l'écrivain présent à Toulouse. Cinq médias en parlent : Europe 1, France Inter, Valeurs actuelles, La Dépêche et France 24."
   },
   {
    "medias": 4,
@@ -835,55 +865,6 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "L'Humanité",
-    "Sud Ouest",
-    "France Inter"
-   ],
-   "derniere": "2026-11-04T06:01:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Midterms : la majorité au Sénat et à la Chambre des représentants emportée par les démocrates… Suivez en direct la débâcle de Donald Trump",
-     "url": "https://www.humanite.fr/direct_content_feed/midterms-le-senat-bascule-les-democrates-en-avance-a-la-chambre-des-representants-suivez-en-direct-la-debacle-de-donald-trump",
-     "media": "L'Humanité",
-     "date": "2026-11-04T05:59:53.000Z"
-    },
-    {
-     "titre": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants",
-     "url": "https://www.humanite.fr/-/-/les-democrates-ont-pris-le-controle-du-senat-et-sont-en-passe-dobtenir-la-majorite-a-la-chambre-des-representants",
-     "media": "L'Humanité",
-     "date": "2026-11-04T06:01:44.000Z"
-    },
-    {
-     "titre": "DIRECT. Midterms 2026 aux Etats-Unis : déferlante démocrate à la chambre et au sénat, déroute pour Trump... Suivez toutes les infos de ce mercredi 4 novembre",
-     "url": "https://www.sudouest.fr/international/etats-unis/direct-midterms-2026-aux-etats-unis-deferlante-democrate-a-la-chambre-et-au-senat-deroute-pour-trump-suivez-toutes-les-infos-de-ce-mercredi-4-novembre-31373899.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-04T05:41:32.000Z"
-    },
-    {
-     "titre": "Aux États-Unis, les démocrates remportent le Sénat et sont sur le point de décrocher la Chambre des représentants",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/aux-etats-unis-les-democrates-remportent-le-senat-et-sont-sur-le-point-de-decrocher-la-chambre-des-representants-3173878",
-     "media": "France Inter",
-     "date": "2026-11-04T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   },
-   "accroche": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants",
-   "essentiel": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants. Trois médias en parlent : L'Humanité, Sud Ouest et France Inter.",
-   "fait": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants"
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
     "Libération",
     "La Dépêche",
     "Europe 1"
@@ -937,6 +918,49 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Nice-Matin",
+    "20 Minutes",
+    "France 24"
+   ],
+   "derniere": "2026-11-03T09:06:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
+     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-03T08:28:24.000Z"
+    },
+    {
+     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
+     "media": "Nice-Matin",
+     "date": "2026-11-03T09:06:14.000Z"
+    },
+    {
+     "titre": "Jean-François Copé appelle la droite à cesser de \"chercher sans arrêt le général de Gaulle\"",
+     "url": "https://www.france24.com/fr/france/20261103-jean-fran%C3%A7ois-cop%C3%A9-appelle-la-droite-%C3%A0-cesser-de-chercher-sans-arr%C3%AAt-le-g%C3%A9n%C3%A9ral-de-gaulle",
+     "media": "France 24",
+     "date": "2026-11-03T07:51:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Trois médias en parlent : 20 Minutes, Nice-Matin et France 24."
   },
   {
    "medias": 5,
@@ -993,8 +1017,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Public",
-    "origine": "dossier"
+    "titre": "Êtes tous trop durs",
+    "origine": "recoupement"
    },
    "fait": "Une journaliste publie ses échanges avec Emmanuel Macron",
    "accroche": "Une journaliste publie ses échanges avec Emmanuel Macron",
@@ -1098,6 +1122,48 @@
     "titre": "Sénat : ce que disent les médias",
     "origine": "regles"
    }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Humanité",
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-04T06:01:44.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "Midterms : la majorité au Sénat et à la Chambre des représentants emportée par les démocrates… Suivez en direct la débâcle de Donald Trump",
+     "url": "https://www.humanite.fr/direct_content_feed/midterms-le-senat-bascule-les-democrates-en-avance-a-la-chambre-des-representants-suivez-en-direct-la-debacle-de-donald-trump",
+     "media": "L'Humanité",
+     "date": "2026-11-04T05:59:53.000Z"
+    },
+    {
+     "titre": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants",
+     "url": "https://www.humanite.fr/-/-/les-democrates-ont-pris-le-controle-du-senat-et-sont-en-passe-dobtenir-la-majorite-a-la-chambre-des-representants",
+     "media": "L'Humanité",
+     "date": "2026-11-04T06:01:44.000Z"
+    },
+    {
+     "titre": "DIRECT. Midterms 2026 aux Etats-Unis : déferlante démocrate à la chambre et au sénat, déroute pour Trump... Suivez toutes les infos de ce mercredi 4 novembre",
+     "url": "https://www.sudouest.fr/international/etats-unis/direct-midterms-2026-aux-etats-unis-deferlante-democrate-a-la-chambre-et-au-senat-deroute-pour-trump-suivez-toutes-les-infos-de-ce-mercredi-4-novembre-31373899.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-04T05:41:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles"
+   },
+   "accroche": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants",
+   "essentiel": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants. Deux médias en parlent : L'Humanité et Sud Ouest.",
+   "fait": "Les démocrates ont pris le contrôle du Sénat et sont en passe d’obtenir la majorité à la Chambre des représentants"
   },
   {
    "medias": 2,
@@ -1310,8 +1376,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pétition appelant à fermer",
-    "origine": "recoupement"
+    "titre": "Pétition",
+    "origine": "dossier"
    },
    "fait": "CNews : la pétition appelant à fermer la chaîne dépasse les 760 000 signatures, décision sur son sort",
    "accroche": "CNews : la pétition appelant à fermer la chaîne dépasse les 760 000 signatures, décision sur son sort",
@@ -1466,9 +1532,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Pétition : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Pétition",
+    "origine": "dossier"
    },
    "accroche": "Pétition contre CNews : comment la chaîne de Bolloré est rattrapée par un climat de dégagisme",
    "essentiel": "Pétition contre CNews : comment la chaîne de Bolloré est rattrapée par un climat de dégagisme. Deux médias en parlent : Public Sénat et L'Obs.",
@@ -1563,42 +1628,6 @@
    "fait": "L’ex-Premier ministre Dominique de Villepin assure qu’il sera bien candidat à la présidentielle 2027",
    "accroche": "L’ex-Premier ministre Dominique de Villepin assure qu’il sera bien candidat à la présidentielle 2027",
    "essentiel": "L’ex-Premier ministre Dominique de Villepin assure qu’il sera bien candidat à la présidentielle 2027. Deux médias en parlent : Nice-Matin et 20 Minutes."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Nice-Matin",
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-03T09:06:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
-     "media": "Nice-Matin",
-     "date": "2026-11-03T09:06:14.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
-     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-03T08:28:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : appel sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Deux médias en parlent : Nice-Matin et 20 Minutes."
   },
   {
    "medias": 2,
@@ -1747,62 +1776,6 @@
    "accroche": "Jean-Luc Mélenchon annule son passage au «20 heures» de TF1, la chaîne assure que l’interview",
    "essentiel": "Jean-Luc Mélenchon annule son passage au «20 heures» de TF1, la chaîne assure que l’interview. Fâché contre TF1 et l’interview de Philippe, Mélenchon annule un passage au 20H. Deux médias en parlent : Libération et Nice-Matin.",
    "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Nice-Matin",
-    "RFI"
-   ],
-   "derniere": "2026-11-01T20:47:33.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle : Edouard Philippe refuse de participer à une primaire, source de « division »",
-     "url": "https://www.nicematin.com/societe/politique/presidentielle-edouard-philippe-refuse-de-participer-a-une-primaire-source-de-division-10751976",
-     "media": "Nice-Matin",
-     "date": "2026-11-01T20:47:33.000Z"
-    },
-    {
-     "titre": "Présidentielle française: Édouard Philippe refuse de participer à une primaire de la droite et du centre",
-     "url": "https://www.rfi.fr/fr/france/20261101-pr%C3%A9sidentielle-fran%C3%A7aise-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-de-la-droite-et-du-centre",
-     "media": "RFI",
-     "date": "2026-11-01T20:11:41.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Participer à une primaire",
-    "origine": "recoupement"
-   },
-   "fait": "Edouard Philippe refuse de participer à une primaire",
-   "accroche": "Edouard Philippe refuse de participer à une primaire",
-   "essentiel": "Pour la présidentielle française, Édouard Philippe refuse de participer à une primaire de la droite et du centre. Deux médias en parlent : Nice-Matin et RFI.",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
     {
      "type": "personnes",
      "texte": "Édouard Philippe : président d'Horizons",
@@ -2078,12 +2051,109 @@
    ]
   },
   {
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin / France 24 / RFI"
+   ],
+   "derniere": "2026-11-01T20:47:33.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : Edouard Philippe refuse de participer à une primaire, source de « division »",
+     "url": "https://www.nicematin.com/societe/politique/presidentielle-edouard-philippe-refuse-de-participer-a-une-primaire-source-de-division-10751976",
+     "media": "Nice-Matin",
+     "date": "2026-11-01T20:47:33.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : Édouard Philippe refuse de participer à une primaire, source de \"division\"",
+     "url": "https://www.france24.com/fr/france/20261101-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-source-de-division",
+     "media": "France 24",
+     "date": "2026-11-01T20:35:14.000Z"
+    },
+    {
+     "titre": "Présidentielle française: Édouard Philippe refuse de participer à une primaire de la droite et du centre",
+     "url": "https://www.rfi.fr/fr/france/20261101-pr%C3%A9sidentielle-fran%C3%A7aise-%C3%A9douard-philippe-refuse-de-participer-%C3%A0-une-primaire-de-la-droite-et-du-centre",
+     "media": "RFI",
+     "date": "2026-11-01T20:11:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Participer à une primaire",
+    "origine": "recoupement"
+   },
+   "fait": "Édouard Philippe refuse de participer à une primaire, source de \"division\"",
+   "accroche": "Édouard Philippe refuse de participer à une primaire, source de \"division\"",
+   "essentiel": "Pour la présidentielle française, Édouard Philippe refuse de participer à une primaire de la droite et du centre. Trois médias en parlent : Nice-Matin, France 24 et RFI.",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-02T15:36:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "\"Dubaï Papers\" : le procès pour fraude fiscale internationale s'ouvre à Paris",
+     "url": "https://www.france24.com/fr/france/20261102-duba%C3%AF-papers-proc%C3%A8s-pour-fraude-fiscale-internationale-ouvre-paris",
+     "media": "France 24",
+     "date": "2026-11-02T15:36:15.000Z"
+    },
+    {
+     "titre": "Procès des «Dubaï Papers»: trois sociétés et 13 personnes, dont un prince belge, seront jugées à Paris",
+     "url": "https://www.rfi.fr/fr/france/20261101-proc%C3%A8s-des-duba%C3%AF-papers-trois-soci%C3%A9t%C3%A9s-et-14-personnes-dont-un-prince-belge-seront-jug%C3%A9es-%C3%A0-paris",
+     "media": "RFI",
+     "date": "2026-11-01T18:14:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Justice : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
+   "accroche": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
+   "essentiel": "Le procès pour fraude fiscale internationale s'ouvre à Paris. Trois sociétés et 13 personnes seront jugées à Paris. Deux médias en parlent : France 24 et RFI."
+  },
+  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
     "La Dépêche"
    ],
-   "derniere": "2026-11-04T07:05:45.000Z",
+   "derniere": "2026-11-04T07:06:29.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2095,7 +2165,7 @@
      "titre": "Violences attisées sur TikTok : une étude met à mal les arguments du gouvernement contre le réseau social",
      "url": "https://www.ladepeche.fr/2026/11/04/violences-attisees-sur-tiktok-une-etude-met-a-mal-les-arguments-du-gouvernement-contre-le-reseau-social-13635197.php",
      "media": "La Dépêche",
-     "date": "2026-11-04T07:05:45.000Z"
+     "date": "2026-11-04T07:06:29.000Z"
     }
    ],
    "titrePropre": {
@@ -2108,44 +2178,9 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-04T07:00:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "justice",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Enquête sur Nicolas Diat, l’influent éditeur au service de Bardella et Bolloré",
-     "url": "https://www.nouvelobs.com/bibliobs/20261104.OBS119831/enquete-sur-nicolas-diat-l-influent-editeur-au-service-de-bardella-et-bollore.html",
-     "media": "L'Obs",
-     "date": "2026-11-04T07:00:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-04T07:00:11.000Z",
+   "derniere": "2026-11-04T07:00:09.000Z",
    "illustration": {
     "personnes": [
      {
@@ -2167,7 +2202,7 @@
      "titre": "Dans « Gouverner », Jordan Bardella creuse le sillon libéral-sécuritaire du RN, sans propositions nouvelles",
      "url": "https://www.lemonde.fr/politique/article/2026/11/04/dans-gouverner-jordan-bardella-creuse-le-sillon-liberal-securitaire-du-rn-sans-propositions-nouvelles_6806117_823448.html",
      "media": "Le Monde",
-     "date": "2026-11-04T07:00:11.000Z"
+     "date": "2026-11-04T07:00:09.000Z"
     }
    ],
    "titrePropre": {
@@ -2821,34 +2856,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-04T06:06:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Midterms 2026 : les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès",
-     "url": "https://www.europe1.fr/international/midterms-2026-les-democrates-obtiennent-la-majorite-au-senat-et-prennent-le-controle-total-du-congres-1207133?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-04T06:06:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès",
-   "accroche": "Les démocrates obtiennent la majorité au Sénat et prennent le contrôle total du Congrès"
   },
   {
    "medias": 1,
@@ -3623,7 +3630,7 @@
    "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-04T04:30:02.000Z",
+   "derniere": "2026-11-04T04:30:01.000Z",
    "illustration": {
     "personnes": [
      {
@@ -3642,7 +3649,7 @@
      "titre": "Budget 2027 : devant l’impasse des débats, Sébastien Lecornu explore la voie des ordonnances",
      "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2027-devant-l-impasse-des-debats-sebastien-lecornu-explore-la-voie-des-ordonnances_6805969_823448.html",
      "media": "Le Monde",
-     "date": "2026-11-04T04:30:02.000Z"
+     "date": "2026-11-04T04:30:01.000Z"
     }
    ],
    "titrePropre": {
@@ -3655,6 +3662,49 @@
      "type": "personnes",
      "texte": "Sébastien Lecornu : premier ministre",
      "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-03T23:30:50.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "media": "BFMTV",
+     "date": "2026-11-03T23:30:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -3726,49 +3776,6 @@
     {
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-03T23:30:50.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
-     "media": "BFMTV",
-     "date": "2026-11-03T23:30:50.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -4887,8 +4894,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Public",
-    "origine": "dossier"
+    "titre": "Syndicats : appel sur le logement et l'accueil",
+    "origine": "regles"
    }
   },
   {
@@ -5027,8 +5034,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Public",
-    "origine": "dossier"
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
    }
   },
   {
@@ -5350,6 +5357,33 @@
    ],
    "titrePropre": {
     "titre": "Département : ce qu'il faut savoir sur l'environnement",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-11-03T19:25:46.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Gaz: l’Europe sur un fil",
+     "url": "https://www.mediapart.fr/journal/international/031126/gaz-l-europe-sur-un-fil",
+     "media": "Mediapart",
+     "date": "2026-11-03T19:25:46.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gaz : actualité locale",
     "origine": "regles",
     "generique": true
    }
