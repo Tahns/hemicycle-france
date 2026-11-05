@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-05T16:25:29.761Z",
+ "lastUpdated": "2026-11-05T16:30:55.034Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -311,16 +311,17 @@
    ]
   },
   {
-   "id": "sociale",
-   "titre": "Sociale",
+   "id": "social",
+   "titre": "Social",
    "motifs": [
-    "sociale",
+    "social",
     "euros"
    ],
    "medias": [
-    "Le Monde",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
+    "Le Monde",
+    "France 24",
     "BFMTV",
     "Libération",
     "Sud Ouest",
@@ -333,10 +334,11 @@
     "Le Figaro",
     "La Croix"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 13,
    "sources": [
-    "Le Monde",
     "EBRA",
+    "Le Monde",
+    "France 24",
     "BFMTV",
     "Libération",
     "Sud Ouest",
@@ -348,9 +350,21 @@
     "Le Figaro",
     "La Croix"
    ],
-   "nb": 28,
-   "derniere": "2026-11-05T16:19:20.000Z",
+   "nb": 31,
+   "derniere": "2026-11-05T16:28:00.000Z",
    "articles": [
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Social. Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+     "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-chahute-raphael-glucksmann-quitte-le-cortege-parisien",
+     "date": "2026-11-05T16:28:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Social. Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+     "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-chahute-raphael-glucksmann-quitte-le-cortege-parisien",
+     "date": "2026-11-05T16:28:00.000Z"
+    },
     {
      "media": "Le Monde",
      "titre": "EN DIRECT, grève du 5 novembre : près de 600 000 manifestants en France ce jeudi, Sébastien Lecornu réunira une « conférence sociale » entre syndicats et patronat lundi",
@@ -358,16 +372,10 @@
      "date": "2026-11-05T16:19:20.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Grève du 5 novembre : près de 600 000 manifestants, Sébastien Lecornu réunira syndicats et patronat lundi",
-     "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
-     "date": "2026-11-05T16:10:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Social. Grève du 5 novembre : près de 600 000 manifestants, Sébastien Lecornu réunira syndicats et patronat lundi",
-     "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
-     "date": "2026-11-05T16:10:00.000Z"
+     "media": "France 24",
+     "titre": "Mobilisations en France : \"il va falloir un peu se bouger sur les réponses sociales\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-mobilisations-en-france-il-va-falloir-un-peu-se-bouger-sur-les-r%C3%A9ponses-sociales",
+     "date": "2026-11-05T14:44:02.000Z"
     },
     {
      "media": "BFMTV",
@@ -443,9 +451,12 @@
    "titre": "Budget",
    "motifs": [
     "budget",
+    "rejette",
+    "unanimité",
     "retraite"
    ],
    "medias": [
+    "France 24",
     "Public Sénat",
     "BFMTV",
     "20 Minutes",
@@ -458,8 +469,9 @@
     "L'Obs",
     "Le Figaro"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 10,
    "sources": [
+    "France 24",
     "Public Sénat",
     "BFMTV",
     "20 Minutes",
@@ -470,9 +482,15 @@
     "L'Obs",
     "Le Figaro"
    ],
-   "nb": 21,
-   "derniere": "2026-11-05T15:06:34.000Z",
+   "nb": 23,
+   "derniere": "2026-11-05T16:15:32.000Z",
    "articles": [
+    {
+     "media": "France 24",
+     "titre": "Budget 2027 : l'Assemblée nationale rejette à l'unanimité le projet de budget de l'État",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-budget-2027-l-assembl%C3%A9e-nationale-rejette-%C3%A0-l-unanimit%C3%A9-le-projet-de-budget-de-l-%C3%A9tat",
+     "date": "2026-11-05T16:15:32.000Z"
+    },
     {
      "media": "Public Sénat",
      "titre": "Budget de la Sécu : le Sénat prévoit de voter le retour de la réforme des retraites de 2023",
@@ -528,12 +546,6 @@
      "titre": "« Ce budget n’était pas crédible à l’origine » : l’Assemblée Nationale rejette très largement le budget 2027 de l’État, le texte envoyé au Sénat",
      "url": "https://www.nicematin.com/societe/politique/ce-budget-n-etait-pas-credible-a-l-origine-l-assemblee-nationale-rejette-tres-largement-le-budget-2027-de-l-etat-le-texte-envoye-au-senat-10754055",
      "date": "2026-11-05T06:32:42.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Une majorité qui assume ses choix ne devrait pas craindre que les citoyens l’entendent débattre » : pourquoi le conseil municipal de Cannes n’est-il plus retransmis ?",
-     "url": "https://www.nicematin.com/societe/politique/une-majorite-qui-assume-ses-choix-ne-devrait-pas-craindre-que-les-citoyens-l-entendent-debattre-pourquoi-le-conseil-municipal-de-cannes-n-est-il-plus-retransmis-10748704",
-     "date": "2026-11-05T05:03:07.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -635,6 +647,49 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Sud Ouest",
+    "Le Monde",
+    "France 24"
+   ],
+   "derniere": "2026-11-05T15:46:51.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Un lycée fermé à Tournefeuille, près de Toulouse, après un début d’incendie par des personnes masquées",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/05/un-lycee-ferme-pres-de-toulouse-apres-un-debut-d-incendie-par-des-personnes-masquees_6807073_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-05T15:42:42.000Z"
+    },
+    {
+     "titre": "« Ces actes sont une honte » : un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
+     "url": "https://www.sudouest.fr/occitanie/toulouse/ces-actes-sont-une-honte-un-lycee-ferme-pres-de-toulouse-apres-un-incendie-declenche-par-des-personnes-masquees-31397852.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-05T15:46:51.000Z"
+    },
+    {
+     "titre": "France : un début d'incendie éteint dans un lycée près de Toulouse",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-france-un-d%C3%A9but-d-incendie-dans-un-lyc%C3%A9e-pr%C3%A8s-de-toulouse",
+     "media": "France 24",
+     "date": "2026-11-05T14:39:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
+   "accroche": "Un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
+   "essentiel": "Un lycée fermé à Tournefeuille, près de Toulouse, après un début d’incendie par des personnes masquées. Trois médias en parlent : Le Monde, Sud Ouest et France 24."
   },
   {
    "medias": 3,
@@ -825,6 +880,62 @@
    "medias": 3,
    "mediasDistincts": 2,
    "sources": [
+    "EBRA",
+    "BFMTV"
+   ],
+   "derniere": "2026-11-05T16:28:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Social. Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+     "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-chahute-raphael-glucksmann-quitte-le-cortege-parisien",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-05T16:28:00.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+     "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-chahute-raphael-glucksmann-quitte-le-cortege-parisien",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T16:28:00.000Z"
+    },
+    {
+     "titre": "Manifestations du 5 novembre: Raphaël Glucksmann quitte le cortège parisien après avoir été bloqué par des militants",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-manifestations-du-5-novembre-raphael-glucksmann-quitte-le-cortege-parisien-apres-avoir-ete-bloque-par-des-militants_VN-202611050564.html",
+     "media": "BFMTV",
+     "date": "2026-11-05T14:33:05.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social",
+    "origine": "dossier"
+   },
+   "fait": "Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+   "accroche": "Grève du 5 novembre : chahuté, Raphaël Glucksmann quitte le cortège parisien",
+   "essentiel": "Pendant la manifestations du 5 novembre, Raphaël Glucksmann quitte le cortège parisien après avoir été bloqué par des militants. Trois médias en parlent : Dernières Nouvelles d'Alsace, L'Est républicain et BFMTV.",
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
     "Le Monde",
     "EBRA"
    ],
@@ -863,8 +974,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
+    "titre": "Syndicats et patronat",
+    "origine": "recoupement"
    },
    "fait": "Près de 600 000 manifestants, Sébastien Lecornu réunira syndicats et patronat",
    "accroche": "Près de 600 000 manifestants, Sébastien Lecornu réunira syndicats et patronat",
@@ -1066,42 +1177,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Sud Ouest",
-    "Le Monde"
-   ],
-   "derniere": "2026-11-05T15:46:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "« Ces actes sont une honte » : un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
-     "url": "https://www.sudouest.fr/occitanie/toulouse/ces-actes-sont-une-honte-un-lycee-ferme-pres-de-toulouse-apres-un-incendie-declenche-par-des-personnes-masquees-31397852.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T15:46:51.000Z"
-    },
-    {
-     "titre": "Un lycée fermé à Tournefeuille, près de Toulouse, après un début d’incendie par des personnes masquées",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/05/un-lycee-ferme-pres-de-toulouse-apres-un-debut-d-incendie-par-des-personnes-masquees_6807073_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-05T15:42:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
-   "accroche": "Un lycée fermé près de Toulouse après un incendie déclenché par des personnes masquées",
-   "essentiel": "Un lycée fermé à Tournefeuille, près de Toulouse, après un début d’incendie par des personnes masquées. Deux médias en parlent : Sud Ouest et Le Monde."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "L'Humanité",
     "Libération"
    ],
@@ -1249,6 +1324,98 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "France 24",
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-05T10:23:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre en France : quelque 70 000 policiers et gendarmes mobilisés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-en-france-quelque-70-000-policiers-et-gendarmes-mobilis%C3%A9s",
+     "media": "France 24",
+     "date": "2026-11-05T10:23:54.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés jeudi, Laurent Nuñez maintient son dispositif",
+     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-70-000-policiers-et-gendarmes-mobilises-jeudi-laurent-nunez-maintient-son-dispositif",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T18:51:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
+   "accroche": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
+   "essentiel": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif. Deux médias en parlent : France 24 et Dernières Nouvelles d'Alsace.",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Laurent Nunez : ministre de l'intérieur",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "70 000",
+    "unite": "policiers"
+   },
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le Monde",
+    "France 24"
+   ],
+   "derniere": "2026-11-05T08:47:57.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : transports, éducation, santé…, quels secteurs seront touchés jeudi ?",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/05/greve-du-5-novembre-transports-education-sante-quels-secteurs-seront-touches-jeudi_6806839_3224.html",
+     "media": "Le Monde",
+     "date": "2026-11-05T08:47:57.000Z"
+    },
+    {
+     "titre": "Éducation, transports, santé... à quoi s'attendre pour la journée de mobilisation de jeudi ?",
+     "url": "https://www.france24.com/fr/france/20261104-%C3%A9ducation-transports-sant%C3%A9-%C3%A0-quoi-s-attendre-journ%C3%A9e-mobilisation-jeudi",
+     "media": "France 24",
+     "date": "2026-11-04T15:35:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Santé : ce que disent les médias",
+    "origine": "regles"
+   }
   },
   {
    "medias": 2,
@@ -1575,53 +1742,6 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV / Sud Ouest"
-   ],
-   "derniere": "2026-11-05T10:43:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "Dominique de Villepin",
-      "photo": "photos/personnalites/dominique-de-villepin.jpg",
-      "photoHd": "photos/personnalites/hd/dominique-de-villepin.jpg",
-      "parti": "LFH",
-      "credit": "Georges Seguin (Okki), CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "\"Une incitation au racisme\": Dominique de Villepin dénonce le \"naufrage moral et politique\" d'Édouard Philippe",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/une-incitation-au-racisme-dominique-de-villepin-denonce-le-naufrage-moral-et-politique-d-edouard-philippe_AD-202611050392.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T10:43:26.000Z"
-    },
-    {
-     "titre": "Immigration : « Une incitation au racisme », Dominique de Villepin dénonce le « naufrage moral et politique » d’Édouard Philippe",
-     "url": "https://www.sudouest.fr/politique/edouard-philippe/immigration-une-incitation-au-racisme-dominique-de-villepin-denonce-le-naufrage-moral-et-politique-d-edouard-philippe-31391178.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T09:14:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Naufrage moral et politique",
-    "origine": "recoupement"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
     "Groupe Bolloré"
    ],
    "derniere": "2026-11-05T09:37:00.000Z",
@@ -1767,6 +1887,87 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-05T16:29:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "À Royan, le conseiller municipal de la majorité Gilbert Thuleau démissionne après un soupçon de propos licencieux sur une jeune lycéenne",
+     "url": "https://www.sudouest.fr/charente-maritime/royan/a-royan-le-conseiller-municipal-de-la-majorite-gilbert-thuleau-demissionne-apres-un-soupcon-de-propos-licencieux-sur-une-jeune-lyceenne-31350512.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-05T16:29:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Mediapart"
+   ],
+   "derniere": "2026-11-05T16:27:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Midterms: la politique étrangère s’est invitée dans les urnes",
+     "url": "https://www.mediapart.fr/journal/international/051126/midterms-la-politique-etrangere-s-est-invitee-dans-les-urnes",
+     "media": "Mediapart",
+     "date": "2026-11-05T16:27:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Midterms : affaire internationale",
+    "origine": "regles"
+   },
+   "fait": "La politique étrangère s’est invitée dans les urnes",
+   "accroche": "La politique étrangère s’est invitée dans les urnes"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-05T16:24:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mérignac : les équipiers des Escadrilles Air Jeunesse de la BA 204 ont reçu leurs calots et insignes de progression",
+     "url": "https://www.sudouest.fr/gironde/merignac/merignac-les-equipiers-des-escadrilles-air-jeunesse-de-la-ba-204-ont-recu-leurs-calots-et-insignes-de-progression-31391020.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-05T16:24:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mérignac : actualité scolaire",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-05T16:16:20.000Z",
@@ -1789,6 +1990,40 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T16:15:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : l'Assemblée nationale rejette à l'unanimité le projet de budget de l'État",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-budget-2027-l-assembl%C3%A9e-nationale-rejette-%C3%A0-l-unanimit%C3%A9-le-projet-de-budget-de-l-%C3%A9tat",
+     "media": "France 24",
+     "date": "2026-11-05T16:15:32.000Z"
+    },
+    {
+     "titre": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité en première lecture",
+     "url": "https://www.france24.com/fr/france/20261104-assemblee-nationale-rejette-unanimite-en-premiere-lecture-budget-etat-2027-pib-finances",
+     "media": "France 24",
+     "date": "2026-11-04T23:16:53.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
+   "accroche": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte"
   },
   {
    "medias": 1,
@@ -1823,6 +2058,59 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T16:12:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grèves en France : comment les manifestations sont vues de l'étranger ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ves-en-france-comment-les-manifestations-sont-vues-de-l-%C3%A9tranger",
+     "media": "France 24",
+     "date": "2026-11-05T16:12:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Grèves en France : affaire internationale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T16:08:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : plus de 9,8 millions de Français sous le seuil de pauvreté",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-plus-de-9-8-millions-de-fran%C3%A7ais-sous-le-seuil-de-pauvret%C3%A9",
+     "media": "France 24",
+     "date": "2026-11-05T16:08:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-11-05T16:03:00.000Z",
@@ -1846,6 +2134,64 @@
    },
    "fait": "Situation financière, urbanisme et sécurité routière au menu du conseil municipal",
    "accroche": "Situation financière, urbanisme et sécurité routière au menu du conseil municipal"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T15:57:21.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : une augmentation du SMIC demandée pas les syndicats",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-une-augmentation-du-smic-demand%C3%A9e-pas-les-syndicats",
+     "media": "France 24",
+     "date": "2026-11-05T15:57:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Syndicats : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Une augmentation du SMIC demandée pas les syndicats",
+   "accroche": "Une augmentation du SMIC demandée pas les syndicats"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T15:55:04.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : le cortège devrait rassembler entre 40 000 et 80 000 manifestants à Paris",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-le-cort%C3%A8ge-devrait-rassembler-entre-40-000-et-80-000-manifestants-%C3%A0-paris",
+     "media": "France 24",
+     "date": "2026-11-05T15:55:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le cortège devrait rassembler entre 40 000 et 80 000 manifestants à Paris",
+   "accroche": "Le cortège devrait rassembler entre 40 000 et 80 000 manifestants à Paris"
   },
   {
    "medias": 1,
@@ -2621,6 +2967,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T14:48:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : environ 1 000 lycées \"à l'arrêt\" selon l'Union Syndicale Étudiante",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-environ-1-000-lyc%C3%A9es-%C3%A0-l-arr%C3%AAt-selon-l-union-syndicale-%C3%A9tudiante",
+     "media": "France 24",
+     "date": "2026-11-05T14:48:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Environ 1 000 lycées \"à l'arrêt\" selon l'Union Syndicale Étudiante",
+   "accroche": "Environ 1 000 lycées \"à l'arrêt\" selon l'Union Syndicale Étudiante"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-11-05T14:48:00.000Z",
@@ -2645,6 +3019,33 @@
    },
    "fait": "Déjà divisé sur la primaire, le centre se déchire sur l'immigration",
    "accroche": "Déjà divisé sur la primaire, le centre se déchire sur l'immigration"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-05T14:47:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire, sondage XXL, statu quo… La droite et le bloc central cherchent la méthode pour n’avoir qu’un seul candidat au premier tour de la présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-sondage-xxl-statu-quo-la-droite-et-le-bloc-central-cherchent-la-methode-pour-n-avoir-qu-un-seul-candidat-au-premier-tour-de-la-presidentielle_AN-202611050571.html",
+     "media": "BFMTV",
+     "date": "2026-11-05T14:47:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2778,28 +3179,56 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
+    "France 24"
    ],
-   "derniere": "2026-11-05T14:47:15.000Z",
+   "derniere": "2026-11-05T14:44:02.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "Primaire, sondage XXL, statu quo… La droite et le bloc central cherchent la méthode pour n’avoir qu’un seul candidat au premier tour de la présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-sondage-xxl-statu-quo-la-droite-et-le-bloc-central-cherchent-la-methode-pour-n-avoir-qu-un-seul-candidat-au-premier-tour-de-la-presidentielle_AN-202611050571.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T14:47:15.000Z"
+     "titre": "Mobilisations en France : \"il va falloir un peu se bouger sur les réponses sociales\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-mobilisations-en-france-il-va-falloir-un-peu-se-bouger-sur-les-r%C3%A9ponses-sociales",
+     "media": "France 24",
+     "date": "2026-11-05T14:44:02.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
+    "titre": "Social",
+    "origine": "dossier"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T14:37:35.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : jusqu'à 700 000 manifestants attendus partout dans le pays",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-jusqu-%C3%A0-700-000-manifestants-attendus-partout-dans-le-pays",
+     "media": "France 24",
+     "date": "2026-11-05T14:37:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
+   },
+   "fait": "Jusqu'à 700 000 manifestants attendus partout dans le pays",
+   "accroche": "Jusqu'à 700 000 manifestants attendus partout dans le pays"
   },
   {
    "medias": 1,
@@ -2864,44 +3293,6 @@
     "origine": "regles",
     "generique": true
    }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-05T14:33:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 5 novembre: Raphaël Glucksmann quitte le cortège parisien après avoir été bloqué par des militants",
-     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-manifestations-du-5-novembre-raphael-glucksmann-quitte-le-cortege-parisien-apres-avoir-ete-bloque-par-des-militants_VN-202611050564.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T14:33:05.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Raphaël Glucksmann quitte le cortège parisien après avoir été bloqué par des militants",
-   "accroche": "Raphaël Glucksmann quitte le cortège parisien après avoir été bloqué par des militants"
   },
   {
    "medias": 1,
@@ -3202,7 +3593,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    },
    "contexte": [
@@ -3318,6 +3709,33 @@
    },
    "fait": "Raphaël Glucksmann accueilli par quelques huées : leur répond-il",
    "accroche": "Raphaël Glucksmann accueilli par quelques huées : leur répond-il"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T13:42:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Le point sur la mobilisation du 5 novembre",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-le-point-sur-la-mobilisation-du-5-novembre",
+     "media": "France 24",
+     "date": "2026-11-05T13:42:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -4229,6 +4647,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T11:28:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisations en France : des lycéens maintiennent les blocus avant le cortège",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-mobilisations-en-france-des-lyc%C3%A9ens-maintiennent-les-blocus-avant-le-cort%C3%A8ge",
+     "media": "France 24",
+     "date": "2026-11-05T11:28:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mobilisations en France : mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "Des lycéens maintiennent les blocus avant le cortège",
+   "accroche": "Des lycéens maintiennent les blocus avant le cortège"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-05T11:25:03.000Z",
@@ -4360,7 +4806,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    }
   },
@@ -4694,7 +5140,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    },
    "fait": "L’accord sur les mesures de reclassement signé par les syndicats",
@@ -4751,14 +5197,22 @@
    "sources": [
     "BFMTV"
    ],
-   "derniere": "2026-11-05T10:41:14.000Z",
+   "derniere": "2026-11-05T10:43:26.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "Dominique de Villepin",
+      "photo": "photos/personnalites/dominique-de-villepin.jpg",
+      "photoHd": "photos/personnalites/hd/dominique-de-villepin.jpg",
+      "parti": "LFH",
+      "credit": "Georges Seguin (Okki), CC BY-SA 3.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -4767,495 +5221,16 @@
    },
    "articles": [
     {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
+     "titre": "\"Une incitation au racisme\": Dominique de Villepin dénonce le \"naufrage moral et politique\" d'Édouard Philippe",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/une-incitation-au-racisme-dominique-de-villepin-denonce-le-naufrage-moral-et-politique-d-edouard-philippe_AD-202611050392.html",
      "media": "BFMTV",
-     "date": "2026-11-05T10:41:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-05T10:39:12.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Quand Edouard Philippe livrait un plaidoyer pro-primaire : «Je ne suis pas par nature un enthousiaste de la primaire…»",
-     "url": "https://www.liberation.fr/politique/quand-edouard-philippe-livrait-un-plaidoyer-pro-primaire-je-ne-suis-pas-par-nature-un-enthousiaste-de-la-primaire-20261105_CQQTAGS6IVBIJBHM3J2RXCBKRI/",
-     "media": "Libération",
-     "date": "2026-11-05T10:39:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-11-05T10:36:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget 2027 : les sénateurs suggèrent de geler les pensions de retraite supérieures à 1 500 euros",
-     "url": "https://www.lejdd.fr/politique/budget-2027-les-senateurs-suggerent-de-geler-les-pensions-de-retraite-superieures-a-1-500-euros-187869",
-     "media": "Le JDD",
-     "date": "2026-11-05T10:36:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les sénateurs suggèrent de geler les pensions de retraite supérieures à 1 500 euros",
-   "accroche": "Les sénateurs suggèrent de geler les pensions de retraite supérieures à 1 500 euros"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-05T10:30:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Stationnement, vitesse, nuisances nocturnes... A Menton, les habitants du Careï, de Monti et de Saint-Roman font remonter leurs préoccupations",
-     "url": "https://www.nicematin.com/societe/politique/stationnement-vitesse-nuisances-nocturnes-a-menton-les-habitants-du-carei-de-monti-et-de-saint-roman-font-remonter-leurs-preoccupations-10753684",
-     "media": "Nice-Matin",
-     "date": "2026-11-05T10:30:08.000Z"
+     "date": "2026-11-05T10:43:26.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-05T10:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Belleville-sur-Meuse. La place Maginot bénéficie d’un éclairage renforcé",
-     "url": "https://www.estrepublicain.fr/environnement/2026/11/05/la-place-maginot-est-maintenant-en-pleine-lumiere",
-     "media": "L'Est républicain",
-     "date": "2026-11-05T10:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Belleville-sur-Meuse : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La place Maginot bénéficie d’un éclairage renforcé",
-   "accroche": "La place Maginot bénéficie d’un éclairage renforcé"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-05T10:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Pouvoir d’achat : «Il faut libérer l’esprit d’entreprise et lever les blocages administratifs», pointe Gabrielle Cluzel",
-     "url": "https://www.europe1.fr/politique/pouvoir-dachat-il-faut-liberer-lesprit-dentreprise-et-lever-les-blocages-administratifs-pointe-gabrielle-cluzel-1210298?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-05T10:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Gabrielle Cluzel pointe : « Il faut libérer l’esprit d’entreprise et lever les blocages administratifs »",
-   "accroche": "Gabrielle Cluzel pointe : « Il faut libérer l’esprit d’entreprise et lever les blocages administratifs »"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-05T10:28:04.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Débat budgétaire : un jeu de rôles dont tout le monde sort perdant",
-     "url": "https://www.liberation.fr/politique/debat-budgetaire-un-jeu-de-roles-dont-tout-le-monde-sort-perdant-20261105_ESRKPZGJKRALVNN3CM273ZNMVQ/",
-     "media": "Libération",
-     "date": "2026-11-05T10:28:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Un jeu de rôles dont tout le monde sort perdant",
-   "accroche": "Un jeu de rôles dont tout le monde sort perdant"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-05T10:17:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences du 17-octobre : le président de la Région Sud-Paca François de Canson défend la création d’un « délit spécifique de pillage »",
-     "url": "https://www.nicematin.com/societe/politique/violences-du-17-octobre-le-president-de-la-region-sud-paca-francois-de-canson-defend-la-creation-d-un-delit-specifique-de-pillage-10754260",
-     "media": "Nice-Matin",
-     "date": "2026-11-05T10:17:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Région : ce qu'il faut savoir sur l'organisation des collectivités",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T10:15:46.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     },
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Emmanuel Macron prône une coalition de David Lisnard à Raphaël Glucksmann",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-emmanuel-macron-prone-une-coalition-de-david-lisnard-a-raphael-glucksmann-31392335.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T10:15:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Lisnard 7–9 %, Glucksmann 10–13 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T10:14:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Alstom : l’État « aux côtés » du groupe ferroviaire, mais « extrêmement exigeant » sur l’emploi en France, notamment à Aytré",
-     "url": "https://www.sudouest.fr/charente-maritime/alstom-l-etat-aux-cotes-du-groupe-ferroviaire-mais-extremement-exigeant-sur-l-emploi-en-france-notamment-a-aytre-31391935.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T10:14:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Alstom : actualité sociale",
-    "origine": "regles"
-   },
-   "fait": "L’État « aux côtés » du groupe ferroviaire, mais « extrêmement exigeant » sur l’emploi en France",
-   "accroche": "L’État « aux côtés » du groupe ferroviaire, mais « extrêmement exigeant » sur l’emploi en France"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-05T10:11:28.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Après l’attentat de Trappes, les colporteurs du «grand remplacement» refusent tout examen de conscience",
-     "url": "https://www.mediapart.fr/journal/politique/051126/apres-l-attentat-de-trappes-les-colporteurs-du-grand-remplacement-refusent-tout-examen-de-conscience",
-     "media": "Mediapart",
-     "date": "2026-11-05T10:11:28.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les colporteurs du «grand remplacement» refusent tout examen de conscience",
-   "accroche": "Les colporteurs du «grand remplacement» refusent tout examen de conscience"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-11-05T10:09:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Tondelier",
-      "photo": "photos/personnalites/marine-tondelier.jpg",
-      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
-      "parti": "ECO",
-      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Personne ne gagnera seul », assure Marine Tondelier",
-     "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-personne-ne-gagnera-seul-assure-marine-tondelier",
-     "media": "Public Sénat",
-     "date": "2026-11-05T10:09:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Pour la présidentielle 2027, Marine Tondelier assure : « Personne ne gagnera seul »",
-   "accroche": "Pour la présidentielle 2027, Marine Tondelier assure : « Personne ne gagnera seul »",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Tondelier 3–3,5 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-05T10:08:51.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Philippe accuse Attal de consommer de la cocaïne ? Encore une trace d’ingérence russe dans la présidentielle française",
-     "url": "https://www.20minutes.fr/politique/4260447-20261105-philippe-accuse-attal-consommer-cocaine-encore-trace-ingerence-russe-presidentielle-francaise?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-05T10:08:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Attal 5–9 %, Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-05T10:05:35.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Incendie de la mairie de Limoges : un suspect maintenu en détention, l’autre remis en liberté sous contrôle judiciaire",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/05/incendie-de-la-mairie-de-limoges-un-suspect-maintenu-en-detention-l-autre-remis-en-liberte-sous-controle-judiciaire_6806847_3224.html",
-     "media": "Le Monde",
-     "date": "2026-11-05T10:05:35.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-05T10:04:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Dette record et crise sociale : face à ce casse-tête français, les propositions des candidats à la présidentielle sont-elles solides ?",
-     "url": "https://www.nouvelobs.com/economie/20261105.OBS119858/dette-record-et-crise-sociale-face-a-ce-casse-tete-francais-les-propositions-des-candidats-a-la-presidentielle-sont-elles-solides.html",
-     "media": "L'Obs",
-     "date": "2026-11-05T10:04:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : réponse sur les finances publiques",
-    "origine": "regles"
    }
   }
  ]
