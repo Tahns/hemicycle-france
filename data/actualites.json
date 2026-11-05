@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-05T15:15:42.631Z",
+ "lastUpdated": "2026-11-05T15:20:42.065Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -155,8 +155,8 @@
    "motifs": [
     "présidentielle",
     "candidat",
-    "primaire",
-    "communiste"
+    "communiste",
+    "primaire"
    ],
    "medias": [
     "Valeurs actuelles",
@@ -167,14 +167,15 @@
     "La Dépêche",
     "Libération",
     "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "20 Minutes",
     "Nice-Matin",
     "Public Sénat",
     "L'Obs",
     "Le JDD",
-    "RFI",
     "Le Figaro",
     "L'Express",
+    "RFI",
     "France 24"
    ],
    "mediasDistincts": 15,
@@ -186,16 +187,16 @@
     "Sud Ouest",
     "La Dépêche",
     "Libération",
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "20 Minutes",
     "Nice-Matin",
     "Public Sénat",
     "L'Obs",
-    "France Médias Monde",
     "Le Figaro",
-    "L'Express"
+    "L'Express",
+    "France Médias Monde"
    ],
-   "nb": 87,
+   "nb": 88,
    "derniere": "2026-11-05T15:12:51.000Z",
    "articles": [
     {
@@ -247,6 +248,12 @@
      "date": "2026-11-05T14:00:00.000Z"
     },
     {
+     "media": "L'Est républicain",
+     "titre": "Présidentielle 2027. La majorité des communistes à l'Assemblée soutient Jean-Luc Mélenchon plutôt que Fabien Roussel",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/05/la-majorite-du-groupe-communiste-a-l-assemblee-va-soutenir-melenchon-plutot-que-roussel",
+     "date": "2026-11-05T14:00:00.000Z"
+    },
+    {
      "media": "20 Minutes",
      "titre": "Présidentielle 2027 : Macron fait savoir qu’il est favorable une « coalition » allant de Lisnard à Glucksmann",
      "url": "https://www.20minutes.fr/politique/4260640-20261105-presidentielle-2027-macron-fait-savoir-coalition-lisnard-glucksmann?at_medium=display&at_campaign=149",
@@ -277,12 +284,6 @@
      "date": "2026-11-05T09:24:51.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "EN DIRECT - Grève du 5 novembre: minute de silence pour les victimes de Trappes, près de 10 % de grévistes dans la fonction publique d’État",
-     "url": "https://www.rfi.fr/fr/france/20261105-en-direct-gr%C3%A8ve-du-5-novembre-la-col%C3%A8re-sociale-monte-d-un-cran-des-manifestations-attendues-partout-en-france",
-     "date": "2026-11-05T08:49:03.000Z"
-    },
-    {
      "media": "Le Figaro",
      "titre": "Présidentielle 2027 : plutôt qu’une primaire, Macron veut une coalition allant de Glucksmann à Lisnard pour déjouer le duel Le Pen-Mélenchon",
      "url": "https://www.lefigaro.fr/elections/presidentielles/candidats/presidentielle-2027-plutot-qu-une-primaire-macron-veut-une-coalition-allant-de-glucksmann-a-lisnard-pour-dejouer-le-duel-le-pen-melenchon-20261104",
@@ -295,6 +296,12 @@
      "date": "2026-11-04T15:00:00.000Z"
     },
     {
+     "media": "RFI",
+     "titre": "Présidentielle française: le candidat Nouvelle Énergie David Lisnard fait-il peur à ses concurrents?",
+     "url": "https://www.rfi.fr/fr/france/20261103-pr%C3%A9sidentielle-fran%C3%A7aise-la-candidat-nouvelle-%C3%A9nergie-david-lisnard-fait-il-peur-%C3%A0-ses-concurrents",
+     "date": "2026-11-03T18:14:20.000Z"
+    },
+    {
      "media": "France 24",
      "titre": "Présidentielle en France : y aura-t-il une primaire de la droite ?",
      "url": "https://www.france24.com/fr/vid%C3%A9o/20261103-pr%C3%A9sidentielle-en-france-y-aura-t-il-une-primaire-de-la-droite",
@@ -303,15 +310,16 @@
    ]
   },
   {
-   "id": "sociale",
-   "titre": "Sociale",
+   "id": "social",
+   "titre": "Social",
    "motifs": [
-    "sociale",
+    "social",
     "euros",
     "mouvement"
    ],
    "medias": [
     "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "France 24",
     "BFMTV",
     "Libération",
@@ -328,7 +336,7 @@
    ],
    "mediasDistincts": 13,
    "sources": [
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "France 24",
     "BFMTV",
     "Libération",
@@ -342,13 +350,19 @@
     "Le Figaro",
     "La Croix"
    ],
-   "nb": 28,
+   "nb": 32,
    "derniere": "2026-11-05T14:51:00.000Z",
    "articles": [
     {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Social. Grève du 5 novembre : sifflé, insulté puis bloqué, Raphaël Glucksmann a dû quitter le cortège parisien",
      "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
+     "date": "2026-11-05T14:51:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Social. Grève du 5 novembre : sifflé, insulté puis bloqué, Raphaël Glucksmann a dû quitter le cortège parisien",
+     "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
      "date": "2026-11-05T14:51:00.000Z"
     },
     {
@@ -437,8 +451,9 @@
    "titre": "Budget",
    "motifs": [
     "budget",
+    "rejette",
     "retraite",
-    "rejette"
+    "unanimité"
    ],
    "medias": [
     "Public Sénat",
@@ -451,6 +466,7 @@
     "France 24",
     "Le Monde",
     "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "L'Obs",
     "Le Figaro"
    ],
@@ -464,11 +480,11 @@
     "Nice-Matin",
     "France 24",
     "Le Monde",
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "L'Obs",
     "Le Figaro"
    ],
-   "nb": 23,
+   "nb": 24,
    "derniere": "2026-11-05T15:06:34.000Z",
    "articles": [
     {
@@ -502,12 +518,6 @@
      "titre": "Budget 2027 : «Il n'est pas question que les Français souffrent», affirme Laure Lavalette",
      "url": "https://www.europe1.fr/politique/budget-2027-il-nest-pas-question-que-les-francais-souffrent-affirme-laure-lavalette-1210295?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-11-05T11:20:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 : Le plan pour l’adaptation au changement climatique sera présenté « d’ici 15 jours », annonce la ministre de la Transition écologique",
-     "url": "https://www.publicsenat.fr/actualites/environnement/budget-2027-le-plan-pour-ladaptation-au-changement-climatique-sera-presente-dici-15-jours-annonce-la-ministre-de-la-transition-ecologique",
-     "date": "2026-11-05T11:04:13.000Z"
     },
     {
      "media": "Le JDD",
@@ -546,6 +556,12 @@
      "date": "2026-11-04T22:30:00.000Z"
     },
     {
+     "media": "L'Est républicain",
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "date": "2026-11-04T22:30:00.000Z"
+    },
+    {
      "media": "L'Obs",
      "titre": "Dette française : augmenter la TVA, baisser les retraites ou travailler plus ?",
      "url": "https://www.nouvelobs.com/economie/20261104.OBS119849/dette-francaise-augmenter-la-tva-baisser-les-retraites-ou-travailler-plus.html",
@@ -562,14 +578,14 @@
  ],
  "sujets": [
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 5,
    "sources": [
     "Le Monde",
     "La Dépêche",
     "BFMTV",
     "Libération",
-    "Dernières Nouvelles d'Alsace"
+    "EBRA"
    ],
    "derniere": "2026-11-05T14:49:26.000Z",
    "illustration": {
@@ -626,6 +642,12 @@
      "url": "https://www.dna.fr/politique/2026/11/05/la-majorite-du-groupe-communiste-a-l-assemblee-va-soutenir-melenchon-plutot-que-roussel",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-05T14:00:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. La majorité des communistes à l'Assemblée soutient Jean-Luc Mélenchon plutôt que Fabien Roussel",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/05/la-majorite-du-groupe-communiste-a-l-assemblee-va-soutenir-melenchon-plutot-que-roussel",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T14:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -635,7 +657,7 @@
    },
    "fait": "La majorité des communistes à l'Assemblée soutient Jean-Luc Mélenchon plutôt que Fabien Roussel",
    "accroche": "La majorité des communistes à l'Assemblée soutient Jean-Luc Mélenchon plutôt que Fabien Roussel",
-   "essentiel": "Ils choisissent Jean-Luc Mélenchon plutôt que Fabien Roussel : la majorité du groupe communiste à l'Assemblée annonce soutenir le leader La France insoumise. Cinq médias en parlent : La Dépêche, Le Monde, BFMTV, Libération et Dernières Nouvelles d'Alsace.",
+   "essentiel": "Ils choisissent Jean-Luc Mélenchon plutôt que Fabien Roussel : la majorité du groupe communiste à l'Assemblée annonce soutenir le leader La France insoumise. Six médias en parlent : La Dépêche, Le Monde, BFMTV, Libération, Dernières Nouvelles d'Alsace et L'Est républicain.",
    "contexte": [
     {
      "type": "sondage",
@@ -648,6 +670,55 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 3,
+   "sources": [
+    "France 24",
+    "Le Monde",
+    "EBRA"
+   ],
+   "derniere": "2026-11-04T23:16:53.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.dna.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T22:30:00.000Z"
+    },
+    {
+     "titre": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité en première lecture",
+     "url": "https://www.france24.com/fr/france/20261104-assemblee-nationale-rejette-unanimite-en-premiere-lecture-budget-etat-2027-pib-finances",
+     "media": "France 24",
+     "date": "2026-11-04T23:16:53.000Z"
+    },
+    {
+     "titre": "Budget 2027 : l’Assemblée nationale rejette en première lecture, à l’unanimité, le projet de loi de finances",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-le-projet-de-loi-de-finances_6806468_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-04T22:53:12.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "media": "L'Est républicain",
+     "date": "2026-11-04T22:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
+   "accroche": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
+   "essentiel": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte. Quatre médias en parlent : Dernières Nouvelles d'Alsace, France 24, Le Monde et L'Est républicain."
   },
   {
    "medias": 3,
@@ -845,49 +916,6 @@
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
-    "France 24",
-    "Le Monde",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-04T23:16:53.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité en première lecture",
-     "url": "https://www.france24.com/fr/france/20261104-assemblee-nationale-rejette-unanimite-en-premiere-lecture-budget-etat-2027-pib-finances",
-     "media": "France 24",
-     "date": "2026-11-04T23:16:53.000Z"
-    },
-    {
-     "titre": "Budget 2027 : l’Assemblée nationale rejette en première lecture, à l’unanimité, le projet de loi de finances",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-le-projet-de-loi-de-finances_6806468_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-04T22:53:12.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
-     "url": "https://www.dna.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T22:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
-   "accroche": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
-   "essentiel": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte. Trois médias en parlent : France 24, Le Monde et Dernières Nouvelles d'Alsace."
   },
   {
    "medias": 3,
@@ -1490,6 +1518,54 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-05T14:51:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Social. Grève du 5 novembre : sifflé, insulté puis bloqué, Raphaël Glucksmann a dû quitter le cortège parisien",
+     "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-05T14:51:00.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : sifflé, insulté puis bloqué, Raphaël Glucksmann a dû quitter le cortège parisien",
+     "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T14:51:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social",
+    "origine": "dossier"
+   },
+   "fait": "Grève du 5 novembre : sifflé, insulté puis bloqué",
+   "accroche": "Grève du 5 novembre : sifflé, insulté puis bloqué",
+   "essentiel": "Grève du 5 novembre : sifflé, insulté puis bloqué. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV / Sud Ouest"
    ],
    "derniere": "2026-11-05T10:43:26.000Z",
@@ -1531,6 +1607,103 @@
    "titrePropre": {
     "titre": "Naufrage moral et politique",
     "origine": "recoupement"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-04T20:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. « Cela peut laisser des traces profondes » : comment la mobilisation sociale bouscule la campagne",
+     "url": "https://www.dna.fr/politique/2026/11/04/cela-peut-laisser-des-traces-profondes-comment-la-mobilisation-sociale-bouscule-la-campagne",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T20:00:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Cela peut laisser des traces profondes » : comment la mobilisation sociale bouscule la campagne",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/04/cela-peut-laisser-des-traces-profondes-comment-la-mobilisation-sociale-bouscule-la-campagne",
+     "media": "L'Est républicain",
+     "date": "2026-11-04T20:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-04T19:35:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Social. Grève du 5 novembre : vers une hausse du Smic pour calmer la colère ? Le gouvernement envisage un geste",
+     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-vers-une-hausse-du-smic-pour-calmer-la-colere-le-gouvernement-envisage-un-geste",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T19:35:00.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : vers une hausse du Smic pour calmer la colère ? Le gouvernement envisage un geste",
+     "url": "https://www.estrepublicain.fr/social/2026/11/04/greve-du-5-novembre-vers-une-hausse-du-smic-pour-calmer-la-colere-le-gouvernement-envisage-un-geste",
+     "media": "L'Est républicain",
+     "date": "2026-11-04T19:35:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-05T15:18:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Varennes-en-Argonne. Conseil Municipal volet économique.",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/05/conseil-municipal-volet-economique",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T15:18:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Conseil municipal : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -1658,42 +1831,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-05T14:51:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Social. Grève du 5 novembre : sifflé, insulté puis bloqué, Raphaël Glucksmann a dû quitter le cortège parisien",
-     "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-05T14:51:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
-   },
-   "fait": "Grève du 5 novembre : sifflé, insulté puis bloqué",
-   "accroche": "Grève du 5 novembre : sifflé, insulté puis bloqué"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "France 24"
    ],
    "derniere": "2026-11-05T14:48:06.000Z",
@@ -1746,33 +1883,6 @@
    },
    "fait": "Déjà divisé sur la primaire, le centre se déchire sur l'immigration",
    "accroche": "Déjà divisé sur la primaire, le centre se déchire sur l'immigration"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-05T14:47:15.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire, sondage XXL, statu quo… La droite et le bloc central cherchent la méthode pour n’avoir qu’un seul candidat au premier tour de la présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-sondage-xxl-statu-quo-la-droite-et-le-bloc-central-cherchent-la-methode-pour-n-avoir-qu-un-seul-candidat-au-premier-tour-de-la-presidentielle_AN-202611050571.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T14:47:15.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   },
   {
    "medias": 1,
@@ -1906,6 +2016,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-05T14:47:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire, sondage XXL, statu quo… La droite et le bloc central cherchent la méthode pour n’avoir qu’un seul candidat au premier tour de la présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-sondage-xxl-statu-quo-la-droite-et-le-bloc-central-cherchent-la-methode-pour-n-avoir-qu-un-seul-candidat-au-premier-tour-de-la-presidentielle_AN-202611050571.html",
+     "media": "BFMTV",
+     "date": "2026-11-05T14:47:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France 24"
    ],
    "derniere": "2026-11-05T14:44:02.000Z",
@@ -1924,7 +2061,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    }
   },
@@ -2473,7 +2610,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    },
    "contexte": [
@@ -3556,6 +3693,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-05T11:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Besançon. Cinéma et documentaire : « Nos métiers sont en danger, nous sommes très inquiets en France et dans les régions »",
+     "url": "https://www.estrepublicain.fr/culture-loisirs/2026/11/05/cinema-et-documentaire-nos-metiers-sont-en-danger-nous-sommes-tres-inquiets-en-france-et-dans-les-regions",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T11:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Besançon : organisation territoriale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France 24"
    ],
    "derniere": "2026-11-05T11:28:50.000Z",
@@ -3671,6 +3834,32 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-05T11:19:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Vuillafans. Décès de Gérard Quété, maire de la commune de 2014 à 2020",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/05/deces-de-gerard-quete-maire-de-la-commune-de-2014-a-2020",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T11:19:36.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vuillafans : vie municipale",
+    "origine": "regles"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-11-05T11:16:15.000Z",
@@ -3689,7 +3878,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    }
   },
@@ -3818,8 +4007,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Finances publiques : annonces sur les finances publiques",
+    "origine": "regles"
    },
    "fait": "Le plan pour l’adaptation au changement climatique sera présenté « d’ici 15 jours »",
    "accroche": "Le plan pour l’adaptation au changement climatique sera présenté « d’ici 15 jours »"
@@ -3852,6 +4041,35 @@
    },
    "fait": "Journée de grève et manifestations en France qui s’annoncent très suivies",
    "accroche": "Journée de grève et manifestations en France qui s’annoncent très suivies"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-05T11:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Haute-Saône. Qui était Maurice Thiery, qui donne son nom à la nouvelle gare routière d’Héricourt ?",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/05/qui-etait-maurice-thiery-qui-donne-son-nom-a-la-nouvelle-gare-routiere-d-hericourt",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T11:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Haute-Saône : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Qui était Maurice Thiery, qui donne son nom à la nouvelle gare routière d’Héricourt ?",
+   "accroche": "Qui était Maurice Thiery, qui donne son nom à la nouvelle gare routière d’Héricourt ?"
   },
   {
    "medias": 1,
@@ -3994,7 +4212,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
+    "titre": "Social",
     "origine": "dossier"
    },
    "fait": "L’accord sur les mesures de reclassement signé par les syndicats",
@@ -4208,6 +4426,35 @@
     "origine": "regles",
     "generique": true
    }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-05T10:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Belleville-sur-Meuse. La place Maginot bénéficie d’un éclairage renforcé",
+     "url": "https://www.estrepublicain.fr/environnement/2026/11/05/la-place-maginot-est-maintenant-en-pleine-lumiere",
+     "media": "L'Est républicain",
+     "date": "2026-11-05T10:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Belleville-sur-Meuse : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La place Maginot bénéficie d’un éclairage renforcé",
+   "accroche": "La place Maginot bénéficie d’un éclairage renforcé"
   },
   {
    "medias": 1,
@@ -4887,206 +5134,6 @@
    },
    "fait": "La réforme nécessite de supprimer 20 % des places",
    "accroche": "La réforme nécessite de supprimer 20 % des places"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-11-05T09:02:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Grève du 5 novembre : 270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris",
-     "url": "https://www.lejdd.fr/Societe/greve-du-5-novembre-jusqua-700-000-manifestants-attendus-70-000-policiers-et-gendarmes-mobilises-187851",
-     "media": "Le JDD",
-     "date": "2026-11-05T09:02:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris",
-   "accroche": "270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-05T09:01:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lucie Castets, maire PS du XIIe arrondissement: \"J'aimerais que l'on respecte le droit de manifester et en même temps que l'on permette aux élus locaux d'anticiper\"",
-     "url": "https://www.bfmtv.com/politique/video-lucie-castets-maire-ps-du-xi-ie-arrondissement-j-aimerais-que-l-on-respecte-le-droit-de-manifester-et-en-meme-temps-que-l-on-permette-aux-elus-locaux-d-anticiper_VN-202611050322.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T09:01:12.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Parti socialiste : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-05T08:49:03.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT - Grève du 5 novembre: minute de silence pour les victimes de Trappes, près de 10 % de grévistes dans la fonction publique d’État",
-     "url": "https://www.rfi.fr/fr/france/20261105-en-direct-gr%C3%A8ve-du-5-novembre-la-col%C3%A8re-sociale-monte-d-un-cran-des-manifestations-attendues-partout-en-france",
-     "media": "RFI",
-     "date": "2026-11-05T08:49:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Minute de silence pour les victimes de Trappes, près de 10 % de grévistes dans la fonction publique d’État",
-   "accroche": "Minute de silence pour les victimes de Trappes, près de 10 % de grévistes dans la fonction publique d’État"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-05T08:48:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Où est passée la police municipale parisienne pendant les émeutes ? Emmanuel Grégoire sous le feu des critiques",
-     "url": "https://www.europe1.fr/politique/ou-est-passee-la-police-municipale-parisienne-pendant-les-emeutes-emmanuel-gregoire-sous-le-feu-des-critiques-1209716?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-05T08:48:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : déclaration sur le maintien de l'ordre",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-05T08:42:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Qu’ont fait les nouveaux maires RN ? Six mois de politiques publiques, des Alpes-Maritimes à l’Oise",
-     "url": "https://www.nouvelobs.com/politique/20261104.OBS119854/qu-ont-fait-les-nouveaux-maires-rn-six-mois-de-politiques-publiques-des-alpes-maritimes-a-l-oise.html",
-     "media": "L'Obs",
-     "date": "2026-11-05T08:42:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T08:39:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grève du 5 novembre. « CNews » et le « RN » en « prison » : la permanence du Rassemblement national de nouveau vandalisée à Agen",
-     "url": "https://www.sudouest.fr/faits-divers/greve-du-5-novembre-prison-cnews-rn-fascisme-la-permanence-du-rassemblement-national-de-nouveau-vandalisee-a-agen-31390998.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T08:39:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La permanence du Rassemblement national de nouveau vandalisée à Agen",
-   "accroche": "La permanence du Rassemblement national de nouveau vandalisée à Agen"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-05T08:30:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Réappropriation des extérieurs, propreté, sécurité… A Berthe, des ateliers collaboratifs entre les locataires d’une résidence et le bailleur social accouchent de 250 000 euros d’aménagements",
-     "url": "https://www.nicematin.com/societe/vie-locale/reappropriation-des-exterieurs-proprete-securite-a-berthe-des-ateliers-collaboratifs-entre-les-locataires-d-une-residence-et-le-bailleur-social-accouchent-de-250-000-euros-d-amenagements-10753242",
-     "media": "Nice-Matin",
-     "date": "2026-11-05T08:30:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
-   }
   }
  ]
 }
