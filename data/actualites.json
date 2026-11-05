@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-05T12:45:40.332Z",
+ "lastUpdated": "2026-11-05T12:50:43.418Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -85,7 +85,7 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
@@ -154,15 +154,15 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidat",
+    "candidats",
     "primaire",
     "coalition"
    ],
    "medias": [
+    "BFMTV",
     "Libération",
     "20 Minutes",
     "Europe 1",
-    "BFMTV",
     "Sud Ouest",
     "Public Sénat",
     "L'Obs",
@@ -170,36 +170,43 @@
     "Valeurs actuelles",
     "Le JDD",
     "La Dépêche",
-    "Le Dauphiné libéré",
     "Le Monde",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Le Figaro",
     "L'Express",
-    "RFI"
+    "RFI",
+    "France 24"
    ],
    "mediasDistincts": 15,
    "sources": [
+    "BFMTV",
     "Libération",
     "20 Minutes",
     "Groupe Bolloré",
-    "BFMTV",
     "Sud Ouest",
     "Public Sénat",
     "L'Obs",
     "Nice-Matin",
     "Valeurs actuelles",
     "La Dépêche",
-    "EBRA",
     "Le Monde",
+    "EBRA",
     "Le Figaro",
     "L'Express",
-    "RFI"
+    "France Médias Monde"
    ],
-   "nb": 65,
-   "derniere": "2026-11-05T12:24:29.000Z",
+   "nb": 62,
+   "derniere": "2026-11-05T12:46:50.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Augmentation du SMIC: \"Nos entreprises sont dans une situation trop fragile\", répond Marine Le Pen, candidate RN à la présidentielle, à la CGT",
+     "url": "https://www.bfmtv.com/politique/front-national/video-augmentation-du-smic-nos-entreprises-sont-dans-une-situation-trop-fragile-repond-marine-le-pen-candidate-rn-a-la-presidentielle-a-la-cgt_VN-202611050490.html",
+     "date": "2026-11-05T12:46:50.000Z",
+     "video": true
+    },
     {
      "media": "Libération",
      "titre": "Pour la présidentielle, Macron veut une «coalition» allant de Raphaël Glucksmann à David Lisnard",
@@ -217,12 +224,6 @@
      "titre": "Présidentielle 2027 : «C'est le moment de Marine Le Pen, de la rencontre de son programme avec les Français», estime Laure Lavalette",
      "url": "https://www.europe1.fr/politique/presidentielle-2027-cest-le-moment-de-marine-le-pen-de-la-rencontre-de-son-programme-avec-les-francais-estime-laure-lavalette-1210178?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-11-05T11:12:00.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Il ne se résout pas à un duel LFI/RN\": Emmanuel Macron pour une \"coalition\" de David Lisnard à Raphaël Glucksmann avant la présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/il-ne-se-resout-pas-a-un-duel-lfi-rn-emmanuel-macron-pour-une-coalition-de-david-lisnard-a-raphael-glucksmann-avant-la-presidentielle_AD-202611050388.html",
-     "date": "2026-11-05T10:41:13.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -267,12 +268,6 @@
      "date": "2026-11-05T08:31:02.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Voiron. Contournement routier : la majorité réaffirme son soutien au projet",
-     "url": "https://www.ledauphine.com/politique/2026/11/05/contournement-routier-la-majorite-reaffirme-son-soutien-au-projet",
-     "date": "2026-11-04T23:32:00.000Z"
-    },
-    {
      "media": "Le Monde",
      "titre": "Présidentielle 2027 : pour battre Marine Le Pen et Jean-Luc Mélenchon, Emmanuel Macron préconise une large alliance au sein de l’espace central",
      "url": "https://www.lemonde.fr/politique/article/2026/11/04/presidentielle-2027-emmanuel-macron-preconise-une-coalition-de-glucksmann-a-lisnard_6806470_823448.html",
@@ -313,16 +308,22 @@
      "titre": "Présidentielle française: le candidat Nouvelle Énergie David Lisnard fait-il peur à ses concurrents?",
      "url": "https://www.rfi.fr/fr/france/20261103-pr%C3%A9sidentielle-fran%C3%A7aise-la-candidat-nouvelle-%C3%A9nergie-david-lisnard-fait-il-peur-%C3%A0-ses-concurrents",
      "date": "2026-11-03T18:14:20.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle en France : y aura-t-il une primaire de la droite ?",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261103-pr%C3%A9sidentielle-en-france-y-aura-t-il-une-primaire-de-la-droite",
+     "date": "2026-11-03T15:38:53.000Z"
     }
    ]
   },
   {
-   "id": "social",
-   "titre": "Social",
+   "id": "sociale",
+   "titre": "Sociale",
    "motifs": [
-    "social",
-    "colère",
+    "sociale",
     "euros",
+    "colère",
     "sécurité"
    ],
    "medias": [
@@ -339,7 +340,6 @@
     "Europe 1",
     "L'Est républicain",
     "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
     "Public Sénat",
     "Le Figaro",
     "La Croix",
@@ -362,7 +362,7 @@
     "La Croix",
     "20 Minutes"
    ],
-   "nb": 42,
+   "nb": 37,
    "derniere": "2026-11-05T11:16:15.000Z",
    "articles": [
     {
@@ -445,12 +445,6 @@
      "date": "2026-11-04T20:00:00.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
-     "titre": "Présidentielle 2027. « Cela peut laisser des traces profondes » : comment la mobilisation sociale bouscule la campagne",
-     "url": "https://www.ledauphine.com/politique/2026/11/04/cela-peut-laisser-des-traces-profondes-comment-la-mobilisation-sociale-bouscule-la-campagne",
-     "date": "2026-11-04T20:00:00.000Z"
-    },
-    {
      "media": "Public Sénat",
      "titre": "Mouvement lycéen : « Manifester est légitime mais bloquer un lycée est illégal et porte préjudice aux élèves », assure le ministre de l’Éducation",
      "url": "https://www.publicsenat.fr/actualites/education/mouvement-lyceen-manifester-est-legitime-mais-bloquer-un-lycee-est-illegal-et-porte-prejudice-aux-eleves-assure-le-ministre-de-leducation",
@@ -485,7 +479,6 @@
    "medias": [
     "La Dépêche",
     "Public Sénat",
-    "Le Dauphiné libéré",
     "Le Monde",
     "BFMTV",
     "Le Progrès",
@@ -504,9 +497,9 @@
    "sources": [
     "La Dépêche",
     "Public Sénat",
-    "EBRA",
     "Le Monde",
     "BFMTV",
+    "EBRA",
     "RFI",
     "Sud Ouest",
     "20 Minutes",
@@ -516,7 +509,7 @@
     "Libération",
     "L'Obs"
    ],
-   "nb": 23,
+   "nb": 22,
    "derniere": "2026-11-05T11:07:19.000Z",
    "articles": [
     {
@@ -530,12 +523,6 @@
      "titre": "Mobilisation contre la vie chère : journée de grève et manifestations en France qui s’annoncent très suivies",
      "url": "https://www.publicsenat.fr/actualites/politique/mobilisation-contre-la-vie-chere-journee-de-greve-et-manifestations-en-france-qui-sannoncent-tres-suivies",
      "date": "2026-11-05T11:02:16.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Isère. Grève du 5 novembre : manifestations en cours à Grenoble, des interpellations à Bourgoin-Jallieu",
-     "url": "https://www.ledauphine.com/social/2026/11/05/mobilisation-du-5-novembre-un-barrage-filtrant-a-voreppe-des-mobilisations-attendues-a-grenoble-bourgoin-jallieu-vienne-ou-encore-voiron",
-     "date": "2026-11-05T10:32:00.000Z"
     },
     {
      "media": "Le Monde",
@@ -621,6 +608,75 @@
   }
  ],
  "sujets": [
+  {
+   "medias": 6,
+   "mediasDistincts": 4,
+   "sources": [
+    "BFMTV",
+    "France 24",
+    "Le Monde",
+    "EBRA"
+   ],
+   "derniere": "2026-11-05T07:27:43.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.leprogres.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "media": "Le Progrès",
+     "date": "2026-11-04T22:30:00.000Z"
+    },
+    {
+     "titre": "Budget 2027: l'Assemblée nationale rejette à l'unanimité la partie \"recettes\"",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-budget-2027-l-assemblee-nationale-rejette-a-l-unanimite-la-partie-recettes_VN-202611050236.html",
+     "media": "BFMTV",
+     "date": "2026-11-05T07:27:43.000Z",
+     "video": true
+    },
+    {
+     "titre": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité en première lecture",
+     "url": "https://www.france24.com/fr/france/20261104-assemblee-nationale-rejette-unanimite-en-premiere-lecture-budget-etat-2027-pib-finances",
+     "media": "France 24",
+     "date": "2026-11-04T23:16:53.000Z"
+    },
+    {
+     "titre": "Budget 2027 : l’Assemblée nationale rejette en première lecture, à l’unanimité, le projet de loi de finances",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-le-projet-de-loi-de-finances_6806468_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-04T22:53:12.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.dna.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T22:30:00.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
+     "media": "L'Est républicain",
+     "date": "2026-11-04T22:30:00.000Z"
+    },
+    {
+     "titre": "Budget 2027: l'Assemblée nationale rejette en première lecture à l'unanimité la partie \"recettes\" du projet de loi de finances",
+     "url": "https://www.bfmtv.com/politique/parlement/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-la-partie-recettes-du-projet-de-loi-de-finance_AD-202611040991.html",
+     "media": "BFMTV",
+     "date": "2026-11-04T22:25:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Nationale rejette",
+    "origine": "recoupement"
+   },
+   "fait": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
+   "accroche": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte",
+   "essentiel": "L'Assemblée nationale rejette le budget de l'État 2027 à l'unanimité lors du premier examen du texte. L'Assemblée nationale rejette à l'unanimité la partie \"recettes\". Six médias en parlent : Le Progrès, BFMTV, France 24, Le Monde, Dernières Nouvelles d'Alsace et L'Est républicain."
+  },
   {
    "medias": 4,
    "mediasDistincts": 4,
@@ -762,74 +818,6 @@
    "essentiel": "Emmanuel Macron : Ce que révèle le livre, qui dévoile des messages privés du président. Quatre médias en parlent : Nice-Matin, Sud Ouest, RFI et 20 Minutes."
   },
   {
-   "medias": 6,
-   "mediasDistincts": 3,
-   "sources": [
-    "BFMTV",
-    "Le Monde",
-    "EBRA"
-   ],
-   "derniere": "2026-11-05T07:27:43.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
-     "url": "https://www.leprogres.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
-     "media": "Le Progrès",
-     "date": "2026-11-04T22:30:00.000Z"
-    },
-    {
-     "titre": "Budget 2027: l'Assemblée nationale rejette à l'unanimité la partie \"recettes\"",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-budget-2027-l-assemblee-nationale-rejette-a-l-unanimite-la-partie-recettes_VN-202611050236.html",
-     "media": "BFMTV",
-     "date": "2026-11-05T07:27:43.000Z",
-     "video": true
-    },
-    {
-     "titre": "Budget 2027 : l’Assemblée nationale rejette en première lecture, à l’unanimité, le projet de loi de finances",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/04/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-le-projet-de-loi-de-finances_6806468_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-04T22:53:12.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
-     "url": "https://www.dna.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T22:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
-     "url": "https://www.ledauphine.com/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-04T22:30:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : sans surprise, l'Assemblée nationale rejette à l'unanimité le texte en première lecture",
-     "url": "https://www.estrepublicain.fr/economie/2026/11/04/budget-2027-sans-surprise-l-assemblee-nationale-rejette-a-l-unanimite-le-texte-en-premiere-lecture",
-     "media": "L'Est républicain",
-     "date": "2026-11-04T22:30:00.000Z"
-    },
-    {
-     "titre": "Budget 2027: l'Assemblée nationale rejette en première lecture à l'unanimité la partie \"recettes\" du projet de loi de finances",
-     "url": "https://www.bfmtv.com/politique/parlement/budget-2027-l-assemblee-nationale-rejette-en-premiere-lecture-a-l-unanimite-la-partie-recettes-du-projet-de-loi-de-finance_AD-202611040991.html",
-     "media": "BFMTV",
-     "date": "2026-11-04T22:25:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Nationale rejette",
-    "origine": "recoupement"
-   },
-   "fait": "Budget 2027 : l’Assemblée nationale rejette lors du premier examen du texte, à l’unanimité",
-   "accroche": "Budget 2027 : l’Assemblée nationale rejette lors du premier examen du texte, à l’unanimité",
-   "essentiel": "Sur le budget 2027, l’Assemblée nationale rejette lors du premier examen du texte, à l’unanimité. L'Assemblée nationale rejette à l'unanimité la partie \"recettes\". Six médias en parlent : Le Progrès, BFMTV, Le Monde, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain."
-  },
-  {
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
@@ -890,68 +878,109 @@
   },
   {
    "medias": 3,
-   "mediasDistincts": 2,
+   "mediasDistincts": 3,
    "sources": [
-    "EBRA",
-    "Le Monde"
+    "Le JDD",
+    "Libération",
+    "20 Minutes"
    ],
-   "derniere": "2026-11-04T18:51:00.000Z",
+   "derniere": "2026-11-05T09:24:51.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
      }
     ],
     "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Social. Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés jeudi, Laurent Nuñez maintient son dispositif",
-     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-70-000-policiers-et-gendarmes-mobilises-jeudi-laurent-nunez-maintient-son-dispositif",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T18:51:00.000Z"
+     "titre": "Edouard Philippe invite Jean-Luc Mélenchon à débattre de «racisme» et d’«antisémitisme»",
+     "url": "https://www.liberation.fr/politique/edouard-philippe-invite-jean-luc-melenchon-a-debattre-de-racisme-et-dantisemitisme-20261104_SNQG4X6JAFGC3KYKM67CSD6M24/",
+     "media": "Libération",
+     "date": "2026-11-04T14:14:15.000Z"
     },
     {
-     "titre": "Social. Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés jeudi, Laurent Nuñez maintient son dispositif",
-     "url": "https://www.ledauphine.com/social/2026/11/04/greve-du-5-novembre-70-000-policiers-et-gendarmes-mobilises-jeudi-laurent-nunez-maintient-son-dispositif",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-04T18:51:00.000Z"
+     "titre": "Présidentielle : Mélenchon balaie l'offre de débat de Philippe sur le «racisme» et l'«antisémitisme»",
+     "url": "https://www.lejdd.fr/politique/presidentielle-melenchon-balaie-loffre-de-debat-de-philippe-sur-le-racisme-et-lantisemitisme-187845",
+     "media": "Le JDD",
+     "date": "2026-11-05T09:24:51.000Z"
     },
     {
-     "titre": "Manifestation du 5 novembre : Laurent Nuñez annonce 70 000 policiers et gendarmes déployés et prévient qu’aucun « débordement ne sera toléré »",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/04/manifestation-du-5-novembre-laurent-nunez-annonce-70-000-policiers-et-gendarmes-deployes-et-previent-qu-aucun-debordement-ne-sera-tolere_6806412_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-04T17:58:29.000Z"
+     "titre": "Présidentielle 2027 : Énervé, Philippe invite Mélenchon à débattre sur le « racisme » et « l’antisémitisme »",
+     "url": "https://www.20minutes.fr/politique/4260366-20261104-presidentielle-2027-enerve-philippe-invite-melenchon-debattre-racisme-antisemitisme?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-04T13:45:54.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Policiers et gendarmes",
-    "origine": "recoupement"
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
-   "fait": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
-   "accroche": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
-   "essentiel": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif. Pendant la manifestation du 5 novembre, Laurent Nuñez annonce 70 000 policiers et gendarmes déployés et prévient qu’aucun. Trois médias en parlent.",
    "contexte": [
     {
-     "type": "personnes",
-     "texte": "Laurent Nunez : ministre de l'intérieur",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %, Mélenchon 17,5–18 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Nice-Matin",
+    "20 Minutes",
+    "France 24"
+   ],
+   "derniere": "2026-11-03T09:06:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
+     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-03T08:28:24.000Z"
+    },
+    {
+     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
+     "media": "Nice-Matin",
+     "date": "2026-11-03T09:06:14.000Z"
+    },
+    {
+     "titre": "Jean-François Copé appelle la droite à cesser de \"chercher sans arrêt le général de Gaulle\"",
+     "url": "https://www.france24.com/fr/france/20261103-jean-fran%C3%A7ois-cop%C3%A9-appelle-la-droite-%C3%A0-cesser-de-chercher-sans-arr%C3%AAt-le-g%C3%A9n%C3%A9ral-de-gaulle",
+     "media": "France 24",
+     "date": "2026-11-03T07:51:09.000Z"
     }
    ],
-   "chiffre": {
-    "valeur": "70 000",
-    "unite": "policiers"
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
    },
-   "date": {
-    "iso": "2026-11-05",
-    "jour": 5,
-    "mois": "novembre"
-   }
+   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
+   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Trois médias en parlent : 20 Minutes, Nice-Matin et France 24."
   },
   {
    "medias": 2,
@@ -1005,6 +1034,65 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "France 24",
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-05T10:23:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre en France : quelque 70 000 policiers et gendarmes mobilisés",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-gr%C3%A8ve-du-5-novembre-en-france-quelque-70-000-policiers-et-gendarmes-mobilis%C3%A9s",
+     "media": "France 24",
+     "date": "2026-11-05T10:23:54.000Z"
+    },
+    {
+     "titre": "Social. Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés jeudi, Laurent Nuñez maintient son dispositif",
+     "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-70-000-policiers-et-gendarmes-mobilises-jeudi-laurent-nunez-maintient-son-dispositif",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-04T18:51:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
+   "accroche": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif",
+   "essentiel": "Grève du 5 novembre : 70 000 policiers et gendarmes mobilisés, Laurent Nuñez maintient son dispositif. Deux médias en parlent : France 24 et Dernières Nouvelles d'Alsace.",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Laurent Nunez : ministre de l'intérieur",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ],
+   "chiffre": {
+    "valeur": "70 000",
+    "unite": "policiers"
+   },
+   "date": {
+    "iso": "2026-11-05",
+    "jour": 5,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Europe 1",
     "France Inter"
    ],
@@ -1036,6 +1124,39 @@
    "fait": "Midterms 2026 : qui est Abdul El-Sayed, premier sénateur musulman",
    "accroche": "Midterms 2026 : qui est Abdul El-Sayed, premier sénateur musulman",
    "essentiel": "Midterms 2026 : qui est Abdul El-Sayed, premier sénateur musulman. Deux médias en parlent : Europe 1 et France Inter."
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le Monde",
+    "France 24"
+   ],
+   "derniere": "2026-11-05T08:47:57.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : transports, éducation, santé…, quels secteurs seront touchés jeudi ?",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/05/greve-du-5-novembre-transports-education-sante-quels-secteurs-seront-touches-jeudi_6806839_3224.html",
+     "media": "Le Monde",
+     "date": "2026-11-05T08:47:57.000Z"
+    },
+    {
+     "titre": "Éducation, transports, santé... à quoi s'attendre pour la journée de mobilisation de jeudi ?",
+     "url": "https://www.france24.com/fr/france/20261104-%C3%A9ducation-transports-sant%C3%A9-%C3%A0-quoi-s-attendre-journ%C3%A9e-mobilisation-jeudi",
+     "media": "France 24",
+     "date": "2026-11-04T15:35:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Santé : ce que disent les médias",
+    "origine": "regles"
+   }
   },
   {
    "medias": 2,
@@ -1184,62 +1305,6 @@
    "fait": "L’Elysée embarrassé par les confidences d’Emmanuel Macron dans un livre",
    "accroche": "L’Elysée embarrassé par les confidences d’Emmanuel Macron dans un livre",
    "essentiel": "L’Elysée embarrassé par les confidences d’Emmanuel Macron dans un livre. Deux médias en parlent : Europe 1 et Libération."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-04T14:14:15.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Edouard Philippe invite Jean-Luc Mélenchon à débattre de «racisme» et d’«antisémitisme»",
-     "url": "https://www.liberation.fr/politique/edouard-philippe-invite-jean-luc-melenchon-a-debattre-de-racisme-et-dantisemitisme-20261104_SNQG4X6JAFGC3KYKM67CSD6M24/",
-     "media": "Libération",
-     "date": "2026-11-04T14:14:15.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Énervé, Philippe invite Mélenchon à débattre sur le « racisme » et « l’antisémitisme »",
-     "url": "https://www.20minutes.fr/politique/4260366-20261104-presidentielle-2027-enerve-philippe-invite-melenchon-debattre-racisme-antisemitisme?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-04T13:45:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %, Mélenchon 17,5–18 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -1456,42 +1521,6 @@
    "mediasDistincts": 2,
    "sources": [
     "Nice-Matin",
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-03T09:06:14.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "« Pas de Général de Gaulle en stock » : Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-     "url": "https://www.nicematin.com/societe/politique/pas-de-general-de-gaulle-en-stock-jean-francois-cope-appelle-les-candidats-de-droite-a-se-rassembler-des-janvier-pour-ne-pas-echouer-a-la-presidentielle-2027-10753136",
-     "media": "Nice-Matin",
-     "date": "2026-11-03T09:06:14.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Jean-François Copé exhorte la droite à cesser de « chercher le général de Gaulle »",
-     "url": "https://www.20minutes.fr/politique/4259922-20261103-presidentielle-2027-stock-cope-exhorte-droite-cesser-chercher-general-gaulle?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-03T08:28:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : appel sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "accroche": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027",
-   "essentiel": "Jean-François Copé appelle les candidats de droite à se rassembler dès janvier pour ne pas échouer à la présidentielle 2027. Deux médias en parlent : Nice-Matin et 20 Minutes."
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Nice-Matin",
     "RFI"
    ],
    "derniere": "2026-11-01T20:47:33.000Z",
@@ -1544,12 +1573,12 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
    ],
-   "derniere": "2026-11-05T11:49:00.000Z",
+   "derniere": "2026-11-05T12:46:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1561,25 +1590,19 @@
      "titre": "Social. Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
      "url": "https://www.leprogres.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
      "media": "Le Progrès",
-     "date": "2026-11-05T11:49:00.000Z"
+     "date": "2026-11-05T12:46:00.000Z"
     },
     {
      "titre": "Social. Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
      "url": "https://www.dna.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
      "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-05T11:49:00.000Z"
-    },
-    {
-     "titre": "Social. Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
-     "url": "https://www.ledauphine.com/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-05T11:49:00.000Z"
+     "date": "2026-11-05T12:46:00.000Z"
     },
     {
      "titre": "Social. Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
      "url": "https://www.estrepublicain.fr/social/2026/11/05/greve-du-5-novembre-mobilisation-massive-en-vue-ce-jeudi-le-gouvernement-plus-que-jamais-sous-pression",
      "media": "L'Est républicain",
-     "date": "2026-11-05T11:49:00.000Z"
+     "date": "2026-11-05T12:46:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1588,7 +1611,7 @@
    },
    "fait": "Les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
    "accroche": "Les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse",
-   "essentiel": "Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Grève du 5 novembre : les cortèges s'élancent, « violences urbaines » à Rennes, un lycée incendié à Toulouse. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
    "date": {
     "iso": "2026-11-05",
     "jour": 5,
@@ -1596,7 +1619,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1623,12 +1646,6 @@
     },
     {
      "titre": "Présidentielle 2027. « Cela peut laisser des traces profondes » : comment la mobilisation sociale bouscule la campagne",
-     "url": "https://www.ledauphine.com/politique/2026/11/04/cela-peut-laisser-des-traces-profondes-comment-la-mobilisation-sociale-bouscule-la-campagne",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-04T20:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Cela peut laisser des traces profondes » : comment la mobilisation sociale bouscule la campagne",
      "url": "https://www.estrepublicain.fr/politique/2026/11/04/cela-peut-laisser-des-traces-profondes-comment-la-mobilisation-sociale-bouscule-la-campagne",
      "media": "L'Est républicain",
      "date": "2026-11-04T20:00:00.000Z"
@@ -1641,7 +1658,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1664,12 +1681,6 @@
      "titre": "Social. Grève du 5 novembre : vers une hausse du Smic pour calmer la colère ? Le gouvernement envisage un geste",
      "url": "https://www.dna.fr/social/2026/11/04/greve-du-5-novembre-vers-une-hausse-du-smic-pour-calmer-la-colere-le-gouvernement-envisage-un-geste",
      "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T19:35:00.000Z"
-    },
-    {
-     "titre": "Social. Grève du 5 novembre : vers une hausse du Smic pour calmer la colère ? Le gouvernement envisage un geste",
-     "url": "https://www.ledauphine.com/social/2026/11/04/greve-du-5-novembre-vers-une-hausse-du-smic-pour-calmer-la-colere-le-gouvernement-envisage-un-geste",
-     "media": "Le Dauphiné libéré",
      "date": "2026-11-04T19:35:00.000Z"
     },
     {
@@ -1740,32 +1751,113 @@
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
-    "EBRA"
+    "France Médias Monde"
    ],
-   "derniere": "2026-11-04T18:40:00.000Z",
+   "derniere": "2026-11-02T15:36:15.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "justice",
+    "vignette": "justice"
    },
    "articles": [
     {
-     "titre": "Consommation. Netflix, TikTok, GTA... C'est quoi ce projet de taxe sur les gigaoctets qui pourrait faire grimper vos forfaits ?",
-     "url": "https://www.dna.fr/economie/2026/11/04/netflix-tiktok-quel-est-ce-projet-de-taxe-sur-les-gigaoctets-qui-pourrait-faire-grimper-vos-forfaits",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-04T18:40:00.000Z"
+     "titre": "\"Dubaï Papers\" : le procès pour fraude fiscale internationale s'ouvre à Paris",
+     "url": "https://www.france24.com/fr/france/20261102-duba%C3%AF-papers-proc%C3%A8s-pour-fraude-fiscale-internationale-ouvre-paris",
+     "media": "France 24",
+     "date": "2026-11-02T15:36:15.000Z"
     },
     {
-     "titre": "Consommation. Netflix, TikTok, GTA... C'est quoi ce projet de taxe sur les gigaoctets qui pourrait faire grimper vos forfaits ?",
-     "url": "https://www.ledauphine.com/economie/2026/11/04/netflix-tiktok-quel-est-ce-projet-de-taxe-sur-les-gigaoctets-qui-pourrait-faire-grimper-vos-forfaits",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-04T18:40:00.000Z"
+     "titre": "Procès des «Dubaï Papers»: trois sociétés et 13 personnes, dont un prince belge, seront jugées à Paris",
+     "url": "https://www.rfi.fr/fr/france/20261101-proc%C3%A8s-des-duba%C3%AF-papers-trois-soci%C3%A9t%C3%A9s-et-14-personnes-dont-un-prince-belge-seront-jug%C3%A9es-%C3%A0-paris",
+     "media": "RFI",
+     "date": "2026-11-01T18:14:27.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Consommation : finances locales",
+    "titre": "Justice : actualité de la justice",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
+   "accroche": "Le procès pour fraude fiscale internationale s'ouvre à Paris",
+   "essentiel": "Le procès pour fraude fiscale internationale s'ouvre à Paris. Trois sociétés et 13 personnes seront jugées à Paris. Deux médias en parlent : France 24 et RFI."
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-05T12:46:50.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Augmentation du SMIC: \"Nos entreprises sont dans une situation trop fragile\", répond Marine Le Pen, candidate RN à la présidentielle, à la CGT",
+     "url": "https://www.bfmtv.com/politique/front-national/video-augmentation-du-smic-nos-entreprises-sont-dans-une-situation-trop-fragile-repond-marine-le-pen-candidate-rn-a-la-presidentielle-a-la-cgt_VN-202611050490.html",
+     "media": "BFMTV",
+     "date": "2026-11-05T12:46:50.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen : réponse sur la présidentielle de 2027",
     "origine": "regles"
+   },
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Pen 35–37 %",
+     "source": "Commission des sondages (notice Ifop)"
+    },
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-05T12:43:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre à Bordeaux : une interpellation et un blessé au lycée Montesquieu, où parents et élèves grévistes s’opposent",
+     "url": "https://www.sudouest.fr/gironde/bordeaux/greve-du-5-novembre-a-bordeaux-une-interpellation-et-un-blesse-au-lycee-montesquieu-ou-parents-et-eleves-grevistes-s-opposent-31392723.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-05T12:43:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    }
   },
   {
@@ -2063,6 +2155,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T11:28:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mobilisations en France : des lycéens maintiennent les blocus avant le cortège",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-mobilisations-en-france-des-lyc%C3%A9ens-maintiennent-les-blocus-avant-le-cort%C3%A8ge",
+     "media": "France 24",
+     "date": "2026-11-05T11:28:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mobilisations en France : mobilisation lycéenne",
+    "origine": "regles"
+   },
+   "fait": "Des lycéens maintiennent les blocus avant le cortège",
+   "accroche": "Des lycéens maintiennent les blocus avant le cortège"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-05T11:25:03.000Z",
@@ -2195,34 +2315,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-05T11:14:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Haute-Savoie. « Un projet de loi de finances qui ne soigne pas, mais qui risque au contraire de rendre malade »",
-     "url": "https://www.ledauphine.com/politique/2026/11/05/un-projet-de-loi-de-finances-qui-ne-soigne-pas-mais-qui-risque-au-contraire-de-rendre-malade",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-05T11:14:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haute-Savoie : finances locales",
-    "origine": "regles"
    }
   },
   {
@@ -2554,7 +2648,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    },
    "fait": "L’accord sur les mesures de reclassement signé par les syndicats",
@@ -2634,7 +2728,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    },
    "fait": "Édouard Philippe estime : « Une discussion sur le SMIC devrait relever d'une discussion entre les partenaires sociaux »",
@@ -2774,6 +2868,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T10:37:04.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Route du Rhum : le navigateur Armel Le Cléac'h secouru après avoir chaviré",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-route-du-rhum-le-navigateur-armel-le-cl%C3%A9ac-h-secouru-apr%C3%A8s-avoir-chavir%C3%A9",
+     "media": "France 24",
+     "date": "2026-11-05T10:37:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Route du Rhum : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le JDD"
    ],
    "derniere": "2026-11-05T10:36:21.000Z",
@@ -2798,32 +2919,6 @@
    },
    "fait": "Les sénateurs suggèrent de geler les pensions de retraite supérieures à 1 500 euros",
    "accroche": "Les sénateurs suggèrent de geler les pensions de retraite supérieures à 1 500 euros"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-05T10:32:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Isère. Grève du 5 novembre : manifestations en cours à Grenoble, des interpellations à Bourgoin-Jallieu",
-     "url": "https://www.ledauphine.com/social/2026/11/05/mobilisation-du-5-novembre-un-barrage-filtrant-a-voreppe-des-mobilisations-attendues-a-grenoble-bourgoin-jallieu-vienne-ou-encore-voiron",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-05T10:32:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Manifestations",
-    "origine": "dossier"
-   }
   },
   {
    "medias": 1,
@@ -2880,6 +2975,33 @@
    },
    "fait": "La place Maginot bénéficie d’un éclairage renforcé",
    "accroche": "La place Maginot bénéficie d’un éclairage renforcé"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T10:28:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "France : cyberattaque du groupe Crédit Mutuel Arkéa, une enquête ouverte",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-france-cyberattaque-du-groupe-cr%C3%A9dit-mutuel-ark%C3%A9a-une-enqu%C3%AAte-ouverte",
+     "media": "France 24",
+     "date": "2026-11-05T10:28:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Numérique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -2977,6 +3099,33 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-05T10:21:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mobilisations en France : un appel à la grève d'ampleur nationale",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261105-mobilisations-en-france-un-appel-%C3%A0-la-gr%C3%A8ve-d-ampleur-nationale",
+     "media": "France 24",
+     "date": "2026-11-05T10:21:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mobilisations en France : actualité locale",
+    "origine": "regles",
+    "generique": true
+   }
   },
   {
    "medias": 1,
@@ -3478,55 +3627,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-11-05T09:24:51.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle : Mélenchon balaie l'offre de débat de Philippe sur le «racisme» et l'«antisémitisme»",
-     "url": "https://www.lejdd.fr/politique/presidentielle-melenchon-balaie-loffre-de-debat-de-philippe-sur-le-racisme-et-lantisemitisme-187845",
-     "media": "Le JDD",
-     "date": "2026-11-05T09:24:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %, Mélenchon 17,5–18 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Libération"
    ],
    "derniere": "2026-11-05T09:18:09.000Z",
@@ -3596,33 +3696,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-05T09:06:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Savoie. Pourquoi des places de stationnement sont supprimées à Aix-les-Bains",
-     "url": "https://www.ledauphine.com/transport/2026/11/05/pourquoi-des-places-de-stationnement-sont-supprimees-a-aix-les-bains",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-05T09:06:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Savoie : actualité locale",
-    "origine": "regles",
-    "generique": true
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-11-05T09:04:23.000Z",
@@ -3646,6 +3719,35 @@
    },
    "fait": "La réforme nécessite de supprimer 20 % des places",
    "accroche": "La réforme nécessite de supprimer 20 % des places"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-05T09:02:21.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 5 novembre : 270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris",
+     "url": "https://www.lejdd.fr/Societe/greve-du-5-novembre-jusqua-700-000-manifestants-attendus-70-000-policiers-et-gendarmes-mobilises-187851",
+     "media": "Le JDD",
+     "date": "2026-11-05T09:02:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris",
+   "accroche": "270 000 manifestants selon le ministère de l’Intérieur, un professeur agressé à Paris"
   },
   {
    "medias": 1,
@@ -3698,7 +3800,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -3724,7 +3826,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -3751,32 +3853,6 @@
    ],
    "titrePropre": {
     "titre": "Sécurité : déclaration sur le maintien de l'ordre",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-05T08:47:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grève du 5 novembre : transports, éducation, santé…, quels secteurs seront touchés jeudi ?",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/05/greve-du-5-novembre-transports-education-sante-quels-secteurs-seront-touches-jeudi_6806839_3224.html",
-     "media": "Le Monde",
-     "date": "2026-11-05T08:47:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : ce que disent les médias",
     "origine": "regles"
    }
   },
@@ -3862,7 +3938,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -4049,7 +4125,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -4133,7 +4209,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Sociale",
     "origine": "dossier"
    }
   },
@@ -4876,103 +4952,6 @@
    },
    "fait": "Face aux ministres des sports d’Europe, le couple princier s’engage pour mieux encadrer la pratique du sport chez les jeunes",
    "accroche": "Face aux ministres des sports d’Europe, le couple princier s’engage pour mieux encadrer la pratique du sport chez les jeunes"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T06:04:57.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mediapart refoulé de la soirée de lancement du nouveau livre de Jordan Bardella, quasi toute la presse quitte l’événement par solidarité",
-     "url": "https://www.sudouest.fr/politique/mediapart-refoule-de-la-soiree-de-lancement-du-nouveau-livre-de-jordan-bardella-quasi-toute-la-presse-boycotte-en-solidarite-31390248.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T06:04:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Mediapart refoulé de la soirée de lancement du nouveau livre de Jordan Bardella",
-   "accroche": "Mediapart refoulé de la soirée de lancement du nouveau livre de Jordan Bardella",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T06:03:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Landes. « Débrider un vélo électrique, c’est interdit », rappellent les CRS de la piste d’éducation routière installée à Saint-Vincent-de-Tyrosse",
-     "url": "https://www.sudouest.fr/societe/securite-routiere/landes-debrider-un-velo-electrique-c-est-interdit-rappellent-les-crs-de-la-piste-d-education-routiere-installee-a-saint-vincent-de-tyrosse-31378907.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T06:03:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Landes : actualité scolaire",
-    "origine": "regles"
-   }
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-05T06:01:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« J’ai peur d’être une cible » : l’association SOS Racisme fait étape en Gironde avec l’opération Salam, Shalom, Salut",
-     "url": "https://www.sudouest.fr/gironde/j-ai-peur-d-etre-une-cible-l-association-sos-racisme-fait-etape-en-gironde-avec-l-operation-salam-shalom-salut-31385564.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-05T06:01:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   }
   }
  ]
 }
