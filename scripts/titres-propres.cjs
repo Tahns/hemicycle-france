@@ -242,6 +242,7 @@ const nomParti = (k) => NOM_PARTI[k] || k;
 // Listes de mots prudents : UNE seule source (scripts/liste-prudente.cjs, mots entiers), la même que stories-auto.cjs (motExclu) et publier-stories.cjs.
 // JUDICIAIRE_TITRES = accusation, procédure, violence contre une personne, mineur identifiable ; PROCEDURE = procédure formelle ; JURIDICTION = juridiction ou décision de justice explicite.
 const { JUDICIAIRE_TITRES, PROCEDURE, JURIDICTION } = require("./liste-prudente.cjs");
+const { rubriqueDe } = require("./rubriques.cjs"); // rubrique de presse (champ `rubrique`, lu par le dessin)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire et marge d'erreur d'un sondage (mentions obligatoires)
 // Indice explicite d'une juridiction ou d'une décision de justice : sans lui (simple « accusé de », « plainte », « victime », « soupçonné »), le titre n'affirme JAMAIS une procédure.
 
@@ -427,13 +428,14 @@ function titreSujetBrut(sujet, dossiers = [], donnees = {}) {
 /** Tous les champs « média » d'un sujet, prêts à écrire (seulement ceux qui existent). Marque aussi les vidéos. */
 function enrichirSujet(sujet, dossiers, donnees, maintenant = new Date()) {
   for (const a of sujet.articles || []) if (estVideo(a.url)) a.video = true; else delete a.video;
-  for (const k of ["titrePropre", "fait", "accroche", "essentiel", "contexte", "chiffre", "date"]) delete sujet[k];
+  for (const k of ["titrePropre", "fait", "accroche", "essentiel", "contexte", "chiffre", "date", "rubrique"]) delete sujet[k];
   const tp = titreSujet(sujet, dossiers, donnees); if (tp) sujet.titrePropre = tp;
   // Titre-fait : champ d'AFFICHAGE (gros titre des stories, lu par js/stories.js sous le nom « accroche ») ; titrePropre.titre reste la clé anti-doublon
   const fait = titreFait(sujet); if (fait) { sujet.fait = fait; sujet.accroche = fait; }
   // Message complet (voir messageComplet) : `accroche` = phrase complète, `essentiel` = une ou deux phrases de contexte (js/stories-actu.js lit s.accroche et s.essentiel)
   const msg = messageComplet(sujet);
   if (msg) { sujet.accroche = msg.accroche; sujet.essentiel = msg.essentiel; if (!sujet.fait) sujet.fait = msg.accroche; }
+  sujet.rubrique = rubriqueDe(sujet);
   const c = contexteSujet(sujet, donnees, maintenant); if (c.length) sujet.contexte = c;
   const ch = chiffreSujet(sujet); if (ch) sujet.chiffre = ch;
   const da = dateSujet(sujet, maintenant); if (da) sujet.date = da;

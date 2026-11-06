@@ -40,6 +40,12 @@ window.__rec = [];
     }catch(e){}
     return oft.call(this, t, x, y, ...r);
   };
+  // base blanche : on note le fond plein cadre et tout dégradé / motif de grain (interdits)
+  const ofr=P.fillRect, olg=P.createLinearGradient, org=P.createRadialGradient, opa=P.createPattern;
+  P.fillRect=function(x,y,w,h){ try{ if(w>=1000&&h>=1300) window.__rec.push({k:"f", c:String(this.fillStyle).toLowerCase()}); }catch(e){} return ofr.call(this,x,y,w,h); };
+  P.createLinearGradient=function(...a){ window.__rec.push({k:"g"}); return olg.apply(this,a); };
+  P.createRadialGradient=function(...a){ window.__rec.push({k:"g"}); return org.apply(this,a); };
+  P.createPattern=function(...a){ window.__rec.push({k:"g"}); return opa.apply(this,a); };
   const orect=P.rect, orr=P.roundRect, oclip=P.clip, osave=P.save, orest=P.restore;
   let last=null, cur=null, stack=[];
   P.rect=function(x,y,w,h){ last={x,y,w,h}; return orect.call(this,x,y,w,h); };
@@ -97,7 +103,13 @@ ACTUALITES.dossiers.push({id:"stress2",titre:"Budget",mediasDistincts:6,nb:3,med
 `;
 function analyser(rec, W=1080, H=1920){
   const out = [];
+  // base blanche : fond blanc plein cadre, aucun dégradé ni grain
+  const fonds = rec.filter(r=>r.k==="f");
+  if(!fonds.length || fonds[0].c !== "#ffffff") out.push(`FOND non blanc (${fonds[0] ? fonds[0].c : "aucun"})`);
+  if(rec.some(r=>r.k==="g")) out.push("DEGRADE / GRAIN (interdit sur la base blanche)");
   const T = rec.filter(r=>r.k==="t" && r.t.trim() && r.w>0 && r.h<400);
+  // zones masquées par Instagram (story 1080 × 1920) : aucun texte au-dessus de y = 250 ni sous y = 1640
+  if(H >= 1900) for(const t of T) if(t.y < 250 || t.y+t.h > 1640) out.push(`ZONE-INSTAGRAM "${t.t.slice(0,30)}" y=${t.y|0}..${(t.y+t.h)|0}`);
   const I = rec.filter(r=>r.k==="i" && r.w < W*0.95 && r.h < H*0.9);
   for(const t of T){
     if(/(…|… »)$/.test(t.t.trim()) && t.t.length > 8 && !/^(Photos? :|—)/.test(t.t) && !/Rochefoucauld|Marie-Antoinette|Hoffmann|Wolfgang/.test(t.t)) out.push(`TRONQUE "${t.t.slice(-40)}"`);

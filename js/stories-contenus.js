@@ -5,58 +5,21 @@
    - « comprendre »   : story, une notion de la rubrique Comprendre (règle stable, source officielle) ;
    - « chiffre-jour » : story, une donnée officielle (Insee, Eurostat…) avec sa date et sa source ;
    - « diapo »        : une image de CARROUSEL 1080 × 1350 (4:5), numérotée « n/N » : couverture, texte, liste, voix, sources.
-   Même direction artistique que les autres stories (STORY_DA, storyCadre / storyPied de js/stories.js). Rien n'est ajouté à l'espace global : tout est dans STORY_PLUS. */
+   Direction artistique « base blanche » (js/stories-blanc.js : BLANC, storyBlanc*) : fond blanc, bandeau de tête, filet noir épais, rubrique rouge,
+   titres serif, filets gris, pied de source. Tout est vectoriel ; le texte n'est JAMAIS coupé (la taille diminue, la mise en page s'allonge).
+   Rien n'est ajouté à l'espace global : tout est dans STORY_PLUS. */
 (() => {
-const DA = STORY_DA, { L, marge } = STORY, LARG = L - 2 * marge;
-const H_DIAPO = 1350, DECALAGE = 230; // le cadre des stories place le logo à 292 px : sur un format 4:5, on le remonte
-const fr = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const { L } = STORY, M = BLANC.marge, LARG = L - 2 * M;
+const H_DIAPO = 1350;
+const fr = n => String(n ?? 0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 async function polices(){
-  await Promise.all(['900 100px "Public Sans"', '800 30px "Public Sans"', '700 30px "Public Sans"', '600 30px "Public Sans"', '400 30px "Public Sans"', '700 60px Newsreader', '600 60px Newsreader']
+  await Promise.all(['800 30px "Public Sans"', '700 30px "Public Sans"', '600 30px "Public Sans"', '500 30px "Public Sans"', '400 30px "Public Sans"', '600 60px Newsreader', '400 60px Newsreader']
     .map(f => document.fonts.load(f).catch(() => {})));
-}
-// Ligne unique qui ne dépasse jamais `larg` : taille réduite jusqu'à `min`, puis texte coupé avec « … » ; renvoie { txt, taille }
-function ajuster(ctx, txt, poids, taille, larg, fam = "Public Sans", ls = 0, min = 16){
-  txt = String(txt == null ? "" : txt);
-  if(!(larg > 0)) return { txt, taille };
-  while(taille > min && largeur(ctx, txt, poids, taille, fam, ls) > larg) taille -= 2;
-  if(largeur(ctx, txt, poids, taille, fam, ls) > larg){
-    while(txt.length > 1 && largeur(ctx, txt + "…", poids, taille, fam, ls) > larg) txt = txt.slice(0, -1).trimEnd();
-    txt += "…";
-  }
-  return { txt, taille };
-}
-// `larg` : largeur maximale (le texte rétrécit, puis est coupé, plutôt que de sortir du cadre ou de toucher un voisin)
-function gras(ctx, txt, x, y, { poids = 700, taille = 30, fam = "Public Sans", couleur = "#fff", align = "left", ls = 0, larg = 0, min = 16 } = {}){
-  const a = ajuster(ctx, txt, poids, taille, larg, fam, ls, min);
-  ctx.font = `${poids} ${a.taille}px "${fam}"`; ctx.fillStyle = couleur; ctx.textAlign = align; ctx.textBaseline = "alphabetic";
-  ctx.letterSpacing = ls + "px"; ctx.fillText(a.txt, x, y); ctx.letterSpacing = "0px"; ctx.textAlign = "left";
-}
-function largeur(ctx, txt, poids, taille, fam = "Public Sans", ls = 0){
-  ctx.font = `${poids} ${taille}px "${fam}"`; ctx.letterSpacing = ls + "px";
-  const w = ctx.measureText(txt).width; ctx.letterSpacing = "0px"; return w;
-}
-// Plus grand nombre de lignes (≤ `max`) pour lequel le texte, à cette taille, tient dans `haut` pixels (au moins 1)
-function lignesQuiTiennent(ctx, texte, o, haut, max = 60){
-  let n = max;
-  while(n > 1 && storyHauteur(ctx, texte, { ...o, max: n }) > haut) n--;
-  return n;
-}
-// Pied des stories : source (2 lignes au plus, pour ne jamais toucher l'accroche) puis « accroche → @compte » (accroche coupée si la ligne dépasse la largeur utile)
-function pied(ctx, source, accroche){
-  storyTexte(ctx, String(source == null ? "" : source), marge, 1524, { taille: 23, couleur: STORY.ciel, max: 2, interligne: 1.2 });
-  accrocheFit(ctx, accroche, undefined);
-}
-function accrocheFit(ctx, accroche, y){
-  const compte = typeof COMPTE_STORY === "string" ? COMPTE_STORY : "@hemicyclefrance";
-  const f = t => { ctx.font = '700 24px "Public Sans"'; return ctx.measureText(`${t} → ${compte}`).width; };
-  let a = String(accroche || "");
-  if(f(a) > LARG){ while(a.length > 1 && f(a + "…") > LARG) a = a.slice(0, -1).trimEnd(); a += "…"; }
-  storyAccroche(ctx, a, y);
 }
 const T = t => storyTypo(t); // apostrophes typographiques, espaces normalisées
 /* Styles du test comparatif (champ `style` de la fiche : bleu, une-photo, question, chiffre) : la fiche `d` complète le thème (clé de THEMES_ACTU : photo d'institution ou motif) ;
-   renvoie false si le style bleu historique doit être dessiné. Fiches officielles : aucune presse, aucun portrait. */
+   renvoie false si le style historique (désormais la base blanche) doit être dessiné. Fiches officielles : aucune presse, aucun portrait. */
 async function dessinerStyle(ctx, s, d){
   const style = storyStyleValide(s?.style);
   if(style === "bleu") return false;
@@ -73,21 +36,8 @@ function condenser(t){
 }
 const phrases = t => T(t).split(/(?<=[.!?])\s+/).filter(Boolean);
 const maj = t => String(t || "").charAt(0).toUpperCase() + String(t || "").slice(1);
-
-// Trois cases « pour / contre / abstentions » (aucune couleur partisane) ; renvoie l'ordonnée sous les cases
-function cases(ctx, y, h, liste, taille = 92){
-  const gap = 18, w = (LARG - 2 * gap) / 3;
-  let tn = taille; // même taille pour les trois nombres, réduite pour qu'aucun ne déborde de sa case
-  for(const [, n] of liste) while(tn > 30 && largeur(ctx, fr(n ?? 0), 900, tn, "Public Sans", -2) > w - 28) tn -= 2;
-  liste.forEach(([nom, n], i) => {
-    const x = marge + i * (w + gap);
-    storyCarte(ctx, x, y, w, h);
-    const type = /^pour/i.test(nom) ? "pour" : /^contre/i.test(nom) ? "contre" : /^abst/i.test(nom) ? "abst" : null; // « Pour » vert, « Contre » rouge, « Abstentions » orange (le libellé reste écrit)
-    gras(ctx, fr(n ?? 0), x + w / 2, y + h * 0.58, { poids: 900, taille: tn, couleur: (type && storyVoixCouleur(type, "creme")) || STORY.encre, align: "center", ls: -2, larg: w - 28, min: 20 });
-    gras(ctx, nom.toUpperCase(), x + w / 2, y + h * 0.58 + 44, { poids: 800, taille: 24, couleur: STORY.pale, align: "center", ls: 3, larg: w - 20, min: 14 });
-  });
-  return y + h;
-}
+// Pied ancré en bas d'une story (source entière) ; renvoie la limite basse du contenu
+const pied = (ctx, source, o = {}) => storyBlancPiedBas(ctx, T(source), { bas: BLANC.bas - 10, ...o }) - 28;
 
 /* ---------- Story « Aujourd'hui à l'Assemblée » ---------- */
 STORY_PLUS.aujourdhui = async (ctx, s) => {
@@ -99,30 +49,29 @@ STORY_PLUS.aujourdhui = async (ctx, s) => {
     puces: s.style === "question" ? s.points.slice(0, 3).map(p => condenser(p.t)) : [], contexte: `${maj(s.jour)} : ${condenser(s.points[0].t)}`,
     chiffre: { valeur: String(nbPoints), legende: nbPoints > 1 ? "points à l'ordre du jour" : "point à l'ordre du jour" }, source, cta: "Tout l'agenda",
   })) return { nom: `aujourdhui-${s.iso || "x"}` };
-  let y = storyCadre(ctx, "Séance publique", { etiquette: "rouge" });
-  const titre = T("Aujourd'hui à l'Assemblée");
-  const tt = storyTailleFit(ctx, titre, y, y + 2 * 92, { tMax: 88, tMin: 60, police: "Newsreader", poids: 600, interligne: 1.04 });
-  y = storyTexte(ctx, titre, marge, y, { taille: tt, poids: 600, police: "Newsreader", couleur: "#fff", max: 2, interligne: 1.04 });
-  gras(ctx, maj(s.jour), marge, y + 44, { poids: 700, taille: 36, couleur: DA.ciel, larg: LARG, min: 22 });
-  y += 96;
-  const bas = 1480, tag = { qag: "Questions orales", vote: "Vote solennel", texte: "À l'ordre du jour" };
-  const lignes = { taille: 38, poids: 600, largeur: LARG - 56, max: 4, interligne: 1.2 };
-  const hCarte = p => 24 + 24 + 16 + storyHauteur(ctx, T(p.t), lignes) + 18;
-  // nombre de points dont les cartes tiennent ; s'il en reste (ou si d'autres points existent), la ligne « + N autres » garde sa place sous la dernière carte
-  let n = s.points.length;
-  const finCartes = k => s.points.slice(0, k).reduce((a, p) => a + hCarte(p) + 14, y);
-  while(n > 1 && finCartes(n) - 14 > ((n < s.points.length || s.autres > 0) ? bas - 46 : bas)) n--;
-  let reste = s.points.length - n;
+  let y = storyBlancCadre(ctx, "Séance publique", { date: maj(s.jour) });
+  const bas = pied(ctx, source);
+  y = storyBlancTitre(ctx, T("Aujourd'hui à l'Assemblée"), M, y, y + 2 * 100, { tMax: 96, tMin: 64 }).y + 4;
+  y = storyBlancTexte(ctx, `${nbPoints} point${nbPoints > 1 ? "s" : ""} à l'ordre du jour`, M, y, { taille: 32, poids: 600, couleur: BLANC.gris }) + 18;
+  const tag = { qag: "Questions orales", vote: "Vote solennel", texte: "À l'ordre du jour" };
+  const couleurTag = p => p.k === "vote" ? BLANC.rouge : p.k === "qag" ? BLANC.bleu : BLANC.gris;
+  const o = t => ({ taille: t, poids: 600, police: "Newsreader", largeur: LARG, interligne: 1.14 });
+  const hPoint = (p, t) => 26 + 14 + storyBlancHauteur(ctx, T(p.t), o(t)) + 26;
+  const hAutres = 56;
+  // taille la plus grande pour laquelle tous les points tiennent ; sinon, à la taille minimale, les derniers points passent dans « + N autres »
+  let t = 46, n = s.points.length;
+  const total = (k, tt) => s.points.slice(0, k).reduce((a, p) => a + hPoint(p, tt), 0) + ((k < s.points.length || s.autres > 0) ? hAutres : 0);
+  while(t > 30 && y + total(n, t) > bas) t -= 2;
+  while(n > 1 && y + total(n, t) > bas) n--;
+  storyBlancFilet(ctx, y, { epais: 3, couleur: BLANC.encre });
   for(const p of s.points.slice(0, n)){
-    const h = hCarte(p);
-    storyCarte(ctx, marge, y, LARG, h);
-    gras(ctx, T(tag[p.k] || tag.texte).toUpperCase(), marge + 28, y + 24 + 16, { poids: 800, taille: 20, couleur: p.k === "vote" ? STORY.rouge : p.k === "qag" ? STORY.bleu : STORY.pale, ls: 3, larg: LARG - 56, min: 14 });
-    storyTexte(ctx, T(p.t), marge + 28, y + 24 + 24 + 8, { ...lignes, couleur: STORY.encre });
-    y += h + 14;
+    const h = hPoint(p, t);
+    storyBlancCaps(ctx, tag[p.k] || tag.texte, M, y + 24, { taille: 22, couleur: couleurTag(p), ls: 3 });
+    storyBlancTexte(ctx, T(p.t), M, y + 24 + 36, o(t));
+    y += h; storyBlancFilet(ctx, y);
   }
-  const autres = (s.autres || 0) + reste;
-  if(autres > 0) gras(ctx, `+ ${autres} autre${autres > 1 ? "s" : ""} point${autres > 1 ? "s" : ""} à l'ordre du jour`, marge, Math.min(y + 30, bas + 24), { poids: 700, taille: 28, couleur: DA.ciel, larg: LARG, min: 18 });
-  pied(ctx, s.source || "Source : Assemblée nationale, ordre du jour des séances publiques.", "Tout l'agenda");
+  const autres = (s.autres || 0) + (s.points.length - n);
+  if(autres > 0) storyBlancTexte(ctx, `+ ${autres} autre${autres > 1 ? "s" : ""} point${autres > 1 ? "s" : ""} à l'ordre du jour`, M, y + 14, { taille: 30, poids: 700, couleur: BLANC.rouge });
   return { nom: `aujourdhui-${s.iso || "x"}` };
 };
 
@@ -134,7 +83,8 @@ STORY_PLUS["vote-jour"] = async (ctx, s) => {
     if(r) return { nom:`vote-jour-${s.numero || "x"}` };
   }
   await polices();
-  const verdict = s.verdict === "adopte" ? "Adopté\u2060✓" : "Rejeté\u2060✕"; // signe collé au mot : la couleur n'est jamais seule
+  const adopte = s.verdict === "adopte";
+  const verdict = adopte ? "Adopté⁠✓" : "Rejeté⁠✕"; // signe collé au mot : la couleur n'est jamais seule
   const voix = (n, mot) => `${fr(n ?? 0)} ${mot}`;
   if(await dessinerStyle(ctx, s, {
     cle: "assemblee", fond: "noir", categorie: "Le vote du jour",
@@ -144,19 +94,27 @@ STORY_PLUS["vote-jour"] = async (ctx, s) => {
     chiffre: { valeur: fr(s.pour ?? 0), legende: "voix pour", type: "pour" }, contexte: `${verdict} (${fr(s.contre ?? 0)} contre, ${fr(s.abst ?? 0)} abstentions) : ${storyMots(T(s.dossier || s.objet), 12)}`,
     source: s.sourceTxt, cta: "Chaque jour de séance", colorerVoix: true,
   })) return { nom: `vote-jour-${s.numero || "x"}` };
-  let y = storyCadre(ctx, `Le vote du jour · ${s.date}`, { etiquette: "blanc" });
-  gras(ctx, String(s.type || "Scrutin public").toUpperCase(), marge, y + 30, { poids: 700, taille: 28, couleur: DA.ciel, ls: 4, larg: LARG, min: 18 });
-  y += 62;
-  const tv = 170;
-  storyVerdict(ctx, s.verdict, s.verdict === "adopte" ? "Adopté" : "Rejeté", marge, y + tv * 0.82, tv);
-  y += tv * 0.82 + 40;
-  const yCases = 1180;
+  let y = storyBlancCadre(ctx, "Le vote du jour", { date: s.date });
+  const bas = pied(ctx, s.sourceTxt);
+  storyBlancCaps(ctx, s.type || "Scrutin public", M, y, { taille: 24, couleur: BLANC.gris });
+  y += 52;
+  const tv = 112; // pastille ✓ / ✕ et mot, côte à côte
+  storyBlancVerdict(ctx, adopte, M, y, tv);
+  ctx.font = `800 ${tv * 0.92}px "Public Sans"`; ctx.letterSpacing = "-2px"; ctx.fillStyle = BLANC.encre; ctx.textBaseline = "alphabetic";
+  ctx.fillText(adopte ? "ADOPTÉ" : "REJETÉ", M + tv + 30, y + tv * 0.8); ctx.letterSpacing = "0px";
+  y += tv + 34;
+  storyBlancFilet(ctx, y, { epais: 3, couleur: BLANC.encre }); y += 28;
+  const hVoix = 232, yVoix = Math.min(bas - hVoix, 1330), haut = y;
   const objet = T(s.objet);
-  const tt = storyTailleFit(ctx, objet, y, yCases - 150, { tMax: 60, tMin: 38, police: "Newsreader", poids: 600, interligne: 1.08 });
-  y = storyTexte(ctx, objet, marge, y, { taille: tt, poids: 600, police: "Newsreader", couleur: "#fff", max: 6, interligne: 1.08 });
-  if(s.dossier) y = storyTexte(ctx, T(`Texte : ${s.dossier}`), marge, y + 6, { taille: 28, poids: 600, couleur: DA.ciel, max: 3, interligne: 1.2 });
-  cases(ctx, yCases, 250, [["Pour", s.pour], ["Contre", s.contre], ["Abstentions", s.abst]]);
-  pied(ctx, s.sourceTxt, "Chaque jour de séance");
+  const dossier = s.dossier ? T(`Texte : ${s.dossier}`) : "";
+  const hDossier = dossier ? storyBlancHauteur(ctx, dossier, { taille: 28, poids: 600 }) + 14 : 0;
+  const rt = storyBlancTitre(ctx, objet, M, y, yVoix - 50 - hDossier, { tMax: 64, tMin: 36 });
+  y = rt.y;
+  if(dossier) y = storyBlancTexte(ctx, dossier, M, y + 10, { taille: 28, poids: 600, couleur: BLANC.gris });
+  const total = (s.pour || 0) + (s.contre || 0) + (s.abst || 0) || 1;
+  const yV = Math.max(yVoix, y + 50);
+  storyBlancBarreEmpilee(ctx, M, yV, LARG, 26, [[s.pour || 0, BLANC_VOIX.pour], [s.contre || 0, BLANC_VOIX.contre], [s.abst || 0, BLANC_VOIX.abst]], total);
+  storyBlancVoix(ctx, yV + 44, [["Pour", s.pour, "pour"], ["Contre", s.contre, "contre"], ["Abstentions", s.abst, "abst"]], { hauteur: 190, taille: 110 });
   return { nom: `vote-jour-${s.numero || "x"}` };
 };
 
@@ -169,18 +127,12 @@ STORY_PLUS.comprendre = async (ctx, s) => {
     accroche: s.style === "question" ? `${T(s.titre)} : de quoi parle-t-on ?` : T(s.titre), essentiel: phrases(s.texte)[0] || T(s.texte),
     puces: phrases(s.texte).slice(0, 3), source: s.sourceTxt, cta: "Une notion par semaine",
   })) return { nom: `comprendre-${s.cle || "x"}` };
-  let y = storyCadre(ctx, `Comprendre · notion ${s.n}/${s.total}`, { etiquette: "blanc" });
-  const titre = T(s.titre), texte = T(s.texte);
-  const tt = storyTailleFit(ctx, titre, y, y + 3 * 90, { tMax: 82, tMin: 50, police: "Newsreader", poids: 600, interligne: 1.05 });
-  y = storyTexte(ctx, titre, marge, y, { taille: tt, poids: 600, police: "Newsreader", couleur: "#fff", max: 3, interligne: 1.05 });
-  y += 22;
-  const bas = 1480, hc = bas - y;
-  storyCarte(ctx, marge, y, LARG, hc);
-  const t = storyTailleFit(ctx, texte, y + 36, bas - 36, { tMax: 46, tMin: 24, poids: 500, largeur: LARG - 72, interligne: 1.34 });
-  const o = { taille: t, poids: 500, largeur: LARG - 72, interligne: 1.34 };
-  const nl = lignesQuiTiennent(ctx, texte, o, hc - 60, 30); // texte très long : coupé (« … ») pour rester dans la carte
-  storyTexte(ctx, texte, marge + 36, y + 30, { ...o, couleur: STORY.encre, max: nl });
-  pied(ctx, s.sourceTxt, "Une notion par semaine");
+  let y = storyBlancCadre(ctx, `Comprendre · notion ${s.n}/${s.total}`);
+  const bas = pied(ctx, s.sourceTxt);
+  y = storyBlancTitre(ctx, T(s.titre), M, y, y + 3 * 96, { tMax: 92, tMin: 56 }).y + 14;
+  storyBlancFilet(ctx, y, { epais: 6, couleur: BLANC.rouge, largeur: 120 });
+  y += 34;
+  const r = storyBlancFit(ctx, T(s.texte), M, y, bas, { tMax: 50, tMin: 24, poids: 500, interligne: 1.36 });
   return { nom: `comprendre-${s.cle || "x"}` };
 };
 
@@ -194,118 +146,110 @@ STORY_PLUS["chiffre-jour"] = async (ctx, s) => {
     puces: [[s.valeur, s.soustitre].filter(Boolean).map(T).join(" "), s.periode && T(s.periode), ...(s.lignes || []).filter(Boolean).map(T)].filter(Boolean).slice(0, 3),
     chiffre: { valeur: T(s.valeur), legende: T(s.soustitre || s.periode || "") }, contexte: T(s.libelle), source: s.sourceTxt, cta: "Un chiffre par jour",
   })) return { nom: `chiffre-${s.cle || "x"}` };
-  let y = storyCadre(ctx, "Le chiffre du jour", { etiquette: "rouge" });
-  const libelle = T(s.libelle);
-  const tl = storyTailleFit(ctx, libelle, y, y + 2 * 80, { tMax: 76, tMin: 46, police: "Newsreader", poids: 600, interligne: 1.05 });
-  y = storyTexte(ctx, libelle, marge, y, { taille: tl, poids: 600, police: "Newsreader", couleur: "#fff", max: 2, interligne: 1.05 });
-  y += 10;
-  y = storyChiffreHeros(ctx, T(s.valeur), marge, y + 230, "#fff", 250);
-  y += 36;
-  if(s.soustitre) y = storyTexte(ctx, T(s.soustitre), marge, y - 6, { taille: 36, poids: 700, couleur: DA.rose, max: 2, interligne: 1.15 });
-  const bas = 1480;
-  if(s.periode){
-    const a = ajuster(ctx, s.periode, 700, 28, LARG - 40, "Public Sans", 0, 18);
-    const w = largeur(ctx, a.txt, 700, a.taille) + 40;
-    ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.strokeRect(marge + 1.5, y + 11.5, w - 3, 53);
-    gras(ctx, a.txt, marge + 20, y + 47, { taille: a.taille });
-    y += 76 + 18;
-  }
+  let y = storyBlancCadre(ctx, "Le chiffre du jour");
+  const bas = pied(ctx, s.sourceTxt);
+  y = storyBlancTitre(ctx, T(s.libelle), M, y, y + 3 * 80, { tMax: 76, tMin: 44 }).y + 16;
+  storyBlancFilet(ctx, y, { epais: 3, couleur: BLANC.encre }); y += 18;
+  // le chiffre, en grand, sur toute la largeur utile
+  let tv = 260; const valeur = T(s.valeur);
+  ctx.font = `600 ${tv}px "Newsreader"`; ctx.letterSpacing = "-4px";
+  while(tv > 90 && ctx.measureText(valeur).width > LARG){ tv -= 6; ctx.font = `600 ${tv}px "Newsreader"`; }
+  ctx.fillStyle = BLANC.rouge; ctx.textBaseline = "alphabetic"; ctx.fillText(valeur, M - 6, y + tv * 0.82); ctx.letterSpacing = "0px";
+  y += tv * 0.82 + 70;
+  if(s.soustitre) y = storyBlancTexte(ctx, T(s.soustitre), M, y, { taille: 40, poids: 700 }) + 8;
+  if(s.periode){ y += 4; storyBlancEtiquette(ctx, T(s.periode), M, y, { taille: 24, couleur: BLANC.gris, ls: 1 }); y += 24 * 1.9 + 30; }
   const lignes = (s.lignes || []).filter(Boolean).map(T);
-  if(lignes.length && bas - y > 110){
-    // taille puis nombre de lignes par élément réduits jusqu'à ce que tout tienne dans la carte ; à défaut, les derniers éléments sont retirés
-    const mesure = (liste, tl, ml) => 2 * 30 + liste.reduce((a, l) => a + storyHauteur(ctx, l, { taille: tl, poids: 500, largeur: LARG - 64, max: ml, interligne: 1.28 }) + 12, 0);
-    let liste = lignes, tl = 36, ml = 5;
-    const tient = () => mesure(liste, tl, ml) <= bas - y;
-    while(!tient() && tl > 26) tl -= 2;
-    while(!tient() && ml > 1) ml--;
-    while(!tient() && liste.length > 1) liste = liste.slice(0, -1);
-    const h = Math.min(bas - y, mesure(liste, tl, ml));
-    storyCarte(ctx, marge, y, LARG, h);
-    let yy = y + 26;
-    for(const l of liste) yy = storyTexte(ctx, l, marge + 32, yy, { taille: tl, poids: 500, couleur: STORY.encre, largeur: LARG - 64, max: ml, interligne: 1.28 }) + 12;
+  if(lignes.length){
+    storyBlancFilet(ctx, y); y += 6;
+    // la taille diminue jusqu'à ce que tout tienne ; rien n'est retiré ni coupé tant que la taille minimale le permet
+    const mesure = tl => lignes.reduce((a, l) => a + storyBlancHauteur(ctx, l, { taille: tl, poids: 500, largeur: LARG - 40, interligne: 1.28 }) + 30, 0);
+    let tl = 38; while(tl > 22 && y + mesure(tl) > bas) tl -= 2;
+    for(const l of lignes){
+      storyBlancPuce(ctx, M, y + 22 + tl * 0.3, 14);
+      const yy = storyBlancTexte(ctx, l, M + 40, y + 20, { taille: tl, poids: 500, largeur: LARG - 40, interligne: 1.28 });
+      y = yy + 10; storyBlancFilet(ctx, y); y += 6;
+    }
   }
-  pied(ctx, s.sourceTxt, "Un chiffre par jour");
   return { nom: `chiffre-${s.cle || "x"}` };
 };
 
 /* ---------- Image de carrousel (1080 × 1350) ---------- */
-// Cadre des stories décalé vers le haut ; renvoie l'ordonnée où commence le contenu
-function cadreDiapo(ctx, surtitre, opts){
-  storyFondTheme(ctx); // fond généré à la taille de l'image (1080 × 1350), puis cadre décalé sans refaire le fond
-  ctx.save(); ctx.translate(0, -DECALAGE);
-  const y = storyCadre(ctx, surtitre, { ...opts, sansFond: true }) - DECALAGE;
-  ctx.restore();
-  return y;
-}
 STORY_PLUS.diapo = async (ctx, s) => {
   if(!s || !s.titre || !Array.isArray(s.corps)) return null;
   await polices();
-  const bas = H_DIAPO - 160, cv = Boolean(s.couverture);
-  let y = cadreDiapo(ctx, T(s.kicker || "Hémicycle France"), { etiquette: cv ? "rouge" : "blanc" }); // 190
-  if(s.total > 1) gras(ctx, `${s.n}/${s.total}`, L - marge, 62 + 14, { poids: 800, taille: 34, couleur: DA.ciel, align: "right", ls: 2 });
-  y += 8;
-  const titre = T(s.titre);
-  const tMax = cv ? 88 : 76, tMin = cv ? 52 : 44, maxL = cv ? 6 : 3;
-  const tt = storyTailleFit(ctx, titre, y, y + maxL * (tMax + 6), { tMax, tMin, police: "Newsreader", poids: 600, interligne: 1.06 });
-  y = storyTexte(ctx, titre, marge, y, { taille: tt, poids: 600, police: "Newsreader", couleur: "#fff", max: maxL, interligne: 1.06 });
-  y += 22;
-  // Les blocs sont dessinés dans l'ordre ; la taille du texte est la plus grande pour laquelle tout tient avant `bas`,
-  // puis (à la taille minimale) le nombre de lignes par bloc est réduit (« … »), enfin les derniers blocs qui ne tiennent pas sont omis : rien ne déborde sur la source
-  const hauteurs = (taille, cap) => s.corps.reduce((a, b) => a + hauteurBloc(ctx, b, taille, cap), 0);
-  let taille = cv ? 36 : 44, cap = 99;
-  while(taille > 26 && y + hauteurs(taille, cap) > bas) taille -= 2;
-  while(cap > 1 && y + hauteurs(taille, cap) > bas) cap = cap > 8 ? 8 : cap - 1;
+  const cv = Boolean(s.couverture), haut = 56;
+  let y = storyBlancCadre(ctx, T(s.kicker || "Hémicycle France"), { date: s.total > 1 ? `${s.n}/${s.total}` : "", haut });
+  const bas = storyBlancPiedBas(ctx, T(s.source || "Source : données officielles."), { bas: H_DIAPO - 30, taille: 22 }) - 22;
+  const tMax = cv ? 88 : 72, tMin = cv ? 52 : 44, maxL = cv ? 6 : 3;
+  y = storyBlancTitre(ctx, T(s.titre), M, y, y + maxL * (tMax + 6), { tMax, tMin }).y + 14;
+  // Les blocs sont dessinés dans l'ordre ; la taille du texte est la plus grande pour laquelle tout tient avant `bas` ; à la taille minimale seulement,
+  // les derniers blocs qui ne tiennent toujours pas sont omis : rien ne déborde sur la source
+  const hauteurs = taille => s.corps.reduce((a, b) => a + hauteurBloc(ctx, b, taille), 0);
+  let taille = cv ? 36 : 44;
+  while(taille > 22 && y + hauteurs(taille) > bas) taille -= 2;
   for(const b of s.corps){
-    if(y + hauteurBloc(ctx, b, taille, cap) > bas) break;
-    y = dessinerBloc(ctx, b, y, taille, bas, cap);
+    if(y + hauteurBloc(ctx, b, taille) > bas) break;
+    y = dessinerBloc(ctx, b, y, taille);
   }
-  storyTexte(ctx, T(s.source || "Source : données officielles."), marge, H_DIAPO - 142, { taille: 23, couleur: STORY.ciel, max: 2, interligne: 1.2 });
-  accrocheFit(ctx, T(s.accroche || (s.n < s.total ? "Faites défiler" : "Toute l'actu politique")), H_DIAPO - 40);
   return { nom: `diapo-${s.n || 1}` };
 };
-// Mesure d'un bloc de carrousel (même logique que dessinerBloc, sans dessiner) ; `cap` : nombre de lignes maximal par paragraphe
-function hauteurBloc(ctx, b, t, cap = 99){
+// Mesure d'un bloc de carrousel (même logique que dessinerBloc, sans dessiner)
+function hauteurBloc(ctx, b, t){
   const tp = b.taille ? Math.min(b.taille, t) : t;
-  if(b.p) return storyHauteur(ctx, T(b.p), { taille: tp, poids: b.poids || 500, max: Math.min(b.max || 8, cap), interligne: 1.3 }) + 12;
-  if(b.li) return b.li.reduce((a, x) => a + storyHauteur(ctx, T(x), { taille: t, poids: 500, largeur: LARG - 44, max: Math.min(6, cap), interligne: 1.28 }) + 18, 0);
-  if(b.carte) return 2 * 30 + storyHauteur(ctx, T(b.carte), { taille: t, poids: 600, largeur: LARG - 64, max: Math.min(8, cap), interligne: 1.26 }) + 20;
-  if(b.cases) return 280 + 16;
-  if(b.gros) return 150 * 0.82 + 40;
+  if(b.p) return storyBlancHauteur(ctx, T(b.p), { taille: tp, poids: b.poids || 500, interligne: 1.3 }) + 14;
+  if(b.li) return b.li.reduce((a, x) => a + storyBlancHauteur(ctx, T(x), { taille: t, poids: 500, largeur: LARG - 40, interligne: 1.28 }) + 16, 0);
+  if(b.carte) return 2 * 26 + storyBlancHauteur(ctx, T(b.carte), { taille: t, poids: 600, police: "Newsreader", largeur: LARG - 64, interligne: 1.22 }) + 22;
+  if(b.cases) return 190 + 20 + 50;
+  if(b.gros) return /^(adopt|rejet)/i.test(b.gros) ? 128 + 50 : 150 * 0.82 + 40;
   if(b.kv) return b.kv.length * (t + 40) + 10;
   return 0;
 }
-function dessinerBloc(ctx, b, y, t, bas, cap = 99){
+function dessinerBloc(ctx, b, y, t){
   const tp = b.taille ? Math.min(b.taille, t) : t;
-  if(b.p){
-    return storyTexte(ctx, T(b.p), marge, y, { taille: tp, poids: b.poids || 500, couleur: b.couleur === "ciel" ? DA.ciel : "#fff", max: Math.min(b.max || 8, cap), interligne: 1.3 }) + 12;
-  }
+  if(b.p) return storyBlancTexte(ctx, T(b.p), M, y, { taille: tp, poids: b.poids || 500, couleur: b.couleur === "ciel" ? BLANC.gris : BLANC.encre, interligne: 1.3 }) + 14;
   if(b.li){
     for(const x of b.li){
-      const o = { taille: t, poids: 500, largeur: LARG - 44, max: Math.min(6, cap), interligne: 1.28 };
-      ctx.fillStyle = DA.rose; ctx.fillRect(marge, y + t * 0.42, 14, 14);
-      y = storyTexte(ctx, T(x), marge + 40, y, { ...o, couleur: "#fff" }) + 18;
+      storyBlancPuce(ctx, M, y + t * 0.3, 14);
+      y = storyBlancTexte(ctx, T(x), M + 40, y, { taille: t, poids: 500, largeur: LARG - 40, interligne: 1.28 }) + 16;
     }
     return y;
   }
   if(b.carte){
-    const o = { taille: t, poids: 600, largeur: LARG - 64, max: Math.min(8, cap), interligne: 1.26 };
-    const h = 2 * 30 + storyHauteur(ctx, T(b.carte), o);
-    storyCarte(ctx, marge, y, LARG, h);
-    storyTexte(ctx, T(b.carte), marge + 32, y + 28, { ...o, couleur: STORY.encre });
-    return y + h + 20;
+    const o = { taille: t, poids: 600, police: "Newsreader", largeur: LARG - 64, interligne: 1.22 };
+    const h = 2 * 26 + storyBlancHauteur(ctx, T(b.carte), o);
+    ctx.fillStyle = BLANC.fondDoux; ctx.fillRect(M, y, LARG, h);
+    ctx.fillStyle = BLANC.rouge; ctx.fillRect(M, y, 8, h);
+    storyBlancTexte(ctx, T(b.carte), M + 36, y + 26, o);
+    return y + h + 22;
   }
-  if(b.cases) return cases(ctx, y + 10, 280, b.cases, 100) + 16;
+  if(b.cases){
+    const types = b.cases.map(([nom]) => /^pour/i.test(nom) ? "pour" : /^contre/i.test(nom) ? "contre" : "abst"); // « Ni pour ni contre » : abstentions
+    const tot = b.cases.reduce((a, [, n]) => a + (n || 0), 0) || 1;
+    storyBlancBarreEmpilee(ctx, M, y + 8, LARG, 24, b.cases.map(([, n], i) => [n || 0, BLANC_VOIX[types[i]]]), tot);
+    return storyBlancVoix(ctx, y + 58, b.cases.map(([nom, n], i) => [nom, n, types[i]]), { hauteur: 190, taille: 100 }) + 20;
+  }
+  if(b.gros && /^(adopt|rejet)/i.test(b.gros)){ // verdict : pastille ✓ / ✕ et mot, jamais la couleur seule
+    const adopte = /^adopt/i.test(b.gros), tv = 128;
+    storyBlancVerdict(ctx, adopte, M, y + 6, tv);
+    ctx.font = `600 ${tv * 1.1}px "Newsreader"`; ctx.fillStyle = BLANC.encre; ctx.textBaseline = "alphabetic"; ctx.letterSpacing = "-2px";
+    ctx.fillText(b.gros, M + tv + 30, y + 6 + tv * 0.84); ctx.letterSpacing = "0px";
+    return y + tv + 50;
+  }
   if(b.gros){
-    const tv = 150; gras(ctx, b.gros, marge - 4, y + tv * 0.82, { poids: 900, taille: tv, ls: -tv * 0.03, larg: LARG + 4, min: 40 });
+    const tv = 150; ctx.font = `600 ${tv}px "Newsreader"`; ctx.letterSpacing = "-3px";
+    let tt = tv; while(tt > 40 && ctx.measureText(b.gros).width > LARG + 4){ tt -= 4; ctx.font = `600 ${tt}px "Newsreader"`; }
+    ctx.fillStyle = BLANC.rouge; ctx.textBaseline = "alphabetic"; ctx.fillText(b.gros, M - 4, y + tv * 0.82); ctx.letterSpacing = "0px";
     return y + tv * 0.82 + 40;
   }
   if(b.kv){
     for(const [k, v] of b.kv){
-      ctx.fillStyle = DA.filet; ctx.fillRect(marge, y, LARG, 2);
-      // la valeur (à droite) garde sa place ; le libellé (à gauche) rétrécit, puis est coupé, avant de la toucher
-      const av = ajuster(ctx, T(v), 900, Math.round(t * 1.1), LARG * 0.62, "Public Sans", 0, 16);
-      gras(ctx, av.txt, L - marge, y + t + 18, { poids: 900, taille: av.taille, align: "right" });
-      gras(ctx, T(k), marge, y + t + 14, { poids: 600, taille: Math.round(t * 0.8), couleur: DA.ciel, larg: LARG - largeur(ctx, av.txt, 900, av.taille) - 28, min: 14 });
+      storyBlancFilet(ctx, y);
+      // la valeur (à droite) garde sa place ; le libellé (à gauche) occupe le reste et, si besoin, s'écrit sur plusieurs lignes à gauche de la valeur
+      ctx.font = `800 ${Math.round(t * 1.05)}px "Public Sans"`;
+      let tv = Math.round(t * 1.05); while(tv > 16 && ctx.measureText(T(v)).width > LARG * 0.6){ tv -= 2; ctx.font = `800 ${tv}px "Public Sans"`; }
+      const wv = ctx.measureText(T(v)).width;
+      ctx.fillStyle = BLANC.encre; ctx.textAlign = "right"; ctx.fillText(T(v), L - M, y + t + 14); ctx.textAlign = "left";
+      storyBlancLigne(ctx, T(k), M, y + 14, { taille: Math.round(t * 0.8), poids: 600, couleur: BLANC.gris, largeur: LARG - wv - 28, min: 16 });
       y += t + 40;
     }
     return y + 10;
