@@ -1215,8 +1215,11 @@ assert.ok(choixS([inst("Ifop", 24, { scores: { "Marine Le Pen": [30, 35] } })]).
   assert.deepStrictEqual(A.argsAvecVariante([0, "t", null, null, null], "bleu", "x").slice(8), [null, { accroche: "x" }], "style bleu : le titre-fait est transmis lui aussi (gros titre)");
   // le dessin des styles vit dans js/stories.js : mêmes règles que le cahier des charges (taille de texte, nombre de mots, zones de sécurité)
   const src = readFileSync(new URL("../js/stories.js", import.meta.url), "utf-8");
-  for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'ESSENTIEL"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);
-  assert.match(src, /storyStylePied\(ctx, d, \{ doux:"#D9DEF2", texte:"#FFFFFF", credit:true \}\)/, "le crédit de la photo est affiché avec la photo");
+  for (const mot of ["une-photo", "question", "chiffre", "storyStyleDessiner", "L'essentiel", "storyBlancPile"]) assert.ok(src.includes(mot), `js/stories.js : ${mot}`);
+  // base blanche : plus de fond coloré, de dégradé, de grain ni de fond généré dans les styles
+  const blocStyles = src.slice(src.indexOf("Trois mises en page BLANCHES"), src.indexOf("Point d'entrée : dessine la fiche"));
+  assert.ok(blocStyles.length > 1000 && !/createLinearGradient|createRadialGradient|storyFondGenere|storyFondTheme|STORY_DA\.(?:fond|nuit)|storyMarque\(/.test(blocStyles), "styles de story : fond blanc uni, ni dégradé ni fond généré");
+  assert.match(blocStyles, /legende:d\.photo\?\.img \? \(d\.photo\.credit \|\| ""\) : ""/, "le crédit de la photo est affiché avec la photo");
   assert.ok(!/https?:\/\/[^"'`\s]*\.(?:jpe?g|png|woff2?)/.test(src.slice(src.indexOf("Styles de story du test comparatif"), src.indexOf("Stories d'actualité : modules séparés"))), "aucune ressource externe dans les styles (CSP)");
 }
 

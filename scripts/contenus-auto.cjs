@@ -264,7 +264,7 @@ function choisirAujourdhui({ agenda, jour, now }) {
   const nTextes = sujets.length;
   return { contenu: {
     type: "aujourdhui", cle: jour, rendu: { kind: "story", type: "aujourdhui", spec: { iso: jour, jour: jourTxt, points: points.slice(0, 7), autres: Math.max(0, points.length - 7), source: "Source : Assemblée nationale, programme des débats dans l'hémicycle (assemblee-nationale.fr). Il peut encore changer." } },
-    entree: { titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `Aujourd'hui, les députés se réunissent : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : le programme du débat dans l'hémicycle de l'Assemblée nationale, ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote des députés : " : "") + p.t).join(" ; ")}. Source : Assemblée nationale.` },
+    entree: { rubrique: "Assemblée nationale", titre: `Aujourd'hui à l'Assemblée : ${jourTxt}`, titrePropre: "Aujourd'hui à l'Assemblée", accroche: `Aujourd'hui, les députés se réunissent : ${nTextes} ${nTextes > 1 ? "textes" : "texte"} au programme`, sujets, sources: [sourceUrl], alt: `Story Hémicycle France : le programme du débat dans l'hémicycle de l'Assemblée nationale, ${jourTxt}. ${points.map((p) => (p.k === "vote" ? "Vote des députés : " : "") + p.t).join(" ; ")}. Source : Assemblée nationale.` },
   } };
 }
 
@@ -323,7 +323,7 @@ function choisirVoteDuJour({ lois, jour, now }) {
     return { contenu: {
       _vote: { l, t, objet, objetOfficiel, typeCourt, verbe, url, censure: cl.type === "Motion de censure" },
       type: "vote-jour", cle: String(l.numero), rendu: { kind: "story", type: "vote-jour", spec: { date: l.date, type: typeAff, objet, dossier: l.dossierTitre ? coupe(clair(l.dossierTitre), 150) : "", verdict: l.resultat, pour: t.pour, contre: t.contre, abst: t.abst, numero: l.numero, votes: l.votes, censure: cl.type === "Motion de censure", sourceTxt: `Source : Assemblée nationale, vote n°${l.numero} (assemblee-nationale.fr). Résultat officiel.` } },
-      entree: { titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
+      entree: { rubrique: "Assemblée nationale", titre: `Le vote du jour : ${typeCourt}, résultat : ${verbe} (${l.date})`, titrePropre: l.dossierTitre ? coupe(l.dossierTitre, 150) : coupe(objetOfficiel, 150), sujets: [objetOfficiel, l.dossierTitre].filter(Boolean), voteId: `an-${l.numero}`, sources: [url],
         alt: `Story Hémicycle France, le vote du jour. Vote des députés à l'Assemblée nationale le ${l.date} : ${typeCourt}. Résultat : ${verbe}. Pour : ${nbFr(t.pour)}, contre : ${nbFr(t.contre)}, abstentions (ni pour ni contre) : ${nbFr(t.abst)}. Vote n°${l.numero}. ${objet}` },
     } };
   }
@@ -369,7 +369,7 @@ function choisirComprendre({ notions, etat, jour }) {
   return { contenu: {
     type: "comprendre", cle: semaine, notion: n.cle,
     rendu: { kind: "story", type: "comprendre", spec: { n: sures.indexOf(n) + 1, total: sures.length, cle: n.cle, titre: n.titre, texte: n.texte, sourceTxt: n.sourceTxt } },
-    entree: { titre: `Comprendre : ${n.titre}`, titrePropre: n.titre, sujets: [n.titre], sources: [], cle: n.cle, alt: `Story Hémicycle France, rubrique Comprendre (notion ${sures.indexOf(n) + 1} sur ${sures.length}) : ${n.titre}. ${n.texte} ${n.sourceTxt}` },
+    entree: { rubrique: "Décryptage", titre: `Comprendre : ${n.titre}`, titrePropre: n.titre, sujets: [n.titre], sources: [], cle: n.cle, alt: `Story Hémicycle France, rubrique Comprendre (notion ${sures.indexOf(n) + 1} sur ${sures.length}) : ${n.titre}. ${n.texte} ${n.sourceTxt}` },
   } };
 }
 
@@ -449,7 +449,7 @@ function choisirChiffre({ indicateurs, budget, sondages, veille = null, etat, jo
   return { contenu: {
     type: "chiffre-jour", cle: jour, chiffre: c.cle,
     rendu: { kind: "story", type: "chiffre-jour", spec: c.spec },
-    entree: { titre: c.titre, titrePropre: c.spec.libelle, sujets: [c.spec.libelle], sources: c.sources, ...(c.sondage ? { reserve: true, nommePersonne: true } : {}), alt: `Story Hémicycle France, le chiffre du jour : ${c.texte} ${c.spec.sourceTxt}` },
+    entree: { rubrique: (c.sondage ? "Sondage" : "Chiffres"), titre: c.titre, titrePropre: c.spec.libelle, sujets: [c.spec.libelle], sources: c.sources, ...(c.sondage ? { reserve: true, nommePersonne: true } : {}), alt: `Story Hémicycle France, le chiffre du jour : ${c.texte} ${c.spec.sourceTxt}` },
   } };
 }
 
@@ -574,7 +574,7 @@ function choisirCarrouselLoi({ lois, senat, navette, etat, jour, now, file, regi
     ];
     return { contenu: {
       type: "carrousel-loi", cle: v.voteId, rendu: { kind: "carrousel", specs, alts },
-      entree: { titre: `Une loi expliquée : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteId: v.voteId, sources: [f.source, urlDossier].filter(Boolean), legende, alt: alts[0] },
+      entree: { rubrique: an ? "Assemblée nationale" : "Sénat", titre: `Une loi expliquée : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteId: v.voteId, sources: [f.source, urlDossier].filter(Boolean), legende, alt: alts[0] },
     } };
   }
   return { refus: refusLoi };
@@ -614,7 +614,7 @@ function choisirVoteDuJourPost({ lois, jour, now }) {
   if (reserveStory(now) && [sp.objet, sp.dossier, k.entree.titre].some(SA.parleDeSondage)) return { refus: "réserve électorale : texte qui parle de sondages" };
   const hashtags = hashtagsLegende({ genre: "autre", chambre: "an", theme: "assemblee", titre: sp.dossier || sp.objet, max: 5, seed: `vj|${l.numero}` });
   const legende = [
-    varLegende(`vj|${l.numero}`, "t", [`Vote du jour à l'Assemblée nationale : ${typeCourt}, ${verbe} (${l.date})`, `À l'Assemblée nationale, ${typeCourt} ${verbe} le ${l.date}`, `Ce qui s'est voté à l'Assemblée le ${l.date} : ${typeCourt}, ${verbe}`]),
+    varLegende(`vj|${l.numero}`, "t", [`Assemblée nationale : ${typeCourt} ${verbe} (${l.date})`, `Assemblée nationale. Les députés se sont prononcés le ${l.date} : ${typeCourt} ${verbe}`, `Ce qui s'est voté à l'Assemblée le ${l.date} : ${typeCourt}, ${verbe}`]),
     "",
     objet,
     ...(sp.dossier ? [`Texte concerné : ${sp.dossier}.`] : []),
@@ -662,7 +662,7 @@ function choisirVoteLoi({ lois, etat, jour, now, registre }) {
     return { contenu: {
       type: "vote-loi", cle: v.voteId,
       rendu: { kind: "story", type: "vote-groupes", spec: { format: "story", titre: f.titreAffiche, date: sp.date, chambre: "Assemblée nationale", numero: sp.numero, verdict: sp.verdict, pour: sp.pour, contre: sp.contre, abst: sp.abst, votes: l.votes, ...(auteur ? { auteur } : {}), sourceTxt: sp.sourceTxt } },
-      entree: { titre: `Le vote final par groupe : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteIdGroupes: v.voteId, sources: [f.source], ...(auteur ? { nommePersonne: true } : {}),
+      entree: { rubrique: "Assemblée nationale", titre: `Le vote final par groupe : ${f.titreCourt} (${verbe})`, titrePropre: f.titreCourt, sujets: [f.titreCourt], voteIdGroupes: v.voteId, sources: [f.source], ...(auteur ? { nommePersonne: true } : {}),
         alt: `Story Hémicycle France, le vote final par groupe. Texte « ${f.titreCourt} », ${verbe} par l'Assemblée nationale le ${sp.date}. Pour : ${nbFr(sp.pour)}, contre : ${nbFr(sp.contre)}, abstentions (ni pour ni contre) : ${nbFr(sp.abst)}. Position majoritaire de chaque groupe : ${positions}.${auteur ? ` Texte de ${auteur}.` : ""} ${sp.sourceTxt}` },
     } };
   }
@@ -704,7 +704,7 @@ function choisirCarrouselHebdo({ digest, jour, now }) {
   const alts = specs.map((s, i) => `Image ${i + 1} sur ${total}. ${s.titre}. ${s.corps.map((b) => b.p || (b.li || []).join(" ; ") || (b.kv || []).map(([k, v]) => `${k} : ${v}`).join(", ") || b.carte || (b.cases ? b.cases.map(([k, v]) => `${k} : ${v}`).join(", ") : "")).filter(Boolean).map((x) => (/[.!?]$/.test(x) ? x : x + ".")).join(" ")}`.slice(0, 990));
   return { contenu: {
     type: "carrousel-hebdo", cle: digest.id, rendu: { kind: "carrousel", specs, alts },
-    entree: { titre: `Ce qu'il faut retenir cette semaine (${digest.id})`, titrePropre: "Résumé de la semaine au Parlement", sujets: [...textes.map((t) => t.titre), ...dossiers.map((d) => d.titre)], sources: ["https://data.assemblee-nationale.fr/travaux-parlementaires/votes", ...(sondage ? [sondage.url] : [])], legende, alt: alts[0], ...(sondage ? { reserve: true, nommePersonne: true } : {}) },
+    entree: { rubrique: "Parlement", titre: `Ce qu'il faut retenir cette semaine (${digest.id})`, titrePropre: "Résumé de la semaine au Parlement", sujets: [...textes.map((t) => t.titre), ...dossiers.map((d) => d.titre)], sources: ["https://data.assemblee-nationale.fr/travaux-parlementaires/votes", ...(sondage ? [sondage.url] : [])], legende, alt: alts[0], ...(sondage ? { reserve: true, nommePersonne: true } : {}) },
   } };
 }
 

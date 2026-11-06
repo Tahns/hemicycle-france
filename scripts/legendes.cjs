@@ -12,12 +12,12 @@
  *  - titre : texte libre, seulement pour repérer un thème (présidentielle, budget…)
  */
 const PAR_THEME = {
-  assemblee: ["#AssembléeNationale", "#Parlement", "#Députés"],
-  senat: ["#Sénat", "#Parlement", "#Sénateurs"],
-  budget: ["#Budget", "#FinancesPubliques"],
-  justice: ["#Justice"],
+  assemblee: ["#AssembléeNationale", "#Parlement", "#Députés", "#PalaisBourbon"],
+  senat: ["#Sénat", "#Parlement", "#Sénateurs", "#PalaisDuLuxembourg"],
+  budget: ["#Budget", "#FinancesPubliques", "#Économie"],
+  justice: ["#Justice", "#Droit"],
   election: ["#Présidentielle2027", "#Élections"],
-  gouvernement: ["#Gouvernement"],
+  gouvernement: ["#Gouvernement", "#Matignon"],
   international: ["#International"],
   securite: ["#Sécurité"],
   politique: [],
@@ -39,22 +39,22 @@ const MOTS = [
   [/budget|finances|s[ée]curit[ée] sociale/i, ["#Budget", "#FinancesPubliques"]],
 ];
 // Hashtags génériques : jamais les deux à la fois, et pas toujours le même (Instagram déprécie des séries de hashtags identiques d'une publication à l'autre)
-const GENERIQUES = ["#Politique", "#Actualité", "#France"];
+const GENERIQUES = ["#Politique", "#Actualité", "#PolitiqueFrançaise", "#France"];
 // Pieds de légende : plusieurs formulations équivalentes, choisies selon la graine (identifiant du contenu), jamais le même texte à chaque publication
 const PIEDS = [
-  (c) => `On vous explique la suite sur ${c}`,
-  (c) => `La politique sans jargon, c'est ici : ${c}`,
-  (c) => `Plus de repères sur ${c}`,
-  (c) => `Pour ne pas perdre le fil : ${c}`,
-  (c) => `${c}, pour comprendre sans se prendre la tête`,
-  (c) => `Retrouvez-nous sur ${c}`,
+  (c) => `Le suivi de l'actualité politique, sources à l'appui : ${c}`,
+  (c) => `${c} : l'actualité politique, avec ses sources`,
+  (c) => `Retrouvez l'essentiel de la politique sur ${c}`,
+  (c) => `Pour suivre la suite, abonnez-vous à ${c}`,
+  (c) => `Plus d'infos politiques vérifiables sur ${c}`,
+  (c) => `À suivre sur ${c}`,
 ];
 const APPELS = [
-  "À garder sous la main pour y revenir.",
-  "Utile ? Enregistrez-le pour plus tard.",
-  "À partager si cela peut servir autour de vous.",
-  "Une petite pause pour comprendre, à garder de côté.",
-  "Vous pouvez l'enregistrer pour le retrouver.",
+  "À enregistrer pour y revenir.",
+  "À garder de côté, ça resservira.",
+  "À partager avec ceux que le sujet intéresse.",
+  "Enregistrez pour le retrouver plus tard.",
+  "Une image à conserver pour la prochaine fois.",
 ];
 const graine = (x) => { let h = 2166136261; for (const c of String(x ?? "")) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; };
 const tourner = (liste, g) => (liste.length ? liste.slice(g % liste.length).concat(liste.slice(0, g % liste.length)) : []);
@@ -79,7 +79,7 @@ function hashtags({ genre = "autre", theme = "politique", chambre = null, titre 
   else if (chambre === "senat") propres.push("#Sénat", "#Parlement");
   const genreListe = PAR_GENRE[genre] || [];
   propres.push(...(g == null ? genreListe : tourner(genreListe, g)));
-  propres.push(...(PAR_THEME[theme] || []));
+  propres.push(...(g == null ? PAR_THEME[theme] || [] : tourner((PAR_THEME[theme] || []).slice(0, 1), 0).concat(tourner((PAR_THEME[theme] || []).slice(1), g >>> 5))));
   for (const [re, h] of MOTS) if (re.test(String(titre))) propres.push(...h);
   const generique = g == null ? ["#Politique", "#Actualité"] : [GENERIQUES[g % GENERIQUES.length]];
   const liste = g == null ? ["#Politique", ...propres, "#Actualité"] : [...propres, ...generique];

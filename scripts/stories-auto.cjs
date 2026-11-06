@@ -124,6 +124,7 @@ const MAX_OCTETS = 8 * 1024 * 1024;
 const LP = require("./liste-prudente.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs"); // « repris par N médias » : médias DISTINCTS (un groupe de presse ou une dépêche reprise à l'identique compte une fois)
 const { lireRetiresSur } = require("./retires.cjs"); // contenus retirés (data/instagram-retires.json) : leur texte n'est jamais repris (audit J-23)
+const { rubriqueDe } = require("./rubriques.cjs"); // rubrique de presse des fiches (champ `rubrique`)
 const { hashtags: hashtagsLegende, pied: piedLegende, variante: varLegende } = require("./legendes.cjs"); // hashtags neutres des légendes (jamais de nom propre)
 const { simplifierJargon, simplifierTexteLoi, etapeSimple, natureSimple, titreFait, messageComplet, sansBandeauEtat } = require("./titres-propres.cjs"); // textes affichés en mots simples (FALC : lecteur de 12-14 ans sans culture politique)
 const SC = require("./sondage-commanditaire.cjs"); // commanditaire d'un sondage (mention obligatoire)
@@ -1011,19 +1012,19 @@ function ficheLoi({ chambre, id, numero, titre, dossierTitre, date, dateISO, res
   const natureTxt = natureSimple(d.nature), etapeTxt = d.etape ? etapeSimple(d.etape) : "";
   const sujetTxt = d.simple ? d.simple.replace(/^([^:]+) : (.+)$/, (m, th, o) => `${o} (thème : ${th.toLowerCase()})`) : "";
   const sourceTxt = `Source : ${nomChambre}, vote n°${numero}${an ? "" : ` (session ${id.split("-")[1]}-${Number(id.split("-")[1]) + 1})`} (${an ? "assemblee-nationale.fr" : "senat.fr"}). Résultat officiel.`;
-  const spec = { genre: "loi", chambre: nomChambre, date, dateISO, nature: d.nature, natureSimple: natureTxt, titre: d.court, etape: d.etape, ...(etapeTxt ? { etapeSimple: etapeTxt } : {}), ...(d.simple ? { titreSimple: d.simple } : {}), verdict: resultat, pour, contre, abst, numero, sourceTxt };
+  const spec = { genre: "loi", rubrique: nomChambre, chambre: nomChambre, date, dateISO, nature: d.nature, natureSimple: natureTxt, titre: d.court, etape: d.etape, ...(etapeTxt ? { etapeSimple: etapeTxt } : {}), ...(d.simple ? { titreSimple: d.simple } : {}), verdict: resultat, pour, contre, abst, numero, sourceTxt };
   const voix = `Pour : ${nbFr(pour)} · Contre : ${nbFr(contre)} · Abstentions (ni pour ni contre) : ${nbFr(abst)}`;
   const suite = resultat === "adopte"
     ? "Un texte devient une loi quand l'Assemblée nationale et le Sénat l'ont adopté dans les mêmes termes."
     : "Un texte rejeté n'est pas accepté par ce vote : à ce stade, il ne devient pas une loi.";
   const gr = `loi|${id}|${numero}`, quelleMin = quelle.charAt(0).toLowerCase() + quelle.slice(1);
   const legende = [
-    varLegende(gr, "t", [`${nomChambre} : texte ${verbe} le ${date}`, `Texte ${verbe} (${nomChambre}, ${date})`, `${quelle} a ${verbe} un texte le ${date}`, `Vote du ${date} : texte ${verbe} (${nomChambre})`]),
+    varLegende(gr, "t", [`${nomChambre} : le texte est ${verbe} le ${date}`, `${nomChambre}. Un texte ${verbe} le ${date}`, `${quelle} a ${verbe} un texte le ${date}`, `${nomChambre} : un texte ${verbe} à l'issue du vote du ${date}`]),
     "",
-    varLegende(gr, "a", [`Vote sur l'ensemble du texte : ${quelleMin} l'a ${verbe} le ${date}.`, `${quelle} s'est prononcé${an ? "e" : ""} sur l'ensemble du texte le ${date} et l'a ${verbe}.`, `Le ${date}, ${quelleMin} a ${verbe} le texte en entier.`]),
+    varLegende(gr, "a", [`${quelle} s'est prononcé${an ? "e" : ""} sur l'ensemble du texte : il est ${verbe} le ${date}.`, `${quelle} s'est prononcé${an ? "e" : ""} sur l'ensemble du texte le ${date} et l'a ${verbe}.`, `Le ${date}, ${quelleMin} a ${verbe} le texte en entier.`]),
     ...(etapeTxt ? [varLegende(gr, "e", [`Où on en est : ${etapeTxt}.`, `Étape : ${etapeTxt}.`, `À ce stade, ${etapeTxt.charAt(0).toLowerCase()}${etapeTxt.slice(1)}.`])] : []),
     `C'est une ${natureTxt}.`,
-    ...(sujetTxt ? [varLegende(gr, "s", [`En clair : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`, `De quoi parle-t-on ? ${sujetTxt}.`])] : []),
+    ...(sujetTxt ? [varLegende(gr, "s", [`En clair : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`, `Le sujet : ${sujetTxt.charAt(0).toLowerCase()}${sujetTxt.slice(1)}.`])] : []),
     `Titre officiel : « ${d.court} ».`,
     voix + ".",
     suite,
@@ -1253,10 +1254,10 @@ function ficheDate(s, now = new Date()) {
   const lieuTxt = ag?.lieu ? ` (${ag.lieu})` : "";
   const sujetPropre = titreAff.replace(/[.\s]+$/, "");
   const legende = [
-    varLegende(gr, "t", [`À noter dans l'agenda : ${jourAff} ${annee}`, `Gardez cette date : ${jourAff} ${annee}`, `${jourAff} ${annee} : un rendez-vous à ne pas manquer`, `Date à retenir, ${jourAff} ${annee}`]),
+    varLegende(gr, "t", [`Agenda : rendez-vous le ${jourAff} ${annee}`, `Agenda. À noter, le ${jourAff} ${annee}`, `Le ${jourAff} ${annee} dans le calendrier politique`, `Date à retenir : ${jourAff} ${annee}`]),
     "",
     `${sujetPropre}.`,
-    varLegende(gr, "q", [`Ça se passera ${quandPhrase}${lieuTxt}.`, `Rendez-vous ${quandPhrase}${lieuTxt}.`, `Dans le calendrier : ${quandPhrase}${lieuTxt}.`]),
+    varLegende(gr, "q", [`C'est prévu ${quandPhrase}${lieuTxt}.`, `Rendez-vous ${quandPhrase}${lieuTxt}.`, `Au programme ${quandPhrase}${lieuTxt}.`]),
     "",
     ag ? varLegende(gr, "m", [`Date relevée par ${listeMedias}. Le programme peut encore bouger, vérifiez auprès de l'organisateur.`, `Source de la date : ${listeMedias}. Le programme peut changer, vérifiez auprès de l'organisateur.`]) : varLegende(gr, "m", [`Annoncé par la presse (${listeMedias}${medias.length > 4 ? "…" : ""}). Le programme peut encore changer : vérifiez auprès de l'institution concernée.`, `D'après ${listeMedias}${medias.length > 4 ? "…" : ""}. Le programme peut changer, vérifiez auprès de l'institution concernée.`]),
     "",
@@ -1264,7 +1265,7 @@ function ficheDate(s, now = new Date()) {
     hashtagsLegende({ genre: "date", theme: /s[ée]nat/i.test(titre) ? "senat" : /assembl[ée]e nationale|d[ée]put[ée]s/i.test(titre) ? "assemblee" : "politique", titre, max: 5, seed: gr }).join(" "),
   ].join("\n");
   return {
-    spec: { genre: "date", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre: titreAff, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
+    spec: { genre: "date", rubrique: "Agenda", iso: dt.iso, jour: dt.jour, mois: dt.mois, annee, semaine, titre: titreAff, citation, media: art.media || "", ...(ag ? { agenda: true } : {}) },
     titreCourt: titre,
     titreAffiche: titreAff,
     sous: `Date à retenir · ${jourAff}`,
@@ -1433,11 +1434,11 @@ function decrirePost(choix, now) {
   if (choix.post) { // loi
     const f = choix.post;
     return { titre: f.titreCourt, medias: [], sources: [f.source], type: "post", post: { fiche: f, id: choix.id },
-      champs: { donneesPropres: true, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, ...(f.accroche ? { accroche: f.accroche } : {}), legende: f.legende, alt: f.alt } };
+      champs: { donneesPropres: true, rubrique: f.spec.rubrique, postGenre: "loi", voteId: f.voteId, titrePropre: f.titreCourt, ...(f.accroche ? { accroche: f.accroche } : {}), legende: f.legende, alt: f.alt } };
   }
   const s = choix.sujet, f = ficheDate(s, now), videos = liensVideo(s.articles);
   return { titre: s.articles[0].titre || f.titreCourt, medias: sourcesDe_(s.articles), sources: sourcesDe(s.articles, videos), type: "post", post: { fiche: f, id: choix.id },
-    champs: { titrePropre: f.titreCourt, postGenre: "date", dateIso: f.dateIso, legende: f.legende, alt: f.alt } };
+    champs: { titrePropre: f.titreCourt, rubrique: "Agenda", postGenre: "date", dateIso: f.dateIso, legende: f.legende, alt: f.alt } };
 }
 /**
  * Décrit un sujet SENSIBLE : fiche fabriquée par règles (scripts/sujets-sensibles.cjs), contrôlée par formulationSure (une règle violée = erreur,
@@ -1457,7 +1458,7 @@ function decrireSensible(choix) {
   return {
     titre: fiche.titre, medias: c.medias, sources, type: "story", args: [choix.indice, s.articles[0].titre, null, null, null, "une", null, synth],
     champs: {
-      sensible: c.niveau, titrePropre: fiche.titre, sujets: [s.articles[0].titre], pied: fiche.pied, alt: fiche.alt, nommePersonne: nommes.length > 0,
+      sensible: c.niveau, rubrique: "Justice", titrePropre: fiche.titre, sujets: [s.articles[0].titre], pied: fiche.pied, alt: fiche.alt, nommePersonne: nommes.length > 0,
       ...(c.niveau === 1 ? { juridiction: c.juridiction, nature: c.nature, penal: c.penal } : { categorie: c.categorie, reponseCitee: c.reponseCitee, citation: { titre: fiche.citation, media: c.citee.media, url: c.citee.url } }),
     },
   };
@@ -1469,7 +1470,7 @@ function decrireRappelAgenda(choix, now) {
   const synth = { ...s, titrePropre: { ...s.titrePropre, titre: affichage }, modeleImpose: "date" }; // le dessin affiche le titre en mots simples ; l'entrée garde le titre d'origine
   return {
     titre: s.titrePropre.titre, medias: [s.articles[0].media], sources: [s.articles[0].url], type: "story", args: [-1, s.articles[0].titre, null, null, null, "date", null, synth],
-    champs: { titrePropre: s.titrePropre.titre, modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir. ${affichage.replace(/[.\s]+$/, "")}. C'est dans ${n} jours, le ${s.date.jour} ${s.date.mois}. Date indiquée par ${s.articles[0].media}.` },
+    champs: { titrePropre: s.titrePropre.titre, rubrique: "Agenda", modele: "date", rappelDe: choix.postId, dateIso: s.date.iso, alt: `Story Hémicycle France, date à retenir. ${affichage.replace(/[.\s]+$/, "")}. C'est dans ${n} jours, le ${s.date.jour} ${s.date.mois}. Date indiquée par ${s.articles[0].media}.` },
   };
 }
 /** Accroche d'affichage d'un sujet de presse : le titre-fait (ce qui s'est passé) ; à défaut, titres-propres.accroche pour un sujet normal (pas pour un titre de repli) ; null s'il n'apporte rien de plus que le titre propre. Le titre propre reste la clé des registres. */
@@ -1485,24 +1486,24 @@ function decrireBase(choix, now = new Date()) {
   if (choix.modele === "rappel-agenda") return decrireRappelAgenda(choix, now);
   if (choix.sondage) {
     const i = choix.sondage;
-    return { titre: `Sondage ${i.nom} : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId }, args: [choix.indice, null, i, null, null], type: "sondage" };
+    return { titre: `Sondage ${i.nom} : pour qui voteraient les personnes interrogées au 1er tour de l'élection du président (enquête : ${i.date})`, medias: [i.nom], sources: [i.url].filter((u) => /^https:\/\//.test(u || "")), champs: { sondageId: choix.sondageId, rubrique: "Sondage" }, args: [choix.indice, null, i, null, null], type: "sondage" };
   }
   if (choix.propre) {
     const p = choix.propre;
-    return { titre: p.titre, medias: [], sources: [], champs: { donneesPropres: true, nommePersonne: Boolean(choix.nommePersonne), ...(choix.reserve ? { reserve: true } : {}), source: p.source }, args: [0, p.titre, null, null, p], type: p.type };
+    return { titre: p.titre, medias: [], sources: [], champs: { donneesPropres: true, rubrique: rubriqueDe({ titre: p.titre, genre: p.type === "chiffre" ? "chiffre" : null, sondage: Boolean(choix.reserve) }), nommePersonne: Boolean(choix.nommePersonne), ...(choix.reserve ? { reserve: true } : {}), source: p.source }, args: [0, p.titre, null, null, p], type: p.type };
   }
   if (choix.dossier) {
     const d = choix.dossier;
     const videos = liensVideo(d.articles);
-    return { titre: d.titre, medias: sourcesDe_(d.articles), sources: sourcesDe(d.articles, videos), champs: { dossierId: d.id, titrePropre: d.titre, ...(videos.length ? { videos } : {}) }, args: [0, d.titre, null, d.id, null], type: "dossier" };
+    return { titre: d.titre, medias: sourcesDe_(d.articles), sources: sourcesDe(d.articles, videos), champs: { dossierId: d.id, rubrique: rubriqueDe({ titre: d.titre }), titrePropre: d.titre, ...(videos.length ? { videos } : {}) }, args: [0, d.titre, null, d.id, null], type: "dossier" };
   }
   if (choix.bref) {
-    return { titre: "En bref : ce qu'il faut retenir aujourd'hui", medias: [], sources: choix.sources, champs: { bref: true, sujets: choix.bref.titresPropres, modele: "bref" }, args: [0, "", null, null, null, "bref", choix.bref], type: "en-bref" };
+    return { titre: "En bref : ce qu'il faut retenir aujourd'hui", medias: [], sources: choix.sources, champs: { bref: true, rubrique: "Politique", sujets: choix.bref.titresPropres, modele: "bref" }, args: [0, "", null, null, null, "bref", choix.bref], type: "en-bref" };
   }
   const titre = choix.sujet.articles[0].titre;
   const videos = liensVideo(choix.sujet.articles);
   const modele = choix.modele && choix.modele !== "une" ? choix.modele : null; // « une » : modèle par défaut, rien à ajouter
-  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(essentielDe(choix.sujet) ? { essentiel: essentielDe(choix.sujet) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}), ...(choix.sansPortrait ? { personneNommee: true, sansPortrait: true } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
+  return { titre, medias: sourcesDe_(choix.sujet.articles), sources: sourcesDe(choix.sujet.articles, videos), champs: { rubrique: choix.sujet.rubrique || rubriqueDe(choix.sujet), ...(choix.sujet.titrePropre?.titre && !choix.repli ? { titrePropre: choix.sujet.titrePropre.titre } : {}), ...(accrocheDe(choix.sujet, choix.repli) ? { accroche: accrocheDe(choix.sujet, choix.repli) } : {}), ...(essentielDe(choix.sujet) ? { essentiel: essentielDe(choix.sujet) } : {}), ...(videos.length ? { videos } : {}), ...(modele ? { modele } : {}), ...(modele === "date" && choix.sujet.date?.iso ? { dateIso: choix.sujet.date.iso } : {}), ...(choix.sansPortrait ? { personneNommee: true, sansPortrait: true } : {}) }, args: modele ? [choix.indice, titre, null, null, null, modele] : [choix.indice, titre, null, null, null], type: modele ? MODELES_TYPE[modele] || "actualite" : "actualite" };
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

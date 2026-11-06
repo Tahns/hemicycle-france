@@ -507,6 +507,7 @@ function storyPListe(ctx, noms, largeur, maxi){
 // 1-2. Les stories d'actualité (« à la une », « en direct », « face à face », « le chiffre », « date à retenir », « en bref », « dossier »)
 //      sont dessinées par les modules js/stories-actu*.js (chargés avec dessinerStory ci-dessous), sur la même direction artistique (STORY_DA).
 
+// CODE MORT (3 à 11) : STORY_PLUS.probabilites … meeting sont REDÉFINIS sur la base blanche par js/stories-fiches.js (chargé après ce module) ; ces anciens dessins bleus sont à supprimer.
 // 3. Qui a le plus de chances ? (data-id vide)
 STORY_PLUS.probabilites = async (ctx)=>{
   if(!PROBAS?.candidats?.length || periodeReserveSondages()) return null;
@@ -870,27 +871,18 @@ STORY_PLUS.meeting = async (ctx, info)=>{
 };
 
 /* ---------- Styles de story du test comparatif (instagram/auto, champ « variante ») ----------
-   « bleu » (le dessin historique de chaque module), puis trois styles qui partagent ce dessinateur :
-   - « une-photo » : photo libre de l'institution du thème (data/vignettes.json) plein cadre sous dégradé sombre, accroche géante, « L'essentiel », pastille de catégorie ; sans photo, motif graphique du thème ;
-   - « question » : accroche en question, 3 puces de 8 mots au plus, fond de couleur par thème (rouge, vert, jaune, bleu, noir) ;
-   - « chiffre » : nombre géant et une ligne de contexte.
-   Chaque module (stories-actu, stories-actu-fait, stories-contenus) prépare une fiche `d` puis appelle storyStyleDessiner(ctx, style, d) :
-   { couleur, motif, categorie, accroche, essentiel, puces[], chiffre:{ valeur, legende }, contexte, photo:{ img, credit }, fond, source, video, cta }.
-   Règles : texte essentiel ≥ 52 px, 35 mots au plus, rien d'essentiel dans les ≈ 250 px du haut ni au-dessus des ≈ 340 px du bas (y ≥ 1580) ;
-   seules la source officielle (une ligne) et le crédit photo exigé par la licence figurent dans le pied. Jamais de photo de personne : seules les vignettes d'institutions sont utilisées. */
+   Quatre noms valides, TOUS sur la BASE BLANCHE (js/stories-blanc.js : fond blanc plein, bandeau marque + date, rubrique rouge, titre Newsreader gras, chapeau, filets gris, pied de source) :
+   - « bleu » (nom historique, VARIANTES de scripts/stories-auto.cjs) : la mise en page « une » dessinée par chaque module (stories-actu, stories-actu-fait, stories-contenus) : gros titre, chapeau, citation, portraits ;
+   - « une-photo » : mise en page « photo » : cadre photo net (photo libre de l'institution du thème, data/vignettes.json, crédit en légende ; sans photo, cadre gris au motif vectoriel du thème), titre, chapeau « L'essentiel » ;
+   - « question » : accroche posée en question (« ? » rouge), puis la réponse : « L'essentiel » et/ou trois puces numérotées ;
+   - « chiffre » : nombre géant sous un trait rouge, sa légende, puis l'accroche et l'essentiel (types « le chiffre » et « date à retenir »).
+   Chaque module prépare une fiche `d` puis appelle storyStyleDessiner(ctx, style, d) :
+   { couleur, motif, categorie (= rubrique rouge), accroche, essentiel, puces[], chiffre:{ valeur, legende, type }, contexte, photo:{ img, credit }, medias[] (pied « N médias en parlent : … »), quand, source, video }.
+   Règles : texte jamais coupé (la taille descend, un élément facultatif est retiré avant qu'un texte ne le soit), rien dans les zones masquées par Instagram (y < 250 et y > 1640),
+   aucun dégradé ni grain. Jamais de photo de personne dans ces styles : seules les vignettes d'institutions sont utilisées. */
 const STORY_STYLES = ["bleu", "une-photo", "question", "chiffre"];
-const STORY_FONDS_QUESTION = {
-  rouge: { fond:"#A8201A", texte:"#FFFFFF", doux:"#FFE3DF" },
-  vert:  { fond:"#1C6B3C", texte:"#FFFFFF", doux:"#DDF4E4" },
-  jaune: { fond:"#F5C21B", texte:"#1C1B18", doux:"#2E2A12" },
-  bleu:  { fond:"#1B3A8C", texte:"#FFFFFF", doux:"#C5CEF2" },
-  noir:  { fond:"#14161B", texte:"#FFFFFF", doux:"#C5CEF2" },
-};
-const STORY_FOND_THEME = { justice:"noir", budget:"vert", election:"bleu", senat:"rouge", assemblee:"bleu", gouvernement:"noir", international:"vert", securite:"rouge", politique:"jaune" };
 const storyStyleValide = s => STORY_STYLES.includes(s) ? s : "bleu";
 function storyContraste(a, b){ const x = storyLuminance(a), y = storyLuminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
-// Couleur assombrie jusqu'à porter du texte blanc à 4,5:1 (WCAG AA)
-function storyAssombri(c){ let x = /^#[0-9a-f]{6}$/i.test(String(c)) ? c : "#3A4A80", t = 0; while(storyContraste(x, "#FFFFFF") < 4.5 && t < 1){ t += 0.08; x = storyMelange(c, "#000000", t); } return x; }
 // Variantes d'un texte, de la plus complète à la plus courte : le texte ENTIER, puis ses premières propositions complètes (coupées avant « , » « ; » « : » « — » ou
 // après un point), terminées par un point, JAMAIS par « … ». Au moins 4 mots, jamais sur un mot faible, une parenthèse ou un guillemet resté ouvert.
 const STORY_ABREV = /(?:^|\s)(?:M|MM|Mme|Mmes|Dr|Pr|St|Ste|Me|\p{Lu})\.$/u;
@@ -910,9 +902,8 @@ function storyVariantes(texte){
   }
   return sortie;
 }
-const storyTailles = (max, min, pas = 2) => { const r = []; for(let t = max; t >= min; t -= pas) r.push(t); return r; };
 // Texte coupé aux mots : TOUJOURS complet. Au plus n mots : texte entier ; sinon la dernière proposition complète de n mots au plus, terminée par un point (sans « … ») ;
-// sans proposition complète assez courte, le texte entier (c'est à la mise en page de l'ajuster : voir storyAjuste)
+// sans proposition complète assez courte, le texte entier (c'est à la mise en page de l'ajuster : voir storyBlancOptions)
 function storyMots(texte, n){
   const v = storyVariantes(texte);
   return v.find(x => storyNbMots(x) <= n) || v[0] || "";
@@ -931,40 +922,6 @@ async function storyPhotoTheme(cle){
   const img = (okHd && await storyImage(p.chemin_hd)) || await storyImage(p.chemin);
   const libre = /CC0|domaine public|public domain/i.test(p.licence || ""); // crédit exigé par CC BY / CC BY-SA, pas par CC0 ni le domaine public
   return img ? { img, credit:libre ? "" : `Photo : ${p.auteur || "auteur inconnu"}, ${p.licence}, Wikimedia Commons`, lieu:p.lieu || "" } : null;
-}
-function storyStylePastille(ctx, texte, x, y, fond, couleur){
-  ctx.font = `800 30px "Public Sans"`; ctx.letterSpacing = "3px";
-  const t = storyLignes(ctx, String(texte).toUpperCase(), STORY.L - 2 * STORY.marge - 56, 1)[0];
-  const w = Math.ceil(ctx.measureText(t).width) + 56 - 3, h = 66;
-  ctx.fillStyle = fond; ctx.beginPath(); ctx.roundRect(x, y, w, h, h / 2); ctx.fill();
-  ctx.fillStyle = couleur; ctx.textBaseline = "middle"; ctx.textAlign = "left"; ctx.fillText(t, x + 28, y + h / 2 + 2);
-  ctx.letterSpacing = "0px"; ctx.textBaseline = "alphabetic";
-  return h;
-}
-// Pied des styles : crédit photo, ligne vidéo, source (mentions légales), puis « accroche → @compte » ; couleurs adaptées au fond
-function storyStylePied(ctx, d, { doux, texte, credit = false }){
-  const { L, marge } = STORY;
-  let y = 1486;
-  if(credit && d.photo?.credit){ ctx.font = `600 22px "Public Sans"`; ctx.fillStyle = doux; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText(storyLignes(ctx, d.photo.credit, L - 2 * marge, 1)[0], marge, y + 22); y += 34; }
-  if(d.video){
-    ctx.font = `800 26px "Public Sans"`; ctx.fillStyle = texte; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    ctx.beginPath(); ctx.moveTo(marge, y + 4); ctx.lineTo(marge, y + 28); ctx.lineTo(marge + 22, y + 16); ctx.closePath(); ctx.fill();
-    ctx.fillText(storyLignes(ctx, `Vidéo : ${d.video}`, L - 2 * marge - 40, 1)[0], marge + 38, y + 26);
-    y += 42;
-  }
-  const max = Math.max(1, Math.min(4, Math.floor((1618 - y) / 27.6)));
-  if(d.source) storyTexte(ctx, d.source, marge, y, { taille:23, couleur:doux, max, interligne:1.2 });
-  let t = 34; const accroche = `${d.cta || "Toute l'actu politique"} → ${COMPTE_STORY}`;
-  ctx.font = `700 ${t}px "Public Sans"`;
-  while(ctx.measureText(accroche).width > L - 2 * marge && t > 24){ t -= 2; ctx.font = `700 ${t}px "Public Sans"`; }
-  ctx.fillStyle = texte; ctx.textAlign = "center"; ctx.fillText(accroche, L / 2, 1636); ctx.textAlign = "left";
-}
-// Motif graphique du thème (tracé SVG 24 × 24 agrandi), pour les fiches sans photo
-function storyStyleMotif(ctx, motif, x, y, taille, couleur){
-  if(!motif || typeof Path2D === "undefined") return;
-  ctx.save(); ctx.translate(x, y); ctx.scale(taille / 24, taille / 24);
-  ctx.strokeStyle = couleur; ctx.lineWidth = 0.55; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke(new Path2D(motif));
-  ctx.restore();
 }
 // Mots courts qui ne finissent jamais une ligne (« de », « la », « à », « contre »…) : collés au mot suivant par une espace insécable ; les deux derniers mots d'un texte sont collés
 // (jamais un mot orphelin seul sur la dernière ligne)
@@ -1020,205 +977,99 @@ function storyStyleEcrire(ctx, b, x, y, couleur, fond = null){
   });
   return y + b.h;
 }
-// Plus grande taille (tMax..tMin) pour laquelle le texte tient en `lignes` lignes au plus et `hMax` de haut
-function storyStyleFit(ctx, texte, { tMax, tMin, pas = 2, poids, police, largeur, lignes, hMax, interligne }){
-  let b;
-  for(let t = tMax; t >= tMin; t -= pas){
-    b = storyStyleBloc(ctx, texte, { taille:t, poids, police, largeur, max:99, interligne });
-    if(b.l.length <= lignes && b.h <= hMax && b.ok) return b;
-  }
-  return storyStyleBloc(ctx, texte, { taille:tMin, poids, police, largeur, max:lignes, interligne });
+/* Trois mises en page BLANCHES (kit js/stories-blanc.js : fond blanc, bandeau marque + date, rubrique rouge, titre Newsreader gras, chapeau « L'essentiel », filets gris, pied de source).
+   Tout est empilé par storyBlancPile : les textes s'écrivent TOUJOURS en entier (la taille descend, jamais de « … »), les éléments facultatifs (photo, citation…) sont retirés avant de couper quoi que ce soit. */
+const STORY_HAUT_BLANC = 440; // ordonnée où commence le contenu : sous le bandeau, le filet épais et la ligne de rubrique (storyBlancTete)
+// Pied commun des fiches : source, médias cités (liste complète : mention obligatoire) et ligne vidéo ; renvoie le plan du pied (sa hauteur sert à borner le contenu)
+function storyStylePiedBlanc(ctx, d){
+  return storyBlancPiedPlan(ctx, [d.source ? storyTypo(d.source) : "", storyBlancSources((d.medias || []).map(storyTypo))].filter(Boolean).join(" "), { video:d.video || "" });
 }
-
-// Plus grande taille pour laquelle le texte ENTIER tient (ou, à défaut, l'une de ses premières propositions complètes, terminée par un point) ; null si rien ne tient : le bloc n'est alors pas affiché
-function storyAjuste(ctx, texte, { tailles, poids, police, largeur, max = 99, hMax = 99999, interligne = 1.2, coupe = true }){
-  const vs = coupe ? storyVariantes(texte) : [storyTypo(texte)].filter(Boolean);
-  for(const v of vs) for(const t of tailles){
-    const b = storyStyleBloc(ctx, v, { taille:t, poids, police, largeur, max:99, interligne });
-    if(b.l.length <= max && b.h <= hMax && b.ok) return { ...b, texte:v };
-  }
-  return null;
+const storyStyleBasBlanc = pied => BLANC.bas - pied.h - 30;
+// Pose une fiche dont le plan est établi : fond blanc, bandeau et rubrique, blocs empilés, pied
+function storyStylePoser(ctx, d, plan, pied){
+  storyBlancFond(ctx);
+  storyBlancTete(ctx, { rubrique:d.categorie, quand:d.quand || "" });
+  plan.dessiner();
+  storyBlancPiedDessiner(ctx, pied);
 }
+// Titre en options de taille décroissante (serif gras serré) : jusqu'à 6 lignes ; on le rétrécit en dernier (rang 2 au-dessus de `grand` px, 4 en dessous)
+const storyStyleTitre = (ctx, texte, { tMax = 104, grand = 72, accent = "", fond = null } = {}) => ({ options:storyBlancOptions(ctx, texte, { tailles:storyBlancTailles(tMax, 52, 4), max:6, poids:800, police:BLANC.serif, interligne:1.13, ls:t => -t * 0.004, fond, accent, avant:34, rang:t => t >= grand ? 2 : 4 }) });
 
+// « photo » : cadre photo net sous la rubrique (photo libre de l'institution du thème avec son crédit, sinon cadre gris au motif vectoriel du thème), titre, chapeau
 function storyStyleUnePhoto(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1446, dispo = bas - 400;
-  // 1. mise en page (de bas en haut), avant de peindre. Le gros titre (accroche) n'est JAMAIS coupé : il rétrécit (jusqu'à 52 px) et prend jusqu'à 6 lignes.
-  //    L'essentiel s'affiche en entier ; sa taille descend jusqu'à 34 px, puis il est réduit à ses premières propositions complètes, puis retiré.
-  const accroche = storyTypo(d.accroche);
-  const essentiels = [...(d.essentiel ? storyVariantes(d.essentiel) : []), ""];
-  let plan = null;
-  for(const ev of essentiels){
-    for(let tA = 124; tA >= 52 && !plan; tA -= 4){
-      const a = storyStyleBloc(ctx, accroche, { taille:tA, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.18 });
-      if(!a.ok || a.l.length > 6) continue; // 6 lignes au plus pour le gros titre
-      const minE = tA >= 100 ? 50 : tA >= 80 ? 44 : tA >= 64 ? 38 : 34;
-      if(!ev){ if(66 + 30 + a.h <= dispo) plan = { a, e:null, total:66 + 30 + a.h }; continue; }
-      for(let tE = 60; tE >= minE; tE -= 2){
-        const e = storyStyleBloc(ctx, ev, { taille:tE, poids:600, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
-        const total = 66 + 30 + a.h + 40 + 36 + e.h;
-        if(e.ok && total <= dispo){ plan = { a, e, total }; break; }
-      }
-    }
-    if(plan) break;
-  }
+  const larg = STORY.L - 2 * BLANC.marge, fond = d.colorerVoix ? "creme" : null, pied = storyStylePiedBlanc(ctx, d);
+  const photo = storyBlancPhotoOptions(ctx, { img:d.photo?.img || null, motif:d.motif, legende:d.photo?.img ? (d.photo.credit || "") : "", hauteurs:storyBlancTailles(640, 320, 40), avant:0 });
+  const titre = storyStyleTitre(ctx, storyTypo(d.accroche), { fond });
+  if(!titre.options.length) return false;
+  const plan = storyBlancPile(ctx, [photo, titre, storyBlancChapeau(ctx, d.essentiel, { largeur:larg, fond, avant:36, rang:[1, 5, null] })], { haut:STORY_HAUT_BLANC, bas:storyStyleBasBlanc(pied) });
   if(!plan) return false;
-  const haut = bas - plan.total;
-  // 2. fond : photo (carrée, 320 px à l'origine : agrandie et adoucie) ou motif du thème
-  ctx.fillStyle = NUIT; ctx.fillRect(0, 0, L, H);
-  if(d.photo?.img){
-    const S = 1300, x = Math.round((L - S) / 2), y = 0;
-    ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.filter = "blur(1.5px) saturate(1.05)";
-    ctx.drawImage(d.photo.img, x, y, S, S); ctx.restore();
-  } else {
-    storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H }); // sans photo : fond généré du thème (jamais un pictogramme)
-  }
-  // 3. dégradé sombre : léger en haut (logo), presque opaque sous le texte
-  const g = ctx.createLinearGradient(0, 0, 0, H), k = v => Math.max(0, Math.min(1, v / H));
-  g.addColorStop(0, "rgba(20,22,27,0.70)"); g.addColorStop(k(420), "rgba(20,22,27,0.18)");
-  g.addColorStop(k(Math.max(430, haut - 340)), "rgba(20,22,27,0.32)"); g.addColorStop(k(Math.max(450, haut - 100)), "rgba(20,22,27,0.84)");
-  g.addColorStop(k(Math.max(470, haut + 20)), "rgba(20,22,27,0.93)"); g.addColorStop(1, "rgba(20,22,27,0.97)");
-  ctx.fillStyle = g; ctx.fillRect(0, 0, L, H);
-  storyMarque(ctx);
-  // 4. texte
-  let y = haut;
-  storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
-  y += 66 + 30;
-  y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
-  if(plan.e){
-    y += 40;
-    ctx.fillStyle = "rgba(255,255,255,0.22)"; ctx.fillRect(marge, y - 20, larg, 2); // filet de séparation
-    ctx.font = `800 28px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = STORY_DA.rose; ctx.textBaseline = "alphabetic";
-    ctx.fillText("L'ESSENTIEL", marge, y + 12); ctx.letterSpacing = "0px";
-    y += 36;
-    ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
-    storyStyleEcrire(ctx, plan.e, marge + 30, y, "#FFFFFF", d.colorerVoix ? NUIT : null);
-  }
-  storyStylePied(ctx, d, { doux:"#D9DEF2", texte:"#FFFFFF", credit:true }); // le crédit de la photo n'est affiché que si la photo l'est
+  storyStylePoser(ctx, d, plan, pied);
   return true;
 }
 
+// « question » : accroche posée en QUESTION (point d'interrogation rouge), puis la réponse : « L'essentiel » et/ou trois puces numérotées séparées par des filets gris
 function storyStyleQuestion(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, bas = 1446, dispo = bas - 400;
-  const P = STORY_FONDS_QUESTION[d.fond] || STORY_FONDS_QUESTION[STORY_FOND_THEME[d.theme]] || STORY_FONDS_QUESTION.bleu;
+  const larg = STORY.L - 2 * BLANC.marge, fond = d.colorerVoix ? "creme" : null, pied = storyStylePiedBlanc(ctx, d), bas = storyStyleBasBlanc(pied);
   let question = storyTypo(d.accroche).replace(/[\s.!…]+$/, "");
   if(!/\?$/.test(question)) question += " ?";
   const puces = (d.puces || []).map(storyTypo).filter(Boolean).slice(0, 3);
   // Réponse : l'essentiel en entier (puis, s'il y a la place, les puces) ; sans essentiel, les puces numérotées
-  const reps = d.essentiel ? storyVariantes(d.essentiel) : [];
   const candidats = [];
-  for(const r of reps){ if(puces.length) candidats.push({ r, p:true }); candidats.push({ r, p:false }); }
+  for(const r of (d.essentiel ? storyVariantes(d.essentiel) : [])){ if(puces.length) candidats.push({ r, p:true }); candidats.push({ r, p:false }); }
   candidats.push({ r:"", p:true });
-  const blPuces = tP => { const bl = puces.map(p => storyAjuste(ctx, p, { tailles:[tP], poids:700, police:"Public Sans", largeur:larg - 104, max:3, interligne:1.16 })); return bl.filter(Boolean); };
-  let plan = null;
+  const titre = storyStyleTitre(ctx, question, { tMax:116, grand:80, accent:"?", fond });
+  if(!titre.options.length) return false;
+  const barre = storyBlancBloc(10, (c, x, y) => { c.fillStyle = BLANC.rouge; c.fillRect(x, y, 140, 10); }, { avant:30 });
+  const blocsPuces = tP => {
+    const bl = puces.map(p => storyBlancOptions(ctx, p, { tailles:[tP], max:3, poids:700, largeur:larg - 96, interligne:1.2, couleur:BLANC.encre, fond })[0]);
+    if(bl.some(b => !b)) return null;
+    return bl.map((b, i) => { const h = Math.max(b.h, 64), dy = (h - b.h) / 2; return storyBlancBloc(h, (c, x, y) => {
+      if(i) storyBlancFilet(c, y - 15, { x, largeur:larg });
+      c.font = `800 62px "${BLANC.serif}"`; c.fillStyle = BLANC.rouge; c.textAlign = "left"; c.textBaseline = "alphabetic"; c.fillText(String(i + 1), x, y + dy + tP * 0.82);
+      b.dessiner(c, x + 96, y + dy);
+    }, { avant:30 }); });
+  };
   for(const c of candidats){
-    for(let tQ = 116; tQ >= 52 && !plan; tQ -= 4){
-      const q = storyStyleBloc(ctx, question, { taille:tQ, poids:700, police:"Newsreader", largeur:larg, max:99, interligne:1.18 });
-      if(!q.ok || q.l.length > 6) continue;
-      const base = 66 + 44 + q.h + 28 + 10;
-      if(!c.r){
-        for(const tP of [56, 54, 52, 50, 48, 46, 44]){
-          const bl = blPuces(tP);
-          const hP = bl.reduce((a, b) => a + b.h, 0) && bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * Math.max(0, bl.length - 1);
-          if(base + 56 + (hP || 0) <= dispo){ plan = { q, bl, e:null, total:base + 56 + (hP || 0) }; break; }
-        }
-        if(!plan && !puces.length) plan = { q, bl:[], e:null, total:base };
-        continue;
-      }
-      if(c.p && tQ < 80) continue;
-      for(let tE = 52; tE >= (c.p ? 44 : 34) && !plan; tE -= 2){
-        const e = storyStyleBloc(ctx, c.r, { taille:tE, poids:700, police:"Public Sans", largeur:larg - 30, max:99, interligne:1.2 });
-        if(!e.ok) continue;
-        let bl = [], hP = 0;
-        if(c.p){ bl = blPuces(44); if(bl.length < puces.length) break; hP = 40 + bl.reduce((a, b) => a + Math.max(b.h, 76), 0) + 34 * (bl.length - 1); }
-        const total = base + 44 + 36 + e.h + hP;
-        if(total <= dispo) plan = { q, bl, e, total, tP:44 };
-      }
+    for(const tP of (c.p || !c.r ? [46, 44, 42, 40, 38, 36] : [0])){
+      const bp = c.p || !c.r ? blocsPuces(tP) : [];
+      if(!bp) continue;
+      const chap = c.r ? storyBlancChapeau(ctx, c.r, { largeur:larg, fond, avant:36, variantes:false, tailles:storyBlancTailles(c.p ? 46 : 52, c.p ? 38 : 34), rang:[1, 5, null] }) : null;
+      const plan = storyBlancPile(ctx, [titre, barre, chap, ...bp], { haut:STORY_HAUT_BLANC, bas });
+      if(plan && (!c.p || plan.choix[0].taille >= 72)){ storyStylePoser(ctx, d, plan, pied); return true; }
     }
-    if(plan) break;
   }
-  if(!plan) return false;
-  storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, couleur:P.fond, textes:[P.texte, P.doux] });
-  // grand « ? » décoratif en filigrane
-  ctx.font = `700 1250px "Newsreader"`; ctx.fillStyle = storyMelange(P.fond, P.texte, 0.09); ctx.textAlign = "right"; ctx.textBaseline = "alphabetic";
-  ctx.fillText("?", L + 120, 1500); ctx.textAlign = "left";
-  storyMarque(ctx, { texte:P.texte, arc:P.doux, rose:P.texte });
-  const haut = Math.max(400, 400 + (dispo - plan.total) * 0.3);
-  let y = haut;
-  storyStylePastille(ctx, d.categorie, marge, y, P.texte, P.fond);
-  y += 66 + 44;
-  y = storyStyleEcrire(ctx, plan.q, marge, y, P.texte, d.colorerVoix ? P.fond : null);
-  y += 28; ctx.fillStyle = P.texte; ctx.fillRect(marge, y, 140, 10); y += 10;
-  if(plan.e){
-    y += 44;
-    ctx.font = `800 26px "Public Sans"`; ctx.letterSpacing = "4px"; ctx.fillStyle = P.doux; ctx.textBaseline = "alphabetic";
-    ctx.fillText("L'ESSENTIEL", marge, y + 10); ctx.letterSpacing = "0px";
-    y += 36;
-    ctx.fillStyle = P.texte; ctx.fillRect(marge, y + 4, 8, plan.e.h - 8);
-    y = storyStyleEcrire(ctx, plan.e, marge + 30, y, P.texte, d.colorerVoix ? P.fond : null);
-    if(plan.bl.length) y += 40;
-  } else y += 56;
-  plan.bl.forEach((b, i) => {
-    const h = Math.max(b.h, 76), cy = y + 38;
-    ctx.fillStyle = P.texte; ctx.beginPath(); ctx.arc(marge + 38, cy, 38, 0, 2 * Math.PI); ctx.fill();
-    ctx.font = `900 44px "Public Sans"`; ctx.fillStyle = P.fond; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), marge + 38, cy + 3); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    storyStyleEcrire(ctx, b, marge + 104, y + (h - b.h) / 2, P.texte, d.colorerVoix ? P.fond : null);
-    y += h + 34;
-  });
-  storyStylePied(ctx, d, { doux:P.doux, texte:P.texte });
-  return true;
+  return false;
 }
 
+// « chiffre » : le nombre en très grand (serif gras) sous un trait rouge, sa légende, puis l'accroche et l'essentiel sous un filet gris
 function storyStyleChiffre(ctx, d){
-  const { L, H, marge } = STORY, larg = L - 2 * marge, NUIT = STORY_DA.nuit, bas = 1446, dispo = bas - 400;
+  const larg = STORY.L - 2 * BLANC.marge, fond = d.colorerVoix ? "creme" : null, pied = storyStylePiedBlanc(ctx, d), bas = storyStyleBasBlanc(pied);
   const valeur = String(d.chiffre.valeur), accroche = storyTypo(d.contexte || d.accroche || "");
-  ctx.font = `900 440px "Public Sans"`; ctx.letterSpacing = "-12px";
-  const w0 = ctx.measureText(valeur).width;
-  const tN0 = Math.max(120, Math.min(520, Math.floor(440 * larg / Math.max(w0, 1))));
-  ctx.letterSpacing = "0px";
+  const vc = d.chiffre.type ? storyVoixCouleur(d.chiffre.type, "creme") : null; // chiffre et légende teintés (voix pour / contre / abstentions)
+  ctx.font = `800 400px "${BLANC.serif}"`; ctx.letterSpacing = "-8px";
+  const w0 = ctx.measureText(valeur).width; ctx.letterSpacing = "0px";
+  const tN0 = Math.max(48, Math.min(440, Math.floor(400 * larg / Math.max(w0, 1))));
+  const nombre = { options:storyBlancTailles(tN0, Math.min(tN0, Math.max(48, Math.round(tN0 * 0.55))), 10).map(tN => storyBlancBloc(Math.round(tN * 0.72), (c, x, y) => {
+    c.font = `800 ${tN}px "${BLANC.serif}"`; c.letterSpacing = `${-Math.round(tN * 0.02)}px`; c.fillStyle = vc || BLANC.encre; c.textAlign = "left"; c.textBaseline = "alphabetic";
+    c.fillText(valeur, x - 4, y + Math.round(tN * 0.72)); c.letterSpacing = "0px";
+  }, { avant:34, rang:0 })) };
+  const barre = storyBlancBloc(14, (c, x, y) => { c.fillStyle = BLANC.rouge; c.fillRect(x, y, 150, 14); });
   // légende : entière (jusqu'à 3 lignes) ou absente
-  const lg = d.chiffre.legende ? storyAjuste(ctx, d.chiffre.legende, { tailles:storyTailles(76, 44), poids:700, police:"Newsreader", largeur:larg, max:3, hMax:260, interligne:1.18 }) : null;
+  const legende = d.chiffre.legende ? storyBlancOptions(ctx, d.chiffre.legende, { tailles:storyBlancTailles(76, 44), max:3, hMax:260, poids:800, police:BLANC.serif, interligne:1.14, ls:t => -t * 0.01, couleur:vc || BLANC.encre, fond:null, avant:22, rang:() => 1 }) : [];
   // bas de page : l'accroche, puis l'essentiel EN ENTIER ; on retire d'abord l'accroche, puis on réduit l'essentiel à ses premières propositions complètes
-  const essentiels = d.essentiel ? storyVariantes(d.essentiel) : [];
   const candidats = [];
-  for(const e of essentiels){ if(accroche && storyTypo(e) !== accroche) candidats.push({ a:true, e }); candidats.push({ a:false, e }); }
+  for(const e of (d.essentiel ? storyVariantes(d.essentiel) : [])){ if(accroche && storyTypo(e) !== accroche) candidats.push({ a:true, e }); candidats.push({ a:false, e }); }
   if(accroche) candidats.push({ a:true, e:"" });
   candidats.push({ a:false, e:"" });
-  let plan = null;
   for(const c of candidats){
-    for(const [tC, tE] of (c.a && c.e ? [[56, 48], [52, 46], [48, 42], [44, 38], [40, 36], [36, 34]] : [[56, 56], [52, 52], [48, 48], [44, 44], [40, 40], [36, 36], [34, 34]])){
-      const a = c.a ? storyStyleBloc(ctx, accroche, { taille:tC, poids:700, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
-      const e = c.e ? storyStyleBloc(ctx, c.e, { taille:tE, poids:600, police:"Public Sans", largeur:larg, max:99, interligne:1.2 }) : null;
-      if((a && !a.ok) || (e && !e.ok)) continue;
-      const hBas = (a || e) ? 56 + 4 + 40 + (a ? a.h : 0) + (a && e ? 26 : 0) + (e ? e.h : 0) : 0;
-      for(let tN = tN0; tN >= Math.max(120, Math.round(tN0 * 0.55)); tN -= 20){
-        const hN = Math.round(tN * 0.74), total = 66 + 60 + 14 + 36 + hN + (lg ? 26 + lg.h : 0) + hBas;
-        if(total <= dispo){ plan = { a, e, tN, hN, total }; break; }
-      }
-      if(plan) break;
-    }
-    if(plan) break;
+    const sep = c.a || c.e ? storyBlancFiletBloc(40) : null;
+    const a = c.a ? { options:storyBlancOptions(ctx, accroche, { tailles:storyBlancTailles(c.e ? 52 : 56, 34), poids:700, largeur:larg, interligne:1.2, couleur:BLANC.encre, fond, avant:34, rang:() => 2 }) } : null;
+    const e = c.e ? { options:storyBlancOptions(ctx, c.e, { tailles:storyBlancTailles(c.a ? 46 : 54, 34), poids:600, largeur:larg, interligne:1.22, couleur:BLANC.texte, fond, avant:c.a ? 22 : 34, rang:() => 2 }) } : null;
+    if((a && !a.options.length) || (e && !e.options.length)) continue;
+    const plan = storyBlancPile(ctx, [barre, nombre, legende.length ? { options:legende } : null, sep, a, e], { haut:STORY_HAUT_BLANC, bas });
+    if(plan){ storyStylePoser(ctx, d, plan, pied); return true; }
   }
-  if(!plan) return false;
-  const { tN, hN } = plan;
-  const vc = d.chiffre.type ? storyVoixCouleur(d.chiffre.type, NUIT) : null; // chiffre et légende teintés (voix pour / contre / abstentions)
-  storyFondGenere(ctx, { theme:d.theme, cle:d.accroche, largeur:L, hauteur:H, sombre:true });
-  storyMarque(ctx);
-  const haut = Math.max(400, 400 + (dispo - plan.total) * 0.35);
-  let y = haut;
-  storyStylePastille(ctx, d.categorie, marge, y, storyAssombri(d.couleur), "#FFFFFF");
-  y += 66 + 60;
-  ctx.fillStyle = STORY_DA.rose; ctx.fillRect(marge, y, 150, 14); y += 14 + 36;
-  ctx.font = `900 ${tN}px "Public Sans"`; ctx.letterSpacing = `${-Math.round(tN * 0.027)}px`; ctx.fillStyle = vc || "#FFFFFF"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
-  ctx.fillText(valeur, marge - 6, y + hN); ctx.letterSpacing = "0px";
-  y += hN;
-  if(lg){ y += 26; y = storyStyleEcrire(ctx, lg, marge, y, vc || STORY_DA.rose); }
-  if(plan.a || plan.e){
-    y += 56; ctx.fillStyle = "rgba(197,206,242,0.45)"; ctx.fillRect(marge, y, larg, 3); y += 4 + 40;
-    if(plan.a){ y = storyStyleEcrire(ctx, plan.a, marge, y, "#FFFFFF", d.colorerVoix ? NUIT : null); if(plan.e) y += 26; }
-    if(plan.e) storyStyleEcrire(ctx, plan.e, marge, y, plan.a ? "#D9DEF2" : "#FFFFFF", d.colorerVoix ? NUIT : null);
-  }
-  storyStylePied(ctx, d, { doux:"#C5CEF2", texte:"#FFFFFF" });
-  return true;
+  return false;
 }
 // Point d'entrée : dessine la fiche dans le style demandé ; renvoie le style réellement employé (« chiffre » sans nombre devient « question »), ou null pour « bleu » (le module dessine alors
 // lui-même) ou si la mise en page ne peut pas afficher le texte entier (rien n'est alors dessiné : le module retombe sur le style bleu)
@@ -1274,6 +1125,7 @@ async function storySpecSujet(s){
   const liste = medias.slice(0, 5).join(", ") + (n > 5 ? ` et ${n - 5} autres` : "");
   return {
     theme:th.cle, couleur:th.couleur, motif:th.motif, categorie:th.categorie, accroche, essentiel, puces, chiffre:ch, contexte:accroche, photo,
+    medias, quand:s.sensible?.sansHeure || typeof storyBlancQuand !== "function" ? "" : storyBlancQuand(a0.date), // médias cités (pied « Sources : … ») et heure de la première reprise
     source:"",
     video:(s.articles.find(a => a.video) || {}).media || "", cta:"Toute l'actu politique",
   };
@@ -1295,6 +1147,8 @@ function storyFondDepuis(type, info){
 }
 async function dessinerStory(type, info){
   await chargerModule("stories-fond");
+  await chargerModule("stories-blanc"); await storyBlancPolices(); // kit « base blanche » (BLANC, storyBlanc*) : fond blanc, filets, rubrique, pied de source, tout en vectoriel
+  await chargerModule("stories-fiches"); // fiches et visuels hors presse sur la base blanche (vote, sondages, élus, résultats, quiz…) : STORY_PLUS + STORY_FICHES_TYPES
   const fd = storyFondDepuis(type, info); storyFondContexte({ theme:fd.theme, cle:fd.cle || type });
   if(STORY_ACTU_TYPES.includes(type)) await Promise.all(["stories-actu", "stories-actu-liste", "stories-actu-fait"].map(chargerModule));
   // Publications Instagram automatiques : « post » (image de fil 1080 × 1350) et « annonce-post » (story qui l'annonce), dessinées d'après une fiche (js/stories-post.js)
@@ -1311,7 +1165,13 @@ async function dessinerStory(type, info){
   let y, nom = "hemicycle-france";
   const fr1 = n => String(n).replace(".", ",");
 
-  if(type === "scrutin" || type === "senat"){
+  if(STORY_FICHES_TYPES.includes(type)){ // base blanche : js/stories-fiches.js
+    const r = await STORY_PLUS[type](ctx, info);
+    if(!r) return null;
+    nom = r.nom || nom;
+  }
+  // CODE MORT : les branches « scrutin » … « quiz » ci-dessous (ancien dessin bleu) ne sont plus atteintes (STORY_FICHES_TYPES, ci-dessus, les capte) ; à supprimer avec les anciens STORY_PLUS 3 à 11
+  else if(type === "scrutin" || type === "senat"){
     let titre, date, resultat, groupes, sourceTxt, surtitre, censure = false;
     if(type === "scrutin"){
       const loi = currentLoi(); if(!loi) return null;

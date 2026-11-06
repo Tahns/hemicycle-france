@@ -1,4 +1,7 @@
 /* Module chargé à la demande (dessin des stories et des posts) : voir chargerModule() dans index.html.
+   HÉRITAGE : fonds dégradés, arcs, sièges et grain de l'ancienne direction artistique « fond bleu ». Les stories de PRESSE (js/stories.js : styles « bleu », « une-photo », « question »,
+   « chiffre » ; js/stories-actu*.js) sont désormais sur la BASE BLANCHE (js/stories-blanc.js : fond blanc plein, aucun dégradé, aucun grain) et n'appellent plus ce module. Il reste chargé
+   pour les autres types de story qui n'ont pas encore migré ; à supprimer, avec storyFondTheme, quand plus aucun dessin n'en dépend.
    FONDS GÉNÉRÉS pour les images sans photo : aucune ressource externe, tout est dessiné dans le canvas.
    Un fond = dégradé travaillé de la couleur du thème (assourdie ; bleu #1B3A8C pour la politique générale), grands arcs concentriques d'hémicycle
    (la forme du logo) en filigrane, motif discret de « sièges » (points) et léger grain. 8 compositions, choisies de façon déterministe par un hash
