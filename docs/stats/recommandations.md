@@ -1,19 +1,19 @@
 # Recommandations (suggestions, rien n'est modifié automatiquement)
 
-Calculées le 2026-11-06 à partir de 208 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
+Calculées le 2026-11-07 à partir de 209 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
 
 ## Stories (182 mesuré(s))
 
-- les stories publiés vers 14 h (heure de Paris) ont 51 % de vues de moins que les autres (4 contre 178 médias). Piste : en publier moins ou les repenser.
-- les stories sur le thème « budget » ont 44 % de vues de plus que les autres (4 contre 178 médias, moyenne 12 vues). Piste : en publier davantage.
-- les stories sur le thème « elections » ont 21 % de vues de moins que les autres (29 contre 153 médias). Piste : en publier moins ou les repenser.
+- les stories publiés vers 14 h (heure de Paris) ont 52 % de vues de moins que les autres (4 contre 178 médias). Piste : en publier moins ou les repenser.
+- les stories sur le thème « budget » ont 42 % de vues de plus que les autres (4 contre 178 médias, moyenne 12 vues). Piste : en publier davantage.
+- les stories sur le thème « elections » ont 20 % de vues de moins que les autres (29 contre 153 médias). Piste : en publier moins ou les repenser.
 
-## Posts (24 mesuré(s))
+## Posts (25 mesuré(s))
 
-- les posts publiés vers 13 h (heure de Paris) ont 629 % de vues de plus que les autres (3 contre 21 médias, moyenne 109 vues). Piste : en publier davantage.
-- les posts publiés vers 9 h (heure de Paris) ont 67 % de vues de moins que les autres (3 contre 21 médias). Piste : en publier moins ou les repenser.
-- les posts sur le thème « parlement » ont 211 % de vues de plus que les autres (9 contre 15 médias, moyenne 46 vues). Piste : en publier davantage.
-- les posts sur le thème « autre » ont 64 % de vues de moins que les autres (6 contre 18 médias). Piste : en publier moins ou les repenser.
+- les posts publiés vers 13 h (heure de Paris) ont 642 % de vues de plus que les autres (3 contre 22 médias, moyenne 109 vues). Piste : en publier davantage.
+- les posts publiés vers 9 h (heure de Paris) ont 59 % de vues de moins que les autres (3 contre 22 médias). Piste : en publier moins ou les repenser.
+- les posts sur le thème « parlement » ont 219 % de vues de plus que les autres (9 contre 16 médias, moyenne 46 vues). Piste : en publier davantage.
+- les posts sur le thème « autre » ont 63 % de vues de moins que les autres (6 contre 19 médias). Piste : en publier moins ou les repenser.
 
 ## Carrousels (2 mesuré(s))
 
@@ -21,7 +21,7 @@ Données insuffisantes : 2 sur 10 nécessaires avant de tirer des conclusions. A
 
 ## Formats (indicatif)
 
-Vues moyennes : posts 27 (24) ; stories 9 (182). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
+Vues moyennes : posts 26 (25) ; stories 9 (182). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
 
 ## Test comparatif des styles de story
 
