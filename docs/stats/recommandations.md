@@ -25,4 +25,4 @@ Vues moyennes : posts 26 (25) ; stories 9 (188). Attention : une vue de story et
 
 ## Test comparatif des styles de story
 
-- Style gagnant : aucun net. « une-photo » est en tête (10 vues) mais l'écart avec « question » (9 vues) est inférieur à 15 %. bleu : 33 stories, 8 vues en moyenne ; une-photo : 54 stories, 10 vues en moyenne ; question : 36 stories, 9 vues en moyenne.
+- Style gagnant : aucun net. « une-photo » est en tête (10 vues) mais l'écart avec « question » (9 vues) est inférieur à 15 %. bleu : 33 stories, 9 vues en moyenne ; une-photo : 54 stories, 10 vues en moyenne ; question : 36 stories, 9 vues en moyenne.
