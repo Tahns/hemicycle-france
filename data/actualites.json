@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-07T14:55:34.052Z",
+ "lastUpdated": "2026-11-07T15:01:03.373Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -155,7 +155,6 @@
    "motifs": [
     "manifestation",
     "policiers",
-    "parisien",
     "gendarmes"
    ],
    "medias": [
@@ -193,7 +192,7 @@
     "L'Obs",
     "Public Sénat"
    ],
-   "nb": 43,
+   "nb": 41,
    "derniere": "2026-11-07T14:49:02.000Z",
    "articles": [
     {
@@ -259,9 +258,9 @@
     },
     {
      "media": "RFI",
-     "titre": "DIRECT - Colère sociale en France: le cortège parisien s'est élancé depuis la place de la République",
-     "url": "https://www.rfi.fr/fr/france/20261107-direct-col%C3%A8re-sociale-en-france-des-milliers-de-personnes-attendues-dans-la-rue-pour-maintenir-la-pression",
-     "date": "2026-11-07T11:31:11.000Z"
+     "titre": "Manifestations en France: «Désormais, la restriction devient la règle», estime Serge Slama",
+     "url": "https://www.rfi.fr/fr/podcasts/le-grand-invit%C3%A9-international/20261107-manifestations-en-france-d%C3%A9sormais-la-restriction-devient-la-r%C3%A8gle-estime-serge-slama",
+     "date": "2026-11-07T08:01:37.000Z"
     },
     {
      "media": "Libération",
@@ -495,7 +494,7 @@
      "media": "Le Monde",
      "titre": "Marine Le Pen et Edouard Philippe attaquent le programme de LFI, que Jean-Luc Mélenchon doit présenter samedi lors d’un meeting au Bourget",
      "url": "https://www.lemonde.fr/politique/article/2026/11/07/marine-le-pen-et-edouard-philippe-attaquent-le-programme-de-lfi-que-jean-luc-melenchon-doit-presenter-samedi-lors-d-un-meeting-au-bourget_6808286_823448.html",
-     "date": "2026-11-07T14:43:54.000Z"
+     "date": "2026-11-07T14:43:50.000Z"
     },
     {
      "media": "France 24",
@@ -1791,40 +1790,51 @@
    "rubrique": "Politique"
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "BFMTV"
    ],
-   "derniere": "2026-11-07T11:31:11.000Z",
+   "derniere": "2026-11-07T15:00:34.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "DIRECT - Colère sociale en France: le cortège parisien s'est élancé depuis la place de la République",
-     "url": "https://www.rfi.fr/fr/france/20261107-direct-col%C3%A8re-sociale-en-france-des-milliers-de-personnes-attendues-dans-la-rue-pour-maintenir-la-pression",
-     "media": "RFI",
-     "date": "2026-11-07T11:31:11.000Z"
-    },
-    {
-     "titre": "Manifestations en direct : le cortège parisien s'élance place de la République",
-     "url": "https://www.france24.com/fr/france/20261107-en-direct-nouvelle-journ%C3%A9e-de-mobilisation-en-france-pour-faire-pression-sur-le-gouvernement",
-     "media": "France 24",
-     "date": "2026-11-07T06:05:34.000Z"
+     "titre": "DIRECT. Présidentielle: le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-jean-luc-melenchon-attendu-pour-un-meeting-au-bourget-edouard-philippe-a-la-ciotat-et-saint-raphael_LN-202611070180.html",
+     "media": "BFMTV",
+     "date": "2026-11-07T15:00:34.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Manifestations",
-    "origine": "dossier"
+    "titre": "Présidentielle 2027 : Jean-Luc Mélenchon (La France insoumise)",
+    "origine": "regles",
+    "generique": true
    },
-   "fait": "Le cortège parisien s'est élancé depuis la place de la République",
-   "accroche": "Le cortège parisien s'est élancé depuis la place de la République",
-   "essentiel": "Pendant la colère sociale en France, le cortège parisien s'est élancé depuis la place de la République. Deux médias en parlent : RFI et France 24.",
-   "rubrique": "Politique"
+   "fait": "Le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
+   "accroche": "Le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Mélenchon 17,5–18 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -1861,7 +1871,7 @@
    "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-07T14:43:54.000Z",
+   "derniere": "2026-11-07T14:43:50.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1898,7 +1908,7 @@
      "titre": "Marine Le Pen et Edouard Philippe attaquent le programme de LFI, que Jean-Luc Mélenchon doit présenter samedi lors d’un meeting au Bourget",
      "url": "https://www.lemonde.fr/politique/article/2026/11/07/marine-le-pen-et-edouard-philippe-attaquent-le-programme-de-lfi-que-jean-luc-melenchon-doit-presenter-samedi-lors-d-un-meeting-au-bourget_6808286_823448.html",
      "media": "Le Monde",
-     "date": "2026-11-07T14:43:54.000Z"
+     "date": "2026-11-07T14:43:50.000Z"
     }
    ],
    "titrePropre": {
@@ -2029,53 +2039,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-07T14:33:12.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Présidentielle: le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-jean-luc-melenchon-attendu-pour-un-meeting-au-bourget-edouard-philippe-a-la-ciotat-et-saint-raphael_LN-202611070180.html",
-     "media": "BFMTV",
-     "date": "2026-11-07T14:33:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : Jean-Luc Mélenchon (La France insoumise)",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
-   "accroche": "Le meeting de La France insoumise commence au Bourget, le discours de Jean-Luc Mélenchon attendu vers 16h45",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Mélenchon 17,5–18 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-07T14:30:12.000Z",
@@ -2201,6 +2164,42 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-11-07T14:03:44.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-07T14:03:44.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Fabien Roussel",
       "photo": "photos/personnalites/fabien-roussel.jpg",
       "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
@@ -2233,42 +2232,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-07T14:03:44.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-07T14:03:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -3446,6 +3409,35 @@
    "fait": "À Brest la police organise un « Possible fichage » des élèves",
    "accroche": "À Brest la police organise un « Possible fichage » des élèves",
    "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-11-07T11:31:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "DIRECT - Colère sociale en France: le cortège parisien s'est élancé depuis la place de la République",
+     "url": "https://www.rfi.fr/fr/france/20261107-direct-col%C3%A8re-sociale-en-france-des-milliers-de-personnes-attendues-dans-la-rue-pour-maintenir-la-pression",
+     "media": "RFI",
+     "date": "2026-11-07T11:31:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : suivi en direct",
+    "origine": "regles"
+   },
+   "fait": "Le cortège parisien s'est élancé depuis la place de la République",
+   "accroche": "Le cortège parisien s'est élancé depuis la place de la République",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4688,9 +4680,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "fait": "Pendant la manifestations en France, Serge Slama estime : « Désormais, la restriction devient la règle »",
    "accroche": "Pendant la manifestations en France, Serge Slama estime : « Désormais, la restriction devient la règle »",
