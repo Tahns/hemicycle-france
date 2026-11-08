@@ -4,9 +4,9 @@ Calculées le 2026-11-08 à partir de 220 média(s) mesuré(s) (data/instagram-s
 
 ## Stories (193 mesuré(s))
 
-- les stories publiés vers 14 h (heure de Paris) ont 51 % de vues de moins que les autres (4 contre 189 médias). Piste : en publier moins ou les repenser.
-- les stories sur le thème « budget » ont 43 % de vues de plus que les autres (4 contre 189 médias, moyenne 12 vues). Piste : en publier davantage.
-- les stories sur le thème « elections » ont 19 % de vues de moins que les autres (30 contre 163 médias). Piste : en publier moins ou les repenser.
+- les stories publiés vers 14 h (heure de Paris) ont 52 % de vues de moins que les autres (4 contre 189 médias). Piste : en publier moins ou les repenser.
+- les stories sur le thème « budget » ont 42 % de vues de plus que les autres (4 contre 189 médias, moyenne 12 vues). Piste : en publier davantage.
+- les stories sur le thème « elections » ont 20 % de vues de moins que les autres (30 contre 163 médias). Piste : en publier moins ou les repenser.
 
 ## Posts (25 mesuré(s))
 
