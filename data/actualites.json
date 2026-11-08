@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-08T03:35:30.284Z",
+ "lastUpdated": "2026-11-08T04:01:02.034Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Public Sénat",
@@ -200,14 +200,14 @@
     "Public Sénat",
     "L'Express"
    ],
-   "nb": 85,
-   "derniere": "2026-11-07T23:36:49.000Z",
+   "nb": 86,
+   "derniere": "2026-11-08T03:58:20.000Z",
    "articles": [
     {
      "media": "RFI",
-     "titre": "Présidentielle en France: Édouard Philippe débute son «Grand Tour» pour relancer sa campagne",
-     "url": "https://www.rfi.fr/fr/france/20261107-pr%C3%A9sidentielle-en-france-%C3%A9douard-philippe-d%C3%A9bute-son-grand-tour-pour-relancer-sa-campagne",
-     "date": "2026-11-07T23:36:49.000Z"
+     "titre": "Présidentielle en France: Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+     "url": "https://www.rfi.fr/fr/france/20261108-pr%C3%A9sidentielle-en-france-jean-luc-m%C3%A9lenchon-pr%C3%A9sente-son-programme-lors-d-un-grand-meeting-au-bourget",
+     "date": "2026-11-08T03:58:20.000Z"
     },
     {
      "media": "BFMTV",
@@ -486,7 +486,8 @@
    "id": "manifestants",
    "titre": "Manifestations",
    "motifs": [
-    "manifestants"
+    "manifestants",
+    "samedi"
    ],
    "medias": [
     "Le JDD",
@@ -500,12 +501,13 @@
     "Le Monde",
     "Nice-Matin",
     "Sud Ouest",
+    "Hugo Décrypte",
     "Mediapart",
     "RFI",
     "France 24",
     "Libération"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 11,
    "sources": [
     "Groupe Bolloré",
     "BFMTV",
@@ -514,11 +516,12 @@
     "Le Monde",
     "Nice-Matin",
     "Sud Ouest",
+    "Hugo Décrypte",
     "Mediapart",
     "France Médias Monde",
     "Libération"
    ],
-   "nb": 25,
+   "nb": 29,
    "derniere": "2026-11-07T22:49:41.000Z",
    "articles": [
     {
@@ -587,6 +590,13 @@
      "titre": "Mobilisation sociale du 7 novembre : moins nombreux mais toujours déterminés, les manifestants ont battu le pavé dans le Sud-Ouest et partout en France",
      "url": "https://www.sudouest.fr/politique/mobilisation-sociale-du-7-novembre-moins-nombreux-mais-toujours-determines-les-manifestants-ont-battu-le-pave-dans-le-sud-ouest-et-partout-en-france-31432041.php",
      "date": "2026-11-07T18:35:24.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "250 000 personnes ont manifesté ce samedi selon les syndicats, 146 000 selon le gouvernement",
+     "url": "https://www.youtube.com/shorts/wTjPtU8hegk",
+     "date": "2026-11-07T18:00:55.000Z",
+     "video": true
     },
     {
      "media": "Mediapart",
@@ -1781,6 +1791,50 @@
    "accroche": "Entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation",
    "essentiel": "Colère sociale en France : entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation. Deux médias en parlent : RFI et France 24.",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-11-08T03:58:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle en France: Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+     "url": "https://www.rfi.fr/fr/france/20261108-pr%C3%A9sidentielle-en-france-jean-luc-m%C3%A9lenchon-pr%C3%A9sente-son-programme-lors-d-un-grand-meeting-au-bourget",
+     "media": "RFI",
+     "date": "2026-11-08T03:58:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Pour la présidentielle en France, Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+   "accroche": "Pour la présidentielle en France, Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Mélenchon 17,5–18 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4932,6 +4986,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-11-07T18:00:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "250 000 personnes ont manifesté ce samedi selon les syndicats, 146 000 selon le gouvernement",
+     "url": "https://www.youtube.com/shorts/wTjPtU8hegk",
+     "media": "Hugo Décrypte",
+     "date": "2026-11-07T18:00:55.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   },
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-07T17:57:49.000Z",
@@ -5295,63 +5377,6 @@
    },
    "fait": "Au meeting du Bourget, Jean-Luc Mélenchon présente son chemin de rupture",
    "accroche": "Au meeting du Bourget, Jean-Luc Mélenchon présente son chemin de rupture",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-07T17:31:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« À force de sensibilisation, on constate une diminution des signalements » : la lutte contre le harcèlement, matière principale durant une semaine à l’institution Sainte-Catherine",
-     "url": "https://www.sudouest.fr/lot-et-garonne/villeneuve-sur-lot/a-force-de-sensibilisation-on-constate-une-diminution-des-signalements-la-lutte-contre-le-harcelement-matiere-principale-durant-une-semaine-a-l-institution-sainte-catherine-31418045.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-07T17:31:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-07T17:30:52.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grand Besançon. Réduction du temps de parole des élus : le recours en référé de Frank Laidié et Marc Girardot rejeté",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/07/reduction-du-temps-de-parole-des-elus-le-recours-en-refere-de-frank-laidie-et-marc-girardot-rejete",
-     "media": "L'Est républicain",
-     "date": "2026-11-07T17:30:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Grand Besançon : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Le recours en référé de Frank Laidié et Marc Girardot rejeté",
-   "accroche": "Le recours en référé de Frank Laidié et Marc Girardot rejeté",
    "rubrique": "Politique"
   }
  ]
