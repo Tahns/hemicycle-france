@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-09T10:10:41.096Z",
+ "lastUpdated": "2026-11-09T10:15:53.785Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -274,48 +274,166 @@
    ]
   },
   {
-   "id": "accuse",
-   "titre": "Accuse",
+   "id": "mobilisation",
+   "titre": "Mobilisation",
    "motifs": [
-    "accuse",
-    "porte-parole",
-    "jean-noël"
+    "mobilisation",
+    "policiers"
    ],
    "medias": [
-    "BFMTV",
+    "Hugo Décrypte",
+    "Le Monde",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "RFI",
+    "Sud Ouest",
+    "Mediapart",
     "La Dépêche",
+    "France 24",
+    "Public Sénat"
+   ],
+   "mediasDistincts": 8,
+   "sources": [
+    "Hugo Décrypte",
+    "Le Monde",
+    "EBRA",
+    "France Médias Monde",
+    "Sud Ouest",
+    "Mediapart",
+    "La Dépêche",
+    "Public Sénat"
+   ],
+   "nb": 15,
+   "derniere": "2026-11-09T10:07:52.000Z",
+   "articles": [
+    {
+     "media": "Hugo Décrypte",
+     "titre": "Comment GTA est passé d’un jeu sur la police raté à une saga culte ?",
+     "url": "https://www.youtube.com/shorts/pOReBukTpEM",
+     "date": "2026-11-09T10:07:52.000Z",
+     "video": true
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Mobilisation lycéenne : pour rattraper les heures perdues, le ministre de l’éducation propose des « cours de rattrapage » pendant les vacances",
+     "url": "https://www.lemonde.fr/education/article/2026/11/09/heures-perdues-par-les-lyceens-edouard-geffray-propose-des-cours-de-rattrapage-ou-d-entrainement_6808629_1473685.html",
+     "date": "2026-11-09T08:30:35.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Franche-Comté. « Si ça se trouve vous êtes pas une citoyenne française » : une vidéo de policiers filmés lors d'une mobilisation devient virale",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/09/le-rn-c-est-des-gauchos-les-propos-choquants-de-policiers-filmes-lors-d-une-mobilisation",
+     "date": "2026-11-09T07:50:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Franche-Comté. « Le RN, c'est des gauchos » : une vidéo de policiers filmés lors d'une mobilisation devient virale",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/09/le-rn-c-est-des-gauchos-les-propos-choquants-de-policiers-filmes-lors-d-une-mobilisation",
+     "date": "2026-11-09T07:50:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Franche-Comté. « Le RN, c'est des gauchos » : une vidéo de policiers filmés lors d'une mobilisation devient virale",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/09/le-rn-c-est-des-gauchos-les-propos-choquants-de-policiers-filmes-lors-d-une-mobilisation",
+     "date": "2026-11-09T07:50:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Mobilisation sociale : pour Sébastien Lecornu, la semaine de toutes les négociations",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/09/mobilisation-sociale-pour-sebastien-lecornu-la-semaine-de-toutes-les-negociations_6808601_823448.html",
+     "date": "2026-11-09T04:30:38.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "France: six ans après le tabassage de Michel Zecler, trois policiers comparaissent devant la justice",
+     "url": "https://www.rfi.fr/fr/france/20261109-france-six-ans-apr%C3%A8s-le-tabassage-de-michel-zecler-trois-policiers-comparaissent-devant-la-justice",
+     "date": "2026-11-09T04:04:36.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "« C’est un caprice de gosse » : à Cergy, la mobilisation s’organise contre le projet de parcs d’attractions d’Emmanuel Macron et du prince héritier saoudien",
+     "url": "https://www.sudouest.fr/politique/emmanuel-macron/c-est-un-caprice-de-gosse-a-cergy-la-mobilisation-s-organise-contre-le-projet-de-parcs-d-attractions-d-emmanuel-macron-et-du-prince-heritier-saoudien-31451311.php",
+     "date": "2026-11-08T21:21:35.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Six ans après, les policiers qui ont tabassé Michel Zecler jugés devant une cour criminelle",
+     "url": "https://www.mediapart.fr/journal/france/081126/six-ans-apres-les-policiers-qui-ont-tabasse-michel-zecler-juges-devant-une-cour-criminelle",
+     "date": "2026-11-08T17:05:00.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Mobilisation lycéenne : le ministre de l'Éducation Édouard Geffray refuse de modifier le calendrier du bac malgré les heures de cours perdues",
+     "url": "https://www.ladepeche.fr/2026/11/08/mobilisation-lyceenne-le-ministre-de-leducation-edouard-geffray-refuse-de-modifier-le-calendrier-du-bac-malgre-les-heures-de-cours-perdues-13642353.php",
+     "date": "2026-11-08T08:42:18.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Jean-Luc Mélenchon, en meeting au Bourget pour l’élection présidentielle 2027, mobilise sa base tout en s’attelant à élargir son électorat",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/08/presidentielle-2027-en-meeting-au-bourget-jean-luc-melenchon-s-attelle-a-mobiliser-sa-base-tout-en-elargissant-son-electorat_6808387_823448.html",
+     "date": "2026-11-08T04:00:04.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "France : malgré une mobilisation en baisse, la rue veut \"maintenir la pression\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261107-col%C3%A8re-sociale-malgr%C3%A9-une-mobilisation-en-baisse-la-rue-veut-maintenir-la-pression",
+     "date": "2026-11-07T18:43:38.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Mobilisation de la jeunesse : « Nous avons construit un État-providence qui fonctionne seulement pour les adultes », reconnaît cette eurodéputée",
+     "url": "https://www.publicsenat.fr/actualites/politique/mobilisation-de-la-jeunesse-nous-avons-construit-un-etat-providence-qui-fonctionne-seulement-pour-les-adultes-reconnait-cette-eurodeputee",
+     "date": "2026-11-07T15:30:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Nouvelle mobilisation sociale, des milliers de personnes attendues dans les rues",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261107-nouvelle-mobilisation-sociale-des-milliers-de-personnes-attendues-dans-les-rues",
+     "date": "2026-11-07T13:47:28.000Z"
+    }
+   ]
+  },
+  {
+   "id": "passe",
+   "titre": "Passe",
+   "motifs": [
+    "passe",
+    "devenir"
+   ],
+   "medias": [
+    "Hugo Décrypte",
     "Nice-Matin",
-    "L'Humanité",
+    "BFMTV",
+    "Sud Ouest",
+    "20 Minutes",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "Le Monde"
+    "Le JDD",
+    "Ouest-France"
    ],
-   "mediasDistincts": 6,
+   "mediasDistincts": 8,
    "sources": [
-    "BFMTV",
-    "La Dépêche",
+    "Hugo Décrypte",
     "Nice-Matin",
-    "L'Humanité",
+    "BFMTV",
+    "Sud Ouest",
+    "20 Minutes",
     "EBRA",
-    "Le Monde"
+    "Le JDD",
+    "Ouest-France"
    ],
    "nb": 11,
-   "derniere": "2026-11-09T07:54:58.000Z",
+   "derniere": "2026-11-09T10:07:52.000Z",
    "articles": [
     {
-     "media": "BFMTV",
-     "titre": "Sarah Knafo, députée européenne Reconquête, accuse Jean-Luc Mélenchon “de vouloir mener une révolte bolchevique”",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-sarah-knafo-deputee-europeenne-reconquete-accuse-jean-luc-melenchon-de-vouloir-mener-une-revolte-bolchevique_VN-202611090306.html",
-     "date": "2026-11-09T07:54:58.000Z",
+     "media": "Hugo Décrypte",
+     "titre": "Comment GTA est passé d’un jeu sur la police raté à une saga culte ?",
+     "url": "https://www.youtube.com/shorts/pOReBukTpEM",
+     "date": "2026-11-09T10:07:52.000Z",
      "video": true
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "DIRECT. Présidentielle 2027 : accusé d'être trop proche du macronisme, Raphaël Glucksmann affirme avoir refusé le poste de Premier ministre en 2024",
-     "url": "https://www.ladepeche.fr/2026/11/09/direct-presidentielle-2027-accuse-detre-trop-proche-du-macronisme-raphael-glucksmann-affirme-avoir-refuse-le-poste-de-premier-ministre-en-2024-13643517.php",
-     "date": "2026-11-09T06:34:13.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -324,89 +442,17 @@
      "date": "2026-11-09T06:10:01.000Z"
     },
     {
-     "media": "L'Humanité",
-     "titre": "De la banalisation à l’alliance ? Comment la droite ouvre de plus en plus grand sa porte au RN",
-     "url": "https://www.humanite.fr/politique/alliance-rn-les-republicains/de-la-banalisation-a-lalliance-comment-la-droite-ouvre-de-plus-en-plus-grand-sa-porte-au-rn",
-     "date": "2026-11-09T06:00:00.000Z"
+     "media": "BFMTV",
+     "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - La nouvelle passe d'armes entre Raphaël Glucksmann et Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/video-l-edito-politique-de-guillaume-daret-la-nouvelle-passe-d-armes-entre-raphael-glucksmann-et-jean-luc-melenchon_VN-202611090130.html",
+     "date": "2026-11-09T05:53:49.000Z",
+     "video": true
     },
     {
-     "media": "Le Progrès",
-     "titre": "Politique. Jean-Noël Barrot accuse Jean-Luc Mélenchon de s’être fait le « porte-parole du Kremlin »",
-     "url": "https://www.leprogres.fr/politique/2026/11/08/jean-noel-barrot-accuse-jean-luc-melenchon-de-s-etre-fait-le-porte-parole-du-kremlin",
-     "date": "2026-11-08T19:22:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Jean-Noël Barrot accuse Jean-Luc Mélenchon de s’être fait le « porte-parole du Kremlin »",
-     "url": "https://www.dna.fr/politique/2026/11/08/jean-noel-barrot-accuse-jean-luc-melenchon-de-s-etre-fait-le-porte-parole-du-kremlin",
-     "date": "2026-11-08T19:22:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Politique. Jean-Noël Barrot accuse Jean-Luc Mélenchon de s’être fait le « porte-parole du Kremlin »",
-     "url": "https://www.ledauphine.com/politique/2026/11/08/jean-noel-barrot-accuse-jean-luc-melenchon-de-s-etre-fait-le-porte-parole-du-kremlin",
-     "date": "2026-11-08T19:22:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Politique. Jean-Noël Barrot accuse Jean-Luc Mélenchon de s’être fait le « porte-parole du Kremlin »",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/08/jean-noel-barrot-accuse-jean-luc-melenchon-de-s-etre-fait-le-porte-parole-du-kremlin",
-     "date": "2026-11-08T19:22:00.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Présidentielle 2027 : Jean-Noël Barrot accuse Jean-Luc Mélenchon de s’être fait \"le porte-parole du Kremlin\" après ses propos sur le Donbass",
-     "url": "https://www.ladepeche.fr/2026/11/08/presidentielle-2027-jean-noel-barrot-accuse-jean-luc-melenchon-de-setre-fait-le-porte-parole-du-kremlin-apres-ses-propos-sur-le-donbass-13642810.php",
-     "date": "2026-11-08T17:16:28.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Jean-Luc Mélenchon « s’est fait le porte-parole du Kremlin » sur le Donbass, tance Jean-Noël Barrot",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/08/jean-luc-melenchon-accuse-de-relayer-le-discours-du-kremlin-sur-le-donbass-il-s-est-fait-porte-parole-du-kremlin-tance-jean-noel-barrot_6808430_823448.html",
-     "date": "2026-11-08T13:04:32.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« La primaire va mécaniquement conduire à diviser, distendre, critiquer, attaquer » : à Saint-Raphaël, Édouard Philippe ferme définitivement la porte à une primaire",
-     "url": "https://www.nicematin.com/societe/politique/la-primaire-va-mecaniquement-conduire-a-diviser-distendre-critiquer-attaquer-a-saint-raphael-edouard-philippe-ferme-definitivement-la-porte-a-une-primaire-10755210",
-     "date": "2026-11-08T05:45:08.000Z"
-    }
-   ]
-  },
-  {
-   "id": "petition",
-   "titre": "Pétition",
-   "motifs": [
-    "pétition",
-    "million",
-    "signatures"
-   ],
-   "medias": [
-    "Le Progrès",
-    "20 Minutes",
-    "Nice-Matin",
-    "Sud Ouest",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "L'Obs"
-   ],
-   "mediasDistincts": 5,
-   "sources": [
-    "EBRA",
-    "20 Minutes",
-    "Nice-Matin",
-    "Sud Ouest",
-    "L'Obs"
-   ],
-   "nb": 10,
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "articles": [
-    {
-     "media": "Le Progrès",
-     "titre": "Firminy. Finances de la ville, hausse des impôts : « Marc Petit doit assumer ses choix »",
-     "url": "https://www.leprogres.fr/politique/2026/11/09/finances-de-la-ville-hausse-des-impots-marc-petit-doit-assumer-ses-choix",
-     "date": "2026-11-09T05:00:00.000Z"
+     "media": "Sud Ouest",
+     "titre": "Colère sociale : le smic va-t-il passer la barre des 1 500 euros ce lundi ?",
+     "url": "https://www.sudouest.fr/france/colere-sociale-le-smic-va-t-il-passer-la-barre-des-1-500-euros-ce-lundi-31452883.php",
+     "date": "2026-11-09T05:21:56.000Z"
     },
     {
      "media": "20 Minutes",
@@ -415,57 +461,114 @@
      "date": "2026-11-09T03:47:26.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "La pétition appelant à fermer CNews dépasse le million de signatures sur le site de l’Assemblée nationale",
-     "url": "https://www.nicematin.com/culture/television/la-petition-appelant-a-fermer-cnews-depasse-le-million-de-signatures-sur-le-site-de-l-assemblee-nationale-10756596",
-     "date": "2026-11-08T21:36:26.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Pétition contre Cnews : plus d’un million de personnes ont déjà signé l’appel à fermer la chaîne de télévision",
-     "url": "https://www.sudouest.fr/politique/petition-contre-cnews-plus-d-un-million-de-personnes-ont-deja-signe-l-appel-a-fermer-la-chaine-de-television-31451427.php",
-     "date": "2026-11-08T21:33:10.000Z"
-    },
-    {
      "media": "Le Progrès",
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.leprogres.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "date": "2026-11-08T21:24:00.000Z"
+     "titre": "Allemagne. Ilse Aigner en passe de devenir la première femme présidente du pays",
+     "url": "https://www.leprogres.fr/politique/2026/11/08/ilse-aigner-en-passe-de-devenir-la-premiere-femme-presidente-du-pays",
+     "date": "2026-11-08T20:56:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.dna.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "date": "2026-11-08T21:24:00.000Z"
+     "titre": "Allemagne. Ilse Aigner en passe de devenir la première femme présidente du pays",
+     "url": "https://www.dna.fr/politique/2026/11/08/ilse-aigner-en-passe-de-devenir-la-premiere-femme-presidente-du-pays",
+     "date": "2026-11-08T20:56:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.ledauphine.com/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "date": "2026-11-08T21:24:00.000Z"
+     "titre": "Allemagne. Ilse Aigner en passe de devenir la première femme présidente du pays",
+     "url": "https://www.ledauphine.com/politique/2026/11/08/ilse-aigner-en-passe-de-devenir-la-premiere-femme-presidente-du-pays",
+     "date": "2026-11-08T20:56:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.estrepublicain.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "date": "2026-11-08T21:24:00.000Z"
+     "titre": "Allemagne. Ilse Aigner en passe de devenir la première femme présidente du pays",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/08/ilse-aigner-en-passe-de-devenir-la-premiere-femme-presidente-du-pays",
+     "date": "2026-11-08T20:56:00.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "« Supprimer CNews » : qui est Lucas Massoni, l’initiateur de la pétition qui a franchi le million de signatures ?",
-     "url": "https://www.nouvelobs.com/medias/20261108.OBS119971/supprimer-cnews-qui-est-lucas-massoni-l-initiateur-de-la-petition-qui-a-franchi-le-million-de-signataires.html",
-     "date": "2026-11-08T20:59:35.000Z"
+     "media": "Le JDD",
+     "titre": "Alice Rufo, la diplomate devenue ministre qui a l’oreille de Lecornu",
+     "url": "https://www.lejdd.fr/politique/alice-rufo-la-diplomate-devenue-ministre-qui-a-loreille-de-lecornu-188061",
+     "date": "2026-11-08T06:43:04.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Faut-il supprimer CNews de la télé, comme le réclame une pétition ? Les Français sont partagés",
-     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4261141-20261107-faut-supprimer-cnews-tele-comme-reclame-petition-francais-partages?at_medium=display&at_campaign=149",
-     "date": "2026-11-07T10:33:16.000Z"
+     "media": "Ouest-France",
+     "titre": "Dans l’œil du dessinateur Frap. Mais que va devenir Macron ? Frap vous répond",
+     "url": "https://www.ouest-france.fr/actualite-en-continu/dans-lil-du-dessinateur-frap-mais-que-va-devenir-macron-frap-vous-repond-75371004-d9ef-11f1-81f5-8e32b0872d76?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "date": "2026-11-07T11:46:03.000Z"
     }
    ]
   }
  ],
  "sujets": [
+  {
+   "medias": 7,
+   "mediasDistincts": 4,
+   "sources": [
+    "20 Minutes",
+    "Nice-Matin",
+    "EBRA",
+    "France 24"
+   ],
+   "derniere": "2026-11-09T03:47:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+     "url": "https://www.leprogres.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
+     "media": "Le Progrès",
+     "date": "2026-11-08T21:24:00.000Z"
+    },
+    {
+     "titre": "La pétition appelant à fermer CNews passe la barre du million de signatures",
+     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4261386-20261109-petition-appelant-fermer-cnews-passe-barre-million-signatures?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-09T03:47:26.000Z"
+    },
+    {
+     "titre": "La pétition appelant à fermer CNews dépasse le million de signatures sur le site de l’Assemblée nationale",
+     "url": "https://www.nicematin.com/culture/television/la-petition-appelant-a-fermer-cnews-depasse-le-million-de-signatures-sur-le-site-de-l-assemblee-nationale-10756596",
+     "media": "Nice-Matin",
+     "date": "2026-11-08T21:36:26.000Z"
+    },
+    {
+     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+     "url": "https://www.dna.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-08T21:24:00.000Z"
+    },
+    {
+     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+     "url": "https://www.ledauphine.com/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-08T21:24:00.000Z"
+    },
+    {
+     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+     "url": "https://www.estrepublicain.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
+     "media": "L'Est républicain",
+     "date": "2026-11-08T21:24:00.000Z"
+    },
+    {
+     "titre": "CNews : la pétition appelant à la fermeture de la chaîne dépasse le million de signatures",
+     "url": "https://www.france24.com/fr/france/20261108-cnews-la-p%C3%A9tition-appelant-%C3%A0-la-fermeture-de-la-cha%C3%AEne-d%C3%A9passe-le-million-de-signatures",
+     "media": "France 24",
+     "date": "2026-11-08T21:12:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+   "accroche": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
+   "essentiel": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés. La pétition appelant à fermer CNews dépasse le million de signatures sur le site de l’Assemblée nationale. Sept médias en parlent.",
+   "rubrique": "Élysée 2027"
+  },
   {
    "medias": 4,
    "mediasDistincts": 4,
@@ -544,68 +647,6 @@
    "medias": 6,
    "mediasDistincts": 3,
    "sources": [
-    "20 Minutes",
-    "Nice-Matin",
-    "EBRA"
-   ],
-   "derniere": "2026-11-09T03:47:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.leprogres.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "media": "Le Progrès",
-     "date": "2026-11-08T21:24:00.000Z"
-    },
-    {
-     "titre": "La pétition appelant à fermer CNews passe la barre du million de signatures",
-     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4261386-20261109-petition-appelant-fermer-cnews-passe-barre-million-signatures?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-09T03:47:26.000Z"
-    },
-    {
-     "titre": "La pétition appelant à fermer CNews dépasse le million de signatures sur le site de l’Assemblée nationale",
-     "url": "https://www.nicematin.com/culture/television/la-petition-appelant-a-fermer-cnews-depasse-le-million-de-signatures-sur-le-site-de-l-assemblee-nationale-10756596",
-     "media": "Nice-Matin",
-     "date": "2026-11-08T21:36:26.000Z"
-    },
-    {
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.dna.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-08T21:24:00.000Z"
-    },
-    {
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.ledauphine.com/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-08T21:24:00.000Z"
-    },
-    {
-     "titre": "Médias. Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-     "url": "https://www.estrepublicain.fr/societe/2026/11/08/petition-contre-cnews-plus-d-un-million-de-signatures-avant-le-vote-des-deputes",
-     "media": "L'Est républicain",
-     "date": "2026-11-08T21:24:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Pétition",
-    "origine": "dossier"
-   },
-   "fait": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-   "accroche": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés",
-   "essentiel": "Pétition contre CNews : plus d'un million de signatures avant le vote des députés. La pétition appelant à fermer CNews dépasse le million de signatures sur le site de l’Assemblée nationale. Six médias en parlent.",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 6,
-   "mediasDistincts": 3,
-   "sources": [
     "EBRA",
     "La Dépêche",
     "Le Monde"
@@ -670,8 +711,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Accuse",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Élysée 2027",
    "contexte": [
@@ -817,6 +859,64 @@
    ]
   },
   {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Europe 1",
+    "France 24",
+    "20 Minutes"
+   ],
+   "derniere": "2026-11-09T09:34:44.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "En direct - Conférence sociale : Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue",
+     "url": "https://www.europe1.fr/societe/en-direct-conference-sociale-sebastien-lecornu-va-tenter-de-repondre-a-la-colere-des-francais-une-hausse-du-smic-attendue-1219718?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-09T09:34:44.000Z"
+    },
+    {
+     "titre": "En direct : Lecornu reçoit syndicats et patronat pour tenter de répondre aux revendications sociales",
+     "url": "https://www.france24.com/fr/france/20261109-en-direct-lecornu-re%C3%A7oit-syndicats-et-patronat-pour-tenter-de-r%C3%A9pondre-aux-revendications-sociales",
+     "media": "France 24",
+     "date": "2026-11-09T09:17:53.000Z"
+    },
+    {
+     "titre": "Smic, Parcoursup… Lecornu au front pour tenter de calmer la colère sociale",
+     "url": "https://www.20minutes.fr/politique/4261380-20261109-smic-parcoursup-lecornu-front-tenter-calmer-colere-sociale?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-09T01:44:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Premier ministre : réponse sur le social et l'emploi",
+    "origine": "regles"
+   },
+   "fait": "Sébastien Lecornu va tenter de répondre à la colère des Français",
+   "accroche": "Sébastien Lecornu va tenter de répondre à la colère des Français",
+   "essentiel": "Conférence sociale : Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue. Lecornu reçoit syndicats et patronat pour tenter de répondre aux revendications sociales. Trois médias en parlent : Europe 1, France 24 et 20 Minutes.",
+   "rubrique": "Gouvernement",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
    "medias": 5,
    "mediasDistincts": 2,
    "sources": [
@@ -950,53 +1050,39 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Europe 1",
-    "20 Minutes"
+    "La Croix",
+    "France 24"
    ],
-   "derniere": "2026-11-09T09:34:44.000Z",
+   "derniere": "2026-11-09T10:02:42.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "gouvernement",
+    "vignette": "education"
    },
    "articles": [
     {
-     "titre": "En direct - Conférence sociale : Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue",
-     "url": "https://www.europe1.fr/societe/en-direct-conference-sociale-sebastien-lecornu-va-tenter-de-repondre-a-la-colere-des-francais-une-hausse-du-smic-attendue-1219718?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-09T09:34:44.000Z"
+     "titre": "Crise sociale en France : les syndicats reçus à Matignon ; la revalorisation du smic attendue",
+     "url": "https://www.la-croix.com/economie/crise-sociale-en-france-les-syndicats-recus-a-matignon-la-revalorisation-du-smic-attendue-20261109",
+     "media": "La Croix",
+     "date": "2026-11-09T10:02:42.000Z"
     },
     {
-     "titre": "Smic, Parcoursup… Lecornu au front pour tenter de calmer la colère sociale",
-     "url": "https://www.20minutes.fr/politique/4261380-20261109-smic-parcoursup-lecornu-front-tenter-calmer-colere-sociale?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-09T01:44:47.000Z"
+     "titre": "France : une conférence sociale à Matignon pour écouter la colère des syndicats et lycéens",
+     "url": "https://www.france24.com/fr/france/20261109-france-une-conf%C3%A9rence-sociale-%C3%A0-matignon-pour-%C3%A9couter-la-col%C3%A8re-des-syndicats-et-lyc%C3%A9ens",
+     "media": "France 24",
+     "date": "2026-11-09T00:58:05.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Premier ministre : ce que disent les médias",
+    "titre": "Syndicats : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue",
-   "accroche": "Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue",
-   "essentiel": "Conférence sociale : Sébastien Lecornu va tenter de répondre à la colère des Français, une hausse du Smic attendue. Deux médias en parlent : Europe 1 et 20 Minutes.",
-   "rubrique": "Gouvernement",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
+   "fait": "Une conférence sociale à Matignon pour écouter la colère des syndicats et lycéens",
+   "accroche": "Une conférence sociale à Matignon pour écouter la colère des syndicats et lycéens",
+   "essentiel": "Une conférence sociale à Matignon pour écouter la colère des syndicats et lycéens. Deux médias en parlent : La Croix et France 24.",
+   "rubrique": "Gouvernement"
   },
   {
    "medias": 2,
@@ -1318,59 +1404,6 @@
     {
      "type": "sondage",
      "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Glucksmann 10–13 %, Lisnard 7–9 %",
-     "source": "Commission des sondages (notice Ifop)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Public Sénat",
-    "Libération"
-   ],
-   "derniere": "2026-11-06T15:32:18.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : avec la « Nouvelle France », Jean-Luc Mélenchon fait de l’écologie la clé de voûte de son programme",
-     "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-avec-la-nouvelle-france-jean-luc-melenchon-fait-de-lecologie-la-cle-de-voute-de-son-programme",
-     "media": "Public Sénat",
-     "date": "2026-11-06T15:32:18.000Z"
-    },
-    {
-     "titre": "Nous avons cherché les 7 différences dans le nouveau programme de Mélenchon : écologie, IA, Europe…",
-     "url": "https://www.liberation.fr/politique/elections/libe-a-cherche-les-7-differences-dans-le-nouveau-programme-de-melenchon-ecologie-ia-europe-20261106_4M26K43WZFGZRE2DRVIGDZT6ZQ/",
-     "media": "Libération",
-     "date": "2026-11-06T05:00:01.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "accroche": "Présidentielle 2027 : avec la « Nouvelle France », Jean-Luc Mélenchon fait de l’écologie la clé de voûte de son programme",
-   "essentiel": "Présidentielle 2027 : avec la « Nouvelle France », Jean-Luc Mélenchon fait de l’écologie la clé de voûte de son programme. Deux médias en parlent : Public Sénat et Libération.",
-   "fait": "Présidentielle 2027 : avec la « Nouvelle France », Jean-Luc Mélenchon fait de l’écologie la clé de voûte de son programme",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Mélenchon 17,5–18 %",
      "source": "Commission des sondages (notice Ifop)"
     }
    ]
@@ -1737,9 +1770,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "fait": "Une vidéo de policiers filmés lors d'une mobilisation devient virale",
    "accroche": "Une vidéo de policiers filmés lors d'une mobilisation devient virale",
@@ -1831,6 +1863,93 @@
    },
    "fait": "Terrinov va présenter son rapport d’activité 2025",
    "accroche": "Terrinov va présenter son rapport d’activité 2025",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-08T03:58:20.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle en France: Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+     "url": "https://www.rfi.fr/fr/france/20261108-pr%C3%A9sidentielle-en-france-jean-luc-m%C3%A9lenchon-pr%C3%A9sente-son-programme-lors-d-un-grand-meeting-au-bourget",
+     "media": "RFI",
+     "date": "2026-11-08T03:58:20.000Z"
+    },
+    {
+     "titre": "Jean-Luc Mélenchon présente son programme au Bourget, 20 000 personnes attendues",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261107-jean-luc-m%C3%A9lenchon-pr%C3%A9sente-son-programme-au-bourget-20-000-personnes-attendues",
+     "media": "France 24",
+     "date": "2026-11-07T14:55:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présente son programme",
+    "origine": "recoupement"
+   },
+   "fait": "Pour la présidentielle en France, Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+   "accroche": "Pour la présidentielle en France, Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget",
+   "essentiel": "Pour la présidentielle en France, Jean-Luc Mélenchon présente son programme lors d'un grand meeting au Bourget. Jean-Luc Mélenchon présente son programme au Bourget, 20 000 personnes attendues. Deux médias en parlent : RFI et France 24.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Mélenchon 17,5–18 %",
+     "source": "Commission des sondages (notice Ifop)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-07T11:31:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Colère sociale en France: entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation mardi",
+     "url": "https://www.rfi.fr/fr/france/20261107-direct-col%C3%A8re-sociale-en-france-des-milliers-de-personnes-attendues-dans-la-rue-pour-maintenir-la-pression",
+     "media": "RFI",
+     "date": "2026-11-07T11:31:11.000Z"
+    },
+    {
+     "titre": "Manifestations en France : la mobilisation recule, nouvel appel à la grève mardi dans l'éducation",
+     "url": "https://www.france24.com/fr/france/20261106-manifestations-en-france-la-mobilisation-recule-nouvel-appel-%C3%A0-la-gr%C3%A8ve-mardi-dans-l-%C3%A9ducation",
+     "media": "France 24",
+     "date": "2026-11-06T23:34:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : appel sur l'éducation et la jeunesse",
+    "origine": "regles"
+   },
+   "fait": "Entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation",
+   "accroche": "Entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation",
+   "essentiel": "Colère sociale en France : entre 146000 et 250000 manifestants, nouvel appel à la grève dans l'éducation. Deux médias en parlent : RFI et France 24.",
    "rubrique": "Politique"
   },
   {
@@ -1928,6 +2047,66 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Hugo Décrypte"
+   ],
+   "derniere": "2026-11-09T10:07:52.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Comment GTA est passé d’un jeu sur la police raté à une saga culte ?",
+     "url": "https://www.youtube.com/shorts/pOReBukTpEM",
+     "media": "Hugo Décrypte",
+     "date": "2026-11-09T10:07:52.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-09T10:07:06.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "\"J'ai vu ses yeux rouges injectés de sang\" : une députée LFI était-elle visée par la violente attaque au mortier d'un salon de coiffure ?",
+     "url": "https://www.ladepeche.fr/2026/11/09/jai-vu-ses-yeux-rouges-injectes-de-sang-une-deputee-lfi-etait-elle-visee-par-la-violente-attaque-au-mortier-dun-salon-de-coiffure-13643710.php",
+     "media": "La Dépêche",
+     "date": "2026-11-09T10:07:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "La France insoumise : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Une députée La France insoumise était-elle visée par la violente attaque au mortier d'un salon de coiffure ?",
+   "accroche": "Une députée La France insoumise était-elle visée par la violente attaque au mortier d'un salon de coiffure ?",
+   "rubrique": "Assemblée nationale"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-09T10:05:25.000Z",
@@ -1971,29 +2150,39 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "La Croix"
+    "L'Obs"
    ],
-   "derniere": "2026-11-09T10:02:42.000Z",
+   "derniere": "2026-11-09T10:01:15.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "Crise sociale en France : les syndicats reçus à Matignon ; la revalorisation du smic attendue",
-     "url": "https://www.la-croix.com/economie/crise-sociale-en-france-les-syndicats-recus-a-matignon-la-revalorisation-du-smic-attendue-20261109",
-     "media": "La Croix",
-     "date": "2026-11-09T10:02:42.000Z"
+     "titre": "Alexis Braud, un écologiste historique suspendu pour son soutien à Glucksmann",
+     "url": "https://www.nouvelobs.com/politique/20261109.OBS119981/alexis-braud-un-ecologiste-historique-suspendu-pour-son-soutien-a-glucksmann.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T10:01:15.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Syndicats : ce qu'il faut savoir sur le social et l'emploi",
+    "titre": "Environnement : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Gouvernement"
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2486,6 +2675,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:45:55.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« De Gaulle a montré que la France n’est pas irréformable » : l’historien Pierre Manenti a analysé les 200 premiers jours de son retour au pouvoir en 1958",
+     "url": "https://www.nouvelobs.com/politique/20261109.OBS119978/de-gaulle-a-montre-que-la-france-n-est-pas-irreformable-l-historien-pierre-manenti-a-analyse-les-200-premiers-jours-de-son-retour-au-pouvoir-en-1958.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:45:55.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "L’historien Pierre Manenti a analysé les 200 premiers jours de son retour au pouvoir en 1958",
+   "accroche": "L’historien Pierre Manenti a analysé les 200 premiers jours de son retour au pouvoir en 1958",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-11-09T08:45:02.000Z",
@@ -2517,6 +2736,36 @@
     "generique": true
    },
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:44:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "La retraite à 60 ans de la France insoumise, projet crédible ou « saut dans le vide » ?",
+     "url": "https://www.nouvelobs.com/politique/20261108.OBS119946/la-retraite-a-60-ans-de-la-france-insoumise-projet-credible-ou-saut-dans-le-vide.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:44:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2587,6 +2836,113 @@
     "generique": true
    },
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:42:57.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Jean-Luc Mélenchon a fait de la santé un sujet politique alors que cette thématique fait peur à tout le monde »",
+     "url": "https://www.nouvelobs.com/politique/20261107.OBS119926/jean-luc-melenchon-a-fait-de-la-sante-un-sujet-politique-alors-que-cette-thematique-fait-peur-a-tout-le-monde.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:42:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Santé : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:41:49.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Mélenchon et l’Otan, une longue histoire de désamour",
+     "url": "https://www.nouvelobs.com/politique/20261107.OBS119921/melenchon-et-l-otan-une-longue-histoire-de-desamour.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:41:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:41:27.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Keynes, Marx et les autres... Quelles sont les influences du programme économique de Jean-Luc Mélenchon ?",
+     "url": "https://www.nouvelobs.com/idees/20261102.OBS119770/keynes-marx-et-les-autres-quelles-sont-les-influences-du-programme-economique-de-jean-luc-melenchon.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:41:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2674,6 +3030,44 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T08:40:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon veut faciliter le changement de genre à l’état civil : que changerait cette mesure ?",
+     "url": "https://www.nouvelobs.com/societe/20261106.OBS119887/melenchon-veut-faciliter-le-changement-de-genre-a-l-etat-civil-que-changerait-cette-mesure.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T08:40:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Jean-Luc Mélenchon veut faciliter le changement de genre à l’état civil",
+   "accroche": "Jean-Luc Mélenchon veut faciliter le changement de genre à l’état civil",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-09T08:30:35.000Z",
@@ -2692,8 +3086,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées : annonces sur la mobilisation lycéenne",
-    "origine": "regles"
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "fait": "Le ministre de l’éducation propose des « cours de rattrapage » pendant les vacances",
    "accroche": "Le ministre de l’éducation propose des « cours de rattrapage » pendant les vacances",
@@ -3030,8 +3424,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Accuse",
-    "origine": "dossier"
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Assemblée nationale"
   },
@@ -3325,6 +3720,42 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T07:13:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Attentat meurtrier en Pologne, mouvement social en France, meeting de Mélenchon… Cinq infos à retenir du week-end",
+     "url": "https://www.nouvelobs.com/monde/20261108.OBS119969/attentat-meurtrier-en-pologne-mouvement-social-en-france-meeting-de-melenchon-cinq-infos-a-retenir-du-week-end.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T07:13:51.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-11-09T07:10:05.000Z",
@@ -3523,6 +3954,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-09T06:50:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Pouvoir d’achat : comment va se dérouler la « conférence sociale » organisée ce lundi par Matignon ?",
+     "url": "https://www.nouvelobs.com/social/20261106.OBS119898/pouvoir-d-achat-comment-va-se-derouler-la-conference-sociale-organisee-lundi-par-matignon.html",
+     "media": "L'Obs",
+     "date": "2026-11-09T06:50:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-11-09T06:48:58.000Z",
@@ -3545,6 +4004,36 @@
     "origine": "regles"
    },
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-09T06:46:45.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Réunion du G7 : les midterms rebattent-elles les cartes de la diplomatie de Donald Trump ?",
+     "url": "https://www.france24.com/fr/france/20261109-r%C3%A9union-du-g7-les-midterms-rebattent-elles-les-cartes-de-la-diplomatie-de-donald-trump",
+     "media": "France 24",
+     "date": "2026-11-09T06:46:45.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "International : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Les midterms rebattent-elles les cartes de la diplomatie de Donald Trump ?",
+   "accroche": "Les midterms rebattent-elles les cartes de la diplomatie de Donald Trump ?",
+   "rubrique": "International"
   },
   {
    "medias": 1,
@@ -3959,7 +4448,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Accuse",
+    "titre": "Passe",
     "origine": "dossier"
    },
    "rubrique": "Politique"
@@ -4583,9 +5072,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Passe",
+    "origine": "dossier"
    },
    "fait": "Colère sociale : le smic va-t-il passer la barre des 1 500 euros ?",
    "accroche": "Colère sociale : le smic va-t-il passer la barre des 1 500 euros ?",
@@ -4860,456 +5348,6 @@
    "fait": "Édouard Leveugle, l’entrepreneur qui accompagne la relève",
    "accroche": "Édouard Leveugle, l’entrepreneur qui accompagne la relève",
    "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-09T05:00:31.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Après un été de cyberattaques et un an de blocage, la loi « résilience » de retour à l’Assemblée nationale",
-     "url": "https://www.lemonde.fr/pixels/article/2026/11/09/apres-un-ete-de-cyberattaques-et-un-an-de-blocage-la-loi-resilience-de-retour-a-l-assemblee-nationale_6808612_4408996.html",
-     "media": "Le Monde",
-     "date": "2026-11-09T05:00:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Numérique : ce qu'il faut savoir sur le numérique et les données",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La loi « résilience » de retour à l’Assemblée nationale",
-   "accroche": "La loi « résilience » de retour à l’Assemblée nationale",
-   "rubrique": "Assemblée nationale"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Firminy. Finances de la ville, hausse des impôts : « Marc Petit doit assumer ses choix »",
-     "url": "https://www.leprogres.fr/politique/2026/11/09/finances-de-la-ville-hausse-des-impots-marc-petit-doit-assumer-ses-choix",
-     "media": "Le Progrès",
-     "date": "2026-11-09T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Pétition",
-    "origine": "dossier"
-   },
-   "fait": "Finances de la ville, hausse des impôts",
-   "accroche": "Finances de la ville, hausse des impôts",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Est lyonnais. Comment ces trois maires LFI agissent malgré l'annulation des élections dans leur ville",
-     "url": "https://www.leprogres.fr/elections/2026/11/09/elections-annulees-les-maires-lfi-expliquent-poursuivre-leur-mandat-sereinement",
-     "media": "Le Progrès",
-     "date": "2026-11-09T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La France insoumise : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Roannais. Pour les Villerestois, la crise politique « c’est un problème de haute sphère »",
-     "url": "https://www.leprogres.fr/politique/2026/11/09/pour-les-villerestois-la-crise-politique-c-est-un-probleme-de-haute-sphere",
-     "media": "Le Progrès",
-     "date": "2026-11-09T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Roannais : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "L’éditorial. Restaurer la confiance",
-     "url": "https://www.dna.fr/elections/2026/11/09/restaurer-la-confiance",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-09T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : opinion d'un média",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-09T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Billet. Marcel, quelque part entre Proust et Cerdan",
-     "url": "https://www.ledauphine.com/societe/2026/11/09/marcel-quelque-part-entre-proust-et-cerdan",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-09T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Billet d'humeur : regard sur l'actualité du jour",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-09T04:55:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« On n’arrive plus à dormir » : des habitants de ce quartier vivant et festif de Toulon en croisade contre le bruit",
-     "url": "https://www.nicematin.com/societe/vie-locale/on-n-arrive-plus-a-dormir-des-habitants-de-ce-quartier-vivant-et-festif-de-toulon-en-croisade-contre-le-bruit-10754685",
-     "media": "Nice-Matin",
-     "date": "2026-11-09T04:55:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-09T04:30:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation sociale : pour Sébastien Lecornu, la semaine de toutes les négociations",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/09/mobilisation-sociale-pour-sebastien-lecornu-la-semaine-de-toutes-les-negociations_6808601_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-09T04:30:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-09T04:06:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: la collecte des banques alimentaires freinée par la hausse du coût de la vie",
-     "url": "https://www.rfi.fr/fr/france/20261109-france-la-collecte-des-banques-alimentaires-frein%C3%A9e-par-la-hausse-du-co%C3%BBt-de-la-vie",
-     "media": "RFI",
-     "date": "2026-11-09T04:06:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La collecte des banques alimentaires freinée par la hausse du coût de la vie",
-   "accroche": "La collecte des banques alimentaires freinée par la hausse du coût de la vie",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-09T04:05:31.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "France: Lecornu réunit partenaires sociaux, lycéens et étudiants pour tenter d'apaiser la colère sociale",
-     "url": "https://www.rfi.fr/fr/france/20261109-france-lecornu-r%C3%A9unit-partenaires-sociaux-lyc%C3%A9ens-et-%C3%A9tudiants-pour-tenter-d-apaiser-la-col%C3%A8re-sociale",
-     "media": "RFI",
-     "date": "2026-11-09T04:05:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : ce qu'il faut savoir sur la mobilisation lycéenne",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Lecornu réunit partenaires sociaux, lycéens et étudiants pour tenter d'apaiser la colère sociale",
-   "accroche": "Lecornu réunit partenaires sociaux, lycéens et étudiants pour tenter d'apaiser la colère sociale",
-   "rubrique": "Gouvernement",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-09T04:00:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Edouard Philippe tente le pari risqué du virage à droite pour sa campagne",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/09/presidentielle-2027-edouard-philippe-tente-le-pari-risque-du-virage-a-droite-pour-sa-campagne_6808565_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-09T04:00:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-08T23:16:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "France: règles douloureuses après les manifestations, les gaz lacrymogènes en question",
-     "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261108-france-r%C3%A8gles-douloureuses-apr%C3%A8s-les-manifestations-les-gaz-lacrymog%C3%A8nes-en-question",
-     "media": "RFI",
-     "date": "2026-11-08T23:16:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-08T22:58:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Prisca Thevenot",
-      "photo": "photos/deputes/PA795920.jpg",
-      "photoHd": "photos/deputes/hd/PA795920.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA795920",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "EPR"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire de la droite et du centre: \"Si Édouard Philippe n'entend pas les appels, qu'il écoute alors ses sympathisants\", explique Prisca Thévenot, députée Renaissance",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-primaire-de-la-droite-et-du-centre-si-edouard-philippe-n-entend-pas-les-appels-qu-il-ecoute-alors-ses-sympathisants-explique-prisca-thevenot-deputee-renaissance_VN-202611080458.html",
-     "media": "BFMTV",
-     "date": "2026-11-08T22:58:22.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "sondage",
-     "texte": "Dernier sondage Ifop pour LCI (terrain : 27-29 octobre 2026, 1 501 personnes, marge d'erreur ±2,5 pts) : Philippe 9,5–15 %",
-     "source": "Commission des sondages (notice Ifop)"
-    },
-    {
-     "type": "personnes",
-     "texte": "Prisca Thevenot : députée EPR (Hauts-de-Seine) · Édouard Philippe : président d'Horizons",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   }
  ]
 }
