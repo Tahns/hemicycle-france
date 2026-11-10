@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-10T11:20:40.627Z",
+ "lastUpdated": "2026-11-10T11:25:32.672Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -155,10 +155,11 @@
    "motifs": [
     "présidentielle",
     "candidature",
-    "emmanuel",
-    "présente"
+    "présente",
+    "écologique"
    ],
    "medias": [
+    "Nice-Matin",
     "20 Minutes",
     "BFMTV",
     "Le Dauphiné libéré",
@@ -176,7 +177,6 @@
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Ouest-France",
-    "Nice-Matin",
     "RFI",
     "Le Figaro",
     "L'Express",
@@ -185,6 +185,7 @@
    ],
    "mediasDistincts": 18,
    "sources": [
+    "Nice-Matin",
     "20 Minutes",
     "BFMTV",
     "EBRA",
@@ -198,15 +199,20 @@
     "France Inter",
     "Libération",
     "Ouest-France",
-    "Nice-Matin",
     "Le Figaro",
     "L'Express",
     "Public Sénat",
     "Hugo Décrypte"
    ],
-   "nb": 111,
-   "derniere": "2026-11-10T11:09:43.000Z",
+   "nb": 107,
+   "derniere": "2026-11-10T11:22:29.000Z",
    "articles": [
+    {
+     "media": "Nice-Matin",
+     "titre": "« Sa candidature est légitime » : la ministre des Sports Marina Ferrari ainsi que les grandes institutions du sport saluent la candidature de Teddy Riner",
+     "url": "https://www.nicematin.com/societe/politique/sa-candidature-est-legitime-la-ministre-des-sports-marina-ferrari-ainsi-que-les-grandes-institutions-du-sport-saluent-la-candidature-de-teddy-riner-10757407",
+     "date": "2026-11-10T11:22:29.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Présidentielle 2027 : « Il n’est pas mal du tout »… Jusqu’où la candidature de Teddy Riner peut-elle aller ?",
@@ -311,12 +317,6 @@
      "date": "2026-11-09T19:28:58.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "Teddy Riner candidat à l’élection présidentielle : cela « ne peut qu’apporter au pays », se félicite Emmanuel Macron",
-     "url": "https://www.nicematin.com/societe/politique/teddy-riner-candidat-a-l-election-presidentielle-cela-ne-peut-qu-apporter-au-pays-se-felicite-emmanuel-macron-10757058",
-     "date": "2026-11-09T19:21:40.000Z"
-    },
-    {
      "media": "RFI",
      "titre": "Présidentielle en France: Raphaël Glucksmann présente son projet de «révolution écologique»",
      "url": "https://www.rfi.fr/fr/france/20261109-pr%C3%A9sidentielle-en-france-rapha%C3%ABl-glucksmann-pr%C3%A9sente-son-projet-de-r%C3%A9volution-%C3%A9cologique",
@@ -390,7 +390,7 @@
     "La Dépêche",
     "Libération"
    ],
-   "nb": 21,
+   "nb": 20,
    "derniere": "2026-11-10T10:06:42.000Z",
    "articles": [
     {
@@ -1144,6 +1144,58 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Nice-Matin",
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-10T10:28:04.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Le maire de Cannes David Lisnard gagne en popularité, Christian Estrosi au plus bas… Ce que révèle ce sondage sur les personnalités politiques préférées des Français",
+     "url": "https://www.nicematin.com/societe/politique/le-maire-de-cannes-david-lisnard-gagne-en-popularite-christian-estrosi-au-plus-bas-ce-que-revele-ce-sondage-sur-les-personnalites-politiques-preferees-des-francais-10757382",
+     "media": "Nice-Matin",
+     "date": "2026-11-10T10:28:04.000Z"
+    },
+    {
+     "titre": "David Lisnard et Christian Estrosi courent sur le marathon Nice-Cannes, le candidat à l'élection présidentielle boucle 21,1 km en 1h44 sans préparation",
+     "url": "https://www.ladepeche.fr/2026/11/09/david-lisnard-et-christian-estrosi-courent-sur-le-marathon-nice-cannes-le-candidat-a-lelection-presidentielle-boucle-211-km-en-1h44-sans-preparation-13644436.php",
+     "media": "La Dépêche",
+     "date": "2026-11-09T17:54:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le maire de Cannes David Lisnard gagne en popularité",
+   "accroche": "Le maire de Cannes David Lisnard gagne en popularité",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "sondage",
+     "texte": "Dernier sondage Harris pour M6 et RTL (terrain : 3-5 novembre 2026, 2 101 personnes, marge d'erreur ±2,1 pts) : Lisnard 9 %",
+     "source": "Commission des sondages (notice Harris)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "France 24",
     "Le Monde"
    ],
@@ -1182,40 +1234,6 @@
    "fait": "Le gouvernement annonce une hausse du smic de 1",
    "accroche": "Le gouvernement annonce une hausse du smic de 1",
    "essentiel": "Hausse du smic : le gouvernement annonce une revalorisation de 1,6 % à partir du 1ᵉʳ décembre. Deux médias en parlent : Le Monde et France 24.",
-   "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Monde",
-    "France 24"
-   ],
-   "derniere": "2026-11-10T09:08:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Grève du 10 novembre : étudiants, lycéens et enseignants appellent à une nouvelle journée d’action pour « mettre le gouvernement sous pression »",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/10/greve-du-10-novembre-etudiants-lyceens-et-enseignants-appellent-a-une-nouvelle-journee-d-action-pour-mettre-le-gouvernement-sous-pression_6808805_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-10T09:08:26.000Z"
-    },
-    {
-     "titre": "France : nouvelle journée d'action à l'appel des étudiants, lycéens et enseignants",
-     "url": "https://www.france24.com/fr/france/20261109-france-nouvelle-journ%C3%A9e-d-action-%C3%A0-l-appel-des-%C3%A9tudiants-lyc%C3%A9ens-et-enseignants",
-     "media": "France 24",
-     "date": "2026-11-09T23:52:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : appel sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
    "rubrique": "Gouvernement"
   },
   {
@@ -2103,9 +2121,57 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-11-10T11:22:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Teddy Riner",
+      "photo": "photos/personnalites/teddy-riner.jpg",
+      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
+      "parti": "SE",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Marina Ferrari",
+      "photo": "photos/personnalites/marina-ferrari.jpg",
+      "photoHd": "photos/personnalites/hd/marina-ferrari.jpg",
+      "credit": "Gezelin Gree - MEFSIN, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Sa candidature est légitime » : la ministre des Sports Marina Ferrari ainsi que les grandes institutions du sport saluent la candidature de Teddy Riner",
+     "url": "https://www.nicematin.com/societe/politique/sa-candidature-est-legitime-la-ministre-des-sports-marina-ferrari-ainsi-que-les-grandes-institutions-du-sport-saluent-la-candidature-de-teddy-riner-10757407",
+     "media": "Nice-Matin",
+     "date": "2026-11-10T11:22:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marina Ferrari : ministre des sports, de la jeunesse et de la vie associative",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
-   "derniere": "2026-11-10T11:11:12.000Z",
+   "derniere": "2026-11-10T11:21:11.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2113,6 +2179,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/17 Ma P1",
+     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-17-ma-p1-e0",
+     "media": "Public Sénat",
+     "date": "2026-11-10T11:21:11.000Z"
+    },
     {
      "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/16 Lu P1",
      "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-16-lu-p1-e0",
@@ -2161,6 +2233,65 @@
     "origine": "regles",
     "generique": true
    },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-10T11:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lot-et-Garonne : Lucie Choupe, 18 ans à peine, représentera à Paris les porte-drapeaux du département",
+     "url": "https://www.sudouest.fr/societe/defense/lot-et-garonne-lucie-choupe-18-ans-a-peine-representera-a-paris-les-porte-drapeaux-du-departement-31466092.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-10T11:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce qu'il faut savoir sur collectivités locales",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Lucie Choupe représentera à Paris les porte-drapeaux du département",
+   "accroche": "Lucie Choupe représentera à Paris les porte-drapeaux du département",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-10T11:15:29.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Mobilisation sociale : les lycéens et personnels de l’Education de nouveau appelés à manifester ce mardi",
+     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-sociale-les-lyceens-et-personnels-de-leducation-de-nouveau-appeles-a-manifester-ce-mardi-20261110_F6UT6DKGF5AR7FVVKSR3FEE5PM/",
+     "media": "Libération",
+     "date": "2026-11-10T11:15:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : suivi en direct",
+    "origine": "regles"
+   },
+   "fait": "Les lycéens et personnels de l’Education de nouveau appelés à manifester",
+   "accroche": "Les lycéens et personnels de l’Education de nouveau appelés à manifester",
    "rubrique": "Politique"
   },
   {
@@ -2544,6 +2675,56 @@
    "fait": "Mathilde Schnoeller est la nouvelle maire du conseil municipal des enfants",
    "accroche": "Mathilde Schnoeller est la nouvelle maire du conseil municipal des enfants",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-10T11:00:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Hollande",
+      "photo": "photos/deputes/PA1654.jpg",
+      "photoHd": "photos/deputes/hd/PA1654.jpg",
+      "parti": "SOC",
+      "lien": "#depute-PA1654",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Meuse. Michel Hazanavicius, Jean Dujardin, François Hollande, Emmanuel Macron, Omar Sy, Michaël Youn... Ces personnalités qui défilent à Verdun",
+     "url": "https://www.estrepublicain.fr/insolite/2026/11/10/michel-hazanavicius-jean-dujardin-francois-hollande-emmanuel-macron-omar-sy-michael-youn-ces-personnalites-qui-defilent-a-verdun",
+     "media": "L'Est républicain",
+     "date": "2026-11-10T11:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Hollande : député SOC (Corrèze)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3466,6 +3647,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-10T09:08:26.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Grève du 10 novembre : étudiants, lycéens et enseignants à nouveau mobilisés pour « mettre le gouvernement sous pression »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/10/greve-du-10-novembre-etudiants-lyceens-et-enseignants-appellent-a-une-nouvelle-journee-d-action-pour-mettre-le-gouvernement-sous-pression_6808805_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-10T09:08:26.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-11-10T09:00:38.000Z",
@@ -3578,35 +3787,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-10T08:51:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT – Mobilisation sociale : les lycéens et personnels de l’Education de nouveau appelés à manifester ce mardi",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-sociale-les-lyceens-et-personnels-de-leducation-de-nouveau-appeles-a-manifester-ce-mardi-20261110_F6UT6DKGF5AR7FVVKSR3FEE5PM/",
-     "media": "Libération",
-     "date": "2026-11-10T08:51:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : suivi en direct",
-    "origine": "regles"
-   },
-   "fait": "Les lycéens et personnels de l’Education de nouveau appelés à manifester",
-   "accroche": "Les lycéens et personnels de l’Education de nouveau appelés à manifester",
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -5315,128 +5495,6 @@
    },
    "fait": "Une petite tranche de travaux achevée. Et maintenant ?",
    "accroche": "Une petite tranche de travaux achevée. Et maintenant ?",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-10T06:29:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Auto-déclaration des arrêts maladie de courte durée: ça coûterait combien?",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-auto-declaration-des-arrets-maladie-de-courte-duree-ca-couterait-combien_VN-202611100185.html",
-     "media": "BFMTV",
-     "date": "2026-11-10T06:29:21.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-10T06:24:16.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
-     "media": "BFMTV",
-     "date": "2026-11-10T06:24:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-10T06:24:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Brigitte Macron",
-     "url": "https://www.bfmtv.com/politique/brigitte-macron_DN-201707210113.html",
-     "media": "BFMTV",
-     "date": "2026-11-10T06:24:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-10T06:13:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le Conseil départemental veut écouter les habitants avec le projet Les Landes c’est vous, parlons-en !",
-     "url": "https://www.sudouest.fr/landes/le-conseil-departemental-veut-ecouter-les-habitants-avec-le-projet-les-landes-c-est-vous-parlons-en-31461620.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-10T06:13:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : ce qu'il faut savoir sur le conseil départemental",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le Conseil départemental veut écouter les habitants avec le projet Les Landes c’est vous",
-   "accroche": "Le Conseil départemental veut écouter les habitants avec le projet Les Landes c’est vous",
    "rubrique": "Politique"
   }
  ]
