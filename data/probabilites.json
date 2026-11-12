@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-11-11T21:28:06.171Z",
+  "lastUpdated": "2026-11-12T02:29:37.803Z",
   "methode": {
     "instituts": 8,
     "duels": 5,
     "tirages": 20000,
-    "ecartPremierTour": 5,
+    "ecartPremierTour": 4.9,
     "ecartSecondTour": 5.3,
     "tours": [
       "2027-04-18",
@@ -17,13 +17,13 @@
       "parti": "RN",
       "intention": 34.3,
       "secondTour": 99.8,
-      "victoire": 93.3
+      "victoire": 93.4
     },
     {
       "nom": "Jean-Luc Mélenchon",
       "parti": "LFI",
       "intention": 17.2,
-      "secondTour": 64.6,
+      "secondTour": 64.3,
       "victoire": 0
     },
     {
@@ -31,14 +31,14 @@
       "parti": "HOR",
       "intention": 13.1,
       "secondTour": 19.8,
-      "victoire": 3.9
+      "victoire": 4
     },
     {
       "nom": "Raphaël Glucksmann",
       "parti": "PP",
       "intention": 12.4,
-      "secondTour": 14.8,
-      "victoire": 1.8
+      "secondTour": 15.1,
+      "victoire": 1.7
     },
     {
       "nom": "Bruno Retailleau",
@@ -58,8 +58,8 @@
       "nom": "Gabriel Attal",
       "parti": "RE",
       "intention": 6.8,
-      "secondTour": 0.3,
-      "victoire": 0
+      "secondTour": 0.4,
+      "victoire": 0.1
     },
     {
       "nom": "Éric Zemmour",
@@ -104,14 +104,14 @@
       "victoire": 0
     }
   ],
-  "duelNonTeste": 0.9,
+  "duelNonTeste": 0.8,
   "finales": [
     {
       "candidats": [
         "Jean-Luc Mélenchon",
         "Marine Le Pen"
       ],
-      "probabilite": 64.3,
+      "probabilite": 64.1,
       "victoire": {
         "Jean-Luc Mélenchon": 0,
         "Marine Le Pen": 100
@@ -122,10 +122,10 @@
         "Marine Le Pen",
         "Édouard Philippe"
       ],
-      "probabilite": 19.7,
+      "probabilite": 19.6,
       "victoire": {
-        "Marine Le Pen": 80.7,
-        "Édouard Philippe": 19.3
+        "Marine Le Pen": 80.2,
+        "Édouard Philippe": 19.8
       }
     },
     {
@@ -133,10 +133,21 @@
         "Marine Le Pen",
         "Raphaël Glucksmann"
       ],
-      "probabilite": 14.7,
+      "probabilite": 15,
       "victoire": {
-        "Marine Le Pen": 87.4,
-        "Raphaël Glucksmann": 12.6
+        "Marine Le Pen": 88.5,
+        "Raphaël Glucksmann": 11.5
+      }
+    },
+    {
+      "candidats": [
+        "Gabriel Attal",
+        "Marine Le Pen"
+      ],
+      "probabilite": 0.4,
+      "victoire": {
+        "Gabriel Attal": 13,
+        "Marine Le Pen": 87
       }
     },
     {
@@ -154,17 +165,6 @@
       ],
       "probabilite": 0.3,
       "victoire": null
-    },
-    {
-      "candidats": [
-        "Gabriel Attal",
-        "Marine Le Pen"
-      ],
-      "probabilite": 0.3,
-      "victoire": {
-        "Gabriel Attal": 8.3,
-        "Marine Le Pen": 91.7
-      }
     }
   ]
 }
