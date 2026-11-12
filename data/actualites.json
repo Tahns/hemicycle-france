@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-12T07:35:40.062Z",
+ "lastUpdated": "2026-11-12T07:40:38.183Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -85,7 +85,7 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "L'Est républicain",
@@ -154,11 +154,12 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidature",
+    "candidat",
     "sondage",
     "edouard"
    ],
    "medias": [
+    "Le Monde",
     "La Dépêche",
     "Valeurs actuelles",
     "France Inter",
@@ -166,9 +167,9 @@
     "Libération",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
     "L'Est républicain",
     "BFMTV",
-    "Le Monde",
     "Europe 1",
     "20 Minutes",
     "Sud Ouest",
@@ -184,6 +185,7 @@
    ],
    "mediasDistincts": 18,
    "sources": [
+    "Le Monde",
     "La Dépêche",
     "Valeurs actuelles",
     "France Inter",
@@ -191,7 +193,6 @@
     "Libération",
     "EBRA",
     "BFMTV",
-    "Le Monde",
     "Groupe Bolloré",
     "20 Minutes",
     "Sud Ouest",
@@ -203,9 +204,15 @@
     "Public Sénat",
     "L'Express"
    ],
-   "nb": 112,
-   "derniere": "2026-11-12T07:10:23.000Z",
+   "nb": 115,
+   "derniere": "2026-11-12T07:31:16.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "EN DIRECT, présidentielle 2027 : suivez le grand oral de huit candidats sur les services publics",
+     "url": "https://www.lemonde.fr/politique/live/2026/11/12/en-direct-presidentielle-2027-suivez-le-grand-oral-de-huit-candidats-sur-les-services-publics_6809070_823448.html",
+     "date": "2026-11-12T07:31:16.000Z"
+    },
     {
      "media": "La Dépêche",
      "titre": "DIRECT. Présidentielle 2027 : à peine candidat, Teddy Riner est déjà rattrapé par ses déboires avec le fisc qui lui réclame 244 000 euros",
@@ -249,6 +256,12 @@
      "date": "2026-11-12T06:20:00.000Z"
     },
     {
+     "media": "Le Dauphiné libéré",
+     "titre": "Présidentielle 2027. 101 départements en 101 jours : le pari fou d’Olivier Becht pour se faire un nom et viser l’Élysée",
+     "url": "https://www.ledauphine.com/elections/2026/11/12/101-departements-en-101-jours-le-pari-fou-d-olivier-becht-pour-se-faire-un-nom-et-viser-l-elysee",
+     "date": "2026-11-12T06:20:00.000Z"
+    },
+    {
      "media": "L'Est républicain",
      "titre": "Présidentielle 2027. 101 départements en 101 jours : le pari fou d’Olivier Becht pour se faire un nom et viser l’Élysée",
      "url": "https://www.estrepublicain.fr/elections/2026/11/12/101-departements-en-101-jours-le-pari-fou-d-olivier-becht-pour-se-faire-un-nom-et-viser-l-elysee",
@@ -260,12 +273,6 @@
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-l-edito-politique-de-guillaume-daret-marine-tondelier-une-candidate-en-difficulte_VN-202611120167.html",
      "date": "2026-11-12T05:52:40.000Z",
      "video": true
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Présidentielle 2027 : comment les influenceurs attisent les convoitises des équipes de campagne",
-     "url": "https://www.lemonde.fr/pixels/article/2026/11/12/presidentielle-2027-comment-les-influenceurs-attisent-les-convoitises-des-equipes-de-campagne_6809062_4408996.html",
-     "date": "2026-11-12T05:30:10.000Z"
     },
     {
      "media": "Europe 1",
@@ -342,57 +349,209 @@
    ]
   },
   {
-   "id": "lyceens",
-   "titre": "Lycées",
+   "id": "interview",
+   "titre": "Interview",
    "motifs": [
-    "lycéens",
-    "enseignement",
-    "étudiants"
+    "interview",
+    "territoire",
+    "appelle",
+    "arrêter"
    ],
    "medias": [
-    "L'Est républicain",
-    "BFMTV",
-    "Le Monde",
+    "Sud Ouest",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
-    "Sud Ouest",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Ouest-France",
+    "Valeurs actuelles",
     "L'Humanité",
-    "Mediapart",
-    "La Dépêche",
-    "RFI",
-    "Le JDD",
-    "Libération",
-    "Public Sénat",
-    "France 24"
-   ],
-   "mediasDistincts": 11,
-   "sources": [
-    "EBRA",
     "BFMTV",
-    "Le Monde",
-    "Sud Ouest",
-    "L'Humanité",
-    "Mediapart",
-    "La Dépêche",
-    "France Médias Monde",
-    "Le JDD",
     "Libération",
-    "Public Sénat"
+    "La Dépêche",
+    "Le Monde",
+    "L'Obs",
+    "Le JDD",
+    "20 Minutes",
+    "France 24",
+    "Nice-Matin"
    ],
-   "nb": 20,
-   "derniere": "2026-11-12T05:30:00.000Z",
+   "mediasDistincts": 14,
+   "sources": [
+    "Sud Ouest",
+    "EBRA",
+    "Ouest-France",
+    "Valeurs actuelles",
+    "L'Humanité",
+    "BFMTV",
+    "Libération",
+    "La Dépêche",
+    "Le Monde",
+    "L'Obs",
+    "Le JDD",
+    "20 Minutes",
+    "France 24",
+    "Nice-Matin"
+   ],
+   "nb": 29,
+   "derniere": "2026-11-12T06:48:00.000Z",
    "articles": [
     {
-     "media": "L'Est républicain",
-     "titre": "Verdun. La ministre déléguée à l’enseignement professionnel, Sabrina Roubache, attendue au lycée Nicole-Mangin",
-     "url": "https://www.estrepublicain.fr/education/2026/11/12/la-ministre-deleguee-a-l-enseignement-professionnel-sabrina-agresti-roubache-attendue",
+     "media": "Sud Ouest",
+     "titre": "Haute-Saintonge : un nouveau groupe de réflexion pour imaginer le territoire de demain",
+     "url": "https://www.sudouest.fr/charente-maritime/saint-genis-de-saintonge/haute-saintonge-un-nouveau-groupe-de-reflexion-pour-imaginer-le-territoire-de-demain-31479938.php",
+     "date": "2026-11-12T06:48:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
+     "url": "https://www.leprogres.fr/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
      "date": "2026-11-12T05:30:00.000Z"
     },
     {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
+     "url": "https://www.dna.fr/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
+     "date": "2026-11-12T05:30:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
+     "url": "https://www.ledauphine.com/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
+     "date": "2026-11-12T05:30:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
+     "date": "2026-11-12T05:30:00.000Z"
+    },
+    {
+     "media": "Ouest-France",
+     "titre": "INFOGRAPHIES. La France insoumise propose d’autodéclarer les arrêts maladie de courte durée : comment ça marcherait ?",
+     "url": "https://www.ouest-france.fr/sante/securite-sociale/infographies-la-france-insoumise-propose-dautodeclarer-les-arrets-maladie-de-courte-duree-comment-ca-marcherait-90edf3cc-dddb-11f1-86b6-0a2fbb1d8ed9?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "date": "2026-11-11T18:02:42.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "Financements de La Boétie : après les révélations sur les avantages fiscaux du think tank proche de LFI, une députée RN interpelle Bercy",
+     "url": "https://www.valeursactuelles.com/politique/financements-de-la-boetie-apres-les-revelations-sur-les-avantages-fiscaux-du-think-tank-proche-de-lfi-une-deputee-rn-interpelle-bercy",
+     "date": "2026-11-11T17:03:54.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Pourquoi la Russie interdit de territoire deux journalistes et deux députés français",
+     "url": "https://www.humanite.fr/medias/arthur-delaporte/pourquoi-la-russie-interdit-de-territoire-deux-journalistes-et-deux-deputes-francais",
+     "date": "2026-11-11T17:00:00.000Z"
+    },
+    {
      "media": "BFMTV",
-     "titre": "FORUM BFMTV - Mouvement lycéen: \"J'ai des établissements où il n'y a pas de prof de français depuis la rentrée\", témoigne Sabrina Sebaihi, députée \"Écologiste et social\" des Hauts-de-Seine",
-     "url": "https://www.bfmtv.com/politique/video-forum-bfmtv-mouvement-lyceen-j-ai-des-etablissements-ou-il-n-y-a-pas-de-prof-de-francais-depuis-la-rentree-temoigne-sabrina-sebaihi-deputee-ecologiste-et-social-des-hauts-de-seine_VN-202611110812.html",
-     "date": "2026-11-11T21:38:51.000Z",
-     "video": true
+     "titre": "\"Une tentative d'intimider les démocrates\": les députés Arthur Delaporte et Sacha Houlié réagissent à leur interdiction d'entrée en Russie",
+     "url": "https://www.bfmtv.com/politique/une-tentative-d-intimider-les-democrates-les-deputes-arthur-delaporte-et-sacha-houlie-reagissent-a-leur-interdiction-d-entree-en-russie_AV-202611110608.html",
+     "date": "2026-11-11T16:43:01.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "En réaction à l’expulsion de Fedorova, la Russie interdit de territoire deux députés et deux journalistes français",
+     "url": "https://www.liberation.fr/international/europe/en-reaction-a-lexpulsion-de-fedorova-la-russie-interdit-de-territoire-deux-deputes-et-deux-journalistes-francais-20261111_HN2JUTQSGZAALCIS22HOVBGC4U/",
+     "date": "2026-11-11T15:40:51.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Députés et journalistes français interdits d'entrée en Russie : une réponse à l'expulsion de Xenia Fedorova, Bolloré pointé du doigt, réactions... ce qu'il se cache derrière cette décision",
+     "url": "https://www.ladepeche.fr/2026/11/11/deputes-et-journalistes-interdits-dentree-en-russie-une-reponse-a-lexpulsion-de-xenia-fedorova-bollore-pointe-du-doigt-reactions-ce-quil-se-cache-13647387.php",
+     "date": "2026-11-11T15:04:42.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "La Russie interdit l’entrée sur son territoire à deux députés et deux journalistes français, après l’expulsion de Xenia Fedorova",
+     "url": "https://www.lemonde.fr/international/article/2026/11/11/la-russie-interdit-l-entree-sur-son-territoire-a-deux-deputes-et-deux-journalistes-francais-apres-l-expulsion-de-xenia-fedorova_6808983_3210.html",
+     "date": "2026-11-11T14:35:42.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Le Pen, Bardella, Mélenchon, Roussel… Face à Poutine, des positions ambiguës derrière leurs appels à la paix en Ukraine",
+     "url": "https://www.nouvelobs.com/politique/20261111.OBS120022/le-pen-bardella-melenchon-roussel-face-a-poutine-des-positions-ambigues-derriere-leurs-appels-a-la-paix-en-ukraine.html",
+     "date": "2026-11-11T07:00:14.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Présidentielle 2027 : cinq ans après son «appel du 18 juin», Éric Zemmour se relance",
+     "url": "https://www.lejdd.fr/politique/presidentielle-2027-cinq-ans-apres-son-appel-du-18-juin-eric-zemmour-se-relance-188358",
+     "date": "2026-11-10T19:36:35.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : Trop chaud l’été, trop froid l’hiver… Un collectif interpelle sur la précarité énergétique",
+     "url": "https://www.20minutes.fr/politique/4262062-20261110-presidentielle-2027-trop-chaud-trop-froid-hiver-collectif-interpelle-precarite-energetique?at_medium=display&at_campaign=149",
+     "date": "2026-11-10T18:00:22.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "France : étudiants, lycéens et enseignants appelés à une nouvelle journée de grève par l'Interfac",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261110-france-%C3%A9tudiants-lyc%C3%A9ens-et-enseignants-appel%C3%A9s-%C3%A0-une-nouvelle-journ%C3%A9e-de-gr%C3%A8ve-par-l-interfac",
+     "date": "2026-11-10T16:15:49.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Une campagne d’humiliation internationale » : nouvelles plaintes des époux Macron contre l’Américaine adepte des infox transphobes sur la Première dame",
+     "url": "https://www.nicematin.com/societe/politique/une-campagne-d-humiliation-internationale-nouvelles-plaintes-des-epoux-macron-contre-l-americaine-adepte-des-infox-transphobes-sur-la-premiere-dame-10757385",
+     "date": "2026-11-10T10:06:42.000Z"
+    }
+   ]
+  },
+  {
+   "id": "places",
+   "titre": "Places",
+   "motifs": [
+    "places",
+    "création",
+    "supplémentaires",
+    "sébastien"
+   ],
+   "medias": [
+    "La Croix",
+    "Le Progrès",
+    "BFMTV",
+    "Le Monde",
+    "Nice-Matin",
+    "Europe 1",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Sud Ouest",
+    "Mediapart",
+    "La Dépêche",
+    "Le JDD",
+    "Public Sénat"
+   ],
+   "mediasDistincts": 10,
+   "sources": [
+    "La Croix",
+    "EBRA",
+    "BFMTV",
+    "Le Monde",
+    "Nice-Matin",
+    "Groupe Bolloré",
+    "Sud Ouest",
+    "Mediapart",
+    "La Dépêche",
+    "Public Sénat"
+   ],
+   "nb": 19,
+   "derniere": "2026-11-12T06:59:39.000Z",
+   "articles": [
+    {
+     "media": "La Croix",
+     "titre": "Université : Lecornu officialise la création de 5 000 places supplémentaires en licence",
+     "url": "https://www.la-croix.com/lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence-20261111",
+     "date": "2026-11-12T06:59:39.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Lyon 8e. Création d’un chemin piéton entre une école et un espace sportif : l’opposition s’inquiète des « nuisances »",
+     "url": "https://www.leprogres.fr/environnement/2026/11/12/creation-d-un-chemin-pieton-entre-une-ecole-et-un-espace-sportif-l-opposition-s-inquiete-des-nuisances",
+     "date": "2026-11-12T05:00:00.000Z"
     },
     {
      "media": "BFMTV",
@@ -407,193 +566,71 @@
      "date": "2026-11-11T20:07:54.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
-     "url": "https://www.dna.fr/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
-     "date": "2026-11-11T18:46:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Colère des lycéens en Gironde : comment « structurer le mouvement » pour « le faire durer et l’amplifier » ?",
-     "url": "https://www.sudouest.fr/gironde/bordeaux/colere-des-lyceens-en-gironde-comment-structurer-le-mouvement-pour-le-faire-durer-et-l-amplifier-31484489.php",
-     "date": "2026-11-11T18:23:57.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Investissements dans les lycées d’Île-de-France : les mensonges de Valérie Pécresse",
-     "url": "https://www.humanite.fr/politique/budget/investissements-dans-les-lycees-dile-de-france-les-mensonges-de-valerie-pecresse",
-     "date": "2026-11-11T17:07:10.000Z"
-    },
-    {
-     "media": "Mediapart",
-     "titre": "À Marseille, une enquête ouverte après des messages nazis et menaçants de lycéens anti-blocage",
-     "url": "https://www.mediapart.fr/journal/france/111126/marseille-une-enquete-ouverte-apres-des-messages-nazis-et-menacants-de-lyceens-anti-blocage",
-     "date": "2026-11-11T14:43:30.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "\"Vous vous foutez de moi ou quoi ?\" : clash en direct sur BFMTV entre le député Alexis Corbière et Louise Montangon, le débat s'enflamme, la responsable étudiante quitte le plateau",
-     "url": "https://www.ladepeche.fr/2026/11/11/vous-vous-foutez-de-moi-ou-quoi-clash-en-direct-sur-bfmtv-entre-le-depute-alexis-corbiere-et-louise-montangon-le-debat-senflamme-la-responsable-13646858.php",
-     "date": "2026-11-11T13:27:26.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Crise lycéenne en France: des avocats dénoncent des gardes à vue préventives pour décourager la mobilisation",
-     "url": "https://www.rfi.fr/fr/france/20261111-crise-lyc%C3%A9enne-en-france-des-avocats-d%C3%A9noncent-des-gardes-%C3%A0-vue-pr%C3%A9ventives-pour-d%C3%A9courager-la-mobilisation",
-     "date": "2026-11-11T08:22:04.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Présidentielle : Le Pen au plus haut, Lisnard monte encore, Riner séduit les sympathisants LFI... Les enseignements d'un nouveau sondage",
-     "url": "https://www.lejdd.fr/politique/presidentielle-le-pen-au-plus-haut-lisnard-monte-encore-riner-seduit-les-sympathisants-lfi-les-enseignements-dun-nouveau-sondage-188370",
-     "date": "2026-11-11T08:03:35.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Mobilisation lycéenne : «J’ai deux passions : la fanfare, la révolution !»",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisation-sociale-les-lyceens-et-personnels-de-leducation-de-nouveau-appeles-a-manifester-ce-mardi-20261110_F6UT6DKGF5AR7FVVKSR3FEE5PM/",
-     "date": "2026-11-10T18:46:10.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Reportage. « La bataille n’est pas finie » : quand les enseignants se joignent aux lycéens et étudiants dans la rue",
-     "url": "https://www.publicsenat.fr/actualites/education/reportage-la-bataille-nest-pas-finie-quand-les-enseignants-se-joignent-aux-lyceens-et-etudiants-dans-la-rue",
-     "date": "2026-11-10T17:25:51.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "France : étudiants, lycéens et enseignants appelés à une nouvelle journée de grève par l'Interfac",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261110-france-%C3%A9tudiants-lyc%C3%A9ens-et-enseignants-appel%C3%A9s-%C3%A0-une-nouvelle-journ%C3%A9e-de-gr%C3%A8ve-par-l-interfac",
-     "date": "2026-11-10T16:15:49.000Z"
-    }
-   ]
-  },
-  {
-   "id": "commemorations",
-   "titre": "Commémorations",
-   "motifs": [
-    "commémorations",
-    "polémique"
-   ],
-   "medias": [
-    "Le Progrès",
-    "Sud Ouest",
-    "Nice-Matin",
-    "L'Humanité",
-    "Le Figaro",
-    "BFMTV",
-    "RFI",
-    "20 Minutes",
-    "France 24",
-    "L'Obs",
-    "Le JDD"
-   ],
-   "mediasDistincts": 10,
-   "sources": [
-    "Le Progrès",
-    "Sud Ouest",
-    "Nice-Matin",
-    "L'Humanité",
-    "Le Figaro",
-    "BFMTV",
-    "France Médias Monde",
-    "20 Minutes",
-    "L'Obs",
-    "Le JDD"
-   ],
-   "nb": 15,
-   "derniere": "2026-11-12T05:00:00.000Z",
-   "articles": [
-    {
-     "media": "Le Progrès",
-     "titre": "Le Coteau. Polémiques autour du centre aqualudique : Sandra Creuzet-Taite dénonce « une manipulation d’informations »",
-     "url": "https://www.leprogres.fr/politique/2026/11/12/centre-aqualudique-sandra-creuzet-taite-denonce-une-manipulation-d-informations",
-     "date": "2026-11-12T05:00:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Éditorial. 11-Novembre : une polémique désarmante",
-     "url": "https://www.sudouest.fr/politique/education/editorial-11-novembre-une-polemique-desarmante-31487418.php",
-     "date": "2026-11-11T20:02:43.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "Les places commencent à manquer dans ce cimetière de Grasse : le conseil municipal affecte plus de 100.000 euros à la création de caveaux",
      "url": "https://www.nicematin.com/societe/les-places-commencent-a-manquer-dans-ce-cimetiere-de-grasse-le-conseil-municipal-affecte-plus-de-100-000-euros-a-la-creation-de-caveaux-10757554",
      "date": "2026-11-11T19:37:00.000Z"
     },
     {
-     "media": "L'Humanité",
-     "titre": "11-Novembre : des cérémonies de commémoration instrumentalisées par Macron et la droite",
-     "url": "https://www.humanite.fr/histoire/11-novembre/11-novembre-des-ceremonies-de-commemoration-instrumentalisees-par-macron-et-la-droite",
-     "date": "2026-11-11T18:35:00.000Z"
+     "media": "Europe 1",
+     "titre": "Sébastien Lecornu formalise la création de 5.000 places supplémentaires en licence",
+     "url": "https://www.europe1.fr/politique/sebastien-lecornu-formalise-la-creation-de-5000-places-supplementaires-en-licence-1226114?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-11T19:22:00.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "Le Pen à Hénin-Beaumont, Mélenchon dans la Creuse : le match à distance sur fond de commémorations",
-     "url": "https://www.lefigaro.fr/politique/le-pen-a-henin-beaumont-melenchon-dans-la-creuse-le-match-a-distance-sur-fond-de-commemorations-20261111",
-     "date": "2026-11-11T18:06:16.000Z"
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
+     "url": "https://www.dna.fr/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
+     "date": "2026-11-11T18:46:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
+     "date": "2026-11-11T18:46:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
+     "date": "2026-11-11T18:46:00.000Z"
     },
     {
      "media": "Sud Ouest",
-     "titre": "En images : la foule et beaucoup d’enfants pour la commémoration de l’armistice de 1918 à Marmande",
-     "url": "https://www.sudouest.fr/lot-et-garonne/marmande/en-images-la-foule-et-beaucoup-d-enfants-pour-la-commemoration-de-l-armistice-de-1918-a-marmande-31482405.php",
-     "date": "2026-11-11T17:30:00.000Z"
+     "titre": "Hongrie : le frère de Viktor Orban placé en détention provisoire pour trafic de migrants",
+     "url": "https://www.sudouest.fr/international/europe/viktor-orban/hongrie-le-frere-de-viktor-orban-place-en-detention-provisoire-pour-trafic-de-migrants-31486251.php",
+     "date": "2026-11-11T17:31:04.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Polémique sur les commémorations en milieu scolaire: Emmanuel Macron estime que \"la mémoire du 11-Novembre a sa place dans toutes les écoles de la République\"",
-     "url": "https://www.bfmtv.com/politique/elysee/polemique-sur-les-commemorations-en-milieu-scolaire-emmanuel-macron-estime-que-la-memoire-du-11-novembre-a-sa-place-dans-toutes-les-ecoles-de-la-republique_AN-202611110660.html",
-     "date": "2026-11-11T17:26:13.000Z"
+     "media": "Mediapart",
+     "titre": "Cyberattaque contre des frigos de supermarchés: Paris accuse l’Iran et menace de riposter",
+     "url": "https://www.mediapart.fr/journal/international/111126/cyberattaque-contre-des-frigos-de-supermarches-paris-accuse-l-iran-et-menace-de-riposter",
+     "date": "2026-11-11T17:30:45.000Z"
     },
     {
-     "media": "RFI",
-     "titre": "France: polémique sur les commémorations du 11-Novembre dans les établissements scolaires",
-     "url": "https://www.rfi.fr/fr/france/20261111-france-pol%C3%A9mique-sur-les-comm%C3%A9morations-du-11-novembre-dans-les-%C3%A9tablissements-scolaires",
-     "date": "2026-11-11T16:10:19.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Commémorations du 11-Novembre : Ultime remontée des Champs-Élysées pour Emmanuel Macron en président",
-     "url": "https://www.20minutes.fr/politique/4262188-20261111-commemorations-11-novembre-ultime-remontee-champs-elysees-emmanuel-macron-president?at_medium=display&at_campaign=149",
-     "date": "2026-11-11T14:54:12.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "REPLAY. Emmanuel Macron s'exprime à l'occasion des commémorations de l'Armistice du 11-Novembre",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261111-replay-emmanuel-macron-s-exprime-%C3%A0-l-occasion-de-l-armistice-du-11-novembre",
-     "date": "2026-11-11T13:45:16.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Commémorations de l'Armistice du 11-Novembre : \"un devoir de mémoire\"",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261111-comm%C3%A9morations-de-l-armistice-du-11-novembre-un-devoir-de-m%C3%A9moire",
-     "date": "2026-11-11T13:25:10.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "« Très regrettable » : quelle est cette polémique sur les commémorations du 11-Novembre qui scandalise le gouvernement ?",
-     "url": "https://www.nouvelobs.com/societe/20261111.OBS120044/tres-regrettable-quelle-est-cette-polemique-sur-les-commemorations-du-11-novembre-qui-scandalise-le-gouvernement.html",
-     "date": "2026-11-11T12:22:30.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Emmanuel Macron préside un dernier 11-Novembre marqué par une polémique",
-     "url": "https://www.france24.com/fr/france/20261111-ceremonies-du-11-novembre-une-polemique-hommage-national-education-histoire",
-     "date": "2026-11-11T08:38:54.000Z"
+     "media": "La Dépêche",
+     "titre": "Teddy Riner : le fisc réclamait près de 250 000 euros à une société appartenant au candidat à la présidentielle 2027, l'entreprise placée en liquidation judiciaire",
+     "url": "https://www.ladepeche.fr/2026/11/11/teddy-riner-le-fisc-reclamait-pres-de-250-000-euros-a-une-societe-appartenant-au-candidat-a-la-presidentielle-2027-lentreprise-placee-en-liquidation-13647320.php",
+     "date": "2026-11-11T15:58:18.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "Commémorations du 11-Novembre, Mélenchon dans la Creuse, le pape au Pérou... Les 4 infos dont vous allez entendre parler demain",
-     "url": "https://www.lejdd.fr/Societe/commemorations-du-11-novembre-melenchon-dans-la-creuse-le-pape-au-perou-les-4-infos-dont-vous-allez-entendre-parler-demain-188322",
-     "date": "2026-11-10T16:36:18.000Z"
+     "titre": "Géopolitique : l’Algérie prend-elle la place de la France au Sahel ?",
+     "url": "https://www.lejdd.fr/International/geopolitique-lalgerie-prend-elle-la-place-de-la-france-au-sahel-188388",
+     "date": "2026-11-11T11:34:29.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Attaque contre des frigos de supermarchés : le projet de loi pour renforcer la cybersécurité enfin à l’Assemblée après deux ans de report",
+     "url": "https://www.publicsenat.fr/actualites/politique/attaque-contre-des-frigos-de-supermarches-le-projet-de-loi-pour-renforcer-la-cybersecurite-enfin-a-lassemblee-apres-deux-ans-de-report",
+     "date": "2026-11-10T13:55:19.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 6,
+   "medias": 7,
    "mediasDistincts": 5,
    "sources": [
     "La Croix",
@@ -649,18 +686,24 @@
     },
     {
      "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:46:00.000Z"
+    },
+    {
+     "titre": "Enseignement supérieur. Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
      "url": "https://www.estrepublicain.fr/politique/2026/11/11/sebastien-lecornu-formalise-la-creation-de-5-000-places-supplementaires-en-licence",
      "media": "L'Est républicain",
      "date": "2026-11-11T18:46:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
+    "titre": "Places",
     "origine": "dossier"
    },
    "fait": "Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
    "accroche": "Sébastien Lecornu annonce la création de 5 000 places supplémentaires en Licence",
-   "essentiel": "Sébastien Lecornu promet 5 000 places supplémentaires en licence en réponse à la mobilisation étudiante. Six médias en parlent : Dernières Nouvelles d'Alsace, La Croix, BFMTV, Le Monde, Europe 1 et L'Est républicain.",
+   "essentiel": "Sébastien Lecornu promet 5 000 places supplémentaires en licence en réponse à la mobilisation étudiante. Sept médias en parlent.",
    "rubrique": "Politique",
    "contexte": [
     {
@@ -671,7 +714,7 @@
    ]
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 4,
    "sources": [
     "Libération",
@@ -722,6 +765,12 @@
     },
     {
      "titre": "Présidentielle 2027. Réviser la Constitution par référendum : 110 constitutionnalistes critiquent le projet de Marine Le Pen",
+     "url": "https://www.ledauphine.com/elections/2026/11/11/110-constitutionnalistes-critiquent-le-referendum-propose-par-marine-le-pen",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:29:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Réviser la Constitution par référendum : 110 constitutionnalistes critiquent le projet de Marine Le Pen",
      "url": "https://www.estrepublicain.fr/elections/2026/11/11/110-constitutionnalistes-critiquent-le-referendum-propose-par-marine-le-pen",
      "media": "L'Est républicain",
      "date": "2026-11-11T18:29:00.000Z"
@@ -733,7 +782,7 @@
    },
    "fait": "Pour la présidentielle 2027, des constitutionnalistes jugent irrégulier le projet de référendum de Marine Le Pen",
    "accroche": "Pour la présidentielle 2027, des constitutionnalistes jugent irrégulier le projet de référendum de Marine Le Pen",
-   "essentiel": "Pour la présidentielle 2027, des constitutionnalistes jugent irrégulier le projet de référendum de Marine Le Pen. Cinq médias en parlent : Dernières Nouvelles d'Alsace, Libération, Sud Ouest, BFMTV et L'Est républicain.",
+   "essentiel": "Pour la présidentielle 2027, des constitutionnalistes jugent irrégulier le projet de référendum de Marine Le Pen. Six médias en parlent : Dernières Nouvelles d'Alsace, Libération, Sud Ouest, BFMTV, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Justice",
    "contexte": [
     {
@@ -786,8 +835,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Interview",
+    "origine": "dossier"
    },
    "fait": "Expulsion de Xenia Fedorova : le Kremlin interdit deux députés et deux journalistes français de son territoire",
    "accroche": "Expulsion de Xenia Fedorova : le Kremlin interdit deux députés et deux journalistes français de son territoire",
@@ -866,7 +915,7 @@
    ]
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "BFMTV",
@@ -915,6 +964,12 @@
     },
     {
      "titre": "Paris. À l’Élysée, deux gardes d’honneur s’effondrent l’un après l’autre devant Emmanuel Macron",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/11/a-l-elysee-deux-gardes-d-honneur-s-effondrent-l-un-apres-l-autre-devant-emmanuel-macron",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T22:55:00.000Z"
+    },
+    {
+     "titre": "Paris. À l’Élysée, deux gardes d’honneur s’effondrent l’un après l’autre devant Emmanuel Macron",
      "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/11/a-l-elysee-deux-gardes-d-honneur-s-effondrent-l-un-apres-l-autre-devant-emmanuel-macron",
      "media": "L'Est républicain",
      "date": "2026-11-11T22:55:00.000Z"
@@ -934,7 +989,7 @@
    },
    "fait": "À l’Élysée, deux gardes d’honneur s’effondrent l’un après l’autre devant Emmanuel Macron",
    "accroche": "À l’Élysée, deux gardes d’honneur s’effondrent l’un après l’autre devant Emmanuel Macron",
-   "essentiel": "Elysée : deux gardes d'honneur s'effondrent à quelques mètres d'Emmanuel Macron qui attendait sur le perron. Cinq médias en parlent : Le Progrès, BFMTV, La Dépêche, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "essentiel": "Elysée : deux gardes d'honneur s'effondrent à quelques mètres d'Emmanuel Macron qui attendait sur le perron. Six médias en parlent : Le Progrès, BFMTV, La Dépêche, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Gouvernement"
   },
   {
@@ -983,7 +1038,7 @@
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 2,
    "sources": [
     "La Dépêche",
@@ -1022,6 +1077,12 @@
      "url": "https://www.ladepeche.fr/2026/11/11/presidentielle-2027-sondage-christine-lagarde-creditee-de-8-pour-la-premiere-fois-riner-et-attal-a-egalite-avec-2-des-intentions-de-vote-ce-que-revele-13647725.php",
      "media": "La Dépêche",
      "date": "2026-11-11T19:01:02.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Christine Lagarde créditée de 14 % en cas de candidature, Teddy Riner de 2 %, selon un sondage",
+     "url": "https://www.ledauphine.com/elections/2026/11/11/christine-lagarde-creditee-de-14-en-cas-de-candidature-teddy-riner-de-2-selon-un-sondage",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:54:00.000Z"
     },
     {
      "titre": "Présidentielle 2027. Christine Lagarde créditée de 14 % en cas de candidature, Teddy Riner de 2 %, selon un sondage",
@@ -1588,7 +1649,7 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1615,6 +1676,12 @@
     },
     {
      "titre": "Justice. Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/12/patrick-et-isabelle-balkany-risquent-l-expulsion-de-leur-moulin-a-giverny",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-12T07:21:00.000Z"
+    },
+    {
+     "titre": "Justice. Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny",
      "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/12/patrick-et-isabelle-balkany-risquent-l-expulsion-de-leur-moulin-a-giverny",
      "media": "L'Est républicain",
      "date": "2026-11-12T07:21:00.000Z"
@@ -1627,11 +1694,11 @@
    },
    "fait": "Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny",
    "accroche": "Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny",
-   "essentiel": "Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "essentiel": "Patrick et Isabelle Balkany risquent l’expulsion de leur moulin à Giverny. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Justice"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1667,6 +1734,12 @@
     },
     {
      "titre": "Présidentielle 2027. 101 départements en 101 jours : le pari fou d’Olivier Becht pour se faire un nom et viser l’Élysée",
+     "url": "https://www.ledauphine.com/elections/2026/11/12/101-departements-en-101-jours-le-pari-fou-d-olivier-becht-pour-se-faire-un-nom-et-viser-l-elysee",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-12T06:20:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. 101 départements en 101 jours : le pari fou d’Olivier Becht pour se faire un nom et viser l’Élysée",
      "url": "https://www.estrepublicain.fr/elections/2026/11/12/101-departements-en-101-jours-le-pari-fou-d-olivier-becht-pour-se-faire-un-nom-et-viser-l-elysee",
      "media": "L'Est républicain",
      "date": "2026-11-12T06:20:00.000Z"
@@ -1678,7 +1751,7 @@
    },
    "fait": "Le pari fou du député alsacien Olivier Becht pour viser l’Élysée",
    "accroche": "Le pari fou du député alsacien Olivier Becht pour viser l’Élysée",
-   "essentiel": "101 départements en 101 jours : le pari fou du député alsacien Olivier Becht pour viser l’Élysée. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "essentiel": "101 départements en 101 jours : le pari fou du député alsacien Olivier Becht pour viser l’Élysée. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1693,7 +1766,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1720,19 +1793,24 @@
     },
     {
      "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
+     "url": "https://www.ledauphine.com/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-12T05:30:00.000Z"
+    },
+    {
+     "titre": "Interview. « Notre défaite, c'est d'arrêter d'y croire » : l'ex-gouverneur de la Banque de France appelle au sursaut",
      "url": "https://www.estrepublicain.fr/economie/2026/11/12/notre-defaite-c-est-d-arreter-d-y-croire-l-ex-gouverneur-de-la-banque-de-france-appelle-au-sursaut",
      "media": "L'Est républicain",
      "date": "2026-11-12T05:30:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Interview : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Interview",
+    "origine": "dossier"
    },
    "fait": "L'ex-gouverneur de la Banque de France appelle au sursaut",
    "accroche": "L'ex-gouverneur de la Banque de France appelle au sursaut",
-   "essentiel": "L'ex-gouverneur de la Banque de France appelle au sursaut. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "essentiel": "L'ex-gouverneur de la Banque de France appelle au sursaut. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique"
   },
   {
@@ -1816,6 +1894,35 @@
    "accroche": "Le tireur avait listé des personnalités de gauche, sans « projet » les visant",
    "essentiel": "Attentat de Trappes : le tireur avait listé des personnalités de gauche, sans « projet » les visant. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
    "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-12T07:31:16.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT, présidentielle 2027 : suivez le grand oral de huit candidats sur les services publics",
+     "url": "https://www.lemonde.fr/politique/live/2026/11/12/en-direct-presidentielle-2027-suivez-le-grand-oral-de-huit-candidats-sur-les-services-publics_6809070_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-12T07:31:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : suivi en direct",
+    "origine": "regles"
+   },
+   "fait": "Suivez le grand oral de huit candidats sur les services publics",
+   "accroche": "Suivez le grand oral de huit candidats sur les services publics",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2166,6 +2273,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-12T06:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Avignon. Marc Gonzalez, conseiller municipal du quartier Nord, entend « ramener de la vie et du lien »",
+     "url": "https://www.ledauphine.com/politique/2026/11/12/marc-gonzalez-entend-ramener-de-la-vie-et-du-lien-dans-le-quartier-nord",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-12T06:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Avignon : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "Marc Gonzalez, conseiller municipal du quartier Nord, entend",
+   "accroche": "Marc Gonzalez, conseiller municipal du quartier Nord, entend",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Figaro"
    ],
    "derniere": "2026-11-12T06:25:42.000Z",
@@ -2450,7 +2586,7 @@
    "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-12T05:30:10.000Z",
+   "derniere": "2026-11-12T05:30:04.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2462,7 +2598,7 @@
      "titre": "Présidentielle 2027 : comment les influenceurs attisent les convoitises des équipes de campagne",
      "url": "https://www.lemonde.fr/pixels/article/2026/11/12/presidentielle-2027-comment-les-influenceurs-attisent-les-convoitises-des-equipes-de-campagne_6809062_4408996.html",
      "media": "Le Monde",
-     "date": "2026-11-12T05:30:10.000Z"
+     "date": "2026-11-12T05:30:04.000Z"
     }
    ],
    "titrePropre": {
@@ -2534,8 +2670,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "La ministre déléguée à l’enseignement professionnel, Sabrina Roubache, attendue au lycée Nicole-Mangin",
    "accroche": "La ministre déléguée à l’enseignement professionnel, Sabrina Roubache, attendue au lycée Nicole-Mangin",
@@ -2848,6 +2985,50 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-12T05:00:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Billet. Édouard Philippe n'aura pas d'autres choix que d'accepter",
+     "url": "https://www.ledauphine.com/politique/2026/11/12/la-primaire-pour-tous",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-12T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Billet d'humeur : regard sur l'actualité du jour",
+    "origine": "regles"
+   },
+   "fait": "Édouard Philippe n'aura pas d'autres choix que d'accepter",
+   "accroche": "Édouard Philippe n'aura pas d'autres choix que d'accepter",
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "20 Minutes"
    ],
    "derniere": "2026-11-12T03:16:07.000Z",
@@ -3010,8 +3191,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Sabrina Sebaihi : témoignage sur la mobilisation lycéenne",
+    "origine": "regles"
    },
    "rubrique": "Assemblée nationale",
    "contexte": [
@@ -3302,6 +3483,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T20:01:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "La droite et le centre doivent-ils réaliser une primaire ?",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/la-droite-et-le-centre-doivent-ils-realiser-une-primaire",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T20:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-11T19:54:43.000Z",
@@ -3375,6 +3584,51 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T19:48:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "HOR"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle. Édouard Philippe, le candidat Horizons, attendu le 20 novembre à Romans-sur-Isère",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/edouard-philippe-le-candidat-horizons-attendu-le-20-novembre-a-romans-sur-isere",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T19:48:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3558,7 +3812,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Commémorations",
+    "titre": "Places",
     "origine": "dossier"
    },
    "fait": "Les places commencent à manquer dans ce cimetière de Grasse",
@@ -3708,6 +3962,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T19:24:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grenoble. Une importante communion autour de la cérémonie du 11-Novembre",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/une-importante-communion-autour-de-la-ceremonie-du-11-novembre",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T19:24:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Grenoble : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-11T19:24:23.000Z",
@@ -3731,6 +4013,63 @@
    },
    "fait": "À mi-mandat, les jeunes élus ont toujours des projets plein la tête",
    "accroche": "À mi-mandat, les jeunes élus ont toujours des projets plein la tête",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T19:22:40.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Mouxy. Les nouveaux membres de l’instance municipale jeunes ont été élus",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/les-nouveaux-membres-de-l-instance-municipale-jeunes-ont-ete-elus",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T19:22:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mouxy : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "Les nouveaux membres de l’instance municipale jeunes ont été élus",
+   "accroche": "Les nouveaux membres de l’instance municipale jeunes ont été élus",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T19:22:04.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Serre Ponçon - Val d’Avance. Conseil communautaire : les autres délibérations prises",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/conseil-communautaire-les-autres-deliberations-prises",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T19:22:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
    "rubrique": "Politique"
   },
   {
@@ -3925,6 +4264,35 @@
     "origine": "regles"
    },
    "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T19:05:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Ucel. Les trois points à retenir du dernier conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/les-trois-points-a-retenir-du-dernier-conseil-municipal",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T19:05:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Ucel : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Les trois points à retenir du dernier conseil municipal",
+   "accroche": "Les trois points à retenir du dernier conseil municipal",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -4219,11 +4587,69 @@
     }
    ],
    "titrePropre": {
-    "titre": "Commémorations",
-    "origine": "dossier"
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Des cérémonies de commémoration instrumentalisées par Macron et la droite",
    "accroche": "Des cérémonies de commémoration instrumentalisées par Macron et la droite",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T18:30:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Chanas. Le conseil municipal des enfants installé",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/le-conseil-municipal-des-enfants-installe",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:30:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Chanas : conseil municipal",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T18:28:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Les Vans. Un afterwork entre acteurs du bâtiment pour parler rénovation",
+     "url": "https://www.ledauphine.com/economie/2026/11/11/un-afterwork-entre-acteurs-du-batiment-pour-parler-renovation",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:28:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Les Vans : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Un afterwork entre acteurs du bâtiment pour parler rénovation",
+   "accroche": "Un afterwork entre acteurs du bâtiment pour parler rénovation",
    "rubrique": "Politique"
   },
   {
@@ -4248,8 +4674,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Lycées",
-    "origine": "dossier"
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
    },
    "rubrique": "Politique"
   },
@@ -4293,6 +4719,64 @@
     "origine": "regles",
     "generique": true
    },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T18:22:31.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Marcel-d'Ardèche. Huit élus au conseil municipal des enfants",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/huit-elus-au-conseil-municipal-des-enfants",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:22:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Marcel-d'Ardèche : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Huit élus au conseil municipal des enfants",
+   "accroche": "Huit élus au conseil municipal des enfants",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-11T18:19:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Laurent-du-Pape. De nombreuses conventions adoptées en conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/11/11/de-nombreuses-conventions-adoptees-en-conseil-municipal",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-11T18:19:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Laurent-du-Pape : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "De nombreuses conventions adoptées en conseil municipal",
+   "accroche": "De nombreuses conventions adoptées en conseil municipal",
    "rubrique": "Élysée 2027"
   },
   {
@@ -4425,8 +4909,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Commémorations",
-    "origine": "dossier"
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique",
    "contexte": [
@@ -4630,406 +5115,6 @@
    ],
    "titrePropre": {
     "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-11T17:35:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Jean-d’Angély : « Mémoire, paix, liberté, fraternité » célébrés dans les écoles angériennes",
-     "url": "https://www.sudouest.fr/charente-maritime/saint-jean-d-angely/saint-jean-d-angely-memoire-paix-liberte-fraternite-celebres-dans-les-ecoles-angeriennes-31480162.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-11T17:35:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Jean-d’Angély : actualité scolaire",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-11T17:34:11.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Une figure du néofascisme italien invitée à Nice : la conférence de l’ultradroite crée de vives tensions",
-     "url": "https://www.nicematin.com/societe/une-figure-du-neofascisme-italien-invitee-a-nice-la-conference-de-l-ultradroite-cree-de-vives-tensions-10758235",
-     "media": "Nice-Matin",
-     "date": "2026-11-11T17:34:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Une figure du néofascisme italien invitée à Nice",
-   "accroche": "Une figure du néofascisme italien invitée à Nice",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-11T17:31:03.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : comment Emmanuel Macron a adoubé la candidature de Teddy Riner",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/11/presidentielle-2027-comment-emmanuel-macron-a-adoube-la-candidature-de-teddy-riner_6809010_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-11T17:31:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-11T17:30:58.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "L’agression d’une élue lors d’un blocage lycéen suscite l’émotion et des questions",
-     "url": "https://www.mediapart.fr/journal/france/111126/l-agression-d-une-elue-lors-d-un-blocage-lyceen-suscite-l-emotion-et-des-questions",
-     "media": "Mediapart",
-     "date": "2026-11-11T17:30:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-11T17:30:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Cyberattaque contre des frigos de supermarchés: Paris accuse l’Iran et menace de riposter",
-     "url": "https://www.mediapart.fr/journal/international/111126/cyberattaque-contre-des-frigos-de-supermarches-paris-accuse-l-iran-et-menace-de-riposter",
-     "media": "Mediapart",
-     "date": "2026-11-11T17:30:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Numérique : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Paris accuse l’Iran et menace de riposter",
-   "accroche": "Paris accuse l’Iran et menace de riposter",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-11T17:30:38.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "En 1873, quand la bulle des chemins de fer finit par éclater",
-     "url": "https://www.mediapart.fr/journal/economie-et-social/111126/en-1873-quand-la-bulle-des-chemins-de-fer-finit-par-eclater",
-     "media": "Mediapart",
-     "date": "2026-11-11T17:30:38.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-11T17:30:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Pour le géant de l’IA Anthropic, le pari risqué de l’entrée en Bourse",
-     "url": "https://www.mediapart.fr/journal/economie-et-social/111126/pour-le-geant-de-l-ia-anthropic-le-pari-risque-de-l-entree-en-bourse",
-     "media": "Mediapart",
-     "date": "2026-11-11T17:30:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Intelligence artificielle : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Le pari risqué de l’entrée en Bourse",
-   "accroche": "Le pari risqué de l’entrée en Bourse",
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 19 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-11T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "En images : la foule et beaucoup d’enfants pour la commémoration de l’armistice de 1918 à Marmande",
-     "url": "https://www.sudouest.fr/lot-et-garonne/marmande/en-images-la-foule-et-beaucoup-d-enfants-pour-la-commemoration-de-l-armistice-de-1918-a-marmande-31482405.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-11T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Commémorations",
-    "origine": "dossier"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-11T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Helfrantzkirch. Les effectifs scolaires, le cimetière, les dépôts sauvages et la vitesse à la table du conseil",
-     "url": "https://www.dna.fr/economie/2026/11/11/les-effectifs-scolaires-le-cimetiere-les-depots-sauvages-et-la-vitesse-a-la-table-du-conseil",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-11T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Helfrantzkirch : actualité scolaire",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-11T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Besançon. Local de campagne d’Anne Vignot vandalisé : l’auteur condamné à des travaux d’intérêt général",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/11/local-de-campagne-d-anne-vignot-vandalise-l-auteur-condamne-a-des-travaux-d-interet-general",
-     "media": "L'Est républicain",
-     "date": "2026-11-11T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Besançon : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Local de campagne d’Anne Vignot vandalisé : l’auteur condamné à des travaux d’intérêt général",
-   "accroche": "Local de campagne d’Anne Vignot vandalisé : l’auteur condamné à des travaux d’intérêt général",
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-11T17:26:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
-     "media": "BFMTV",
-     "date": "2026-11-11T17:26:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-11T17:26:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Polémique sur les commémorations en milieu scolaire: Emmanuel Macron estime que \"la mémoire du 11-Novembre a sa place dans toutes les écoles de la République\"",
-     "url": "https://www.bfmtv.com/politique/elysee/polemique-sur-les-commemorations-en-milieu-scolaire-emmanuel-macron-estime-que-la-memoire-du-11-novembre-a-sa-place-dans-toutes-les-ecoles-de-la-republique_AN-202611110660.html",
-     "media": "BFMTV",
-     "date": "2026-11-11T17:26:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Commémorations",
-    "origine": "dossier"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-11T17:25:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle: \"Il n'y a pas beaucoup de candidats qui ont l'air d'avoir compris la fonction présidentielle\", estime Henri Guaino, ancien conseiller de Nicolas Sarkozy",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-il-n-y-a-pas-beaucoup-de-candidats-qui-ont-l-air-d-avoir-compris-la-fonction-presidentielle-estime-henri-guaino-ancien-conseiller-de-nicolas-sarkozy_VN-202611110664.html",
-     "media": "BFMTV",
-     "date": "2026-11-11T17:25:27.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : déclaration sur la présidentielle de 2027",
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
