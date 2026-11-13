@@ -1523,3 +1523,19 @@ async function dessinerStory(type, info){
   const blob = await new Promise(res=> c.toBlob(res, "image/png"));
   return { blob, apercu: c.toDataURL("image/jpeg", 0.85), nom: nom + ".png" };
 }
+
+/* ---------- Images vectorielles (js/stories-vecto.js) ----------
+   Les types ci-dessous sont dessinés en SVG (charte simple et lisible) puis exportés ; les autres gardent le dessin d'origine.
+   Mettre `window.STORY_SANS_VECTO = true` (console) pour comparer avec l'ancien rendu. */
+const STORY_TYPES_VECTO = ["actualite", "post", "annonce-post", "diapo", "aujourdhui", "vote-jour", "comprendre", "chiffre-jour"];
+const dessinerStoryPixels = dessinerStory;
+dessinerStory = async function(type, info){
+  if(!window.STORY_SANS_VECTO && STORY_TYPES_VECTO.includes(type)){
+    try {
+      await chargerModule("stories-vecto");
+      const r = await window.dessinerVecto(type, info);
+      if(r) return r;
+    } catch(e){ console.warn("[stories-vecto]", e); }
+  }
+  return dessinerStoryPixels(type, info);
+};

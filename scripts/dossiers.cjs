@@ -11,6 +11,7 @@
  * l'étranger est écarté (pertinence.cjs). Le titre est neutre : un thème, jamais une affirmation.
  */
 const { concerneLaFrance } = require("./pertinence.cjs");
+const { estUtile } = require("./utilite.cjs");
 const { motExclu } = require("./stories-auto.cjs");
 const { sourcesDistinctes } = require("./regroupement.cjs");
 
@@ -97,7 +98,7 @@ function construireDossiers(articles, now = new Date()) {
   for (const g of groupes) {
     const arts = [...g.arts].map((i) => frais[i]).sort((a, b) => b.date.localeCompare(a.date));
     const medias = [...new Set(arts.map((a) => a.media))];
-    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || sourcesDistinctes(arts).mediasDistincts < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre))) continue;
+    if (arts.length < MIN_ARTICLES || medias.length < MIN_MEDIAS || sourcesDistinctes(arts).mediasDistincts < MIN_MEDIAS || !concerneLaFrance(arts.map((a) => a.titre)) || !estUtile(arts.map((a) => a.titre)).utile) continue;
     g.liste = arts;
     g.medias = medias;
     g.score = medias.length * 100 + arts.length;

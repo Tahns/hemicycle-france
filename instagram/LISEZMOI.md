@@ -44,3 +44,15 @@ Aperçus des modèles : `modeles/post-date.jpg`, `modeles/post-loi.jpg` (posts) 
 ## Contenus récurrents et carrousels
 
 `scripts/contenus-auto.cjs` produit chaque jour, depuis nos seules données officielles, des stories à heure fixe : **Aujourd'hui à l'Assemblée** (8 h 30), **Le vote du jour** (12 h 30), **Comprendre** (une notion par semaine, samedi 10 h), **Le chiffre du jour** (19 h), et des posts **carrousels** : **Une loi expliquée en 5 images** (17 h 30) et **Ce qu'il faut retenir cette semaine** (dimanche 18 h 30). Heures réglables dans `data/stories-config.json` (`creneaux`). Aperçus : `modeles/contenu-aujourdhui.jpg`, `modeles/contenu-vote-jour.jpg`, `modeles/contenu-comprendre.jpg`, `modeles/contenu-chiffre-jour.jpg`, `modeles/carrousel-loi-1.jpg` à `-5.jpg`, `modeles/carrousel-hebdo-1.jpg` à `-7.jpg`. Détails : `docs/PUBLICATION-AUTO.md`.
+
+## Images vectorielles (`js/stories-vecto.js`)
+
+Les stories, posts et carrousels sont maintenant écrits en **SVG** (formes et texte, police Public Sans embarquée), puis exportés en JPEG 1080 px pour Instagram. Une seule charte, volontairement simple : fond clair, gros texte noir, une couleur par rubrique, un message par image, source toujours visible. Types concernés : `actualite`, `post` (date, loi, presse), `annonce-post`, `diapo` (carrousels), `aujourdhui`, `vote-jour`, `comprendre`, `chiffre-jour`. Les autres types (dossiers, « en bref », sondages, hémicycle par groupe, portraits) gardent l'ancien dessin en attendant leur migration. Le SVG est renvoyé par `dessinerStory` (champ `svg`). `window.STORY_SANS_VECTO = true` rétablit l'ancien rendu pour comparer. Le test comparatif des 4 styles est neutralisé pour ces types (un seul style). Aperçus : `modeles/vecto-*.jpg`.
+
+**Style « presse »** : quand une photo libre d'une institution existe pour le thème (`data/vignettes.json`), l'actualité et la couverture des carrousels sont dessinées photo plein cadre sous un dégradé sombre, gros titre blanc, trait jaune, crédit de la photo visible (« Photo d'illustration »). Sans photo : la carte claire. `window.STORY_SANS_PHOTO = true` désactive ce style.
+
+**Mise en page et ton** : titres jamais coupés (la taille baisse d'abord, retours à la ligne équilibrés), sous-titres coupés à la phrase entière, agenda réduit à quelques points plutôt qu'un texte minuscule, hémicycle vectoriel pâle en décor. Mots simples partout (« Ont voté pour / contre », « Se sont abstenus », « On vous explique », « Glissez pour la suite »).
+
+## Filtre d'utilité (`scripts/utilite.cjs`)
+
+Un sujet de presse n'est mis en story ou en post que s'il a un lien clair avec la vie politique (Parlement, gouvernement, élections, partis, lois, budget, institutions, mobilisations nationales). Les prix littéraires, le sport, la météo, les faits divers, le people et la vie municipale locale sont écartés, même repris par beaucoup de médias ; le motif apparaît dans le journal (« pas assez utile : … »). Les listes de mots sont simples, en tête du fichier : à compléter si un sujet utile est écarté à tort. Test : `tests/utilite.test.mjs`.
