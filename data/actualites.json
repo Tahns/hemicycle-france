@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-13T14:45:40.456Z",
+ "lastUpdated": "2026-11-13T14:50:41.350Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -150,262 +150,52 @@
  ],
  "dossiers": [
   {
-   "id": "presidentielle",
-   "titre": "Présidentielle",
+   "id": "syndicats",
+   "titre": "Syndicats",
    "motifs": [
-    "présidentielle",
-    "candidat",
-    "hôpital",
-    "bruno"
+    "syndicats",
+    "fonctionnaires"
    ],
    "medias": [
-    "La Dépêche",
-    "Le JDD",
-    "Sud Ouest",
-    "L'Humanité",
-    "Le Dauphiné libéré",
-    "BFMTV",
     "Le Monde",
-    "Nice-Matin",
-    "Europe 1",
     "France 24",
-    "Valeurs actuelles",
-    "20 Minutes",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "L'Est républicain",
-    "Mediapart",
-    "L'Express",
-    "Public Sénat",
-    "RFI",
-    "L'Obs",
-    "Le Figaro"
-   ],
-   "mediasDistincts": 17,
-   "sources": [
-    "La Dépêche",
-    "Groupe Bolloré",
-    "Sud Ouest",
     "L'Humanité",
-    "EBRA",
-    "BFMTV",
-    "Le Monde",
-    "Nice-Matin",
-    "France Médias Monde",
-    "Valeurs actuelles",
     "20 Minutes",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Europe 1",
+    "Sud Ouest",
     "Libération",
-    "Mediapart",
-    "L'Express",
     "Public Sénat",
-    "L'Obs",
-    "Le Figaro"
+    "Le JDD"
    ],
-   "nb": 113,
-   "derniere": "2026-11-13T14:25:44.000Z",
+   "mediasDistincts": 8,
+   "sources": [
+    "Le Monde",
+    "France 24",
+    "L'Humanité",
+    "20 Minutes",
+    "EBRA",
+    "Europe 1 / Sud Ouest / Le JDD",
+    "Libération",
+    "Public Sénat"
+   ],
+   "nb": 19,
+   "derniere": "2026-11-13T12:43:02.000Z",
    "articles": [
     {
-     "media": "La Dépêche",
-     "titre": "DIRECT. Présidentielle 2027 : \"J'avais besoin d'entendre les soignants\", les premiers mots du candidat Teddy Riner, dans un hôpital de Seine-Saint-Denis",
-     "url": "https://www.ladepeche.fr/2026/11/13/direct-presidentielle-2027-jean-luc-melenchon-interdit-dentree-en-israel-on-minterdit-dentrer-sur-un-territoire-ou-je-nai-pas-demande-a-entrer-ironise-13650436.php",
-     "date": "2026-11-13T14:25:44.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "«Franchement, oui» : Cyril Hanouna prêt à voter pour Teddy Riner à la présidentielle de 2027",
-     "url": "https://www.lejdd.fr/politique/franchement-oui-cyril-hanouna-pret-a-voter-pour-teddy-riner-a-la-presidentielle-de-2027-188562",
-     "date": "2026-11-13T14:02:26.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : « J’ai écouté, j’ai noté, le temps de la réflexion va venir », Teddy Riner a effectué sa première visite de campagne dans un hôpital ce vendredi",
-     "url": "https://www.sudouest.fr/sport/judo/teddy-riner/presidentielle-2027-j-ai-ecoute-j-ai-note-le-temps-de-la-reflexion-va-venir-teddy-riner-a-effectue-sa-premiere-visite-de-campagne-dans-un-hopital-ce-vendredi-31510707.php",
-     "date": "2026-11-13T14:01:26.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "De l’éducation à la police : les propositions des candidats pour les services publics",
-     "url": "https://www.humanite.fr/politique/education/de-leducation-a-la-police-les-propositions-des-candidats-pour-les-services-publics",
-     "date": "2026-11-13T14:00:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Briançon. Présidentielle : Bruno Le Maire lance son “autre France” sous les yeux d’Arnaud Murgia assis au premier rang",
-     "url": "https://www.ledauphine.com/elections/2026/11/13/presidentielle-bruno-le-maire-lance-son-autre-france-sous-les-yeux-d-arnaud-murgia-assis-au-premier-rang",
-     "date": "2026-11-13T13:40:00.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Présidentielle : premier déplacement dans un hôpital à Saint-Denis pour le candidat Teddy Riner",
-     "url": "https://www.bfmtv.com/politique/video-presidentielle-premier-deplacement-dans-un-hopital-a-saint-denis-pour-le-candidat-teddy-riner_VN-202611130554.html",
-     "date": "2026-11-13T13:39:57.000Z",
-     "video": true
-    },
-    {
      "media": "Le Monde",
-     "titre": "Présidentielle 2027 : « Le champ médiatique n’est plus une autoroute à péage, mais un manège d’autos-tamponneuses »",
-     "url": "https://www.lemonde.fr/idees/article/2026/11/13/presidentielle-2027-le-champ-mediatique-n-est-plus-une-autoroute-a-peage-mais-un-manege-d-autos-tamponneuses_6809325_3232.html",
-     "date": "2026-11-13T13:00:07.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« J’espère que David Lisnard résistera à (la) pression de ses amis de LR » : Eric Zemmour compte sur le maire de Cannes pour lui permettre de participer à une primaire de la droite",
-     "url": "https://www.nicematin.com/societe/politique/j-espere-que-david-lisnard-resistera-a-la-pression-de-ses-amis-de-lr-eric-zemmour-compte-sur-le-maire-de-cannes-pour-lui-permettre-de-participer-a-une-primaire-de-la-droite-10759148",
-     "date": "2026-11-13T12:55:09.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "2027 : à Saint-Denis, Teddy Riner lance sa campagne sur le thème de la santé",
-     "url": "https://www.europe1.fr/politique/2027-a-saint-denis-teddy-riner-lance-sa-campagne-sur-le-theme-de-la-sante-1230617?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-13T12:32:00.000Z"
+     "titre": "Sébastien Lecornu ouvre une discussion d’un mois avec les syndicats de fonctionnaires, notamment sur la revalorisation des « bas salaires »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/13/mobilisations-sociales-sebastien-lecornu-ouvre-une-discussion-d-un-mois-avec-les-syndicats_6809324_823448.html",
+     "date": "2026-11-13T12:43:02.000Z"
     },
     {
      "media": "France 24",
-     "titre": "Teddy Riner lance sa campagne présidentielle dans un hôpital de Saint-Denis",
-     "url": "https://www.france24.com/fr/france/20261113-teddy-riner-lance-sa-campagne-pr%C3%A9sidentielle-dans-un-h%C3%B4pital-de-saint-denis",
-     "date": "2026-11-13T12:02:25.000Z"
-    },
-    {
-     "media": "Valeurs actuelles",
-     "titre": "Présidentielle 2027 : la spectaculaire percée de David Lisnard, bientôt dans la course pour le second tour ?",
-     "url": "https://www.valeursactuelles.com/politique/presidentielle-2027-la-spectaculaire-percee-de-david-lisnard-bientot-dans-la-course-pour-le-second-tour",
-     "date": "2026-11-13T11:31:01.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Présidentielle 2027 : Comment Mélenchon veut relancer la filière textile made in France",
-     "url": "https://www.20minutes.fr/politique/4262619-20261113-presidentielle-2027-comment-melenchon-veut-relancer-filiere-textile-made-in-france?at_medium=display&at_campaign=149",
-     "date": "2026-11-13T10:46:12.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "A l’approche de la présidentielle, les grands patrons multiplient les rencontres avec Le Pen",
-     "url": "https://www.liberation.fr/politique/a-lapproche-de-la-presidentielle-les-grands-patrons-multiplient-les-rencontres-avec-le-pen-20261113_E6MZUY2IJNGA5B4IATWQPGYXZA/",
-     "date": "2026-11-13T10:34:58.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. « Continuer à bosser le programme » : Teddy Riner a lancé sa campagne à l’hôpital",
-     "url": "https://www.dna.fr/elections/2026/11/13/replacer-la-sante-au-coeur-de-nos-priorites-teddy-riner-fait-son-premier-deplacement-de-campagne-ce-vendredi",
-     "date": "2026-11-13T07:54:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Présidentielle 2027. « Continuer à bosser le programme » : Teddy Riner a lancé sa campagne à l’hôpital",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/13/replacer-la-sante-au-coeur-de-nos-priorites-teddy-riner-fait-son-premier-deplacement-de-campagne-ce-vendredi",
-     "date": "2026-11-13T07:54:00.000Z"
-    },
-    {
-     "media": "Mediapart",
-     "titre": "Nucléaire: à Chinon, EDF refuse de déplacer une station de mesure de radioactivité mal située",
-     "url": "https://www.mediapart.fr/journal/ecologie/131126/nucleaire-chinon-edf-refuse-de-deplacer-une-station-de-mesure-de-radioactivite-mal-situee",
-     "date": "2026-11-13T07:08:08.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "\"C’est une folie autodestructrice\" : avant la présidentielle, le bloc central en plein chaos",
-     "url": "https://www.lexpress.fr/politique/cest-une-folie-autodestructrice-avant-la-presidentielle-le-bloc-central-en-plein-chaos-NJAKELRXNJDRFBCDXHYHFAJPYQ/",
-     "date": "2026-11-13T05:30:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 de la Sécurité sociale : le Sénat atténue la hausse prévue sur les cotisations retraites des collectivités locales et des hôpitaux",
-     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-de-la-securite-sociale-cnracl-le-senat-attenue-la-hausse-prevue-sur-les-cotisations-retraites-des-collectivites-locales-et-des-hopitaux",
-     "date": "2026-11-12T19:01:17.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Primaire droite-centre: «On ne peut se rassembler derrière quelqu’un qui chute dans les sondages», Abdoulaye Kanté, porte-parole de campagne de Gabriel Attal",
-     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261112-primaire-droite-centre-on-ne-peut-se-rassembler-derri%C3%A8re-quelqu-un-qui-chute-dans-les-sondages-dit-le-camp-de-gabriel-attal",
-     "date": "2026-11-12T14:59:39.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Teddy Riner, candidat à l’élection présidentielle : une ambition mais beaucoup de questions",
-     "url": "https://www.nouvelobs.com/politique/20261111.OBS120032/teddy-riner-candidat-a-l-election-presidentielle-une-ambition-mais-beaucoup-de-questions.html",
-     "date": "2026-11-12T09:52:47.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "Bruno Retailleau : « Il est hors de question que j’utilise ma famille pour me mettre en avant »",
-     "url": "https://www.lefigaro.fr/elections/presidentielles/bruno-retailleau-il-est-hors-de-question-que-j-utilise-ma-famille-pour-me-mettre-en-avant-20261111",
-     "date": "2026-11-11T16:39:58.000Z"
-    }
-   ]
-  },
-  {
-   "id": "interdit",
-   "titre": "Interdit",
-   "motifs": [
-    "interdit",
-    "magistrats",
-    "livre"
-   ],
-   "medias": [
-    "Sud Ouest",
-    "RFI",
-    "L'Obs",
-    "Libération",
-    "La Dépêche",
-    "L'Humanité",
-    "20 Minutes",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Europe 1",
-    "L'Express",
-    "Le Monde",
-    "France 24",
-    "Le JDD",
-    "Nice-Matin"
-   ],
-   "mediasDistincts": 12,
-   "sources": [
-    "Sud Ouest",
-    "France Médias Monde",
-    "L'Obs",
-    "Libération",
-    "La Dépêche",
-    "L'Humanité",
-    "20 Minutes",
-    "EBRA",
-    "Groupe Bolloré",
-    "L'Express",
-    "Le Monde",
-    "Nice-Matin"
-   ],
-   "nb": 30,
-   "derniere": "2026-11-13T13:15:18.000Z",
-   "articles": [
-    {
-     "media": "Sud Ouest",
-     "titre": "Affaire Lyhanna : Gérald Darmanin saisit le Conseil de la magistrature contre une magistrate d’Auch pour « manquement à son devoir de conscience professionnelle »",
-     "url": "https://www.sudouest.fr/faits-divers/disparition-de-lyhanna/affaire-lyhanna-gerald-darmanin-saisit-le-conseil-de-la-magistrature-contre-une-magistrate-d-auch-pour-manquement-a-son-devoir-de-conscience-professionnelle-31501209.php",
-     "date": "2026-11-13T13:15:18.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Affaire Lyhanna en France: le ministre de la Justice saisit le Conseil de la magistrature contre une magistrate",
-     "url": "https://www.rfi.fr/fr/france/20261113-affaire-lyhanna-en-france-le-ministre-de-la-justice-saisit-le-conseil-de-la-magistrature-contre-une-magistrate",
-     "date": "2026-11-13T12:52:52.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Ancienne « petite fasciste », Maylis Adhémar livre un récit d’émancipation et d’avertissement face à l’extrême droite",
-     "url": "https://www.nouvelobs.com/politique/20261113.OBS120094/ancienne-petite-fasciste-maylis-adhemar-livre-un-recit-d-emancipation-et-d-avertissement-face-a-l-extreme-droite.html",
-     "date": "2026-11-13T12:00:12.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "A Rouen, une manifestation de groupuscules d’extrême droite interdite, des militants veulent braver les autorités",
-     "url": "https://www.liberation.fr/politique/a-rouen-une-manifestation-de-groupuscules-dextreme-droite-interdite-des-militants-veulent-braver-les-autorites-20261113_XI3TE6QD4JCCXLHVYNPFZ2ZY5Y/",
-     "date": "2026-11-13T11:40:14.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Le député LFI Sébastien Delogu jugé pour outrage après une altercation avec des policiers en intervention l'été dernier à Marseille",
-     "url": "https://www.ladepeche.fr/2026/11/13/le-depute-lfi-sebastien-delogu-juge-pour-outrage-apres-une-altercation-avec-des-policiers-en-intervention-lete-dernier-a-marseille-13650763.php",
-     "date": "2026-11-13T11:12:46.000Z"
+     "titre": "Fonction publique : Lecornu ouvre un mois de discussions sur cinq chantiers, dont les bas salaires",
+     "url": "https://www.france24.com/fr/france/20261113-fonction-publique-lecornu-ouvre-mois-discussions-cinq-chantiers-bas-salaires",
+     "date": "2026-11-13T12:40:00.000Z"
     },
     {
      "media": "L'Humanité",
@@ -420,58 +210,64 @@
      "date": "2026-11-13T10:18:01.000Z"
     },
     {
+     "media": "Le Progrès",
+     "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
+     "url": "https://www.leprogres.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "date": "2026-11-13T10:05:00.000Z"
+    },
+    {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Désinfox. Interview de Jordan Bardella sur BFMTV : un QR code pour acheter son livre a-t-il été diffusé pendant toute l'émission ?",
-     "url": "https://www.dna.fr/elections/2026/11/13/interview-de-jordan-bardella-sur-bfmtv-le-qr-code-pour-acheter-son-livre-a-t-il-ete-en-bandeau",
-     "date": "2026-11-13T07:00:00.000Z"
+     "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
+     "url": "https://www.dna.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "date": "2026-11-13T10:05:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
-     "titre": "Désinfox. Interview de Jordan Bardella sur BFMTV : un QR code pour acheter son livre a-t-il été diffusé pendant toute l'émission ?",
-     "url": "https://www.ledauphine.com/elections/2026/11/13/interview-de-jordan-bardella-sur-bfmtv-le-qr-code-pour-acheter-son-livre-a-t-il-ete-en-bandeau",
-     "date": "2026-11-13T07:00:00.000Z"
+     "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
+     "url": "https://www.ledauphine.com/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "date": "2026-11-13T10:05:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Désinfox. Interview de Jordan Bardella sur BFMTV : un QR code pour acheter son livre a-t-il été diffusé pendant toute l'émission ?",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/13/interview-de-jordan-bardella-sur-bfmtv-le-qr-code-pour-acheter-son-livre-a-t-il-ete-en-bandeau",
-     "date": "2026-11-13T07:00:00.000Z"
+     "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
+     "url": "https://www.estrepublicain.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "date": "2026-11-13T10:05:00.000Z"
     },
     {
      "media": "Europe 1",
-     "titre": "Jean-Luc Mélenchon interdit sur le sol israélien : Jean-Noël Barrot fustige une «décision démagogique»",
-     "url": "https://www.europe1.fr/international/jean-luc-melenchon-interdit-sur-le-sol-israelien-jean-noel-barrot-fustige-une-decision-demagogique-1228988?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-12T21:07:22.000Z"
+     "titre": "2027 : Elisabeth Borne dénonce «la surenchère» sur les suppressions de postes de fonctionnaires",
+     "url": "https://www.europe1.fr/politique/2027-elisabeth-borne-denonce-la-surenchere-sur-les-suppressions-de-postes-de-fonctionnaires-1230338?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-13T09:56:46.000Z"
     },
     {
-     "media": "L'Express",
-     "titre": "Israël interdit l'entrée sur son territoire à Jean-Luc Mélenchon et Mathilde Panot",
-     "url": "https://www.lexpress.fr/monde/proche-moyen-orient/israel-interdit-lentree-sur-son-territoire-a-jean-luc-melenchon-et-mathilde-panot-WY3FKXYFP5ADNFCOBFESFUZXKM/",
-     "date": "2026-11-12T18:28:11.000Z"
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : Élisabeth Borne dénonce « la surenchère » sur les suppressions de postes de fonctionnaires",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-elisabeth-borne-denonce-la-surenchere-sur-les-suppressions-de-postes-de-fonctionnaires-31507483.php",
+     "date": "2026-11-13T09:48:50.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "« Retrouver le peuple », un livre qui esquisse des pistes pour réparer le régime de la Vᵉ République",
-     "url": "https://www.lemonde.fr/idees/article/2026/11/12/retrouver-le-peuple-un-livre-qui-esquisse-des-pistes-pour-reparer-le-regime-de-la-v-republique_6809146_3232.html",
-     "date": "2026-11-12T18:00:09.000Z"
+     "media": "Sud Ouest",
+     "titre": "Crise sociale : les syndicats de fonctionnaires reçus ce vendredi à Matignon pour réclamer de meilleurs salaires",
+     "url": "https://www.sudouest.fr/politique/syndicats/crise-sociale-les-syndicats-de-fonctionnaires-recus-ce-vendredi-a-matignon-pour-reclamer-de-meilleurs-salaires-31507096.php",
+     "date": "2026-11-13T09:34:26.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Israël interdit l'entrée sur son territoire à Mélenchon, Paris dénonce une \"décision démagogique\"",
-     "url": "https://www.france24.com/fr/france/20261112-isra%C3%ABl-interdit-entr%C3%A9e-territoire-jean-luc-m%C3%A9lenchon-lfi-gauche-radicale-gaza-colonies",
-     "date": "2026-11-12T17:25:25.000Z"
+     "media": "Libération",
+     "titre": "En voulant interdire aux magistrats de se syndiquer, Philippe double sur leur droite Lisnard et Retailleau",
+     "url": "https://www.liberation.fr/politique/elections/en-voulant-interdire-aux-magistrats-de-se-syndiquer-philippe-double-sur-leur-droite-lisnard-et-retailleau-20261113_6B4Q7HMPD5BEFDFWIBGLJI6VC4/",
+     "date": "2026-11-13T09:10:32.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Fin de l’abattement pour les retraités, non-remplacement d’un fonctionnaire sur deux : le Sénat veut renforcer l’effort budgétaire « de l’ordre de 6 milliards d’euros »",
+     "url": "https://www.publicsenat.fr/actualites/parlementaire/fin-de-labattement-pour-les-retraites-non-remplacement-dun-fonctionnaire-sur-deux-le-senat-veut-renforcer-leffort-budgetaire-de-lordre-de-6",
+     "date": "2026-11-12T18:16:26.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "Jean-Luc Mélenchon et Mathilde Panot interdits d'entrée en Israël",
-     "url": "https://www.lejdd.fr/International/jean-luc-melenchon-interdit-dentree-en-israel-188520",
-     "date": "2026-11-12T17:07:09.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Nous sommes devant Jordan Bardella et Sarah Knafo » : le livre programme du candidat LFI à la présidentielle Jean-Luc Mélenchon plus vendu que le prix Goncourt",
-     "url": "https://www.nicematin.com/societe/politique/nous-sommes-devant-jordan-bardella-et-sarah-knafo-le-livre-programme-du-candidat-lfi-a-la-presidentielle-jean-luc-melenchon-plus-vendu-que-le-prix-goncourt-10758589",
-     "date": "2026-11-12T12:14:02.000Z"
+     "titre": "Lecornu reçoit les syndicats, Marine Le Pen au Salon du Made in France, procès de Delogu… Les 4 infos dont vous allez entendre parler demain",
+     "url": "https://www.lejdd.fr/politique/lecornu-recoit-les-syndicats-marine-le-pen-au-salon-du-made-in-france-proces-de-delogu-les-4-infos-dont-vous-allez-entendre-parler-demain-188361",
+     "date": "2026-11-12T15:45:04.000Z"
     }
    ]
   },
@@ -599,6 +395,129 @@
      "titre": "Accusations d’antisémitisme : le président du RN Jordan Bardella porte plainte contre X pour faux et usage de faux après l’enquête de Mediapart",
      "url": "https://www.nicematin.com/societe/justice/accusations-d-antisemitisme-le-president-du-rn-jordan-bardella-porte-plainte-contre-x-pour-faux-et-usage-de-faux-apres-l-enquete-de-mediapart-10758590",
      "date": "2026-11-12T12:21:35.000Z"
+    }
+   ]
+  },
+  {
+   "id": "policiers",
+   "titre": "Policiers",
+   "motifs": [
+    "policiers",
+    "procès",
+    "justice"
+   ],
+   "medias": [
+    "Le Monde",
+    "L'Humanité",
+    "RFI",
+    "La Dépêche",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Libération",
+    "Public Sénat",
+    "Le JDD",
+    "L'Obs"
+   ],
+   "mediasDistincts": 9,
+   "sources": [
+    "Le Monde",
+    "L'Humanité",
+    "RFI",
+    "La Dépêche",
+    "EBRA",
+    "Libération",
+    "Public Sénat",
+    "Le JDD",
+    "L'Obs"
+   ],
+   "nb": 19,
+   "derniere": "2026-11-13T14:37:11.000Z",
+   "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "Mobilisation du 14 novembre : la Préfecture de police de Paris redoute une manifestation « à forte coloration antipolice »",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/13/mobilisation-du-14-novembre-la-prefecture-de-police-de-paris-redoute-une-manifestation-a-forte-coloration-anti-police_6809334_3224.html",
+     "date": "2026-11-13T14:37:11.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "De l’éducation à la police : les propositions des candidats pour les services publics",
+     "url": "https://www.humanite.fr/politique/education/de-leducation-a-la-police-les-propositions-des-candidats-pour-les-services-publics",
+     "date": "2026-11-13T14:00:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Affaire Lyhanna en France: le ministre de la Justice saisit le Conseil de la magistrature contre une magistrate",
+     "url": "https://www.rfi.fr/fr/france/20261113-affaire-lyhanna-en-france-le-ministre-de-la-justice-saisit-le-conseil-de-la-magistrature-contre-une-magistrate",
+     "date": "2026-11-13T12:52:52.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Plus de 50 manifestations attendues samedi lors de l’acte V des mobilisations sociales ; 70 000 policiers et gendarmes devraient être mobilisés",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/13/acte-v-des-mobilisations-sociales-entre-50-et-60-defiles-sur-l-ensemble-du-territoire-national-prevoit-le-ministre-de-l-interieur_6809320_3224.html",
+     "date": "2026-11-13T11:16:26.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Le député LFI Sébastien Delogu jugé pour outrage après une altercation avec des policiers en intervention l'été dernier à Marseille",
+     "url": "https://www.ladepeche.fr/2026/11/13/le-depute-lfi-sebastien-delogu-juge-pour-outrage-apres-une-altercation-avec-des-policiers-en-intervention-lete-dernier-a-marseille-13650763.php",
+     "date": "2026-11-13T11:12:46.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "date": "2026-11-13T10:57:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "date": "2026-11-13T10:57:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "date": "2026-11-13T10:57:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "date": "2026-11-13T10:57:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Brutalités policières contre des journalistes : pourquoi n’entend-on pas le ministre de l’Intérieur ?",
+     "url": "https://www.liberation.fr/idees-et-debats/tribunes/brutalites-policieres-contre-des-journalistes-pourquoi-nentend-on-pas-le-ministre-de-linterieur-20261113_5RCVMRHZAFDB5HXIT64IJIINXA/",
+     "date": "2026-11-13T10:20:04.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Social. Mobilisation du 14 novembre : 70 000 policiers et gendarmes mobilisés pour l'acte V",
+     "url": "https://www.leprogres.fr/social/2026/11/13/mobilisation-du-14-novembre-70-000-policiers-et-gendarmes-mobilises-pour-l-acte-v",
+     "date": "2026-11-13T08:54:00.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Présidentielle 2027 : santé, justice, éducation, culture…Que retenir du grand oral des candidats sur les services publics",
+     "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-sante-justice-education-cultureque-retenir-du-grand-oral-des-candidats-sur-les-services-publics",
+     "date": "2026-11-12T18:44:26.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Lecornu reçoit les syndicats, Marine Le Pen au Salon du Made in France, procès de Delogu… Les 4 infos dont vous allez entendre parler demain",
+     "url": "https://www.lejdd.fr/politique/lecornu-recoit-les-syndicats-marine-le-pen-au-salon-du-made-in-france-proces-de-delogu-les-4-infos-dont-vous-allez-entendre-parler-demain-188361",
+     "date": "2026-11-12T15:45:04.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Du procès à la tournée : Rima Hassan, l’artilleuse de Mélenchon",
+     "url": "https://www.nouvelobs.com/politique/20261106.OBS119886/du-proces-a-la-tournee-rima-hassan-l-artilleuse-de-melenchon.html",
+     "date": "2026-11-12T13:46:42.000Z"
     }
    ]
   }
@@ -925,7 +844,7 @@
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "Le Monde",
@@ -949,8 +868,8 @@
    "articles": [
     {
      "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
-     "url": "https://www.dna.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "media": "Le Progrès",
      "date": "2026-11-13T10:05:00.000Z"
     },
     {
@@ -967,6 +886,12 @@
     },
     {
      "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
+     "url": "https://www.dna.fr/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-13T10:05:00.000Z"
+    },
+    {
+     "titre": "Social. Après la réunion avec les syndicats de fonctionnaires, Lecornu ouvre un mois de discussions sur les salaires",
      "url": "https://www.ledauphine.com/social/2026/11/13/les-syndicats-de-fonctionnaires-recus-a-matignon-ce-vendredi-pour-reclamer-de-meilleurs-salaires",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-13T10:05:00.000Z"
@@ -979,24 +904,18 @@
     }
    ],
    "titrePropre": {
-    "titre": "Premier ministre : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
+    "titre": "Syndicats",
+    "origine": "dossier"
    },
    "fait": "Sébastien Lecornu ouvre une discussion d’un mois avec les syndicats de fonctionnaires",
    "accroche": "Sébastien Lecornu ouvre une discussion d’un mois avec les syndicats de fonctionnaires",
-   "essentiel": "Sébastien Lecornu ouvre une discussion d’un mois avec les syndicats de fonctionnaires, sur la revalorisation des « bas salaires ». Cinq médias en parlent : Dernières Nouvelles d'Alsace, Le Monde, France 24, Le Dauphiné libéré et L'Est républicain.",
-   "rubrique": "Gouvernement",
+   "essentiel": "Sébastien Lecornu ouvre une discussion d’un mois avec les syndicats de fonctionnaires, sur la revalorisation des « bas salaires ». Six médias en parlent : Le Progrès, Le Monde, France 24, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "rubrique": "Politique",
    "contexte": [
     {
      "type": "personnes",
      "texte": "Sébastien Lecornu : premier ministre",
      "source": "Assemblée nationale (mandats du Gouvernement)"
-    },
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
     }
    ]
   },
@@ -1050,7 +969,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
+    "titre": "Syndicats",
     "origine": "dossier"
    },
    "fait": "Interdire aux magistrats de se syndiquer",
@@ -1308,7 +1227,7 @@
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "Le Monde",
@@ -1324,8 +1243,8 @@
    "articles": [
     {
      "titre": "Social. Mobilisation du 14 novembre : 70 000 policiers et gendarmes mobilisés pour l'acte V",
-     "url": "https://www.dna.fr/social/2026/11/13/mobilisation-du-14-novembre-70-000-policiers-et-gendarmes-mobilises-pour-l-acte-v",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/social/2026/11/13/mobilisation-du-14-novembre-70-000-policiers-et-gendarmes-mobilises-pour-l-acte-v",
+     "media": "Le Progrès",
      "date": "2026-11-13T08:54:00.000Z"
     },
     {
@@ -1333,6 +1252,12 @@
      "url": "https://www.lemonde.fr/societe/article/2026/11/13/acte-v-des-mobilisations-sociales-entre-50-et-60-defiles-sur-l-ensemble-du-territoire-national-prevoit-le-ministre-de-l-interieur_6809320_3224.html",
      "media": "Le Monde",
      "date": "2026-11-13T11:16:26.000Z"
+    },
+    {
+     "titre": "Social. Mobilisation du 14 novembre : 70 000 policiers et gendarmes mobilisés pour l'acte V",
+     "url": "https://www.dna.fr/social/2026/11/13/mobilisation-du-14-novembre-70-000-policiers-et-gendarmes-mobilises-pour-l-acte-v",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-13T08:54:00.000Z"
     },
     {
      "titre": "Social. Mobilisation du 14 novembre : 70 000 policiers et gendarmes mobilisés pour l'acte V",
@@ -1353,7 +1278,7 @@
    },
    "fait": "Plus de 50 manifestations attendues lors de l’acte V des mobilisations sociales; 70 000 policiers et gendarmes devraient être mobilisés",
    "accroche": "Plus de 50 manifestations attendues lors de l’acte V des mobilisations sociales; 70 000 policiers et gendarmes devraient être mobilisés",
-   "essentiel": "Plus de 50 manifestations attendues lors de l’acte V des mobilisations sociales; 70 000 policiers et gendarmes devraient être mobilisés. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Monde, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Plus de 50 manifestations attendues lors de l’acte V des mobilisations sociales; 70 000 policiers et gendarmes devraient être mobilisés. Cinq médias en parlent : Le Progrès, Le Monde, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Sécurité",
    "chiffre": {
     "valeur": "70 000",
@@ -1366,7 +1291,7 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "La Dépêche",
@@ -1393,8 +1318,8 @@
    "articles": [
     {
      "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "media": "Le Progrès",
      "date": "2026-11-13T10:57:00.000Z"
     },
     {
@@ -1402,6 +1327,12 @@
      "url": "https://www.ladepeche.fr/2026/11/13/le-depute-lfi-sebastien-delogu-juge-pour-outrage-apres-une-altercation-avec-des-policiers-en-intervention-lete-dernier-a-marseille-13650763.php",
      "media": "La Dépêche",
      "date": "2026-11-13T11:12:46.000Z"
+    },
+    {
+     "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/13/nouveau-proces-contre-le-depute-lfi-sebastien-delogu-cette-fois-pour-outrage-envers-des-policiers",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-13T10:57:00.000Z"
     },
     {
      "titre": "Justice. Nouveau procès contre le député LFI Sébastien Delogu, cette fois pour outrage envers des policiers",
@@ -1417,9 +1348,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
+    "titre": "Policiers",
+    "origine": "dossier"
    },
    "rubrique": "Justice"
   },
@@ -1478,6 +1408,51 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le JDD",
+    "20 Minutes"
+   ],
+   "derniere": "2026-11-13T14:48:05.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Teddy Riner",
+      "photo": "photos/personnalites/teddy-riner.jpg",
+      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
+      "parti": "SE",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : après Saxo Bank, d’autres sponsors vont-ils lâcher Teddy Riner ?",
+     "url": "https://www.lejdd.fr/politique/presidentielle-2027-apres-saxo-bank-dautres-sponsors-vont-ils-lacher-teddy-riner-188568",
+     "media": "Le JDD",
+     "date": "2026-11-13T14:48:05.000Z"
+    },
+    {
+     "titre": "Présidentielles 2027 : Saxo Bank suspend sa collaboration avec Teddy Riner après sa candidature",
+     "url": "https://www.20minutes.fr/sport/4262470-20261112-presidentielles-2027-saxo-bank-suspend-collaboration-teddy-riner-apres-candidature?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-12T16:18:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Saxo Bank suspend sa collaboration avec Teddy Riner après sa candidature",
+   "accroche": "Saxo Bank suspend sa collaboration avec Teddy Riner après sa candidature",
+   "essentiel": "Présidentielles 2027 : Saxo Bank suspend sa collaboration avec Teddy Riner après sa candidature. Deux médias en parlent : Le JDD et 20 Minutes.",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1807,8 +1782,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
-    "origine": "dossier"
+    "titre": "Israël interdit",
+    "origine": "recoupement"
    },
    "fait": "Israël interdit de territoire Jean-Luc Mélenchon",
    "accroche": "Israël interdit de territoire Jean-Luc Mélenchon",
@@ -2279,7 +2254,7 @@
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2300,6 +2275,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. « Continuer à bosser le programme » : Teddy Riner a lancé sa campagne à l’hôpital",
+     "url": "https://www.leprogres.fr/elections/2026/11/13/replacer-la-sante-au-coeur-de-nos-priorites-teddy-riner-fait-son-premier-deplacement-de-campagne-ce-vendredi",
+     "media": "Le Progrès",
+     "date": "2026-11-13T07:54:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. « Continuer à bosser le programme » : Teddy Riner a lancé sa campagne à l’hôpital",
      "url": "https://www.dna.fr/elections/2026/11/13/replacer-la-sante-au-coeur-de-nos-priorites-teddy-riner-fait-son-premier-deplacement-de-campagne-ce-vendredi",
@@ -2325,11 +2306,11 @@
    },
    "fait": "Teddy Riner a lancé sa campagne à l’hôpital",
    "accroche": "Teddy Riner a lancé sa campagne à l’hôpital",
-   "essentiel": "Teddy Riner a lancé sa campagne à l’hôpital. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Teddy Riner a lancé sa campagne à l’hôpital. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2352,6 +2333,12 @@
    "articles": [
     {
      "titre": "Désinfox. Interview de Jordan Bardella sur BFMTV : un QR code pour acheter son livre a-t-il été diffusé pendant toute l'émission ?",
+     "url": "https://www.leprogres.fr/elections/2026/11/13/interview-de-jordan-bardella-sur-bfmtv-le-qr-code-pour-acheter-son-livre-a-t-il-ete-en-bandeau",
+     "media": "Le Progrès",
+     "date": "2026-11-13T07:00:00.000Z"
+    },
+    {
+     "titre": "Désinfox. Interview de Jordan Bardella sur BFMTV : un QR code pour acheter son livre a-t-il été diffusé pendant toute l'émission ?",
      "url": "https://www.dna.fr/elections/2026/11/13/interview-de-jordan-bardella-sur-bfmtv-le-qr-code-pour-acheter-son-livre-a-t-il-ete-en-bandeau",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-13T07:00:00.000Z"
@@ -2370,8 +2357,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
-    "origine": "dossier"
+    "titre": "Jordan Bardella (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique",
    "contexte": [
@@ -2397,7 +2385,7 @@
    },
    "articles": [
     {
-     "titre": "Depardieu renonce à son appel juste avant son procès pour agressions sexuelles",
+     "titre": "Agressions sexuelles : Gérard Depardieu renonce à son appel juste avant son procès",
      "url": "https://www.france24.com/fr/france/20261113-depardieu-renonce-%C3%A0-son-appel-juste-avant-son-proc%C3%A8s-pour-agressions-sexuelles",
      "media": "France 24",
      "date": "2026-11-13T11:23:34.000Z"
@@ -2414,9 +2402,6 @@
     "origine": "regles",
     "generique": true
    },
-   "accroche": "Depardieu renonce à son appel juste avant son procès pour agressions sexuelles",
-   "essentiel": "Depardieu renonce à son appel juste avant son procès pour agressions sexuelles. Deux médias en parlent : France 24 et RFI.",
-   "fait": "Depardieu renonce à son appel juste avant son procès pour agressions sexuelles",
    "rubrique": "Justice"
   },
   {
@@ -2463,8 +2448,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
-    "origine": "dossier"
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Jean-Luc Mélenchon et Mathilde Panot interdits d’entrée en Israël",
    "accroche": "Jean-Luc Mélenchon et Mathilde Panot interdits d’entrée en Israël",
@@ -2596,8 +2582,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
-    "origine": "dossier"
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Israël interdit l'entrée sur son territoire à Jean-Luc Mélenchon et Mathilde Panot",
    "accroche": "Israël interdit l'entrée sur son territoire à Jean-Luc Mélenchon et Mathilde Panot",
@@ -2615,9 +2602,83 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-13T14:47:19.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Arnault",
+      "photo": "photos/deputes/PA842105.jpg",
+      "photoHd": "photos/deputes/hd/PA842105.jpg",
+      "parti": "LFI",
+      "lien": "#depute-PA842105",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Enquête sur une possible reconstitution de la Jeune Garde : un assistant du député Raphaël Arnault entendu",
+     "url": "https://www.sudouest.fr/politique/enquete-sur-une-possible-reconstitution-de-la-jeune-garde-un-assistant-du-depute-raphael-arnault-entendu-31511474.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-13T14:47:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-13T14:43:21.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Christine Lagarde",
+      "photo": "photos/personnalites/christine-lagarde.jpg",
+      "photoHd": "photos/personnalites/hd/christine-lagarde.jpg",
+      "credit": "European Parliament from EU, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Banque centrale européenne : qui pour succéder à Christine Lagarde ? « Deux excellentes candidatures » et des discussions « intenses » entre Paris et Berlin",
+     "url": "https://www.sudouest.fr/economie/banque-centrale-europeenne-qui-pour-succeder-a-christine-lagarde-deux-excellentes-candidatures-et-des-discussions-intenses-entre-paris-et-berlin-31511524.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-13T14:43:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Banque centrale européenne : qui pour succéder",
+   "accroche": "Banque centrale européenne : qui pour succéder",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-13T14:37:14.000Z",
+   "derniere": "2026-11-13T14:37:11.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2626,15 +2687,15 @@
    },
    "articles": [
     {
-     "titre": "Mobilisation du 14 novembre : la Préfecture de police de Paris redoute une manifestation « à forte coloration anti-police »",
+     "titre": "Mobilisation du 14 novembre : la Préfecture de police de Paris redoute une manifestation « à forte coloration antipolice »",
      "url": "https://www.lemonde.fr/societe/article/2026/11/13/mobilisation-du-14-novembre-la-prefecture-de-police-de-paris-redoute-une-manifestation-a-forte-coloration-anti-police_6809334_3224.html",
      "media": "Le Monde",
-     "date": "2026-11-13T14:37:14.000Z"
+     "date": "2026-11-13T14:37:11.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Policiers",
+    "origine": "dossier"
    },
    "rubrique": "Sécurité"
   },
@@ -2666,6 +2727,34 @@
    "fait": "Le conseil municipal a choisi son nouveau premier adjoint",
    "accroche": "Le conseil municipal a choisi son nouveau premier adjoint",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-13T14:28:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Pétition de CNews classée : Dominique Sopo dénonce une « faiblesse » face à « l’extrême droite »",
+     "url": "https://www.nouvelobs.com/societe/20261113.OBS120098/petition-de-cnews-classee-dominique-sopo-denonce-une-faiblesse-face-a-l-extreme-droite.html",
+     "media": "L'Obs",
+     "date": "2026-11-13T14:28:14.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2801,6 +2890,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T14:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Beauvallon. Bientôt 31 nouveaux logements : comment la commune veut répondre aux besoins du territoire",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/bientot-31-nouveaux-logements-comment-cette-petite-commune-des-monts-du-lyonnais-veut-repondre-aux-besoins-du-territoire",
+     "media": "Le Progrès",
+     "date": "2026-11-13T14:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Beauvallon : logement et accueil",
+    "origine": "regles"
+   },
+   "fait": "Bientôt 31 nouveaux logements : comment la commune veut répondre aux besoins du territoire",
+   "accroche": "Bientôt 31 nouveaux logements : comment la commune veut répondre aux besoins du territoire",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-11-13T14:00:00.000Z",
@@ -2819,12 +2937,71 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Policiers",
+    "origine": "dossier"
    },
    "fait": "Les propositions des candidats pour les services publics",
    "accroche": "Les propositions des candidats pour les services publics",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T13:46:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Plateau d'Hauteville. La commune prépare son dispositif de recensement de la population",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/la-commune-prepare-son-dispositif-de-recensement-de-la-population",
+     "media": "Le Progrès",
+     "date": "2026-11-13T13:46:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Plateau d'Hauteville : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "La commune prépare son dispositif de recensement de la population",
+   "accroche": "La commune prépare son dispositif de recensement de la population",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T13:46:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Plateau d'Hauteville. Le montant des redevances d’occupation du domaine public adopté",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/le-montant-des-redevances-d-occupation-du-domaine-public-adopte",
+     "media": "Le Progrès",
+     "date": "2026-11-13T13:46:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Plateau d'Hauteville : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le montant des redevances d’occupation du domaine public adopté",
+   "accroche": "Le montant des redevances d’occupation du domaine public adopté",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -3169,6 +3346,42 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Éric Zemmour",
+      "photo": "photos/personnalites/eric-zemmour.jpg",
+      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
+      "parti": "REC",
+      "credit": "Anh De France, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Eric Zemmour",
+     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
+     "media": "BFMTV",
+     "date": "2026-11-13T13:17:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éric Zemmour : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-13T13:17:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Gabriel Attal",
       "photo": "photos/deputes/PA722190.jpg",
       "photoHd": "photos/deputes/hd/PA722190.jpg",
@@ -3296,42 +3509,6 @@
    "sources": [
     "BFMTV"
    ],
-   "derniere": "2026-11-13T13:17:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Eric Zemmour",
-     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
-     "media": "BFMTV",
-     "date": "2026-11-13T13:17:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Zemmour : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
    "derniere": "2026-11-13T13:09:32.000Z",
    "illustration": {
     "personnes": [
@@ -3416,6 +3593,62 @@
     "titre": "Présidentielle 2027 : ce que disent les médias",
     "origine": "regles"
    },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T12:59:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Jean-de-Thurigneux. Crèche, transports, pistes cyclables : le bilan 2025 de la communauté de communes",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/creche-transports-pistes-cyclables-le-bilan-2025-de-la-communaute-de-communes",
+     "media": "Le Progrès",
+     "date": "2026-11-13T12:59:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Jean-de-Thurigneux : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T12:59:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Jean-de-Thurigneux. Le conseil municipal des jeunes a été mis en place",
+     "url": "https://www.leprogres.fr/education/2026/11/13/le-conseil-municipal-des-jeunes-a-ete-mis-en-place",
+     "media": "Le Progrès",
+     "date": "2026-11-13T12:59:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Jean-de-Thurigneux : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Le conseil municipal des jeunes a été mis en place",
+   "accroche": "Le conseil municipal des jeunes a été mis en place",
    "rubrique": "Élysée 2027"
   },
   {
@@ -3631,6 +3864,42 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-11-13T12:30:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-13T12:30:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Teddy Riner",
       "photo": "photos/personnalites/teddy-riner.jpg",
       "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
@@ -3677,42 +3946,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-13T12:30:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-13T12:30:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -3953,6 +4186,42 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T12:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Métropole de Lyon. Trophées des maires du Rhône : une soirée pour célébrer l’engagement des communes",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/trophees-des-maires-du-rhone-une-soiree-pour-celebrer-l-engagement-des-communes",
+     "media": "Le Progrès",
+     "date": "2026-11-13T12:00:00.000Z"
+    },
+    {
+     "titre": "Trophées des maires du Rhône et de la Métropole de Lyon et des présidents d’intercommunalité. Une soirée pour célébrer l’engagement des communes",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/une-soiree-pour-celebrer-l-engagement-des-communes",
+     "media": "Le Progrès",
+     "date": "2026-11-12T23:04:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Métropole de Lyon : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Trophées des maires du Rhône : une soirée pour célébrer l’engagement des communes",
+   "accroche": "Trophées des maires du Rhône : une soirée pour célébrer l’engagement des communes",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4201,8 +4470,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Interdit",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique"
   },
@@ -4669,6 +4939,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-13T11:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Étienne. Saccages et pillages de commerces : l’opposant Quentin Bataillon réclame un bilan chiffré",
+     "url": "https://www.leprogres.fr/politique/2026/11/13/saccages-et-pillages-l-opposant-quentin-bataillon-reclame-un-bilan-chiffre",
+     "media": "Le Progrès",
+     "date": "2026-11-13T11:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Étienne : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Saccages et pillages de commerces : l’opposant Quentin Bataillon réclame un bilan chiffré",
+   "accroche": "Saccages et pillages de commerces : l’opposant Quentin Bataillon réclame un bilan chiffré",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-11-13T11:00:00.000Z",
@@ -5019,9 +5319,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Policiers",
+    "origine": "dossier"
    },
    "rubrique": "Gouvernement"
   },
@@ -5126,369 +5425,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-13T10:10:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Scherwiller. Jade Turck, nouvelle directrice générale des services, prend ses marques",
-     "url": "https://www.dna.fr/politique/2026/11/13/jade-turck-nouvelle-directrice-generale-des-services-prend-ses-marques",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-13T10:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Scherwiller : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-13T10:07:31.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Pourquoi Gabriel Attal est persuadé de gagner la primaire face à Retailleau et Lisnard",
-     "url": "https://www.liberation.fr/politique/pourquoi-gabriel-attal-est-persuade-de-gagner-la-primaire-face-a-retailleau-et-lisnard-20261113_RBF4A6X3TRBERDDRKPD5O5RTEY/",
-     "media": "Libération",
-     "date": "2026-11-13T10:07:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gabriel Attal (Ensemble pour la République) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-11-13T10:01:09.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Il a de la gueule », la candidature de Teddy Riner bouscule la classe politique",
-     "url": "https://www.valeursactuelles.com/politique/presidentielle-2027-il-a-de-la-gueule-la-candidature-de-teddy-riner-bouscule-la-classe-politique",
-     "media": "Valeurs actuelles",
-     "date": "2026-11-13T10:01:09.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Teddy Riner : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-13T09:50:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Les Contamines-Montjoie. Projet du centre-ville : l’ancienne municipalité accusée d’avoir piégé les finances de la commune avant son départ",
-     "url": "https://www.ledauphine.com/politique/2026/11/13/projet-du-centre-ville-l-ancienne-municipalite-accusee-d-avoir-piege-les-finances-de-la-commune-avant-son-depart",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-13T09:50:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Accusations",
-    "origine": "dossier"
-   },
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-13T09:45:43.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "Vous rêvez de personnaliser la plaque d'immatriculation de votre voiture ? Un sénateur dépose une proposition de loi pour le rendre possible en France",
-     "url": "https://www.ladepeche.fr/2026/11/13/vous-revez-de-personnaliser-la-plaque-dimmatriculation-de-votre-voiture-un-senateur-depose-une-proposition-de-loi-pour-le-rendre-possible-en-france-13650628.php",
-     "media": "La Dépêche",
-     "date": "2026-11-13T09:45:43.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sénat : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Sénat"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-13T09:43:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 14 novembre : parcours, revendications, sécurité... Ce qu'il faut savoir",
-     "url": "https://www.france24.com/fr/france/20261113-manifestations-du-14-novembre-parcours-revendications-s%C3%A9curit%C3%A9-ce-qu-il-faut-savoir",
-     "media": "France 24",
-     "date": "2026-11-13T09:43:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-13T09:41:11.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Les choix de Teddy Riner pour ses deux premiers déplacements de campagne",
-     "url": "https://www.20minutes.fr/politique/4262577-20261113-presidentielle-2027-choix-teddy-riner-deux-premiers-deplacements-campagne?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-13T09:41:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Teddy Riner : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-13T09:34:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Crise sociale : les syndicats de fonctionnaires reçus ce vendredi à Matignon pour réclamer de meilleurs salaires",
-     "url": "https://www.sudouest.fr/politique/syndicats/crise-sociale-les-syndicats-de-fonctionnaires-recus-ce-vendredi-a-matignon-pour-reclamer-de-meilleurs-salaires-31507096.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-13T09:34:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Syndicats : déclaration sur le social et l'emploi",
-    "origine": "regles"
-   },
-   "fait": "Les syndicats de fonctionnaires reçus ce vendredi à Matignon pour réclamer de meilleurs salaires",
-   "accroche": "Les syndicats de fonctionnaires reçus ce vendredi à Matignon pour réclamer de meilleurs salaires",
-   "rubrique": "Gouvernement",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-13T09:33:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Disparition. La figure politique Robert Gardette est décédée",
-     "url": "https://www.ledauphine.com/carnet-du-jour/2026/11/13/la-figure-politique-robert-gardette-est-decede",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-13T09:33:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Disparition : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La figure politique Robert Gardette est décédée",
-   "accroche": "La figure politique Robert Gardette est décédée",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-13T09:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Julien Jeanneney, constitutionnaliste : « Là où juges, presse et opposition tiennent bon, l’érosion démocratique peut être freinée »",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/13/julien-jeanneney-constitutionnaliste-la-ou-juges-presse-et-opposition-tiennent-bon-l-erosion-democratique-peut-etre-freinee_6809302_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-13T09:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-13T09:16:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Colère des lycéens : « On est exsangues… » Les proviseurs se mobilisent face aux violences ce vendredi, notamment à Bordeaux et Pau",
-     "url": "https://www.sudouest.fr/etudiant/lycee/colere-des-lyceens-on-est-exsangues-les-proviseurs-se-mobilisent-face-aux-violences-ce-vendredi-notamment-a-bordeaux-et-pau-31507152.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-13T09:16:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : appel sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "fait": "Les proviseurs se mobilisent face aux violences, à Bordeaux et Pau",
-   "accroche": "Les proviseurs se mobilisent face aux violences, à Bordeaux et Pau",
-   "rubrique": "Sécurité"
   }
  ]
 }
