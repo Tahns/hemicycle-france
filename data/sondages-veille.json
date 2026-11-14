@@ -1,8 +1,20 @@
 {
- "lastUpdated": "2026-11-14T00:52:34.361Z",
+ "lastUpdated": "2026-11-14T14:20:07.092Z",
  "source": "Commission des sondages — notices déposées",
  "sourceUrl": "https://www.commission-des-sondages.fr/notices/",
  "enquetes": [
+  {
+   "institut": "OpinionWay",
+   "media": "Cnews",
+   "terrain": {
+    "debut": "2026-11-10",
+    "fin": "2026-11-12"
+   },
+   "echantillon": 1001,
+   "notice": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2393",
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10371-pres-iv-opinionway-cnews-12-novembre.pdf",
+   "integre": false
+  },
   {
    "institut": "Cluster17",
    "media": "Politico",
@@ -149,6 +161,37 @@
   }
  ],
  "notices": [
+  {
+   "id": 2393,
+   "titre": "10371 Pres IV OPINIONWAY Cnews 12 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2393",
+   "iv": true,
+   "terrain": {
+    "debut": "2026-11-10",
+    "fin": "2026-11-12"
+   },
+   "echantillon": 1001,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10371-pres-iv-opinionway-cnews-12-novembre.pdf",
+   "resultats": null,
+   "institut": "OpinionWay",
+   "media": "Cnews"
+  },
+  {
+   "id": 2392,
+   "titre": "10370 Pres primaire centre droite IFOP Sud Radio 12 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2392",
+   "iv": false,
+   "terrain": {
+    "debut": "2026-11-04",
+    "fin": "2026-11-05"
+   },
+   "echantillon": 1481,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10370-pres-primaire-centre-droite-ifop-sud-radio-12-novembre.pdf",
+   "institut": "Ifop",
+   "media": "primaire centre droite Sud Radio"
+  },
   {
    "id": 2386,
    "titre": "10369 Pres candidature T. Riner ODOXA 12 novembre",
@@ -1244,32 +1287,6 @@
    "echantillon": 1000,
    "institut": "CSA",
    "media": "blocages des lycées Cnews"
-  },
-  {
-   "id": 2306,
-   "titre": "10289 Pres Primaire à gauche ELABE 3 octobre",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2306",
-   "iv": false,
-   "terrain": {
-    "debut": "2026-09-29",
-    "fin": "2026-10-02"
-   },
-   "echantillon": null,
-   "institut": "Elabe",
-   "media": "Primaire à gauche"
-  },
-  {
-   "id": 2305,
-   "titre": "10288 Pres Barometre popularite YOUGOV Huffpost 2 octobre",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2305",
-   "iv": false,
-   "terrain": {
-    "debut": "2026-09-29",
-    "fin": "2026-10-01"
-   },
-   "echantillon": 1000,
-   "institut": "YouGov",
-   "media": "popularite Huffpost"
   }
  ]
 }
