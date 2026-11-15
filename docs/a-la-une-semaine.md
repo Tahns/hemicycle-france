@@ -31,7 +31,7 @@ Instagram ne permet pas d'ajouter une story à une une automatiquement : à fair
 | 12 novembre 2026 | **Actualité** | story | Places | faible |
 | 12 novembre 2026 | **Actualité** | story | Chanas : conseil municipal | faible |
 | 12 novembre 2026 | **2027** | story | Teddy Riner : ce qu'il faut savoir sur la présidentielle de 2027 | moyenne |
-| 12 novembre 2026 | **Agenda** | post | Proposition de loi visant à renforcer l'effectivité des droits voisins des éditeurs et des agences de presse | haute |
+| 12 novembre 2026 | **Élus et votes** | story | Proposition de loi visant à renforcer l'effectivité des droits voisins des éditeurs et des agences de presse | haute |
 | 12 novembre 2026 | **Élus et votes** | story | Proposition de loi visant à renforcer l'effectivité des droits voisins des éditeurs et des agences de presse | haute |
 | 12 novembre 2026 | **Élus et votes** | story | Proposition de loi visant à renforcer l'effectivité des droits voisins des éditeurs et des agences de presse | haute |
 | 13 novembre 2026 | **Actualité** | story | Israël. Mélenchon et Panot interdits de territoire israélien, Barrot dénonce une décision « démagogique » | moyenne |
@@ -65,8 +65,8 @@ Confiance « faible » : aucun indice net, la rubrique par défaut (Politique) e
 - **Actualité** : 92 publication(s), la plus récente le 15 novembre 2026
 - **2027** : 22 publication(s), la plus récente le 14 novembre 2026
 - **Sondages** : 4 publication(s), la plus récente le 4 novembre 2026
-- **Élus et votes** : 40 publication(s), la plus récente le 15 novembre 2026
+- **Élus et votes** : 41 publication(s), la plus récente le 15 novembre 2026
 - **Argent public** : 5 publication(s), la plus récente le 10 novembre 2026
 - **Comprendre** : 1 publication(s), la plus récente le 23 octobre 2026
 - **Quiz** : aucune pour l'instant
-- **Agenda** : 5 publication(s), la plus récente le 15 novembre 2026
+- **Agenda** : 4 publication(s), la plus récente le 15 novembre 2026
