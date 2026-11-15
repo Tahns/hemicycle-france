@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-15T05:35:34.298Z",
+ "lastUpdated": "2026-11-15T05:40:48.553Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -154,15 +154,16 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
+    "teddy",
     "candidat",
-    "sondage",
-    "primaire"
+    "sondage"
    ],
    "medias": [
-    "La Dépêche",
     "BFMTV",
+    "La Dépêche",
     "Nice-Matin",
     "Le Dauphiné libéré",
+    "Le Progrès",
     "Le Monde",
     "20 Minutes",
     "RFI",
@@ -183,8 +184,8 @@
    ],
    "mediasDistincts": 17,
    "sources": [
-    "La Dépêche",
     "BFMTV",
+    "La Dépêche",
     "Nice-Matin",
     "EBRA",
     "Le Monde",
@@ -201,20 +202,21 @@
     "La Croix",
     "Public Sénat"
    ],
-   "nb": 109,
-   "derniere": "2026-11-15T05:31:05.000Z",
+   "nb": 125,
+   "derniere": "2026-11-15T05:35:42.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Présidentielle de 2027: Teddy Riner déjà dans son costume de candidat au Salon du Made in France",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-de-2027-teddy-riner-deja-dans-son-costume-de-candidat-au-salon-du-made-in-france_VN-202611150080.html",
+     "date": "2026-11-15T05:35:42.000Z",
+     "video": true
+    },
     {
      "media": "La Dépêche",
      "titre": "Présidentielle 2027 : \"Rien ne pourra me convaincre d'y participer\", Édouard Philippe ferme une nouvelle fois la porte à une primaire",
      "url": "https://www.ladepeche.fr/2026/11/15/presidentielle-2027-rien-ne-pourra-me-convaincre-dy-participer-edouard-philippe-ferme-une-nouvelle-fois-la-porte-a-une-primaire-13650921.php",
      "date": "2026-11-15T05:31:05.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "DIRECT. Présidentielle: Gérard Larcher veut une \"méthode de départage\" pour désigner un candidat unique de la droite et du centre",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-gerard-larcher-veut-une-methode-de-departage-pour-designer-un-candidat-unique-de-la-droite-et-du-centre-intensifiant-la-pression-sur-edouard-philippe_LN-202611150075.html",
-     "date": "2026-11-15T05:27:17.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -226,6 +228,12 @@
      "media": "Le Dauphiné libéré",
      "titre": "Billet. Présidentielle : ce candidat crédible au printemps que l'automne a emporté",
      "url": "https://www.ledauphine.com/politique/2026/11/15/l-automne-a-tout-emporte",
+     "date": "2026-11-15T05:00:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Saint-Chamond. Féeries de Noël : un programme et un budget quasi inchangés pour une recette qui fonctionne",
+     "url": "https://www.leprogres.fr/politique/2026/11/15/feeries-de-noel-programme-et-budget-quasi-inchanges-pour-une-recette-qui-fonctionne",
      "date": "2026-11-15T05:00:00.000Z"
     },
     {
@@ -338,10 +346,12 @@
    "motifs": [
     "manifestations",
     "mobilisation",
-    "samedi"
+    "samedi",
+    "tensions"
    ],
    "medias": [
     "Le Monde",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
@@ -369,7 +379,7 @@
     "Libération",
     "Nice-Matin"
    ],
-   "nb": 23,
+   "nb": 27,
    "derniere": "2026-11-14T23:39:08.000Z",
    "articles": [
     {
@@ -377,6 +387,12 @@
      "titre": "Manifestations du 14 novembre : à Paris comme à Lyon, des cortèges hétéroclites mais déterminés",
      "url": "https://www.lemonde.fr/societe/article/2026/11/15/manifestations-du-14-novembre-a-paris-comme-a-lyon-des-corteges-heteroclites-mais-determines_6810709_3224.html",
      "date": "2026-11-14T23:39:08.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.leprogres.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "date": "2026-11-14T21:05:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -459,107 +475,119 @@
    ]
   },
   {
-   "id": "novembre",
-   "titre": "Novembre",
+   "id": "social",
+   "titre": "Social",
    "motifs": [
-    "novembre"
+    "social",
+    "baisse"
    ],
    "medias": [
-    "Ouest-France",
     "Le Monde",
-    "L'Est républicain",
-    "Le Dauphiné libéré",
-    "Sud Ouest",
-    "Europe 1",
     "RFI",
-    "Nice-Matin",
-    "France 24"
+    "France 24",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Sud Ouest",
+    "La Dépêche",
+    "Public Sénat"
    ],
-   "mediasDistincts": 7,
+   "mediasDistincts": 6,
    "sources": [
-    "Ouest-France",
     "Le Monde",
+    "France Médias Monde",
     "EBRA",
     "Sud Ouest",
-    "Europe 1",
-    "France Médias Monde",
-    "Nice-Matin"
+    "La Dépêche",
+    "Public Sénat"
    ],
-   "nb": 12,
-   "derniere": "2026-11-15T00:37:04.000Z",
+   "nb": 18,
+   "derniere": "2026-11-15T05:15:06.000Z",
    "articles": [
     {
-     "media": "Ouest-France",
-     "titre": "Le gouvernement interdit la vente de mortiers d’artifice jusqu’au 27 novembre",
-     "url": "https://www.ouest-france.fr/societe/manifestation/le-gouvernement-interdit-la-vente-de-mortiers-dartifice-jusquau-27-novembre-e0d34386-e08a-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "date": "2026-11-15T00:37:04.000Z"
-    },
-    {
      "media": "Le Monde",
-     "titre": "Manifestations du 14 novembre : à Paris comme à Lyon, des cortèges hétéroclites mais déterminés",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/15/manifestations-du-14-novembre-a-paris-comme-a-lyon-des-corteges-heteroclites-mais-determines_6810709_3224.html",
-     "date": "2026-11-14T23:39:08.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Manifestations du 14 novembre : retour en images sur la journée de mobilisation en France",
-     "url": "https://www.lemonde.fr/politique/video/2026/11/14/manifestations-du-14-novembre-retour-en-images-sur-la-journee-de-mobilisation-en-france_6810577_823448.html",
-     "date": "2026-11-14T20:26:38.000Z",
-     "video": true
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Volon. Les enfants participent à la cérémonie du 11-Novembre",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/14/les-enfants-participent-a-la-ceremonie-du-11-novembre",
-     "date": "2026-11-14T19:13:27.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Le Pouzin. Au menu du conseil municipal de ce lundi 16 novembre",
-     "url": "https://www.ledauphine.com/politique/2026/11/14/au-menu-du-conseil-municipal-de-ce-lundi-16-novembre",
-     "date": "2026-11-14T18:57:17.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Mobilisation du 14 novembre en Charente-Maritime : la convergence des luttes pour l’acte V",
-     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/mobilisation-du-14-novembre-en-charente-maritime-la-convergence-des-luttes-pour-l-acte-v-31524284.php",
-     "date": "2026-11-14T17:16:38.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "En direct - Manifestations du 14 novembre : 200.000 personnes mobilisées ce samedi selon les syndicats, 106.000 pour le ministère de l'Intérieur",
-     "url": "https://www.europe1.fr/societe/en-direct-manifestations-du-14-novembre-200000-personnes-mobilisees-ce-samedi-selon-les-syndicats-106000-pour-le-ministere-de-linterieur-1232735?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-14T16:30:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Manifestations du 14 novembre : 106 000 personnes ont défilé samedi dans toute la France, selon le ministère de l’intérieur ; 200 000, selon l’intersyndicale de la jeunesse",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/14/manifestations-du-14-novembre-106-000-personnes-ont-defile-samedi-dans-toute-la-france-selon-le-ministere-de-l-interieur-contre-la-vie-chere-pour-la-protection-des-enfants-ou-davantage-de-moyens-pour-l-education_6809818_823449.html",
-     "date": "2026-11-14T16:29:53.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Manuel Valls : «Depuis le 13-Novembre, je comprends peut-être mieux ce qui est de l'ordre de l'essentiel»",
-     "url": "https://www.europe1.fr/politique/manuel-valls-depuis-le-13-novembre-je-comprends-peut-etre-mieux-ce-qui-est-de-lordre-de-lessentiel-1231400?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-13T19:12:33.000Z"
+     "titre": "« Les élections au Brésil, aux Etats-Unis et en Israël ont vu la défaite des partis qui ont misé sur la provocation sur les réseaux sociaux »",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/15/les-elections-au-bresil-aux-etats-unis-et-en-israel-ont-vu-la-defaite-des-partis-qui-ont-mise-sur-la-provocation-sur-les-reseaux-sociaux_6810983_3232.html",
+     "date": "2026-11-15T05:15:06.000Z"
     },
     {
      "media": "RFI",
-     "titre": "Journal d'Outre-mer du 13 novembre 2026",
-     "url": "https://www.rfi.fr/fr/podcasts/le-journal-d-outre-mer-la-1%C3%A8re/20261113-journal-d-outre-mer-du-13-novembre-2026",
-     "date": "2026-11-13T15:39:35.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Marseillaise, levée du drapeau… Cette cérémonie du 11-Novembre organisée dans une école de Nice fait écho au projet d’Éric Ciotti",
-     "url": "https://www.nicematin.com/societe/education/marseillaise-levee-du-drapeau-cette-ceremonie-du-11-novembre-organisee-dans-une-ecole-de-nice-fait-echo-au-projet-d-eric-ciotti-10758652",
-     "date": "2026-11-13T11:54:45.000Z"
+     "titre": "Mouvement social en France: un «acte V» marqué par une affluence un peu moindre",
+     "url": "https://www.rfi.fr/fr/france/20261115-mouvement-social-en-france-un-acte-v-marqu%C3%A9-par-une-affluence-un-peu-moindre",
+     "date": "2026-11-15T00:02:20.000Z"
     },
     {
      "media": "France 24",
-     "titre": "Manifestations du 14 novembre : parcours, revendications, sécurité... Ce qu'il faut savoir",
-     "url": "https://www.france24.com/fr/france/20261113-manifestations-du-14-novembre-parcours-revendications-s%C3%A9curit%C3%A9-ce-qu-il-faut-savoir",
-     "date": "2026-11-13T09:43:27.000Z"
+     "titre": "Acte V du mouvement social : des revendications variées, une affluence en baisse",
+     "url": "https://www.france24.com/fr/france/20261114-acte-v-du-mouvement-social-des-revendications-vari%C3%A9es-une-affluence-en-baisse",
+     "date": "2026-11-14T21:43:20.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.leprogres.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "date": "2026-11-14T21:05:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.dna.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "date": "2026-11-14T21:05:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.ledauphine.com/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "date": "2026-11-14T21:05:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.estrepublicain.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "date": "2026-11-14T21:05:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Manifestations contre la vie chère : une mobilisation en baisse pour l’acte V mais des tensions dans plusieurs villes",
+     "url": "https://www.sudouest.fr/societe/manifestations-contre-la-vie-chere-une-mobilisation-en-baisse-pour-l-acte-v-mais-des-tensions-dans-plusieurs-villes-31528988.php",
+     "date": "2026-11-14T20:38:21.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Beaujolais Pierres Dorées. Crèches : 385 places proposées dans 13 structures mais la fréquentation baisse",
+     "url": "https://www.leprogres.fr/education/2026/11/14/creches-385-places-proposees-dans-13-structures-mais-la-frequentation-baisse",
+     "date": "2026-11-14T18:37:33.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Communauté de communes Seille et Grand Couronné. Déchets ménagers : une baisse de 13 % des tonnages collectés",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/14/dechets-menagers-une-baisse-de-13-des-tonnages-collectes",
+     "date": "2026-11-14T16:20:49.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "\"Les fachos se croient tout permis !\" : à Montauban, un rassemblement social face à Sarah Knafo, députée d’extrême droite, attendue en dédicace par 800 personnes",
+     "url": "https://www.ladepeche.fr/2026/11/14/les-fachos-se-croient-tout-permis-a-montauban-un-rassemblement-social-face-a-sarah-knafo-deputee-dextreme-droite-attendue-en-dedicace-par-800-13652711.php",
+     "date": "2026-11-14T16:02:02.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Dominique Schnapper, politiste : « Les partis de la droite républicaine et de la social-démocratie ne sont plus des lieux de débat politique »",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/14/dominique-schnapper-politiste-les-partis-de-la-droite-republicaine-et-de-la-social-democratie-ne-sont-plus-des-lieux-de-debat-politique_6810281_3232.html",
+     "date": "2026-11-14T13:30:09.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mobilisation en France: un «acte V» du mouvement social ce samedi avec des revendications variées",
+     "url": "https://www.rfi.fr/fr/france/20261114-mobilisation-en-france-un-acte-v-du-mouvement-social-ce-samedi-avec-des-revendications-vari%C3%A9es",
+     "date": "2026-11-14T08:32:56.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Budget 2027 de la Sécurité sociale : le Sénat adopte un volet recettes affaibli",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-de-la-securite-sociale-le-senat-adopte-un-volet-recettes-affaibli",
+     "date": "2026-11-13T21:15:56.000Z"
     }
    ]
   }
@@ -876,7 +904,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -906,6 +934,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. Teddy Riner crédité de 4,5% des intentions de vote, Marine Le Pen toujours en tête",
+     "url": "https://www.leprogres.fr/elections/2026/11/14/teddy-riner-credite-de-4-5-des-intentions-de-vote-marine-le-pen-toujours-en-tete",
+     "media": "Le Progrès",
+     "date": "2026-11-14T20:36:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. Teddy Riner crédité de 4,5% des intentions de vote, Marine Le Pen toujours en tête",
      "url": "https://www.dna.fr/elections/2026/11/14/teddy-riner-credite-de-4-5-des-intentions-de-vote-marine-le-pen-toujours-en-tete",
@@ -938,7 +972,7 @@
    },
    "fait": "Teddy Riner est crédité de 4,5% des intentions de vote",
    "accroche": "Teddy Riner est crédité de 4,5% des intentions de vote",
-   "essentiel": "Teddy Riner crédité de 4,5% des intentions de vote, Marine Le Pen toujours en tête. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et BFMTV.",
+   "essentiel": "Teddy Riner crédité de 4,5% des intentions de vote, Marine Le Pen toujours en tête. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et BFMTV.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1145,51 +1179,6 @@
    "accroche": "Disparition de Michel Destot : de nombreux hommages rendus à l'ancien maire de Grenoble",
    "essentiel": "Disparition de Michel Destot : de nombreux hommages rendus à l'ancien maire de Grenoble. L'ancien maire socialiste de Grenoble et député de l'Isère Michel Destot est mort à l'âge de 80 ans. Deux médias en parlent : BFMTV et Le Dauphiné libéré.",
    "rubrique": "Assemblée nationale"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Figaro",
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-14T20:55:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«Je suis un pur produit français» : le candidat Teddy Riner s’offre un premier bain de foule au salon du Made in France à Paris",
-     "url": "https://www.lefigaro.fr/elections/presidentielles/je-suis-un-pur-produit-francais-le-candidat-teddy-riner-s-offre-un-premier-bain-de-foule-au-salon-du-made-in-france-a-paris-20261114",
-     "media": "Le Figaro",
-     "date": "2026-11-14T20:55:06.000Z"
-    },
-    {
-     "titre": "Le candidat Teddy Riner fera son premier déplacement de campagne au salon du « Made in France » samedi à Paris",
-     "url": "https://www.nicematin.com/societe/politique/le-candidat-teddy-riner-fera-son-premier-deplacement-de-campagne-au-salon-du-made-in-france-samedi-a-paris-10759127",
-     "media": "Nice-Matin",
-     "date": "2026-11-13T10:17:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "In France",
-    "origine": "recoupement"
-   },
-   "accroche": "Le candidat Teddy Riner fera son premier déplacement de campagne au salon du « Made in France » samedi à Paris",
-   "essentiel": "Le candidat Teddy Riner fera son premier déplacement de campagne au salon du « Made in France » samedi à Paris. Deux médias en parlent : Le Figaro et Nice-Matin.",
-   "fait": "Le candidat Teddy Riner fera son premier déplacement de campagne au salon du « Made in France » samedi à Paris",
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1845,7 +1834,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1858,6 +1847,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
+     "url": "https://www.leprogres.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
+     "media": "Le Progrès",
+     "date": "2026-11-14T21:05:00.000Z"
+    },
     {
      "titre": "Social. 106 000 manifestants, quelques tensions, appel à un acte VI... Ce qu'il faut retenir de la mobilisation de ce samedi",
      "url": "https://www.dna.fr/social/2026/11/14/mobilisation-du-14-novembre-un-cinquieme-samedi-contre-la-vie-chere-70-000-policiers-et-gendarmes-deployes",
@@ -1888,7 +1883,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1917,6 +1912,12 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. « Un baiser empoisonné » : Teddy Riner dénonce le soutien affiché d'Emmanuel Macron",
+     "url": "https://www.leprogres.fr/elections/2026/11/14/un-baiser-empoisonne-teddy-riner-denonce-le-soutien-affiche-d-emmanuel-macron",
+     "media": "Le Progrès",
+     "date": "2026-11-14T19:05:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Un baiser empoisonné » : Teddy Riner dénonce le soutien affiché d'Emmanuel Macron",
      "url": "https://www.dna.fr/elections/2026/11/14/un-baiser-empoisonne-teddy-riner-denonce-le-soutien-affiche-d-emmanuel-macron",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-14T19:05:00.000Z"
@@ -1939,6 +1940,54 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-14T19:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Disparition. Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/michel-destot-ancien-maire-socialiste-de-grenoble-est-mort-a-80-ans",
+     "media": "Le Progrès",
+     "date": "2026-11-14T19:20:00.000Z"
+    },
+    {
+     "titre": "Disparition. Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
+     "url": "https://www.dna.fr/politique/2026/11/14/michel-destot-ancien-maire-socialiste-de-grenoble-est-mort-a-80-ans",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-14T19:20:00.000Z"
+    },
+    {
+     "titre": "Disparition. Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/14/michel-destot-ancien-maire-socialiste-de-grenoble-est-mort-a-80-ans",
+     "media": "L'Est républicain",
+     "date": "2026-11-14T19:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Disparition : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
+   "accroche": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
+   "essentiel": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "80",
+    "unite": "ans"
+   }
   },
   {
    "medias": 2,
@@ -1974,55 +2023,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mouvement social",
-    "origine": "recoupement"
+    "titre": "Social",
+    "origine": "dossier"
    },
    "fait": "Un «acte V» marqué par une affluence un peu moindre",
    "accroche": "Un «acte V» marqué par une affluence un peu moindre",
    "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
    "rubrique": "Politique"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-14T19:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Disparition. Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
-     "url": "https://www.dna.fr/politique/2026/11/14/michel-destot-ancien-maire-socialiste-de-grenoble-est-mort-a-80-ans",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-14T19:20:00.000Z"
-    },
-    {
-     "titre": "Disparition. Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/14/michel-destot-ancien-maire-socialiste-de-grenoble-est-mort-a-80-ans",
-     "media": "L'Est républicain",
-     "date": "2026-11-14T19:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Disparition : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
-   "accroche": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans",
-   "essentiel": "Michel Destot, ancien maire socialiste de Grenoble, est mort à 80 ans. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
-   "rubrique": "Politique",
-   "chiffre": {
-    "valeur": "80",
-    "unite": "ans"
-   }
   },
   {
    "medias": 2,
@@ -2093,6 +2100,43 @@
     "generique": true
    },
    "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-15T05:35:42.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Teddy Riner",
+      "photo": "photos/personnalites/teddy-riner.jpg",
+      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
+      "parti": "SE",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle de 2027: Teddy Riner déjà dans son costume de candidat au Salon du Made in France",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-de-2027-teddy-riner-deja-dans-son-costume-de-candidat-au-salon-du-made-in-france_VN-202611150080.html",
+     "media": "BFMTV",
+     "date": "2026-11-15T05:35:42.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Teddy Riner : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2185,50 +2229,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Sandrine Rousseau",
-      "photo": "photos/deputes/PA795076.jpg",
-      "photoHd": "photos/deputes/hd/PA795076.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA795076",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Sandrine Rousseau",
-     "url": "https://www.bfmtv.com/politique/sandrine-rousseau_DN-202108310682.html",
-     "media": "BFMTV",
-     "date": "2026-11-15T05:21:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sandrine Rousseau (Écologistes) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sandrine Rousseau : députée ECO (Paris)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-15T05:21:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Gabriel Attal",
       "photo": "photos/deputes/PA722190.jpg",
       "photoHd": "photos/deputes/hd/PA722190.jpg",
@@ -2303,6 +2303,50 @@
      "type": "personnes",
      "texte": "Édouard Philippe : président d'Horizons",
      "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-15T05:21:22.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sandrine Rousseau",
+      "photo": "photos/deputes/PA795076.jpg",
+      "photoHd": "photos/deputes/hd/PA795076.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA795076",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sandrine Rousseau",
+     "url": "https://www.bfmtv.com/politique/sandrine-rousseau_DN-202108310682.html",
+     "media": "BFMTV",
+     "date": "2026-11-15T05:21:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sandrine Rousseau (Écologistes) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sandrine Rousseau : députée ECO (Paris)",
+     "source": "Assemblée nationale (open data)"
     }
    ]
   },
@@ -2469,6 +2513,35 @@
    "fait": "3 000 personnes réunies à Nice pour soutenir Jean-Luc Mélenchon",
    "accroche": "3 000 personnes réunies à Nice pour soutenir Jean-Luc Mélenchon",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-15T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Chamond. Féeries de Noël : un programme et un budget quasi inchangés pour une recette qui fonctionne",
+     "url": "https://www.leprogres.fr/politique/2026/11/15/feeries-de-noel-programme-et-budget-quasi-inchanges-pour-une-recette-qui-fonctionne",
+     "media": "Le Progrès",
+     "date": "2026-11-15T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Chamond : finances locales",
+    "origine": "regles"
+   },
+   "fait": "Féeries de Noël : un programme et un budget quasi inchangés pour une recette qui fonctionne",
+   "accroche": "Féeries de Noël : un programme et un budget quasi inchangés pour une recette qui fonctionne",
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2908,8 +2981,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Novembre",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
    },
    "rubrique": "Gouvernement"
   },
@@ -3204,6 +3277,42 @@
    ],
    "titrePropre": {
     "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Figaro"
+   ],
+   "derniere": "2026-11-14T20:55:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Teddy Riner",
+      "photo": "photos/personnalites/teddy-riner.jpg",
+      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
+      "parti": "SE",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "«Je suis un pur produit français» : le candidat Teddy Riner s’offre un premier bain de foule au salon du Made in France à Paris",
+     "url": "https://www.lefigaro.fr/elections/presidentielles/je-suis-un-pur-produit-francais-le-candidat-teddy-riner-s-offre-un-premier-bain-de-foule-au-salon-du-made-in-france-a-paris-20261114",
+     "media": "Le Figaro",
+     "date": "2026-11-14T20:55:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Teddy Riner : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
@@ -3523,8 +3632,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Novembre",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique"
   },
@@ -3802,6 +3912,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T19:19:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Veauchette. Élagage, installation de panneaux… De nombreux travaux réalisés pour renforcer la sécurité",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/elagage-installation-de-panneaux-de-nombreux-travaux-realises-pour-renforcer-la-securite",
+     "media": "Le Progrès",
+     "date": "2026-11-14T19:19:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Veauchette : sécurité",
+    "origine": "regles"
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Dauphiné libéré"
    ],
    "derniere": "2026-11-14T19:17:00.000Z",
@@ -3891,8 +4028,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Novembre",
-    "origine": "dossier"
+    "titre": "Volon : actualité scolaire",
+    "origine": "regles"
    },
    "rubrique": "Politique"
   },
@@ -4085,8 +4222,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Novembre",
-    "origine": "dossier"
+    "titre": "Le Pouzin : conseil municipal",
+    "origine": "regles"
    },
    "rubrique": "Élysée 2027"
   },
@@ -4233,6 +4370,63 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:37:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Vérand. La commune devient officiellement “Village ambassadeur du don d’organes”",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/la-commune-devient-officiellement-village-ambassadeur-du-don-d-organes",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:37:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Vérand : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:37:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Beaujolais Pierres Dorées. Crèches : 385 places proposées dans 13 structures mais la fréquentation baisse",
+     "url": "https://www.leprogres.fr/education/2026/11/14/creches-385-places-proposees-dans-13-structures-mais-la-frequentation-baisse",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:37:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Beaujolais Pierres Dorées : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "385 places proposées dans 13 structures mais la fréquentation baisse",
+   "accroche": "385 places proposées dans 13 structures mais la fréquentation baisse",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-11-14T18:34:12.000Z",
@@ -4329,6 +4523,65 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:27:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bourg-Argental. Monts du Pilat : des réunions mensuelles avec la Région instaurées",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/monts-du-pilat-des-reunions-mensuelles-avec-la-region-instaurees",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:27:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Région : ce qu'il faut savoir sur l'organisation des collectivités",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Monts du Pilat : des réunions mensuelles avec la Région instaurées",
+   "accroche": "Monts du Pilat : des réunions mensuelles avec la Région instaurées",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:27:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Pélussin. Conseil municipal : des demandes de subventions approuvées",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/conseil-municipal-des-demandes-de-subventions-approuvees",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:27:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Pélussin : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Conseil municipal : des demandes de subventions approuvées",
+   "accroche": "Conseil municipal : des demandes de subventions approuvées",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -4470,6 +4723,36 @@
     "origine": "regles",
     "generique": true
    },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:20:34.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Dunières. Que va devenir la fontaine devant le kebab ?",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/que-va-devenir-la-fontaine-devant-le-kebab",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:20:34.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Dunières : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Que va devenir la fontaine devant le kebab ?",
+   "accroche": "Que va devenir la fontaine devant le kebab ?",
    "rubrique": "Politique"
   },
   {
@@ -4620,6 +4903,93 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Clément-sur-Valsonne. La maire Sylvie Martinez élevée au rang de chevalier de l’Ordre national du Mérite",
+     "url": "https://www.leprogres.fr/politique/2026/11/15/la-maire-sylvie-martinez-elevee-au-rang-de-chevalier-de-l-ordre-national-du-merite",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Clément-sur-Valsonne : vie municipale",
+    "origine": "regles"
+   },
+   "fait": "La maire Sylvie Martinez élevée au rang de chevalier de l’Ordre national du Mérite",
+   "accroche": "La maire Sylvie Martinez élevée au rang de chevalier de l’Ordre national du Mérite",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Oyonnax. À la Plaine, l’ouverture de cette impasse inquiète les riverains",
+     "url": "https://www.leprogres.fr/economie/2026/11/14/a-la-plaine-l-ouverture-de-cette-impasse-inquiete-les-riverains",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Oyonnax : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T18:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Villefranche-sur-Saône. La CCI Beaujolais a un nouveau président : « Travailler dans la continuité »",
+     "url": "https://www.leprogres.fr/economie/2026/11/11/la-cci-beaujolais-a-un-nouveau-president-travailler-dans-la-continuite",
+     "media": "Le Progrès",
+     "date": "2026-11-14T18:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Villefranche-sur-Saône : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La CCI Beaujolais a un nouveau président",
+   "accroche": "La CCI Beaujolais a un nouveau président",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-11-14T18:00:00.000Z",
@@ -4642,6 +5012,36 @@
     "origine": "regles",
     "generique": true
    },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-14T17:58:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Pays mornantais. 3,2 millions d‘euros pour le plan mobilité de la Copamo en 2026-2032",
+     "url": "https://www.leprogres.fr/politique/2026/11/14/3-2-millions-d-euros-pour-le-plan-mobilite-de-la-copamo-en-2026-2032",
+     "media": "Le Progrès",
+     "date": "2026-11-14T17:58:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "3,2 millions d‘euros pour le plan mobilité de la Copamo en 2026-2032",
+   "accroche": "3,2 millions d‘euros pour le plan mobilité de la Copamo en 2026-2032",
    "rubrique": "Politique"
   },
   {
@@ -4727,429 +5127,6 @@
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-11-14T17:55:02.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Smic, «made in France», présidentielle 2027 : les cinq infos économiques à retenir",
-     "url": "https://www.lejdd.fr/economie/smic-made-in-france-presidentielle-2027-les-cinq-infos-economiques-a-retenir-188640",
-     "media": "Le JDD",
-     "date": "2026-11-14T17:55:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Smic, présidentielle 2027 : les cinq infos économiques à retenir",
-   "accroche": "Smic, présidentielle 2027 : les cinq infos économiques à retenir",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-14T17:45:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Zemmour",
-      "photo": "photos/personnalites/eric-zemmour.jpg",
-      "photoHd": "photos/personnalites/hd/eric-zemmour.jpg",
-      "parti": "REC",
-      "credit": "Anh De France, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Eric Zemmour",
-     "url": "https://www.bfmtv.com/politique/eric-zemmour_DN-202110270595.html",
-     "media": "BFMTV",
-     "date": "2026-11-14T17:45:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Zemmour : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-14T17:45:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-14T17:45:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-14T17:45:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/raphael-glucksmann_DN-202405270322.html",
-     "media": "BFMTV",
-     "date": "2026-11-14T17:45:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-14T17:45:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Marine Le Pen",
-     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
-     "media": "BFMTV",
-     "date": "2026-11-14T17:45:07.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-14T17:45:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Alsace. Sortie de la CEA du Grand Est : le réquisitoire de FO devant la mission d’évaluation",
-     "url": "https://www.dna.fr/politique/2026/11/15/sortie-de-la-cea-du-grand-est-le-requisitoire-de-fo-devant-la-mission-d-evaluation",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-14T17:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Collectivités locales : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-14T17:30:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     },
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Teddy Riner candidat à la présidentielle : depuis la Gironde, Jordan Bardella charge les « célébrités qui se lancent en politique »",
-     "url": "https://www.sudouest.fr/politique/jordan-bardella/bardella-charge-les-celebrites-qui-se-lancent-en-politique-31524785.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-14T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Teddy Riner : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-14T17:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": "securite"
-   },
-   "articles": [
-    {
-     "titre": "Alsace. Les pouvoirs publics mobilisés pour renforcer la sécurité des usagers de trottinette électrique",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/11/14/les-pouvoirs-publics-mobilises-pour-renforcer-la-securite-des-usagers-de-trottinette-electrique",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-14T17:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Alsace : sécurité",
-    "origine": "regles"
-   },
-   "fait": "Les pouvoirs publics mobilisés pour renforcer la sécurité des usagers de trottinette électrique",
-   "accroche": "Les pouvoirs publics mobilisés pour renforcer la sécurité des usagers de trottinette électrique",
-   "rubrique": "Sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Express"
-   ],
-   "derniere": "2026-11-14T17:28:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "\"Un outsider\" venu \"sauver le centre\" : Teddy Riner, pourquoi la presse étrangère prend sa candidature très au sérieux",
-     "url": "https://www.lexpress.fr/politique/un-outsider-venu-sauver-le-centre-teddy-riner-pourquoi-la-presse-etrangere-prend-sa-candidature-tres-IYOMX3NW7RGXTHANWK7TSM3RXQ/",
-     "media": "L'Express",
-     "date": "2026-11-14T17:28:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Teddy Riner : ce qu'il faut savoir sur une affaire internationale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-14T17:27:53.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Max. Renouvellement des jeunes élus du CMEJ pour 2026-2028",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/14/renouvellement-des-jeunes-elus-du-cmej-pour-2026-2028",
-     "media": "L'Est républicain",
-     "date": "2026-11-14T17:27:53.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Max : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-14T17:26:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Martignas-sur-Jalle : Le brevet en main, cap sur l’avenir pour les anciens collégiens d’Aliénor-d’Aquitaine",
-     "url": "https://www.sudouest.fr/gironde/martignas-sur-jalle/martignas-sur-jalle-le-brevet-en-main-cap-sur-l-avenir-les-anciens-collegiens-d-alienor-d-aquitaine-31506960.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-14T17:26:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Martignas-sur-Jalle : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-14T17:20:19.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Teddy Riner",
-      "photo": "photos/personnalites/teddy-riner.jpg",
-      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
-      "parti": "SE",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Teddy Riner, candidat à la présidentielle, assure qu'Emmanuel Macron n'a pas lancé sa candidature",
-     "url": "https://www.bfmtv.com/politique/video-teddy-riner-candidat-a-la-presidentielle-assure-qu-emmanuel-macron-n-a-pas-lance-sa-candidature_VN-202611140310.html",
-     "media": "BFMTV",
-     "date": "2026-11-14T17:20:19.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Teddy Riner : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Teddy Riner, candidat, assure qu'Emmanuel Macron n'a pas lancé sa candidature",
-   "accroche": "Teddy Riner, candidat, assure qu'Emmanuel Macron n'a pas lancé sa candidature",
    "rubrique": "Élysée 2027"
   }
  ]
