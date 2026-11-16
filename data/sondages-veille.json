@@ -1,8 +1,20 @@
 {
- "lastUpdated": "2026-11-15T10:17:09.515Z",
+ "lastUpdated": "2026-11-16T19:50:09.952Z",
  "source": "Commission des sondages — notices déposées",
  "sourceUrl": "https://www.commission-des-sondages.fr/notices/",
  "enquetes": [
+  {
+   "institut": "Elabe",
+   "media": null,
+   "terrain": {
+    "debut": "2026-11-12",
+    "fin": "2026-11-13"
+   },
+   "echantillon": 1391,
+   "notice": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2394",
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10375-pres-iv-elabe-14-novembre.pdf",
+   "integre": true
+  },
   {
    "institut": "OpinionWay",
    "media": "Cnews",
@@ -14,6 +26,18 @@
    "notice": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2393",
    "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10371-pres-iv-opinionway-cnews-12-novembre.pdf",
    "integre": false
+  },
+  {
+   "institut": "OpinionWay",
+   "media": null,
+   "terrain": {
+    "debut": "2026-11-09",
+    "fin": "2026-11-10"
+   },
+   "echantillon": 1017,
+   "notice": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2396",
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10372-pres-presitrack-opinionway-13-novembre.pdf",
+   "integre": true
   },
   {
    "institut": "Cluster17",
@@ -161,6 +185,80 @@
   }
  ],
  "notices": [
+  {
+   "id": 2398,
+   "titre": "10377 Pres Fractures françaises Le Monde 16 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2398",
+   "iv": false,
+   "terrain": {
+    "debut": "2026-10-30",
+    "fin": "2026-11-03"
+   },
+   "echantillon": 3000,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10377-pres-fractures-francaises-le-monde-16-novembre.pdf",
+   "institut": null,
+   "media": "Fractures françaises Le Monde"
+  },
+  {
+   "id": 2397,
+   "titre": "10376 Pres balise opinion CSA Cnews Europe 1 JDD 12 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2397",
+   "iv": false,
+   "terrain": null,
+   "echantillon": 1000,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10376-pres-balise-opinion-csa-cnews-europe-1-jdd-12-novembre.pdf",
+   "institut": "CSA",
+   "media": "balise opinion Cnews Europe 1 JDD"
+  },
+  {
+   "id": 2394,
+   "titre": "10375 Pres IV ELABE 14 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2394",
+   "iv": true,
+   "terrain": {
+    "debut": "2026-11-12",
+    "fin": "2026-11-13"
+   },
+   "echantillon": 1391,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10375-pres-iv-elabe-14-novembre.pdf",
+   "resultats": null,
+   "institut": "Elabe",
+   "media": null
+  },
+  {
+   "id": 2395,
+   "titre": "10373 Pres Barometre politique IPSOS BVA La Tribune dimanche 14 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2395",
+   "iv": false,
+   "terrain": {
+    "debut": "2026-11-10",
+    "fin": "2026-11-12"
+   },
+   "echantillon": 1000,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10373-pres-barometre-politique-ipsos-bva-la-tribune-dimanche-14-novembre.pdf",
+   "institut": "Ipsos",
+   "media": "politique La Tribune dimanche"
+  },
+  {
+   "id": 2396,
+   "titre": "10372 Pres Presitrack OPINIONWAY 13 novembre",
+   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2396",
+   "iv": true,
+   "terrain": {
+    "debut": "2026-11-09",
+    "fin": "2026-11-10"
+   },
+   "echantillon": 1017,
+   "commanditaire": null,
+   "pdf": "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10372-pres-presitrack-opinionway-13-novembre.pdf",
+   "resultats": null,
+   "institut": "OpinionWay",
+   "media": null
+  },
   {
    "id": 2393,
    "titre": "10371 Pres IV OPINIONWAY Cnews 12 novembre",
@@ -1223,42 +1321,6 @@
    "echantillon": 1000,
    "institut": "Ifop",
    "media": "Mouvement lyceen TF1"
-  },
-  {
-   "id": 2311,
-   "titre": "10294 Pres colère des lyceens ELABE 7 octobre",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2311",
-   "iv": false,
-   "terrain": {
-    "debut": "2026-10-06",
-    "fin": "2026-10-07"
-   },
-   "echantillon": null,
-   "institut": "Elabe",
-   "media": "colère des lyceens"
-  },
-  {
-   "id": 2312,
-   "titre": "10293 Pres Questions actu CSA Cnews 7 octobre",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2312",
-   "iv": false,
-   "terrain": null,
-   "echantillon": 1000,
-   "institut": "CSA",
-   "media": "Questions actu Cnews"
-  },
-  {
-   "id": 2307,
-   "titre": "10290 Pres blocages des lycées CSA Cnews 4 octobre",
-   "url": "https://www.commission-des-sondages.fr/notices/medias/fichiers/add/2307",
-   "iv": false,
-   "terrain": {
-    "debut": "2026-10-01",
-    "fin": "2026-10-02"
-   },
-   "echantillon": 1000,
-   "institut": "CSA",
-   "media": "blocages des lycées Cnews"
   }
  ]
 }
