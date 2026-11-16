@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-16T11:01:16.411Z",
+ "lastUpdated": "2026-11-16T11:05:42.425Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Nice-Matin",
@@ -159,20 +159,18 @@
     "édouard"
    ],
    "medias": [
+    "Libération",
     "BFMTV",
     "Public Sénat",
     "La Dépêche",
-    "Libération",
     "Le JDD",
     "Le Monde",
     "Europe 1",
     "Nice-Matin",
     "L'Obs",
     "Valeurs actuelles",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
-    "L'Est républicain",
     "Sud Ouest",
     "RFI",
     "20 Minutes",
@@ -182,10 +180,10 @@
    ],
    "mediasDistincts": 15,
    "sources": [
+    "Libération",
     "BFMTV",
     "Public Sénat",
     "La Dépêche",
-    "Libération",
     "Groupe Bolloré",
     "Le Monde",
     "Nice-Matin",
@@ -198,9 +196,15 @@
     "Le Figaro",
     "L'Express"
    ],
-   "nb": 85,
-   "derniere": "2026-11-16T10:42:26.000Z",
+   "nb": 76,
+   "derniere": "2026-11-16T10:59:39.000Z",
    "articles": [
+    {
+     "media": "Libération",
+     "titre": "L’ancienne dircab de Sarkozy compare le premier déplacement de campagne de Teddy Riner à «Tintin au Congo»",
+     "url": "https://www.liberation.fr/politique/lancienne-dircab-de-sarkozy-compare-le-premier-deplacement-de-campagne-de-teddy-riner-a-tintin-au-congo-20261116_3LNC2YVDPFEOJMCIFQDFYCFHGM/",
+     "date": "2026-11-16T10:59:39.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "DIRECT. Colère lycéenne: interpellé dans un lycée de Nantes, Édouard Geffray dit \"respecter\" les revendications des élèves",
@@ -218,12 +222,6 @@
      "titre": "DIRECT. Présidentielle 2027 : le RN annonce qu'aucune banque française n'a voulu accorder de prêt à Marine Le Pen pour sa campagne",
      "url": "https://www.ladepeche.fr/2026/11/16/direct-presidentielle-2027-si-on-est-amene-a-defendre-le-meme-candidat-a-la-presidentielle-dit-marine-tondelier-ce-sera-sous-nos-couleurs-ecologistes-13653911.php",
      "date": "2026-11-16T10:06:14.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : cinq candidats vont débattre sur le pouvoir d’achat et la précarité ce lundi soir",
-     "url": "https://www.liberation.fr/politique/presidentielle-2027-cinq-candidats-vont-debattre-sur-le-pouvoir-dachat-et-la-precarite-ce-lundi-soir-20261116_7QJ44LZUYZBGJCXXO2BCATX3O4/",
-     "date": "2026-11-16T10:02:00.000Z"
     },
     {
      "media": "Le JDD",
@@ -262,12 +260,6 @@
      "date": "2026-11-16T07:01:39.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
-     "url": "https://www.leprogres.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
-     "date": "2026-11-16T06:30:00.000Z"
-    },
-    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
      "url": "https://www.dna.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
@@ -277,12 +269,6 @@
      "media": "Le Dauphiné libéré",
      "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
      "url": "https://www.ledauphine.com/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
-     "date": "2026-11-16T06:30:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
      "date": "2026-11-16T06:30:00.000Z"
     },
     {
@@ -324,13 +310,134 @@
    ]
   },
   {
+   "id": "sociale",
+   "titre": "Sociale",
+   "motifs": [
+    "sociale"
+   ],
+   "medias": [
+    "L'Obs",
+    "L'Humanité",
+    "Le Monde",
+    "BFMTV",
+    "Sud Ouest",
+    "Nice-Matin",
+    "Le Dauphiné libéré",
+    "Libération",
+    "Dernières Nouvelles d'Alsace",
+    "RFI",
+    "France 24"
+   ],
+   "mediasDistincts": 9,
+   "sources": [
+    "L'Obs",
+    "L'Humanité",
+    "Le Monde",
+    "BFMTV",
+    "Sud Ouest",
+    "Nice-Matin",
+    "EBRA",
+    "Libération",
+    "France Médias Monde"
+   ],
+   "nb": 17,
+   "derniere": "2026-11-16T10:20:08.000Z",
+   "articles": [
+    {
+     "media": "L'Obs",
+     "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
+     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
+     "date": "2026-11-16T10:20:08.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "« Cette Fête de l’Humanité fait écho au mouvement social » : en Normandie, un rendez-vous au rythme des mobilisations",
+     "url": "https://www.humanite.fr/politique/fabien-gay/cette-fete-de-lhumanite-fait-echo-au-mouvement-social-en-normandie-un-rendez-vous-au-rythme-des-mobilisations",
+     "date": "2026-11-16T09:51:54.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "EN DIRECT, présidentielle 2027 : « Toutes les catégories de revenus ont tendance à se situer au milieu de l’échelle sociale »",
+     "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/11/16/en-direct-presidentielle-2027-decouvrez-les-enseignements-de-la-nouvelle-enquete-fractures-francaises-une-grande-etude-sur-l-etat-d-esprit-des-francais-a-cinq-mois-de-l-election_6811633_6205049.html",
+     "date": "2026-11-16T08:00:05.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère sociale: \"Il est capital que les commerçants puissent ouvrir y compris le samedi\", affirme Olivier Faure (PS)",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-colere-sociale-il-est-capital-que-les-commercants-puissent-ouvrir-y-compris-le-samedi-affirme-olivier-faure-ps_VN-202611160290.html",
+     "date": "2026-11-16T07:44:54.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Olivier Faure (PS): \"On vit un moment de grande tension sociale lié à une politique dont tout le monde a compris qu'elle avait contribué à enrichir les plus riches et à appauvrir tous les autres\"",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-olivier-faure-ps-on-vit-un-moment-de-grande-tension-sociale-lie-a-une-politique-dont-tout-le-monde-a-compris-qu-elle-avait-contribue-a-enrichir-les-plus-riches-et-a-appauvrir-tous-les-autres_VN-202611160285.html",
+     "date": "2026-11-16T07:41:04.000Z",
+     "video": true
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Forum de l’économie sociale et solidaire à Niort : « Les sujets sur lesquels nous nous mobilisons sont ce à quoi aspirent les gens dans la rue en ce moment »",
+     "url": "https://www.sudouest.fr/economie/forum-de-l-economie-sociale-et-solidaire-a-niort-les-sujets-sur-lesquels-nous-nous-mobilisons-sont-ce-a-quoi-aspirent-les-gens-dans-la-rue-en-ce-moment-31510502.php",
+     "date": "2026-11-16T06:00:00.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "À Nice, la montée de l’extrême droite, Éric Ciotti à la mairie et le climat social poussent la gauche à une réconciliation inattendue",
+     "url": "https://www.nicematin.com/societe/politique/a-nice-la-montee-de-l-extreme-droite-eric-ciotti-a-la-mairie-et-le-climat-social-poussent-la-gauche-a-une-reconciliation-inattendue-10752484",
+     "date": "2026-11-16T04:45:09.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Avignonet. Les élus municipaux ont adopté à l’unanimité le projet social de territoire",
+     "url": "https://www.ledauphine.com/politique/2026/11/15/les-elus-municipaux-ont-adopte-a-l-unanimite-le-projet-social-de-territoire",
+     "date": "2026-11-15T23:30:15.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère sociale: Jean-François Copé estime que les “Français sont instrumentalisés” par “l’extrême gauche”",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-gerard-larcher-veut-une-methode-de-departage-pour-designer-un-candidat-unique-de-la-droite-et-du-centre-intensifiant-la-pression-sur-edouard-philippe_LN-202611150075.html",
+     "date": "2026-11-15T22:53:01.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Colère sociale: \"Celles et ceux qui subissent les revendications et qui en plus en pâtissent ce sont les PME\", observe Dieynaba Diop, porte-parole du PS",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-colere-sociale-celles-et-ceux-qui-subissent-les-revendications-et-qui-en-plus-en-patissent-ce-sont-les-pme-observe-dieynaba-diop-porte-parole-du-ps_VN-202611150443.html",
+     "date": "2026-11-15T22:50:43.000Z",
+     "video": true
+    },
+    {
+     "media": "Libération",
+     "titre": "Réseaux sociaux : pourquoi Raphaël Glucksmann n’a plus la cote",
+     "url": "https://www.liberation.fr/politique/reseaux-sociaux-pourquoi-raphael-glucksmann-na-plus-la-cote-20261115_GIC6HKMNTZAO3DUPZDRJAPX64I/",
+     "date": "2026-11-15T10:02:17.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Crise sociale. La vente de mortiers d'artifice interdite en France jusqu'au 27 novembre",
+     "url": "https://www.dna.fr/politique/2026/11/15/la-vente-de-mortiers-d-artifice-interdite-en-france-jusqu-au-27-novembre",
+     "date": "2026-11-15T06:36:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Mouvement social en France: un «acte V» marqué par une affluence un peu moindre",
+     "url": "https://www.rfi.fr/fr/france/20261115-mouvement-social-en-france-un-acte-v-marqu%C3%A9-par-une-affluence-un-peu-moindre",
+     "date": "2026-11-15T00:02:20.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Acte V du mouvement social : des revendications variées, une affluence en baisse",
+     "url": "https://www.france24.com/fr/france/20261114-acte-v-du-mouvement-social-des-revendications-vari%C3%A9es-une-affluence-en-baisse",
+     "date": "2026-11-14T21:43:20.000Z"
+    }
+   ]
+  },
+  {
    "id": "francophonie",
    "titre": "Francophonie",
    "motifs": [
     "francophonie",
-    "secrétaire",
-    "général",
-    "prochain"
+    "secrétaire"
    ],
    "medias": [
     "France 24",
@@ -338,16 +445,13 @@
     "Valeurs actuelles",
     "Le JDD",
     "BFMTV",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Nice-Matin",
     "La Dépêche",
     "Ouest-France",
     "Le Monde"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 9,
    "sources": [
     "France 24",
     "Sud Ouest",
@@ -355,12 +459,11 @@
     "Le JDD",
     "BFMTV",
     "EBRA",
-    "Nice-Matin",
     "La Dépêche",
     "Ouest-France",
     "Le Monde"
    ],
-   "nb": 24,
+   "nb": 18,
    "derniere": "2026-11-16T10:32:27.000Z",
    "articles": [
     {
@@ -402,10 +505,18 @@
      "video": true
     },
     {
-     "media": "Le Progrès",
-     "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
-     "date": "2026-11-16T07:15:00.000Z"
+     "media": "BFMTV",
+     "titre": "Assemblée nationale: \"Dans cette majorité, ils se battent les uns avec les autres dans une surenchère du 'plus à droite que moi tu meurs'\", estime Olivier Faure, premier secrétaire du PS",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-assemblee-nationale-dans-cette-majorite-ils-se-battent-les-uns-avec-les-autres-dans-une-surenchere-du-plus-a-droite-que-moi-tu-meurs-estime-olivier-faure-premier-secretaire-du-ps_VN-202611160293.html",
+     "date": "2026-11-16T07:47:19.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Hausse du Smic: \"C'est un pourboire\", estime Olivier Faure, premier secrétaire du PS",
+     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-hausse-du-smic-c-est-un-pourboire-estime-olivier-faure-premier-secretaire-du-ps_VN-202611160287.html",
+     "date": "2026-11-16T07:42:45.000Z",
+     "video": true
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -420,16 +531,10 @@
      "date": "2026-11-16T07:15:00.000Z"
     },
     {
-     "media": "L'Est républicain",
-     "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
-     "date": "2026-11-16T07:15:00.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« C’est un peu comme la Coupe de France de football » : le politologue Bruno Cautrès analyse le nombre record de candidatures à la prochaine présidentielle",
-     "url": "https://www.nicematin.com/societe/politique/c-est-un-peu-comme-la-coupe-de-france-de-football-le-politologue-bruno-cautres-analyse-le-nombre-record-de-candidatures-a-la-prochaine-presidentielle-10761751",
-     "date": "2026-11-16T05:30:04.000Z"
+     "media": "France 24",
+     "titre": "Francophonie : l'élection du secrétaire général reportée, Macron salue un \"compromis\"",
+     "url": "https://www.france24.com/fr/france/20261116-francophonie-oif-vote-%C3%A9lection-secr%C3%A9taire-g%C3%A9n%C3%A9ral-louise-mushikiwabo-rwanda-rd-congo-juliana-lumumba-dacian-ciolos-coumba-ba",
+     "date": "2026-11-16T07:01:33.000Z"
     },
     {
      "media": "La Dépêche",
@@ -448,129 +553,6 @@
      "titre": "Sommet de la francophonie : Emmanuel Macron appelle à l’« unité » et au « consensus » face aux tensions entre la RDC et le Rwanda",
      "url": "https://www.lemonde.fr/international/article/2026/11/15/somment-de-la-francophonie-emmanuel-macron-appelle-a-l-unite-et-au-consensus-face-aux-tensions-entre-la-rdc-et-le-rwanda_6810995_3210.html",
      "date": "2026-11-15T07:45:48.000Z"
-    }
-   ]
-  },
-  {
-   "id": "sociale",
-   "titre": "Sociale",
-   "motifs": [
-    "sociale",
-    "mobilisation"
-   ],
-   "medias": [
-    "L'Humanité",
-    "L'Obs",
-    "Le Monde",
-    "BFMTV",
-    "Sud Ouest",
-    "Nice-Matin",
-    "Le Dauphiné libéré",
-    "Libération",
-    "Dernières Nouvelles d'Alsace",
-    "RFI",
-    "France 24"
-   ],
-   "mediasDistincts": 9,
-   "sources": [
-    "L'Humanité",
-    "L'Obs",
-    "Le Monde",
-    "BFMTV",
-    "Sud Ouest",
-    "Nice-Matin",
-    "EBRA",
-    "Libération",
-    "France Médias Monde"
-   ],
-   "nb": 20,
-   "derniere": "2026-11-16T09:51:54.000Z",
-   "articles": [
-    {
-     "media": "L'Humanité",
-     "titre": "« Cette Fête de l’Humanité fait écho au mouvement social » : en Normandie, un rendez-vous au rythme des mobilisations",
-     "url": "https://www.humanite.fr/politique/fabien-gay/cette-fete-de-lhumanite-fait-echo-au-mouvement-social-en-normandie-un-rendez-vous-au-rythme-des-mobilisations",
-     "date": "2026-11-16T09:51:54.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Mobilisation sociale : « Le rendez-vous du 17 novembre est décisif pour maintenir la pression sur les pouvoirs publics »",
-     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
-     "date": "2026-11-16T09:00:12.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "EN DIRECT, présidentielle 2027 : « Toutes les catégories de revenus ont tendance à se situer au milieu de l’échelle sociale »",
-     "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/11/16/en-direct-presidentielle-2027-decouvrez-les-enseignements-de-la-nouvelle-enquete-fractures-francaises-une-grande-etude-sur-l-etat-d-esprit-des-francais-a-cinq-mois-de-l-election_6811633_6205049.html",
-     "date": "2026-11-16T08:00:05.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère sociale: \"Il est capital que les commerçants puissent ouvrir y compris le samedi\", affirme Olivier Faure (PS)",
-     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-colere-sociale-il-est-capital-que-les-commercants-puissent-ouvrir-y-compris-le-samedi-affirme-olivier-faure-ps_VN-202611160290.html",
-     "date": "2026-11-16T07:44:54.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Olivier Faure (PS): \"On vit un moment de grande tension sociale lié à une politique dont tout le monde a compris qu'elle avait contribué à enrichir les plus riches et à appauvrir tous les autres\"",
-     "url": "https://www.bfmtv.com/politique/parti-socialiste/video-olivier-faure-ps-on-vit-un-moment-de-grande-tension-sociale-lie-a-une-politique-dont-tout-le-monde-a-compris-qu-elle-avait-contribue-a-enrichir-les-plus-riches-et-a-appauvrir-tous-les-autres_VN-202611160285.html",
-     "date": "2026-11-16T07:41:04.000Z",
-     "video": true
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Grève du 17 novembre : les syndicats appellent à la mobilisation, trois rassemblements organisés en Dordogne",
-     "url": "https://www.sudouest.fr/dordogne/greve-du-17-novembre-les-syndicats-appellent-a-la-mobilisation-trois-rassemblements-organises-en-dordogne-31527649.php",
-     "date": "2026-11-16T06:30:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Forum de l’économie sociale et solidaire à Niort : « Les sujets sur lesquels nous nous mobilisons sont ce à quoi aspirent les gens dans la rue en ce moment »",
-     "url": "https://www.sudouest.fr/economie/forum-de-l-economie-sociale-et-solidaire-a-niort-les-sujets-sur-lesquels-nous-nous-mobilisons-sont-ce-a-quoi-aspirent-les-gens-dans-la-rue-en-ce-moment-31510502.php",
-     "date": "2026-11-16T06:00:00.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "À Nice, la montée de l’extrême droite, Éric Ciotti à la mairie et le climat social poussent la gauche à une réconciliation inattendue",
-     "url": "https://www.nicematin.com/societe/politique/a-nice-la-montee-de-l-extreme-droite-eric-ciotti-a-la-mairie-et-le-climat-social-poussent-la-gauche-a-une-reconciliation-inattendue-10752484",
-     "date": "2026-11-16T04:45:09.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Avignonet. Les élus municipaux ont adopté à l’unanimité le projet social de territoire",
-     "url": "https://www.ledauphine.com/politique/2026/11/15/les-elus-municipaux-ont-adopte-a-l-unanimite-le-projet-social-de-territoire",
-     "date": "2026-11-15T23:30:15.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère sociale: Jean-François Copé estime que les “Français sont instrumentalisés” par “l’extrême gauche”",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-gerard-larcher-veut-une-methode-de-departage-pour-designer-un-candidat-unique-de-la-droite-et-du-centre-intensifiant-la-pression-sur-edouard-philippe_LN-202611150075.html",
-     "date": "2026-11-15T22:53:01.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Réseaux sociaux : pourquoi Raphaël Glucksmann n’a plus la cote",
-     "url": "https://www.liberation.fr/politique/reseaux-sociaux-pourquoi-raphael-glucksmann-na-plus-la-cote-20261115_GIC6HKMNTZAO3DUPZDRJAPX64I/",
-     "date": "2026-11-15T10:02:17.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Crise sociale. La vente de mortiers d'artifice interdite en France jusqu'au 27 novembre",
-     "url": "https://www.dna.fr/politique/2026/11/15/la-vente-de-mortiers-d-artifice-interdite-en-france-jusqu-au-27-novembre",
-     "date": "2026-11-15T06:36:00.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Mouvement social en France: un «acte V» marqué par une affluence un peu moindre",
-     "url": "https://www.rfi.fr/fr/france/20261115-mouvement-social-en-france-un-acte-v-marqu%C3%A9-par-une-affluence-un-peu-moindre",
-     "date": "2026-11-15T00:02:20.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Acte V du mouvement social : des revendications variées, une affluence en baisse",
-     "url": "https://www.france24.com/fr/france/20261114-acte-v-du-mouvement-social-des-revendications-vari%C3%A9es-une-affluence-en-baisse",
-     "date": "2026-11-14T21:43:20.000Z"
     }
    ]
   }
@@ -705,7 +687,7 @@
    ]
   },
   {
-   "medias": 5,
+   "medias": 3,
    "mediasDistincts": 2,
    "sources": [
     "BFMTV",
@@ -728,8 +710,8 @@
    "articles": [
     {
      "titre": "Nantes. « Geffray, responsable ! » : le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
-     "url": "https://www.leprogres.fr/social/2026/11/16/geffray-responsable-le-ministre-hue-lors-de-la-reouverture-du-lycee-nelson-mandela-incendie-en-octobre",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/social/2026/11/16/geffray-responsable-le-ministre-hue-lors-de-la-reouverture-du-lycee-nelson-mandela-incendie-en-octobre",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-16T09:35:00.000Z"
     },
     {
@@ -748,20 +730,8 @@
     },
     {
      "titre": "Nantes. « Geffray, responsable ! » : le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
-     "url": "https://www.dna.fr/social/2026/11/16/geffray-responsable-le-ministre-hue-lors-de-la-reouverture-du-lycee-nelson-mandela-incendie-en-octobre",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-16T09:35:00.000Z"
-    },
-    {
-     "titre": "Nantes. « Geffray, responsable ! » : le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
      "url": "https://www.ledauphine.com/social/2026/11/16/geffray-responsable-le-ministre-hue-lors-de-la-reouverture-du-lycee-nelson-mandela-incendie-en-octobre",
      "media": "Le Dauphiné libéré",
-     "date": "2026-11-16T09:35:00.000Z"
-    },
-    {
-     "titre": "Nantes. « Geffray, responsable ! » : le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
-     "url": "https://www.estrepublicain.fr/social/2026/11/16/geffray-responsable-le-ministre-hue-lors-de-la-reouverture-du-lycee-nelson-mandela-incendie-en-octobre",
-     "media": "L'Est républicain",
      "date": "2026-11-16T09:35:00.000Z"
     }
    ],
@@ -769,9 +739,9 @@
     "titre": "Nantes : mobilisation lycéenne",
     "origine": "regles"
    },
-   "fait": "Le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
-   "accroche": "Le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre",
-   "essentiel": "Le ministre hué lors de la réouverture du lycée Nelson-Mandela, incendié en octobre. Édouard Geffray répond aux élèves du lycée Nelson Mandela de Nantes mobilisés contre sa venue. Cinq médias en parlent : Le Progrès, BFMTV, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "fait": "Édouard Geffray répond aux élèves du lycée Nelson Mandela de Nantes mobilisés contre sa venue",
+   "accroche": "Édouard Geffray répond aux élèves du lycée Nelson Mandela de Nantes mobilisés contre sa venue",
+   "essentiel": "Édouard Geffray répond aux élèves du lycée Nelson Mandela de Nantes mobilisés contre sa venue. Trois médias en parlent : Dernières Nouvelles d'Alsace, BFMTV et Le Dauphiné libéré.",
    "rubrique": "Gouvernement",
    "contexte": [
     {
@@ -782,7 +752,7 @@
    ]
   },
   {
-   "medias": 5,
+   "medias": 3,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -805,12 +775,6 @@
    "articles": [
     {
      "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
-     "media": "Le Progrès",
-     "date": "2026-11-16T07:15:00.000Z"
-    },
-    {
-     "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
      "url": "https://www.dna.fr/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-16T07:15:00.000Z"
@@ -819,12 +783,6 @@
      "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
      "url": "https://www.ledauphine.com/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
      "media": "Le Dauphiné libéré",
-     "date": "2026-11-16T07:15:00.000Z"
-    },
-    {
-     "titre": "Diplomatie. L'élection du prochain secrétaire général de la francophonie reportée d'un an",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/16/ce-qu-il-faut-savoir-sur-l-election-du-prochain-secretaire-general-de-la-francophonie-ce-lundi",
-     "media": "L'Est républicain",
      "date": "2026-11-16T07:15:00.000Z"
     },
     {
@@ -840,7 +798,7 @@
    },
    "fait": "L'élection du prochain secrétaire général de la francophonie reportée d'un an",
    "accroche": "L'élection du prochain secrétaire général de la francophonie reportée d'un an",
-   "essentiel": "L'élection du prochain secrétaire général de la francophonie reportée d'un an. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et France 24.",
+   "essentiel": "L'élection du prochain secrétaire général de la francophonie reportée d'un an. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et France 24.",
    "rubrique": "Élysée 2027"
   },
   {
@@ -1824,7 +1782,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 4,
+   "medias": 2,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1839,12 +1797,6 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
-     "url": "https://www.leprogres.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
-     "media": "Le Progrès",
-     "date": "2026-11-16T06:30:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
      "url": "https://www.dna.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-16T06:30:00.000Z"
@@ -1854,12 +1806,6 @@
      "url": "https://www.ledauphine.com/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-16T06:30:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Cinq candidats vont débattre de lutte contre la pauvreté, les Restos réclament « une stratégie nationale »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/16/cinq-candidats-vont-debattre-de-lutte-contre-la-pauvrete-les-restos-reclament-une-strategie-nationale",
-     "media": "L'Est républicain",
-     "date": "2026-11-16T06:30:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1868,7 +1814,7 @@
    },
    "fait": "Cinq candidats vont débattre de lutte contre la pauvreté",
    "accroche": "Cinq candidats vont débattre de lutte contre la pauvreté",
-   "essentiel": "Cinq candidats vont débattre de lutte contre la pauvreté. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Cinq candidats vont débattre de lutte contre la pauvreté. Deux médias en parlent : Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1879,7 +1825,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 2,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1903,12 +1849,6 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. Cette élection est « la plus importante de ma vie », déclare François Hollande",
-     "url": "https://www.leprogres.fr/elections/2026/11/15/cette-election-est-la-plus-importante-de-ma-vie-declare-francois-hollande",
-     "media": "Le Progrès",
-     "date": "2026-11-15T19:58:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Cette élection est « la plus importante de ma vie », déclare François Hollande",
      "url": "https://www.dna.fr/elections/2026/11/15/cette-election-est-la-plus-importante-de-ma-vie-declare-francois-hollande",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-15T19:58:00.000Z"
@@ -1917,12 +1857,6 @@
      "titre": "Présidentielle 2027. Cette élection est « la plus importante de ma vie », déclare François Hollande",
      "url": "https://www.ledauphine.com/elections/2026/11/15/cette-election-est-la-plus-importante-de-ma-vie-declare-francois-hollande",
      "media": "Le Dauphiné libéré",
-     "date": "2026-11-15T19:58:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. Cette élection est « la plus importante de ma vie », déclare François Hollande",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/15/cette-election-est-la-plus-importante-de-ma-vie-declare-francois-hollande",
-     "media": "L'Est républicain",
      "date": "2026-11-15T19:58:00.000Z"
     }
    ],
@@ -1936,100 +1870,6 @@
      "type": "personnes",
      "texte": "François Hollande : député SOC (Corrèze)",
      "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-15T16:51:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Union européenne. L'Estonie va fermer sa frontière avec la Russie après avoir déjoué in extremis un sabotage",
-     "url": "https://www.leprogres.fr/defense-guerre-conflit/2026/11/15/l-estonie-va-fermer-sa-frontiere-avec-la-russie-apres-avoir-dejoue-in-extremis-un-sabotage",
-     "media": "Le Progrès",
-     "date": "2026-11-15T16:51:00.000Z"
-    },
-    {
-     "titre": "Europe. L'Estonie va fermer sa frontière avec la Russie après avoir déjoué un sabotage",
-     "url": "https://www.dna.fr/defense-guerre-conflit/2026/11/15/l-estonie-va-fermer-sa-frontiere-avec-la-russie-apres-avoir-dejoue-in-extremis-un-sabotage",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-15T16:51:00.000Z"
-    },
-    {
-     "titre": "Union européenne. L'Estonie va fermer sa frontière avec la Russie après avoir déjoué in extremis un sabotage",
-     "url": "https://www.estrepublicain.fr/defense-guerre-conflit/2026/11/15/l-estonie-va-fermer-sa-frontiere-avec-la-russie-apres-avoir-dejoue-in-extremis-un-sabotage",
-     "media": "L'Est républicain",
-     "date": "2026-11-15T16:51:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Va fermer sa frontière",
-    "origine": "recoupement"
-   },
-   "fait": "L'Estonie va fermer sa frontière avec la Russie après avoir déjoué un sabotage",
-   "accroche": "L'Estonie va fermer sa frontière avec la Russie après avoir déjoué un sabotage",
-   "essentiel": "L'Estonie va fermer sa frontière avec la Russie après avoir déjoué in extremis un sabotage. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et L'Est républicain.",
-   "rubrique": "International"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-15T16:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. « Si c’est pour reparler d’une primaire... » : Philippe répond à la proposition de réunion de Larcher",
-     "url": "https://www.dna.fr/elections/2026/11/15/si-c-est-pour-reparler-d-une-primaire-philippe-repond-a-la-proposition-de-reunion-de-larcher",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-15T16:00:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Si c’est pour reparler d’une primaire... » : Philippe répond à la proposition de réunion de Larcher",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/15/si-c-est-pour-reparler-d-une-primaire-philippe-repond-a-la-proposition-de-reunion-de-larcher",
-     "media": "L'Est républicain",
-     "date": "2026-11-15T16:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Philippe répond à la proposition de réunion de Larcher",
-   "accroche": "Philippe répond à la proposition de réunion de Larcher",
-   "essentiel": "Philippe répond à la proposition de réunion de Larcher. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -2144,6 +1984,86 @@
     "generique": true
    },
    "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T11:02:39.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sandrine Rousseau",
+      "photo": "photos/deputes/PA795076.jpg",
+      "photoHd": "photos/deputes/hd/PA795076.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA795076",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Marine Tondelier",
+      "photo": "photos/personnalites/marine-tondelier.jpg",
+      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
+      "parti": "ECO",
+      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"La manière dont elle essaie de faire valoir ses idées est toxique\": Marine Tondelier appelle Sandrine Rousseau à lui \"lâcher la grappe\" et à la \"laisser faire campagne\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/la-maniere-dont-elle-essaie-de-faire-valoir-ses-idees-est-toxique-marine-tondelier-appelle-sandrine-rousseau-a-lui-lacher-la-grappe-et-a-la-laisser-faire-campagne_AN-202611160442.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T11:02:39.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Tondelier (Écologistes) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sandrine Rousseau : députée ECO (Paris) · Marine Tondelier : secrétaire nationale des Écologistes",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-16T10:55:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "senat",
+    "vignette": "senat"
+   },
+   "articles": [
+    {
+     "titre": "« Fusillés pour l’exemple » durant la Première Guerre mondiale : deux sénateurs du 64 expliquent pourquoi ils souhaitent plutôt une réhabilitation « au cas par cas »",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/fusilles-pour-l-exemple-durant-la-premiere-guerre-mondiale-deux-senateurs-du-64-expliquent-pourquoi-ils-souhaitent-plutot-une-rehabilitation-au-cas-par-cas-31534929.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-16T10:55:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sénat : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Deux sénateurs du 64 expliquent pourquoi ils souhaitent plutôt une réhabilitation « au cas par cas »",
+   "accroche": "Deux sénateurs du 64 expliquent pourquoi ils souhaitent plutôt une réhabilitation « au cas par cas »",
+   "rubrique": "Sénat"
   },
   {
    "medias": 1,
@@ -2414,6 +2334,35 @@
    "fait": "Martèle le ministre de l'Éducation nationale",
    "accroche": "Martèle le ministre de l'Éducation nationale",
    "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-16T10:20:08.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
+     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
+     "media": "L'Obs",
+     "date": "2026-11-16T10:20:08.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sociale",
+    "origine": "dossier"
+   },
+   "fait": "Les syndicats peuvent-ils encore obtenir quelque chose ?",
+   "accroche": "Les syndicats peuvent-ils encore obtenir quelque chose ?",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2835,33 +2784,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-16T09:00:12.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Mobilisation sociale : « Le rendez-vous du 17 novembre est décisif pour maintenir la pression sur les pouvoirs publics »",
-     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
-     "media": "L'Obs",
-     "date": "2026-11-16T09:00:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-16T09:00:05.000Z",
@@ -3219,34 +3141,6 @@
     "origine": "dossier"
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-16T08:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Éveux. Un premier Forum citoyen pour « capter les personnes éloignées de la vie locale »",
-     "url": "https://www.leprogres.fr/politique/2026/11/15/un-premier-forum-citoyen-pour-capter-les-personnes-eloignees-de-la-vie-locale",
-     "media": "Le Progrès",
-     "date": "2026-11-16T08:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éveux : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4027,35 +3921,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-16T07:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Dortan. Dégâts dans les plafonds à cause de la chaleur : des travaux pour sécuriser l’école",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/degats-dans-les-plafonds-a-cause-de-la-chaleur-des-travaux-pour-securiser-l-ecole",
-     "media": "Le Progrès",
-     "date": "2026-11-16T07:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dortan : projet d'aménagement",
-    "origine": "regles"
-   },
-   "fait": "Dégâts dans les plafonds à cause de la chaleur : des travaux pour sécuriser l’école",
-   "accroche": "Dégâts dans les plafonds à cause de la chaleur : des travaux pour sécuriser l’école",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-11-16T06:45:46.000Z",
@@ -4697,34 +4562,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-16T06:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Nord meusien. Une vague rouge, un tour de France à 80 ans, une préfète et une ministre en visite : une semaine d’actualité en 10 images",
-     "url": "https://www.estrepublicain.fr/culture-loisirs/2026/11/16/une-vague-rouge-un-tour-de-france-a-80-ans-une-prefete-et-une-ministre-en-visite-une-semaine-d-actualite-en-10-images",
-     "media": "L'Est républicain",
-     "date": "2026-11-16T06:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-16T05:58:57.000Z",
@@ -4912,8 +4749,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Francophonie",
-    "origine": "dossier"
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
    },
    "rubrique": "Élysée 2027"
   },
@@ -5098,6 +4935,122 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Express"
+   ],
+   "derniere": "2026-11-16T05:00:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Charles Rodwell",
+      "photo": "photos/deputes/PA795528.jpg",
+      "photoHd": "photos/deputes/hd/PA795528.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA795528",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Charles Rodwell, député Ensemble pour la République : \"Il faut fixer des quotas migratoires par pays d’origine\"",
+     "url": "https://www.lexpress.fr/politique/charles-rodwell-depute-ensemble-pour-la-republique-il-faut-fixer-des-quotas-migratoires-par-pays-ZX2PKPXMNBHFNBAL4AHPNEWSFI/",
+     "media": "L'Express",
+     "date": "2026-11-16T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Charles Rodwell : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Assemblée nationale",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Charles Rodwell : député EPR (Yvelines)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-16T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Billet. Présidentielle : personne ne l'imaginait et pourtant un an plus tard, il était à l'Élysée",
+     "url": "https://www.ledauphine.com/politique/2026/11/16/alors-peut-etre",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-16T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : opinion d'un média",
+    "origine": "regles"
+   },
+   "fait": "Présidentielle : personne ne l'imaginait et pourtant un an plus tard, il était à l'Élysée",
+   "accroche": "Présidentielle : personne ne l'imaginait et pourtant un an plus tard, il était à l'Élysée",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-11-16T04:45:09.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Éric Ciotti",
+      "photo": "photos/deputes/PA330240.jpg",
+      "photoHd": "photos/deputes/hd/PA330240.jpg",
+      "parti": "UDR",
+      "lien": "#depute-PA330240",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "À Nice, la montée de l’extrême droite, Éric Ciotti à la mairie et le climat social poussent la gauche à une réconciliation inattendue",
+     "url": "https://www.nicematin.com/societe/politique/a-nice-la-montee-de-l-extreme-droite-eric-ciotti-a-la-mairie-et-le-climat-social-poussent-la-gauche-a-une-reconciliation-inattendue-10752484",
+     "media": "Nice-Matin",
+     "date": "2026-11-16T04:45:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sociale",
+    "origine": "dossier"
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Éric Ciotti : président de l'UDR",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   }
  ]
 }
