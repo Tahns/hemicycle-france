@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-16T00:55:34.930Z",
+ "lastUpdated": "2026-11-16T01:01:13.127Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -30,7 +30,7 @@
   {
    "nom": "Hugo Décrypte",
    "site": "https://www.youtube.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Public Sénat",
@@ -440,6 +440,7 @@
     "international"
    ],
    "medias": [
+    "France 24",
     "BFMTV",
     "Mediapart",
     "Sud Ouest",
@@ -453,6 +454,7 @@
    ],
    "mediasDistincts": 9,
    "sources": [
+    "France Médias Monde",
     "BFMTV",
     "Mediapart",
     "Sud Ouest",
@@ -460,12 +462,17 @@
     "La Dépêche",
     "Europe 1 / Ouest-France",
     "Dernières Nouvelles d'Alsace",
-    "RFI",
     "20 Minutes"
    ],
-   "nb": 10,
-   "derniere": "2026-11-15T16:49:15.000Z",
+   "nb": 11,
+   "derniere": "2026-11-15T20:19:27.000Z",
    "articles": [
+    {
+     "media": "France 24",
+     "titre": "Les rassemblements autour de certains lycées et universités interdits à Paris",
+     "url": "https://www.france24.com/fr/france/20261115-les-rassemblements-autour-de-certains-lyc%C3%A9es-et-universit%C3%A9s-interdits-%C3%A0-paris",
+     "date": "2026-11-15T20:19:27.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Présidentielle, mobilisations... L'interview d'Éric Coquerel, député LFI de Seine-Saint-Denis",
@@ -2482,6 +2489,33 @@
    "fait": "L’école de Chaniers a achevé son regroupement sur un seul site",
    "accroche": "L’école de Chaniers a achevé son regroupement sur un seul site",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-15T20:19:27.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Les rassemblements autour de certains lycées et universités interdits à Paris",
+     "url": "https://www.france24.com/fr/france/20261115-les-rassemblements-autour-de-certains-lyc%C3%A9es-et-universit%C3%A9s-interdits-%C3%A0-paris",
+     "media": "France 24",
+     "date": "2026-11-15T20:19:27.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "International",
+    "origine": "dossier"
+   },
+   "rubrique": "International"
   },
   {
    "medias": 1,
@@ -4905,52 +4939,6 @@
    "fait": "Le chantier sans cesse repoussé du redécoupage électoral",
    "accroche": "Le chantier sans cesse repoussé du redécoupage électoral",
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-15T16:03:57.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Éric Coquerel",
-      "photo": "photos/deputes/PA721202.jpg",
-      "photoHd": "photos/deputes/hd/PA721202.jpg",
-      "parti": "LFI",
-      "lien": "#depute-PA721202",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "assemblee",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Colère lycéenne et étudiante: \"Il y a beaucoup de communication mais concrètement il n’y a rien à la hauteur des revendications\", dénonce Éric Coquerel, député LFI",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-colere-lyceenne-et-etudiante-il-y-a-beaucoup-de-communication-mais-concretement-il-n-y-a-rien-a-la-hauteur-des-revendications-denonce-eric-coquerel-depute-lfi_VN-202611150304.html",
-     "media": "BFMTV",
-     "date": "2026-11-15T16:03:57.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éric Coquerel : déclaration sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "rubrique": "Assemblée nationale",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Éric Coquerel : député LFI (Seine-Saint-Denis)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   }
  ]
 }
