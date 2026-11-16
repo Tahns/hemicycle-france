@@ -1,11 +1,11 @@
 {
- "lastUpdated": "2026-11-16T22:55:38.664Z",
+ "lastUpdated": "2026-11-16T23:01:25.765Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
    "nom": "franceinfo",
    "site": "https://www.francetvinfo.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Le Monde",
@@ -217,7 +217,7 @@
     },
     {
      "media": "Le Monde",
-     "titre": "EN DIRECT, débat de la présidentielle 2027 : les cinq candidats s’affrontent sur les retraites ; Marine Le Pen cible la Ligue des droits de l’homme, « un ramassis de gauchistes »",
+     "titre": "Débat de la présidentielle 2027 : revivez le débat entre Marine Le Pen, Raphaël Glucksmann, Jean-Luc Mélenchon, Gabriel Attal et Bruno Retailleau",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/11/16/en-direct-debat-de-la-presidentielle-2027-les-cinq-candidats-s-affrontent-sur-les-retraites-marine-le-pen-cible-la-ligue-des-droits-de-l-homme-un-ramassis-de-gauchistes_6811633_6205049.html",
      "date": "2026-11-16T22:21:54.000Z"
     },
@@ -384,7 +384,7 @@
     },
     {
      "media": "Le Monde",
-     "titre": "EN DIRECT, débat de la présidentielle 2027 : les cinq candidats s’affrontent sur les retraites ; Marine Le Pen cible la Ligue des droits de l’homme, « un ramassis de gauchistes »",
+     "titre": "Débat de la présidentielle 2027 : revivez le débat entre Marine Le Pen, Raphaël Glucksmann, Jean-Luc Mélenchon, Gabriel Attal et Bruno Retailleau",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/11/16/en-direct-debat-de-la-presidentielle-2027-les-cinq-candidats-s-affrontent-sur-les-retraites-marine-le-pen-cible-la-ligue-des-droits-de-l-homme-un-ramassis-de-gauchistes_6811633_6205049.html",
      "date": "2026-11-16T22:21:54.000Z"
     },
@@ -2114,21 +2114,37 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
       "parti": "RN",
       "lien": "#depute-PA720614",
       "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
      }
     ],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "EN DIRECT, débat de la présidentielle 2027 : les cinq candidats s’affrontent sur les retraites ; Marine Le Pen cible la Ligue des droits de l’homme, « un ramassis de gauchistes »",
+     "titre": "Débat de la présidentielle 2027 : revivez le débat entre Marine Le Pen, Raphaël Glucksmann, Jean-Luc Mélenchon, Gabriel Attal et Bruno Retailleau",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/live/2026/11/16/en-direct-debat-de-la-presidentielle-2027-les-cinq-candidats-s-affrontent-sur-les-retraites-marine-le-pen-cible-la-ligue-des-droits-de-l-homme-un-ramassis-de-gauchistes_6811633_6205049.html",
      "media": "Le Monde",
      "date": "2026-11-16T22:21:54.000Z"
@@ -2139,12 +2155,12 @@
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Budget",
+   "rubrique": "Élysée 2027",
    "contexte": [
     {
      "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
