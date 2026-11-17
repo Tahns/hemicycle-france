@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T11:19:15.891Z",
+ "lastUpdated": "2026-11-17T11:20:57.545Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -155,23 +155,24 @@
    "motifs": [
     "présidentielle",
     "candidats",
-    "primaire",
-    "pouvoir"
+    "mardi",
+    "primaire"
    ],
    "medias": [
+    "Libération",
     "20 Minutes",
     "La Dépêche",
     "La Croix",
     "BFMTV",
-    "Libération",
+    "Nice-Matin",
     "Europe 1",
     "Le JDD",
     "L'Est républicain",
     "Le Monde",
     "Sud Ouest",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
-    "Nice-Matin",
     "Mediapart",
     "L'Obs",
     "Valeurs actuelles",
@@ -182,15 +183,15 @@
    ],
    "mediasDistincts": 15,
    "sources": [
+    "Libération",
     "20 Minutes",
     "La Dépêche",
     "La Croix",
     "BFMTV",
-    "Libération",
-    "Groupe Bolloré",
-    "L'Est républicain / Sud Ouest / Dernières Nouvelles d'Alsace / Le Dauphiné libéré",
-    "Le Monde",
     "Nice-Matin",
+    "Groupe Bolloré",
+    "L'Est républicain / Sud Ouest / Le Progrès / Dernières Nouvelles d'Alsace / Le Dauphiné libéré",
+    "Le Monde",
     "Mediapart",
     "L'Obs",
     "Valeurs actuelles",
@@ -198,9 +199,15 @@
     "Public Sénat",
     "Ouest-France"
    ],
-   "nb": 116,
-   "derniere": "2026-11-17T11:11:35.000Z",
+   "nb": 128,
+   "derniere": "2026-11-17T11:15:58.000Z",
    "articles": [
+    {
+     "media": "Libération",
+     "titre": "Pétition pour l’interdiction de CNews : Yaël Braun-Pivet «regrette» l’absence de débat, définitivement confirmée ce mardi",
+     "url": "https://www.liberation.fr/politique/petition-pour-linterdiction-de-cnews-yael-braun-pivet-regrette-labsence-de-debat-confirmee-ce-mardi-20261117_MDVWSFY4TZA5PBLPGNVMRESWEM/",
+     "date": "2026-11-17T11:15:58.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Présidentielle 2027 : Une maman solo sur trois est pauvre, comme l’affirme Mélenchon ?",
@@ -227,10 +234,10 @@
      "video": true
     },
     {
-     "media": "Libération",
-     "titre": "Le Modem soutient à son tour le boycott des produits des colonies d’Israël",
-     "url": "https://www.liberation.fr/politique/le-modem-soutient-a-son-tour-le-boycott-des-produits-des-colonies-disrael-20261117_JQDZI762BFEBHOPMJGZCVLKASE/",
-     "date": "2026-11-17T10:44:10.000Z"
+     "media": "Nice-Matin",
+     "titre": "Salaire de base, primes, point d’indice, carrières... Quatre questions autour de la rémunération des agents publics mobilisés ce mardi 17 novembre",
+     "url": "https://www.nicematin.com/societe/politique/salaire-de-base-primes-point-d-indice-carrieres-quatre-questions-autour-de-la-remuneration-des-agents-publics-mobilises-ce-mardi-17-novembre-10762758",
+     "date": "2026-11-17T10:45:00.000Z"
     },
     {
      "media": "Europe 1",
@@ -263,6 +270,12 @@
      "date": "2026-11-17T09:42:05.000Z"
     },
     {
+     "media": "Le Progrès",
+     "titre": "Présidentielle 2027. Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi soir",
+     "url": "https://www.leprogres.fr/elections/2026/11/17/jean-luc-melenchon-va-diner-avec-bernard-arnault-et-patrick-pouyanne-ce-mardi-soir",
+     "date": "2026-11-17T09:00:00.000Z"
+    },
+    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Présidentielle 2027. Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi soir",
      "url": "https://www.dna.fr/elections/2026/11/17/jean-luc-melenchon-va-diner-avec-bernard-arnault-et-patrick-pouyanne-ce-mardi-soir",
@@ -273,12 +286,6 @@
      "titre": "Présidentielle 2027. Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi soir",
      "url": "https://www.ledauphine.com/elections/2026/11/17/jean-luc-melenchon-va-diner-avec-bernard-arnault-et-patrick-pouyanne-ce-mardi-soir",
      "date": "2026-11-17T09:00:00.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Budget de la Sécu : pour compenser le rejet de la désindexation des retraites sur l’inflation, le Sénat va proposer de supprimer entièrement l’abattement fiscal de 10%",
-     "url": "https://www.nicematin.com/societe/politique/budget-de-la-secu-pour-compenser-le-rejet-de-la-desindexation-des-retraites-sur-l-inflation-le-senat-va-proposer-de-supprimer-entierement-l-abattement-fiscal-de-10-10762736",
-     "date": "2026-11-17T08:59:05.000Z"
     },
     {
      "media": "Mediapart",
@@ -331,9 +338,10 @@
     "novembre",
     "grève",
     "mobilisation",
-    "manifestations"
+    "colère"
    ],
    "medias": [
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
@@ -369,6 +377,12 @@
    "nb": 34,
    "derniere": "2026-11-17T11:17:00.000Z",
    "articles": [
+    {
+     "media": "Le Progrès",
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.leprogres.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T11:17:00.000Z"
+    },
     {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
@@ -468,128 +482,126 @@
    ]
   },
   {
-   "id": "marine",
-   "titre": "Marine",
+   "id": "public",
+   "titre": "Public",
    "motifs": [
-    "marine",
-    "capitalisation"
+    "public",
+    "fonction"
    ],
    "medias": [
-    "La Dépêche",
-    "BFMTV",
-    "Libération",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Nice-Matin",
     "Europe 1",
-    "Le Monde",
-    "Le JDD",
-    "L'Humanité",
-    "20 Minutes",
     "France 24",
-    "L'Express",
-    "Dernières Nouvelles d'Alsace",
-    "Public Sénat"
-   ],
-   "mediasDistincts": 11,
-   "sources": [
-    "La Dépêche",
-    "BFMTV",
+    "20 Minutes",
+    "Le Monde",
+    "Sud Ouest",
     "Libération",
-    "Groupe Bolloré",
-    "Le Monde",
-    "L'Humanité",
-    "20 Minutes",
-    "France 24",
-    "L'Express",
-    "Dernières Nouvelles d'Alsace",
+    "La Dépêche",
     "Public Sénat"
    ],
-   "nb": 35,
-   "derniere": "2026-11-17T11:09:29.000Z",
+   "mediasDistincts": 10,
+   "sources": [
+    "EBRA",
+    "Nice-Matin",
+    "Europe 1",
+    "France 24",
+    "20 Minutes",
+    "Le Monde",
+    "Sud Ouest",
+    "Libération",
+    "La Dépêche",
+    "Public Sénat"
+   ],
+   "nb": 27,
+   "derniere": "2026-11-17T11:17:00.000Z",
    "articles": [
     {
-     "media": "La Dépêche",
-     "titre": "DIRECT. Présidentielle 2027 : Marine Le Pen assure que la réforme des retraites du RN \"est pleinement financée\" et promet un âge de départ entre 60 et 62 ans",
-     "url": "https://www.ladepeche.fr/2026/11/17/direct-presidentielle-2027-jai-fait-de-mon-mieux-malgre-des-erreurs-emmanuel-macron-fait-le-bilan-de-ses-annees-de-pouvoir-13655250.php",
-     "date": "2026-11-17T11:09:29.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Réforme des retraites: le RN propose de \"transformer certaines cotisations patronales déjà payées\" pour financer son \"pilier de capitalisation\"",
-     "url": "https://www.bfmtv.com/politique/video-reforme-des-retraites-le-rn-propose-de-transformer-certaines-cotisations-patronales-deja-payees-pour-financer-son-pilier-de-capitalisation_VN-202611170489.html",
-     "date": "2026-11-17T11:07:33.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Marine Le Pen",
-     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
-     "date": "2026-11-17T10:55:51.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Retraites: \"Sous mon premier quinquennat, des centaines de milliers de travailleurs partiront plus tôt\", assure Marine Le Pen, candidate RN à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/video-retraites-sous-mon-premier-quinquennat-des-centaines-de-milliers-de-travailleurs-partiront-plus-tot-assure-marine-le-pen-candidate-rn-a-l-election-presidentielle_VN-202611170474.html",
-     "date": "2026-11-17T10:54:55.000Z",
-     "video": true
-    },
-    {
-     "media": "Libération",
-     "titre": "Retraites : Marine Le Pen veut faire reculer l’âge de départ à 62 ans",
-     "url": "https://www.liberation.fr/politique/elections/marine-le-pen-presente-son-projet-de-reforme-des-retraites-20261117_4PGOZBOHAJGRTN5SP3MQA6OCYE/",
-     "date": "2026-11-17T10:49:28.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Marine Le Pen affirme que sa réforme des retraites sera «engagée dès son arrivée au pouvoir» et sera appliquée au 1er janvier 2028",
-     "url": "https://www.europe1.fr/politique/marine-le-pen-affirme-que-sa-reforme-des-retraites-sera-engagee-des-son-arrivee-au-pouvoir-et-sera-appliquee-au-1er-janvier-2028-1238676?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-17T10:38:43.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Marine Le Pen et l’Ukraine, entre hypocrisie et lâcheté",
-     "url": "https://www.lemonde.fr/idees/article/2026/11/17/marine-le-pen-et-l-ukraine-entre-hypocrisie-et-lachete_6812934_3232.html",
-     "date": "2026-11-17T09:30:10.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "«Ramassis de gauchistes» : Marine Le Pen promet de couper les subventions aux associations politisées",
-     "url": "https://www.lejdd.fr/politique/ramassis-de-gauchistes-marine-le-pen-promet-de-couper-les-subventions-aux-associations-politisees-188904",
-     "date": "2026-11-17T08:14:32.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Augmenter le Smic ? Ce serait revenir à « l’URSS » : Marine Le Pen confirme sur LCI ses orientations antisociales",
-     "url": "https://www.humanite.fr/politique/extreme-droite/augmenter-le-smic-ce-serait-revenir-a-lurss-marine-le-pen-confirme-sur-lci-ses-orientations-antisociales",
-     "date": "2026-11-17T07:30:00.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "EN DIRECT Présidentielle 2027 : « Un départ de 60 à 62 ans » et une dose de capitalisation, Marine Le Pen dévoile sa réforme des retraites...",
-     "url": "https://www.20minutes.fr/politique/4263434-20261117-direct-presidentielle-2027-pen-melenchon-echarpent-hausse-smic?at_medium=display&at_campaign=149",
-     "date": "2026-11-17T05:15:53.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Ukraine : Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue",
-     "url": "https://www.france24.com/fr/france/20261116-ukraine-marine-le-pen-confirme-%C3%A0-l-ambassadeur-la-fin-de-l-aide-financi%C3%A8re-si-elle-est-%C3%A9lue",
-     "date": "2026-11-16T21:46:15.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "Ukraine : Marine Le Pen veut changer la nature de l'aide française à Kiev",
-     "url": "https://www.lexpress.fr/monde/europe/ukraine-marine-le-pen-veut-changer-la-nature-de-laide-francaise-a-kiev-YIPQHFO6UBGUXPHO2DTQ7N7EXA/",
-     "date": "2026-11-16T17:56:34.000Z"
+     "media": "Le Progrès",
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.leprogres.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T11:17:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Guerre en Ukraine. « Dans les prochains mois » : Marine Le Pen redit à Kiev son intention de couper les aides",
-     "url": "https://www.dna.fr/politique/2026/11/16/dans-les-prochains-mois-marine-le-pen-redit-a-kiev-son-intention-de-couper-les-aides",
-     "date": "2026-11-16T17:16:00.000Z"
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T11:17:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.ledauphine.com/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T11:17:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.estrepublicain.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T11:17:00.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Salaire de base, primes, point d’indice, carrières... Quatre questions autour de la rémunération des agents publics mobilisés ce mardi 17 novembre",
+     "url": "https://www.nicematin.com/societe/politique/salaire-de-base-primes-point-d-indice-carrieres-quatre-questions-autour-de-la-remuneration-des-agents-publics-mobilises-ce-mardi-17-novembre-10762758",
+     "date": "2026-11-17T10:45:00.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Grève du 17 novembre : la fonction publique en grève ce mardi, des manifestations prévues à Nice et Toulon... Suivez les informations en direct",
+     "url": "https://www.nicematin.com/societe/greves/greve-du-17-novembre-la-fonction-publique-en-greve-ce-mardi-des-manifestations-prevues-a-nice-et-toulon-suivez-les-informations-en-direct-10762445",
+     "date": "2026-11-17T09:51:57.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Service public : «La France est en phase d'effondrement», réaffirme Alain Bauer",
+     "url": "https://www.europe1.fr/politique/service-public-la-france-est-en-phase-deffondrement-reaffirme-alain-bauer-1238502?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-17T07:53:41.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "En direct : nouvelle journée de mobilisation dans la fonction publique",
+     "url": "https://www.france24.com/fr/france/20261117-en-direct-nouvelle-journ%C3%A9e-mobilisation-gr%C3%A8ve-fonction-publique-gilets-jaunes-pouvoir-achat-%C3%A9tudiants-lyc%C3%A9ens",
+     "date": "2026-11-17T06:57:54.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Toute l’info en 2 minutes : Grève des fonctionnaires, débat présidentiel et un nouveau 007",
+     "url": "https://www.20minutes.fr/societe/greve/4263441-20261117-toute-info-2-minutes-greve-fonctionnaires-debat-presidentiel-nouveau-007?at_medium=display&at_campaign=149",
+     "date": "2026-11-17T06:57:35.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "« Nous, hauts fonctionnaires, magistrats et agents publics, ne pouvons rester indifférents à ce qui se joue : une atteinte grave aux libertés publiques »",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/17/nous-hauts-fonctionnaires-magistrats-et-agents-publics-ne-pouvons-rester-indifferents-a-ce-qui-se-joue-une-atteinte-grave-aux-libertes-publiques_6812907_3232.html",
+     "date": "2026-11-17T05:25:04.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Grève du 17 novembre en Lot-Garonne. Salaires, vie chère, budget… Les agents du service public dans la rue",
+     "url": "https://www.sudouest.fr/societe/greves-et-manifestations/greve-du-17-novembre-salaires-vie-chere-budget-les-agents-du-service-public-dans-la-rue-a-agen-31549791.php",
+     "date": "2026-11-16T20:00:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Fonctionnaires, le point de rupture",
+     "url": "https://www.liberation.fr/idees-et-debats/editorial/fonctionnaires-le-point-de-rupture-20261116_5NKEALU4LRGWHICSU3DA6TXIYE/",
+     "date": "2026-11-16T19:06:37.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 : Marine Le Pen a dit à l'ambassadeur d'Ukraine qu'en cas d'élection, \"l'état des finances publiques ne permettrait plus\" d'aider Kiev",
+     "url": "https://www.ladepeche.fr/2026/11/16/presidentielle-2027-marine-le-pen-a-dit-a-lambassadeur-dukraine-quen-cas-delection-letat-des-finances-publiques-ne-permettrait-plus-daider-kiev-13655755.php",
+     "date": "2026-11-16T17:53:46.000Z"
     },
     {
      "media": "Public Sénat",
-     "titre": "Sondages : Marine Le Pen doit-elle s’inquiéter d’un regain de la « diabolisation » du RN ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/sondages-marine-le-pen-doit-elle-sinquieter-dun-regain-de-la-diabolisation-du-rn",
-     "date": "2026-11-16T16:32:54.000Z"
+     "titre": "Sens Public — SENS PUBLIC 26/11/26 Je P1",
+     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-26-je-p1-e0",
+     "date": "2026-11-16T16:22:54.000Z"
     }
    ]
   }
@@ -676,11 +688,11 @@
    }
   },
   {
-   "medias": 8,
+   "medias": 9,
    "mediasDistincts": 4,
    "sources": [
     "La Dépêche",
-    "Sud Ouest / 20 Minutes / Dernières Nouvelles d'Alsace / Le Dauphiné libéré / L'Est républicain",
+    "Sud Ouest / 20 Minutes / Le Progrès / Dernières Nouvelles d'Alsace / Le Dauphiné libéré / L'Est républicain",
     "Libération",
     "Europe 1"
    ],
@@ -732,6 +744,12 @@
     },
     {
      "titre": "Présidentielle 2027. Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi soir",
+     "url": "https://www.leprogres.fr/elections/2026/11/17/jean-luc-melenchon-va-diner-avec-bernard-arnault-et-patrick-pouyanne-ce-mardi-soir",
+     "media": "Le Progrès",
+     "date": "2026-11-17T09:00:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi soir",
      "url": "https://www.dna.fr/elections/2026/11/17/jean-luc-melenchon-va-diner-avec-bernard-arnault-et-patrick-pouyanne-ce-mardi-soir",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-17T09:00:00.000Z"
@@ -755,7 +773,7 @@
    },
    "fait": "Oui, Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné",
    "accroche": "Oui, Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné",
-   "essentiel": "Pour la présidentielle 2027, Oui, Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné. Huit médias en parlent.",
+   "essentiel": "Pour la présidentielle 2027, Oui, Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné. Neuf médias en parlent.",
    "rubrique": "Élysée 2027"
   },
   {
@@ -853,8 +871,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen : annonces sur la présidentielle de 2027",
+    "origine": "regles"
    },
    "accroche": "Marine Le Pen dévoile sa réforme des retraites",
    "essentiel": "Marine Le Pen assure que la réforme des retraites du Rassemblement national \"est pleinement financée\" et promet un âge de départ entre 60 et 62 ans. Trois médias en parlent : La Dépêche, BFMTV et 20 Minutes.",
@@ -929,7 +947,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -943,6 +961,12 @@
     "vignette": "budget"
    },
    "articles": [
+    {
+     "titre": "Social. Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\"",
+     "url": "https://www.leprogres.fr/social/2026/11/17/retraites-le-gouvernement-fait-marche-arriere-sur-la-majoration-pour-les-familles-nombreuses",
+     "media": "Le Progrès",
+     "date": "2026-11-17T10:08:00.000Z"
+    },
     {
      "titre": "Social. Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\"",
      "url": "https://www.dna.fr/social/2026/11/17/retraites-le-gouvernement-fait-marche-arriere-sur-la-majoration-pour-les-familles-nombreuses",
@@ -974,7 +998,7 @@
    },
    "fait": "Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\"",
    "accroche": "Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\"",
-   "essentiel": "Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\". Le Sénat refuse la réforme des majorations de pensions pour les familles nombreuses. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Public Sénat.",
+   "essentiel": "Le Sénat rejette la désindexation des retraites, l'exécutif recule sur la majoration \"familles nombreuses\". Le Sénat refuse la réforme des majorations de pensions pour les familles nombreuses. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Public Sénat.",
    "rubrique": "Budget"
   },
   {
@@ -1109,8 +1133,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
    "accroche": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
@@ -1236,8 +1261,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Marine Le Pen veut changer la nature de l'aide française à Kiev",
    "accroche": "Marine Le Pen veut changer la nature de l'aide française à Kiev",
@@ -1415,7 +1441,7 @@
    "rubrique": "International"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1428,6 +1454,12 @@
     "vignette": "education"
    },
    "articles": [
+    {
+     "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
+     "url": "https://www.leprogres.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "media": "Le Progrès",
+     "date": "2026-11-17T11:17:00.000Z"
+    },
     {
      "titre": "Colère sociale. Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
      "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
@@ -1453,7 +1485,7 @@
    },
    "fait": "La fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
    "accroche": "La fonction publique mobilisée, 3 % de grévistes dans l'Education nationale",
-   "essentiel": "Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Grève du 17 novembre : la fonction publique mobilisée, 3 % de grévistes dans l'Education nationale. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique",
    "chiffre": {
     "valeur": "3",
@@ -1466,7 +1498,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1479,6 +1511,12 @@
     "vignette": "assemblee"
    },
    "articles": [
+    {
+     "titre": "Politique. Après le rejet de la pétition contre CNews, l’Assemblée prévoit un débat sur le pluralisme dans les médias",
+     "url": "https://www.leprogres.fr/politique/2026/11/17/apres-le-rejet-de-la-petition-contre-cnews-l-assemblee-prevoit-un-debat-sur-le-pluralisme-dans-les-medias",
+     "media": "Le Progrès",
+     "date": "2026-11-17T10:21:00.000Z"
+    },
     {
      "titre": "Politique. Après le rejet de la pétition contre CNews, l’Assemblée prévoit un débat sur le pluralisme dans les médias",
      "url": "https://www.dna.fr/politique/2026/11/17/apres-le-rejet-de-la-petition-contre-cnews-l-assemblee-prevoit-un-debat-sur-le-pluralisme-dans-les-medias",
@@ -1505,11 +1543,11 @@
    },
    "fait": "L’Assemblée prévoit un débat sur le pluralisme dans les médias",
    "accroche": "L’Assemblée prévoit un débat sur le pluralisme dans les médias",
-   "essentiel": "L’Assemblée prévoit un débat sur le pluralisme dans les médias. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "L’Assemblée prévoit un débat sur le pluralisme dans les médias. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1522,6 +1560,12 @@
     "vignette": "gouvernement"
    },
    "articles": [
+    {
+     "titre": "Énergie. Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement",
+     "url": "https://www.leprogres.fr/economie/2026/11/17/le-diesel-a-baisse-de-pres-de-21-centimes-dans-plus-de-90-des-stations-assure-le-gouvernement",
+     "media": "Le Progrès",
+     "date": "2026-11-17T08:38:00.000Z"
+    },
     {
      "titre": "Énergie. Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement",
      "url": "https://www.dna.fr/economie/2026/11/17/le-diesel-a-baisse-de-pres-de-21-centimes-dans-plus-de-90-des-stations-assure-le-gouvernement",
@@ -1547,7 +1591,7 @@
    },
    "fait": "Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement",
    "accroche": "Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement",
-   "essentiel": "Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Le diesel a baissé de près de 21 centimes dans plus de 90% des stations, assure le gouvernement. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Gouvernement",
    "chiffre": {
     "valeur": "90",
@@ -1555,7 +1599,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1575,6 +1619,12 @@
      "date": "2026-11-17T07:39:00.000Z"
     },
     {
+     "titre": "Télévision. « Vous êtes malades ! » : une invitée de Franceinfo furieuse après la mention de son compagnon",
+     "url": "https://www.leprogres.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
+     "media": "Le Progrès",
+     "date": "2026-11-17T07:39:00.000Z"
+    },
+    {
      "titre": "Télévision. « Vous êtes malades ! » : Anne-Cécile Mailfert furieuse contre FranceTV après la mention de son compagnon",
      "url": "https://www.ledauphine.com/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
      "media": "Le Dauphiné libéré",
@@ -1591,10 +1641,13 @@
     "titre": "Mention de son compagnon",
     "origine": "recoupement"
    },
+   "fait": "Une invitée de Franceinfo furieuse après la mention de son compagnon",
+   "accroche": "Une invitée de Franceinfo furieuse après la mention de son compagnon",
+   "essentiel": "Une invitée de Franceinfo furieuse après la mention de son compagnon. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Progrès, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1607,6 +1660,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
+     "url": "https://www.leprogres.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
+     "media": "Le Progrès",
+     "date": "2026-11-17T05:30:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
      "url": "https://www.dna.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
@@ -1633,7 +1692,7 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1664,6 +1723,12 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. « C'est pas l'URSS » : Mélenchon et Le Pen s'écharpent sur le Smic lors du débat sur le pouvoir d'achat",
+     "url": "https://www.leprogres.fr/politique/2026/11/16/c-est-pas-l-urss-melenchon-et-le-pen-s-echarpent-sur-le-smic-lors-du-debat-sur-le-pouvoir-d-achat",
+     "media": "Le Progrès",
+     "date": "2026-11-16T20:52:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « C'est pas l'URSS » : Mélenchon et Le Pen s'écharpent sur le Smic lors du débat sur le pouvoir d'achat",
      "url": "https://www.dna.fr/politique/2026/11/16/c-est-pas-l-urss-melenchon-et-le-pen-s-echarpent-sur-le-smic-lors-du-debat-sur-le-pouvoir-d-achat",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-16T20:52:00.000Z"
@@ -1690,7 +1755,7 @@
    ]
   },
   {
-   "medias": 2,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1703,6 +1768,12 @@
     "vignette": "international"
    },
    "articles": [
+    {
+     "titre": "Union européenne. Comment cinq pays, dont l'Allemagne, vont expulser des migrants vers le Rwanda",
+     "url": "https://www.leprogres.fr/societe/2026/11/16/comment-cinq-pays-dont-l-allemagne-vont-expulser-des-migrants-vers-le-rwanda",
+     "media": "Le Progrès",
+     "date": "2026-11-16T19:45:00.000Z"
+    },
     {
      "titre": "Union européenne. Comment cinq pays, dont l'Allemagne, vont expulser des migrants vers le Rwanda",
      "url": "https://www.dna.fr/societe/2026/11/16/comment-cinq-pays-dont-l-allemagne-vont-expulser-des-migrants-vers-le-rwanda",
@@ -2396,42 +2467,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-17T11:00:14.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le collectivisme de Mélenchon est-il un retour à 1981 ?",
-     "url": "https://www.nouvelobs.com/chroniques/20261117.OBS120201/le-collectivisme-de-melenchon-est-il-un-retour-a-1981.html",
-     "media": "L'Obs",
-     "date": "2026-11-17T11:00:14.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-17T10:59:17.000Z",
@@ -2547,8 +2582,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique",
    "contexte": [
@@ -2593,8 +2629,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Rassemblement national : ce qu'il faut savoir sur présidentielle 2027",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Budget",
    "contexte": [
@@ -2685,8 +2722,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Marine Le Pen veut faire reculer l’âge de départ à 62 ans",
    "accroche": "Marine Le Pen veut faire reculer l’âge de départ à 62 ans",
@@ -2696,46 +2734,13 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
+    },
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
+     "source": "Assemblée nationale (agenda officiel)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-17T10:49:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ? « Personne ne dit que ce sera facile »",
-     "url": "https://www.nouvelobs.com/politique/20261117.OBS120195/sortir-du-nucleaire-en-2060-comme-le-propose-jean-luc-melenchon-personne-ne-dit-que-ce-sera-facile.html",
-     "media": "L'Obs",
-     "date": "2026-11-17T10:49:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ?",
-   "accroche": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ?",
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2759,8 +2764,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Novembre",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique"
   },
@@ -3226,9 +3232,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Public",
+    "origine": "dossier"
    },
    "fait": "Grève du 17 novembre : la fonction publique en grève, des manifestations prévues",
    "accroche": "Grève du 17 novembre : la fonction publique en grève, des manifestations prévues",
@@ -3428,8 +3433,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "International",
    "contexte": [
@@ -3516,6 +3522,7 @@
      {
       "nom": "Hervé de Lépinau",
       "photo": "photos/deputes/PA642988.jpg",
+      "photoHd": "photos/deputes/hd/PA642988.jpg",
       "parti": "RN",
       "lien": "#depute-PA642988",
       "credit": "Assemblée nationale"
@@ -3548,6 +3555,36 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-17T09:18:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lyon. Grève du 17 novembre : le cortège atteint la Guillotière, les rassemblements interdits en Presqu'île",
+     "url": "https://www.leprogres.fr/social/2026/11/17/greve-du-17-novembre-a-lyon-depart-de-la-manifestation-a-11-heures-de-la-manufacture-des-tabacs",
+     "media": "Le Progrès",
+     "date": "2026-11-17T09:18:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lyon : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Grève du 17 novembre : le cortège atteint la Guillotière, les rassemblements interdits en Presqu'île",
+   "accroche": "Grève du 17 novembre : le cortège atteint la Guillotière, les rassemblements interdits en Presqu'île",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4143,9 +4180,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Public",
+    "origine": "dossier"
    },
    "rubrique": "Politique"
   },
@@ -4384,8 +4420,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Marine Le Pen confirme sur LCI ses orientations antisociales",
    "accroche": "Marine Le Pen confirme sur LCI ses orientations antisociales",
@@ -4677,6 +4714,44 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-17T06:45:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ? « Personne ne dit que ce sera facile »",
+     "url": "https://www.nouvelobs.com/politique/20261117.OBS120195/sortir-du-nucleaire-en-2060-comme-le-propose-jean-luc-melenchon-personne-ne-dit-que-ce-sera-facile.html",
+     "media": "L'Obs",
+     "date": "2026-11-17T06:45:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ?",
+   "accroche": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ?",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France 24"
    ],
    "derniere": "2026-11-17T06:29:49.000Z",
@@ -4856,6 +4931,36 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-17T06:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Châtillon-sur-Chalaronne. Cinéma L’Étoile : quel avenir après le redressement judiciaire de l'exploitant ?",
+     "url": "https://www.leprogres.fr/politique/2026/11/17/cinema-l-etoile-quel-avenir-apres-le-redressement-judiciaire-de-cineode",
+     "media": "Le Progrès",
+     "date": "2026-11-17T06:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Quel avenir après le redressement judiciaire de l'exploitant ?",
+   "accroche": "Quel avenir après le redressement judiciaire de l'exploitant ?",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -5050,33 +5155,6 @@
     "origine": "regles"
    },
    "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-17T05:45:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La commune peut-elle échapper à la loi ? Ce vif débat sur l’urbanisme se poursuit à Roquefort-les-Pins, on fait le point sur le dossier",
-     "url": "https://www.nicematin.com/societe/urbanisme/la-commune-peut-elle-echapper-a-la-loi-ce-vif-debat-sur-l-urbanisme-se-poursuit-a-roquefort-les-pins-on-fait-le-point-sur-le-dossier-10757379",
-     "media": "Nice-Matin",
-     "date": "2026-11-17T05:45:10.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Aménagement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
   }
  ]
 }
