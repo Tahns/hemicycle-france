@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T06:25:48.170Z",
+ "lastUpdated": "2026-11-17T06:31:04.359Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -475,6 +475,7 @@
     "marine"
    ],
    "medias": [
+    "Libération",
     "BFMTV",
     "La Dépêche",
     "Le Monde",
@@ -487,8 +488,9 @@
     "20 Minutes",
     "Le JDD"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 11,
    "sources": [
+    "Libération",
     "BFMTV",
     "La Dépêche",
     "Le Monde",
@@ -500,9 +502,15 @@
     "Public Sénat",
     "20 Minutes"
    ],
-   "nb": 20,
-   "derniere": "2026-11-17T06:06:50.000Z",
+   "nb": 21,
+   "derniere": "2026-11-17T06:25:13.000Z",
    "articles": [
+    {
+     "media": "Libération",
+     "titre": "Sur le financement des associations, un front républicain bienvenu contre Marine Le Pen",
+     "url": "https://www.liberation.fr/politique/sur-le-financement-des-associations-un-front-republicain-bienvenu-contre-marine-le-pen-20261117_BYBIUKIKSRDW5I3MVV5PFGTPSY/",
+     "date": "2026-11-17T06:25:13.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - Jean-Luc Mélenchon et Marine Le Pen, les candidats les plus plébiscités, mais aussi les plus rejetés par les Français",
@@ -533,12 +541,6 @@
      "titre": "Marine Le Pen",
      "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
      "date": "2026-11-16T22:39:32.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Présidentielle 2027: Marine Le Pen défend une \"prime d'activité étudiante\" et le permis gratuit pour les jeunes",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-marine-le-pen-defend-une-prime-d-activite-etudiante-et-le-permis-gratuit-pour-les-jeunes_AD-202611160977.html",
-     "date": "2026-11-16T22:39:31.000Z"
     },
     {
      "media": "France 24",
@@ -1586,6 +1588,79 @@
    "fait": "Un «acte V» marqué par une affluence un peu moindre",
    "accroche": "Un «acte V» marqué par une affluence un peu moindre",
    "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-17T06:25:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sur le financement des associations, un front républicain bienvenu contre Marine Le Pen",
+     "url": "https://www.liberation.fr/politique/sur-le-financement-des-associations-un-front-republicain-bienvenu-contre-marine-le-pen-20261117_BYBIUKIKSRDW5I3MVV5PFGTPSY/",
+     "media": "Libération",
+     "date": "2026-11-17T06:25:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine",
+    "origine": "dossier"
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-17T06:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "RN : le complotisme aux relents antisémites d’une membre du conseil national du parti",
+     "url": "https://www.liberation.fr/politique/rn-le-complotisme-aux-relents-antisemites-dune-membre-du-conseil-national-du-parti-20261117_6P5SPVRW6RDAFDDHHZKLU5EJLQ/",
+     "media": "Libération",
+     "date": "2026-11-17T06:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rassemblement national : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
    "rubrique": "Politique"
   },
   {
@@ -3687,8 +3762,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Marine Le Pen défend une \"prime d'activité étudiante\" et le permis gratuit pour les jeunes",
    "accroche": "Marine Le Pen défend une \"prime d'activité étudiante\" et le permis gratuit pour les jeunes",
@@ -4931,86 +5007,6 @@
     "generique": true
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-16T19:25:55.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Emmanuel Macron",
-     "url": "https://www.bfmtv.com/politique/emmanuel-macron_DN-201609010121.html",
-     "media": "BFMTV",
-     "date": "2026-11-16T19:25:55.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-16T19:22:49.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Primaire de la droite et du centre : réunion décisive ce mardi entre les représentants des candidats, mais sans Édouard Philippe",
-     "url": "https://www.europe1.fr/politique/primaire-de-la-droite-et-du-centre-reunion-decisive-ce-mardi-entre-les-representants-des-candidats-mais-sans-edouard-philippe-1238208?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-16T19:22:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Réunion décisive ce mardi entre les représentants des candidats, mais sans Édouard Philippe",
-   "accroche": "Réunion décisive ce mardi entre les représentants des candidats, mais sans Édouard Philippe",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   }
  ]
 }
