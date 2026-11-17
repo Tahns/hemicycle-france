@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T18:01:04.026Z",
+ "lastUpdated": "2026-11-17T18:05:39.604Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -155,11 +155,13 @@
    "motifs": [
     "présidentielle",
     "candidats",
-    "suspend",
-    "ambassadeur"
+    "primaire",
+    "suspend"
    ],
    "medias": [
+    "Europe 1",
     "20 Minutes",
+    "Nice-Matin",
     "BFMTV",
     "Valeurs actuelles",
     "Libération",
@@ -170,46 +172,56 @@
     "L'Est républicain",
     "RFI",
     "Le JDD",
-    "Europe 1",
     "L'Obs",
     "Le Monde",
     "Public Sénat",
     "L'Humanité",
     "France Inter",
     "La Croix",
-    "Nice-Matin",
     "Mediapart",
     "France 24",
     "Ouest-France"
    ],
    "mediasDistincts": 17,
    "sources": [
+    "Groupe Bolloré",
     "20 Minutes",
+    "Nice-Matin",
     "BFMTV",
     "Valeurs actuelles",
     "Libération",
     "La Dépêche",
     "EBRA",
     "France Médias Monde",
-    "Groupe Bolloré",
     "L'Obs",
     "Le Monde",
     "Public Sénat",
     "L'Humanité",
     "France Inter",
     "La Croix",
-    "Nice-Matin",
     "Mediapart",
     "Ouest-France"
    ],
-   "nb": 97,
-   "derniere": "2026-11-17T17:56:26.000Z",
+   "nb": 99,
+   "derniere": "2026-11-17T18:05:09.000Z",
    "articles": [
+    {
+     "media": "Europe 1",
+     "titre": "Élection présidentielle 2027 : Gabriel Attal, David Lisnard et Bruno Retailleau s'accordent sur une primaire en janvier",
+     "url": "https://www.europe1.fr/politique/election-presidentielle-2027-gabriel-attal-david-lisnard-et-bruno-retailleau-saccordent-sur-une-primaire-en-janvier-1239033?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-17T18:05:09.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Présidentielle 2027 : L’Unicef suspend la mission d’ambassadeur de Teddy Riner",
      "url": "https://www.20minutes.fr/politique/4263666-20261117-presidentielle-2027-unicef-suspend-mission-ambassadeur-teddy-riner?at_medium=display&at_campaign=149",
      "date": "2026-11-17T17:56:26.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« Réelle manipulation » : un groupe Facebook de 25.000 membres consacré aux sorties dans le Lot détourné au profit du candidat à la présidentielle David Lisnard",
+     "url": "https://www.nicematin.com/societe/politique/reelle-manipulation-un-groupe-facebook-de-25-000-membres-consacre-aux-sorties-dans-le-lot-detourne-au-profit-du-candidat-a-la-presidentielle-david-lisnard-10762895",
+     "date": "2026-11-17T17:52:02.000Z"
     },
     {
      "media": "BFMTV",
@@ -273,12 +285,6 @@
      "date": "2026-11-17T17:00:10.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Âge de départ, «pilier de capitalisation obligatoire»... Ce qu'il faut retenir du projet du RN pour les retraites",
-     "url": "https://www.europe1.fr/societe/age-de-depart-pilier-de-capitalisation-obligatoire-ce-quil-faut-retenir-du-projet-du-rn-pour-les-retraites-1238868?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-17T16:27:00.000Z"
-    },
-    {
      "media": "L'Obs",
      "titre": "Glucksmann à l’offensive, Le Pen acculée sur les assos… Que s’est-il passé lors du débat présidentiel des Restos du Cœur ?",
      "url": "https://www.nouvelobs.com/politique/20261117.OBS120194/glucksmann-a-l-offensive-le-pen-acculee-sur-les-assos-que-s-est-il-passe-au-debat-presidentiel-des-restos-du-c-ur.html",
@@ -313,12 +319,6 @@
      "titre": "Présidentielle 2027 : cinq candidats confrontent leurs positions sur la pauvreté",
      "url": "https://www.la-croix.com/societe/presidentielle-2027-cinq-candidats-confrontent-leurs-positions-sur-la-pauvrete-20261117",
      "date": "2026-11-17T11:08:50.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Grève du 17 novembre : ce qu’il faut retenir de la mobilisation dans les Alpes-Maritimes et le Var",
-     "url": "https://www.nicematin.com/societe/greves/greve-du-17-novembre-la-fonction-publique-en-greve-ce-mardi-des-manifestations-prevues-a-nice-et-toulon-suivez-les-informations-en-direct-10762445",
-     "date": "2026-11-17T09:51:57.000Z"
     },
     {
      "media": "Mediapart",
@@ -518,40 +518,48 @@
    ]
   },
   {
-   "id": "social",
-   "titre": "Social",
+   "id": "mobilisation",
+   "titre": "Mobilisation",
    "motifs": [
-    "social"
+    "mobilisation"
    ],
    "medias": [
-    "Libération",
-    "BFMTV",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Sud Ouest",
-    "L'Humanité",
-    "Le Monde",
-    "Europe 1",
-    "L'Obs",
-    "Nice-Matin"
-   ],
-   "mediasDistincts": 9,
-   "sources": [
     "Libération",
+    "Hugo Décrypte",
+    "Le Dauphiné libéré",
+    "Sud Ouest",
+    "Le Progrès",
+    "L'Est républicain",
+    "L'Humanité",
     "BFMTV",
+    "Le Monde",
+    "Public Sénat",
+    "Nice-Matin",
+    "France 24"
+   ],
+   "mediasDistincts": 10,
+   "sources": [
     "EBRA",
+    "Libération",
+    "Hugo Décrypte",
     "Sud Ouest",
     "L'Humanité",
+    "BFMTV",
     "Le Monde",
-    "Europe 1",
-    "L'Obs",
-    "Nice-Matin"
+    "Public Sénat",
+    "Nice-Matin",
+    "France 24"
    ],
-   "nb": 13,
-   "derniere": "2026-11-17T17:50:46.000Z",
+   "nb": 19,
+   "derniere": "2026-11-17T18:05:00.000Z",
    "articles": [
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Haut-Rhin. Mobilisation en baisse mais la colère des fonctionnaires est intacte à Mulhouse",
+     "url": "https://www.dna.fr/education/2026/11/17/mobilisation-en-baisse-mais-la-colere-des-fonctionnaires-est-intacte-a-mulhouse",
+     "date": "2026-11-17T18:05:00.000Z"
+    },
     {
      "media": "Libération",
      "titre": "EN DIRECT – Mobilisation sociale : 146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
@@ -559,28 +567,34 @@
      "date": "2026-11-17T17:50:46.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Réforme des retraites du RN: \"Nous sommes attachés à ce que la retraite redevienne un instrument de justice sociale\", indique Julien Odoul (RN)",
-     "url": "https://www.bfmtv.com/politique/video-reforme-des-retraites-du-rn-nous-sommes-attaches-a-ce-que-la-retraite-redevienne-un-instrument-de-justice-sociale-indique-julien-odoul-rn_VN-202611170772.html",
-     "date": "2026-11-17T17:06:46.000Z",
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Moosch. Sur la déchetterie mobile, les élus se donnent le temps de la réflexion",
+     "url": "https://www.dna.fr/politique/2026/11/17/sur-la-dechetterie-mobile-les-elus-se-donnent-le-temps-de-la-reflexion",
+     "date": "2026-11-17T17:25:00.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "500000 personnes se sont mobilisées en France ce mardi selon la CDGT / 146 000 selon le gouvernement",
+     "url": "https://www.youtube.com/shorts/4bs_rbzPxOg",
+     "date": "2026-11-17T17:16:06.000Z",
      "video": true
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Aubenas. Manifestation du 17 novembre : entre 450 et 500 personnes toujours mobilisées",
+     "url": "https://www.ledauphine.com/education/2026/11/17/manifestation-du-17-novembre-entre-450-et-500-personnes-toujours-mobilisees",
+     "date": "2026-11-17T17:05:48.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Mobilisation du 17 novembre : « Effet d’annonce », « miettes »… malgré les annonces du gouvernement, un millier de personnes ont défilé à Bayonne",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/bayonne/mobilisation-du-17-novembre-effet-d-annonce-miettes-malgre-les-annonces-du-gouvernement-un-millier-de-personnes-ont-defile-a-bayonne-31562461.php",
+     "date": "2026-11-17T16:59:00.000Z"
     },
     {
      "media": "Le Progrès",
      "titre": "Social. Grève du 17 novembre : mobilisation en baisse ce mardi, entre 146 000 et 500 000 manifestants",
      "url": "https://www.leprogres.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
-     "date": "2026-11-17T16:38:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Grève du 17 novembre : mobilisation en baisse ce mardi, entre 146 000 et 500 000 manifestants",
-     "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
-     "date": "2026-11-17T16:38:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Social. Grève du 17 novembre : mobilisation en baisse ce mardi, entre 146 000 et 500 000 manifestants",
-     "url": "https://www.ledauphine.com/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
      "date": "2026-11-17T16:38:00.000Z"
     },
     {
@@ -590,22 +604,17 @@
      "date": "2026-11-17T16:38:00.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "La Rochelle : après six mois de polémique, le maire Olivier Falorni annonce des mesures sociales pour les sans-abri",
-     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/la-rochelle-apres-six-mois-de-polemique-le-maire-olivier-falorni-annonce-des-mesures-sociales-pour-les-sans-abri-31559428.php",
-     "date": "2026-11-17T16:19:03.000Z"
-    },
-    {
      "media": "L'Humanité",
-     "titre": "Présidentielle 2027 : 60 ans ou 62 ans, capitalisation… l’enfumage social du projet de réforme des retraites du RN",
-     "url": "https://www.humanite.fr/politique/election-presidentielle/presidentielle-2027-60-ans-ou-62-ans-capitalisation-lenfumage-social-du-projet-de-reforme-des-retraites-du-rn",
-     "date": "2026-11-17T15:42:51.000Z"
+     "titre": "« Notre président est méprisant avec le peuple » : Christophe Dettinger, le boxeur des Gilets jaunes, solidaire de la mobilisation de la jeunesse",
+     "url": "https://www.humanite.fr/societe/christophe-dettinger/notre-president-est-meprisant-avec-le-peuple-christophe-dettinger-le-boxeur-des-gilets-jaunes-solidaire-de-la-mobilisation-de-la-jeunesse",
+     "date": "2026-11-17T16:00:00.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Les mouvements sociaux et l’après présidentielle suscitent l’inquiétude des fabricants de la marque « Elysée »",
-     "url": "https://www.lemonde.fr/economie/article/2026/11/17/entre-mouvements-sociaux-et-incertitude-politique-les-fabricants-de-la-marque-elysee-s-inquietent-pour-son-avenir_6812993_3234.html",
-     "date": "2026-11-17T15:25:31.000Z"
+     "media": "BFMTV",
+     "titre": "Mobilisation lycéenne: \"Une minorité d'élèves ultra-radicalisés empêche la majorité de bénéficier du droit à l'instruction\", dénonce Édouard Geffray, ministre de l'Éducation nationale",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-lyceenne-une-minorite-d-eleves-ultra-radicalises-empeche-la-majorite-de-beneficier-du-droit-a-l-instruction-denonce-edouard-geffray-ministre-de-l-education-nationale_VN-202611170641.html",
+     "date": "2026-11-17T14:12:40.000Z",
+     "video": true
     },
     {
      "media": "Le Monde",
@@ -614,22 +623,22 @@
      "date": "2026-11-17T13:58:29.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Les Trophées de l'Avenir 2026 : découvrez Cyril Berthier, Président de Alt Eco, qui concourt dans la catégorie Impact social",
-     "url": "https://www.europe1.fr/economie/les-trophees-de-lavenir-2026-decouvrez-cyril-berthier-president-de-alt-eco-qui-concourt-dans-la-categorie-impact-social-1238766?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-17T13:32:00.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
-     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
-     "date": "2026-11-17T07:56:20.000Z"
+     "media": "Public Sénat",
+     "titre": "« Smicardisation », « tassement des salaires » : les fonctionnaires appellent à la mobilisation ce mardi 17 novembre",
+     "url": "https://www.publicsenat.fr/actualites/societe/smicardisation-tassement-des-salaires-les-fonctionnaires-appellent-a-la-mobilisation-ce-mardi-17-novembre",
+     "date": "2026-11-17T11:53:06.000Z"
     },
     {
      "media": "Nice-Matin",
-     "titre": "À Nice, la montée de l’extrême droite, Éric Ciotti à la mairie et le climat social poussent la gauche à une réconciliation inattendue",
-     "url": "https://www.nicematin.com/societe/politique/a-nice-la-montee-de-l-extreme-droite-eric-ciotti-a-la-mairie-et-le-climat-social-poussent-la-gauche-a-une-reconciliation-inattendue-10752484",
-     "date": "2026-11-16T04:45:09.000Z"
+     "titre": "Salaire de base, primes, point d’indice, carrières... Quatre questions autour de la rémunération des agents publics mobilisés ce mardi 17 novembre",
+     "url": "https://www.nicematin.com/societe/politique/salaire-de-base-primes-point-d-indice-carrieres-quatre-questions-autour-de-la-remuneration-des-agents-publics-mobilises-ce-mardi-17-novembre-10762758",
+     "date": "2026-11-17T10:45:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Mobilisation en direct : 500 000 manifestants en France selon la CGT, 146 000 selon Beauvau",
+     "url": "https://www.france24.com/fr/france/20261117-en-direct-nouvelle-journ%C3%A9e-mobilisation-gr%C3%A8ve-fonction-publique-gilets-jaunes-pouvoir-achat-%C3%A9tudiants-lyc%C3%A9ens",
+     "date": "2026-11-17T06:57:54.000Z"
     }
    ]
   }
@@ -1718,7 +1727,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social",
+    "titre": "Mobilisation",
     "origine": "dossier"
    },
    "fait": "Grève du 17 novembre : mobilisation en baisse, entre 146 000 et 500 000 manifestants",
@@ -1949,6 +1958,180 @@
    "accroche": "Un «acte V» marqué par une affluence un peu moindre",
    "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-17T18:05:14.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Eurre | Val de Drôme. La mise en œuvre du SCoT de la Vallée de la Drôme Aval se poursuit",
+     "url": "https://www.ledauphine.com/politique/2026/11/17/la-mise-en-oeuvre-du-scot-de-la-vallee-de-la-drome-aval-se-poursuit",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-17T18:05:14.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-17T18:05:09.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Élection présidentielle 2027 : Gabriel Attal, David Lisnard et Bruno Retailleau s'accordent sur une primaire en janvier",
+     "url": "https://www.europe1.fr/politique/election-presidentielle-2027-gabriel-attal-david-lisnard-et-bruno-retailleau-saccordent-sur-une-primaire-en-janvier-1239033?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-17T18:05:09.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-17T18:05:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Haut-Rhin. Mobilisation en baisse mais la colère des fonctionnaires est intacte à Mulhouse",
+     "url": "https://www.dna.fr/education/2026/11/17/mobilisation-en-baisse-mais-la-colere-des-fonctionnaires-est-intacte-a-mulhouse",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-17T18:05:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mobilisation",
+    "origine": "dossier"
+   },
+   "fait": "Mobilisation en baisse mais la colère des fonctionnaires est intacte à Mulhouse",
+   "accroche": "Mobilisation en baisse mais la colère des fonctionnaires est intacte à Mulhouse",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-17T18:01:49.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Dunières. Bureau de tabac dans l’ancienne Poste : le conseil municipal dit non",
+     "url": "https://www.leprogres.fr/politique/2026/11/17/bureau-de-tabac-dans-l-ancienne-poste-le-conseil-municipal-dit-non",
+     "media": "Le Progrès",
+     "date": "2026-11-17T18:01:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Dunières : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Bureau de tabac dans l’ancienne Poste : le conseil municipal dit non",
+   "accroche": "Bureau de tabac dans l’ancienne Poste : le conseil municipal dit non",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-17T18:01:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Les Villettes. Six nouveaux élus au conseil municipal des enfants",
+     "url": "https://www.leprogres.fr/politique/2026/11/17/six-nouveaux-elus-au-conseil-municipal-des-enfants",
+     "media": "Le Progrès",
+     "date": "2026-11-17T18:01:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Les Villettes : conseil municipal",
+    "origine": "regles"
+   },
+   "fait": "Six nouveaux élus au conseil municipal des enfants",
+   "accroche": "Six nouveaux élus au conseil municipal des enfants",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2206,6 +2389,42 @@
    "fait": "Les élus à la découverte des coulisses du tri des déchets",
    "accroche": "Les élus à la découverte des coulisses du tri des déchets",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Nice-Matin"
+   ],
+   "derniere": "2026-11-17T17:52:02.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« Réelle manipulation » : un groupe Facebook de 25.000 membres consacré aux sorties dans le Lot détourné au profit du candidat à la présidentielle David Lisnard",
+     "url": "https://www.nicematin.com/societe/politique/reelle-manipulation-un-groupe-facebook-de-25-000-membres-consacre-aux-sorties-dans-le-lot-detourne-au-profit-du-candidat-a-la-presidentielle-david-lisnard-10762895",
+     "media": "Nice-Matin",
+     "date": "2026-11-17T17:52:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -3235,8 +3454,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Moosch : vie municipale",
-    "origine": "regles"
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "fait": "Sur la déchetterie mobile, les élus se donnent le temps de la réflexion",
    "accroche": "Sur la déchetterie mobile, les élus se donnent le temps de la réflexion",
@@ -3394,8 +3613,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "rubrique": "Gouvernement"
   },
@@ -3700,9 +3919,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Aubenas : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "fait": "Manifestation du 17 novembre : entre 450 et 500 personnes toujours mobilisées",
    "accroche": "Manifestation du 17 novembre : entre 450 et 500 personnes toujours mobilisées",
@@ -4069,8 +4287,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
+    "titre": "Mobilisation",
+    "origine": "dossier"
    },
    "rubrique": "Gouvernement"
   },
@@ -4533,33 +4751,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-17T16:37:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Thonon-les-Bains. Suppression de 30 postes municipaux envisagée : ce que révèle une note confidentielle de l'ancienne municipalité",
-     "url": "https://www.ledauphine.com/politique/2026/11/17/une-note-confidentielle-envisageait-la-suppression-de-30-postes-municipaux",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-17T16:37:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Thonon-les-Bains : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-17T16:36:00.000Z",
@@ -4646,6 +4837,50 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-17T16:32:58.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Marine Le Pen",
+     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
+     "media": "BFMTV",
+     "date": "2026-11-17T16:32:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4777,198 +5012,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-17T16:32:58.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Marine Le Pen",
-     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
-     "media": "BFMTV",
-     "date": "2026-11-17T16:32:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-17T16:27:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Âge de départ, «pilier de capitalisation obligatoire»... Ce qu'il faut retenir du projet du RN pour les retraites",
-     "url": "https://www.europe1.fr/societe/age-de-depart-pilier-de-capitalisation-obligatoire-ce-quil-faut-retenir-du-projet-du-rn-pour-les-retraites-1238868?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-17T16:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T16:26:11.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Une élève du lycée Pape Clément de Pessac blessée par un tir de mortier",
-     "url": "https://www.sudouest.fr/gironde/pessac/une-eleve-du-lycee-pape-clement-de-pessac-blessee-par-un-tir-de-mortier-31564349.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T16:26:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T16:19:03.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Rochelle : après six mois de polémique, le maire Olivier Falorni annonce des mesures sociales pour les sans-abri",
-     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/la-rochelle-apres-six-mois-de-polemique-le-maire-olivier-falorni-annonce-des-mesures-sociales-pour-les-sans-abri-31559428.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T16:19:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social",
-    "origine": "dossier"
-   },
-   "fait": "Le maire Olivier Falorni annonce des mesures sociales pour les sans-abri",
-   "accroche": "Le maire Olivier Falorni annonce des mesures sociales pour les sans-abri",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T16:19:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "La Jarrie : la municipalité sollicite plusieurs subventions pour ses projets",
-     "url": "https://www.sudouest.fr/charente-maritime/la-jarrie/la-jarrie-la-municipalite-sollicite-plusieurs-subventions-pour-ses-projets-31559659.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T16:19:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Jarrie : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T16:14:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Béarn : objet de nombreuses interrogations, E-CHO renvoie dos à dos opposants et porteurs du projet",
-     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pardies/bearn-objet-de-nombreuses-interrogations-le-projet-e-cho-a-renvoye-dos-a-dos-opposants-et-porteurs-du-projet-31565000.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T16:14:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Béarn : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   }
  ]
 }
