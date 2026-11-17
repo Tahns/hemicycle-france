@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T16:05:32.753Z",
+ "lastUpdated": "2026-11-17T16:10:55.398Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -155,14 +155,12 @@
    "motifs": [
     "présidentielle",
     "candidats",
-    "marine",
-    "capitalisation"
+    "pouvoir",
+    "primaire"
    ],
    "medias": [
     "Valeurs actuelles",
     "Le Monde",
-    "Le JDD",
-    "L'Express",
     "Public Sénat",
     "L'Humanité",
     "La Dépêche",
@@ -177,23 +175,24 @@
     "Le Dauphiné libéré",
     "L'Est républicain",
     "Sud Ouest",
+    "Le JDD",
     "La Croix",
     "Mediapart",
     "L'Obs",
     "RFI",
+    "France 24",
     "Ouest-France"
    ],
-   "mediasDistincts": 19,
+   "mediasDistincts": 18,
    "sources": [
     "Valeurs actuelles",
     "Le Monde",
-    "Groupe Bolloré",
-    "L'Express",
     "Public Sénat",
     "L'Humanité",
     "La Dépêche",
     "Libération",
     "Nice-Matin",
+    "Groupe Bolloré",
     "BFMTV",
     "20 Minutes",
     "France Inter",
@@ -202,10 +201,10 @@
     "La Croix",
     "Mediapart",
     "L'Obs",
-    "RFI",
+    "France Médias Monde",
     "Ouest-France"
    ],
-   "nb": 121,
+   "nb": 104,
    "derniere": "2026-11-17T16:04:39.000Z",
    "articles": [
     {
@@ -219,18 +218,6 @@
      "titre": "La présidentielle de 2027 et ses enjeux : l’immigration face à la réalité des chiffres",
      "url": "https://www.lemonde.fr/election-presidentielle-2027/article/2026/11/17/la-presidentielle-de-2027-et-ses-enjeux-l-immigration-face-a-la-realite-des-chiffres_6813002_6205049.html",
      "date": "2026-11-17T16:00:07.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Âge de départ, capitalisation, financement… Tout ce qu’il faut savoir sur la réforme des retraites de Marine Le Pen",
-     "url": "https://www.lejdd.fr/politique/age-de-depart-capitalisation-financement-tout-ce-quil-faut-savoir-sur-la-reforme-des-retraites-de-marine-le-pen-188985",
-     "date": "2026-11-17T15:56:06.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "Réforme des retraites : Marine Le Pen ou la stratégie de l’adaptation permanente",
-     "url": "https://www.lexpress.fr/politique/reforme-des-retraites-marine-le-pen-ou-la-strategie-de-ladaptation-permanente-XEAXIGQMOBENNBWJS3BDJ4WNI4/",
-     "date": "2026-11-17T15:54:03.000Z"
     },
     {
      "media": "Public Sénat",
@@ -318,6 +305,12 @@
      "date": "2026-11-17T11:50:25.000Z"
     },
     {
+     "media": "Le JDD",
+     "titre": "Présidentielle : Teddy Riner candidat, ou la métaphore de tout ce qui ne va plus dans notre démocratie",
+     "url": "https://www.lejdd.fr/politique/presidentielle-teddy-riner-ou-la-metaphore-de-tout-ce-qui-ne-va-plus-dans-notre-democratie-188910",
+     "date": "2026-11-17T11:31:50.000Z"
+    },
+    {
      "media": "La Croix",
      "titre": "Présidentielle 2027 : cinq candidats confrontent leurs positions sur la pauvreté",
      "url": "https://www.la-croix.com/societe/presidentielle-2027-cinq-candidats-confrontent-leurs-positions-sur-la-pauvrete-20261117",
@@ -342,6 +335,12 @@
      "date": "2026-11-17T05:48:15.000Z"
     },
     {
+     "media": "France 24",
+     "titre": "Impôts, logement, Smic... les candidats à la présidentielle débattent de leurs propositions",
+     "url": "https://www.france24.com/fr/france/20261116-imp%C3%B4ts-logement-smic-les-candidats-%C3%A0-la-pr%C3%A9sidentielle-d%C3%A9battent-de-leurs-propositions",
+     "date": "2026-11-16T22:39:30.000Z"
+    },
+    {
      "media": "Ouest-France",
      "titre": "Élection présidentielle 2027. Ce qu’il faut retenir du débat sur la solidarité, le pouvoir d’achat et la précarité",
      "url": "https://www.ouest-france.fr/elections/presidentielle/election-presidentielle-2027-ce-quil-faut-retenir-du-debat-sur-la-solidarite-le-pouvoir-dachat-et-la-precarite-f78247e6-e1dc-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
@@ -354,8 +353,8 @@
    "titre": "Retraites",
    "motifs": [
     "retraites",
-    "assure",
-    "majorité",
+    "marine",
+    "capitalisation",
     "départ"
    ],
    "medias": [
@@ -363,9 +362,10 @@
     "L'Express",
     "Public Sénat",
     "L'Humanité",
-    "BFMTV",
+    "France 24",
     "La Dépêche",
     "Nice-Matin",
+    "BFMTV",
     "Europe 1",
     "20 Minutes",
     "France Inter",
@@ -375,8 +375,7 @@
     "L'Est républicain",
     "Sud Ouest",
     "Le Monde",
-    "Libération",
-    "RFI"
+    "Libération"
    ],
    "mediasDistincts": 14,
    "sources": [
@@ -384,18 +383,18 @@
     "L'Express",
     "Public Sénat",
     "L'Humanité",
-    "BFMTV",
+    "France 24",
     "La Dépêche",
     "Nice-Matin",
+    "BFMTV",
     "20 Minutes",
     "France Inter",
     "EBRA",
     "Sud Ouest",
     "Le Monde",
-    "Libération",
-    "RFI"
+    "Libération"
    ],
-   "nb": 73,
+   "nb": 82,
    "derniere": "2026-11-17T15:56:06.000Z",
    "articles": [
     {
@@ -423,11 +422,10 @@
      "date": "2026-11-17T15:42:51.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Blocages des lycées: plus de \"10 000 élèves interpellés\", assure Laurent Nuñez",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-blocages-des-lycees-plus-de-10-000-eleves-interpelles-assure-laurent-nunez_VN-202611170687.html",
-     "date": "2026-11-17T15:28:29.000Z",
-     "video": true
+     "media": "France 24",
+     "titre": "Réforme des retraites de Marine Le Pen : départ à 60 ou 62 ans, capitalisation et conditions durcies",
+     "url": "https://www.france24.com/fr/france/20261117-france-presidentielle-2027-reforme-des-retraites-marine-le-pen-depart-a-60-ou-62-ans-capitalisation-conditions-durcies",
+     "date": "2026-11-17T15:31:35.000Z"
     },
     {
      "media": "La Dépêche",
@@ -440,6 +438,13 @@
      "titre": "Capitalisation, départ à 62 ans, pension majorée pour les mères : ce que contient la réforme des retraites de Marine Le Pen qui sera « engagée dès (son) arrivée au pouvoir »",
      "url": "https://www.nicematin.com/societe/politique/capitalisation-depart-a-62-ans-pension-majoree-pour-les-meres-ce-que-contient-la-reforme-des-retraites-de-marine-qui-sera-engagee-des-son-arrivee-au-pouvoir-10762839",
      "date": "2026-11-17T14:21:22.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Mobilisation lycéenne: \"Une minorité d'élèves ultra-radicalisés empêche la majorité de bénéficier du droit à l'instruction\", dénonce Édouard Geffray, ministre de l'Éducation nationale",
+     "url": "https://www.bfmtv.com/politique/video-mobilisation-lyceenne-une-minorite-d-eleves-ultra-radicalises-empeche-la-majorite-de-beneficier-du-droit-a-l-instruction-denonce-edouard-geffray-ministre-de-l-education-nationale_VN-202611170641.html",
+     "date": "2026-11-17T14:12:40.000Z",
+     "video": true
     },
     {
      "media": "Europe 1",
@@ -500,12 +505,6 @@
      "titre": "Retraites : Marine Le Pen veut permettre de partir entre 60 et 62 ans",
      "url": "https://www.liberation.fr/politique/elections/marine-le-pen-presente-son-projet-de-reforme-des-retraites-20261117_4PGOZBOHAJGRTN5SP3MQA6OCYE/",
      "date": "2026-11-17T11:21:56.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "France: l'Assurance maladie adresse un courrier aux jeunes de 29 ans pour les sensibiliser à la fertilité",
-     "url": "https://www.rfi.fr/fr/france/20261116-france-l-assurance-maladie-adresse-un-courrier-aux-jeunes-de-29-ans-pour-les-sensibiliser-%C3%A0-la-fertilit%C3%A9",
-     "date": "2026-11-16T04:05:07.000Z"
     }
    ]
   },
@@ -542,13 +541,13 @@
     "Nice-Matin"
    ],
    "nb": 15,
-   "derniere": "2026-11-17T16:01:38.000Z",
+   "derniere": "2026-11-17T16:05:33.000Z",
    "articles": [
     {
      "media": "Libération",
      "titre": "EN DIRECT – Mobilisation sociale : l’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
      "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
-     "date": "2026-11-17T16:01:38.000Z"
+     "date": "2026-11-17T16:05:33.000Z"
     },
     {
      "media": "L'Humanité",
@@ -803,64 +802,6 @@
    "rubrique": "Politique"
   },
   {
-   "medias": 4,
-   "mediasDistincts": 4,
-   "sources": [
-    "20 Minutes",
-    "La Dépêche",
-    "Libération",
-    "Ouest-France"
-   ],
-   "derniere": "2026-11-16T21:28:11.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
-     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
-     "media": "Libération",
-     "date": "2026-11-16T19:13:59.000Z"
-    },
-    {
-     "titre": "« Il y a eu des erreurs » mais j’ai fait « de mon mieux pour l’intérêt du pays », lâche Macron pour ses dix ans",
-     "url": "https://www.20minutes.fr/politique/4263405-20261116-erreurs-fait-mieux-interet-pays-lache-macron-dix-ans?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-16T21:28:11.000Z"
-    },
-    {
-     "titre": "\"Il y a eu parfois des erreurs\" : à six mois de la fin de son mandat, Emmanuel Macron assure avoir \"fait de mon mieux\"",
-     "url": "https://www.ladepeche.fr/2026/11/16/il-y-a-eu-parfois-des-erreurs-a-six-mois-de-la-fin-de-son-mandat-emmanuel-macron-assure-avoir-fait-de-mon-mieux-13655875.php",
-     "media": "La Dépêche",
-     "date": "2026-11-16T19:42:51.000Z"
-    },
-    {
-     "titre": "« J’ai fait de mon mieux » : dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs »",
-     "url": "https://www.ouest-france.fr/politique/emmanuel-macron/jai-fait-de-mon-mieux-dix-ans-apres-sa-candidature-le-president-emmanuel-macron-reconnait-des-erreurs-d2606a40-e1e3-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "media": "Ouest-France",
-     "date": "2026-11-16T18:15:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Mon mieux",
-    "origine": "recoupement"
-   },
-   "fait": "Emmanuel Macron assure avoir \"fait de mon mieux\"",
-   "accroche": "Emmanuel Macron assure avoir \"fait de mon mieux\"",
-   "essentiel": "À six mois de la fin de son mandat, Emmanuel Macron assure avoir \"fait de mon mieux\". Dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs ». Quatre médias en parlent : Libération, 20 Minutes, La Dépêche et Ouest-France.",
-   "rubrique": "Élysée 2027"
-  },
-  {
    "medias": 6,
    "mediasDistincts": 3,
    "sources": [
@@ -931,6 +872,53 @@
    ]
   },
   {
+   "medias": 4,
+   "mediasDistincts": 3,
+   "sources": [
+    "Le JDD",
+    "France Médias Monde",
+    "Le Monde"
+   ],
+   "derniere": "2026-11-17T08:00:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Impôts, logement, Smic: ce qu'il faut retenir du débat entre cinq candidats à la présidentielle française",
+     "url": "https://www.rfi.fr/fr/france/20261117-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-cinq-candidats-%C3%A0-la-pr%C3%A9sidentielle-fran%C3%A7aise",
+     "media": "RFI",
+     "date": "2026-11-17T05:48:15.000Z"
+    },
+    {
+     "titre": "Impôts, associations, logement... Ce qu'il faut retenir du grand débat présidentiel sur la vie chère",
+     "url": "https://www.lejdd.fr/politique/impots-associations-logement-ce-quil-faut-retenir-du-grand-debat-presidentiel-sur-la-vie-chere-188901",
+     "media": "Le JDD",
+     "date": "2026-11-17T08:00:37.000Z"
+    },
+    {
+     "titre": "Ce qu’il faut retenir du débat entre 5 candidats à la présidentielle : impôts, salaires, logement, retraite",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/17/impots-logement-smic-ce-qu-il-faut-retenir-du-debat-entre-candidats-a-la-presidentielle_6812895_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-17T04:33:10.000Z"
+    },
+    {
+     "titre": "Impôts, logement, Smic... les candidats à la présidentielle débattent de leurs propositions",
+     "url": "https://www.france24.com/fr/france/20261116-imp%C3%B4ts-logement-smic-les-candidats-%C3%A0-la-pr%C3%A9sidentielle-d%C3%A9battent-de-leurs-propositions",
+     "media": "France 24",
+     "date": "2026-11-16T22:39:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
@@ -978,43 +966,53 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Le JDD",
-    "RFI",
-    "Le Monde"
+    "Libération",
+    "France 24",
+    "Ouest-France"
    ],
-   "derniere": "2026-11-17T08:00:37.000Z",
+   "derniere": "2026-11-16T19:13:59.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Ce qu’il faut retenir du débat entre 5 candidats à la présidentielle : impôts, salaires, logement, retraite",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/17/impots-logement-smic-ce-qu-il-faut-retenir-du-debat-entre-candidats-a-la-presidentielle_6812895_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-17T04:33:10.000Z"
+     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
+     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
+     "media": "Libération",
+     "date": "2026-11-16T19:13:59.000Z"
     },
     {
-     "titre": "Impôts, associations, logement... Ce qu'il faut retenir du grand débat présidentiel sur la vie chère",
-     "url": "https://www.lejdd.fr/politique/impots-associations-logement-ce-quil-faut-retenir-du-grand-debat-presidentiel-sur-la-vie-chere-188901",
-     "media": "Le JDD",
-     "date": "2026-11-17T08:00:37.000Z"
+     "titre": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\"",
+     "url": "https://www.france24.com/fr/france/20261116-macron-assure-avoir-fait-de-son-mieux-malgr%C3%A9-des-erreurs",
+     "media": "France 24",
+     "date": "2026-11-16T18:35:29.000Z"
     },
     {
-     "titre": "Impôts, logement, Smic: ce qu'il faut retenir du débat entre cinq candidats à la présidentielle française",
-     "url": "https://www.rfi.fr/fr/france/20261117-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-cinq-candidats-%C3%A0-la-pr%C3%A9sidentielle-fran%C3%A7aise",
-     "media": "RFI",
-     "date": "2026-11-17T05:48:15.000Z"
+     "titre": "« J’ai fait de mon mieux » : dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs »",
+     "url": "https://www.ouest-france.fr/politique/emmanuel-macron/jai-fait-de-mon-mieux-dix-ans-apres-sa-candidature-le-president-emmanuel-macron-reconnait-des-erreurs-d2606a40-e1e3-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
+     "media": "Ouest-France",
+     "date": "2026-11-16T18:15:51.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
+    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Budget"
+   "fait": "Dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs »",
+   "accroche": "Dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs »",
+   "essentiel": "Dix ans après sa candidature, le président Emmanuel Macron reconnaît des « erreurs ». Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\". Trois médias en parlent : Libération, France 24 et Ouest-France.",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 5,
@@ -1138,57 +1136,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Le JDD",
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-17T15:56:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Âge de départ, capitalisation, financement… Tout ce qu’il faut savoir sur la réforme des retraites de Marine Le Pen",
-     "url": "https://www.lejdd.fr/politique/age-de-depart-capitalisation-financement-tout-ce-quil-faut-savoir-sur-la-reforme-des-retraites-de-marine-le-pen-188985",
-     "media": "Le JDD",
-     "date": "2026-11-17T15:56:06.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : départ légal à la retraite à 62 ans ou 60 ans, capitalisation... Marine Le Pen dévoile sa contre-réforme",
-     "url": "https://www.ladepeche.fr/2026/11/17/presidentielle-2027-depart-legal-a-la-retraite-a-62-ans-ou-60-ans-capitalisation-marine-le-pen-devoile-sa-contre-reforme-13657201.php",
-     "media": "La Dépêche",
-     "date": "2026-11-17T15:16:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "BFMTV",
     "La Dépêche"
    ],
@@ -1291,65 +1238,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "La Dépêche",
-    "France Inter"
-   ],
-   "derniere": "2026-11-17T13:03:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Présidentielle 2027 : Marine Le Pen assure que la réforme des retraites du RN \"est pleinement financée\" et promet un âge de départ entre 60 et 62 ans",
-     "url": "https://www.ladepeche.fr/2026/11/17/direct-presidentielle-2027-jai-fait-de-mon-mieux-malgre-des-erreurs-emmanuel-macron-fait-le-bilan-de-ses-annees-de-pouvoir-13655250.php",
-     "media": "La Dépêche",
-     "date": "2026-11-17T13:03:32.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : comment le RN compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/reforme-des-retraites-comment-le-rn-veut-il-financer-son-projet-7489386",
-     "media": "France Inter",
-     "date": "2026-11-17T12:01:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Présidentielle 2027 : comment le Rassemblement national compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
-   "accroche": "Présidentielle 2027 : comment le Rassemblement national compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
-   "essentiel": "Marine Le Pen assure que la réforme des retraites du Rassemblement national \"est pleinement financée\" et promet un âge de départ entre 60 et 62 ans. Deux médias en parlent : La Dépêche et France Inter.",
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ],
-   "chiffre": {
-    "valeur": "62",
-    "unite": "ans"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Le JDD",
     "Dernières Nouvelles d'Alsace"
    ],
@@ -1387,6 +1275,60 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "20 Minutes",
+    "France 24"
+   ],
+   "derniere": "2026-11-17T01:27:04.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+     "url": "https://www.20minutes.fr/politique/4263424-20261117-presidentielle-2027-pen-confirme-france-lachera-financierement-ukraine-si-elue?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-17T01:27:04.000Z"
+    },
+    {
+     "titre": "Ukraine : Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue",
+     "url": "https://www.france24.com/fr/france/20261116-ukraine-marine-le-pen-confirme-%C3%A0-l-ambassadeur-la-fin-de-l-aide-financi%C3%A8re-si-elle-est-%C3%A9lue",
+     "media": "France 24",
+     "date": "2026-11-16T21:46:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+   "accroche": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+   "essentiel": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue. Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue. Deux médias en parlent : 20 Minutes et France 24.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -1508,6 +1450,48 @@
     "valeur": "1",
     "unite": "milliard d’euros"
    }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Obs",
+    "France 24"
+   ],
+   "derniere": "2026-11-15T09:47:31.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron dénonce « ceux qui veulent rationner » l’aide à l’Ukraine et « l’obliger à une paix injuste »",
+     "url": "https://www.nouvelobs.com/politique/20261115.OBS120149/emmanuel-macron-denonce-ceux-qui-veulent-rationner-l-aide-l-ukraine-et-l-obliger-a-une-paix-injuste.html",
+     "media": "L'Obs",
+     "date": "2026-11-15T09:47:31.000Z"
+    },
+    {
+     "titre": "Macron dénonce \"ceux qui veulent rationner\" l’aide à l’Ukraine et \"l’obliger à une paix injuste\"",
+     "url": "https://www.france24.com/fr/france/20261114-macron-d%C3%A9nonce-ceux-qui-veulent-rationner-l-aide-%C3%A0-l-ukraine-et-l-obliger-%C3%A0-une-paix-injuste",
+     "media": "France 24",
+     "date": "2026-11-14T20:02:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
   },
   {
    "medias": 4,
@@ -1905,6 +1889,168 @@
    "rubrique": "Élysée 2027"
   },
   {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-16T19:38:46.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "France: deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+     "url": "https://www.rfi.fr/fr/france/20261116-france-deux-condamnations-%C3%A0-perp%C3%A9tuit%C3%A9-%C3%A0-l-issue-du-proc%C3%A8s-du-triple-narchomicide-pr%C3%A8s-de-marseille",
+     "media": "RFI",
+     "date": "2026-11-16T19:38:46.000Z"
+    },
+    {
+     "titre": "Triple narchomicide à Marseille en 2020 : deux accusés condamnés à la perpétuité",
+     "url": "https://www.france24.com/fr/france/20261116-triple-narchomicide-%C3%A0-marseille-en-2020-deux-accus%C3%A9s-condamn%C3%A9s-%C3%A0-la-perp%C3%A9tuit%C3%A9",
+     "media": "France 24",
+     "date": "2026-11-16T17:23:12.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Triple narchomicide",
+    "origine": "recoupement"
+   },
+   "fait": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+   "accroche": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+   "essentiel": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille. Triple narchomicide à Marseille en 2020 : deux accusés condamnés à la perpétuité. Deux médias en parlent : RFI et France 24.",
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-15T00:02:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Acte V du mouvement social : des revendications variées, une affluence en baisse",
+     "url": "https://www.france24.com/fr/france/20261114-acte-v-du-mouvement-social-des-revendications-vari%C3%A9es-une-affluence-en-baisse",
+     "media": "France 24",
+     "date": "2026-11-14T21:43:20.000Z"
+    },
+    {
+     "titre": "Mouvement social en France: un «acte V» marqué par une affluence un peu moindre",
+     "url": "https://www.rfi.fr/fr/france/20261115-mouvement-social-en-france-un-acte-v-marqu%C3%A9-par-une-affluence-un-peu-moindre",
+     "media": "RFI",
+     "date": "2026-11-15T00:02:20.000Z"
+    },
+    {
+     "titre": "Mobilisation en France: un «acte V» du mouvement social ce samedi avec des revendications variées",
+     "url": "https://www.rfi.fr/fr/france/20261114-mobilisation-en-france-un-acte-v-du-mouvement-social-ce-samedi-avec-des-revendications-vari%C3%A9es",
+     "media": "RFI",
+     "date": "2026-11-14T08:32:56.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mouvement social",
+    "origine": "recoupement"
+   },
+   "fait": "Un «acte V» marqué par une affluence un peu moindre",
+   "accroche": "Un «acte V» marqué par une affluence un peu moindre",
+   "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-17T16:09:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Grève du 17 novembre à Rochefort : pour Philippe Meirieu, « Parcoursup, c’est un self-service qui sert la société de consommation »",
+     "url": "https://www.sudouest.fr/politique/education/greve-du-17-novembre-a-rochefort-pour-philippe-meirieu-parcoursup-c-est-un-self-service-qui-sert-la-societe-de-consommation-31561672.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-17T16:09:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-17T16:05:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Mobilisation sociale : l’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
+     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
+     "media": "Libération",
+     "date": "2026-11-17T16:05:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Social",
+    "origine": "dossier"
+   },
+   "fait": "L’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
+   "accroche": "L’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-17T16:04:59.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "COP31 : le texte « ne va pas dans la bonne direction et doit être profondément remanié », un projet de compromis fraîchement accueilli",
+     "url": "https://www.sudouest.fr/environnement/conference-pour-le-climat/cop31-le-texte-ne-va-pas-dans-la-bonne-direction-et-doit-etre-profondement-remanie-un-projet-de-compromis-fraichement-accueilli-31565009.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-17T16:04:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
@@ -1965,30 +2111,28 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Libération"
+    "La Dépêche"
    ],
-   "derniere": "2026-11-17T16:01:38.000Z",
+   "derniere": "2026-11-17T16:01:05.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
+    "theme": "budget",
+    "vignette": "region"
    },
    "articles": [
     {
-     "titre": "EN DIRECT – Mobilisation sociale : l’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
-     "media": "Libération",
-     "date": "2026-11-17T16:01:38.000Z"
+     "titre": "Droit d'expression de l'opposition, risque de conflits d'intérêts, orientations budgétaires : la mairie de Montauban répond aux critiques de la chambre régionale des comptes",
+     "url": "https://www.ladepeche.fr/2026/11/17/droit-dexpression-de-lopposition-risque-de-conflits-dinterets-orientations-budgetaires-la-mairie-de-montauban-repond-aux-critiques-de-la-chambre-13657051.php",
+     "media": "La Dépêche",
+     "date": "2026-11-17T16:01:05.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Social",
-    "origine": "dossier"
+    "titre": "Finances publiques : réponse sur les finances publiques",
+    "origine": "regles"
    },
-   "fait": "L’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
-   "accroche": "L’interdiction de rassemblements autour de certains lycées et universités à Paris suspendue par la justice",
-   "rubrique": "Justice"
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2115,6 +2259,49 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-17T15:56:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Âge de départ, capitalisation, financement… Tout ce qu’il faut savoir sur la réforme des retraites de Marine Le Pen",
+     "url": "https://www.lejdd.fr/politique/age-de-depart-capitalisation-financement-tout-ce-quil-faut-savoir-sur-la-reforme-des-retraites-de-marine-le-pen-188985",
+     "media": "Le JDD",
+     "date": "2026-11-17T15:56:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Retraites",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Express"
    ],
    "derniere": "2026-11-17T15:54:03.000Z",
@@ -2142,9 +2329,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine Le Pen : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
+    "titre": "Retraites",
+    "origine": "dossier"
    },
    "rubrique": "Budget",
    "contexte": [
@@ -2152,11 +2338,6 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
-    },
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
     }
    ]
   },
@@ -2333,34 +2514,6 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-17T15:45:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Dominique Sopo : « CNews a une volonté, organisée, structurelle de banaliser la haine raciste dans notre pays »",
-     "url": "https://www.nouvelobs.com/planete-reac/20261116.OBS120189/dominique-sopo-cnews-a-une-volonte-organisee-structurelle-de-banaliser-la-haine-raciste-dans-notre-pays.html",
-     "media": "L'Obs",
-     "date": "2026-11-17T15:45:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Dominique Sopo : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2575,6 +2728,51 @@
     "generique": true
    },
    "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-17T15:31:35.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Réforme des retraites de Marine Le Pen : départ à 60 ou 62 ans, capitalisation et conditions durcies",
+     "url": "https://www.france24.com/fr/france/20261117-france-presidentielle-2027-reforme-des-retraites-marine-le-pen-depart-a-60-ou-62-ans-capitalisation-conditions-durcies",
+     "media": "France 24",
+     "date": "2026-11-17T15:31:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Retraites",
+    "origine": "dossier"
+   },
+   "fait": "Départ à 60 ou 62 ans, capitalisation et conditions durcies",
+   "accroche": "Départ à 60 ou 62 ans, capitalisation et conditions durcies",
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2994,6 +3192,49 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-17T15:16:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : départ légal à la retraite à 62 ans ou 60 ans, capitalisation... Marine Le Pen dévoile sa contre-réforme",
+     "url": "https://www.ladepeche.fr/2026/11/17/presidentielle-2027-depart-legal-a-la-retraite-a-62-ans-ou-60-ans-capitalisation-marine-le-pen-devoile-sa-contre-reforme-13657201.php",
+     "media": "La Dépêche",
+     "date": "2026-11-17T15:16:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-11-17T14:45:09.000Z",
@@ -3341,12 +3582,6 @@
      "url": "https://www.europe1.fr/sport/candidat-a-la-presidence-de-la-fifa-philippe-diallo-veut-la-fin-de-la-gouvernance-solitaire-1238778?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "media": "Europe 1",
      "date": "2026-11-17T14:19:45.000Z"
-    },
-    {
-     "titre": "Philippe Diallo candidat à la présidence de la Fifa : «Ça peut se jouer à pas grand-chose», estime Jean-François Pérès",
-     "url": "https://www.europe1.fr/sport/philippe-diallo-candidat-a-la-presidence-de-la-fifa-ca-peut-se-jouer-a-pas-grand-chose-estime-jean-francois-peres-1238151?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-16T18:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -3354,8 +3589,6 @@
     "origine": "regles",
     "generique": true
    },
-   "fait": "Jean-François Pérès estime : « Ça peut se jouer à pas grand-chose »",
-   "accroche": "Jean-François Pérès estime : « Ça peut se jouer à pas grand-chose »",
    "rubrique": "Élysée 2027"
   },
   {
@@ -3506,7 +3739,7 @@
    },
    "articles": [
     {
-     "titre": "Pour Jean-Luc Mélenchon, “la répression se durcit”",
+     "titre": "Pour Jean-Luc Mélenchon, « la répression se durcit »",
      "url": "https://www.humanite.fr/-/-/pour-jean-luc-melenchon-la-repression-se-durcit",
      "media": "L'Humanité",
      "date": "2026-11-17T14:05:07.000Z"
@@ -3996,6 +4229,51 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-17T13:03:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Présidentielle 2027 : Marine Le Pen assure que la réforme des retraites du RN \"est pleinement financée\" et promet un âge de départ entre 60 et 62 ans",
+     "url": "https://www.ladepeche.fr/2026/11/17/direct-presidentielle-2027-jai-fait-de-mon-mieux-malgre-des-erreurs-emmanuel-macron-fait-le-bilan-de-ses-annees-de-pouvoir-13655250.php",
+     "media": "La Dépêche",
+     "date": "2026-11-17T13:03:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-17T12:46:53.000Z",
@@ -4274,6 +4552,38 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Inter"
+   ],
+   "derniere": "2026-11-17T12:01:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : comment le RN compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/reforme-des-retraites-comment-le-rn-veut-il-financer-son-projet-7489386",
+     "media": "France Inter",
+     "date": "2026-11-17T12:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rassemblement national : ce qu'il faut savoir sur présidentielle 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Présidentielle 2027 : comment le Rassemblement national compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
+   "accroche": "Présidentielle 2027 : comment le Rassemblement national compte-t-il financer sa réforme des retraites et le départ entre 60 et 62 ans ?",
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -4767,297 +5077,6 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-17T11:19:04.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "«La bataille de France» ou l’étrange référence du camp Glucksmann",
-     "url": "https://www.liberation.fr/politique/la-bataille-de-france-ou-letrange-reference-du-camp-glucksmann-20261117_T6O5OLXAFVEYBLM3WZUPH7PNZ4/",
-     "media": "Libération",
-     "date": "2026-11-17T11:19:04.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-17T11:16:40.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Propos racistes de policiers municipaux à Carcassonne: les résultats d’une enquête bâclée",
-     "url": "https://www.mediapart.fr/journal/france/171126/propos-racistes-de-policiers-municipaux-carcassonne-les-resultats-d-une-enquete-baclee",
-     "media": "Mediapart",
-     "date": "2026-11-17T11:16:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Propos racistes de policiers municipaux à Carcassonne",
-   "accroche": "Propos racistes de policiers municipaux à Carcassonne",
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T11:14:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "À Ambarès-et-Lagrave, la nouvelle majorité veut une culture plus « populaire » et installe un conseil municipal des enfants",
-     "url": "https://www.sudouest.fr/gironde/ambares-et-lagrave/a-ambares-et-lagrave-la-nouvelle-majorite-veut-une-culture-plus-populaire-et-installe-un-conseil-municipal-des-enfants-31559150.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T11:14:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-17T11:12:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Isère. Crise sociale : 10 500 personnes à Grenoble selon la CGT, manifestation terminée à Voiron",
-     "url": "https://www.ledauphine.com/social/2026/11/17/isere-crise-sociale-quatre-manifestations-prevues-a-grenoble-voiron-bourgoin-jallieu-et-roussillon",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-17T11:12:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social",
-    "origine": "dossier"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-17T11:11:35.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Une maman solo sur trois est pauvre, comme l’affirme Mélenchon ?",
-     "url": "https://www.20minutes.fr/politique/4263505-20261117-presidentielle-2027-maman-solo-trois-pauvre-comme-affirme-melenchon?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-17T11:11:35.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : témoignage sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Pour la présidentielle 2027, une maman solo sur trois est pauvre, comme l’affirme Mélenchon ?",
-   "accroche": "Pour la présidentielle 2027, une maman solo sur trois est pauvre, comme l’affirme Mélenchon ?",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-17T11:10:10.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Le RN souhaite \"diviser par deux\" le déficit du système des retraites d'ici 2032",
-     "url": "https://www.bfmtv.com/politique/video-le-rn-souhaite-diviser-par-deux-le-deficit-du-systeme-des-retraites-d-ici-2032_VN-202611170490.html",
-     "media": "BFMTV",
-     "date": "2026-11-17T11:10:10.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : déclaration sur les finances publiques",
-    "origine": "regles"
-   },
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-17T11:08:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Koh-Lanta », « The Voice », Ligue 1… Nos idées de formats pour la primaire du bloc central",
-     "url": "https://www.20minutes.fr/politique/4263339-20261117-presidentielle-2027-koh-lanta-the-voice-ligue-1-idees-formats-primaire-bloc-central?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-17T11:08:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Croix"
-   ],
-   "derniere": "2026-11-17T11:08:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : cinq candidats confrontent leurs positions sur la pauvreté",
-     "url": "https://www.la-croix.com/societe/presidentielle-2027-cinq-candidats-confrontent-leurs-positions-sur-la-pauvrete-20261117",
-     "media": "La Croix",
-     "date": "2026-11-17T11:08:50.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-17T11:08:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Retraites: \"Notre réforme se déploiera de manière progressive pour être pleinement opérationnelle en 2032\", indique Jordan Bardella",
-     "url": "https://www.bfmtv.com/politique/video-retraites-notre-reforme-se-deploiera-de-maniere-progressive-pour-etre-pleinement-operationnelle-en-2032-indique-jordan-bardella_VN-202611170488.html",
-     "media": "BFMTV",
-     "date": "2026-11-17T11:08:32.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jordan Bardella : déclaration sur le social et l'emploi",
-    "origine": "regles"
-   },
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    },
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
     }
    ]
   }
