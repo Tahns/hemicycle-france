@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T20:15:47.412Z",
+ "lastUpdated": "2026-11-17T20:22:51.718Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -159,6 +159,7 @@
     "janvier"
    ],
    "medias": [
+    "BFMTV",
     "La Dépêche",
     "Public Sénat",
     "Sud Ouest",
@@ -166,7 +167,6 @@
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "BFMTV",
     "Le Monde",
     "RFI",
     "Nice-Matin",
@@ -177,17 +177,18 @@
     "Libération",
     "L'Obs",
     "France Inter",
-    "La Croix"
+    "La Croix",
+    "France 24"
    ],
    "mediasDistincts": 15,
    "sources": [
+    "BFMTV",
     "La Dépêche",
     "Public Sénat",
     "Sud Ouest",
     "EBRA",
-    "BFMTV",
     "Le Monde",
-    "RFI",
+    "France Médias Monde",
     "Nice-Matin",
     "Groupe Bolloré",
     "20 Minutes",
@@ -197,9 +198,16 @@
     "France Inter",
     "La Croix"
    ],
-   "nb": 123,
-   "derniere": "2026-11-17T20:09:47.000Z",
+   "nb": 129,
+   "derniere": "2026-11-17T20:16:17.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Dîner avec les grands patrons: Jean-Luc Mélenchon ne dîne finalement pas chez Drouant, comme c'était le cas précédemment pour Marine Le Pen",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-diner-avec-les-grands-patrons-jean-luc-melenchon-ne-dine-finalement-pas-chez-drouant-comme-c-etait-le-cas-precedemment-pour-marine-le-pen_VN-202611170924.html",
+     "date": "2026-11-17T20:16:17.000Z",
+     "video": true
+    },
     {
      "media": "La Dépêche",
      "titre": "Miss France 2027 : découvrez les portraits officiels des 31 candidates à l'élection en décembre",
@@ -241,13 +249,6 @@
      "titre": "Présidentielle 2027. Trois candidats, fin janvier, 2 euros : Attal, Retailleau et Lisnard avancent pour une primaire",
      "url": "https://www.estrepublicain.fr/politique/2026/11/17/trois-candidats-fin-janvier-2-euros-attal-retailleau-et-lisnard-avancent-pour-une-primaire",
      "date": "2026-11-17T20:05:00.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Michel Barnier confirme \"un accord pour une primaire fin janvier\", entre Attal, Retailleau et Lisnard",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-michel-barnier-confirme-un-accord-pour-une-primaire-fin-janvier-entre-attal-retailleau-et-lisnard_VN-202611170895.html",
-     "date": "2026-11-17T19:31:21.000Z",
-     "video": true
     },
     {
      "media": "Le Monde",
@@ -314,74 +315,220 @@
      "titre": "Présidentielle 2027 : cinq candidats confrontent leurs positions sur la pauvreté",
      "url": "https://www.la-croix.com/societe/presidentielle-2027-cinq-candidats-confrontent-leurs-positions-sur-la-pauvrete-20261117",
      "date": "2026-11-17T11:08:50.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Impôts, logement, Smic... les candidats à la présidentielle débattent de leurs propositions",
+     "url": "https://www.france24.com/fr/france/20261116-imp%C3%B4ts-logement-smic-les-candidats-%C3%A0-la-pr%C3%A9sidentielle-d%C3%A9battent-de-leurs-propositions",
+     "date": "2026-11-16T22:39:30.000Z"
     }
    ]
   },
   {
-   "id": "interieur",
-   "titre": "Intérieur",
+   "id": "novembre",
+   "titre": "Novembre",
    "motifs": [
-    "intérieur"
+    "novembre",
+    "grève",
+    "mardi"
+   ],
+   "medias": [
+    "Europe 1",
+    "L'Est républicain",
+    "Le Progrès",
+    "Le Dauphiné libéré",
+    "Dernières Nouvelles d'Alsace",
+    "Hugo Décrypte",
+    "La Dépêche",
+    "Le Monde",
+    "Libération",
+    "BFMTV",
+    "Public Sénat",
+    "Nice-Matin",
+    "20 Minutes",
+    "Mediapart",
+    "L'Obs",
+    "RFI",
+    "Le JDD"
+   ],
+   "mediasDistincts": 13,
+   "sources": [
+    "Groupe Bolloré",
+    "EBRA",
+    "Hugo Décrypte",
+    "La Dépêche",
+    "Le Monde",
+    "Libération",
+    "BFMTV",
+    "Public Sénat",
+    "Nice-Matin",
+    "20 Minutes",
+    "Mediapart",
+    "L'Obs",
+    "RFI"
+   ],
+   "nb": 30,
+   "derniere": "2026-11-17T19:30:00.000Z",
+   "articles": [
+    {
+     "media": "Europe 1",
+     "titre": "En direct - Grève du 17 novembre : «L'ultra gauche cherche à pourrir ces revendications», assure Jordan Bardella",
+     "url": "https://www.europe1.fr/politique/en-direct-greve-du-17-novembre-lultra-gauche-cherche-a-pourrir-ces-revendications-assure-jordan-bardella-1239039?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-17T19:30:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Ollans. 11-Novembre : Patrice Perruche médaillé pour dix années de bénévolat",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/17/11-novembre-patrice-perruche-medaille-pour-dix-annees-de-benevolat",
+     "date": "2026-11-17T19:22:07.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Écotay-l'Olme. Démocratie participative : réunion publique, le 20 novembre, salle du conseil",
+     "url": "https://www.leprogres.fr/politique/2026/11/17/democratie-participative-reunion-publique-le-20-novembre-salle-du-conseil",
+     "date": "2026-11-17T19:06:06.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Le Grand-Lemps. Rendez-vous ce 19 novembre pour le conseil municipal",
+     "url": "https://www.ledauphine.com/politique/2026/11/17/rendez-vous-ce-19-novembre-pour-le-conseil-municipal",
+     "date": "2026-11-17T18:27:44.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Mulhouse. Manifestation du 17 novembre : une mobilisation en baisse, mais une colère des fonctionnaires intacte",
+     "url": "https://www.dna.fr/education/2026/11/17/mobilisation-en-baisse-mais-la-colere-des-fonctionnaires-est-intacte-a-mulhouse",
+     "date": "2026-11-17T18:05:00.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "500000 personnes se sont mobilisées en France ce mardi selon la CDGT / 146 000 selon le gouvernement",
+     "url": "https://www.youtube.com/shorts/4bs_rbzPxOg",
+     "date": "2026-11-17T17:16:06.000Z",
+     "video": true
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "DIRECT. Manifestations du 17 novembre : le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France",
+     "url": "https://www.ladepeche.fr/2026/11/17/direct-manifestations-du-17-novembre-nouvel-appel-a-la-greve-des-syndicats-ce-mardi-220-000-a-300-000-personnes-attendues-13656543.php",
+     "date": "2026-11-17T16:46:31.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Manifestations du 17 novembre : entre 146 000, selon le gouvernement, et 500 000 personnes, selon la CGT, ont défilé en France ; revivez la journée de mobilisation",
+     "url": "https://www.lemonde.fr/politique/live/2026/11/17/en-direct-manifestations-du-17-novembre-a-paris-une-manifestation-calme-a-17-heures-ayant-rassemble-28-000-personnes-selon-la-prefecture-de-police_6812905_823448.html",
+     "date": "2026-11-17T16:28:59.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Un dîner chez Drouant ce mardi entre Jean-Luc Mélenchon, Bernard Arnault et Patrick Pouyanné : «Ça me fait plaisir de les voir»",
+     "url": "https://www.liberation.fr/politique/un-diner-chez-drouant-ce-mardi-entre-jean-luc-melenchon-bernard-arnault-et-patrick-pouyanne-20261117_HKHJG34XLZFVXCQJIBE7THWFQQ/",
+     "date": "2026-11-17T15:04:42.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Grève du 17 novembre: Jean-Luc Mélenchon dénonce un \"divorce\" entre les gens et le gouvernement",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-greve-du-17-novembre-jean-luc-melenchon-denonce-un-divorce-entre-les-gens-et-le-gouvernement_VN-202611170612.html",
+     "date": "2026-11-17T13:46:17.000Z",
+     "video": true
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Smicardisation », « tassement des salaires » : les fonctionnaires appellent à la mobilisation ce mardi 17 novembre",
+     "url": "https://www.publicsenat.fr/actualites/societe/smicardisation-tassement-des-salaires-les-fonctionnaires-appellent-a-la-mobilisation-ce-mardi-17-novembre",
+     "date": "2026-11-17T11:53:06.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Salaire de base, primes, point d’indice, carrières... Quatre questions autour de la rémunération des agents publics mobilisés ce mardi 17 novembre",
+     "url": "https://www.nicematin.com/societe/politique/salaire-de-base-primes-point-d-indice-carrieres-quatre-questions-autour-de-la-remuneration-des-agents-publics-mobilises-ce-mardi-17-novembre-10762758",
+     "date": "2026-11-17T10:45:00.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : Oui, Jean-Luc Mélenchon va dîner avec Bernard Arnault et Patrick Pouyanné ce mardi",
+     "url": "https://www.20minutes.fr/politique/4263467-20261117-presidentielle-2027-oui-jean-luc-melenchon-va-diner-bernard-arnault-patrick-pouyanne?at_medium=display&at_campaign=149",
+     "date": "2026-11-17T09:29:50.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Manifestations du 17 novembre: entre 146 000 et 500 000 personnes ont défilé en France",
+     "url": "https://www.mediapart.fr/journal/france/171126/manifestations-du-17-novembre-entre-146-000-et-500-000-personnes-ont-defile-en-france",
+     "date": "2026-11-17T08:42:04.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
+     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
+     "date": "2026-11-17T07:56:20.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Nouvelle journée de manifestations et de grève partout en France",
+     "url": "https://www.rfi.fr/fr/france/20261117-nouvelle-journ%C3%A9e-de-mobilisation-et-de-gr%C3%A8ve-partout-en-france",
+     "date": "2026-11-17T07:24:44.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Grève du 17 novembre et colère lycéenne : les rendez-vous, les perturbations et la réponse du gouvernement",
+     "url": "https://www.lejdd.fr/Societe/greve-du-17-novembre-et-colere-lyceenne-les-rendez-vous-les-perturbations-et-la-reponse-du-gouvernement-188895",
+     "date": "2026-11-16T17:10:29.000Z"
+    }
+   ]
+  },
+  {
+   "id": "manifestants",
+   "titre": "Manifestations",
+   "motifs": [
+    "manifestants",
+    "personnes"
    ],
    "medias": [
     "Libération",
     "L'Humanité",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
     "BFMTV",
-    "Sud Ouest",
-    "Nice-Matin",
+    "Le Dauphiné libéré",
+    "Dernières Nouvelles d'Alsace",
+    "Mediapart",
+    "Hugo Décrypte",
     "La Dépêche",
+    "L'Est républicain",
     "Le Monde",
+    "L'Obs",
     "Europe 1",
-    "20 Minutes"
+    "RFI",
+    "France 24",
+    "Nice-Matin"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 12,
    "sources": [
     "Libération",
     "L'Humanité",
-    "EBRA",
     "BFMTV",
-    "Sud Ouest",
-    "Nice-Matin",
+    "EBRA",
+    "Mediapart",
+    "Hugo Décrypte",
     "La Dépêche",
     "Le Monde",
+    "L'Obs",
     "Europe 1",
-    "20 Minutes"
+    "France Médias Monde",
+    "Nice-Matin"
    ],
-   "nb": 17,
-   "derniere": "2026-11-17T20:06:16.000Z",
+   "nb": 20,
+   "derniere": "2026-11-17T20:18:59.000Z",
    "articles": [
     {
      "media": "Libération",
      "titre": "EN DIRECT – Mobilisation sociale : 146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
      "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
-     "date": "2026-11-17T20:06:16.000Z"
+     "date": "2026-11-17T20:18:59.000Z"
     },
     {
      "media": "L'Humanité",
-     "titre": "À l’Assemblée, le RN fait sauter l’interdiction de la location des passoires thermiques… et s’en félicite",
-     "url": "https://www.humanite.fr/politique/acces-au-logement/a-lassemblee-le-rn-fait-sauter-linterdiction-de-la-location-des-passoires-thermiques-et-sen-felicite",
-     "date": "2026-11-17T19:19:58.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Interview. Raphaël Glucksmann : « Voter Jean-Luc Mélenchon n’a rien d’utile, il perdra au second tour »",
-     "url": "https://www.dna.fr/elections/2026/11/17/raphael-glucksmann-voter-jean-luc-melenchon-n-a-rien-d-utile-il-perdra-au-second-tour",
-     "date": "2026-11-17T19:00:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Interview. Raphaël Glucksmann : « Voter Jean-Luc Mélenchon n’a rien d’utile, il perdra au second tour »",
-     "url": "https://www.ledauphine.com/elections/2026/11/17/raphael-glucksmann-voter-jean-luc-melenchon-n-a-rien-d-utile-il-perdra-au-second-tour",
-     "date": "2026-11-17T19:00:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Interview. Raphaël Glucksmann : « Voter Jean-Luc Mélenchon n’a rien d’utile, il perdra au second tour »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/17/raphael-glucksmann-voter-jean-luc-melenchon-n-a-rien-d-utile-il-perdra-au-second-tour",
-     "date": "2026-11-17T19:00:00.000Z"
+     "titre": "L’opération de communication de Laurent Nuñez sur les blessures des policiers… pour éclipser celles des manifestants",
+     "url": "https://www.humanite.fr/politique/crs/loperation-de-communication-de-laurent-nunez-sur-les-blessures-des-policiers-pour-eclipser-celles-des-manifestants",
+     "date": "2026-11-17T18:53:08.000Z"
     },
     {
      "media": "BFMTV",
@@ -391,124 +538,10 @@
      "video": true
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Vidéo. Mobilisation sociale à Bordeaux : un temps interdit de parcours, le cortège « déterminé, offensif et pacifique » finit en fanfare et en toute légalité",
-     "url": "https://www.sudouest.fr/gironde/bordeaux/video-mobilisation-sociale-a-bordeaux-un-temps-interdit-de-parcours-le-cortege-determine-offensif-et-pacifique-finit-en-fanfare-et-en-toute-legalite-31565298.php",
-     "date": "2026-11-17T18:39:08.000Z",
-     "video": true
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Logement : un amendement RN supprime les interdictions de louer liées au diagnostic énergétique",
-     "url": "https://www.nicematin.com/societe/logement-un-amendement-rn-supprime-les-interdictions-de-louer-liees-au-diagnostic-energetique-10762919",
-     "date": "2026-11-17T18:22:32.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "DIRECT. Manifestations du 17 novembre : le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France",
-     "url": "https://www.ladepeche.fr/2026/11/17/direct-manifestations-du-17-novembre-nouvel-appel-a-la-greve-des-syndicats-ce-mardi-220-000-a-300-000-personnes-attendues-13656543.php",
-     "date": "2026-11-17T16:46:31.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Droit d'expression de l'opposition, risque de conflits d'intérêts, orientations budgétaires : la mairie de Montauban répond aux critiques de la chambre régionale des comptes",
-     "url": "https://www.ladepeche.fr/2026/11/17/droit-dexpression-de-lopposition-risque-de-conflits-dinterets-orientations-budgetaires-la-mairie-de-montauban-repond-aux-critiques-de-la-chambre-13657051.php",
-     "date": "2026-11-17T16:01:05.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Les députés LFI vont déposer une proposition de loi pour interdire l'utilisation en manifestations des gaz lacrymogènes, pointant de \"vives inquiétudes\" sur leurs effets",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/les-deputes-lfi-vont-deposer-une-proposition-de-loi-pour-interdire-l-utilisation-en-manifestations-des-gaz-lacrymogenes-pointant-de-vives-inquietudes-sur-leurs-effets_AN-202611170700.html",
-     "date": "2026-11-17T15:48:50.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Pétition pour interdire CNews : un débat élargi à tous les médias finalement organisé et déjà controversé",
-     "url": "https://www.lemonde.fr/economie/article/2026/11/17/petition-pour-interdire-cnews-un-debat-elargi-a-tous-les-medias-finalement-organise-et-deja-controverse_6812980_3234.html",
-     "date": "2026-11-17T14:20:00.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "En direct - Manifestations du 17 novembre : 146.000 manifestants en France, selon le ministère de l'Intérieur, plus de 500.000 personnes, selon la CGT",
-     "url": "https://www.europe1.fr/societe/en-direct-manifestations-du-17-novembre-146000-manifestants-en-france-selon-le-ministere-de-linterieur-plus-de-500000-personnes-selon-la-cgt-1238553?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-17T08:34:12.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "« Il y a eu des erreurs » mais j’ai fait « de mon mieux pour l’intérêt du pays », lâche Macron pour ses dix ans",
-     "url": "https://www.20minutes.fr/politique/4263405-20261116-erreurs-fait-mieux-interet-pays-lache-macron-dix-ans?at_medium=display&at_campaign=149",
-     "date": "2026-11-16T21:28:11.000Z"
-    }
-   ]
-  },
-  {
-   "id": "sociale",
-   "titre": "Sociale",
-   "motifs": [
-    "sociale",
-    "colère"
-   ],
-   "medias": [
-    "Libération",
-    "L'Humanité",
-    "RFI",
-    "BFMTV",
-    "Sud Ouest",
-    "Dernières Nouvelles d'Alsace",
-    "L'Est républicain",
-    "Le Monde",
-    "Europe 1",
-    "L'Obs",
-    "Le JDD",
-    "Nice-Matin"
-   ],
-   "mediasDistincts": 10,
-   "sources": [
-    "Libération",
-    "L'Humanité",
-    "RFI",
-    "BFMTV",
-    "Sud Ouest",
-    "EBRA",
-    "Le Monde",
-    "Groupe Bolloré",
-    "L'Obs",
-    "Nice-Matin"
-   ],
-   "nb": 15,
-   "derniere": "2026-11-17T20:06:16.000Z",
-   "articles": [
-    {
-     "media": "Libération",
-     "titre": "EN DIRECT – Mobilisation sociale : 146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
-     "date": "2026-11-17T20:06:16.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Arsenal sécuritaire, répression administrative… Comment le gouvernement attise toujours plus les braises de la colère lycéenne",
-     "url": "https://www.humanite.fr/societe/mouvement-lyceen/arsenal-securitaire-repression-administrative-comment-le-gouvernement-attise-toujours-plus-les-braises-de-la-colere-lyceenne",
-     "date": "2026-11-17T19:15:47.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "France: la colère sociale s'est encore faite entendre, malgré des cortèges moins fournis",
-     "url": "https://www.rfi.fr/fr/france/20261117-france-la-col%C3%A8re-sociale-s-est-encore-faite-entendre-malgr%C3%A9-des-cort%C3%A8ges-moins-fournis",
-     "date": "2026-11-17T19:14:20.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Colère sociale: Alexis Corbière, député \"L'Après\", pointe \"un système inégalitaire\"",
-     "url": "https://www.bfmtv.com/politique/video-colere-sociale-alexis-corbiere-depute-l-apres-pointe-un-systeme-inegalitaire_VN-202611170867.html",
-     "date": "2026-11-17T18:52:50.000Z",
-     "video": true
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Vidéo. Mobilisation sociale à Bordeaux : un temps interdit de parcours, le cortège « déterminé, offensif et pacifique » finit en fanfare et en toute légalité",
-     "url": "https://www.sudouest.fr/gironde/bordeaux/video-mobilisation-sociale-a-bordeaux-un-temps-interdit-de-parcours-le-cortege-determine-offensif-et-pacifique-finit-en-fanfare-et-en-toute-legalite-31565298.php",
-     "date": "2026-11-17T18:39:08.000Z",
-     "video": true
+     "media": "Le Dauphiné libéré",
+     "titre": "Bourgoin-Jallieu. 140 manifestants pour réclamer une hausse des salaires et des pensions",
+     "url": "https://www.ledauphine.com/education/2026/11/17/isere-bourgoin-jallieu-140-manifestants-pour-reclamer-une-hausse-des-salaires-et-des-pensions",
+     "date": "2026-11-17T18:37:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -517,17 +550,23 @@
      "date": "2026-11-17T18:05:00.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Réforme des retraites du RN: \"Nous sommes attachés à ce que la retraite redevienne un instrument de justice sociale\", indique Julien Odoul (RN)",
-     "url": "https://www.bfmtv.com/politique/video-reforme-des-retraites-du-rn-nous-sommes-attaches-a-ce-que-la-retraite-redevienne-un-instrument-de-justice-sociale-indique-julien-odoul-rn_VN-202611170772.html",
-     "date": "2026-11-17T17:06:46.000Z",
+     "media": "Mediapart",
+     "titre": "À Créteil, une manifestation tout en symboles pour «montrer qu’il n’y a pas de retour à la normale»",
+     "url": "https://www.mediapart.fr/journal/france/171126/creteil-une-manifestation-tout-en-symboles-pour-montrer-qu-il-n-y-pas-de-retour-la-normale",
+     "date": "2026-11-17T17:49:01.000Z"
+    },
+    {
+     "media": "Hugo Décrypte",
+     "titre": "500000 personnes se sont mobilisées en France ce mardi selon la CDGT / 146 000 selon le gouvernement",
+     "url": "https://www.youtube.com/shorts/4bs_rbzPxOg",
+     "date": "2026-11-17T17:16:06.000Z",
      "video": true
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Social. Grève du 17 novembre : mobilisation en baisse ce mardi, entre 146 000 et 500 000 manifestants",
-     "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
-     "date": "2026-11-17T16:38:00.000Z"
+     "media": "La Dépêche",
+     "titre": "DIRECT. Manifestations du 17 novembre : le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France",
+     "url": "https://www.ladepeche.fr/2026/11/17/direct-manifestations-du-17-novembre-nouvel-appel-a-la-greve-des-syndicats-ce-mardi-220-000-a-300-000-personnes-attendues-13656543.php",
+     "date": "2026-11-17T16:46:31.000Z"
     },
     {
      "media": "L'Est républicain",
@@ -537,33 +576,39 @@
     },
     {
      "media": "Le Monde",
-     "titre": "Les mouvements sociaux et l’après présidentielle suscitent l’inquiétude des fabricants de la marque « Elysée »",
-     "url": "https://www.lemonde.fr/economie/article/2026/11/17/entre-mouvements-sociaux-et-incertitude-politique-les-fabricants-de-la-marque-elysee-s-inquietent-pour-son-avenir_6812993_3234.html",
-     "date": "2026-11-17T15:25:31.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Les Trophées de l'Avenir 2026 : découvrez Cyril Berthier, Président de Alt Eco, qui concourt dans la catégorie Impact social",
-     "url": "https://www.europe1.fr/economie/les-trophees-de-lavenir-2026-decouvrez-cyril-berthier-president-de-alt-eco-qui-concourt-dans-la-categorie-impact-social-1238766?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-17T13:32:00.000Z"
+     "titre": "Manifestations du 17 novembre : entre 146 000, selon le gouvernement, et 500 000 personnes, selon la CGT, ont défilé en France ; revivez la journée de mobilisation",
+     "url": "https://www.lemonde.fr/politique/live/2026/11/17/en-direct-manifestations-du-17-novembre-a-paris-une-manifestation-calme-a-17-heures-ayant-rassemble-28-000-personnes-selon-la-prefecture-de-police_6812905_823448.html",
+     "date": "2026-11-17T16:28:59.000Z"
     },
     {
      "media": "L'Obs",
-     "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
-     "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
-     "date": "2026-11-17T07:56:20.000Z"
+     "titre": "Sortir du nucléaire en 2060 comme le propose Jean-Luc Mélenchon ? « Personne ne dit que ce sera facile »",
+     "url": "https://www.nouvelobs.com/politique/20261117.OBS120195/sortir-du-nucleaire-en-2060-comme-le-propose-jean-luc-melenchon-personne-ne-dit-que-ce-sera-facile.html",
+     "date": "2026-11-17T10:49:00.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Grève du 17 novembre et colère lycéenne : les rendez-vous, les perturbations et la réponse du gouvernement",
-     "url": "https://www.lejdd.fr/Societe/greve-du-17-novembre-et-colere-lyceenne-les-rendez-vous-les-perturbations-et-la-reponse-du-gouvernement-188895",
-     "date": "2026-11-16T17:10:29.000Z"
+     "media": "Europe 1",
+     "titre": "En direct - Manifestations du 17 novembre : 146.000 manifestants en France, selon le ministère de l'Intérieur, plus de 500.000 personnes, selon la CGT",
+     "url": "https://www.europe1.fr/societe/en-direct-manifestations-du-17-novembre-146000-manifestants-en-france-selon-le-ministere-de-linterieur-plus-de-500000-personnes-selon-la-cgt-1238553?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-17T08:34:12.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Nouvelle journée de manifestations et de grève partout en France",
+     "url": "https://www.rfi.fr/fr/france/20261117-nouvelle-journ%C3%A9e-de-mobilisation-et-de-gr%C3%A8ve-partout-en-france",
+     "date": "2026-11-17T07:24:44.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Mobilisation en direct : 500 000 manifestants en France selon la CGT, 146 000 selon Beauvau",
+     "url": "https://www.france24.com/fr/france/20261117-en-direct-nouvelle-journ%C3%A9e-mobilisation-gr%C3%A8ve-fonction-publique-gilets-jaunes-pouvoir-achat-%C3%A9tudiants-lyc%C3%A9ens",
+     "date": "2026-11-17T06:57:54.000Z"
     },
     {
      "media": "Nice-Matin",
-     "titre": "À Nice, la montée de l’extrême droite, Éric Ciotti à la mairie et le climat social poussent la gauche à une réconciliation inattendue",
-     "url": "https://www.nicematin.com/societe/politique/a-nice-la-montee-de-l-extreme-droite-eric-ciotti-a-la-mairie-et-le-climat-social-poussent-la-gauche-a-une-reconciliation-inattendue-10752484",
-     "date": "2026-11-16T04:45:09.000Z"
+     "titre": "Trente personnes tirées au sort, des ateliers, des rencontres… Dans ce village du centre Var, on tente de fabriquer un espace de démocratie",
+     "url": "https://www.nicematin.com/societe/politique/trente-personnes-tirees-au-sort-des-ateliers-des-rencontres-dans-ce-village-du-centre-var-on-tente-de-fabriquer-un-espace-de-democratie-10762239",
+     "date": "2026-11-16T18:30:08.000Z"
     }
    ]
   }
@@ -786,10 +831,10 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 4,
    "sources": [
-    "RFI",
+    "France Médias Monde",
     "Groupe Bolloré",
     "La Dépêche",
     "Nice-Matin"
@@ -830,6 +875,12 @@
      "date": "2026-11-17T15:56:06.000Z"
     },
     {
+     "titre": "Réforme des retraites de Marine Le Pen : départ à 60 ou 62 ans, capitalisation et conditions durcies",
+     "url": "https://www.france24.com/fr/france/20261117-france-presidentielle-2027-reforme-des-retraites-marine-le-pen-depart-a-60-ou-62-ans-capitalisation-conditions-durcies",
+     "media": "France 24",
+     "date": "2026-11-17T15:31:35.000Z"
+    },
+    {
      "titre": "Capitalisation, départ à 62 ans, pension majorée pour les mères : ce que contient la réforme des retraites de Marine Le Pen qui sera « engagée dès (son) arrivée au pouvoir »",
      "url": "https://www.nicematin.com/societe/politique/capitalisation-depart-a-62-ans-pension-majoree-pour-les-meres-ce-que-contient-la-reforme-des-retraites-de-marine-qui-sera-engagee-des-son-arrivee-au-pouvoir-10762839",
      "media": "Nice-Matin",
@@ -848,7 +899,7 @@
    },
    "fait": "Présidentielle 2027 : Marine Le Pen dévoile sa réforme des retraites qu'elle veut engager",
    "accroche": "Présidentielle 2027 : Marine Le Pen dévoile sa réforme des retraites qu'elle veut engager",
-   "essentiel": "Pour la présidentielle 2027, Marine Le Pen dévoile sa réforme des retraites qu'elle veut engager. Capitalisation, départ à 62 ans, pension majorée pour les mères. Cinq médias en parlent : La Dépêche, RFI, Le JDD, Nice-Matin et Europe 1.",
+   "essentiel": "Pour la présidentielle 2027, Marine Le Pen dévoile sa réforme des retraites qu'elle veut engager. Capitalisation, départ à 62 ans, pension majorée pour les mères. Six médias en parlent : La Dépêche, RFI, Le JDD, France 24, Nice-Matin et Europe 1.",
    "rubrique": "Budget",
    "contexte": [
     {
@@ -978,6 +1029,107 @@
    "rubrique": "Politique"
   },
   {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Le Monde",
+    "Europe 1",
+    "France 24"
+   ],
+   "derniere": "2026-11-17T16:28:59.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Manifestations du 17 novembre : entre 146 000, selon le gouvernement, et 500 000 personnes, selon la CGT, ont défilé en France ; revivez la journée de mobilisation",
+     "url": "https://www.lemonde.fr/politique/live/2026/11/17/en-direct-manifestations-du-17-novembre-a-paris-une-manifestation-calme-a-17-heures-ayant-rassemble-28-000-personnes-selon-la-prefecture-de-police_6812905_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-17T16:28:59.000Z"
+    },
+    {
+     "titre": "En direct - Manifestations du 17 novembre : 146.000 manifestants en France, selon le ministère de l'Intérieur, plus de 500.000 personnes, selon la CGT",
+     "url": "https://www.europe1.fr/societe/en-direct-manifestations-du-17-novembre-146000-manifestants-en-france-selon-le-ministere-de-linterieur-plus-de-500000-personnes-selon-la-cgt-1238553?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-17T08:34:12.000Z"
+    },
+    {
+     "titre": "Mobilisation en direct : 500 000 manifestants en France selon la CGT, 146 000 selon Beauvau",
+     "url": "https://www.france24.com/fr/france/20261117-en-direct-nouvelle-journ%C3%A9e-mobilisation-gr%C3%A8ve-fonction-publique-gilets-jaunes-pouvoir-achat-%C3%A9tudiants-lyc%C3%A9ens",
+     "media": "France 24",
+     "date": "2026-11-17T06:57:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Manifestations",
+    "origine": "dossier"
+   },
+   "rubrique": "Gouvernement",
+   "chiffre": {
+    "valeur": "500 000",
+    "unite": "personnes"
+   },
+   "date": {
+    "iso": "2026-11-17",
+    "jour": 17,
+    "mois": "novembre"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "20 Minutes",
+    "Libération",
+    "France 24"
+   ],
+   "derniere": "2026-11-16T21:28:11.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\"",
+     "url": "https://www.france24.com/fr/france/20261116-macron-assure-avoir-fait-de-son-mieux-malgr%C3%A9-des-erreurs",
+     "media": "France 24",
+     "date": "2026-11-16T18:35:29.000Z"
+    },
+    {
+     "titre": "« Il y a eu des erreurs » mais j’ai fait « de mon mieux pour l’intérêt du pays », lâche Macron pour ses dix ans",
+     "url": "https://www.20minutes.fr/politique/4263405-20261116-erreurs-fait-mieux-interet-pays-lache-macron-dix-ans?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-16T21:28:11.000Z"
+    },
+    {
+     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
+     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
+     "media": "Libération",
+     "date": "2026-11-16T19:13:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mon mieux",
+    "origine": "recoupement"
+   },
+   "accroche": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\"",
+   "essentiel": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\". Trois médias en parlent : France 24, 20 Minutes et Libération.",
+   "fait": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\"",
+   "rubrique": "Élysée 2027"
+  },
+  {
    "medias": 5,
    "mediasDistincts": 2,
    "sources": [
@@ -1073,8 +1225,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
+    "titre": "Mobilisation en baisse",
+    "origine": "recoupement"
    },
    "fait": "Grève du 17 novembre : mobilisation en baisse, entre 146 000 et 500 000 manifestants",
    "accroche": "Grève du 17 novembre : mobilisation en baisse, entre 146 000 et 500 000 manifestants",
@@ -1088,6 +1240,87 @@
     "iso": "2026-11-17",
     "jour": 17,
     "mois": "novembre"
+   }
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le JDD",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-17T08:00:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Impôts, logement, Smic: ce qu'il faut retenir du débat entre cinq candidats à la présidentielle française",
+     "url": "https://www.rfi.fr/fr/france/20261117-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-cinq-candidats-%C3%A0-la-pr%C3%A9sidentielle-fran%C3%A7aise",
+     "media": "RFI",
+     "date": "2026-11-17T05:48:15.000Z"
+    },
+    {
+     "titre": "Impôts, associations, logement... Ce qu'il faut retenir du grand débat présidentiel sur la vie chère",
+     "url": "https://www.lejdd.fr/politique/impots-associations-logement-ce-quil-faut-retenir-du-grand-debat-presidentiel-sur-la-vie-chere-188901",
+     "media": "Le JDD",
+     "date": "2026-11-17T08:00:37.000Z"
+    },
+    {
+     "titre": "Impôts, logement, Smic... les candidats à la présidentielle débattent de leurs propositions",
+     "url": "https://www.france24.com/fr/france/20261116-imp%C3%B4ts-logement-smic-les-candidats-%C3%A0-la-pr%C3%A9sidentielle-d%C3%A9battent-de-leurs-propositions",
+     "media": "France 24",
+     "date": "2026-11-16T22:39:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Libération",
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-17T20:18:59.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "EN DIRECT – Mobilisation sociale : 146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
+     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
+     "media": "Libération",
+     "date": "2026-11-17T20:18:59.000Z"
+    },
+    {
+     "titre": "DIRECT. Manifestations du 17 novembre : le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France",
+     "url": "https://www.ladepeche.fr/2026/11/17/direct-manifestations-du-17-novembre-nouvel-appel-a-la-greve-des-syndicats-ce-mardi-220-000-a-300-000-personnes-attendues-13656543.php",
+     "media": "La Dépêche",
+     "date": "2026-11-17T16:46:31.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Novembre",
+    "origine": "dossier"
+   },
+   "fait": "146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
+   "accroche": "146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
+   "essentiel": "Pendant la manifestations du 17 novembre, le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France. Deux médias en parlent : Libération et La Dépêche.",
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "146 000",
+    "unite": "personnes"
    }
   },
   {
@@ -1163,47 +1396,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Libération",
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-17T20:06:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "EN DIRECT – Mobilisation sociale : 146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
-     "url": "https://www.liberation.fr/economie/social/en-direct-mobilisations-sociales-fonctionnaires-cheminots-etudiants-et-lyceens-dans-la-rue-ce-mardi-20261117_OHS6A6MT4FDIBE5NLCOZ5SN2QY/",
-     "media": "Libération",
-     "date": "2026-11-17T20:06:16.000Z"
-    },
-    {
-     "titre": "DIRECT. Manifestations du 17 novembre : le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France",
-     "url": "https://www.ladepeche.fr/2026/11/17/direct-manifestations-du-17-novembre-nouvel-appel-a-la-greve-des-syndicats-ce-mardi-220-000-a-300-000-personnes-attendues-13656543.php",
-     "media": "La Dépêche",
-     "date": "2026-11-17T16:46:31.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
-   },
-   "fait": "146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
-   "accroche": "146 000 personnes ont manifesté en France selon l’Intérieur, plus de 500 000 selon les syndicats",
-   "essentiel": "Pendant la manifestations du 17 novembre, le ministère de l'Intérieur annonce que 146 000 personnes ont défilé dans toute la France. Deux médias en parlent : Libération et La Dépêche.",
-   "rubrique": "Politique",
-   "chiffre": {
-    "valeur": "146 000",
-    "unite": "personnes"
-   }
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Le Monde",
     "Sud Ouest"
    ],
@@ -1238,45 +1430,6 @@
    "accroche": "Une école de Bergerac a été rebaptisée du nom d’Irène Sapir, rescapée de la Shoah et militante pour la paix",
    "essentiel": "Une école de Bergerac a été rebaptisée du nom d’Irène Sapir, rescapée de la Shoah et militante pour la paix. A Bergerac, malgré l’opposition du Rassemblement national, une école adopte le nom d’Irène Sapir, rescapée de la rafle du Vél’ d’Hiv. Deux médias en parlent.",
    "rubrique": "Politique"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Monde",
-    "Europe 1"
-   ],
-   "derniere": "2026-11-17T16:28:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Manifestations du 17 novembre : entre 146 000, selon le gouvernement, et 500 000 personnes, selon la CGT, ont défilé en France ; revivez la journée de mobilisation",
-     "url": "https://www.lemonde.fr/politique/live/2026/11/17/en-direct-manifestations-du-17-novembre-a-paris-une-manifestation-calme-a-17-heures-ayant-rassemble-28-000-personnes-selon-la-prefecture-de-police_6812905_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-17T16:28:59.000Z"
-    },
-    {
-     "titre": "En direct - Manifestations du 17 novembre : 146.000 manifestants en France, selon le ministère de l'Intérieur, plus de 500.000 personnes, selon la CGT",
-     "url": "https://www.europe1.fr/societe/en-direct-manifestations-du-17-novembre-146000-manifestants-en-france-selon-le-ministere-de-linterieur-plus-de-500000-personnes-selon-la-cgt-1238553?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-17T08:34:12.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
-   },
-   "rubrique": "Gouvernement",
-   "date": {
-    "iso": "2026-11-17",
-    "jour": 17,
-    "mois": "novembre"
-   }
   },
   {
    "medias": 2,
@@ -1331,51 +1484,19 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Le JDD",
-    "RFI"
-   ],
-   "derniere": "2026-11-17T08:00:37.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Impôts, associations, logement... Ce qu'il faut retenir du grand débat présidentiel sur la vie chère",
-     "url": "https://www.lejdd.fr/politique/impots-associations-logement-ce-quil-faut-retenir-du-grand-debat-presidentiel-sur-la-vie-chere-188901",
-     "media": "Le JDD",
-     "date": "2026-11-17T08:00:37.000Z"
-    },
-    {
-     "titre": "Impôts, logement, Smic: ce qu'il faut retenir du débat entre cinq candidats à la présidentielle française",
-     "url": "https://www.rfi.fr/fr/france/20261117-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-cinq-candidats-%C3%A0-la-pr%C3%A9sidentielle-fran%C3%A7aise",
-     "media": "RFI",
-     "date": "2026-11-17T05:48:15.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "20 Minutes",
-    "Libération"
+    "France 24"
    ],
-   "derniere": "2026-11-16T21:28:11.000Z",
+   "derniere": "2026-11-17T01:27:04.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [],
@@ -1384,23 +1505,34 @@
    },
    "articles": [
     {
-     "titre": "« Il y a eu des erreurs » mais j’ai fait « de mon mieux pour l’intérêt du pays », lâche Macron pour ses dix ans",
-     "url": "https://www.20minutes.fr/politique/4263405-20261116-erreurs-fait-mieux-interet-pays-lache-macron-dix-ans?at_medium=display&at_campaign=149",
+     "titre": "Présidentielle 2027 : Le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+     "url": "https://www.20minutes.fr/politique/4263424-20261117-presidentielle-2027-pen-confirme-france-lachera-financierement-ukraine-si-elue?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
-     "date": "2026-11-16T21:28:11.000Z"
+     "date": "2026-11-17T01:27:04.000Z"
     },
     {
-     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
-     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
-     "media": "Libération",
-     "date": "2026-11-16T19:13:59.000Z"
+     "titre": "Ukraine : Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue",
+     "url": "https://www.france24.com/fr/france/20261116-ukraine-marine-le-pen-confirme-%C3%A0-l-ambassadeur-la-fin-de-l-aide-financi%C3%A8re-si-elle-est-%C3%A9lue",
+     "media": "France 24",
+     "date": "2026-11-16T21:46:15.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Élections : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
-   "rubrique": "Élysée 2027"
+   "fait": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+   "accroche": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+   "essentiel": "Pour la présidentielle 2027, le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue. Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue. Deux médias en parlent : 20 Minutes et France 24.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -1485,6 +1617,48 @@
     "valeur": "1",
     "unite": "milliard d’euros"
    }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "L'Obs",
+    "France 24"
+   ],
+   "derniere": "2026-11-15T09:47:31.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron dénonce « ceux qui veulent rationner » l’aide à l’Ukraine et « l’obliger à une paix injuste »",
+     "url": "https://www.nouvelobs.com/politique/20261115.OBS120149/emmanuel-macron-denonce-ceux-qui-veulent-rationner-l-aide-l-ukraine-et-l-obliger-a-une-paix-injuste.html",
+     "media": "L'Obs",
+     "date": "2026-11-15T09:47:31.000Z"
+    },
+    {
+     "titre": "Macron dénonce \"ceux qui veulent rationner\" l’aide à l’Ukraine et \"l’obliger à une paix injuste\"",
+     "url": "https://www.france24.com/fr/france/20261114-macron-d%C3%A9nonce-ceux-qui-veulent-rationner-l-aide-%C3%A0-l-ukraine-et-l-obliger-%C3%A0-une-paix-injuste",
+     "media": "France 24",
+     "date": "2026-11-14T20:02:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
   },
   {
    "medias": 4,
@@ -1622,8 +1796,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Élysée 2027"
   },
@@ -1789,6 +1964,181 @@
    "accroche": "Des soldats français déployés, le Parlement aurait-il dû être prévenu ?",
    "essentiel": "Des soldats français déployés, le Parlement aurait-il dû être prévenu ? Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
    "rubrique": "International"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-16T19:38:46.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "France: deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+     "url": "https://www.rfi.fr/fr/france/20261116-france-deux-condamnations-%C3%A0-perp%C3%A9tuit%C3%A9-%C3%A0-l-issue-du-proc%C3%A8s-du-triple-narchomicide-pr%C3%A8s-de-marseille",
+     "media": "RFI",
+     "date": "2026-11-16T19:38:46.000Z"
+    },
+    {
+     "titre": "Triple narchomicide à Marseille en 2020 : deux accusés condamnés à la perpétuité",
+     "url": "https://www.france24.com/fr/france/20261116-triple-narchomicide-%C3%A0-marseille-en-2020-deux-accus%C3%A9s-condamn%C3%A9s-%C3%A0-la-perp%C3%A9tuit%C3%A9",
+     "media": "France 24",
+     "date": "2026-11-16T17:23:12.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Triple narchomicide",
+    "origine": "recoupement"
+   },
+   "fait": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+   "accroche": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille",
+   "essentiel": "Deux condamnations à perpétuité à l'issue du procès du triple narchomicide près de Marseille. Triple narchomicide à Marseille en 2020 : deux accusés condamnés à la perpétuité. Deux médias en parlent : RFI et France 24.",
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-15T00:02:20.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Acte V du mouvement social : des revendications variées, une affluence en baisse",
+     "url": "https://www.france24.com/fr/france/20261114-acte-v-du-mouvement-social-des-revendications-vari%C3%A9es-une-affluence-en-baisse",
+     "media": "France 24",
+     "date": "2026-11-14T21:43:20.000Z"
+    },
+    {
+     "titre": "Mouvement social en France: un «acte V» marqué par une affluence un peu moindre",
+     "url": "https://www.rfi.fr/fr/france/20261115-mouvement-social-en-france-un-acte-v-marqu%C3%A9-par-une-affluence-un-peu-moindre",
+     "media": "RFI",
+     "date": "2026-11-15T00:02:20.000Z"
+    },
+    {
+     "titre": "Mobilisation en France: un «acte V» du mouvement social ce samedi avec des revendications variées",
+     "url": "https://www.rfi.fr/fr/france/20261114-mobilisation-en-france-un-acte-v-du-mouvement-social-ce-samedi-avec-des-revendications-vari%C3%A9es",
+     "media": "RFI",
+     "date": "2026-11-14T08:32:56.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mouvement social",
+    "origine": "recoupement"
+   },
+   "fait": "Un «acte V» marqué par une affluence un peu moindre",
+   "accroche": "Un «acte V» marqué par une affluence un peu moindre",
+   "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-17T20:19:19.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Philippe de Villiers : «Robespierre en djellabah»",
+     "url": "https://www.lejdd.fr/politique/philippe-de-villiers-robespierre-en-djellabah-188928",
+     "media": "Le JDD",
+     "date": "2026-11-17T20:19:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-17T20:16:17.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Dîner avec les grands patrons: Jean-Luc Mélenchon ne dîne finalement pas chez Drouant, comme c'était le cas précédemment pour Marine Le Pen",
+     "url": "https://www.bfmtv.com/politique/la-france-insoumise/video-diner-avec-les-grands-patrons-jean-luc-melenchon-ne-dine-finalement-pas-chez-drouant-comme-c-etait-le-cas-precedemment-pour-marine-le-pen_VN-202611170924.html",
+     "media": "BFMTV",
+     "date": "2026-11-17T20:16:17.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Jean-Luc Mélenchon ne dîne pas chez Drouant, comme c'était le cas précédemment pour Marine Le Pen",
+   "accroche": "Jean-Luc Mélenchon ne dîne pas chez Drouant, comme c'était le cas précédemment pour Marine Le Pen",
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2209,9 +2559,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Novembre",
+    "origine": "dossier"
    },
    "rubrique": "Politique",
    "contexte": [
@@ -2376,9 +2725,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Ollans : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Novembre",
+    "origine": "dossier"
    },
    "fait": "Patrice Perruche médaillé pour dix années de bénévolat",
    "accroche": "Patrice Perruche médaillé pour dix années de bénévolat",
@@ -2418,6 +2766,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-17T19:20:47.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Fractures françaises\" : jusqu'où ?",
+     "url": "https://www.france24.com/fr/%C3%A9missions/le-d%C3%A9bat/20261117-fractures-fran%C3%A7aises-jusqu-o%C3%B9",
+     "media": "France 24",
+     "date": "2026-11-17T19:20:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Humanité"
    ],
    "derniere": "2026-11-17T19:19:58.000Z",
@@ -2438,8 +2814,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Rassemblement national : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Assemblée nationale"
   },
@@ -2734,9 +3111,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Écotay-l'Olme : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Novembre",
+    "origine": "dossier"
    },
    "fait": "Réunion publique, le 20 novembre, salle du conseil",
    "accroche": "Réunion publique, le 20 novembre, salle du conseil",
@@ -3210,11 +3586,10 @@
     }
    ],
    "titrePropre": {
-    "titre": "Ministre de l'intérieur : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
-   "rubrique": "Gouvernement",
+   "rubrique": "Politique",
    "contexte": [
     {
      "type": "personnes",
@@ -3255,8 +3630,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Sociale",
-    "origine": "dossier"
+    "titre": "Alexis Corbière : ce qu'il faut savoir sur le social et l'emploi",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Pendant la colère sociale, Alexis Corbière, député \"L'Après\", pointe",
    "accroche": "Pendant la colère sociale, Alexis Corbière, député \"L'Après\", pointe",
@@ -3266,6 +3642,11 @@
      "type": "personnes",
      "texte": "Alexis Corbière : député ECO (Seine-Saint-Denis)",
      "source": "Assemblée nationale (open data)"
+    },
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
+     "source": "Assemblée nationale (agenda officiel)"
     }
    ]
   },
@@ -3330,7 +3711,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
+    "titre": "Manifestations",
     "origine": "dossier"
    },
    "rubrique": "Assemblée nationale"
@@ -3445,8 +3826,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Social : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Un temps interdit de parcours, le cortège « déterminé, offensif et pacifique » finit en fanfare et en toute légalité",
    "accroche": "Un temps interdit de parcours, le cortège « déterminé, offensif et pacifique » finit en fanfare et en toute légalité",
@@ -3510,9 +3892,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Bourgoin-Jallieu : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Manifestations",
+    "origine": "dossier"
    },
    "fait": "140 manifestants pour réclamer une hausse des salaires et des pensions",
    "accroche": "140 manifestants pour réclamer une hausse des salaires et des pensions",
@@ -3797,8 +4178,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Le Grand-Lemps : conseil municipal",
-    "origine": "regles"
+    "titre": "Novembre",
+    "origine": "dossier"
    },
    "rubrique": "Élysée 2027"
   },
@@ -4020,8 +4401,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Rassemblement national : ce qu'il faut savoir sur logement et accueil",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Logement : une modification proposée Rassemblement national supprime les interdictions de louer liées au diagnostic énergétique",
    "accroche": "Logement : une modification proposée Rassemblement national supprime les interdictions de louer liées au diagnostic énergétique",
@@ -4393,9 +4775,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Mulhouse : actualité locale",
-    "origine": "regles",
-    "generique": true
+    "titre": "Novembre",
+    "origine": "dossier"
    },
    "fait": "Manifestation du 17 novembre : une mobilisation en baisse, mais une colère des fonctionnaires intacte",
    "accroche": "Manifestation du 17 novembre : une mobilisation en baisse, mais une colère des fonctionnaires intacte",
@@ -4781,235 +5162,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-17T17:49:01.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "À Créteil, une manifestation tout en symboles pour «montrer qu’il n’y a pas de retour à la normale»",
-     "url": "https://www.mediapart.fr/journal/france/171126/creteil-une-manifestation-tout-en-symboles-pour-montrer-qu-il-n-y-pas-de-retour-la-normale",
-     "media": "Mediapart",
-     "date": "2026-11-17T17:49:01.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-17T17:47:27.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Les Français «ne sont pas cobelligérants en Ukraine» malgré la présence de soldats, martèle le gouvernement",
-     "url": "https://www.rfi.fr/fr/france/20261117-les-fran%C3%A7ais-ne-sont-pas-cobellig%C3%A9rants-en-ukraine-malgr%C3%A9-la-pr%C3%A9sence-de-soldats-mart%C3%A8le-le-gouvernement",
-     "media": "RFI",
-     "date": "2026-11-17T17:47:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-17T17:47:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bordeaux : « Engagement tenu » ou « gaspillage », le sapin de Noël « naturel » suscite lui aussi la polémique",
-     "url": "https://www.sudouest.fr/gironde/bordeaux/bordeaux-engagement-tenu-ou-gaspillage-le-sapin-de-noel-naturel-suscite-lui-aussi-la-polemique-31560757.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-17T17:47:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bordeaux : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le JDD"
-   ],
-   "derniere": "2026-11-17T17:46:23.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "«On peut évoluer en politique, ce n’est pas une honte» : Marine Le Pen reconnaît avoir changé d’avis sur deux sujets de société",
-     "url": "https://www.lejdd.fr/politique/on-peut-evoluer-en-politique-ce-nest-pas-une-honte-marine-le-pen-reconnait-avoir-change-davis-sur-deux-sujets-de-societe-188961",
-     "media": "Le JDD",
-     "date": "2026-11-17T17:46:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Marine Le Pen reconnaît avoir changé d’avis sur deux sujets de société",
-   "accroche": "Marine Le Pen reconnaît avoir changé d’avis sur deux sujets de société",
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-17T17:46:17.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Croizier",
-      "photo": "photos/deputes/PA793716.jpg",
-      "parti": "DEM",
-      "lien": "#depute-PA793716",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "CNews : le député du Doubs Laurent Croizier vote avec LFI pour mieux dénoncer la censure",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/17/cnews-le-depute-du-doubs-laurent-croizier-vote-avec-lfi-pour-mieux-denoncer-la-censure",
-     "media": "L'Est républicain",
-     "date": "2026-11-17T17:46:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Laurent Croizier : déclaration sur les débats parlementaires",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Laurent Croizier : député DEM (Doubs)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-17T17:45:16.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Petitefontaine. Des aides financières pour les associations",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/17/des-aides-financieres-pour-les-associations",
-     "media": "L'Est républicain",
-     "date": "2026-11-17T17:45:16.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Petitefontaine : actualité sociale",
-    "origine": "regles"
-   },
-   "fait": "Des aides financières pour les associations",
-   "accroche": "Des aides financières pour les associations",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-17T17:44:05.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "Serres. La députée vient échanger sur les dossiers du territoire",
-     "url": "https://www.ledauphine.com/politique/2026/11/17/la-deputee-vient-echanger-sur-les-dossiers-du-territoire",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-17T17:44:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Assemblée nationale"
   }
  ]
 }
