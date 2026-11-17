@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T08:05:43.182Z",
+ "lastUpdated": "2026-11-17T08:10:53.361Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -169,7 +169,6 @@
     "Valeurs actuelles",
     "RFI",
     "L'Est républicain",
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "Le Monde",
@@ -200,7 +199,7 @@
     "La Croix",
     "Nice-Matin"
    ],
-   "nb": 108,
+   "nb": 103,
    "derniere": "2026-11-17T08:00:37.000Z",
    "articles": [
     {
@@ -265,12 +264,6 @@
      "date": "2026-11-17T05:35:00.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
-     "url": "https://www.leprogres.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
-     "date": "2026-11-17T05:30:00.000Z"
-    },
-    {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
      "url": "https://www.dna.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
@@ -333,16 +326,141 @@
    ]
   },
   {
+   "id": "marine",
+   "titre": "Marine",
+   "motifs": [
+    "marine",
+    "financement"
+   ],
+   "medias": [
+    "La Dépêche",
+    "Libération",
+    "BFMTV",
+    "Nice-Matin",
+    "20 Minutes",
+    "Le Monde",
+    "France 24",
+    "Europe 1",
+    "Sud Ouest",
+    "L'Express",
+    "Dernières Nouvelles d'Alsace",
+    "Public Sénat",
+    "Le JDD"
+   ],
+   "mediasDistincts": 12,
+   "sources": [
+    "La Dépêche",
+    "Libération",
+    "BFMTV",
+    "Nice-Matin",
+    "20 Minutes",
+    "Le Monde",
+    "France 24",
+    "Groupe Bolloré",
+    "Sud Ouest",
+    "L'Express",
+    "Dernières Nouvelles d'Alsace",
+    "Public Sénat"
+   ],
+   "nb": 25,
+   "derniere": "2026-11-17T06:47:44.000Z",
+   "articles": [
+    {
+     "media": "La Dépêche",
+     "titre": "DECRYPTAGE. Présidentielle 2027 : Marine Le Pen promet la fin de l'aide à l'Ukraine, Macron dénonce \"un esprit de défaite\"... quand le conflit entre Kiev et Moscou percute la campagne en France",
+     "url": "https://www.ladepeche.fr/2026/11/17/decryptage-presidentielle-2027-marine-le-pen-promet-la-fin-de-laide-a-lukraine-macron-denonce-un-esprit-de-defaite-quand-le-conflit-entre-kiev-et-13655590.php",
+     "date": "2026-11-17T06:47:44.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Sur le financement des associations, un front républicain bienvenu contre Marine Le Pen",
+     "url": "https://www.liberation.fr/politique/sur-le-financement-des-associations-un-front-republicain-bienvenu-contre-marine-le-pen-20261117_BYBIUKIKSRDW5I3MVV5PFGTPSY/",
+     "date": "2026-11-17T06:25:13.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - Jean-Luc Mélenchon et Marine Le Pen, les candidats les plus plébiscités, mais aussi les plus rejetés par les Français",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-l-edito-politique-de-guillaume-daret-jean-luc-melenchon-et-marine-le-pen-les-candidats-les-plus-plebiscites-mais-aussi-les-plus-rejetes-par-les-francais_VN-202611170189.html",
+     "date": "2026-11-17T06:06:50.000Z",
+     "video": true
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "« On doit baisser notre budget d’investissement d’environ 20 % » : Jean-Louis Masson, président du Département du Var, face aux secousses financières",
+     "url": "https://www.nicematin.com/societe/politique/on-doit-baisser-notre-budget-d-investissement-d-environ-20-jean-louis-masson-president-du-departement-du-var-face-aux-secousses-financieres-10762420",
+     "date": "2026-11-17T05:30:07.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "ENTRETIEN. Guerre en Ukraine : \"Faire des économies maintenant finira par se retourner contre la France\", une politologue analyse les propositions de Marine Le Pen et Jean-Luc Mélenchon",
+     "url": "https://www.ladepeche.fr/2026/11/17/entretien-guerre-en-ukraine-faire-des-economies-maintenant-finira-par-se-retourner-contre-la-france-une-politologue-analyse-les-propositions-de-marine-13655193.php",
+     "date": "2026-11-17T05:08:02.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : Le Pen confirme que la France lâchera financièrement l’Ukraine si elle est élue",
+     "url": "https://www.20minutes.fr/politique/4263424-20261117-presidentielle-2027-pen-confirme-france-lachera-financierement-ukraine-si-elue?at_medium=display&at_campaign=149",
+     "date": "2026-11-17T01:27:04.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Débat de la présidentielle : Marine Le Pen cible les associations « politisées », dont la Ligue des droits de l’homme, « ramassis de gauchistes »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/17/debat-de-la-presidentielle-marine-le-pen-cible-les-associations-politisees-dont-la-ligue-des-droits-de-l-homme-ramassis-de-gauchistes_6812656_823448.html",
+     "date": "2026-11-16T23:17:20.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Ukraine : Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue",
+     "url": "https://www.france24.com/fr/france/20261116-ukraine-marine-le-pen-confirme-%C3%A0-l-ambassadeur-la-fin-de-l-aide-financi%C3%A8re-si-elle-est-%C3%A9lue",
+     "date": "2026-11-16T21:46:15.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Suppression de Parcoursup, baccalauréat en mai... Les propositions de Marine Le Pen pour répondre à la colère lycéenne",
+     "url": "https://www.europe1.fr/politique/suppression-de-parcoursup-baccalaureat-en-mai-les-propositions-de-marine-le-pen-pour-repondre-a-la-colere-lyceenne-1238190?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-16T18:24:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : Marine Le Pen veut supprimer Parcoursup, le contrôle continu, et avancer le bac en mai",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-marine-le-pen-veut-supprimer-parcoursup-le-controle-continu-et-avancer-le-bac-en-mai-31554223.php",
+     "date": "2026-11-16T18:16:35.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "Ukraine : Marine Le Pen veut changer la nature de l'aide française à Kiev",
+     "url": "https://www.lexpress.fr/monde/europe/ukraine-marine-le-pen-veut-changer-la-nature-de-laide-francaise-a-kiev-YIPQHFO6UBGUXPHO2DTQ7N7EXA/",
+     "date": "2026-11-16T17:56:34.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Guerre en Ukraine. « Dans les prochains mois » : Marine Le Pen redit à Kiev son intention de couper les aides",
+     "url": "https://www.dna.fr/politique/2026/11/16/dans-les-prochains-mois-marine-le-pen-redit-a-kiev-son-intention-de-couper-les-aides",
+     "date": "2026-11-16T17:16:00.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Sondages : Marine Le Pen doit-elle s’inquiéter d’un regain de la « diabolisation » du RN ?",
+     "url": "https://www.publicsenat.fr/actualites/politique/sondages-marine-le-pen-doit-elle-sinquieter-dun-regain-de-la-diabolisation-du-rn",
+     "date": "2026-11-16T16:32:54.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "«Une provocation» : Marine Tondelier s'insurge contre l'appel de Sandrine Rousseau à rallier LFI",
+     "url": "https://www.lejdd.fr/politique/une-provocation-marine-tondelier-sinsurge-contre-lappel-de-sandrine-rousseau-a-rallier-lfi-188820",
+     "date": "2026-11-16T10:23:42.000Z"
+    }
+   ]
+  },
+  {
    "id": "social",
    "titre": "Social",
    "motifs": [
     "social",
     "familles",
-    "nombreuses",
-    "majoration"
+    "nombreuses"
    ],
    "medias": [
-    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
@@ -354,10 +472,9 @@
     "BFMTV",
     "L'Humanité",
     "France 24",
-    "Le JDD",
     "Nice-Matin"
    ],
-   "mediasDistincts": 11,
+   "mediasDistincts": 10,
    "sources": [
     "EBRA",
     "Libération",
@@ -368,18 +485,11 @@
     "BFMTV",
     "L'Humanité",
     "France 24",
-    "Le JDD",
     "Nice-Matin"
    ],
-   "nb": 24,
+   "nb": 21,
    "derniere": "2026-11-17T08:03:00.000Z",
    "articles": [
-    {
-     "media": "Le Progrès",
-     "titre": "Social. Retraites : le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
-     "url": "https://www.leprogres.fr/social/2026/11/17/retraites-le-gouvernement-fait-marche-arriere-sur-la-majoration-pour-les-familles-nombreuses",
-     "date": "2026-11-17T08:03:00.000Z"
-    },
     {
      "media": "Dernières Nouvelles d'Alsace",
      "titre": "Social. Retraites : le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
@@ -409,6 +519,18 @@
      "titre": "Mouvement social du 17 novembre : les syndicats peuvent-ils encore obtenir quelque chose ?",
      "url": "https://www.nouvelobs.com/politique/20261116.OBS120173/mobilisation-sociale-le-rendez-vous-du-17-novembre-est-decisif-pour-maintenir-la-pression-sur-les-pouvoirs-publics.html",
      "date": "2026-11-17T07:56:20.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Social. Colère sociale : « le compte n'y est pas » pour Sophie Binet, 300 000 personnes attendues dans la rue",
+     "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T07:39:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Social. Colère sociale : « le compte n'y est pas » pour Sophie Binet, 300 000 personnes attendues dans la rue",
+     "url": "https://www.ledauphine.com/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
+     "date": "2026-11-17T07:39:00.000Z"
     },
     {
      "media": "Mediapart",
@@ -448,153 +570,22 @@
      "date": "2026-11-16T15:20:28.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Défiance : une majorité de Français ne fait pas confiance au Conseil constitutionnel",
-     "url": "https://www.lejdd.fr/politique/defiance-une-majorite-de-francais-ne-fait-pas-confiance-au-conseil-constitutionnel-188862",
-     "date": "2026-11-16T14:25:57.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "« C’est un peu comme la Coupe de France de football » : le politologue Bruno Cautrès analyse le nombre record de candidatures à la prochaine présidentielle",
      "url": "https://www.nicematin.com/societe/politique/c-est-un-peu-comme-la-coupe-de-france-de-football-le-politologue-bruno-cautres-analyse-le-nombre-record-de-candidatures-a-la-prochaine-presidentielle-10761751",
      "date": "2026-11-16T05:30:04.000Z"
     }
    ]
-  },
-  {
-   "id": "marine",
-   "titre": "Marine",
-   "motifs": [
-    "marine"
-   ],
-   "medias": [
-    "La Dépêche",
-    "Libération",
-    "BFMTV",
-    "Le Monde",
-    "France 24",
-    "Europe 1",
-    "Sud Ouest",
-    "L'Express",
-    "Dernières Nouvelles d'Alsace",
-    "Public Sénat",
-    "20 Minutes",
-    "Le JDD"
-   ],
-   "mediasDistincts": 11,
-   "sources": [
-    "La Dépêche",
-    "Libération",
-    "BFMTV",
-    "Le Monde",
-    "France 24",
-    "Groupe Bolloré",
-    "Sud Ouest",
-    "L'Express",
-    "Dernières Nouvelles d'Alsace",
-    "Public Sénat",
-    "20 Minutes"
-   ],
-   "nb": 21,
-   "derniere": "2026-11-17T06:47:44.000Z",
-   "articles": [
-    {
-     "media": "La Dépêche",
-     "titre": "DECRYPTAGE. Présidentielle 2027 : Marine Le Pen promet la fin de l'aide à l'Ukraine, Macron dénonce \"un esprit de défaite\"... quand le conflit entre Kiev et Moscou percute la campagne en France",
-     "url": "https://www.ladepeche.fr/2026/11/17/decryptage-presidentielle-2027-marine-le-pen-promet-la-fin-de-laide-a-lukraine-macron-denonce-un-esprit-de-defaite-quand-le-conflit-entre-kiev-et-13655590.php",
-     "date": "2026-11-17T06:47:44.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Sur le financement des associations, un front républicain bienvenu contre Marine Le Pen",
-     "url": "https://www.liberation.fr/politique/sur-le-financement-des-associations-un-front-republicain-bienvenu-contre-marine-le-pen-20261117_BYBIUKIKSRDW5I3MVV5PFGTPSY/",
-     "date": "2026-11-17T06:25:13.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - Jean-Luc Mélenchon et Marine Le Pen, les candidats les plus plébiscités, mais aussi les plus rejetés par les Français",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-l-edito-politique-de-guillaume-daret-jean-luc-melenchon-et-marine-le-pen-les-candidats-les-plus-plebiscites-mais-aussi-les-plus-rejetes-par-les-francais_VN-202611170189.html",
-     "date": "2026-11-17T06:06:50.000Z",
-     "video": true
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "ENTRETIEN. Guerre en Ukraine : \"Faire des économies maintenant finira par se retourner contre la France\", une politologue analyse les propositions de Marine Le Pen et Jean-Luc Mélenchon",
-     "url": "https://www.ladepeche.fr/2026/11/17/entretien-guerre-en-ukraine-faire-des-economies-maintenant-finira-par-se-retourner-contre-la-france-une-politologue-analyse-les-propositions-de-marine-13655193.php",
-     "date": "2026-11-17T05:08:02.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Débat de la présidentielle : Marine Le Pen cible les associations « politisées », dont la Ligue des droits de l’homme, « ramassis de gauchistes »",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/17/debat-de-la-presidentielle-marine-le-pen-cible-les-associations-politisees-dont-la-ligue-des-droits-de-l-homme-ramassis-de-gauchistes_6812656_823448.html",
-     "date": "2026-11-16T23:17:20.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Marine Le Pen",
-     "url": "https://www.bfmtv.com/politique/marine-le-pen_DN-201201010011.html",
-     "date": "2026-11-16T22:39:32.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Ukraine : Marine Le Pen confirme à l'ambassadeur la fin de l'aide financière si elle est élue",
-     "url": "https://www.france24.com/fr/france/20261116-ukraine-marine-le-pen-confirme-%C3%A0-l-ambassadeur-la-fin-de-l-aide-financi%C3%A8re-si-elle-est-%C3%A9lue",
-     "date": "2026-11-16T21:46:15.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Suppression de Parcoursup, baccalauréat en mai... Les propositions de Marine Le Pen pour répondre à la colère lycéenne",
-     "url": "https://www.europe1.fr/politique/suppression-de-parcoursup-baccalaureat-en-mai-les-propositions-de-marine-le-pen-pour-repondre-a-la-colere-lyceenne-1238190?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-16T18:24:00.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Présidentielle 2027 : Marine Le Pen veut supprimer Parcoursup, le contrôle continu, et avancer le bac en mai",
-     "url": "https://www.sudouest.fr/politique/presidentielle-2027-marine-le-pen-veut-supprimer-parcoursup-le-controle-continu-et-avancer-le-bac-en-mai-31554223.php",
-     "date": "2026-11-16T18:16:35.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "Ukraine : Marine Le Pen veut changer la nature de l'aide française à Kiev",
-     "url": "https://www.lexpress.fr/monde/europe/ukraine-marine-le-pen-veut-changer-la-nature-de-laide-francaise-a-kiev-YIPQHFO6UBGUXPHO2DTQ7N7EXA/",
-     "date": "2026-11-16T17:56:34.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Guerre en Ukraine. « Dans les prochains mois » : Marine Le Pen redit à Kiev son intention de couper les aides",
-     "url": "https://www.dna.fr/politique/2026/11/16/dans-les-prochains-mois-marine-le-pen-redit-a-kiev-son-intention-de-couper-les-aides",
-     "date": "2026-11-16T17:16:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Sondages : Marine Le Pen doit-elle s’inquiéter d’un regain de la « diabolisation » du RN ?",
-     "url": "https://www.publicsenat.fr/actualites/politique/sondages-marine-le-pen-doit-elle-sinquieter-dun-regain-de-la-diabolisation-du-rn",
-     "date": "2026-11-16T16:32:54.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Présidentielle 2027 : Marine Tondelier demande à Sandrine Rousseau de lui « lâcher la grappe »",
-     "url": "https://www.20minutes.fr/politique/4263367-20261116-presidentielle-2027-marine-tondelier-demande-sandrine-rousseau-lacher-grappe?at_medium=display&at_campaign=149",
-     "date": "2026-11-16T16:22:50.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "«Une provocation» : Marine Tondelier s'insurge contre l'appel de Sandrine Rousseau à rallier LFI",
-     "url": "https://www.lejdd.fr/politique/une-provocation-marine-tondelier-sinsurge-contre-lappel-de-sandrine-rousseau-a-rallier-lfi-188820",
-     "date": "2026-11-16T10:23:42.000Z"
-    }
-   ]
   }
  ],
  "sujets": [
   {
-   "medias": 8,
-   "mediasDistincts": 5,
+   "medias": 4,
+   "mediasDistincts": 4,
    "sources": [
     "Sud Ouest",
     "BFMTV",
     "Libération",
-    "EBRA",
     "France 24"
    ],
    "derniere": "2026-11-16T19:39:01.000Z",
@@ -613,10 +604,10 @@
    },
    "articles": [
     {
-     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
-     "media": "Le Progrès",
-     "date": "2026-11-16T18:50:00.000Z"
+     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
+     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
+     "media": "Libération",
+     "date": "2026-11-16T19:13:59.000Z"
     },
     {
      "titre": "« J’ai fait de mon mieux » malgré des « erreurs » : Macron dresse un premier bilan dix ans après l’annonce de sa première candidature",
@@ -631,30 +622,6 @@
      "date": "2026-11-16T19:25:55.000Z"
     },
     {
-     "titre": "«J’ai fait de mon mieux» malgré des «erreurs», assure Macron dix ans après l’annonce de sa candidature",
-     "url": "https://www.liberation.fr/politique/elections/jai-fait-de-mon-mieux-malgre-des-erreurs-assure-macron-dix-ans-apres-lannonce-de-sa-candidature-20261116_NW3265WTHJDMXDNLREHDF7Z2FI/",
-     "media": "Libération",
-     "date": "2026-11-16T19:13:59.000Z"
-    },
-    {
-     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
-     "url": "https://www.dna.fr/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-16T18:50:00.000Z"
-    },
-    {
-     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
-     "url": "https://www.ledauphine.com/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-16T18:50:00.000Z"
-    },
-    {
-     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
-     "media": "L'Est républicain",
-     "date": "2026-11-16T18:50:00.000Z"
-    },
-    {
      "titre": "Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\"",
      "url": "https://www.france24.com/fr/france/20261116-macron-assure-avoir-fait-de-son-mieux-malgr%C3%A9-des-erreurs",
      "media": "France 24",
@@ -666,16 +633,13 @@
     "origine": "regles",
     "generique": true
    },
-   "fait": "Dix ans après l'annonce de sa candidature",
-   "accroche": "Dix ans après l'annonce de sa candidature",
-   "rubrique": "Élysée 2027",
-   "chiffre": {
-    "valeur": "10",
-    "unite": "ans"
-   }
+   "fait": "Dix ans après l'annonce de sa candidature, Emmanuel Macron revient sur ses années au pouvoir",
+   "accroche": "Dix ans après l'annonce de sa candidature, Emmanuel Macron revient sur ses années au pouvoir",
+   "essentiel": "Dix ans après l'annonce de sa candidature, Emmanuel Macron revient sur ses années au pouvoir. Emmanuel Macron assure avoir fait de son mieux malgré des \"erreurs\". Quatre médias en parlent : Libération, Sud Ouest, BFMTV et France 24.",
+   "rubrique": "Élysée 2027"
   },
   {
-   "medias": 6,
+   "medias": 5,
    "mediasDistincts": 3,
    "sources": [
     "20 Minutes",
@@ -708,8 +672,8 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. « C'est pas l'URSS » : Mélenchon et Le Pen s'écharpent sur le Smic lors du débat sur le pouvoir d'achat",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/c-est-pas-l-urss-melenchon-et-le-pen-s-echarpent-sur-le-smic-lors-du-debat-sur-le-pouvoir-d-achat",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/politique/2026/11/16/c-est-pas-l-urss-melenchon-et-le-pen-s-echarpent-sur-le-smic-lors-du-debat-sur-le-pouvoir-d-achat",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-16T20:52:00.000Z"
     },
     {
@@ -723,12 +687,6 @@
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/c-est-pas-l-urss-passe-d-armes-tendue-entre-jean-luc-melenchon-et-marine-le-pen-sur-l-augmentation-du-smic_AD-202611160949.html",
      "media": "BFMTV",
      "date": "2026-11-16T21:50:07.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « C'est pas l'URSS » : Mélenchon et Le Pen s'écharpent sur le Smic lors du débat sur le pouvoir d'achat",
-     "url": "https://www.dna.fr/politique/2026/11/16/c-est-pas-l-urss-melenchon-et-le-pen-s-echarpent-sur-le-smic-lors-du-debat-sur-le-pouvoir-d-achat",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-16T20:52:00.000Z"
     },
     {
      "titre": "Présidentielle 2027. « C'est pas l'URSS » : Mélenchon et Le Pen s'écharpent sur le Smic lors du débat sur le pouvoir d'achat",
@@ -803,6 +761,56 @@
     "origine": "regles"
    },
    "rubrique": "Budget"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "L'Obs",
+    "Libération",
+    "20 Minutes"
+   ],
+   "derniere": "2026-11-15T15:03:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sandrine Rousseau",
+      "photo": "photos/deputes/PA795076.jpg",
+      "photoHd": "photos/deputes/hd/PA795076.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA795076",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Attentat de Trappes : Sandrine Rousseau accuse le gouvernement de «sous-estimer la menace venant de l’extrême droite»",
+     "url": "https://www.liberation.fr/politique/attentat-de-trappes-sandrine-rousseau-accuse-le-gouvernement-de-sous-estimer-la-menace-venant-de-lextreme-droite-20261115_MNZSLAZJUVAHDMBRDHOBIAYQBI/",
+     "media": "Libération",
+     "date": "2026-11-15T13:51:38.000Z"
+    },
+    {
+     "titre": "Attentat raciste de Trappes : le gouvernement « minimise les violences issues de l’extrême droite », dénonce Sandrine Rousseau",
+     "url": "https://www.nouvelobs.com/politique/20261115.OBS120161/attentat-raciste-de-trappes-le-gouvernement-minimise-les-violences-issues-de-l-extreme-droite-denonce-sandrine-rousseau.html",
+     "media": "L'Obs",
+     "date": "2026-11-15T15:03:34.000Z"
+    },
+    {
+     "titre": "Attentat à Trappes : Sandrine Rousseau accuse le gouvernement de « sous-estimer la menace venant de l’extrême droite »",
+     "url": "https://www.20minutes.fr/politique/4262950-20261115-attentat-trappes-sandrine-rousseau-accuse-gouvernement-sous-estimer-menace-venant-extreme-droite?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-15T13:42:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Extrême droite",
+    "origine": "recoupement"
+   },
+   "rubrique": "Gouvernement"
   },
   {
    "medias": 2,
@@ -973,50 +981,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Europe 1",
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-16T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Philippe Diallo : le patron de la FFF candidat à la présidence de la FIFA",
-     "url": "https://www.europe1.fr/sport/philippe-diallo-le-patron-de-la-fff-candidat-a-la-presidence-de-la-fifa-1238040?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-16T15:53:00.000Z"
-    },
-    {
-     "titre": "Philippe Diallo candidat à la présidence de la Fifa : «Ça peut se jouer à pas grand-chose», estime Jean-François Pérès",
-     "url": "https://www.europe1.fr/sport/philippe-diallo-candidat-a-la-presidence-de-la-fifa-ca-peut-se-jouer-a-pas-grand-chose-estime-jean-francois-peres-1238151?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-16T18:00:00.000Z"
-    },
-    {
-     "titre": "Philippe Diallo veut remplacer Gianni Infantino : le président de la FFF est candidat à la présidence de la FIFA",
-     "url": "https://www.ladepeche.fr/2026/11/16/philippe-diallo-veut-remplacer-gianni-infantino-le-president-de-la-fff-est-candidat-a-la-presidence-de-la-fifa-13655554.php",
-     "media": "La Dépêche",
-     "date": "2026-11-16T16:19:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Philippe Diallo veut remplacer Gianni Infantino",
-   "accroche": "Philippe Diallo veut remplacer Gianni Infantino",
-   "essentiel": "Philippe Diallo veut remplacer Gianni Infantino. Jean-François Pérès estime : « Ça peut se jouer à pas grand-chose ». Deux médias en parlent : Europe 1 et La Dépêche.",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "L'Express",
     "Dernières Nouvelles d'Alsace"
    ],
@@ -1070,6 +1034,43 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "La Dépêche",
+    "Europe 1"
+   ],
+   "derniere": "2026-11-16T16:19:24.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Philippe Diallo veut remplacer Gianni Infantino : le président de la FFF est candidat à la présidence de la FIFA",
+     "url": "https://www.ladepeche.fr/2026/11/16/philippe-diallo-veut-remplacer-gianni-infantino-le-president-de-la-fff-est-candidat-a-la-presidence-de-la-fifa-13655554.php",
+     "media": "La Dépêche",
+     "date": "2026-11-16T16:19:24.000Z"
+    },
+    {
+     "titre": "Philippe Diallo : le patron de la FFF candidat à la présidence de la FIFA",
+     "url": "https://www.europe1.fr/sport/philippe-diallo-le-patron-de-la-fff-candidat-a-la-presidence-de-la-fifa-1238040?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-16T15:53:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Philippe Diallo veut remplacer Gianni Infantino",
+   "accroche": "Philippe Diallo veut remplacer Gianni Infantino",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "Dernières Nouvelles d'Alsace",
     "20 Minutes"
    ],
@@ -1102,50 +1103,6 @@
    "accroche": "Pour la présidentielle 2027, un millier d’élus locaux signent une tribune pour une primaire de la droite et du centre",
    "essentiel": "Pour la présidentielle 2027, un millier d’élus locaux signent une tribune pour une primaire de la droite et du centre. Deux médias en parlent : Dernières Nouvelles d'Alsace et 20 Minutes.",
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-15T13:51:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sandrine Rousseau",
-      "photo": "photos/deputes/PA795076.jpg",
-      "photoHd": "photos/deputes/hd/PA795076.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA795076",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Attentat de Trappes : Sandrine Rousseau accuse le gouvernement de «sous-estimer la menace venant de l’extrême droite»",
-     "url": "https://www.liberation.fr/politique/attentat-de-trappes-sandrine-rousseau-accuse-le-gouvernement-de-sous-estimer-la-menace-venant-de-lextreme-droite-20261115_MNZSLAZJUVAHDMBRDHOBIAYQBI/",
-     "media": "Libération",
-     "date": "2026-11-15T13:51:38.000Z"
-    },
-    {
-     "titre": "Attentat à Trappes : Sandrine Rousseau accuse le gouvernement de « sous-estimer la menace venant de l’extrême droite »",
-     "url": "https://www.20minutes.fr/politique/4262950-20261115-attentat-trappes-sandrine-rousseau-accuse-gouvernement-sous-estimer-menace-venant-extreme-droite?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-15T13:42:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Gouvernement"
   },
   {
    "medias": 2,
@@ -1276,7 +1233,7 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1289,12 +1246,6 @@
     "vignette": "budget"
    },
    "articles": [
-    {
-     "titre": "Social. Retraites : le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
-     "url": "https://www.leprogres.fr/social/2026/11/17/retraites-le-gouvernement-fait-marche-arriere-sur-la-majoration-pour-les-familles-nombreuses",
-     "media": "Le Progrès",
-     "date": "2026-11-17T08:03:00.000Z"
-    },
     {
      "titre": "Social. Retraites : le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
      "url": "https://www.dna.fr/social/2026/11/17/retraites-le-gouvernement-fait-marche-arriere-sur-la-majoration-pour-les-familles-nombreuses",
@@ -1320,11 +1271,11 @@
    },
    "fait": "Le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
    "accroche": "Le gouvernement fait marche arrière sur la majoration pour les familles nombreuses",
-   "essentiel": "Le gouvernement fait marche arrière sur la majoration pour les familles nombreuses. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Le gouvernement fait marche arrière sur la majoration pour les familles nombreuses. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Budget"
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1337,57 +1288,6 @@
     "vignette": null
    },
    "articles": [
-    {
-     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
-     "url": "https://www.dna.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-17T07:39:00.000Z"
-    },
-    {
-     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'une invitée de Franceinfo après la mention de son compagnon",
-     "url": "https://www.leprogres.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
-     "media": "Le Progrès",
-     "date": "2026-11-17T07:39:00.000Z"
-    },
-    {
-     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
-     "url": "https://www.ledauphine.com/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-17T07:39:00.000Z"
-    },
-    {
-     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
-     "url": "https://www.estrepublicain.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
-     "media": "L'Est républicain",
-     "date": "2026-11-17T07:39:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Mention de son compagnon",
-    "origine": "recoupement"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-17T07:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Social. Colère sociale : « le compte n'y est pas » pour Sophie Binet, 300 000 personnes attendues dans la rue",
-     "url": "https://www.leprogres.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
-     "media": "Le Progrès",
-     "date": "2026-11-17T07:39:00.000Z"
-    },
     {
      "titre": "Social. Colère sociale : « le compte n'y est pas » pour Sophie Binet, 300 000 personnes attendues dans la rue",
      "url": "https://www.dna.fr/social/2026/11/17/colere-sociale-fonctionnaires-lyceens-et-gilets-jaunes-attendus-dans-la-rue-ce-mardi",
@@ -1408,9 +1308,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Social",
+    "origine": "dossier"
    },
    "rubrique": "Politique",
    "chiffre": {
@@ -1419,7 +1318,47 @@
    }
   },
   {
-   "medias": 4,
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-17T07:39:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
+     "url": "https://www.dna.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-17T07:39:00.000Z"
+    },
+    {
+     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
+     "url": "https://www.ledauphine.com/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-17T07:39:00.000Z"
+    },
+    {
+     "titre": "Télévision. « Vous êtes malades ! » : énorme colère en direct d'Anne-Cécile Mailfert après la mention de son compagnon",
+     "url": "https://www.estrepublicain.fr/societe/2026/11/17/vous-etes-malades-enorme-colere-en-direct-d-anne-cecile-mailfert-apres-la-mention-de-son-compagnon",
+     "media": "L'Est républicain",
+     "date": "2026-11-17T07:39:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Télévision : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1432,12 +1371,6 @@
     "vignette": "election"
    },
    "articles": [
-    {
-     "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
-     "url": "https://www.leprogres.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:30:00.000Z"
-    },
     {
      "titre": "Présidentielle 2027. Theodora, Patrick Sébastien, Boualem Sansal… Quels candidats soutiennent les célébrités ?",
      "url": "https://www.dna.fr/elections/2026/11/17/theodora-patrick-sebastien-boualem-sansal-quels-candidats-soutiennent-les-celebrites",
@@ -1464,7 +1397,7 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 4,
+   "medias": 3,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1477,12 +1410,6 @@
     "vignette": "international"
    },
    "articles": [
-    {
-     "titre": "Union européenne. Comment cinq pays, dont l'Allemagne, vont expulser des migrants vers le Rwanda",
-     "url": "https://www.leprogres.fr/societe/2026/11/16/comment-cinq-pays-dont-l-allemagne-vont-expulser-des-migrants-vers-le-rwanda",
-     "media": "Le Progrès",
-     "date": "2026-11-16T19:45:00.000Z"
-    },
     {
      "titre": "Union européenne. Comment cinq pays, dont l'Allemagne, vont expulser des migrants vers le Rwanda",
      "url": "https://www.dna.fr/societe/2026/11/16/comment-cinq-pays-dont-l-allemagne-vont-expulser-des-migrants-vers-le-rwanda",
@@ -1507,6 +1434,57 @@
     "origine": "regles"
    },
    "rubrique": "International"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-16T18:50:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
+     "url": "https://www.dna.fr/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-16T18:50:00.000Z"
+    },
+    {
+     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
+     "url": "https://www.ledauphine.com/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-16T18:50:00.000Z"
+    },
+    {
+     "titre": "Politique. « À chaque instant, j'ai fait de mon mieux » : quand Emmanuel Macron fait son bilan, 10 ans après",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/16/a-chaque-instant-j-ai-fait-de-mon-mieux-quand-macron-fait-son-bilan-dans-un-message-sur-x",
+     "media": "L'Est républicain",
+     "date": "2026-11-16T18:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "10",
+    "unite": "ans"
+   }
   },
   {
    "medias": 2,
@@ -2496,36 +2474,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T06:15:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Châtillon-sur-Chalaronne. Cinéma L’Étoile : quel avenir après le redressement judiciaire de l'exploitant ?",
-     "url": "https://www.leprogres.fr/politique/2026/11/17/cinema-l-etoile-quel-avenir-apres-le-redressement-judiciaire-de-cineode",
-     "media": "Le Progrès",
-     "date": "2026-11-17T06:15:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Quel avenir après le redressement judiciaire de l'exploitant ?",
-   "accroche": "Quel avenir après le redressement judiciaire de l'exploitant ?",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-11-17T06:10:49.000Z",
@@ -3455,147 +3403,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lons-le-Saunier. « Bien plus que des commerces » : les librairies locales reçoivent le soutien de la CGT",
-     "url": "https://www.leprogres.fr/economie/2026/11/17/bien-plus-que-des-commerces-les-librairies-locales-recoivent-le-soutien-de-la-cgt",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lons-le-Saunier : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lyon. Un mois après le chaos du 17 octobre, les commerçants toujours traumatisés : « Il n’y a plus personne » en Presqu’île",
-     "url": "https://www.leprogres.fr/societe/2026/11/17/un-mois-apres-le-chaos-les-commercants-toujours-traumatises-il-n-y-a-plus-personne-dans-le-centre",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lyon : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lyon. L’avenue Rockefeller rouverte aux automobilistes : des habitants et des cyclistes irrités",
-     "url": "https://www.leprogres.fr/politique/2026/11/17/l-avenue-rockefeller-rouverte-aux-automobilistes-des-habitants-et-des-cyclistes-irrites",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lyon : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Ain. Les grands moyens pour réparer la tourbière et le stockage de carbone",
-     "url": "https://www.leprogres.fr/economie/2026/11/16/les-grands-moyens-pour-reparer-la-tourbiere-et-le-stockage-de-carbone",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Ain : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Les grands moyens pour réparer la tourbière et le stockage de carbone",
-   "accroche": "Les grands moyens pour réparer la tourbière et le stockage de carbone",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-17T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Riorges. Les élus d’opposition alertent le maire et dénoncent un règlement intérieur illégal",
-     "url": "https://www.leprogres.fr/politique/2026/11/17/les-elus-d-opposition-alertent-le-maire-et-denoncent-un-reglement-interieur-illegal",
-     "media": "Le Progrès",
-     "date": "2026-11-17T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Riorges : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-11-17T04:55:03.000Z",
@@ -4187,8 +3994,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Marine",
-    "origine": "dossier"
+    "titre": "Marine Le Pen (Rassemblement national) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique",
    "contexte": [
@@ -4297,42 +4105,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-16T22:39:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-16T22:39:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Raphaël Glucksmann",
       "photo": "photos/personnalites/raphael-glucksmann.jpg",
       "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
@@ -4354,6 +4126,42 @@
    ],
    "titrePropre": {
     "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T22:39:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T22:39:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
@@ -4659,34 +4467,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-16T21:47:20.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Haut Pays du Velay. Plateforme Vial : la fin de cinq ans d’hésitation",
-     "url": "https://www.leprogres.fr/politique/2026/11/16/plateforme-vial-la-fin-de-cinq-ans-d-hesitation",
-     "media": "Le Progrès",
-     "date": "2026-11-16T21:47:20.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haut Pays du Velay : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-16T21:46:27.000Z",
@@ -4929,6 +4709,212 @@
     "generique": true
    },
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T20:42:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"Il n'y a pas plus grand danger pour le pays que l'extrême droite\", assure Sophie Binet, secrétaire générale de la CGT",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-il-n-y-a-pas-plus-grand-danger-pour-le-pays-que-l-extreme-droite-assure-sophie-binet-secretaire-generale-de-la-cgt_VN-202611160902.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T20:42:36.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T20:38:14.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Nicolas Dupont-Aignan",
+      "photo": "photos/personnalites/nicolas-dupont-aignan.jpg",
+      "photoHd": "photos/personnalites/hd/nicolas-dupont-aignan.jpg",
+      "parti": "DLF",
+      "credit": "Debout la France, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron \"aura fait tellement de mal à la France\", estime Nicolas Dupont-Aignan, candidat à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-emmanuel-macron-aura-fait-tellement-de-mal-a-la-france-estime-nicolas-dupont-aignan-candidat-a-l-election-presidentielle_VN-202611160901.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T20:38:14.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T20:33:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Âge de départ à la retraite: ce que proposent les candidats à l'élection présidentielle de 2027",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-age-de-depart-a-la-retraite-ce-que-proposent-les-candidats-a-l-election-presidentielle-de-2027_VN-202611160897.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T20:33:30.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Ce que proposent les candidats à l'élection présidentielle de 2027",
+   "accroche": "Ce que proposent les candidats à l'élection présidentielle de 2027",
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Valeurs actuelles"
+   ],
+   "derniere": "2026-11-16T20:31:23.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "« Ils se foutent de nous » : les agriculteurs sceptiques face au plan de relance du gouvernement",
+     "url": "https://www.valeursactuelles.com/economie/ils-se-foutent-de-nous-les-agriculteurs-sceptiques-face-au-plan-de-relance-du-gouvernement",
+     "media": "Valeurs actuelles",
+     "date": "2026-11-16T20:31:23.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Dauphiné libéré"
+   ],
+   "derniere": "2026-11-16T20:31:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Annecy. Les riverains du champ de tir de Sacconges dénoncent « l’inaction » de la mairie : « Ça nous rend fou ! »",
+     "url": "https://www.ledauphine.com/social/2026/11/16/avant-le-conseil-municipal-les-riverains-du-champ-de-tir-de-sacconges-denoncent-l-inaction-de-la-mairie-ca-nous-rend-fou",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-16T20:31:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Annecy : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T20:28:47.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Fabien Roussel",
+      "photo": "photos/personnalites/fabien-roussel.jpg",
+      "photoHd": "photos/personnalites/hd/fabien-roussel.jpg",
+      "parti": "GDR",
+      "credit": "Zouhair NAKARA, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "GDR"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"Au revoir\": Fabien Roussel, candidat PCF à la présidentielle, réagit au tweet d'Emmanuel Macron sur les 10 ans de sa candidature",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-au-revoir-fabien-roussel-candidat-pcf-a-la-presidentielle-reagit-au-tweet-d-emmanuel-macron-sur-les-10-ans-de-sa-candidature_VN-202611160890.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T20:28:47.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fabien Roussel : réponse sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Fabien Roussel : secrétaire national du Parti communiste français",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   }
  ]
 }
