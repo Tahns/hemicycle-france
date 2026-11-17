@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-17T05:15:48.201Z",
+ "lastUpdated": "2026-11-17T05:20:41.329Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -159,6 +159,7 @@
     "achat"
    ],
    "medias": [
+    "Libération",
     "Le Dauphiné libéré",
     "Le Monde",
     "20 Minutes",
@@ -166,7 +167,6 @@
     "BFMTV",
     "France 24",
     "Ouest-France",
-    "Libération",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
@@ -182,6 +182,7 @@
    ],
    "mediasDistincts": 15,
    "sources": [
+    "Libération",
     "EBRA",
     "Le Monde",
     "20 Minutes",
@@ -189,7 +190,6 @@
     "BFMTV",
     "France Médias Monde",
     "Ouest-France",
-    "Libération",
     "Sud Ouest",
     "Groupe Bolloré",
     "La Dépêche",
@@ -198,9 +198,15 @@
     "L'Obs",
     "Nice-Matin"
    ],
-   "nb": 99,
-   "derniere": "2026-11-17T05:05:00.000Z",
+   "nb": 100,
+   "derniere": "2026-11-17T05:15:00.000Z",
    "articles": [
+    {
+     "media": "Libération",
+     "titre": "«C’est la primaire de la droite avec l’ultradroite» : critiqués, les camps Attal, Retailleau et Lisnard tentent de monter leur compétition sans Philippe",
+     "url": "https://www.liberation.fr/politique/elections/cest-la-primaire-de-la-droite-avec-lultradroite-critiques-les-camps-attal-retailleau-et-lisnard-tentent-de-monter-leur-competition-sans-philippe-20261117_IYUV65WDJZCFDJQBENZURQB5BY/",
+     "date": "2026-11-17T05:15:00.000Z"
+    },
     {
      "media": "Le Dauphiné libéré",
      "titre": "Ardèche. « C’est l’une des préoccupations majeures de nos habitants » : Olivier Amrane défend le projet de vidéoprotection du département",
@@ -243,12 +249,6 @@
      "titre": "Élection présidentielle 2027. Ce qu’il faut retenir du débat sur la solidarité, le pouvoir d’achat et la précarité",
      "url": "https://www.ouest-france.fr/elections/presidentielle/election-presidentielle-2027-ce-quil-faut-retenir-du-debat-sur-la-solidarite-le-pouvoir-dachat-et-la-precarite-f78247e6-e1dc-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
      "date": "2026-11-16T22:31:54.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : les moments forts du débat entre Mélenchon, Glucksmann, Le Pen, Attal et Retailleau",
-     "url": "https://www.liberation.fr/politique/il-ny-a-personne-qui-veut-parler-de-la-distribution-retrouvez-les-moments-forts-du-debat-presidentielle-20261116_MZBZMVHPSVBL3DQHSSB3IWPCUE/",
-     "date": "2026-11-16T22:09:45.000Z"
     },
     {
      "media": "Le Progrès",
@@ -1667,6 +1667,65 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-17T05:15:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     },
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "«C’est la primaire de la droite avec l’ultradroite» : critiqués, les camps Attal, Retailleau et Lisnard tentent de monter leur compétition sans Philippe",
+     "url": "https://www.liberation.fr/politique/elections/cest-la-primaire-de-la-droite-avec-lultradroite-critiques-les-camps-attal-retailleau-et-lisnard-tentent-de-monter-leur-competition-sans-philippe-20261117_IYUV65WDJZCFDJQBENZURQB5BY/",
+     "media": "Libération",
+     "date": "2026-11-17T05:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France Inter"
    ],
    "derniere": "2026-11-17T05:11:20.000Z",
@@ -2680,6 +2739,50 @@
    "illustration": {
     "personnes": [
      {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "media": "BFMTV",
+     "date": "2026-11-16T22:39:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-16T22:39:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -2753,50 +2856,6 @@
     {
      "type": "personnes",
      "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-16T22:39:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
-     "media": "BFMTV",
-     "date": "2026-11-16T22:39:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
      "source": "Wikipédia (infobox du parti)"
     }
    ]
@@ -4948,36 +5007,6 @@
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-16T18:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Sampigny. Un accord de principe pour poursuivre la construction du projet de vidéoprotection",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/16/un-accord-de-principe-pour-poursuivre-la-construction-du-projet-de-videoprotection",
-     "media": "L'Est républicain",
-     "date": "2026-11-16T18:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sampigny : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Un accord de principe pour poursuivre la construction du projet de vidéoprotection",
-   "accroche": "Un accord de principe pour poursuivre la construction du projet de vidéoprotection",
    "rubrique": "Politique"
   }
  ]
