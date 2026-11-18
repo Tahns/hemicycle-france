@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-18T21:05:34.850Z",
+ "lastUpdated": "2026-11-18T21:10:49.960Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -159,14 +159,15 @@
     "programme"
    ],
    "medias": [
-    "Le Monde",
     "BFMTV",
+    "Le Monde",
+    "Sud Ouest",
     "Europe 1",
     "Libération",
-    "Sud Ouest",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
+    "L'Est républicain",
     "La Dépêche",
     "Valeurs actuelles",
     "L'Humanité",
@@ -181,13 +182,11 @@
     "L'Obs",
     "La Croix"
    ],
-   "mediasDistincts": 17,
+   "mediasDistincts": 15,
    "sources": [
-    "Le Monde",
-    "BFMTV",
+    "BFMTV / Le Monde / Sud Ouest",
     "Groupe Bolloré",
     "Libération",
-    "Sud Ouest",
     "EBRA",
     "La Dépêche",
     "Valeurs actuelles",
@@ -202,8 +201,14 @@
     "La Croix"
    ],
    "nb": 128,
-   "derniere": "2026-11-18T20:59:38.000Z",
+   "derniere": "2026-11-18T21:07:06.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "DIRECT. Présidentielle 2027: Marine Tondelier se dit \"prête à une coalition autour de la candidature de Jean-Luc Mélenchon\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-michel-barnier-annonce-un-accord-pour-une-primaire-de-la-droite-et-du-centre-fin-janvier-le-maire-de-cannes-refute_LN-202611180177.html",
+     "date": "2026-11-18T21:07:06.000Z"
+    },
     {
      "media": "Le Monde",
      "titre": "Présidentielle 2027 : Marine Tondelier se dit « prête » à bâtir une « coalition autour de la candidature » de Jean-Luc Mélenchon",
@@ -211,10 +216,10 @@
      "date": "2026-11-18T20:59:38.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "DIRECT. Présidentielle 2027: Marine Tondelier se dit \"prête à une coalition autour de la candidature de Jean-Luc Mélenchon\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-michel-barnier-annonce-un-accord-pour-une-primaire-de-la-droite-et-du-centre-fin-janvier-le-maire-de-cannes-refute_LN-202611180177.html",
-     "date": "2026-11-18T20:56:43.000Z"
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : Marine Tondelier se dit « prête » à travailler à une « coalition autour de la candidature » de Jean-Luc Mélenchon",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-marine-tondelier-se-dit-prete-a-travailler-a-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon-31580562.php",
+     "date": "2026-11-18T20:58:04.000Z"
     },
     {
      "media": "Europe 1",
@@ -227,12 +232,6 @@
      "titre": "Présidentielle : Marine Tondelier «prête» à travailler à une «coalition autour de la candidature» de Jean-Luc Mélenchon",
      "url": "https://www.liberation.fr/politique/elections/presidentielle-marine-tondelier-prete-a-travailler-a-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon-20261118_PUIXEKHEVNGODJR6DXZRPEQ5ZI/",
      "date": "2026-11-18T20:24:07.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Éditorial. Primaire à droite et au centre, machine à perdre",
-     "url": "https://www.sudouest.fr/redaction/editorial/editorial-primaire-a-droite-et-au-centre-machine-a-perdre-31580117.php",
-     "date": "2026-11-18T20:15:10.000Z"
     },
     {
      "media": "Le Progrès",
@@ -250,6 +249,12 @@
      "media": "Le Dauphiné libéré",
      "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
      "url": "https://www.ledauphine.com/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
+     "date": "2026-11-18T20:10:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
      "date": "2026-11-18T20:10:00.000Z"
     },
     {
@@ -465,7 +470,8 @@
    "id": "budget",
    "titre": "Budget",
    "motifs": [
-    "budget"
+    "budget",
+    "rejet"
    ],
    "medias": [
     "BFMTV",
@@ -473,28 +479,31 @@
     "Nice-Matin",
     "Le Progrès",
     "20 Minutes",
-    "Sud Ouest",
     "Le Monde",
+    "Sud Ouest",
     "L'Humanité",
     "Libération",
     "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
     "Public Sénat",
+    "La Dépêche",
     "Le JDD"
    ],
-   "mediasDistincts": 10,
+   "mediasDistincts": 11,
    "sources": [
     "BFMTV",
     "Groupe Bolloré",
     "Nice-Matin",
     "EBRA",
     "20 Minutes",
-    "Sud Ouest",
     "Le Monde",
+    "Sud Ouest",
     "L'Humanité",
     "Libération",
-    "Public Sénat"
+    "Public Sénat",
+    "La Dépêche"
    ],
-   "nb": 23,
+   "nb": 28,
    "derniere": "2026-11-18T20:41:13.000Z",
    "articles": [
     {
@@ -522,34 +531,22 @@
      "date": "2026-11-18T19:09:41.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "Fleurieu-sur-Saône. Le conseil municipal adopte une modification de son budget",
-     "url": "https://www.leprogres.fr/politique/2026/11/18/le-conseil-municipal-adopte-une-modification-de-son-budget",
-     "date": "2026-11-18T18:50:59.000Z"
-    },
-    {
      "media": "20 Minutes",
      "titre": "Le Budget 2027 de la Sécu adopté par le Sénat, mais il faudra convaincre les députés",
      "url": "https://www.20minutes.fr/politique/4263952-20261118-budget-2027-secu-adopte-senat-faudra-convaincre-deputes?at_medium=display&at_campaign=149",
      "date": "2026-11-18T18:42:33.000Z"
     },
     {
-     "media": "Le Progrès",
-     "titre": "La Fouillouse. Conseil municipal : des modifications pour un budget équilibré",
-     "url": "https://www.leprogres.fr/politique/2026/11/18/conseil-municipal-des-modifications-pour-un-budget-equilibre",
-     "date": "2026-11-18T18:15:51.000Z"
+     "media": "Le Monde",
+     "titre": "Le rejet du statut de lanceuse d’alerte de l’ex-directrice nationale du régime de garantie des salaires annulé par la Cour de cassation",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/18/le-rejet-du-statut-de-lanceuse-d-alerte-de-l-ex-directrice-nationale-du-regime-de-garantie-des-salaires-annule-par-la-cour-de-cassation_6813189_823448.html",
+     "date": "2026-11-18T18:09:23.000Z"
     },
     {
      "media": "Sud Ouest",
      "titre": "Budget de la Sécurité sociale : le Sénat adopte le texte après avoir modifié plusieurs mesures phares",
      "url": "https://www.sudouest.fr/politique/budget-de-la-securite-sociale-le-senat-adopte-le-projet-apres-avoir-modifie-plusieurs-mesures-phares-31579449.php",
      "date": "2026-11-18T17:49:52.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Budget de la « Sécu » 2027 : le projet de texte adopté au Sénat en première lecture",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/18/budget-de-la-secu-2027-le-projet-de-texte-adopte-au-senat-en-premiere-lecture_6813180_823448.html",
-     "date": "2026-11-18T17:31:41.000Z"
     },
     {
      "media": "L'Humanité",
@@ -570,10 +567,22 @@
      "date": "2026-11-18T17:04:00.000Z"
     },
     {
+     "media": "L'Est républicain",
+     "titre": "Politique. Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/18/rejete-a-l-assemblee-le-projet-de-budget-2027-de-la-securite-sociale-est-adopte-au-senat",
+     "date": "2026-11-18T17:04:00.000Z"
+    },
+    {
      "media": "Public Sénat",
      "titre": "« Nada, aucun signe » : face au risque de censure sur le budget, les socialistes dénoncent l’absence de dialogue avec Sébastien Lecornu",
      "url": "https://www.publicsenat.fr/actualites/politique/nada-aucun-signe-face-au-risque-de-censure-sur-le-budget-les-socialistes-denoncent-labsence-de-dialogue-avec-sebastien-lecornu",
      "date": "2026-11-18T16:35:11.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 : le tribunal administratif rejette la demande de Francis Lalanne, son meeting avec Dieudonné et Sylvain Durif se déroulera dans une autre salle de Montauban ce mercredi soir",
+     "url": "https://www.ladepeche.fr/2026/11/18/presidentielle-2027-le-tribunal-administratif-rejette-la-demande-de-francis-lalanne-son-meeting-avec-dieudonne-et-sylvain-durif-se-deroulera-dans-une-13658915.php",
+     "date": "2026-11-18T13:39:00.000Z"
     },
     {
      "media": "Le JDD",
@@ -586,103 +595,12 @@
  ],
  "sujets": [
   {
-   "medias": 6,
-   "mediasDistincts": 4,
-   "sources": [
-    "Le Monde",
-    "BFMTV",
-    "Libération",
-    "EBRA"
-   ],
-   "derniere": "2026-11-18T20:59:38.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Tondelier",
-      "photo": "photos/personnalites/marine-tondelier.jpg",
-      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
-      "parti": "ECO",
-      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Présidentielle 2027: Marine Tondelier se dit \"prête à une coalition autour de la candidature de Jean-Luc Mélenchon\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-michel-barnier-annonce-un-accord-pour-une-primaire-de-la-droite-et-du-centre-fin-janvier-le-maire-de-cannes-refute_LN-202611180177.html",
-     "media": "BFMTV",
-     "date": "2026-11-18T20:56:43.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Marine Tondelier se dit « prête » à bâtir une « coalition autour de la candidature » de Jean-Luc Mélenchon",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/18/presidentielle-2027-marine-tondelier-se-dit-prete-a-batir-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon_6813209_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-18T20:59:38.000Z"
-    },
-    {
-     "titre": "\"C'est un pas pour qu'on ouvre les discussions\": Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/c-est-un-pas-pour-qu-on-ouvre-les-discussions-marine-tondelier-se-dit-prete-a-une-coalition-autour-de-jean-luc-melenchon_AV-202611180969.html",
-     "media": "BFMTV",
-     "date": "2026-11-18T20:36:48.000Z"
-    },
-    {
-     "titre": "Présidentielle : Marine Tondelier «prête» à travailler à une «coalition autour de la candidature» de Jean-Luc Mélenchon",
-     "url": "https://www.liberation.fr/politique/elections/presidentielle-marine-tondelier-prete-a-travailler-a-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon-20261118_PUIXEKHEVNGODJR6DXZRPEQ5ZI/",
-     "media": "Libération",
-     "date": "2026-11-18T20:24:07.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
-     "url": "https://www.leprogres.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
-     "media": "Le Progrès",
-     "date": "2026-11-18T20:10:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
-     "url": "https://www.dna.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-18T20:10:00.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
-     "url": "https://www.ledauphine.com/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-18T20:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Marine Tondelier : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
-   "accroche": "Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
-   "essentiel": "Pour la présidentielle 2027, Marine Tondelier se dit « prête » à bâtir une « coalition autour de la candidature » de Jean-Luc Mélenchon. Six médias en parlent : BFMTV, Le Monde, Libération, Le Progrès, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 4,
    "sources": [
     "BFMTV",
     "Le Monde",
-    "Dernières Nouvelles d'Alsace",
+    "EBRA",
     "20 Minutes"
    ],
    "derniere": "2026-11-18T20:29:08.000Z",
@@ -702,10 +620,10 @@
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027 : Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/18/presidentielle-2027-francis-lalanne-maintient-son-meeting-mercredi-soir-a-montauban-en-presence-de-dieudonne_6813181_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-18T17:32:56.000Z"
+     "titre": "Tarn-et-Garonne. « Dieudonné sera présent » : privé de salle, Francis Lalanne assure maintenir un meeting à Montauban",
+     "url": "https://www.dna.fr/elections/2026/11/18/dieudonne-sera-present-prive-de-salle-francis-lalanne-assure-maintenir-un-meeting-a-montauban",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-18T15:59:00.000Z"
     },
     {
      "titre": "Une décision \"non motivée, non fondée\": privé de salle municipale, Francis Lalanne maintient son meeting à Montauban",
@@ -714,9 +632,15 @@
      "date": "2026-11-18T20:29:08.000Z"
     },
     {
+     "titre": "Présidentielle 2027 : Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/18/presidentielle-2027-francis-lalanne-maintient-son-meeting-mercredi-soir-a-montauban-en-presence-de-dieudonne_6813181_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-18T17:32:56.000Z"
+    },
+    {
      "titre": "Tarn-et-Garonne. « Dieudonné sera présent » : privé de salle, Francis Lalanne assure maintenir un meeting à Montauban",
-     "url": "https://www.dna.fr/elections/2026/11/18/dieudonne-sera-present-prive-de-salle-francis-lalanne-assure-maintenir-un-meeting-a-montauban",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/18/dieudonne-sera-present-prive-de-salle-francis-lalanne-assure-maintenir-un-meeting-a-montauban",
+     "media": "L'Est républicain",
      "date": "2026-11-18T15:59:00.000Z"
     },
     {
@@ -727,12 +651,13 @@
     }
    ],
    "titrePropre": {
-    "titre": "Maintient son meeting",
-    "origine": "recoupement"
+    "titre": "Francis Lalanne : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Pour la présidentielle 2027, Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné",
    "accroche": "Pour la présidentielle 2027, Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné",
-   "essentiel": "Pour la présidentielle 2027, Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné. Une décision \"non motivée, non fondée\" : privé de salle municipale, Francis Lalanne maintient son meeting à Montauban. Quatre médias en parlent.",
+   "essentiel": "Pour la présidentielle 2027, Francis Lalanne maintient son meeting mercredi soir à Montauban, en présence de Dieudonné. Une décision \"non motivée, non fondée\" : privé de salle municipale, Francis Lalanne maintient son meeting à Montauban. Cinq médias en parlent.",
    "rubrique": "Élysée 2027"
   },
   {
@@ -812,6 +737,56 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 3,
+   "sources": [
+    "Le Monde",
+    "Libération",
+    "EBRA"
+   ],
+   "derniere": "2026-11-18T17:31:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
+     "url": "https://www.dna.fr/politique/2026/11/18/rejete-a-l-assemblee-le-projet-de-budget-2027-de-la-securite-sociale-est-adopte-au-senat",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-18T17:04:00.000Z"
+    },
+    {
+     "titre": "Budget de la « Sécu » 2027 : le projet de texte adopté au Sénat en première lecture",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/18/budget-de-la-secu-2027-le-projet-de-texte-adopte-au-senat-en-premiere-lecture_6813180_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-18T17:31:41.000Z"
+    },
+    {
+     "titre": "Le projet de budget de la Sécurité sociale adopté au Sénat en première lecture, après son rejet par l’Assemblée",
+     "url": "https://www.liberation.fr/economie/le-projet-de-budget-de-la-securite-sociale-adopte-au-senat-en-premiere-lecture-apres-son-rejet-par-lassemblee-20261118_MKVIZRWYSZDHHJLPXQB44B6TBU/",
+     "media": "Libération",
+     "date": "2026-11-18T17:22:21.000Z"
+    },
+    {
+     "titre": "Politique. Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/18/rejete-a-l-assemblee-le-projet-de-budget-2027-de-la-securite-sociale-est-adopte-au-senat",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T17:04:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
+   "accroche": "Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
+   "essentiel": "Le projet de budget de la Sécurité sociale adopté au Sénat lors du premier examen du texte, après son rejet par l’Assemblée. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Monde, Libération et L'Est républicain.",
+   "rubrique": "Budget"
   },
   {
    "medias": 4,
@@ -1002,50 +977,6 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Le Monde",
-    "Libération",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-18T17:31:41.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget de la « Sécu » 2027 : le projet de texte adopté au Sénat en première lecture",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/18/budget-de-la-secu-2027-le-projet-de-texte-adopte-au-senat-en-premiere-lecture_6813180_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-18T17:31:41.000Z"
-    },
-    {
-     "titre": "Le projet de budget de la Sécurité sociale adopté au Sénat en première lecture, après son rejet par l’Assemblée",
-     "url": "https://www.liberation.fr/economie/le-projet-de-budget-de-la-securite-sociale-adopte-au-senat-en-premiere-lecture-apres-son-rejet-par-lassemblee-20261118_MKVIZRWYSZDHHJLPXQB44B6TBU/",
-     "media": "Libération",
-     "date": "2026-11-18T17:22:21.000Z"
-    },
-    {
-     "titre": "Politique. Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
-     "url": "https://www.dna.fr/politique/2026/11/18/rejete-a-l-assemblee-le-projet-de-budget-2027-de-la-securite-sociale-est-adopte-au-senat",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-18T17:04:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
-   "accroche": "Budget de la Sécu 2027 : rejeté à l'Assemblée, le texte est adopté au Sénat",
-   "essentiel": "Le projet de budget de la Sécurité sociale adopté au Sénat lors du premier examen du texte, après son rejet par l’Assemblée. Trois médias en parlent : Le Monde, Libération et Dernières Nouvelles d'Alsace.",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
     "Le JDD",
     "Libération",
     "Nice-Matin"
@@ -1087,6 +1018,83 @@
    "accroche": "Les députés adoptent une modification proposée Rassemblement national supprimant les interdictions de louer des passoires thermiques",
    "essentiel": "Les députés adoptent une modification proposée Rassemblement national supprimant les interdictions de louer des passoires thermiques. Logement : une modification proposée Rassemblement national supprime les interdictions de louer liées au diagnostic énergétique. Trois médias en parlent : Le JDD, Libération et Nice-Matin.",
    "rubrique": "Assemblée nationale"
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 2,
+   "sources": [
+    "BFMTV / Le Monde / Sud Ouest",
+    "Libération"
+   ],
+   "derniere": "2026-11-18T21:07:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Tondelier",
+      "photo": "photos/personnalites/marine-tondelier.jpg",
+      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
+      "parti": "ECO",
+      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Présidentielle 2027: Marine Tondelier se dit \"prête à une coalition autour de la candidature de Jean-Luc Mélenchon\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-michel-barnier-annonce-un-accord-pour-une-primaire-de-la-droite-et-du-centre-fin-janvier-le-maire-de-cannes-refute_LN-202611180177.html",
+     "media": "BFMTV",
+     "date": "2026-11-18T21:07:06.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : Marine Tondelier se dit « prête » à bâtir une « coalition autour de la candidature » de Jean-Luc Mélenchon",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/18/presidentielle-2027-marine-tondelier-se-dit-prete-a-batir-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon_6813209_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-18T20:59:38.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : Marine Tondelier se dit « prête » à travailler à une « coalition autour de la candidature » de Jean-Luc Mélenchon",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-marine-tondelier-se-dit-prete-a-travailler-a-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon-31580562.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-18T20:58:04.000Z"
+    },
+    {
+     "titre": "\"C'est un pas pour qu'on ouvre les discussions\": Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/c-est-un-pas-pour-qu-on-ouvre-les-discussions-marine-tondelier-se-dit-prete-a-une-coalition-autour-de-jean-luc-melenchon_AV-202611180969.html",
+     "media": "BFMTV",
+     "date": "2026-11-18T20:36:48.000Z"
+    },
+    {
+     "titre": "Présidentielle : Marine Tondelier «prête» à travailler à une «coalition autour de la candidature» de Jean-Luc Mélenchon",
+     "url": "https://www.liberation.fr/politique/elections/presidentielle-marine-tondelier-prete-a-travailler-a-une-coalition-autour-de-la-candidature-de-jean-luc-melenchon-20261118_PUIXEKHEVNGODJR6DXZRPEQ5ZI/",
+     "media": "Libération",
+     "date": "2026-11-18T20:24:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Tondelier : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
+   "accroche": "Marine Tondelier se dit \"prête\" à une coalition autour de Jean-Luc Mélenchon",
+   "essentiel": "Pour la présidentielle 2027, Marine Tondelier se dit « prête » à travailler à une « coalition autour de la candidature » de Jean-Luc Mélenchon. Quatre médias en parlent : BFMTV, Le Monde, Sud Ouest et Libération.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -1264,7 +1272,7 @@
    "mediasDistincts": 2,
    "sources": [
     "Le JDD",
-    "Sud Ouest"
+    "Le Monde"
    ],
    "derniere": "2026-11-18T16:36:05.000Z",
    "illustration": {
@@ -1274,13 +1282,21 @@
       "photo": "photos/personnalites/laurent-nunez.jpg",
       "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
       "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
+     },
+     {
+      "nom": "Pierre-Yves Cadalen",
+      "photo": "photos/deputes/PA841023.jpg",
+      "photoHd": "photos/deputes/hd/PA841023.jpg",
+      "parti": "LFI",
+      "lien": "#depute-PA841023",
+      "credit": "Assemblée nationale"
      }
     ],
     "partis": [
      "LFI"
     ],
-    "theme": "politique",
-    "vignette": "education"
+    "theme": "assemblee",
+    "vignette": "assemblee"
    },
    "articles": [
     {
@@ -1290,17 +1306,17 @@
      "date": "2026-11-18T16:36:05.000Z"
     },
     {
-     "titre": "Mouvement lycéen : Laurent Nuñez accuse La France insoumise d’organiser « la chienlit », « les Français ne vous la pardonneront jamais »",
-     "url": "https://www.sudouest.fr/politique/mouvement-lyceen-laurent-nunez-accuse-la-france-insoumise-d-organiser-la-chienlit-les-francais-ne-vous-la-pardonneront-jamais-31577750.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-18T15:25:15.000Z"
+     "titre": "Vif échange à l’Assemblée entre Laurent Nuñez et le député LFI Pierre-Yves Cadalen : « La chienlit que vous organisez, les Français ne vous la pardonneront jamais »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/18/vif-echange-a-l-assemblee-entre-laurent-nunez-et-le-depute-lfi-pierre-yves-cadalen-la-chienlit-que-vous-organisez-les-francais-ne-vous-la-pardonneront-jamais_6813168_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-18T16:33:50.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Pardonneront jamais",
     "origine": "recoupement"
    },
-   "rubrique": "Politique"
+   "rubrique": "Assemblée nationale"
   },
   {
    "medias": 2,
@@ -1648,6 +1664,77 @@
    "rubrique": "Élysée 2027"
   },
   {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-18T20:10:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Tondelier",
+      "photo": "photos/personnalites/marine-tondelier.jpg",
+      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
+      "parti": "ECO",
+      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+     "url": "https://www.leprogres.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
+     "media": "Le Progrès",
+     "date": "2026-11-18T20:10:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+     "url": "https://www.dna.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-18T20:10:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+     "url": "https://www.ledauphine.com/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-18T20:10:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Je suis prête » : Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/18/je-suis-prete-les-ecologistes-sont-prets-tondelier-fait-un-pas-vers-une-coalition-avec-melenchon",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T20:10:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Tondelier : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+   "accroche": "Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon",
+   "essentiel": "Marine Tondelier fait un pas vers une coalition avec Jean-Luc Mélenchon. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
@@ -1704,6 +1791,95 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-18T16:31:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027. « Bonjour la France » : le groupe EBRA prend les Français à témoin",
+     "url": "https://www.dna.fr/elections/2026/11/18/bonjour-la-france-le-groupe-ebra-prend-les-francais-a-temoin",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-18T16:31:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « Bonjour la France » : le groupe EBRA prend les Français à témoin",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/18/bonjour-la-france-le-groupe-ebra-prend-les-francais-a-temoin",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T16:31:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-18T13:18:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Télévision. Clash entre Anne-Cécile Mailfert et franceinfo : Hanouna, Mélenchon, Bardella... les réactions fusent",
+     "url": "https://www.dna.fr/societe/2026/11/18/clash-entre-anne-cecile-mailfert-et-francetv-hanouna-melenchon-bardella-les-reactions-fusent",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-18T13:18:00.000Z"
+    },
+    {
+     "titre": "Télévision. Clash entre Anne-Cécile Mailfert et franceinfo : Hanouna, Mélenchon, Bardella... les réactions fusent",
+     "url": "https://www.estrepublicain.fr/societe/2026/11/18/clash-entre-anne-cecile-mailfert-et-francetv-hanouna-melenchon-bardella-les-reactions-fusent",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T13:18:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Jordan Bardella : président du Rassemblement national",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -1964,35 +2140,6 @@
    ],
    "derniere": "2026-11-18T20:41:13.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget: le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
-     "url": "https://www.bfmtv.com/politique/gouvernement/budget-le-gouvernement-precisera-dans-les-prochains-jours-les-themes-prioritaires-de-discussion-en-vue-de-compromis_AD-202611180973.html",
-     "media": "BFMTV",
-     "date": "2026-11-18T20:41:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
-   "accroche": "Le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-18T20:41:13.000Z",
-   "illustration": {
     "personnes": [
      {
       "nom": "Sébastien Lecornu",
@@ -2026,6 +2173,35 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-18T20:41:13.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget: le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
+     "url": "https://www.bfmtv.com/politique/gouvernement/budget-le-gouvernement-precisera-dans-les-prochains-jours-les-themes-prioritaires-de-discussion-en-vue-de-compromis_AD-202611180973.html",
+     "media": "BFMTV",
+     "date": "2026-11-18T20:41:13.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "fait": "Le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
+   "accroche": "Le gouvernement précisera \"dans les prochains jours\" les thèmes \"prioritaires\" de discussion en vue de compromis",
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2410,6 +2586,33 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-18T20:06:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Écrouves. « J’ai le sentiment qu’on assiste à un sketch ! » : le nouveau maire face aux habitants",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/18/j-ai-le-sentiment-qu-on-assiste-a-un-sketch-le-nouveau-maire-face-aux-habitants",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T20:06:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Écrouves : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -3490,8 +3693,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Fleurieu-sur-Saône : finances locales",
+    "origine": "regles"
    },
    "fait": "Le conseil municipal adopte une modification de son budget",
    "accroche": "Le conseil municipal adopte une modification de son budget",
@@ -3598,6 +3801,35 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-18T18:46:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Réchésy. École : les élus votent pour l’installation d’une climatisation",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/18/ecole-les-elus-votent-pour-l-installation-d-une-climatisation",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T18:46:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Réchésy : environnement",
+    "origine": "regles"
+   },
+   "fait": "Les élus votent pour l’installation d’une climatisation",
+   "accroche": "Les élus votent pour l’installation d’une climatisation",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -3802,6 +4034,36 @@
    },
    "fait": "Jean-Luc Mélenchon ouvre le dialogue avec les grands patrons, sans changer de programme",
    "accroche": "Jean-Luc Mélenchon ouvre le dialogue avec les grands patrons, sans changer de programme",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-18T18:32:33.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sermamagny. Une convention pour encadrer le ramassage des déchets",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/18/une-convention-pour-encadrer-le-ramassage-des-dechets",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T18:32:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sermamagny : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Une convention pour encadrer le ramassage des déchets",
+   "accroche": "Une convention pour encadrer le ramassage des déchets",
    "rubrique": "Politique"
   },
   {
@@ -4408,8 +4670,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "La Fouillouse : finances locales",
+    "origine": "regles"
    },
    "rubrique": "Budget"
   },
@@ -4500,6 +4762,34 @@
    "fait": "L’agglo va soutenir l'événement Vaches en piste 2027",
    "accroche": "L’agglo va soutenir l'événement Vaches en piste 2027",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-18T18:11:19.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Commercy. Une nouvelle station d’épuration à l’étude pour 5 à 6 millions d’€",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/18/une-nouvelle-station-d-epuration-a-l-etude-pour-5-a-6-millions-d",
+     "media": "L'Est républicain",
+     "date": "2026-11-18T18:11:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Commercy : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4822,230 +5112,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-18T18:01:01.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Camaret-sur-Aigues. Les travaux prévus sur le territoire évoqués en conseil communautaire",
-     "url": "https://www.ledauphine.com/politique/2026/11/18/les-travaux-prevus-sur-le-territoire-evoques-en-conseil-communautaire",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-18T18:01:01.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Camaret-sur-Aigues : projet d'aménagement",
-    "origine": "regles"
-   },
-   "fait": "Les travaux prévus sur le territoire évoqués en conseil communautaire",
-   "accroche": "Les travaux prévus sur le territoire évoqués en conseil communautaire",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-11-18T18:00:30.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Ordre et Progrès », pour relancer sa campagne, Édouard Philippe s’essaie au positivisme",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/politique/presidentielle-2027-ordre-et-progres-pour-relancer-sa-campagne-edouard-philippe-sessaie-au-positivisme",
-     "media": "Valeurs actuelles",
-     "date": "2026-11-18T18:00:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Présidentielle 2027 : « Ordre et Progrès », pour relancer sa campagne",
-   "accroche": "Présidentielle 2027 : « Ordre et Progrès », pour relancer sa campagne",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-11-18T18:00:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sylvie Robert",
-      "photo": "photos/senateurs/14229S.jpg",
-      "parti": "SER",
-      "lien": "#senateur-14229S",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "senat",
-    "vignette": "senat"
-   },
-   "articles": [
-    {
-     "titre": "« On est dans une vraie bataille culturelle » : la sénatrice Sylvie Robert veut mieux protéger la liberté des artistes face aux entraves et aux pressions politiques",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/on-est-dans-une-vraie-bataille-culturelle-la-senatrice-sylvie-robert-veut-mieux-proteger-la-liberte-des-artistes-face-aux-entraves-et-aux-pressions-politiques",
-     "media": "Public Sénat",
-     "date": "2026-11-18T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sylvie Robert : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La sénatrice Sylvie Robert veut mieux protéger la liberté des artistes face aux entraves et aux pressions politiques",
-   "accroche": "La sénatrice Sylvie Robert veut mieux protéger la liberté des artistes face aux entraves et aux pressions politiques",
-   "rubrique": "Sénat"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-18T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Dompter Parcoursup, ce serait possible ? À Pau, un salon d’orientation propose un décryptage samedi 21 novembre",
-     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/dompter-parcoursup-ce-serait-possible-a-pau-un-salon-d-orientation-propose-un-decryptage-samedi-21-novembre-31576009.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-18T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : annonces sur la mobilisation lycéenne",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-18T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Quand on me suspecte, on remet en cause mon éthique » : la Sécu veut qu’ils accordent moins d’arrêts de travail, deux médecins du Sud-Ouest s’indignent",
-     "url": "https://www.sudouest.fr/sante/quand-on-me-suspecte-on-remet-en-cause-mon-ethique-la-secu-veut-qu-ils-accordent-moins-d-arrets-de-travail-deux-medecins-du-sud-ouest-s-indignent-31576373.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-18T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "La Sécu veut qu’ils accordent moins d’arrêts de travail",
-   "accroche": "La Sécu veut qu’ils accordent moins d’arrêts de travail",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-18T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« On est reparti pour 50 ans » : discret en surface, le chantier des égouts bâtis sous les boulevards de Marmande progresse",
-     "url": "https://www.sudouest.fr/lot-et-garonne/marmande/on-est-reparti-pour-50-ans-discret-en-surface-le-chantier-des-egouts-batis-sous-les-boulevards-de-marmande-progresse-31573986.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-18T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-18T17:57:46.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Barcelonnette | Vallée de l’Ubaye. EELV s’interroge sur le devenir du tourisme en Ubaye",
-     "url": "https://www.ledauphine.com/politique/2026/11/18/eelv-s-interroge-sur-le-devenir-du-tourisme-en-ubaye",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-18T17:57:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   }
  ]
 }
