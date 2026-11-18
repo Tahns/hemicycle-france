@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-18T06:20:40.254Z",
+ "lastUpdated": "2026-11-18T06:25:43.686Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -157,6 +157,7 @@
     "départ"
    ],
    "medias": [
+    "BFMTV",
     "Europe 1",
     "Libération",
     "Le Monde",
@@ -168,7 +169,6 @@
     "Sud Ouest",
     "L'Humanité",
     "Valeurs actuelles",
-    "BFMTV",
     "La Dépêche",
     "RFI",
     "20 Minutes",
@@ -180,6 +180,7 @@
    ],
    "mediasDistincts": 15,
    "sources": [
+    "BFMTV",
     "Groupe Bolloré",
     "Libération",
     "Le Monde",
@@ -188,7 +189,6 @@
     "Sud Ouest",
     "L'Humanité",
     "Valeurs actuelles",
-    "BFMTV",
     "La Dépêche",
     "France Médias Monde",
     "20 Minutes",
@@ -196,9 +196,16 @@
     "Public Sénat",
     "Nice-Matin"
    ],
-   "nb": 46,
-   "derniere": "2026-11-18T05:15:00.000Z",
+   "nb": 47,
+   "derniere": "2026-11-18T06:18:17.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - Réforme des retraites: Marine Le Pen joue sa crédibilité",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-l-edito-politique-de-guillaume-daret-reforme-des-retraites-marine-le-pen-joue-sa-credibilite_VN-202611180204.html",
+     "date": "2026-11-18T06:18:17.000Z",
+     "video": true
+    },
     {
      "media": "Europe 1",
      "titre": "Retraites : la droite et le centre critiquent le plan présenté par Marine Le Pen",
@@ -264,13 +271,6 @@
      "titre": "Présidentielle 2027 : Marine Le Pen tente de résoudre l’impossible équation des retraites",
      "url": "https://www.valeursactuelles.com/clubvaleurs/politique/presidentielle-2027-marine-le-pen-tente-de-resoudre-limpossible-equation-des-retraites",
      "date": "2026-11-17T17:29:06.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Réforme des retraites du RN: \"Nous sommes attachés à ce que la retraite redevienne un instrument de justice sociale\", indique Julien Odoul (RN)",
-     "url": "https://www.bfmtv.com/politique/video-reforme-des-retraites-du-rn-nous-sommes-attaches-a-ce-que-la-retraite-redevienne-un-instrument-de-justice-sociale-indique-julien-odoul-rn_VN-202611170772.html",
-     "date": "2026-11-17T17:06:46.000Z",
-     "video": true
     },
     {
      "media": "La Dépêche",
@@ -369,7 +369,7 @@
     "Libération",
     "La Croix"
    ],
-   "nb": 138,
+   "nb": 137,
    "derniere": "2026-11-18T06:18:16.000Z",
    "articles": [
     {
@@ -2008,6 +2008,77 @@
    "accroche": "Un «acte V» marqué par une affluence un peu moindre",
    "essentiel": "Mouvement social en France : un «acte V» marqué par une affluence un peu moindre. Deux médias en parlent : France 24 et RFI.",
    "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-18T06:21:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Sur les chaînes d’info, gare au recel de mensonges gouvernementaux",
+     "url": "https://www.liberation.fr/politique/sur-les-chaines-dinfo-gare-au-recel-de-mensonges-gouvernementaux-20261118_JMU5REZEKVDCNAYGGSQA3C32VI/",
+     "media": "Libération",
+     "date": "2026-11-18T06:21:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-18T06:18:17.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "L'ÉDITO POLITIQUE DE GUILLAUME DARET - Réforme des retraites: Marine Le Pen joue sa crédibilité",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-l-edito-politique-de-guillaume-daret-reforme-des-retraites-marine-le-pen-joue-sa-credibilite_VN-202611180204.html",
+     "media": "BFMTV",
+     "date": "2026-11-18T06:18:17.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Retraites",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -5269,78 +5340,6 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-17T18:56:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Le Pouzin. Deux élus d'opposition rejoignent la majorité : « Nous n’avons bénéficié ni d’encadrement ni de soutien »",
-     "url": "https://www.ledauphine.com/politique/2026/11/17/deux-elus-d-opposition-rejoignent-la-majorite-nous-n-avons-beneficie-ni-d-encadrement-ni-de-soutien",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-17T18:56:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Le Pouzin : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Le Pouzin. Deux élus d'opposition rejoignent la majorité",
-   "accroche": "Le Pouzin. Deux élus d'opposition rejoignent la majorité",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-17T18:53:40.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Édouard Philippe absent, pas de candidats des \"extrêmes\"... comment va s'organiser la primaire de la droite et du centre",
-     "url": "https://www.ladepeche.fr/2026/11/17/presidentielle-2027-edouard-philippe-absent-pas-de-candidats-des-extremes-comment-va-sorganiser-la-primaire-de-la-droite-et-du-centre-13657321.php",
-     "media": "La Dépêche",
-     "date": "2026-11-17T18:53:40.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   }
  ]
 }
