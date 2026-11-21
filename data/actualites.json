@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-21T17:45:43.144Z",
+ "lastUpdated": "2026-11-21T17:50:40.058Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -85,12 +85,12 @@
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -155,13 +155,14 @@
    "motifs": [
     "présidentielle",
     "candidature",
-    "dominique",
-    "françois"
+    "françois",
+    "dominique"
    ],
    "medias": [
-    "France 24",
     "La Dépêche",
+    "France 24",
     "Sud Ouest",
+    "L'Obs",
     "Dernières Nouvelles d'Alsace",
     "BFMTV",
     "Le JDD",
@@ -169,21 +170,22 @@
     "Libération",
     "Nice-Matin",
     "Le Progrès",
-    "Le Dauphiné libéré",
+    "L'Est républicain",
     "Valeurs actuelles",
     "Europe 1",
     "RFI",
     "20 Minutes",
-    "L'Obs",
     "Ouest-France",
     "Hugo Décrypte",
     "Public Sénat",
     "Le Figaro"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 15,
    "sources": [
+    "La Dépêche",
     "France Médias Monde",
-    "La Dépêche / Sud Ouest / Nice-Matin",
+    "Sud Ouest / Nice-Matin",
+    "L'Obs",
     "EBRA",
     "BFMTV",
     "Groupe Bolloré",
@@ -191,15 +193,20 @@
     "Libération",
     "Valeurs actuelles",
     "20 Minutes",
-    "L'Obs",
     "Ouest-France",
     "Hugo Décrypte",
     "Public Sénat",
     "Le Figaro"
    ],
-   "nb": 111,
-   "derniere": "2026-11-21T17:37:20.000Z",
+   "nb": 109,
+   "derniere": "2026-11-21T17:46:48.000Z",
    "articles": [
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 : \"je prends acte de l'impasse\"... les raisons qui ont poussé François Ruffin à se retirer de la course à l'Élysée",
+     "url": "https://www.ladepeche.fr/2026/11/21/presidentielle-2027-je-prends-acte-de-limpasse-les-raisons-qui-ont-pousse-francois-ruffin-a-se-retirer-de-la-course-a-lelysee-13664854.php",
+     "date": "2026-11-21T17:46:48.000Z"
+    },
     {
      "media": "France 24",
      "titre": "Présidentielle : prenant \"acte de l’impasse\" de sa campagne, François Ruffin retire sa candidature",
@@ -207,16 +214,16 @@
      "date": "2026-11-21T17:37:20.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "DIRECT. Présidentielle 2027 : François Ruffin retire sa candidature et souhaite \"bonne campagne\" aux \"candidats de gauche encore en lice\"",
-     "url": "https://www.ladepeche.fr/2026/11/21/direct-presidentielle-2027-dominique-de-villepin-a-officialise-sa-candidature-la-crise-continue-chez-les-ecologistes-suivez-les-dernieres-infos-sur-la-13664360.php",
-     "date": "2026-11-21T17:35:53.000Z"
-    },
-    {
      "media": "Sud Ouest",
      "titre": "Présidentielle 2027 : Ruffin retire sa candidature et souhaite « bonne campagne » aux « candidats de gauche encore en lice »",
      "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-ruffin-retire-sa-candidature-et-souhaite-bonne-campagne-aux-candidats-de-gauche-encore-en-lice-31606366.php",
      "date": "2026-11-21T17:28:39.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "François Ruffin retire sa candidature à l’élection présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261121.OBS120337/francois-ruffin-retire-sa-candidature-a-l-election-presidentielle.html",
+     "date": "2026-11-21T17:22:33.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -261,9 +268,9 @@
      "date": "2026-11-21T17:08:00.000Z"
     },
     {
-     "media": "Le Dauphiné libéré",
+     "media": "L'Est républicain",
      "titre": "Présidentielle 2027. François Ruffin prend « acte de l'impasse » de sa campagne et retire sa candidature",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/francois-ruffin-annonce-retirer-sa-candidature-et-n-apporte-son-soutien-a-aucun-candidat",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/francois-ruffin-annonce-retirer-sa-candidature-et-n-apporte-son-soutien-a-aucun-candidat",
      "date": "2026-11-21T17:08:00.000Z"
     },
     {
@@ -289,12 +296,6 @@
      "titre": "Présidentielle 2027 : « La primaire patine sérieusement »... Et si Edouard Philippe avait raison de tracer sa route ?",
      "url": "https://www.20minutes.fr/politique/4264335-20261121-presidentielle-2027-primaire-patine-serieusement-si-edouard-philippe-raison-tracer-route?at_medium=display&at_campaign=149",
      "date": "2026-11-21T06:17:37.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Dominique de Villepin candidat : y a-t-il un espace pour un « gaulliste de gauche » à la présidentielle ?",
-     "url": "https://www.nouvelobs.com/politique/20261120.OBS120304/dominique-de-villepin-candidat-y-a-t-il-un-espace-pour-un-gaulliste-de-gauche-a-la-presidentielle.html",
-     "date": "2026-11-20T17:44:39.000Z"
     },
     {
      "media": "Ouest-France",
@@ -330,7 +331,6 @@
     "affaire"
    ],
    "medias": [
-    "Le Dauphiné libéré",
     "La Dépêche",
     "Nice-Matin",
     "Le Monde",
@@ -340,9 +340,8 @@
     "L'Obs",
     "L'Express"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 8,
    "sources": [
-    "Le Dauphiné libéré",
     "La Dépêche",
     "Nice-Matin",
     "Le Monde",
@@ -352,15 +351,9 @@
     "L'Obs",
     "L'Express"
    ],
-   "nb": 14,
-   "derniere": "2026-11-21T16:08:50.000Z",
+   "nb": 13,
+   "derniere": "2026-11-21T11:01:05.000Z",
    "articles": [
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Servoz. Les affaires courantes de la commune confiées à une délégation spéciale",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/les-affaires-courantes-de-la-commune-confiees-a-une-delegation-speciale",
-     "date": "2026-11-21T16:08:50.000Z"
-    },
     {
      "media": "La Dépêche",
      "titre": "ENTRETIEN. Présidentielle 2027 : l'enquête sur le RN, une possible \"affaire d'État\"... Peut-elle avoir des conséquences sur la campagne de Marine Le Pen ?",
@@ -449,7 +442,6 @@
     "maire"
    ],
    "medias": [
-    "Le Dauphiné libéré",
     "BFMTV",
     "La Dépêche",
     "Le JDD",
@@ -458,9 +450,8 @@
     "Nice-Matin",
     "Libération"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 7,
    "sources": [
-    "Le Dauphiné libéré",
     "BFMTV",
     "La Dépêche",
     "Le JDD",
@@ -469,15 +460,9 @@
     "Nice-Matin",
     "Libération"
    ],
-   "nb": 21,
-   "derniere": "2026-11-21T16:44:00.000Z",
+   "nb": 20,
+   "derniere": "2026-11-21T16:09:07.000Z",
    "articles": [
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Drôme. « C’est le grand retour de la maire qui ajoute des F » : Bertrand Chameroy tique sur le langage de Marie-Hélène Thoraval",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/c-est-le-grand-retour-de-la-maire-qui-ajoute-des-f-bertrand-chameroy-tique-sur-le-langage-de-marie-helene-thoraval",
-     "date": "2026-11-21T16:44:00.000Z"
-    },
     {
      "media": "BFMTV",
      "titre": "Bruno Le Maire",
@@ -551,6 +536,13 @@
      "titre": "Présidentielle 2027: \"Il y a beaucoup de candidats et peu de projets\", observe Bruno Le Maire, ancien ministre de l'Économie",
      "url": "https://www.bfmtv.com/politique/video-presidentielle-2027-il-y-a-beaucoup-de-candidats-et-peu-de-projets-observe-bruno-le-maire-ancien-ministre-de-l-economie_VN-202611200955.html",
      "date": "2026-11-20T21:52:39.000Z",
+     "video": true
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Philippe Rio, maire PCF de Grigny: \"Nous devrons créer la baston juridique\" en cas de victoire du RN",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-philippe-rio-maire-pcf-de-grigny-nous-devrons-creer-la-baston-juridique-en-cas-de-victoire-du-rn_VN-202611200875.html",
+     "date": "2026-11-20T19:02:30.000Z",
      "video": true
     },
     {
@@ -629,15 +621,15 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 8,
+   "medias": 6,
    "mediasDistincts": 4,
    "sources": [
+    "La Dépêche",
     "France 24",
-    "La Dépêche / Sud Ouest / Nice-Matin",
     "EBRA",
     "BFMTV"
    ],
-   "derniere": "2026-11-21T17:37:20.000Z",
+   "derniere": "2026-11-21T17:46:48.000Z",
    "illustration": {
     "personnes": [
      {
@@ -661,28 +653,16 @@
      "date": "2026-11-21T17:08:00.000Z"
     },
     {
+     "titre": "Présidentielle 2027 : \"je prends acte de l'impasse\"... les raisons qui ont poussé François Ruffin à se retirer de la course à l'Élysée",
+     "url": "https://www.ladepeche.fr/2026/11/21/presidentielle-2027-je-prends-acte-de-limpasse-les-raisons-qui-ont-pousse-francois-ruffin-a-se-retirer-de-la-course-a-lelysee-13664854.php",
+     "media": "La Dépêche",
+     "date": "2026-11-21T17:46:48.000Z"
+    },
+    {
      "titre": "Présidentielle : prenant \"acte de l’impasse\" de sa campagne, François Ruffin retire sa candidature",
      "url": "https://www.france24.com/fr/france/20261121-pr%C3%A9sidentielle-prenant-acte-de-l-impasse-de-sa-campagne-fran%C3%A7ois-ruffin-retire-sa-candidature",
      "media": "France 24",
      "date": "2026-11-21T17:37:20.000Z"
-    },
-    {
-     "titre": "DIRECT. Présidentielle 2027 : François Ruffin retire sa candidature et souhaite \"bonne campagne\" aux \"candidats de gauche encore en lice\"",
-     "url": "https://www.ladepeche.fr/2026/11/21/direct-presidentielle-2027-dominique-de-villepin-a-officialise-sa-candidature-la-crise-continue-chez-les-ecologistes-suivez-les-dernieres-infos-sur-la-13664360.php",
-     "media": "La Dépêche",
-     "date": "2026-11-21T17:35:53.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Ruffin retire sa candidature et souhaite « bonne campagne » aux « candidats de gauche encore en lice »",
-     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-ruffin-retire-sa-candidature-et-souhaite-bonne-campagne-aux-candidats-de-gauche-encore-en-lice-31606366.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-21T17:28:39.000Z"
-    },
-    {
-     "titre": "Ruffin retire sa candidature et souhaite « bonne campagne » aux « candidats de gauche encore en lice »",
-     "url": "https://www.nicematin.com/societe/politique/ruffin-retire-sa-candidature-et-souhaite-bonne-campagne-aux-candidats-de-gauche-encore-en-lice-10765739",
-     "media": "Nice-Matin",
-     "date": "2026-11-21T17:09:40.000Z"
     },
     {
      "titre": "Présidentielle 2027. François Ruffin prend « acte de l'impasse » de sa campagne et retire sa candidature",
@@ -692,8 +672,8 @@
     },
     {
      "titre": "Présidentielle 2027. François Ruffin prend « acte de l'impasse » de sa campagne et retire sa candidature",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/francois-ruffin-annonce-retirer-sa-candidature-et-n-apporte-son-soutien-a-aucun-candidat",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/francois-ruffin-annonce-retirer-sa-candidature-et-n-apporte-son-soutien-a-aucun-candidat",
+     "media": "L'Est républicain",
      "date": "2026-11-21T17:08:00.000Z"
     },
     {
@@ -704,13 +684,12 @@
     }
    ],
    "titrePropre": {
-    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
+    "titre": "Acte de l impasse",
+    "origine": "recoupement"
    },
    "fait": "Pour la présidentielle 2027, François Ruffin prend \"acte de l'impasse\" de sa campagne et annonce retirer sa candidature",
    "accroche": "Pour la présidentielle 2027, François Ruffin prend \"acte de l'impasse\" de sa campagne et annonce retirer sa candidature",
-   "essentiel": "Pour la présidentielle 2027, François Ruffin prend \"acte de l'impasse\" de sa campagne et annonce retirer sa candidature. Huit médias en parlent.",
+   "essentiel": "Pour la présidentielle 2027, François Ruffin prend \"acte de l'impasse\" de sa campagne et annonce retirer sa candidature. Six médias en parlent : Le Progrès, La Dépêche, France 24, Dernières Nouvelles d'Alsace, L'Est républicain et BFMTV.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1184,10 +1163,10 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "BFMTV",
-    "Public Sénat"
+    "L'Obs",
+    "BFMTV"
    ],
-   "derniere": "2026-11-21T11:39:14.000Z",
+   "derniere": "2026-11-21T15:52:03.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1196,26 +1175,26 @@
    },
    "articles": [
     {
+     "titre": "« Permis de tuer » ou « cadre juridique » : que change la présomption d’usage légal des armes par les forces de l’ordre ?",
+     "url": "https://www.nouvelobs.com/politique/20261121.OBS120323/permis-de-tuer-ou-cadre-juridique-adoptee-au-senat-que-change-la-presomption-d-usage-legal-des-armes-par-les-forces-de-l-ordre.html",
+     "media": "L'Obs",
+     "date": "2026-11-21T15:52:03.000Z"
+    },
+    {
      "titre": "Présomption d'usage légal des armes par les forces de l'ordre: ce que change le texte adopté au Sénat",
      "url": "https://www.bfmtv.com/politique/parlement/video-presomption-d-usage-legal-des-armes-par-les-forces-de-l-ordre-ce-que-change-le-texte-adopte-au-senat_VN-202611210304.html",
      "media": "BFMTV",
      "date": "2026-11-21T11:39:14.000Z",
      "video": true
-    },
-    {
-     "titre": "« Ce texte va plus loin que l’Italie de Mussolini » : au Sénat, des débats électriques autour de l’instauration d’une « présomption d’usage légal des armes » par les forces de l’ordre",
-     "url": "https://www.publicsenat.fr/actualites/parlementaire/ce-texte-va-plus-loin-que-litalie-de-mussolini-au-senat-des-debats-electriques-autour-de-linstauration-dune-presomption-de-legitime-defense",
-     "media": "Public Sénat",
-     "date": "2026-11-20T00:46:19.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Sénat : vote sur le maintien de l'ordre",
+    "titre": "Sécurité : ce que disent les médias",
     "origine": "regles"
    },
-   "fait": "Ce que change le texte adopté au Sénat",
-   "accroche": "Ce que change le texte adopté au Sénat",
-   "essentiel": "Présomption d'usage légal des armes par les forces de l'ordre : ce que change le texte adopté au Sénat. Deux médias en parlent : BFMTV et Public Sénat.",
+   "fait": "Que change la présomption d’usage légal des armes par les forces de l’ordre ?",
+   "accroche": "Que change la présomption d’usage légal des armes par les forces de l’ordre ?",
+   "essentiel": "Présomption d'usage légal des armes par les forces de l'ordre : ce que change le texte adopté au Sénat. Deux médias en parlent : L'Obs et BFMTV.",
    "rubrique": "Sénat"
   },
   {
@@ -1777,6 +1756,61 @@
    "medias": 3,
    "mediasDistincts": 1,
    "sources": [
+    "La Dépêche / Sud Ouest / Nice-Matin"
+   ],
+   "derniere": "2026-11-21T17:35:53.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Présidentielle 2027 : François Ruffin retire sa candidature et souhaite \"bonne campagne\" aux \"candidats de gauche encore en lice\"",
+     "url": "https://www.ladepeche.fr/2026/11/21/direct-presidentielle-2027-dominique-de-villepin-a-officialise-sa-candidature-la-crise-continue-chez-les-ecologistes-suivez-les-dernieres-infos-sur-la-13664360.php",
+     "media": "La Dépêche",
+     "date": "2026-11-21T17:35:53.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : Ruffin retire sa candidature et souhaite « bonne campagne » aux « candidats de gauche encore en lice »",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-ruffin-retire-sa-candidature-et-souhaite-bonne-campagne-aux-candidats-de-gauche-encore-en-lice-31606366.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-21T17:28:39.000Z"
+    },
+    {
+     "titre": "Ruffin retire sa candidature et souhaite « bonne campagne » aux « candidats de gauche encore en lice »",
+     "url": "https://www.nicematin.com/societe/politique/ruffin-retire-sa-candidature-et-souhaite-bonne-campagne-aux-candidats-de-gauche-encore-en-lice-10765739",
+     "media": "Nice-Matin",
+     "date": "2026-11-21T17:09:40.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Ruffin : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
     "EBRA"
    ],
    "derniere": "2026-11-21T17:00:00.000Z",
@@ -1801,8 +1835,8 @@
     },
     {
      "titre": "Présidentielle 2027. Le centre et la droite s'enfoncent dans l'interminable débat sur la primaire",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/le-centre-et-la-droite-s-enfoncent-dans-l-interminable-debat-sur-la-primaire",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/le-centre-et-la-droite-s-enfoncent-dans-l-interminable-debat-sur-la-primaire",
+     "media": "L'Est républicain",
      "date": "2026-11-21T17:00:00.000Z"
     }
    ],
@@ -1812,6 +1846,160 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-21T11:20:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Europe. Budget de l'UE : Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
+     "url": "https://www.dna.fr/politique/2026/11/21/budget-de-l-ue-antonio-costa-propose-204-milliards-d-euros-d-economies-la-france-s-y-oppose",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-21T11:20:00.000Z"
+    },
+    {
+     "titre": "Europe. Budget de l'UE : Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/budget-de-l-ue-antonio-costa-propose-204-milliards-d-euros-d-economies-la-france-s-y-oppose",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T11:20:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Europe : finances locales",
+    "origine": "regles"
+   },
+   "fait": "Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
+   "accroche": "Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
+   "essentiel": "Sur le budget de l'UE, Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "rubrique": "Budget",
+   "chiffre": {
+    "valeur": "204",
+    "unite": "milliards d'euros"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-21T06:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Consommation. Black Friday : ces pièges des sites marchands que Bruxelles veut interdire",
+     "url": "https://www.dna.fr/economie/2026/11/21/black-friday-bruxelles-veut-interdire-les-dark-patterns-voici-ce-que-ca-pourrait-changer-pour-vous",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-21T06:15:00.000Z"
+    },
+    {
+     "titre": "Consommation. Black Friday : Bruxelles veut interdire les “dark patterns”, voici ce que ça pourrait changer pour vous",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/21/black-friday-bruxelles-veut-interdire-les-dark-patterns-voici-ce-que-ca-pourrait-changer-pour-vous",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T06:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Consommation : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Black Friday : Bruxelles veut interdire les “dark patterns”",
+   "accroche": "Black Friday : Bruxelles veut interdire les “dark patterns”",
+   "essentiel": "Black Friday : Bruxelles veut interdire les “dark patterns”. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "rubrique": "International"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-21T05:27:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Aldjia, 58 ans. Issue d’une fratrie de neuf enfants, elle espère le changement : « Il ne faut pas se contenter d’applaudir, il faut y aller, nous aussi »",
+     "url": "https://www.dna.fr/elections/2026/11/21/issue-d-une-fratrie-de-neuf-enfants-elle-espere-le-changement-il-ne-faut-pas-se-contenter-d-applaudir-il-faut-y-aller-nous-aussi",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-21T05:27:00.000Z"
+    },
+    {
+     "titre": "Aldjia, 58 ans. Issue d’une fratrie de neuf enfants, elle espère le changement : « Il ne faut pas se contenter d’applaudir, il faut y aller, nous aussi »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/issue-d-une-fratrie-de-neuf-enfants-elle-espere-le-changement-il-ne-faut-pas-se-contenter-d-applaudir-il-faut-y-aller-nous-aussi",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éducation et jeunesse : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Aldjia, 58 ans. Issue d’une fratrie de neuf enfants, elle espère le changement",
+   "accroche": "Aldjia, 58 ans. Issue d’une fratrie de neuf enfants, elle espère le changement",
+   "essentiel": "Aldjia, 58 ans. Issue d’une fratrie de neuf enfants, elle espère le changement. Deux médias en parlent : Dernières Nouvelles d'Alsace et L'Est républicain.",
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "58",
+    "unite": "ans"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-21T05:05:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Christine, 60 ans. « Ceux qui redoutent le grand remplacement feraient bien d’être écolos », une gardienne de refuge face au réchauffement climatique",
+     "url": "https://www.dna.fr/elections/2026/11/21/ceux-qui-redoutent-le-grand-remplacement-feraient-bien-d-etre-ecolos-une-gardienne-de-refuge-face-au-rechauffement-climatique",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-21T05:05:00.000Z"
+    },
+    {
+     "titre": "Christine, 60 ans. « Ceux qui redoutent le grand remplacement feraient bien d’être écolos », une gardienne de refuge face au réchauffement climatique",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/ceux-qui-redoutent-le-grand-remplacement-feraient-bien-d-etre-ecolos-une-gardienne-de-refuge-face-au-rechauffement-climatique",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T05:05:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Environnement : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "60",
+    "unite": "ans"
+   }
   },
   {
    "medias": 2,
@@ -1969,6 +2157,38 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-21T17:45:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Soupçons de fuites vers le RN : le préfet Hugues Moutouh demande à être relevé de ses fonctions",
+     "url": "https://www.europe1.fr/societe/soupcons-de-fuites-vers-le-rn-le-prefet-hugues-moutouh-demande-a-etre-releve-de-ses-fonctions-1241833?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-21T17:45:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le préfet Hugues Moutouh demande à être relevé de ses fonctions",
+   "accroche": "Le préfet Hugues Moutouh demande à être relevé de ses fonctions",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-21T17:45:20.000Z",
@@ -1989,6 +2209,34 @@
    "titrePropre": {
     "titre": "Saint-Bonnet-le-Froid : environnement",
     "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:45:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L'oeil de la rédaction. Inondations, tornade : la solidarité comme antidote aux coups durs",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/21/inondations-tornade-la-solidarite-comme-antidote-aux-coups-durs",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:45:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique"
   },
@@ -2024,9 +2272,9 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
+    "L'Est républicain"
    ],
-   "derniere": "2026-11-21T17:36:55.000Z",
+   "derniere": "2026-11-21T17:40:07.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2035,45 +2283,18 @@
    },
    "articles": [
     {
-     "titre": "Saint-Geoire-en-Valdaine. Illuminations, déneigement et résidence autonomie au conseil",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/illuminations-deneigement-et-residence-autonomie-au-conseil",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:36:55.000Z"
+     "titre": "Bayonville-sur-Mad. Salle communale, affouage et subventions au menu du conseil",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/salle-communale-affouage-et-subventions-au-menu-du-conseil",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:40:07.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Saint-Geoire-en-Valdaine : actualité locale",
+    "titre": "Bayonville-sur-Mad : actualité locale",
     "origine": "regles",
     "generique": true
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T17:36:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Violès. La municipalité souhaite aménager un pôle sportif et de loisirs",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/la-municipalite-souhaite-amenager-un-pole-sportif-et-de-loisirs",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Violès : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2133,62 +2354,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T17:30:37.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Roquemaure. Le 24 novembre, la commune se mobilise pour les services publics",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/le-24-novembre-la-commune-se-mobilise-pour-les-services-publics",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:30:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Roquemaure : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Le 24 novembre, la commune se mobilise pour les services publics",
-   "accroche": "Le 24 novembre, la commune se mobilise pour les services publics",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T17:28:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Isère. “Les élus à la ferme” : dans le Trièves, les politiques se sont mis dans les bottes des agriculteurs",
-     "url": "https://www.ledauphine.com/economie/2026/11/21/les-elus-a-la-ferme-dans-le-trieves-les-politiques-se-sont-mis-dans-les-bottes-des-agriculteurs",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:28:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Isère : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-21T17:22:57.000Z",
@@ -2218,6 +2383,50 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-21T17:22:33.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "François Ruffin retire sa candidature à l’élection présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261121.OBS120337/francois-ruffin-retire-sa-candidature-a-l-election-presidentielle.html",
+     "media": "L'Obs",
+     "date": "2026-11-21T17:22:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-11-21T17:22:00.000Z",
@@ -2240,6 +2449,67 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-21T17:21:38.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gabriel Attal",
+      "photo": "photos/deputes/PA722190.jpg",
+      "photoHd": "photos/deputes/hd/PA722190.jpg",
+      "parti": "EPR",
+      "lien": "#depute-PA722190",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Primaire de la droite et du centre: une nouvelle réunion des équipes de David Lisnard, Gabriel Attal et Bruno Retailleau prévue le 26 novembre prochain",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-de-la-droite-et-du-centre-une-nouvelle-reunion-des-equipes-de-david-lisnard-gabriel-attal-et-bruno-retailleau-prevue-le-26-novembre-prochain_AN-202611210385.html",
+     "media": "BFMTV",
+     "date": "2026-11-21T17:21:38.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Primaire de la droite et du centre : une nouvelle réunion des équipes de David Lisnard",
+   "accroche": "Primaire de la droite et du centre : une nouvelle réunion des équipes de David Lisnard",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2376,33 +2646,17 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
+    "L'Obs"
    ],
-   "derniere": "2026-11-21T17:21:38.000Z",
+   "derniere": "2026-11-21T17:20:55.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+      "nom": "François Asselineau",
+      "photo": "photos/personnalites/francois-asselineau.jpg",
+      "photoHd": "photos/personnalites/hd/francois-asselineau.jpg",
+      "parti": "UPR",
+      "credit": "Union Populaire Républicaine, CC BY-SA 4.0, Wikimedia Commons"
      }
     ],
     "partis": [],
@@ -2411,54 +2665,19 @@
    },
    "articles": [
     {
-     "titre": "Primaire de la droite et du centre: une nouvelle réunion des équipes de David Lisnard, Gabriel Attal et Bruno Retailleau prévue le 26 novembre prochain",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-de-la-droite-et-du-centre-une-nouvelle-reunion-des-equipes-de-david-lisnard-gabriel-attal-et-bruno-retailleau-prevue-le-26-novembre-prochain_AN-202611210385.html",
-     "media": "BFMTV",
-     "date": "2026-11-21T17:21:38.000Z"
+     "titre": "Présidentielle 2027 : d’Asselineau à Villepin, quels sont les 32 candidats actuellement déclarés ?",
+     "url": "https://www.nouvelobs.com/politique/20261120.OBS120289/presidentielle-2027-d-asselineau-a-villepin-quels-sont-les-32-candidats-actuellement-declares.html",
+     "media": "L'Obs",
+     "date": "2026-11-21T17:20:55.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Primaire de la droite et du centre : une nouvelle réunion des équipes de David Lisnard",
-   "accroche": "Primaire de la droite et du centre : une nouvelle réunion des équipes de David Lisnard",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T17:20:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Le Pont-de-Beauvoisin. Travaux, marché de Noël et école au menu du conseil de lundi",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/travaux-marche-de-noel-et-ecole-au-menu-du-conseil-de-lundi",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:20:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Le Pont-de-Beauvoisin : projet d'aménagement",
+    "titre": "François Asselineau : déclaration sur la présidentielle de 2027",
     "origine": "regles"
    },
-   "rubrique": "Politique"
+   "fait": "D’Asselineau à Villepin, quels sont les 32 candidats actuellement déclarés ?",
+   "accroche": "D’Asselineau à Villepin, quels sont les 32 candidats actuellement déclarés ?",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2521,6 +2740,120 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:17:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bavilliers. Lynda Boubekeur, nouvelle médiatrice de proximité",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/lynda-boubekeur-nouvelle-mediatrice-de-proximite",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:17:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bavilliers : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:17:50.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Essert. Acquisition de parcelles par la commune",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/acquisition-de-parcelles-par-la-commune",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:17:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Essert : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:17:36.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Phaffans. Des habitants récompensés pour leur investissement",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/des-habitants-recompenses-pour-leur-investissement",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:17:36.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Phaffans : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Des habitants récompensés pour leur investissement",
+   "accroche": "Des habitants récompensés pour leur investissement",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:15:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Vesoul. « On le doit aux Vésuliens » : pas de hausse d’impôts, des investissements maintenus et une opposition constructive",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/on-le-doit-aux-vesuliens-pas-de-hausse-d-impots-des-investissements-maintenus-et-une-opposition-constructive",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:15:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vesoul : finances locales",
+    "origine": "regles"
+   },
+   "fait": "Pas de hausse d’impôts, des investissements maintenus et une opposition constructive",
+   "accroche": "Pas de hausse d’impôts, des investissements maintenus et une opposition constructive",
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2616,33 +2949,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T17:11:51.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Fontanil-Cornillon. L’intercommunalité à l’ordre du jour du conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/l-intercommunalite-a-l-ordre-du-jour-du-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T17:11:51.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Fontanil-Cornillon : conseil municipal",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-11-21T17:04:21.000Z",
@@ -2695,6 +3001,33 @@
    },
    "fait": "À Chalon-sur-Saône, la municipalité reprend possession d’un bâtiment",
    "accroche": "À Chalon-sur-Saône, la municipalité reprend possession d’un bâtiment",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:02:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Roppe. Conseil municipal : une subvention pour les Anciens combattants",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/conseil-municipal-une-subvention-pour-les-anciens-combattants",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:02:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Roppe : conseil municipal",
+    "origine": "regles"
+   },
    "rubrique": "Élysée 2027"
   },
   {
@@ -2816,6 +3149,34 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T17:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Meuse. Les missions locales soutenues par les conseillers départementaux",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/21/les-missions-locales-soutenues-par-les-conseillers-departementaux",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T17:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Département : ce qu'il faut savoir sur collectivités locales",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-21T16:55:41.000Z",
@@ -2899,33 +3260,6 @@
    },
    "fait": "Le conseil municipal adopte 20 532 € de subventions",
    "accroche": "Le conseil municipal adopte 20 532 € de subventions",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:50:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Cluses. « Tout est cher et on ne parle que d’immigration et du voile » : la présidentielle 2027 vue du quartier des Ewües",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/tout-est-cher-et-on-ne-parle-que-d-immigration-et-du-voile-la-presidentielle-2027-vue-du-quartier-des-ewues",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:50:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Cluses : présidentielle",
-    "origine": "regles"
-   },
    "rubrique": "Élysée 2027"
   },
   {
@@ -3045,33 +3379,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:44:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Drôme. « C’est le grand retour de la maire qui ajoute des F » : Bertrand Chameroy tique sur le langage de Marie-Hélène Thoraval",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/c-est-le-grand-retour-de-la-maire-qui-ajoute-des-f-bertrand-chameroy-tique-sur-le-langage-de-marie-helene-thoraval",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:44:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-21T16:38:46.000Z",
@@ -3127,91 +3434,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:24:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Villargondran. Carrière Apprin, cimetière et investissements au conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/carriere-apprin-cimetiere-et-investissements-au-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:24:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Villargondran : conseil municipal",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:24:56.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Tour-en-Maurienne. La voirie de L'Échaillon intégrée au domaine communal",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/la-voirie-de-l-echaillon-integree-au-domaine-communal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:24:56.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Tour-en-Maurienne : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:24:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Chamonix. Candidatures ouvertes pour les sportifs de haut niveau",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/candidatures-ouvertes-pour-les-sportifs-de-haut-niveau",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:24:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Chamonix : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Candidatures ouvertes pour les sportifs de haut niveau",
-   "accroche": "Candidatures ouvertes pour les sportifs de haut niveau",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-11-21T16:23:56.000Z",
@@ -3240,9 +3462,9 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
+    "L'Est républicain"
    ],
-   "derniere": "2026-11-21T16:13:00.000Z",
+   "derniere": "2026-11-21T16:21:24.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -3251,75 +3473,17 @@
    },
    "articles": [
     {
-     "titre": "Isère. « Faire de Grenoble la capitale de la géopolitique » : l'ambition de Pascal Boniface et de Fouziya Bouzerda",
-     "url": "https://www.ledauphine.com/economie/2026/11/21/faire-de-grenoble-la-capitale-de-la-geopolitique-l-ambition-de-pascal-boniface-et-de-fouziya-bouzerda",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:13:00.000Z"
+     "titre": "Villers-lès-Nancy. Le camping de Brabois rouvre pour les fêtes de la Saint-Nicolas",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/le-camping-de-brabois-rouvre-pour-les-fetes-de-la-saint-nicolas",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T16:21:24.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Isère : actualité locale",
+    "titre": "Villers-lès-Nancy : actualité locale",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:12:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Une vingtaine de dossiers à l’ordre du jour du conseil municipal",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/une-vingtaine-de-dossiers-a-l-ordre-du-jour-du-conseil-municipal",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:12:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:11:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Passy. Des projets en cascade malgré la baisse des dotations",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/des-projets-en-cascade-malgre-la-baisse-des-dotations",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:11:30.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Passy : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Des projets en cascade malgré la baisse des dotations",
-   "accroche": "Des projets en cascade malgré la baisse des dotations",
    "rubrique": "Politique"
   },
   {
@@ -3394,35 +3558,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:08:50.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Servoz. Les affaires courantes de la commune confiées à une délégation spéciale",
-     "url": "https://www.ledauphine.com/elections/2026/11/21/les-affaires-courantes-de-la-commune-confiees-a-une-delegation-speciale",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:08:50.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Affaire",
-    "origine": "dossier"
-   },
-   "fait": "Les affaires courantes de la commune confiées à une délégation spéciale",
-   "accroche": "Les affaires courantes de la commune confiées à une délégation spéciale",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-21T16:04:58.000Z",
@@ -3448,51 +3583,6 @@
    "fait": "Entre 80 000 et 150 000 personnes se sont mobilisées en France",
    "accroche": "Entre 80 000 et 150 000 personnes se sont mobilisées en France",
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T16:02:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Un comité de soutien à la candidature de Bruno Retailleau lancé en Savoie",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/un-comite-de-soutien-a-la-candidature-de-bruno-retailleau-lance-en-savoie",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T16:02:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Un comité de soutien à la candidature de Bruno Retailleau lancé en Savoie",
-   "accroche": "Un comité de soutien à la candidature de Bruno Retailleau lancé en Savoie",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -3646,34 +3736,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T15:49:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Saint-Julien-en-Genevois. Conseil municipal : un nouvel écrin pour des échanges soutenus",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/conseil-municipal-un-nouvel-ecrin-pour-des-echanges-soutenus",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T15:49:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Conseil municipal : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Le Progrès"
    ],
    "derniere": "2026-11-21T15:45:00.000Z",
@@ -3791,6 +3853,61 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T15:13:12.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Blénod-lès-Toul. Une aide de 6 522 € pour plusieurs équipements",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/une-aide-de-6-522-pour-plusieurs-equipements",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T15:13:12.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Blénod-lès-Toul : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-21T15:12:37.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Aubréville. Un accueil de loisirs et de nouvelles plantations d’arbres en projet pour la commune",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/21/un-accueil-de-loisirs-et-de-nouvelles-plantations-d-arbres-en-projet-pour-la-commune",
+     "media": "L'Est républicain",
+     "date": "2026-11-21T15:12:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Aubréville : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4027,33 +4144,6 @@
     "generique": true
    },
    "rubrique": "International"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-21T14:19:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le Champ-près-Froges. Un conseil municipal en partie axé sur les festivités de fin d’année",
-     "url": "https://www.ledauphine.com/politique/2026/11/21/un-conseil-municipal-en-partie-axe-sur-les-festivites-de-fin-d-annee",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-21T14:19:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Le Champ-près-Froges : conseil municipal",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -4442,35 +4532,6 @@
    "fait": "Rouen : des antifas font taire un élu Rassemblement national en plein conseil municipal",
    "accroche": "Rouen : des antifas font taire un élu Rassemblement national en plein conseil municipal",
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-21T11:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Europe. Budget de l'UE : Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
-     "url": "https://www.dna.fr/politique/2026/11/21/budget-de-l-ue-antonio-costa-propose-204-milliards-d-euros-d-economies-la-france-s-y-oppose",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-21T11:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Europe : finances locales",
-    "origine": "regles"
-   },
-   "fait": "Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
-   "accroche": "Antonio Costa propose 204 milliards d'euros d'économies, la France s'y oppose",
-   "rubrique": "Budget"
   },
   {
    "medias": 1,
