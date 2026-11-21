@@ -1,13 +1,13 @@
 # Recommandations (suggestions, rien n'est modifié automatiquement)
 
-Calculées le 2026-11-20 à partir de 295 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
+Calculées le 2026-11-21 à partir de 296 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
 
-## Stories (257 mesuré(s))
+## Stories (258 mesuré(s))
 
-- les stories publiés vers 21 h (heure de Paris) ont 21 % de vues de plus que les autres (3 contre 254 médias, moyenne 10 vues). Piste : en publier davantage.
-- les stories publiés vers 14 h (heure de Paris) ont 51 % de vues de moins que les autres (4 contre 253 médias). Piste : en publier moins ou les repenser.
-- les stories sur le thème « budget » ont 45 % de vues de plus que les autres (4 contre 253 médias, moyenne 12 vues). Piste : en publier davantage.
-- les stories sur le thème « energie-ecologie » ont 61 % de vues de moins que les autres (3 contre 254 médias). Piste : en publier moins ou les repenser.
+- les stories publiés vers 21 h (heure de Paris) ont 21 % de vues de plus que les autres (3 contre 255 médias, moyenne 10 vues). Piste : en publier davantage.
+- les stories publiés vers 14 h (heure de Paris) ont 51 % de vues de moins que les autres (4 contre 254 médias). Piste : en publier moins ou les repenser.
+- les stories sur le thème « budget » ont 44 % de vues de plus que les autres (4 contre 254 médias, moyenne 12 vues). Piste : en publier davantage.
+- les stories sur le thème « energie-ecologie » ont 61 % de vues de moins que les autres (3 contre 255 médias). Piste : en publier moins ou les repenser.
 
 ## Posts (36 mesuré(s))
 
@@ -22,7 +22,7 @@ Données insuffisantes : 2 sur 10 nécessaires avant de tirer des conclusions. A
 
 ## Formats (indicatif)
 
-Vues moyennes : posts 20 (36) ; stories 9 (257). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
+Vues moyennes : posts 20 (36) ; stories 9 (258). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
 
 ## Test comparatif des styles de story
 
