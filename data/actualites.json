@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-22T00:30:52.977Z",
+ "lastUpdated": "2026-11-22T00:35:27.798Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -175,9 +175,9 @@
     "L'Express",
     "France 24",
     "Sud Ouest",
+    "L'Obs",
     "Libération",
     "20 Minutes",
-    "L'Obs",
     "Ouest-France",
     "Hugo Décrypte",
     "Public Sénat",
@@ -196,15 +196,15 @@
     "L'Humanité",
     "L'Express",
     "Sud Ouest",
+    "L'Obs",
     "Libération",
     "20 Minutes",
-    "L'Obs",
     "Ouest-France",
     "Hugo Décrypte",
     "Public Sénat",
     "Le Figaro"
    ],
-   "nb": 115,
+   "nb": 116,
    "derniere": "2026-11-21T22:59:13.000Z",
    "articles": [
     {
@@ -304,6 +304,12 @@
      "date": "2026-11-21T17:28:39.000Z"
     },
     {
+     "media": "L'Obs",
+     "titre": "François Ruffin retire sa candidature à l’élection présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261121.OBS120337/francois-ruffin-retire-sa-candidature-a-l-election-presidentielle.html",
+     "date": "2026-11-21T17:22:33.000Z"
+    },
+    {
      "media": "Libération",
      "titre": "Présidentielle 2027 : prenant acte d’une «impasse», François Ruffin retire sa candidature",
      "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-francois-ruffin-retire-sa-candidature-20261121_KUCTZ27WZFBDRP62V22OJEAVBY/",
@@ -314,12 +320,6 @@
      "titre": "Présidentielle 2027 : « La primaire patine sérieusement »... Et si Edouard Philippe avait raison de tracer sa route ?",
      "url": "https://www.20minutes.fr/politique/4264335-20261121-presidentielle-2027-primaire-patine-serieusement-si-edouard-philippe-raison-tracer-route?at_medium=display&at_campaign=149",
      "date": "2026-11-21T06:17:37.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Dominique de Villepin candidat : y a-t-il un espace pour un « gaulliste de gauche » à la présidentielle ?",
-     "url": "https://www.nouvelobs.com/politique/20261120.OBS120304/dominique-de-villepin-candidat-y-a-t-il-un-espace-pour-un-gaulliste-de-gauche-a-la-presidentielle.html",
-     "date": "2026-11-20T17:44:39.000Z"
     },
     {
      "media": "Ouest-France",
@@ -1027,7 +1027,7 @@
     "20 Minutes",
     "Dernières Nouvelles d'Alsace"
    ],
-   "derniere": "2026-11-21T10:32:32.000Z",
+   "derniere": "2026-11-21T15:52:03.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1045,7 +1045,7 @@
      "titre": "« Permis de tuer » ou « cadre juridique » : que change la présomption d’usage légal des armes par les forces de l’ordre ?",
      "url": "https://www.nouvelobs.com/politique/20261121.OBS120323/permis-de-tuer-ou-cadre-juridique-adoptee-au-senat-que-change-la-presomption-d-usage-legal-des-armes-par-les-forces-de-l-ordre.html",
      "media": "L'Obs",
-     "date": "2026-11-21T10:32:32.000Z"
+     "date": "2026-11-21T15:52:03.000Z"
     },
     {
      "titre": "La présomption d’usage légal des armes par les forces de l’ordre adoptée par le Parlement",
@@ -5105,30 +5105,45 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "L'Obs"
    ],
-   "derniere": "2026-11-21T17:22:00.000Z",
+   "derniere": "2026-11-21T17:22:33.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
     "partis": [],
     "theme": "election",
     "vignette": "election"
    },
    "articles": [
     {
-     "titre": "Strasbourg. Catherine Trautmann appelle les candidats à la présidentielle à s’emparer du sujet du logement",
-     "url": "https://www.dna.fr/politique/2026/11/21/catherine-trautmann-appelle-les-candidats-a-s-emparer-du-sujet-du-logement",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-21T17:22:00.000Z"
+     "titre": "François Ruffin retire sa candidature à l’élection présidentielle",
+     "url": "https://www.nouvelobs.com/politique/20261121.OBS120337/francois-ruffin-retire-sa-candidature-a-l-election-presidentielle.html",
+     "media": "L'Obs",
+     "date": "2026-11-21T17:22:33.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Strasbourg : présidentielle",
-    "origine": "regles"
+    "titre": "François Ruffin : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
-   "fait": "Catherine Trautmann appelle les candidats à la présidentielle à s’emparer du sujet du logement",
-   "accroche": "Catherine Trautmann appelle les candidats à la présidentielle à s’emparer du sujet du logement",
-   "rubrique": "Élysée 2027"
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   }
  ]
 }
