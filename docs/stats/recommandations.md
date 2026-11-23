@@ -1,6 +1,6 @@
 # Recommandations (suggestions, rien n'est modifié automatiquement)
 
-Calculées le 2026-11-22 à partir de 305 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
+Calculées le 2026-11-23 à partir de 305 média(s) mesuré(s) (data/instagram-stats.json). Ce sont des pistes à valider par vous ; voir docs/STATS.md.
 
 ## Stories (267 mesuré(s))
 
@@ -22,7 +22,7 @@ Données insuffisantes : 2 sur 10 nécessaires avant de tirer des conclusions. A
 
 ## Formats (indicatif)
 
-Vues moyennes : posts 20 (36) ; stories 8 (267). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
+Vues moyennes : posts 20 (36) ; stories 9 (267). Attention : une vue de story et une vue de Reel ne se comptent pas pareil, ne comparez les formats qu'avec prudence.
 
 ## Test comparatif des styles de story
 
