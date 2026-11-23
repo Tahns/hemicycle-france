@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-23T14:05:32.948Z",
+ "lastUpdated": "2026-11-23T14:10:51.356Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "RFI",
@@ -90,7 +90,7 @@
   {
    "nom": "L'Est républicain",
    "site": "https://www.estrepublicain.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Nice-Matin",
@@ -174,17 +174,19 @@
     "Libération",
     "L'Obs",
     "Public Sénat",
+    "20 Minutes",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
-    "20 Minutes",
-    "Ouest-France"
+    "L'Est républicain",
+    "Ouest-France",
+    "France 24"
    ],
    "mediasDistincts": 17,
    "sources": [
     "EBRA",
     "BFMTV",
     "Le Monde",
-    "RFI",
+    "France Médias Monde",
     "Sud Ouest",
     "La Dépêche",
     "Nice-Matin",
@@ -199,7 +201,7 @@
     "20 Minutes",
     "Ouest-France"
    ],
-   "nb": 81,
+   "nb": 82,
    "derniere": "2026-11-23T13:59:00.000Z",
    "articles": [
     {
@@ -294,6 +296,12 @@
      "date": "2026-11-23T10:21:06.000Z"
     },
     {
+     "media": "20 Minutes",
+     "titre": "Toute l’info en 2 minutes : Fiasco de la COP31, Ruffin courtisé et le RN dément avoir été aidé par le préfet",
+     "url": "https://www.20minutes.fr/societe/4264992-20261123-toute-info-2-minutes-echec-cop31-ruffin-courtise-prefet-soupconne-aider-rn?at_medium=display&at_campaign=149",
+     "date": "2026-11-23T07:00:13.000Z"
+    },
+    {
      "media": "Le Progrès",
      "titre": "Présidentielle 2027. Marine Le Pen recule, David Lisnard passe devant Édouard Philippe dans un sondage",
      "url": "https://www.leprogres.fr/politique/2026/11/23/marine-le-pen-recule-david-lisnard-passe-devant-edouard-philippe-dans-un-sondage",
@@ -306,16 +314,159 @@
      "date": "2026-11-23T06:01:00.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Présidentielle : Le Pen recule et Lisnard accélère dans un nouveau sondage",
-     "url": "https://www.20minutes.fr/politique/4264988-20261123-presidentielle-pen-recule-lisnard-accelere-nouveau-sondage?at_medium=display&at_campaign=149",
-     "date": "2026-11-23T05:26:10.000Z"
+     "media": "L'Est républicain",
+     "titre": "Présidentielle 2027. Marine Le Pen recule, David Lisnard passe devant Édouard Philippe dans un sondage",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/23/marine-le-pen-recule-david-lisnard-passe-devant-edouard-philippe-dans-un-sondage",
+     "date": "2026-11-23T06:01:00.000Z"
     },
     {
      "media": "Ouest-France",
      "titre": "ENTRETIEN. « Les peurs vont être au premier plan de la présidentielle de 2027 », analyse le politologue Pascal Perrineau",
      "url": "https://www.ouest-france.fr/elections/presidentielle/entretien-les-peurs-vont-etre-au-premier-plan-de-la-presidentielle-de-2027-analyse-le-politologue-pascal-perrineau-5da02d90-e1e2-11f1-b029-43a761592972?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
      "date": "2026-11-22T05:45:15.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Présidentielle 2027 : François Ruffin jette l'éponge face à \"l’impasse\" de sa campagne",
+     "url": "https://www.france24.com/fr/france/20261121-pr%C3%A9sidentielle-prenant-acte-de-l-impasse-de-sa-campagne-fran%C3%A7ois-ruffin-retire-sa-candidature",
+     "date": "2026-11-21T17:37:20.000Z"
+    }
+   ]
+  },
+  {
+   "id": "interieur",
+   "titre": "Intérieur",
+   "motifs": [
+    "intérieur",
+    "roland",
+    "continuent",
+    "climat"
+   ],
+   "medias": [
+    "BFMTV",
+    "L'Obs",
+    "Valeurs actuelles",
+    "Sud Ouest",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Le Progrès",
+    "L'Express",
+    "Le Monde",
+    "Mediapart",
+    "La Dépêche",
+    "Libération",
+    "20 Minutes",
+    "Le JDD"
+   ],
+   "mediasDistincts": 12,
+   "sources": [
+    "BFMTV",
+    "L'Obs",
+    "Valeurs actuelles",
+    "Sud Ouest",
+    "EBRA",
+    "L'Express",
+    "Le Monde",
+    "Mediapart",
+    "La Dépêche",
+    "Libération",
+    "20 Minutes",
+    "Le JDD"
+   ],
+   "nb": 19,
+   "derniere": "2026-11-23T13:19:31.000Z",
+   "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "\"C'est pas fait\": le ministre Roland Lescure sur une règle d'or budgétaire dans la Constitution",
+     "url": "https://www.bfmtv.com/politique/parlement/video-c-est-pas-fait-le-ministre-roland-lescure-sur-une-regle-d-or-budgetaire-dans-la-constitution_VN-202611230538.html",
+     "date": "2026-11-23T13:19:31.000Z",
+     "video": true
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Anne Hidalgo : Les enquêtes sur les déplacements internationaux de l’ex-maire de Paris classées sans suite",
+     "url": "https://www.nouvelobs.com/justice/20261123.OBS120373/les-enquetes-sur-les-deplacements-internationaux-d-anne-hidalgo-classees-sans-suite-pour-absence-d-infraction.html",
+     "date": "2026-11-23T13:16:03.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "À Angers, 200 manifestants bravent l’interdiction pour dénoncer la « haine anti-Blancs »",
+     "url": "https://www.valeursactuelles.com/regions/pays-de-la-loire/maine-et-loire/angers/politique/a-angers-200-manifestants-bravent-linterdiction-pour-denoncer-la-haine-anti-blancs",
+     "date": "2026-11-23T11:04:15.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Nontron, ma commune à la Une : le maire et le président de l’intercommunalité face au double défi des finances et de l’attractivité",
+     "url": "https://www.sudouest.fr/dordogne/nontron/nontron-ma-commune-a-la-une-le-maire-et-le-president-de-l-intercommunalite-face-au-double-defi-des-finances-et-de-l-attractivite-31600035.php",
+     "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
+     "url": "https://www.dna.fr/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
+     "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
+     "url": "https://www.ledauphine.com/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
+     "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
+     "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Economie. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
+     "url": "https://www.leprogres.fr/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
+     "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "L'ascension de David Lisnard, le recul de Marine Le Pen : les enseignements du baromètre Toluna-Harris Interactive-M6-RTL-L’Express",
+     "url": "https://www.lexpress.fr/politique/elections/lascension-de-david-lisnard-le-recul-de-marine-le-pen-les-enseignements-du-barometre-toluna-harris-O6AAC2RGUBCPTCCAWMEEMZUADE/",
+     "date": "2026-11-23T04:30:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "A Angers, militants identitaires et antifascistes se toisent en marge d’un rassemblement interdit contre le « racisme anti-Blancs »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/22/a-angers-militants-identitaires-et-antifascistes-se-toisent-en-marge-d-un-rassemblement-interdit-contre-le-racisme-anti-blancs_6814249_823448.html",
+     "date": "2026-11-22T22:42:42.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "En Turquie, en pleine ébullition climatique, la COP31 prend l’eau",
+     "url": "https://www.mediapart.fr/journal/ecologie/221126/en-turquie-en-pleine-ebullition-climatique-la-cop31-prend-l-eau",
+     "date": "2026-11-22T18:22:47.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "COP31 : \"Nous n'avons pas pu parvenir à un accord\"... énorme déception, aucune décision politique finale trouvée à l'issue de la conférence sur le climat",
+     "url": "https://www.ladepeche.fr/2026/11/22/cop31-nous-navons-pas-pu-parvenir-a-un-accord-enorme-deception-aucune-decision-politique-finale-trouvee-a-lissue-de-la-conference-sur-le-climat-13665862.php",
+     "date": "2026-11-22T14:59:34.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Fuites au ministère de l’Intérieur : un mail du service du préfet Moutouh découvert chez un proche de Marine Le Pen",
+     "url": "https://www.liberation.fr/societe/police-justice/fuites-au-ministere-de-linterieur-un-mail-du-service-du-prefet-moutouh-decouvert-chez-un-proche-de-marine-le-pen-20261122_35OXDYGGVRFFXGEIYX72YKYHGM/",
+     "date": "2026-11-22T11:44:30.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : Marine Le Pen couperait les subventions du Planning familial s'il continue « à faire de la politique »...",
+     "url": "https://www.20minutes.fr/politique/4264740-20261122-presidentielle-2027-marylise-leon-veut-eviter-second-tour-lendemain-1er-mai?at_medium=display&at_campaign=149",
+     "date": "2026-11-22T07:10:24.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Présidentielle 2027 : jusqu’où l’Arcom peut-elle encadrer le débat politique sur Internet ?",
+     "url": "https://www.lejdd.fr/politique/presidentielle-2027-jusquou-larcom-peut-elle-encadrer-le-debat-politique-sur-internet-189321",
+     "date": "2026-11-22T05:04:04.000Z"
     }
    ]
   },
@@ -325,10 +476,11 @@
    "motifs": [
     "enquêtes",
     "déplacements",
-    "classées",
-    "suite"
+    "paris",
+    "classées"
    ],
    "medias": [
+    "Le Monde",
     "20 Minutes",
     "L'Obs",
     "L'Express",
@@ -336,24 +488,30 @@
     "Sud Ouest",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
+    "L'Est républicain",
     "La Dépêche",
-    "Le Monde",
     "Nice-Matin"
    ],
    "mediasDistincts": 8,
    "sources": [
+    "Le Monde",
     "20 Minutes",
     "L'Obs",
     "L'Express",
     "EBRA",
     "Sud Ouest",
     "La Dépêche",
-    "Le Monde",
     "Nice-Matin"
    ],
-   "nb": 16,
-   "derniere": "2026-11-23T13:17:11.000Z",
+   "nb": 20,
+   "derniere": "2026-11-23T13:30:07.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "A Paris, les conflits autour de l’espace public pourraient faire le bonheur du secteur privé",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/23/a-paris-les-conflits-autour-de-l-espace-public-pourraient-faire-le-bonheur-du-secteur-prive_6814387_3232.html",
+     "date": "2026-11-23T13:30:07.000Z"
+    },
     {
      "media": "20 Minutes",
      "titre": "Anne Hidalgo à Tahiti : Les deux enquêtes concernant les déplacements de l’ex maire de Paris classées sans suite",
@@ -403,6 +561,18 @@
      "date": "2026-11-23T11:54:00.000Z"
     },
     {
+     "media": "L'Est républicain",
+     "titre": "Paris. \"TahitiGate\" : les enquêtes sur les déplacements polémiques d'Anne Hidalgo classées sans suite",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/23/tahitigate-les-enquetes-sur-les-deplacements-polemiques-d-anne-hidalgo-classees-sans-suite",
+     "date": "2026-11-23T11:54:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : face à la polémique liée au calendrier, faut-il changer les dates des élections ?",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-face-a-la-polemique-liee-au-calendrier-faut-il-changer-les-dates-des-elections-31617588.php",
+     "date": "2026-11-23T11:19:34.000Z"
+    },
+    {
      "media": "Sud Ouest",
      "titre": "Enquête sur des fuites présumées vers le RN : le préfet Hugues Moutouh annonce porter plainte pour « violation du secret de l’enquête »",
      "url": "https://www.sudouest.fr/justice/enquete-sur-des-fuites-presumees-vers-le-rn-le-prefet-hugues-moutouh-annonce-porter-plainte-pour-violation-du-secret-de-l-enquete-31617351.php",
@@ -415,144 +585,25 @@
      "date": "2026-11-23T08:06:13.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Guerre en Ukraine : invitée par Volodymyr Zelensky, Marine Le Pen refuse de se rendre à Kiev... la candidate ne fera \"aucun\" déplacement à l'étranger pendant la campagne",
-     "url": "https://www.ladepeche.fr/2026/11/22/guerre-en-ukraine-invitee-par-volodymyr-zelensky-marine-le-pen-refuse-de-se-rendre-a-kiev-la-candidate-ne-fera-aucun-deplacement-a-letranger-pendant-13665831.php",
-     "date": "2026-11-22T15:22:13.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Qui est Hugues Moutouh, le préfet « bulldozer » soupçonné d’avoir renseigné le RN sur des enquêtes ?",
-     "url": "https://www.nouvelobs.com/politique/20261120.OBS120292/qui-est-hugues-moutouh-le-prefet-bulldozer-soupconne-d-avoir-renseigne-le-rn-sur-des-enquetes.html",
-     "date": "2026-11-22T14:16:13.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Présidentielle 2027 : Marine Le Pen refuse le risque des déplacements à l’étranger",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/22/presidentielle-2027-marine-le-pen-refuse-le-risque-des-deplacements-a-l-etranger_6814211_823448.html",
-     "date": "2026-11-22T13:00:03.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "Enquête sur les fuites de Beauvau : un mail du service du préfet Hugues Moutouh découvert en perquisition chez Frédéric Chatillon, un proche de Marine Le Pen",
      "url": "https://www.nicematin.com/societe/justice/enquete-sur-les-fuites-de-beauvau-un-mail-du-service-du-prefet-moutouh-decouvert-en-perquisition-chez-un-proche-de-le-pen-10766565",
      "date": "2026-11-22T11:01:12.000Z"
     }
    ]
-  },
-  {
-   "id": "interieur",
-   "titre": "Intérieur",
-   "motifs": [
-    "intérieur"
-   ],
-   "medias": [
-    "L'Obs",
-    "Valeurs actuelles",
-    "BFMTV",
-    "Sud Ouest",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Express",
-    "Le Monde",
-    "Libération",
-    "Le JDD"
-   ],
-   "mediasDistincts": 9,
-   "sources": [
-    "L'Obs",
-    "Valeurs actuelles",
-    "BFMTV",
-    "Sud Ouest",
-    "EBRA",
-    "L'Express",
-    "Le Monde",
-    "Libération",
-    "Le JDD"
-   ],
-   "nb": 11,
-   "derniere": "2026-11-23T13:16:03.000Z",
-   "articles": [
-    {
-     "media": "L'Obs",
-     "titre": "Anne Hidalgo : Les enquêtes sur les déplacements internationaux de l’ex-maire de Paris classées sans suite",
-     "url": "https://www.nouvelobs.com/justice/20261123.OBS120373/les-enquetes-sur-les-deplacements-internationaux-d-anne-hidalgo-classees-sans-suite-pour-absence-d-infraction.html",
-     "date": "2026-11-23T13:16:03.000Z"
-    },
-    {
-     "media": "Valeurs actuelles",
-     "titre": "À Angers, 200 manifestants bravent l’interdiction pour dénoncer la « haine anti-Blancs »",
-     "url": "https://www.valeursactuelles.com/regions/pays-de-la-loire/maine-et-loire/angers/politique/a-angers-200-manifestants-bravent-linterdiction-pour-denoncer-la-haine-anti-blancs",
-     "date": "2026-11-23T11:04:15.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "Visé par des soupçons de fuites du ministère de l'Intérieur vers le RN, le préfet Hugues Moutouh annonce porter plainte",
-     "url": "https://www.bfmtv.com/politique/front-national/video-vise-par-des-soupcons-de-fuites-du-ministere-de-l-interieur-vers-le-rn-le-prefet-hugues-moutouh-annonce-porter-plainte_VN-202611230322.html",
-     "date": "2026-11-23T08:18:07.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Je veux savoir qui veut ma tête\": visé par des soupçons de fuites du ministère de l'Intérieur vers le RN, le préfet Hugues Moutouh annonce porter plainte",
-     "url": "https://www.bfmtv.com/politique/je-veux-savoir-qui-veut-ma-tete-vise-par-des-soupcons-de-fuites-du-ministere-de-l-interieur-vers-le-rn-le-prefet-hugues-moutouh-annonce-porter-plainte_AN-202611230228.html",
-     "date": "2026-11-23T07:32:53.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Nontron, ma commune à la Une : le maire et le président de l’intercommunalité face au double défi des finances et de l’attractivité",
-     "url": "https://www.sudouest.fr/dordogne/nontron/nontron-ma-commune-a-la-une-le-maire-et-le-president-de-l-intercommunalite-face-au-double-defi-des-finances-et-de-l-attractivite-31600035.php",
-     "date": "2026-11-23T05:30:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
-     "url": "https://www.dna.fr/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
-     "date": "2026-11-23T05:30:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
-     "url": "https://www.ledauphine.com/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
-     "date": "2026-11-23T05:30:00.000Z"
-    },
-    {
-     "media": "L'Express",
-     "titre": "L'ascension de David Lisnard, le recul de Marine Le Pen : les enseignements du baromètre Toluna-Harris Interactive-M6-RTL-L’Express",
-     "url": "https://www.lexpress.fr/politique/elections/lascension-de-david-lisnard-le-recul-de-marine-le-pen-les-enseignements-du-barometre-toluna-harris-O6AAC2RGUBCPTCCAWMEEMZUADE/",
-     "date": "2026-11-23T04:30:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "A Angers, militants identitaires et antifascistes se toisent en marge d’un rassemblement interdit contre le « racisme anti-Blancs »",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/22/a-angers-militants-identitaires-et-antifascistes-se-toisent-en-marge-d-un-rassemblement-interdit-contre-le-racisme-anti-blancs_6814249_823448.html",
-     "date": "2026-11-22T22:42:42.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Fuites au ministère de l’Intérieur : un mail du service du préfet Moutouh découvert chez un proche de Marine Le Pen",
-     "url": "https://www.liberation.fr/societe/police-justice/fuites-au-ministere-de-linterieur-un-mail-du-service-du-prefet-moutouh-decouvert-chez-un-proche-de-marine-le-pen-20261122_35OXDYGGVRFFXGEIYX72YKYHGM/",
-     "date": "2026-11-22T11:44:30.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "Présidentielle 2027 : jusqu’où l’Arcom peut-elle encadrer le débat politique sur Internet ?",
-     "url": "https://www.lejdd.fr/politique/presidentielle-2027-jusquou-larcom-peut-elle-encadrer-le-debat-politique-sur-internet-189321",
-     "date": "2026-11-22T05:04:04.000Z"
-    }
-   ]
   }
  ],
  "sujets": [
   {
-   "medias": 5,
-   "mediasDistincts": 5,
+   "medias": 6,
+   "mediasDistincts": 6,
    "sources": [
     "Sud Ouest",
     "20 Minutes",
     "La Dépêche",
     "L'Obs",
-    "Le Dauphiné libéré"
+    "Le Dauphiné libéré",
+    "France 24"
    ],
    "derniere": "2026-11-23T09:16:40.000Z",
    "illustration": {
@@ -598,19 +649,25 @@
      "url": "https://www.ledauphine.com/politique/2026/11/22/inscrire-une-regle-d-or-budgetaire-dans-la-constitution",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-22T21:09:00.000Z"
+    },
+    {
+     "titre": "Budget : Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
+     "url": "https://www.france24.com/fr/france/20261122-budget-macron-confirme-qu-il-envisage-d-inscrire-une-r%C3%A8gle-d-or-dans-la-constitution",
+     "media": "France 24",
+     "date": "2026-11-22T15:54:26.000Z"
     }
    ],
    "titrePropre": {
     "titre": "Règle d or",
     "origine": "recoupement"
    },
-   "accroche": "Emmanuel Macron envisage de faire inscrire dans la Constitution ?",
-   "essentiel": "Emmanuel Macron envisage de faire inscrire dans la Constitution ? Cinq médias en parlent : L'Obs, Sud Ouest, 20 Minutes, La Dépêche et Le Dauphiné libéré.",
-   "fait": "Emmanuel Macron envisage de faire inscrire dans la Constitution ?",
+   "fait": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
+   "accroche": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
+   "essentiel": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution. Six médias en parlent : L'Obs, Sud Ouest, 20 Minutes, La Dépêche, Le Dauphiné libéré et France 24.",
    "rubrique": "Budget"
   },
   {
-   "medias": 6,
+   "medias": 7,
    "mediasDistincts": 4,
    "sources": [
     "20 Minutes",
@@ -660,6 +717,12 @@
      "titre": "Paris. \"TahitiGate\" : les enquêtes sur les déplacements polémiques d'Anne Hidalgo classées sans suite",
      "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/23/tahitigate-les-enquetes-sur-les-deplacements-polemiques-d-anne-hidalgo-classees-sans-suite",
      "media": "Le Dauphiné libéré",
+     "date": "2026-11-23T11:54:00.000Z"
+    },
+    {
+     "titre": "Paris. \"TahitiGate\" : les enquêtes sur les déplacements polémiques d'Anne Hidalgo classées sans suite",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/23/tahitigate-les-enquetes-sur-les-deplacements-polemiques-d-anne-hidalgo-classees-sans-suite",
+     "media": "L'Est républicain",
      "date": "2026-11-23T11:54:00.000Z"
     }
    ],
@@ -915,7 +978,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -948,6 +1011,12 @@
      "date": "2026-11-23T12:56:00.000Z"
     },
     {
+     "titre": "Économie. Prime carburant : le gouvernement fait adopter au Sénat une prolongation en 2027",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/23/prime-carburant-le-gouvernement-fait-adopter-au-senat-une-prolongation-en-2027",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T12:56:00.000Z"
+    },
+    {
      "titre": "Elle sera prolongée en 2027 : le gouvernement fait adopter au Sénat une reconduction de la prime carburants pour les salariés",
      "url": "https://www.nicematin.com/conso/prix-des-carburants/elle-sera-prolongee-en-2027-le-gouvernement-fait-adopter-au-senat-une-reconduction-de-la-prime-carburants-pour-les-salaries-10767529",
      "media": "Nice-Matin",
@@ -960,11 +1029,11 @@
    },
    "fait": "Prime carburant : le gouvernement fait adopter au Sénat une prolongation en 2027",
    "accroche": "Prime carburant : le gouvernement fait adopter au Sénat une prolongation en 2027",
-   "essentiel": "Elle sera prolongée en 2027 : le gouvernement fait adopter au Sénat une reconduction de la prime carburants pour les salariés. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et Nice-Matin.",
+   "essentiel": "Elle sera prolongée en 2027 : le gouvernement fait adopter au Sénat une reconduction de la prime carburants pour les salariés. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Nice-Matin.",
    "rubrique": "Budget"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "L'Humanité",
@@ -1010,6 +1079,12 @@
      "url": "https://www.ledauphine.com/elections/2026/11/22/c-est-agreable-francois-ruffin-courtise-a-gauche-depuis-le-retrait-de-sa-candidature",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-22T21:30:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. « C'est agréable » : François Ruffin courtisé à gauche depuis le retrait de sa candidature",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/22/c-est-agreable-francois-ruffin-courtise-a-gauche-depuis-le-retrait-de-sa-candidature",
+     "media": "L'Est républicain",
+     "date": "2026-11-22T21:30:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1018,7 +1093,7 @@
    },
    "fait": "François Ruffin courtisé à gauche depuis le retrait de sa candidature",
    "accroche": "François Ruffin courtisé à gauche depuis le retrait de sa candidature",
-   "essentiel": "François Ruffin courtisé à gauche depuis le retrait de sa candidature. Quatre médias en parlent : Le Progrès, L'Humanité, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
+   "essentiel": "François Ruffin courtisé à gauche depuis le retrait de sa candidature. Cinq médias en parlent : Le Progrès, L'Humanité, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1029,7 +1104,7 @@
    ]
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -1062,6 +1137,12 @@
      "date": "2026-11-23T11:24:00.000Z"
     },
     {
+     "titre": "Justice. Eurovision Junior à Nice : le couple Estrosi, France Télévisions et La Tribune renvoyés au tribunal",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/23/eurovision-junior-a-nice-le-couple-estrosi-france-televisions-et-la-tribune-renvoyes-au-tribunal",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T11:24:00.000Z"
+    },
+    {
      "titre": "Eurovision Junior à Nice: les époux Estrosi et France TV renvoyés en correctionnelle",
      "url": "https://www.mediapart.fr/journal/france/221126/eurovision-junior-nice-les-epoux-estrosi-et-france-tv-renvoyes-en-correctionnelle",
      "media": "Mediapart",
@@ -1076,7 +1157,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -1132,6 +1213,12 @@
      "date": "2026-11-23T06:01:00.000Z"
     },
     {
+     "titre": "Présidentielle 2027. Marine Le Pen recule, David Lisnard passe devant Édouard Philippe dans un sondage",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/23/marine-le-pen-recule-david-lisnard-passe-devant-edouard-philippe-dans-un-sondage",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T06:01:00.000Z"
+    },
+    {
      "titre": "Présidentielle : Le Pen recule et Lisnard accélère dans un nouveau sondage",
      "url": "https://www.20minutes.fr/politique/4264988-20261123-presidentielle-pen-recule-lisnard-accelere-nouveau-sondage?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
@@ -1147,6 +1234,64 @@
     {
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais) · Édouard Philippe : président d'Horizons",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le JDD",
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-22T09:19:48.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "François Ruffin",
+      "photo": "photos/deputes/PA722142.jpg",
+      "photoHd": "photos/deputes/hd/PA722142.jpg",
+      "parti": "ECO",
+      "lien": "#depute-PA722142",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : François Ruffin jette l'éponge face à \"l’impasse\" de sa campagne",
+     "url": "https://www.france24.com/fr/france/20261121-pr%C3%A9sidentielle-prenant-acte-de-l-impasse-de-sa-campagne-fran%C3%A7ois-ruffin-retire-sa-candidature",
+     "media": "France 24",
+     "date": "2026-11-21T17:37:20.000Z"
+    },
+    {
+     "titre": "«Le RN est aux portes du pouvoir» : François Ruffin jette l'éponge pour 2027",
+     "url": "https://www.lejdd.fr/politique/le-rn-est-aux-portes-du-pouvoir-francois-ruffin-jette-leponge-pour-2027-189369",
+     "media": "Le JDD",
+     "date": "2026-11-22T09:19:48.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027: François Ruffin jette l'éponge, faute de primaire de toute la gauche",
+     "url": "https://www.rfi.fr/fr/france/20261121-pr%C3%A9sidentielle-2027-fran%C3%A7ois-ruffin-jette-l-%C3%A9ponge-faute-de-primaire-de-toute-la-gauche",
+     "media": "RFI",
+     "date": "2026-11-21T18:00:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jette l éponge",
+    "origine": "recoupement"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "François Ruffin : député ECO (Somme)",
      "source": "Assemblée nationale (open data)"
     }
    ]
@@ -1569,58 +1714,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "Le JDD",
-    "RFI"
-   ],
-   "derniere": "2026-11-22T09:19:48.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "François Ruffin",
-      "photo": "photos/deputes/PA722142.jpg",
-      "photoHd": "photos/deputes/hd/PA722142.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA722142",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "«Le RN est aux portes du pouvoir» : François Ruffin jette l'éponge pour 2027",
-     "url": "https://www.lejdd.fr/politique/le-rn-est-aux-portes-du-pouvoir-francois-ruffin-jette-leponge-pour-2027-189369",
-     "media": "Le JDD",
-     "date": "2026-11-22T09:19:48.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027: François Ruffin jette l'éponge, faute de primaire de toute la gauche",
-     "url": "https://www.rfi.fr/fr/france/20261121-pr%C3%A9sidentielle-2027-fran%C3%A7ois-ruffin-jette-l-%C3%A9ponge-faute-de-primaire-de-toute-la-gauche",
-     "media": "RFI",
-     "date": "2026-11-21T18:00:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jette l éponge",
-    "origine": "recoupement"
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "François Ruffin : député ECO (Somme)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Libération",
     "Nice-Matin"
    ],
@@ -1665,10 +1758,10 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "RFI",
-    "Libération"
+    "Public Sénat",
+    "France 24"
    ],
-   "derniere": "2026-11-20T23:00:25.000Z",
+   "derniere": "2026-11-20T19:15:54.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -1677,25 +1770,31 @@
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027: contraints par l’Arcom de respecter le pluralisme, des créateurs de contenus s’insurgent",
-     "url": "https://www.rfi.fr/fr/podcasts/chronique-des-m%C3%A9dias/20261120-pr%C3%A9sidentielle-2027-contraints-par-l-arcom-de-respecter-le-pluralisme-des-cr%C3%A9ateurs-de-contenus-s-insurgent",
-     "media": "RFI",
-     "date": "2026-11-20T23:00:25.000Z"
+     "titre": "La proposition de loi instaurant une présomption de légitime défense pour les forces de l’ordre définitivement adoptée par le Parlement, après le vote du Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/la-proposition-de-loi-instaurant-une-presomption-de-legitime-defense-pour-les-forces-de-lordre-definitivement-adoptee-par-le-parlement-apres-le-vote-du-senat",
+     "media": "Public Sénat",
+     "date": "2026-11-20T19:15:54.000Z"
     },
     {
-     "titre": "«Une funeste connerie» : bronca des créateurs de contenu contre les nouvelles mesures de l’Arcom pour le pluralisme",
-     "url": "https://www.liberation.fr/economie/medias/une-funeste-connerie-bronca-des-createurs-de-contenu-contre-les-nouvelles-mesures-de-larcom-pour-le-pluralisme-20261120_R5C6BOL6WNG3DOZIOIIQLFITYU/",
-     "media": "Libération",
-     "date": "2026-11-20T20:34:01.000Z"
+     "titre": "Police : la loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
+     "url": "https://www.france24.com/fr/france/20261120-police-la-loi-sur-la-pr%C3%A9somption-de-l%C3%A9gitime-d%C3%A9fense-d%C3%A9finitivement-adopt%C3%A9e-par-le-parlement",
+     "media": "France 24",
+     "date": "2026-11-20T19:02:24.000Z"
+    },
+    {
+     "titre": "Reportage. Présomption de légitime défense pour les forces de l’ordre : près du Sénat, syndicats et associations dénoncent un « permis de tuer » pour la police",
+     "url": "https://www.publicsenat.fr/actualites/societe/reportage-presomption-de-legitime-defense-pour-les-forces-de-lordre-pres-du-senat-syndicats-et-associations-denoncent-un-permis-de-tuer-pour-la-police",
+     "media": "Public Sénat",
+     "date": "2026-11-19T19:25:22.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Élections : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Présomption de légitime défense",
+    "origine": "recoupement"
    },
-   "fait": "Présidentielle 2027 : contraints par l’Arcom de respecter le pluralisme",
-   "accroche": "Présidentielle 2027 : contraints par l’Arcom de respecter le pluralisme",
+   "fait": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
+   "accroche": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
+   "essentiel": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement. Deux médias en parlent : Public Sénat et France 24.",
    "rubrique": "Élysée 2027"
   },
   {
@@ -1766,7 +1865,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1803,6 +1902,12 @@
      "url": "https://www.ledauphine.com/social/2026/11/23/mobilisation-lyceenne-98-eleves-blesses-la-semaine-derniere-280-professionnels-depuis-le-debut-du-mouvement",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-23T09:49:00.000Z"
+    },
+    {
+     "titre": "Social. Lycées bloqués : Edouard Geffray annonce 98 élèves blessés la semaine dernière, 280 professionnels depuis le début",
+     "url": "https://www.estrepublicain.fr/social/2026/11/23/mobilisation-lyceenne-98-eleves-blesses-la-semaine-derniere-280-professionnels-depuis-le-debut-du-mouvement",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T09:49:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1811,7 +1916,7 @@
    },
    "fait": "Edouard Geffray annonce 98 élèves blessés la semaine dernière, 280 professionnels depuis le début",
    "accroche": "Edouard Geffray annonce 98 élèves blessés la semaine dernière, 280 professionnels depuis le début",
-   "essentiel": "Lycées bloqués : Edouard Geffray annonce 98 élèves blessés la semaine dernière, 280 professionnels depuis le début. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
+   "essentiel": "Lycées bloqués : Edouard Geffray annonce 98 élèves blessés la semaine dernière, 280 professionnels depuis le début. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Gouvernement",
    "contexte": [
     {
@@ -1822,7 +1927,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1852,6 +1957,12 @@
      "url": "https://www.ledauphine.com/politique/2026/11/23/qu-est-ce-qu-une-regle-d-or-pour-encadrer-les-finances-publiques",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-23T06:50:00.000Z"
+    },
+    {
+     "titre": "Politique. Qu'est-ce qu'une « règle d'or » budgétaire pour encadrer les finances publiques ?",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/23/qu-est-ce-qu-une-regle-d-or-pour-encadrer-les-finances-publiques",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T06:50:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1861,7 +1972,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1898,6 +2009,12 @@
      "url": "https://www.ledauphine.com/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-23T05:30:00.000Z"
+    },
+    {
+     "titre": "Interview. Roland Lescure : « Malgré le climat actuel, les entreprises continuent à avoir envie d’investir »",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/23/roland-lescure-malgre-le-climat-actuel-les-entreprises-continuent-a-avoir-envie-d-investir",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T05:30:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1914,7 +2031,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1944,6 +2061,12 @@
      "url": "https://www.ledauphine.com/elections/2026/11/23/controleuse-a-la-sncf-les-envies-d-une-cheminote-de-la-generation-des-services-publics",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-23T05:02:00.000Z"
+    },
+    {
+     "titre": "Audrey, 48 ans. Contrôleuse à la SNCF, les envies d'une cheminote « de la génération des services publics »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/23/controleuse-a-la-sncf-les-envies-d-une-cheminote-de-la-generation-des-services-publics",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T05:02:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1958,7 +2081,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1984,6 +2107,12 @@
      "date": "2026-11-23T05:01:00.000Z"
     },
     {
+     "titre": "Sandra, 46 ans. « Avant de former des footballeurs, on forme des citoyens » : cette éducatrice mise sur le sport pour changer la société à son échelle",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/23/avant-de-former-des-footballeurs-on-forme-des-citoyens-cette-educatrice-mise-sur-le-sport-pour-changer-la-societe-a-son-echelle",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T05:01:00.000Z"
+    },
+    {
      "titre": "Sandra, 46 ans. Cette éducatrice mise sur le sport pour changer la société à son échelle : « Avant de former des footballeurs, on forme des citoyens » :",
      "url": "https://www.leprogres.fr/elections/2026/11/23/avant-de-former-des-footballeurs-on-forme-des-citoyens-cette-educatrice-mise-sur-le-sport-pour-changer-la-societe-a-son-echelle",
      "media": "Le Progrès",
@@ -1997,7 +2126,7 @@
    },
    "fait": "Cette éducatrice mise sur le sport pour changer la société à son échelle",
    "accroche": "Cette éducatrice mise sur le sport pour changer la société à son échelle",
-   "essentiel": "Cette éducatrice mise sur le sport pour changer la société à son échelle. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et Le Progrès.",
+   "essentiel": "Cette éducatrice mise sur le sport pour changer la société à son échelle. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Le Progrès.",
    "rubrique": "Politique",
    "chiffre": {
     "valeur": "46",
@@ -2005,7 +2134,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2043,6 +2172,12 @@
      "url": "https://www.ledauphine.com/elections/2026/11/23/il-est-directeur-d-un-centre-social-pour-la-premiere-fois-je-ne-sais-pas-pour-qui-je-voterai",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-23T05:00:00.000Z"
+    },
+    {
+     "titre": "Philippe, 60 ans. Il est directeur d'un centre social : « Pour la première fois, je ne sais pas pour qui je voterai »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/23/il-est-directeur-d-un-centre-social-pour-la-premiere-fois-je-ne-sais-pas-pour-qui-je-voterai",
+     "media": "L'Est républicain",
+     "date": "2026-11-23T05:00:00.000Z"
     }
    ],
    "titrePropre": {
@@ -2052,7 +2187,7 @@
    },
    "fait": "Philippe, 60 ans. Il est directeur d'un centre social",
    "accroche": "Philippe, 60 ans. Il est directeur d'un centre social",
-   "essentiel": "Philippe, 60 ans. Il est directeur d'un centre social. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
+   "essentiel": "Philippe, 60 ans. Il est directeur d'un centre social. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique",
    "contexte": [
     {
@@ -2140,6 +2275,219 @@
    "fait": "Commerces vandalisés et pillés le 17 octobre : le guichet national d’aide est ouvert",
    "accroche": "Commerces vandalisés et pillés le 17 octobre : le guichet national d’aide est ouvert",
    "essentiel": "Commerces vandalisés et pillés le 17 octobre : le guichet national d’aide est ouvert. Deux médias en parlent : Le Progrès et Le Dauphiné libéré.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-21T11:55:56.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "France: un acte VI de la mobilisation sous l'impulsion des syndicats et des «gilets jaunes»",
+     "url": "https://www.rfi.fr/fr/france/20261121-mobilisation-en-france-un-acte-vi-sous-l-impulsion-des-syndicats-et-des-gilets-jaunes-qui-f%C3%AAtent-leurs-8-ans",
+     "media": "RFI",
+     "date": "2026-11-21T11:55:56.000Z"
+    },
+    {
+     "titre": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
+     "url": "https://www.france24.com/fr/france/20261121-en-direct-acte-vi-de-la-mobilisation-pour-la-jeunesse-et-contre-la-vie-ch%C3%A8re",
+     "media": "France 24",
+     "date": "2026-11-21T08:23:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gilets jaunes",
+    "origine": "recoupement"
+   },
+   "accroche": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
+   "essentiel": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation. Deux médias en parlent : RFI et France 24.",
+   "fait": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-20T23:00:25.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027: contraints par l’Arcom de respecter le pluralisme, des créateurs de contenus s’insurgent",
+     "url": "https://www.rfi.fr/fr/podcasts/chronique-des-m%C3%A9dias/20261120-pr%C3%A9sidentielle-2027-contraints-par-l-arcom-de-respecter-le-pluralisme-des-cr%C3%A9ateurs-de-contenus-s-insurgent",
+     "media": "RFI",
+     "date": "2026-11-20T23:00:25.000Z"
+    },
+    {
+     "titre": "Présidentielle : les créateurs de contenus sommés de respecter le pluralisme par l'Arcom",
+     "url": "https://www.france24.com/fr/france/20261119-pr%C3%A9sidentielle-cr%C3%A9ateurs-contenus-somm%C3%A9s-respecter-pluralisme-arcom",
+     "media": "France 24",
+     "date": "2026-11-19T18:07:37.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Les créateurs de contenus sommés de respecter le pluralisme par l'Arcom",
+   "accroche": "Les créateurs de contenus sommés de respecter le pluralisme par l'Arcom",
+   "essentiel": "Les créateurs de contenus sommés de respecter le pluralisme par l'Arcom. Deux médias en parlent : RFI et France 24.",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-20T16:25:48.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "France: Gérard Depardieu et Michel Houellebecq visés par une plainte pour violences sexuelles en réunion",
+     "url": "https://www.rfi.fr/fr/france/20261120-france-g%C3%A9rard-depardieu-et-michel-houellebecq-vis%C3%A9s-par-une-plainte-pour-violences-sexuelles-en-r%C3%A9union",
+     "media": "RFI",
+     "date": "2026-11-20T16:25:48.000Z"
+    },
+    {
+     "titre": "Gérard Depardieu et Michel Houellebecq accusés de viol en réunion et d'agressions sexuelles",
+     "url": "https://www.france24.com/fr/france/20261120-g%C3%A9rard-depardieu-et-michel-houellebecq-accus%C3%A9s-de-viol-en-r%C3%A9union-et-d-agressions-sexuelles",
+     "media": "France 24",
+     "date": "2026-11-20T14:38:36.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Justice : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "France Médias Monde"
+   ],
+   "derniere": "2026-11-19T23:13:14.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Tondelier",
+      "photo": "photos/personnalites/marine-tondelier.jpg",
+      "photoHd": "photos/personnalites/hd/marine-tondelier.jpg",
+      "parti": "ECO",
+      "credit": "Greenbox, CC BY-SA 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Yannick Jadot",
+      "photo": "photos/senateurs/21093M.jpg",
+      "photoHd": "photos/senateurs/hd/21093M.jpg",
+      "parti": "GEST",
+      "lien": "#senateur-21093M",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [
+     "LFI",
+     "ECO"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027: Tondelier fait un pas vers Mélenchon, Jadot claque la porte des Écologistes",
+     "url": "https://www.rfi.fr/fr/france/20261119-pr%C3%A9sidentielle-2027-tondelier-fait-un-pas-vers-m%C3%A9lenchon-jadot-claque-la-porte-des-%C3%A9cologistes",
+     "media": "RFI",
+     "date": "2026-11-19T23:13:14.000Z"
+    },
+    {
+     "titre": "Yannick Jadot claque la porte des Écologistes suite au rapprochement entre Marine Tondelier et LFI",
+     "url": "https://www.france24.com/fr/france/20261119-france-presidentielle-yannick-jadot-quitte-les-ecologistes-marine-tondelier-jean-luc-melenchon-glucksmann",
+     "media": "France 24",
+     "date": "2026-11-19T23:04:16.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Claque la porte",
+    "origine": "recoupement"
+   },
+   "fait": "Tondelier fait un pas vers Mélenchon, Jadot claque la porte des Écologistes",
+   "accroche": "Tondelier fait un pas vers Mélenchon, Jadot claque la porte des Écologistes",
+   "essentiel": "Pour la présidentielle 2027, Tondelier fait un pas vers Mélenchon, Jadot claque la porte des Écologistes. Deux médias en parlent : RFI et France 24.",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Tondelier : secrétaire nationale des Écologistes",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-23T14:05:50.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«S’unir pour faire advenir le meilleur» : le parti Génération.s fondé par Hamon rallie Mélenchon",
+     "url": "https://www.lejdd.fr/politique/sunir-pour-faire-advenir-le-meilleur-le-parti-generations-fonde-par-hamon-rallie-melenchon-189489",
+     "media": "Le JDD",
+     "date": "2026-11-23T14:05:50.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le parti Génération.s fondé par Hamon rallie Mélenchon",
+   "accroche": "Le parti Génération.s fondé par Hamon rallie Mélenchon",
    "rubrique": "Politique"
   },
   {
@@ -4255,6 +4603,41 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "France 24"
+   ],
+   "derniere": "2026-11-23T09:55:48.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Geffray",
+      "photo": "photos/personnalites/edouard-geffray.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-geffray.jpg",
+      "credit": "Ministère de l'Éducation Nationale, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "\"On n'est pas dans GTA VI\" : Geffray fustige une flambée de violence dans certains lycées",
+     "url": "https://www.france24.com/fr/france/20261123-on-n-est-pas-gta-vi-geffray-fustige-flamb%C3%A9e-violence-lyc%C3%A9es",
+     "media": "France 24",
+     "date": "2026-11-23T09:55:48.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Libération"
    ],
    "derniere": "2026-11-23T09:48:32.000Z",
@@ -4995,8 +5378,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Intérieur",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Justice"
   },
@@ -5028,250 +5412,6 @@
     "origine": "dossier"
    },
    "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-23T08:06:13.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Enquête au RN : \"Je n’ai rien à me reprocher\" se défend le préfet Hugues Moutouh qui annonce vouloir \"porter plainte\"",
-     "url": "https://www.ladepeche.fr/2026/11/23/enquete-au-rn-je-nai-rien-a-me-reprocher-se-defend-le-prefet-hugues-moutouh-qui-annonce-vouloir-porter-plainte-13666653.php",
-     "media": "La Dépêche",
-     "date": "2026-11-23T08:06:13.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Enquêtes",
-    "origine": "dossier"
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Valeurs actuelles"
-   ],
-   "derniere": "2026-11-23T08:03:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : David Lisnard double Édouard Philippe et s’impose à droite, selon un sondage",
-     "url": "https://www.valeursactuelles.com/politique/presidentielle-2027-david-lisnard-double-edouard-philippe-et-simpose-a-droite-selon-un-sondage",
-     "media": "Valeurs actuelles",
-     "date": "2026-11-23T08:03:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T08:02:21.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LR"
-    ],
-    "theme": "politique",
-    "vignette": "region"
-   },
-   "articles": [
-    {
-     "titre": "Crise lycéenne: Valérie Pécresse, présidente LR de la région Île-de-France, veut que \"les dizaines de lycées\" visés par des tirs de mortiers \"soient équipés dans les trois mois de caméras de vidéoprotection\"",
-     "url": "https://www.bfmtv.com/politique/les-republicains/video-crise-lyceenne-valerie-pecresse-presidente-lr-de-la-region-ile-de-france-veut-que-les-dizaines-de-lycees-vises-par-des-tirs-de-mortiers-soient-equipes-dans-les-trois-mois-de-cameras-de-videoprotection_VN-202611230314.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T08:02:21.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : ce qu'il faut savoir sur la mobilisation lycéenne",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Valérie Pécresse veut que \"les dizaines de lycées\" visés par des tirs de mortiers",
-   "accroche": "Valérie Pécresse veut que \"les dizaines de lycées\" visés par des tirs de mortiers",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-11-23T08:00:13.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Sens Public — SENS PUBLIC 26/11/26 Je P2",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-26-je-p2-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T08:00:13.000Z"
-    },
-    {
-     "titre": "Sens Public — SENS PUBLIC 26/11/25 Me P2",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-25-me-p2-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T08:00:12.000Z"
-    },
-    {
-     "titre": "Sens Public — SENS PUBLIC 26/11/23 Lu P2",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-11-23-lu-p2-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T08:00:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T07:57:31.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI",
-     "LR"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Dégradations au lycée Paul-Éluard de Saint-Denis: \"La facture, de 150.000 euros, je l'ai envoyée au procureur\", assure Valérie Pécresse (LR) concernant le signalement à la justice du préfet de police contre Bally Bagayoko (LFI)",
-     "url": "https://www.bfmtv.com/politique/les-republicains/video-degradations-au-lycee-paul-eluard-de-saint-denis-la-facture-de-150-000-euros-je-l-ai-envoyee-au-procureur-assure-valerie-pecresse-lr-concernant-le-signalement-a-la-justice-du-prefet-de-police-contre-bally-bagayoko-lfi_VN-202611230307.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T07:57:31.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Lycées : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Public Sénat"
-   ],
-   "derniere": "2026-11-23T07:55:49.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/25 Me P3",
-     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-25-me-p3-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T07:55:49.000Z"
-    },
-    {
-     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/24 Ma P3",
-     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-24-ma-p3-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T07:55:47.000Z"
-    },
-    {
-     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/25 Me P2",
-     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-25-me-p2-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T07:55:47.000Z"
-    },
-    {
-     "titre": "Bonjour chez vous ! — BONJOUR CHEZ VOUS 26/11/24 Ma P2",
-     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/bonjour-chez-vous-26-11-24-ma-p2-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T07:55:46.000Z"
-    },
-    {
-     "titre": "Bonjour chez vous ! — Jusqu’où ira David Lisnard ?",
-     "url": "https://www.publicsenat.fr/emission/bonjour-chez-vous/jusquou-ira-david-lisnard-e0",
-     "media": "Public Sénat",
-     "date": "2026-11-23T07:55:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   }
  ]
 }
