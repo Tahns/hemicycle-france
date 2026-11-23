@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-23T16:35:32.753Z",
+ "lastUpdated": "2026-11-23T16:40:49.783Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -341,15 +341,16 @@
    ]
   },
   {
-   "id": "budgetaire",
-   "titre": "Budgétaire",
+   "id": "regle",
+   "titre": "Règle",
    "motifs": [
-    "budgétaire",
     "règle",
-    "envisage",
-    "inscrire"
+    "budgétaire",
+    "inscrire",
+    "envisage"
    ],
    "medias": [
+    "La Dépêche",
     "L'Humanité",
     "Libération",
     "Public Sénat",
@@ -359,7 +360,6 @@
     "RFI",
     "Sud Ouest",
     "20 Minutes",
-    "La Dépêche",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
@@ -369,6 +369,7 @@
    ],
    "mediasDistincts": 13,
    "sources": [
+    "La Dépêche",
     "L'Humanité",
     "Libération",
     "Public Sénat",
@@ -378,14 +379,19 @@
     "France Médias Monde",
     "Sud Ouest",
     "20 Minutes",
-    "La Dépêche",
     "EBRA",
     "L'Obs",
     "Le Monde"
    ],
-   "nb": 36,
-   "derniere": "2026-11-23T16:27:55.000Z",
+   "nb": 37,
+   "derniere": "2026-11-23T16:35:03.000Z",
    "articles": [
+    {
+     "media": "La Dépêche",
+     "titre": "Emmanuel Macron veut inscrire une \"règle d'or\" budgétaire dans la Constitution : cette réforme peut-elle vraiment empêcher les dérapages financiers ?",
+     "url": "https://www.ladepeche.fr/2026/11/23/emmanuel-macron-veut-inscrire-une-regle-dor-budgetaire-dans-la-constitution-cette-reforme-peut-elle-vraiment-empecher-les-derapages-financiers-13666746.php",
+     "date": "2026-11-23T16:35:03.000Z"
+    },
     {
      "media": "L'Humanité",
      "titre": "La présidente de Radio France Sibyle Veil alerte sur les coupes budgétaires et les attaques du RN",
@@ -440,12 +446,6 @@
      "titre": "Constitution : Emmanuel Macron envisage bien d’inscrire une règle d’or budgétaire en janvier",
      "url": "https://www.20minutes.fr/politique/4265006-20261123-constitution-emmanuel-macron-envisage-bien-inscrire-regle-or-budgetaire-janvier?at_medium=display&at_campaign=149",
      "date": "2026-11-23T09:10:13.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Qu'est-ce que la \"règle d'or budgétaire\", ce mécanisme censé freiner le déficit public qu'Emmanuel Macron envisage de faire inscrire dans la Constitution ?",
-     "url": "https://www.ladepeche.fr/2026/11/23/quest-ce-que-la-regle-dor-budgetaire-ce-mecanisme-cense-freiner-le-deficit-public-quemmanuel-macron-envisage-de-faire-inscrire-dans-la-constitution-13666630.php",
-     "date": "2026-11-23T07:27:41.000Z"
     },
     {
      "media": "Le Progrès",
@@ -670,7 +670,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
+    "titre": "Règle",
     "origine": "dossier"
    },
    "fait": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
@@ -1994,7 +1994,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
+    "titre": "Règle",
     "origine": "dossier"
    },
    "rubrique": "Budget"
@@ -2343,6 +2343,42 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-23T16:35:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Emmanuel Macron veut inscrire une \"règle d'or\" budgétaire dans la Constitution : cette réforme peut-elle vraiment empêcher les dérapages financiers ?",
+     "url": "https://www.ladepeche.fr/2026/11/23/emmanuel-macron-veut-inscrire-une-regle-dor-budgetaire-dans-la-constitution-cette-reforme-peut-elle-vraiment-empecher-les-derapages-financiers-13666746.php",
+     "media": "La Dépêche",
+     "date": "2026-11-23T16:35:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Règle",
+    "origine": "dossier"
+   },
+   "fait": "Emmanuel Macron veut inscrire une \"règle d'or\" budgétaire dans la Constitution",
+   "accroche": "Emmanuel Macron veut inscrire une \"règle d'or\" budgétaire dans la Constitution",
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-23T16:31:39.000Z",
@@ -2558,8 +2594,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
-    "origine": "dossier"
+    "titre": "Finances publiques : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Budget"
   },
@@ -3343,8 +3380,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
-    "origine": "dossier"
+    "titre": "Sénat : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Le Sénat supprime la réduction d’impôt sur le revenu pour frais de scolarité",
    "accroche": "Le Sénat supprime la réduction d’impôt sur le revenu pour frais de scolarité",
@@ -3738,9 +3776,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Règle",
+    "origine": "dossier"
    },
    "rubrique": "Politique"
   },
@@ -3766,7 +3803,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
+    "titre": "Règle",
     "origine": "dossier"
    },
    "rubrique": "Budget"
@@ -4505,7 +4542,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
+    "titre": "Règle",
     "origine": "dossier"
    },
    "rubrique": "Budget",
@@ -4760,7 +4797,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budgétaire",
+    "titre": "Règle",
     "origine": "dossier"
    },
    "rubrique": "Budget",
@@ -5221,36 +5258,6 @@
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-23T11:45:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La Rochelle : le parking des Cabanes Urbaines a enfin un nom officiel, les amendes liées au stationnement ne devraient plus pouvoir être contestées",
-     "url": "https://www.sudouest.fr/charente-maritime/la-rochelle/la-rochelle-le-parking-des-cabanes-urbaines-a-enfin-un-nom-officiel-les-amendes-liees-au-stationnement-ne-devraient-plus-pouvoir-etre-contestees-31618517.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-23T11:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "La Rochelle : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le parking des Cabanes Urbaines a un nom officiel, les amendes liées au stationnement ne devraient plus pouvoir être contestées",
-   "accroche": "Le parking des Cabanes Urbaines a un nom officiel, les amendes liées au stationnement ne devraient plus pouvoir être contestées",
    "rubrique": "Politique"
   }
  ]
