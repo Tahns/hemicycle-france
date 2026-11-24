@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-24T09:01:17.046Z",
+ "lastUpdated": "2026-11-24T09:05:40.098Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -480,9 +480,9 @@
    "titre": "Communes",
    "motifs": [
     "communes",
-    "fiscal",
     "économie",
-    "impôts"
+    "impôts",
+    "locaux"
    ],
    "medias": [
     "Sud Ouest",
@@ -490,10 +490,10 @@
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "Public Sénat",
     "BFMTV",
     "La Dépêche",
     "Le Monde",
+    "Public Sénat",
     "Le JDD",
     "Libération",
     "Nice-Matin"
@@ -502,15 +502,15 @@
    "sources": [
     "Sud Ouest",
     "EBRA",
-    "Public Sénat",
     "BFMTV",
     "La Dépêche",
     "Le Monde",
+    "Public Sénat",
     "Le JDD",
     "Libération",
     "Nice-Matin"
    ],
-   "nb": 24,
+   "nb": 20,
    "derniere": "2026-11-24T07:50:00.000Z",
    "articles": [
     {
@@ -544,12 +544,6 @@
      "date": "2026-11-24T07:30:00.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 : le Sénat allège la fiscalité des donations familiales",
-     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-le-senat-allege-la-fiscalite-des-donations-familiales",
-     "date": "2026-11-23T22:02:40.000Z"
-    },
-    {
      "media": "BFMTV",
      "titre": "\"Il faut décortiquer le chiffrage du programme économique de David Lisnard pour comprendre que ce n'est pas crédible\", analyse Jean-François Copé, maire LR de Meaux",
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-il-faut-decortiquer-le-chiffrage-du-programme-economique-de-david-lisnard-pour-comprendre-que-ce-n-est-pas-credible-analyse-jean-francois-cope-maire-lr-de-meaux_VN-202611230921.html",
@@ -579,6 +573,12 @@
      "titre": "A Saint-Fons, Hadi Mebarki met en œuvre le « communalisme » de LFI",
      "url": "https://www.lemonde.fr/politique/article/2026/11/23/a-saint-fons-hadi-mebarki-met-en-uvre-le-communalisme-de-lfi_6814413_823448.html",
      "date": "2026-11-23T16:00:20.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Budget 2027 : le Sénat supprime la réduction d’impôt sur le revenu pour frais de scolarité",
+     "url": "https://www.publicsenat.fr/actualites/education/budget-2027-le-senat-supprime-la-reduction-dimpot-sur-le-revenu-pour-frais-de-scolarite",
+     "date": "2026-11-23T15:06:25.000Z"
     },
     {
      "media": "Le JDD",
@@ -2429,6 +2429,91 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-11-24T09:05:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«On vit dans la peur de sortir»: à Mayotte, la population s'inquiète d'une flambée des violences",
+     "url": "https://www.rfi.fr/fr/france/20261124-on-vit-dans-la-peur-de-sortir-%C3%A0-mayotte-la-population-s-inqui%C3%A8te-d-une-flamb%C3%A9e-des-violences",
+     "media": "RFI",
+     "date": "2026-11-24T09:05:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-11-24T09:02:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget : « Hormis les 5 % de déficit et la stabilité fiscale, tout est négociable », estime le porte-parole du gouvernement",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-hormis-les-5-de-deficit-et-la-stabilite-fiscale-tout-est-negociable-estime-le-porte-parole-du-gouvernement",
+     "media": "Public Sénat",
+     "date": "2026-11-24T09:02:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : déclaration sur les finances publiques",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T09:00:59.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Primaire de la droite et du centre: François Bayou juge qu'\"on a dépassé le comique pour entrer dans le burlesque\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-marine-le-pen-gabriel-attal-edouard-philippe-de-nombreux-candidats-a-la-rencontre-des-maires-a-l-occasion-du-congres-de-l-amf_LN-202611240163.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T09:00:59.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Primaire de la droite et du centre : François Bayou juge qu'",
+   "accroche": "Primaire de la droite et du centre : François Bayou juge qu'",
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-24T08:52:32.000Z",
@@ -2459,36 +2544,6 @@
     "generique": true
    },
    "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-24T08:52:26.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Primaire de la droite et du centre: François Bayou juge qu'on \"on a dépassé le comique pour entrer dans le burlesque\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-marine-le-pen-gabriel-attal-edouard-philippe-de-nombreux-candidats-a-la-rencontre-des-maires-a-l-occasion-du-congres-de-l-amf_LN-202611240163.html",
-     "media": "BFMTV",
-     "date": "2026-11-24T08:52:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Primaire de la droite et du centre : François Bayou juge qu'on",
-   "accroche": "Primaire de la droite et du centre : François Bayou juge qu'on",
-   "rubrique": "Justice"
   },
   {
    "medias": 1,
@@ -2648,6 +2703,41 @@
     "origine": "dossier"
    },
    "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-24T08:20:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Règle d’or budgétaire : Emmanuel Macron, le président Tartuffe",
+     "url": "https://www.nouvelobs.com/economie/20261124.OBS120400/regle-d-or-budgetaire-emmanuel-macron-le-president-tartuffe.html",
+     "media": "L'Obs",
+     "date": "2026-11-24T08:20:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -5335,90 +5425,6 @@
    "fait": "Le Conseil d'État a rendu sa décision, le résultat du scrutin des élections municipales est annulé",
    "accroche": "Le Conseil d'État a rendu sa décision, le résultat du scrutin des élections municipales est annulé",
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-23T20:28:53.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Hippolyte-le-Graveyron. 32e fête des vins : sept intronisations",
-     "url": "https://www.ledauphine.com/politique/2026/11/23/32e-fete-des-vins-sept-intronisations",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-23T20:28:53.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Hippolyte-le-Graveyron : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "RFI"
-   ],
-   "derniere": "2026-11-23T20:28:05.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Racisme en France: une marche pour l'égalité s'élance de Marseille en direction de Trappes",
-     "url": "https://www.rfi.fr/fr/france/20261123-racisme-en-france-une-marche-pour-l-%C3%A9galit%C3%A9-s-%C3%A9lance-de-marseille-en-direction-de-trappes",
-     "media": "RFI",
-     "date": "2026-11-23T20:28:05.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Racisme en France : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-23T20:20:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Lyon. Affaire Quentin Deranque : que s’est il passé ? Ce que dit le rapport du renseignement territorial",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/23/affaire-quentin-deranque-que-s-est-il-passe-ce-que-dit-le-rapport-du-renseignement-territorial",
-     "media": "Le Progrès",
-     "date": "2026-11-23T20:20:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   }
  ]
 }
