@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-24T18:45:49.385Z",
+ "lastUpdated": "2026-11-24T18:50:53.613Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -350,10 +350,10 @@
     "envisage"
    ],
    "medias": [
+    "Le Monde",
     "Public Sénat",
     "L'Humanité",
     "Dernières Nouvelles d'Alsace",
-    "Le Monde",
     "Sud Ouest",
     "Le Progrès",
     "Le JDD",
@@ -369,10 +369,10 @@
    ],
    "mediasDistincts": 14,
    "sources": [
+    "Le Monde",
     "Public Sénat",
     "L'Humanité",
     "EBRA",
-    "Le Monde",
     "Sud Ouest",
     "Groupe Bolloré",
     "La Dépêche",
@@ -384,9 +384,15 @@
     "RFI",
     "L'Express"
    ],
-   "nb": 52,
-   "derniere": "2026-11-24T18:41:42.000Z",
+   "nb": 53,
+   "derniere": "2026-11-24T18:42:05.000Z",
    "articles": [
+    {
+     "media": "Le Monde",
+     "titre": "La Commission européenne se montre indulgente sur la situation budgétaire française",
+     "url": "https://www.lemonde.fr/economie/article/2026/11/24/la-commission-europeenne-se-montre-indulgente-sur-la-situation-budgetaire-francaise_6814840_3234.html",
+     "date": "2026-11-24T18:42:05.000Z"
+    },
     {
      "media": "Public Sénat",
      "titre": "Budget 2027 : la gauche du Sénat échoue à supprimer la flat tax",
@@ -404,12 +410,6 @@
      "titre": "Molsheim. Au conseil municipal, un budget élaboré dans un contexte d’instabilité chronique",
      "url": "https://www.dna.fr/politique/2026/11/24/au-conseil-municipal-un-budget-elabore-dans-un-contexte-d-instabilite-chronique",
      "date": "2026-11-24T18:31:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Budget 2027 : le Sénat abaisse le plafond de l’abattement fiscal de 10 % des retraités, refusant sa suppression totale",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/24/budget-2027-le-senat-abaisse-le-plafond-de-l-abattement-fiscal-de-10-des-retraites-refusant-sa-suppression-totale_6814837_823448.html",
-     "date": "2026-11-24T18:15:05.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -2395,6 +2395,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-24T18:42:05.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "La Commission européenne se montre indulgente sur la situation budgétaire française",
+     "url": "https://www.lemonde.fr/economie/article/2026/11/24/la-commission-europeenne-se-montre-indulgente-sur-la-situation-budgetaire-francaise_6814840_3234.html",
+     "media": "Le Monde",
+     "date": "2026-11-24T18:42:05.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budget",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-11-24T18:41:42.000Z",
@@ -3030,8 +3057,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Sénat : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Sur le budget 2027, le Sénat abaisse le plafond de l’abattement fiscal de 10 % des retraités, refusant sa suppression totale",
    "accroche": "Sur le budget 2027, le Sénat abaisse le plafond de l’abattement fiscal de 10 % des retraités, refusant sa suppression totale",
@@ -4479,42 +4507,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-24T17:09:29.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-24T17:09:29.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4591,6 +4583,42 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T17:09:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T17:09:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4979,46 +5007,6 @@
     "generique": true
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-24T16:54:35.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     },
-     {
-      "nom": "Natacha Polony",
-      "photo": "photos/personnalites/natacha-polony.jpg",
-      "photoHd": "photos/personnalites/hd/natacha-polony.jpg",
-      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "VRAI/FAUX. Présidentielle: les dates de l’élection de 2022 ont-elles été \"avancées\" par Emmanuel Macron pour avoir une campagne \"courte\", comme l’affirme Natacha Polony?",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/vrai-faux-presidentielle-les-dates-de-l-election-de-2022-ont-elles-ete-avancees-par-emmanuel-macron-pour-avoir-une-campagne-courte-comme-l-affirme-natacha-polony_AV-202611240768.html",
-     "media": "BFMTV",
-     "date": "2026-11-24T16:54:35.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
