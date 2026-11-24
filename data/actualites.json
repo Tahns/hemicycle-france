@@ -1,11 +1,11 @@
 {
- "lastUpdated": "2026-11-24T12:10:56.503Z",
+ "lastUpdated": "2026-11-24T12:15:49.273Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
    "nom": "franceinfo",
    "site": "https://www.francetvinfo.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Monde",
@@ -156,12 +156,13 @@
     "présidentielle",
     "candidats",
     "congrès",
-    "sondage"
+    "parrainages"
    ],
    "medias": [
-    "France Inter",
     "La Dépêche",
+    "Public Sénat",
     "BFMTV",
+    "France Inter",
     "20 Minutes",
     "Dernières Nouvelles d'Alsace",
     "L'Humanité",
@@ -178,15 +179,15 @@
     "L'Est républicain",
     "Le Monde",
     "L'Obs",
-    "Public Sénat",
     "France 24",
     "RFI"
    ],
    "mediasDistincts": 17,
    "sources": [
-    "France Inter",
     "La Dépêche",
+    "Public Sénat",
     "BFMTV",
+    "France Inter",
     "20 Minutes",
     "EBRA",
     "L'Humanité",
@@ -199,29 +200,35 @@
     "Valeurs actuelles",
     "Le Monde",
     "L'Obs",
-    "Public Sénat",
     "France Médias Monde"
    ],
-   "nb": 116,
-   "derniere": "2026-11-24T12:00:00.000Z",
+   "nb": 117,
+   "derniere": "2026-11-24T12:09:03.000Z",
    "articles": [
+    {
+     "media": "La Dépêche",
+     "titre": "DIRECT. Présidentielle 2027 : la réunion prévue jeudi entre les équipes d'Attal, Retailleau et Lisnard reportée à une date ultérieure",
+     "url": "https://www.ladepeche.fr/2026/11/24/direct-presidentielle-le-congres-des-maires-souvre-ce-mardi-marine-le-pen-de-nombreux-candidats-a-la-rencontre-des-elus-13668403.php",
+     "date": "2026-11-24T12:09:03.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Congrès des maires : « L’AMF n’est pas un plan B qu’on reprend une fois qu’on n’a pas été élu à la présidentielle », tacle Philippe Laurent visant David Lisnard",
+     "url": "https://www.publicsenat.fr/actualites/politique/congres-des-maires-lamf-nest-pas-un-plan-b-quon-reprend-une-fois-quon-na-pas-ete-elu-a-la-presidentielle-tacle-philippe-laurent-visan",
+     "date": "2026-11-24T12:08:54.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Présidentielle: \"Le président TikTok on l'a depuis quasiment 10 ans\", lance Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/elections/video-presidentielle-le-president-tik-tok-on-l-a-depuis-quasiment-10-ans-lance-bruno-retailleau_VN-202611240562.html",
+     "date": "2026-11-24T12:08:29.000Z",
+     "video": true
+    },
     {
      "media": "France Inter",
      "titre": "A moins de cinq mois de la présidentielle, où en est le bloc central ?",
      "url": "https://www.radiofrance.fr/franceinter/podcasts/le-13-14/le-13-14-du-mardi-24-novembre-2026-4996978",
      "date": "2026-11-24T12:00:00.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Présidentielle 2027 : \"Je ne voterai ni pour l'un, ni pour l'autre\", François Bayrou refuse lui aussi de choisir entre Marine Le Pen et Jean-Luc Mélenchon",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-je-ne-voterai-ni-pour-lun-ni-pour-lautre-francois-bayrou-refuse-lui-aussi-de-choisir-entre-marine-le-pen-et-jean-luc-melenchon-13668792.php",
-     "date": "2026-11-24T11:58:42.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Il y a urgence\": pour réparer le système de santé, l'Ordre des médecins propose aux candidats à la présidentielle un plan sur dix ans",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/il-y-a-urgence-pour-reparer-le-systeme-de-sante-l-ordre-des-medecins-propose-aux-candidats-a-la-presidentielle-un-plan-sur-dix-ans_AN-202611240549.html",
-     "date": "2026-11-24T11:58:32.000Z"
     },
     {
      "media": "20 Minutes",
@@ -320,12 +327,6 @@
      "date": "2026-11-24T06:29:15.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Sondage : le vainqueur de l’élection présidentielle de 2027 devrait susciter plus de rejet que d’adhésion",
-     "url": "https://www.publicsenat.fr/actualites/politique/sondage-le-vainqueur-de-lelection-presidentielle-de-2027-devrait-susciter-plus-de-rejet-que-dadhesion",
-     "date": "2026-11-24T04:00:00.000Z"
-    },
-    {
      "media": "France 24",
      "titre": "Ouverture du Congrès des maires sur fond de bataille pour l'Élysée",
      "url": "https://www.france24.com/fr/france/20261124-ouverture-du-congr%C3%A8s-des-maires-sur-fond-de-bataille-pour-l-%C3%A9lys%C3%A9e",
@@ -345,10 +346,11 @@
    "motifs": [
     "emmanuel",
     "économie",
-    "syndicats",
-    "représentants"
+    "représentants",
+    "syndicats"
    ],
    "medias": [
+    "Public Sénat",
     "Europe 1",
     "La Dépêche",
     "BFMTV",
@@ -364,13 +366,13 @@
     "L'Obs",
     "L'Humanité",
     "France 24",
-    "Public Sénat",
     "Nice-Matin",
     "RFI",
     "20 Minutes"
    ],
    "mediasDistincts": 14,
    "sources": [
+    "Public Sénat",
     "Groupe Bolloré",
     "La Dépêche",
     "BFMTV",
@@ -382,13 +384,18 @@
     "L'Obs",
     "L'Humanité",
     "France Médias Monde",
-    "Public Sénat",
     "Nice-Matin",
     "20 Minutes"
    ],
-   "nb": 45,
-   "derniere": "2026-11-24T11:30:00.000Z",
+   "nb": 46,
+   "derniere": "2026-11-24T12:08:54.000Z",
    "articles": [
+    {
+     "media": "Public Sénat",
+     "titre": "Congrès des maires : « L’AMF n’est pas un plan B qu’on reprend une fois qu’on n’a pas été élu à la présidentielle », tacle Philippe Laurent visant David Lisnard",
+     "url": "https://www.publicsenat.fr/actualites/politique/congres-des-maires-lamf-nest-pas-un-plan-b-quon-reprend-une-fois-quon-na-pas-ete-elu-a-la-presidentielle-tacle-philippe-laurent-visan",
+     "date": "2026-11-24T12:08:54.000Z"
+    },
     {
      "media": "Europe 1",
      "titre": "Les effets de la politique de l'offre d'Emmanuel Macron «très intéressants» mais insuffisamment financés, selon cet économiste",
@@ -479,12 +486,6 @@
      "titre": "Terres rares : Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
      "url": "https://www.france24.com/fr/france/20261123-terres-rares-macron-annonce-france-doter-stocks-strat%C3%A9giques",
      "date": "2026-11-23T21:06:36.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« Il se fout de la gueule du monde » : la règle d’or budgétaire évoquée par Emmanuel Macron laisse dubitatif",
-     "url": "https://www.publicsenat.fr/actualites/politique/il-se-fout-de-la-gueule-du-monde-la-regle-dor-budgetaire-evoquee-par-emmanuel-macron-laisse-dubitatif",
-     "date": "2026-11-23T17:55:55.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -1372,10 +1373,10 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "BFMTV",
-    "La Dépêche"
+    "La Dépêche",
+    "BFMTV"
    ],
-   "derniere": "2026-11-24T11:37:42.000Z",
+   "derniere": "2026-11-24T12:09:03.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1408,16 +1409,16 @@
    },
    "articles": [
     {
+     "titre": "DIRECT. Présidentielle 2027 : la réunion prévue jeudi entre les équipes d'Attal, Retailleau et Lisnard reportée à une date ultérieure",
+     "url": "https://www.ladepeche.fr/2026/11/24/direct-presidentielle-le-congres-des-maires-souvre-ce-mardi-marine-le-pen-de-nombreux-candidats-a-la-rencontre-des-elus-13668403.php",
+     "media": "La Dépêche",
+     "date": "2026-11-24T12:09:03.000Z"
+    },
+    {
      "titre": "DIRECT. Primaire de la droite et du centre: la nouvelle réunion entre les équipes de Gabriel Attal, David Lisnard et Bruno Retailleau reportée",
      "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-marine-le-pen-gabriel-attal-edouard-philippe-de-nombreux-candidats-a-la-rencontre-des-maires-a-l-occasion-du-congres-de-l-amf_LN-202611240163.html",
      "media": "BFMTV",
      "date": "2026-11-24T11:37:42.000Z"
-    },
-    {
-     "titre": "DIRECT. Présidentielle 2027 : la réunion prévue jeudi entre les équipes d'Attal, Retailleau et Lisnard reportée à une date ultérieure",
-     "url": "https://www.ladepeche.fr/2026/11/24/direct-presidentielle-le-congres-des-maires-souvre-ce-mardi-marine-le-pen-de-nombreux-candidats-a-la-rencontre-des-elus-13668403.php",
-     "media": "La Dépêche",
-     "date": "2026-11-24T11:20:18.000Z"
     }
    ],
    "titrePropre": {
@@ -1427,7 +1428,7 @@
    },
    "fait": "La nouvelle réunion entre les équipes de Gabriel Attal, David Lisnard et Bruno Retailleau reportée",
    "accroche": "La nouvelle réunion entre les équipes de Gabriel Attal, David Lisnard et Bruno Retailleau reportée",
-   "essentiel": "Dans la primaire de la droite et du centre, la nouvelle réunion entre les équipes de Gabriel Attal, David Lisnard et Bruno Retailleau reportée. Deux médias en parlent : BFMTV et La Dépêche.",
+   "essentiel": "Dans la primaire de la droite et du centre, la nouvelle réunion entre les équipes de Gabriel Attal, David Lisnard et Bruno Retailleau reportée. Deux médias en parlent : La Dépêche et BFMTV.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1773,8 +1774,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel",
-    "origine": "dossier"
+    "titre": "Gueule du monde",
+    "origine": "recoupement"
    },
    "fait": "La règle d’or budgétaire évoquée par Emmanuel Macron laisse dubitatif",
    "accroche": "La règle d’or budgétaire évoquée par Emmanuel Macron laisse dubitatif",
@@ -2781,6 +2782,86 @@
    "accroche": "Prison ferme pour les trois policiers, le caractère raciste de l'agression retenu",
    "essentiel": "Prison ferme pour les trois policiers, le caractère raciste de l'agression retenu. Deux médias en parlent : France 24 et RFI.",
    "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-11-24T12:08:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Congrès des maires : « L’AMF n’est pas un plan B qu’on reprend une fois qu’on n’a pas été élu à la présidentielle », tacle Philippe Laurent visant David Lisnard",
+     "url": "https://www.publicsenat.fr/actualites/politique/congres-des-maires-lamf-nest-pas-un-plan-b-quon-reprend-une-fois-quon-na-pas-ete-elu-a-la-presidentielle-tacle-philippe-laurent-visan",
+     "media": "Public Sénat",
+     "date": "2026-11-24T12:08:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T12:08:29.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle: \"Le président TikTok on l'a depuis quasiment 10 ans\", lance Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/elections/video-presidentielle-le-president-tik-tok-on-l-a-depuis-quasiment-10-ans-lance-bruno-retailleau_VN-202611240562.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T12:08:29.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -5496,63 +5577,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-24T06:48:25.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Ali, réfugié palestinien détenu en France: l’ONU s’inquiète, la justice s’entête",
-     "url": "https://www.mediapart.fr/journal/france/241126/ali-refugie-palestinien-detenu-en-france-l-onu-s-inquiete-la-justice-s-entete",
-     "media": "Mediapart",
-     "date": "2026-11-24T06:48:25.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-24T06:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Ils portent le nom de collabos » : sur le campus Montesquieu de l’Université de Bordeaux, une offensive étudiante pour débaptiser deux amphithéâtres",
-     "url": "https://www.sudouest.fr/gironde/pessac/ils-portent-le-nom-de-collabos-sur-le-campus-montesquieu-de-l-universite-de-bordeaux-une-offensive-etudiante-pour-debaptiser-deux-amphitheatres-31598224.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-24T06:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Sur le campus Montesquieu de l’Université de Bordeaux, une offensive étudiante pour débaptiser deux amphithéâtres",
-   "accroche": "Sur le campus Montesquieu de l’Université de Bordeaux, une offensive étudiante pour débaptiser deux amphithéâtres",
-   "rubrique": "Politique"
   }
  ]
 }
