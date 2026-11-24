@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-24T09:10:56.007Z",
+ "lastUpdated": "2026-11-24T09:15:42.176Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -145,7 +145,7 @@
   {
    "nom": "Europe 1",
    "site": "https://www.europe1.fr/",
-   "lu": false
+   "lu": true
   }
  ],
  "dossiers": [
@@ -159,21 +159,23 @@
     "sondage"
    ],
    "medias": [
+    "BFMTV",
     "Le Figaro",
     "La Dépêche",
     "Valeurs actuelles",
     "Sud Ouest",
-    "BFMTV",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
+    "Libération",
+    "Europe 1",
     "Le Monde",
     "Nice-Matin",
     "L'Obs",
     "20 Minutes",
     "Public Sénat",
     "France 24",
-    "Libération",
     "L'Humanité",
     "Le JDD",
     "RFI",
@@ -181,26 +183,33 @@
    ],
    "mediasDistincts": 16,
    "sources": [
+    "BFMTV",
     "Le Figaro",
     "La Dépêche",
     "Valeurs actuelles",
     "Sud Ouest",
-    "BFMTV",
     "EBRA",
+    "Libération",
+    "Groupe Bolloré",
     "Le Monde",
     "Nice-Matin",
     "L'Obs",
     "20 Minutes",
     "Public Sénat",
     "France Médias Monde",
-    "Libération",
     "L'Humanité",
-    "Le JDD",
     "L'Express"
    ],
-   "nb": 94,
-   "derniere": "2026-11-24T09:01:32.000Z",
+   "nb": 112,
+   "derniere": "2026-11-24T09:04:34.000Z",
    "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "\"J'ai décidé d'agir\": Natacha Polony évoque sa candidature à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-j-ai-decide-d-agir-natacha-polony-evoque-sa-candidature-a-l-election-presidentielle_VN-202611240430.html",
+     "date": "2026-11-24T09:04:34.000Z",
+     "video": true
+    },
     {
      "media": "Le Figaro",
      "titre": "Congrès, référendum… Quelles solutions pour inscrire une «règle d’or» budgétaire dans la Constitution ?",
@@ -226,11 +235,10 @@
      "date": "2026-11-24T08:02:00.000Z"
     },
     {
-     "media": "BFMTV",
-     "titre": "Présidentielle 2027: \"J'ai déjà récolté la moitié des parrainages nécessaires\", affirme Natacha Polony, candidate “Nous sommes la France”",
-     "url": "https://www.bfmtv.com/politique/elections/video-presidentielle-2027-j-ai-deja-recolte-la-moitie-des-parrainages-necessaires-affirme-natacha-polony-candidate-nous-sommes-la-france_VN-202611240325.html",
-     "date": "2026-11-24T08:01:59.000Z",
-     "video": true
+     "media": "Le Progrès",
+     "titre": "Présidentielle 2027. Rupture avec Marine Tondelier : Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/rupture-avec-marine-tondelier-yannick-jadot-et-jeremie-iordanoff-creent-un-nouveau-parti-ecologiste",
+     "date": "2026-11-24T08:01:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -249,6 +257,18 @@
      "titre": "Présidentielle 2027. Rupture avec Marine Tondelier : Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
      "url": "https://www.estrepublicain.fr/elections/2026/11/24/rupture-avec-marine-tondelier-yannick-jadot-et-jeremie-iordanoff-creent-un-nouveau-parti-ecologiste",
      "date": "2026-11-24T08:01:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "En finir avec le «syndrome du grenier», ennemi de la démocratie, par Dominique Rousseau",
+     "url": "https://www.liberation.fr/idees-et-debats/tribunes/en-finir-avec-le-syndrome-du-grenier-ennemi-de-la-democratie-par-dominique-rousseau-20261124_4XU2K7J6DFDMHILVZTH5O4TDEA/",
+     "date": "2026-11-24T08:00:00.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Présidentielle 2027 : l'élection de Mélenchon serait une «abomination» conduisant à une «dictature» estime Eric Ciotti",
+     "url": "https://www.europe1.fr/politique/presidentielle-2027-lelection-de-melenchon-serait-une-abomination-conduisant-a-une-dictature-estime-eric-ciotti-1243456?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-24T07:52:39.000Z"
     },
     {
      "media": "Le Monde",
@@ -287,12 +307,6 @@
      "date": "2026-11-24T00:06:27.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Les écolos pro-Glucksmann fondent «Ecologistes et démocrates», un nouveau parti",
-     "url": "https://www.liberation.fr/politique/elections/les-ecolos-pro-glucksmann-fondent-ecologistes-et-democrates-un-nouveau-parti-20261123_MLJLZCW7TFETBE4P665OQHQB5Y/",
-     "date": "2026-11-23T21:09:41.000Z"
-    },
-    {
      "media": "L'Humanité",
      "titre": "Présidentielle 2027 : chez les Écologistes, le rapprochement avec Mélenchon précipite la rupture avec Yannick Jadot",
      "url": "https://www.humanite.fr/politique/jean-luc-melenchon/presidentielle-2027-chez-les-ecologistes-le-rapprochement-avec-melenchon-precipite-la-rupture-avec-yannick-jadot",
@@ -319,54 +333,85 @@
    ]
   },
   {
-   "id": "maire",
-   "titre": "Maire",
+   "id": "budgetaire",
+   "titre": "Budgétaire",
    "motifs": [
-    "maire"
+    "budgétaire",
+    "règle",
+    "envisage",
+    "inscrire"
    ],
    "medias": [
-    "Valeurs actuelles",
-    "Nice-Matin",
-    "La Dépêche",
-    "Sud Ouest",
-    "Le Monde",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "BFMTV",
-    "20 Minutes",
-    "France 24",
-    "L'Humanité",
-    "Le JDD",
-    "Public Sénat",
+    "Europe 1",
     "Le Figaro",
-    "Libération"
+    "Public Sénat",
+    "Le Monde",
+    "Le JDD",
+    "Nice-Matin",
+    "L'Obs",
+    "Sud Ouest",
+    "France Inter",
+    "BFMTV",
+    "La Dépêche",
+    "20 Minutes",
+    "Mediapart",
+    "L'Humanité",
+    "Valeurs actuelles",
+    "Libération",
+    "RFI",
+    "France 24"
    ],
-   "mediasDistincts": 14,
+   "mediasDistincts": 16,
    "sources": [
-    "Valeurs actuelles",
-    "Nice-Matin",
-    "La Dépêche",
-    "Sud Ouest",
-    "Le Monde",
-    "EBRA",
-    "BFMTV",
-    "20 Minutes",
-    "France 24",
-    "L'Humanité",
-    "Le JDD",
-    "Public Sénat",
+    "Groupe Bolloré",
     "Le Figaro",
-    "Libération"
+    "Public Sénat",
+    "Le Monde",
+    "Nice-Matin",
+    "L'Obs",
+    "Sud Ouest",
+    "France Inter",
+    "BFMTV",
+    "La Dépêche",
+    "20 Minutes",
+    "Mediapart",
+    "L'Humanité",
+    "Valeurs actuelles",
+    "Libération",
+    "France Médias Monde"
    ],
-   "nb": 32,
-   "derniere": "2026-11-24T08:31:22.000Z",
+   "nb": 50,
+   "derniere": "2026-11-24T09:13:00.000Z",
    "articles": [
     {
-     "media": "Valeurs actuelles",
-     "titre": "Présidentielle 2027 : contre la « folie administrative française », l’appel au bon sens du maire de Molsheim",
-     "url": "https://www.valeursactuelles.com/clubvaleurs/regions/grand-est/bas-rhin/strasbourg/politique/presidentielle-2027-contre-la-folie-administrative-francaise-lappel-au-bon-sens-du-maire-de-molsheim",
-     "date": "2026-11-24T08:31:22.000Z"
+     "media": "Europe 1",
+     "titre": "Budget de la PAC en baisse : Macron rencontre les syndicats agricoles ce mercredi",
+     "url": "https://www.europe1.fr/societe/budget-de-la-pac-en-baisse-macron-rencontre-les-syndicats-agricoles-ce-mercredi-1243516?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-24T09:13:00.000Z"
+    },
+    {
+     "media": "Le Figaro",
+     "titre": "Règle d’or budgétaire : Emmanuel Macron face à la faisabilité d’un ultime défi",
+     "url": "https://www.lefigaro.fr/politique/regle-d-or-budgetaire-emmanuel-macron-face-a-la-faisabilite-d-un-ultime-defi-20261123",
+     "date": "2026-11-24T09:05:45.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Budget : « Hormis les 5 % de déficit et la stabilité fiscale, tout est négociable », estime le porte-parole du gouvernement",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-hormis-les-5-de-deficit-et-la-stabilite-fiscale-tout-est-negociable-estime-le-porte-parole-du-gouvernement",
+     "date": "2026-11-24T09:02:00.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "PAC : Emmanuel Macron recevra les syndicats agricoles mercredi pour faire le point sur le prochain budget européen",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/24/pac-emmanuel-macron-recevra-les-syndicats-agricoles-mercredi-pour-faire-le-point-sur-le-prochain-budget-europeen_6814725_823448.html",
+     "date": "2026-11-24T08:52:32.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Proposition d'Emmanuel Macron sur la règle d’or budgétaire : «Il faut vraiment n'avoir honte de rien», fustige François-Xavier Bellamy",
+     "url": "https://www.lejdd.fr/politique/proposition-demmanuel-macron-sur-la-regle-dor-budgetaire-il-faut-vraiment-navoir-honte-de-rien-fustige-francois-xavier-bellamy-189507",
+     "date": "2026-11-24T08:30:19.000Z"
     },
     {
      "media": "Nice-Matin",
@@ -375,59 +420,46 @@
      "date": "2026-11-24T08:24:44.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "Présidentielle 2027 - Sondage : David Lisnard passe devant Edouard Philippe... mais agace les maires de France",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-david-lisnard-passe-devant-edouard-philippe-dans-les-sondages-mais-agace-les-maires-de-france-13666980.php",
-     "date": "2026-11-24T08:10:37.000Z"
+     "media": "L'Obs",
+     "titre": "Règle d’or budgétaire : Emmanuel Macron, le président Tartuffe",
+     "url": "https://www.nouvelobs.com/economie/20261124.OBS120400/regle-d-or-budgetaire-emmanuel-macron-le-president-tartuffe.html",
+     "date": "2026-11-24T08:20:03.000Z"
     },
     {
      "media": "Sud Ouest",
-     "titre": "Le Congrès des maires de France s’ouvre ce mardi sur fond de bataille pour l’Élysée et de protestations autour de la double candidature de David Lisnard",
-     "url": "https://www.sudouest.fr/politique/le-congres-des-maires-de-france-s-ouvre-ce-mardi-sur-fond-de-bataille-pour-l-elysee-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard-31649554.php",
-     "date": "2026-11-24T08:02:00.000Z"
+     "titre": "Le président des maires du Pays basque et du Béarn craint que le futur budget de l’État n’appauvrisse encore un peu plus les communes",
+     "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/le-president-des-maires-du-pays-basque-et-du-bearn-craint-que-le-futur-budget-de-l-etat-n-appauvrisse-encore-un-peu-plus-les-communes-31624366.php",
+     "date": "2026-11-24T07:50:00.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Le congrès des maires de France s’ouvre sur fond de course à la présidentielle et de protestations autour de la double candidature de David Lisnard",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/24/le-congres-des-maires-de-france-s-ouvre-sur-fond-de-course-a-la-presidentielle-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard_6814718_823448.html",
-     "date": "2026-11-24T07:09:47.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Parrainages, Lisnard... Le congrès des maires s'ouvre à l’ombre de la présidentielle",
-     "url": "https://www.dna.fr/elections/2026/11/24/parrainages-lisnard-le-congres-des-maires-s-ouvre-a-l-ombre-de-la-presidentielle",
-     "date": "2026-11-24T06:00:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Politique. Parrainages, Lisnard... Le congrès des maires s'ouvre à l’ombre de la présidentielle",
-     "url": "https://www.ledauphine.com/elections/2026/11/24/parrainages-lisnard-le-congres-des-maires-s-ouvre-a-l-ombre-de-la-presidentielle",
-     "date": "2026-11-24T06:00:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Politique. Parrainages, Lisnard... Le congrès des maires s'ouvre à l’ombre de la présidentielle",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/24/parrainages-lisnard-le-congres-des-maires-s-ouvre-a-l-ombre-de-la-presidentielle",
-     "date": "2026-11-24T06:00:00.000Z"
+     "media": "France Inter",
+     "titre": "Macron tape l'incruste avec sa règle d'or",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-edito-politique/l-edito-politique-du-mardi-24-novembre-2026-3960931",
+     "date": "2026-11-24T06:42:20.000Z"
     },
     {
      "media": "BFMTV",
-     "titre": "Présidentielle 2027: au Congrès des maires, les candidats affluent",
-     "url": "https://www.bfmtv.com/politique/elections/video-presidentielle-2027-au-congres-des-maires-les-candidats-affluent_VN-202611240113.html",
-     "date": "2026-11-24T05:15:44.000Z",
-     "video": true
+     "titre": "\"Règle d'or\" budgétaire proposée par l'Élysée: Emmanuel Macron pourra-t-il remporter son pari et convaincre les oppositions?",
+     "url": "https://www.bfmtv.com/politique/elysee/regle-d-or-budgetaire-proposee-par-l-elysee-emmanuel-macron-pourra-t-il-remporter-son-pari-et-convaincre-les-oppositions_AN-202611240066.html",
+     "date": "2026-11-24T05:52:00.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "DECRYPTAGE. Présidentielle 2027 : retraites, voile, règle d’or, avortement, Ukraine... comment Marine Le Pen tentent de rassurer ses électeurs",
+     "url": "https://www.ladepeche.fr/2026/11/24/decryptage-presidentielle-2027-retraites-voile-regle-dor-avortement-ukraine-comment-marine-le-pen-tentent-de-rassurer-ses-electeurs-13667260.php",
+     "date": "2026-11-24T05:11:02.000Z"
     },
     {
      "media": "20 Minutes",
-     "titre": "EN DIRECT Présidentielle 2027 : La candidature de David Lisnard va agiter le congrès des maires de France, Jadot créé un nouveau parti…",
-     "url": "https://www.20minutes.fr/politique/4265257-20261124-direct-presidentielle-2027-candidature-david-lisnard-va-agiter-congres-maires-france?at_medium=display&at_campaign=149",
-     "date": "2026-11-24T05:02:47.000Z"
+     "titre": "Budget : Agriculture, Éducation… Tout savoir sur le compromis proposé par Lecornu",
+     "url": "https://www.20minutes.fr/politique/assemblee_nationale/4265254-20261124-budget-agriculture-education-tout-savoir-compromis-propose-lecornu?at_medium=display&at_campaign=149",
+     "date": "2026-11-24T03:32:16.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Ouverture du Congrès des maires sur fond de bataille pour l'Élysée",
-     "url": "https://www.france24.com/fr/france/20261124-ouverture-du-congr%C3%A8s-des-maires-sur-fond-de-bataille-pour-l-%C3%A9lys%C3%A9e",
-     "date": "2026-11-24T00:06:27.000Z"
+     "media": "Mediapart",
+     "titre": "La «règle d’or» budgétaire ou le macronisme pour l’éternité",
+     "url": "https://www.mediapart.fr/journal/economie-et-social/231126/la-regle-d-or-budgetaire-ou-le-macronisme-pour-l-eternite",
+     "date": "2026-11-23T18:37:14.000Z"
     },
     {
      "media": "L'Humanité",
@@ -436,28 +468,28 @@
      "date": "2026-11-23T18:29:36.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Dette, bureaucratie, immigration : un maire de petite ville face aux crises françaises",
-     "url": "https://www.lejdd.fr/politique/dette-bureaucratie-immigration-un-maire-de-petite-ville-face-aux-crises-francaises-189492",
-     "date": "2026-11-23T16:46:04.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Congrès des maires : Les candidats partent à la chasse aux parrainages même si seul un maire sur quatre compte donner sa signature, selon une enquête du CEVIPOF",
-     "url": "https://www.publicsenat.fr/actualites/politique/congres-des-maires-les-candidats-partent-a-la-chasse-aux-parrainages-meme-si-seul-un-maire-sur-quatre-compte-donner-sa-signature-selon-une-enquete-du-cevipof",
-     "date": "2026-11-23T15:24:51.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "Martial Foucault, professeur à Sciences Po : « Le maire est souvent le maillon d’une chaîne plus complexe »",
-     "url": "https://www.lefigaro.fr/politique/martial-foucault-professeur-a-sciences-po-le-maire-est-souvent-le-maillon-d-une-chaine-plus-complexe-20261123",
-     "date": "2026-11-23T06:00:00.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "« Un acte de comédie » : au crépuscule, Emmanuel Macron agite sa règle d’or",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/politique/un-acte-de-comedie-au-crepuscule-emmanuel-macron-agite-sa-regle-dor",
+     "date": "2026-11-23T18:00:53.000Z"
     },
     {
      "media": "Libération",
-     "titre": "A Orléans, le pas de deux du maire de droite avec le Rassemblement national",
-     "url": "https://www.liberation.fr/politique/elections/a-orleans-le-pas-de-deux-du-maire-de-droite-avec-le-rassemblement-national-20261123_UN3AQEGY6VH6HM6FKR3BB6KN6M/",
-     "date": "2026-11-23T04:55:00.000Z"
+     "titre": "«Il a réussi à nous avoir» : avec sa règle d’or budgétaire, Macron s’incruste dans la campagne présidentielle",
+     "url": "https://www.liberation.fr/politique/il-a-reussi-a-nous-avoir-avec-sa-regle-dor-budgetaire-macron-sincruste-dans-la-campagne-20261123_SOURM2OF2NBULILOORRIDBIG3M/",
+     "date": "2026-11-23T17:33:39.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "«Une règle d'or budgétaire, proposée par Emmanuel Macron, n'a aucun sens», déplore le député LFI Aurélien Taché",
+     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261123-une-r%C3%A8gle-d-or-budg%C3%A9taire-propos%C3%A9e-par-emmanuel-macron-n-a-aucun-sens-d%C3%A9plore-le-d%C3%A9put%C3%A9-lfi-aur%C3%A9lien-tach%C3%A9",
+     "date": "2026-11-23T12:49:21.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Budget : Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
+     "url": "https://www.france24.com/fr/france/20261122-budget-macron-confirme-qu-il-envisage-d-inscrire-une-r%C3%A8gle-d-or-dans-la-constitution",
+     "date": "2026-11-22T15:54:26.000Z"
     }
    ]
   },
@@ -466,19 +498,22 @@
    "titre": "Communes",
    "motifs": [
     "communes",
-    "économie"
+    "économie",
+    "impôts",
+    "locaux"
    ],
    "medias": [
     "Sud Ouest",
+    "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
     "BFMTV",
     "La Dépêche",
     "Le Monde",
+    "Public Sénat",
     "Le JDD",
     "Libération",
-    "Public Sénat",
     "Nice-Matin"
    ],
    "mediasDistincts": 9,
@@ -488,12 +523,12 @@
     "BFMTV",
     "La Dépêche",
     "Le Monde",
+    "Public Sénat",
     "Le JDD",
     "Libération",
-    "Public Sénat",
     "Nice-Matin"
    ],
-   "nb": 15,
+   "nb": 20,
    "derniere": "2026-11-24T07:50:00.000Z",
    "articles": [
     {
@@ -501,6 +536,12 @@
      "titre": "Le président des maires du Pays basque et du Béarn craint que le futur budget de l’État n’appauvrisse encore un peu plus les communes",
      "url": "https://www.sudouest.fr/pyrenees-atlantiques/pau/le-president-des-maires-du-pays-basque-et-du-bearn-craint-que-le-futur-budget-de-l-etat-n-appauvrisse-encore-un-peu-plus-les-communes-31624366.php",
      "date": "2026-11-24T07:50:00.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Économie. Un \"choc fiscal\" en 2027 ? Pourquoi les communes pourraient augmenter les impôts locaux",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/un-choc-fiscal-en-2027-pourquoi-les-communes-pourraient-augmenter-les-impots-locaux",
+     "date": "2026-11-24T07:30:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -552,6 +593,12 @@
      "date": "2026-11-23T16:00:20.000Z"
     },
     {
+     "media": "Public Sénat",
+     "titre": "Budget 2027 : le Sénat supprime la réduction d’impôt sur le revenu pour frais de scolarité",
+     "url": "https://www.publicsenat.fr/actualites/education/budget-2027-le-senat-supprime-la-reduction-dimpot-sur-le-revenu-pour-frais-de-scolarite",
+     "date": "2026-11-23T15:06:25.000Z"
+    },
+    {
      "media": "Le JDD",
      "titre": "Le post-libéralisme, réconcilier les élites et le peuple autour du bien commun",
      "url": "https://www.lejdd.fr/politique/le-post-liberalisme-reconcilier-les-elites-et-le-peuple-autour-du-bien-commun-189483",
@@ -564,22 +611,10 @@
      "date": "2026-11-23T13:44:09.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "« Elle a un discours économique très proche du mien » : David Lisnard admet des convergences avec Sarah Knafo mais écarte tout rapprochement",
-     "url": "https://www.publicsenat.fr/actualites/politique/elle-a-un-discours-economique-tres-proche-du-mien-david-lisnard-admet-des-convergences-avec-sarah-knafo-mais-ecarte-tout-rapprochement",
-     "date": "2026-11-23T09:30:33.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "Les maires du Var vent debout : « L’État malade invente un nouvel impôt sur l’investissement de nos communes ! »",
      "url": "https://www.nicematin.com/societe/politique/les-maires-du-var-vent-debout-l-etat-malade-invente-un-nouvel-impot-sur-l-investissement-de-nos-communes-10766497",
      "date": "2026-11-23T05:45:09.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Des nids-de-poule aux toitures trouées, la «dette grise» met les communes au défi",
-     "url": "https://www.liberation.fr/politique/des-nids-de-poule-aux-toitures-trouees-la-dette-grise-met-les-communes-au-defi-20261123_XEE2AOELQZHDHHQ54IGKNJRYGU/",
-     "date": "2026-11-23T05:02:00.000Z"
     }
    ]
   }
@@ -674,7 +709,7 @@
    "rubrique": "Assemblée nationale"
   },
   {
-   "medias": 6,
+   "medias": 7,
    "mediasDistincts": 4,
    "sources": [
     "Libération",
@@ -694,8 +729,8 @@
    "articles": [
     {
      "titre": "Politique. Six députés LFI portent plainte pour des menaces de mort anonymes",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/11/23/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/23/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes",
+     "media": "Le Progrès",
      "date": "2026-11-23T22:08:00.000Z"
     },
     {
@@ -709,6 +744,12 @@
      "url": "https://www.lemonde.fr/societe/article/2026/11/24/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes_6814471_3224.html",
      "media": "Le Monde",
      "date": "2026-11-24T00:09:13.000Z"
+    },
+    {
+     "titre": "Politique. Six députés LFI portent plainte pour des menaces de mort anonymes",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/23/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-23T22:08:00.000Z"
     },
     {
      "titre": "Politique. Six députés LFI portent plainte pour des menaces de mort anonymes",
@@ -735,7 +776,7 @@
    },
    "fait": "Six députés La France insoumise vont porter plainte pour des menaces de mort anonymes",
    "accroche": "Six députés La France insoumise vont porter plainte pour des menaces de mort anonymes",
-   "essentiel": "Six députés La France insoumise vont porter plainte pour des menaces de mort anonymes. Six médias en parlent : Dernières Nouvelles d'Alsace, Libération, Le Monde, Le Dauphiné libéré, L'Est républicain et Sud Ouest.",
+   "essentiel": "Six députés La France insoumise vont porter plainte pour des menaces de mort anonymes. Sept médias en parlent.",
    "rubrique": "Justice"
   },
   {
@@ -797,7 +838,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "EBRA",
@@ -840,6 +881,12 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. Rupture avec Marine Tondelier : Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/rupture-avec-marine-tondelier-yannick-jadot-et-jeremie-iordanoff-creent-un-nouveau-parti-ecologiste",
+     "media": "Le Progrès",
+     "date": "2026-11-24T08:01:00.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. Rupture avec Marine Tondelier : Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
      "url": "https://www.dna.fr/elections/2026/11/24/rupture-avec-marine-tondelier-yannick-jadot-et-jeremie-iordanoff-creent-un-nouveau-parti-ecologiste",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-24T08:01:00.000Z"
@@ -876,7 +923,7 @@
    },
    "fait": "Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
    "accroche": "Yannick Jadot et Jérémie Iordanoff créent un nouveau parti écologiste",
-   "essentiel": "Yannick Jadot et Jérémie Iordanoff, en rupture avec Marine Tondelier, créent un nouveau parti écologiste. Cinq médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain, L'Humanité et Le Monde.",
+   "essentiel": "Yannick Jadot et Jérémie Iordanoff, en rupture avec Marine Tondelier, créent un nouveau parti écologiste. Six médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain, L'Humanité et Le Monde.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -935,6 +982,50 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "20 Minutes",
+    "L'Obs",
+    "Europe 1"
+   ],
+   "derniere": "2026-11-23T13:17:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "SOC"
+    ],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Anne Hidalgo : Les enquêtes sur les déplacements internationaux de l’ex-maire de Paris classées sans suite",
+     "url": "https://www.nouvelobs.com/justice/20261123.OBS120373/les-enquetes-sur-les-deplacements-internationaux-d-anne-hidalgo-classees-sans-suite-pour-absence-d-infraction.html",
+     "media": "L'Obs",
+     "date": "2026-11-23T13:16:03.000Z"
+    },
+    {
+     "titre": "Anne Hidalgo à Tahiti : Les deux enquêtes concernant les déplacements de l’ex maire de Paris classées sans suite",
+     "url": "https://www.20minutes.fr/politique/4265098-20261123-anne-hidalgo-tahiti-deux-enquetes-concernant-deplacements-ex-maire-paris-classees-suite?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-23T13:17:11.000Z"
+    },
+    {
+     "titre": "La justice classe les enquêtes sur les voyages de l'ex-maire PS de Paris Anne Hidalgo",
+     "url": "https://www.europe1.fr/politique/la-justice-classe-les-enquetes-sur-les-voyages-de-lex-maire-ps-de-paris-anne-hidalgo-1242949?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-23T13:01:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Vie locale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Justice"
   },
   {
    "medias": 3,
@@ -1188,6 +1279,47 @@
    "accroche": "Le Parlement adopte définitivement la présomption d'usage légitime des armes par les forces de l'ordre",
    "essentiel": "Le Parlement adopte définitivement la présomption d'usage légitime des armes par les forces de l'ordre. Trois médias en parlent : Public Sénat, France 24 et RFI.",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Europe 1",
+    "Le Monde"
+   ],
+   "derniere": "2026-11-24T09:13:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget de la PAC en baisse : Macron rencontre les syndicats agricoles ce mercredi",
+     "url": "https://www.europe1.fr/societe/budget-de-la-pac-en-baisse-macron-rencontre-les-syndicats-agricoles-ce-mercredi-1243516?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T09:13:00.000Z"
+    },
+    {
+     "titre": "PAC : Emmanuel Macron recevra les syndicats agricoles mercredi pour faire le point sur le prochain budget européen",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/24/pac-emmanuel-macron-recevra-les-syndicats-agricoles-mercredi-pour-faire-le-point-sur-le-prochain-budget-europeen_6814725_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-24T08:52:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Budgétaire",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget"
   },
   {
    "medias": 2,
@@ -1449,6 +1581,41 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Mediapart",
+    "Europe 1"
+   ],
+   "derniere": "2026-11-23T17:40:52.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jensen Huang de retour à la tête de Nvidia, les marchés euphoriques",
+     "url": "https://www.mediapart.fr/journal/international/231126/jensen-huang-de-retour-la-tete-de-nvidia-les-marches-euphoriques",
+     "media": "Mediapart",
+     "date": "2026-11-23T17:40:52.000Z"
+    },
+    {
+     "titre": "Le conseil de Nvidia annonce la réintégration de Jensen Huang comme DG et président",
+     "url": "https://www.europe1.fr/international/le-conseil-de-nvidia-annonce-la-reintegration-de-jensen-huang-comme-dg-et-president-1242988?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-23T14:18:20.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "20 Minutes",
     "Le JDD"
    ],
@@ -1527,41 +1694,6 @@
    "accroche": "Le gouvernement fait adopter au Sénat sa prolongation en 2027",
    "essentiel": "Elle sera prolongée en 2027 : le gouvernement fait adopter au Sénat une reconduction de la prime carburants pour les salariés. Deux médias en parlent : La Croix et Nice-Matin.",
    "rubrique": "Sénat"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "L'Obs"
-   ],
-   "derniere": "2026-11-23T13:17:11.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Anne Hidalgo à Tahiti : Les deux enquêtes concernant les déplacements de l’ex maire de Paris classées sans suite",
-     "url": "https://www.20minutes.fr/politique/4265098-20261123-anne-hidalgo-tahiti-deux-enquetes-concernant-deplacements-ex-maire-paris-classees-suite?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-23T13:17:11.000Z"
-    },
-    {
-     "titre": "Anne Hidalgo : Les enquêtes sur les déplacements internationaux de l’ex-maire de Paris classées sans suite",
-     "url": "https://www.nouvelobs.com/justice/20261123.OBS120373/les-enquetes-sur-les-deplacements-internationaux-d-anne-hidalgo-classees-sans-suite-pour-absence-d-infraction.html",
-     "media": "L'Obs",
-     "date": "2026-11-23T13:16:03.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
   },
   {
    "medias": 2,
@@ -1783,7 +1915,7 @@
    "rubrique": "Politique"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1796,6 +1928,12 @@
     "vignette": "budget"
    },
    "articles": [
+    {
+     "titre": "Économie. Un \"choc fiscal\" en 2027 ? Pourquoi les communes pourraient augmenter les impôts locaux",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/un-choc-fiscal-en-2027-pourquoi-les-communes-pourraient-augmenter-les-impots-locaux",
+     "media": "Le Progrès",
+     "date": "2026-11-24T07:30:00.000Z"
+    },
     {
      "titre": "Économie. Un \"choc fiscal\" en 2027 ? Pourquoi les communes pourraient augmenter les impôts locaux",
      "url": "https://www.dna.fr/economie/2026/11/24/un-choc-fiscal-en-2027-pourquoi-les-communes-pourraient-augmenter-les-impots-locaux",
@@ -1822,7 +1960,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1845,6 +1983,12 @@
    "articles": [
     {
      "titre": "Politique. Parrainages, Lisnard... Le congrès des maires s'ouvre à l’ombre de la présidentielle",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/parrainages-lisnard-le-congres-des-maires-s-ouvre-a-l-ombre-de-la-presidentielle",
+     "media": "Le Progrès",
+     "date": "2026-11-24T06:00:00.000Z"
+    },
+    {
+     "titre": "Politique. Parrainages, Lisnard... Le congrès des maires s'ouvre à l’ombre de la présidentielle",
      "url": "https://www.dna.fr/elections/2026/11/24/parrainages-lisnard-le-congres-des-maires-s-ouvre-a-l-ombre-de-la-presidentielle",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-24T06:00:00.000Z"
@@ -1863,13 +2007,14 @@
     }
    ],
    "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
+    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1882,6 +2027,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Alexia, 30 ans. « En France, nous avons 20 ans de retard sur le sujet de la santé mentale »",
+     "url": "https://www.leprogres.fr/societe/2026/11/24/alexia-30-ans-je-vis-sante-et-je-travaille-sante",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:30:00.000Z"
+    },
     {
      "titre": "Alexia, 30 ans. « En France, nous avons 20 ans de retard sur le sujet de la santé mentale »",
      "url": "https://www.dna.fr/societe/2026/11/24/alexia-30-ans-je-vis-sante-et-je-travaille-sante",
@@ -1912,7 +2063,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1927,14 +2078,20 @@
    "articles": [
     {
      "titre": "Fanny, 40 ans. Dirigeante d'entreprise en Alsace : face au désordre mondial, « l’adaptation et la réactivité, c’est ce qui fait notre force »",
-     "url": "https://www.ledauphine.com/elections/2026/11/24/dirigeante-d-entreprise-a-erstein-face-au-desordre-mondial-l-adaptation-et-la-reactivite-c-est-ce-qui-fait-notre-force",
-     "media": "Le Dauphiné libéré",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/dirigeante-d-entreprise-a-erstein-face-au-desordre-mondial-l-adaptation-et-la-reactivite-c-est-ce-qui-fait-notre-force",
+     "media": "Le Progrès",
      "date": "2026-11-24T05:27:00.000Z"
     },
     {
      "titre": "Fanny, 40 ans. Dirigeante d'entreprise à Erstein : face au désordre mondial, « l’adaptation et la réactivité, c’est ce qui fait notre force »",
      "url": "https://www.dna.fr/elections/2026/11/24/dirigeante-d-entreprise-a-erstein-face-au-desordre-mondial-l-adaptation-et-la-reactivite-c-est-ce-qui-fait-notre-force",
      "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-24T05:27:00.000Z"
+    },
+    {
+     "titre": "Fanny, 40 ans. Dirigeante d'entreprise en Alsace : face au désordre mondial, « l’adaptation et la réactivité, c’est ce qui fait notre force »",
+     "url": "https://www.ledauphine.com/elections/2026/11/24/dirigeante-d-entreprise-a-erstein-face-au-desordre-mondial-l-adaptation-et-la-reactivite-c-est-ce-qui-fait-notre-force",
+     "media": "Le Dauphiné libéré",
      "date": "2026-11-24T05:27:00.000Z"
     },
     {
@@ -1955,7 +2112,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1968,6 +2125,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Marine, 35 ans. « On ne travaille pas dans le social pour la paie », une vie pour celle des autres",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/on-ne-travaille-pas-dans-le-social-pour-la-paie-une-vie-pour-celle-des-autres",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:10:00.000Z"
+    },
     {
      "titre": "Marine, 35 ans. « On ne travaille pas dans le social pour la paie », une vie pour celle des autres",
      "url": "https://www.dna.fr/elections/2026/11/24/on-ne-travaille-pas-dans-le-social-pour-la-paie-une-vie-pour-celle-des-autres",
@@ -1999,7 +2162,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2027,6 +2190,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. Baromètre Odoxa : le décrochage d'Édouard Philippe, l'ascension de David Lisnard",
+     "url": "https://www.leprogres.fr/elections/2026/11/24/barometre-odoxa-le-decrochage-d-edouard-philippe-face-a-l-ascension-de-david-lisnard",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:00:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. Baromètre Odoxa : le décrochage d'Édouard Philippe, l'ascension de David Lisnard",
      "url": "https://www.dna.fr/elections/2026/11/24/barometre-odoxa-le-decrochage-d-edouard-philippe-face-a-l-ascension-de-david-lisnard",
@@ -2061,7 +2230,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2082,6 +2251,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond",
+     "url": "https://www.leprogres.fr/elections/2026/11/23/a-gauche-les-premisses-d-une-recomposition-avec-melenchon-en-toile-de-fond",
+     "media": "Le Progrès",
+     "date": "2026-11-23T19:30:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond",
      "url": "https://www.dna.fr/elections/2026/11/23/a-gauche-les-premisses-d-une-recomposition-avec-melenchon-en-toile-de-fond",
@@ -2108,8 +2283,48 @@
    },
    "fait": "À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond",
    "accroche": "À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond",
-   "essentiel": "À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond. Trois médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "À gauche, les prémices d’une recomposition avec Mélenchon en toile de fond. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-24T06:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "Le Progrès",
+     "date": "2026-11-24T06:30:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.ledauphine.com/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-24T06:30:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "L'Est républicain",
+     "date": "2026-11-24T06:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Agriculture : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
   },
   {
    "medias": 2,
@@ -2147,40 +2362,6 @@
    "accroche": "La justice ordonne un procès pour meurtre à l'encontre du policier",
    "essentiel": "La justice ordonne un procès pour meurtre à l'encontre du policier. Deux médias en parlent : RFI et France 24.",
    "rubrique": "Justice"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-24T06:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
-     "url": "https://www.ledauphine.com/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-24T06:30:00.000Z"
-    },
-    {
-     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
-     "url": "https://www.estrepublicain.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
-     "media": "L'Est républicain",
-     "date": "2026-11-24T06:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Agriculture : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "International"
   },
   {
    "medias": 2,
@@ -2413,8 +2594,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : réponse sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budgétaire",
+    "origine": "dossier"
    },
    "rubrique": "Budget"
   },
@@ -2450,6 +2631,41 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T09:04:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Natacha Polony",
+      "photo": "photos/personnalites/natacha-polony.jpg",
+      "photoHd": "photos/personnalites/hd/natacha-polony.jpg",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"J'ai décidé d'agir\": Natacha Polony évoque sa candidature à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-j-ai-decide-d-agir-natacha-polony-evoque-sa-candidature-a-l-election-presidentielle_VN-202611240430.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T09:04:34.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Natacha Polony : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Public Sénat"
    ],
    "derniere": "2026-11-24T09:02:00.000Z",
@@ -2468,8 +2684,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : déclaration sur les finances publiques",
-    "origine": "regles"
+    "titre": "Budgétaire",
+    "origine": "dossier"
    },
    "rubrique": "Budget"
   },
@@ -2529,41 +2745,6 @@
    "fait": "Primaire de la droite et du centre : François Bayou juge qu'",
    "accroche": "Primaire de la droite et du centre : François Bayou juge qu'",
    "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-24T08:52:32.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "PAC : Emmanuel Macron recevra les syndicats agricoles mercredi pour faire le point sur le prochain budget européen",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/24/pac-emmanuel-macron-recevra-les-syndicats-agricoles-mercredi-pour-faire-le-point-sur-le-prochain-budget-europeen_6814725_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-24T08:52:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -2691,9 +2872,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
+    "titre": "Budgétaire",
+    "origine": "dossier"
    },
    "rubrique": "Budget"
   },
@@ -2719,8 +2899,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
+    "titre": "Gouvernement : ce qu'il faut savoir sur l'éducation et la jeunesse",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Gouvernement"
   },
@@ -2753,11 +2934,56 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
+    "titre": "Budgétaire",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-24T08:17:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget 2027 : Marine Le Pen, clé de voûte de la survie du gouvernement ?",
+     "url": "https://www.europe1.fr/politique/budget-2027-marine-le-pen-cle-de-voute-de-la-survie-du-gouvernement-1243408?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T08:17:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Marine Le Pen : ce qu'il faut savoir sur les finances publiques",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Budget"
+   "fait": "Marine Le Pen, clé de voûte de la survie du gouvernement ?",
+   "accroche": "Marine Le Pen, clé de voûte de la survie du gouvernement ?",
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2862,8 +3088,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
+    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Élysée 2027",
    "contexte": [
@@ -3077,6 +3304,56 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-24T07:52:39.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Éric Ciotti",
+      "photo": "photos/deputes/PA330240.jpg",
+      "photoHd": "photos/deputes/hd/PA330240.jpg",
+      "parti": "UDR",
+      "lien": "#depute-PA330240",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : l'élection de Mélenchon serait une «abomination» conduisant à une «dictature» estime Eric Ciotti",
+     "url": "https://www.europe1.fr/politique/presidentielle-2027-lelection-de-melenchon-serait-une-abomination-conduisant-a-une-dictature-estime-eric-ciotti-1243456?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T07:52:39.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Éric Ciotti : président de l'UDR",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
    "derniere": "2026-11-24T07:51:22.000Z",
@@ -3122,7 +3399,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Communes",
+    "titre": "Budgétaire",
     "origine": "dossier"
    },
    "rubrique": "Budget"
@@ -3233,6 +3510,54 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-24T07:38:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Éric Ciotti",
+      "photo": "photos/deputes/PA330240.jpg",
+      "photoHd": "photos/deputes/hd/PA330240.jpg",
+      "parti": "UDR",
+      "lien": "#depute-PA330240",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : «L'union est avec le Rassemblement national», plaide Éric Ciotti",
+     "url": "https://www.europe1.fr/politique/presidentielle-2027-lunion-est-avec-le-rassemblement-national-plaide-eric-ciotti-1243450?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T07:38:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Éric Ciotti : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Pour la présidentielle 2027, Éric Ciotti plaide : « L'union est avec le Rassemblement national »",
+   "accroche": "Pour la présidentielle 2027, Éric Ciotti plaide : « L'union est avec le Rassemblement national »",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Éric Ciotti : président de l'UDR",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -3905,9 +4230,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
+    "titre": "Budgétaire",
+    "origine": "dossier"
    },
    "fait": "Emmanuel Macron pourra-t-il remporter son pari et convaincre les oppositions ?",
    "accroche": "Emmanuel Macron pourra-t-il remporter son pari et convaincre les oppositions ?",
@@ -3942,6 +4266,33 @@
    "fait": "Les autorités monégasques font le bilan de six mois de présidence à la tête du Comité des ministres",
    "accroche": "Les autorités monégasques font le bilan de six mois de présidence à la tête du Comité des ministres",
    "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-24T05:32:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Parrainages : la défiance des maires à l'approche de l'élection présidentielle",
+     "url": "https://www.europe1.fr/politique/parrainages-la-defiance-des-maires-a-lapproche-de-lelection-presidentielle-1243180?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T05:32:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Parrainages : présidentielle",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -4085,8 +4436,35 @@
     }
    ],
    "titrePropre": {
-    "titre": "Maire",
-    "origine": "dossier"
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-24T05:14:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : où en sont les différents candidats dans leur quête aux parrainages ?",
+     "url": "https://www.europe1.fr/politique/presidentielle-2027-ou-en-sont-les-differents-candidats-dans-leur-quete-aux-parrainages-1243213?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-24T05:14:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Présidentielle 2027 : ce que disent les médias",
+    "origine": "regles"
    },
    "rubrique": "Élysée 2027"
   },
@@ -4348,6 +4726,91 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-24T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Feurs. Robotisation, fabrication additive... Dans les coulisses des innovations de l'usine Castmetal",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/robotisation-fabrication-additive-dans-les-coulisses-des-innovations-de-castmetal",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Feurs : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-24T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "RN"
+    ],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Saint-Étienne. « Il y avait Viktor Orbán et Donald Trump, il y a maintenant Corentin Jousserand » : Régis Juanico recadre l’élu RN",
+     "url": "https://www.leprogres.fr/politique/2026/11/23/il-y-avait-viktor-orban-donald-trump-il-y-a-maintenant-corentin-jousserand-regis-juanico-recadre-l-elu-rn",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rassemblement national : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-24T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jura. « C’est un puits sans fond » : en colère, les maires disent stop aux ponctions de l’État",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/c-est-un-puits-sans-fond-en-colere-les-maires-disent-stop-aux-ponctions-de-l-etat",
+     "media": "Le Progrès",
+     "date": "2026-11-24T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jura : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Dernières Nouvelles d'Alsace"
    ],
    "derniere": "2026-11-24T05:00:00.000Z",
@@ -4568,9 +5031,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Premier ministre : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
+    "titre": "Budgétaire",
+    "origine": "dossier"
    },
    "rubrique": "Budget",
    "contexte": [
@@ -4975,391 +5437,6 @@
     "generique": true
    },
    "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T22:02:21.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     },
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LR"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Gabriel Attal, Édouard Philippe, Bruno Retailleau, David Lisnard: \"J'ai la conviction profonde qu'ils se regrouperont\", lance Jean-François Copé, maire LR de Meaux",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-gabriel-attal-edouard-philippe-bruno-retailleau-david-lisnard-j-ai-la-conviction-profonde-qu-ils-se-regrouperont-lance-jean-francois-cope-maire-lr-de-meaux_VN-202611230925.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T22:02:21.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gabriel Attal (Ensemble pour la République) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Lance Jean-François Copé, maire Les Républicains de Meaux",
-   "accroche": "Lance Jean-François Copé, maire Les Républicains de Meaux",
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance · Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T21:58:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LR"
-    ],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "\"Il faut décortiquer le chiffrage du programme économique de David Lisnard pour comprendre que ce n'est pas crédible\", analyse Jean-François Copé, maire LR de Meaux",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-il-faut-decortiquer-le-chiffrage-du-programme-economique-de-david-lisnard-pour-comprendre-que-ce-n-est-pas-credible-analyse-jean-francois-cope-maire-lr-de-meaux_VN-202611230921.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T21:58:22.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T21:56:16.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LR"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027: \"La grande arme de David Lisnard c'est que les Français ne le connaissent pas\", lance Jean-François Copé, maire LR de Meaux",
-     "url": "https://www.bfmtv.com/politique/video-presidentielle-2027-la-grande-arme-de-david-lisnard-c-est-que-les-francais-ne-le-connaissent-pas-lance-jean-francois-cope-maire-lr-de-meaux_VN-202611230918.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T21:56:16.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Les Républicains : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Lance Jean-François Copé, maire Les Républicains de Meaux",
-   "accroche": "Lance Jean-François Copé, maire Les Républicains de Meaux",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-23T21:48:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "REPORTAGE. Emmanuel Macron chez Airbus : innovations, échanges avec les ouvriers et selfies... dans les coulisses de la visite présidentielle à Toulouse",
-     "url": "https://www.ladepeche.fr/2026/11/23/reportage-emmanuel-macron-chez-airbus-innovations-echanges-avec-les-ouvriers-et-selfies-dans-les-coulisses-de-la-visite-presidentielle-a-toulouse-13667208.php",
-     "media": "La Dépêche",
-     "date": "2026-11-23T21:48:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Emmanuel Macron : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-23T21:29:56.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Boris Vallaud",
-      "photo": "photos/deputes/PA719930.jpg",
-      "photoHd": "photos/deputes/hd/PA719930.jpg",
-      "parti": "SOC",
-      "lien": "#depute-PA719930",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "SOC"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027: \"quand on est antifasciste, on vote Raphaël Glucksmann\", lance Boris Vallaud, député PS",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-2027-quand-on-est-antifasciste-on-vote-raphael-glucksmann-lance-boris-vallaud-depute-ps_VN-202611230907.html",
-     "media": "BFMTV",
-     "date": "2026-11-23T21:29:56.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Boris Vallaud : annonces sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "fait": "Lance Boris Vallaud, député Parti socialiste",
-   "accroche": "Lance Boris Vallaud, député Parti socialiste",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Boris Vallaud : député SOC (Landes)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-23T21:24:44.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Accusé de faire pression sur les magistrats administratifs, le maire de Vallauris-Golfe-Juan attaque la rédaction de Nice-Matin",
-     "url": "https://www.nicematin.com/societe/politique/accuse-de-faire-pression-sur-les-magistrats-administratifs-le-maire-de-vallauris-golfe-juan-attaque-la-redaction-de-nice-matin-10767718",
-     "media": "Nice-Matin",
-     "date": "2026-11-23T21:24:44.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Libération"
-   ],
-   "derniere": "2026-11-23T21:09:41.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Raphaël Glucksmann",
-      "photo": "photos/personnalites/raphael-glucksmann.jpg",
-      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
-      "parti": "PP",
-      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "ECO"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Les écolos pro-Glucksmann fondent «Ecologistes et démocrates», un nouveau parti",
-     "url": "https://www.liberation.fr/politique/elections/les-ecolos-pro-glucksmann-fondent-ecologistes-et-democrates-un-nouveau-parti-20261123_MLJLZCW7TFETBE4P665OQHQB5Y/",
-     "media": "Libération",
-     "date": "2026-11-23T21:09:41.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Raphaël Glucksmann : ce qu'il faut savoir sur l'environnement",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-23T20:59:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Nancy. Conseil municipal : pillages et manifestations au cœur d’un long débat sur la sécurité",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/23/conseil-pillages-et-manifestations-au-coeur-d-un-long-debat-sur-la-securite",
-     "media": "L'Est républicain",
-     "date": "2026-11-23T20:59:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Nancy : conseil municipal",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-23T20:48:32.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Gironde : à Pauillac, l’annulation des municipales confirmée, retour aux urnes pour les électeurs, qui va gérer la commune en attendant ?",
-     "url": "https://www.sudouest.fr/gironde/pauillac/pauillac-le-conseil-d-etat-confirme-l-annulation-des-municipales-retour-aux-urnes-pour-les-electeurs-31625319.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-23T20:48:32.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Communes",
-    "origine": "dossier"
-   },
-   "fait": "À Pauillac, l’annulation des municipales confirmée, retour aux urnes pour les électeurs",
-   "accroche": "À Pauillac, l’annulation des municipales confirmée, retour aux urnes pour les électeurs",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-23T20:31:45.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le Conseil d'État a rendu sa décision, le résultat du scrutin des élections municipales est annulé, les électeurs devront à nouveau voter à Capdenac-Gare.",
-     "url": "https://www.ladepeche.fr/2026/11/23/le-conseil-detat-a-rendu-sa-decision-le-resultat-du-scrutin-des-elections-municipales-est-annule-les-electeurs-devront-a-nouveau-voter-a-capdenac-gare-13661629.php",
-     "media": "La Dépêche",
-     "date": "2026-11-23T20:31:45.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le Conseil d'État a rendu sa décision, le résultat du scrutin des élections municipales est annulé",
-   "accroche": "Le Conseil d'État a rendu sa décision, le résultat du scrutin des élections municipales est annulé",
-   "rubrique": "Élysée 2027"
   }
  ]
 }
