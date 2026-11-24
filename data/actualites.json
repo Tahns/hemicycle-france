@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-24T14:31:08.261Z",
+ "lastUpdated": "2026-11-24T14:35:43.660Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -167,7 +167,6 @@
     "BFMTV",
     "Europe 1",
     "L'Humanité",
-    "France 24",
     "Sud Ouest",
     "Libération",
     "Nice-Matin",
@@ -192,7 +191,6 @@
     "EBRA",
     "BFMTV",
     "L'Humanité",
-    "France Médias Monde",
     "Sud Ouest",
     "Libération",
     "Nice-Matin",
@@ -202,9 +200,10 @@
     "Le Monde",
     "Le Figaro",
     "Valeurs actuelles",
-    "L'Obs"
+    "L'Obs",
+    "RFI"
    ],
-   "nb": 127,
+   "nb": 124,
    "derniere": "2026-11-24T14:23:22.000Z",
    "articles": [
     {
@@ -255,12 +254,6 @@
      "titre": "Détournement de fonds publics : une enquête préliminaire ouverte à l’agglomération du Havre, présidée par Édouard Philippe",
      "url": "https://www.humanite.fr/politique/detournement-de-fonds/detournement-de-fonds-publics-une-enquete-preliminaire-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe",
      "date": "2026-11-24T13:38:18.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "La grande mosquée de Paris a-t-elle sauvé \"1 500 enfants juifs\" sous l'Occupation ?",
-     "url": "https://www.france24.com/fr/france/20261124-grande-mosqu%C3%A9e-paris-sauvetage-1-500-enfants-juifs-sous-occupation-seconde-guerre-mondiale",
-     "date": "2026-11-24T13:05:57.000Z"
     },
     {
      "media": "Sud Ouest",
@@ -349,13 +342,148 @@
    ]
   },
   {
+   "id": "laure",
+   "titre": "Laure",
+   "motifs": [
+    "laure",
+    "accusée",
+    "reconnaît",
+    "antisémites"
+   ],
+   "medias": [
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Valeurs actuelles",
+    "Public Sénat",
+    "20 Minutes",
+    "L'Humanité",
+    "Sud Ouest",
+    "La Dépêche",
+    "Le Monde",
+    "Nice-Matin",
+    "Libération",
+    "Le JDD",
+    "Le Figaro"
+   ],
+   "mediasDistincts": 12,
+   "sources": [
+    "EBRA",
+    "Valeurs actuelles",
+    "Public Sénat",
+    "20 Minutes",
+    "L'Humanité",
+    "Sud Ouest",
+    "La Dépêche",
+    "Le Monde",
+    "Nice-Matin",
+    "Libération",
+    "Le JDD",
+    "Le Figaro"
+   ],
+   "nb": 22,
+   "derniere": "2026-11-24T14:33:00.000Z",
+   "articles": [
+    {
+     "media": "Le Progrès",
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "Mobilisations lycéennes : accusé par Vincent Jeanbrun de liens avec des « types cagoulés », l’élu LFI Louis Boyard porte plainte",
+     "url": "https://www.valeursactuelles.com/politique/mobilisations-lyceennes-accuse-par-vincent-jeanbrun-de-liens-avec-des-types-cagoules-lelu-lfi-louis-boyard-porte-plainte",
+     "date": "2026-11-24T13:00:38.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Congrès des maires : « L’AMF n’est pas un plan B qu’on reprend une fois qu’on n’a pas été élu à la présidentielle », tacle Philippe Laurent visant David Lisnard",
+     "url": "https://www.publicsenat.fr/actualites/politique/congres-des-maires-lamf-nest-pas-un-plan-b-quon-reprend-une-fois-quon-na-pas-ete-elu-a-la-presidentielle-tacle-philippe-laurent-visan",
+     "date": "2026-11-24T12:08:54.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Bardella reconnaît « une faute » de Lavalette, accusée d’avoir cautionné des propos antisémites",
+     "url": "https://www.20minutes.fr/politique/4265276-20261124-bardella-reconnait-faute-lavalette-accusee-avoir-cautionne-propos-antisemites?at_medium=display&at_campaign=149",
+     "date": "2026-11-24T08:38:22.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "Lui-même accusé d’écrits antisémites, Bardella invoque une erreur d’« inattention » pour excuser ceux de Laure Lavalette",
+     "url": "https://www.humanite.fr/politique/antisemitisme/lui-meme-accuse-decrits-antisemites-bardella-invoque-une-erreur-d-inattention-pour-excuser-ceux-de-laure-lavalette",
+     "date": "2026-11-24T08:38:07.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Laure Lavalette accusée d’avoir cautionné des écrits antisémites : Jordan Bardella reconnaît « une faute » mais lui garde son « total soutien »",
+     "url": "https://www.sudouest.fr/politique/laure-lavalette-accusee-d-avoir-cautionne-des-ecrits-antisemites-jordan-bardella-reconnait-une-faute-mais-lui-garde-son-total-soutien-31649608.php",
+     "date": "2026-11-24T08:13:01.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Laure Lavalette accusée d'avoir cautionné des écrits antisémites : Jordan Bardella reconnaît une \"faute\" mais maintient son \"total soutien\" à la députée RN",
+     "url": "https://www.ladepeche.fr/2026/11/24/laure-lavalette-accusee-davoir-cautionne-des-ecrits-antisemites-jordan-bardella-reconnait-une-faute-mais-maintient-son-total-soutien-a-la-deputee-rn-13668429.php",
+     "date": "2026-11-24T07:58:59.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Jordan Bardella déplore la « faute » de la députée RN Laure Lavalette, accusée d’avoir cautionné des écrits antisémites dans les années 1990",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/23/jordan-bardella-deplore-la-faute-de-la-deputee-rn-laure-lavalette-accusee-d-avoir-cautionne-des-ecrits-antisemites-dans-les-annees-1990_6814453_823448.html",
+     "date": "2026-11-23T21:51:32.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Laure Lavalette accusée d’avoir cautionné des écrits antisémites : « Bien sûr que c’est une faute », reconnaît Jordan Bardella",
+     "url": "https://www.nicematin.com/societe/politique/ecrits-antisemites-jordan-bardella-reconnait-une-faute-de-la-deputee-varoise-laure-lavalette-mais-lui-garde-son-total-soutien-10767750",
+     "date": "2026-11-23T21:51:10.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Ecrits antisémites : Jordan Bardella reconnaît «une faute» de Laure Lavalette mais lui garde son «total soutien»",
+     "url": "https://www.liberation.fr/politique/ecrits-antisemites-jordan-bardella-reconnait-une-faute-de-laure-lavalette-mais-lui-garde-son-total-soutien-20261123_2UTAIIKFYNH4XM2N42RBJZFOJM/",
+     "date": "2026-11-23T21:33:59.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Le post-libéralisme, réconcilier les élites et le peuple autour du bien commun",
+     "url": "https://www.lejdd.fr/politique/le-post-liberalisme-reconcilier-les-elites-et-le-peuple-autour-du-bien-commun-189483",
+     "date": "2026-11-23T13:51:43.000Z"
+    },
+    {
+     "media": "Le Figaro",
+     "titre": "Accusé par le ministre du Logement de «s’afficher avec des types cagoulés qui tirent au mortier sur les forces de l’ordre», Louis Boyard annonce porter plainte",
+     "url": "https://www.lefigaro.fr/politique/accuse-par-le-ministre-du-logement-de-s-afficher-avec-des-types-cagoules-qui-tirent-au-mortier-sur-les-forces-de-l-ordre-louis-boyard-annonce-porter-plainte-20261123",
+     "date": "2026-11-23T12:51:22.000Z"
+    }
+   ]
+  },
+  {
    "id": "budget",
    "titre": "Budget",
    "motifs": [
     "budget",
     "règle",
-    "envisage",
-    "inscrire"
+    "envisage"
    ],
    "medias": [
     "Public Sénat",
@@ -371,8 +499,7 @@
     "La Dépêche",
     "20 Minutes",
     "Libération",
-    "RFI",
-    "France 24"
+    "RFI"
    ],
    "mediasDistincts": 13,
    "sources": [
@@ -388,9 +515,9 @@
     "La Dépêche",
     "20 Minutes",
     "Libération",
-    "France Médias Monde"
+    "RFI"
    ],
-   "nb": 43,
+   "nb": 42,
    "derniere": "2026-11-24T14:25:46.000Z",
    "articles": [
     {
@@ -477,149 +604,6 @@
      "titre": "«Une règle d'or budgétaire, proposée par Emmanuel Macron, n'a aucun sens», déplore le député LFI Aurélien Taché",
      "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261123-une-r%C3%A8gle-d-or-budg%C3%A9taire-propos%C3%A9e-par-emmanuel-macron-n-a-aucun-sens-d%C3%A9plore-le-d%C3%A9put%C3%A9-lfi-aur%C3%A9lien-tach%C3%A9",
      "date": "2026-11-23T12:49:21.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Budget : Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
-     "url": "https://www.france24.com/fr/france/20261122-budget-macron-confirme-qu-il-envisage-d-inscrire-une-r%C3%A8gle-d-or-dans-la-constitution",
-     "date": "2026-11-22T15:54:26.000Z"
-    }
-   ]
-  },
-  {
-   "id": "publics",
-   "titre": "Publics",
-   "motifs": [
-    "publics",
-    "enquête",
-    "détournement",
-    "fonds"
-   ],
-   "medias": [
-    "La Dépêche",
-    "Europe 1",
-    "L'Humanité",
-    "Libération",
-    "Sud Ouest",
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Le Monde",
-    "BFMTV",
-    "Nice-Matin",
-    "Public Sénat",
-    "20 Minutes",
-    "L'Obs"
-   ],
-   "mediasDistincts": 12,
-   "sources": [
-    "La Dépêche",
-    "Europe 1",
-    "L'Humanité",
-    "Libération",
-    "Sud Ouest",
-    "EBRA",
-    "Le Monde",
-    "BFMTV",
-    "Nice-Matin",
-    "Public Sénat",
-    "20 Minutes",
-    "L'Obs"
-   ],
-   "nb": 29,
-   "derniere": "2026-11-24T14:12:06.000Z",
-   "articles": [
-    {
-     "media": "La Dépêche",
-     "titre": "Présidentielle 2027 : la justice ouvre une enquête pénale pour détournement de fonds publics ciblant l'agglomération du Havre présidée par Édouard Philippe",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-la-justice-ouvre-une-enquete-penale-pour-detournement-de-fonds-publics-ciblant-lagglomeration-du-havre-presidee-par-edouard-13668976.php",
-     "date": "2026-11-24T14:12:06.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Présidentielle 2027 : pourquoi les parrainages sont-ils rendus publics ?",
-     "url": "https://www.europe1.fr/politique/presidentielle-2027-pourquoi-les-parrainages-sont-ils-rendus-publics-1243744?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-24T14:00:00.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Détournement de fonds publics : une enquête préliminaire ouverte à l’agglomération du Havre, présidée par Édouard Philippe",
-     "url": "https://www.humanite.fr/politique/detournement-de-fonds/detournement-de-fonds-publics-une-enquete-preliminaire-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe",
-     "date": "2026-11-24T13:38:18.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Détournement de fonds publics : enquête ouverte à l’agglomération du Havre, présidée par Edouard Philippe",
-     "url": "https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/",
-     "date": "2026-11-24T12:40:56.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Soupçons de détournements de fonds publics au Havre : la communauté urbaine présidée par Édouard Philippe visée par une enquête pénale",
-     "url": "https://www.sudouest.fr/politique/soupcons-de-detournements-de-fonds-publics-au-havre-la-communaute-urbaine-presidee-par-edouard-philippe-visee-par-une-enquete-penale-31652086.php",
-     "date": "2026-11-24T12:35:02.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Seine-Maritime. Une enquête ouverte pour détournement de fonds publics à l'agglomération du Havre dirigée par Édouard Philippe",
-     "url": "https://www.leprogres.fr/politique/2026/11/24/enquete-ouverte-apres-un-signalement-de-detournement-de-fonds-publics-a-la-metropole-du-havre",
-     "date": "2026-11-24T12:06:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Seine-Maritime. Une enquête ouverte pour détournement de fonds publics à l'agglomération du Havre dirigée par Édouard Philippe",
-     "url": "https://www.dna.fr/politique/2026/11/24/enquete-ouverte-apres-un-signalement-de-detournement-de-fonds-publics-a-la-metropole-du-havre",
-     "date": "2026-11-24T12:06:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Seine-Maritime. Une enquête ouverte pour détournement de fonds publics à l'agglomération du Havre dirigée par Édouard Philippe",
-     "url": "https://www.ledauphine.com/politique/2026/11/24/enquete-ouverte-apres-un-signalement-de-detournement-de-fonds-publics-a-la-metropole-du-havre",
-     "date": "2026-11-24T12:06:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Seine-Maritime. Une enquête ouverte pour détournement de fonds publics à l'agglomération du Havre dirigée par Édouard Philippe",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/24/enquete-ouverte-apres-un-signalement-de-detournement-de-fonds-publics-a-la-metropole-du-havre",
-     "date": "2026-11-24T12:06:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Guadeloupe : le parquet de Paris ouvre une enquête à la suite de la cyberattaque contre le CHU",
-     "url": "https://www.lemonde.fr/pixels/article/2026/11/24/guadeloupe-le-parquet-de-paris-ouvre-une-enquete-a-la-suite-de-la-cyberattaque-contre-le-chu_6814735_4408996.html",
-     "date": "2026-11-24T09:58:24.000Z"
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"Ça fait 30 ans que les dirigeants s'asseyent sur la démocratie\", déclare Natacha Polony, candidate à l'élection présidentielle",
-     "url": "https://www.bfmtv.com/politique/elections/video-ca-fait-30-ans-que-les-dirigeants-s-asseyent-sur-la-democratie-declare-natacha-polony-candidate-a-l-election-presidentielle_VN-202611240280.html",
-     "date": "2026-11-24T07:41:18.000Z",
-     "video": true
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Enquête sur des fuites présumées vers le RN : Bardella évoque un « timing » « étrange »",
-     "url": "https://www.nicematin.com/societe/politique/enquete-sur-des-fuites-presumees-vers-le-rn-bardella-evoque-un-timing-etrange-10767651",
-     "date": "2026-11-23T19:36:59.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Sens Public — SENS PUBLIC 26/12/03 Je P1",
-     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-26-12-03-je-p1-e0",
-     "date": "2026-11-23T16:31:27.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Anne Hidalgo à Tahiti : Les deux enquêtes concernant les déplacements de l’ex maire de Paris classées sans suite",
-     "url": "https://www.20minutes.fr/politique/4265098-20261123-anne-hidalgo-tahiti-deux-enquetes-concernant-deplacements-ex-maire-paris-classees-suite?at_medium=display&at_campaign=149",
-     "date": "2026-11-23T13:17:11.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Anne Hidalgo : Les enquêtes sur les déplacements internationaux de l’ex-maire de Paris classées sans suite",
-     "url": "https://www.nouvelobs.com/justice/20261123.OBS120373/les-enquetes-sur-les-deplacements-internationaux-d-anne-hidalgo-classees-sans-suite-pour-absence-d-infraction.html",
-     "date": "2026-11-23T13:16:03.000Z"
     }
    ]
   }
@@ -708,8 +692,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Publics",
-    "origine": "dossier"
+    "titre": "Fonds publics",
+    "origine": "recoupement"
    },
    "fait": "Soupçons de détournements de fonds publics au Havre",
    "accroche": "Soupçons de détournements de fonds publics au Havre",
@@ -871,9 +855,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Assemblée nationale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Laure",
+    "origine": "dossier"
    },
    "rubrique": "Assemblée nationale"
   },
@@ -1102,7 +1085,7 @@
    ]
   },
   {
-   "medias": 5,
+   "medias": 4,
    "mediasDistincts": 3,
    "sources": [
     "L'Humanité",
@@ -1142,12 +1125,6 @@
      "url": "https://www.dna.fr/faits-divers-justice/2026/11/23/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes",
      "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-23T22:08:00.000Z"
-    },
-    {
-     "titre": "Politique. Six députés LFI portent plainte pour des menaces de mort anonymes",
-     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/23/six-deputes-lfi-portent-plainte-pour-des-menaces-de-mort-anonymes",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-23T22:08:00.000Z"
     }
    ],
    "titrePropre": {
@@ -1156,7 +1133,7 @@
    },
    "fait": "Six députés de la France insoumise portent plainte pour des menaces de mort anonymes",
    "accroche": "Six députés de la France insoumise portent plainte pour des menaces de mort anonymes",
-   "essentiel": "Six députés de la France insoumise portent plainte pour des menaces de mort anonymes. Cinq médias en parlent : Le Progrès, L'Humanité, Le Monde, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
+   "essentiel": "Six députés de la France insoumise portent plainte pour des menaces de mort anonymes. Quatre médias en parlent : Le Progrès, L'Humanité, Le Monde et Dernières Nouvelles d'Alsace.",
    "rubrique": "Justice"
   },
   {
@@ -1164,7 +1141,7 @@
    "mediasDistincts": 3,
    "sources": [
     "Le JDD",
-    "Le Figaro",
+    "20 Minutes",
     "L'Obs"
    ],
    "derniere": "2026-11-24T10:00:40.000Z",
@@ -1189,10 +1166,10 @@
      "date": "2026-11-24T10:00:40.000Z"
     },
     {
-     "titre": "Congrès, référendum… Quelles solutions pour inscrire une «règle d’or» budgétaire dans la Constitution ?",
-     "url": "https://www.lefigaro.fr/politique/congres-referendum-quelles-solutions-pour-inscrire-une-regle-d-or-budgetaire-dans-la-constitution-20261123",
-     "media": "Le Figaro",
-     "date": "2026-11-24T09:01:32.000Z"
+     "titre": "Constitution : Emmanuel Macron envisage bien d’inscrire une règle d’or budgétaire en janvier",
+     "url": "https://www.20minutes.fr/politique/4265006-20261123-constitution-emmanuel-macron-envisage-bien-inscrire-regle-or-budgetaire-janvier?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-23T09:10:13.000Z"
     },
     {
      "titre": "Qu’est-ce que la règle d’or budgétaire que Macron envisage d’inscrire dans la Constitution ?",
@@ -1202,60 +1179,10 @@
     }
    ],
    "titrePropre": {
-    "titre": "Règle d or",
+    "titre": "Règle d or budgétaire",
     "origine": "recoupement"
    },
    "rubrique": "Budget"
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
-    "Sud Ouest",
-    "Le Monde",
-    "France 24"
-   ],
-   "derniere": "2026-11-24T08:02:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Le Congrès des maires de France s’ouvre ce mardi sur fond de bataille pour l’Élysée et de protestations autour de la double candidature de David Lisnard",
-     "url": "https://www.sudouest.fr/politique/le-congres-des-maires-de-france-s-ouvre-ce-mardi-sur-fond-de-bataille-pour-l-elysee-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard-31649554.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-24T08:02:00.000Z"
-    },
-    {
-     "titre": "Le congrès des maires de France s’ouvre sur fond de course à la présidentielle et de protestations autour de la double candidature de David Lisnard",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/24/le-congres-des-maires-de-france-s-ouvre-sur-fond-de-course-a-la-presidentielle-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard_6814718_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-24T07:09:47.000Z"
-    },
-    {
-     "titre": "Ouverture du Congrès des maires sur fond de bataille pour l'Élysée",
-     "url": "https://www.france24.com/fr/france/20261124-ouverture-du-congr%C3%A8s-des-maires-sur-fond-de-bataille-pour-l-%C3%A9lys%C3%A9e",
-     "media": "France 24",
-     "date": "2026-11-24T00:06:27.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 3,
@@ -1366,50 +1293,6 @@
    "rubrique": "Politique"
   },
   {
-   "medias": 3,
-   "mediasDistincts": 2,
-   "sources": [
-    "Mediapart",
-    "France Médias Monde"
-   ],
-   "derniere": "2026-11-24T10:46:30.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Mort de Nahel Merzouk : la justice ordonne un procès pour meurtre à l'encontre du policier",
-     "url": "https://www.france24.com/fr/france/20261124-mort-nahel-merzouk-justice-ordonne-proc%C3%A8s-pour-meurtre-policier",
-     "media": "France 24",
-     "date": "2026-11-24T08:27:33.000Z"
-    },
-    {
-     "titre": "Le policier qui a tué Nahel Merzouk doit bien être jugé pour meurtre",
-     "url": "https://www.mediapart.fr/journal/france/241126/le-policier-qui-tue-nahel-merzouk-doit-bien-etre-juge-pour-meurtre",
-     "media": "Mediapart",
-     "date": "2026-11-24T10:46:30.000Z"
-    },
-    {
-     "titre": "Mort de Nahel Merzouk en 2023: en appel, la justice française ordonne un procès pour meurtre à l'encontre du policier",
-     "url": "https://www.rfi.fr/fr/france/20261124-mort-de-nahel-en-2023-en-appel-la-justice-fran%C3%A7aise-ordonne-un-proc%C3%A8s-pour-meurtre-%C3%A0-l-encontre-du-policier",
-     "media": "RFI",
-     "date": "2026-11-24T08:42:24.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Mort de Nahel Merzouk : actualité de la justice",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "La justice ordonne un procès pour meurtre à l'encontre du policier",
-   "accroche": "La justice ordonne un procès pour meurtre à l'encontre du policier",
-   "essentiel": "La justice ordonne un procès pour meurtre à l'encontre du policier. Trois médias en parlent : France 24, Mediapart et RFI.",
-   "rubrique": "Justice"
-  },
-  {
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
@@ -1457,6 +1340,41 @@
    "titrePropre": {
     "titre": "Types cagoulés",
     "origine": "recoupement"
+   },
+   "rubrique": "Justice"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Mediapart",
+    "RFI"
+   ],
+   "derniere": "2026-11-24T10:46:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "justice",
+    "vignette": "justice"
+   },
+   "articles": [
+    {
+     "titre": "Le policier qui a tué Nahel Merzouk doit bien être jugé pour meurtre",
+     "url": "https://www.mediapart.fr/journal/france/241126/le-policier-qui-tue-nahel-merzouk-doit-bien-etre-juge-pour-meurtre",
+     "media": "Mediapart",
+     "date": "2026-11-24T10:46:30.000Z"
+    },
+    {
+     "titre": "Mort de Nahel Merzouk en 2023: en appel, la justice française ordonne un procès pour meurtre à l'encontre du policier",
+     "url": "https://www.rfi.fr/fr/france/20261124-mort-de-nahel-en-2023-en-appel-la-justice-fran%C3%A7aise-ordonne-un-proc%C3%A8s-pour-meurtre-%C3%A0-l-encontre-du-policier",
+     "media": "RFI",
+     "date": "2026-11-24T08:42:24.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Justice : actualité de la justice",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Justice"
   },
@@ -1621,6 +1539,49 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
+    "Sud Ouest",
+    "Le Monde"
+   ],
+   "derniere": "2026-11-24T08:02:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Le Congrès des maires de France s’ouvre ce mardi sur fond de bataille pour l’Élysée et de protestations autour de la double candidature de David Lisnard",
+     "url": "https://www.sudouest.fr/politique/le-congres-des-maires-de-france-s-ouvre-ce-mardi-sur-fond-de-bataille-pour-l-elysee-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard-31649554.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-24T08:02:00.000Z"
+    },
+    {
+     "titre": "Le congrès des maires de France s’ouvre sur fond de course à la présidentielle et de protestations autour de la double candidature de David Lisnard",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/24/le-congres-des-maires-de-france-s-ouvre-sur-fond-de-course-a-la-presidentielle-et-de-protestations-autour-de-la-double-candidature-de-david-lisnard_6814718_823448.html",
+     "media": "Le Monde",
+     "date": "2026-11-24T07:09:47.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
     "BFMTV",
     "Libération"
    ],
@@ -1685,50 +1646,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Ouest-France",
-    "France 24"
-   ],
-   "derniere": "2026-11-23T21:09:07.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "elysee"
-   },
-   "articles": [
-    {
-     "titre": "La France va se doter de « stocks stratégiques » de terres rares et « métaux prioritaires », confirme l’Élysée",
-     "url": "https://www.ouest-france.fr/economie/la-france-va-se-doter-de-stocks-strategiques-de-terres-rares-et-metaux-prioritaires-confirme-lelysee-2e6de14c-e779-11f1-bd4e-6f30b8f49e21?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "media": "Ouest-France",
-     "date": "2026-11-23T21:09:07.000Z"
-    },
-    {
-     "titre": "Terres rares : Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-     "url": "https://www.france24.com/fr/france/20261123-terres-rares-macron-annonce-france-doter-stocks-strat%C3%A9giques",
-     "media": "France 24",
-     "date": "2026-11-23T21:06:36.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "France va se doter",
-    "origine": "recoupement"
-   },
-   "fait": "Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-   "accroche": "Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-   "essentiel": "Terres rares : Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\". Deux médias en parlent : Ouest-France et France 24.",
-   "rubrique": "Gouvernement"
   },
   {
    "medias": 2,
@@ -1817,52 +1734,6 @@
    "accroche": "La règle d’or budgétaire évoquée par Emmanuel Macron laisse dubitatif",
    "essentiel": "La règle d’or budgétaire évoquée par Emmanuel Macron laisse dubitatif. Deux médias en parlent : Public Sénat et 20 Minutes.",
    "rubrique": "Budget"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "20 Minutes",
-    "Le JDD"
-   ],
-   "derniere": "2026-11-23T16:55:59.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Le parti Génération. s (créé par Benoît Hamon) rallie la candidature de Mélenchon",
-     "url": "https://www.20minutes.fr/politique/4265178-20261123-presidentielle-2027-parti-generation-cree-benoit-hamon-rallie-candidature-melenchon?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-23T16:55:59.000Z"
-    },
-    {
-     "titre": "«S’unir pour faire advenir le meilleur» : le parti Génération.s fondé par Hamon rallie Mélenchon",
-     "url": "https://www.lejdd.fr/politique/sunir-pour-faire-advenir-le-meilleur-le-parti-generations-fonde-par-hamon-rallie-melenchon-189489",
-     "media": "Le JDD",
-     "date": "2026-11-23T14:05:50.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Le parti Génération.s fondé par Hamon rallie Mélenchon",
-   "accroche": "Le parti Génération.s fondé par Hamon rallie Mélenchon",
-   "essentiel": "Le parti Génération.s fondé par Hamon rallie Mélenchon. Deux médias en parlent : 20 Minutes et Le JDD.",
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1997,50 +1868,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "20 Minutes",
-    "France 24"
-   ],
-   "derniere": "2026-11-23T09:10:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Constitution : Emmanuel Macron envisage bien d’inscrire une règle d’or budgétaire en janvier",
-     "url": "https://www.20minutes.fr/politique/4265006-20261123-constitution-emmanuel-macron-envisage-bien-inscrire-regle-or-budgetaire-janvier?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-23T09:10:13.000Z"
-    },
-    {
-     "titre": "Budget : Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
-     "url": "https://www.france24.com/fr/france/20261122-budget-macron-confirme-qu-il-envisage-d-inscrire-une-r%C3%A8gle-d-or-dans-la-constitution",
-     "media": "France 24",
-     "date": "2026-11-22T15:54:26.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
-   "accroche": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
-   "essentiel": "Sur le budget, Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution. Deux médias en parlent : 20 Minutes et France 24.",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "Libération",
     "Nice-Matin"
    ],
@@ -2163,42 +1990,58 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 2,
-   "mediasDistincts": 2,
+   "medias": 4,
+   "mediasDistincts": 1,
    "sources": [
-    "Public Sénat",
-    "France 24"
+    "EBRA"
    ],
-   "derniere": "2026-11-20T19:15:54.000Z",
+   "derniere": "2026-11-24T14:33:00.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "personnes": [
+     {
+      "nom": "Laurent Nunez",
+      "photo": "photos/personnalites/laurent-nunez.jpg",
+      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
+      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "justice",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "La proposition de loi instaurant une présomption de légitime défense pour les forces de l’ordre définitivement adoptée par le Parlement, après le vote du Sénat",
-     "url": "https://www.publicsenat.fr/actualites/politique/la-proposition-de-loi-instaurant-une-presomption-de-legitime-defense-pour-les-forces-de-lordre-definitivement-adoptee-par-le-parlement-apres-le-vote-du-senat",
-     "media": "Public Sénat",
-     "date": "2026-11-20T19:15:54.000Z"
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "media": "Le Progrès",
+     "date": "2026-11-24T14:33:00.000Z"
     },
     {
-     "titre": "Police : la loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
-     "url": "https://www.france24.com/fr/france/20261120-police-la-loi-sur-la-pr%C3%A9somption-de-l%C3%A9gitime-d%C3%A9fense-d%C3%A9finitivement-adopt%C3%A9e-par-le-parlement",
-     "media": "France 24",
-     "date": "2026-11-20T19:02:24.000Z"
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-24T14:33:00.000Z"
+    },
+    {
+     "titre": "Justice. Soupçons de fuites au profit du RN : Laurent Nuñez a proposé un successeur au préfet Moutouh",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/24/soupcons-de-fuites-au-profit-du-rn-laurent-nunez-a-propose-un-successeur-au-prefet-moutouh",
+     "media": "L'Est républicain",
+     "date": "2026-11-24T14:33:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Laure",
+    "origine": "dossier"
    },
-   "fait": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
-   "accroche": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement",
-   "essentiel": "La loi sur la présomption de légitime défense définitivement adoptée par le Parlement. Deux médias en parlent : Public Sénat et France 24.",
-   "rubrique": "Élysée 2027"
+   "rubrique": "Justice"
   },
   {
    "medias": 4,
@@ -2304,6 +2147,55 @@
    "sources": [
     "EBRA"
    ],
+   "derniere": "2026-11-24T06:30:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.leprogres.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "Le Progrès",
+     "date": "2026-11-24T06:30:00.000Z"
+    },
+    {
+     "titre": "Strasbourg. Contre l'utilisation « simplifiée » des pesticides, 300 organisations manifestent devant le Parlement européen ce mardi",
+     "url": "https://www.dna.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-24T06:30:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.ledauphine.com/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-24T06:30:00.000Z"
+    },
+    {
+     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
+     "url": "https://www.estrepublicain.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
+     "media": "L'Est républicain",
+     "date": "2026-11-24T06:30:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Agriculture : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Contre l'utilisation « simplifiée » des pesticides, 300 organisations manifestent devant le Parlement européen",
+   "accroche": "Contre l'utilisation « simplifiée » des pesticides, 300 organisations manifestent devant le Parlement européen",
+   "essentiel": "Contre l'utilisation « simplifiée » des pesticides, 300 organisations manifestent devant le Parlement européen. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
+   "rubrique": "International"
+  },
+  {
+   "medias": 4,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
    "derniere": "2026-11-24T06:00:00.000Z",
    "illustration": {
     "personnes": [
@@ -2351,46 +2243,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-24T06:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "international",
-    "vignette": "international"
-   },
-   "articles": [
-    {
-     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
-     "url": "https://www.leprogres.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
-     "media": "Le Progrès",
-     "date": "2026-11-24T06:30:00.000Z"
-    },
-    {
-     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
-     "url": "https://www.ledauphine.com/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-24T06:30:00.000Z"
-    },
-    {
-     "titre": "Agriculture. Utilisation « simplifiée » des pesticides : vent de révolte européen ce mardi à Strasbourg",
-     "url": "https://www.estrepublicain.fr/economie/2026/11/24/utilisation-simplifiee-des-pesticides-vent-de-revolte-europeen-ce-mardi-a-strasbourg",
-     "media": "L'Est républicain",
-     "date": "2026-11-24T06:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Agriculture : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "International"
   },
   {
    "medias": 3,
@@ -2585,61 +2437,12 @@
    ]
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "Le Dauphiné libéré"
    ],
-   "derniere": "2026-11-21T18:00:47.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "François Ruffin",
-      "photo": "photos/deputes/PA722142.jpg",
-      "photoHd": "photos/deputes/hd/PA722142.jpg",
-      "parti": "ECO",
-      "lien": "#depute-PA722142",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027: François Ruffin jette l'éponge, faute de primaire de toute la gauche",
-     "url": "https://www.rfi.fr/fr/france/20261121-pr%C3%A9sidentielle-2027-fran%C3%A7ois-ruffin-jette-l-%C3%A9ponge-faute-de-primaire-de-toute-la-gauche",
-     "media": "RFI",
-     "date": "2026-11-21T18:00:47.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : François Ruffin jette l'éponge face à \"l’impasse\" de sa campagne",
-     "url": "https://www.france24.com/fr/france/20261121-pr%C3%A9sidentielle-prenant-acte-de-l-impasse-de-sa-campagne-fran%C3%A7ois-ruffin-retire-sa-candidature",
-     "media": "France 24",
-     "date": "2026-11-21T17:37:20.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jette l éponge",
-    "origine": "recoupement"
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "François Ruffin : député ECO (Somme)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 1,
-   "sources": [
-    "France Médias Monde"
-   ],
-   "derniere": "2026-11-21T11:55:56.000Z",
+   "derniere": "2026-11-24T14:32:00.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -2648,25 +2451,17 @@
    },
    "articles": [
     {
-     "titre": "France: un acte VI de la mobilisation sous l'impulsion des syndicats et des «gilets jaunes»",
-     "url": "https://www.rfi.fr/fr/france/20261121-mobilisation-en-france-un-acte-vi-sous-l-impulsion-des-syndicats-et-des-gilets-jaunes-qui-f%C3%AAtent-leurs-8-ans",
-     "media": "RFI",
-     "date": "2026-11-21T11:55:56.000Z"
-    },
-    {
-     "titre": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
-     "url": "https://www.france24.com/fr/france/20261121-en-direct-acte-vi-de-la-mobilisation-pour-la-jeunesse-et-contre-la-vie-ch%C3%A8re",
-     "media": "France 24",
-     "date": "2026-11-21T08:23:49.000Z"
+     "titre": "Bourgoin-Jallieu. Samedi, un café-rencontre autour du mouvement politique de De Villepin",
+     "url": "https://www.ledauphine.com/elections/2026/11/24/samedi-un-cafe-rencontre-autour-du-mouvement-politique-de-de-villepin",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-24T14:32:00.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Gilets jaunes",
-    "origine": "recoupement"
+    "titre": "Bourgoin-Jallieu : actualité locale",
+    "origine": "regles",
+    "generique": true
    },
-   "accroche": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
-   "essentiel": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation. Deux médias en parlent : RFI et France 24.",
-   "fait": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
    "rubrique": "Politique"
   },
   {
@@ -3405,33 +3200,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-24T13:05:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "La grande mosquée de Paris a-t-elle sauvé \"1 500 enfants juifs\" sous l'Occupation ?",
-     "url": "https://www.france24.com/fr/france/20261124-grande-mosqu%C3%A9e-paris-sauvetage-1-500-enfants-juifs-sous-occupation-seconde-guerre-mondiale",
-     "media": "France 24",
-     "date": "2026-11-24T13:05:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-11-24T13:03:00.000Z",
@@ -3651,23 +3419,25 @@
      }
     ],
     "partis": [],
-    "theme": "politique",
+    "theme": "justice",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "François Bayrou",
-     "url": "https://www.bfmtv.com/politique/francois-bayrou_DN-202108310661.html",
+     "titre": "Primaire de la droite et du centre: François Bayrou juge \"qu'on a dépassé le comique pour entrer dans le burlesque\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-de-la-droite-et-du-centre-francois-bayrou-juge-qu-on-a-depasse-le-comique-pour-entrer-dans-le-burlesque_AN-202611240576.html",
      "media": "BFMTV",
      "date": "2026-11-24T12:42:37.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "François Bayrou (Mouvement démocrate) : ce que disent les médias",
+    "titre": "Primaire : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique",
+   "fait": "Primaire de la droite et du centre : François Bayrou juge",
+   "accroche": "Primaire de la droite et du centre : François Bayrou juge",
+   "rubrique": "Justice",
    "contexte": [
     {
      "type": "personnes",
@@ -3694,25 +3464,23 @@
      }
     ],
     "partis": [],
-    "theme": "justice",
+    "theme": "politique",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "Primaire de la droite et du centre: François Bayrou juge \"qu'on a dépassé le comique pour entrer dans le burlesque\"",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-de-la-droite-et-du-centre-francois-bayrou-juge-qu-on-a-depasse-le-comique-pour-entrer-dans-le-burlesque_AN-202611240576.html",
+     "titre": "François Bayrou",
+     "url": "https://www.bfmtv.com/politique/francois-bayrou_DN-202108310661.html",
      "media": "BFMTV",
      "date": "2026-11-24T12:42:37.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
+    "titre": "François Bayrou (Mouvement démocrate) : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "fait": "Primaire de la droite et du centre : François Bayrou juge",
-   "accroche": "Primaire de la droite et du centre : François Bayrou juge",
-   "rubrique": "Justice",
+   "rubrique": "Politique",
    "contexte": [
     {
      "type": "personnes",
@@ -3859,33 +3627,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-24T12:25:46.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Thomas Pesquet raconte l'espace aux enfants",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261124-thomas-pesquet-raconte-l-espace-aux-enfants",
-     "media": "France 24",
-     "date": "2026-11-24T12:25:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Éducation et jeunesse : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "20 Minutes"
    ],
    "derniere": "2026-11-24T12:18:47.000Z",
@@ -3939,9 +3680,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
-    "origine": "regles",
-    "generique": true
+    "titre": "Laure",
+    "origine": "dossier"
    },
    "rubrique": "Élysée 2027"
   },
@@ -4264,34 +4004,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-24T11:43:57.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Orphelins de féminicides, les victimes oubliées",
-     "url": "https://www.france24.com/fr/%C3%A9missions/c-est-en-france/20261124-orphelins-feminicides-meurtres-violences-faites-aux-femmes",
-     "media": "France 24",
-     "date": "2026-11-24T11:43:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -5580,6 +5292,247 @@
     "generique": true
    },
    "rubrique": "Assemblée nationale"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-24T09:19:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Scission chez les écolos : quand Placé et Rugy créaient déjà leur petite boutique",
+     "url": "https://www.liberation.fr/politique/elections/scission-chez-les-ecolos-quand-place-et-rugy-creaient-deja-leur-petite-boutique-20261124_E7MOHUOK2RELFK43SEBYVTYNLA/",
+     "media": "Libération",
+     "date": "2026-11-24T09:19:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T09:13:53.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Teddy Riner",
+      "photo": "photos/personnalites/teddy-riner.jpg",
+      "photoHd": "photos/personnalites/hd/teddy-riner.jpg",
+      "parti": "SE",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "INFO BFMTV. Salon des maires, Béziers, Guadeloupe...Les déplacements prévus par Teddy Riner",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-info-bfmtv-salon-des-maires-beziers-guadeloupe-les-deplacements-prevus-par-teddy-riner_VN-202611240432.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T09:13:53.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "INFO BFMTV : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Figaro"
+   ],
+   "derniere": "2026-11-24T09:07:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Budget : Emmanuel Macron envisagerait un Congrès sur la règle d’or, droite et RN sont favorables mais critiques",
+     "url": "https://www.lefigaro.fr/politique/budget-emmanuel-macron-envisagerait-un-congres-sur-la-regle-d-or-droite-et-rn-sont-favorables-mais-critiques-20261122",
+     "media": "Le Figaro",
+     "date": "2026-11-24T09:07:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : déclaration sur les finances publiques",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T09:05:54.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Maël de Calan, porte-parole d'Édouard Philippe: \"Les primaires sont une machine à diviser extraordinaire dont tout le monde sort perdant\"",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-mael-de-calan-porte-parole-d-edouard-philippe-les-primaires-sont-une-machine-a-diviser-extraordinaire-dont-tout-le-monde-sort-perdant_VN-202611240425.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T09:05:54.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Figaro"
+   ],
+   "derniere": "2026-11-24T09:05:45.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Règle d’or budgétaire : Emmanuel Macron face à la faisabilité d’un ultime défi",
+     "url": "https://www.lefigaro.fr/politique/regle-d-or-budgetaire-emmanuel-macron-face-a-la-faisabilite-d-un-ultime-defi-20261123",
+     "media": "Le Figaro",
+     "date": "2026-11-24T09:05:45.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : réponse sur les finances publiques",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-11-24T09:05:32.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«On vit dans la peur de sortir»: à Mayotte, la population s'inquiète d'une flambée des violences",
+     "url": "https://www.rfi.fr/fr/france/20261124-on-vit-dans-la-peur-de-sortir-%C3%A0-mayotte-la-population-s-inqui%C3%A8te-d-une-flamb%C3%A9e-des-violences",
+     "media": "RFI",
+     "date": "2026-11-24T09:05:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-24T09:04:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Natacha Polony",
+      "photo": "photos/personnalites/natacha-polony.jpg",
+      "photoHd": "photos/personnalites/hd/natacha-polony.jpg",
+      "credit": "Georges Biard, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "\"J'ai décidé d'agir\": Natacha Polony évoque sa candidature à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-j-ai-decide-d-agir-natacha-polony-evoque-sa-candidature-a-l-election-presidentielle_VN-202611240430.html",
+     "media": "BFMTV",
+     "date": "2026-11-24T09:04:34.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Natacha Polony : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
   }
  ]
 }
