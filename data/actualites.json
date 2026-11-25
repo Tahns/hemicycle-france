@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-25T08:20:50.859Z",
+ "lastUpdated": "2026-11-25T08:25:39.036Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -156,7 +156,7 @@
     "présidentielle",
     "candidats",
     "parrainages",
-    "congrès"
+    "primaire"
    ],
    "medias": [
     "BFMTV",
@@ -164,6 +164,7 @@
     "Europe 1",
     "La Dépêche",
     "L'Express",
+    "L'Humanité",
     "France Inter",
     "Sud Ouest",
     "L'Est républicain",
@@ -171,7 +172,6 @@
     "RFI",
     "Le Dauphiné libéré",
     "Le Figaro",
-    "L'Humanité",
     "Dernières Nouvelles d'Alsace",
     "Le Progrès",
     "Le JDD",
@@ -190,13 +190,13 @@
     "Groupe Bolloré",
     "La Dépêche",
     "L'Express",
+    "L'Humanité",
     "France Inter",
     "Sud Ouest",
     "EBRA",
     "20 Minutes",
     "France Médias Monde",
     "Le Figaro",
-    "L'Humanité",
     "Valeurs actuelles",
     "Public Sénat",
     "Libération",
@@ -204,7 +204,7 @@
     "Ouest-France",
     "Nice-Matin"
    ],
-   "nb": 117,
+   "nb": 110,
    "derniere": "2026-11-25T08:12:54.000Z",
    "articles": [
     {
@@ -235,6 +235,12 @@
      "media": "L'Express",
      "titre": "Présidentielle : face à la haine, le choix de l'exigence, par Eric Chol",
      "url": "https://www.lexpress.fr/politique/elections/presidentielle-face-a-la-haine-le-choix-de-lexigence-par-eric-chol-W2K6BOQU2JD7XIKKOJV2RYT7GE/",
+     "date": "2026-11-25T07:00:00.000Z"
+    },
+    {
+     "media": "L'Humanité",
+     "titre": "David Lisnard, Bruno Retailleau et Édouard Philippe en répétition générale de la primaire de la droite au Congrès de l’AMF",
+     "url": "https://www.humanite.fr/politique/bruno-retailleau/david-lisnard-bruno-retailleau-et-edouard-philippe-en-repetition-generale-de-la-primaire-de-la-droite-au-congres-de-lamf",
      "date": "2026-11-25T07:00:00.000Z"
     },
     {
@@ -278,12 +284,6 @@
      "titre": "« Il est déjà élu à l’applaudimètre »: dans les coulisses du match entre David Lisnard et Philippe Laurent pour la présidence de l’AMF",
      "url": "https://www.lefigaro.fr/elections/presidentielles/il-est-deja-elu-a-l-applaudimetre-dans-les-coulisses-du-match-entre-david-lisnard-et-philippe-laurent-pour-la-presidence-de-l-amf-20261124",
      "date": "2026-11-24T18:52:21.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "« Contre-productif », voire « imbécile »… Le budget 2027 de Lecornu vu depuis le Congrès des maires",
-     "url": "https://www.humanite.fr/politique/amf/contre-productif-voire-imbecile-le-budget-2027-de-lecornu-vu-depuis-le-congres-des-maires",
-     "date": "2026-11-24T18:38:34.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -515,146 +515,129 @@
    ]
   },
   {
-   "id": "justice",
-   "titre": "Justice",
+   "id": "nicolas",
+   "titre": "Nicolas",
    "motifs": [
-    "justice",
-    "générale",
-    "présence",
-    "siège"
+    "nicolas",
+    "affaire",
+    "remplir"
    ],
    "medias": [
-    "Nice-Matin",
-    "Sud Ouest",
-    "Le Monde",
-    "Libération",
+    "Mediapart",
+    "Valeurs actuelles",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "BFMTV",
-    "France Inter",
-    "La Dépêche",
-    "Mediapart",
-    "20 Minutes",
-    "Public Sénat",
-    "Ouest-France",
-    "Le JDD"
-   ],
-   "mediasDistincts": 13,
-   "sources": [
-    "Nice-Matin",
     "Sud Ouest",
-    "Le Monde",
-    "Libération",
-    "EBRA",
     "BFMTV",
-    "France Inter",
-    "La Dépêche",
-    "Mediapart",
-    "20 Minutes",
-    "Public Sénat",
-    "Ouest-France",
+    "France 24",
+    "L'Obs",
+    "Nice-Matin",
+    "RFI",
+    "Libération",
     "Le JDD"
    ],
-   "nb": 39,
-   "derniere": "2026-11-25T08:14:49.000Z",
+   "mediasDistincts": 10,
+   "sources": [
+    "Mediapart",
+    "Valeurs actuelles",
+    "EBRA",
+    "Sud Ouest",
+    "BFMTV",
+    "France Médias Monde",
+    "L'Obs",
+    "Nice-Matin",
+    "Libération",
+    "Le JDD"
+   ],
+   "nb": 15,
+   "derniere": "2026-11-25T07:13:06.000Z",
    "articles": [
     {
-     "media": "Nice-Matin",
-     "titre": "« On doit lever une ambiguïté » : que faisait un vice-procureur de Paris au siège du RN lors d’une perquisition ? Gérald Darmanin saisit l’Inspection générale de la Justice",
-     "url": "https://www.nicematin.com/societe/polemique/on-doit-lever-une-ambiguite-que-faisait-un-vice-procureur-de-paris-au-siege-du-rn-lors-d-une-perquisition-gerald-darmanin-saisit-l-inspection-generale-de-la-justice-10768483",
-     "date": "2026-11-25T08:14:49.000Z"
+     "media": "Mediapart",
+     "titre": "Un procès pour Nicolas Sarkozy, Carla Bruni et Michèle Marchand: la charge des juges dans l’affaire de la fausse rétractation de Ziad Takieddine",
+     "url": "https://www.mediapart.fr/journal/france/251126/un-proces-pour-nicolas-sarkozy-carla-bruni-et-michele-marchand-la-charge-des-juges-dans-l-affaire-de-la-fa",
+     "date": "2026-11-25T07:13:06.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Présence d’un procureur au siège du Rassemblement national lors d’une perquisition : Gérald Darmanin saisit l’Inspection générale de la Justice",
-     "url": "https://www.sudouest.fr/politique/gerald-darmanin/presence-d-un-procureur-au-siege-du-rassemblement-national-gerald-darmanin-saisit-l-inspection-generale-de-la-justice-31662474.php",
-     "date": "2026-11-25T08:02:21.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Procureur présent au siège du RN lors d’une perquisition : Gérald Darmanin annonce saisir l’inspection générale de la justice « pour faire toute la lumière »",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/25/procureur-present-lors-d-une-perquisition-au-rn-gerald-darmanin-annonce-saisir-l-inspection-generale-de-la-justice-pour-faire-toute-la-lumiere_6815060_3224.html",
-     "date": "2026-11-25T07:55:20.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Procureur au siège du RN : Gérald Darmanin saisit l’Inspection générale de la Justice",
-     "url": "https://www.liberation.fr/politique/procureur-au-siege-du-rn-gerald-darmanin-saisit-linspection-generale-de-la-justice-20261125_EU7CDIDAZFD6PPTT3ORXBFSSZQ/",
-     "date": "2026-11-25T07:54:42.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "Danemark : quand la socialiste Mette Frederiksen fait voler en éclats le tabou du « grand remplacement » et de la « souche ethnique »",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/monde/danemark-quand-la-socialiste-mette-frederiksen-fait-voler-en-eclats-le-tabou-du-grand-remplacement-et-de-la-souche-ethnique",
+     "date": "2026-11-25T07:01:59.000Z"
     },
     {
      "media": "Le Progrès",
-     "titre": "Enquête. Présence d'un procureur adjoint au siège du RN : Darmanin saisit l'Inspection générale de la Justice",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/25/visite-surprise-d-un-procureur-au-siege-du-rn-darmanin-saisit-l-inspection-generale-de-la-justice",
-     "date": "2026-11-25T07:47:00.000Z"
+     "titre": "Nicolas, 32 ans. En recherche d’emploi, il s’investit dans le bénévolat même si « cela ne suffit pas à remplir l’assiette »",
+     "url": "https://www.leprogres.fr/elections/2026/11/25/en-recherche-d-emploi-il-s-investit-dans-le-benevolat-meme-si-cela-ne-suffit-pas-a-remplir-l-assiette",
+     "date": "2026-11-25T05:27:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Enquête. Présence d'un procureur adjoint au siège du RN : Darmanin saisit l'Inspection générale de la Justice",
-     "url": "https://www.dna.fr/faits-divers-justice/2026/11/25/visite-surprise-d-un-procureur-au-siege-du-rn-darmanin-saisit-l-inspection-generale-de-la-justice",
-     "date": "2026-11-25T07:47:00.000Z"
+     "titre": "Nicolas, 32 ans. En recherche d’emploi, ce Mulhousien s’investit dans le bénévolat même si « cela ne suffit pas à remplir l’assiette »",
+     "url": "https://www.dna.fr/elections/2026/11/25/en-recherche-d-emploi-ce-mulhousien-s-investit-dans-le-benevolat-meme-si-cela-ne-suffit-pas-a-remplir-l-assiette",
+     "date": "2026-11-25T05:27:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
-     "titre": "Enquête. Présence d'un procureur adjoint au siège du RN : Darmanin saisit l'Inspection générale de la Justice",
-     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/25/visite-surprise-d-un-procureur-au-siege-du-rn-darmanin-saisit-l-inspection-generale-de-la-justice",
-     "date": "2026-11-25T07:47:00.000Z"
+     "titre": "Nicolas, 32 ans. En recherche d’emploi, il s’investit dans le bénévolat même si « cela ne suffit pas à remplir l’assiette »",
+     "url": "https://www.ledauphine.com/elections/2026/11/25/en-recherche-d-emploi-il-s-investit-dans-le-benevolat-meme-si-cela-ne-suffit-pas-a-remplir-l-assiette",
+     "date": "2026-11-25T05:27:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Enquête. Présence d'un procureur adjoint au siège du RN : Darmanin saisit l'Inspection générale de la Justice",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/25/visite-surprise-d-un-procureur-au-siege-du-rn-darmanin-saisit-l-inspection-generale-de-la-justice",
-     "date": "2026-11-25T07:47:00.000Z"
+     "titre": "Nicolas, 32 ans. En recherche d’emploi, il s’investit dans le bénévolat même si « cela ne suffit pas à remplir l’assiette »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/25/en-recherche-d-emploi-il-s-investit-dans-le-benevolat-meme-si-cela-ne-suffit-pas-a-remplir-l-assiette",
+     "date": "2026-11-25T05:27:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Le dessin du mercredi 25 novembre : le retour de Nicolas Sarkozy au tribunal",
+     "url": "https://www.sudouest.fr/redaction/le-dessin-du-jour/le-dessin-du-mercredi-25-novembre-le-retour-de-nicolas-sarkozy-au-tribunal-31658656.php",
+     "date": "2026-11-25T05:00:00.000Z"
     },
     {
      "media": "BFMTV",
-     "titre": "Gérald Darmanin",
-     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
-     "date": "2026-11-25T07:39:32.000Z"
+     "titre": "OQTF: Manuel Bompard veut remplacer les centres de rétention par des structures d'accompagnement",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-oqtf-manuel-bompard-veut-remplacer-les-centres-de-retention-par-des-structures-d-accompagnement_VN-202611241021.html",
+     "date": "2026-11-24T22:28:18.000Z",
+     "video": true
     },
     {
-     "media": "France Inter",
-     "titre": "Présence d'un procureur au siège du RN : Gérald Darmanin annonce saisir l'Inspection générale de la justice",
-     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-8h20-le-grand-entretien/l-invite-de-8h20-le-grand-entretien-du-mercredi-25-novembre-2026-3839037",
-     "date": "2026-11-25T07:22:10.000Z"
+     "media": "France 24",
+     "titre": "Fausse rétractation de Takieddine : renvoi en procès de Nicolas Sarkozy et Carla Bruni",
+     "url": "https://www.france24.com/fr/france/20261124-fausse-r%C3%A9tractation-takieddine-renvoi-proc%C3%A8s-nicolas-sarkozy-carla-bruni",
+     "date": "2026-11-24T14:53:55.000Z"
     },
     {
-     "media": "La Dépêche",
-     "titre": "REPORTAGE. Présidentielle 2027 : \"Ça m'a saoulé que des gens viennent se présenter chez moi\", les maires submergés par les demandes de parrainages des candidats",
-     "url": "https://www.ladepeche.fr/2026/11/25/reportage-presidentielle-2027-ca-ma-saoule-que-des-gens-viennent-se-presenter-chez-moi-les-maires-submerges-par-les-demandes-de-parrainages-des-13669279.php",
-     "date": "2026-11-25T05:32:02.000Z"
+     "media": "L'Obs",
+     "titre": "Affaire Takieddine : Nicolas Sarkozy face à un nouveau procès, cette fois aux côtés de Carla Bruni et Mimi Marchand",
+     "url": "https://www.nouvelobs.com/justice/20261124.OBS120405/affaire-takieddine-nicolas-sarkozy-carla-bruni-et-mimi-marchand-seront-juges-pour-association-de-malfaiteurs.html",
+     "date": "2026-11-24T13:43:18.000Z"
     },
     {
-     "media": "Mediapart",
-     "titre": "La justice ouvre une nouvelle enquête visant la communauté urbaine dirigée par Édouard Philippe",
-     "url": "https://www.mediapart.fr/journal/france/241126/la-justice-ouvre-une-nouvelle-enquete-visant-la-communaute-urbaine-dirigee-par-edouard-philippe",
-     "date": "2026-11-24T18:18:21.000Z"
+     "media": "Nice-Matin",
+     "titre": "Ont-ils payé pour la rétractation de Ziad Takieddine dans l’affaire libyenne ? Nicolas Sarkozy et Carla Bruni renvoyés devant la justice en 2027",
+     "url": "https://www.nicematin.com/societe/justice/ont-ils-paye-pour-la-retractation-de-ziad-takieddine-dans-l-affaire-libyenne-nicolas-sarkozy-et-carla-bruni-renvoyes-devant-la-justice-en-2027-10768182",
+     "date": "2026-11-24T13:19:43.000Z"
     },
     {
-     "media": "20 Minutes",
-     "titre": "Présidentielle 2027 : Cette députée Génération. s était porte-parole de Ruffin, LFI ne veut pas d’elle dans l’accord",
-     "url": "https://www.20minutes.fr/politique/4265495-20261124-presidentielle-2027-deputee-generation-porte-parole-ruffin-lfi-veut-accord?at_medium=display&at_campaign=149",
-     "date": "2026-11-24T18:10:59.000Z"
+     "media": "RFI",
+     "titre": "Fausse rétractation de Ziad Takieddine: l'ex-président Nicolas Sarkozy et son épouse Carla Bruni renvoyés en procès",
+     "url": "https://www.rfi.fr/fr/france/20261124-fausse-r%C3%A9tractation-de-ziad-takieddine-nicolas-sarkozy-et-carla-bruni-renvoy%C3%A9s-en-proc%C3%A8s",
+     "date": "2026-11-24T12:30:30.000Z"
     },
     {
-     "media": "Public Sénat",
-     "titre": "Justice : pour la loi intégrale, « il faudra des moyens très importants et un budget rectificatif, ça me paraît évident », affirme Gérald Darmanin",
-     "url": "https://www.publicsenat.fr/actualites/societe/justice-pour-la-loi-integrale-il-faudra-des-moyens-tres-importants-et-un-budget-rectificatif-ca-me-parait-evident-affirme-gerald-darmanin",
-     "date": "2026-11-24T18:01:54.000Z"
-    },
-    {
-     "media": "Ouest-France",
-     "titre": "Présidence de la Fifa. Kévin Lamour dément rejoindre l’équipe de Philippe Diallo mais lui souhaite bonne chance",
-     "url": "https://www.ouest-france.fr/sport/football/fifa/presidence-de-la-fifa-kevin-lamour-dement-rejoindre-lequipe-de-philippe-diallo-mais-lui-souhaite-bonne-chance-692ea632-e809-11f1-86c1-70195b4d2e52?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
-     "date": "2026-11-24T14:18:11.000Z"
+     "media": "Libération",
+     "titre": "Le préfet Moutouh et le RN : cinq questions pour tout comprendre à l’affaire",
+     "url": "https://www.liberation.fr/societe/police-justice/le-prefet-moutouh-et-le-rn-cinq-questions-pour-tout-comprendre-a-laffaire-20261123_R4AATCCKQBC7DA4C2V32F2C3NI/",
+     "date": "2026-11-23T17:12:43.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "«S’unir pour faire advenir le meilleur» : le parti Génération.s fondé par Hamon rallie Mélenchon",
-     "url": "https://www.lejdd.fr/politique/sunir-pour-faire-advenir-le-meilleur-le-parti-generations-fonde-par-hamon-rallie-melenchon-189489",
-     "date": "2026-11-23T14:05:50.000Z"
+     "titre": "Ouverture du congrès des maires, affaire Nahel, loi logement... Les 4 infos dont vous allez entendre parler demain",
+     "url": "https://www.lejdd.fr/politique/ouverture-du-congres-des-maires-affaire-nahel-loi-logement-les-4-infos-dont-vous-allez-entendre-parler-demain-189465",
+     "date": "2026-11-23T15:05:26.000Z"
     }
    ]
   }
@@ -744,8 +727,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Justice",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Que faisait un vice-procureur de Paris au siège du Rassemblement national",
    "accroche": "Que faisait un vice-procureur de Paris au siège du Rassemblement national",
@@ -866,9 +850,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
+    "titre": "Nicolas",
+    "origine": "dossier"
    },
    "rubrique": "Justice"
   },
@@ -2357,9 +2340,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Nicolas",
+    "origine": "dossier"
    },
    "rubrique": "Politique",
    "chiffre": {
@@ -2988,6 +2970,64 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "L'Humanité"
+   ],
+   "derniere": "2026-11-25T07:00:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     },
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "David Lisnard, Bruno Retailleau et Édouard Philippe en répétition générale de la primaire de la droite au Congrès de l’AMF",
+     "url": "https://www.humanite.fr/politique/bruno-retailleau/david-lisnard-bruno-retailleau-et-edouard-philippe-en-repetition-generale-de-la-primaire-de-la-droite-au-congres-de-lamf",
+     "media": "L'Humanité",
+     "date": "2026-11-25T07:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains · Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-11-25T06:51:03.000Z",
@@ -3165,50 +3205,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Bruno Retailleau",
-      "photo": "photos/senateurs/04033B.jpg",
-      "photoHd": "photos/senateurs/hd/04033B.jpg",
-      "parti": "LR",
-      "lien": "#senateur-04033B",
-      "credit": "Sénat"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Bruno Retailleau",
-     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
-     "media": "BFMTV",
-     "date": "2026-11-25T06:25:53.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Bruno Retailleau : président des Républicains",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-25T06:25:53.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -3240,6 +3236,50 @@
      "type": "personnes",
      "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
      "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-25T06:25:53.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Bruno Retailleau",
+      "photo": "photos/senateurs/04033B.jpg",
+      "photoHd": "photos/senateurs/hd/04033B.jpg",
+      "parti": "LR",
+      "lien": "#senateur-04033B",
+      "credit": "Sénat"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bruno Retailleau",
+     "url": "https://www.bfmtv.com/politique/gouvernement/bruno-retailleau_DN-202410030418.html",
+     "media": "BFMTV",
+     "date": "2026-11-25T06:25:53.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bruno Retailleau (Les Républicains) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Bruno Retailleau : président des Républicains",
+     "source": "Wikipédia (infobox du parti)"
     }
    ]
   },
@@ -4151,8 +4191,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Dessin de presse : regard sur l'actualité du jour",
-    "origine": "regles"
+    "titre": "Nicolas",
+    "origine": "dossier"
    },
    "rubrique": "Justice"
   },
@@ -5645,57 +5685,6 @@
    "fait": "Bilan d’Emmanuel Macron : boudé par Renaissance et Horizons",
    "accroche": "Bilan d’Emmanuel Macron : boudé par Renaissance et Horizons",
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "La Dépêche"
-   ],
-   "derniere": "2026-11-24T19:31:02.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Patrick Pouyanné, Bernard Arnault... comment voteront les grands patrons en cas d'un duel entre Jean-Luc Mélenchon et Marine Le Pen ?",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-patrick-pouyanne-bernard-arnault-comment-voteront-les-grands-patrons-en-cas-dun-duel-entre-jean-luc-melenchon-et-marine-le-pen-13669471.php",
-     "media": "La Dépêche",
-     "date": "2026-11-24T19:31:02.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : Jean-Luc Mélenchon (La France insoumise)",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
-     "source": "Assemblée nationale (open data)"
-    }
-   ]
   }
  ]
 }
