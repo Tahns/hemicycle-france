@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-25T12:55:41.837Z",
+ "lastUpdated": "2026-11-25T13:01:08.252Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -45,7 +45,7 @@
   {
    "nom": "France 24",
    "site": "https://www.france24.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "RFI",
@@ -154,11 +154,12 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
+    "maires",
     "candidat",
-    "parrainages",
-    "réélu"
+    "parrainages"
    ],
    "medias": [
+    "Sud Ouest",
     "BFMTV",
     "Le Monde",
     "La Dépêche",
@@ -171,50 +172,56 @@
     "Libération",
     "Nice-Matin",
     "Public Sénat",
-    "Sud Ouest",
     "Le JDD",
     "Valeurs actuelles",
     "L'Humanité",
     "L'Express",
     "RFI",
     "Le Figaro",
-    "France 24",
     "L'Obs",
     "Ouest-France"
    ],
-   "mediasDistincts": 16,
+   "mediasDistincts": 17,
    "sources": [
-    "BFMTV / La Dépêche",
+    "Sud Ouest",
+    "BFMTV",
     "Le Monde",
+    "La Dépêche",
     "EBRA",
     "20 Minutes",
     "Groupe Bolloré",
     "Libération",
     "Nice-Matin",
     "Public Sénat",
-    "Sud Ouest",
     "Valeurs actuelles",
     "L'Humanité",
     "L'Express",
-    "France Médias Monde",
+    "RFI",
     "Le Figaro",
     "L'Obs",
     "Ouest-France"
    ],
-   "nb": 130,
-   "derniere": "2026-11-25T12:53:29.000Z",
+   "nb": 138,
+   "derniere": "2026-11-25T12:57:35.000Z",
    "articles": [
     {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : l’organisation du second tour le 2 mai reste la meilleure option, assure le porte-parole du gouvernement",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-l-organisation-du-second-tour-le-2-mai-reste-la-meilleure-option-assure-le-porte-parole-du-gouvernement-31665887.php",
+     "date": "2026-11-25T12:57:35.000Z"
+    },
+    {
      "media": "BFMTV",
-     "titre": "DIRECT. Présidentielle 2027: David Lisnard réélu à la tête de l'Association des maires de France avec 72% des voix",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-presidentielle-2027-les-candidats-se-relaient-au-congres-des-maires-de-france-david-lisnard-fixe-sur-sa-reelection-a-la-tete-de-l-amf-ce-mercredi_LN-202611250225.html",
-     "date": "2026-11-25T12:53:29.000Z"
+     "titre": "Réélection à la tête de l'AMF: \"Pas un tremplin\" pour la présidentielle mais \"ça me renforce dans mes convictions\", estime David Lisnard",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-reelection-a-la-tete-de-l-amf-pas-un-tremplin-pour-la-presidentielle-mais-ca-me-renforce-dans-mes-convictions-estime-david-lisnard_VN-202611250593.html",
+     "date": "2026-11-25T12:56:49.000Z",
+     "video": true
     },
     {
      "media": "Le Monde",
      "titre": "David Lisnard, candidat à l’élection présidentielle, réélu à la tête de l’Association des maires de France",
      "url": "https://www.lemonde.fr/politique/article/2026/11/25/david-lisnard-candidat-a-l-election-presidentielle-reelu-a-la-tete-de-l-association-des-maires-de-france_6815094_823448.html",
-     "date": "2026-11-25T12:44:02.000Z"
+     "date": "2026-11-25T12:43:58.000Z"
     },
     {
      "media": "La Dépêche",
@@ -277,12 +284,6 @@
      "date": "2026-11-25T12:34:58.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "« Je n’ai pas été biberonné par lui » : Teddy Riner, candidat à la présidentielle 2027, clarifie encore ses liens avec Emmanuel Macron",
-     "url": "https://www.sudouest.fr/sport/judo/teddy-riner/je-n-ai-pas-ete-biberonne-par-lui-teddy-riner-candidat-a-la-presidentielle-2027-clarifie-encore-ses-liens-avec-emmanuel-macron-31664730.php",
-     "date": "2026-11-25T11:26:57.000Z"
-    },
-    {
      "media": "Le JDD",
      "titre": "Présidentielle : Philippe accuse Lisnard d’entretenir une frontière «poreuse» avec l’«extrême droite»",
      "url": "https://www.lejdd.fr/politique/presidentielle-philippe-accuse-lisnard-dentretenir-une-frontiere-poreuse-avec-lextreme-droite-189648",
@@ -319,12 +320,6 @@
      "date": "2026-11-24T18:52:21.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "David Lisnard, le candidat ultralibéral qui chamboule la campagne à droite",
-     "url": "https://www.france24.com/fr/france/20261124-france-presidentielle-2027-david-lisnard-candidat-ultraliberal-chamboule-campagne-droite",
-     "date": "2026-11-24T16:43:24.000Z"
-    },
-    {
      "media": "L'Obs",
      "titre": "Présidentielle 2027 : « La gauche doit renouer avec son ambition décentralisatrice »",
      "url": "https://www.nouvelobs.com/opinions/20261124.OBS120406/presidentielle-2027-la-gauche-doit-renouer-avec-son-ambition-decentralisatrice.html",
@@ -335,6 +330,165 @@
      "titre": "Présidence de la Fifa. Kévin Lamour dément rejoindre l’équipe de Philippe Diallo mais lui souhaite bonne chance",
      "url": "https://www.ouest-france.fr/sport/football/fifa/presidence-de-la-fifa-kevin-lamour-dement-rejoindre-lequipe-de-philippe-diallo-mais-lui-souhaite-bonne-chance-692ea632-e809-11f1-86c1-70195b4d2e52?utm_source=fluxpublicfrance&utm_medium=fluxrss&utm_campaign=banquedecontenu",
      "date": "2026-11-24T14:18:11.000Z"
+    }
+   ]
+  },
+  {
+   "id": "fonctions",
+   "titre": "Fonctions",
+   "motifs": [
+    "fonctions",
+    "fuites",
+    "préfet",
+    "démis"
+   ],
+   "medias": [
+    "BFMTV",
+    "France Inter",
+    "RFI",
+    "Le Monde",
+    "20 Minutes",
+    "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
+    "Le Dauphiné libéré",
+    "L'Est républicain",
+    "Sud Ouest",
+    "Nice-Matin",
+    "Europe 1",
+    "Valeurs actuelles",
+    "La Dépêche",
+    "L'Obs",
+    "Le JDD",
+    "Public Sénat",
+    "Libération"
+   ],
+   "mediasDistincts": 14,
+   "sources": [
+    "BFMTV",
+    "France Inter",
+    "RFI",
+    "Le Monde",
+    "20 Minutes",
+    "EBRA",
+    "Sud Ouest",
+    "Nice-Matin",
+    "Groupe Bolloré",
+    "Valeurs actuelles",
+    "La Dépêche",
+    "L'Obs",
+    "Public Sénat",
+    "Libération"
+   ],
+   "nb": 32,
+   "derniere": "2026-11-25T12:48:03.000Z",
+   "articles": [
+    {
+     "media": "BFMTV",
+     "titre": "Soupçons de fuites du ministère de l'Intérieur vers le RN: le préfet Hugues Moutouh officiellement démis de ses fonctions",
+     "url": "https://www.bfmtv.com/politique/soupcons-de-fuites-du-ministere-de-l-interieur-vers-le-rn-le-prefet-hugues-moutouh-officiellement-demis-de-ses-fonctions_AN-202611250520.html",
+     "date": "2026-11-25T12:48:03.000Z"
+    },
+    {
+     "media": "France Inter",
+     "titre": "Soupçons de fuites vers le RN : le préfet Hugues Moutouh officiellement démis de ses fonctions",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-info-de-france-inter/soupcons-de-fuites-vers-le-rn-le-prefet-hugues-moutouh-officiellement-demis-de-ses-fonctions-7417788",
+     "date": "2026-11-25T12:23:00.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Soupçons de fuites du ministère de l'Intérieur au profit du RN: le préfet Hugues Moutouh démis de ses fonctions",
+     "url": "https://www.rfi.fr/fr/france/20261125-soup%C3%A7ons-de-fuites-au-profit-du-rn-en-france-un-pr%C3%A9fet-d%C3%A9mis-de-ses-fonctions",
+     "date": "2026-11-25T12:16:24.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Hugues Moutouh, le préfet soupçonné de fuites d’informations confidentielles vers le RN, a été démis de ses fonctions en conseil des ministres",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/25/hugues-moutouh-le-prefet-soupconne-de-fuites-d-informations-confidentielles-vers-le-rn-a-ete-demis-de-ses-fonctions-en-conseil-des-ministres_6815089_823448.html",
+     "date": "2026-11-25T11:32:38.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Soupçons de fuite au profit du RN : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
+     "url": "https://www.20minutes.fr/politique/4265628-20261125-soupcons-fuite-profit-rn-prefet-moutouh-officiellement-demis-fonctions-successeur-nomme?at_medium=display&at_campaign=149",
+     "date": "2026-11-25T11:21:14.000Z"
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "date": "2026-11-25T11:19:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.dna.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "date": "2026-11-25T11:19:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.ledauphine.com/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "date": "2026-11-25T11:19:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "date": "2026-11-25T11:19:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Enquête sur des fuites vers le RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
+     "url": "https://www.sudouest.fr/politique/enquete-sur-des-fuites-vers-le-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-31664792.php",
+     "date": "2026-11-25T11:16:51.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
+     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
+     "date": "2026-11-25T11:03:54.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Enquête RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
+     "url": "https://www.europe1.fr/politique/enquete-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-1244659?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-25T11:02:21.000Z"
+    },
+    {
+     "media": "Valeurs actuelles",
+     "titre": "« J’ai été tour à tour traité de gaucho, de facho, de salaud… » : Pierre Perret répond à ses détracteurs LFI",
+     "url": "https://www.valeursactuelles.com/culture/jai-ete-tour-a-tour-traite-de-gaucho-de-facho-de-salaud-pierre-perret-repond-a-ses-detracteurs-lfi",
+     "date": "2026-11-25T09:01:35.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "Présidentielle 2027 : les \"500 signatures\", comment fonctionne le système de parrainage pour l'élection ?",
+     "url": "https://www.ladepeche.fr/2026/11/25/presidentielle-2027-les-500-signatures-comment-fonctionne-le-systeme-de-parrainage-pour-lelection-13668957.php",
+     "date": "2026-11-25T05:05:02.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "« Il aime donner des coups de menton » : 10 choses à savoir sur Hugues Moutouh, le préfet soupçonné d’avoir été une taupe du RN",
+     "url": "https://www.nouvelobs.com/justice/20261124.OBS120402/il-aime-donner-des-coups-de-menton-10-choses-a-savoir-sur-hugues-moutouh-le-prefet-soupconne-d-avoir-ete-une-taupe-du-rn.html",
+     "date": "2026-11-24T10:47:15.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Présidentielle : face à Mélenchon, l’ex-patron du Medef Pierre Gattaz voterait Le Pen «sans aucune hésitation»",
+     "url": "https://www.lejdd.fr/politique/presidentielle-face-a-melenchon-lex-patron-du-medef-pierre-gattaz-voterait-le-pen-sans-aucune-hesitation-189522",
+     "date": "2026-11-24T10:14:18.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "Sondage : au deuxième tour, seuls David Lisnard et Edouard Philippe seraient préférés à Marine Le Pen",
+     "url": "https://www.publicsenat.fr/actualites/politique/sondage-au-deuxieme-tour-seuls-david-lisnard-et-edouard-philippe-seraient-preferes-a-marine-le-pen",
+     "date": "2026-11-24T04:00:00.000Z"
+    },
+    {
+     "media": "Libération",
+     "titre": "Le préfet Moutouh et le RN : cinq questions pour tout comprendre à l’affaire",
+     "url": "https://www.liberation.fr/societe/police-justice/le-prefet-moutouh-et-le-rn-cinq-questions-pour-tout-comprendre-a-laffaire-20261123_R4AATCCKQBC7DA4C2V32F2C3NI/",
+     "date": "2026-11-23T17:12:43.000Z"
     }
    ]
   },
@@ -357,12 +511,10 @@
     "Le JDD",
     "Libération",
     "L'Obs",
-    "France 24",
-    "La Dépêche",
     "Nice-Matin",
     "Public Sénat"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 10,
    "sources": [
     "20 Minutes",
     "Sud Ouest",
@@ -372,12 +524,10 @@
     "Mediapart",
     "Libération",
     "L'Obs",
-    "France 24",
-    "La Dépêche",
     "Nice-Matin",
     "Public Sénat"
    ],
-   "nb": 17,
+   "nb": 15,
    "derniere": "2026-11-25T11:46:40.000Z",
    "articles": [
     {
@@ -403,6 +553,12 @@
      "titre": "Les journalistes de RTL se réunissent en assemblée générale pour dénoncer la brutalité de leur direction",
      "url": "https://www.humanite.fr/medias/harcelement-moral/les-journalistes-de-rtl-se-reunissent-en-assemblee-generale-pour-denoncer-la-brutalite-de-leur-direction",
      "date": "2026-11-25T10:57:10.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : David Lisnard est « en rupture fondamentale avec ce qu’est la droite », dénonce Gérald Darmanin",
+     "url": "https://www.sudouest.fr/politique/gerald-darmanin/presidentielle-2027-david-lisnard-est-en-rupture-fondamentale-avec-ce-qu-est-la-droite-denonce-gerald-darmanin-31663988.php",
+     "date": "2026-11-25T10:52:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
@@ -447,18 +603,6 @@
      "date": "2026-11-24T15:47:37.000Z"
     },
     {
-     "media": "France 24",
-     "titre": "Détournement de fonds de publics : une enquête vise l'agglomération du Havre d'Édouard Philippe",
-     "url": "https://www.france24.com/fr/france/20261124-edouard-philippe-vis%C3%A9-par-une-enqu%C3%AAte-pour-d%C3%A9tournement-de-fonds-publics-au-havre",
-     "date": "2026-11-24T14:47:28.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Présidentielle 2027 : la justice ouvre une enquête pénale pour détournement de fonds publics ciblant l'agglomération du Havre présidée par Édouard Philippe",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-la-justice-ouvre-une-enquete-penale-pour-detournement-de-fonds-publics-ciblant-lagglomeration-du-havre-presidee-par-edouard-13668976.php",
-     "date": "2026-11-24T14:12:06.000Z"
-    },
-    {
      "media": "Nice-Matin",
      "titre": "Enquête sur des fuites présumées vers le RN : Bardella évoque un « timing » « étrange »",
      "url": "https://www.nicematin.com/societe/politique/enquete-sur-des-fuites-presumees-vers-le-rn-bardella-evoque-un-timing-etrange-10767651",
@@ -471,232 +615,14 @@
      "date": "2026-11-23T15:24:51.000Z"
     }
    ]
-  },
-  {
-   "id": "francois",
-   "titre": "François",
-   "motifs": [
-    "françois",
-    "changer",
-    "choses"
-   ],
-   "medias": [
-    "BFMTV",
-    "Dernières Nouvelles d'Alsace",
-    "Libération",
-    "La Dépêche",
-    "Le Progrès",
-    "Le Dauphiné libéré",
-    "L'Est républicain",
-    "Public Sénat",
-    "Le Figaro",
-    "Le JDD",
-    "L'Obs",
-    "Nice-Matin"
-   ],
-   "mediasDistincts": 9,
-   "sources": [
-    "BFMTV",
-    "EBRA",
-    "Libération",
-    "La Dépêche",
-    "Public Sénat",
-    "Le Figaro",
-    "Le JDD",
-    "L'Obs",
-    "Nice-Matin"
-   ],
-   "nb": 15,
-   "derniere": "2026-11-25T12:31:24.000Z",
-   "articles": [
-    {
-     "media": "BFMTV",
-     "titre": "Possible candidature de François Hollande: \"Chacun son rythme, nous on est en campagne\", déclare Raphaël Glucksmann",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-possible-candidature-de-francois-hollande-chacun-son-rythme-nous-on-est-en-campagne-declare-raphael-glucksmann_VN-202611250581.html",
-     "date": "2026-11-25T12:31:24.000Z",
-     "video": true
-    },
-    {
-     "media": "BFMTV",
-     "titre": "\"La situation politique va se décanter à la fin du mois de janvier\": pas encore candidat, François Hollande réunit 200 personnes dans son QG parisien",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-la-situation-politique-va-se-decanter-a-la-fin-du-mois-de-janvier-pas-encore-candidat-francois-hollande-reunit-200-personnes-dans-son-qg-parisien_VN-202611250565.html",
-     "date": "2026-11-25T12:07:24.000Z",
-     "video": true
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Strasbourg. Apollonia : changement de lieu et d’horaire pour la réunion du collectif",
-     "url": "https://www.dna.fr/culture-loisirs/2026/11/25/apollonia-changement-de-lieu-et-d-horaire-pour-la-reunion-du-collectif",
-     "date": "2026-11-25T10:04:00.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "Présidentielle 2027 : après François Bayrou, au tour de Jean-Noël Barrot de prôner le «ni-ni» entre Jean-Luc Mélenchon et Marine Le Pen",
-     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-apres-francois-bayrou-au-tour-de-jean-noel-barrot-de-proner-le-ni-ni-entre-jean-luc-melenchon-et-marine-le-pen-20261125_YRWHOZLD4JFHND6FVZP5KEJU5M/",
-     "date": "2026-11-25T08:39:10.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "DECRYPTAGE. Présidentielle 2027 : après avoir renoncé à sa candidature, François Ruffin soutiendra-t-il Jean-Luc Mélenchon, Raphaël Glucksmann ou Fabien Roussel ?",
-     "url": "https://www.ladepeche.fr/2026/11/25/decryptage-presidentielle-2027-apres-avoir-renonce-a-sa-candidature-francois-ruffin-soutiendra-t-il-jean-luc-melenchon-raphael-glucksmann-ou-fabien-13666789.php",
-     "date": "2026-11-25T05:21:02.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Blaise Klébert, 73 ans. Ce Mitterrandiste est prêt à franchir le pas : « À mon âge, je me dis qu’il faut changer les choses »",
-     "url": "https://www.leprogres.fr/elections/2026/11/25/ce-mitterrandiste-pret-a-franchir-un-cap-a-mon-age-je-me-dis-qu-il-faut-changer-les-choses",
-     "date": "2026-11-25T05:00:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Blaise Klébert, 73 ans. Ce Mitterrandiste est prêt à franchir le pas : « À mon âge, je me dis qu’il faut changer les choses »",
-     "url": "https://www.dna.fr/elections/2026/11/25/ce-mitterrandiste-pret-a-franchir-un-cap-a-mon-age-je-me-dis-qu-il-faut-changer-les-choses",
-     "date": "2026-11-25T05:00:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Blaise Klébert, 73 ans. Ce Mitterrandiste est prêt à franchir le pas : « À mon âge, je me dis qu’il faut changer les choses »",
-     "url": "https://www.ledauphine.com/elections/2026/11/24/blaise-klebert-73-ans-j-ai-toujours-vote",
-     "date": "2026-11-25T05:00:00.000Z"
-    },
-    {
-     "media": "L'Est républicain",
-     "titre": "Blaise Klébert, 73 ans. Ce Mitterrandiste est prêt à franchir le pas : « À mon âge, je me dis qu’il faut changer les choses »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/25/ce-mitterrandiste-pret-a-franchir-un-cap-a-mon-age-je-me-dis-qu-il-faut-changer-les-choses",
-     "date": "2026-11-25T05:00:00.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "« Il aurait fallu qu’il fasse la part des choses » : les maires, premiers juges du cumul de candidatures de David Lisnard",
-     "url": "https://www.publicsenat.fr/actualites/politique/il-aurait-fallu-quil-fasse-la-part-des-choses-les-maires-premiers-juges-du-cumul-de-candidatures-de-david-lisnard",
-     "date": "2026-11-24T16:06:24.000Z"
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "Le gouvernement peut-il encore changer la date de l’élection présidentielle ?",
-     "url": "https://www.lefigaro.fr/politique/le-gouvernement-peut-il-encore-changer-la-date-de-l-election-presidentielle-20261123",
-     "date": "2026-11-24T14:36:15.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "François Hollande réunit 200 invités dans son QG parisien",
-     "url": "https://www.lejdd.fr/politique/francois-hollande-reunit-200-invites-dans-son-qg-parisien-189531",
-     "date": "2026-11-24T13:13:10.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "« Il aime donner des coups de menton » : 10 choses à savoir sur Hugues Moutouh, le préfet soupçonné d’avoir été une taupe du RN",
-     "url": "https://www.nouvelobs.com/justice/20261124.OBS120402/il-aime-donner-des-coups-de-menton-10-choses-a-savoir-sur-hugues-moutouh-le-prefet-soupconne-d-avoir-ete-une-taupe-du-rn.html",
-     "date": "2026-11-24T10:47:15.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "François Bayrou étrille le maire de Cannes et candidat à la présidentielle 2027, David Lisnard, qui plébiscite une primaire ouverte à l’extrême droite",
-     "url": "https://www.nicematin.com/societe/politique/francois-bayrou-etrille-le-maire-de-cannes-et-candidat-a-la-presidentielle-2027-david-lisnard-qui-plebiscite-une-primaire-ouverte-a-l-extreme-droite-10768098",
-     "date": "2026-11-24T10:36:41.000Z"
-    }
-   ]
   }
  ],
  "sujets": [
   {
-   "medias": 10,
-   "mediasDistincts": 7,
-   "sources": [
-    "RFI",
-    "20 Minutes",
-    "BFMTV",
-    "EBRA",
-    "Sud Ouest",
-    "Nice-Matin",
-    "Europe 1"
-   ],
-   "derniere": "2026-11-25T12:16:24.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
-     "url": "https://www.leprogres.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
-     "media": "Le Progrès",
-     "date": "2026-11-25T11:19:00.000Z"
-    },
-    {
-     "titre": "Soupçons de fuites au profit du RN en France: le préfet Hugues Moutouh démis de ses fonctions",
-     "url": "https://www.rfi.fr/fr/france/20261125-soup%C3%A7ons-de-fuites-au-profit-du-rn-en-france-un-pr%C3%A9fet-d%C3%A9mis-de-ses-fonctions",
-     "media": "RFI",
-     "date": "2026-11-25T12:16:24.000Z"
-    },
-    {
-     "titre": "Soupçons de fuite au profit du RN : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
-     "url": "https://www.20minutes.fr/politique/4265628-20261125-soupcons-fuite-profit-rn-prefet-moutouh-officiellement-demis-fonctions-successeur-nomme?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-25T11:21:14.000Z"
-    },
-    {
-     "titre": "Soupçons de fuites visant le RN: Pierre Ory est nommé préfet du Loiret en remplacement d'Hugues Moutouh",
-     "url": "https://www.bfmtv.com/politique/gouvernement/video-soupcons-de-fuites-visant-le-rn-pierre-ory-est-nomme-prefet-du-loiret-en-remplacement-d-hugues-moutouh_VN-202611250534.html",
-     "media": "BFMTV",
-     "date": "2026-11-25T11:21:12.000Z",
-     "video": true
-    },
-    {
-     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
-     "url": "https://www.dna.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T11:19:00.000Z"
-    },
-    {
-     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
-     "url": "https://www.ledauphine.com/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-25T11:19:00.000Z"
-    },
-    {
-     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
-     "media": "L'Est républicain",
-     "date": "2026-11-25T11:19:00.000Z"
-    },
-    {
-     "titre": "Enquête sur des fuites vers le RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
-     "url": "https://www.sudouest.fr/politique/enquete-sur-des-fuites-vers-le-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-31664792.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-25T11:16:51.000Z"
-    },
-    {
-     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
-     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
-     "media": "Nice-Matin",
-     "date": "2026-11-25T11:03:54.000Z"
-    },
-    {
-     "titre": "Enquête RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
-     "url": "https://www.europe1.fr/politique/enquete-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-1244659?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-25T11:02:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Démis de ses fonctions",
-    "origine": "recoupement"
-   },
-   "fait": "Pierre Ory est nommé préfet du Loiret en remplacement d'Hugues Moutouh",
-   "accroche": "Pierre Ory est nommé préfet du Loiret en remplacement d'Hugues Moutouh",
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 9,
-   "mediasDistincts": 6,
+   "medias": 8,
+   "mediasDistincts": 5,
    "sources": [
     "Libération",
-    "France 24",
     "Nice-Matin",
     "Sud Ouest",
     "Le Monde",
@@ -730,12 +656,6 @@
      "url": "https://www.liberation.fr/politique/procureur-au-siege-du-rn-gerald-darmanin-saisit-linspection-generale-de-la-justice-20261125_EU7CDIDAZFD6PPTT3ORXBFSSZQ/",
      "media": "Libération",
      "date": "2026-11-25T08:30:48.000Z"
-    },
-    {
-     "titre": "Suspicion de fuites vers le RN : Darmanin saisit l'Inspection générale de la Justice",
-     "url": "https://www.france24.com/fr/france/20261125-procureur-au-si%C3%A8ge-du-rn-darmanin-saisit-l-inspection-g%C3%A9n%C3%A9rale-de-la-justice",
-     "media": "France 24",
-     "date": "2026-11-25T08:21:25.000Z"
     },
     {
      "titre": "« On doit lever une ambiguïté » : que faisait un vice-procureur de Paris au siège du RN lors d’une perquisition ? Gérald Darmanin saisit l’Inspection générale de la Justice",
@@ -784,79 +704,83 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 5,
-   "mediasDistincts": 5,
+   "medias": 7,
+   "mediasDistincts": 4,
    "sources": [
-    "Le JDD",
-    "Libération",
-    "L'Obs",
-    "France 24",
-    "La Dépêche"
+    "EBRA",
+    "Sud Ouest",
+    "Nice-Matin",
+    "Europe 1"
    ],
-   "derniere": "2026-11-24T17:25:10.000Z",
+   "derniere": "2026-11-25T11:19:00.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
+    "personnes": [],
+    "partis": [
+     "RN"
     ],
-    "partis": [],
     "theme": "justice",
-    "vignette": null
+    "vignette": "justice"
    },
    "articles": [
     {
-     "titre": "Détournement de fonds publics : enquête ouverte au Havre, Edouard Philippe dénonce une «vendetta judiciaire»",
-     "url": "https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/",
-     "media": "Libération",
-     "date": "2026-11-24T15:57:12.000Z"
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "media": "Le Progrès",
+     "date": "2026-11-25T11:19:00.000Z"
     },
     {
-     "titre": "Enquête ouverte au Havre : Édouard Philippe dénonce une «vendetta judiciaire»",
-     "url": "https://www.lejdd.fr/politique/enquete-ouverte-au-havre-edouard-philippe-denonce-une-vendetta-judiciaire-189585",
-     "media": "Le JDD",
-     "date": "2026-11-24T17:25:10.000Z"
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.dna.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-25T11:19:00.000Z"
     },
     {
-     "titre": "Edouard Philippe dénonce une « vendetta » après une nouvelle enquête pour détournement de fonds publics",
-     "url": "https://www.nouvelobs.com/justice/20261124.OBS120407/edouard-philippe-denonce-une-vendetta-apres-une-nouvelle-enquete-pour-detournement-de-fonds-publics.html",
-     "media": "L'Obs",
-     "date": "2026-11-24T15:47:37.000Z"
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.ledauphine.com/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-25T11:19:00.000Z"
     },
     {
-     "titre": "Détournement de fonds de publics : une enquête vise l'agglomération du Havre d'Édouard Philippe",
-     "url": "https://www.france24.com/fr/france/20261124-edouard-philippe-vis%C3%A9-par-une-enqu%C3%AAte-pour-d%C3%A9tournement-de-fonds-publics-au-havre",
-     "media": "France 24",
-     "date": "2026-11-24T14:47:28.000Z"
+     "titre": "Justice. Soupçons de fuites vers le RN : Pierre Ory remplace Hugues Moutouh, officiellement démis de ses fonctions",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/25/soupcons-de-fuites-vers-le-rn-pierre-ory-remplace-hugues-moutouh-officiellement-demis-de-ses-fonctions",
+     "media": "L'Est républicain",
+     "date": "2026-11-25T11:19:00.000Z"
     },
     {
-     "titre": "Présidentielle 2027 : la justice ouvre une enquête pénale pour détournement de fonds publics ciblant l'agglomération du Havre présidée par Édouard Philippe",
-     "url": "https://www.ladepeche.fr/2026/11/24/presidentielle-2027-la-justice-ouvre-une-enquete-penale-pour-detournement-de-fonds-publics-ciblant-lagglomeration-du-havre-presidee-par-edouard-13668976.php",
-     "media": "La Dépêche",
-     "date": "2026-11-24T14:12:06.000Z"
+     "titre": "Enquête sur des fuites vers le RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
+     "url": "https://www.sudouest.fr/politique/enquete-sur-des-fuites-vers-le-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-31664792.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-25T11:16:51.000Z"
+    },
+    {
+     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
+     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
+     "media": "Nice-Matin",
+     "date": "2026-11-25T11:03:54.000Z"
+    },
+    {
+     "titre": "Enquête RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
+     "url": "https://www.europe1.fr/politique/enquete-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-1244659?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-25T11:02:21.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Enquête",
+    "titre": "Fonctions",
     "origine": "dossier"
    },
-   "fait": "Détournement de fonds publics : enquête ouverte au Havre",
-   "accroche": "Détournement de fonds publics : enquête ouverte au Havre",
-   "essentiel": "Détournement de fonds publics : enquête ouverte au Havre. Cinq médias en parlent : Libération, Le JDD, L'Obs, France 24 et La Dépêche.",
+   "fait": "Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
+   "accroche": "Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
    "rubrique": "Justice"
   },
   {
-   "medias": 5,
+   "medias": 4,
    "mediasDistincts": 4,
    "sources": [
     "Mediapart",
-    "France Médias Monde",
     "L'Obs",
-    "Nice-Matin"
+    "Nice-Matin",
+    "RFI"
    ],
    "derniere": "2026-11-25T07:13:06.000Z",
    "illustration": {
@@ -877,12 +801,6 @@
      "url": "https://www.mediapart.fr/journal/france/251126/un-proces-pour-nicolas-sarkozy-carla-bruni-et-michele-marchand-la-charge-des-juges-dans-l-affaire-de-la-fa",
      "media": "Mediapart",
      "date": "2026-11-25T07:13:06.000Z"
-    },
-    {
-     "titre": "Fausse rétractation de Takieddine : renvoi en procès de Nicolas Sarkozy et Carla Bruni",
-     "url": "https://www.france24.com/fr/france/20261124-fausse-r%C3%A9tractation-takieddine-renvoi-proc%C3%A8s-nicolas-sarkozy-carla-bruni",
-     "media": "France 24",
-     "date": "2026-11-24T14:53:55.000Z"
     },
     {
      "titre": "Affaire Takieddine : Nicolas Sarkozy face à un nouveau procès, cette fois aux côtés de Carla Bruni et Mimi Marchand",
@@ -985,63 +903,105 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Nice-Matin",
-    "Sud Ouest",
+    "BFMTV",
+    "RFI",
     "20 Minutes"
    ],
-   "derniere": "2026-11-25T11:10:30.000Z",
+   "derniere": "2026-11-25T12:48:03.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     },
-     {
-      "nom": "Gérald Darmanin",
-      "photo": "photos/personnalites/gerald-darmanin.jpg",
-      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
-      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
-     }
+    "personnes": [],
+    "partis": [
+     "RN"
     ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
+    "theme": "politique",
+    "vignette": null
    },
    "articles": [
     {
-     "titre": "Présidentielle 2027 : David Lisnard est « en rupture fondamentale avec ce qu’est la droite », dénonce Gérald Darmanin",
-     "url": "https://www.sudouest.fr/politique/gerald-darmanin/presidentielle-2027-david-lisnard-est-en-rupture-fondamentale-avec-ce-qu-est-la-droite-denonce-gerald-darmanin-31663988.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-25T10:52:00.000Z"
+     "titre": "Soupçons de fuites du ministère de l'Intérieur vers le RN: le préfet Hugues Moutouh officiellement démis de ses fonctions",
+     "url": "https://www.bfmtv.com/politique/soupcons-de-fuites-du-ministere-de-l-interieur-vers-le-rn-le-prefet-hugues-moutouh-officiellement-demis-de-ses-fonctions_AN-202611250520.html",
+     "media": "BFMTV",
+     "date": "2026-11-25T12:48:03.000Z"
     },
     {
-     "titre": "« En rupture fondamentale avec ce qu’est la droite » : le ministre Gérald Darmanin s’en prend à David Lisnard, fustigeant sa main tendue à l’extrême droite",
-     "url": "https://www.nicematin.com/societe/politique/en-rupture-fondamentale-avec-ce-qu-est-la-droite-le-ministre-gerald-darmanin-s-en-prend-a-david-lisnard-fustigeant-sa-main-tendue-a-l-extreme-droite-10768522",
-     "media": "Nice-Matin",
-     "date": "2026-11-25T11:10:30.000Z"
+     "titre": "Soupçons de fuites du ministère de l'Intérieur au profit du RN: le préfet Hugues Moutouh démis de ses fonctions",
+     "url": "https://www.rfi.fr/fr/france/20261125-soup%C3%A7ons-de-fuites-au-profit-du-rn-en-france-un-pr%C3%A9fet-d%C3%A9mis-de-ses-fonctions",
+     "media": "RFI",
+     "date": "2026-11-25T12:16:24.000Z"
     },
     {
-     "titre": "EN DIRECT Présidentielle 2027 : Lisnard est « en rupture fondamentale avec ce qu'est la droite », allume Darmanin…",
-     "url": "https://www.20minutes.fr/politique/4265545-20261125-direct-presidentielle-2027-edouard-philippe-propose-david-lisnard-debat-televise?at_medium=display&at_campaign=149",
+     "titre": "Soupçons de fuite au profit du RN : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
+     "url": "https://www.20minutes.fr/politique/4265628-20261125-soupcons-fuite-profit-rn-prefet-moutouh-officiellement-demis-fonctions-successeur-nomme?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
-     "date": "2026-11-25T04:53:33.000Z"
+     "date": "2026-11-25T11:21:14.000Z"
+    },
+    {
+     "titre": "Soupçons de fuites visant le RN: Pierre Ory est nommé préfet du Loiret en remplacement d'Hugues Moutouh",
+     "url": "https://www.bfmtv.com/politique/gouvernement/video-soupcons-de-fuites-visant-le-rn-pierre-ory-est-nomme-prefet-du-loiret-en-remplacement-d-hugues-moutouh_VN-202611250534.html",
+     "media": "BFMTV",
+     "date": "2026-11-25T11:21:12.000Z",
+     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "David Lisnard : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
+    "titre": "Fonctions",
+    "origine": "dossier"
    },
-   "rubrique": "Élysée 2027",
-   "contexte": [
+   "fait": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
+   "accroche": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
+   "essentiel": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé. Pierre Ory est nommé préfet du Loiret en remplacement d'Hugues Moutouh. Trois médias en parlent : BFMTV, RFI et 20 Minutes.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 3,
+   "sources": [
+    "Le JDD",
+    "Libération",
+    "L'Obs"
+   ],
+   "derniere": "2026-11-24T17:25:10.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "justice",
+    "vignette": null
+   },
+   "articles": [
     {
-     "type": "personnes",
-     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
+     "titre": "Détournement de fonds publics : enquête ouverte au Havre, Edouard Philippe dénonce une «vendetta judiciaire»",
+     "url": "https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/",
+     "media": "Libération",
+     "date": "2026-11-24T15:57:12.000Z"
+    },
+    {
+     "titre": "Enquête ouverte au Havre : Édouard Philippe dénonce une «vendetta judiciaire»",
+     "url": "https://www.lejdd.fr/politique/enquete-ouverte-au-havre-edouard-philippe-denonce-une-vendetta-judiciaire-189585",
+     "media": "Le JDD",
+     "date": "2026-11-24T17:25:10.000Z"
+    },
+    {
+     "titre": "Edouard Philippe dénonce une « vendetta » après une nouvelle enquête pour détournement de fonds publics",
+     "url": "https://www.nouvelobs.com/justice/20261124.OBS120407/edouard-philippe-denonce-une-vendetta-apres-une-nouvelle-enquete-pour-detournement-de-fonds-publics.html",
+     "media": "L'Obs",
+     "date": "2026-11-24T15:47:37.000Z"
     }
-   ]
+   ],
+   "titrePropre": {
+    "titre": "Enquête",
+    "origine": "dossier"
+   },
+   "fait": "Détournement de fonds publics : enquête ouverte au Havre",
+   "accroche": "Détournement de fonds publics : enquête ouverte au Havre",
+   "rubrique": "Justice"
   },
   {
    "medias": 3,
@@ -1145,11 +1105,11 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 6,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
-    "France Médias Monde"
+    "RFI"
    ],
    "derniere": "2026-11-24T19:45:00.000Z",
    "illustration": {
@@ -1188,12 +1148,6 @@
      "url": "https://www.rfi.fr/fr/france/20261124-mort-de-nahel-en-2023-en-appel-la-justice-fran%C3%A7aise-ordonne-un-proc%C3%A8s-pour-meurtre-%C3%A0-l-encontre-du-policier",
      "media": "RFI",
      "date": "2026-11-24T08:42:24.000Z"
-    },
-    {
-     "titre": "Mort de Nahel Merzouk : la justice ordonne un procès pour meurtre à l'encontre du policier",
-     "url": "https://www.france24.com/fr/france/20261124-mort-nahel-merzouk-justice-ordonne-proc%C3%A8s-pour-meurtre-policier",
-     "media": "France 24",
-     "date": "2026-11-24T08:27:33.000Z"
     }
    ],
    "titrePropre": {
@@ -1202,8 +1156,90 @@
    },
    "fait": "Mort de Nahel : la loi « permis de tuer » aurait-elle pu éviter au policier un procès pour meurtre ?",
    "accroche": "Mort de Nahel : la loi « permis de tuer » aurait-elle pu éviter au policier un procès pour meurtre ?",
-   "essentiel": "Mort de Nahel : la loi « permis de tuer » aurait-elle pu éviter au policier un procès pour meurtre ? La justice ordonne un procès pour meurtre à l'encontre du policier. Six médias en parlent.",
+   "essentiel": "Mort de Nahel : la loi « permis de tuer » aurait-elle pu éviter au policier un procès pour meurtre ? Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et RFI.",
    "rubrique": "Justice"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Sud Ouest",
+    "Europe 1"
+   ],
+   "derniere": "2026-11-25T12:57:35.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : l’organisation du second tour le 2 mai reste la meilleure option, assure le porte-parole du gouvernement",
+     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-l-organisation-du-second-tour-le-2-mai-reste-la-meilleure-option-assure-le-porte-parole-du-gouvernement-31665887.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-25T12:57:35.000Z"
+    },
+    {
+     "titre": "2027 : un second tour le 2 mai reste la meilleure option, selon le porte-parole du gouvernement",
+     "url": "https://www.europe1.fr/politique/2027-un-second-tour-le-2-mai-reste-la-meilleure-option-selon-le-porte-parole-du-gouvernement-1244701?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-25T12:43:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Reste la meilleure option",
+    "origine": "recoupement"
+   },
+   "fait": "L’organisation du second tour le 2 mai reste la meilleure option, assure le porte-parole du gouvernement",
+   "accroche": "L’organisation du second tour le 2 mai reste la meilleure option, assure le porte-parole du gouvernement",
+   "essentiel": "Pour la présidentielle 2027, l’organisation du second tour le 2 mai reste la meilleure option, assure le porte-parole du gouvernement. Deux médias en parlent : Sud Ouest et Europe 1.",
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Sud Ouest",
+    "20 Minutes"
+   ],
+   "derniere": "2026-11-25T12:51:34.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "David Lisnard, candidat à la présidentielle, annonce sa réélection à la tête de l'Association des maires de France",
+     "url": "https://www.sudouest.fr/politique/david-lisnard-candidat-a-la-presidentielle-annonce-sa-reelection-a-la-tete-de-l-association-des-maires-de-france-31666032.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-25T12:51:34.000Z"
+    },
+    {
+     "titre": "EN DIRECT Présidentielle 2027 : David Lisnard annonce sa réélection à la tête de l'Association des maires de France…",
+     "url": "https://www.20minutes.fr/politique/4265545-20261125-direct-presidentielle-2027-edouard-philippe-propose-david-lisnard-debat-televise?at_medium=display&at_campaign=149",
+     "media": "20 Minutes",
+     "date": "2026-11-25T04:53:33.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : annonces sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "fait": "David Lisnard annonce sa réélection à la tête de l'Association des maires de France",
+   "accroche": "David Lisnard annonce sa réélection à la tête de l'Association des maires de France",
+   "essentiel": "David Lisnard, candidat à la présidentielle, annonce sa réélection à la tête de l'Association des maires de France. Deux médias en parlent : Sud Ouest et 20 Minutes.",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1244,8 +1280,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "François",
-    "origine": "dossier"
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Élysée 2027",
    "contexte": [
@@ -1337,6 +1374,61 @@
     "origine": "recoupement"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Nice-Matin",
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-25T11:10:30.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     },
+     {
+      "nom": "Gérald Darmanin",
+      "photo": "photos/personnalites/gerald-darmanin.jpg",
+      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
+      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "« En rupture fondamentale avec ce qu’est la droite » : le ministre Gérald Darmanin s’en prend à David Lisnard, fustigeant sa main tendue à l’extrême droite",
+     "url": "https://www.nicematin.com/societe/politique/en-rupture-fondamentale-avec-ce-qu-est-la-droite-le-ministre-gerald-darmanin-s-en-prend-a-david-lisnard-fustigeant-sa-main-tendue-a-l-extreme-droite-10768522",
+     "media": "Nice-Matin",
+     "date": "2026-11-25T11:10:30.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027 : David Lisnard est « en rupture fondamentale avec ce qu’est la droite », dénonce Gérald Darmanin",
+     "url": "https://www.sudouest.fr/politique/gerald-darmanin/presidentielle-2027-david-lisnard-est-en-rupture-fondamentale-avec-ce-qu-est-la-droite-denonce-gerald-darmanin-31663988.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-25T10:52:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Rupture fondamentale",
+    "origine": "recoupement"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 2,
@@ -1460,66 +1552,6 @@
    "accroche": "L'Assemblée nationale adopte lors du premier examen du texte la loi proposée par le Gouvernement logement",
    "essentiel": "L'Assemblée nationale adopte lors du premier examen du texte la loi proposée par le Gouvernement logement. Deux médias en parlent : Europe 1 et Mediapart.",
    "rubrique": "Assemblée nationale"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Monde",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-24T19:56:50.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : Gabriel Attal presse Edouard Philippe de « proposer une autre modalité de départage », face à son refus de la primaire",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/24/presidentielle-2027-gabriel-attal-presse-edouard-philippe-de-proposer-une-autre-modalite-de-departage-face-a-son-refus-de-la-primaire_6814848_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-24T19:56:50.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027 : Gabriel Attal exhorte Édouard Philippe à trouver « une autre modalité de départage » s’il refuse la primaire",
-     "url": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2027-gabriel-attal-exhorte-edouard-philippe-a-trouver-une-autre-modalite-de-departage-s-il-refuse-la-primaire-31658475.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-24T19:49:54.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Autre modalité de départage",
-    "origine": "recoupement"
-   },
-   "fait": "Présidentielle 2027 : Gabriel Attal presse Edouard Philippe de, face à son refus de la primaire",
-   "accroche": "Présidentielle 2027 : Gabriel Attal presse Edouard Philippe de, face à son refus de la primaire",
-   "essentiel": "Pour la présidentielle 2027, Gabriel Attal presse Edouard Philippe de, face à son refus de la primaire. Deux médias en parlent : Le Monde et Sud Ouest.",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance · Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   },
   {
    "medias": 2,
@@ -2001,50 +2033,6 @@
    "medias": 2,
    "mediasDistincts": 2,
    "sources": [
-    "France 24",
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-22T15:54:26.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget : Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution",
-     "url": "https://www.france24.com/fr/france/20261122-budget-macron-confirme-qu-il-envisage-d-inscrire-une-r%C3%A8gle-d-or-dans-la-constitution",
-     "media": "France 24",
-     "date": "2026-11-22T15:54:26.000Z"
-    },
-    {
-     "titre": "Budget 2027: Emmanuel Macron réfléchirait à convoquer le Congrès pour instaurer une règle d’or dans la Constitution",
-     "url": "https://www.nicematin.com/economie/budget-2027-emmanuel-macron-reflechirait-a-convoquer-le-congres-pour-instaurer-une-regle-d-or-dans-la-constitution-10766298",
-     "media": "Nice-Matin",
-     "date": "2026-11-22T06:03:53.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Règle d or",
-    "origine": "recoupement"
-   },
-   "fait": "Emmanuel Macron réfléchirait à convoquer le Congrès pour instaurer une règle d’or dans la Constitution",
-   "accroche": "Emmanuel Macron réfléchirait à convoquer le Congrès pour instaurer une règle d’or dans la Constitution",
-   "essentiel": "Sur le budget 2027, Emmanuel Macron réfléchirait à convoquer le Congrès pour instaurer une règle d’or dans la Constitution. Macron confirme qu'il envisage d'inscrire une \"règle d'or\" dans la Constitution. Deux médias en parlent : France 24 et Nice-Matin.",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
     "RFI",
     "Nice-Matin"
    ],
@@ -2368,8 +2356,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "François",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Politique",
    "chiffre": {
@@ -2519,9 +2508,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Fonctions",
+    "origine": "dossier"
    },
    "rubrique": "Politique"
   },
@@ -2594,12 +2582,48 @@
    "rubrique": "Élysée 2027"
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "BFMTV"
    ],
-   "derniere": "2026-11-23T22:13:11.000Z",
+   "derniere": "2026-11-25T12:56:49.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Réélection à la tête de l'AMF: \"Pas un tremplin\" pour la présidentielle mais \"ça me renforce dans mes convictions\", estime David Lisnard",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-reelection-a-la-tete-de-l-amf-pas-un-tremplin-pour-la-presidentielle-mais-ca-me-renforce-dans-mes-convictions-estime-david-lisnard_VN-202611250593.html",
+     "media": "BFMTV",
+     "date": "2026-11-25T12:56:49.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-25T12:54:49.000Z",
    "illustration": {
     "personnes": [
      {
@@ -2615,25 +2639,17 @@
    },
    "articles": [
     {
-     "titre": "Industrie: la France va se doter de «stocks stratégiques» de minerais critiques",
-     "url": "https://www.rfi.fr/fr/france/20261123-industrie-la-france-va-se-doter-de-stocks-strat%C3%A9giques-de-minerais-critiques",
-     "media": "RFI",
-     "date": "2026-11-23T22:13:11.000Z"
-    },
-    {
-     "titre": "Terres rares : Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-     "url": "https://www.france24.com/fr/france/20261123-terres-rares-macron-annonce-france-doter-stocks-strat%C3%A9giques",
-     "media": "France 24",
-     "date": "2026-11-23T21:06:36.000Z"
+     "titre": "Colère des agriculteurs : Emmanuel Macron pose ses lignes rouges sur la PAC et fixe l’échéance de décembre",
+     "url": "https://www.ladepeche.fr/2026/11/25/colere-des-agriculteurs-emmanuel-macron-pose-ses-lignes-rouges-sur-la-pac-et-fixe-lecheance-de-decembre-13670693.php",
+     "media": "La Dépêche",
+     "date": "2026-11-25T12:54:49.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "France va se doter",
-    "origine": "recoupement"
+    "titre": "Emmanuel Macron : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
-   "fait": "Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-   "accroche": "Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\"",
-   "essentiel": "Terres rares : Emmanuel Macron annonce que la France va se doter de \"stocks stratégiques\". Deux médias en parlent : RFI et France 24.",
    "rubrique": "Politique"
   },
   {
@@ -2670,25 +2686,32 @@
    "sources": [
     "BFMTV"
    ],
-   "derniere": "2026-11-25T12:48:03.000Z",
+   "derniere": "2026-11-25T12:53:46.000Z",
    "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
     ],
+    "partis": [],
     "theme": "politique",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "Soupçons de fuites du ministère de l'Intérieur vers le RN: le préfet Hugues Moutouh officiellement démis de ses fonctions",
-     "url": "https://www.bfmtv.com/politique/soupcons-de-fuites-du-ministere-de-l-interieur-vers-le-rn-le-prefet-hugues-moutouh-officiellement-demis-de-ses-fonctions_AN-202611250520.html",
+     "titre": "David Lisnard réélu à la tête de l'AMF: \"C'est le fruit de la mobilisation d’une France du terrain\", assure-t-il",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-david-lisnard-reelu-a-la-tete-de-l-amf-c-est-le-fruit-de-la-mobilisation-d-une-france-du-terrain-assure-t-il_VN-202611250590.html",
      "media": "BFMTV",
-     "date": "2026-11-25T12:48:03.000Z"
+     "date": "2026-11-25T12:53:46.000Z",
+     "video": true
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
+    "titre": "David Lisnard : ce qu'il faut savoir sur l'aménagement du territoire",
     "origine": "regles",
     "generique": true
    },
@@ -2698,9 +2721,38 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-25T12:50:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Décès de l’ancien député de la Charente-Maritime Raphaël Gérard : un dernier adieu poignant, en présence de centaines de personnes, a eu lieu dans sa commune de Lonzac",
+     "url": "https://www.sudouest.fr/charente-maritime/jonzac/deces-de-l-ancien-depute-de-la-charente-maritime-raphael-gerard-un-dernier-adieu-poignant-en-presence-de-centaines-de-personnes-a-eu-lieu-dans-sa-commune-de-lonzac-31662497.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-25T12:50:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles"
+   },
+   "fait": "Décès de l’ancien député de la Charente-Maritime Raphaël Gérard",
+   "accroche": "Décès de l’ancien député de la Charente-Maritime Raphaël Gérard",
+   "rubrique": "Assemblée nationale"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Le Monde"
    ],
-   "derniere": "2026-11-25T12:44:02.000Z",
+   "derniere": "2026-11-25T12:43:58.000Z",
    "illustration": {
     "personnes": [
      {
@@ -2720,7 +2772,7 @@
      "titre": "David Lisnard, candidat à l’élection présidentielle, réélu à la tête de l’Association des maires de France",
      "url": "https://www.lemonde.fr/politique/article/2026/11/25/david-lisnard-candidat-a-l-election-presidentielle-reelu-a-la-tete-de-l-association-des-maires-de-france_6815094_823448.html",
      "media": "Le Monde",
-     "date": "2026-11-25T12:44:02.000Z"
+     "date": "2026-11-25T12:43:58.000Z"
     }
    ],
    "titrePropre": {
@@ -2729,107 +2781,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T12:43:47.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Suspicion de fuites vers le RN : le prefet Hugues Moutouh démis de ses fonctions",
-     "url": "https://www.france24.com/fr/france/20261125-suspicion-de-fuites-vers-le-rn-le-prefet-hugues-moutouh-d%C3%A9mis-de-ses-fonctions",
-     "media": "France 24",
-     "date": "2026-11-25T12:43:47.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Rassemblement national : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Europe 1"
-   ],
-   "derniere": "2026-11-25T12:43:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "2027 : un second tour le 2 mai reste la meilleure option, selon le porte-parole du gouvernement",
-     "url": "https://www.europe1.fr/politique/2027-un-second-tour-le-2-mai-reste-la-meilleure-option-selon-le-porte-parole-du-gouvernement-1244701?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "media": "Europe 1",
-     "date": "2026-11-25T12:43:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Un second tour le 2 mai reste la meilleure option, selon le porte-parole du gouvernement",
-   "accroche": "Un second tour le 2 mai reste la meilleure option, selon le porte-parole du gouvernement",
-   "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T12:42:22.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "David Lisnard annonce sa réélection à la tête de l'Association des maires de France",
-     "url": "https://www.france24.com/fr/france/20261125-france-david-lisnard-annonce-sa-reelection-a-la-tete-de-l-association-des-maires-de-france",
-     "media": "France 24",
-     "date": "2026-11-25T12:42:22.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "David Lisnard : annonces sur le social et l'emploi",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -3116,8 +3067,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "François",
-    "origine": "dossier"
+    "titre": "François Hollande (Parti socialiste) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Raphaël Glucksmann déclare : « Chacun son rythme, nous on est en campagne »",
    "accroche": "Raphaël Glucksmann déclare : « Chacun son rythme, nous on est en campagne »",
@@ -3323,66 +3275,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T12:18:52.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
-   },
-   "articles": [
-    {
-     "titre": "France : enquête dans les écoles de police pour propos racistes, salut nazi et agression sexuelle",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261125-france-enqu%C3%AAte-dans-les-%C3%A9coles-de-police-pour-propos-racistes-salut-nazi-et-agression-sexuelle",
-     "media": "France 24",
-     "date": "2026-11-25T12:18:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Enquête dans les écoles de police pour propos racistes, salut nazi et agression sexuelle",
-   "accroche": "Enquête dans les écoles de police pour propos racistes, salut nazi et agression sexuelle",
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T12:13:23.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences conjugales : l'extrême difficulté de quitter un proche violent",
-     "url": "https://www.france24.com/fr/vid%C3%A9o/20261125-violences-faites-aux-femmes-l-extr%C3%AAme-difficult%C3%A9-de-quitter-un-proche-violent",
-     "media": "France 24",
-     "date": "2026-11-25T12:13:23.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "L'extrême difficulté de quitter un proche violent",
-   "accroche": "L'extrême difficulté de quitter un proche violent",
-   "rubrique": "Sécurité"
   },
   {
    "medias": 1,
@@ -3648,9 +3540,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Fonctions",
+    "origine": "dossier"
    },
    "rubrique": "Gouvernement"
   },
@@ -4559,36 +4450,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T10:27:49.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences faites aux femmes : 129 femmes tuées par un proche chaque jour dans le monde en 2025",
-     "url": "https://www.france24.com/fr/france/20261125-violences-vss-129-femmes-tu%C3%A9es-proche-chaque-jour-monde-2025",
-     "media": "France 24",
-     "date": "2026-11-25T10:27:49.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Sécurité : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "129 femmes tuées par un proche chaque jour dans le monde en 2025",
-   "accroche": "129 femmes tuées par un proche chaque jour dans le monde en 2025",
-   "rubrique": "Sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-25T10:26:16.000Z",
@@ -4627,34 +4488,6 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "France 24"
-   ],
-   "derniere": "2026-11-25T10:24:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"Aux combattantes inconnues assassinées par le patriarcat\" : un hommage aux victimes des féminicides",
-     "url": "https://www.france24.com/fr/france/20261125-aux-combattantes-inconnues-assassin%C3%A9es-par-le-patriarcat-un-hommage-aux-victimes-des-f%C3%A9minicides",
-     "media": "France 24",
-     "date": "2026-11-25T10:24:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -5318,8 +5151,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "François",
-    "origine": "dossier"
+    "titre": "François Bayrou : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Au tour de Jean-Noël Barrot de prôner le «ni-ni» entre Jean-Luc Mélenchon et Marine Le Pen",
    "accroche": "Au tour de Jean-Noël Barrot de prôner le «ni-ni» entre Jean-Luc Mélenchon et Marine Le Pen",
@@ -5475,6 +5309,163 @@
     "generique": true
    },
    "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "RFI"
+   ],
+   "derniere": "2026-11-25T07:54:21.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Raphaël Glucksmann",
+      "photo": "photos/personnalites/raphael-glucksmann.jpg",
+      "photoHd": "photos/personnalites/hd/raphael-glucksmann.jpg",
+      "parti": "PP",
+      "credit": "Librairie Mollat, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Épisode 2: Raphaël Glucksmann",
+     "url": "https://www.rfi.fr/fr/podcasts/en-campagne-avec/20261125-%C3%A9pisode-2-rapha%C3%ABl-glucksmann",
+     "media": "RFI",
+     "date": "2026-11-25T07:54:21.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Raphaël Glucksmann : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-25T07:46:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Aurore Bergé",
+      "photo": "photos/personnalites/aurore-berge.jpg",
+      "photoHd": "photos/personnalites/hd/aurore-berge.jpg",
+      "credit": "HUGUES DE BEAUCHESNE, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "«On se comporte comme des enfants gâtés» : Aurore Bergé réaffirme qu'une primaire de la droite est indispensable",
+     "url": "https://www.europe1.fr/politique/on-se-comporte-comme-des-enfants-gates-aurore-berge-reaffirme-quune-primaire-de-la-droite-est-indispensable-1244380?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-25T07:46:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Primaire : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Aurore Bergé réaffirme qu'une primaire de la droite est indispensable",
+   "accroche": "Aurore Bergé réaffirme qu'une primaire de la droite est indispensable",
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Aurore Bergé : ministre déléguée chargée de l’égalité entre les femmes et les hommes et de la lutte contre les discriminations",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-25T07:39:32.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gérald Darmanin",
+      "photo": "photos/personnalites/gerald-darmanin.jpg",
+      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
+      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gérald Darmanin",
+     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
+     "media": "BFMTV",
+     "date": "2026-11-25T07:39:32.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Gouvernement",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-25T07:37:35.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Aurore Bergé",
+      "photo": "photos/personnalites/aurore-berge.jpg",
+      "photoHd": "photos/personnalites/hd/aurore-berge.jpg",
+      "credit": "HUGUES DE BEAUCHESNE, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "securite",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "«Le rapport à la violence progresse dans la société notamment chez les jeunes», estime Aurore Bergé",
+     "url": "https://www.europe1.fr/politique/le-rapport-a-la-violence-progresse-dans-la-societe-notamment-chez-les-jeunes-estime-aurore-berge-1244383?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-25T07:37:35.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Sécurité"
   }
  ]
 }
