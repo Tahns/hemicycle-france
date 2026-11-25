@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-25T02:05:29.410Z",
+ "lastUpdated": "2026-11-25T03:40:44.144Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -159,6 +159,7 @@
     "primaire"
    ],
    "medias": [
+    "RFI",
     "BFMTV",
     "Le Monde",
     "La Dépêche",
@@ -177,12 +178,12 @@
     "Public Sénat",
     "Libération",
     "L'Obs",
-    "RFI",
     "Ouest-France",
     "Nice-Matin"
    ],
    "mediasDistincts": 16,
    "sources": [
+    "France Médias Monde",
     "BFMTV",
     "Le Monde",
     "La Dépêche",
@@ -193,16 +194,21 @@
     "Le Figaro",
     "Valeurs actuelles",
     "L'Express",
-    "France Médias Monde",
     "Public Sénat",
     "Libération",
     "L'Obs",
     "Ouest-France",
     "Nice-Matin"
    ],
-   "nb": 100,
-   "derniere": "2026-11-24T23:00:27.000Z",
+   "nb": 101,
+   "derniere": "2026-11-25T03:37:46.000Z",
    "articles": [
+    {
+     "media": "RFI",
+     "titre": "Présidentielle 2027: Édouard Philippe marque ses différences avec David Lisnard",
+     "url": "https://www.rfi.fr/fr/france/20261125-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-marque-ses-diff%C3%A9rences-avec-david-lisnard",
+     "date": "2026-11-25T03:37:46.000Z"
+    },
     {
      "media": "BFMTV",
      "titre": "Présidentielle: Édouard Philippe se dit ouvert à un débat avec David Lisnard, mais s'oppose toujours à une primaire de la droite et du centre",
@@ -310,12 +316,6 @@
      "titre": "Présidentielle 2027 : « La gauche doit renouer avec son ambition décentralisatrice »",
      "url": "https://www.nouvelobs.com/opinions/20261124.OBS120406/presidentielle-2027-la-gauche-doit-renouer-avec-son-ambition-decentralisatrice.html",
      "date": "2026-11-24T15:00:15.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Présidentielle 2027: le Congrès des maires de France, marché aux parrainages des candidats",
-     "url": "https://www.rfi.fr/fr/france/20261124-pr%C3%A9sidentielle-2027-le-congr%C3%A8s-des-maires-de-france-march%C3%A9-aux-parrainages-des-candidats",
-     "date": "2026-11-24T14:53:36.000Z"
     },
     {
      "media": "Ouest-France",
@@ -2343,40 +2343,54 @@
    ]
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "RFI"
    ],
-   "derniere": "2026-11-21T11:55:56.000Z",
+   "derniere": "2026-11-25T03:37:46.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Édouard Philippe",
+      "photo": "photos/personnalites/edouard-philippe.jpg",
+      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
+      "parti": "HOR",
+      "credit": "Wasasaq8, CC0, Wikimedia Commons"
+     },
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "France: un acte VI de la mobilisation sous l'impulsion des syndicats et des «gilets jaunes»",
-     "url": "https://www.rfi.fr/fr/france/20261121-mobilisation-en-france-un-acte-vi-sous-l-impulsion-des-syndicats-et-des-gilets-jaunes-qui-f%C3%AAtent-leurs-8-ans",
+     "titre": "Présidentielle 2027: Édouard Philippe marque ses différences avec David Lisnard",
+     "url": "https://www.rfi.fr/fr/france/20261125-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-marque-ses-diff%C3%A9rences-avec-david-lisnard",
      "media": "RFI",
-     "date": "2026-11-21T11:55:56.000Z"
-    },
-    {
-     "titre": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
-     "url": "https://www.france24.com/fr/france/20261121-en-direct-acte-vi-de-la-mobilisation-pour-la-jeunesse-et-contre-la-vie-ch%C3%A8re",
-     "media": "France 24",
-     "date": "2026-11-21T08:23:49.000Z"
+     "date": "2026-11-25T03:37:46.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Gilets jaunes",
-    "origine": "recoupement"
+    "titre": "Édouard Philippe : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
    },
-   "accroche": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
-   "essentiel": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation. Deux médias en parlent : RFI et France 24.",
-   "fait": "Syndicats, jeunesse et gilets jaunes un peu moins mobilisés pour le sixième samedi de manifestation",
-   "rubrique": "Politique"
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Édouard Philippe : président d'Horizons",
+     "source": "Wikipédia (infobox du parti)"
+    }
+   ]
   },
   {
    "medias": 1,
