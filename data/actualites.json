@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-26T16:10:40.847Z",
+ "lastUpdated": "2026-11-26T16:15:50.190Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,12 +80,12 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "Le Dauphiné libéré",
    "site": "https://www.ledauphine.com/",
-   "lu": true
+   "lu": false
   },
   {
    "nom": "L'Est républicain",
@@ -154,17 +154,16 @@
    "titre": "Présidentielle",
    "motifs": [
     "présidentielle",
-    "candidat",
-    "réélu",
-    "raphaël"
+    "candidats",
+    "association",
+    "parrainages"
    ],
    "medias": [
+    "Le Figaro",
     "L'Express",
     "La Dépêche",
     "Le JDD",
     "BFMTV",
-    "Le Figaro",
-    "Le Dauphiné libéré",
     "Valeurs actuelles",
     "France 24",
     "Libération",
@@ -174,7 +173,6 @@
     "Europe 1",
     "Sud Ouest",
     "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Le Monde",
     "20 Minutes",
@@ -183,26 +181,32 @@
    ],
    "mediasDistincts": 16,
    "sources": [
+    "Le Figaro",
     "L'Express",
     "La Dépêche",
     "Groupe Bolloré",
     "BFMTV",
-    "Le Figaro",
-    "EBRA",
     "Valeurs actuelles",
     "France Médias Monde",
     "Libération",
     "L'Humanité",
     "Nice-Matin",
     "Sud Ouest",
+    "EBRA",
     "Le Monde",
     "20 Minutes",
     "Ouest-France",
     "Public Sénat"
    ],
-   "nb": 98,
-   "derniere": "2026-11-26T16:00:00.000Z",
+   "nb": 83,
+   "derniere": "2026-11-26T16:10:33.000Z",
    "articles": [
+    {
+     "media": "Le Figaro",
+     "titre": "«Fermer le robinet», référendum, avoirs russes… Ce que proposent les candidats à la présidentielle sur la guerre en Ukraine",
+     "url": "https://www.lefigaro.fr/politique/fermer-le-robinet-referendum-avoirs-russes-ce-que-proposent-les-candidats-a-la-presidentielle-sur-la-guerre-en-ukraine-20261126",
+     "date": "2026-11-26T16:10:33.000Z"
+    },
     {
      "media": "L'Express",
      "titre": "Marine Le Pen, Jean-Luc Mélenchon... et les pro-Kremlin : notre baromètre de la guerre informationnelle avant la présidentielle",
@@ -227,18 +231,6 @@
      "url": "https://www.bfmtv.com/politique/video-parrainages-des-candidats-a-la-presidentielle-le-systeme-des-parrainages-aujourd-hui-il-fait-reposer-une-pression-excessive-sur-les-maires-assure-david-lisnard-president-de-l-amf-et-candidat-a-la-presidentielle_VN-202611260751.html",
      "date": "2026-11-26T15:54:24.000Z",
      "video": true
-    },
-    {
-     "media": "Le Figaro",
-     "titre": "«Fermer le robinet», référendum, avoirs russes… Ce que proposent les candidats à la présidentielle sur la guerre en Ukraine",
-     "url": "https://www.lefigaro.fr/politique/fermer-le-robinet-referendum-avoirs-russes-ce-que-proposent-les-candidats-a-la-presidentielle-sur-la-guerre-en-ukraine-20261126",
-     "date": "2026-11-26T15:44:10.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Présidentielle. « Il nous faut un champion » : nouveau porte-parole de Gabriel Attal, le maire de Montélimar plaide pour une primaire de la droite et du centre",
-     "url": "https://www.ledauphine.com/elections/2026/11/26/il-nous-faut-un-champion-nouveau-porte-parole-de-gabriel-attal-le-maire-de-montelimar-plaide-pour-une-primaire-de-la-droite-et-du-centre",
-     "date": "2026-11-26T15:36:00.000Z"
     },
     {
      "media": "Valeurs actuelles",
@@ -295,12 +287,6 @@
      "date": "2026-11-26T12:17:00.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Présidentielle 2027. « La guerre en Ukraine est notre guerre » : Raphaël Glucksmann répond à Teddy Riner",
-     "url": "https://www.dna.fr/elections/2026/11/26/la-guerre-en-ukraine-est-notre-guerre-repond-glucksmann-a-riner",
-     "date": "2026-11-26T12:17:00.000Z"
-    },
-    {
      "media": "L'Est républicain",
      "titre": "Présidentielle 2027. « La guerre en Ukraine est notre guerre » : Raphaël Glucksmann répond à Teddy Riner",
      "url": "https://www.estrepublicain.fr/elections/2026/11/26/la-guerre-en-ukraine-est-notre-guerre-repond-glucksmann-a-riner",
@@ -342,6 +328,7 @@
     "éléments"
    ],
    "medias": [
+    "Le JDD",
     "France 24",
     "BFMTV",
     "L'Humanité",
@@ -355,8 +342,6 @@
     "Nice-Matin",
     "RFI",
     "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "Le Dauphiné libéré",
     "L'Est républicain",
     "20 Minutes",
     "Sud Ouest",
@@ -364,10 +349,10 @@
    ],
    "mediasDistincts": 15,
    "sources": [
+    "Groupe Bolloré",
     "France Médias Monde",
     "BFMTV",
     "L'Humanité",
-    "Europe 1",
     "La Dépêche",
     "Le Monde",
     "Libération",
@@ -380,9 +365,15 @@
     "Sud Ouest",
     "Mediapart"
    ],
-   "nb": 36,
-   "derniere": "2026-11-26T15:25:11.000Z",
+   "nb": 34,
+   "derniere": "2026-11-26T16:11:03.000Z",
    "articles": [
+    {
+     "media": "Le JDD",
+     "titre": "Accusations d'antisémitisme : Alloncle dénonce un «acharnement médiatique» contre Bardella",
+     "url": "https://www.lejdd.fr/politique/accusations-dantisemitisme-alloncle-denonce-un-acharnement-mediatique-contre-bardella-189765",
+     "date": "2026-11-26T16:11:03.000Z"
+    },
     {
      "media": "France 24",
      "titre": "Propos antisémites : Bardella tente se dit victime de \"persécution\" par \"certains médias\"",
@@ -463,18 +454,6 @@
      "date": "2026-11-26T06:37:00.000Z"
     },
     {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.dna.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
      "media": "L'Est républicain",
      "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
      "url": "https://www.estrepublicain.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
@@ -501,130 +480,131 @@
    ]
   },
   {
-   "id": "budget",
-   "titre": "Budget",
+   "id": "maires",
+   "titre": "Maires",
    "motifs": [
-    "budget",
-    "sébastien",
-    "parler",
-    "accord"
+    "maires",
+    "réélu",
+    "congrès",
+    "énergie"
    ],
    "medias": [
-    "Public Sénat",
-    "BFMTV",
-    "L'Humanité",
-    "Le JDD",
-    "RFI",
-    "Le Dauphiné libéré",
-    "Sud Ouest",
     "Le Monde",
-    "20 Minutes",
+    "BFMTV",
+    "Valeurs actuelles",
+    "Public Sénat",
     "Libération",
-    "Europe 1",
-    "Le Progrès",
-    "Dernières Nouvelles d'Alsace",
-    "L'Est républicain"
-   ],
-   "mediasDistincts": 10,
-   "sources": [
-    "Public Sénat",
-    "BFMTV",
     "L'Humanité",
-    "Groupe Bolloré",
-    "RFI",
-    "EBRA",
+    "L'Est républicain",
     "Sud Ouest",
-    "Le Monde",
+    "Nice-Matin",
+    "RFI",
     "20 Minutes",
-    "Libération"
+    "Le JDD",
+    "France 24"
    ],
-   "nb": 54,
-   "derniere": "2026-11-26T16:07:34.000Z",
+   "mediasDistincts": 12,
+   "sources": [
+    "Le Monde",
+    "BFMTV",
+    "Valeurs actuelles",
+    "Public Sénat",
+    "Libération",
+    "L'Humanité",
+    "L'Est républicain",
+    "Sud Ouest",
+    "Nice-Matin",
+    "France Médias Monde",
+    "20 Minutes",
+    "Le JDD"
+   ],
+   "nb": 49,
+   "derniere": "2026-11-26T16:15:01.000Z",
    "articles": [
     {
-     "media": "Public Sénat",
-     "titre": "Budget 2027 : le Sénat vote un crédit d’impôt pour inciter les agriculteurs à préserver les haies",
-     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-le-senat-vote-un-credit-dimpot-pour-inciter-les-agriculteurs-a-preserver-les-haies",
-     "date": "2026-11-26T16:07:34.000Z"
+     "media": "Le Monde",
+     "titre": "Rénovation énergétique : le gouvernement inflexible face aux maires inquiets des coupes budgétaires",
+     "url": "https://www.lemonde.fr/planete/article/2026/11/26/renovation-energetique-le-gouvernement-inflexible-face-aux-maires-inquiets-des-coupes-budgetaires_6815563_3244.html",
+     "date": "2026-11-26T16:15:01.000Z"
     },
     {
      "media": "BFMTV",
-     "titre": "\"Simplifier, c'est compliqué\": Sébastien Lecornu dénonce le fait qu'\"il y a toujours une bonne raison pour ne pas le faire\"",
-     "url": "https://www.bfmtv.com/politique/video-simplifier-c-est-complique-sebastien-lecornu-denonce-le-fait-qu-il-y-a-toujours-une-bonne-raison-pour-ne-pas-le-faire_VN-202611260760.html",
-     "date": "2026-11-26T16:03:09.000Z",
+     "titre": "DIRECT. Débat au congrès des maires: Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
+     "date": "2026-11-26T16:11:12.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Au congrès des maires, Sébastien Lecornu imite Jacques Chirac",
+     "url": "https://www.bfmtv.com/politique/video-au-congres-des-maires-sebastien-lecornu-imite-jacques-chirac_VN-202611260764.html",
+     "date": "2026-11-26T16:08:30.000Z",
      "video": true
     },
     {
-     "media": "L'Humanité",
-     "titre": "Sommet européen : pourquoi la réunion des Vingt-Sept sur le budget s’annonce particulièrement tendue ?",
-     "url": "https://www.humanite.fr/monde/budget/sommet-europeen-pourquoi-la-reunion-des-vingt-sept-sur-le-budget-sannonce-particulierement-tendue",
-     "date": "2026-11-26T15:56:05.000Z"
+     "media": "Valeurs actuelles",
+     "titre": "Logement social de 100 m2 : le maire LFI de La Courneuve Aly Diouara relogé par une adjointe de Bally Bagayoko",
+     "url": "https://www.valeursactuelles.com/politique/logement-social-de-100-m2-le-maire-lfi-de-la-courneuve-aly-diouara-reloge-par-une-adjointe-de-bally-bagayoko",
+     "date": "2026-11-26T16:00:08.000Z"
     },
     {
-     "media": "Le JDD",
-     "titre": "Déplacements de Philippe et de Retailleau, S&P Global Ratings note la dette française... Les 4 infos dont vous allez entendre parler demain",
-     "url": "https://www.lejdd.fr/politique/deplacements-de-philippe-et-de-retailleau-sp-global-ratings-note-la-dette-francaise-les-4-infos-dont-vous-allez-entendre-parler-demain-189597",
-     "date": "2026-11-26T15:20:05.000Z"
-    },
-    {
-     "media": "RFI",
-     "titre": "Présidentielle 2027: «Une primaire pour éliminer» n'est «pas un accord de gouvernement», affirme Hervé Morin",
-     "url": "https://www.rfi.fr/fr/podcasts/invit%C3%A9-politique/20261126-pr%C3%A9sidentielle-2027-une-primaire-pour-%C3%A9liminer-n-est-pas-un-accord-de-gouvernement-affirme-herv%C3%A9-morin",
-     "date": "2026-11-26T14:28:57.000Z"
-    },
-    {
-     "media": "Le Dauphiné libéré",
-     "titre": "Jarcieu. Budget participatif : quatre projets soumis au vote des habitants",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/budget-participatif-quatre-projets-soumis-au-vote-des-habitants",
-     "date": "2026-11-26T13:33:42.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Budget 2027 : Lecornu privilégie l’option du 49.3 face à l’impasse parlementaire",
-     "url": "https://www.sudouest.fr/politique/sebastien-lecornu/budget-2027-lecornu-privilegie-l-option-du-49-3-face-a-l-impasse-parlementaire-31680305.php",
-     "date": "2026-11-26T12:37:00.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "EN DIRECT, congrès des maires de France : « On nous a mis budgétairement et juridiquement sous perfusion », affirme David Lisnard",
-     "url": "https://www.lemonde.fr/politique/live/2026/11/26/en-direct-congres-des-maires-de-france-david-lisnard-est-accuse-de-compromission-avec-l-extreme-droite-par-gerald-darmanin_6815062_823448.html",
-     "date": "2026-11-26T12:01:40.000Z"
-    },
-    {
-     "media": "20 Minutes",
-     "titre": "Budget de la Sécu : Députés et sénateurs échouent à trouver un accord, le texte retourne à l’Assemblée",
-     "url": "https://www.20minutes.fr/economie/4265884-20261126-budget-secu-deputes-senateurs-echouent-trouver-accord-texte-retourne-assemblee?at_medium=display&at_campaign=149",
-     "date": "2026-11-26T10:39:42.000Z"
+     "media": "Public Sénat",
+     "titre": "Réunion du Congrès pour la règle d’or : « Aucune décision n’est prise », insiste Sébastien Lecornu",
+     "url": "https://www.publicsenat.fr/actualites/politique/reunion-du-congres-pour-la-regle-dor-aucune-decision-nest-prise-insiste-sebastien-lecornu",
+     "date": "2026-11-26T15:35:49.000Z"
     },
     {
      "media": "Libération",
-     "titre": "Appel au retrait de la vie politique ou soutien renouvelé… Les réactions politiques aux nouveaux éléments sur les écrits antisémites prêtés à Jordan Bardella",
-     "url": "https://www.liberation.fr/politique/appel-au-retrait-de-la-vie-politique-ou-soutien-renouvele-les-reactions-politiques-aux-nouveaux-elements-sur-les-ecrits-antisemites-pretes-a-jordan-bardella-20261126_GNINQDYAFJBNBOQHAEG2EYGPXE/",
-     "date": "2026-11-26T10:24:14.000Z"
+     "titre": "Coco sur les pas des candidats au Salon des maires",
+     "url": "https://www.liberation.fr/politique/elections/coco-sur-les-pas-des-candidats-au-salon-des-maires-20261126_U77ULU3LWJA6NPA7BMPCHSFKWU/",
+     "date": "2026-11-26T14:56:21.000Z"
     },
     {
-     "media": "Europe 1",
-     "titre": "Budget de la Sécu : députés et sénateurs échouent à trouver un accord",
-     "url": "https://www.europe1.fr/politique/budget-de-la-secu-deputes-et-senateurs-echouent-a-trouver-un-accord-1245253?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-26T08:44:42.000Z"
-    },
-    {
-     "media": "Le Progrès",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.leprogres.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
-    },
-    {
-     "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.dna.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
+     "media": "L'Humanité",
+     "titre": "« Nous resterons les garants de la devise républicaine » : les maires de l’association Ville & Banlieue mènent la bataille contre le RN",
+     "url": "https://www.humanite.fr/politique/attentat-raciste-de-trappes/nous-resterons-les-garants-de-la-devise-republicaine-les-maires-de-lassociation-ville-banlieue-menent-la-bataille-contre-le-rn",
+     "date": "2026-11-26T12:49:50.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
+     "titre": "Pontarlier. Taxation des unités de valorisation énergétique : l’inquiétude de Préval Haut-Doubs",
+     "url": "https://www.estrepublicain.fr/environnement/2026/11/26/taxation-des-unites-de-valorisation-energetique-l-inquietude-de-preval-haut-doubs",
+     "date": "2026-11-26T12:14:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : « Beaucoup de maires ont peur », le RN n’a toujours pas ses 500 promesses de parrainages pour Marine Le Pen",
+     "url": "https://www.sudouest.fr/politique/marine-le-pen/presidentielle-2027-beaucoup-de-maires-ont-peur-le-rn-n-a-toujours-pas-ses-500-parrainages-pour-marine-le-pen-31679270.php",
+     "date": "2026-11-26T10:49:15.000Z"
+    },
+    {
+     "media": "Nice-Matin",
+     "titre": "Des tags racistes découverts sur la route menant à ces villages de l’arrière-pays niçois : les maires condamnent avec fermeté",
+     "url": "https://www.nicematin.com/societe/des-tags-racistes-decouverts-sur-la-route-menant-a-ces-villages-de-l-arriere-pays-nicois-les-maires-condamnent-avec-fermete-10768588",
+     "date": "2026-11-26T07:30:03.000Z"
+    },
+    {
+     "media": "RFI",
+     "titre": "Présidentielle 2027: au salon des maires de France, Teddy Riner s'emmêle les pinceaux sur la guerre en Ukraine",
+     "url": "https://www.rfi.fr/fr/france/20261126-pr%C3%A9sidentielle-2027-au-salon-des-maires-de-france-teddy-riner-s-emm%C3%AAle-les-pinceaux-sur-la-guerre-en-ukraine",
+     "date": "2026-11-26T06:34:50.000Z"
+    },
+    {
+     "media": "20 Minutes",
+     "titre": "Présidentielle 2027 : « Je suis fan et je vais le parrainer »… Comment les candidats tentent de séduire les maires",
+     "url": "https://www.20minutes.fr/politique/4265748-20261125-presidentielle-2027-fan-vais-parrainer-comment-candidats-tentent-seduire-maires?at_medium=display&at_campaign=149",
+     "date": "2026-11-25T19:13:17.000Z"
+    },
+    {
+     "media": "Le JDD",
+     "titre": "Lecornu et les maires, Zemmour sur CNews, Mélenchon à Berlin... Les 4 infos dont vous allez entendre parler demain",
+     "url": "https://www.lejdd.fr/politique/lecornu-et-les-maires-zemmour-sur-cnews-melenchon-a-berlin-les-4-infos-dont-vous-allez-entendre-parler-demain-189570",
+     "date": "2026-11-25T16:09:20.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "David Lisnard à la tête des Maires de France : \"un record de participation depuis 1989\"",
+     "url": "https://www.france24.com/fr/vid%C3%A9o/20261125-david-lisnard-%C3%A0-la-t%C3%AAte-des-maires-de-france-un-record-de-participation-depuis-1989",
+     "date": "2026-11-25T15:15:51.000Z"
     }
    ]
   }
@@ -703,7 +683,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 7,
+   "medias": 5,
    "mediasDistincts": 4,
    "sources": [
     "Valeurs actuelles",
@@ -745,18 +725,6 @@
     },
     {
      "titre": "Télévision. CNews : Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois",
-     "url": "https://www.dna.fr/societe/2026/11/26/cnews-reporters-sans-frontieres-saisit-l-arcom-et-demande-la-suspension-de-la-chaine-pendant-un-mois",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T05:42:00.000Z"
-    },
-    {
-     "titre": "Télévision. CNews : Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois",
-     "url": "https://www.ledauphine.com/societe/2026/11/26/cnews-reporters-sans-frontieres-saisit-l-arcom-et-demande-la-suspension-de-la-chaine-pendant-un-mois",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T05:42:00.000Z"
-    },
-    {
-     "titre": "Télévision. CNews : Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois",
      "url": "https://www.estrepublicain.fr/societe/2026/11/26/cnews-reporters-sans-frontieres-saisit-l-arcom-et-demande-la-suspension-de-la-chaine-pendant-un-mois",
      "media": "L'Est républicain",
      "date": "2026-11-26T05:42:00.000Z"
@@ -769,7 +737,7 @@
    },
    "fait": "Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois",
    "accroche": "Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois",
-   "essentiel": "Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois. Reporters sans frontières réclame la suspension de CNews pendant un mois. Sept médias en parlent.",
+   "essentiel": "Reporters sans frontières saisit l'Arcom et demande la suspension de la chaîne pendant un mois. Reporters sans frontières réclame la suspension de CNews pendant un mois. Cinq médias en parlent : Le Progrès, Valeurs actuelles, Mediapart, Sud Ouest et L'Est républicain.",
    "rubrique": "Politique"
   },
   {
@@ -782,14 +750,7 @@
    ],
    "derniere": "2026-11-25T12:43:47.000Z",
    "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
+    "personnes": [],
     "partis": [
      "RN"
     ],
@@ -798,10 +759,10 @@
    },
    "articles": [
     {
-     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
-     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
-     "media": "Nice-Matin",
-     "date": "2026-11-25T11:03:54.000Z"
+     "titre": "Soupçons de fuites du ministère de l'Intérieur au profit du RN: le préfet Hugues Moutouh démis de ses fonctions",
+     "url": "https://www.rfi.fr/fr/france/20261125-soup%C3%A7ons-de-fuites-au-profit-du-rn-en-france-un-pr%C3%A9fet-d%C3%A9mis-de-ses-fonctions",
+     "media": "RFI",
+     "date": "2026-11-25T12:16:24.000Z"
     },
     {
      "titre": "Suspicion de fuites vers le RN : le prefet Hugues Moutouh démis de ses fonctions",
@@ -810,22 +771,16 @@
      "date": "2026-11-25T12:43:47.000Z"
     },
     {
-     "titre": "Soupçons de fuites du ministère de l'Intérieur au profit du RN: le préfet Hugues Moutouh démis de ses fonctions",
-     "url": "https://www.rfi.fr/fr/france/20261125-soup%C3%A7ons-de-fuites-au-profit-du-rn-en-france-un-pr%C3%A9fet-d%C3%A9mis-de-ses-fonctions",
-     "media": "RFI",
-     "date": "2026-11-25T12:16:24.000Z"
-    },
-    {
      "titre": "Soupçons de fuite au profit du RN : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
      "url": "https://www.20minutes.fr/politique/4265628-20261125-soupcons-fuite-profit-rn-prefet-moutouh-officiellement-demis-fonctions-successeur-nomme?at_medium=display&at_campaign=149",
      "media": "20 Minutes",
      "date": "2026-11-25T11:21:14.000Z"
     },
     {
-     "titre": "« Il souhaite être démis de ses fonctions » : Laurent Nuñez a proposé un successeur à l’ancien préfet des Alpes-Maritimes Hugues Moutouh, dans la tourmente",
-     "url": "https://www.nicematin.com/societe/polemique/le-prefet-moutouh-m-a-fait-savoit-qu-il-souhaitait-etre-demis-de-ses-fonctions-laurent-nuez-a-propose-un-successeur-a-l-ancien-prefet-des-alpes-maritimes-dans-la-tourmente-10768208",
+     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
+     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
      "media": "Nice-Matin",
-     "date": "2026-11-24T14:37:52.000Z"
+     "date": "2026-11-25T11:03:54.000Z"
     }
    ],
    "titrePropre": {
@@ -834,7 +789,7 @@
    },
    "fait": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
    "accroche": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
-   "essentiel": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé. Quatre médias en parlent : Nice-Matin, France 24, RFI et 20 Minutes.",
+   "essentiel": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé. Quatre médias en parlent : RFI, France 24, 20 Minutes et Nice-Matin.",
    "rubrique": "Politique"
   },
   {
@@ -986,69 +941,6 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 5,
-   "mediasDistincts": 2,
-   "sources": [
-    "Public Sénat",
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T08:17:13.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.leprogres.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Le Progrès",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Ecrits antisémites : Jordan Bardella mis en cause par de nouvelles preuves révélées par Le Monde et Mediapart",
-     "url": "https://www.publicsenat.fr/actualites/politique/ecrits-antisemites-jordan-bardella-mis-en-cause-par-de-nouvelles-preuves-revelees-par-le-monde-et-mediapart",
-     "media": "Public Sénat",
-     "date": "2026-11-26T08:17:13.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.dna.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T06:37:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Antisémites",
-    "origine": "dossier"
-   },
-   "fait": "Le Monde et Mediapart dévoilent de nouvelles preuves",
-   "accroche": "Le Monde et Mediapart dévoilent de nouvelles preuves",
-   "essentiel": "Le Monde et Mediapart dévoilent de nouvelles preuves. Cinq médias en parlent : Le Progrès, Public Sénat, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
-   "rubrique": "Politique"
-  },
-  {
    "medias": 3,
    "mediasDistincts": 2,
    "sources": [
@@ -1097,6 +989,57 @@
    "fait": "De nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
    "accroche": "De nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
    "essentiel": "De nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart. Trois médias en parlent : RFI, France 24 et Nice-Matin.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 3,
+   "mediasDistincts": 2,
+   "sources": [
+    "Public Sénat",
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T08:17:13.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.leprogres.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "Le Progrès",
+     "date": "2026-11-26T06:37:00.000Z"
+    },
+    {
+     "titre": "Ecrits antisémites : Jordan Bardella mis en cause par de nouvelles preuves révélées par Le Monde et Mediapart",
+     "url": "https://www.publicsenat.fr/actualites/politique/ecrits-antisemites-jordan-bardella-mis-en-cause-par-de-nouvelles-preuves-revelees-par-le-monde-et-mediapart",
+     "media": "Public Sénat",
+     "date": "2026-11-26T08:17:13.000Z"
+    },
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T06:37:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Antisémites",
+    "origine": "dossier"
+   },
+   "fait": "Le Monde et Mediapart dévoilent de nouvelles preuves",
+   "accroche": "Le Monde et Mediapart dévoilent de nouvelles preuves",
+   "essentiel": "Le Monde et Mediapart dévoilent de nouvelles preuves. Trois médias en parlent : Le Progrès, Public Sénat et L'Est républicain.",
    "rubrique": "Politique"
   },
   {
@@ -1241,8 +1184,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "David Lisnard : déclaration sur les finances publiques",
+    "origine": "regles"
    },
    "fait": "David Lisnard affirme : « On nous a mis budgétairement et juridiquement sous perfusion »",
    "accroche": "David Lisnard affirme : « On nous a mis budgétairement et juridiquement sous perfusion »",
@@ -1290,88 +1233,6 @@
     "origine": "dossier"
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Libération",
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-25T19:00:06.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "LFI refuse de rencontrer les anciens insoumis de L’Après en vue «d’une éventuelle coalition»",
-     "url": "https://www.liberation.fr/politique/lfi-refuse-de-rencontrer-les-anciens-insoumis-de-lapres-en-vue-dune-eventuelle-coalition-20261125_2BOWYGXNWRDLXGIFZM6NMNHEYU/",
-     "media": "Libération",
-     "date": "2026-11-25T19:00:06.000Z"
-    },
-    {
-     "titre": "Présidentielle 2027. C'est « non » : LFI refuse net la rencontre proposée par les ex-insoumis de L'Après",
-     "url": "https://www.dna.fr/politique/2026/11/25/c-est-non-lfi-refuse-net-la-rencontre-proposee-par-les-ex-insoumis-de-l-apres",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T18:56:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "LFI refuse",
-    "origine": "recoupement"
-   },
-   "fait": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue",
-   "accroche": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue",
-   "essentiel": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue. Deux médias en parlent : Libération et Dernières Nouvelles d'Alsace.",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Dernières Nouvelles d'Alsace",
-    "Libération"
-   ],
-   "derniere": "2026-11-25T18:15:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027. Réélu à la tête des maires de France, comment David Lisnard assoit ses ambitions pour l’Élysée",
-     "url": "https://www.dna.fr/elections/2026/11/25/reelu-a-la-tete-des-maires-de-france-comment-david-lisnard-assoit-ses-ambitions-pour-l-elysee",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T18:15:00.000Z"
-    },
-    {
-     "titre": "En campagne pour l’Elysée, David Lisnard réélu à la tête des maires de France",
-     "url": "https://www.liberation.fr/politique/elections/en-campagne-pour-lelysee-david-lisnard-reelu-a-la-tete-des-maires-de-france-20261125_SGKQEG6H3FHHPMAGJUG2OU2I2Q/",
-     "media": "Libération",
-     "date": "2026-11-25T14:43:21.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1654,321 +1515,6 @@
    "rubrique": "Sénat"
   },
   {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T09:58:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-     "url": "https://www.leprogres.fr/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
-     "media": "Le Progrès",
-     "date": "2026-11-26T09:58:00.000Z"
-    },
-    {
-     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-     "url": "https://www.dna.fr/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T09:58:00.000Z"
-    },
-    {
-     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-     "url": "https://www.ledauphine.com/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T09:58:00.000Z"
-    },
-    {
-     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-     "url": "https://www.estrepublicain.fr/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T09:58:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Espace : numérique",
-    "origine": "regles"
-   },
-   "fait": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-   "accroche": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
-   "essentiel": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T06:10:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.leprogres.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "media": "Le Progrès",
-     "date": "2026-11-26T06:10:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.dna.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T06:10:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T06:10:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T06:10:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T05:27:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
-     "url": "https://www.leprogres.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
-     "media": "Le Progrès",
-     "date": "2026-11-26T05:27:00.000Z"
-    },
-    {
-     "titre": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique, on lui a fait comprendre que « [son] âge était un problème »",
-     "url": "https://www.dna.fr/elections/2026/11/25/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T05:27:00.000Z"
-    },
-    {
-     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
-     "url": "https://www.ledauphine.com/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T05:27:00.000Z"
-    },
-    {
-     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T05:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Âge était un problème",
-    "origine": "recoupement"
-   },
-   "fait": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique",
-   "accroche": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique",
-   "essentiel": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
-   "rubrique": "Budget",
-   "chiffre": {
-    "valeur": "59",
-    "unite": "ans"
-   }
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T05:02:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
-     "url": "https://www.leprogres.fr/elections/2026/11/26/pour-ce-directeur-commercial-ultra-sportif-les-gens-n-arrivent-plus-a-se-parler",
-     "media": "Le Progrès",
-     "date": "2026-11-26T05:02:00.000Z"
-    },
-    {
-     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
-     "url": "https://www.dna.fr/elections/2026/11/26/pour-ce-directeur-commercial-ultra-sportif-les-gens-n-arrivent-plus-a-se-parler",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T05:02:00.000Z"
-    },
-    {
-     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
-     "url": "https://www.ledauphine.com/elections/2026/11/25/nicolas-50-ans-j-estime-que-mon-vote-est-important",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T05:02:00.000Z"
-    },
-    {
-     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/26/pour-ce-directeur-commercial-ultra-sportif-les-gens-n-arrivent-plus-a-se-parler",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T05:02:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "chiffre": {
-    "valeur": "50",
-    "unite": "ans"
-   }
-  },
-  {
-   "medias": 4,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-26T05:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
-     "url": "https://www.leprogres.fr/elections/2026/11/26/mounira-53-ans-arriver-a-un-vrai-vivre-ensemble",
-     "media": "Le Progrès",
-     "date": "2026-11-26T05:00:00.000Z"
-    },
-    {
-     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
-     "url": "https://www.dna.fr/elections/2026/11/26/professeure-documentaliste-elle-souhaite-arriver-a-un-vrai-vivre-ensemble",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T05:00:00.000Z"
-    },
-    {
-     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
-     "url": "https://www.ledauphine.com/elections/2026/11/26/professeure-documentaliste-elle-souhaite-arriver-a-un-vrai-vivre-ensemble",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T05:00:00.000Z"
-    },
-    {
-     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
-     "url": "https://www.estrepublicain.fr/elections/2026/11/26/professeure-documentaliste-elle-souhaite-arriver-a-un-vrai-vivre-ensemble",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T05:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "chiffre": {
-    "valeur": "53",
-    "unite": "ans"
-   }
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 1,
-   "sources": [
-    "EBRA"
-   ],
-   "derniere": "2026-11-25T20:27:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Politique. Budget 2027 : Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-     "url": "https://www.leprogres.fr/politique/2026/11/25/budget-2027-lecornu-exclut-tout-passage-en-force-et-appelle-au-compromis",
-     "media": "Le Progrès",
-     "date": "2026-11-25T20:27:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-     "url": "https://www.dna.fr/politique/2026/11/25/budget-2027-lecornu-exclut-tout-passage-en-force-et-appelle-au-compromis",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T20:27:00.000Z"
-    },
-    {
-     "titre": "Politique. Budget 2027 : Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-     "url": "https://www.ledauphine.com/politique/2026/11/25/budget-2027-lecornu-exclut-tout-passage-en-force-et-appelle-au-compromis",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-25T20:27:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : appel sur les finances publiques",
-    "origine": "regles"
-   },
-   "fait": "Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-   "accroche": "Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-   "essentiel": "Sur le budget 2027, Sébastien Lecornu exclut tout « passage en force » et appelle au compromis. Trois médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace et Le Dauphiné libéré.",
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
    "medias": 2,
    "mediasDistincts": 1,
    "sources": [
@@ -2044,6 +1590,358 @@
    "rubrique": "Justice"
   },
   {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T09:58:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
+     "url": "https://www.leprogres.fr/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
+     "media": "Le Progrès",
+     "date": "2026-11-26T09:58:00.000Z"
+    },
+    {
+     "titre": "Espace. SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
+     "url": "https://www.estrepublicain.fr/science-et-technologie/2026/11/26/spacex-autorisee-a-lancer-un-million-de-satellites-pour-son-projet-de-centres-de-donnees-en-orbite",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T09:58:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Espace : numérique",
+    "origine": "regles"
+   },
+   "fait": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
+   "accroche": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite",
+   "essentiel": "SpaceX autorisée à lancer un million de satellites pour son projet de centres de données en orbite. Deux médias en parlent : Le Progrès et L'Est républicain.",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T06:10:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
+     "url": "https://www.leprogres.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
+     "media": "Le Progrès",
+     "date": "2026-11-26T06:10:00.000Z"
+    },
+    {
+     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T06:10:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Premier ministre : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T05:27:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
+     "url": "https://www.leprogres.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "media": "Le Progrès",
+     "date": "2026-11-26T05:27:00.000Z"
+    },
+    {
+     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T05:27:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget",
+   "chiffre": {
+    "valeur": "59",
+    "unite": "ans"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T05:02:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
+     "url": "https://www.leprogres.fr/elections/2026/11/26/pour-ce-directeur-commercial-ultra-sportif-les-gens-n-arrivent-plus-a-se-parler",
+     "media": "Le Progrès",
+     "date": "2026-11-26T05:02:00.000Z"
+    },
+    {
+     "titre": "Nicolas, 50 ans. Pour ce directeur commercial, ultra-sportif, « les gens n'arrivent plus à se parler »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/26/pour-ce-directeur-commercial-ultra-sportif-les-gens-n-arrivent-plus-a-se-parler",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T05:02:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "50",
+    "unite": "ans"
+   }
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 1,
+   "sources": [
+    "EBRA"
+   ],
+   "derniere": "2026-11-26T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
+     "url": "https://www.leprogres.fr/elections/2026/11/26/mounira-53-ans-arriver-a-un-vrai-vivre-ensemble",
+     "media": "Le Progrès",
+     "date": "2026-11-26T05:00:00.000Z"
+    },
+    {
+     "titre": "Mounira, 53 ans. Professeure documentaliste, elle souhaite « arriver à un vrai vivre-ensemble »",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/26/professeure-documentaliste-elle-souhaite-arriver-a-un-vrai-vivre-ensemble",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique",
+   "chiffre": {
+    "valeur": "53",
+    "unite": "ans"
+   }
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-26T16:15:01.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Rénovation énergétique : le gouvernement inflexible face aux maires inquiets des coupes budgétaires",
+     "url": "https://www.lemonde.fr/planete/article/2026/11/26/renovation-energetique-le-gouvernement-inflexible-face-aux-maires-inquiets-des-coupes-budgetaires_6815563_3244.html",
+     "media": "Le Monde",
+     "date": "2026-11-26T16:15:01.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maires",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-26T16:11:12.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Débat au congrès des maires: Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T16:11:12.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maires",
+    "origine": "dossier"
+   },
+   "fait": "Débat au congrès des maires : Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
+   "accroche": "Débat au congrès des maires : Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-26T16:11:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Accusations d'antisémitisme : Alloncle dénonce un «acharnement médiatique» contre Bardella",
+     "url": "https://www.lejdd.fr/politique/accusations-dantisemitisme-alloncle-denonce-un-acharnement-mediatique-contre-bardella-189765",
+     "media": "Le JDD",
+     "date": "2026-11-26T16:11:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Antisémites",
+    "origine": "dossier"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-26T16:08:30.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Sébastien Lecornu",
+      "photo": "photos/personnalites/sebastien-lecornu.jpg",
+      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
+      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Au congrès des maires, Sébastien Lecornu imite Jacques Chirac",
+     "url": "https://www.bfmtv.com/politique/video-au-congres-des-maires-sebastien-lecornu-imite-jacques-chirac_VN-202611260764.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T16:08:30.000Z",
+     "video": true
+    },
+    {
+     "titre": "Débat au Congrès des maires: Sébastien Lecornu imite le président Jacques Chirac sur les niches fiscales",
+     "url": "https://www.bfmtv.com/politique/video-debat-au-congres-des-maires-sebastien-lecornu-imite-le-president-jacques-chirac-sur-les-niches-fiscales_VN-202611260732.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T15:28:25.000Z",
+     "video": true
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maires",
+    "origine": "dossier"
+   },
+   "rubrique": "Budget",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Sébastien Lecornu : premier ministre",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
+  },
+  {
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
@@ -2065,8 +1963,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Sénat : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "fait": "Le Sénat vote un crédit d’impôt pour inciter les agriculteurs à préserver les haies",
    "accroche": "Le Sénat vote un crédit d’impôt pour inciter les agriculteurs à préserver les haies",
@@ -2203,9 +2102,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Aly Diouara : ce qu'il faut savoir sur le logement et l'accueil",
-    "origine": "regles",
-    "generique": true
+    "titre": "Maires",
+    "origine": "dossier"
    },
    "fait": "Le maire La France insoumise de La Courneuve Aly Diouara relogé par une adjointe de Bally Bagayoko",
    "accroche": "Le maire La France insoumise de La Courneuve Aly Diouara relogé par une adjointe de Bally Bagayoko",
@@ -2268,35 +2166,6 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-26T16:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Kembs. Réunion publique : le maire veut agir sur les incivilités routières et assume sa politique d’offre de santé",
-     "url": "https://www.dna.fr/culture-loisirs/2026/11/26/reunion-publique-le-maire-veut-agir-sur-les-incivilites-routieres-et-assume-sa-politique-d-offre-de-sante",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T16:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Kembs : santé publique",
-    "origine": "regles"
-   },
-   "fait": "Réunion publique : le maire veut agir sur les incivilités routières et assume sa politique d’offre de santé",
-   "accroche": "Réunion publique : le maire veut agir sur les incivilités routières et assume sa politique d’offre de santé",
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2408,8 +2277,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Finances publiques : annonces sur les finances publiques",
+    "origine": "regles"
    },
    "rubrique": "Budget"
   },
@@ -2448,49 +2317,6 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-26T15:53:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "DIRECT. Débat au congrès des maires: Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T15:53:06.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : déclaration sur les finances publiques",
-    "origine": "regles"
-   },
-   "fait": "Débat au congrès des maires : Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
-   "accroche": "Débat au congrès des maires : Sébastien Lecornu affirme qu'il prendra \"ses responsabilités\" sur le budget",
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -2576,35 +2402,6 @@
      "source": "Assemblée nationale (mandats du Gouvernement)"
     }
    ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T15:44:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Haute-Savoie. Élections municipales : le village de Servoz retournera aux urnes le 24 janvier",
-     "url": "https://www.ledauphine.com/elections/2026/11/26/elections-municipales-le-village-de-servoz-retournera-aux-urnes-le-24-janvier",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T15:44:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Haute-Savoie : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Le village de Servoz retournera aux urnes le 24 janvier",
-   "accroche": "Le village de Servoz retournera aux urnes le 24 janvier",
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2733,52 +2530,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T15:36:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle. « Il nous faut un champion » : nouveau porte-parole de Gabriel Attal, le maire de Montélimar plaide pour une primaire de la droite et du centre",
-     "url": "https://www.ledauphine.com/elections/2026/11/26/il-nous-faut-un-champion-nouveau-porte-parole-de-gabriel-attal-le-maire-de-montelimar-plaide-pour-une-primaire-de-la-droite-et-du-centre",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T15:36:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Primaire : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Nouveau porte-parole de Gabriel Attal, le maire de Montélimar plaide pour une primaire de la droite et du centre",
-   "accroche": "Nouveau porte-parole de Gabriel Attal, le maire de Montélimar plaide pour une primaire de la droite et du centre",
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-26T15:35:51.000Z",
@@ -2838,49 +2589,6 @@
     "origine": "regles"
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-26T15:28:25.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Sébastien Lecornu",
-      "photo": "photos/personnalites/sebastien-lecornu.jpg",
-      "photoHd": "photos/personnalites/hd/sebastien-lecornu.jpg",
-      "credit": "© Patrice Normand/Leextra via opale, CC BY-SA 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Débat au Congrès des maires: Sébastien Lecornu imite le président Jacques Chirac sur les niches fiscales",
-     "url": "https://www.bfmtv.com/politique/video-debat-au-congres-des-maires-sebastien-lecornu-imite-le-president-jacques-chirac-sur-les-niches-fiscales_VN-202611260732.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T15:28:25.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Premier ministre : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Sébastien Lecornu : premier ministre",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -3469,35 +3177,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-26T14:38:48.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Bischwiller. Quatorze nouveaux élus entrent au conseil municipal des enfants",
-     "url": "https://www.dna.fr/politique/2026/11/26/quatorze-nouveaux-elus-entrent-au-conseil-municipal-des-enfants",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T14:38:48.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Bischwiller : conseil municipal",
-    "origine": "regles"
-   },
-   "fait": "Quatorze nouveaux élus entrent au conseil municipal des enfants",
-   "accroche": "Quatorze nouveaux élus entrent au conseil municipal des enfants",
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "BFMTV"
    ],
    "derniere": "2026-11-26T14:38:24.000Z",
@@ -3621,33 +3300,6 @@
     "generique": true
    },
    "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T14:32:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Montagne. Des dispositions spéciales pour les stations dans la nouvelle loi sur le logement",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/des-dispositions-speciales-pour-les-stations-dans-la-nouvelle-loi-sur-le-logement",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T14:32:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Montagne : logement et accueil",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4192,35 +3844,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T13:33:42.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Jarcieu. Budget participatif : quatre projets soumis au vote des habitants",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/budget-participatif-quatre-projets-soumis-au-vote-des-habitants",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T13:33:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Quatre projets soumis au vote des habitants",
-   "accroche": "Quatre projets soumis au vote des habitants",
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "La Dépêche"
    ],
    "derniere": "2026-11-26T13:31:42.000Z",
@@ -4318,59 +3941,6 @@
     "generique": true
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-26T13:02:05.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Édouard Philippe",
-      "photo": "photos/personnalites/edouard-philippe.jpg",
-      "photoHd": "photos/personnalites/hd/edouard-philippe.jpg",
-      "parti": "HOR",
-      "credit": "Wasasaq8, CC0, Wikimedia Commons"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "\"La porosité qui semble exister entre David Lisnard et l'extrême droite s'avère de plus en plus franche\", lance Charlotte Parmentier-Lecoq, porte-parole d'Édouard Philippe",
-     "url": "https://www.bfmtv.com/politique/extreme-droite/video-la-porosite-qui-semble-exister-entre-david-lisnard-et-l-extreme-droite-s-avere-de-plus-en-plus-franche-lance-charlotte-parmentier-lecoq-porte-parole-d-edouard-philippe_VN-202611260614.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T13:02:05.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Édouard Philippe (Horizons) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Lance Charlotte Parmentier-Lecoq, porte-parole d'Édouard Philippe",
-   "accroche": "Lance Charlotte Parmentier-Lecoq, porte-parole d'Édouard Philippe",
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Édouard Philippe : président d'Horizons",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   },
   {
    "medias": 1,
@@ -4550,18 +4120,10 @@
     }
    ],
    "titrePropre": {
-    "titre": "Social : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
+    "titre": "Maires",
+    "origine": "dossier"
    },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4636,8 +4198,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Premier ministre : réponse sur les finances publiques",
+    "origine": "regles"
    },
    "rubrique": "Budget",
    "contexte": [
@@ -4932,33 +4494,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T12:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Métropole de Grenoble. 11-Novembre à Meylan : « Oui, j’ai invité toutes les écoles, même celles hors contrat »",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/11-novembre-a-meylan-oui-j-ai-invite-toutes-les-ecoles-meme-celles-hors-contrat",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T12:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Métropole de Grenoble : actualité scolaire",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Libération"
    ],
    "derniere": "2026-11-26T11:55:10.000Z",
@@ -5145,33 +4680,6 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-26T11:30:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Saint-Quentin-Fallavier. « Injuste » : une adjointe écartée, Mathieu Gaget agit « en tant que maire employeur »",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/injuste-une-adjointe-ecartee-mathieu-gaget-agit-en-tant-que-maire-employeur",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T11:30:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Saint-Quentin-Fallavier : vie municipale",
-    "origine": "regles"
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
     "Europe 1"
    ],
    "derniere": "2026-11-26T11:27:00.000Z",
@@ -5312,6 +4820,354 @@
    "fait": "Le président du groupe Liot à l’Assemblée rallie David Lisnard",
    "accroche": "Le président du groupe Liot à l’Assemblée rallie David Lisnard",
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le JDD"
+   ],
+   "derniere": "2026-11-26T11:11:45.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle : Lisnard, l’homme à abattre",
+     "url": "https://www.lejdd.fr/politique/presidentielle-lisnard-lhomme-a-abattre-189723",
+     "media": "Le JDD",
+     "date": "2026-11-26T11:11:45.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "David Lisnard : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Est républicain"
+   ],
+   "derniere": "2026-11-26T11:07:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "securite",
+    "vignette": "securite"
+   },
+   "articles": [
+    {
+     "titre": "Besançon. Manifestations des lycéens : l’élu local Martin Mellion (LFI) convoqué au commissariat de police",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/26/mouvement-lyceen-l-elu-lfi-martin-mellion-convoque-au-commissariat",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T11:07:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lycées : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "L’élu local Martin Mellion convoqué au commissariat de police",
+   "accroche": "L’élu local Martin Mellion convoqué au commissariat de police",
+   "rubrique": "Sécurité"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Public Sénat"
+   ],
+   "derniere": "2026-11-26T11:02:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sens Public — Sens Public",
+     "url": "https://www.publicsenat.fr/emission/sens-public/sens-public-e79",
+     "media": "Public Sénat",
+     "date": "2026-11-26T11:02:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-26T11:00:04.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "ECO"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : Les Ecologistes confrontés au risque de leur disparition",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/26/presidentielle-2027-les-ecologistes-confrontes-au-risque-de-leur-disparition_6815522_3232.html",
+     "media": "Le Monde",
+     "date": "2026-11-26T11:00:04.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Écologistes : ce qu'il faut savoir sur la présidentielle de 2027",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-26T11:00:03.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     },
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Comment le concept d’« hyperpolitique » explique l’avance électorale de Le Pen et Mélenchon",
+     "url": "https://www.nouvelobs.com/idees/20261126.OBS120454/comment-le-concept-d-hyperpolitique-explique-l-avance-electorale-de-le-pen-et-melenchon.html",
+     "media": "L'Obs",
+     "date": "2026-11-26T11:00:03.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-26T11:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "Ain. Collectivités locales étranglées : pour Jean-François Debat, « il faut que le gouvernement corrige sa copie »",
+     "url": "https://www.leprogres.fr/politique/2026/11/26/jean-francois-debat-il-faut-que-le-gouvernement-corrige-sa-copie",
+     "media": "Le Progrès",
+     "date": "2026-11-26T11:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce qu'il faut savoir sur collectivités locales",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Collectivités locales étranglées : pour Jean-François Debat",
+   "accroche": "Collectivités locales étranglées : pour Jean-François Debat",
+   "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-26T10:51:41.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Bassin d’Arcachon : une résidence de logements sociaux inaugurée à Gujan-Mestras",
+     "url": "https://www.sudouest.fr/gironde/gujan-mestras/bassin-d-arcachon-une-residence-de-logements-sociaux-inauguree-a-gujan-mestras-31653104.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-26T10:51:41.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Bassin d’Arcachon : logement et accueil",
+    "origine": "regles"
+   },
+   "fait": "Une résidence de logements sociaux inaugurée à Gujan-Mestras",
+   "accroche": "Une résidence de logements sociaux inaugurée à Gujan-Mestras",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Libération"
+   ],
+   "derniere": "2026-11-26T10:50:30.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [
+     "LFI"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Les tractations avec LFI retardent la démocratie interne chez les écolos",
+     "url": "https://www.liberation.fr/politique/les-tractations-avec-lfi-retardent-la-democratie-interne-chez-les-ecolos-20261126_QDUSMKEYT5GJ7EZOSLKGY4IKIE/",
+     "media": "Libération",
+     "date": "2026-11-26T10:50:30.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "La France insoumise : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-26T10:49:15.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Présidentielle 2027 : « Beaucoup de maires ont peur », le RN n’a toujours pas ses 500 promesses de parrainages pour Marine Le Pen",
+     "url": "https://www.sudouest.fr/politique/marine-le-pen/presidentielle-2027-beaucoup-de-maires-ont-peur-le-rn-n-a-toujours-pas-ses-500-parrainages-pour-marine-le-pen-31679270.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-26T10:49:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Maires",
+    "origine": "dossier"
+   },
+   "rubrique": "Élysée 2027",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Marine Le Pen : députée RN (Pas-de-Calais)",
+     "source": "Assemblée nationale (open data)"
+    }
+   ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-26T10:47:49.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "De nouveaux propos antisémites attribués à Jordan Bardella dans sa jeunesse : \"Les sionistes sont à la tête des banques, tout est lié\", le président du RN nie en être l’auteur",
+     "url": "https://www.ladepeche.fr/2026/11/26/de-nouveaux-propos-antisemites-attribues-a-jordan-bardella-dans-sa-jeunesse-les-sionistes-sont-a-la-tete-des-banques-tout-est-lie-le-president-du-rn-13672102.php",
+     "media": "La Dépêche",
+     "date": "2026-11-26T10:47:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Antisémites",
+    "origine": "dossier"
+   },
+   "rubrique": "Politique"
   }
  ]
 }
