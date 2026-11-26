@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-26T11:45:45.462Z",
+ "lastUpdated": "2026-11-26T11:50:43.357Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -156,7 +156,7 @@
     "présidentielle",
     "candidats",
     "parrainages",
-    "proposée"
+    "congrès"
    ],
    "medias": [
     "BFMTV",
@@ -200,7 +200,7 @@
     "Le Figaro",
     "L'Obs"
    ],
-   "nb": 102,
+   "nb": 103,
    "derniere": "2026-11-26T11:32:48.000Z",
    "articles": [
     {
@@ -2341,6 +2341,43 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Europe 1"
+   ],
+   "derniere": "2026-11-26T11:46:00.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Estelle Youssouffa",
+      "photo": "photos/deputes/PA796078.jpg",
+      "photoHd": "photos/deputes/hd/PA796078.jpg",
+      "parti": "LIOT",
+      "lien": "#depute-PA796078",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [],
+    "theme": "assemblee",
+    "vignette": "assemblee"
+   },
+   "articles": [
+    {
+     "titre": "Violences à Mayotte : «Il faut changer de doctrine», réclame la députée LIOT Estelle Youssouffa",
+     "url": "https://www.europe1.fr/politique/violences-a-mayotte-il-faut-changer-de-doctrine-reclame-la-deputee-liot-estelle-youssouffa-1245340?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "media": "Europe 1",
+     "date": "2026-11-26T11:46:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Assemblée nationale : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Assemblée nationale"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-11-26T11:42:00.000Z",
@@ -4216,48 +4253,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Gérald Darmanin",
-      "photo": "photos/personnalites/gerald-darmanin.jpg",
-      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
-      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Gérald Darmanin",
-     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T08:40:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Gouvernement",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-26T08:40:57.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -4298,6 +4293,48 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-26T08:40:57.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gérald Darmanin",
+      "photo": "photos/personnalites/gerald-darmanin.jpg",
+      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
+      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gérald Darmanin",
+     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T08:40:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Gouvernement",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -4389,23 +4426,23 @@
      }
     ],
     "partis": [],
-    "theme": "politique",
-    "vignette": null
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "EN DIRECT, propos antisémites : Jordan Bardella réitère « sa contestation formelle » ; mais « les nombreux éléments ne laissent aucun doute », affirme notre journaliste Clément Guillou",
+     "titre": "EN DIRECT, congrès des maires de France, suites des propos antisémites de Bardella, campagne présidentielle : suivez l’actualité politique",
      "url": "https://www.lemonde.fr/politique/live/2026/11/26/en-direct-david-lisnard-assure-garder-la-tete-froide-apres-sa-reelection-a-l-amf-retour-sur-les-propos-antisemites-de-jordan-bardella_6815062_823448.html",
      "media": "Le Monde",
      "date": "2026-11-26T08:23:31.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
+    "titre": "Présidentielle 2027 : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique"
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -5367,36 +5404,6 @@
    },
    "fait": "La rénovation du château va entrer dans sa phase 2",
    "accroche": "La rénovation du château va entrer dans sa phase 2",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-26T06:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Meuse. Éric Le Roux quitte la sous-préfecture de Commercy",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/c-est-annonce-eric-le-roux-quitte-la-sous-prefecture-de-commercy",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T06:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Meuse : actualité locale",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Éric Le Roux quitte la sous-préfecture de Commercy",
-   "accroche": "Éric Le Roux quitte la sous-préfecture de Commercy",
    "rubrique": "Politique"
   }
  ]
