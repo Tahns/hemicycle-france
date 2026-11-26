@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-26T09:05:33.511Z",
+ "lastUpdated": "2026-11-26T09:10:54.594Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -159,7 +159,6 @@
     "réélu"
    ],
    "medias": [
-    "Public Sénat",
     "BFMTV",
     "La Dépêche",
     "Europe 1",
@@ -177,6 +176,7 @@
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "L'Humanité",
+    "Public Sénat",
     "France 24",
     "Le JDD",
     "L'Express",
@@ -185,7 +185,6 @@
    ],
    "mediasDistincts": 18,
    "sources": [
-    "Public Sénat",
     "BFMTV",
     "La Dépêche",
     "Groupe Bolloré",
@@ -200,19 +199,14 @@
     "Ouest-France",
     "Le Monde",
     "L'Humanité",
+    "Public Sénat",
     "L'Express",
     "Le Figaro",
     "L'Obs"
    ],
    "nb": 121,
-   "derniere": "2026-11-26T09:04:22.000Z",
+   "derniere": "2026-11-26T09:00:01.000Z",
    "articles": [
-    {
-     "media": "Public Sénat",
-     "titre": "Budget : « J’ai fait mon job pour faire baisser la dette », estime Bruno Le Maire",
-     "url": "https://www.publicsenat.fr/actualites/politique/budget-jai-fait-mon-job-pour-faire-baisser-la-dette-estime-bruno-le-maire",
-     "date": "2026-11-26T09:04:22.000Z"
-    },
     {
      "media": "BFMTV",
      "titre": "DIRECT. Présidentielle 2027: \"comment tu peux dire ça?\" Robert Ménard fustige les propos de Teddy Riner sur la guerre en Ukraine",
@@ -314,6 +308,12 @@
      "titre": "« Les attaques du RN contre le Planning familial ne sont pas qu’un positionnement, c’est un projet de société », alerte la présidente de l’association Sarah Durocher",
      "url": "https://www.humanite.fr/feminisme/associations/les-attaques-du-rn-contre-le-planning-familial-ne-sont-pas-quun-positionnement-cest-un-projet-de-societe-alerte-la-presidente-de-lassociation-sarah",
      "date": "2026-11-25T18:15:31.000Z"
+    },
+    {
+     "media": "Public Sénat",
+     "titre": "« Je ne veux pas d’étiquette » : pourquoi certains maires rechignent à parrainer les candidats de 2027",
+     "url": "https://www.publicsenat.fr/actualites/politique/je-ne-veux-pas-detiquette-pourquoi-certains-maires-rechignent-a-parrainer-les-candidats-de-2027",
+     "date": "2026-11-25T16:51:20.000Z"
     },
     {
      "media": "France 24",
@@ -2393,21 +2393,54 @@
      "date": "2026-11-26T05:31:24.000Z"
     },
     {
-     "titre": "France: le procès d'Émilie König, «égérie du jihad», commence aux assises à Paris",
+     "titre": "France: le procès d'Émilie König, «égérie du jihad», s'ouvre devant la cour d'assises spéciale à Paris",
      "url": "https://www.rfi.fr/fr/france/20261126-france-le-proc%C3%A8s-d-%C3%A9milie-k%C3%B6nig-%C3%A9g%C3%A9rie-du-jihad-commence-aux-assises-%C3%A0-paris",
      "media": "RFI",
      "date": "2026-11-26T03:44:17.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Justice : actualité de la justice",
-    "origine": "regles",
-    "generique": true
+    "titre": "Ouvre devant la cour",
+    "origine": "recoupement"
    },
-   "fait": "Le procès d'Émilie König, commence aux assises à Paris",
-   "accroche": "Le procès d'Émilie König, commence aux assises à Paris",
+   "fait": "Le procès d'Émilie König s'ouvre devant la cour d'assises spéciale de Paris",
+   "accroche": "Le procès d'Émilie König s'ouvre devant la cour d'assises spéciale de Paris",
    "essentiel": "Le procès d'Émilie König, propagandiste du jihad, s'ouvre devant la cour d'assises spéciale de Paris. Deux médias en parlent : France 24 et RFI.",
    "rubrique": "Justice"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "La Dépêche"
+   ],
+   "derniere": "2026-11-26T09:06:11.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "gouvernement",
+    "vignette": "gouvernement"
+   },
+   "articles": [
+    {
+     "titre": "DIRECT. Manifestations du 26 novembre : \"les réponses du gouvernement restent insuffisantes\", estiment les syndicats, des cortèges attendus cet après-midi",
+     "url": "https://www.ladepeche.fr/2026/11/26/direct-manifestations-du-26-novembre-les-reponses-du-gouvernement-restent-insuffisantes-estiment-les-syndicats-des-corteges-attendus-cet-apres-midi-13672206.php",
+     "media": "La Dépêche",
+     "date": "2026-11-26T09:06:11.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Syndicats : déclaration sur le social et l'emploi",
+    "origine": "regles"
+   },
+   "rubrique": "Gouvernement",
+   "contexte": [
+    {
+     "type": "agenda",
+     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
+     "source": "Assemblée nationale (agenda officiel)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -2655,48 +2688,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Gérald Darmanin",
-      "photo": "photos/personnalites/gerald-darmanin.jpg",
-      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
-      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Gérald Darmanin",
-     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T08:40:57.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gouvernement : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Gouvernement",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
-     "source": "Assemblée nationale (mandats du Gouvernement)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-26T08:40:57.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "Marine Le Pen",
       "photo": "photos/deputes/PA720614.jpg",
       "photoHd": "photos/deputes/hd/PA720614.jpg",
@@ -2736,6 +2727,48 @@
     "origine": "dossier"
    },
    "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-26T08:40:57.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Gérald Darmanin",
+      "photo": "photos/personnalites/gerald-darmanin.jpg",
+      "photoHd": "photos/personnalites/hd/gerald-darmanin.jpg",
+      "credit": "UK Home Office, CC BY 2.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Gérald Darmanin",
+     "url": "https://www.bfmtv.com/politique/gerald-darmanin_DN-202108310663.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T08:40:57.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Gouvernement : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Gouvernement",
+   "contexte": [
+    {
+     "type": "personnes",
+     "texte": "Gérald Darmanin : garde des sceaux, ministre de la justice",
+     "source": "Assemblée nationale (mandats du Gouvernement)"
+    }
+   ]
   },
   {
    "medias": 1,
@@ -5383,49 +5416,6 @@
     "generique": true
    },
    "rubrique": "Sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-25T20:45:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Alsace. Plus d’un millier de personnes pour Bardella en dédicace à Haguenau",
-     "url": "https://www.dna.fr/politique/2026/11/25/plus-d-un-millier-de-personnes-pour-bardella-en-dedicace-a-haguenau",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T20:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Collectivités locales : Jordan Bardella (Rassemblement national)",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Jordan Bardella : président du Rassemblement national",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
   }
  ]
 }
