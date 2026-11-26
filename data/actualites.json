@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-26T06:55:40.736Z",
+ "lastUpdated": "2026-11-26T07:16:27.918Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -155,15 +155,16 @@
    "motifs": [
     "présidentielle",
     "candidat",
-    "réélu",
-    "parrainages"
+    "parrainages",
+    "réélu"
    ],
    "medias": [
     "La Dépêche",
+    "L'Obs",
+    "France Inter",
     "RFI",
     "Sud Ouest",
     "BFMTV",
-    "L'Obs",
     "Valeurs actuelles",
     "Le Dauphiné libéré",
     "20 Minutes",
@@ -175,20 +176,21 @@
     "Le Monde",
     "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
-    "Public Sénat",
     "L'Humanité",
+    "Public Sénat",
     "France 24",
     "Le JDD",
     "L'Express",
     "Le Figaro"
    ],
-   "mediasDistincts": 17,
+   "mediasDistincts": 18,
    "sources": [
     "La Dépêche",
+    "L'Obs",
+    "France Inter",
     "France Médias Monde",
     "Sud Ouest",
     "BFMTV",
-    "L'Obs",
     "Valeurs actuelles",
     "EBRA",
     "20 Minutes",
@@ -197,19 +199,31 @@
     "Groupe Bolloré",
     "Ouest-France",
     "Le Monde",
-    "Public Sénat",
     "L'Humanité",
+    "Public Sénat",
     "L'Express",
     "Le Figaro"
    ],
-   "nb": 132,
-   "derniere": "2026-11-26T06:51:09.000Z",
+   "nb": 129,
+   "derniere": "2026-11-26T07:12:00.000Z",
    "articles": [
     {
      "media": "La Dépêche",
      "titre": "DIRECT. Présidentielle 2027 : David Lisnard rejette la proposition d'un débat avec Édouard Philippe",
      "url": "https://www.ladepeche.fr/2026/11/26/direct-presidentielle-2027-david-lisnard-rejette-la-proposition-dun-debat-avec-edouard-philippe-13672098.php",
-     "date": "2026-11-26T06:51:09.000Z"
+     "date": "2026-11-26T07:12:00.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "Le programme de Mélenchon passé au crible : retraite à 60 ans, fin des mutuelles, suppression de Parcoursup…",
+     "url": "https://www.nouvelobs.com/politique/20261126.OBS120451/le-programme-de-melenchon-passe-au-crible-retraite-a-60-ans-fin-des-mutuelles-suppression-de-parcoursup.html",
+     "date": "2026-11-26T07:00:19.000Z"
+    },
+    {
+     "media": "France Inter",
+     "titre": "Présidentielle : \"J'ai envie de faire entendre mon projet, j'ai envie que les Français le tranchent\", dit David Lisnard",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-7h50/l-invite-de-7h50-du-jeudi-26-novembre-2026-3666315",
+     "date": "2026-11-26T06:47:45.000Z"
     },
     {
      "media": "RFI",
@@ -229,12 +243,6 @@
      "url": "https://www.bfmtv.com/politique/elections/video-presidentielle-2027-l-idee-d-une-primaire-a-droite-divise-les-electeurs_VN-202611260225.html",
      "date": "2026-11-26T06:05:04.000Z",
      "video": true
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Le programme de Mélenchon passé au crible : retraite à 60 ans, fin des mutuelles, suppression de Parcoursup…",
-     "url": "https://www.nouvelobs.com/politique/20261126.OBS120451/le-programme-de-melenchon-passe-au-crible-retraite-a-60-ans-fin-des-mutuelles-suppression-de-parcoursup.html",
-     "date": "2026-11-26T06:00:18.000Z"
     },
     {
      "media": "Valeurs actuelles",
@@ -303,16 +311,16 @@
      "date": "2026-11-25T18:56:00.000Z"
     },
     {
+     "media": "L'Humanité",
+     "titre": "« Les attaques du RN contre le Planning familial ne sont pas qu’un positionnement, c’est un projet de société », alerte la présidente de l’association Sarah Durocher",
+     "url": "https://www.humanite.fr/feminisme/associations/les-attaques-du-rn-contre-le-planning-familial-ne-sont-pas-quun-positionnement-cest-un-projet-de-societe-alerte-la-presidente-de-lassociation-sarah",
+     "date": "2026-11-25T18:15:31.000Z"
+    },
+    {
      "media": "Public Sénat",
      "titre": "« Je ne veux pas d’étiquette » : pourquoi certains maires rechignent à parrainer les candidats de 2027",
      "url": "https://www.publicsenat.fr/actualites/politique/je-ne-veux-pas-detiquette-pourquoi-certains-maires-rechignent-a-parrainer-les-candidats-de-2027",
      "date": "2026-11-25T16:51:20.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Au Congrès des maires, Fabien Roussel défend les communes dans la bataille présidentielle",
-     "url": "https://www.humanite.fr/politique/fabien-roussel/au-congres-des-maires-fabien-roussel-defend-les-communes-dans-la-bataille-presidentielle",
-     "date": "2026-11-25T16:32:05.000Z"
     },
     {
      "media": "France 24",
@@ -341,146 +349,138 @@
    ]
   },
   {
-   "id": "budget",
-   "titre": "Budget",
+   "id": "compromis",
+   "titre": "Compromis",
    "motifs": [
-    "budget",
-    "emmanuel",
-    "sébastien",
-    "attendu"
+    "compromis",
+    "francesca",
+    "victime"
    ],
    "medias": [
-    "BFMTV",
+    "Nice-Matin",
     "Le Progrès",
     "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "La Dépêche",
-    "Nice-Matin",
-    "Public Sénat",
-    "Le Monde",
-    "Sud Ouest",
-    "L'Humanité",
-    "Le JDD",
     "20 Minutes",
-    "L'Obs",
-    "Libération",
-    "Le Figaro"
-   ],
-   "mediasDistincts": 13,
-   "sources": [
     "BFMTV",
-    "EBRA",
-    "La Dépêche",
-    "Nice-Matin",
-    "Public Sénat",
-    "Le Monde",
     "Sud Ouest",
-    "L'Humanité",
-    "Le JDD",
-    "20 Minutes",
-    "L'Obs",
+    "Europe 1",
+    "Mediapart",
+    "Le Monde",
     "Libération",
-    "Le Figaro"
+    "Public Sénat",
+    "L'Express",
+    "France 24"
    ],
-   "nb": 44,
-   "derniere": "2026-11-26T06:45:23.000Z",
+   "mediasDistincts": 12,
+   "sources": [
+    "Nice-Matin",
+    "EBRA",
+    "20 Minutes",
+    "BFMTV",
+    "Sud Ouest",
+    "Europe 1",
+    "Mediapart",
+    "Le Monde",
+    "Libération",
+    "Public Sénat",
+    "L'Express",
+    "France 24"
+   ],
+   "nb": 22,
+   "derniere": "2026-11-26T07:11:30.000Z",
    "articles": [
     {
-     "media": "BFMTV",
-     "titre": "DIRECT. Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
-     "date": "2026-11-26T06:45:23.000Z"
+     "media": "Nice-Matin",
+     "titre": "Écrits antisémites : de nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
+     "url": "https://www.nicematin.com/societe/justice/ecrits-antisemites-de-nouveaux-elements-compromettants-pour-jordan-bardella-reveles-par-le-monde-et-mediapart-10768809",
+     "date": "2026-11-26T07:11:30.000Z"
     },
     {
      "media": "Le Progrès",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.leprogres.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
+     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
+     "url": "https://www.leprogres.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "date": "2026-11-26T05:27:00.000Z"
     },
     {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.dna.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
+     "titre": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique, on lui a fait comprendre que « [son] âge était un problème »",
+     "url": "https://www.dna.fr/elections/2026/11/25/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "date": "2026-11-26T05:27:00.000Z"
     },
     {
      "media": "Le Dauphiné libéré",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
+     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
+     "url": "https://www.ledauphine.com/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "date": "2026-11-26T05:27:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Politique. Budget 2027 : un accord impossible au Parlement ? Sébastien Lecornu poussé à choisir entre 49.3 et ordonnances",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/budget-2027-un-accord-impossible-au-parlement-sebastien-lecornu-pousse-a-choisir-entre-49-3-et-ordonnances",
-     "date": "2026-11-26T06:10:00.000Z"
-    },
-    {
-     "media": "La Dépêche",
-     "titre": "Le Meilleur Pâtissier : arrivée d'Olivier Minne, nouveau jury, candidats… tout ce qui vous attend cette saison à partir de ce jeudi soir",
-     "url": "https://www.ladepeche.fr/2026/11/26/le-meilleur-patissier-arrivee-dolivier-minne-nouveau-jury-candidats-tout-ce-qui-vous-attend-cette-saison-a-partir-de-ce-jeudi-soir-13663155.php",
-     "date": "2026-11-26T06:02:02.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "Echanges secrets avec Ciotti, tensions avec Estrosi, visites aux députés RN... nos révélations sur le passage du préfet Hugues Moutouh dans les Alpes-Maritimes",
-     "url": "https://www.nicematin.com/societe/polemique/echanges-secrets-avec-ciotti-tensions-avec-estrosi-visites-aux-deputes-rn-nos-revelations-sur-le-passage-du-prefet-hugues-moutouh-dans-les-alpes-maritimes-10768490",
-     "date": "2026-11-26T03:15:04.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Budget : le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
-     "url": "https://www.publicsenat.fr/actualites/politique/budget-le-senat-reconduit-la-surtaxe-sur-les-grandes-entreprises-allegee-de-2-milliards-deuros",
-     "date": "2026-11-26T00:33:43.000Z"
-    },
-    {
-     "media": "Le Monde",
-     "titre": "Budget 2027 : le Sénat approuve l’effort de cinq milliards d’euros demandé aux grandes entreprises",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/26/budget-2027-le-senat-approuve-l-effort-de-cinq-milliards-d-euros-demande-aux-grandes-entreprises_6815197_823448.html",
-     "date": "2026-11-25T23:50:44.000Z"
-    },
-    {
-     "media": "Sud Ouest",
-     "titre": "Budget de l’Union européenne : Macron ne veut « pas un euro » de moins pour la politique agricole commune",
-     "url": "https://www.sudouest.fr/economie/budget-de-l-union-europeenne-macron-ne-veut-pas-un-euro-de-moins-pour-la-politique-agricole-commune-31672013.php",
-     "date": "2026-11-25T19:03:52.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Budget de l’UE : face aux coupes budgétaires prévues, les agriculteurs sur le pont pour défendre leurs revenus",
-     "url": "https://www.humanite.fr/monde/agriculture/budget-de-lue-face-aux-coupes-budgetaires-prevues-les-agriculteurs-sur-le-pont-pour-defendre-leurs-revenus",
-     "date": "2026-11-25T16:03:04.000Z"
-    },
-    {
-     "media": "Le JDD",
-     "titre": "«Ce n’est pas notre guerre» : Teddy Riner prend position sur l'Ukraine et appelle à des élections anticipées",
-     "url": "https://www.lejdd.fr/politique/ce-nest-pas-notre-guerre-teddy-riner-prend-position-sur-lukraine-et-appelle-a-des-elections-anticipees-189684",
-     "date": "2026-11-25T16:00:17.000Z"
+     "titre": "Francesca, 59 ans. Victime d’un licenciement économique, « on m’a fait comprendre que mon âge était un problème »\"",
+     "url": "https://www.estrepublicain.fr/elections/2026/11/26/victime-d-un-licenciement-economique-on-m-a-fait-comprendre-que-mon-age-etait-un-probleme",
+     "date": "2026-11-26T05:27:00.000Z"
     },
     {
      "media": "20 Minutes",
-     "titre": "Budget 2027 : Le Sénat réduit la niche fiscale des retraités (mais ne la supprime pas)",
-     "url": "https://www.20minutes.fr/politique/4265555-20261125-budget-2027-senat-reduit-niche-fiscale-retraites-supprime?at_medium=display&at_campaign=149",
-     "date": "2026-11-25T07:55:35.000Z"
+     "titre": "EN DIRECT Présidentielle 2027 : Lisnard veut convaincre les électeurs de « tous horizons y compris le RN », Riner rejoint Le Pen sur l'Ukraine…",
+     "url": "https://www.20minutes.fr/politique/4265846-20261126-direct-presidentielle-2027-lisnard-veut-convaincre-electeurs-tous-horizons-compris-rn?at_medium=display&at_campaign=149",
+     "date": "2026-11-26T05:00:03.000Z"
     },
     {
-     "media": "L'Obs",
-     "titre": "Bilan d’Emmanuel Macron : boudé par Renaissance et Horizons, le MoDem fait le SAV tout seul",
-     "url": "https://www.nouvelobs.com/politique/20261124.OBS120413/le-modem-lance-un-site-pour-saluer-les-10-ans-de-macron-sans-renaissance-ni-horizons.html",
-     "date": "2026-11-24T19:31:09.000Z"
+     "media": "BFMTV",
+     "titre": "\"Quand je vois ses propositions qui viennent à 99% du programme de Marine Le Pen, je ne comprends pas pourquoi il ne nous aide pas\", assure Jean-Philippe Tanguy (RN) à propos de David Lisnard",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-quand-je-vois-ses-propositions-qui-viennent-a-99-du-programme-de-marine-le-pen-je-ne-comprends-pas-pourquoi-il-ne-nous-aide-pas-assure-jean-philippe-tanguy-rn-a-propos-de-david-lisnard_VN-202611250998.html",
+     "date": "2026-11-25T22:08:42.000Z",
+     "video": true
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Présidentielle 2027 : David Lisnard veut attirer des électeurs de « tous horizons y compris le RN »",
+     "url": "https://www.sudouest.fr/politique/presidentielle-2027-david-lisnard-veut-attirer-des-electeurs-de-tous-horizons-y-compris-le-rn-31673699.php",
+     "date": "2026-11-25T21:07:07.000Z"
+    },
+    {
+     "media": "Europe 1",
+     "titre": "Commerçants : les réseaux de franchise ont «mieux résisté à ce qu'il s'est passé le 17 octobre», estime le président de l'IREF",
+     "url": "https://www.europe1.fr/economie/commercants-les-reseaux-de-franchise-ont-mieux-resiste-a-ce-quil-sest-passe-le-17-octobre-estime-le-president-de-liref-1244872?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
+     "date": "2026-11-25T20:30:00.000Z"
+    },
+    {
+     "media": "Mediapart",
+     "titre": "Victimes des tirs nucléaires: le revirement du gouvernement",
+     "url": "https://www.mediapart.fr/journal/ecologie/251126/victimes-des-tirs-nucleaires-le-revirement-du-gouvernement",
+     "date": "2026-11-25T19:21:08.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Budget : Sébastien Lecornu assure qu’il n’a pas de « volonté de passage en force », et appelle au « compromis »",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/25/budget-sebastien-lecornu-assure-qu-il-n-a-pas-de-volonte-de-passage-en-force-et-appelle-au-compromis_6815129_823448.html",
+     "date": "2026-11-25T15:37:16.000Z"
     },
     {
      "media": "Libération",
-     "titre": "Attal, Retailleau et Lisnard annulent leur deuxième réunion sur la primaire en attendant la rencontre autour de Larcher",
-     "url": "https://www.liberation.fr/politique/attal-retailleau-et-lisnard-annulent-leur-deuxieme-reunion-sur-la-primaire-en-attendant-la-rencontre-autour-de-larcher-20261124_A65DDJYCZFFQNN75YDHKX5CZ2M/",
-     "date": "2026-11-24T09:54:59.000Z"
+     "titre": "Présidentielle 2027 : après François Bayrou, au tour de Jean-Noël Barrot de prôner le «ni-ni» entre Jean-Luc Mélenchon et Marine Le Pen",
+     "url": "https://www.liberation.fr/politique/elections/presidentielle-2027-apres-francois-bayrou-au-tour-de-jean-noel-barrot-de-proner-le-ni-ni-entre-jean-luc-melenchon-et-marine-le-pen-20261125_YRWHOZLD4JFHND6FVZP5KEJU5M/",
+     "date": "2026-11-25T08:39:10.000Z"
     },
     {
-     "media": "Le Figaro",
-     "titre": "Budget : Emmanuel Macron envisagerait un Congrès sur la règle d’or, droite et RN sont favorables mais critiques",
-     "url": "https://www.lefigaro.fr/politique/budget-emmanuel-macron-envisagerait-un-congres-sur-la-regle-d-or-droite-et-rn-sont-favorables-mais-critiques-20261122",
-     "date": "2026-11-24T09:07:32.000Z"
+     "media": "Public Sénat",
+     "titre": "Budget 2027 : les sénateurs étrillent la « lettre au Père Noël » de Sébastien Lecornu, qui appelle les parlementaires au « compromis »",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-les-senateurs-etrillent-la-lettre-au-pere-noel-de-sebastien-lecornu-qui-appelle-les-parlementaires-au-compromis",
+     "date": "2026-11-24T17:07:03.000Z"
+    },
+    {
+     "media": "L'Express",
+     "titre": "\"Ne pas être allé en Chine, c’est ne pas comprendre le monde\" : le prochain président devra traiter avec Xi Jinping, et tous les candidats n’y sont pas prêts",
+     "url": "https://www.lexpress.fr/politique/ne-pas-etre-alle-en-chine-cest-ne-pas-comprendre-le-monde-le-prochain-president-devra-traiter-avec-LJ5J4AC7VBBENFFXPSQSITMJKU/",
+     "date": "2026-11-24T17:00:00.000Z"
+    },
+    {
+     "media": "France 24",
+     "titre": "Orphelins de féminicides, les victimes oubliées",
+     "url": "https://www.france24.com/fr/%C3%A9missions/c-est-en-france/20261124-orphelins-feminicides-meurtres-violences-faites-aux-femmes",
+     "date": "2026-11-24T11:43:57.000Z"
     }
    ]
   },
@@ -615,6 +615,99 @@
  ],
  "sujets": [
   {
+   "medias": 9,
+   "mediasDistincts": 6,
+   "sources": [
+    "Nice-Matin",
+    "Libération",
+    "France 24",
+    "EBRA",
+    "BFMTV",
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-26T07:11:30.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jordan Bardella",
+      "photo": "photos/personnalites/jordan-bardella.jpg",
+      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
+      "parti": "RN",
+      "credit": "European Union, European Parliament, Wikimedia Commons"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.leprogres.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "Le Progrès",
+     "date": "2026-11-26T06:37:00.000Z"
+    },
+    {
+     "titre": "Écrits antisémites : de nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
+     "url": "https://www.nicematin.com/societe/justice/ecrits-antisemites-de-nouveaux-elements-compromettants-pour-jordan-bardella-reveles-par-le-monde-et-mediapart-10768809",
+     "media": "Nice-Matin",
+     "date": "2026-11-26T07:11:30.000Z"
+    },
+    {
+     "titre": "Ecrits antisémites : Jordan Bardella visé par de nouvelles révélations du «Monde» et de «Mediapart»",
+     "url": "https://www.liberation.fr/politique/ecrits-antisemites-le-monde-et-mediapart-revelent-de-nouveaux-elements-attribuant-les-propos-a-jordan-bardella-20261126_BNWRSU22LNFUFJT2CZYNGRILZI/",
+     "media": "Libération",
+     "date": "2026-11-26T07:01:11.000Z"
+    },
+    {
+     "titre": "Écrits antisémites : de nouveaux éléments accablent Jordan Bardella",
+     "url": "https://www.france24.com/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-de-nouveaux-%C3%A9l%C3%A9ments-accablent-jordan-bardella",
+     "media": "France 24",
+     "date": "2026-11-26T06:58:38.000Z"
+    },
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.dna.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-26T06:37:00.000Z"
+    },
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.ledauphine.com/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "Le Dauphiné libéré",
+     "date": "2026-11-26T06:37:00.000Z"
+    },
+    {
+     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
+     "url": "https://www.estrepublicain.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
+     "media": "L'Est républicain",
+     "date": "2026-11-26T06:37:00.000Z"
+    },
+    {
+     "titre": "Écrits antisémites attribués à Jordan Bardella: Le Monde et Mediapart révèlent de nouveaux éléments mettant en cause le président du RN, qui réfute \"catégoriquement\" en être l'auteur",
+     "url": "https://www.bfmtv.com/politique/front-national/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-revelent-de-nouveaux-elements-mettant-en-cause-le-president-du-rn_AD-202611260232.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T06:20:20.000Z"
+    },
+    {
+     "titre": "Écrits antisémites attribués à Jordan Bardella : de nouveaux éléments révélés par Le Monde et Mediapart relient le président du RN aux messages",
+     "url": "https://www.sudouest.fr/politique/jordan-bardella/ecrits-antisemites-attribues-a-jordan-bardella-de-nouveaux-elements-reveles-par-le-monde-et-mediapart-relient-le-president-du-rn-aux-messages-31676051.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-26T06:19:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Écrits antisémites",
+    "origine": "recoupement"
+   },
+   "fait": "De nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
+   "accroche": "De nouveaux éléments compromettants pour Jordan Bardella révélés par Le Monde et Mediapart",
+   "essentiel": "De nouveaux éléments révélés par Le Monde et Mediapart relient le président du Rassemblement national aux messages. Le Monde et Mediapart dévoilent de nouvelles preuves. Neuf médias en parlent.",
+   "rubrique": "Politique"
+  },
+  {
    "medias": 4,
    "mediasDistincts": 4,
    "sources": [
@@ -677,78 +770,6 @@
    "medias": 6,
    "mediasDistincts": 3,
    "sources": [
-    "EBRA",
-    "BFMTV",
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-26T06:37:00.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jordan Bardella",
-      "photo": "photos/personnalites/jordan-bardella.jpg",
-      "photoHd": "photos/personnalites/hd/jordan-bardella.jpg",
-      "parti": "RN",
-      "credit": "European Union, European Parliament, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.leprogres.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Le Progrès",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.dna.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.ledauphine.com/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Politique. Écrits antisémites attribués à Jordan Bardella : Le Monde et Mediapart dévoilent de nouvelles preuves",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/26/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-devoilent-de-nouvelles-preuves",
-     "media": "L'Est républicain",
-     "date": "2026-11-26T06:37:00.000Z"
-    },
-    {
-     "titre": "Écrits antisémites attribués à Jordan Bardella: Le Monde et Mediapart révèlent de nouveaux éléments mettant en cause le président du RN, qui réfute \"catégoriquement\" en être l'auteur",
-     "url": "https://www.bfmtv.com/politique/front-national/ecrits-antisemites-attribues-a-jordan-bardella-le-monde-et-mediapart-revelent-de-nouveaux-elements-mettant-en-cause-le-president-du-rn_AD-202611260232.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T06:20:20.000Z"
-    },
-    {
-     "titre": "Écrits antisémites attribués à Jordan Bardella : de nouveaux éléments révélés par Le Monde et Mediapart relient le président du RN aux messages",
-     "url": "https://www.sudouest.fr/politique/jordan-bardella/ecrits-antisemites-attribues-a-jordan-bardella-de-nouveaux-elements-reveles-par-le-monde-et-mediapart-relient-le-president-du-rn-aux-messages-31676051.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-26T06:19:58.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Écrits antisémites attribués",
-    "origine": "recoupement"
-   },
-   "fait": "Le Monde et Mediapart dévoilent de nouvelles preuves",
-   "accroche": "Le Monde et Mediapart dévoilent de nouvelles preuves",
-   "essentiel": "De nouveaux éléments révélés par Le Monde et Mediapart relient le président du Rassemblement national aux messages. Six médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain, BFMTV et Sud Ouest.",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 6,
-   "mediasDistincts": 3,
-   "sources": [
     "Mediapart",
     "Sud Ouest",
     "EBRA"
@@ -774,7 +795,7 @@
      "date": "2026-11-26T05:49:26.000Z"
     },
     {
-     "titre": "CNews : dénonçant un « péril démocratique », Reporters sans frontières demande à l’Arcom de suspendre la chaîne pendant un mois, est-ce possible ?",
+     "titre": "CNews : dénonçant un « péril démocratique », Reporters sans frontières demande à l’Arcom de suspendre la chaîne pendant un mois, est-ce vraiment possible ?",
      "url": "https://www.sudouest.fr/ile-de-france/cnews-denoncant-un-peril-democratique-reporters-sans-frontieres-demande-a-l-arcom-de-suspendre-la-chaine-pendant-un-mois-est-ce-possible-31675773.php",
      "media": "Sud Ouest",
      "date": "2026-11-26T05:43:56.000Z"
@@ -927,7 +948,7 @@
     "BFMTV",
     "20 Minutes"
    ],
-   "derniere": "2026-11-26T06:51:09.000Z",
+   "derniere": "2026-11-26T07:12:00.000Z",
    "illustration": {
     "personnes": [
      {
@@ -954,7 +975,7 @@
      "titre": "DIRECT. Présidentielle 2027 : David Lisnard rejette la proposition d'un débat avec Édouard Philippe",
      "url": "https://www.ladepeche.fr/2026/11/26/direct-presidentielle-2027-david-lisnard-rejette-la-proposition-dun-debat-avec-edouard-philippe-13672098.php",
      "media": "La Dépêche",
-     "date": "2026-11-26T06:51:09.000Z"
+     "date": "2026-11-26T07:12:00.000Z"
     },
     {
      "titre": "Présidentielle: David Lisnard rejette la proposition d'un débat avec Édouard Philippe",
@@ -1167,7 +1188,7 @@
     "La Dépêche",
     "Le Monde"
    ],
-   "derniere": "2026-11-26T06:52:43.000Z",
+   "derniere": "2026-11-26T07:12:56.000Z",
    "illustration": {
     "personnes": [
      {
@@ -1189,7 +1210,7 @@
      "titre": "De nouveaux propos antisémites attribués à Jordan Bardella dans sa jeunesse : \"Les sionistes sont à la tête des banques, tout est lié\", le président du RN nie en être l'auteur",
      "url": "https://www.ladepeche.fr/2026/11/26/de-nouveaux-propos-antisemites-attribues-a-jordan-bardella-dans-sa-jeunesse-les-sionistes-sont-a-la-tete-des-banques-tout-est-lie-le-president-du-rn-13672102.php",
      "media": "La Dépêche",
-     "date": "2026-11-26T06:52:43.000Z"
+     "date": "2026-11-26T07:12:56.000Z"
     },
     {
      "titre": "« Les sionistes sont à la tête des banques, tout est lié » : nouvelles révélations sur les propos antisémites de Jordan Bardella",
@@ -1344,8 +1365,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Milliards d euros",
+    "origine": "recoupement"
    },
    "fait": "Le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
    "accroche": "Le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
@@ -1492,44 +1513,6 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
-  },
-  {
-   "medias": 2,
-   "mediasDistincts": 2,
-   "sources": [
-    "Le Progrès",
-    "Nice-Matin"
-   ],
-   "derniere": "2026-11-25T18:26:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "education"
-   },
-   "articles": [
-    {
-     "titre": "Curis-au-Mont-d’Or. Cantine scolaire : les prix des repas vont augmenter",
-     "url": "https://www.leprogres.fr/politique/2026/11/25/cantine-scolaire-les-prix-des-repas-vont-augmenter",
-     "media": "Le Progrès",
-     "date": "2026-11-25T18:26:00.000Z"
-    },
-    {
-     "titre": "Le prix des cantines scolaires va augmenter : le Département des Alpes-Maritimes vote une nouvelle hausse des tarifs du repas au collège",
-     "url": "https://www.nicematin.com/societe/politique/le-prix-des-cantines-scolaires-va-augmenter-le-departement-des-alpes-maritimes-vote-une-nouvelle-hausse-des-tarifs-du-repas-au-college-10767512",
-     "media": "Nice-Matin",
-     "date": "2026-11-25T05:49:42.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Santé : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Cantine scolaire : les prix des repas vont augmenter",
-   "accroche": "Cantine scolaire : les prix des repas vont augmenter",
-   "essentiel": "Le prix des cantines scolaires va augmenter : le Département des Alpes-Maritimes vote une nouvelle hausse des tarifs du repas au collège. Deux médias en parlent : Le Progrès et Nice-Matin.",
-   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -2054,8 +2037,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "Premier ministre : ce qu'il faut savoir sur les finances publiques",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Budget",
    "contexte": [
@@ -2106,8 +2090,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Âge était un problème",
-    "origine": "recoupement"
+    "titre": "Compromis",
+    "origine": "dossier"
    },
    "fait": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique",
    "accroche": "Francesca, 59 ans. Habitante de Surbourg et licenciée économique",
@@ -2357,41 +2341,227 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 2,
+   "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "France Médias Monde"
+    "BFMTV"
    ],
-   "derniere": "2026-11-24T08:42:24.000Z",
+   "derniere": "2026-11-26T07:11:25.000Z",
    "illustration": {
-    "personnes": [],
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
     "partis": [],
-    "theme": "justice",
-    "vignette": "justice"
+    "theme": "budget",
+    "vignette": "budget"
    },
    "articles": [
     {
-     "titre": "Mort de Nahel Merzouk en 2023: en appel, la justice française ordonne un procès pour meurtre à l'encontre du policier",
-     "url": "https://www.rfi.fr/fr/france/20261124-mort-de-nahel-en-2023-en-appel-la-justice-fran%C3%A7aise-ordonne-un-proc%C3%A8s-pour-meurtre-%C3%A0-l-encontre-du-policier",
-     "media": "RFI",
-     "date": "2026-11-24T08:42:24.000Z"
-    },
-    {
-     "titre": "Mort de Nahel Merzouk : la justice ordonne un procès pour meurtre à l'encontre du policier",
-     "url": "https://www.france24.com/fr/france/20261124-mort-nahel-merzouk-justice-ordonne-proc%C3%A8s-pour-meurtre-policier",
-     "media": "France 24",
-     "date": "2026-11-24T08:27:33.000Z"
+     "titre": "DIRECT. Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
+     "media": "BFMTV",
+     "date": "2026-11-26T07:11:25.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur les finances publiques",
     "origine": "regles",
     "generique": true
    },
-   "fait": "La justice ordonne un procès pour meurtre à l'encontre du policier",
-   "accroche": "La justice ordonne un procès pour meurtre à l'encontre du policier",
-   "essentiel": "La justice ordonne un procès pour meurtre à l'encontre du policier. Deux médias en parlent : RFI et France 24.",
-   "rubrique": "Justice"
+   "fait": "Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
+   "accroche": "Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Valeurs actuelles"
+   ],
+   "derniere": "2026-11-26T07:03:58.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Emmanuel Macron",
+      "photo": "photos/personnalites/emmanuel-macron.jpg",
+      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
+      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "OQTF, entrées légales records, asile : la faillite de la politique migratoire d’Emmanuel Macron",
+     "url": "https://www.valeursactuelles.com/clubvaleurs/societe/oqtf-entrees-legales-records-asile-la-faillite-de-la-politique-migratoire-demmanuel-macron",
+     "media": "Valeurs actuelles",
+     "date": "2026-11-26T07:03:58.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Emmanuel Macron : ce qu'il faut savoir sur le logement et l'accueil",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-26T07:03:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Fleurie. Le marché de Noël et la patinoire ouvrent ce samedi",
+     "url": "https://www.leprogres.fr/politique/2026/11/26/le-marche-de-noel-et-la-patinoire-ouvrent-ce-samedi",
+     "media": "Le Progrès",
+     "date": "2026-11-26T07:03:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fleurie : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le marché de Noël et la patinoire ouvrent",
+   "accroche": "Le marché de Noël et la patinoire ouvrent",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Obs"
+   ],
+   "derniere": "2026-11-26T07:00:19.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "Le programme de Mélenchon passé au crible : retraite à 60 ans, fin des mutuelles, suppression de Parcoursup…",
+     "url": "https://www.nouvelobs.com/politique/20261126.OBS120451/le-programme-de-melenchon-passe-au-crible-retraite-a-60-ans-fin-des-mutuelles-suppression-de-parcoursup.html",
+     "media": "L'Obs",
+     "date": "2026-11-26T07:00:19.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon : ce qu'il faut savoir sur la mobilisation lycéenne",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "L'Express"
+   ],
+   "derniere": "2026-11-26T07:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "international",
+    "vignette": "international"
+   },
+   "articles": [
+    {
+     "titre": "Face aux empires, vive l’Europe décomplexée ! Par Jean-François Copé",
+     "url": "https://www.lexpress.fr/monde/europe/face-aux-empires-vive-leurope-decomplexee-par-jean-francois-cope-DZRW6UCEBBGOFI4YJ6J4XVVJ5Q/",
+     "media": "L'Express",
+     "date": "2026-11-26T07:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "International : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "International"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-26T07:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Périgueux : des centaines de scolaires sensibilisés au monde rural et à l'agriculture",
+     "url": "https://www.sudouest.fr/culture/perigueux-des-centaines-de-scolaires-sensibilises-au-monde-rural-et-a-l-agriculture-31655196.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-26T07:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Périgueux : actualité scolaire",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-26T07:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Lyon. La rue Grenette ouvrira le 9 décembre « en urgence » pour soutenir les commerces",
+     "url": "https://www.leprogres.fr/environnement/2026/11/26/la-rue-grenette-ouvrira-le-9-decembre-en-urgence-pour-soutenir-les-commerces",
+     "media": "Le Progrès",
+     "date": "2026-11-26T07:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Lyon : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La rue Grenette ouvrira le 9 décembre « en urgence » pour soutenir les commerces",
+   "accroche": "La rue Grenette ouvrira le 9 décembre « en urgence » pour soutenir les commerces",
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -2433,37 +2603,38 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "BFMTV"
+    "France Inter"
    ],
-   "derniere": "2026-11-26T06:45:23.000Z",
+   "derniere": "2026-11-26T06:47:45.000Z",
    "illustration": {
     "personnes": [
      {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
+      "nom": "David Lisnard",
+      "photo": "photos/personnalites/david-lisnard.jpg",
+      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
+      "parti": "DVD",
+      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
      }
     ],
     "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
+    "theme": "election",
+    "vignette": "election"
    },
    "articles": [
     {
-     "titre": "DIRECT. Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/direct-emmanuel-macron-en-route-pour-bruxelle-pour-negocier-avec-les-dirigeants-de-l-ue-sur-le-budget-europeen_LN-202611260221.html",
-     "media": "BFMTV",
-     "date": "2026-11-26T06:45:23.000Z"
+     "titre": "Présidentielle : \"J'ai envie de faire entendre mon projet, j'ai envie que les Français le tranchent\", dit David Lisnard",
+     "url": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-7h50/l-invite-de-7h50-du-jeudi-26-novembre-2026-3666315",
+     "media": "France Inter",
+     "date": "2026-11-26T06:47:45.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
+    "titre": "David Lisnard : déclaration sur la présidentielle de 2027",
+    "origine": "regles"
    },
-   "fait": "Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
-   "accroche": "Emmanuel Macron en route pour Bruxelle pour négocier avec les dirigeants de l'UE sur le budget européen",
-   "rubrique": "Budget"
+   "fait": "David Lisnard dit : « J'ai envie de faire entendre mon projet, j'ai envie que les Français le tranchent »",
+   "accroche": "David Lisnard dit : « J'ai envie de faire entendre mon projet, j'ai envie que les Français le tranchent »",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -2830,42 +3001,6 @@
     "generique": true
    },
    "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Obs"
-   ],
-   "derniere": "2026-11-26T06:00:18.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Le programme de Mélenchon passé au crible : retraite à 60 ans, fin des mutuelles, suppression de Parcoursup…",
-     "url": "https://www.nouvelobs.com/politique/20261126.OBS120451/le-programme-de-melenchon-passe-au-crible-retraite-a-60-ans-fin-des-mutuelles-suppression-de-parcoursup.html",
-     "media": "L'Obs",
-     "date": "2026-11-26T06:00:18.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon : ce qu'il faut savoir sur la mobilisation lycéenne",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget"
   },
   {
    "medias": 1,
@@ -4132,9 +4267,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "David Lisnard : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Compromis",
+    "origine": "dossier"
    },
    "rubrique": "Politique",
    "contexte": [
@@ -5243,124 +5377,6 @@
    "fait": "La Tranclière. Le financement d’une borne incendie refusé",
    "accroche": "La Tranclière. Le financement d’une borne incendie refusé",
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Mediapart"
-   ],
-   "derniere": "2026-11-25T19:21:08.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "gouvernement",
-    "vignette": "gouvernement"
-   },
-   "articles": [
-    {
-     "titre": "Victimes des tirs nucléaires: le revirement du gouvernement",
-     "url": "https://www.mediapart.fr/journal/ecologie/251126/victimes-des-tirs-nucleaires-le-revirement-du-gouvernement",
-     "media": "Mediapart",
-     "date": "2026-11-25T19:21:08.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Gouvernement"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-25T19:20:29.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Amplepuis. Agrandissement du centre municipal de santé : les entreprises retenues",
-     "url": "https://www.leprogres.fr/politique/2026/11/25/agrandissement-du-centre-municipal-de-sante-les-entreprises-retenues",
-     "media": "Le Progrès",
-     "date": "2026-11-25T19:20:29.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Amplepuis : santé publique",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "20 Minutes"
-   ],
-   "derniere": "2026-11-25T19:13:17.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle 2027 : « Je suis fan et je vais le parrainer »… Comment les candidats tentent de séduire les maires",
-     "url": "https://www.20minutes.fr/politique/4265748-20261125-presidentielle-2027-fan-vais-parrainer-comment-candidats-tentent-seduire-maires?at_medium=display&at_campaign=149",
-     "media": "20 Minutes",
-     "date": "2026-11-25T19:13:17.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Présidentielle 2027 : ce que disent les médias",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-25T19:03:52.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Emmanuel Macron",
-      "photo": "photos/personnalites/emmanuel-macron.jpg",
-      "photoHd": "photos/personnalites/hd/emmanuel-macron.jpg",
-      "credit": "Nebojša Tejić, Public domain, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Budget de l’Union européenne : Macron ne veut « pas un euro » de moins pour la politique agricole commune",
-     "url": "https://www.sudouest.fr/economie/budget-de-l-union-europeenne-macron-ne-veut-pas-un-euro-de-moins-pour-la-politique-agricole-commune-31672013.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-25T19:03:52.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Budget",
-    "origine": "dossier"
-   },
-   "fait": "Macron ne veut « pas un euro » de moins pour la politique agricole commune",
-   "accroche": "Macron ne veut « pas un euro » de moins pour la politique agricole commune",
-   "rubrique": "Budget"
   }
  ]
 }
