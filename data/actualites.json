@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-26T03:55:38.164Z",
+ "lastUpdated": "2026-11-26T04:01:10.591Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -75,7 +75,7 @@
   {
    "nom": "Le Progrès",
    "site": "https://www.leprogres.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Dernières Nouvelles d'Alsace",
@@ -295,39 +295,44 @@
    ]
   },
   {
-   "id": "prefet",
-   "titre": "Préfet",
+   "id": "fuites",
+   "titre": "Fuites",
    "motifs": [
+    "fuites",
     "préfet",
     "démis",
-    "fonctions",
-    "soupçons"
+    "fonctions"
    ],
    "medias": [
     "Nice-Matin",
+    "BFMTV",
     "Mediapart",
     "Le Monde",
+    "Dernières Nouvelles d'Alsace",
+    "L'Est républicain",
+    "Sud Ouest",
     "L'Obs",
     "L'Humanité",
     "France 24",
     "RFI",
     "20 Minutes",
-    "Europe 1",
-    "Public Sénat"
+    "Europe 1"
    ],
-   "mediasDistincts": 9,
+   "mediasDistincts": 11,
    "sources": [
     "Nice-Matin",
+    "BFMTV",
     "Mediapart",
     "Le Monde",
+    "EBRA",
+    "Sud Ouest",
     "L'Obs",
     "L'Humanité",
     "France Médias Monde",
     "20 Minutes",
-    "Europe 1",
-    "Public Sénat"
+    "Europe 1"
    ],
-   "nb": 14,
+   "nb": 19,
    "derniere": "2026-11-26T03:15:04.000Z",
    "articles": [
     {
@@ -335,6 +340,13 @@
      "titre": "Echanges secrets avec Ciotti, tensions avec Estrosi, visites aux députés RN... nos révélations sur le passage du préfet Hugues Moutouh dans les Alpes-Maritimes",
      "url": "https://www.nicematin.com/societe/polemique/echanges-secrets-avec-ciotti-tensions-avec-estrosi-visites-aux-deputes-rn-nos-revelations-sur-le-passage-du-prefet-hugues-moutouh-dans-les-alpes-maritimes-10768490",
      "date": "2026-11-26T03:15:04.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Suspicions de fuites pour le RN: \"J'ai l'impression que c'est des règlements de compte\", assure Jean-Philippe Tanguy, député RN de la Somme",
+     "url": "https://www.bfmtv.com/politique/front-national/video-suspicions-de-fuites-pour-le-rn-j-ai-l-impression-que-c-est-des-reglements-de-compte-assure-jean-philippe-tanguy-depute-rn-de-la-somme_VN-202611251001.html",
+     "date": "2026-11-25T22:13:35.000Z",
+     "video": true
     },
     {
      "media": "Mediapart",
@@ -349,10 +361,29 @@
      "date": "2026-11-25T19:11:02.000Z"
     },
     {
-     "media": "Mediapart",
-     "titre": "Liens cachés avec le RN: un préfet débarqué, un magistrat sous enquête",
-     "url": "https://www.mediapart.fr/journal/france/251126/liens-caches-avec-le-rn-un-prefet-debarque-un-magistrat-sous-enquete",
-     "date": "2026-11-25T15:59:29.000Z"
+     "media": "Le Monde",
+     "titre": "Ce que l’on sait des fuites d’informations confidentielles vers le Rassemblement national",
+     "url": "https://www.lemonde.fr/videos/video/2026/11/25/ce-que-l-on-sait-des-fuites-d-informations-confidentielles-vers-le-rassemblement-national_6815155_1669088.html",
+     "date": "2026-11-25T17:30:09.000Z",
+     "video": true
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Politique. Cyberattaques et fuites de données : le Sénat va lancer une commission d'enquête",
+     "url": "https://www.dna.fr/science-et-technologie/2026/11/25/cyberattaques-et-fuites-de-donnees-le-senat-va-lancer-une-commission-d-enquete",
+     "date": "2026-11-25T16:51:00.000Z"
+    },
+    {
+     "media": "L'Est républicain",
+     "titre": "Politique. Cyberattaques et fuites de données : le Sénat va lancer une commission d'enquête",
+     "url": "https://www.estrepublicain.fr/science-et-technologie/2026/11/25/cyberattaques-et-fuites-de-donnees-le-senat-va-lancer-une-commission-d-enquete",
+     "date": "2026-11-25T16:51:00.000Z"
+    },
+    {
+     "media": "Sud Ouest",
+     "titre": "Cybersécurité : une commission d’enquête sur les cyberattaques et les fuites de données va être lancée au Sénat",
+     "url": "https://www.sudouest.fr/sciences-et-technologie/cybersecurite-une-commission-d-enquete-sur-les-cyberattaques-et-les-fuites-de-donnees-va-etre-lancee-au-senat-31669510.php",
+     "date": "2026-11-25T16:48:37.000Z"
     },
     {
      "media": "L'Obs",
@@ -379,134 +410,115 @@
      "date": "2026-11-25T12:16:24.000Z"
     },
     {
-     "media": "Le Monde",
-     "titre": "Hugues Moutouh, le préfet soupçonné de fuites d’informations confidentielles vers le RN, a été démis de ses fonctions en conseil des ministres",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/25/hugues-moutouh-le-prefet-soupconne-de-fuites-d-informations-confidentielles-vers-le-rn-a-ete-demis-de-ses-fonctions-en-conseil-des-ministres_6815089_823448.html",
-     "date": "2026-11-25T11:32:38.000Z"
-    },
-    {
      "media": "20 Minutes",
      "titre": "Soupçons de fuite au profit du RN : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
      "url": "https://www.20minutes.fr/politique/4265628-20261125-soupcons-fuite-profit-rn-prefet-moutouh-officiellement-demis-fonctions-successeur-nomme?at_medium=display&at_campaign=149",
      "date": "2026-11-25T11:21:14.000Z"
     },
     {
-     "media": "Nice-Matin",
-     "titre": "Affaire des fuites au profit du RN : l’ex-préfet des Alpes-Maritimes, Hugues Moutouh, officiellement démis de ses fonctions et remplacé",
-     "url": "https://www.nicematin.com/societe/politique/l-ex-prefet-des-alpes-maritimes-hugues-moutouh-officiellement-demis-de-ses-fonctions-et-remplace-10768524",
-     "date": "2026-11-25T11:03:54.000Z"
-    },
-    {
      "media": "Europe 1",
      "titre": "Enquête RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
      "url": "https://www.europe1.fr/politique/enquete-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-1244659?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
      "date": "2026-11-25T11:02:21.000Z"
-    },
-    {
-     "media": "Nice-Matin",
-     "titre": "« Il souhaite être démis de ses fonctions » : Laurent Nuñez a proposé un successeur à l’ancien préfet des Alpes-Maritimes Hugues Moutouh, dans la tourmente",
-     "url": "https://www.nicematin.com/societe/polemique/le-prefet-moutouh-m-a-fait-savoit-qu-il-souhaitait-etre-demis-de-ses-fonctions-laurent-nuez-a-propose-un-successeur-a-l-ancien-prefet-des-alpes-maritimes-dans-la-tourmente-10768208",
-     "date": "2026-11-24T14:37:52.000Z"
-    },
-    {
-     "media": "Public Sénat",
-     "titre": "Sondage : au deuxième tour, seuls David Lisnard et Edouard Philippe seraient préférés à Marine Le Pen",
-     "url": "https://www.publicsenat.fr/actualites/politique/sondage-au-deuxieme-tour-seuls-david-lisnard-et-edouard-philippe-seraient-preferes-a-marine-le-pen",
-     "date": "2026-11-24T04:00:00.000Z"
     }
    ]
   },
   {
-   "id": "enquete",
-   "titre": "Enquête",
+   "id": "euros",
+   "titre": "Euros",
    "motifs": [
-    "enquête"
+    "euros",
+    "millions"
    ],
    "medias": [
+    "Public Sénat",
+    "Le Monde",
     "Dernières Nouvelles d'Alsace",
+    "BFMTV",
+    "Le Progrès",
+    "Le Dauphiné libéré",
     "L'Est républicain",
-    "Sud Ouest",
-    "Mediapart",
-    "L'Humanité",
-    "Europe 1",
-    "Le JDD",
-    "Libération",
-    "L'Obs",
-    "France 24"
+    "20 Minutes",
+    "Le JDD"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 6,
    "sources": [
+    "Public Sénat",
+    "Le Monde",
     "EBRA",
-    "Sud Ouest",
-    "Mediapart",
-    "L'Humanité",
-    "Groupe Bolloré",
-    "Libération",
-    "L'Obs",
-    "France 24"
+    "BFMTV",
+    "20 Minutes",
+    "Le JDD"
    ],
-   "nb": 10,
-   "derniere": "2026-11-25T16:51:00.000Z",
+   "nb": 11,
+   "derniere": "2026-11-26T00:33:43.000Z",
    "articles": [
     {
+     "media": "Public Sénat",
+     "titre": "Budget : le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-le-senat-reconduit-la-surtaxe-sur-les-grandes-entreprises-allegee-de-2-milliards-deuros",
+     "date": "2026-11-26T00:33:43.000Z"
+    },
+    {
+     "media": "Le Monde",
+     "titre": "Budget 2027 : le Sénat approuve l’effort de cinq milliards d’euros demandé aux grandes entreprises",
+     "url": "https://www.lemonde.fr/politique/article/2026/11/26/budget-2027-le-senat-approuve-l-effort-de-cinq-milliards-d-euros-demande-aux-grandes-entreprises_6815197_823448.html",
+     "date": "2026-11-25T23:50:44.000Z"
+    },
+    {
      "media": "Dernières Nouvelles d'Alsace",
-     "titre": "Politique. Cyberattaques et fuites de données : le Sénat va lancer une commission d'enquête",
-     "url": "https://www.dna.fr/science-et-technologie/2026/11/25/cyberattaques-et-fuites-de-donnees-le-senat-va-lancer-une-commission-d-enquete",
-     "date": "2026-11-25T16:51:00.000Z"
+     "titre": "Alsace. Plus d’un millier de personnes pour Bardella en dédicace à Haguenau",
+     "url": "https://www.dna.fr/politique/2026/11/25/plus-d-un-millier-de-personnes-pour-bardella-en-dedicace-a-haguenau",
+     "date": "2026-11-25T20:45:00.000Z"
+    },
+    {
+     "media": "BFMTV",
+     "titre": "Proposition d'augmenter de 200 euros net les salaires: \"Il s'agit de rapprocher le brut du net\", explique Dominique de Villepin, candidat à l'élection présidentielle",
+     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-proposition-d-augmenter-de-200-euros-net-les-salaires-il-s-agit-de-rapprocher-le-brut-du-net-explique-dominique-de-villepin-candidat-a-l-election-presidentielle_VN-202611250948.html",
+     "date": "2026-11-25T20:26:44.000Z",
+     "video": true
+    },
+    {
+     "media": "Le Progrès",
+     "titre": "Hongrie. Près de 18 millions d’euros en cash retrouvés enterrés dans la forêt, un ex-ministre de Viktor Orbán visé",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/25/pres-de-18-millions-d-euros-en-cash-retrouves-enterres-dans-la-foret-un-ex-ministre-de-viktor-orban-vise",
+     "date": "2026-11-25T20:10:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Hongrie. Près de 18 millions d’euros en cash retrouvés enterrés dans la forêt, un ex-ministre de Viktor Orbán visé",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/25/pres-de-18-millions-d-euros-en-cash-retrouves-enterres-dans-la-foret-un-ex-ministre-de-viktor-orban-vise",
+     "date": "2026-11-25T20:10:00.000Z"
+    },
+    {
+     "media": "Le Dauphiné libéré",
+     "titre": "Hongrie. Près de 18 millions d’euros en cash retrouvés enterrés dans la forêt, un ex-ministre de Viktor Orbán visé",
+     "url": "https://www.ledauphine.com/faits-divers-justice/2026/11/25/pres-de-18-millions-d-euros-en-cash-retrouves-enterres-dans-la-foret-un-ex-ministre-de-viktor-orban-vise",
+     "date": "2026-11-25T20:10:00.000Z"
     },
     {
      "media": "L'Est républicain",
-     "titre": "Politique. Cyberattaques et fuites de données : le Sénat va lancer une commission d'enquête",
-     "url": "https://www.estrepublicain.fr/science-et-technologie/2026/11/25/cyberattaques-et-fuites-de-donnees-le-senat-va-lancer-une-commission-d-enquete",
-     "date": "2026-11-25T16:51:00.000Z"
+     "titre": "Hongrie. Près de 18 millions d’euros en cash retrouvés enterrés dans la forêt, un ex-ministre de Viktor Orbán visé",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/25/pres-de-18-millions-d-euros-en-cash-retrouves-enterres-dans-la-foret-un-ex-ministre-de-viktor-orban-vise",
+     "date": "2026-11-25T20:10:00.000Z"
     },
     {
-     "media": "Sud Ouest",
-     "titre": "Cybersécurité : une commission d’enquête sur les cyberattaques et les fuites de données va être lancée au Sénat",
-     "url": "https://www.sudouest.fr/sciences-et-technologie/cybersecurite-une-commission-d-enquete-sur-les-cyberattaques-et-les-fuites-de-donnees-va-etre-lancee-au-senat-31669510.php",
-     "date": "2026-11-25T16:48:37.000Z"
-    },
-    {
-     "media": "Mediapart",
-     "titre": "Liens cachés avec le RN: un préfet débarqué, un magistrat sous enquête",
-     "url": "https://www.mediapart.fr/journal/france/251126/liens-caches-avec-le-rn-un-prefet-debarque-un-magistrat-sous-enquete",
-     "date": "2026-11-25T15:59:29.000Z"
-    },
-    {
-     "media": "L'Humanité",
-     "titre": "Soupçons de fuites au profit du RN : le préfet Moutouh démis de ses fonctions et le procureur adjoint de Paris visé par une enquête",
-     "url": "https://www.humanite.fr/politique/extreme-droite/soupcons-de-fuites-au-profit-du-rn-le-prefet-moutouh-demis-de-ses-fonctions-et-le-procureur-adjoint-de-paris-vise-par-une-enquete",
-     "date": "2026-11-25T14:42:21.000Z"
-    },
-    {
-     "media": "Europe 1",
-     "titre": "Enquête RN : Hugues Moutouh officiellement démis de ses fonctions, remplacé par le préfet Pierre Ory",
-     "url": "https://www.europe1.fr/politique/enquete-rn-hugues-moutouh-officiellement-demis-de-ses-fonctions-remplace-par-le-prefet-pierre-ory-1244659?at_medium=RSS%20feeds&at_campaign=Flux%20Generique",
-     "date": "2026-11-25T11:02:21.000Z"
+     "media": "20 Minutes",
+     "titre": "Apprentissage : La Cour des comptes dénonce des milliards d’euros de fraudes et d’abus",
+     "url": "https://www.20minutes.fr/societe/4265639-20261125-apprentissage-cour-comptes-denonce-milliards-euros-fraudes-abus?at_medium=display&at_campaign=149",
+     "date": "2026-11-25T11:46:40.000Z"
     },
     {
      "media": "Le JDD",
-     "titre": "Enquête ouverte au Havre : Édouard Philippe dénonce une «vendetta judiciaire»",
-     "url": "https://www.lejdd.fr/politique/enquete-ouverte-au-havre-edouard-philippe-denonce-une-vendetta-judiciaire-189585",
-     "date": "2026-11-24T17:25:10.000Z"
+     "titre": "Budget 2027 : le Sénat renonce à supprimer l’abattement fiscal des retraités, mais le plafonne à 1 000 euros",
+     "url": "https://www.lejdd.fr/politique/budget-2027-le-senat-renonce-a-supprimer-labattement-fiscal-des-retraites-mais-le-plafonne-a-1-000-euros-189588",
+     "date": "2026-11-24T17:00:12.000Z"
     },
     {
-     "media": "Libération",
-     "titre": "Détournement de fonds publics : enquête ouverte au Havre, Edouard Philippe dénonce une «vendetta judiciaire»",
-     "url": "https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/",
-     "date": "2026-11-24T15:57:12.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Edouard Philippe dénonce une « vendetta » après une nouvelle enquête pour détournement de fonds publics",
-     "url": "https://www.nouvelobs.com/justice/20261124.OBS120407/edouard-philippe-denonce-une-vendetta-apres-une-nouvelle-enquete-pour-detournement-de-fonds-publics.html",
-     "date": "2026-11-24T15:47:37.000Z"
-    },
-    {
-     "media": "France 24",
-     "titre": "Détournement de fonds de publics : une enquête vise l'agglomération du Havre d'Édouard Philippe",
-     "url": "https://www.france24.com/fr/france/20261124-edouard-philippe-vis%C3%A9-par-une-enqu%C3%AAte-pour-d%C3%A9tournement-de-fonds-publics-au-havre",
-     "date": "2026-11-24T14:47:28.000Z"
+     "media": "Public Sénat",
+     "titre": "Budget 2027 : coup de théâtre, le Sénat renonce à supprimer l’abattement de 10 % des retraités, mais le plafonne à 1000 euros",
+     "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-coup-de-theatre-le-senat-renonce-a-supprimer-labattement-de-10-des-retraites",
+     "date": "2026-11-24T16:17:02.000Z"
     }
    ]
   }
@@ -557,7 +569,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Préfet",
+    "titre": "Fuites",
     "origine": "dossier"
    },
    "fait": "Soupçons de fuite au profit du Rassemblement national : Le préfet Moutouh officiellement démis de ses fonctions, son successeur nommé",
@@ -616,8 +628,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Enquête",
-    "origine": "dossier"
+    "titre": "Détournement de fonds",
+    "origine": "recoupement"
    },
    "fait": "Détournement de fonds publics : enquête ouverte au Havre",
    "accroche": "Détournement de fonds publics : enquête ouverte au Havre",
@@ -625,7 +637,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 5,
+   "medias": 6,
    "mediasDistincts": 3,
    "sources": [
     "BFMTV",
@@ -644,8 +656,8 @@
    "articles": [
     {
      "titre": "Présidentielle 2027. C'est « non » : LFI refuse net la rencontre proposée par les ex-insoumis de L'Après",
-     "url": "https://www.dna.fr/politique/2026/11/25/c-est-non-lfi-refuse-net-la-rencontre-proposee-par-les-ex-insoumis-de-l-apres",
-     "media": "Dernières Nouvelles d'Alsace",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/c-est-non-lfi-refuse-net-la-rencontre-proposee-par-les-ex-insoumis-de-l-apres",
+     "media": "Le Progrès",
      "date": "2026-11-25T18:56:00.000Z"
     },
     {
@@ -659,6 +671,12 @@
      "url": "https://www.liberation.fr/politique/lfi-refuse-de-rencontrer-les-anciens-insoumis-de-lapres-en-vue-dune-eventuelle-coalition-20261125_2BOWYGXNWRDLXGIFZM6NMNHEYU/",
      "media": "Libération",
      "date": "2026-11-25T19:00:06.000Z"
+    },
+    {
+     "titre": "Présidentielle 2027. C'est « non » : LFI refuse net la rencontre proposée par les ex-insoumis de L'Après",
+     "url": "https://www.dna.fr/politique/2026/11/25/c-est-non-lfi-refuse-net-la-rencontre-proposee-par-les-ex-insoumis-de-l-apres",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-25T18:56:00.000Z"
     },
     {
      "titre": "Présidentielle 2027. C'est « non » : LFI refuse net la rencontre proposée par les ex-insoumis de L'Après",
@@ -679,7 +697,7 @@
    },
    "fait": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue",
    "accroche": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue",
-   "essentiel": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue. Cinq médias en parlent : Dernières Nouvelles d'Alsace, BFMTV, Libération, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "La France insoumise refuse de rencontrer les anciens insoumis de L’Après en vue. Six médias en parlent : Le Progrès, BFMTV, Libération, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027"
   },
   {
@@ -836,7 +854,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "EBRA",
@@ -857,6 +875,12 @@
     "vignette": "budget"
    },
    "articles": [
+    {
+     "titre": "Politique. Budget 2027 : Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/budget-2027-lecornu-exclut-tout-passage-en-force-et-appelle-au-compromis",
+     "media": "Le Progrès",
+     "date": "2026-11-25T20:27:00.000Z"
+    },
     {
      "titre": "Politique. Budget 2027 : Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
      "url": "https://www.dna.fr/politique/2026/11/25/budget-2027-lecornu-exclut-tout-passage-en-force-et-appelle-au-compromis",
@@ -888,7 +912,7 @@
    },
    "fait": "Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
    "accroche": "Sébastien Lecornu exclut tout « passage en force » et appelle au compromis",
-   "essentiel": "Sur le budget 2027, Sébastien Lecornu exclut tout « passage en force » et appelle au compromis. Quatre médias en parlent : Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Le Monde.",
+   "essentiel": "Sur le budget 2027, Sébastien Lecornu exclut tout « passage en force » et appelle au compromis. Cinq médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré, L'Est républicain et Le Monde.",
    "rubrique": "Budget",
    "contexte": [
     {
@@ -981,7 +1005,7 @@
     }
    ],
    "titrePropre": {
-    "titre": "Enquête",
+    "titre": "Fuites",
     "origine": "dossier"
    },
    "fait": "Cyberattaques et fuites de données : le Sénat va lancer une commission d'enquête",
@@ -1018,8 +1042,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Milliards d euros",
-    "origine": "recoupement"
+    "titre": "Euros",
+    "origine": "dossier"
    },
    "fait": "Le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
    "accroche": "Le Sénat reconduit la surtaxe sur les grandes entreprises, allégée de 2 milliards d’euros",
@@ -1306,10 +1330,48 @@
     }
    ],
    "titrePropre": {
-    "titre": "Préfet",
+    "titre": "Fuites",
     "origine": "dossier"
    },
    "rubrique": "Politique"
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "Le Progrès",
+    "Nice-Matin"
+   ],
+   "derniere": "2026-11-25T18:26:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "education"
+   },
+   "articles": [
+    {
+     "titre": "Curis-au-Mont-d’Or. Cantine scolaire : les prix des repas vont augmenter",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/cantine-scolaire-les-prix-des-repas-vont-augmenter",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:26:00.000Z"
+    },
+    {
+     "titre": "Le prix des cantines scolaires va augmenter : le Département des Alpes-Maritimes vote une nouvelle hausse des tarifs du repas au collège",
+     "url": "https://www.nicematin.com/societe/politique/le-prix-des-cantines-scolaires-va-augmenter-le-departement-des-alpes-maritimes-vote-une-nouvelle-hausse-des-tarifs-du-repas-au-college-10767512",
+     "media": "Nice-Matin",
+     "date": "2026-11-25T05:49:42.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Santé : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Cantine scolaire : les prix des repas vont augmenter",
+   "accroche": "Cantine scolaire : les prix des repas vont augmenter",
+   "essentiel": "Le prix des cantines scolaires va augmenter : le Département des Alpes-Maritimes vote une nouvelle hausse des tarifs du repas au collège. Deux médias en parlent : Le Progrès et Nice-Matin.",
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 2,
@@ -1545,9 +1607,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Euros",
+    "origine": "dossier"
    },
    "accroche": "Les aides à l’apprentissage font l’objet de nombreux abus et fraudes, selon la Cour des comptes",
    "essentiel": "Les aides à l’apprentissage font l’objet de nombreux abus et fraudes, selon la Cour des comptes. Deux médias en parlent : Le Monde et 20 Minutes.",
@@ -1627,9 +1688,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Finances publiques : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Euros",
+    "origine": "dossier"
    },
    "fait": "Le Sénat renonce à supprimer l’abattement fiscal des retraités, mais le plafonne à 1 000 euros",
    "accroche": "Le Sénat renonce à supprimer l’abattement fiscal des retraités, mais le plafonne à 1 000 euros",
@@ -1985,7 +2045,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2000,6 +2060,12 @@
     "vignette": "justice"
    },
    "articles": [
+    {
+     "titre": "Justice. Procureur au siège du RN : comment l'affaire relance le débat sur les liens entre magistrats et politiques",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/25/procureur-au-siege-du-rn-comment-l-affaire-relance-le-debat-sur-les-liens-entre-magistrats-et-politiques",
+     "media": "Le Progrès",
+     "date": "2026-11-25T19:20:00.000Z"
+    },
     {
      "titre": "Justice. Procureur au siège du RN : comment l'affaire relance le débat sur les liens entre magistrats et politiques",
      "url": "https://www.dna.fr/faits-divers-justice/2026/11/25/procureur-au-siege-du-rn-comment-l-affaire-relance-le-debat-sur-les-liens-entre-magistrats-et-politiques",
@@ -2027,7 +2093,7 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2047,6 +2113,12 @@
     "vignette": "budget"
    },
    "articles": [
+    {
+     "titre": "Europe. Budget de l'UE : Emmanuel Macron met la pression sur la PAC, bras de fer attendu entre la France et l’Allemagne",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/budget-de-l-ue-emmanuel-macron-met-la-pression-sur-la-pac-bras-de-fer-attendu-entre-la-france-et-l-allemagne",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:50:00.000Z"
+    },
     {
      "titre": "Europe. Budget de l'UE : Emmanuel Macron met la pression sur la PAC, bras de fer attendu entre la France et l’Allemagne",
      "url": "https://www.dna.fr/politique/2026/11/25/budget-de-l-ue-emmanuel-macron-met-la-pression-sur-la-pac-bras-de-fer-attendu-entre-la-france-et-l-allemagne",
@@ -2074,7 +2146,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -2095,6 +2167,12 @@
     "vignette": "election"
    },
    "articles": [
+    {
+     "titre": "Présidentielle 2027. Réélu à la tête des maires de France, comment David Lisnard assoit ses ambitions pour l’Élysée",
+     "url": "https://www.leprogres.fr/elections/2026/11/25/reelu-a-la-tete-des-maires-de-france-comment-david-lisnard-assoit-ses-ambitions-pour-l-elysee",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:15:00.000Z"
+    },
     {
      "titre": "Présidentielle 2027. Réélu à la tête des maires de France, comment David Lisnard assoit ses ambitions pour l’Élysée",
      "url": "https://www.dna.fr/elections/2026/11/25/reelu-a-la-tete-des-maires-de-france-comment-david-lisnard-assoit-ses-ambitions-pour-l-elysee",
@@ -2250,8 +2328,9 @@
     }
    ],
    "titrePropre": {
-    "titre": "Préfet",
-    "origine": "dossier"
+    "titre": "Rassemblement national : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
    "rubrique": "Assemblée nationale",
    "contexte": [
@@ -2543,9 +2622,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Rassemblement national : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
+    "titre": "Fuites",
+    "origine": "dossier"
    },
    "rubrique": "Assemblée nationale",
    "contexte": [
@@ -3620,9 +3698,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Dominique de Villepin : ce qu'il faut savoir sur présidentielle 2027",
-    "origine": "regles",
-    "generique": true
+    "titre": "Euros",
+    "origine": "dossier"
    },
    "fait": "Proposition d'augmenter de 200 euros net les salaires",
    "accroche": "Proposition d'augmenter de 200 euros net les salaires",
@@ -3831,8 +3908,8 @@
     }
    ],
    "titrePropre": {
-    "titre": "Préfet",
-    "origine": "dossier"
+    "titre": "Sécurité : ce que disent les médias",
+    "origine": "regles"
    },
    "fait": "Le préfet de police défend son dispositif et met en cause des batteries de vélo",
    "accroche": "Le préfet de police défend son dispositif et met en cause des batteries de vélo",
@@ -3892,6 +3969,64 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T19:23:02.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Saint-Didier-de-Formans. Le Directeur général des services médaillé",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/le-directeur-general-des-services-medaille",
+     "media": "Le Progrès",
+     "date": "2026-11-25T19:23:02.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Saint-Didier-de-Formans : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T19:21:22.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "La Tranclière. Le financement d’une borne incendie refusé, l’éclairage public modernisé",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/le-financement-d-une-borne-incendie-refuse-l-eclairage-public-modernise",
+     "media": "Le Progrès",
+     "date": "2026-11-25T19:21:22.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "La Tranclière : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "La Tranclière. Le financement d’une borne incendie refusé",
+   "accroche": "La Tranclière. Le financement d’une borne incendie refusé",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Mediapart"
    ],
    "derniere": "2026-11-25T19:21:08.000Z",
@@ -3915,6 +4050,33 @@
     "generique": true
    },
    "rubrique": "Gouvernement"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T19:20:29.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Amplepuis. Agrandissement du centre municipal de santé : les entreprises retenues",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/agrandissement-du-centre-municipal-de-sante-les-entreprises-retenues",
+     "media": "Le Progrès",
+     "date": "2026-11-25T19:20:29.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Amplepuis : santé publique",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
   },
   {
    "medias": 1,
@@ -4224,6 +4386,35 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T18:45:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Métropole de Lyon. Feux, métros, tunnel : comment la Métropole espère fluidifier le trafic",
+     "url": "https://www.leprogres.fr/environnement/2026/11/25/feux-metros-tunnel-comment-la-metropole-espere-fluidifier-le-trafic",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:45:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Métropole de Lyon : organisation territoriale",
+    "origine": "regles"
+   },
+   "fait": "Feux, métros, tunnel : comment la Métropole espère fluidifier le trafic",
+   "accroche": "Feux, métros, tunnel : comment la Métropole espère fluidifier le trafic",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "France 24"
    ],
    "derniere": "2026-11-25T18:36:07.000Z",
@@ -4525,6 +4716,33 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T18:26:54.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "election",
+    "vignette": "election"
+   },
+   "articles": [
+    {
+     "titre": "Montceaux. Le premier conseil municipal des jeunes officiellement installé",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/le-premier-conseil-municipal-des-jeunes-officiellement-installe",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:26:54.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Montceaux : conseil municipal",
+    "origine": "regles"
+   },
+   "rubrique": "Élysée 2027"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Sud Ouest"
    ],
    "derniere": "2026-11-25T18:26:32.000Z",
@@ -4549,6 +4767,35 @@
    },
    "fait": "Un pas de plus vers une école vétérinaire ?",
    "accroche": "Un pas de plus vers une école vétérinaire ?",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Progrès"
+   ],
+   "derniere": "2026-11-25T18:23:07.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Mornant. Un nouveau pôle santé pour renforcer l’offre de soins de proximité",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/un-nouveau-pole-sante-pour-renforcer-l-offre-de-soins-de-proximite",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:23:07.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Mornant : santé publique",
+    "origine": "regles"
+   },
+   "fait": "Un nouveau pôle santé pour renforcer l’offre de soins de proximité",
+   "accroche": "Un nouveau pôle santé pour renforcer l’offre de soins de proximité",
    "rubrique": "Politique"
   },
   {
@@ -4919,9 +5166,9 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
-    "Dernières Nouvelles d'Alsace"
+    "Le Progrès"
    ],
-   "derniere": "2026-11-25T18:01:00.000Z",
+   "derniere": "2026-11-25T18:01:42.000Z",
    "illustration": {
     "personnes": [],
     "partis": [],
@@ -4930,225 +5177,18 @@
    },
    "articles": [
     {
-     "titre": "Strasbourg. Dans son livre, Rima Hassan explore une histoire intime et politique",
-     "url": "https://www.dna.fr/culture-loisirs/2026/11/25/dans-son-livre-rima-hassan-explore-une-histoire-intime-et-politique",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T18:01:00.000Z"
+     "titre": "Cuinzier. Le patrimoine au cœur des investissements du village",
+     "url": "https://www.leprogres.fr/politique/2026/11/25/le-patrimoine-au-coeur-des-investissements-du-village",
+     "media": "Le Progrès",
+     "date": "2026-11-25T18:01:42.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Strasbourg : actualité locale",
+    "titre": "Cuinzier : actualité locale",
     "origine": "regles",
     "generique": true
    },
    "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-25T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Grand Nancy. Neige et verglas : la Métropole déploie son dispositif pour sécuriser les routes cet hiver",
-     "url": "https://www.estrepublicain.fr/environnement/2026/11/25/neige-et-verglas-la-metropole-deploie-son-dispositif-pour-securiser-les-routes-cet-hiver",
-     "media": "L'Est républicain",
-     "date": "2026-11-25T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Grand Nancy : organisation territoriale",
-    "origine": "regles"
-   },
-   "fait": "Neige et verglas : la Métropole déploie son dispositif pour sécuriser les routes cet hiver",
-   "accroche": "Neige et verglas : la Métropole déploie son dispositif pour sécuriser les routes cet hiver",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "L'Est républicain"
-   ],
-   "derniere": "2026-11-25T18:00:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "budget",
-    "vignette": "budget"
-   },
-   "articles": [
-    {
-     "titre": "Haute-Saône. Budget 2027 du Département : « La protection de l’enfance ne doit pas être une dépense subie »",
-     "url": "https://www.estrepublicain.fr/politique/2026/11/25/budget-2027-du-departement-la-protection-de-l-enfance-ne-doit-pas-etre-une-depense-subie",
-     "media": "L'Est républicain",
-     "date": "2026-11-25T18:00:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Département : ce qu'il faut savoir sur les finances publiques",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Budget"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-25T17:59:39.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "« Notre but, c’est de remettre de la vie » : La Maison des femmes de Mérignac propose un accueil inconditionnel et gratuit aux victimes",
-     "url": "https://www.sudouest.fr/gironde/merignac/notre-but-c-est-de-remettre-de-la-vie-la-maison-des-femmes-de-merignac-propose-un-accueil-inconditionnel-et-gratuit-aux-victimes-31665761.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-25T17:59:39.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Dauphiné libéré"
-   ],
-   "derniere": "2026-11-25T17:51:46.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Pont-Évêque. La baisse des dotations de l’État préoccupe les élus",
-     "url": "https://www.ledauphine.com/politique/2026/11/25/la-baisse-des-dotations-de-l-etat-preoccupe-les-elus",
-     "media": "Le Dauphiné libéré",
-     "date": "2026-11-25T17:51:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Pont-Évêque : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "La baisse des dotations de l’État préoccupe les élus",
-   "accroche": "La baisse des dotations de l’État préoccupe les élus",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Sud Ouest"
-   ],
-   "derniere": "2026-11-25T17:45:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Plus de 70 logements en projet à Mios : une réunion publique pour rassurer les riverains",
-     "url": "https://www.sudouest.fr/societe/logement/plus-de-70-logements-en-projet-a-mios-une-reunion-publique-pour-rassurer-les-riverains-31664045.php",
-     "media": "Sud Ouest",
-     "date": "2026-11-25T17:45:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Logement et accueil : ce que disent les médias",
-    "origine": "regles"
-   },
-   "fait": "Une réunion publique pour rassurer les riverains",
-   "accroche": "Une réunion publique pour rassurer les riverains",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-25T17:40:46.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Laurent Nunez",
-      "photo": "photos/personnalites/laurent-nunez.jpg",
-      "photoHd": "photos/personnalites/hd/laurent-nunez.jpg",
-      "credit": "Ministère de l'Intérieur, Licence Ouverte, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "securite",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Violences sur des élus : plus de 3 100 faits comptabilisés depuis le début 2026 ; une hausse de 25 % par rapport à 2025, annonce Laurent Nuñez",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/25/violences-sur-des-elus-plus-de-3-100-faits-comptabilises-depuis-le-debut-2026-en-hausse-de-25-par-rapport-a-2025-annonce-laurent-nunez_6815158_3224.html",
-     "media": "Le Monde",
-     "date": "2026-11-25T17:40:46.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Vie locale : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Plus de 3 100 faits comptabilisés depuis le début 2026; une hausse de 25 % par rapport à 2025",
-   "accroche": "Plus de 3 100 faits comptabilisés depuis le début 2026; une hausse de 25 % par rapport à 2025",
-   "rubrique": "Sécurité"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Dernières Nouvelles d'Alsace"
-   ],
-   "derniere": "2026-11-25T17:39:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Strasbourg. « Un recul démocratique » : Strasbourg Juste et Vivante attaque le règlement intérieur du conseil municipal",
-     "url": "https://www.dna.fr/politique/2026/11/25/un-recul-democratique-strasbourg-juste-et-vivante-attaque-le-reglement-interieur-du-conseil-municipal",
-     "media": "Dernières Nouvelles d'Alsace",
-     "date": "2026-11-25T17:39:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Strasbourg : conseil municipal",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027"
   }
  ]
 }
