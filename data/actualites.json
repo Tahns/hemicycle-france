@@ -1,5 +1,5 @@
 {
- "lastUpdated": "2026-11-28T11:01:20.040Z",
+ "lastUpdated": "2026-11-28T11:05:37.339Z",
  "source": "Flux RSS publics de la rubrique politique de médias nationaux",
  "medias": [
   {
@@ -80,7 +80,7 @@
   {
    "nom": "Dernières Nouvelles d'Alsace",
    "site": "https://www.dna.fr/",
-   "lu": false
+   "lu": true
   },
   {
    "nom": "Le Dauphiné libéré",
@@ -170,6 +170,7 @@
     "Libération",
     "France Inter",
     "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
     "L'Humanité",
@@ -205,7 +206,7 @@
     "Le Figaro",
     "L'Express"
    ],
-   "nb": 87,
+   "nb": 88,
    "derniere": "2026-11-28T10:59:30.000Z",
    "articles": [
     {
@@ -273,6 +274,12 @@
      "media": "Le Progrès",
      "titre": "Exclusif. « Je vais voter pour Fabien Roussel » : Renaud choisit le candidat communiste pour la présidentielle 2027",
      "url": "https://www.leprogres.fr/elections/2026/11/28/je-vais-voter-pour-fabien-roussel-renaud-choisit-le-candidat-communiste-pour-la-presidentielle-2027",
+     "date": "2026-11-28T06:15:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Exclusif. « Je vais voter pour Fabien Roussel » : Renaud choisit le candidat communiste pour la présidentielle 2027",
+     "url": "https://www.dna.fr/elections/2026/11/28/je-vais-voter-pour-fabien-roussel-renaud-choisit-le-candidat-communiste-pour-la-presidentielle-2027",
      "date": "2026-11-28T06:15:00.000Z"
     },
     {
@@ -356,13 +363,16 @@
    "motifs": [
     "antisémites",
     "écrits",
-    "accusations"
+    "accusations",
+    "révélations"
    ],
    "medias": [
     "Le JDD",
+    "La Dépêche",
     "France Inter",
     "Libération",
     "BFMTV",
+    "Dernières Nouvelles d'Alsace",
     "L'Est républicain",
     "Le Monde",
     "20 Minutes",
@@ -373,13 +383,14 @@
     "L'Express",
     "Nice-Matin"
    ],
-   "mediasDistincts": 12,
+   "mediasDistincts": 13,
    "sources": [
     "Groupe Bolloré",
+    "La Dépêche",
     "France Inter",
     "Libération",
     "BFMTV",
-    "L'Est républicain",
+    "EBRA",
     "Le Monde",
     "20 Minutes",
     "L'Obs",
@@ -388,7 +399,7 @@
     "L'Express",
     "Nice-Matin"
    ],
-   "nb": 25,
+   "nb": 28,
    "derniere": "2026-11-28T10:23:14.000Z",
    "articles": [
     {
@@ -396,6 +407,12 @@
      "titre": "«Des méthodes indignes» : Marine Le Pen accuse LFI de vouloir entraver sa campagne dans la Vienne",
      "url": "https://www.lejdd.fr/politique/des-methodes-indignes-marine-le-pen-accuse-lfi-de-vouloir-entraver-sa-campagne-dans-la-vienne-189852",
      "date": "2026-11-28T10:23:14.000Z"
+    },
+    {
+     "media": "La Dépêche",
+     "titre": "DÉCRYPTAGE. Affaire Jordan Bardella : les révélations peuvent-elles ébranler les ambitions du dauphin de Marine Le Pen ?",
+     "url": "https://www.ladepeche.fr/2026/11/28/decryptage-affaire-jordan-bardella-les-revelations-peuvent-elles-ebranler-les-ambitions-du-dauphin-de-marine-le-pen-13674625.php",
+     "date": "2026-11-28T09:01:04.000Z"
     },
     {
      "media": "France Inter",
@@ -416,6 +433,12 @@
      "date": "2026-11-28T06:03:00.000Z"
     },
     {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Sélestat. Commandé par la Ville, un audit révèle « une situation financière inédite »",
+     "url": "https://www.dna.fr/politique/2026/11/28/commande-par-la-ville-un-audit-revele-une-situation-financiere-inedite",
+     "date": "2026-11-28T05:00:00.000Z"
+    },
+    {
      "media": "L'Est républicain",
      "titre": "Humour. Le dessin du jour : les paroles s'envolent, les écrits restent",
      "url": "https://www.estrepublicain.fr/actualite/2026/11/28/le-dessin-du-jour-les-paroles-s-envolent-les-ecrits-restent",
@@ -426,12 +449,6 @@
      "titre": "Ecrits antisémites : la défense de Jordan Bardella patine, Marine Le Pen maintient timidement sa confiance",
      "url": "https://www.lemonde.fr/politique/article/2026/11/27/ecrits-antisemites-la-defense-de-jordan-bardella-patine-marine-le-pen-maintient-timidement-sa-confiance_6815931_823448.html",
      "date": "2026-11-27T20:14:22.000Z"
-    },
-    {
-     "media": "Libération",
-     "titre": "L’antisémitisme de Jordan Bardella n’est pas antinomique avec son soutien à Israël",
-     "url": "https://www.liberation.fr/politique/lantisemitisme-de-jordan-bardella-nest-pas-antinomique-avec-son-soutien-a-israel-20261127_BJVGP7BXDNCZDL6IZKXXIMM2AA/",
-     "date": "2026-11-27T14:29:22.000Z"
     },
     {
      "media": "20 Minutes",
@@ -483,32 +500,34 @@
    "motifs": [
     "fuites",
     "perquisitionnés",
-    "soupçons",
-    "bureau"
+    "bureau",
+    "domicile"
    ],
    "medias": [
     "Libération",
-    "L'Obs",
     "20 Minutes",
     "BFMTV",
     "Sud Ouest",
     "Nice-Matin",
     "La Dépêche",
     "Le Progrès",
+    "Dernières Nouvelles d'Alsace",
     "Le Dauphiné libéré",
     "L'Est républicain",
-    "Le Monde"
+    "Le Monde",
+    "L'Obs"
    ],
-   "mediasDistincts": 8,
+   "mediasDistincts": 9,
    "sources": [
     "Libération",
-    "L'Obs",
-    "20 Minutes / Le Progrès / Le Dauphiné libéré / L'Est républicain",
+    "20 Minutes",
     "BFMTV",
     "Sud Ouest",
     "Nice-Matin",
     "La Dépêche",
-    "Le Monde"
+    "EBRA",
+    "Le Monde",
+    "L'Obs"
    ],
    "nb": 19,
    "derniere": "2026-11-28T10:39:45.000Z",
@@ -518,12 +537,6 @@
      "titre": "Fuite d’infos du ministère de l’Intérieur vers le RN : Ambroise de Rancourt, responsable du programme du parti, soupçonné d’être le principal destinataire",
      "url": "https://www.liberation.fr/politique/fuite-dinfos-du-ministere-de-linterieur-vers-le-rn-ambroise-de-rancourt-responsable-du-programme-du-parti-soupconne-detre-le-principal-destinataire-20261127_EUCHKEJEYNGQFF4CHZADDU7HCQ/",
      "date": "2026-11-28T10:39:45.000Z"
-    },
-    {
-     "media": "L'Obs",
-     "titre": "Qui est Ambroise de Rancourt, ce proche de Marine Le Pen suspecté d’être au cœur des fuites au profit du RN ?",
-     "url": "https://www.nouvelobs.com/politique/20261128.OBS121409/qui-est-ambroise-de-rancourt-ce-proche-de-marine-le-pen-suspecte-d-etre-au-c-ur-des-fuites-au-profit-du-rn.html",
-     "date": "2026-11-28T10:20:06.000Z"
     },
     {
      "media": "20 Minutes",
@@ -571,15 +584,15 @@
      "video": true
     },
     {
-     "media": "20 Minutes",
-     "titre": "Fuites présumées vers le RN : Le bureau et le domicile de l’ex-directeur de cabinet de Marine Le Pen perquisitionnés",
-     "url": "https://www.20minutes.fr/politique/4266426-20261128-fuites-presumees-vers-rn-bureau-domicile-ex-directeur-cabinet-marine-pen-perquisitionnes?at_medium=display&at_campaign=149",
-     "date": "2026-11-28T00:02:44.000Z"
-    },
-    {
      "media": "Le Progrès",
      "titre": "Justice. Fuites vers le RN : le bureau et le domicile de l'ex-directeur de cabinet de Marine Le Pen perquisitionnés",
      "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/27/fuites-de-beauvau-vers-le-rn-le-responsable-du-programme-de-marine-le-pen-dans-le-viseur",
+     "date": "2026-11-27T19:45:00.000Z"
+    },
+    {
+     "media": "Dernières Nouvelles d'Alsace",
+     "titre": "Justice. Fuites vers le RN : le bureau et le domicile de l'ex-directeur de cabinet de Marine Le Pen perquisitionnés",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/27/fuites-de-beauvau-vers-le-rn-le-responsable-du-programme-de-marine-le-pen-dans-le-viseur",
      "date": "2026-11-27T19:45:00.000Z"
     },
     {
@@ -599,19 +612,25 @@
      "titre": "Fuite d’informations confidentielles vers le RN : Ambroise de Rancourt, le responsable du programme présidentiel de Marine Le Pen, soupçonné d’être le principal destinataire",
      "url": "https://www.lemonde.fr/societe/article/2026/11/27/ambroise-de-rancourt-le-responsable-du-programme-presidentiel-de-marine-le-pen-soupconne-d-etre-le-principal-destinataire-de-la-fuite-de-documents-de-beauvau-vers-le-rn_6815924_3224.html",
      "date": "2026-11-27T18:35:49.000Z"
+    },
+    {
+     "media": "L'Obs",
+     "titre": "« Il aime donner des coups de menton » : 10 choses à savoir sur Hugues Moutouh, le préfet soupçonné d’avoir été une taupe du RN",
+     "url": "https://www.nouvelobs.com/justice/20261124.OBS120402/il-aime-donner-des-coups-de-menton-10-choses-a-savoir-sur-hugues-moutouh-le-prefet-soupconne-d-avoir-ete-une-taupe-du-rn.html",
+     "date": "2026-11-26T16:23:10.000Z"
     }
    ]
   }
  ],
  "sujets": [
   {
-   "medias": 7,
+   "medias": 8,
    "mediasDistincts": 4,
    "sources": [
     "BFMTV",
     "Nice-Matin",
     "La Dépêche",
-    "20 Minutes / Le Progrès / Le Dauphiné libéré / L'Est républicain"
+    "20 Minutes / Le Progrès / Dernières Nouvelles d'Alsace / Le Dauphiné libéré / L'Est républicain"
    ],
    "derniere": "2026-11-28T08:32:19.000Z",
    "illustration": {
@@ -632,6 +651,12 @@
     "vignette": null
    },
    "articles": [
+    {
+     "titre": "Justice. Fuites vers le RN : le bureau et le domicile de l'ex-directeur de cabinet de Marine Le Pen perquisitionnés",
+     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/27/fuites-de-beauvau-vers-le-rn-le-responsable-du-programme-de-marine-le-pen-dans-le-viseur",
+     "media": "Le Progrès",
+     "date": "2026-11-27T19:45:00.000Z"
+    },
     {
      "titre": "Soupçons de fuite vers le RN: le bureau et le domicile de l'ex-directeur de cabinet de Marine Le Pen perquisitionnés",
      "url": "https://www.bfmtv.com/politique/front-national/video-soupcons-de-fuite-vers-le-rn-le-bureau-et-le-domicile-de-l-ex-directeur-de-cabinet-de-marine-le-pen-perquisitionnes_VN-202611280213.html",
@@ -673,8 +698,8 @@
     },
     {
      "titre": "Justice. Fuites vers le RN : le bureau et le domicile de l'ex-directeur de cabinet de Marine Le Pen perquisitionnés",
-     "url": "https://www.leprogres.fr/faits-divers-justice/2026/11/27/fuites-de-beauvau-vers-le-rn-le-responsable-du-programme-de-marine-le-pen-dans-le-viseur",
-     "media": "Le Progrès",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/27/fuites-de-beauvau-vers-le-rn-le-responsable-du-programme-de-marine-le-pen-dans-le-viseur",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-27T19:45:00.000Z"
     },
     {
@@ -757,14 +782,14 @@
    "rubrique": "Justice"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 3,
    "sources": [
-    "L'Obs",
-    "BFMTV",
-    "Le Monde"
+    "Le Monde",
+    "EBRA",
+    "Libération"
    ],
-   "derniere": "2026-11-28T10:20:06.000Z",
+   "derniere": "2026-11-27T19:14:46.000Z",
    "illustration": {
     "personnes": [
      {
@@ -776,38 +801,42 @@
       "credit": "Assemblée nationale"
      }
     ],
-    "partis": [
-     "RN"
-    ],
-    "theme": "politique",
+    "partis": [],
+    "theme": "justice",
     "vignette": null
    },
    "articles": [
     {
-     "titre": "Fuite d’informations confidentielles vers le RN : Ambroise de Rancourt, le responsable du programme présidentiel de Marine Le Pen, soupçonné d’être le principal destinataire",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/27/ambroise-de-rancourt-le-responsable-du-programme-presidentiel-de-marine-le-pen-soupconne-d-etre-le-principal-destinataire-de-la-fuite-de-documents-de-beauvau-vers-le-rn_6815924_3224.html",
+     "titre": "Justice. Marine Le Pen attaque la presse : le secret de l'instruction s'impose-t-il aussi aux journalistes ? Ce que dit la loi",
+     "url": "https://www.dna.fr/faits-divers-justice/2026/11/27/le-secret-de-l-instruction-s-impose-t-il-(aussi)-aux-journalistes-ce-que-dit-(vraiment)-la-loi",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-27T18:05:00.000Z"
+    },
+    {
+     "titre": "Journalistes et secret de l’instruction : comprendre ce que dit le droit après les déclarations de Marine Le Pen",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/27/journalistes-et-secret-de-l-instruction-comprendre-ce-que-dit-le-droit-apres-les-declarations-de-marine-le-pen_6815927_3224.html",
      "media": "Le Monde",
-     "date": "2026-11-27T18:35:49.000Z"
+     "date": "2026-11-27T19:14:46.000Z"
     },
     {
-     "titre": "Qui est Ambroise de Rancourt, ce proche de Marine Le Pen suspecté d’être au cœur des fuites au profit du RN ?",
-     "url": "https://www.nouvelobs.com/politique/20261128.OBS121409/qui-est-ambroise-de-rancourt-ce-proche-de-marine-le-pen-suspecte-d-etre-au-c-ur-des-fuites-au-profit-du-rn.html",
-     "media": "L'Obs",
-     "date": "2026-11-28T10:20:06.000Z"
+     "titre": "Justice. Marine Le Pen attaque la presse : le secret de l'instruction s'impose-t-il aussi aux journalistes ? Ce que dit la loi",
+     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/27/le-secret-de-l-instruction-s-impose-t-il-(aussi)-aux-journalistes-ce-que-dit-(vraiment)-la-loi",
+     "media": "L'Est républicain",
+     "date": "2026-11-27T18:05:00.000Z"
     },
     {
-     "titre": "Soupçons de fuites du ministère de l'Intérieur: Ambroise de Rancourt, coordinateur du programme présidentiel du RN, perquisitionné",
-     "url": "https://www.bfmtv.com/politique/video-soupcons-de-fuites-du-ministere-de-l-interieur-ambroise-de-rancourt-coordinateur-du-programme-presidentiel-du-rn-perquisitionne_VN-202611280164.html",
-     "media": "BFMTV",
-     "date": "2026-11-28T06:21:51.000Z",
-     "video": true
+     "titre": "«Une nouvelle tentative d’intimidation des journalistes et de leurs sources» : Marine Le Pen attaque la presse et suscite un tollé",
+     "url": "https://www.liberation.fr/politique/elections/une-nouvelle-tentative-dintimidation-des-journalistes-et-de-leurs-sources-marine-le-pen-attaque-la-presse-et-suscite-un-tolle-20261127_UORSBR67GFCKFHVJSUH4O2XH6Q/",
+     "media": "Libération",
+     "date": "2026-11-27T18:00:37.000Z"
     }
    ],
    "titrePropre": {
-    "titre": "Fuites",
-    "origine": "dossier"
+    "titre": "Politique : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
    },
-   "rubrique": "Politique"
+   "rubrique": "Justice"
   },
   {
    "medias": 3,
@@ -926,57 +955,6 @@
    "medias": 3,
    "mediasDistincts": 3,
    "sources": [
-    "Le Monde",
-    "L'Est républicain",
-    "Libération"
-   ],
-   "derniere": "2026-11-27T19:14:46.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Marine Le Pen",
-      "photo": "photos/deputes/PA720614.jpg",
-      "photoHd": "photos/deputes/hd/PA720614.jpg",
-      "parti": "RN",
-      "lien": "#depute-PA720614",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "justice",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Justice. Marine Le Pen attaque la presse : le secret de l'instruction s'impose-t-il aussi aux journalistes ? Ce que dit la loi",
-     "url": "https://www.estrepublicain.fr/faits-divers-justice/2026/11/27/le-secret-de-l-instruction-s-impose-t-il-(aussi)-aux-journalistes-ce-que-dit-(vraiment)-la-loi",
-     "media": "L'Est républicain",
-     "date": "2026-11-27T18:05:00.000Z"
-    },
-    {
-     "titre": "Journalistes et secret de l’instruction : comprendre ce que dit le droit après les déclarations de Marine Le Pen",
-     "url": "https://www.lemonde.fr/societe/article/2026/11/27/journalistes-et-secret-de-l-instruction-comprendre-ce-que-dit-le-droit-apres-les-declarations-de-marine-le-pen_6815927_3224.html",
-     "media": "Le Monde",
-     "date": "2026-11-27T19:14:46.000Z"
-    },
-    {
-     "titre": "«Une nouvelle tentative d’intimidation des journalistes et de leurs sources» : Marine Le Pen attaque la presse et suscite un tollé",
-     "url": "https://www.liberation.fr/politique/elections/une-nouvelle-tentative-dintimidation-des-journalistes-et-de-leurs-sources-marine-le-pen-attaque-la-presse-et-suscite-un-tolle-20261127_UORSBR67GFCKFHVJSUH4O2XH6Q/",
-     "media": "Libération",
-     "date": "2026-11-27T18:00:37.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Justice"
-  },
-  {
-   "medias": 3,
-   "mediasDistincts": 3,
-   "sources": [
     "Public Sénat",
     "20 Minutes",
     "Nice-Matin"
@@ -1018,7 +996,7 @@
    "rubrique": "Budget"
   },
   {
-   "medias": 4,
+   "medias": 5,
    "mediasDistincts": 2,
    "sources": [
     "RFI",
@@ -1046,6 +1024,12 @@
     },
     {
      "titre": "Société. Mobilisation sociale : des appels à manifester ce samedi contres les violences faites aux femmes",
+     "url": "https://www.dna.fr/politique/2026/11/28/mobilisation-sociale-des-appels-a-manifester-ce-samedi-notamment-contres-les-violences-faites-aux-femmes",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T09:29:00.000Z"
+    },
+    {
+     "titre": "Société. Mobilisation sociale : des appels à manifester ce samedi contres les violences faites aux femmes",
      "url": "https://www.ledauphine.com/politique/2026/11/28/mobilisation-sociale-des-appels-a-manifester-ce-samedi-notamment-contres-les-violences-faites-aux-femmes",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-28T09:29:00.000Z"
@@ -1070,7 +1054,7 @@
    },
    "fait": "Mobilisation sociale : des appels à manifester ce samedi contres les violences faites aux femmes",
    "accroche": "Mobilisation sociale : des appels à manifester ce samedi contres les violences faites aux femmes",
-   "essentiel": "Pendant la mobilisation sociale, des appels à manifester ce samedi contres les violences faites aux femmes. Quatre médias en parlent : Le Progrès, RFI, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Pendant la mobilisation sociale, des appels à manifester ce samedi contres les violences faites aux femmes. Cinq médias en parlent : Le Progrès, RFI, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Sécurité"
   },
   {
@@ -1256,6 +1240,52 @@
      "source": "Assemblée nationale (open data)"
     }
    ]
+  },
+  {
+   "medias": 2,
+   "mediasDistincts": 2,
+   "sources": [
+    "BFMTV",
+    "Le Monde"
+   ],
+   "derniere": "2026-11-28T06:21:51.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Marine Le Pen",
+      "photo": "photos/deputes/PA720614.jpg",
+      "photoHd": "photos/deputes/hd/PA720614.jpg",
+      "parti": "RN",
+      "lien": "#depute-PA720614",
+      "credit": "Assemblée nationale"
+     }
+    ],
+    "partis": [
+     "RN"
+    ],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Soupçons de fuites du ministère de l'Intérieur: Ambroise de Rancourt, coordinateur du programme présidentiel du RN, perquisitionné",
+     "url": "https://www.bfmtv.com/politique/video-soupcons-de-fuites-du-ministere-de-l-interieur-ambroise-de-rancourt-coordinateur-du-programme-presidentiel-du-rn-perquisitionne_VN-202611280164.html",
+     "media": "BFMTV",
+     "date": "2026-11-28T06:21:51.000Z",
+     "video": true
+    },
+    {
+     "titre": "Fuite d’informations confidentielles vers le RN : Ambroise de Rancourt, le responsable du programme présidentiel de Marine Le Pen, soupçonné d’être le principal destinataire",
+     "url": "https://www.lemonde.fr/societe/article/2026/11/27/ambroise-de-rancourt-le-responsable-du-programme-presidentiel-de-marine-le-pen-soupconne-d-etre-le-principal-destinataire-de-la-fuite-de-documents-de-beauvau-vers-le-rn_6815924_3224.html",
+     "media": "Le Monde",
+     "date": "2026-11-27T18:35:49.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Fuites",
+    "origine": "dossier"
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 2,
@@ -1560,7 +1590,7 @@
    "rubrique": "Politique"
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1591,6 +1621,12 @@
     },
     {
      "titre": "Exclusif. « Je vais voter pour Fabien Roussel » : Renaud choisit le candidat communiste pour la présidentielle 2027",
+     "url": "https://www.dna.fr/elections/2026/11/28/je-vais-voter-pour-fabien-roussel-renaud-choisit-le-candidat-communiste-pour-la-presidentielle-2027",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T06:15:00.000Z"
+    },
+    {
+     "titre": "Exclusif. « Je vais voter pour Fabien Roussel » : Renaud choisit le candidat communiste pour la présidentielle 2027",
      "url": "https://www.ledauphine.com/elections/2026/11/28/je-vais-voter-pour-fabien-roussel-renaud-choisit-le-candidat-communiste-pour-la-presidentielle-2027",
      "media": "Le Dauphiné libéré",
      "date": "2026-11-28T06:15:00.000Z"
@@ -1608,7 +1644,7 @@
    },
    "fait": "Renaud choisit le candidat communiste pour la présidentielle 2027",
    "accroche": "Renaud choisit le candidat communiste pour la présidentielle 2027",
-   "essentiel": "Renaud choisit le candidat communiste pour la présidentielle 2027. Trois médias en parlent : Le Progrès, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Renaud choisit le candidat communiste pour la présidentielle 2027. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Élysée 2027",
    "contexte": [
     {
@@ -1619,7 +1655,7 @@
    ]
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1636,6 +1672,12 @@
      "titre": "Sébastien, 25 ans. Plus jeune maire de son département : « Plus on travaille tôt, plus on a envie de s’engager »",
      "url": "https://www.leprogres.fr/elections/2026/11/28/plus-jeune-maire-de-son-departement-plus-on-travaille-tot-plus-on-a-envie-de-s-engager",
      "media": "Le Progrès",
+     "date": "2026-11-28T05:30:00.000Z"
+    },
+    {
+     "titre": "Sébastien, 25 ans. Plus jeune maire de son département : « Plus on travaille tôt, plus on a envie de s’engager »",
+     "url": "https://www.dna.fr/elections/2026/11/28/plus-jeune-maire-de-son-departement-plus-on-travaille-tot-plus-on-a-envie-de-s-engager",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-28T05:30:00.000Z"
     },
     {
@@ -1663,7 +1705,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1691,6 +1733,12 @@
      "date": "2026-11-28T05:27:00.000Z"
     },
     {
+     "titre": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, ce Sélestadien veut « croire en la solidarité » des Français",
+     "url": "https://www.dna.fr/elections/2026/11/28/retraite-de-l-education-nationale-et-croyant-il-veut-croire-en-la-solidarite-des-francais",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T05:27:00.000Z"
+    },
+    {
      "titre": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, il veut « croire en la solidarité » des Français",
      "url": "https://www.ledauphine.com/elections/2026/11/28/retraite-de-l-education-nationale-et-croyant-il-veut-croire-en-la-solidarite-des-francais",
      "media": "Le Dauphiné libéré",
@@ -1704,13 +1752,12 @@
     }
    ],
    "titrePropre": {
-    "titre": "Édouard Philippe : ce qu'il faut savoir sur l'éducation et la jeunesse",
-    "origine": "regles",
-    "generique": true
+    "titre": "Croire en la solidarité",
+    "origine": "recoupement"
    },
    "fait": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, il veut « croire en la solidarité » des Français",
    "accroche": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, il veut « croire en la solidarité » des Français",
-   "essentiel": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, il veut « croire en la solidarité » des Français. Trois médias en parlent : Le Progrès, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Philippe, 83 ans. Retraité de l’Éducation nationale et croyant, il veut « croire en la solidarité » des Français. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Budget",
    "contexte": [
     {
@@ -1725,7 +1772,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1742,6 +1789,12 @@
      "titre": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller « travailler avec ceux qui ont envie »",
      "url": "https://www.leprogres.fr/elections/2026/11/28/le-chef-d-entreprise-dans-l-evenementiel-se-leve-le-matin-pour-aller-travailler-avec-ceux-qui-ont-envie",
      "media": "Le Progrès",
+     "date": "2026-11-28T05:00:00.000Z"
+    },
+    {
+     "titre": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller « travailler avec ceux qui ont envie »",
+     "url": "https://www.dna.fr/elections/2026/11/28/le-chef-d-entreprise-dans-l-evenementiel-se-leve-le-matin-pour-aller-travailler-avec-ceux-qui-ont-envie",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-28T05:00:00.000Z"
     },
     {
@@ -1764,7 +1817,7 @@
    },
    "fait": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller",
    "accroche": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller",
-   "essentiel": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller. Trois médias en parlent : Le Progrès, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Manuel, 50 ans. Le chef d’entreprise dans l’événementiel se lève le matin pour aller. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique",
    "chiffre": {
     "valeur": "50",
@@ -1772,7 +1825,7 @@
    }
   },
   {
-   "medias": 3,
+   "medias": 4,
    "mediasDistincts": 1,
    "sources": [
     "EBRA"
@@ -1789,6 +1842,12 @@
      "titre": "Julie, 35 ans. « Tout le monde parle beaucoup, mais rien ne se passe » : cette éleveuse se sent détachée de la politique",
      "url": "https://www.leprogres.fr/elections/2026/11/28/tout-le-monde-parle-beaucoup-mais-rien-ne-se-passe-cette-eleveuse-se-sent-detachee-de-la-politique",
      "media": "Le Progrès",
+     "date": "2026-11-28T05:00:00.000Z"
+    },
+    {
+     "titre": "Julie, 35 ans. « Tout le monde parle beaucoup, mais rien ne se passe » : cette éleveuse se sent détachée de la politique",
+     "url": "https://www.dna.fr/elections/2026/11/28/tout-le-monde-parle-beaucoup-mais-rien-ne-se-passe-cette-eleveuse-se-sent-detachee-de-la-politique",
+     "media": "Dernières Nouvelles d'Alsace",
      "date": "2026-11-28T05:00:00.000Z"
     },
     {
@@ -1811,7 +1870,7 @@
    },
    "fait": "Cette éleveuse se sent détachée de la politique",
    "accroche": "Cette éleveuse se sent détachée de la politique",
-   "essentiel": "Cette éleveuse se sent détachée de la politique. Trois médias en parlent : Le Progrès, Le Dauphiné libéré et L'Est républicain.",
+   "essentiel": "Cette éleveuse se sent détachée de la politique. Quatre médias en parlent : Le Progrès, Dernières Nouvelles d'Alsace, Le Dauphiné libéré et L'Est républicain.",
    "rubrique": "Politique",
    "chiffre": {
     "valeur": "35",
@@ -1916,6 +1975,61 @@
    ],
    "titrePropre": {
     "titre": "HUNGER GAMES : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Le Monde"
+   ],
+   "derniere": "2026-11-28T11:00:15.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "budget",
+    "vignette": "budget"
+   },
+   "articles": [
+    {
+     "titre": "« Etablir une règle d’or budgétaire n’ôtera pas le besoin de relever l’âge de la retraite ou d’augmenter le temps de travail »",
+     "url": "https://www.lemonde.fr/idees/article/2026/11/28/etablir-une-regle-d-or-budgetaire-n-otera-pas-le-besoin-de-relever-l-age-de-la-retraite-ou-d-augmenter-le-temps-de-travail_6816099_3232.html",
+     "media": "Le Monde",
+     "date": "2026-11-28T11:00:15.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Finances publiques : ce que disent les médias",
+    "origine": "regles"
+   },
+   "rubrique": "Budget"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Sud Ouest"
+   ],
+   "derniere": "2026-11-28T11:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "« Si j’avais su, j’aurais vendu la truffe plus cher » : une semaine de politique en Dordogne",
+     "url": "https://www.sudouest.fr/politique/si-j-avais-su-j-aurais-vendu-la-truffe-plus-cher-une-semaine-de-politique-en-dordogne-31678688.php",
+     "media": "Sud Ouest",
+     "date": "2026-11-28T11:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : ce que disent les médias",
     "origine": "regles",
     "generique": true
    },
@@ -3049,42 +3163,6 @@
    "illustration": {
     "personnes": [
      {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Jean-Luc Mélenchon",
-     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
-     "media": "BFMTV",
-     "date": "2026-11-28T08:40:06.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-28T08:40:06.000Z",
-   "illustration": {
-    "personnes": [
-     {
       "nom": "François Hollande",
       "photo": "photos/deputes/PA1654.jpg",
       "photoHd": "photos/deputes/hd/PA1654.jpg",
@@ -3293,6 +3371,42 @@
      "source": "Wikipédia (infobox du parti)"
     }
    ]
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "BFMTV"
+   ],
+   "derniere": "2026-11-28T08:40:06.000Z",
+   "illustration": {
+    "personnes": [
+     {
+      "nom": "Jean-Luc Mélenchon",
+      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
+      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
+      "parti": "LFI",
+      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
+     }
+    ],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Jean-Luc Mélenchon",
+     "url": "https://www.bfmtv.com/politique/jean-luc-melenchon_DN-201701010040.html",
+     "media": "BFMTV",
+     "date": "2026-11-28T08:40:06.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
   },
   {
    "medias": 1,
@@ -4181,6 +4295,36 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-28T06:07:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Région de Colmar. Le Zapping politique : au marché de Noël, Patrick fait attendre Éric",
+     "url": "https://www.dna.fr/politique/2026/11/28/le-zapping-politique-au-marche-de-noel-patrick-fait-attendre-eric",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T06:07:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Région : ce qu'il faut savoir sur l'organisation des collectivités",
+    "origine": "regles",
+    "generique": true
+   },
+   "fait": "Le Zapping politique : au marché de Noël, Patrick fait attendre Éric",
+   "accroche": "Le Zapping politique : au marché de Noël, Patrick fait attendre Éric",
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "Nice-Matin"
    ],
    "derniere": "2026-11-28T06:05:08.000Z",
@@ -4390,6 +4534,33 @@
    ],
    "titrePropre": {
     "titre": "Damparis : vie municipale",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-28T06:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Wittenheim. L’inquiétude des clubs sportifs face à la crise à la mairie",
+     "url": "https://www.dna.fr/economie/2026/11/28/manque-d-interlocuteur-crainte-sur-les-subventions-l-inquietude-des-clubs-sportifs-face-a-la-crise-a-la-mairie",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T06:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Wittenheim : vie municipale",
     "origine": "regles"
    },
    "rubrique": "Politique"
@@ -4717,6 +4888,61 @@
    "medias": 1,
    "mediasDistincts": 1,
    "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-28T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "L’éditorial. Un problème de croissance",
+     "url": "https://www.dna.fr/economie/2026/11/28/un-probleme-de-croissance",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Politique : opinion d'un média",
+    "origine": "regles"
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
+    "Dernières Nouvelles d'Alsace"
+   ],
+   "derniere": "2026-11-28T05:00:00.000Z",
+   "illustration": {
+    "personnes": [],
+    "partis": [],
+    "theme": "politique",
+    "vignette": null
+   },
+   "articles": [
+    {
+     "titre": "Sélestat. Commandé par la Ville, un audit révèle « une situation financière inédite »",
+     "url": "https://www.dna.fr/politique/2026/11/28/commande-par-la-ville-un-audit-revele-une-situation-financiere-inedite",
+     "media": "Dernières Nouvelles d'Alsace",
+     "date": "2026-11-28T05:00:00.000Z"
+    }
+   ],
+   "titrePropre": {
+    "titre": "Sélestat : actualité locale",
+    "origine": "regles",
+    "generique": true
+   },
+   "rubrique": "Politique"
+  },
+  {
+   "medias": 1,
+   "mediasDistincts": 1,
+   "sources": [
     "L'Est républicain"
    ],
    "derniere": "2026-11-28T04:55:00.000Z",
@@ -4989,232 +5215,6 @@
     "origine": "regles",
     "generique": true
    },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-27T22:57:14.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Carlos Martens Bilongo",
-      "photo": "photos/deputes/PA795616.jpg",
-      "photoHd": "photos/deputes/hd/PA795616.jpg",
-      "parti": "LFI",
-      "lien": "#depute-PA795616",
-      "credit": "Assemblée nationale"
-     },
-     {
-      "nom": "David Lisnard",
-      "photo": "photos/personnalites/david-lisnard.jpg",
-      "photoHd": "photos/personnalites/hd/david-lisnard.jpg",
-      "parti": "DVD",
-      "credit": "Frantogian, CC BY-SA 3.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [
-     "LFI"
-    ],
-    "theme": "assemblee",
-    "vignette": "assemblee"
-   },
-   "articles": [
-    {
-     "titre": "\"La pauvreté du choix politique à droite fait que David Lisnard occupe l'espace\", analyse Carlos Martens Bilongo, député LFI",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-la-pauvrete-du-choix-politique-a-droite-fait-que-david-lisnard-occupe-l-espace-analyse-carlos-martens-bilongo-depute-lfi_VN-202611270951.html",
-     "media": "BFMTV",
-     "date": "2026-11-27T22:57:14.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Social : ce qu'il faut savoir sur le social et l'emploi",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Assemblée nationale",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Carlos Martens Bilongo : député LFI (Val-d'Oise)",
-     "source": "Assemblée nationale (open data)"
-    },
-    {
-     "type": "agenda",
-     "texte": "À l'ordre du jour de l'Assemblée le 30 novembre",
-     "source": "Assemblée nationale (agenda officiel)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-27T22:56:55.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Gabriel Attal",
-      "photo": "photos/deputes/PA722190.jpg",
-      "photoHd": "photos/deputes/hd/PA722190.jpg",
-      "parti": "EPR",
-      "lien": "#depute-PA722190",
-      "credit": "Assemblée nationale"
-     }
-    ],
-    "partis": [],
-    "theme": "election",
-    "vignette": "election"
-   },
-   "articles": [
-    {
-     "titre": "Présidentielle: \"Les Français veulent qu'on s'occupe d'eux et qu'on arrête la tambouille\", affirme Patrick Vignal, conseiller politique de Gabriel Attal",
-     "url": "https://www.bfmtv.com/politique/elections/presidentielle/video-presidentielle-les-francais-veulent-qu-on-s-occupe-d-eux-et-qu-on-arrete-la-tambouille-affirme-patrick-vignal-conseiller-politique-de-gabriel-attal_VN-202611270950.html",
-     "media": "BFMTV",
-     "date": "2026-11-27T22:56:55.000Z",
-     "video": true
-    }
-   ],
-   "titrePropre": {
-    "titre": "Gabriel Attal : déclaration sur la présidentielle de 2027",
-    "origine": "regles"
-   },
-   "rubrique": "Élysée 2027",
-   "contexte": [
-    {
-     "type": "personnes",
-     "texte": "Gabriel Attal : secrétaire général de Renaissance",
-     "source": "Wikipédia (infobox du parti)"
-    }
-   ]
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-27T22:54:59.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Un concert organisé par un groupe appartenant à la « mouvance identitaire nationaliste, voire néonazie », interdit dans le Rhône et l’Isère",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/27/un-concert-de-rock-antiwokisme-organise-par-une-mouvance-identitaire-interdit-dans-le-rhone-et-l-isere_6815938_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-27T22:54:59.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "fait": "Un concert organisé par un groupe appartenant à la, interdit dans le Rhône et l’Isère",
-   "accroche": "Un concert organisé par un groupe appartenant à la, interdit dans le Rhône et l’Isère",
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "BFMTV"
-   ],
-   "derniere": "2026-11-27T22:28:11.000Z",
-   "illustration": {
-    "personnes": [
-     {
-      "nom": "Jean-Luc Mélenchon",
-      "photo": "photos/personnalites/jean-luc-melenchon.jpg",
-      "photoHd": "photos/personnalites/hd/jean-luc-melenchon.jpg",
-      "parti": "LFI",
-      "credit": "jlm2017.fr, CC BY 4.0, Wikimedia Commons"
-     }
-    ],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "En déplacement en Allemagne, Jean-Luc Mélenchon affirme vouloir refuser \"d'aider les Américains à faire la guerre aux Chinois\"",
-     "url": "https://www.bfmtv.com/politique/la-france-insoumise/en-deplacement-en-allemagne-jean-luc-melenchon-affirme-vouloir-refuser-d-aider-les-americains-a-faire-la-guerre-aux-chinois_AD-202611270940.html",
-     "media": "BFMTV",
-     "date": "2026-11-27T22:28:11.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Jean-Luc Mélenchon (La France insoumise) : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "International"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Monde"
-   ],
-   "derniere": "2026-11-27T21:18:33.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "L’agence S&P menace de dégrader encore la note de la France, entrée en récession",
-     "url": "https://www.lemonde.fr/politique/article/2026/11/27/l-agence-s-p-menace-de-degrader-encore-la-note-de-la-france-entree-en-recession_6815934_823448.html",
-     "media": "Le Monde",
-     "date": "2026-11-27T21:18:33.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Politique : ce que disent les médias",
-    "origine": "regles",
-    "generique": true
-   },
-   "rubrique": "Politique"
-  },
-  {
-   "medias": 1,
-   "mediasDistincts": 1,
-   "sources": [
-    "Le Progrès"
-   ],
-   "derniere": "2026-11-27T21:09:00.000Z",
-   "illustration": {
-    "personnes": [],
-    "partis": [],
-    "theme": "politique",
-    "vignette": null
-   },
-   "articles": [
-    {
-     "titre": "Limas. Demandes de subventions : une commission d’élus a été créée",
-     "url": "https://www.leprogres.fr/politique/2026/11/27/demandes-de-subventions-une-commission-d-elus-a-ete-creee",
-     "media": "Le Progrès",
-     "date": "2026-11-27T21:09:00.000Z"
-    }
-   ],
-   "titrePropre": {
-    "titre": "Limas : vie municipale",
-    "origine": "regles"
-   },
-   "fait": "Demandes de subventions : une commission d’élus a été créée",
-   "accroche": "Demandes de subventions : une commission d’élus a été créée",
    "rubrique": "Politique"
   }
  ]
